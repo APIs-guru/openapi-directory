@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ListHistoricalGwsColorEnum {
-    Red = "red"
-,    White = "white"
-,    Pink = "pink"
+    Red = "red",
+    White = "white",
+    Pink = "pink"
 }
 
 export enum ListHistoricalGwsOrderingEnum {
-    Date = "date"
-,    MinusDate = "-date"
-,    Score = "score"
-,    MinusScore = "-score"
+    Date = "date",
+    MinusDate = "-date",
+    Score = "score",
+    MinusScore = "-score"
 }
 
 
 export class ListHistoricalGwsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=color" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=color" })
   color?: ListHistoricalGwsColorEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_primeurs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_primeurs" })
   isPrimeurs?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lwin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lwin" })
   lwin?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lwin_11" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lwin_11" })
   lwin11?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ordering" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ordering" })
   ordering?: ListHistoricalGwsOrderingEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vintage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vintage" })
   vintage?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wine_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wine_id" })
   wineId?: number[];
 }
 
 
 export class ListHistoricalGwsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization?: string;
 }
 
 
 export class ListHistoricalGwsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListHistoricalGwsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListHistoricalGwsHeaders;
 }
 
 
 export class ListHistoricalGwsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceLocation } from "./resourcelocation";
 import { ContactProtocolEnum } from "./contactprotocolenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { ContactMethodStatusEnum } from "./contactmethodstatusenum";
+
 
 
 // ContactMethod
@@ -10,30 +11,30 @@ import { ContactMethodStatusEnum } from "./contactmethodstatusenum";
  * <p>Describes a contact method.</p> <p>A contact method is a way to send you notifications. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>
 **/
 export class ContactMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=contactEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=contactEndpoint" })
   contactEndpoint?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ResourceLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: ContactProtocolEnum;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ContactMethodStatusEnum;
 
-  @Metadata({ data: "json, name=supportCode" })
+  @SpeakeasyMetadata({ data: "json, name=supportCode" })
   supportCode?: string;
 }

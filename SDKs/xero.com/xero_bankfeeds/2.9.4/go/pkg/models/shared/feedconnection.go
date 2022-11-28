@@ -7,6 +7,9 @@ const (
 	FeedConnectionStatusEnumRejected FeedConnectionStatusEnum = "REJECTED"
 )
 
+// FeedConnection
+
+// https://developer.xero.com/documentation/bank-feeds-api/feed-connections
 type FeedConnection struct {
 	AccountID     *string                   `json:"accountId,omitempty"`
 	AccountName   *string                   `json:"accountName,omitempty"`

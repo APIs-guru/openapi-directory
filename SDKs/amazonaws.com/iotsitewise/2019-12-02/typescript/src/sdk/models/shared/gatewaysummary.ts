@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GatewayCapabilitySummary } from "./gatewaycapabilitysummary";
 import { GatewayPlatform } from "./gatewayplatform";
+
 
 
 // GatewaySummary
@@ -9,21 +9,21 @@ import { GatewayPlatform } from "./gatewayplatform";
  * Contains a summary of a gateway.
 **/
 export class GatewaySummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=gatewayCapabilitySummaries", elemType: shared.GatewayCapabilitySummary })
+  @SpeakeasyMetadata({ data: "json, name=gatewayCapabilitySummaries", elemType: GatewayCapabilitySummary })
   gatewayCapabilitySummaries?: GatewayCapabilitySummary[];
 
-  @Metadata({ data: "json, name=gatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayId" })
   gatewayId: string;
 
-  @Metadata({ data: "json, name=gatewayName" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayName" })
   gatewayName: string;
 
-  @Metadata({ data: "json, name=gatewayPlatform" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayPlatform" })
   gatewayPlatform?: GatewayPlatform;
 
-  @Metadata({ data: "json, name=lastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateDate" })
   lastUpdateDate: Date;
 }

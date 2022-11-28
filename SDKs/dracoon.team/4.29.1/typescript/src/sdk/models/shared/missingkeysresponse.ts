@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileFileKeys } from "./filefilekeys";
 import { UserIdFileIdItem } from "./useridfileiditem";
 import { Range } from "./range";
-import { UserUserPublicKey } from "./useruserpublickey";
+import { UserUserPublicKeyOutput } from "./useruserpublickey";
 
 
-// MissingKeysResponse
+
+// MissingKeysResponseOutput
 /** 
  * Missing keys information
 **/
-export class MissingKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files", elemType: shared.FileFileKeys })
+export class MissingKeysResponseOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: FileFileKeys })
   files?: FileFileKeys[];
 
-  @Metadata({ data: "json, name=items", elemType: shared.UserIdFileIdItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: UserIdFileIdItem })
   items?: UserIdFileIdItem[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: Range;
 
-  @Metadata({ data: "json, name=users", elemType: shared.UserUserPublicKey })
-  users?: UserUserPublicKey[];
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: UserUserPublicKeyOutput })
+  users?: UserUserPublicKeyOutput[];
 }

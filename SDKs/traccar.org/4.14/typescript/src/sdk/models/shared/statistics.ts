@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Statistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeDevices" })
+  @SpeakeasyMetadata({ data: "json, name=activeDevices" })
   activeDevices?: number;
 
-  @Metadata({ data: "json, name=activeUsers" })
+  @SpeakeasyMetadata({ data: "json, name=activeUsers" })
   activeUsers?: number;
 
-  @Metadata({ data: "json, name=captureTime" })
+  @SpeakeasyMetadata({ data: "json, name=captureTime" })
   captureTime?: Date;
 
-  @Metadata({ data: "json, name=messagesReceived" })
+  @SpeakeasyMetadata({ data: "json, name=messagesReceived" })
   messagesReceived?: number;
 
-  @Metadata({ data: "json, name=messagesStored" })
+  @SpeakeasyMetadata({ data: "json, name=messagesStored" })
   messagesStored?: number;
 
-  @Metadata({ data: "json, name=requests" })
+  @SpeakeasyMetadata({ data: "json, name=requests" })
   requests?: number;
 }

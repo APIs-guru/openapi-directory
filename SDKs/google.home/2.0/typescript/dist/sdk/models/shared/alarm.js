@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatePattern } from "./datepattern";
 import { TimePattern } from "./timepattern";
 var Alarm = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var Alarm = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=date_pattern" }),
+        SpeakeasyMetadata({ data: "json, name=date_pattern" }),
         __metadata("design:type", DatePattern)
     ], Alarm.prototype, "datePattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=fire_time" }),
+        SpeakeasyMetadata({ data: "json, name=fire_time" }),
         __metadata("design:type", Number)
     ], Alarm.prototype, "fireTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Alarm.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], Alarm.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=time_pattern" }),
+        SpeakeasyMetadata({ data: "json, name=time_pattern" }),
         __metadata("design:type", TimePattern)
     ], Alarm.prototype, "timePattern", void 0);
     return Alarm;

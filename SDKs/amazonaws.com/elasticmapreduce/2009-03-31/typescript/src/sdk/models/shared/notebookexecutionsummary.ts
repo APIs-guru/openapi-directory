@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotebookExecutionStatusEnum } from "./notebookexecutionstatusenum";
+
 
 
 // NotebookExecutionSummary
@@ -7,21 +8,21 @@ import { NotebookExecutionStatusEnum } from "./notebookexecutionstatusenum";
  * Details for a notebook execution. The details include information such as the unique ID and status of the notebook execution.
 **/
 export class NotebookExecutionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EditorId" })
+  @SpeakeasyMetadata({ data: "json, name=EditorId" })
   editorId?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=NotebookExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookExecutionId" })
   notebookExecutionId?: string;
 
-  @Metadata({ data: "json, name=NotebookExecutionName" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookExecutionName" })
   notebookExecutionName?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: NotebookExecutionStatusEnum;
 }

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05ConsentsHiuNotifyServers = []string{
+var PostV05ConsentsHiuNotifyServerList = []string{
 	"https://dev.ndhm.gov.in/hiu",
 }
 

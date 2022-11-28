@@ -16,14 +16,14 @@ type RemoveCustomFieldSettingForProjectRequestBody struct {
 	Data *shared.RemoveCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
+type RemoveCustomFieldSettingForProject200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveCustomFieldSettingForProjectRequest struct {
 	PathParams  RemoveCustomFieldSettingForProjectPathParams
 	QueryParams RemoveCustomFieldSettingForProjectQueryParams
 	Request     RemoveCustomFieldSettingForProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveCustomFieldSettingForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveCustomFieldSettingForProjectResponse struct {

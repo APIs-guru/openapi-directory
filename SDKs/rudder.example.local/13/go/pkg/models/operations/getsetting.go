@@ -4,16 +4,14 @@ type GetSettingPathParams struct {
 	SettingID string `pathParam:"style=simple,explode=false,name=settingId"`
 }
 
-type GetSettingRequest struct {
-	PathParams GetSettingPathParams
-}
-
 type GetSetting200ApplicationJSONActionEnum string
 
 const (
 	GetSetting200ApplicationJSONActionEnumGetSetting GetSetting200ApplicationJSONActionEnum = "getSetting"
 )
 
+// GetSetting200ApplicationJSONData
+// Information about the setting
 type GetSetting200ApplicationJSONData struct {
 	SettingID *string `json:"settingId,omitempty"`
 }
@@ -30,6 +28,10 @@ type GetSetting200ApplicationJSON struct {
 	Data   GetSetting200ApplicationJSONData       `json:"data"`
 	ID     string                                 `json:"id"`
 	Result GetSetting200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetSettingRequest struct {
+	PathParams GetSettingPathParams
 }
 
 type GetSettingResponse struct {

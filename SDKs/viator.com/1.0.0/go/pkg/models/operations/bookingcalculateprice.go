@@ -24,11 +24,6 @@ type BookingCalculatepriceRequestBody struct {
 	Items        []BookingCalculatepriceRequestBodyItems `json:"items,omitempty"`
 }
 
-type BookingCalculatepriceRequest struct {
-	Headers BookingCalculatepriceHeaders
-	Request *BookingCalculatepriceRequestBody `request:"mediaType=application/json"`
-}
-
 type BookingCalculateprice200ApplicationJSONDataItineraryItemSummariesTravellerAgeBands struct {
 	AgeBandID         *int64  `json:"ageBandId,omitempty"`
 	Count             *int64  `json:"count,omitempty"`
@@ -92,6 +87,8 @@ type BookingCalculateprice200ApplicationJSONDataItineraryItemSummaries struct {
 	Vouchers                     *string                                                                              `json:"vouchers,omitempty"`
 }
 
+// BookingCalculateprice200ApplicationJSONDataItinerary
+// **summary results** for all itinerary items
 type BookingCalculateprice200ApplicationJSONDataItinerary struct {
 	BookerEmail         *string                                                             `json:"bookerEmail,omitempty"`
 	BookingDate         *string                                                             `json:"bookingDate,omitempty"`
@@ -146,6 +143,11 @@ type BookingCalculateprice200ApplicationJSON struct {
 	Success          *bool                                        `json:"success,omitempty"`
 	TotalCount       *int64                                       `json:"totalCount,omitempty"`
 	Vmid             *string                                      `json:"vmid,omitempty"`
+}
+
+type BookingCalculatepriceRequest struct {
+	Headers BookingCalculatepriceHeaders
+	Request *BookingCalculatepriceRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingCalculatepriceResponse struct {

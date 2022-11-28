@@ -16,14 +16,14 @@ class GetSearchV1ScrapeQueryParams:
 
 @dataclass
 class GetSearchV1ScrapeRequest:
-    query_params: GetSearchV1ScrapeQueryParams = field(default=None)
+    query_params: GetSearchV1ScrapeQueryParams = field()
     
 
 @dataclass
 class GetSearchV1ScrapeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error: Optional[Any] = field(default=None)
     scrape_result: Optional[shared.ScrapeResult] = field(default=None)
-    status_code: int = field(default=None)
     

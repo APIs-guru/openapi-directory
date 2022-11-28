@@ -14,7 +14,7 @@ type UpdateUserSecurity struct {
 
 type UpdateUserRequest struct {
 	PathParams UpdateUserPathParams
-	Request    shared.User `request:"mediaType=application/json"`
+	Request    shared.UserInput `request:"mediaType=application/json"`
 	Security   UpdateUserSecurity
 }
 

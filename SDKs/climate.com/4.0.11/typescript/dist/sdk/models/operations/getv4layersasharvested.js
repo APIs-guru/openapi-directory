@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV4LayersAsHarvestedQueryParams = /** @class */ (function (_super) {
     __extends(GetV4LayersAsHarvestedQueryParams, _super);
@@ -30,19 +30,19 @@ var GetV4LayersAsHarvestedQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" }),
         __metadata("design:type", Date)
     ], GetV4LayersAsHarvestedQueryParams.prototype, "occurredAfter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" }),
         __metadata("design:type", Date)
     ], GetV4LayersAsHarvestedQueryParams.prototype, "occurredBefore", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=resourceOwnerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceOwnerId" }),
         __metadata("design:type", String)
     ], GetV4LayersAsHarvestedQueryParams.prototype, "resourceOwnerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=updatedAfter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedAfter" }),
         __metadata("design:type", Date)
     ], GetV4LayersAsHarvestedQueryParams.prototype, "updatedAfter", void 0);
     return GetV4LayersAsHarvestedQueryParams;
@@ -54,57 +54,33 @@ var GetV4LayersAsHarvestedHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], GetV4LayersAsHarvestedHeaders.prototype, "accept", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Limit" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Limit" }),
         __metadata("design:type", Number)
     ], GetV4LayersAsHarvestedHeaders.prototype, "xLimit", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Next-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Next-Token" }),
         __metadata("design:type", String)
     ], GetV4LayersAsHarvestedHeaders.prototype, "xNextToken", void 0);
     return GetV4LayersAsHarvestedHeaders;
 }(SpeakeasyBase));
 export { GetV4LayersAsHarvestedHeaders };
-var GetV4LayersAsHarvestedSecurityOption1 = /** @class */ (function (_super) {
-    __extends(GetV4LayersAsHarvestedSecurityOption1, _super);
-    function GetV4LayersAsHarvestedSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], GetV4LayersAsHarvestedSecurityOption1.prototype, "apiKey", void 0);
-    return GetV4LayersAsHarvestedSecurityOption1;
-}(SpeakeasyBase));
-export { GetV4LayersAsHarvestedSecurityOption1 };
-var GetV4LayersAsHarvestedSecurityOption2 = /** @class */ (function (_super) {
-    __extends(GetV4LayersAsHarvestedSecurityOption2, _super);
-    function GetV4LayersAsHarvestedSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], GetV4LayersAsHarvestedSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return GetV4LayersAsHarvestedSecurityOption2;
-}(SpeakeasyBase));
-export { GetV4LayersAsHarvestedSecurityOption2 };
 var GetV4LayersAsHarvestedSecurity = /** @class */ (function (_super) {
     __extends(GetV4LayersAsHarvestedSecurity, _super);
     function GetV4LayersAsHarvestedSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetV4LayersAsHarvestedSecurityOption1)
-    ], GetV4LayersAsHarvestedSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], GetV4LayersAsHarvestedSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetV4LayersAsHarvestedSecurityOption2)
-    ], GetV4LayersAsHarvestedSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], GetV4LayersAsHarvestedSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return GetV4LayersAsHarvestedSecurity;
 }(SpeakeasyBase));
 export { GetV4LayersAsHarvestedSecurity };
@@ -114,15 +90,15 @@ var GetV4LayersAsHarvestedRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV4LayersAsHarvestedQueryParams)
     ], GetV4LayersAsHarvestedRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV4LayersAsHarvestedHeaders)
     ], GetV4LayersAsHarvestedRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV4LayersAsHarvestedSecurity)
     ], GetV4LayersAsHarvestedRequest.prototype, "security", void 0);
     return GetV4LayersAsHarvestedRequest;
@@ -134,27 +110,27 @@ var GetV4LayersAsHarvestedResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV4LayersAsHarvestedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetV4LayersAsHarvestedResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetV4LayersAsHarvestedResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetV4LayersAsHarvestedResponse.prototype, "harvestActivities", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetV4LayersAsHarvestedResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV4LayersAsHarvestedResponse.prototype, "statusCode", void 0);
     return GetV4LayersAsHarvestedResponse;

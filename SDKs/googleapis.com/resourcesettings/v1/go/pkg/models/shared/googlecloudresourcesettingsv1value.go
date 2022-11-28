@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudResourcesettingsV1Value
+// The data in a setting value.
 type GoogleCloudResourcesettingsV1Value struct {
 	BooleanValue   *bool                                        `json:"booleanValue,omitempty"`
 	DurationValue  *string                                      `json:"durationValue,omitempty"`

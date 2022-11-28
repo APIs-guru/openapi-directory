@@ -12,12 +12,12 @@ class GetSetupV1CalendarsQueryParams:
 
 @dataclass
 class GetSetupV1CalendarsRequest:
-    query_params: GetSetupV1CalendarsQueryParams = field(default=None)
+    query_params: GetSetupV1CalendarsQueryParams = field()
     
 
 @dataclass
 class GetSetupV1CalendarsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

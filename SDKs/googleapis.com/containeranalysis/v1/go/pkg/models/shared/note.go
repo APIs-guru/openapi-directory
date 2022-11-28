@@ -16,6 +16,8 @@ const (
 	NoteKindEnumDsseAttestation     NoteKindEnum = "DSSE_ATTESTATION"
 )
 
+// Note
+// A type of analysis that can be done for a resource.
 type Note struct {
 	Attestation      *AttestationNote     `json:"attestation,omitempty"`
 	Build            *BuildNote           `json:"build,omitempty"`

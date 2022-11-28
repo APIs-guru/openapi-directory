@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposCreateOrUpdateEnvironmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environment_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environment_name" })
   environmentName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposCreateOrUpdateEnvironmentRequestBodyReviewers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: shared.DeploymentReviewerTypeEnum;
 }
 
 
 export class ReposCreateOrUpdateEnvironmentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deployment_branch_policy" })
+  @SpeakeasyMetadata({ data: "json, name=deployment_branch_policy" })
   deploymentBranchPolicy?: shared.DeploymentBranchPolicy;
 
-  @Metadata({ data: "json, name=reviewers", elemType: operations.ReposCreateOrUpdateEnvironmentRequestBodyReviewers })
+  @SpeakeasyMetadata({ data: "json, name=reviewers", elemType: ReposCreateOrUpdateEnvironmentRequestBodyReviewers })
   reviewers?: ReposCreateOrUpdateEnvironmentRequestBodyReviewers[];
 
-  @Metadata({ data: "json, name=wait_timer" })
+  @SpeakeasyMetadata({ data: "json, name=wait_timer" })
   waitTimer?: number;
 }
 
 
 export class ReposCreateOrUpdateEnvironmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposCreateOrUpdateEnvironmentPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReposCreateOrUpdateEnvironmentRequestBody;
 }
 
 
 export class ReposCreateOrUpdateEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   environment?: shared.Environment;
 }

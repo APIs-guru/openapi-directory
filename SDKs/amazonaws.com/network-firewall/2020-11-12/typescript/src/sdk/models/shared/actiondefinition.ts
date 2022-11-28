@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublishMetricAction } from "./publishmetricaction";
+
 
 
 // ActionDefinition
@@ -7,6 +8,6 @@ import { PublishMetricAction } from "./publishmetricaction";
  * A custom action to use in stateless rule actions settings. This is used in <a>CustomAction</a>.
 **/
 export class ActionDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PublishMetricAction" })
+  @SpeakeasyMetadata({ data: "json, name=PublishMetricAction" })
   publishMetricAction?: PublishMetricAction;
 }

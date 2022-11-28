@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2beta1knowledgeanswersanswer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2beta1KnowledgeAnswers:
-    answers: Optional[List[googleclouddialogflowv2beta1knowledgeanswersanswer.GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'answers' }})
+    r"""GoogleCloudDialogflowV2beta1KnowledgeAnswers
+    Represents the result of querying a Knowledge base.
+    """
+    
+    answers: Optional[List[GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('answers') }})
     

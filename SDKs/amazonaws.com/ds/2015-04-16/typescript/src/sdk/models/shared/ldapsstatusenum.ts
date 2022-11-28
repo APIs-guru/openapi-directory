@@ -1,8 +1,9 @@
 
 
+
 export enum LdapsStatusEnum {
-    Enabling = "Enabling"
-,    Enabled = "Enabled"
-,    EnableFailed = "EnableFailed"
-,    Disabled = "Disabled"
+    Enabling = "Enabling",
+    Enabled = "Enabled",
+    EnableFailed = "EnableFailed",
+    Disabled = "Disabled"
 }

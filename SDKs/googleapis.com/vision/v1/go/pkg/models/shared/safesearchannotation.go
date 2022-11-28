@@ -55,6 +55,8 @@ const (
 	SafeSearchAnnotationViolenceEnumVeryLikely   SafeSearchAnnotationViolenceEnum = "VERY_LIKELY"
 )
 
+// SafeSearchAnnotation
+// Set of features pertaining to the image, computed by computer vision methods over safe-search verticals (for example, adult, spoof, medical, violence).
 type SafeSearchAnnotation struct {
 	Adult    *SafeSearchAnnotationAdultEnum    `json:"adult,omitempty"`
 	Medical  *SafeSearchAnnotationMedicalEnum  `json:"medical,omitempty"`

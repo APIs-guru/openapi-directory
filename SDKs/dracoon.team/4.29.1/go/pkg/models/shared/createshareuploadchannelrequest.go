@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CreateShareUploadChannelRequest
+// Request model for creating an upload channel
 type CreateShareUploadChannelRequest struct {
 	DirectS3Upload        *bool      `json:"directS3Upload,omitempty"`
 	Name                  string     `json:"name"`

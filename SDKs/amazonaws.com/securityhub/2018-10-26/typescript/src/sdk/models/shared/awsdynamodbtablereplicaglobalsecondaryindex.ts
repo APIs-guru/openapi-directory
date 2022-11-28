@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsDynamoDbTableProvisionedThroughputOverride } from "./awsdynamodbtableprovisionedthroughputoverride";
+
 
 
 // AwsDynamoDbTableReplicaGlobalSecondaryIndex
@@ -7,9 +8,9 @@ import { AwsDynamoDbTableProvisionedThroughputOverride } from "./awsdynamodbtabl
  * Information about a global secondary index for a DynamoDB table replica.
 **/
 export class AwsDynamoDbTableReplicaGlobalSecondaryIndex extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName?: string;
 
-  @Metadata({ data: "json, name=ProvisionedThroughputOverride" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughputOverride" })
   provisionedThroughputOverride?: AwsDynamoDbTableProvisionedThroughputOverride;
 }

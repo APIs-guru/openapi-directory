@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
+
 
 
 // Activities
@@ -8,12 +8,12 @@ import { DimensionValue } from "./dimensionvalue";
  * Represents an activity group.
 **/
 export class Activities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.DimensionValue })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: DimensionValue })
   filters?: DimensionValue[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metricNames" })
+  @SpeakeasyMetadata({ data: "json, name=metricNames" })
   metricNames?: string[];
 }

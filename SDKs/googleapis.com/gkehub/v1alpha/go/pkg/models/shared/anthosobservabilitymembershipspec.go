@@ -1,5 +1,7 @@
 package shared
 
+// AnthosObservabilityMembershipSpec
+// **Anthosobservability**: Per-Membership Feature spec.
 type AnthosObservabilityMembershipSpec struct {
 	DoNotOptimizeMetrics            *bool   `json:"doNotOptimizeMetrics,omitempty"`
 	EnableStackdriverOnApplications *bool   `json:"enableStackdriverOnApplications,omitempty"`

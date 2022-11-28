@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GetEditorUrlLanguageEnum {
     En = "en",
     Et = "et",
@@ -9,10 +9,6 @@ export declare enum GetEditorUrlLanguageEnum {
 export declare class GetEditorUrlQueryParams extends SpeakeasyBase {
     language?: GetEditorUrlLanguageEnum;
     templateId: number;
-}
-export declare class GetEditorUrlRequest extends SpeakeasyBase {
-    queryParams: GetEditorUrlQueryParams;
-    request: Map<string, any>;
 }
 export declare class GetEditorUrl200ApplicationJson extends SpeakeasyBase {
     response?: string;
@@ -62,6 +58,10 @@ export declare class GetEditorUrl422ApplicationJson extends SpeakeasyBase {
 export declare class GetEditorUrl500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class GetEditorUrlRequest extends SpeakeasyBase {
+    queryParams: GetEditorUrlQueryParams;
+    request: Map<string, any>;
 }
 export declare class GetEditorUrlResponse extends SpeakeasyBase {
     contentType: string;

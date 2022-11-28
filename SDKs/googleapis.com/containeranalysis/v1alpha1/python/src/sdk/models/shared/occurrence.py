@@ -1,22 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attestation
-from . import builddetails
-from . import complianceoccurrence
-from . import deployment
-from . import derived
-from . import discovered
-from . import dsseattestationoccurrence
-from . import envelope
-from . import installation
-from . import resource
-from . import documentoccurrence
-from . import fileoccurrence
-from . import packageinfooccurrence
-from . import relationshipoccurrence
-from . import upgradeoccurrence
-from . import vulnerabilitydetails
+from sdk import utils
+from . import *
 
 class OccurrenceKindEnum(str, Enum):
     KIND_UNSPECIFIED = "KIND_UNSPECIFIED"
@@ -38,28 +28,64 @@ class OccurrenceKindEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class OccurrenceInput:
+    r"""OccurrenceInput
+    `Occurrence` includes information about analysis occurrences for an image.
+    """
+    
+    attestation: Optional[Attestation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attestation') }})
+    build_details: Optional[BuildDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buildDetails') }})
+    compliance: Optional[ComplianceOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compliance') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    deployment: Optional[Deployment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployment') }})
+    derived_image: Optional[Derived] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('derivedImage') }})
+    discovered: Optional[Discovered] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('discovered') }})
+    dsse_attestation: Optional[DsseAttestationOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dsseAttestation') }})
+    envelope: Optional[Envelope] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('envelope') }})
+    installation: Optional[InstallationInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('installation') }})
+    kind: Optional[OccurrenceKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    note_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('noteName') }})
+    remediation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('remediation') }})
+    resource: Optional[Resource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource') }})
+    resource_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceUrl') }})
+    sbom: Optional[DocumentOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sbom') }})
+    spdx_file: Optional[FileOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spdxFile') }})
+    spdx_package: Optional[PackageInfoOccurrenceInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spdxPackage') }})
+    spdx_relationship: Optional[RelationshipOccurrenceInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spdxRelationship') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    upgrade: Optional[UpgradeOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upgrade') }})
+    vulnerability_details: Optional[VulnerabilityDetailsInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vulnerabilityDetails') }})
+    
+
+@dataclass_json
+@dataclass
 class Occurrence:
-    attestation: Optional[attestation.Attestation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attestation' }})
-    build_details: Optional[builddetails.BuildDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buildDetails' }})
-    compliance: Optional[complianceoccurrence.ComplianceOccurrence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compliance' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    deployment: Optional[deployment.Deployment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployment' }})
-    derived_image: Optional[derived.Derived] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'derivedImage' }})
-    discovered: Optional[discovered.Discovered] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'discovered' }})
-    dsse_attestation: Optional[dsseattestationoccurrence.DsseAttestationOccurrence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dsseAttestation' }})
-    envelope: Optional[envelope.Envelope] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envelope' }})
-    installation: Optional[installation.Installation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installation' }})
-    kind: Optional[OccurrenceKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    note_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'noteName' }})
-    remediation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remediation' }})
-    resource: Optional[resource.Resource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource' }})
-    resource_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceUrl' }})
-    sbom: Optional[documentoccurrence.DocumentOccurrence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sbom' }})
-    spdx_file: Optional[fileoccurrence.FileOccurrence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spdxFile' }})
-    spdx_package: Optional[packageinfooccurrence.PackageInfoOccurrence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spdxPackage' }})
-    spdx_relationship: Optional[relationshipoccurrence.RelationshipOccurrence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spdxRelationship' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    upgrade: Optional[upgradeoccurrence.UpgradeOccurrence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upgrade' }})
-    vulnerability_details: Optional[vulnerabilitydetails.VulnerabilityDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vulnerabilityDetails' }})
+    r"""Occurrence
+    `Occurrence` includes information about analysis occurrences for an image.
+    """
+    
+    attestation: Optional[Attestation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attestation') }})
+    build_details: Optional[BuildDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buildDetails') }})
+    compliance: Optional[ComplianceOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compliance') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    deployment: Optional[Deployment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployment') }})
+    derived_image: Optional[Derived] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('derivedImage') }})
+    discovered: Optional[Discovered] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('discovered') }})
+    dsse_attestation: Optional[DsseAttestationOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dsseAttestation') }})
+    envelope: Optional[Envelope] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('envelope') }})
+    installation: Optional[Installation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('installation') }})
+    kind: Optional[OccurrenceKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    note_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('noteName') }})
+    remediation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('remediation') }})
+    resource: Optional[Resource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource') }})
+    resource_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceUrl') }})
+    sbom: Optional[DocumentOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sbom') }})
+    spdx_file: Optional[FileOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spdxFile') }})
+    spdx_package: Optional[PackageInfoOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spdxPackage') }})
+    spdx_relationship: Optional[RelationshipOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spdxRelationship') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    upgrade: Optional[UpgradeOccurrence] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upgrade') }})
+    vulnerability_details: Optional[VulnerabilityDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vulnerabilityDetails') }})
     

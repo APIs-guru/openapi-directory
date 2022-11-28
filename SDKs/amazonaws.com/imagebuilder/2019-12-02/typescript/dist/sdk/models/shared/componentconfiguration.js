@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComponentParameter } from "./componentparameter";
 // ComponentConfiguration
 /**
  *  Configuration details of the component.
@@ -34,11 +34,11 @@ var ComponentConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=componentArn" }),
+        SpeakeasyMetadata({ data: "json, name=componentArn" }),
         __metadata("design:type", String)
     ], ComponentConfiguration.prototype, "componentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters", elemType: shared.ComponentParameter }),
+        SpeakeasyMetadata({ data: "json, name=parameters", elemType: ComponentParameter }),
         __metadata("design:type", Array)
     ], ComponentConfiguration.prototype, "parameters", void 0);
     return ComponentConfiguration;

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ParticipationStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=all" })
+  @SpeakeasyMetadata({ data: "json, name=all" })
   all: number[];
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner: number[];
 }

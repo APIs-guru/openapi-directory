@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import blobmetadata
-from . import blobmetadata
-from . import changetypeenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Difference:
-    after_blob: Optional[blobmetadata.BlobMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'afterBlob' }})
-    before_blob: Optional[blobmetadata.BlobMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'beforeBlob' }})
-    change_type: Optional[changetypeenum_enum.ChangeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'changeType' }})
+    r"""Difference
+    Returns information about a set of differences for a commit specifier.
+    """
+    
+    after_blob: Optional[BlobMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('afterBlob') }})
+    before_blob: Optional[BlobMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('beforeBlob') }})
+    change_type: Optional[ChangeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('changeType') }})
     

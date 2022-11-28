@@ -22,54 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetBlock = /** @class */ (function (_super) {
     __extends(GetBlock, _super);
     function GetBlock() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=block_number" }),
+        SpeakeasyMetadata({ data: "json, name=block_number" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "blockNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=difficulty" }),
+        SpeakeasyMetadata({ data: "json, name=difficulty" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "difficulty", void 0);
     __decorate([
-        Metadata({ data: "json, name=gas_limit" }),
+        SpeakeasyMetadata({ data: "json, name=gas_limit" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "gasLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=gas_used" }),
+        SpeakeasyMetadata({ data: "json, name=gas_used" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "gasUsed", void 0);
     __decorate([
-        Metadata({ data: "json, name=hash" }),
+        SpeakeasyMetadata({ data: "json, name=hash" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "hash", void 0);
     __decorate([
-        Metadata({ data: "json, name=miner" }),
+        SpeakeasyMetadata({ data: "json, name=miner" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "miner", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], GetBlock.prototype, "ok", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent_hash" }),
+        SpeakeasyMetadata({ data: "json, name=parent_hash" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "parentHash", void 0);
     __decorate([
-        Metadata({ data: "json, name=size_in_bytes" }),
+        SpeakeasyMetadata({ data: "json, name=size_in_bytes" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "sizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=time_stamp" }),
+        SpeakeasyMetadata({ data: "json, name=time_stamp" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "timeStamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=transactions_count" }),
+        SpeakeasyMetadata({ data: "json, name=transactions_count" }),
         __metadata("design:type", String)
     ], GetBlock.prototype, "transactionsCount", void 0);
     return GetBlock;

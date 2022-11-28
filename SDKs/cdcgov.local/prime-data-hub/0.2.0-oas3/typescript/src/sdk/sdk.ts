@@ -1,18 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromResponse} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://cdcgov.local",
+export const ServerList = [
+	"http://cdcgov.local",
 ] as const;
 
 export function WithServerURL(
@@ -23,47 +19,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // DeleteSettingsOrganizationsOrganizationName - Delete an organization (and the associated receivers and senders)
-  DeleteSettingsOrganizationsOrganizationName(
+  /**
+   * deleteSettingsOrganizationsOrganizationName - Delete an organization (and the associated receivers and senders)
+  **/
+  deleteSettingsOrganizationsOrganizationName(
     req: operations.DeleteSettingsOrganizationsOrganizationNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSettingsOrganizationsOrganizationNameResponse> {
@@ -71,28 +67,30 @@ export class SDK {
       req = new operations.DeleteSettingsOrganizationsOrganizationNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSettingsOrganizationsOrganizationNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteSettingsOrganizationsOrganizationNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.organization = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -102,8 +100,10 @@ export class SDK {
   }
 
   
-  // DeleteSettingsOrganizationsOrganizationNameReceiversReceiverName - Delete a receiver
-  DeleteSettingsOrganizationsOrganizationNameReceiversReceiverName(
+  /**
+   * deleteSettingsOrganizationsOrganizationNameReceiversReceiverName - Delete a receiver
+  **/
+  deleteSettingsOrganizationsOrganizationNameReceiversReceiverName(
     req: operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse> {
@@ -111,28 +111,30 @@ export class SDK {
       req = new operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/receivers/{receiverName}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.receiver = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -142,8 +144,10 @@ export class SDK {
   }
 
   
-  // DeleteSettingsOrganizationsOrganizationNameSendersSenderName - Delete a sender
-  DeleteSettingsOrganizationsOrganizationNameSendersSenderName(
+  /**
+   * deleteSettingsOrganizationsOrganizationNameSendersSenderName - Delete a sender
+  **/
+  deleteSettingsOrganizationsOrganizationNameSendersSenderName(
     req: operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameResponse> {
@@ -151,28 +155,30 @@ export class SDK {
       req = new operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/senders/{senderName}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sender = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -182,8 +188,10 @@ export class SDK {
   }
 
   
-  // GetSettingsOrganizations - The settings for all organizations of the system. Must have admin access.
-  GetSettingsOrganizations(
+  /**
+   * getSettingsOrganizations - The settings for all organizations of the system. Must have admin access.
+  **/
+  getSettingsOrganizations(
     req: operations.GetSettingsOrganizationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSettingsOrganizationsResponse> {
@@ -191,22 +199,24 @@ export class SDK {
       req = new operations.GetSettingsOrganizationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/settings/organizations";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSettingsOrganizationsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSettingsOrganizationsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.organizations = httpRes?.data;
             }
             break;
@@ -218,8 +228,10 @@ export class SDK {
   }
 
   
-  // GetSettingsOrganizationsOrganizationName - A single organization settings
-  GetSettingsOrganizationsOrganizationName(
+  /**
+   * getSettingsOrganizationsOrganizationName - A single organization settings
+  **/
+  getSettingsOrganizationsOrganizationName(
     req: operations.GetSettingsOrganizationsOrganizationNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSettingsOrganizationsOrganizationNameResponse> {
@@ -227,22 +239,24 @@ export class SDK {
       req = new operations.GetSettingsOrganizationsOrganizationNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSettingsOrganizationsOrganizationNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSettingsOrganizationsOrganizationNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.organization = httpRes?.data;
             }
             break;
@@ -254,8 +268,10 @@ export class SDK {
   }
 
   
-  // GetSettingsOrganizationsOrganizationNameReceivers - A list of receivers and their current settings
-  GetSettingsOrganizationsOrganizationNameReceivers(
+  /**
+   * getSettingsOrganizationsOrganizationNameReceivers - A list of receivers and their current settings
+  **/
+  getSettingsOrganizationsOrganizationNameReceivers(
     req: operations.GetSettingsOrganizationsOrganizationNameReceiversRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSettingsOrganizationsOrganizationNameReceiversResponse> {
@@ -263,28 +279,30 @@ export class SDK {
       req = new operations.GetSettingsOrganizationsOrganizationNameReceiversRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/receivers", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSettingsOrganizationsOrganizationNameReceiversResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSettingsOrganizationsOrganizationNameReceiversResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.receivers = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -294,8 +312,10 @@ export class SDK {
   }
 
   
-  // GetSettingsOrganizationsOrganizationNameReceiversReceiverName - The settings of a single of receiver
-  GetSettingsOrganizationsOrganizationNameReceiversReceiverName(
+  /**
+   * getSettingsOrganizationsOrganizationNameReceiversReceiverName - The settings of a single of receiver
+  **/
+  getSettingsOrganizationsOrganizationNameReceiversReceiverName(
     req: operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse> {
@@ -303,28 +323,30 @@ export class SDK {
       req = new operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/receivers/{receiverName}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.receiver = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -334,8 +356,10 @@ export class SDK {
   }
 
   
-  // GetSettingsOrganizationsOrganizationNameSenders - A list of senders
-  GetSettingsOrganizationsOrganizationNameSenders(
+  /**
+   * getSettingsOrganizationsOrganizationNameSenders - A list of senders
+  **/
+  getSettingsOrganizationsOrganizationNameSenders(
     req: operations.GetSettingsOrganizationsOrganizationNameSendersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSettingsOrganizationsOrganizationNameSendersResponse> {
@@ -343,28 +367,30 @@ export class SDK {
       req = new operations.GetSettingsOrganizationsOrganizationNameSendersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/senders", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSettingsOrganizationsOrganizationNameSendersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSettingsOrganizationsOrganizationNameSendersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.senders = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -374,8 +400,10 @@ export class SDK {
   }
 
   
-  // GetSettingsOrganizationsOrganizationNameSendersSenderName - The settings of a single of sender
-  GetSettingsOrganizationsOrganizationNameSendersSenderName(
+  /**
+   * getSettingsOrganizationsOrganizationNameSendersSenderName - The settings of a single of sender
+  **/
+  getSettingsOrganizationsOrganizationNameSendersSenderName(
     req: operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameResponse> {
@@ -383,28 +411,30 @@ export class SDK {
       req = new operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/senders/{senderName}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sender = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -414,8 +444,10 @@ export class SDK {
   }
 
   
-  // HeadSettingsOrganizations - Retrived the last modified for all settings of the system. Must have admin access.
-  HeadSettingsOrganizations(
+  /**
+   * headSettingsOrganizations - Retrived the last modified for all settings of the system. Must have admin access.
+  **/
+  headSettingsOrganizations(
     req: operations.HeadSettingsOrganizationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.HeadSettingsOrganizationsResponse> {
@@ -423,21 +455,23 @@ export class SDK {
       req = new operations.HeadSettingsOrganizationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/settings/organizations";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .head(url, {
+      .request({
+        url: url,
+        method: "head",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.HeadSettingsOrganizationsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.HeadSettingsOrganizationsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -447,8 +481,10 @@ export class SDK {
   }
 
   
-  // PostReports - Post a report to the data hub
-  PostReports(
+  /**
+   * postReports - Post a report to the data hub
+  **/
+  postReports(
     req: operations.PostReportsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostReportsResponse> {
@@ -456,22 +492,22 @@ export class SDK {
       req = new operations.PostReportsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/reports";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -482,36 +518,36 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostReportsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostReportsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.report = httpRes?.data;
             }
             break;
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.report = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.report = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
         }
 
@@ -521,8 +557,10 @@ export class SDK {
   }
 
   
-  // PutSettingsOrganizationsOrganizationName - Create or update the direct settings associated with an organization
-  PutSettingsOrganizationsOrganizationName(
+  /**
+   * putSettingsOrganizationsOrganizationName - Create or update the direct settings associated with an organization
+  **/
+  putSettingsOrganizationsOrganizationName(
     req: operations.PutSettingsOrganizationsOrganizationNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutSettingsOrganizationsOrganizationNameResponse> {
@@ -530,49 +568,50 @@ export class SDK {
       req = new operations.PutSettingsOrganizationsOrganizationNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutSettingsOrganizationsOrganizationNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutSettingsOrganizationsOrganizationNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.organization = httpRes?.data;
             }
             break;
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.organization = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -582,8 +621,10 @@ export class SDK {
   }
 
   
-  // PutSettingsOrganizationsOrganizationNameReceiversReceiverName - Update a single reciever
-  PutSettingsOrganizationsOrganizationNameReceiversReceiverName(
+  /**
+   * putSettingsOrganizationsOrganizationNameReceiversReceiverName - Update a single reciever
+  **/
+  putSettingsOrganizationsOrganizationNameReceiversReceiverName(
     req: operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse> {
@@ -591,49 +632,50 @@ export class SDK {
       req = new operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/receivers/{receiverName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.receiver = httpRes?.data;
             }
             break;
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.receiver = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 
@@ -643,8 +685,10 @@ export class SDK {
   }
 
   
-  // PutSettingsOrganizationsOrganizationNameSendersSenderName - Update a single sender
-  PutSettingsOrganizationsOrganizationNameSendersSenderName(
+  /**
+   * putSettingsOrganizationsOrganizationNameSendersSenderName - Update a single sender
+  **/
+  putSettingsOrganizationsOrganizationNameSendersSenderName(
     req: operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameResponse> {
@@ -652,49 +696,50 @@ export class SDK {
       req = new operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/settings/organizations/{organizationName}/senders/{senderName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.senders = httpRes?.data;
             }
             break;
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.senders = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
         }
 

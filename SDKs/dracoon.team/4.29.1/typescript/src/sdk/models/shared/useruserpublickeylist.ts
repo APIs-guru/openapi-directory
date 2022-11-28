@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { UserUserPublicKey } from "./useruserpublickey";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UserUserPublicKeyOutput } from "./useruserpublickey";
 
 
-// UserUserPublicKeyList
+
+// UserUserPublicKeyListOutput
 /** 
  * List of user public keys
 **/
-export class UserUserPublicKeyList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.UserUserPublicKey })
-  items: UserUserPublicKey[];
+export class UserUserPublicKeyListOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: UserUserPublicKeyOutput })
+  items: UserUserPublicKeyOutput[];
 }

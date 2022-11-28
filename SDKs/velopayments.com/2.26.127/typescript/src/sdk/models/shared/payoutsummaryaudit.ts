@@ -1,57 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FxSummary } from "./fxsummary";
 import { PayoutTypeEnum } from "./payouttypeenum";
 import { SourceAccountSummary } from "./sourceaccountsummary";
 import { PayoutStatusEnum } from "./payoutstatusenum";
 
 
+
 export class PayoutSummaryAudit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dateTime" })
+  @SpeakeasyMetadata({ data: "json, name=dateTime" })
   dateTime?: Date;
 
-  @Metadata({ data: "json, name=fxSummaries", elemType: shared.FxSummary })
+  @SpeakeasyMetadata({ data: "json, name=fxSummaries", elemType: FxSummary })
   fxSummaries?: FxSummary[];
 
-  @Metadata({ data: "json, name=instructedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=instructedDateTime" })
   instructedDateTime?: string;
 
-  @Metadata({ data: "json, name=payorId" })
+  @SpeakeasyMetadata({ data: "json, name=payorId" })
   payorId?: string;
 
-  @Metadata({ data: "json, name=payorName" })
+  @SpeakeasyMetadata({ data: "json, name=payorName" })
   payorName: string;
 
-  @Metadata({ data: "json, name=payoutId" })
+  @SpeakeasyMetadata({ data: "json, name=payoutId" })
   payoutId?: string;
 
-  @Metadata({ data: "json, name=payoutMemo" })
+  @SpeakeasyMetadata({ data: "json, name=payoutMemo" })
   payoutMemo?: string;
 
-  @Metadata({ data: "json, name=payoutType" })
+  @SpeakeasyMetadata({ data: "json, name=payoutType" })
   payoutType: PayoutTypeEnum;
 
-  @Metadata({ data: "json, name=sourceAccountSummary", elemType: shared.SourceAccountSummary })
+  @SpeakeasyMetadata({ data: "json, name=sourceAccountSummary", elemType: SourceAccountSummary })
   sourceAccountSummary?: SourceAccountSummary[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PayoutStatusEnum;
 
-  @Metadata({ data: "json, name=submittedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=submittedDateTime" })
   submittedDateTime: string;
 
-  @Metadata({ data: "json, name=totalIncompletePayments" })
+  @SpeakeasyMetadata({ data: "json, name=totalIncompletePayments" })
   totalIncompletePayments?: number;
 
-  @Metadata({ data: "json, name=totalPayments" })
+  @SpeakeasyMetadata({ data: "json, name=totalPayments" })
   totalPayments?: number;
 
-  @Metadata({ data: "json, name=totalReturnedPayments" })
+  @SpeakeasyMetadata({ data: "json, name=totalReturnedPayments" })
   totalReturnedPayments?: number;
 
-  @Metadata({ data: "json, name=totalWithdrawnPayments" })
+  @SpeakeasyMetadata({ data: "json, name=totalWithdrawnPayments" })
   totalWithdrawnPayments?: number;
 
-  @Metadata({ data: "json, name=withdrawnDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=withdrawnDateTime" })
   withdrawnDateTime?: Date;
 }

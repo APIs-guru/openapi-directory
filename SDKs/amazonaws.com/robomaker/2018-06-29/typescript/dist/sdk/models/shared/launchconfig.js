@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortForwardingConfig } from "./portforwardingconfig";
 // LaunchConfig
 /**
@@ -34,23 +34,23 @@ var LaunchConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=environmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
         __metadata("design:type", Map)
     ], LaunchConfig.prototype, "environmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchFile" }),
+        SpeakeasyMetadata({ data: "json, name=launchFile" }),
         __metadata("design:type", String)
     ], LaunchConfig.prototype, "launchFile", void 0);
     __decorate([
-        Metadata({ data: "json, name=packageName" }),
+        SpeakeasyMetadata({ data: "json, name=packageName" }),
         __metadata("design:type", String)
     ], LaunchConfig.prototype, "packageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=portForwardingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=portForwardingConfig" }),
         __metadata("design:type", PortForwardingConfig)
     ], LaunchConfig.prototype, "portForwardingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=streamUI" }),
+        SpeakeasyMetadata({ data: "json, name=streamUI" }),
         __metadata("design:type", Boolean)
     ], LaunchConfig.prototype, "streamUi", void 0);
     return LaunchConfig;

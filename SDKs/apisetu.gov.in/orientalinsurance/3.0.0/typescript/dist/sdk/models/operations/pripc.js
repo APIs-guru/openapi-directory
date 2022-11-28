@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PripcRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(PripcRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var PripcRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=INSCODE" }),
+        SpeakeasyMetadata({ data: "json, name=INSCODE" }),
         __metadata("design:type", String)
     ], PripcRequestBodyCertificateParameters.prototype, "inscode", void 0);
     __decorate([
-        Metadata({ data: "json, name=POLNO" }),
+        SpeakeasyMetadata({ data: "json, name=POLNO" }),
         __metadata("design:type", String)
     ], PripcRequestBodyCertificateParameters.prototype, "polno", void 0);
     __decorate([
-        Metadata({ data: "json, name=STARTDT" }),
+        SpeakeasyMetadata({ data: "json, name=STARTDT" }),
         __metadata("design:type", String)
     ], PripcRequestBodyCertificateParameters.prototype, "startdt", void 0);
     return PripcRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var PripcRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", PripcRequestBodyCertificateParameters)
     ], PripcRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], PripcRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PripcRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], PripcRequestBody.prototype, "txnId", void 0);
     return PripcRequestBody;
@@ -78,32 +78,16 @@ var PripcSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PripcSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], PripcSecurity.prototype, "clientId", void 0);
     return PripcSecurity;
 }(SpeakeasyBase));
 export { PripcSecurity };
-var PripcRequest = /** @class */ (function (_super) {
-    __extends(PripcRequest, _super);
-    function PripcRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", PripcRequestBody)
-    ], PripcRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PripcSecurity)
-    ], PripcRequest.prototype, "security", void 0);
-    return PripcRequest;
-}(SpeakeasyBase));
-export { PripcRequest };
 export var Pripc400ApplicationJsonErrorEnum;
 (function (Pripc400ApplicationJsonErrorEnum) {
     Pripc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Pripc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pripc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pripc400ApplicationJson.prototype, "errorDescription", void 0);
     return Pripc400ApplicationJson;
@@ -152,11 +136,11 @@ var Pripc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pripc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pripc401ApplicationJson.prototype, "errorDescription", void 0);
     return Pripc401ApplicationJson;
@@ -178,11 +162,11 @@ var Pripc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pripc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pripc404ApplicationJson.prototype, "errorDescription", void 0);
     return Pripc404ApplicationJson;
@@ -202,11 +186,11 @@ var Pripc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pripc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pripc500ApplicationJson.prototype, "errorDescription", void 0);
     return Pripc500ApplicationJson;
@@ -226,11 +210,11 @@ var Pripc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pripc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pripc502ApplicationJson.prototype, "errorDescription", void 0);
     return Pripc502ApplicationJson;
@@ -250,11 +234,11 @@ var Pripc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pripc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pripc503ApplicationJson.prototype, "errorDescription", void 0);
     return Pripc503ApplicationJson;
@@ -274,55 +258,71 @@ var Pripc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pripc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pripc504ApplicationJson.prototype, "errorDescription", void 0);
     return Pripc504ApplicationJson;
 }(SpeakeasyBase));
 export { Pripc504ApplicationJson };
+var PripcRequest = /** @class */ (function (_super) {
+    __extends(PripcRequest, _super);
+    function PripcRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", PripcRequestBody)
+    ], PripcRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PripcSecurity)
+    ], PripcRequest.prototype, "security", void 0);
+    return PripcRequest;
+}(SpeakeasyBase));
+export { PripcRequest };
 var PripcResponse = /** @class */ (function (_super) {
     __extends(PripcResponse, _super);
     function PripcResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PripcResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PripcResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pripc400ApplicationJson)
     ], PripcResponse.prototype, "pripc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pripc401ApplicationJson)
     ], PripcResponse.prototype, "pripc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pripc404ApplicationJson)
     ], PripcResponse.prototype, "pripc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pripc500ApplicationJson)
     ], PripcResponse.prototype, "pripc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pripc502ApplicationJson)
     ], PripcResponse.prototype, "pripc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pripc503ApplicationJson)
     ], PripcResponse.prototype, "pripc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pripc504ApplicationJson)
     ], PripcResponse.prototype, "pripc504ApplicationJsonObject", void 0);
     return PripcResponse;

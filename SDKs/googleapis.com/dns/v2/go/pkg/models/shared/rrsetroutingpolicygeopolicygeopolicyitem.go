@@ -1,5 +1,7 @@
 package shared
 
+// RrSetRoutingPolicyGeoPolicyGeoPolicyItem
+// ResourceRecordSet data for one geo location.
 type RrSetRoutingPolicyGeoPolicyGeoPolicyItem struct {
 	HealthCheckedTargets *RrSetRoutingPolicyHealthCheckTargets `json:"healthCheckedTargets,omitempty"`
 	Kind                 *string                               `json:"kind,omitempty"`

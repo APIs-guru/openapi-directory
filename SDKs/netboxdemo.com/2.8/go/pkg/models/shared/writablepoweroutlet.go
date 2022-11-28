@@ -79,17 +79,14 @@ const (
 	WritablePowerOutletTypeEnumHdotCx         WritablePowerOutletTypeEnum = "hdot-cx"
 )
 
-type WritablePowerOutlet struct {
-	Cable                 *NestedCable                    `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string               `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                         `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *bool                           `json:"connection_status,omitempty"`
-	Description           *string                         `json:"description,omitempty"`
-	Device                int64                           `json:"device"`
-	FeedLeg               *WritablePowerOutletFeedLegEnum `json:"feed_leg,omitempty"`
-	ID                    *int64                          `json:"id,omitempty"`
-	Name                  string                          `json:"name"`
-	PowerPort             *int64                          `json:"power_port,omitempty"`
-	Tags                  []string                        `json:"tags,omitempty"`
-	Type                  *WritablePowerOutletTypeEnum    `json:"type,omitempty"`
+type WritablePowerOutletInput struct {
+	Cable            *NestedCableInput               `json:"cable,omitempty"`
+	ConnectionStatus *bool                           `json:"connection_status,omitempty"`
+	Description      *string                         `json:"description,omitempty"`
+	Device           int64                           `json:"device"`
+	FeedLeg          *WritablePowerOutletFeedLegEnum `json:"feed_leg,omitempty"`
+	Name             string                          `json:"name"`
+	PowerPort        *int64                          `json:"power_port,omitempty"`
+	Tags             []string                        `json:"tags,omitempty"`
+	Type             *WritablePowerOutletTypeEnum    `json:"type,omitempty"`
 }

@@ -31,7 +31,7 @@ type NetworkservicesProjectsLocationsMeshesCreateSecurity struct {
 type NetworkservicesProjectsLocationsMeshesCreateRequest struct {
 	PathParams  NetworkservicesProjectsLocationsMeshesCreatePathParams
 	QueryParams NetworkservicesProjectsLocationsMeshesCreateQueryParams
-	Request     *shared.Mesh `request:"mediaType=application/json"`
+	Request     *shared.MeshInput `request:"mediaType=application/json"`
 	Security    NetworkservicesProjectsLocationsMeshesCreateSecurity
 }
 

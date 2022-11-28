@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PubSub } from "./pubsub";
+
 
 
 // NotificationConfig
@@ -7,6 +8,6 @@ import { PubSub } from "./pubsub";
  * NotificationConfig is the configuration of notifications.
 **/
 export class NotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsub" })
+  @SpeakeasyMetadata({ data: "json, name=pubsub" })
   pubsub?: PubSub;
 }

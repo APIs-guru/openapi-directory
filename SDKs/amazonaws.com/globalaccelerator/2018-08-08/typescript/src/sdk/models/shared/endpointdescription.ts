@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthStateEnum } from "./healthstateenum";
+
 
 
 // EndpointDescription
@@ -7,18 +8,18 @@ import { HealthStateEnum } from "./healthstateenum";
  * A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load balancers.
 **/
 export class EndpointDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientIPPreservationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=ClientIPPreservationEnabled" })
   clientIpPreservationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=EndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointId" })
   endpointId?: string;
 
-  @Metadata({ data: "json, name=HealthReason" })
+  @SpeakeasyMetadata({ data: "json, name=HealthReason" })
   healthReason?: string;
 
-  @Metadata({ data: "json, name=HealthState" })
+  @SpeakeasyMetadata({ data: "json, name=HealthState" })
   healthState?: HealthStateEnum;
 
-  @Metadata({ data: "json, name=Weight" })
+  @SpeakeasyMetadata({ data: "json, name=Weight" })
   weight?: number;
 }

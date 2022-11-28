@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVideointelligenceV1p1beta1TextDetectionConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config for TEXT_DETECTION.
 **/
 export class GoogleCloudVideointelligenceV1p1beta1TextDetectionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageHints" })
+  @SpeakeasyMetadata({ data: "json, name=languageHints" })
   languageHints?: string[];
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 }

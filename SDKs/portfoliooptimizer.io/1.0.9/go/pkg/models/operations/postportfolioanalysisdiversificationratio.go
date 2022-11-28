@@ -10,16 +10,16 @@ type PostPortfolioAnalysisDiversificationRatioRequestBody struct {
 	Portfolios             []PostPortfolioAnalysisDiversificationRatioRequestBodyPortfolios `json:"portfolios"`
 }
 
-type PostPortfolioAnalysisDiversificationRatioRequest struct {
-	Request PostPortfolioAnalysisDiversificationRatioRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisDiversificationRatio200ApplicationJSONPortfolios struct {
 	PortfolioDiversificationRatio float64 `json:"portfolioDiversificationRatio"`
 }
 
 type PostPortfolioAnalysisDiversificationRatio200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisDiversificationRatio200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisDiversificationRatioRequest struct {
+	Request PostPortfolioAnalysisDiversificationRatioRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisDiversificationRatioResponse struct {

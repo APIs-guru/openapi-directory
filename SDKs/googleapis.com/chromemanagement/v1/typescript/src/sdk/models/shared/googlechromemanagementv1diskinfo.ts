@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromeManagementV1DiskInfo
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Status of the single storage device.
 **/
 export class GoogleChromeManagementV1DiskInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bytesReadThisSession" })
+  @SpeakeasyMetadata({ data: "json, name=bytesReadThisSession" })
   bytesReadThisSession?: string;
 
-  @Metadata({ data: "json, name=bytesWrittenThisSession" })
+  @SpeakeasyMetadata({ data: "json, name=bytesWrittenThisSession" })
   bytesWrittenThisSession?: string;
 
-  @Metadata({ data: "json, name=discardTimeThisSession" })
+  @SpeakeasyMetadata({ data: "json, name=discardTimeThisSession" })
   discardTimeThisSession?: string;
 
-  @Metadata({ data: "json, name=health" })
+  @SpeakeasyMetadata({ data: "json, name=health" })
   health?: string;
 
-  @Metadata({ data: "json, name=ioTimeThisSession" })
+  @SpeakeasyMetadata({ data: "json, name=ioTimeThisSession" })
   ioTimeThisSession?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=readTimeThisSession" })
+  @SpeakeasyMetadata({ data: "json, name=readTimeThisSession" })
   readTimeThisSession?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=sizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=sizeBytes" })
   sizeBytes?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=volumeIds" })
+  @SpeakeasyMetadata({ data: "json, name=volumeIds" })
   volumeIds?: string[];
 
-  @Metadata({ data: "json, name=writeTimeThisSession" })
+  @SpeakeasyMetadata({ data: "json, name=writeTimeThisSession" })
   writeTimeThisSession?: string;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiMappingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiId" })
+  @SpeakeasyMetadata({ data: "json, name=ApiId" })
   apiId?: string;
 
-  @Metadata({ data: "json, name=ApiMappingId" })
+  @SpeakeasyMetadata({ data: "json, name=ApiMappingId" })
   apiMappingId?: string;
 
-  @Metadata({ data: "json, name=ApiMappingKey" })
+  @SpeakeasyMetadata({ data: "json, name=ApiMappingKey" })
   apiMappingKey?: string;
 
-  @Metadata({ data: "json, name=Stage" })
+  @SpeakeasyMetadata({ data: "json, name=Stage" })
   stage?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingVideoFormatsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DfareportingVideoFormatsListQueryParams:
 
 @dataclass
 class DfareportingVideoFormatsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingVideoFormatsListRequest:
-    path_params: DfareportingVideoFormatsListPathParams = field(default=None)
-    query_params: DfareportingVideoFormatsListQueryParams = field(default=None)
-    security: DfareportingVideoFormatsListSecurity = field(default=None)
+    path_params: DfareportingVideoFormatsListPathParams = field()
+    query_params: DfareportingVideoFormatsListQueryParams = field()
+    security: DfareportingVideoFormatsListSecurity = field()
     
 
 @dataclass
 class DfareportingVideoFormatsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_formats_list_response: Optional[shared.VideoFormatsListResponse] = field(default=None)
     

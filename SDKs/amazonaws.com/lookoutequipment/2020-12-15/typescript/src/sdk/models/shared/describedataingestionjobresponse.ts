@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IngestionInputConfiguration } from "./ingestioninputconfiguration";
 import { IngestionJobStatusEnum } from "./ingestionjobstatusenum";
 
 
+
 export class DescribeDataIngestionJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=DatasetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetArn" })
   datasetArn?: string;
 
-  @Metadata({ data: "json, name=FailedReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailedReason" })
   failedReason?: string;
 
-  @Metadata({ data: "json, name=IngestionInputConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=IngestionInputConfiguration" })
   ingestionInputConfiguration?: IngestionInputConfiguration;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: IngestionJobStatusEnum;
 }

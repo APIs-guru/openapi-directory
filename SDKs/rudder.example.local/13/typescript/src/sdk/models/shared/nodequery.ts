@@ -1,34 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NodeQueryCompositionEnum {
-    And = "and"
-,    Or = "or"
+    And = "and",
+    Or = "or"
 }
 
 
 export class NodeQueryWhere extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attribute" })
+  @SpeakeasyMetadata({ data: "json, name=attribute" })
   attribute?: string;
 
-  @Metadata({ data: "json, name=comparator" })
+  @SpeakeasyMetadata({ data: "json, name=comparator" })
   comparator?: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class NodeQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=composition" })
+  @SpeakeasyMetadata({ data: "json, name=composition" })
   composition?: NodeQueryCompositionEnum;
 
-  @Metadata({ data: "json, name=select" })
+  @SpeakeasyMetadata({ data: "json, name=select" })
   select?: string;
 
-  @Metadata({ data: "json, name=where", elemType: shared.NodeQueryWhere })
+  @SpeakeasyMetadata({ data: "json, name=where", elemType: NodeQueryWhere })
   where?: NodeQueryWhere[];
 }

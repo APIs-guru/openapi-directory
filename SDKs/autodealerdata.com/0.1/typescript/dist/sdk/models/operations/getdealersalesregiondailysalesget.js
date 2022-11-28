@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDealerSalesRegionDailySalesGetQueryParams = /** @class */ (function (_super) {
     __extends(GetDealerSalesRegionDailySalesGetQueryParams, _super);
@@ -30,19 +30,19 @@ var GetDealerSalesRegionDailySalesGetQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
         __metadata("design:type", String)
     ], GetDealerSalesRegionDailySalesGetQueryParams.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=day" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=day" }),
         __metadata("design:type", Date)
     ], GetDealerSalesRegionDailySalesGetQueryParams.prototype, "day", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetDealerSalesRegionDailySalesGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
         __metadata("design:type", String)
     ], GetDealerSalesRegionDailySalesGetQueryParams.prototype, "regionName", void 0);
     return GetDealerSalesRegionDailySalesGetQueryParams;
@@ -54,7 +54,7 @@ var GetDealerSalesRegionDailySalesGetRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDealerSalesRegionDailySalesGetQueryParams)
     ], GetDealerSalesRegionDailySalesGetRequest.prototype, "queryParams", void 0);
     return GetDealerSalesRegionDailySalesGetRequest;
@@ -66,19 +66,19 @@ var GetDealerSalesRegionDailySalesGetResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDealerSalesRegionDailySalesGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GenericResponse)
     ], GetDealerSalesRegionDailySalesGetResponse.prototype, "genericResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetDealerSalesRegionDailySalesGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDealerSalesRegionDailySalesGetResponse.prototype, "statusCode", void 0);
     return GetDealerSalesRegionDailySalesGetResponse;

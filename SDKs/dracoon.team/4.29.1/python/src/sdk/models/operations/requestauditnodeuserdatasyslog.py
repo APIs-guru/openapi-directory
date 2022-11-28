@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
@@ -19,14 +22,14 @@ class RequestAuditNodeUserDataSyslogHeaders:
 
 @dataclass
 class RequestAuditNodeUserDataSyslogRequest:
-    query_params: RequestAuditNodeUserDataSyslogQueryParams = field(default=None)
-    headers: RequestAuditNodeUserDataSyslogHeaders = field(default=None)
+    headers: RequestAuditNodeUserDataSyslogHeaders = field()
+    query_params: RequestAuditNodeUserDataSyslogQueryParams = field()
     
 
 @dataclass
 class RequestAuditNodeUserDataSyslogResponse:
+    content_type: str = field()
+    status_code: int = field()
     audit_node_responses: Optional[List[shared.AuditNodeResponse]] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

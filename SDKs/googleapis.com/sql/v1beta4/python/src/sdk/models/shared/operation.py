@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import backupcontext
-from . import operationerrors
-from . import exportcontext
-from . import importcontext
+from sdk import utils
+from . import *
 
 class OperationOperationTypeEnum(str, Enum):
     SQL_OPERATION_TYPE_UNSPECIFIED = "SQL_OPERATION_TYPE_UNSPECIFIED"
@@ -55,20 +54,24 @@ class OperationStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Operation:
-    backup_context: Optional[backupcontext.BackupContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backupContext' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    error: Optional[operationerrors.OperationErrors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    export_context: Optional[exportcontext.ExportContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exportContext' }})
-    import_context: Optional[importcontext.ImportContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'importContext' }})
-    insert_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertTime' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operation_type: Optional[OperationOperationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operationType' }})
-    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfLink' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    status: Optional[OperationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    target_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetId' }})
-    target_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetLink' }})
-    target_project: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetProject' }})
-    user: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    r"""Operation
+    An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource.
+    """
+    
+    backup_context: Optional[BackupContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backupContext') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    error: Optional[OperationErrors] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    export_context: Optional[ExportContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exportContext') }})
+    import_context: Optional[ImportContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('importContext') }})
+    insert_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertTime') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operation_type: Optional[OperationOperationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operationType') }})
+    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfLink') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    status: Optional[OperationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    target_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetId') }})
+    target_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetLink') }})
+    target_project: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetProject') }})
+    user: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     

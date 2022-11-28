@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkerSettings
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides data to pass through to the worker harness.
 **/
 export class WorkerSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseUrl" })
+  @SpeakeasyMetadata({ data: "json, name=baseUrl" })
   baseUrl?: string;
 
-  @Metadata({ data: "json, name=reportingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=reportingEnabled" })
   reportingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=servicePath" })
+  @SpeakeasyMetadata({ data: "json, name=servicePath" })
   servicePath?: string;
 
-  @Metadata({ data: "json, name=shuffleServicePath" })
+  @SpeakeasyMetadata({ data: "json, name=shuffleServicePath" })
   shuffleServicePath?: string;
 
-  @Metadata({ data: "json, name=tempStoragePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=tempStoragePrefix" })
   tempStoragePrefix?: string;
 
-  @Metadata({ data: "json, name=workerId" })
+  @SpeakeasyMetadata({ data: "json, name=workerId" })
   workerId?: string;
 }

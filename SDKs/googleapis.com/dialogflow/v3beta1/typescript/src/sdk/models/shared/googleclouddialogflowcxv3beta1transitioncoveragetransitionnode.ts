@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1Flow } from "./googleclouddialogflowcxv3beta1flow";
 import { GoogleCloudDialogflowCxV3beta1Page } from "./googleclouddialogflowcxv3beta1page";
+
 
 
 // GoogleCloudDialogflowCxV3beta1TransitionCoverageTransitionNode
@@ -8,9 +9,9 @@ import { GoogleCloudDialogflowCxV3beta1Page } from "./googleclouddialogflowcxv3b
  * The source or target of a transition.
 **/
 export class GoogleCloudDialogflowCxV3beta1TransitionCoverageTransitionNode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=flow" })
+  @SpeakeasyMetadata({ data: "json, name=flow" })
   flow?: GoogleCloudDialogflowCxV3beta1Flow;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: GoogleCloudDialogflowCxV3beta1Page;
 }

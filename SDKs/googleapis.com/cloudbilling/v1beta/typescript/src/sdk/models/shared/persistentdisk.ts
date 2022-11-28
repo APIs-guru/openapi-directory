@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Usage } from "./usage";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Usage } from "./usage";
 
+
 export enum PersistentDiskScopeEnum {
-    ScopeUnspecified = "SCOPE_UNSPECIFIED"
-,    ScopeZonal = "SCOPE_ZONAL"
-,    ScopeRegional = "SCOPE_REGIONAL"
+    ScopeUnspecified = "SCOPE_UNSPECIFIED",
+    ScopeZonal = "SCOPE_ZONAL",
+    ScopeRegional = "SCOPE_REGIONAL"
 }
 
 
@@ -14,15 +14,15 @@ export enum PersistentDiskScopeEnum {
  * Specification of a persistent disk attached to a VM.
 **/
 export class PersistentDisk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diskSize" })
+  @SpeakeasyMetadata({ data: "json, name=diskSize" })
   diskSize?: Usage;
 
-  @Metadata({ data: "json, name=diskType" })
+  @SpeakeasyMetadata({ data: "json, name=diskType" })
   diskType?: string;
 
-  @Metadata({ data: "json, name=provisionedIops" })
+  @SpeakeasyMetadata({ data: "json, name=provisionedIops" })
   provisionedIops?: Usage;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: PersistentDiskScopeEnum;
 }

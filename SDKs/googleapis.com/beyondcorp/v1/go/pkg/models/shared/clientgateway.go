@@ -12,6 +12,14 @@ const (
 	ClientGatewayStateEnumError            ClientGatewayStateEnum = "ERROR"
 )
 
+// ClientGatewayInput
+// Message describing ClientGateway object.
+type ClientGatewayInput struct {
+	Name *string `json:"name,omitempty"`
+}
+
+// ClientGateway
+// Message describing ClientGateway object.
 type ClientGateway struct {
 	ClientConnectorService *string                 `json:"clientConnectorService,omitempty"`
 	CreateTime             *string                 `json:"createTime,omitempty"`

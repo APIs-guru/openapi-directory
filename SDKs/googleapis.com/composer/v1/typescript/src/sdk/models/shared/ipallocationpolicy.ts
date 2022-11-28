@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IpAllocationPolicy
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for controlling how IPs are allocated in the GKE cluster running the Apache Airflow software.
 **/
 export class IpAllocationPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterIpv4CidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=clusterIpv4CidrBlock" })
   clusterIpv4CidrBlock?: string;
 
-  @Metadata({ data: "json, name=clusterSecondaryRangeName" })
+  @SpeakeasyMetadata({ data: "json, name=clusterSecondaryRangeName" })
   clusterSecondaryRangeName?: string;
 
-  @Metadata({ data: "json, name=servicesIpv4CidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=servicesIpv4CidrBlock" })
   servicesIpv4CidrBlock?: string;
 
-  @Metadata({ data: "json, name=servicesSecondaryRangeName" })
+  @SpeakeasyMetadata({ data: "json, name=servicesSecondaryRangeName" })
   servicesSecondaryRangeName?: string;
 
-  @Metadata({ data: "json, name=useIpAliases" })
+  @SpeakeasyMetadata({ data: "json, name=useIpAliases" })
   useIpAliases?: boolean;
 }

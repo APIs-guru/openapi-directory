@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import appsummary
-from . import servergroup
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateAppResponse:
-    app_summary: Optional[appsummary.AppSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appSummary' }})
-    server_groups: Optional[List[servergroup.ServerGroup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serverGroups' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    app_summary: Optional[AppSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appSummary') }})
+    server_groups: Optional[List[ServerGroup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverGroups') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

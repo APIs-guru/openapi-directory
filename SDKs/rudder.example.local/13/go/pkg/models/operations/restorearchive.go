@@ -17,10 +17,6 @@ type RestoreArchivePathParams struct {
 	ArchiveRestoreKind RestoreArchiveArchiveRestoreKindEnum `pathParam:"style=simple,explode=false,name=archiveRestoreKind"`
 }
 
-type RestoreArchiveRequest struct {
-	PathParams RestoreArchivePathParams
-}
-
 type RestoreArchive200ApplicationJSONActionEnum string
 
 const (
@@ -60,6 +56,10 @@ type RestoreArchive200ApplicationJSON struct {
 	Action RestoreArchive200ApplicationJSONActionEnum `json:"action"`
 	Data   RestoreArchive200ApplicationJSONData       `json:"data"`
 	Result RestoreArchive200ApplicationJSONResultEnum `json:"result"`
+}
+
+type RestoreArchiveRequest struct {
+	PathParams RestoreArchivePathParams
 }
 
 type RestoreArchiveResponse struct {

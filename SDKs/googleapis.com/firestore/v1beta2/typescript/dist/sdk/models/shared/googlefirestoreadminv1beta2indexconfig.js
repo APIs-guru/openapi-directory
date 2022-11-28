@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFirestoreAdminV1beta2Index } from "./googlefirestoreadminv1beta2index";
 // GoogleFirestoreAdminV1beta2IndexConfig
 /**
  * The index configuration for this field.
@@ -34,19 +34,19 @@ var GoogleFirestoreAdminV1beta2IndexConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ancestorField" }),
+        SpeakeasyMetadata({ data: "json, name=ancestorField" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2IndexConfig.prototype, "ancestorField", void 0);
     __decorate([
-        Metadata({ data: "json, name=indexes", elemType: shared.GoogleFirestoreAdminV1beta2Index }),
+        SpeakeasyMetadata({ data: "json, name=indexes", elemType: GoogleFirestoreAdminV1beta2Index }),
         __metadata("design:type", Array)
     ], GoogleFirestoreAdminV1beta2IndexConfig.prototype, "indexes", void 0);
     __decorate([
-        Metadata({ data: "json, name=reverting" }),
+        SpeakeasyMetadata({ data: "json, name=reverting" }),
         __metadata("design:type", Boolean)
     ], GoogleFirestoreAdminV1beta2IndexConfig.prototype, "reverting", void 0);
     __decorate([
-        Metadata({ data: "json, name=usesAncestorConfig" }),
+        SpeakeasyMetadata({ data: "json, name=usesAncestorConfig" }),
         __metadata("design:type", Boolean)
     ], GoogleFirestoreAdminV1beta2IndexConfig.prototype, "usesAncestorConfig", void 0);
     return GoogleFirestoreAdminV1beta2IndexConfig;

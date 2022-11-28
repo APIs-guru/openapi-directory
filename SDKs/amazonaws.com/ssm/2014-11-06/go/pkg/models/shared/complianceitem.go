@@ -1,5 +1,7 @@
 package shared
 
+// ComplianceItem
+// Information about the compliance as defined by the resource type. For example, for a patch resource type, <code>Items</code> includes information about the PatchSeverity, Classification, and so on.
 type ComplianceItem struct {
 	ComplianceType   *string                     `json:"ComplianceType,omitempty"`
 	Details          map[string]string           `json:"Details,omitempty"`

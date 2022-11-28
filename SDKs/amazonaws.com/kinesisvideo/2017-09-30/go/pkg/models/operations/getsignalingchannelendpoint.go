@@ -14,6 +14,8 @@ type GetSignalingChannelEndpointHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetSignalingChannelEndpointRequestBodySingleMasterChannelEndpointConfiguration
+// An object that contains the endpoint configuration for the <code>SINGLE_MASTER</code> channel type.
 type GetSignalingChannelEndpointRequestBodySingleMasterChannelEndpointConfiguration struct {
 	Protocols []shared.ChannelProtocolEnum `json:"Protocols,omitempty"`
 	Role      *shared.ChannelRoleEnum      `json:"Role,omitempty"`

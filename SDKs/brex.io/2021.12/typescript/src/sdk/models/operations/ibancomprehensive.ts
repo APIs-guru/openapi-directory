@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IbanComprehensiveRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=ibanNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=ibanNumber;" })
   ibanNumber: string;
 }
 
 
 export class IbanComprehensiveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class IbanComprehensiveRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: IbanComprehensiveRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: IbanComprehensiveSecurity;
 }
 
 
 export class IbanComprehensiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibanComprehensiveDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   oneapi1v11ibanVerification1checkIbanPostResponses200ContentApplication1jsonSchema?: any;
 }

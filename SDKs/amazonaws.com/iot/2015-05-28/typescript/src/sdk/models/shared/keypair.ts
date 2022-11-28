@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KeyPair
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a key pair.
 **/
 export class KeyPair extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateKey" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=PublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKey" })
   publicKey?: string;
 }

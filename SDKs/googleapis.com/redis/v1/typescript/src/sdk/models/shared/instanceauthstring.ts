@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceAuthString
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Instance AUTH string details.
 **/
 export class InstanceAuthString extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authString" })
+  @SpeakeasyMetadata({ data: "json, name=authString" })
   authString?: string;
 }

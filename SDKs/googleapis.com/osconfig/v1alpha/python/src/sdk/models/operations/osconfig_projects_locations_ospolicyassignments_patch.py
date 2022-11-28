@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class OsconfigProjectsLocationsOsPolicyAssignmentsPatchQueryParams:
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsPatchRequest:
-    path_params: OsconfigProjectsLocationsOsPolicyAssignmentsPatchPathParams = field(default=None)
-    query_params: OsconfigProjectsLocationsOsPolicyAssignmentsPatchQueryParams = field(default=None)
-    request: Optional[shared.OsPolicyAssignment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: OsconfigProjectsLocationsOsPolicyAssignmentsPatchSecurity = field(default=None)
+    path_params: OsconfigProjectsLocationsOsPolicyAssignmentsPatchPathParams = field()
+    query_params: OsconfigProjectsLocationsOsPolicyAssignmentsPatchQueryParams = field()
+    security: OsconfigProjectsLocationsOsPolicyAssignmentsPatchSecurity = field()
+    request: Optional[shared.OsPolicyAssignmentInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class OsconfigProjectsLocationsOsPolicyAssignmentsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

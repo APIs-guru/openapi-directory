@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import value
-from . import value
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MetadataRecord:
-    metadata_values: Optional[List[value.Value]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadataValues' }})
-    value: Optional[value.Value] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""MetadataRecord
+    A complex type that defines the data records returned in the report.
+    """
+    
+    metadata_values: Optional[List[Value]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadataValues') }})
+    value: Optional[Value] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeAttachmentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentId" })
+  @SpeakeasyMetadata({ data: "json, name=attachmentId" })
   attachmentId: string;
 }

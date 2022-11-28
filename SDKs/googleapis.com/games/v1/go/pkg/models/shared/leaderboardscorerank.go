@@ -1,5 +1,7 @@
 package shared
 
+// LeaderboardScoreRank
+// A score rank in a leaderboard.
 type LeaderboardScoreRank struct {
 	FormattedNumScores *string `json:"formattedNumScores,omitempty"`
 	FormattedRank      *string `json:"formattedRank,omitempty"`

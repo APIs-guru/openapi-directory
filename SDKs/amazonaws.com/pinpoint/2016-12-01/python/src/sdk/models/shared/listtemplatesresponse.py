@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List
 from dataclasses_json import dataclass_json
-from . import templatesresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListTemplatesResponse:
-    templates_response: templatesresponse.TemplatesResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplatesResponse' }})
+    templates_response: TemplatesResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplatesResponse') }})
     

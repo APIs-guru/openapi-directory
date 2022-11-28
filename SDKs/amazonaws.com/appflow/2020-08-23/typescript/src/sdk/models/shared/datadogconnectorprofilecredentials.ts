@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatadogConnectorProfileCredentials
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific credentials required by Datadog. 
 **/
 export class DatadogConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "json, name=applicationKey" })
+  @SpeakeasyMetadata({ data: "json, name=applicationKey" })
   applicationKey: string;
 }

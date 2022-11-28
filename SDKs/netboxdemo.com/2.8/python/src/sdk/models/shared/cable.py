@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CableLengthUnitLabelEnum(str, Enum):
     METERS = "Meters"
@@ -18,8 +20,8 @@ class CableLengthUnitValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CableLengthUnit:
-    label: CableLengthUnitLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: CableLengthUnitValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: CableLengthUnitLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: CableLengthUnitValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class CableStatusLabelEnum(str, Enum):
     CONNECTED = "Connected"
@@ -35,8 +37,8 @@ class CableStatusValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CableStatus:
-    label: CableStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: CableStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: CableStatusLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: CableStatusValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class CableTypeEnum(str, Enum):
     CAT3 = "cat3"
@@ -64,17 +66,17 @@ class CableTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cable:
-    color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'length' }})
-    length_unit: Optional[CableLengthUnit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'length_unit' }})
-    status: Optional[CableStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    termination_a: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a' }})
-    termination_a_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a_id' }})
-    termination_a_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a_type' }})
-    termination_b: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_b' }})
-    termination_b_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_b_id' }})
-    termination_b_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_b_type' }})
-    type: Optional[CableTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    termination_a_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('termination_a_id') }})
+    termination_a_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('termination_a_type') }})
+    termination_b_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('termination_b_id') }})
+    termination_b_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('termination_b_type') }})
+    color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('length') }})
+    length_unit: Optional[CableLengthUnit] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('length_unit') }})
+    status: Optional[CableStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    termination_a: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('termination_a') }})
+    termination_b: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('termination_b') }})
+    type: Optional[CableTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

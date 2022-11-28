@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListViolationEventsBehaviorCriteriaTypeEnum(str, Enum):
@@ -13,13 +14,13 @@ class ListViolationEventsBehaviorCriteriaTypeEnum(str, Enum):
 
 @dataclass
 class ListViolationEventsQueryParams:
+    end_time: datetime = field(metadata={'query_param': { 'field_name': 'endTime', 'style': 'form', 'explode': True }})
+    start_time: datetime = field(metadata={'query_param': { 'field_name': 'startTime', 'style': 'form', 'explode': True }})
     behavior_criteria_type: Optional[ListViolationEventsBehaviorCriteriaTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'behaviorCriteriaType', 'style': 'form', 'explode': True }})
-    end_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'endTime', 'style': 'form', 'explode': True }})
     list_suppressed_alerts: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'listSuppressedAlerts', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
     security_profile_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'securityProfileName', 'style': 'form', 'explode': True }})
-    start_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'startTime', 'style': 'form', 'explode': True }})
     thing_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'thingName', 'style': 'form', 'explode': True }})
     
 
@@ -36,16 +37,16 @@ class ListViolationEventsHeaders:
 
 @dataclass
 class ListViolationEventsRequest:
-    query_params: ListViolationEventsQueryParams = field(default=None)
-    headers: ListViolationEventsHeaders = field(default=None)
+    headers: ListViolationEventsHeaders = field()
+    query_params: ListViolationEventsQueryParams = field()
     
 
 @dataclass
 class ListViolationEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_violation_events_response: Optional[shared.ListViolationEventsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

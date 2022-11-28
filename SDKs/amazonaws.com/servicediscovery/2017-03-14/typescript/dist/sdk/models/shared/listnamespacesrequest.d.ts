@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NamespaceFilter } from "./namespacefilter";
 export declare class ListNamespacesRequest extends SpeakeasyBase {
     filters?: NamespaceFilter[];

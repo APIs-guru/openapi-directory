@@ -63,6 +63,8 @@ const (
 	MinimizedContactRoomBookingsBufferExceptionEnumDependentOnDayOfWeek MinimizedContactRoomBookingsBufferExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// MinimizedContact
+// Minimized contact measures implemented by the hotel during COVID-19.
 type MinimizedContact struct {
 	ContactlessCheckinCheckout                *bool                                                          `json:"contactlessCheckinCheckout,omitempty"`
 	ContactlessCheckinCheckoutException       *MinimizedContactContactlessCheckinCheckoutExceptionEnum       `json:"contactlessCheckinCheckoutException,omitempty"`

@@ -13,13 +13,13 @@ type SupportingWorkQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type SupportingWork200ApplicationJSON struct {
+	Data []shared.ProjectCompact `json:"data,omitempty"`
+}
+
 type SupportingWorkRequest struct {
 	PathParams  SupportingWorkPathParams
 	QueryParams SupportingWorkQueryParams
-}
-
-type SupportingWork200ApplicationJSON struct {
-	Data []shared.ProjectCompact `json:"data,omitempty"`
 }
 
 type SupportingWorkResponse struct {

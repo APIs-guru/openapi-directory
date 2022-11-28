@@ -1,6 +1,7 @@
 
 
+
 export enum ImageVersionSortOrderEnum {
-    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }

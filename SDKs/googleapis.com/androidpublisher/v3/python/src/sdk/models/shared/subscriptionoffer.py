@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import offertag
-from . import otherregionssubscriptionofferconfig
-from . import subscriptionofferphase
-from . import regionalsubscriptionofferconfig
-from . import subscriptionoffertargeting
+from sdk import utils
+from . import *
 
 class SubscriptionOfferStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -16,15 +14,37 @@ class SubscriptionOfferStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class SubscriptionOfferInput:
+    r"""SubscriptionOfferInput
+    A single, temporary offer
+    """
+    
+    base_plan_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('basePlanId') }})
+    offer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offerId') }})
+    offer_tags: Optional[List[OfferTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offerTags') }})
+    other_regions_config: Optional[OtherRegionsSubscriptionOfferConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('otherRegionsConfig') }})
+    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageName') }})
+    phases: Optional[List[SubscriptionOfferPhase]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phases') }})
+    product_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productId') }})
+    regional_configs: Optional[List[RegionalSubscriptionOfferConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionalConfigs') }})
+    targeting: Optional[SubscriptionOfferTargeting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targeting') }})
+    
+
+@dataclass_json
+@dataclass
 class SubscriptionOffer:
-    base_plan_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'basePlanId' }})
-    offer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offerId' }})
-    offer_tags: Optional[List[offertag.OfferTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offerTags' }})
-    other_regions_config: Optional[otherregionssubscriptionofferconfig.OtherRegionsSubscriptionOfferConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'otherRegionsConfig' }})
-    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageName' }})
-    phases: Optional[List[subscriptionofferphase.SubscriptionOfferPhase]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phases' }})
-    product_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productId' }})
-    regional_configs: Optional[List[regionalsubscriptionofferconfig.RegionalSubscriptionOfferConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionalConfigs' }})
-    state: Optional[SubscriptionOfferStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    targeting: Optional[subscriptionoffertargeting.SubscriptionOfferTargeting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targeting' }})
+    r"""SubscriptionOffer
+    A single, temporary offer
+    """
+    
+    base_plan_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('basePlanId') }})
+    offer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offerId') }})
+    offer_tags: Optional[List[OfferTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offerTags') }})
+    other_regions_config: Optional[OtherRegionsSubscriptionOfferConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('otherRegionsConfig') }})
+    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageName') }})
+    phases: Optional[List[SubscriptionOfferPhase]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phases') }})
+    product_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productId') }})
+    regional_configs: Optional[List[RegionalSubscriptionOfferConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionalConfigs') }})
+    state: Optional[SubscriptionOfferStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    targeting: Optional[SubscriptionOfferTargeting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targeting') }})
     

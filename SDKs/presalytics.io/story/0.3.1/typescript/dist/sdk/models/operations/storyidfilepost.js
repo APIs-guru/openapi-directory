@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StoryIdFilePostPathParams = /** @class */ (function (_super) {
     __extends(StoryIdFilePostPathParams, _super);
@@ -30,7 +30,7 @@ var StoryIdFilePostPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], StoryIdFilePostPathParams.prototype, "id", void 0);
     return StoryIdFilePostPathParams;
@@ -42,15 +42,15 @@ var StoryIdFilePostQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
         __metadata("design:type", Boolean)
     ], StoryIdFilePostQueryParams.prototype, "includeOutline", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=obsolete_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=obsolete_id" }),
         __metadata("design:type", String)
     ], StoryIdFilePostQueryParams.prototype, "obsoleteId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=replace_existing" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=replace_existing" }),
         __metadata("design:type", Boolean)
     ], StoryIdFilePostQueryParams.prototype, "replaceExisting", void 0);
     return StoryIdFilePostQueryParams;
@@ -62,15 +62,15 @@ var StoryIdFilePostRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdFilePostPathParams)
     ], StoryIdFilePostRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdFilePostQueryParams)
     ], StoryIdFilePostRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", Object)
     ], StoryIdFilePostRequest.prototype, "request", void 0);
     return StoryIdFilePostRequest;
@@ -82,19 +82,19 @@ var StoryIdFilePostResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdFilePostResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryIdFilePostResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryIdFilePostResponse.prototype, "problemDetail", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Story)
     ], StoryIdFilePostResponse.prototype, "story", void 0);
     return StoryIdFilePostResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// CertificateAuthorityPolicy
+// The issuing policy for a CertificateAuthority. Certificates will not be successfully issued from this CertificateAuthority if they violate the policy.
 type CertificateAuthorityPolicy struct {
 	AllowedCommonNames               []string                `json:"allowedCommonNames,omitempty"`
 	AllowedConfigList                *AllowedConfigList      `json:"allowedConfigList,omitempty"`

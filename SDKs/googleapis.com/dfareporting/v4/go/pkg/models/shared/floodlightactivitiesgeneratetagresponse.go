@@ -1,5 +1,7 @@
 package shared
 
+// FloodlightActivitiesGenerateTagResponse
+// Floodlight Activity GenerateTag Response
 type FloodlightActivitiesGenerateTagResponse struct {
 	FloodlightActivityTag      *string `json:"floodlightActivityTag,omitempty"`
 	GlobalSiteTagGlobalSnippet *string `json:"globalSiteTagGlobalSnippet,omitempty"`

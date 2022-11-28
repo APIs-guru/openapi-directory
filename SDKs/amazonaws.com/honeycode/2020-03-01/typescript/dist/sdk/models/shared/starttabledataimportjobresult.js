@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableDataImportJobStatusEnum } from "./tabledataimportjobstatusenum";
 var StartTableDataImportJobResult = /** @class */ (function (_super) {
     __extends(StartTableDataImportJobResult, _super);
@@ -30,11 +30,11 @@ var StartTableDataImportJobResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=jobId" }),
+        SpeakeasyMetadata({ data: "json, name=jobId" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobResult.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobStatus" }),
+        SpeakeasyMetadata({ data: "json, name=jobStatus" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobResult.prototype, "jobStatus", void 0);
     return StartTableDataImportJobResult;

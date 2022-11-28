@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildNotDeleted } from "./buildnotdeleted";
 
 
+
 export class DeleteBuildBatchOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildsDeleted" })
+  @SpeakeasyMetadata({ data: "json, name=buildsDeleted" })
   buildsDeleted?: string[];
 
-  @Metadata({ data: "json, name=buildsNotDeleted", elemType: shared.BuildNotDeleted })
+  @SpeakeasyMetadata({ data: "json, name=buildsNotDeleted", elemType: BuildNotDeleted })
   buildsNotDeleted?: BuildNotDeleted[];
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: string;
 }

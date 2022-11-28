@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupIdentity } from "./groupidentity";
 import { IamRoleIdentity } from "./iamroleidentity";
 import { IamUserIdentity } from "./iamuseridentity";
@@ -37,19 +37,19 @@ var Identity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=group" }),
+        SpeakeasyMetadata({ data: "json, name=group" }),
         __metadata("design:type", GroupIdentity)
     ], Identity.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamRole" }),
+        SpeakeasyMetadata({ data: "json, name=iamRole" }),
         __metadata("design:type", IamRoleIdentity)
     ], Identity.prototype, "iamRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamUser" }),
+        SpeakeasyMetadata({ data: "json, name=iamUser" }),
         __metadata("design:type", IamUserIdentity)
     ], Identity.prototype, "iamUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", UserIdentity)
     ], Identity.prototype, "user", void 0);
     return Identity;

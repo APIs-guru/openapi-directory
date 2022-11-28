@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Meta
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON API-compliant object containing metadata about this response
 **/
 export class Meta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=band_version" })
+  @SpeakeasyMetadata({ data: "json, name=band_version" })
   bandVersion?: string;
 }

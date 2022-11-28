@@ -22,28 +22,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchFacetsResponse } from "./searchfacetsresponse";
+import { RelatedSearch } from "./relatedsearch";
+import { EditorialVideoSearchItem } from "./editorialvideosearchitem";
 var EditorialVideoSearchResults = /** @class */ (function (_super) {
     __extends(EditorialVideoSearchResults, _super);
     function EditorialVideoSearchResults() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=facets" }),
+        SpeakeasyMetadata({ data: "json, name=facets" }),
         __metadata("design:type", SearchFacetsResponse)
     ], EditorialVideoSearchResults.prototype, "facets", void 0);
     __decorate([
-        Metadata({ data: "json, name=related_searches", elemType: shared.RelatedSearch }),
+        SpeakeasyMetadata({ data: "json, name=related_searches", elemType: RelatedSearch }),
         __metadata("design:type", Array)
     ], EditorialVideoSearchResults.prototype, "relatedSearches", void 0);
     __decorate([
-        Metadata({ data: "json, name=result_count" }),
+        SpeakeasyMetadata({ data: "json, name=result_count" }),
         __metadata("design:type", Number)
     ], EditorialVideoSearchResults.prototype, "resultCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=videos", elemType: shared.EditorialVideoSearchItem }),
+        SpeakeasyMetadata({ data: "json, name=videos", elemType: EditorialVideoSearchItem }),
         __metadata("design:type", Array)
     ], EditorialVideoSearchResults.prototype, "videos", void 0);
     return EditorialVideoSearchResults;

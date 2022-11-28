@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class CancelDeploymentPathParams:
-    deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
+    deployment_id: str = field(metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class CancelDeploymentHeaders:
 
 @dataclass
 class CancelDeploymentRequest:
-    path_params: CancelDeploymentPathParams = field(default=None)
-    headers: CancelDeploymentHeaders = field(default=None)
+    headers: CancelDeploymentHeaders = field()
+    path_params: CancelDeploymentPathParams = field()
     
 
 @dataclass
 class CancelDeploymentResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     cancel_deployment_response: Optional[shared.CancelDeploymentResponse] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

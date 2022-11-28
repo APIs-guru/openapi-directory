@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetResetNetworkInterfaceAttributeActionEnum(str, Enum):
     RESET_NETWORK_INTERFACE_ATTRIBUTE = "ResetNetworkInterfaceAttribute"
@@ -10,11 +14,11 @@ class GetResetNetworkInterfaceAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetResetNetworkInterfaceAttributeQueryParams:
-    action: GetResetNetworkInterfaceAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetResetNetworkInterfaceAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    version: GetResetNetworkInterfaceAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
     source_dest_check: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceDestCheck', 'style': 'form', 'explode': True }})
-    version: GetResetNetworkInterfaceAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetResetNetworkInterfaceAttributeHeaders:
 
 @dataclass
 class GetResetNetworkInterfaceAttributeRequest:
-    query_params: GetResetNetworkInterfaceAttributeQueryParams = field(default=None)
-    headers: GetResetNetworkInterfaceAttributeHeaders = field(default=None)
+    headers: GetResetNetworkInterfaceAttributeHeaders = field()
+    query_params: GetResetNetworkInterfaceAttributeQueryParams = field()
     
 
 @dataclass
 class GetResetNetworkInterfaceAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowExecutionStatusEnum } from "./flowexecutionstatusenum";
+
 
 
 // FlowExecutionSummary
@@ -7,21 +8,21 @@ import { FlowExecutionStatusEnum } from "./flowexecutionstatusenum";
  * An object that contains summary information about a flow execution.
 **/
 export class FlowExecutionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=flowExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=flowExecutionId" })
   flowExecutionId?: string;
 
-  @Metadata({ data: "json, name=flowTemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=flowTemplateId" })
   flowTemplateId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: FlowExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=systemInstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=systemInstanceId" })
   systemInstanceId?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 }

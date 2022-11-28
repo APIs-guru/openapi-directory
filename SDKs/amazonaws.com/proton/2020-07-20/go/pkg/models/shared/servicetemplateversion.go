@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceTemplateVersion
+// The version of a service template detail data.
 type ServiceTemplateVersion struct {
 	Arn                            string                          `json:"arn"`
 	CompatibleEnvironmentTemplates []CompatibleEnvironmentTemplate `json:"compatibleEnvironmentTemplates"`

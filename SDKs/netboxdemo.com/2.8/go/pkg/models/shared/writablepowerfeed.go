@@ -1,9 +1,5 @@
 package shared
 
-import (
-	"time"
-)
-
 type WritablePowerFeedPhaseEnum string
 
 const (
@@ -34,13 +30,10 @@ const (
 	WritablePowerFeedTypeEnumRedundant WritablePowerFeedTypeEnum = "redundant"
 )
 
-type WritablePowerFeed struct {
+type WritablePowerFeedInput struct {
 	Amperage       *int64                       `json:"amperage,omitempty"`
 	Comments       *string                      `json:"comments,omitempty"`
-	Created        *time.Time                   `json:"created,omitempty"`
 	CustomFields   map[string]interface{}       `json:"custom_fields,omitempty"`
-	ID             *int64                       `json:"id,omitempty"`
-	LastUpdated    *time.Time                   `json:"last_updated,omitempty"`
 	MaxUtilization *int64                       `json:"max_utilization,omitempty"`
 	Name           string                       `json:"name"`
 	Phase          *WritablePowerFeedPhaseEnum  `json:"phase,omitempty"`

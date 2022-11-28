@@ -41,10 +41,8 @@ type GetBatchesQueryParams struct {
 	OrderBy     *GetBatchesOrderByEnum     `queryParam:"style=form,explode=true,name=orderBy"`
 }
 
-type GetBatchesRequest struct {
-	QueryParams GetBatchesQueryParams
-}
-
+// GetBatchesBatchItemsBatchItemResult
+// The outcome of the attempted transaction.
 type GetBatchesBatchItemsBatchItemResult struct {
 	Code    *int64  `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
@@ -78,6 +76,10 @@ type GetBatchesBatchItemsBatchItem struct {
 type GetBatchesBatchItems struct {
 	Items []GetBatchesBatchItemsBatchItem `json:"items,omitempty"`
 	Total *int64                          `json:"total,omitempty"`
+}
+
+type GetBatchesRequest struct {
+	QueryParams GetBatchesQueryParams
 }
 
 type GetBatchesResponse struct {

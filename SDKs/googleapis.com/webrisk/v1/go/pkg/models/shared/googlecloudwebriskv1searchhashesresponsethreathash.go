@@ -10,6 +10,8 @@ const (
 	GoogleCloudWebriskV1SearchHashesResponseThreatHashThreatTypesEnumSocialEngineeringExtendedCoverage GoogleCloudWebriskV1SearchHashesResponseThreatHashThreatTypesEnum = "SOCIAL_ENGINEERING_EXTENDED_COVERAGE"
 )
 
+// GoogleCloudWebriskV1SearchHashesResponseThreatHash
+// Contains threat information on a matching hash.
 type GoogleCloudWebriskV1SearchHashesResponseThreatHash struct {
 	ExpireTime  *string                                                             `json:"expireTime,omitempty"`
 	Hash        *string                                                             `json:"hash,omitempty"`

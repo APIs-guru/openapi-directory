@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetP45ReportOutputQueryParams = /** @class */ (function (_super) {
     __extends(GetP45ReportOutputQueryParams, _super);
@@ -30,15 +30,15 @@ var GetP45ReportOutputQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" }),
         __metadata("design:type", String)
     ], GetP45ReportOutputQueryParams.prototype, "employeeKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
         __metadata("design:type", String)
     ], GetP45ReportOutputQueryParams.prototype, "employerKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
         __metadata("design:type", String)
     ], GetP45ReportOutputQueryParams.prototype, "transformDefinitionKey", void 0);
     return GetP45ReportOutputQueryParams;
@@ -50,11 +50,11 @@ var GetP45ReportOutputHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetP45ReportOutputHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetP45ReportOutputHeaders.prototype, "authorization", void 0);
     return GetP45ReportOutputHeaders;
@@ -66,11 +66,11 @@ var GetP45ReportOutputRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetP45ReportOutputQueryParams)
     ], GetP45ReportOutputRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetP45ReportOutputHeaders)
     ], GetP45ReportOutputRequest.prototype, "headers", void 0);
     return GetP45ReportOutputRequest;
@@ -82,19 +82,19 @@ var GetP45ReportOutputResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetP45ReportOutputResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetP45ReportOutputResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetP45ReportOutputResponse.prototype, "getP45ReportOutput200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetP45ReportOutputResponse.prototype, "statusCode", void 0);
     return GetP45ReportOutputResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p1beta1Page
+// Detected page from OCR.
 type GoogleCloudVisionV1p1beta1Page struct {
 	Blocks     []GoogleCloudVisionV1p1beta1Block                     `json:"blocks,omitempty"`
 	Confidence *float32                                              `json:"confidence,omitempty"`

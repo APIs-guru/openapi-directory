@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// ReplicationTaskAssessmentResult
+//
+//	The task assessment report in JSON format.
 type ReplicationTaskAssessmentResult struct {
 	AssessmentResults                 *string    `json:"AssessmentResults,omitempty"`
 	AssessmentResultsFile             *string    `json:"AssessmentResultsFile,omitempty"`

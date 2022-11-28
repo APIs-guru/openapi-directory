@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DropInfoCauseEnum(str, Enum):
     CAUSE_UNSPECIFIED = "CAUSE_UNSPECIFIED"
@@ -15,9 +17,12 @@ class DropInfoCauseEnum(str, Enum):
     NO_EXTERNAL_ADDRESS = "NO_EXTERNAL_ADDRESS"
     UNKNOWN_INTERNAL_ADDRESS = "UNKNOWN_INTERNAL_ADDRESS"
     FORWARDING_RULE_MISMATCH = "FORWARDING_RULE_MISMATCH"
+    FORWARDING_RULE_REGION_MISMATCH = "FORWARDING_RULE_REGION_MISMATCH"
     FORWARDING_RULE_NO_INSTANCES = "FORWARDING_RULE_NO_INSTANCES"
     FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"
     INSTANCE_NOT_RUNNING = "INSTANCE_NOT_RUNNING"
+    GKE_CLUSTER_NOT_RUNNING = "GKE_CLUSTER_NOT_RUNNING"
+    CLOUD_SQL_INSTANCE_NOT_RUNNING = "CLOUD_SQL_INSTANCE_NOT_RUNNING"
     TRAFFIC_TYPE_BLOCKED = "TRAFFIC_TYPE_BLOCKED"
     GKE_MASTER_UNAUTHORIZED_ACCESS = "GKE_MASTER_UNAUTHORIZED_ACCESS"
     CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS = "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"
@@ -25,6 +30,12 @@ class DropInfoCauseEnum(str, Enum):
     DROPPED_INSIDE_CLOUD_SQL_SERVICE = "DROPPED_INSIDE_CLOUD_SQL_SERVICE"
     GOOGLE_MANAGED_SERVICE_NO_PEERING = "GOOGLE_MANAGED_SERVICE_NO_PEERING"
     CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS"
+    GKE_CONTROL_PLANE_REGION_MISMATCH = "GKE_CONTROL_PLANE_REGION_MISMATCH"
+    PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION = "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"
+    GKE_CONTROL_PLANE_NO_ROUTE = "GKE_CONTROL_PLANE_NO_ROUTE"
+    CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC = "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"
+    PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION = "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"
+    CLOUD_SQL_INSTANCE_NO_ROUTE = "CLOUD_SQL_INSTANCE_NO_ROUTE"
     CLOUD_FUNCTION_NOT_ACTIVE = "CLOUD_FUNCTION_NOT_ACTIVE"
     VPC_CONNECTOR_NOT_SET = "VPC_CONNECTOR_NOT_SET"
     VPC_CONNECTOR_NOT_RUNNING = "VPC_CONNECTOR_NOT_RUNNING"
@@ -34,6 +45,10 @@ class DropInfoCauseEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DropInfo:
-    cause: Optional[DropInfoCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cause' }})
-    resource_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceUri' }})
+    r"""DropInfo
+    Details of the final state \"drop\" and associated resource.
+    """
+    
+    cause: Optional[DropInfoCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cause') }})
+    resource_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceUri') }})
     

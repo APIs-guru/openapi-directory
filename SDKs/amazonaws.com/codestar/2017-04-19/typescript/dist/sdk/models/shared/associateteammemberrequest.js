@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AssociateTeamMemberRequest = /** @class */ (function (_super) {
     __extends(AssociateTeamMemberRequest, _super);
     function AssociateTeamMemberRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], AssociateTeamMemberRequest.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], AssociateTeamMemberRequest.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectRole" }),
+        SpeakeasyMetadata({ data: "json, name=projectRole" }),
         __metadata("design:type", String)
     ], AssociateTeamMemberRequest.prototype, "projectRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=remoteAccessAllowed" }),
+        SpeakeasyMetadata({ data: "json, name=remoteAccessAllowed" }),
         __metadata("design:type", Boolean)
     ], AssociateTeamMemberRequest.prototype, "remoteAccessAllowed", void 0);
     __decorate([
-        Metadata({ data: "json, name=userArn" }),
+        SpeakeasyMetadata({ data: "json, name=userArn" }),
         __metadata("design:type", String)
     ], AssociateTeamMemberRequest.prototype, "userArn", void 0);
     return AssociateTeamMemberRequest;

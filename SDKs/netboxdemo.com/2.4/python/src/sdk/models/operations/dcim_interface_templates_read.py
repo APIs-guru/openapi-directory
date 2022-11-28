@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimInterfaceTemplatesReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimInterfaceTemplatesReadRequest:
-    path_params: DcimInterfaceTemplatesReadPathParams = field(default=None)
+    path_params: DcimInterfaceTemplatesReadPathParams = field()
     
 
 @dataclass
 class DcimInterfaceTemplatesReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     interface_template: Optional[shared.InterfaceTemplate] = field(default=None)
-    status_code: int = field(default=None)
     

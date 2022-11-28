@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiPartiesStateOfThePartiesHouseForDatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=forDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=forDate" })
   forDate: Date;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=house" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=house" })
   house: number;
 }
 
 
 export class GetApiPartiesStateOfThePartiesHouseForDateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiPartiesStateOfThePartiesHouseForDatePathParams;
 }
 
 
 export class GetApiPartiesStateOfThePartiesHouseForDateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partySeatCountMembersServiceSearchResult?: shared.PartySeatCountMembersServiceSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

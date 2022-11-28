@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BlacklistEntry } from "./blacklistentry";
+
 
 
 // GetBlacklistReportsResponse
@@ -8,6 +8,6 @@ import { BlacklistEntry } from "./blacklistentry";
  * An object that contains information about blacklist events.
 **/
 export class GetBlacklistReportsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlacklistReport", elemType: shared.BlacklistEntry, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=BlacklistReport", elemType: BlacklistEntry, elemDepth: 2 })
   blacklistReport: Map<string, BlacklistEntry[]>;
 }

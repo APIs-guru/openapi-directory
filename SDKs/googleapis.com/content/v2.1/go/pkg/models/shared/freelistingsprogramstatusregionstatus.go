@@ -34,6 +34,8 @@ const (
 	FreeListingsProgramStatusRegionStatusReviewIneligibilityReasonEnumAlreadyReviewed                      FreeListingsProgramStatusRegionStatusReviewIneligibilityReasonEnum = "ALREADY_REVIEWED"
 )
 
+// FreeListingsProgramStatusRegionStatus
+// Status of program and region.
 type FreeListingsProgramStatusRegionStatus struct {
 	DisapprovalDate                      *string                                                             `json:"disapprovalDate,omitempty"`
 	EligibilityStatus                    *FreeListingsProgramStatusRegionStatusEligibilityStatusEnum         `json:"eligibilityStatus,omitempty"`

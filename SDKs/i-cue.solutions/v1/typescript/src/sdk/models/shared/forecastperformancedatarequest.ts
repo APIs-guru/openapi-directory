@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ForecastPerformanceDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forecastValues" })
+  @SpeakeasyMetadata({ data: "json, name=forecastValues" })
   forecastValues?: number[];
 
-  @Metadata({ data: "json, name=historyValues" })
+  @SpeakeasyMetadata({ data: "json, name=historyValues" })
   historyValues?: number[];
 
-  @Metadata({ data: "json, name=timeSeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesId" })
   timeSeriesId?: string;
 }

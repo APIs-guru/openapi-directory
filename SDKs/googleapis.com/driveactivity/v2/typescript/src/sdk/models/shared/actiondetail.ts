@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppliedLabelChange } from "./appliedlabelchange";
 import { Comment } from "./comment";
 import { Create } from "./create";
@@ -12,44 +12,45 @@ import { Restore } from "./restore";
 import { SettingsChange } from "./settingschange";
 
 
+
 // ActionDetail
 /** 
  * Data describing the type and additional information of an action.
 **/
 export class ActionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appliedLabelChange" })
+  @SpeakeasyMetadata({ data: "json, name=appliedLabelChange" })
   appliedLabelChange?: AppliedLabelChange;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: Comment;
 
-  @Metadata({ data: "json, name=create" })
+  @SpeakeasyMetadata({ data: "json, name=create" })
   create?: Create;
 
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete?: Delete;
 
-  @Metadata({ data: "json, name=dlpChange" })
+  @SpeakeasyMetadata({ data: "json, name=dlpChange" })
   dlpChange?: DataLeakPreventionChange;
 
-  @Metadata({ data: "json, name=edit" })
+  @SpeakeasyMetadata({ data: "json, name=edit" })
   edit?: Map<string, any>;
 
-  @Metadata({ data: "json, name=move" })
+  @SpeakeasyMetadata({ data: "json, name=move" })
   move?: Move;
 
-  @Metadata({ data: "json, name=permissionChange" })
+  @SpeakeasyMetadata({ data: "json, name=permissionChange" })
   permissionChange?: PermissionChange;
 
-  @Metadata({ data: "json, name=reference" })
+  @SpeakeasyMetadata({ data: "json, name=reference" })
   reference?: ApplicationReference;
 
-  @Metadata({ data: "json, name=rename" })
+  @SpeakeasyMetadata({ data: "json, name=rename" })
   rename?: Rename;
 
-  @Metadata({ data: "json, name=restore" })
+  @SpeakeasyMetadata({ data: "json, name=restore" })
   restore?: Restore;
 
-  @Metadata({ data: "json, name=settingsChange" })
+  @SpeakeasyMetadata({ data: "json, name=settingsChange" })
   settingsChange?: SettingsChange;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Relyingparty
+// Request of getting a code for user confirmation (reset password, change email etc.)
 type Relyingparty struct {
 	AndroidInstallApp     *bool   `json:"androidInstallApp,omitempty"`
 	AndroidMinimumVersion *string `json:"androidMinimumVersion,omitempty"`

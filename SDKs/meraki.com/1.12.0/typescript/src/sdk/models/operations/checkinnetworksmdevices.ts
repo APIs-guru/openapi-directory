@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CheckinNetworkSmDevicesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class CheckinNetworkSmDevicesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string[];
 
-  @Metadata({ data: "json, name=serials" })
+  @SpeakeasyMetadata({ data: "json, name=serials" })
   serials?: string[];
 
-  @Metadata({ data: "json, name=wifiMacs" })
+  @SpeakeasyMetadata({ data: "json, name=wifiMacs" })
   wifiMacs?: string[];
 }
 
 
 export class CheckinNetworkSmDevicesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CheckinNetworkSmDevicesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: CheckinNetworkSmDevicesRequestBody;
 }
 
 
 export class CheckinNetworkSmDevicesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   checkinNetworkSmDevices200ApplicationJsonObject?: Map<string, any>;
 }

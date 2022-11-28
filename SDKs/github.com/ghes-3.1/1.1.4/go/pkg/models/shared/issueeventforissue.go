@@ -1,5 +1,7 @@
 package shared
 
+// IssueEventForIssue
+// Issue Event for Issue
 type IssueEventForIssue struct {
 	Actor             *SimpleUser            `json:"actor,omitempty"`
 	AuthorAssociation *AuthorAssociationEnum `json:"author_association,omitempty"`

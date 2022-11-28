@@ -1,24 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostNetworksIdActionsChangeIpRangePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostNetworksIdActionsChangeIpRangeChangeIpRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ip_range" })
+  @SpeakeasyMetadata({ data: "json, name=ip_range" })
   ipRange: string;
-}
-
-
-export class PostNetworksIdActionsChangeIpRangeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostNetworksIdActionsChangeIpRangePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostNetworksIdActionsChangeIpRangeChangeIpRangeRequest;
 }
 
 
@@ -27,69 +19,78 @@ export class PostNetworksIdActionsChangeIpRangeRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostNetworksIdActionsChangeIpRangeActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostNetworksIdActionsChangeIpRangeActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostNetworksIdActionsChangeIpRangeActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostNetworksIdActionsChangeIpRangeActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostNetworksIdActionsChangeIpRangeActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostNetworksIdActionsChangeIpRangeActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostNetworksIdActionsChangeIpRangeActionResponseActionResources })
   resources: PostNetworksIdActionsChangeIpRangeActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostNetworksIdActionsChangeIpRangeActionResponseActionStatusEnum;
 }
 
 
 export class PostNetworksIdActionsChangeIpRangeActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostNetworksIdActionsChangeIpRangeActionResponseAction;
 }
 
 
+export class PostNetworksIdActionsChangeIpRangeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostNetworksIdActionsChangeIpRangePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostNetworksIdActionsChangeIpRangeChangeIpRangeRequest;
+}
+
+
 export class PostNetworksIdActionsChangeIpRangeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostNetworksIdActionsChangeIpRangeActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

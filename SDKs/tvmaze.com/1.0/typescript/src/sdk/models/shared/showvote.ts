@@ -1,13 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ShowVote extends SpeakeasyBase {
-  @Metadata({ data: "json, name=show_id" })
+  @SpeakeasyMetadata({ data: "json, name=show_id" })
   showId?: number;
 
-  @Metadata({ data: "json, name=vote" })
+  @SpeakeasyMetadata({ data: "json, name=vote" })
   vote?: number;
 
-  @Metadata({ data: "json, name=voted_at" })
+  @SpeakeasyMetadata({ data: "json, name=voted_at" })
   votedAt?: number;
+}
+
+
+export class ShowVoteInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=vote" })
+  vote?: number;
 }

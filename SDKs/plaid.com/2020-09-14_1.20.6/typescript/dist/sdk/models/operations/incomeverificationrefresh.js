@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IncomeVerificationRefreshRequest = /** @class */ (function (_super) {
     __extends(IncomeVerificationRefreshRequest, _super);
@@ -30,7 +30,7 @@ var IncomeVerificationRefreshRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.IncomeVerificationRefreshRequest)
     ], IncomeVerificationRefreshRequest.prototype, "request", void 0);
     return IncomeVerificationRefreshRequest;
@@ -42,19 +42,19 @@ var IncomeVerificationRefreshResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IncomeVerificationRefreshResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], IncomeVerificationRefreshResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.IncomeVerificationRefreshResponse)
     ], IncomeVerificationRefreshResponse.prototype, "incomeVerificationRefreshResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IncomeVerificationRefreshResponse.prototype, "statusCode", void 0);
     return IncomeVerificationRefreshResponse;

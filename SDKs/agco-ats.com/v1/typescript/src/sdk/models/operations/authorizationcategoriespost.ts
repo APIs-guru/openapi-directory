@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AuthorizationCategoriesPostRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   authorizationCodesSharedModelsCategory?: shared.AuthorizationCodesSharedModelsCategory;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   authorizationCodesSharedModelsCategory1?: shared.AuthorizationCodesSharedModelsCategory;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   authorizationCodesSharedModelsCategory2?: shared.AuthorizationCodesSharedModelsCategory;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class AuthorizationCategoriesPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: AuthorizationCategoriesPostRequests;
 }
 
 
 export class AuthorizationCategoriesPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authorizationCategoriesPost200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authorizationCategoriesPost200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authorizationCategoriesPost200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authorizationCategoriesPost200TextXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

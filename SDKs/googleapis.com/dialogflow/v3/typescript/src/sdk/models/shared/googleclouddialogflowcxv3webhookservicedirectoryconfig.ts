@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3WebhookGenericWebService } from "./googleclouddialogflowcxv3webhookgenericwebservice";
+
 
 
 // GoogleCloudDialogflowCxV3WebhookServiceDirectoryConfig
@@ -7,9 +8,9 @@ import { GoogleCloudDialogflowCxV3WebhookGenericWebService } from "./googlecloud
  * Represents configuration for a [Service Directory](https://cloud.google.com/service-directory) service.
 **/
 export class GoogleCloudDialogflowCxV3WebhookServiceDirectoryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=genericWebService" })
+  @SpeakeasyMetadata({ data: "json, name=genericWebService" })
   genericWebService?: GoogleCloudDialogflowCxV3WebhookGenericWebService;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AlertTarget
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure containing the alert target ARN and the role ARN.
 **/
 export class AlertTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertTargetArn" })
+  @SpeakeasyMetadata({ data: "json, name=alertTargetArn" })
   alertTargetArn: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

@@ -1,28 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransactionDetail } from "./transactiondetail";
-import { TransactionDetail } from "./transactiondetail";
+
 
 
 export class SaveTransactionsResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duplicate_import_ids" })
+  @SpeakeasyMetadata({ data: "json, name=duplicate_import_ids" })
   duplicateImportIds?: string[];
 
-  @Metadata({ data: "json, name=server_knowledge" })
+  @SpeakeasyMetadata({ data: "json, name=server_knowledge" })
   serverKnowledge: number;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: TransactionDetail;
 
-  @Metadata({ data: "json, name=transaction_ids" })
+  @SpeakeasyMetadata({ data: "json, name=transaction_ids" })
   transactionIds: string[];
 
-  @Metadata({ data: "json, name=transactions", elemType: shared.TransactionDetail })
+  @SpeakeasyMetadata({ data: "json, name=transactions", elemType: TransactionDetail })
   transactions?: TransactionDetail[];
 }
 
 
 export class SaveTransactionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: SaveTransactionsResponseData;
 }

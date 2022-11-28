@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsKeySpec } from "./dnskeyspec";
 
+
 export enum ManagedZoneDnsSecConfigNonExistenceEnum {
-    Nsec = "NSEC"
-,    Nsec3 = "NSEC3"
+    Nsec = "NSEC",
+    Nsec3 = "NSEC3"
 }
 
 export enum ManagedZoneDnsSecConfigStateEnum {
-    Off = "OFF"
-,    On = "ON"
-,    Transfer = "TRANSFER"
+    Off = "OFF",
+    On = "ON",
+    Transfer = "TRANSFER"
 }
 
 
 export class ManagedZoneDnsSecConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultKeySpecs", elemType: shared.DnsKeySpec })
+  @SpeakeasyMetadata({ data: "json, name=defaultKeySpecs", elemType: DnsKeySpec })
   defaultKeySpecs?: DnsKeySpec[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nonExistence" })
+  @SpeakeasyMetadata({ data: "json, name=nonExistence" })
   nonExistence?: ManagedZoneDnsSecConfigNonExistenceEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ManagedZoneDnsSecConfigStateEnum;
 }

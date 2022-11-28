@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchQualityMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional search quality metadata of the item.
 **/
 export class SearchQualityMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quality" })
+  @SpeakeasyMetadata({ data: "json, name=quality" })
   quality?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRunV2Job } from "./googlecloudrunv2job";
+
 
 
 // GoogleCloudRunV2ListJobsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudRunV2Job } from "./googlecloudrunv2job";
  * Response message containing a list of Jobs.
 **/
 export class GoogleCloudRunV2ListJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs", elemType: shared.GoogleCloudRunV2Job })
+  @SpeakeasyMetadata({ data: "json, name=jobs", elemType: GoogleCloudRunV2Job })
   jobs?: GoogleCloudRunV2Job[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

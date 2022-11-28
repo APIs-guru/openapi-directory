@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserDefinedFunctionResource } from "./userdefinedfunctionresource";
 
 
+
 export class ViewDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=useExplicitColumnNames" })
+  @SpeakeasyMetadata({ data: "json, name=useExplicitColumnNames" })
   useExplicitColumnNames?: boolean;
 
-  @Metadata({ data: "json, name=useLegacySql" })
+  @SpeakeasyMetadata({ data: "json, name=useLegacySql" })
   useLegacySql?: boolean;
 
-  @Metadata({ data: "json, name=userDefinedFunctionResources", elemType: shared.UserDefinedFunctionResource })
+  @SpeakeasyMetadata({ data: "json, name=userDefinedFunctionResources", elemType: UserDefinedFunctionResource })
   userDefinedFunctionResources?: UserDefinedFunctionResource[];
 }

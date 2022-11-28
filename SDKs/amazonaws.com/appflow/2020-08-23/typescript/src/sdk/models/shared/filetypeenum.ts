@@ -1,7 +1,8 @@
 
 
+
 export enum FileTypeEnum {
-    Csv = "CSV"
-,    Json = "JSON"
-,    Parquet = "PARQUET"
+    Csv = "CSV",
+    Json = "JSON",
+    Parquet = "PARQUET"
 }

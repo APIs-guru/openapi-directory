@@ -1,7 +1,8 @@
 
 
+
 export enum UserPoolMfaTypeEnum {
-    Off = "OFF"
-,    On = "ON"
-,    Optional = "OPTIONAL"
+    Off = "OFF",
+    On = "ON",
+    Optional = "OPTIONAL"
 }

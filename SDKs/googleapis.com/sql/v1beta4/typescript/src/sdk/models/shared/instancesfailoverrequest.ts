@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailoverContext } from "./failovercontext";
+
 
 
 // InstancesFailoverRequest
@@ -7,6 +8,6 @@ import { FailoverContext } from "./failovercontext";
  * Instance failover request.
 **/
 export class InstancesFailoverRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failoverContext" })
+  @SpeakeasyMetadata({ data: "json, name=failoverContext" })
   failoverContext?: FailoverContext;
 }

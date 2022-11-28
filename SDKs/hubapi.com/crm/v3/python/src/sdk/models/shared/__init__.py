@@ -11,6 +11,8 @@ from .cardobjecttypebody import *
 from .cardpatchrequest import *
 from .cardresponse import *
 from .displayoption import *
+from .error import *
+from .errordetail import *
 from .iframeactionbody import *
 from .integratorcardpayloadresponse import *
 from .integratorobjectresult import *

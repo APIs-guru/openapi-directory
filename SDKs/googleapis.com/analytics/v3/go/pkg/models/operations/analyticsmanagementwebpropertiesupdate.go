@@ -27,7 +27,7 @@ type AnalyticsManagementWebpropertiesUpdateSecurity struct {
 type AnalyticsManagementWebpropertiesUpdateRequest struct {
 	PathParams  AnalyticsManagementWebpropertiesUpdatePathParams
 	QueryParams AnalyticsManagementWebpropertiesUpdateQueryParams
-	Request     *shared.Webproperty `request:"mediaType=application/json"`
+	Request     *shared.WebpropertyInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementWebpropertiesUpdateSecurity
 }
 

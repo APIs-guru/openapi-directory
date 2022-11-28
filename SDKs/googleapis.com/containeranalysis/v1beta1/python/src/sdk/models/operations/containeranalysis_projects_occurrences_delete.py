@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class ContaineranalysisProjectsOccurrencesDeleteQueryParams:
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesDeleteRequest:
-    path_params: ContaineranalysisProjectsOccurrencesDeletePathParams = field(default=None)
-    query_params: ContaineranalysisProjectsOccurrencesDeleteQueryParams = field(default=None)
-    security: ContaineranalysisProjectsOccurrencesDeleteSecurity = field(default=None)
+    path_params: ContaineranalysisProjectsOccurrencesDeletePathParams = field()
+    query_params: ContaineranalysisProjectsOccurrencesDeleteQueryParams = field()
+    security: ContaineranalysisProjectsOccurrencesDeleteSecurity = field()
     
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

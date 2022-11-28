@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageFileTypeEnum } from "./imagefiletypeenum";
+
 
 
 // ImageFile
@@ -7,9 +8,9 @@ import { ImageFileTypeEnum } from "./imagefiletypeenum";
  * Contains an image file.
 **/
 export class ImageFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: ImageFileTypeEnum;
 }

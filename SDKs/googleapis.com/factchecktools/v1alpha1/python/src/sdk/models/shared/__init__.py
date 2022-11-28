@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlefactcheckingfactchecktoolsv1alpha1claim import *
 from .googlefactcheckingfactchecktoolsv1alpha1claimauthor import *

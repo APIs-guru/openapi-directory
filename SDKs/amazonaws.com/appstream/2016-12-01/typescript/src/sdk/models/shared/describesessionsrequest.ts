@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 
 
+
 export class DescribeSessionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthenticationType" })
   authenticationType?: AuthenticationTypeEnum;
 
-  @Metadata({ data: "json, name=FleetName" })
+  @SpeakeasyMetadata({ data: "json, name=FleetName" })
   fleetName: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=StackName" })
+  @SpeakeasyMetadata({ data: "json, name=StackName" })
   stackName: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 }

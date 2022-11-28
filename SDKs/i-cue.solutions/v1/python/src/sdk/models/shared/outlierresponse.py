@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OutlierResponseTypeEnum(str, Enum):
     ADDITIVE = "Additive"
@@ -12,7 +14,7 @@ class OutlierResponseTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OutlierResponse:
-    index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'index' }})
-    type: Optional[OutlierResponseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('index') }})
+    type: Optional[OutlierResponseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AnalyticshubProjectsLocationsDataExchangesListingsCreatePathParams = /** @class */ (function (_super) {
     __extends(AnalyticshubProjectsLocationsDataExchangesListingsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var AnalyticshubProjectsLocationsDataExchangesListingsCreatePathParams = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreatePathParams.prototype, "parent", void 0);
     return AnalyticshubProjectsLocationsDataExchangesListingsCreatePathParams;
@@ -42,51 +42,51 @@ var AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=listingId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=listingId" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "listingId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams;
@@ -98,11 +98,11 @@ var AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption1 = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption1.prototype, "oauth2c", void 0);
     return AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption1;
@@ -114,11 +114,11 @@ var AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption2 = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption2.prototype, "oauth2c", void 0);
     return AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption2;
@@ -130,11 +130,11 @@ var AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurity = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption1)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurityOption2)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurity.prototype, "option2", void 0);
     return AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurity;
@@ -146,19 +146,19 @@ var AnalyticshubProjectsLocationsDataExchangesListingsCreateRequest = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AnalyticshubProjectsLocationsDataExchangesListingsCreatePathParams)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AnalyticshubProjectsLocationsDataExchangesListingsCreateQueryParams)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.Listing)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.ListingInput)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AnalyticshubProjectsLocationsDataExchangesListingsCreateSecurity)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateRequest.prototype, "security", void 0);
     return AnalyticshubProjectsLocationsDataExchangesListingsCreateRequest;
@@ -170,15 +170,15 @@ var AnalyticshubProjectsLocationsDataExchangesListingsCreateResponse = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Listing)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateResponse.prototype, "listing", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AnalyticshubProjectsLocationsDataExchangesListingsCreateResponse.prototype, "statusCode", void 0);
     return AnalyticshubProjectsLocationsDataExchangesListingsCreateResponse;

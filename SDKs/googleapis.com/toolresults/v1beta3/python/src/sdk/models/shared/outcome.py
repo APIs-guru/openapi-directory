@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import failuredetail
-from . import inconclusivedetail
-from . import skippeddetail
-from . import successdetail
+from sdk import utils
+from . import *
 
 class OutcomeSummaryEnum(str, Enum):
     UNSET = "unset"
@@ -18,9 +17,13 @@ class OutcomeSummaryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Outcome:
-    failure_detail: Optional[failuredetail.FailureDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureDetail' }})
-    inconclusive_detail: Optional[inconclusivedetail.InconclusiveDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inconclusiveDetail' }})
-    skipped_detail: Optional[skippeddetail.SkippedDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skippedDetail' }})
-    success_detail: Optional[successdetail.SuccessDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'successDetail' }})
-    summary: Optional[OutcomeSummaryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
+    r"""Outcome
+    Interprets a result so that humans and machines can act on it.
+    """
+    
+    failure_detail: Optional[FailureDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureDetail') }})
+    inconclusive_detail: Optional[InconclusiveDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inconclusiveDetail') }})
+    skipped_detail: Optional[SkippedDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skippedDetail') }})
+    success_detail: Optional[SuccessDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('successDetail') }})
+    summary: Optional[OutcomeSummaryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
     

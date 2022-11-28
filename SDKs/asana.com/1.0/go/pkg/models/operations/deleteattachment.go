@@ -13,13 +13,13 @@ type DeleteAttachmentQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeleteAttachment200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeleteAttachmentRequest struct {
 	PathParams  DeleteAttachmentPathParams
 	QueryParams DeleteAttachmentQueryParams
-}
-
-type DeleteAttachment200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteAttachmentResponse struct {

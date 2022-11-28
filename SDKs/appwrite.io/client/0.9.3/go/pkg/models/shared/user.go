@@ -1,5 +1,7 @@
 package shared
 
+// User
+// User
 type User struct {
 	DollarID          string                 `json:"$id"`
 	Email             string                 `json:"email"`

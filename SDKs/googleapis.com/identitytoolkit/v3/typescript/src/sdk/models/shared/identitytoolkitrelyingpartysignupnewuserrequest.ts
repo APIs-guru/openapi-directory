@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartySignupNewUserRequest
@@ -6,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to signup new user, create anonymous user or anonymous user reauth.
 **/
 export class IdentitytoolkitRelyingpartySignupNewUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=captchaChallenge" })
+  @SpeakeasyMetadata({ data: "json, name=captchaChallenge" })
   captchaChallenge?: string;
 
-  @Metadata({ data: "json, name=captchaResponse" })
+  @SpeakeasyMetadata({ data: "json, name=captchaResponse" })
   captchaResponse?: string;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=emailVerified" })
+  @SpeakeasyMetadata({ data: "json, name=emailVerified" })
   emailVerified?: boolean;
 
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=localId" })
+  @SpeakeasyMetadata({ data: "json, name=localId" })
   localId?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=photoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=photoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=tenantId" })
+  @SpeakeasyMetadata({ data: "json, name=tenantId" })
   tenantId?: string;
 
-  @Metadata({ data: "json, name=tenantProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=tenantProjectNumber" })
   tenantProjectNumber?: string;
 }

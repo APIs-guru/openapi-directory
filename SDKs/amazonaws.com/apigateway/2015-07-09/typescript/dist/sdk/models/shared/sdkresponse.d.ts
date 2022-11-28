@@ -1,7 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The binary blob response to <a>GetSdk</a>, which contains the generated SDK.
 **/
-export declare class SdkResponse extends SpeakeasyBase {
+export declare class SDKResponse extends SpeakeasyBase {
     body?: string;
 }

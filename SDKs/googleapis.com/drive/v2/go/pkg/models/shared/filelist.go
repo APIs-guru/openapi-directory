@@ -1,5 +1,7 @@
 package shared
 
+// FileList
+// A list of files.
 type FileList struct {
 	Etag             *string `json:"etag,omitempty"`
 	IncompleteSearch *bool   `json:"incompleteSearch,omitempty"`

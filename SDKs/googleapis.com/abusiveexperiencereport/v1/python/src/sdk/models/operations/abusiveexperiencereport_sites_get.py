@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AbusiveexperiencereportSitesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class AbusiveexperiencereportSitesGetQueryParams:
 
 @dataclass
 class AbusiveexperiencereportSitesGetRequest:
-    path_params: AbusiveexperiencereportSitesGetPathParams = field(default=None)
-    query_params: AbusiveexperiencereportSitesGetQueryParams = field(default=None)
+    path_params: AbusiveexperiencereportSitesGetPathParams = field()
+    query_params: AbusiveexperiencereportSitesGetQueryParams = field()
     
 
 @dataclass
 class AbusiveexperiencereportSitesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     site_summary_response: Optional[shared.SiteSummaryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

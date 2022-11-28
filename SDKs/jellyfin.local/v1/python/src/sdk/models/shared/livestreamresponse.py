@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import mediasourceinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LiveStreamResponse:
-    media_source: Optional[mediasourceinfo.MediaSourceInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MediaSource' }})
+    media_source: Optional[MediaSourceInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MediaSource') }})
     

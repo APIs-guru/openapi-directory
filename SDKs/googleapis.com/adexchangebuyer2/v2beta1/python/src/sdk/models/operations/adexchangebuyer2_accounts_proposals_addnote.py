@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsAddNotePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class Adexchangebuyer2AccountsProposalsAddNoteQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsAddNoteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsAddNoteRequest:
-    path_params: Adexchangebuyer2AccountsProposalsAddNotePathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsProposalsAddNoteQueryParams = field(default=None)
-    request: Optional[shared.AddNoteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: Adexchangebuyer2AccountsProposalsAddNoteSecurity = field(default=None)
+    path_params: Adexchangebuyer2AccountsProposalsAddNotePathParams = field()
+    query_params: Adexchangebuyer2AccountsProposalsAddNoteQueryParams = field()
+    security: Adexchangebuyer2AccountsProposalsAddNoteSecurity = field()
+    request: Optional[shared.AddNoteRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsAddNoteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     note: Optional[shared.Note] = field(default=None)
-    status_code: int = field(default=None)
     

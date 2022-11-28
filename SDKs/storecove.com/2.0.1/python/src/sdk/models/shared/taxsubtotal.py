@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import country_enum
+from sdk import utils
+from . import *
 
 class TaxSubtotalTaxCategoryEnum(str, Enum):
     STANDARD = "standard"
@@ -34,9 +36,13 @@ class TaxSubtotalTaxCategoryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TaxSubtotal:
-    category: Optional[TaxSubtotalTaxCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    country: Optional[country_enum.CountryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
-    percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percentage' }})
-    tax_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxAmount' }})
-    taxable_amount: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxableAmount' }})
+    r"""TaxSubtotal
+    The total amount of tax of this type in the invoice.
+    """
+    
+    taxable_amount: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxableAmount') }})
+    category: Optional[TaxSubtotalTaxCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    country: Optional[CountryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('country') }})
+    percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('percentage') }})
+    tax_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxAmount') }})
     

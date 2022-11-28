@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SessionInfo
+// Class SessionInfo.
 type SessionInfo struct {
 	AdditionalUsers       []SessionUserInfo        `json:"AdditionalUsers,omitempty"`
 	ApplicationVersion    *string                  `json:"ApplicationVersion,omitempty"`

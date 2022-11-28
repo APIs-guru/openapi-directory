@@ -12,6 +12,8 @@ const (
 	PermissionEntityPermissionEnumBundle    PermissionEntityPermissionEnum = "bundle"
 )
 
+// PermissionEntity
+// List Permissions
 type PermissionEntity struct {
 	GroupID    *int32                          `json:"group_id,omitempty"`
 	GroupName  *string                         `json:"group_name,omitempty"`

@@ -1,18 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.xero.com/bankfeeds.xro/1.0",
+export const ServerList = [
+	"https://api.xero.com/bankfeeds.xro/1.0",
 ] as const;
 
 export function WithServerURL(
@@ -23,50 +19,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // CreateFeedConnections - Create one or more new feed connection
-  /** 
+  /**
+   * createFeedConnections - Create one or more new feed connection
+   *
    * By passing in the FeedConnections array object in the body, you can create one or more new feed connections
   **/
-  CreateFeedConnections(
+  createFeedConnections(
     req: operations.CreateFeedConnectionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateFeedConnectionsResponse> {
@@ -74,47 +69,47 @@ export class SDK {
       req = new operations.CreateFeedConnectionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/FeedConnections";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateFeedConnectionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateFeedConnectionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.feedConnections = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -126,8 +121,10 @@ export class SDK {
   }
 
   
-  // CreateStatements - Creates one or more new statements
-  CreateStatements(
+  /**
+   * createStatements - Creates one or more new statements
+  **/
+  createStatements(
     req: operations.CreateStatementsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateStatementsResponse> {
@@ -135,68 +132,69 @@ export class SDK {
       req = new operations.CreateStatementsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/Statements";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateStatementsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateStatementsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.statements = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/problem+json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/problem+json`)) {
                 res.statements = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/problem+json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/problem+json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/problem+json`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/problem+json`)) {
                 res.statements = httpRes?.data;
             }
             break;
-          case 413:
-            if (MatchContentType(contentType, `application/problem+json`)) {
+          case httpRes?.status == 413:
+            if (utils.MatchContentType(contentType, `application/problem+json`)) {
                 res.statements = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/problem+json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/problem+json`)) {
                 res.statements = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/problem+json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/problem+json`)) {
                 res.statements = httpRes?.data;
             }
             break;
@@ -208,11 +206,12 @@ export class SDK {
   }
 
   
-  // DeleteFeedConnections - Delete an existing feed connection
-  /** 
+  /**
+   * deleteFeedConnections - Delete an existing feed connection
+   *
    * By passing in FeedConnections array object in the body, you can delete a feed connection.
   **/
-  DeleteFeedConnections(
+  deleteFeedConnections(
     req: operations.DeleteFeedConnectionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteFeedConnectionsResponse> {
@@ -220,44 +219,44 @@ export class SDK {
       req = new operations.DeleteFeedConnectionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/FeedConnections/DeleteRequests";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteFeedConnectionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteFeedConnectionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.feedConnections = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -267,11 +266,12 @@ export class SDK {
   }
 
   
-  // GetFeedConnection - Retrieve single feed connection based on a unique id provided
-  /** 
+  /**
+   * getFeedConnection - Retrieve single feed connection based on a unique id provided
+   *
    * By passing in a FeedConnection Id options, you can search for matching feed connections
   **/
-  GetFeedConnection(
+  getFeedConnection(
     req: operations.GetFeedConnectionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFeedConnectionResponse> {
@@ -279,27 +279,29 @@ export class SDK {
       req = new operations.GetFeedConnectionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/FeedConnections/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFeedConnectionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFeedConnectionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.feedConnection = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -309,11 +311,12 @@ export class SDK {
   }
 
   
-  // GetFeedConnections - Searches for feed connections
-  /** 
+  /**
+   * getFeedConnections - Searches for feed connections
+   *
    * By passing in the appropriate options, you can search for available feed connections in the system.
   **/
-  GetFeedConnections(
+  getFeedConnections(
     req: operations.GetFeedConnectionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFeedConnectionsResponse> {
@@ -321,12 +324,12 @@ export class SDK {
       req = new operations.GetFeedConnectionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/FeedConnections";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -335,21 +338,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFeedConnectionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFeedConnectionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.feedConnections = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -359,11 +364,12 @@ export class SDK {
   }
 
   
-  // GetStatement - Retrieve single statement based on unique id provided
-  /** 
+  /**
+   * getStatement - Retrieve single statement based on unique id provided
+   *
    * By passing in a statement id, you can search for matching statements
   **/
-  GetStatement(
+  getStatement(
     req: operations.GetStatementRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStatementResponse> {
@@ -371,12 +377,12 @@ export class SDK {
       req = new operations.GetStatementRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/Statements/{statementID}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -385,21 +391,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStatementResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetStatementResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.statement = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -409,11 +417,12 @@ export class SDK {
   }
 
   
-  // GetStatements - Retrieve all statements
-  /** 
+  /**
+   * getStatements - Retrieve all statements
+   *
    * By passing in parameters, you can search for matching statements
   **/
-  GetStatements(
+  getStatements(
     req: operations.GetStatementsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStatementsResponse> {
@@ -421,12 +430,12 @@ export class SDK {
       req = new operations.GetStatementsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/Statements";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -435,22 +444,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStatementsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetStatementsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.statements = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/problem+json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/problem+json`)) {
                 res.statements = httpRes?.data;
             }
             break;

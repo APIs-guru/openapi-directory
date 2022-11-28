@@ -1,5 +1,7 @@
 package shared
 
+// PutScalingPolicyInput
+// Represents the input for a request operation.
 type PutScalingPolicyInput struct {
 	ComparisonOperator    *ComparisonOperatorTypeEnum `json:"ComparisonOperator,omitempty"`
 	EvaluationPeriods     *int64                      `json:"EvaluationPeriods,omitempty"`

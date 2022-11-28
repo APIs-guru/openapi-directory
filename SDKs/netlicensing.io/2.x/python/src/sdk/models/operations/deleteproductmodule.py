@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class DeleteProductModulePathParams:
-    product_module_number: str = field(default=None, metadata={'path_param': { 'field_name': 'productModuleNumber', 'style': 'simple', 'explode': False }})
+    product_module_number: str = field(metadata={'path_param': { 'field_name': 'productModuleNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,20 +15,20 @@ class DeleteProductModuleQueryParams:
 
 @dataclass
 class DeleteProductModuleSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class DeleteProductModuleRequest:
-    path_params: DeleteProductModulePathParams = field(default=None)
-    query_params: DeleteProductModuleQueryParams = field(default=None)
-    security: DeleteProductModuleSecurity = field(default=None)
+    path_params: DeleteProductModulePathParams = field()
+    query_params: DeleteProductModuleQueryParams = field()
+    security: DeleteProductModuleSecurity = field()
     
 
 @dataclass
 class DeleteProductModuleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensing: Optional[Any] = field(default=None)
     

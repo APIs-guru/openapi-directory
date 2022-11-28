@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ContentHandlingStrategyEnum(str, Enum):
     CONVERT_TO_BINARY = "CONVERT_TO_BINARY"

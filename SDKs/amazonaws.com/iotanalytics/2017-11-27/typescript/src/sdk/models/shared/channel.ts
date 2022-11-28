@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionPeriod } from "./retentionperiod";
 import { ChannelStatusEnum } from "./channelstatusenum";
 import { ChannelStorage } from "./channelstorage";
+
 
 
 // Channel
@@ -9,27 +10,27 @@ import { ChannelStorage } from "./channelstorage";
  * A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.
 **/
 export class Channel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=lastMessageArrivalTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastMessageArrivalTime" })
   lastMessageArrivalTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=retentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=retentionPeriod" })
   retentionPeriod?: RetentionPeriod;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ChannelStatusEnum;
 
-  @Metadata({ data: "json, name=storage" })
+  @SpeakeasyMetadata({ data: "json, name=storage" })
   storage?: ChannelStorage;
 }

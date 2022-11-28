@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserInfo } from "./userinfo";
+
 
 
 // RoleUser
@@ -7,15 +8,15 @@ import { UserInfo } from "./userinfo";
  * User information
 **/
 export class RoleUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isMember" })
+  @SpeakeasyMetadata({ data: "json, name=isMember" })
   isMember: boolean;
 
-  @Metadata({ data: "json, name=userInfo" })
+  @SpeakeasyMetadata({ data: "json, name=userInfo" })
   userInfo: UserInfo;
 }

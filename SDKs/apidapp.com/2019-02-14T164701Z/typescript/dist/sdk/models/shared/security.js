@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeKey2 = /** @class */ (function (_super) {
     __extends(SchemeKey2, _super);
     function SchemeKey2() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "security, name=X-Api-Key" }),
         __metadata("design:type", String)
     ], SchemeKey2.prototype, "apiKey", void 0);
     return SchemeKey2;

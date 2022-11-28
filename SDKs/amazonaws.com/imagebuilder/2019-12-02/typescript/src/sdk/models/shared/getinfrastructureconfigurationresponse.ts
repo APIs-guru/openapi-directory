@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InfrastructureConfiguration } from "./infrastructureconfiguration";
+
 
 
 // GetInfrastructureConfigurationResponse
@@ -7,9 +8,9 @@ import { InfrastructureConfiguration } from "./infrastructureconfiguration";
  * GetInfrastructureConfiguration response object.
 **/
 export class GetInfrastructureConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=infrastructureConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=infrastructureConfiguration" })
   infrastructureConfiguration?: InfrastructureConfiguration;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

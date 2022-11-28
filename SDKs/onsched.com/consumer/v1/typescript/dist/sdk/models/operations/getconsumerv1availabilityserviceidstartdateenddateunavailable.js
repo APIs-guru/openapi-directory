@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams, _super);
     function GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=endDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=endDate" }),
         __metadata("design:type", Date)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" }),
         __metadata("design:type", String)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams.prototype, "serviceId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=startDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=startDate" }),
         __metadata("design:type", Date)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams.prototype, "startDate", void 0);
     return GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams;
@@ -49,23 +49,23 @@ var GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams = /
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=duration" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" }),
         __metadata("design:type", Number)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fullServerBasedAvailability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fullServerBasedAvailability" }),
         __metadata("design:type", Boolean)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams.prototype, "fullServerBasedAvailability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
         __metadata("design:type", String)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=resourceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceId" }),
         __metadata("design:type", String)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tzOffset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tzOffset" }),
         __metadata("design:type", Number)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams.prototype, "tzOffset", void 0);
     return GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams;
@@ -77,11 +77,11 @@ var GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableRequest = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailablePathParams)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableQueryParams)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableRequest.prototype, "queryParams", void 0);
     return GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableRequest;
@@ -93,15 +93,15 @@ var GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse.prototype, "unavailableTimeListViewModel", void 0);
     return GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse;

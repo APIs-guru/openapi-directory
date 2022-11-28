@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountDetails } from "./accountdetails";
 import { AppIntegrity } from "./appintegrity";
 import { DeviceIntegrity } from "./deviceintegrity";
@@ -6,23 +6,24 @@ import { RequestDetails } from "./requestdetails";
 import { TestingDetails } from "./testingdetails";
 
 
+
 // TokenPayloadExternal
 /** 
  * Contains basic app information and integrity signals like device attestation and licensing details.
 **/
 export class TokenPayloadExternal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountDetails" })
+  @SpeakeasyMetadata({ data: "json, name=accountDetails" })
   accountDetails?: AccountDetails;
 
-  @Metadata({ data: "json, name=appIntegrity" })
+  @SpeakeasyMetadata({ data: "json, name=appIntegrity" })
   appIntegrity?: AppIntegrity;
 
-  @Metadata({ data: "json, name=deviceIntegrity" })
+  @SpeakeasyMetadata({ data: "json, name=deviceIntegrity" })
   deviceIntegrity?: DeviceIntegrity;
 
-  @Metadata({ data: "json, name=requestDetails" })
+  @SpeakeasyMetadata({ data: "json, name=requestDetails" })
   requestDetails?: RequestDetails;
 
-  @Metadata({ data: "json, name=testingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=testingDetails" })
   testingDetails?: TestingDetails;
 }

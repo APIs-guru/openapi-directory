@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import money
+from sdk import utils
+from . import *
 
 class PriceTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class PriceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Price:
-    amount: Optional[money.Money] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    type: Optional[PriceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Price
+    Represents a price and a pricing type for a deal.
+    """
+    
+    amount: Optional[Money] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    type: Optional[PriceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

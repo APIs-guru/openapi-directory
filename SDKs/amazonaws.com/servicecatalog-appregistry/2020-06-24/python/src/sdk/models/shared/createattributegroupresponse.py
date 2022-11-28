@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributegroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateAttributeGroupResponse:
-    attribute_group: Optional[attributegroup.AttributeGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeGroup' }})
+    attribute_group: Optional[AttributeGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributeGroup') }})
     

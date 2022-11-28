@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAttributeNamespaceAttributeNameMetaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=attribute_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attribute_name" })
   attributeName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=namespace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace" })
   namespace: string;
 }
 
 
 export class PostAttributeNamespaceAttributeNameMetaSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class PostAttributeNamespaceAttributeNameMetaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostAttributeNamespaceAttributeNameMetaPathParams;
 
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   request: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostAttributeNamespaceAttributeNameMetaSecurity;
 }
 
 
 export class PostAttributeNamespaceAttributeNameMetaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -15,11 +15,6 @@ type ProductReviewsHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type ProductReviewsRequest struct {
-	QueryParams ProductReviewsQueryParams
-	Headers     ProductReviewsHeaders
-}
-
 type ProductReviews200ApplicationJSON struct {
 	Data             []shared.ReviewObject  `json:"data,omitempty"`
 	DateStamp        *string                `json:"dateStamp,omitempty"`
@@ -34,6 +29,11 @@ type ProductReviews200ApplicationJSON struct {
 	Success          *bool                  `json:"success,omitempty"`
 	TotalCount       *int64                 `json:"totalCount,omitempty"`
 	Vmid             *string                `json:"vmid,omitempty"`
+}
+
+type ProductReviewsRequest struct {
+	QueryParams ProductReviewsQueryParams
+	Headers     ProductReviewsHeaders
 }
 
 type ProductReviewsResponse struct {

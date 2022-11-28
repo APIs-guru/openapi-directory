@@ -1,5 +1,7 @@
 package shared
 
+// HumanTaskConfig
+// Information required for human workers to complete a labeling task.
 type HumanTaskConfig struct {
 	AnnotationConsolidationConfig     AnnotationConsolidationConfig `json:"AnnotationConsolidationConfig"`
 	MaxConcurrentTaskCount            *int64                        `json:"MaxConcurrentTaskCount,omitempty"`

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAttributesComputedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=all" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" })
   all?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" })
   groupId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=refresh" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=refresh" })
   refresh?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: number;
 }
 
 
 export class GetAttributesComputedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAttributesComputedQueryParams;
 }
 
 
 export class GetAttributesComputedResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Attribute })
+  @SpeakeasyMetadata({ elemType: shared.Attribute })
   attributes?: shared.Attribute[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

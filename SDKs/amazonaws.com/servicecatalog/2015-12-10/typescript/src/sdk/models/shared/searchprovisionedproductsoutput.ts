@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductAttribute } from "./provisionedproductattribute";
 
 
+
 export class SearchProvisionedProductsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=ProvisionedProducts", elemType: shared.ProvisionedProductAttribute })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProducts", elemType: ProvisionedProductAttribute })
   provisionedProducts?: ProvisionedProductAttribute[];
 
-  @Metadata({ data: "json, name=TotalResultsCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalResultsCount" })
   totalResultsCount?: number;
 }

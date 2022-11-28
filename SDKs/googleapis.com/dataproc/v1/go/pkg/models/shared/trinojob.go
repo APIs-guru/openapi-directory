@@ -1,5 +1,7 @@
 package shared
 
+// TrinoJob
+// A Dataproc job for running Trino (https://trino.io/) queries. IMPORTANT: The Dataproc Trino Optional Component (https://cloud.google.com/dataproc/docs/concepts/components/trino) must be enabled when the cluster is created to submit a Trino job to the cluster.
 type TrinoJob struct {
 	ClientTags        []string          `json:"clientTags,omitempty"`
 	ContinueOnFailure *bool             `json:"continueOnFailure,omitempty"`

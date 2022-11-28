@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteCrmV3ExtensionsCardsAppIdCardIdArchivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cardId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cardId" })
   cardId: string;
 }
 
 
 export class DeleteCrmV3ExtensionsCardsAppIdCardIdArchiveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class DeleteCrmV3ExtensionsCardsAppIdCardIdArchiveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteCrmV3ExtensionsCardsAppIdCardIdArchivePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteCrmV3ExtensionsCardsAppIdCardIdArchiveSecurity;
 }
 
 
 export class DeleteCrmV3ExtensionsCardsAppIdCardIdArchiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

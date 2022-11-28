@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Webhook = /** @class */ (function (_super) {
     __extends(Webhook, _super);
     function Webhook() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=active" }),
+        SpeakeasyMetadata({ data: "json, name=active" }),
         __metadata("design:type", Boolean)
     ], Webhook.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactEmailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=contactEmailAddress" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "contactEmailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Webhook.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=onWebApp" }),
+        SpeakeasyMetadata({ data: "json, name=onWebApp" }),
         __metadata("design:type", Boolean)
     ], Webhook.prototype, "onWebApp", void 0);
     __decorate([
-        Metadata({ data: "json, name=triggerScope" }),
+        SpeakeasyMetadata({ data: "json, name=triggerScope" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "triggerScope", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "url", void 0);
     return Webhook;

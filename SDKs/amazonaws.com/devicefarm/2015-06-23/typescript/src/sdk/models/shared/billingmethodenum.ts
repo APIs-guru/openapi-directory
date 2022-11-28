@@ -1,6 +1,7 @@
 
 
+
 export enum BillingMethodEnum {
-    Metered = "METERED"
-,    Unmetered = "UNMETERED"
+    Metered = "METERED",
+    Unmetered = "UNMETERED"
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUploadServerCertificateActionEnum(str, Enum):
     UPLOAD_SERVER_CERTIFICATE = "UploadServerCertificate"
@@ -10,8 +14,8 @@ class PostUploadServerCertificateVersionEnum(str, Enum):
 
 @dataclass
 class PostUploadServerCertificateQueryParams:
-    action: PostUploadServerCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUploadServerCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUploadServerCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUploadServerCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUploadServerCertificateHeaders:
 
 @dataclass
 class PostUploadServerCertificateRequest:
-    query_params: PostUploadServerCertificateQueryParams = field(default=None)
-    headers: PostUploadServerCertificateHeaders = field(default=None)
+    headers: PostUploadServerCertificateHeaders = field()
+    query_params: PostUploadServerCertificateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUploadServerCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

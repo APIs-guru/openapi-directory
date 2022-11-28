@@ -1,7 +1,8 @@
 
 
+
 export enum NotebookInstanceSortKeyEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
-,    Status = "Status"
+    Name = "Name",
+    CreationTime = "CreationTime",
+    Status = "Status"
 }

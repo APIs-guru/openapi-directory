@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceIdentity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata service. For more information, see <a href="https://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html">Instance Metadata and User Data</a>.
 **/
 export class InstanceIdentity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Document" })
+  @SpeakeasyMetadata({ data: "json, name=Document" })
   document?: string;
 
-  @Metadata({ data: "json, name=Signature" })
+  @SpeakeasyMetadata({ data: "json, name=Signature" })
   signature?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRetrieveEnvironmentInfoActionEnum(str, Enum):
     RETRIEVE_ENVIRONMENT_INFO = "RetrieveEnvironmentInfo"
@@ -10,8 +14,8 @@ class PostRetrieveEnvironmentInfoVersionEnum(str, Enum):
 
 @dataclass
 class PostRetrieveEnvironmentInfoQueryParams:
-    action: PostRetrieveEnvironmentInfoActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRetrieveEnvironmentInfoVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRetrieveEnvironmentInfoActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRetrieveEnvironmentInfoVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRetrieveEnvironmentInfoHeaders:
 
 @dataclass
 class PostRetrieveEnvironmentInfoRequest:
-    query_params: PostRetrieveEnvironmentInfoQueryParams = field(default=None)
-    headers: PostRetrieveEnvironmentInfoHeaders = field(default=None)
+    headers: PostRetrieveEnvironmentInfoHeaders = field()
+    query_params: PostRetrieveEnvironmentInfoQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRetrieveEnvironmentInfoResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

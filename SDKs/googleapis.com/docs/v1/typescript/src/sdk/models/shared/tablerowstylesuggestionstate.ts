@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TableRowStyleSuggestionState
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A mask that indicates which of the fields on the base TableRowStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class TableRowStyleSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=minRowHeightSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=minRowHeightSuggested" })
   minRowHeightSuggested?: boolean;
 }

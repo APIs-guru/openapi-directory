@@ -1,127 +1,109 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AbsenceEntitlement } from "./absenceentitlement";
 import { Attribute } from "./attribute";
 import { CostCenters } from "./costcenters";
-import { Attribute } from "./attribute";
 import { Department } from "./department";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
 import { HolidayCalendar } from "./holidaycalendar";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
 import { Office } from "./office";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
 import { Supervisor } from "./supervisor";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
-import { Attribute } from "./attribute";
 import { WorkSchedule } from "./workschedule";
 
 
+
 export class EmployeesResponseDataAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absence_entitlement" })
+  @SpeakeasyMetadata({ data: "json, name=absence_entitlement" })
   absenceEntitlement?: AbsenceEntitlement;
 
-  @Metadata({ data: "json, name=contract_end_date" })
+  @SpeakeasyMetadata({ data: "json, name=contract_end_date" })
   contractEndDate?: Attribute;
 
-  @Metadata({ data: "json, name=cost_centers" })
+  @SpeakeasyMetadata({ data: "json, name=cost_centers" })
   costCenters?: CostCenters;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Attribute;
 
-  @Metadata({ data: "json, name=department" })
+  @SpeakeasyMetadata({ data: "json, name=department" })
   department?: Department;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: Attribute;
 
-  @Metadata({ data: "json, name=employment_type" })
+  @SpeakeasyMetadata({ data: "json, name=employment_type" })
   employmentType?: Attribute;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: Attribute;
 
-  @Metadata({ data: "json, name=fix_salary" })
+  @SpeakeasyMetadata({ data: "json, name=fix_salary" })
   fixSalary?: Attribute;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: Attribute;
 
-  @Metadata({ data: "json, name=hire_date" })
+  @SpeakeasyMetadata({ data: "json, name=hire_date" })
   hireDate?: Attribute;
 
-  @Metadata({ data: "json, name=holiday_calendar" })
+  @SpeakeasyMetadata({ data: "json, name=holiday_calendar" })
   holidayCalendar?: HolidayCalendar;
 
-  @Metadata({ data: "json, name=hourly_salary" })
+  @SpeakeasyMetadata({ data: "json, name=hourly_salary" })
   hourlySalary?: Attribute;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: Attribute;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: Attribute;
 
-  @Metadata({ data: "json, name=office" })
+  @SpeakeasyMetadata({ data: "json, name=office" })
   office?: Office;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: Attribute;
 
-  @Metadata({ data: "json, name=probation_period_end" })
+  @SpeakeasyMetadata({ data: "json, name=probation_period_end" })
   probationPeriodEnd?: Attribute;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: Attribute;
 
-  @Metadata({ data: "json, name=supervisor" })
+  @SpeakeasyMetadata({ data: "json, name=supervisor" })
   supervisor?: Supervisor;
 
-  @Metadata({ data: "json, name=termination_date" })
+  @SpeakeasyMetadata({ data: "json, name=termination_date" })
   terminationDate?: Attribute;
 
-  @Metadata({ data: "json, name=termination_reason" })
+  @SpeakeasyMetadata({ data: "json, name=termination_reason" })
   terminationReason?: Attribute;
 
-  @Metadata({ data: "json, name=termination_type" })
+  @SpeakeasyMetadata({ data: "json, name=termination_type" })
   terminationType?: Attribute;
 
-  @Metadata({ data: "json, name=vacation_day_balance" })
+  @SpeakeasyMetadata({ data: "json, name=vacation_day_balance" })
   vacationDayBalance?: Attribute;
 
-  @Metadata({ data: "json, name=weekly_working_hours" })
+  @SpeakeasyMetadata({ data: "json, name=weekly_working_hours" })
   weeklyWorkingHours?: Attribute;
 
-  @Metadata({ data: "json, name=work_schedule" })
+  @SpeakeasyMetadata({ data: "json, name=work_schedule" })
   workSchedule?: WorkSchedule;
 }
 
 
 export class EmployeesResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.EmployeesResponseDataAttributes })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: EmployeesResponseDataAttributes })
   attributes: EmployeesResponseDataAttributes[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class EmployeesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.EmployeesResponseData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: EmployeesResponseData })
   data: EmployeesResponseData[];
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success: boolean;
 }

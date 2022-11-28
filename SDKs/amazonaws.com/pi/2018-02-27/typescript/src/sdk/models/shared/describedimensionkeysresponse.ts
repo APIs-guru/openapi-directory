@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionKeyDescription } from "./dimensionkeydescription";
 import { ResponsePartitionKey } from "./responsepartitionkey";
 
 
+
 export class DescribeDimensionKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlignedEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=AlignedEndTime" })
   alignedEndTime?: Date;
 
-  @Metadata({ data: "json, name=AlignedStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=AlignedStartTime" })
   alignedStartTime?: Date;
 
-  @Metadata({ data: "json, name=Keys", elemType: shared.DimensionKeyDescription })
+  @SpeakeasyMetadata({ data: "json, name=Keys", elemType: DimensionKeyDescription })
   keys?: DimensionKeyDescription[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=PartitionKeys", elemType: shared.ResponsePartitionKey })
+  @SpeakeasyMetadata({ data: "json, name=PartitionKeys", elemType: ResponsePartitionKey })
   partitionKeys?: ResponsePartitionKey[];
 }

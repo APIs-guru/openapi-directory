@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetTransitGatewayAttachmentPropagationsActionEnum(str, Enum):
     GET_TRANSIT_GATEWAY_ATTACHMENT_PROPAGATIONS = "GetTransitGatewayAttachmentPropagations"
@@ -10,10 +14,10 @@ class PostGetTransitGatewayAttachmentPropagationsVersionEnum(str, Enum):
 
 @dataclass
 class PostGetTransitGatewayAttachmentPropagationsQueryParams:
-    action: PostGetTransitGatewayAttachmentPropagationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostGetTransitGatewayAttachmentPropagationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetTransitGatewayAttachmentPropagationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostGetTransitGatewayAttachmentPropagationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostGetTransitGatewayAttachmentPropagationsHeaders:
 
 @dataclass
 class PostGetTransitGatewayAttachmentPropagationsRequest:
-    query_params: PostGetTransitGatewayAttachmentPropagationsQueryParams = field(default=None)
-    headers: PostGetTransitGatewayAttachmentPropagationsHeaders = field(default=None)
+    headers: PostGetTransitGatewayAttachmentPropagationsHeaders = field()
+    query_params: PostGetTransitGatewayAttachmentPropagationsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetTransitGatewayAttachmentPropagationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,10 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DatasetAction } from "./datasetaction";
+import { DatasetContentDeliveryRule } from "./datasetcontentdeliveryrule";
+import { LateDataRule } from "./latedatarule";
 import { RetentionPeriod } from "./retentionperiod";
 import { DatasetStatusEnum } from "./datasetstatusenum";
+import { DatasetTrigger } from "./datasettrigger";
 import { VersioningConfiguration } from "./versioningconfiguration";
 // Dataset
 /**
@@ -37,47 +40,47 @@ var Dataset = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actions", elemType: shared.DatasetAction }),
+        SpeakeasyMetadata({ data: "json, name=actions", elemType: DatasetAction }),
         __metadata("design:type", Array)
     ], Dataset.prototype, "actions", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Dataset.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=contentDeliveryRules", elemType: shared.DatasetContentDeliveryRule }),
+        SpeakeasyMetadata({ data: "json, name=contentDeliveryRules", elemType: DatasetContentDeliveryRule }),
         __metadata("design:type", Array)
     ], Dataset.prototype, "contentDeliveryRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], Dataset.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], Dataset.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lateDataRules", elemType: shared.LateDataRule }),
+        SpeakeasyMetadata({ data: "json, name=lateDataRules", elemType: LateDataRule }),
         __metadata("design:type", Array)
     ], Dataset.prototype, "lateDataRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Dataset.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=retentionPeriod" }),
         __metadata("design:type", RetentionPeriod)
     ], Dataset.prototype, "retentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Dataset.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=triggers", elemType: shared.DatasetTrigger }),
+        SpeakeasyMetadata({ data: "json, name=triggers", elemType: DatasetTrigger }),
         __metadata("design:type", Array)
     ], Dataset.prototype, "triggers", void 0);
     __decorate([
-        Metadata({ data: "json, name=versioningConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=versioningConfiguration" }),
         __metadata("design:type", VersioningConfiguration)
     ], Dataset.prototype, "versioningConfiguration", void 0);
     return Dataset;

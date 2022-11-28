@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MaintenanceWindow
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Maintenance window for managed Google Play Accounts. This allows Play store to update the apps on the foreground in the designated window.
 **/
 export class MaintenanceWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=durationMs" })
+  @SpeakeasyMetadata({ data: "json, name=durationMs" })
   durationMs?: string;
 
-  @Metadata({ data: "json, name=startTimeAfterMidnightMs" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeAfterMidnightMs" })
   startTimeAfterMidnightMs?: string;
 }

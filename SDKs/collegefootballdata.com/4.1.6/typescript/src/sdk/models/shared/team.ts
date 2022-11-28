@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TeamLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity?: number;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country_code" })
+  @SpeakeasyMetadata({ data: "json, name=country_code" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=dome" })
+  @SpeakeasyMetadata({ data: "json, name=dome" })
   dome?: boolean;
 
-  @Metadata({ data: "json, name=elevation" })
+  @SpeakeasyMetadata({ data: "json, name=elevation" })
   elevation?: number;
 
-  @Metadata({ data: "json, name=grass" })
+  @SpeakeasyMetadata({ data: "json, name=grass" })
   grass?: boolean;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 
-  @Metadata({ data: "json, name=venue_id" })
+  @SpeakeasyMetadata({ data: "json, name=venue_id" })
   venueId?: number;
 
-  @Metadata({ data: "json, name=year_constructed" })
+  @SpeakeasyMetadata({ data: "json, name=year_constructed" })
   yearConstructed?: number;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }
 
 
 export class Team extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=alt_color" })
+  @SpeakeasyMetadata({ data: "json, name=alt_color" })
   altColor?: string;
 
-  @Metadata({ data: "json, name=alt_name_1" })
+  @SpeakeasyMetadata({ data: "json, name=alt_name_1" })
   altName1?: string;
 
-  @Metadata({ data: "json, name=alt_name_2" })
+  @SpeakeasyMetadata({ data: "json, name=alt_name_2" })
   altName2?: string;
 
-  @Metadata({ data: "json, name=alt_name_3" })
+  @SpeakeasyMetadata({ data: "json, name=alt_name_3" })
   altName3?: string;
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=conference" })
+  @SpeakeasyMetadata({ data: "json, name=conference" })
   conference?: string;
 
-  @Metadata({ data: "json, name=division" })
+  @SpeakeasyMetadata({ data: "json, name=division" })
   division?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: TeamLocation;
 
-  @Metadata({ data: "json, name=logos" })
+  @SpeakeasyMetadata({ data: "json, name=logos" })
   logos?: string[];
 
-  @Metadata({ data: "json, name=mascot" })
+  @SpeakeasyMetadata({ data: "json, name=mascot" })
   mascot?: string;
 
-  @Metadata({ data: "json, name=school" })
+  @SpeakeasyMetadata({ data: "json, name=school" })
   school?: string;
 }

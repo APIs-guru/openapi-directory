@@ -8,11 +8,6 @@ type PostDatabaseTestConnectionSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostDatabaseTestConnectionRequest struct {
-	Request  shared.DatabaseTestConnectionSchema `request:"mediaType=application/json"`
-	Security PostDatabaseTestConnectionSecurity
-}
-
 type PostDatabaseTestConnection200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -27,6 +22,11 @@ type PostDatabaseTestConnection422ApplicationJSON struct {
 
 type PostDatabaseTestConnection500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostDatabaseTestConnectionRequest struct {
+	Request  shared.DatabaseTestConnectionSchema `request:"mediaType=application/json"`
+	Security PostDatabaseTestConnectionSecurity
 }
 
 type PostDatabaseTestConnectionResponse struct {

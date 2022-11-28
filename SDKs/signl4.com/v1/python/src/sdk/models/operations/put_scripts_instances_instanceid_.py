@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutScriptsInstancesInstanceIDPathParams:
-    instance_id: str = field(default=None, metadata={'path_param': { 'field_name': 'instanceId', 'style': 'simple', 'explode': False }})
+    instance_id: str = field(metadata={'path_param': { 'field_name': 'instanceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +18,15 @@ class PutScriptsInstancesInstanceIDRequests:
 
 @dataclass
 class PutScriptsInstancesInstanceIDRequest:
-    path_params: PutScriptsInstancesInstanceIDPathParams = field(default=None)
+    path_params: PutScriptsInstancesInstanceIDPathParams = field()
     request: Optional[PutScriptsInstancesInstanceIDRequests] = field(default=None)
     
 
 @dataclass
 class PutScriptsInstancesInstanceIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
     script_instance_details: Optional[shared.ScriptInstanceDetails] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleMapsPlayablelocationsV3SamplePlayableLocation
+// A geographical point suitable for placing game objects in location-based games.
 type GoogleMapsPlayablelocationsV3SamplePlayableLocation struct {
 	CenterPoint  *GoogleTypeLatLng `json:"centerPoint,omitempty"`
 	Name         *string           `json:"name,omitempty"`

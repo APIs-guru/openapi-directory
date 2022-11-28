@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PipelineObject } from "./pipelineobject";
 // TaskObject
 /**
  * Contains information about a pipeline task that is assigned to a task runner.
@@ -34,19 +34,19 @@ var TaskObject = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attemptId" }),
+        SpeakeasyMetadata({ data: "json, name=attemptId" }),
         __metadata("design:type", String)
     ], TaskObject.prototype, "attemptId", void 0);
     __decorate([
-        Metadata({ data: "json, name=objects", elemType: shared.PipelineObject }),
+        SpeakeasyMetadata({ data: "json, name=objects", elemType: PipelineObject }),
         __metadata("design:type", Map)
     ], TaskObject.prototype, "objects", void 0);
     __decorate([
-        Metadata({ data: "json, name=pipelineId" }),
+        SpeakeasyMetadata({ data: "json, name=pipelineId" }),
         __metadata("design:type", String)
     ], TaskObject.prototype, "pipelineId", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskId" }),
+        SpeakeasyMetadata({ data: "json, name=taskId" }),
         __metadata("design:type", String)
     ], TaskObject.prototype, "taskId", void 0);
     return TaskObject;

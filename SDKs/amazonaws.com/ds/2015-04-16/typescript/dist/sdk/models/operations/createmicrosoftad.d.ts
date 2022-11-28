@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateMicrosoftAdxAmzTargetEnum {
     DirectoryService20150416CreateMicrosoftAd = "DirectoryService_20150416.CreateMicrosoftAD"

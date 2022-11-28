@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiVVersionMetalsSpotHistoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class GetApiVVersionMetalsSpotHistoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currency" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currency" })
   currency?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" })
   end?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: shared.ResponseFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=historicalfx" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=historicalfx" })
   historicalfx?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=interval" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=interval" })
   interval?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=metals" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=metals" })
   metals: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unitofmeasure" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitofmeasure" })
   unitofmeasure?: shared.UnitOfMeasureEnum;
 }
 
 
 export class GetApiVVersionMetalsSpotHistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiVVersionMetalsSpotHistoryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiVVersionMetalsSpotHistoryQueryParams;
 }
 
 
 export class GetApiVVersionMetalsSpotHistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.IntervalCollectionResponse })
+  @SpeakeasyMetadata({ elemType: shared.IntervalCollectionResponse })
   intervalCollectionResponses?: shared.IntervalCollectionResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

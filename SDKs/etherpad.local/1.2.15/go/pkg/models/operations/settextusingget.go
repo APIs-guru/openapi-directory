@@ -5,10 +5,6 @@ type SetTextUsingGetQueryParams struct {
 	Text  *string `queryParam:"style=form,explode=true,name=text"`
 }
 
-type SetTextUsingGetRequest struct {
-	QueryParams SetTextUsingGetQueryParams
-}
-
 type SetTextUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type SetTextUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type SetTextUsingGetRequest struct {
+	QueryParams SetTextUsingGetQueryParams
 }
 
 type SetTextUsingGetResponse struct {

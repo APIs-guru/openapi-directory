@@ -19,6 +19,8 @@ const (
 	CustomBiddingModelDetailsSuspensionStateEnumSuspensionStateSuspended   CustomBiddingModelDetailsSuspensionStateEnum = "SUSPENSION_STATE_SUSPENDED"
 )
 
+// CustomBiddingModelDetails
+// The details of a custom bidding algorithm model for a single shared advertiser.
 type CustomBiddingModelDetails struct {
 	AdvertiserID    *string                                       `json:"advertiserId,omitempty"`
 	ReadinessState  *CustomBiddingModelDetailsReadinessStateEnum  `json:"readinessState,omitempty"`

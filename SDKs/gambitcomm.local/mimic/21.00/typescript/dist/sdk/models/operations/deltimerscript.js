@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DelTimerScriptPathParams = /** @class */ (function (_super) {
     __extends(DelTimerScriptPathParams, _super);
     function DelTimerScriptPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], DelTimerScriptPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=arg" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=arg" }),
         __metadata("design:type", String)
     ], DelTimerScriptPathParams.prototype, "arg", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=interval" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interval" }),
         __metadata("design:type", Number)
     ], DelTimerScriptPathParams.prototype, "interval", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=script" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=script" }),
         __metadata("design:type", String)
     ], DelTimerScriptPathParams.prototype, "script", void 0);
     return DelTimerScriptPathParams;
@@ -53,7 +53,7 @@ var DelTimerScriptRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DelTimerScriptPathParams)
     ], DelTimerScriptRequest.prototype, "pathParams", void 0);
     return DelTimerScriptRequest;
@@ -65,15 +65,15 @@ var DelTimerScriptResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DelTimerScriptResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DelTimerScriptResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DelTimerScriptResponse.prototype, "delTimerScript200ApplicationJsonString", void 0);
     return DelTimerScriptResponse;

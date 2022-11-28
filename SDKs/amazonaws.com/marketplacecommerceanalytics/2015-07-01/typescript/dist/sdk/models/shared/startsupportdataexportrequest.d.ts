@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SupportDataSetTypeEnum } from "./supportdatasettypeenum";
 /**
  * Container for the parameters to the StartSupportDataExport operation.

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BatchGetRecordError
 /**
  * The error that has occurred when attempting to retrieve a batch of Records.
@@ -33,19 +33,19 @@ var BatchGetRecordError = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ErrorCode" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorCode" }),
         __metadata("design:type", String)
     ], BatchGetRecordError.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMessage" }),
         __metadata("design:type", String)
     ], BatchGetRecordError.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=FeatureGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=FeatureGroupName" }),
         __metadata("design:type", String)
     ], BatchGetRecordError.prototype, "featureGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordIdentifierValueAsString" }),
+        SpeakeasyMetadata({ data: "json, name=RecordIdentifierValueAsString" }),
         __metadata("design:type", String)
     ], BatchGetRecordError.prototype, "recordIdentifierValueAsString", void 0);
     return BatchGetRecordError;

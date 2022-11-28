@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Color
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Color preprocessing configuration. **Note:** This configuration is not supported.
 **/
 export class Color extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brightness" })
+  @SpeakeasyMetadata({ data: "json, name=brightness" })
   brightness?: number;
 
-  @Metadata({ data: "json, name=contrast" })
+  @SpeakeasyMetadata({ data: "json, name=contrast" })
   contrast?: number;
 
-  @Metadata({ data: "json, name=saturation" })
+  @SpeakeasyMetadata({ data: "json, name=saturation" })
   saturation?: number;
 }

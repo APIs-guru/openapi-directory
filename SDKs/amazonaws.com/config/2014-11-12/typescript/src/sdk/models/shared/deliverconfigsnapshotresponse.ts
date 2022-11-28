@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeliverConfigSnapshotResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output for the <a>DeliverConfigSnapshot</a> action, in JSON format.
 **/
 export class DeliverConfigSnapshotResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configSnapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=configSnapshotId" })
   configSnapshotId?: string;
 }

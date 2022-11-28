@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BotAliasMetadata
+// Provides information about a bot alias.
 type BotAliasMetadata struct {
 	BotName          *string                   `json:"botName,omitempty"`
 	BotVersion       *string                   `json:"botVersion,omitempty"`

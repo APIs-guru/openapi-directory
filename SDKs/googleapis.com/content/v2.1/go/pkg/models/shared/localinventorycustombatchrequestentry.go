@@ -1,5 +1,7 @@
 package shared
 
+// LocalinventoryCustomBatchRequestEntry
+// Batch entry encoding a single local inventory update request.
 type LocalinventoryCustomBatchRequestEntry struct {
 	BatchID        *int64          `json:"batchId,omitempty"`
 	LocalInventory *LocalInventory `json:"localInventory,omitempty"`

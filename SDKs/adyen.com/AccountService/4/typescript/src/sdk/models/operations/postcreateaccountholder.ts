@@ -1,47 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class PostCreateAccountHolderSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basicAuth: shared.SchemeBasicAuth;
-}
-
-
-export class PostCreateAccountHolderSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKeyAuth: shared.SchemeApiKeyAuth;
-}
-
 
 export class PostCreateAccountHolderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostCreateAccountHolderSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basicAuth?: shared.SchemeBasicAuth;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostCreateAccountHolderSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 
 
 export class PostCreateAccountHolderRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostCreateAccountHolderSecurity;
 }
 
 
 export class PostCreateAccountHolderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAccountHolderResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

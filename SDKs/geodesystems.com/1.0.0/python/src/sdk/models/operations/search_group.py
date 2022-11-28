@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -28,11 +28,11 @@ class SearchGroupQueryParams:
 
 @dataclass
 class SearchGroupRequest:
-    query_params: SearchGroupQueryParams = field(default=None)
+    query_params: SearchGroupQueryParams = field()
     
 
 @dataclass
 class SearchGroupResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

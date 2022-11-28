@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PosixGroup
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * POSIX Group definition to represent a group in a POSIX compliant system.
 **/
 export class PosixGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=systemId" })
+  @SpeakeasyMetadata({ data: "json, name=systemId" })
   systemId?: string;
 }

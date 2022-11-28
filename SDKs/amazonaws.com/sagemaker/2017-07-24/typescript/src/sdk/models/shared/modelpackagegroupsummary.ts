@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelPackageGroupStatusEnum } from "./modelpackagegroupstatusenum";
+
 
 
 // ModelPackageGroupSummary
@@ -7,18 +8,18 @@ import { ModelPackageGroupStatusEnum } from "./modelpackagegroupstatusenum";
  * Summary information about a model group.
 **/
 export class ModelPackageGroupSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=ModelPackageGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageGroupArn" })
   modelPackageGroupArn: string;
 
-  @Metadata({ data: "json, name=ModelPackageGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageGroupDescription" })
   modelPackageGroupDescription?: string;
 
-  @Metadata({ data: "json, name=ModelPackageGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageGroupName" })
   modelPackageGroupName: string;
 
-  @Metadata({ data: "json, name=ModelPackageGroupStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageGroupStatus" })
   modelPackageGroupStatus: ModelPackageGroupStatusEnum;
 }

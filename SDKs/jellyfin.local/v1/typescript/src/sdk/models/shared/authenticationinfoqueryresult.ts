@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationInfo } from "./authenticationinfo";
 
 
+
 export class AuthenticationInfoQueryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.AuthenticationInfo })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: AuthenticationInfo })
   items?: AuthenticationInfo[];
 
-  @Metadata({ data: "json, name=StartIndex" })
+  @SpeakeasyMetadata({ data: "json, name=StartIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=TotalRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalRecordCount" })
   totalRecordCount?: number;
 }

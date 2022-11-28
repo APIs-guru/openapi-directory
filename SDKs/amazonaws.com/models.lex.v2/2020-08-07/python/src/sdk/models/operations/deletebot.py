@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteBotPathParams:
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +29,20 @@ class DeleteBotHeaders:
 
 @dataclass
 class DeleteBotRequest:
-    path_params: DeleteBotPathParams = field(default=None)
-    query_params: DeleteBotQueryParams = field(default=None)
-    headers: DeleteBotHeaders = field(default=None)
+    headers: DeleteBotHeaders = field()
+    path_params: DeleteBotPathParams = field()
+    query_params: DeleteBotQueryParams = field()
     
 
 @dataclass
 class DeleteBotResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_bot_response: Optional[shared.DeleteBotResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

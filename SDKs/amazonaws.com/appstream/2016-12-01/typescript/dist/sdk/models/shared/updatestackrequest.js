@@ -22,60 +22,62 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AccessEndpoint } from "./accessendpoint";
 import { ApplicationSettings } from "./applicationsettings";
+import { StorageConnector } from "./storageconnector";
+import { UserSetting } from "./usersetting";
 var UpdateStackRequest = /** @class */ (function (_super) {
     __extends(UpdateStackRequest, _super);
     function UpdateStackRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessEndpoints", elemType: shared.AccessEndpoint }),
+        SpeakeasyMetadata({ data: "json, name=AccessEndpoints", elemType: AccessEndpoint }),
         __metadata("design:type", Array)
     ], UpdateStackRequest.prototype, "accessEndpoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationSettings" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationSettings" }),
         __metadata("design:type", ApplicationSettings)
     ], UpdateStackRequest.prototype, "applicationSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=AttributesToDelete" }),
+        SpeakeasyMetadata({ data: "json, name=AttributesToDelete" }),
         __metadata("design:type", Array)
     ], UpdateStackRequest.prototype, "attributesToDelete", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeleteStorageConnectors" }),
+        SpeakeasyMetadata({ data: "json, name=DeleteStorageConnectors" }),
         __metadata("design:type", Boolean)
     ], UpdateStackRequest.prototype, "deleteStorageConnectors", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateStackRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], UpdateStackRequest.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmbedHostDomains" }),
+        SpeakeasyMetadata({ data: "json, name=EmbedHostDomains" }),
         __metadata("design:type", Array)
     ], UpdateStackRequest.prototype, "embedHostDomains", void 0);
     __decorate([
-        Metadata({ data: "json, name=FeedbackURL" }),
+        SpeakeasyMetadata({ data: "json, name=FeedbackURL" }),
         __metadata("design:type", String)
     ], UpdateStackRequest.prototype, "feedbackUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], UpdateStackRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RedirectURL" }),
+        SpeakeasyMetadata({ data: "json, name=RedirectURL" }),
         __metadata("design:type", String)
     ], UpdateStackRequest.prototype, "redirectUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=StorageConnectors", elemType: shared.StorageConnector }),
+        SpeakeasyMetadata({ data: "json, name=StorageConnectors", elemType: StorageConnector }),
         __metadata("design:type", Array)
     ], UpdateStackRequest.prototype, "storageConnectors", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserSettings", elemType: shared.UserSetting }),
+        SpeakeasyMetadata({ data: "json, name=UserSettings", elemType: UserSetting }),
         __metadata("design:type", Array)
     ], UpdateStackRequest.prototype, "userSettings", void 0);
     return UpdateStackRequest;

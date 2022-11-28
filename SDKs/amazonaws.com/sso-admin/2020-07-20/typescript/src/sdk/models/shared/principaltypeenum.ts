@@ -1,6 +1,7 @@
 
 
+
 export enum PrincipalTypeEnum {
-    User = "USER"
-,    Group = "GROUP"
+    User = "USER",
+    Group = "GROUP"
 }

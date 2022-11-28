@@ -6,3 +6,9 @@ type Rir struct {
 	Name      string `json:"name"`
 	Slug      string `json:"slug"`
 }
+
+type RirInput struct {
+	IsPrivate *bool  `json:"is_private,omitempty"`
+	Name      string `json:"name"`
+	Slug      string `json:"slug"`
+}

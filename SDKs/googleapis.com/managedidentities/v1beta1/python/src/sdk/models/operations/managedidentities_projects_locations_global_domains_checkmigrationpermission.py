@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionPathParams:
-    domain: str = field(default=None, metadata={'path_param': { 'field_name': 'domain', 'style': 'simple', 'explode': False }})
+    domain: str = field(metadata={'path_param': { 'field_name': 'domain', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionQue
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionRequest:
-    path_params: ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionPathParams = field(default=None)
-    query_params: ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionQueryParams = field(default=None)
+    path_params: ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionPathParams = field()
+    query_params: ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionQueryParams = field()
+    security: ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionSecurity = field(default=None)
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermissionResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_migration_permission_response: Optional[shared.CheckMigrationPermissionResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

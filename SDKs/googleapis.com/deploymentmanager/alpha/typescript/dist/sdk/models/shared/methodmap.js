@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MethodMap
 /**
  * Deployment Manager will call these methods during the events of creation/deletion/update/get/setIamPolicy
@@ -33,23 +33,23 @@ var MethodMap = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=create" }),
+        SpeakeasyMetadata({ data: "json, name=create" }),
         __metadata("design:type", String)
     ], MethodMap.prototype, "create", void 0);
     __decorate([
-        Metadata({ data: "json, name=delete" }),
+        SpeakeasyMetadata({ data: "json, name=delete" }),
         __metadata("design:type", String)
     ], MethodMap.prototype, "delete", void 0);
     __decorate([
-        Metadata({ data: "json, name=get" }),
+        SpeakeasyMetadata({ data: "json, name=get" }),
         __metadata("design:type", String)
     ], MethodMap.prototype, "get", void 0);
     __decorate([
-        Metadata({ data: "json, name=setIamPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=setIamPolicy" }),
         __metadata("design:type", String)
     ], MethodMap.prototype, "setIamPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=update" }),
+        SpeakeasyMetadata({ data: "json, name=update" }),
         __metadata("design:type", String)
     ], MethodMap.prototype, "update", void 0);
     return MethodMap;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AuthorizationAttemptInfoFailureReasonEnum;
 (function (AuthorizationAttemptInfoFailureReasonEnum) {
     AuthorizationAttemptInfoFailureReasonEnum["FailureReasonUnspecified"] = "FAILURE_REASON_UNSPECIFIED";
@@ -47,19 +47,19 @@ var AuthorizationAttemptInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=details" }),
+        SpeakeasyMetadata({ data: "json, name=details" }),
         __metadata("design:type", String)
     ], AuthorizationAttemptInfo.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], AuthorizationAttemptInfo.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], AuthorizationAttemptInfo.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], AuthorizationAttemptInfo.prototype, "state", void 0);
     return AuthorizationAttemptInfo;

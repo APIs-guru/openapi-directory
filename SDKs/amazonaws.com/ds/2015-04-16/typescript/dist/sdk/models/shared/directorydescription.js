@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectoryConnectSettingsDescription } from "./directoryconnectsettingsdescription";
 import { DirectoryEditionEnum } from "./directoryeditionenum";
 import { OwnerDirectoryDescription } from "./ownerdirectorydescription";
@@ -45,103 +45,103 @@ var DirectoryDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessUrl" }),
+        SpeakeasyMetadata({ data: "json, name=AccessUrl" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "accessUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=Alias" }),
+        SpeakeasyMetadata({ data: "json, name=Alias" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "alias", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectSettings" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectSettings" }),
         __metadata("design:type", DirectoryConnectSettingsDescription)
     ], DirectoryDescription.prototype, "connectSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DesiredNumberOfDomainControllers" }),
+        SpeakeasyMetadata({ data: "json, name=DesiredNumberOfDomainControllers" }),
         __metadata("design:type", Number)
     ], DirectoryDescription.prototype, "desiredNumberOfDomainControllers", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DnsIpAddrs" }),
+        SpeakeasyMetadata({ data: "json, name=DnsIpAddrs" }),
         __metadata("design:type", Array)
     ], DirectoryDescription.prototype, "dnsIpAddrs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Edition" }),
+        SpeakeasyMetadata({ data: "json, name=Edition" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "edition", void 0);
     __decorate([
-        Metadata({ data: "json, name=LaunchTime" }),
+        SpeakeasyMetadata({ data: "json, name=LaunchTime" }),
         __metadata("design:type", Date)
     ], DirectoryDescription.prototype, "launchTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwnerDirectoryDescription" }),
+        SpeakeasyMetadata({ data: "json, name=OwnerDirectoryDescription" }),
         __metadata("design:type", OwnerDirectoryDescription)
     ], DirectoryDescription.prototype, "ownerDirectoryDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=RadiusSettings" }),
+        SpeakeasyMetadata({ data: "json, name=RadiusSettings" }),
         __metadata("design:type", RadiusSettings)
     ], DirectoryDescription.prototype, "radiusSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=RadiusStatus" }),
+        SpeakeasyMetadata({ data: "json, name=RadiusStatus" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "radiusStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegionsInfo" }),
+        SpeakeasyMetadata({ data: "json, name=RegionsInfo" }),
         __metadata("design:type", RegionsInfo)
     ], DirectoryDescription.prototype, "regionsInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareMethod" }),
+        SpeakeasyMetadata({ data: "json, name=ShareMethod" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "shareMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareNotes" }),
+        SpeakeasyMetadata({ data: "json, name=ShareNotes" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "shareNotes", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ShareStatus" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "shareStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShortName" }),
+        SpeakeasyMetadata({ data: "json, name=ShortName" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "shortName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Size" }),
+        SpeakeasyMetadata({ data: "json, name=Size" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=SsoEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=SsoEnabled" }),
         __metadata("design:type", Boolean)
     ], DirectoryDescription.prototype, "ssoEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=Stage" }),
+        SpeakeasyMetadata({ data: "json, name=Stage" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "stage", void 0);
     __decorate([
-        Metadata({ data: "json, name=StageLastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=StageLastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], DirectoryDescription.prototype, "stageLastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=StageReason" }),
+        SpeakeasyMetadata({ data: "json, name=StageReason" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "stageReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], DirectoryDescription.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcSettings" }),
+        SpeakeasyMetadata({ data: "json, name=VpcSettings" }),
         __metadata("design:type", DirectoryVpcSettingsDescription)
     ], DirectoryDescription.prototype, "vpcSettings", void 0);
     return DirectoryDescription;

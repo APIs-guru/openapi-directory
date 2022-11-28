@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MeshRef
+// An object that represents a service mesh returned by a list operation.
 type MeshRef struct {
 	Arn           string    `json:"arn"`
 	CreatedAt     time.Time `json:"createdAt"`

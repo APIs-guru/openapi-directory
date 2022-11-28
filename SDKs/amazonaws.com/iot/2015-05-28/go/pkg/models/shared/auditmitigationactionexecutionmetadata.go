@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AuditMitigationActionExecutionMetadata
+// Returned by ListAuditMitigationActionsTask, this object contains information that describes a mitigation action that has been started.
 type AuditMitigationActionExecutionMetadata struct {
 	ActionID   *string                                    `json:"actionId,omitempty"`
 	ActionName *string                                    `json:"actionName,omitempty"`

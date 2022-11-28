@@ -4,21 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetNotificationsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetNotificationsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetNotificationsSecurity struct {
-	Option1 *GetNotificationsSecurityOption1 `security:"option"`
-	Option2 *GetNotificationsSecurityOption2 `security:"option"`
-}
-
-type GetNotificationsRequest struct {
-	Security GetNotificationsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetNotifications200ApplicationJSON struct {
@@ -30,6 +18,10 @@ type GetNotifications200ApplicationJSON struct {
 
 type GetNotificationsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetNotificationsRequest struct {
+	Security GetNotificationsSecurity
 }
 
 type GetNotificationsResponse struct {

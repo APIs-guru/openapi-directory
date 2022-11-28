@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReservationAffinityConsumeReservationTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    NoReservation = "NO_RESERVATION"
-,    AnyReservation = "ANY_RESERVATION"
-,    SpecificReservation = "SPECIFIC_RESERVATION"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    NoReservation = "NO_RESERVATION",
+    AnyReservation = "ANY_RESERVATION",
+    SpecificReservation = "SPECIFIC_RESERVATION"
 }
 
 
@@ -13,12 +14,12 @@ export enum ReservationAffinityConsumeReservationTypeEnum {
  * Reservation Affinity for consuming Zonal reservation.
 **/
 export class ReservationAffinity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumeReservationType" })
+  @SpeakeasyMetadata({ data: "json, name=consumeReservationType" })
   consumeReservationType?: ReservationAffinityConsumeReservationTypeEnum;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

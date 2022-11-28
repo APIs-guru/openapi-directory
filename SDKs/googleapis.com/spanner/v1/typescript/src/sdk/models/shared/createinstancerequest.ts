@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Instance } from "./instance";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InstanceInput } from "./instance";
 
 
-// CreateInstanceRequest
+
+// CreateInstanceRequestInput
 /** 
  * The request for CreateInstance.
 **/
-export class CreateInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instance" })
-  instance?: Instance;
+export class CreateInstanceRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=instance" })
+  instance?: InstanceInput;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 }

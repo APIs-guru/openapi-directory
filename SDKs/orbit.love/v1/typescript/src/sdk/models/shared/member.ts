@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Member extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bio" })
+  @SpeakeasyMetadata({ data: "json, name=bio" })
   bio?: string;
 
-  @Metadata({ data: "json, name=birthday" })
+  @SpeakeasyMetadata({ data: "json, name=birthday" })
   birthday?: string;
 
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: string;
 
-  @Metadata({ data: "json, name=devto" })
+  @SpeakeasyMetadata({ data: "json, name=devto" })
   devto?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=github" })
+  @SpeakeasyMetadata({ data: "json, name=github" })
   github?: string;
 
-  @Metadata({ data: "json, name=linkedin" })
+  @SpeakeasyMetadata({ data: "json, name=linkedin" })
   linkedin?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pronouns" })
+  @SpeakeasyMetadata({ data: "json, name=pronouns" })
   pronouns?: string;
 
-  @Metadata({ data: "json, name=shipping_address" })
+  @SpeakeasyMetadata({ data: "json, name=shipping_address" })
   shippingAddress?: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug?: string;
 
-  @Metadata({ data: "json, name=tag_list" })
+  @SpeakeasyMetadata({ data: "json, name=tag_list" })
   tagList?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string;
 
-  @Metadata({ data: "json, name=tags_to_add" })
+  @SpeakeasyMetadata({ data: "json, name=tags_to_add" })
   tagsToAdd?: string;
 
-  @Metadata({ data: "json, name=teammate" })
+  @SpeakeasyMetadata({ data: "json, name=teammate" })
   teammate?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=tshirt" })
+  @SpeakeasyMetadata({ data: "json, name=tshirt" })
   tshirt?: string;
 
-  @Metadata({ data: "json, name=twitter" })
+  @SpeakeasyMetadata({ data: "json, name=twitter" })
   twitter?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

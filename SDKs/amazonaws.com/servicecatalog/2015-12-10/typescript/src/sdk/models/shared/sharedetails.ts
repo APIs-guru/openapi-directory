@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareError } from "./shareerror";
+
 
 
 // ShareDetails
@@ -8,9 +8,9 @@ import { ShareError } from "./shareerror";
  * Information about the portfolio share operation.
 **/
 export class ShareDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShareErrors", elemType: shared.ShareError })
+  @SpeakeasyMetadata({ data: "json, name=ShareErrors", elemType: ShareError })
   shareErrors?: ShareError[];
 
-  @Metadata({ data: "json, name=SuccessfulShares" })
+  @SpeakeasyMetadata({ data: "json, name=SuccessfulShares" })
   successfulShares?: string[];
 }

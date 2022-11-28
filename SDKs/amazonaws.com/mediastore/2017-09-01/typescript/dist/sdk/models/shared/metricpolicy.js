@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerLevelMetricsEnum } from "./containerlevelmetricsenum";
+import { MetricPolicyRule } from "./metricpolicyrule";
 // MetricPolicy
 /**
  * <p>The metric policy that is associated with the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include rules to define groups of objects that you want MediaStore to send object-level metrics for.</p> <p>To view examples of how to construct a metric policy for your use case, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html">Example Metric Policies</a>.</p>
@@ -35,11 +35,11 @@ var MetricPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContainerLevelMetrics" }),
+        SpeakeasyMetadata({ data: "json, name=ContainerLevelMetrics" }),
         __metadata("design:type", String)
     ], MetricPolicy.prototype, "containerLevelMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricPolicyRules", elemType: shared.MetricPolicyRule }),
+        SpeakeasyMetadata({ data: "json, name=MetricPolicyRules", elemType: MetricPolicyRule }),
         __metadata("design:type", Array)
     ], MetricPolicy.prototype, "metricPolicyRules", void 0);
     return MetricPolicy;

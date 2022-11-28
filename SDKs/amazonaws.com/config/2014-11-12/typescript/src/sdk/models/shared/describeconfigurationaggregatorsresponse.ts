@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationAggregator } from "./configurationaggregator";
 
 
+
 export class DescribeConfigurationAggregatorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationAggregators", elemType: shared.ConfigurationAggregator })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationAggregators", elemType: ConfigurationAggregator })
   configurationAggregators?: ConfigurationAggregator[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

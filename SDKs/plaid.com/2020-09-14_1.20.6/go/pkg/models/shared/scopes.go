@@ -1,5 +1,7 @@
 package shared
 
+// Scopes
+// The scopes object
 type Scopes struct {
 	Accounts      []AccountAccess        `json:"accounts,omitempty"`
 	NewAccounts   *bool                  `json:"new_accounts,omitempty"`

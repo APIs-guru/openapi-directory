@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import clientevent
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateClientEventRequest:
-    client_event: Optional[clientevent.ClientEvent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientEvent' }})
+    r"""CreateClientEventRequest
+    The report event request.
+    """
+    
+    client_event: Optional[ClientEvent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientEvent') }})
     

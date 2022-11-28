@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SandboxConfigTypeEnum {
-    Unspecified = "UNSPECIFIED"
-,    Gvisor = "GVISOR"
+    Unspecified = "UNSPECIFIED",
+    Gvisor = "GVISOR"
 }
 
 
@@ -11,9 +12,9 @@ export enum SandboxConfigTypeEnum {
  * SandboxConfig contains configurations of the sandbox to use for the node.
 **/
 export class SandboxConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sandboxType" })
+  @SpeakeasyMetadata({ data: "json, name=sandboxType" })
   sandboxType?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SandboxConfigTypeEnum;
 }

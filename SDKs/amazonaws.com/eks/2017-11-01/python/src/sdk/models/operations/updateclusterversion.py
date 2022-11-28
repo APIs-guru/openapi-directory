@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateClusterVersionPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class UpdateClusterVersionHeaders:
 @dataclass_json
 @dataclass
 class UpdateClusterVersionRequestBody:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
     
 
 @dataclass
 class UpdateClusterVersionRequest:
-    path_params: UpdateClusterVersionPathParams = field(default=None)
-    headers: UpdateClusterVersionHeaders = field(default=None)
-    request: UpdateClusterVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateClusterVersionHeaders = field()
+    path_params: UpdateClusterVersionPathParams = field()
+    request: UpdateClusterVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateClusterVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_cluster_version_response: Optional[shared.UpdateClusterVersionResponse] = field(default=None)
     

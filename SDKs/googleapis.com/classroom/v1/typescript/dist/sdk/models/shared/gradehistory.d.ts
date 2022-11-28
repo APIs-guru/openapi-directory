@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GradeHistoryGradeChangeTypeEnum {
     UnknownGradeChangeType = "UNKNOWN_GRADE_CHANGE_TYPE",
     DraftGradePointsEarnedChange = "DRAFT_GRADE_POINTS_EARNED_CHANGE",

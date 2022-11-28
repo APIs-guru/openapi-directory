@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyHostsActionEnum {
     ModifyHosts = "ModifyHosts"
 }
 
 export enum GetModifyHostsAutoPlacementEnum {
-    On = "on"
-,    Off = "off"
+    On = "on",
+    Off = "off"
 }
 
 export enum GetModifyHostsHostRecoveryEnum {
-    On = "on"
-,    Off = "off"
+    On = "on",
+    Off = "off"
 }
 
 export enum GetModifyHostsVersionEnum {
@@ -20,69 +21,69 @@ export enum GetModifyHostsVersionEnum {
 
 
 export class GetModifyHostsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyHostsActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AutoPlacement" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutoPlacement" })
   autoPlacement?: GetModifyHostsAutoPlacementEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HostId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HostId" })
   hostId: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HostRecovery" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HostRecovery" })
   hostRecovery?: GetModifyHostsHostRecoveryEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceFamily" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceFamily" })
   instanceFamily?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyHostsVersionEnum;
 }
 
 
 export class GetModifyHostsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyHostsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyHostsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyHostsHeaders;
 }
 
 
 export class GetModifyHostsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ClusterEndpoint } from "./clusterendpoint";
 import { StatusEnum } from "./statusenum";
 // Cluster
 /**
@@ -35,19 +35,19 @@ var Cluster = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterArn" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterArn" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "clusterArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterEndpoints", elemType: shared.ClusterEndpoint }),
+        SpeakeasyMetadata({ data: "json, name=ClusterEndpoints", elemType: ClusterEndpoint }),
         __metadata("design:type", Array)
     ], Cluster.prototype, "clusterEndpoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Cluster.prototype, "status", void 0);
     return Cluster;

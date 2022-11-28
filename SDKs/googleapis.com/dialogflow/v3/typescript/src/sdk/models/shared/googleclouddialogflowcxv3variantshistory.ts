@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3VersionVariants } from "./googleclouddialogflowcxv3versionvariants";
+
 
 
 // GoogleCloudDialogflowCxV3VariantsHistory
@@ -7,9 +8,9 @@ import { GoogleCloudDialogflowCxV3VersionVariants } from "./googleclouddialogflo
  * The history of variants update.
 **/
 export class GoogleCloudDialogflowCxV3VariantsHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=versionVariants" })
+  @SpeakeasyMetadata({ data: "json, name=versionVariants" })
   versionVariants?: GoogleCloudDialogflowCxV3VersionVariants;
 }

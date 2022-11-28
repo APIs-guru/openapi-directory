@@ -1,0 +1,23 @@
+export var ResourceTypeEnum;
+(function (ResourceTypeEnum) {
+    ResourceTypeEnum["ContainerService"] = "ContainerService";
+    ResourceTypeEnum["Instance"] = "Instance";
+    ResourceTypeEnum["StaticIp"] = "StaticIp";
+    ResourceTypeEnum["KeyPair"] = "KeyPair";
+    ResourceTypeEnum["InstanceSnapshot"] = "InstanceSnapshot";
+    ResourceTypeEnum["Domain"] = "Domain";
+    ResourceTypeEnum["PeeredVpc"] = "PeeredVpc";
+    ResourceTypeEnum["LoadBalancer"] = "LoadBalancer";
+    ResourceTypeEnum["LoadBalancerTlsCertificate"] = "LoadBalancerTlsCertificate";
+    ResourceTypeEnum["Disk"] = "Disk";
+    ResourceTypeEnum["DiskSnapshot"] = "DiskSnapshot";
+    ResourceTypeEnum["RelationalDatabase"] = "RelationalDatabase";
+    ResourceTypeEnum["RelationalDatabaseSnapshot"] = "RelationalDatabaseSnapshot";
+    ResourceTypeEnum["ExportSnapshotRecord"] = "ExportSnapshotRecord";
+    ResourceTypeEnum["CloudFormationStackRecord"] = "CloudFormationStackRecord";
+    ResourceTypeEnum["Alarm"] = "Alarm";
+    ResourceTypeEnum["ContactMethod"] = "ContactMethod";
+    ResourceTypeEnum["Distribution"] = "Distribution";
+    ResourceTypeEnum["Certificate"] = "Certificate";
+    ResourceTypeEnum["Bucket"] = "Bucket";
+})(ResourceTypeEnum || (ResourceTypeEnum = {}));

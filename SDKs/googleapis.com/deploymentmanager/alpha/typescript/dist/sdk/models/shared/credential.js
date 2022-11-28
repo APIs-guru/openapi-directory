@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicAuth } from "./basicauth";
 import { ServiceAccount } from "./serviceaccount";
 // Credential
@@ -35,15 +35,15 @@ var Credential = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=basicAuth" }),
+        SpeakeasyMetadata({ data: "json, name=basicAuth" }),
         __metadata("design:type", BasicAuth)
     ], Credential.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", ServiceAccount)
     ], Credential.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=useProjectDefault" }),
+        SpeakeasyMetadata({ data: "json, name=useProjectDefault" }),
         __metadata("design:type", Boolean)
     ], Credential.prototype, "useProjectDefault", void 0);
     return Credential;

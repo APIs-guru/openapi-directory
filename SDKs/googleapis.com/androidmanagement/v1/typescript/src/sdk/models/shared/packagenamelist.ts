@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PackageNameList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of package names.
 **/
 export class PackageNameList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=packageNames" })
+  @SpeakeasyMetadata({ data: "json, name=packageNames" })
   packageNames?: string[];
 }

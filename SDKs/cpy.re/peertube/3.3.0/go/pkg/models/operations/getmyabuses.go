@@ -16,14 +16,14 @@ type GetMyAbusesSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type GetMyAbusesRequest struct {
-	QueryParams GetMyAbusesQueryParams
-	Security    GetMyAbusesSecurity
-}
-
 type GetMyAbuses200ApplicationJSON struct {
 	Data  []interface{} `json:"data,omitempty"`
 	Total *int64        `json:"total,omitempty"`
+}
+
+type GetMyAbusesRequest struct {
+	QueryParams GetMyAbusesQueryParams
+	Security    GetMyAbusesSecurity
 }
 
 type GetMyAbusesResponse struct {

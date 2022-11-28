@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeInstanceEventNotificationAttributesActionEnum(str, Enum):
     DESCRIBE_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES = "DescribeInstanceEventNotificationAttributes"
@@ -10,9 +14,9 @@ class GetDescribeInstanceEventNotificationAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeInstanceEventNotificationAttributesQueryParams:
-    action: GetDescribeInstanceEventNotificationAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeInstanceEventNotificationAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeInstanceEventNotificationAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDescribeInstanceEventNotificationAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeInstanceEventNotificationAttributesHeaders:
 
 @dataclass
 class GetDescribeInstanceEventNotificationAttributesRequest:
-    query_params: GetDescribeInstanceEventNotificationAttributesQueryParams = field(default=None)
-    headers: GetDescribeInstanceEventNotificationAttributesHeaders = field(default=None)
+    headers: GetDescribeInstanceEventNotificationAttributesHeaders = field()
+    query_params: GetDescribeInstanceEventNotificationAttributesQueryParams = field()
     
 
 @dataclass
 class GetDescribeInstanceEventNotificationAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

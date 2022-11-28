@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class PostDevelopersDeveloperIDPathParams:
-    developer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'developerId', 'style': 'simple', 'explode': False }})
+    developer_id: str = field(metadata={'path_param': { 'field_name': 'developerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostDevelopersDeveloperIDQueryParams:
 
 @dataclass
 class PostDevelopersDeveloperIDRequest:
-    path_params: PostDevelopersDeveloperIDPathParams = field(default=None)
-    query_params: PostDevelopersDeveloperIDQueryParams = field(default=None)
+    path_params: PostDevelopersDeveloperIDPathParams = field()
+    query_params: PostDevelopersDeveloperIDQueryParams = field()
     
 
 @dataclass
 class PostDevelopersDeveloperIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

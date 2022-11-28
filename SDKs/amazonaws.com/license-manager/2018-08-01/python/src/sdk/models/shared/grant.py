@@ -1,21 +1,26 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import grantstatus_enum
-from . import allowedoperation_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Grant:
-    grant_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GrantArn' }})
-    grant_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GrantName' }})
-    grant_status: grantstatus_enum.GrantStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GrantStatus' }})
-    granted_operations: List[allowedoperation_enum.AllowedOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GrantedOperations' }})
-    grantee_principal_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GranteePrincipalArn' }})
-    home_region: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HomeRegion' }})
-    license_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseArn' }})
-    parent_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentArn' }})
-    status_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusReason' }})
-    version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Version' }})
+    r"""Grant
+    Describes a grant.
+    """
+    
+    grant_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GrantArn') }})
+    grant_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GrantName') }})
+    grant_status: GrantStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GrantStatus') }})
+    granted_operations: List[AllowedOperationEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GrantedOperations') }})
+    grantee_principal_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GranteePrincipalArn') }})
+    home_region: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('HomeRegion') }})
+    license_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseArn') }})
+    parent_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParentArn') }})
+    version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Version') }})
+    status_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusReason') }})
     

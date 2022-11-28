@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GameMedia extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awayConference" })
+  @SpeakeasyMetadata({ data: "json, name=awayConference" })
   awayConference?: string;
 
-  @Metadata({ data: "json, name=awayTeam" })
+  @SpeakeasyMetadata({ data: "json, name=awayTeam" })
   awayTeam?: string;
 
-  @Metadata({ data: "json, name=homeConference" })
+  @SpeakeasyMetadata({ data: "json, name=homeConference" })
   homeConference?: string;
 
-  @Metadata({ data: "json, name=homeTeam" })
+  @SpeakeasyMetadata({ data: "json, name=homeTeam" })
   homeTeam?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isStartTimeTBD" })
+  @SpeakeasyMetadata({ data: "json, name=isStartTimeTBD" })
   isStartTimeTbd?: boolean;
 
-  @Metadata({ data: "json, name=mediaType" })
+  @SpeakeasyMetadata({ data: "json, name=mediaType" })
   mediaType?: string;
 
-  @Metadata({ data: "json, name=outlet" })
+  @SpeakeasyMetadata({ data: "json, name=outlet" })
   outlet?: string;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=seasonType" })
+  @SpeakeasyMetadata({ data: "json, name=seasonType" })
   seasonType?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=week" })
+  @SpeakeasyMetadata({ data: "json, name=week" })
   week?: number;
 }

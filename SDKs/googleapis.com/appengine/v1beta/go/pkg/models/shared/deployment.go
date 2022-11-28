@@ -1,5 +1,7 @@
 package shared
 
+// Deployment
+// Code and application artifacts used to deploy a version to App Engine.
 type Deployment struct {
 	Build             *BuildInfo          `json:"build,omitempty"`
 	CloudBuildOptions *CloudBuildOptions  `json:"cloudBuildOptions,omitempty"`

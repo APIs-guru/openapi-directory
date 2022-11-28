@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Issue } from "./issue";
+
 
 
 // NodegroupHealth
@@ -8,6 +8,6 @@ import { Issue } from "./issue";
  * An object representing the health status of the node group.
 **/
 export class NodegroupHealth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issues", elemType: shared.Issue })
+  @SpeakeasyMetadata({ data: "json, name=issues", elemType: Issue })
   issues?: Issue[];
 }

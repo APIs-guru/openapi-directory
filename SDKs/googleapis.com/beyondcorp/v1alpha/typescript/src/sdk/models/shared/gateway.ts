@@ -1,8 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GatewayTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    GcpRegionalMig = "GCP_REGIONAL_MIG"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    GcpRegionalMig = "GCP_REGIONAL_MIG"
+}
+
+
+// GatewayInput
+/** 
+ * Gateway represents a user facing component that serves as an entrance to enable connectivity.
+**/
+export class GatewayInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: GatewayTypeEnum;
 }
 
 
@@ -11,12 +22,12 @@ export enum GatewayTypeEnum {
  * Gateway represents a user facing component that serves as an entrance to enable connectivity.
 **/
 export class Gateway extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GatewayTypeEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 
-  @Metadata({ data: "json, name=userPort" })
+  @SpeakeasyMetadata({ data: "json, name=userPort" })
   userPort?: number;
 }

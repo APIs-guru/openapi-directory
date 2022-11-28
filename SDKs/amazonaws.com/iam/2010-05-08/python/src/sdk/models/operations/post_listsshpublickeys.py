@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListSSHPublicKeysActionEnum(str, Enum):
     LIST_SSH_PUBLIC_KEYS = "ListSSHPublicKeys"
@@ -10,10 +14,10 @@ class PostListSSHPublicKeysVersionEnum(str, Enum):
 
 @dataclass
 class PostListSSHPublicKeysQueryParams:
-    action: PostListSSHPublicKeysActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostListSSHPublicKeysActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListSSHPublicKeysVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: PostListSSHPublicKeysVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostListSSHPublicKeysHeaders:
 
 @dataclass
 class PostListSSHPublicKeysRequest:
-    query_params: PostListSSHPublicKeysQueryParams = field(default=None)
-    headers: PostListSSHPublicKeysHeaders = field(default=None)
+    headers: PostListSSHPublicKeysHeaders = field()
+    query_params: PostListSSHPublicKeysQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListSSHPublicKeysResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

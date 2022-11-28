@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LegGeometry } from "./leggeometry";
+import { Step } from "./step";
 // Leg
 /**
  * <p>Contains the calculated route's details for each path between a pair of positions. The number of legs returned corresponds to one fewer than the total number of positions in the request. </p> <p>For example, a route with a departure position and destination position returns one leg with the positions <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road">snapped to a nearby road</a>:</p> <ul> <li> <p>The <code>StartPosition</code> is the departure position.</p> </li> <li> <p>The <code>EndPosition</code> is the destination position.</p> </li> </ul> <p>A route with a waypoint between the departure and destination position returns two legs with the positions snapped to a nearby road:</p> <ul> <li> <p>Leg 1: The <code>StartPosition</code> is the departure position . The <code>EndPosition</code> is the waypoint positon.</p> </li> <li> <p>Leg 2: The <code>StartPosition</code> is the waypoint position. The <code>EndPosition</code> is the destination position.</p> </li> </ul>
@@ -35,27 +35,27 @@ var Leg = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Distance" }),
+        SpeakeasyMetadata({ data: "json, name=Distance" }),
         __metadata("design:type", Number)
     ], Leg.prototype, "distance", void 0);
     __decorate([
-        Metadata({ data: "json, name=DurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=DurationSeconds" }),
         __metadata("design:type", Number)
     ], Leg.prototype, "durationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndPosition" }),
+        SpeakeasyMetadata({ data: "json, name=EndPosition" }),
         __metadata("design:type", Array)
     ], Leg.prototype, "endPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=Geometry" }),
+        SpeakeasyMetadata({ data: "json, name=Geometry" }),
         __metadata("design:type", LegGeometry)
     ], Leg.prototype, "geometry", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartPosition" }),
+        SpeakeasyMetadata({ data: "json, name=StartPosition" }),
         __metadata("design:type", Array)
     ], Leg.prototype, "startPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=Steps", elemType: shared.Step }),
+        SpeakeasyMetadata({ data: "json, name=Steps", elemType: Step }),
         __metadata("design:type", Array)
     ], Leg.prototype, "steps", void 0);
     return Leg;

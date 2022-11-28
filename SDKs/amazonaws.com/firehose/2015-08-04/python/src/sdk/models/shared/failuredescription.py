@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deliverystreamfailuretype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FailureDescription:
-    details: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Details' }})
-    type: deliverystreamfailuretype_enum.DeliveryStreamFailureTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""FailureDescription
+    Provides details in case one of the following operations fails due to an error related to KMS: <a>CreateDeliveryStream</a>, <a>DeleteDeliveryStream</a>, <a>StartDeliveryStreamEncryption</a>, <a>StopDeliveryStreamEncryption</a>.
+    """
+    
+    details: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Details') }})
+    type: DeliveryStreamFailureTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetEmployerSecretsPathParams:
-    employer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
+    employer_id: str = field(metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEmployerSecretsHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEmployerSecretsRequest:
-    path_params: GetEmployerSecretsPathParams = field(default=None)
-    headers: GetEmployerSecretsHeaders = field(default=None)
+    headers: GetEmployerSecretsHeaders = field()
+    path_params: GetEmployerSecretsPathParams = field()
     
 
 @dataclass
 class GetEmployerSecretsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link_collection: Optional[shared.LinkCollection] = field(default=None)
-    status_code: int = field(default=None)
     

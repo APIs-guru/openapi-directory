@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ImageTagPrediction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Probability" })
+  @SpeakeasyMetadata({ data: "json, name=Probability" })
   probability?: number;
 
-  @Metadata({ data: "json, name=Tag" })
+  @SpeakeasyMetadata({ data: "json, name=Tag" })
   tag?: string;
 
-  @Metadata({ data: "json, name=TagId" })
+  @SpeakeasyMetadata({ data: "json, name=TagId" })
   tagId?: string;
 }

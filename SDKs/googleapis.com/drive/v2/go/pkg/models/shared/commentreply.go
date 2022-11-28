@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CommentReply
+// A comment on a file in Google Drive.
 type CommentReply struct {
 	Author       *User      `json:"author,omitempty"`
 	Content      *string    `json:"content,omitempty"`

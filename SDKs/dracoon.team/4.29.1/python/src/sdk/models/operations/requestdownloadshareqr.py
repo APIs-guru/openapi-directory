@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestDownloadShareQrPathParams:
-    share_id: int = field(default=None, metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
+    share_id: int = field(metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RequestDownloadShareQrHeaders:
 
 @dataclass
 class RequestDownloadShareQrRequest:
-    path_params: RequestDownloadShareQrPathParams = field(default=None)
-    headers: RequestDownloadShareQrHeaders = field(default=None)
+    headers: RequestDownloadShareQrHeaders = field()
+    path_params: RequestDownloadShareQrPathParams = field()
     
 
 @dataclass
 class RequestDownloadShareQrResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     download_share: Optional[shared.DownloadShare] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

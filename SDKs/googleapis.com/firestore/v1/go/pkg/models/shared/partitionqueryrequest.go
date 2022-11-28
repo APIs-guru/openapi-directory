@@ -1,5 +1,7 @@
 package shared
 
+// PartitionQueryRequest
+// The request for Firestore.PartitionQuery.
 type PartitionQueryRequest struct {
 	PageSize        *int32           `json:"pageSize,omitempty"`
 	PageToken       *string          `json:"pageToken,omitempty"`

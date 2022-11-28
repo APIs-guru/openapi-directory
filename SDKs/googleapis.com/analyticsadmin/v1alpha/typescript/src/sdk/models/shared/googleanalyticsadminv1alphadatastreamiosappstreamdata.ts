@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamDataInput
+/** 
+ * Data specific to iOS app streams.
+**/
+export class GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamDataInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
+  bundleId?: string;
+}
 
 
 // GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Data specific to iOS app streams.
 **/
 export class GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=firebaseAppId" })
+  @SpeakeasyMetadata({ data: "json, name=firebaseAppId" })
   firebaseAppId?: string;
 }

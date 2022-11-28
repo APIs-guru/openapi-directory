@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DateColumnStatisticsData
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines column statistics supported for timestamp data columns.
 **/
 export class DateColumnStatisticsData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaximumValue" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumValue" })
   maximumValue?: Date;
 
-  @Metadata({ data: "json, name=MinimumValue" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumValue" })
   minimumValue?: Date;
 
-  @Metadata({ data: "json, name=NumberOfDistinctValues" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfDistinctValues" })
   numberOfDistinctValues: number;
 
-  @Metadata({ data: "json, name=NumberOfNulls" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfNulls" })
   numberOfNulls: number;
 }

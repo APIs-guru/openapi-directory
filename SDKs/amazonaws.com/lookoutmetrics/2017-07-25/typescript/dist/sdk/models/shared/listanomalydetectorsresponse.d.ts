@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyDetectorSummary } from "./anomalydetectorsummary";
 export declare class ListAnomalyDetectorsResponse extends SpeakeasyBase {
     anomalyDetectorSummaryList?: AnomalyDetectorSummary[];

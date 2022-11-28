@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchMtuPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkSwitchMtuRequestBodyOverrides extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mtuSize" })
+  @SpeakeasyMetadata({ data: "json, name=mtuSize" })
   mtuSize: number;
 
-  @Metadata({ data: "json, name=switchProfiles" })
+  @SpeakeasyMetadata({ data: "json, name=switchProfiles" })
   switchProfiles?: string[];
 
-  @Metadata({ data: "json, name=switches" })
+  @SpeakeasyMetadata({ data: "json, name=switches" })
   switches?: string[];
 }
 
 
 export class UpdateNetworkSwitchMtuRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultMtuSize" })
+  @SpeakeasyMetadata({ data: "json, name=defaultMtuSize" })
   defaultMtuSize?: number;
 
-  @Metadata({ data: "json, name=overrides", elemType: operations.UpdateNetworkSwitchMtuRequestBodyOverrides })
+  @SpeakeasyMetadata({ data: "json, name=overrides", elemType: UpdateNetworkSwitchMtuRequestBodyOverrides })
   overrides?: UpdateNetworkSwitchMtuRequestBodyOverrides[];
 }
 
 
 export class UpdateNetworkSwitchMtuRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchMtuPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchMtuRequestBody;
 }
 
 
 export class UpdateNetworkSwitchMtuResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchMtu200ApplicationJsonObject?: Map<string, any>;
 }

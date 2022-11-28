@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModeEnum } from "./modeenum";
+
 
 
 // CampaignHook
@@ -7,12 +8,12 @@ import { ModeEnum } from "./modeenum";
  * Specifies settings for invoking an AWS Lambda function that customizes a segment for a campaign.
 **/
 export class CampaignHook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LambdaFunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaFunctionName" })
   lambdaFunctionName?: string;
 
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: ModeEnum;
 
-  @Metadata({ data: "json, name=WebUrl" })
+  @SpeakeasyMetadata({ data: "json, name=WebUrl" })
   webUrl?: string;
 }

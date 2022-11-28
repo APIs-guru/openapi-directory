@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Step } from "./step";
+
 
 
 // ListStepsResponse
@@ -8,9 +8,9 @@ import { Step } from "./step";
  * Response message for StepService.List.
 **/
 export class ListStepsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=steps", elemType: shared.Step })
+  @SpeakeasyMetadata({ data: "json, name=steps", elemType: Step })
   steps?: Step[];
 }

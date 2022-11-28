@@ -1,21 +1,25 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import inputparallelismupdate
-from . import inputprocessingconfigurationupdate
-from . import inputschemaupdate
-from . import kinesisfirehoseinputupdate
-from . import kinesisstreamsinputupdate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InputUpdate:
-    input_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputId' }})
-    input_parallelism_update: Optional[inputparallelismupdate.InputParallelismUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputParallelismUpdate' }})
-    input_processing_configuration_update: Optional[inputprocessingconfigurationupdate.InputProcessingConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputProcessingConfigurationUpdate' }})
-    input_schema_update: Optional[inputschemaupdate.InputSchemaUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputSchemaUpdate' }})
-    kinesis_firehose_input_update: Optional[kinesisfirehoseinputupdate.KinesisFirehoseInputUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KinesisFirehoseInputUpdate' }})
-    kinesis_streams_input_update: Optional[kinesisstreamsinputupdate.KinesisStreamsInputUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KinesisStreamsInputUpdate' }})
-    name_prefix_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NamePrefixUpdate' }})
+    r"""InputUpdate
+    For a SQL-based Kinesis Data Analytics application, describes updates to a specific input configuration (identified by the <code>InputId</code> of an application). 
+    """
+    
+    input_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputId') }})
+    input_parallelism_update: Optional[InputParallelismUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputParallelismUpdate') }})
+    input_processing_configuration_update: Optional[InputProcessingConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputProcessingConfigurationUpdate') }})
+    input_schema_update: Optional[InputSchemaUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputSchemaUpdate') }})
+    kinesis_firehose_input_update: Optional[KinesisFirehoseInputUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KinesisFirehoseInputUpdate') }})
+    kinesis_streams_input_update: Optional[KinesisStreamsInputUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KinesisStreamsInputUpdate') }})
+    name_prefix_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NamePrefixUpdate') }})
     

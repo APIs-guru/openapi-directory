@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,13 +23,13 @@ class DrivelabelsLabelsCreateQueryParams:
 
 @dataclass
 class DrivelabelsLabelsCreateRequest:
-    query_params: DrivelabelsLabelsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleAppsDriveLabelsV2betaLabel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: DrivelabelsLabelsCreateQueryParams = field()
+    request: Optional[shared.GoogleAppsDriveLabelsV2betaLabelInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivelabelsLabelsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_label: Optional[shared.GoogleAppsDriveLabelsV2betaLabel] = field(default=None)
-    status_code: int = field(default=None)
     

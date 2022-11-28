@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Hit } from "./hit";
+
 
 
 // Hits
@@ -8,15 +8,15 @@ import { Hit } from "./hit";
  * The collection of documents that match the search request.
 **/
 export class Hits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cursor" })
+  @SpeakeasyMetadata({ data: "json, name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "json, name=found" })
+  @SpeakeasyMetadata({ data: "json, name=found" })
   found?: number;
 
-  @Metadata({ data: "json, name=hit", elemType: shared.Hit })
+  @SpeakeasyMetadata({ data: "json, name=hit", elemType: Hit })
   hit?: Hit[];
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: number;
 }

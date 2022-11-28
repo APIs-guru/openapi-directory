@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Color = /** @class */ (function (_super) {
     __extends(Color, _super);
     function Color() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blue" }),
+        SpeakeasyMetadata({ data: "json, name=blue" }),
         __metadata("design:type", Number)
     ], Color.prototype, "blue", void 0);
     __decorate([
-        Metadata({ data: "json, name=green" }),
+        SpeakeasyMetadata({ data: "json, name=green" }),
         __metadata("design:type", Number)
     ], Color.prototype, "green", void 0);
     __decorate([
-        Metadata({ data: "json, name=hex" }),
+        SpeakeasyMetadata({ data: "json, name=hex" }),
         __metadata("design:type", String)
     ], Color.prototype, "hex", void 0);
     __decorate([
-        Metadata({ data: "json, name=number_of_pixel" }),
+        SpeakeasyMetadata({ data: "json, name=number_of_pixel" }),
         __metadata("design:type", Number)
     ], Color.prototype, "numberOfPixel", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentage" }),
+        SpeakeasyMetadata({ data: "json, name=percentage" }),
         __metadata("design:type", String)
     ], Color.prototype, "percentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=red" }),
+        SpeakeasyMetadata({ data: "json, name=red" }),
         __metadata("design:type", Number)
     ], Color.prototype, "red", void 0);
     return Color;

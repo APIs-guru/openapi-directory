@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import creativedealassociation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListDealAssociationsResponse:
-    associations: Optional[List[creativedealassociation.CreativeDealAssociation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'associations' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListDealAssociationsResponse
+    A response for listing creative and deal associations
+    """
+    
+    associations: Optional[List[CreativeDealAssociation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('associations') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

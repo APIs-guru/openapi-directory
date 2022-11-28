@@ -1,6 +1,7 @@
 
 
+
 export enum SlotConstraintEnum {
-    Required = "Required"
-,    Optional = "Optional"
+    Required = "Required",
+    Optional = "Optional"
 }

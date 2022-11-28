@@ -22,28 +22,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoCorrections } from "./autocorrections";
+import { ImageSearchItemCreative } from "./imagesearchitemcreative";
+import { RelatedSearch } from "./relatedsearch";
 var CreativeImageSearchResults = /** @class */ (function (_super) {
     __extends(CreativeImageSearchResults, _super);
     function CreativeImageSearchResults() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=auto_corrections" }),
+        SpeakeasyMetadata({ data: "json, name=auto_corrections" }),
         __metadata("design:type", AutoCorrections)
     ], CreativeImageSearchResults.prototype, "autoCorrections", void 0);
     __decorate([
-        Metadata({ data: "json, name=images", elemType: shared.ImageSearchItemCreative }),
+        SpeakeasyMetadata({ data: "json, name=images", elemType: ImageSearchItemCreative }),
         __metadata("design:type", Array)
     ], CreativeImageSearchResults.prototype, "images", void 0);
     __decorate([
-        Metadata({ data: "json, name=related_searches", elemType: shared.RelatedSearch }),
+        SpeakeasyMetadata({ data: "json, name=related_searches", elemType: RelatedSearch }),
         __metadata("design:type", Array)
     ], CreativeImageSearchResults.prototype, "relatedSearches", void 0);
     __decorate([
-        Metadata({ data: "json, name=result_count" }),
+        SpeakeasyMetadata({ data: "json, name=result_count" }),
         __metadata("design:type", Number)
     ], CreativeImageSearchResults.prototype, "resultCount", void 0);
     return CreativeImageSearchResults;

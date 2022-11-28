@@ -1,18 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import basemodelname_enum
-from . import inputdataconfig
-from . import clmlanguagecode_enum
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateLanguageModelRequest:
-    base_model_name: basemodelname_enum.BaseModelNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BaseModelName' }})
-    input_data_config: inputdataconfig.InputDataConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputDataConfig' }})
-    language_code: clmlanguagecode_enum.ClmLanguageCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LanguageCode' }})
-    model_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelName' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    base_model_name: BaseModelNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BaseModelName') }})
+    input_data_config: InputDataConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputDataConfig') }})
+    language_code: ClmLanguageCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LanguageCode') }})
+    model_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelName') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

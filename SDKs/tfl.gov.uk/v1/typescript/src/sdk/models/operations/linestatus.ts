@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LineStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EndDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EndDate" })
   endDate: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=StartDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=StartDate" })
   startDate: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string[];
 }
 
 
 export class LineStatusQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateRange.endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateRange.endDate" })
   dateRangeEndDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateRange.startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateRange.startDate" })
   dateRangeStartDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=detail" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=detail" })
   detail?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate: string;
 }
 
 
 export class LineStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LineStatusPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LineStatusQueryParams;
 }
 
 
 export class LineStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesLine })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesLine })
   tflApiPresentationEntitiesLines?: shared.TflApiPresentationEntitiesLine[];
 }

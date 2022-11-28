@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteCustomKeyStoreRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomKeyStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomKeyStoreId" })
   customKeyStoreId: string;
 }

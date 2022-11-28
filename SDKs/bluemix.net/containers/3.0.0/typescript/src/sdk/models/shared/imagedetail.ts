@@ -1,103 +1,104 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ImageDetailConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArgsEscaped" })
+  @SpeakeasyMetadata({ data: "json, name=ArgsEscaped" })
   argsEscaped?: boolean;
 
-  @Metadata({ data: "json, name=AttachStderr" })
+  @SpeakeasyMetadata({ data: "json, name=AttachStderr" })
   attachStderr?: boolean;
 
-  @Metadata({ data: "json, name=AttachStdin" })
+  @SpeakeasyMetadata({ data: "json, name=AttachStdin" })
   attachStdin?: boolean;
 
-  @Metadata({ data: "json, name=AttachStdout" })
+  @SpeakeasyMetadata({ data: "json, name=AttachStdout" })
   attachStdout?: boolean;
 
-  @Metadata({ data: "json, name=Cmd" })
+  @SpeakeasyMetadata({ data: "json, name=Cmd" })
   cmd?: string[];
 
-  @Metadata({ data: "json, name=Domainmame" })
+  @SpeakeasyMetadata({ data: "json, name=Domainmame" })
   domainmame?: string;
 
-  @Metadata({ data: "json, name=Entrypoint" })
+  @SpeakeasyMetadata({ data: "json, name=Entrypoint" })
   entrypoint?: string;
 
-  @Metadata({ data: "json, name=Env" })
+  @SpeakeasyMetadata({ data: "json, name=Env" })
   env?: string[];
 
-  @Metadata({ data: "json, name=ExposedPorts" })
+  @SpeakeasyMetadata({ data: "json, name=ExposedPorts" })
   exposedPorts?: string[];
 
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image?: string;
 
-  @Metadata({ data: "json, name=Labels" })
+  @SpeakeasyMetadata({ data: "json, name=Labels" })
   labels?: string[];
 
-  @Metadata({ data: "json, name=OnBuild" })
+  @SpeakeasyMetadata({ data: "json, name=OnBuild" })
   onBuild?: string[];
 
-  @Metadata({ data: "json, name=OpenStdin" })
+  @SpeakeasyMetadata({ data: "json, name=OpenStdin" })
   openStdin?: boolean;
 
-  @Metadata({ data: "json, name=StdinOnce" })
+  @SpeakeasyMetadata({ data: "json, name=StdinOnce" })
   stdinOnce?: boolean;
 
-  @Metadata({ data: "json, name=Tty" })
+  @SpeakeasyMetadata({ data: "json, name=Tty" })
   tty?: boolean;
 
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user?: string;
 
-  @Metadata({ data: "json, name=Volumes" })
+  @SpeakeasyMetadata({ data: "json, name=Volumes" })
   volumes?: string;
 
-  @Metadata({ data: "json, name=WorkingDir" })
+  @SpeakeasyMetadata({ data: "json, name=WorkingDir" })
   workingDir?: string;
 }
 
 
 export class ImageDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Architecture" })
+  @SpeakeasyMetadata({ data: "json, name=Architecture" })
   architecture?: string;
 
-  @Metadata({ data: "json, name=Config" })
+  @SpeakeasyMetadata({ data: "json, name=Config" })
   config?: ImageDetailConfig;
 
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=ContainerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerConfig" })
   containerConfig?: any;
 
-  @Metadata({ data: "json, name=Created" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: string;
 
-  @Metadata({ data: "json, name=DockerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DockerVersion" })
   dockerVersion?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Os" })
+  @SpeakeasyMetadata({ data: "json, name=Os" })
   os?: string;
 
-  @Metadata({ data: "json, name=Parent" })
+  @SpeakeasyMetadata({ data: "json, name=Parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: number;
 
-  @Metadata({ data: "json, name=Tag" })
+  @SpeakeasyMetadata({ data: "json, name=Tag" })
   tag?: string;
 
-  @Metadata({ data: "json, name=Throwaway" })
+  @SpeakeasyMetadata({ data: "json, name=Throwaway" })
   throwaway?: string;
 
-  @Metadata({ data: "json, name=VirtualSize" })
+  @SpeakeasyMetadata({ data: "json, name=VirtualSize" })
   virtualSize?: number;
 }

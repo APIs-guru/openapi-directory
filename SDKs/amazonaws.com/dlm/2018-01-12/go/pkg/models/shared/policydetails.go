@@ -1,5 +1,7 @@
 package shared
 
+// PolicyDetails
+// Specifies the configuration of a lifecycle policy.
 type PolicyDetails struct {
 	Actions           []Action                     `json:"Actions,omitempty"`
 	EventSource       *EventSource                 `json:"EventSource,omitempty"`

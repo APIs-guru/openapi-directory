@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CommitTransactionResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response elements represent the output of a commit transaction request.
 **/
 export class CommitTransactionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=transactionStatus" })
   transactionStatus?: string;
 }

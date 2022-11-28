@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputDataConfig } from "./inputdataconfig";
 import { JobStatusEnum } from "./jobstatusenum";
 import { OutputDataConfig } from "./outputdataconfig";
@@ -37,51 +37,51 @@ var DominantLanguageDetectionJobProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" }),
         __metadata("design:type", String)
     ], DominantLanguageDetectionJobProperties.prototype, "dataAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], DominantLanguageDetectionJobProperties.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=InputDataConfig" }),
         __metadata("design:type", InputDataConfig)
     ], DominantLanguageDetectionJobProperties.prototype, "inputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobArn" }),
+        SpeakeasyMetadata({ data: "json, name=JobArn" }),
         __metadata("design:type", String)
     ], DominantLanguageDetectionJobProperties.prototype, "jobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobId" }),
+        SpeakeasyMetadata({ data: "json, name=JobId" }),
         __metadata("design:type", String)
     ], DominantLanguageDetectionJobProperties.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobName" }),
+        SpeakeasyMetadata({ data: "json, name=JobName" }),
         __metadata("design:type", String)
     ], DominantLanguageDetectionJobProperties.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobStatus" }),
+        SpeakeasyMetadata({ data: "json, name=JobStatus" }),
         __metadata("design:type", String)
     ], DominantLanguageDetectionJobProperties.prototype, "jobStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], DominantLanguageDetectionJobProperties.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=OutputDataConfig" }),
         __metadata("design:type", OutputDataConfig)
     ], DominantLanguageDetectionJobProperties.prototype, "outputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubmitTime" }),
+        SpeakeasyMetadata({ data: "json, name=SubmitTime" }),
         __metadata("design:type", Date)
     ], DominantLanguageDetectionJobProperties.prototype, "submitTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=VolumeKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=VolumeKmsKeyId" }),
         __metadata("design:type", String)
     ], DominantLanguageDetectionJobProperties.prototype, "volumeKmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", VpcConfig)
     ], DominantLanguageDetectionJobProperties.prototype, "vpcConfig", void 0);
     return DominantLanguageDetectionJobProperties;

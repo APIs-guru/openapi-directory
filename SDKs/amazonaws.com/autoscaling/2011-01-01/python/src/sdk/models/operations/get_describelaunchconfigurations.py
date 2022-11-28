@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeLaunchConfigurationsActionEnum(str, Enum):
     DESCRIBE_LAUNCH_CONFIGURATIONS = "DescribeLaunchConfigurations"
@@ -10,11 +14,11 @@ class GetDescribeLaunchConfigurationsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeLaunchConfigurationsQueryParams:
-    action: GetDescribeLaunchConfigurationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeLaunchConfigurationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeLaunchConfigurationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     launch_configuration_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'LaunchConfigurationNames', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeLaunchConfigurationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeLaunchConfigurationsHeaders:
 
 @dataclass
 class GetDescribeLaunchConfigurationsRequest:
-    query_params: GetDescribeLaunchConfigurationsQueryParams = field(default=None)
-    headers: GetDescribeLaunchConfigurationsHeaders = field(default=None)
+    headers: GetDescribeLaunchConfigurationsHeaders = field()
+    query_params: GetDescribeLaunchConfigurationsQueryParams = field()
     
 
 @dataclass
 class GetDescribeLaunchConfigurationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

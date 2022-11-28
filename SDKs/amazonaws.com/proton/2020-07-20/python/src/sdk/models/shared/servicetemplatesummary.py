@@ -1,21 +1,27 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import provisioning_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ServiceTemplateSummary:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    last_modified_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModifiedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pipeline_provisioning: Optional[provisioning_enum.ProvisioningEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipelineProvisioning' }})
-    recommended_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommendedVersion' }})
+    r"""ServiceTemplateSummary
+    The service template summary data.
+    """
+    
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    last_modified_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModifiedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    pipeline_provisioning: Optional[ProvisioningEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineProvisioning') }})
+    recommended_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommendedVersion') }})
     

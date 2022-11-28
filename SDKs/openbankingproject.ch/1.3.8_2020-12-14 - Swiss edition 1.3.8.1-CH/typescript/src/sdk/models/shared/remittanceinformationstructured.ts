@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RemittanceInformationStructuredScoRorQrRorIpiEnum {
-    Scor = "SCOR"
-,    Qrr = "QRR"
-,    Ipi = "IPI"
+    Scor = "SCOR",
+    Qrr = "QRR",
+    Ipi = "IPI"
 }
 
 
@@ -13,18 +14,18 @@ export enum RemittanceInformationStructuredScoRorQrRorIpiEnum {
  * 
 **/
 export class RemittanceInformationStructured extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SCORorQRRorIPI" })
+  @SpeakeasyMetadata({ data: "json, name=SCORorQRRorIPI" })
   scoRorQrRorIpi?: RemittanceInformationStructuredScoRorQrRorIpiEnum;
 
-  @Metadata({ data: "json, name=additionalRemittanceInformation" })
+  @SpeakeasyMetadata({ data: "json, name=additionalRemittanceInformation" })
   additionalRemittanceInformation?: string;
 
-  @Metadata({ data: "json, name=reference" })
+  @SpeakeasyMetadata({ data: "json, name=reference" })
   reference: string;
 
-  @Metadata({ data: "json, name=referenceIssuer" })
+  @SpeakeasyMetadata({ data: "json, name=referenceIssuer" })
   referenceIssuer?: string;
 
-  @Metadata({ data: "json, name=referenceType" })
+  @SpeakeasyMetadata({ data: "json, name=referenceType" })
   referenceType?: string;
 }

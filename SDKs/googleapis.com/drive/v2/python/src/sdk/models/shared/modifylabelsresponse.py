@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import label
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModifyLabelsResponse:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    modified_labels: Optional[List[label.Label]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modifiedLabels' }})
+    r"""ModifyLabelsResponse
+    Response to a ModifyLabels request. This contains only those labels which were added or updated by the request.
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    modified_labels: Optional[List[Label]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modifiedLabels') }})
     

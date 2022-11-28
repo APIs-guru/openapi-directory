@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Css
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about CSS domain.
 **/
 export class Css extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cssDomainId" })
+  @SpeakeasyMetadata({ data: "json, name=cssDomainId" })
   cssDomainId?: string;
 
-  @Metadata({ data: "json, name=cssGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=cssGroupId" })
   cssGroupId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=fullName" })
+  @SpeakeasyMetadata({ data: "json, name=fullName" })
   fullName?: string;
 
-  @Metadata({ data: "json, name=homepageUri" })
+  @SpeakeasyMetadata({ data: "json, name=homepageUri" })
   homepageUri?: string;
 
-  @Metadata({ data: "json, name=labelIds" })
+  @SpeakeasyMetadata({ data: "json, name=labelIds" })
   labelIds?: string[];
 }

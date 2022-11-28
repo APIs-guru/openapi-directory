@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InferenceExecutionSummary
+// Contains information about the specific inference execution, including input and output data configuration, inference scheduling information, status, and so on.
 type InferenceExecutionSummary struct {
 	CustomerResultObject    *S3Object                     `json:"CustomerResultObject,omitempty"`
 	DataEndTime             *time.Time                    `json:"DataEndTime,omitempty"`

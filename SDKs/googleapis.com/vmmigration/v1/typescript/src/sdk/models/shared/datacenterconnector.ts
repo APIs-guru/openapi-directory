@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AvailableUpdates } from "./availableupdates";
 import { Status } from "./status";
 import { UpgradeStatus } from "./upgradestatus";
 
+
 export enum DatacenterConnectorStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Offline = "OFFLINE"
-,    Failed = "FAILED"
-,    Active = "ACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Offline = "OFFLINE",
+    Failed = "FAILED",
+    Active = "ACTIVE"
 }
 
 
@@ -17,45 +18,70 @@ export enum DatacenterConnectorStateEnum {
  * DatacenterConnector message describes a connector between the Source and GCP, which is installed on a vmware datacenter (an OVA vm installed by the user) to connect the Datacenter to GCP and support vm migration data transfer.
 **/
 export class DatacenterConnector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applianceInfrastructureVersion" })
+  @SpeakeasyMetadata({ data: "json, name=applianceInfrastructureVersion" })
   applianceInfrastructureVersion?: string;
 
-  @Metadata({ data: "json, name=applianceSoftwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=applianceSoftwareVersion" })
   applianceSoftwareVersion?: string;
 
-  @Metadata({ data: "json, name=availableVersions" })
+  @SpeakeasyMetadata({ data: "json, name=availableVersions" })
   availableVersions?: AvailableUpdates;
 
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Status;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=registrationId" })
+  @SpeakeasyMetadata({ data: "json, name=registrationId" })
   registrationId?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DatacenterConnectorStateEnum;
 
-  @Metadata({ data: "json, name=stateTime" })
+  @SpeakeasyMetadata({ data: "json, name=stateTime" })
   stateTime?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=upgradeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeStatus" })
   upgradeStatus?: UpgradeStatus;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: string;
+}
+
+
+// DatacenterConnectorInput
+/** 
+ * DatacenterConnector message describes a connector between the Source and GCP, which is installed on a vmware datacenter (an OVA vm installed by the user) to connect the Datacenter to GCP and support vm migration data transfer.
+**/
+export class DatacenterConnectorInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=availableVersions" })
+  availableVersions?: AvailableUpdates;
+
+  @SpeakeasyMetadata({ data: "json, name=error" })
+  error?: Status;
+
+  @SpeakeasyMetadata({ data: "json, name=registrationId" })
+  registrationId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
+  serviceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=upgradeStatus" })
+  upgradeStatus?: UpgradeStatus;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

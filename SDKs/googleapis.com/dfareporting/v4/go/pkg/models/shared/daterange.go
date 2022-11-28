@@ -26,6 +26,8 @@ const (
 	DateRangeRelativeDateRangeEnumLast60Days      DateRangeRelativeDateRangeEnum = "LAST_60_DAYS"
 )
 
+// DateRange
+// Represents a date range.
 type DateRange struct {
 	EndDate           *time.Time                      `json:"endDate,omitempty"`
 	Kind              *string                         `json:"kind,omitempty"`

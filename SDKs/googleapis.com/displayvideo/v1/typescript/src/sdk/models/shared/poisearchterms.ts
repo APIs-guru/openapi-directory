@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PoiSearchTerms
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Search terms for POI targeting options.
 **/
 export class PoiSearchTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=poiQuery" })
+  @SpeakeasyMetadata({ data: "json, name=poiQuery" })
   poiQuery?: string;
 }

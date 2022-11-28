@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import places
+from sdk import utils
+from . import *
 
 class ServiceAreaBusinessBusinessTypeEnum(str, Enum):
     BUSINESS_TYPE_UNSPECIFIED = "BUSINESS_TYPE_UNSPECIFIED"
@@ -12,7 +14,11 @@ class ServiceAreaBusinessBusinessTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ServiceAreaBusiness:
-    business_type: Optional[ServiceAreaBusinessBusinessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'businessType' }})
-    places: Optional[places.Places] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'places' }})
-    region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionCode' }})
+    r"""ServiceAreaBusiness
+    Service area businesses provide their service at the customer's location (for example, a locksmith or plumber).
+    """
+    
+    business_type: Optional[ServiceAreaBusinessBusinessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('businessType') }})
+    places: Optional[Places] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('places') }})
+    region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionCode') }})
     

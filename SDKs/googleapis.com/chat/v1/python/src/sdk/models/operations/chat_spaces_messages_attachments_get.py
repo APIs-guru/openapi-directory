@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChatSpacesMessagesAttachmentsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,21 +25,33 @@ class ChatSpacesMessagesAttachmentsGetQueryParams:
     
 
 @dataclass
+class ChatSpacesMessagesAttachmentsGetSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class ChatSpacesMessagesAttachmentsGetSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
 class ChatSpacesMessagesAttachmentsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    option1: Optional[ChatSpacesMessagesAttachmentsGetSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[ChatSpacesMessagesAttachmentsGetSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
     
 
 @dataclass
 class ChatSpacesMessagesAttachmentsGetRequest:
-    path_params: ChatSpacesMessagesAttachmentsGetPathParams = field(default=None)
-    query_params: ChatSpacesMessagesAttachmentsGetQueryParams = field(default=None)
-    security: ChatSpacesMessagesAttachmentsGetSecurity = field(default=None)
+    path_params: ChatSpacesMessagesAttachmentsGetPathParams = field()
+    query_params: ChatSpacesMessagesAttachmentsGetQueryParams = field()
+    security: ChatSpacesMessagesAttachmentsGetSecurity = field()
     
 
 @dataclass
 class ChatSpacesMessagesAttachmentsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     attachment: Optional[shared.Attachment] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

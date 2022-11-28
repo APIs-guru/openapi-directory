@@ -1,6 +1,7 @@
 
 
+
 export enum ReplicationConfigurationEbsEncryptionEnum {
-    Default = "DEFAULT"
-,    Custom = "CUSTOM"
+    Default = "DEFAULT",
+    Custom = "CUSTOM"
 }

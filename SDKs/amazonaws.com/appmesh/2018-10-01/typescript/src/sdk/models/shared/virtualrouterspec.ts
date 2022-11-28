@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VirtualRouterSpec
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the specification of a virtual router.
 **/
 export class VirtualRouterSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceNames" })
+  @SpeakeasyMetadata({ data: "json, name=serviceNames" })
   serviceNames?: string[];
 }

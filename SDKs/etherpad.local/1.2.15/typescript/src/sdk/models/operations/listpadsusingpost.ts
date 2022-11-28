@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListPadsUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupID" })
   groupId?: string;
 }
 
 
-export class ListPadsUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: ListPadsUsingPostQueryParams;
-}
-
-
 export class ListPadsUsingPost200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=padIDs" })
+  @SpeakeasyMetadata({ data: "json, name=padIDs" })
   padIDs?: string[];
 }
 
 
 export class ListPadsUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ListPadsUsingPost200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListPadsUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListPadsUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListPadsUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ListPadsUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: ListPadsUsingPostQueryParams;
+}
+
+
 export class ListPadsUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listPadsUsingPost200ApplicationJsonObject?: ListPadsUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listPadsUsingPost400ApplicationJsonObject?: ListPadsUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listPadsUsingPost401ApplicationJsonObject?: ListPadsUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listPadsUsingPost500ApplicationJsonObject?: ListPadsUsingPost500ApplicationJson;
 }

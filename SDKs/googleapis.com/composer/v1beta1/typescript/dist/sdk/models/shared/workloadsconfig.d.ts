@@ -1,5 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SchedulerResource } from "./schedulerresource";
+import { TriggererResource } from "./triggererresource";
 import { WebServerResource } from "./webserverresource";
 import { WorkerResource } from "./workerresource";
 /**
@@ -7,6 +8,7 @@ import { WorkerResource } from "./workerresource";
 **/
 export declare class WorkloadsConfig extends SpeakeasyBase {
     scheduler?: SchedulerResource;
+    triggerer?: TriggererResource;
     webServer?: WebServerResource;
     worker?: WorkerResource;
 }

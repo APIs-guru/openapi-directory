@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TweetExpansionsParamTypeEnum(str, Enum):
     AUTHOR_ID = "author_id"

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { KafkaClusterEncryptionInTransitTypeEnum } from "./kafkaclusterencryptionintransittypeenum";
 /**
  * The description of the encryption in transit to the Apache Kafka cluster.

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1ImagePayload
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container of information about an image.
 **/
 export class GoogleCloudDatalabelingV1beta1ImagePayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageThumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=imageThumbnail" })
   imageThumbnail?: string;
 
-  @Metadata({ data: "json, name=imageUri" })
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=signedUri" })
+  @SpeakeasyMetadata({ data: "json, name=signedUri" })
   signedUri?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChartSpec } from "./chartspec";
+
 
 
 // UpdateChartSpecRequest
@@ -7,9 +8,9 @@ import { ChartSpec } from "./chartspec";
  * Updates a chart's specifications. (This does not move or resize a chart. To move or resize a chart, use UpdateEmbeddedObjectPositionRequest.)
 **/
 export class UpdateChartSpecRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chartId" })
+  @SpeakeasyMetadata({ data: "json, name=chartId" })
   chartId?: number;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: ChartSpec;
 }

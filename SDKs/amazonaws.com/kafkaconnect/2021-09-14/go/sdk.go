@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://kafkaconnect.{region}.amazonaws.com",
 	"https://kafkaconnect.{region}.amazonaws.com",
 	"http://kafkaconnect.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/kafkaconnect/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateConnector - Creates a connector using the specified properties.
 func (s *SDK) CreateConnector(ctx context.Context, request operations.CreateConnectorRequest) (*operations.CreateConnectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connectors"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateConnector(ctx context.Context, request operations.CreateConn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -191,8 +218,9 @@ func (s *SDK) CreateConnector(ctx context.Context, request operations.CreateConn
 	return res, nil
 }
 
+// CreateCustomPlugin - Creates a custom plugin using the specified properties.
 func (s *SDK) CreateCustomPlugin(ctx context.Context, request operations.CreateCustomPluginRequest) (*operations.CreateCustomPluginResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/custom-plugins"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -212,7 +240,7 @@ func (s *SDK) CreateCustomPlugin(ctx context.Context, request operations.CreateC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -322,8 +350,9 @@ func (s *SDK) CreateCustomPlugin(ctx context.Context, request operations.CreateC
 	return res, nil
 }
 
+// CreateWorkerConfiguration - Creates a worker configuration using the specified properties.
 func (s *SDK) CreateWorkerConfiguration(ctx context.Context, request operations.CreateWorkerConfigurationRequest) (*operations.CreateWorkerConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/worker-configurations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -343,7 +372,7 @@ func (s *SDK) CreateWorkerConfiguration(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -453,8 +482,9 @@ func (s *SDK) CreateWorkerConfiguration(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteConnector - Deletes the specified connector.
 func (s *SDK) DeleteConnector(ctx context.Context, request operations.DeleteConnectorRequest) (*operations.DeleteConnectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/connectors/{connectorArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -466,7 +496,7 @@ func (s *SDK) DeleteConnector(ctx context.Context, request operations.DeleteConn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -566,8 +596,9 @@ func (s *SDK) DeleteConnector(ctx context.Context, request operations.DeleteConn
 	return res, nil
 }
 
+// DescribeConnector - Returns summary information about the connector.
 func (s *SDK) DescribeConnector(ctx context.Context, request operations.DescribeConnectorRequest) (*operations.DescribeConnectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/connectors/{connectorArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -577,7 +608,7 @@ func (s *SDK) DescribeConnector(ctx context.Context, request operations.Describe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -677,8 +708,9 @@ func (s *SDK) DescribeConnector(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// DescribeCustomPlugin - A summary description of the custom plugin.
 func (s *SDK) DescribeCustomPlugin(ctx context.Context, request operations.DescribeCustomPluginRequest) (*operations.DescribeCustomPluginResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/custom-plugins/{customPluginArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -688,7 +720,7 @@ func (s *SDK) DescribeCustomPlugin(ctx context.Context, request operations.Descr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -788,8 +820,9 @@ func (s *SDK) DescribeCustomPlugin(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// DescribeWorkerConfiguration - Returns information about a worker configuration.
 func (s *SDK) DescribeWorkerConfiguration(ctx context.Context, request operations.DescribeWorkerConfigurationRequest) (*operations.DescribeWorkerConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/worker-configurations/{workerConfigurationArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -799,7 +832,7 @@ func (s *SDK) DescribeWorkerConfiguration(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -899,8 +932,9 @@ func (s *SDK) DescribeWorkerConfiguration(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListConnectors - Returns a list of all the connectors in this account and Region. The list is limited to connectors whose name starts with the specified prefix. The response also includes a description of each of the listed connectors.
 func (s *SDK) ListConnectors(ctx context.Context, request operations.ListConnectorsRequest) (*operations.ListConnectorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connectors"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -912,7 +946,7 @@ func (s *SDK) ListConnectors(ctx context.Context, request operations.ListConnect
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1012,8 +1046,9 @@ func (s *SDK) ListConnectors(ctx context.Context, request operations.ListConnect
 	return res, nil
 }
 
+// ListCustomPlugins - Returns a list of all of the custom plugins in this account and Region.
 func (s *SDK) ListCustomPlugins(ctx context.Context, request operations.ListCustomPluginsRequest) (*operations.ListCustomPluginsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/custom-plugins"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1025,7 +1060,7 @@ func (s *SDK) ListCustomPlugins(ctx context.Context, request operations.ListCust
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1125,8 +1160,9 @@ func (s *SDK) ListCustomPlugins(ctx context.Context, request operations.ListCust
 	return res, nil
 }
 
+// ListWorkerConfigurations - Returns a list of all of the worker configurations in this account and Region.
 func (s *SDK) ListWorkerConfigurations(ctx context.Context, request operations.ListWorkerConfigurationsRequest) (*operations.ListWorkerConfigurationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/worker-configurations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1138,7 +1174,7 @@ func (s *SDK) ListWorkerConfigurations(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1238,8 +1274,9 @@ func (s *SDK) ListWorkerConfigurations(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// UpdateConnector - Updates the specified connector.
 func (s *SDK) UpdateConnector(ctx context.Context, request operations.UpdateConnectorRequest) (*operations.UpdateConnectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/connectors/{connectorArn}#currentVersion", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1261,7 +1298,7 @@ func (s *SDK) UpdateConnector(ctx context.Context, request operations.UpdateConn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

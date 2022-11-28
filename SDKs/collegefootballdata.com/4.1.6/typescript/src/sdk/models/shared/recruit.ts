@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RecruitHometownInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countyFips" })
+  @SpeakeasyMetadata({ data: "json, name=countyFips" })
   countyFips?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 }
 
 
 export class Recruit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=athleteId" })
+  @SpeakeasyMetadata({ data: "json, name=athleteId" })
   athleteId?: number;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=committedTo" })
+  @SpeakeasyMetadata({ data: "json, name=committedTo" })
   committedTo?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=hometownInfo" })
+  @SpeakeasyMetadata({ data: "json, name=hometownInfo" })
   hometownInfo?: RecruitHometownInfo;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=ranking" })
+  @SpeakeasyMetadata({ data: "json, name=ranking" })
   ranking?: number;
 
-  @Metadata({ data: "json, name=rating" })
+  @SpeakeasyMetadata({ data: "json, name=rating" })
   rating?: number;
 
-  @Metadata({ data: "json, name=recruitType" })
+  @SpeakeasyMetadata({ data: "json, name=recruitType" })
   recruitType?: string;
 
-  @Metadata({ data: "json, name=school" })
+  @SpeakeasyMetadata({ data: "json, name=school" })
   school?: string;
 
-  @Metadata({ data: "json, name=stars" })
+  @SpeakeasyMetadata({ data: "json, name=stars" })
   stars?: number;
 
-  @Metadata({ data: "json, name=stateProvince" })
+  @SpeakeasyMetadata({ data: "json, name=stateProvince" })
   stateProvince?: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year?: number;
 }

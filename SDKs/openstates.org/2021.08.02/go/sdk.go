@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://openstates.org",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BillDetailBillsJurisdictionSessionBillIDGet - Bill Detail
+// Obtain bill information based on (state, session, bill_id).
 func (s *SDK) BillDetailBillsJurisdictionSessionBillIDGet(ctx context.Context, request operations.BillDetailBillsJurisdictionSessionBillIDGetRequest) (*operations.BillDetailBillsJurisdictionSessionBillIDGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bills/{jurisdiction}/{session}/{bill_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -64,7 +87,7 @@ func (s *SDK) BillDetailBillsJurisdictionSessionBillIDGet(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -104,8 +127,10 @@ func (s *SDK) BillDetailBillsJurisdictionSessionBillIDGet(ctx context.Context, r
 	return res, nil
 }
 
+// BillDetailByIDBillsOcdBillOpenstatesBillIDGet - Bill Detail By Id
+// Obtain bill information by internal ID in the format ocd-bill/*uuid*.
 func (s *SDK) BillDetailByIDBillsOcdBillOpenstatesBillIDGet(ctx context.Context, request operations.BillDetailByIDBillsOcdBillOpenstatesBillIDGetRequest) (*operations.BillDetailByIDBillsOcdBillOpenstatesBillIDGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bills/ocd-bill/{openstates_bill_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -117,7 +142,7 @@ func (s *SDK) BillDetailByIDBillsOcdBillOpenstatesBillIDGet(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -157,8 +182,13 @@ func (s *SDK) BillDetailByIDBillsOcdBillOpenstatesBillIDGet(ctx context.Context,
 	return res, nil
 }
 
+// BillsSearchBillsGet - Bills Search
+// Search for bills matching given criteria.
+//
+// Must either specify a jurisdiction or a full text query (q).  Additional parameters will
+// futher restrict bills returned.
 func (s *SDK) BillsSearchBillsGet(ctx context.Context, request operations.BillsSearchBillsGetRequest) (*operations.BillsSearchBillsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bills"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -170,7 +200,7 @@ func (s *SDK) BillsSearchBillsGet(ctx context.Context, request operations.BillsS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -210,8 +240,10 @@ func (s *SDK) BillsSearchBillsGet(ctx context.Context, request operations.BillsS
 	return res, nil
 }
 
+// CommitteeDetailCommitteesCommitteeIDGet - Committee Detail
+// Get details on a single committee by ID.
 func (s *SDK) CommitteeDetailCommitteesCommitteeIDGet(ctx context.Context, request operations.CommitteeDetailCommitteesCommitteeIDGetRequest) (*operations.CommitteeDetailCommitteesCommitteeIDGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/committees/{committee_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -223,7 +255,7 @@ func (s *SDK) CommitteeDetailCommitteesCommitteeIDGet(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -263,8 +295,9 @@ func (s *SDK) CommitteeDetailCommitteesCommitteeIDGet(ctx context.Context, reque
 	return res, nil
 }
 
+// CommitteeListCommitteesGet - Committee List
 func (s *SDK) CommitteeListCommitteesGet(ctx context.Context, request operations.CommitteeListCommitteesGetRequest) (*operations.CommitteeListCommitteesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/committees"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -276,7 +309,7 @@ func (s *SDK) CommitteeListCommitteesGet(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -316,8 +349,10 @@ func (s *SDK) CommitteeListCommitteesGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// JurisdictionDetailJurisdictionsJurisdictionIDGet - Jurisdiction Detail
+// Get details on a single Jurisdiction (e.g. state or municipality).
 func (s *SDK) JurisdictionDetailJurisdictionsJurisdictionIDGet(ctx context.Context, request operations.JurisdictionDetailJurisdictionsJurisdictionIDGetRequest) (*operations.JurisdictionDetailJurisdictionsJurisdictionIDGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jurisdictions/{jurisdiction_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -329,7 +364,7 @@ func (s *SDK) JurisdictionDetailJurisdictionsJurisdictionIDGet(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -369,8 +404,10 @@ func (s *SDK) JurisdictionDetailJurisdictionsJurisdictionIDGet(ctx context.Conte
 	return res, nil
 }
 
+// JurisdictionListJurisdictionsGet - Jurisdiction List
+// Get list of supported Jurisdictions, a Jurisdiction is a state or municipality.
 func (s *SDK) JurisdictionListJurisdictionsGet(ctx context.Context, request operations.JurisdictionListJurisdictionsGetRequest) (*operations.JurisdictionListJurisdictionsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jurisdictions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -382,7 +419,7 @@ func (s *SDK) JurisdictionListJurisdictionsGet(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -422,8 +459,12 @@ func (s *SDK) JurisdictionListJurisdictionsGet(ctx context.Context, request oper
 	return res, nil
 }
 
+// PeopleGeoPeopleGeoGet - People Geo
+// Get list of people currently representing a given location.
+//
+// **Note:** Currently limited to state legislators.  Governors & mayors are not included.
 func (s *SDK) PeopleGeoPeopleGeoGet(ctx context.Context, request operations.PeopleGeoPeopleGeoGetRequest) (*operations.PeopleGeoPeopleGeoGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/people.geo"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -435,7 +476,7 @@ func (s *SDK) PeopleGeoPeopleGeoGet(ctx context.Context, request operations.Peop
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -475,8 +516,12 @@ func (s *SDK) PeopleGeoPeopleGeoGet(ctx context.Context, request operations.Peop
 	return res, nil
 }
 
+// PeopleSearchPeopleGet - People Search
+// Get list of people matching selected criteria.
+//
+// Must provide either **jurisdiction**, **name**, or one or more **id** parameters.
 func (s *SDK) PeopleSearchPeopleGet(ctx context.Context, request operations.PeopleSearchPeopleGetRequest) (*operations.PeopleSearchPeopleGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/people"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -488,7 +533,7 @@ func (s *SDK) PeopleSearchPeopleGet(ctx context.Context, request operations.Peop
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

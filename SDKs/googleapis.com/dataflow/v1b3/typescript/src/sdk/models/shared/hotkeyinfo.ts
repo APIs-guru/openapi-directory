@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HotKeyInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a hot key.
 **/
 export class HotKeyInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hotKeyAge" })
+  @SpeakeasyMetadata({ data: "json, name=hotKeyAge" })
   hotKeyAge?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=keyTruncated" })
+  @SpeakeasyMetadata({ data: "json, name=keyTruncated" })
   keyTruncated?: boolean;
 }

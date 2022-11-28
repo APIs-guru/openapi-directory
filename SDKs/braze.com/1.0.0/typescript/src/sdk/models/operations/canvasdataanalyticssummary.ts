@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CanvasDataAnalyticsSummaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=canvas_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=canvas_id" })
   canvasId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
   endingAt?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_deleted_step_data" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_deleted_step_data" })
   includeDeletedStepData?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_step_breakdown" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_step_breakdown" })
   includeStepBreakdown?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_variant_breakdown" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_variant_breakdown" })
   includeVariantBreakdown?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=length" })
   length?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=starting_at" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=starting_at" })
   startingAt?: string;
 }
 
 
 export class CanvasDataAnalyticsSummaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CanvasDataAnalyticsSummaryQueryParams;
 }
 
 
 export class CanvasDataAnalyticsSummaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

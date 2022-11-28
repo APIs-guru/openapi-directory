@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ReplicationSubnetGroup } from "./replicationsubnetgroup";
 // DescribeReplicationSubnetGroupsResponse
 /**
  * <p/>
@@ -34,11 +34,11 @@ var DescribeReplicationSubnetGroupsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeReplicationSubnetGroupsResponse.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationSubnetGroups", elemType: shared.ReplicationSubnetGroup }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroups", elemType: ReplicationSubnetGroup }),
         __metadata("design:type", Array)
     ], DescribeReplicationSubnetGroupsResponse.prototype, "replicationSubnetGroups", void 0);
     return DescribeReplicationSubnetGroupsResponse;

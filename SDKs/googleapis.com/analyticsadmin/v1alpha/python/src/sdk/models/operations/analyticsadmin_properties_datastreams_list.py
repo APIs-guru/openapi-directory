@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesDataStreamsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class AnalyticsadminPropertiesDataStreamsListQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesDataStreamsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesDataStreamsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class AnalyticsadminPropertiesDataStreamsListSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesDataStreamsListRequest:
-    path_params: AnalyticsadminPropertiesDataStreamsListPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesDataStreamsListQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesDataStreamsListSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesDataStreamsListPathParams = field()
+    query_params: AnalyticsadminPropertiesDataStreamsListQueryParams = field()
+    security: AnalyticsadminPropertiesDataStreamsListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesDataStreamsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_data_streams_response: Optional[shared.GoogleAnalyticsAdminV1alphaListDataStreamsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

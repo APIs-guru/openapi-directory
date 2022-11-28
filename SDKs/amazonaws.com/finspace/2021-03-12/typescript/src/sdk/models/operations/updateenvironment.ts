@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateEnvironmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class UpdateEnvironmentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum UpdateEnvironmentRequestBodyFederationModeEnum {
-    Federated = "FEDERATED"
-,    Local = "LOCAL"
+    Federated = "FEDERATED",
+    Local = "LOCAL"
 }
 
 
@@ -42,75 +43,75 @@ export enum UpdateEnvironmentRequestBodyFederationModeEnum {
  * Configuration information when authentication mode is FEDERATED.
 **/
 export class UpdateEnvironmentRequestBodyFederationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationCallBackURL" })
+  @SpeakeasyMetadata({ data: "json, name=applicationCallBackURL" })
   applicationCallBackUrl?: string;
 
-  @Metadata({ data: "json, name=attributeMap" })
+  @SpeakeasyMetadata({ data: "json, name=attributeMap" })
   attributeMap?: Map<string, string>;
 
-  @Metadata({ data: "json, name=federationProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=federationProviderName" })
   federationProviderName?: string;
 
-  @Metadata({ data: "json, name=federationURN" })
+  @SpeakeasyMetadata({ data: "json, name=federationURN" })
   federationUrn?: string;
 
-  @Metadata({ data: "json, name=samlMetadataDocument" })
+  @SpeakeasyMetadata({ data: "json, name=samlMetadataDocument" })
   samlMetadataDocument?: string;
 
-  @Metadata({ data: "json, name=samlMetadataURL" })
+  @SpeakeasyMetadata({ data: "json, name=samlMetadataURL" })
   samlMetadataUrl?: string;
 }
 
 
 export class UpdateEnvironmentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=federationMode" })
+  @SpeakeasyMetadata({ data: "json, name=federationMode" })
   federationMode?: UpdateEnvironmentRequestBodyFederationModeEnum;
 
-  @Metadata({ data: "json, name=federationParameters" })
+  @SpeakeasyMetadata({ data: "json, name=federationParameters" })
   federationParameters?: UpdateEnvironmentRequestBodyFederationParameters;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class UpdateEnvironmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateEnvironmentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateEnvironmentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateEnvironmentRequestBody;
 }
 
 
 export class UpdateEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateEnvironmentResponse?: shared.UpdateEnvironmentResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

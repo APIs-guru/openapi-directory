@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildSystemSharedDtoAgentStatus } from "./buildsystemshareddtoagentstatus";
 import { BuildSystemSharedDtoStepConfiguration } from "./buildsystemshareddtostepconfiguration";
+
 
 
 // BuildSystemSharedDtoAgent
@@ -9,21 +9,43 @@ import { BuildSystemSharedDtoStepConfiguration } from "./buildsystemshareddtoste
  * A DTO for an IAgent
 **/
 export class BuildSystemSharedDtoAgent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentID" })
+  @SpeakeasyMetadata({ data: "json, name=AgentID" })
   agentId?: number;
 
-  @Metadata({ data: "json, name=KeepAliveInterval" })
+  @SpeakeasyMetadata({ data: "json, name=KeepAliveInterval" })
   keepAliveInterval: number;
 
-  @Metadata({ data: "json, name=MachineName" })
+  @SpeakeasyMetadata({ data: "json, name=MachineName" })
   machineName: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: BuildSystemSharedDtoAgentStatus;
 
-  @Metadata({ data: "json, name=StepConfigurations", elemType: shared.BuildSystemSharedDtoStepConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=StepConfigurations", elemType: BuildSystemSharedDtoStepConfiguration })
   stepConfigurations?: BuildSystemSharedDtoStepConfiguration[];
 
-  @Metadata({ data: "json, name=UserID" })
+  @SpeakeasyMetadata({ data: "json, name=UserID" })
+  userId: number;
+}
+
+
+// BuildSystemSharedDtoAgentInput
+/** 
+ * A DTO for an IAgent
+**/
+export class BuildSystemSharedDtoAgentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AgentID, form, name=AgentID;" })
+  agentId?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=KeepAliveInterval, form, name=KeepAliveInterval;" })
+  keepAliveInterval: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MachineName, form, name=MachineName;" })
+  machineName: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Status, form, name=Status;" })
+  status: BuildSystemSharedDtoAgentStatus;
+
+  @SpeakeasyMetadata({ data: "json, name=UserID, form, name=UserID;" })
   userId: number;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum LeavePeriodStatusEnum {
-    Scheduled = "SCHEDULED"
-,    Processed = "PROCESSED"
+    Scheduled = "SCHEDULED",
+    Processed = "PROCESSED"
 }

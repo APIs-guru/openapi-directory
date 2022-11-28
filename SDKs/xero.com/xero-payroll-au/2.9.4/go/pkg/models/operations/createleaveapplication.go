@@ -14,7 +14,7 @@ type CreateLeaveApplicationSecurity struct {
 
 type CreateLeaveApplicationRequest struct {
 	Headers  CreateLeaveApplicationHeaders
-	Request  []shared.LeaveApplication `request:"mediaType=application/json"`
+	Request  []shared.LeaveApplicationInput `request:"mediaType=application/json"`
 	Security CreateLeaveApplicationSecurity
 }
 

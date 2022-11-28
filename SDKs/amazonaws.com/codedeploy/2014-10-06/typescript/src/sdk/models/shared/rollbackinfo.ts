@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RollbackInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a deployment rollback.
 **/
 export class RollbackInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rollbackDeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=rollbackDeploymentId" })
   rollbackDeploymentId?: string;
 
-  @Metadata({ data: "json, name=rollbackMessage" })
+  @SpeakeasyMetadata({ data: "json, name=rollbackMessage" })
   rollbackMessage?: string;
 
-  @Metadata({ data: "json, name=rollbackTriggeringDeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=rollbackTriggeringDeploymentId" })
   rollbackTriggeringDeploymentId?: string;
 }

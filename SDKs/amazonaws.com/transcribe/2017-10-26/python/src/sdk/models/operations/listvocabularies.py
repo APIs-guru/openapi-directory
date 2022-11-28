@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListVocabulariesXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListVocabulariesHeaders:
+    x_amz_target: ListVocabulariesXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,22 +26,21 @@ class ListVocabulariesHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListVocabulariesXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListVocabulariesRequest:
-    query_params: ListVocabulariesQueryParams = field(default=None)
-    headers: ListVocabulariesHeaders = field(default=None)
-    request: shared.ListVocabulariesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListVocabulariesHeaders = field()
+    query_params: ListVocabulariesQueryParams = field()
+    request: shared.ListVocabulariesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListVocabulariesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     list_vocabularies_response: Optional[shared.ListVocabulariesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

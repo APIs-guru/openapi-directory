@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
+
 
 
 // PubsubMessage
@@ -8,15 +8,15 @@ import { Label } from "./label";
  * A message data and its labels.
 **/
 export class PubsubMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=label", elemType: shared.Label })
+  @SpeakeasyMetadata({ data: "json, name=label", elemType: Label })
   label?: Label[];
 
-  @Metadata({ data: "json, name=messageId" })
+  @SpeakeasyMetadata({ data: "json, name=messageId" })
   messageId?: string;
 
-  @Metadata({ data: "json, name=publishTime" })
+  @SpeakeasyMetadata({ data: "json, name=publishTime" })
   publishTime?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateTrustResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of a CreateTrust request.
 **/
 export class CreateTrustResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TrustId" })
+  @SpeakeasyMetadata({ data: "json, name=TrustId" })
   trustId?: string;
 }

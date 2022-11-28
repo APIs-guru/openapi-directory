@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ObReadConsent1DataPermissionsEnum(str, Enum):
     READ_ACCOUNTS_BASIC = "ReadAccountsBasic"
@@ -32,15 +34,15 @@ class ObReadConsent1DataPermissionsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ObReadConsent1Data:
-    expiration_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExpirationDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    permissions: List[ObReadConsent1DataPermissionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permissions' }})
-    transaction_from_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactionFromDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    transaction_to_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactionToDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    permissions: List[ObReadConsent1DataPermissionsEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Permissions') }})
+    expiration_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExpirationDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    transaction_from_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransactionFromDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    transaction_to_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransactionToDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     
 
 @dataclass_json
 @dataclass
 class ObReadConsent1:
-    data: ObReadConsent1Data = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Data' }})
-    risk: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Risk' }})
+    data: ObReadConsent1Data = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Data') }})
+    risk: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Risk') }})
     

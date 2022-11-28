@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SetChannelMappingDto
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Set channel mapping dto.
 **/
 export class SetChannelMappingDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProviderChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderChannelId" })
   providerChannelId: string;
 
-  @Metadata({ data: "json, name=ProviderId" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderId" })
   providerId: string;
 
-  @Metadata({ data: "json, name=TunerChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=TunerChannelId" })
   tunerChannelId: string;
 }

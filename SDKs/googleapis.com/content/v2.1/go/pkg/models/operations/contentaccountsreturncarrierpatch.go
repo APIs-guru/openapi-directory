@@ -31,7 +31,7 @@ type ContentAccountsReturncarrierPatchSecurity struct {
 type ContentAccountsReturncarrierPatchRequest struct {
 	PathParams  ContentAccountsReturncarrierPatchPathParams
 	QueryParams ContentAccountsReturncarrierPatchQueryParams
-	Request     *shared.AccountReturnCarrier `request:"mediaType=application/json"`
+	Request     *shared.AccountReturnCarrierInput `request:"mediaType=application/json"`
 	Security    ContentAccountsReturncarrierPatchSecurity
 }
 

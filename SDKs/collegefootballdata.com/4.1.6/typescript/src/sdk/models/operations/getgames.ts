@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGamesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=away" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=away" })
   away?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=conference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" })
   conference?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=home" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=home" })
   home?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" })
   seasonType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=week" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=week" })
   week?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year: number;
 }
 
 
 export class GetGamesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGamesQueryParams;
 }
 
 
 export class GetGamesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Game })
+  @SpeakeasyMetadata({ elemType: shared.Game })
   games?: shared.Game[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

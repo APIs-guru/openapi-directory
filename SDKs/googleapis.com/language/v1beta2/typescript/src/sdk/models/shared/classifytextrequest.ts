@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationModelOptions } from "./classificationmodeloptions";
 import { Document } from "./document";
+
 
 
 // ClassifyTextRequest
@@ -8,9 +9,9 @@ import { Document } from "./document";
  * The document classification request message.
 **/
 export class ClassifyTextRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classificationModelOptions" })
+  @SpeakeasyMetadata({ data: "json, name=classificationModelOptions" })
   classificationModelOptions?: ClassificationModelOptions;
 
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: Document;
 }

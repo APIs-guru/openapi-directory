@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceEntityId } from "./datasourceentityid";
 
 
+
 export class DataSourceListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.DataSourceEntityId })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: DataSourceEntityId })
   results?: DataSourceEntityId[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount?: number;
 }

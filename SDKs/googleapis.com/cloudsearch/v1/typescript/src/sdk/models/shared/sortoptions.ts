@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SortOptionsSortOrderEnum {
-    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
 export class SortOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatorName" })
+  @SpeakeasyMetadata({ data: "json, name=operatorName" })
   operatorName?: string;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: SortOptionsSortOrderEnum;
 }

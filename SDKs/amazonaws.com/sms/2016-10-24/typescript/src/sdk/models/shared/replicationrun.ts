@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationRunStageDetails } from "./replicationrunstagedetails";
 import { ReplicationRunStateEnum } from "./replicationrunstateenum";
 import { ReplicationRunTypeEnum } from "./replicationruntypeenum";
+
 
 
 // ReplicationRun
@@ -9,36 +10,36 @@ import { ReplicationRunTypeEnum } from "./replicationruntypeenum";
  * Represents a replication run.
 **/
 export class ReplicationRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amiId" })
+  @SpeakeasyMetadata({ data: "json, name=amiId" })
   amiId?: string;
 
-  @Metadata({ data: "json, name=completedTime" })
+  @SpeakeasyMetadata({ data: "json, name=completedTime" })
   completedTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=replicationRunId" })
+  @SpeakeasyMetadata({ data: "json, name=replicationRunId" })
   replicationRunId?: string;
 
-  @Metadata({ data: "json, name=scheduledStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledStartTime" })
   scheduledStartTime?: Date;
 
-  @Metadata({ data: "json, name=stageDetails" })
+  @SpeakeasyMetadata({ data: "json, name=stageDetails" })
   stageDetails?: ReplicationRunStageDetails;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ReplicationRunStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ReplicationRunTypeEnum;
 }

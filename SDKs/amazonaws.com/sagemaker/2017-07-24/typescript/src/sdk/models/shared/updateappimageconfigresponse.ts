@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateAppImageConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppImageConfigArn" })
+  @SpeakeasyMetadata({ data: "json, name=AppImageConfigArn" })
   appImageConfigArn?: string;
 }

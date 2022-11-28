@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ReadabilityAssessmentRequestBody = /** @class */ (function (_super) {
     __extends(ReadabilityAssessmentRequestBody, _super);
     function ReadabilityAssessmentRequestBody() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=api_key;" }),
         __metadata("design:type", String)
     ], ReadabilityAssessmentRequestBody.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=text;" }),
+        SpeakeasyMetadata({ data: "form, name=text;" }),
         __metadata("design:type", String)
     ], ReadabilityAssessmentRequestBody.prototype, "text", void 0);
     return ReadabilityAssessmentRequestBody;
@@ -45,7 +45,7 @@ var ReadabilityAssessmentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", ReadabilityAssessmentRequestBody)
     ], ReadabilityAssessmentRequest.prototype, "request", void 0);
     return ReadabilityAssessmentRequest;
@@ -57,11 +57,11 @@ var ReadabilityAssessmentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReadabilityAssessmentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReadabilityAssessmentResponse.prototype, "statusCode", void 0);
     return ReadabilityAssessmentResponse;

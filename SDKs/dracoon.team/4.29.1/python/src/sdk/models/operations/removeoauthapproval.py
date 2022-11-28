@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveOAuthApprovalPathParams:
-    client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
+    client_id: str = field(metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveOAuthApprovalHeaders:
 
 @dataclass
 class RemoveOAuthApprovalRequest:
-    path_params: RemoveOAuthApprovalPathParams = field(default=None)
-    headers: RemoveOAuthApprovalHeaders = field(default=None)
+    headers: RemoveOAuthApprovalHeaders = field()
+    path_params: RemoveOAuthApprovalPathParams = field()
     
 
 @dataclass
 class RemoveOAuthApprovalResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StorageObjectsComposePathParams:
-    destination_bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'destinationBucket', 'style': 'simple', 'explode': False }})
-    destination_object: str = field(default=None, metadata={'path_param': { 'field_name': 'destinationObject', 'style': 'simple', 'explode': False }})
+    destination_bucket: str = field(metadata={'path_param': { 'field_name': 'destinationBucket', 'style': 'simple', 'explode': False }})
+    destination_object: str = field(metadata={'path_param': { 'field_name': 'destinationObject', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +25,14 @@ class StorageObjectsComposeQueryParams:
 
 @dataclass
 class StorageObjectsComposeSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageObjectsComposeSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -42,15 +43,15 @@ class StorageObjectsComposeSecurity:
 
 @dataclass
 class StorageObjectsComposeRequest:
-    path_params: StorageObjectsComposePathParams = field(default=None)
-    query_params: StorageObjectsComposeQueryParams = field(default=None)
+    path_params: StorageObjectsComposePathParams = field()
+    query_params: StorageObjectsComposeQueryParams = field()
+    security: StorageObjectsComposeSecurity = field()
     request: Optional[shared.ComposeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StorageObjectsComposeSecurity = field(default=None)
     
 
 @dataclass
 class StorageObjectsComposeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object: Optional[shared.Object] = field(default=None)
-    status_code: int = field(default=None)
     

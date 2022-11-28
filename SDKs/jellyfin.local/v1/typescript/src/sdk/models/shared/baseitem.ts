@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediaUrl } from "./mediaurl";
+
 
 
 // BaseItem
@@ -8,36 +8,36 @@ import { MediaUrl } from "./mediaurl";
  * Class BaseItem.
 **/
 export class BaseItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=DateLastSaved" })
+  @SpeakeasyMetadata({ data: "json, name=DateLastSaved" })
   dateLastSaved?: Date;
 
-  @Metadata({ data: "json, name=ExtraIds" })
+  @SpeakeasyMetadata({ data: "json, name=ExtraIds" })
   extraIds?: string[];
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=IsHD" })
+  @SpeakeasyMetadata({ data: "json, name=IsHD" })
   isHd?: boolean;
 
-  @Metadata({ data: "json, name=IsShortcut" })
+  @SpeakeasyMetadata({ data: "json, name=IsShortcut" })
   isShortcut?: boolean;
 
-  @Metadata({ data: "json, name=RemoteTrailers", elemType: shared.MediaUrl })
+  @SpeakeasyMetadata({ data: "json, name=RemoteTrailers", elemType: MediaUrl })
   remoteTrailers?: MediaUrl[];
 
-  @Metadata({ data: "json, name=ShortcutPath" })
+  @SpeakeasyMetadata({ data: "json, name=ShortcutPath" })
   shortcutPath?: string;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: number;
 
-  @Metadata({ data: "json, name=SupportsExternalTransfer" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsExternalTransfer" })
   supportsExternalTransfer?: boolean;
 
-  @Metadata({ data: "json, name=Width" })
+  @SpeakeasyMetadata({ data: "json, name=Width" })
   width?: number;
 }

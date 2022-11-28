@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteSamlProviderActionEnum(str, Enum):
     DELETE_SAML_PROVIDER = "DeleteSAMLProvider"
@@ -10,9 +14,9 @@ class GetDeleteSamlProviderVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteSamlProviderQueryParams:
-    action: GetDeleteSamlProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    saml_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
-    version: GetDeleteSamlProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteSamlProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    saml_provider_arn: str = field(metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
+    version: GetDeleteSamlProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteSamlProviderHeaders:
 
 @dataclass
 class GetDeleteSamlProviderRequest:
-    query_params: GetDeleteSamlProviderQueryParams = field(default=None)
-    headers: GetDeleteSamlProviderHeaders = field(default=None)
+    headers: GetDeleteSamlProviderHeaders = field()
+    query_params: GetDeleteSamlProviderQueryParams = field()
     
 
 @dataclass
 class GetDeleteSamlProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

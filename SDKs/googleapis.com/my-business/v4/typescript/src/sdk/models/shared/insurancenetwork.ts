@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InsuranceNetworkStateEnum {
-    NetworkStateUnspecified = "NETWORK_STATE_UNSPECIFIED"
-,    Accepted = "ACCEPTED"
-,    PendingAdd = "PENDING_ADD"
-,    PendingDelete = "PENDING_DELETE"
-,    NotAccepted = "NOT_ACCEPTED"
+    NetworkStateUnspecified = "NETWORK_STATE_UNSPECIFIED",
+    Accepted = "ACCEPTED",
+    PendingAdd = "PENDING_ADD",
+    PendingDelete = "PENDING_DELETE",
+    NotAccepted = "NOT_ACCEPTED"
 }
 
 
@@ -14,15 +15,15 @@ export enum InsuranceNetworkStateEnum {
  * A single insurance network. Next id: 5
 **/
 export class InsuranceNetwork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkId" })
+  @SpeakeasyMetadata({ data: "json, name=networkId" })
   networkId?: string;
 
-  @Metadata({ data: "json, name=networkNames" })
+  @SpeakeasyMetadata({ data: "json, name=networkNames" })
   networkNames?: Map<string, string>;
 
-  @Metadata({ data: "json, name=payerNames" })
+  @SpeakeasyMetadata({ data: "json, name=payerNames" })
   payerNames?: Map<string, string>;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InsuranceNetworkStateEnum;
 }

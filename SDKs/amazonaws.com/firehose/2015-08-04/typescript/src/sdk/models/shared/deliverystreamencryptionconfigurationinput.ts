@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyTypeEnum } from "./keytypeenum";
+
 
 
 // DeliveryStreamEncryptionConfigurationInput
@@ -7,9 +8,9 @@ import { KeyTypeEnum } from "./keytypeenum";
  * Specifies the type and Amazon Resource Name (ARN) of the CMK to use for Server-Side Encryption (SSE). 
 **/
 export class DeliveryStreamEncryptionConfigurationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KeyARN" })
+  @SpeakeasyMetadata({ data: "json, name=KeyARN" })
   keyArn?: string;
 
-  @Metadata({ data: "json, name=KeyType" })
+  @SpeakeasyMetadata({ data: "json, name=KeyType" })
   keyType: KeyTypeEnum;
 }

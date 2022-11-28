@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import instancestate_enum
-from . import instancestatechangereason
-from . import instancetimeline
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InstanceStatus:
-    state: Optional[instancestate_enum.InstanceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
-    state_change_reason: Optional[instancestatechangereason.InstanceStateChangeReason] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StateChangeReason' }})
-    timeline: Optional[instancetimeline.InstanceTimeline] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Timeline' }})
+    r"""InstanceStatus
+    The instance status details.
+    """
+    
+    state: Optional[InstanceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
+    state_change_reason: Optional[InstanceStateChangeReason] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StateChangeReason') }})
+    timeline: Optional[InstanceTimeline] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Timeline') }})
     

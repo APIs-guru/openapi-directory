@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreditDebitIndicatorEnum } from "./creditdebitindicatorenum";
+
 
 
 // StartBalance
@@ -7,9 +8,9 @@ import { CreditDebitIndicatorEnum } from "./creditdebitindicatorenum";
  * The starting balance of the statement
 **/
 export class StartBalance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=creditDebitIndicator" })
+  @SpeakeasyMetadata({ data: "json, name=creditDebitIndicator" })
   creditDebitIndicator?: CreditDebitIndicatorEnum;
 }

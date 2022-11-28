@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeGeofenceCollectionPathParams:
-    collection_name: str = field(default=None, metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
+    collection_name: str = field(metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DescribeGeofenceCollectionHeaders:
 
 @dataclass
 class DescribeGeofenceCollectionRequest:
-    path_params: DescribeGeofenceCollectionPathParams = field(default=None)
-    headers: DescribeGeofenceCollectionHeaders = field(default=None)
+    headers: DescribeGeofenceCollectionHeaders = field()
+    path_params: DescribeGeofenceCollectionPathParams = field()
     
 
 @dataclass
 class DescribeGeofenceCollectionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_geofence_collection_response: Optional[shared.DescribeGeofenceCollectionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

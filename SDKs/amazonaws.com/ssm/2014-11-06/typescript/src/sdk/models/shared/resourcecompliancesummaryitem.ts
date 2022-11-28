@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompliantSummary } from "./compliantsummary";
 import { ComplianceExecutionSummary } from "./complianceexecutionsummary";
 import { NonCompliantSummary } from "./noncompliantsummary";
@@ -6,32 +6,33 @@ import { ComplianceSeverityEnum } from "./complianceseverityenum";
 import { ComplianceStatusEnum } from "./compliancestatusenum";
 
 
+
 // ResourceComplianceSummaryItem
 /** 
  * Compliance summary information for a specific resource. 
 **/
 export class ResourceComplianceSummaryItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: string;
 
-  @Metadata({ data: "json, name=CompliantSummary" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantSummary" })
   compliantSummary?: CompliantSummary;
 
-  @Metadata({ data: "json, name=ExecutionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionSummary" })
   executionSummary?: ComplianceExecutionSummary;
 
-  @Metadata({ data: "json, name=NonCompliantSummary" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantSummary" })
   nonCompliantSummary?: NonCompliantSummary;
 
-  @Metadata({ data: "json, name=OverallSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=OverallSeverity" })
   overallSeverity?: ComplianceSeverityEnum;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ComplianceStatusEnum;
 }

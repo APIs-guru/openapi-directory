@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageCodeEnum } from "./languagecodeenum";
 var DetectEntitiesRequest = /** @class */ (function (_super) {
     __extends(DetectEntitiesRequest, _super);
@@ -30,15 +30,15 @@ var DetectEntitiesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndpointArn" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointArn" }),
         __metadata("design:type", String)
     ], DetectEntitiesRequest.prototype, "endpointArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LanguageCode" }),
+        SpeakeasyMetadata({ data: "json, name=LanguageCode" }),
         __metadata("design:type", String)
     ], DetectEntitiesRequest.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], DetectEntitiesRequest.prototype, "text", void 0);
     return DetectEntitiesRequest;

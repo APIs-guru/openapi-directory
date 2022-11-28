@@ -10,18 +10,18 @@ class CheckEeBtEligibilityQueryParams:
 
 @dataclass
 class CheckEeBtEligibilitySecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CheckEeBtEligibilityRequest:
-    query_params: CheckEeBtEligibilityQueryParams = field(default=None)
-    security: CheckEeBtEligibilitySecurity = field(default=None)
+    query_params: CheckEeBtEligibilityQueryParams = field()
+    security: CheckEeBtEligibilitySecurity = field()
     
 
 @dataclass
 class CheckEeBtEligibilityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ee_bt_eligibility: Optional[shared.EeBtEligibility] = field(default=None)
-    status_code: int = field(default=None)
     

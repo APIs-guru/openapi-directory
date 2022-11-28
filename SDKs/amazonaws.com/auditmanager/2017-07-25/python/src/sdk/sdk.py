@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/auditmanager/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/auditmanager/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def associate_assessment_report_evidence_folder(self, request: operations.AssociateAssessmentReportEvidenceFolderRequest) -> operations.AssociateAssessmentReportEvidenceFolderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Associates an evidence folder to the specified assessment report in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/associateToAssessmentReport", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -75,22 +104,22 @@ class SDK:
 
     
     def batch_associate_assessment_report_evidence(self, request: operations.BatchAssociateAssessmentReportEvidenceRequest) -> operations.BatchAssociateAssessmentReportEvidenceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Associates a list of evidence to an assessment report in an Audit Manager assessment. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/batchAssociateToAssessmentReport", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -121,22 +150,22 @@ class SDK:
 
     
     def batch_create_delegation_by_assessment(self, request: operations.BatchCreateDelegationByAssessmentRequest) -> operations.BatchCreateDelegationByAssessmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Create a batch of delegations for a specified assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/delegations", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -167,22 +196,22 @@ class SDK:
 
     
     def batch_delete_delegation_by_assessment(self, request: operations.BatchDeleteDelegationByAssessmentRequest) -> operations.BatchDeleteDelegationByAssessmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes the delegations in the specified Audit Manager assessment. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/delegations", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -213,22 +242,22 @@ class SDK:
 
     
     def batch_disassociate_assessment_report_evidence(self, request: operations.BatchDisassociateAssessmentReportEvidenceRequest) -> operations.BatchDisassociateAssessmentReportEvidenceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Disassociates a list of evidence from the specified assessment report in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/batchDisassociateFromAssessmentReport", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -259,22 +288,22 @@ class SDK:
 
     
     def batch_import_evidence_to_assessment_control(self, request: operations.BatchImportEvidenceToAssessmentControlRequest) -> operations.BatchImportEvidenceToAssessmentControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}/evidence", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -305,22 +334,22 @@ class SDK:
 
     
     def create_assessment(self, request: operations.CreateAssessmentRequest) -> operations.CreateAssessmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates an assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/assessments"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -351,22 +380,22 @@ class SDK:
 
     
     def create_assessment_framework(self, request: operations.CreateAssessmentFrameworkRequest) -> operations.CreateAssessmentFrameworkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates a custom framework in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/assessmentFrameworks"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -397,22 +426,22 @@ class SDK:
 
     
     def create_assessment_report(self, request: operations.CreateAssessmentReportRequest) -> operations.CreateAssessmentReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates an assessment report for the specified assessment. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/reports", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -443,22 +472,22 @@ class SDK:
 
     
     def create_control(self, request: operations.CreateControlRequest) -> operations.CreateControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates a new custom control in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/controls"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -489,15 +518,17 @@ class SDK:
 
     
     def delete_assessment(self, request: operations.DeleteAssessmentRequest) -> operations.DeleteAssessmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes an assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -528,15 +559,17 @@ class SDK:
 
     
     def delete_assessment_framework(self, request: operations.DeleteAssessmentFrameworkRequest) -> operations.DeleteAssessmentFrameworkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes a custom framework in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessmentFrameworks/{frameworkId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -567,15 +600,17 @@ class SDK:
 
     
     def delete_assessment_report(self, request: operations.DeleteAssessmentReportRequest) -> operations.DeleteAssessmentReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes an assessment report from an assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/reports/{assessmentReportId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -606,15 +641,17 @@ class SDK:
 
     
     def delete_control(self, request: operations.DeleteControlRequest) -> operations.DeleteControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes a custom control in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/controls/{controlId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -645,15 +682,17 @@ class SDK:
 
     
     def deregister_account(self, request: operations.DeregisterAccountRequest) -> operations.DeregisterAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deregisters an account in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/deregisterAccount"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -684,22 +723,22 @@ class SDK:
 
     
     def deregister_organization_admin_account(self, request: operations.DeregisterOrganizationAdminAccountRequest) -> operations.DeregisterOrganizationAdminAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Removes the specified member account as a delegated administrator for Audit Manager. </p> <important> <p>When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.</p> </important>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/deregisterOrganizationAdminAccount"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -730,22 +769,22 @@ class SDK:
 
     
     def disassociate_assessment_report_evidence_folder(self, request: operations.DisassociateAssessmentReportEvidenceFolderRequest) -> operations.DisassociateAssessmentReportEvidenceFolderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Disassociates an evidence folder from the specified assessment report in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/disassociateFromAssessmentReport", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -776,15 +815,17 @@ class SDK:
 
     
     def get_account_status(self, request: operations.GetAccountStatusRequest) -> operations.GetAccountStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns the registration status of an account in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/status"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -803,15 +844,17 @@ class SDK:
 
     
     def get_assessment(self, request: operations.GetAssessmentRequest) -> operations.GetAssessmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns an assessment from Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -842,15 +885,17 @@ class SDK:
 
     
     def get_assessment_framework(self, request: operations.GetAssessmentFrameworkRequest) -> operations.GetAssessmentFrameworkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a framework from Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessmentFrameworks/{frameworkId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -881,15 +926,17 @@ class SDK:
 
     
     def get_assessment_report_url(self, request: operations.GetAssessmentReportURLRequest) -> operations.GetAssessmentReportURLResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns the URL of a specified assessment report in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/reports/{assessmentReportId}/url", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -920,17 +967,18 @@ class SDK:
 
     
     def get_change_logs(self, request: operations.GetChangeLogsRequest) -> operations.GetChangeLogsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of changelogs from Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/changelogs", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -961,15 +1009,17 @@ class SDK:
 
     
     def get_control(self, request: operations.GetControlRequest) -> operations.GetControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a control from Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/controls/{controlId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1000,17 +1050,18 @@ class SDK:
 
     
     def get_delegations(self, request: operations.GetDelegationsRequest) -> operations.GetDelegationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of delegations from an audit owner to a delegate. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/delegations"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1037,15 +1088,17 @@ class SDK:
 
     
     def get_evidence(self, request: operations.GetEvidenceRequest) -> operations.GetEvidenceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns evidence from Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence/{evidenceId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1076,17 +1129,18 @@ class SDK:
 
     
     def get_evidence_by_evidence_folder(self, request: operations.GetEvidenceByEvidenceFolderRequest) -> operations.GetEvidenceByEvidenceFolderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns all evidence from a specified evidence folder in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1117,15 +1171,17 @@ class SDK:
 
     
     def get_evidence_folder(self, request: operations.GetEvidenceFolderRequest) -> operations.GetEvidenceFolderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns an evidence folder from the specified assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1156,17 +1212,18 @@ class SDK:
 
     
     def get_evidence_folders_by_assessment(self, request: operations.GetEvidenceFoldersByAssessmentRequest) -> operations.GetEvidenceFoldersByAssessmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns the evidence folders from a specified assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/evidenceFolders", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1197,17 +1254,18 @@ class SDK:
 
     
     def get_evidence_folders_by_assessment_control(self, request: operations.GetEvidenceFoldersByAssessmentControlRequest) -> operations.GetEvidenceFoldersByAssessmentControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/evidenceFolders-by-assessment-control/{controlSetId}/{controlId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1238,15 +1296,17 @@ class SDK:
 
     
     def get_organization_admin_account(self, request: operations.GetOrganizationAdminAccountRequest) -> operations.GetOrganizationAdminAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns the name of the delegated Amazon Web Services administrator account for the organization. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/organizationAdminAccount"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1277,15 +1337,17 @@ class SDK:
 
     
     def get_services_in_scope(self, request: operations.GetServicesInScopeRequest) -> operations.GetServicesInScopeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of the in-scope Amazon Web Services services for the specified assessment. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/services"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1312,15 +1374,17 @@ class SDK:
 
     
     def get_settings(self, request: operations.GetSettingsRequest) -> operations.GetSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns the settings for the specified account. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/settings/{attribute}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1343,17 +1407,18 @@ class SDK:
 
     
     def list_assessment_frameworks(self, request: operations.ListAssessmentFrameworksRequest) -> operations.ListAssessmentFrameworksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of the frameworks available in the Audit Manager framework library. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/assessmentFrameworks#frameworkType"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1380,17 +1445,18 @@ class SDK:
 
     
     def list_assessment_reports(self, request: operations.ListAssessmentReportsRequest) -> operations.ListAssessmentReportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of assessment reports created in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/assessmentReports"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1417,17 +1483,18 @@ class SDK:
 
     
     def list_assessments(self, request: operations.ListAssessmentsRequest) -> operations.ListAssessmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of current and past assessments from Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/assessments"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1454,17 +1521,18 @@ class SDK:
 
     
     def list_controls(self, request: operations.ListControlsRequest) -> operations.ListControlsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of controls from Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/controls#controlType"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1491,17 +1559,18 @@ class SDK:
 
     
     def list_keywords_for_data_source(self, request: operations.ListKeywordsForDataSourceRequest) -> operations.ListKeywordsForDataSourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of keywords that pre-mapped to the specified control data source. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dataSourceKeywords#source"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1528,17 +1597,18 @@ class SDK:
 
     
     def list_notifications(self, request: operations.ListNotificationsRequest) -> operations.ListNotificationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of all Audit Manager notifications. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/notifications"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1565,15 +1635,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of tags for the specified resource in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1600,22 +1672,22 @@ class SDK:
 
     
     def register_account(self, request: operations.RegisterAccountRequest) -> operations.RegisterAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Enables Audit Manager for the specified account. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/registerAccount"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1646,22 +1718,22 @@ class SDK:
 
     
     def register_organization_admin_account(self, request: operations.RegisterOrganizationAdminAccountRequest) -> operations.RegisterOrganizationAdminAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Enables an account within the organization as the delegated administrator for Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/registerOrganizationAdminAccount"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1692,22 +1764,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Tags the specified resource in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1734,17 +1806,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Removes a tag from a resource in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1771,22 +1844,22 @@ class SDK:
 
     
     def update_assessment(self, request: operations.UpdateAssessmentRequest) -> operations.UpdateAssessmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Edits an Audit Manager assessment. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1817,22 +1890,22 @@ class SDK:
 
     
     def update_assessment_control(self, request: operations.UpdateAssessmentControlRequest) -> operations.UpdateAssessmentControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates a control within an assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1863,22 +1936,22 @@ class SDK:
 
     
     def update_assessment_control_set_status(self, request: operations.UpdateAssessmentControlSetStatusRequest) -> operations.UpdateAssessmentControlSetStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates the status of a control set in an Audit Manager assessment. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/controlSets/{controlSetId}/status", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1909,22 +1982,22 @@ class SDK:
 
     
     def update_assessment_framework(self, request: operations.UpdateAssessmentFrameworkRequest) -> operations.UpdateAssessmentFrameworkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates a custom framework in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessmentFrameworks/{frameworkId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1955,22 +2028,22 @@ class SDK:
 
     
     def update_assessment_status(self, request: operations.UpdateAssessmentStatusRequest) -> operations.UpdateAssessmentStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates the status of an assessment in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/assessments/{assessmentId}/status", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2001,22 +2074,22 @@ class SDK:
 
     
     def update_control(self, request: operations.UpdateControlRequest) -> operations.UpdateControlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates a custom control in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/controls/{controlId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2047,22 +2120,22 @@ class SDK:
 
     
     def update_settings(self, request: operations.UpdateSettingsRequest) -> operations.UpdateSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates Audit Manager settings for the current user account. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/settings"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2089,22 +2162,22 @@ class SDK:
 
     
     def validate_assessment_report_integrity(self, request: operations.ValidateAssessmentReportIntegrityRequest) -> operations.ValidateAssessmentReportIntegrityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Validates the integrity of an assessment report in Audit Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/assessmentReports/integrity"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

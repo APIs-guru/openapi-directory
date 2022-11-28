@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetReceiptRulePositionActionEnum(str, Enum):
     SET_RECEIPT_RULE_POSITION = "SetReceiptRulePosition"
@@ -10,8 +14,8 @@ class PostSetReceiptRulePositionVersionEnum(str, Enum):
 
 @dataclass
 class PostSetReceiptRulePositionQueryParams:
-    action: PostSetReceiptRulePositionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetReceiptRulePositionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetReceiptRulePositionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetReceiptRulePositionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetReceiptRulePositionHeaders:
 
 @dataclass
 class PostSetReceiptRulePositionRequest:
-    query_params: PostSetReceiptRulePositionQueryParams = field(default=None)
-    headers: PostSetReceiptRulePositionHeaders = field(default=None)
+    headers: PostSetReceiptRulePositionHeaders = field()
+    query_params: PostSetReceiptRulePositionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetReceiptRulePositionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

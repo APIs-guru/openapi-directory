@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressVerificationData } from "./addressverificationdata";
 import { EmailVerificationData } from "./emailverificationdata";
 export var VerificationOptionVerificationMethodEnum;
@@ -45,19 +45,19 @@ var VerificationOption = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addressData" }),
+        SpeakeasyMetadata({ data: "json, name=addressData" }),
         __metadata("design:type", AddressVerificationData)
     ], VerificationOption.prototype, "addressData", void 0);
     __decorate([
-        Metadata({ data: "json, name=emailData" }),
+        SpeakeasyMetadata({ data: "json, name=emailData" }),
         __metadata("design:type", EmailVerificationData)
     ], VerificationOption.prototype, "emailData", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=phoneNumber" }),
         __metadata("design:type", String)
     ], VerificationOption.prototype, "phoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=verificationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=verificationMethod" }),
         __metadata("design:type", String)
     ], VerificationOption.prototype, "verificationMethod", void 0);
     return VerificationOption;

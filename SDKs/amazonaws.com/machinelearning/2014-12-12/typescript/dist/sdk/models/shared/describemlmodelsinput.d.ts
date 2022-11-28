@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MlModelFilterVariableEnum } from "./mlmodelfiltervariableenum";
 import { SortOrderEnum } from "./sortorderenum";
 export declare class DescribeMlModelsInput extends SpeakeasyBase {

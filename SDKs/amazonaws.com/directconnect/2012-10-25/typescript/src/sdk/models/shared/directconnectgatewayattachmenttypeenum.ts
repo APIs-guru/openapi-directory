@@ -1,6 +1,7 @@
 
 
+
 export enum DirectConnectGatewayAttachmentTypeEnum {
-    TransitVirtualInterface = "TransitVirtualInterface"
-,    PrivateVirtualInterface = "PrivateVirtualInterface"
+    TransitVirtualInterface = "TransitVirtualInterface",
+    PrivateVirtualInterface = "PrivateVirtualInterface"
 }

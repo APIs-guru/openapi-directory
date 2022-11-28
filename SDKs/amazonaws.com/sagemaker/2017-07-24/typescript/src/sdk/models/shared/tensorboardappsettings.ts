@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceSpec } from "./resourcespec";
+
 
 
 // TensorBoardAppSettings
@@ -7,6 +8,6 @@ import { ResourceSpec } from "./resourcespec";
  * The TensorBoard app settings.
 **/
 export class TensorBoardAppSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultResourceSpec" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultResourceSpec" })
   defaultResourceSpec?: ResourceSpec;
 }

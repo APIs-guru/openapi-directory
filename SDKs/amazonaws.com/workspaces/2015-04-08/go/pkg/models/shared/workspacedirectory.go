@@ -1,5 +1,7 @@
 package shared
 
+// WorkspaceDirectory
+// Describes a directory that is used with Amazon WorkSpaces.
 type WorkspaceDirectory struct {
 	Alias                       *string                             `json:"Alias,omitempty"`
 	CustomerUserName            *string                             `json:"CustomerUserName,omitempty"`

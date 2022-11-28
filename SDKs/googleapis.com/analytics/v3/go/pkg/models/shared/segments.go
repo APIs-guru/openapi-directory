@@ -1,5 +1,7 @@
 package shared
 
+// Segments
+// An segment collection lists Analytics segments that the user has access to. Each resource in the collection corresponds to a single Analytics segment.
 type Segments struct {
 	Items        []Segment `json:"items,omitempty"`
 	ItemsPerPage *int32    `json:"itemsPerPage,omitempty"`

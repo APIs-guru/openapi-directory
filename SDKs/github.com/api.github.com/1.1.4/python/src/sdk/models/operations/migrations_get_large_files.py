@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class MigrationsGetLargeFilesPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class MigrationsGetLargeFilesRequest:
-    path_params: MigrationsGetLargeFilesPathParams = field(default=None)
+    path_params: MigrationsGetLargeFilesPathParams = field()
     
 
 @dataclass
 class MigrationsGetLargeFilesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     porter_large_files: Optional[List[shared.PorterLargeFile]] = field(default=None)
     

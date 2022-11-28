@@ -1,5 +1,7 @@
 package shared
 
+// APICache
+// The <code>ApiCache</code> object.
 type APICache struct {
 	APICachingBehavior       *APICachingBehaviorEnum `json:"apiCachingBehavior,omitempty"`
 	AtRestEncryptionEnabled  *bool                   `json:"atRestEncryptionEnabled,omitempty"`

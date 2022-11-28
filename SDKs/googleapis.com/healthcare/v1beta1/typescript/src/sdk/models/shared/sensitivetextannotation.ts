@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Detail } from "./detail";
+
 
 
 // SensitiveTextAnnotation
@@ -8,6 +8,6 @@ import { Detail } from "./detail";
  * A TextAnnotation specifies a text range that includes sensitive information.
 **/
 export class SensitiveTextAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details", elemType: shared.Detail })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: Detail })
   details?: Map<string, Detail>;
 }

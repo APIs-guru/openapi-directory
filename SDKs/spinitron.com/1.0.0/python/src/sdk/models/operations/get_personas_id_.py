@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPersonasIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class GetPersonasIDQueryParams:
 
 @dataclass
 class GetPersonasIDRequest:
-    path_params: GetPersonasIDPathParams = field(default=None)
-    query_params: GetPersonasIDQueryParams = field(default=None)
+    path_params: GetPersonasIDPathParams = field()
+    query_params: GetPersonasIDQueryParams = field()
     
 
 @dataclass
 class GetPersonasIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     persona: Optional[shared.Persona] = field(default=None)
-    status_code: int = field(default=None)
     

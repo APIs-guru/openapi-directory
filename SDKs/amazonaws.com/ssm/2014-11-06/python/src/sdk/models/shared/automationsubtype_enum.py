@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AutomationSubtypeEnum(str, Enum):
     CHANGE_REQUEST = "ChangeRequest"

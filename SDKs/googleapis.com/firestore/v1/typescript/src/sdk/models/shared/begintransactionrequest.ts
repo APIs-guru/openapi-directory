@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransactionOptions } from "./transactionoptions";
+
 
 
 // BeginTransactionRequest
@@ -7,6 +8,6 @@ import { TransactionOptions } from "./transactionoptions";
  * The request for Firestore.BeginTransaction.
 **/
 export class BeginTransactionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: TransactionOptions;
 }

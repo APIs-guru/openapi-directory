@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchiveRuleSummary } from "./archiverulesummary";
+
 
 
 // ListArchiveRulesResponse
@@ -8,9 +8,9 @@ import { ArchiveRuleSummary } from "./archiverulesummary";
  * The response to the request.
 **/
 export class ListArchiveRulesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archiveRules", elemType: shared.ArchiveRuleSummary })
+  @SpeakeasyMetadata({ data: "json, name=archiveRules", elemType: ArchiveRuleSummary })
   archiveRules: ArchiveRuleSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

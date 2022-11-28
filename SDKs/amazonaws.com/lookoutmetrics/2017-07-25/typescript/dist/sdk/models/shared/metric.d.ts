@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AggregationFunctionEnum } from "./aggregationfunctionenum";
 /**
  * A calculation made by contrasting a measure and a dimension from your source data.

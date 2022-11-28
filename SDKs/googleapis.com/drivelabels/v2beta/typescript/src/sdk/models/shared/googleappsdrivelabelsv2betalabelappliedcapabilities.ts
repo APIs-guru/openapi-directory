@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2betaLabelAppliedCapabilities
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The capabilities a user has on this label's applied metadata.
 **/
 export class GoogleAppsDriveLabelsV2betaLabelAppliedCapabilities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canApply" })
+  @SpeakeasyMetadata({ data: "json, name=canApply" })
   canApply?: boolean;
 
-  @Metadata({ data: "json, name=canRead" })
+  @SpeakeasyMetadata({ data: "json, name=canRead" })
   canRead?: boolean;
 
-  @Metadata({ data: "json, name=canRemove" })
+  @SpeakeasyMetadata({ data: "json, name=canRemove" })
   canRemove?: boolean;
 }

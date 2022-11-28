@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
-import { Job } from "./job";
+
 
 
 // DeploymentJobs
@@ -8,9 +8,9 @@ import { Job } from "./job";
  * Deployment job composition.
 **/
 export class DeploymentJobs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deployJob" })
+  @SpeakeasyMetadata({ data: "json, name=deployJob" })
   deployJob?: Job;
 
-  @Metadata({ data: "json, name=verifyJob" })
+  @SpeakeasyMetadata({ data: "json, name=verifyJob" })
   verifyJob?: Job;
 }

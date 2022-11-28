@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Product } from "./product";
 import { Links } from "./links";
 import { Meta } from "./meta";
 
 
+
 export class GetProductsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Product })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Product })
   data: Product[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: Links;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: Meta;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=status_code" })
+  @SpeakeasyMetadata({ data: "json, name=status_code" })
   statusCode: number;
 }

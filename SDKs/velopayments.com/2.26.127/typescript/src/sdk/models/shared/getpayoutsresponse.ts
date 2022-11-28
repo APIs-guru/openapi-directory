@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PayoutSummaryAudit } from "./payoutsummaryaudit";
+
 
 
 // GetPayoutsResponse
@@ -8,12 +8,12 @@ import { PayoutSummaryAudit } from "./payoutsummaryaudit";
  * List Payouts Response
 **/
 export class GetPayoutsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.PayoutSummaryAudit })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: PayoutSummaryAudit })
   content?: PayoutSummaryAudit[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: any[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: any;
 }

@@ -30,7 +30,7 @@ type ContactcenterinsightsProjectsLocationsPhraseMatchersCreateSecurity struct {
 type ContactcenterinsightsProjectsLocationsPhraseMatchersCreateRequest struct {
 	PathParams  ContactcenterinsightsProjectsLocationsPhraseMatchersCreatePathParams
 	QueryParams ContactcenterinsightsProjectsLocationsPhraseMatchersCreateQueryParams
-	Request     *shared.GoogleCloudContactcenterinsightsV1PhraseMatcher `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudContactcenterinsightsV1PhraseMatcherInput `request:"mediaType=application/json"`
 	Security    ContactcenterinsightsProjectsLocationsPhraseMatchersCreateSecurity
 }
 

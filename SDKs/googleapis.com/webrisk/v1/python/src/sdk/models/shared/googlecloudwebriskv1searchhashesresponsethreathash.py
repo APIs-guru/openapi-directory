@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudWebriskV1SearchHashesResponseThreatHashThreatTypesEnum(str, Enum):
     THREAT_TYPE_UNSPECIFIED = "THREAT_TYPE_UNSPECIFIED"
@@ -13,7 +15,11 @@ class GoogleCloudWebriskV1SearchHashesResponseThreatHashThreatTypesEnum(str, Enu
 @dataclass_json
 @dataclass
 class GoogleCloudWebriskV1SearchHashesResponseThreatHash:
-    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expireTime' }})
-    hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hash' }})
-    threat_types: Optional[List[GoogleCloudWebriskV1SearchHashesResponseThreatHashThreatTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threatTypes' }})
+    r"""GoogleCloudWebriskV1SearchHashesResponseThreatHash
+    Contains threat information on a matching hash.
+    """
+    
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hash') }})
+    threat_types: Optional[List[GoogleCloudWebriskV1SearchHashesResponseThreatHashThreatTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threatTypes') }})
     

@@ -1,6 +1,7 @@
 
 
+
 export enum AccountStatusEnum {
-    Active = "ACTIVE"
-,    Suspended = "SUSPENDED"
+    Active = "ACTIVE",
+    Suspended = "SUSPENDED"
 }

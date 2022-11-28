@@ -5,7 +5,7 @@ import (
 )
 
 type DcimRackReservationsCreateRequest struct {
-	Request shared.WritableRackReservation `request:"mediaType=application/json"`
+	Request shared.WritableRackReservationInput `request:"mediaType=application/json"`
 }
 
 type DcimRackReservationsCreateResponse struct {

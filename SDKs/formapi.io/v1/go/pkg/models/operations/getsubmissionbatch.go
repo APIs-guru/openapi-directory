@@ -16,12 +16,6 @@ type GetSubmissionBatchSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type GetSubmissionBatchRequest struct {
-	PathParams  GetSubmissionBatchPathParams
-	QueryParams GetSubmissionBatchQueryParams
-	Security    GetSubmissionBatchSecurity
-}
-
 type GetSubmissionBatchSubmissionBatchStateEnum string
 
 const (
@@ -40,6 +34,12 @@ type GetSubmissionBatchSubmissionBatch struct {
 	State                GetSubmissionBatchSubmissionBatchStateEnum `json:"state"`
 	Submissions          []shared.Submission                        `json:"submissions,omitempty"`
 	TotalCount           int64                                      `json:"total_count"`
+}
+
+type GetSubmissionBatchRequest struct {
+	PathParams  GetSubmissionBatchPathParams
+	QueryParams GetSubmissionBatchQueryParams
+	Security    GetSubmissionBatchSecurity
 }
 
 type GetSubmissionBatchResponse struct {

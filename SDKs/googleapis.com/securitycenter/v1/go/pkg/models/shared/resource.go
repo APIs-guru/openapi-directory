@@ -1,5 +1,7 @@
 package shared
 
+// Resource
+// Information related to the Google Cloud resource that is associated with this finding.
 type Resource struct {
 	DisplayName        *string  `json:"displayName,omitempty"`
 	Folders            []Folder `json:"folders,omitempty"`

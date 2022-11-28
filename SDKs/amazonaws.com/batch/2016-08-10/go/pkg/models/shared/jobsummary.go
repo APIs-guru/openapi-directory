@@ -1,5 +1,7 @@
 package shared
 
+// JobSummary
+// An object representing summary details of a job.
 type JobSummary struct {
 	ArrayProperties *ArrayPropertiesSummary `json:"arrayProperties,omitempty"`
 	Container       *ContainerSummary       `json:"container,omitempty"`

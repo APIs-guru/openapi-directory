@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkloadIdentityPoolProvider } from "./workloadidentitypoolprovider";
+
 
 
 // ListWorkloadIdentityPoolProvidersResponse
@@ -8,9 +8,9 @@ import { WorkloadIdentityPoolProvider } from "./workloadidentitypoolprovider";
  * Response message for ListWorkloadIdentityPoolProviders.
 **/
 export class ListWorkloadIdentityPoolProvidersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=workloadIdentityPoolProviders", elemType: shared.WorkloadIdentityPoolProvider })
+  @SpeakeasyMetadata({ data: "json, name=workloadIdentityPoolProviders", elemType: WorkloadIdentityPoolProvider })
   workloadIdentityPoolProviders?: WorkloadIdentityPoolProvider[];
 }

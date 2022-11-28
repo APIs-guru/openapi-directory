@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromePolicyVersionsV1PolicySchemaFieldDependencies
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The field and the value it must have for another field to be allowed to be set.
 **/
 export class GoogleChromePolicyVersionsV1PolicySchemaFieldDependencies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceField" })
+  @SpeakeasyMetadata({ data: "json, name=sourceField" })
   sourceField?: string;
 
-  @Metadata({ data: "json, name=sourceFieldValue" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFieldValue" })
   sourceFieldValue?: string;
 }

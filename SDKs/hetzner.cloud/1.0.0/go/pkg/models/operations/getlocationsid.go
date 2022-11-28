@@ -4,10 +4,6 @@ type GetLocationsIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetLocationsIDRequest struct {
-	PathParams GetLocationsIDPathParams
-}
-
 type GetLocationsID200ApplicationJSONLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -21,6 +17,10 @@ type GetLocationsID200ApplicationJSONLocation struct {
 
 type GetLocationsID200ApplicationJSON struct {
 	Location GetLocationsID200ApplicationJSONLocation `json:"location"`
+}
+
+type GetLocationsIDRequest struct {
+	PathParams GetLocationsIDPathParams
 }
 
 type GetLocationsIDResponse struct {

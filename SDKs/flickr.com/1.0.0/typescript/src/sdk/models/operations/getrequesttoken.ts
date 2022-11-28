@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRequestTokenQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_callback" })
   oauthCallback: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_consumer_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_consumer_key" })
   oauthConsumerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_nonce" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_nonce" })
   oauthNonce: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_signature" })
   oauthSignature: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_signature_method" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_signature_method" })
   oauthSignatureMethod: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_timestamp" })
   oauthTimestamp: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_version" })
   oauthVersion: string;
 }
 
 
 export class GetRequestTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRequestTokenQueryParams;
 }
 
 
 export class GetRequestTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRequestToken200ApplicationJsonString?: string;
 }

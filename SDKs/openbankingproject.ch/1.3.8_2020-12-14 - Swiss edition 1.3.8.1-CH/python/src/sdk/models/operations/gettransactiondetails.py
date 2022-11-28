@@ -1,18 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetTransactionDetailsPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'account-id', 'style': 'simple', 'explode': False }})
-    transaction_id: str = field(default=None, metadata={'path_param': { 'field_name': 'transactionId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'account-id', 'style': 'simple', 'explode': False }})
+    transaction_id: str = field(metadata={'path_param': { 'field_name': 'transactionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTransactionDetailsHeaders:
-    consent_id: str = field(default=None, metadata={'header': { 'field_name': 'Consent-ID', 'style': 'simple', 'explode': False }})
+    consent_id: str = field(metadata={'header': { 'field_name': 'Consent-ID', 'style': 'simple', 'explode': False }})
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
     psu_accept_charset: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept-Charset', 'style': 'simple', 'explode': False }})
@@ -26,7 +29,6 @@ class GetTransactionDetailsHeaders:
     psu_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-User-Agent', 'style': 'simple', 'explode': False }})
     signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -34,22 +36,24 @@ class GetTransactionDetailsSecurity:
     bearer_auth_o_auth: Optional[shared.SchemeBearerAuthOAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
-@dataclass
-class GetTransactionDetailsRequest:
-    path_params: GetTransactionDetailsPathParams = field(default=None)
-    headers: GetTransactionDetailsHeaders = field(default=None)
-    security: GetTransactionDetailsSecurity = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetTransactionDetails200ApplicationJSON:
-    transactions_details: shared.TransactionDetailsBody = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionsDetails' }})
+    transactions_details: shared.TransactionDetailsBody = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionsDetails') }})
+    
+
+@dataclass
+class GetTransactionDetailsRequest:
+    headers: GetTransactionDetailsHeaders = field()
+    path_params: GetTransactionDetailsPathParams = field()
+    security: GetTransactionDetailsSecurity = field()
     
 
 @dataclass
 class GetTransactionDetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error400_ais: Optional[shared.Error400Ais] = field(default=None)
     error400_ng_ais: Optional[shared.Error400NgAis] = field(default=None)
     error401_ais: Optional[shared.Error401Ais] = field(default=None)
@@ -66,7 +70,5 @@ class GetTransactionDetailsResponse:
     error409_ng_ais: Optional[shared.Error409NgAis] = field(default=None)
     error429_ais: Optional[shared.Error429Ais] = field(default=None)
     error429_ng_ais: Optional[shared.Error429NgAis] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     get_transaction_details_200_application_json_object: Optional[GetTransactionDetails200ApplicationJSON] = field(default=None)
     

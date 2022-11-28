@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModifyReplicationSubnetGroupMessage
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class ModifyReplicationSubnetGroupMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationSubnetGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroupDescription" })
   replicationSubnetGroupDescription?: string;
 
-  @Metadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
   replicationSubnetGroupIdentifier: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds: string[];
 }

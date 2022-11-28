@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregationTypeEnum } from "./aggregationtypeenum";
+
 
 
 // AggregationConfig
@@ -7,6 +8,6 @@ import { AggregationTypeEnum } from "./aggregationtypeenum";
  *  The aggregation settings that you can use to customize the output format of your flow data. 
 **/
 export class AggregationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationType" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationType" })
   aggregationType?: AggregationTypeEnum;
 }

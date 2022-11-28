@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SupportTicketReply
+// An object representing a reply to a Support Ticket.
 type SupportTicketReply struct {
 	Created     *time.Time `json:"created,omitempty"`
 	CreatedBy   *string    `json:"created_by,omitempty"`

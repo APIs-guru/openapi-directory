@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentAccountsRequestphoneverificationPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ContentAccountsRequestphoneverificationQueryParams:
 
 @dataclass
 class ContentAccountsRequestphoneverificationSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentAccountsRequestphoneverificationRequest:
-    path_params: ContentAccountsRequestphoneverificationPathParams = field(default=None)
-    query_params: ContentAccountsRequestphoneverificationQueryParams = field(default=None)
+    path_params: ContentAccountsRequestphoneverificationPathParams = field()
+    query_params: ContentAccountsRequestphoneverificationQueryParams = field()
+    security: ContentAccountsRequestphoneverificationSecurity = field()
     request: Optional[shared.RequestPhoneVerificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentAccountsRequestphoneverificationSecurity = field(default=None)
     
 
 @dataclass
 class ContentAccountsRequestphoneverificationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     request_phone_verification_response: Optional[shared.RequestPhoneVerificationResponse] = field(default=None)
-    status_code: int = field(default=None)
     

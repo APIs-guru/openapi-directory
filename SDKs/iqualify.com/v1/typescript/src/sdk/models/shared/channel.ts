@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChannelGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoAssign" })
+  @SpeakeasyMetadata({ data: "json, name=autoAssign" })
   autoAssign?: boolean;
 }
 
 
 export class Channel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: ChannelGroup;
 
-  @Metadata({ data: "json, name=groupDiscussion" })
+  @SpeakeasyMetadata({ data: "json, name=groupDiscussion" })
   groupDiscussion?: boolean;
 
-  @Metadata({ data: "json, name=isBroadcastOnly" })
+  @SpeakeasyMetadata({ data: "json, name=isBroadcastOnly" })
   isBroadcastOnly?: boolean;
 
-  @Metadata({ data: "json, name=privateSupport" })
+  @SpeakeasyMetadata({ data: "json, name=privateSupport" })
   privateSupport?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

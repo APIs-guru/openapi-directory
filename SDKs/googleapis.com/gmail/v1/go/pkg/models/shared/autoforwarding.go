@@ -10,6 +10,8 @@ const (
 	AutoForwardingDispositionEnumMarkRead               AutoForwardingDispositionEnum = "markRead"
 )
 
+// AutoForwarding
+// Auto-forwarding settings for an account.
 type AutoForwarding struct {
 	Disposition  *AutoForwardingDispositionEnum `json:"disposition,omitempty"`
 	EmailAddress *string                        `json:"emailAddress,omitempty"`

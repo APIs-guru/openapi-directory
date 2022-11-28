@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMaintenanceWindowRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WindowId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowId" })
   windowId: string;
 }

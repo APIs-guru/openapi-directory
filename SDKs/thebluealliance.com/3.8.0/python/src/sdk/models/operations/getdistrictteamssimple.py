@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDistrictTeamsSimplePathParams:
-    district_key: str = field(default=None, metadata={'path_param': { 'field_name': 'district_key', 'style': 'simple', 'explode': False }})
+    district_key: str = field(metadata={'path_param': { 'field_name': 'district_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetDistrictTeamsSimpleHeaders:
 
 @dataclass
 class GetDistrictTeamsSimpleSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetDistrictTeamsSimpleRequest:
-    path_params: GetDistrictTeamsSimplePathParams = field(default=None)
-    headers: GetDistrictTeamsSimpleHeaders = field(default=None)
-    security: GetDistrictTeamsSimpleSecurity = field(default=None)
+    headers: GetDistrictTeamsSimpleHeaders = field()
+    path_params: GetDistrictTeamsSimplePathParams = field()
+    security: GetDistrictTeamsSimpleSecurity = field()
     
 
 @dataclass
 class GetDistrictTeamsSimpleResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     team_simples: Optional[List[shared.TeamSimple]] = field(default=None)
     

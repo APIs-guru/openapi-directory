@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OffsetInfo } from "./offsetinfo";
 import { CommitteeReports } from "./committeereports";
 
 
+
 export class CommitteeReportsPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: OffsetInfo;
 
-  @Metadata({ data: "json, name=results", elemType: shared.CommitteeReports })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: CommitteeReports })
   results?: CommitteeReports[];
 }

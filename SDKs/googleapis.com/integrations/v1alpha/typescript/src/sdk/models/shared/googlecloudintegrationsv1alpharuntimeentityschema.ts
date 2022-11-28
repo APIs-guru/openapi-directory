@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaRuntimeEntitySchema
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata of an entity, including a schema for its properties.
 **/
 export class GoogleCloudIntegrationsV1alphaRuntimeEntitySchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayFieldSchema" })
+  @SpeakeasyMetadata({ data: "json, name=arrayFieldSchema" })
   arrayFieldSchema?: string;
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: string;
 
-  @Metadata({ data: "json, name=fieldSchema" })
+  @SpeakeasyMetadata({ data: "json, name=fieldSchema" })
   fieldSchema?: string;
 }

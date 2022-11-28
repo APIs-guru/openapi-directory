@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Example113 = /** @class */ (function (_super) {
     __extends(Example113, _super);
     function Example113() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ssid" }),
+        SpeakeasyMetadata({ data: "json, name=ssid" }),
         __metadata("design:type", String)
     ], Example113.prototype, "ssid", void 0);
     __decorate([
-        Metadata({ data: "json, name=wpa_auth" }),
+        SpeakeasyMetadata({ data: "json, name=wpa_auth" }),
         __metadata("design:type", Number)
     ], Example113.prototype, "wpaAuth", void 0);
     __decorate([
-        Metadata({ data: "json, name=wpa_cipher" }),
+        SpeakeasyMetadata({ data: "json, name=wpa_cipher" }),
         __metadata("design:type", Number)
     ], Example113.prototype, "wpaCipher", void 0);
     __decorate([
-        Metadata({ data: "json, name=wpa_id" }),
+        SpeakeasyMetadata({ data: "json, name=wpa_id" }),
         __metadata("design:type", Number)
     ], Example113.prototype, "wpaId", void 0);
     return Example113;

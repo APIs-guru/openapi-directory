@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionDeclaration } from "./actiondeclaration";
 import { BlockerDeclaration } from "./blockerdeclaration";
+
 
 
 // StageDeclaration
@@ -9,12 +9,12 @@ import { BlockerDeclaration } from "./blockerdeclaration";
  * Represents information about a stage and its definition.
 **/
 export class StageDeclaration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.ActionDeclaration })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: ActionDeclaration })
   actions: ActionDeclaration[];
 
-  @Metadata({ data: "json, name=blockers", elemType: shared.BlockerDeclaration })
+  @SpeakeasyMetadata({ data: "json, name=blockers", elemType: BlockerDeclaration })
   blockers?: BlockerDeclaration[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

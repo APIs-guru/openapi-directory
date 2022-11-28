@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetEventPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEventRequest:
-    path_params: GetEventPathParams = field(default=None)
+    path_params: GetEventPathParams = field()
     
 
 @dataclass
 class GetEventResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     events: Optional[List[shared.Event]] = field(default=None)
-    status_code: int = field(default=None)
     

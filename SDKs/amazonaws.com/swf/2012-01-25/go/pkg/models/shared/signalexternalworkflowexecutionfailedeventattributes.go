@@ -1,5 +1,7 @@
 package shared
 
+// SignalExternalWorkflowExecutionFailedEventAttributes
+// Provides the details of the <code>SignalExternalWorkflowExecutionFailed</code> event.
 type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	Cause                        SignalExternalWorkflowExecutionFailedCauseEnum `json:"cause"`
 	Control                      *string                                        `json:"control,omitempty"`

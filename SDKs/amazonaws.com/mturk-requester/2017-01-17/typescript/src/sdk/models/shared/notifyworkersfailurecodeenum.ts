@@ -1,6 +1,7 @@
 
 
+
 export enum NotifyWorkersFailureCodeEnum {
-    SoftFailure = "SoftFailure"
-,    HardFailure = "HardFailure"
+    SoftFailure = "SoftFailure",
+    HardFailure = "HardFailure"
 }

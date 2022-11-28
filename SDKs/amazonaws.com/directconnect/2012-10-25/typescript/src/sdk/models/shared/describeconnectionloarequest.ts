@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoaContentTypeEnum } from "./loacontenttypeenum";
 
 
+
 export class DescribeConnectionLoaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId: string;
 
-  @Metadata({ data: "json, name=loaContentType" })
+  @SpeakeasyMetadata({ data: "json, name=loaContentType" })
   loaContentType?: LoaContentTypeEnum;
 
-  @Metadata({ data: "json, name=providerName" })
+  @SpeakeasyMetadata({ data: "json, name=providerName" })
   providerName?: string;
 }

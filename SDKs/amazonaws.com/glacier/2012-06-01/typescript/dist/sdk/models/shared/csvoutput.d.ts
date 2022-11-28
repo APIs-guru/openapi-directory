@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { QuoteFieldsEnum } from "./quotefieldsenum";
 /**
  * Contains information about the comma-separated value (CSV) file that the job results are stored in.

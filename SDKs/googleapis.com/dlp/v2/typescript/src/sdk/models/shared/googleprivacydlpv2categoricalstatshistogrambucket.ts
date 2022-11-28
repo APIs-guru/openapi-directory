@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2ValueFrequency } from "./googleprivacydlpv2valuefrequency";
+
 
 
 // GooglePrivacyDlpV2CategoricalStatsHistogramBucket
@@ -8,18 +8,18 @@ import { GooglePrivacyDlpV2ValueFrequency } from "./googleprivacydlpv2valuefrequ
  * Histogram of value frequencies in the column.
 **/
 export class GooglePrivacyDlpV2CategoricalStatsHistogramBucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketSize" })
+  @SpeakeasyMetadata({ data: "json, name=bucketSize" })
   bucketSize?: string;
 
-  @Metadata({ data: "json, name=bucketValueCount" })
+  @SpeakeasyMetadata({ data: "json, name=bucketValueCount" })
   bucketValueCount?: string;
 
-  @Metadata({ data: "json, name=bucketValues", elemType: shared.GooglePrivacyDlpV2ValueFrequency })
+  @SpeakeasyMetadata({ data: "json, name=bucketValues", elemType: GooglePrivacyDlpV2ValueFrequency })
   bucketValues?: GooglePrivacyDlpV2ValueFrequency[];
 
-  @Metadata({ data: "json, name=valueFrequencyLowerBound" })
+  @SpeakeasyMetadata({ data: "json, name=valueFrequencyLowerBound" })
   valueFrequencyLowerBound?: string;
 
-  @Metadata({ data: "json, name=valueFrequencyUpperBound" })
+  @SpeakeasyMetadata({ data: "json, name=valueFrequencyUpperBound" })
   valueFrequencyUpperBound?: string;
 }

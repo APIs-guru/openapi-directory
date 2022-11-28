@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeScalingActivitiesActionEnum(str, Enum):
     DESCRIBE_SCALING_ACTIVITIES = "DescribeScalingActivities"
@@ -10,13 +14,13 @@ class GetDescribeScalingActivitiesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeScalingActivitiesQueryParams:
-    action: GetDescribeScalingActivitiesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeScalingActivitiesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeScalingActivitiesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     activity_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ActivityIds', 'style': 'form', 'explode': True }})
     auto_scaling_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
     include_deleted_groups: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'IncludeDeletedGroups', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeScalingActivitiesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribeScalingActivitiesHeaders:
 
 @dataclass
 class GetDescribeScalingActivitiesRequest:
-    query_params: GetDescribeScalingActivitiesQueryParams = field(default=None)
-    headers: GetDescribeScalingActivitiesHeaders = field(default=None)
+    headers: GetDescribeScalingActivitiesHeaders = field()
+    query_params: GetDescribeScalingActivitiesQueryParams = field()
     
 
 @dataclass
 class GetDescribeScalingActivitiesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
+
 
 export enum AmqpExternalRulePatchRequestModeEnum {
     Single = "single"
@@ -11,60 +11,60 @@ export enum AmqpExternalRulePatchRuleTypeEnum {
 }
 
 export enum AmqpExternalRulePatchStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
 export class AmqpExternalRulePatchTargetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class AmqpExternalRulePatchTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enveloped" })
+  @SpeakeasyMetadata({ data: "json, name=enveloped" })
   enveloped?: boolean;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=headers", elemType: shared.AmqpExternalRulePatchTargetHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: AmqpExternalRulePatchTargetHeaders })
   headers?: AmqpExternalRulePatchTargetHeaders[];
 
-  @Metadata({ data: "json, name=mandatoryRoute" })
+  @SpeakeasyMetadata({ data: "json, name=mandatoryRoute" })
   mandatoryRoute?: boolean;
 
-  @Metadata({ data: "json, name=messageTtl" })
+  @SpeakeasyMetadata({ data: "json, name=messageTtl" })
   messageTtl?: number;
 
-  @Metadata({ data: "json, name=persistentMessages" })
+  @SpeakeasyMetadata({ data: "json, name=persistentMessages" })
   persistentMessages?: boolean;
 
-  @Metadata({ data: "json, name=routingKey" })
+  @SpeakeasyMetadata({ data: "json, name=routingKey" })
   routingKey?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class AmqpExternalRulePatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode?: AmqpExternalRulePatchRequestModeEnum;
 
-  @Metadata({ data: "json, name=ruleType" })
+  @SpeakeasyMetadata({ data: "json, name=ruleType" })
   ruleType?: AmqpExternalRulePatchRuleTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: RuleSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AmqpExternalRulePatchStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: AmqpExternalRulePatchTarget;
 }

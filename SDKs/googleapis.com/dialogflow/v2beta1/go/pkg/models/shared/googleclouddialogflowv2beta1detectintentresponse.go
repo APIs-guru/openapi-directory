@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1DetectIntentResponse
+// The message returned from the DetectIntent method.
 type GoogleCloudDialogflowV2beta1DetectIntentResponse struct {
 	AlternativeQueryResults []GoogleCloudDialogflowV2beta1QueryResult      `json:"alternativeQueryResults,omitempty"`
 	OutputAudio             *string                                        `json:"outputAudio,omitempty"`

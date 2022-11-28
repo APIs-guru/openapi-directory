@@ -1,5 +1,7 @@
 package shared
 
+// DealItemSearchResponse
+// The result set for the deal item search.
 type DealItemSearchResponse struct {
 	DealItems []DealItem `json:"dealItems,omitempty"`
 	Href      *string    `json:"href,omitempty"`

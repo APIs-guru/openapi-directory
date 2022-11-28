@@ -1,84 +1,85 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum PeoplePeopleCreateContactSourcesEnum {
-    ReadSourceTypeUnspecified = "READ_SOURCE_TYPE_UNSPECIFIED"
-,    ReadSourceTypeProfile = "READ_SOURCE_TYPE_PROFILE"
-,    ReadSourceTypeContact = "READ_SOURCE_TYPE_CONTACT"
-,    ReadSourceTypeDomainContact = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
+    ReadSourceTypeUnspecified = "READ_SOURCE_TYPE_UNSPECIFIED",
+    ReadSourceTypeProfile = "READ_SOURCE_TYPE_PROFILE",
+    ReadSourceTypeContact = "READ_SOURCE_TYPE_CONTACT",
+    ReadSourceTypeDomainContact = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 }
 
 
 export class PeoplePeopleCreateContactQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=personFields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=personFields" })
   personFields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sources" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sources" })
   sources?: PeoplePeopleCreateContactSourcesEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 }
 
 
 export class PeoplePeopleCreateContactSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class PeoplePeopleCreateContactRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PeoplePeopleCreateContactQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.Person;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.PersonInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PeoplePeopleCreateContactSecurity;
 }
 
 
 export class PeoplePeopleCreateContactResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   person?: shared.Person;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

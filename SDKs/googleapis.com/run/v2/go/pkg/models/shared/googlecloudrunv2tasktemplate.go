@@ -8,6 +8,8 @@ const (
 	GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnumExecutionEnvironmentGen2        GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnum = "EXECUTION_ENVIRONMENT_GEN2"
 )
 
+// GoogleCloudRunV2TaskTemplate
+// TaskTemplate describes the data a task should have when created from a template.
 type GoogleCloudRunV2TaskTemplate struct {
 	Containers           []GoogleCloudRunV2Container                           `json:"containers,omitempty"`
 	EncryptionKey        *string                                               `json:"encryptionKey,omitempty"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Classification } from "./classification";
 import { AppConfigDisplay } from "./appconfigdisplay";
 import { AppConfigGeneral } from "./appconfiggeneral";
@@ -11,31 +10,32 @@ import { PageSummary } from "./pagesummary";
 import { AppConfigSubscription } from "./appconfigsubscription";
 
 
+
 export class AppConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classification", elemType: shared.Classification })
+  @SpeakeasyMetadata({ data: "json, name=classification", elemType: Classification })
   classification?: Map<string, Classification>;
 
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display?: AppConfigDisplay;
 
-  @Metadata({ data: "json, name=general" })
+  @SpeakeasyMetadata({ data: "json, name=general" })
   general?: AppConfigGeneral;
 
-  @Metadata({ data: "json, name=i18n" })
+  @SpeakeasyMetadata({ data: "json, name=i18n" })
   i18n?: AppConfigI18n;
 
-  @Metadata({ data: "json, name=linear" })
+  @SpeakeasyMetadata({ data: "json, name=linear" })
   linear?: AppConfigLinear;
 
-  @Metadata({ data: "json, name=navigation" })
+  @SpeakeasyMetadata({ data: "json, name=navigation" })
   navigation?: Navigation;
 
-  @Metadata({ data: "json, name=playback" })
+  @SpeakeasyMetadata({ data: "json, name=playback" })
   playback?: AppConfigPlayback;
 
-  @Metadata({ data: "json, name=sitemap", elemType: shared.PageSummary })
+  @SpeakeasyMetadata({ data: "json, name=sitemap", elemType: PageSummary })
   sitemap?: PageSummary[];
 
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription?: AppConfigSubscription;
 }

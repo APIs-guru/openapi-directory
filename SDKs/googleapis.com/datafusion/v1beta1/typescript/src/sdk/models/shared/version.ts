@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VersionTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    TypePreview = "TYPE_PREVIEW"
-,    TypeGeneralAvailability = "TYPE_GENERAL_AVAILABILITY"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    TypePreview = "TYPE_PREVIEW",
+    TypeGeneralAvailability = "TYPE_GENERAL_AVAILABILITY"
 }
 
 
@@ -12,15 +13,15 @@ export enum VersionTypeEnum {
  * The Data Fusion version.
 **/
 export class Version extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availableFeatures" })
+  @SpeakeasyMetadata({ data: "json, name=availableFeatures" })
   availableFeatures?: string[];
 
-  @Metadata({ data: "json, name=defaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=defaultVersion" })
   defaultVersion?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: VersionTypeEnum;
 
-  @Metadata({ data: "json, name=versionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=versionNumber" })
   versionNumber?: string;
 }

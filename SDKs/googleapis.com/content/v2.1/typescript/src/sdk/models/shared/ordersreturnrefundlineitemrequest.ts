@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
-import { Price } from "./price";
+
 
 
 export class OrdersReturnRefundLineItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineItemId" })
+  @SpeakeasyMetadata({ data: "json, name=lineItemId" })
   lineItemId?: string;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=priceAmount" })
+  @SpeakeasyMetadata({ data: "json, name=priceAmount" })
   priceAmount?: Price;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=reasonText" })
+  @SpeakeasyMetadata({ data: "json, name=reasonText" })
   reasonText?: string;
 
-  @Metadata({ data: "json, name=taxAmount" })
+  @SpeakeasyMetadata({ data: "json, name=taxAmount" })
   taxAmount?: Price;
 }

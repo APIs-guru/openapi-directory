@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import annotationpayload
-from . import examplepayload
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PredictResponse:
-    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    payload: Optional[List[annotationpayload.AnnotationPayload]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payload' }})
-    preprocessed_input: Optional[examplepayload.ExamplePayload] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preprocessedInput' }})
+    r"""PredictResponse
+    Response message for PredictionService.Predict.
+    """
+    
+    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    payload: Optional[List[AnnotationPayload]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payload') }})
+    preprocessed_input: Optional[ExamplePayload] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preprocessedInput') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// ActivityContentDetails
+// Details about the content of an activity: the video that was shared, the channel that was subscribed to, etc.
 type ActivityContentDetails struct {
 	Bulletin       *ActivityContentDetailsBulletin       `json:"bulletin,omitempty"`
 	ChannelItem    *ActivityContentDetailsChannelItem    `json:"channelItem,omitempty"`

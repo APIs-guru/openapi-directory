@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import occurrence
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchCreateOccurrencesResponse:
-    occurrences: Optional[List[occurrence.Occurrence]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'occurrences' }})
+    r"""BatchCreateOccurrencesResponse
+    Response for creating occurrences in batch.
+    """
+    
+    occurrences: Optional[List[Occurrence]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('occurrences') }})
     

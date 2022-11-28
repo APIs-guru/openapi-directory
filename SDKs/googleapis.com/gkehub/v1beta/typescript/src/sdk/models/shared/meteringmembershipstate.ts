@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MeteringMembershipState
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * **Metering**: Per-Membership Feature State.
 **/
 export class MeteringMembershipState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastMeasurementTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastMeasurementTime" })
   lastMeasurementTime?: string;
 
-  @Metadata({ data: "json, name=preciseLastMeasuredClusterVcpuCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=preciseLastMeasuredClusterVcpuCapacity" })
   preciseLastMeasuredClusterVcpuCapacity?: number;
 }

@@ -1,8 +1,9 @@
 
 
+
 export enum ProcessorTypeEnum {
-    RecordDeAggregation = "RecordDeAggregation"
-,    Lambda = "Lambda"
-,    MetadataExtraction = "MetadataExtraction"
-,    AppendDelimiterToRecord = "AppendDelimiterToRecord"
+    RecordDeAggregation = "RecordDeAggregation",
+    Lambda = "Lambda",
+    MetadataExtraction = "MetadataExtraction",
+    AppendDelimiterToRecord = "AppendDelimiterToRecord"
 }

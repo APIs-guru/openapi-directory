@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class ImportAPIKeysFormatEnum(str, Enum):
@@ -12,9 +17,9 @@ class ImportAPIKeysModeEnum(str, Enum):
 
 @dataclass
 class ImportAPIKeysQueryParams:
+    format: ImportAPIKeysFormatEnum = field(metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
+    mode: ImportAPIKeysModeEnum = field(metadata={'query_param': { 'field_name': 'mode', 'style': 'form', 'explode': True }})
     failonwarnings: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'failonwarnings', 'style': 'form', 'explode': True }})
-    format: ImportAPIKeysFormatEnum = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    mode: ImportAPIKeysModeEnum = field(default=None, metadata={'query_param': { 'field_name': 'mode', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,25 +36,25 @@ class ImportAPIKeysHeaders:
 @dataclass_json
 @dataclass
 class ImportAPIKeysRequestBody:
-    body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
+    body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
     
 
 @dataclass
 class ImportAPIKeysRequest:
-    query_params: ImportAPIKeysQueryParams = field(default=None)
-    headers: ImportAPIKeysHeaders = field(default=None)
-    request: ImportAPIKeysRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ImportAPIKeysHeaders = field()
+    query_params: ImportAPIKeysQueryParams = field()
+    request: ImportAPIKeysRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ImportAPIKeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_ids: Optional[shared.APIKeyIds] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

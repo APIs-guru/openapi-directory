@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import organizationresourcedetailedstatusfilters
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetOrganizationConformancePackDetailedStatusRequest:
-    filters: Optional[organizationresourcedetailedstatusfilters.OrganizationResourceDetailedStatusFilters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Filters' }})
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Limit' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    organization_conformance_pack_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrganizationConformancePackName' }})
+    organization_conformance_pack_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OrganizationConformancePackName') }})
+    filters: Optional[OrganizationResourceDetailedStatusFilters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Filters') }})
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Limit') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

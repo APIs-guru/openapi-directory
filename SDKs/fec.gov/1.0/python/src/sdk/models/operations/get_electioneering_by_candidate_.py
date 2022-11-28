@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetElectioneeringByCandidateOfficeEnum(str, Enum):
@@ -10,7 +14,7 @@ class GetElectioneeringByCandidateOfficeEnum(str, Enum):
 
 @dataclass
 class GetElectioneeringByCandidateQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     district: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'district', 'style': 'form', 'explode': True }})
@@ -27,12 +31,12 @@ class GetElectioneeringByCandidateQueryParams:
 
 @dataclass
 class GetElectioneeringByCandidateRequest:
-    query_params: GetElectioneeringByCandidateQueryParams = field(default=None)
+    query_params: GetElectioneeringByCandidateQueryParams = field()
     
 
 @dataclass
 class GetElectioneeringByCandidateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     electioneering_by_candidate_page: Optional[shared.ElectioneeringByCandidatePage] = field(default=None)
-    status_code: int = field(default=None)
     

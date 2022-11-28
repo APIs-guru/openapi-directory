@@ -27,11 +27,6 @@ type DelcsSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type DelcsRequest struct {
-	Request  *DelcsRequestBody `request:"mediaType=application/json"`
-	Security DelcsSecurity
-}
-
 type Delcs400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Delcs504ApplicationJSON struct {
 	Error            *Delcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Delcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type DelcsRequest struct {
+	Request  *DelcsRequestBody `request:"mediaType=application/json"`
+	Security DelcsSecurity
 }
 
 type DelcsResponse struct {

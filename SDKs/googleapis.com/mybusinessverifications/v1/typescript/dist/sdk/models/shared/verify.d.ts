@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Indicates that the location requires verification. Contains information about the current verification actions performed on the location.
 **/

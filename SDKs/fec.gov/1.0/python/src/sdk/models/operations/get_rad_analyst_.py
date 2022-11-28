@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -8,13 +8,13 @@ from sdk.models import shared
 
 @dataclass
 class GetRadAnalystQueryParams:
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     analyst_id: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'analyst_id', 'style': 'form', 'explode': True }})
     analyst_short_id: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'analyst_short_id', 'style': 'form', 'explode': True }})
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     email: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'email', 'style': 'form', 'explode': True }})
-    max_assignment_update_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_assignment_update_date', 'style': 'form', 'explode': True }})
-    min_assignment_update_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_assignment_update_date', 'style': 'form', 'explode': True }})
+    max_assignment_update_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_assignment_update_date', 'style': 'form', 'explode': True }})
+    min_assignment_update_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_assignment_update_date', 'style': 'form', 'explode': True }})
     name: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
@@ -28,12 +28,12 @@ class GetRadAnalystQueryParams:
 
 @dataclass
 class GetRadAnalystRequest:
-    query_params: GetRadAnalystQueryParams = field(default=None)
+    query_params: GetRadAnalystQueryParams = field()
     
 
 @dataclass
 class GetRadAnalystResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rad_analyst_page: Optional[shared.RadAnalystPage] = field(default=None)
-    status_code: int = field(default=None)
     

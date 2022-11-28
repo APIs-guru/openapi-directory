@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import keyvalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HadoopJarStepConfig:
-    args: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Args' }})
-    jar: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Jar' }})
-    main_class: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MainClass' }})
-    properties: Optional[List[keyvalue.KeyValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Properties' }})
+    r"""HadoopJarStepConfig
+    A job flow step consisting of a JAR file whose main function will be executed. The main function submits a job for Hadoop to execute and waits for the job to finish or fail.
+    """
+    
+    jar: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Jar') }})
+    args: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Args') }})
+    main_class: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MainClass') }})
+    properties: Optional[List[KeyValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Properties') }})
     

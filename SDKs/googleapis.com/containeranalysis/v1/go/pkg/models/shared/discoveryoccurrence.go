@@ -20,12 +20,26 @@ const (
 	DiscoveryOccurrenceContinuousAnalysisEnumInactive                      DiscoveryOccurrenceContinuousAnalysisEnum = "INACTIVE"
 )
 
+// DiscoveryOccurrence
+// Provides information about the analysis status of a discovered resource.
 type DiscoveryOccurrence struct {
 	AnalysisCompleted   *AnalysisCompleted                         `json:"analysisCompleted,omitempty"`
 	AnalysisError       []Status                                   `json:"analysisError,omitempty"`
 	AnalysisStatus      *DiscoveryOccurrenceAnalysisStatusEnum     `json:"analysisStatus,omitempty"`
 	AnalysisStatusError *Status                                    `json:"analysisStatusError,omitempty"`
 	ArchiveTime         *string                                    `json:"archiveTime,omitempty"`
+	ContinuousAnalysis  *DiscoveryOccurrenceContinuousAnalysisEnum `json:"continuousAnalysis,omitempty"`
+	Cpe                 *string                                    `json:"cpe,omitempty"`
+	LastScanTime        *string                                    `json:"lastScanTime,omitempty"`
+}
+
+// DiscoveryOccurrenceInput
+// Provides information about the analysis status of a discovered resource.
+type DiscoveryOccurrenceInput struct {
+	AnalysisCompleted   *AnalysisCompleted                         `json:"analysisCompleted,omitempty"`
+	AnalysisError       []Status                                   `json:"analysisError,omitempty"`
+	AnalysisStatus      *DiscoveryOccurrenceAnalysisStatusEnum     `json:"analysisStatus,omitempty"`
+	AnalysisStatusError *Status                                    `json:"analysisStatusError,omitempty"`
 	ContinuousAnalysis  *DiscoveryOccurrenceContinuousAnalysisEnum `json:"continuousAnalysis,omitempty"`
 	Cpe                 *string                                    `json:"cpe,omitempty"`
 	LastScanTime        *string                                    `json:"lastScanTime,omitempty"`

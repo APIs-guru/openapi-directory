@@ -8,6 +8,8 @@ const (
 	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnumBillingCycleSpecStartImmediately              GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum = "BILLING_CYCLE_SPEC_START_IMMEDIATELY"
 )
 
+// GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails
+// Details about the previous subscription that this new subscription upgrades/downgrades from.
 type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails struct {
 	BillingCycleSpec       *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum `json:"billingCycleSpec,omitempty"`
 	PreviousSubscriptionID *string                                                                                           `json:"previousSubscriptionId,omitempty"`

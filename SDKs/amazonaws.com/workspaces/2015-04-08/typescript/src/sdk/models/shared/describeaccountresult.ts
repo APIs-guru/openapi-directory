@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DedicatedTenancySupportResultEnumEnum } from "./dedicatedtenancysupportresultenumenum";
 
 
+
 export class DescribeAccountResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DedicatedTenancyManagementCidrRange" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedTenancyManagementCidrRange" })
   dedicatedTenancyManagementCidrRange?: string;
 
-  @Metadata({ data: "json, name=DedicatedTenancySupport" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedTenancySupport" })
   dedicatedTenancySupport?: DedicatedTenancySupportResultEnumEnum;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -29,11 +29,11 @@ class SearchTypeAwcMetarQueryParams:
 
 @dataclass
 class SearchTypeAwcMetarRequest:
-    query_params: SearchTypeAwcMetarQueryParams = field(default=None)
+    query_params: SearchTypeAwcMetarQueryParams = field()
     
 
 @dataclass
 class SearchTypeAwcMetarResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

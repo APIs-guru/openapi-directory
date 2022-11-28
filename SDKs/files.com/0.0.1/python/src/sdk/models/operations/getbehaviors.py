@@ -19,12 +19,12 @@ class GetBehaviorsQueryParams:
 
 @dataclass
 class GetBehaviorsRequest:
-    query_params: GetBehaviorsQueryParams = field(default=None)
+    query_params: GetBehaviorsQueryParams = field()
     
 
 @dataclass
 class GetBehaviorsResponse:
+    content_type: str = field()
+    status_code: int = field()
     behavior_entities: Optional[List[shared.BehaviorEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

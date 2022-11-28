@@ -31,7 +31,7 @@ type AssuredworkloadsOrganizationsLocationsWorkloadsPatchSecurity struct {
 type AssuredworkloadsOrganizationsLocationsWorkloadsPatchRequest struct {
 	PathParams  AssuredworkloadsOrganizationsLocationsWorkloadsPatchPathParams
 	QueryParams AssuredworkloadsOrganizationsLocationsWorkloadsPatchQueryParams
-	Request     *shared.GoogleCloudAssuredworkloadsV1beta1Workload `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudAssuredworkloadsV1beta1WorkloadInput `request:"mediaType=application/json"`
 	Security    AssuredworkloadsOrganizationsLocationsWorkloadsPatchSecurity
 }
 

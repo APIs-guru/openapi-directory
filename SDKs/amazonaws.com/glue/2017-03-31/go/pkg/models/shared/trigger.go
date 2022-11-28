@@ -1,5 +1,7 @@
 package shared
 
+// Trigger
+// Information about a specific trigger.
 type Trigger struct {
 	Actions                []Action                `json:"Actions,omitempty"`
 	Description            *string                 `json:"Description,omitempty"`

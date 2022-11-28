@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -13,12 +13,12 @@ class ListTagsQueryParams:
 
 @dataclass
 class ListTagsRequest:
-    query_params: ListTagsQueryParams = field(default=None)
+    query_params: ListTagsQueryParams = field()
     
 
 @dataclass
 class ListTagsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tags_collection: Optional[shared.TagsCollection] = field(default=None)
     

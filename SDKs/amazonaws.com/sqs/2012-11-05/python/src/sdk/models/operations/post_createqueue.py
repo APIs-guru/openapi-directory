@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateQueueActionEnum(str, Enum):
     CREATE_QUEUE = "CreateQueue"
@@ -10,8 +14,8 @@ class PostCreateQueueVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateQueueQueryParams:
-    action: PostCreateQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateQueueHeaders:
 
 @dataclass
 class PostCreateQueueRequest:
-    query_params: PostCreateQueueQueryParams = field(default=None)
-    headers: PostCreateQueueHeaders = field(default=None)
+    headers: PostCreateQueueHeaders = field()
+    query_params: PostCreateQueueQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateQueueResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

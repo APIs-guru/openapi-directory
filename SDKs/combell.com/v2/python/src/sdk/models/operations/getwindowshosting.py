@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetWindowsHostingPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWindowsHostingQueryParams:
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetWindowsHostingRequest:
-    path_params: GetWindowsHostingPathParams = field(default=None)
-    query_params: GetWindowsHostingQueryParams = field(default=None)
+    path_params: GetWindowsHostingPathParams = field()
+    query_params: GetWindowsHostingQueryParams = field()
     
 
 @dataclass
 class GetWindowsHostingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     windows_hosting_detail: Optional[shared.WindowsHostingDetail] = field(default=None)
     

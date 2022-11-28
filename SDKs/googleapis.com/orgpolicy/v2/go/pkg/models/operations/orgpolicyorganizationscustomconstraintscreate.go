@@ -30,7 +30,7 @@ type OrgpolicyOrganizationsCustomConstraintsCreateSecurity struct {
 type OrgpolicyOrganizationsCustomConstraintsCreateRequest struct {
 	PathParams  OrgpolicyOrganizationsCustomConstraintsCreatePathParams
 	QueryParams OrgpolicyOrganizationsCustomConstraintsCreateQueryParams
-	Request     *shared.GoogleCloudOrgpolicyV2CustomConstraint `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudOrgpolicyV2CustomConstraintInput `request:"mediaType=application/json"`
 	Security    OrgpolicyOrganizationsCustomConstraintsCreateSecurity
 }
 

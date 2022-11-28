@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EventSourceConfiguration
 /**
  * Describes mapping between an Amazon Kinesis stream and a Lambda function.
@@ -33,39 +33,39 @@ var EventSourceConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BatchSize" }),
+        SpeakeasyMetadata({ data: "json, name=BatchSize" }),
         __metadata("design:type", Number)
     ], EventSourceConfiguration.prototype, "batchSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSource" }),
+        SpeakeasyMetadata({ data: "json, name=EventSource" }),
         __metadata("design:type", String)
     ], EventSourceConfiguration.prototype, "eventSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionName" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionName" }),
         __metadata("design:type", String)
     ], EventSourceConfiguration.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsActive" }),
+        SpeakeasyMetadata({ data: "json, name=IsActive" }),
         __metadata("design:type", Boolean)
     ], EventSourceConfiguration.prototype, "isActive", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModified" }),
+        SpeakeasyMetadata({ data: "json, name=LastModified" }),
         __metadata("design:type", Date)
     ], EventSourceConfiguration.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=Parameters" }),
+        SpeakeasyMetadata({ data: "json, name=Parameters" }),
         __metadata("design:type", Map)
     ], EventSourceConfiguration.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=Role" }),
+        SpeakeasyMetadata({ data: "json, name=Role" }),
         __metadata("design:type", String)
     ], EventSourceConfiguration.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], EventSourceConfiguration.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=UUID" }),
+        SpeakeasyMetadata({ data: "json, name=UUID" }),
         __metadata("design:type", String)
     ], EventSourceConfiguration.prototype, "uuid", void 0);
     return EventSourceConfiguration;

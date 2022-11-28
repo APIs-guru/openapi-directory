@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpsertAccountRequestBodyIdentification
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Account identification requires an accountId, domain or both
 **/
 export class UpsertAccountRequestBodyIdentification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 }
 
@@ -19,10 +20,10 @@ export class UpsertAccountRequestBodyIdentification extends SpeakeasyBase {
  * User identification requires a userId, email or both
 **/
 export class UpsertAccountRequestBodyMembersIdentification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }
 
@@ -32,7 +33,7 @@ export class UpsertAccountRequestBodyMembersIdentification extends SpeakeasyBase
  * Identification requires an accountId, domain or both
 **/
 export class UpsertAccountRequestBodyMembers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identification" })
+  @SpeakeasyMetadata({ data: "json, name=identification" })
   identification: UpsertAccountRequestBodyMembersIdentification;
 }
 
@@ -42,37 +43,31 @@ export class UpsertAccountRequestBodyMembers extends SpeakeasyBase {
  * Update properties and/or members of an account
 **/
 export class UpsertAccountRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identification" })
+  @SpeakeasyMetadata({ data: "json, name=identification" })
   identification: UpsertAccountRequestBodyIdentification;
 
-  @Metadata({ data: "json, name=members", elemType: operations.UpsertAccountRequestBodyMembers })
+  @SpeakeasyMetadata({ data: "json, name=members", elemType: UpsertAccountRequestBodyMembers })
   members?: UpsertAccountRequestBodyMembers[];
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, any>;
 }
 
 
-export class UpsertAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: UpsertAccountRequestBody;
-}
-
-
 export class UpsertAccount201ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class UpsertAccount201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: UpsertAccount201ApplicationJsonMeta;
 }
 
@@ -82,13 +77,13 @@ export class UpsertAccount201ApplicationJson extends SpeakeasyBase {
  * All query-, header- and path- parameters that seemed incorrect
 **/
 export class UpsertAccount400ApplicationJsonErrorsParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: Map<string, string>;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: Map<string, string>;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Map<string, string>;
 }
 
@@ -98,111 +93,117 @@ export class UpsertAccount400ApplicationJsonErrorsParameters extends SpeakeasyBa
  * Map that sums up all received values that seemed incorrect
 **/
 export class UpsertAccount400ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: Map<string, string>;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: UpsertAccount400ApplicationJsonErrorsParameters;
 }
 
 
 export class UpsertAccount400ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class UpsertAccount400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors: UpsertAccount400ApplicationJsonErrors;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: UpsertAccount400ApplicationJsonMeta;
 }
 
 
 export class UpsertAccount401ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class UpsertAccount401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: UpsertAccount401ApplicationJsonMeta;
 }
 
 
 export class UpsertAccount429ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class UpsertAccount429ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: UpsertAccount429ApplicationJsonMeta;
 }
 
 
 export class UpsertAccount500ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class UpsertAccount500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: UpsertAccount500ApplicationJsonMeta;
 }
 
 
+export class UpsertAccountRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: UpsertAccountRequestBody;
+}
+
+
 export class UpsertAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   upsertAccount201ApplicationJsonObject?: UpsertAccount201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   upsertAccount400ApplicationJsonObject?: UpsertAccount400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   upsertAccount401ApplicationJsonObject?: UpsertAccount401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   upsertAccount429ApplicationJsonObject?: UpsertAccount429ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   upsertAccount500ApplicationJsonObject?: UpsertAccount500ApplicationJson;
 }

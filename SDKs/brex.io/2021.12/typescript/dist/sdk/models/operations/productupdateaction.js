@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductUpdateActionPathParams = /** @class */ (function (_super) {
     __extends(ProductUpdateActionPathParams, _super);
@@ -30,11 +30,11 @@ var ProductUpdateActionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=action" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=action" }),
         __metadata("design:type", String)
     ], ProductUpdateActionPathParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=orderId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=orderId" }),
         __metadata("design:type", String)
     ], ProductUpdateActionPathParams.prototype, "orderId", void 0);
     return ProductUpdateActionPathParams;
@@ -46,7 +46,7 @@ var ProductUpdateActionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=credits;" }),
+        SpeakeasyMetadata({ data: "form, name=credits;" }),
         __metadata("design:type", Number)
     ], ProductUpdateActionRequestBody.prototype, "credits", void 0);
     return ProductUpdateActionRequestBody;
@@ -58,7 +58,7 @@ var ProductUpdateActionSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductUpdateActionSecurity.prototype, "userKey", void 0);
     return ProductUpdateActionSecurity;
@@ -70,15 +70,15 @@ var ProductUpdateActionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductUpdateActionPathParams)
     ], ProductUpdateActionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", ProductUpdateActionRequestBody)
     ], ProductUpdateActionRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductUpdateActionSecurity)
     ], ProductUpdateActionRequest.prototype, "security", void 0);
     return ProductUpdateActionRequest;
@@ -90,19 +90,19 @@ var ProductUpdateActionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductUpdateActionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductUpdateActionResponse.prototype, "productUpdateAction200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductUpdateActionResponse.prototype, "productUpdateActionDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductUpdateActionResponse.prototype, "statusCode", void 0);
     return ProductUpdateActionResponse;

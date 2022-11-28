@@ -1,0 +1,5 @@
+package shared
+
+type DestinyHistoricalStatsDestinyHistoricalWeaponStatsData struct {
+	Weapons []DestinyHistoricalStatsDestinyHistoricalWeaponStats
+}

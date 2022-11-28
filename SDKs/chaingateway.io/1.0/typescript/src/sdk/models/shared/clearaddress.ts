@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ClearAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=ethereumaddress" })
+  @SpeakeasyMetadata({ data: "json, name=ethereumaddress" })
   ethereumaddress: string;
 
-  @Metadata({ data: "json, name=gas" })
+  @SpeakeasyMetadata({ data: "json, name=gas" })
   gas: number;
 
-  @Metadata({ data: "json, name=newaddress" })
+  @SpeakeasyMetadata({ data: "json, name=newaddress" })
   newaddress: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok: boolean;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: string;
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid: string;
 }

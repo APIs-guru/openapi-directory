@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ThreeContentTypeEnum {
-    AudioL16RateEqual8000 = "audio/l16;rate=8000"
-,    AudioL16RateEqual16000 = "audio/l16;rate=16000"
+    AudioL16RateEqual8000 = "audio/l16;rate=8000",
+    AudioL16RateEqual16000 = "audio/l16;rate=16000"
 }
 
 
@@ -11,7 +12,7 @@ export enum ThreeContentTypeEnum {
  * Details of the Websocket you want to connect to
 **/
 export class ThreeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customer_id" })
+  @SpeakeasyMetadata({ data: "json, name=customer_id" })
   customerId?: string;
 }
 
@@ -21,15 +22,15 @@ export class ThreeHeaders extends SpeakeasyBase {
  * Connect to a Websocket
 **/
 export class Three extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content-type" })
+  @SpeakeasyMetadata({ data: "json, name=content-type" })
   contentType: ThreeContentTypeEnum;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: ThreeHeaders;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

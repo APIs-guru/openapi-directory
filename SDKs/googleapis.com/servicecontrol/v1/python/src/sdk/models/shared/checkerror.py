@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import status
+from sdk import utils
+from . import *
 
 class CheckErrorCodeEnum(str, Enum):
     ERROR_CODE_UNSPECIFIED = "ERROR_CODE_UNSPECIFIED"
@@ -46,8 +48,12 @@ class CheckErrorCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CheckError:
-    code: Optional[CheckErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    status: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    subject: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subject' }})
+    r"""CheckError
+    Defines the errors to be returned in google.api.servicecontrol.v1.CheckResponse.check_errors.
+    """
+    
+    code: Optional[CheckErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    status: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    subject: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subject') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CharacterOffsets } from "./characteroffsets";
 /**
  * Potential issues that are detected based on an artificial intelligence analysis of each turn in the conversation.

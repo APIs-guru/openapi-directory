@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseDevicesSetStatePathParams:
-    device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    device_id: str = field(metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class AndroidenterpriseDevicesSetStateQueryParams:
 
 @dataclass
 class AndroidenterpriseDevicesSetStateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseDevicesSetStateRequest:
-    path_params: AndroidenterpriseDevicesSetStatePathParams = field(default=None)
-    query_params: AndroidenterpriseDevicesSetStateQueryParams = field(default=None)
+    path_params: AndroidenterpriseDevicesSetStatePathParams = field()
+    query_params: AndroidenterpriseDevicesSetStateQueryParams = field()
+    security: AndroidenterpriseDevicesSetStateSecurity = field()
     request: Optional[shared.DeviceState] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidenterpriseDevicesSetStateSecurity = field(default=None)
     
 
 @dataclass
 class AndroidenterpriseDevicesSetStateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device_state: Optional[shared.DeviceState] = field(default=None)
-    status_code: int = field(default=None)
     

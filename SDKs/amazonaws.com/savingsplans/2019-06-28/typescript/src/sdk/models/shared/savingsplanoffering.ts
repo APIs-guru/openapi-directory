@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CurrencyCodeEnum } from "./currencycodeenum";
 import { SavingsPlanPaymentOptionEnum } from "./savingsplanpaymentoptionenum";
 import { SavingsPlanTypeEnum } from "./savingsplantypeenum";
 import { SavingsPlanProductTypeEnum } from "./savingsplanproducttypeenum";
+
 
 
 // SavingsPlanOffering
@@ -10,36 +11,36 @@ import { SavingsPlanProductTypeEnum } from "./savingsplanproducttypeenum";
  * Information about a Savings Plan offering.
 **/
 export class SavingsPlanOffering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: CurrencyCodeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=durationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=durationSeconds" })
   durationSeconds?: number;
 
-  @Metadata({ data: "json, name=offeringId" })
+  @SpeakeasyMetadata({ data: "json, name=offeringId" })
   offeringId?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: string;
 
-  @Metadata({ data: "json, name=paymentOption" })
+  @SpeakeasyMetadata({ data: "json, name=paymentOption" })
   paymentOption?: SavingsPlanPaymentOptionEnum;
 
-  @Metadata({ data: "json, name=planType" })
+  @SpeakeasyMetadata({ data: "json, name=planType" })
   planType?: SavingsPlanTypeEnum;
 
-  @Metadata({ data: "json, name=productTypes" })
+  @SpeakeasyMetadata({ data: "json, name=productTypes" })
   productTypes?: SavingsPlanProductTypeEnum[];
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: any;
 
-  @Metadata({ data: "json, name=serviceCode" })
+  @SpeakeasyMetadata({ data: "json, name=serviceCode" })
   serviceCode?: string;
 
-  @Metadata({ data: "json, name=usageType" })
+  @SpeakeasyMetadata({ data: "json, name=usageType" })
   usageType?: string;
 }

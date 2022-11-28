@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactTypeEnum } from "./contacttypeenum";
+
 
 
 // Contact
@@ -7,15 +8,15 @@ import { ContactTypeEnum } from "./contacttypeenum";
  * A personal contact or escalation plan that Incident Manager engages during an incident.
 **/
 export class Contact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Alias" })
+  @SpeakeasyMetadata({ data: "json, name=Alias" })
   alias: string;
 
-  @Metadata({ data: "json, name=ContactArn" })
+  @SpeakeasyMetadata({ data: "json, name=ContactArn" })
   contactArn: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: ContactTypeEnum;
 }

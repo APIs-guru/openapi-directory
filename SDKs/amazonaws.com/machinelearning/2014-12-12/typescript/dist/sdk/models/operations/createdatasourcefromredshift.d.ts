@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateDataSourceFromRedshiftXAmzTargetEnum {
     AmazonMl20141212CreateDataSourceFromRedshift = "AmazonML_20141212.CreateDataSourceFromRedshift"

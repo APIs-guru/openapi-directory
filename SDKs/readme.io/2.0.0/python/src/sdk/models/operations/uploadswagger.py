@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class UploadSwaggerRequestBodySwagger:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    swagger: str = field(default=None, metadata={'multipart_form': { 'field_name': 'swagger' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    swagger: str = field(metadata={'multipart_form': { 'field_name': 'swagger' }})
     
 
 @dataclass
@@ -15,17 +16,17 @@ class UploadSwaggerRequestBody:
 
 @dataclass
 class UploadSwaggerSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class UploadSwaggerRequest:
-    request: UploadSwaggerRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: UploadSwaggerSecurity = field(default=None)
+    request: UploadSwaggerRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
+    security: UploadSwaggerSecurity = field()
     
 
 @dataclass
 class UploadSwaggerResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

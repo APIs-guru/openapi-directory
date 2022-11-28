@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import solutionversionsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListSolutionVersionsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    solution_versions: Optional[List[solutionversionsummary.SolutionVersionSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'solutionVersions' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    solution_versions: Optional[List[SolutionVersionSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('solutionVersions') }})
     

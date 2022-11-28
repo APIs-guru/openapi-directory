@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -37,11 +37,11 @@ class SearchGazeteerCensusTractsQueryParams:
 
 @dataclass
 class SearchGazeteerCensusTractsRequest:
-    query_params: SearchGazeteerCensusTractsQueryParams = field(default=None)
+    query_params: SearchGazeteerCensusTractsQueryParams = field()
     
 
 @dataclass
 class SearchGazeteerCensusTractsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

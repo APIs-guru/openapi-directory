@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LikeStoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=story_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=story_id" })
   storyId: string;
 }
 
 
 export class LikeStoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
   devicePixelRatio?: number;
 }
 
 
 export class LikeStoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LikeStoryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LikeStoryQueryParams;
 }
 
 
 export class LikeStoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   story?: shared.Story;
 }

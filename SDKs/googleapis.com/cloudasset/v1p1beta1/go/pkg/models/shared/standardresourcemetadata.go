@@ -1,5 +1,7 @@
 package shared
 
+// StandardResourceMetadata
+// The standard metadata of a cloud resource.
 type StandardResourceMetadata struct {
 	AdditionalAttributes []string          `json:"additionalAttributes,omitempty"`
 	AssetType            *string           `json:"assetType,omitempty"`

@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTagsJson200ApplicationJsonExtras extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: any[];
 }
 
 
 export class GetTagsJson200ApplicationJsonTags extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=pm_count" })
+  @SpeakeasyMetadata({ data: "json, name=pm_count" })
   pmCount?: number;
 
-  @Metadata({ data: "json, name=target_tag" })
+  @SpeakeasyMetadata({ data: "json, name=target_tag" })
   targetTag?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }
 
 
 export class GetTagsJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=extras" })
+  @SpeakeasyMetadata({ data: "json, name=extras" })
   extras?: GetTagsJson200ApplicationJsonExtras;
 
-  @Metadata({ data: "json, name=tags", elemType: operations.GetTagsJson200ApplicationJsonTags })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: GetTagsJson200ApplicationJsonTags })
   tags?: GetTagsJson200ApplicationJsonTags[];
 }
 
 
 export class GetTagsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTagsJson200ApplicationJsonObject?: GetTagsJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

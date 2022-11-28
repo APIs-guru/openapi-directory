@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeDuration } from "./timeduration";
+import { OfferedItem } from "./offereditem";
 // CreateOffersRequest
 /**
  * This complex type contains the fields needed to create an offer to a buyer that is initiated by the seller.
@@ -35,19 +35,19 @@ var CreateOffersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowCounterOffer" }),
+        SpeakeasyMetadata({ data: "json, name=allowCounterOffer" }),
         __metadata("design:type", Boolean)
     ], CreateOffersRequest.prototype, "allowCounterOffer", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], CreateOffersRequest.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerDuration" }),
+        SpeakeasyMetadata({ data: "json, name=offerDuration" }),
         __metadata("design:type", TimeDuration)
     ], CreateOffersRequest.prototype, "offerDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=offeredItems", elemType: shared.OfferedItem }),
+        SpeakeasyMetadata({ data: "json, name=offeredItems", elemType: OfferedItem }),
         __metadata("design:type", Array)
     ], CreateOffersRequest.prototype, "offeredItems", void 0);
     return CreateOffersRequest;

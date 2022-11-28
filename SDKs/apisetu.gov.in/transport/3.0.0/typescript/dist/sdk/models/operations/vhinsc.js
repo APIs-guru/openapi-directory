@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VhinscRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(VhinscRequestBodyCertificateParameters, _super);
@@ -30,23 +30,23 @@ var VhinscRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], VhinscRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], VhinscRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=chasis_no" }),
+        SpeakeasyMetadata({ data: "json, name=chasis_no" }),
         __metadata("design:type", String)
     ], VhinscRequestBodyCertificateParameters.prototype, "chasisNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=reg_no" }),
+        SpeakeasyMetadata({ data: "json, name=reg_no" }),
         __metadata("design:type", String)
     ], VhinscRequestBodyCertificateParameters.prototype, "regNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=swd_name" }),
+        SpeakeasyMetadata({ data: "json, name=swd_name" }),
         __metadata("design:type", String)
     ], VhinscRequestBodyCertificateParameters.prototype, "swdName", void 0);
     return VhinscRequestBodyCertificateParameters;
@@ -62,19 +62,19 @@ var VhinscRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", VhinscRequestBodyCertificateParameters)
     ], VhinscRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], VhinscRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], VhinscRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], VhinscRequestBody.prototype, "txnId", void 0);
     return VhinscRequestBody;
@@ -86,32 +86,16 @@ var VhinscSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], VhinscSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], VhinscSecurity.prototype, "clientId", void 0);
     return VhinscSecurity;
 }(SpeakeasyBase));
 export { VhinscSecurity };
-var VhinscRequest = /** @class */ (function (_super) {
-    __extends(VhinscRequest, _super);
-    function VhinscRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", VhinscRequestBody)
-    ], VhinscRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", VhinscSecurity)
-    ], VhinscRequest.prototype, "security", void 0);
-    return VhinscRequest;
-}(SpeakeasyBase));
-export { VhinscRequest };
 export var Vhinsc400ApplicationJsonErrorEnum;
 (function (Vhinsc400ApplicationJsonErrorEnum) {
     Vhinsc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -134,11 +118,11 @@ var Vhinsc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhinsc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhinsc400ApplicationJson.prototype, "errorDescription", void 0);
     return Vhinsc400ApplicationJson;
@@ -160,11 +144,11 @@ var Vhinsc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhinsc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhinsc401ApplicationJson.prototype, "errorDescription", void 0);
     return Vhinsc401ApplicationJson;
@@ -186,11 +170,11 @@ var Vhinsc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhinsc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhinsc404ApplicationJson.prototype, "errorDescription", void 0);
     return Vhinsc404ApplicationJson;
@@ -210,11 +194,11 @@ var Vhinsc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhinsc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhinsc500ApplicationJson.prototype, "errorDescription", void 0);
     return Vhinsc500ApplicationJson;
@@ -234,11 +218,11 @@ var Vhinsc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhinsc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhinsc502ApplicationJson.prototype, "errorDescription", void 0);
     return Vhinsc502ApplicationJson;
@@ -258,11 +242,11 @@ var Vhinsc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhinsc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhinsc503ApplicationJson.prototype, "errorDescription", void 0);
     return Vhinsc503ApplicationJson;
@@ -282,55 +266,71 @@ var Vhinsc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhinsc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhinsc504ApplicationJson.prototype, "errorDescription", void 0);
     return Vhinsc504ApplicationJson;
 }(SpeakeasyBase));
 export { Vhinsc504ApplicationJson };
+var VhinscRequest = /** @class */ (function (_super) {
+    __extends(VhinscRequest, _super);
+    function VhinscRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", VhinscRequestBody)
+    ], VhinscRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", VhinscSecurity)
+    ], VhinscRequest.prototype, "security", void 0);
+    return VhinscRequest;
+}(SpeakeasyBase));
+export { VhinscRequest };
 var VhinscResponse = /** @class */ (function (_super) {
     __extends(VhinscResponse, _super);
     function VhinscResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VhinscResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VhinscResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhinsc400ApplicationJson)
     ], VhinscResponse.prototype, "vhinsc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhinsc401ApplicationJson)
     ], VhinscResponse.prototype, "vhinsc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhinsc404ApplicationJson)
     ], VhinscResponse.prototype, "vhinsc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhinsc500ApplicationJson)
     ], VhinscResponse.prototype, "vhinsc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhinsc502ApplicationJson)
     ], VhinscResponse.prototype, "vhinsc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhinsc503ApplicationJson)
     ], VhinscResponse.prototype, "vhinsc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhinsc504ApplicationJson)
     ], VhinscResponse.prototype, "vhinsc504ApplicationJsonObject", void 0);
     return VhinscResponse;

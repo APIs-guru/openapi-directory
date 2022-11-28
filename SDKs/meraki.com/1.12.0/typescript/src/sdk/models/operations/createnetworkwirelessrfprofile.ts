@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkWirelessRfProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum CreateNetworkWirelessRfProfileRequestBodyApBandSettingsBandOperationModeEnum {
-    Dual = "dual"
-,    Two4ghz = "2.4ghz"
-,    Fiveghz = "5ghz"
+    Dual = "dual",
+    Two4ghz = "2.4ghz",
+    Fiveghz = "5ghz"
 }
 
 
@@ -18,16 +19,16 @@ export enum CreateNetworkWirelessRfProfileRequestBodyApBandSettingsBandOperation
  * Settings that will be enabled if selectionType is set to 'ap'.
 **/
 export class CreateNetworkWirelessRfProfileRequestBodyApBandSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandOperationMode" })
+  @SpeakeasyMetadata({ data: "json, name=bandOperationMode" })
   bandOperationMode?: CreateNetworkWirelessRfProfileRequestBodyApBandSettingsBandOperationModeEnum;
 
-  @Metadata({ data: "json, name=bandSteeringEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=bandSteeringEnabled" })
   bandSteeringEnabled?: boolean;
 }
 
 export enum CreateNetworkWirelessRfProfileRequestBodyBandSelectionTypeEnum {
-    Ssid = "ssid"
-,    Ap = "ap"
+    Ssid = "ssid",
+    Ap = "ap"
 }
 
 
@@ -36,28 +37,28 @@ export enum CreateNetworkWirelessRfProfileRequestBodyBandSelectionTypeEnum {
  * Settings related to 5Ghz band
 **/
 export class CreateNetworkWirelessRfProfileRequestBodyFiveGhzSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelWidth" })
+  @SpeakeasyMetadata({ data: "json, name=channelWidth" })
   channelWidth?: string;
 
-  @Metadata({ data: "json, name=maxPower" })
+  @SpeakeasyMetadata({ data: "json, name=maxPower" })
   maxPower?: number;
 
-  @Metadata({ data: "json, name=minBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=minBitrate" })
   minBitrate?: number;
 
-  @Metadata({ data: "json, name=minPower" })
+  @SpeakeasyMetadata({ data: "json, name=minPower" })
   minPower?: number;
 
-  @Metadata({ data: "json, name=rxsop" })
+  @SpeakeasyMetadata({ data: "json, name=rxsop" })
   rxsop?: number;
 
-  @Metadata({ data: "json, name=validAutoChannels" })
+  @SpeakeasyMetadata({ data: "json, name=validAutoChannels" })
   validAutoChannels?: number[];
 }
 
 export enum CreateNetworkWirelessRfProfileRequestBodyMinBitrateTypeEnum {
-    Band = "band"
-,    Ssid = "ssid"
+    Band = "band",
+    Ssid = "ssid"
 }
 
 
@@ -66,66 +67,66 @@ export enum CreateNetworkWirelessRfProfileRequestBodyMinBitrateTypeEnum {
  * Settings related to 2.4Ghz band
 **/
 export class CreateNetworkWirelessRfProfileRequestBodyTwoFourGhzSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=axEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=axEnabled" })
   axEnabled?: boolean;
 
-  @Metadata({ data: "json, name=maxPower" })
+  @SpeakeasyMetadata({ data: "json, name=maxPower" })
   maxPower?: number;
 
-  @Metadata({ data: "json, name=minBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=minBitrate" })
   minBitrate?: number;
 
-  @Metadata({ data: "json, name=minPower" })
+  @SpeakeasyMetadata({ data: "json, name=minPower" })
   minPower?: number;
 
-  @Metadata({ data: "json, name=rxsop" })
+  @SpeakeasyMetadata({ data: "json, name=rxsop" })
   rxsop?: number;
 
-  @Metadata({ data: "json, name=validAutoChannels" })
+  @SpeakeasyMetadata({ data: "json, name=validAutoChannels" })
   validAutoChannels?: number[];
 }
 
 
 export class CreateNetworkWirelessRfProfileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apBandSettings" })
+  @SpeakeasyMetadata({ data: "json, name=apBandSettings" })
   apBandSettings?: CreateNetworkWirelessRfProfileRequestBodyApBandSettings;
 
-  @Metadata({ data: "json, name=bandSelectionType" })
+  @SpeakeasyMetadata({ data: "json, name=bandSelectionType" })
   bandSelectionType: CreateNetworkWirelessRfProfileRequestBodyBandSelectionTypeEnum;
 
-  @Metadata({ data: "json, name=clientBalancingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=clientBalancingEnabled" })
   clientBalancingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=fiveGhzSettings" })
+  @SpeakeasyMetadata({ data: "json, name=fiveGhzSettings" })
   fiveGhzSettings?: CreateNetworkWirelessRfProfileRequestBodyFiveGhzSettings;
 
-  @Metadata({ data: "json, name=minBitrateType" })
+  @SpeakeasyMetadata({ data: "json, name=minBitrateType" })
   minBitrateType?: CreateNetworkWirelessRfProfileRequestBodyMinBitrateTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=twoFourGhzSettings" })
+  @SpeakeasyMetadata({ data: "json, name=twoFourGhzSettings" })
   twoFourGhzSettings?: CreateNetworkWirelessRfProfileRequestBodyTwoFourGhzSettings;
 }
 
 
 export class CreateNetworkWirelessRfProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkWirelessRfProfilePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkWirelessRfProfileRequestBody;
 }
 
 
 export class CreateNetworkWirelessRfProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkWirelessRfProfile201ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1HumanAnnotationConfig
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for how human labeling task should be done.
 **/
 export class GoogleCloudDatalabelingV1beta1HumanAnnotationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotatedDatasetDescription" })
+  @SpeakeasyMetadata({ data: "json, name=annotatedDatasetDescription" })
   annotatedDatasetDescription?: string;
 
-  @Metadata({ data: "json, name=annotatedDatasetDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=annotatedDatasetDisplayName" })
   annotatedDatasetDisplayName?: string;
 
-  @Metadata({ data: "json, name=contributorEmails" })
+  @SpeakeasyMetadata({ data: "json, name=contributorEmails" })
   contributorEmails?: string[];
 
-  @Metadata({ data: "json, name=instruction" })
+  @SpeakeasyMetadata({ data: "json, name=instruction" })
   instruction?: string;
 
-  @Metadata({ data: "json, name=labelGroup" })
+  @SpeakeasyMetadata({ data: "json, name=labelGroup" })
   labelGroup?: string;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=questionDuration" })
+  @SpeakeasyMetadata({ data: "json, name=questionDuration" })
   questionDuration?: string;
 
-  @Metadata({ data: "json, name=replicaCount" })
+  @SpeakeasyMetadata({ data: "json, name=replicaCount" })
   replicaCount?: number;
 
-  @Metadata({ data: "json, name=userEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=userEmailAddress" })
   userEmailAddress?: string;
 }

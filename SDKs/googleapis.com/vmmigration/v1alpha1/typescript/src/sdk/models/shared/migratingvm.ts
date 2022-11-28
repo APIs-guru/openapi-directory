@@ -1,28 +1,73 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ComputeEngineTargetDefaults } from "./computeenginetargetdefaults";
-import { TargetVmDetails } from "./targetvmdetails";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AwsSourceVmDetails } from "./awssourcevmdetails";
+import { ComputeEngineTargetDefaultsInput } from "./computeenginetargetdefaults";
+import { TargetVmDetailsInput } from "./targetvmdetails";
 import { ReplicationCycle } from "./replicationcycle";
 import { Status } from "./status";
 import { ReplicationSync } from "./replicationsync";
 import { SchedulePolicy } from "./schedulepolicy";
+import { ComputeEngineTargetDefaults } from "./computeenginetargetdefaults";
+import { TargetVmDetails } from "./targetvmdetails";
 import { CloneJob } from "./clonejob";
 import { CutoverJob } from "./cutoverjob";
-import { TargetVmDetails } from "./targetvmdetails";
+
 
 export enum MigratingVmStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Ready = "READY"
-,    FirstSync = "FIRST_SYNC"
-,    Active = "ACTIVE"
-,    CuttingOver = "CUTTING_OVER"
-,    Cutover = "CUTOVER"
-,    FinalSync = "FINAL_SYNC"
-,    Paused = "PAUSED"
-,    Finalizing = "FINALIZING"
-,    Finalized = "FINALIZED"
-,    Error = "ERROR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Ready = "READY",
+    FirstSync = "FIRST_SYNC",
+    Active = "ACTIVE",
+    CuttingOver = "CUTTING_OVER",
+    Cutover = "CUTOVER",
+    FinalSync = "FINAL_SYNC",
+    Paused = "PAUSED",
+    Finalizing = "FINALIZING",
+    Finalized = "FINALIZED",
+    Error = "ERROR"
+}
+
+
+// MigratingVmInput
+/** 
+ * MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
+**/
+export class MigratingVmInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=awsSourceVmDetails" })
+  awsSourceVmDetails?: AwsSourceVmDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=computeEngineTargetDefaults" })
+  computeEngineTargetDefaults?: ComputeEngineTargetDefaultsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=computeEngineVmDefaults" })
+  computeEngineVmDefaults?: TargetVmDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=currentSyncInfo" })
+  currentSyncInfo?: ReplicationCycle;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=error" })
+  error?: Status;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=lastSync" })
+  lastSync?: ReplicationSync;
+
+  @SpeakeasyMetadata({ data: "json, name=policy" })
+  policy?: SchedulePolicy;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceVmId" })
+  sourceVmId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=targetDefaults" })
+  targetDefaults?: TargetVmDetailsInput;
 }
 
 
@@ -31,60 +76,63 @@ export enum MigratingVmStateEnum {
  * MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
 **/
 export class MigratingVm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computeEngineTargetDefaults" })
+  @SpeakeasyMetadata({ data: "json, name=awsSourceVmDetails" })
+  awsSourceVmDetails?: AwsSourceVmDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=computeEngineTargetDefaults" })
   computeEngineTargetDefaults?: ComputeEngineTargetDefaults;
 
-  @Metadata({ data: "json, name=computeEngineVmDefaults" })
+  @SpeakeasyMetadata({ data: "json, name=computeEngineVmDefaults" })
   computeEngineVmDefaults?: TargetVmDetails;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=currentSyncInfo" })
+  @SpeakeasyMetadata({ data: "json, name=currentSyncInfo" })
   currentSyncInfo?: ReplicationCycle;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Status;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lastSync" })
+  @SpeakeasyMetadata({ data: "json, name=lastSync" })
   lastSync?: ReplicationSync;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: SchedulePolicy;
 
-  @Metadata({ data: "json, name=recentCloneJobs", elemType: shared.CloneJob })
+  @SpeakeasyMetadata({ data: "json, name=recentCloneJobs", elemType: CloneJob })
   recentCloneJobs?: CloneJob[];
 
-  @Metadata({ data: "json, name=recentCutoverJobs", elemType: shared.CutoverJob })
+  @SpeakeasyMetadata({ data: "json, name=recentCutoverJobs", elemType: CutoverJob })
   recentCutoverJobs?: CutoverJob[];
 
-  @Metadata({ data: "json, name=sourceVmId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceVmId" })
   sourceVmId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: MigratingVmStateEnum;
 
-  @Metadata({ data: "json, name=stateTime" })
+  @SpeakeasyMetadata({ data: "json, name=stateTime" })
   stateTime?: string;
 
-  @Metadata({ data: "json, name=targetDefaults" })
+  @SpeakeasyMetadata({ data: "json, name=targetDefaults" })
   targetDefaults?: TargetVmDetails;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

@@ -4,10 +4,6 @@ type GetPublicStatusUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type GetPublicStatusUsingPostRequest struct {
-	QueryParams GetPublicStatusUsingPostQueryParams
-}
-
 type GetPublicStatusUsingPost200ApplicationJSONData struct {
 	PublicStatus *bool `json:"publicStatus,omitempty"`
 }
@@ -34,6 +30,10 @@ type GetPublicStatusUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetPublicStatusUsingPostRequest struct {
+	QueryParams GetPublicStatusUsingPostQueryParams
 }
 
 type GetPublicStatusUsingPostResponse struct {

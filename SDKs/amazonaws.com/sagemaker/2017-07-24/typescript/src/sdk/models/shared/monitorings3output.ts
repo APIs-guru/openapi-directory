@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingS3UploadModeEnum } from "./processings3uploadmodeenum";
+
 
 
 // MonitoringS3Output
@@ -7,12 +8,12 @@ import { ProcessingS3UploadModeEnum } from "./processings3uploadmodeenum";
  * Information about where and how you want to store the results of a monitoring job.
 **/
 export class MonitoringS3Output extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LocalPath" })
+  @SpeakeasyMetadata({ data: "json, name=LocalPath" })
   localPath: string;
 
-  @Metadata({ data: "json, name=S3UploadMode" })
+  @SpeakeasyMetadata({ data: "json, name=S3UploadMode" })
   s3UploadMode?: ProcessingS3UploadModeEnum;
 
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri: string;
 }

@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class QueryDbQueryParams:
-    query: str = field(default=None, metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
+    query: str = field(metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class QueryDbRequest:
-    query_params: QueryDbQueryParams = field(default=None)
+    query_params: QueryDbQueryParams = field()
     
 
 @dataclass
 class QueryDbResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     query_db_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

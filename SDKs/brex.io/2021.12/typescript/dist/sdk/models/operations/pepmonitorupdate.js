@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PepMonitorUpdatePathParams = /** @class */ (function (_super) {
     __extends(PepMonitorUpdatePathParams, _super);
@@ -30,7 +30,7 @@ var PepMonitorUpdatePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PepMonitorUpdatePathParams.prototype, "id", void 0);
     return PepMonitorUpdatePathParams;
@@ -42,7 +42,7 @@ var PepMonitorUpdateRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=Webhook;" }),
+        SpeakeasyMetadata({ data: "form, name=Webhook;" }),
         __metadata("design:type", String)
     ], PepMonitorUpdateRequestBody.prototype, "webhook", void 0);
     return PepMonitorUpdateRequestBody;
@@ -54,7 +54,7 @@ var PepMonitorUpdateSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], PepMonitorUpdateSecurity.prototype, "userKey", void 0);
     return PepMonitorUpdateSecurity;
@@ -66,15 +66,15 @@ var PepMonitorUpdateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PepMonitorUpdatePathParams)
     ], PepMonitorUpdateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", PepMonitorUpdateRequestBody)
     ], PepMonitorUpdateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PepMonitorUpdateSecurity)
     ], PepMonitorUpdateRequest.prototype, "security", void 0);
     return PepMonitorUpdateRequest;
@@ -86,19 +86,19 @@ var PepMonitorUpdateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PepMonitorUpdateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PepMonitorUpdateResponse.prototype, "pepMonitorUpdate200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PepMonitorUpdateResponse.prototype, "pepMonitorUpdateDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PepMonitorUpdateResponse.prototype, "statusCode", void 0);
     return PepMonitorUpdateResponse;

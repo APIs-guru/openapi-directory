@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OnFailure } from "./onfailure";
 import { OnSuccess } from "./onsuccess";
 /**

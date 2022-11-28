@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteRoleActionEnum(str, Enum):
     DELETE_ROLE = "DeleteRole"
@@ -10,9 +14,9 @@ class GetDeleteRoleVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteRoleQueryParams:
-    action: GetDeleteRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    role_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
-    version: GetDeleteRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    role_name: str = field(metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
+    version: GetDeleteRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteRoleHeaders:
 
 @dataclass
 class GetDeleteRoleRequest:
-    query_params: GetDeleteRoleQueryParams = field(default=None)
-    headers: GetDeleteRoleHeaders = field(default=None)
+    headers: GetDeleteRoleHeaders = field()
+    query_params: GetDeleteRoleQueryParams = field()
     
 
 @dataclass
 class GetDeleteRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

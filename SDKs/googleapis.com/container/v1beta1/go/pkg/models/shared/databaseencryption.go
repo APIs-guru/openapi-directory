@@ -8,6 +8,8 @@ const (
 	DatabaseEncryptionStateEnumDecrypted DatabaseEncryptionStateEnum = "DECRYPTED"
 )
 
+// DatabaseEncryption
+// Configuration of etcd encryption.
 type DatabaseEncryption struct {
 	KeyName *string                      `json:"keyName,omitempty"`
 	State   *DatabaseEncryptionStateEnum `json:"state,omitempty"`

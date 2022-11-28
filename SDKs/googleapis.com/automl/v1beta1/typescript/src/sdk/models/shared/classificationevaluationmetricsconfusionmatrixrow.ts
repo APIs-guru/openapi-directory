@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClassificationEvaluationMetricsConfusionMatrixRow
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Output only. A row in the confusion matrix.
 **/
 export class ClassificationEvaluationMetricsConfusionMatrixRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exampleCount" })
+  @SpeakeasyMetadata({ data: "json, name=exampleCount" })
   exampleCount?: number[];
 }

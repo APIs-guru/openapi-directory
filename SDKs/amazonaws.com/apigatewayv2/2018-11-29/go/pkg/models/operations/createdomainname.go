@@ -14,6 +14,8 @@ type CreateDomainNameHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateDomainNameRequestBodyMutualTLSAuthentication
+// The mutual TLS authentication configuration for a custom domain name.
 type CreateDomainNameRequestBodyMutualTLSAuthentication struct {
 	TruststoreURI     *string `json:"TruststoreUri,omitempty"`
 	TruststoreVersion *string `json:"TruststoreVersion,omitempty"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityRecognizerAnnotations } from "./entityrecognizerannotations";
 import { AugmentedManifestsListItem } from "./augmentedmanifestslistitem";
 import { EntityRecognizerDataFormatEnum } from "./entityrecognizerdataformatenum";
@@ -8,26 +7,27 @@ import { EntityRecognizerEntityList } from "./entityrecognizerentitylist";
 import { EntityTypesListItem } from "./entitytypeslistitem";
 
 
+
 // EntityRecognizerInputDataConfig
 /** 
  * Specifies the format and location of the input data.
 **/
 export class EntityRecognizerInputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Annotations" })
+  @SpeakeasyMetadata({ data: "json, name=Annotations" })
   annotations?: EntityRecognizerAnnotations;
 
-  @Metadata({ data: "json, name=AugmentedManifests", elemType: shared.AugmentedManifestsListItem })
+  @SpeakeasyMetadata({ data: "json, name=AugmentedManifests", elemType: AugmentedManifestsListItem })
   augmentedManifests?: AugmentedManifestsListItem[];
 
-  @Metadata({ data: "json, name=DataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DataFormat" })
   dataFormat?: EntityRecognizerDataFormatEnum;
 
-  @Metadata({ data: "json, name=Documents" })
+  @SpeakeasyMetadata({ data: "json, name=Documents" })
   documents?: EntityRecognizerDocuments;
 
-  @Metadata({ data: "json, name=EntityList" })
+  @SpeakeasyMetadata({ data: "json, name=EntityList" })
   entityList?: EntityRecognizerEntityList;
 
-  @Metadata({ data: "json, name=EntityTypes", elemType: shared.EntityTypesListItem })
+  @SpeakeasyMetadata({ data: "json, name=EntityTypes", elemType: EntityTypesListItem })
   entityTypes: EntityTypesListItem[];
 }

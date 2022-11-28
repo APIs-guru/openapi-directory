@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
+
 
 
 // BatchStopJobRunError
@@ -7,12 +8,12 @@ import { ErrorDetail } from "./errordetail";
  * Records an error that occurred when attempting to stop a specified job run.
 **/
 export class BatchStopJobRunError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorDetail" })
   errorDetail?: ErrorDetail;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=JobRunId" })
+  @SpeakeasyMetadata({ data: "json, name=JobRunId" })
   jobRunId?: string;
 }

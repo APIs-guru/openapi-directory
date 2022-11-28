@@ -13,31 +13,19 @@ type GetStoriesQueryParams struct {
 	SortBy           *string  `queryParam:"style=form,explode=true,name=sort_by"`
 }
 
-type GetStoriesSecurityOption1 struct {
-	Oauth2Implicit shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
-}
-
-type GetStoriesSecurityOption2 struct {
-	Oauth2Code shared.SchemeOauth2Code `security:"scheme,type=oauth2"`
-}
-
-type GetStoriesSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type GetStoriesSecurity struct {
-	Option1 *GetStoriesSecurityOption1 `security:"option"`
-	Option2 *GetStoriesSecurityOption2 `security:"option"`
-	Option3 *GetStoriesSecurityOption3 `security:"option"`
+	Oauth2Implicit *shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
+	Oauth2Code     *shared.SchemeOauth2Code     `security:"scheme,type=oauth2"`
+	APIKey         *shared.SchemeAPIKey         `security:"scheme,type=apiKey,subtype=query"`
+}
+
+type GetStories200ApplicationJSON struct {
+	Stories []shared.Story `json:"stories,omitempty"`
 }
 
 type GetStoriesRequest struct {
 	QueryParams GetStoriesQueryParams
 	Security    GetStoriesSecurity
-}
-
-type GetStories200ApplicationJSON struct {
-	Stories []shared.Story `json:"stories,omitempty"`
 }
 
 type GetStoriesResponse struct {

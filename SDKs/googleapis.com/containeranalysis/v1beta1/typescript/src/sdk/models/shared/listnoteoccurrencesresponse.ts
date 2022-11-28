@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Occurrence } from "./occurrence";
+
 
 
 // ListNoteOccurrencesResponse
@@ -8,9 +8,9 @@ import { Occurrence } from "./occurrence";
  * Response for listing occurrences for a note.
 **/
 export class ListNoteOccurrencesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=occurrences", elemType: shared.Occurrence })
+  @SpeakeasyMetadata({ data: "json, name=occurrences", elemType: Occurrence })
   occurrences?: Occurrence[];
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompanyMonitorRegisterPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class CompanyMonitorRegisterRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=callbackUrl;" })
+  @SpeakeasyMetadata({ data: "form, name=callbackUrl;" })
   callbackUrl: string;
 
-  @Metadata({ data: "form, name=changeType;" })
+  @SpeakeasyMetadata({ data: "form, name=changeType;" })
   changeType: string;
 }
 
 
 export class CompanyMonitorRegisterSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class CompanyMonitorRegisterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompanyMonitorRegisterPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: CompanyMonitorRegisterRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CompanyMonitorRegisterSecurity;
 }
 
 
 export class CompanyMonitorRegisterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companyMonitorRegister200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   companyMonitorRegisterDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

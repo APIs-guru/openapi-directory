@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeltaSyncConfig } from "./deltasyncconfig";
 /**
  * Describes an Amazon DynamoDB data source configuration.

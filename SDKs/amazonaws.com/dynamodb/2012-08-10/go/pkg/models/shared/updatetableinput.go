@@ -1,5 +1,7 @@
 package shared
 
+// UpdateTableInput
+// Represents the input of an <code>UpdateTable</code> operation.
 type UpdateTableInput struct {
 	AttributeDefinitions        []AttributeDefinition        `json:"AttributeDefinitions,omitempty"`
 	BillingMode                 *BillingModeEnum             `json:"BillingMode,omitempty"`

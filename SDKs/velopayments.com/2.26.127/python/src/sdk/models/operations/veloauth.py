@@ -10,19 +10,19 @@ class VeloAuthQueryParams:
 
 @dataclass
 class VeloAuthSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class VeloAuthRequest:
-    query_params: VeloAuthQueryParams = field(default=None)
-    security: VeloAuthSecurity = field(default=None)
+    query_params: VeloAuthQueryParams = field()
+    security: VeloAuthSecurity = field()
     
 
 @dataclass
 class VeloAuthResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     auth_response: Optional[shared.AuthResponse] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

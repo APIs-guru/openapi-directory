@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BatchAssociateClientDeviceWithCoreDevicePathParams = /** @class */ (function (_super) {
     __extends(BatchAssociateClientDeviceWithCoreDevicePathParams, _super);
@@ -30,7 +30,7 @@ var BatchAssociateClientDeviceWithCoreDevicePathParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=coreDeviceThingName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=coreDeviceThingName" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDevicePathParams.prototype, "coreDeviceThingName", void 0);
     return BatchAssociateClientDeviceWithCoreDevicePathParams;
@@ -42,31 +42,31 @@ var BatchAssociateClientDeviceWithCoreDeviceHeaders = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceHeaders.prototype, "xAmzSignedHeaders", void 0);
     return BatchAssociateClientDeviceWithCoreDeviceHeaders;
@@ -78,7 +78,7 @@ var BatchAssociateClientDeviceWithCoreDeviceRequestBody = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entries", elemType: shared.AssociateClientDeviceWithCoreDeviceEntry }),
+        SpeakeasyMetadata({ data: "json, name=entries", elemType: shared.AssociateClientDeviceWithCoreDeviceEntry }),
         __metadata("design:type", Array)
     ], BatchAssociateClientDeviceWithCoreDeviceRequestBody.prototype, "entries", void 0);
     return BatchAssociateClientDeviceWithCoreDeviceRequestBody;
@@ -90,15 +90,15 @@ var BatchAssociateClientDeviceWithCoreDeviceRequest = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BatchAssociateClientDeviceWithCoreDevicePathParams)
     ], BatchAssociateClientDeviceWithCoreDeviceRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BatchAssociateClientDeviceWithCoreDeviceHeaders)
     ], BatchAssociateClientDeviceWithCoreDeviceRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", BatchAssociateClientDeviceWithCoreDeviceRequestBody)
     ], BatchAssociateClientDeviceWithCoreDeviceRequest.prototype, "request", void 0);
     return BatchAssociateClientDeviceWithCoreDeviceRequest;
@@ -110,35 +110,35 @@ var BatchAssociateClientDeviceWithCoreDeviceResponse = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BatchAssociateClientDeviceWithCoreDeviceResponse)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "batchAssociateClientDeviceWithCoreDeviceResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], BatchAssociateClientDeviceWithCoreDeviceResponse.prototype, "validationException", void 0);
     return BatchAssociateClientDeviceWithCoreDeviceResponse;

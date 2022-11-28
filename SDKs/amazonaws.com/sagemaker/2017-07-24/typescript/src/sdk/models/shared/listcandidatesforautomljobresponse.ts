@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlCandidate } from "./automlcandidate";
 
 
+
 export class ListCandidatesForAutoMlJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Candidates", elemType: shared.AutoMlCandidate })
+  @SpeakeasyMetadata({ data: "json, name=Candidates", elemType: AutoMlCandidate })
   candidates: AutoMlCandidate[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

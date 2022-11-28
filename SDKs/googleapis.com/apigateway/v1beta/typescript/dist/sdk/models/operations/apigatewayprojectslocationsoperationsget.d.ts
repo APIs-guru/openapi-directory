@@ -1,0 +1,38 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class ApigatewayProjectsLocationsOperationsGetPathParams extends SpeakeasyBase {
+    name: string;
+}
+export declare enum ApigatewayProjectsLocationsOperationsGetViewEnum {
+    ConfigViewUnspecified = "CONFIG_VIEW_UNSPECIFIED",
+    Basic = "BASIC",
+    Full = "FULL"
+}
+export declare class ApigatewayProjectsLocationsOperationsGetQueryParams extends SpeakeasyBase {
+    dollarXgafv?: shared.XgafvEnum;
+    accessToken?: string;
+    alt?: shared.AltEnum;
+    callback?: string;
+    fields?: string;
+    key?: string;
+    oauthToken?: string;
+    prettyPrint?: boolean;
+    quotaUser?: string;
+    uploadType?: string;
+    uploadProtocol?: string;
+    view?: ApigatewayProjectsLocationsOperationsGetViewEnum;
+}
+export declare class ApigatewayProjectsLocationsOperationsGetSecurity extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class ApigatewayProjectsLocationsOperationsGetRequest extends SpeakeasyBase {
+    pathParams: ApigatewayProjectsLocationsOperationsGetPathParams;
+    queryParams: ApigatewayProjectsLocationsOperationsGetQueryParams;
+    security: ApigatewayProjectsLocationsOperationsGetSecurity;
+}
+export declare class ApigatewayProjectsLocationsOperationsGetResponse extends SpeakeasyBase {
+    apigatewayOperation?: shared.ApigatewayOperation;
+    contentType: string;
+    statusCode: number;
+}

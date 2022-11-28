@@ -15,6 +15,8 @@ type CreateGroupHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateGroupRequestBodyInitialVersion
+// Information about a group version.
 type CreateGroupRequestBodyInitialVersion struct {
 	ConnectorDefinitionVersionArn    *string `json:"ConnectorDefinitionVersionArn,omitempty"`
 	CoreDefinitionVersionArn         *string `json:"CoreDefinitionVersionArn,omitempty"`

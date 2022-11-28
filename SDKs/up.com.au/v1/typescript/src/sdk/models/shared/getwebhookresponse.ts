@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebhookResource } from "./webhookresource";
+
 
 
 // GetWebhookResponse
@@ -8,6 +9,6 @@ import { WebhookResource } from "./webhookresource";
  * 
 **/
 export class GetWebhookResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: WebhookResource;
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProductsApiDeleteProductPathParams = /** @class */ (function (_super) {
     __extends(ProductsApiDeleteProductPathParams, _super);
     function ProductsApiDeleteProductPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=serial" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" }),
         __metadata("design:type", String)
     ], ProductsApiDeleteProductPathParams.prototype, "serial", void 0);
     return ProductsApiDeleteProductPathParams;
@@ -41,7 +41,7 @@ var ProductsApiDeleteProductHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], ProductsApiDeleteProductHeaders.prototype, "xApiKey", void 0);
     return ProductsApiDeleteProductHeaders;
@@ -53,11 +53,11 @@ var ProductsApiDeleteProductRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductsApiDeleteProductPathParams)
     ], ProductsApiDeleteProductRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductsApiDeleteProductHeaders)
     ], ProductsApiDeleteProductRequest.prototype, "headers", void 0);
     return ProductsApiDeleteProductRequest;
@@ -69,11 +69,11 @@ var ProductsApiDeleteProductResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductsApiDeleteProductResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductsApiDeleteProductResponse.prototype, "statusCode", void 0);
     return ProductsApiDeleteProductResponse;

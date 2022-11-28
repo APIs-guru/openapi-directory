@@ -1,5 +1,7 @@
 package shared
 
+// PatientDemographic
+// Demographic details must be same as registered
 type PatientDemographic struct {
 	DateOfBirth string                 `json:"dateOfBirth"`
 	Gender      PatientGenderEnum      `json:"gender"`

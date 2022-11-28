@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PorterLargeFile
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Porter Large File
 **/
 export class PorterLargeFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oid" })
+  @SpeakeasyMetadata({ data: "json, name=oid" })
   oid: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=ref_name" })
+  @SpeakeasyMetadata({ data: "json, name=ref_name" })
   refName: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 }

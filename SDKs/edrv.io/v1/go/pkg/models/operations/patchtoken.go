@@ -21,15 +21,15 @@ type PatchTokenRequestBody struct {
 	Type       *string                           `json:"type,omitempty"`
 }
 
-type PatchTokenRequest struct {
-	PathParams PatchTokenPathParams
-	Request    PatchTokenRequestBody `request:"mediaType=application/json"`
-}
-
 type PatchToken201ApplicationJSON struct {
 	Message *string       `json:"message,omitempty"`
 	Ok      *bool         `json:"ok,omitempty"`
 	Result  []interface{} `json:"result,omitempty"`
+}
+
+type PatchTokenRequest struct {
+	PathParams PatchTokenPathParams
+	Request    PatchTokenRequestBody `request:"mediaType=application/json"`
 }
 
 type PatchTokenResponse struct {

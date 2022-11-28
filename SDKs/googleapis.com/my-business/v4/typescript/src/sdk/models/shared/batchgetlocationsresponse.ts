@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
+
 
 
 // BatchGetLocationsResponse
@@ -8,6 +8,6 @@ import { Location } from "./location";
  * Response message for Locations.BatchGetLocations.
 **/
 export class BatchGetLocationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locations", elemType: shared.Location })
+  @SpeakeasyMetadata({ data: "json, name=locations", elemType: Location })
   locations?: Location[];
 }

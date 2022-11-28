@@ -1,5 +1,7 @@
 package shared
 
+// WebAppConfig
+// Configuration metadata of a single Firebase App for the web.
 type WebAppConfig struct {
 	APIKey            *string `json:"apiKey,omitempty"`
 	AppID             *string `json:"appId,omitempty"`

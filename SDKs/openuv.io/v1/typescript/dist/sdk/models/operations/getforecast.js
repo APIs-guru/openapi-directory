@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetForecastQueryParams = /** @class */ (function (_super) {
     __extends(GetForecastQueryParams, _super);
@@ -30,23 +30,23 @@ var GetForecastQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", Number)
     ], GetForecastQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dt" }),
         __metadata("design:type", Date)
     ], GetForecastQueryParams.prototype, "dt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" }),
         __metadata("design:type", Number)
     ], GetForecastQueryParams.prototype, "lat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lng" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lng" }),
         __metadata("design:type", Number)
     ], GetForecastQueryParams.prototype, "lng", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ozone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ozone" }),
         __metadata("design:type", Number)
     ], GetForecastQueryParams.prototype, "ozone", void 0);
     return GetForecastQueryParams;
@@ -58,7 +58,7 @@ var GetForecastHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-access-token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-access-token" }),
         __metadata("design:type", String)
     ], GetForecastHeaders.prototype, "xAccessToken", void 0);
     return GetForecastHeaders;
@@ -70,11 +70,11 @@ var GetForecastRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetForecastQueryParams)
     ], GetForecastRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetForecastHeaders)
     ], GetForecastRequest.prototype, "headers", void 0);
     return GetForecastRequest;
@@ -86,15 +86,15 @@ var GetForecastResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetForecastResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetForecastResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Forecast, elemDepth: 2 }),
+        SpeakeasyMetadata({ elemType: shared.Forecast, elemDepth: 2 }),
         __metadata("design:type", Array)
     ], GetForecastResponse.prototype, "forecastResults", void 0);
     return GetForecastResponse;

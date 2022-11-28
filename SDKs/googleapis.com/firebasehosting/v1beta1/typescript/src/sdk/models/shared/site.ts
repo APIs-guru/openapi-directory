@@ -1,9 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SiteTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    DefaultSite = "DEFAULT_SITE"
-,    UserSite = "USER_SITE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    DefaultSite = "DEFAULT_SITE",
+    UserSite = "USER_SITE"
+}
+
+
+// SiteInput
+/** 
+ * A `Site` represents a Firebase Hosting site.
+**/
+export class SiteInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=appId" })
+  appId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
 }
 
 
@@ -12,18 +26,18 @@ export enum SiteTypeEnum {
  * A `Site` represents a Firebase Hosting site.
 **/
 export class Site extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=defaultUrl" })
+  @SpeakeasyMetadata({ data: "json, name=defaultUrl" })
   defaultUrl?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SiteTypeEnum;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GitHubEnterpriseSecrets } from "./githubenterprisesecrets";
+
 
 
 // GitHubEnterpriseConfig
@@ -7,30 +8,61 @@ import { GitHubEnterpriseSecrets } from "./githubenterprisesecrets";
  * GitHubEnterpriseConfig represents a configuration for a GitHub Enterprise server.
 **/
 export class GitHubEnterpriseConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=hostUrl" })
+  @SpeakeasyMetadata({ data: "json, name=hostUrl" })
   hostUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=peeredNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=peeredNetwork" })
   peeredNetwork?: string;
 
-  @Metadata({ data: "json, name=secrets" })
+  @SpeakeasyMetadata({ data: "json, name=secrets" })
   secrets?: GitHubEnterpriseSecrets;
 
-  @Metadata({ data: "json, name=sslCa" })
+  @SpeakeasyMetadata({ data: "json, name=sslCa" })
   sslCa?: string;
 
-  @Metadata({ data: "json, name=webhookKey" })
+  @SpeakeasyMetadata({ data: "json, name=webhookKey" })
+  webhookKey?: string;
+}
+
+
+// GitHubEnterpriseConfigInput
+/** 
+ * GitHubEnterpriseConfig represents a configuration for a GitHub Enterprise server.
+**/
+export class GitHubEnterpriseConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=appId" })
+  appId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=hostUrl" })
+  hostUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=peeredNetwork" })
+  peeredNetwork?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=secrets" })
+  secrets?: GitHubEnterpriseSecrets;
+
+  @SpeakeasyMetadata({ data: "json, name=sslCa" })
+  sslCa?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=webhookKey" })
   webhookKey?: string;
 }

@@ -9,11 +9,6 @@ type BookingHotelsHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type BookingHotelsRequest struct {
-	QueryParams BookingHotelsQueryParams
-	Headers     BookingHotelsHeaders
-}
-
 type BookingHotels200ApplicationJSONData struct {
 	Address       *string  `json:"address,omitempty"`
 	Brand         *string  `json:"brand,omitempty"`
@@ -45,6 +40,11 @@ type BookingHotels200ApplicationJSON struct {
 	Success          *bool                                 `json:"success,omitempty"`
 	TotalCount       *int64                                `json:"totalCount,omitempty"`
 	Vmid             *string                               `json:"vmid,omitempty"`
+}
+
+type BookingHotelsRequest struct {
+	QueryParams BookingHotelsQueryParams
+	Headers     BookingHotelsHeaders
 }
 
 type BookingHotelsResponse struct {

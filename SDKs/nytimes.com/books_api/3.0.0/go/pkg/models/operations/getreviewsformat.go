@@ -26,12 +26,6 @@ type GetReviewsFormatSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetReviewsFormatRequest struct {
-	PathParams  GetReviewsFormatPathParams
-	QueryParams GetReviewsFormatQueryParams
-	Security    GetReviewsFormatSecurity
-}
-
 type GetReviewsFormat200ApplicationJSONResults struct {
 	BookAuthor    *string  `json:"book_author,omitempty"`
 	BookTitle     *string  `json:"book_title,omitempty"`
@@ -47,6 +41,12 @@ type GetReviewsFormat200ApplicationJSON struct {
 	NumResults *int64                                      `json:"num_results,omitempty"`
 	Results    []GetReviewsFormat200ApplicationJSONResults `json:"results,omitempty"`
 	Status     *string                                     `json:"status,omitempty"`
+}
+
+type GetReviewsFormatRequest struct {
+	PathParams  GetReviewsFormatPathParams
+	QueryParams GetReviewsFormatQueryParams
+	Security    GetReviewsFormatSecurity
 }
 
 type GetReviewsFormatResponse struct {

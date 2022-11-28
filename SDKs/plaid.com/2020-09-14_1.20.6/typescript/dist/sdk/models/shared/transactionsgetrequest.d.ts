@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TransactionsGetRequestOptions } from "./transactionsgetrequestoptions";
 /**
  * TransactionsGetRequest defines the request schema for `/transactions/get`

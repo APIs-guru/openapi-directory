@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWebhooksV3AppIdSettingsGetAllPathParams = /** @class */ (function (_super) {
     __extends(GetWebhooksV3AppIdSettingsGetAllPathParams, _super);
@@ -30,7 +30,7 @@ var GetWebhooksV3AppIdSettingsGetAllPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], GetWebhooksV3AppIdSettingsGetAllPathParams.prototype, "appId", void 0);
     return GetWebhooksV3AppIdSettingsGetAllPathParams;
@@ -42,7 +42,7 @@ var GetWebhooksV3AppIdSettingsGetAllSecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], GetWebhooksV3AppIdSettingsGetAllSecurity.prototype, "developerHapikey", void 0);
     return GetWebhooksV3AppIdSettingsGetAllSecurity;
@@ -54,11 +54,11 @@ var GetWebhooksV3AppIdSettingsGetAllRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWebhooksV3AppIdSettingsGetAllPathParams)
     ], GetWebhooksV3AppIdSettingsGetAllRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWebhooksV3AppIdSettingsGetAllSecurity)
     ], GetWebhooksV3AppIdSettingsGetAllRequest.prototype, "security", void 0);
     return GetWebhooksV3AppIdSettingsGetAllRequest;
@@ -70,19 +70,19 @@ var GetWebhooksV3AppIdSettingsGetAllResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetWebhooksV3AppIdSettingsGetAllResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWebhooksV3AppIdSettingsGetAllResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SettingsResponse)
     ], GetWebhooksV3AppIdSettingsGetAllResponse.prototype, "settingsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWebhooksV3AppIdSettingsGetAllResponse.prototype, "statusCode", void 0);
     return GetWebhooksV3AppIdSettingsGetAllResponse;

@@ -5,7 +5,7 @@ import (
 )
 
 type IpamVrfsCreateRequest struct {
-	Request shared.WritableVrf `request:"mediaType=application/json"`
+	Request shared.WritableVrfInput `request:"mediaType=application/json"`
 }
 
 type IpamVrfsCreateResponse struct {

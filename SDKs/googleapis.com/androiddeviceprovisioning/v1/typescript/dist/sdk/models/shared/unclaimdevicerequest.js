@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceIdentifier } from "./deviceidentifier";
 export var UnclaimDeviceRequestSectionTypeEnum;
 (function (UnclaimDeviceRequestSectionTypeEnum) {
@@ -40,23 +40,23 @@ var UnclaimDeviceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceId" }),
+        SpeakeasyMetadata({ data: "json, name=deviceId" }),
         __metadata("design:type", String)
     ], UnclaimDeviceRequest.prototype, "deviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=deviceIdentifier" }),
         __metadata("design:type", DeviceIdentifier)
     ], UnclaimDeviceRequest.prototype, "deviceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=sectionType" }),
+        SpeakeasyMetadata({ data: "json, name=sectionType" }),
         __metadata("design:type", String)
     ], UnclaimDeviceRequest.prototype, "sectionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=vacationModeDays" }),
+        SpeakeasyMetadata({ data: "json, name=vacationModeDays" }),
         __metadata("design:type", Number)
     ], UnclaimDeviceRequest.prototype, "vacationModeDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=vacationModeExpireTime" }),
+        SpeakeasyMetadata({ data: "json, name=vacationModeExpireTime" }),
         __metadata("design:type", String)
     ], UnclaimDeviceRequest.prototype, "vacationModeExpireTime", void 0);
     return UnclaimDeviceRequest;

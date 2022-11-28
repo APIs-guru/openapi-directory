@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,56 +23,72 @@ class UpdateSimulationApplicationHeaders:
 @dataclass_json
 @dataclass
 class UpdateSimulationApplicationRequestBodyEnvironment:
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""UpdateSimulationApplicationRequestBodyEnvironment
+    The object that contains the Docker image URI for either your robot or simulation applications.
+    """
+    
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateSimulationApplicationRequestBodyRenderingEngine:
-    name: Optional[shared.RenderingEngineTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""UpdateSimulationApplicationRequestBodyRenderingEngine
+    Information about a rendering engine.
+    """
+    
+    name: Optional[shared.RenderingEngineTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateSimulationApplicationRequestBodyRobotSoftwareSuite:
-    name: Optional[shared.RobotSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    version: Optional[shared.RobotSoftwareSuiteVersionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""UpdateSimulationApplicationRequestBodyRobotSoftwareSuite
+    Information about a robot software suite (ROS distribution).
+    """
+    
+    name: Optional[shared.RobotSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    version: Optional[shared.RobotSoftwareSuiteVersionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateSimulationApplicationRequestBodySimulationSoftwareSuite:
-    name: Optional[shared.SimulationSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""UpdateSimulationApplicationRequestBodySimulationSoftwareSuite
+    Information about a simulation software suite.
+    """
+    
+    name: Optional[shared.SimulationSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateSimulationApplicationRequestBody:
-    application: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'application' }})
-    current_revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentRevisionId' }})
-    environment: Optional[UpdateSimulationApplicationRequestBodyEnvironment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    rendering_engine: Optional[UpdateSimulationApplicationRequestBodyRenderingEngine] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renderingEngine' }})
-    robot_software_suite: UpdateSimulationApplicationRequestBodyRobotSoftwareSuite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'robotSoftwareSuite' }})
-    simulation_software_suite: UpdateSimulationApplicationRequestBodySimulationSoftwareSuite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'simulationSoftwareSuite' }})
-    sources: Optional[List[shared.SourceConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sources' }})
+    application: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('application') }})
+    robot_software_suite: UpdateSimulationApplicationRequestBodyRobotSoftwareSuite = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('robotSoftwareSuite') }})
+    simulation_software_suite: UpdateSimulationApplicationRequestBodySimulationSoftwareSuite = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('simulationSoftwareSuite') }})
+    current_revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentRevisionId') }})
+    environment: Optional[UpdateSimulationApplicationRequestBodyEnvironment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    rendering_engine: Optional[UpdateSimulationApplicationRequestBodyRenderingEngine] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('renderingEngine') }})
+    sources: Optional[List[shared.SourceConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sources') }})
     
 
 @dataclass
 class UpdateSimulationApplicationRequest:
-    headers: UpdateSimulationApplicationHeaders = field(default=None)
-    request: UpdateSimulationApplicationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateSimulationApplicationHeaders = field()
+    request: UpdateSimulationApplicationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateSimulationApplicationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_simulation_application_response: Optional[shared.UpdateSimulationApplicationResponse] = field(default=None)
     

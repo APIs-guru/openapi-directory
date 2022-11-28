@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3ContentBaseLocation } from "./s3contentbaselocation";
 /**
  * The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..

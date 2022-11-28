@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EbsVolume
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * EBS block device that's attached to an EC2 instance.
 **/
 export class EbsVolume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Device" })
+  @SpeakeasyMetadata({ data: "json, name=Device" })
   device?: string;
 
-  @Metadata({ data: "json, name=VolumeId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeId" })
   volumeId?: string;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ProcessingInstanceTypeEnum(str, Enum):
     ML_T3_MEDIUM = "ml.t3.medium"

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EventStatusCodeEnum {
-    Onsale = "onsale"
-,    Offsale = "offsale"
-,    Canceled = "canceled"
-,    Postponed = "postponed"
-,    Rescheduled = "rescheduled"
+    Onsale = "onsale",
+    Offsale = "offsale",
+    Canceled = "canceled",
+    Postponed = "postponed",
+    Rescheduled = "rescheduled"
 }
 
 
@@ -14,6 +15,6 @@ export enum EventStatusCodeEnum {
  * Event's Status
 **/
 export class EventStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: EventStatusCodeEnum;
 }

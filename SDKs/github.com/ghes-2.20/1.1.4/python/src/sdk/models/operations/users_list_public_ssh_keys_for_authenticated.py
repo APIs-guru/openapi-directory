@@ -11,14 +11,14 @@ class UsersListPublicSSHKeysForAuthenticatedQueryParams:
 
 @dataclass
 class UsersListPublicSSHKeysForAuthenticatedRequest:
-    query_params: UsersListPublicSSHKeysForAuthenticatedQueryParams = field(default=None)
+    query_params: UsersListPublicSSHKeysForAuthenticatedQueryParams = field()
     
 
 @dataclass
 class UsersListPublicSSHKeysForAuthenticatedResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     keys: Optional[List[shared.Key]] = field(default=None)
     

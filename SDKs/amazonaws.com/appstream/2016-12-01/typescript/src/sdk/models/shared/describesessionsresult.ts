@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Session } from "./session";
 
 
+
 export class DescribeSessionsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Sessions", elemType: shared.Session })
+  @SpeakeasyMetadata({ data: "json, name=Sessions", elemType: Session })
   sessions?: Session[];
 }

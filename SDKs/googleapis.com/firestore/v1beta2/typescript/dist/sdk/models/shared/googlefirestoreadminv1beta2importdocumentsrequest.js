@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirestoreAdminV1beta2ImportDocumentsRequest
 /**
  * The request for FirestoreAdmin.ImportDocuments.
@@ -33,11 +33,11 @@ var GoogleFirestoreAdminV1beta2ImportDocumentsRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=collectionIds" }),
+        SpeakeasyMetadata({ data: "json, name=collectionIds" }),
         __metadata("design:type", Array)
     ], GoogleFirestoreAdminV1beta2ImportDocumentsRequest.prototype, "collectionIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputUriPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=inputUriPrefix" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2ImportDocumentsRequest.prototype, "inputUriPrefix", void 0);
     return GoogleFirestoreAdminV1beta2ImportDocumentsRequest;

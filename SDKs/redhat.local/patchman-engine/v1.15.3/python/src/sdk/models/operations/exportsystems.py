@@ -24,19 +24,19 @@ class ExportSystemsQueryParams:
 
 @dataclass
 class ExportSystemsSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ExportSystemsRequest:
-    query_params: ExportSystemsQueryParams = field(default=None)
-    security: ExportSystemsSecurity = field(default=None)
+    query_params: ExportSystemsQueryParams = field()
+    security: ExportSystemsSecurity = field()
     
 
 @dataclass
 class ExportSystemsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     controllers_system_inline_items: Optional[List[shared.ControllersSystemInlineItem]] = field(default=None)
     

@@ -1,77 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ChatSpacesWebhooksPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=parent" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" })
   parent: string;
+}
+
+export enum ChatSpacesWebhooksMessageReplyOptionEnum {
+    MessageReplyOptionUnspecified = "MESSAGE_REPLY_OPTION_UNSPECIFIED",
+    ReplyMessageFallbackToNewThread = "REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD",
+    ReplyMessageOrFail = "REPLY_MESSAGE_OR_FAIL"
 }
 
 
 export class ChatSpacesWebhooksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=messageId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=messageId" })
   messageId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=messageReplyOption" })
+  messageReplyOption?: ChatSpacesWebhooksMessageReplyOptionEnum;
+
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=requestId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requestId" })
   requestId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=threadKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=threadKey" })
   threadKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 }
 
 
 export class ChatSpacesWebhooksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ChatSpacesWebhooksPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ChatSpacesWebhooksQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.Message;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.MessageInput;
 }
 
 
 export class ChatSpacesWebhooksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   message?: shared.Message;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

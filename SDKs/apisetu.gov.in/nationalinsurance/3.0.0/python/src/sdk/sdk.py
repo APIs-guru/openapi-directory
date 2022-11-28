@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,32 +14,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def cripc(self, request: operations.CripcRequest) -> operations.CripcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Car
+        API to verify Insurance Policy - Car.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cripc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -77,19 +101,21 @@ class SDK:
 
     
     def cvipc(self, request: operations.CvipcRequest) -> operations.CvipcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Commercial Vehicle
+        API to verify Insurance Policy - Commercial Vehicle.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cvipc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -130,19 +156,21 @@ class SDK:
 
     
     def egipc(self, request: operations.EgipcRequest) -> operations.EgipcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Engineering
+        API to verify Insurance Policy - Engineering.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/egipc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -183,19 +211,21 @@ class SDK:
 
     
     def gicer(self, request: operations.GicerRequest) -> operations.GicerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Group
+        API to verify Insurance Policy - Group.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/gicer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -236,19 +266,21 @@ class SDK:
 
     
     def hlipc(self, request: operations.HlipcRequest) -> operations.HlipcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Health
+        API to verify Insurance Policy - Health.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hlipc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -289,19 +321,21 @@ class SDK:
 
     
     def hmipc(self, request: operations.HmipcRequest) -> operations.HmipcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Home
+        API to verify Insurance Policy - Home.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hmipc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -342,19 +376,21 @@ class SDK:
 
     
     def miipc(self, request: operations.MiipcRequest) -> operations.MiipcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Miscellaneous
+        API to verify Insurance Policy - Miscellaneous.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/miipc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -395,19 +431,21 @@ class SDK:
 
     
     def mripc(self, request: operations.MripcRequest) -> operations.MripcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Marine
+        API to verify Insurance Policy - Marine.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/mripc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -448,19 +486,21 @@ class SDK:
 
     
     def pripc(self, request: operations.PripcRequest) -> operations.PripcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Property
+        API to verify Insurance Policy - Property.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pripc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -501,19 +541,21 @@ class SDK:
 
     
     def twipc(self, request: operations.TwipcRequest) -> operations.TwipcResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insurance Policy - Two Wheeler
+        API to verify Insurance Policy - Two Wheeler.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/twipc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesScoresSubmitPathParams:
-    leaderboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
+    leaderboard_id: str = field(metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GamesScoresSubmitQueryParams:
+    score: str = field(metadata={'query_param': { 'field_name': 'score', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
@@ -20,7 +22,6 @@ class GamesScoresSubmitQueryParams:
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
     quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
-    score: str = field(default=None, metadata={'query_param': { 'field_name': 'score', 'style': 'form', 'explode': True }})
     score_tag: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'scoreTag', 'style': 'form', 'explode': True }})
     upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
     upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
@@ -28,20 +29,20 @@ class GamesScoresSubmitQueryParams:
 
 @dataclass
 class GamesScoresSubmitSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesScoresSubmitRequest:
-    path_params: GamesScoresSubmitPathParams = field(default=None)
-    query_params: GamesScoresSubmitQueryParams = field(default=None)
-    security: GamesScoresSubmitSecurity = field(default=None)
+    path_params: GamesScoresSubmitPathParams = field()
+    query_params: GamesScoresSubmitQueryParams = field()
+    security: GamesScoresSubmitSecurity = field()
     
 
 @dataclass
 class GamesScoresSubmitResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_score_response: Optional[shared.PlayerScoreResponse] = field(default=None)
-    status_code: int = field(default=None)
     

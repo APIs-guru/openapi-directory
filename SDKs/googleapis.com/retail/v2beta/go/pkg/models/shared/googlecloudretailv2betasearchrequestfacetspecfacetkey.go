@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2betaSearchRequestFacetSpecFacetKey
+// Specifies how a facet is computed.
 type GoogleCloudRetailV2betaSearchRequestFacetSpecFacetKey struct {
 	CaseInsensitive  *bool                             `json:"caseInsensitive,omitempty"`
 	Contains         []string                          `json:"contains,omitempty"`

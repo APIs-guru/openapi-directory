@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GroupV2GetBannedMembersOfGroupPathParams = /** @class */ (function (_super) {
     __extends(GroupV2GetBannedMembersOfGroupPathParams, _super);
@@ -30,7 +30,7 @@ var GroupV2GetBannedMembersOfGroupPathParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], GroupV2GetBannedMembersOfGroupPathParams.prototype, "groupId", void 0);
     return GroupV2GetBannedMembersOfGroupPathParams;
@@ -42,7 +42,7 @@ var GroupV2GetBannedMembersOfGroupQueryParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currentpage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentpage" }),
         __metadata("design:type", Number)
     ], GroupV2GetBannedMembersOfGroupQueryParams.prototype, "currentpage", void 0);
     return GroupV2GetBannedMembersOfGroupQueryParams;
@@ -54,7 +54,7 @@ var GroupV2GetBannedMembersOfGroupSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], GroupV2GetBannedMembersOfGroupSecurity.prototype, "oauth2", void 0);
     return GroupV2GetBannedMembersOfGroupSecurity;
@@ -66,15 +66,15 @@ var GroupV2GetBannedMembersOfGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetBannedMembersOfGroupPathParams)
     ], GroupV2GetBannedMembersOfGroupRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetBannedMembersOfGroupQueryParams)
     ], GroupV2GetBannedMembersOfGroupRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetBannedMembersOfGroupSecurity)
     ], GroupV2GetBannedMembersOfGroupRequest.prototype, "security", void 0);
     return GroupV2GetBannedMembersOfGroupRequest;
@@ -86,15 +86,15 @@ var GroupV2GetBannedMembersOfGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2GetBannedMembersOfGroupResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2GetBannedMembersOfGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2GetBannedMembersOfGroupResponse.prototype, "statusCode", void 0);
     return GroupV2GetBannedMembersOfGroupResponse;

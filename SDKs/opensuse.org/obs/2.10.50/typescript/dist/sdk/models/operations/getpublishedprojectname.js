@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPublishedProjectNamePathParams = /** @class */ (function (_super) {
     __extends(GetPublishedProjectNamePathParams, _super);
@@ -30,7 +30,7 @@ var GetPublishedProjectNamePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNamePathParams.prototype, "projectName", void 0);
     return GetPublishedProjectNamePathParams;
@@ -42,7 +42,7 @@ var GetPublishedProjectNameSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetPublishedProjectNameSecurity.prototype, "basicAuthentication", void 0);
     return GetPublishedProjectNameSecurity;
@@ -54,11 +54,11 @@ var GetPublishedProjectNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPublishedProjectNamePathParams)
     ], GetPublishedProjectNameRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPublishedProjectNameSecurity)
     ], GetPublishedProjectNameRequest.prototype, "security", void 0);
     return GetPublishedProjectNameRequest;
@@ -70,15 +70,15 @@ var GetPublishedProjectNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPublishedProjectNameResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPublishedProjectNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPublishedProjectNameResponse.prototype, "statusCode", void 0);
     return GetPublishedProjectNameResponse;

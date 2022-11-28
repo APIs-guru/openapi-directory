@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodeTypeEnum } from "./nodetypeenum";
 
+
 export enum NodeNodeTypeEnum {
-    ProxyVm = "PROXY_VM"
-,    PlatformVm = "PLATFORM_VM"
+    ProxyVm = "PROXY_VM",
+    PlatformVm = "PLATFORM_VM"
 }
 
 
 export class Node extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: NodeTypeEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ip_address" })
+  @SpeakeasyMetadata({ data: "json, name=ip_address" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=node_type" })
+  @SpeakeasyMetadata({ data: "json, name=node_type" })
   nodeType?: NodeNodeTypeEnum;
 }

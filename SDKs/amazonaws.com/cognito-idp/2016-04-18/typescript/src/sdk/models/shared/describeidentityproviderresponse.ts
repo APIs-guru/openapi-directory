@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityProviderType } from "./identityprovidertype";
 
 
+
 export class DescribeIdentityProviderResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityProvider" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProvider" })
   identityProvider: IdentityProviderType;
 }

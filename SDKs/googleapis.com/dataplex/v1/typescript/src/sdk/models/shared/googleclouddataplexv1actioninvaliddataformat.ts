@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1ActionInvalidDataFormat
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Action details for invalid or unsupported data files detected by discovery.
 **/
 export class GoogleCloudDataplexV1ActionInvalidDataFormat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expectedFormat" })
+  @SpeakeasyMetadata({ data: "json, name=expectedFormat" })
   expectedFormat?: string;
 
-  @Metadata({ data: "json, name=newFormat" })
+  @SpeakeasyMetadata({ data: "json, name=newFormat" })
   newFormat?: string;
 
-  @Metadata({ data: "json, name=sampledDataLocations" })
+  @SpeakeasyMetadata({ data: "json, name=sampledDataLocations" })
   sampledDataLocations?: string[];
 }

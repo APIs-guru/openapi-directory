@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UserAPIGetOnePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class UserAPIGetOneFieldsEnum(str, Enum):
     NONE = "None"
@@ -21,14 +22,14 @@ class UserAPIGetOneQueryParams:
 
 @dataclass
 class UserAPIGetOneRequest:
-    path_params: UserAPIGetOnePathParams = field(default=None)
-    query_params: UserAPIGetOneQueryParams = field(default=None)
+    path_params: UserAPIGetOnePathParams = field()
+    query_params: UserAPIGetOneQueryParams = field()
     
 
 @dataclass
 class UserAPIGetOneResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     user_for_api_contract: Optional[shared.UserForAPIContract] = field(default=None)
     

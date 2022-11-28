@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CinemaScheduleSearchallReadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=param" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=param" })
   param: string;
 }
 
 
 export class CinemaScheduleSearchallReadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CinemaScheduleSearchallReadPathParams;
 }
 
 
 export class CinemaScheduleSearchallReadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchMonitoringConfiguration } from "./cloudwatchmonitoringconfiguration";
 import { PersistentAppUiEnum } from "./persistentappuienum";
 import { S3MonitoringConfiguration } from "./s3monitoringconfiguration";
+
 
 
 // MonitoringConfiguration
@@ -9,12 +10,12 @@ import { S3MonitoringConfiguration } from "./s3monitoringconfiguration";
  * Configuration setting for monitoring.
 **/
 export class MonitoringConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudWatchMonitoringConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=cloudWatchMonitoringConfiguration" })
   cloudWatchMonitoringConfiguration?: CloudWatchMonitoringConfiguration;
 
-  @Metadata({ data: "json, name=persistentAppUI" })
+  @SpeakeasyMetadata({ data: "json, name=persistentAppUI" })
   persistentAppUi?: PersistentAppUiEnum;
 
-  @Metadata({ data: "json, name=s3MonitoringConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=s3MonitoringConfiguration" })
   s3MonitoringConfiguration?: S3MonitoringConfiguration;
 }

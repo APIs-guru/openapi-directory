@@ -18,6 +18,8 @@ type SendUsersMessagesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SendUsersMessagesRequestBodySendUsersMessageRequest
+// Specifies the configuration and other settings for a message to send to all the endpoints that are associated with a list of users.
 type SendUsersMessagesRequestBodySendUsersMessageRequest struct {
 	Context               map[string]string                           `json:"Context,omitempty"`
 	MessageConfiguration  *shared.DirectMessageConfiguration          `json:"MessageConfiguration,omitempty"`

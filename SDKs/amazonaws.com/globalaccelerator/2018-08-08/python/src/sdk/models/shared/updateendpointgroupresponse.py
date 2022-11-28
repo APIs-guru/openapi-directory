@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import endpointgroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEndpointGroupResponse:
-    endpoint_group: Optional[endpointgroup.EndpointGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointGroup' }})
+    endpoint_group: Optional[EndpointGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointGroup') }})
     

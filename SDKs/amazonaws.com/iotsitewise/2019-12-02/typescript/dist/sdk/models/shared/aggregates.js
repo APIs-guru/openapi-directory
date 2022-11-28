@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Aggregates
 /**
  * Contains the (pre-calculated) aggregate values for an asset property.
@@ -33,27 +33,27 @@ var Aggregates = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=average" }),
+        SpeakeasyMetadata({ data: "json, name=average" }),
         __metadata("design:type", Number)
     ], Aggregates.prototype, "average", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], Aggregates.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=maximum" }),
+        SpeakeasyMetadata({ data: "json, name=maximum" }),
         __metadata("design:type", Number)
     ], Aggregates.prototype, "maximum", void 0);
     __decorate([
-        Metadata({ data: "json, name=minimum" }),
+        SpeakeasyMetadata({ data: "json, name=minimum" }),
         __metadata("design:type", Number)
     ], Aggregates.prototype, "minimum", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardDeviation" }),
+        SpeakeasyMetadata({ data: "json, name=standardDeviation" }),
         __metadata("design:type", Number)
     ], Aggregates.prototype, "standardDeviation", void 0);
     __decorate([
-        Metadata({ data: "json, name=sum" }),
+        SpeakeasyMetadata({ data: "json, name=sum" }),
         __metadata("design:type", Number)
     ], Aggregates.prototype, "sum", void 0);
     return Aggregates;

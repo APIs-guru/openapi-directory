@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThemeColorPair } from "./themecolorpair";
+
 
 
 // ColorScheme
@@ -8,6 +8,6 @@ import { ThemeColorPair } from "./themecolorpair";
  * The palette of predefined colors for a page.
 **/
 export class ColorScheme extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colors", elemType: shared.ThemeColorPair })
+  @SpeakeasyMetadata({ data: "json, name=colors", elemType: ThemeColorPair })
   colors?: ThemeColorPair[];
 }

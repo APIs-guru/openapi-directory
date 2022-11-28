@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // OAuthToken
 /**
  * Contains information needed for generating an [OAuth token](https://developers.google.com/identity/protocols/OAuth2). This type of authorization should generally only be used when calling Google APIs hosted on *.googleapis.com.
@@ -33,11 +33,11 @@ var OAuthToken = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=scope" }),
+        SpeakeasyMetadata({ data: "json, name=scope" }),
         __metadata("design:type", String)
     ], OAuthToken.prototype, "scope", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountEmail" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" }),
         __metadata("design:type", String)
     ], OAuthToken.prototype, "serviceAccountEmail", void 0);
     return OAuthToken;

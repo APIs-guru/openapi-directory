@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AlbumAPIGetOnePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class AlbumAPIGetOneFieldsEnum(str, Enum):
     NONE = "None"
@@ -52,14 +53,14 @@ class AlbumAPIGetOneQueryParams:
 
 @dataclass
 class AlbumAPIGetOneRequest:
-    path_params: AlbumAPIGetOnePathParams = field(default=None)
-    query_params: AlbumAPIGetOneQueryParams = field(default=None)
+    path_params: AlbumAPIGetOnePathParams = field()
+    query_params: AlbumAPIGetOneQueryParams = field()
     
 
 @dataclass
 class AlbumAPIGetOneResponse:
+    content_type: str = field()
+    status_code: int = field()
     album_for_api_contract: Optional[shared.AlbumForAPIContract] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

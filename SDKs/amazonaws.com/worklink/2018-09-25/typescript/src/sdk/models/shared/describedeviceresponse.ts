@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceStatusEnum } from "./devicestatusenum";
 
 
+
 export class DescribeDeviceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirstAccessedTime" })
+  @SpeakeasyMetadata({ data: "json, name=FirstAccessedTime" })
   firstAccessedTime?: Date;
 
-  @Metadata({ data: "json, name=LastAccessedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastAccessedTime" })
   lastAccessedTime?: Date;
 
-  @Metadata({ data: "json, name=Manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=Manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=Model" })
+  @SpeakeasyMetadata({ data: "json, name=Model" })
   model?: string;
 
-  @Metadata({ data: "json, name=OperatingSystem" })
+  @SpeakeasyMetadata({ data: "json, name=OperatingSystem" })
   operatingSystem?: string;
 
-  @Metadata({ data: "json, name=OperatingSystemVersion" })
+  @SpeakeasyMetadata({ data: "json, name=OperatingSystemVersion" })
   operatingSystemVersion?: string;
 
-  @Metadata({ data: "json, name=PatchLevel" })
+  @SpeakeasyMetadata({ data: "json, name=PatchLevel" })
   patchLevel?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: DeviceStatusEnum;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// SchemaAttributeType
+// Contains information about the schema attribute.
 type SchemaAttributeType struct {
 	AttributeDataType          *AttributeDataTypeEnum          `json:"AttributeDataType,omitempty"`
 	DeveloperOnlyAttribute     *bool                           `json:"DeveloperOnlyAttribute,omitempty"`

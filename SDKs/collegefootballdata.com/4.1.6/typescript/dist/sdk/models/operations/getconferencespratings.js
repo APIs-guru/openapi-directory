@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConferenceSpRatingsQueryParams = /** @class */ (function (_super) {
     __extends(GetConferenceSpRatingsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetConferenceSpRatingsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetConferenceSpRatingsQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetConferenceSpRatingsQueryParams.prototype, "year", void 0);
     return GetConferenceSpRatingsQueryParams;
@@ -46,7 +46,7 @@ var GetConferenceSpRatingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConferenceSpRatingsQueryParams)
     ], GetConferenceSpRatingsRequest.prototype, "queryParams", void 0);
     return GetConferenceSpRatingsRequest;
@@ -58,15 +58,15 @@ var GetConferenceSpRatingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.ConferenceSpRating }),
+        SpeakeasyMetadata({ elemType: shared.ConferenceSpRating }),
         __metadata("design:type", Array)
     ], GetConferenceSpRatingsResponse.prototype, "conferenceSpRatings", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConferenceSpRatingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConferenceSpRatingsResponse.prototype, "statusCode", void 0);
     return GetConferenceSpRatingsResponse;

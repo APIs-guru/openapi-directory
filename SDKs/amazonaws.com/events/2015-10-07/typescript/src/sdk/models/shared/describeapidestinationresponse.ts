@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiDestinationStateEnum } from "./apidestinationstateenum";
 import { ApiDestinationHttpMethodEnum } from "./apidestinationhttpmethodenum";
 
 
+
 export class DescribeApiDestinationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiDestinationArn" })
+  @SpeakeasyMetadata({ data: "json, name=ApiDestinationArn" })
   apiDestinationArn?: string;
 
-  @Metadata({ data: "json, name=ApiDestinationState" })
+  @SpeakeasyMetadata({ data: "json, name=ApiDestinationState" })
   apiDestinationState?: ApiDestinationStateEnum;
 
-  @Metadata({ data: "json, name=ConnectionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionArn" })
   connectionArn?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=HttpMethod" })
+  @SpeakeasyMetadata({ data: "json, name=HttpMethod" })
   httpMethod?: ApiDestinationHttpMethodEnum;
 
-  @Metadata({ data: "json, name=InvocationEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=InvocationEndpoint" })
   invocationEndpoint?: string;
 
-  @Metadata({ data: "json, name=InvocationRateLimitPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=InvocationRateLimitPerSecond" })
   invocationRateLimitPerSecond?: number;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

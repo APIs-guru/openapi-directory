@@ -10,10 +10,6 @@ type GetPhotolistContextByIDQueryParams struct {
 	PhotolistID string `queryParam:"style=form,explode=true,name=photolist_id"`
 }
 
-type GetPhotolistContextByIDRequest struct {
-	QueryParams GetPhotolistContextByIDQueryParams
-}
-
 type GetPhotolistContextByID200ApplicationJSONCount struct {
 	Content *string `json:"_content,omitempty"`
 }
@@ -23,6 +19,10 @@ type GetPhotolistContextByID200ApplicationJSON struct {
 	Nextphoto *shared.ContextPhoto                            `json:"nextphoto,omitempty"`
 	Prevphoto *shared.ContextPhoto                            `json:"prevphoto,omitempty"`
 	Stat      *string                                         `json:"stat,omitempty"`
+}
+
+type GetPhotolistContextByIDRequest struct {
+	QueryParams GetPhotolistContextByIDQueryParams
 }
 
 type GetPhotolistContextByIDResponse struct {

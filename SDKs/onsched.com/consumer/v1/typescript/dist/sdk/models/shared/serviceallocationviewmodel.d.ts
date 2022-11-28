@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RepeatViewModel } from "./repeatviewmodel";
 export declare class ServiceAllocationViewModel extends SpeakeasyBase {
     bookingCount?: number;

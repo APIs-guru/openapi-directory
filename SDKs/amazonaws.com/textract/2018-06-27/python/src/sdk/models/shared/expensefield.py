@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import expensedetection
-from . import expensetype
-from . import expensedetection
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExpenseField:
-    label_detection: Optional[expensedetection.ExpenseDetection] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LabelDetection' }})
-    page_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PageNumber' }})
-    type: Optional[expensetype.ExpenseType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    value_detection: Optional[expensedetection.ExpenseDetection] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ValueDetection' }})
+    r"""ExpenseField
+    Breakdown of detected information, seperated into the catagories Type, LableDetection, and ValueDetection
+    """
+    
+    label_detection: Optional[ExpenseDetection] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LabelDetection') }})
+    page_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PageNumber') }})
+    type: Optional[ExpenseType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    value_detection: Optional[ExpenseDetection] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ValueDetection') }})
     

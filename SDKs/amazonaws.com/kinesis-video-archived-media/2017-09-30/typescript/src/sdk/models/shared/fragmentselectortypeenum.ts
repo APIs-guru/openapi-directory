@@ -1,6 +1,7 @@
 
 
+
 export enum FragmentSelectorTypeEnum {
-    ProducerTimestamp = "PRODUCER_TIMESTAMP"
-,    ServerTimestamp = "SERVER_TIMESTAMP"
+    ProducerTimestamp = "PRODUCER_TIMESTAMP",
+    ServerTimestamp = "SERVER_TIMESTAMP"
 }

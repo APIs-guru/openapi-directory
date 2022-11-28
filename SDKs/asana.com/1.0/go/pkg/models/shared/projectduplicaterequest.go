@@ -17,6 +17,8 @@ const (
 	ProjectDuplicateRequestIncludeEnumTaskProjects     ProjectDuplicateRequestIncludeEnum = "task_projects"
 )
 
+// ProjectDuplicateRequestScheduleDates
+// A dictionary of options to auto-shift dates. `task_dates` must be included to use this option. Requires either `start_on` or `due_on`, but not both.
 type ProjectDuplicateRequestScheduleDates struct {
 	DueOn              *string `json:"due_on,omitempty"`
 	ShouldSkipWeekends bool    `json:"should_skip_weekends"`

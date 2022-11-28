@@ -1,6 +1,7 @@
 
 
+
 export enum DimensionUnitEnum {
-    Meters = "Meters"
-,    Feet = "Feet"
+    Meters = "Meters",
+    Feet = "Feet"
 }

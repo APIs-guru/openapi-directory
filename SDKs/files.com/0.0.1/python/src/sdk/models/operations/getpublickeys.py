@@ -12,12 +12,12 @@ class GetPublicKeysQueryParams:
 
 @dataclass
 class GetPublicKeysRequest:
-    query_params: GetPublicKeysQueryParams = field(default=None)
+    query_params: GetPublicKeysQueryParams = field()
     
 
 @dataclass
 class GetPublicKeysResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     public_key_entities: Optional[List[shared.PublicKeyEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

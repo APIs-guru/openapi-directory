@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WafAction } from "./wafaction";
 import { WafExcludedRule } from "./wafexcludedrule";
 import { WafOverrideAction } from "./wafoverrideaction";
+
 
 
 // AwsWafWebAclRule
@@ -10,21 +10,21 @@ import { WafOverrideAction } from "./wafoverrideaction";
  * Details for a rule in an WAF WebACL.
 **/
 export class AwsWafWebAclRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: WafAction;
 
-  @Metadata({ data: "json, name=ExcludedRules", elemType: shared.WafExcludedRule })
+  @SpeakeasyMetadata({ data: "json, name=ExcludedRules", elemType: WafExcludedRule })
   excludedRules?: WafExcludedRule[];
 
-  @Metadata({ data: "json, name=OverrideAction" })
+  @SpeakeasyMetadata({ data: "json, name=OverrideAction" })
   overrideAction?: WafOverrideAction;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=RuleId" })
+  @SpeakeasyMetadata({ data: "json, name=RuleId" })
   ruleId?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

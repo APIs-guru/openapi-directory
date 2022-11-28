@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsItemIdentity } from "./opsitemidentity";
+
 
 
 // OpsItemEventSummary
@@ -7,24 +8,24 @@ import { OpsItemIdentity } from "./opsitemidentity";
  * Summary information about an OpsItem event or that associated an OpsItem with a related item.
 **/
 export class OpsItemEventSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: OpsItemIdentity;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=Detail" })
+  @SpeakeasyMetadata({ data: "json, name=Detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=DetailType" })
+  @SpeakeasyMetadata({ data: "json, name=DetailType" })
   detailType?: string;
 
-  @Metadata({ data: "json, name=EventId" })
+  @SpeakeasyMetadata({ data: "json, name=EventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=OpsItemId" })
+  @SpeakeasyMetadata({ data: "json, name=OpsItemId" })
   opsItemId?: string;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: string;
 }

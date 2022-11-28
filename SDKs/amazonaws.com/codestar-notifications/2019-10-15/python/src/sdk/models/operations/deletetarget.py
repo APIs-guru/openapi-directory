@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,20 +21,20 @@ class DeleteTargetHeaders:
 @dataclass_json
 @dataclass
 class DeleteTargetRequestBody:
-    force_unsubscribe_all: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ForceUnsubscribeAll' }})
-    target_address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetAddress' }})
+    target_address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetAddress') }})
+    force_unsubscribe_all: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ForceUnsubscribeAll') }})
     
 
 @dataclass
 class DeleteTargetRequest:
-    headers: DeleteTargetHeaders = field(default=None)
-    request: DeleteTargetRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteTargetHeaders = field()
+    request: DeleteTargetRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteTargetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_target_result: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

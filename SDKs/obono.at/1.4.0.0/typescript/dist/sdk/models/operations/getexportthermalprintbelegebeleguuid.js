@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetExportThermalPrintBelegeBelegUuidPathParams = /** @class */ (function (_super) {
     __extends(GetExportThermalPrintBelegeBelegUuidPathParams, _super);
     function GetExportThermalPrintBelegeBelegUuidPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=belegUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=belegUuid" }),
         __metadata("design:type", String)
     ], GetExportThermalPrintBelegeBelegUuidPathParams.prototype, "belegUuid", void 0);
     return GetExportThermalPrintBelegeBelegUuidPathParams;
@@ -53,19 +53,19 @@ var GetExportThermalPrintBelegeBelegUuidQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dialect" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dialect" }),
         __metadata("design:type", String)
     ], GetExportThermalPrintBelegeBelegUuidQueryParams.prototype, "dialect", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=encoding" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=encoding" }),
         __metadata("design:type", String)
     ], GetExportThermalPrintBelegeBelegUuidQueryParams.prototype, "encoding", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=qr" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=qr" }),
         __metadata("design:type", Boolean)
     ], GetExportThermalPrintBelegeBelegUuidQueryParams.prototype, "qr", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], GetExportThermalPrintBelegeBelegUuidQueryParams.prototype, "width", void 0);
     return GetExportThermalPrintBelegeBelegUuidQueryParams;
@@ -77,11 +77,11 @@ var GetExportThermalPrintBelegeBelegUuidRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetExportThermalPrintBelegeBelegUuidPathParams)
     ], GetExportThermalPrintBelegeBelegUuidRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetExportThermalPrintBelegeBelegUuidQueryParams)
     ], GetExportThermalPrintBelegeBelegUuidRequest.prototype, "queryParams", void 0);
     return GetExportThermalPrintBelegeBelegUuidRequest;
@@ -93,11 +93,11 @@ var GetExportThermalPrintBelegeBelegUuidResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetExportThermalPrintBelegeBelegUuidResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetExportThermalPrintBelegeBelegUuidResponse.prototype, "statusCode", void 0);
     return GetExportThermalPrintBelegeBelegUuidResponse;

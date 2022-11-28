@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAddSourceIdentifierToSubscriptionActionEnum(str, Enum):
     ADD_SOURCE_IDENTIFIER_TO_SUBSCRIPTION = "AddSourceIdentifierToSubscription"
@@ -10,10 +14,10 @@ class GetAddSourceIdentifierToSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class GetAddSourceIdentifierToSubscriptionQueryParams:
-    action: GetAddSourceIdentifierToSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    source_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceIdentifier', 'style': 'form', 'explode': True }})
-    subscription_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
-    version: GetAddSourceIdentifierToSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAddSourceIdentifierToSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    source_identifier: str = field(metadata={'query_param': { 'field_name': 'SourceIdentifier', 'style': 'form', 'explode': True }})
+    subscription_name: str = field(metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
+    version: GetAddSourceIdentifierToSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAddSourceIdentifierToSubscriptionHeaders:
 
 @dataclass
 class GetAddSourceIdentifierToSubscriptionRequest:
-    query_params: GetAddSourceIdentifierToSubscriptionQueryParams = field(default=None)
-    headers: GetAddSourceIdentifierToSubscriptionHeaders = field(default=None)
+    headers: GetAddSourceIdentifierToSubscriptionHeaders = field()
+    query_params: GetAddSourceIdentifierToSubscriptionQueryParams = field()
     
 
 @dataclass
 class GetAddSourceIdentifierToSubscriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

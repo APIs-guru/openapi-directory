@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NodeRangeProperty } from "./noderangeproperty";
 /**
  * An object representing the node properties of a multi-node parallel job.

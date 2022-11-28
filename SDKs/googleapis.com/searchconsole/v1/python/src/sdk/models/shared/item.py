@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import richresultsissue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Item:
-    issues: Optional[List[richresultsissue.RichResultsIssue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issues' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""Item
+    A specific rich result found on the page.
+    """
+    
+    issues: Optional[List[RichResultsIssue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issues') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

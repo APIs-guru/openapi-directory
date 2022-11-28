@@ -1,5 +1,7 @@
 package shared
 
+// InstanceInfo
+// For display only. Metadata associated with a Compute Engine instance.
 type InstanceInfo struct {
 	DisplayName    *string  `json:"displayName,omitempty"`
 	ExternalIP     *string  `json:"externalIp,omitempty"`

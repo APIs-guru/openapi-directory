@@ -31,7 +31,7 @@ type DatafusionProjectsLocationsInstancesPatchSecurity struct {
 type DatafusionProjectsLocationsInstancesPatchRequest struct {
 	PathParams  DatafusionProjectsLocationsInstancesPatchPathParams
 	QueryParams DatafusionProjectsLocationsInstancesPatchQueryParams
-	Request     *shared.Instance `request:"mediaType=application/json"`
+	Request     *shared.InstanceInput `request:"mediaType=application/json"`
 	Security    DatafusionProjectsLocationsInstancesPatchSecurity
 }
 

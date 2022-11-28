@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var EncryptResponseProtectionLevelEnum;
 (function (EncryptResponseProtectionLevelEnum) {
     EncryptResponseProtectionLevelEnum["ProtectionLevelUnspecified"] = "PROTECTION_LEVEL_UNSPECIFIED";
@@ -41,27 +41,27 @@ var EncryptResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ciphertext" }),
+        SpeakeasyMetadata({ data: "json, name=ciphertext" }),
         __metadata("design:type", String)
     ], EncryptResponse.prototype, "ciphertext", void 0);
     __decorate([
-        Metadata({ data: "json, name=ciphertextCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=ciphertextCrc32c" }),
         __metadata("design:type", String)
     ], EncryptResponse.prototype, "ciphertextCrc32c", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], EncryptResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=protectionLevel" }),
+        SpeakeasyMetadata({ data: "json, name=protectionLevel" }),
         __metadata("design:type", String)
     ], EncryptResponse.prototype, "protectionLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=verifiedAdditionalAuthenticatedDataCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=verifiedAdditionalAuthenticatedDataCrc32c" }),
         __metadata("design:type", Boolean)
     ], EncryptResponse.prototype, "verifiedAdditionalAuthenticatedDataCrc32c", void 0);
     __decorate([
-        Metadata({ data: "json, name=verifiedPlaintextCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=verifiedPlaintextCrc32c" }),
         __metadata("design:type", Boolean)
     ], EncryptResponse.prototype, "verifiedPlaintextCrc32c", void 0);
     return EncryptResponse;

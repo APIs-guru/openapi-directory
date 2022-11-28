@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsWebhooksListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DialogflowProjectsLocationsAgentsWebhooksListQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsWebhooksListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsWebhooksListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class DialogflowProjectsLocationsAgentsWebhooksListSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsWebhooksListRequest:
-    path_params: DialogflowProjectsLocationsAgentsWebhooksListPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsWebhooksListQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsAgentsWebhooksListSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsWebhooksListPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsWebhooksListQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsWebhooksListSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsWebhooksListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_cx_v3_list_webhooks_response: Optional[shared.GoogleCloudDialogflowCxV3ListWebhooksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

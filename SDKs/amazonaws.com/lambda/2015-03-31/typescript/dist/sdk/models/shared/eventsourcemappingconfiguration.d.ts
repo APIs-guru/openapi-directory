@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DestinationConfig } from "./destinationconfig";
 import { FunctionResponseTypeEnum } from "./functionresponsetypeenum";
 import { SelfManagedEventSource } from "./selfmanagedeventsource";

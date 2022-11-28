@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExtractionRule } from "./extractionrule";
+
 
 
 // ExtractionRules
@@ -8,6 +8,6 @@ import { ExtractionRule } from "./extractionrule";
  * Extraction Rules to identity the backends from customer provided configuration in Connection resource.
 **/
 export class ExtractionRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=extractionRule", elemType: shared.ExtractionRule })
+  @SpeakeasyMetadata({ data: "json, name=extractionRule", elemType: ExtractionRule })
   extractionRule?: ExtractionRule[];
 }

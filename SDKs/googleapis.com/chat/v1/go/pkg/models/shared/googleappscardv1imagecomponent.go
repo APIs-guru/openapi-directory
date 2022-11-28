@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsCardV1ImageComponent
+// Represents an image.
 type GoogleAppsCardV1ImageComponent struct {
 	AltText     *string                         `json:"altText,omitempty"`
 	BorderStyle *GoogleAppsCardV1BorderStyle    `json:"borderStyle,omitempty"`

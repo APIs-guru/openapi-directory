@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PlaylistItemSnippet
+// Basic details about a playlist, including title, description and thumbnails. Basic details of a YouTube Playlist item provided by the author. Next ID: 15
 type PlaylistItemSnippet struct {
 	ChannelID              *string           `json:"channelId,omitempty"`
 	ChannelTitle           *string           `json:"channelTitle,omitempty"`

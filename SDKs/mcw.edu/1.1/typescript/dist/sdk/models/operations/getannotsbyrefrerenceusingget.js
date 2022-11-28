@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAnnotsByRefrerenceUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetAnnotsByRefrerenceUsingGetPathParams, _super);
     function GetAnnotsByRefrerenceUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=refRgdId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=refRgdId" }),
         __metadata("design:type", Number)
     ], GetAnnotsByRefrerenceUsingGetPathParams.prototype, "refRgdId", void 0);
     return GetAnnotsByRefrerenceUsingGetPathParams;
@@ -41,7 +41,7 @@ var GetAnnotsByRefrerenceUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAnnotsByRefrerenceUsingGetPathParams)
     ], GetAnnotsByRefrerenceUsingGetRequest.prototype, "pathParams", void 0);
     return GetAnnotsByRefrerenceUsingGetRequest;
@@ -53,15 +53,15 @@ var GetAnnotsByRefrerenceUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAnnotsByRefrerenceUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAnnotsByRefrerenceUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAnnotsByRefrerenceUsingGetResponse.prototype, "statusCode", void 0);
     return GetAnnotsByRefrerenceUsingGetResponse;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// NotebookInstanceSummary
+// Provides summary information for an Amazon SageMaker notebook instance.
 type NotebookInstanceSummary struct {
 	AdditionalCodeRepositories          []string                    `json:"AdditionalCodeRepositories,omitempty"`
 	CreationTime                        *time.Time                  `json:"CreationTime,omitempty"`

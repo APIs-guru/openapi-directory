@@ -22,54 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FigiResult = /** @class */ (function (_super) {
     __extends(FigiResult, _super);
     function FigiResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=compositeFIGI" }),
+        SpeakeasyMetadata({ data: "json, name=compositeFIGI" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "compositeFigi", void 0);
     __decorate([
-        Metadata({ data: "json, name=exchCode" }),
+        SpeakeasyMetadata({ data: "json, name=exchCode" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "exchCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=figi" }),
+        SpeakeasyMetadata({ data: "json, name=figi" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "figi", void 0);
     __decorate([
-        Metadata({ data: "json, name=marketSector" }),
+        SpeakeasyMetadata({ data: "json, name=marketSector" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "marketSector", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityDescription" }),
+        SpeakeasyMetadata({ data: "json, name=securityDescription" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "securityDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityType" }),
+        SpeakeasyMetadata({ data: "json, name=securityType" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "securityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityType2" }),
+        SpeakeasyMetadata({ data: "json, name=securityType2" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "securityType2", void 0);
     __decorate([
-        Metadata({ data: "json, name=shareClassFIGI" }),
+        SpeakeasyMetadata({ data: "json, name=shareClassFIGI" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "shareClassFigi", void 0);
     __decorate([
-        Metadata({ data: "json, name=ticker" }),
+        SpeakeasyMetadata({ data: "json, name=ticker" }),
         __metadata("design:type", String)
     ], FigiResult.prototype, "ticker", void 0);
     return FigiResult;

@@ -1,6 +1,7 @@
 
 
+
 export enum LayerFailureCodeEnum {
-    InvalidLayerDigest = "InvalidLayerDigest"
-,    MissingLayerDigest = "MissingLayerDigest"
+    InvalidLayerDigest = "InvalidLayerDigest",
+    MissingLayerDigest = "MissingLayerDigest"
 }

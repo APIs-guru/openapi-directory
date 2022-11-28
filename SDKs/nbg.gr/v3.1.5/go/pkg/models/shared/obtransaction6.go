@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObTransaction6
+// Provides further details on an entry in the report.
 type ObTransaction6 struct {
 	AccountID                      string                                    `json:"AccountId"`
 	Amount                         ObActiveOrHistoricCurrencyAndAmount       `json:"Amount"`

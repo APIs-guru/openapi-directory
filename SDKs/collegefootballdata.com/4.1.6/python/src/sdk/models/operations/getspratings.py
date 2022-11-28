@@ -11,12 +11,12 @@ class GetSpRatingsQueryParams:
 
 @dataclass
 class GetSpRatingsRequest:
-    query_params: GetSpRatingsQueryParams = field(default=None)
+    query_params: GetSpRatingsQueryParams = field()
     
 
 @dataclass
 class GetSpRatingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_sp_ratings: Optional[List[shared.TeamSpRating]] = field(default=None)
     

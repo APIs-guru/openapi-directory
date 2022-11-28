@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionDocument } from "./definitiondocument";
 import { FlowTemplateSummary } from "./flowtemplatesummary";
+
 
 
 // FlowTemplateDescription
@@ -8,12 +9,12 @@ import { FlowTemplateSummary } from "./flowtemplatesummary";
  * An object that contains a workflow's definition and summary information.
 **/
 export class FlowTemplateDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition?: DefinitionDocument;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: FlowTemplateSummary;
 
-  @Metadata({ data: "json, name=validatedNamespaceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=validatedNamespaceVersion" })
   validatedNamespaceVersion?: number;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchResourcesComparatorEnum } from "./searchresourcescomparatorenum";
 import { SearchResourcesTagCriterionPair } from "./searchresourcestagcriterionpair";
+
 
 
 // SearchResourcesTagCriterion
@@ -9,9 +9,9 @@ import { SearchResourcesTagCriterionPair } from "./searchresourcestagcriterionpa
  * Specifies a tag-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.
 **/
 export class SearchResourcesTagCriterion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparator" })
+  @SpeakeasyMetadata({ data: "json, name=comparator" })
   comparator?: SearchResourcesComparatorEnum;
 
-  @Metadata({ data: "json, name=tagValues", elemType: shared.SearchResourcesTagCriterionPair })
+  @SpeakeasyMetadata({ data: "json, name=tagValues", elemType: SearchResourcesTagCriterionPair })
   tagValues?: SearchResourcesTagCriterionPair[];
 }

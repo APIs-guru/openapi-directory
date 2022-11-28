@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetRecallHistoryPathParams:
-    vin: str = field(default=None, metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
+    vin: str = field(metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetRecallHistoryQueryParams:
 
 @dataclass
 class GetRecallHistoryRequest:
-    path_params: GetRecallHistoryPathParams = field(default=None)
-    query_params: GetRecallHistoryQueryParams = field(default=None)
+    path_params: GetRecallHistoryPathParams = field()
+    query_params: GetRecallHistoryQueryParams = field()
     
 
 @dataclass
 class GetRecallHistoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     search_response: Optional[shared.SearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

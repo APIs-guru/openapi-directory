@@ -11,6 +11,8 @@ const (
 	RuleActionEnumLog          RuleActionEnum = "LOG"
 )
 
+// Rule
+// A rule to be applied in a Policy.
 type Rule struct {
 	Action      *RuleActionEnum `json:"action,omitempty"`
 	Conditions  []Condition     `json:"conditions,omitempty"`

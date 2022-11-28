@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SalesforceConnectorProfileProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile properties required when using Salesforce. 
 **/
 export class SalesforceConnectorProfileProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=instanceUrl" })
   instanceUrl?: string;
 
-  @Metadata({ data: "json, name=isSandboxEnvironment" })
+  @SpeakeasyMetadata({ data: "json, name=isSandboxEnvironment" })
   isSandboxEnvironment?: boolean;
 }

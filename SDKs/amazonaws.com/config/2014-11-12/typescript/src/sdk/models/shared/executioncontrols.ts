@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SsmControls } from "./ssmcontrols";
+
 
 
 // ExecutionControls
@@ -7,6 +8,6 @@ import { SsmControls } from "./ssmcontrols";
  * The controls that Config uses for executing remediations.
 **/
 export class ExecutionControls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SsmControls" })
+  @SpeakeasyMetadata({ data: "json, name=SsmControls" })
   ssmControls?: SsmControls;
 }

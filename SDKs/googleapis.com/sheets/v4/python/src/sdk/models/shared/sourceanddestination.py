@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import gridrange
+from sdk import utils
+from . import *
 
 class SourceAndDestinationDimensionEnum(str, Enum):
     DIMENSION_UNSPECIFIED = "DIMENSION_UNSPECIFIED"
@@ -12,7 +14,11 @@ class SourceAndDestinationDimensionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SourceAndDestination:
-    dimension: Optional[SourceAndDestinationDimensionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimension' }})
-    fill_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fillLength' }})
-    source: Optional[gridrange.GridRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""SourceAndDestination
+    A combination of a source range and how to extend that source.
+    """
+    
+    dimension: Optional[SourceAndDestinationDimensionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimension') }})
+    fill_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fillLength') }})
+    source: Optional[GridRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

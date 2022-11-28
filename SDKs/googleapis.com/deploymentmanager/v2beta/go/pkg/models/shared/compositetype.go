@@ -9,6 +9,8 @@ const (
 	CompositeTypeStatusEnumSupported     CompositeTypeStatusEnum = "SUPPORTED"
 )
 
+// CompositeType
+// Holds the composite type.
 type CompositeType struct {
 	Description      *string                   `json:"description,omitempty"`
 	ID               *string                   `json:"id,omitempty"`

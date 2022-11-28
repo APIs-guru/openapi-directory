@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchConversationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_pixel_ratio" })
   devicePixelRatio?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search: string;
 }
 
 
-export class SearchConversationsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: SearchConversationsQueryParams;
-}
-
-
 export class SearchConversations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversations", elemType: shared.Conversation })
+  @SpeakeasyMetadata({ data: "json, name=conversations", elemType: shared.Conversation })
   conversations?: shared.Conversation[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "json, name=search" })
+  @SpeakeasyMetadata({ data: "json, name=search" })
   search?: string;
 }
 
 
+export class SearchConversationsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: SearchConversationsQueryParams;
+}
+
+
 export class SearchConversationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchConversations200ApplicationJsonObject?: SearchConversations200ApplicationJson;
 }

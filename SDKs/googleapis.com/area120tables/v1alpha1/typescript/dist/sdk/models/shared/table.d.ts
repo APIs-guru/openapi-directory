@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ColumnDescription } from "./columndescription";
 import { SavedView } from "./savedview";
 /**

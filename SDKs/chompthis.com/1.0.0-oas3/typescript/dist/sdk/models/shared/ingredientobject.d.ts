@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * An object containing the multiplication factors to be used when calculating energy from macronutrients for a specific food.
 **/

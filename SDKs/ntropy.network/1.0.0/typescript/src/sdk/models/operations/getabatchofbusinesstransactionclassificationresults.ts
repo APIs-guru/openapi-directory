@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetABatchOfBusinessTransactionClassificationResultsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
-export class GetABatchOfBusinessTransactionClassificationResultsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetABatchOfBusinessTransactionClassificationResultsPathParams;
-}
-
-
 export class GetABatchOfBusinessTransactionClassificationResults200ApplicationJsonResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: string[];
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: string;
 
-  @Metadata({ data: "json, name=merchant" })
+  @SpeakeasyMetadata({ data: "json, name=merchant" })
   merchant?: string;
 
-  @Metadata({ data: "json, name=transaction_id" })
+  @SpeakeasyMetadata({ data: "json, name=transaction_id" })
   transactionId?: string;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 }
 
 
 export class GetABatchOfBusinessTransactionClassificationResults200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress?: number;
 
-  @Metadata({ data: "json, name=results", elemType: operations.GetABatchOfBusinessTransactionClassificationResults200ApplicationJsonResults })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: GetABatchOfBusinessTransactionClassificationResults200ApplicationJsonResults })
   results?: GetABatchOfBusinessTransactionClassificationResults200ApplicationJsonResults[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: string;
 }
 
 
+export class GetABatchOfBusinessTransactionClassificationResultsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetABatchOfBusinessTransactionClassificationResultsPathParams;
+}
+
+
 export class GetABatchOfBusinessTransactionClassificationResultsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getABatchOfBusinessTransactionClassificationResults200ApplicationJsonObject?: GetABatchOfBusinessTransactionClassificationResults200ApplicationJson;
 }

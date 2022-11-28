@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WkHtmlToPdfRequestDto
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * WkHtmlToPdfRequestDto is the data transfer object for generating a pdf using wkhtmltopdf;
 **/
 export class WkHtmlToPdfRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HtmlBase64String" })
+  @SpeakeasyMetadata({ data: "json, name=HtmlBase64String" })
   htmlBase64String?: string;
 
-  @Metadata({ data: "json, name=Resources" })
+  @SpeakeasyMetadata({ data: "json, name=Resources" })
   resources?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=WkHtmlToPdfArguments" })
+  @SpeakeasyMetadata({ data: "json, name=WkHtmlToPdfArguments" })
   wkHtmlToPdfArguments?: Map<string, string>;
 }

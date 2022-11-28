@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AuthorizationCategoriesGetUsersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=categoryIDs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=categoryIDs" })
   categoryIDs?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeCategories" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeCategories" })
   includeCategories?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeUsers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeUsers" })
   includeUsers?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIDs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIDs" })
   userIDs?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userSearch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userSearch" })
   userSearch?: string;
 }
 
 
 export class AuthorizationCategoriesGetUsersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AuthorizationCategoriesGetUsersQueryParams;
 }
 
 
 export class AuthorizationCategoriesGetUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiIPagedResponseAuthorizationCodesSharedModelsCategoryUserReport?: shared.ApiIPagedResponseAuthorizationCodesSharedModelsCategoryUserReport;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

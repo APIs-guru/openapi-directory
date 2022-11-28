@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CognitoIdentityProvider
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A provider representing an Amazon Cognito user pool and its client ID.
 **/
 export class CognitoIdentityProvider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=ProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderName" })
   providerName?: string;
 
-  @Metadata({ data: "json, name=ServerSideTokenCheck" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideTokenCheck" })
   serverSideTokenCheck?: boolean;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SyncPlayUserAccessTypeEnum(str, Enum):
     CREATE_AND_JOIN_GROUPS = "CreateAndJoinGroups"

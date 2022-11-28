@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LastAdminUserRoom } from "./lastadminuserroom";
+
 
 
 // LastAdminUserRoomList
@@ -8,6 +8,6 @@ import { LastAdminUserRoom } from "./lastadminuserroom";
  * List of (last admin user) rooms
 **/
 export class LastAdminUserRoomList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.LastAdminUserRoom })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: LastAdminUserRoom })
   items: LastAdminUserRoom[];
 }

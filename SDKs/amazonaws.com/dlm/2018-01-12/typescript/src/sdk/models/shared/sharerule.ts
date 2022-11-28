@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionIntervalUnitValuesEnum } from "./retentionintervalunitvaluesenum";
+
 
 
 // ShareRule
@@ -7,12 +8,12 @@ import { RetentionIntervalUnitValuesEnum } from "./retentionintervalunitvaluesen
  * Specifies a rule for sharing snapshots across Amazon Web Services accounts.
 **/
 export class ShareRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TargetAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=TargetAccounts" })
   targetAccounts: string[];
 
-  @Metadata({ data: "json, name=UnshareInterval" })
+  @SpeakeasyMetadata({ data: "json, name=UnshareInterval" })
   unshareInterval?: number;
 
-  @Metadata({ data: "json, name=UnshareIntervalUnit" })
+  @SpeakeasyMetadata({ data: "json, name=UnshareIntervalUnit" })
   unshareIntervalUnit?: RetentionIntervalUnitValuesEnum;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class RetrievePricingCountryPathParams extends SpeakeasyBase {
     type: string;
 }
@@ -6,10 +6,6 @@ export declare class RetrievePricingCountryQueryParams extends SpeakeasyBase {
     apiKey: string;
     apiSecret: string;
     country: string;
-}
-export declare class RetrievePricingCountryRequest extends SpeakeasyBase {
-    pathParams: RetrievePricingCountryPathParams;
-    queryParams: RetrievePricingCountryQueryParams;
 }
 export declare class RetrievePricingCountry400ApplicationJsonInvalidParameters extends SpeakeasyBase {
     message?: string;
@@ -24,6 +20,10 @@ export declare class RetrievePricingCountry401ApplicationJson extends SpeakeasyB
     code: string;
     currency: string;
     errorCodeLabel: string;
+}
+export declare class RetrievePricingCountryRequest extends SpeakeasyBase {
+    pathParams: RetrievePricingCountryPathParams;
+    queryParams: RetrievePricingCountryQueryParams;
 }
 export declare class RetrievePricingCountryResponse extends SpeakeasyBase {
     contentType: string;

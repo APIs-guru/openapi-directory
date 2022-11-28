@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetCapabilitiesPathParams = /** @class */ (function (_super) {
     __extends(GetCapabilitiesPathParams, _super);
     function GetCapabilitiesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], GetCapabilitiesPathParams.prototype, "versionNumber", void 0);
     return GetCapabilitiesPathParams;
@@ -53,15 +53,15 @@ var GetCapabilitiesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=request" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=request" }),
         __metadata("design:type", String)
     ], GetCapabilitiesQueryParams.prototype, "request", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=service" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=service" }),
         __metadata("design:type", String)
     ], GetCapabilitiesQueryParams.prototype, "service", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" }),
         __metadata("design:type", String)
     ], GetCapabilitiesQueryParams.prototype, "version", void 0);
     return GetCapabilitiesQueryParams;
@@ -73,11 +73,11 @@ var GetCapabilitiesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCapabilitiesPathParams)
     ], GetCapabilitiesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCapabilitiesQueryParams)
     ], GetCapabilitiesRequest.prototype, "queryParams", void 0);
     return GetCapabilitiesRequest;
@@ -89,11 +89,11 @@ var GetCapabilitiesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCapabilitiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCapabilitiesResponse.prototype, "statusCode", void 0);
     return GetCapabilitiesResponse;

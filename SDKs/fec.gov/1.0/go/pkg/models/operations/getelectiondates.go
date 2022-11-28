@@ -37,13 +37,13 @@ type GetElectionDatesQueryParams struct {
 	SortNullsLast         *bool                              `queryParam:"style=form,explode=true,name=sort_nulls_last"`
 }
 
-type GetElectionDatesRequest struct {
-	QueryParams GetElectionDatesQueryParams
-}
-
 type GetElectionDatesDefaultApplicationJSON struct {
 	Pagination *shared.OffsetInfo    `json:"pagination,omitempty"`
 	Results    []shared.ElectionDate `json:"results,omitempty"`
+}
+
+type GetElectionDatesRequest struct {
+	QueryParams GetElectionDatesQueryParams
 }
 
 type GetElectionDatesResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceUpdateRequest } from "./serviceupdaterequest";
 var BatchUpdateClusterRequest = /** @class */ (function (_super) {
     __extends(BatchUpdateClusterRequest, _super);
@@ -30,11 +30,11 @@ var BatchUpdateClusterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterNames" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterNames" }),
         __metadata("design:type", Array)
     ], BatchUpdateClusterRequest.prototype, "clusterNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceUpdate" }),
         __metadata("design:type", ServiceUpdateRequest)
     ], BatchUpdateClusterRequest.prototype, "serviceUpdate", void 0);
     return BatchUpdateClusterRequest;

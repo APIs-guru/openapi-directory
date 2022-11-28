@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import subtransaction
+from sdk import utils
+from . import *
 
 class TransactionDetailClearedEnum(str, Enum):
     CLEARED = "cleared"
@@ -23,23 +25,23 @@ class TransactionDetailFlagColorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TransactionDetail:
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account_id' }})
-    account_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account_name' }})
-    amount: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    approved: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approved' }})
-    category_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category_id' }})
-    category_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category_name' }})
-    cleared: TransactionDetailClearedEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cleared' }})
-    date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    deleted: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleted' }})
-    flag_color: Optional[TransactionDetailFlagColorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flag_color' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    import_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'import_id' }})
-    matched_transaction_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matched_transaction_id' }})
-    memo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memo' }})
-    payee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payee_id' }})
-    payee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payee_name' }})
-    subtransactions: List[subtransaction.SubTransaction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subtransactions' }})
-    transfer_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transfer_account_id' }})
-    transfer_transaction_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transfer_transaction_id' }})
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account_id') }})
+    account_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account_name') }})
+    amount: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    approved: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('approved') }})
+    cleared: TransactionDetailClearedEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cleared') }})
+    date_: date = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('date'), 'encoder': utils.dateisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    deleted: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleted') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    subtransactions: List[SubTransaction] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subtransactions') }})
+    category_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category_id') }})
+    category_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category_name') }})
+    flag_color: Optional[TransactionDetailFlagColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flag_color') }})
+    import_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('import_id') }})
+    matched_transaction_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matched_transaction_id') }})
+    memo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memo') }})
+    payee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payee_id') }})
+    payee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payee_name') }})
+    transfer_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transfer_account_id') }})
+    transfer_transaction_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transfer_transaction_id') }})
     

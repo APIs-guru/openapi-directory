@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class InitiateMultipartUploadPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    vault_name: str = field(default=None, metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    vault_name: str = field(metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,17 +26,17 @@ class InitiateMultipartUploadHeaders:
 
 @dataclass
 class InitiateMultipartUploadRequest:
-    path_params: InitiateMultipartUploadPathParams = field(default=None)
-    headers: InitiateMultipartUploadHeaders = field(default=None)
+    headers: InitiateMultipartUploadHeaders = field()
+    path_params: InitiateMultipartUploadPathParams = field()
     
 
 @dataclass
 class InitiateMultipartUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     initiate_multipart_upload_output: Optional[dict[str, Any]] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     missing_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

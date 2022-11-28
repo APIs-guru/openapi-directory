@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DataSetTypeEnum(str, Enum):
     CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS = "customer_subscriber_hourly_monthly_subscriptions"

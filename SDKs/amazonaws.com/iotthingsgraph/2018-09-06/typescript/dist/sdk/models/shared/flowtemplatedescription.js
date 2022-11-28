@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionDocument } from "./definitiondocument";
 import { FlowTemplateSummary } from "./flowtemplatesummary";
 // FlowTemplateDescription
@@ -35,15 +35,15 @@ var FlowTemplateDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=definition" }),
+        SpeakeasyMetadata({ data: "json, name=definition" }),
         __metadata("design:type", DefinitionDocument)
     ], FlowTemplateDescription.prototype, "definition", void 0);
     __decorate([
-        Metadata({ data: "json, name=summary" }),
+        SpeakeasyMetadata({ data: "json, name=summary" }),
         __metadata("design:type", FlowTemplateSummary)
     ], FlowTemplateDescription.prototype, "summary", void 0);
     __decorate([
-        Metadata({ data: "json, name=validatedNamespaceVersion" }),
+        SpeakeasyMetadata({ data: "json, name=validatedNamespaceVersion" }),
         __metadata("design:type", Number)
     ], FlowTemplateDescription.prototype, "validatedNamespaceVersion", void 0);
     return FlowTemplateDescription;

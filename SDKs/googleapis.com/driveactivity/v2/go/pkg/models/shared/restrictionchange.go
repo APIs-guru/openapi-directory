@@ -18,6 +18,8 @@ const (
 	RestrictionChangeNewRestrictionEnumFullyRestricted        RestrictionChangeNewRestrictionEnum = "FULLY_RESTRICTED"
 )
 
+// RestrictionChange
+// Information about restriction policy changes to a feature.
 type RestrictionChange struct {
 	Feature        *RestrictionChangeFeatureEnum        `json:"feature,omitempty"`
 	NewRestriction *RestrictionChangeNewRestrictionEnum `json:"newRestriction,omitempty"`

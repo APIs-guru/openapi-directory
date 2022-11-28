@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class FlowExecutionEventTypeEnum(str, Enum):
     EXECUTION_STARTED = "EXECUTION_STARTED"

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputParallelismUpdate } from "./inputparallelismupdate";
 import { InputProcessingConfigurationUpdate } from "./inputprocessingconfigurationupdate";
 import { InputSchemaUpdate } from "./inputschemaupdate";

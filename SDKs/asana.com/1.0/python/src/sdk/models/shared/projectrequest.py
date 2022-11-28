@@ -1,13 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import usercompact
-from . import usercompact
-from . import customfieldsettingcompact
-from . import usercompact
+from sdk import utils
+from . import *
 
 class ProjectRequestColorEnum(str, Enum):
     DARK_PINK = "dark-pink"
@@ -38,17 +37,13 @@ class ProjectRequestCurrentStatusColorEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ProjectRequestCurrentStatus:
-    author: Optional[usercompact.UserCompact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
-    color: ProjectRequestCurrentStatusColorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    created_by: Optional[usercompact.UserCompact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_by' }})
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    html_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_text' }})
-    modified_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class ProjectRequestCurrentStatusInput:
+    color: ProjectRequestCurrentStatusColorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    author: Optional[UserCompactInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('author') }})
+    created_by: Optional[UserCompactInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_by') }})
+    html_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('html_text') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 class ProjectRequestDefaultViewEnum(str, Enum):
     LIST = "list"
@@ -59,36 +54,28 @@ class ProjectRequestDefaultViewEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ProjectRequestWorkspace:
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
+class ProjectRequestWorkspaceInput:
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 
 @dataclass_json
 @dataclass
-class ProjectRequest:
-    archived: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'archived' }})
-    color: Optional[ProjectRequestColorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    current_status: Optional[ProjectRequestCurrentStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_status' }})
-    custom_field_settings: Optional[List[customfieldsettingcompact.CustomFieldSettingCompact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_field_settings' }})
-    custom_fields: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_fields' }})
-    default_view: Optional[ProjectRequestDefaultViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'default_view' }})
-    due_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'due_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    due_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'due_on', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    followers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    html_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_notes' }})
-    is_template: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_template' }})
-    members: Optional[List[usercompact.UserCompact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'members' }})
-    modified_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }})
-    owner: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    public: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'public' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    start_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'start_on', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    team: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'team' }})
-    workspace: Optional[ProjectRequestWorkspace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workspace' }})
+class ProjectRequestInput:
+    archived: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('archived') }})
+    color: Optional[ProjectRequestColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    current_status: Optional[ProjectRequestCurrentStatusInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('current_status') }})
+    custom_fields: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('custom_fields') }})
+    default_view: Optional[ProjectRequestDefaultViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('default_view') }})
+    due_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('due_date'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    due_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('due_on'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    followers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('followers') }})
+    html_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('html_notes') }})
+    is_template: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('is_template') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notes') }})
+    owner: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner') }})
+    public: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('public') }})
+    start_on: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('start_on'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    team: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('team') }})
+    workspace: Optional[ProjectRequestWorkspaceInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workspace') }})
     

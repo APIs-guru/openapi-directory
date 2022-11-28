@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InboxRegistrationEntity } from "./inboxregistrationentity";
+
 
 
 // InboxUploadEntity
@@ -7,12 +8,12 @@ import { InboxRegistrationEntity } from "./inboxregistrationentity";
  * List Inbox Uploads
 **/
 export class InboxUploadEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=inbox_registration" })
+  @SpeakeasyMetadata({ data: "json, name=inbox_registration" })
   inboxRegistration?: InboxRegistrationEntity;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

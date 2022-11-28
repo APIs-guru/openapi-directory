@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IssueResolutionEnum {
-    ResolutionUnspecified = "RESOLUTION_UNSPECIFIED"
-,    UserAction = "USER_ACTION"
-,    PendingProcessing = "PENDING_PROCESSING"
+    ResolutionUnspecified = "RESOLUTION_UNSPECIFIED",
+    UserAction = "USER_ACTION",
+    PendingProcessing = "PENDING_PROCESSING"
 }
 
 export enum IssueSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Error = "ERROR"
-,    Warning = "WARNING"
-,    Info = "INFO"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Error = "ERROR",
+    Warning = "WARNING",
+    Info = "INFO"
 }
 
 
@@ -19,27 +20,27 @@ export enum IssueSeverityEnum {
  * Product issue.
 **/
 export class Issue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attribute" })
+  @SpeakeasyMetadata({ data: "json, name=attribute" })
   attribute?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution?: IssueResolutionEnum;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: IssueSeverityEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

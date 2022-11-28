@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PlayerUsageUsage = /** @class */ (function (_super) {
     __extends(PlayerUsageUsage, _super);
     function PlayerUsageUsage() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=firstDown" }),
+        SpeakeasyMetadata({ data: "json, name=firstDown" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "firstDown", void 0);
     __decorate([
-        Metadata({ data: "json, name=overall" }),
+        SpeakeasyMetadata({ data: "json, name=overall" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "overall", void 0);
     __decorate([
-        Metadata({ data: "json, name=pass" }),
+        SpeakeasyMetadata({ data: "json, name=pass" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "pass", void 0);
     __decorate([
-        Metadata({ data: "json, name=passingDowns" }),
+        SpeakeasyMetadata({ data: "json, name=passingDowns" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "passingDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=rush" }),
+        SpeakeasyMetadata({ data: "json, name=rush" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "rush", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondDown" }),
+        SpeakeasyMetadata({ data: "json, name=secondDown" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "secondDown", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardDowns" }),
+        SpeakeasyMetadata({ data: "json, name=standardDowns" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "standardDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=thirdDown" }),
+        SpeakeasyMetadata({ data: "json, name=thirdDown" }),
         __metadata("design:type", Number)
     ], PlayerUsageUsage.prototype, "thirdDown", void 0);
     return PlayerUsageUsage;
@@ -69,31 +69,31 @@ var PlayerUsage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=conference" }),
+        SpeakeasyMetadata({ data: "json, name=conference" }),
         __metadata("design:type", String)
     ], PlayerUsage.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], PlayerUsage.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PlayerUsage.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], PlayerUsage.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=season" }),
+        SpeakeasyMetadata({ data: "json, name=season" }),
         __metadata("design:type", Number)
     ], PlayerUsage.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], PlayerUsage.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "json, name=usage" }),
+        SpeakeasyMetadata({ data: "json, name=usage" }),
         __metadata("design:type", PlayerUsageUsage)
     ], PlayerUsage.prototype, "usage", void 0);
     return PlayerUsage;

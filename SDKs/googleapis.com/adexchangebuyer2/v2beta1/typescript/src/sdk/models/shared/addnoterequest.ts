@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Note } from "./note";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NoteInput } from "./note";
 
 
-// AddNoteRequest
+
+// AddNoteRequestInput
 /** 
  * Request message for adding a note to a given proposal.
 **/
-export class AddNoteRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=note" })
-  note?: Note;
+export class AddNoteRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=note" })
+  note?: NoteInput;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetJobUnlockCodeResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UnlockCode" })
+  @SpeakeasyMetadata({ data: "json, name=UnlockCode" })
   unlockCode?: string;
 }

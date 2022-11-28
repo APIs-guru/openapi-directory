@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodeTaint } from "./nodetaint";
+
 
 
 // NodeTaints
@@ -8,6 +8,6 @@ import { NodeTaint } from "./nodetaint";
  * Collection of Kubernetes [node taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration).
 **/
 export class NodeTaints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taints", elemType: shared.NodeTaint })
+  @SpeakeasyMetadata({ data: "json, name=taints", elemType: NodeTaint })
   taints?: NodeTaint[];
 }

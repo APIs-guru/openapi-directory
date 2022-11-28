@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import option
+from sdk import utils
+from . import *
 
 class FieldTypeDefinitionFieldTypeEnum(str, Enum):
     BOOLEANCHECKBOX = "booleancheckbox"
@@ -103,10 +105,14 @@ class FieldTypeDefinitionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FieldTypeDefinition:
-    field_type: Optional[FieldTypeDefinitionFieldTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldType' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    options: List[option.Option] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    options_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'optionsUrl' }})
-    referenced_object_type: Optional[FieldTypeDefinitionReferencedObjectTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referencedObjectType' }})
-    type: FieldTypeDefinitionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""FieldTypeDefinition
+    The data type expected by an input field.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    options: List[Option] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    type: FieldTypeDefinitionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    field_type: Optional[FieldTypeDefinitionFieldTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldType') }})
+    options_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('optionsUrl') }})
+    referenced_object_type: Optional[FieldTypeDefinitionReferencedObjectTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referencedObjectType') }})
     

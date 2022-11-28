@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstancePatchState } from "./instancepatchstate";
 
 
+
 export class DescribeInstancePatchStatesForPatchGroupResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstancePatchStates", elemType: shared.InstancePatchState })
+  @SpeakeasyMetadata({ data: "json, name=InstancePatchStates", elemType: InstancePatchState })
   instancePatchStates?: InstancePatchState[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

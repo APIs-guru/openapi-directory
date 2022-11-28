@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSolutionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=solutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionArn" })
   solutionArn: string;
 }

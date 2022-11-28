@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Poster } from "./poster";
 import { Range } from "./range";
 import { Size } from "./size";
@@ -76,47 +76,47 @@ var Output = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aspectRatio" }),
+        SpeakeasyMetadata({ data: "json, name=aspectRatio" }),
         __metadata("design:type", String)
     ], Output.prototype, "aspectRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinations" }),
+        SpeakeasyMetadata({ data: "json, name=destinations" }),
         __metadata("design:type", Array)
     ], Output.prototype, "destinations", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], Output.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=fps" }),
+        SpeakeasyMetadata({ data: "json, name=fps" }),
         __metadata("design:type", Number)
     ], Output.prototype, "fps", void 0);
     __decorate([
-        Metadata({ data: "json, name=poster" }),
+        SpeakeasyMetadata({ data: "json, name=poster" }),
         __metadata("design:type", Poster)
     ], Output.prototype, "poster", void 0);
     __decorate([
-        Metadata({ data: "json, name=quality" }),
+        SpeakeasyMetadata({ data: "json, name=quality" }),
         __metadata("design:type", String)
     ], Output.prototype, "quality", void 0);
     __decorate([
-        Metadata({ data: "json, name=range" }),
+        SpeakeasyMetadata({ data: "json, name=range" }),
         __metadata("design:type", Range)
     ], Output.prototype, "range", void 0);
     __decorate([
-        Metadata({ data: "json, name=resolution" }),
+        SpeakeasyMetadata({ data: "json, name=resolution" }),
         __metadata("design:type", String)
     ], Output.prototype, "resolution", void 0);
     __decorate([
-        Metadata({ data: "json, name=scaleTo" }),
+        SpeakeasyMetadata({ data: "json, name=scaleTo" }),
         __metadata("design:type", String)
     ], Output.prototype, "scaleTo", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", Size)
     ], Output.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnail" }),
+        SpeakeasyMetadata({ data: "json, name=thumbnail" }),
         __metadata("design:type", Thumbnail)
     ], Output.prototype, "thumbnail", void 0);
     return Output;

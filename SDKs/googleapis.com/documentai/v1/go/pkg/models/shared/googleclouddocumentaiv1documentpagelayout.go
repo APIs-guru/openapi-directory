@@ -10,6 +10,8 @@ const (
 	GoogleCloudDocumentaiV1DocumentPageLayoutOrientationEnumPageLeft               GoogleCloudDocumentaiV1DocumentPageLayoutOrientationEnum = "PAGE_LEFT"
 )
 
+// GoogleCloudDocumentaiV1DocumentPageLayout
+// Visual element describing a layout unit on a page.
 type GoogleCloudDocumentaiV1DocumentPageLayout struct {
 	BoundingPoly *GoogleCloudDocumentaiV1BoundingPoly                      `json:"boundingPoly,omitempty"`
 	Confidence   *float32                                                  `json:"confidence,omitempty"`

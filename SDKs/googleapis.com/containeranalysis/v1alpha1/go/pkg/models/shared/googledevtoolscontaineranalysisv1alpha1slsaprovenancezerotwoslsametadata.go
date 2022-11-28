@@ -1,5 +1,7 @@
 package shared
 
+// GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaMetadata
+// Other properties of the build.
 type GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaMetadata struct {
 	BuildFinishedOn   *string                                                                       `json:"buildFinishedOn,omitempty"`
 	BuildInvocationID *string                                                                       `json:"buildInvocationId,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DiskStatus
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The status of a disk on a VM.
 **/
 export class DiskStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=freeSpaceBytes" })
+  @SpeakeasyMetadata({ data: "json, name=freeSpaceBytes" })
   freeSpaceBytes?: string;
 
-  @Metadata({ data: "json, name=totalSpaceBytes" })
+  @SpeakeasyMetadata({ data: "json, name=totalSpaceBytes" })
   totalSpaceBytes?: string;
 }

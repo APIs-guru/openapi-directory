@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Soa } from "./soa";
+
 
 
 // DnsProperties
@@ -7,9 +8,9 @@ import { Soa } from "./soa";
  * A complex type that contains the ID for the Route 53 hosted zone that Cloud Map creates when you create a namespace.
 **/
 export class DnsProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HostedZoneId" })
+  @SpeakeasyMetadata({ data: "json, name=HostedZoneId" })
   hostedZoneId?: string;
 
-  @Metadata({ data: "json, name=SOA" })
+  @SpeakeasyMetadata({ data: "json, name=SOA" })
   soa?: Soa;
 }

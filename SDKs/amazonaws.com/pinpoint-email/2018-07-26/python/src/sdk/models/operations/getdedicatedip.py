@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDedicatedIPPathParams:
-    ip: str = field(default=None, metadata={'path_param': { 'field_name': 'IP', 'style': 'simple', 'explode': False }})
+    ip: str = field(metadata={'path_param': { 'field_name': 'IP', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetDedicatedIPHeaders:
 
 @dataclass
 class GetDedicatedIPRequest:
-    path_params: GetDedicatedIPPathParams = field(default=None)
-    headers: GetDedicatedIPHeaders = field(default=None)
+    headers: GetDedicatedIPHeaders = field()
+    path_params: GetDedicatedIPPathParams = field()
     
 
 @dataclass
 class GetDedicatedIPResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_dedicated_ip_response: Optional[shared.GetDedicatedIPResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,14 @@
 package shared
 
+// AnswerInput
+// Represents an answer to a question
+type AnswerInput struct {
+	Author *Author `json:"author,omitempty"`
+	Text   *string `json:"text,omitempty"`
+}
+
+// Answer
+// Represents an answer to a question
 type Answer struct {
 	Author      *Author `json:"author,omitempty"`
 	CreateTime  *string `json:"createTime,omitempty"`

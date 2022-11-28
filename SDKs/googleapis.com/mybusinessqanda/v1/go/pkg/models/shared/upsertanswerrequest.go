@@ -1,5 +1,7 @@
 package shared
 
-type UpsertAnswerRequest struct {
-	Answer *Answer `json:"answer,omitempty"`
+// UpsertAnswerRequestInput
+// Request message for QuestionsAndAnswers.UpsertAnswer
+type UpsertAnswerRequestInput struct {
+	Answer *AnswerInput `json:"answer,omitempty"`
 }

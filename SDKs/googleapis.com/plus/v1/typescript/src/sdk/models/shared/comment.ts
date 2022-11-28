@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CommentActorClientSpecificActorInfoYoutubeActorInfo
@@ -7,7 +7,7 @@ import * as shared from "../shared";
  * Actor info specific to YouTube clients.
 **/
 export class CommentActorClientSpecificActorInfoYoutubeActorInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 }
 
@@ -17,7 +17,7 @@ export class CommentActorClientSpecificActorInfoYoutubeActorInfo extends Speakea
  * Actor info specific to particular clients.
 **/
 export class CommentActorClientSpecificActorInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=youtubeActorInfo" })
+  @SpeakeasyMetadata({ data: "json, name=youtubeActorInfo" })
   youtubeActorInfo?: CommentActorClientSpecificActorInfoYoutubeActorInfo;
 }
 
@@ -27,7 +27,7 @@ export class CommentActorClientSpecificActorInfo extends SpeakeasyBase {
  * The image representation of this actor.
 **/
 export class CommentActorImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -37,7 +37,7 @@ export class CommentActorImage extends SpeakeasyBase {
  * Verification status of actor.
 **/
 export class CommentActorVerification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adHocVerified" })
+  @SpeakeasyMetadata({ data: "json, name=adHocVerified" })
   adHocVerified?: string;
 }
 
@@ -47,31 +47,31 @@ export class CommentActorVerification extends SpeakeasyBase {
  * The person who posted this comment.
 **/
 export class CommentActor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientSpecificActorInfo" })
+  @SpeakeasyMetadata({ data: "json, name=clientSpecificActorInfo" })
   clientSpecificActorInfo?: CommentActorClientSpecificActorInfo;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: CommentActorImage;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=verification" })
+  @SpeakeasyMetadata({ data: "json, name=verification" })
   verification?: CommentActorVerification;
 }
 
 
 export class CommentInReplyTo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -81,13 +81,13 @@ export class CommentInReplyTo extends SpeakeasyBase {
  * The object of this comment.
 **/
 export class CommentObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=originalContent" })
+  @SpeakeasyMetadata({ data: "json, name=originalContent" })
   originalContent?: string;
 }
 
@@ -97,42 +97,42 @@ export class CommentObject extends SpeakeasyBase {
  * People who +1'd this comment.
 **/
 export class CommentPlusoners extends SpeakeasyBase {
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: number;
 }
 
 
 export class Comment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actor" })
+  @SpeakeasyMetadata({ data: "json, name=actor" })
   actor?: CommentActor;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=inReplyTo", elemType: shared.CommentInReplyTo })
+  @SpeakeasyMetadata({ data: "json, name=inReplyTo", elemType: CommentInReplyTo })
   inReplyTo?: CommentInReplyTo[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: CommentObject;
 
-  @Metadata({ data: "json, name=plusoners" })
+  @SpeakeasyMetadata({ data: "json, name=plusoners" })
   plusoners?: CommentPlusoners;
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: Date;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=verb" })
+  @SpeakeasyMetadata({ data: "json, name=verb" })
   verb?: string;
 }

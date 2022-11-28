@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RuleSourceTypeEnum {
-    ChannelMessage = "channel.message"
-,    ChannelPresence = "channel.presence"
-,    ChannelLifecycle = "channel.lifecycle"
-,    ChannelOccupancy = "channel.occupancy"
+    ChannelMessage = "channel.message",
+    ChannelPresence = "channel.presence",
+    ChannelLifecycle = "channel.lifecycle",
+    ChannelOccupancy = "channel.occupancy"
 }
 
 
 export class RuleSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelFilter" })
+  @SpeakeasyMetadata({ data: "json, name=channelFilter" })
   channelFilter: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: RuleSourceTypeEnum;
 }

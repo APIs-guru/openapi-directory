@@ -1,5 +1,7 @@
 package shared
 
+// PosInventory
+// The absolute quantity of an item available at the given store.
 type PosInventory struct {
 	ContentLanguage *string `json:"contentLanguage,omitempty"`
 	Gtin            *string `json:"gtin,omitempty"`

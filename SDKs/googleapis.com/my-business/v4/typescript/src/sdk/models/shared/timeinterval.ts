@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 import { TimeOfDay } from "./timeofday";
-import { Date } from "./date";
-import { TimeOfDay } from "./timeofday";
+
 
 
 // TimeInterval
@@ -10,15 +9,15 @@ import { TimeOfDay } from "./timeofday";
  * An interval of time, inclusive. It must contain all fields to be valid.
 **/
 export class TimeInterval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: TimeOfDay;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: TimeOfDay;
 }

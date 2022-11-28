@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ConfigCreateRequest
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for creating a S3 configuration
 **/
 export class S3ConfigCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessKey" })
+  @SpeakeasyMetadata({ data: "json, name=accessKey" })
   accessKey: string;
 
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=bucketUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bucketUrl" })
   bucketUrl?: string;
 
-  @Metadata({ data: "json, name=endpointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=endpointUrl" })
   endpointUrl?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=secretKey" })
+  @SpeakeasyMetadata({ data: "json, name=secretKey" })
   secretKey: string;
 }

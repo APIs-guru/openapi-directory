@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PlatformEnum } from "./platformenum";
 /**
  * A summary of an image recipe.

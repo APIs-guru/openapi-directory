@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsfordeviceUpdatePathParams:
-    device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    managed_configuration_for_device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'managedConfigurationForDeviceId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    device_id: str = field(metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    managed_configuration_for_device_id: str = field(metadata={'path_param': { 'field_name': 'managedConfigurationForDeviceId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +32,21 @@ class AndroidenterpriseManagedconfigurationsfordeviceUpdateQueryParams:
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsfordeviceUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsfordeviceUpdateRequest:
-    path_params: AndroidenterpriseManagedconfigurationsfordeviceUpdatePathParams = field(default=None)
-    query_params: AndroidenterpriseManagedconfigurationsfordeviceUpdateQueryParams = field(default=None)
+    path_params: AndroidenterpriseManagedconfigurationsfordeviceUpdatePathParams = field()
+    query_params: AndroidenterpriseManagedconfigurationsfordeviceUpdateQueryParams = field()
+    security: AndroidenterpriseManagedconfigurationsfordeviceUpdateSecurity = field()
     request: Optional[shared.ManagedConfiguration] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidenterpriseManagedconfigurationsfordeviceUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsfordeviceUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     managed_configuration: Optional[shared.ManagedConfiguration] = field(default=None)
-    status_code: int = field(default=None)
     

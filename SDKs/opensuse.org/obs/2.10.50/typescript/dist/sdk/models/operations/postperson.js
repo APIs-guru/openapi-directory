@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostPersonCmdEnum;
 (function (PostPersonCmdEnum) {
     PostPersonCmdEnum["Register"] = "register";
@@ -33,7 +33,7 @@ var PostPersonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cmd" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cmd" }),
         __metadata("design:type", String)
     ], PostPersonQueryParams.prototype, "cmd", void 0);
     return PostPersonQueryParams;
@@ -45,11 +45,11 @@ var PostPersonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostPersonQueryParams)
     ], PostPersonRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/xml" }),
         __metadata("design:type", Uint8Array)
     ], PostPersonRequest.prototype, "request", void 0);
     return PostPersonRequest;
@@ -61,15 +61,15 @@ var PostPersonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostPersonResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostPersonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostPersonResponse.prototype, "statusCode", void 0);
     return PostPersonResponse;

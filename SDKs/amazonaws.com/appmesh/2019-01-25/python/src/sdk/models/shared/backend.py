@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import virtualservicebackend
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Backend:
-    virtual_service: Optional[virtualservicebackend.VirtualServiceBackend] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualService' }})
+    r"""Backend
+    An object that represents the backends that a virtual node is expected to send outbound traffic to.
+    """
+    
+    virtual_service: Optional[VirtualServiceBackend] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualService') }})
     

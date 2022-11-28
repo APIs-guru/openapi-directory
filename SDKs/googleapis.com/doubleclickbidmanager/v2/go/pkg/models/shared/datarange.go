@@ -24,6 +24,8 @@ const (
 	DataRangeRangeEnumLast60Days       DataRangeRangeEnum = "LAST_60_DAYS"
 )
 
+// DataRange
+// Report data range.
 type DataRange struct {
 	CustomEndDate   *Date               `json:"customEndDate,omitempty"`
 	CustomStartDate *Date               `json:"customStartDate,omitempty"`

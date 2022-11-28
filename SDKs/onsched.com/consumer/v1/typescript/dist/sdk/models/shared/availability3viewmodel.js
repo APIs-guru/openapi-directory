@@ -22,58 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Availability3ViewModel = /** @class */ (function (_super) {
     __extends(Availability3ViewModel, _super);
     function Availability3ViewModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=businessName" }),
+        SpeakeasyMetadata({ data: "json, name=businessName" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "businessName", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstAvailableDate" }),
+        SpeakeasyMetadata({ data: "json, name=firstAvailableDate" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "firstAvailableDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectName" }),
+        SpeakeasyMetadata({ data: "json, name=objectName" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "objectName", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceDescription" }),
+        SpeakeasyMetadata({ data: "json, name=resourceDescription" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "resourceDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceId" }),
+        SpeakeasyMetadata({ data: "json, name=resourceId" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceIds" }),
+        SpeakeasyMetadata({ data: "json, name=resourceIds" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "resourceIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceName" }),
+        SpeakeasyMetadata({ data: "json, name=resourceName" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "resourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceDescription" }),
+        SpeakeasyMetadata({ data: "json, name=serviceDescription" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "serviceDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceDuration" }),
+        SpeakeasyMetadata({ data: "json, name=serviceDuration" }),
         __metadata("design:type", Number)
     ], Availability3ViewModel.prototype, "serviceDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceId" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "serviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceName" }),
+        SpeakeasyMetadata({ data: "json, name=serviceName" }),
         __metadata("design:type", String)
     ], Availability3ViewModel.prototype, "serviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tzRequested" }),
+        SpeakeasyMetadata({ data: "json, name=tzRequested" }),
         __metadata("design:type", Number)
     ], Availability3ViewModel.prototype, "tzRequested", void 0);
     return Availability3ViewModel;

@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dimensionvalue
-from . import floodlightactivitydynamictag
-from . import dimensionvalue
-from . import dimensionvalue
-from . import floodlightactivitypublisherdynamictag
+from sdk import utils
+from . import *
 
 class FloodlightActivityCacheBustingTypeEnum(str, Enum):
     JAVASCRIPT = "JAVASCRIPT"
@@ -140,32 +138,36 @@ class FloodlightActivityUserDefinedVariableTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FloodlightActivity:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountId' }})
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    advertiser_id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserIdDimensionValue' }})
-    cache_busting_type: Optional[FloodlightActivityCacheBustingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cacheBustingType' }})
-    counting_method: Optional[FloodlightActivityCountingMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countingMethod' }})
-    default_tags: Optional[List[floodlightactivitydynamictag.FloodlightActivityDynamicTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultTags' }})
-    expected_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedUrl' }})
-    floodlight_activity_group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightActivityGroupId' }})
-    floodlight_activity_group_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightActivityGroupName' }})
-    floodlight_activity_group_tag_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightActivityGroupTagString' }})
-    floodlight_activity_group_type: Optional[FloodlightActivityFloodlightActivityGroupTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightActivityGroupType' }})
-    floodlight_configuration_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightConfigurationId' }})
-    floodlight_configuration_id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightConfigurationIdDimensionValue' }})
-    floodlight_tag_type: Optional[FloodlightActivityFloodlightTagTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floodlightTagType' }})
-    hidden: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hidden' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idDimensionValue' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }})
-    publisher_tags: Optional[List[floodlightactivitypublisherdynamictag.FloodlightActivityPublisherDynamicTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisherTags' }})
-    secure: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secure' }})
-    ssl_compliant: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sslCompliant' }})
-    ssl_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sslRequired' }})
-    subaccount_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subaccountId' }})
-    tag_format: Optional[FloodlightActivityTagFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagFormat' }})
-    tag_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagString' }})
-    user_defined_variable_types: Optional[List[FloodlightActivityUserDefinedVariableTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userDefinedVariableTypes' }})
+    r"""FloodlightActivity
+    Contains properties of a Floodlight activity.
+    """
+    
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountId') }})
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    advertiser_id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserIdDimensionValue') }})
+    cache_busting_type: Optional[FloodlightActivityCacheBustingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cacheBustingType') }})
+    counting_method: Optional[FloodlightActivityCountingMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countingMethod') }})
+    default_tags: Optional[List[FloodlightActivityDynamicTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultTags') }})
+    expected_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedUrl') }})
+    floodlight_activity_group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightActivityGroupId') }})
+    floodlight_activity_group_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightActivityGroupName') }})
+    floodlight_activity_group_tag_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightActivityGroupTagString') }})
+    floodlight_activity_group_type: Optional[FloodlightActivityFloodlightActivityGroupTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightActivityGroupType') }})
+    floodlight_configuration_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightConfigurationId') }})
+    floodlight_configuration_id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightConfigurationIdDimensionValue') }})
+    floodlight_tag_type: Optional[FloodlightActivityFloodlightTagTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('floodlightTagType') }})
+    hidden: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hidden') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('idDimensionValue') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notes') }})
+    publisher_tags: Optional[List[FloodlightActivityPublisherDynamicTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherTags') }})
+    secure: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secure') }})
+    ssl_compliant: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sslCompliant') }})
+    ssl_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sslRequired') }})
+    subaccount_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subaccountId') }})
+    tag_format: Optional[FloodlightActivityTagFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagFormat') }})
+    tag_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagString') }})
+    user_defined_variable_types: Optional[List[FloodlightActivityUserDefinedVariableTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userDefinedVariableTypes') }})
     

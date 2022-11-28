@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Snapshot
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a snapshot.
 **/
 export class Snapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SnapshotTime" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotTime" })
   snapshotTime?: Date;
 }

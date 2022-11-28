@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import deleteadsbyinventoryreferenceresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BulkDeleteAdsByInventoryReferenceResponse:
-    responses: Optional[List[deleteadsbyinventoryreferenceresponse.DeleteAdsByInventoryReferenceResponse]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responses' }})
+    r"""BulkDeleteAdsByInventoryReferenceResponse
+    This type defines a container that lists the ads that bulkDeleteAdsByInventoryReference deleted.
+    """
+    
+    responses: Optional[List[DeleteAdsByInventoryReferenceResponse]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responses') }})
     

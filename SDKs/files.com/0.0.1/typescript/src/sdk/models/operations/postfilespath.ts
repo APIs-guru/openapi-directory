@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostFilesPathPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class PostFilesPathRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=action" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=action" })
   action?: string;
 
-  @Metadata({ data: "multipart_form, name=etags[etag]" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=etags[etag]" })
   etagsEtag: string[];
 
-  @Metadata({ data: "multipart_form, name=etags[part]" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=etags[part]" })
   etagsPart: number[];
 
-  @Metadata({ data: "multipart_form, name=length" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=length" })
   length?: number;
 
-  @Metadata({ data: "multipart_form, name=mkdir_parents" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=mkdir_parents" })
   mkdirParents?: boolean;
 
-  @Metadata({ data: "multipart_form, name=part" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=part" })
   part?: number;
 
-  @Metadata({ data: "multipart_form, name=parts" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=parts" })
   parts?: number;
 
-  @Metadata({ data: "multipart_form, name=provided_mtime" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=provided_mtime" })
   providedMtime?: Date;
 
-  @Metadata({ data: "multipart_form, name=ref" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=ref" })
   ref?: string;
 
-  @Metadata({ data: "multipart_form, name=restart" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=restart" })
   restart?: number;
 
-  @Metadata({ data: "multipart_form, name=size" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=size" })
   size?: number;
 
-  @Metadata({ data: "multipart_form, name=structure" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=structure" })
   structure?: string;
 
-  @Metadata({ data: "multipart_form, name=with_rename" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=with_rename" })
   withRename?: boolean;
 }
 
 
 export class PostFilesPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostFilesPathPathParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostFilesPathRequestBody;
 }
 
 
 export class PostFilesPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileEntity?: shared.FileEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

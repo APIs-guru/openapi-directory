@@ -1,5 +1,7 @@
 package shared
 
+// LandlordDetailsModel
+// Landlord Details
 type LandlordDetailsModel struct {
 	Address         *string `json:"Address,omitempty"`
 	Email           *string `json:"Email,omitempty"`

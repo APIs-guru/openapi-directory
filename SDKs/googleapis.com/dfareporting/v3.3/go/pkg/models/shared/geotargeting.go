@@ -1,5 +1,7 @@
 package shared
 
+// GeoTargeting
+// Geographical Targeting.
 type GeoTargeting struct {
 	Cities           []City       `json:"cities,omitempty"`
 	Countries        []Country    `json:"countries,omitempty"`

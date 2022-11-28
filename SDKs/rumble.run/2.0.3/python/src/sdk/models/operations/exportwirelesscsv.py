@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,18 +10,18 @@ class ExportWirelessCsvQueryParams:
 
 @dataclass
 class ExportWirelessCsvSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExportWirelessCsvRequest:
-    query_params: ExportWirelessCsvQueryParams = field(default=None)
-    security: ExportWirelessCsvSecurity = field(default=None)
+    query_params: ExportWirelessCsvQueryParams = field()
+    security: ExportWirelessCsvSecurity = field()
     
 
 @dataclass
 class ExportWirelessCsvResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     export_wireless_csv_200_text_csv_binary_string: Optional[bytes] = field(default=None)
     

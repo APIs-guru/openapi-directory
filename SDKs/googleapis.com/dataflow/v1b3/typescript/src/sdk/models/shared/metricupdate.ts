@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricStructuredName } from "./metricstructuredname";
+
 
 
 // MetricUpdate
@@ -7,36 +8,36 @@ import { MetricStructuredName } from "./metricstructuredname";
  * Describes the state of a metric.
 **/
 export class MetricUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cumulative" })
+  @SpeakeasyMetadata({ data: "json, name=cumulative" })
   cumulative?: boolean;
 
-  @Metadata({ data: "json, name=distribution" })
+  @SpeakeasyMetadata({ data: "json, name=distribution" })
   distribution?: any;
 
-  @Metadata({ data: "json, name=gauge" })
+  @SpeakeasyMetadata({ data: "json, name=gauge" })
   gauge?: any;
 
-  @Metadata({ data: "json, name=internal" })
+  @SpeakeasyMetadata({ data: "json, name=internal" })
   internal?: any;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=meanCount" })
+  @SpeakeasyMetadata({ data: "json, name=meanCount" })
   meanCount?: any;
 
-  @Metadata({ data: "json, name=meanSum" })
+  @SpeakeasyMetadata({ data: "json, name=meanSum" })
   meanSum?: any;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: MetricStructuredName;
 
-  @Metadata({ data: "json, name=scalar" })
+  @SpeakeasyMetadata({ data: "json, name=scalar" })
   scalar?: any;
 
-  @Metadata({ data: "json, name=set" })
+  @SpeakeasyMetadata({ data: "json, name=set" })
   set?: any;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

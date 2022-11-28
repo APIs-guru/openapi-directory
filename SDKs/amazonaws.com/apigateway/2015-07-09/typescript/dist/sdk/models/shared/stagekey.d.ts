@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.
 **/

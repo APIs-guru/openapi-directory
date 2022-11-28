@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesReplacePathParams:
-    channel_id: str = field(default=None, metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
-    partner_id: str = field(default=None, metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
+    channel_id: str = field(metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
+    partner_id: str = field(metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DisplayvideoPartnersChannelsSitesReplaceQueryParams:
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesReplaceSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesReplaceRequest:
-    path_params: DisplayvideoPartnersChannelsSitesReplacePathParams = field(default=None)
-    query_params: DisplayvideoPartnersChannelsSitesReplaceQueryParams = field(default=None)
-    request: Optional[shared.ReplaceSitesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoPartnersChannelsSitesReplaceSecurity = field(default=None)
+    path_params: DisplayvideoPartnersChannelsSitesReplacePathParams = field()
+    query_params: DisplayvideoPartnersChannelsSitesReplaceQueryParams = field()
+    security: DisplayvideoPartnersChannelsSitesReplaceSecurity = field()
+    request: Optional[shared.ReplaceSitesRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoPartnersChannelsSitesReplaceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     replace_sites_response: Optional[shared.ReplaceSitesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PiiEntitiesDetectionJobProperties } from "./piientitiesdetectionjobproperties";
 export declare class DescribePiiEntitiesDetectionJobResponse extends SpeakeasyBase {
     piiEntitiesDetectionJobProperties?: PiiEntitiesDetectionJobProperties;

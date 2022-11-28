@@ -1,52 +1,92 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OptionalGeoPointContract } from "./optionalgeopointcontract";
 import { ReleaseEventContract } from "./releaseeventcontract";
 import { LocalizedStringContract } from "./localizedstringcontract";
 import { WebLinkForApiContract } from "./weblinkforapicontract";
+import { ReleaseEventContractInput } from "./releaseeventcontract";
+
 
 export enum VenueForApiContractStatusEnum {
-    Draft = "Draft"
-,    Finished = "Finished"
-,    Approved = "Approved"
-,    Locked = "Locked"
+    Draft = "Draft",
+    Finished = "Finished",
+    Approved = "Approved",
+    Locked = "Locked"
 }
 
 
 export class VenueForApiContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalNames" })
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
   additionalNames?: string;
 
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=addressCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=addressCountryCode" })
   addressCountryCode?: string;
 
-  @Metadata({ data: "json, name=coordinates" })
+  @SpeakeasyMetadata({ data: "json, name=coordinates" })
   coordinates?: OptionalGeoPointContract;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=events", elemType: shared.ReleaseEventContract })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: ReleaseEventContract })
   events?: ReleaseEventContract[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=names", elemType: shared.LocalizedStringContract })
+  @SpeakeasyMetadata({ data: "json, name=names", elemType: LocalizedStringContract })
   names?: LocalizedStringContract[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: VenueForApiContractStatusEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=webLinks", elemType: shared.WebLinkForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=webLinks", elemType: WebLinkForApiContract })
+  webLinks?: WebLinkForApiContract[];
+}
+
+
+export class VenueForApiContractInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
+  additionalNames?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=address" })
+  address?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=addressCountryCode" })
+  addressCountryCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=coordinates" })
+  coordinates?: OptionalGeoPointContract;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: ReleaseEventContractInput })
+  events?: ReleaseEventContractInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=names", elemType: LocalizedStringContract })
+  names?: LocalizedStringContract[];
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: VenueForApiContractStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=webLinks", elemType: WebLinkForApiContract })
   webLinks?: WebLinkForApiContract[];
 }

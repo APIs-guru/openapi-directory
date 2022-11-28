@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Trigger } from "./trigger";
 /**
  * The response message for the `ListTriggers` method.

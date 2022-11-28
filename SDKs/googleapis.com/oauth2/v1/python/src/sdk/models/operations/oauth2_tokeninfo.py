@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -18,12 +19,12 @@ class Oauth2TokeninfoQueryParams:
 
 @dataclass
 class Oauth2TokeninfoRequest:
-    query_params: Oauth2TokeninfoQueryParams = field(default=None)
+    query_params: Oauth2TokeninfoQueryParams = field()
     
 
 @dataclass
 class Oauth2TokeninfoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tokeninfo: Optional[shared.Tokeninfo] = field(default=None)
     

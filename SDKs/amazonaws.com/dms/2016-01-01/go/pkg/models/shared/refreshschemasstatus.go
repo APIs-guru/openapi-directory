@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RefreshSchemasStatus
+// Provides information that describes status of a schema at an endpoint specified by the <code>DescribeRefreshSchemaStatus</code> operation.
 type RefreshSchemasStatus struct {
 	EndpointArn            *string                            `json:"EndpointArn,omitempty"`
 	LastFailureMessage     *string                            `json:"LastFailureMessage,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// GetItemInput
+// Represents the input of a <code>GetItem</code> operation.
 type GetItemInput struct {
 	AttributesToGet          []string                    `json:"AttributesToGet,omitempty"`
 	ConsistentRead           *bool                       `json:"ConsistentRead,omitempty"`

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingPlacementGroupsUpdatePathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DfareportingPlacementGroupsUpdateQueryParams:
 
 @dataclass
 class DfareportingPlacementGroupsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingPlacementGroupsUpdateRequest:
-    path_params: DfareportingPlacementGroupsUpdatePathParams = field(default=None)
-    query_params: DfareportingPlacementGroupsUpdateQueryParams = field(default=None)
+    path_params: DfareportingPlacementGroupsUpdatePathParams = field()
+    query_params: DfareportingPlacementGroupsUpdateQueryParams = field()
+    security: DfareportingPlacementGroupsUpdateSecurity = field()
     request: Optional[shared.PlacementGroup] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingPlacementGroupsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingPlacementGroupsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     placement_group: Optional[shared.PlacementGroup] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlJobSecondaryStatusEnum } from "./automljobsecondarystatusenum";
 import { AutoMlJobStatusEnum } from "./automljobstatusenum";
 import { AutoMlPartialFailureReason } from "./automlpartialfailurereason";
+
 
 
 // AutoMlJobSummary
@@ -10,30 +10,30 @@ import { AutoMlPartialFailureReason } from "./automlpartialfailurereason";
  * Provides a summary about an AutoML job.
 **/
 export class AutoMlJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoMLJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobArn" })
   autoMlJobArn: string;
 
-  @Metadata({ data: "json, name=AutoMLJobName" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobName" })
   autoMlJobName: string;
 
-  @Metadata({ data: "json, name=AutoMLJobSecondaryStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobSecondaryStatus" })
   autoMlJobSecondaryStatus: AutoMlJobSecondaryStatusEnum;
 
-  @Metadata({ data: "json, name=AutoMLJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobStatus" })
   autoMlJobStatus: AutoMlJobStatusEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=PartialFailureReasons", elemType: shared.AutoMlPartialFailureReason })
+  @SpeakeasyMetadata({ data: "json, name=PartialFailureReasons", elemType: AutoMlPartialFailureReason })
   partialFailureReasons?: AutoMlPartialFailureReason[];
 }

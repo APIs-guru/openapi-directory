@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLQueryParams:
 
 @dataclass
 class CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLRequest:
-    path_params: CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLPathParams = field(default=None)
-    query_params: CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLQueryParams = field(default=None)
+    path_params: CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLPathParams = field()
+    query_params: CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLQueryParams = field()
+    security: CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLSecurity = field()
     request: Optional[shared.GenerateDownloadURLRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLSecurity = field(default=None)
     
 
 @dataclass
 class CloudfunctionsProjectsLocationsFunctionsGenerateDownloadURLResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_download_url_response: Optional[shared.GenerateDownloadURLResponse] = field(default=None)
-    status_code: int = field(default=None)
     

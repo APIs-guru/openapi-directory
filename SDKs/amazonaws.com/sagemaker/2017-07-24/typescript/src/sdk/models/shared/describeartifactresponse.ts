@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { UserContext } from "./usercontext";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserContext } from "./usercontext";
 import { MetadataProperties } from "./metadataproperties";
 import { ArtifactSource } from "./artifactsource";
 
 
+
 export class DescribeArtifactResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactArn" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactArn" })
   artifactArn?: string;
 
-  @Metadata({ data: "json, name=ArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactName" })
   artifactName?: string;
 
-  @Metadata({ data: "json, name=ArtifactType" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactType" })
   artifactType?: string;
 
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: UserContext;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: UserContext;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=MetadataProperties" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataProperties" })
   metadataProperties?: MetadataProperties;
 
-  @Metadata({ data: "json, name=Properties" })
+  @SpeakeasyMetadata({ data: "json, name=Properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: ArtifactSource;
 }

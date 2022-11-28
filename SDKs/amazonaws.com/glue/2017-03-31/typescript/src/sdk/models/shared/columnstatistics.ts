@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnStatisticsData } from "./columnstatisticsdata";
+
 
 
 // ColumnStatistics
@@ -7,15 +8,15 @@ import { ColumnStatisticsData } from "./columnstatisticsdata";
  * Represents the generated column-level statistics for a table or partition.
 **/
 export class ColumnStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnalyzedTime" })
+  @SpeakeasyMetadata({ data: "json, name=AnalyzedTime" })
   analyzedTime: Date;
 
-  @Metadata({ data: "json, name=ColumnName" })
+  @SpeakeasyMetadata({ data: "json, name=ColumnName" })
   columnName: string;
 
-  @Metadata({ data: "json, name=ColumnType" })
+  @SpeakeasyMetadata({ data: "json, name=ColumnType" })
   columnType: string;
 
-  @Metadata({ data: "json, name=StatisticsData" })
+  @SpeakeasyMetadata({ data: "json, name=StatisticsData" })
   statisticsData: ColumnStatisticsData;
 }

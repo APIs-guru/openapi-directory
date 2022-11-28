@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { App } from "./app";
+
 
 
 // ListAppsResult
@@ -8,9 +8,9 @@ import { App } from "./app";
  *  The result structure for an Amplify app list request. 
 **/
 export class ListAppsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apps", elemType: shared.App })
+  @SpeakeasyMetadata({ data: "json, name=apps", elemType: App })
   apps: App[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

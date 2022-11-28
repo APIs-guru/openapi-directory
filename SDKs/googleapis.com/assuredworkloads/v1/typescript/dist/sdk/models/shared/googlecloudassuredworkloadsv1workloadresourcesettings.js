@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudAssuredworkloadsV1WorkloadResourceSettingsResourceTypeEnum;
 (function (GoogleCloudAssuredworkloadsV1WorkloadResourceSettingsResourceTypeEnum) {
     GoogleCloudAssuredworkloadsV1WorkloadResourceSettingsResourceTypeEnum["ResourceTypeUnspecified"] = "RESOURCE_TYPE_UNSPECIFIED";
@@ -41,15 +41,15 @@ var GoogleCloudAssuredworkloadsV1WorkloadResourceSettings = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1WorkloadResourceSettings.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceId" }),
+        SpeakeasyMetadata({ data: "json, name=resourceId" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1WorkloadResourceSettings.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceType" }),
+        SpeakeasyMetadata({ data: "json, name=resourceType" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1WorkloadResourceSettings.prototype, "resourceType", void 0);
     return GoogleCloudAssuredworkloadsV1WorkloadResourceSettings;

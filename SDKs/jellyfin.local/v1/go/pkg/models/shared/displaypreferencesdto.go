@@ -1,5 +1,7 @@
 package shared
 
+// DisplayPreferencesDto
+// Defines the display preferences for any item that supports them (usually Folders).
 type DisplayPreferencesDto struct {
 	Client             *string              `json:"Client,omitempty"`
 	CustomPrefs        map[string]string    `json:"CustomPrefs,omitempty"`

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IdentityProviderMapperRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=identityProviderAlias" })
+  @SpeakeasyMetadata({ data: "json, name=identityProviderAlias" })
   identityProviderAlias?: string;
 
-  @Metadata({ data: "json, name=identityProviderMapper" })
+  @SpeakeasyMetadata({ data: "json, name=identityProviderMapper" })
   identityProviderMapper?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

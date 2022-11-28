@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
 /**
  * Contains the labels array that contains all the labels for the dataset.

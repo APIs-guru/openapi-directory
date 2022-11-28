@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IngredientObjectItemsCalorieConversionFactor
 /**
  * An object containing the multiplication factors to be used when calculating energy from macronutrients for a specific food.
@@ -34,15 +33,15 @@ var IngredientObjectItemsCalorieConversionFactor = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=carbohydrate_value" }),
+        SpeakeasyMetadata({ data: "json, name=carbohydrate_value" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsCalorieConversionFactor.prototype, "carbohydrateValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=fat_value" }),
+        SpeakeasyMetadata({ data: "json, name=fat_value" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsCalorieConversionFactor.prototype, "fatValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=protein_value" }),
+        SpeakeasyMetadata({ data: "json, name=protein_value" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsCalorieConversionFactor.prototype, "proteinValue", void 0);
     return IngredientObjectItemsCalorieConversionFactor;
@@ -58,23 +57,23 @@ var IngredientObjectItemsComponents = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data_points" }),
+        SpeakeasyMetadata({ data: "json, name=data_points" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsComponents.prototype, "dataPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=gram_weight" }),
+        SpeakeasyMetadata({ data: "json, name=gram_weight" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsComponents.prototype, "gramWeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_refuse" }),
+        SpeakeasyMetadata({ data: "json, name=is_refuse" }),
         __metadata("design:type", Boolean)
     ], IngredientObjectItemsComponents.prototype, "isRefuse", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsComponents.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=pct_weight" }),
+        SpeakeasyMetadata({ data: "json, name=pct_weight" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsComponents.prototype, "pctWeight", void 0);
     return IngredientObjectItemsComponents;
@@ -90,43 +89,43 @@ var IngredientObjectItemsNutrients = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data_points" }),
+        SpeakeasyMetadata({ data: "json, name=data_points" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsNutrients.prototype, "dataPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsNutrients.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=footnote" }),
+        SpeakeasyMetadata({ data: "json, name=footnote" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsNutrients.prototype, "footnote", void 0);
     __decorate([
-        Metadata({ data: "json, name=max" }),
+        SpeakeasyMetadata({ data: "json, name=max" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsNutrients.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "json, name=measurement_unit" }),
+        SpeakeasyMetadata({ data: "json, name=measurement_unit" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsNutrients.prototype, "measurementUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=median" }),
+        SpeakeasyMetadata({ data: "json, name=median" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsNutrients.prototype, "median", void 0);
     __decorate([
-        Metadata({ data: "json, name=min" }),
+        SpeakeasyMetadata({ data: "json, name=min" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsNutrients.prototype, "min", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsNutrients.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=per_100g" }),
+        SpeakeasyMetadata({ data: "json, name=per_100g" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsNutrients.prototype, "per100g", void 0);
     __decorate([
-        Metadata({ data: "json, name=rank" }),
+        SpeakeasyMetadata({ data: "json, name=rank" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsNutrients.prototype, "rank", void 0);
     return IngredientObjectItemsNutrients;
@@ -142,27 +141,27 @@ var IngredientObjectItemsPortions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data_points" }),
+        SpeakeasyMetadata({ data: "json, name=data_points" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsPortions.prototype, "dataPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsPortions.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=footnote" }),
+        SpeakeasyMetadata({ data: "json, name=footnote" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsPortions.prototype, "footnote", void 0);
     __decorate([
-        Metadata({ data: "json, name=gram_weight" }),
+        SpeakeasyMetadata({ data: "json, name=gram_weight" }),
         __metadata("design:type", Number)
     ], IngredientObjectItemsPortions.prototype, "gramWeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=measurement_unit" }),
+        SpeakeasyMetadata({ data: "json, name=measurement_unit" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsPortions.prototype, "measurementUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=modifier" }),
+        SpeakeasyMetadata({ data: "json, name=modifier" }),
         __metadata("design:type", String)
     ], IngredientObjectItemsPortions.prototype, "modifier", void 0);
     return IngredientObjectItemsPortions;
@@ -178,47 +177,47 @@ var IngredientObjectItems = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=calorie_conversion_factor" }),
+        SpeakeasyMetadata({ data: "json, name=calorie_conversion_factor" }),
         __metadata("design:type", IngredientObjectItemsCalorieConversionFactor)
     ], IngredientObjectItems.prototype, "calorieConversionFactor", void 0);
     __decorate([
-        Metadata({ data: "json, name=categories" }),
+        SpeakeasyMetadata({ data: "json, name=categories" }),
         __metadata("design:type", Array)
     ], IngredientObjectItems.prototype, "categories", void 0);
     __decorate([
-        Metadata({ data: "json, name=common_name" }),
+        SpeakeasyMetadata({ data: "json, name=common_name" }),
         __metadata("design:type", String)
     ], IngredientObjectItems.prototype, "commonName", void 0);
     __decorate([
-        Metadata({ data: "json, name=components", elemType: shared.IngredientObjectItemsComponents }),
+        SpeakeasyMetadata({ data: "json, name=components", elemType: IngredientObjectItemsComponents }),
         __metadata("design:type", Array)
     ], IngredientObjectItems.prototype, "components", void 0);
     __decorate([
-        Metadata({ data: "json, name=footnote" }),
+        SpeakeasyMetadata({ data: "json, name=footnote" }),
         __metadata("design:type", String)
     ], IngredientObjectItems.prototype, "footnote", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], IngredientObjectItems.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nutrients", elemType: shared.IngredientObjectItemsNutrients }),
+        SpeakeasyMetadata({ data: "json, name=nutrients", elemType: IngredientObjectItemsNutrients }),
         __metadata("design:type", Array)
     ], IngredientObjectItems.prototype, "nutrients", void 0);
     __decorate([
-        Metadata({ data: "json, name=portions", elemType: shared.IngredientObjectItemsPortions }),
+        SpeakeasyMetadata({ data: "json, name=portions", elemType: IngredientObjectItemsPortions }),
         __metadata("design:type", Array)
     ], IngredientObjectItems.prototype, "portions", void 0);
     __decorate([
-        Metadata({ data: "json, name=protein_conversion_factor" }),
+        SpeakeasyMetadata({ data: "json, name=protein_conversion_factor" }),
         __metadata("design:type", Number)
     ], IngredientObjectItems.prototype, "proteinConversionFactor", void 0);
     __decorate([
-        Metadata({ data: "json, name=score" }),
+        SpeakeasyMetadata({ data: "json, name=score" }),
         __metadata("design:type", String)
     ], IngredientObjectItems.prototype, "score", void 0);
     __decorate([
-        Metadata({ data: "json, name=search_term" }),
+        SpeakeasyMetadata({ data: "json, name=search_term" }),
         __metadata("design:type", String)
     ], IngredientObjectItems.prototype, "searchTerm", void 0);
     return IngredientObjectItems;
@@ -234,7 +233,7 @@ var IngredientObject = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=items", elemType: shared.IngredientObjectItems }),
+        SpeakeasyMetadata({ data: "json, name=items", elemType: IngredientObjectItems }),
         __metadata("design:type", Array)
     ], IngredientObject.prototype, "items", void 0);
     return IngredientObject;

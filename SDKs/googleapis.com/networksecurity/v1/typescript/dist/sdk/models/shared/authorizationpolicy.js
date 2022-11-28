@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Rule } from "./rule";
 export var AuthorizationPolicyActionEnum;
 (function (AuthorizationPolicyActionEnum) {
     AuthorizationPolicyActionEnum["ActionUnspecified"] = "ACTION_UNSPECIFIED";
@@ -40,33 +40,65 @@ var AuthorizationPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", String)
     ], AuthorizationPolicy.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], AuthorizationPolicy.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], AuthorizationPolicy.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], AuthorizationPolicy.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AuthorizationPolicy.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=rules", elemType: shared.Rule }),
+        SpeakeasyMetadata({ data: "json, name=rules", elemType: Rule }),
         __metadata("design:type", Array)
     ], AuthorizationPolicy.prototype, "rules", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], AuthorizationPolicy.prototype, "updateTime", void 0);
     return AuthorizationPolicy;
 }(SpeakeasyBase));
 export { AuthorizationPolicy };
+// AuthorizationPolicyInput
+/**
+ * AuthorizationPolicy is a resource that specifies how a server should authorize incoming connections. This resource in itself does not change the configuration unless it's attached to a target https proxy or endpoint config selector resource.
+**/
+var AuthorizationPolicyInput = /** @class */ (function (_super) {
+    __extends(AuthorizationPolicyInput, _super);
+    function AuthorizationPolicyInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=action" }),
+        __metadata("design:type", String)
+    ], AuthorizationPolicyInput.prototype, "action", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], AuthorizationPolicyInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], AuthorizationPolicyInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], AuthorizationPolicyInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=rules", elemType: Rule }),
+        __metadata("design:type", Array)
+    ], AuthorizationPolicyInput.prototype, "rules", void 0);
+    return AuthorizationPolicyInput;
+}(SpeakeasyBase));
+export { AuthorizationPolicyInput };

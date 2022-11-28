@@ -1,92 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum UnliWithoutApplicationnkApplicationProviderEnum {
-    Messenger = "messenger"
-,    ViberServiceMsg = "viber_service_msg"
-,    Whatsapp = "whatsapp"
+    Messenger = "messenger",
+    ViberServiceMsg = "viber_service_msg",
+    Whatsapp = "whatsapp"
 }
 
 
 export class UnliWithoutApplicationnkApplicationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=application_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=application_id" })
   applicationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=external_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=external_id" })
   externalId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=provider" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=provider" })
   provider: UnliWithoutApplicationnkApplicationProviderEnum;
 }
 
 
-export class UnliWithoutApplicationnkApplicationSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  bearerAuth: shared.SchemeBearerAuth;
-}
-
-
-export class UnliWithoutApplicationnkApplicationSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basicAuth: shared.SchemeBasicAuth;
-}
-
-
 export class UnliWithoutApplicationnkApplicationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UnliWithoutApplicationnkApplicationSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  bearerAuth?: shared.SchemeBearerAuth;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UnliWithoutApplicationnkApplicationSecurityOption2;
-}
-
-
-export class UnliWithoutApplicationnkApplicationRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UnliWithoutApplicationnkApplicationPathParams;
-
-  @Metadata()
-  security: UnliWithoutApplicationnkApplicationSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basicAuth?: shared.SchemeBasicAuth;
 }
 
 
 export class UnliWithoutApplicationnkApplication403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class UnliWithoutApplicationnkApplication409ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
+export class UnliWithoutApplicationnkApplicationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UnliWithoutApplicationnkApplicationPathParams;
+
+  @SpeakeasyMetadata()
+  security: UnliWithoutApplicationnkApplicationSecurity;
+}
+
+
 export class UnliWithoutApplicationnkApplicationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndOneResponse?: shared.FourHundredAndOneResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unliWithoutApplicationnkApplication403ApplicationJsonObject?: UnliWithoutApplicationnkApplication403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unliWithoutApplicationnkApplication409ApplicationJsonObject?: UnliWithoutApplicationnkApplication409ApplicationJson;
 }

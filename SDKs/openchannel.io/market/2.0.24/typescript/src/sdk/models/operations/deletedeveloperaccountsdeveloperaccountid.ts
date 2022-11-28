@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteDeveloperAccountsDeveloperAccountIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=developerAccountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerAccountId" })
   developerAccountId: string;
 }
 
 
 export class DeleteDeveloperAccountsDeveloperAccountIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteDeveloperAccountsDeveloperAccountIdPathParams;
 }
 
 
 export class DeleteDeveloperAccountsDeveloperAccountIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ClusterSummary
+// The summary description of the cluster.
 type ClusterSummary struct {
 	ClusterArn              *string        `json:"ClusterArn,omitempty"`
 	ID                      *string        `json:"Id,omitempty"`

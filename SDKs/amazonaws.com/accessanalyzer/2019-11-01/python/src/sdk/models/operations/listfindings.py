@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,35 +29,39 @@ class ListFindingsHeaders:
 @dataclass_json
 @dataclass
 class ListFindingsRequestBodySort:
-    attribute_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeName' }})
-    order_by: Optional[shared.OrderByEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderBy' }})
+    r"""ListFindingsRequestBodySort
+    The criteria used to sort.
+    """
+    
+    attribute_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributeName') }})
+    order_by: Optional[shared.OrderByEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderBy') }})
     
 
 @dataclass_json
 @dataclass
 class ListFindingsRequestBody:
-    analyzer_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'analyzerArn' }})
-    filter: Optional[dict[str, shared.Criterion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    sort: Optional[ListFindingsRequestBodySort] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sort' }})
+    analyzer_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('analyzerArn') }})
+    filter: Optional[dict[str, shared.Criterion]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    sort: Optional[ListFindingsRequestBodySort] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sort') }})
     
 
 @dataclass
 class ListFindingsRequest:
-    query_params: ListFindingsQueryParams = field(default=None)
-    headers: ListFindingsHeaders = field(default=None)
-    request: ListFindingsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListFindingsHeaders = field()
+    query_params: ListFindingsQueryParams = field()
+    request: ListFindingsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListFindingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_findings_response: Optional[shared.ListFindingsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

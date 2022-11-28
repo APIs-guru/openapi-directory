@@ -1,5 +1,7 @@
 package shared
 
+// FormResponse
+// A form response.
 type FormResponse struct {
 	Answers           map[string]Answer `json:"answers,omitempty"`
 	CreateTime        *string           `json:"createTime,omitempty"`

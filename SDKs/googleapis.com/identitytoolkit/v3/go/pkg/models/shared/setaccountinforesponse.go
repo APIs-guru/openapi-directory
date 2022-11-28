@@ -7,6 +7,8 @@ type SetAccountInfoResponseProviderUserInfo struct {
 	ProviderID  *string `json:"providerId,omitempty"`
 }
 
+// SetAccountInfoResponse
+// Respone of setting the account information.
 type SetAccountInfoResponse struct {
 	DisplayName      *string                                  `json:"displayName,omitempty"`
 	Email            *string                                  `json:"email,omitempty"`

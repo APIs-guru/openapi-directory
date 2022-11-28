@@ -36,6 +36,8 @@ const (
 	ImageButtonIconEnumVideoPlay              ImageButtonIconEnum = "VIDEO_PLAY"
 )
 
+// ImageButton
+// An image button with an onclick action.
 type ImageButton struct {
 	Icon    *ImageButtonIconEnum `json:"icon,omitempty"`
 	IconURL *string              `json:"iconUrl,omitempty"`

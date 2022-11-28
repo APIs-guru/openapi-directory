@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetareacodefromnumberQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" })
   number: string;
 }
 
 
-export class GetareacodefromnumberRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetareacodefromnumberQueryParams;
-}
-
-
 export class Getareacodefromnumber200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=Abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=AreaCode" })
+  @SpeakeasyMetadata({ data: "json, name=AreaCode" })
   areaCode?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Locale" })
+  @SpeakeasyMetadata({ data: "json, name=Locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=PrimaryCity" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryCity" })
   primaryCity?: string;
 }
 
 
+export class GetareacodefromnumberRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetareacodefromnumberQueryParams;
+}
+
+
 export class GetareacodefromnumberResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getareacodefromnumber200ApplicationJsonObject?: Getareacodefromnumber200ApplicationJson;
 }

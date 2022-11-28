@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StoredQueryMetadata
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns details of a specific query. 
 **/
 export class StoredQueryMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=QueryArn" })
+  @SpeakeasyMetadata({ data: "json, name=QueryArn" })
   queryArn: string;
 
-  @Metadata({ data: "json, name=QueryId" })
+  @SpeakeasyMetadata({ data: "json, name=QueryId" })
   queryId: string;
 
-  @Metadata({ data: "json, name=QueryName" })
+  @SpeakeasyMetadata({ data: "json, name=QueryName" })
   queryName: string;
 }

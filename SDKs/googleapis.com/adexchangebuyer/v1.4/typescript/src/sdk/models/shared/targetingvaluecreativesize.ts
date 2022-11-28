@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetingValueSize } from "./targetingvaluesize";
-import { TargetingValueSize } from "./targetingvaluesize";
+
 
 
 // TargetingValueCreativeSize
@@ -9,21 +8,21 @@ import { TargetingValueSize } from "./targetingvaluesize";
  * Next Id: 7
 **/
 export class TargetingValueCreativeSize extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedFormats" })
+  @SpeakeasyMetadata({ data: "json, name=allowedFormats" })
   allowedFormats?: string[];
 
-  @Metadata({ data: "json, name=companionSizes", elemType: shared.TargetingValueSize })
+  @SpeakeasyMetadata({ data: "json, name=companionSizes", elemType: TargetingValueSize })
   companionSizes?: TargetingValueSize[];
 
-  @Metadata({ data: "json, name=creativeSizeType" })
+  @SpeakeasyMetadata({ data: "json, name=creativeSizeType" })
   creativeSizeType?: string;
 
-  @Metadata({ data: "json, name=nativeTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=nativeTemplate" })
   nativeTemplate?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: TargetingValueSize;
 
-  @Metadata({ data: "json, name=skippableAdType" })
+  @SpeakeasyMetadata({ data: "json, name=skippableAdType" })
   skippableAdType?: string;
 }

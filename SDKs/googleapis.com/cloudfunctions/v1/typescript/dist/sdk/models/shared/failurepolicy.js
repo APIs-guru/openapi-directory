@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FailurePolicy
 /**
  * Describes the policy in case of function's execution failure. If empty, then defaults to ignoring failures (i.e. not retrying them).
@@ -33,7 +33,7 @@ var FailurePolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=retry" }),
+        SpeakeasyMetadata({ data: "json, name=retry" }),
         __metadata("design:type", Map)
     ], FailurePolicy.prototype, "retry", void 0);
     return FailurePolicy;

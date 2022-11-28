@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DecodeViaEpiPathParams:
-    vin: str = field(default=None, metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
+    vin: str = field(metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class DecodeViaEpiQueryParams:
 
 @dataclass
 class DecodeViaEpiRequest:
-    path_params: DecodeViaEpiPathParams = field(default=None)
-    query_params: DecodeViaEpiQueryParams = field(default=None)
+    path_params: DecodeViaEpiPathParams = field()
+    query_params: DecodeViaEpiQueryParams = field()
     
 
 @dataclass
 class DecodeViaEpiResponse:
+    content_type: str = field()
+    status_code: int = field()
     build: Optional[shared.Build] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

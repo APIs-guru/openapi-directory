@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Notification } from "./notification";
 // Settings
 /**
  * Customer-level settings.
@@ -34,7 +34,7 @@ var Settings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=notifications", elemType: shared.Notification }),
+        SpeakeasyMetadata({ data: "json, name=notifications", elemType: Notification }),
         __metadata("design:type", Array)
     ], Settings.prototype, "notifications", void 0);
     return Settings;

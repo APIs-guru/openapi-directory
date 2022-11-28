@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Metaline } from "./metaline";
+
 
 
 // ObjectDisplayOptions
@@ -8,9 +8,9 @@ import { Metaline } from "./metaline";
  * The display options for an object.
 **/
 export class ObjectDisplayOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metalines", elemType: shared.Metaline })
+  @SpeakeasyMetadata({ data: "json, name=metalines", elemType: Metaline })
   metalines?: Metaline[];
 
-  @Metadata({ data: "json, name=objectDisplayLabel" })
+  @SpeakeasyMetadata({ data: "json, name=objectDisplayLabel" })
   objectDisplayLabel?: string;
 }

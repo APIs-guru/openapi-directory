@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChartDataDatasourceTypeEnum {
-    Druid = "druid"
-,    Table = "table"
+    Druid = "druid",
+    Table = "table"
 }
 
 
 export class ChartDataDatasource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ChartDataDatasourceTypeEnum;
 }

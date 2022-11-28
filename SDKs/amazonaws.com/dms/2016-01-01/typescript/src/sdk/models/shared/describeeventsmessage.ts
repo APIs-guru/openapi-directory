@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
 import { SourceTypeEnum } from "./sourcetypeenum";
+
 
 
 // DescribeEventsMessage
@@ -9,30 +9,30 @@ import { SourceTypeEnum } from "./sourcetypeenum";
  * <p/>
 **/
 export class DescribeEventsMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=EventCategories" })
+  @SpeakeasyMetadata({ data: "json, name=EventCategories" })
   eventCategories?: string[];
 
-  @Metadata({ data: "json, name=Filters", elemType: shared.Filter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: Filter })
   filters?: Filter[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRecords" })
   maxRecords?: number;
 
-  @Metadata({ data: "json, name=SourceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=SourceIdentifier" })
   sourceIdentifier?: string;
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: SourceTypeEnum;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 }

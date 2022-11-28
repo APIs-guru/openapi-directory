@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvHadEntitlement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasHadEntitlements" })
+  @SpeakeasyMetadata({ data: "json, name=hasHadEntitlements" })
   hasHadEntitlements: boolean;
 }

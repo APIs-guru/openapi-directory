@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ModifyNetworkSmDevicesTagsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class ModifyNetworkSmDevicesTagsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string[];
 
-  @Metadata({ data: "json, name=serials" })
+  @SpeakeasyMetadata({ data: "json, name=serials" })
   serials?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags: string[];
 
-  @Metadata({ data: "json, name=updateAction" })
+  @SpeakeasyMetadata({ data: "json, name=updateAction" })
   updateAction: string;
 
-  @Metadata({ data: "json, name=wifiMacs" })
+  @SpeakeasyMetadata({ data: "json, name=wifiMacs" })
   wifiMacs?: string[];
 }
 
 
 export class ModifyNetworkSmDevicesTagsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ModifyNetworkSmDevicesTagsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: ModifyNetworkSmDevicesTagsRequestBody;
 }
 
 
 export class ModifyNetworkSmDevicesTagsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   modifyNetworkSmDevicesTags200ApplicationJsonObject?: Map<string, any>;
 }

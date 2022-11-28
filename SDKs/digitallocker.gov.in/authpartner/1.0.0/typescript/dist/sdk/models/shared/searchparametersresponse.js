@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SearchParametersResponse = /** @class */ (function (_super) {
     __extends(SearchParametersResponse, _super);
     function SearchParametersResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=example" }),
+        SpeakeasyMetadata({ data: "json, name=example" }),
         __metadata("design:type", String)
     ], SearchParametersResponse.prototype, "example", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], SearchParametersResponse.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=paramname" }),
+        SpeakeasyMetadata({ data: "json, name=paramname" }),
         __metadata("design:type", String)
     ], SearchParametersResponse.prototype, "paramname", void 0);
     __decorate([
-        Metadata({ data: "json, name=valuelist" }),
+        SpeakeasyMetadata({ data: "json, name=valuelist" }),
         __metadata("design:type", Object)
     ], SearchParametersResponse.prototype, "valuelist", void 0);
     return SearchParametersResponse;

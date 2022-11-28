@@ -1,20 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import language_enum
-from . import location
-from . import mappingentry
-from . import catalogentry
-from . import catalogentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetPlanRequest:
-    additional_plan_options_map: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalPlanOptionsMap' }})
-    language: Optional[language_enum.LanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Language' }})
-    location: Optional[location.Location] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Location' }})
-    mapping: List[mappingentry.MappingEntry] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Mapping' }})
-    sinks: Optional[List[catalogentry.CatalogEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sinks' }})
-    source: catalogentry.CatalogEntry = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Source' }})
+    mapping: List[MappingEntry] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Mapping') }})
+    source: CatalogEntry = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Source') }})
+    additional_plan_options_map: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalPlanOptionsMap') }})
+    language: Optional[LanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Language') }})
+    location: Optional[Location] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Location') }})
+    sinks: Optional[List[CatalogEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Sinks') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RtiJobInstructionRtiJobInstructionEmployer
+// The rti job instructions' employer
 type RtiJobInstructionRtiJobInstructionEmployer struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
@@ -22,12 +24,16 @@ const (
 	RtiJobInstructionRtiJobInstructionLateReasonEnumH RtiJobInstructionRtiJobInstructionLateReasonEnum = "H"
 )
 
+// RtiJobInstructionRtiJobInstructionPaySchedule
+// The rti job instructions' pay schedule
 type RtiJobInstructionRtiJobInstructionPaySchedule struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
+// RtiJobInstructionRtiJobInstructionRtiTransaction
+// The rti job instructions' rti transaction
 type RtiJobInstructionRtiJobInstructionRtiTransaction struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

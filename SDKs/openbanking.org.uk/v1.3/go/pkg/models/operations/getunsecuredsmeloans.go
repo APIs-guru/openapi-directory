@@ -9,10 +9,6 @@ type GetUnsecuredSmeLoansHeaders struct {
 	IfNoneMatch     *string `header:"style=simple,explode=false,name=If-None-Match"`
 }
 
-type GetUnsecuredSmeLoansRequest struct {
-	Headers GetUnsecuredSmeLoansHeaders
-}
-
 type GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum string
 
 const (
@@ -151,6 +147,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumRegularDeposit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "RegularDeposit"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail
+// Benefit detail
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail struct {
 	BenefitDescription *string                                                                                                                               `json:"BenefitDescription,omitempty"`
 	BenefitID          *string                                                                                                                               `json:"BenefitID,omitempty"`
@@ -166,6 +164,8 @@ type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBene
 	PromotionStartDate *string                                                                                                                               `json:"PromotionStartDate,omitempty"`
 }
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem
+// Benefit Item
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem struct {
 	BenefitDetail               []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail `json:"BenefitDetail,omitempty"`
 	DateOfChange                *string                                                                                                               `json:"DateOfChange,omitempty"`
@@ -182,11 +182,15 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum = "Regular"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup
+// Benefit Interest Group
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup struct {
 	BenefitItem    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem         `json:"BenefitItem"`
 	BenefitSubType *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum `json:"BenefitSubType,omitempty"`
 }
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefits
+// Benefit
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefits struct {
 	Benefit      bool                                                                                          `json:"Benefit"`
 	BenefitGroup []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup `json:"BenefitGroup,omitempty"`
@@ -271,6 +275,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumTurnover    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "Turnover"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibility
+// Eligibility
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibility struct {
 	AgeRestricted                    bool                                                                                                             `json:"AgeRestricted"`
 	AnnualBusinessTurnover           *string                                                                                                          `json:"AnnualBusinessTurnover,omitempty"`
@@ -333,6 +339,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumYearly                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Yearly"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails
+// Fee Sub Details
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails struct {
 	FeeAmount           *string                                                                                                                                   `json:"FeeAmount,omitempty"`
 	FeeFrequency        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum `json:"FeeFrequency"`
@@ -721,6 +729,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashFeePercent                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashFeePercent"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetail
+// Fee Detail
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetail struct {
 	DateOfChange                *string                                                                                                                   `json:"DateOfChange,omitempty"`
 	FeeSubDetails               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails `json:"FeeSubDetails"`
@@ -739,11 +749,15 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = "Regular"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetails
+// Fee Details
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetails struct {
 	FeeDetail  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetail      `json:"FeeDetail"`
 	FeeSubType GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum `json:"FeeSubType"`
 }
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFees
+// Fees
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFees struct {
 	DateOfChange                *string                                                                                               `json:"DateOfChange,omitempty"`
 	FeeDetails                  []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetails `json:"FeeDetails"`
@@ -762,6 +776,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum = "Regular"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndCharges
+// Fees And Charges
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndCharges struct {
 	Fees         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFees             `json:"Fees"`
 	ProductState GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum `json:"ProductState"`
@@ -813,6 +829,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumTierMinimum GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "TierMinimum"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricing
+// Loan Pricing
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricing struct {
 	IndicativeRate           string                                                                                                             `json:"IndicativeRate"`
 	LoanLengthIncrement      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum  `json:"LoanLengthIncrement"`
@@ -834,6 +852,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum = "Regular"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItem
+// Loan Item
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItem struct {
 	CcaRegulatedEntity                   bool                                                                                            `json:"CCARegulatedEntity"`
 	DateOfChange                         *string                                                                                         `json:"DateOfChange,omitempty"`
@@ -854,21 +874,29 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnumEu GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = "EU"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand
+// Brand
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand struct {
 	TrademarkID      string                                                                                                       `json:"TrademarkID"`
 	TrademarkIpoCode GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum `json:"TrademarkIPOCode"`
 }
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName
+// Organisation Name
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName struct {
 	LegalName string `json:"LegalName"`
 }
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation
+// Parent organisation
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation struct {
 	Bic              *string                                                                                                               `json:"BIC,omitempty"`
 	Lei              *string                                                                                                               `json:"LEI,omitempty"`
 	OrganisationName GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation
+// Organisation
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation struct {
 	Brand              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand              `json:"Brand"`
 	ParentOrganisation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation `json:"ParentOrganisation"`
@@ -897,6 +925,8 @@ const (
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnumSmeUnsecuredLoan     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum = "SmeUnsecuredLoan"
 )
 
+// GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData
+// SME Loan
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData struct {
 	ArrearsTreatment       *string                                                                                             `json:"ArrearsTreatment,omitempty"`
 	Benefits               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefits                     `json:"Benefits"`
@@ -949,6 +979,10 @@ type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
 	Data []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData   `json:"data"`
 	Meta GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
+}
+
+type GetUnsecuredSmeLoansRequest struct {
+	Headers GetUnsecuredSmeLoansHeaders
 }
 
 type GetUnsecuredSmeLoansResponse struct {

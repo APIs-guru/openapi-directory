@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuperannuationCalculationTypeEnum } from "./superannuationcalculationtypeenum";
 import { SuperannuationContributionTypeEnum } from "./superannuationcontributiontypeenum";
 
 
+
 export class SuperannuationLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=CalculationType" })
+  @SpeakeasyMetadata({ data: "json, name=CalculationType" })
   calculationType?: SuperannuationCalculationTypeEnum;
 
-  @Metadata({ data: "json, name=ContributionType" })
+  @SpeakeasyMetadata({ data: "json, name=ContributionType" })
   contributionType?: SuperannuationContributionTypeEnum;
 
-  @Metadata({ data: "json, name=ExpenseAccountCode" })
+  @SpeakeasyMetadata({ data: "json, name=ExpenseAccountCode" })
   expenseAccountCode?: string;
 
-  @Metadata({ data: "json, name=LiabilityAccountCode" })
+  @SpeakeasyMetadata({ data: "json, name=LiabilityAccountCode" })
   liabilityAccountCode?: string;
 
-  @Metadata({ data: "json, name=MinimumMonthlyEarnings" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumMonthlyEarnings" })
   minimumMonthlyEarnings?: number;
 
-  @Metadata({ data: "json, name=PaymentDateForThisPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentDateForThisPeriod" })
   paymentDateForThisPeriod?: string;
 
-  @Metadata({ data: "json, name=Percentage" })
+  @SpeakeasyMetadata({ data: "json, name=Percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=SuperMembershipID" })
+  @SpeakeasyMetadata({ data: "json, name=SuperMembershipID" })
   superMembershipId?: string;
 }

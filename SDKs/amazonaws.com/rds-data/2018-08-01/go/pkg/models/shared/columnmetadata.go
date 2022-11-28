@@ -1,5 +1,7 @@
 package shared
 
+// ColumnMetadata
+// Contains the metadata for a column.
 type ColumnMetadata struct {
 	ArrayBaseColumnType *int64  `json:"arrayBaseColumnType,omitempty"`
 	IsAutoIncrement     *bool   `json:"isAutoIncrement,omitempty"`

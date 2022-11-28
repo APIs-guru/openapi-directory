@@ -11,13 +11,13 @@ type CreateConversationRequestBody struct {
 	Properties  *shared.ConversationProperties `json:"properties,omitempty"`
 }
 
-type CreateConversationRequest struct {
-	Request *CreateConversationRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateConversation200ApplicationJSON struct {
 	Href string `json:"href"`
 	ID   string `json:"id"`
+}
+
+type CreateConversationRequest struct {
+	Request *CreateConversationRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateConversationResponse struct {

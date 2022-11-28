@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageFields } from "./imagefields";
 import { ProductOptionVariantEdit } from "./productoptionvariantedit";
 
 
+
 export class VariantFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: ImageFields;
 
-  @Metadata({ data: "json, name=options", elemType: shared.ProductOptionVariantEdit })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: ProductOptionVariantEdit })
   options?: ProductOptionVariantEdit[];
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku?: string;
 
-  @Metadata({ data: "json, name=stock" })
+  @SpeakeasyMetadata({ data: "json, name=stock" })
   stock?: number;
 
-  @Metadata({ data: "json, name=stock_unlimited" })
+  @SpeakeasyMetadata({ data: "json, name=stock_unlimited" })
   stockUnlimited?: boolean;
 }

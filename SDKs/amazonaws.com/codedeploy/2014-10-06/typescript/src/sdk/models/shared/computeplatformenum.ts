@@ -1,7 +1,8 @@
 
 
+
 export enum ComputePlatformEnum {
-    Server = "Server"
-,    Lambda = "Lambda"
-,    Ecs = "ECS"
+    Server = "Server",
+    Lambda = "Lambda",
+    Ecs = "ECS"
 }

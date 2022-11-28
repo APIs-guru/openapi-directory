@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingTargetTrackingScalingPolicyConfigurationUpdate } from "./autoscalingtargettrackingscalingpolicyconfigurationupdate";
+
 
 
 // AutoScalingPolicyUpdate
@@ -7,9 +8,9 @@ import { AutoScalingTargetTrackingScalingPolicyConfigurationUpdate } from "./aut
  * Represents the auto scaling policy to be modified.
 **/
 export class AutoScalingPolicyUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyName" })
   policyName?: string;
 
-  @Metadata({ data: "json, name=TargetTrackingScalingPolicyConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=TargetTrackingScalingPolicyConfiguration" })
   targetTrackingScalingPolicyConfiguration: AutoScalingTargetTrackingScalingPolicyConfigurationUpdate;
 }

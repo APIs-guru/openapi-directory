@@ -1,5 +1,7 @@
 package shared
 
+// Place
+// Place
 type Place struct {
 	Address    *Address          `json:"address,omitempty"`
 	Area       *Area             `json:"area,omitempty"`

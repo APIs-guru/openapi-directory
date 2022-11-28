@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ConfigConfigGetHeaders = /** @class */ (function (_super) {
     __extends(ConfigConfigGetHeaders, _super);
@@ -30,7 +30,7 @@ var ConfigConfigGetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" }),
         __metadata("design:type", String)
     ], ConfigConfigGetHeaders.prototype, "authorization", void 0);
     return ConfigConfigGetHeaders;
@@ -42,7 +42,7 @@ var ConfigConfigGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ConfigConfigGetHeaders)
     ], ConfigConfigGetRequest.prototype, "headers", void 0);
     return ConfigConfigGetRequest;
@@ -54,19 +54,19 @@ var ConfigConfigGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Config)
     ], ConfigConfigGetResponse.prototype, "config", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ConfigConfigGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], ConfigConfigGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ConfigConfigGetResponse.prototype, "statusCode", void 0);
     return ConfigConfigGetResponse;

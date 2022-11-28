@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationSource } from "./applicationsource";
 import { ScalingInstruction } from "./scalinginstruction";
 export declare class UpdateScalingPlanRequest extends SpeakeasyBase {

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CpuInfo } from "./cpuinfo";
 import { MemoryInfo } from "./memoryinfo";
+
 
 
 // PerfEnvironment
@@ -8,9 +9,9 @@ import { MemoryInfo } from "./memoryinfo";
  * Encapsulates performance environment info
 **/
 export class PerfEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuInfo" })
+  @SpeakeasyMetadata({ data: "json, name=cpuInfo" })
   cpuInfo?: CpuInfo;
 
-  @Metadata({ data: "json, name=memoryInfo" })
+  @SpeakeasyMetadata({ data: "json, name=memoryInfo" })
   memoryInfo?: MemoryInfo;
 }

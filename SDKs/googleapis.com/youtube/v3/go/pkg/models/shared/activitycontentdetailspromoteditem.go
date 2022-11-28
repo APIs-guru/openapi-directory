@@ -7,6 +7,8 @@ const (
 	ActivityContentDetailsPromotedItemCtaTypeEnumVisitAdvertiserSite ActivityContentDetailsPromotedItemCtaTypeEnum = "visitAdvertiserSite"
 )
 
+// ActivityContentDetailsPromotedItem
+// Details about a resource which is being promoted.
 type ActivityContentDetailsPromotedItem struct {
 	AdTag               *string                                        `json:"adTag,omitempty"`
 	ClickTrackingURL    *string                                        `json:"clickTrackingUrl,omitempty"`

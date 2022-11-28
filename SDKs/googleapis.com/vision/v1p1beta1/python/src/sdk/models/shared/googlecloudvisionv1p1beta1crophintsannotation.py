@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudvisionv1p1beta1crophint
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudVisionV1p1beta1CropHintsAnnotation:
-    crop_hints: Optional[List[googlecloudvisionv1p1beta1crophint.GoogleCloudVisionV1p1beta1CropHint]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cropHints' }})
+    r"""GoogleCloudVisionV1p1beta1CropHintsAnnotation
+    Set of crop hints that are used to generate new crops when serving images.
+    """
+    
+    crop_hints: Optional[List[GoogleCloudVisionV1p1beta1CropHint]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cropHints') }})
     

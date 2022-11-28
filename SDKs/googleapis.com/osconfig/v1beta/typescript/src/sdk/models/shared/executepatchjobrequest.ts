@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchInstanceFilter } from "./patchinstancefilter";
 import { PatchConfig } from "./patchconfig";
 import { PatchRollout } from "./patchrollout";
+
 
 
 // ExecutePatchJobRequest
@@ -9,24 +10,24 @@ import { PatchRollout } from "./patchrollout";
  * A request message to initiate patching across Compute Engine instances.
 **/
 export class ExecutePatchJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=dryRun" })
+  @SpeakeasyMetadata({ data: "json, name=dryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=instanceFilter" })
+  @SpeakeasyMetadata({ data: "json, name=instanceFilter" })
   instanceFilter?: PatchInstanceFilter;
 
-  @Metadata({ data: "json, name=patchConfig" })
+  @SpeakeasyMetadata({ data: "json, name=patchConfig" })
   patchConfig?: PatchConfig;
 
-  @Metadata({ data: "json, name=rollout" })
+  @SpeakeasyMetadata({ data: "json, name=rollout" })
   rollout?: PatchRollout;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import search_line
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchContentMatch:
-    lines: Optional[List[search_line.SearchLine]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lines' }})
+    lines: Optional[List[SearchLine]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lines') }})
     

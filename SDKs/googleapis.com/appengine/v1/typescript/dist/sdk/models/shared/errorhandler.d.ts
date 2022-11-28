@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ErrorHandlerErrorCodeEnum {
     ErrorCodeUnspecified = "ERROR_CODE_UNSPECIFIED",
     ErrorCodeDefault = "ERROR_CODE_DEFAULT",

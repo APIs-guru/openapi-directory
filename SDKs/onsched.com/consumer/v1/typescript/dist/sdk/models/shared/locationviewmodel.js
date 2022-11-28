@@ -22,106 +22,106 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var LocationViewModel = /** @class */ (function (_super) {
     __extends(LocationViewModel, _super);
     function LocationViewModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=adminEmail" }),
+        SpeakeasyMetadata({ data: "json, name=adminEmail" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "adminEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=adminName" }),
+        SpeakeasyMetadata({ data: "json, name=adminName" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "adminName", void 0);
     __decorate([
-        Metadata({ data: "json, name=companyId" }),
+        SpeakeasyMetadata({ data: "json, name=companyId" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=companyName" }),
+        SpeakeasyMetadata({ data: "json, name=companyName" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=fax" }),
+        SpeakeasyMetadata({ data: "json, name=fax" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "fax", void 0);
     __decorate([
-        Metadata({ data: "json, name=friendlyId" }),
+        SpeakeasyMetadata({ data: "json, name=friendlyId" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "friendlyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageUrl" }),
+        SpeakeasyMetadata({ data: "json, name=imageUrl" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "imageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=latitude" }),
+        SpeakeasyMetadata({ data: "json, name=latitude" }),
         __metadata("design:type", Number)
     ], LocationViewModel.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=logo" }),
+        SpeakeasyMetadata({ data: "json, name=logo" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "logo", void 0);
     __decorate([
-        Metadata({ data: "json, name=longitude" }),
+        SpeakeasyMetadata({ data: "json, name=longitude" }),
         __metadata("design:type", Number)
     ], LocationViewModel.prototype, "longitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=maxCapacity" }),
         __metadata("design:type", Number)
     ], LocationViewModel.prototype, "maxCapacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxGroupSize" }),
+        SpeakeasyMetadata({ data: "json, name=maxGroupSize" }),
         __metadata("design:type", Number)
     ], LocationViewModel.prototype, "maxGroupSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectName" }),
+        SpeakeasyMetadata({ data: "json, name=objectName" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "objectName", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone" }),
+        SpeakeasyMetadata({ data: "json, name=phone" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "phone", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryBusiness" }),
+        SpeakeasyMetadata({ data: "json, name=primaryBusiness" }),
         __metadata("design:type", Boolean)
     ], LocationViewModel.prototype, "primaryBusiness", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryCalendarId" }),
+        SpeakeasyMetadata({ data: "json, name=primaryCalendarId" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "primaryCalendarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionId" }),
+        SpeakeasyMetadata({ data: "json, name=regionId" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "regionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezoneIana" }),
+        SpeakeasyMetadata({ data: "json, name=timezoneIana" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "timezoneIana", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezoneId" }),
+        SpeakeasyMetadata({ data: "json, name=timezoneId" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "timezoneId", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezoneOffset" }),
+        SpeakeasyMetadata({ data: "json, name=timezoneOffset" }),
         __metadata("design:type", Number)
     ], LocationViewModel.prototype, "timezoneOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=website" }),
+        SpeakeasyMetadata({ data: "json, name=website" }),
         __metadata("design:type", String)
     ], LocationViewModel.prototype, "website", void 0);
     return LocationViewModel;

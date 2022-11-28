@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartnerAdServerConfig } from "./partneradserverconfig";
 import { PartnerDataAccessConfig } from "./partnerdataaccessconfig";
 import { ExchangeConfig } from "./exchangeconfig";
 import { PartnerGeneralConfig } from "./partnergeneralconfig";
 
+
 export enum PartnerEntityStatusEnum {
-    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED"
-,    EntityStatusActive = "ENTITY_STATUS_ACTIVE"
-,    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED"
-,    EntityStatusDraft = "ENTITY_STATUS_DRAFT"
-,    EntityStatusPaused = "ENTITY_STATUS_PAUSED"
-,    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
+    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED",
+    EntityStatusActive = "ENTITY_STATUS_ACTIVE",
+    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED",
+    EntityStatusDraft = "ENTITY_STATUS_DRAFT",
+    EntityStatusPaused = "ENTITY_STATUS_PAUSED",
+    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
 }
 
 
@@ -19,30 +20,30 @@ export enum PartnerEntityStatusEnum {
  * A single partner in Display & Video 360 (DV360).
 **/
 export class Partner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adServerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=adServerConfig" })
   adServerConfig?: PartnerAdServerConfig;
 
-  @Metadata({ data: "json, name=dataAccessConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dataAccessConfig" })
   dataAccessConfig?: PartnerDataAccessConfig;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=entityStatus" })
+  @SpeakeasyMetadata({ data: "json, name=entityStatus" })
   entityStatus?: PartnerEntityStatusEnum;
 
-  @Metadata({ data: "json, name=exchangeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=exchangeConfig" })
   exchangeConfig?: ExchangeConfig;
 
-  @Metadata({ data: "json, name=generalConfig" })
+  @SpeakeasyMetadata({ data: "json, name=generalConfig" })
   generalConfig?: PartnerGeneralConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=partnerId" })
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
   partnerId?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

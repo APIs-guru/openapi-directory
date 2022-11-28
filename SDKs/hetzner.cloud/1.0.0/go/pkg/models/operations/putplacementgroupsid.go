@@ -9,11 +9,6 @@ type PutPlacementGroupsIDUpdatePlacementGroupRequest struct {
 	Name   *string                `json:"name,omitempty"`
 }
 
-type PutPlacementGroupsIDRequest struct {
-	PathParams PutPlacementGroupsIDPathParams
-	Request    *PutPlacementGroupsIDUpdatePlacementGroupRequest `request:"mediaType=application/json"`
-}
-
 type PutPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnum string
 
 const (
@@ -31,6 +26,11 @@ type PutPlacementGroupsIDPlacementGroupResponsePlacementGroup struct {
 
 type PutPlacementGroupsIDPlacementGroupResponse struct {
 	PlacementGroup PutPlacementGroupsIDPlacementGroupResponsePlacementGroup `json:"placement_group"`
+}
+
+type PutPlacementGroupsIDRequest struct {
+	PathParams PutPlacementGroupsIDPathParams
+	Request    *PutPlacementGroupsIDUpdatePlacementGroupRequest `request:"mediaType=application/json"`
 }
 
 type PutPlacementGroupsIDResponse struct {

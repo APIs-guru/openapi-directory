@@ -1,98 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPostAndRelatedDataPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=post_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=post_id" })
   postId: string;
 }
 
 
-export class GetPostAndRelatedDataSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Implicit: shared.SchemeOauth2Implicit;
-}
-
-
-export class GetPostAndRelatedDataSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Code: shared.SchemeOauth2Code;
-}
-
-
-export class GetPostAndRelatedDataSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetPostAndRelatedDataSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetPostAndRelatedDataSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Implicit?: shared.SchemeOauth2Implicit;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetPostAndRelatedDataSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Code?: shared.SchemeOauth2Code;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetPostAndRelatedDataSecurityOption3;
-}
-
-
-export class GetPostAndRelatedDataRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetPostAndRelatedDataPathParams;
-
-  @Metadata()
-  security: GetPostAndRelatedDataSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetPostAndRelatedData200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: shared.User;
 
-  @Metadata({ data: "json, name=author_offer_count" })
+  @SpeakeasyMetadata({ data: "json, name=author_offer_count" })
   authorOfferCount?: number;
 
-  @Metadata({ data: "json, name=author_posts", elemType: shared.Post })
+  @SpeakeasyMetadata({ data: "json, name=author_posts", elemType: shared.Post })
   authorPosts?: shared.Post[];
 
-  @Metadata({ data: "json, name=author_wanted_count" })
+  @SpeakeasyMetadata({ data: "json, name=author_wanted_count" })
   authorWantedCount?: number;
 
-  @Metadata({ data: "json, name=bookmarked" })
+  @SpeakeasyMetadata({ data: "json, name=bookmarked" })
   bookmarked?: boolean;
 
-  @Metadata({ data: "json, name=feedback", elemType: shared.Feedback })
+  @SpeakeasyMetadata({ data: "json, name=feedback", elemType: shared.Feedback })
   feedback?: shared.Feedback[];
 
-  @Metadata({ data: "json, name=geolocate_bounds" })
+  @SpeakeasyMetadata({ data: "json, name=geolocate_bounds" })
   geolocateBounds?: shared.GeolocateBounds;
 
-  @Metadata({ data: "json, name=groups", elemType: shared.Group })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: shared.Group })
   groups?: shared.Group[];
 
-  @Metadata({ data: "json, name=post" })
+  @SpeakeasyMetadata({ data: "json, name=post" })
   post?: shared.Post;
 
-  @Metadata({ data: "json, name=replied" })
+  @SpeakeasyMetadata({ data: "json, name=replied" })
   replied?: boolean;
 
-  @Metadata({ data: "json, name=user_can_reply" })
+  @SpeakeasyMetadata({ data: "json, name=user_can_reply" })
   userCanReply?: boolean;
 
-  @Metadata({ data: "json, name=viewed" })
+  @SpeakeasyMetadata({ data: "json, name=viewed" })
   viewed?: boolean;
 }
 
 
+export class GetPostAndRelatedDataRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetPostAndRelatedDataPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetPostAndRelatedDataSecurity;
+}
+
+
 export class GetPostAndRelatedDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPostAndRelatedData200ApplicationJsonObject?: GetPostAndRelatedData200ApplicationJson;
 }

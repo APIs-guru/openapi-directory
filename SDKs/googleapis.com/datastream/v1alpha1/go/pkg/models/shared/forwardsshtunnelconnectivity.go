@@ -1,5 +1,7 @@
 package shared
 
+// ForwardSSHTunnelConnectivity
+// Forward SSH Tunnel connectivity.
 type ForwardSSHTunnelConnectivity struct {
 	Hostname   *string `json:"hostname,omitempty"`
 	Password   *string `json:"password,omitempty"`

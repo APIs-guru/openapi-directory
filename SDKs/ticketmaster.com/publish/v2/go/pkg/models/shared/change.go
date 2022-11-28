@@ -11,6 +11,8 @@ const (
 	ChangeOpEnumTest    ChangeOpEnum = "test"
 )
 
+// Change
+// This class defines the Changes on the Publish API
 type Change struct {
 	From  *string                `json:"from,omitempty"`
 	Op    ChangeOpEnum           `json:"op"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CheckErrorResponseStatusEnum;
 (function (CheckErrorResponseStatusEnum) {
     CheckErrorResponseStatusEnum["Zero"] = "0";
@@ -45,15 +45,15 @@ var CheckErrorResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error_text" }),
+        SpeakeasyMetadata({ data: "json, name=error_text" }),
         __metadata("design:type", String)
     ], CheckErrorResponse.prototype, "errorText", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_id" }),
+        SpeakeasyMetadata({ data: "json, name=request_id" }),
         __metadata("design:type", String)
     ], CheckErrorResponse.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], CheckErrorResponse.prototype, "status", void 0);
     return CheckErrorResponse;

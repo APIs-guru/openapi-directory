@@ -1,23 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetWorkspaceQueryParams:
-    workspace_id: str = field(default=None, metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
-    
-
-@dataclass
-class GetWorkspaceRequest:
-    query_params: GetWorkspaceQueryParams = field(default=None)
+    workspace_id: str = field(metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
     
 
 @dataclass_json
 @dataclass
 class GetWorkspace200ApplicationJSON:
-    response: Optional[shared.Workspace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    response: Optional[shared.Workspace] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
     
 class GetWorkspace401ApplicationJSONErrorEnum(str, Enum):
     AUTHENTICATION_FAILED_REQUEST_EXPIRED = "Authentication failed: request expired"
@@ -35,8 +32,8 @@ class GetWorkspace401ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetWorkspace401ApplicationJSON:
-    error: Optional[GetWorkspace401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetWorkspace401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetWorkspace403ApplicationJSONErrorEnum(str, Enum):
     YOUR_ACCOUNT_HAS_EXCEEDED_THE_MONTHLY_DOCUMENT_GENERATION_LIMIT_ = "Your account has exceeded the monthly document generation limit."
@@ -45,8 +42,8 @@ class GetWorkspace403ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetWorkspace403ApplicationJSON:
-    error: Optional[GetWorkspace403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetWorkspace403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetWorkspace404ApplicationJSONErrorEnum(str, Enum):
     ENTITY_NOT_FOUND = "Entity not found"
@@ -57,8 +54,8 @@ class GetWorkspace404ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetWorkspace404ApplicationJSON:
-    error: Optional[GetWorkspace404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetWorkspace404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetWorkspace422ApplicationJSONErrorEnum(str, Enum):
     UNABLE_TO_PARSE_JSON_PLEASE_CHECK_FORMATTING = "Unable to parse JSON, please check formatting"
@@ -70,21 +67,26 @@ class GetWorkspace422ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetWorkspace422ApplicationJSON:
-    error: Optional[GetWorkspace422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetWorkspace422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class GetWorkspace500ApplicationJSON:
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    
+
+@dataclass
+class GetWorkspaceRequest:
+    query_params: GetWorkspaceQueryParams = field()
     
 
 @dataclass
 class GetWorkspaceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_workspace_200_application_json_object: Optional[GetWorkspace200ApplicationJSON] = field(default=None)
     get_workspace_401_application_json_object: Optional[GetWorkspace401ApplicationJSON] = field(default=None)
     get_workspace_403_application_json_object: Optional[GetWorkspace403ApplicationJSON] = field(default=None)

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LoadSnapshotRequest
 /**
  * Request to load a snapshot into a Cloud Composer environment.
@@ -33,11 +33,23 @@ var LoadSnapshotRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=skipPypiPackagesInstallation" }),
+        SpeakeasyMetadata({ data: "json, name=skipAirflowOverridesSetting" }),
+        __metadata("design:type", Boolean)
+    ], LoadSnapshotRequest.prototype, "skipAirflowOverridesSetting", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=skipEnvironmentVariablesSetting" }),
+        __metadata("design:type", Boolean)
+    ], LoadSnapshotRequest.prototype, "skipEnvironmentVariablesSetting", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=skipGcsDataCopying" }),
+        __metadata("design:type", Boolean)
+    ], LoadSnapshotRequest.prototype, "skipGcsDataCopying", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=skipPypiPackagesInstallation" }),
         __metadata("design:type", Boolean)
     ], LoadSnapshotRequest.prototype, "skipPypiPackagesInstallation", void 0);
     __decorate([
-        Metadata({ data: "json, name=snapshotPath" }),
+        SpeakeasyMetadata({ data: "json, name=snapshotPath" }),
         __metadata("design:type", String)
     ], LoadSnapshotRequest.prototype, "snapshotPath", void 0);
     return LoadSnapshotRequest;

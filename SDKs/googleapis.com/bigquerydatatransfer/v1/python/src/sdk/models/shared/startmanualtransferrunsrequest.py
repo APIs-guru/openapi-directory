@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import timerange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartManualTransferRunsRequest:
-    requested_run_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedRunTime' }})
-    requested_time_range: Optional[timerange.TimeRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedTimeRange' }})
+    r"""StartManualTransferRunsRequest
+    A request to start manual transfer runs.
+    """
+    
+    requested_run_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedRunTime') }})
+    requested_time_range: Optional[TimeRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedTimeRange') }})
     

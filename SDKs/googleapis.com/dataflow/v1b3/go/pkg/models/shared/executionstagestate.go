@@ -18,6 +18,8 @@ const (
 	ExecutionStageStateExecutionStageStateEnumJobStateResourceCleaningUp ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_RESOURCE_CLEANING_UP"
 )
 
+// ExecutionStageState
+// A message describing the state of a particular execution stage.
 type ExecutionStageState struct {
 	CurrentStateTime    *string                                     `json:"currentStateTime,omitempty"`
 	ExecutionStageName  *string                                     `json:"executionStageName,omitempty"`

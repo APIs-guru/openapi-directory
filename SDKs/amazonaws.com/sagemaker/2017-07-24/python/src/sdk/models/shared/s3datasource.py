@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import s3datadistribution_enum
-from . import s3datatype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class S3DataSource:
-    attribute_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeNames' }})
-    s3_data_distribution_type: Optional[s3datadistribution_enum.S3DataDistributionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3DataDistributionType' }})
-    s3_data_type: s3datatype_enum.S3DataTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3DataType' }})
-    s3_uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Uri' }})
+    r"""S3DataSource
+    Describes the S3 data source.
+    """
+    
+    s3_data_type: S3DataTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3DataType') }})
+    s3_uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Uri') }})
+    attribute_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeNames') }})
+    s3_data_distribution_type: Optional[S3DataDistributionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3DataDistributionType') }})
     

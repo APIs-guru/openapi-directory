@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PagedResultsPublicContinuationToken } from "./pagedresultspubliccontinuationtoken";
 import { OverviewAlert } from "./overviewalert";
 
 
+
 export class OverviewAlertPagedResultsPublic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continuationToken" })
+  @SpeakeasyMetadata({ data: "json, name=continuationToken" })
   continuationToken?: PagedResultsPublicContinuationToken;
 
-  @Metadata({ data: "json, name=hasMore" })
+  @SpeakeasyMetadata({ data: "json, name=hasMore" })
   hasMore?: boolean;
 
-  @Metadata({ data: "json, name=results", elemType: shared.OverviewAlert })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: OverviewAlert })
   results?: OverviewAlert[];
 }

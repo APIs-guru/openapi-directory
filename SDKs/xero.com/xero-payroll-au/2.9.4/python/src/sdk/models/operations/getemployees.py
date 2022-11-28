@@ -12,26 +12,26 @@ class GetEmployeesQueryParams:
 
 @dataclass
 class GetEmployeesHeaders:
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     if_modified_since: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Modified-Since', 'style': 'simple', 'explode': False }})
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEmployeesSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetEmployeesRequest:
-    query_params: GetEmployeesQueryParams = field(default=None)
-    headers: GetEmployeesHeaders = field(default=None)
-    security: GetEmployeesSecurity = field(default=None)
+    headers: GetEmployeesHeaders = field()
+    query_params: GetEmployeesQueryParams = field()
+    security: GetEmployeesSecurity = field()
     
 
 @dataclass
 class GetEmployeesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_exception: Optional[shared.APIException] = field(default=None)
-    content_type: str = field(default=None)
     employees: Optional[shared.Employees] = field(default=None)
-    status_code: int = field(default=None)
     

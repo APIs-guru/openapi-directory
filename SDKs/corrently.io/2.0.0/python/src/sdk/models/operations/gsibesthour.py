@@ -12,12 +12,12 @@ class GsiBesthourQueryParams:
 
 @dataclass
 class GsiBesthourRequest:
-    query_params: GsiBesthourQueryParams = field(default=None)
+    query_params: GsiBesthourQueryParams = field()
     
 
 @dataclass
 class GsiBesthourResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     gsi_besthour_200_application_json_boolean: Optional[bool] = field(default=None)
     

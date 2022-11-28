@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Area } from "./area";
 
 
+
 export class AreaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=areas", elemType: shared.Area })
+  @SpeakeasyMetadata({ data: "json, name=areas", elemType: Area })
   areas?: Area[];
 
-  @Metadata({ data: "json, name=row_count" })
+  @SpeakeasyMetadata({ data: "json, name=row_count" })
   rowCount?: number;
 }

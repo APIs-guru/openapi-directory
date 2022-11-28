@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DeliveryErrorErrorClassEnum;
 (function (DeliveryErrorErrorClassEnum) {
     DeliveryErrorErrorClassEnum["DeliveryErrorClassUnspecified"] = "DELIVERY_ERROR_CLASS_UNSPECIFIED";
@@ -53,15 +53,15 @@ var DeliveryError = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errorClass" }),
+        SpeakeasyMetadata({ data: "json, name=errorClass" }),
         __metadata("design:type", String)
     ], DeliveryError.prototype, "errorClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorRatio" }),
+        SpeakeasyMetadata({ data: "json, name=errorRatio" }),
         __metadata("design:type", Number)
     ], DeliveryError.prototype, "errorRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorType" }),
+        SpeakeasyMetadata({ data: "json, name=errorType" }),
         __metadata("design:type", String)
     ], DeliveryError.prototype, "errorType", void 0);
     return DeliveryError;

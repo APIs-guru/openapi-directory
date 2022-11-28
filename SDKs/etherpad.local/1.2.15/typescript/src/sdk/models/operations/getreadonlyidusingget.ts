@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetReadOnlyIdUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 }
 
 
-export class GetReadOnlyIdUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetReadOnlyIdUsingGetQueryParams;
-}
-
-
 export class GetReadOnlyIdUsingGet200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=readOnlyID" })
+  @SpeakeasyMetadata({ data: "json, name=readOnlyID" })
   readOnlyId?: string;
 }
 
 
 export class GetReadOnlyIdUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetReadOnlyIdUsingGet200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReadOnlyIdUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReadOnlyIdUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReadOnlyIdUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetReadOnlyIdUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetReadOnlyIdUsingGetQueryParams;
+}
+
+
 export class GetReadOnlyIdUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReadOnlyIdUsingGet200ApplicationJsonObject?: GetReadOnlyIdUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReadOnlyIdUsingGet400ApplicationJsonObject?: GetReadOnlyIdUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReadOnlyIdUsingGet401ApplicationJsonObject?: GetReadOnlyIdUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReadOnlyIdUsingGet500ApplicationJsonObject?: GetReadOnlyIdUsingGet500ApplicationJson;
 }

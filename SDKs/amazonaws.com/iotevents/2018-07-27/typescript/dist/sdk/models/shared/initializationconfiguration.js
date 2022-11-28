@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InitializationConfiguration
 /**
  * Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.
@@ -33,7 +33,7 @@ var InitializationConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=disabledOnInitialization" }),
+        SpeakeasyMetadata({ data: "json, name=disabledOnInitialization" }),
         __metadata("design:type", Boolean)
     ], InitializationConfiguration.prototype, "disabledOnInitialization", void 0);
     return InitializationConfiguration;

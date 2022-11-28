@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApigatewayBackendConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for all backends.
 **/
 export class ApigatewayBackendConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleServiceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=googleServiceAccount" })
   googleServiceAccount?: string;
 }

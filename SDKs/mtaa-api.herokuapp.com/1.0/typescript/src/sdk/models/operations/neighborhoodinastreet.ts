@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NeighborhoodInAStreetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" })
   country: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=district" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=district" })
   district: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=region" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=region" })
   region: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=street" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=street" })
   street: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ward" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ward" })
   ward: string;
 }
 
 
 export class NeighborhoodInAStreetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: NeighborhoodInAStreetPathParams;
 }
 
 
 export class NeighborhoodInAStreetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

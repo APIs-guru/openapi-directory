@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuggestedTextStyle } from "./suggestedtextstyle";
 import { TextStyle } from "./textstyle";
+
 
 
 // InlineObjectElement
@@ -9,18 +9,18 @@ import { TextStyle } from "./textstyle";
  * A ParagraphElement that contains an InlineObject.
 **/
 export class InlineObjectElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inlineObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=inlineObjectId" })
   inlineObjectId?: string;
 
-  @Metadata({ data: "json, name=suggestedDeletionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
   suggestedDeletionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedInsertionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionIds" })
   suggestedInsertionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedTextStyleChanges", elemType: shared.SuggestedTextStyle })
+  @SpeakeasyMetadata({ data: "json, name=suggestedTextStyleChanges", elemType: SuggestedTextStyle })
   suggestedTextStyleChanges?: Map<string, SuggestedTextStyle>;
 
-  @Metadata({ data: "json, name=textStyle" })
+  @SpeakeasyMetadata({ data: "json, name=textStyle" })
   textStyle?: TextStyle;
 }

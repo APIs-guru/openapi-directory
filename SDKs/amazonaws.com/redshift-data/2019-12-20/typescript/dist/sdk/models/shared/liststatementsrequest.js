@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusStringEnum } from "./statusstringenum";
 var ListStatementsRequest = /** @class */ (function (_super) {
     __extends(ListStatementsRequest, _super);
@@ -30,23 +30,23 @@ var ListStatementsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListStatementsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListStatementsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleLevel" }),
+        SpeakeasyMetadata({ data: "json, name=RoleLevel" }),
         __metadata("design:type", Boolean)
     ], ListStatementsRequest.prototype, "roleLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatementName" }),
+        SpeakeasyMetadata({ data: "json, name=StatementName" }),
         __metadata("design:type", String)
     ], ListStatementsRequest.prototype, "statementName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ListStatementsRequest.prototype, "status", void 0);
     return ListStatementsRequest;

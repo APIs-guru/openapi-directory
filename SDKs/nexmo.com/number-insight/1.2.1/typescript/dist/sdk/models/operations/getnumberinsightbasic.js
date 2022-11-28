@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetNumberInsightBasicPathParams = /** @class */ (function (_super) {
     __extends(GetNumberInsightBasicPathParams, _super);
@@ -30,7 +30,7 @@ var GetNumberInsightBasicPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetNumberInsightBasicPathParams.prototype, "format", void 0);
     return GetNumberInsightBasicPathParams;
@@ -42,11 +42,11 @@ var GetNumberInsightBasicQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetNumberInsightBasicQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=number" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" }),
         __metadata("design:type", String)
     ], GetNumberInsightBasicQueryParams.prototype, "number", void 0);
     return GetNumberInsightBasicQueryParams;
@@ -58,11 +58,11 @@ var GetNumberInsightBasicRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumberInsightBasicPathParams)
     ], GetNumberInsightBasicRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumberInsightBasicQueryParams)
     ], GetNumberInsightBasicRequest.prototype, "queryParams", void 0);
     return GetNumberInsightBasicRequest;
@@ -74,19 +74,19 @@ var GetNumberInsightBasicResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetNumberInsightBasicResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNumberInsightBasicResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNumberInsightBasicResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NiResponseJsonBasic)
     ], GetNumberInsightBasicResponse.prototype, "niResponseJsonBasic", void 0);
     return GetNumberInsightBasicResponse;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamProjectsRolesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class IamProjectsRolesListViewEnum(str, Enum):
     BASIC = "BASIC"
@@ -33,20 +34,20 @@ class IamProjectsRolesListQueryParams:
 
 @dataclass
 class IamProjectsRolesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamProjectsRolesListRequest:
-    path_params: IamProjectsRolesListPathParams = field(default=None)
-    query_params: IamProjectsRolesListQueryParams = field(default=None)
-    security: IamProjectsRolesListSecurity = field(default=None)
+    path_params: IamProjectsRolesListPathParams = field()
+    query_params: IamProjectsRolesListQueryParams = field()
+    security: IamProjectsRolesListSecurity = field()
     
 
 @dataclass
 class IamProjectsRolesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_roles_response: Optional[shared.ListRolesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

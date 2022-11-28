@@ -19,6 +19,8 @@ type UpdateBackendAuthHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateBackendAuthRequestBodyResourceConfig
+// Defines the resource configuration when updating an authentication resource in your Amplify project.
 type UpdateBackendAuthRequestBodyResourceConfig struct {
 	AuthResources       *shared.AuthResourcesEnum                   `json:"AuthResources,omitempty"`
 	IdentityPoolConfigs *shared.UpdateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs,omitempty"`

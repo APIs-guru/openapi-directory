@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestRoomUsersPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,15 +23,15 @@ class RequestRoomUsersHeaders:
 
 @dataclass
 class RequestRoomUsersRequest:
-    path_params: RequestRoomUsersPathParams = field(default=None)
-    query_params: RequestRoomUsersQueryParams = field(default=None)
-    headers: RequestRoomUsersHeaders = field(default=None)
+    headers: RequestRoomUsersHeaders = field()
+    path_params: RequestRoomUsersPathParams = field()
+    query_params: RequestRoomUsersQueryParams = field()
     
 
 @dataclass
-class RequestRoomUsersResponse:
-    content_type: str = field(default=None)
+class RequestRoomUsersResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    room_user_list: Optional[shared.RoomUserList] = field(default=None)
-    status_code: int = field(default=None)
+    room_user_list: Optional[shared.RoomUserListOutput] = field(default=None)
     

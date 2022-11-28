@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationItemStatusEnum } from "./configurationitemstatusenum";
 import { Relationship } from "./relationship";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // ConfigurationItem
@@ -10,57 +10,57 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * A list that contains detailed configurations of a specified resource.
 **/
 export class ConfigurationItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=availabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=awsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=awsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: string;
 
-  @Metadata({ data: "json, name=configurationItemCaptureTime" })
+  @SpeakeasyMetadata({ data: "json, name=configurationItemCaptureTime" })
   configurationItemCaptureTime?: Date;
 
-  @Metadata({ data: "json, name=configurationItemMD5Hash" })
+  @SpeakeasyMetadata({ data: "json, name=configurationItemMD5Hash" })
   configurationItemMd5Hash?: string;
 
-  @Metadata({ data: "json, name=configurationItemStatus" })
+  @SpeakeasyMetadata({ data: "json, name=configurationItemStatus" })
   configurationItemStatus?: ConfigurationItemStatusEnum;
 
-  @Metadata({ data: "json, name=configurationStateId" })
+  @SpeakeasyMetadata({ data: "json, name=configurationStateId" })
   configurationStateId?: string;
 
-  @Metadata({ data: "json, name=relatedEvents" })
+  @SpeakeasyMetadata({ data: "json, name=relatedEvents" })
   relatedEvents?: string[];
 
-  @Metadata({ data: "json, name=relationships", elemType: shared.Relationship })
+  @SpeakeasyMetadata({ data: "json, name=relationships", elemType: Relationship })
   relationships?: Relationship[];
 
-  @Metadata({ data: "json, name=resourceCreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=resourceCreationTime" })
   resourceCreationTime?: Date;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=supplementaryConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=supplementaryConfiguration" })
   supplementaryConfiguration?: Map<string, string>;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

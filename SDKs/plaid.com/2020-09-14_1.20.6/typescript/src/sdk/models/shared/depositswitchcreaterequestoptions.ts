@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DepositSwitchCreateRequestOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options to configure the `/deposit_switch/create` request. If provided, cannot be `null`.
 **/
 export class DepositSwitchCreateRequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transaction_item_access_tokens" })
+  @SpeakeasyMetadata({ data: "json, name=transaction_item_access_tokens" })
   transactionItemAccessTokens?: string[];
 
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook?: string;
 }

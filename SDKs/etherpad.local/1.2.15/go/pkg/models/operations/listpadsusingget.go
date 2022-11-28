@@ -4,10 +4,6 @@ type ListPadsUsingGetQueryParams struct {
 	GroupID *string `queryParam:"style=form,explode=true,name=groupID"`
 }
 
-type ListPadsUsingGetRequest struct {
-	QueryParams ListPadsUsingGetQueryParams
-}
-
 type ListPadsUsingGet200ApplicationJSONData struct {
 	PadIDs []string `json:"padIDs,omitempty"`
 }
@@ -34,6 +30,10 @@ type ListPadsUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type ListPadsUsingGetRequest struct {
+	QueryParams ListPadsUsingGetQueryParams
 }
 
 type ListPadsUsingGetResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreSummary } from "./datastoresummary";
 export declare class ListDatastoresResponse extends SpeakeasyBase {
     datastoreSummaries?: DatastoreSummary[];

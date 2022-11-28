@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigOvenModelApi2Photo } from "./bigovenmodelapi2photo";
 
 
+
 export class Api2ControllersWebApiImagesControllerRecipePhotosResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResultCount" })
+  @SpeakeasyMetadata({ data: "json, name=ResultCount" })
   resultCount?: number;
 
-  @Metadata({ data: "json, name=Results", elemType: shared.BigOvenModelApi2Photo })
+  @SpeakeasyMetadata({ data: "json, name=Results", elemType: BigOvenModelApi2Photo })
   results?: BigOvenModelApi2Photo[];
 }

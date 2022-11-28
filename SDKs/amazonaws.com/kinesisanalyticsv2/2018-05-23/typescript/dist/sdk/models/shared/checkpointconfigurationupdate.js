@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationTypeEnum } from "./configurationtypeenum";
 // CheckpointConfigurationUpdate
 /**
@@ -34,19 +34,19 @@ var CheckpointConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CheckpointIntervalUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=CheckpointIntervalUpdate" }),
         __metadata("design:type", Number)
     ], CheckpointConfigurationUpdate.prototype, "checkpointIntervalUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=CheckpointingEnabledUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=CheckpointingEnabledUpdate" }),
         __metadata("design:type", Boolean)
     ], CheckpointConfigurationUpdate.prototype, "checkpointingEnabledUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConfigurationTypeUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ConfigurationTypeUpdate" }),
         __metadata("design:type", String)
     ], CheckpointConfigurationUpdate.prototype, "configurationTypeUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinPauseBetweenCheckpointsUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=MinPauseBetweenCheckpointsUpdate" }),
         __metadata("design:type", Number)
     ], CheckpointConfigurationUpdate.prototype, "minPauseBetweenCheckpointsUpdate", void 0);
     return CheckpointConfigurationUpdate;

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SoftwareRecipeStepExtractArchiveTypeEnum(str, Enum):
     ARCHIVE_TYPE_UNSPECIFIED = "ARCHIVE_TYPE_UNSPECIFIED"
@@ -15,7 +17,11 @@ class SoftwareRecipeStepExtractArchiveTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SoftwareRecipeStepExtractArchive:
-    artifact_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'artifactId' }})
-    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    type: Optional[SoftwareRecipeStepExtractArchiveTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""SoftwareRecipeStepExtractArchive
+    Extracts an archive of the type specified in the specified directory.
+    """
+    
+    artifact_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('artifactId') }})
+    destination: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    type: Optional[SoftwareRecipeStepExtractArchiveTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

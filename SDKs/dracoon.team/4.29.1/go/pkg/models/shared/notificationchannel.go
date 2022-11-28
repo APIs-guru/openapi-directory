@@ -1,5 +1,7 @@
 package shared
 
+// NotificationChannel
+// Notification channel information
 type NotificationChannel struct {
 	Frequency int64  `json:"frequency"`
 	ID        int32  `json:"id"`

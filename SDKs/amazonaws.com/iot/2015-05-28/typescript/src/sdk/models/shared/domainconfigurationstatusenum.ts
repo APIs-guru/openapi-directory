@@ -1,6 +1,7 @@
 
 
+
 export enum DomainConfigurationStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

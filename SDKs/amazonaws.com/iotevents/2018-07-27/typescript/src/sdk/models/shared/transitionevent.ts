@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
+
 
 
 // TransitionEvent
@@ -8,15 +8,15 @@ import { Action } from "./action";
  * Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.
 **/
 export class TransitionEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: Action })
   actions?: Action[];
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition: string;
 
-  @Metadata({ data: "json, name=eventName" })
+  @SpeakeasyMetadata({ data: "json, name=eventName" })
   eventName: string;
 
-  @Metadata({ data: "json, name=nextState" })
+  @SpeakeasyMetadata({ data: "json, name=nextState" })
   nextState: string;
 }

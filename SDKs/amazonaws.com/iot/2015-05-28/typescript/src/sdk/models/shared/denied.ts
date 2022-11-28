@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExplicitDeny } from "./explicitdeny";
 import { ImplicitDeny } from "./implicitdeny";
+
 
 
 // Denied
@@ -8,9 +9,9 @@ import { ImplicitDeny } from "./implicitdeny";
  * Contains information that denied the authorization.
 **/
 export class Denied extends SpeakeasyBase {
-  @Metadata({ data: "json, name=explicitDeny" })
+  @SpeakeasyMetadata({ data: "json, name=explicitDeny" })
   explicitDeny?: ExplicitDeny;
 
-  @Metadata({ data: "json, name=implicitDeny" })
+  @SpeakeasyMetadata({ data: "json, name=implicitDeny" })
   implicitDeny?: ImplicitDeny;
 }

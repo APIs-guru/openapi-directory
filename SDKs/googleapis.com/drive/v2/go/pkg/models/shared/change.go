@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Change
+// Representation of a change to a file or shared drive.
 type Change struct {
 	ChangeType       *string    `json:"changeType,omitempty"`
 	Deleted          *bool      `json:"deleted,omitempty"`

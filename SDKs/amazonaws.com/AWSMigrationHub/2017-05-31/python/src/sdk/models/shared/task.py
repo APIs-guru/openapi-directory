@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import status_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Task:
-    progress_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProgressPercent' }})
-    status: status_enum.StatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    status_detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusDetail' }})
+    r"""Task
+    Task object encapsulating task information.
+    """
+    
+    status: StatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    progress_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProgressPercent') }})
+    status_detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusDetail') }})
     

@@ -32,7 +32,7 @@ type IdsProjectsLocationsEndpointsCreateSecurity struct {
 type IdsProjectsLocationsEndpointsCreateRequest struct {
 	PathParams  IdsProjectsLocationsEndpointsCreatePathParams
 	QueryParams IdsProjectsLocationsEndpointsCreateQueryParams
-	Request     *shared.Endpoint `request:"mediaType=application/json"`
+	Request     *shared.EndpointInput `request:"mediaType=application/json"`
 	Security    IdsProjectsLocationsEndpointsCreateSecurity
 }
 

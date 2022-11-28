@@ -1,104 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAnnouncementsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=description" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=description" })
   description?: string;
 
-  @Metadata({ data: "multipart_form, name=file" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file" })
   file?: string;
 }
 
 
-export class PostAnnouncementsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request: PostAnnouncementsRequestBody;
-}
-
-
 export class PostAnnouncements201ApplicationJsonAnnouncementUrl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=download" })
+  @SpeakeasyMetadata({ data: "json, name=download" })
   download?: string;
 
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class PostAnnouncements201ApplicationJsonAnnouncement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creation_date" })
+  @SpeakeasyMetadata({ data: "json, name=creation_date" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=file_internal" })
+  @SpeakeasyMetadata({ data: "json, name=file_internal" })
   fileInternal?: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=src_ip_address" })
+  @SpeakeasyMetadata({ data: "json, name=src_ip_address" })
   srcIpAddress?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: PostAnnouncements201ApplicationJsonAnnouncementUrl;
 }
 
 
 export class PostAnnouncements201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=announcement" })
+  @SpeakeasyMetadata({ data: "json, name=announcement" })
   announcement?: PostAnnouncements201ApplicationJsonAnnouncement;
 }
 
 
 export class PostAnnouncements400ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string[];
 }
 
 
 export class PostAnnouncements400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: operations.PostAnnouncements400ApplicationJsonErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: PostAnnouncements400ApplicationJsonErrors })
   errors: PostAnnouncements400ApplicationJsonErrors[];
 }
 
 
 export class PostAnnouncements403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostAnnouncementsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request: PostAnnouncementsRequestBody;
+}
+
+
 export class PostAnnouncementsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAnnouncements201ApplicationJsonObject?: PostAnnouncements201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAnnouncements400ApplicationJsonObject?: PostAnnouncements400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAnnouncements403ApplicationJsonObject?: PostAnnouncements403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   oneannouncementsPostResponses403ContentApplication1jsonSchema?: shared.OneannouncementsPostResponses403ContentApplication1jsonSchema;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Backup
+// A backup of an Amazon FSx for Windows File Server or Amazon FSx for Lustre file system, or of an Amazon FSx for NetApp ONTAP volume.
 type Backup struct {
 	BackupID             string                           `json:"BackupId"`
 	CreationTime         time.Time                        `json:"CreationTime"`

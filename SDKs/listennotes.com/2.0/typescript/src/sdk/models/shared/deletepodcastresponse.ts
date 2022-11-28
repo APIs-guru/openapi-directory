@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeletePodcastResponseStatusEnum {
-    Deleted = "deleted"
-,    InReview = "in review"
+    Deleted = "deleted",
+    InReview = "in review"
 }
 
 
 export class DeletePodcastResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: DeletePodcastResponseStatusEnum;
 }

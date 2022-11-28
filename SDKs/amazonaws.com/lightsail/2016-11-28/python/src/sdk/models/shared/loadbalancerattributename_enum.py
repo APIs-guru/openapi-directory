@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LoadBalancerAttributeNameEnum(str, Enum):
     HEALTH_CHECK_PATH = "HealthCheckPath"

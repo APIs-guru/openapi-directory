@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TaintEffectEnum } from "./tainteffectenum";
 /**
  * A property that allows a node to repel a set of pods.

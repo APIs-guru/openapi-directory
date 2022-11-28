@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var NetworkUnblockRequest = /** @class */ (function (_super) {
     __extends(NetworkUnblockRequest, _super);
@@ -30,7 +30,7 @@ var NetworkUnblockRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.NetworkUnblock)
     ], NetworkUnblockRequest.prototype, "request", void 0);
     return NetworkUnblockRequest;
@@ -42,31 +42,31 @@ var NetworkUnblockResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NetworkUnblockResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorThrottled)
     ], NetworkUnblockResponse.prototype, "errorThrottled", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NetworkUnblockResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NetworkUnblockResponseForbidden)
     ], NetworkUnblockResponse.prototype, "networkUnblockResponseForbidden", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NetworkUnblockResponseNotFound)
     ], NetworkUnblockResponse.prototype, "networkUnblockResponseNotFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NetworkUnblockResponseOk)
     ], NetworkUnblockResponse.prototype, "networkUnblockResponseOk", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], NetworkUnblockResponse.prototype, "networkUnblock422ApplicationJsonOneOf", void 0);
     return NetworkUnblockResponse;

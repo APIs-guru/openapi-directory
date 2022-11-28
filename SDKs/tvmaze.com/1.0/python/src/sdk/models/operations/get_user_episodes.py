@@ -10,12 +10,12 @@ class GetUserEpisodesQueryParams:
 
 @dataclass
 class GetUserEpisodesRequest:
-    query_params: GetUserEpisodesQueryParams = field(default=None)
+    query_params: GetUserEpisodesQueryParams = field()
     
 
 @dataclass
 class GetUserEpisodesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     marked_episodes: Optional[List[shared.MarkedEpisode]] = field(default=None)
-    status_code: int = field(default=None)
     

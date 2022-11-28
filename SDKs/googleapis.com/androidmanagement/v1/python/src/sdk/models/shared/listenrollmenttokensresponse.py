@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import enrollmenttoken
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListEnrollmentTokensResponse:
-    enrollment_tokens: Optional[List[enrollmenttoken.EnrollmentToken]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enrollmentTokens' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListEnrollmentTokensResponse
+    Response to a request to list enrollment tokens for a given enterprise.
+    """
+    
+    enrollment_tokens: Optional[List[EnrollmentToken]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enrollmentTokens') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

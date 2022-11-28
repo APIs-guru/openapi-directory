@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GmailpostmastertoolsDomainsListQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;

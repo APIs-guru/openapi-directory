@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AsanaResource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A generic Asana Resource, containing a globally unique identifier.
 **/
 export class AsanaResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkloadConfig } from "./workloadconfig";
 
+
 export enum ProtectConfigWorkloadVulnerabilityModeEnum {
-    WorkloadVulnerabilityModeUnspecified = "WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Basic = "BASIC"
+    WorkloadVulnerabilityModeUnspecified = "WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Basic = "BASIC"
 }
 
 
@@ -13,9 +14,9 @@ export enum ProtectConfigWorkloadVulnerabilityModeEnum {
  * ProtectConfig defines the flags needed to enable/disable features for the Protect API.
 **/
 export class ProtectConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workloadConfig" })
+  @SpeakeasyMetadata({ data: "json, name=workloadConfig" })
   workloadConfig?: WorkloadConfig;
 
-  @Metadata({ data: "json, name=workloadVulnerabilityMode" })
+  @SpeakeasyMetadata({ data: "json, name=workloadVulnerabilityMode" })
   workloadVulnerabilityMode?: ProtectConfigWorkloadVulnerabilityModeEnum;
 }

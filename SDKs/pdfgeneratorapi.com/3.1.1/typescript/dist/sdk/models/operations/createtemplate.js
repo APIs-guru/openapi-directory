@@ -22,27 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var CreateTemplateRequest = /** @class */ (function (_super) {
-    __extends(CreateTemplateRequest, _super);
-    function CreateTemplateRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.TemplateDefinitionNew)
-    ], CreateTemplateRequest.prototype, "request", void 0);
-    return CreateTemplateRequest;
-}(SpeakeasyBase));
-export { CreateTemplateRequest };
 var CreateTemplate200ApplicationJson = /** @class */ (function (_super) {
     __extends(CreateTemplate200ApplicationJson, _super);
     function CreateTemplate200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=response" }),
+        SpeakeasyMetadata({ data: "json, name=response" }),
         __metadata("design:type", shared.TemplateDefinition)
     ], CreateTemplate200ApplicationJson.prototype, "response", void 0);
     return CreateTemplate200ApplicationJson;
@@ -67,11 +55,11 @@ var CreateTemplate401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CreateTemplate401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CreateTemplate401ApplicationJson.prototype, "status", void 0);
     return CreateTemplate401ApplicationJson;
@@ -87,11 +75,11 @@ var CreateTemplate403ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CreateTemplate403ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CreateTemplate403ApplicationJson.prototype, "status", void 0);
     return CreateTemplate403ApplicationJson;
@@ -109,11 +97,11 @@ var CreateTemplate404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CreateTemplate404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CreateTemplate404ApplicationJson.prototype, "status", void 0);
     return CreateTemplate404ApplicationJson;
@@ -132,11 +120,11 @@ var CreateTemplate422ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CreateTemplate422ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CreateTemplate422ApplicationJson.prototype, "status", void 0);
     return CreateTemplate422ApplicationJson;
@@ -148,51 +136,63 @@ var CreateTemplate500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CreateTemplate500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CreateTemplate500ApplicationJson.prototype, "status", void 0);
     return CreateTemplate500ApplicationJson;
 }(SpeakeasyBase));
 export { CreateTemplate500ApplicationJson };
+var CreateTemplateRequest = /** @class */ (function (_super) {
+    __extends(CreateTemplateRequest, _super);
+    function CreateTemplateRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.TemplateDefinitionNew)
+    ], CreateTemplateRequest.prototype, "request", void 0);
+    return CreateTemplateRequest;
+}(SpeakeasyBase));
+export { CreateTemplateRequest };
 var CreateTemplateResponse = /** @class */ (function (_super) {
     __extends(CreateTemplateResponse, _super);
     function CreateTemplateResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateTemplateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTemplate200ApplicationJson)
     ], CreateTemplateResponse.prototype, "createTemplate200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTemplate401ApplicationJson)
     ], CreateTemplateResponse.prototype, "createTemplate401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTemplate403ApplicationJson)
     ], CreateTemplateResponse.prototype, "createTemplate403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTemplate404ApplicationJson)
     ], CreateTemplateResponse.prototype, "createTemplate404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTemplate422ApplicationJson)
     ], CreateTemplateResponse.prototype, "createTemplate422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTemplate500ApplicationJson)
     ], CreateTemplateResponse.prototype, "createTemplate500ApplicationJsonObject", void 0);
     return CreateTemplateResponse;

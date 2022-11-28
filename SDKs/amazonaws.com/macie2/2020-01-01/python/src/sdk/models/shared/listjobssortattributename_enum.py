@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 
 class ListJobsSortAttributeNameEnum(str, Enum):
     CREATED_AT = "createdAt"

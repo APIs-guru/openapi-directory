@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Capabilities } from "./capabilities";
 var DeviceInfo = /** @class */ (function (_super) {
     __extends(DeviceInfo, _super);
@@ -30,63 +30,63 @@ var DeviceInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=4k_blocked" }),
+        SpeakeasyMetadata({ data: "json, name=4k_blocked" }),
         __metadata("design:type", Number)
     ], DeviceInfo.prototype, "fourkBlocked", void 0);
     __decorate([
-        Metadata({ data: "json, name=capabilities" }),
+        SpeakeasyMetadata({ data: "json, name=capabilities" }),
         __metadata("design:type", Capabilities)
     ], DeviceInfo.prototype, "capabilities", void 0);
     __decorate([
-        Metadata({ data: "json, name=cloud_device_id" }),
+        SpeakeasyMetadata({ data: "json, name=cloud_device_id" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "cloudDeviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=factory_country_code" }),
+        SpeakeasyMetadata({ data: "json, name=factory_country_code" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "factoryCountryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=hotspot_bssid" }),
+        SpeakeasyMetadata({ data: "json, name=hotspot_bssid" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "hotspotBssid", void 0);
     __decorate([
-        Metadata({ data: "json, name=local_authorization_token_hash" }),
+        SpeakeasyMetadata({ data: "json, name=local_authorization_token_hash" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "localAuthorizationTokenHash", void 0);
     __decorate([
-        Metadata({ data: "json, name=mac_address" }),
+        SpeakeasyMetadata({ data: "json, name=mac_address" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "macAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=manufacturer" }),
+        SpeakeasyMetadata({ data: "json, name=manufacturer" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "manufacturer", void 0);
     __decorate([
-        Metadata({ data: "json, name=model_name" }),
+        SpeakeasyMetadata({ data: "json, name=model_name" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=product_name" }),
+        SpeakeasyMetadata({ data: "json, name=product_name" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "productName", void 0);
     __decorate([
-        Metadata({ data: "json, name=public_key" }),
+        SpeakeasyMetadata({ data: "json, name=public_key" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "publicKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssdp_udn" }),
+        SpeakeasyMetadata({ data: "json, name=ssdp_udn" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "ssdpUdn", void 0);
     __decorate([
-        Metadata({ data: "json, name=uma_client_id" }),
+        SpeakeasyMetadata({ data: "json, name=uma_client_id" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "umaClientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=uptime" }),
+        SpeakeasyMetadata({ data: "json, name=uptime" }),
         __metadata("design:type", Number)
     ], DeviceInfo.prototype, "uptime", void 0);
     __decorate([
-        Metadata({ data: "json, name=weave_device_id" }),
+        SpeakeasyMetadata({ data: "json, name=weave_device_id" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "weaveDeviceId", void 0);
     return DeviceInfo;

@@ -22,8 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PubsubInput } from "./pubsub";
 import { Pubsub } from "./pubsub";
+// TransportInput
+/**
+ * Represents the transport intermediaries created for the trigger in order to deliver events.
+**/
+var TransportInput = /** @class */ (function (_super) {
+    __extends(TransportInput, _super);
+    function TransportInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=pubsub" }),
+        __metadata("design:type", PubsubInput)
+    ], TransportInput.prototype, "pubsub", void 0);
+    return TransportInput;
+}(SpeakeasyBase));
+export { TransportInput };
 // Transport
 /**
  * Represents the transport intermediaries created for the trigger in order to deliver events.
@@ -34,7 +51,7 @@ var Transport = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=pubsub" }),
+        SpeakeasyMetadata({ data: "json, name=pubsub" }),
         __metadata("design:type", Pubsub)
     ], Transport.prototype, "pubsub", void 0);
     return Transport;

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceEnum } from "./datasourceenum";
 import { ContinuousExportStatusEnum } from "./continuousexportstatusenum";
+
 
 
 // ContinuousExportDescription
@@ -8,27 +9,27 @@ import { ContinuousExportStatusEnum } from "./continuousexportstatusenum";
  * A list of continuous export descriptions.
 **/
 export class ContinuousExportDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource?: DataSourceEnum;
 
-  @Metadata({ data: "json, name=exportId" })
+  @SpeakeasyMetadata({ data: "json, name=exportId" })
   exportId?: string;
 
-  @Metadata({ data: "json, name=s3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=s3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=schemaStorageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=schemaStorageConfig" })
   schemaStorageConfig?: Map<string, string>;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ContinuousExportStatusEnum;
 
-  @Metadata({ data: "json, name=statusDetail" })
+  @SpeakeasyMetadata({ data: "json, name=statusDetail" })
   statusDetail?: string;
 
-  @Metadata({ data: "json, name=stopTime" })
+  @SpeakeasyMetadata({ data: "json, name=stopTime" })
   stopTime?: Date;
 }

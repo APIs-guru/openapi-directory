@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerPagesListPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
     
 class BloggerPagesListStatusEnum(str, Enum):
     LIVE = "LIVE"
@@ -41,14 +42,14 @@ class BloggerPagesListQueryParams:
 
 @dataclass
 class BloggerPagesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerPagesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -59,14 +60,14 @@ class BloggerPagesListSecurity:
 
 @dataclass
 class BloggerPagesListRequest:
-    path_params: BloggerPagesListPathParams = field(default=None)
-    query_params: BloggerPagesListQueryParams = field(default=None)
-    security: BloggerPagesListSecurity = field(default=None)
+    path_params: BloggerPagesListPathParams = field()
+    query_params: BloggerPagesListQueryParams = field()
+    security: BloggerPagesListSecurity = field()
     
 
 @dataclass
 class BloggerPagesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     page_list: Optional[shared.PageList] = field(default=None)
-    status_code: int = field(default=None)
     

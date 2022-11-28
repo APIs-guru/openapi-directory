@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalAddress } from "./postaladdress";
+
 
 
 // AddressVerificationData
@@ -7,9 +8,9 @@ import { PostalAddress } from "./postaladdress";
  * Display data for verifications through postcard.
 **/
 export class AddressVerificationData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PostalAddress;
 
-  @Metadata({ data: "json, name=businessName" })
+  @SpeakeasyMetadata({ data: "json, name=businessName" })
   businessName?: string;
 }

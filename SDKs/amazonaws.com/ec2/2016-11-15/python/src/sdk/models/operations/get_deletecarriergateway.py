@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteCarrierGatewayActionEnum(str, Enum):
     DELETE_CARRIER_GATEWAY = "DeleteCarrierGateway"
@@ -10,10 +14,10 @@ class GetDeleteCarrierGatewayVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteCarrierGatewayQueryParams:
-    action: GetDeleteCarrierGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    carrier_gateway_id: str = field(default=None, metadata={'query_param': { 'field_name': 'CarrierGatewayId', 'style': 'form', 'explode': True }})
+    action: GetDeleteCarrierGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    carrier_gateway_id: str = field(metadata={'query_param': { 'field_name': 'CarrierGatewayId', 'style': 'form', 'explode': True }})
+    version: GetDeleteCarrierGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeleteCarrierGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteCarrierGatewayHeaders:
 
 @dataclass
 class GetDeleteCarrierGatewayRequest:
-    query_params: GetDeleteCarrierGatewayQueryParams = field(default=None)
-    headers: GetDeleteCarrierGatewayHeaders = field(default=None)
+    headers: GetDeleteCarrierGatewayHeaders = field()
+    query_params: GetDeleteCarrierGatewayQueryParams = field()
     
 
 @dataclass
 class GetDeleteCarrierGatewayResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

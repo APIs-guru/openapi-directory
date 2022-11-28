@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ActivateContactChannelRequest = /** @class */ (function (_super) {
     __extends(ActivateContactChannelRequest, _super);
     function ActivateContactChannelRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ActivationCode" }),
+        SpeakeasyMetadata({ data: "json, name=ActivationCode" }),
         __metadata("design:type", String)
     ], ActivateContactChannelRequest.prototype, "activationCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ContactChannelId" }),
+        SpeakeasyMetadata({ data: "json, name=ContactChannelId" }),
         __metadata("design:type", String)
     ], ActivateContactChannelRequest.prototype, "contactChannelId", void 0);
     return ActivateContactChannelRequest;

@@ -14,14 +14,14 @@ type ReposGetAllTopicsQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ReposGetAllTopicsRequest struct {
-	PathParams  ReposGetAllTopicsPathParams
-	QueryParams ReposGetAllTopicsQueryParams
-}
-
 type ReposGetAllTopics415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposGetAllTopicsRequest struct {
+	PathParams  ReposGetAllTopicsPathParams
+	QueryParams ReposGetAllTopicsQueryParams
 }
 
 type ReposGetAllTopicsResponse struct {

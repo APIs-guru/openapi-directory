@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DecodeConfig } from "./decodeconfig";
 import { DemodulationConfig } from "./demodulationconfig";
 import { SpectrumConfig } from "./spectrumconfig";
@@ -36,15 +36,15 @@ var AntennaDownlinkDemodDecodeConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=decodeConfig" }),
+        SpeakeasyMetadata({ data: "json, name=decodeConfig" }),
         __metadata("design:type", DecodeConfig)
     ], AntennaDownlinkDemodDecodeConfig.prototype, "decodeConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=demodulationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=demodulationConfig" }),
         __metadata("design:type", DemodulationConfig)
     ], AntennaDownlinkDemodDecodeConfig.prototype, "demodulationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=spectrumConfig" }),
+        SpeakeasyMetadata({ data: "json, name=spectrumConfig" }),
         __metadata("design:type", SpectrumConfig)
     ], AntennaDownlinkDemodDecodeConfig.prototype, "spectrumConfig", void 0);
     return AntennaDownlinkDemodDecodeConfig;

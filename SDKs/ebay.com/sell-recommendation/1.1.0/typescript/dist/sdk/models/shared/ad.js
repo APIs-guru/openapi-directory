@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BidPercentages } from "./bidpercentages";
 // Ad
 /**
  * A complex type that contains recommendations and information on how to configure Promoted Listings ad campaigns.
@@ -34,11 +34,11 @@ var Ad = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bidPercentages", elemType: shared.BidPercentages }),
+        SpeakeasyMetadata({ data: "json, name=bidPercentages", elemType: BidPercentages }),
         __metadata("design:type", Array)
     ], Ad.prototype, "bidPercentages", void 0);
     __decorate([
-        Metadata({ data: "json, name=promoteWithAd" }),
+        SpeakeasyMetadata({ data: "json, name=promoteWithAd" }),
         __metadata("design:type", String)
     ], Ad.prototype, "promoteWithAd", void 0);
     return Ad;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentWordInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Word-level info for words in a transcript.
 **/
 export class GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentWordInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=endOffset" })
+  @SpeakeasyMetadata({ data: "json, name=endOffset" })
   endOffset?: string;
 
-  @Metadata({ data: "json, name=startOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startOffset" })
   startOffset?: string;
 
-  @Metadata({ data: "json, name=word" })
+  @SpeakeasyMetadata({ data: "json, name=word" })
   word?: string;
 }

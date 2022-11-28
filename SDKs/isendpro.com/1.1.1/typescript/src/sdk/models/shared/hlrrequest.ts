@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum HlRrequestGetHlrEnum {
     One = "1"
@@ -6,12 +7,12 @@ export enum HlRrequestGetHlrEnum {
 
 
 export class HlRrequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=getHLR" })
+  @SpeakeasyMetadata({ data: "json, name=getHLR" })
   getHlr: HlRrequestGetHlrEnum;
 
-  @Metadata({ data: "json, name=keyid" })
+  @SpeakeasyMetadata({ data: "json, name=keyid" })
   keyid: string;
 
-  @Metadata({ data: "json, name=num" })
+  @SpeakeasyMetadata({ data: "json, name=num" })
   num: string[];
 }

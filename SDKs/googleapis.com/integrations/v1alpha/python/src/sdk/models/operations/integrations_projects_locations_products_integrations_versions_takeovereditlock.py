@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockPathParams:
-    integration_version: str = field(default=None, metadata={'path_param': { 'field_name': 'integrationVersion', 'style': 'simple', 'explode': False }})
+    integration_version: str = field(metadata={'path_param': { 'field_name': 'integrationVersion', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockQ
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockRequest:
-    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockPathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockQueryParams = field(default=None)
+    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockPathParams = field()
+    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockQueryParams = field()
+    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockSecurity = field(default=None)
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverEditLockResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_takeover_edit_lock_response: Optional[shared.GoogleCloudIntegrationsV1alphaTakeoverEditLockResponse] = field(default=None)
-    status_code: int = field(default=None)
     

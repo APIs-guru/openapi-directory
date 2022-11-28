@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1ProvisionOrganizationRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for ProvisionOrganization.
 **/
 export class GoogleCloudApigeeV1ProvisionOrganizationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyticsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=analyticsRegion" })
   analyticsRegion?: string;
 
-  @Metadata({ data: "json, name=authorizedNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetwork" })
   authorizedNetwork?: string;
 
-  @Metadata({ data: "json, name=runtimeLocation" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeLocation" })
   runtimeLocation?: string;
 }

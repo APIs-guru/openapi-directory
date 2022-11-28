@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileFormatEnum } from "./fileformatenum";
+import { Filter } from "./filter";
 import { RecommendationPreferences } from "./recommendationpreferences";
 import { S3DestinationConfig } from "./s3destinationconfig";
 var ExportEc2InstanceRecommendationsRequest = /** @class */ (function (_super) {
@@ -33,31 +33,31 @@ var ExportEc2InstanceRecommendationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountIds" }),
+        SpeakeasyMetadata({ data: "json, name=accountIds" }),
         __metadata("design:type", Array)
     ], ExportEc2InstanceRecommendationsRequest.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldsToExport" }),
+        SpeakeasyMetadata({ data: "json, name=fieldsToExport" }),
         __metadata("design:type", Array)
     ], ExportEc2InstanceRecommendationsRequest.prototype, "fieldsToExport", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileFormat" }),
+        SpeakeasyMetadata({ data: "json, name=fileFormat" }),
         __metadata("design:type", String)
     ], ExportEc2InstanceRecommendationsRequest.prototype, "fileFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.Filter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: Filter }),
         __metadata("design:type", Array)
     ], ExportEc2InstanceRecommendationsRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeMemberAccounts" }),
+        SpeakeasyMetadata({ data: "json, name=includeMemberAccounts" }),
         __metadata("design:type", Boolean)
     ], ExportEc2InstanceRecommendationsRequest.prototype, "includeMemberAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendationPreferences" }),
+        SpeakeasyMetadata({ data: "json, name=recommendationPreferences" }),
         __metadata("design:type", RecommendationPreferences)
     ], ExportEc2InstanceRecommendationsRequest.prototype, "recommendationPreferences", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3DestinationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=s3DestinationConfig" }),
         __metadata("design:type", S3DestinationConfig)
     ], ExportEc2InstanceRecommendationsRequest.prototype, "s3DestinationConfig", void 0);
     return ExportEc2InstanceRecommendationsRequest;

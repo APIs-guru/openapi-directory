@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SecretPayload } from "./secretpayload";
 /**
  * Request message for SecretManagerService.AddSecretVersion.

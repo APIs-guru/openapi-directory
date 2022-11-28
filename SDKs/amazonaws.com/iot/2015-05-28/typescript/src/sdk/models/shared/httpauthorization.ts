@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SigV4Authorization } from "./sigv4authorization";
+
 
 
 // HttpAuthorization
@@ -7,6 +8,6 @@ import { SigV4Authorization } from "./sigv4authorization";
  * The authorization method used to send messages.
 **/
 export class HttpAuthorization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sigv4" })
+  @SpeakeasyMetadata({ data: "json, name=sigv4" })
   sigv4?: SigV4Authorization;
 }

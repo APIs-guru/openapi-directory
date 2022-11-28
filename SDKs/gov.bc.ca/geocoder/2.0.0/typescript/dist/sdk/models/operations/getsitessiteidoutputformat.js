@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetSitesSiteIdOutputFormatOutputFormatEnum;
 (function (GetSitesSiteIdOutputFormatOutputFormatEnum) {
     GetSitesSiteIdOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,11 +39,11 @@ var GetSitesSiteIdOutputFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetSitesSiteIdOutputFormatPathParams.prototype, "outputFormat", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=siteID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteID" }),
         __metadata("design:type", String)
     ], GetSitesSiteIdOutputFormatPathParams.prototype, "siteId", void 0);
     return GetSitesSiteIdOutputFormatPathParams;
@@ -64,19 +64,19 @@ var GetSitesSiteIdOutputFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brief" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" }),
         __metadata("design:type", Boolean)
     ], GetSitesSiteIdOutputFormatQueryParams.prototype, "brief", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
         __metadata("design:type", String)
     ], GetSitesSiteIdOutputFormatQueryParams.prototype, "locationDescriptor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetSitesSiteIdOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
         __metadata("design:type", Number)
     ], GetSitesSiteIdOutputFormatQueryParams.prototype, "setBack", void 0);
     return GetSitesSiteIdOutputFormatQueryParams;
@@ -88,11 +88,11 @@ var GetSitesSiteIdOutputFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSitesSiteIdOutputFormatPathParams)
     ], GetSitesSiteIdOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSitesSiteIdOutputFormatQueryParams)
     ], GetSitesSiteIdOutputFormatRequest.prototype, "queryParams", void 0);
     return GetSitesSiteIdOutputFormatRequest;
@@ -104,11 +104,11 @@ var GetSitesSiteIdOutputFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSitesSiteIdOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSitesSiteIdOutputFormatResponse.prototype, "statusCode", void 0);
     return GetSitesSiteIdOutputFormatResponse;

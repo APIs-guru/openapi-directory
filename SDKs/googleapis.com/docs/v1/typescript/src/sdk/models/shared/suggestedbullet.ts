@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Bullet } from "./bullet";
 import { BulletSuggestionState } from "./bulletsuggestionstate";
+
 
 
 // SuggestedBullet
@@ -8,9 +9,9 @@ import { BulletSuggestionState } from "./bulletsuggestionstate";
  * A suggested change to a Bullet.
 **/
 export class SuggestedBullet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bullet" })
+  @SpeakeasyMetadata({ data: "json, name=bullet" })
   bullet?: Bullet;
 
-  @Metadata({ data: "json, name=bulletSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=bulletSuggestionState" })
   bulletSuggestionState?: BulletSuggestionState;
 }

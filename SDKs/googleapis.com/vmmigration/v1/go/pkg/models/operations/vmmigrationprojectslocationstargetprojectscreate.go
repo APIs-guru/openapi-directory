@@ -32,7 +32,7 @@ type VmmigrationProjectsLocationsTargetProjectsCreateSecurity struct {
 type VmmigrationProjectsLocationsTargetProjectsCreateRequest struct {
 	PathParams  VmmigrationProjectsLocationsTargetProjectsCreatePathParams
 	QueryParams VmmigrationProjectsLocationsTargetProjectsCreateQueryParams
-	Request     *shared.TargetProject `request:"mediaType=application/json"`
+	Request     *shared.TargetProjectInput `request:"mediaType=application/json"`
 	Security    VmmigrationProjectsLocationsTargetProjectsCreateSecurity
 }
 

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeregisterDevicePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +17,19 @@ class DeregisterDeviceQueryParams:
 
 @dataclass
 class DeregisterDeviceSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeregisterDeviceRequest:
-    path_params: DeregisterDevicePathParams = field(default=None)
-    query_params: DeregisterDeviceQueryParams = field(default=None)
-    security: DeregisterDeviceSecurity = field(default=None)
+    path_params: DeregisterDevicePathParams = field()
+    query_params: DeregisterDeviceQueryParams = field()
+    security: DeregisterDeviceSecurity = field()
     
 
 @dataclass
 class DeregisterDeviceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

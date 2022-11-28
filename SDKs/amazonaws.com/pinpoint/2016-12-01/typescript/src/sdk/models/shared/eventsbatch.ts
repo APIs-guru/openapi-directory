@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicEndpoint } from "./publicendpoint";
 import { Event } from "./event";
+
 
 
 // EventsBatch
@@ -9,9 +9,9 @@ import { Event } from "./event";
  * Specifies a batch of endpoints and events to process.
 **/
 export class EventsBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint: PublicEndpoint;
 
-  @Metadata({ data: "json, name=Events", elemType: shared.Event })
+  @SpeakeasyMetadata({ data: "json, name=Events", elemType: Event })
   events: Map<string, Event>;
 }

@@ -18,6 +18,8 @@ const (
 	LintResultSeverityEnumDeprecated          LintResultSeverityEnum = "DEPRECATED"
 )
 
+// LintResult
+// Structured response of a single validation unit.
 type LintResult struct {
 	DebugMessage       *string                 `json:"debugMessage,omitempty"`
 	FieldName          *string                 `json:"fieldName,omitempty"`

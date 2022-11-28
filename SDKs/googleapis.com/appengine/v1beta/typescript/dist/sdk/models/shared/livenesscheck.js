@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LivenessCheck
 /**
  * Health checking configuration for VM instances. Unhealthy instances are killed and replaced with new instances.
@@ -33,31 +33,31 @@ var LivenessCheck = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=checkInterval" }),
+        SpeakeasyMetadata({ data: "json, name=checkInterval" }),
         __metadata("design:type", String)
     ], LivenessCheck.prototype, "checkInterval", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=failureThreshold" }),
         __metadata("design:type", Number)
     ], LivenessCheck.prototype, "failureThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=host" }),
+        SpeakeasyMetadata({ data: "json, name=host" }),
         __metadata("design:type", String)
     ], LivenessCheck.prototype, "host", void 0);
     __decorate([
-        Metadata({ data: "json, name=initialDelay" }),
+        SpeakeasyMetadata({ data: "json, name=initialDelay" }),
         __metadata("design:type", String)
     ], LivenessCheck.prototype, "initialDelay", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], LivenessCheck.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=successThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=successThreshold" }),
         __metadata("design:type", Number)
     ], LivenessCheck.prototype, "successThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", String)
     ], LivenessCheck.prototype, "timeout", void 0);
     return LivenessCheck;

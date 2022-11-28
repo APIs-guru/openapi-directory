@@ -53,15 +53,15 @@ type DcimFrontPortsListQueryParams struct {
 	TypeN           *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type DcimFrontPortsListRequest struct {
-	QueryParams DcimFrontPortsListQueryParams
-}
-
 type DcimFrontPortsList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.FrontPort `json:"results"`
+}
+
+type DcimFrontPortsListRequest struct {
+	QueryParams DcimFrontPortsListQueryParams
 }
 
 type DcimFrontPortsListResponse struct {

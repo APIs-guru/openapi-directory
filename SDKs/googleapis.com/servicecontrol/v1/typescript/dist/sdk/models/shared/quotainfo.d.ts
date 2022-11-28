@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MetricValueSet } from "./metricvalueset";
 /**
  * Contains the quota information for a quota check response.

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryDomainAliasesInsertPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DirectoryDomainAliasesInsertQueryParams:
 
 @dataclass
 class DirectoryDomainAliasesInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryDomainAliasesInsertRequest:
-    path_params: DirectoryDomainAliasesInsertPathParams = field(default=None)
-    query_params: DirectoryDomainAliasesInsertQueryParams = field(default=None)
+    path_params: DirectoryDomainAliasesInsertPathParams = field()
+    query_params: DirectoryDomainAliasesInsertQueryParams = field()
+    security: DirectoryDomainAliasesInsertSecurity = field()
     request: Optional[shared.DomainAlias] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryDomainAliasesInsertSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryDomainAliasesInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     domain_alias: Optional[shared.DomainAlias] = field(default=None)
-    status_code: int = field(default=None)
     

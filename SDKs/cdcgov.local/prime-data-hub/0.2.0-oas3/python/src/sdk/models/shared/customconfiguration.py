@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sftptransport
-from . import as2transport
-from . import blobstoretransport
-from . import nulltransport
+from sdk import utils
+from . import *
 
 class CustomConfigurationFormatEnum(str, Enum):
     CSV = "CSV"
@@ -14,10 +13,14 @@ class CustomConfigurationFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CustomConfiguration:
-    format: CustomConfigurationFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    name_format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nameFormat' }})
-    receiving_organization: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'receivingOrganization' }})
-    schema_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemaName' }})
-    transport: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transport' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""CustomConfiguration
+    A custom configuration for a custom schema
+    """
+    
+    format: CustomConfigurationFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    schema_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemaName') }})
+    transport: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('transport') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    name_format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nameFormat') }})
+    receiving_organization: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('receivingOrganization') }})
     

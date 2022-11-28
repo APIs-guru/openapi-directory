@@ -1,30 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudapigeev1canaryevaluationmetriclabels
-
-class GoogleCloudApigeeV1CanaryEvaluationStateEnum(str, Enum):
-    STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
-    RUNNING = "RUNNING"
-    SUCCEEDED = "SUCCEEDED"
-
-class GoogleCloudApigeeV1CanaryEvaluationVerdictEnum(str, Enum):
-    VERDICT_UNSPECIFIED = "VERDICT_UNSPECIFIED"
-    NONE = "NONE"
-    FAIL = "FAIL"
-    PASS = "PASS"
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleCloudApigeeV1CanaryEvaluation:
-    control: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'control' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    metric_labels: Optional[googlecloudapigeev1canaryevaluationmetriclabels.GoogleCloudApigeeV1CanaryEvaluationMetricLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricLabels' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    state: Optional[GoogleCloudApigeeV1CanaryEvaluationStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    treatment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'treatment' }})
-    verdict: Optional[GoogleCloudApigeeV1CanaryEvaluationVerdictEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verdict' }})
+class GoogleCloudApigeeV1CanaryEvaluationInput:
+    r"""GoogleCloudApigeeV1CanaryEvaluationInput
+    CanaryEvaluation represents the canary analysis between two versions of the runtime that is serving requests.
+    """
+    
+    control: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('control') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    metric_labels: Optional[GoogleCloudApigeeV1CanaryEvaluationMetricLabels] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricLabels') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    treatment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('treatment') }})
     

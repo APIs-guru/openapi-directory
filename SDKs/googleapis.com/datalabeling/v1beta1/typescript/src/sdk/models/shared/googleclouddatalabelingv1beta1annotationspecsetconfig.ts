@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1AnnotationSpecSetConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Annotation spec set with the setting of allowing multi labels or not.
 **/
 export class GoogleCloudDatalabelingV1beta1AnnotationSpecSetConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowMultiLabel" })
+  @SpeakeasyMetadata({ data: "json, name=allowMultiLabel" })
   allowMultiLabel?: boolean;
 
-  @Metadata({ data: "json, name=annotationSpecSet" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpecSet" })
   annotationSpecSet?: string;
 }

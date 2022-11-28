@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OcrPageResult = /** @class */ (function (_super) {
     __extends(OcrPageResult, _super);
     function OcrPageResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MeanConfidenceLevel" }),
+        SpeakeasyMetadata({ data: "json, name=MeanConfidenceLevel" }),
         __metadata("design:type", Number)
     ], OcrPageResult.prototype, "meanConfidenceLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageNumber" }),
+        SpeakeasyMetadata({ data: "json, name=PageNumber" }),
         __metadata("design:type", Number)
     ], OcrPageResult.prototype, "pageNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=TextResult" }),
+        SpeakeasyMetadata({ data: "json, name=TextResult" }),
         __metadata("design:type", String)
     ], OcrPageResult.prototype, "textResult", void 0);
     return OcrPageResult;

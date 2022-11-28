@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EventType } from "./eventtype";
 // Provider
 /**
  * A representation of the Provider resource.
@@ -34,15 +34,15 @@ var Provider = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Provider.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTypes", elemType: shared.EventType }),
+        SpeakeasyMetadata({ data: "json, name=eventTypes", elemType: EventType }),
         __metadata("design:type", Array)
     ], Provider.prototype, "eventTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Provider.prototype, "name", void 0);
     return Provider;

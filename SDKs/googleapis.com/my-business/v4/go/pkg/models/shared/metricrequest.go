@@ -31,6 +31,8 @@ const (
 	MetricRequestOptionsEnumBreakdownHourOfDay      MetricRequestOptionsEnum = "BREAKDOWN_HOUR_OF_DAY"
 )
 
+// MetricRequest
+// A request to return values for one metric and the options for how those values should be returned.
 type MetricRequest struct {
 	Metric  *MetricRequestMetricEnum   `json:"metric,omitempty"`
 	Options []MetricRequestOptionsEnum `json:"options,omitempty"`

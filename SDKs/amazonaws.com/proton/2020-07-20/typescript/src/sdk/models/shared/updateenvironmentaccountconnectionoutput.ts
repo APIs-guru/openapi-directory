@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentAccountConnection } from "./environmentaccountconnection";
 
 
+
 export class UpdateEnvironmentAccountConnectionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentAccountConnection" })
+  @SpeakeasyMetadata({ data: "json, name=environmentAccountConnection" })
   environmentAccountConnection: EnvironmentAccountConnection;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PubsubSnapshotMetadata
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a Pubsub snapshot.
 **/
 export class PubsubSnapshotMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=snapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotName" })
   snapshotName?: string;
 
-  @Metadata({ data: "json, name=topicName" })
+  @SpeakeasyMetadata({ data: "json, name=topicName" })
   topicName?: string;
 }

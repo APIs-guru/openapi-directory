@@ -9,11 +9,11 @@ class PostInventoryMoqHeaders:
 
 @dataclass
 class PostInventoryMoqRequest:
-    headers: PostInventoryMoqHeaders = field(default=None)
+    headers: PostInventoryMoqHeaders = field()
     
 
 @dataclass
 class PostInventoryMoqResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

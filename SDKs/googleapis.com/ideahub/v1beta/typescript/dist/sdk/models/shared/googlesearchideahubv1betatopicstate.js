@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleSearchIdeahubV1betaTopicState
 /**
  * Represents topic state specific to a web property.
@@ -33,15 +33,15 @@ var GoogleSearchIdeahubV1betaTopicState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dismissed" }),
+        SpeakeasyMetadata({ data: "json, name=dismissed" }),
         __metadata("design:type", Boolean)
     ], GoogleSearchIdeahubV1betaTopicState.prototype, "dismissed", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleSearchIdeahubV1betaTopicState.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=saved" }),
+        SpeakeasyMetadata({ data: "json, name=saved" }),
         __metadata("design:type", Boolean)
     ], GoogleSearchIdeahubV1betaTopicState.prototype, "saved", void 0);
     return GoogleSearchIdeahubV1betaTopicState;

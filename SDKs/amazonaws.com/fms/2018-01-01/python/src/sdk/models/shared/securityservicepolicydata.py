@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import securityservicetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SecurityServicePolicyData:
-    managed_service_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ManagedServiceData' }})
-    type: securityservicetype_enum.SecurityServiceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""SecurityServicePolicyData
+    Details about the security service that is being used to protect the resources.
+    """
+    
+    type: SecurityServiceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    managed_service_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ManagedServiceData') }})
     

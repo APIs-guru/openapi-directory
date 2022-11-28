@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Role } from "./role";
+
 
 
 // CreateRoleRequest
@@ -7,9 +8,9 @@ import { Role } from "./role";
  * The request to create a new role.
 **/
 export class CreateRoleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: Role;
 
-  @Metadata({ data: "json, name=roleId" })
+  @SpeakeasyMetadata({ data: "json, name=roleId" })
   roleId?: string;
 }

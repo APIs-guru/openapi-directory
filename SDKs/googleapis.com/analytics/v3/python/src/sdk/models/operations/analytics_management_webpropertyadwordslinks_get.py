@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksGetPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    web_property_ad_words_link_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyAdWordsLinkId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    web_property_ad_words_link_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyAdWordsLinkId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,14 +24,14 @@ class AnalyticsManagementWebPropertyAdWordsLinksGetQueryParams:
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,14 +42,14 @@ class AnalyticsManagementWebPropertyAdWordsLinksGetSecurity:
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksGetRequest:
-    path_params: AnalyticsManagementWebPropertyAdWordsLinksGetPathParams = field(default=None)
-    query_params: AnalyticsManagementWebPropertyAdWordsLinksGetQueryParams = field(default=None)
-    security: AnalyticsManagementWebPropertyAdWordsLinksGetSecurity = field(default=None)
+    path_params: AnalyticsManagementWebPropertyAdWordsLinksGetPathParams = field()
+    query_params: AnalyticsManagementWebPropertyAdWordsLinksGetQueryParams = field()
+    security: AnalyticsManagementWebPropertyAdWordsLinksGetSecurity = field()
     
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     entity_ad_words_link: Optional[shared.EntityAdWordsLink] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedEncryptionStatus } from "./customermanagedencryptionstatus";
 /**
  * Describes the status of a user-managed replica for the SecretVersion.

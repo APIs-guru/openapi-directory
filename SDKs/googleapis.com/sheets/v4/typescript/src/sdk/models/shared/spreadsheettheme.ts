@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThemeColorPair } from "./themecolorpair";
+
 
 
 // SpreadsheetTheme
@@ -8,9 +8,9 @@ import { ThemeColorPair } from "./themecolorpair";
  * Represents spreadsheet theme
 **/
 export class SpreadsheetTheme extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primaryFontFamily" })
+  @SpeakeasyMetadata({ data: "json, name=primaryFontFamily" })
   primaryFontFamily?: string;
 
-  @Metadata({ data: "json, name=themeColors", elemType: shared.ThemeColorPair })
+  @SpeakeasyMetadata({ data: "json, name=themeColors", elemType: ThemeColorPair })
   themeColors?: ThemeColorPair[];
 }

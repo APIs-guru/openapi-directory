@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutV3AssetChangesChangeSetsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=batch_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=batch_size" })
   batchSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=channel_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=channel_id" })
   channelId?: number;
 }
 
 
 export class PutV3AssetChangesChangeSetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutV3AssetChangesChangeSetsQueryParams;
 }
 
 
 export class PutV3AssetChangesChangeSetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   assetChanges?: shared.AssetChanges;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

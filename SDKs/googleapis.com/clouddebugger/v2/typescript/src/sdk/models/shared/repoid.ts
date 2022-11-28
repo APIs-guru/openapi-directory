@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectRepoId } from "./projectrepoid";
+
 
 
 // RepoId
@@ -7,9 +8,9 @@ import { ProjectRepoId } from "./projectrepoid";
  * A unique identifier for a cloud repo.
 **/
 export class RepoId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectRepoId" })
+  @SpeakeasyMetadata({ data: "json, name=projectRepoId" })
   projectRepoId?: ProjectRepoId;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }

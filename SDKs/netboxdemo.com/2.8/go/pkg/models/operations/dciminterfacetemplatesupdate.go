@@ -10,7 +10,7 @@ type DcimInterfaceTemplatesUpdatePathParams struct {
 
 type DcimInterfaceTemplatesUpdateRequest struct {
 	PathParams DcimInterfaceTemplatesUpdatePathParams
-	Request    shared.WritableInterfaceTemplate `request:"mediaType=application/json"`
+	Request    shared.WritableInterfaceTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimInterfaceTemplatesUpdateResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// AccountLimit
+// Limits that are related to concurrency and storage. All file and storage sizes are in bytes.
 type AccountLimit struct {
 	CodeSizeUnzipped               *int64 `json:"CodeSizeUnzipped,omitempty"`
 	CodeSizeZipped                 *int64 `json:"CodeSizeZipped,omitempty"`

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProviderTypeEnum } from "./providertypeenum";
 import { RepositoryAssociationStateEnum } from "./repositoryassociationstateenum";
+
 
 
 // RepositoryAssociationSummary
@@ -8,27 +9,27 @@ import { RepositoryAssociationStateEnum } from "./repositoryassociationstateenum
  * Summary information about a repository association. The <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html"> <code>ListRepositoryAssociations</code> </a> operation returns a list of <code>RepositoryAssociationSummary</code> objects.
 **/
 export class RepositoryAssociationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationArn" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationArn" })
   associationArn?: string;
 
-  @Metadata({ data: "json, name=AssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=ConnectionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionArn" })
   connectionArn?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedTimeStamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTimeStamp" })
   lastUpdatedTimeStamp?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=ProviderType" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderType" })
   providerType?: ProviderTypeEnum;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: RepositoryAssociationStateEnum;
 }

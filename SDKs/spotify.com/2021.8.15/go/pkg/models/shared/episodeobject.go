@@ -1,5 +1,8 @@
 package shared
 
+// EpisodeObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-episodeobject - Find more info on the official Spotify Web API Reference
 type EpisodeObject struct {
 	AudioPreviewURL      *string                   `json:"audio_preview_url,omitempty"`
 	Description          *string                   `json:"description,omitempty"`

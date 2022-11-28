@@ -18,8 +18,16 @@ const (
 	OnScreenPositionAssignedTargetingOptionDetailsOnScreenPositionEnumOnScreenPositionBelowTheFold OnScreenPositionAssignedTargetingOptionDetailsOnScreenPositionEnum = "ON_SCREEN_POSITION_BELOW_THE_FOLD"
 )
 
+// OnScreenPositionAssignedTargetingOptionDetails
+// On screen position targeting option details. This will be populated in the on_screen_position_details field when targeting_type is `TARGETING_TYPE_ON_SCREEN_POSITION`.
 type OnScreenPositionAssignedTargetingOptionDetails struct {
 	AdType            *OnScreenPositionAssignedTargetingOptionDetailsAdTypeEnum           `json:"adType,omitempty"`
 	OnScreenPosition  *OnScreenPositionAssignedTargetingOptionDetailsOnScreenPositionEnum `json:"onScreenPosition,omitempty"`
 	TargetingOptionID *string                                                             `json:"targetingOptionId,omitempty"`
+}
+
+// OnScreenPositionAssignedTargetingOptionDetailsInput
+// On screen position targeting option details. This will be populated in the on_screen_position_details field when targeting_type is `TARGETING_TYPE_ON_SCREEN_POSITION`.
+type OnScreenPositionAssignedTargetingOptionDetailsInput struct {
+	TargetingOptionID *string `json:"targetingOptionId,omitempty"`
 }

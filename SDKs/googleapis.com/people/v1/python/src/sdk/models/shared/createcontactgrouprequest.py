@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import contactgroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class CreateContactGroupRequest:
-    contact_group: Optional[contactgroup.ContactGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contactGroup' }})
-    read_group_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readGroupFields' }})
+class CreateContactGroupRequestInput:
+    r"""CreateContactGroupRequestInput
+    A request to create a new contact group.
+    """
+    
+    contact_group: Optional[ContactGroupInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contactGroup') }})
+    read_group_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readGroupFields') }})
     

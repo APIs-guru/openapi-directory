@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class BatchUpdateDevicePositionPathParams:
-    tracker_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
+    tracker_name: str = field(metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,24 +27,24 @@ class BatchUpdateDevicePositionHeaders:
 @dataclass_json
 @dataclass
 class BatchUpdateDevicePositionRequestBody:
-    updates: List[shared.DevicePositionUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Updates' }})
+    updates: List[shared.DevicePositionUpdate] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Updates') }})
     
 
 @dataclass
 class BatchUpdateDevicePositionRequest:
-    path_params: BatchUpdateDevicePositionPathParams = field(default=None)
-    headers: BatchUpdateDevicePositionHeaders = field(default=None)
-    request: BatchUpdateDevicePositionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchUpdateDevicePositionHeaders = field()
+    path_params: BatchUpdateDevicePositionPathParams = field()
+    request: BatchUpdateDevicePositionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchUpdateDevicePositionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     batch_update_device_position_response: Optional[shared.BatchUpdateDevicePositionResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

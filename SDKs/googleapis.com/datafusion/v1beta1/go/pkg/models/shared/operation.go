@@ -1,5 +1,7 @@
 package shared
 
+// Operation
+// This resource represents a long-running operation that is the result of a network API call.
 type Operation struct {
 	Done     *bool                  `json:"done,omitempty"`
 	Error    *Status                `json:"error,omitempty"`

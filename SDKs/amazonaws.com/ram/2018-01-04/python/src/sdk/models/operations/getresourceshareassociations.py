@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -35,25 +40,26 @@ class GetResourceShareAssociationsRequestBodyAssociationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetResourceShareAssociationsRequestBody:
-    association_status: Optional[GetResourceShareAssociationsRequestBodyAssociationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'associationStatus' }})
-    association_type: GetResourceShareAssociationsRequestBodyAssociationTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'associationType' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principal' }})
-    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceArn' }})
-    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArns' }})
+    association_type: GetResourceShareAssociationsRequestBodyAssociationTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('associationType') }})
+    association_status: Optional[GetResourceShareAssociationsRequestBodyAssociationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('associationStatus') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principal') }})
+    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceArn') }})
+    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArns') }})
     
 
 @dataclass
 class GetResourceShareAssociationsRequest:
-    query_params: GetResourceShareAssociationsQueryParams = field(default=None)
-    headers: GetResourceShareAssociationsHeaders = field(default=None)
-    request: GetResourceShareAssociationsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetResourceShareAssociationsHeaders = field()
+    query_params: GetResourceShareAssociationsQueryParams = field()
+    request: GetResourceShareAssociationsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetResourceShareAssociationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_resource_share_associations_response: Optional[shared.GetResourceShareAssociationsResponse] = field(default=None)
     invalid_next_token_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
@@ -61,6 +67,5 @@ class GetResourceShareAssociationsResponse:
     operation_not_permitted_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

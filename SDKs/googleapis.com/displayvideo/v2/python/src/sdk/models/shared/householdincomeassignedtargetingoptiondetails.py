@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class HouseholdIncomeAssignedTargetingOptionDetailsHouseholdIncomeEnum(str, Enum):
     HOUSEHOLD_INCOME_UNSPECIFIED = "HOUSEHOLD_INCOME_UNSPECIFIED"
@@ -16,5 +18,9 @@ class HouseholdIncomeAssignedTargetingOptionDetailsHouseholdIncomeEnum(str, Enum
 @dataclass_json
 @dataclass
 class HouseholdIncomeAssignedTargetingOptionDetails:
-    household_income: Optional[HouseholdIncomeAssignedTargetingOptionDetailsHouseholdIncomeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'householdIncome' }})
+    r"""HouseholdIncomeAssignedTargetingOptionDetails
+    Details for assigned household income targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_HOUSEHOLD_INCOME`.
+    """
+    
+    household_income: Optional[HouseholdIncomeAssignedTargetingOptionDetailsHouseholdIncomeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('householdIncome') }})
     

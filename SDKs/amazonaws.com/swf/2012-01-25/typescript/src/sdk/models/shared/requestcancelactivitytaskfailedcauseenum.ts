@@ -1,6 +1,7 @@
 
 
+
 export enum RequestCancelActivityTaskFailedCauseEnum {
-    ActivityIdUnknown = "ACTIVITY_ID_UNKNOWN"
-,    OperationNotPermitted = "OPERATION_NOT_PERMITTED"
+    ActivityIdUnknown = "ACTIVITY_ID_UNKNOWN",
+    OperationNotPermitted = "OPERATION_NOT_PERMITTED"
 }

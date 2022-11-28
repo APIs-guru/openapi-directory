@@ -1,5 +1,7 @@
 package shared
 
+// RedshiftDataSpec
+// Describes the data specification of an Amazon Redshift <code>DataSource</code>.
 type RedshiftDataSpec struct {
 	DataRearrangement   *string                     `json:"DataRearrangement,omitempty"`
 	DataSchema          *string                     `json:"DataSchema,omitempty"`

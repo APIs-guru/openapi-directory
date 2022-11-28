@@ -28,11 +28,6 @@ type IncerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type IncerRequest struct {
-	Request  *IncerRequestBody `request:"mediaType=application/json"`
-	Security IncerSecurity
-}
-
 type Incer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Incer504ApplicationJSON struct {
 	Error            *Incer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Incer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type IncerRequest struct {
+	Request  *IncerRequestBody `request:"mediaType=application/json"`
+	Security IncerSecurity
 }
 
 type IncerResponse struct {

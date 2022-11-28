@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Behavior
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents behaviour reports
 **/
 export class Behavior extends SpeakeasyBase {
-  @Metadata({ data: "json, name=birth_date" })
+  @SpeakeasyMetadata({ data: "json, name=birth_date" })
   birthDate: Date;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: any;
 
-  @Metadata({ data: "json, name=creation_date" })
+  @SpeakeasyMetadata({ data: "json, name=creation_date" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=document_id" })
+  @SpeakeasyMetadata({ data: "json, name=document_id" })
   documentId: string;
 
-  @Metadata({ data: "json, name=document_type" })
+  @SpeakeasyMetadata({ data: "json, name=document_type" })
   documentType: any;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 
-  @Metadata({ data: "json, name=feedback_date" })
+  @SpeakeasyMetadata({ data: "json, name=feedback_date" })
   feedbackDate: Date;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName: string;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName: string;
 
-  @Metadata({ data: "json, name=phone_number" })
+  @SpeakeasyMetadata({ data: "json, name=phone_number" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string;
 }

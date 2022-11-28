@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostPortfolioXyzHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class PostPortfolioXyzRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   portfolioRequest?: shared.PortfolioRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   portfolioRequest1?: shared.PortfolioRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   portfolioRequest2?: shared.PortfolioRequest;
 }
 
 
 export class PostPortfolioXyzRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostPortfolioXyzHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostPortfolioXyzRequests;
 }
 
 
 export class PostPortfolioXyzResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PortfolioXyzModel })
+  @SpeakeasyMetadata({ elemType: shared.PortfolioXyzModel })
   portfolioXyzModels?: shared.PortfolioXyzModel[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -42,7 +42,7 @@ type FirebasedatabaseProjectsLocationsInstancesCreateSecurity struct {
 type FirebasedatabaseProjectsLocationsInstancesCreateRequest struct {
 	PathParams  FirebasedatabaseProjectsLocationsInstancesCreatePathParams
 	QueryParams FirebasedatabaseProjectsLocationsInstancesCreateQueryParams
-	Request     *shared.DatabaseInstance `request:"mediaType=application/json"`
+	Request     *shared.DatabaseInstanceInput `request:"mediaType=application/json"`
 	Security    FirebasedatabaseProjectsLocationsInstancesCreateSecurity
 }
 

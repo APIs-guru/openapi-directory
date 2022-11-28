@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum Proto2FieldDescriptorProtoLabelEnum {
-    LabelOptional = "LABEL_OPTIONAL"
-,    LabelRequired = "LABEL_REQUIRED"
-,    LabelRepeated = "LABEL_REPEATED"
+    LabelOptional = "LABEL_OPTIONAL",
+    LabelRequired = "LABEL_REQUIRED",
+    LabelRepeated = "LABEL_REPEATED"
 }
 
 export enum Proto2FieldDescriptorProtoTypeEnum {
-    TypeDouble = "TYPE_DOUBLE"
-,    TypeFloat = "TYPE_FLOAT"
-,    TypeInt64 = "TYPE_INT64"
-,    TypeUint64 = "TYPE_UINT64"
-,    TypeInt32 = "TYPE_INT32"
-,    TypeFixed64 = "TYPE_FIXED64"
-,    TypeFixed32 = "TYPE_FIXED32"
-,    TypeBool = "TYPE_BOOL"
-,    TypeString = "TYPE_STRING"
-,    TypeGroup = "TYPE_GROUP"
-,    TypeMessage = "TYPE_MESSAGE"
-,    TypeBytes = "TYPE_BYTES"
-,    TypeUint32 = "TYPE_UINT32"
-,    TypeEnum = "TYPE_ENUM"
-,    TypeSfixed32 = "TYPE_SFIXED32"
-,    TypeSfixed64 = "TYPE_SFIXED64"
-,    TypeSint32 = "TYPE_SINT32"
-,    TypeSint64 = "TYPE_SINT64"
+    TypeDouble = "TYPE_DOUBLE",
+    TypeFloat = "TYPE_FLOAT",
+    TypeInt64 = "TYPE_INT64",
+    TypeUint64 = "TYPE_UINT64",
+    TypeInt32 = "TYPE_INT32",
+    TypeFixed64 = "TYPE_FIXED64",
+    TypeFixed32 = "TYPE_FIXED32",
+    TypeBool = "TYPE_BOOL",
+    TypeString = "TYPE_STRING",
+    TypeGroup = "TYPE_GROUP",
+    TypeMessage = "TYPE_MESSAGE",
+    TypeBytes = "TYPE_BYTES",
+    TypeUint32 = "TYPE_UINT32",
+    TypeEnum = "TYPE_ENUM",
+    TypeSfixed32 = "TYPE_SFIXED32",
+    TypeSfixed64 = "TYPE_SFIXED64",
+    TypeSint32 = "TYPE_SINT32",
+    TypeSint64 = "TYPE_SINT64"
 }
 
 
@@ -33,30 +34,30 @@ export enum Proto2FieldDescriptorProtoTypeEnum {
  * Describes a field within a message.
 **/
 export class Proto2FieldDescriptorProto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=defaultValue" })
   defaultValue?: string;
 
-  @Metadata({ data: "json, name=jsonName" })
+  @SpeakeasyMetadata({ data: "json, name=jsonName" })
   jsonName?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: Proto2FieldDescriptorProtoLabelEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 
-  @Metadata({ data: "json, name=oneofIndex" })
+  @SpeakeasyMetadata({ data: "json, name=oneofIndex" })
   oneofIndex?: number;
 
-  @Metadata({ data: "json, name=proto3Optional" })
+  @SpeakeasyMetadata({ data: "json, name=proto3Optional" })
   proto3Optional?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: Proto2FieldDescriptorProtoTypeEnum;
 
-  @Metadata({ data: "json, name=typeName" })
+  @SpeakeasyMetadata({ data: "json, name=typeName" })
   typeName?: string;
 }

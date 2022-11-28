@@ -1,9 +1,11 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails } from "./googlecloudpaymentsresellersubscriptionv1subscriptioncancellationdetails";
 import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem } from "./googlecloudpaymentsresellersubscriptionv1subscriptionlineitem";
 import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec } from "./googlecloudpaymentsresellersubscriptionv1subscriptionpromotionspec";
 import { GoogleCloudPaymentsResellerSubscriptionV1Location } from "./googlecloudpaymentsresellersubscriptionv1location";
 import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails } from "./googlecloudpaymentsresellersubscriptionv1subscriptionupgradedowngradedetails";
+import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput } from "./googlecloudpaymentsresellersubscriptionv1subscriptionlineitem";
+import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecInput } from "./googlecloudpaymentsresellersubscriptionv1subscriptionpromotionspec";
 export declare enum GoogleCloudPaymentsResellerSubscriptionV1SubscriptionProcessingStateEnum {
     ProcessingStateUnspecified = "PROCESSING_STATE_UNSPECIFIED",
     ProcessingStateCancelling = "PROCESSING_STATE_CANCELLING",
@@ -39,5 +41,19 @@ export declare class GoogleCloudPaymentsResellerSubscriptionV1Subscription exten
     serviceLocation?: GoogleCloudPaymentsResellerSubscriptionV1Location;
     state?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum;
     updateTime?: string;
+    upgradeDowngradeDetails?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails;
+}
+/**
+ * A Subscription resource managed by 3P Partners.
+**/
+export declare class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionInput extends SpeakeasyBase {
+    cancellationDetails?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails;
+    lineItems?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput[];
+    name?: string;
+    partnerUserToken?: string;
+    products?: string[];
+    promotionSpecs?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecInput[];
+    promotions?: string[];
+    serviceLocation?: GoogleCloudPaymentsResellerSubscriptionV1Location;
     upgradeDowngradeDetails?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails;
 }

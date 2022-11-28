@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedValue } from "./typedvalue";
 
+
 export enum CollectdValueDataSourceTypeEnum {
-    UnspecifiedDataSourceType = "UNSPECIFIED_DATA_SOURCE_TYPE"
-,    Gauge = "GAUGE"
-,    Counter = "COUNTER"
-,    Derive = "DERIVE"
-,    Absolute = "ABSOLUTE"
+    UnspecifiedDataSourceType = "UNSPECIFIED_DATA_SOURCE_TYPE",
+    Gauge = "GAUGE",
+    Counter = "COUNTER",
+    Derive = "DERIVE",
+    Absolute = "ABSOLUTE"
 }
 
 
@@ -15,12 +16,12 @@ export enum CollectdValueDataSourceTypeEnum {
  * A single data point from a collectd-based plugin.
 **/
 export class CollectdValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceName" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceName" })
   dataSourceName?: string;
 
-  @Metadata({ data: "json, name=dataSourceType" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceType" })
   dataSourceType?: CollectdValueDataSourceTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: TypedValue;
 }

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateClusterHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,7 +32,7 @@ export class CreateClusterHeaders extends SpeakeasyBase {
  * The Kubernetes network configuration for the cluster.
 **/
 export class CreateClusterRequestBodyKubernetesNetworkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceIpv4Cidr" })
+  @SpeakeasyMetadata({ data: "json, name=serviceIpv4Cidr" })
   serviceIpv4Cidr?: string;
 }
 
@@ -41,7 +42,7 @@ export class CreateClusterRequestBodyKubernetesNetworkConfig extends SpeakeasyBa
  * An object representing the logging configuration for resources in your cluster.
 **/
 export class CreateClusterRequestBodyLogging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterLogging", elemType: shared.LogSetup })
+  @SpeakeasyMetadata({ data: "json, name=clusterLogging", elemType: shared.LogSetup })
   clusterLogging?: shared.LogSetup[];
 }
 
@@ -51,90 +52,90 @@ export class CreateClusterRequestBodyLogging extends SpeakeasyBase {
  * An object representing the VPC configuration to use for an Amazon EKS cluster.
 **/
 export class CreateClusterRequestBodyResourcesVpcConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpointPrivateAccess" })
+  @SpeakeasyMetadata({ data: "json, name=endpointPrivateAccess" })
   endpointPrivateAccess?: boolean;
 
-  @Metadata({ data: "json, name=endpointPublicAccess" })
+  @SpeakeasyMetadata({ data: "json, name=endpointPublicAccess" })
   endpointPublicAccess?: boolean;
 
-  @Metadata({ data: "json, name=publicAccessCidrs" })
+  @SpeakeasyMetadata({ data: "json, name=publicAccessCidrs" })
   publicAccessCidrs?: string[];
 
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=subnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=subnetIds" })
   subnetIds?: string[];
 }
 
 
 export class CreateClusterRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=encryptionConfig", elemType: shared.EncryptionConfig })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig", elemType: shared.EncryptionConfig })
   encryptionConfig?: shared.EncryptionConfig[];
 
-  @Metadata({ data: "json, name=kubernetesNetworkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=kubernetesNetworkConfig" })
   kubernetesNetworkConfig?: CreateClusterRequestBodyKubernetesNetworkConfig;
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: CreateClusterRequestBodyLogging;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=resourcesVpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesVpcConfig" })
   resourcesVpcConfig: CreateClusterRequestBodyResourcesVpcConfig;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
 
 export class CreateClusterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateClusterHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateClusterRequestBody;
 }
 
 
 export class CreateClusterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   clientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createClusterResponse?: shared.CreateClusterResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serverException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unsupportedAvailabilityZoneException?: any;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// AdminConfirmSignUpRequest
+// Represents the request to confirm user registration.
 type AdminConfirmSignUpRequest struct {
 	ClientMetadata map[string]string `json:"ClientMetadata,omitempty"`
 	UserPoolID     string            `json:"UserPoolId"`

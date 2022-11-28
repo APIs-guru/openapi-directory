@@ -9,11 +9,11 @@ class GetActionPackageSearchQueryParams:
 
 @dataclass
 class GetActionPackageSearchRequest:
-    query_params: GetActionPackageSearchQueryParams = field(default=None)
+    query_params: GetActionPackageSearchQueryParams = field()
     
 
 @dataclass
 class GetActionPackageSearchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class DeleteAppsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteAppsIDSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class DeleteAppsIDRequest:
-    path_params: DeleteAppsIDPathParams = field(default=None)
-    security: DeleteAppsIDSecurity = field(default=None)
+    path_params: DeleteAppsIDPathParams = field()
+    security: DeleteAppsIDSecurity = field()
     
 
 @dataclass
 class DeleteAppsIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     

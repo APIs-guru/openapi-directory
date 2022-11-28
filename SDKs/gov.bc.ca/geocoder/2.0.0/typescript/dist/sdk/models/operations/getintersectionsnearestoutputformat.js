@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetIntersectionsNearestOutputFormatOutputFormatEnum;
 (function (GetIntersectionsNearestOutputFormatOutputFormatEnum) {
     GetIntersectionsNearestOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,7 +39,7 @@ var GetIntersectionsNearestOutputFormatPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetIntersectionsNearestOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetIntersectionsNearestOutputFormatPathParams;
@@ -51,23 +51,23 @@ var GetIntersectionsNearestOutputFormatQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxDegree" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDegree" }),
         __metadata("design:type", Number)
     ], GetIntersectionsNearestOutputFormatQueryParams.prototype, "maxDegree", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxDistance" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDistance" }),
         __metadata("design:type", Number)
     ], GetIntersectionsNearestOutputFormatQueryParams.prototype, "maxDistance", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minDegree" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minDegree" }),
         __metadata("design:type", Number)
     ], GetIntersectionsNearestOutputFormatQueryParams.prototype, "minDegree", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetIntersectionsNearestOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=point" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point" }),
         __metadata("design:type", String)
     ], GetIntersectionsNearestOutputFormatQueryParams.prototype, "point", void 0);
     return GetIntersectionsNearestOutputFormatQueryParams;
@@ -79,11 +79,11 @@ var GetIntersectionsNearestOutputFormatRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetIntersectionsNearestOutputFormatPathParams)
     ], GetIntersectionsNearestOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetIntersectionsNearestOutputFormatQueryParams)
     ], GetIntersectionsNearestOutputFormatRequest.prototype, "queryParams", void 0);
     return GetIntersectionsNearestOutputFormatRequest;
@@ -95,11 +95,11 @@ var GetIntersectionsNearestOutputFormatResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetIntersectionsNearestOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetIntersectionsNearestOutputFormatResponse.prototype, "statusCode", void 0);
     return GetIntersectionsNearestOutputFormatResponse;

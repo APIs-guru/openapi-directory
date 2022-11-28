@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CollectionOverride } from "./collectionoverride";
 import { Credential } from "./credential";
 import { Options } from "./options";
+
 
 
 // BaseType
@@ -10,15 +10,15 @@ import { Options } from "./options";
  * BaseType that describes a service-backed Type.
 **/
 export class BaseType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionOverrides", elemType: shared.CollectionOverride })
+  @SpeakeasyMetadata({ data: "json, name=collectionOverrides", elemType: CollectionOverride })
   collectionOverrides?: CollectionOverride[];
 
-  @Metadata({ data: "json, name=credential" })
+  @SpeakeasyMetadata({ data: "json, name=credential" })
   credential?: Credential;
 
-  @Metadata({ data: "json, name=descriptorUrl" })
+  @SpeakeasyMetadata({ data: "json, name=descriptorUrl" })
   descriptorUrl?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: Options;
 }

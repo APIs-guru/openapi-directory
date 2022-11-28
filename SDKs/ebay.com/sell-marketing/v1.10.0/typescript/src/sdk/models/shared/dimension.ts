@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Dimension
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type defines the annotation and dimension key used by the report. For information on how to set these values, see Reading Promoted Listings reports.
 **/
 export class Dimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationKeys" })
+  @SpeakeasyMetadata({ data: "json, name=annotationKeys" })
   annotationKeys?: string[];
 
-  @Metadata({ data: "json, name=dimensionKey" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionKey" })
   dimensionKey?: string;
 }

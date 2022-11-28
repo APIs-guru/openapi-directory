@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionEngineConfig } from "./executionengineconfig";
 import { NotebookExecutionStatusEnum } from "./notebookexecutionstatusenum";
 import { Tag } from "./tag";
+
 
 
 // NotebookExecution
@@ -10,42 +10,42 @@ import { Tag } from "./tag";
  * A notebook execution. An execution is a specific instance that an EMR Notebook is run using the <code>StartNotebookExecution</code> action.
 **/
 export class NotebookExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=EditorId" })
+  @SpeakeasyMetadata({ data: "json, name=EditorId" })
   editorId?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=ExecutionEngine" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionEngine" })
   executionEngine?: ExecutionEngineConfig;
 
-  @Metadata({ data: "json, name=LastStateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=LastStateChangeReason" })
   lastStateChangeReason?: string;
 
-  @Metadata({ data: "json, name=NotebookExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookExecutionId" })
   notebookExecutionId?: string;
 
-  @Metadata({ data: "json, name=NotebookExecutionName" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookExecutionName" })
   notebookExecutionName?: string;
 
-  @Metadata({ data: "json, name=NotebookInstanceSecurityGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceSecurityGroupId" })
   notebookInstanceSecurityGroupId?: string;
 
-  @Metadata({ data: "json, name=NotebookParams" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookParams" })
   notebookParams?: string;
 
-  @Metadata({ data: "json, name=OutputNotebookURI" })
+  @SpeakeasyMetadata({ data: "json, name=OutputNotebookURI" })
   outputNotebookUri?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: NotebookExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

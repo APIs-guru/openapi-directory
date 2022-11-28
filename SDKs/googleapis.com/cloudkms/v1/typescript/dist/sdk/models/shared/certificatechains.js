@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CertificateChains
 /**
  * Certificate chains needed to verify the attestation. Certificates in chains are PEM-encoded and are ordered based on https://tools.ietf.org/html/rfc5246#section-7.4.2.
@@ -33,15 +33,15 @@ var CertificateChains = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=caviumCerts" }),
+        SpeakeasyMetadata({ data: "json, name=caviumCerts" }),
         __metadata("design:type", Array)
     ], CertificateChains.prototype, "caviumCerts", void 0);
     __decorate([
-        Metadata({ data: "json, name=googleCardCerts" }),
+        SpeakeasyMetadata({ data: "json, name=googleCardCerts" }),
         __metadata("design:type", Array)
     ], CertificateChains.prototype, "googleCardCerts", void 0);
     __decorate([
-        Metadata({ data: "json, name=googlePartitionCerts" }),
+        SpeakeasyMetadata({ data: "json, name=googlePartitionCerts" }),
         __metadata("design:type", Array)
     ], CertificateChains.prototype, "googlePartitionCerts", void 0);
     return CertificateChains;

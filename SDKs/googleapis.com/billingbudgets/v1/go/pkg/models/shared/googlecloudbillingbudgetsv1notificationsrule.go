@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudBillingBudgetsV1NotificationsRule
+// NotificationsRule defines notifications that are sent based on budget spend and thresholds.
 type GoogleCloudBillingBudgetsV1NotificationsRule struct {
 	DisableDefaultIamRecipients    *bool    `json:"disableDefaultIamRecipients,omitempty"`
 	MonitoringNotificationChannels []string `json:"monitoringNotificationChannels,omitempty"`

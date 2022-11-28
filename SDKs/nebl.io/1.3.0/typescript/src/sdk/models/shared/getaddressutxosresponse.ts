@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAddressUtxosResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=confirmations" })
+  @SpeakeasyMetadata({ data: "json, name=confirmations" })
   confirmations?: number;
 
-  @Metadata({ data: "json, name=scriptPubKey" })
+  @SpeakeasyMetadata({ data: "json, name=scriptPubKey" })
   scriptPubKey?: string;
 
-  @Metadata({ data: "json, name=ts" })
+  @SpeakeasyMetadata({ data: "json, name=ts" })
   ts?: number;
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 
-  @Metadata({ data: "json, name=vout" })
+  @SpeakeasyMetadata({ data: "json, name=vout" })
   vout?: number;
 }

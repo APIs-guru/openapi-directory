@@ -1,7 +1,8 @@
 
 
+
 export enum NameTypeEnum {
-    Firstname = "firstname"
-,    Surname = "surname"
-,    Fullname = "fullname"
+    Firstname = "firstname",
+    Surname = "surname",
+    Fullname = "fullname"
 }

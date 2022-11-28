@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ApiDataRow = /** @class */ (function (_super) {
     __extends(ApiDataRow, _super);
     function ApiDataRow() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clicks" }),
+        SpeakeasyMetadata({ data: "json, name=clicks" }),
         __metadata("design:type", Number)
     ], ApiDataRow.prototype, "clicks", void 0);
     __decorate([
-        Metadata({ data: "json, name=ctr" }),
+        SpeakeasyMetadata({ data: "json, name=ctr" }),
         __metadata("design:type", Number)
     ], ApiDataRow.prototype, "ctr", void 0);
     __decorate([
-        Metadata({ data: "json, name=impressions" }),
+        SpeakeasyMetadata({ data: "json, name=impressions" }),
         __metadata("design:type", Number)
     ], ApiDataRow.prototype, "impressions", void 0);
     __decorate([
-        Metadata({ data: "json, name=keys" }),
+        SpeakeasyMetadata({ data: "json, name=keys" }),
         __metadata("design:type", Array)
     ], ApiDataRow.prototype, "keys", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", Number)
     ], ApiDataRow.prototype, "position", void 0);
     return ApiDataRow;

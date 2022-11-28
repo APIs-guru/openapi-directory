@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportFormatEnum } from "./exportformatenum";
 import { ExportStatusEnum } from "./exportstatusenum";
 import { S3SseAlgorithmEnum } from "./s3ssealgorithmenum";
+
 
 
 // ExportDescription
@@ -9,60 +10,60 @@ import { S3SseAlgorithmEnum } from "./s3ssealgorithmenum";
  * Represents the properties of the exported table.
 **/
 export class ExportDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BilledSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=BilledSizeBytes" })
   billedSizeBytes?: number;
 
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=ExportArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExportArn" })
   exportArn?: string;
 
-  @Metadata({ data: "json, name=ExportFormat" })
+  @SpeakeasyMetadata({ data: "json, name=ExportFormat" })
   exportFormat?: ExportFormatEnum;
 
-  @Metadata({ data: "json, name=ExportManifest" })
+  @SpeakeasyMetadata({ data: "json, name=ExportManifest" })
   exportManifest?: string;
 
-  @Metadata({ data: "json, name=ExportStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ExportStatus" })
   exportStatus?: ExportStatusEnum;
 
-  @Metadata({ data: "json, name=ExportTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExportTime" })
   exportTime?: Date;
 
-  @Metadata({ data: "json, name=FailureCode" })
+  @SpeakeasyMetadata({ data: "json, name=FailureCode" })
   failureCode?: string;
 
-  @Metadata({ data: "json, name=FailureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=FailureMessage" })
   failureMessage?: string;
 
-  @Metadata({ data: "json, name=ItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=ItemCount" })
   itemCount?: number;
 
-  @Metadata({ data: "json, name=S3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=S3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=S3BucketOwner" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketOwner" })
   s3BucketOwner?: string;
 
-  @Metadata({ data: "json, name=S3Prefix" })
+  @SpeakeasyMetadata({ data: "json, name=S3Prefix" })
   s3Prefix?: string;
 
-  @Metadata({ data: "json, name=S3SseAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=S3SseAlgorithm" })
   s3SseAlgorithm?: S3SseAlgorithmEnum;
 
-  @Metadata({ data: "json, name=S3SseKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=S3SseKmsKeyId" })
   s3SseKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=TableArn" })
+  @SpeakeasyMetadata({ data: "json, name=TableArn" })
   tableArn?: string;
 
-  @Metadata({ data: "json, name=TableId" })
+  @SpeakeasyMetadata({ data: "json, name=TableId" })
   tableId?: string;
 }

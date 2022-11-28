@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdWordsAccount } from "./adwordsaccount";
 import { WebPropertyRef } from "./webpropertyref";
+
 
 
 // EntityAdWordsLinkEntity
@@ -9,7 +9,7 @@ import { WebPropertyRef } from "./webpropertyref";
  * Web property being linked.
 **/
 export class EntityAdWordsLinkEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webPropertyRef" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyRef" })
   webPropertyRef?: WebPropertyRef;
 }
 
@@ -19,24 +19,24 @@ export class EntityAdWordsLinkEntity extends SpeakeasyBase {
  * JSON template for Analytics Entity Google Ads Link.
 **/
 export class EntityAdWordsLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adWordsAccounts", elemType: shared.AdWordsAccount })
+  @SpeakeasyMetadata({ data: "json, name=adWordsAccounts", elemType: AdWordsAccount })
   adWordsAccounts?: AdWordsAccount[];
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: EntityAdWordsLinkEntity;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=profileIds" })
+  @SpeakeasyMetadata({ data: "json, name=profileIds" })
   profileIds?: string[];
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

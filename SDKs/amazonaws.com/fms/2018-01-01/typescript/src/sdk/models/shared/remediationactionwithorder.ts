@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RemediationAction } from "./remediationaction";
+
 
 
 // RemediationActionWithOrder
@@ -7,9 +8,9 @@ import { RemediationAction } from "./remediationaction";
  * An ordered list of actions you can take to remediate a violation.
 **/
 export class RemediationActionWithOrder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Order" })
+  @SpeakeasyMetadata({ data: "json, name=Order" })
   order?: number;
 
-  @Metadata({ data: "json, name=RemediationAction" })
+  @SpeakeasyMetadata({ data: "json, name=RemediationAction" })
   remediationAction?: RemediationAction;
 }

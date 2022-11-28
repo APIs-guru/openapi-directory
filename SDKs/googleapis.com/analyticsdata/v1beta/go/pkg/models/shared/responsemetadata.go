@@ -1,5 +1,7 @@
 package shared
 
+// ResponseMetaData
+// Response's metadata carrying additional information about the report content.
 type ResponseMetaData struct {
 	CurrencyCode              *string                    `json:"currencyCode,omitempty"`
 	DataLossFromOtherRow      *bool                      `json:"dataLossFromOtherRow,omitempty"`

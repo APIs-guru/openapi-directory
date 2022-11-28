@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDrugByIdPathParams = /** @class */ (function (_super) {
     __extends(GetDrugByIdPathParams, _super);
     function GetDrugByIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=DRUG_ID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DRUG_ID" }),
         __metadata("design:type", String)
     ], GetDrugByIdPathParams.prototype, "drugId", void 0);
     return GetDrugByIdPathParams;
@@ -41,7 +41,7 @@ var GetDrugByIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=drug_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=drug_id" }),
         __metadata("design:type", String)
     ], GetDrugByIdQueryParams.prototype, "drugId", void 0);
     return GetDrugByIdQueryParams;
@@ -53,11 +53,11 @@ var GetDrugByIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDrugByIdPathParams)
     ], GetDrugByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDrugByIdQueryParams)
     ], GetDrugByIdRequest.prototype, "queryParams", void 0);
     return GetDrugByIdRequest;
@@ -69,11 +69,11 @@ var GetDrugByIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDrugByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDrugByIdResponse.prototype, "statusCode", void 0);
     return GetDrugByIdResponse;

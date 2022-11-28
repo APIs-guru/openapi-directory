@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
+
 
 
 // BatchDetectEntitiesItemResult
@@ -8,9 +8,9 @@ import { Entity } from "./entity";
  * The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.
 **/
 export class BatchDetectEntitiesItemResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.Entity })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: Entity })
   entities?: Entity[];
 
-  @Metadata({ data: "json, name=Index" })
+  @SpeakeasyMetadata({ data: "json, name=Index" })
   index?: number;
 }

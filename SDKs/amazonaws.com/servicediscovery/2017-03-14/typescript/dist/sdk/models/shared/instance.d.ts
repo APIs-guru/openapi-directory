@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A complex type that contains information about an instance that Cloud Map creates when you submit a <code>RegisterInstance</code> request.
 **/

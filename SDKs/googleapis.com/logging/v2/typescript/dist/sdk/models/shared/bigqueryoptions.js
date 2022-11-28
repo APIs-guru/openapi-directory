@@ -22,7 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// BigQueryOptionsInput
+/**
+ * Options that change functionality of a sink exporting data to BigQuery.
+**/
+var BigQueryOptionsInput = /** @class */ (function (_super) {
+    __extends(BigQueryOptionsInput, _super);
+    function BigQueryOptionsInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=usePartitionedTables" }),
+        __metadata("design:type", Boolean)
+    ], BigQueryOptionsInput.prototype, "usePartitionedTables", void 0);
+    return BigQueryOptionsInput;
+}(SpeakeasyBase));
+export { BigQueryOptionsInput };
 // BigQueryOptions
 /**
  * Options that change functionality of a sink exporting data to BigQuery.
@@ -33,11 +49,11 @@ var BigQueryOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=usePartitionedTables" }),
+        SpeakeasyMetadata({ data: "json, name=usePartitionedTables" }),
         __metadata("design:type", Boolean)
     ], BigQueryOptions.prototype, "usePartitionedTables", void 0);
     __decorate([
-        Metadata({ data: "json, name=usesTimestampColumnPartitioning" }),
+        SpeakeasyMetadata({ data: "json, name=usesTimestampColumnPartitioning" }),
         __metadata("design:type", Boolean)
     ], BigQueryOptions.prototype, "usesTimestampColumnPartitioning", void 0);
     return BigQueryOptions;

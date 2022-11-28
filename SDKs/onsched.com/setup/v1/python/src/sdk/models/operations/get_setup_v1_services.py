@@ -13,12 +13,12 @@ class GetSetupV1ServicesQueryParams:
 
 @dataclass
 class GetSetupV1ServicesRequest:
-    query_params: GetSetupV1ServicesQueryParams = field(default=None)
+    query_params: GetSetupV1ServicesQueryParams = field()
     
 
 @dataclass
 class GetSetupV1ServicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

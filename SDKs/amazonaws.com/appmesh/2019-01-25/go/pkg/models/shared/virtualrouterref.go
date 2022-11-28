@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VirtualRouterRef
+// An object that represents a virtual router returned by a list operation.
 type VirtualRouterRef struct {
 	Arn               string    `json:"arn"`
 	CreatedAt         time.Time `json:"createdAt"`

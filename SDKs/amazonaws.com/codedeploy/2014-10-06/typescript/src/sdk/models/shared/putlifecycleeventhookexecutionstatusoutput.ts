@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutLifecycleEventHookExecutionStatusOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lifecycleEventHookExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycleEventHookExecutionId" })
   lifecycleEventHookExecutionId?: string;
 }

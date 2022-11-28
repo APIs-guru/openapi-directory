@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PrepaidPlan
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information related to a prepaid plan.
 **/
 export class PrepaidPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowExtendAfterTime" })
+  @SpeakeasyMetadata({ data: "json, name=allowExtendAfterTime" })
   allowExtendAfterTime?: string;
 }

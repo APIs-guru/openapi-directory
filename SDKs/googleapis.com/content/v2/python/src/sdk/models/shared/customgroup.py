@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import customattribute
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomGroup:
-    attributes: Optional[List[customattribute.CustomAttribute]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    attributes: Optional[List[CustomAttribute]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributes') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserSafeScoringAccumulatedValueV1ScoringsIndividualQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate?: string;
 }
 
 
-export class UserSafeScoringAccumulatedValueV1ScoringsIndividualRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: UserSafeScoringAccumulatedValueV1ScoringsIndividualQueryParams;
-}
-
-
 export class UserSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJsonResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccelerationScore" })
+  @SpeakeasyMetadata({ data: "json, name=AccelerationScore" })
   accelerationScore?: number;
 
-  @Metadata({ data: "json, name=AppId" })
+  @SpeakeasyMetadata({ data: "json, name=AppId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=BrakingScore" })
+  @SpeakeasyMetadata({ data: "json, name=BrakingScore" })
   brakingScore?: number;
 
-  @Metadata({ data: "json, name=CompanyId" })
+  @SpeakeasyMetadata({ data: "json, name=CompanyId" })
   companyId?: string;
 
-  @Metadata({ data: "json, name=CorneringScore" })
+  @SpeakeasyMetadata({ data: "json, name=CorneringScore" })
   corneringScore?: number;
 
-  @Metadata({ data: "json, name=DeviceToken" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceToken" })
   deviceToken?: string;
 
-  @Metadata({ data: "json, name=DistractedScore" })
+  @SpeakeasyMetadata({ data: "json, name=DistractedScore" })
   distractedScore?: number;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=OverallScore" })
+  @SpeakeasyMetadata({ data: "json, name=OverallScore" })
   overallScore?: number;
 
-  @Metadata({ data: "json, name=SpeedingScore" })
+  @SpeakeasyMetadata({ data: "json, name=SpeedingScore" })
   speedingScore?: number;
 }
 
 
 export class UserSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors" })
+  @SpeakeasyMetadata({ data: "json, name=Errors" })
   errors?: any[];
 
-  @Metadata({ data: "json, name=Result" })
+  @SpeakeasyMetadata({ data: "json, name=Result" })
   result?: UserSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJsonResult;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }
 
 
+export class UserSafeScoringAccumulatedValueV1ScoringsIndividualRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: UserSafeScoringAccumulatedValueV1ScoringsIndividualQueryParams;
+}
+
+
 export class UserSafeScoringAccumulatedValueV1ScoringsIndividualResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJsonObject?: UserSafeScoringAccumulatedValueV1ScoringsIndividual200ApplicationJson;
 }

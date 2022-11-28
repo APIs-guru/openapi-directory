@@ -22,74 +22,74 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetfullnameparsedmatchQueryParams = /** @class */ (function (_super) {
     __extends(GetfullnameparsedmatchQueryParams, _super);
     function GetfullnameparsedmatchQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=firstname" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=firstname" }),
         __metadata("design:type", String)
     ], GetfullnameparsedmatchQueryParams.prototype, "firstname", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lastname" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastname" }),
         __metadata("design:type", String)
     ], GetfullnameparsedmatchQueryParams.prototype, "lastname", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetfullnameparsedmatchQueryParams.prototype, "license", void 0);
     return GetfullnameparsedmatchQueryParams;
 }(SpeakeasyBase));
 export { GetfullnameparsedmatchQueryParams };
-var GetfullnameparsedmatchRequest = /** @class */ (function (_super) {
-    __extends(GetfullnameparsedmatchRequest, _super);
-    function GetfullnameparsedmatchRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetfullnameparsedmatchQueryParams)
-    ], GetfullnameparsedmatchRequest.prototype, "queryParams", void 0);
-    return GetfullnameparsedmatchRequest;
-}(SpeakeasyBase));
-export { GetfullnameparsedmatchRequest };
 var Getfullnameparsedmatch200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getfullnameparsedmatch200ApplicationJson, _super);
     function Getfullnameparsedmatch200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getfullnameparsedmatch200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getfullnameparsedmatch200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Simkey" }),
+        SpeakeasyMetadata({ data: "json, name=Simkey" }),
         __metadata("design:type", String)
     ], Getfullnameparsedmatch200ApplicationJson.prototype, "simkey", void 0);
     return Getfullnameparsedmatch200ApplicationJson;
 }(SpeakeasyBase));
 export { Getfullnameparsedmatch200ApplicationJson };
+var GetfullnameparsedmatchRequest = /** @class */ (function (_super) {
+    __extends(GetfullnameparsedmatchRequest, _super);
+    function GetfullnameparsedmatchRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetfullnameparsedmatchQueryParams)
+    ], GetfullnameparsedmatchRequest.prototype, "queryParams", void 0);
+    return GetfullnameparsedmatchRequest;
+}(SpeakeasyBase));
+export { GetfullnameparsedmatchRequest };
 var GetfullnameparsedmatchResponse = /** @class */ (function (_super) {
     __extends(GetfullnameparsedmatchResponse, _super);
     function GetfullnameparsedmatchResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetfullnameparsedmatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetfullnameparsedmatchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getfullnameparsedmatch200ApplicationJson)
     ], GetfullnameparsedmatchResponse.prototype, "getfullnameparsedmatch200ApplicationJsonObject", void 0);
     return GetfullnameparsedmatchResponse;

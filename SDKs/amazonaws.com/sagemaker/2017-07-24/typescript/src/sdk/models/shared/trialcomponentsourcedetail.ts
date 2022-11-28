@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingJob } from "./processingjob";
 import { TrainingJob } from "./trainingjob";
 import { TransformJob } from "./transformjob";
+
 
 
 // TrialComponentSourceDetail
@@ -9,15 +10,15 @@ import { TransformJob } from "./transformjob";
  * Detailed information about the source of a trial component. Either <code>ProcessingJob</code> or <code>TrainingJob</code> is returned.
 **/
 export class TrialComponentSourceDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProcessingJob" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJob" })
   processingJob?: ProcessingJob;
 
-  @Metadata({ data: "json, name=SourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceArn" })
   sourceArn?: string;
 
-  @Metadata({ data: "json, name=TrainingJob" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJob" })
   trainingJob?: TrainingJob;
 
-  @Metadata({ data: "json, name=TransformJob" })
+  @SpeakeasyMetadata({ data: "json, name=TransformJob" })
   transformJob?: TransformJob;
 }

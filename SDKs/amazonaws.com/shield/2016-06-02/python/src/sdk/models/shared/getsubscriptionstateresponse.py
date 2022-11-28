@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import subscriptionstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSubscriptionStateResponse:
-    subscription_state: subscriptionstate_enum.SubscriptionStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubscriptionState' }})
+    subscription_state: SubscriptionStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubscriptionState') }})
     

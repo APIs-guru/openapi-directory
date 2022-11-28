@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DurationEnum } from "./durationenum";
 import { RecencyTypeEnum } from "./recencytypeenum";
+
 
 
 // RecencyDimension
@@ -8,9 +9,9 @@ import { RecencyTypeEnum } from "./recencytypeenum";
  * Specifies criteria for including or excluding endpoints from a segment based on how recently an endpoint was active.
 **/
 export class RecencyDimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration: DurationEnum;
 
-  @Metadata({ data: "json, name=RecencyType" })
+  @SpeakeasyMetadata({ data: "json, name=RecencyType" })
   recencyType: RecencyTypeEnum;
 }

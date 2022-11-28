@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TagTagTaggedItem
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The tags' tagged item
 **/
 export class TagTagTaggedItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
 
 export class TagTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Created" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=TaggedItem" })
+  @SpeakeasyMetadata({ data: "json, name=TaggedItem" })
   taggedItem?: TagTagTaggedItem;
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text?: string;
 }
 
 
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Tag" })
+  @SpeakeasyMetadata({ data: "json, name=Tag" })
   tag?: TagTag;
 }

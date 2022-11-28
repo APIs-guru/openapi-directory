@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageState } from "./imagestate";
 /**
  *  Details of an Amazon EC2 AMI.

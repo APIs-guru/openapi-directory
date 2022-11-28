@@ -1,5 +1,7 @@
 package shared
 
+// ExecuteBatchDmlRequest
+// The request for ExecuteBatchDml.
 type ExecuteBatchDmlRequest struct {
 	RequestOptions *RequestOptions      `json:"requestOptions,omitempty"`
 	Seqno          *string              `json:"seqno,omitempty"`

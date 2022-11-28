@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessQueryParams:
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessRequest:
-    path_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessPathParams = field(default=None)
-    query_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessQueryParams = field(default=None)
+    path_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessPathParams = field()
+    query_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessQueryParams = field()
+    security: DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessSecurity = field()
     request: Optional[shared.GoogleCloudDocumentaiV1beta3ProcessRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessSecurity = field(default=None)
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsProcessResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_documentai_v1beta3_process_response: Optional[shared.GoogleCloudDocumentaiV1beta3ProcessResponse] = field(default=None)
-    status_code: int = field(default=None)
     

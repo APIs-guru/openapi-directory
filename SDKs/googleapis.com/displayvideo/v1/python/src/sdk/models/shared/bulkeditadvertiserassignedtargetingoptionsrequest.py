@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import createassignedtargetingoptionsrequest
-from . import deleteassignedtargetingoptionsrequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class BulkEditAdvertiserAssignedTargetingOptionsRequest:
-    create_requests: Optional[List[createassignedtargetingoptionsrequest.CreateAssignedTargetingOptionsRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createRequests' }})
-    delete_requests: Optional[List[deleteassignedtargetingoptionsrequest.DeleteAssignedTargetingOptionsRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleteRequests' }})
+class BulkEditAdvertiserAssignedTargetingOptionsRequestInput:
+    r"""BulkEditAdvertiserAssignedTargetingOptionsRequestInput
+    Request message for BulkEditAdvertiserAssignedTargetingOptions.
+    """
+    
+    create_requests: Optional[List[CreateAssignedTargetingOptionsRequestInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createRequests') }})
+    delete_requests: Optional[List[DeleteAssignedTargetingOptionsRequest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleteRequests') }})
     

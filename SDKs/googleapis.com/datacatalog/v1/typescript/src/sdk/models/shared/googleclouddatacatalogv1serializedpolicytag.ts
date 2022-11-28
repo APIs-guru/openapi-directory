@@ -1,6 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudDatacatalogV1SerializedPolicyTag } from "./googleclouddatacatalogv1serializedpolicytag";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1SerializedPolicyTag
@@ -8,15 +7,15 @@ import { GoogleCloudDatacatalogV1SerializedPolicyTag } from "./googleclouddataca
  * A nested protocol buffer that represents a policy tag and all its descendants.
 **/
 export class GoogleCloudDatacatalogV1SerializedPolicyTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childPolicyTags", elemType: shared.GoogleCloudDatacatalogV1SerializedPolicyTag })
+  @SpeakeasyMetadata({ data: "json, name=childPolicyTags", elemType: GoogleCloudDatacatalogV1SerializedPolicyTag })
   childPolicyTags?: GoogleCloudDatacatalogV1SerializedPolicyTag[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=policyTag" })
+  @SpeakeasyMetadata({ data: "json, name=policyTag" })
   policyTag?: string;
 }

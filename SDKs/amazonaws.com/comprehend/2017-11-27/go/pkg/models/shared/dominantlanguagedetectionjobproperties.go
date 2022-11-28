@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DominantLanguageDetectionJobProperties
+// Provides information about a dominant language detection job.
 type DominantLanguageDetectionJobProperties struct {
 	DataAccessRoleArn *string           `json:"DataAccessRoleArn,omitempty"`
 	EndTime           *time.Time        `json:"EndTime,omitempty"`

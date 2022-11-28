@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import options
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateTaskExecutionRequest:
-    options: options.Options = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Options' }})
-    task_execution_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaskExecutionArn' }})
+    options: Options = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Options') }})
+    task_execution_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TaskExecutionArn') }})
     

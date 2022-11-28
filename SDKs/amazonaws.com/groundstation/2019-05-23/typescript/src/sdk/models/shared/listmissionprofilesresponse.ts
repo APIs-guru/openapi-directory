@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MissionProfileListItem } from "./missionprofilelistitem";
+
 
 
 // ListMissionProfilesResponse
@@ -8,9 +8,9 @@ import { MissionProfileListItem } from "./missionprofilelistitem";
  * <p/>
 **/
 export class ListMissionProfilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=missionProfileList", elemType: shared.MissionProfileListItem })
+  @SpeakeasyMetadata({ data: "json, name=missionProfileList", elemType: MissionProfileListItem })
   missionProfileList?: MissionProfileListItem[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

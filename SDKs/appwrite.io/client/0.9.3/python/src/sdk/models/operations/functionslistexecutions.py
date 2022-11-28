@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class FunctionsListExecutionsPathParams:
-    function_id: str = field(default=None, metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
+    function_id: str = field(metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,20 +18,20 @@ class FunctionsListExecutionsQueryParams:
 
 @dataclass
 class FunctionsListExecutionsSecurity:
-    jwt: shared.SchemeJwt = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    jwt: shared.SchemeJwt = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class FunctionsListExecutionsRequest:
-    path_params: FunctionsListExecutionsPathParams = field(default=None)
-    query_params: FunctionsListExecutionsQueryParams = field(default=None)
-    security: FunctionsListExecutionsSecurity = field(default=None)
+    path_params: FunctionsListExecutionsPathParams = field()
+    query_params: FunctionsListExecutionsQueryParams = field()
+    security: FunctionsListExecutionsSecurity = field()
     
 
 @dataclass
 class FunctionsListExecutionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     execution_list: Optional[shared.ExecutionList] = field(default=None)
     

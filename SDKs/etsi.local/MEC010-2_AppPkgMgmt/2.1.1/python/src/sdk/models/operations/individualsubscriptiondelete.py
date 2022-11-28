@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class IndividualSubscriptionDeletePathParams:
-    subscription_id: str = field(default=None, metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
+    subscription_id: str = field(metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class IndividualSubscriptionDeleteRequest:
-    path_params: IndividualSubscriptionDeletePathParams = field(default=None)
+    path_params: IndividualSubscriptionDeletePathParams = field()
     
 
 @dataclass
 class IndividualSubscriptionDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[shared.ProblemDetails] = field(default=None)
-    status_code: int = field(default=None)
     

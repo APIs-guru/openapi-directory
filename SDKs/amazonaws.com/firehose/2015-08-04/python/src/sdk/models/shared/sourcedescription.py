@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import kinesisstreamsourcedescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SourceDescription:
-    kinesis_stream_source_description: Optional[kinesisstreamsourcedescription.KinesisStreamSourceDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KinesisStreamSourceDescription' }})
+    r"""SourceDescription
+    Details about a Kinesis data stream used as the source for a Kinesis Data Firehose delivery stream.
+    """
+    
+    kinesis_stream_source_description: Optional[KinesisStreamSourceDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KinesisStreamSourceDescription') }})
     

@@ -5,30 +5,30 @@ from sdk.models import shared
 
 @dataclass
 class EndpointCheckUsersSavedAlbumsQueryParams:
-    ids: str = field(default=None, metadata={'query_param': { 'field_name': 'ids', 'style': 'form', 'explode': True }})
+    ids: str = field(metadata={'query_param': { 'field_name': 'ids', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class EndpointCheckUsersSavedAlbumsHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointCheckUsersSavedAlbumsSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointCheckUsersSavedAlbumsRequest:
-    query_params: EndpointCheckUsersSavedAlbumsQueryParams = field(default=None)
-    headers: EndpointCheckUsersSavedAlbumsHeaders = field(default=None)
-    security: EndpointCheckUsersSavedAlbumsSecurity = field(default=None)
+    headers: EndpointCheckUsersSavedAlbumsHeaders = field()
+    query_params: EndpointCheckUsersSavedAlbumsQueryParams = field()
+    security: EndpointCheckUsersSavedAlbumsSecurity = field()
     
 
 @dataclass
 class EndpointCheckUsersSavedAlbumsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     endpoint_check_users_saved_albums_200_application_json_booleans: Optional[List[bool]] = field(default=None)
     

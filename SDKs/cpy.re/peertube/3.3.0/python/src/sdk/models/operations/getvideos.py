@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -21,12 +22,12 @@ class GetVideosQueryParams:
 
 @dataclass
 class GetVideosRequest:
-    query_params: GetVideosQueryParams = field(default=None)
+    query_params: GetVideosQueryParams = field()
     
 
 @dataclass
 class GetVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_list_response: Optional[Any] = field(default=None)
     

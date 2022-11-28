@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { File } from "./file";
 import { EnvironmentVariable } from "./environmentvariable";
-import { File } from "./file";
-import { File } from "./file";
+
 
 
 // Process
@@ -11,33 +9,33 @@ import { File } from "./file";
  * Represents an operating system process.
 **/
 export class Process extends SpeakeasyBase {
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: string[];
 
-  @Metadata({ data: "json, name=argumentsTruncated" })
+  @SpeakeasyMetadata({ data: "json, name=argumentsTruncated" })
   argumentsTruncated?: boolean;
 
-  @Metadata({ data: "json, name=binary" })
+  @SpeakeasyMetadata({ data: "json, name=binary" })
   binary?: File;
 
-  @Metadata({ data: "json, name=envVariables", elemType: shared.EnvironmentVariable })
+  @SpeakeasyMetadata({ data: "json, name=envVariables", elemType: EnvironmentVariable })
   envVariables?: EnvironmentVariable[];
 
-  @Metadata({ data: "json, name=envVariablesTruncated" })
+  @SpeakeasyMetadata({ data: "json, name=envVariablesTruncated" })
   envVariablesTruncated?: boolean;
 
-  @Metadata({ data: "json, name=libraries", elemType: shared.File })
+  @SpeakeasyMetadata({ data: "json, name=libraries", elemType: File })
   libraries?: File[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentPid" })
+  @SpeakeasyMetadata({ data: "json, name=parentPid" })
   parentPid?: string;
 
-  @Metadata({ data: "json, name=pid" })
+  @SpeakeasyMetadata({ data: "json, name=pid" })
   pid?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: File;
 }

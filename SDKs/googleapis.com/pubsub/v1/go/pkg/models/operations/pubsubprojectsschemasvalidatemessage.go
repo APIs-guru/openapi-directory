@@ -40,7 +40,7 @@ type PubsubProjectsSchemasValidateMessageSecurity struct {
 type PubsubProjectsSchemasValidateMessageRequest struct {
 	PathParams  PubsubProjectsSchemasValidateMessagePathParams
 	QueryParams PubsubProjectsSchemasValidateMessageQueryParams
-	Request     *shared.ValidateMessageRequest `request:"mediaType=application/json"`
+	Request     *shared.ValidateMessageRequestInput `request:"mediaType=application/json"`
 	Security    PubsubProjectsSchemasValidateMessageSecurity
 }
 

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PicoSettingsDtoAuthenticationTypeEnum {
-    None = "None"
-,    Backend = "Backend"
+    None = "None",
+    Backend = "Backend"
 }
 
 
@@ -11,36 +12,36 @@ export enum PicoSettingsDtoAuthenticationTypeEnum {
  * DTO for the pico charging station settings
 **/
 export class PicoSettingsDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthenticationType" })
   authenticationType?: PicoSettingsDtoAuthenticationTypeEnum;
 
-  @Metadata({ data: "json, name=DisplayBrightness" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayBrightness" })
   displayBrightness?: string;
 
-  @Metadata({ data: "json, name=DnsName" })
+  @SpeakeasyMetadata({ data: "json, name=DnsName" })
   dnsName?: string;
 
-  @Metadata({ data: "json, name=IdleImageData" })
+  @SpeakeasyMetadata({ data: "json, name=IdleImageData" })
   idleImageData?: string;
 
-  @Metadata({ data: "json, name=IdleImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=IdleImageUrl" })
   idleImageUrl?: string;
 
-  @Metadata({ data: "json, name=InternalIp" })
+  @SpeakeasyMetadata({ data: "json, name=InternalIp" })
   internalIp?: string;
 
-  @Metadata({ data: "json, name=LoadmanagementGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=LoadmanagementGroupId" })
   loadmanagementGroupId?: string;
 
-  @Metadata({ data: "json, name=MaxCurrent" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCurrent" })
   maxCurrent?: number;
 
-  @Metadata({ data: "json, name=MinCurrent" })
+  @SpeakeasyMetadata({ data: "json, name=MinCurrent" })
   minCurrent?: number;
 
-  @Metadata({ data: "json, name=ModbusTcp" })
+  @SpeakeasyMetadata({ data: "json, name=ModbusTcp" })
   modbusTcp?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetConsumerV1CustomersSubscriptionsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetConsumerV1CustomersSubscriptionsIDRequest:
-    path_params: GetConsumerV1CustomersSubscriptionsIDPathParams = field(default=None)
+    path_params: GetConsumerV1CustomersSubscriptionsIDPathParams = field()
     
 
 @dataclass
 class GetConsumerV1CustomersSubscriptionsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_subscription_view_model: Optional[shared.CustomerSubscriptionViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

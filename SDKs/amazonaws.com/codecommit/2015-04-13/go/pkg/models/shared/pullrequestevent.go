@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PullRequestEvent
+// Returns information about a pull request event.
 type PullRequestEvent struct {
 	ActorArn                                       *string                                         `json:"actorArn,omitempty"`
 	ApprovalRuleEventMetadata                      *ApprovalRuleEventMetadata                      `json:"approvalRuleEventMetadata,omitempty"`

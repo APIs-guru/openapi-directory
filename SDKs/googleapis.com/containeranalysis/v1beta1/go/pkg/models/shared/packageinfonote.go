@@ -1,5 +1,7 @@
 package shared
 
+// PackageInfoNote
+// PackageInfoNote represents an SPDX Package Information section: https://spdx.github.io/spdx-spec/3-package-information/
 type PackageInfoNote struct {
 	Analyzed            *bool         `json:"analyzed,omitempty"`
 	Attribution         *string       `json:"attribution,omitempty"`

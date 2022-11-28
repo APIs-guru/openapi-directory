@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import gamesessionplacement
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StopGameSessionPlacementOutput:
-    game_session_placement: Optional[gamesessionplacement.GameSessionPlacement] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GameSessionPlacement' }})
+    r"""StopGameSessionPlacementOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    game_session_placement: Optional[GameSessionPlacement] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GameSessionPlacement') }})
     

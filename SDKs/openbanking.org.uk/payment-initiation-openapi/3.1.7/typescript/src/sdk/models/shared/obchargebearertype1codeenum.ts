@@ -1,8 +1,9 @@
 
 
+
 export enum ObChargeBearerType1CodeEnum {
-    BorneByCreditor = "BorneByCreditor"
-,    BorneByDebtor = "BorneByDebtor"
-,    FollowingServiceLevel = "FollowingServiceLevel"
-,    Shared = "Shared"
+    BorneByCreditor = "BorneByCreditor",
+    BorneByDebtor = "BorneByDebtor",
+    FollowingServiceLevel = "FollowingServiceLevel",
+    Shared = "Shared"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// OrganizationInvitation
+// Organization Invitation
 type OrganizationInvitation struct {
 	CreatedAt          string     `json:"created_at"`
 	Email              string     `json:"email"`

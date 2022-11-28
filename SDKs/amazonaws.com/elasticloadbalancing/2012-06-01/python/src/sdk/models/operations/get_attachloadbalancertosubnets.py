@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetAttachLoadBalancerToSubnetsActionEnum(str, Enum):
     ATTACH_LOAD_BALANCER_TO_SUBNETS = "AttachLoadBalancerToSubnets"
@@ -10,10 +14,10 @@ class GetAttachLoadBalancerToSubnetsVersionEnum(str, Enum):
 
 @dataclass
 class GetAttachLoadBalancerToSubnetsQueryParams:
-    action: GetAttachLoadBalancerToSubnetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    subnets: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'Subnets', 'style': 'form', 'explode': True }})
-    version: GetAttachLoadBalancerToSubnetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAttachLoadBalancerToSubnetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    subnets: List[str] = field(metadata={'query_param': { 'field_name': 'Subnets', 'style': 'form', 'explode': True }})
+    version: GetAttachLoadBalancerToSubnetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAttachLoadBalancerToSubnetsHeaders:
 
 @dataclass
 class GetAttachLoadBalancerToSubnetsRequest:
-    query_params: GetAttachLoadBalancerToSubnetsQueryParams = field(default=None)
-    headers: GetAttachLoadBalancerToSubnetsHeaders = field(default=None)
+    headers: GetAttachLoadBalancerToSubnetsHeaders = field()
+    query_params: GetAttachLoadBalancerToSubnetsQueryParams = field()
     
 
 @dataclass
 class GetAttachLoadBalancerToSubnetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

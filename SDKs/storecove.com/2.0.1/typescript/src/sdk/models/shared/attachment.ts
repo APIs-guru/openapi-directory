@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AttachmentMimeTypeEnum {
     ApplicationPdf = "application/pdf"
@@ -10,15 +11,15 @@ export enum AttachmentMimeTypeEnum {
  * A document attachment to the invoice.
 **/
 export class Attachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType: AttachmentMimeTypeEnum;
 
-  @Metadata({ data: "json, name=primaryImage" })
+  @SpeakeasyMetadata({ data: "json, name=primaryImage" })
   primaryImage?: boolean;
 }

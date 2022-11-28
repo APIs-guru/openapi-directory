@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class GetAccountsNameRatingsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class GetAccountsNameRatingsRatingEnum(str, Enum):
     LIKE = "like"
@@ -21,19 +23,19 @@ class GetAccountsNameRatingsQueryParams:
 
 @dataclass
 class GetAccountsNameRatingsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAccountsNameRatingsRequest:
-    path_params: GetAccountsNameRatingsPathParams = field(default=None)
-    query_params: GetAccountsNameRatingsQueryParams = field(default=None)
-    security: GetAccountsNameRatingsSecurity = field(default=None)
+    path_params: GetAccountsNameRatingsPathParams = field()
+    query_params: GetAccountsNameRatingsQueryParams = field()
+    security: GetAccountsNameRatingsSecurity = field()
     
 
 @dataclass
 class GetAccountsNameRatingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_ratings: Optional[List[Any]] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HttpProperties
 /**
  * A complex type that contains the name of an HTTP namespace.
@@ -33,7 +33,7 @@ var HttpProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=HttpName" }),
+        SpeakeasyMetadata({ data: "json, name=HttpName" }),
         __metadata("design:type", String)
     ], HttpProperties.prototype, "httpName", void 0);
     return HttpProperties;

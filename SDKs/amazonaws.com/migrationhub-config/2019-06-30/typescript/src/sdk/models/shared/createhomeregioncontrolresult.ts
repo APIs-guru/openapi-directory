@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HomeRegionControl } from "./homeregioncontrol";
 
 
+
 export class CreateHomeRegionControlResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HomeRegionControl" })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegionControl" })
   homeRegionControl?: HomeRegionControl;
 }

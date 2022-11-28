@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CopyPadUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=destinationID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destinationID" })
   destinationId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=force" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=force" })
   force?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sourceID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceID" })
   sourceId?: string;
 }
 
 
-export class CopyPadUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CopyPadUsingGetQueryParams;
-}
-
-
 export class CopyPadUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CopyPadUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CopyPadUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CopyPadUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CopyPadUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CopyPadUsingGetQueryParams;
+}
+
+
 export class CopyPadUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   copyPadUsingGet200ApplicationJsonObject?: CopyPadUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   copyPadUsingGet400ApplicationJsonObject?: CopyPadUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   copyPadUsingGet401ApplicationJsonObject?: CopyPadUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   copyPadUsingGet500ApplicationJsonObject?: CopyPadUsingGet500ApplicationJson;
 }

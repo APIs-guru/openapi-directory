@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BandedRange } from "./bandedrange";
+
 
 
 // UpdateBandingRequest
@@ -7,9 +8,9 @@ import { BandedRange } from "./bandedrange";
  * Updates properties of the supplied banded range.
 **/
 export class UpdateBandingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandedRange" })
+  @SpeakeasyMetadata({ data: "json, name=bandedRange" })
   bandedRange?: BandedRange;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 }

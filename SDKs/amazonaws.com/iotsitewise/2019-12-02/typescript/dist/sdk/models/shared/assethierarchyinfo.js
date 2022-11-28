@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AssetHierarchyInfo
 /**
  * Contains information about a parent asset and a child asset that are related through an asset hierarchy.
@@ -33,11 +33,11 @@ var AssetHierarchyInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=childAssetId" }),
+        SpeakeasyMetadata({ data: "json, name=childAssetId" }),
         __metadata("design:type", String)
     ], AssetHierarchyInfo.prototype, "childAssetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentAssetId" }),
+        SpeakeasyMetadata({ data: "json, name=parentAssetId" }),
         __metadata("design:type", String)
     ], AssetHierarchyInfo.prototype, "parentAssetId", void 0);
     return AssetHierarchyInfo;

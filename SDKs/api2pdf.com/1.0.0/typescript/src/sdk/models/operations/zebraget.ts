@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ZebraGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=height" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" })
   height?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=showlabel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showlabel" })
   showlabel?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=value" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=value" })
   value: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=width" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" })
   width?: number;
 }
 
 
 export class ZebraGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   queryApiKey: shared.SchemeQueryApiKey;
 }
 
 
 export class ZebraGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ZebraGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ZebraGetSecurity;
 }
 
 
 export class ZebraGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   zebraGet200ImagePngBinaryString?: Uint8Array;
 }

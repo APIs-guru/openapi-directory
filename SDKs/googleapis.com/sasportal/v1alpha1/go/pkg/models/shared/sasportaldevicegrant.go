@@ -19,6 +19,8 @@ const (
 	SasPortalDeviceGrantStateEnumGrantStateExpired     SasPortalDeviceGrantStateEnum = "GRANT_STATE_EXPIRED"
 )
 
+// SasPortalDeviceGrant
+// Device grant. It is an authorization provided by the Spectrum Access System to a device to transmit using specified operating parameters after a successful heartbeat by the device.
 type SasPortalDeviceGrant struct {
 	ChannelType                     *SasPortalDeviceGrantChannelTypeEnum `json:"channelType,omitempty"`
 	ExpireTime                      *string                              `json:"expireTime,omitempty"`

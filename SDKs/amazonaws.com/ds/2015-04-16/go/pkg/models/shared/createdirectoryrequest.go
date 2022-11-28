@@ -1,5 +1,7 @@
 package shared
 
+// CreateDirectoryRequest
+// Contains the inputs for the <a>CreateDirectory</a> operation.
 type CreateDirectoryRequest struct {
 	Description *string               `json:"Description,omitempty"`
 	Name        string                `json:"Name"`

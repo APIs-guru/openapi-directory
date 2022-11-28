@@ -1,5 +1,7 @@
 package shared
 
+// AdmChannelResponse
+// Provides information about the status and settings of the ADM (Amazon Device Messaging) channel for an application.
 type AdmChannelResponse struct {
 	ApplicationID    *string `json:"ApplicationId,omitempty"`
 	CreationDate     *string `json:"CreationDate,omitempty"`

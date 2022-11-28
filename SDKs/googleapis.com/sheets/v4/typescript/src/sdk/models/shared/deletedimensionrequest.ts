@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionRange } from "./dimensionrange";
+
 
 
 // DeleteDimensionRequest
@@ -7,6 +8,6 @@ import { DimensionRange } from "./dimensionrange";
  * Deletes the dimensions from the sheet.
 **/
 export class DeleteDimensionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: DimensionRange;
 }

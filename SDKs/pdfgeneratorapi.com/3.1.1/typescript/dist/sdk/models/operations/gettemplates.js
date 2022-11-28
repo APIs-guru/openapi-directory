@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTemplates200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetTemplates200ApplicationJson, _super);
@@ -30,7 +30,7 @@ var GetTemplates200ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=response", elemType: shared.Template }),
+        SpeakeasyMetadata({ data: "json, name=response", elemType: shared.Template }),
         __metadata("design:type", Array)
     ], GetTemplates200ApplicationJson.prototype, "response", void 0);
     return GetTemplates200ApplicationJson;
@@ -55,11 +55,11 @@ var GetTemplates401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetTemplates401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetTemplates401ApplicationJson.prototype, "status", void 0);
     return GetTemplates401ApplicationJson;
@@ -75,11 +75,11 @@ var GetTemplates403ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetTemplates403ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetTemplates403ApplicationJson.prototype, "status", void 0);
     return GetTemplates403ApplicationJson;
@@ -97,11 +97,11 @@ var GetTemplates404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetTemplates404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetTemplates404ApplicationJson.prototype, "status", void 0);
     return GetTemplates404ApplicationJson;
@@ -120,11 +120,11 @@ var GetTemplates422ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetTemplates422ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetTemplates422ApplicationJson.prototype, "status", void 0);
     return GetTemplates422ApplicationJson;
@@ -136,11 +136,11 @@ var GetTemplates500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetTemplates500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetTemplates500ApplicationJson.prototype, "status", void 0);
     return GetTemplates500ApplicationJson;
@@ -152,35 +152,35 @@ var GetTemplatesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTemplatesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTemplatesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTemplates200ApplicationJson)
     ], GetTemplatesResponse.prototype, "getTemplates200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTemplates401ApplicationJson)
     ], GetTemplatesResponse.prototype, "getTemplates401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTemplates403ApplicationJson)
     ], GetTemplatesResponse.prototype, "getTemplates403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTemplates404ApplicationJson)
     ], GetTemplatesResponse.prototype, "getTemplates404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTemplates422ApplicationJson)
     ], GetTemplatesResponse.prototype, "getTemplates422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTemplates500ApplicationJson)
     ], GetTemplatesResponse.prototype, "getTemplates500ApplicationJsonObject", void 0);
     return GetTemplatesResponse;

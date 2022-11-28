@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteOrderDealsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dealIds" })
+  @SpeakeasyMetadata({ data: "json, name=dealIds" })
   dealIds?: string[];
 
-  @Metadata({ data: "json, name=proposalRevisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=proposalRevisionNumber" })
   proposalRevisionNumber?: string;
 
-  @Metadata({ data: "json, name=updateAction" })
+  @SpeakeasyMetadata({ data: "json, name=updateAction" })
   updateAction?: string;
 }

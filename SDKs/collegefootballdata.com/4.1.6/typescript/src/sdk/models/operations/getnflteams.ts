@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNflTeamsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.DraftTeam })
+  @SpeakeasyMetadata({ elemType: shared.DraftTeam })
   draftTeams?: shared.DraftTeam[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

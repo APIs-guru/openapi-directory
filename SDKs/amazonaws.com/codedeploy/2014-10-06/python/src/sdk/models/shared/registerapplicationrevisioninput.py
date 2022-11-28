@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import revisionlocation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RegisterApplicationRevisionInput:
-    application_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationName' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    revision: revisionlocation.RevisionLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revision' }})
+    r"""RegisterApplicationRevisionInput
+    Represents the input of a RegisterApplicationRevision operation.
+    """
+    
+    application_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationName') }})
+    revision: RevisionLocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('revision') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     

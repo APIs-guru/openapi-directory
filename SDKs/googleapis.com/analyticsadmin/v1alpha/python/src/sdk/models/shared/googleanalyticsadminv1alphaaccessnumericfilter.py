@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphanumericvalue
+from sdk import utils
+from . import *
 
 class GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum(str, Enum):
     OPERATION_UNSPECIFIED = "OPERATION_UNSPECIFIED"
@@ -15,6 +20,10 @@ class GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAccessNumericFilter:
-    operation: Optional[GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
-    value: Optional[googleanalyticsadminv1alphanumericvalue.GoogleAnalyticsAdminV1alphaNumericValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""GoogleAnalyticsAdminV1alphaAccessNumericFilter
+    Filters for numeric or date values.
+    """
+    
+    operation: Optional[GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    value: Optional[GoogleAnalyticsAdminV1alphaNumericValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

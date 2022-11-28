@@ -51,6 +51,8 @@ const (
 	DeleteAssignedTargetingOptionsRequestTargetingTypeEnumTargetingTypeContentGenre                 DeleteAssignedTargetingOptionsRequestTargetingTypeEnum = "TARGETING_TYPE_CONTENT_GENRE"
 )
 
+// DeleteAssignedTargetingOptionsRequest
+// A request listing which assigned targeting options of a given targeting type should be deleted.
 type DeleteAssignedTargetingOptionsRequest struct {
 	AssignedTargetingOptionIds []string                                                `json:"assignedTargetingOptionIds,omitempty"`
 	TargetingType              *DeleteAssignedTargetingOptionsRequestTargetingTypeEnum `json:"targetingType,omitempty"`

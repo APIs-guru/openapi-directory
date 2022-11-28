@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DfpSettings
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Google Ad Manager Settings
 **/
 export class DfpSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dfpNetworkCode" })
+  @SpeakeasyMetadata({ data: "json, name=dfpNetworkCode" })
   dfpNetworkCode?: string;
 
-  @Metadata({ data: "json, name=dfpNetworkName" })
+  @SpeakeasyMetadata({ data: "json, name=dfpNetworkName" })
   dfpNetworkName?: string;
 
-  @Metadata({ data: "json, name=programmaticPlacementAccepted" })
+  @SpeakeasyMetadata({ data: "json, name=programmaticPlacementAccepted" })
   programmaticPlacementAccepted?: boolean;
 
-  @Metadata({ data: "json, name=pubPaidPlacementAccepted" })
+  @SpeakeasyMetadata({ data: "json, name=pubPaidPlacementAccepted" })
   pubPaidPlacementAccepted?: boolean;
 
-  @Metadata({ data: "json, name=publisherPortalOnly" })
+  @SpeakeasyMetadata({ data: "json, name=publisherPortalOnly" })
   publisherPortalOnly?: boolean;
 }

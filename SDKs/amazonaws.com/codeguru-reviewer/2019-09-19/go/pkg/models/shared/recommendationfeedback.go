@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// RecommendationFeedback
+//
+//	Information about the recommendation feedback.
 type RecommendationFeedback struct {
 	CodeReviewArn        *string        `json:"CodeReviewArn,omitempty"`
 	CreatedTimeStamp     *time.Time     `json:"CreatedTimeStamp,omitempty"`

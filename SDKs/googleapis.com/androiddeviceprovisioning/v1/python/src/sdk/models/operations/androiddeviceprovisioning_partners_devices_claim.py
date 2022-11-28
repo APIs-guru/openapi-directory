@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesClaimPathParams:
-    partner_id: str = field(default=None, metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
+    partner_id: str = field(metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AndroiddeviceprovisioningPartnersDevicesClaimQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesClaimRequest:
-    path_params: AndroiddeviceprovisioningPartnersDevicesClaimPathParams = field(default=None)
-    query_params: AndroiddeviceprovisioningPartnersDevicesClaimQueryParams = field(default=None)
+    path_params: AndroiddeviceprovisioningPartnersDevicesClaimPathParams = field()
+    query_params: AndroiddeviceprovisioningPartnersDevicesClaimQueryParams = field()
     request: Optional[shared.ClaimDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesClaimResponse:
+    content_type: str = field()
+    status_code: int = field()
     claim_device_response: Optional[shared.ClaimDeviceResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

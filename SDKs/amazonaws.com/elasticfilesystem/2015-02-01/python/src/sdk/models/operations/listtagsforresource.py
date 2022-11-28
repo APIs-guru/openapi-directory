@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListTagsForResourcePathParams:
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ResourceId', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'ResourceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class ListTagsForResourceHeaders:
 
 @dataclass
 class ListTagsForResourceRequest:
-    path_params: ListTagsForResourcePathParams = field(default=None)
-    query_params: ListTagsForResourceQueryParams = field(default=None)
-    headers: ListTagsForResourceHeaders = field(default=None)
+    headers: ListTagsForResourceHeaders = field()
+    path_params: ListTagsForResourcePathParams = field()
+    query_params: ListTagsForResourceQueryParams = field()
     
 
 @dataclass
 class ListTagsForResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_point_not_found: Optional[Any] = field(default=None)
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     list_tags_for_resource_response: Optional[shared.ListTagsForResourceResponse] = field(default=None)
-    status_code: int = field(default=None)
     

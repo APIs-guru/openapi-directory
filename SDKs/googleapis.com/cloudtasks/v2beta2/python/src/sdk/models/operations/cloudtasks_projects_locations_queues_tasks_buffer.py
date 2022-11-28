@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksBufferPathParams:
-    queue: str = field(default=None, metadata={'path_param': { 'field_name': 'queue', 'style': 'simple', 'explode': False }})
-    task_id: str = field(default=None, metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
+    queue: str = field(metadata={'path_param': { 'field_name': 'queue', 'style': 'simple', 'explode': False }})
+    task_id: str = field(metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class CloudtasksProjectsLocationsQueuesTasksBufferQueryParams:
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksBufferSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksBufferRequest:
-    path_params: CloudtasksProjectsLocationsQueuesTasksBufferPathParams = field(default=None)
-    query_params: CloudtasksProjectsLocationsQueuesTasksBufferQueryParams = field(default=None)
+    path_params: CloudtasksProjectsLocationsQueuesTasksBufferPathParams = field()
+    query_params: CloudtasksProjectsLocationsQueuesTasksBufferQueryParams = field()
+    security: CloudtasksProjectsLocationsQueuesTasksBufferSecurity = field()
     request: Optional[shared.BufferTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudtasksProjectsLocationsQueuesTasksBufferSecurity = field(default=None)
     
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksBufferResponse:
+    content_type: str = field()
+    status_code: int = field()
     buffer_task_response: Optional[shared.BufferTaskResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

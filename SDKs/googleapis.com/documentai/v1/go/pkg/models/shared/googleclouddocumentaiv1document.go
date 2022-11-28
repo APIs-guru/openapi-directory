@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1Document
+// Document represents the canonical document resource in Document AI. It is an interchange format that provides insights into documents and allows for collaboration between users and Document AI to iterate and optimize for quality.
 type GoogleCloudDocumentaiV1Document struct {
 	Content         *string                                         `json:"content,omitempty"`
 	Entities        []GoogleCloudDocumentaiV1DocumentEntity         `json:"entities,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetAllCve200ApplicationJsonActionEnum {
     GetAllCve = "getAllCve"
@@ -7,35 +8,35 @@ export enum GetAllCve200ApplicationJsonActionEnum {
 
 
 export class GetAllCve200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CVEs", elemType: shared.CveDetails })
+  @SpeakeasyMetadata({ data: "json, name=CVEs", elemType: shared.CveDetails })
   cvEs: shared.CveDetails[];
 }
 
 export enum GetAllCve200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetAllCve200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetAllCve200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetAllCve200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetAllCve200ApplicationJsonResultEnum;
 }
 
 
 export class GetAllCveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAllCve200ApplicationJsonObject?: GetAllCve200ApplicationJson;
 }

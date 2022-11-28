@@ -1,18 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CheckDirectivePathParams:
-    directive_id: str = field(default=None, metadata={'path_param': { 'field_name': 'directiveId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class CheckDirectiveRequest:
-    path_params: CheckDirectivePathParams = field(default=None)
-    request: shared.Directive = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    directive_id: str = field(metadata={'path_param': { 'field_name': 'directiveId', 'style': 'simple', 'explode': False }})
     
 class CheckDirective200ApplicationJSONActionEnum(str, Enum):
     CHECK_DIRECTIVE = "checkDirective"
@@ -21,7 +17,7 @@ class CheckDirective200ApplicationJSONActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CheckDirective200ApplicationJSONData:
-    directives: List[shared.Directive] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directives' }})
+    directives: List[shared.Directive] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('directives') }})
     
 class CheckDirective200ApplicationJSONResultEnum(str, Enum):
     SUCCESS = "success"
@@ -31,14 +27,20 @@ class CheckDirective200ApplicationJSONResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CheckDirective200ApplicationJSON:
-    action: CheckDirective200ApplicationJSONActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    data: CheckDirective200ApplicationJSONData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    result: CheckDirective200ApplicationJSONResultEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    action: CheckDirective200ApplicationJSONActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    data: CheckDirective200ApplicationJSONData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    result: CheckDirective200ApplicationJSONResultEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    
+
+@dataclass
+class CheckDirectiveRequest:
+    path_params: CheckDirectivePathParams = field()
+    request: shared.Directive = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CheckDirectiveResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     check_directive_200_application_json_object: Optional[CheckDirective200ApplicationJSON] = field(default=None)
     

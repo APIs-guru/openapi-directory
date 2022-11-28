@@ -14,6 +14,8 @@ type CreateMeshHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateMeshRequestBodySpec
+// An object that represents the specification of a service mesh.
 type CreateMeshRequestBodySpec struct {
 	EgressFilter *shared.EgressFilter `json:"egressFilter,omitempty"`
 }

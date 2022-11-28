@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AccessPreview
+// Contains information about an access preview.
 type AccessPreview struct {
 	AnalyzerArn    string                     `json:"analyzerArn"`
 	Configurations map[string]Configuration   `json:"configurations"`

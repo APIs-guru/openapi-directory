@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SpeechAdaptation } from "./speechadaptation";
-import { SpeakerDiarizationConfig } from "./speakerdiarizationconfig";
+import { SpeakerDiarizationConfigInput } from "./speakerdiarizationconfig";
 import { RecognitionMetadata } from "./recognitionmetadata";
+import { SpeechContext } from "./speechcontext";
 import { TranscriptNormalization } from "./transcriptnormalization";
 export var RecognitionConfigEncodingEnum;
 (function (RecognitionConfigEncodingEnum) {
@@ -41,103 +41,103 @@ export var RecognitionConfigEncodingEnum;
     RecognitionConfigEncodingEnum["Mp3"] = "MP3";
     RecognitionConfigEncodingEnum["WebmOpus"] = "WEBM_OPUS";
 })(RecognitionConfigEncodingEnum || (RecognitionConfigEncodingEnum = {}));
-// RecognitionConfig
+// RecognitionConfigInput
 /**
  * Provides information to the recognizer that specifies how to process the request.
 **/
-var RecognitionConfig = /** @class */ (function (_super) {
-    __extends(RecognitionConfig, _super);
-    function RecognitionConfig() {
+var RecognitionConfigInput = /** @class */ (function (_super) {
+    __extends(RecognitionConfigInput, _super);
+    function RecognitionConfigInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=adaptation" }),
+        SpeakeasyMetadata({ data: "json, name=adaptation" }),
         __metadata("design:type", SpeechAdaptation)
-    ], RecognitionConfig.prototype, "adaptation", void 0);
+    ], RecognitionConfigInput.prototype, "adaptation", void 0);
     __decorate([
-        Metadata({ data: "json, name=alternativeLanguageCodes" }),
+        SpeakeasyMetadata({ data: "json, name=alternativeLanguageCodes" }),
         __metadata("design:type", Array)
-    ], RecognitionConfig.prototype, "alternativeLanguageCodes", void 0);
+    ], RecognitionConfigInput.prototype, "alternativeLanguageCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=audioChannelCount" }),
+        SpeakeasyMetadata({ data: "json, name=audioChannelCount" }),
         __metadata("design:type", Number)
-    ], RecognitionConfig.prototype, "audioChannelCount", void 0);
+    ], RecognitionConfigInput.prototype, "audioChannelCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=diarizationConfig" }),
-        __metadata("design:type", SpeakerDiarizationConfig)
-    ], RecognitionConfig.prototype, "diarizationConfig", void 0);
+        SpeakeasyMetadata({ data: "json, name=diarizationConfig" }),
+        __metadata("design:type", SpeakerDiarizationConfigInput)
+    ], RecognitionConfigInput.prototype, "diarizationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=diarizationSpeakerCount" }),
+        SpeakeasyMetadata({ data: "json, name=diarizationSpeakerCount" }),
         __metadata("design:type", Number)
-    ], RecognitionConfig.prototype, "diarizationSpeakerCount", void 0);
+    ], RecognitionConfigInput.prototype, "diarizationSpeakerCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAutomaticPunctuation" }),
+        SpeakeasyMetadata({ data: "json, name=enableAutomaticPunctuation" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "enableAutomaticPunctuation", void 0);
+    ], RecognitionConfigInput.prototype, "enableAutomaticPunctuation", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableSeparateRecognitionPerChannel" }),
+        SpeakeasyMetadata({ data: "json, name=enableSeparateRecognitionPerChannel" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "enableSeparateRecognitionPerChannel", void 0);
+    ], RecognitionConfigInput.prototype, "enableSeparateRecognitionPerChannel", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableSpeakerDiarization" }),
+        SpeakeasyMetadata({ data: "json, name=enableSpeakerDiarization" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "enableSpeakerDiarization", void 0);
+    ], RecognitionConfigInput.prototype, "enableSpeakerDiarization", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableSpokenEmojis" }),
+        SpeakeasyMetadata({ data: "json, name=enableSpokenEmojis" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "enableSpokenEmojis", void 0);
+    ], RecognitionConfigInput.prototype, "enableSpokenEmojis", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableSpokenPunctuation" }),
+        SpeakeasyMetadata({ data: "json, name=enableSpokenPunctuation" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "enableSpokenPunctuation", void 0);
+    ], RecognitionConfigInput.prototype, "enableSpokenPunctuation", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableWordConfidence" }),
+        SpeakeasyMetadata({ data: "json, name=enableWordConfidence" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "enableWordConfidence", void 0);
+    ], RecognitionConfigInput.prototype, "enableWordConfidence", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableWordTimeOffsets" }),
+        SpeakeasyMetadata({ data: "json, name=enableWordTimeOffsets" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "enableWordTimeOffsets", void 0);
+    ], RecognitionConfigInput.prototype, "enableWordTimeOffsets", void 0);
     __decorate([
-        Metadata({ data: "json, name=encoding" }),
+        SpeakeasyMetadata({ data: "json, name=encoding" }),
         __metadata("design:type", String)
-    ], RecognitionConfig.prototype, "encoding", void 0);
+    ], RecognitionConfigInput.prototype, "encoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
-    ], RecognitionConfig.prototype, "languageCode", void 0);
+    ], RecognitionConfigInput.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxAlternatives" }),
+        SpeakeasyMetadata({ data: "json, name=maxAlternatives" }),
         __metadata("design:type", Number)
-    ], RecognitionConfig.prototype, "maxAlternatives", void 0);
+    ], RecognitionConfigInput.prototype, "maxAlternatives", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", RecognitionMetadata)
-    ], RecognitionConfig.prototype, "metadata", void 0);
+    ], RecognitionConfigInput.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=model" }),
+        SpeakeasyMetadata({ data: "json, name=model" }),
         __metadata("design:type", String)
-    ], RecognitionConfig.prototype, "model", void 0);
+    ], RecognitionConfigInput.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "json, name=profanityFilter" }),
+        SpeakeasyMetadata({ data: "json, name=profanityFilter" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "profanityFilter", void 0);
+    ], RecognitionConfigInput.prototype, "profanityFilter", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleRateHertz" }),
+        SpeakeasyMetadata({ data: "json, name=sampleRateHertz" }),
         __metadata("design:type", Number)
-    ], RecognitionConfig.prototype, "sampleRateHertz", void 0);
+    ], RecognitionConfigInput.prototype, "sampleRateHertz", void 0);
     __decorate([
-        Metadata({ data: "json, name=speechContexts", elemType: shared.SpeechContext }),
+        SpeakeasyMetadata({ data: "json, name=speechContexts", elemType: SpeechContext }),
         __metadata("design:type", Array)
-    ], RecognitionConfig.prototype, "speechContexts", void 0);
+    ], RecognitionConfigInput.prototype, "speechContexts", void 0);
     __decorate([
-        Metadata({ data: "json, name=transcriptNormalization" }),
+        SpeakeasyMetadata({ data: "json, name=transcriptNormalization" }),
         __metadata("design:type", TranscriptNormalization)
-    ], RecognitionConfig.prototype, "transcriptNormalization", void 0);
+    ], RecognitionConfigInput.prototype, "transcriptNormalization", void 0);
     __decorate([
-        Metadata({ data: "json, name=useEnhanced" }),
+        SpeakeasyMetadata({ data: "json, name=useEnhanced" }),
         __metadata("design:type", Boolean)
-    ], RecognitionConfig.prototype, "useEnhanced", void 0);
-    return RecognitionConfig;
+    ], RecognitionConfigInput.prototype, "useEnhanced", void 0);
+    return RecognitionConfigInput;
 }(SpeakeasyBase));
-export { RecognitionConfig };
+export { RecognitionConfigInput };

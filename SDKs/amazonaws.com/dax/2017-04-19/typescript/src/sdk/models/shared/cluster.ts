@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
 import { ClusterEndpointEncryptionTypeEnum } from "./clusterendpointencryptiontypeenum";
 import { Node } from "./node";
@@ -9,62 +8,63 @@ import { SseDescription } from "./ssedescription";
 import { SecurityGroupMembership } from "./securitygroupmembership";
 
 
+
 // Cluster
 /** 
  * Contains all of the attributes of a specific DAX cluster.
 **/
 export class Cluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActiveNodes" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveNodes" })
   activeNodes?: number;
 
-  @Metadata({ data: "json, name=ClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterArn" })
   clusterArn?: string;
 
-  @Metadata({ data: "json, name=ClusterDiscoveryEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterDiscoveryEndpoint" })
   clusterDiscoveryEndpoint?: Endpoint;
 
-  @Metadata({ data: "json, name=ClusterEndpointEncryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterEndpointEncryptionType" })
   clusterEndpointEncryptionType?: ClusterEndpointEncryptionTypeEnum;
 
-  @Metadata({ data: "json, name=ClusterName" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamRoleArn" })
   iamRoleArn?: string;
 
-  @Metadata({ data: "json, name=NodeIdsToRemove" })
+  @SpeakeasyMetadata({ data: "json, name=NodeIdsToRemove" })
   nodeIdsToRemove?: string[];
 
-  @Metadata({ data: "json, name=NodeType" })
+  @SpeakeasyMetadata({ data: "json, name=NodeType" })
   nodeType?: string;
 
-  @Metadata({ data: "json, name=Nodes", elemType: shared.Node })
+  @SpeakeasyMetadata({ data: "json, name=Nodes", elemType: Node })
   nodes?: Node[];
 
-  @Metadata({ data: "json, name=NotificationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationConfiguration" })
   notificationConfiguration?: NotificationConfiguration;
 
-  @Metadata({ data: "json, name=ParameterGroup" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroup" })
   parameterGroup?: ParameterGroupStatus;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=SSEDescription" })
+  @SpeakeasyMetadata({ data: "json, name=SSEDescription" })
   sseDescription?: SseDescription;
 
-  @Metadata({ data: "json, name=SecurityGroups", elemType: shared.SecurityGroupMembership })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroups", elemType: SecurityGroupMembership })
   securityGroups?: SecurityGroupMembership[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=SubnetGroup" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetGroup" })
   subnetGroup?: string;
 
-  @Metadata({ data: "json, name=TotalNodes" })
+  @SpeakeasyMetadata({ data: "json, name=TotalNodes" })
   totalNodes?: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EmailVerificationData
 /**
  * Display data for verifications through email.
@@ -33,15 +33,15 @@ var EmailVerificationData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], EmailVerificationData.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=isUserNameEditable" }),
+        SpeakeasyMetadata({ data: "json, name=isUserNameEditable" }),
         __metadata("design:type", Boolean)
     ], EmailVerificationData.prototype, "isUserNameEditable", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", String)
     ], EmailVerificationData.prototype, "user", void 0);
     return EmailVerificationData;

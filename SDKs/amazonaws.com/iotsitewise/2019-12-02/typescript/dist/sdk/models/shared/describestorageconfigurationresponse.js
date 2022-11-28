@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationStatus } from "./configurationstatus";
 import { MultiLayerStorage } from "./multilayerstorage";
 import { StorageTypeEnum } from "./storagetypeenum";
@@ -32,19 +32,19 @@ var DescribeStorageConfigurationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configurationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=configurationStatus" }),
         __metadata("design:type", ConfigurationStatus)
     ], DescribeStorageConfigurationResponse.prototype, "configurationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateDate" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateDate" }),
         __metadata("design:type", Date)
     ], DescribeStorageConfigurationResponse.prototype, "lastUpdateDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=multiLayerStorage" }),
+        SpeakeasyMetadata({ data: "json, name=multiLayerStorage" }),
         __metadata("design:type", MultiLayerStorage)
     ], DescribeStorageConfigurationResponse.prototype, "multiLayerStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=storageType" }),
+        SpeakeasyMetadata({ data: "json, name=storageType" }),
         __metadata("design:type", String)
     ], DescribeStorageConfigurationResponse.prototype, "storageType", void 0);
     return DescribeStorageConfigurationResponse;

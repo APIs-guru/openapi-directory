@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VoiceOptionsCoveredDataEnum {
-    CoveredDataUnspecified = "COVERED_DATA_UNSPECIFIED"
-,    TextMessages = "TEXT_MESSAGES"
-,    Voicemails = "VOICEMAILS"
-,    CallLogs = "CALL_LOGS"
+    CoveredDataUnspecified = "COVERED_DATA_UNSPECIFIED",
+    TextMessages = "TEXT_MESSAGES",
+    Voicemails = "VOICEMAILS",
+    CallLogs = "CALL_LOGS"
 }
 
 
@@ -13,6 +14,6 @@ export enum VoiceOptionsCoveredDataEnum {
  * Additional options for Voice search
 **/
 export class VoiceOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coveredData" })
+  @SpeakeasyMetadata({ data: "json, name=coveredData" })
   coveredData?: VoiceOptionsCoveredDataEnum[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Credential } from "./credential";
 import { DeploymentLabelEntry } from "./deploymentlabelentry";
 import { Operation } from "./operation";

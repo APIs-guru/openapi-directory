@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ServicePrincipalsAddOwnerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=objectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=objectId" })
   objectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 }
 
 
 export class ServicePrincipalsAddOwnerQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class ServicePrincipalsAddOwnerRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   addOwnerParameters?: Map<string, Map<string, any>>;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   addOwnerParameters1?: Map<string, Map<string, any>>;
 }
 
 
 export class ServicePrincipalsAddOwnerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ServicePrincipalsAddOwnerPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ServicePrincipalsAddOwnerQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: ServicePrincipalsAddOwnerRequests;
 }
 
 
 export class ServicePrincipalsAddOwnerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   graphError?: shared.GraphError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

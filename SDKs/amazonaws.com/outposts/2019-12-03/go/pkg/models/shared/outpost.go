@@ -1,5 +1,7 @@
 package shared
 
+// Outpost
+// Information about an Outpost.
 type Outpost struct {
 	AvailabilityZone   *string           `json:"AvailabilityZone,omitempty"`
 	AvailabilityZoneID *string           `json:"AvailabilityZoneId,omitempty"`

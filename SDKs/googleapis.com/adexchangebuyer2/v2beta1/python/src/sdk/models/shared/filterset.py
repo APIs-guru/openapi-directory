@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import absolutedaterange
-from . import realtimetimerange
-from . import relativedaterange
+from sdk import utils
+from . import *
 
 class FilterSetBreakdownDimensionsEnum(str, Enum):
     BREAKDOWN_DIMENSION_UNSPECIFIED = "BREAKDOWN_DIMENSION_UNSPECIFIED"
@@ -43,18 +46,22 @@ class FilterSetTimeSeriesGranularityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FilterSet:
-    absolute_date_range: Optional[absolutedaterange.AbsoluteDateRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'absoluteDateRange' }})
-    breakdown_dimensions: Optional[List[FilterSetBreakdownDimensionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'breakdownDimensions' }})
-    creative_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeId' }})
-    deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealId' }})
-    environment: Optional[FilterSetEnvironmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    format: Optional[FilterSetFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    formats: Optional[List[FilterSetFormatsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'formats' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    platforms: Optional[List[FilterSetPlatformsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platforms' }})
-    publisher_identifiers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisherIdentifiers' }})
-    realtime_time_range: Optional[realtimetimerange.RealtimeTimeRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'realtimeTimeRange' }})
-    relative_date_range: Optional[relativedaterange.RelativeDateRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relativeDateRange' }})
-    seller_network_ids: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sellerNetworkIds' }})
-    time_series_granularity: Optional[FilterSetTimeSeriesGranularityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeSeriesGranularity' }})
+    r"""FilterSet
+    A set of filters that is applied to a request for data. Within a filter set, an AND operation is performed across the filters represented by each field. An OR operation is performed across the filters represented by the multiple values of a repeated field, for example, \"format=VIDEO AND deal_id=12 AND (seller_network_id=34 OR seller_network_id=56)\".
+    """
+    
+    absolute_date_range: Optional[AbsoluteDateRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('absoluteDateRange') }})
+    breakdown_dimensions: Optional[List[FilterSetBreakdownDimensionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('breakdownDimensions') }})
+    creative_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeId') }})
+    deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealId') }})
+    environment: Optional[FilterSetEnvironmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    format: Optional[FilterSetFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    formats: Optional[List[FilterSetFormatsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('formats') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    platforms: Optional[List[FilterSetPlatformsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platforms') }})
+    publisher_identifiers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherIdentifiers') }})
+    realtime_time_range: Optional[RealtimeTimeRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('realtimeTimeRange') }})
+    relative_date_range: Optional[RelativeDateRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relativeDateRange') }})
+    seller_network_ids: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sellerNetworkIds') }})
+    time_series_granularity: Optional[FilterSetTimeSeriesGranularityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeSeriesGranularity') }})
     

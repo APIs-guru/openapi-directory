@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RecoveryOptionNameTypeEnum(str, Enum):
     VERIFIED_EMAIL = "verified_email"

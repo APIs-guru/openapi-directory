@@ -1,5 +1,7 @@
 package shared
 
+// CmHybridConfig
+// Settings for advertisers that use both Campaign Manager 360 (CM360) and third-party ad servers.
 type CmHybridConfig struct {
 	CmAccountID                   *string  `json:"cmAccountId,omitempty"`
 	CmFloodlightConfigID          *string  `json:"cmFloodlightConfigId,omitempty"`

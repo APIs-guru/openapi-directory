@@ -1,5 +1,7 @@
 package shared
 
+// AnswerSummary
+// An answer summary of a lens review in a workload.
 type AnswerSummary struct {
 	ChoiceAnswerSummaries []ChoiceAnswerSummary `json:"ChoiceAnswerSummaries,omitempty"`
 	Choices               []Choice              `json:"Choices,omitempty"`

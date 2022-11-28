@@ -1,15 +1,24 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.vonage.com/t/vbc.prod/provisioning"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    UserCtrlGetUserById(req: operations.UserCtrlGetUserByIdRequest, config?: AxiosRequestConfig): Promise<operations.UserCtrlGetUserByIdResponse>;
-    UserCtrlGetUsers(req: operations.UserCtrlGetUsersRequest, config?: AxiosRequestConfig): Promise<operations.UserCtrlGetUsersResponse>;
+    /**
+     * userCtrlGetUserById - Get user data by account ID and user ID
+    **/
+    userCtrlGetUserById(req: operations.UserCtrlGetUserByIdRequest, config?: AxiosRequestConfig): Promise<operations.UserCtrlGetUserByIdResponse>;
+    /**
+     * userCtrlGetUsers - Get account users data by account ID
+    **/
+    userCtrlGetUsers(req: operations.UserCtrlGetUsersRequest, config?: AxiosRequestConfig): Promise<operations.UserCtrlGetUsersResponse>;
 }
 export {};

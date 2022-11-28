@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1IntentMessageImage } from "./googleclouddialogflowv2beta1intentmessageimage";
 import { GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo } from "./googleclouddialogflowv2beta1intentmessageselectiteminfo";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem
@@ -8,15 +9,15 @@ import { GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo } from "./googl
  * An item in the carousel.
 **/
 export class GoogleCloudDialogflowV2beta1IntentMessageCarouselSelectItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: GoogleCloudDialogflowV2beta1IntentMessageImage;
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

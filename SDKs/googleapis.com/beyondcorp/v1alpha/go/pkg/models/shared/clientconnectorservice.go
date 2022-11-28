@@ -12,6 +12,17 @@ const (
 	ClientConnectorServiceStateEnumError            ClientConnectorServiceStateEnum = "ERROR"
 )
 
+// ClientConnectorServiceInput
+// Message describing ClientConnectorService object.
+type ClientConnectorServiceInput struct {
+	DisplayName *string  `json:"displayName,omitempty"`
+	Egress      *Egress  `json:"egress,omitempty"`
+	Ingress     *Ingress `json:"ingress,omitempty"`
+	Name        *string  `json:"name,omitempty"`
+}
+
+// ClientConnectorService
+// Message describing ClientConnectorService object.
 type ClientConnectorService struct {
 	CreateTime  *string                          `json:"createTime,omitempty"`
 	DisplayName *string                          `json:"displayName,omitempty"`

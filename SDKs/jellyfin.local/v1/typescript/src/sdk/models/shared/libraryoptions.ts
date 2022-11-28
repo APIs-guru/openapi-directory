@@ -1,82 +1,82 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediaPathInfo } from "./mediapathinfo";
 import { TypeOptions } from "./typeoptions";
 
 
+
 export class LibraryOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomaticRefreshIntervalDays" })
+  @SpeakeasyMetadata({ data: "json, name=AutomaticRefreshIntervalDays" })
   automaticRefreshIntervalDays?: number;
 
-  @Metadata({ data: "json, name=DisabledLocalMetadataReaders" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledLocalMetadataReaders" })
   disabledLocalMetadataReaders?: string[];
 
-  @Metadata({ data: "json, name=DisabledSubtitleFetchers" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledSubtitleFetchers" })
   disabledSubtitleFetchers?: string[];
 
-  @Metadata({ data: "json, name=EnableAutomaticSeriesGrouping" })
+  @SpeakeasyMetadata({ data: "json, name=EnableAutomaticSeriesGrouping" })
   enableAutomaticSeriesGrouping?: boolean;
 
-  @Metadata({ data: "json, name=EnableChapterImageExtraction" })
+  @SpeakeasyMetadata({ data: "json, name=EnableChapterImageExtraction" })
   enableChapterImageExtraction?: boolean;
 
-  @Metadata({ data: "json, name=EnableEmbeddedEpisodeInfos" })
+  @SpeakeasyMetadata({ data: "json, name=EnableEmbeddedEpisodeInfos" })
   enableEmbeddedEpisodeInfos?: boolean;
 
-  @Metadata({ data: "json, name=EnableEmbeddedTitles" })
+  @SpeakeasyMetadata({ data: "json, name=EnableEmbeddedTitles" })
   enableEmbeddedTitles?: boolean;
 
-  @Metadata({ data: "json, name=EnableInternetProviders" })
+  @SpeakeasyMetadata({ data: "json, name=EnableInternetProviders" })
   enableInternetProviders?: boolean;
 
-  @Metadata({ data: "json, name=EnablePhotos" })
+  @SpeakeasyMetadata({ data: "json, name=EnablePhotos" })
   enablePhotos?: boolean;
 
-  @Metadata({ data: "json, name=EnableRealtimeMonitor" })
+  @SpeakeasyMetadata({ data: "json, name=EnableRealtimeMonitor" })
   enableRealtimeMonitor?: boolean;
 
-  @Metadata({ data: "json, name=ExtractChapterImagesDuringLibraryScan" })
+  @SpeakeasyMetadata({ data: "json, name=ExtractChapterImagesDuringLibraryScan" })
   extractChapterImagesDuringLibraryScan?: boolean;
 
-  @Metadata({ data: "json, name=LocalMetadataReaderOrder" })
+  @SpeakeasyMetadata({ data: "json, name=LocalMetadataReaderOrder" })
   localMetadataReaderOrder?: string[];
 
-  @Metadata({ data: "json, name=MetadataCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataCountryCode" })
   metadataCountryCode?: string;
 
-  @Metadata({ data: "json, name=MetadataSavers" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataSavers" })
   metadataSavers?: string[];
 
-  @Metadata({ data: "json, name=PathInfos", elemType: shared.MediaPathInfo })
+  @SpeakeasyMetadata({ data: "json, name=PathInfos", elemType: MediaPathInfo })
   pathInfos?: MediaPathInfo[];
 
-  @Metadata({ data: "json, name=PreferredMetadataLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataLanguage" })
   preferredMetadataLanguage?: string;
 
-  @Metadata({ data: "json, name=RequirePerfectSubtitleMatch" })
+  @SpeakeasyMetadata({ data: "json, name=RequirePerfectSubtitleMatch" })
   requirePerfectSubtitleMatch?: boolean;
 
-  @Metadata({ data: "json, name=SaveLocalMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=SaveLocalMetadata" })
   saveLocalMetadata?: boolean;
 
-  @Metadata({ data: "json, name=SaveSubtitlesWithMedia" })
+  @SpeakeasyMetadata({ data: "json, name=SaveSubtitlesWithMedia" })
   saveSubtitlesWithMedia?: boolean;
 
-  @Metadata({ data: "json, name=SeasonZeroDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=SeasonZeroDisplayName" })
   seasonZeroDisplayName?: string;
 
-  @Metadata({ data: "json, name=SkipSubtitlesIfAudioTrackMatches" })
+  @SpeakeasyMetadata({ data: "json, name=SkipSubtitlesIfAudioTrackMatches" })
   skipSubtitlesIfAudioTrackMatches?: boolean;
 
-  @Metadata({ data: "json, name=SkipSubtitlesIfEmbeddedSubtitlesPresent" })
+  @SpeakeasyMetadata({ data: "json, name=SkipSubtitlesIfEmbeddedSubtitlesPresent" })
   skipSubtitlesIfEmbeddedSubtitlesPresent?: boolean;
 
-  @Metadata({ data: "json, name=SubtitleDownloadLanguages" })
+  @SpeakeasyMetadata({ data: "json, name=SubtitleDownloadLanguages" })
   subtitleDownloadLanguages?: string[];
 
-  @Metadata({ data: "json, name=SubtitleFetcherOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SubtitleFetcherOrder" })
   subtitleFetcherOrder?: string[];
 
-  @Metadata({ data: "json, name=TypeOptions", elemType: shared.TypeOptions })
+  @SpeakeasyMetadata({ data: "json, name=TypeOptions", elemType: TypeOptions })
   typeOptions?: TypeOptions[];
 }

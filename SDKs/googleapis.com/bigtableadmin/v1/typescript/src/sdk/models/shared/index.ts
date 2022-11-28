@@ -35,6 +35,7 @@ export * from "./modifycolumnfamiliesrequest";
 export * from "./operation";
 export * from "./policy";
 export * from "./restoreinfo";
+export * from "./restoreinfo1";
 export * from "./restoretablerequest";
 export * from "./security";
 export * from "./setiampolicyrequest";

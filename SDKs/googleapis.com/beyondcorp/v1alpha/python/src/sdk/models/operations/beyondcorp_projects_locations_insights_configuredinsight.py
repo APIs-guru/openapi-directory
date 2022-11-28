@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsConfiguredInsightPathParams:
-    insight: str = field(default=None, metadata={'path_param': { 'field_name': 'insight', 'style': 'simple', 'explode': False }})
+    insight: str = field(metadata={'path_param': { 'field_name': 'insight', 'style': 'simple', 'explode': False }})
     
 class BeyondcorpProjectsLocationsInsightsConfiguredInsightAggregationEnum(str, Enum):
     AGGREGATION_UNSPECIFIED = "AGGREGATION_UNSPECIFIED"
@@ -42,20 +43,20 @@ class BeyondcorpProjectsLocationsInsightsConfiguredInsightQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsConfiguredInsightSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsConfiguredInsightRequest:
-    path_params: BeyondcorpProjectsLocationsInsightsConfiguredInsightPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsInsightsConfiguredInsightQueryParams = field(default=None)
-    security: BeyondcorpProjectsLocationsInsightsConfiguredInsightSecurity = field(default=None)
+    path_params: BeyondcorpProjectsLocationsInsightsConfiguredInsightPathParams = field()
+    query_params: BeyondcorpProjectsLocationsInsightsConfiguredInsightQueryParams = field()
+    security: BeyondcorpProjectsLocationsInsightsConfiguredInsightSecurity = field()
     
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsConfiguredInsightResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_beyondcorp_saasplatform_insights_v1alpha_configured_insight_response: Optional[shared.GoogleCloudBeyondcorpSaasplatformInsightsV1alphaConfiguredInsightResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OsconfigProjectsPatchDeploymentsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class OsconfigProjectsPatchDeploymentsPatchQueryParams:
 
 @dataclass
 class OsconfigProjectsPatchDeploymentsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OsconfigProjectsPatchDeploymentsPatchRequest:
-    path_params: OsconfigProjectsPatchDeploymentsPatchPathParams = field(default=None)
-    query_params: OsconfigProjectsPatchDeploymentsPatchQueryParams = field(default=None)
-    request: Optional[shared.PatchDeployment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: OsconfigProjectsPatchDeploymentsPatchSecurity = field(default=None)
+    path_params: OsconfigProjectsPatchDeploymentsPatchPathParams = field()
+    query_params: OsconfigProjectsPatchDeploymentsPatchQueryParams = field()
+    security: OsconfigProjectsPatchDeploymentsPatchSecurity = field()
+    request: Optional[shared.PatchDeploymentInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class OsconfigProjectsPatchDeploymentsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     patch_deployment: Optional[shared.PatchDeployment] = field(default=None)
-    status_code: int = field(default=None)
     

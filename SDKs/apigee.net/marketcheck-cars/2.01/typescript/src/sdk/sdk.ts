@@ -1,17 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://marketcheck-prod.apigee.net/v2",
+export const ServerList = [
+	"https://marketcheck-prod.apigee.net/v2",
 ] as const;
 
 export function WithServerURL(
@@ -22,50 +19,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetCarDealerInventoryActive - Get dealers active inventory
-  /** 
+  /**
+   * getCarDealerInventoryActive - Get dealers active inventory
+   *
    * Get dealers active inventory
   **/
-  GetCarDealerInventoryActive(
+  getCarDealerInventoryActive(
     req: operations.GetCarDealerInventoryActiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCarDealerInventoryActiveResponse> {
@@ -73,12 +69,11 @@ export class SDK {
       req = new operations.GetCarDealerInventoryActiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/car/dealer/inventory/active";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -87,22 +82,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCarDealerInventoryActiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCarDealerInventoryActiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -114,11 +110,12 @@ export class SDK {
   }
 
   
-  // GetDealerHeavyEquipmentId - Dealer by id
-  /** 
+  /**
+   * getDealerHeavyEquipmentId - Dealer by id
+   *
    * Get a particular dealer's information by its id
   **/
-  GetDealerHeavyEquipmentId(
+  getDealerHeavyEquipmentId(
     req: operations.GetDealerHeavyEquipmentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDealerHeavyEquipmentIdResponse> {
@@ -126,12 +123,11 @@ export class SDK {
       req = new operations.GetDealerHeavyEquipmentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dealer/heavy-equipment/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -140,22 +136,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDealerHeavyEquipmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDealerHeavyEquipmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -167,11 +164,12 @@ export class SDK {
   }
 
   
-  // GetDealerMotorcycleId - Dealer by id
-  /** 
+  /**
+   * getDealerMotorcycleId - Dealer by id
+   *
    * Get a particular dealer's information by its id
   **/
-  GetDealerMotorcycleId(
+  getDealerMotorcycleId(
     req: operations.GetDealerMotorcycleIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDealerMotorcycleIdResponse> {
@@ -179,12 +177,11 @@ export class SDK {
       req = new operations.GetDealerMotorcycleIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dealer/motorcycle/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -193,22 +190,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDealerMotorcycleIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDealerMotorcycleIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -220,11 +218,12 @@ export class SDK {
   }
 
   
-  // GetDealerRvId - Dealer by id
-  /** 
+  /**
+   * getDealerRvId - Dealer by id
+   *
    * Get a particular dealer's information by its id
   **/
-  GetDealerRvId(
+  getDealerRvId(
     req: operations.GetDealerRvIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDealerRvIdResponse> {
@@ -232,12 +231,11 @@ export class SDK {
       req = new operations.GetDealerRvIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dealer/rv/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -246,22 +244,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDealerRvIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDealerRvIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -273,11 +272,12 @@ export class SDK {
   }
 
   
-  // GetDealersHeavyEquipment - Find car dealers around
-  /** 
+  /**
+   * getDealersHeavyEquipment - Find car dealers around
+   *
    * The dealers API returns a list of dealers around a given point and radius.
   **/
-  GetDealersHeavyEquipment(
+  getDealersHeavyEquipment(
     req: operations.GetDealersHeavyEquipmentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDealersHeavyEquipmentResponse> {
@@ -285,12 +285,11 @@ export class SDK {
       req = new operations.GetDealersHeavyEquipmentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dealers/heavy-equipment";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -299,22 +298,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDealersHeavyEquipmentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDealersHeavyEquipmentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealersResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -326,11 +326,12 @@ export class SDK {
   }
 
   
-  // GetDealersMotorcycle - Find car dealers around
-  /** 
+  /**
+   * getDealersMotorcycle - Find car dealers around
+   *
    * The dealers API returns a list of dealers around a given point and radius.
   **/
-  GetDealersMotorcycle(
+  getDealersMotorcycle(
     req: operations.GetDealersMotorcycleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDealersMotorcycleResponse> {
@@ -338,12 +339,11 @@ export class SDK {
       req = new operations.GetDealersMotorcycleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dealers/motorcycle";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -352,22 +352,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDealersMotorcycleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDealersMotorcycleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealersResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -379,11 +380,12 @@ export class SDK {
   }
 
   
-  // GetDealersRv - Find car dealers around
-  /** 
+  /**
+   * getDealersRv - Find car dealers around
+   *
    * The dealers API returns a list of dealers around a given point and radius.
   **/
-  GetDealersRv(
+  getDealersRv(
     req: operations.GetDealersRvRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDealersRvResponse> {
@@ -391,12 +393,11 @@ export class SDK {
       req = new operations.GetDealersRvRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dealers/rv";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -405,22 +406,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDealersRvResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDealersRvResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealersResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -432,11 +434,12 @@ export class SDK {
   }
 
   
-  // GetListingCarAuctionId - Listing by id
-  /** 
+  /**
+   * getListingCarAuctionId - Listing by id
+   *
    * Get a particular auction listing by its id
   **/
-  GetListingCarAuctionId(
+  getListingCarAuctionId(
     req: operations.GetListingCarAuctionIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarAuctionIdResponse> {
@@ -444,12 +447,11 @@ export class SDK {
       req = new operations.GetListingCarAuctionIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/auction/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -458,22 +460,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarAuctionIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarAuctionIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listing = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -485,11 +488,12 @@ export class SDK {
   }
 
   
-  // GetListingCarAuctionIdExtra - Long text Listings attributes for Listing with the given id
-  /** 
+  /**
+   * getListingCarAuctionIdExtra - Long text Listings attributes for Listing with the given id
+   *
    * Get listing options, features, seller comments
   **/
-  GetListingCarAuctionIdExtra(
+  getListingCarAuctionIdExtra(
     req: operations.GetListingCarAuctionIdExtraRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarAuctionIdExtraResponse> {
@@ -497,12 +501,11 @@ export class SDK {
       req = new operations.GetListingCarAuctionIdExtraRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/auction/{id}/extra", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -511,22 +514,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarAuctionIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarAuctionIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingExtraAttributes = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -538,11 +542,12 @@ export class SDK {
   }
 
   
-  // GetListingCarAuctionIdMedia - Listing media by id
-  /** 
+  /**
+   * getListingCarAuctionIdMedia - Listing media by id
+   *
    * Get listing media (photo, photos) by id
   **/
-  GetListingCarAuctionIdMedia(
+  getListingCarAuctionIdMedia(
     req: operations.GetListingCarAuctionIdMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarAuctionIdMediaResponse> {
@@ -550,12 +555,11 @@ export class SDK {
       req = new operations.GetListingCarAuctionIdMediaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/auction/{id}/media", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -564,22 +568,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarAuctionIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarAuctionIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingMedia = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -591,11 +596,12 @@ export class SDK {
   }
 
   
-  // GetListingCarFsboId - Listing by id
-  /** 
+  /**
+   * getListingCarFsboId - Listing by id
+   *
    * Get a particular private party listing by its id
   **/
-  GetListingCarFsboId(
+  getListingCarFsboId(
     req: operations.GetListingCarFsboIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarFsboIdResponse> {
@@ -603,12 +609,11 @@ export class SDK {
       req = new operations.GetListingCarFsboIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/fsbo/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -617,22 +622,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarFsboIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarFsboIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listing = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -644,11 +650,12 @@ export class SDK {
   }
 
   
-  // GetListingCarFsboIdExtra - Long text Listings attributes for Listing with the given id
-  /** 
+  /**
+   * getListingCarFsboIdExtra - Long text Listings attributes for Listing with the given id
+   *
    * Get listing options, features, seller comments
   **/
-  GetListingCarFsboIdExtra(
+  getListingCarFsboIdExtra(
     req: operations.GetListingCarFsboIdExtraRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarFsboIdExtraResponse> {
@@ -656,12 +663,11 @@ export class SDK {
       req = new operations.GetListingCarFsboIdExtraRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/fsbo/{id}/extra", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -670,22 +676,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarFsboIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarFsboIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingExtraAttributes = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -697,11 +704,12 @@ export class SDK {
   }
 
   
-  // GetListingCarFsboIdMedia - Listing media by id
-  /** 
+  /**
+   * getListingCarFsboIdMedia - Listing media by id
+   *
    * Get listing media (photo, photos) by id
   **/
-  GetListingCarFsboIdMedia(
+  getListingCarFsboIdMedia(
     req: operations.GetListingCarFsboIdMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarFsboIdMediaResponse> {
@@ -709,12 +717,11 @@ export class SDK {
       req = new operations.GetListingCarFsboIdMediaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/fsbo/{id}/media", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -723,22 +730,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarFsboIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarFsboIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingMedia = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -750,11 +758,12 @@ export class SDK {
   }
 
   
-  // GetListingCarIdExtra - Long text Listings attributes for Listing with the given id
-  /** 
+  /**
+   * getListingCarIdExtra - Long text Listings attributes for Listing with the given id
+   *
    * Get listing options, features, seller comments
   **/
-  GetListingCarIdExtra(
+  getListingCarIdExtra(
     req: operations.GetListingCarIdExtraRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarIdExtraResponse> {
@@ -762,12 +771,11 @@ export class SDK {
       req = new operations.GetListingCarIdExtraRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/{id}/extra", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -776,22 +784,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingExtraAttributes = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -803,11 +812,12 @@ export class SDK {
   }
 
   
-  // GetListingCarIdMedia - Listing media by id
-  /** 
+  /**
+   * getListingCarIdMedia - Listing media by id
+   *
    * Get listing media (photo, photos) by id
   **/
-  GetListingCarIdMedia(
+  getListingCarIdMedia(
     req: operations.GetListingCarIdMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingCarIdMediaResponse> {
@@ -815,12 +825,11 @@ export class SDK {
       req = new operations.GetListingCarIdMediaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/{id}/media", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -829,22 +838,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingCarIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingCarIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingMedia = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -856,11 +866,12 @@ export class SDK {
   }
 
   
-  // GetListingHeavyEquipmentId - Heavy equipment listing by id
-  /** 
+  /**
+   * getListingHeavyEquipmentId - Heavy equipment listing by id
+   *
    * Get a particular Heavy equipment listing by its id
   **/
-  GetListingHeavyEquipmentId(
+  getListingHeavyEquipmentId(
     req: operations.GetListingHeavyEquipmentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingHeavyEquipmentIdResponse> {
@@ -868,12 +879,11 @@ export class SDK {
       req = new operations.GetListingHeavyEquipmentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/heavy-equipment/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -882,22 +892,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingHeavyEquipmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingHeavyEquipmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.heavyEquipmentsListing = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -909,11 +920,12 @@ export class SDK {
   }
 
   
-  // GetListingHeavyEquipmentIdExtra - Long text Heavy equipment Listings attributes for Listing with the given id
-  /** 
+  /**
+   * getListingHeavyEquipmentIdExtra - Long text Heavy equipment Listings attributes for Listing with the given id
+   *
    * Get Heavy equipment listing options, features, seller comments
   **/
-  GetListingHeavyEquipmentIdExtra(
+  getListingHeavyEquipmentIdExtra(
     req: operations.GetListingHeavyEquipmentIdExtraRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingHeavyEquipmentIdExtraResponse> {
@@ -921,12 +933,11 @@ export class SDK {
       req = new operations.GetListingHeavyEquipmentIdExtraRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/heavy-equipment/{id}/extra", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -935,22 +946,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingHeavyEquipmentIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingHeavyEquipmentIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingExtraAttributes = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -962,11 +974,12 @@ export class SDK {
   }
 
   
-  // GetListingHeavyEquipmentIdMedia - Listing media by id
-  /** 
+  /**
+   * getListingHeavyEquipmentIdMedia - Listing media by id
+   *
    * Get listing media (photo, photos) by id
   **/
-  GetListingHeavyEquipmentIdMedia(
+  getListingHeavyEquipmentIdMedia(
     req: operations.GetListingHeavyEquipmentIdMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingHeavyEquipmentIdMediaResponse> {
@@ -974,12 +987,11 @@ export class SDK {
       req = new operations.GetListingHeavyEquipmentIdMediaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/heavy-equipment/{id}/media", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -988,22 +1000,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingHeavyEquipmentIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingHeavyEquipmentIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingMedia = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1015,11 +1028,12 @@ export class SDK {
   }
 
   
-  // GetListingMotorcycleId - Motorcycle listing by id
-  /** 
+  /**
+   * getListingMotorcycleId - Motorcycle listing by id
+   *
    * Get a particular Motorcycle listing by its id
   **/
-  GetListingMotorcycleId(
+  getListingMotorcycleId(
     req: operations.GetListingMotorcycleIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingMotorcycleIdResponse> {
@@ -1027,12 +1041,11 @@ export class SDK {
       req = new operations.GetListingMotorcycleIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/motorcycle/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1041,22 +1054,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingMotorcycleIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingMotorcycleIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.motorcycleListing = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1068,11 +1082,12 @@ export class SDK {
   }
 
   
-  // GetListingMotorcycleIdExtra - Long text Motorcycle Listings attributes for Listing with the given id
-  /** 
+  /**
+   * getListingMotorcycleIdExtra - Long text Motorcycle Listings attributes for Listing with the given id
+   *
    * Get Motorcycle listing options, features, seller comments
   **/
-  GetListingMotorcycleIdExtra(
+  getListingMotorcycleIdExtra(
     req: operations.GetListingMotorcycleIdExtraRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingMotorcycleIdExtraResponse> {
@@ -1080,12 +1095,11 @@ export class SDK {
       req = new operations.GetListingMotorcycleIdExtraRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/motorcycle/{id}/extra", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1094,22 +1108,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingMotorcycleIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingMotorcycleIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingExtraAttributes = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1121,11 +1136,12 @@ export class SDK {
   }
 
   
-  // GetListingMotorcycleIdMedia - Motorcycle listing media by id
-  /** 
+  /**
+   * getListingMotorcycleIdMedia - Motorcycle listing media by id
+   *
    * Get Motorcycle listing media (photo, photos) by id
   **/
-  GetListingMotorcycleIdMedia(
+  getListingMotorcycleIdMedia(
     req: operations.GetListingMotorcycleIdMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingMotorcycleIdMediaResponse> {
@@ -1133,12 +1149,11 @@ export class SDK {
       req = new operations.GetListingMotorcycleIdMediaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/motorcycle/{id}/media", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1147,22 +1162,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingMotorcycleIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingMotorcycleIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingMedia = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1174,11 +1190,12 @@ export class SDK {
   }
 
   
-  // GetListingRvId - RV listing by id
-  /** 
+  /**
+   * getListingRvId - RV listing by id
+   *
    * Get a particular RV listing by its id
   **/
-  GetListingRvId(
+  getListingRvId(
     req: operations.GetListingRvIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingRvIdResponse> {
@@ -1186,12 +1203,11 @@ export class SDK {
       req = new operations.GetListingRvIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/rv/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1200,22 +1216,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingRvIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingRvIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rvListing = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1227,11 +1244,12 @@ export class SDK {
   }
 
   
-  // GetListingRvIdExtra - Long text RV Listings attributes for Listing with the given id
-  /** 
+  /**
+   * getListingRvIdExtra - Long text RV Listings attributes for Listing with the given id
+   *
    * Get RV listing options, features, seller comments
   **/
-  GetListingRvIdExtra(
+  getListingRvIdExtra(
     req: operations.GetListingRvIdExtraRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingRvIdExtraResponse> {
@@ -1239,12 +1257,11 @@ export class SDK {
       req = new operations.GetListingRvIdExtraRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/rv/{id}/extra", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1253,22 +1270,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingRvIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingRvIdExtraResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingExtraAttributes = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1280,11 +1298,12 @@ export class SDK {
   }
 
   
-  // GetListingRvIdMedia - Listing media by id
-  /** 
+  /**
+   * getListingRvIdMedia - Listing media by id
+   *
    * Get listing media (photo, photos) by id
   **/
-  GetListingRvIdMedia(
+  getListingRvIdMedia(
     req: operations.GetListingRvIdMediaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingRvIdMediaResponse> {
@@ -1292,12 +1311,11 @@ export class SDK {
       req = new operations.GetListingRvIdMediaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/rv/{id}/media", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1306,22 +1324,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingRvIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingRvIdMediaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listingMedia = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1333,8 +1352,9 @@ export class SDK {
   }
 
   
-  // GetSearchCarAuctionActive - Gets active auction car listings for the given search criteria
-  /** 
+  /**
+   * getSearchCarAuctionActive - Gets active auction car listings for the given search criteria
+   *
    * This API produces a list of currently active auction cars from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
    *  The search API facilitates the following use cases - 
    * 1. Search Cars around a given geo-point within a given radius 
@@ -1348,7 +1368,7 @@ export class SDK {
    * 9. Get Facets to build the search drill downs 
    * 10. Get Market averages for price/miles/dom for your search
   **/
-  GetSearchCarAuctionActive(
+  getSearchCarAuctionActive(
     req: operations.GetSearchCarAuctionActiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchCarAuctionActiveResponse> {
@@ -1356,12 +1376,11 @@ export class SDK {
       req = new operations.GetSearchCarAuctionActiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/auction/active";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1370,22 +1389,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchCarAuctionActiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchCarAuctionActiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1397,8 +1417,9 @@ export class SDK {
   }
 
   
-  // GetSearchCarFsboActive - Gets active private party car listings for the given search criteria
-  /** 
+  /**
+   * getSearchCarFsboActive - Gets active private party car listings for the given search criteria
+   *
    * This API produces a list of currently active FSBO cars from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
    *  The search API facilitates the following use cases - 
    * 1. Search Cars around a given geo-point within a given radius 
@@ -1412,7 +1433,7 @@ export class SDK {
    * 9. Get Facets to build the search drill downs 
    * 10. Get Market averages for price/miles/dom for your search
   **/
-  GetSearchCarFsboActive(
+  getSearchCarFsboActive(
     req: operations.GetSearchCarFsboActiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchCarFsboActiveResponse> {
@@ -1420,12 +1441,11 @@ export class SDK {
       req = new operations.GetSearchCarFsboActiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/fsbo/active";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1434,22 +1454,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchCarFsboActiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchCarFsboActiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1461,8 +1482,9 @@ export class SDK {
   }
 
   
-  // GetSearchCarIncentiveOem - Gets oem incentive listings for the given search criteria
-  /** 
+  /**
+   * getSearchCarIncentiveOem - Gets oem incentive listings for the given search criteria
+   *
    * This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active oem incentive from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
    *  The search API facilitates the following use cases - 
    * 1. Search Cars around a given geo-point within a given radius 
@@ -1476,7 +1498,7 @@ export class SDK {
    * 9. Get Facets to build the search drill downs 
    * 10. Get Market averages for price/miles/dom for your search
   **/
-  GetSearchCarIncentiveOem(
+  getSearchCarIncentiveOem(
     req: operations.GetSearchCarIncentiveOemRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchCarIncentiveOemResponse> {
@@ -1484,12 +1506,11 @@ export class SDK {
       req = new operations.GetSearchCarIncentiveOemRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/incentive/oem";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1498,22 +1519,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchCarIncentiveOemResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchCarIncentiveOemResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1525,11 +1547,12 @@ export class SDK {
   }
 
   
-  // GetSearchCarRecents - Gets Recent car listings for the given search criteria
-  /** 
+  /**
+   * getSearchCarRecents - Gets Recent car listings for the given search criteria
+   *
    * This API produces a list of recently active (past 90 days) cars from the market for the given search criteria
   **/
-  GetSearchCarRecents(
+  getSearchCarRecents(
     req: operations.GetSearchCarRecentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchCarRecentsResponse> {
@@ -1537,12 +1560,11 @@ export class SDK {
       req = new operations.GetSearchCarRecentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/recents";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1551,22 +1573,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchCarRecentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchCarRecentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1578,8 +1601,9 @@ export class SDK {
   }
 
   
-  // GetSearchHeavyEquipmentActive - Gets active heavy equipment listings for the given search criteria
-  /** 
+  /**
+   * getSearchHeavyEquipmentActive - Gets active heavy equipment listings for the given search criteria
+   *
    * This endpoint provides search on heavy equipment inventory. This API produces a list of currently active heavy equipments from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
    *  The search API facilitates the following use cases - 
    * 1. Search heavy equipments around a given geo-point within a given radius 
@@ -1592,7 +1616,7 @@ export class SDK {
    * 8. Get Facets to build the search drill downs 
    * 9. Get Market averages for price/miles for your search
   **/
-  GetSearchHeavyEquipmentActive(
+  getSearchHeavyEquipmentActive(
     req: operations.GetSearchHeavyEquipmentActiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchHeavyEquipmentActiveResponse> {
@@ -1600,12 +1624,11 @@ export class SDK {
       req = new operations.GetSearchHeavyEquipmentActiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/heavy-equipment/active";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1614,22 +1637,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchHeavyEquipmentActiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchHeavyEquipmentActiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.heavyEquipmentsSearchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1641,11 +1665,12 @@ export class SDK {
   }
 
   
-  // GetSearchHeavyEquipmentAutoComplete - API for auto-completion of inputs
-  /** 
+  /**
+   * getSearchHeavyEquipmentAutoComplete - API for auto-completion of inputs
+   *
    * Auto-complete the inputs of your end users
   **/
-  GetSearchHeavyEquipmentAutoComplete(
+  getSearchHeavyEquipmentAutoComplete(
     req: operations.GetSearchHeavyEquipmentAutoCompleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchHeavyEquipmentAutoCompleteResponse> {
@@ -1653,12 +1678,11 @@ export class SDK {
       req = new operations.GetSearchHeavyEquipmentAutoCompleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/heavy-equipment/auto-complete";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1667,22 +1691,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchHeavyEquipmentAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchHeavyEquipmentAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchAutoCompleteResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1694,8 +1719,9 @@ export class SDK {
   }
 
   
-  // GetSearchMotorcycleActive - Gets active motorcycle listings for the given search criteria
-  /** 
+  /**
+   * getSearchMotorcycleActive - Gets active motorcycle listings for the given search criteria
+   *
    * This endpoint provides search on motorcycle inventory. This API produces a list of currently active motorcycles from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
    *  The search API facilitates the following use cases - 
    * 1. Search motorcycles around a given geo-point within a given radius 
@@ -1709,7 +1735,7 @@ export class SDK {
    * 9. Get Facets to build the search drill downs 
    * 10. Get Market averages for price/miles for your search
   **/
-  GetSearchMotorcycleActive(
+  getSearchMotorcycleActive(
     req: operations.GetSearchMotorcycleActiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchMotorcycleActiveResponse> {
@@ -1717,12 +1743,11 @@ export class SDK {
       req = new operations.GetSearchMotorcycleActiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/motorcycle/active";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1731,22 +1756,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchMotorcycleActiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchMotorcycleActiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.motorcycleSearchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1758,11 +1784,12 @@ export class SDK {
   }
 
   
-  // GetSearchMotorcycleAutoComplete - API for auto-completion of inputs
-  /** 
+  /**
+   * getSearchMotorcycleAutoComplete - API for auto-completion of inputs
+   *
    * Auto-complete the inputs of your end users
   **/
-  GetSearchMotorcycleAutoComplete(
+  getSearchMotorcycleAutoComplete(
     req: operations.GetSearchMotorcycleAutoCompleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchMotorcycleAutoCompleteResponse> {
@@ -1770,12 +1797,11 @@ export class SDK {
       req = new operations.GetSearchMotorcycleAutoCompleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/motorcycle/auto-complete";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1784,22 +1810,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchMotorcycleAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchMotorcycleAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchAutoCompleteResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1811,8 +1838,9 @@ export class SDK {
   }
 
   
-  // GetSearchRvActive - Gets active RV listings for the given search criteria
-  /** 
+  /**
+   * getSearchRvActive - Gets active RV listings for the given search criteria
+   *
    * This endpoint provides search on RV inventory. This API produces a list of currently active RV from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
    *  The search API facilitates the following use cases - 
    * 1. Search RV around a given geo-point within a given radius 
@@ -1825,7 +1853,7 @@ export class SDK {
    * 8. Get Facets to build the search drill downs 
    * 9. Get Market averages for price/miles for your search
   **/
-  GetSearchRvActive(
+  getSearchRvActive(
     req: operations.GetSearchRvActiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchRvActiveResponse> {
@@ -1833,12 +1861,11 @@ export class SDK {
       req = new operations.GetSearchRvActiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/rv/active";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1847,22 +1874,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchRvActiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchRvActiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rvSearchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1874,11 +1902,12 @@ export class SDK {
   }
 
   
-  // GetSearchRvAutoComplete - API for auto-completion of inputs
-  /** 
+  /**
+   * getSearchRvAutoComplete - API for auto-completion of inputs
+   *
    * Auto-complete the inputs of your end users
   **/
-  GetSearchRvAutoComplete(
+  getSearchRvAutoComplete(
     req: operations.GetSearchRvAutoCompleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchRvAutoCompleteResponse> {
@@ -1886,12 +1915,11 @@ export class SDK {
       req = new operations.GetSearchRvAutoCompleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/rv/auto-complete";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1900,22 +1928,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchRvAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSearchRvAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchAutoCompleteResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1927,11 +1956,12 @@ export class SDK {
   }
 
   
-  // GetSpecsCarAutoComplete - API for auto-completion of inputs based on taxonomy
-  /** 
+  /**
+   * getSpecsCarAutoComplete - API for auto-completion of inputs based on taxonomy
+   *
    * Auto-complete the inputs of your end users, not from active set but from taxonomy (decoder database)
   **/
-  GetSpecsCarAutoComplete(
+  getSpecsCarAutoComplete(
     req: operations.GetSpecsCarAutoCompleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSpecsCarAutoCompleteResponse> {
@@ -1939,12 +1969,11 @@ export class SDK {
       req = new operations.GetSpecsCarAutoCompleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/specs/car/auto-complete";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1953,22 +1982,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSpecsCarAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSpecsCarAutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.specsAutoCompleteResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1980,11 +2010,12 @@ export class SDK {
   }
 
   
-  // AutoComplete - API for auto-completion of inputs
-  /** 
+  /**
+   * autoComplete - API for auto-completion of inputs
+   *
    * Auto-complete the inputs of your end users
   **/
-  AutoComplete(
+  autoComplete(
     req: operations.AutoCompleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AutoCompleteResponse> {
@@ -1992,12 +2023,11 @@ export class SDK {
       req = new operations.AutoCompleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/auto-complete";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2006,22 +2036,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AutoCompleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchAutoCompleteResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2033,11 +2064,12 @@ export class SDK {
   }
 
   
-  // CrmCheck - CRM check of a particular vin
-  /** 
+  /**
+   * crmCheck - CRM check of a particular vin
+   *
    * Check whether particular vin has had a listing after stipulated date or not
   **/
-  CrmCheck(
+  crmCheck(
     req: operations.CrmCheckRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CrmCheckResponse> {
@@ -2045,12 +2077,11 @@ export class SDK {
       req = new operations.CrmCheckRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/crm_check/car/{vin}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2059,22 +2090,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CrmCheckResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CrmCheckResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.crmResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2086,11 +2118,12 @@ export class SDK {
   }
 
   
-  // DealerSearch - Find car dealers around
-  /** 
+  /**
+   * dealerSearch - Find car dealers around
+   *
    * The dealers API returns a list of dealers around a given point and radius.
   **/
-  DealerSearch(
+  dealerSearch(
     req: operations.DealerSearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DealerSearchResponse> {
@@ -2098,12 +2131,11 @@ export class SDK {
       req = new operations.DealerSearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dealers/car";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2112,22 +2144,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DealerSearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DealerSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealersResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2139,11 +2172,12 @@ export class SDK {
   }
 
   
-  // Decode - VIN Decoder
-  /** 
+  /**
+   * decode - VIN Decoder
+   *
    * Get the basic information on specifications for a car identified by a valid VIN
   **/
-  Decode(
+  decode(
     req: operations.DecodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DecodeResponse> {
@@ -2151,12 +2185,11 @@ export class SDK {
       req = new operations.DecodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/decode/car/{vin}/specs", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2165,22 +2198,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DecodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DecodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.build = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2192,11 +2226,12 @@ export class SDK {
   }
 
   
-  // DecodeViaEpi - EPI VIN Decoder
-  /** 
+  /**
+   * decodeViaEpi - EPI VIN Decoder
+   *
    * Get the basic information on specifications for a car identified by a valid VIN from EPI's decoder
   **/
-  DecodeViaEpi(
+  decodeViaEpi(
     req: operations.DecodeViaEpiRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DecodeViaEpiResponse> {
@@ -2204,12 +2239,11 @@ export class SDK {
       req = new operations.DecodeViaEpiRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/decode/car/epi/{vin}/specs", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2218,22 +2252,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DecodeViaEpiResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DecodeViaEpiResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.build = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2245,11 +2280,12 @@ export class SDK {
   }
 
   
-  // GetCachedImage - Fetch cached image
-  /** 
+  /**
+   * getCachedImage - Fetch cached image
+   *
    * Fetch the cached car image
   **/
-  GetCachedImage(
+  getCachedImage(
     req: operations.GetCachedImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCachedImageResponse> {
@@ -2257,12 +2293,11 @@ export class SDK {
       req = new operations.GetCachedImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/image/cache/car/{listingID}/{imageID}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2271,22 +2306,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCachedImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCachedImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cacheImageResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2298,11 +2334,12 @@ export class SDK {
   }
 
   
-  // GetCarHistory - Get a cars online listing history
-  /** 
+  /**
+   * getCarHistory - Get a cars online listing history
+   *
    * The history API returns online listing history for a car identified by its VIN. History listings are sorted in the descending order of the listing date / last seen date
   **/
-  GetCarHistory(
+  getCarHistory(
     req: operations.GetCarHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCarHistoryResponse> {
@@ -2310,12 +2347,11 @@ export class SDK {
       req = new operations.GetCarHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/history/car/{vin}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2324,22 +2360,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCarHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCarHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.historicalListings = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2351,11 +2388,12 @@ export class SDK {
   }
 
   
-  // GetDailyStats - Price, Miles and Days on Market stats
-  /** 
+  /**
+   * getDailyStats - Price, Miles and Days on Market stats
+   *
    * National, state and city level stats for price, miles and dom
   **/
-  GetDailyStats(
+  getDailyStats(
     req: operations.GetDailyStatsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDailyStatsResponse> {
@@ -2363,12 +2401,11 @@ export class SDK {
       req = new operations.GetDailyStatsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/stats/car";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2377,22 +2414,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDailyStatsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDailyStatsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dailyStats = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2404,11 +2442,12 @@ export class SDK {
   }
 
   
-  // GetDealer - Dealer by id
-  /** 
+  /**
+   * getDealer - Dealer by id
+   *
    * Get a particular dealer's information by its id
   **/
-  GetDealer(
+  getDealer(
     req: operations.GetDealerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDealerResponse> {
@@ -2416,12 +2455,11 @@ export class SDK {
       req = new operations.GetDealerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dealer/car/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2430,22 +2468,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDealerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDealerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dealer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2457,11 +2496,12 @@ export class SDK {
   }
 
   
-  // GetListing - Listing by id
-  /** 
+  /**
+   * getListing - Listing by id
+   *
    * Get a particular dealer listing by its id
   **/
-  GetListing(
+  getListing(
     req: operations.GetListingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListingResponse> {
@@ -2469,12 +2509,11 @@ export class SDK {
       req = new operations.GetListingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/listing/car/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2483,22 +2522,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listing = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2510,11 +2550,12 @@ export class SDK {
   }
 
   
-  // GetMds - Market Days Supply
-  /** 
+  /**
+   * getMds - Market Days Supply
+   *
    * Get the basic information on specifications for a car identified by a valid VIN
   **/
-  GetMds(
+  getMds(
     req: operations.GetMdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMdsResponse> {
@@ -2522,12 +2563,11 @@ export class SDK {
       req = new operations.GetMdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/mds/car";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2536,22 +2576,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mds = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2563,11 +2604,12 @@ export class SDK {
   }
 
   
-  // GetPopularCars - Get make model wise top 50 popular cars on national, state, city level
-  /** 
+  /**
+   * getPopularCars - Get make model wise top 50 popular cars on national, state, city level
+   *
    * Get make model wise top 50 popular cars on national, state, city level
   **/
-  GetPopularCars(
+  getPopularCars(
     req: operations.GetPopularCarsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPopularCarsResponse> {
@@ -2575,12 +2617,11 @@ export class SDK {
       req = new operations.GetPopularCarsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/popular/cars";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2589,22 +2630,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPopularCarsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPopularCarsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.popularCars = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2616,11 +2658,12 @@ export class SDK {
   }
 
   
-  // GetRecallHistory - Recall info by vin
-  /** 
+  /**
+   * getRecallHistory - Recall info by vin
+   *
    * Get a particular recall information for a vin
   **/
-  GetRecallHistory(
+  getRecallHistory(
     req: operations.GetRecallHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRecallHistoryResponse> {
@@ -2628,12 +2671,11 @@ export class SDK {
       req = new operations.GetRecallHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/car/recall/{vin}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2642,22 +2684,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRecallHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRecallHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2669,11 +2712,12 @@ export class SDK {
   }
 
   
-  // GetSalesCount - Get sales count by make, model, year, trim or taxonomy vin
-  /** 
+  /**
+   * getSalesCount - Get sales count by make, model, year, trim or taxonomy vin
+   *
    * Get a sales count for city, state or national level by make, model, year, trim or taxonomy vin
   **/
-  GetSalesCount(
+  getSalesCount(
     req: operations.GetSalesCountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSalesCountResponse> {
@@ -2681,12 +2725,11 @@ export class SDK {
       req = new operations.GetSalesCountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/sales/car";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2695,22 +2738,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSalesCountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSalesCountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sales = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2722,11 +2766,12 @@ export class SDK {
   }
 
   
-  // GetTaxonomyTerms - API for getting terms from taxonomy
-  /** 
+  /**
+   * getTaxonomyTerms - API for getting terms from taxonomy
+   *
    * Facets on taxonomy
   **/
-  GetTaxonomyTerms(
+  getTaxonomyTerms(
     req: operations.GetTaxonomyTermsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTaxonomyTermsResponse> {
@@ -2734,12 +2779,11 @@ export class SDK {
       req = new operations.GetTaxonomyTermsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/specs/car/terms";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2748,22 +2792,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTaxonomyTermsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTaxonomyTermsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.specsAutoCompleteResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2775,11 +2820,12 @@ export class SDK {
   }
 
   
-  // RankCar - Compute relative rank for car listings.
-  /** 
+  /**
+   * rankCar - Compute relative rank for car listings.
+   *
    * Computer rank for car listings based on inputs provided.Weights for ranking parameters can also be provided.
   **/
-  RankCar(
+  rankCar(
     req: operations.RankCarRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RankCarResponse> {
@@ -2787,23 +2833,21 @@ export class SDK {
       req = new operations.RankCarRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/active/rank/listings";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2814,27 +2858,27 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RankCarResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RankCarResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.carRankResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2846,8 +2890,9 @@ export class SDK {
   }
 
   
-  // Search - Gets active car listings for the given search criteria
-  /** 
+  /**
+   * search - Gets active car listings for the given search criteria
+   *
    * This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
    *  The search API facilitates the following use cases - 
    * 1. Search Cars around a given geo-point within a given radius 
@@ -2861,7 +2906,7 @@ export class SDK {
    * 9. Get Facets to build the search drill downs 
    * 10. Get Market averages for price/miles/dom for your search
   **/
-  Search(
+  search(
     req: operations.SearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SearchResponse> {
@@ -2869,12 +2914,11 @@ export class SDK {
       req = new operations.SearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/active";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2883,22 +2927,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -2910,11 +2955,12 @@ export class SDK {
   }
 
   
-  // SearchAndRankCar - Compute relative rank for car listings.
-  /** 
+  /**
+   * searchAndRankCar - Compute relative rank for car listings.
+   *
    * Computer rank for car listings based on inputs provided.Weights for ranking parameters can also be provided.
   **/
-  SearchAndRankCar(
+  searchAndRankCar(
     req: operations.SearchAndRankCarRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SearchAndRankCarResponse> {
@@ -2922,23 +2968,21 @@ export class SDK {
       req = new operations.SearchAndRankCarRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/car/active/rank";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2949,27 +2993,27 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SearchAndRankCarResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SearchAndRankCarResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.carRankResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;

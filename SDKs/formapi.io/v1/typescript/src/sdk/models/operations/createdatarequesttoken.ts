@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDataRequestTokenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=data_request_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=data_request_id" })
   dataRequestId: string;
 }
 
 
 export class CreateDataRequestTokenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
-
-export class CreateDataRequestTokenRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateDataRequestTokenPathParams;
-
-  @Metadata()
-  security: CreateDataRequestTokenSecurity;
-}
-
 export enum CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data_request_url" })
+  @SpeakeasyMetadata({ data: "json, name=data_request_url" })
   dataRequestUrl: string;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret: string;
 }
 
 
 export class CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseToken;
 }
 
 
+export class CreateDataRequestTokenRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateDataRequestTokenPathParams;
+
+  @SpeakeasyMetadata()
+  security: CreateDataRequestTokenSecurity;
+}
+
+
 export class CreateDataRequestTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSubmissionDataRequestTokenResponse?: CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse;
 }

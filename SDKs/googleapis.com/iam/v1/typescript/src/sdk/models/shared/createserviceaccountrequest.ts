@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ServiceAccount } from "./serviceaccount";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServiceAccountInput } from "./serviceaccount";
 
 
-// CreateServiceAccountRequest
+
+// CreateServiceAccountRequestInput
 /** 
  * The service account create request.
 **/
-export class CreateServiceAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+export class CreateServiceAccountRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
-  serviceAccount?: ServiceAccount;
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
+  serviceAccount?: ServiceAccountInput;
 }

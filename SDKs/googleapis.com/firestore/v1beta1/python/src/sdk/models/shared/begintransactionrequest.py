@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import transactionoptions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BeginTransactionRequest:
-    options: Optional[transactionoptions.TransactionOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
+    r"""BeginTransactionRequest
+    The request for Firestore.BeginTransaction.
+    """
+    
+    options: Optional[TransactionOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
     

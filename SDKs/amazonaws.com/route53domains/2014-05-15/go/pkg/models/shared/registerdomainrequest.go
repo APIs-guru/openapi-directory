@@ -1,5 +1,7 @@
 package shared
 
+// RegisterDomainRequest
+// The RegisterDomain request includes the following elements.
 type RegisterDomainRequest struct {
 	AdminContact                    ContactDetail `json:"AdminContact"`
 	AutoRenew                       *bool         `json:"AutoRenew,omitempty"`

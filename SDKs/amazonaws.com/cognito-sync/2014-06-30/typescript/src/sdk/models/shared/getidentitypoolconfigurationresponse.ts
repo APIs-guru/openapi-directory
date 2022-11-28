@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CognitoStreams } from "./cognitostreams";
 import { PushSync } from "./pushsync";
+
 
 
 // GetIdentityPoolConfigurationResponse
@@ -8,12 +9,12 @@ import { PushSync } from "./pushsync";
  * The output for the GetIdentityPoolConfiguration operation.
 **/
 export class GetIdentityPoolConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CognitoStreams" })
+  @SpeakeasyMetadata({ data: "json, name=CognitoStreams" })
   cognitoStreams?: CognitoStreams;
 
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId?: string;
 
-  @Metadata({ data: "json, name=PushSync" })
+  @SpeakeasyMetadata({ data: "json, name=PushSync" })
   pushSync?: PushSync;
 }

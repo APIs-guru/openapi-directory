@@ -10,15 +10,15 @@ type GenresListQueryParams struct {
 	PageSize *int64  `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GenresListRequest struct {
-	QueryParams GenresListQueryParams
-}
-
 type GenresList200ApplicationJSON struct {
 	Count    int64          `json:"count"`
 	Next     *string        `json:"next,omitempty"`
 	Previous *string        `json:"previous,omitempty"`
 	Results  []shared.Genre `json:"results"`
+}
+
+type GenresListRequest struct {
+	QueryParams GenresListQueryParams
 }
 
 type GenresListResponse struct {

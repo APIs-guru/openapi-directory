@@ -23,6 +23,8 @@ const (
 	DataLabelTypeEnumCustom                   DataLabelTypeEnum = "CUSTOM"
 )
 
+// DataLabel
+// Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
 type DataLabel struct {
 	CustomLabelData *ChartData              `json:"customLabelData,omitempty"`
 	Placement       *DataLabelPlacementEnum `json:"placement,omitempty"`

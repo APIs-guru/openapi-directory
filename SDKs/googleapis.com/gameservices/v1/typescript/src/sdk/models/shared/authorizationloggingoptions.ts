@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AuthorizationLoggingOptionsPermissionTypeEnum {
-    PermissionTypeUnspecified = "PERMISSION_TYPE_UNSPECIFIED"
-,    AdminRead = "ADMIN_READ"
-,    AdminWrite = "ADMIN_WRITE"
-,    DataRead = "DATA_READ"
-,    DataWrite = "DATA_WRITE"
+    PermissionTypeUnspecified = "PERMISSION_TYPE_UNSPECIFIED",
+    AdminRead = "ADMIN_READ",
+    AdminWrite = "ADMIN_WRITE",
+    DataRead = "DATA_READ",
+    DataWrite = "DATA_WRITE"
 }
 
 
@@ -14,6 +15,6 @@ export enum AuthorizationLoggingOptionsPermissionTypeEnum {
  * Authorization-related information used by Cloud Audit Logging.
 **/
 export class AuthorizationLoggingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permissionType" })
+  @SpeakeasyMetadata({ data: "json, name=permissionType" })
   permissionType?: AuthorizationLoggingOptionsPermissionTypeEnum;
 }

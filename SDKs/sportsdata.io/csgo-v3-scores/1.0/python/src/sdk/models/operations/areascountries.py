@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class AreasCountriesFormatEnum(str, Enum):
     XML = "xml"
@@ -8,17 +9,17 @@ class AreasCountriesFormatEnum(str, Enum):
 
 @dataclass
 class AreasCountriesPathParams:
-    format: AreasCountriesFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: AreasCountriesFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AreasCountriesRequest:
-    path_params: AreasCountriesPathParams = field(default=None)
+    path_params: AreasCountriesPathParams = field()
     
 
 @dataclass
 class AreasCountriesResponse:
+    content_type: str = field()
+    status_code: int = field()
     areas: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

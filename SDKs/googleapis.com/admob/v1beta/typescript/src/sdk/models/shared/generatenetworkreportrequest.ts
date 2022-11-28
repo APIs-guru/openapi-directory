@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkReportSpec } from "./networkreportspec";
+
 
 
 // GenerateNetworkReportRequest
@@ -7,6 +8,6 @@ import { NetworkReportSpec } from "./networkreportspec";
  * Request to generate an AdMob Network report.
 **/
 export class GenerateNetworkReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reportSpec" })
+  @SpeakeasyMetadata({ data: "json, name=reportSpec" })
   reportSpec?: NetworkReportSpec;
 }

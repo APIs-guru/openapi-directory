@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DateQuestion
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A date question. Date questions default to just month + day.
 **/
 export class DateQuestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeTime" })
+  @SpeakeasyMetadata({ data: "json, name=includeTime" })
   includeTime?: boolean;
 
-  @Metadata({ data: "json, name=includeYear" })
+  @SpeakeasyMetadata({ data: "json, name=includeYear" })
   includeYear?: boolean;
 }

@@ -30,6 +30,8 @@ export * from "./displayvideoadvertisersinsertionordersget";
 export * from "./displayvideoadvertisersinsertionorderslist";
 export * from "./displayvideoadvertisersinsertionorderslistassignedtargetingoptions";
 export * from "./displayvideoadvertisersinsertionorderspatch";
+export * from "./displayvideoadvertisersinsertionorderstargetingtypesassignedtargetingoptionscreate";
+export * from "./displayvideoadvertisersinsertionorderstargetingtypesassignedtargetingoptionsdelete";
 export * from "./displayvideoadvertisersinsertionorderstargetingtypesassignedtargetingoptionsget";
 export * from "./displayvideoadvertisersinsertionorderstargetingtypesassignedtargetingoptionslist";
 export * from "./displayvideoadvertisersinvoiceslist";
@@ -39,6 +41,7 @@ export * from "./displayvideoadvertiserslineitemsbulklistassignedtargetingoption
 export * from "./displayvideoadvertiserslineitemsbulkupdate";
 export * from "./displayvideoadvertiserslineitemscreate";
 export * from "./displayvideoadvertiserslineitemsdelete";
+export * from "./displayvideoadvertiserslineitemsduplicate";
 export * from "./displayvideoadvertiserslineitemsgeneratedefault";
 export * from "./displayvideoadvertiserslineitemsget";
 export * from "./displayvideoadvertiserslineitemslist";

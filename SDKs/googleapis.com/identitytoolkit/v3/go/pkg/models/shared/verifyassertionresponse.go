@@ -1,5 +1,7 @@
 package shared
 
+// VerifyAssertionResponse
+// Response of verifying the IDP assertion.
 type VerifyAssertionResponse struct {
 	Action                 *string  `json:"action,omitempty"`
 	AppInstallationURL     *string  `json:"appInstallationUrl,omitempty"`

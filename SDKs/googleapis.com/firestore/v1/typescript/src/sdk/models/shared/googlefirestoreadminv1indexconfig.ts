@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1Index } from "./googlefirestoreadminv1index";
+
 
 
 // GoogleFirestoreAdminV1IndexConfig
@@ -8,15 +8,15 @@ import { GoogleFirestoreAdminV1Index } from "./googlefirestoreadminv1index";
  * The index configuration for this field.
 **/
 export class GoogleFirestoreAdminV1IndexConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ancestorField" })
+  @SpeakeasyMetadata({ data: "json, name=ancestorField" })
   ancestorField?: string;
 
-  @Metadata({ data: "json, name=indexes", elemType: shared.GoogleFirestoreAdminV1Index })
+  @SpeakeasyMetadata({ data: "json, name=indexes", elemType: GoogleFirestoreAdminV1Index })
   indexes?: GoogleFirestoreAdminV1Index[];
 
-  @Metadata({ data: "json, name=reverting" })
+  @SpeakeasyMetadata({ data: "json, name=reverting" })
   reverting?: boolean;
 
-  @Metadata({ data: "json, name=usesAncestorConfig" })
+  @SpeakeasyMetadata({ data: "json, name=usesAncestorConfig" })
   usesAncestorConfig?: boolean;
 }

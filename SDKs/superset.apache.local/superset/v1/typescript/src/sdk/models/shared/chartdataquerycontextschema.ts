@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChartDataDatasource } from "./chartdatadatasource";
 import { ChartDataQueryObject } from "./chartdataqueryobject";
 
 
+
 export class ChartDataQueryContextSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasource" })
+  @SpeakeasyMetadata({ data: "json, name=datasource" })
   datasource?: ChartDataDatasource;
 
-  @Metadata({ data: "json, name=force" })
+  @SpeakeasyMetadata({ data: "json, name=force" })
   force?: boolean;
 
-  @Metadata({ data: "json, name=queries", elemType: shared.ChartDataQueryObject })
+  @SpeakeasyMetadata({ data: "json, name=queries", elemType: ChartDataQueryObject })
   queries?: ChartDataQueryObject[];
 
-  @Metadata({ data: "json, name=result_format" })
+  @SpeakeasyMetadata({ data: "json, name=result_format" })
   resultFormat?: any;
 
-  @Metadata({ data: "json, name=result_type" })
+  @SpeakeasyMetadata({ data: "json, name=result_type" })
   resultType?: any;
 }

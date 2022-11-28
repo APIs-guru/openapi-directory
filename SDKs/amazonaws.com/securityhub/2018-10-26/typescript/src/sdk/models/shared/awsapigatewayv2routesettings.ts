@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsApiGatewayV2RouteSettings
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains route settings for a stage.
 **/
 export class AwsApiGatewayV2RouteSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataTraceEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DataTraceEnabled" })
   dataTraceEnabled?: boolean;
 
-  @Metadata({ data: "json, name=DetailedMetricsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DetailedMetricsEnabled" })
   detailedMetricsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=LoggingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingLevel" })
   loggingLevel?: string;
 
-  @Metadata({ data: "json, name=ThrottlingBurstLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ThrottlingBurstLimit" })
   throttlingBurstLimit?: number;
 
-  @Metadata({ data: "json, name=ThrottlingRateLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ThrottlingRateLimit" })
   throttlingRateLimit?: number;
 }

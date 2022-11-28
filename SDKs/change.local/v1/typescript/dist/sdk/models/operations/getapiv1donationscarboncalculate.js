@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetApiV1DonationsCarbonCalculateTransportationMethodEnum;
 (function (GetApiV1DonationsCarbonCalculateTransportationMethodEnum) {
@@ -37,23 +37,23 @@ var GetApiV1DonationsCarbonCalculateQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=destination_address" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destination_address" }),
         __metadata("design:type", Number)
     ], GetApiV1DonationsCarbonCalculateQueryParams.prototype, "destinationAddress", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=distance_mi" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=distance_mi" }),
         __metadata("design:type", Number)
     ], GetApiV1DonationsCarbonCalculateQueryParams.prototype, "distanceMi", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=origin_address" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=origin_address" }),
         __metadata("design:type", Number)
     ], GetApiV1DonationsCarbonCalculateQueryParams.prototype, "originAddress", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=transportation_method" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=transportation_method" }),
         __metadata("design:type", String)
     ], GetApiV1DonationsCarbonCalculateQueryParams.prototype, "transportationMethod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=weight_lb" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=weight_lb" }),
         __metadata("design:type", Number)
     ], GetApiV1DonationsCarbonCalculateQueryParams.prototype, "weightLb", void 0);
     return GetApiV1DonationsCarbonCalculateQueryParams;
@@ -65,7 +65,7 @@ var GetApiV1DonationsCarbonCalculateSecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], GetApiV1DonationsCarbonCalculateSecurity.prototype, "basicAuth", void 0);
     return GetApiV1DonationsCarbonCalculateSecurity;
@@ -77,11 +77,11 @@ var GetApiV1DonationsCarbonCalculateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV1DonationsCarbonCalculateQueryParams)
     ], GetApiV1DonationsCarbonCalculateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV1DonationsCarbonCalculateSecurity)
     ], GetApiV1DonationsCarbonCalculateRequest.prototype, "security", void 0);
     return GetApiV1DonationsCarbonCalculateRequest;
@@ -93,11 +93,11 @@ var GetApiV1DonationsCarbonCalculateResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiV1DonationsCarbonCalculateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiV1DonationsCarbonCalculateResponse.prototype, "statusCode", void 0);
     return GetApiV1DonationsCarbonCalculateResponse;

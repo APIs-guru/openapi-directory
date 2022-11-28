@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class PageviewData:
-    page_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagePath' }})
-    page_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageTitle' }})
+    r"""PageviewData
+    Represents details collected when the visitor views a page.
+    """
+    
+    page_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagePath') }})
+    page_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageTitle') }})
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteVirtualMfaDeviceActionEnum(str, Enum):
     DELETE_VIRTUAL_MFA_DEVICE = "DeleteVirtualMFADevice"
@@ -10,9 +14,9 @@ class GetDeleteVirtualMfaDeviceVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVirtualMfaDeviceQueryParams:
-    action: GetDeleteVirtualMfaDeviceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    serial_number: str = field(default=None, metadata={'query_param': { 'field_name': 'SerialNumber', 'style': 'form', 'explode': True }})
-    version: GetDeleteVirtualMfaDeviceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteVirtualMfaDeviceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    serial_number: str = field(metadata={'query_param': { 'field_name': 'SerialNumber', 'style': 'form', 'explode': True }})
+    version: GetDeleteVirtualMfaDeviceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteVirtualMfaDeviceHeaders:
 
 @dataclass
 class GetDeleteVirtualMfaDeviceRequest:
-    query_params: GetDeleteVirtualMfaDeviceQueryParams = field(default=None)
-    headers: GetDeleteVirtualMfaDeviceHeaders = field(default=None)
+    headers: GetDeleteVirtualMfaDeviceHeaders = field()
+    query_params: GetDeleteVirtualMfaDeviceQueryParams = field()
     
 
 @dataclass
 class GetDeleteVirtualMfaDeviceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

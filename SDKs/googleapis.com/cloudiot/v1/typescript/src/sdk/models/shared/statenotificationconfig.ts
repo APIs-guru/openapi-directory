@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StateNotificationConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for notification of new states received from the device.
 **/
 export class StateNotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsubTopicName" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopicName" })
   pubsubTopicName?: string;
 }

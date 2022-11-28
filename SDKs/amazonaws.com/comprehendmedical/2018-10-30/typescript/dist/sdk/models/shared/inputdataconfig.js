@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InputDataConfig
 /**
  * The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed.
@@ -33,11 +33,11 @@ var InputDataConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=S3Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=S3Bucket" }),
         __metadata("design:type", String)
     ], InputDataConfig.prototype, "s3Bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Key" }),
+        SpeakeasyMetadata({ data: "json, name=S3Key" }),
         __metadata("design:type", String)
     ], InputDataConfig.prototype, "s3Key", void 0);
     return InputDataConfig;

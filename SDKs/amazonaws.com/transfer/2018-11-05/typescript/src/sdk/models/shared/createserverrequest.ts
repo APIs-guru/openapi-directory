@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainEnum } from "./domainenum";
 import { EndpointDetails } from "./endpointdetails";
 import { EndpointTypeEnum } from "./endpointtypeenum";
@@ -10,40 +9,41 @@ import { Tag } from "./tag";
 import { WorkflowDetails } from "./workflowdetails";
 
 
+
 export class CreateServerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: DomainEnum;
 
-  @Metadata({ data: "json, name=EndpointDetails" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointDetails" })
   endpointDetails?: EndpointDetails;
 
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: EndpointTypeEnum;
 
-  @Metadata({ data: "json, name=HostKey" })
+  @SpeakeasyMetadata({ data: "json, name=HostKey" })
   hostKey?: string;
 
-  @Metadata({ data: "json, name=IdentityProviderDetails" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderDetails" })
   identityProviderDetails?: IdentityProviderDetails;
 
-  @Metadata({ data: "json, name=IdentityProviderType" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderType" })
   identityProviderType?: IdentityProviderTypeEnum;
 
-  @Metadata({ data: "json, name=LoggingRole" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingRole" })
   loggingRole?: string;
 
-  @Metadata({ data: "json, name=Protocols" })
+  @SpeakeasyMetadata({ data: "json, name=Protocols" })
   protocols?: ProtocolEnum[];
 
-  @Metadata({ data: "json, name=SecurityPolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityPolicyName" })
   securityPolicyName?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=WorkflowDetails" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowDetails" })
   workflowDetails?: WorkflowDetails;
 }

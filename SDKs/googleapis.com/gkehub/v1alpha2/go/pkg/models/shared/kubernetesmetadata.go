@@ -1,5 +1,7 @@
 package shared
 
+// KubernetesMetadata
+// KubernetesMetadata provides informational metadata for Memberships that are created from Kubernetes Endpoints (currently, these are equivalent to Kubernetes clusters).
 type KubernetesMetadata struct {
 	KubernetesAPIServerVersion *string `json:"kubernetesApiServerVersion,omitempty"`
 	MemoryMb                   *int32  `json:"memoryMb,omitempty"`

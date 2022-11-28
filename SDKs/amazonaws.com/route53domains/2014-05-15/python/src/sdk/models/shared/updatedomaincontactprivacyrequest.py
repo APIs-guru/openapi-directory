@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class UpdateDomainContactPrivacyRequest:
-    admin_privacy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdminPrivacy' }})
-    domain_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainName' }})
-    registrant_privacy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RegistrantPrivacy' }})
-    tech_privacy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TechPrivacy' }})
+    r"""UpdateDomainContactPrivacyRequest
+    The UpdateDomainContactPrivacy request includes the following elements.
+    """
+    
+    domain_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainName') }})
+    admin_privacy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdminPrivacy') }})
+    registrant_privacy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RegistrantPrivacy') }})
+    tech_privacy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TechPrivacy') }})
     

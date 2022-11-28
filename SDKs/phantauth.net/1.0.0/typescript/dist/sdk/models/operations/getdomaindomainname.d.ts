@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetDomainDomainnamePathParams extends SpeakeasyBase {
     domainname: string;
-}
-export declare class GetDomainDomainnameRequest extends SpeakeasyBase {
-    pathParams: GetDomainDomainnamePathParams;
 }
 export declare class GetDomainDomainname200ApplicationJson extends SpeakeasyBase {
     atId?: string;
@@ -12,6 +9,9 @@ export declare class GetDomainDomainname200ApplicationJson extends SpeakeasyBase
     name?: string;
     profile?: string;
     sub?: string;
+}
+export declare class GetDomainDomainnameRequest extends SpeakeasyBase {
+    pathParams: GetDomainDomainnamePathParams;
 }
 export declare class GetDomainDomainnameResponse extends SpeakeasyBase {
     contentType: string;

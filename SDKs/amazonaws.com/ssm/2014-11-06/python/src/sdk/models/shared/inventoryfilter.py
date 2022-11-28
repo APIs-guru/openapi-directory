@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inventoryqueryoperatortype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InventoryFilter:
-    key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    type: Optional[inventoryqueryoperatortype_enum.InventoryQueryOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""InventoryFilter
+    One or more filters. Use a filter to return a more specific list of results.
+    """
+    
+    key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
+    type: Optional[InventoryQueryOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

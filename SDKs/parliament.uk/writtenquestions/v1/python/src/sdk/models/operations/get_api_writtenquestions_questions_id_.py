@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIWrittenquestionsQuestionsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class GetAPIWrittenquestionsQuestionsIDQueryParams:
 
 @dataclass
 class GetAPIWrittenquestionsQuestionsIDRequest:
-    path_params: GetAPIWrittenquestionsQuestionsIDPathParams = field(default=None)
-    query_params: GetAPIWrittenquestionsQuestionsIDQueryParams = field(default=None)
+    path_params: GetAPIWrittenquestionsQuestionsIDPathParams = field()
+    query_params: GetAPIWrittenquestionsQuestionsIDQueryParams = field()
     
 
 @dataclass
 class GetAPIWrittenquestionsQuestionsIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, dict[str, Any]]] = field(default=None)
     questions_view_model_item: Optional[shared.QuestionsViewModelItem] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The IDP's certificate data to verify the signature in the SAMLResponse issued by the IDP.
 **/

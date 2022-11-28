@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Type } from "./type";
 import { PartitionOptions } from "./partitionoptions";
 import { TransactionSelector } from "./transactionselector";
+
 
 
 // PartitionQueryRequest
@@ -10,18 +10,18 @@ import { TransactionSelector } from "./transactionselector";
  * The request for PartitionQuery
 **/
 export class PartitionQueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paramTypes", elemType: shared.Type })
+  @SpeakeasyMetadata({ data: "json, name=paramTypes", elemType: Type })
   paramTypes?: Map<string, Type>;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, any>;
 
-  @Metadata({ data: "json, name=partitionOptions" })
+  @SpeakeasyMetadata({ data: "json, name=partitionOptions" })
   partitionOptions?: PartitionOptions;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql?: string;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: TransactionSelector;
 }

@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import detailedalgorithmstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AlgorithmStatusItem:
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    status: detailedalgorithmstatus_enum.DetailedAlgorithmStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""AlgorithmStatusItem
+    Represents the overall status of an algorithm.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    status: DetailedAlgorithmStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
     

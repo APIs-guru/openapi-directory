@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ObscaSupportData1AppliedAuthenticationApproachEnum {
-    Ca = "CA"
-,    Sca = "SCA"
+    Ca = "CA",
+    Sca = "SCA"
 }
 
 export enum ObscaSupportData1RequestedScaExemptionTypeEnum {
-    BillPayment = "BillPayment"
-,    ContactlessTravel = "ContactlessTravel"
-,    EcommerceGoods = "EcommerceGoods"
-,    EcommerceServices = "EcommerceServices"
-,    Kiosk = "Kiosk"
-,    Parking = "Parking"
-,    PartyToParty = "PartyToParty"
+    BillPayment = "BillPayment",
+    ContactlessTravel = "ContactlessTravel",
+    EcommerceGoods = "EcommerceGoods",
+    EcommerceServices = "EcommerceServices",
+    Kiosk = "Kiosk",
+    Parking = "Parking",
+    PartyToParty = "PartyToParty"
 }
 
 
@@ -21,12 +22,12 @@ export enum ObscaSupportData1RequestedScaExemptionTypeEnum {
  * Supporting Data provided by TPP, when requesting SCA Exemption.
 **/
 export class ObscaSupportData1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppliedAuthenticationApproach" })
+  @SpeakeasyMetadata({ data: "json, name=AppliedAuthenticationApproach" })
   appliedAuthenticationApproach?: ObscaSupportData1AppliedAuthenticationApproachEnum;
 
-  @Metadata({ data: "json, name=ReferencePaymentOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=ReferencePaymentOrderId" })
   referencePaymentOrderId?: string;
 
-  @Metadata({ data: "json, name=RequestedSCAExemptionType" })
+  @SpeakeasyMetadata({ data: "json, name=RequestedSCAExemptionType" })
   requestedScaExemptionType?: ObscaSupportData1RequestedScaExemptionTypeEnum;
 }

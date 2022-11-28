@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MissDistance } from "./missdistance";
 import { RelVelocity } from "./relvelocity";
 
 
+
 export class CloseApproachData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=close_approach_date" })
+  @SpeakeasyMetadata({ data: "json, name=close_approach_date" })
   closeApproachDate?: string;
 
-  @Metadata({ data: "json, name=close_approach_date_full" })
+  @SpeakeasyMetadata({ data: "json, name=close_approach_date_full" })
   closeApproachDateFull?: string;
 
-  @Metadata({ data: "json, name=epoch_date_close_approach" })
+  @SpeakeasyMetadata({ data: "json, name=epoch_date_close_approach" })
   epochDateCloseApproach?: number;
 
-  @Metadata({ data: "json, name=miss_distance" })
+  @SpeakeasyMetadata({ data: "json, name=miss_distance" })
   missDistance?: MissDistance;
 
-  @Metadata({ data: "json, name=orbiting_body" })
+  @SpeakeasyMetadata({ data: "json, name=orbiting_body" })
   orbitingBody?: string;
 
-  @Metadata({ data: "json, name=relative_velocity" })
+  @SpeakeasyMetadata({ data: "json, name=relative_velocity" })
   relativeVelocity?: RelVelocity;
 }

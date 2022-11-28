@@ -14,12 +14,12 @@ class GetRequestsQueryParams:
 
 @dataclass
 class GetRequestsRequest:
-    query_params: GetRequestsQueryParams = field(default=None)
+    query_params: GetRequestsQueryParams = field()
     
 
 @dataclass
 class GetRequestsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     request_entities: Optional[List[shared.RequestEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

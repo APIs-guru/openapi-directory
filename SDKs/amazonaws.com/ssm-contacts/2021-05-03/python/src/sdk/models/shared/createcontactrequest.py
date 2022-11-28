@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import plan
-from . import tag
-from . import contacttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateContactRequest:
-    alias: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Alias' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayName' }})
-    idempotency_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdempotencyToken' }})
-    plan: plan.Plan = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Plan' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    type: contacttype_enum.ContactTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    alias: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Alias') }})
+    plan: Plan = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Plan') }})
+    type: ContactTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisplayName') }})
+    idempotency_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdempotencyToken') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

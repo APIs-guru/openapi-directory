@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LatLng } from "./latlng";
-import { LatLng } from "./latlng";
+
 
 
 // GoogleCloudVisionV1p2beta1LatLongRect
@@ -8,9 +8,9 @@ import { LatLng } from "./latlng";
  * Rectangle determined by min and max `LatLng` pairs.
 **/
 export class GoogleCloudVisionV1p2beta1LatLongRect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxLatLng" })
+  @SpeakeasyMetadata({ data: "json, name=maxLatLng" })
   maxLatLng?: LatLng;
 
-  @Metadata({ data: "json, name=minLatLng" })
+  @SpeakeasyMetadata({ data: "json, name=minLatLng" })
   minLatLng?: LatLng;
 }

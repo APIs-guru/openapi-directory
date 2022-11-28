@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class EffectivePolicyTypeEnum(str, Enum):
     TAG_POLICY = "TAG_POLICY"

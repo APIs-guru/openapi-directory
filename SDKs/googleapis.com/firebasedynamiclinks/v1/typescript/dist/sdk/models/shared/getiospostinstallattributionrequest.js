@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceInfo } from "./deviceinfo";
 export var GetIosPostInstallAttributionRequestRetrievalMethodEnum;
 (function (GetIosPostInstallAttributionRequestRetrievalMethodEnum) {
@@ -47,35 +47,35 @@ var GetIosPostInstallAttributionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appInstallationTime" }),
+        SpeakeasyMetadata({ data: "json, name=appInstallationTime" }),
         __metadata("design:type", String)
     ], GetIosPostInstallAttributionRequest.prototype, "appInstallationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=bundleId" }),
+        SpeakeasyMetadata({ data: "json, name=bundleId" }),
         __metadata("design:type", String)
     ], GetIosPostInstallAttributionRequest.prototype, "bundleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=device" }),
+        SpeakeasyMetadata({ data: "json, name=device" }),
         __metadata("design:type", DeviceInfo)
     ], GetIosPostInstallAttributionRequest.prototype, "device", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosVersion" }),
+        SpeakeasyMetadata({ data: "json, name=iosVersion" }),
         __metadata("design:type", String)
     ], GetIosPostInstallAttributionRequest.prototype, "iosVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=retrievalMethod" }),
+        SpeakeasyMetadata({ data: "json, name=retrievalMethod" }),
         __metadata("design:type", String)
     ], GetIosPostInstallAttributionRequest.prototype, "retrievalMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=sdkVersion" }),
+        SpeakeasyMetadata({ data: "json, name=sdkVersion" }),
         __metadata("design:type", String)
     ], GetIosPostInstallAttributionRequest.prototype, "sdkVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=uniqueMatchLinkToCheck" }),
+        SpeakeasyMetadata({ data: "json, name=uniqueMatchLinkToCheck" }),
         __metadata("design:type", String)
     ], GetIosPostInstallAttributionRequest.prototype, "uniqueMatchLinkToCheck", void 0);
     __decorate([
-        Metadata({ data: "json, name=visualStyle" }),
+        SpeakeasyMetadata({ data: "json, name=visualStyle" }),
         __metadata("design:type", String)
     ], GetIosPostInstallAttributionRequest.prototype, "visualStyle", void 0);
     return GetIosPostInstallAttributionRequest;

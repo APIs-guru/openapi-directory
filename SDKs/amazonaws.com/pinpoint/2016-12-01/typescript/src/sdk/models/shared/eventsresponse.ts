@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemResponse } from "./itemresponse";
+
 
 
 // EventsResponse
@@ -8,6 +8,6 @@ import { ItemResponse } from "./itemresponse";
  * Provides information about endpoints and the events that they're associated with.
 **/
 export class EventsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Results", elemType: shared.ItemResponse })
+  @SpeakeasyMetadata({ data: "json, name=Results", elemType: ItemResponse })
   results?: Map<string, ItemResponse>;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionModeValueEnum } from "./encryptionmodevalueenum";
 /**
  * Provides information that defines an Amazon Redshift endpoint.

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metricvalueset
+from sdk import utils
+from . import *
 
 class QuotaOperationQuotaModeEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
@@ -14,10 +16,14 @@ class QuotaOperationQuotaModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class QuotaOperation:
-    consumer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consumerId' }})
-    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    method_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'methodName' }})
-    operation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operationId' }})
-    quota_metrics: Optional[List[metricvalueset.MetricValueSet]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quotaMetrics' }})
-    quota_mode: Optional[QuotaOperationQuotaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quotaMode' }})
+    r"""QuotaOperation
+    Represents information regarding a quota operation.
+    """
+    
+    consumer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consumerId') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    method_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('methodName') }})
+    operation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operationId') }})
+    quota_metrics: Optional[List[MetricValueSet]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('quotaMetrics') }})
+    quota_mode: Optional[QuotaOperationQuotaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('quotaMode') }})
     

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetHistory2VehicleHistoryGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" })
   vin: string;
 }
 
 
 export class GetHistory2VehicleHistoryGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetHistory2VehicleHistoryGetQueryParams;
 }
 
 
 export class GetHistory2VehicleHistoryGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   historyResp?: shared.HistoryResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

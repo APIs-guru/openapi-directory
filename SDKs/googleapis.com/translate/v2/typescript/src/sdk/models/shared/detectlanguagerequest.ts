@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetectLanguageRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for language detection.
 **/
 export class DetectLanguageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=q" })
+  @SpeakeasyMetadata({ data: "json, name=q" })
   q?: string[];
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeDate } from "./googletypedate";
-import { GoogleTypeDate } from "./googletypedate";
+
 
 
 // GoogleCloudBillingBudgetsV1beta1CustomPeriod
@@ -8,9 +8,9 @@ import { GoogleTypeDate } from "./googletypedate";
  * All date times begin at 12 AM US and Canadian Pacific Time (UTC-8).
 **/
 export class GoogleCloudBillingBudgetsV1beta1CustomPeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: GoogleTypeDate;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: GoogleTypeDate;
 }

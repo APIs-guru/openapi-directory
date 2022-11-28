@@ -1,6 +1,7 @@
 
 
+
 export enum MigrationStrategyEnum {
-    CreateNew = "CREATE_NEW"
-,    UpdateExisting = "UPDATE_EXISTING"
+    CreateNew = "CREATE_NEW",
+    UpdateExisting = "UPDATE_EXISTING"
 }

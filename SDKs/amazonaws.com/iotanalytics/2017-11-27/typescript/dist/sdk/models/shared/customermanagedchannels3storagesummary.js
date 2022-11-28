@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CustomerManagedChannelS3StorageSummary
 /**
  * Used to store channel data in an S3 bucket that you manage.
@@ -33,15 +33,15 @@ var CustomerManagedChannelS3StorageSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], CustomerManagedChannelS3StorageSummary.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=keyPrefix" }),
         __metadata("design:type", String)
     ], CustomerManagedChannelS3StorageSummary.prototype, "keyPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], CustomerManagedChannelS3StorageSummary.prototype, "roleArn", void 0);
     return CustomerManagedChannelS3StorageSummary;

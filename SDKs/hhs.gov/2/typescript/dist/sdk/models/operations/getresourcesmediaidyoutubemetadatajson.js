@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesMediaIdYoutubeMetaDataJsonPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesMediaIdYoutubeMetaDataJsonPathParams, _super);
@@ -30,59 +30,59 @@ var GetResourcesMediaIdYoutubeMetaDataJsonPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdYoutubeMetaDataJsonPathParams.prototype, "id", void 0);
     return GetResourcesMediaIdYoutubeMetaDataJsonPathParams;
 }(SpeakeasyBase));
 export { GetResourcesMediaIdYoutubeMetaDataJsonPathParams };
-var GetResourcesMediaIdYoutubeMetaDataJsonRequest = /** @class */ (function (_super) {
-    __extends(GetResourcesMediaIdYoutubeMetaDataJsonRequest, _super);
-    function GetResourcesMediaIdYoutubeMetaDataJsonRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetResourcesMediaIdYoutubeMetaDataJsonPathParams)
-    ], GetResourcesMediaIdYoutubeMetaDataJsonRequest.prototype, "pathParams", void 0);
-    return GetResourcesMediaIdYoutubeMetaDataJsonRequest;
-}(SpeakeasyBase));
-export { GetResourcesMediaIdYoutubeMetaDataJsonRequest };
 var GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson, _super);
     function GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=callback" }),
+        SpeakeasyMetadata({ data: "json, name=callback" }),
         __metadata("design:type", String)
     ], GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "json, name=meta" }),
+        SpeakeasyMetadata({ data: "json, name=meta" }),
         __metadata("design:type", shared.Meta)
     ], GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson.prototype, "meta", void 0);
     __decorate([
-        Metadata({ data: "json, name=results" }),
+        SpeakeasyMetadata({ data: "json, name=results" }),
         __metadata("design:type", Array)
     ], GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson.prototype, "results", void 0);
     return GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson;
 }(SpeakeasyBase));
 export { GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson };
+var GetResourcesMediaIdYoutubeMetaDataJsonRequest = /** @class */ (function (_super) {
+    __extends(GetResourcesMediaIdYoutubeMetaDataJsonRequest, _super);
+    function GetResourcesMediaIdYoutubeMetaDataJsonRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetResourcesMediaIdYoutubeMetaDataJsonPathParams)
+    ], GetResourcesMediaIdYoutubeMetaDataJsonRequest.prototype, "pathParams", void 0);
+    return GetResourcesMediaIdYoutubeMetaDataJsonRequest;
+}(SpeakeasyBase));
+export { GetResourcesMediaIdYoutubeMetaDataJsonRequest };
 var GetResourcesMediaIdYoutubeMetaDataJsonResponse = /** @class */ (function (_super) {
     __extends(GetResourcesMediaIdYoutubeMetaDataJsonResponse, _super);
     function GetResourcesMediaIdYoutubeMetaDataJsonResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesMediaIdYoutubeMetaDataJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaIdYoutubeMetaDataJson200ApplicationJson)
     ], GetResourcesMediaIdYoutubeMetaDataJsonResponse.prototype, "getResourcesMediaIdYoutubeMetaDataJson200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdYoutubeMetaDataJsonResponse.prototype, "statusCode", void 0);
     return GetResourcesMediaIdYoutubeMetaDataJsonResponse;

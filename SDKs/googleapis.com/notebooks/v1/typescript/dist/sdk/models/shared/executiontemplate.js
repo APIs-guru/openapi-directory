@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchedulerAcceleratorConfig } from "./scheduleracceleratorconfig";
 import { DataprocParameters } from "./dataprocparameters";
 import { VertexAiParameters } from "./vertexaiparameters";
@@ -52,63 +52,63 @@ var ExecutionTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acceleratorConfig" }),
+        SpeakeasyMetadata({ data: "json, name=acceleratorConfig" }),
         __metadata("design:type", SchedulerAcceleratorConfig)
     ], ExecutionTemplate.prototype, "acceleratorConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=containerImageUri" }),
+        SpeakeasyMetadata({ data: "json, name=containerImageUri" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "containerImageUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataprocParameters" }),
+        SpeakeasyMetadata({ data: "json, name=dataprocParameters" }),
         __metadata("design:type", DataprocParameters)
     ], ExecutionTemplate.prototype, "dataprocParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputNotebookFile" }),
+        SpeakeasyMetadata({ data: "json, name=inputNotebookFile" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "inputNotebookFile", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobType" }),
+        SpeakeasyMetadata({ data: "json, name=jobType" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "jobType", void 0);
     __decorate([
-        Metadata({ data: "json, name=kernelSpec" }),
+        SpeakeasyMetadata({ data: "json, name=kernelSpec" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "kernelSpec", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], ExecutionTemplate.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=masterType" }),
+        SpeakeasyMetadata({ data: "json, name=masterType" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "masterType", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputNotebookFolder" }),
+        SpeakeasyMetadata({ data: "json, name=outputNotebookFolder" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "outputNotebookFolder", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=paramsYamlFile" }),
+        SpeakeasyMetadata({ data: "json, name=paramsYamlFile" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "paramsYamlFile", void 0);
     __decorate([
-        Metadata({ data: "json, name=scaleTier" }),
+        SpeakeasyMetadata({ data: "json, name=scaleTier" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "scaleTier", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=tensorboard" }),
+        SpeakeasyMetadata({ data: "json, name=tensorboard" }),
         __metadata("design:type", String)
     ], ExecutionTemplate.prototype, "tensorboard", void 0);
     __decorate([
-        Metadata({ data: "json, name=vertexAiParameters" }),
+        SpeakeasyMetadata({ data: "json, name=vertexAiParameters" }),
         __metadata("design:type", VertexAiParameters)
     ], ExecutionTemplate.prototype, "vertexAiParameters", void 0);
     return ExecutionTemplate;

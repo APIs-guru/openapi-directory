@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserDefinedField } from "./userdefinedfield";
+
 
 
 // StackScript
@@ -9,48 +9,74 @@ import { UserDefinedField } from "./userdefinedfield";
  * 
 **/
 export class StackScript extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=deployments_active" })
+  @SpeakeasyMetadata({ data: "json, name=deployments_active" })
   deploymentsActive?: number;
 
-  @Metadata({ data: "json, name=deployments_total" })
+  @SpeakeasyMetadata({ data: "json, name=deployments_total" })
   deploymentsTotal?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=images" })
+  @SpeakeasyMetadata({ data: "json, name=images" })
   images?: string[];
 
-  @Metadata({ data: "json, name=is_public" })
+  @SpeakeasyMetadata({ data: "json, name=is_public" })
   isPublic?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=mine" })
+  @SpeakeasyMetadata({ data: "json, name=mine" })
   mine?: boolean;
 
-  @Metadata({ data: "json, name=rev_note" })
+  @SpeakeasyMetadata({ data: "json, name=rev_note" })
   revNote?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=user_defined_fields", elemType: shared.UserDefinedField })
+  @SpeakeasyMetadata({ data: "json, name=user_defined_fields", elemType: UserDefinedField })
   userDefinedFields?: UserDefinedField[];
 
-  @Metadata({ data: "json, name=user_gravatar_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_gravatar_id" })
   userGravatarId?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
+}
+
+
+// StackScriptInput
+/** 
+ * A StackScript enables you to quickly deploy a fully-configured application in an automated manner.
+ * 
+**/
+export class StackScriptInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=images" })
+  images?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=is_public" })
+  isPublic?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=rev_note" })
+  revNote?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=script" })
+  script?: string;
 }

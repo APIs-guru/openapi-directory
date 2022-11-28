@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum UpdateAccountSettingsXAmzTargetEnum {
     AwsProton20200720UpdateAccountSettings = "AwsProton20200720.UpdateAccountSettings"

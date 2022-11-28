@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentAccountConnectionRequesterAccountTypeEnum } from "./environmentaccountconnectionrequesteraccounttypeenum";
 import { EnvironmentAccountConnectionStatusEnum } from "./environmentaccountconnectionstatusenum";
 
 
+
 export class ListEnvironmentAccountConnectionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentName" })
+  @SpeakeasyMetadata({ data: "json, name=environmentName" })
   environmentName?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=requestedBy" })
+  @SpeakeasyMetadata({ data: "json, name=requestedBy" })
   requestedBy: EnvironmentAccountConnectionRequesterAccountTypeEnum;
 
-  @Metadata({ data: "json, name=statuses" })
+  @SpeakeasyMetadata({ data: "json, name=statuses" })
   statuses?: EnvironmentAccountConnectionStatusEnum[];
 }

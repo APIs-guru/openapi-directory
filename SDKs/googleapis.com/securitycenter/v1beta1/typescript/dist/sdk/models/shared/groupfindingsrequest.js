@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GroupFindingsRequest
 /**
  * Request message for grouping by findings.
@@ -33,23 +33,23 @@ var GroupFindingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], GroupFindingsRequest.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupBy" }),
+        SpeakeasyMetadata({ data: "json, name=groupBy" }),
         __metadata("design:type", String)
     ], GroupFindingsRequest.prototype, "groupBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageSize" }),
+        SpeakeasyMetadata({ data: "json, name=pageSize" }),
         __metadata("design:type", Number)
     ], GroupFindingsRequest.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageToken" }),
+        SpeakeasyMetadata({ data: "json, name=pageToken" }),
         __metadata("design:type", String)
     ], GroupFindingsRequest.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=readTime" }),
+        SpeakeasyMetadata({ data: "json, name=readTime" }),
         __metadata("design:type", String)
     ], GroupFindingsRequest.prototype, "readTime", void 0);
     return GroupFindingsRequest;

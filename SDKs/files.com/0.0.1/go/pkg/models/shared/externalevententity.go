@@ -24,6 +24,8 @@ const (
 	ExternalEventEntityStatusEnumPartialFailure ExternalEventEntityStatusEnum = "partial_failure"
 )
 
+// ExternalEventEntity
+// List External Events
 type ExternalEventEntity struct {
 	Body             *string                           `json:"body,omitempty"`
 	BodyURL          *string                           `json:"body_url,omitempty"`

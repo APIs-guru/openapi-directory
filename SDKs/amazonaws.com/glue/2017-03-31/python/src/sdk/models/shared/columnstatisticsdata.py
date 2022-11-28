@@ -1,25 +1,27 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import binarycolumnstatisticsdata
-from . import booleancolumnstatisticsdata
-from . import datecolumnstatisticsdata
-from . import decimalcolumnstatisticsdata
-from . import doublecolumnstatisticsdata
-from . import longcolumnstatisticsdata
-from . import stringcolumnstatisticsdata
-from . import columnstatisticstype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ColumnStatisticsData:
-    binary_column_statistics_data: Optional[binarycolumnstatisticsdata.BinaryColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BinaryColumnStatisticsData' }})
-    boolean_column_statistics_data: Optional[booleancolumnstatisticsdata.BooleanColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BooleanColumnStatisticsData' }})
-    date_column_statistics_data: Optional[datecolumnstatisticsdata.DateColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateColumnStatisticsData' }})
-    decimal_column_statistics_data: Optional[decimalcolumnstatisticsdata.DecimalColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DecimalColumnStatisticsData' }})
-    double_column_statistics_data: Optional[doublecolumnstatisticsdata.DoubleColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DoubleColumnStatisticsData' }})
-    long_column_statistics_data: Optional[longcolumnstatisticsdata.LongColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LongColumnStatisticsData' }})
-    string_column_statistics_data: Optional[stringcolumnstatisticsdata.StringColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StringColumnStatisticsData' }})
-    type: columnstatisticstype_enum.ColumnStatisticsTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""ColumnStatisticsData
+    Contains the individual types of column statistics data. Only one data object should be set and indicated by the <code>Type</code> attribute.
+    """
+    
+    type: ColumnStatisticsTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    binary_column_statistics_data: Optional[BinaryColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BinaryColumnStatisticsData') }})
+    boolean_column_statistics_data: Optional[BooleanColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BooleanColumnStatisticsData') }})
+    date_column_statistics_data: Optional[DateColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateColumnStatisticsData') }})
+    decimal_column_statistics_data: Optional[DecimalColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DecimalColumnStatisticsData') }})
+    double_column_statistics_data: Optional[DoubleColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DoubleColumnStatisticsData') }})
+    long_column_statistics_data: Optional[LongColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LongColumnStatisticsData') }})
+    string_column_statistics_data: Optional[StringColumnStatisticsData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StringColumnStatisticsData') }})
     

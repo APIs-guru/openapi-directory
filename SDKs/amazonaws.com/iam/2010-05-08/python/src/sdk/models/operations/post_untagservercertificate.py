@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUntagServerCertificateActionEnum(str, Enum):
     UNTAG_SERVER_CERTIFICATE = "UntagServerCertificate"
@@ -10,8 +14,8 @@ class PostUntagServerCertificateVersionEnum(str, Enum):
 
 @dataclass
 class PostUntagServerCertificateQueryParams:
-    action: PostUntagServerCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUntagServerCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUntagServerCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUntagServerCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUntagServerCertificateHeaders:
 
 @dataclass
 class PostUntagServerCertificateRequest:
-    query_params: PostUntagServerCertificateQueryParams = field(default=None)
-    headers: PostUntagServerCertificateHeaders = field(default=None)
+    headers: PostUntagServerCertificateHeaders = field()
+    query_params: PostUntagServerCertificateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUntagServerCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

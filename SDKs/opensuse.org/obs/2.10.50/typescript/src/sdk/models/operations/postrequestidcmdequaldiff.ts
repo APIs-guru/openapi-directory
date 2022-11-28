@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostRequestIdCmdEqualDiffPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
@@ -12,51 +13,51 @@ export enum PostRequestIdCmdEqualDiffViewEnum {
 }
 
 export enum PostRequestIdCmdEqualDiffWithissuesEnum {
-    True = "true"
-,    One = "1"
+    True = "true",
+    One = "1"
 }
 
 
 export class PostRequestIdCmdEqualDiffQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=diff_to_superseded" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=diff_to_superseded" })
   diffToSuperseded?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=view" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" })
   view?: PostRequestIdCmdEqualDiffViewEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=withissues" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=withissues" })
   withissues?: PostRequestIdCmdEqualDiffWithissuesEnum;
 }
 
 
 export class PostRequestIdCmdEqualDiffSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class PostRequestIdCmdEqualDiffRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostRequestIdCmdEqualDiffPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostRequestIdCmdEqualDiffQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostRequestIdCmdEqualDiffSecurity;
 }
 
 
 export class PostRequestIdCmdEqualDiffResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postRequestIdCmdEqualDiff200TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

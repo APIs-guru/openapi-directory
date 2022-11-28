@@ -9,11 +9,11 @@ class PostPricingCostPlusPricingHeaders:
 
 @dataclass
 class PostPricingCostPlusPricingRequest:
-    headers: PostPricingCostPlusPricingHeaders = field(default=None)
+    headers: PostPricingCostPlusPricingHeaders = field()
     
 
 @dataclass
 class PostPricingCostPlusPricingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

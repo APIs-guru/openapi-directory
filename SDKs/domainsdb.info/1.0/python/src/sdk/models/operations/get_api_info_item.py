@@ -10,12 +10,12 @@ class GetAPIInfoItemQueryParams:
 
 @dataclass
 class GetAPIInfoItemRequest:
-    query_params: GetAPIInfoItemQueryParams = field(default=None)
+    query_params: GetAPIInfoItemQueryParams = field()
     
 
 @dataclass
 class GetAPIInfoItemResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_info: Optional[shared.APIKeyInfo] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

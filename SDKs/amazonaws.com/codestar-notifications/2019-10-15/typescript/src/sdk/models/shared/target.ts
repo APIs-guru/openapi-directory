@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Target
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the SNS topics associated with a notification rule.
 **/
 export class Target extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TargetAddress" })
+  @SpeakeasyMetadata({ data: "json, name=TargetAddress" })
   targetAddress?: string;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType?: string;
 }

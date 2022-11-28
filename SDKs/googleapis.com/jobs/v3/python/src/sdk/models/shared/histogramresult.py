@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class HistogramResultSearchTypeEnum(str, Enum):
     SEARCH_TYPE_UNSPECIFIED = "SEARCH_TYPE_UNSPECIFIED"
@@ -25,6 +27,10 @@ class HistogramResultSearchTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class HistogramResult:
-    search_type: Optional[HistogramResultSearchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'searchType' }})
-    values: Optional[dict[str, int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""HistogramResult
+    Output only. Result of a histogram call. The response contains the histogram map for the search type specified by HistogramResult.field. The response is a map of each filter value to the corresponding count of jobs for that filter.
+    """
+    
+    search_type: Optional[HistogramResultSearchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchType') }})
+    values: Optional[dict[str, int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

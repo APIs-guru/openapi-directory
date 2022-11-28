@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeQueryParams:
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeRequest:
-    path_params: AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribePathParams = field(default=None)
-    query_params: AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeQueryParams = field(default=None)
+    path_params: AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribePathParams = field()
+    query_params: AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeQueryParams = field()
+    security: AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeSecurity = field(default=None)
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersAuctionPackagesUnsubscribeResponse:
+    content_type: str = field()
+    status_code: int = field()
     auction_package: Optional[shared.AuctionPackage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

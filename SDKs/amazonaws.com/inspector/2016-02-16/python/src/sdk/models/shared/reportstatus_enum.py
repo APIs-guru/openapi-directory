@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ReportStatusEnum(str, Enum):
     WORK_IN_PROGRESS = "WORK_IN_PROGRESS"

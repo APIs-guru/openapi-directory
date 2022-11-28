@@ -19,6 +19,8 @@ const (
 	QueryResultBatchMoreResultsEnumNoMoreResults              QueryResultBatchMoreResultsEnum = "NO_MORE_RESULTS"
 )
 
+// QueryResultBatch
+// A batch of results produced by a query.
 type QueryResultBatch struct {
 	EndCursor        *string                               `json:"endCursor,omitempty"`
 	EntityResultType *QueryResultBatchEntityResultTypeEnum `json:"entityResultType,omitempty"`

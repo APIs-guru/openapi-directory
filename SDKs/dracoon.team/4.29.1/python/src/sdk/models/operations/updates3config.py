@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -10,14 +13,14 @@ class UpdateS3ConfigHeaders:
 
 @dataclass
 class UpdateS3ConfigRequest:
-    headers: UpdateS3ConfigHeaders = field(default=None)
-    request: shared.S3ConfigUpdateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateS3ConfigHeaders = field()
+    request: shared.S3ConfigUpdateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateS3ConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     s3_config: Optional[shared.S3Config] = field(default=None)
-    status_code: int = field(default=None)
     

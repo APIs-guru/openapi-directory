@@ -1,5 +1,7 @@
 package shared
 
+// PayStatementDetails
+// The pay statement details model
 type PayStatementDetails struct {
 	Amount               *float64 `json:"amount,omitempty"`
 	CheckDate            *string  `json:"checkDate,omitempty"`

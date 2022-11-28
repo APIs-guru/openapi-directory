@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConstraintDetail } from "./constraintdetail";
 import { StatusEnum } from "./statusenum";
 var CreateConstraintOutput = /** @class */ (function (_super) {
@@ -31,15 +31,15 @@ var CreateConstraintOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConstraintDetail" }),
+        SpeakeasyMetadata({ data: "json, name=ConstraintDetail" }),
         __metadata("design:type", ConstraintDetail)
     ], CreateConstraintOutput.prototype, "constraintDetail", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConstraintParameters" }),
+        SpeakeasyMetadata({ data: "json, name=ConstraintParameters" }),
         __metadata("design:type", String)
     ], CreateConstraintOutput.prototype, "constraintParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], CreateConstraintOutput.prototype, "status", void 0);
     return CreateConstraintOutput;

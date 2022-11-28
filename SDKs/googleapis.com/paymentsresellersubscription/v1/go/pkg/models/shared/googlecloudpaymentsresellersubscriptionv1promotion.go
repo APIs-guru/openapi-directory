@@ -8,6 +8,8 @@ const (
 	GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnumPromotionTypeIntroductoryPricing GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnum = "PROMOTION_TYPE_INTRODUCTORY_PRICING"
 )
 
+// GoogleCloudPaymentsResellerSubscriptionV1Promotion
+// A Promotion resource that defines a promotion for a subscription that can be resold.
 type GoogleCloudPaymentsResellerSubscriptionV1Promotion struct {
 	ApplicableProducts         []string                                                                      `json:"applicableProducts,omitempty"`
 	EndTime                    *string                                                                       `json:"endTime,omitempty"`

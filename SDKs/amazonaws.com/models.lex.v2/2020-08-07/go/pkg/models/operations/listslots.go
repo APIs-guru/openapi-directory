@@ -26,6 +26,8 @@ type ListSlotsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListSlotsRequestBodySortBy
+// Specifies attributes for sorting a list of bots.
 type ListSlotsRequestBodySortBy struct {
 	Attribute *shared.SlotSortAttributeEnum `json:"attribute,omitempty"`
 	Order     *shared.SortOrderEnum         `json:"order,omitempty"`

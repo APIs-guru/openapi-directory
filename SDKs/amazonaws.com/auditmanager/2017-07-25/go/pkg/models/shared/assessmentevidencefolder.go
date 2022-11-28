@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// AssessmentEvidenceFolder
+//
+//	The folder in which Audit Manager stores evidence for an assessment.
 type AssessmentEvidenceFolder struct {
 	AssessmentID                             *string    `json:"assessmentId,omitempty"`
 	AssessmentReportSelectionCount           *int64     `json:"assessmentReportSelectionCount,omitempty"`

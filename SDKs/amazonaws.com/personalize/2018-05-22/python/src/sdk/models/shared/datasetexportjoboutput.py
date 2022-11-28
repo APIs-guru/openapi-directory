@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import s3dataconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DatasetExportJobOutput:
-    s3_data_destination: s3dataconfig.S3DataConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3DataDestination' }})
+    r"""DatasetExportJobOutput
+    The output configuration parameters of a dataset export job.
+    """
+    
+    s3_data_destination: S3DataConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3DataDestination') }})
     

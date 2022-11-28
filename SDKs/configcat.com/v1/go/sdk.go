@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.configcat.com",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddOrUpdateIntegrationLink - Add or update Integration link
 func (s *SDK) AddOrUpdateIntegrationLink(ctx context.Context, request operations.AddOrUpdateIntegrationLinkRequest) (*operations.AddOrUpdateIntegrationLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -73,7 +99,7 @@ func (s *SDK) AddOrUpdateIntegrationLink(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -114,8 +140,11 @@ func (s *SDK) AddOrUpdateIntegrationLink(ctx context.Context, request operations
 	return res, nil
 }
 
+// CreateConfig - Create Config
+// This endpoint creates a new Config in a specified Product
+// identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 func (s *SDK) CreateConfig(ctx context.Context, request operations.CreateConfigRequest) (*operations.CreateConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/configs", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -133,7 +162,7 @@ func (s *SDK) CreateConfig(ctx context.Context, request operations.CreateConfigR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -174,8 +203,11 @@ func (s *SDK) CreateConfig(ctx context.Context, request operations.CreateConfigR
 	return res, nil
 }
 
+// CreateEnvironment - Create Environment
+// This endpoint creates a new Environment in a specified Product
+// identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEnvironmentRequest) (*operations.CreateEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/environments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -193,7 +225,7 @@ func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEn
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -234,8 +266,11 @@ func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEn
 	return res, nil
 }
 
+// CreatePermissionGroup - Create Permission Group
+// This endpoint creates a new Permission Group in a specified Product
+// identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 func (s *SDK) CreatePermissionGroup(ctx context.Context, request operations.CreatePermissionGroupRequest) (*operations.CreatePermissionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/permissions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -253,7 +288,7 @@ func (s *SDK) CreatePermissionGroup(ctx context.Context, request operations.Crea
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -294,8 +329,11 @@ func (s *SDK) CreatePermissionGroup(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateProduct - Create Product
+// This endpoint creates a new Product in a specified Organization
+// identified by the `organizationId` parameter, which can be obtained from the [List Organizations](#operation/get-organizations) endpoint.
 func (s *SDK) CreateProduct(ctx context.Context, request operations.CreateProductRequest) (*operations.CreateProductResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/products", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -313,7 +351,7 @@ func (s *SDK) CreateProduct(ctx context.Context, request operations.CreateProduc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -354,8 +392,13 @@ func (s *SDK) CreateProduct(ctx context.Context, request operations.CreateProduc
 	return res, nil
 }
 
+// CreateSetting - Create Flag
+// This endpoint creates a new Feature Flag or Setting in a specified Config
+// identified by the `configId` parameter.
+//
+// **Important:** The `key` attribute must be unique within the given Config.
 func (s *SDK) CreateSetting(ctx context.Context, request operations.CreateSettingRequest) (*operations.CreateSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}/settings", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -373,7 +416,7 @@ func (s *SDK) CreateSetting(ctx context.Context, request operations.CreateSettin
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -414,8 +457,11 @@ func (s *SDK) CreateSetting(ctx context.Context, request operations.CreateSettin
 	return res, nil
 }
 
+// CreateTag - Create Tag
+// This endpoint creates a new Tag in a specified Product
+// identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest) (*operations.CreateTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/tags", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -433,7 +479,7 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -474,8 +520,10 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 	return res, nil
 }
 
+// DeleteConfig - Delete Config
+// This endpoint removes a Config identified by the `configId` parameter.
 func (s *SDK) DeleteConfig(ctx context.Context, request operations.DeleteConfigRequest) (*operations.DeleteConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -483,7 +531,7 @@ func (s *SDK) DeleteConfig(ctx context.Context, request operations.DeleteConfigR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -508,8 +556,10 @@ func (s *SDK) DeleteConfig(ctx context.Context, request operations.DeleteConfigR
 	return res, nil
 }
 
+// DeleteEnvironment - Delete Environment
+// This endpoint removes an Environment identified by the `environmentId` parameter.
 func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEnvironmentRequest) (*operations.DeleteEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -517,7 +567,7 @@ func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEn
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -542,8 +592,9 @@ func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEn
 	return res, nil
 }
 
+// DeleteIntegrationLink - Delete Integration link
 func (s *SDK) DeleteIntegrationLink(ctx context.Context, request operations.DeleteIntegrationLinkRequest) (*operations.DeleteIntegrationLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -551,7 +602,7 @@ func (s *SDK) DeleteIntegrationLink(ctx context.Context, request operations.Dele
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -592,8 +643,11 @@ func (s *SDK) DeleteIntegrationLink(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteOrganizationMember - Delete Member from Organization
+// This endpoint removes a Member identified by the `userId` from the
+// given Organization identified by the `organizationId` parameter.
 func (s *SDK) DeleteOrganizationMember(ctx context.Context, request operations.DeleteOrganizationMemberRequest) (*operations.DeleteOrganizationMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/members/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -601,7 +655,7 @@ func (s *SDK) DeleteOrganizationMember(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -626,8 +680,10 @@ func (s *SDK) DeleteOrganizationMember(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeletePermissionGroup - Delete Permission Group
+// This endpoint removes a Permission Group identified by the `permissionGroupId` parameter.
 func (s *SDK) DeletePermissionGroup(ctx context.Context, request operations.DeletePermissionGroupRequest) (*operations.DeletePermissionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/permissions/{permissionGroupId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -635,7 +691,7 @@ func (s *SDK) DeletePermissionGroup(ctx context.Context, request operations.Dele
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -660,8 +716,10 @@ func (s *SDK) DeletePermissionGroup(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteProduct - Delete Product
+// This endpoint removes a Product identified by the `productId` parameter.
 func (s *SDK) DeleteProduct(ctx context.Context, request operations.DeleteProductRequest) (*operations.DeleteProductResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -669,7 +727,7 @@ func (s *SDK) DeleteProduct(ctx context.Context, request operations.DeleteProduc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -694,8 +752,11 @@ func (s *SDK) DeleteProduct(ctx context.Context, request operations.DeleteProduc
 	return res, nil
 }
 
+// DeleteProductMember - Delete Member from Product
+// This endpoint removes a Member identified by the `userId` from the
+// given Product identified by the `productId` parameter.
 func (s *SDK) DeleteProductMember(ctx context.Context, request operations.DeleteProductMemberRequest) (*operations.DeleteProductMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/members/{userId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -703,7 +764,7 @@ func (s *SDK) DeleteProductMember(ctx context.Context, request operations.Delete
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -728,8 +789,11 @@ func (s *SDK) DeleteProductMember(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteSetting - Delete Flag
+// This endpoint removes a Feature Flag or Setting from a specified Config,
+// identified by the `configId` parameter.
 func (s *SDK) DeleteSetting(ctx context.Context, request operations.DeleteSettingRequest) (*operations.DeleteSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/settings/{settingId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -737,7 +801,7 @@ func (s *SDK) DeleteSetting(ctx context.Context, request operations.DeleteSettin
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -762,8 +826,10 @@ func (s *SDK) DeleteSetting(ctx context.Context, request operations.DeleteSettin
 	return res, nil
 }
 
+// DeleteTag - Delete Tag
+// This endpoint deletes a Tag identified by the `tagId` parameter. To remove a Tag from a Feature Flag or Setting use the [Update Flag](#operation/update-setting) endpoint.
 func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest) (*operations.DeleteTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/tags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -771,7 +837,7 @@ func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -796,8 +862,11 @@ func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest
 	return res, nil
 }
 
+// GetAuditlogs - List Audit log items for Product
+// This endpoint returns the list of Audit log items for a given Product
+// and the result can be optionally filtered by Config and/or Environment.
 func (s *SDK) GetAuditlogs(ctx context.Context, request operations.GetAuditlogsRequest) (*operations.GetAuditlogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/auditlogs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -807,7 +876,7 @@ func (s *SDK) GetAuditlogs(ctx context.Context, request operations.GetAuditlogsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -848,8 +917,11 @@ func (s *SDK) GetAuditlogs(ctx context.Context, request operations.GetAuditlogsR
 	return res, nil
 }
 
+// GetConfig - Get Config
+// This endpoint returns the metadata of a Config
+// identified by the `configId`.
 func (s *SDK) GetConfig(ctx context.Context, request operations.GetConfigRequest) (*operations.GetConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -857,7 +929,7 @@ func (s *SDK) GetConfig(ctx context.Context, request operations.GetConfigRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -898,8 +970,11 @@ func (s *SDK) GetConfig(ctx context.Context, request operations.GetConfigRequest
 	return res, nil
 }
 
+// GetConfigs - List Configs
+// This endpoint returns the list of the Configs that belongs to the given Product identified by the
+// `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 func (s *SDK) GetConfigs(ctx context.Context, request operations.GetConfigsRequest) (*operations.GetConfigsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/configs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -907,7 +982,7 @@ func (s *SDK) GetConfigs(ctx context.Context, request operations.GetConfigsReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -948,8 +1023,10 @@ func (s *SDK) GetConfigs(ctx context.Context, request operations.GetConfigsReque
 	return res, nil
 }
 
+// GetDeletedSettings - List Deleted Settings
+// This endpoint returns the list of Feature Flags and Settings that were deleted from the given Config.
 func (s *SDK) GetDeletedSettings(ctx context.Context, request operations.GetDeletedSettingsRequest) (*operations.GetDeletedSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}/deleted-settings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -957,7 +1034,7 @@ func (s *SDK) GetDeletedSettings(ctx context.Context, request operations.GetDele
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -998,8 +1075,11 @@ func (s *SDK) GetDeletedSettings(ctx context.Context, request operations.GetDele
 	return res, nil
 }
 
+// GetEnvironment - Get Environment
+// This endpoint returns the metadata of an Environment
+// identified by the `environmentId`.
 func (s *SDK) GetEnvironment(ctx context.Context, request operations.GetEnvironmentRequest) (*operations.GetEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1007,7 +1087,7 @@ func (s *SDK) GetEnvironment(ctx context.Context, request operations.GetEnvironm
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1048,8 +1128,11 @@ func (s *SDK) GetEnvironment(ctx context.Context, request operations.GetEnvironm
 	return res, nil
 }
 
+// GetEnvironments - List Environments
+// This endpoint returns the list of the Environments that belongs to the given Product identified by the
+// `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 func (s *SDK) GetEnvironments(ctx context.Context, request operations.GetEnvironmentsRequest) (*operations.GetEnvironmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/environments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1057,7 +1140,7 @@ func (s *SDK) GetEnvironments(ctx context.Context, request operations.GetEnviron
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1098,8 +1181,9 @@ func (s *SDK) GetEnvironments(ctx context.Context, request operations.GetEnviron
 	return res, nil
 }
 
+// GetIntegrationLinkDetails - Get Integration link
 func (s *SDK) GetIntegrationLinkDetails(ctx context.Context, request operations.GetIntegrationLinkDetailsRequest) (*operations.GetIntegrationLinkDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/integrationLink/{integrationLinkType}/{key}/details", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1107,7 +1191,7 @@ func (s *SDK) GetIntegrationLinkDetails(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1148,8 +1232,9 @@ func (s *SDK) GetIntegrationLinkDetails(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetMe - Get authenticated user details
 func (s *SDK) GetMe(ctx context.Context) (*operations.GetMeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/me"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1157,7 +1242,7 @@ func (s *SDK) GetMe(ctx context.Context) (*operations.GetMeResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1196,8 +1281,11 @@ func (s *SDK) GetMe(ctx context.Context) (*operations.GetMeResponse, error) {
 	return res, nil
 }
 
+// GetOrganizationAuditlogs - List Audit log items for Organization
+// This endpoint returns the list of Audit log items for a given Organization
+// and the result can be optionally filtered by Product and/or Config and/or Environment.
 func (s *SDK) GetOrganizationAuditlogs(ctx context.Context, request operations.GetOrganizationAuditlogsRequest) (*operations.GetOrganizationAuditlogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/auditlogs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1207,7 +1295,7 @@ func (s *SDK) GetOrganizationAuditlogs(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1248,8 +1336,11 @@ func (s *SDK) GetOrganizationAuditlogs(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetOrganizationMembers - List Organization Members
+// This endpoint returns the list of Members that belongs
+// to the given Organization, identified by the `organizationId` parameter.
 func (s *SDK) GetOrganizationMembers(ctx context.Context, request operations.GetOrganizationMembersRequest) (*operations.GetOrganizationMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/members", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1257,7 +1348,7 @@ func (s *SDK) GetOrganizationMembers(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1298,8 +1389,10 @@ func (s *SDK) GetOrganizationMembers(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetOrganizations - List Organizations
+// This endpoint returns the list of the Organizations that belongs to the user.
 func (s *SDK) GetOrganizations(ctx context.Context) (*operations.GetOrganizationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/organizations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1307,7 +1400,7 @@ func (s *SDK) GetOrganizations(ctx context.Context) (*operations.GetOrganization
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1346,8 +1439,11 @@ func (s *SDK) GetOrganizations(ctx context.Context) (*operations.GetOrganization
 	return res, nil
 }
 
+// GetPermissionGroup - Get Permission Group
+// This endpoint returns the metadata of a Permission Group
+// identified by the `permissionGroupId`.
 func (s *SDK) GetPermissionGroup(ctx context.Context, request operations.GetPermissionGroupRequest) (*operations.GetPermissionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/permissions/{permissionGroupId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1355,7 +1451,7 @@ func (s *SDK) GetPermissionGroup(ctx context.Context, request operations.GetPerm
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1396,8 +1492,11 @@ func (s *SDK) GetPermissionGroup(ctx context.Context, request operations.GetPerm
 	return res, nil
 }
 
+// GetPermissionGroups - List Permission Groups
+// This endpoint returns the list of the Permission Groups that belongs to the given Product identified by the
+// `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 func (s *SDK) GetPermissionGroups(ctx context.Context, request operations.GetPermissionGroupsRequest) (*operations.GetPermissionGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/permissions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1405,7 +1504,7 @@ func (s *SDK) GetPermissionGroups(ctx context.Context, request operations.GetPer
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1446,8 +1545,11 @@ func (s *SDK) GetPermissionGroups(ctx context.Context, request operations.GetPer
 	return res, nil
 }
 
+// GetProduct - Get Product
+// This endpoint returns the metadata of a Product
+// identified by the `productId`.
 func (s *SDK) GetProduct(ctx context.Context, request operations.GetProductRequest) (*operations.GetProductResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1455,7 +1557,7 @@ func (s *SDK) GetProduct(ctx context.Context, request operations.GetProductReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1496,8 +1598,11 @@ func (s *SDK) GetProduct(ctx context.Context, request operations.GetProductReque
 	return res, nil
 }
 
+// GetProductMembers - List Product Members
+// This endpoint returns the list of Members that belongs
+// to the given Product, identified by the `productId` parameter.
 func (s *SDK) GetProductMembers(ctx context.Context, request operations.GetProductMembersRequest) (*operations.GetProductMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/members", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1505,7 +1610,7 @@ func (s *SDK) GetProductMembers(ctx context.Context, request operations.GetProdu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1546,8 +1651,10 @@ func (s *SDK) GetProductMembers(ctx context.Context, request operations.GetProdu
 	return res, nil
 }
 
+// GetProducts - List Products
+// This endpoint returns the list of the Products that belongs to the user.
 func (s *SDK) GetProducts(ctx context.Context) (*operations.GetProductsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/products"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1555,7 +1662,7 @@ func (s *SDK) GetProducts(ctx context.Context) (*operations.GetProductsResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1594,8 +1701,10 @@ func (s *SDK) GetProducts(ctx context.Context) (*operations.GetProductsResponse,
 	return res, nil
 }
 
-func (s *SDK) GetSdkKeys(ctx context.Context, request operations.GetSdkKeysRequest) (*operations.GetSdkKeysResponse, error) {
-	baseURL := s.serverURL
+// GetSdkKeys - Get SDK Key
+// This endpoint returns the SDK Key for your Config in a specified Environment.
+func (s *SDK) GetSdkKeys(ctx context.Context, request operations.GetSDKKeysRequest) (*operations.GetSDKKeysResponse, error) {
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}/environments/{environmentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1603,7 +1712,7 @@ func (s *SDK) GetSdkKeys(ctx context.Context, request operations.GetSdkKeysReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1613,7 +1722,7 @@ func (s *SDK) GetSdkKeys(ctx context.Context, request operations.GetSdkKeysReque
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetSdkKeysResponse{
+	res := &operations.GetSDKKeysResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
 	}
@@ -1621,14 +1730,14 @@ func (s *SDK) GetSdkKeys(ctx context.Context, request operations.GetSdkKeysReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/hal+json`):
-			var out *shared.SdkKeysModel
+			var out *shared.SDKKeysModel
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
 			res.SdkKeysModel = out
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.SdkKeysModel
+			var out *shared.SDKKeysModel
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1644,8 +1753,11 @@ func (s *SDK) GetSdkKeys(ctx context.Context, request operations.GetSdkKeysReque
 	return res, nil
 }
 
+// GetSetting - Get Flag
+// This endpoint returns the metadata attributes of a Feature Flag or Setting
+// identified by the `settingId` parameter.
 func (s *SDK) GetSetting(ctx context.Context, request operations.GetSettingRequest) (*operations.GetSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/settings/{settingId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1653,7 +1765,7 @@ func (s *SDK) GetSetting(ctx context.Context, request operations.GetSettingReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1694,8 +1806,20 @@ func (s *SDK) GetSetting(ctx context.Context, request operations.GetSettingReque
 	return res, nil
 }
 
+// GetSettingValue - Get value
+// This endpoint returns the value of a Feature Flag or Setting
+// in a specified Environment identified by the `environmentId` parameter.
+//
+// The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`.
+// The `value` represents what the clients will get when the evaluation requests of our SDKs
+// are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.
+//
+// The `rolloutRules` and `percentageRules` attributes are representing the current
+// Targeting and Percentage Rules configuration of the actual Feature Flag or Setting
+// in an **ordered** collection, which means the order of the returned rules is matching to the
+// evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
 func (s *SDK) GetSettingValue(ctx context.Context, request operations.GetSettingValueRequest) (*operations.GetSettingValueResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}/settings/{settingId}/value", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1703,7 +1827,7 @@ func (s *SDK) GetSettingValue(ctx context.Context, request operations.GetSetting
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1744,8 +1868,20 @@ func (s *SDK) GetSettingValue(ctx context.Context, request operations.GetSetting
 	return res, nil
 }
 
+// GetSettingValueBySdkkey - Get value
+// This endpoint returns the value of a Feature Flag or Setting
+// in a specified Environment identified by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+//
+// The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`.
+// The `value` represents what the clients will get when the evaluation requests of our SDKs
+// are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.
+//
+// The `rolloutRules` and `percentageRules` attributes are representing the current
+// Targeting and Percentage Rules configuration of the actual Feature Flag or Setting
+// in an **ordered** collection, which means the order of the returned rules is matching to the
+// evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
 func (s *SDK) GetSettingValueBySdkkey(ctx context.Context, request operations.GetSettingValueBySdkkeyRequest) (*operations.GetSettingValueBySdkkeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/settings/{settingKeyOrId}/value", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1755,7 +1891,7 @@ func (s *SDK) GetSettingValueBySdkkey(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1796,8 +1932,20 @@ func (s *SDK) GetSettingValueBySdkkey(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetSettingValues - Get values
+// This endpoint returns the value of a specified Config's Feature Flags or Settings identified by the `configId` parameter
+// in a specified Environment identified by the `environmentId` parameter.
+//
+// The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`.
+// The `value` represents what the clients will get when the evaluation requests of our SDKs
+// are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.
+//
+// The `rolloutRules` and `percentageRules` attributes are representing the current
+// Targeting and Percentage Rules configuration of the actual Feature Flag or Setting
+// in an **ordered** collection, which means the order of the returned rules is matching to the
+// evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
 func (s *SDK) GetSettingValues(ctx context.Context, request operations.GetSettingValuesRequest) (*operations.GetSettingValuesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}/environments/{environmentId}/values", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1805,7 +1953,7 @@ func (s *SDK) GetSettingValues(ctx context.Context, request operations.GetSettin
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1846,8 +1994,11 @@ func (s *SDK) GetSettingValues(ctx context.Context, request operations.GetSettin
 	return res, nil
 }
 
+// GetSettings - List Flags
+// This endpoint returns the list of the Feature Flags and Settings defined in a
+// specified Config, identified by the `configId` parameter.
 func (s *SDK) GetSettings(ctx context.Context, request operations.GetSettingsRequest) (*operations.GetSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}/settings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1855,7 +2006,7 @@ func (s *SDK) GetSettings(ctx context.Context, request operations.GetSettingsReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1896,8 +2047,11 @@ func (s *SDK) GetSettings(ctx context.Context, request operations.GetSettingsReq
 	return res, nil
 }
 
+// GetSettingsByTag - List Settings by Tag
+// This endpoint returns the list of the Settings that
+// has the specified Tag, identified by the `tagId` parameter.
 func (s *SDK) GetSettingsByTag(ctx context.Context, request operations.GetSettingsByTagRequest) (*operations.GetSettingsByTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/tags/{tagId}/settings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1905,7 +2059,7 @@ func (s *SDK) GetSettingsByTag(ctx context.Context, request operations.GetSettin
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1946,8 +2100,11 @@ func (s *SDK) GetSettingsByTag(ctx context.Context, request operations.GetSettin
 	return res, nil
 }
 
+// GetTag - Get Tag
+// This endpoint returns the metadata of a Tag
+// identified by the `tagId`.
 func (s *SDK) GetTag(ctx context.Context, request operations.GetTagRequest) (*operations.GetTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/tags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1955,7 +2112,7 @@ func (s *SDK) GetTag(ctx context.Context, request operations.GetTagRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1996,8 +2153,11 @@ func (s *SDK) GetTag(ctx context.Context, request operations.GetTagRequest) (*op
 	return res, nil
 }
 
+// GetTags - List Tags
+// This endpoint returns the list of the Tags in a
+// specified Product, identified by the `productId` parameter.
 func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*operations.GetTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2005,7 +2165,7 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2044,8 +2204,10 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 	return res, nil
 }
 
+// InviteMember - Invite Member
+// This endpoint invites a Member into the given Product identified by the `productId` parameter.
 func (s *SDK) InviteMember(ctx context.Context, request operations.InviteMemberRequest) (*operations.InviteMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}/members/invite", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2063,7 +2225,7 @@ func (s *SDK) InviteMember(ctx context.Context, request operations.InviteMemberR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2088,8 +2250,54 @@ func (s *SDK) InviteMember(ctx context.Context, request operations.InviteMemberR
 	return res, nil
 }
 
+// ReplaceSettingValue - Replace value
+// This endpoint replaces the whole value of a Feature Flag or Setting in a specified Environment.
+//
+// Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+//
+// **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't
+// want to change in its original state. Not listing one means that it will reset.
+//
+// For example: We have the following resource.
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [
+//			{
+//				"percentage": 30,
+//				"value": true
+//			},
+//			{
+//				"percentage": 70,
+//				"value": false
+//			}
+//		],
+//		"rolloutRules": [],
+//		"value": false
+//	}
+//
+// ```
+// If we send a replace request body as below:
+// ```
+//
+//	{
+//		"value": true
+//	}
+//
+// ```
+// Then besides that the default value is set to `true`, all the Percentage Rules are deleted.
+// So we get a response like this:
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [],
+//		"rolloutRules": [],
+//		"value": true
+//	}
+//
+// ```
 func (s *SDK) ReplaceSettingValue(ctx context.Context, request operations.ReplaceSettingValueRequest) (*operations.ReplaceSettingValueResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}/settings/{settingId}/value", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2109,7 +2317,7 @@ func (s *SDK) ReplaceSettingValue(ctx context.Context, request operations.Replac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2150,8 +2358,55 @@ func (s *SDK) ReplaceSettingValue(ctx context.Context, request operations.Replac
 	return res, nil
 }
 
+// ReplaceSettingValueBySdkkey - Replace value
+// This endpoint replaces the value of a Feature Flag or Setting
+// in a specified Environment identified by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+//
+// Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+//
+// **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't
+// want to change to its original state. Not listing one means that it will reset.
+//
+// For example: We have the following resource.
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [
+//			{
+//				"percentage": 30,
+//				"value": true
+//			},
+//			{
+//				"percentage": 70,
+//				"value": false
+//			}
+//		],
+//		"rolloutRules": [],
+//		"value": false
+//	}
+//
+// ```
+// If we send a replace request body as below:
+// ```
+//
+//	{
+//		"value": true
+//	}
+//
+// ```
+// Then besides that the default served value is set to `true`, all the Percentage Rules are deleted.
+// So we get a response like this:
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [],
+//		"rolloutRules": [],
+//		"value": true
+//	}
+//
+// ```
 func (s *SDK) ReplaceSettingValueBySdkkey(ctx context.Context, request operations.ReplaceSettingValueBySdkkeyRequest) (*operations.ReplaceSettingValueBySdkkeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/settings/{settingKeyOrId}/value", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2173,7 +2428,7 @@ func (s *SDK) ReplaceSettingValueBySdkkey(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2214,8 +2469,10 @@ func (s *SDK) ReplaceSettingValueBySdkkey(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateConfig - Update Config
+// This endpoint updates a Config identified by the `configId` parameter.
 func (s *SDK) UpdateConfig(ctx context.Context, request operations.UpdateConfigRequest) (*operations.UpdateConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/configs/{configId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2233,7 +2490,7 @@ func (s *SDK) UpdateConfig(ctx context.Context, request operations.UpdateConfigR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2274,8 +2531,10 @@ func (s *SDK) UpdateConfig(ctx context.Context, request operations.UpdateConfigR
 	return res, nil
 }
 
+// UpdateEnvironment - Update Environment
+// This endpoint updates an Environment identified by the `environmentId` parameter.
 func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEnvironmentRequest) (*operations.UpdateEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2293,7 +2552,7 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2334,8 +2593,10 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 	return res, nil
 }
 
+// UpdatePermissionGroup - Update Permission Group
+// This endpoint updates a Permission Group identified by the `permissionGroupId` parameter.
 func (s *SDK) UpdatePermissionGroup(ctx context.Context, request operations.UpdatePermissionGroupRequest) (*operations.UpdatePermissionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/permissions/{permissionGroupId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2353,7 +2614,7 @@ func (s *SDK) UpdatePermissionGroup(ctx context.Context, request operations.Upda
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,8 +2655,10 @@ func (s *SDK) UpdatePermissionGroup(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateProduct - Update Product
+// This endpoint updates a Product identified by the `productId` parameter.
 func (s *SDK) UpdateProduct(ctx context.Context, request operations.UpdateProductRequest) (*operations.UpdateProductResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{productId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2413,7 +2676,7 @@ func (s *SDK) UpdateProduct(ctx context.Context, request operations.UpdateProduc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2454,8 +2717,79 @@ func (s *SDK) UpdateProduct(ctx context.Context, request operations.UpdateProduc
 	return res, nil
 }
 
+// UpdateSetting - Update Flag
+// This endpoint updates the metadata of a Feature Flag or Setting
+// with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Config.
+//
+// Only the `name`, `hint` and `tags` attributes are modifiable by this endpoint.
+// The `tags` attribute is a simple collection of the [tag IDs](#operation/get-tags) attached to the given setting.
+//
+// The advantage of using JSON Patch is that you can describe individual update operations on a resource
+// without touching attributes that you don't want to change.
+//
+// For example: We have the following resource.
+// ```
+//
+//	{
+//		"settingId": 5345,
+//		"key": "myGrandFeature",
+//		"name": "Tihs is a naem with soem typos.",
+//		"hint": "This flag controls my grandioso feature.",
+//		"settingType": "boolean",
+//		"tags": [
+//			{
+//				"tagId": 0,
+//				"name": "sample tag",
+//				"color": "whale"
+//			}
+//		]
+//	}
+//
+// ```
+// If we send an update request body as below (it changes the name and adds the already existing tag with the id 2):
+// ```
+// [
+//
+//	{
+//		"op": "replace",
+//		"path": "/name",
+//		"value": "This is the name without typos."
+//	},
+//	{
+//		"op": "add",
+//		"path": "/tags/-",
+//		"value": 2
+//	}
+//
+// ]
+// ```
+// Only the `name` and `tags` are going to be updated and all the other attributes are remaining unchanged.
+// So we get a response like this:
+// ```
+//
+//	{
+//		"settingId": 5345,
+//		"key": "myGrandFeature",
+//		"name": "This is the name without typos.",
+//		"hint": "This flag controls my grandioso feature.",
+//		"settingType": "boolean",
+//		"tags": [
+//			{
+//				"tagId": 0,
+//				"name": "sample tag",
+//				"color": "whale"
+//			},
+//			{
+//				"tagId": 2,
+//				"name": "another tag",
+//				"color": "koala"
+//			}
+//		]
+//	}
+//
+// ```
 func (s *SDK) UpdateSetting(ctx context.Context, request operations.UpdateSettingRequest) (*operations.UpdateSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/settings/{settingId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2473,7 +2807,7 @@ func (s *SDK) UpdateSetting(ctx context.Context, request operations.UpdateSettin
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2514,8 +2848,69 @@ func (s *SDK) UpdateSetting(ctx context.Context, request operations.UpdateSettin
 	return res, nil
 }
 
+// UpdateSettingValue - Update value
+// This endpoint updates the value of a Feature Flag or Setting
+// with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment.
+//
+// Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+//
+// The advantage of using JSON Patch is that you can describe individual update operations on a resource
+// without touching attributes that you don't want to change. It supports collection reordering, so it also
+// can be used for reordering the targeting rules of a Feature Flag or Setting.
+//
+// For example: We have the following resource.
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [
+//			{
+//				"percentage": 30,
+//				"value": true
+//			},
+//			{
+//				"percentage": 70,
+//				"value": false
+//			}
+//		],
+//		"rolloutRules": [],
+//		"value": false
+//	}
+//
+// ```
+// If we send an update request body as below:
+// ```
+// [
+//
+//	{
+//		"op": "replace",
+//		"path": "/value",
+//		"value": true
+//	}
+//
+// ]
+// ```
+// Only the default value is going to be set to `true` and all the Percentage Rules are remaining unchanged.
+// So we get a response like this:
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [
+//			{
+//				"percentage": 30,
+//				"value": true
+//			},
+//			{
+//				"percentage": 70,
+//				"value": false
+//			}
+//		],
+//		"rolloutRules": [],
+//		"value": true
+//	}
+//
+// ```
 func (s *SDK) UpdateSettingValue(ctx context.Context, request operations.UpdateSettingValueRequest) (*operations.UpdateSettingValueResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/environments/{environmentId}/settings/{settingId}/value", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2535,7 +2930,7 @@ func (s *SDK) UpdateSettingValue(ctx context.Context, request operations.UpdateS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2577,8 +2972,70 @@ func (s *SDK) UpdateSettingValue(ctx context.Context, request operations.UpdateS
 	return res, nil
 }
 
+// UpdateSettingValueBySdkkey - Update value
+// This endpoint updates the value of a Feature Flag or Setting
+// with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment
+// identified by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+//
+// Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+//
+// The advantage of using JSON Patch is that you can describe individual update operations on a resource
+// without touching attributes that you don't want to change. It supports collection reordering, so it also
+// can be used for reordering the targeting rules of a Feature Flag or Setting.
+//
+// For example: We have the following resource.
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [
+//			{
+//				"percentage": 30,
+//				"value": true
+//			},
+//			{
+//				"percentage": 70,
+//				"value": false
+//			}
+//		],
+//		"rolloutRules": [],
+//		"value": false
+//	}
+//
+// ```
+// If we send an update request body as below:
+// ```
+// [
+//
+//	{
+//		"op": "replace",
+//		"path": "/value",
+//		"value": true
+//	}
+//
+// ]
+// ```
+// Only the default served value is going to be set to `true` and all the Percentage Rules are remaining unchanged.
+// So we get a response like this:
+// ```
+//
+//	{
+//		"rolloutPercentageItems": [
+//			{
+//				"percentage": 30,
+//				"value": true
+//			},
+//			{
+//				"percentage": 70,
+//				"value": false
+//			}
+//		],
+//		"rolloutRules": [],
+//		"value": true
+//	}
+//
+// ```
 func (s *SDK) UpdateSettingValueBySdkkey(ctx context.Context, request operations.UpdateSettingValueBySdkkeyRequest) (*operations.UpdateSettingValueBySdkkeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/settings/{settingKeyOrId}/value", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2600,7 +3057,7 @@ func (s *SDK) UpdateSettingValueBySdkkey(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2642,8 +3099,10 @@ func (s *SDK) UpdateSettingValueBySdkkey(ctx context.Context, request operations
 	return res, nil
 }
 
+// UpdateTag - Update Tag
+// This endpoint updates a Tag identified by the `tagId` parameter.
 func (s *SDK) UpdateTag(ctx context.Context, request operations.UpdateTagRequest) (*operations.UpdateTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/tags/{tagId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2661,7 +3120,7 @@ func (s *SDK) UpdateTag(ctx context.Context, request operations.UpdateTagRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

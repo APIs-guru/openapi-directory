@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAdministrationEntityHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class PostAdministrationEntityRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   newEntityRequest?: shared.NewEntityRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   newEntityRequest1?: shared.NewEntityRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   newEntityRequest2?: shared.NewEntityRequest;
 }
 
 
 export class PostAdministrationEntityRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostAdministrationEntityHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostAdministrationEntityRequests;
 }
 
 
 export class PostAdministrationEntityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAdministrationEntity200ApplicationJsonUuidString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAdministrationEntity200TextJsonUuidString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAdministrationEntity200TextPlainUuidString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

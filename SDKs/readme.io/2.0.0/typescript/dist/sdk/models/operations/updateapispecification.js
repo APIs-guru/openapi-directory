@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateApiSpecificationPathParams = /** @class */ (function (_super) {
     __extends(UpdateApiSpecificationPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateApiSpecificationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], UpdateApiSpecificationPathParams.prototype, "id", void 0);
     return UpdateApiSpecificationPathParams;
@@ -42,11 +42,11 @@ var UpdateApiSpecificationRequestBodySpec = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], UpdateApiSpecificationRequestBodySpec.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=spec" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=spec" }),
         __metadata("design:type", String)
     ], UpdateApiSpecificationRequestBodySpec.prototype, "spec", void 0);
     return UpdateApiSpecificationRequestBodySpec;
@@ -58,7 +58,7 @@ var UpdateApiSpecificationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", UpdateApiSpecificationRequestBodySpec)
     ], UpdateApiSpecificationRequestBody.prototype, "spec", void 0);
     return UpdateApiSpecificationRequestBody;
@@ -70,7 +70,7 @@ var UpdateApiSpecificationSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], UpdateApiSpecificationSecurity.prototype, "apiKey", void 0);
     return UpdateApiSpecificationSecurity;
@@ -82,15 +82,15 @@ var UpdateApiSpecificationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateApiSpecificationPathParams)
     ], UpdateApiSpecificationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", UpdateApiSpecificationRequestBody)
     ], UpdateApiSpecificationRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateApiSpecificationSecurity)
     ], UpdateApiSpecificationRequest.prototype, "security", void 0);
     return UpdateApiSpecificationRequest;
@@ -102,11 +102,11 @@ var UpdateApiSpecificationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateApiSpecificationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateApiSpecificationResponse.prototype, "statusCode", void 0);
     return UpdateApiSpecificationResponse;

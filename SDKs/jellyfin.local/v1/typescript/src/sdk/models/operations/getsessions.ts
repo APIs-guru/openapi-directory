@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSessionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=activeWithinSeconds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=activeWithinSeconds" })
   activeWithinSeconds?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=controllableByUserId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=controllableByUserId" })
   controllableByUserId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
   deviceId?: string;
 }
 
 
 export class GetSessionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetSessionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSessionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSessionsSecurity;
 }
 
 
 export class GetSessionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.SessionInfo })
+  @SpeakeasyMetadata({ elemType: shared.SessionInfo })
   sessionInfos?: shared.SessionInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

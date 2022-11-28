@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AppFlowConfig } from "./appflowconfig";
 import { CloudWatchConfig } from "./cloudwatchconfig";
 import { RdsSourceConfig } from "./rdssourceconfig";

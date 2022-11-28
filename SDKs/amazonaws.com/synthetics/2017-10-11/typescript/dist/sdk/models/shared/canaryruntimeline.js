@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CanaryRunTimeline
 /**
  * This structure contains the start and end times of a single canary run.
@@ -33,11 +33,11 @@ var CanaryRunTimeline = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Completed" }),
+        SpeakeasyMetadata({ data: "json, name=Completed" }),
         __metadata("design:type", Date)
     ], CanaryRunTimeline.prototype, "completed", void 0);
     __decorate([
-        Metadata({ data: "json, name=Started" }),
+        SpeakeasyMetadata({ data: "json, name=Started" }),
         __metadata("design:type", Date)
     ], CanaryRunTimeline.prototype, "started", void 0);
     return CanaryRunTimeline;

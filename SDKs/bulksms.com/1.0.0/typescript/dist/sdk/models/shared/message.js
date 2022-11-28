@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MessageEncodingEnum;
 (function (MessageEncodingEnum) {
     MessageEncodingEnum["Text"] = "TEXT";
@@ -55,15 +55,15 @@ var MessageStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], MessageStatus.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=subtype" }),
+        SpeakeasyMetadata({ data: "json, name=subtype" }),
         __metadata("design:type", String)
     ], MessageStatus.prototype, "subtype", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], MessageStatus.prototype, "type", void 0);
     return MessageStatus;
@@ -80,11 +80,11 @@ var MessageSubmission = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=date" }),
+        SpeakeasyMetadata({ data: "json, name=date" }),
         __metadata("design:type", Date)
     ], MessageSubmission.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], MessageSubmission.prototype, "id", void 0);
     return MessageSubmission;
@@ -101,59 +101,59 @@ var Message = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", Object)
     ], Message.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=creditCost" }),
+        SpeakeasyMetadata({ data: "json, name=creditCost" }),
         __metadata("design:type", Number)
     ], Message.prototype, "creditCost", void 0);
     __decorate([
-        Metadata({ data: "json, name=encoding" }),
+        SpeakeasyMetadata({ data: "json, name=encoding" }),
         __metadata("design:type", String)
     ], Message.prototype, "encoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", String)
     ], Message.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Message.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageClass" }),
+        SpeakeasyMetadata({ data: "json, name=messageClass" }),
         __metadata("design:type", Number)
     ], Message.prototype, "messageClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=numberOfParts" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfParts" }),
         __metadata("design:type", Number)
     ], Message.prototype, "numberOfParts", void 0);
     __decorate([
-        Metadata({ data: "json, name=protocolId" }),
+        SpeakeasyMetadata({ data: "json, name=protocolId" }),
         __metadata("design:type", Number)
     ], Message.prototype, "protocolId", void 0);
     __decorate([
-        Metadata({ data: "json, name=relatedSentMessageId" }),
+        SpeakeasyMetadata({ data: "json, name=relatedSentMessageId" }),
         __metadata("design:type", String)
     ], Message.prototype, "relatedSentMessageId", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", MessageStatus)
     ], Message.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=submission" }),
+        SpeakeasyMetadata({ data: "json, name=submission" }),
         __metadata("design:type", MessageSubmission)
     ], Message.prototype, "submission", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", String)
     ], Message.prototype, "to", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Message.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=userSuppliedId" }),
+        SpeakeasyMetadata({ data: "json, name=userSuppliedId" }),
         __metadata("design:type", String)
     ], Message.prototype, "userSuppliedId", void 0);
     return Message;

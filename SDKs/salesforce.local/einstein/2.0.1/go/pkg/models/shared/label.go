@@ -1,5 +1,7 @@
 package shared
 
+// Label
+// Contains information about the label with which the example is associated.
 type Label struct {
 	DatasetID   int64  `json:"datasetId"`
 	ID          *int64 `json:"id,omitempty"`

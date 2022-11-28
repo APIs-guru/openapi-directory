@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetFlightOffersTravelClassEnum;
 (function (GetFlightOffersTravelClassEnum) {
     GetFlightOffersTravelClassEnum["Economy"] = "ECONOMY";
@@ -36,59 +36,59 @@ var GetFlightOffersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=adults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=adults" }),
         __metadata("design:type", Number)
     ], GetFlightOffersQueryParams.prototype, "adults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=children" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=children" }),
         __metadata("design:type", Number)
     ], GetFlightOffersQueryParams.prototype, "children", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currencyCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currencyCode" }),
         __metadata("design:type", String)
     ], GetFlightOffersQueryParams.prototype, "currencyCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=departureDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=departureDate" }),
         __metadata("design:type", Date)
     ], GetFlightOffersQueryParams.prototype, "departureDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=destinationLocationCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destinationLocationCode" }),
         __metadata("design:type", String)
     ], GetFlightOffersQueryParams.prototype, "destinationLocationCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=excludedAirlineCodes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=excludedAirlineCodes" }),
         __metadata("design:type", String)
     ], GetFlightOffersQueryParams.prototype, "excludedAirlineCodes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=includedAirlineCodes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=includedAirlineCodes" }),
         __metadata("design:type", String)
     ], GetFlightOffersQueryParams.prototype, "includedAirlineCodes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=infants" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=infants" }),
         __metadata("design:type", Number)
     ], GetFlightOffersQueryParams.prototype, "infants", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], GetFlightOffersQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxPrice" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxPrice" }),
         __metadata("design:type", Number)
     ], GetFlightOffersQueryParams.prototype, "maxPrice", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nonStop" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nonStop" }),
         __metadata("design:type", Boolean)
     ], GetFlightOffersQueryParams.prototype, "nonStop", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=originLocationCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=originLocationCode" }),
         __metadata("design:type", String)
     ], GetFlightOffersQueryParams.prototype, "originLocationCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=returnDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=returnDate" }),
         __metadata("design:type", Date)
     ], GetFlightOffersQueryParams.prototype, "returnDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travelClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelClass" }),
         __metadata("design:type", String)
     ], GetFlightOffersQueryParams.prototype, "travelClass", void 0);
     return GetFlightOffersQueryParams;
@@ -100,7 +100,7 @@ var GetFlightOffersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFlightOffersQueryParams)
     ], GetFlightOffersRequest.prototype, "queryParams", void 0);
     return GetFlightOffersRequest;
@@ -112,23 +112,23 @@ var GetFlightOffersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFlightOffersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetFlightOffersResponse.prototype, "error400", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetFlightOffersResponse.prototype, "error500", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFlightOffersResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetFlightOffersResponse.prototype, "success", void 0);
     return GetFlightOffersResponse;

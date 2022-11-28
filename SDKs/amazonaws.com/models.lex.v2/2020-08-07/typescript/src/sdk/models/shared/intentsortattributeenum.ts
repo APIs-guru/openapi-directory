@@ -1,6 +1,7 @@
 
 
+
 export enum IntentSortAttributeEnum {
-    IntentName = "IntentName"
-,    LastUpdatedDateTime = "LastUpdatedDateTime"
+    IntentName = "IntentName",
+    LastUpdatedDateTime = "LastUpdatedDateTime"
 }

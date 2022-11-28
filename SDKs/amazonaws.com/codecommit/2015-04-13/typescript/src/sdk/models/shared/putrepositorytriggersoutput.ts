@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PutRepositoryTriggersOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a put repository triggers operation.
 **/
 export class PutRepositoryTriggersOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationId" })
+  @SpeakeasyMetadata({ data: "json, name=configurationId" })
   configurationId?: string;
 }

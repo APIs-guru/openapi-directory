@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VochseRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(VochseRequestBodyCertificateParameters, _super);
@@ -30,23 +30,23 @@ var VochseRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], VochseRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], VochseRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Regno" }),
+        SpeakeasyMetadata({ data: "json, name=Regno" }),
         __metadata("design:type", String)
     ], VochseRequestBodyCertificateParameters.prototype, "regno", void 0);
     __decorate([
-        Metadata({ data: "json, name=Year" }),
+        SpeakeasyMetadata({ data: "json, name=Year" }),
         __metadata("design:type", String)
     ], VochseRequestBodyCertificateParameters.prototype, "year", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], VochseRequestBodyCertificateParameters.prototype, "type", void 0);
     return VochseRequestBodyCertificateParameters;
@@ -62,19 +62,19 @@ var VochseRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", VochseRequestBodyCertificateParameters)
     ], VochseRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], VochseRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], VochseRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], VochseRequestBody.prototype, "txnId", void 0);
     return VochseRequestBody;
@@ -86,32 +86,16 @@ var VochseSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], VochseSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], VochseSecurity.prototype, "clientId", void 0);
     return VochseSecurity;
 }(SpeakeasyBase));
 export { VochseSecurity };
-var VochseRequest = /** @class */ (function (_super) {
-    __extends(VochseRequest, _super);
-    function VochseRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", VochseRequestBody)
-    ], VochseRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", VochseSecurity)
-    ], VochseRequest.prototype, "security", void 0);
-    return VochseRequest;
-}(SpeakeasyBase));
-export { VochseRequest };
 export var Vochse400ApplicationJsonErrorEnum;
 (function (Vochse400ApplicationJsonErrorEnum) {
     Vochse400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -134,11 +118,11 @@ var Vochse400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vochse400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vochse400ApplicationJson.prototype, "errorDescription", void 0);
     return Vochse400ApplicationJson;
@@ -160,11 +144,11 @@ var Vochse401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vochse401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vochse401ApplicationJson.prototype, "errorDescription", void 0);
     return Vochse401ApplicationJson;
@@ -186,11 +170,11 @@ var Vochse404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vochse404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vochse404ApplicationJson.prototype, "errorDescription", void 0);
     return Vochse404ApplicationJson;
@@ -210,11 +194,11 @@ var Vochse500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vochse500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vochse500ApplicationJson.prototype, "errorDescription", void 0);
     return Vochse500ApplicationJson;
@@ -234,11 +218,11 @@ var Vochse502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vochse502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vochse502ApplicationJson.prototype, "errorDescription", void 0);
     return Vochse502ApplicationJson;
@@ -258,11 +242,11 @@ var Vochse503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vochse503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vochse503ApplicationJson.prototype, "errorDescription", void 0);
     return Vochse503ApplicationJson;
@@ -282,55 +266,71 @@ var Vochse504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vochse504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vochse504ApplicationJson.prototype, "errorDescription", void 0);
     return Vochse504ApplicationJson;
 }(SpeakeasyBase));
 export { Vochse504ApplicationJson };
+var VochseRequest = /** @class */ (function (_super) {
+    __extends(VochseRequest, _super);
+    function VochseRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", VochseRequestBody)
+    ], VochseRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", VochseSecurity)
+    ], VochseRequest.prototype, "security", void 0);
+    return VochseRequest;
+}(SpeakeasyBase));
+export { VochseRequest };
 var VochseResponse = /** @class */ (function (_super) {
     __extends(VochseResponse, _super);
     function VochseResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VochseResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VochseResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vochse400ApplicationJson)
     ], VochseResponse.prototype, "vochse400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vochse401ApplicationJson)
     ], VochseResponse.prototype, "vochse401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vochse404ApplicationJson)
     ], VochseResponse.prototype, "vochse404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vochse500ApplicationJson)
     ], VochseResponse.prototype, "vochse500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vochse502ApplicationJson)
     ], VochseResponse.prototype, "vochse502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vochse503ApplicationJson)
     ], VochseResponse.prototype, "vochse503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vochse504ApplicationJson)
     ], VochseResponse.prototype, "vochse504ApplicationJsonObject", void 0);
     return VochseResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaDataStreamWebStreamData
@@ -6,12 +7,22 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Data specific to web streams.
 **/
 export class GoogleAnalyticsAdminV1alphaDataStreamWebStreamData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultUri" })
+  @SpeakeasyMetadata({ data: "json, name=defaultUri" })
   defaultUri?: string;
 
-  @Metadata({ data: "json, name=firebaseAppId" })
+  @SpeakeasyMetadata({ data: "json, name=firebaseAppId" })
   firebaseAppId?: string;
 
-  @Metadata({ data: "json, name=measurementId" })
+  @SpeakeasyMetadata({ data: "json, name=measurementId" })
   measurementId?: string;
+}
+
+
+// GoogleAnalyticsAdminV1alphaDataStreamWebStreamDataInput
+/** 
+ * Data specific to web streams.
+**/
+export class GoogleAnalyticsAdminV1alphaDataStreamWebStreamDataInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=defaultUri" })
+  defaultUri?: string;
 }

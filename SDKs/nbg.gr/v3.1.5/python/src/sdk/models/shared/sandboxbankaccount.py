@@ -1,23 +1,22 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import sandboxbeneficiary
-from . import sandboxbankaccountinfo
-from . import sandboxparty
-from . import sandboxscheduledpayment
-from . import sandboxstandingorder
-from . import sandboxstatement
-from . import sandboxtransaction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SandboxBankAccount:
-    beneficiaries: Optional[List[sandboxbeneficiary.SandboxBeneficiary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'beneficiaries' }})
-    info: Optional[sandboxbankaccountinfo.SandboxBankAccountInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'info' }})
-    party: Optional[sandboxparty.SandboxParty] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'party' }})
-    scheduled_payments: Optional[List[sandboxscheduledpayment.SandboxScheduledPayment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduledPayments' }})
-    standing_orders: Optional[List[sandboxstandingorder.SandboxStandingOrder]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'standingOrders' }})
-    statements: Optional[List[sandboxstatement.SandboxStatement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statements' }})
-    transactions: Optional[List[sandboxtransaction.SandboxTransaction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactions' }})
+    r"""SandboxBankAccount
+    Sandbox bank account
+    """
+    
+    beneficiaries: Optional[List[SandboxBeneficiary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('beneficiaries') }})
+    info: Optional[SandboxBankAccountInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('info') }})
+    party: Optional[SandboxParty] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('party') }})
+    scheduled_payments: Optional[List[SandboxScheduledPayment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduledPayments') }})
+    standing_orders: Optional[List[SandboxStandingOrder]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('standingOrders') }})
+    statements: Optional[List[SandboxStatement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statements') }})
+    transactions: Optional[List[SandboxTransaction]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactions') }})
     

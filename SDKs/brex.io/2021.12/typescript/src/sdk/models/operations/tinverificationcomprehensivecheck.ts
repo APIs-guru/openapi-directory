@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TinVerificationComprehensiveCheckQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=threshold" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=threshold" })
   threshold?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tin" })
   tin: string;
 }
 
 
 export class TinVerificationComprehensiveCheckSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class TinVerificationComprehensiveCheckRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TinVerificationComprehensiveCheckQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: TinVerificationComprehensiveCheckSecurity;
 }
 
 
 export class TinVerificationComprehensiveCheckResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tinVerificationComprehensiveCheck200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tinVerificationComprehensiveCheckDefaultApplicationJsonAny?: any;
 }

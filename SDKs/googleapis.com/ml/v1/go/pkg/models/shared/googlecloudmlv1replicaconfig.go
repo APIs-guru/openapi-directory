@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudMlV1ReplicaConfig
+// Represents the configuration for a replica in a cluster.
 type GoogleCloudMlV1ReplicaConfig struct {
 	AcceleratorConfig *GoogleCloudMlV1AcceleratorConfig `json:"acceleratorConfig,omitempty"`
 	ContainerArgs     []string                          `json:"containerArgs,omitempty"`

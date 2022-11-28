@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import createdartifact
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AssociateCreatedArtifactRequest:
-    created_artifact: createdartifact.CreatedArtifact = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreatedArtifact' }})
-    dry_run: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DryRun' }})
-    migration_task_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MigrationTaskName' }})
-    progress_update_stream: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProgressUpdateStream' }})
+    created_artifact: CreatedArtifact = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreatedArtifact') }})
+    migration_task_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MigrationTaskName') }})
+    progress_update_stream: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProgressUpdateStream') }})
+    dry_run: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DryRun') }})
     

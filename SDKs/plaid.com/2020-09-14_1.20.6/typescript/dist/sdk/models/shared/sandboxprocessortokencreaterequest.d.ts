@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SandboxProcessorTokenCreateRequestOptions } from "./sandboxprocessortokencreaterequestoptions";
 export declare class SandboxProcessorTokenCreateRequest extends SpeakeasyBase {
     clientId?: string;

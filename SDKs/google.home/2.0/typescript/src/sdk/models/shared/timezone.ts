@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Timezone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display_string" })
+  @SpeakeasyMetadata({ data: "json, name=display_string" })
   displayString: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset: number;
 }

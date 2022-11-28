@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FieldStats
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The statistics for a field calculated in the request.
 **/
 export class FieldStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max?: string;
 
-  @Metadata({ data: "json, name=mean" })
+  @SpeakeasyMetadata({ data: "json, name=mean" })
   mean?: string;
 
-  @Metadata({ data: "json, name=min" })
+  @SpeakeasyMetadata({ data: "json, name=min" })
   min?: string;
 
-  @Metadata({ data: "json, name=missing" })
+  @SpeakeasyMetadata({ data: "json, name=missing" })
   missing?: number;
 
-  @Metadata({ data: "json, name=stddev" })
+  @SpeakeasyMetadata({ data: "json, name=stddev" })
   stddev?: number;
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum?: number;
 
-  @Metadata({ data: "json, name=sumOfSquares" })
+  @SpeakeasyMetadata({ data: "json, name=sumOfSquares" })
   sumOfSquares?: number;
 }

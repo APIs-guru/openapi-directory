@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TopModelEntry } from "./topmodelentry";
 export declare class TopModelResp extends SpeakeasyBase {
     brandName?: string;

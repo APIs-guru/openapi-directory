@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkebackupProjectsLocationsDeleteOperationsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class GkebackupProjectsLocationsDeleteOperationsQueryParams:
 
 @dataclass
 class GkebackupProjectsLocationsDeleteOperationsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkebackupProjectsLocationsDeleteOperationsRequest:
-    path_params: GkebackupProjectsLocationsDeleteOperationsPathParams = field(default=None)
-    query_params: GkebackupProjectsLocationsDeleteOperationsQueryParams = field(default=None)
-    security: GkebackupProjectsLocationsDeleteOperationsSecurity = field(default=None)
+    path_params: GkebackupProjectsLocationsDeleteOperationsPathParams = field()
+    query_params: GkebackupProjectsLocationsDeleteOperationsQueryParams = field()
+    security: GkebackupProjectsLocationsDeleteOperationsSecurity = field()
     
 
 @dataclass
 class GkebackupProjectsLocationsDeleteOperationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

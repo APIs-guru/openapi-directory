@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum PutRegistryPolicyXAmzTargetEnum {
     AmazonEc2ContainerRegistryV20150921PutRegistryPolicy = "AmazonEC2ContainerRegistry_V20150921.PutRegistryPolicy"

@@ -1,100 +1,101 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateMockPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mock_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mock_uid" })
   mockUid: string;
 }
 
 
 export class UpdateMockRequestBodyMock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=private" })
+  @SpeakeasyMetadata({ data: "json, name=private" })
   private?: boolean;
 
-  @Metadata({ data: "json, name=versionTag" })
+  @SpeakeasyMetadata({ data: "json, name=versionTag" })
   versionTag?: string;
 }
 
 
 export class UpdateMockRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: UpdateMockRequestBodyMock;
 }
 
 
-export class UpdateMockRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateMockPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: UpdateMockRequestBody;
-}
-
-
 export class UpdateMock200ApplicationJsonMockConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: any[];
 
-  @Metadata({ data: "json, name=matchBody" })
+  @SpeakeasyMetadata({ data: "json, name=matchBody" })
   matchBody?: boolean;
 
-  @Metadata({ data: "json, name=matchQueryParams" })
+  @SpeakeasyMetadata({ data: "json, name=matchQueryParams" })
   matchQueryParams?: boolean;
 
-  @Metadata({ data: "json, name=matchWildcards" })
+  @SpeakeasyMetadata({ data: "json, name=matchWildcards" })
   matchWildcards?: boolean;
 }
 
 
 export class UpdateMock200ApplicationJsonMock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: UpdateMock200ApplicationJsonMockConfig;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=mockUrl" })
+  @SpeakeasyMetadata({ data: "json, name=mockUrl" })
   mockUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class UpdateMock200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: UpdateMock200ApplicationJsonMock;
 }
 
 
+export class UpdateMockRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateMockPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: UpdateMockRequestBody;
+}
+
+
 export class UpdateMockResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateMock200ApplicationJsonObject?: UpdateMock200ApplicationJson;
 }

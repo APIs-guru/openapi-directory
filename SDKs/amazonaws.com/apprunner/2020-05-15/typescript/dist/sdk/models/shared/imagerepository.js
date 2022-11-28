@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageConfiguration } from "./imageconfiguration";
 import { ImageRepositoryTypeEnum } from "./imagerepositorytypeenum";
 // ImageRepository
@@ -35,15 +35,15 @@ var ImageRepository = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ImageConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=ImageConfiguration" }),
         __metadata("design:type", ImageConfiguration)
     ], ImageRepository.prototype, "imageConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ImageIdentifier" }),
         __metadata("design:type", String)
     ], ImageRepository.prototype, "imageIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageRepositoryType" }),
+        SpeakeasyMetadata({ data: "json, name=ImageRepositoryType" }),
         __metadata("design:type", String)
     ], ImageRepository.prototype, "imageRepositoryType", void 0);
     return ImageRepository;

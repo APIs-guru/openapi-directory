@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
+
 
 
 // PartitionError
@@ -7,9 +8,9 @@ import { ErrorDetail } from "./errordetail";
  * Contains information about a partition error.
 **/
 export class PartitionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorDetail" })
   errorDetail?: ErrorDetail;
 
-  @Metadata({ data: "json, name=PartitionValues" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionValues" })
   partitionValues?: string[];
 }

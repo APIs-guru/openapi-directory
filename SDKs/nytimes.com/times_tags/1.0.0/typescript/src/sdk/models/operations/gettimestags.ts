@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetTimestagsFilterEnum {
-    Des = "Des"
-,    Geo = "Geo"
-,    Org = "Org"
-,    Per = "Per"
+    Des = "Des",
+    Geo = "Geo",
+    Org = "Org",
+    Per = "Per"
 }
 
 
 export class GetTimestagsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetTimestagsFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 }
 
 
 export class GetTimestagsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTimestagsQueryParams;
 }
 
 
 export class GetTimestagsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTimestags200ApplicationJsonArrays?: string[][];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetVersionSecurity:
-    access_token: shared.SchemeAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    access_token: shared.SchemeAccessToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetVersionRequest:
-    security: GetVersionSecurity = field(default=None)
+    security: GetVersionSecurity = field()
     
 
 @dataclass
 class GetVersionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     version: Optional[shared.Version] = field(default=None)
     

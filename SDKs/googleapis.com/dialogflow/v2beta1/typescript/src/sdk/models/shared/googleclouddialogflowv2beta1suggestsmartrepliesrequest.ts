@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1TextInput } from "./googleclouddialogflowv2beta1textinput";
+
 
 
 // GoogleCloudDialogflowV2beta1SuggestSmartRepliesRequest
@@ -7,12 +8,12 @@ import { GoogleCloudDialogflowV2beta1TextInput } from "./googleclouddialogflowv2
  * The request message for Participants.SuggestSmartReplies.
 **/
 export class GoogleCloudDialogflowV2beta1SuggestSmartRepliesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contextSize" })
+  @SpeakeasyMetadata({ data: "json, name=contextSize" })
   contextSize?: number;
 
-  @Metadata({ data: "json, name=currentTextInput" })
+  @SpeakeasyMetadata({ data: "json, name=currentTextInput" })
   currentTextInput?: GoogleCloudDialogflowV2beta1TextInput;
 
-  @Metadata({ data: "json, name=latestMessage" })
+  @SpeakeasyMetadata({ data: "json, name=latestMessage" })
   latestMessage?: string;
 }

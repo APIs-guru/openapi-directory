@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAdsPathParams:
-    campaign_id: str = field(default=None, metadata={'path_param': { 'field_name': 'campaign_id', 'style': 'simple', 'explode': False }})
+    campaign_id: str = field(metadata={'path_param': { 'field_name': 'campaign_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,19 +17,19 @@ class GetAdsQueryParams:
 
 @dataclass
 class GetAdsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAdsRequest:
-    path_params: GetAdsPathParams = field(default=None)
-    query_params: GetAdsQueryParams = field(default=None)
-    security: GetAdsSecurity = field(default=None)
+    path_params: GetAdsPathParams = field()
+    query_params: GetAdsQueryParams = field()
+    security: GetAdsSecurity = field()
     
 
 @dataclass
 class GetAdsResponse:
+    content_type: str = field()
+    status_code: int = field()
     ad_paged_collection: Optional[shared.AdPagedCollection] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

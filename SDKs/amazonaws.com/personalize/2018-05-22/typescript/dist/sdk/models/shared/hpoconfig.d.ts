@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HyperParameterRanges } from "./hyperparameterranges";
 import { HpoObjective } from "./hpoobjective";
 import { HpoResourceConfig } from "./hporesourceconfig";

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudvideointelligencev1beta2_videocontext
+from sdk import utils
+from . import *
 
 class GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum(str, Enum):
     FEATURE_UNSPECIFIED = "FEATURE_UNSPECIFIED"
@@ -19,10 +21,14 @@ class GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum(str, E
 @dataclass_json
 @dataclass
 class GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest:
-    features: Optional[List[GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'features' }})
-    input_content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputContent' }})
-    input_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputUri' }})
-    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationId' }})
-    output_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputUri' }})
-    video_context: Optional[googlecloudvideointelligencev1beta2_videocontext.GoogleCloudVideointelligenceV1beta2VideoContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoContext' }})
+    r"""GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest
+    Video annotation request.
+    """
+    
+    features: Optional[List[GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('features') }})
+    input_content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputContent') }})
+    input_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputUri') }})
+    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationId') }})
+    output_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputUri') }})
+    video_context: Optional[GoogleCloudVideointelligenceV1beta2VideoContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoContext') }})
     

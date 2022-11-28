@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiPhoneGenerateQueryParams = /** @class */ (function (_super) {
     __extends(GetApiPhoneGenerateQueryParams, _super);
     function GetApiPhoneGenerateQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CountryCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CountryCode" }),
         __metadata("design:type", String)
     ], GetApiPhoneGenerateQueryParams.prototype, "countryCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Quantity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Quantity" }),
         __metadata("design:type", Number)
     ], GetApiPhoneGenerateQueryParams.prototype, "quantity", void 0);
     return GetApiPhoneGenerateQueryParams;
@@ -45,7 +45,7 @@ var GetApiPhoneGenerateHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiPhoneGenerateHeaders.prototype, "xApiKey", void 0);
     return GetApiPhoneGenerateHeaders;
@@ -57,11 +57,11 @@ var GetApiPhoneGenerateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiPhoneGenerateQueryParams)
     ], GetApiPhoneGenerateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiPhoneGenerateHeaders)
     ], GetApiPhoneGenerateRequest.prototype, "headers", void 0);
     return GetApiPhoneGenerateRequest;
@@ -73,11 +73,11 @@ var GetApiPhoneGenerateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiPhoneGenerateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiPhoneGenerateResponse.prototype, "statusCode", void 0);
     return GetApiPhoneGenerateResponse;

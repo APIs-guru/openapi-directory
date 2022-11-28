@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class VirtualizationClustersReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class VirtualizationClustersReadRequest:
-    path_params: VirtualizationClustersReadPathParams = field(default=None)
+    path_params: VirtualizationClustersReadPathParams = field()
     
 
 @dataclass
 class VirtualizationClustersReadResponse:
+    content_type: str = field()
+    status_code: int = field()
     cluster: Optional[shared.Cluster] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetargetingGetDatapointsCountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum RetargetingGetDatapointsCountStatusEnum {
-    Deleted = "deleted"
-,    Active = "active"
-,    Paused = "paused"
-,    Spam = "spam"
+    Deleted = "deleted",
+    Active = "active",
+    Paused = "paused",
+    Spam = "spam"
 }
 
 
 export class RetargetingGetDatapointsCountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
   createdAfter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
   createdBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=onlyFavorites" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onlyFavorites" })
   onlyFavorites?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: RetargetingGetDatapointsCountStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=textSearch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=textSearch" })
   textSearch?: string;
 }
 
 
 export class RetargetingGetDatapointsCountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RetargetingGetDatapointsCountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RetargetingGetDatapointsCountQueryParams;
 }
 
 
 export class RetargetingGetDatapointsCountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesCountResponce?: shared.ApiCoreResponsesCountResponce;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

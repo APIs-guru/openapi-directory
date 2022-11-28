@@ -1,5 +1,7 @@
 package shared
 
+// AppointmentPhoneNumber
+// Phone number information for scheduling an appointment.
 type AppointmentPhoneNumber struct {
 	Extension *string `json:"extension,omitempty"`
 	Label     *string `json:"label,omitempty"`

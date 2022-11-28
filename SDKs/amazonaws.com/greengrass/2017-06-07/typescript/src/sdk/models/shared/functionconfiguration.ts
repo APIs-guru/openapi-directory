@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncodingTypeEnum } from "./encodingtypeenum";
 import { FunctionConfigurationEnvironment } from "./functionconfigurationenvironment";
+
 
 
 // FunctionConfiguration
@@ -8,24 +9,24 @@ import { FunctionConfigurationEnvironment } from "./functionconfigurationenviron
  * The configuration of the Lambda function.
 **/
 export class FunctionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncodingType" })
+  @SpeakeasyMetadata({ data: "json, name=EncodingType" })
   encodingType?: EncodingTypeEnum;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: FunctionConfigurationEnvironment;
 
-  @Metadata({ data: "json, name=ExecArgs" })
+  @SpeakeasyMetadata({ data: "json, name=ExecArgs" })
   execArgs?: string;
 
-  @Metadata({ data: "json, name=Executable" })
+  @SpeakeasyMetadata({ data: "json, name=Executable" })
   executable?: string;
 
-  @Metadata({ data: "json, name=MemorySize" })
+  @SpeakeasyMetadata({ data: "json, name=MemorySize" })
   memorySize?: number;
 
-  @Metadata({ data: "json, name=Pinned" })
+  @SpeakeasyMetadata({ data: "json, name=Pinned" })
   pinned?: boolean;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 }

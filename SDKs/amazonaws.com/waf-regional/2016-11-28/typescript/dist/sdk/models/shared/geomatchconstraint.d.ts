@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GeoMatchConstraintTypeEnum } from "./geomatchconstrainttypeenum";
 import { GeoMatchConstraintValueEnum } from "./geomatchconstraintvalueenum";
 /**

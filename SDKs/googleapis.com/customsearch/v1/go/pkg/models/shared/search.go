@@ -1,5 +1,7 @@
 package shared
 
+// SearchQueriesNextPage
+// Custom search request metadata.
 type SearchQueriesNextPage struct {
 	Count                  *int32  `json:"count,omitempty"`
 	Cr                     *string `json:"cr,omitempty"`
@@ -39,6 +41,8 @@ type SearchQueriesNextPage struct {
 	TotalResults           *string `json:"totalResults,omitempty"`
 }
 
+// SearchQueriesPreviousPage
+// Custom search request metadata.
 type SearchQueriesPreviousPage struct {
 	Count                  *int32  `json:"count,omitempty"`
 	Cr                     *string `json:"cr,omitempty"`
@@ -78,6 +82,8 @@ type SearchQueriesPreviousPage struct {
 	TotalResults           *string `json:"totalResults,omitempty"`
 }
 
+// SearchQueriesRequest
+// Custom search request metadata.
 type SearchQueriesRequest struct {
 	Count                  *int32  `json:"count,omitempty"`
 	Cr                     *string `json:"cr,omitempty"`
@@ -117,12 +123,16 @@ type SearchQueriesRequest struct {
 	TotalResults           *string `json:"totalResults,omitempty"`
 }
 
+// SearchQueries
+// Query metadata for the previous, current, and next pages of results.
 type SearchQueries struct {
 	NextPage     []SearchQueriesNextPage     `json:"nextPage,omitempty"`
 	PreviousPage []SearchQueriesPreviousPage `json:"previousPage,omitempty"`
 	Request      []SearchQueriesRequest      `json:"request,omitempty"`
 }
 
+// SearchSearchInformation
+// Metadata about a search operation.
 type SearchSearchInformation struct {
 	FormattedSearchTime   *string  `json:"formattedSearchTime,omitempty"`
 	FormattedTotalResults *string  `json:"formattedTotalResults,omitempty"`
@@ -130,16 +140,22 @@ type SearchSearchInformation struct {
 	TotalResults          *string  `json:"totalResults,omitempty"`
 }
 
+// SearchSpelling
+// Spell correction information for a query.
 type SearchSpelling struct {
 	CorrectedQuery     *string `json:"correctedQuery,omitempty"`
 	HTMLCorrectedQuery *string `json:"htmlCorrectedQuery,omitempty"`
 }
 
+// SearchURL
+// OpenSearch template and URL.
 type SearchURL struct {
 	Template *string `json:"template,omitempty"`
 	Type     *string `json:"type,omitempty"`
 }
 
+// Search
+// Response to a custom search request.
 type Search struct {
 	Context           map[string]interface{}   `json:"context,omitempty"`
 	Items             []Result                 `json:"items,omitempty"`

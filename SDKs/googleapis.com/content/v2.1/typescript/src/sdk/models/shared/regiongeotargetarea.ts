@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegionGeoTargetArea
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of geotargets that defines the region area.
 **/
 export class RegionGeoTargetArea extends SpeakeasyBase {
-  @Metadata({ data: "json, name=geotargetCriteriaIds" })
+  @SpeakeasyMetadata({ data: "json, name=geotargetCriteriaIds" })
   geotargetCriteriaIds?: string[];
 }

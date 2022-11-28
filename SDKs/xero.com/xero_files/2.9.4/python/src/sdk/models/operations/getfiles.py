@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetFilesSortEnum(str, Enum):
@@ -17,24 +18,24 @@ class GetFilesQueryParams:
 
 @dataclass
 class GetFilesHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFilesSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetFilesRequest:
-    query_params: GetFilesQueryParams = field(default=None)
-    headers: GetFilesHeaders = field(default=None)
-    security: GetFilesSecurity = field(default=None)
+    headers: GetFilesHeaders = field()
+    query_params: GetFilesQueryParams = field()
+    security: GetFilesSecurity = field()
     
 
 @dataclass
 class GetFilesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     files: Optional[shared.Files] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowStatusEnum } from "./flowstatusenum";
 
 
+
 export class StartFlowResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionId" })
+  @SpeakeasyMetadata({ data: "json, name=executionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=flowArn" })
+  @SpeakeasyMetadata({ data: "json, name=flowArn" })
   flowArn?: string;
 
-  @Metadata({ data: "json, name=flowStatus" })
+  @SpeakeasyMetadata({ data: "json, name=flowStatus" })
   flowStatus?: FlowStatusEnum;
 }

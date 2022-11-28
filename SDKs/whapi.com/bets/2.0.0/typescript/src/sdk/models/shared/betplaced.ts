@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BetPlaced extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=numLines" })
+  @SpeakeasyMetadata({ data: "json, name=numLines" })
   numLines?: number;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 
-  @Metadata({ data: "json, name=placedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=placedDateTime" })
   placedDateTime?: string;
 
-  @Metadata({ data: "json, name=receipt" })
+  @SpeakeasyMetadata({ data: "json, name=receipt" })
   receipt: string;
 
-  @Metadata({ data: "json, name=totalStake" })
+  @SpeakeasyMetadata({ data: "json, name=totalStake" })
   totalStake?: number;
 }

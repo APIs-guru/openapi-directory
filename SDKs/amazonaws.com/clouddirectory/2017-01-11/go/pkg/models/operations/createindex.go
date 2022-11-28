@@ -15,6 +15,8 @@ type CreateIndexHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// CreateIndexRequestBodyParentReference
+// The reference that identifies an object.
 type CreateIndexRequestBodyParentReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 
 
 @dataclass
 class RegistryListAPISpecRevisionsPathParams:
-    api: str = field(default=None, metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    spec: str = field(default=None, metadata={'path_param': { 'field_name': 'spec', 'style': 'simple', 'explode': False }})
-    version: str = field(default=None, metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
+    api: str = field(metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    spec: str = field(metadata={'path_param': { 'field_name': 'spec', 'style': 'simple', 'explode': False }})
+    version: str = field(metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class RegistryListAPISpecRevisionsQueryParams:
 
 @dataclass
 class RegistryListAPISpecRevisionsRequest:
-    path_params: RegistryListAPISpecRevisionsPathParams = field(default=None)
-    query_params: RegistryListAPISpecRevisionsQueryParams = field(default=None)
+    path_params: RegistryListAPISpecRevisionsPathParams = field()
+    query_params: RegistryListAPISpecRevisionsQueryParams = field()
     
 
 @dataclass
 class RegistryListAPISpecRevisionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_api_spec_revisions_response: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

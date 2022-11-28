@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import deploymentinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetDeploymentsOutput:
-    deployments_info: Optional[List[deploymentinfo.DeploymentInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentsInfo' }})
+    r"""BatchGetDeploymentsOutput
+     Represents the output of a <code>BatchGetDeployments</code> operation. 
+    """
+    
+    deployments_info: Optional[List[DeploymentInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentsInfo') }})
     

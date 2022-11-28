@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PubsubMessage } from "./pubsubmessage";
+
 
 
 // TriggerPubsubExecutionRequest
@@ -7,12 +8,12 @@ import { PubsubMessage } from "./pubsubmessage";
  * Request for the TriggerPubsubExecution method.
 **/
 export class TriggerPubsubExecutionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GCPCloudEventsMode" })
+  @SpeakeasyMetadata({ data: "json, name=GCPCloudEventsMode" })
   gcpCloudEventsMode?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: PubsubMessage;
 
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription?: string;
 }

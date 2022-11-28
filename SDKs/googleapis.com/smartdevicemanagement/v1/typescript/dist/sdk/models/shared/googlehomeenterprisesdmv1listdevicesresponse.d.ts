@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleHomeEnterpriseSdmV1Device } from "./googlehomeenterprisesdmv1device";
 /**
  * Response message for SmartDeviceManagementService.ListDevices

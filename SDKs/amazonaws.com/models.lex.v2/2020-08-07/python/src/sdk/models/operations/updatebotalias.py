@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateBotAliasPathParams:
-    bot_alias_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botAliasId', 'style': 'simple', 'explode': False }})
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    bot_alias_id: str = field(metadata={'path_param': { 'field_name': 'botAliasId', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,42 +28,50 @@ class UpdateBotAliasHeaders:
 @dataclass_json
 @dataclass
 class UpdateBotAliasRequestBodyConversationLogSettings:
-    audio_log_settings: Optional[List[shared.AudioLogSetting]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'audioLogSettings' }})
-    text_log_settings: Optional[List[shared.TextLogSetting]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textLogSettings' }})
+    r"""UpdateBotAliasRequestBodyConversationLogSettings
+    Configures conversation logging that saves audio, text, and metadata for the conversations with your users.
+    """
+    
+    audio_log_settings: Optional[List[shared.AudioLogSetting]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('audioLogSettings') }})
+    text_log_settings: Optional[List[shared.TextLogSetting]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textLogSettings') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateBotAliasRequestBodySentimentAnalysisSettings:
-    detect_sentiment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectSentiment' }})
+    r"""UpdateBotAliasRequestBodySentimentAnalysisSettings
+    Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.
+    """
+    
+    detect_sentiment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectSentiment') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateBotAliasRequestBody:
-    bot_alias_locale_settings: Optional[dict[str, shared.BotAliasLocaleSettings]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'botAliasLocaleSettings' }})
-    bot_alias_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'botAliasName' }})
-    bot_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'botVersion' }})
-    conversation_log_settings: Optional[UpdateBotAliasRequestBodyConversationLogSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversationLogSettings' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    sentiment_analysis_settings: Optional[UpdateBotAliasRequestBodySentimentAnalysisSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sentimentAnalysisSettings' }})
+    bot_alias_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('botAliasName') }})
+    bot_alias_locale_settings: Optional[dict[str, shared.BotAliasLocaleSettings]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('botAliasLocaleSettings') }})
+    bot_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('botVersion') }})
+    conversation_log_settings: Optional[UpdateBotAliasRequestBodyConversationLogSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationLogSettings') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    sentiment_analysis_settings: Optional[UpdateBotAliasRequestBodySentimentAnalysisSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sentimentAnalysisSettings') }})
     
 
 @dataclass
 class UpdateBotAliasRequest:
-    path_params: UpdateBotAliasPathParams = field(default=None)
-    headers: UpdateBotAliasHeaders = field(default=None)
-    request: UpdateBotAliasRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateBotAliasHeaders = field()
+    path_params: UpdateBotAliasPathParams = field()
+    request: UpdateBotAliasRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateBotAliasResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_bot_alias_response: Optional[shared.UpdateBotAliasResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

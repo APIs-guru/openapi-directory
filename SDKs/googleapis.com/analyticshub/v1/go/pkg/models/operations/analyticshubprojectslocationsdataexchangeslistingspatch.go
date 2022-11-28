@@ -41,7 +41,7 @@ type AnalyticshubProjectsLocationsDataExchangesListingsPatchSecurity struct {
 type AnalyticshubProjectsLocationsDataExchangesListingsPatchRequest struct {
 	PathParams  AnalyticshubProjectsLocationsDataExchangesListingsPatchPathParams
 	QueryParams AnalyticshubProjectsLocationsDataExchangesListingsPatchQueryParams
-	Request     *shared.Listing `request:"mediaType=application/json"`
+	Request     *shared.ListingInput `request:"mediaType=application/json"`
 	Security    AnalyticshubProjectsLocationsDataExchangesListingsPatchSecurity
 }
 

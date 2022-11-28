@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ConsumerConfig } from "./consumerconfig";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConsumerConfigInput } from "./consumerconfig";
 
 
-// UpdateConsumerConfigRequest
+
+// UpdateConsumerConfigRequestInput
 /** 
  * Request to update the configuration of a service networking connection including the import/export of custom routes and subnetwork routes with public IP.
 **/
-export class UpdateConsumerConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerConfig" })
-  consumerConfig?: ConsumerConfig;
+export class UpdateConsumerConfigRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=consumerConfig" })
+  consumerConfig?: ConsumerConfigInput;
 }

@@ -31,7 +31,7 @@ type NotebooksProjectsLocationsEnvironmentsCreateSecurity struct {
 type NotebooksProjectsLocationsEnvironmentsCreateRequest struct {
 	PathParams  NotebooksProjectsLocationsEnvironmentsCreatePathParams
 	QueryParams NotebooksProjectsLocationsEnvironmentsCreateQueryParams
-	Request     *shared.Environment `request:"mediaType=application/json"`
+	Request     *shared.EnvironmentInput `request:"mediaType=application/json"`
 	Security    NotebooksProjectsLocationsEnvironmentsCreateSecurity
 }
 

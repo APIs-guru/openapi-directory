@@ -31,11 +31,6 @@ type FitcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type FitcerRequest struct {
-	Request  *FitcerRequestBody `request:"mediaType=application/json"`
-	Security FitcerSecurity
-}
-
 type Fitcer400ApplicationJSONErrorEnum string
 
 const (
@@ -165,6 +160,11 @@ const (
 type Fitcer504ApplicationJSON struct {
 	Error            *Fitcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Fitcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type FitcerRequest struct {
+	Request  *FitcerRequestBody `request:"mediaType=application/json"`
+	Security FitcerSecurity
 }
 
 type FitcerResponse struct {

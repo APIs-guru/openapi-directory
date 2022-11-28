@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Certificate = /** @class */ (function (_super) {
     __extends(Certificate, _super);
     function Certificate() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ca_cert" }),
+        SpeakeasyMetadata({ data: "json, name=ca_cert" }),
         __metadata("design:type", String)
     ], Certificate.prototype, "caCert", void 0);
     __decorate([
-        Metadata({ data: "json, name=server_cert" }),
+        SpeakeasyMetadata({ data: "json, name=server_cert" }),
         __metadata("design:type", String)
     ], Certificate.prototype, "serverCert", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_cert" }),
+        SpeakeasyMetadata({ data: "json, name=user_cert" }),
         __metadata("design:type", String)
     ], Certificate.prototype, "userCert", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_key" }),
+        SpeakeasyMetadata({ data: "json, name=user_key" }),
         __metadata("design:type", String)
     ], Certificate.prototype, "userKey", void 0);
     return Certificate;

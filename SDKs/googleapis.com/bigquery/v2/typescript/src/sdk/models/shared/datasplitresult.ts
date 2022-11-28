@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableReference } from "./tablereference";
-import { TableReference } from "./tablereference";
-import { TableReference } from "./tablereference";
+
 
 
 // DataSplitResult
@@ -9,12 +8,12 @@ import { TableReference } from "./tablereference";
  * Data split result. This contains references to the training and evaluation data tables that were used to train the model.
 **/
 export class DataSplitResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evaluationTable" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationTable" })
   evaluationTable?: TableReference;
 
-  @Metadata({ data: "json, name=testTable" })
+  @SpeakeasyMetadata({ data: "json, name=testTable" })
   testTable?: TableReference;
 
-  @Metadata({ data: "json, name=trainingTable" })
+  @SpeakeasyMetadata({ data: "json, name=trainingTable" })
   trainingTable?: TableReference;
 }

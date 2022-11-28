@@ -10,7 +10,7 @@ type SecretsSecretsUpdatePathParams struct {
 
 type SecretsSecretsUpdateRequest struct {
 	PathParams SecretsSecretsUpdatePathParams
-	Request    shared.WritableSecret `request:"mediaType=application/json"`
+	Request    shared.WritableSecretInput `request:"mediaType=application/json"`
 }
 
 type SecretsSecretsUpdateResponse struct {

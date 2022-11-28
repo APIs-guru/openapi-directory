@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CommunityContentGetCommunityContentPathParams = /** @class */ (function (_super) {
     __extends(CommunityContentGetCommunityContentPathParams, _super);
     function CommunityContentGetCommunityContentPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mediaFilter" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaFilter" }),
         __metadata("design:type", Number)
     ], CommunityContentGetCommunityContentPathParams.prototype, "mediaFilter", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=page" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" }),
         __metadata("design:type", Number)
     ], CommunityContentGetCommunityContentPathParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sort" }),
         __metadata("design:type", Number)
     ], CommunityContentGetCommunityContentPathParams.prototype, "sort", void 0);
     return CommunityContentGetCommunityContentPathParams;
@@ -49,7 +49,7 @@ var CommunityContentGetCommunityContentRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CommunityContentGetCommunityContentPathParams)
     ], CommunityContentGetCommunityContentRequest.prototype, "pathParams", void 0);
     return CommunityContentGetCommunityContentRequest;
@@ -61,15 +61,15 @@ var CommunityContentGetCommunityContentResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], CommunityContentGetCommunityContentResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CommunityContentGetCommunityContentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CommunityContentGetCommunityContentResponse.prototype, "statusCode", void 0);
     return CommunityContentGetCommunityContentResponse;

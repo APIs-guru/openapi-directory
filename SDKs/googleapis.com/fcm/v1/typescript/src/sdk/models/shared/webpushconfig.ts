@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebpushFcmOptions } from "./webpushfcmoptions";
+
 
 
 // WebpushConfig
@@ -7,15 +8,15 @@ import { WebpushFcmOptions } from "./webpushfcmoptions";
  * [Webpush protocol](https://tools.ietf.org/html/rfc8030) options.
 **/
 export class WebpushConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, string>;
 
-  @Metadata({ data: "json, name=fcmOptions" })
+  @SpeakeasyMetadata({ data: "json, name=fcmOptions" })
   fcmOptions?: WebpushFcmOptions;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: Map<string, string>;
 
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification?: Map<string, any>;
 }

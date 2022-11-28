@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
+
 
 
 // ReadJobResponse
@@ -7,6 +8,6 @@ import { Job } from "./job";
  * The <code>ReadJobResponse</code> structure.
 **/
 export class ReadJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Job" })
+  @SpeakeasyMetadata({ data: "json, name=Job" })
   job?: Job;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldReference } from "./fieldreference";
 
+
 export enum OrderDirectionEnum {
-    DirectionUnspecified = "DIRECTION_UNSPECIFIED"
-,    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    DirectionUnspecified = "DIRECTION_UNSPECIFIED",
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
@@ -13,9 +14,9 @@ export enum OrderDirectionEnum {
  * An order on a field.
 **/
 export class Order extends SpeakeasyBase {
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: OrderDirectionEnum;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: FieldReference;
 }

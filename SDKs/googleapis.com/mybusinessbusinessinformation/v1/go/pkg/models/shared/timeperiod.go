@@ -26,6 +26,8 @@ const (
 	TimePeriodOpenDayEnumSunday               TimePeriodOpenDayEnum = "SUNDAY"
 )
 
+// TimePeriod
+// Represents a span of time that the business is open, starting on the specified open day/time and closing on the specified close day/time. The closing time must occur after the opening time, for example later in the same day, or on a subsequent day.
 type TimePeriod struct {
 	CloseDay  *TimePeriodCloseDayEnum `json:"closeDay,omitempty"`
 	CloseTime *TimeOfDay              `json:"closeTime,omitempty"`

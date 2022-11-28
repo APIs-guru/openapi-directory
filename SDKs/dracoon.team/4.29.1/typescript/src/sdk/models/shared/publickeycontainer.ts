@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PublicKeyContainer
@@ -6,18 +7,37 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Public key container
 **/
 export class PublicKeyContainer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: number;
 
-  @Metadata({ data: "json, name=expireAt" })
+  @SpeakeasyMetadata({ data: "json, name=expireAt" })
   expireAt?: Date;
 
-  @Metadata({ data: "json, name=publicKey" })
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
   publicKey: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version: string;
+}
+
+
+// PublicKeyContainerOutput
+/** 
+ * Public key container
+**/
+export class PublicKeyContainerOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
+  createdAt?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
+  createdBy?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
+  publicKey: string;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

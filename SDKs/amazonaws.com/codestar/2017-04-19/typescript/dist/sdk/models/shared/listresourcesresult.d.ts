@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Resource } from "./resource";
 export declare class ListResourcesResult extends SpeakeasyBase {
     nextToken?: string;

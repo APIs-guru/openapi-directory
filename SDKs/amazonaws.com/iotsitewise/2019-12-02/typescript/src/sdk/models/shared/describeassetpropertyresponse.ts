@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Property } from "./property";
 import { CompositeModelProperty } from "./compositemodelproperty";
 
 
+
 export class DescribeAssetPropertyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetId" })
+  @SpeakeasyMetadata({ data: "json, name=assetId" })
   assetId: string;
 
-  @Metadata({ data: "json, name=assetModelId" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelId" })
   assetModelId: string;
 
-  @Metadata({ data: "json, name=assetName" })
+  @SpeakeasyMetadata({ data: "json, name=assetName" })
   assetName: string;
 
-  @Metadata({ data: "json, name=assetProperty" })
+  @SpeakeasyMetadata({ data: "json, name=assetProperty" })
   assetProperty?: Property;
 
-  @Metadata({ data: "json, name=compositeModel" })
+  @SpeakeasyMetadata({ data: "json, name=compositeModel" })
   compositeModel?: CompositeModelProperty;
 }

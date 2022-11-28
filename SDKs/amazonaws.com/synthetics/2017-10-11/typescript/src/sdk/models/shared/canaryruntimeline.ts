@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CanaryRunTimeline
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This structure contains the start and end times of a single canary run.
 **/
 export class CanaryRunTimeline extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Completed" })
+  @SpeakeasyMetadata({ data: "json, name=Completed" })
   completed?: Date;
 
-  @Metadata({ data: "json, name=Started" })
+  @SpeakeasyMetadata({ data: "json, name=Started" })
   started?: Date;
 }

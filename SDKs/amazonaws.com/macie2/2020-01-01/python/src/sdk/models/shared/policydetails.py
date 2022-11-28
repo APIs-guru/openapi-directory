@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import findingaction
-from . import findingactor
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PolicyDetails:
-    action: Optional[findingaction.FindingAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    actor: Optional[findingactor.FindingActor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actor' }})
+    r"""PolicyDetails
+    Provides the details of a policy finding.
+    """
+    
+    action: Optional[FindingAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    actor: Optional[FindingActor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actor') }})
     

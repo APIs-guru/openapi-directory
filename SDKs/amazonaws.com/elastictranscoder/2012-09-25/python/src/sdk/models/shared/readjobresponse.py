@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import job
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReadJobResponse:
-    job: Optional[job.Job] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Job' }})
+    r"""ReadJobResponse
+    The <code>ReadJobResponse</code> structure.
+    """
+    
+    job: Optional[Job] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Job') }})
     

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetPriceguideIDTransactionsSummaryPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetPriceguideIDTransactionsSummaryQueryParams:
 
 @dataclass
 class GetPriceguideIDTransactionsSummaryRequest:
-    path_params: GetPriceguideIDTransactionsSummaryPathParams = field(default=None)
-    query_params: GetPriceguideIDTransactionsSummaryQueryParams = field(default=None)
+    path_params: GetPriceguideIDTransactionsSummaryPathParams = field()
+    query_params: GetPriceguideIDTransactionsSummaryQueryParams = field()
     
 
 @dataclass
 class GetPriceguideIDTransactionsSummaryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

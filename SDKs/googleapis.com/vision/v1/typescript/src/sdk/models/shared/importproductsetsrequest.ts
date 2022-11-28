@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportProductSetsInputConfig } from "./importproductsetsinputconfig";
+
 
 
 // ImportProductSetsRequest
@@ -7,6 +8,6 @@ import { ImportProductSetsInputConfig } from "./importproductsetsinputconfig";
  * Request message for the `ImportProductSets` method.
 **/
 export class ImportProductSetsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
   inputConfig?: ImportProductSetsInputConfig;
 }

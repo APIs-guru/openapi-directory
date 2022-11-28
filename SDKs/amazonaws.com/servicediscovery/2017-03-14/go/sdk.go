@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://servicediscovery.{region}.amazonaws.com",
 	"https://servicediscovery.{region}.amazonaws.com",
 	"http://servicediscovery.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/servicediscovery/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateHTTPNamespace - <p>Creates an HTTP namespace. Service instances registered using an HTTP namespace can be discovered using a <code>DiscoverInstances</code> request but can't be discovered using DNS.</p> <p>For the current quota on the number of namespaces that you can create using the same account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the <i>Cloud Map Developer Guide</i>.</p>
 func (s *SDK) CreateHTTPNamespace(ctx context.Context, request operations.CreateHTTPNamespaceRequest) (*operations.CreateHTTPNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.CreateHttpNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateHTTPNamespace(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) CreateHTTPNamespace(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreatePrivateDNSNamespace - Creates a private namespace based on DNS, which is visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for the service is <code>backend.example.com</code>. Service instances that are registered using a private DNS namespace can be discovered using either a <code>DiscoverInstances</code> request or using DNS. For the current quota on the number of namespaces that you can create using the same account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the <i>Cloud Map Developer Guide</i>.
 func (s *SDK) CreatePrivateDNSNamespace(ctx context.Context, request operations.CreatePrivateDNSNamespaceRequest) (*operations.CreatePrivateDNSNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.CreatePrivateDnsNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) CreatePrivateDNSNamespace(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) CreatePrivateDNSNamespace(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreatePublicDNSNamespace - Creates a public namespace based on DNS, which is visible on the internet. The namespace defines your service naming scheme. For example, if you name your namespace <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for the service is <code>backend.example.com</code>. You can discover instances that were registered with a public DNS namespace by using either a <code>DiscoverInstances</code> request or using DNS. For the current quota on the number of namespaces that you can create using the same account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the <i>Cloud Map Developer Guide</i>.
 func (s *SDK) CreatePublicDNSNamespace(ctx context.Context, request operations.CreatePublicDNSNamespaceRequest) (*operations.CreatePublicDNSNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.CreatePublicDnsNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) CreatePublicDNSNamespace(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -363,8 +392,9 @@ func (s *SDK) CreatePublicDNSNamespace(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CreateService - <p>Creates a service. This action defines the configuration for the following entities:</p> <ul> <li> <p>For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:</p> <ul> <li> <p> <code>A</code> </p> </li> <li> <p> <code>AAAA</code> </p> </li> <li> <p> <code>A</code> and <code>AAAA</code> </p> </li> <li> <p> <code>SRV</code> </p> </li> <li> <p> <code>CNAME</code> </p> </li> </ul> </li> <li> <p>Optionally, a health check</p> </li> </ul> <p>After you create the service, you can submit a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a> request, and Cloud Map uses the values in the configuration to create the specified entities.</p> <p>For the current quota on the number of instances that you can register using the same namespace and using the same service, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the <i>Cloud Map Developer Guide</i>.</p>
 func (s *SDK) CreateService(ctx context.Context, request operations.CreateServiceRequest) (*operations.CreateServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.CreateService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -384,7 +414,7 @@ func (s *SDK) CreateService(ctx context.Context, request operations.CreateServic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -464,8 +494,9 @@ func (s *SDK) CreateService(ctx context.Context, request operations.CreateServic
 	return res, nil
 }
 
+// DeleteNamespace - Deletes a namespace from the current account. If the namespace still contains one or more services, the request fails.
 func (s *SDK) DeleteNamespace(ctx context.Context, request operations.DeleteNamespaceRequest) (*operations.DeleteNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.DeleteNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -485,7 +516,7 @@ func (s *SDK) DeleteNamespace(ctx context.Context, request operations.DeleteName
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -555,8 +586,9 @@ func (s *SDK) DeleteNamespace(ctx context.Context, request operations.DeleteName
 	return res, nil
 }
 
+// DeleteService - Deletes a specified service. If the service still contains one or more registered instances, the request fails.
 func (s *SDK) DeleteService(ctx context.Context, request operations.DeleteServiceRequest) (*operations.DeleteServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.DeleteService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -576,7 +608,7 @@ func (s *SDK) DeleteService(ctx context.Context, request operations.DeleteServic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -636,8 +668,9 @@ func (s *SDK) DeleteService(ctx context.Context, request operations.DeleteServic
 	return res, nil
 }
 
+// DeregisterInstance - Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map created for the specified instance.
 func (s *SDK) DeregisterInstance(ctx context.Context, request operations.DeregisterInstanceRequest) (*operations.DeregisterInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.DeregisterInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -657,7 +690,7 @@ func (s *SDK) DeregisterInstance(ctx context.Context, request operations.Deregis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -737,8 +770,9 @@ func (s *SDK) DeregisterInstance(ctx context.Context, request operations.Deregis
 	return res, nil
 }
 
+// DiscoverInstances - Discovers registered instances for a specified namespace and service. You can use <code>DiscoverInstances</code> to discover instances for any type of namespace. For public and private DNS namespaces, you can also use DNS queries to discover instances.
 func (s *SDK) DiscoverInstances(ctx context.Context, request operations.DiscoverInstancesRequest) (*operations.DiscoverInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.DiscoverInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -758,7 +792,7 @@ func (s *SDK) DiscoverInstances(ctx context.Context, request operations.Discover
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -828,8 +862,9 @@ func (s *SDK) DiscoverInstances(ctx context.Context, request operations.Discover
 	return res, nil
 }
 
+// GetInstance - Gets information about a specified instance.
 func (s *SDK) GetInstance(ctx context.Context, request operations.GetInstanceRequest) (*operations.GetInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.GetInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -849,7 +884,7 @@ func (s *SDK) GetInstance(ctx context.Context, request operations.GetInstanceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -909,8 +944,9 @@ func (s *SDK) GetInstance(ctx context.Context, request operations.GetInstanceReq
 	return res, nil
 }
 
+// GetInstancesHealthStatus - <p>Gets the current health status (<code>Healthy</code>, <code>Unhealthy</code>, or <code>Unknown</code>) of one or more instances that are associated with a specified service.</p> <note> <p>There's a brief delay between when you register an instance and when the health status for the instance is available. </p> </note>
 func (s *SDK) GetInstancesHealthStatus(ctx context.Context, request operations.GetInstancesHealthStatusRequest) (*operations.GetInstancesHealthStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.GetInstancesHealthStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -932,7 +968,7 @@ func (s *SDK) GetInstancesHealthStatus(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -992,8 +1028,9 @@ func (s *SDK) GetInstancesHealthStatus(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetNamespace - Gets information about a namespace.
 func (s *SDK) GetNamespace(ctx context.Context, request operations.GetNamespaceRequest) (*operations.GetNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.GetNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1013,7 +1050,7 @@ func (s *SDK) GetNamespace(ctx context.Context, request operations.GetNamespaceR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1063,8 +1100,9 @@ func (s *SDK) GetNamespace(ctx context.Context, request operations.GetNamespaceR
 	return res, nil
 }
 
+// GetOperation - <p>Gets information about any operation that returns an operation ID in the response, such as a <code>CreateService</code> request.</p> <note> <p>To get a list of operations that match specified criteria, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html">ListOperations</a>.</p> </note>
 func (s *SDK) GetOperation(ctx context.Context, request operations.GetOperationRequest) (*operations.GetOperationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.GetOperation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1084,7 +1122,7 @@ func (s *SDK) GetOperation(ctx context.Context, request operations.GetOperationR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1134,8 +1172,9 @@ func (s *SDK) GetOperation(ctx context.Context, request operations.GetOperationR
 	return res, nil
 }
 
+// GetService - Gets the settings for a specified service.
 func (s *SDK) GetService(ctx context.Context, request operations.GetServiceRequest) (*operations.GetServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.GetService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1155,7 +1194,7 @@ func (s *SDK) GetService(ctx context.Context, request operations.GetServiceReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1205,8 +1244,9 @@ func (s *SDK) GetService(ctx context.Context, request operations.GetServiceReque
 	return res, nil
 }
 
+// ListInstances - Lists summary information about the instances that you registered by using a specified service.
 func (s *SDK) ListInstances(ctx context.Context, request operations.ListInstancesRequest) (*operations.ListInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.ListInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1228,7 +1268,7 @@ func (s *SDK) ListInstances(ctx context.Context, request operations.ListInstance
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1278,8 +1318,9 @@ func (s *SDK) ListInstances(ctx context.Context, request operations.ListInstance
 	return res, nil
 }
 
+// ListNamespaces - Lists summary information about the namespaces that were created by the current account.
 func (s *SDK) ListNamespaces(ctx context.Context, request operations.ListNamespacesRequest) (*operations.ListNamespacesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.ListNamespaces"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1301,7 +1342,7 @@ func (s *SDK) ListNamespaces(ctx context.Context, request operations.ListNamespa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1341,8 +1382,9 @@ func (s *SDK) ListNamespaces(ctx context.Context, request operations.ListNamespa
 	return res, nil
 }
 
+// ListOperations - Lists operations that match the criteria that you specify.
 func (s *SDK) ListOperations(ctx context.Context, request operations.ListOperationsRequest) (*operations.ListOperationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.ListOperations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1364,7 +1406,7 @@ func (s *SDK) ListOperations(ctx context.Context, request operations.ListOperati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1404,8 +1446,9 @@ func (s *SDK) ListOperations(ctx context.Context, request operations.ListOperati
 	return res, nil
 }
 
+// ListServices - Lists summary information for all the services that are associated with one or more specified namespaces.
 func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesRequest) (*operations.ListServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.ListServices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1427,7 +1470,7 @@ func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1467,8 +1510,9 @@ func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesR
 	return res, nil
 }
 
+// ListTagsForResource - Lists tags for the specified resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1488,7 +1532,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1538,8 +1582,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// RegisterInstance - <p>Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a <code>RegisterInstance</code> request, the following occurs:</p> <ul> <li> <p>For each DNS record that you define in the service that's specified by <code>ServiceId</code>, a record is created or updated in the hosted zone that's associated with the corresponding namespace.</p> </li> <li> <p>If the service includes <code>HealthCheckConfig</code>, a health check is created based on the settings in the health check configuration.</p> </li> <li> <p>The health check, if any, is associated with each of the new or updated records.</p> </li> </ul> <important> <p>One <code>RegisterInstance</code> request must complete before you can submit another request and specify the same service ID and instance ID.</p> </important> <p>For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html">CreateService</a>.</p> <p>When Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:</p> <ul> <li> <p> <b>If the health check is healthy</b>: returns all the records</p> </li> <li> <p> <b>If the health check is unhealthy</b>: returns the applicable value for the last healthy instance</p> </li> <li> <p> <b>If you didn't specify a health check configuration</b>: returns all the records</p> </li> </ul> <p>For the current quota on the number of instances that you can register using the same namespace and using the same service, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the <i>Cloud Map Developer Guide</i>.</p>
 func (s *SDK) RegisterInstance(ctx context.Context, request operations.RegisterInstanceRequest) (*operations.RegisterInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.RegisterInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1559,7 +1604,7 @@ func (s *SDK) RegisterInstance(ctx context.Context, request operations.RegisterI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1639,8 +1684,9 @@ func (s *SDK) RegisterInstance(ctx context.Context, request operations.RegisterI
 	return res, nil
 }
 
+// TagResource - Adds one or more tags to the specified resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1660,7 +1706,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1720,8 +1766,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes one or more tags from the specified resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1741,7 +1788,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1791,8 +1838,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateHTTPNamespace - Updates an HTTP namespace.
 func (s *SDK) UpdateHTTPNamespace(ctx context.Context, request operations.UpdateHTTPNamespaceRequest) (*operations.UpdateHTTPNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.UpdateHttpNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1812,7 +1860,7 @@ func (s *SDK) UpdateHTTPNamespace(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1882,8 +1930,9 @@ func (s *SDK) UpdateHTTPNamespace(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateInstanceCustomHealthStatus - <p>Submits a request to change the health status of a custom health check to healthy or unhealthy.</p> <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for custom health checks, which you define using <code>HealthCheckCustomConfig</code> when you create a service. You can't use it to change the status for Route 53 health checks, which you define using <code>HealthCheckConfig</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html">HealthCheckCustomConfig</a>.</p>
 func (s *SDK) UpdateInstanceCustomHealthStatus(ctx context.Context, request operations.UpdateInstanceCustomHealthStatusRequest) (*operations.UpdateInstanceCustomHealthStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.UpdateInstanceCustomHealthStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1903,7 +1952,7 @@ func (s *SDK) UpdateInstanceCustomHealthStatus(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1964,8 +2013,9 @@ func (s *SDK) UpdateInstanceCustomHealthStatus(ctx context.Context, request oper
 	return res, nil
 }
 
+// UpdatePrivateDNSNamespace - Updates a private DNS namespace.
 func (s *SDK) UpdatePrivateDNSNamespace(ctx context.Context, request operations.UpdatePrivateDNSNamespaceRequest) (*operations.UpdatePrivateDNSNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.UpdatePrivateDnsNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1985,7 +2035,7 @@ func (s *SDK) UpdatePrivateDNSNamespace(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2055,8 +2105,9 @@ func (s *SDK) UpdatePrivateDNSNamespace(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdatePublicDNSNamespace - Updates a public DNS namespace.
 func (s *SDK) UpdatePublicDNSNamespace(ctx context.Context, request operations.UpdatePublicDNSNamespaceRequest) (*operations.UpdatePublicDNSNamespaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.UpdatePublicDnsNamespace"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2076,7 +2127,7 @@ func (s *SDK) UpdatePublicDNSNamespace(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2146,8 +2197,9 @@ func (s *SDK) UpdatePublicDNSNamespace(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateService - <p>Submits a request to perform the following operations:</p> <ul> <li> <p>Update the TTL setting for existing <code>DnsRecords</code> configurations</p> </li> <li> <p>Add, update, or delete <code>HealthCheckConfig</code> for a specified service</p> <note> <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code> configuration.</p> </note> </li> </ul> <p>For public and private DNS namespaces, note the following:</p> <ul> <li> <p>If you omit any existing <code>DnsRecords</code> or <code>HealthCheckConfig</code> configurations from an <code>UpdateService</code> request, the configurations are deleted from the service.</p> </li> <li> <p>If you omit an existing <code>HealthCheckCustomConfig</code> configuration from an <code>UpdateService</code> request, the configuration isn't deleted from the service.</p> </li> </ul> <p>When you update settings for a service, Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.</p>
 func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServiceRequest) (*operations.UpdateServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=Route53AutoNaming_v20170314.UpdateService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2167,7 +2219,7 @@ func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Sentiment = /** @class */ (function (_super) {
     __extends(Sentiment, _super);
     function Sentiment() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], Sentiment.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=end" }),
+        SpeakeasyMetadata({ data: "json, name=end" }),
         __metadata("design:type", Number)
     ], Sentiment.prototype, "end", void 0);
     __decorate([
-        Metadata({ data: "json, name=negationTerm" }),
+        SpeakeasyMetadata({ data: "json, name=negationTerm" }),
         __metadata("design:type", String)
     ], Sentiment.prototype, "negationTerm", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentCategory" }),
+        SpeakeasyMetadata({ data: "json, name=parentCategory" }),
         __metadata("design:type", String)
     ], Sentiment.prototype, "parentCategory", void 0);
     __decorate([
-        Metadata({ data: "json, name=positive" }),
+        SpeakeasyMetadata({ data: "json, name=positive" }),
         __metadata("design:type", Boolean)
     ], Sentiment.prototype, "positive", void 0);
     __decorate([
-        Metadata({ data: "json, name=scale" }),
+        SpeakeasyMetadata({ data: "json, name=scale" }),
         __metadata("design:type", Number)
     ], Sentiment.prototype, "scale", void 0);
     __decorate([
-        Metadata({ data: "json, name=start" }),
+        SpeakeasyMetadata({ data: "json, name=start" }),
         __metadata("design:type", Number)
     ], Sentiment.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], Sentiment.prototype, "text", void 0);
     return Sentiment;

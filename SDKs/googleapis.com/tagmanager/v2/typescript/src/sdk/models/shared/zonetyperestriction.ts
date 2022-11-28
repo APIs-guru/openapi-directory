@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ZoneTypeRestriction
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a Zone's type restrictions.
 **/
 export class ZoneTypeRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enable" })
+  @SpeakeasyMetadata({ data: "json, name=enable" })
   enable?: boolean;
 
-  @Metadata({ data: "json, name=whitelistedTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=whitelistedTypeId" })
   whitelistedTypeId?: string[];
 }

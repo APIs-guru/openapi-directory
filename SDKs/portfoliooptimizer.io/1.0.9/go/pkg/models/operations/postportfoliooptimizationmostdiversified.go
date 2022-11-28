@@ -16,12 +16,12 @@ type PostPortfolioOptimizationMostDiversifiedRequestBody struct {
 	Constraints            *PostPortfolioOptimizationMostDiversifiedRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
-type PostPortfolioOptimizationMostDiversifiedRequest struct {
-	Request PostPortfolioOptimizationMostDiversifiedRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationMostDiversified200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationMostDiversifiedRequest struct {
+	Request PostPortfolioOptimizationMostDiversifiedRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMostDiversifiedResponse struct {

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetOrganizationSmVppAccountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vppAccountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vppAccountId" })
   vppAccountId: string;
 }
 
 
 export class GetOrganizationSmVppAccountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrganizationSmVppAccountPathParams;
 }
 
 
 export class GetOrganizationSmVppAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOrganizationSmVppAccount200ApplicationJsonObject?: Map<string, any>;
 }

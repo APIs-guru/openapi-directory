@@ -9,22 +9,9 @@ type GetSSHKeysQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetSSHKeysSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetSSHKeysSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetSSHKeysSecurity struct {
-	Option1 *GetSSHKeysSecurityOption1 `security:"option"`
-	Option2 *GetSSHKeysSecurityOption2 `security:"option"`
-}
-
-type GetSSHKeysRequest struct {
-	QueryParams GetSSHKeysQueryParams
-	Security    GetSSHKeysSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetSSHKeys200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetSSHKeys200ApplicationJSON struct {
 
 type GetSSHKeysDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetSSHKeysRequest struct {
+	QueryParams GetSSHKeysQueryParams
+	Security    GetSSHKeysSecurity
 }
 
 type GetSSHKeysResponse struct {

@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldValueChange } from "./fieldvaluechange";
 
+
 export enum AppliedLabelChangeDetailTypesEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    LabelAdded = "LABEL_ADDED"
-,    LabelRemoved = "LABEL_REMOVED"
-,    LabelFieldValueChanged = "LABEL_FIELD_VALUE_CHANGED"
-,    LabelAppliedByItemCreate = "LABEL_APPLIED_BY_ITEM_CREATE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    LabelAdded = "LABEL_ADDED",
+    LabelRemoved = "LABEL_REMOVED",
+    LabelFieldValueChanged = "LABEL_FIELD_VALUE_CHANGED",
+    LabelAppliedByItemCreate = "LABEL_APPLIED_BY_ITEM_CREATE"
 }
 
 
@@ -16,15 +16,15 @@ export enum AppliedLabelChangeDetailTypesEnum {
  * A change made to a Label on the Target.
 **/
 export class AppliedLabelChangeDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldChanges", elemType: shared.FieldValueChange })
+  @SpeakeasyMetadata({ data: "json, name=fieldChanges", elemType: FieldValueChange })
   fieldChanges?: FieldValueChange[];
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=types" })
+  @SpeakeasyMetadata({ data: "json, name=types" })
   types?: AppliedLabelChangeDetailTypesEnum[];
 }

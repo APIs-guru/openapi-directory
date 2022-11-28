@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataCatalogEncryptionSettings } from "./datacatalogencryptionsettings";
 
 
+
 export class GetDataCatalogEncryptionSettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataCatalogEncryptionSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DataCatalogEncryptionSettings" })
   dataCatalogEncryptionSettings?: DataCatalogEncryptionSettings;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DpsJobInstructionDpsJobInstructionEmployer
@@ -6,13 +7,13 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The dps job instructions' employer
 **/
 export class DpsJobInstructionDpsJobInstructionEmployer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
@@ -22,7 +23,7 @@ export class DpsJobInstructionDpsJobInstructionEmployer extends SpeakeasyBase {
  * The dps job instructions' message types
 **/
 export class DpsJobInstructionDpsJobInstructionType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: any[];
 }
 
@@ -32,36 +33,36 @@ export class DpsJobInstructionDpsJobInstructionType extends SpeakeasyBase {
  * The dps job instructions' messages to process
 **/
 export class DpsJobInstructionDpsJobInstructionMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: any[];
 }
 
 
 export class DpsJobInstructionDpsJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Apply" })
+  @SpeakeasyMetadata({ data: "json, name=Apply" })
   apply?: boolean;
 
-  @Metadata({ data: "json, name=Employer" })
+  @SpeakeasyMetadata({ data: "json, name=Employer" })
   employer?: DpsJobInstructionDpsJobInstructionEmployer;
 
-  @Metadata({ data: "json, name=FromDate" })
+  @SpeakeasyMetadata({ data: "json, name=FromDate" })
   fromDate?: Date;
 
-  @Metadata({ data: "json, name=HoldingDate" })
+  @SpeakeasyMetadata({ data: "json, name=HoldingDate" })
   holdingDate?: Date;
 
-  @Metadata({ data: "json, name=MessageTypes" })
+  @SpeakeasyMetadata({ data: "json, name=MessageTypes" })
   messageTypes?: DpsJobInstructionDpsJobInstructionType;
 
-  @Metadata({ data: "json, name=MessagesToProcess" })
+  @SpeakeasyMetadata({ data: "json, name=MessagesToProcess" })
   messagesToProcess?: DpsJobInstructionDpsJobInstructionMessage;
 
-  @Metadata({ data: "json, name=Retrieve" })
+  @SpeakeasyMetadata({ data: "json, name=Retrieve" })
   retrieve?: boolean;
 }
 
 
 export class DpsJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DpsJobInstruction" })
+  @SpeakeasyMetadata({ data: "json, name=DpsJobInstruction" })
   dpsJobInstruction?: DpsJobInstructionDpsJobInstruction;
 }

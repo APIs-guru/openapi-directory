@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 /**
  * Task object encapsulating task information.

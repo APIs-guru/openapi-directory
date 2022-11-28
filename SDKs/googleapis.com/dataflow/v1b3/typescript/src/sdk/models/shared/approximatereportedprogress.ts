@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportedParallelism } from "./reportedparallelism";
 import { Position } from "./position";
-import { ReportedParallelism } from "./reportedparallelism";
+
 
 
 // ApproximateReportedProgress
@@ -9,15 +9,15 @@ import { ReportedParallelism } from "./reportedparallelism";
  * A progress measurement of a WorkItem by a worker.
 **/
 export class ApproximateReportedProgress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumedParallelism" })
+  @SpeakeasyMetadata({ data: "json, name=consumedParallelism" })
   consumedParallelism?: ReportedParallelism;
 
-  @Metadata({ data: "json, name=fractionConsumed" })
+  @SpeakeasyMetadata({ data: "json, name=fractionConsumed" })
   fractionConsumed?: number;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: Position;
 
-  @Metadata({ data: "json, name=remainingParallelism" })
+  @SpeakeasyMetadata({ data: "json, name=remainingParallelism" })
   remainingParallelism?: ReportedParallelism;
 }

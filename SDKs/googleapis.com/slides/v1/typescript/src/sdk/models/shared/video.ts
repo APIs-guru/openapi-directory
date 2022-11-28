@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoProperties } from "./videoproperties";
 
+
 export enum VideoSourceEnum {
-    SourceUnspecified = "SOURCE_UNSPECIFIED"
-,    Youtube = "YOUTUBE"
-,    Drive = "DRIVE"
+    SourceUnspecified = "SOURCE_UNSPECIFIED",
+    Youtube = "YOUTUBE",
+    Drive = "DRIVE"
 }
 
 
@@ -13,15 +14,15 @@ export enum VideoSourceEnum {
  * A PageElement kind representing a video.
 **/
 export class Video extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: VideoSourceEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=videoProperties" })
+  @SpeakeasyMetadata({ data: "json, name=videoProperties" })
   videoProperties?: VideoProperties;
 }

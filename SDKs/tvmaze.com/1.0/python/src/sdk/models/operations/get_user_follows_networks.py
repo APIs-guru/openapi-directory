@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetUserFollowsNetworksEmbedEnum(str, Enum):
@@ -13,12 +14,12 @@ class GetUserFollowsNetworksQueryParams:
 
 @dataclass
 class GetUserFollowsNetworksRequest:
-    query_params: GetUserFollowsNetworksQueryParams = field(default=None)
+    query_params: GetUserFollowsNetworksQueryParams = field()
     
 
 @dataclass
 class GetUserFollowsNetworksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     network_follows: Optional[List[shared.NetworkFollow]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ScoreDetailResultEnum(str, Enum):
     PENDING = "pending"
@@ -23,7 +24,11 @@ class ScoreDetailSeverityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ScoreDetail:
-    result: ScoreDetailResultEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
-    score: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
-    severity: ScoreDetailSeverityEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
+    r"""ScoreDetail
+    Represents score detail of a background check
+    """
+    
+    result: ScoreDetailResultEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    score: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
+    severity: ScoreDetailSeverityEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
     

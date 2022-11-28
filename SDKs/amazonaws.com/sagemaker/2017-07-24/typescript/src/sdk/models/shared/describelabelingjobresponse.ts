@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HumanTaskConfig } from "./humantaskconfig";
 import { LabelingJobInputConfig } from "./labelingjobinputconfig";
 import { LabelCounters } from "./labelcounters";
@@ -11,58 +10,59 @@ import { LabelingJobStoppingConditions } from "./labelingjobstoppingconditions";
 import { Tag } from "./tag";
 
 
+
 export class DescribeLabelingJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=HumanTaskConfig" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskConfig" })
   humanTaskConfig: HumanTaskConfig;
 
-  @Metadata({ data: "json, name=InputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=InputConfig" })
   inputConfig: LabelingJobInputConfig;
 
-  @Metadata({ data: "json, name=JobReferenceCode" })
+  @SpeakeasyMetadata({ data: "json, name=JobReferenceCode" })
   jobReferenceCode: string;
 
-  @Metadata({ data: "json, name=LabelAttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=LabelAttributeName" })
   labelAttributeName?: string;
 
-  @Metadata({ data: "json, name=LabelCategoryConfigS3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=LabelCategoryConfigS3Uri" })
   labelCategoryConfigS3Uri?: string;
 
-  @Metadata({ data: "json, name=LabelCounters" })
+  @SpeakeasyMetadata({ data: "json, name=LabelCounters" })
   labelCounters: LabelCounters;
 
-  @Metadata({ data: "json, name=LabelingJobAlgorithmsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobAlgorithmsConfig" })
   labelingJobAlgorithmsConfig?: LabelingJobAlgorithmsConfig;
 
-  @Metadata({ data: "json, name=LabelingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobArn" })
   labelingJobArn: string;
 
-  @Metadata({ data: "json, name=LabelingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobName" })
   labelingJobName: string;
 
-  @Metadata({ data: "json, name=LabelingJobOutput" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobOutput" })
   labelingJobOutput?: LabelingJobOutput;
 
-  @Metadata({ data: "json, name=LabelingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobStatus" })
   labelingJobStatus: LabelingJobStatusEnum;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=OutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputConfig" })
   outputConfig: LabelingJobOutputConfig;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=StoppingConditions" })
+  @SpeakeasyMetadata({ data: "json, name=StoppingConditions" })
   stoppingConditions?: LabelingJobStoppingConditions;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

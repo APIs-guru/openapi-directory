@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ShareError } from "./shareerror";
 // ShareDetails
 /**
  * Information about the portfolio share operation.
@@ -34,11 +34,11 @@ var ShareDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ShareErrors", elemType: shared.ShareError }),
+        SpeakeasyMetadata({ data: "json, name=ShareErrors", elemType: ShareError }),
         __metadata("design:type", Array)
     ], ShareDetails.prototype, "shareErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=SuccessfulShares" }),
+        SpeakeasyMetadata({ data: "json, name=SuccessfulShares" }),
         __metadata("design:type", Array)
     ], ShareDetails.prototype, "successfulShares", void 0);
     return ShareDetails;

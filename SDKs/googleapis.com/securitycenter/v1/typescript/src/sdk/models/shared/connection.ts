@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConnectionProtocolEnum {
-    ProtocolUnspecified = "PROTOCOL_UNSPECIFIED"
-,    Icmp = "ICMP"
-,    Tcp = "TCP"
-,    Udp = "UDP"
-,    Gre = "GRE"
-,    Esp = "ESP"
+    ProtocolUnspecified = "PROTOCOL_UNSPECIFIED",
+    Icmp = "ICMP",
+    Tcp = "TCP",
+    Udp = "UDP",
+    Gre = "GRE",
+    Esp = "ESP"
 }
 
 
@@ -15,18 +16,18 @@ export enum ConnectionProtocolEnum {
  * Contains information about the IP connection associated with the finding.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationIp" })
+  @SpeakeasyMetadata({ data: "json, name=destinationIp" })
   destinationIp?: string;
 
-  @Metadata({ data: "json, name=destinationPort" })
+  @SpeakeasyMetadata({ data: "json, name=destinationPort" })
   destinationPort?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: ConnectionProtocolEnum;
 
-  @Metadata({ data: "json, name=sourceIp" })
+  @SpeakeasyMetadata({ data: "json, name=sourceIp" })
   sourceIp?: string;
 
-  @Metadata({ data: "json, name=sourcePort" })
+  @SpeakeasyMetadata({ data: "json, name=sourcePort" })
   sourcePort?: number;
 }

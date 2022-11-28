@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DomainSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Summary information about one domain.
 **/
 export class DomainSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=AutoRenew" })
   autoRenew?: boolean;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=Expiry" })
+  @SpeakeasyMetadata({ data: "json, name=Expiry" })
   expiry?: Date;
 
-  @Metadata({ data: "json, name=TransferLock" })
+  @SpeakeasyMetadata({ data: "json, name=TransferLock" })
   transferLock?: boolean;
 }

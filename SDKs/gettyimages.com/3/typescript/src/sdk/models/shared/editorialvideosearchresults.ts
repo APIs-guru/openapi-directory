@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchFacetsResponse } from "./searchfacetsresponse";
 import { RelatedSearch } from "./relatedsearch";
 import { EditorialVideoSearchItem } from "./editorialvideosearchitem";
 
 
+
 export class EditorialVideoSearchResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=facets" })
+  @SpeakeasyMetadata({ data: "json, name=facets" })
   facets?: SearchFacetsResponse;
 
-  @Metadata({ data: "json, name=related_searches", elemType: shared.RelatedSearch })
+  @SpeakeasyMetadata({ data: "json, name=related_searches", elemType: RelatedSearch })
   relatedSearches?: RelatedSearch[];
 
-  @Metadata({ data: "json, name=result_count" })
+  @SpeakeasyMetadata({ data: "json, name=result_count" })
   resultCount?: number;
 
-  @Metadata({ data: "json, name=videos", elemType: shared.EditorialVideoSearchItem })
+  @SpeakeasyMetadata({ data: "json, name=videos", elemType: EditorialVideoSearchItem })
   videos?: EditorialVideoSearchItem[];
 }

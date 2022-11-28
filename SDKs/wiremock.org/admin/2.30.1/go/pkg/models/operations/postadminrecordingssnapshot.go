@@ -4,11 +4,15 @@ type PostAdminRecordingsSnapshotRequestBodyCaptureHeaders struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty"`
 }
 
+// PostAdminRecordingsSnapshotRequestBodyExtractBodyCriteria
+// Criteria for extracting response bodies to a separate file instead of including it in the stub mapping
 type PostAdminRecordingsSnapshotRequestBodyExtractBodyCriteria struct {
 	BinarySizeThreshold *string `json:"binarySizeThreshold,omitempty"`
 	TextSizeThreshold   *string `json:"textSizeThreshold,omitempty"`
 }
 
+// PostAdminRecordingsSnapshotRequestBodyFiltersBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminRecordingsSnapshotRequestBodyFiltersBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -39,10 +43,8 @@ type PostAdminRecordingsSnapshotRequestBody struct {
 	Transformers          []string                                                        `json:"transformers,omitempty"`
 }
 
-type PostAdminRecordingsSnapshotRequest struct {
-	Request PostAdminRecordingsSnapshotRequestBody `request:"mediaType=application/json"`
-}
-
+// PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminRecordingsSnapshot200ApplicationJSONMappingsRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -109,6 +111,10 @@ type PostAdminRecordingsSnapshot200ApplicationJSONMeta struct {
 type PostAdminRecordingsSnapshot200ApplicationJSON struct {
 	Mappings []PostAdminRecordingsSnapshot200ApplicationJSONMappings `json:"mappings,omitempty"`
 	Meta     *PostAdminRecordingsSnapshot200ApplicationJSONMeta      `json:"meta,omitempty"`
+}
+
+type PostAdminRecordingsSnapshotRequest struct {
+	Request PostAdminRecordingsSnapshotRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAdminRecordingsSnapshotResponse struct {

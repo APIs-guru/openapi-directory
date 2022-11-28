@@ -5,10 +5,6 @@ type ListWordSensesQueryParams struct {
 	Word     *string `queryParam:"style=form,explode=true,name=word"`
 }
 
-type ListWordSensesRequest struct {
-	QueryParams ListWordSensesQueryParams
-}
-
 type ListWordSenses200ApplicationJSONFamilies struct {
 	Key        *float64               `json:"Key,omitempty"`
 	Value      map[string]interface{} `json:"Value,omitempty"`
@@ -28,6 +24,10 @@ type ListWordSenses200ApplicationJSON struct {
 	LegacyMapID *float64                                   `json:"legacyMapId,omitempty"`
 	Lemma       *string                                    `json:"lemma,omitempty"`
 	LexemeID    *float64                                   `json:"lexemeId,omitempty"`
+}
+
+type ListWordSensesRequest struct {
+	QueryParams ListWordSensesQueryParams
 }
 
 type ListWordSensesResponse struct {

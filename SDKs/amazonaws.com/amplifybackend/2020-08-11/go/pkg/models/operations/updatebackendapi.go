@@ -19,6 +19,8 @@ type UpdateBackendAPIHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateBackendAPIRequestBodyResourceConfig
+// The resource config for the data model, configured as a part of the Amplify project.
 type UpdateBackendAPIRequestBodyResourceConfig struct {
 	AdditionalAuthTypes []shared.BackendAPIAuthType          `json:"AdditionalAuthTypes,omitempty"`
 	APIName             *string                              `json:"ApiName,omitempty"`

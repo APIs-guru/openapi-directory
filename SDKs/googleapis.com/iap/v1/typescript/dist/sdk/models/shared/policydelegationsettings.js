@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyName } from "./policyname";
 import { Resource } from "./resource";
 // PolicyDelegationSettings
@@ -35,19 +35,19 @@ var PolicyDelegationSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=iamPermission" }),
+        SpeakeasyMetadata({ data: "json, name=iamPermission" }),
         __metadata("design:type", String)
     ], PolicyDelegationSettings.prototype, "iamPermission", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamServiceName" }),
+        SpeakeasyMetadata({ data: "json, name=iamServiceName" }),
         __metadata("design:type", String)
     ], PolicyDelegationSettings.prototype, "iamServiceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyName" }),
+        SpeakeasyMetadata({ data: "json, name=policyName" }),
         __metadata("design:type", PolicyName)
     ], PolicyDelegationSettings.prototype, "policyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=resource" }),
+        SpeakeasyMetadata({ data: "json, name=resource" }),
         __metadata("design:type", Resource)
     ], PolicyDelegationSettings.prototype, "resource", void 0);
     return PolicyDelegationSettings;

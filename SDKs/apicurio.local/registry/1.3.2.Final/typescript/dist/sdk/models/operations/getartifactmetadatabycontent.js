@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetArtifactMetaDataByContentPathParams = /** @class */ (function (_super) {
     __extends(GetArtifactMetaDataByContentPathParams, _super);
@@ -30,7 +30,7 @@ var GetArtifactMetaDataByContentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
         __metadata("design:type", String)
     ], GetArtifactMetaDataByContentPathParams.prototype, "artifactId", void 0);
     return GetArtifactMetaDataByContentPathParams;
@@ -42,11 +42,11 @@ var GetArtifactMetaDataByContentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetArtifactMetaDataByContentPathParams)
     ], GetArtifactMetaDataByContentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Uint8Array)
     ], GetArtifactMetaDataByContentRequest.prototype, "request", void 0);
     return GetArtifactMetaDataByContentRequest;
@@ -58,19 +58,19 @@ var GetArtifactMetaDataByContentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ArtifactMetaData)
     ], GetArtifactMetaDataByContentResponse.prototype, "artifactMetaData", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetArtifactMetaDataByContentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetArtifactMetaDataByContentResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetArtifactMetaDataByContentResponse.prototype, "statusCode", void 0);
     return GetArtifactMetaDataByContentResponse;

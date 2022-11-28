@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import suppressionlistreason_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SuppressionOptions:
-    suppressed_reasons: Optional[List[suppressionlistreason_enum.SuppressionListReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressedReasons' }})
+    r"""SuppressionOptions
+    An object that contains information about the suppression list preferences for your account.
+    """
+    
+    suppressed_reasons: Optional[List[SuppressionListReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressedReasons') }})
     

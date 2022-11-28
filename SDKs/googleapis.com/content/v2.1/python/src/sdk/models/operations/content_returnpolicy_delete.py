@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentReturnpolicyDeletePathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    return_policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'returnPolicyId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    return_policy_id: str = field(metadata={'path_param': { 'field_name': 'returnPolicyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,19 +27,19 @@ class ContentReturnpolicyDeleteQueryParams:
 
 @dataclass
 class ContentReturnpolicyDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentReturnpolicyDeleteRequest:
-    path_params: ContentReturnpolicyDeletePathParams = field(default=None)
-    query_params: ContentReturnpolicyDeleteQueryParams = field(default=None)
-    security: ContentReturnpolicyDeleteSecurity = field(default=None)
+    path_params: ContentReturnpolicyDeletePathParams = field()
+    query_params: ContentReturnpolicyDeleteQueryParams = field()
+    security: ContentReturnpolicyDeleteSecurity = field()
     
 
 @dataclass
 class ContentReturnpolicyDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteDeveloperAccountsDeveloperAccountIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteDeveloperAccountsDeveloperAccountIdPathParams, _super);
     function DeleteDeveloperAccountsDeveloperAccountIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=developerAccountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerAccountId" }),
         __metadata("design:type", String)
     ], DeleteDeveloperAccountsDeveloperAccountIdPathParams.prototype, "developerAccountId", void 0);
     return DeleteDeveloperAccountsDeveloperAccountIdPathParams;
@@ -41,7 +41,7 @@ var DeleteDeveloperAccountsDeveloperAccountIdRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDeveloperAccountsDeveloperAccountIdPathParams)
     ], DeleteDeveloperAccountsDeveloperAccountIdRequest.prototype, "pathParams", void 0);
     return DeleteDeveloperAccountsDeveloperAccountIdRequest;
@@ -53,11 +53,11 @@ var DeleteDeveloperAccountsDeveloperAccountIdResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteDeveloperAccountsDeveloperAccountIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteDeveloperAccountsDeveloperAccountIdResponse.prototype, "statusCode", void 0);
     return DeleteDeveloperAccountsDeveloperAccountIdResponse;

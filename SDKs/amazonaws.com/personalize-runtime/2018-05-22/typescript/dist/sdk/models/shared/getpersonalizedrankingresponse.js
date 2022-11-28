@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PredictedItem } from "./predicteditem";
 var GetPersonalizedRankingResponse = /** @class */ (function (_super) {
     __extends(GetPersonalizedRankingResponse, _super);
     function GetPersonalizedRankingResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=personalizedRanking", elemType: shared.PredictedItem }),
+        SpeakeasyMetadata({ data: "json, name=personalizedRanking", elemType: PredictedItem }),
         __metadata("design:type", Array)
     ], GetPersonalizedRankingResponse.prototype, "personalizedRanking", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendationId" }),
+        SpeakeasyMetadata({ data: "json, name=recommendationId" }),
         __metadata("design:type", String)
     ], GetPersonalizedRankingResponse.prototype, "recommendationId", void 0);
     return GetPersonalizedRankingResponse;

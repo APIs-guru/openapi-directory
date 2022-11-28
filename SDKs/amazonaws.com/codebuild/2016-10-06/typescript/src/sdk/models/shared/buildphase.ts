@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PhaseContext } from "./phasecontext";
 import { StatusTypeEnum } from "./statustypeenum";
 import { BuildPhaseTypeEnum } from "./buildphasetypeenum";
+
 
 
 // BuildPhase
@@ -10,21 +10,21 @@ import { BuildPhaseTypeEnum } from "./buildphasetypeenum";
  * Information about a stage for a build.
 **/
 export class BuildPhase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contexts", elemType: shared.PhaseContext })
+  @SpeakeasyMetadata({ data: "json, name=contexts", elemType: PhaseContext })
   contexts?: PhaseContext[];
 
-  @Metadata({ data: "json, name=durationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=durationInSeconds" })
   durationInSeconds?: number;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=phaseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=phaseStatus" })
   phaseStatus?: StatusTypeEnum;
 
-  @Metadata({ data: "json, name=phaseType" })
+  @SpeakeasyMetadata({ data: "json, name=phaseType" })
   phaseType?: BuildPhaseTypeEnum;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 }

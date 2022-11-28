@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CostScenario } from "./costscenario";
+
 
 
 // EstimateCostScenarioForBillingAccountRequest
@@ -7,6 +8,6 @@ import { CostScenario } from "./costscenario";
  * Request for EstimateCostScenarioForBillingAccount.
 **/
 export class EstimateCostScenarioForBillingAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=costScenario" })
+  @SpeakeasyMetadata({ data: "json, name=costScenario" })
   costScenario?: CostScenario;
 }

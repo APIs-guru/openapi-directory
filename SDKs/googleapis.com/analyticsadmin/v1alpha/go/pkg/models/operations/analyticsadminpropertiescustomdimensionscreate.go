@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesCustomDimensionsCreateSecurity struct {
 type AnalyticsadminPropertiesCustomDimensionsCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesCustomDimensionsCreatePathParams
 	QueryParams AnalyticsadminPropertiesCustomDimensionsCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaCustomDimension `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaCustomDimensionInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesCustomDimensionsCreateSecurity
 }
 

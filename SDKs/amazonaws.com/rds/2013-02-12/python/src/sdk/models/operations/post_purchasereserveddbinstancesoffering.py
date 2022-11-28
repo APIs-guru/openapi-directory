@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPurchaseReservedDbInstancesOfferingActionEnum(str, Enum):
     PURCHASE_RESERVED_DB_INSTANCES_OFFERING = "PurchaseReservedDBInstancesOffering"
@@ -10,8 +14,8 @@ class PostPurchaseReservedDbInstancesOfferingVersionEnum(str, Enum):
 
 @dataclass
 class PostPurchaseReservedDbInstancesOfferingQueryParams:
-    action: PostPurchaseReservedDbInstancesOfferingActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPurchaseReservedDbInstancesOfferingVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPurchaseReservedDbInstancesOfferingActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPurchaseReservedDbInstancesOfferingVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPurchaseReservedDbInstancesOfferingHeaders:
 
 @dataclass
 class PostPurchaseReservedDbInstancesOfferingRequest:
-    query_params: PostPurchaseReservedDbInstancesOfferingQueryParams = field(default=None)
-    headers: PostPurchaseReservedDbInstancesOfferingHeaders = field(default=None)
+    headers: PostPurchaseReservedDbInstancesOfferingHeaders = field()
+    query_params: PostPurchaseReservedDbInstancesOfferingQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPurchaseReservedDbInstancesOfferingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

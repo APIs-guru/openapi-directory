@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigFile } from "./configfile";
 import { ImportFile } from "./importfile";
 
 
+
 export class TargetConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: ConfigFile;
 
-  @Metadata({ data: "json, name=imports", elemType: shared.ImportFile })
+  @SpeakeasyMetadata({ data: "json, name=imports", elemType: ImportFile })
   imports?: ImportFile[];
 }

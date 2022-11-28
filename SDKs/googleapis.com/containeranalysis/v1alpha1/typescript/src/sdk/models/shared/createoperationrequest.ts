@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Operation } from "./operation";
+
 
 
 // CreateOperationRequest
@@ -7,9 +8,9 @@ import { Operation } from "./operation";
  * Request for creating an operation
 **/
 export class CreateOperationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: Operation;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 }

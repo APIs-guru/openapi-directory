@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainController } from "./domaincontroller";
 
 
+
 export class DescribeDomainControllersResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainControllers", elemType: shared.DomainController })
+  @SpeakeasyMetadata({ data: "json, name=DomainControllers", elemType: DomainController })
   domainControllers?: DomainController[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

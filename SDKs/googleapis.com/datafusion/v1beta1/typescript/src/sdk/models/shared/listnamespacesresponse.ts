@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Namespace } from "./namespace";
+
 
 
 // ListNamespacesResponse
@@ -8,9 +8,9 @@ import { Namespace } from "./namespace";
  * List namespaces response.
 **/
 export class ListNamespacesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespaces", elemType: shared.Namespace })
+  @SpeakeasyMetadata({ data: "json, name=namespaces", elemType: Namespace })
   namespaces?: Namespace[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

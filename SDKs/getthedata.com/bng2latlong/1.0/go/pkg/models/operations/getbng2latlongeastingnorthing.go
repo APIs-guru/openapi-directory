@@ -5,10 +5,6 @@ type GetBng2latlongEastingNorthingPathParams struct {
 	Northing int64 `pathParam:"style=simple,explode=false,name=northing"`
 }
 
-type GetBng2latlongEastingNorthingRequest struct {
-	PathParams GetBng2latlongEastingNorthingPathParams
-}
-
 type GetBng2latlongEastingNorthing200ApplicationJSONStatusEnum string
 
 const (
@@ -23,6 +19,10 @@ type GetBng2latlongEastingNorthing200ApplicationJSON struct {
 	Longitude *float64                                                   `json:"longitude,omitempty"`
 	Northing  *int64                                                     `json:"northing,omitempty"`
 	Status    *GetBng2latlongEastingNorthing200ApplicationJSONStatusEnum `json:"status,omitempty"`
+}
+
+type GetBng2latlongEastingNorthingRequest struct {
+	PathParams GetBng2latlongEastingNorthingPathParams
 }
 
 type GetBng2latlongEastingNorthingResponse struct {

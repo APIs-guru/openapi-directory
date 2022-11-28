@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CurrencyCodeEnum } from "./currencycodeenum";
 import { SavingsPlanPaymentOptionEnum } from "./savingsplanpaymentoptionenum";
 import { SavingsPlanProductTypeEnum } from "./savingsplanproducttypeenum";
@@ -6,62 +6,63 @@ import { SavingsPlanTypeEnum } from "./savingsplantypeenum";
 import { SavingsPlanStateEnum } from "./savingsplanstateenum";
 
 
+
 // SavingsPlan
 /** 
  * Information about a Savings Plan.
 **/
 export class SavingsPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitment" })
+  @SpeakeasyMetadata({ data: "json, name=commitment" })
   commitment?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: CurrencyCodeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ec2InstanceFamily" })
+  @SpeakeasyMetadata({ data: "json, name=ec2InstanceFamily" })
   ec2InstanceFamily?: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: string;
 
-  @Metadata({ data: "json, name=offeringId" })
+  @SpeakeasyMetadata({ data: "json, name=offeringId" })
   offeringId?: string;
 
-  @Metadata({ data: "json, name=paymentOption" })
+  @SpeakeasyMetadata({ data: "json, name=paymentOption" })
   paymentOption?: SavingsPlanPaymentOptionEnum;
 
-  @Metadata({ data: "json, name=productTypes" })
+  @SpeakeasyMetadata({ data: "json, name=productTypes" })
   productTypes?: SavingsPlanProductTypeEnum[];
 
-  @Metadata({ data: "json, name=recurringPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=recurringPaymentAmount" })
   recurringPaymentAmount?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=savingsPlanArn" })
+  @SpeakeasyMetadata({ data: "json, name=savingsPlanArn" })
   savingsPlanArn?: string;
 
-  @Metadata({ data: "json, name=savingsPlanId" })
+  @SpeakeasyMetadata({ data: "json, name=savingsPlanId" })
   savingsPlanId?: string;
 
-  @Metadata({ data: "json, name=savingsPlanType" })
+  @SpeakeasyMetadata({ data: "json, name=savingsPlanType" })
   savingsPlanType?: SavingsPlanTypeEnum;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SavingsPlanStateEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=termDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=termDurationInSeconds" })
   termDurationInSeconds?: number;
 
-  @Metadata({ data: "json, name=upfrontPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=upfrontPaymentAmount" })
   upfrontPaymentAmount?: string;
 }

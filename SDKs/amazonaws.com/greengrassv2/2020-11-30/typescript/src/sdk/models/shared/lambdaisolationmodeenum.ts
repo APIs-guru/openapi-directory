@@ -1,6 +1,7 @@
 
 
+
 export enum LambdaIsolationModeEnum {
-    GreengrassContainer = "GreengrassContainer"
-,    NoContainer = "NoContainer"
+    GreengrassContainer = "GreengrassContainer",
+    NoContainer = "NoContainer"
 }

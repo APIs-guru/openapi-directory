@@ -1,5 +1,7 @@
 package shared
 
+// DecimalColumnStatisticsData
+// Defines column statistics supported for fixed-point number data columns.
 type DecimalColumnStatisticsData struct {
 	MaximumValue           *DecimalNumber `json:"MaximumValue,omitempty"`
 	MinimumValue           *DecimalNumber `json:"MinimumValue,omitempty"`

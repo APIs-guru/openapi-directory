@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails } from "./awselasticsearchdomainelasticsearchclusterconfigzoneawarenessconfigdetails";
+
 
 
 // AwsElasticsearchDomainElasticsearchClusterConfigDetails
@@ -7,24 +8,24 @@ import { AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDeta
  * details about the configuration of an Elasticsearch cluster.
 **/
 export class AwsElasticsearchDomainElasticsearchClusterConfigDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DedicatedMasterCount" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedMasterCount" })
   dedicatedMasterCount?: number;
 
-  @Metadata({ data: "json, name=DedicatedMasterEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedMasterEnabled" })
   dedicatedMasterEnabled?: boolean;
 
-  @Metadata({ data: "json, name=DedicatedMasterType" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedMasterType" })
   dedicatedMasterType?: string;
 
-  @Metadata({ data: "json, name=InstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCount" })
   instanceCount?: number;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=ZoneAwarenessConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ZoneAwarenessConfig" })
   zoneAwarenessConfig?: AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails;
 
-  @Metadata({ data: "json, name=ZoneAwarenessEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=ZoneAwarenessEnabled" })
   zoneAwarenessEnabled?: boolean;
 }

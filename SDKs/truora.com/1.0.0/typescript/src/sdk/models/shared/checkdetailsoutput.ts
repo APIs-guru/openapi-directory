@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckDetails } from "./checkdetails";
+
 
 
 // CheckDetailsOutput
@@ -8,12 +8,12 @@ import { CheckDetails } from "./checkdetails";
  * Represents a list of background check details
 **/
 export class CheckDetailsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details", elemType: shared.CheckDetails })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: CheckDetails })
   details: CheckDetails[];
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }

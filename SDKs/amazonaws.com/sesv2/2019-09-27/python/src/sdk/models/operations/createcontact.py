@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateContactPathParams:
-    contact_list_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
+    contact_list_name: str = field(metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class CreateContactHeaders:
 @dataclass_json
 @dataclass
 class CreateContactRequestBody:
-    attributes_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributesData' }})
-    email_address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailAddress' }})
-    topic_preferences: Optional[List[shared.TopicPreference]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TopicPreferences' }})
-    unsubscribe_all: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UnsubscribeAll' }})
+    email_address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailAddress') }})
+    attributes_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributesData') }})
+    topic_preferences: Optional[List[shared.TopicPreference]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TopicPreferences') }})
+    unsubscribe_all: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UnsubscribeAll') }})
     
 
 @dataclass
 class CreateContactRequest:
-    path_params: CreateContactPathParams = field(default=None)
-    headers: CreateContactHeaders = field(default=None)
-    request: CreateContactRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateContactHeaders = field()
+    path_params: CreateContactPathParams = field()
+    request: CreateContactRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateContactResponse:
+    content_type: str = field()
+    status_code: int = field()
     already_exists_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_contact_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

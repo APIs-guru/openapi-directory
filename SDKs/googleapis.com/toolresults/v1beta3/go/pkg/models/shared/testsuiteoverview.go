@@ -1,5 +1,7 @@
 package shared
 
+// TestSuiteOverview
+// A summary of a test suite result either parsed from XML or uploaded directly by a user. Note: the API related comments are for StepService only. This message is also being used in ExecutionService in a read only mode for the corresponding step.
 type TestSuiteOverview struct {
 	ElapsedTime  *Duration      `json:"elapsedTime,omitempty"`
 	ErrorCount   *int32         `json:"errorCount,omitempty"`

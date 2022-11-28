@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Language } from "./language";
+
 
 
 // LanguageTargeting
@@ -8,6 +8,6 @@ import { Language } from "./language";
  * Language Targeting.
 **/
 export class LanguageTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languages", elemType: shared.Language })
+  @SpeakeasyMetadata({ data: "json, name=languages", elemType: Language })
   languages?: Language[];
 }

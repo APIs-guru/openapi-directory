@@ -15,6 +15,8 @@ type CreateStudioHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateStudioRequestBodyStudioEncryptionConfiguration
+// Configuration of the encryption method that is used for the studio.
 type CreateStudioRequestBodyStudioEncryptionConfiguration struct {
 	KeyArn  *string                                          `json:"keyArn,omitempty"`
 	KeyType *shared.StudioEncryptionConfigurationKeyTypeEnum `json:"keyType,omitempty"`

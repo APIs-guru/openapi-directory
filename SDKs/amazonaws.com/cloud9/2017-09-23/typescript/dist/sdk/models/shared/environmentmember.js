@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionsEnum } from "./permissionsenum";
 // EnvironmentMember
 /**
@@ -34,23 +34,23 @@ var EnvironmentMember = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=environmentId" }),
+        SpeakeasyMetadata({ data: "json, name=environmentId" }),
         __metadata("design:type", String)
     ], EnvironmentMember.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastAccess" }),
+        SpeakeasyMetadata({ data: "json, name=lastAccess" }),
         __metadata("design:type", Date)
     ], EnvironmentMember.prototype, "lastAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=permissions" }),
+        SpeakeasyMetadata({ data: "json, name=permissions" }),
         __metadata("design:type", String)
     ], EnvironmentMember.prototype, "permissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=userArn" }),
+        SpeakeasyMetadata({ data: "json, name=userArn" }),
         __metadata("design:type", String)
     ], EnvironmentMember.prototype, "userArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], EnvironmentMember.prototype, "userId", void 0);
     return EnvironmentMember;

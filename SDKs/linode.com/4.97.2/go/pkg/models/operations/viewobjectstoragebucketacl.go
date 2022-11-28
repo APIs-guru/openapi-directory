@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var ViewObjectStorageBucketACLServers = []string{
+var ViewObjectStorageBucketACLServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -17,24 +17,9 @@ type ViewObjectStorageBucketACLQueryParams struct {
 	Name string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type ViewObjectStorageBucketACLSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type ViewObjectStorageBucketACLSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type ViewObjectStorageBucketACLSecurity struct {
-	Option1 *ViewObjectStorageBucketACLSecurityOption1 `security:"option"`
-	Option2 *ViewObjectStorageBucketACLSecurityOption2 `security:"option"`
-}
-
-type ViewObjectStorageBucketACLRequest struct {
-	ServerURL   *string
-	PathParams  ViewObjectStorageBucketACLPathParams
-	QueryParams ViewObjectStorageBucketACLQueryParams
-	Security    ViewObjectStorageBucketACLSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type ViewObjectStorageBucketACL200ApplicationJSONACLEnum string
@@ -54,6 +39,13 @@ type ViewObjectStorageBucketACL200ApplicationJSON struct {
 
 type ViewObjectStorageBucketACLDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type ViewObjectStorageBucketACLRequest struct {
+	ServerURL   *string
+	PathParams  ViewObjectStorageBucketACLPathParams
+	QueryParams ViewObjectStorageBucketACLQueryParams
+	Security    ViewObjectStorageBucketACLSecurity
 }
 
 type ViewObjectStorageBucketACLResponse struct {

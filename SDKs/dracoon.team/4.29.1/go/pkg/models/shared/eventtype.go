@@ -1,5 +1,7 @@
 package shared
 
+// EventType
+// Event type information
 type EventType struct {
 	ID                         int32  `json:"id"`
 	Name                       string `json:"name"`

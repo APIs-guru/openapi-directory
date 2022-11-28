@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Logging } from "./logging";
+
 
 
 // InfrastructureConfiguration
@@ -7,48 +8,48 @@ import { Logging } from "./logging";
  * Details of the infrastructure configuration.
 **/
 export class InfrastructureConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated?: string;
 
-  @Metadata({ data: "json, name=dateUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=dateUpdated" })
   dateUpdated?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=instanceProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceProfileName" })
   instanceProfileName?: string;
 
-  @Metadata({ data: "json, name=instanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=instanceTypes" })
   instanceTypes?: string[];
 
-  @Metadata({ data: "json, name=keyPair" })
+  @SpeakeasyMetadata({ data: "json, name=keyPair" })
   keyPair?: string;
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: Logging;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceTags" })
+  @SpeakeasyMetadata({ data: "json, name=resourceTags" })
   resourceTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=snsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=snsTopicArn" })
   snsTopicArn?: string;
 
-  @Metadata({ data: "json, name=subnetId" })
+  @SpeakeasyMetadata({ data: "json, name=subnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=terminateInstanceOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=terminateInstanceOnFailure" })
   terminateInstanceOnFailure?: boolean;
 }

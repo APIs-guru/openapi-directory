@@ -1,6 +1,7 @@
 
 
+
 export enum QuoteFieldsEnum {
-    Always = "ALWAYS"
-,    Asneeded = "ASNEEDED"
+    Always = "ALWAYS",
+    Asneeded = "ASNEEDED"
 }

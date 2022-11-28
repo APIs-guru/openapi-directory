@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SegmentMetricFilterOperatorEnum(str, Enum):
     UNSPECIFIED_OPERATOR = "UNSPECIFIED_OPERATOR"
@@ -20,9 +22,13 @@ class SegmentMetricFilterScopeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SegmentMetricFilter:
-    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparisonValue' }})
-    max_comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxComparisonValue' }})
-    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricName' }})
-    operator: Optional[SegmentMetricFilterOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    scope: Optional[SegmentMetricFilterScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
+    r"""SegmentMetricFilter
+    Metric filter to be used in a segment filter clause.
+    """
+    
+    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparisonValue') }})
+    max_comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxComparisonValue') }})
+    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricName') }})
+    operator: Optional[SegmentMetricFilterOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    scope: Optional[SegmentMetricFilterScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scope') }})
     

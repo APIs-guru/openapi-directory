@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -8,11 +8,11 @@ from sdk.models import shared
 
 @dataclass
 class GetEfileReportsHouseSenateQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     file_number: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'file_number', 'style': 'form', 'explode': True }})
-    max_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
-    min_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
+    max_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
+    min_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     sort: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
@@ -23,12 +23,12 @@ class GetEfileReportsHouseSenateQueryParams:
 
 @dataclass
 class GetEfileReportsHouseSenateRequest:
-    query_params: GetEfileReportsHouseSenateQueryParams = field(default=None)
+    query_params: GetEfileReportsHouseSenateQueryParams = field()
     
 
 @dataclass
 class GetEfileReportsHouseSenateResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_f3_filing_page: Optional[shared.BaseF3FilingPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

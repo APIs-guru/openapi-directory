@@ -1,5 +1,7 @@
 package shared
 
+// ContactInfo
+// Contact details for managed Google Play enterprises.
 type ContactInfo struct {
 	ContactEmail               *string `json:"contactEmail,omitempty"`
 	DataProtectionOfficerEmail *string `json:"dataProtectionOfficerEmail,omitempty"`

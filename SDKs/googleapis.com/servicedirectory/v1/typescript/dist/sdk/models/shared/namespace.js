@@ -22,7 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// NamespaceInput
+/**
+ * A container for services. Namespaces allow administrators to group services together and define permissions for a collection of services.
+**/
+var NamespaceInput = /** @class */ (function (_super) {
+    __extends(NamespaceInput, _super);
+    function NamespaceInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], NamespaceInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], NamespaceInput.prototype, "name", void 0);
+    return NamespaceInput;
+}(SpeakeasyBase));
+export { NamespaceInput };
 // Namespace
 /**
  * A container for services. Namespaces allow administrators to group services together and define permissions for a collection of services.
@@ -33,13 +53,17 @@ var Namespace = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Namespace.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Namespace.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=uid" }),
+        __metadata("design:type", String)
+    ], Namespace.prototype, "uid", void 0);
     return Namespace;
 }(SpeakeasyBase));
 export { Namespace };

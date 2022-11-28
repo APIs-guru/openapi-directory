@@ -1,5 +1,7 @@
 package shared
 
+// EndpointLocation
+// Specifies geographic information about an endpoint.
 type EndpointLocation struct {
 	City       *string  `json:"City,omitempty"`
 	Country    *string  `json:"Country,omitempty"`

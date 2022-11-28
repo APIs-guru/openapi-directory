@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomizedScalingMetricSpecification } from "./customizedscalingmetricspecification";
 import { PredefinedScalingMetricSpecification } from "./predefinedscalingmetricspecification";
 // TargetTrackingConfiguration
@@ -35,31 +35,31 @@ var TargetTrackingConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CustomizedScalingMetricSpecification" }),
+        SpeakeasyMetadata({ data: "json, name=CustomizedScalingMetricSpecification" }),
         __metadata("design:type", CustomizedScalingMetricSpecification)
     ], TargetTrackingConfiguration.prototype, "customizedScalingMetricSpecification", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisableScaleIn" }),
+        SpeakeasyMetadata({ data: "json, name=DisableScaleIn" }),
         __metadata("design:type", Boolean)
     ], TargetTrackingConfiguration.prototype, "disableScaleIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EstimatedInstanceWarmup" }),
+        SpeakeasyMetadata({ data: "json, name=EstimatedInstanceWarmup" }),
         __metadata("design:type", Number)
     ], TargetTrackingConfiguration.prototype, "estimatedInstanceWarmup", void 0);
     __decorate([
-        Metadata({ data: "json, name=PredefinedScalingMetricSpecification" }),
+        SpeakeasyMetadata({ data: "json, name=PredefinedScalingMetricSpecification" }),
         __metadata("design:type", PredefinedScalingMetricSpecification)
     ], TargetTrackingConfiguration.prototype, "predefinedScalingMetricSpecification", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScaleInCooldown" }),
+        SpeakeasyMetadata({ data: "json, name=ScaleInCooldown" }),
         __metadata("design:type", Number)
     ], TargetTrackingConfiguration.prototype, "scaleInCooldown", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScaleOutCooldown" }),
+        SpeakeasyMetadata({ data: "json, name=ScaleOutCooldown" }),
         __metadata("design:type", Number)
     ], TargetTrackingConfiguration.prototype, "scaleOutCooldown", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetValue" }),
+        SpeakeasyMetadata({ data: "json, name=TargetValue" }),
         __metadata("design:type", Number)
     ], TargetTrackingConfiguration.prototype, "targetValue", void 0);
     return TargetTrackingConfiguration;

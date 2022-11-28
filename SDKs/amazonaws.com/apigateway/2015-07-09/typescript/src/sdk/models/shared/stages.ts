@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Stage } from "./stage";
+
 
 
 // Stages
@@ -8,6 +8,6 @@ import { Stage } from "./stage";
  * <p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p> <div class="seeAlso"><a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html">Deploying API in Stages</a></div>
 **/
 export class Stages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=item", elemType: shared.Stage })
+  @SpeakeasyMetadata({ data: "json, name=item", elemType: Stage })
   item?: Stage[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetArtifactVersionPathParams = /** @class */ (function (_super) {
     __extends(GetArtifactVersionPathParams, _super);
@@ -30,11 +30,11 @@ var GetArtifactVersionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
         __metadata("design:type", String)
     ], GetArtifactVersionPathParams.prototype, "artifactId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", Number)
     ], GetArtifactVersionPathParams.prototype, "version", void 0);
     return GetArtifactVersionPathParams;
@@ -46,7 +46,7 @@ var GetArtifactVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetArtifactVersionPathParams)
     ], GetArtifactVersionRequest.prototype, "pathParams", void 0);
     return GetArtifactVersionRequest;
@@ -58,15 +58,15 @@ var GetArtifactVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetArtifactVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetArtifactVersionResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetArtifactVersionResponse.prototype, "statusCode", void 0);
     return GetArtifactVersionResponse;

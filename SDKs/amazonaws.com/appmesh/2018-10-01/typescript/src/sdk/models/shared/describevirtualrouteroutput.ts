@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualRouterData } from "./virtualrouterdata";
 
 
+
 export class DescribeVirtualRouterOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualRouter" })
+  @SpeakeasyMetadata({ data: "json, name=virtualRouter" })
   virtualRouter?: VirtualRouterData;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CanarySettings
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration settings of a canary deployment.
 **/
 export class CanarySettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=percentTraffic" })
+  @SpeakeasyMetadata({ data: "json, name=percentTraffic" })
   percentTraffic?: number;
 
-  @Metadata({ data: "json, name=stageVariableOverrides" })
+  @SpeakeasyMetadata({ data: "json, name=stageVariableOverrides" })
   stageVariableOverrides?: Map<string, string>;
 
-  @Metadata({ data: "json, name=useStageCache" })
+  @SpeakeasyMetadata({ data: "json, name=useStageCache" })
   useStageCache?: boolean;
 }

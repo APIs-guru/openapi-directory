@@ -39,6 +39,8 @@ type PullRequestReviewSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// PullRequestReview
+// Pull Request Reviews are reviews on pull requests.
 type PullRequestReview struct {
 	Links             PullRequestReviewLinks      `json:"_links"`
 	AuthorAssociation AuthorAssociationEnum       `json:"author_association"`

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval } from "./googleclouddialogflowcxv3experimentresultconfidenceinterval";
 
+
 export enum GoogleCloudDialogflowCxV3ExperimentResultMetricCountTypeEnum {
-    CountTypeUnspecified = "COUNT_TYPE_UNSPECIFIED"
-,    TotalNoMatchCount = "TOTAL_NO_MATCH_COUNT"
-,    TotalTurnCount = "TOTAL_TURN_COUNT"
-,    AverageTurnCount = "AVERAGE_TURN_COUNT"
+    CountTypeUnspecified = "COUNT_TYPE_UNSPECIFIED",
+    TotalNoMatchCount = "TOTAL_NO_MATCH_COUNT",
+    TotalTurnCount = "TOTAL_TURN_COUNT",
+    AverageTurnCount = "AVERAGE_TURN_COUNT"
 }
 
 export enum GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum {
-    MetricUnspecified = "METRIC_UNSPECIFIED"
-,    ContainedSessionNoCallbackRate = "CONTAINED_SESSION_NO_CALLBACK_RATE"
-,    LiveAgentHandoffRate = "LIVE_AGENT_HANDOFF_RATE"
-,    CallbackSessionRate = "CALLBACK_SESSION_RATE"
-,    AbandonedSessionRate = "ABANDONED_SESSION_RATE"
-,    SessionEndRate = "SESSION_END_RATE"
+    MetricUnspecified = "METRIC_UNSPECIFIED",
+    ContainedSessionNoCallbackRate = "CONTAINED_SESSION_NO_CALLBACK_RATE",
+    LiveAgentHandoffRate = "LIVE_AGENT_HANDOFF_RATE",
+    CallbackSessionRate = "CALLBACK_SESSION_RATE",
+    AbandonedSessionRate = "ABANDONED_SESSION_RATE",
+    SessionEndRate = "SESSION_END_RATE"
 }
 
 
@@ -23,18 +24,18 @@ export enum GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum {
  * Metric and corresponding confidence intervals.
 **/
 export class GoogleCloudDialogflowCxV3ExperimentResultMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidenceInterval" })
+  @SpeakeasyMetadata({ data: "json, name=confidenceInterval" })
   confidenceInterval?: GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=countType" })
+  @SpeakeasyMetadata({ data: "json, name=countType" })
   countType?: GoogleCloudDialogflowCxV3ExperimentResultMetricCountTypeEnum;
 
-  @Metadata({ data: "json, name=ratio" })
+  @SpeakeasyMetadata({ data: "json, name=ratio" })
   ratio?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum;
 }

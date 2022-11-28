@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1EntityMetadata } from "./googlecloudapigeev1entitymetadata";
+
 
 
 // GoogleCloudApigeeV1SharedFlow
@@ -7,15 +8,15 @@ import { GoogleCloudApigeeV1EntityMetadata } from "./googlecloudapigeev1entityme
  * The metadata describing a shared flow
 **/
 export class GoogleCloudApigeeV1SharedFlow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latestRevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=latestRevisionId" })
   latestRevisionId?: string;
 
-  @Metadata({ data: "json, name=metaData" })
+  @SpeakeasyMetadata({ data: "json, name=metaData" })
   metaData?: GoogleCloudApigeeV1EntityMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: string[];
 }

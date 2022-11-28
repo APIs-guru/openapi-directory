@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SubordinateConfigChain
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This message describes a subordinate CA's issuer certificate chain. This wrapper exists for compatibility reasons.
 **/
 export class SubordinateConfigChain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pemCertificates" })
+  @SpeakeasyMetadata({ data: "json, name=pemCertificates" })
   pemCertificates?: string[];
 }

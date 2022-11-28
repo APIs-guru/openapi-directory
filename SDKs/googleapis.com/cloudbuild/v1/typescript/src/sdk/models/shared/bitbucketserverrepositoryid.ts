@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BitbucketServerRepositoryId
@@ -6,12 +7,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * BitbucketServerRepositoryId identifies a specific repository hosted on a Bitbucket Server.
 **/
 export class BitbucketServerRepositoryId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectKey" })
+  @SpeakeasyMetadata({ data: "json, name=projectKey" })
   projectKey?: string;
 
-  @Metadata({ data: "json, name=repoSlug" })
+  @SpeakeasyMetadata({ data: "json, name=repoSlug" })
   repoSlug?: string;
 
-  @Metadata({ data: "json, name=webhookId" })
+  @SpeakeasyMetadata({ data: "json, name=webhookId" })
   webhookId?: number;
+}
+
+
+// BitbucketServerRepositoryIdInput
+/** 
+ * BitbucketServerRepositoryId identifies a specific repository hosted on a Bitbucket Server.
+**/
+export class BitbucketServerRepositoryIdInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=projectKey" })
+  projectKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=repoSlug" })
+  repoSlug?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GranularStats
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Stats split by a defined in context granularity.
 **/
 export class GranularStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buckets" })
+  @SpeakeasyMetadata({ data: "json, name=buckets" })
   buckets?: Map<string, string>;
 }

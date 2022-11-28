@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LateDataRuleConfiguration } from "./latedataruleconfiguration";
+
 
 
 // LateDataRule
@@ -7,9 +8,9 @@ import { LateDataRuleConfiguration } from "./latedataruleconfiguration";
  * A structure that contains the name and configuration information of a late data rule.
 **/
 export class LateDataRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ruleConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ruleConfiguration" })
   ruleConfiguration: LateDataRuleConfiguration;
 
-  @Metadata({ data: "json, name=ruleName" })
+  @SpeakeasyMetadata({ data: "json, name=ruleName" })
   ruleName?: string;
 }

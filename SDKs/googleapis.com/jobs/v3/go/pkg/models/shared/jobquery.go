@@ -52,6 +52,8 @@ const (
 	JobQueryJobCategoriesEnumTransportationAndLogistics       JobQueryJobCategoriesEnum = "TRANSPORTATION_AND_LOGISTICS"
 )
 
+// JobQuery
+// Input only. The query required to perform a search query.
 type JobQuery struct {
 	CommuteFilter         *CommuteFilter                `json:"commuteFilter,omitempty"`
 	CompanyDisplayNames   []string                      `json:"companyDisplayNames,omitempty"`

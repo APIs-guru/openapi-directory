@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1SafetyNetConfig } from "./googlefirebaseappcheckv1safetynetconfig";
+
 
 
 // GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse
@@ -8,6 +8,6 @@ import { GoogleFirebaseAppcheckV1SafetyNetConfig } from "./googlefirebaseappchec
  * Response message for the BatchGetSafetyNetConfigs method.
 **/
 export class GoogleFirebaseAppcheckV1BatchGetSafetyNetConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configs", elemType: shared.GoogleFirebaseAppcheckV1SafetyNetConfig })
+  @SpeakeasyMetadata({ data: "json, name=configs", elemType: GoogleFirebaseAppcheckV1SafetyNetConfig })
   configs?: GoogleFirebaseAppcheckV1SafetyNetConfig[];
 }

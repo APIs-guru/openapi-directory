@@ -12,12 +12,12 @@ class GetReturningProductionQueryParams:
 
 @dataclass
 class GetReturningProductionRequest:
-    query_params: GetReturningProductionQueryParams = field(default=None)
+    query_params: GetReturningProductionQueryParams = field()
     
 
 @dataclass
 class GetReturningProductionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     returning_productions: Optional[List[shared.ReturningProduction]] = field(default=None)
-    status_code: int = field(default=None)
     

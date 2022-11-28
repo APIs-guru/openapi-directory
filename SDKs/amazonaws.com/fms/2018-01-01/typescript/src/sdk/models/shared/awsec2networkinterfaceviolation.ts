@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2NetworkInterfaceViolation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Violation detail for network interfaces associated with an EC2 instance.
 **/
 export class AwsEc2NetworkInterfaceViolation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ViolatingSecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=ViolatingSecurityGroups" })
   violatingSecurityGroups?: string[];
 
-  @Metadata({ data: "json, name=ViolationTarget" })
+  @SpeakeasyMetadata({ data: "json, name=ViolationTarget" })
   violationTarget?: string;
 }

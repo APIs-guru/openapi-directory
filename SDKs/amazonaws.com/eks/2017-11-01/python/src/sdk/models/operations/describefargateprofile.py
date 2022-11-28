@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeFargateProfilePathParams:
-    fargate_profile_name: str = field(default=None, metadata={'path_param': { 'field_name': 'fargateProfileName', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    fargate_profile_name: str = field(metadata={'path_param': { 'field_name': 'fargateProfileName', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class DescribeFargateProfileHeaders:
 
 @dataclass
 class DescribeFargateProfileRequest:
-    path_params: DescribeFargateProfilePathParams = field(default=None)
-    headers: DescribeFargateProfileHeaders = field(default=None)
+    headers: DescribeFargateProfileHeaders = field()
+    path_params: DescribeFargateProfilePathParams = field()
     
 
 @dataclass
 class DescribeFargateProfileResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_fargate_profile_response: Optional[shared.DescribeFargateProfileResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

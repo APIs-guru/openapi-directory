@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostGetOnboardingUrlSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostGetOnboardingUrlSecurityOption1, _super);
-    function PostGetOnboardingUrlSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostGetOnboardingUrlSecurityOption1.prototype, "basicAuth", void 0);
-    return PostGetOnboardingUrlSecurityOption1;
-}(SpeakeasyBase));
-export { PostGetOnboardingUrlSecurityOption1 };
-var PostGetOnboardingUrlSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostGetOnboardingUrlSecurityOption2, _super);
-    function PostGetOnboardingUrlSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostGetOnboardingUrlSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostGetOnboardingUrlSecurityOption2;
-}(SpeakeasyBase));
-export { PostGetOnboardingUrlSecurityOption2 };
 var PostGetOnboardingUrlSecurity = /** @class */ (function (_super) {
     __extends(PostGetOnboardingUrlSecurity, _super);
     function PostGetOnboardingUrlSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetOnboardingUrlSecurityOption1)
-    ], PostGetOnboardingUrlSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostGetOnboardingUrlSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetOnboardingUrlSecurityOption2)
-    ], PostGetOnboardingUrlSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostGetOnboardingUrlSecurity.prototype, "apiKeyAuth", void 0);
     return PostGetOnboardingUrlSecurity;
 }(SpeakeasyBase));
 export { PostGetOnboardingUrlSecurity };
@@ -70,11 +46,11 @@ var PostGetOnboardingUrlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostGetOnboardingUrlRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGetOnboardingUrlSecurity)
     ], PostGetOnboardingUrlRequest.prototype, "security", void 0);
     return PostGetOnboardingUrlRequest;
@@ -86,19 +62,19 @@ var PostGetOnboardingUrlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGetOnboardingUrlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetOnboardingUrlResponse.prototype, "getOnboardingUrlResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetOnboardingUrlResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGetOnboardingUrlResponse.prototype, "statusCode", void 0);
     return PostGetOnboardingUrlResponse;

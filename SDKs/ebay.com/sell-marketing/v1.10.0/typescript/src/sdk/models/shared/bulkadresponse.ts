@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdResponse } from "./adresponse";
+
 
 
 // BulkAdResponse
@@ -8,6 +8,6 @@ import { AdResponse } from "./adresponse";
  * This type defines the fields for the create ads in bulk response.
 **/
 export class BulkAdResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responses", elemType: shared.AdResponse })
+  @SpeakeasyMetadata({ data: "json, name=responses", elemType: AdResponse })
   responses?: AdResponse[];
 }

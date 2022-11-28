@@ -1,7 +1,8 @@
 
 
+
 export enum EventTypeEnum {
-    SignIn = "SignIn"
-,    SignUp = "SignUp"
-,    ForgotPassword = "ForgotPassword"
+    SignIn = "SignIn",
+    SignUp = "SignUp",
+    ForgotPassword = "ForgotPassword"
 }

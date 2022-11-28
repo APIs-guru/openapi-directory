@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import embeddedobjectsuggestionstate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InlineObjectPropertiesSuggestionState:
-    embedded_object_suggestion_state: Optional[embeddedobjectsuggestionstate.EmbeddedObjectSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embeddedObjectSuggestionState' }})
+    r"""InlineObjectPropertiesSuggestionState
+    A mask that indicates which of the fields on the base InlineObjectProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
+    """
+    
+    embedded_object_suggestion_state: Optional[EmbeddedObjectSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('embeddedObjectSuggestionState') }})
     

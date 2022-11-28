@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDrugByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=DRUG_ID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DRUG_ID" })
   drugId: string;
 }
 
 
 export class GetDrugByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=drug_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=drug_id" })
   drugId: string;
 }
 
 
 export class GetDrugByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDrugByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDrugByIdQueryParams;
 }
 
 
 export class GetDrugByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

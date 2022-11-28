@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CollectionConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information for the Debugger output tensor collections.
 **/
 export class CollectionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CollectionName" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionName" })
   collectionName?: string;
 
-  @Metadata({ data: "json, name=CollectionParameters" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionParameters" })
   collectionParameters?: Map<string, string>;
 }

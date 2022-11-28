@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicenetworkingServicesDNSRecordSetsRemovePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class ServicenetworkingServicesDNSRecordSetsRemoveQueryParams:
 
 @dataclass
 class ServicenetworkingServicesDNSRecordSetsRemoveSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicenetworkingServicesDNSRecordSetsRemoveSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class ServicenetworkingServicesDNSRecordSetsRemoveSecurity:
 
 @dataclass
 class ServicenetworkingServicesDNSRecordSetsRemoveRequest:
-    path_params: ServicenetworkingServicesDNSRecordSetsRemovePathParams = field(default=None)
-    query_params: ServicenetworkingServicesDNSRecordSetsRemoveQueryParams = field(default=None)
+    path_params: ServicenetworkingServicesDNSRecordSetsRemovePathParams = field()
+    query_params: ServicenetworkingServicesDNSRecordSetsRemoveQueryParams = field()
+    security: ServicenetworkingServicesDNSRecordSetsRemoveSecurity = field()
     request: Optional[shared.RemoveDNSRecordSetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicenetworkingServicesDNSRecordSetsRemoveSecurity = field(default=None)
     
 
 @dataclass
 class ServicenetworkingServicesDNSRecordSetsRemoveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

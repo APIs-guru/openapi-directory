@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddEvidencePaymentDisputeResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type is used by the response payload of the addEvidence method. Its only field is an unique identifier of an evidence set.
 **/
 export class AddEvidencePaymentDisputeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evidenceId" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceId" })
   evidenceId?: string;
 }

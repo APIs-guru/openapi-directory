@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDatastoreAdminV1beta1EntityFilter } from "./googledatastoreadminv1beta1entityfilter";
 // GoogleDatastoreAdminV1beta1ImportEntitiesRequest
 /**
@@ -34,15 +34,15 @@ var GoogleDatastoreAdminV1beta1ImportEntitiesRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entityFilter" }),
+        SpeakeasyMetadata({ data: "json, name=entityFilter" }),
         __metadata("design:type", GoogleDatastoreAdminV1beta1EntityFilter)
     ], GoogleDatastoreAdminV1beta1ImportEntitiesRequest.prototype, "entityFilter", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputUrl" }),
+        SpeakeasyMetadata({ data: "json, name=inputUrl" }),
         __metadata("design:type", String)
     ], GoogleDatastoreAdminV1beta1ImportEntitiesRequest.prototype, "inputUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], GoogleDatastoreAdminV1beta1ImportEntitiesRequest.prototype, "labels", void 0);
     return GoogleDatastoreAdminV1beta1ImportEntitiesRequest;

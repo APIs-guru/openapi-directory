@@ -1,131 +1,132 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateDeviceSwitchRoutingInterfaceDhcpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=interfaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interfaceId" })
   interfaceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 export enum UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpLeaseTimeEnum {
-    ThirtyMinutes = "30 minutes"
-,    OneHour = "1 hour"
-,    FourHours = "4 hours"
-,    TwelveHours = "12 hours"
-,    OneDay = "1 day"
-,    OneWeek = "1 week"
+    ThirtyMinutes = "30 minutes",
+    OneHour = "1 hour",
+    FourHours = "4 hours",
+    TwelveHours = "12 hours",
+    OneDay = "1 day",
+    OneWeek = "1 week"
 }
 
 export enum UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpModeEnum {
-    DhcpDisabled = "dhcpDisabled"
-,    DhcpRelay = "dhcpRelay"
-,    DhcpServer = "dhcpServer"
+    DhcpDisabled = "dhcpDisabled",
+    DhcpRelay = "dhcpRelay",
+    DhcpServer = "dhcpServer"
 }
 
 export enum UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpOptionsTypeEnum {
-    Text = "text"
-,    Ip = "ip"
-,    Integer = "integer"
-,    Hex = "hex"
+    Text = "text",
+    Ip = "ip",
+    Integer = "integer",
+    Hex = "hex"
 }
 
 
 export class UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpOptionsTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
 export enum UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDnsNameserversOptionEnum {
-    GooglePublicDns = "googlePublicDns"
-,    OpenDns = "openDns"
-,    Custom = "custom"
+    GooglePublicDns = "googlePublicDns",
+    OpenDns = "openDns",
+    Custom = "custom"
 }
 
 
 export class UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyFixedIpAssignments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 
-  @Metadata({ data: "json, name=mac" })
+  @SpeakeasyMetadata({ data: "json, name=mac" })
   mac: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyReservedIpRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: string;
 }
 
 
 export class UpdateDeviceSwitchRoutingInterfaceDhcpRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bootFileName" })
+  @SpeakeasyMetadata({ data: "json, name=bootFileName" })
   bootFileName?: string;
 
-  @Metadata({ data: "json, name=bootNextServer" })
+  @SpeakeasyMetadata({ data: "json, name=bootNextServer" })
   bootNextServer?: string;
 
-  @Metadata({ data: "json, name=bootOptionsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=bootOptionsEnabled" })
   bootOptionsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=dhcpLeaseTime" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpLeaseTime" })
   dhcpLeaseTime?: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpLeaseTimeEnum;
 
-  @Metadata({ data: "json, name=dhcpMode" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpMode" })
   dhcpMode?: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpModeEnum;
 
-  @Metadata({ data: "json, name=dhcpOptions", elemType: operations.UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpOptions })
+  @SpeakeasyMetadata({ data: "json, name=dhcpOptions", elemType: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpOptions })
   dhcpOptions?: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDhcpOptions[];
 
-  @Metadata({ data: "json, name=dhcpRelayServerIps" })
+  @SpeakeasyMetadata({ data: "json, name=dhcpRelayServerIps" })
   dhcpRelayServerIps?: string[];
 
-  @Metadata({ data: "json, name=dnsCustomNameservers" })
+  @SpeakeasyMetadata({ data: "json, name=dnsCustomNameservers" })
   dnsCustomNameservers?: string[];
 
-  @Metadata({ data: "json, name=dnsNameserversOption" })
+  @SpeakeasyMetadata({ data: "json, name=dnsNameserversOption" })
   dnsNameserversOption?: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyDnsNameserversOptionEnum;
 
-  @Metadata({ data: "json, name=fixedIpAssignments", elemType: operations.UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyFixedIpAssignments })
+  @SpeakeasyMetadata({ data: "json, name=fixedIpAssignments", elemType: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyFixedIpAssignments })
   fixedIpAssignments?: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyFixedIpAssignments[];
 
-  @Metadata({ data: "json, name=reservedIpRanges", elemType: operations.UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyReservedIpRanges })
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRanges", elemType: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyReservedIpRanges })
   reservedIpRanges?: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBodyReservedIpRanges[];
 }
 
 
 export class UpdateDeviceSwitchRoutingInterfaceDhcpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDeviceSwitchRoutingInterfaceDhcpPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateDeviceSwitchRoutingInterfaceDhcpRequestBody;
 }
 
 
 export class UpdateDeviceSwitchRoutingInterfaceDhcpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDeviceSwitchRoutingInterfaceDhcp200ApplicationJsonObject?: Map<string, any>;
 }

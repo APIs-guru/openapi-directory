@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import invoice
+from sdk import utils
+from . import *
 
 class PaymentTypeEnum(str, Enum):
     OTHER = "Other"
@@ -33,13 +35,13 @@ class PaymentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Payment:
-    amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Amount' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    invoice: Optional[invoice.Invoice] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Invoice' }})
-    invoice_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InvoiceId' }})
-    is_automatic: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsAutomatic' }})
-    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Note' }})
-    paid_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaidOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    reference_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReferenceId' }})
-    type: Optional[PaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Amount') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    invoice: Optional[Invoice] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Invoice') }})
+    invoice_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InvoiceId') }})
+    is_automatic: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IsAutomatic') }})
+    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Note') }})
+    paid_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PaidOn'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    reference_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReferenceId') }})
+    type: Optional[PaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

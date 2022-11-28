@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import virtualserviceprovider
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualServiceSpec:
-    provider: Optional[virtualserviceprovider.VirtualServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
+    r"""VirtualServiceSpec
+    An object that represents the specification of a virtual service.
+    """
+    
+    provider: Optional[VirtualServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
     

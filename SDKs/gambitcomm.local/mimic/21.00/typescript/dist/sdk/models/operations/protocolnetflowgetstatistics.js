@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolNetflowGetStatisticsPathParams = /** @class */ (function (_super) {
     __extends(ProtocolNetflowGetStatisticsPathParams, _super);
     function ProtocolNetflowGetStatisticsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowGetStatisticsPathParams.prototype, "agentNum", void 0);
     return ProtocolNetflowGetStatisticsPathParams;
@@ -41,7 +41,7 @@ var ProtocolNetflowGetStatisticsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolNetflowGetStatisticsPathParams)
     ], ProtocolNetflowGetStatisticsRequest.prototype, "pathParams", void 0);
     return ProtocolNetflowGetStatisticsRequest;
@@ -53,15 +53,15 @@ var ProtocolNetflowGetStatisticsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowGetStatisticsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolNetflowGetStatisticsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolNetflowGetStatisticsResponse.prototype, "protocolNetflowGetStatistics200ApplicationJsonInt32Integers", void 0);
     return ProtocolNetflowGetStatisticsResponse;

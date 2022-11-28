@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BlockedResource } from "./blockedresource";
+
 
 
 // ResourceIssue
@@ -7,6 +8,6 @@ import { BlockedResource } from "./blockedresource";
  * Information about a resource with issue.
 **/
 export class ResourceIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockedResource" })
+  @SpeakeasyMetadata({ data: "json, name=blockedResource" })
   blockedResource?: BlockedResource;
 }

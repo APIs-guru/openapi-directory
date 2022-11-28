@@ -1,6 +1,7 @@
 
 
+
 export enum AuthenticationTypeEnum {
-    Password = "password"
-,    NoPassword = "no-password"
+    Password = "password",
+    NoPassword = "no-password"
 }

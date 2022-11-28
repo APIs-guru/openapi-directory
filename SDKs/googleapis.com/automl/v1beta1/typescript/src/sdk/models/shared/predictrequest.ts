@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExamplePayload } from "./examplepayload";
+
 
 
 // PredictRequest
@@ -7,9 +8,9 @@ import { ExamplePayload } from "./examplepayload";
  * Request message for PredictionService.Predict.
 **/
 export class PredictRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, string>;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: ExamplePayload;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class EntryAPIGetListEntryTypesEnum(str, Enum):
@@ -71,13 +72,13 @@ class EntryAPIGetListQueryParams:
 
 @dataclass
 class EntryAPIGetListRequest:
-    query_params: EntryAPIGetListQueryParams = field(default=None)
+    query_params: EntryAPIGetListQueryParams = field()
     
 
 @dataclass
 class EntryAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_entry_for_api_contract_: Optional[shared.PartialFindResultEntryForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

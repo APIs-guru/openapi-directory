@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryResource } from "./categoryresource";
+
 
 
 // GetCategoryResponse
@@ -8,6 +9,6 @@ import { CategoryResource } from "./categoryresource";
  * 
 **/
 export class GetCategoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CategoryResource;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Contains information about the backup that will be copied and created by the <a>CopyBackupToRegion</a> operation.
 **/

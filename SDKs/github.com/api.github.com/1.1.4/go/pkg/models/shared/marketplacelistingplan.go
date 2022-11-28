@@ -1,5 +1,7 @@
 package shared
 
+// MarketplaceListingPlan
+// Marketplace Listing Plan
 type MarketplaceListingPlan struct {
 	AccountsURL         string   `json:"accounts_url"`
 	Bullets             []string `json:"bullets"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 // LightSettings
 /**
@@ -34,15 +34,15 @@ var LightSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=color" }),
+        SpeakeasyMetadata({ data: "json, name=color" }),
         __metadata("design:type", Color)
     ], LightSettings.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "json, name=lightOffDuration" }),
+        SpeakeasyMetadata({ data: "json, name=lightOffDuration" }),
         __metadata("design:type", String)
     ], LightSettings.prototype, "lightOffDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=lightOnDuration" }),
+        SpeakeasyMetadata({ data: "json, name=lightOnDuration" }),
         __metadata("design:type", String)
     ], LightSettings.prototype, "lightOnDuration", void 0);
     return LightSettings;

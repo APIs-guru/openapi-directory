@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentConfiguration } from "./agentconfiguration";
+
 
 
 // ConfigureAgentResponse
@@ -7,6 +8,6 @@ import { AgentConfiguration } from "./agentconfiguration";
  * The structure representing the configureAgentResponse.
 **/
 export class ConfigureAgentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration: AgentConfiguration;
 }

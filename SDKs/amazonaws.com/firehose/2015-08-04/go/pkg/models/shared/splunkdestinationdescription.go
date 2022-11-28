@@ -1,5 +1,7 @@
 package shared
 
+// SplunkDestinationDescription
+// Describes a destination in Splunk.
 type SplunkDestinationDescription struct {
 	CloudWatchLoggingOptions          *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions,omitempty"`
 	HecAcknowledgmentTimeoutInSeconds *int64                    `json:"HECAcknowledgmentTimeoutInSeconds,omitempty"`

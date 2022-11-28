@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetAPIMembersIDPortraitPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetAPIMembersIDPortraitQueryParams:
 
 @dataclass
 class GetAPIMembersIDPortraitRequest:
-    path_params: GetAPIMembersIDPortraitPathParams = field(default=None)
-    query_params: GetAPIMembersIDPortraitQueryParams = field(default=None)
+    path_params: GetAPIMembersIDPortraitPathParams = field()
+    query_params: GetAPIMembersIDPortraitQueryParams = field()
     
 
 @dataclass
 class GetAPIMembersIDPortraitResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

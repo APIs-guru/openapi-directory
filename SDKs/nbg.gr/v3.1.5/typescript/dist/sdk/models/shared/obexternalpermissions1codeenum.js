@@ -1,0 +1,24 @@
+export var ObExternalPermissions1CodeEnum;
+(function (ObExternalPermissions1CodeEnum) {
+    ObExternalPermissions1CodeEnum["ReadAccountsBasic"] = "ReadAccountsBasic";
+    ObExternalPermissions1CodeEnum["ReadAccountsDetail"] = "ReadAccountsDetail";
+    ObExternalPermissions1CodeEnum["ReadBalances"] = "ReadBalances";
+    ObExternalPermissions1CodeEnum["ReadBeneficiariesBasic"] = "ReadBeneficiariesBasic";
+    ObExternalPermissions1CodeEnum["ReadBeneficiariesDetail"] = "ReadBeneficiariesDetail";
+    ObExternalPermissions1CodeEnum["ReadDirectDebits"] = "ReadDirectDebits";
+    ObExternalPermissions1CodeEnum["ReadOffers"] = "ReadOffers";
+    ObExternalPermissions1CodeEnum["ReadPan"] = "ReadPAN";
+    ObExternalPermissions1CodeEnum["ReadParty"] = "ReadParty";
+    ObExternalPermissions1CodeEnum["ReadPartyPsu"] = "ReadPartyPSU";
+    ObExternalPermissions1CodeEnum["ReadProducts"] = "ReadProducts";
+    ObExternalPermissions1CodeEnum["ReadScheduledPaymentsBasic"] = "ReadScheduledPaymentsBasic";
+    ObExternalPermissions1CodeEnum["ReadScheduledPaymentsDetail"] = "ReadScheduledPaymentsDetail";
+    ObExternalPermissions1CodeEnum["ReadStandingOrdersBasic"] = "ReadStandingOrdersBasic";
+    ObExternalPermissions1CodeEnum["ReadStandingOrdersDetail"] = "ReadStandingOrdersDetail";
+    ObExternalPermissions1CodeEnum["ReadStatementsBasic"] = "ReadStatementsBasic";
+    ObExternalPermissions1CodeEnum["ReadStatementsDetail"] = "ReadStatementsDetail";
+    ObExternalPermissions1CodeEnum["ReadTransactionsBasic"] = "ReadTransactionsBasic";
+    ObExternalPermissions1CodeEnum["ReadTransactionsCredits"] = "ReadTransactionsCredits";
+    ObExternalPermissions1CodeEnum["ReadTransactionsDebits"] = "ReadTransactionsDebits";
+    ObExternalPermissions1CodeEnum["ReadTransactionsDetail"] = "ReadTransactionsDetail";
+})(ObExternalPermissions1CodeEnum || (ObExternalPermissions1CodeEnum = {}));

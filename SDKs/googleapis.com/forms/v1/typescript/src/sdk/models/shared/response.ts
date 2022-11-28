@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateItemResponse } from "./createitemresponse";
+
 
 
 // Response
@@ -7,6 +8,6 @@ import { CreateItemResponse } from "./createitemresponse";
  * A single response from an update.
 **/
 export class Response extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createItem" })
+  @SpeakeasyMetadata({ data: "json, name=createItem" })
   createItem?: CreateItemResponse;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceTemplateSpec } from "./instancetemplatespec";
+
 
 
 // JobSpec
@@ -7,21 +8,21 @@ import { InstanceTemplateSpec } from "./instancetemplatespec";
  * JobSpec describes how the job execution will look like.
 **/
 export class JobSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeDeadlineSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=activeDeadlineSeconds" })
   activeDeadlineSeconds?: string;
 
-  @Metadata({ data: "json, name=backoffLimit" })
+  @SpeakeasyMetadata({ data: "json, name=backoffLimit" })
   backoffLimit?: number;
 
-  @Metadata({ data: "json, name=completions" })
+  @SpeakeasyMetadata({ data: "json, name=completions" })
   completions?: number;
 
-  @Metadata({ data: "json, name=parallelism" })
+  @SpeakeasyMetadata({ data: "json, name=parallelism" })
   parallelism?: number;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: InstanceTemplateSpec;
 
-  @Metadata({ data: "json, name=ttlSecondsAfterFinished" })
+  @SpeakeasyMetadata({ data: "json, name=ttlSecondsAfterFinished" })
   ttlSecondsAfterFinished?: number;
 }

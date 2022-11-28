@@ -1,56 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostMarketingV3MarketingEventsAppIdSettingsCreatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 }
 
 
-export class PostMarketingV3MarketingEventsAppIdSettingsCreateSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class PostMarketingV3MarketingEventsAppIdSettingsCreateSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  developerHapikey: shared.SchemeDeveloperHapikey;
-}
-
-
 export class PostMarketingV3MarketingEventsAppIdSettingsCreateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostMarketingV3MarketingEventsAppIdSettingsCreateSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostMarketingV3MarketingEventsAppIdSettingsCreateSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  developerHapikey?: shared.SchemeDeveloperHapikey;
 }
 
 
 export class PostMarketingV3MarketingEventsAppIdSettingsCreateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostMarketingV3MarketingEventsAppIdSettingsCreatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.EventDetailSettingsUrl;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostMarketingV3MarketingEventsAppIdSettingsCreateSecurity;
 }
 
 
 export class PostMarketingV3MarketingEventsAppIdSettingsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   eventDetailSettings?: shared.EventDetailSettings;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

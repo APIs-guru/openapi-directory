@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteConditionalForwarderXAmzTargetEnum {
     DirectoryService20150416DeleteConditionalForwarder = "DirectoryService_20150416.DeleteConditionalForwarder"

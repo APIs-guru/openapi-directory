@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValueRange } from "./valuerange";
+
 
 
 // BatchGetValuesResponse
@@ -8,9 +8,9 @@ import { ValueRange } from "./valuerange";
  * The response when retrieving more than one range of values in a spreadsheet.
 **/
 export class BatchGetValuesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=spreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetId" })
   spreadsheetId?: string;
 
-  @Metadata({ data: "json, name=valueRanges", elemType: shared.ValueRange })
+  @SpeakeasyMetadata({ data: "json, name=valueRanges", elemType: ValueRange })
   valueRanges?: ValueRange[];
 }

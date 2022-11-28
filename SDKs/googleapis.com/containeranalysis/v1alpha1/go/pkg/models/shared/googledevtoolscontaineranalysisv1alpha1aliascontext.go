@@ -9,6 +9,8 @@ const (
 	GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnumOther           GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum = "OTHER"
 )
 
+// GoogleDevtoolsContaineranalysisV1alpha1AliasContext
+// An alias to a repo revision.
 type GoogleDevtoolsContaineranalysisV1alpha1AliasContext struct {
 	Kind *GoogleDevtoolsContaineranalysisV1alpha1AliasContextKindEnum `json:"kind,omitempty"`
 	Name *string                                                      `json:"name,omitempty"`

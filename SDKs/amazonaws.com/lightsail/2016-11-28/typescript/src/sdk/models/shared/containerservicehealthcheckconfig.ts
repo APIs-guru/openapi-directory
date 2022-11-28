@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContainerServiceHealthCheckConfig
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the health check configuration of an Amazon Lightsail container service.
 **/
 export class ContainerServiceHealthCheckConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=healthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=healthyThreshold" })
   healthyThreshold?: number;
 
-  @Metadata({ data: "json, name=intervalSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=intervalSeconds" })
   intervalSeconds?: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=successCodes" })
+  @SpeakeasyMetadata({ data: "json, name=successCodes" })
   successCodes?: string;
 
-  @Metadata({ data: "json, name=timeoutSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutSeconds" })
   timeoutSeconds?: number;
 
-  @Metadata({ data: "json, name=unhealthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=unhealthyThreshold" })
   unhealthyThreshold?: number;
 }

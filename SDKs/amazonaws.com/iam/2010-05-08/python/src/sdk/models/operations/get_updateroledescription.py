@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateRoleDescriptionActionEnum(str, Enum):
     UPDATE_ROLE_DESCRIPTION = "UpdateRoleDescription"
@@ -10,10 +14,10 @@ class GetUpdateRoleDescriptionVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateRoleDescriptionQueryParams:
-    action: GetUpdateRoleDescriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    description: str = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
-    role_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
-    version: GetUpdateRoleDescriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateRoleDescriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    description: str = field(metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
+    role_name: str = field(metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
+    version: GetUpdateRoleDescriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateRoleDescriptionHeaders:
 
 @dataclass
 class GetUpdateRoleDescriptionRequest:
-    query_params: GetUpdateRoleDescriptionQueryParams = field(default=None)
-    headers: GetUpdateRoleDescriptionHeaders = field(default=None)
+    headers: GetUpdateRoleDescriptionHeaders = field()
+    query_params: GetUpdateRoleDescriptionQueryParams = field()
     
 
 @dataclass
 class GetUpdateRoleDescriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

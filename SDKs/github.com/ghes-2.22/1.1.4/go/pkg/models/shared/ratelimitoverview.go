@@ -9,6 +9,8 @@ type RateLimitOverviewResources struct {
 	SourceImport        *RateLimit `json:"source_import,omitempty"`
 }
 
+// RateLimitOverview
+// Rate Limit Overview
 type RateLimitOverview struct {
 	Rate      RateLimit                  `json:"rate"`
 	Resources RateLimitOverviewResources `json:"resources"`

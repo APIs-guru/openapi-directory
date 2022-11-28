@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
+
 
 
 // Deployment
@@ -7,21 +8,21 @@ import { DeploymentStatusEnum } from "./deploymentstatusenum";
  * An immutable representation of an API that can be called by users. A Deployment must be associated with a Stage for it to be callable over the internet.
 **/
 export class Deployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoDeployed" })
+  @SpeakeasyMetadata({ data: "json, name=AutoDeployed" })
   autoDeployed?: boolean;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=DeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=DeploymentStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentStatus" })
   deploymentStatus?: DeploymentStatusEnum;
 
-  @Metadata({ data: "json, name=DeploymentStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentStatusMessage" })
   deploymentStatusMessage?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 }

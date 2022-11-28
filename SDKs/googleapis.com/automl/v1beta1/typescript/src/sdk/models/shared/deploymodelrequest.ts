@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageClassificationModelDeploymentMetadata } from "./imageclassificationmodeldeploymentmetadata";
 import { ImageObjectDetectionModelDeploymentMetadata } from "./imageobjectdetectionmodeldeploymentmetadata";
+
 
 
 // DeployModelRequest
@@ -8,9 +9,9 @@ import { ImageObjectDetectionModelDeploymentMetadata } from "./imageobjectdetect
  * Request message for AutoMl.DeployModel.
 **/
 export class DeployModelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageClassificationModelDeploymentMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=imageClassificationModelDeploymentMetadata" })
   imageClassificationModelDeploymentMetadata?: ImageClassificationModelDeploymentMetadata;
 
-  @Metadata({ data: "json, name=imageObjectDetectionModelDeploymentMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=imageObjectDetectionModelDeploymentMetadata" })
   imageObjectDetectionModelDeploymentMetadata?: ImageObjectDetectionModelDeploymentMetadata;
 }

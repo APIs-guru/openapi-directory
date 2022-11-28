@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ContributionMatrix } from "./contributionmatrix";
 /**
  * Details about a measure affected by an anomaly.

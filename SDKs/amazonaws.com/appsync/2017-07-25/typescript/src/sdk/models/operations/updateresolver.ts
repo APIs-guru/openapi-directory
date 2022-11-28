@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateResolverPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fieldName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fieldName" })
   fieldName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=typeName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=typeName" })
   typeName: string;
 }
 
 
 export class UpdateResolverHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -43,16 +44,16 @@ export class UpdateResolverHeaders extends SpeakeasyBase {
  * The caching configuration for a resolver that has caching enabled.
 **/
 export class UpdateResolverRequestBodyCachingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cachingKeys" })
+  @SpeakeasyMetadata({ data: "json, name=cachingKeys" })
   cachingKeys?: string[];
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: number;
 }
 
 export enum UpdateResolverRequestBodyKindEnum {
-    Unit = "UNIT"
-,    Pipeline = "PIPELINE"
+    Unit = "UNIT",
+    Pipeline = "PIPELINE"
 }
 
 
@@ -61,7 +62,7 @@ export enum UpdateResolverRequestBodyKindEnum {
  * The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
 **/
 export class UpdateResolverRequestBodyPipelineConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=functions" })
+  @SpeakeasyMetadata({ data: "json, name=functions" })
   functions?: string[];
 }
 
@@ -71,72 +72,72 @@ export class UpdateResolverRequestBodyPipelineConfig extends SpeakeasyBase {
  * <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
 **/
 export class UpdateResolverRequestBodySyncConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conflictDetection" })
+  @SpeakeasyMetadata({ data: "json, name=conflictDetection" })
   conflictDetection?: shared.ConflictDetectionTypeEnum;
 
-  @Metadata({ data: "json, name=conflictHandler" })
+  @SpeakeasyMetadata({ data: "json, name=conflictHandler" })
   conflictHandler?: shared.ConflictHandlerTypeEnum;
 
-  @Metadata({ data: "json, name=lambdaConflictHandlerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaConflictHandlerConfig" })
   lambdaConflictHandlerConfig?: shared.LambdaConflictHandlerConfig;
 }
 
 
 export class UpdateResolverRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cachingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=cachingConfig" })
   cachingConfig?: UpdateResolverRequestBodyCachingConfig;
 
-  @Metadata({ data: "json, name=dataSourceName" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceName" })
   dataSourceName?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: UpdateResolverRequestBodyKindEnum;
 
-  @Metadata({ data: "json, name=pipelineConfig" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineConfig" })
   pipelineConfig?: UpdateResolverRequestBodyPipelineConfig;
 
-  @Metadata({ data: "json, name=requestMappingTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=requestMappingTemplate" })
   requestMappingTemplate?: string;
 
-  @Metadata({ data: "json, name=responseMappingTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=responseMappingTemplate" })
   responseMappingTemplate?: string;
 
-  @Metadata({ data: "json, name=syncConfig" })
+  @SpeakeasyMetadata({ data: "json, name=syncConfig" })
   syncConfig?: UpdateResolverRequestBodySyncConfig;
 }
 
 
 export class UpdateResolverRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateResolverPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateResolverHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateResolverRequestBody;
 }
 
 
 export class UpdateResolverResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentModificationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateResolverResponse?: shared.UpdateResolverResponse;
 }

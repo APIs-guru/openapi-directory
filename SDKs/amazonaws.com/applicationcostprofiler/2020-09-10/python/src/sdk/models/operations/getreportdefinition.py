@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetReportDefinitionPathParams:
-    report_id: str = field(default=None, metadata={'path_param': { 'field_name': 'reportId', 'style': 'simple', 'explode': False }})
+    report_id: str = field(metadata={'path_param': { 'field_name': 'reportId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetReportDefinitionHeaders:
 
 @dataclass
 class GetReportDefinitionRequest:
-    path_params: GetReportDefinitionPathParams = field(default=None)
-    headers: GetReportDefinitionHeaders = field(default=None)
+    headers: GetReportDefinitionHeaders = field()
+    path_params: GetReportDefinitionPathParams = field()
     
 
 @dataclass
 class GetReportDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_report_definition_result: Optional[shared.GetReportDefinitionResult] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// Campaign
+// This type defines the fields that describe an ad campaign.
 type Campaign struct {
 	CampaignCriterion *CampaignCriterion `json:"campaignCriterion,omitempty"`
 	CampaignID        *string            `json:"campaignId,omitempty"`

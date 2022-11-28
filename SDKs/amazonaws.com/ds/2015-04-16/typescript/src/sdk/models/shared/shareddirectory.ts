@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareMethodEnum } from "./sharemethodenum";
 import { ShareStatusEnum } from "./sharestatusenum";
+
 
 
 // SharedDirectory
@@ -8,30 +9,30 @@ import { ShareStatusEnum } from "./sharestatusenum";
  * Details about the shared directory in the directory owner account for which the share request in the directory consumer account has been accepted.
 **/
 export class SharedDirectory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDateTime" })
   createdDateTime?: Date;
 
-  @Metadata({ data: "json, name=LastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=OwnerAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerAccountId" })
   ownerAccountId?: string;
 
-  @Metadata({ data: "json, name=OwnerDirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerDirectoryId" })
   ownerDirectoryId?: string;
 
-  @Metadata({ data: "json, name=ShareMethod" })
+  @SpeakeasyMetadata({ data: "json, name=ShareMethod" })
   shareMethod?: ShareMethodEnum;
 
-  @Metadata({ data: "json, name=ShareNotes" })
+  @SpeakeasyMetadata({ data: "json, name=ShareNotes" })
   shareNotes?: string;
 
-  @Metadata({ data: "json, name=ShareStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ShareStatus" })
   shareStatus?: ShareStatusEnum;
 
-  @Metadata({ data: "json, name=SharedAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=SharedAccountId" })
   sharedAccountId?: string;
 
-  @Metadata({ data: "json, name=SharedDirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=SharedDirectoryId" })
   sharedDirectoryId?: string;
 }

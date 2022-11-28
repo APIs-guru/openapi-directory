@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserUserPermission
@@ -6,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The users' permissions
 **/
 export class UserUserPermission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Permission" })
+  @SpeakeasyMetadata({ data: "json, name=Permission" })
   permission?: any[];
 }
 
@@ -16,27 +17,27 @@ export class UserUserPermission extends SpeakeasyBase {
  * The users' roles
 **/
 export class UserUserRoles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string[];
 }
 
 
 export class UserUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetaData" })
+  @SpeakeasyMetadata({ data: "json, name=MetaData" })
   metaData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=Permissions" })
+  @SpeakeasyMetadata({ data: "json, name=Permissions" })
   permissions?: UserUserPermission;
 
-  @Metadata({ data: "json, name=Roles" })
+  @SpeakeasyMetadata({ data: "json, name=Roles" })
   roles?: UserUserRoles;
 
-  @Metadata({ data: "json, name=UserIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=UserIdentifier" })
   userIdentifier?: string;
 }
 
 
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user?: UserUser;
 }

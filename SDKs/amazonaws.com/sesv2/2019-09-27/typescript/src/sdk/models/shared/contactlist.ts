@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContactList
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list that contains contacts that have subscribed to a particular topic or topics.
 **/
 export class ContactList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactListName" })
+  @SpeakeasyMetadata({ data: "json, name=ContactListName" })
   contactListName?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTimestamp" })
   lastUpdatedTimestamp?: Date;
 }

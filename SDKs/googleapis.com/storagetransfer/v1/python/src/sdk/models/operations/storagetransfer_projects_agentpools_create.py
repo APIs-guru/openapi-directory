@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StoragetransferProjectsAgentPoolsCreatePathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class StoragetransferProjectsAgentPoolsCreateQueryParams:
 
 @dataclass
 class StoragetransferProjectsAgentPoolsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StoragetransferProjectsAgentPoolsCreateRequest:
-    path_params: StoragetransferProjectsAgentPoolsCreatePathParams = field(default=None)
-    query_params: StoragetransferProjectsAgentPoolsCreateQueryParams = field(default=None)
-    request: Optional[shared.AgentPool] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StoragetransferProjectsAgentPoolsCreateSecurity = field(default=None)
+    path_params: StoragetransferProjectsAgentPoolsCreatePathParams = field()
+    query_params: StoragetransferProjectsAgentPoolsCreateQueryParams = field()
+    security: StoragetransferProjectsAgentPoolsCreateSecurity = field()
+    request: Optional[shared.AgentPoolInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StoragetransferProjectsAgentPoolsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     agent_pool: Optional[shared.AgentPool] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

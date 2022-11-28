@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateConnectionOAuthClientRequestParameters } from "./updateconnectionoauthclientrequestparameters";
 import { ConnectionOAuthHttpMethodEnum } from "./connectionoauthhttpmethodenum";
 import { ConnectionHttpParameters } from "./connectionhttpparameters";
@@ -36,19 +36,19 @@ var UpdateConnectionOAuthRequestParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AuthorizationEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=AuthorizationEndpoint" }),
         __metadata("design:type", String)
     ], UpdateConnectionOAuthRequestParameters.prototype, "authorizationEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientParameters" }),
+        SpeakeasyMetadata({ data: "json, name=ClientParameters" }),
         __metadata("design:type", UpdateConnectionOAuthClientRequestParameters)
     ], UpdateConnectionOAuthRequestParameters.prototype, "clientParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=HttpMethod" }),
+        SpeakeasyMetadata({ data: "json, name=HttpMethod" }),
         __metadata("design:type", String)
     ], UpdateConnectionOAuthRequestParameters.prototype, "httpMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=OAuthHttpParameters" }),
+        SpeakeasyMetadata({ data: "json, name=OAuthHttpParameters" }),
         __metadata("design:type", ConnectionHttpParameters)
     ], UpdateConnectionOAuthRequestParameters.prototype, "oAuthHttpParameters", void 0);
     return UpdateConnectionOAuthRequestParameters;

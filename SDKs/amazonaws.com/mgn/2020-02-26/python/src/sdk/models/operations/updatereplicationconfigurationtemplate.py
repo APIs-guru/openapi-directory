@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -30,35 +35,35 @@ class UpdateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum(str, En
 @dataclass_json
 @dataclass
 class UpdateReplicationConfigurationTemplateRequestBody:
-    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    associate_default_security_group: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'associateDefaultSecurityGroup' }})
-    bandwidth_throttling: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bandwidthThrottling' }})
-    create_public_ip: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createPublicIP' }})
-    data_plane_routing: Optional[UpdateReplicationConfigurationTemplateRequestBodyDataPlaneRoutingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataPlaneRouting' }})
-    default_large_staging_disk_type: Optional[UpdateReplicationConfigurationTemplateRequestBodyDefaultLargeStagingDiskTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultLargeStagingDiskType' }})
-    ebs_encryption: Optional[UpdateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ebsEncryption' }})
-    ebs_encryption_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ebsEncryptionKeyArn' }})
-    replication_configuration_template_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationConfigurationTemplateID' }})
-    replication_server_instance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationServerInstanceType' }})
-    replication_servers_security_groups_i_ds: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationServersSecurityGroupsIDs' }})
-    staging_area_subnet_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stagingAreaSubnetId' }})
-    staging_area_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stagingAreaTags' }})
-    use_dedicated_replication_server: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useDedicatedReplicationServer' }})
+    replication_configuration_template_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationConfigurationTemplateID') }})
+    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    associate_default_security_group: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('associateDefaultSecurityGroup') }})
+    bandwidth_throttling: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bandwidthThrottling') }})
+    create_public_ip: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createPublicIP') }})
+    data_plane_routing: Optional[UpdateReplicationConfigurationTemplateRequestBodyDataPlaneRoutingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataPlaneRouting') }})
+    default_large_staging_disk_type: Optional[UpdateReplicationConfigurationTemplateRequestBodyDefaultLargeStagingDiskTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultLargeStagingDiskType') }})
+    ebs_encryption: Optional[UpdateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ebsEncryption') }})
+    ebs_encryption_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ebsEncryptionKeyArn') }})
+    replication_server_instance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationServerInstanceType') }})
+    replication_servers_security_groups_i_ds: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationServersSecurityGroupsIDs') }})
+    staging_area_subnet_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stagingAreaSubnetId') }})
+    staging_area_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stagingAreaTags') }})
+    use_dedicated_replication_server: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('useDedicatedReplicationServer') }})
     
 
 @dataclass
 class UpdateReplicationConfigurationTemplateRequest:
-    headers: UpdateReplicationConfigurationTemplateHeaders = field(default=None)
-    request: UpdateReplicationConfigurationTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateReplicationConfigurationTemplateHeaders = field()
+    request: UpdateReplicationConfigurationTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateReplicationConfigurationTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     replication_configuration_template: Optional[shared.ReplicationConfigurationTemplate] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

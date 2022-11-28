@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportDestinationTypeEnum } from "./assessmentreportdestinationtypeenum";
 /**
  *  The location in which Audit Manager saves assessment reports for the given assessment.

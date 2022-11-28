@@ -17,11 +17,6 @@ type GetDocumentQueryParams struct {
 	Provenance *bool                  `queryParam:"style=form,explode=true,name=provenance"`
 }
 
-type GetDocumentRequest struct {
-	PathParams  GetDocumentPathParams
-	QueryParams GetDocumentQueryParams
-}
-
 type GetDocument200ApplicationJSONExplanationLocalsKey struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
@@ -42,6 +37,9 @@ type GetDocument200ApplicationJSONExplanationNodeTerms struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// GetDocument200ApplicationJSONExplanationNode
+// The AST element associated with the evaluation step.
+// https://godoc.org/github.com/open-policy-agent/opa/ast - AST
 type GetDocument200ApplicationJSONExplanationNode struct {
 	Index *float64                                            `json:"index,omitempty"`
 	Terms []GetDocument200ApplicationJSONExplanationNodeTerms `json:"terms,omitempty"`
@@ -111,6 +109,11 @@ type GetDocument200ApplicationJSON struct {
 	Metrics     *GetDocument200ApplicationJSONMetrics      `json:"metrics,omitempty"`
 	Provenance  *GetDocument200ApplicationJSONProvenance   `json:"provenance,omitempty"`
 	Result      []interface{}                              `json:"result,omitempty"`
+}
+
+type GetDocumentRequest struct {
+	PathParams  GetDocumentPathParams
+	QueryParams GetDocumentQueryParams
 }
 
 type GetDocumentResponse struct {

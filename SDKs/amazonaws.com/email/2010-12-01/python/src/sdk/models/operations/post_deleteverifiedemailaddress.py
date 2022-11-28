@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteVerifiedEmailAddressActionEnum(str, Enum):
     DELETE_VERIFIED_EMAIL_ADDRESS = "DeleteVerifiedEmailAddress"
@@ -10,8 +14,8 @@ class PostDeleteVerifiedEmailAddressVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteVerifiedEmailAddressQueryParams:
-    action: PostDeleteVerifiedEmailAddressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteVerifiedEmailAddressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteVerifiedEmailAddressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteVerifiedEmailAddressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteVerifiedEmailAddressHeaders:
 
 @dataclass
 class PostDeleteVerifiedEmailAddressRequest:
-    query_params: PostDeleteVerifiedEmailAddressQueryParams = field(default=None)
-    headers: PostDeleteVerifiedEmailAddressHeaders = field(default=None)
+    headers: PostDeleteVerifiedEmailAddressHeaders = field()
+    query_params: PostDeleteVerifiedEmailAddressQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteVerifiedEmailAddressResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

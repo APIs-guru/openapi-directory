@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SecretListEntry
+// A structure that contains the details about a secret. It does not include the encrypted <code>SecretString</code> and <code>SecretBinary</code> values. To get those values, use the <a>GetSecretValue</a> operation.
 type SecretListEntry struct {
 	Arn                    *string             `json:"ARN,omitempty"`
 	CreatedDate            *time.Time          `json:"CreatedDate,omitempty"`

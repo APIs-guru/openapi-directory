@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignJwtPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IamcredentialsProjectsServiceAccountsSignJwtQueryParams:
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignJwtSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignJwtRequest:
-    path_params: IamcredentialsProjectsServiceAccountsSignJwtPathParams = field(default=None)
-    query_params: IamcredentialsProjectsServiceAccountsSignJwtQueryParams = field(default=None)
+    path_params: IamcredentialsProjectsServiceAccountsSignJwtPathParams = field()
+    query_params: IamcredentialsProjectsServiceAccountsSignJwtQueryParams = field()
+    security: IamcredentialsProjectsServiceAccountsSignJwtSecurity = field()
     request: Optional[shared.SignJwtRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IamcredentialsProjectsServiceAccountsSignJwtSecurity = field(default=None)
     
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignJwtResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sign_jwt_response: Optional[shared.SignJwtResponse] = field(default=None)
-    status_code: int = field(default=None)
     

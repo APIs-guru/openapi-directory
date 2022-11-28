@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProjectBadge
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the build badge for the build project.
 **/
 export class ProjectBadge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=badgeEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=badgeEnabled" })
   badgeEnabled?: boolean;
 
-  @Metadata({ data: "json, name=badgeRequestUrl" })
+  @SpeakeasyMetadata({ data: "json, name=badgeRequestUrl" })
   badgeRequestUrl?: string;
 }

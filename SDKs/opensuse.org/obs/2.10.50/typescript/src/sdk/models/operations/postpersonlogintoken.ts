@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostPersonLoginTokenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=login" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=login" })
   login: string;
 }
 
 export enum PostPersonLoginTokenOperationEnum {
-    Runservice = "runservice"
-,    Rebuild = "rebuild"
-,    Release = "release"
+    Runservice = "runservice",
+    Rebuild = "rebuild",
+    Release = "release"
 }
 
 
 export class PostPersonLoginTokenQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=operation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=operation" })
   operation?: PostPersonLoginTokenOperationEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=package" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=package" })
   package?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=project" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" })
   project?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scm_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scm_token" })
   scmToken?: string;
 }
 
 
 export class PostPersonLoginTokenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class PostPersonLoginTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostPersonLoginTokenPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostPersonLoginTokenQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostPersonLoginTokenSecurity;
 }
 
 
 export class PostPersonLoginTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

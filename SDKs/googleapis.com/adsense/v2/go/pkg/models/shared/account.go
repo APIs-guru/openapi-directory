@@ -9,6 +9,8 @@ const (
 	AccountStateEnumClosed           AccountStateEnum = "CLOSED"
 )
 
+// Account
+// Representation of an account.
 type Account struct {
 	CreateTime   *string           `json:"createTime,omitempty"`
 	DisplayName  *string           `json:"displayName,omitempty"`

@@ -10,6 +10,8 @@ const (
 	UptimeCheckIPRegionEnumAsiaPacific       UptimeCheckIPRegionEnum = "ASIA_PACIFIC"
 )
 
+// UptimeCheckIP
+// Contains the region, location, and list of IP addresses where checkers in the location run from.
 type UptimeCheckIP struct {
 	IPAddress *string                  `json:"ipAddress,omitempty"`
 	Location  *string                  `json:"location,omitempty"`

@@ -14,6 +14,8 @@ const (
 	AccountPermissionLevelEnumAdministrator AccountPermissionLevelEnum = "ADMINISTRATOR"
 )
 
+// AccountPermission
+// AccountPermissions contains information about a particular account permission. Some features of Campaign Manager require an account permission to be present in the account.
 type AccountPermission struct {
 	AccountProfiles   []AccountPermissionAccountProfilesEnum `json:"accountProfiles,omitempty"`
 	ID                *string                                `json:"id,omitempty"`

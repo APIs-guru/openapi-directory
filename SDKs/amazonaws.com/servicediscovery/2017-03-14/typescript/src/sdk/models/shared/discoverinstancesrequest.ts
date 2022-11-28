@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthStatusFilterEnum } from "./healthstatusfilterenum";
 
 
+
 export class DiscoverInstancesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HealthStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HealthStatus" })
   healthStatus?: HealthStatusFilterEnum;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NamespaceName" })
+  @SpeakeasyMetadata({ data: "json, name=NamespaceName" })
   namespaceName: string;
 
-  @Metadata({ data: "json, name=OptionalParameters" })
+  @SpeakeasyMetadata({ data: "json, name=OptionalParameters" })
   optionalParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=QueryParameters" })
+  @SpeakeasyMetadata({ data: "json, name=QueryParameters" })
   queryParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName: string;
 }

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDeploymentStatusPathParams:
-    deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'DeploymentId', 'style': 'simple', 'explode': False }})
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    deployment_id: str = field(metadata={'path_param': { 'field_name': 'DeploymentId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +25,14 @@ class GetDeploymentStatusHeaders:
 
 @dataclass
 class GetDeploymentStatusRequest:
-    path_params: GetDeploymentStatusPathParams = field(default=None)
-    headers: GetDeploymentStatusHeaders = field(default=None)
+    headers: GetDeploymentStatusHeaders = field()
+    path_params: GetDeploymentStatusPathParams = field()
     
 
 @dataclass
 class GetDeploymentStatusResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_deployment_status_response: Optional[shared.GetDeploymentStatusResponse] = field(default=None)
-    status_code: int = field(default=None)
     

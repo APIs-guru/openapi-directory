@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FileSystemConfig
 /**
  * Details about the connection between a Lambda function and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.
@@ -33,11 +33,11 @@ var FileSystemConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], FileSystemConfig.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LocalMountPath" }),
+        SpeakeasyMetadata({ data: "json, name=LocalMountPath" }),
         __metadata("design:type", String)
     ], FileSystemConfig.prototype, "localMountPath", void 0);
     return FileSystemConfig;

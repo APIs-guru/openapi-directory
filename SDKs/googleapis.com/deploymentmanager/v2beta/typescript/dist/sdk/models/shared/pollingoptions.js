@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Diagnostic } from "./diagnostic";
 var PollingOptions = /** @class */ (function (_super) {
     __extends(PollingOptions, _super);
     function PollingOptions() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=diagnostics", elemType: shared.Diagnostic }),
+        SpeakeasyMetadata({ data: "json, name=diagnostics", elemType: Diagnostic }),
         __metadata("design:type", Array)
     ], PollingOptions.prototype, "diagnostics", void 0);
     __decorate([
-        Metadata({ data: "json, name=failCondition" }),
+        SpeakeasyMetadata({ data: "json, name=failCondition" }),
         __metadata("design:type", String)
     ], PollingOptions.prototype, "failCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=finishCondition" }),
+        SpeakeasyMetadata({ data: "json, name=finishCondition" }),
         __metadata("design:type", String)
     ], PollingOptions.prototype, "finishCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=pollingLink" }),
+        SpeakeasyMetadata({ data: "json, name=pollingLink" }),
         __metadata("design:type", String)
     ], PollingOptions.prototype, "pollingLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetLink" }),
+        SpeakeasyMetadata({ data: "json, name=targetLink" }),
         __metadata("design:type", String)
     ], PollingOptions.prototype, "targetLink", void 0);
     return PollingOptions;

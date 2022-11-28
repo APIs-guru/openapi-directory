@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingConfigurationStatusEnum } from "./autoscalingconfigurationstatusenum";
 // AutoScalingConfiguration
 /**
@@ -34,43 +34,43 @@ var AutoScalingConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AutoScalingConfigurationArn" }),
+        SpeakeasyMetadata({ data: "json, name=AutoScalingConfigurationArn" }),
         __metadata("design:type", String)
     ], AutoScalingConfiguration.prototype, "autoScalingConfigurationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoScalingConfigurationName" }),
+        SpeakeasyMetadata({ data: "json, name=AutoScalingConfigurationName" }),
         __metadata("design:type", String)
     ], AutoScalingConfiguration.prototype, "autoScalingConfigurationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoScalingConfigurationRevision" }),
+        SpeakeasyMetadata({ data: "json, name=AutoScalingConfigurationRevision" }),
         __metadata("design:type", Number)
     ], AutoScalingConfiguration.prototype, "autoScalingConfigurationRevision", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], AutoScalingConfiguration.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeletedAt" }),
+        SpeakeasyMetadata({ data: "json, name=DeletedAt" }),
         __metadata("design:type", Date)
     ], AutoScalingConfiguration.prototype, "deletedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Latest" }),
+        SpeakeasyMetadata({ data: "json, name=Latest" }),
         __metadata("design:type", Boolean)
     ], AutoScalingConfiguration.prototype, "latest", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxConcurrency" }),
+        SpeakeasyMetadata({ data: "json, name=MaxConcurrency" }),
         __metadata("design:type", Number)
     ], AutoScalingConfiguration.prototype, "maxConcurrency", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxSize" }),
+        SpeakeasyMetadata({ data: "json, name=MaxSize" }),
         __metadata("design:type", Number)
     ], AutoScalingConfiguration.prototype, "maxSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinSize" }),
+        SpeakeasyMetadata({ data: "json, name=MinSize" }),
         __metadata("design:type", Number)
     ], AutoScalingConfiguration.prototype, "minSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], AutoScalingConfiguration.prototype, "status", void 0);
     return AutoScalingConfiguration;

@@ -12,13 +12,13 @@ type PutGroupsIDJSONRequestBody struct {
 	Group PutGroupsIDJSONRequestBodyGroup `json:"group"`
 }
 
+type PutGroupsIDJSON200ApplicationJSON struct {
+	Success *string `json:"success,omitempty"`
+}
+
 type PutGroupsIDJSONRequest struct {
 	PathParams PutGroupsIDJSONPathParams
 	Request    *PutGroupsIDJSONRequestBody `request:"mediaType=application/json"`
-}
-
-type PutGroupsIDJSON200ApplicationJSON struct {
-	Success *string `json:"success,omitempty"`
 }
 
 type PutGroupsIDJSONResponse struct {

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreateConfigInputCountryEnum {
-    All = "ALL"
-,    Br = "BR"
-,    Cl = "CL"
-,    Co = "CO"
-,    Cr = "CR"
-,    Ec = "EC"
-,    Mx = "MX"
-,    Pe = "PE"
-,    Ar = "AR"
+    All = "ALL",
+    Br = "BR",
+    Cl = "CL",
+    Co = "CO",
+    Cr = "CR",
+    Ec = "EC",
+    Mx = "MX",
+    Pe = "PE",
+    Ar = "AR"
 }
 
 
@@ -18,48 +19,48 @@ export enum CreateConfigInputCountryEnum {
  * Represents paramaters required to create a score configuration
 **/
 export class CreateConfigInput extends SpeakeasyBase {
-  @Metadata({ data: "form, name=country;" })
+  @SpeakeasyMetadata({ data: "form, name=country;" })
   country: CreateConfigInputCountryEnum;
 
-  @Metadata({ data: "form, name=dataset_affiliations_and_insurances;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_affiliations_and_insurances;" })
   datasetAffiliationsAndInsurances?: number;
 
-  @Metadata({ data: "form, name=dataset_alert_in_media;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_alert_in_media;" })
   datasetAlertInMedia?: number;
 
-  @Metadata({ data: "form, name=dataset_business_background;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_business_background;" })
   datasetBusinessBackground?: number;
 
-  @Metadata({ data: "form, name=dataset_criminal_record;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_criminal_record;" })
   datasetCriminalRecord?: number;
 
-  @Metadata({ data: "form, name=dataset_driving_licenses;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_driving_licenses;" })
   datasetDrivingLicenses?: number;
 
-  @Metadata({ data: "form, name=dataset_international_background;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_international_background;" })
   datasetInternationalBackground?: number;
 
-  @Metadata({ data: "form, name=dataset_legal_background;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_legal_background;" })
   datasetLegalBackground?: number;
 
-  @Metadata({ data: "form, name=dataset_personal_identity;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_personal_identity;" })
   datasetPersonalIdentity?: number;
 
-  @Metadata({ data: "form, name=dataset_professional_background;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_professional_background;" })
   datasetProfessionalBackground?: number;
 
-  @Metadata({ data: "form, name=dataset_taxes_and_finances;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_taxes_and_finances;" })
   datasetTaxesAndFinances?: number;
 
-  @Metadata({ data: "form, name=dataset_traffic_fines;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_traffic_fines;" })
   datasetTrafficFines?: number;
 
-  @Metadata({ data: "form, name=dataset_vehicle_information;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_vehicle_information;" })
   datasetVehicleInformation?: number;
 
-  @Metadata({ data: "form, name=dataset_vehicle_permits;" })
+  @SpeakeasyMetadata({ data: "form, name=dataset_vehicle_permits;" })
   datasetVehiclePermits?: number;
 
-  @Metadata({ data: "form, name=type;" })
+  @SpeakeasyMetadata({ data: "form, name=type;" })
   type: string;
 }

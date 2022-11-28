@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScaleInPolicyUpdate } from "./scaleinpolicyupdate";
 import { ScaleOutPolicyUpdate } from "./scaleoutpolicyupdate";
 // AutoScalingUpdate
@@ -35,23 +35,23 @@ var AutoScalingUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxWorkerCount" }),
+        SpeakeasyMetadata({ data: "json, name=maxWorkerCount" }),
         __metadata("design:type", Number)
     ], AutoScalingUpdate.prototype, "maxWorkerCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=mcuCount" }),
+        SpeakeasyMetadata({ data: "json, name=mcuCount" }),
         __metadata("design:type", Number)
     ], AutoScalingUpdate.prototype, "mcuCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=minWorkerCount" }),
+        SpeakeasyMetadata({ data: "json, name=minWorkerCount" }),
         __metadata("design:type", Number)
     ], AutoScalingUpdate.prototype, "minWorkerCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=scaleInPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=scaleInPolicy" }),
         __metadata("design:type", ScaleInPolicyUpdate)
     ], AutoScalingUpdate.prototype, "scaleInPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=scaleOutPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=scaleOutPolicy" }),
         __metadata("design:type", ScaleOutPolicyUpdate)
     ], AutoScalingUpdate.prototype, "scaleOutPolicy", void 0);
     return AutoScalingUpdate;

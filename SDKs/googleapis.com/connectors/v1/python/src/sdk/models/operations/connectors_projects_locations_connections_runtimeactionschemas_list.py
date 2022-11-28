@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListQueryParams:
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListRequest:
-    path_params: ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListPathParams = field(default=None)
-    query_params: ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListQueryParams = field(default=None)
-    security: ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListSecurity = field(default=None)
+    path_params: ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListPathParams = field()
+    query_params: ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListQueryParams = field()
+    security: ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListSecurity = field()
     
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsRuntimeActionSchemasListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_runtime_action_schemas_response: Optional[shared.ListRuntimeActionSchemasResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecaptchaenterpriseV1ScoreDistribution
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Score distribution.
 **/
 export class GoogleCloudRecaptchaenterpriseV1ScoreDistribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scoreBuckets" })
+  @SpeakeasyMetadata({ data: "json, name=scoreBuckets" })
   scoreBuckets?: Map<string, string>;
 }

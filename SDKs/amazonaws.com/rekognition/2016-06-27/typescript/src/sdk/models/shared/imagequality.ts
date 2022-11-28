@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageQuality
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies face image brightness and sharpness. 
 **/
 export class ImageQuality extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Brightness" })
+  @SpeakeasyMetadata({ data: "json, name=Brightness" })
   brightness?: number;
 
-  @Metadata({ data: "json, name=Sharpness" })
+  @SpeakeasyMetadata({ data: "json, name=Sharpness" })
   sharpness?: number;
 }

@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import protectiongroupaggregation_enum
-from . import protectiongrouppattern_enum
-from . import protectedresourcetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateProtectionGroupRequest:
-    aggregation: protectiongroupaggregation_enum.ProtectionGroupAggregationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Aggregation' }})
-    members: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Members' }})
-    pattern: protectiongrouppattern_enum.ProtectionGroupPatternEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Pattern' }})
-    protection_group_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProtectionGroupId' }})
-    resource_type: Optional[protectedresourcetype_enum.ProtectedResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceType' }})
+    aggregation: ProtectionGroupAggregationEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Aggregation') }})
+    pattern: ProtectionGroupPatternEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Pattern') }})
+    protection_group_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProtectionGroupId') }})
+    members: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Members') }})
+    resource_type: Optional[ProtectedResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceType') }})
     

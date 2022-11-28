@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LabelColor } from "./labelcolor";
 
+
 export enum LabelLabelListVisibilityEnum {
-    LabelShow = "labelShow"
-,    LabelShowIfUnread = "labelShowIfUnread"
-,    LabelHide = "labelHide"
+    LabelShow = "labelShow",
+    LabelShowIfUnread = "labelShowIfUnread",
+    LabelHide = "labelHide"
 }
 
 export enum LabelMessageListVisibilityEnum {
-    Show = "show"
-,    Hide = "hide"
+    Show = "show",
+    Hide = "hide"
 }
 
 export enum LabelTypeEnum {
-    System = "system"
-,    User = "user"
+    System = "system",
+    User = "user"
 }
 
 
@@ -23,33 +24,33 @@ export enum LabelTypeEnum {
  * Labels are used to categorize messages and threads within the user's mailbox. The maximum number of labels supported for a user's mailbox is 10,000.
 **/
 export class Label extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: LabelColor;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=labelListVisibility" })
+  @SpeakeasyMetadata({ data: "json, name=labelListVisibility" })
   labelListVisibility?: LabelLabelListVisibilityEnum;
 
-  @Metadata({ data: "json, name=messageListVisibility" })
+  @SpeakeasyMetadata({ data: "json, name=messageListVisibility" })
   messageListVisibility?: LabelMessageListVisibilityEnum;
 
-  @Metadata({ data: "json, name=messagesTotal" })
+  @SpeakeasyMetadata({ data: "json, name=messagesTotal" })
   messagesTotal?: number;
 
-  @Metadata({ data: "json, name=messagesUnread" })
+  @SpeakeasyMetadata({ data: "json, name=messagesUnread" })
   messagesUnread?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=threadsTotal" })
+  @SpeakeasyMetadata({ data: "json, name=threadsTotal" })
   threadsTotal?: number;
 
-  @Metadata({ data: "json, name=threadsUnread" })
+  @SpeakeasyMetadata({ data: "json, name=threadsUnread" })
   threadsUnread?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: LabelTypeEnum;
 }

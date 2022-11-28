@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FileMigrationEntityOperationEnum(str, Enum):
     DELETE = "delete"
@@ -29,13 +31,17 @@ class FileMigrationEntityStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FileMigrationEntity:
-    dest_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dest_path' }})
-    files_moved: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files_moved' }})
-    files_total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files_total' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    log_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'log_url' }})
-    operation: Optional[FileMigrationEntityOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    status: Optional[FileMigrationEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""FileMigrationEntity
+    Show File Migration
+    """
+    
+    dest_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dest_path') }})
+    files_moved: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('files_moved') }})
+    files_total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('files_total') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    log_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('log_url') }})
+    operation: Optional[FileMigrationEntityOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    status: Optional[FileMigrationEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

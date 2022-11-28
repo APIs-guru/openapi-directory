@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SandboxItemSetVerificationStatusRequestVerificationStatusEnum {
-    AutomaticallyVerified = "automatically_verified"
-,    VerificationExpired = "verification_expired"
+    AutomaticallyVerified = "automatically_verified",
+    VerificationExpired = "verification_expired"
 }
 
 
@@ -11,18 +12,18 @@ export enum SandboxItemSetVerificationStatusRequestVerificationStatusEnum {
  * SandboxItemSetVerificationStatusRequest defines the request schema for `/sandbox/item/set_verification_status`
 **/
 export class SandboxItemSetVerificationStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=account_id" })
+  @SpeakeasyMetadata({ data: "json, name=account_id" })
   accountId: string;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=verification_status" })
+  @SpeakeasyMetadata({ data: "json, name=verification_status" })
   verificationStatus: SandboxItemSetVerificationStatusRequestVerificationStatusEnum;
 }

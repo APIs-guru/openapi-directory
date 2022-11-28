@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration options for zone awareness.
 **/
 export class AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZoneCount" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZoneCount" })
   availabilityZoneCount?: number;
 }

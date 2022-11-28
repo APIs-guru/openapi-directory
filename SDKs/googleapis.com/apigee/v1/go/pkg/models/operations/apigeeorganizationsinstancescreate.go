@@ -30,7 +30,7 @@ type ApigeeOrganizationsInstancesCreateSecurity struct {
 type ApigeeOrganizationsInstancesCreateRequest struct {
 	PathParams  ApigeeOrganizationsInstancesCreatePathParams
 	QueryParams ApigeeOrganizationsInstancesCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1Instance `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1InstanceInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsInstancesCreateSecurity
 }
 

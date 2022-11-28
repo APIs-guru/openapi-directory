@@ -10,6 +10,8 @@ const (
 	MobileUsabilityInspectionResultVerdictEnumNeutral            MobileUsabilityInspectionResultVerdictEnum = "NEUTRAL"
 )
 
+// MobileUsabilityInspectionResult
+// Mobile-usability inspection results.
 type MobileUsabilityInspectionResult struct {
 	Issues  []MobileUsabilityIssue                      `json:"issues,omitempty"`
 	Verdict *MobileUsabilityInspectionResultVerdictEnum `json:"verdict,omitempty"`

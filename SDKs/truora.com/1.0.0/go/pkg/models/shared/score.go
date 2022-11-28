@@ -30,6 +30,8 @@ const (
 	ScoreResultEnumIgnored  ScoreResultEnum = "ignored"
 )
 
+// Score
+// Represents dataset scores. A score is a number between 0 and 1 that indicates how trustworthy the person, vehicle, or company is accordig to the result of the background check. Severity represents the risk associated with each dataset according to the background check. Keep in mind that you should use either the score or the severity but not both
 type Score struct {
 	ByID     ScoreDetail      `json:"by_id"`
 	ByName   ScoreDetail      `json:"by_name"`

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShippingOptionEnum } from "./shippingoptionenum";
 
 
+
 export class CreateReturnShippingLabelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId: string;
 
-  @Metadata({ data: "json, name=ShippingOption" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingOption" })
   shippingOption?: ShippingOptionEnum;
 }

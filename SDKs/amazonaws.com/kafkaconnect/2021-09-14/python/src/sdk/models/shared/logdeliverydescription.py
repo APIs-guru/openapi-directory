@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import workerlogdeliverydescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LogDeliveryDescription:
-    worker_log_delivery: Optional[workerlogdeliverydescription.WorkerLogDeliveryDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerLogDelivery' }})
+    r"""LogDeliveryDescription
+    The description of the log delivery settings.
+    """
+    
+    worker_log_delivery: Optional[WorkerLogDeliveryDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerLogDelivery') }})
     

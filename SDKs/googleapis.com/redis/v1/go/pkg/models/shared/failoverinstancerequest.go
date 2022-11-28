@@ -8,6 +8,8 @@ const (
 	FailoverInstanceRequestDataProtectionModeEnumForceDataLoss                 FailoverInstanceRequestDataProtectionModeEnum = "FORCE_DATA_LOSS"
 )
 
+// FailoverInstanceRequest
+// Request for Failover.
 type FailoverInstanceRequest struct {
 	DataProtectionMode *FailoverInstanceRequestDataProtectionModeEnum `json:"dataProtectionMode,omitempty"`
 }

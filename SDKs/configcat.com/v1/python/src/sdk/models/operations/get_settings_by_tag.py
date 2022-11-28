@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetSettingsByTagPathParams:
-    tag_id: int = field(default=None, metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
+    tag_id: int = field(metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSettingsByTagRequest:
-    path_params: GetSettingsByTagPathParams = field(default=None)
+    path_params: GetSettingsByTagPathParams = field()
     
 
 @dataclass
 class GetSettingsByTagResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     setting_model_haljsons: Optional[List[shared.SettingModelHaljson]] = field(default=None)
     setting_models: Optional[List[shared.SettingModel]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterHsmStatus
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about whether an Amazon Redshift cluster finished applying any hardware changes to security module (HSM) settings that were specified in a modify cluster command.
 **/
 export class AwsRedshiftClusterHsmStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HsmClientCertificateIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=HsmClientCertificateIdentifier" })
   hsmClientCertificateIdentifier?: string;
 
-  @Metadata({ data: "json, name=HsmConfigurationIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=HsmConfigurationIdentifier" })
   hsmConfigurationIdentifier?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

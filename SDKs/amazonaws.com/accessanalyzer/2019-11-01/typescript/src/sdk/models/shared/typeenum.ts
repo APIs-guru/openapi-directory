@@ -1,6 +1,7 @@
 
 
+
 export enum TypeEnum {
-    Account = "ACCOUNT"
-,    Organization = "ORGANIZATION"
+    Account = "ACCOUNT",
+    Organization = "ORGANIZATION"
 }

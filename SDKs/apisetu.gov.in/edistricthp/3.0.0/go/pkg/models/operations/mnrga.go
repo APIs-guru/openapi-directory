@@ -26,11 +26,6 @@ type MnrgaSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MnrgaRequest struct {
-	Request  *MnrgaRequestBody `request:"mediaType=application/json"`
-	Security MnrgaSecurity
-}
-
 type Mnrga400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Mnrga504ApplicationJSON struct {
 	Error            *Mnrga504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Mnrga504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MnrgaRequest struct {
+	Request  *MnrgaRequestBody `request:"mediaType=application/json"`
+	Security MnrgaSecurity
 }
 
 type MnrgaResponse struct {

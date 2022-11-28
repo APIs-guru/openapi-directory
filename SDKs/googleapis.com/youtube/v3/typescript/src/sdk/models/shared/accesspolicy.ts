@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccessPolicy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Rights management policy for YouTube resources.
 **/
 export class AccessPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed" })
+  @SpeakeasyMetadata({ data: "json, name=allowed" })
   allowed?: boolean;
 
-  @Metadata({ data: "json, name=exception" })
+  @SpeakeasyMetadata({ data: "json, name=exception" })
   exception?: string[];
 }

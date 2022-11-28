@@ -1,5 +1,7 @@
 package shared
 
+// DocumentOccurrence
+// DocumentOccurrence represents an SPDX Document Creation Information section: https://spdx.github.io/spdx-spec/2-document-creation-information/
 type DocumentOccurrence struct {
 	CreateTime           *string  `json:"createTime,omitempty"`
 	CreatorComment       *string  `json:"creatorComment,omitempty"`

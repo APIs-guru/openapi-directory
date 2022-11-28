@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var LibreOfficeConvertRequest = /** @class */ (function (_super) {
     __extends(LibreOfficeConvertRequest, _super);
     function LibreOfficeConvertRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fileName" }),
+        SpeakeasyMetadata({ data: "json, name=fileName" }),
         __metadata("design:type", String)
     ], LibreOfficeConvertRequest.prototype, "fileName", void 0);
     __decorate([
-        Metadata({ data: "json, name=inlinePdf" }),
+        SpeakeasyMetadata({ data: "json, name=inlinePdf" }),
         __metadata("design:type", Boolean)
     ], LibreOfficeConvertRequest.prototype, "inlinePdf", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], LibreOfficeConvertRequest.prototype, "url", void 0);
     return LibreOfficeConvertRequest;

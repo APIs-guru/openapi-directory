@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SignatureInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the digital signature of the resource.
 **/
 export class SignatureInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerKmsKeyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=customerKmsKeyVersion" })
   customerKmsKeyVersion?: string;
 
-  @Metadata({ data: "json, name=googlePublicKeyPem" })
+  @SpeakeasyMetadata({ data: "json, name=googlePublicKeyPem" })
   googlePublicKeyPem?: string;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature?: string;
 }

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolTftpSessionSetParameterPathParams = /** @class */ (function (_super) {
     __extends(ProtocolTftpSessionSetParameterPathParams, _super);
     function ProtocolTftpSessionSetParameterPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTftpSessionSetParameterPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parameter" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parameter" }),
         __metadata("design:type", String)
     ], ProtocolTftpSessionSetParameterPathParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sessionID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sessionID" }),
         __metadata("design:type", String)
     ], ProtocolTftpSessionSetParameterPathParams.prototype, "sessionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=value" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=value" }),
         __metadata("design:type", String)
     ], ProtocolTftpSessionSetParameterPathParams.prototype, "value", void 0);
     return ProtocolTftpSessionSetParameterPathParams;
@@ -53,7 +53,7 @@ var ProtocolTftpSessionSetParameterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTftpSessionSetParameterPathParams)
     ], ProtocolTftpSessionSetParameterRequest.prototype, "pathParams", void 0);
     return ProtocolTftpSessionSetParameterRequest;
@@ -65,15 +65,15 @@ var ProtocolTftpSessionSetParameterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTftpSessionSetParameterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTftpSessionSetParameterResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTftpSessionSetParameterResponse.prototype, "protocolTftpSessionSetParameter200ApplicationJsonString", void 0);
     return ProtocolTftpSessionSetParameterResponse;

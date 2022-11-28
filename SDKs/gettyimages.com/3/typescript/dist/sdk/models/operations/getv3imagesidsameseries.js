@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3ImagesIdSameSeriesPathParams = /** @class */ (function (_super) {
     __extends(GetV3ImagesIdSameSeriesPathParams, _super);
@@ -30,7 +30,7 @@ var GetV3ImagesIdSameSeriesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetV3ImagesIdSameSeriesPathParams.prototype, "id", void 0);
     return GetV3ImagesIdSameSeriesPathParams;
@@ -42,15 +42,15 @@ var GetV3ImagesIdSameSeriesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetV3ImagesIdSameSeriesQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetV3ImagesIdSameSeriesQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetV3ImagesIdSameSeriesQueryParams.prototype, "pageSize", void 0);
     return GetV3ImagesIdSameSeriesQueryParams;
@@ -62,7 +62,7 @@ var GetV3ImagesIdSameSeriesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3ImagesIdSameSeriesHeaders.prototype, "acceptLanguage", void 0);
     return GetV3ImagesIdSameSeriesHeaders;
@@ -74,15 +74,15 @@ var GetV3ImagesIdSameSeriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesIdSameSeriesPathParams)
     ], GetV3ImagesIdSameSeriesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesIdSameSeriesQueryParams)
     ], GetV3ImagesIdSameSeriesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesIdSameSeriesHeaders)
     ], GetV3ImagesIdSameSeriesRequest.prototype, "headers", void 0);
     return GetV3ImagesIdSameSeriesRequest;
@@ -94,15 +94,15 @@ var GetV3ImagesIdSameSeriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3ImagesIdSameSeriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImageSearchItemSearchResults)
     ], GetV3ImagesIdSameSeriesResponse.prototype, "imageSearchItemSearchResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3ImagesIdSameSeriesResponse.prototype, "statusCode", void 0);
     return GetV3ImagesIdSameSeriesResponse;

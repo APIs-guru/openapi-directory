@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var OrganizationStateEnum;
 (function (OrganizationStateEnum) {
     OrganizationStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -39,35 +39,35 @@ var Organization = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Organization.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleteTime" }),
+        SpeakeasyMetadata({ data: "json, name=deleteTime" }),
         __metadata("design:type", String)
     ], Organization.prototype, "deleteTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=directoryCustomerId" }),
+        SpeakeasyMetadata({ data: "json, name=directoryCustomerId" }),
         __metadata("design:type", String)
     ], Organization.prototype, "directoryCustomerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Organization.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Organization.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Organization.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Organization.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Organization.prototype, "updateTime", void 0);
     return Organization;

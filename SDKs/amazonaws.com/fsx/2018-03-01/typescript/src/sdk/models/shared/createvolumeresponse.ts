@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Volume } from "./volume";
 
 
+
 export class CreateVolumeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Volume" })
+  @SpeakeasyMetadata({ data: "json, name=Volume" })
   volume?: Volume;
 }

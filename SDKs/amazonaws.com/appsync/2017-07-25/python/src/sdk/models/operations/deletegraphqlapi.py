@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteGraphqlAPIPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,19 +23,19 @@ class DeleteGraphqlAPIHeaders:
 
 @dataclass
 class DeleteGraphqlAPIRequest:
-    path_params: DeleteGraphqlAPIPathParams = field(default=None)
-    headers: DeleteGraphqlAPIHeaders = field(default=None)
+    headers: DeleteGraphqlAPIHeaders = field()
+    path_params: DeleteGraphqlAPIPathParams = field()
     
 
 @dataclass
 class DeleteGraphqlAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_graphql_api_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

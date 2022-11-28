@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VerifyUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class VerifyUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isPendingEmail" })
+  @SpeakeasyMetadata({ data: "json, name=isPendingEmail" })
   isPendingEmail?: boolean;
 
-  @Metadata({ data: "json, name=verificationString" })
+  @SpeakeasyMetadata({ data: "json, name=verificationString" })
   verificationString: string;
 }
 
 
 export class VerifyUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: VerifyUserPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: VerifyUserRequestBody;
 }
 
 
 export class VerifyUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

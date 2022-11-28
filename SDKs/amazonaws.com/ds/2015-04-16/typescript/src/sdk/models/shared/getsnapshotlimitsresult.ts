@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SnapshotLimits } from "./snapshotlimits";
+
 
 
 // GetSnapshotLimitsResult
@@ -7,6 +8,6 @@ import { SnapshotLimits } from "./snapshotlimits";
  * Contains the results of the <a>GetSnapshotLimits</a> operation.
 **/
 export class GetSnapshotLimitsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SnapshotLimits" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotLimits" })
   snapshotLimits?: SnapshotLimits;
 }

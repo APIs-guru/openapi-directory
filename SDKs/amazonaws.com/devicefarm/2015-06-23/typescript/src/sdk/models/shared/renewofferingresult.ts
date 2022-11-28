@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OfferingTransaction } from "./offeringtransaction";
+
 
 
 // RenewOfferingResult
@@ -7,6 +8,6 @@ import { OfferingTransaction } from "./offeringtransaction";
  * The result of a renewal offering.
 **/
 export class RenewOfferingResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=offeringTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=offeringTransaction" })
   offeringTransaction?: OfferingTransaction;
 }

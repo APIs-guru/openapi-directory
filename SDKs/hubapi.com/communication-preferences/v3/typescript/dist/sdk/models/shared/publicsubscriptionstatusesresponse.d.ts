@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PublicSubscriptionStatus } from "./publicsubscriptionstatus";
 /**
  * A collection of subscription statuses for a contact.

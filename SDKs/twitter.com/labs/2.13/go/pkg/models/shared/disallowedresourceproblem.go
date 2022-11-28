@@ -14,6 +14,8 @@ const (
 	DisallowedResourceProblemSectionEnumIncludes DisallowedResourceProblemSectionEnum = "includes"
 )
 
+// DisallowedResourceProblem
+// A problem that indicates that the resource requested violates the precepts of this API.
 type DisallowedResourceProblem struct {
 	Detail       string                                    `json:"detail"`
 	ResourceID   string                                    `json:"resource_id"`

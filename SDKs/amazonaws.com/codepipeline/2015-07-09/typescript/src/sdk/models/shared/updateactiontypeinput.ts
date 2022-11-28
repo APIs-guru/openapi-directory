@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTypeDeclaration } from "./actiontypedeclaration";
 
 
+
 export class UpdateActionTypeInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionType" })
+  @SpeakeasyMetadata({ data: "json, name=actionType" })
   actionType: ActionTypeDeclaration;
 }

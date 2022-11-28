@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta1IndexField } from "./googlefirestoreadminv1beta1indexfield";
 
+
 export enum GoogleFirestoreAdminV1beta1IndexStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Error = "ERROR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Error = "ERROR"
 }
 
 
@@ -15,15 +15,15 @@ export enum GoogleFirestoreAdminV1beta1IndexStateEnum {
  * An index definition.
 **/
 export class GoogleFirestoreAdminV1beta1Index extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionId" })
+  @SpeakeasyMetadata({ data: "json, name=collectionId" })
   collectionId?: string;
 
-  @Metadata({ data: "json, name=fields", elemType: shared.GoogleFirestoreAdminV1beta1IndexField })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: GoogleFirestoreAdminV1beta1IndexField })
   fields?: GoogleFirestoreAdminV1beta1IndexField[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleFirestoreAdminV1beta1IndexStateEnum;
 }

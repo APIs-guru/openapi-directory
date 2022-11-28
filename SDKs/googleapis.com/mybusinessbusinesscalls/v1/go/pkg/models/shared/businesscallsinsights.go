@@ -7,6 +7,8 @@ const (
 	BusinessCallsInsightsMetricTypeEnumAggregateCount        BusinessCallsInsightsMetricTypeEnum = "AGGREGATE_COUNT"
 )
 
+// BusinessCallsInsights
+// Insights for calls made to a location.
 type BusinessCallsInsights struct {
 	AggregateMetrics *AggregateMetrics                    `json:"aggregateMetrics,omitempty"`
 	MetricType       *BusinessCallsInsightsMetricTypeEnum `json:"metricType,omitempty"`

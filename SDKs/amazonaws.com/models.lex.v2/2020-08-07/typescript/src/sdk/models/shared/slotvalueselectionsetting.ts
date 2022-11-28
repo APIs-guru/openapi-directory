@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotValueRegexFilter } from "./slotvalueregexfilter";
 import { SlotValueResolutionStrategyEnum } from "./slotvalueresolutionstrategyenum";
+
 
 
 // SlotValueSelectionSetting
@@ -8,9 +9,9 @@ import { SlotValueResolutionStrategyEnum } from "./slotvalueresolutionstrategyen
  * Contains settings used by Amazon Lex to select a slot value.
 **/
 export class SlotValueSelectionSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regexFilter" })
+  @SpeakeasyMetadata({ data: "json, name=regexFilter" })
   regexFilter?: SlotValueRegexFilter;
 
-  @Metadata({ data: "json, name=resolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=resolutionStrategy" })
   resolutionStrategy: SlotValueResolutionStrategyEnum;
 }

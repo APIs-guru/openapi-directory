@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UsageReportEntity
@@ -7,40 +7,40 @@ import * as shared from "../shared";
  * Output only. Information about the type of the item.
 **/
 export class UsageReportEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=userEmail" })
+  @SpeakeasyMetadata({ data: "json, name=userEmail" })
   userEmail?: string;
 }
 
 
 export class UsageReportParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=datetimeValue" })
+  @SpeakeasyMetadata({ data: "json, name=datetimeValue" })
   datetimeValue?: Date;
 
-  @Metadata({ data: "json, name=intValue" })
+  @SpeakeasyMetadata({ data: "json, name=intValue" })
   intValue?: string;
 
-  @Metadata({ data: "json, name=msgValue" })
+  @SpeakeasyMetadata({ data: "json, name=msgValue" })
   msgValue?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }
 
@@ -50,18 +50,18 @@ export class UsageReportParameters extends SpeakeasyBase {
  * JSON template for a usage report.
 **/
 export class UsageReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: UsageReportEntity;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.UsageReportParameters })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: UsageReportParameters })
   parameters?: UsageReportParameters[];
 }

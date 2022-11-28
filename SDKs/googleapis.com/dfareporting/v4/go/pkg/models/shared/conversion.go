@@ -1,5 +1,7 @@
 package shared
 
+// Conversion
+// A Conversion represents when a user successfully performs a desired action after seeing an ad.
 type Conversion struct {
 	ChildDirectedTreatment    *bool                      `json:"childDirectedTreatment,omitempty"`
 	CustomVariables           []CustomFloodlightVariable `json:"customVariables,omitempty"`

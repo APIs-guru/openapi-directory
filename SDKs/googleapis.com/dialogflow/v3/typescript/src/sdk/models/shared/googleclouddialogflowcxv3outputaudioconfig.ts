@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3SynthesizeSpeechConfig } from "./googleclouddialogflowcxv3synthesizespeechconfig";
 
+
 export enum GoogleCloudDialogflowCxV3OutputAudioConfigAudioEncodingEnum {
-    OutputAudioEncodingUnspecified = "OUTPUT_AUDIO_ENCODING_UNSPECIFIED"
-,    OutputAudioEncodingLinear16 = "OUTPUT_AUDIO_ENCODING_LINEAR_16"
-,    OutputAudioEncodingMp3 = "OUTPUT_AUDIO_ENCODING_MP3"
-,    OutputAudioEncodingMp364Kbps = "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS"
-,    OutputAudioEncodingOggOpus = "OUTPUT_AUDIO_ENCODING_OGG_OPUS"
-,    OutputAudioEncodingMulaw = "OUTPUT_AUDIO_ENCODING_MULAW"
+    OutputAudioEncodingUnspecified = "OUTPUT_AUDIO_ENCODING_UNSPECIFIED",
+    OutputAudioEncodingLinear16 = "OUTPUT_AUDIO_ENCODING_LINEAR_16",
+    OutputAudioEncodingMp3 = "OUTPUT_AUDIO_ENCODING_MP3",
+    OutputAudioEncodingMp364Kbps = "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS",
+    OutputAudioEncodingOggOpus = "OUTPUT_AUDIO_ENCODING_OGG_OPUS",
+    OutputAudioEncodingMulaw = "OUTPUT_AUDIO_ENCODING_MULAW"
 }
 
 
@@ -16,12 +17,12 @@ export enum GoogleCloudDialogflowCxV3OutputAudioConfigAudioEncodingEnum {
  * Instructs the speech synthesizer how to generate the output audio content.
 **/
 export class GoogleCloudDialogflowCxV3OutputAudioConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=audioEncoding" })
   audioEncoding?: GoogleCloudDialogflowCxV3OutputAudioConfigAudioEncodingEnum;
 
-  @Metadata({ data: "json, name=sampleRateHertz" })
+  @SpeakeasyMetadata({ data: "json, name=sampleRateHertz" })
   sampleRateHertz?: number;
 
-  @Metadata({ data: "json, name=synthesizeSpeechConfig" })
+  @SpeakeasyMetadata({ data: "json, name=synthesizeSpeechConfig" })
   synthesizeSpeechConfig?: GoogleCloudDialogflowCxV3SynthesizeSpeechConfig;
 }

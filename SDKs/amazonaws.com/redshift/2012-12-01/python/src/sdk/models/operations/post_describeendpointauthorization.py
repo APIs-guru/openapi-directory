@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeEndpointAuthorizationActionEnum(str, Enum):
     DESCRIBE_ENDPOINT_AUTHORIZATION = "DescribeEndpointAuthorization"
@@ -10,10 +14,10 @@ class PostDescribeEndpointAuthorizationVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeEndpointAuthorizationQueryParams:
-    action: PostDescribeEndpointAuthorizationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeEndpointAuthorizationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeEndpointAuthorizationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeEndpointAuthorizationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeEndpointAuthorizationHeaders:
 
 @dataclass
 class PostDescribeEndpointAuthorizationRequest:
-    query_params: PostDescribeEndpointAuthorizationQueryParams = field(default=None)
-    headers: PostDescribeEndpointAuthorizationHeaders = field(default=None)
+    headers: PostDescribeEndpointAuthorizationHeaders = field()
+    query_params: PostDescribeEndpointAuthorizationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeEndpointAuthorizationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

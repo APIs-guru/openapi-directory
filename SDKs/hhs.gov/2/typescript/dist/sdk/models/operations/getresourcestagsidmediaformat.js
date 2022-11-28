@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesTagsIdMediaFormatPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesTagsIdMediaFormatPathParams, _super);
@@ -30,11 +30,11 @@ var GetResourcesTagsIdMediaFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetResourcesTagsIdMediaFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdMediaFormatPathParams.prototype, "id", void 0);
     return GetResourcesTagsIdMediaFormatPathParams;
@@ -46,15 +46,15 @@ var GetResourcesTagsIdMediaFormatQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdMediaFormatQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdMediaFormatQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesTagsIdMediaFormatQueryParams.prototype, "sort", void 0);
     return GetResourcesTagsIdMediaFormatQueryParams;
@@ -66,11 +66,11 @@ var GetResourcesTagsIdMediaFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesTagsIdMediaFormatPathParams)
     ], GetResourcesTagsIdMediaFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesTagsIdMediaFormatQueryParams)
     ], GetResourcesTagsIdMediaFormatRequest.prototype, "queryParams", void 0);
     return GetResourcesTagsIdMediaFormatRequest;
@@ -82,15 +82,15 @@ var GetResourcesTagsIdMediaFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesTagsIdMediaFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.MediaItemWrapped }),
+        SpeakeasyMetadata({ elemType: shared.MediaItemWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesTagsIdMediaFormatResponse.prototype, "mediaItemWrappeds", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdMediaFormatResponse.prototype, "statusCode", void 0);
     return GetResourcesTagsIdMediaFormatResponse;

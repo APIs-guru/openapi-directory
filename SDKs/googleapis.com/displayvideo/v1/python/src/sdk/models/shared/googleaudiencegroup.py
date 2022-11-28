@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleaudiencetargetingsetting
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAudienceGroup:
-    settings: Optional[List[googleaudiencetargetingsetting.GoogleAudienceTargetingSetting]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""GoogleAudienceGroup
+    Details of Google audience group. All Google audience targeting settings are logically ‘OR’ of each other.
+    """
+    
+    settings: Optional[List[GoogleAudienceTargetingSetting]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     

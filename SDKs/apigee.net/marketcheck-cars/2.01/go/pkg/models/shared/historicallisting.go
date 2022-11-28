@@ -1,5 +1,7 @@
 package shared
 
+// HistoricalListing
+// Represents a car history entry
 type HistoricalListing struct {
 	Carfax1Owner     *bool            `json:"carfax_1_owner,omitempty"`
 	CarfaxCleanTitle *bool            `json:"carfax_clean_title,omitempty"`

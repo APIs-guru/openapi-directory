@@ -1,65 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GeoCoordsReadOnly } from "./geocoordsreadonly";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemProtocolEnum } from "./itemprotocolenum";
 import { TechnologyEnum } from "./technologyenum";
 import { ItemTypeEnum } from "./itemtypeenum";
+import { GeoCoordsReadOnly } from "./geocoordsreadonly";
+
+
+
+export class ItemInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=code_hex" })
+  codeHex?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=config_request" })
+  configRequest?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=custom" })
+  custom?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=location_request" })
+  locationRequest?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
+  protocol?: ItemProtocolEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=technology" })
+  technology?: TechnologyEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: ItemTypeEnum;
+}
 
 
 export class Item extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code_hex" })
+  @SpeakeasyMetadata({ data: "json, name=code_hex" })
   codeHex?: string;
 
-  @Metadata({ data: "json, name=config_request" })
+  @SpeakeasyMetadata({ data: "json, name=config_request" })
   configRequest?: Map<string, any>;
 
-  @Metadata({ data: "json, name=custom" })
+  @SpeakeasyMetadata({ data: "json, name=custom" })
   custom?: any;
 
-  @Metadata({ data: "json, name=geo_coords" })
+  @SpeakeasyMetadata({ data: "json, name=geo_coords" })
   geoCoords?: GeoCoordsReadOnly;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=is_present" })
+  @SpeakeasyMetadata({ data: "json, name=is_present" })
   isPresent?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=location_request" })
+  @SpeakeasyMetadata({ data: "json, name=location_request" })
   locationRequest?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, any>;
 
-  @Metadata({ data: "json, name=move_count" })
+  @SpeakeasyMetadata({ data: "json, name=move_count" })
   moveCount?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: ItemProtocolEnum;
 
-  @Metadata({ data: "json, name=sets" })
+  @SpeakeasyMetadata({ data: "json, name=sets" })
   sets?: string[];
 
-  @Metadata({ data: "json, name=technology" })
+  @SpeakeasyMetadata({ data: "json, name=technology" })
   technology?: TechnologyEnum;
 
-  @Metadata({ data: "json, name=time_created" })
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_last_present" })
+  @SpeakeasyMetadata({ data: "json, name=time_last_present" })
   timeLastPresent?: string;
 
-  @Metadata({ data: "json, name=time_moved" })
+  @SpeakeasyMetadata({ data: "json, name=time_moved" })
   timeMoved?: string;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ItemTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

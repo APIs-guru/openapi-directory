@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RunQueryRequestDataRangeEnum;
 (function (RunQueryRequestDataRangeEnum) {
     RunQueryRequestDataRangeEnum["CustomDates"] = "CUSTOM_DATES";
@@ -56,19 +56,19 @@ var RunQueryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataRange" }),
+        SpeakeasyMetadata({ data: "json, name=dataRange" }),
         __metadata("design:type", String)
     ], RunQueryRequest.prototype, "dataRange", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportDataEndTimeMs" }),
+        SpeakeasyMetadata({ data: "json, name=reportDataEndTimeMs" }),
         __metadata("design:type", String)
     ], RunQueryRequest.prototype, "reportDataEndTimeMs", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportDataStartTimeMs" }),
+        SpeakeasyMetadata({ data: "json, name=reportDataStartTimeMs" }),
         __metadata("design:type", String)
     ], RunQueryRequest.prototype, "reportDataStartTimeMs", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezoneCode" }),
+        SpeakeasyMetadata({ data: "json, name=timezoneCode" }),
         __metadata("design:type", String)
     ], RunQueryRequest.prototype, "timezoneCode", void 0);
     return RunQueryRequest;

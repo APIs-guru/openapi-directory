@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { MessageCode405PisCancEnum } from "./messagecode405piscancenum";
-import { MessageCode405PisCancEnum } from "./messagecode405piscancenum";
+
 
 
 // Error405PisCancAdditionalErrors
@@ -10,13 +9,13 @@ import { MessageCode405PisCancEnum } from "./messagecode405piscancenum";
  * This is a data element to support the declaration of additional errors in the context of [RFC7807].
 **/
 export class Error405PisCancAdditionalErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: MessageCode405PisCancEnum;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
@@ -28,21 +27,21 @@ export class Error405PisCancAdditionalErrors extends SpeakeasyBase {
  * 
 **/
 export class Error405PisCanc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links?: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=additionalErrors", elemType: shared.Error405PisCancAdditionalErrors })
+  @SpeakeasyMetadata({ data: "json, name=additionalErrors", elemType: Error405PisCancAdditionalErrors })
   additionalErrors?: Error405PisCancAdditionalErrors[];
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: MessageCode405PisCancEnum;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

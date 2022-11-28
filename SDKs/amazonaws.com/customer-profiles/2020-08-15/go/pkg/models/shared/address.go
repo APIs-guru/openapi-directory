@@ -1,5 +1,7 @@
 package shared
 
+// Address
+// A generic address associated with the customer that is not mailing, shipping, or billing.
 type Address struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`

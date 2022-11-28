@@ -44,6 +44,8 @@ const (
 	LinePropertiesStartArrowEnumOpenDiamond           LinePropertiesStartArrowEnum = "OPEN_DIAMOND"
 )
 
+// LineProperties
+// The properties of the Line. When unset, these fields default to values that match the appearance of new lines created in the Slides editor.
 type LineProperties struct {
 	DashStyle       *LinePropertiesDashStyleEnum  `json:"dashStyle,omitempty"`
 	EndArrow        *LinePropertiesEndArrowEnum   `json:"endArrow,omitempty"`

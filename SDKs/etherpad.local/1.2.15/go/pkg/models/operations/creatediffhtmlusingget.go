@@ -6,10 +6,6 @@ type CreateDiffHTMLUsingGetQueryParams struct {
 	StartRev *string `queryParam:"style=form,explode=true,name=startRev"`
 }
 
-type CreateDiffHTMLUsingGetRequest struct {
-	QueryParams CreateDiffHTMLUsingGetQueryParams
-}
-
 type CreateDiffHTMLUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -32,6 +28,10 @@ type CreateDiffHTMLUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateDiffHTMLUsingGetRequest struct {
+	QueryParams CreateDiffHTMLUsingGetQueryParams
 }
 
 type CreateDiffHTMLUsingGetResponse struct {

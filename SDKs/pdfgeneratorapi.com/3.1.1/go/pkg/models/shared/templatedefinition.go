@@ -1,10 +1,14 @@
 package shared
 
+// TemplateDefinitionDataSettings
+// Defines filter and sort option for root data set.
 type TemplateDefinitionDataSettings struct {
 	FilterBy []map[string]interface{} `json:"filterBy,omitempty"`
 	SortBy   []map[string]interface{} `json:"sortBy,omitempty"`
 }
 
+// TemplateDefinitionEditor
+// Configuration preferences for the editor
 type TemplateDefinitionEditor struct {
 	HeightMultiplier *float64 `json:"heightMultiplier,omitempty"`
 }
@@ -17,6 +21,8 @@ const (
 	TemplateDefinitionLayoutFormatEnumCustom TemplateDefinitionLayoutFormatEnum = "custom"
 )
 
+// TemplateDefinitionLayoutMargins
+// Page margins in units
 type TemplateDefinitionLayoutMargins struct {
 	Bottom *float64 `json:"bottom,omitempty"`
 	Left   *float64 `json:"left,omitempty"`
@@ -39,6 +45,8 @@ const (
 	TemplateDefinitionLayoutRepeatLayoutFormatEnumCustom TemplateDefinitionLayoutRepeatLayoutFormatEnum = "custom"
 )
 
+// TemplateDefinitionLayoutRepeatLayout
+// Defines page size if layout is repeated on the page e.g sheet labels
 type TemplateDefinitionLayoutRepeatLayout struct {
 	Format *TemplateDefinitionLayoutRepeatLayoutFormatEnum `json:"format,omitempty"`
 	Height *float64                                        `json:"height,omitempty"`
@@ -52,6 +60,8 @@ const (
 	TemplateDefinitionLayoutUnitEnumIn TemplateDefinitionLayoutUnitEnum = "in"
 )
 
+// TemplateDefinitionLayout
+// Defines template layout (e.g page format, margins).
 type TemplateDefinitionLayout struct {
 	EmptyLabels  *int64                                   `json:"emptyLabels,omitempty"`
 	Format       *TemplateDefinitionLayoutFormatEnum      `json:"format,omitempty"`

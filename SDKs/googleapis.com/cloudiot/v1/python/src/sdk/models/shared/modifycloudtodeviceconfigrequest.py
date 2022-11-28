@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ModifyCloudToDeviceConfigRequest:
-    binary_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'binaryData' }})
-    version_to_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versionToUpdate' }})
+    r"""ModifyCloudToDeviceConfigRequest
+    Request for `ModifyCloudToDeviceConfig`.
+    """
+    
+    binary_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('binaryData') }})
+    version_to_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionToUpdate') }})
     

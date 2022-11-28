@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConnectionsList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the connections used by a job.
 **/
 export class ConnectionsList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Connections" })
+  @SpeakeasyMetadata({ data: "json, name=Connections" })
   connections?: string[];
 }

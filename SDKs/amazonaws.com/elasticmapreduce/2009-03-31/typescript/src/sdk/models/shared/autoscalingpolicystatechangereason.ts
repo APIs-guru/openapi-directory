@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingPolicyStateChangeReasonCodeEnum } from "./autoscalingpolicystatechangereasoncodeenum";
+
 
 
 // AutoScalingPolicyStateChangeReason
@@ -7,9 +8,9 @@ import { AutoScalingPolicyStateChangeReasonCodeEnum } from "./autoscalingpolicys
  * The reason for an <a>AutoScalingPolicyStatus</a> change.
 **/
 export class AutoScalingPolicyStateChangeReason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: AutoScalingPolicyStateChangeReasonCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

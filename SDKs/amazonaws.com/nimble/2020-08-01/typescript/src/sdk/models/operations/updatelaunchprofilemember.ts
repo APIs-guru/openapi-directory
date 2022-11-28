@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateLaunchProfileMemberPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=launchProfileId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=launchProfileId" })
   launchProfileId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=principalId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=principalId" })
   principalId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=studioId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=studioId" })
   studioId: string;
 }
 
 
 export class UpdateLaunchProfileMemberHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Client-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Client-Token" })
   xAmzClientToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -46,51 +47,51 @@ export enum UpdateLaunchProfileMemberRequestBodyPersonaEnum {
 
 
 export class UpdateLaunchProfileMemberRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=persona" })
+  @SpeakeasyMetadata({ data: "json, name=persona" })
   persona: UpdateLaunchProfileMemberRequestBodyPersonaEnum;
 }
 
 
 export class UpdateLaunchProfileMemberRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateLaunchProfileMemberPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateLaunchProfileMemberHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateLaunchProfileMemberRequestBody;
 }
 
 
 export class UpdateLaunchProfileMemberResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateLaunchProfileMemberResponse?: shared.UpdateLaunchProfileMemberResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

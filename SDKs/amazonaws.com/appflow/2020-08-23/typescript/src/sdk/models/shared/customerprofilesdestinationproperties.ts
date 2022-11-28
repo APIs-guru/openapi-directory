@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerProfilesDestinationProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The properties that are applied when Amazon Connect Customer Profiles is used as a destination. 
 **/
 export class CustomerProfilesDestinationProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=objectTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=objectTypeName" })
   objectTypeName?: string;
 }

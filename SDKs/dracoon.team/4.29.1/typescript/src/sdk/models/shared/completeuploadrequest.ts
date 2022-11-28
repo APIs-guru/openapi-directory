@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileKey } from "./filekey";
 import { UserFileKeyList } from "./userfilekeylist";
 
+
 export enum CompleteUploadRequestResolutionStrategyEnum {
-    Autorename = "autorename"
-,    Overwrite = "overwrite"
-,    Fail = "fail"
+    Autorename = "autorename",
+    Overwrite = "overwrite",
+    Fail = "fail"
 }
 
 
@@ -14,18 +15,18 @@ export enum CompleteUploadRequestResolutionStrategyEnum {
  * Request model for completing an upload
 **/
 export class CompleteUploadRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileKey" })
+  @SpeakeasyMetadata({ data: "json, name=fileKey" })
   fileKey?: FileKey;
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=keepShareLinks" })
+  @SpeakeasyMetadata({ data: "json, name=keepShareLinks" })
   keepShareLinks?: boolean;
 
-  @Metadata({ data: "json, name=resolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=resolutionStrategy" })
   resolutionStrategy?: CompleteUploadRequestResolutionStrategyEnum;
 
-  @Metadata({ data: "json, name=userFileKeyList" })
+  @SpeakeasyMetadata({ data: "json, name=userFileKeyList" })
   userFileKeyList?: UserFileKeyList;
 }

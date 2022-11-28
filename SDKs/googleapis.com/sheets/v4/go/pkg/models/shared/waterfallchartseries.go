@@ -1,5 +1,7 @@
 package shared
 
+// WaterfallChartSeries
+// A single series of data for a waterfall chart.
 type WaterfallChartSeries struct {
 	CustomSubtotals      []WaterfallChartCustomSubtotal `json:"customSubtotals,omitempty"`
 	Data                 *ChartData                     `json:"data,omitempty"`

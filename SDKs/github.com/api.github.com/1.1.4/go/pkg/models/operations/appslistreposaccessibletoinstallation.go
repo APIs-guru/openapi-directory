@@ -9,14 +9,14 @@ type AppsListReposAccessibleToInstallationQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type AppsListReposAccessibleToInstallationRequest struct {
-	QueryParams AppsListReposAccessibleToInstallationQueryParams
-}
-
 type AppsListReposAccessibleToInstallation200ApplicationJSON struct {
 	Repositories        []shared.Repository `json:"repositories"`
 	RepositorySelection *string             `json:"repository_selection,omitempty"`
 	TotalCount          int64               `json:"total_count"`
+}
+
+type AppsListReposAccessibleToInstallationRequest struct {
+	QueryParams AppsListReposAccessibleToInstallationQueryParams
 }
 
 type AppsListReposAccessibleToInstallationResponse struct {

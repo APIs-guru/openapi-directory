@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -51,13 +52,13 @@ class GetSearchMotorcycleActiveQueryParams:
 
 @dataclass
 class GetSearchMotorcycleActiveRequest:
-    query_params: GetSearchMotorcycleActiveQueryParams = field(default=None)
+    query_params: GetSearchMotorcycleActiveQueryParams = field()
     
 
 @dataclass
 class GetSearchMotorcycleActiveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     motorcycle_search_response: Optional[shared.MotorcycleSearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetStudiesIdModulePatientPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetStudiesIdModulePatientQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ignore-length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignore-length" })
   ignoreLength?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=short" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" })
   short?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=simplify" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=simplify" })
   simplify?: boolean;
 }
 
 
 export class GetStudiesIdModulePatientRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetStudiesIdModulePatientPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetStudiesIdModulePatientQueryParams;
 }
 
 
 export class GetStudiesIdModulePatientResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getStudiesIdModulePatient200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

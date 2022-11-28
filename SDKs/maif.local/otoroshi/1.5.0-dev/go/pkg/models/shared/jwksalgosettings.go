@@ -1,5 +1,7 @@
 package shared
 
+// JwksAlgoSettings
+// Settings for a JWK set
 type JwksAlgoSettings struct {
 	Headers map[string]string `json:"headers,omitempty"`
 	Kty     *string           `json:"kty,omitempty"`

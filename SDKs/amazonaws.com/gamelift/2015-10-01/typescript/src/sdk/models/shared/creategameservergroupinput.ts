@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GameServerGroupAutoScalingPolicy } from "./gameservergroupautoscalingpolicy";
 import { BalancingStrategyEnum } from "./balancingstrategyenum";
 import { GameServerProtectionPolicyEnum } from "./gameserverprotectionpolicyenum";
@@ -8,37 +7,38 @@ import { LaunchTemplateSpecification } from "./launchtemplatespecification";
 import { Tag } from "./tag";
 
 
+
 export class CreateGameServerGroupInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingPolicy" })
   autoScalingPolicy?: GameServerGroupAutoScalingPolicy;
 
-  @Metadata({ data: "json, name=BalancingStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=BalancingStrategy" })
   balancingStrategy?: BalancingStrategyEnum;
 
-  @Metadata({ data: "json, name=GameServerGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerGroupName" })
   gameServerGroupName: string;
 
-  @Metadata({ data: "json, name=GameServerProtectionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerProtectionPolicy" })
   gameServerProtectionPolicy?: GameServerProtectionPolicyEnum;
 
-  @Metadata({ data: "json, name=InstanceDefinitions", elemType: shared.InstanceDefinition })
+  @SpeakeasyMetadata({ data: "json, name=InstanceDefinitions", elemType: InstanceDefinition })
   instanceDefinitions: InstanceDefinition[];
 
-  @Metadata({ data: "json, name=LaunchTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=LaunchTemplate" })
   launchTemplate: LaunchTemplateSpecification;
 
-  @Metadata({ data: "json, name=MaxSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxSize" })
   maxSize: number;
 
-  @Metadata({ data: "json, name=MinSize" })
+  @SpeakeasyMetadata({ data: "json, name=MinSize" })
   minSize: number;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VpcSubnets" })
+  @SpeakeasyMetadata({ data: "json, name=VpcSubnets" })
   vpcSubnets?: string[];
 }

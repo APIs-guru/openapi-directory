@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportEvidenceError } from "./assessmentreportevidenceerror";
 export declare class BatchDisassociateAssessmentReportEvidenceResponse extends SpeakeasyBase {
     errors?: AssessmentReportEvidenceError[];

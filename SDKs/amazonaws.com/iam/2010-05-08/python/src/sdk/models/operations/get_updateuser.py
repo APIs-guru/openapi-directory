@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateUserActionEnum(str, Enum):
     UPDATE_USER = "UpdateUser"
@@ -10,11 +14,11 @@ class GetUpdateUserVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateUserQueryParams:
-    action: GetUpdateUserActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetUpdateUserActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetUpdateUserVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     new_path: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NewPath', 'style': 'form', 'explode': True }})
     new_user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NewUserName', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetUpdateUserVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetUpdateUserHeaders:
 
 @dataclass
 class GetUpdateUserRequest:
-    query_params: GetUpdateUserQueryParams = field(default=None)
-    headers: GetUpdateUserHeaders = field(default=None)
+    headers: GetUpdateUserHeaders = field()
+    query_params: GetUpdateUserQueryParams = field()
     
 
 @dataclass
 class GetUpdateUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

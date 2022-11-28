@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppState } from "./appstate";
+
 
 
 // DeviceReport
@@ -8,9 +8,9 @@ import { AppState } from "./appstate";
  * Device report updated with the latest app states for managed apps on the device.
 **/
 export class DeviceReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appState", elemType: shared.AppState })
+  @SpeakeasyMetadata({ data: "json, name=appState", elemType: AppState })
   appState?: AppState[];
 
-  @Metadata({ data: "json, name=lastUpdatedTimestampMillis" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestampMillis" })
   lastUpdatedTimestampMillis?: string;
 }

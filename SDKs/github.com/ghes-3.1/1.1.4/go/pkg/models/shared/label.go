@@ -1,5 +1,7 @@
 package shared
 
+// Label
+// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
 type Label struct {
 	Color       string `json:"color"`
 	Default     bool   `json:"default"`

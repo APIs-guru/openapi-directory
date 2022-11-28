@@ -1,129 +1,130 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StorageBucketsUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=bucket" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bucket" })
   bucket: string;
 }
 
 export enum StorageBucketsUpdatePredefinedAclEnum {
-    AuthenticatedRead = "authenticatedRead"
-,    Private = "private"
-,    ProjectPrivate = "projectPrivate"
-,    PublicRead = "publicRead"
-,    PublicReadWrite = "publicReadWrite"
+    AuthenticatedRead = "authenticatedRead",
+    Private = "private",
+    ProjectPrivate = "projectPrivate",
+    PublicRead = "publicRead",
+    PublicReadWrite = "publicReadWrite"
 }
 
 export enum StorageBucketsUpdatePredefinedDefaultObjectAclEnum {
-    AuthenticatedRead = "authenticatedRead"
-,    BucketOwnerFullControl = "bucketOwnerFullControl"
-,    BucketOwnerRead = "bucketOwnerRead"
-,    Private = "private"
-,    ProjectPrivate = "projectPrivate"
-,    PublicRead = "publicRead"
+    AuthenticatedRead = "authenticatedRead",
+    BucketOwnerFullControl = "bucketOwnerFullControl",
+    BucketOwnerRead = "bucketOwnerRead",
+    Private = "private",
+    ProjectPrivate = "projectPrivate",
+    PublicRead = "publicRead"
 }
 
 export enum StorageBucketsUpdateProjectionEnum {
-    Full = "full"
-,    NoAcl = "noAcl"
+    Full = "full",
+    NoAcl = "noAcl"
 }
 
 
 export class StorageBucketsUpdateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" })
   ifMetagenerationMatch?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationNotMatch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationNotMatch" })
   ifMetagenerationNotMatch?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=predefinedAcl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=predefinedAcl" })
   predefinedAcl?: StorageBucketsUpdatePredefinedAclEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=predefinedDefaultObjectAcl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=predefinedDefaultObjectAcl" })
   predefinedDefaultObjectAcl?: StorageBucketsUpdatePredefinedDefaultObjectAclEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=projection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=projection" })
   projection?: StorageBucketsUpdateProjectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" })
   userIp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userProject" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userProject" })
   userProject?: string;
 }
 
 
 export class StorageBucketsUpdateSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class StorageBucketsUpdateSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class StorageBucketsUpdateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: StorageBucketsUpdateSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: StorageBucketsUpdateSecurityOption2;
 }
 
 
 export class StorageBucketsUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StorageBucketsUpdatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StorageBucketsUpdateQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.Bucket;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: StorageBucketsUpdateSecurity;
 }
 
 
 export class StorageBucketsUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bucket?: shared.Bucket;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

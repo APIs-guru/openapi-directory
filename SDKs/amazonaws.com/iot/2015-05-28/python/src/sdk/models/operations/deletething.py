@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteThingPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +28,20 @@ class DeleteThingHeaders:
 
 @dataclass
 class DeleteThingRequest:
-    path_params: DeleteThingPathParams = field(default=None)
-    query_params: DeleteThingQueryParams = field(default=None)
-    headers: DeleteThingHeaders = field(default=None)
+    headers: DeleteThingHeaders = field()
+    path_params: DeleteThingPathParams = field()
+    query_params: DeleteThingQueryParams = field()
     
 
 @dataclass
 class DeleteThingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_thing_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     version_conflict_exception: Optional[Any] = field(default=None)

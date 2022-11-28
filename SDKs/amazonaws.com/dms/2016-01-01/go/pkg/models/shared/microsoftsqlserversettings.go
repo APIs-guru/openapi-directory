@@ -1,5 +1,7 @@
 package shared
 
+// MicrosoftSQLServerSettings
+// Provides information that defines a Microsoft SQL Server endpoint.
 type MicrosoftSQLServerSettings struct {
 	BcpPacketSize               *int64               `json:"BcpPacketSize,omitempty"`
 	ControlTablesFileGroup      *string              `json:"ControlTablesFileGroup,omitempty"`

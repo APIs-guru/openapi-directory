@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Notification } from "./notification";
-import { Notification } from "./notification";
+
 
 
 // UpdateNotificationRequest
@@ -8,15 +8,15 @@ import { Notification } from "./notification";
  *  Request of UpdateNotification 
 **/
 export class UpdateNotificationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=BudgetName" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetName" })
   budgetName: string;
 
-  @Metadata({ data: "json, name=NewNotification" })
+  @SpeakeasyMetadata({ data: "json, name=NewNotification" })
   newNotification: Notification;
 
-  @Metadata({ data: "json, name=OldNotification" })
+  @SpeakeasyMetadata({ data: "json, name=OldNotification" })
   oldNotification: Notification;
 }

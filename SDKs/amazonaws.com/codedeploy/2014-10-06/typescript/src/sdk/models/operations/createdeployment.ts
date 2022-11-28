@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum CreateDeploymentXAmzTargetEnum {
     CodeDeploy20141006CreateDeployment = "CodeDeploy_20141006.CreateDeployment"
@@ -7,120 +8,120 @@ export enum CreateDeploymentXAmzTargetEnum {
 
 
 export class CreateDeploymentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: CreateDeploymentXAmzTargetEnum;
 }
 
 
 export class CreateDeploymentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDeploymentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateDeploymentInput;
 }
 
 
 export class CreateDeploymentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   applicationDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   applicationNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDeploymentOutput?: shared.CreateDeploymentOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentConfigDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentGroupDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentGroupNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   descriptionTooLongException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidApplicationNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAutoRollbackConfigException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAutoScalingGroupException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentConfigNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentGroupNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidFileExistsBehaviorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidGitHubAccountTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidIgnoreApplicationStopFailuresValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidLoadBalancerInfoException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRevisionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRoleException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTargetInstancesException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTrafficRoutingConfigurationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidUpdateOutdatedInstancesOnlyValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revisionDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revisionRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

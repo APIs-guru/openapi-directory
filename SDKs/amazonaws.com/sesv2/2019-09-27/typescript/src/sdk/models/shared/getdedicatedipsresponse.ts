@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DedicatedIp } from "./dedicatedip";
+
 
 
 // GetDedicatedIpsResponse
@@ -8,9 +8,9 @@ import { DedicatedIp } from "./dedicatedip";
  * Information about the dedicated IP addresses that are associated with your AWS account.
 **/
 export class GetDedicatedIpsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DedicatedIps", elemType: shared.DedicatedIp })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedIps", elemType: DedicatedIp })
   dedicatedIps?: DedicatedIp[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

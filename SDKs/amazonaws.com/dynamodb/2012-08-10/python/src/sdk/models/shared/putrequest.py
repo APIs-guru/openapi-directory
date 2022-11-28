@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import attributevalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutRequest:
-    item: dict[str, attributevalue.AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Item' }})
+    r"""PutRequest
+    Represents a request to perform a <code>PutItem</code> operation on an item.
+    """
+    
+    item: dict[str, AttributeValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Item') }})
     

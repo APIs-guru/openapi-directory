@@ -1,5 +1,7 @@
 package shared
 
+// CreateEndpointMessage
+// <p/>
 type CreateEndpointMessage struct {
 	CertificateArn             *string                          `json:"CertificateArn,omitempty"`
 	DatabaseName               *string                          `json:"DatabaseName,omitempty"`

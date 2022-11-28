@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskStateEnum } from "./taskstateenum";
 var DescribeTaskOutput = /** @class */ (function (_super) {
     __extends(DescribeTaskOutput, _super);
@@ -30,39 +30,39 @@ var DescribeTaskOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=completedAt" }),
+        SpeakeasyMetadata({ data: "json, name=completedAt" }),
         __metadata("design:type", Date)
     ], DescribeTaskOutput.prototype, "completedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], DescribeTaskOutput.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], DescribeTaskOutput.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], DescribeTaskOutput.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], DescribeTaskOutput.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DescribeTaskOutput.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=targets" }),
+        SpeakeasyMetadata({ data: "json, name=targets" }),
         __metadata("design:type", Array)
     ], DescribeTaskOutput.prototype, "targets", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskArn" }),
+        SpeakeasyMetadata({ data: "json, name=taskArn" }),
         __metadata("design:type", String)
     ], DescribeTaskOutput.prototype, "taskArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskId" }),
+        SpeakeasyMetadata({ data: "json, name=taskId" }),
         __metadata("design:type", String)
     ], DescribeTaskOutput.prototype, "taskId", void 0);
     return DescribeTaskOutput;

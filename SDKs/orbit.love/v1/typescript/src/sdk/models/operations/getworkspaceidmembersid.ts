@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWorkspaceIdMembersIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" })
   workspaceId: string;
 }
 
 
 export class GetWorkspaceIdMembersIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   bearer: shared.SchemeBearer;
 }
 
 
 export class GetWorkspaceIdMembersIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWorkspaceIdMembersIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetWorkspaceIdMembersIdSecurity;
 }
 
 
 export class GetWorkspaceIdMembersIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

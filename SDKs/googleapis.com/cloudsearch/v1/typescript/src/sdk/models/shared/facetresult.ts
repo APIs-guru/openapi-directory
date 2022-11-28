@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FacetBucket } from "./facetbucket";
+
 
 
 // FacetResult
@@ -8,15 +8,15 @@ import { FacetBucket } from "./facetbucket";
  * Source specific facet response
 **/
 export class FacetResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buckets", elemType: shared.FacetBucket })
+  @SpeakeasyMetadata({ data: "json, name=buckets", elemType: FacetBucket })
   buckets?: FacetBucket[];
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=operatorName" })
+  @SpeakeasyMetadata({ data: "json, name=operatorName" })
   operatorName?: string;
 
-  @Metadata({ data: "json, name=sourceName" })
+  @SpeakeasyMetadata({ data: "json, name=sourceName" })
   sourceName?: string;
 }

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDomainConfigType } from "./customdomainconfigtype";
 
 
+
 export class CreateUserPoolDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomDomainConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CustomDomainConfig" })
   customDomainConfig?: CustomDomainConfigType;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

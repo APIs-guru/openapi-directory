@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteFleetMetricPathParams:
-    metric_name: str = field(default=None, metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
+    metric_name: str = field(metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteFleetMetricHeaders:
 
 @dataclass
 class DeleteFleetMetricRequest:
-    path_params: DeleteFleetMetricPathParams = field(default=None)
-    query_params: DeleteFleetMetricQueryParams = field(default=None)
-    headers: DeleteFleetMetricHeaders = field(default=None)
+    headers: DeleteFleetMetricHeaders = field()
+    path_params: DeleteFleetMetricPathParams = field()
+    query_params: DeleteFleetMetricQueryParams = field()
     
 
 @dataclass
 class DeleteFleetMetricResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     version_conflict_exception: Optional[Any] = field(default=None)

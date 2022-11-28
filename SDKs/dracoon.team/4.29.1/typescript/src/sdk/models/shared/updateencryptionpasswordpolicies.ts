@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CharacterRules } from "./characterrules";
+
 
 
 // UpdateEncryptionPasswordPolicies
@@ -7,15 +8,15 @@ import { CharacterRules } from "./characterrules";
  * Request model for updating encryption password policies
 **/
 export class UpdateEncryptionPasswordPolicies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=characterRules" })
+  @SpeakeasyMetadata({ data: "json, name=characterRules" })
   characterRules?: CharacterRules;
 
-  @Metadata({ data: "json, name=minLength" })
+  @SpeakeasyMetadata({ data: "json, name=minLength" })
   minLength?: number;
 
-  @Metadata({ data: "json, name=rejectKeyboardPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=rejectKeyboardPatterns" })
   rejectKeyboardPatterns?: boolean;
 
-  @Metadata({ data: "json, name=rejectUserInfo" })
+  @SpeakeasyMetadata({ data: "json, name=rejectUserInfo" })
   rejectUserInfo?: boolean;
 }

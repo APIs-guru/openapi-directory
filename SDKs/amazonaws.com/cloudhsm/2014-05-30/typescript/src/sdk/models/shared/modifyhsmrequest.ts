@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModifyHsmRequest
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the inputs for the <a>ModifyHsm</a> operation.
 **/
 export class ModifyHsmRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EniIp" })
+  @SpeakeasyMetadata({ data: "json, name=EniIp" })
   eniIp?: string;
 
-  @Metadata({ data: "json, name=ExternalId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=HsmArn" })
+  @SpeakeasyMetadata({ data: "json, name=HsmArn" })
   hsmArn: string;
 
-  @Metadata({ data: "json, name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamRoleArn" })
   iamRoleArn?: string;
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=SyslogIp" })
+  @SpeakeasyMetadata({ data: "json, name=SyslogIp" })
   syslogIp?: string;
 }

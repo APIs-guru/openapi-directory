@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ExtrasTopologyMapsRenderPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ExtrasTopologyMapsRenderRequest:
-    path_params: ExtrasTopologyMapsRenderPathParams = field(default=None)
+    path_params: ExtrasTopologyMapsRenderPathParams = field()
     
 
 @dataclass
 class ExtrasTopologyMapsRenderResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     topology_map: Optional[shared.TopologyMap] = field(default=None)
     

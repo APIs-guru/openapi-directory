@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class DriveactivityActivityQueryQueryParams:
 
 @dataclass
 class DriveactivityActivityQuerySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DriveactivityActivityQuerySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class DriveactivityActivityQuerySecurity:
 
 @dataclass
 class DriveactivityActivityQueryRequest:
-    query_params: DriveactivityActivityQueryQueryParams = field(default=None)
+    query_params: DriveactivityActivityQueryQueryParams = field()
+    security: DriveactivityActivityQuerySecurity = field()
     request: Optional[shared.QueryDriveActivityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DriveactivityActivityQuerySecurity = field(default=None)
     
 
 @dataclass
 class DriveactivityActivityQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     query_drive_activity_response: Optional[shared.QueryDriveActivityResponse] = field(default=None)
-    status_code: int = field(default=None)
     

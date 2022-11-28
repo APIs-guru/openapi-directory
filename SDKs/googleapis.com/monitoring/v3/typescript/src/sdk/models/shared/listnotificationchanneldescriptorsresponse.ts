@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationChannelDescriptor } from "./notificationchanneldescriptor";
+
 
 
 // ListNotificationChannelDescriptorsResponse
@@ -8,9 +8,9 @@ import { NotificationChannelDescriptor } from "./notificationchanneldescriptor";
  * The ListNotificationChannelDescriptors response.
 **/
 export class ListNotificationChannelDescriptorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelDescriptors", elemType: shared.NotificationChannelDescriptor })
+  @SpeakeasyMetadata({ data: "json, name=channelDescriptors", elemType: NotificationChannelDescriptor })
   channelDescriptors?: NotificationChannelDescriptor[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

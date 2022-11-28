@@ -8,6 +8,8 @@ type BookingBookHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
+// BookingBookRequestBodyBooker
+// **object** containing details about the primary contact (**note**: this contact needn't be a traveller)
 type BookingBookRequestBodyBooker struct {
 	CellPhone            *string `json:"cellPhone,omitempty"`
 	CellPhoneCountryCode *string `json:"cellPhoneCountryCode,omitempty"`
@@ -23,6 +25,8 @@ type BookingBookRequestBodyItemsBookingQuestionAnswers struct {
 	QuestionID *int64  `json:"questionId,omitempty"`
 }
 
+// BookingBookRequestBodyItemsPartnerItemDetail
+// **object** containing partner details at a per-item level
 type BookingBookRequestBodyItemsPartnerItemDetail struct {
 	DistributorItemRef *string `json:"distributorItemRef,omitempty"`
 }
@@ -48,6 +52,8 @@ type BookingBookRequestBodyItems struct {
 	Travellers             []BookingBookRequestBodyItemsTravellers             `json:"travellers,omitempty"`
 }
 
+// BookingBookRequestBodyPartnerDetail
+// Applicable only for extra partner detail for either partner or merchant partner for sending partner specific information
 type BookingBookRequestBodyPartnerDetail struct {
 	DistributorRef *string `json:"distributorRef,omitempty"`
 }
@@ -58,11 +64,6 @@ type BookingBookRequestBody struct {
 	Demo          *bool                                `json:"demo,omitempty"`
 	Items         []BookingBookRequestBodyItems        `json:"items,omitempty"`
 	PartnerDetail *BookingBookRequestBodyPartnerDetail `json:"partnerDetail,omitempty"`
-}
-
-type BookingBookRequest struct {
-	Headers BookingBookHeaders
-	Request *BookingBookRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingBook200ApplicationJSONDataItemSummariesMerchantTermsAndConditionsCancellationFromTourDate struct {
@@ -180,6 +181,11 @@ type BookingBook200ApplicationJSON struct {
 	Success          *bool                              `json:"success,omitempty"`
 	TotalCount       *int64                             `json:"totalCount,omitempty"`
 	Vmid             *string                            `json:"vmid,omitempty"`
+}
+
+type BookingBookRequest struct {
+	Headers BookingBookHeaders
+	Request *BookingBookRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingBookResponse struct {

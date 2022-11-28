@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Mitigation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The mitigation applied to a DDoS attack.
 **/
 export class Mitigation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MitigationName" })
+  @SpeakeasyMetadata({ data: "json, name=MitigationName" })
   mitigationName?: string;
 }

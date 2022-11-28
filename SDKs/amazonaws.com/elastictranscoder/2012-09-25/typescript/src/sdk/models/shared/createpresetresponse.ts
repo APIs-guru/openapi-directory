@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Preset } from "./preset";
+
 
 
 // CreatePresetResponse
@@ -7,9 +8,9 @@ import { Preset } from "./preset";
  * The <code>CreatePresetResponse</code> structure.
 **/
 export class CreatePresetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Preset" })
+  @SpeakeasyMetadata({ data: "json, name=Preset" })
   preset?: Preset;
 
-  @Metadata({ data: "json, name=Warning" })
+  @SpeakeasyMetadata({ data: "json, name=Warning" })
   warning?: string;
 }

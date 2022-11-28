@@ -1,6 +1,7 @@
 
 
+
 export enum MonitoringJobDefinitionSortKeyEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

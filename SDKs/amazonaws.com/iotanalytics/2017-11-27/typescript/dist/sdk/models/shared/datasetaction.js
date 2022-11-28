@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerDatasetAction } from "./containerdatasetaction";
 import { SqlQueryDatasetAction } from "./sqlquerydatasetaction";
 // DatasetAction
@@ -35,15 +35,15 @@ var DatasetAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actionName" }),
+        SpeakeasyMetadata({ data: "json, name=actionName" }),
         __metadata("design:type", String)
     ], DatasetAction.prototype, "actionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=containerAction" }),
+        SpeakeasyMetadata({ data: "json, name=containerAction" }),
         __metadata("design:type", ContainerDatasetAction)
     ], DatasetAction.prototype, "containerAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryAction" }),
+        SpeakeasyMetadata({ data: "json, name=queryAction" }),
         __metadata("design:type", SqlQueryDatasetAction)
     ], DatasetAction.prototype, "queryAction", void 0);
     return DatasetAction;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteAdRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type defines the fields used in a delete-ad request.
 **/
 export class DeleteAdRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listingId" })
+  @SpeakeasyMetadata({ data: "json, name=listingId" })
   listingId?: string;
 }

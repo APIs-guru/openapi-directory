@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BandedRange } from "./bandedrange";
 import { BasicFilter } from "./basicfilter";
 import { EmbeddedChart } from "./embeddedchart";
@@ -11,8 +10,8 @@ import { FilterView } from "./filterview";
 import { GridRange } from "./gridrange";
 import { SheetProperties } from "./sheetproperties";
 import { ProtectedRange } from "./protectedrange";
-import { DimensionGroup } from "./dimensiongroup";
 import { Slicer } from "./slicer";
+
 
 
 // Sheet
@@ -20,42 +19,42 @@ import { Slicer } from "./slicer";
  * A sheet in a spreadsheet.
 **/
 export class Sheet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandedRanges", elemType: shared.BandedRange })
+  @SpeakeasyMetadata({ data: "json, name=bandedRanges", elemType: BandedRange })
   bandedRanges?: BandedRange[];
 
-  @Metadata({ data: "json, name=basicFilter" })
+  @SpeakeasyMetadata({ data: "json, name=basicFilter" })
   basicFilter?: BasicFilter;
 
-  @Metadata({ data: "json, name=charts", elemType: shared.EmbeddedChart })
+  @SpeakeasyMetadata({ data: "json, name=charts", elemType: EmbeddedChart })
   charts?: EmbeddedChart[];
 
-  @Metadata({ data: "json, name=columnGroups", elemType: shared.DimensionGroup })
+  @SpeakeasyMetadata({ data: "json, name=columnGroups", elemType: DimensionGroup })
   columnGroups?: DimensionGroup[];
 
-  @Metadata({ data: "json, name=conditionalFormats", elemType: shared.ConditionalFormatRule })
+  @SpeakeasyMetadata({ data: "json, name=conditionalFormats", elemType: ConditionalFormatRule })
   conditionalFormats?: ConditionalFormatRule[];
 
-  @Metadata({ data: "json, name=data", elemType: shared.GridData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: GridData })
   data?: GridData[];
 
-  @Metadata({ data: "json, name=developerMetadata", elemType: shared.DeveloperMetadata })
+  @SpeakeasyMetadata({ data: "json, name=developerMetadata", elemType: DeveloperMetadata })
   developerMetadata?: DeveloperMetadata[];
 
-  @Metadata({ data: "json, name=filterViews", elemType: shared.FilterView })
+  @SpeakeasyMetadata({ data: "json, name=filterViews", elemType: FilterView })
   filterViews?: FilterView[];
 
-  @Metadata({ data: "json, name=merges", elemType: shared.GridRange })
+  @SpeakeasyMetadata({ data: "json, name=merges", elemType: GridRange })
   merges?: GridRange[];
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: SheetProperties;
 
-  @Metadata({ data: "json, name=protectedRanges", elemType: shared.ProtectedRange })
+  @SpeakeasyMetadata({ data: "json, name=protectedRanges", elemType: ProtectedRange })
   protectedRanges?: ProtectedRange[];
 
-  @Metadata({ data: "json, name=rowGroups", elemType: shared.DimensionGroup })
+  @SpeakeasyMetadata({ data: "json, name=rowGroups", elemType: DimensionGroup })
   rowGroups?: DimensionGroup[];
 
-  @Metadata({ data: "json, name=slicers", elemType: shared.Slicer })
+  @SpeakeasyMetadata({ data: "json, name=slicers", elemType: Slicer })
   slicers?: Slicer[];
 }

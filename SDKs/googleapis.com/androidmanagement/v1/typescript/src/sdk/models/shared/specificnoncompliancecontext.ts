@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OncWifiContext } from "./oncwificontext";
 import { PasswordPoliciesContext } from "./passwordpoliciescontext";
+
 
 
 // SpecificNonComplianceContext
@@ -8,9 +9,9 @@ import { PasswordPoliciesContext } from "./passwordpoliciescontext";
  * Additional context for SpecificNonComplianceReason.
 **/
 export class SpecificNonComplianceContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oncWifiContext" })
+  @SpeakeasyMetadata({ data: "json, name=oncWifiContext" })
   oncWifiContext?: OncWifiContext;
 
-  @Metadata({ data: "json, name=passwordPoliciesContext" })
+  @SpeakeasyMetadata({ data: "json, name=passwordPoliciesContext" })
   passwordPoliciesContext?: PasswordPoliciesContext;
 }

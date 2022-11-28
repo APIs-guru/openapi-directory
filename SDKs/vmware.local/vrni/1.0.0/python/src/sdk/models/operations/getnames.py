@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetNamesSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetNamesRequest:
-    request: shared.NamesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GetNamesSecurity = field(default=None)
+    request: shared.NamesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: GetNamesSecurity = field()
     
 
 @dataclass
 class GetNamesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     names_response: Optional[shared.NamesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

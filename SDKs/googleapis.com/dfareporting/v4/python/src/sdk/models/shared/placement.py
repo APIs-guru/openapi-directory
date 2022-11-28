@@ -1,22 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import size
-from . import dimensionvalue
-from . import dimensionvalue
-from . import lastmodifiedinfo
-from . import dimensionvalue
-from . import dimensionvalue
-from . import lastmodifiedinfo
-from . import lookbackconfiguration
-from . import measurementpartnerwrappingdata
-from . import dimensionvalue
-from . import pricingschedule
-from . import lastmodifiedinfo
-from . import dimensionvalue
-from . import size
-from . import tagsetting
-from . import videosettings
+from sdk import utils
+from . import *
 
 class PlacementActiveStatusEnum(str, Enum):
     PLACEMENT_STATUS_UNKNOWN = "PLACEMENT_STATUS_UNKNOWN"
@@ -77,47 +67,51 @@ class PlacementVpaidAdapterChoiceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Placement:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountId' }})
-    active_status: Optional[PlacementActiveStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeStatus' }})
-    ad_blocking_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'adBlockingOptOut' }})
-    additional_sizes: Optional[List[size.Size]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalSizes' }})
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    advertiser_id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserIdDimensionValue' }})
-    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignId' }})
-    campaign_id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignIdDimensionValue' }})
-    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment' }})
-    compatibility: Optional[PlacementCompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compatibility' }})
-    content_category_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentCategoryId' }})
-    create_info: Optional[lastmodifiedinfo.LastModifiedInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createInfo' }})
-    directory_site_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directorySiteId' }})
-    directory_site_id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directorySiteIdDimensionValue' }})
-    external_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'externalId' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idDimensionValue' }})
-    key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyName' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    last_modified_info: Optional[lastmodifiedinfo.LastModifiedInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModifiedInfo' }})
-    lookback_configuration: Optional[lookbackconfiguration.LookbackConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lookbackConfiguration' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    partner_wrapping_data: Optional[measurementpartnerwrappingdata.MeasurementPartnerWrappingData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerWrappingData' }})
-    payment_approved: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentApproved' }})
-    payment_source: Optional[PlacementPaymentSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentSource' }})
-    placement_group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placementGroupId' }})
-    placement_group_id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placementGroupIdDimensionValue' }})
-    placement_strategy_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placementStrategyId' }})
-    pricing_schedule: Optional[pricingschedule.PricingSchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pricingSchedule' }})
-    primary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary' }})
-    publisher_update_info: Optional[lastmodifiedinfo.LastModifiedInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisherUpdateInfo' }})
-    site_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'siteId' }})
-    site_id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'siteIdDimensionValue' }})
-    size: Optional[size.Size] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    ssl_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sslRequired' }})
-    status: Optional[PlacementStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    subaccount_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subaccountId' }})
-    tag_formats: Optional[List[PlacementTagFormatsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagFormats' }})
-    tag_setting: Optional[tagsetting.TagSetting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagSetting' }})
-    video_active_view_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoActiveViewOptOut' }})
-    video_settings: Optional[videosettings.VideoSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoSettings' }})
-    vpaid_adapter_choice: Optional[PlacementVpaidAdapterChoiceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpaidAdapterChoice' }})
-    wrapping_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wrappingOptOut' }})
+    r"""Placement
+    Contains properties of a placement.
+    """
+    
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountId') }})
+    active_status: Optional[PlacementActiveStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeStatus') }})
+    ad_blocking_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('adBlockingOptOut') }})
+    additional_sizes: Optional[List[Size]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalSizes') }})
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    advertiser_id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserIdDimensionValue') }})
+    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignId') }})
+    campaign_id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignIdDimensionValue') }})
+    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comment') }})
+    compatibility: Optional[PlacementCompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compatibility') }})
+    content_category_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentCategoryId') }})
+    create_info: Optional[LastModifiedInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createInfo') }})
+    directory_site_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('directorySiteId') }})
+    directory_site_id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('directorySiteIdDimensionValue') }})
+    external_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('externalId') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('idDimensionValue') }})
+    key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyName') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    last_modified_info: Optional[LastModifiedInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModifiedInfo') }})
+    lookback_configuration: Optional[LookbackConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lookbackConfiguration') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    partner_wrapping_data: Optional[MeasurementPartnerWrappingData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerWrappingData') }})
+    payment_approved: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentApproved') }})
+    payment_source: Optional[PlacementPaymentSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentSource') }})
+    placement_group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('placementGroupId') }})
+    placement_group_id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('placementGroupIdDimensionValue') }})
+    placement_strategy_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('placementStrategyId') }})
+    pricing_schedule: Optional[PricingSchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pricingSchedule') }})
+    primary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primary') }})
+    publisher_update_info: Optional[LastModifiedInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherUpdateInfo') }})
+    site_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('siteId') }})
+    site_id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('siteIdDimensionValue') }})
+    size: Optional[Size] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    ssl_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sslRequired') }})
+    status: Optional[PlacementStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    subaccount_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subaccountId') }})
+    tag_formats: Optional[List[PlacementTagFormatsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagFormats') }})
+    tag_setting: Optional[TagSetting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagSetting') }})
+    video_active_view_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoActiveViewOptOut') }})
+    video_settings: Optional[VideoSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoSettings') }})
+    vpaid_adapter_choice: Optional[PlacementVpaidAdapterChoiceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vpaidAdapterChoice') }})
+    wrapping_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wrappingOptOut') }})
     

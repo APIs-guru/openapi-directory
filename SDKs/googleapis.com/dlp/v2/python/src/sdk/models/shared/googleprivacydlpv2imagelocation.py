@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2boundingbox
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2ImageLocation:
-    bounding_boxes: Optional[List[googleprivacydlpv2boundingbox.GooglePrivacyDlpV2BoundingBox]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'boundingBoxes' }})
+    r"""GooglePrivacyDlpV2ImageLocation
+    Location of the finding within an image.
+    """
+    
+    bounding_boxes: Optional[List[GooglePrivacyDlpV2BoundingBox]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('boundingBoxes') }})
     

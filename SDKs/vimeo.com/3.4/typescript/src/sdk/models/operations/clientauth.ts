@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ClientAuthRequestBodyGrantTypeEnum {
     ClientCredentials = "client_credentials"
@@ -7,30 +8,30 @@ export enum ClientAuthRequestBodyGrantTypeEnum {
 
 
 export class ClientAuthRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=grant_type" })
+  @SpeakeasyMetadata({ data: "json, name=grant_type" })
   grantType: ClientAuthRequestBodyGrantTypeEnum;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope: string;
 }
 
 
 export class ClientAuthRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.auth+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.auth+json" })
   request: ClientAuthRequestBody;
 }
 
 
 export class ClientAuthResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   auth?: shared.Auth;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 }

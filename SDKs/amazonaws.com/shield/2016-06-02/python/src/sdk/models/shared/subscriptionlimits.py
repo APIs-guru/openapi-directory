@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import protectiongrouplimits
-from . import protectionlimits
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubscriptionLimits:
-    protection_group_limits: protectiongrouplimits.ProtectionGroupLimits = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProtectionGroupLimits' }})
-    protection_limits: protectionlimits.ProtectionLimits = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProtectionLimits' }})
+    r"""SubscriptionLimits
+    Limits settings for your subscription. 
+    """
+    
+    protection_group_limits: ProtectionGroupLimits = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProtectionGroupLimits') }})
+    protection_limits: ProtectionLimits = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProtectionLimits') }})
     

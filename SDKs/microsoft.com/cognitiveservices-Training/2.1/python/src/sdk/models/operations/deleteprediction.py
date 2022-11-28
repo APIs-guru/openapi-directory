@@ -4,28 +4,28 @@ from typing import List
 
 @dataclass
 class DeletePredictionPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeletePredictionQueryParams:
-    ids: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'ids', 'style': 'form', 'explode': False }})
+    ids: List[str] = field(metadata={'query_param': { 'field_name': 'ids', 'style': 'form', 'explode': False }})
     
 
 @dataclass
 class DeletePredictionHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeletePredictionRequest:
-    path_params: DeletePredictionPathParams = field(default=None)
-    query_params: DeletePredictionQueryParams = field(default=None)
-    headers: DeletePredictionHeaders = field(default=None)
+    headers: DeletePredictionHeaders = field()
+    path_params: DeletePredictionPathParams = field()
+    query_params: DeletePredictionQueryParams = field()
     
 
 @dataclass
 class DeletePredictionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

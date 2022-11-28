@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attachmentfields
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Attachment:
-    attachment: Optional[attachmentfields.AttachmentFields] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attachment' }})
+    attachment: Optional[AttachmentFields] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attachment') }})
     

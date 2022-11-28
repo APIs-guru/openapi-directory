@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportStatusEnum } from "./exportstatusenum";
 // ExportInfo
 /**
@@ -34,35 +34,35 @@ var ExportInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configurationsDownloadUrl" }),
+        SpeakeasyMetadata({ data: "json, name=configurationsDownloadUrl" }),
         __metadata("design:type", String)
     ], ExportInfo.prototype, "configurationsDownloadUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=exportId" }),
+        SpeakeasyMetadata({ data: "json, name=exportId" }),
         __metadata("design:type", String)
     ], ExportInfo.prototype, "exportId", void 0);
     __decorate([
-        Metadata({ data: "json, name=exportRequestTime" }),
+        SpeakeasyMetadata({ data: "json, name=exportRequestTime" }),
         __metadata("design:type", Date)
     ], ExportInfo.prototype, "exportRequestTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=exportStatus" }),
+        SpeakeasyMetadata({ data: "json, name=exportStatus" }),
         __metadata("design:type", String)
     ], ExportInfo.prototype, "exportStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=isTruncated" }),
+        SpeakeasyMetadata({ data: "json, name=isTruncated" }),
         __metadata("design:type", Boolean)
     ], ExportInfo.prototype, "isTruncated", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=requestedEndTime" }),
         __metadata("design:type", Date)
     ], ExportInfo.prototype, "requestedEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=requestedStartTime" }),
         __metadata("design:type", Date)
     ], ExportInfo.prototype, "requestedStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], ExportInfo.prototype, "statusMessage", void 0);
     return ExportInfo;

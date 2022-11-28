@@ -1,5 +1,7 @@
 package shared
 
+// BatchReadSuccessfulResponse
+// Represents the output of a <code>BatchRead</code> success response operation.
 type BatchReadSuccessfulResponse struct {
 	GetLinkAttributes      *BatchGetLinkAttributesResponse      `json:"GetLinkAttributes,omitempty"`
 	GetObjectAttributes    *BatchGetObjectAttributesResponse    `json:"GetObjectAttributes,omitempty"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WebhookEntryInvokeOptionEnum(str, Enum):
     ONE = "ONE"
@@ -14,11 +16,11 @@ class WebhookEntryTriggerScopeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class WebhookEntry:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    contact_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contactEmailAddress' }})
-    invoke_option: Optional[WebhookEntryInvokeOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invokeOption' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    on_web_app: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onWebApp' }})
-    trigger_scope: WebhookEntryTriggerScopeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerScope' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    trigger_scope: WebhookEntryTriggerScopeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerScope') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    contact_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contactEmailAddress') }})
+    invoke_option: Optional[WebhookEntryInvokeOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invokeOption') }})
+    on_web_app: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onWebApp') }})
     

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFileContentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FileId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FileId" })
   fileId: string;
 }
 
 
 export class GetFileContentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
   xeroTenantId: string;
 }
 
 
 export class GetFileContentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetFileContentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFileContentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetFileContentHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFileContentSecurity;
 }
 
 
 export class GetFileContentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFileContent200ApplicationOctetStreamBinaryString?: Uint8Array;
 }

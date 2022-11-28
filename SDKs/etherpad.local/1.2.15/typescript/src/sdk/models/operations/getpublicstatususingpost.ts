@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPublicStatusUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 }
 
 
-export class GetPublicStatusUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetPublicStatusUsingPostQueryParams;
-}
-
-
 export class GetPublicStatusUsingPost200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=publicStatus" })
+  @SpeakeasyMetadata({ data: "json, name=publicStatus" })
   publicStatus?: boolean;
 }
 
 
 export class GetPublicStatusUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetPublicStatusUsingPost200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetPublicStatusUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetPublicStatusUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetPublicStatusUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetPublicStatusUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetPublicStatusUsingPostQueryParams;
+}
+
+
 export class GetPublicStatusUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPublicStatusUsingPost200ApplicationJsonObject?: GetPublicStatusUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPublicStatusUsingPost400ApplicationJsonObject?: GetPublicStatusUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPublicStatusUsingPost401ApplicationJsonObject?: GetPublicStatusUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPublicStatusUsingPost500ApplicationJsonObject?: GetPublicStatusUsingPost500ApplicationJson;
 }

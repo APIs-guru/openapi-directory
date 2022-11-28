@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2DocumentLocation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Location of a finding within a document.
 **/
 export class GooglePrivacyDlpV2DocumentLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileOffset" })
+  @SpeakeasyMetadata({ data: "json, name=fileOffset" })
   fileOffset?: string;
 }

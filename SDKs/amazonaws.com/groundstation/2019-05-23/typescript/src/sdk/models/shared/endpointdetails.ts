@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataflowEndpoint } from "./dataflowendpoint";
 import { SecurityDetails } from "./securitydetails";
+
 
 
 // EndpointDetails
@@ -8,9 +9,9 @@ import { SecurityDetails } from "./securitydetails";
  * Information about the endpoint details.
 **/
 export class EndpointDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: DataflowEndpoint;
 
-  @Metadata({ data: "json, name=securityDetails" })
+  @SpeakeasyMetadata({ data: "json, name=securityDetails" })
   securityDetails?: SecurityDetails;
 }

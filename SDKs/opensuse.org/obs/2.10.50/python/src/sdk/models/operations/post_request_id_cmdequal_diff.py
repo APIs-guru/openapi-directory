@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class PostRequestIDCmdEqualDiffPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class PostRequestIDCmdEqualDiffViewEnum(str, Enum):
     XML = "xml"
@@ -23,20 +25,20 @@ class PostRequestIDCmdEqualDiffQueryParams:
 
 @dataclass
 class PostRequestIDCmdEqualDiffSecurity:
-    basic_authentication: shared.SchemeBasicAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_authentication: shared.SchemeBasicAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostRequestIDCmdEqualDiffRequest:
-    path_params: PostRequestIDCmdEqualDiffPathParams = field(default=None)
-    query_params: PostRequestIDCmdEqualDiffQueryParams = field(default=None)
-    security: PostRequestIDCmdEqualDiffSecurity = field(default=None)
+    path_params: PostRequestIDCmdEqualDiffPathParams = field()
+    query_params: PostRequestIDCmdEqualDiffQueryParams = field()
+    security: PostRequestIDCmdEqualDiffSecurity = field()
     
 
 @dataclass
 class PostRequestIDCmdEqualDiffResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     post_request_id_cmd_equal_diff_200_text_plain_string: Optional[str] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRejectVpcEndpointConnectionsActionEnum(str, Enum):
     REJECT_VPC_ENDPOINT_CONNECTIONS = "RejectVpcEndpointConnections"
@@ -10,8 +14,8 @@ class PostRejectVpcEndpointConnectionsVersionEnum(str, Enum):
 
 @dataclass
 class PostRejectVpcEndpointConnectionsQueryParams:
-    action: PostRejectVpcEndpointConnectionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRejectVpcEndpointConnectionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRejectVpcEndpointConnectionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRejectVpcEndpointConnectionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRejectVpcEndpointConnectionsHeaders:
 
 @dataclass
 class PostRejectVpcEndpointConnectionsRequest:
-    query_params: PostRejectVpcEndpointConnectionsQueryParams = field(default=None)
-    headers: PostRejectVpcEndpointConnectionsHeaders = field(default=None)
+    headers: PostRejectVpcEndpointConnectionsHeaders = field()
+    query_params: PostRejectVpcEndpointConnectionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRejectVpcEndpointConnectionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

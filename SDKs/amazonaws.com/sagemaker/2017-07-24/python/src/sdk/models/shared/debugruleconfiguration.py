@@ -1,17 +1,26 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import processinginstancetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DebugRuleConfiguration:
-    instance_type: Optional[processinginstancetype_enum.ProcessingInstanceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceType' }})
-    local_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocalPath' }})
-    rule_configuration_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleConfigurationName' }})
-    rule_evaluator_image: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleEvaluatorImage' }})
-    rule_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleParameters' }})
-    s3_output_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3OutputPath' }})
-    volume_size_in_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VolumeSizeInGB' }})
+    r"""DebugRuleConfiguration
+    Configuration information for SageMaker Debugger rules for debugging. To learn more about how to configure the <code>DebugRuleConfiguration</code> parameter, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html\">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>.
+    """
+    
+    rule_configuration_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleConfigurationName') }})
+    rule_evaluator_image: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleEvaluatorImage') }})
+    instance_type: Optional[ProcessingInstanceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceType') }})
+    local_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LocalPath') }})
+    rule_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleParameters') }})
+    s3_output_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3OutputPath') }})
+    volume_size_in_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VolumeSizeInGB') }})
     

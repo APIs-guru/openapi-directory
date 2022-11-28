@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PrivatecaProjectsLocationsCertificateAuthoritiesRestorePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class PrivatecaProjectsLocationsCertificateAuthoritiesRestoreQueryParams:
 
 @dataclass
 class PrivatecaProjectsLocationsCertificateAuthoritiesRestoreSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PrivatecaProjectsLocationsCertificateAuthoritiesRestoreRequest:
-    path_params: PrivatecaProjectsLocationsCertificateAuthoritiesRestorePathParams = field(default=None)
-    query_params: PrivatecaProjectsLocationsCertificateAuthoritiesRestoreQueryParams = field(default=None)
+    path_params: PrivatecaProjectsLocationsCertificateAuthoritiesRestorePathParams = field()
+    query_params: PrivatecaProjectsLocationsCertificateAuthoritiesRestoreQueryParams = field()
+    security: PrivatecaProjectsLocationsCertificateAuthoritiesRestoreSecurity = field()
     request: Optional[shared.RestoreCertificateAuthorityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PrivatecaProjectsLocationsCertificateAuthoritiesRestoreSecurity = field(default=None)
     
 
 @dataclass
 class PrivatecaProjectsLocationsCertificateAuthoritiesRestoreResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

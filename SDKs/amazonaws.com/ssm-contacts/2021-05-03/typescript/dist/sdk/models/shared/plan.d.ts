@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Stage } from "./stage";
 /**
  * The stages that an escalation plan or engagement plan engages contacts and contact methods in.

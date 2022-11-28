@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class AuthorizationCodesDeleteAuthorizationCodePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AuthorizationCodesDeleteAuthorizationCodeRequest:
-    path_params: AuthorizationCodesDeleteAuthorizationCodePathParams = field(default=None)
+    path_params: AuthorizationCodesDeleteAuthorizationCodePathParams = field()
     
 
 @dataclass
 class AuthorizationCodesDeleteAuthorizationCodeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

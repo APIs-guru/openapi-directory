@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleTargets } from "./ruletargets";
 
 
+
 export class RuleTags extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class Rule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directives" })
+  @SpeakeasyMetadata({ data: "json, name=directives" })
   directives?: string[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=longDescription" })
+  @SpeakeasyMetadata({ data: "json, name=longDescription" })
   longDescription?: string;
 
-  @Metadata({ data: "json, name=shortDescription" })
+  @SpeakeasyMetadata({ data: "json, name=shortDescription" })
   shortDescription?: string;
 
-  @Metadata({ data: "json, name=system" })
+  @SpeakeasyMetadata({ data: "json, name=system" })
   system?: boolean;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.RuleTags })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: RuleTags })
   tags?: RuleTags[];
 
-  @Metadata({ data: "json, name=targets", elemType: shared.RuleTargets })
+  @SpeakeasyMetadata({ data: "json, name=targets", elemType: RuleTargets })
   targets?: RuleTargets[];
 }

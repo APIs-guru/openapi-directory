@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Cipherparams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iv" })
+  @SpeakeasyMetadata({ data: "json, name=iv" })
   iv: string;
 }

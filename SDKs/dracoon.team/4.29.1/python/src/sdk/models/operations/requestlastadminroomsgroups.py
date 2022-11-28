@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestLastAdminRoomsGroupsPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RequestLastAdminRoomsGroupsHeaders:
 
 @dataclass
 class RequestLastAdminRoomsGroupsRequest:
-    path_params: RequestLastAdminRoomsGroupsPathParams = field(default=None)
-    headers: RequestLastAdminRoomsGroupsHeaders = field(default=None)
+    headers: RequestLastAdminRoomsGroupsHeaders = field()
+    path_params: RequestLastAdminRoomsGroupsPathParams = field()
     
 
 @dataclass
 class RequestLastAdminRoomsGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     last_admin_group_room_list: Optional[shared.LastAdminGroupRoomList] = field(default=None)
-    status_code: int = field(default=None)
     

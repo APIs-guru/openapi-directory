@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import policytopicentry
+from sdk import utils
+from . import *
 
 class PolicyComplianceStatusEnum(str, Enum):
     STATUS_UNSPECIFIED = "STATUS_UNSPECIFIED"
@@ -14,6 +16,10 @@ class PolicyComplianceStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PolicyCompliance:
-    status: Optional[PolicyComplianceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    topics: Optional[List[policytopicentry.PolicyTopicEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topics' }})
+    r"""PolicyCompliance
+    Policy compliance of the creative for a transaction type or a region.
+    """
+    
+    status: Optional[PolicyComplianceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    topics: Optional[List[PolicyTopicEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topics') }})
     

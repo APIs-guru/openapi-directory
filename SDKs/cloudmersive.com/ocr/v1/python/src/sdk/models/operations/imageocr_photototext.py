@@ -11,31 +11,31 @@ class ImageOcrPhotoToTextHeaders:
 
 @dataclass
 class ImageOcrPhotoToTextRequestBodyImageFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    image_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'imageFile' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    image_file: str = field(metadata={'multipart_form': { 'field_name': 'imageFile' }})
     
 
 @dataclass
 class ImageOcrPhotoToTextRequestBody:
-    image_file: ImageOcrPhotoToTextRequestBodyImageFile = field(default=None, metadata={'multipart_form': { 'file': True }})
+    image_file: ImageOcrPhotoToTextRequestBodyImageFile = field(metadata={'multipart_form': { 'file': True }})
     
 
 @dataclass
 class ImageOcrPhotoToTextSecurity:
-    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    apikey: shared.SchemeApikey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ImageOcrPhotoToTextRequest:
-    headers: ImageOcrPhotoToTextHeaders = field(default=None)
-    request: ImageOcrPhotoToTextRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: ImageOcrPhotoToTextSecurity = field(default=None)
+    headers: ImageOcrPhotoToTextHeaders = field()
+    request: ImageOcrPhotoToTextRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
+    security: ImageOcrPhotoToTextSecurity = field()
     
 
 @dataclass
 class ImageOcrPhotoToTextResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     image_to_text_response: Optional[shared.ImageToTextResponse] = field(default=None)
-    status_code: int = field(default=None)
     

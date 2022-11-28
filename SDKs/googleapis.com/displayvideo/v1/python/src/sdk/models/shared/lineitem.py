@@ -1,17 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import biddingstrategy
-from . import lineitembudget
-from . import conversioncountingconfig
-from . import lineitemflight
-from . import frequencycap
-from . import integrationdetails
-from . import mobileapp
-from . import pacing
-from . import partnercost
-from . import partnerrevenuemodel
-from . import targetingexpansionconfig
+from sdk import utils
+from . import *
 
 class LineItemEntityStatusEnum(str, Enum):
     ENTITY_STATUS_UNSPECIFIED = "ENTITY_STATUS_UNSPECIFIED"
@@ -61,30 +56,61 @@ class LineItemWarningMessagesEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class LineItemInput:
+    r"""LineItemInput
+    A single line item.
+    """
+    
+    bid_strategy: Optional[BiddingStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bidStrategy') }})
+    budget: Optional[LineItemBudgetInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budget') }})
+    conversion_counting: Optional[ConversionCountingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversionCounting') }})
+    creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeIds') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[LineItemEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    exclude_new_exchanges: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeNewExchanges') }})
+    flight: Optional[LineItemFlight] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flight') }})
+    frequency_cap: Optional[FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCap') }})
+    insertion_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertionOrderId') }})
+    integration_details: Optional[IntegrationDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationDetails') }})
+    inventory_source_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inventorySourceIds') }})
+    line_item_type: Optional[LineItemLineItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineItemType') }})
+    mobile_app: Optional[MobileAppInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mobileApp') }})
+    pacing: Optional[Pacing] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pacing') }})
+    partner_costs: Optional[List[PartnerCost]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerCosts') }})
+    partner_revenue_model: Optional[PartnerRevenueModel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerRevenueModel') }})
+    targeting_expansion: Optional[TargetingExpansionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetingExpansion') }})
+    
+
+@dataclass_json
+@dataclass
 class LineItem:
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    bid_strategy: Optional[biddingstrategy.BiddingStrategy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bidStrategy' }})
-    budget: Optional[lineitembudget.LineItemBudget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budget' }})
-    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignId' }})
-    conversion_counting: Optional[conversioncountingconfig.ConversionCountingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversionCounting' }})
-    creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeIds' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    entity_status: Optional[LineItemEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityStatus' }})
-    exclude_new_exchanges: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludeNewExchanges' }})
-    flight: Optional[lineitemflight.LineItemFlight] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flight' }})
-    frequency_cap: Optional[frequencycap.FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequencyCap' }})
-    insertion_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertionOrderId' }})
-    integration_details: Optional[integrationdetails.IntegrationDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationDetails' }})
-    inventory_source_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inventorySourceIds' }})
-    line_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineItemId' }})
-    line_item_type: Optional[LineItemLineItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineItemType' }})
-    mobile_app: Optional[mobileapp.MobileApp] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mobileApp' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pacing: Optional[pacing.Pacing] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pacing' }})
-    partner_costs: Optional[List[partnercost.PartnerCost]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerCosts' }})
-    partner_revenue_model: Optional[partnerrevenuemodel.PartnerRevenueModel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerRevenueModel' }})
-    reservation_type: Optional[LineItemReservationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reservationType' }})
-    targeting_expansion: Optional[targetingexpansionconfig.TargetingExpansionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetingExpansion' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    warning_messages: Optional[List[LineItemWarningMessagesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warningMessages' }})
+    r"""LineItem
+    A single line item.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    bid_strategy: Optional[BiddingStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bidStrategy') }})
+    budget: Optional[LineItemBudget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budget') }})
+    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignId') }})
+    conversion_counting: Optional[ConversionCountingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversionCounting') }})
+    creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeIds') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[LineItemEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    exclude_new_exchanges: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeNewExchanges') }})
+    flight: Optional[LineItemFlight] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flight') }})
+    frequency_cap: Optional[FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCap') }})
+    insertion_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertionOrderId') }})
+    integration_details: Optional[IntegrationDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationDetails') }})
+    inventory_source_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inventorySourceIds') }})
+    line_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineItemId') }})
+    line_item_type: Optional[LineItemLineItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineItemType') }})
+    mobile_app: Optional[MobileApp] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mobileApp') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pacing: Optional[Pacing] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pacing') }})
+    partner_costs: Optional[List[PartnerCost]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerCosts') }})
+    partner_revenue_model: Optional[PartnerRevenueModel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerRevenueModel') }})
+    reservation_type: Optional[LineItemReservationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reservationType') }})
+    targeting_expansion: Optional[TargetingExpansionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetingExpansion') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    warning_messages: Optional[List[LineItemWarningMessagesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warningMessages') }})
     

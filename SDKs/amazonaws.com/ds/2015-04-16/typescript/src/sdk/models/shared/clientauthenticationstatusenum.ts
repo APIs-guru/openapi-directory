@@ -1,6 +1,7 @@
 
 
+
 export enum ClientAuthenticationStatusEnum {
-    Enabled = "Enabled"
-,    Disabled = "Disabled"
+    Enabled = "Enabled",
+    Disabled = "Disabled"
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Summary } from "./summary";
 
 
+
 export class GetComplianceSummaryOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 
-  @Metadata({ data: "json, name=SummaryList", elemType: shared.Summary })
+  @SpeakeasyMetadata({ data: "json, name=SummaryList", elemType: Summary })
   summaryList?: Summary[];
 }

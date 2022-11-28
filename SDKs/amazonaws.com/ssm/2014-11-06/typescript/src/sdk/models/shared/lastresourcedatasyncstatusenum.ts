@@ -1,7 +1,8 @@
 
 
+
 export enum LastResourceDataSyncStatusEnum {
-    Successful = "Successful"
-,    Failed = "Failed"
-,    InProgress = "InProgress"
+    Successful = "Successful",
+    Failed = "Failed",
+    InProgress = "InProgress"
 }

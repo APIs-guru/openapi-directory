@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptTypeEnum } from "./scripttypeenum";
 import { Source } from "./source";
+
 
 
 // SsmValidationParameters
@@ -8,21 +9,21 @@ import { Source } from "./source";
  * Contains validation parameters.
 **/
 export class SsmValidationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: string;
 
-  @Metadata({ data: "json, name=executionTimeoutSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=executionTimeoutSeconds" })
   executionTimeoutSeconds?: number;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=outputS3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=outputS3BucketName" })
   outputS3BucketName?: string;
 
-  @Metadata({ data: "json, name=scriptType" })
+  @SpeakeasyMetadata({ data: "json, name=scriptType" })
   scriptType?: ScriptTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

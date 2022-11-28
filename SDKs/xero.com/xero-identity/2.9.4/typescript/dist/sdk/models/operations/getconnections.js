@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConnectionsQueryParams = /** @class */ (function (_super) {
     __extends(GetConnectionsQueryParams, _super);
@@ -30,7 +30,7 @@ var GetConnectionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=authEventId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authEventId" }),
         __metadata("design:type", String)
     ], GetConnectionsQueryParams.prototype, "authEventId", void 0);
     return GetConnectionsQueryParams;
@@ -42,7 +42,7 @@ var GetConnectionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], GetConnectionsSecurity.prototype, "oAuth2", void 0);
     return GetConnectionsSecurity;
@@ -54,11 +54,11 @@ var GetConnectionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConnectionsQueryParams)
     ], GetConnectionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConnectionsSecurity)
     ], GetConnectionsRequest.prototype, "security", void 0);
     return GetConnectionsRequest;
@@ -70,15 +70,15 @@ var GetConnectionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetConnectionsResponse.prototype, "connections", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConnectionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConnectionsResponse.prototype, "statusCode", void 0);
     return GetConnectionsResponse;

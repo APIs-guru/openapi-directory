@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetListingViolationsSummaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=compliance_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=compliance_type" })
   complianceType?: string;
 }
 
 
 export class GetListingViolationsSummaryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" })
   xEbayCMarketplaceId?: string;
 }
 
 
 export class GetListingViolationsSummarySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetListingViolationsSummaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetListingViolationsSummaryQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetListingViolationsSummaryHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetListingViolationsSummarySecurity;
 }
 
 
 export class GetListingViolationsSummaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   complianceSummary?: shared.ComplianceSummary;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

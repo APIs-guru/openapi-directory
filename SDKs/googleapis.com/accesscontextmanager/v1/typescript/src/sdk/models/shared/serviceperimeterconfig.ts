@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EgressPolicy } from "./egresspolicy";
 import { IngressPolicy } from "./ingresspolicy";
 import { VpcAccessibleServices } from "./vpcaccessibleservices";
+
 
 
 // ServicePerimeterConfig
@@ -10,21 +10,21 @@ import { VpcAccessibleServices } from "./vpcaccessibleservices";
  * `ServicePerimeterConfig` specifies a set of Google Cloud resources that describe specific Service Perimeter configuration.
 **/
 export class ServicePerimeterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLevels" })
+  @SpeakeasyMetadata({ data: "json, name=accessLevels" })
   accessLevels?: string[];
 
-  @Metadata({ data: "json, name=egressPolicies", elemType: shared.EgressPolicy })
+  @SpeakeasyMetadata({ data: "json, name=egressPolicies", elemType: EgressPolicy })
   egressPolicies?: EgressPolicy[];
 
-  @Metadata({ data: "json, name=ingressPolicies", elemType: shared.IngressPolicy })
+  @SpeakeasyMetadata({ data: "json, name=ingressPolicies", elemType: IngressPolicy })
   ingressPolicies?: IngressPolicy[];
 
-  @Metadata({ data: "json, name=resources" })
+  @SpeakeasyMetadata({ data: "json, name=resources" })
   resources?: string[];
 
-  @Metadata({ data: "json, name=restrictedServices" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedServices" })
   restrictedServices?: string[];
 
-  @Metadata({ data: "json, name=vpcAccessibleServices" })
+  @SpeakeasyMetadata({ data: "json, name=vpcAccessibleServices" })
   vpcAccessibleServices?: VpcAccessibleServices;
 }

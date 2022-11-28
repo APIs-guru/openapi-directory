@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ItemCreatePublicTokenRequest:
-    request: shared.ItemPublicTokenCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ItemPublicTokenCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ItemCreatePublicTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item_public_token_create_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

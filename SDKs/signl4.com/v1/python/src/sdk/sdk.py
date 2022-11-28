@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,60 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def delete_categories_team_id_category_id_(self, request: operations.DeleteCategoriesTeamIDCategoryIDRequest) -> operations.DeleteCategoriesTeamIDCategoryIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing category
+        Sample Request:
+                    
+            DELETE /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}/{categoryId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -83,13 +118,17 @@ class SDK:
 
     
     def delete_scripts_instances_instance_id_(self, request: operations.DeleteScriptsInstancesInstanceIDRequest) -> operations.DeleteScriptsInstancesInstanceIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a script instance.
+        Gets the script instance specified by the passed instance id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scripts/instances/{instanceId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -120,15 +159,17 @@ class SDK:
 
     
     def delete_teams_team_id_memberships_user_id_(self, request: operations.DeleteTeamsTeamIDMembershipsUserIDRequest) -> operations.DeleteTeamsTeamIDMembershipsUserIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes a user or invitation from a team, and may delete the user if he is not in any team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/memberships/{userId}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -184,13 +225,16 @@ class SDK:
 
     
     def delete_teams_team_id_schedules_duty_id_(self, request: operations.DeleteTeamsTeamIDSchedulesDutyIDRequest) -> operations.DeleteTeamsTeamIDSchedulesDutyIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a specific duty.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/schedules/{dutyId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -239,13 +283,17 @@ class SDK:
 
     
     def delete_webhooks_webhook_id_(self, request: operations.DeleteWebhooksWebhookIDRequest) -> operations.DeleteWebhooksWebhookIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Webhook by Id
+        Deletes the specified webhook so that it will no longer be notified.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/webhooks/{webhookId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -285,13 +333,17 @@ class SDK:
 
     
     def get_alerts_alert_id_(self, request: operations.GetAlertsAlertIDRequest) -> operations.GetAlertsAlertIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Alert
+        Gets an alert by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -338,13 +390,17 @@ class SDK:
 
     
     def get_alerts_alert_id_annotations(self, request: operations.GetAlertsAlertIDAnnotationsRequest) -> operations.GetAlertsAlertIDAnnotationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get annotations of an alert
+        Get annotations of an alert by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/annotations", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -393,13 +449,17 @@ class SDK:
 
     
     def get_alerts_alert_id_attachments(self, request: operations.GetAlertsAlertIDAttachmentsRequest) -> operations.GetAlertsAlertIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachments of an alert
+        Get attachments of an alert by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/attachments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -446,15 +506,17 @@ class SDK:
 
     
     def get_alerts_alert_id_attachments_attachment_id_(self, request: operations.GetAlertsAlertIDAttachmentsAttachmentIDRequest) -> operations.GetAlertsAlertIDAttachmentsAttachmentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a specified attachment of a specified alert.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/attachments/{attachmentId}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -505,13 +567,17 @@ class SDK:
 
     
     def get_alerts_alert_id_notifications(self, request: operations.GetAlertsAlertIDNotificationsRequest) -> operations.GetAlertsAlertIDNotificationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get alert notifications
+        Get notifications of all users by alert id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/notifications", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -558,13 +624,17 @@ class SDK:
 
     
     def get_alerts_alert_id_overview(self, request: operations.GetAlertsAlertIDOverviewRequest) -> operations.GetAlertsAlertIDOverviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an overview alert.
+        Get overview alert by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/overview", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -611,15 +681,19 @@ class SDK:
 
     
     def get_alerts_report(self, request: operations.GetAlertsReportRequest) -> operations.GetAlertsReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Alert Report
+        Returns information about the occurred alert volume in different time periods as well as information about the
+        response behaviour (amount of confirmed and unhandled alerts) of your team members.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/report"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -666,13 +740,17 @@ class SDK:
 
     
     def get_categories_images(self) -> operations.GetCategoriesImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the names of all alert category images.
+        You can get the image by going to account.signl4.com/images/alerts/categoryImageName.svg
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/categories/images"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -721,13 +799,19 @@ class SDK:
 
     
     def get_categories_team_id_(self, request: operations.GetCategoriesTeamIDRequest) -> operations.GetCategoriesTeamIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all categories
+        Sample Request:
+                    
+            GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -783,13 +867,19 @@ class SDK:
 
     
     def get_categories_team_id_category_id_(self, request: operations.GetCategoriesTeamIDCategoryIDRequest) -> operations.GetCategoriesTeamIDCategoryIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific category
+        Sample Request:
+                    
+            GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}/{categoryId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -845,13 +935,19 @@ class SDK:
 
     
     def get_categories_team_id_category_id_metrics(self, request: operations.GetCategoriesTeamIDCategoryIDMetricsRequest) -> operations.GetCategoriesTeamIDCategoryIDMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metrics for a specific category
+        Sample Request:
+                    
+            GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/metrics
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}/{categoryId}/metrics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -907,13 +1003,21 @@ class SDK:
 
     
     def get_categories_team_id_category_id_subscriptions(self, request: operations.GetCategoriesTeamIDCategoryIDSubscriptionsRequest) -> operations.GetCategoriesTeamIDCategoryIDSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get category subscriptions
+        Sample Request:
+                    
+            GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/subscriptions
+            {
+            }
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}/{categoryId}/subscriptions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -962,13 +1066,19 @@ class SDK:
 
     
     def get_categories_team_id_metrics(self, request: operations.GetCategoriesTeamIDMetricsRequest) -> operations.GetCategoriesTeamIDMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metrics for all categories
+        Sample Request:
+                    
+            GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/metrics
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}/metrics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1024,13 +1134,17 @@ class SDK:
 
     
     def get_events_event_id_overview(self, request: operations.GetEventsEventIDOverviewRequest) -> operations.GetEventsEventIDOverviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get overview event
+        Get overview event by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/events/{eventId}/overview", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1077,13 +1191,17 @@ class SDK:
 
     
     def get_events_event_id_parameters(self, request: operations.GetEventsEventIDParametersRequest) -> operations.GetEventsEventIDParametersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get event parameters
+        Get parameters of an event by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/events/{eventId}/parameters", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1130,13 +1248,16 @@ class SDK:
 
     
     def get_prepaid_balance(self) -> operations.GetPrepaidBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get your subscription's current prepaid balance.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/prepaid/balance"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1183,13 +1304,16 @@ class SDK:
 
     
     def get_prepaid_settings(self) -> operations.GetPrepaidSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get your subscription's current prepaid settings.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/prepaid/settings"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1236,13 +1360,16 @@ class SDK:
 
     
     def get_prepaid_transactions(self) -> operations.GetPrepaidTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get your subscription's prepaid transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/prepaid/transactions"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1289,15 +1416,18 @@ class SDK:
 
     
     def get_scripts_instances(self, request: operations.GetScriptsInstancesRequest) -> operations.GetScriptsInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all script instances of the SIGNL4 team
+        Returns all script instances in the subscription.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/scripts/instances"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1326,13 +1456,17 @@ class SDK:
 
     
     def get_scripts_instances_instance_id_(self, request: operations.GetScriptsInstancesInstanceIDRequest) -> operations.GetScriptsInstancesInstanceIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all information about a given script instance which includes its runtime status.
+        Gets the script instance specified by the passed instance id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scripts/instances/{instanceId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1370,13 +1504,17 @@ class SDK:
 
     
     def get_scripts_inventory(self) -> operations.GetScriptsInventoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all available inventory scripts which can be added to a SIGNL4 subscription.
+        Returns all available inventory scripts which can be added to a SIGNL4 subscription.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/scripts/inventory"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1414,15 +1552,17 @@ class SDK:
 
     
     def get_scripts_inventory_parsed(self, request: operations.GetScriptsInventoryParsedRequest) -> operations.GetScriptsInventoryParsedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all inventory scripts.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/scripts/inventory/parsed"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1460,15 +1600,18 @@ class SDK:
 
     
     def get_scripts_inventory_parsed_script_id_(self, request: operations.GetScriptsInventoryParsedScriptIDRequest) -> operations.GetScriptsInventoryParsedScriptIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an inventory script by its id.
+        Gets the script specified by the passed script id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scripts/inventory/parsed/{scriptId}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1506,13 +1649,16 @@ class SDK:
 
     
     def get_subscriptions(self) -> operations.GetSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get infos of all available/managed subscriptions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/subscriptions"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1568,13 +1714,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_(self, request: operations.GetSubscriptionsSubscriptionIDRequest) -> operations.GetSubscriptionsSubscriptionIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get infos of a specific subscription.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1630,13 +1779,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_channel_prices(self, request: operations.GetSubscriptionsSubscriptionIDChannelPricesRequest) -> operations.GetSubscriptionsSubscriptionIDChannelPricesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the subscription's channel price information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/channelPrices", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1683,13 +1835,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_features(self, request: operations.GetSubscriptionsSubscriptionIDFeaturesRequest) -> operations.GetSubscriptionsSubscriptionIDFeaturesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the features of a specified subscription.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/features", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1745,13 +1900,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_prepaid_balance(self, request: operations.GetSubscriptionsSubscriptionIDPrepaidBalanceRequest) -> operations.GetSubscriptionsSubscriptionIDPrepaidBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a subscription's current prepaid balance.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/prepaidBalance", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1807,13 +1965,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_prepaid_settings(self, request: operations.GetSubscriptionsSubscriptionIDPrepaidSettingsRequest) -> operations.GetSubscriptionsSubscriptionIDPrepaidSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a subscription's current prepaid settings.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/prepaidSettings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1869,13 +2030,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_prepaid_transactions(self, request: operations.GetSubscriptionsSubscriptionIDPrepaidTransactionsRequest) -> operations.GetSubscriptionsSubscriptionIDPrepaidTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a subscription's prepaid transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/prepaidTransactions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1931,13 +2095,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_teams(self, request: operations.GetSubscriptionsSubscriptionIDTeamsRequest) -> operations.GetSubscriptionsSubscriptionIDTeamsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get infos for all teams of the subscription.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/teams", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1984,13 +2151,16 @@ class SDK:
 
     
     def get_subscriptions_subscription_id_user_licenses(self, request: operations.GetSubscriptionsSubscriptionIDUserLicensesRequest) -> operations.GetSubscriptionsSubscriptionIDUserLicensesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a subscription's user licenses.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/userLicenses", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2046,13 +2216,16 @@ class SDK:
 
     
     def get_teams(self) -> operations.GetTeamsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get infos of all teams.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/teams"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2099,13 +2272,16 @@ class SDK:
 
     
     def get_teams_team_id_(self, request: operations.GetTeamsTeamIDRequest) -> operations.GetTeamsTeamIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets infos of a specific team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2161,13 +2337,16 @@ class SDK:
 
     
     def get_teams_team_id_alert_reports(self, request: operations.GetTeamsTeamIDAlertReportsRequest) -> operations.GetTeamsTeamIDAlertReportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about downloadable alert reports
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/alertReports", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2223,13 +2402,16 @@ class SDK:
 
     
     def get_teams_team_id_alert_reports_file_name_(self, request: operations.GetTeamsTeamIDAlertReportsFileNameRequest) -> operations.GetTeamsTeamIDAlertReportsFileNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns Alert Report
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/alertReports/{fileName}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2285,13 +2467,16 @@ class SDK:
 
     
     def get_teams_team_id_alert_settings(self, request: operations.GetTeamsTeamIDAlertSettingsRequest) -> operations.GetTeamsTeamIDAlertSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets alert settings of a specific team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/alertSettings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2347,13 +2532,16 @@ class SDK:
 
     
     def get_teams_team_id_duty_reports(self, request: operations.GetTeamsTeamIDDutyReportsRequest) -> operations.GetTeamsTeamIDDutyReportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Information about downloadable reports
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/dutyReports", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2409,13 +2597,16 @@ class SDK:
 
     
     def get_teams_team_id_duty_reports_file_name_(self, request: operations.GetTeamsTeamIDDutyReportsFileNameRequest) -> operations.GetTeamsTeamIDDutyReportsFileNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Download duty report with a specific fileName
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/dutyReports/{fileName}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2471,15 +2662,17 @@ class SDK:
 
     
     def get_teams_team_id_dutysummary(self, request: operations.GetTeamsTeamIDDutysummaryRequest) -> operations.GetTeamsTeamIDDutysummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get duty assistant info for a team
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/dutysummary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2517,13 +2710,16 @@ class SDK:
 
     
     def get_teams_team_id_event_sources(self, request: operations.GetTeamsTeamIDEventSourcesRequest) -> operations.GetTeamsTeamIDEventSourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets event sources of a specific team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/eventSources", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2579,13 +2775,16 @@ class SDK:
 
     
     def get_teams_team_id_memberships(self, request: operations.GetTeamsTeamIDMembershipsRequest) -> operations.GetTeamsTeamIDMembershipsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all invites of a team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/memberships", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2636,15 +2835,17 @@ class SDK:
 
     
     def get_teams_team_id_schedules(self, request: operations.GetTeamsTeamIDSchedulesRequest) -> operations.GetTeamsTeamIDSchedulesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about all duties that belong to the team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/schedules", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2700,13 +2901,16 @@ class SDK:
 
     
     def get_teams_team_id_schedules_schedule_id_(self, request: operations.GetTeamsTeamIDSchedulesScheduleIDRequest) -> operations.GetTeamsTeamIDSchedulesScheduleIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information of the duty schedule with the specified Id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/schedules/{scheduleId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2762,13 +2966,16 @@ class SDK:
 
     
     def get_teams_team_id_setup_progress(self, request: operations.GetTeamsTeamIDSetupProgressRequest) -> operations.GetTeamsTeamIDSetupProgressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets setup progress of a specific team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/setupProgress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2824,13 +3031,18 @@ class SDK:
 
     
     def get_users(self) -> operations.GetUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all Users
+        Returns a list of user objects with details such as their email address and duty information. Only users who
+        are part of your team will be returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2870,13 +3082,17 @@ class SDK:
 
     
     def get_users_user_id_(self, request: operations.GetUsersUserIDRequest) -> operations.GetUsersUserIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get User by Id
+        Returns a user object with details such as his email address and duty information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2916,13 +3132,17 @@ class SDK:
 
     
     def get_users_user_id_duty_status(self, request: operations.GetUsersUserIDDutyStatusRequest) -> operations.GetUsersUserIDDutyStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get duty status by user Id
+        Returns a object with duty information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/dutyStatus", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2962,15 +3182,14 @@ class SDK:
 
     
     def get_users_user_id_image(self, request: operations.GetUsersUserIDImageRequest) -> operations.GetUsersUserIDImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/image", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3017,13 +3236,16 @@ class SDK:
 
     
     def get_users_user_id_setup_progress(self, request: operations.GetUsersUserIDSetupProgressRequest) -> operations.GetUsersUserIDSetupProgressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets setup progress of a specific user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/setupProgress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3079,15 +3301,18 @@ class SDK:
 
     
     def get_webhooks(self, request: operations.GetWebhooksRequest) -> operations.GetWebhooksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Webhooks
+        Returns a collection of defined outbound webhooks in the system.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/webhooks"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3125,13 +3350,17 @@ class SDK:
 
     
     def get_webhook_by_id(self, request: operations.GetWebhookByIDRequest) -> operations.GetWebhookByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Webhook by Id
+        Returns information of the webhook specified by the passed id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/webhooks/{webhookId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3176,19 +3405,21 @@ class SDK:
 
     
     def post_alerts(self, request: operations.PostAlertsRequest) -> operations.PostAlertsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger Alert
+        Triggers a new alert for your team. All team members on duty will receive alert notifications.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3235,21 +3466,22 @@ class SDK:
 
     
     def post_alerts_acknowledge_all(self, request: operations.PostAlertsAcknowledgeAllRequest) -> operations.PostAlertsAcknowledgeAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Confirms all visible alerts
+        This method confirms all unhandled alerts your team currently has by a specific user.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/acknowledgeAll"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3282,19 +3514,21 @@ class SDK:
 
     
     def post_alerts_acknowledge_multiple(self, request: operations.PostAlertsAcknowledgeMultipleRequest) -> operations.PostAlertsAcknowledgeMultipleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Acknowlegde multiple alerts
+        This method confirms all alerts provided.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/acknowledgeMultiple"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3334,19 +3568,20 @@ class SDK:
 
     
     def post_alerts_alert_id_acknowledge(self, request: operations.PostAlertsAlertIDAcknowledgeRequest) -> operations.PostAlertsAlertIDAcknowledgeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Acknowledge an alert
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/acknowledge", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3402,19 +3637,21 @@ class SDK:
 
     
     def post_alerts_alert_id_annotate(self, request: operations.PostAlertsAlertIDAnnotateRequest) -> operations.PostAlertsAlertIDAnnotateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Annotate Alert
+        Annotates an alert by given Annotation Info.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/annotate", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3461,19 +3698,20 @@ class SDK:
 
     
     def post_alerts_alert_id_close(self, request: operations.PostAlertsAlertIDCloseRequest) -> operations.PostAlertsAlertIDCloseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Close an alert
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/close", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3529,19 +3767,21 @@ class SDK:
 
     
     def post_alerts_alert_id_undo_acknowledge(self, request: operations.PostAlertsAlertIDUndoAcknowledgeRequest) -> operations.PostAlertsAlertIDUndoAcknowledgeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Undo the acknowledgement of an alert.
+        This method tries to undo an alert acknowledgement.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/undoAcknowledge", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3588,19 +3828,21 @@ class SDK:
 
     
     def post_alerts_alert_id_undo_close(self, request: operations.PostAlertsAlertIDUndoCloseRequest) -> operations.PostAlertsAlertIDUndoCloseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Undo the closure of an alert.
+        This method tries to undo an alert close.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alerts/{alertId}/undoClose", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3647,21 +3889,22 @@ class SDK:
 
     
     def post_alerts_close_all(self, request: operations.PostAlertsCloseAllRequest) -> operations.PostAlertsCloseAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Close all acknowledged alerts.
+        This method closes all acknowledged alerts your team currently has.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/closeAll"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3701,19 +3944,21 @@ class SDK:
 
     
     def post_alerts_close_multiple(self, request: operations.PostAlertsCloseMultipleRequest) -> operations.PostAlertsCloseMultipleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Close multiple alerts
+        This method closes all alerts provided.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/closeMultiple"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3753,21 +3998,21 @@ class SDK:
 
     
     def post_alerts_paged(self, request: operations.PostAlertsPagedRequest) -> operations.PostAlertsPagedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets alerts paged
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/paged"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3825,19 +4070,21 @@ class SDK:
 
     
     def post_alerts_undo_acknowledge_multiple(self, request: operations.PostAlertsUndoAcknowledgeMultipleRequest) -> operations.PostAlertsUndoAcknowledgeMultipleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Queue undo of multiple acknowledgments.
+        This method tries to undo the acknowledgement of multiple alerts via a queue. The operation is handled in the background.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/undoAcknowledgeMultiple"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3877,19 +4124,21 @@ class SDK:
 
     
     def post_alerts_undo_close_multiple(self, request: operations.PostAlertsUndoCloseMultipleRequest) -> operations.PostAlertsUndoCloseMultipleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Withdraw closure of multiple alerts
+        This method tries to undo multiple alert closes. The operation is handled in the background.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alerts/undoCloseMultiple"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3929,19 +4178,37 @@ class SDK:
 
     
     def post_categories_team_id_(self, request: operations.PostCategoriesTeamIDRequest) -> operations.PostCategoriesTeamIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new category
+        Sample Request:
+                    
+            POST /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7
+            {
+                \"name\": \"Water\",
+                \"imageName\": \"water.svg\",
+                \"color\": \"#0000cc\",
+                \"keywordMatching\": \"Any\",
+                \"keywords\": [
+                    {
+                        \"value\": \"H2O\"
+                    },
+                    {
+                        \"value\": \"Water\"
+                    }
+                ]
+            }
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3997,19 +4264,25 @@ class SDK:
 
     
     def post_categories_team_id_category_id_subscriptions(self, request: operations.PostCategoriesTeamIDCategoryIDSubscriptionsRequest) -> operations.PostCategoriesTeamIDCategoryIDSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set category subscriptions
+        Sample Request:
+                    
+            POST /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/subscriptions
+            {
+            }
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}/{categoryId}/subscriptions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4058,21 +4331,22 @@ class SDK:
 
     
     def post_events_paged(self, request: operations.PostEventsPagedRequest) -> operations.PostEventsPagedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get overview event paged.
+        Get overview event paged. If there are more results, you also get a continuation token which you can add to the event filter.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/events/paged"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4121,19 +4395,21 @@ class SDK:
 
     
     def post_scripts_instances(self, request: operations.PostScriptsInstancesRequest) -> operations.PostScriptsInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new script instance in the in the SIGNL4 team.
+        Creates a new script instance of the script specified in the request body.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/scripts/instances"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4189,13 +4465,16 @@ class SDK:
 
     
     def post_scripts_instances_instance_id_disable(self, request: operations.PostScriptsInstancesInstanceIDDisableRequest) -> operations.PostScriptsInstancesInstanceIDDisableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables a given script instance.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scripts/instances/{instanceId}/disable", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4242,13 +4521,16 @@ class SDK:
 
     
     def post_scripts_instances_instance_id_enable(self, request: operations.PostScriptsInstancesInstanceIDEnableRequest) -> operations.PostScriptsInstancesInstanceIDEnableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables a script instance.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scripts/instances/{instanceId}/enable", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4295,19 +4577,20 @@ class SDK:
 
     
     def post_teams_team_id_alert_settings(self, request: operations.PostTeamsTeamIDAlertSettingsRequest) -> operations.PostTeamsTeamIDAlertSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sets alert settings of a specific team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/alertSettings", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4363,19 +4646,20 @@ class SDK:
 
     
     def post_teams_team_id_memberships(self, request: operations.PostTeamsTeamIDMembershipsRequest) -> operations.PostTeamsTeamIDMembershipsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Invite users to a team
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/memberships", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4426,19 +4710,20 @@ class SDK:
 
     
     def post_teams_team_id_memberships_resend_invite_mail(self, request: operations.PostTeamsTeamIDMembershipsResendInviteMailRequest) -> operations.PostTeamsTeamIDMembershipsResendInviteMailResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sends invite email again if an invite exists
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/memberships/resendInviteMail", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4483,19 +4768,20 @@ class SDK:
 
     
     def post_teams_team_id_schedules(self, request: operations.PostTeamsTeamIDSchedulesRequest) -> operations.PostTeamsTeamIDSchedulesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create/Update given duty schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/schedules", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4560,19 +4846,20 @@ class SDK:
 
     
     def post_teams_team_id_schedules_delete_range(self, request: operations.PostTeamsTeamIDSchedulesDeleteRangeRequest) -> operations.PostTeamsTeamIDSchedulesDeleteRangeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete duty schedules in range
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/schedules/deleteRange", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4637,21 +4924,21 @@ class SDK:
 
     
     def post_teams_team_id_schedules_multiple(self, request: operations.PostTeamsTeamIDSchedulesMultipleRequest) -> operations.PostTeamsTeamIDSchedulesMultipleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Save multiple schedules. It is possible to override existing schedules if you wish
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/schedules/multiple", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4716,21 +5003,21 @@ class SDK:
 
     
     def post_users_user_id_check_permissions(self, request: operations.PostUsersUserIDCheckPermissionsRequest) -> operations.PostUsersUserIDCheckPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Checks if a user has the provided permission.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/checkPermissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4777,13 +5064,16 @@ class SDK:
 
     
     def post_users_user_id_image(self, request: operations.PostUsersUserIDImageRequest) -> operations.PostUsersUserIDImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Uploaded a profile image for a specified user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/image", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4834,13 +5124,17 @@ class SDK:
 
     
     def post_users_user_id_punch_in(self, request: operations.PostUsersUserIDPunchInRequest) -> operations.PostUsersUserIDPunchInResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Punch User in
+        The specified user will be punched in to duty.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/punchIn", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4887,13 +5181,17 @@ class SDK:
 
     
     def post_users_user_id_punch_in_as_manager(self, request: operations.PostUsersUserIDPunchInAsManagerRequest) -> operations.PostUsersUserIDPunchInAsManagerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Punch User in as Manager
+        The specified user will be punched in to duty as a manager.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/punchInAsManager", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4940,13 +5238,17 @@ class SDK:
 
     
     def post_users_user_id_punch_out(self, request: operations.PostUsersUserIDPunchOutRequest) -> operations.PostUsersUserIDPunchOutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Punch User out
+        The specified user will be punched out from duty.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/punchOut", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5002,19 +5304,21 @@ class SDK:
 
     
     def post_webhooks(self, request: operations.PostWebhooksRequest) -> operations.PostWebhooksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Webhook
+        Creates a new outbound webhook that will be notified when certain events occur.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/webhooks"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5050,13 +5354,16 @@ class SDK:
 
     
     def post_webhooks_webhook_id_disable(self, request: operations.PostWebhooksWebhookIDDisableRequest) -> operations.PostWebhooksWebhookIDDisableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Ability to enable a webHook.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/webhooks/{webhookId}/disable", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5103,13 +5410,16 @@ class SDK:
 
     
     def post_webhooks_webhook_id_enable(self, request: operations.PostWebhooksWebhookIDEnableRequest) -> operations.PostWebhooksWebhookIDEnableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Ability to disable a webHook.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/webhooks/{webhookId}/enable", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5156,19 +5466,40 @@ class SDK:
 
     
     def put_categories_team_id_category_id_(self, request: operations.PutCategoriesTeamIDCategoryIDRequest) -> operations.PutCategoriesTeamIDCategoryIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an existing category
+        Sample Request:
+                    
+            PUT /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e
+            {
+                \"name\": \"Water-Updated\",
+                \"imageName\": \"water.svg\",
+                \"color\": \"#0000cc\",
+                \"keywordMatching\": \"All\",
+                \"keywords\": [
+                    {
+                        \"value\": \"H2O\"
+                    },
+                    {
+                        \"value\": \"Water\"
+                    },
+                    {
+                        \"value\": \"Wet\"
+                    }
+                ]
+            }
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{teamId}/{categoryId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5224,19 +5555,20 @@ class SDK:
 
     
     def put_prepaid_settings(self, request: operations.PutPrepaidSettingsRequest) -> operations.PutPrepaidSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update your subscription's current prepaid settings.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/prepaid/settings"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5283,19 +5615,21 @@ class SDK:
 
     
     def put_scripts_instances_instance_id_(self, request: operations.PutScriptsInstancesInstanceIDRequest) -> operations.PutScriptsInstancesInstanceIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a given script instance, typically used for updating the configuration of a script.
+        Updates the specified script instance.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scripts/instances/{instanceId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5342,19 +5676,21 @@ class SDK:
 
     
     def put_scripts_instances_instance_id_data(self, request: operations.PutScriptsInstancesInstanceIDDataRequest) -> operations.PutScriptsInstancesInstanceIDDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates custom data of a given script instance which includes its display name.
+        Updates the specified script instance.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scripts/instances/{instanceId}/data", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5401,19 +5737,20 @@ class SDK:
 
     
     def put_subscriptions_subscription_id_prepaid_settings(self, request: operations.PutSubscriptionsSubscriptionIDPrepaidSettingsRequest) -> operations.PutSubscriptionsSubscriptionIDPrepaidSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a subscription's current prepaid settings.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/prepaidSettings", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5469,19 +5806,20 @@ class SDK:
 
     
     def put_subscriptions_subscription_id_profile(self, request: operations.PutSubscriptionsSubscriptionIDProfileRequest) -> operations.PutSubscriptionsSubscriptionIDProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a subscriptions profile.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/subscriptions/{subscriptionId}/profile", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5537,21 +5875,23 @@ class SDK:
 
     
     def put_teams_team_id_memberships_user_id_(self, request: operations.PutTeamsTeamIDMembershipsUserIDRequest) -> operations.PutTeamsTeamIDMembershipsUserIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update user's team membership.
+        Updates the user's team membership. You can move the user to another team within the subscription
+        and/or change the user's role.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/memberships/{userId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5616,19 +5956,20 @@ class SDK:
 
     
     def put_teams_team_id_profile(self, request: operations.PutTeamsTeamIDProfileRequest) -> operations.PutTeamsTeamIDProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates team profile of a team
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/teams/{teamId}/profile", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5684,19 +6025,20 @@ class SDK:
 
     
     def put_users_user_id_change_password(self, request: operations.PutUsersUserIDChangePasswordRequest) -> operations.PutUsersUserIDChangePasswordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the password of a user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/changePassword", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5745,19 +6087,20 @@ class SDK:
 
     
     def put_users_user_id_profile(self, request: operations.PutUsersUserIDProfileRequest) -> operations.PutUsersUserIDProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates user profile of an user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{userId}/profile", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5813,19 +6156,21 @@ class SDK:
 
     
     def put_webhooks_webhook_id_(self, request: operations.PutWebhooksWebhookIDRequest) -> operations.PutWebhooksWebhookIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update Webhook by Id
+        Updates the specified webhook.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/webhooks/{webhookId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

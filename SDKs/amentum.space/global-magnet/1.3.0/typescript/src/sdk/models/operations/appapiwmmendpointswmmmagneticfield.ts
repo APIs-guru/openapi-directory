@@ -1,24 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppApiWmmEndpointsWmmMagneticFieldQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=altitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=altitude" })
   altitude: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=latitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=longitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=longitude" })
   longitude: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year: number;
-}
-
-
-export class AppApiWmmEndpointsWmmMagneticFieldRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: AppApiWmmEndpointsWmmMagneticFieldQueryParams;
 }
 
 
@@ -28,10 +23,10 @@ export class AppApiWmmEndpointsWmmMagneticFieldRequest extends SpeakeasyBase {
  * 
 **/
 export class AppApiWmmEndpointsWmmMagneticField200ApplicationJsonDeclination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }
 
@@ -42,10 +37,10 @@ export class AppApiWmmEndpointsWmmMagneticField200ApplicationJsonDeclination ext
  * 
 **/
 export class AppApiWmmEndpointsWmmMagneticField200ApplicationJsonGridVariation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }
 
@@ -56,10 +51,10 @@ export class AppApiWmmEndpointsWmmMagneticField200ApplicationJsonGridVariation e
  * 
 **/
 export class AppApiWmmEndpointsWmmMagneticField200ApplicationJsonInclination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }
 
@@ -70,36 +65,42 @@ export class AppApiWmmEndpointsWmmMagneticField200ApplicationJsonInclination ext
  * 
 **/
 export class AppApiWmmEndpointsWmmMagneticField200ApplicationJsonTotalIntensity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }
 
 
 export class AppApiWmmEndpointsWmmMagneticField200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=declination" })
+  @SpeakeasyMetadata({ data: "json, name=declination" })
   declination?: AppApiWmmEndpointsWmmMagneticField200ApplicationJsonDeclination;
 
-  @Metadata({ data: "json, name=grid_variation" })
+  @SpeakeasyMetadata({ data: "json, name=grid_variation" })
   gridVariation?: AppApiWmmEndpointsWmmMagneticField200ApplicationJsonGridVariation;
 
-  @Metadata({ data: "json, name=inclination" })
+  @SpeakeasyMetadata({ data: "json, name=inclination" })
   inclination?: AppApiWmmEndpointsWmmMagneticField200ApplicationJsonInclination;
 
-  @Metadata({ data: "json, name=total_intensity" })
+  @SpeakeasyMetadata({ data: "json, name=total_intensity" })
   totalIntensity?: AppApiWmmEndpointsWmmMagneticField200ApplicationJsonTotalIntensity;
 }
 
 
+export class AppApiWmmEndpointsWmmMagneticFieldRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: AppApiWmmEndpointsWmmMagneticFieldQueryParams;
+}
+
+
 export class AppApiWmmEndpointsWmmMagneticFieldResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   appApiWmmEndpointsWmmMagneticField200ApplicationJsonObject?: AppApiWmmEndpointsWmmMagneticField200ApplicationJson;
 }

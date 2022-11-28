@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AlimwRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class AlimwRequestBody extends SpeakeasyBase {
 export declare class AlimwSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class AlimwRequest extends SpeakeasyBase {
-    request?: AlimwRequestBody;
-    security: AlimwSecurity;
 }
 export declare enum Alimw400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Alimw504ApplicationJsonErrorDescriptionEnum {
 export declare class Alimw504ApplicationJson extends SpeakeasyBase {
     error?: Alimw504ApplicationJsonErrorEnum;
     errorDescription?: Alimw504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class AlimwRequest extends SpeakeasyBase {
+    request?: AlimwRequestBody;
+    security: AlimwSecurity;
 }
 export declare class AlimwResponse extends SpeakeasyBase {
     contentType: string;

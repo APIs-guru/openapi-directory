@@ -1,6 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterRef } from "./filterref";
 import { ProfileRef } from "./profileref";
+import { FilterRefInput } from "./filterref";
+
 
 
 // ProfileFilterLink
@@ -8,21 +10,40 @@ import { ProfileRef } from "./profileref";
  * JSON template for an Analytics profile filter link.
 **/
 export class ProfileFilterLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterRef" })
+  @SpeakeasyMetadata({ data: "json, name=filterRef" })
   filterRef?: FilterRef;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=profileRef" })
+  @SpeakeasyMetadata({ data: "json, name=profileRef" })
   profileRef?: ProfileRef;
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
+}
+
+
+// ProfileFilterLinkInput
+/** 
+ * JSON template for an Analytics profile filter link.
+**/
+export class ProfileFilterLinkInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=filterRef" })
+  filterRef?: FilterRefInput;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=profileRef" })
+  profileRef?: ProfileRef;
+
+  @SpeakeasyMetadata({ data: "json, name=rank" })
+  rank?: number;
 }

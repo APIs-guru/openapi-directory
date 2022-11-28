@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateFootnoteResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of creating a footnote.
 **/
 export class CreateFootnoteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=footnoteId" })
+  @SpeakeasyMetadata({ data: "json, name=footnoteId" })
   footnoteId?: string;
 }

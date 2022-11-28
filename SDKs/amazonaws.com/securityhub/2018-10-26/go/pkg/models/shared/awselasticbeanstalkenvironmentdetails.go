@@ -1,5 +1,7 @@
 package shared
 
+// AwsElasticBeanstalkEnvironmentDetails
+// Contains details about an Elastic Beanstalk environment.
 type AwsElasticBeanstalkEnvironmentDetails struct {
 	ApplicationName   *string                                         `json:"ApplicationName,omitempty"`
 	Cname             *string                                         `json:"Cname,omitempty"`

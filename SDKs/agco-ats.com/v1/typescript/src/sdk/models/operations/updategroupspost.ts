@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateGroupsPostRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   updateSystemModelsUpdateGroup?: shared.UpdateSystemModelsUpdateGroup;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   updateSystemModelsUpdateGroup1?: shared.UpdateSystemModelsUpdateGroup;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   updateSystemModelsUpdateGroup2?: shared.UpdateSystemModelsUpdateGroup;
 }
 
 
 export class UpdateGroupsPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdateGroupsPostRequests;
 }
 
 
 export class UpdateGroupsPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateGroupsPost200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateGroupsPost200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateGroupsPost200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateGroupsPost200TextXmlString?: string;
 }

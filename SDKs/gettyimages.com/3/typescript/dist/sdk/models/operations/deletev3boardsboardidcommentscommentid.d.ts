@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class DeleteV3BoardsBoardIdCommentsCommentIdPathParams extends SpeakeasyBase {
     boardId: string;
     commentId: string;

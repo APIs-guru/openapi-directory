@@ -1,17 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CampaignBudget } from "./campaignbudget";
 import { CampaignFlight } from "./campaignflight";
 import { CampaignGoal } from "./campaigngoal";
 import { FrequencyCap } from "./frequencycap";
 
+
 export enum CampaignEntityStatusEnum {
-    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED"
-,    EntityStatusActive = "ENTITY_STATUS_ACTIVE"
-,    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED"
-,    EntityStatusDraft = "ENTITY_STATUS_DRAFT"
-,    EntityStatusPaused = "ENTITY_STATUS_PAUSED"
-,    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
+    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED",
+    EntityStatusActive = "ENTITY_STATUS_ACTIVE",
+    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED",
+    EntityStatusDraft = "ENTITY_STATUS_DRAFT",
+    EntityStatusPaused = "ENTITY_STATUS_PAUSED",
+    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
+}
+
+
+// CampaignInput
+/** 
+ * A single campaign.
+**/
+export class CampaignInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=campaignBudgets", elemType: CampaignBudget })
+  campaignBudgets?: CampaignBudget[];
+
+  @SpeakeasyMetadata({ data: "json, name=campaignFlight" })
+  campaignFlight?: CampaignFlight;
+
+  @SpeakeasyMetadata({ data: "json, name=campaignGoal" })
+  campaignGoal?: CampaignGoal;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=entityStatus" })
+  entityStatus?: CampaignEntityStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=frequencyCap" })
+  frequencyCap?: FrequencyCap;
 }
 
 
@@ -20,33 +45,33 @@ export enum CampaignEntityStatusEnum {
  * A single campaign.
 **/
 export class Campaign extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=campaignBudgets", elemType: shared.CampaignBudget })
+  @SpeakeasyMetadata({ data: "json, name=campaignBudgets", elemType: CampaignBudget })
   campaignBudgets?: CampaignBudget[];
 
-  @Metadata({ data: "json, name=campaignFlight" })
+  @SpeakeasyMetadata({ data: "json, name=campaignFlight" })
   campaignFlight?: CampaignFlight;
 
-  @Metadata({ data: "json, name=campaignGoal" })
+  @SpeakeasyMetadata({ data: "json, name=campaignGoal" })
   campaignGoal?: CampaignGoal;
 
-  @Metadata({ data: "json, name=campaignId" })
+  @SpeakeasyMetadata({ data: "json, name=campaignId" })
   campaignId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=entityStatus" })
+  @SpeakeasyMetadata({ data: "json, name=entityStatus" })
   entityStatus?: CampaignEntityStatusEnum;
 
-  @Metadata({ data: "json, name=frequencyCap" })
+  @SpeakeasyMetadata({ data: "json, name=frequencyCap" })
   frequencyCap?: FrequencyCap;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

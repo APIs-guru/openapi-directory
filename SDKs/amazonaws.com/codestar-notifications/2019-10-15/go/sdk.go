@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://codestar-notifications.{region}.amazonaws.com",
 	"https://codestar-notifications.{region}.amazonaws.com",
 	"http://codestar-notifications.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/codestar-notifications/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateNotificationRule - Creates a notification rule for a resource. The rule specifies the events you want notifications about and the targets (such as SNS topics) where you want to receive them.
 func (s *SDK) CreateNotificationRule(ctx context.Context, request operations.CreateNotificationRuleRequest) (*operations.CreateNotificationRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createNotificationRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateNotificationRule(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) CreateNotificationRule(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// DeleteNotificationRule - Deletes a notification rule for a resource.
 func (s *SDK) DeleteNotificationRule(ctx context.Context, request operations.DeleteNotificationRuleRequest) (*operations.DeleteNotificationRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteNotificationRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) DeleteNotificationRule(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -252,8 +280,9 @@ func (s *SDK) DeleteNotificationRule(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteTarget - Deletes a specified target for notifications.
 func (s *SDK) DeleteTarget(ctx context.Context, request operations.DeleteTargetRequest) (*operations.DeleteTargetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteTarget"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -273,7 +302,7 @@ func (s *SDK) DeleteTarget(ctx context.Context, request operations.DeleteTargetR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +342,9 @@ func (s *SDK) DeleteTarget(ctx context.Context, request operations.DeleteTargetR
 	return res, nil
 }
 
+// DescribeNotificationRule - Returns information about a specified notification rule.
 func (s *SDK) DescribeNotificationRule(ctx context.Context, request operations.DescribeNotificationRuleRequest) (*operations.DescribeNotificationRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeNotificationRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -334,7 +364,7 @@ func (s *SDK) DescribeNotificationRule(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -384,8 +414,9 @@ func (s *SDK) DescribeNotificationRule(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// ListEventTypes - Returns information about the event types available for configuring notifications.
 func (s *SDK) ListEventTypes(ctx context.Context, request operations.ListEventTypesRequest) (*operations.ListEventTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listEventTypes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -407,7 +438,7 @@ func (s *SDK) ListEventTypes(ctx context.Context, request operations.ListEventTy
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -457,8 +488,9 @@ func (s *SDK) ListEventTypes(ctx context.Context, request operations.ListEventTy
 	return res, nil
 }
 
+// ListNotificationRules - Returns a list of the notification rules for an AWS account.
 func (s *SDK) ListNotificationRules(ctx context.Context, request operations.ListNotificationRulesRequest) (*operations.ListNotificationRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listNotificationRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -480,7 +512,7 @@ func (s *SDK) ListNotificationRules(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -530,8 +562,9 @@ func (s *SDK) ListNotificationRules(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListTagsForResource - Returns a list of the tags associated with a notification rule.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -551,7 +584,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -601,8 +634,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListTargets - Returns a list of the notification rule targets for an AWS account.
 func (s *SDK) ListTargets(ctx context.Context, request operations.ListTargetsRequest) (*operations.ListTargetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listTargets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -624,7 +658,7 @@ func (s *SDK) ListTargets(ctx context.Context, request operations.ListTargetsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -674,8 +708,9 @@ func (s *SDK) ListTargets(ctx context.Context, request operations.ListTargetsReq
 	return res, nil
 }
 
+// Subscribe - Creates an association between a notification rule and an SNS topic so that the associated target can receive notifications when the events described in the rule are triggered.
 func (s *SDK) Subscribe(ctx context.Context, request operations.SubscribeRequest) (*operations.SubscribeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/subscribe"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -695,7 +730,7 @@ func (s *SDK) Subscribe(ctx context.Context, request operations.SubscribeRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -745,8 +780,9 @@ func (s *SDK) Subscribe(ctx context.Context, request operations.SubscribeRequest
 	return res, nil
 }
 
+// TagResource - Associates a set of provided tags with a notification rule.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -766,7 +802,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -826,8 +862,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// Unsubscribe - Removes an association between a notification rule and an Amazon SNS topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
 func (s *SDK) Unsubscribe(ctx context.Context, request operations.UnsubscribeRequest) (*operations.UnsubscribeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/unsubscribe"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -847,7 +884,7 @@ func (s *SDK) Unsubscribe(ctx context.Context, request operations.UnsubscribeReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -887,8 +924,9 @@ func (s *SDK) Unsubscribe(ctx context.Context, request operations.UnsubscribeReq
 	return res, nil
 }
 
+// UntagResource - Removes the association between one or more provided tags and a notification rule.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/untagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -908,7 +946,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -968,8 +1006,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateNotificationRule - <p>Updates a notification rule for a resource. You can change the events that trigger the notification rule, the status of the rule, and the targets that receive the notifications.</p> <note> <p>To add or remove tags for a notification rule, you must use <a>TagResource</a> and <a>UntagResource</a>.</p> </note>
 func (s *SDK) UpdateNotificationRule(ctx context.Context, request operations.UpdateNotificationRuleRequest) (*operations.UpdateNotificationRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateNotificationRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -989,7 +1028,7 @@ func (s *SDK) UpdateNotificationRule(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

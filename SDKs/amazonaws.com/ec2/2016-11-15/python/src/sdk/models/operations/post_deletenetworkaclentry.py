@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteNetworkACLEntryActionEnum(str, Enum):
     DELETE_NETWORK_ACL_ENTRY = "DeleteNetworkAclEntry"
@@ -10,8 +14,8 @@ class PostDeleteNetworkACLEntryVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteNetworkACLEntryQueryParams:
-    action: PostDeleteNetworkACLEntryActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteNetworkACLEntryVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteNetworkACLEntryActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteNetworkACLEntryVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteNetworkACLEntryHeaders:
 
 @dataclass
 class PostDeleteNetworkACLEntryRequest:
-    query_params: PostDeleteNetworkACLEntryQueryParams = field(default=None)
-    headers: PostDeleteNetworkACLEntryHeaders = field(default=None)
+    headers: PostDeleteNetworkACLEntryHeaders = field()
+    query_params: PostDeleteNetworkACLEntryQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteNetworkACLEntryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { RestrictionEvaluation } from "./restrictionevaluation";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MemberRestriction
 /**
  * The definition of MemberRestriction
@@ -34,11 +33,7 @@ var MemberRestriction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=evaluation" }),
-        __metadata("design:type", RestrictionEvaluation)
-    ], MemberRestriction.prototype, "evaluation", void 0);
-    __decorate([
-        Metadata({ data: "json, name=query" }),
+        SpeakeasyMetadata({ data: "json, name=query" }),
         __metadata("design:type", String)
     ], MemberRestriction.prototype, "query", void 0);
     return MemberRestriction;

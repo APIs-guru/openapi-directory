@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetTeamEventsPathParams:
-    team_key: str = field(default=None, metadata={'path_param': { 'field_name': 'team_key', 'style': 'simple', 'explode': False }})
+    team_key: str = field(metadata={'path_param': { 'field_name': 'team_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetTeamEventsHeaders:
 
 @dataclass
 class GetTeamEventsSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetTeamEventsRequest:
-    path_params: GetTeamEventsPathParams = field(default=None)
-    headers: GetTeamEventsHeaders = field(default=None)
-    security: GetTeamEventsSecurity = field(default=None)
+    headers: GetTeamEventsHeaders = field()
+    path_params: GetTeamEventsPathParams = field()
+    security: GetTeamEventsSecurity = field()
     
 
 @dataclass
 class GetTeamEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     events: Optional[List[shared.Event]] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

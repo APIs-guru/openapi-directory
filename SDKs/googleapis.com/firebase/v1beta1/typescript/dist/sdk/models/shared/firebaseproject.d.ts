@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DefaultResources } from "./defaultresources";
 export declare enum FirebaseProjectStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",

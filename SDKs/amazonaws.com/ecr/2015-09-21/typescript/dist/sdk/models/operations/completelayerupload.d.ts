@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CompleteLayerUploadXAmzTargetEnum {
     AmazonEc2ContainerRegistryV20150921CompleteLayerUpload = "AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload"

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSeries } from "./timeseries";
+
 
 
 // GetDailyMetricsTimeSeriesResponse
@@ -7,6 +8,6 @@ import { TimeSeries } from "./timeseries";
  * Represents the response for GetDailyMetricsTimeSeries.
 **/
 export class GetDailyMetricsTimeSeriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timeSeries" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeries" })
   timeSeries?: TimeSeries;
 }

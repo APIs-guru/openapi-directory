@@ -8,6 +8,8 @@ const (
 	NfsExportPermissionsEnumReadWrite              NfsExportPermissionsEnum = "READ_WRITE"
 )
 
+// NfsExport
+// A NFS export entry.
 type NfsExport struct {
 	AllowDev     *bool                     `json:"allowDev,omitempty"`
 	AllowSuid    *bool                     `json:"allowSuid,omitempty"`

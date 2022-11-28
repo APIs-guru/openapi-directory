@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchitectureEnum } from "./architectureenum";
 import { AutoScalingTypeEnum } from "./autoscalingtypeenum";
 
 
+
 export class UpdateInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AgentVersion" })
   agentVersion?: string;
 
-  @Metadata({ data: "json, name=AmiId" })
+  @SpeakeasyMetadata({ data: "json, name=AmiId" })
   amiId?: string;
 
-  @Metadata({ data: "json, name=Architecture" })
+  @SpeakeasyMetadata({ data: "json, name=Architecture" })
   architecture?: ArchitectureEnum;
 
-  @Metadata({ data: "json, name=AutoScalingType" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingType" })
   autoScalingType?: AutoScalingTypeEnum;
 
-  @Metadata({ data: "json, name=EbsOptimized" })
+  @SpeakeasyMetadata({ data: "json, name=EbsOptimized" })
   ebsOptimized?: boolean;
 
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=InstallUpdatesOnBoot" })
+  @SpeakeasyMetadata({ data: "json, name=InstallUpdatesOnBoot" })
   installUpdatesOnBoot?: boolean;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=LayerIds" })
+  @SpeakeasyMetadata({ data: "json, name=LayerIds" })
   layerIds?: string[];
 
-  @Metadata({ data: "json, name=Os" })
+  @SpeakeasyMetadata({ data: "json, name=Os" })
   os?: string;
 
-  @Metadata({ data: "json, name=SshKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=SshKeyName" })
   sshKeyName?: string;
 }

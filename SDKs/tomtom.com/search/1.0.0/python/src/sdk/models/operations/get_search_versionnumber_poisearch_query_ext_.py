@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSearchVersionNumberPoiSearchQueryExtPathParams:
-    ext: shared.ExtEnum = field(default=None, metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
-    query: str = field(default=None, metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    ext: shared.ExtEnum = field(metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
+    query: str = field(metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,12 +29,12 @@ class GetSearchVersionNumberPoiSearchQueryExtQueryParams:
 
 @dataclass
 class GetSearchVersionNumberPoiSearchQueryExtRequest:
-    path_params: GetSearchVersionNumberPoiSearchQueryExtPathParams = field(default=None)
-    query_params: GetSearchVersionNumberPoiSearchQueryExtQueryParams = field(default=None)
+    path_params: GetSearchVersionNumberPoiSearchQueryExtPathParams = field()
+    query_params: GetSearchVersionNumberPoiSearchQueryExtQueryParams = field()
     
 
 @dataclass
 class GetSearchVersionNumberPoiSearchQueryExtResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

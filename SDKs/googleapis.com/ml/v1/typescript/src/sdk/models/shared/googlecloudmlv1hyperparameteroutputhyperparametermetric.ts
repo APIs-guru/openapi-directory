@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudMlV1HyperparameterOutputHyperparameterMetric
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An observed value of a metric.
 **/
 export class GoogleCloudMlV1HyperparameterOutputHyperparameterMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectiveValue" })
+  @SpeakeasyMetadata({ data: "json, name=objectiveValue" })
   objectiveValue?: number;
 
-  @Metadata({ data: "json, name=trainingStep" })
+  @SpeakeasyMetadata({ data: "json, name=trainingStep" })
   trainingStep?: string;
 }

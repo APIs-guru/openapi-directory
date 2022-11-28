@@ -8,7 +8,15 @@ const (
 	AuthorizedSellerStatusAssignedTargetingOptionDetailsAuthorizedSellerStatusEnumAuthorizedSellerStatusAuthorizedAndNonParticipatingPublishers AuthorizedSellerStatusAssignedTargetingOptionDetailsAuthorizedSellerStatusEnum = "AUTHORIZED_SELLER_STATUS_AUTHORIZED_AND_NON_PARTICIPATING_PUBLISHERS"
 )
 
+// AuthorizedSellerStatusAssignedTargetingOptionDetails
+// Represents an assigned authorized seller status. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS`.
 type AuthorizedSellerStatusAssignedTargetingOptionDetails struct {
 	AuthorizedSellerStatus *AuthorizedSellerStatusAssignedTargetingOptionDetailsAuthorizedSellerStatusEnum `json:"authorizedSellerStatus,omitempty"`
 	TargetingOptionID      *string                                                                         `json:"targetingOptionId,omitempty"`
+}
+
+// AuthorizedSellerStatusAssignedTargetingOptionDetailsInput
+// Represents an assigned authorized seller status. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS`.
+type AuthorizedSellerStatusAssignedTargetingOptionDetailsInput struct {
+	TargetingOptionID *string `json:"targetingOptionId,omitempty"`
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudresourcemanagerFoldersGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudresourcemanagerFoldersGetQueryParams:
 
 @dataclass
 class CloudresourcemanagerFoldersGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerFoldersGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class CloudresourcemanagerFoldersGetSecurity:
 
 @dataclass
 class CloudresourcemanagerFoldersGetRequest:
-    path_params: CloudresourcemanagerFoldersGetPathParams = field(default=None)
-    query_params: CloudresourcemanagerFoldersGetQueryParams = field(default=None)
-    security: CloudresourcemanagerFoldersGetSecurity = field(default=None)
+    path_params: CloudresourcemanagerFoldersGetPathParams = field()
+    query_params: CloudresourcemanagerFoldersGetQueryParams = field()
+    security: CloudresourcemanagerFoldersGetSecurity = field()
     
 
 @dataclass
 class CloudresourcemanagerFoldersGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     folder: Optional[shared.Folder] = field(default=None)
-    status_code: int = field(default=None)
     

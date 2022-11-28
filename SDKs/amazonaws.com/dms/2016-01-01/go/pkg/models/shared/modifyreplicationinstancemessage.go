@@ -1,5 +1,7 @@
 package shared
 
+// ModifyReplicationInstanceMessage
+// <p/>
 type ModifyReplicationInstanceMessage struct {
 	AllocatedStorage              *int64   `json:"AllocatedStorage,omitempty"`
 	AllowMajorVersionUpgrade      *bool    `json:"AllowMajorVersionUpgrade,omitempty"`

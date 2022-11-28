@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementInstallError } from "./configmanagementinstallerror";
 export declare enum ConfigManagementOperatorStateDeploymentStateEnum {
     DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",

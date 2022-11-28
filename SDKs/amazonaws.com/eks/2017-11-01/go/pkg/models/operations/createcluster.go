@@ -14,14 +14,20 @@ type CreateClusterHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateClusterRequestBodyKubernetesNetworkConfig
+// The Kubernetes network configuration for the cluster.
 type CreateClusterRequestBodyKubernetesNetworkConfig struct {
 	ServiceIpv4Cidr *string `json:"serviceIpv4Cidr,omitempty"`
 }
 
+// CreateClusterRequestBodyLogging
+// An object representing the logging configuration for resources in your cluster.
 type CreateClusterRequestBodyLogging struct {
 	ClusterLogging []shared.LogSetup `json:"clusterLogging,omitempty"`
 }
 
+// CreateClusterRequestBodyResourcesVpcConfig
+// An object representing the VPC configuration to use for an Amazon EKS cluster.
 type CreateClusterRequestBodyResourcesVpcConfig struct {
 	EndpointPrivateAccess *bool    `json:"endpointPrivateAccess,omitempty"`
 	EndpointPublicAccess  *bool    `json:"endpointPublicAccess,omitempty"`

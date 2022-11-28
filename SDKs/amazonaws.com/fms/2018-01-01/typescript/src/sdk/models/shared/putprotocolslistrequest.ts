@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProtocolsListData } from "./protocolslistdata";
 import { Tag } from "./tag";
 
 
+
 export class PutProtocolsListRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProtocolsList" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolsList" })
   protocolsList: ProtocolsListData;
 
-  @Metadata({ data: "json, name=TagList", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TagList", elemType: Tag })
   tagList?: Tag[];
 }

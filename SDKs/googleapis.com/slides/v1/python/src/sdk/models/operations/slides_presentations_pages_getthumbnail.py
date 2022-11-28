@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailPathParams:
-    page_object_id: str = field(default=None, metadata={'path_param': { 'field_name': 'pageObjectId', 'style': 'simple', 'explode': False }})
-    presentation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'presentationId', 'style': 'simple', 'explode': False }})
+    page_object_id: str = field(metadata={'path_param': { 'field_name': 'pageObjectId', 'style': 'simple', 'explode': False }})
+    presentation_id: str = field(metadata={'path_param': { 'field_name': 'presentationId', 'style': 'simple', 'explode': False }})
     
 class SlidesPresentationsPagesGetThumbnailThumbnailPropertiesMimeTypeEnum(str, Enum):
     PNG = "PNG"
@@ -37,32 +38,32 @@ class SlidesPresentationsPagesGetThumbnailQueryParams:
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailSecurityOption5:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -76,14 +77,14 @@ class SlidesPresentationsPagesGetThumbnailSecurity:
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailRequest:
-    path_params: SlidesPresentationsPagesGetThumbnailPathParams = field(default=None)
-    query_params: SlidesPresentationsPagesGetThumbnailQueryParams = field(default=None)
-    security: SlidesPresentationsPagesGetThumbnailSecurity = field(default=None)
+    path_params: SlidesPresentationsPagesGetThumbnailPathParams = field()
+    query_params: SlidesPresentationsPagesGetThumbnailQueryParams = field()
+    security: SlidesPresentationsPagesGetThumbnailSecurity = field()
     
 
 @dataclass
 class SlidesPresentationsPagesGetThumbnailResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     thumbnail: Optional[shared.Thumbnail] = field(default=None)
     

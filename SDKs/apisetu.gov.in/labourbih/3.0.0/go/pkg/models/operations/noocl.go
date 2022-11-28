@@ -27,11 +27,6 @@ type NooclSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type NooclRequest struct {
-	Request  *NooclRequestBody `request:"mediaType=application/json"`
-	Security NooclSecurity
-}
-
 type Noocl400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Noocl504ApplicationJSON struct {
 	Error            *Noocl504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Noocl504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type NooclRequest struct {
+	Request  *NooclRequestBody `request:"mediaType=application/json"`
+	Security NooclSecurity
 }
 
 type NooclResponse struct {

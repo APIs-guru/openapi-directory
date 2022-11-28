@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteResourceDefinitionPathParams:
-    resource_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ResourceDefinitionId', 'style': 'simple', 'explode': False }})
+    resource_definition_id: str = field(metadata={'path_param': { 'field_name': 'ResourceDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class DeleteResourceDefinitionHeaders:
 
 @dataclass
 class DeleteResourceDefinitionRequest:
-    path_params: DeleteResourceDefinitionPathParams = field(default=None)
-    headers: DeleteResourceDefinitionHeaders = field(default=None)
+    headers: DeleteResourceDefinitionHeaders = field()
+    path_params: DeleteResourceDefinitionPathParams = field()
     
 
 @dataclass
 class DeleteResourceDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_resource_definition_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

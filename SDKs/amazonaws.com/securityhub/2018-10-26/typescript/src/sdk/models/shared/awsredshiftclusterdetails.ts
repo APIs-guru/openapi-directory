@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsRedshiftClusterClusterNode } from "./awsredshiftclusterclusternode";
 import { AwsRedshiftClusterClusterParameterGroup } from "./awsredshiftclusterclusterparametergroup";
 import { AwsRedshiftClusterClusterSecurityGroup } from "./awsredshiftclusterclustersecuritygroup";
@@ -15,137 +14,138 @@ import { AwsRedshiftClusterRestoreStatus } from "./awsredshiftclusterrestorestat
 import { AwsRedshiftClusterVpcSecurityGroup } from "./awsredshiftclustervpcsecuritygroup";
 
 
+
 // AwsRedshiftClusterDetails
 /** 
  * Details about an Amazon Redshift cluster.
 **/
 export class AwsRedshiftClusterDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowVersionUpgrade" })
+  @SpeakeasyMetadata({ data: "json, name=AllowVersionUpgrade" })
   allowVersionUpgrade?: boolean;
 
-  @Metadata({ data: "json, name=AutomatedSnapshotRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=AutomatedSnapshotRetentionPeriod" })
   automatedSnapshotRetentionPeriod?: number;
 
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=ClusterAvailabilityStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterAvailabilityStatus" })
   clusterAvailabilityStatus?: string;
 
-  @Metadata({ data: "json, name=ClusterCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterCreateTime" })
   clusterCreateTime?: string;
 
-  @Metadata({ data: "json, name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" })
   clusterIdentifier?: string;
 
-  @Metadata({ data: "json, name=ClusterNodes", elemType: shared.AwsRedshiftClusterClusterNode })
+  @SpeakeasyMetadata({ data: "json, name=ClusterNodes", elemType: AwsRedshiftClusterClusterNode })
   clusterNodes?: AwsRedshiftClusterClusterNode[];
 
-  @Metadata({ data: "json, name=ClusterParameterGroups", elemType: shared.AwsRedshiftClusterClusterParameterGroup })
+  @SpeakeasyMetadata({ data: "json, name=ClusterParameterGroups", elemType: AwsRedshiftClusterClusterParameterGroup })
   clusterParameterGroups?: AwsRedshiftClusterClusterParameterGroup[];
 
-  @Metadata({ data: "json, name=ClusterPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterPublicKey" })
   clusterPublicKey?: string;
 
-  @Metadata({ data: "json, name=ClusterRevisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterRevisionNumber" })
   clusterRevisionNumber?: string;
 
-  @Metadata({ data: "json, name=ClusterSecurityGroups", elemType: shared.AwsRedshiftClusterClusterSecurityGroup })
+  @SpeakeasyMetadata({ data: "json, name=ClusterSecurityGroups", elemType: AwsRedshiftClusterClusterSecurityGroup })
   clusterSecurityGroups?: AwsRedshiftClusterClusterSecurityGroup[];
 
-  @Metadata({ data: "json, name=ClusterSnapshotCopyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterSnapshotCopyStatus" })
   clusterSnapshotCopyStatus?: AwsRedshiftClusterClusterSnapshotCopyStatus;
 
-  @Metadata({ data: "json, name=ClusterStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterStatus" })
   clusterStatus?: string;
 
-  @Metadata({ data: "json, name=ClusterSubnetGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterSubnetGroupName" })
   clusterSubnetGroupName?: string;
 
-  @Metadata({ data: "json, name=ClusterVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterVersion" })
   clusterVersion?: string;
 
-  @Metadata({ data: "json, name=DBName" })
+  @SpeakeasyMetadata({ data: "json, name=DBName" })
   dbName?: string;
 
-  @Metadata({ data: "json, name=DeferredMaintenanceWindows", elemType: shared.AwsRedshiftClusterDeferredMaintenanceWindow })
+  @SpeakeasyMetadata({ data: "json, name=DeferredMaintenanceWindows", elemType: AwsRedshiftClusterDeferredMaintenanceWindow })
   deferredMaintenanceWindows?: AwsRedshiftClusterDeferredMaintenanceWindow[];
 
-  @Metadata({ data: "json, name=ElasticIpStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ElasticIpStatus" })
   elasticIpStatus?: AwsRedshiftClusterElasticIpStatus;
 
-  @Metadata({ data: "json, name=ElasticResizeNumberOfNodeOptions" })
+  @SpeakeasyMetadata({ data: "json, name=ElasticResizeNumberOfNodeOptions" })
   elasticResizeNumberOfNodeOptions?: string;
 
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: AwsRedshiftClusterEndpoint;
 
-  @Metadata({ data: "json, name=EnhancedVpcRouting" })
+  @SpeakeasyMetadata({ data: "json, name=EnhancedVpcRouting" })
   enhancedVpcRouting?: boolean;
 
-  @Metadata({ data: "json, name=ExpectedNextSnapshotScheduleTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpectedNextSnapshotScheduleTime" })
   expectedNextSnapshotScheduleTime?: string;
 
-  @Metadata({ data: "json, name=ExpectedNextSnapshotScheduleTimeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ExpectedNextSnapshotScheduleTimeStatus" })
   expectedNextSnapshotScheduleTimeStatus?: string;
 
-  @Metadata({ data: "json, name=HsmStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HsmStatus" })
   hsmStatus?: AwsRedshiftClusterHsmStatus;
 
-  @Metadata({ data: "json, name=IamRoles", elemType: shared.AwsRedshiftClusterIamRole })
+  @SpeakeasyMetadata({ data: "json, name=IamRoles", elemType: AwsRedshiftClusterIamRole })
   iamRoles?: AwsRedshiftClusterIamRole[];
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=MaintenanceTrackName" })
+  @SpeakeasyMetadata({ data: "json, name=MaintenanceTrackName" })
   maintenanceTrackName?: string;
 
-  @Metadata({ data: "json, name=ManualSnapshotRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=ManualSnapshotRetentionPeriod" })
   manualSnapshotRetentionPeriod?: number;
 
-  @Metadata({ data: "json, name=MasterUsername" })
+  @SpeakeasyMetadata({ data: "json, name=MasterUsername" })
   masterUsername?: string;
 
-  @Metadata({ data: "json, name=NextMaintenanceWindowStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=NextMaintenanceWindowStartTime" })
   nextMaintenanceWindowStartTime?: string;
 
-  @Metadata({ data: "json, name=NodeType" })
+  @SpeakeasyMetadata({ data: "json, name=NodeType" })
   nodeType?: string;
 
-  @Metadata({ data: "json, name=NumberOfNodes" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfNodes" })
   numberOfNodes?: number;
 
-  @Metadata({ data: "json, name=PendingActions" })
+  @SpeakeasyMetadata({ data: "json, name=PendingActions" })
   pendingActions?: string[];
 
-  @Metadata({ data: "json, name=PendingModifiedValues" })
+  @SpeakeasyMetadata({ data: "json, name=PendingModifiedValues" })
   pendingModifiedValues?: AwsRedshiftClusterPendingModifiedValues;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=PubliclyAccessible" })
+  @SpeakeasyMetadata({ data: "json, name=PubliclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "json, name=ResizeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ResizeInfo" })
   resizeInfo?: AwsRedshiftClusterResizeInfo;
 
-  @Metadata({ data: "json, name=RestoreStatus" })
+  @SpeakeasyMetadata({ data: "json, name=RestoreStatus" })
   restoreStatus?: AwsRedshiftClusterRestoreStatus;
 
-  @Metadata({ data: "json, name=SnapshotScheduleIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotScheduleIdentifier" })
   snapshotScheduleIdentifier?: string;
 
-  @Metadata({ data: "json, name=SnapshotScheduleState" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotScheduleState" })
   snapshotScheduleState?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 
-  @Metadata({ data: "json, name=VpcSecurityGroups", elemType: shared.AwsRedshiftClusterVpcSecurityGroup })
+  @SpeakeasyMetadata({ data: "json, name=VpcSecurityGroups", elemType: AwsRedshiftClusterVpcSecurityGroup })
   vpcSecurityGroups?: AwsRedshiftClusterVpcSecurityGroup[];
 }

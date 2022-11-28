@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1TransitionRouteGroupCoverageCoverage } from "./googleclouddialogflowcxv3beta1transitionroutegroupcoveragecoverage";
+
 
 
 // GoogleCloudDialogflowCxV3beta1TransitionRouteGroupCoverage
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowCxV3beta1TransitionRouteGroupCoverageCoverage } fr
  * Transition route group coverage represents the percentage of all possible transition routes present within any of a parent's test cases. The results are grouped by the transition route group.
 **/
 export class GoogleCloudDialogflowCxV3beta1TransitionRouteGroupCoverage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coverageScore" })
+  @SpeakeasyMetadata({ data: "json, name=coverageScore" })
   coverageScore?: number;
 
-  @Metadata({ data: "json, name=coverages", elemType: shared.GoogleCloudDialogflowCxV3beta1TransitionRouteGroupCoverageCoverage })
+  @SpeakeasyMetadata({ data: "json, name=coverages", elemType: GoogleCloudDialogflowCxV3beta1TransitionRouteGroupCoverageCoverage })
   coverages?: GoogleCloudDialogflowCxV3beta1TransitionRouteGroupCoverageCoverage[];
 }

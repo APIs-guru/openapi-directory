@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArti
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArti
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesRequest:
-    path_params: DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesQueryParams = field(default=None)
+    path_params: DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesPathParams = field()
+    query_params: DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesQueryParams = field()
+    security: DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesSecurity = field()
     request: Optional[shared.GoogleCloudDialogflowV2SuggestArticlesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesSecurity = field(default=None)
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_v2_suggest_articles_response: Optional[shared.GoogleCloudDialogflowV2SuggestArticlesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

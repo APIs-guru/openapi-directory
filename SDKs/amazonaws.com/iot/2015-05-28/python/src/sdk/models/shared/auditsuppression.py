@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import resourceidentifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AuditSuppression:
-    check_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkName' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    expiration_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expirationDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    resource_identifier: resourceidentifier.ResourceIdentifier = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceIdentifier' }})
-    suppress_indefinitely: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suppressIndefinitely' }})
+    r"""AuditSuppression
+     Filters out specific findings of a Device Defender audit. 
+    """
+    
+    check_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('checkName') }})
+    resource_identifier: ResourceIdentifier = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceIdentifier') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    expiration_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expirationDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    suppress_indefinitely: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suppressIndefinitely') }})
     

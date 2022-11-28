@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import abortcriteria
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AbortConfig:
-    criteria_list: List[abortcriteria.AbortCriteria] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'criteriaList' }})
+    r"""AbortConfig
+    The criteria that determine when and how a job abort takes place.
+    """
+    
+    criteria_list: List[AbortCriteria] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('criteriaList') }})
     

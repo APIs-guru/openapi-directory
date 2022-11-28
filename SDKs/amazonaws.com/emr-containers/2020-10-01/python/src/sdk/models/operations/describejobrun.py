@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeJobRunPathParams:
-    job_run_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobRunId', 'style': 'simple', 'explode': False }})
-    virtual_cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
+    job_run_id: str = field(metadata={'path_param': { 'field_name': 'jobRunId', 'style': 'simple', 'explode': False }})
+    virtual_cluster_id: str = field(metadata={'path_param': { 'field_name': 'virtualClusterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class DescribeJobRunHeaders:
 
 @dataclass
 class DescribeJobRunRequest:
-    path_params: DescribeJobRunPathParams = field(default=None)
-    headers: DescribeJobRunHeaders = field(default=None)
+    headers: DescribeJobRunHeaders = field()
+    path_params: DescribeJobRunPathParams = field()
     
 
 @dataclass
 class DescribeJobRunResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_job_run_response: Optional[shared.DescribeJobRunResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

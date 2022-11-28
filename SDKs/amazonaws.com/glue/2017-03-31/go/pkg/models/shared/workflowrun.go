@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkflowRun
+// A workflow run is an execution of a workflow providing all the runtime information.
 type WorkflowRun struct {
 	CompletedOn                 *time.Time                   `json:"CompletedOn,omitempty"`
 	ErrorMessage                *string                      `json:"ErrorMessage,omitempty"`

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsResourcefilesDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
-    type: str = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    type: str = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ApigeeOrganizationsEnvironmentsResourcefilesDeleteQueryParams:
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsResourcefilesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsResourcefilesDeleteRequest:
-    path_params: ApigeeOrganizationsEnvironmentsResourcefilesDeletePathParams = field(default=None)
-    query_params: ApigeeOrganizationsEnvironmentsResourcefilesDeleteQueryParams = field(default=None)
-    security: ApigeeOrganizationsEnvironmentsResourcefilesDeleteSecurity = field(default=None)
+    path_params: ApigeeOrganizationsEnvironmentsResourcefilesDeletePathParams = field()
+    query_params: ApigeeOrganizationsEnvironmentsResourcefilesDeleteQueryParams = field()
+    security: ApigeeOrganizationsEnvironmentsResourcefilesDeleteSecurity = field()
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsResourcefilesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_resource_file: Optional[shared.GoogleCloudApigeeV1ResourceFile] = field(default=None)
-    status_code: int = field(default=None)
     

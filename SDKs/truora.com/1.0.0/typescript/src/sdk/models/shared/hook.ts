@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum HookEventTypeEnum {
-    All = "all"
-,    Check = "check"
+    All = "all",
+    Check = "check"
 }
 
 export enum HookStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
@@ -16,21 +17,21 @@ export enum HookStatusEnum {
  * Represents a hook configuration
 **/
 export class Hook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions" })
+  @SpeakeasyMetadata({ data: "json, name=actions" })
   actions?: string[];
 
-  @Metadata({ data: "json, name=event_type" })
+  @SpeakeasyMetadata({ data: "json, name=event_type" })
   eventType?: HookEventTypeEnum;
 
-  @Metadata({ data: "json, name=signing_key" })
+  @SpeakeasyMetadata({ data: "json, name=signing_key" })
   signingKey?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: HookStatusEnum;
 
-  @Metadata({ data: "json, name=subscriber_type" })
+  @SpeakeasyMetadata({ data: "json, name=subscriber_type" })
   subscriberType?: string;
 
-  @Metadata({ data: "json, name=subscriber_url" })
+  @SpeakeasyMetadata({ data: "json, name=subscriber_url" })
   subscriberUrl?: string;
 }

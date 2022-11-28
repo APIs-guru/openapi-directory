@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Identity } from "./identity";
 
 
+
 export class GetConnectionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectedAt" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectedAt" })
   connectedAt?: Date;
 
-  @Metadata({ data: "json, name=Identity" })
+  @SpeakeasyMetadata({ data: "json, name=Identity" })
   identity?: Identity;
 
-  @Metadata({ data: "json, name=LastActiveAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastActiveAt" })
   lastActiveAt?: Date;
 }

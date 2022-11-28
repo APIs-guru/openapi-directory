@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,21 +33,21 @@ class ClouddeployProjectsLocationsTargetsPatchQueryParams:
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsPatchRequest:
-    path_params: ClouddeployProjectsLocationsTargetsPatchPathParams = field(default=None)
-    query_params: ClouddeployProjectsLocationsTargetsPatchQueryParams = field(default=None)
-    request: Optional[shared.Target] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ClouddeployProjectsLocationsTargetsPatchSecurity = field(default=None)
+    path_params: ClouddeployProjectsLocationsTargetsPatchPathParams = field()
+    query_params: ClouddeployProjectsLocationsTargetsPatchQueryParams = field()
+    security: ClouddeployProjectsLocationsTargetsPatchSecurity = field()
+    request: Optional[shared.TargetInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

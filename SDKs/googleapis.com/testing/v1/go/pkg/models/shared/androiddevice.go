@@ -1,5 +1,7 @@
 package shared
 
+// AndroidDevice
+// A single Android device.
 type AndroidDevice struct {
 	AndroidModelID   *string `json:"androidModelId,omitempty"`
 	AndroidVersionID *string `json:"androidVersionId,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductPlanTypeEnum } from "./provisionedproductplantypeenum";
 import { UpdateProvisioningParameter } from "./updateprovisioningparameter";
 import { ProvisionedProductPlanStatusEnum } from "./provisionedproductplanstatusenum";

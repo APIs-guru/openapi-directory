@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AsyncInferenceConfig } from "./asyncinferenceconfig";
 import { DataCaptureConfig } from "./datacaptureconfig";
 import { ProductionVariant } from "./productionvariant";
 import { Tag } from "./tag";
 
 
+
 export class CreateEndpointConfigInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AsyncInferenceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=AsyncInferenceConfig" })
   asyncInferenceConfig?: AsyncInferenceConfig;
 
-  @Metadata({ data: "json, name=DataCaptureConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DataCaptureConfig" })
   dataCaptureConfig?: DataCaptureConfig;
 
-  @Metadata({ data: "json, name=EndpointConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigName" })
   endpointConfigName: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=ProductionVariants", elemType: shared.ProductionVariant })
+  @SpeakeasyMetadata({ data: "json, name=ProductionVariants", elemType: ProductionVariant })
   productionVariants: ProductionVariant[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

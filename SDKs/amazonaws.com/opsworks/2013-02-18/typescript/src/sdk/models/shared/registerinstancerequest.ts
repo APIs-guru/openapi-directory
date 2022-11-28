@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceIdentity } from "./instanceidentity";
 
 
+
 export class RegisterInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=InstanceIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceIdentity" })
   instanceIdentity?: InstanceIdentity;
 
-  @Metadata({ data: "json, name=PrivateIp" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateIp" })
   privateIp?: string;
 
-  @Metadata({ data: "json, name=PublicIp" })
+  @SpeakeasyMetadata({ data: "json, name=PublicIp" })
   publicIp?: string;
 
-  @Metadata({ data: "json, name=RsaPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=RsaPublicKey" })
   rsaPublicKey?: string;
 
-  @Metadata({ data: "json, name=RsaPublicKeyFingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=RsaPublicKeyFingerprint" })
   rsaPublicKeyFingerprint?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId: string;
 }

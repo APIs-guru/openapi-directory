@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionStatusEnum } from "./subscriptionstatusenum";
+
 
 
 // Topic
@@ -7,15 +8,15 @@ import { SubscriptionStatusEnum } from "./subscriptionstatusenum";
  * An interest group, theme, or label within a list. Lists can have multiple topics.
 **/
 export class Topic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultSubscriptionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSubscriptionStatus" })
   defaultSubscriptionStatus: SubscriptionStatusEnum;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName: string;
 
-  @Metadata({ data: "json, name=TopicName" })
+  @SpeakeasyMetadata({ data: "json, name=TopicName" })
   topicName: string;
 }

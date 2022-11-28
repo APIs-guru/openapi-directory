@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestTypeEnum } from "./testtypeenum";
+
 
 
 // ScheduleRunTest
@@ -7,18 +8,18 @@ import { TestTypeEnum } from "./testtypeenum";
  * Represents test settings. This data structure is passed in as the test parameter to ScheduleRun. For an example of the JSON request syntax, see <a>ScheduleRun</a>.
 **/
 export class ScheduleRunTest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=testPackageArn" })
+  @SpeakeasyMetadata({ data: "json, name=testPackageArn" })
   testPackageArn?: string;
 
-  @Metadata({ data: "json, name=testSpecArn" })
+  @SpeakeasyMetadata({ data: "json, name=testSpecArn" })
   testSpecArn?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: TestTypeEnum;
 }

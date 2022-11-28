@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2FieldTextOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for the Text field type.
 **/
 export class GoogleAppsDriveLabelsV2FieldTextOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxLength" })
   maxLength?: number;
 
-  @Metadata({ data: "json, name=minLength" })
+  @SpeakeasyMetadata({ data: "json, name=minLength" })
   minLength?: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // ManagedResourceSummary
@@ -7,9 +8,9 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Summary information about a managed resource.
 **/
 export class ManagedResourceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationCount" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationCount" })
   associationCount?: number;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 }

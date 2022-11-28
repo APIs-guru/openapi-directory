@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MetricFilterOperatorEnum {
-    OperatorUnspecified = "OPERATOR_UNSPECIFIED"
-,    Equal = "EQUAL"
-,    LessThan = "LESS_THAN"
-,    GreaterThan = "GREATER_THAN"
-,    IsMissing = "IS_MISSING"
+    OperatorUnspecified = "OPERATOR_UNSPECIFIED",
+    Equal = "EQUAL",
+    LessThan = "LESS_THAN",
+    GreaterThan = "GREATER_THAN",
+    IsMissing = "IS_MISSING"
 }
 
 
@@ -14,15 +15,15 @@ export enum MetricFilterOperatorEnum {
  * MetricFilter specifies the filter on a metric.
 **/
 export class MetricFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparisonValue" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonValue" })
   comparisonValue?: string;
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=not" })
+  @SpeakeasyMetadata({ data: "json, name=not" })
   not?: boolean;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: MetricFilterOperatorEnum;
 }

@@ -1,5 +1,6 @@
 package shared
 
 type SchemeAPIKey struct {
-	Authorization string `security:"name=Authorization"`
+	Password string `security:"name=password"`
+	Username string `security:"name=username"`
 }

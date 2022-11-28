@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesGetPathParams:
-    first_and_third_party_audience_id: str = field(default=None, metadata={'path_param': { 'field_name': 'firstAndThirdPartyAudienceId', 'style': 'simple', 'explode': False }})
+    first_and_third_party_audience_id: str = field(metadata={'path_param': { 'field_name': 'firstAndThirdPartyAudienceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DisplayvideoFirstAndThirdPartyAudiencesGetQueryParams:
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesGetRequest:
-    path_params: DisplayvideoFirstAndThirdPartyAudiencesGetPathParams = field(default=None)
-    query_params: DisplayvideoFirstAndThirdPartyAudiencesGetQueryParams = field(default=None)
-    security: DisplayvideoFirstAndThirdPartyAudiencesGetSecurity = field(default=None)
+    path_params: DisplayvideoFirstAndThirdPartyAudiencesGetPathParams = field()
+    query_params: DisplayvideoFirstAndThirdPartyAudiencesGetQueryParams = field()
+    security: DisplayvideoFirstAndThirdPartyAudiencesGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     first_and_third_party_audience: Optional[shared.FirstAndThirdPartyAudience] = field(default=None)
-    status_code: int = field(default=None)
     

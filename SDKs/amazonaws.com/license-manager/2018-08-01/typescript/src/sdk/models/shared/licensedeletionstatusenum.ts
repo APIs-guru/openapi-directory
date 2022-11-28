@@ -1,6 +1,7 @@
 
 
+
 export enum LicenseDeletionStatusEnum {
-    PendingDelete = "PENDING_DELETE"
-,    Deleted = "DELETED"
+    PendingDelete = "PENDING_DELETE",
+    Deleted = "DELETED"
 }

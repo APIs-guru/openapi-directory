@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateValidationRecord } from "./certificatevalidationrecord";
 import { CustomDomainAssociationStatusEnum } from "./customdomainassociationstatusenum";
+
 
 
 // CustomDomain
@@ -9,15 +9,15 @@ import { CustomDomainAssociationStatusEnum } from "./customdomainassociationstat
  * Describes a custom domain that's associated with an AWS App Runner service.
 **/
 export class CustomDomain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateValidationRecords", elemType: shared.CertificateValidationRecord })
+  @SpeakeasyMetadata({ data: "json, name=CertificateValidationRecords", elemType: CertificateValidationRecord })
   certificateValidationRecords?: CertificateValidationRecord[];
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=EnableWWWSubdomain" })
+  @SpeakeasyMetadata({ data: "json, name=EnableWWWSubdomain" })
   enableWwwSubdomain: boolean;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: CustomDomainAssociationStatusEnum;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetFacilitiesByLocationTypeEnum(str, Enum):
@@ -27,21 +28,21 @@ class GetFacilitiesByLocationQueryParams:
 
 @dataclass
 class GetFacilitiesByLocationSecurity:
-    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    apikey: shared.SchemeApikey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetFacilitiesByLocationRequest:
-    query_params: GetFacilitiesByLocationQueryParams = field(default=None)
-    security: GetFacilitiesByLocationSecurity = field(default=None)
+    query_params: GetFacilitiesByLocationQueryParams = field()
+    security: GetFacilitiesByLocationSecurity = field()
     
 
 @dataclass
 class GetFacilitiesByLocationResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     facilities_response: Optional[shared.FacilitiesResponse] = field(default=None)
     generic_error: Optional[shared.GenericError] = field(default=None)
     geo_facilities_response: Optional[shared.GeoFacilitiesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

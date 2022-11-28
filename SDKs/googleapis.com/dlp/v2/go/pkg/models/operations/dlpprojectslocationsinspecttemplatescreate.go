@@ -30,7 +30,7 @@ type DlpProjectsLocationsInspectTemplatesCreateSecurity struct {
 type DlpProjectsLocationsInspectTemplatesCreateRequest struct {
 	PathParams  DlpProjectsLocationsInspectTemplatesCreatePathParams
 	QueryParams DlpProjectsLocationsInspectTemplatesCreateQueryParams
-	Request     *shared.GooglePrivacyDlpV2CreateInspectTemplateRequest `request:"mediaType=application/json"`
+	Request     *shared.GooglePrivacyDlpV2CreateInspectTemplateRequestInput `request:"mediaType=application/json"`
 	Security    DlpProjectsLocationsInspectTemplatesCreateSecurity
 }
 

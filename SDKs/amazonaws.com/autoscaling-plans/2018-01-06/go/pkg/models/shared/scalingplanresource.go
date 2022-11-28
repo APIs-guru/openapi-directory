@@ -1,5 +1,7 @@
 package shared
 
+// ScalingPlanResource
+// Represents a scalable resource.
 type ScalingPlanResource struct {
 	ResourceID           string                `json:"ResourceId"`
 	ScalableDimension    ScalableDimensionEnum `json:"ScalableDimension"`

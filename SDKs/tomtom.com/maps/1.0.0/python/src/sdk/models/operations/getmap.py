@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetMapPathParams:
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 class GetMapFormatEnum(str, Enum):
     IMAGE_JPEG = "image/jpeg"
@@ -32,26 +33,26 @@ class GetMapVersionEnum(str, Enum):
 
 @dataclass
 class GetMapQueryParams:
-    bbox: str = field(default=None, metadata={'query_param': { 'field_name': 'bbox', 'style': 'form', 'explode': True }})
-    format: GetMapFormatEnum = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    height: int = field(default=None, metadata={'query_param': { 'field_name': 'height', 'style': 'form', 'explode': True }})
-    layers: GetMapLayersEnum = field(default=None, metadata={'query_param': { 'field_name': 'layers', 'style': 'form', 'explode': True }})
-    request: GetMapRequestEnum = field(default=None, metadata={'query_param': { 'field_name': 'request', 'style': 'form', 'explode': True }})
+    bbox: str = field(metadata={'query_param': { 'field_name': 'bbox', 'style': 'form', 'explode': True }})
+    format: GetMapFormatEnum = field(metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
+    height: int = field(metadata={'query_param': { 'field_name': 'height', 'style': 'form', 'explode': True }})
+    layers: GetMapLayersEnum = field(metadata={'query_param': { 'field_name': 'layers', 'style': 'form', 'explode': True }})
+    request: GetMapRequestEnum = field(metadata={'query_param': { 'field_name': 'request', 'style': 'form', 'explode': True }})
+    srs: GetMapSrsEnum = field(metadata={'query_param': { 'field_name': 'srs', 'style': 'form', 'explode': True }})
+    version: GetMapVersionEnum = field(metadata={'query_param': { 'field_name': 'version', 'style': 'form', 'explode': True }})
+    width: int = field(metadata={'query_param': { 'field_name': 'width', 'style': 'form', 'explode': True }})
     service: Optional[GetMapServiceEnum] = field(default=None, metadata={'query_param': { 'field_name': 'service', 'style': 'form', 'explode': True }})
-    srs: GetMapSrsEnum = field(default=None, metadata={'query_param': { 'field_name': 'srs', 'style': 'form', 'explode': True }})
     styles: Optional[GetMapStylesEnum] = field(default=None, metadata={'query_param': { 'field_name': 'styles', 'style': 'form', 'explode': True }})
-    version: GetMapVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'version', 'style': 'form', 'explode': True }})
-    width: int = field(default=None, metadata={'query_param': { 'field_name': 'width', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetMapRequest:
-    path_params: GetMapPathParams = field(default=None)
-    query_params: GetMapQueryParams = field(default=None)
+    path_params: GetMapPathParams = field()
+    query_params: GetMapQueryParams = field()
     
 
 @dataclass
 class GetMapResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

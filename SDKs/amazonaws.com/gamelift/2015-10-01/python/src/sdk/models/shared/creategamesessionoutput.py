@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import gamesession
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateGameSessionOutput:
-    game_session: Optional[gamesession.GameSession] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GameSession' }})
+    r"""CreateGameSessionOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    game_session: Optional[GameSession] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GameSession') }})
     

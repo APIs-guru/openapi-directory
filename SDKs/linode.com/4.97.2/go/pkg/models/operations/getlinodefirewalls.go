@@ -13,23 +13,9 @@ type GetLinodeFirewallsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetLinodeFirewallsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLinodeFirewallsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLinodeFirewallsSecurity struct {
-	Option1 *GetLinodeFirewallsSecurityOption1 `security:"option"`
-	Option2 *GetLinodeFirewallsSecurityOption2 `security:"option"`
-}
-
-type GetLinodeFirewallsRequest struct {
-	PathParams  GetLinodeFirewallsPathParams
-	QueryParams GetLinodeFirewallsQueryParams
-	Security    GetLinodeFirewallsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLinodeFirewalls200ApplicationJSON struct {
@@ -41,6 +27,12 @@ type GetLinodeFirewalls200ApplicationJSON struct {
 
 type GetLinodeFirewallsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLinodeFirewallsRequest struct {
+	PathParams  GetLinodeFirewallsPathParams
+	QueryParams GetLinodeFirewallsQueryParams
+	Security    GetLinodeFirewallsSecurity
 }
 
 type GetLinodeFirewallsResponse struct {

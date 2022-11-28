@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class BigqueryconnectionProjectsLocationsConnectionsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -32,7 +32,7 @@ export declare class BigqueryconnectionProjectsLocationsConnectionsCreateSecurit
 export declare class BigqueryconnectionProjectsLocationsConnectionsCreateRequest extends SpeakeasyBase {
     pathParams: BigqueryconnectionProjectsLocationsConnectionsCreatePathParams;
     queryParams: BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams;
-    request?: shared.Connection;
+    request?: shared.ConnectionInput;
     security: BigqueryconnectionProjectsLocationsConnectionsCreateSecurity;
 }
 export declare class BigqueryconnectionProjectsLocationsConnectionsCreateResponse extends SpeakeasyBase {

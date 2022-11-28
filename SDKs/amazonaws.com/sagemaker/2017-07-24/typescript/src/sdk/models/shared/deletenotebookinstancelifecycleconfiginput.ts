@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteNotebookInstanceLifecycleConfigInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NotebookInstanceLifecycleConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceLifecycleConfigName" })
   notebookInstanceLifecycleConfigName: string;
 }

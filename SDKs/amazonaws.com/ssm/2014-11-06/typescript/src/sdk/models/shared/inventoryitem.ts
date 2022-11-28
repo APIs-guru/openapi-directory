@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InventoryItem
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information collected from managed instances based on your inventory policy document
 **/
 export class InventoryItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaptureTime" })
+  @SpeakeasyMetadata({ data: "json, name=CaptureTime" })
   captureTime: string;
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content?: Map<string, string>[];
 
-  @Metadata({ data: "json, name=ContentHash" })
+  @SpeakeasyMetadata({ data: "json, name=ContentHash" })
   contentHash?: string;
 
-  @Metadata({ data: "json, name=Context" })
+  @SpeakeasyMetadata({ data: "json, name=Context" })
   context?: Map<string, string>;
 
-  @Metadata({ data: "json, name=SchemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersion" })
   schemaVersion: string;
 
-  @Metadata({ data: "json, name=TypeName" })
+  @SpeakeasyMetadata({ data: "json, name=TypeName" })
   typeName: string;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServerReplicationConfiguration } from "./serverreplicationconfiguration";
 // ServerGroupReplicationConfiguration
 /**
  * Replication configuration for a server group.
@@ -34,11 +34,11 @@ var ServerGroupReplicationConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=serverGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=serverGroupId" }),
         __metadata("design:type", String)
     ], ServerGroupReplicationConfiguration.prototype, "serverGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverReplicationConfigurations", elemType: shared.ServerReplicationConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=serverReplicationConfigurations", elemType: ServerReplicationConfiguration }),
         __metadata("design:type", Array)
     ], ServerGroupReplicationConfiguration.prototype, "serverReplicationConfigurations", void 0);
     return ServerGroupReplicationConfiguration;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Subnet
 /**
  * Represents the subnet associated with a DAX cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with DAX.
@@ -33,11 +33,11 @@ var Subnet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SubnetAvailabilityZone" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetAvailabilityZone" }),
         __metadata("design:type", String)
     ], Subnet.prototype, "subnetAvailabilityZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIdentifier" }),
         __metadata("design:type", String)
     ], Subnet.prototype, "subnetIdentifier", void 0);
     return Subnet;

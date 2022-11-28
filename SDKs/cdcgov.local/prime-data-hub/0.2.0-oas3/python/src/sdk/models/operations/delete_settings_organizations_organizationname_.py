@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class DeleteSettingsOrganizationsOrganizationNamePathParams:
-    organization_name: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
+    organization_name: str = field(metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteSettingsOrganizationsOrganizationNameSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteSettingsOrganizationsOrganizationNameRequest:
-    path_params: DeleteSettingsOrganizationsOrganizationNamePathParams = field(default=None)
-    security: DeleteSettingsOrganizationsOrganizationNameSecurity = field(default=None)
+    path_params: DeleteSettingsOrganizationsOrganizationNamePathParams = field()
+    security: DeleteSettingsOrganizationsOrganizationNameSecurity = field()
     
 
 @dataclass
 class DeleteSettingsOrganizationsOrganizationNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     organization: Optional[shared.Organization] = field(default=None)
-    status_code: int = field(default=None)
     

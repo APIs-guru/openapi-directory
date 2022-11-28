@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FirebasedatabaseProjectsLocationsInstancesListPathParams = /** @class */ (function (_super) {
     __extends(FirebasedatabaseProjectsLocationsInstancesListPathParams, _super);
@@ -30,7 +30,7 @@ var FirebasedatabaseProjectsLocationsInstancesListPathParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListPathParams.prototype, "parent", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListPathParams;
@@ -42,59 +42,59 @@ var FirebasedatabaseProjectsLocationsInstancesListQueryParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=showDeleted" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showDeleted" }),
         __metadata("design:type", Boolean)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "showDeleted", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListQueryParams.prototype, "uploadProtocol", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListQueryParams;
@@ -106,11 +106,11 @@ var FirebasedatabaseProjectsLocationsInstancesListSecurityOption1 = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption1.prototype, "oauth2c", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListSecurityOption1;
@@ -122,11 +122,11 @@ var FirebasedatabaseProjectsLocationsInstancesListSecurityOption2 = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption2.prototype, "oauth2c", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListSecurityOption2;
@@ -138,11 +138,11 @@ var FirebasedatabaseProjectsLocationsInstancesListSecurityOption3 = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption3.prototype, "oauth2c", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListSecurityOption3;
@@ -154,11 +154,11 @@ var FirebasedatabaseProjectsLocationsInstancesListSecurityOption4 = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption4.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurityOption4.prototype, "oauth2c", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListSecurityOption4;
@@ -170,19 +170,19 @@ var FirebasedatabaseProjectsLocationsInstancesListSecurity = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirebasedatabaseProjectsLocationsInstancesListSecurityOption1)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirebasedatabaseProjectsLocationsInstancesListSecurityOption2)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirebasedatabaseProjectsLocationsInstancesListSecurityOption3)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurity.prototype, "option3", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirebasedatabaseProjectsLocationsInstancesListSecurityOption4)
     ], FirebasedatabaseProjectsLocationsInstancesListSecurity.prototype, "option4", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListSecurity;
@@ -194,15 +194,15 @@ var FirebasedatabaseProjectsLocationsInstancesListRequest = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirebasedatabaseProjectsLocationsInstancesListPathParams)
     ], FirebasedatabaseProjectsLocationsInstancesListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirebasedatabaseProjectsLocationsInstancesListQueryParams)
     ], FirebasedatabaseProjectsLocationsInstancesListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirebasedatabaseProjectsLocationsInstancesListSecurity)
     ], FirebasedatabaseProjectsLocationsInstancesListRequest.prototype, "security", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListRequest;
@@ -214,15 +214,15 @@ var FirebasedatabaseProjectsLocationsInstancesListResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FirebasedatabaseProjectsLocationsInstancesListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListDatabaseInstancesResponse)
     ], FirebasedatabaseProjectsLocationsInstancesListResponse.prototype, "listDatabaseInstancesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FirebasedatabaseProjectsLocationsInstancesListResponse.prototype, "statusCode", void 0);
     return FirebasedatabaseProjectsLocationsInstancesListResponse;

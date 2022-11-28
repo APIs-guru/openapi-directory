@@ -30,6 +30,8 @@ const (
 	CdnSettingsResolutionEnumVariable                        CdnSettingsResolutionEnum = "variable"
 )
 
+// CdnSettings
+// Brief description of the live stream cdn settings.
 type CdnSettings struct {
 	Format        *string                       `json:"format,omitempty"`
 	FrameRate     *CdnSettingsFrameRateEnum     `json:"frameRate,omitempty"`

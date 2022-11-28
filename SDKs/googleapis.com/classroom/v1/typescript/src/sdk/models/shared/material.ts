@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SharedDriveFile } from "./shareddrivefile";
 import { Form } from "./form";
 import { Link } from "./link";
 import { YouTubeVideo } from "./youtubevideo";
+
 
 
 // Material
@@ -10,15 +11,15 @@ import { YouTubeVideo } from "./youtubevideo";
  * Material attached to course work. When creating attachments, setting the `form` field is not supported.
 **/
 export class Material extends SpeakeasyBase {
-  @Metadata({ data: "json, name=driveFile" })
+  @SpeakeasyMetadata({ data: "json, name=driveFile" })
   driveFile?: SharedDriveFile;
 
-  @Metadata({ data: "json, name=form" })
+  @SpeakeasyMetadata({ data: "json, name=form" })
   form?: Form;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: Link;
 
-  @Metadata({ data: "json, name=youtubeVideo" })
+  @SpeakeasyMetadata({ data: "json, name=youtubeVideo" })
   youtubeVideo?: YouTubeVideo;
 }

@@ -1,0 +1,38 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { OrganizationSimple } from "./organizationsimple";
+export declare class OrgMembershipPermissions extends SpeakeasyBase {
+    canCreateRepository: boolean;
+}
+export declare class OrgMembershipSimpleUser extends SpeakeasyBase {
+    avatarUrl: string;
+    eventsUrl: string;
+    followersUrl: string;
+    followingUrl: string;
+    gistsUrl: string;
+    gravatarId: string;
+    htmlUrl: string;
+    id: number;
+    login: string;
+    nodeId: string;
+    organizationsUrl: string;
+    receivedEventsUrl: string;
+    reposUrl: string;
+    siteAdmin: boolean;
+    starredAt?: string;
+    starredUrl: string;
+    subscriptionsUrl: string;
+    type: string;
+    url: string;
+}
+/**
+ * Org Membership
+**/
+export declare class OrgMembership extends SpeakeasyBase {
+    organization: OrganizationSimple;
+    organizationUrl: string;
+    permissions?: OrgMembershipPermissions;
+    role: string;
+    state: string;
+    url: string;
+    user: OrgMembershipSimpleUser;
+}

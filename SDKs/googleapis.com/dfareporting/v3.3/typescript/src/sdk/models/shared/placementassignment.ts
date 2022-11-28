@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
+
 
 
 // PlacementAssignment
@@ -7,15 +8,15 @@ import { DimensionValue } from "./dimensionvalue";
  * Placement Assignment.
 **/
 export class PlacementAssignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=placementId" })
+  @SpeakeasyMetadata({ data: "json, name=placementId" })
   placementId?: string;
 
-  @Metadata({ data: "json, name=placementIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=placementIdDimensionValue" })
   placementIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=sslRequired" })
+  @SpeakeasyMetadata({ data: "json, name=sslRequired" })
   sslRequired?: boolean;
 }

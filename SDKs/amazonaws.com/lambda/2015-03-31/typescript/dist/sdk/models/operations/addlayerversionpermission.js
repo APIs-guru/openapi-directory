@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddLayerVersionPermissionPathParams = /** @class */ (function (_super) {
     __extends(AddLayerVersionPermissionPathParams, _super);
@@ -30,11 +30,11 @@ var AddLayerVersionPermissionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=LayerName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LayerName" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionPathParams.prototype, "layerName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=VersionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=VersionNumber" }),
         __metadata("design:type", Number)
     ], AddLayerVersionPermissionPathParams.prototype, "versionNumber", void 0);
     return AddLayerVersionPermissionPathParams;
@@ -46,7 +46,7 @@ var AddLayerVersionPermissionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RevisionId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RevisionId" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionQueryParams.prototype, "revisionId", void 0);
     return AddLayerVersionPermissionQueryParams;
@@ -58,31 +58,31 @@ var AddLayerVersionPermissionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return AddLayerVersionPermissionHeaders;
@@ -94,19 +94,19 @@ var AddLayerVersionPermissionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionRequestBody.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationId" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionRequestBody.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Principal" }),
+        SpeakeasyMetadata({ data: "json, name=Principal" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionRequestBody.prototype, "principal", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatementId" }),
+        SpeakeasyMetadata({ data: "json, name=StatementId" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionRequestBody.prototype, "statementId", void 0);
     return AddLayerVersionPermissionRequestBody;
@@ -118,19 +118,19 @@ var AddLayerVersionPermissionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddLayerVersionPermissionPathParams)
     ], AddLayerVersionPermissionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddLayerVersionPermissionQueryParams)
     ], AddLayerVersionPermissionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddLayerVersionPermissionHeaders)
     ], AddLayerVersionPermissionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", AddLayerVersionPermissionRequestBody)
     ], AddLayerVersionPermissionRequest.prototype, "request", void 0);
     return AddLayerVersionPermissionRequest;
@@ -142,43 +142,43 @@ var AddLayerVersionPermissionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddLayerVersionPermissionResponse)
     ], AddLayerVersionPermissionResponse.prototype, "addLayerVersionPermissionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddLayerVersionPermissionResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddLayerVersionPermissionResponse.prototype, "policyLengthExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddLayerVersionPermissionResponse.prototype, "preconditionFailedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddLayerVersionPermissionResponse.prototype, "resourceConflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddLayerVersionPermissionResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddLayerVersionPermissionResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddLayerVersionPermissionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddLayerVersionPermissionResponse.prototype, "tooManyRequestsException", void 0);
     return AddLayerVersionPermissionResponse;

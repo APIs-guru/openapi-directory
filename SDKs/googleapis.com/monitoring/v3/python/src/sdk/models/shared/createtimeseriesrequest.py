@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import timeseries
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateTimeSeriesRequest:
-    time_series: Optional[List[timeseries.TimeSeries]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeSeries' }})
+    r"""CreateTimeSeriesRequest
+    The CreateTimeSeries request.
+    """
+    
+    time_series: Optional[List[TimeSeries]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeSeries') }})
     

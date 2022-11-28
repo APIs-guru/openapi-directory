@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlayerAchievement } from "./playerachievement";
+
 
 
 // PlayerAchievementListResponse
@@ -8,12 +8,12 @@ import { PlayerAchievement } from "./playerachievement";
  * A list of achievement objects.
 **/
 export class PlayerAchievementListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.PlayerAchievement })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PlayerAchievement })
   items?: PlayerAchievement[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

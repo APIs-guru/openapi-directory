@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class VisionImagesAsyncBatchAnnotateQueryParams:
 
 @dataclass
 class VisionImagesAsyncBatchAnnotateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VisionImagesAsyncBatchAnnotateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class VisionImagesAsyncBatchAnnotateSecurity:
 
 @dataclass
 class VisionImagesAsyncBatchAnnotateRequest:
-    query_params: VisionImagesAsyncBatchAnnotateQueryParams = field(default=None)
+    query_params: VisionImagesAsyncBatchAnnotateQueryParams = field()
+    security: VisionImagesAsyncBatchAnnotateSecurity = field()
     request: Optional[shared.GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VisionImagesAsyncBatchAnnotateSecurity = field(default=None)
     
 
 @dataclass
 class VisionImagesAsyncBatchAnnotateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectedApplication } from "./connectedapplication";
 /**
  * Describes the connected application for a particular end user.

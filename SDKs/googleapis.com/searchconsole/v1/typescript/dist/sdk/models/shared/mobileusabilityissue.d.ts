@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum MobileUsabilityIssueIssueTypeEnum {
     MobileUsabilityIssueTypeUnspecified = "MOBILE_USABILITY_ISSUE_TYPE_UNSPECIFIED",
     UsesIncompatiblePlugins = "USES_INCOMPATIBLE_PLUGINS",

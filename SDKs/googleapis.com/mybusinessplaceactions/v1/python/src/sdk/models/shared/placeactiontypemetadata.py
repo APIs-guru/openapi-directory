@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PlaceActionTypeMetadataPlaceActionTypeEnum(str, Enum):
     PLACE_ACTION_TYPE_UNSPECIFIED = "PLACE_ACTION_TYPE_UNSPECIFIED"
@@ -16,6 +18,10 @@ class PlaceActionTypeMetadataPlaceActionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PlaceActionTypeMetadata:
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    place_action_type: Optional[PlaceActionTypeMetadataPlaceActionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placeActionType' }})
+    r"""PlaceActionTypeMetadata
+    Metadata for supported place action types.
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    place_action_type: Optional[PlaceActionTypeMetadataPlaceActionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('placeActionType') }})
     

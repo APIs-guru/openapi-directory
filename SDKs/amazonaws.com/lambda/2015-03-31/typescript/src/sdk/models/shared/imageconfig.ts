@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>. 
 **/
 export class ImageConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Command" })
+  @SpeakeasyMetadata({ data: "json, name=Command" })
   command?: string[];
 
-  @Metadata({ data: "json, name=EntryPoint" })
+  @SpeakeasyMetadata({ data: "json, name=EntryPoint" })
   entryPoint?: string[];
 
-  @Metadata({ data: "json, name=WorkingDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=WorkingDirectory" })
   workingDirectory?: string;
 }

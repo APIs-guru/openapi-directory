@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReportFailure } from "./reportfailure";
 export declare enum ReportStatusFormatEnum {
     Csv = "CSV",

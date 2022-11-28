@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublisherConnection } from "./publisherconnection";
+
 
 
 // BatchRejectPublisherConnectionsResponse
@@ -8,6 +8,6 @@ import { PublisherConnection } from "./publisherconnection";
  * A response for the request to reject a batch of publisher connections.
 **/
 export class BatchRejectPublisherConnectionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=publisherConnections", elemType: shared.PublisherConnection })
+  @SpeakeasyMetadata({ data: "json, name=publisherConnections", elemType: PublisherConnection })
   publisherConnections?: PublisherConnection[];
 }

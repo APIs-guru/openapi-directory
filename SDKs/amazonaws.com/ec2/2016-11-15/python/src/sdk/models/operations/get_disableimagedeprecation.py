@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisableImageDeprecationActionEnum(str, Enum):
     DISABLE_IMAGE_DEPRECATION = "DisableImageDeprecation"
@@ -10,10 +14,10 @@ class GetDisableImageDeprecationVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableImageDeprecationQueryParams:
-    action: GetDisableImageDeprecationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDisableImageDeprecationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    image_id: str = field(metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
+    version: GetDisableImageDeprecationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
-    version: GetDisableImageDeprecationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDisableImageDeprecationHeaders:
 
 @dataclass
 class GetDisableImageDeprecationRequest:
-    query_params: GetDisableImageDeprecationQueryParams = field(default=None)
-    headers: GetDisableImageDeprecationHeaders = field(default=None)
+    headers: GetDisableImageDeprecationHeaders = field()
+    query_params: GetDisableImageDeprecationQueryParams = field()
     
 
 @dataclass
 class GetDisableImageDeprecationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

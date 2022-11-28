@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PositionedObjectPositioningSuggestionState
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A mask that indicates which of the fields on the base PositionedObjectPositioning have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class PositionedObjectPositioningSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=layoutSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=layoutSuggested" })
   layoutSuggested?: boolean;
 
-  @Metadata({ data: "json, name=leftOffsetSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=leftOffsetSuggested" })
   leftOffsetSuggested?: boolean;
 
-  @Metadata({ data: "json, name=topOffsetSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=topOffsetSuggested" })
   topOffsetSuggested?: boolean;
 }

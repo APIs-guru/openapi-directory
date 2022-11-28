@@ -1,5 +1,7 @@
 package shared
 
+// Tool
+// Information about a tool. Tools are used in a simulation job.
 type Tool struct {
 	Command                  string            `json:"command"`
 	ExitBehavior             *ExitBehaviorEnum `json:"exitBehavior,omitempty"`

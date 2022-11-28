@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
+
 
 
 // ListLikedAssetsResponse
@@ -8,12 +8,12 @@ import { Asset } from "./asset";
  * A response message from a request to list.
 **/
 export class ListLikedAssetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: shared.Asset })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: Asset })
   assets?: Asset[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

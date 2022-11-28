@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerMessage } from "./workermessage";
+
 
 
 // SendWorkerMessagesRequest
@@ -8,9 +8,9 @@ import { WorkerMessage } from "./workermessage";
  * A request for sending worker messages to the service.
 **/
 export class SendWorkerMessagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=workerMessages", elemType: shared.WorkerMessage })
+  @SpeakeasyMetadata({ data: "json, name=workerMessages", elemType: WorkerMessage })
   workerMessages?: WorkerMessage[];
 }

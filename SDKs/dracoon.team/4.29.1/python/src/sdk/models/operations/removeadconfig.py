@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveAdConfigPathParams:
-    ad_id: int = field(default=None, metadata={'path_param': { 'field_name': 'ad_id', 'style': 'simple', 'explode': False }})
+    ad_id: int = field(metadata={'path_param': { 'field_name': 'ad_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveAdConfigHeaders:
 
 @dataclass
 class RemoveAdConfigRequest:
-    path_params: RemoveAdConfigPathParams = field(default=None)
-    headers: RemoveAdConfigHeaders = field(default=None)
+    headers: RemoveAdConfigHeaders = field()
+    path_params: RemoveAdConfigPathParams = field()
     
 
 @dataclass
 class RemoveAdConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

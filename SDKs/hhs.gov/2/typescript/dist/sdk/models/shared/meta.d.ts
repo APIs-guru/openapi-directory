@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
 import { Pagination } from "./pagination";
 export declare class Meta extends SpeakeasyBase {

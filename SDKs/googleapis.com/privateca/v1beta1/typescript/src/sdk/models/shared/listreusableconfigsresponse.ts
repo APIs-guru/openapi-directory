@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReusableConfig } from "./reusableconfig";
+
 
 
 // ListReusableConfigsResponse
@@ -8,12 +8,12 @@ import { ReusableConfig } from "./reusableconfig";
  * Response message for CertificateAuthorityService.ListReusableConfigs.
 **/
 export class ListReusableConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=reusableConfigs", elemType: shared.ReusableConfig })
+  @SpeakeasyMetadata({ data: "json, name=reusableConfigs", elemType: ReusableConfig })
   reusableConfigs?: ReusableConfig[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

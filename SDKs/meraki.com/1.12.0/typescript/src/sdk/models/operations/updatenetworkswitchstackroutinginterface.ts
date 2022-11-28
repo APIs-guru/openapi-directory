@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchStackRoutingInterfacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=interfaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interfaceId" })
   interfaceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=switchStackId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=switchStackId" })
   switchStackId: string;
 }
 
 export enum UpdateNetworkSwitchStackRoutingInterfaceRequestBodyMulticastRoutingEnum {
-    Disabled = "disabled"
-,    Enabled = "enabled"
-,    IgmpSnoopingQuerier = "IGMP snooping querier"
+    Disabled = "disabled",
+    Enabled = "enabled",
+    IgmpSnoopingQuerier = "IGMP snooping querier"
 }
 
 
@@ -24,54 +25,54 @@ export enum UpdateNetworkSwitchStackRoutingInterfaceRequestBodyMulticastRoutingE
  * The OSPF routing settings of the interface.
 **/
 export class UpdateNetworkSwitchStackRoutingInterfaceRequestBodyOspfSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=area" })
+  @SpeakeasyMetadata({ data: "json, name=area" })
   area?: string;
 
-  @Metadata({ data: "json, name=cost" })
+  @SpeakeasyMetadata({ data: "json, name=cost" })
   cost?: number;
 
-  @Metadata({ data: "json, name=isPassiveEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isPassiveEnabled" })
   isPassiveEnabled?: boolean;
 }
 
 
 export class UpdateNetworkSwitchStackRoutingInterfaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interfaceIp" })
+  @SpeakeasyMetadata({ data: "json, name=interfaceIp" })
   interfaceIp?: string;
 
-  @Metadata({ data: "json, name=multicastRouting" })
+  @SpeakeasyMetadata({ data: "json, name=multicastRouting" })
   multicastRouting?: UpdateNetworkSwitchStackRoutingInterfaceRequestBodyMulticastRoutingEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ospfSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ospfSettings" })
   ospfSettings?: UpdateNetworkSwitchStackRoutingInterfaceRequestBodyOspfSettings;
 
-  @Metadata({ data: "json, name=subnet" })
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
   subnet?: string;
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId?: number;
 }
 
 
 export class UpdateNetworkSwitchStackRoutingInterfaceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchStackRoutingInterfacePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchStackRoutingInterfaceRequestBody;
 }
 
 
 export class UpdateNetworkSwitchStackRoutingInterfaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchStackRoutingInterface200ApplicationJsonObject?: Map<string, any>;
 }

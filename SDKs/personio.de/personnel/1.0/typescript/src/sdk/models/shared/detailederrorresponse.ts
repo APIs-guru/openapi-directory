@@ -1,53 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DetailedErrorResponseErrorDetailedMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=break" })
+  @SpeakeasyMetadata({ data: "json, name=break" })
   break?: number;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=employee" })
+  @SpeakeasyMetadata({ data: "json, name=employee" })
   employee?: number;
 
-  @Metadata({ data: "json, name=end_time" })
+  @SpeakeasyMetadata({ data: "json, name=end_time" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=error_msg" })
+  @SpeakeasyMetadata({ data: "json, name=error_msg" })
   errorMsg?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=start_time" })
+  @SpeakeasyMetadata({ data: "json, name=start_time" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 }
 
 
 export class DetailedErrorResponseError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=detailed_message", elemType: shared.DetailedErrorResponseErrorDetailedMessage })
+  @SpeakeasyMetadata({ data: "json, name=detailed_message", elemType: DetailedErrorResponseErrorDetailedMessage })
   detailedMessage?: DetailedErrorResponseErrorDetailedMessage[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DetailedErrorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: DetailedErrorResponseError;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success: boolean;
 }

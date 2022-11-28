@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ItemCounts
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class LibrarySummary.
 **/
 export class ItemCounts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlbumCount" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumCount" })
   albumCount?: number;
 
-  @Metadata({ data: "json, name=ArtistCount" })
+  @SpeakeasyMetadata({ data: "json, name=ArtistCount" })
   artistCount?: number;
 
-  @Metadata({ data: "json, name=BookCount" })
+  @SpeakeasyMetadata({ data: "json, name=BookCount" })
   bookCount?: number;
 
-  @Metadata({ data: "json, name=BoxSetCount" })
+  @SpeakeasyMetadata({ data: "json, name=BoxSetCount" })
   boxSetCount?: number;
 
-  @Metadata({ data: "json, name=EpisodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=EpisodeCount" })
   episodeCount?: number;
 
-  @Metadata({ data: "json, name=ItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=ItemCount" })
   itemCount?: number;
 
-  @Metadata({ data: "json, name=MovieCount" })
+  @SpeakeasyMetadata({ data: "json, name=MovieCount" })
   movieCount?: number;
 
-  @Metadata({ data: "json, name=MusicVideoCount" })
+  @SpeakeasyMetadata({ data: "json, name=MusicVideoCount" })
   musicVideoCount?: number;
 
-  @Metadata({ data: "json, name=ProgramCount" })
+  @SpeakeasyMetadata({ data: "json, name=ProgramCount" })
   programCount?: number;
 
-  @Metadata({ data: "json, name=SeriesCount" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesCount" })
   seriesCount?: number;
 
-  @Metadata({ data: "json, name=SongCount" })
+  @SpeakeasyMetadata({ data: "json, name=SongCount" })
   songCount?: number;
 
-  @Metadata({ data: "json, name=TrailerCount" })
+  @SpeakeasyMetadata({ data: "json, name=TrailerCount" })
   trailerCount?: number;
 }

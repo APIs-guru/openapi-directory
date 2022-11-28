@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlayerScoreResetResponse } from "./playerscoreresetresponse";
+
 
 
 // PlayerScoreResetAllResponse
@@ -8,9 +8,9 @@ import { PlayerScoreResetResponse } from "./playerscoreresetresponse";
  * A list of leaderboard reset resources.
 **/
 export class PlayerScoreResetAllResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.PlayerScoreResetResponse })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: PlayerScoreResetResponse })
   results?: PlayerScoreResetResponse[];
 }

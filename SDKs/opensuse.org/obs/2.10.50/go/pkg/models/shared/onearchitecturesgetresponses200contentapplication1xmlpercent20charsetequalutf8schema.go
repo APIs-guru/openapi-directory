@@ -1,0 +1,10 @@
+package shared
+
+type OnearchitecturesGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8SchemaEntry struct {
+	Name *string
+}
+
+type OnearchitecturesGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8Schema struct {
+	Count *int64
+	Entry []OnearchitecturesGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8SchemaEntry
+}

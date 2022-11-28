@@ -1,5 +1,7 @@
 package shared
 
+// DfpSettings
+// Google Ad Manager Settings
 type DfpSettings struct {
 	DfpNetworkCode                *string `json:"dfpNetworkCode,omitempty"`
 	DfpNetworkName                *string `json:"dfpNetworkName,omitempty"`

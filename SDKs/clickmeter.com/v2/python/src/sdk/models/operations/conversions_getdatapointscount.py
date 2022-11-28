@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ConversionsGetDatapointsCountPathParams:
-    conversion_id: int = field(default=None, metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
+    conversion_id: int = field(metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +20,14 @@ class ConversionsGetDatapointsCountQueryParams:
 
 @dataclass
 class ConversionsGetDatapointsCountRequest:
-    path_params: ConversionsGetDatapointsCountPathParams = field(default=None)
-    query_params: ConversionsGetDatapointsCountQueryParams = field(default=None)
+    path_params: ConversionsGetDatapointsCountPathParams = field()
+    query_params: ConversionsGetDatapointsCountQueryParams = field()
     
 
 @dataclass
 class ConversionsGetDatapointsCountResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_count_responce: Optional[shared.APICoreResponsesCountResponce] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

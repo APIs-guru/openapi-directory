@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class EnterpriseAdminGetGlobalWebhookPathParams:
-    hook_id: int = field(default=None, metadata={'path_param': { 'field_name': 'hook_id', 'style': 'simple', 'explode': False }})
+    hook_id: int = field(metadata={'path_param': { 'field_name': 'hook_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EnterpriseAdminGetGlobalWebhookHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EnterpriseAdminGetGlobalWebhookRequest:
-    path_params: EnterpriseAdminGetGlobalWebhookPathParams = field(default=None)
-    headers: EnterpriseAdminGetGlobalWebhookHeaders = field(default=None)
+    headers: EnterpriseAdminGetGlobalWebhookHeaders = field()
+    path_params: EnterpriseAdminGetGlobalWebhookPathParams = field()
     
 
 @dataclass
 class EnterpriseAdminGetGlobalWebhookResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     global_hook: Optional[shared.GlobalHook] = field(default=None)
     

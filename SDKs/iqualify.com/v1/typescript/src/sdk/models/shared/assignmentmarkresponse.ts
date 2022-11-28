@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssignmentMarkResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentId" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentId" })
   assessmentId?: string;
 
-  @Metadata({ data: "json, name=assessmentItemDetails" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentItemDetails" })
   assessmentItemDetails?: string;
 
-  @Metadata({ data: "json, name=assessmentItemName" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentItemName" })
   assessmentItemName?: string;
 
-  @Metadata({ data: "json, name=courseName" })
+  @SpeakeasyMetadata({ data: "json, name=courseName" })
   courseName?: string;
 
-  @Metadata({ data: "json, name=learnerEmail" })
+  @SpeakeasyMetadata({ data: "json, name=learnerEmail" })
   learnerEmail?: string;
 
-  @Metadata({ data: "json, name=learnerFirstName" })
+  @SpeakeasyMetadata({ data: "json, name=learnerFirstName" })
   learnerFirstName?: string;
 
-  @Metadata({ data: "json, name=learnerLastName" })
+  @SpeakeasyMetadata({ data: "json, name=learnerLastName" })
   learnerLastName?: string;
 
-  @Metadata({ data: "json, name=learnerPersonId" })
+  @SpeakeasyMetadata({ data: "json, name=learnerPersonId" })
   learnerPersonId?: string;
 
-  @Metadata({ data: "json, name=mark" })
+  @SpeakeasyMetadata({ data: "json, name=mark" })
   mark?: string;
 
-  @Metadata({ data: "json, name=markFeedback" })
+  @SpeakeasyMetadata({ data: "json, name=markFeedback" })
   markFeedback?: string;
 
-  @Metadata({ data: "json, name=markedBy" })
+  @SpeakeasyMetadata({ data: "json, name=markedBy" })
   markedBy?: string;
 
-  @Metadata({ data: "json, name=markedByEvaluator" })
+  @SpeakeasyMetadata({ data: "json, name=markedByEvaluator" })
   markedByEvaluator?: boolean;
 
-  @Metadata({ data: "json, name=markedByFacilitator" })
+  @SpeakeasyMetadata({ data: "json, name=markedByFacilitator" })
   markedByFacilitator?: boolean;
 
-  @Metadata({ data: "json, name=markedByMarker" })
+  @SpeakeasyMetadata({ data: "json, name=markedByMarker" })
   markedByMarker?: boolean;
 
-  @Metadata({ data: "json, name=markedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=markedDateTime" })
   markedDateTime?: Date;
 
-  @Metadata({ data: "json, name=submissionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=submissionDateTime" })
   submissionDateTime?: Date;
 }

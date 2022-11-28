@@ -40,7 +40,7 @@ type SpannerProjectsInstancesCreateSecurity struct {
 type SpannerProjectsInstancesCreateRequest struct {
 	PathParams  SpannerProjectsInstancesCreatePathParams
 	QueryParams SpannerProjectsInstancesCreateQueryParams
-	Request     *shared.CreateInstanceRequest `request:"mediaType=application/json"`
+	Request     *shared.CreateInstanceRequestInput `request:"mediaType=application/json"`
 	Security    SpannerProjectsInstancesCreateSecurity
 }
 

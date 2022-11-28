@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateDomainActionEnum(str, Enum):
     CREATE_DOMAIN = "CreateDomain"
@@ -10,9 +14,9 @@ class GetCreateDomainVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateDomainQueryParams:
-    action: GetCreateDomainActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetCreateDomainVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateDomainActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetCreateDomainVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetCreateDomainHeaders:
 
 @dataclass
 class GetCreateDomainRequest:
-    query_params: GetCreateDomainQueryParams = field(default=None)
-    headers: GetCreateDomainHeaders = field(default=None)
+    headers: GetCreateDomainHeaders = field()
+    query_params: GetCreateDomainQueryParams = field()
     
 
 @dataclass
 class GetCreateDomainResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

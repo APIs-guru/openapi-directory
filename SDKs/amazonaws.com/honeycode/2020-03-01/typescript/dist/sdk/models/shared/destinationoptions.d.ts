@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SourceDataColumnProperties } from "./sourcedatacolumnproperties";
 /**
  * An object that contains the options relating to the destination of the import request.

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
@@ -10,18 +10,18 @@ class GetWordListsForLoggedInUserQueryParams:
 
 @dataclass
 class GetWordListsForLoggedInUserHeaders:
-    auth_token: str = field(default=None, metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
+    auth_token: str = field(metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWordListsForLoggedInUserRequest:
-    query_params: GetWordListsForLoggedInUserQueryParams = field(default=None)
-    headers: GetWordListsForLoggedInUserHeaders = field(default=None)
+    headers: GetWordListsForLoggedInUserHeaders = field()
+    query_params: GetWordListsForLoggedInUserQueryParams = field()
     
 
 @dataclass
 class GetWordListsForLoggedInUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

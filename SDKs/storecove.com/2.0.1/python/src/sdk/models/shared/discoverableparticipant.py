@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DiscoverableParticipantDocumentTypesEnum(str, Enum):
     INVOICE = "invoice"
@@ -15,9 +17,13 @@ class DiscoverableParticipantDocumentTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DiscoverableParticipant:
-    document_types: Optional[List[DiscoverableParticipantDocumentTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentTypes' }})
-    identifier: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identifier' }})
-    meta_scheme: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metaScheme' }})
-    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
-    scheme: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheme' }})
+    r"""DiscoverableParticipant
+    A participant to be discovered.
+    """
+    
+    identifier: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('identifier') }})
+    scheme: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheme') }})
+    document_types: Optional[List[DiscoverableParticipantDocumentTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentTypes') }})
+    meta_scheme: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metaScheme') }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
     

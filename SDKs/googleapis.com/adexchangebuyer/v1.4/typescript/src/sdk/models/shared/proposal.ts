@@ -1,12 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Buyer } from "./buyer";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Buyer } from "./buyer";
 import { ContactInformation } from "./contactinformation";
 import { PrivateData } from "./privatedata";
 import { MarketplaceLabel } from "./marketplacelabel";
 import { Seller } from "./seller";
-import { ContactInformation } from "./contactinformation";
+
 
 
 // Proposal
@@ -16,72 +14,72 @@ import { ContactInformation } from "./contactinformation";
  * (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
 **/
 export class Proposal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billedBuyer" })
+  @SpeakeasyMetadata({ data: "json, name=billedBuyer" })
   billedBuyer?: Buyer;
 
-  @Metadata({ data: "json, name=buyer" })
+  @SpeakeasyMetadata({ data: "json, name=buyer" })
   buyer?: Buyer;
 
-  @Metadata({ data: "json, name=buyerContacts", elemType: shared.ContactInformation })
+  @SpeakeasyMetadata({ data: "json, name=buyerContacts", elemType: ContactInformation })
   buyerContacts?: ContactInformation[];
 
-  @Metadata({ data: "json, name=buyerPrivateData" })
+  @SpeakeasyMetadata({ data: "json, name=buyerPrivateData" })
   buyerPrivateData?: PrivateData;
 
-  @Metadata({ data: "json, name=dbmAdvertiserIds" })
+  @SpeakeasyMetadata({ data: "json, name=dbmAdvertiserIds" })
   dbmAdvertiserIds?: string[];
 
-  @Metadata({ data: "json, name=hasBuyerSignedOff" })
+  @SpeakeasyMetadata({ data: "json, name=hasBuyerSignedOff" })
   hasBuyerSignedOff?: boolean;
 
-  @Metadata({ data: "json, name=hasSellerSignedOff" })
+  @SpeakeasyMetadata({ data: "json, name=hasSellerSignedOff" })
   hasSellerSignedOff?: boolean;
 
-  @Metadata({ data: "json, name=inventorySource" })
+  @SpeakeasyMetadata({ data: "json, name=inventorySource" })
   inventorySource?: string;
 
-  @Metadata({ data: "json, name=isRenegotiating" })
+  @SpeakeasyMetadata({ data: "json, name=isRenegotiating" })
   isRenegotiating?: boolean;
 
-  @Metadata({ data: "json, name=isSetupComplete" })
+  @SpeakeasyMetadata({ data: "json, name=isSetupComplete" })
   isSetupComplete?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.MarketplaceLabel })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: MarketplaceLabel })
   labels?: MarketplaceLabel[];
 
-  @Metadata({ data: "json, name=lastUpdaterOrCommentorRole" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdaterOrCommentorRole" })
   lastUpdaterOrCommentorRole?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=negotiationId" })
+  @SpeakeasyMetadata({ data: "json, name=negotiationId" })
   negotiationId?: string;
 
-  @Metadata({ data: "json, name=originatorRole" })
+  @SpeakeasyMetadata({ data: "json, name=originatorRole" })
   originatorRole?: string;
 
-  @Metadata({ data: "json, name=privateAuctionId" })
+  @SpeakeasyMetadata({ data: "json, name=privateAuctionId" })
   privateAuctionId?: string;
 
-  @Metadata({ data: "json, name=proposalId" })
+  @SpeakeasyMetadata({ data: "json, name=proposalId" })
   proposalId?: string;
 
-  @Metadata({ data: "json, name=proposalState" })
+  @SpeakeasyMetadata({ data: "json, name=proposalState" })
   proposalState?: string;
 
-  @Metadata({ data: "json, name=revisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=revisionNumber" })
   revisionNumber?: string;
 
-  @Metadata({ data: "json, name=revisionTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=revisionTimeMs" })
   revisionTimeMs?: string;
 
-  @Metadata({ data: "json, name=seller" })
+  @SpeakeasyMetadata({ data: "json, name=seller" })
   seller?: Seller;
 
-  @Metadata({ data: "json, name=sellerContacts", elemType: shared.ContactInformation })
+  @SpeakeasyMetadata({ data: "json, name=sellerContacts", elemType: ContactInformation })
   sellerContacts?: ContactInformation[];
 }

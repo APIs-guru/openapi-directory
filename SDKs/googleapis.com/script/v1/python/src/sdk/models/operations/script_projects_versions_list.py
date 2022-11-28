@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ScriptProjectsVersionsListPathParams:
-    script_id: str = field(default=None, metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
+    script_id: str = field(metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class ScriptProjectsVersionsListQueryParams:
 
 @dataclass
 class ScriptProjectsVersionsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ScriptProjectsVersionsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class ScriptProjectsVersionsListSecurity:
 
 @dataclass
 class ScriptProjectsVersionsListRequest:
-    path_params: ScriptProjectsVersionsListPathParams = field(default=None)
-    query_params: ScriptProjectsVersionsListQueryParams = field(default=None)
-    security: ScriptProjectsVersionsListSecurity = field(default=None)
+    path_params: ScriptProjectsVersionsListPathParams = field()
+    query_params: ScriptProjectsVersionsListQueryParams = field()
+    security: ScriptProjectsVersionsListSecurity = field()
     
 
 @dataclass
 class ScriptProjectsVersionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_versions_response: Optional[shared.ListVersionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

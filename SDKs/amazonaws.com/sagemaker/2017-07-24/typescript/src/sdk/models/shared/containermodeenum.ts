@@ -1,6 +1,7 @@
 
 
+
 export enum ContainerModeEnum {
-    SingleModel = "SingleModel"
-,    MultiModel = "MultiModel"
+    SingleModel = "SingleModel",
+    MultiModel = "MultiModel"
 }

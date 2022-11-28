@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Border } from "./border";
-import { Border } from "./border";
-import { Border } from "./border";
-import { Border } from "./border";
+
 
 
 // Borders
@@ -10,15 +8,15 @@ import { Border } from "./border";
  * The borders of the cell.
 **/
 export class Borders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bottom" })
+  @SpeakeasyMetadata({ data: "json, name=bottom" })
   bottom?: Border;
 
-  @Metadata({ data: "json, name=left" })
+  @SpeakeasyMetadata({ data: "json, name=left" })
   left?: Border;
 
-  @Metadata({ data: "json, name=right" })
+  @SpeakeasyMetadata({ data: "json, name=right" })
   right?: Border;
 
-  @Metadata({ data: "json, name=top" })
+  @SpeakeasyMetadata({ data: "json, name=top" })
   top?: Border;
 }

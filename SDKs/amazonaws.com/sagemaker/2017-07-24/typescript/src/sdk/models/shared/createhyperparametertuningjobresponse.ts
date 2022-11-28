@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateHyperParameterTuningJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HyperParameterTuningJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobArn" })
   hyperParameterTuningJobArn: string;
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAddressUnconfirmedBalancePathParams = /** @class */ (function (_super) {
     __extends(GetAddressUnconfirmedBalancePathParams, _super);
     function GetAddressUnconfirmedBalancePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=address" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" }),
         __metadata("design:type", String)
     ], GetAddressUnconfirmedBalancePathParams.prototype, "address", void 0);
     return GetAddressUnconfirmedBalancePathParams;
@@ -41,7 +41,7 @@ var GetAddressUnconfirmedBalanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAddressUnconfirmedBalancePathParams)
     ], GetAddressUnconfirmedBalanceRequest.prototype, "pathParams", void 0);
     return GetAddressUnconfirmedBalanceRequest;
@@ -53,15 +53,15 @@ var GetAddressUnconfirmedBalanceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAddressUnconfirmedBalanceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAddressUnconfirmedBalanceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAddressUnconfirmedBalanceResponse.prototype, "getAddressUnconfirmedBalanceResponse", void 0);
     return GetAddressUnconfirmedBalanceResponse;

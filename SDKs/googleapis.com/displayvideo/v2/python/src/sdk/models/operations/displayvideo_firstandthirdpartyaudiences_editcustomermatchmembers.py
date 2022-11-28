@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersPathParams:
-    first_and_third_party_audience_id: str = field(default=None, metadata={'path_param': { 'field_name': 'firstAndThirdPartyAudienceId', 'style': 'simple', 'explode': False }})
+    first_and_third_party_audience_id: str = field(metadata={'path_param': { 'field_name': 'firstAndThirdPartyAudienceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersQueryParams
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersRequest:
-    path_params: DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersPathParams = field(default=None)
-    query_params: DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersQueryParams = field(default=None)
+    path_params: DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersPathParams = field()
+    query_params: DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersQueryParams = field()
+    security: DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersSecurity = field()
     request: Optional[shared.EditCustomerMatchMembersRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersSecurity = field(default=None)
     
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesEditCustomerMatchMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     edit_customer_match_members_response: Optional[shared.EditCustomerMatchMembersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

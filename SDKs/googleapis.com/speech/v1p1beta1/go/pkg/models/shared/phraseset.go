@@ -1,5 +1,7 @@
 package shared
 
+// PhraseSet
+// Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
 type PhraseSet struct {
 	Boost   *float32 `json:"boost,omitempty"`
 	Name    *string  `json:"name,omitempty"`

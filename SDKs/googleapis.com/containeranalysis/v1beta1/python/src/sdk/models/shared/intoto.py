@@ -1,18 +1,21 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import artifactrule
-from . import artifactrule
-from . import signingkey
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InToto:
-    expected_command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedCommand' }})
-    expected_materials: Optional[List[artifactrule.ArtifactRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedMaterials' }})
-    expected_products: Optional[List[artifactrule.ArtifactRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedProducts' }})
-    signing_keys: Optional[List[signingkey.SigningKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signingKeys' }})
-    step_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stepName' }})
-    threshold: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threshold' }})
+    r"""InToto
+    This contains the fields corresponding to the definition of a software supply chain step in an in-toto layout. This information goes into a Grafeas note.
+    """
+    
+    expected_command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedCommand') }})
+    expected_materials: Optional[List[ArtifactRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedMaterials') }})
+    expected_products: Optional[List[ArtifactRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedProducts') }})
+    signing_keys: Optional[List[SigningKey]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signingKeys') }})
+    step_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stepName') }})
+    threshold: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threshold') }})
     

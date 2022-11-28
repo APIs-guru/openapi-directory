@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSchoolAdminPathParams = /** @class */ (function (_super) {
     __extends(GetSchoolAdminPathParams, _super);
@@ -30,7 +30,7 @@ var GetSchoolAdminPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetSchoolAdminPathParams.prototype, "id", void 0);
     return GetSchoolAdminPathParams;
@@ -42,7 +42,7 @@ var GetSchoolAdminQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" }),
         __metadata("design:type", String)
     ], GetSchoolAdminQueryParams.prototype, "include", void 0);
     return GetSchoolAdminQueryParams;
@@ -54,11 +54,11 @@ var GetSchoolAdminRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSchoolAdminPathParams)
     ], GetSchoolAdminRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSchoolAdminQueryParams)
     ], GetSchoolAdminRequest.prototype, "queryParams", void 0);
     return GetSchoolAdminRequest;
@@ -70,19 +70,19 @@ var GetSchoolAdminResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSchoolAdminResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFound)
     ], GetSchoolAdminResponse.prototype, "notFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SchoolAdminResponse)
     ], GetSchoolAdminResponse.prototype, "schoolAdminResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSchoolAdminResponse.prototype, "statusCode", void 0);
     return GetSchoolAdminResponse;

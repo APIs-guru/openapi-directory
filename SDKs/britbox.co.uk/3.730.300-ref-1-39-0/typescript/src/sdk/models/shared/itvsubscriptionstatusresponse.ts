@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvSubscriptionStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=is_active" })
+  @SpeakeasyMetadata({ data: "json, name=is_active" })
   isActive: boolean;
 }

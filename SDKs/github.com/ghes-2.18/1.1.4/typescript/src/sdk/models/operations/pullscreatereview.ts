@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PullsCreateReviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
   pullNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class PullsCreateReviewRequestBodyComments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 
-  @Metadata({ data: "json, name=line" })
+  @SpeakeasyMetadata({ data: "json, name=line" })
   line?: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=side" })
+  @SpeakeasyMetadata({ data: "json, name=side" })
   side?: string;
 
-  @Metadata({ data: "json, name=start_line" })
+  @SpeakeasyMetadata({ data: "json, name=start_line" })
   startLine?: number;
 
-  @Metadata({ data: "json, name=start_side" })
+  @SpeakeasyMetadata({ data: "json, name=start_side" })
   startSide?: string;
 }
 
 export enum PullsCreateReviewRequestBodyEventEnum {
-    Approve = "APPROVE"
-,    RequestChanges = "REQUEST_CHANGES"
-,    Comment = "COMMENT"
+    Approve = "APPROVE",
+    RequestChanges = "REQUEST_CHANGES",
+    Comment = "COMMENT"
 }
 
 
 export class PullsCreateReviewRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=comments", elemType: operations.PullsCreateReviewRequestBodyComments })
+  @SpeakeasyMetadata({ data: "json, name=comments", elemType: PullsCreateReviewRequestBodyComments })
   comments?: PullsCreateReviewRequestBodyComments[];
 
-  @Metadata({ data: "json, name=commit_id" })
+  @SpeakeasyMetadata({ data: "json, name=commit_id" })
   commitId?: string;
 
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: PullsCreateReviewRequestBodyEventEnum;
 }
 
 
 export class PullsCreateReviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PullsCreateReviewPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PullsCreateReviewRequestBody;
 }
 
 
 export class PullsCreateReviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestReview?: shared.PullRequestReview;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorSimple?: shared.ValidationErrorSimple;
 }

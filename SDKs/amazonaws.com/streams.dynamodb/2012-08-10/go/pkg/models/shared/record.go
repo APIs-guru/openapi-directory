@@ -1,5 +1,7 @@
 package shared
 
+// Record
+// A description of a unique event within a stream.
 type Record struct {
 	AwsRegion    *string            `json:"awsRegion,omitempty"`
 	Dynamodb     *StreamRecord      `json:"dynamodb,omitempty"`

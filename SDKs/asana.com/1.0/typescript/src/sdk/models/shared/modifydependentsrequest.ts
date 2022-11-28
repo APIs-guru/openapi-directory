@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModifyDependentsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A set of dependent tasks.
 **/
 export class ModifyDependentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dependents" })
+  @SpeakeasyMetadata({ data: "json, name=dependents" })
   dependents?: string[];
 }

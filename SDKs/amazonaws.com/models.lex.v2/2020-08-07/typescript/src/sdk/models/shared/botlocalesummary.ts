@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BotLocaleStatusEnum } from "./botlocalestatusenum";
+
 
 
 // BotLocaleSummary
@@ -7,21 +8,21 @@ import { BotLocaleStatusEnum } from "./botlocalestatusenum";
  * Summary information about bot locales returned by the <a>ListBotLocales</a> operation.
 **/
 export class BotLocaleSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botLocaleStatus" })
+  @SpeakeasyMetadata({ data: "json, name=botLocaleStatus" })
   botLocaleStatus?: BotLocaleStatusEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastBuildSubmittedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastBuildSubmittedDateTime" })
   lastBuildSubmittedDateTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=localeName" })
+  @SpeakeasyMetadata({ data: "json, name=localeName" })
   localeName?: string;
 }

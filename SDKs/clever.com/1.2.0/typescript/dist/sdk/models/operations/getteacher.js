@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTeacherPathParams = /** @class */ (function (_super) {
     __extends(GetTeacherPathParams, _super);
@@ -30,7 +30,7 @@ var GetTeacherPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetTeacherPathParams.prototype, "id", void 0);
     return GetTeacherPathParams;
@@ -42,7 +42,7 @@ var GetTeacherQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" }),
         __metadata("design:type", String)
     ], GetTeacherQueryParams.prototype, "include", void 0);
     return GetTeacherQueryParams;
@@ -54,11 +54,11 @@ var GetTeacherRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeacherPathParams)
     ], GetTeacherRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeacherQueryParams)
     ], GetTeacherRequest.prototype, "queryParams", void 0);
     return GetTeacherRequest;
@@ -70,19 +70,19 @@ var GetTeacherResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeacherResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFound)
     ], GetTeacherResponse.prototype, "notFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeacherResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TeacherResponse)
     ], GetTeacherResponse.prototype, "teacherResponse", void 0);
     return GetTeacherResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DocumentsTarget
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A target specified by a set of documents names.
 **/
 export class DocumentsTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documents" })
+  @SpeakeasyMetadata({ data: "json, name=documents" })
   documents?: string[];
 }

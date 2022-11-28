@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CalculateRoutePostDataParametersAvoidAreasRectanglesNorthEastCorner = /** @class */ (function (_super) {
     __extends(CalculateRoutePostDataParametersAvoidAreasRectanglesNorthEastCorner, _super);
     function CalculateRoutePostDataParametersAvoidAreasRectanglesNorthEastCorner() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=latitude" }),
+        SpeakeasyMetadata({ data: "json, name=latitude" }),
         __metadata("design:type", String)
     ], CalculateRoutePostDataParametersAvoidAreasRectanglesNorthEastCorner.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=longitude" }),
+        SpeakeasyMetadata({ data: "json, name=longitude" }),
         __metadata("design:type", String)
     ], CalculateRoutePostDataParametersAvoidAreasRectanglesNorthEastCorner.prototype, "longitude", void 0);
     return CalculateRoutePostDataParametersAvoidAreasRectanglesNorthEastCorner;
@@ -46,11 +45,11 @@ var CalculateRoutePostDataParametersAvoidAreasRectanglesSouthWestCorner = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=latitude" }),
+        SpeakeasyMetadata({ data: "json, name=latitude" }),
         __metadata("design:type", String)
     ], CalculateRoutePostDataParametersAvoidAreasRectanglesSouthWestCorner.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=longitude" }),
+        SpeakeasyMetadata({ data: "json, name=longitude" }),
         __metadata("design:type", String)
     ], CalculateRoutePostDataParametersAvoidAreasRectanglesSouthWestCorner.prototype, "longitude", void 0);
     return CalculateRoutePostDataParametersAvoidAreasRectanglesSouthWestCorner;
@@ -62,11 +61,11 @@ var CalculateRoutePostDataParametersAvoidAreasRectangles = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=northEastCorner" }),
+        SpeakeasyMetadata({ data: "json, name=northEastCorner" }),
         __metadata("design:type", CalculateRoutePostDataParametersAvoidAreasRectanglesNorthEastCorner)
     ], CalculateRoutePostDataParametersAvoidAreasRectangles.prototype, "northEastCorner", void 0);
     __decorate([
-        Metadata({ data: "json, name=southWestCorner" }),
+        SpeakeasyMetadata({ data: "json, name=southWestCorner" }),
         __metadata("design:type", CalculateRoutePostDataParametersAvoidAreasRectanglesSouthWestCorner)
     ], CalculateRoutePostDataParametersAvoidAreasRectangles.prototype, "southWestCorner", void 0);
     return CalculateRoutePostDataParametersAvoidAreasRectangles;
@@ -78,7 +77,7 @@ var CalculateRoutePostDataParametersAvoidAreas = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rectangles", elemType: shared.CalculateRoutePostDataParametersAvoidAreasRectangles }),
+        SpeakeasyMetadata({ data: "json, name=rectangles", elemType: CalculateRoutePostDataParametersAvoidAreasRectangles }),
         __metadata("design:type", Array)
     ], CalculateRoutePostDataParametersAvoidAreas.prototype, "rectangles", void 0);
     return CalculateRoutePostDataParametersAvoidAreas;
@@ -90,19 +89,19 @@ var CalculateRoutePostDataParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowVignette" }),
+        SpeakeasyMetadata({ data: "json, name=allowVignette" }),
         __metadata("design:type", Array)
     ], CalculateRoutePostDataParameters.prototype, "allowVignette", void 0);
     __decorate([
-        Metadata({ data: "json, name=avoidAreas" }),
+        SpeakeasyMetadata({ data: "json, name=avoidAreas" }),
         __metadata("design:type", CalculateRoutePostDataParametersAvoidAreas)
     ], CalculateRoutePostDataParameters.prototype, "avoidAreas", void 0);
     __decorate([
-        Metadata({ data: "json, name=avoidVignette" }),
+        SpeakeasyMetadata({ data: "json, name=avoidVignette" }),
         __metadata("design:type", Array)
     ], CalculateRoutePostDataParameters.prototype, "avoidVignette", void 0);
     __decorate([
-        Metadata({ data: "json, name=supportingPoints" }),
+        SpeakeasyMetadata({ data: "json, name=supportingPoints" }),
         __metadata("design:type", Array)
     ], CalculateRoutePostDataParameters.prototype, "supportingPoints", void 0);
     return CalculateRoutePostDataParameters;

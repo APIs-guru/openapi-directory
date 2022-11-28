@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentReviewActionEnum } from "./documentreviewactionenum";
 import { DocumentReviewCommentSource } from "./documentreviewcommentsource";
+
 
 
 // DocumentReviews
@@ -9,9 +9,9 @@ import { DocumentReviewCommentSource } from "./documentreviewcommentsource";
  * Information about a document approval review.
 **/
 export class DocumentReviews extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: DocumentReviewActionEnum;
 
-  @Metadata({ data: "json, name=Comment", elemType: shared.DocumentReviewCommentSource })
+  @SpeakeasyMetadata({ data: "json, name=Comment", elemType: DocumentReviewCommentSource })
   comment?: DocumentReviewCommentSource[];
 }

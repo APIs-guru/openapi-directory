@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupVersion
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a group version.
 **/
 export class GroupVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectorDefinitionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectorDefinitionVersionArn" })
   connectorDefinitionVersionArn?: string;
 
-  @Metadata({ data: "json, name=CoreDefinitionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=CoreDefinitionVersionArn" })
   coreDefinitionVersionArn?: string;
 
-  @Metadata({ data: "json, name=DeviceDefinitionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceDefinitionVersionArn" })
   deviceDefinitionVersionArn?: string;
 
-  @Metadata({ data: "json, name=FunctionDefinitionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionDefinitionVersionArn" })
   functionDefinitionVersionArn?: string;
 
-  @Metadata({ data: "json, name=LoggerDefinitionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=LoggerDefinitionVersionArn" })
   loggerDefinitionVersionArn?: string;
 
-  @Metadata({ data: "json, name=ResourceDefinitionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceDefinitionVersionArn" })
   resourceDefinitionVersionArn?: string;
 
-  @Metadata({ data: "json, name=SubscriptionDefinitionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionDefinitionVersionArn" })
   subscriptionDefinitionVersionArn?: string;
 }

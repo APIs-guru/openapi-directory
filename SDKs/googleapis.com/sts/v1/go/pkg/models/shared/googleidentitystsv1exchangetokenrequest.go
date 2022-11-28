@@ -1,5 +1,7 @@
 package shared
 
+// GoogleIdentityStsV1ExchangeTokenRequest
+// Request message for ExchangeToken.
 type GoogleIdentityStsV1ExchangeTokenRequest struct {
 	Audience           *string `json:"audience,omitempty"`
 	GrantType          *string `json:"grantType,omitempty"`

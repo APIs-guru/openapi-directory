@@ -9,11 +9,11 @@ class GetAPISocialNumberHeaders:
 
 @dataclass
 class GetAPISocialNumberRequest:
-    headers: GetAPISocialNumberHeaders = field(default=None)
+    headers: GetAPISocialNumberHeaders = field()
     
 
 @dataclass
 class GetAPISocialNumberResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

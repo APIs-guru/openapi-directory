@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rate } from "./rate";
+
 
 
 // Resource
@@ -8,9 +8,9 @@ import { Rate } from "./rate";
  * This complex type defines the resource (API method) and the current rate-limit data for that resource.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rates", elemType: shared.Rate })
+  @SpeakeasyMetadata({ data: "json, name=rates", elemType: Rate })
   rates?: Rate[];
 }

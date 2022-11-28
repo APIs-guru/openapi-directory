@@ -1,19 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeldonMessage } from "./seldonmessage";
-import { SeldonMessage } from "./seldonmessage";
-import { SeldonMessage } from "./seldonmessage";
+
 
 
 export class Feedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=request" })
+  @SpeakeasyMetadata({ data: "json, name=request" })
   request?: SeldonMessage;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response?: SeldonMessage;
 
-  @Metadata({ data: "json, name=reward" })
+  @SpeakeasyMetadata({ data: "json, name=reward" })
   reward?: number;
 
-  @Metadata({ data: "json, name=truth" })
+  @SpeakeasyMetadata({ data: "json, name=truth" })
   truth?: SeldonMessage;
 }

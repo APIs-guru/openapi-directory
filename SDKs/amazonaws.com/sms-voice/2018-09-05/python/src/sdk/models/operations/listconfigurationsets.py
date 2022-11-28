@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListConfigurationSetsHeaders:
 
 @dataclass
 class ListConfigurationSetsRequest:
-    query_params: ListConfigurationSetsQueryParams = field(default=None)
-    headers: ListConfigurationSetsHeaders = field(default=None)
+    headers: ListConfigurationSetsHeaders = field()
+    query_params: ListConfigurationSetsQueryParams = field()
     
 
 @dataclass
 class ListConfigurationSetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_error_exception: Optional[Any] = field(default=None)
     list_configuration_sets_response: Optional[shared.ListConfigurationSetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

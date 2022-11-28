@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DimensionValueRequest
+// Represents a DimensionValuesRequest.
 type DimensionValueRequest struct {
 	DimensionName *string           `json:"dimensionName,omitempty"`
 	EndDate       *time.Time        `json:"endDate,omitempty"`

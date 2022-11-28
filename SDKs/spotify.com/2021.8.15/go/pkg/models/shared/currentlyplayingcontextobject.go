@@ -1,5 +1,8 @@
 package shared
 
+// CurrentlyPlayingContextObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-currentlyplayingcontextobject - Find more info on the official Spotify Web API Reference
 type CurrentlyPlayingContextObject struct {
 	Actions              *DisallowsObject `json:"actions,omitempty"`
 	Context              *ContextObject   `json:"context,omitempty"`

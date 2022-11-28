@@ -1,5 +1,7 @@
 package shared
 
+// SetNodePoolManagementRequest
+// SetNodePoolManagementRequest sets the node management properties of a node pool.
 type SetNodePoolManagementRequest struct {
 	ClusterID  *string         `json:"clusterId,omitempty"`
 	Management *NodeManagement `json:"management,omitempty"`

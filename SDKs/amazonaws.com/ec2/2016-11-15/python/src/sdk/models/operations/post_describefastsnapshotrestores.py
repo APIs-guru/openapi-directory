@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeFastSnapshotRestoresActionEnum(str, Enum):
     DESCRIBE_FAST_SNAPSHOT_RESTORES = "DescribeFastSnapshotRestores"
@@ -10,10 +14,10 @@ class PostDescribeFastSnapshotRestoresVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeFastSnapshotRestoresQueryParams:
-    action: PostDescribeFastSnapshotRestoresActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeFastSnapshotRestoresActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeFastSnapshotRestoresVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeFastSnapshotRestoresVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeFastSnapshotRestoresHeaders:
 
 @dataclass
 class PostDescribeFastSnapshotRestoresRequest:
-    query_params: PostDescribeFastSnapshotRestoresQueryParams = field(default=None)
-    headers: PostDescribeFastSnapshotRestoresHeaders = field(default=None)
+    headers: PostDescribeFastSnapshotRestoresHeaders = field()
+    query_params: PostDescribeFastSnapshotRestoresQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeFastSnapshotRestoresResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JournalLineJournalLineEmployee
@@ -6,22 +7,22 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The journal lines' employee
 **/
 export class JournalLineJournalLineEmployee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
 export enum JournalLineJournalLinePayFrequencyEnum {
-    Weekly = "Weekly"
-,    Monthly = "Monthly"
-,    TwoWeekly = "TwoWeekly"
-,    FourWeekly = "FourWeekly"
-,    Yearly = "Yearly"
+    Weekly = "Weekly",
+    Monthly = "Monthly",
+    TwoWeekly = "TwoWeekly",
+    FourWeekly = "FourWeekly",
+    Yearly = "Yearly"
 }
 
 
@@ -30,13 +31,13 @@ export enum JournalLineJournalLinePayFrequencyEnum {
  * The journal lines' pay run
 **/
 export class JournalLineJournalLinePayRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
@@ -46,63 +47,63 @@ export class JournalLineJournalLinePayRun extends SpeakeasyBase {
  * The journal lines' sub contractor
 **/
 export class JournalLineJournalLineSubContractor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
 
 export class JournalLineJournalLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Credit" })
+  @SpeakeasyMetadata({ data: "json, name=Credit" })
   credit?: number;
 
-  @Metadata({ data: "json, name=Debit" })
+  @SpeakeasyMetadata({ data: "json, name=Debit" })
   debit?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Employee" })
+  @SpeakeasyMetadata({ data: "json, name=Employee" })
   employee?: JournalLineJournalLineEmployee;
 
-  @Metadata({ data: "json, name=Generated" })
+  @SpeakeasyMetadata({ data: "json, name=Generated" })
   generated?: Date;
 
-  @Metadata({ data: "json, name=Grouping" })
+  @SpeakeasyMetadata({ data: "json, name=Grouping" })
   grouping?: string;
 
-  @Metadata({ data: "json, name=LedgerTarget" })
+  @SpeakeasyMetadata({ data: "json, name=LedgerTarget" })
   ledgerTarget?: string;
 
-  @Metadata({ data: "json, name=NomCode" })
+  @SpeakeasyMetadata({ data: "json, name=NomCode" })
   nomCode?: string;
 
-  @Metadata({ data: "json, name=PayFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=PayFrequency" })
   payFrequency?: JournalLineJournalLinePayFrequencyEnum;
 
-  @Metadata({ data: "json, name=PayRun" })
+  @SpeakeasyMetadata({ data: "json, name=PayRun" })
   payRun?: JournalLineJournalLinePayRun;
 
-  @Metadata({ data: "json, name=SubContractor" })
+  @SpeakeasyMetadata({ data: "json, name=SubContractor" })
   subContractor?: JournalLineJournalLineSubContractor;
 
-  @Metadata({ data: "json, name=SubNomCode" })
+  @SpeakeasyMetadata({ data: "json, name=SubNomCode" })
   subNomCode?: string;
 
-  @Metadata({ data: "json, name=TaxPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=TaxPeriod" })
   taxPeriod?: number;
 
-  @Metadata({ data: "json, name=TaxYear" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYear" })
   taxYear?: number;
 }
 
 
 export class JournalLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JournalLine" })
+  @SpeakeasyMetadata({ data: "json, name=JournalLine" })
   journalLine?: JournalLineJournalLine;
 }

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedUser } from "./nesteduser";
 
+
 export enum ObjectChangeActionLabelEnum {
-    Created = "Created"
-,    Updated = "Updated"
-,    Deleted = "Deleted"
+    Created = "Created",
+    Updated = "Updated",
+    Deleted = "Deleted"
 }
 
 export enum ObjectChangeActionValueEnum {
-    Create = "create"
-,    Update = "update"
-,    Delete = "delete"
+    Create = "create",
+    Update = "update",
+    Delete = "delete"
 }
 
 
 export class ObjectChangeAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: ObjectChangeActionLabelEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: ObjectChangeActionValueEnum;
 }
 
 
 export class ObjectChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: ObjectChangeAction;
 
-  @Metadata({ data: "json, name=changed_object" })
+  @SpeakeasyMetadata({ data: "json, name=changed_object" })
   changedObject?: Map<string, string>;
 
-  @Metadata({ data: "json, name=changed_object_id" })
+  @SpeakeasyMetadata({ data: "json, name=changed_object_id" })
   changedObjectId: number;
 
-  @Metadata({ data: "json, name=changed_object_type" })
+  @SpeakeasyMetadata({ data: "json, name=changed_object_type" })
   changedObjectType?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=object_data" })
+  @SpeakeasyMetadata({ data: "json, name=object_data" })
   objectData?: string;
 
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: Date;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: NestedUser;
 
-  @Metadata({ data: "json, name=user_name" })
+  @SpeakeasyMetadata({ data: "json, name=user_name" })
   userName?: string;
 }

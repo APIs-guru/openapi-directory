@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UnlockconnectorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chargestation" })
+  @SpeakeasyMetadata({ data: "json, name=chargestation" })
   chargestation?: string;
 
-  @Metadata({ data: "json, name=connector" })
+  @SpeakeasyMetadata({ data: "json, name=connector" })
   connector?: string;
 }
 
 
-export class UnlockconnectorRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: UnlockconnectorRequestBody;
-}
-
-
 export class Unlockconnector201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok?: boolean;
 }
 
 
+export class UnlockconnectorRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: UnlockconnectorRequestBody;
+}
+
+
 export class UnlockconnectorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unlockconnector201ApplicationJsonObject?: Unlockconnector201ApplicationJson;
 }

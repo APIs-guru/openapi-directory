@@ -13,13 +13,13 @@ type GetPortfolioMembershipQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetPortfolioMembership200ApplicationJSON struct {
+	Data *shared.PortfolioMembershipResponse `json:"data,omitempty"`
+}
+
 type GetPortfolioMembershipRequest struct {
 	PathParams  GetPortfolioMembershipPathParams
 	QueryParams GetPortfolioMembershipQueryParams
-}
-
-type GetPortfolioMembership200ApplicationJSON struct {
-	Data *shared.PortfolioMembershipResponse `json:"data,omitempty"`
 }
 
 type GetPortfolioMembershipResponse struct {

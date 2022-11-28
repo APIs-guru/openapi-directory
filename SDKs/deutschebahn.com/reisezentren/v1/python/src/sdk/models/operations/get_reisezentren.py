@@ -10,13 +10,13 @@ class GetReisezentrenQueryParams:
 
 @dataclass
 class GetReisezentrenRequest:
-    query_params: GetReisezentrenQueryParams = field(default=None)
+    query_params: GetReisezentrenQueryParams = field()
     
 
 @dataclass
 class GetReisezentrenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     travel_center_list: Optional[List[shared.TravelCenter]] = field(default=None)
     

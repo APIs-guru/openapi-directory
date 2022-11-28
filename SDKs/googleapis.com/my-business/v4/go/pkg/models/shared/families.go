@@ -27,6 +27,8 @@ const (
 	FamiliesKidsClubExceptionEnumDependentOnDayOfWeek FamiliesKidsClubExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Families
+// Services and amenities for families and young guests.
 type Families struct {
 	Babysitting             *bool                                `json:"babysitting,omitempty"`
 	BabysittingException    *FamiliesBabysittingExceptionEnum    `json:"babysittingException,omitempty"`

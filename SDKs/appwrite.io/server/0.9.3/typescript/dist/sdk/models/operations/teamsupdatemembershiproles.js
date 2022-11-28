@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TeamsUpdateMembershipRolesPathParams = /** @class */ (function (_super) {
     __extends(TeamsUpdateMembershipRolesPathParams, _super);
@@ -30,11 +30,11 @@ var TeamsUpdateMembershipRolesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
         __metadata("design:type", String)
     ], TeamsUpdateMembershipRolesPathParams.prototype, "membershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
         __metadata("design:type", String)
     ], TeamsUpdateMembershipRolesPathParams.prototype, "teamId", void 0);
     return TeamsUpdateMembershipRolesPathParams;
@@ -46,7 +46,7 @@ var TeamsUpdateMembershipRolesRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=roles" }),
+        SpeakeasyMetadata({ data: "json, name=roles" }),
         __metadata("design:type", Array)
     ], TeamsUpdateMembershipRolesRequestBody.prototype, "roles", void 0);
     return TeamsUpdateMembershipRolesRequestBody;
@@ -58,15 +58,15 @@ var TeamsUpdateMembershipRolesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], TeamsUpdateMembershipRolesSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], TeamsUpdateMembershipRolesSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], TeamsUpdateMembershipRolesSecurity.prototype, "project", void 0);
     return TeamsUpdateMembershipRolesSecurity;
@@ -78,15 +78,15 @@ var TeamsUpdateMembershipRolesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsUpdateMembershipRolesPathParams)
     ], TeamsUpdateMembershipRolesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", TeamsUpdateMembershipRolesRequestBody)
     ], TeamsUpdateMembershipRolesRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsUpdateMembershipRolesSecurity)
     ], TeamsUpdateMembershipRolesRequest.prototype, "security", void 0);
     return TeamsUpdateMembershipRolesRequest;
@@ -98,15 +98,15 @@ var TeamsUpdateMembershipRolesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TeamsUpdateMembershipRolesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TeamsUpdateMembershipRolesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Membership)
     ], TeamsUpdateMembershipRolesResponse.prototype, "membership", void 0);
     return TeamsUpdateMembershipRolesResponse;

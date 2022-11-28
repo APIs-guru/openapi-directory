@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SupplierParty } from "./supplierparty";
+
 
 
 // AccountingSupplierParty
@@ -7,6 +8,6 @@ import { SupplierParty } from "./supplierparty";
  * The party sending the invoice. Most data for the AccountingSupplierParty is taken from the Storecove database, where your sender identity resides and has been validated. However, we provide a limited number of fields here that you can specify on an invoice-by-invoice basis.
 **/
 export class AccountingSupplierParty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=party" })
+  @SpeakeasyMetadata({ data: "json, name=party" })
   party?: SupplierParty;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NumericTargetingDimension } from "./numerictargetingdimension";
 import { StringTargetingDimension } from "./stringtargetingdimension";
+
 
 
 // AppTargeting
@@ -8,9 +9,9 @@ import { StringTargetingDimension } from "./stringtargetingdimension";
  * A subset of app inventory to target. Bid requests that match criteria in at least one of the specified dimensions will be sent.
 **/
 export class AppTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mobileAppCategoryTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=mobileAppCategoryTargeting" })
   mobileAppCategoryTargeting?: NumericTargetingDimension;
 
-  @Metadata({ data: "json, name=mobileAppTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=mobileAppTargeting" })
   mobileAppTargeting?: StringTargetingDimension;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RenewOfferingRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request that represents an offering renewal.
 **/
 export class RenewOfferingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=offeringId" })
+  @SpeakeasyMetadata({ data: "json, name=offeringId" })
   offeringId: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity: number;
 }

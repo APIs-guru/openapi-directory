@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SQLSslCertsCreateEphemeralPathParams:
-    instance: str = field(default=None, metadata={'path_param': { 'field_name': 'instance', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    instance: str = field(metadata={'path_param': { 'field_name': 'instance', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class SQLSslCertsCreateEphemeralQueryParams:
 
 @dataclass
 class SQLSslCertsCreateEphemeralSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SQLSslCertsCreateEphemeralSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class SQLSslCertsCreateEphemeralSecurity:
 
 @dataclass
 class SQLSslCertsCreateEphemeralRequest:
-    path_params: SQLSslCertsCreateEphemeralPathParams = field(default=None)
-    query_params: SQLSslCertsCreateEphemeralQueryParams = field(default=None)
+    path_params: SQLSslCertsCreateEphemeralPathParams = field()
+    query_params: SQLSslCertsCreateEphemeralQueryParams = field()
+    security: SQLSslCertsCreateEphemeralSecurity = field()
     request: Optional[shared.SslCertsCreateEphemeralRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SQLSslCertsCreateEphemeralSecurity = field(default=None)
     
 
 @dataclass
 class SQLSslCertsCreateEphemeralResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ssl_cert: Optional[shared.SslCert] = field(default=None)
-    status_code: int = field(default=None)
     

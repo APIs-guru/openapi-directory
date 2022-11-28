@@ -22,74 +22,74 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetstateabbreviationQueryParams = /** @class */ (function (_super) {
     __extends(GetstateabbreviationQueryParams, _super);
     function GetstateabbreviationQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetstateabbreviationQueryParams.prototype, "license", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=state" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" }),
         __metadata("design:type", String)
     ], GetstateabbreviationQueryParams.prototype, "state", void 0);
     return GetstateabbreviationQueryParams;
 }(SpeakeasyBase));
 export { GetstateabbreviationQueryParams };
-var GetstateabbreviationRequest = /** @class */ (function (_super) {
-    __extends(GetstateabbreviationRequest, _super);
-    function GetstateabbreviationRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetstateabbreviationQueryParams)
-    ], GetstateabbreviationRequest.prototype, "queryParams", void 0);
-    return GetstateabbreviationRequest;
-}(SpeakeasyBase));
-export { GetstateabbreviationRequest };
 var Getstateabbreviation200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getstateabbreviation200ApplicationJson, _super);
     function Getstateabbreviation200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Abbreviation" }),
+        SpeakeasyMetadata({ data: "json, name=Abbreviation" }),
         __metadata("design:type", String)
     ], Getstateabbreviation200ApplicationJson.prototype, "abbreviation", void 0);
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getstateabbreviation200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getstateabbreviation200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], Getstateabbreviation200ApplicationJson.prototype, "state", void 0);
     return Getstateabbreviation200ApplicationJson;
 }(SpeakeasyBase));
 export { Getstateabbreviation200ApplicationJson };
+var GetstateabbreviationRequest = /** @class */ (function (_super) {
+    __extends(GetstateabbreviationRequest, _super);
+    function GetstateabbreviationRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetstateabbreviationQueryParams)
+    ], GetstateabbreviationRequest.prototype, "queryParams", void 0);
+    return GetstateabbreviationRequest;
+}(SpeakeasyBase));
+export { GetstateabbreviationRequest };
 var GetstateabbreviationResponse = /** @class */ (function (_super) {
     __extends(GetstateabbreviationResponse, _super);
     function GetstateabbreviationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetstateabbreviationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetstateabbreviationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getstateabbreviation200ApplicationJson)
     ], GetstateabbreviationResponse.prototype, "getstateabbreviation200ApplicationJsonObject", void 0);
     return GetstateabbreviationResponse;

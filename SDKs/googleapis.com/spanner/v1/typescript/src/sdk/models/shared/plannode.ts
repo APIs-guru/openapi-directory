@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChildLink } from "./childlink";
 import { ShortRepresentation } from "./shortrepresentation";
 
+
 export enum PlanNodeKindEnum {
-    KindUnspecified = "KIND_UNSPECIFIED"
-,    Relational = "RELATIONAL"
-,    Scalar = "SCALAR"
+    KindUnspecified = "KIND_UNSPECIFIED",
+    Relational = "RELATIONAL",
+    Scalar = "SCALAR"
 }
 
 
@@ -15,24 +15,24 @@ export enum PlanNodeKindEnum {
  * Node information for nodes appearing in a QueryPlan.plan_nodes.
 **/
 export class PlanNode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childLinks", elemType: shared.ChildLink })
+  @SpeakeasyMetadata({ data: "json, name=childLinks", elemType: ChildLink })
   childLinks?: ChildLink[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=executionStats" })
+  @SpeakeasyMetadata({ data: "json, name=executionStats" })
   executionStats?: Map<string, any>;
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: PlanNodeKindEnum;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, any>;
 
-  @Metadata({ data: "json, name=shortRepresentation" })
+  @SpeakeasyMetadata({ data: "json, name=shortRepresentation" })
   shortRepresentation?: ShortRepresentation;
 }

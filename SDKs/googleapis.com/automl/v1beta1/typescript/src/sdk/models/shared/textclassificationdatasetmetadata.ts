@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TextClassificationDatasetMetadataClassificationTypeEnum {
-    ClassificationTypeUnspecified = "CLASSIFICATION_TYPE_UNSPECIFIED"
-,    Multiclass = "MULTICLASS"
-,    Multilabel = "MULTILABEL"
+    ClassificationTypeUnspecified = "CLASSIFICATION_TYPE_UNSPECIFIED",
+    Multiclass = "MULTICLASS",
+    Multilabel = "MULTILABEL"
 }
 
 
@@ -12,6 +13,6 @@ export enum TextClassificationDatasetMetadataClassificationTypeEnum {
  * Dataset metadata for classification.
 **/
 export class TextClassificationDatasetMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classificationType" })
+  @SpeakeasyMetadata({ data: "json, name=classificationType" })
   classificationType?: TextClassificationDatasetMetadataClassificationTypeEnum;
 }

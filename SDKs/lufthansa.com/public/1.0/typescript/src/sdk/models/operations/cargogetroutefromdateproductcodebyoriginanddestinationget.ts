@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum {
-    Fan = "FAN"
-,    Fco = "FCO"
-,    Fcp = "FCP"
-,    Fdg = "FDG"
-,    Ftf = "FTF"
-,    Fun = "FUN"
-,    Fwn = "FWN"
-,    Yco = "YCO"
-,    Ycp = "YCP"
-,    Ydg = "YDG"
-,    Ynb = "YNB"
-,    Ynz = "YNZ"
-,    Ytf = "YTF"
-,    Yun = "YUN"
-,    Zxb = "ZXB"
-,    Zxf = "ZXF"
-,    Zxr = "ZXR"
+    Fan = "FAN",
+    Fco = "FCO",
+    Fcp = "FCP",
+    Fdg = "FDG",
+    Ftf = "FTF",
+    Fun = "FUN",
+    Fwn = "FWN",
+    Yco = "YCO",
+    Ycp = "YCP",
+    Ydg = "YDG",
+    Ynb = "YNB",
+    Ynz = "YNZ",
+    Ytf = "YTF",
+    Yun = "YUN",
+    Zxb = "ZXB",
+    Zxf = "ZXF",
+    Zxr = "ZXR"
 }
 
 
 export class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=destination" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destination" })
   destination: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fromDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fromDate" })
   fromDate: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=origin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=origin" })
   origin: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productCode" })
   productCode: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum;
 }
 
 
 export class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 }
 
 
 export class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   auth: shared.SchemeAuth;
 }
 
 
 export class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity;
 }
 
 
 export class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   cargoGetRouteFromDateProductCodeByOriginAndDestinationGet200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

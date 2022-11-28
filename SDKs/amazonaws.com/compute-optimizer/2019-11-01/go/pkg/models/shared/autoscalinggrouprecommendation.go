@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AutoScalingGroupRecommendation
+// Describes an Auto Scaling group recommendation.
 type AutoScalingGroupRecommendation struct {
 	AccountID             *string                                `json:"accountId,omitempty"`
 	AutoScalingGroupArn   *string                                `json:"autoScalingGroupArn,omitempty"`

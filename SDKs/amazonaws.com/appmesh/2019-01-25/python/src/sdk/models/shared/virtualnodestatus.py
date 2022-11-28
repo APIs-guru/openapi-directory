@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import virtualnodestatuscode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualNodeStatus:
-    status: virtualnodestatuscode_enum.VirtualNodeStatusCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""VirtualNodeStatus
+    An object that represents the current status of the virtual node.
+    """
+    
+    status: VirtualNodeStatusCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

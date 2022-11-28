@@ -1,10 +1,11 @@
 
 
+
 export enum AgentStatusEnum {
-    Healthy = "HEALTHY"
-,    Unhealthy = "UNHEALTHY"
-,    Running = "RUNNING"
-,    Unknown = "UNKNOWN"
-,    Blacklisted = "BLACKLISTED"
-,    Shutdown = "SHUTDOWN"
+    Healthy = "HEALTHY",
+    Unhealthy = "UNHEALTHY",
+    Running = "RUNNING",
+    Unknown = "UNKNOWN",
+    Blacklisted = "BLACKLISTED",
+    Shutdown = "SHUTDOWN"
 }

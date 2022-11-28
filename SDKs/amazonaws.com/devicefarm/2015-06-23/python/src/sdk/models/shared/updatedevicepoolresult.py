@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import devicepool
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDevicePoolResult:
-    device_pool: Optional[devicepool.DevicePool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devicePool' }})
+    r"""UpdateDevicePoolResult
+    Represents the result of an update device pool request.
+    """
+    
+    device_pool: Optional[DevicePool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('devicePool') }})
     

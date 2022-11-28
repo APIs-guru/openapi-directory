@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IapProjectsBrandsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -23,7 +23,7 @@ export declare class IapProjectsBrandsCreateSecurity extends SpeakeasyBase {
 export declare class IapProjectsBrandsCreateRequest extends SpeakeasyBase {
     pathParams: IapProjectsBrandsCreatePathParams;
     queryParams: IapProjectsBrandsCreateQueryParams;
-    request?: shared.Brand;
+    request?: shared.BrandInput;
     security: IapProjectsBrandsCreateSecurity;
 }
 export declare class IapProjectsBrandsCreateResponse extends SpeakeasyBase {

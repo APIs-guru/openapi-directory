@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ImageByNameInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Context" })
+  @SpeakeasyMetadata({ data: "json, name=Context" })
   context?: string;
 
-  @Metadata({ data: "json, name=FileLength" })
+  @SpeakeasyMetadata({ data: "json, name=FileLength" })
   fileLength?: number;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Theme" })
+  @SpeakeasyMetadata({ data: "json, name=Theme" })
   theme?: string;
 }

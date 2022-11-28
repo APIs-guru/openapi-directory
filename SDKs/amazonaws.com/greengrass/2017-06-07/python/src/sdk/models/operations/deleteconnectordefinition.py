@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteConnectorDefinitionPathParams:
-    connector_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
+    connector_definition_id: str = field(metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class DeleteConnectorDefinitionHeaders:
 
 @dataclass
 class DeleteConnectorDefinitionRequest:
-    path_params: DeleteConnectorDefinitionPathParams = field(default=None)
-    headers: DeleteConnectorDefinitionHeaders = field(default=None)
+    headers: DeleteConnectorDefinitionHeaders = field()
+    path_params: DeleteConnectorDefinitionPathParams = field()
     
 
 @dataclass
 class DeleteConnectorDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_connector_definition_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

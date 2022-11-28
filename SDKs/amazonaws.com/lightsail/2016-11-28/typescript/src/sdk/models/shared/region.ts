@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AvailabilityZone } from "./availabilityzone";
 import { RegionNameEnum } from "./regionnameenum";
-import { AvailabilityZone } from "./availabilityzone";
+
 
 
 // Region
@@ -10,21 +9,21 @@ import { AvailabilityZone } from "./availabilityzone";
  * Describes the AWS Region.
 **/
 export class Region extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availabilityZones", elemType: shared.AvailabilityZone })
+  @SpeakeasyMetadata({ data: "json, name=availabilityZones", elemType: AvailabilityZone })
   availabilityZones?: AvailabilityZone[];
 
-  @Metadata({ data: "json, name=continentCode" })
+  @SpeakeasyMetadata({ data: "json, name=continentCode" })
   continentCode?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: RegionNameEnum;
 
-  @Metadata({ data: "json, name=relationalDatabaseAvailabilityZones", elemType: shared.AvailabilityZone })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseAvailabilityZones", elemType: AvailabilityZone })
   relationalDatabaseAvailabilityZones?: AvailabilityZone[];
 }

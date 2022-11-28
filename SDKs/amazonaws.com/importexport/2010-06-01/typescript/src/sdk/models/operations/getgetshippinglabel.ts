@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGetShippingLabelActionEnum {
     GetShippingLabel = "GetShippingLabel"
@@ -14,81 +15,81 @@ export enum GetGetShippingLabelVersionEnum {
 
 
 export class GetGetShippingLabelQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=APIVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=APIVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
   awsAccessKeyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetGetShippingLabelActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Operation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Operation" })
   operation: GetGetShippingLabelOperationEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" })
   signature: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
   signatureMethod: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
   signatureVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
   timestamp: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetGetShippingLabelVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" })
   city?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=company" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company" })
   company?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jobIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jobIds" })
   jobIds: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=postalCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=stateOrProvince" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=stateOrProvince" })
   stateOrProvince?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=street1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=street1" })
   street1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=street2" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=street2" })
   street2?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=street3" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=street3" })
   street3?: string;
 }
 
 
 export class GetGetShippingLabelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGetShippingLabelQueryParams;
 }
 
 
 export class GetGetShippingLabelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

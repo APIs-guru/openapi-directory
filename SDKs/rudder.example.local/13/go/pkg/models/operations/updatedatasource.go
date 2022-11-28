@@ -8,11 +8,6 @@ type UpdateDataSourcePathParams struct {
 	DatasourceID string `pathParam:"style=simple,explode=false,name=datasourceId"`
 }
 
-type UpdateDataSourceRequest struct {
-	PathParams UpdateDataSourcePathParams
-	Request    *shared.Datasource `request:"mediaType=application/json"`
-}
-
 type UpdateDataSource200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +29,11 @@ type UpdateDataSource200ApplicationJSON struct {
 	Action UpdateDataSource200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateDataSource200ApplicationJSONData       `json:"data"`
 	Result UpdateDataSource200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateDataSourceRequest struct {
+	PathParams UpdateDataSourcePathParams
+	Request    *shared.Datasource `request:"mediaType=application/json"`
 }
 
 type UpdateDataSourceResponse struct {

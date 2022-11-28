@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegionalLocationListAssignedTargetingOptionDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Targeting details for regional location list. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_REGIONAL_LOCATION_LIST`.
 **/
 export class RegionalLocationListAssignedTargetingOptionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=negative" })
+  @SpeakeasyMetadata({ data: "json, name=negative" })
   negative?: boolean;
 
-  @Metadata({ data: "json, name=regionalLocationListId" })
+  @SpeakeasyMetadata({ data: "json, name=regionalLocationListId" })
   regionalLocationListId?: string;
 }

@@ -40,7 +40,7 @@ type JobsProjectsTenantsJobsCreateSecurity struct {
 type JobsProjectsTenantsJobsCreateRequest struct {
 	PathParams  JobsProjectsTenantsJobsCreatePathParams
 	QueryParams JobsProjectsTenantsJobsCreateQueryParams
-	Request     *shared.Job `request:"mediaType=application/json"`
+	Request     *shared.JobInput `request:"mediaType=application/json"`
 	Security    JobsProjectsTenantsJobsCreateSecurity
 }
 

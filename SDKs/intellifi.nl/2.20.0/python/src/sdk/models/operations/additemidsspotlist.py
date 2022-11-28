@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class AddItemIdsSpotListPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AddItemIdsSpotListRequest:
-    path_params: AddItemIdsSpotListPathParams = field(default=None)
-    request: List[str] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: AddItemIdsSpotListPathParams = field()
+    request: List[str] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AddItemIdsSpotListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_list_resource: Optional[shared.ResponseListResource] = field(default=None)
-    status_code: int = field(default=None)
     

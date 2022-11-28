@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OutdatedLibrary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information reported for an outdated library.
 **/
 export class OutdatedLibrary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=learnMoreUrls" })
+  @SpeakeasyMetadata({ data: "json, name=learnMoreUrls" })
   learnMoreUrls?: string[];
 
-  @Metadata({ data: "json, name=libraryName" })
+  @SpeakeasyMetadata({ data: "json, name=libraryName" })
   libraryName?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

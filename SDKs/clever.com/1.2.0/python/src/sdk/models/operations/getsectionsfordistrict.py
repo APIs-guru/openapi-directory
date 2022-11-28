@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSectionsForDistrictPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class GetSectionsForDistrictQueryParams:
 
 @dataclass
 class GetSectionsForDistrictRequest:
-    path_params: GetSectionsForDistrictPathParams = field(default=None)
-    query_params: GetSectionsForDistrictQueryParams = field(default=None)
+    path_params: GetSectionsForDistrictPathParams = field()
+    query_params: GetSectionsForDistrictQueryParams = field()
     
 
 @dataclass
 class GetSectionsForDistrictResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     not_found: Optional[shared.NotFound] = field(default=None)
     sections_response: Optional[shared.SectionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

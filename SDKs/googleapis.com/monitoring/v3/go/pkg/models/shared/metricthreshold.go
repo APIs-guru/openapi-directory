@@ -21,6 +21,8 @@ const (
 	MetricThresholdEvaluationMissingDataEnumEvaluationMissingDataNoOp        MetricThresholdEvaluationMissingDataEnum = "EVALUATION_MISSING_DATA_NO_OP"
 )
 
+// MetricThreshold
+// A condition type that compares a collection of time series against a threshold.
 type MetricThreshold struct {
 	Aggregations            []Aggregation                             `json:"aggregations,omitempty"`
 	Comparison              *MetricThresholdComparisonEnum            `json:"comparison,omitempty"`

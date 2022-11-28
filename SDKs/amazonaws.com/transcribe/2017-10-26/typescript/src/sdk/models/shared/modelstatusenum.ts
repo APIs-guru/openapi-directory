@@ -1,7 +1,8 @@
 
 
+
 export enum ModelStatusEnum {
-    InProgress = "IN_PROGRESS"
-,    Failed = "FAILED"
-,    Completed = "COMPLETED"
+    InProgress = "IN_PROGRESS",
+    Failed = "FAILED",
+    Completed = "COMPLETED"
 }

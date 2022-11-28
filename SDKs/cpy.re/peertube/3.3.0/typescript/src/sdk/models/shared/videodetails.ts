@@ -1,139 +1,139 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Account } from "./account";
 import { VideoStreamingPlaylists } from "./videostreamingplaylists";
 
 
+
 export class VideoDetailsScheduledUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: number;
 
-  @Metadata({ data: "json, name=updateAt" })
+  @SpeakeasyMetadata({ data: "json, name=updateAt" })
   updateAt: Date;
 }
 
 
 export class VideoDetailsUserHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentTime" })
+  @SpeakeasyMetadata({ data: "json, name=currentTime" })
   currentTime?: number;
 }
 
 
 export class VideoDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: Account;
 
-  @Metadata({ data: "json, name=blacklisted" })
+  @SpeakeasyMetadata({ data: "json, name=blacklisted" })
   blacklisted?: boolean;
 
-  @Metadata({ data: "json, name=blacklistedReason" })
+  @SpeakeasyMetadata({ data: "json, name=blacklistedReason" })
   blacklistedReason?: string;
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: any;
 
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: any;
 
-  @Metadata({ data: "json, name=commentsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=commentsEnabled" })
   commentsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=descriptionPath" })
+  @SpeakeasyMetadata({ data: "json, name=descriptionPath" })
   descriptionPath?: string;
 
-  @Metadata({ data: "json, name=dislikes" })
+  @SpeakeasyMetadata({ data: "json, name=dislikes" })
   dislikes?: number;
 
-  @Metadata({ data: "json, name=downloadEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=downloadEnabled" })
   downloadEnabled?: boolean;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=embedPath" })
+  @SpeakeasyMetadata({ data: "json, name=embedPath" })
   embedPath?: string;
 
-  @Metadata({ data: "json, name=files" })
+  @SpeakeasyMetadata({ data: "json, name=files" })
   files?: any[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isLive" })
+  @SpeakeasyMetadata({ data: "json, name=isLive" })
   isLive?: boolean;
 
-  @Metadata({ data: "json, name=isLocal" })
+  @SpeakeasyMetadata({ data: "json, name=isLocal" })
   isLocal?: boolean;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: any;
 
-  @Metadata({ data: "json, name=licence" })
+  @SpeakeasyMetadata({ data: "json, name=licence" })
   licence?: any;
 
-  @Metadata({ data: "json, name=likes" })
+  @SpeakeasyMetadata({ data: "json, name=likes" })
   likes?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nsfw" })
+  @SpeakeasyMetadata({ data: "json, name=nsfw" })
   nsfw?: boolean;
 
-  @Metadata({ data: "json, name=originallyPublishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=originallyPublishedAt" })
   originallyPublishedAt?: Date;
 
-  @Metadata({ data: "json, name=previewPath" })
+  @SpeakeasyMetadata({ data: "json, name=previewPath" })
   previewPath?: string;
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: any;
 
-  @Metadata({ data: "json, name=publishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=publishedAt" })
   publishedAt?: Date;
 
-  @Metadata({ data: "json, name=scheduledUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledUpdate" })
   scheduledUpdate?: VideoDetailsScheduledUpdate;
 
-  @Metadata({ data: "json, name=shortUUID" })
+  @SpeakeasyMetadata({ data: "json, name=shortUUID" })
   shortUuid?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: any;
 
-  @Metadata({ data: "json, name=streamingPlaylists", elemType: shared.VideoStreamingPlaylists })
+  @SpeakeasyMetadata({ data: "json, name=streamingPlaylists", elemType: VideoStreamingPlaylists })
   streamingPlaylists?: VideoStreamingPlaylists[];
 
-  @Metadata({ data: "json, name=support" })
+  @SpeakeasyMetadata({ data: "json, name=support" })
   support?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=thumbnailPath" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailPath" })
   thumbnailPath?: string;
 
-  @Metadata({ data: "json, name=trackerUrls" })
+  @SpeakeasyMetadata({ data: "json, name=trackerUrls" })
   trackerUrls?: string[];
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=userHistory" })
+  @SpeakeasyMetadata({ data: "json, name=userHistory" })
   userHistory?: VideoDetailsUserHistory;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid?: string;
 
-  @Metadata({ data: "json, name=views" })
+  @SpeakeasyMetadata({ data: "json, name=views" })
   views?: number;
 
-  @Metadata({ data: "json, name=waitTranscoding" })
+  @SpeakeasyMetadata({ data: "json, name=waitTranscoding" })
   waitTranscoding?: boolean;
 }

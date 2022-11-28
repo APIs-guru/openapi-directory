@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TextMapping
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.
 **/
 export class TextMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=atomKey" })
+  @SpeakeasyMetadata({ data: "json, name=atomKey" })
   atomKey?: string;
 
-  @Metadata({ data: "json, name=inputKey" })
+  @SpeakeasyMetadata({ data: "json, name=inputKey" })
   inputKey?: string;
 
-  @Metadata({ data: "json, name=inputTrack" })
+  @SpeakeasyMetadata({ data: "json, name=inputTrack" })
   inputTrack?: number;
 }

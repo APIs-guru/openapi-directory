@@ -7,6 +7,8 @@ const (
 	ServiceAccountKeyTypeEnumPkcs12            ServiceAccountKeyTypeEnum = "pkcs12"
 )
 
+// ServiceAccountKey
+// Credentials that can be used to authenticate as a service account.
 type ServiceAccountKey struct {
 	Data       *string                    `json:"data,omitempty"`
 	ID         *string                    `json:"id,omitempty"`

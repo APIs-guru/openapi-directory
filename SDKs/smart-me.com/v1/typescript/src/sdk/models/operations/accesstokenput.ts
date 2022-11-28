@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccessTokenPutRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   accessTokenToPut?: shared.AccessTokenToPut;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   accessTokenToPut1?: shared.AccessTokenToPut;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   accessTokenToPut2?: shared.AccessTokenToPut;
 
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class AccessTokenPutRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: AccessTokenPutRequests;
 }
 
 
 export class AccessTokenPutResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessTokenPut200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accessTokenPut200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accessTokenPut200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accessTokenPut200TextXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

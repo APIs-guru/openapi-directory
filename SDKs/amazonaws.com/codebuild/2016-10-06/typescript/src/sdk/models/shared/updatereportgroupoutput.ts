@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportGroup } from "./reportgroup";
 
 
+
 export class UpdateReportGroupOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reportGroup" })
+  @SpeakeasyMetadata({ data: "json, name=reportGroup" })
   reportGroup?: ReportGroup;
 }

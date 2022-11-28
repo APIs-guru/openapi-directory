@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDetachUserPolicyActionEnum(str, Enum):
     DETACH_USER_POLICY = "DetachUserPolicy"
@@ -10,10 +14,10 @@ class GetDetachUserPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetDetachUserPolicyQueryParams:
-    action: GetDetachUserPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    policy_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetDetachUserPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDetachUserPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    policy_arn: str = field(metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetDetachUserPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDetachUserPolicyHeaders:
 
 @dataclass
 class GetDetachUserPolicyRequest:
-    query_params: GetDetachUserPolicyQueryParams = field(default=None)
-    headers: GetDetachUserPolicyHeaders = field(default=None)
+    headers: GetDetachUserPolicyHeaders = field()
+    query_params: GetDetachUserPolicyQueryParams = field()
     
 
 @dataclass
 class GetDetachUserPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

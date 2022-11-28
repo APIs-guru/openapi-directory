@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteInsightRulesActionEnum(str, Enum):
     DELETE_INSIGHT_RULES = "DeleteInsightRules"
@@ -10,9 +14,9 @@ class GetDeleteInsightRulesVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteInsightRulesQueryParams:
-    action: GetDeleteInsightRulesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    rule_names: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'RuleNames', 'style': 'form', 'explode': True }})
-    version: GetDeleteInsightRulesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteInsightRulesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    rule_names: List[str] = field(metadata={'query_param': { 'field_name': 'RuleNames', 'style': 'form', 'explode': True }})
+    version: GetDeleteInsightRulesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteInsightRulesHeaders:
 
 @dataclass
 class GetDeleteInsightRulesRequest:
-    query_params: GetDeleteInsightRulesQueryParams = field(default=None)
-    headers: GetDeleteInsightRulesHeaders = field(default=None)
+    headers: GetDeleteInsightRulesHeaders = field()
+    query_params: GetDeleteInsightRulesQueryParams = field()
     
 
 @dataclass
 class GetDeleteInsightRulesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

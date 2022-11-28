@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import registration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListRegistrationsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    registrations: Optional[List[registration.Registration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registrations' }})
+    r"""ListRegistrationsResponse
+    Response for the `ListRegistrations` method.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    registrations: Optional[List[Registration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('registrations') }})
     

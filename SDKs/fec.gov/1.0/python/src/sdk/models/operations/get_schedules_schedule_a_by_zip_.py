@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSchedulesScheduleAByZipQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -20,12 +20,12 @@ class GetSchedulesScheduleAByZipQueryParams:
 
 @dataclass
 class GetSchedulesScheduleAByZipRequest:
-    query_params: GetSchedulesScheduleAByZipQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleAByZipQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleAByZipResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_a_by_zip_page: Optional[shared.ScheduleAByZipPage] = field(default=None)
-    status_code: int = field(default=None)
     

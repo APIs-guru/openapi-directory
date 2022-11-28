@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdClient } from "./adclient";
+
 
 
 // ListAdClientsResponse
@@ -8,9 +8,9 @@ import { AdClient } from "./adclient";
  * Response definition for the ad client list rpc.
 **/
 export class ListAdClientsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adClients", elemType: shared.AdClient })
+  @SpeakeasyMetadata({ data: "json, name=adClients", elemType: AdClient })
   adClients?: AdClient[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

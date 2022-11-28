@@ -1,5 +1,7 @@
 package shared
 
+// SparkJob
+// A Dataproc job for running Apache Spark (https://spark.apache.org/) applications on YARN.
 type SparkJob struct {
 	ArchiveUris    []string          `json:"archiveUris,omitempty"`
 	Args           []string          `json:"args,omitempty"`

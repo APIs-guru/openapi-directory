@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SessionMappingSummary
+// Details for an Amazon EMR Studio session mapping. The details do not include the time the session mapping was last modified.
 type SessionMappingSummary struct {
 	CreationTime     *time.Time        `json:"CreationTime,omitempty"`
 	IdentityID       *string           `json:"IdentityId,omitempty"`

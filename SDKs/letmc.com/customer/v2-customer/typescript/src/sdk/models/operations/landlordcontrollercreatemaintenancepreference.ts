@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LandlordControllerCreateMaintenancePreferencePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class LandlordControllerCreateMaintenancePreferenceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=notes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=notes" })
   notes: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenancyID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenancyID" })
   tenancyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class LandlordControllerCreateMaintenancePreferenceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LandlordControllerCreateMaintenancePreferencePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LandlordControllerCreateMaintenancePreferenceQueryParams;
 }
 
 
 export class LandlordControllerCreateMaintenancePreferenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   landlordControllerCreateMaintenancePreference200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   landlordControllerCreateMaintenancePreference200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   landlordControllerCreateMaintenancePreference200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   landlordControllerCreateMaintenancePreference200TextXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

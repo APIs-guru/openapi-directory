@@ -9,6 +9,8 @@ const (
 	AndroidAttributesOwnershipPrivilegeEnumDeviceOwner                   AndroidAttributesOwnershipPrivilegeEnum = "DEVICE_OWNER"
 )
 
+// AndroidAttributes
+// Resource representing the Android specific attributes of a Device.
 type AndroidAttributes struct {
 	EnabledUnknownSources *bool                                    `json:"enabledUnknownSources,omitempty"`
 	OwnerProfileAccount   *bool                                    `json:"ownerProfileAccount,omitempty"`

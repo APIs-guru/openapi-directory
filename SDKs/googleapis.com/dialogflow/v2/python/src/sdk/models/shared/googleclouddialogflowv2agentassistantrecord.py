@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2articleanswer
-from . import googleclouddialogflowv2faqanswer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2AgentAssistantRecord:
-    article_suggestion_answer: Optional[googleclouddialogflowv2articleanswer.GoogleCloudDialogflowV2ArticleAnswer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'articleSuggestionAnswer' }})
-    faq_answer: Optional[googleclouddialogflowv2faqanswer.GoogleCloudDialogflowV2FaqAnswer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'faqAnswer' }})
+    r"""GoogleCloudDialogflowV2AgentAssistantRecord
+    Represents a record of a human agent assist answer.
+    """
+    
+    article_suggestion_answer: Optional[GoogleCloudDialogflowV2ArticleAnswer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('articleSuggestionAnswer') }})
+    faq_answer: Optional[GoogleCloudDialogflowV2FaqAnswer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('faqAnswer') }})
     

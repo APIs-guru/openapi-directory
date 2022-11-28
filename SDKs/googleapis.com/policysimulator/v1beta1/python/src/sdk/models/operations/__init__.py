@@ -1,4 +1,3 @@
-from .policysimulator_operations_list import *
 from .policysimulator_projects_locations_replays_create import *
-from .policysimulator_projects_locations_replays_get import *
+from .policysimulator_projects_locations_replays_operations_list import *
 from .policysimulator_projects_locations_replays_results_list import *

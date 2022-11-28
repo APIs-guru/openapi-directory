@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserContext } from "./usercontext";
 import { TrialComponentSource } from "./trialcomponentsource";
+
 
 
 // TrialComponentSimpleSummary
@@ -8,18 +9,18 @@ import { TrialComponentSource } from "./trialcomponentsource";
  * A short summary of a trial component.
 **/
 export class TrialComponentSimpleSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: UserContext;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=TrialComponentArn" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentArn" })
   trialComponentArn?: string;
 
-  @Metadata({ data: "json, name=TrialComponentName" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentName" })
   trialComponentName?: string;
 
-  @Metadata({ data: "json, name=TrialComponentSource" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentSource" })
   trialComponentSource?: TrialComponentSource;
 }

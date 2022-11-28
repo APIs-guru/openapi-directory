@@ -22,90 +22,90 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAssociationFilterQueryParams = /** @class */ (function (_super) {
     __extends(GetAssociationFilterQueryParams, _super);
     function GetAssociationFilterQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=datasource" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=datasource" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "datasource", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=datastructure" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=datastructure" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "datastructure", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=datatype" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=datatype" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "datatype", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=direct" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direct" }),
         __metadata("design:type", Boolean)
     ], GetAssociationFilterQueryParams.prototype, "direct", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=disease" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=disease" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "disease", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=facets" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=facets" }),
         __metadata("design:type", Boolean)
     ], GetAssociationFilterQueryParams.prototype, "facets", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" }),
         __metadata("design:type", Number)
     ], GetAssociationFilterQueryParams.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pathway" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pathway" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "pathway", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=scorevalue_max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scorevalue_max" }),
         __metadata("design:type", Number)
     ], GetAssociationFilterQueryParams.prototype, "scorevalueMax", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=scorevalue_min" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scorevalue_min" }),
         __metadata("design:type", Number)
     ], GetAssociationFilterQueryParams.prototype, "scorevalueMin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=scorevalue_types" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scorevalue_types" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "scorevalueTypes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "search", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" }),
         __metadata("design:type", Number)
     ], GetAssociationFilterQueryParams.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=target" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=target" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "target", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=target_class" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=target_class" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "targetClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=therapeutic_area" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=therapeutic_area" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "therapeuticArea", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uniprotkw" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uniprotkw" }),
         __metadata("design:type", String)
     ], GetAssociationFilterQueryParams.prototype, "uniprotkw", void 0);
     return GetAssociationFilterQueryParams;
@@ -117,7 +117,7 @@ var GetAssociationFilterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssociationFilterQueryParams)
     ], GetAssociationFilterRequest.prototype, "queryParams", void 0);
     return GetAssociationFilterRequest;
@@ -129,11 +129,11 @@ var GetAssociationFilterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAssociationFilterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAssociationFilterResponse.prototype, "statusCode", void 0);
     return GetAssociationFilterResponse;

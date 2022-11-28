@@ -13,13 +13,13 @@ type DeleteWebhookQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeleteWebhook200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeleteWebhookRequest struct {
 	PathParams  DeleteWebhookPathParams
 	QueryParams DeleteWebhookQueryParams
-}
-
-type DeleteWebhook200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteWebhookResponse struct {

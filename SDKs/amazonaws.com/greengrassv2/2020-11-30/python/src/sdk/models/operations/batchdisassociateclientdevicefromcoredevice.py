@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class BatchDisassociateClientDeviceFromCoreDevicePathParams:
-    core_device_thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'coreDeviceThingName', 'style': 'simple', 'explode': False }})
+    core_device_thing_name: str = field(metadata={'path_param': { 'field_name': 'coreDeviceThingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,24 +27,24 @@ class BatchDisassociateClientDeviceFromCoreDeviceHeaders:
 @dataclass_json
 @dataclass
 class BatchDisassociateClientDeviceFromCoreDeviceRequestBody:
-    entries: Optional[List[shared.DisassociateClientDeviceFromCoreDeviceEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entries' }})
+    entries: Optional[List[shared.DisassociateClientDeviceFromCoreDeviceEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entries') }})
     
 
 @dataclass
 class BatchDisassociateClientDeviceFromCoreDeviceRequest:
-    path_params: BatchDisassociateClientDeviceFromCoreDevicePathParams = field(default=None)
-    headers: BatchDisassociateClientDeviceFromCoreDeviceHeaders = field(default=None)
-    request: BatchDisassociateClientDeviceFromCoreDeviceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchDisassociateClientDeviceFromCoreDeviceHeaders = field()
+    path_params: BatchDisassociateClientDeviceFromCoreDevicePathParams = field()
+    request: BatchDisassociateClientDeviceFromCoreDeviceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchDisassociateClientDeviceFromCoreDeviceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     batch_disassociate_client_device_from_core_device_response: Optional[shared.BatchDisassociateClientDeviceFromCoreDeviceResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

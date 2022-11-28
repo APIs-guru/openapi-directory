@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesGetPathParams:
-    apps_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
-    instances_id: str = field(default=None, metadata={'path_param': { 'field_name': 'instancesId', 'style': 'simple', 'explode': False }})
-    services_id: str = field(default=None, metadata={'path_param': { 'field_name': 'servicesId', 'style': 'simple', 'explode': False }})
-    versions_id: str = field(default=None, metadata={'path_param': { 'field_name': 'versionsId', 'style': 'simple', 'explode': False }})
+    apps_id: str = field(metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
+    instances_id: str = field(metadata={'path_param': { 'field_name': 'instancesId', 'style': 'simple', 'explode': False }})
+    services_id: str = field(metadata={'path_param': { 'field_name': 'servicesId', 'style': 'simple', 'explode': False }})
+    versions_id: str = field(metadata={'path_param': { 'field_name': 'versionsId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class AppengineAppsServicesVersionsInstancesGetQueryParams:
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -53,14 +54,14 @@ class AppengineAppsServicesVersionsInstancesGetSecurity:
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesGetRequest:
-    path_params: AppengineAppsServicesVersionsInstancesGetPathParams = field(default=None)
-    query_params: AppengineAppsServicesVersionsInstancesGetQueryParams = field(default=None)
-    security: AppengineAppsServicesVersionsInstancesGetSecurity = field(default=None)
+    path_params: AppengineAppsServicesVersionsInstancesGetPathParams = field()
+    query_params: AppengineAppsServicesVersionsInstancesGetQueryParams = field()
+    security: AppengineAppsServicesVersionsInstancesGetSecurity = field()
     
 
 @dataclass
 class AppengineAppsServicesVersionsInstancesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     instance: Optional[shared.Instance] = field(default=None)
-    status_code: int = field(default=None)
     

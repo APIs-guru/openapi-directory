@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeThingGroupPathParams:
-    thing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
+    thing_group_name: str = field(metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DescribeThingGroupHeaders:
 
 @dataclass
 class DescribeThingGroupRequest:
-    path_params: DescribeThingGroupPathParams = field(default=None)
-    headers: DescribeThingGroupHeaders = field(default=None)
+    headers: DescribeThingGroupHeaders = field()
+    path_params: DescribeThingGroupPathParams = field()
     
 
 @dataclass
 class DescribeThingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_thing_group_response: Optional[shared.DescribeThingGroupResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

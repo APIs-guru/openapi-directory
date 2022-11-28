@@ -5,7 +5,7 @@ import (
 )
 
 type DcimRackRolesCreateRequest struct {
-	Request shared.RackRole `request:"mediaType=application/json"`
+	Request shared.RackRoleInput `request:"mediaType=application/json"`
 }
 
 type DcimRackRolesCreateResponse struct {

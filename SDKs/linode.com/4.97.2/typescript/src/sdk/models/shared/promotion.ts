@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PromotionServiceTypeEnum {
-    All = "all"
-,    Backup = "backup"
-,    Blockstorage = "blockstorage"
-,    DbMysql = "db_mysql"
-,    IpV4 = "ip_v4"
-,    Linode = "linode"
-,    LinodeDisk = "linode_disk"
-,    LinodeMemory = "linode_memory"
-,    Longview = "longview"
-,    Managed = "managed"
-,    Nodebalancer = "nodebalancer"
-,    Objectstorage = "objectstorage"
-,    TransferTx = "transfer_tx"
+    All = "all",
+    Backup = "backup",
+    Blockstorage = "blockstorage",
+    DbMysql = "db_mysql",
+    IpV4 = "ip_v4",
+    Linode = "linode",
+    LinodeDisk = "linode_disk",
+    LinodeMemory = "linode_memory",
+    Longview = "longview",
+    Managed = "managed",
+    Nodebalancer = "nodebalancer",
+    Objectstorage = "objectstorage",
+    TransferTx = "transfer_tx"
 }
 
 
@@ -30,27 +31,27 @@ export enum PromotionServiceTypeEnum {
  * 
 **/
 export class Promotion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=credit_monthly_cap" })
+  @SpeakeasyMetadata({ data: "json, name=credit_monthly_cap" })
   creditMonthlyCap?: string;
 
-  @Metadata({ data: "json, name=credit_remaining" })
+  @SpeakeasyMetadata({ data: "json, name=credit_remaining" })
   creditRemaining?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=expire_dt" })
+  @SpeakeasyMetadata({ data: "json, name=expire_dt" })
   expireDt?: string;
 
-  @Metadata({ data: "json, name=image_url" })
+  @SpeakeasyMetadata({ data: "json, name=image_url" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=service_type" })
+  @SpeakeasyMetadata({ data: "json, name=service_type" })
   serviceType?: PromotionServiceTypeEnum;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=this_month_credit_remaining" })
+  @SpeakeasyMetadata({ data: "json, name=this_month_credit_remaining" })
   thisMonthCreditRemaining?: string;
 }

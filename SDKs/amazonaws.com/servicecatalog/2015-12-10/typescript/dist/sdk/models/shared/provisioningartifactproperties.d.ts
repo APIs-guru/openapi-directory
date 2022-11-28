@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningArtifactTypeEnum } from "./provisioningartifacttypeenum";
 /**
  * Information about a provisioning artifact (also known as a version) for a product.

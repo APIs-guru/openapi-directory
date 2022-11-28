@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CatalogConfigurationUpdate } from "./catalogconfigurationupdate";
 import { CustomArtifactConfiguration } from "./customartifactconfiguration";
 import { DeployAsApplicationConfigurationUpdate } from "./deployasapplicationconfigurationupdate";

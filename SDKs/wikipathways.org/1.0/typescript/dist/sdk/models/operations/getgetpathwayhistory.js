@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetPathwayHistoryFormatEnum;
 (function (GetGetPathwayHistoryFormatEnum) {
     GetGetPathwayHistoryFormatEnum["Json"] = "json";
@@ -38,15 +38,15 @@ var GetGetPathwayHistoryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetGetPathwayHistoryQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
         __metadata("design:type", String)
     ], GetGetPathwayHistoryQueryParams.prototype, "pwId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
         __metadata("design:type", String)
     ], GetGetPathwayHistoryQueryParams.prototype, "timestamp", void 0);
     return GetGetPathwayHistoryQueryParams;
@@ -58,7 +58,7 @@ var GetGetPathwayHistoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetPathwayHistoryQueryParams)
     ], GetGetPathwayHistoryRequest.prototype, "queryParams", void 0);
     return GetGetPathwayHistoryRequest;
@@ -70,11 +70,11 @@ var GetGetPathwayHistoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetPathwayHistoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetPathwayHistoryResponse.prototype, "statusCode", void 0);
     return GetGetPathwayHistoryResponse;

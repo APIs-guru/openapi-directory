@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UtteranceData } from "./utterancedata";
+
 
 
 // UtteranceList
@@ -8,9 +8,9 @@ import { UtteranceData } from "./utterancedata";
  * Provides a list of utterances that have been made to a specific version of your bot. The list contains a maximum of 100 utterances.
 **/
 export class UtteranceList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botVersion" })
+  @SpeakeasyMetadata({ data: "json, name=botVersion" })
   botVersion?: string;
 
-  @Metadata({ data: "json, name=utterances", elemType: shared.UtteranceData })
+  @SpeakeasyMetadata({ data: "json, name=utterances", elemType: UtteranceData })
   utterances?: UtteranceData[];
 }

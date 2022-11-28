@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReorderVideoPlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
   playlistId: number;
 }
 
 
 export class ReorderVideoPlaylistRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insertAfterPosition" })
+  @SpeakeasyMetadata({ data: "json, name=insertAfterPosition" })
   insertAfterPosition: number;
 
-  @Metadata({ data: "json, name=reorderLength" })
+  @SpeakeasyMetadata({ data: "json, name=reorderLength" })
   reorderLength?: number;
 
-  @Metadata({ data: "json, name=startPosition" })
+  @SpeakeasyMetadata({ data: "json, name=startPosition" })
   startPosition: number;
 }
 
 
 export class ReorderVideoPlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class ReorderVideoPlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReorderVideoPlaylistPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReorderVideoPlaylistRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ReorderVideoPlaylistSecurity;
 }
 
 
 export class ReorderVideoPlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

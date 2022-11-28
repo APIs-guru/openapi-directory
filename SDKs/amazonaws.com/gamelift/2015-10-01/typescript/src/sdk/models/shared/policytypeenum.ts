@@ -1,6 +1,7 @@
 
 
+
 export enum PolicyTypeEnum {
-    RuleBased = "RuleBased"
-,    TargetBased = "TargetBased"
+    RuleBased = "RuleBased",
+    TargetBased = "TargetBased"
 }

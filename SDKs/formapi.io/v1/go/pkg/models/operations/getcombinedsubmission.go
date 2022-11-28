@@ -12,11 +12,6 @@ type GetCombinedSubmissionSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type GetCombinedSubmissionRequest struct {
-	PathParams GetCombinedSubmissionPathParams
-	Security   GetCombinedSubmissionSecurity
-}
-
 type GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum string
 
 const (
@@ -61,6 +56,11 @@ type GetCombinedSubmissionCombinedSubmission struct {
 	SourcePdfs    []interface{}                                    `json:"source_pdfs"`
 	State         GetCombinedSubmissionCombinedSubmissionStateEnum `json:"state"`
 	SubmissionIds []string                                         `json:"submission_ids"`
+}
+
+type GetCombinedSubmissionRequest struct {
+	PathParams GetCombinedSubmissionPathParams
+	Security   GetCombinedSubmissionSecurity
 }
 
 type GetCombinedSubmissionResponse struct {

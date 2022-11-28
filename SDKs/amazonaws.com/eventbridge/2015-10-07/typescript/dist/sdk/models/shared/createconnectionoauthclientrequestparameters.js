@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CreateConnectionOAuthClientRequestParameters
 /**
  * Contains the Basic authorization parameters to use for the connection.
@@ -33,11 +33,11 @@ var CreateConnectionOAuthClientRequestParameters = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientID" }),
+        SpeakeasyMetadata({ data: "json, name=ClientID" }),
         __metadata("design:type", String)
     ], CreateConnectionOAuthClientRequestParameters.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientSecret" }),
+        SpeakeasyMetadata({ data: "json, name=ClientSecret" }),
         __metadata("design:type", String)
     ], CreateConnectionOAuthClientRequestParameters.prototype, "clientSecret", void 0);
     return CreateConnectionOAuthClientRequestParameters;

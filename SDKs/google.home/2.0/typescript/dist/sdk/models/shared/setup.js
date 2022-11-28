@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Stats } from "./stats";
 var Setup = /** @class */ (function (_super) {
     __extends(Setup, _super);
@@ -30,23 +30,23 @@ var Setup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=qr_ssid_suffix" }),
+        SpeakeasyMetadata({ data: "json, name=qr_ssid_suffix" }),
         __metadata("design:type", String)
     ], Setup.prototype, "qrSsidSuffix", void 0);
     __decorate([
-        Metadata({ data: "json, name=setup_state" }),
+        SpeakeasyMetadata({ data: "json, name=setup_state" }),
         __metadata("design:type", Number)
     ], Setup.prototype, "setupState", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssid_suffix" }),
+        SpeakeasyMetadata({ data: "json, name=ssid_suffix" }),
         __metadata("design:type", String)
     ], Setup.prototype, "ssidSuffix", void 0);
     __decorate([
-        Metadata({ data: "json, name=stats" }),
+        SpeakeasyMetadata({ data: "json, name=stats" }),
         __metadata("design:type", Stats)
     ], Setup.prototype, "stats", void 0);
     __decorate([
-        Metadata({ data: "json, name=tos_accepted" }),
+        SpeakeasyMetadata({ data: "json, name=tos_accepted" }),
         __metadata("design:type", Boolean)
     ], Setup.prototype, "tosAccepted", void 0);
     return Setup;

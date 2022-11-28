@@ -1,184 +1,185 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DfareportingPlacementsListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=profileId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=profileId" })
   profileId: string;
 }
 
 export enum DfareportingPlacementsListActiveStatusEnum {
-    PlacementStatusUnknown = "PLACEMENT_STATUS_UNKNOWN"
-,    PlacementStatusActive = "PLACEMENT_STATUS_ACTIVE"
-,    PlacementStatusInactive = "PLACEMENT_STATUS_INACTIVE"
-,    PlacementStatusArchived = "PLACEMENT_STATUS_ARCHIVED"
-,    PlacementStatusPermanentlyArchived = "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
+    PlacementStatusUnknown = "PLACEMENT_STATUS_UNKNOWN",
+    PlacementStatusActive = "PLACEMENT_STATUS_ACTIVE",
+    PlacementStatusInactive = "PLACEMENT_STATUS_INACTIVE",
+    PlacementStatusArchived = "PLACEMENT_STATUS_ARCHIVED",
+    PlacementStatusPermanentlyArchived = "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
 }
 
 export enum DfareportingPlacementsListCompatibilitiesEnum {
-    Display = "DISPLAY"
-,    DisplayInterstitial = "DISPLAY_INTERSTITIAL"
-,    App = "APP"
-,    AppInterstitial = "APP_INTERSTITIAL"
-,    InStreamVideo = "IN_STREAM_VIDEO"
-,    InStreamAudio = "IN_STREAM_AUDIO"
+    Display = "DISPLAY",
+    DisplayInterstitial = "DISPLAY_INTERSTITIAL",
+    App = "APP",
+    AppInterstitial = "APP_INTERSTITIAL",
+    InStreamVideo = "IN_STREAM_VIDEO",
+    InStreamAudio = "IN_STREAM_AUDIO"
 }
 
 export enum DfareportingPlacementsListPaymentSourceEnum {
-    PlacementAgencyPaid = "PLACEMENT_AGENCY_PAID"
-,    PlacementPublisherPaid = "PLACEMENT_PUBLISHER_PAID"
+    PlacementAgencyPaid = "PLACEMENT_AGENCY_PAID",
+    PlacementPublisherPaid = "PLACEMENT_PUBLISHER_PAID"
 }
 
 export enum DfareportingPlacementsListPricingTypesEnum {
-    PricingTypeCpm = "PRICING_TYPE_CPM"
-,    PricingTypeCpc = "PRICING_TYPE_CPC"
-,    PricingTypeCpa = "PRICING_TYPE_CPA"
-,    PricingTypeFlatRateImpressions = "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
-,    PricingTypeFlatRateClicks = "PRICING_TYPE_FLAT_RATE_CLICKS"
-,    PricingTypeCpmActiveview = "PRICING_TYPE_CPM_ACTIVEVIEW"
+    PricingTypeCpm = "PRICING_TYPE_CPM",
+    PricingTypeCpc = "PRICING_TYPE_CPC",
+    PricingTypeCpa = "PRICING_TYPE_CPA",
+    PricingTypeFlatRateImpressions = "PRICING_TYPE_FLAT_RATE_IMPRESSIONS",
+    PricingTypeFlatRateClicks = "PRICING_TYPE_FLAT_RATE_CLICKS",
+    PricingTypeCpmActiveview = "PRICING_TYPE_CPM_ACTIVEVIEW"
 }
 
 export enum DfareportingPlacementsListSortFieldEnum {
-    Id = "ID"
-,    Name = "NAME"
+    Id = "ID",
+    Name = "NAME"
 }
 
 export enum DfareportingPlacementsListSortOrderEnum {
-    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
 export class DfareportingPlacementsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=activeStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=activeStatus" })
   activeStatus?: DfareportingPlacementsListActiveStatusEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=advertiserIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=advertiserIds" })
   advertiserIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=campaignIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=campaignIds" })
   campaignIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=compatibilities" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=compatibilities" })
   compatibilities?: DfareportingPlacementsListCompatibilitiesEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=contentCategoryIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=contentCategoryIds" })
   contentCategoryIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=directorySiteIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=directorySiteIds" })
   directorySiteIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupIds" })
   groupIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxEndDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxEndDate" })
   maxEndDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxStartDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxStartDate" })
   maxStartDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minEndDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minEndDate" })
   minEndDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minStartDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minStartDate" })
   minStartDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=paymentSource" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=paymentSource" })
   paymentSource?: DfareportingPlacementsListPaymentSourceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=placementStrategyIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=placementStrategyIds" })
   placementStrategyIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pricingTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pricingTypes" })
   pricingTypes?: DfareportingPlacementsListPricingTypesEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchString" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchString" })
   searchString?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=siteIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=siteIds" })
   siteIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sizeIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sizeIds" })
   sizeIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortField" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortField" })
   sortField?: DfareportingPlacementsListSortFieldEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: DfareportingPlacementsListSortOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 }
 
 
 export class DfareportingPlacementsListSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class DfareportingPlacementsListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DfareportingPlacementsListPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DfareportingPlacementsListQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DfareportingPlacementsListSecurity;
 }
 
 
 export class DfareportingPlacementsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   placementsListResponse?: shared.PlacementsListResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

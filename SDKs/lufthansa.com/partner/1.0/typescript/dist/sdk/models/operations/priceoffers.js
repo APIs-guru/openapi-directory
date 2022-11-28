@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PriceOffersPathParams = /** @class */ (function (_super) {
     __extends(PriceOffersPathParams, _super);
@@ -30,11 +30,11 @@ var PriceOffersPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destination" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destination" }),
         __metadata("design:type", String)
     ], PriceOffersPathParams.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=origin" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=origin" }),
         __metadata("design:type", String)
     ], PriceOffersPathParams.prototype, "origin", void 0);
     return PriceOffersPathParams;
@@ -46,15 +46,15 @@ var PriceOffersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=departureDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=departureDate" }),
         __metadata("design:type", String)
     ], PriceOffersQueryParams.prototype, "departureDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=returnDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=returnDate" }),
         __metadata("design:type", String)
     ], PriceOffersQueryParams.prototype, "returnDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=service" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=service" }),
         __metadata("design:type", String)
     ], PriceOffersQueryParams.prototype, "service", void 0);
     return PriceOffersQueryParams;
@@ -66,7 +66,7 @@ var PriceOffersSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], PriceOffersSecurity.prototype, "auth", void 0);
     return PriceOffersSecurity;
@@ -78,15 +78,15 @@ var PriceOffersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PriceOffersPathParams)
     ], PriceOffersRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PriceOffersQueryParams)
     ], PriceOffersRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PriceOffersSecurity)
     ], PriceOffersRequest.prototype, "security", void 0);
     return PriceOffersRequest;
@@ -98,15 +98,15 @@ var PriceOffersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PriceOffersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PriceOffersResponse.prototype, "priceOffers200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PriceOffersResponse.prototype, "statusCode", void 0);
     return PriceOffersResponse;

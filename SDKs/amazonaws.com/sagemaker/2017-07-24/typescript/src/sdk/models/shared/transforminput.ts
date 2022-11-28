@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompressionTypeEnum } from "./compressiontypeenum";
 import { TransformDataSource } from "./transformdatasource";
 import { SplitTypeEnum } from "./splittypeenum";
+
 
 
 // TransformInput
@@ -9,15 +10,15 @@ import { SplitTypeEnum } from "./splittypeenum";
  * Describes the input source of a transform job and the way the transform job consumes it.
 **/
 export class TransformInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompressionType" })
+  @SpeakeasyMetadata({ data: "json, name=CompressionType" })
   compressionType?: CompressionTypeEnum;
 
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource: TransformDataSource;
 
-  @Metadata({ data: "json, name=SplitType" })
+  @SpeakeasyMetadata({ data: "json, name=SplitType" })
   splitType?: SplitTypeEnum;
 }

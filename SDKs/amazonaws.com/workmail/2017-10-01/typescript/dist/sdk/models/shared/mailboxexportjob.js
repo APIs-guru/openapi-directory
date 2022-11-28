@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MailboxExportJobStateEnum } from "./mailboxexportjobstateenum";
 // MailboxExportJob
 /**
@@ -34,39 +34,39 @@ var MailboxExportJob = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], MailboxExportJob.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], MailboxExportJob.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityId" }),
+        SpeakeasyMetadata({ data: "json, name=EntityId" }),
         __metadata("design:type", String)
     ], MailboxExportJob.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EstimatedProgress" }),
+        SpeakeasyMetadata({ data: "json, name=EstimatedProgress" }),
         __metadata("design:type", Number)
     ], MailboxExportJob.prototype, "estimatedProgress", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobId" }),
+        SpeakeasyMetadata({ data: "json, name=JobId" }),
         __metadata("design:type", String)
     ], MailboxExportJob.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=S3BucketName" }),
         __metadata("design:type", String)
     ], MailboxExportJob.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Path" }),
+        SpeakeasyMetadata({ data: "json, name=S3Path" }),
         __metadata("design:type", String)
     ], MailboxExportJob.prototype, "s3Path", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], MailboxExportJob.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], MailboxExportJob.prototype, "state", void 0);
     return MailboxExportJob;

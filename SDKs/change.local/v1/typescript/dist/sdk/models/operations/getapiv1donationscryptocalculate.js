@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetApiV1DonationsCryptoCalculateCurrencyEnum;
 (function (GetApiV1DonationsCryptoCalculateCurrencyEnum) {
@@ -35,11 +35,11 @@ var GetApiV1DonationsCryptoCalculateQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", Number)
     ], GetApiV1DonationsCryptoCalculateQueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currency" }),
         __metadata("design:type", String)
     ], GetApiV1DonationsCryptoCalculateQueryParams.prototype, "currency", void 0);
     return GetApiV1DonationsCryptoCalculateQueryParams;
@@ -51,7 +51,7 @@ var GetApiV1DonationsCryptoCalculateSecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], GetApiV1DonationsCryptoCalculateSecurity.prototype, "basicAuth", void 0);
     return GetApiV1DonationsCryptoCalculateSecurity;
@@ -63,11 +63,11 @@ var GetApiV1DonationsCryptoCalculateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV1DonationsCryptoCalculateQueryParams)
     ], GetApiV1DonationsCryptoCalculateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV1DonationsCryptoCalculateSecurity)
     ], GetApiV1DonationsCryptoCalculateRequest.prototype, "security", void 0);
     return GetApiV1DonationsCryptoCalculateRequest;
@@ -79,11 +79,11 @@ var GetApiV1DonationsCryptoCalculateResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiV1DonationsCryptoCalculateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiV1DonationsCryptoCalculateResponse.prototype, "statusCode", void 0);
     return GetApiV1DonationsCryptoCalculateResponse;

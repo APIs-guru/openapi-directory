@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MfaOptionType } from "./mfaoptiontype";
+
 
 
 // SetUserSettingsRequest
@@ -8,9 +8,9 @@ import { MfaOptionType } from "./mfaoptiontype";
  * Represents the request to set user settings.
 **/
 export class SetUserSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=MFAOptions", elemType: shared.MfaOptionType })
+  @SpeakeasyMetadata({ data: "json, name=MFAOptions", elemType: MfaOptionType })
   mfaOptions: MfaOptionType[];
 }

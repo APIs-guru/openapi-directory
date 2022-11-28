@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VpcLink
+// Represents a VPC link.
 type VpcLink struct {
 	CreatedDate          *time.Time          `json:"CreatedDate,omitempty"`
 	Name                 string              `json:"Name"`

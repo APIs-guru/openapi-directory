@@ -32,7 +32,7 @@ type NetworkconnectivityProjectsLocationsSpokesPatchSecurity struct {
 type NetworkconnectivityProjectsLocationsSpokesPatchRequest struct {
 	PathParams  NetworkconnectivityProjectsLocationsSpokesPatchPathParams
 	QueryParams NetworkconnectivityProjectsLocationsSpokesPatchQueryParams
-	Request     *shared.Spoke `request:"mediaType=application/json"`
+	Request     *shared.SpokeInput `request:"mediaType=application/json"`
 	Security    NetworkconnectivityProjectsLocationsSpokesPatchSecurity
 }
 

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingFloodlightActivitiesGeneratetagPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DfareportingFloodlightActivitiesGeneratetagQueryParams:
 
 @dataclass
 class DfareportingFloodlightActivitiesGeneratetagSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingFloodlightActivitiesGeneratetagRequest:
-    path_params: DfareportingFloodlightActivitiesGeneratetagPathParams = field(default=None)
-    query_params: DfareportingFloodlightActivitiesGeneratetagQueryParams = field(default=None)
-    security: DfareportingFloodlightActivitiesGeneratetagSecurity = field(default=None)
+    path_params: DfareportingFloodlightActivitiesGeneratetagPathParams = field()
+    query_params: DfareportingFloodlightActivitiesGeneratetagQueryParams = field()
+    security: DfareportingFloodlightActivitiesGeneratetagSecurity = field()
     
 
 @dataclass
 class DfareportingFloodlightActivitiesGeneratetagResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     floodlight_activities_generate_tag_response: Optional[shared.FloodlightActivitiesGenerateTagResponse] = field(default=None)
-    status_code: int = field(default=None)
     

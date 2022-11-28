@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PivotValueRegion } from "./pivotvalueregion";
+
 
 
 // DateRangeValues
@@ -8,9 +8,9 @@ import { PivotValueRegion } from "./pivotvalueregion";
  * Used to return a list of metrics for a single DateRange / dimension combination
 **/
 export class DateRangeValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pivotValueRegions", elemType: shared.PivotValueRegion })
+  @SpeakeasyMetadata({ data: "json, name=pivotValueRegions", elemType: PivotValueRegion })
   pivotValueRegions?: PivotValueRegion[];
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

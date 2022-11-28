@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAssetsVarianceSampleRequestBodyAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetReturns" })
   assetReturns: number[];
 }
 
 
 export class PostAssetsVarianceSampleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsVarianceSampleRequestBodyAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsVarianceSampleRequestBodyAssets })
   assets: PostAssetsVarianceSampleRequestBodyAssets[];
 }
 
 
-export class PostAssetsVarianceSampleRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostAssetsVarianceSampleRequestBody;
-}
-
-
 export class PostAssetsVarianceSample200ApplicationJsonAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetVariance" })
+  @SpeakeasyMetadata({ data: "json, name=assetVariance" })
   assetVariance: number;
 }
 
 
 export class PostAssetsVarianceSample200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsVarianceSample200ApplicationJsonAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsVarianceSample200ApplicationJsonAssets })
   assets: PostAssetsVarianceSample200ApplicationJsonAssets[];
 }
 
 
+export class PostAssetsVarianceSampleRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostAssetsVarianceSampleRequestBody;
+}
+
+
 export class PostAssetsVarianceSampleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAssetsVarianceSample200ApplicationJsonObject?: PostAssetsVarianceSample200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

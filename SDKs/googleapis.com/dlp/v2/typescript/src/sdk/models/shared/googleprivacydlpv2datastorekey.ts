@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Key } from "./googleprivacydlpv2key";
+
 
 
 // GooglePrivacyDlpV2DatastoreKey
@@ -7,6 +8,6 @@ import { GooglePrivacyDlpV2Key } from "./googleprivacydlpv2key";
  * Record key for a finding in Cloud Datastore.
 **/
 export class GooglePrivacyDlpV2DatastoreKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityKey" })
+  @SpeakeasyMetadata({ data: "json, name=entityKey" })
   entityKey?: GooglePrivacyDlpV2Key;
 }

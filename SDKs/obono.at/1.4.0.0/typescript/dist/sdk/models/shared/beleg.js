@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SignierteBelegdaten } from "./signiertebelegdaten";
 export var BelegBelegTypenEnum;
 (function (BelegBelegTypenEnum) {
@@ -40,43 +40,43 @@ var Beleg = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Beleg-Codes" }),
+        SpeakeasyMetadata({ data: "json, name=Beleg-Codes" }),
         __metadata("design:type", Array)
     ], Beleg.prototype, "belegCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=Beleg-Typen" }),
+        SpeakeasyMetadata({ data: "json, name=Beleg-Typen" }),
         __metadata("design:type", Array)
     ], Beleg.prototype, "belegTypen", void 0);
     __decorate([
-        Metadata({ data: "json, name=Belegdaten" }),
+        SpeakeasyMetadata({ data: "json, name=Belegdaten" }),
         __metadata("design:type", SignierteBelegdaten)
     ], Beleg.prototype, "belegdaten", void 0);
     __decorate([
-        Metadata({ data: "json, name=JWS" }),
+        SpeakeasyMetadata({ data: "json, name=JWS" }),
         __metadata("design:type", String)
     ], Beleg.prototype, "jws", void 0);
     __decorate([
-        Metadata({ data: "json, name=QR" }),
+        SpeakeasyMetadata({ data: "json, name=QR" }),
         __metadata("design:type", String)
     ], Beleg.prototype, "qr", void 0);
     __decorate([
-        Metadata({ data: "json, name=QR-Link" }),
+        SpeakeasyMetadata({ data: "json, name=QR-Link" }),
         __metadata("design:type", String)
     ], Beleg.prototype, "qrLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=Registrierkasse-UUID" }),
+        SpeakeasyMetadata({ data: "json, name=Registrierkasse-UUID" }),
         __metadata("design:type", String)
     ], Beleg.prototype, "registrierkasseUuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=Signaturerstellungseinheit-UUID" }),
+        SpeakeasyMetadata({ data: "json, name=Signaturerstellungseinheit-UUID" }),
         __metadata("design:type", String)
     ], Beleg.prototype, "signaturerstellungseinheitUuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=_href" }),
+        SpeakeasyMetadata({ data: "json, name=_href" }),
         __metadata("design:type", String)
     ], Beleg.prototype, "href", void 0);
     __decorate([
-        Metadata({ data: "json, name=_uuid" }),
+        SpeakeasyMetadata({ data: "json, name=_uuid" }),
         __metadata("design:type", String)
     ], Beleg.prototype, "uuid", void 0);
     return Beleg;

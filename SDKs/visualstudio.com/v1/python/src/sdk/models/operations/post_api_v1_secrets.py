@@ -18,15 +18,15 @@ class PostAPIV1SecretsRequests:
 
 @dataclass
 class PostAPIV1SecretsRequest:
-    query_params: PostAPIV1SecretsQueryParams = field(default=None)
+    query_params: PostAPIV1SecretsQueryParams = field()
     request: Optional[PostAPIV1SecretsRequests] = field(default=None)
     
 
 @dataclass
 class PostAPIV1SecretsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     scoped_secret_result_body: Optional[shared.ScopedSecretResultBody] = field(default=None)
-    status_code: int = field(default=None)
     

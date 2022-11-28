@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import compromisedcredentialsactionstype
-from . import eventfiltertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CompromisedCredentialsRiskConfigurationType:
-    actions: compromisedcredentialsactionstype.CompromisedCredentialsActionsType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Actions' }})
-    event_filter: Optional[List[eventfiltertype_enum.EventFilterTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventFilter' }})
+    r"""CompromisedCredentialsRiskConfigurationType
+    The compromised credentials risk configuration type.
+    """
+    
+    actions: CompromisedCredentialsActionsType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Actions') }})
+    event_filter: Optional[List[EventFilterTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventFilter') }})
     

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DisassociateAttributeGroupPathParams:
-    application: str = field(default=None, metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
-    attribute_group: str = field(default=None, metadata={'path_param': { 'field_name': 'attributeGroup', 'style': 'simple', 'explode': False }})
+    application: str = field(metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
+    attribute_group: str = field(metadata={'path_param': { 'field_name': 'attributeGroup', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class DisassociateAttributeGroupHeaders:
 
 @dataclass
 class DisassociateAttributeGroupRequest:
-    path_params: DisassociateAttributeGroupPathParams = field(default=None)
-    headers: DisassociateAttributeGroupHeaders = field(default=None)
+    headers: DisassociateAttributeGroupHeaders = field()
+    path_params: DisassociateAttributeGroupPathParams = field()
     
 
 @dataclass
 class DisassociateAttributeGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     disassociate_attribute_group_response: Optional[shared.DisassociateAttributeGroupResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeySchemaElement } from "./keyschemaelement";
 import { Shard } from "./shard";
 import { StreamStatusEnum } from "./streamstatusenum";
 import { StreamViewTypeEnum } from "./streamviewtypeenum";
+
 
 
 // StreamDescription
@@ -11,30 +11,30 @@ import { StreamViewTypeEnum } from "./streamviewtypeenum";
  * Represents all of the data describing a particular stream.
 **/
 export class StreamDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationRequestDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationRequestDateTime" })
   creationRequestDateTime?: Date;
 
-  @Metadata({ data: "json, name=KeySchema", elemType: shared.KeySchemaElement })
+  @SpeakeasyMetadata({ data: "json, name=KeySchema", elemType: KeySchemaElement })
   keySchema?: KeySchemaElement[];
 
-  @Metadata({ data: "json, name=LastEvaluatedShardId" })
+  @SpeakeasyMetadata({ data: "json, name=LastEvaluatedShardId" })
   lastEvaluatedShardId?: string;
 
-  @Metadata({ data: "json, name=Shards", elemType: shared.Shard })
+  @SpeakeasyMetadata({ data: "json, name=Shards", elemType: Shard })
   shards?: Shard[];
 
-  @Metadata({ data: "json, name=StreamArn" })
+  @SpeakeasyMetadata({ data: "json, name=StreamArn" })
   streamArn?: string;
 
-  @Metadata({ data: "json, name=StreamLabel" })
+  @SpeakeasyMetadata({ data: "json, name=StreamLabel" })
   streamLabel?: string;
 
-  @Metadata({ data: "json, name=StreamStatus" })
+  @SpeakeasyMetadata({ data: "json, name=StreamStatus" })
   streamStatus?: StreamStatusEnum;
 
-  @Metadata({ data: "json, name=StreamViewType" })
+  @SpeakeasyMetadata({ data: "json, name=StreamViewType" })
   streamViewType?: StreamViewTypeEnum;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 }

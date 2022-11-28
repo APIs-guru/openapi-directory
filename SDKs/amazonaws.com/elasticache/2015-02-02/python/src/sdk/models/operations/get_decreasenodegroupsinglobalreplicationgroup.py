@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDecreaseNodeGroupsInGlobalReplicationGroupActionEnum(str, Enum):
     DECREASE_NODE_GROUPS_IN_GLOBAL_REPLICATION_GROUP = "DecreaseNodeGroupsInGlobalReplicationGroup"
@@ -10,13 +14,13 @@ class GetDecreaseNodeGroupsInGlobalReplicationGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDecreaseNodeGroupsInGlobalReplicationGroupQueryParams:
-    action: GetDecreaseNodeGroupsInGlobalReplicationGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    apply_immediately: bool = field(default=None, metadata={'query_param': { 'field_name': 'ApplyImmediately', 'style': 'form', 'explode': True }})
+    action: GetDecreaseNodeGroupsInGlobalReplicationGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    apply_immediately: bool = field(metadata={'query_param': { 'field_name': 'ApplyImmediately', 'style': 'form', 'explode': True }})
+    global_replication_group_id: str = field(metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
+    node_group_count: int = field(metadata={'query_param': { 'field_name': 'NodeGroupCount', 'style': 'form', 'explode': True }})
+    version: GetDecreaseNodeGroupsInGlobalReplicationGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     global_node_groups_to_remove: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'GlobalNodeGroupsToRemove', 'style': 'form', 'explode': True }})
     global_node_groups_to_retain: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'GlobalNodeGroupsToRetain', 'style': 'form', 'explode': True }})
-    global_replication_group_id: str = field(default=None, metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
-    node_group_count: int = field(default=None, metadata={'query_param': { 'field_name': 'NodeGroupCount', 'style': 'form', 'explode': True }})
-    version: GetDecreaseNodeGroupsInGlobalReplicationGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDecreaseNodeGroupsInGlobalReplicationGroupHeaders:
 
 @dataclass
 class GetDecreaseNodeGroupsInGlobalReplicationGroupRequest:
-    query_params: GetDecreaseNodeGroupsInGlobalReplicationGroupQueryParams = field(default=None)
-    headers: GetDecreaseNodeGroupsInGlobalReplicationGroupHeaders = field(default=None)
+    headers: GetDecreaseNodeGroupsInGlobalReplicationGroupHeaders = field()
+    query_params: GetDecreaseNodeGroupsInGlobalReplicationGroupQueryParams = field()
     
 
 @dataclass
 class GetDecreaseNodeGroupsInGlobalReplicationGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

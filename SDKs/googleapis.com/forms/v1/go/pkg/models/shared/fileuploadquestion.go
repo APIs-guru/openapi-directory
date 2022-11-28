@@ -15,6 +15,8 @@ const (
 	FileUploadQuestionTypesEnumAudio               FileUploadQuestionTypesEnum = "AUDIO"
 )
 
+// FileUploadQuestion
+// A file upload question. The API currently does not support creating file upload questions.
 type FileUploadQuestion struct {
 	FolderID    *string                       `json:"folderId,omitempty"`
 	MaxFileSize *string                       `json:"maxFileSize,omitempty"`

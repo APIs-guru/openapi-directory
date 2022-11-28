@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileLocation } from "./filelocation";
 import { ServiceMetadata } from "./servicemetadata";
 import { ExecutionStatusEnum } from "./executionstatusenum";
+
 
 
 // ListedExecution
@@ -9,15 +10,15 @@ import { ExecutionStatusEnum } from "./executionstatusenum";
  * Returns properties of the execution that is specified.
 **/
 export class ListedExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=InitialFileLocation" })
+  @SpeakeasyMetadata({ data: "json, name=InitialFileLocation" })
   initialFileLocation?: FileLocation;
 
-  @Metadata({ data: "json, name=ServiceMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceMetadata" })
   serviceMetadata?: ServiceMetadata;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ExecutionStatusEnum;
 }

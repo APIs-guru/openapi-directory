@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetV1Servers = []string{
+var GetV1ServerList = []string{
 	"https://ipgeolocation.abstractapi.com",
 }
 

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PublicKeyFormatEnum {
-    KeyFormatUnspecified = "KEY_FORMAT_UNSPECIFIED"
-,    Pem = "PEM"
+    KeyFormatUnspecified = "KEY_FORMAT_UNSPECIFIED",
+    Pem = "PEM"
 }
 
 
@@ -11,9 +12,9 @@ export enum PublicKeyFormatEnum {
  * A PublicKey describes a public key.
 **/
 export class PublicKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: PublicKeyFormatEnum;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 }

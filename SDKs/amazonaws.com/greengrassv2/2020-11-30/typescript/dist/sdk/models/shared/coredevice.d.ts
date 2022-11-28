@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CoreDeviceStatusEnum } from "./coredevicestatusenum";
 /**
  * Contains information about a Greengrass core device, which is an IoT thing that runs the IoT Greengrass Core software.

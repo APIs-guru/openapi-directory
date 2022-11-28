@@ -1,5 +1,7 @@
 package shared
 
+// Profiles
+// A view (profile) collection lists Analytics views (profiles) to which the user has access. Each resource in the collection corresponds to a single Analytics view (profile).
 type Profiles struct {
 	Items        []Profile `json:"items,omitempty"`
 	ItemsPerPage *int32    `json:"itemsPerPage,omitempty"`

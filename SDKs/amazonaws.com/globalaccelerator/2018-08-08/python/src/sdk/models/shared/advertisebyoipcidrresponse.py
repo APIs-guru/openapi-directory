@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import byoipcidr
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AdvertiseByoipCidrResponse:
-    byoip_cidr: Optional[byoipcidr.ByoipCidr] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ByoipCidr' }})
+    byoip_cidr: Optional[ByoipCidr] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ByoipCidr') }})
     

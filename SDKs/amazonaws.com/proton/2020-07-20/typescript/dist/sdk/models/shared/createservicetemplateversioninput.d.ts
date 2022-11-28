@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CompatibleEnvironmentTemplateInput } from "./compatibleenvironmenttemplateinput";
 import { TemplateVersionSourceInput } from "./templateversionsourceinput";
 import { Tag } from "./tag";

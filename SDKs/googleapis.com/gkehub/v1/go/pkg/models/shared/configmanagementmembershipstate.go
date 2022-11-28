@@ -1,5 +1,7 @@
 package shared
 
+// ConfigManagementMembershipState
+// **Anthos Config Management**: State for a single cluster.
 type ConfigManagementMembershipState struct {
 	ClusterName              *string                                   `json:"clusterName,omitempty"`
 	ConfigSyncState          *ConfigManagementConfigSyncState          `json:"configSyncState,omitempty"`

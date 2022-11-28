@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListPolicyPrincipalsResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output from the ListPolicyPrincipals operation.
 **/
 export class ListPolicyPrincipalsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=nextMarker" })
   nextMarker?: string;
 
-  @Metadata({ data: "json, name=principals" })
+  @SpeakeasyMetadata({ data: "json, name=principals" })
   principals?: string[];
 }

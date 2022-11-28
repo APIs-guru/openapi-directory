@@ -32,7 +32,7 @@ type DisplayvideoAdvertisersCreativesPatchSecurity struct {
 type DisplayvideoAdvertisersCreativesPatchRequest struct {
 	PathParams  DisplayvideoAdvertisersCreativesPatchPathParams
 	QueryParams DisplayvideoAdvertisersCreativesPatchQueryParams
-	Request     *shared.Creative `request:"mediaType=application/json"`
+	Request     *shared.CreativeInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersCreativesPatchSecurity
 }
 

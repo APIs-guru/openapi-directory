@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .announcement import *
 from .assignment import *
@@ -13,7 +13,7 @@ from .courserosterchangesinfo import *
 from .coursework import *
 from .courseworkchangesinfo import *
 from .courseworkmaterial import *
-from .date import *
+from .date_ import *
 from .drivefile import *
 from .drivefolder import *
 from .feed import *

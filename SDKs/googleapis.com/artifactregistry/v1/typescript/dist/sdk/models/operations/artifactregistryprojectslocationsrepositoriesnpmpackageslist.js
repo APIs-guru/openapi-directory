@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams = /** @class */ (function (_super) {
     __extends(ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams, _super);
@@ -30,7 +30,7 @@ var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams.prototype, "parent", void 0);
     return ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams;
@@ -42,55 +42,55 @@ var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams.prototype, "uploadProtocol", void 0);
     return ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams;
@@ -102,11 +102,11 @@ var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption1 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption1.prototype, "oauth2c", void 0);
     return ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption1;
@@ -118,11 +118,11 @@ var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption2 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption2.prototype, "oauth2c", void 0);
     return ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption2;
@@ -134,11 +134,11 @@ var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption1)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption2)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity.prototype, "option2", void 0);
     return ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity;
@@ -150,15 +150,15 @@ var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListRequest = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListRequest.prototype, "security", void 0);
     return ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListRequest;
@@ -170,15 +170,15 @@ var ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListResponse = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListNpmPackagesResponse)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListResponse.prototype, "listNpmPackagesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListResponse.prototype, "statusCode", void 0);
     return ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListResponse;

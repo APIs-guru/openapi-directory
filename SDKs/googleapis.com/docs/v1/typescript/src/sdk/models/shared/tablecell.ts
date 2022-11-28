@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructuralElement } from "./structuralelement";
 import { SuggestedTableCellStyle } from "./suggestedtablecellstyle";
 import { TableCellStyle } from "./tablecellstyle";
+
 
 
 // TableCell
@@ -10,24 +10,24 @@ import { TableCellStyle } from "./tablecellstyle";
  * The contents and style of a cell in a Table.
 **/
 export class TableCell extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.StructuralElement })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElement })
   content?: StructuralElement[];
 
-  @Metadata({ data: "json, name=endIndex" })
+  @SpeakeasyMetadata({ data: "json, name=endIndex" })
   endIndex?: number;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=suggestedDeletionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
   suggestedDeletionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedInsertionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionIds" })
   suggestedInsertionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedTableCellStyleChanges", elemType: shared.SuggestedTableCellStyle })
+  @SpeakeasyMetadata({ data: "json, name=suggestedTableCellStyleChanges", elemType: SuggestedTableCellStyle })
   suggestedTableCellStyleChanges?: Map<string, SuggestedTableCellStyle>;
 
-  @Metadata({ data: "json, name=tableCellStyle" })
+  @SpeakeasyMetadata({ data: "json, name=tableCellStyle" })
   tableCellStyle?: TableCellStyle;
 }

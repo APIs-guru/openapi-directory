@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContactInputModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=businessPhone" })
+  @SpeakeasyMetadata({ data: "json, name=businessPhone" })
   businessPhone?: string;
 
-  @Metadata({ data: "json, name=businessPhoneExt" })
+  @SpeakeasyMetadata({ data: "json, name=businessPhoneExt" })
   businessPhoneExt?: string;
 
-  @Metadata({ data: "json, name=conferenceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=conferenceInfo" })
   conferenceInfo?: string;
 
-  @Metadata({ data: "json, name=homePhone" })
+  @SpeakeasyMetadata({ data: "json, name=homePhone" })
   homePhone?: string;
 
-  @Metadata({ data: "json, name=mobilePhone" })
+  @SpeakeasyMetadata({ data: "json, name=mobilePhone" })
   mobilePhone?: string;
 
-  @Metadata({ data: "json, name=preferredPhoneType" })
+  @SpeakeasyMetadata({ data: "json, name=preferredPhoneType" })
   preferredPhoneType?: string;
 
-  @Metadata({ data: "json, name=skypeUsername" })
+  @SpeakeasyMetadata({ data: "json, name=skypeUsername" })
   skypeUsername?: string;
 }

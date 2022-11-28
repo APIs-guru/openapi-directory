@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstructionInput } from "./instructioninput";
 import { SideInputInfo } from "./sideinputinfo";
+
 
 
 // PartialGroupByKeyInstruction
@@ -9,21 +9,21 @@ import { SideInputInfo } from "./sideinputinfo";
  * An instruction that does a partial group-by-key. One input and one output.
 **/
 export class PartialGroupByKeyInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: InstructionInput;
 
-  @Metadata({ data: "json, name=inputElementCodec" })
+  @SpeakeasyMetadata({ data: "json, name=inputElementCodec" })
   inputElementCodec?: Map<string, any>;
 
-  @Metadata({ data: "json, name=originalCombineValuesInputStoreName" })
+  @SpeakeasyMetadata({ data: "json, name=originalCombineValuesInputStoreName" })
   originalCombineValuesInputStoreName?: string;
 
-  @Metadata({ data: "json, name=originalCombineValuesStepName" })
+  @SpeakeasyMetadata({ data: "json, name=originalCombineValuesStepName" })
   originalCombineValuesStepName?: string;
 
-  @Metadata({ data: "json, name=sideInputs", elemType: shared.SideInputInfo })
+  @SpeakeasyMetadata({ data: "json, name=sideInputs", elemType: SideInputInfo })
   sideInputs?: SideInputInfo[];
 
-  @Metadata({ data: "json, name=valueCombiningFn" })
+  @SpeakeasyMetadata({ data: "json, name=valueCombiningFn" })
   valueCombiningFn?: Map<string, any>;
 }

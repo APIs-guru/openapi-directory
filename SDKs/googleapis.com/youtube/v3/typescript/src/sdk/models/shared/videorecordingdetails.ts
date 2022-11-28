@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeoPoint } from "./geopoint";
+
 
 
 // VideoRecordingDetails
@@ -7,12 +8,12 @@ import { GeoPoint } from "./geopoint";
  * Recording information associated with the video.
 **/
 export class VideoRecordingDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: GeoPoint;
 
-  @Metadata({ data: "json, name=locationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=locationDescription" })
   locationDescription?: string;
 
-  @Metadata({ data: "json, name=recordingDate" })
+  @SpeakeasyMetadata({ data: "json, name=recordingDate" })
   recordingDate?: Date;
 }

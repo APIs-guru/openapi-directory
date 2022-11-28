@@ -6,6 +6,8 @@ const (
 	GetCreateTemplateActionEnumCreateTemplate GetCreateTemplateActionEnum = "CreateTemplate"
 )
 
+// GetCreateTemplateTemplate
+// The content of the email, composed of a subject line, an HTML part, and a text-only part.
 type GetCreateTemplateTemplate struct {
 	HTMLPart     *string `queryParam:"name=HtmlPart"`
 	SubjectPart  *string `queryParam:"name=SubjectPart"`

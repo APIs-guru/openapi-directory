@@ -1,5 +1,7 @@
 package shared
 
+// TemplateResponse
+// Provides information about a message template that's associated with your Amazon Pinpoint account.
 type TemplateResponse struct {
 	Arn                  *string           `json:"Arn,omitempty"`
 	CreationDate         string            `json:"CreationDate"`

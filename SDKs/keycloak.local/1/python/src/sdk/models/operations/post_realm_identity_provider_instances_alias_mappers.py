@@ -4,18 +4,18 @@ from sdk.models import shared
 
 @dataclass
 class PostRealmIdentityProviderInstancesAliasMappersPathParams:
-    alias: str = field(default=None, metadata={'path_param': { 'field_name': 'alias', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    alias: str = field(metadata={'path_param': { 'field_name': 'alias', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostRealmIdentityProviderInstancesAliasMappersRequest:
-    path_params: PostRealmIdentityProviderInstancesAliasMappersPathParams = field(default=None)
-    request: shared.IdentityProviderMapperRepresentation = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: PostRealmIdentityProviderInstancesAliasMappersPathParams = field()
+    request: shared.IdentityProviderMapperRepresentation = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostRealmIdentityProviderInstancesAliasMappersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

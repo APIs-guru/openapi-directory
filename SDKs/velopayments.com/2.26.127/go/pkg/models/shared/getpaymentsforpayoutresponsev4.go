@@ -1,5 +1,7 @@
 package shared
 
+// GetPaymentsForPayoutResponseV4
+// List Payments for payout
 type GetPaymentsForPayoutResponseV4 struct {
 	Content []PaymentResponseV4 `json:"content,omitempty"`
 	Links   []interface{}       `json:"links,omitempty"`

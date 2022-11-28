@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiStage } from "./apistage";
 import { QuotaSettings } from "./quotasettings";
 import { ThrottleSettings } from "./throttlesettings";

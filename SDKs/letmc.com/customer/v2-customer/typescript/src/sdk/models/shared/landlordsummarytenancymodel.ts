@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LandlordSummaryTenancyModel
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Landlord Summary - Landing Page.
 **/
 export class LandlordSummaryTenancyModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bond" })
+  @SpeakeasyMetadata({ data: "json, name=Bond" })
   bond?: number;
 
-  @Metadata({ data: "json, name=BranchID" })
+  @SpeakeasyMetadata({ data: "json, name=BranchID" })
   branchId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=GlobalReference" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalReference" })
   globalReference?: string;
 
-  @Metadata({ data: "json, name=ID" })
+  @SpeakeasyMetadata({ data: "json, name=ID" })
   id?: string;
 
-  @Metadata({ data: "json, name=MaintenanceJobs" })
+  @SpeakeasyMetadata({ data: "json, name=MaintenanceJobs" })
   maintenanceJobs?: number;
 
-  @Metadata({ data: "json, name=ManagedRent" })
+  @SpeakeasyMetadata({ data: "json, name=ManagedRent" })
   managedRent?: boolean;
 
-  @Metadata({ data: "json, name=PropertyAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PropertyAddress" })
   propertyAddress?: string;
 
-  @Metadata({ data: "json, name=Rent" })
+  @SpeakeasyMetadata({ data: "json, name=Rent" })
   rent?: string;
 
-  @Metadata({ data: "json, name=RentArrears" })
+  @SpeakeasyMetadata({ data: "json, name=RentArrears" })
   rentArrears?: number;
 
-  @Metadata({ data: "json, name=RentCollected" })
+  @SpeakeasyMetadata({ data: "json, name=RentCollected" })
   rentCollected?: number;
 
-  @Metadata({ data: "json, name=TenancyProperty" })
+  @SpeakeasyMetadata({ data: "json, name=TenancyProperty" })
   tenancyProperty?: string;
 
-  @Metadata({ data: "json, name=TenancyState" })
+  @SpeakeasyMetadata({ data: "json, name=TenancyState" })
   tenancyState?: string;
 }

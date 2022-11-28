@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Project } from "./project";
+
 
 
 // ListProjectsResult
@@ -8,9 +8,9 @@ import { Project } from "./project";
  * Represents the result of a list projects request.
 **/
 export class ListProjectsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=projects", elemType: shared.Project })
+  @SpeakeasyMetadata({ data: "json, name=projects", elemType: Project })
   projects?: Project[];
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingUserRolePermissionGroupsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DfareportingUserRolePermissionGroupsGetQueryParams:
 
 @dataclass
 class DfareportingUserRolePermissionGroupsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingUserRolePermissionGroupsGetRequest:
-    path_params: DfareportingUserRolePermissionGroupsGetPathParams = field(default=None)
-    query_params: DfareportingUserRolePermissionGroupsGetQueryParams = field(default=None)
-    security: DfareportingUserRolePermissionGroupsGetSecurity = field(default=None)
+    path_params: DfareportingUserRolePermissionGroupsGetPathParams = field()
+    query_params: DfareportingUserRolePermissionGroupsGetQueryParams = field()
+    security: DfareportingUserRolePermissionGroupsGetSecurity = field()
     
 
 @dataclass
 class DfareportingUserRolePermissionGroupsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_role_permission_group: Optional[shared.UserRolePermissionGroup] = field(default=None)
     

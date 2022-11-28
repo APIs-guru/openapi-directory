@@ -1,9 +1,13 @@
 package shared
 
+// CommentAuthorImage
+// The creator's avatar.
 type CommentAuthorImage struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// CommentAuthor
+// The author of this Comment.
 type CommentAuthor struct {
 	DisplayName *string             `json:"displayName,omitempty"`
 	ID          *string             `json:"id,omitempty"`
@@ -11,14 +15,20 @@ type CommentAuthor struct {
 	URL         *string             `json:"url,omitempty"`
 }
 
+// CommentBlog
+// Data about the blog containing this comment.
 type CommentBlog struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// CommentInReplyTo
+// Data about the comment this is in reply to.
 type CommentInReplyTo struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// CommentPost
+// Data about the post containing this comment.
 type CommentPost struct {
 	ID *string `json:"id,omitempty"`
 }

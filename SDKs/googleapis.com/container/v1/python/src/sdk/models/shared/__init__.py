@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .acceleratorconfig import *
 from .addonsconfig import *
 from .advancedmachinefeatures import *
@@ -30,7 +30,9 @@ from .databaseencryption import *
 from .defaultsnatstatus import *
 from .dnscacheconfig import *
 from .dnsconfig import *
+from .fastsocket import *
 from .filter import *
+from .gatewayapiconfig import *
 from .gcepersistentdiskcsidriverconfig import *
 from .gcfsconfig import *
 from .gcpfilestorecsidriverconfig import *
@@ -88,6 +90,7 @@ from .nodetaints import *
 from .notificationconfig import *
 from .operation import *
 from .operationprogress import *
+from .placementpolicy import *
 from .privateclusterconfig import *
 from .privateclustermasterglobalaccessconfig import *
 from .pubsub import *
@@ -95,6 +98,7 @@ from .recurringtimewindow import *
 from .releasechannel import *
 from .releasechannelconfig import *
 from .reservationaffinity import *
+from .resourcelabels import *
 from .resourcelimit import *
 from .resourceusageexportconfig import *
 from .rollbacknodepoolupgraderequest import *

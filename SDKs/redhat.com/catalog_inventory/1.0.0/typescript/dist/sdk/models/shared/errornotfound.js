@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ErrorNotFoundErrors = /** @class */ (function (_super) {
     __extends(ErrorNotFoundErrors, _super);
     function ErrorNotFoundErrors() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", String)
     ], ErrorNotFoundErrors.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ErrorNotFoundErrors.prototype, "status", void 0);
     return ErrorNotFoundErrors;
@@ -46,7 +45,7 @@ var ErrorNotFound = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.ErrorNotFoundErrors }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: ErrorNotFoundErrors }),
         __metadata("design:type", Array)
     ], ErrorNotFound.prototype, "errors", void 0);
     return ErrorNotFound;

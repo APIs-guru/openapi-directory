@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorCapabilityEnum } from "./connectorcapabilityenum";
 import { ConnectorStatusEnum } from "./connectorstatusenum";
 import { VmManagerTypeEnum } from "./vmmanagertypeenum";

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VirtualNodeRef
+// An object that represents a virtual node returned by a list operation.
 type VirtualNodeRef struct {
 	Arn             string    `json:"arn"`
 	CreatedAt       time.Time `json:"createdAt"`

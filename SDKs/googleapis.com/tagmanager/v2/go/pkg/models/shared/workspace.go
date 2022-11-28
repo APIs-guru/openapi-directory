@@ -1,5 +1,7 @@
 package shared
 
+// Workspace
+// Represents a Google Tag Manager Container Workspace.
 type Workspace struct {
 	AccountID     *string `json:"accountId,omitempty"`
 	ContainerID   *string `json:"containerId,omitempty"`

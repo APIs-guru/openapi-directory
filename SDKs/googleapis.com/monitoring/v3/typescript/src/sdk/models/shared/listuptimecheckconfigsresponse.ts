@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UptimeCheckConfig } from "./uptimecheckconfig";
+
 
 
 // ListUptimeCheckConfigsResponse
@@ -8,12 +8,12 @@ import { UptimeCheckConfig } from "./uptimecheckconfig";
  * The protocol for the ListUptimeCheckConfigs response.
 **/
 export class ListUptimeCheckConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 
-  @Metadata({ data: "json, name=uptimeCheckConfigs", elemType: shared.UptimeCheckConfig })
+  @SpeakeasyMetadata({ data: "json, name=uptimeCheckConfigs", elemType: UptimeCheckConfig })
   uptimeCheckConfigs?: UptimeCheckConfig[];
 }

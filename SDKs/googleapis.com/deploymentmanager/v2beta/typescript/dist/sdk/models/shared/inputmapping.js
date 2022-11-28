@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var InputMappingLocationEnum;
 (function (InputMappingLocationEnum) {
     InputMappingLocationEnum["Unknown"] = "UNKNOWN";
@@ -41,19 +41,19 @@ var InputMapping = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fieldName" }),
+        SpeakeasyMetadata({ data: "json, name=fieldName" }),
         __metadata("design:type", String)
     ], InputMapping.prototype, "fieldName", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], InputMapping.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=methodMatch" }),
+        SpeakeasyMetadata({ data: "json, name=methodMatch" }),
         __metadata("design:type", String)
     ], InputMapping.prototype, "methodMatch", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], InputMapping.prototype, "value", void 0);
     return InputMapping;

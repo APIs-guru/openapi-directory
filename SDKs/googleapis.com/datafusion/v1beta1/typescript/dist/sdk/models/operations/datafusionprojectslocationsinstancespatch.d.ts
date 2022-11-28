@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class DatafusionProjectsLocationsInstancesPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class DatafusionProjectsLocationsInstancesPatchSecurity extends S
 export declare class DatafusionProjectsLocationsInstancesPatchRequest extends SpeakeasyBase {
     pathParams: DatafusionProjectsLocationsInstancesPatchPathParams;
     queryParams: DatafusionProjectsLocationsInstancesPatchQueryParams;
-    request?: shared.Instance;
+    request?: shared.InstanceInput;
     security: DatafusionProjectsLocationsInstancesPatchSecurity;
 }
 export declare class DatafusionProjectsLocationsInstancesPatchResponse extends SpeakeasyBase {

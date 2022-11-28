@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 import { ChannelTypeEnum } from "./channeltypeenum";
 import { SingleMasterConfiguration } from "./singlemasterconfiguration";
@@ -36,31 +36,31 @@ var ChannelInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChannelARN" }),
+        SpeakeasyMetadata({ data: "json, name=ChannelARN" }),
         __metadata("design:type", String)
     ], ChannelInfo.prototype, "channelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChannelName" }),
+        SpeakeasyMetadata({ data: "json, name=ChannelName" }),
         __metadata("design:type", String)
     ], ChannelInfo.prototype, "channelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChannelStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ChannelStatus" }),
         __metadata("design:type", String)
     ], ChannelInfo.prototype, "channelStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChannelType" }),
+        SpeakeasyMetadata({ data: "json, name=ChannelType" }),
         __metadata("design:type", String)
     ], ChannelInfo.prototype, "channelType", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], ChannelInfo.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=SingleMasterConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=SingleMasterConfiguration" }),
         __metadata("design:type", SingleMasterConfiguration)
     ], ChannelInfo.prototype, "singleMasterConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Version" }),
+        SpeakeasyMetadata({ data: "json, name=Version" }),
         __metadata("design:type", String)
     ], ChannelInfo.prototype, "version", void 0);
     return ChannelInfo;

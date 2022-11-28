@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import operatingsystem_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetPatchBaselineForPatchGroupResult:
-    baseline_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BaselineId' }})
-    operating_system: Optional[operatingsystem_enum.OperatingSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OperatingSystem' }})
-    patch_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PatchGroup' }})
+    baseline_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BaselineId') }})
+    operating_system: Optional[OperatingSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OperatingSystem') }})
+    patch_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PatchGroup') }})
     

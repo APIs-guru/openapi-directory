@@ -1,5 +1,7 @@
 package shared
 
+// PostgreSQLSettings
+// Provides information that defines a PostgreSQL endpoint.
 type PostgreSQLSettings struct {
 	AfterConnectScript          *string              `json:"AfterConnectScript,omitempty"`
 	CaptureDdls                 *bool                `json:"CaptureDdls,omitempty"`

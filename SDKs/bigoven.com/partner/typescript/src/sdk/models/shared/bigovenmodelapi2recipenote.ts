@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigOvenModelApi2RecipeNote extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: string;
 
-  @Metadata({ data: "json, name=DateDT" })
+  @SpeakeasyMetadata({ data: "json, name=DateDT" })
   dateDt?: Date;
 
-  @Metadata({ data: "json, name=GUID" })
+  @SpeakeasyMetadata({ data: "json, name=GUID" })
   guid?: string;
 
-  @Metadata({ data: "json, name=ID" })
+  @SpeakeasyMetadata({ data: "json, name=ID" })
   id?: number;
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=People" })
+  @SpeakeasyMetadata({ data: "json, name=People" })
   people?: string;
 
-  @Metadata({ data: "json, name=RecipeID" })
+  @SpeakeasyMetadata({ data: "json, name=RecipeID" })
   recipeId?: number;
 
-  @Metadata({ data: "json, name=UserID" })
+  @SpeakeasyMetadata({ data: "json, name=UserID" })
   userId?: number;
 
-  @Metadata({ data: "json, name=Variations" })
+  @SpeakeasyMetadata({ data: "json, name=Variations" })
   variations?: string;
 }

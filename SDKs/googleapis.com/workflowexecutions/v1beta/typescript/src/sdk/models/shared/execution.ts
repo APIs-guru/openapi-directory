@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Error } from "./error";
 import { Status } from "./status";
 
+
 export enum ExecutionCallLogLevelEnum {
-    CallLogLevelUnspecified = "CALL_LOG_LEVEL_UNSPECIFIED"
-,    LogAllCalls = "LOG_ALL_CALLS"
-,    LogErrorsOnly = "LOG_ERRORS_ONLY"
+    CallLogLevelUnspecified = "CALL_LOG_LEVEL_UNSPECIFIED",
+    LogAllCalls = "LOG_ALL_CALLS",
+    LogErrorsOnly = "LOG_ERRORS_ONLY"
 }
 
 export enum ExecutionStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Cancelled = "CANCELLED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Cancelled = "CANCELLED"
 }
 
 
@@ -22,33 +23,52 @@ export enum ExecutionStateEnum {
  * A running instance of a [Workflow](/workflows/docs/reference/rest/v1beta/projects.locations.workflows).
 **/
 export class Execution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=argument" })
+  @SpeakeasyMetadata({ data: "json, name=argument" })
   argument?: string;
 
-  @Metadata({ data: "json, name=callLogLevel" })
+  @SpeakeasyMetadata({ data: "json, name=callLogLevel" })
   callLogLevel?: ExecutionCallLogLevelEnum;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Error;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ExecutionStateEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: Status;
 
-  @Metadata({ data: "json, name=workflowRevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=workflowRevisionId" })
   workflowRevisionId?: string;
+}
+
+
+// ExecutionInput
+/** 
+ * A running instance of a [Workflow](/workflows/docs/reference/rest/v1beta/projects.locations.workflows).
+**/
+export class ExecutionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=argument" })
+  argument?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=callLogLevel" })
+  callLogLevel?: ExecutionCallLogLevelEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=error" })
+  error?: Error;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: Status;
 }

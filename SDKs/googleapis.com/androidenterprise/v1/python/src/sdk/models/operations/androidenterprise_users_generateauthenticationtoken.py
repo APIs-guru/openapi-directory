@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseUsersGenerateAuthenticationTokenPathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AndroidenterpriseUsersGenerateAuthenticationTokenQueryParams:
 
 @dataclass
 class AndroidenterpriseUsersGenerateAuthenticationTokenSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseUsersGenerateAuthenticationTokenRequest:
-    path_params: AndroidenterpriseUsersGenerateAuthenticationTokenPathParams = field(default=None)
-    query_params: AndroidenterpriseUsersGenerateAuthenticationTokenQueryParams = field(default=None)
-    security: AndroidenterpriseUsersGenerateAuthenticationTokenSecurity = field(default=None)
+    path_params: AndroidenterpriseUsersGenerateAuthenticationTokenPathParams = field()
+    query_params: AndroidenterpriseUsersGenerateAuthenticationTokenQueryParams = field()
+    security: AndroidenterpriseUsersGenerateAuthenticationTokenSecurity = field()
     
 
 @dataclass
 class AndroidenterpriseUsersGenerateAuthenticationTokenResponse:
+    content_type: str = field()
+    status_code: int = field()
     authentication_token: Optional[shared.AuthenticationToken] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubProjectsTopicsSubscriptionsListPathParams:
-    topic: str = field(default=None, metadata={'path_param': { 'field_name': 'topic', 'style': 'simple', 'explode': False }})
+    topic: str = field(metadata={'path_param': { 'field_name': 'topic', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class PubsubProjectsTopicsSubscriptionsListQueryParams:
 
 @dataclass
 class PubsubProjectsTopicsSubscriptionsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubProjectsTopicsSubscriptionsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class PubsubProjectsTopicsSubscriptionsListSecurity:
 
 @dataclass
 class PubsubProjectsTopicsSubscriptionsListRequest:
-    path_params: PubsubProjectsTopicsSubscriptionsListPathParams = field(default=None)
-    query_params: PubsubProjectsTopicsSubscriptionsListQueryParams = field(default=None)
-    security: PubsubProjectsTopicsSubscriptionsListSecurity = field(default=None)
+    path_params: PubsubProjectsTopicsSubscriptionsListPathParams = field()
+    query_params: PubsubProjectsTopicsSubscriptionsListQueryParams = field()
+    security: PubsubProjectsTopicsSubscriptionsListSecurity = field()
     
 
 @dataclass
 class PubsubProjectsTopicsSubscriptionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_topic_subscriptions_response: Optional[shared.ListTopicSubscriptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

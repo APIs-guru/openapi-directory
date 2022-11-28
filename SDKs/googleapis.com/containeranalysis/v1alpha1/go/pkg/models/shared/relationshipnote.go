@@ -49,6 +49,8 @@ const (
 	RelationshipNoteTypeEnumOther                       RelationshipNoteTypeEnum = "OTHER"
 )
 
+// RelationshipNote
+// RelationshipNote represents an SPDX Relationship section: https://spdx.github.io/spdx-spec/7-relationships-between-SPDX-elements/
 type RelationshipNote struct {
 	Type *RelationshipNoteTypeEnum `json:"type,omitempty"`
 }

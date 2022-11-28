@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetEventsV3EventsGetPageQueryParams extends SpeakeasyBase {
     after?: string;
@@ -11,15 +11,10 @@ export declare class GetEventsV3EventsGetPageQueryParams extends SpeakeasyBase {
     occurredBefore?: Date;
     sort?: string[];
 }
-export declare class GetEventsV3EventsGetPageSecurityOption1 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class GetEventsV3EventsGetPageSecurityOption2 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class GetEventsV3EventsGetPageSecurity extends SpeakeasyBase {
-    option1?: GetEventsV3EventsGetPageSecurityOption1;
-    option2?: GetEventsV3EventsGetPageSecurityOption2;
+    hapikey?: shared.SchemeHapikey;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 }
 export declare class GetEventsV3EventsGetPageRequest extends SpeakeasyBase {
     queryParams: GetEventsV3EventsGetPageQueryParams;

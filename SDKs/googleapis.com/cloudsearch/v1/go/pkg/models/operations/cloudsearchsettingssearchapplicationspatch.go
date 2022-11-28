@@ -47,7 +47,7 @@ type CloudsearchSettingsSearchapplicationsPatchSecurity struct {
 type CloudsearchSettingsSearchapplicationsPatchRequest struct {
 	PathParams  CloudsearchSettingsSearchapplicationsPatchPathParams
 	QueryParams CloudsearchSettingsSearchapplicationsPatchQueryParams
-	Request     *shared.SearchApplication `request:"mediaType=application/json"`
+	Request     *shared.SearchApplicationInput `request:"mediaType=application/json"`
 	Security    CloudsearchSettingsSearchapplicationsPatchSecurity
 }
 

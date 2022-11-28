@@ -4,10 +4,6 @@ type GetDomainsQueryParams struct {
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 }
 
-type GetDomainsRequest struct {
-	QueryParams GetDomainsQueryParams
-}
-
 type GetDomains200ApplicationJSONDomainsServiceTypeEnum string
 
 const (
@@ -36,6 +32,10 @@ type GetDomains200ApplicationJSONDomains struct {
 
 type GetDomains200ApplicationJSON struct {
 	Domains []GetDomains200ApplicationJSONDomains `json:"domains"`
+}
+
+type GetDomainsRequest struct {
+	QueryParams GetDomainsQueryParams
 }
 
 type GetDomainsResponse struct {

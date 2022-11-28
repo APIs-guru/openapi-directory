@@ -1,0 +1,5 @@
+package shared
+
+type DestinyComponentsInventoryDestinyPlatformSilverComponent struct {
+	PlatformSilver map[string]DestinyEntitiesItemsDestinyItemComponent
+}

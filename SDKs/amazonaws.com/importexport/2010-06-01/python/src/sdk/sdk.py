@@ -1,8 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/importexport/ - Amazon Web Services documentation"""
 import requests
-from typing import List
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,30 +16,58 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/importexport/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def get_cancel_job(self, request: operations.GetCancelJobRequest) -> operations.GetCancelJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=CancelJob&Action=CancelJob"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -69,15 +99,17 @@ class SDK:
 
     
     def get_create_job(self, request: operations.GetCreateJobRequest) -> operations.GetCreateJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=CreateJob&Action=CreateJob"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -139,15 +171,17 @@ class SDK:
 
     
     def get_get_shipping_label(self, request: operations.GetGetShippingLabelRequest) -> operations.GetGetShippingLabelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=GetShippingLabel&Action=GetShippingLabel"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -182,15 +216,17 @@ class SDK:
 
     
     def get_get_status(self, request: operations.GetGetStatusRequest) -> operations.GetGetStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=GetStatus&Action=GetStatus"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -219,15 +255,17 @@ class SDK:
 
     
     def get_list_jobs(self, request: operations.GetListJobsRequest) -> operations.GetListJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=ListJobs&Action=ListJobs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -250,15 +288,17 @@ class SDK:
 
     
     def get_update_job(self, request: operations.GetUpdateJobRequest) -> operations.GetUpdateJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=UpdateJob&Action=UpdateJob"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -326,21 +366,21 @@ class SDK:
 
     
     def post_cancel_job(self, request: operations.PostCancelJobRequest) -> operations.PostCancelJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=CancelJob&Action=CancelJob"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -372,21 +412,21 @@ class SDK:
 
     
     def post_create_job(self, request: operations.PostCreateJobRequest) -> operations.PostCreateJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=CreateJob&Action=CreateJob"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -448,21 +488,21 @@ class SDK:
 
     
     def post_get_shipping_label(self, request: operations.PostGetShippingLabelRequest) -> operations.PostGetShippingLabelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=GetShippingLabel&Action=GetShippingLabel"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -497,21 +537,21 @@ class SDK:
 
     
     def post_get_status(self, request: operations.PostGetStatusRequest) -> operations.PostGetStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=GetStatus&Action=GetStatus"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -540,21 +580,21 @@ class SDK:
 
     
     def post_list_jobs(self, request: operations.PostListJobsRequest) -> operations.PostListJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=ListJobs&Action=ListJobs"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -577,21 +617,21 @@ class SDK:
 
     
     def post_update_job(self, request: operations.PostUpdateJobRequest) -> operations.PostUpdateJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#Operation=UpdateJob&Action=UpdateJob"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

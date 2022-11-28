@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import processingfeaturestoreoutput
-from . import processings3output
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProcessingOutput:
-    app_managed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AppManaged' }})
-    feature_store_output: Optional[processingfeaturestoreoutput.ProcessingFeatureStoreOutput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureStoreOutput' }})
-    output_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutputName' }})
-    s3_output: Optional[processings3output.ProcessingS3Output] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Output' }})
+    r"""ProcessingOutput
+    Describes the results of a processing job. The processing output must specify exactly one of either <code>S3Output</code> or <code>FeatureStoreOutput</code> types.
+    """
+    
+    output_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutputName') }})
+    app_managed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AppManaged') }})
+    feature_store_output: Optional[ProcessingFeatureStoreOutput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureStoreOutput') }})
+    s3_output: Optional[ProcessingS3Output] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Output') }})
     

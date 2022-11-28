@@ -1,5 +1,7 @@
 package shared
 
+// WebPage
+// Metadata for web pages.
 type WebPage struct {
 	FullMatchingImages    []WebImage `json:"fullMatchingImages,omitempty"`
 	PageTitle             *string    `json:"pageTitle,omitempty"`

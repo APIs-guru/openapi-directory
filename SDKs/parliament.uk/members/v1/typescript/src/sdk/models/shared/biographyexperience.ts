@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BiographyExperience extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endMonth" })
+  @SpeakeasyMetadata({ data: "json, name=endMonth" })
   endMonth?: number;
 
-  @Metadata({ data: "json, name=endYear" })
+  @SpeakeasyMetadata({ data: "json, name=endYear" })
   endYear?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=organisation" })
+  @SpeakeasyMetadata({ data: "json, name=organisation" })
   organisation?: string;
 
-  @Metadata({ data: "json, name=startMonth" })
+  @SpeakeasyMetadata({ data: "json, name=startMonth" })
   startMonth?: number;
 
-  @Metadata({ data: "json, name=startYear" })
+  @SpeakeasyMetadata({ data: "json, name=startYear" })
   startYear?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=typeId" })
+  @SpeakeasyMetadata({ data: "json, name=typeId" })
   typeId?: number;
 }

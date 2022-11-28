@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsBeginTransactionPathParams:
-    session: str = field(default=None, metadata={'path_param': { 'field_name': 'session', 'style': 'simple', 'explode': False }})
+    session: str = field(metadata={'path_param': { 'field_name': 'session', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class SpannerProjectsInstancesDatabasesSessionsBeginTransactionQueryParams:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsBeginTransactionSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsBeginTransactionSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class SpannerProjectsInstancesDatabasesSessionsBeginTransactionSecurity:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsBeginTransactionRequest:
-    path_params: SpannerProjectsInstancesDatabasesSessionsBeginTransactionPathParams = field(default=None)
-    query_params: SpannerProjectsInstancesDatabasesSessionsBeginTransactionQueryParams = field(default=None)
+    path_params: SpannerProjectsInstancesDatabasesSessionsBeginTransactionPathParams = field()
+    query_params: SpannerProjectsInstancesDatabasesSessionsBeginTransactionQueryParams = field()
+    security: SpannerProjectsInstancesDatabasesSessionsBeginTransactionSecurity = field()
     request: Optional[shared.BeginTransactionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SpannerProjectsInstancesDatabasesSessionsBeginTransactionSecurity = field(default=None)
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsBeginTransactionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     transaction: Optional[shared.Transaction] = field(default=None)
     

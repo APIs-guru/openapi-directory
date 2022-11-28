@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParticipantRoleEnum } from "./participantroleenum";
+
 
 
 // ChannelDefinition
@@ -7,9 +8,9 @@ import { ParticipantRoleEnum } from "./participantroleenum";
  * For a call analytics job, an object that indicates the audio channel that belongs to the agent and the audio channel that belongs to the customer.
 **/
 export class ChannelDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelId" })
   channelId?: number;
 
-  @Metadata({ data: "json, name=ParticipantRole" })
+  @SpeakeasyMetadata({ data: "json, name=ParticipantRole" })
   participantRole?: ParticipantRoleEnum;
 }

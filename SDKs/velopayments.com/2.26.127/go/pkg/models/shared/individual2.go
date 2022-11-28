@@ -5,3 +5,7 @@ type Individual2 struct {
 	Name                   interface{} `json:"name"`
 	NationalIdentification *string     `json:"nationalIdentification,omitempty"`
 }
+
+type Individual2Input struct {
+	Name interface{} `json:"name"`
+}

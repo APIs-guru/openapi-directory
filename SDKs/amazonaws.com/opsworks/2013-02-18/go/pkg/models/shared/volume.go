@@ -1,5 +1,7 @@
 package shared
 
+// Volume
+// Describes an instance's Amazon EBS volume.
 type Volume struct {
 	AvailabilityZone *string `json:"AvailabilityZone,omitempty"`
 	Device           *string `json:"Device,omitempty"`

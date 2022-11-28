@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetUserRateLimitsQueryParams extends SpeakeasyBase {
     apiContext?: string;
@@ -7,12 +7,12 @@ export declare class GetUserRateLimitsQueryParams extends SpeakeasyBase {
 export declare class GetUserRateLimitsSecurity extends SpeakeasyBase {
     apiAuth: shared.SchemeApiAuth;
 }
+export declare class GetUserRateLimits500ApplicationJson extends SpeakeasyBase {
+    errors?: shared.Error[];
+}
 export declare class GetUserRateLimitsRequest extends SpeakeasyBase {
     queryParams: GetUserRateLimitsQueryParams;
     security: GetUserRateLimitsSecurity;
-}
-export declare class GetUserRateLimits500ApplicationJson extends SpeakeasyBase {
-    errors?: shared.Error[];
 }
 export declare class GetUserRateLimitsResponse extends SpeakeasyBase {
     contentType: string;

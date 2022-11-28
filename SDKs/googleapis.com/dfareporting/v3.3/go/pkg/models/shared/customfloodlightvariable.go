@@ -105,6 +105,8 @@ const (
 	CustomFloodlightVariableTypeEnumU100 CustomFloodlightVariableTypeEnum = "U100"
 )
 
+// CustomFloodlightVariable
+// A custom floodlight variable. This field may only be used when calling batchinsert; it is not supported by batchupdate.
 type CustomFloodlightVariable struct {
 	Kind  *string                           `json:"kind,omitempty"`
 	Type  *CustomFloodlightVariableTypeEnum `json:"type,omitempty"`

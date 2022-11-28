@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LayerDirectiveEnum(str, Enum):
     DIRECTIVE_UNSPECIFIED = "DIRECTIVE_UNSPECIFIED"
@@ -26,6 +28,10 @@ class LayerDirectiveEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Layer:
-    arguments: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arguments' }})
-    directive: Optional[LayerDirectiveEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directive' }})
+    r"""Layer
+    Layer holds metadata specific to a layer of a Docker image.
+    """
+    
+    arguments: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arguments') }})
+    directive: Optional[LayerDirectiveEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('directive') }})
     

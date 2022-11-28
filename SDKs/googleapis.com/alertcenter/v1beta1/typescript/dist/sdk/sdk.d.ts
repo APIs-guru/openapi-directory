@@ -1,24 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Alerts } from "./alerts";
+import { V1beta1 } from "./v1beta1";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://alertcenter.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    alerts: Alerts;
+    v1beta1: V1beta1;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    AlertcenterAlertsBatchDelete(req: operations.AlertcenterAlertsBatchDeleteRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsBatchDeleteResponse>;
-    AlertcenterAlertsBatchUndelete(req: operations.AlertcenterAlertsBatchUndeleteRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsBatchUndeleteResponse>;
-    AlertcenterAlertsDelete(req: operations.AlertcenterAlertsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsDeleteResponse>;
-    AlertcenterAlertsFeedbackCreate(req: operations.AlertcenterAlertsFeedbackCreateRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsFeedbackCreateResponse>;
-    AlertcenterAlertsFeedbackList(req: operations.AlertcenterAlertsFeedbackListRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsFeedbackListResponse>;
-    AlertcenterAlertsGet(req: operations.AlertcenterAlertsGetRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsGetResponse>;
-    AlertcenterAlertsGetMetadata(req: operations.AlertcenterAlertsGetMetadataRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsGetMetadataResponse>;
-    AlertcenterAlertsList(req: operations.AlertcenterAlertsListRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsListResponse>;
-    AlertcenterAlertsUndelete(req: operations.AlertcenterAlertsUndeleteRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterAlertsUndeleteResponse>;
-    AlertcenterGetSettings(req: operations.AlertcenterGetSettingsRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterGetSettingsResponse>;
-    AlertcenterUpdateSettings(req: operations.AlertcenterUpdateSettingsRequest, config?: AxiosRequestConfig): Promise<operations.AlertcenterUpdateSettingsResponse>;
 }
 export {};

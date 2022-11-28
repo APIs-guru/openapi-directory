@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetActionOrganizationShowQueryParams = /** @class */ (function (_super) {
     __extends(GetActionOrganizationShowQueryParams, _super);
     function GetActionOrganizationShowQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", String)
     ], GetActionOrganizationShowQueryParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_datasets" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_datasets" }),
         __metadata("design:type", Boolean)
     ], GetActionOrganizationShowQueryParams.prototype, "includeDatasets", void 0);
     return GetActionOrganizationShowQueryParams;
@@ -45,7 +45,7 @@ var GetActionOrganizationShowRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetActionOrganizationShowQueryParams)
     ], GetActionOrganizationShowRequest.prototype, "queryParams", void 0);
     return GetActionOrganizationShowRequest;
@@ -57,11 +57,11 @@ var GetActionOrganizationShowResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetActionOrganizationShowResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetActionOrganizationShowResponse.prototype, "statusCode", void 0);
     return GetActionOrganizationShowResponse;

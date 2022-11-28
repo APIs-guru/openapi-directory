@@ -1,46 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Duration } from "./duration";
 import { Timestamp } from "./timestamp";
 import { StackTrace } from "./stacktrace";
-import { Timestamp } from "./timestamp";
 import { TestCaseReference } from "./testcasereference";
 import { ToolOutputReference } from "./tooloutputreference";
 
+
 export enum TestCaseStatusEnum {
-    Passed = "passed"
-,    Failed = "failed"
-,    Error = "error"
-,    Skipped = "skipped"
-,    Flaky = "flaky"
+    Passed = "passed",
+    Failed = "failed",
+    Error = "error",
+    Skipped = "skipped",
+    Flaky = "flaky"
 }
 
 
 export class TestCase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elapsedTime" })
+  @SpeakeasyMetadata({ data: "json, name=elapsedTime" })
   elapsedTime?: Duration;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Timestamp;
 
-  @Metadata({ data: "json, name=skippedMessage" })
+  @SpeakeasyMetadata({ data: "json, name=skippedMessage" })
   skippedMessage?: string;
 
-  @Metadata({ data: "json, name=stackTraces", elemType: shared.StackTrace })
+  @SpeakeasyMetadata({ data: "json, name=stackTraces", elemType: StackTrace })
   stackTraces?: StackTrace[];
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Timestamp;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TestCaseStatusEnum;
 
-  @Metadata({ data: "json, name=testCaseId" })
+  @SpeakeasyMetadata({ data: "json, name=testCaseId" })
   testCaseId?: string;
 
-  @Metadata({ data: "json, name=testCaseReference" })
+  @SpeakeasyMetadata({ data: "json, name=testCaseReference" })
   testCaseReference?: TestCaseReference;
 
-  @Metadata({ data: "json, name=toolOutputs", elemType: shared.ToolOutputReference })
+  @SpeakeasyMetadata({ data: "json, name=toolOutputs", elemType: ToolOutputReference })
   toolOutputs?: ToolOutputReference[];
 }

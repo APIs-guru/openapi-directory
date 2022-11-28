@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutDpsMessagePathParams = /** @class */ (function (_super) {
     __extends(PutDpsMessagePathParams, _super);
@@ -30,11 +30,11 @@ var PutDpsMessagePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=DpsMessageId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DpsMessageId" }),
         __metadata("design:type", String)
     ], PutDpsMessagePathParams.prototype, "dpsMessageId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], PutDpsMessagePathParams.prototype, "employerId", void 0);
     return PutDpsMessagePathParams;
@@ -46,11 +46,11 @@ var PutDpsMessageHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PutDpsMessageHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PutDpsMessageHeaders.prototype, "authorization", void 0);
     return PutDpsMessageHeaders;
@@ -62,11 +62,11 @@ var PutDpsMessageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutDpsMessagePathParams)
     ], PutDpsMessageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutDpsMessageHeaders)
     ], PutDpsMessageRequest.prototype, "headers", void 0);
     return PutDpsMessageRequest;
@@ -78,19 +78,19 @@ var PutDpsMessageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutDpsMessageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DpsMessage)
     ], PutDpsMessageResponse.prototype, "dpsMessage", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PutDpsMessageResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutDpsMessageResponse.prototype, "statusCode", void 0);
     return PutDpsMessageResponse;

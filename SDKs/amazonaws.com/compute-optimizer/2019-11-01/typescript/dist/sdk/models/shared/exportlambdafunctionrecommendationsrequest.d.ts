@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExportableLambdaFunctionFieldEnum } from "./exportablelambdafunctionfieldenum";
 import { FileFormatEnum } from "./fileformatenum";
 import { LambdaFunctionRecommendationFilter } from "./lambdafunctionrecommendationfilter";

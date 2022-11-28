@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import gamesession
-from . import protectionpolicy_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GameSessionDetail:
-    game_session: Optional[gamesession.GameSession] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GameSession' }})
-    protection_policy: Optional[protectionpolicy_enum.ProtectionPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProtectionPolicy' }})
+    r"""GameSessionDetail
+    A game session's properties plus the protection policy currently in force.
+    """
+    
+    game_session: Optional[GameSession] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GameSession') }})
+    protection_policy: Optional[ProtectionPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProtectionPolicy') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Database
+// The <code>Database</code> object represents a logical grouping of tables that might reside in a Hive metastore or an RDBMS.
 type Database struct {
 	CatalogID                     *string                `json:"CatalogId,omitempty"`
 	CreateTableDefaultPermissions []PrincipalPermissions `json:"CreateTableDefaultPermissions,omitempty"`

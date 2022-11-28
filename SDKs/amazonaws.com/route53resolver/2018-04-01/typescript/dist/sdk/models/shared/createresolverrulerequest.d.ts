@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RuleTypeOptionEnum } from "./ruletypeoptionenum";
 import { Tag } from "./tag";
 import { TargetAddress } from "./targetaddress";

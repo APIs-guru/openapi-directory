@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class AccountGetSessionPathParams:
-    session_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
+    session_id: str = field(metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AccountGetSessionSecurity:
-    jwt: shared.SchemeJwt = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    jwt: shared.SchemeJwt = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AccountGetSessionRequest:
-    path_params: AccountGetSessionPathParams = field(default=None)
-    security: AccountGetSessionSecurity = field(default=None)
+    path_params: AccountGetSessionPathParams = field()
+    security: AccountGetSessionSecurity = field()
     
 
 @dataclass
 class AccountGetSessionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     session: Optional[shared.Session] = field(default=None)
     

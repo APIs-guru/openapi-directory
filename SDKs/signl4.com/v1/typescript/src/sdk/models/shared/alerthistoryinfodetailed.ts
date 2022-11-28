@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlertHistoryInfoEntry } from "./alerthistoryinfoentry";
 
 
+
 export class AlertHistoryInfoDetailed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledged" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledged" })
   acknowledged?: Date;
 
-  @Metadata({ data: "json, name=acknowledgedgements" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgedgements" })
   acknowledgedgements?: string[];
 
-  @Metadata({ data: "json, name=closed" })
+  @SpeakeasyMetadata({ data: "json, name=closed" })
   closed?: Date;
 
-  @Metadata({ data: "json, name=closedBy" })
+  @SpeakeasyMetadata({ data: "json, name=closedBy" })
   closedBy?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=historyEntries", elemType: shared.AlertHistoryInfoEntry })
+  @SpeakeasyMetadata({ data: "json, name=historyEntries", elemType: AlertHistoryInfoEntry })
   historyEntries?: AlertHistoryInfoEntry[];
 }

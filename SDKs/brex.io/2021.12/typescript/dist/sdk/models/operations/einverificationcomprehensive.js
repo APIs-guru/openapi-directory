@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var EinVerificationComprehensiveQueryParams = /** @class */ (function (_super) {
     __extends(EinVerificationComprehensiveQueryParams, _super);
@@ -30,7 +30,7 @@ var EinVerificationComprehensiveQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ein" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ein" }),
         __metadata("design:type", String)
     ], EinVerificationComprehensiveQueryParams.prototype, "ein", void 0);
     return EinVerificationComprehensiveQueryParams;
@@ -42,7 +42,7 @@ var EinVerificationComprehensiveSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], EinVerificationComprehensiveSecurity.prototype, "userKey", void 0);
     return EinVerificationComprehensiveSecurity;
@@ -54,11 +54,11 @@ var EinVerificationComprehensiveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EinVerificationComprehensiveQueryParams)
     ], EinVerificationComprehensiveRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EinVerificationComprehensiveSecurity)
     ], EinVerificationComprehensiveRequest.prototype, "security", void 0);
     return EinVerificationComprehensiveRequest;
@@ -70,19 +70,19 @@ var EinVerificationComprehensiveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], EinVerificationComprehensiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], EinVerificationComprehensiveResponse.prototype, "einVerificationComprehensive200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], EinVerificationComprehensiveResponse.prototype, "einVerificationComprehensiveDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], EinVerificationComprehensiveResponse.prototype, "statusCode", void 0);
     return EinVerificationComprehensiveResponse;

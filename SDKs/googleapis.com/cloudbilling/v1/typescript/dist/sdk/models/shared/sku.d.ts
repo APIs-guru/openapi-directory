@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Category } from "./category";
 import { GeoTaxonomy } from "./geotaxonomy";
 import { PricingInfo } from "./pricinginfo";

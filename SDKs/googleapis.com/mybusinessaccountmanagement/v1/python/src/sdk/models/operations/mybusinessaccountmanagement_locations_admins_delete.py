@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessaccountmanagementLocationsAdminsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class MybusinessaccountmanagementLocationsAdminsDeleteQueryParams:
 
 @dataclass
 class MybusinessaccountmanagementLocationsAdminsDeleteRequest:
-    path_params: MybusinessaccountmanagementLocationsAdminsDeletePathParams = field(default=None)
-    query_params: MybusinessaccountmanagementLocationsAdminsDeleteQueryParams = field(default=None)
+    path_params: MybusinessaccountmanagementLocationsAdminsDeletePathParams = field()
+    query_params: MybusinessaccountmanagementLocationsAdminsDeleteQueryParams = field()
     
 
 @dataclass
 class MybusinessaccountmanagementLocationsAdminsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

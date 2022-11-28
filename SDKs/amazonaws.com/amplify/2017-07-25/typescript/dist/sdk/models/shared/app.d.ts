@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoBranchCreationConfig } from "./autobranchcreationconfig";
 import { CustomRule } from "./customrule";
 import { PlatformEnum } from "./platformenum";

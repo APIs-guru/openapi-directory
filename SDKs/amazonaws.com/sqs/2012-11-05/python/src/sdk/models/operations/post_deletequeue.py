@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteQueueActionEnum(str, Enum):
     DELETE_QUEUE = "DeleteQueue"
@@ -10,8 +14,8 @@ class PostDeleteQueueVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteQueueQueryParams:
-    action: PostDeleteQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteQueueHeaders:
 
 @dataclass
 class PostDeleteQueueRequest:
-    query_params: PostDeleteQueueQueryParams = field(default=None)
-    headers: PostDeleteQueueHeaders = field(default=None)
+    headers: PostDeleteQueueHeaders = field()
+    query_params: PostDeleteQueueQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteQueueResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

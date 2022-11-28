@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RootCauseException } from "./rootcauseexception";
+
 
 
 // ErrorRootCauseEntity
@@ -8,12 +8,12 @@ import { RootCauseException } from "./rootcauseexception";
  * A collection of segments and corresponding subsegments associated to a trace summary error.
 **/
 export class ErrorRootCauseEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Exceptions", elemType: shared.RootCauseException })
+  @SpeakeasyMetadata({ data: "json, name=Exceptions", elemType: RootCauseException })
   exceptions?: RootCauseException[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Remote" })
+  @SpeakeasyMetadata({ data: "json, name=Remote" })
   remote?: boolean;
 }

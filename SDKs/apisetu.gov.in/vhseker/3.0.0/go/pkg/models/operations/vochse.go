@@ -30,11 +30,6 @@ type VochseSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type VochseRequest struct {
-	Request  *VochseRequestBody `request:"mediaType=application/json"`
-	Security VochseSecurity
-}
-
 type Vochse400ApplicationJSONErrorEnum string
 
 const (
@@ -164,6 +159,11 @@ const (
 type Vochse504ApplicationJSON struct {
 	Error            *Vochse504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Vochse504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type VochseRequest struct {
+	Request  *VochseRequestBody `request:"mediaType=application/json"`
+	Security VochseSecurity
 }
 
 type VochseResponse struct {

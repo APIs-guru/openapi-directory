@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CollectNowPathParams = /** @class */ (function (_super) {
     __extends(CollectNowPathParams, _super);
     function CollectNowPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
         __metadata("design:type", Number)
     ], CollectNowPathParams.prototype, "deviceId", void 0);
     return CollectNowPathParams;
@@ -41,7 +41,7 @@ var CollectNowQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=monitorClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorClass" }),
         __metadata("design:type", String)
     ], CollectNowQueryParams.prototype, "monitorClass", void 0);
     return CollectNowQueryParams;
@@ -53,11 +53,11 @@ var CollectNowRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CollectNowPathParams)
     ], CollectNowRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CollectNowQueryParams)
     ], CollectNowRequest.prototype, "queryParams", void 0);
     return CollectNowRequest;
@@ -69,15 +69,15 @@ var CollectNowResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], CollectNowResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CollectNowResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CollectNowResponse.prototype, "statusCode", void 0);
     return CollectNowResponse;

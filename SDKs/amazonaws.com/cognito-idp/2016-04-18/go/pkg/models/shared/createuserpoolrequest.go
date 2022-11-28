@@ -1,5 +1,7 @@
 package shared
 
+// CreateUserPoolRequest
+// Represents the request to create a user pool.
 type CreateUserPoolRequest struct {
 	AccountRecoverySetting      *AccountRecoverySettingType      `json:"AccountRecoverySetting,omitempty"`
 	AdminCreateUserConfig       *AdminCreateUserConfigType       `json:"AdminCreateUserConfig,omitempty"`

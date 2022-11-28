@@ -18,6 +18,8 @@ const (
 	EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnumSuspended         EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum = "SUSPENDED"
 )
 
+// EnterpriseCrmEventbusProtoTaskExecutionDetails
+// Contains the details of the execution of this task. Next available id: 11
 type EnterpriseCrmEventbusProtoTaskExecutionDetails struct {
 	TaskAttemptStats   []EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskAttemptStats      `json:"taskAttemptStats,omitempty"`
 	TaskExecutionState *EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState,omitempty"`

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BusinessDefaultsUpdateModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoUpdateCustomer" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpdateCustomer" })
   autoUpdateCustomer?: boolean;
 
-  @Metadata({ data: "json, name=businessNotification" })
+  @SpeakeasyMetadata({ data: "json, name=businessNotification" })
   businessNotification?: boolean;
 
-  @Metadata({ data: "json, name=customerCity" })
+  @SpeakeasyMetadata({ data: "json, name=customerCity" })
   customerCity?: boolean;
 
-  @Metadata({ data: "json, name=customerState" })
+  @SpeakeasyMetadata({ data: "json, name=customerState" })
   customerState?: boolean;
 
-  @Metadata({ data: "json, name=emailInfo" })
+  @SpeakeasyMetadata({ data: "json, name=emailInfo" })
   emailInfo?: boolean;
 
-  @Metadata({ data: "json, name=enableUtcTimezone" })
+  @SpeakeasyMetadata({ data: "json, name=enableUtcTimezone" })
   enableUtcTimezone?: boolean;
 }

@@ -9,8 +9,10 @@ const (
 	BatchCreateContactsRequestSourcesEnumReadSourceTypeDomainContact BatchCreateContactsRequestSourcesEnum = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 )
 
-type BatchCreateContactsRequest struct {
-	Contacts []ContactToCreate                       `json:"contacts,omitempty"`
+// BatchCreateContactsRequestInput
+// A request to create a batch of contacts.
+type BatchCreateContactsRequestInput struct {
+	Contacts []ContactToCreateInput                  `json:"contacts,omitempty"`
 	ReadMask *string                                 `json:"readMask,omitempty"`
 	Sources  []BatchCreateContactsRequestSourcesEnum `json:"sources,omitempty"`
 }

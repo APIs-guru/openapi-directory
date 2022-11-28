@@ -13,15 +13,15 @@ type AppsListInstallationReposForAuthenticatedUserQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type AppsListInstallationReposForAuthenticatedUserRequest struct {
-	PathParams  AppsListInstallationReposForAuthenticatedUserPathParams
-	QueryParams AppsListInstallationReposForAuthenticatedUserQueryParams
-}
-
 type AppsListInstallationReposForAuthenticatedUser200ApplicationJSON struct {
 	Repositories        []shared.Repository `json:"repositories"`
 	RepositorySelection *string             `json:"repository_selection,omitempty"`
 	TotalCount          int64               `json:"total_count"`
+}
+
+type AppsListInstallationReposForAuthenticatedUserRequest struct {
+	PathParams  AppsListInstallationReposForAuthenticatedUserPathParams
+	QueryParams AppsListInstallationReposForAuthenticatedUserQueryParams
 }
 
 type AppsListInstallationReposForAuthenticatedUserResponse struct {

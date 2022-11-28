@@ -31,7 +31,7 @@ type MlProjectsModelsVersionsPatchSecurity struct {
 type MlProjectsModelsVersionsPatchRequest struct {
 	PathParams  MlProjectsModelsVersionsPatchPathParams
 	QueryParams MlProjectsModelsVersionsPatchQueryParams
-	Request     *shared.GoogleCloudMlV1Version `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudMlV1VersionInput `request:"mediaType=application/json"`
 	Security    MlProjectsModelsVersionsPatchSecurity
 }
 

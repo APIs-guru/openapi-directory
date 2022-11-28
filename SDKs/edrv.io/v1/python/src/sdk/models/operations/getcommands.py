@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -25,11 +26,11 @@ class GetCommandsQueryParams:
 
 @dataclass
 class GetCommandsRequest:
-    query_params: GetCommandsQueryParams = field(default=None)
+    query_params: GetCommandsQueryParams = field()
     
 
 @dataclass
 class GetCommandsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

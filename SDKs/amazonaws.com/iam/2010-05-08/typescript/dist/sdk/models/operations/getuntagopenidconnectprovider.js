@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetUntagOpenIdConnectProviderActionEnum;
 (function (GetUntagOpenIdConnectProviderActionEnum) {
     GetUntagOpenIdConnectProviderActionEnum["UntagOpenIdConnectProvider"] = "UntagOpenIDConnectProvider";
@@ -37,19 +37,19 @@ var GetUntagOpenIdConnectProviderQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=OpenIDConnectProviderArn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OpenIDConnectProviderArn" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderQueryParams.prototype, "openIdConnectProviderArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TagKeys" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TagKeys" }),
         __metadata("design:type", Array)
     ], GetUntagOpenIdConnectProviderQueryParams.prototype, "tagKeys", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderQueryParams.prototype, "version", void 0);
     return GetUntagOpenIdConnectProviderQueryParams;
@@ -61,31 +61,31 @@ var GetUntagOpenIdConnectProviderHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetUntagOpenIdConnectProviderHeaders;
@@ -97,11 +97,11 @@ var GetUntagOpenIdConnectProviderRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUntagOpenIdConnectProviderQueryParams)
     ], GetUntagOpenIdConnectProviderRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUntagOpenIdConnectProviderHeaders)
     ], GetUntagOpenIdConnectProviderRequest.prototype, "headers", void 0);
     return GetUntagOpenIdConnectProviderRequest;
@@ -113,15 +113,15 @@ var GetUntagOpenIdConnectProviderResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetUntagOpenIdConnectProviderResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUntagOpenIdConnectProviderResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUntagOpenIdConnectProviderResponse.prototype, "statusCode", void 0);
     return GetUntagOpenIdConnectProviderResponse;

@@ -1,18 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attributevalue
-from . import attributevalue
-from . import returnvaluesonconditioncheckfailure_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Put:
-    condition_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConditionExpression' }})
-    expression_attribute_names: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExpressionAttributeNames' }})
-    expression_attribute_values: Optional[dict[str, attributevalue.AttributeValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExpressionAttributeValues' }})
-    item: dict[str, attributevalue.AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Item' }})
-    return_values_on_condition_check_failure: Optional[returnvaluesonconditioncheckfailure_enum.ReturnValuesOnConditionCheckFailureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReturnValuesOnConditionCheckFailure' }})
-    table_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TableName' }})
+    r"""Put
+    Represents a request to perform a <code>PutItem</code> operation.
+    """
+    
+    item: dict[str, AttributeValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Item') }})
+    table_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TableName') }})
+    condition_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConditionExpression') }})
+    expression_attribute_names: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExpressionAttributeNames') }})
+    expression_attribute_values: Optional[dict[str, AttributeValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExpressionAttributeValues') }})
+    return_values_on_condition_check_failure: Optional[ReturnValuesOnConditionCheckFailureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReturnValuesOnConditionCheckFailure') }})
     

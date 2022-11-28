@@ -13,8 +13,8 @@ class PostTruststoreQueryParams:
 
 @dataclass
 class PostTruststoreRequestBodyCertificate:
-    certificate: str = field(default=None, metadata={'multipart_form': { 'field_name': 'certificate' }})
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
+    certificate: str = field(metadata={'multipart_form': { 'field_name': 'certificate' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
     
 
 @dataclass
@@ -24,13 +24,13 @@ class PostTruststoreRequestBody:
 
 @dataclass
 class PostTruststoreRequest:
-    query_params: PostTruststoreQueryParams = field(default=None)
+    query_params: PostTruststoreQueryParams = field()
     request: Optional[PostTruststoreRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostTruststoreResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_truststore_default_text_plain_string: Optional[str] = field(default=None)
     

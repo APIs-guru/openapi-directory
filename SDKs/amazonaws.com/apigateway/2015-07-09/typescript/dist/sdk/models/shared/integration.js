@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
 import { ContentHandlingStrategyEnum } from "./contenthandlingstrategyenum";
+import { IntegrationResponse } from "./integrationresponse";
 import { TlsConfig } from "./tlsconfig";
 import { IntegrationTypeEnum } from "./integrationtypeenum";
 // Integration
@@ -38,63 +38,63 @@ var Integration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cacheKeyParameters" }),
+        SpeakeasyMetadata({ data: "json, name=cacheKeyParameters" }),
         __metadata("design:type", Array)
     ], Integration.prototype, "cacheKeyParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=cacheNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=cacheNamespace" }),
         __metadata("design:type", String)
     ], Integration.prototype, "cacheNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectionId" }),
+        SpeakeasyMetadata({ data: "json, name=connectionId" }),
         __metadata("design:type", String)
     ], Integration.prototype, "connectionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectionType" }),
+        SpeakeasyMetadata({ data: "json, name=connectionType" }),
         __metadata("design:type", String)
     ], Integration.prototype, "connectionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=contentHandling" }),
+        SpeakeasyMetadata({ data: "json, name=contentHandling" }),
         __metadata("design:type", String)
     ], Integration.prototype, "contentHandling", void 0);
     __decorate([
-        Metadata({ data: "json, name=credentials" }),
+        SpeakeasyMetadata({ data: "json, name=credentials" }),
         __metadata("design:type", String)
     ], Integration.prototype, "credentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpMethod" }),
+        SpeakeasyMetadata({ data: "json, name=httpMethod" }),
         __metadata("design:type", String)
     ], Integration.prototype, "httpMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=integrationResponses", elemType: shared.IntegrationResponse }),
+        SpeakeasyMetadata({ data: "json, name=integrationResponses", elemType: IntegrationResponse }),
         __metadata("design:type", Map)
     ], Integration.prototype, "integrationResponses", void 0);
     __decorate([
-        Metadata({ data: "json, name=passthroughBehavior" }),
+        SpeakeasyMetadata({ data: "json, name=passthroughBehavior" }),
         __metadata("design:type", String)
     ], Integration.prototype, "passthroughBehavior", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestParameters" }),
+        SpeakeasyMetadata({ data: "json, name=requestParameters" }),
         __metadata("design:type", Map)
     ], Integration.prototype, "requestParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestTemplates" }),
+        SpeakeasyMetadata({ data: "json, name=requestTemplates" }),
         __metadata("design:type", Map)
     ], Integration.prototype, "requestTemplates", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeoutInMillis" }),
+        SpeakeasyMetadata({ data: "json, name=timeoutInMillis" }),
         __metadata("design:type", Number)
     ], Integration.prototype, "timeoutInMillis", void 0);
     __decorate([
-        Metadata({ data: "json, name=tlsConfig" }),
+        SpeakeasyMetadata({ data: "json, name=tlsConfig" }),
         __metadata("design:type", TlsConfig)
     ], Integration.prototype, "tlsConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Integration.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], Integration.prototype, "uri", void 0);
     return Integration;

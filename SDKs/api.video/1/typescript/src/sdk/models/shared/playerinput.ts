@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Playerinput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backgroundBottom" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundBottom" })
   backgroundBottom?: string;
 
-  @Metadata({ data: "json, name=backgroundText" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundText" })
   backgroundText?: string;
 
-  @Metadata({ data: "json, name=backgroundTop" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundTop" })
   backgroundTop?: string;
 
-  @Metadata({ data: "json, name=enableApi" })
+  @SpeakeasyMetadata({ data: "json, name=enableApi" })
   enableApi?: boolean;
 
-  @Metadata({ data: "json, name=enableControls" })
+  @SpeakeasyMetadata({ data: "json, name=enableControls" })
   enableControls?: boolean;
 
-  @Metadata({ data: "json, name=forceAutoplay" })
+  @SpeakeasyMetadata({ data: "json, name=forceAutoplay" })
   forceAutoplay?: boolean;
 
-  @Metadata({ data: "json, name=forceLoop" })
+  @SpeakeasyMetadata({ data: "json, name=forceLoop" })
   forceLoop?: boolean;
 
-  @Metadata({ data: "json, name=hideTitle" })
+  @SpeakeasyMetadata({ data: "json, name=hideTitle" })
   hideTitle?: boolean;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=linkHover" })
+  @SpeakeasyMetadata({ data: "json, name=linkHover" })
   linkHover?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=trackBackground" })
+  @SpeakeasyMetadata({ data: "json, name=trackBackground" })
   trackBackground?: string;
 
-  @Metadata({ data: "json, name=trackPlayed" })
+  @SpeakeasyMetadata({ data: "json, name=trackPlayed" })
   trackPlayed?: string;
 
-  @Metadata({ data: "json, name=trackUnplayed" })
+  @SpeakeasyMetadata({ data: "json, name=trackUnplayed" })
   trackUnplayed?: string;
 }

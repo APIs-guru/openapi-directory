@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PropertyReference } from "./propertyreference";
 
+
 export enum PropertyOrderDirectionEnum {
-    DirectionUnspecified = "DIRECTION_UNSPECIFIED"
-,    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    DirectionUnspecified = "DIRECTION_UNSPECIFIED",
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
@@ -13,9 +14,9 @@ export enum PropertyOrderDirectionEnum {
  * The desired order for a specific property.
 **/
 export class PropertyOrder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: PropertyOrderDirectionEnum;
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: PropertyReference;
 }

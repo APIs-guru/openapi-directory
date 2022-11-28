@@ -22,6 +22,8 @@ const (
 	HistogramResultSearchTypeEnumBaseCompensationUnit  HistogramResultSearchTypeEnum = "BASE_COMPENSATION_UNIT"
 )
 
+// HistogramResult
+// Output only. Result of a histogram call. The response contains the histogram map for the search type specified by HistogramResult.field. The response is a map of each filter value to the corresponding count of jobs for that filter.
 type HistogramResult struct {
 	SearchType *HistogramResultSearchTypeEnum `json:"searchType,omitempty"`
 	Values     map[string]int32               `json:"values,omitempty"`

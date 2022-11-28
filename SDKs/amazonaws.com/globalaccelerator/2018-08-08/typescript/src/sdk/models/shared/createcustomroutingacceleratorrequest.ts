@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressTypeEnum } from "./ipaddresstypeenum";
 import { Tag } from "./tag";
 
 
+
 export class CreateCustomRoutingAcceleratorRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken: string;
 
-  @Metadata({ data: "json, name=IpAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddressType" })
   ipAddressType?: IpAddressTypeEnum;
 
-  @Metadata({ data: "json, name=IpAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddresses" })
   ipAddresses?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

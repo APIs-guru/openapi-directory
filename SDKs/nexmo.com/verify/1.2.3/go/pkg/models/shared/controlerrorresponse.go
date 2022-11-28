@@ -15,6 +15,8 @@ const (
 	ControlErrorResponseStatusEnumNineteen ControlErrorResponseStatusEnum = "19"
 )
 
+// ControlErrorResponse
+// Error
 type ControlErrorResponse struct {
 	ErrorText *string                         `json:"error_text,omitempty"`
 	Status    *ControlErrorResponseStatusEnum `json:"status,omitempty"`

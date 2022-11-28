@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HookEvent } from "./hookevent";
+
 
 
 // PaginatedHookEvents
@@ -8,21 +8,21 @@ import { HookEvent } from "./hookevent";
  * A paginated list of webhook types available to subscribe on.
 **/
 export class PaginatedHookEvents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pagelen" })
+  @SpeakeasyMetadata({ data: "json, name=pagelen" })
   pagelen?: number;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=values", elemType: shared.HookEvent })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: HookEvent })
   values?: HookEvent[];
 }

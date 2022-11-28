@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceStatusEnum } from "./resourcestatusenum";
 // Resource
 /**
@@ -34,35 +34,35 @@ var Resource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Resource.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], Resource.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedTime" }),
         __metadata("design:type", Date)
     ], Resource.prototype, "lastUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=resourceGroupArn" }),
         __metadata("design:type", String)
     ], Resource.prototype, "resourceGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareArn" }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareArn" }),
         __metadata("design:type", String)
     ], Resource.prototype, "resourceShareArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Resource.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], Resource.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Resource.prototype, "type", void 0);
     return Resource;

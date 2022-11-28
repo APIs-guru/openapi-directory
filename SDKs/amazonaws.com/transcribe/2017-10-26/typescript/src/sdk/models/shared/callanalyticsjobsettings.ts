@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentRedaction } from "./contentredaction";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { VocabularyFilterMethodEnum } from "./vocabularyfiltermethodenum";
+
 
 
 // CallAnalyticsJobSettings
@@ -9,21 +10,21 @@ import { VocabularyFilterMethodEnum } from "./vocabularyfiltermethodenum";
  * Provides optional settings for the <code>CallAnalyticsJob</code> operation. 
 **/
 export class CallAnalyticsJobSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentRedaction" })
+  @SpeakeasyMetadata({ data: "json, name=ContentRedaction" })
   contentRedaction?: ContentRedaction;
 
-  @Metadata({ data: "json, name=LanguageModelName" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageModelName" })
   languageModelName?: string;
 
-  @Metadata({ data: "json, name=LanguageOptions" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageOptions" })
   languageOptions?: LanguageCodeEnum[];
 
-  @Metadata({ data: "json, name=VocabularyFilterMethod" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyFilterMethod" })
   vocabularyFilterMethod?: VocabularyFilterMethodEnum;
 
-  @Metadata({ data: "json, name=VocabularyFilterName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyFilterName" })
   vocabularyFilterName?: string;
 
-  @Metadata({ data: "json, name=VocabularyName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyName" })
   vocabularyName?: string;
 }

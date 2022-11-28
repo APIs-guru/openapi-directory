@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientAffinityEnum } from "./clientaffinityenum";
 import { PortRange } from "./portrange";
 import { ProtocolEnum } from "./protocolenum";
 
 
+
 export class UpdateListenerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientAffinity" })
+  @SpeakeasyMetadata({ data: "json, name=ClientAffinity" })
   clientAffinity?: ClientAffinityEnum;
 
-  @Metadata({ data: "json, name=ListenerArn" })
+  @SpeakeasyMetadata({ data: "json, name=ListenerArn" })
   listenerArn: string;
 
-  @Metadata({ data: "json, name=PortRanges", elemType: shared.PortRange })
+  @SpeakeasyMetadata({ data: "json, name=PortRanges", elemType: PortRange })
   portRanges?: PortRange[];
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: ProtocolEnum;
 }

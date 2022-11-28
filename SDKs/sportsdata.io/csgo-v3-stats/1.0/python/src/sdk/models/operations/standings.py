@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class StandingsFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class StandingsFormatEnum(str, Enum):
 
 @dataclass
 class StandingsPathParams:
-    format: StandingsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    roundid: str = field(default=None, metadata={'path_param': { 'field_name': 'roundid', 'style': 'simple', 'explode': False }})
+    format: StandingsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    roundid: str = field(metadata={'path_param': { 'field_name': 'roundid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StandingsRequest:
-    path_params: StandingsPathParams = field(default=None)
+    path_params: StandingsPathParams = field()
     
 
 @dataclass
 class StandingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     standings: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

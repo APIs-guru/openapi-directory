@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProjectsGetV2ProjectsProjectIdGetPathParams = /** @class */ (function (_super) {
     __extends(ProjectsGetV2ProjectsProjectIdGetPathParams, _super);
@@ -30,7 +30,7 @@ var ProjectsGetV2ProjectsProjectIdGetPathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" }),
         __metadata("design:type", Number)
     ], ProjectsGetV2ProjectsProjectIdGetPathParams.prototype, "projectId", void 0);
     return ProjectsGetV2ProjectsProjectIdGetPathParams;
@@ -42,67 +42,67 @@ var ProjectsGetV2ProjectsProjectIdGetQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", Array)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
         __metadata("design:type", String)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "countryId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity" }),
         __metadata("design:type", String)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "entity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
         __metadata("design:type", Boolean)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "isAnalysis", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
         __metadata("design:type", Boolean)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "isMobile", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
         __metadata("design:type", String)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
         __metadata("design:type", Array)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
         __metadata("design:type", Number)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "parameterId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=project" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" }),
         __metadata("design:type", Array)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "project", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sensorType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensorType" }),
         __metadata("design:type", String)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "sensorType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
         __metadata("design:type", Array)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "sourceName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unit" }),
         __metadata("design:type", Array)
     ], ProjectsGetV2ProjectsProjectIdGetQueryParams.prototype, "unit", void 0);
     return ProjectsGetV2ProjectsProjectIdGetQueryParams;
@@ -114,11 +114,11 @@ var ProjectsGetV2ProjectsProjectIdGetRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProjectsGetV2ProjectsProjectIdGetPathParams)
     ], ProjectsGetV2ProjectsProjectIdGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProjectsGetV2ProjectsProjectIdGetQueryParams)
     ], ProjectsGetV2ProjectsProjectIdGetRequest.prototype, "queryParams", void 0);
     return ProjectsGetV2ProjectsProjectIdGetRequest;
@@ -130,19 +130,19 @@ var ProjectsGetV2ProjectsProjectIdGetResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProjectsGetV2ProjectsProjectIdGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], ProjectsGetV2ProjectsProjectIdGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OpenAqProjectsResult)
     ], ProjectsGetV2ProjectsProjectIdGetResponse.prototype, "openAqProjectsResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProjectsGetV2ProjectsProjectIdGetResponse.prototype, "statusCode", void 0);
     return ProjectsGetV2ProjectsProjectIdGetResponse;

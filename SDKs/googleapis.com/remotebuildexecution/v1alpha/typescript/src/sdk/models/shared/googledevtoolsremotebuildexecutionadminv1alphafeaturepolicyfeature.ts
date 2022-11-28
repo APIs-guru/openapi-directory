@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicyEnum {
-    PolicyUnspecified = "POLICY_UNSPECIFIED"
-,    Allowed = "ALLOWED"
-,    Forbidden = "FORBIDDEN"
-,    Restricted = "RESTRICTED"
+    PolicyUnspecified = "POLICY_UNSPECIFIED",
+    Allowed = "ALLOWED",
+    Forbidden = "FORBIDDEN",
+    Restricted = "RESTRICTED"
 }
 
 
@@ -13,9 +14,9 @@ export enum GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePo
  * Defines whether a feature can be used or what values are accepted.
 **/
 export class GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedValues" })
+  @SpeakeasyMetadata({ data: "json, name=allowedValues" })
   allowedValues?: string[];
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicyEnum;
 }

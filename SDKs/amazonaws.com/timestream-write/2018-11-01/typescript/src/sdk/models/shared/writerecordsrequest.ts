@@ -1,19 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Record } from "./record";
-import { Record } from "./record";
+
 
 
 export class WriteRecordsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CommonAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=CommonAttributes" })
   commonAttributes?: Record;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=Records", elemType: shared.Record })
+  @SpeakeasyMetadata({ data: "json, name=Records", elemType: Record })
   records: Record[];
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

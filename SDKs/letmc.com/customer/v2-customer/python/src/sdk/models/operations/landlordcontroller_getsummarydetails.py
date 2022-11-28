@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class LandlordControllerGetSummaryDetailsPathParams:
-    short_name: str = field(default=None, metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
+    short_name: str = field(metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LandlordControllerGetSummaryDetailsQueryParams:
-    token: str = field(default=None, metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
+    token: str = field(metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class LandlordControllerGetSummaryDetailsRequest:
-    path_params: LandlordControllerGetSummaryDetailsPathParams = field(default=None)
-    query_params: LandlordControllerGetSummaryDetailsQueryParams = field(default=None)
+    path_params: LandlordControllerGetSummaryDetailsPathParams = field()
+    query_params: LandlordControllerGetSummaryDetailsQueryParams = field()
     
 
 @dataclass
 class LandlordControllerGetSummaryDetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     landlord_summary_model: Optional[shared.LandlordSummaryModel] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,16 +19,16 @@ class DescribeServiceIntegrationHeaders:
 
 @dataclass
 class DescribeServiceIntegrationRequest:
-    headers: DescribeServiceIntegrationHeaders = field(default=None)
+    headers: DescribeServiceIntegrationHeaders = field()
     
 
 @dataclass
 class DescribeServiceIntegrationResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_service_integration_response: Optional[shared.DescribeServiceIntegrationResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

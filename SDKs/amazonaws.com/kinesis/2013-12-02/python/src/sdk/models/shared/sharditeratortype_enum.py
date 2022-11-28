@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ShardIteratorTypeEnum(str, Enum):
     AT_SEQUENCE_NUMBER = "AT_SEQUENCE_NUMBER"

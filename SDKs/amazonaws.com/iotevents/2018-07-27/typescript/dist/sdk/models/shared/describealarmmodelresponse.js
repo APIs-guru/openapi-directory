@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmCapabilities } from "./alarmcapabilities";
 import { AlarmEventActions } from "./alarmeventactions";
 import { AlarmNotification } from "./alarmnotification";
@@ -34,63 +34,63 @@ var DescribeAlarmModelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmCapabilities" }),
+        SpeakeasyMetadata({ data: "json, name=alarmCapabilities" }),
         __metadata("design:type", AlarmCapabilities)
     ], DescribeAlarmModelResponse.prototype, "alarmCapabilities", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmEventActions" }),
+        SpeakeasyMetadata({ data: "json, name=alarmEventActions" }),
         __metadata("design:type", AlarmEventActions)
     ], DescribeAlarmModelResponse.prototype, "alarmEventActions", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelArn" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelArn" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "alarmModelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelDescription" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelDescription" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "alarmModelDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelName" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelName" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "alarmModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelVersion" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "alarmModelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmNotification" }),
+        SpeakeasyMetadata({ data: "json, name=alarmNotification" }),
         __metadata("design:type", AlarmNotification)
     ], DescribeAlarmModelResponse.prototype, "alarmNotification", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmRule" }),
+        SpeakeasyMetadata({ data: "json, name=alarmRule" }),
         __metadata("design:type", AlarmRule)
     ], DescribeAlarmModelResponse.prototype, "alarmRule", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], DescribeAlarmModelResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], DescribeAlarmModelResponse.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", Number)
     ], DescribeAlarmModelResponse.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], DescribeAlarmModelResponse.prototype, "statusMessage", void 0);
     return DescribeAlarmModelResponse;

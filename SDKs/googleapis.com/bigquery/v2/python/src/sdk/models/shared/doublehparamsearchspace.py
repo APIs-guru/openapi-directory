@@ -1,13 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import doublecandidates
-from . import doublerange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DoubleHparamSearchSpace:
-    candidates: Optional[doublecandidates.DoubleCandidates] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidates' }})
-    range: Optional[doublerange.DoubleRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""DoubleHparamSearchSpace
+    Search space for a double hyperparameter.
+    """
+    
+    candidates: Optional[DoubleCandidates] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidates') }})
+    range: Optional[DoubleRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LabelSummary } from "./labelsummary";
 export declare class Dataset extends SpeakeasyBase {
     available?: boolean;

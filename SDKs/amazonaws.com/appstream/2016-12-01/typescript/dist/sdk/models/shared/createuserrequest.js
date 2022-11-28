@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 import { MessageActionEnum } from "./messageactionenum";
 var CreateUserRequest = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var CreateUserRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AuthenticationType" }),
+        SpeakeasyMetadata({ data: "json, name=AuthenticationType" }),
         __metadata("design:type", String)
     ], CreateUserRequest.prototype, "authenticationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=FirstName" }),
+        SpeakeasyMetadata({ data: "json, name=FirstName" }),
         __metadata("design:type", String)
     ], CreateUserRequest.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastName" }),
+        SpeakeasyMetadata({ data: "json, name=LastName" }),
         __metadata("design:type", String)
     ], CreateUserRequest.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MessageAction" }),
+        SpeakeasyMetadata({ data: "json, name=MessageAction" }),
         __metadata("design:type", String)
     ], CreateUserRequest.prototype, "messageAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserName" }),
+        SpeakeasyMetadata({ data: "json, name=UserName" }),
         __metadata("design:type", String)
     ], CreateUserRequest.prototype, "userName", void 0);
     return CreateUserRequest;

@@ -31,7 +31,7 @@ type ApigeeOrganizationsEnvironmentsApisRevisionsDebugsessionsCreateSecurity str
 type ApigeeOrganizationsEnvironmentsApisRevisionsDebugsessionsCreateRequest struct {
 	PathParams  ApigeeOrganizationsEnvironmentsApisRevisionsDebugsessionsCreatePathParams
 	QueryParams ApigeeOrganizationsEnvironmentsApisRevisionsDebugsessionsCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1DebugSession `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1DebugSessionInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsEnvironmentsApisRevisionsDebugsessionsCreateSecurity
 }
 

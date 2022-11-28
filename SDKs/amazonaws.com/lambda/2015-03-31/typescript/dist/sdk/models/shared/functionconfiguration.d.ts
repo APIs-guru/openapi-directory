@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeadLetterConfig } from "./deadletterconfig";
 import { EnvironmentResponse } from "./environmentresponse";
 import { FileSystemConfig } from "./filesystemconfig";

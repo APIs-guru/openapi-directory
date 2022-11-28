@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_api_dailyreports_dailyreports(self, request: operations.GetAPIDailyreportsDailyreportsRequest) -> operations.GetAPIDailyreportsDailyreportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of daily reports
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/dailyreports/dailyreports"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -61,15 +85,17 @@ class SDK:
 
     
     def get_api_writtenquestions_questions(self, request: operations.GetAPIWrittenquestionsQuestionsRequest) -> operations.GetAPIWrittenquestionsQuestionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of written questions
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/writtenquestions/questions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -98,15 +124,17 @@ class SDK:
 
     
     def get_api_writtenquestions_questions_date_uin_(self, request: operations.GetAPIWrittenquestionsQuestionsDateUinRequest) -> operations.GetAPIWrittenquestionsQuestionsDateUinResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a written question
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/writtenquestions/questions/{date}/{uin}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -144,15 +172,17 @@ class SDK:
 
     
     def get_api_writtenquestions_questions_id_(self, request: operations.GetAPIWrittenquestionsQuestionsIDRequest) -> operations.GetAPIWrittenquestionsQuestionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a written question
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/writtenquestions/questions/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -190,15 +220,17 @@ class SDK:
 
     
     def get_api_writtenstatements_statements(self, request: operations.GetAPIWrittenstatementsStatementsRequest) -> operations.GetAPIWrittenstatementsStatementsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of written statements
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/writtenstatements/statements"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -227,15 +259,17 @@ class SDK:
 
     
     def get_api_writtenstatements_statements_date_uin_(self, request: operations.GetAPIWrittenstatementsStatementsDateUinRequest) -> operations.GetAPIWrittenstatementsStatementsDateUinResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a written statemnet
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/writtenstatements/statements/{date}/{uin}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -273,15 +307,17 @@ class SDK:
 
     
     def get_api_writtenstatements_statements_id_(self, request: operations.GetAPIWrittenstatementsStatementsIDRequest) -> operations.GetAPIWrittenstatementsStatementsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a written statement
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/writtenstatements/statements/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

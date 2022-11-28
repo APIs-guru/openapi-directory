@@ -1,0 +1,10 @@
+package shared
+
+type BrandRegistrationsEnumIdentityStatusEnum string
+
+const (
+	BrandRegistrationsEnumIdentityStatusEnumSelfDeclared   BrandRegistrationsEnumIdentityStatusEnum = "SELF_DECLARED"
+	BrandRegistrationsEnumIdentityStatusEnumUnverified     BrandRegistrationsEnumIdentityStatusEnum = "UNVERIFIED"
+	BrandRegistrationsEnumIdentityStatusEnumVerified       BrandRegistrationsEnumIdentityStatusEnum = "VERIFIED"
+	BrandRegistrationsEnumIdentityStatusEnumVettedVerified BrandRegistrationsEnumIdentityStatusEnum = "VETTED_VERIFIED"
+)

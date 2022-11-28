@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSavedQueryPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class PutSavedQueryPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PutSavedQueryPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutSavedQueryPkPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.SavedQueryRestApiPut;
-
-  @Metadata()
-  security: PutSavedQueryPkSecurity;
-}
-
-
 export class PutSavedQueryPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.SavedQueryRestApiPut;
 }
 
 
 export class PutSavedQueryPk400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutSavedQueryPk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutSavedQueryPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutSavedQueryPk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutSavedQueryPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PutSavedQueryPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutSavedQueryPkPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.SavedQueryRestApiPut;
+
+  @SpeakeasyMetadata()
+  security: PutSavedQueryPkSecurity;
+}
+
+
 export class PutSavedQueryPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSavedQueryPk200ApplicationJsonObject?: PutSavedQueryPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSavedQueryPk400ApplicationJsonObject?: PutSavedQueryPk400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSavedQueryPk401ApplicationJsonObject?: PutSavedQueryPk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSavedQueryPk404ApplicationJsonObject?: PutSavedQueryPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSavedQueryPk422ApplicationJsonObject?: PutSavedQueryPk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSavedQueryPk500ApplicationJsonObject?: PutSavedQueryPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

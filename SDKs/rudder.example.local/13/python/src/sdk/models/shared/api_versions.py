@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import api_version
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class APIVersions:
-    all: Optional[List[api_version.APIVersion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'all' }})
-    latest: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latest' }})
+    all: Optional[List[APIVersion]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('all') }})
+    latest: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latest') }})
     

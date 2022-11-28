@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1QueryResult
+// Represents the result of conversational query or event processing.
 type GoogleCloudDialogflowV2beta1QueryResult struct {
 	Action                      *string                                              `json:"action,omitempty"`
 	AllRequiredParamsPresent    *bool                                                `json:"allRequiredParamsPresent,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EstimatedDiameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimated_diameter_max" })
+  @SpeakeasyMetadata({ data: "json, name=estimated_diameter_max" })
   estimatedDiameterMax?: number;
 
-  @Metadata({ data: "json, name=estimated_diameter_min" })
+  @SpeakeasyMetadata({ data: "json, name=estimated_diameter_min" })
   estimatedDiameterMin?: number;
 }

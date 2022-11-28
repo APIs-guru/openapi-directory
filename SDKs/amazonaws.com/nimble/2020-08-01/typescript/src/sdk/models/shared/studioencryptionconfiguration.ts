@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StudioEncryptionConfigurationKeyTypeEnum } from "./studioencryptionconfigurationkeytypeenum";
+
 
 
 // StudioEncryptionConfiguration
@@ -7,9 +8,9 @@ import { StudioEncryptionConfigurationKeyTypeEnum } from "./studioencryptionconf
  * Configuration of the encryption method that is used for the studio.
 **/
 export class StudioEncryptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyArn" })
+  @SpeakeasyMetadata({ data: "json, name=keyArn" })
   keyArn?: string;
 
-  @Metadata({ data: "json, name=keyType" })
+  @SpeakeasyMetadata({ data: "json, name=keyType" })
   keyType: StudioEncryptionConfigurationKeyTypeEnum;
 }

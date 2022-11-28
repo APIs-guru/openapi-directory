@@ -1,8 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://cloud.google.com/resource-manager/docs/resource-settings/overview"""
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+
 from . import utils
+
+from .projects import Projects
 
 
 SERVERS = [
@@ -11,90 +13,46 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://cloud.google.com/resource-manager/docs/resource-settings/overview"""
+    projects: Projects
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def resourcesettings_projects_settings_get(self, request: operations.ResourcesettingsProjectsSettingsGetRequest) -> operations.ResourcesettingsProjectsSettingsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ResourcesettingsProjectsSettingsGetResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudResourcesettingsV1Setting])
-                res.google_cloud_resourcesettings_v1_setting = out
-
-        return res
-
+        self.projects = Projects(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def resourcesettings_projects_settings_list(self, request: operations.ResourcesettingsProjectsSettingsListRequest) -> operations.ResourcesettingsProjectsSettingsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{parent}/settings", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ResourcesettingsProjectsSettingsListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudResourcesettingsV1ListSettingsResponse])
-                res.google_cloud_resourcesettings_v1_list_settings_response = out
-
-        return res
-
-    
-    def resourcesettings_projects_settings_patch(self, request: operations.ResourcesettingsProjectsSettingsPatchRequest) -> operations.ResourcesettingsProjectsSettingsPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.ResourcesettingsProjectsSettingsPatchResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudResourcesettingsV1Setting])
-                res.google_cloud_resourcesettings_v1_setting = out
-
-        return res
-
     

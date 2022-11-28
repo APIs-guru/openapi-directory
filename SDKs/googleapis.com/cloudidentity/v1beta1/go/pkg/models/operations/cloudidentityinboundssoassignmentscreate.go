@@ -25,7 +25,7 @@ type CloudidentityInboundSsoAssignmentsCreateSecurity struct {
 
 type CloudidentityInboundSsoAssignmentsCreateRequest struct {
 	QueryParams CloudidentityInboundSsoAssignmentsCreateQueryParams
-	Request     *shared.InboundSsoAssignment `request:"mediaType=application/json"`
+	Request     *shared.InboundSsoAssignmentInput `request:"mediaType=application/json"`
 	Security    CloudidentityInboundSsoAssignmentsCreateSecurity
 }
 

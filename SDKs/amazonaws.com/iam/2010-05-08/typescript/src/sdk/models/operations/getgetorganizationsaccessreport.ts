@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGetOrganizationsAccessReportActionEnum {
     GetOrganizationsAccessReport = "GetOrganizationsAccessReport"
 }
 
 export enum GetGetOrganizationsAccessReportSortKeyEnum {
-    ServiceNamespaceAscending = "SERVICE_NAMESPACE_ASCENDING"
-,    ServiceNamespaceDescending = "SERVICE_NAMESPACE_DESCENDING"
-,    LastAuthenticatedTimeAscending = "LAST_AUTHENTICATED_TIME_ASCENDING"
-,    LastAuthenticatedTimeDescending = "LAST_AUTHENTICATED_TIME_DESCENDING"
+    ServiceNamespaceAscending = "SERVICE_NAMESPACE_ASCENDING",
+    ServiceNamespaceDescending = "SERVICE_NAMESPACE_DESCENDING",
+    LastAuthenticatedTimeAscending = "LAST_AUTHENTICATED_TIME_ASCENDING",
+    LastAuthenticatedTimeDescending = "LAST_AUTHENTICATED_TIME_DESCENDING"
 }
 
 export enum GetGetOrganizationsAccessReportVersionEnum {
@@ -17,66 +18,66 @@ export enum GetGetOrganizationsAccessReportVersionEnum {
 
 
 export class GetGetOrganizationsAccessReportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetGetOrganizationsAccessReportActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=JobId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=JobId" })
   jobId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Marker" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxItems" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxItems" })
   maxItems?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SortKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SortKey" })
   sortKey?: GetGetOrganizationsAccessReportSortKeyEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetGetOrganizationsAccessReportVersionEnum;
 }
 
 
 export class GetGetOrganizationsAccessReportHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetGetOrganizationsAccessReportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGetOrganizationsAccessReportQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetGetOrganizationsAccessReportHeaders;
 }
 
 
 export class GetGetOrganizationsAccessReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

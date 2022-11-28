@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetManagedPrefixListAssociationsActionEnum(str, Enum):
     GET_MANAGED_PREFIX_LIST_ASSOCIATIONS = "GetManagedPrefixListAssociations"
@@ -10,12 +14,12 @@ class GetGetManagedPrefixListAssociationsVersionEnum(str, Enum):
 
 @dataclass
 class GetGetManagedPrefixListAssociationsQueryParams:
-    action: GetGetManagedPrefixListAssociationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetManagedPrefixListAssociationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    prefix_list_id: str = field(metadata={'query_param': { 'field_name': 'PrefixListId', 'style': 'form', 'explode': True }})
+    version: GetGetManagedPrefixListAssociationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    prefix_list_id: str = field(default=None, metadata={'query_param': { 'field_name': 'PrefixListId', 'style': 'form', 'explode': True }})
-    version: GetGetManagedPrefixListAssociationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetGetManagedPrefixListAssociationsHeaders:
 
 @dataclass
 class GetGetManagedPrefixListAssociationsRequest:
-    query_params: GetGetManagedPrefixListAssociationsQueryParams = field(default=None)
-    headers: GetGetManagedPrefixListAssociationsHeaders = field(default=None)
+    headers: GetGetManagedPrefixListAssociationsHeaders = field()
+    query_params: GetGetManagedPrefixListAssociationsQueryParams = field()
     
 
 @dataclass
 class GetGetManagedPrefixListAssociationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

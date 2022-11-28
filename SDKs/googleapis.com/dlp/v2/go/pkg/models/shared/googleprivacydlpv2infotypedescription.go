@@ -8,11 +8,14 @@ const (
 	GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnumRiskAnalysis        GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum = "RISK_ANALYSIS"
 )
 
+// GooglePrivacyDlpV2InfoTypeDescription
+// InfoType description.
 type GooglePrivacyDlpV2InfoTypeDescription struct {
-	Categories  []GooglePrivacyDlpV2InfoTypeCategory                   `json:"categories,omitempty"`
-	Description *string                                                `json:"description,omitempty"`
-	DisplayName *string                                                `json:"displayName,omitempty"`
-	Name        *string                                                `json:"name,omitempty"`
-	SupportedBy []GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum `json:"supportedBy,omitempty"`
-	Versions    []GooglePrivacyDlpV2VersionDescription                 `json:"versions,omitempty"`
+	Categories       []GooglePrivacyDlpV2InfoTypeCategory                   `json:"categories,omitempty"`
+	Description      *string                                                `json:"description,omitempty"`
+	DisplayName      *string                                                `json:"displayName,omitempty"`
+	Name             *string                                                `json:"name,omitempty"`
+	SensitivityScore *GooglePrivacyDlpV2SensitivityScore                    `json:"sensitivityScore,omitempty"`
+	SupportedBy      []GooglePrivacyDlpV2InfoTypeDescriptionSupportedByEnum `json:"supportedBy,omitempty"`
+	Versions         []GooglePrivacyDlpV2VersionDescription                 `json:"versions,omitempty"`
 }

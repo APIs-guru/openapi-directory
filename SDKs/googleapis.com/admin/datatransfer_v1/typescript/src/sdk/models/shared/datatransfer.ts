@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationDataTransfer } from "./applicationdatatransfer";
+
 
 
 // DataTransfer
@@ -8,27 +8,27 @@ import { ApplicationDataTransfer } from "./applicationdatatransfer";
  * A Transfer resource represents the transfer of the ownership of user data between users.
 **/
 export class DataTransfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationDataTransfers", elemType: shared.ApplicationDataTransfer })
+  @SpeakeasyMetadata({ data: "json, name=applicationDataTransfers", elemType: ApplicationDataTransfer })
   applicationDataTransfers?: ApplicationDataTransfer[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=newOwnerUserId" })
+  @SpeakeasyMetadata({ data: "json, name=newOwnerUserId" })
   newOwnerUserId?: string;
 
-  @Metadata({ data: "json, name=oldOwnerUserId" })
+  @SpeakeasyMetadata({ data: "json, name=oldOwnerUserId" })
   oldOwnerUserId?: string;
 
-  @Metadata({ data: "json, name=overallTransferStatusCode" })
+  @SpeakeasyMetadata({ data: "json, name=overallTransferStatusCode" })
   overallTransferStatusCode?: string;
 
-  @Metadata({ data: "json, name=requestTime" })
+  @SpeakeasyMetadata({ data: "json, name=requestTime" })
   requestTime?: Date;
 }

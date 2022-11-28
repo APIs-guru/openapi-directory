@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetObjectsPathParams = /** @class */ (function (_super) {
     __extends(GetObjectsPathParams, _super);
     function GetObjectsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=OID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=OID" }),
         __metadata("design:type", String)
     ], GetObjectsPathParams.prototype, "oid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], GetObjectsPathParams.prototype, "agentNum", void 0);
     return GetObjectsPathParams;
@@ -45,7 +45,7 @@ var GetObjectsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetObjectsPathParams)
     ], GetObjectsRequest.prototype, "pathParams", void 0);
     return GetObjectsRequest;
@@ -57,15 +57,15 @@ var GetObjectsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetObjectsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetObjectsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetObjectsResponse.prototype, "getObjects200ApplicationJsonStrings", void 0);
     return GetObjectsResponse;

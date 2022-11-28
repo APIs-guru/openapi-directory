@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IsInstanceUpgradeableResponse
 /**
  * Response for checking if a notebook instance is upgradeable.
@@ -33,19 +33,19 @@ var IsInstanceUpgradeableResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=upgradeImage" }),
+        SpeakeasyMetadata({ data: "json, name=upgradeImage" }),
         __metadata("design:type", String)
     ], IsInstanceUpgradeableResponse.prototype, "upgradeImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=upgradeInfo" }),
+        SpeakeasyMetadata({ data: "json, name=upgradeInfo" }),
         __metadata("design:type", String)
     ], IsInstanceUpgradeableResponse.prototype, "upgradeInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=upgradeVersion" }),
+        SpeakeasyMetadata({ data: "json, name=upgradeVersion" }),
         __metadata("design:type", String)
     ], IsInstanceUpgradeableResponse.prototype, "upgradeVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=upgradeable" }),
+        SpeakeasyMetadata({ data: "json, name=upgradeable" }),
         __metadata("design:type", Boolean)
     ], IsInstanceUpgradeableResponse.prototype, "upgradeable", void 0);
     return IsInstanceUpgradeableResponse;

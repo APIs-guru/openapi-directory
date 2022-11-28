@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_from" })
   dateFrom?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_to" })
   dateTo?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=event_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=event_type" })
   eventType?: shared.EventTypesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search_text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_text" })
   searchText?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 }
 
 
 export class GetEventsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class GetEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEventsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetEventsSecurity;
 }
 
 
 export class GetEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   auditResp?: shared.AuditResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorForbidden?: shared.ErrorForbidden;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorNotFound?: shared.ErrorNotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorUnauthorized?: shared.ErrorUnauthorized;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

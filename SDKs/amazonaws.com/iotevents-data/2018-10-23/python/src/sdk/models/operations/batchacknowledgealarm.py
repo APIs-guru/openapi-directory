@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class BatchAcknowledgeAlarmHeaders:
 @dataclass_json
 @dataclass
 class BatchAcknowledgeAlarmRequestBody:
-    acknowledge_action_requests: List[shared.AcknowledgeAlarmActionRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acknowledgeActionRequests' }})
+    acknowledge_action_requests: List[shared.AcknowledgeAlarmActionRequest] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('acknowledgeActionRequests') }})
     
 
 @dataclass
 class BatchAcknowledgeAlarmRequest:
-    headers: BatchAcknowledgeAlarmHeaders = field(default=None)
-    request: BatchAcknowledgeAlarmRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchAcknowledgeAlarmHeaders = field()
+    request: BatchAcknowledgeAlarmRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchAcknowledgeAlarmResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_acknowledge_alarm_response: Optional[shared.BatchAcknowledgeAlarmResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

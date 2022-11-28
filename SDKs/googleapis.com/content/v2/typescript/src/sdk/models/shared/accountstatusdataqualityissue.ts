@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountStatusExampleItem } from "./accountstatusexampleitem";
 
 
+
 export class AccountStatusDataQualityIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=displayedValue" })
+  @SpeakeasyMetadata({ data: "json, name=displayedValue" })
   displayedValue?: string;
 
-  @Metadata({ data: "json, name=exampleItems", elemType: shared.AccountStatusExampleItem })
+  @SpeakeasyMetadata({ data: "json, name=exampleItems", elemType: AccountStatusExampleItem })
   exampleItems?: AccountStatusExampleItem[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastChecked" })
+  @SpeakeasyMetadata({ data: "json, name=lastChecked" })
   lastChecked?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=numItems" })
+  @SpeakeasyMetadata({ data: "json, name=numItems" })
   numItems?: number;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: string;
 
-  @Metadata({ data: "json, name=submittedValue" })
+  @SpeakeasyMetadata({ data: "json, name=submittedValue" })
   submittedValue?: string;
 }

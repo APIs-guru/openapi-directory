@@ -25,6 +25,8 @@ type GpgKeySubkeys struct {
 	Subkeys           []interface{} `json:"subkeys,omitempty"`
 }
 
+// GpgKey
+// A unique encryption key
 type GpgKey struct {
 	CanCertify        bool            `json:"can_certify"`
 	CanEncryptComms   bool            `json:"can_encrypt_comms"`

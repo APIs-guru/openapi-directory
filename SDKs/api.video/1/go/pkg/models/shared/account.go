@@ -1,5 +1,7 @@
 package shared
 
+// AccountQuota
+// Deprecated
 type AccountQuota struct {
 	QuotaRemaining *float64 `json:"quotaRemaining,omitempty"`
 	QuotaTotal     *float64 `json:"quotaTotal,omitempty"`

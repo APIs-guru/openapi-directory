@@ -21,16 +21,16 @@ type PostAssetsVolatilityRequestBody3 struct {
 	Assets []PostAssetsVolatilityRequestBody3Assets `json:"assets"`
 }
 
-type PostAssetsVolatilityRequest struct {
-	Request interface{} `request:"mediaType=application/json"`
-}
-
 type PostAssetsVolatility200ApplicationJSONAssets struct {
 	AssetVolatility float64 `json:"assetVolatility"`
 }
 
 type PostAssetsVolatility200ApplicationJSON struct {
 	Assets []PostAssetsVolatility200ApplicationJSONAssets `json:"assets"`
+}
+
+type PostAssetsVolatilityRequest struct {
+	Request interface{} `request:"mediaType=application/json"`
 }
 
 type PostAssetsVolatilityResponse struct {

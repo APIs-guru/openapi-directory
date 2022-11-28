@@ -16,11 +16,6 @@ type GetReturnsSecurity struct {
 	FdcAuth shared.SchemeFdcAuth `security:"scheme,type=oauth2"`
 }
 
-type GetReturnsRequest struct {
-	QueryParams GetReturnsQueryParams
-	Security    GetReturnsSecurity
-}
-
 type GetReturnsReturnsArrayV2ReturnV2Order struct {
 	ID              *int64  `json:"id,omitempty"`
 	MerchantID      *int64  `json:"merchantId,omitempty"`
@@ -91,6 +86,11 @@ type GetReturnsReturnsArrayV2Meta struct {
 type GetReturnsReturnsArrayV2 struct {
 	Data []GetReturnsReturnsArrayV2ReturnV2 `json:"data,omitempty"`
 	Meta *GetReturnsReturnsArrayV2Meta      `json:"meta,omitempty"`
+}
+
+type GetReturnsRequest struct {
+	QueryParams GetReturnsQueryParams
+	Security    GetReturnsSecurity
 }
 
 type GetReturnsResponse struct {

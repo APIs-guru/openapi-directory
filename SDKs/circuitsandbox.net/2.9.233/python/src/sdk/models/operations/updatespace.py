@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class UpdateSpacePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class UpdateSpaceRequestBodyAccessModeTypeEnum(str, Enum):
     INTERNAL_ONLY = "INTERNAL_ONLY"
@@ -45,20 +50,20 @@ class UpdateSpaceRequestBody:
 
 @dataclass
 class UpdateSpaceSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateSpaceRequest:
-    path_params: UpdateSpacePathParams = field(default=None)
+    path_params: UpdateSpacePathParams = field()
+    security: UpdateSpaceSecurity = field()
     request: Optional[UpdateSpaceRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateSpaceSecurity = field(default=None)
     
 
 @dataclass
 class UpdateSpaceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     participant_space_wrapper: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

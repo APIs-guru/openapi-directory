@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import leaveapplication
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LeaveApplications:
-    leave_applications: Optional[List[leaveapplication.LeaveApplication]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LeaveApplications' }})
+    leave_applications: Optional[List[LeaveApplication]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LeaveApplications') }})
     

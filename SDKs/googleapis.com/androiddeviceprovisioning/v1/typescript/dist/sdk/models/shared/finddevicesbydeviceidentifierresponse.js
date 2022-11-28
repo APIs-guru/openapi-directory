@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Device } from "./device";
 // FindDevicesByDeviceIdentifierResponse
 /**
  * Response containing found devices.
@@ -34,15 +34,15 @@ var FindDevicesByDeviceIdentifierResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=devices", elemType: shared.Device }),
+        SpeakeasyMetadata({ data: "json, name=devices", elemType: Device }),
         __metadata("design:type", Array)
     ], FindDevicesByDeviceIdentifierResponse.prototype, "devices", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], FindDevicesByDeviceIdentifierResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalSize" }),
+        SpeakeasyMetadata({ data: "json, name=totalSize" }),
         __metadata("design:type", Number)
     ], FindDevicesByDeviceIdentifierResponse.prototype, "totalSize", void 0);
     return FindDevicesByDeviceIdentifierResponse;

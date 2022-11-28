@@ -22,70 +22,70 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetcountrystandardQueryParams = /** @class */ (function (_super) {
     __extends(GetcountrystandardQueryParams, _super);
     function GetcountrystandardQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetcountrystandardQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetcountrystandardQueryParams.prototype, "license", void 0);
     return GetcountrystandardQueryParams;
 }(SpeakeasyBase));
 export { GetcountrystandardQueryParams };
-var GetcountrystandardRequest = /** @class */ (function (_super) {
-    __extends(GetcountrystandardRequest, _super);
-    function GetcountrystandardRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetcountrystandardQueryParams)
-    ], GetcountrystandardRequest.prototype, "queryParams", void 0);
-    return GetcountrystandardRequest;
-}(SpeakeasyBase));
-export { GetcountrystandardRequest };
 var Getcountrystandard200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getcountrystandard200ApplicationJson, _super);
     function Getcountrystandard200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getcountrystandard200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountryStandard" }),
+        SpeakeasyMetadata({ data: "json, name=CountryStandard" }),
         __metadata("design:type", String)
     ], Getcountrystandard200ApplicationJson.prototype, "countryStandard", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getcountrystandard200ApplicationJson.prototype, "credits", void 0);
     return Getcountrystandard200ApplicationJson;
 }(SpeakeasyBase));
 export { Getcountrystandard200ApplicationJson };
+var GetcountrystandardRequest = /** @class */ (function (_super) {
+    __extends(GetcountrystandardRequest, _super);
+    function GetcountrystandardRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetcountrystandardQueryParams)
+    ], GetcountrystandardRequest.prototype, "queryParams", void 0);
+    return GetcountrystandardRequest;
+}(SpeakeasyBase));
+export { GetcountrystandardRequest };
 var GetcountrystandardResponse = /** @class */ (function (_super) {
     __extends(GetcountrystandardResponse, _super);
     function GetcountrystandardResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetcountrystandardResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetcountrystandardResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getcountrystandard200ApplicationJson)
     ], GetcountrystandardResponse.prototype, "getcountrystandard200ApplicationJsonObject", void 0);
     return GetcountrystandardResponse;

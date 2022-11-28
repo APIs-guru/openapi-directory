@@ -7,6 +7,8 @@ const (
 	GoogleCloudAssetV1BigQueryDestinationPartitionKeyEnumRequestTime             GoogleCloudAssetV1BigQueryDestinationPartitionKeyEnum = "REQUEST_TIME"
 )
 
+// GoogleCloudAssetV1BigQueryDestination
+// A BigQuery destination.
 type GoogleCloudAssetV1BigQueryDestination struct {
 	Dataset          *string                                                `json:"dataset,omitempty"`
 	PartitionKey     *GoogleCloudAssetV1BigQueryDestinationPartitionKeyEnum `json:"partitionKey,omitempty"`

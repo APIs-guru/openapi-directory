@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCodeEnum } from "./errorcodeenum";
 import { DetailedError } from "./detailederror";
+
 
 
 // ErrorDetails
@@ -9,12 +9,12 @@ import { DetailedError } from "./detailederror";
  * Contains the details of an IoT SiteWise error.
 **/
 export class ErrorDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: ErrorCodeEnum;
 
-  @Metadata({ data: "json, name=details", elemType: shared.DetailedError })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: DetailedError })
   details?: DetailedError[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }

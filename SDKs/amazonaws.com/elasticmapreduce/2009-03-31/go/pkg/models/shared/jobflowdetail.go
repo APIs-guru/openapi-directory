@@ -1,5 +1,7 @@
 package shared
 
+// JobFlowDetail
+// A description of a cluster (job flow).
 type JobFlowDetail struct {
 	AmiVersion            *string                      `json:"AmiVersion,omitempty"`
 	AutoScalingRole       *string                      `json:"AutoScalingRole,omitempty"`

@@ -8,26 +8,18 @@ type GetProfileAppPathParams struct {
 	AppID int64 `pathParam:"style=simple,explode=false,name=appId"`
 }
 
-type GetProfileAppSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetProfileAppSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetProfileAppSecurity struct {
-	Option1 *GetProfileAppSecurityOption1 `security:"option"`
-	Option2 *GetProfileAppSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetProfileAppDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetProfileAppRequest struct {
 	PathParams GetProfileAppPathParams
 	Security   GetProfileAppSecurity
-}
-
-type GetProfileAppDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetProfileAppResponse struct {

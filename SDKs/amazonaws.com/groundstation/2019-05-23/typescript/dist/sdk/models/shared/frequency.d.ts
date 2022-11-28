@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FrequencyUnitsEnum } from "./frequencyunitsenum";
 /**
  * Object that describes the frequency.

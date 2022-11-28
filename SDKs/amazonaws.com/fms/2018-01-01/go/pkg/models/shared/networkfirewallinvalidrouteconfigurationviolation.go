@@ -1,5 +1,7 @@
 package shared
 
+// NetworkFirewallInvalidRouteConfigurationViolation
+// Violation detail for the improperly configured subnet route. It's possible there is a missing route table route, or a configuration that causes traffic to cross an Availability Zone boundary.
 type NetworkFirewallInvalidRouteConfigurationViolation struct {
 	ActualFirewallEndpoint           *string         `json:"ActualFirewallEndpoint,omitempty"`
 	ActualFirewallSubnetID           *string         `json:"ActualFirewallSubnetId,omitempty"`

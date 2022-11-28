@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegistryGetArtifactPathParams = /** @class */ (function (_super) {
     __extends(RegistryGetArtifactPathParams, _super);
     function RegistryGetArtifactPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=artifact" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifact" }),
         __metadata("design:type", String)
     ], RegistryGetArtifactPathParams.prototype, "artifact", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" }),
         __metadata("design:type", String)
     ], RegistryGetArtifactPathParams.prototype, "project", void 0);
     return RegistryGetArtifactPathParams;
@@ -45,7 +45,7 @@ var RegistryGetArtifactRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryGetArtifactPathParams)
     ], RegistryGetArtifactRequest.prototype, "pathParams", void 0);
     return RegistryGetArtifactRequest;
@@ -57,15 +57,15 @@ var RegistryGetArtifactResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RegistryGetArtifactResponse.prototype, "artifact", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegistryGetArtifactResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegistryGetArtifactResponse.prototype, "statusCode", void 0);
     return RegistryGetArtifactResponse;

@@ -18,6 +18,8 @@ type CreateThingTypeHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateThingTypeRequestBodyThingTypeProperties
+// The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.
 type CreateThingTypeRequestBodyThingTypeProperties struct {
 	SearchableAttributes []string `json:"searchableAttributes,omitempty"`
 	ThingTypeDescription *string  `json:"thingTypeDescription,omitempty"`

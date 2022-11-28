@@ -30,7 +30,7 @@ type AdminCustomersChromePrintersBatchCreatePrintersSecurity struct {
 type AdminCustomersChromePrintersBatchCreatePrintersRequest struct {
 	PathParams  AdminCustomersChromePrintersBatchCreatePrintersPathParams
 	QueryParams AdminCustomersChromePrintersBatchCreatePrintersQueryParams
-	Request     *shared.BatchCreatePrintersRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchCreatePrintersRequestInput `request:"mediaType=application/json"`
 	Security    AdminCustomersChromePrintersBatchCreatePrintersSecurity
 }
 

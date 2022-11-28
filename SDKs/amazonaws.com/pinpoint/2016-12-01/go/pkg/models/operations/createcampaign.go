@@ -18,6 +18,8 @@ type CreateCampaignHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateCampaignRequestBodyWriteCampaignRequest
+// Specifies the configuration and other settings for a campaign.
 type CreateCampaignRequestBodyWriteCampaignRequest struct {
 	AdditionalTreatments        []shared.WriteTreatmentResource     `json:"AdditionalTreatments,omitempty"`
 	CustomDeliveryConfiguration *shared.CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration,omitempty"`

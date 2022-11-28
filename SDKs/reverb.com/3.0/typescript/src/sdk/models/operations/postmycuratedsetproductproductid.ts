@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostMyCuratedSetProductProductIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=product_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=product_id" })
   productId: string;
 }
 
 
 export class PostMyCuratedSetProductProductIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostMyCuratedSetProductProductIdPathParams;
 }
 
 
 export class PostMyCuratedSetProductProductIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

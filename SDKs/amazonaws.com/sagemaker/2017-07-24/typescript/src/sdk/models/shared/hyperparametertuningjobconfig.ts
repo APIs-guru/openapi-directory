@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HyperParameterTuningJobObjective } from "./hyperparametertuningjobobjective";
 import { ParameterRanges } from "./parameterranges";
 import { ResourceLimits } from "./resourcelimits";
@@ -7,26 +7,27 @@ import { TrainingJobEarlyStoppingTypeEnum } from "./trainingjobearlystoppingtype
 import { TuningJobCompletionCriteria } from "./tuningjobcompletioncriteria";
 
 
+
 // HyperParameterTuningJobConfig
 /** 
  * Configures a hyperparameter tuning job.
 **/
 export class HyperParameterTuningJobConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HyperParameterTuningJobObjective" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobObjective" })
   hyperParameterTuningJobObjective?: HyperParameterTuningJobObjective;
 
-  @Metadata({ data: "json, name=ParameterRanges" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterRanges" })
   parameterRanges?: ParameterRanges;
 
-  @Metadata({ data: "json, name=ResourceLimits" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceLimits" })
   resourceLimits: ResourceLimits;
 
-  @Metadata({ data: "json, name=Strategy" })
+  @SpeakeasyMetadata({ data: "json, name=Strategy" })
   strategy: HyperParameterTuningJobStrategyTypeEnum;
 
-  @Metadata({ data: "json, name=TrainingJobEarlyStoppingType" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobEarlyStoppingType" })
   trainingJobEarlyStoppingType?: TrainingJobEarlyStoppingTypeEnum;
 
-  @Metadata({ data: "json, name=TuningJobCompletionCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=TuningJobCompletionCriteria" })
   tuningJobCompletionCriteria?: TuningJobCompletionCriteria;
 }

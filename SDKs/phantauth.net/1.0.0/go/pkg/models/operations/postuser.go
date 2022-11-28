@@ -1,5 +1,7 @@
 package operations
 
+// PostUserRequestBodyAddress
+// The user's preferred postal address.
 type PostUserRequestBodyAddress struct {
 	Country       *string `json:"country,omitempty"`
 	Formatted     *string `json:"formatted,omitempty"`

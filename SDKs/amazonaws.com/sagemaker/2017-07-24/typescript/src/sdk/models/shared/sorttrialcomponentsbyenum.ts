@@ -1,6 +1,7 @@
 
 
+
 export enum SortTrialComponentsByEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

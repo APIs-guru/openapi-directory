@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevicePosition } from "./deviceposition";
 import { BatchGetDevicePositionError } from "./batchgetdevicepositionerror";
 
 
+
 export class BatchGetDevicePositionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DevicePositions", elemType: shared.DevicePosition })
+  @SpeakeasyMetadata({ data: "json, name=DevicePositions", elemType: DevicePosition })
   devicePositions: DevicePosition[];
 
-  @Metadata({ data: "json, name=Errors", elemType: shared.BatchGetDevicePositionError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchGetDevicePositionError })
   errors: BatchGetDevicePositionError[];
 }

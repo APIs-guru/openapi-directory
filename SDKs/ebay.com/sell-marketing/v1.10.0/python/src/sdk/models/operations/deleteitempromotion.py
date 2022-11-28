@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteItemPromotionPathParams:
-    promotion_id: str = field(default=None, metadata={'path_param': { 'field_name': 'promotion_id', 'style': 'simple', 'explode': False }})
+    promotion_id: str = field(metadata={'path_param': { 'field_name': 'promotion_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteItemPromotionSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteItemPromotionRequest:
-    path_params: DeleteItemPromotionPathParams = field(default=None)
-    security: DeleteItemPromotionSecurity = field(default=None)
+    path_params: DeleteItemPromotionPathParams = field()
+    security: DeleteItemPromotionSecurity = field()
     
 
 @dataclass
 class DeleteItemPromotionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

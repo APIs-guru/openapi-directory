@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiagnosticConfig } from "./diagnosticconfig";
+
 
 
 // DiagnoseRuntimeRequest
@@ -7,6 +8,6 @@ import { DiagnosticConfig } from "./diagnosticconfig";
  * Request for creating a notebook instance diagnostic file.
 **/
 export class DiagnoseRuntimeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diagnosticConfig" })
+  @SpeakeasyMetadata({ data: "json, name=diagnosticConfig" })
   diagnosticConfig?: DiagnosticConfig;
 }

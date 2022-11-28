@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectoryVpcSettings } from "./directoryvpcsettings";
 var AddRegionRequest = /** @class */ (function (_super) {
     __extends(AddRegionRequest, _super);
@@ -30,15 +30,15 @@ var AddRegionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], AddRegionRequest.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegionName" }),
+        SpeakeasyMetadata({ data: "json, name=RegionName" }),
         __metadata("design:type", String)
     ], AddRegionRequest.prototype, "regionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=VPCSettings" }),
+        SpeakeasyMetadata({ data: "json, name=VPCSettings" }),
         __metadata("design:type", DirectoryVpcSettings)
     ], AddRegionRequest.prototype, "vpcSettings", void 0);
     return AddRegionRequest;

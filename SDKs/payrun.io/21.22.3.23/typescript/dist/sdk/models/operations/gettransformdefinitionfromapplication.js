@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTransformDefinitionFromApplicationPathParams = /** @class */ (function (_super) {
     __extends(GetTransformDefinitionFromApplicationPathParams, _super);
@@ -30,7 +30,7 @@ var GetTransformDefinitionFromApplicationPathParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=TransformDefinitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=TransformDefinitionId" }),
         __metadata("design:type", String)
     ], GetTransformDefinitionFromApplicationPathParams.prototype, "transformDefinitionId", void 0);
     return GetTransformDefinitionFromApplicationPathParams;
@@ -42,11 +42,11 @@ var GetTransformDefinitionFromApplicationHeaders = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetTransformDefinitionFromApplicationHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetTransformDefinitionFromApplicationHeaders.prototype, "authorization", void 0);
     return GetTransformDefinitionFromApplicationHeaders;
@@ -58,11 +58,11 @@ var GetTransformDefinitionFromApplicationRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTransformDefinitionFromApplicationPathParams)
     ], GetTransformDefinitionFromApplicationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTransformDefinitionFromApplicationHeaders)
     ], GetTransformDefinitionFromApplicationRequest.prototype, "headers", void 0);
     return GetTransformDefinitionFromApplicationRequest;
@@ -74,19 +74,19 @@ var GetTransformDefinitionFromApplicationResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTransformDefinitionFromApplicationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetTransformDefinitionFromApplicationResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTransformDefinitionFromApplicationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TransformDefinition)
     ], GetTransformDefinitionFromApplicationResponse.prototype, "transformDefinition", void 0);
     return GetTransformDefinitionFromApplicationResponse;

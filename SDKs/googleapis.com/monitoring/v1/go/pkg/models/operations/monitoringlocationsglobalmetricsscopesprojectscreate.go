@@ -46,7 +46,7 @@ type MonitoringLocationsGlobalMetricsScopesProjectsCreateSecurity struct {
 type MonitoringLocationsGlobalMetricsScopesProjectsCreateRequest struct {
 	PathParams  MonitoringLocationsGlobalMetricsScopesProjectsCreatePathParams
 	QueryParams MonitoringLocationsGlobalMetricsScopesProjectsCreateQueryParams
-	Request     *shared.MonitoredProject `request:"mediaType=application/json"`
+	Request     *shared.MonitoredProjectInput `request:"mediaType=application/json"`
 	Security    MonitoringLocationsGlobalMetricsScopesProjectsCreateSecurity
 }
 

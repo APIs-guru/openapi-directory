@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityStateEnum } from "./entitystateenum";
 import { UserRoleEnum } from "./userroleenum";
+
 
 
 // User
@@ -8,27 +9,27 @@ import { UserRoleEnum } from "./userroleenum";
  * The representation of an Amazon WorkMail user.
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisabledDate" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledDate" })
   disabledDate?: Date;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=EnabledDate" })
+  @SpeakeasyMetadata({ data: "json, name=EnabledDate" })
   enabledDate?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: EntityStateEnum;
 
-  @Metadata({ data: "json, name=UserRole" })
+  @SpeakeasyMetadata({ data: "json, name=UserRole" })
   userRole?: UserRoleEnum;
 }

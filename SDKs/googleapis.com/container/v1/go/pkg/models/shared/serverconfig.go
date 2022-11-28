@@ -1,5 +1,7 @@
 package shared
 
+// ServerConfig
+// Kubernetes Engine service configuration.
 type ServerConfig struct {
 	Channels              []ReleaseChannelConfig `json:"channels,omitempty"`
 	DefaultClusterVersion *string                `json:"defaultClusterVersion,omitempty"`

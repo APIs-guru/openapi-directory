@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2WordList } from "./googleprivacydlpv2wordlist";
+
 
 
 // GooglePrivacyDlpV2ReplaceDictionaryConfig
@@ -7,6 +8,6 @@ import { GooglePrivacyDlpV2WordList } from "./googleprivacydlpv2wordlist";
  * Replace each input value with a value randomly selected from the dictionary.
 **/
 export class GooglePrivacyDlpV2ReplaceDictionaryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=wordList" })
+  @SpeakeasyMetadata({ data: "json, name=wordList" })
   wordList?: GooglePrivacyDlpV2WordList;
 }

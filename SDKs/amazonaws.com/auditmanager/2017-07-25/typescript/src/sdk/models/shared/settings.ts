@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportsDestination } from "./assessmentreportsdestination";
 import { Role } from "./role";
+
 
 
 // Settings
@@ -9,18 +9,18 @@ import { Role } from "./role";
  *  The settings object that holds all supported Audit Manager settings. 
 **/
 export class Settings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultAssessmentReportsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAssessmentReportsDestination" })
   defaultAssessmentReportsDestination?: AssessmentReportsDestination;
 
-  @Metadata({ data: "json, name=defaultProcessOwners", elemType: shared.Role })
+  @SpeakeasyMetadata({ data: "json, name=defaultProcessOwners", elemType: Role })
   defaultProcessOwners?: Role[];
 
-  @Metadata({ data: "json, name=isAwsOrgEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isAwsOrgEnabled" })
   isAwsOrgEnabled?: boolean;
 
-  @Metadata({ data: "json, name=kmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKey" })
   kmsKey?: string;
 
-  @Metadata({ data: "json, name=snsTopic" })
+  @SpeakeasyMetadata({ data: "json, name=snsTopic" })
   snsTopic?: string;
 }

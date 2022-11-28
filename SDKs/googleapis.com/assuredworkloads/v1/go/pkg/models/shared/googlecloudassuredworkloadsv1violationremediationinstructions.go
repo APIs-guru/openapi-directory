@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions
+// Instructions to remediate violation
 type GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions struct {
 	ConsoleInstructions *GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole `json:"consoleInstructions,omitempty"`
 	GcloudInstructions  *GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud  `json:"gcloudInstructions,omitempty"`

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var NumberDetails = /** @class */ (function (_super) {
     __extends(NumberDetails, _super);
     function NumberDetails() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=country;" }),
+        SpeakeasyMetadata({ data: "form, name=country;" }),
         __metadata("design:type", String)
     ], NumberDetails.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "form, name=msisdn;" }),
+        SpeakeasyMetadata({ data: "form, name=msisdn;" }),
         __metadata("design:type", String)
     ], NumberDetails.prototype, "msisdn", void 0);
     __decorate([
-        Metadata({ data: "form, name=target_api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=target_api_key;" }),
         __metadata("design:type", String)
     ], NumberDetails.prototype, "targetApiKey", void 0);
     return NumberDetails;

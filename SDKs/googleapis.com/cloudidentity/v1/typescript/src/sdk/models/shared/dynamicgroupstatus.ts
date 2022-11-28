@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DynamicGroupStatusStatusEnum {
-    StatusUnspecified = "STATUS_UNSPECIFIED"
-,    UpToDate = "UP_TO_DATE"
-,    UpdatingMemberships = "UPDATING_MEMBERSHIPS"
-,    InvalidQuery = "INVALID_QUERY"
+    StatusUnspecified = "STATUS_UNSPECIFIED",
+    UpToDate = "UP_TO_DATE",
+    UpdatingMemberships = "UPDATING_MEMBERSHIPS",
+    InvalidQuery = "INVALID_QUERY"
 }
 
 
@@ -13,9 +14,9 @@ export enum DynamicGroupStatusStatusEnum {
  * The current status of a dynamic group along with timestamp.
 **/
 export class DynamicGroupStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DynamicGroupStatusStatusEnum;
 
-  @Metadata({ data: "json, name=statusTime" })
+  @SpeakeasyMetadata({ data: "json, name=statusTime" })
   statusTime?: string;
 }

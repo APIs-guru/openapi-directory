@@ -1,5 +1,7 @@
 package shared
 
+// ReportGenerator
+// Describe the details of a report generator.
 type ReportGenerator struct {
 	CreateTime                       *string          `json:"CreateTime,omitempty"`
 	Description                      *string          `json:"Description,omitempty"`

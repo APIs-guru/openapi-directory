@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails } from "./awsautoscalinglaunchconfigurationblockdevicemappingsebsdetails";
+
 
 
 // AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails
@@ -7,15 +8,15 @@ import { AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails } from "
  * A block device for the instance.
 **/
 export class AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=Ebs" })
+  @SpeakeasyMetadata({ data: "json, name=Ebs" })
   ebs?: AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails;
 
-  @Metadata({ data: "json, name=NoDevice" })
+  @SpeakeasyMetadata({ data: "json, name=NoDevice" })
   noDevice?: boolean;
 
-  @Metadata({ data: "json, name=VirtualName" })
+  @SpeakeasyMetadata({ data: "json, name=VirtualName" })
   virtualName?: string;
 }

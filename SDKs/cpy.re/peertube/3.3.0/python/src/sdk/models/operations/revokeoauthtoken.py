@@ -1,19 +1,19 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class RevokeOAuthTokenSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RevokeOAuthTokenRequest:
-    security: RevokeOAuthTokenSecurity = field(default=None)
+    security: RevokeOAuthTokenSecurity = field()
     
 
 @dataclass
 class RevokeOAuthTokenResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

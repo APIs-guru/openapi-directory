@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Attachment } from "./attachment";
 var AddAttachmentsToSetRequest = /** @class */ (function (_super) {
     __extends(AddAttachmentsToSetRequest, _super);
     function AddAttachmentsToSetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachmentSetId" }),
+        SpeakeasyMetadata({ data: "json, name=attachmentSetId" }),
         __metadata("design:type", String)
     ], AddAttachmentsToSetRequest.prototype, "attachmentSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=attachments", elemType: shared.Attachment }),
+        SpeakeasyMetadata({ data: "json, name=attachments", elemType: Attachment }),
         __metadata("design:type", Array)
     ], AddAttachmentsToSetRequest.prototype, "attachments", void 0);
     return AddAttachmentsToSetRequest;

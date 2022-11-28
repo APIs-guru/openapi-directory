@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class RemoveCustomerAttributePathParams:
-    customer_id: int = field(default=None, metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    customer_id: int = field(metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class RemoveCustomerAttributeHeaders:
 
 @dataclass
 class RemoveCustomerAttributeRequest:
-    path_params: RemoveCustomerAttributePathParams = field(default=None)
-    headers: RemoveCustomerAttributeHeaders = field(default=None)
+    headers: RemoveCustomerAttributeHeaders = field()
+    path_params: RemoveCustomerAttributePathParams = field()
     
 
 @dataclass
 class RemoveCustomerAttributeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

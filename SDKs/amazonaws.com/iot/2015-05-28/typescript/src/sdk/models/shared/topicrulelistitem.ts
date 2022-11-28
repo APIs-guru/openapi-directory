@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TopicRuleListItem
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a rule.
 **/
 export class TopicRuleListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=ruleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ruleArn" })
   ruleArn?: string;
 
-  @Metadata({ data: "json, name=ruleDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=ruleDisabled" })
   ruleDisabled?: boolean;
 
-  @Metadata({ data: "json, name=ruleName" })
+  @SpeakeasyMetadata({ data: "json, name=ruleName" })
   ruleName?: string;
 
-  @Metadata({ data: "json, name=topicPattern" })
+  @SpeakeasyMetadata({ data: "json, name=topicPattern" })
   topicPattern?: string;
 }

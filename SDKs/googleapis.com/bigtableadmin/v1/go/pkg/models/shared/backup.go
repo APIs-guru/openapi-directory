@@ -8,6 +8,17 @@ const (
 	BackupStateEnumReady            BackupStateEnum = "READY"
 )
 
+// BackupInput
+// A backup of a Cloud Bigtable table.
+type BackupInput struct {
+	EncryptionInfo *EncryptionInfoInput `json:"encryptionInfo,omitempty"`
+	ExpireTime     *string              `json:"expireTime,omitempty"`
+	Name           *string              `json:"name,omitempty"`
+	SourceTable    *string              `json:"sourceTable,omitempty"`
+}
+
+// Backup
+// A backup of a Cloud Bigtable table.
 type Backup struct {
 	EncryptionInfo *EncryptionInfo  `json:"encryptionInfo,omitempty"`
 	EndTime        *string          `json:"endTime,omitempty"`

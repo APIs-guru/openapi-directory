@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudAssuredworkloadsV1WorkloadKmsSettings
 /**
- * Settings specific to the Key Management Service.
+ * Settings specific to the Key Management Service. This message is deprecated. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
 **/
 var GoogleCloudAssuredworkloadsV1WorkloadKmsSettings = /** @class */ (function (_super) {
     __extends(GoogleCloudAssuredworkloadsV1WorkloadKmsSettings, _super);
@@ -33,11 +33,11 @@ var GoogleCloudAssuredworkloadsV1WorkloadKmsSettings = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextRotationTime" }),
+        SpeakeasyMetadata({ data: "json, name=nextRotationTime" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1WorkloadKmsSettings.prototype, "nextRotationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=rotationPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=rotationPeriod" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1WorkloadKmsSettings.prototype, "rotationPeriod", void 0);
     return GoogleCloudAssuredworkloadsV1WorkloadKmsSettings;

@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAccountsAccountIdStatementsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=AccountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=AccountId" })
   accountId: string;
 }
 
 
 export class GetAccountsAccountIdStatementsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromStatementDateTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromStatementDateTime" })
   fromStatementDateTime?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toStatementDateTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toStatementDateTime" })
   toStatementDateTime?: Date;
 }
 
 
 export class GetAccountsAccountIdStatementsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
   xCustomerUserAgent?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
   xFapiAuthDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
   xFapiCustomerIpAddress?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
   xFapiInteractionId?: string;
 }
 
 
 export class GetAccountsAccountIdStatementsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   psuoAuth2Security: shared.SchemePsuoAuth2Security;
 }
 
 
 export class GetAccountsAccountIdStatementsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAccountsAccountIdStatementsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAccountsAccountIdStatementsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAccountsAccountIdStatementsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAccountsAccountIdStatementsSecurity;
 }
 
 
 export class GetAccountsAccountIdStatementsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obErrorResponse1?: shared.ObErrorResponse1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obReadStatement2?: shared.ObReadStatement2;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

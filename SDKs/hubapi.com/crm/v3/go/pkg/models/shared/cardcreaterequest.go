@@ -1,5 +1,7 @@
 package shared
 
+// CardCreateRequest
+// State of card definition to be created
 type CardCreateRequest struct {
 	Actions CardActions     `json:"actions"`
 	Display CardDisplayBody `json:"display"`

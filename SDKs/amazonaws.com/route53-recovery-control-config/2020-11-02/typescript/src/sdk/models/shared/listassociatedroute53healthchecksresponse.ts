@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListAssociatedRoute53HealthChecksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HealthCheckIds" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckIds" })
   healthCheckIds?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

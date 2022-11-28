@@ -11,15 +11,15 @@ type UpdatereservationRequestBody struct {
 	Evse      *int64  `json:"evse,omitempty"`
 }
 
-type UpdatereservationRequest struct {
-	PathParams UpdatereservationPathParams
-	Request    UpdatereservationRequestBody `request:"mediaType=application/json"`
-}
-
 type Updatereservation201ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type UpdatereservationRequest struct {
+	PathParams UpdatereservationPathParams
+	Request    UpdatereservationRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdatereservationResponse struct {

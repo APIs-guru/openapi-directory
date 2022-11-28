@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ModelPackageSummary
+// Provides summary information about a model package.
 type ModelPackageSummary struct {
 	CreationTime            time.Time                `json:"CreationTime"`
 	ModelApprovalStatus     *ModelApprovalStatusEnum `json:"ModelApprovalStatus,omitempty"`

@@ -11,6 +11,8 @@ const (
 	PatchesSchemaOpEnumTest    PatchesSchemaOpEnum = "test"
 )
 
+// PatchesSchema
+// A JSON patch operation
 type PatchesSchema struct {
 	Op    PatchesSchemaOpEnum    `json:"op"`
 	Path  string                 `json:"path"`

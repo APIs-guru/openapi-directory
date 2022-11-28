@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RejectQualificationRequestRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=QualificationRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=QualificationRequestId" })
   qualificationRequestId: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: string;
 }

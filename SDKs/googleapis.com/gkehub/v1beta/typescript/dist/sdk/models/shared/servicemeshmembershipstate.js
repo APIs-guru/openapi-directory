@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMeshControlPlaneManagement } from "./servicemeshcontrolplanemanagement";
 import { ServiceMeshDataPlaneManagement } from "./servicemeshdataplanemanagement";
 // ServiceMeshMembershipState
@@ -35,11 +35,11 @@ var ServiceMeshMembershipState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=controlPlaneManagement" }),
+        SpeakeasyMetadata({ data: "json, name=controlPlaneManagement" }),
         __metadata("design:type", ServiceMeshControlPlaneManagement)
     ], ServiceMeshMembershipState.prototype, "controlPlaneManagement", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataPlaneManagement" }),
+        SpeakeasyMetadata({ data: "json, name=dataPlaneManagement" }),
         __metadata("design:type", ServiceMeshDataPlaneManagement)
     ], ServiceMeshMembershipState.prototype, "dataPlaneManagement", void 0);
     return ServiceMeshMembershipState;

@@ -1,5 +1,7 @@
 package shared
 
+// Celebrity
+// Provides information about a celebrity recognized by the <a>RecognizeCelebrities</a> operation.
 type Celebrity struct {
 	Face            *ComparedFace `json:"Face,omitempty"`
 	ID              *string       `json:"Id,omitempty"`

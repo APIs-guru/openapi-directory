@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEtagEtagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=etag" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=etag" })
   etag: string;
 }
 
 
 export class GetEtagEtagHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Match" })
   ifMatch?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
   ifNoneMatch?: string;
 }
 
 
 export class GetEtagEtagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEtagEtagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetEtagEtagHeaders;
 }
 
 
 export class GetEtagEtagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

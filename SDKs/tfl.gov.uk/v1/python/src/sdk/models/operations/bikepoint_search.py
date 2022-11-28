@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class BikePointSearchQueryParams:
-    query: str = field(default=None, metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
+    query: str = field(metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class BikePointSearchRequest:
-    query_params: BikePointSearchQueryParams = field(default=None)
+    query_params: BikePointSearchQueryParams = field()
     
 
 @dataclass
 class BikePointSearchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_places: Optional[List[shared.TflAPIPresentationEntitiesPlace]] = field(default=None)
     

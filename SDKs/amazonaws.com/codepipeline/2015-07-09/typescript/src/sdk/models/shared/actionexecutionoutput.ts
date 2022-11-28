@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionExecutionResult } from "./actionexecutionresult";
 import { ArtifactDetail } from "./artifactdetail";
+
 
 
 // ActionExecutionOutput
@@ -9,12 +9,12 @@ import { ArtifactDetail } from "./artifactdetail";
  * Output details listed for an action execution, such as the action execution result.
 **/
 export class ActionExecutionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionResult" })
+  @SpeakeasyMetadata({ data: "json, name=executionResult" })
   executionResult?: ActionExecutionResult;
 
-  @Metadata({ data: "json, name=outputArtifacts", elemType: shared.ArtifactDetail })
+  @SpeakeasyMetadata({ data: "json, name=outputArtifacts", elemType: ArtifactDetail })
   outputArtifacts?: ArtifactDetail[];
 
-  @Metadata({ data: "json, name=outputVariables" })
+  @SpeakeasyMetadata({ data: "json, name=outputVariables" })
   outputVariables?: Map<string, string>;
 }

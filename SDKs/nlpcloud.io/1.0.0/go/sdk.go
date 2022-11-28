@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://nlpcloud.io",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ReadDependenciesV1EnCoreWebSmDependenciesPost - Read Dependencies
 func (s *SDK) ReadDependenciesV1EnCoreWebSmDependenciesPost(ctx context.Context, request operations.ReadDependenciesV1EnCoreWebSmDependenciesPostRequest) (*operations.ReadDependenciesV1EnCoreWebSmDependenciesPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/en_core_web_sm/dependencies"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -76,7 +102,7 @@ func (s *SDK) ReadDependenciesV1EnCoreWebSmDependenciesPost(ctx context.Context,
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -116,8 +142,9 @@ func (s *SDK) ReadDependenciesV1EnCoreWebSmDependenciesPost(ctx context.Context,
 	return res, nil
 }
 
+// ReadEntitiesV1EnCoreWebSmEntitiesPost - Read Entities
 func (s *SDK) ReadEntitiesV1EnCoreWebSmEntitiesPost(ctx context.Context, request operations.ReadEntitiesV1EnCoreWebSmEntitiesPostRequest) (*operations.ReadEntitiesV1EnCoreWebSmEntitiesPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/en_core_web_sm/entities"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -135,7 +162,7 @@ func (s *SDK) ReadEntitiesV1EnCoreWebSmEntitiesPost(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -175,8 +202,9 @@ func (s *SDK) ReadEntitiesV1EnCoreWebSmEntitiesPost(ctx context.Context, request
 	return res, nil
 }
 
+// ReadRootV1EnCoreWebSmGet - Read Root
 func (s *SDK) ReadRootV1EnCoreWebSmGet(ctx context.Context) (*operations.ReadRootV1EnCoreWebSmGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/en_core_web_sm/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -184,7 +212,7 @@ func (s *SDK) ReadRootV1EnCoreWebSmGet(ctx context.Context) (*operations.ReadRoo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -214,8 +242,9 @@ func (s *SDK) ReadRootV1EnCoreWebSmGet(ctx context.Context) (*operations.ReadRoo
 	return res, nil
 }
 
+// ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost - Read Sentence Dependencies
 func (s *SDK) ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost(ctx context.Context, request operations.ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest) (*operations.ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/en_core_web_sm/sentence-dependencies"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -233,7 +262,7 @@ func (s *SDK) ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost(ctx 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -273,8 +302,9 @@ func (s *SDK) ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost(ctx 
 	return res, nil
 }
 
+// ReadVersionV1EnCoreWebSmVersionGet - Read Version
 func (s *SDK) ReadVersionV1EnCoreWebSmVersionGet(ctx context.Context) (*operations.ReadVersionV1EnCoreWebSmVersionGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/en_core_web_sm/version"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -282,7 +312,7 @@ func (s *SDK) ReadVersionV1EnCoreWebSmVersionGet(ctx context.Context) (*operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

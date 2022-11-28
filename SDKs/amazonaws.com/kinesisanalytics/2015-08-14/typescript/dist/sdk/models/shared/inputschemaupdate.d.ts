@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecordColumn } from "./recordcolumn";
 import { RecordFormat } from "./recordformat";
 /**

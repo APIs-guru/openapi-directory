@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AutoCompleteFieldEnum(str, Enum):
@@ -33,6 +34,8 @@ class AutoCompleteSortByEnum(str, Enum):
 
 @dataclass
 class AutoCompleteQueryParams:
+    field: AutoCompleteFieldEnum = field(metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
+    input: str = field(metadata={'query_param': { 'field_name': 'input', 'style': 'form', 'explode': True }})
     api_key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     body_subtype: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'body_subtype', 'style': 'form', 'explode': True }})
     body_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'body_type', 'style': 'form', 'explode': True }})
@@ -44,11 +47,9 @@ class AutoCompleteQueryParams:
     engine_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine_block', 'style': 'form', 'explode': True }})
     engine_size: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine_size', 'style': 'form', 'explode': True }})
     exterior_color: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'exterior_color', 'style': 'form', 'explode': True }})
-    field: AutoCompleteFieldEnum = field(default=None, metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
     fuel_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fuel_type', 'style': 'form', 'explode': True }})
     ignore_case: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ignore_case', 'style': 'form', 'explode': True }})
     include_non_vin_listings: Optional[AutoCompleteIncludeNonVinListingsEnum] = field(default=None, metadata={'query_param': { 'field_name': 'include_non_vin_listings', 'style': 'form', 'explode': True }})
-    input: str = field(default=None, metadata={'query_param': { 'field_name': 'input', 'style': 'form', 'explode': True }})
     interior_color: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'interior_color', 'style': 'form', 'explode': True }})
     make: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'make', 'style': 'form', 'explode': True }})
     model: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'model', 'style': 'form', 'explode': True }})
@@ -63,13 +64,13 @@ class AutoCompleteQueryParams:
 
 @dataclass
 class AutoCompleteRequest:
-    query_params: AutoCompleteQueryParams = field(default=None)
+    query_params: AutoCompleteQueryParams = field()
     
 
 @dataclass
 class AutoCompleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     search_auto_complete_response: Optional[shared.SearchAutoCompleteResponse] = field(default=None)
-    status_code: int = field(default=None)
     

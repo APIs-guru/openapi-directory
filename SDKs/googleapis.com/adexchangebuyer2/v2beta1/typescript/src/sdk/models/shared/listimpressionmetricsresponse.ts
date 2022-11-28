@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImpressionMetricsRow } from "./impressionmetricsrow";
+
 
 
 // ListImpressionMetricsResponse
@@ -8,9 +8,9 @@ import { ImpressionMetricsRow } from "./impressionmetricsrow";
  * Response message for listing the metrics that are measured in number of impressions.
 **/
 export class ListImpressionMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=impressionMetricsRows", elemType: shared.ImpressionMetricsRow })
+  @SpeakeasyMetadata({ data: "json, name=impressionMetricsRows", elemType: ImpressionMetricsRow })
   impressionMetricsRows?: ImpressionMetricsRow[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

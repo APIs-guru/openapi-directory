@@ -1,6 +1,7 @@
 
 
+
 export enum RegistryStatusEnum {
-    Available = "AVAILABLE"
-,    Deleting = "DELETING"
+    Available = "AVAILABLE",
+    Deleting = "DELETING"
 }

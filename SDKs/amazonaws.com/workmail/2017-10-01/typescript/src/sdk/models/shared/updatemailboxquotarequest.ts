@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateMailboxQuotaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MailboxQuota" })
+  @SpeakeasyMetadata({ data: "json, name=MailboxQuota" })
   mailboxQuota: number;
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId: string;
 }

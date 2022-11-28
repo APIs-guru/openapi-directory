@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GetInstanceHealthResponseHealthStateEnum(str, Enum):
     HEALTH_STATE_UNSPECIFIED = "HEALTH_STATE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class GetInstanceHealthResponseHealthStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetInstanceHealthResponse:
-    health_info: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'healthInfo' }})
-    health_state: Optional[GetInstanceHealthResponseHealthStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'healthState' }})
+    r"""GetInstanceHealthResponse
+    Response for checking if a notebook instance is healthy.
+    """
+    
+    health_info: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('healthInfo') }})
+    health_state: Optional[GetInstanceHealthResponseHealthStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('healthState') }})
     

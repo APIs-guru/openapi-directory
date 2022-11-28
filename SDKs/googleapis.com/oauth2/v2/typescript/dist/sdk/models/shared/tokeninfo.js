@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Tokeninfo = /** @class */ (function (_super) {
     __extends(Tokeninfo, _super);
     function Tokeninfo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audience" }),
+        SpeakeasyMetadata({ data: "json, name=audience" }),
         __metadata("design:type", String)
     ], Tokeninfo.prototype, "audience", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], Tokeninfo.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=expires_in" }),
+        SpeakeasyMetadata({ data: "json, name=expires_in" }),
         __metadata("design:type", Number)
     ], Tokeninfo.prototype, "expiresIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=issued_to" }),
+        SpeakeasyMetadata({ data: "json, name=issued_to" }),
         __metadata("design:type", String)
     ], Tokeninfo.prototype, "issuedTo", void 0);
     __decorate([
-        Metadata({ data: "json, name=scope" }),
+        SpeakeasyMetadata({ data: "json, name=scope" }),
         __metadata("design:type", String)
     ], Tokeninfo.prototype, "scope", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_id" }),
+        SpeakeasyMetadata({ data: "json, name=user_id" }),
         __metadata("design:type", String)
     ], Tokeninfo.prototype, "userId", void 0);
     __decorate([
-        Metadata({ data: "json, name=verified_email" }),
+        SpeakeasyMetadata({ data: "json, name=verified_email" }),
         __metadata("design:type", Boolean)
     ], Tokeninfo.prototype, "verifiedEmail", void 0);
     return Tokeninfo;

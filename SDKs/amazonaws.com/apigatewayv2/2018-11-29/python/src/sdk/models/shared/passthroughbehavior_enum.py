@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PassthroughBehaviorEnum(str, Enum):
     WHEN_NO_MATCH = "WHEN_NO_MATCH"

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Segment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookingClass" })
+  @SpeakeasyMetadata({ data: "json, name=bookingClass" })
   bookingClass: string;
 
-  @Metadata({ data: "json, name=carrier" })
+  @SpeakeasyMetadata({ data: "json, name=carrier" })
   carrier: string;
 
-  @Metadata({ data: "json, name=departure" })
+  @SpeakeasyMetadata({ data: "json, name=departure" })
   departure?: Date;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination: string;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=flightNumber" })
+  @SpeakeasyMetadata({ data: "json, name=flightNumber" })
   flightNumber?: number;
 
-  @Metadata({ data: "json, name=operatingCarrier" })
+  @SpeakeasyMetadata({ data: "json, name=operatingCarrier" })
   operatingCarrier?: string;
 
-  @Metadata({ data: "json, name=origin" })
+  @SpeakeasyMetadata({ data: "json, name=origin" })
   origin: string;
 }

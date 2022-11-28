@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails
+// Details for a ONE_TIME recurrence line item.
 type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails struct {
 	ServicePeriod *GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod `json:"servicePeriod,omitempty"`
 }

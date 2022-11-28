@@ -1,17 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import acceptcodevalidation_enum
-from . import accepttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AcceptPageRequest:
-    accept_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceptCode' }})
-    accept_code_validation: Optional[acceptcodevalidation_enum.AcceptCodeValidationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceptCodeValidation' }})
-    accept_type: accepttype_enum.AcceptTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceptType' }})
-    contact_channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactChannelId' }})
-    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Note' }})
-    page_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PageId' }})
+    accept_code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceptCode') }})
+    accept_type: AcceptTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceptType') }})
+    page_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PageId') }})
+    accept_code_validation: Optional[AcceptCodeValidationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceptCodeValidation') }})
+    contact_channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactChannelId') }})
+    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Note') }})
     

@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class CreateWebhookRequest:
-    request: shared.WebhookCreate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WebhookCreate = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateWebhookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     webhook: Optional[shared.Webhook] = field(default=None)
     

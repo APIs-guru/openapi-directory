@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUntagQueueActionEnum(str, Enum):
     UNTAG_QUEUE = "UntagQueue"
@@ -10,8 +14,8 @@ class PostUntagQueueVersionEnum(str, Enum):
 
 @dataclass
 class PostUntagQueueQueryParams:
-    action: PostUntagQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUntagQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUntagQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUntagQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostUntagQueueHeaders:
 
 @dataclass
 class PostUntagQueueRequest:
-    query_params: PostUntagQueueQueryParams = field(default=None)
-    headers: PostUntagQueueHeaders = field(default=None)
+    headers: PostUntagQueueHeaders = field()
+    query_params: PostUntagQueueQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUntagQueueResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

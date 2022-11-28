@@ -9,6 +9,8 @@ const (
 	DeploymentPlatformEnumCustom              DeploymentPlatformEnum = "CUSTOM"
 )
 
+// Deployment
+// The period during which some deployable was active in a runtime.
 type Deployment struct {
 	Address      *string                 `json:"address,omitempty"`
 	Config       *string                 `json:"config,omitempty"`

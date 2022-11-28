@@ -1,6 +1,7 @@
 
 
+
 export enum AutoMlSortOrderEnum {
-    Ascending = "Ascending"
-,    Descending = "Descending"
+    Ascending = "Ascending",
+    Descending = "Descending"
 }

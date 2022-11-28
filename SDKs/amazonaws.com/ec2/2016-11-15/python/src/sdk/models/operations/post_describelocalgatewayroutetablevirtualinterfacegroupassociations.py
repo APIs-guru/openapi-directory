@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsActionEnum(str, Enum):
     DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATIONS = "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations"
@@ -10,10 +14,10 @@ class PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsVersion
 
 @dataclass
 class PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsQueryParams:
-    action: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsHeaders
 
 @dataclass
 class PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest:
-    query_params: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsQueryParams = field(default=None)
-    headers: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsHeaders = field(default=None)
+    headers: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsHeaders = field()
+    query_params: PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

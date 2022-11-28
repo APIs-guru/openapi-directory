@@ -42,7 +42,7 @@ type LoggingProjectsSinksPatchSecurity struct {
 type LoggingProjectsSinksPatchRequest struct {
 	PathParams  LoggingProjectsSinksPatchPathParams
 	QueryParams LoggingProjectsSinksPatchQueryParams
-	Request     *shared.LogSink `request:"mediaType=application/json"`
+	Request     *shared.LogSinkInput `request:"mediaType=application/json"`
 	Security    LoggingProjectsSinksPatchSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Page
 /**
  * Incident Manager engaging a contact's contact channel.
@@ -33,35 +33,35 @@ var Page = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContactArn" }),
+        SpeakeasyMetadata({ data: "json, name=ContactArn" }),
         __metadata("design:type", String)
     ], Page.prototype, "contactArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeliveryTime" }),
+        SpeakeasyMetadata({ data: "json, name=DeliveryTime" }),
         __metadata("design:type", Date)
     ], Page.prototype, "deliveryTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngagementArn" }),
+        SpeakeasyMetadata({ data: "json, name=EngagementArn" }),
         __metadata("design:type", String)
     ], Page.prototype, "engagementArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncidentId" }),
+        SpeakeasyMetadata({ data: "json, name=IncidentId" }),
         __metadata("design:type", String)
     ], Page.prototype, "incidentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageArn" }),
+        SpeakeasyMetadata({ data: "json, name=PageArn" }),
         __metadata("design:type", String)
     ], Page.prototype, "pageArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReadTime" }),
+        SpeakeasyMetadata({ data: "json, name=ReadTime" }),
         __metadata("design:type", Date)
     ], Page.prototype, "readTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sender" }),
+        SpeakeasyMetadata({ data: "json, name=Sender" }),
         __metadata("design:type", String)
     ], Page.prototype, "sender", void 0);
     __decorate([
-        Metadata({ data: "json, name=SentTime" }),
+        SpeakeasyMetadata({ data: "json, name=SentTime" }),
         __metadata("design:type", Date)
     ], Page.prototype, "sentTime", void 0);
     return Page;

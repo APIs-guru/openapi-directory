@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventsResetMultipleForAllRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Multiple events reset all request.
 **/
 export class EventsResetMultipleForAllRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event_ids" })
+  @SpeakeasyMetadata({ data: "json, name=event_ids" })
   eventIds?: string[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BpcrdRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(BpcrdRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var BpcrdRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UDF1" }),
+        SpeakeasyMetadata({ data: "json, name=UDF1" }),
         __metadata("design:type", String)
     ], BpcrdRequestBodyCertificateParameters.prototype, "udf1", void 0);
     return BpcrdRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var BpcrdRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", BpcrdRequestBodyCertificateParameters)
     ], BpcrdRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], BpcrdRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], BpcrdRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], BpcrdRequestBody.prototype, "txnId", void 0);
     return BpcrdRequestBody;
@@ -70,32 +70,16 @@ var BpcrdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], BpcrdSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], BpcrdSecurity.prototype, "clientId", void 0);
     return BpcrdSecurity;
 }(SpeakeasyBase));
 export { BpcrdSecurity };
-var BpcrdRequest = /** @class */ (function (_super) {
-    __extends(BpcrdRequest, _super);
-    function BpcrdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", BpcrdRequestBody)
-    ], BpcrdRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", BpcrdSecurity)
-    ], BpcrdRequest.prototype, "security", void 0);
-    return BpcrdRequest;
-}(SpeakeasyBase));
-export { BpcrdRequest };
 export var Bpcrd400ApplicationJsonErrorEnum;
 (function (Bpcrd400ApplicationJsonErrorEnum) {
     Bpcrd400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Bpcrd400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bpcrd400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bpcrd400ApplicationJson.prototype, "errorDescription", void 0);
     return Bpcrd400ApplicationJson;
@@ -144,11 +128,11 @@ var Bpcrd401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bpcrd401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bpcrd401ApplicationJson.prototype, "errorDescription", void 0);
     return Bpcrd401ApplicationJson;
@@ -170,11 +154,11 @@ var Bpcrd404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bpcrd404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bpcrd404ApplicationJson.prototype, "errorDescription", void 0);
     return Bpcrd404ApplicationJson;
@@ -194,11 +178,11 @@ var Bpcrd500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bpcrd500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bpcrd500ApplicationJson.prototype, "errorDescription", void 0);
     return Bpcrd500ApplicationJson;
@@ -218,11 +202,11 @@ var Bpcrd502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bpcrd502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bpcrd502ApplicationJson.prototype, "errorDescription", void 0);
     return Bpcrd502ApplicationJson;
@@ -242,11 +226,11 @@ var Bpcrd503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bpcrd503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bpcrd503ApplicationJson.prototype, "errorDescription", void 0);
     return Bpcrd503ApplicationJson;
@@ -266,55 +250,71 @@ var Bpcrd504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bpcrd504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bpcrd504ApplicationJson.prototype, "errorDescription", void 0);
     return Bpcrd504ApplicationJson;
 }(SpeakeasyBase));
 export { Bpcrd504ApplicationJson };
+var BpcrdRequest = /** @class */ (function (_super) {
+    __extends(BpcrdRequest, _super);
+    function BpcrdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", BpcrdRequestBody)
+    ], BpcrdRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", BpcrdSecurity)
+    ], BpcrdRequest.prototype, "security", void 0);
+    return BpcrdRequest;
+}(SpeakeasyBase));
+export { BpcrdRequest };
 var BpcrdResponse = /** @class */ (function (_super) {
     __extends(BpcrdResponse, _super);
     function BpcrdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BpcrdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BpcrdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bpcrd400ApplicationJson)
     ], BpcrdResponse.prototype, "bpcrd400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bpcrd401ApplicationJson)
     ], BpcrdResponse.prototype, "bpcrd401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bpcrd404ApplicationJson)
     ], BpcrdResponse.prototype, "bpcrd404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bpcrd500ApplicationJson)
     ], BpcrdResponse.prototype, "bpcrd500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bpcrd502ApplicationJson)
     ], BpcrdResponse.prototype, "bpcrd502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bpcrd503ApplicationJson)
     ], BpcrdResponse.prototype, "bpcrd503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bpcrd504ApplicationJson)
     ], BpcrdResponse.prototype, "bpcrd504ApplicationJsonObject", void 0);
     return BpcrdResponse;

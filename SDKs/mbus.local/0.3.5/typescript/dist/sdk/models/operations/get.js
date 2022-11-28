@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetPathParams = /** @class */ (function (_super) {
     __extends(GetPathParams, _super);
     function GetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=address" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" }),
         __metadata("design:type", String)
     ], GetPathParams.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=baudrate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=baudrate" }),
         __metadata("design:type", Number)
     ], GetPathParams.prototype, "baudrate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=device" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=device" }),
         __metadata("design:type", String)
     ], GetPathParams.prototype, "device", void 0);
     return GetPathParams;
@@ -49,7 +49,7 @@ var GetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPathParams)
     ], GetRequest.prototype, "pathParams", void 0);
     return GetRequest;
@@ -61,19 +61,19 @@ var GetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResponse.prototype, "mbusData", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResponse.prototype, "textError", void 0);
     return GetResponse;

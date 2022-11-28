@@ -1,6 +1,7 @@
 
 
+
 export enum ExportTypeEnum {
-    AlexaSkillsKit = "ALEXA_SKILLS_KIT"
-,    Lex = "LEX"
+    AlexaSkillsKit = "ALEXA_SKILLS_KIT",
+    Lex = "LEX"
 }

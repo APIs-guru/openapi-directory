@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Ami } from "./ami";
+import { Container } from "./container";
 // OutputResources
 /**
  * The resources produced by this image.
@@ -34,11 +35,11 @@ var OutputResources = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amis", elemType: shared.Ami }),
+        SpeakeasyMetadata({ data: "json, name=amis", elemType: Ami }),
         __metadata("design:type", Array)
     ], OutputResources.prototype, "amis", void 0);
     __decorate([
-        Metadata({ data: "json, name=containers", elemType: shared.Container }),
+        SpeakeasyMetadata({ data: "json, name=containers", elemType: Container }),
         __metadata("design:type", Array)
     ], OutputResources.prototype, "containers", void 0);
     return OutputResources;

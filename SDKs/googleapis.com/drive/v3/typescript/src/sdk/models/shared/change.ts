@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Drive } from "./drive";
 import { File } from "./file";
 import { TeamDrive } from "./teamdrive";
+
 
 
 // Change
@@ -9,36 +10,36 @@ import { TeamDrive } from "./teamdrive";
  * A change to a file or shared drive.
 **/
 export class Change extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changeType" })
+  @SpeakeasyMetadata({ data: "json, name=changeType" })
   changeType?: string;
 
-  @Metadata({ data: "json, name=drive" })
+  @SpeakeasyMetadata({ data: "json, name=drive" })
   drive?: Drive;
 
-  @Metadata({ data: "json, name=driveId" })
+  @SpeakeasyMetadata({ data: "json, name=driveId" })
   driveId?: string;
 
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: File;
 
-  @Metadata({ data: "json, name=fileId" })
+  @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=removed" })
+  @SpeakeasyMetadata({ data: "json, name=removed" })
   removed?: boolean;
 
-  @Metadata({ data: "json, name=teamDrive" })
+  @SpeakeasyMetadata({ data: "json, name=teamDrive" })
   teamDrive?: TeamDrive;
 
-  @Metadata({ data: "json, name=teamDriveId" })
+  @SpeakeasyMetadata({ data: "json, name=teamDriveId" })
   teamDriveId?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: Date;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum DataFormatEnum {
-    Csv = "CSV"
-,    Json = "JSON"
+    Csv = "CSV",
+    Json = "JSON"
 }

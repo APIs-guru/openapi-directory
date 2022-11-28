@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThrottlingSettings } from "./throttlingsettings";
+
 
 
 // SettingsResponse
@@ -7,15 +8,15 @@ import { ThrottlingSettings } from "./throttlingsettings";
  * Webhook settings for an app.
 **/
 export class SettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=targetUrl" })
+  @SpeakeasyMetadata({ data: "json, name=targetUrl" })
   targetUrl: string;
 
-  @Metadata({ data: "json, name=throttling" })
+  @SpeakeasyMetadata({ data: "json, name=throttling" })
   throttling: ThrottlingSettings;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 }

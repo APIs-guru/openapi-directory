@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1AnalyzeContentResponse
+// The response message for Participants.AnalyzeContent.
 type GoogleCloudDialogflowV2beta1AnalyzeContentResponse struct {
 	AutomatedAgentReply         *GoogleCloudDialogflowV2beta1AutomatedAgentReply `json:"automatedAgentReply,omitempty"`
 	DtmfParameters              *GoogleCloudDialogflowV2beta1DtmfParameters      `json:"dtmfParameters,omitempty"`

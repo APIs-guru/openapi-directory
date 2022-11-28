@@ -46,15 +46,15 @@ type VirtualizationClusterTypesListQueryParams struct {
 	SlugNisw        *string `queryParam:"style=form,explode=true,name=slug__nisw"`
 }
 
-type VirtualizationClusterTypesListRequest struct {
-	QueryParams VirtualizationClusterTypesListQueryParams
-}
-
 type VirtualizationClusterTypesList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
 	Next     *string              `json:"next,omitempty"`
 	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.ClusterType `json:"results"`
+}
+
+type VirtualizationClusterTypesListRequest struct {
+	QueryParams VirtualizationClusterTypesListQueryParams
 }
 
 type VirtualizationClusterTypesListResponse struct {

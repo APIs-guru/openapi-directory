@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuditConfig } from "./auditconfig";
 import { Binding } from "./binding";
 import { Rule } from "./rule";

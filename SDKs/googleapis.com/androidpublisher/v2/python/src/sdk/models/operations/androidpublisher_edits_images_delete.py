@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AndroidpublisherEditsImagesDeleteImageTypeEnum(str, Enum):
@@ -16,11 +17,11 @@ class AndroidpublisherEditsImagesDeleteImageTypeEnum(str, Enum):
 
 @dataclass
 class AndroidpublisherEditsImagesDeletePathParams:
-    edit_id: str = field(default=None, metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
-    image_id: str = field(default=None, metadata={'path_param': { 'field_name': 'imageId', 'style': 'simple', 'explode': False }})
-    image_type: AndroidpublisherEditsImagesDeleteImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    language: str = field(default=None, metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    edit_id: str = field(metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
+    image_id: str = field(metadata={'path_param': { 'field_name': 'imageId', 'style': 'simple', 'explode': False }})
+    image_type: AndroidpublisherEditsImagesDeleteImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    language: str = field(metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -36,19 +37,19 @@ class AndroidpublisherEditsImagesDeleteQueryParams:
 
 @dataclass
 class AndroidpublisherEditsImagesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherEditsImagesDeleteRequest:
-    path_params: AndroidpublisherEditsImagesDeletePathParams = field(default=None)
-    query_params: AndroidpublisherEditsImagesDeleteQueryParams = field(default=None)
-    security: AndroidpublisherEditsImagesDeleteSecurity = field(default=None)
+    path_params: AndroidpublisherEditsImagesDeletePathParams = field()
+    query_params: AndroidpublisherEditsImagesDeleteQueryParams = field()
+    security: AndroidpublisherEditsImagesDeleteSecurity = field()
     
 
 @dataclass
 class AndroidpublisherEditsImagesDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

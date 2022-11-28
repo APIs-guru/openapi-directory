@@ -1,5 +1,7 @@
 package shared
 
+// EventContextDataType
+// Specifies the user context data captured at the time of an event request.
 type EventContextDataType struct {
 	City       *string `json:"City,omitempty"`
 	Country    *string `json:"Country,omitempty"`

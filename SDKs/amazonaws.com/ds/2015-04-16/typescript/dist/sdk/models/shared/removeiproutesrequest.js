@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RemoveIpRoutesRequest = /** @class */ (function (_super) {
     __extends(RemoveIpRoutesRequest, _super);
     function RemoveIpRoutesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CidrIps" }),
+        SpeakeasyMetadata({ data: "json, name=CidrIps" }),
         __metadata("design:type", Array)
     ], RemoveIpRoutesRequest.prototype, "cidrIps", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], RemoveIpRoutesRequest.prototype, "directoryId", void 0);
     return RemoveIpRoutesRequest;

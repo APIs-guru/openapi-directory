@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourcesMediaSearchResultsJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=q" })
   q: string;
 }
 
 
 export class GetResourcesMediaSearchResultsJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResourcesMediaSearchResultsJsonQueryParams;
 }
 
 
 export class GetResourcesMediaSearchResultsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MediaItemWrapped })
+  @SpeakeasyMetadata({ elemType: shared.MediaItemWrapped })
   mediaItemWrappeds?: shared.MediaItemWrapped[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

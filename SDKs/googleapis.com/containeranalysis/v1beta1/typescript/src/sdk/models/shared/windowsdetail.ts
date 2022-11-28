@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KnowledgeBase } from "./knowledgebase";
 
 
+
 export class WindowsDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=cpeUri" })
   cpeUri?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fixingKbs", elemType: shared.KnowledgeBase })
+  @SpeakeasyMetadata({ data: "json, name=fixingKbs", elemType: KnowledgeBase })
   fixingKbs?: KnowledgeBase[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

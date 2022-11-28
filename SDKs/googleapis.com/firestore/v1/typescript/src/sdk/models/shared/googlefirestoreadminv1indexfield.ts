@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleFirestoreAdminV1IndexFieldArrayConfigEnum {
-    ArrayConfigUnspecified = "ARRAY_CONFIG_UNSPECIFIED"
-,    Contains = "CONTAINS"
+    ArrayConfigUnspecified = "ARRAY_CONFIG_UNSPECIFIED",
+    Contains = "CONTAINS"
 }
 
 export enum GoogleFirestoreAdminV1IndexFieldOrderEnum {
-    OrderUnspecified = "ORDER_UNSPECIFIED"
-,    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    OrderUnspecified = "ORDER_UNSPECIFIED",
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
@@ -17,12 +18,12 @@ export enum GoogleFirestoreAdminV1IndexFieldOrderEnum {
  * A field in an index. The field_path describes which field is indexed, the value_mode describes how the field value is indexed.
 **/
 export class GoogleFirestoreAdminV1IndexField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayConfig" })
+  @SpeakeasyMetadata({ data: "json, name=arrayConfig" })
   arrayConfig?: GoogleFirestoreAdminV1IndexFieldArrayConfigEnum;
 
-  @Metadata({ data: "json, name=fieldPath" })
+  @SpeakeasyMetadata({ data: "json, name=fieldPath" })
   fieldPath?: string;
 
-  @Metadata({ data: "json, name=order" })
+  @SpeakeasyMetadata({ data: "json, name=order" })
   order?: GoogleFirestoreAdminV1IndexFieldOrderEnum;
 }

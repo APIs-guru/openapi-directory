@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class TextPositionHorizontalAlignmentEnum(str, Enum):
     HORIZONTAL_ALIGN_UNSPECIFIED = "HORIZONTAL_ALIGN_UNSPECIFIED"
@@ -12,5 +14,9 @@ class TextPositionHorizontalAlignmentEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TextPosition:
-    horizontal_alignment: Optional[TextPositionHorizontalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'horizontalAlignment' }})
+    r"""TextPosition
+    Position settings for text.
+    """
+    
+    horizontal_alignment: Optional[TextPositionHorizontalAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('horizontalAlignment') }})
     

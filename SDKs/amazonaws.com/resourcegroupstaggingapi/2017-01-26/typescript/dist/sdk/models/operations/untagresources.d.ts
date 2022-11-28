@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum UntagResourcesXAmzTargetEnum {
     ResourceGroupsTaggingApi20170126UntagResources = "ResourceGroupsTaggingAPI_20170126.UntagResources"

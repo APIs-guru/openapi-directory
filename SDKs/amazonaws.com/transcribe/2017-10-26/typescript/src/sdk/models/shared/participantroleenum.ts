@@ -1,6 +1,7 @@
 
 
+
 export enum ParticipantRoleEnum {
-    Agent = "AGENT"
-,    Customer = "CUSTOMER"
+    Agent = "AGENT",
+    Customer = "CUSTOMER"
 }

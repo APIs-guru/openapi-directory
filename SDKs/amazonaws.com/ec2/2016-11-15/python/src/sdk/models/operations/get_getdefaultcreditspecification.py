@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetDefaultCreditSpecificationActionEnum(str, Enum):
     GET_DEFAULT_CREDIT_SPECIFICATION = "GetDefaultCreditSpecification"
@@ -16,10 +20,10 @@ class GetGetDefaultCreditSpecificationVersionEnum(str, Enum):
 
 @dataclass
 class GetGetDefaultCreditSpecificationQueryParams:
-    action: GetGetDefaultCreditSpecificationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetDefaultCreditSpecificationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_family: GetGetDefaultCreditSpecificationInstanceFamilyEnum = field(metadata={'query_param': { 'field_name': 'InstanceFamily', 'style': 'form', 'explode': True }})
+    version: GetGetDefaultCreditSpecificationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_family: GetGetDefaultCreditSpecificationInstanceFamilyEnum = field(default=None, metadata={'query_param': { 'field_name': 'InstanceFamily', 'style': 'form', 'explode': True }})
-    version: GetGetDefaultCreditSpecificationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +39,13 @@ class GetGetDefaultCreditSpecificationHeaders:
 
 @dataclass
 class GetGetDefaultCreditSpecificationRequest:
-    query_params: GetGetDefaultCreditSpecificationQueryParams = field(default=None)
-    headers: GetGetDefaultCreditSpecificationHeaders = field(default=None)
+    headers: GetGetDefaultCreditSpecificationHeaders = field()
+    query_params: GetGetDefaultCreditSpecificationQueryParams = field()
     
 
 @dataclass
 class GetGetDefaultCreditSpecificationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

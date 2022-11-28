@@ -26,7 +26,7 @@ type AnalyticsManagementWebpropertiesInsertSecurity struct {
 type AnalyticsManagementWebpropertiesInsertRequest struct {
 	PathParams  AnalyticsManagementWebpropertiesInsertPathParams
 	QueryParams AnalyticsManagementWebpropertiesInsertQueryParams
-	Request     *shared.Webproperty `request:"mediaType=application/json"`
+	Request     *shared.WebpropertyInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementWebpropertiesInsertSecurity
 }
 

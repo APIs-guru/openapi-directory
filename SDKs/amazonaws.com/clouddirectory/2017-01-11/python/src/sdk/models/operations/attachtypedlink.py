@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class AttachTypedLinkHeaders:
+    x_amz_data_partition: str = field(metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -13,48 +18,60 @@ class AttachTypedLinkHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_data_partition: str = field(default=None, metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class AttachTypedLinkRequestBodySourceObjectReference:
-    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Selector' }})
+    r"""AttachTypedLinkRequestBodySourceObjectReference
+    The reference that identifies an object.
+    """
+    
+    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Selector') }})
     
 
 @dataclass_json
 @dataclass
 class AttachTypedLinkRequestBodyTargetObjectReference:
-    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Selector' }})
+    r"""AttachTypedLinkRequestBodyTargetObjectReference
+    The reference that identifies an object.
+    """
+    
+    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Selector') }})
     
 
 @dataclass_json
 @dataclass
 class AttachTypedLinkRequestBodyTypedLinkFacet:
-    schema_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SchemaArn' }})
-    typed_link_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TypedLinkName' }})
+    r"""AttachTypedLinkRequestBodyTypedLinkFacet
+    Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
+    """
+    
+    schema_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SchemaArn') }})
+    typed_link_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TypedLinkName') }})
     
 
 @dataclass_json
 @dataclass
 class AttachTypedLinkRequestBody:
-    attributes: List[shared.AttributeNameAndValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    source_object_reference: AttachTypedLinkRequestBodySourceObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceObjectReference' }})
-    target_object_reference: AttachTypedLinkRequestBodyTargetObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetObjectReference' }})
-    typed_link_facet: AttachTypedLinkRequestBodyTypedLinkFacet = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TypedLinkFacet' }})
+    attributes: List[shared.AttributeNameAndValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    source_object_reference: AttachTypedLinkRequestBodySourceObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceObjectReference') }})
+    target_object_reference: AttachTypedLinkRequestBodyTargetObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetObjectReference') }})
+    typed_link_facet: AttachTypedLinkRequestBodyTypedLinkFacet = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TypedLinkFacet') }})
     
 
 @dataclass
 class AttachTypedLinkRequest:
-    headers: AttachTypedLinkHeaders = field(default=None)
-    request: AttachTypedLinkRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AttachTypedLinkHeaders = field()
+    request: AttachTypedLinkRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AttachTypedLinkResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     attach_typed_link_response: Optional[shared.AttachTypedLinkResponse] = field(default=None)
-    content_type: str = field(default=None)
     directory_not_enabled_exception: Optional[Any] = field(default=None)
     facet_validation_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
@@ -63,6 +80,5 @@ class AttachTypedLinkResponse:
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     retryable_conflict_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StatusGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=messageId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=messageId" })
   messageId?: string;
 }
 
 
 export class StatusGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StatusGetQueryParams;
 }
 
 
 export class StatusGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageStatus?: shared.MessageStatus;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: shared.ProblemDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

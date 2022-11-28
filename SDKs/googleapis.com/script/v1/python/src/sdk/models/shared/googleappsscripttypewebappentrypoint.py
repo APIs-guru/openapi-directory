@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleappsscripttypewebappconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsScriptTypeWebAppEntryPoint:
-    entry_point_config: Optional[googleappsscripttypewebappconfig.GoogleAppsScriptTypeWebAppConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entryPointConfig' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""GoogleAppsScriptTypeWebAppEntryPoint
+    A web application entry point.
+    """
+    
+    entry_point_config: Optional[GoogleAppsScriptTypeWebAppConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entryPointConfig') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

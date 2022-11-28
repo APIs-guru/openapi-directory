@@ -5,7 +5,7 @@ import (
 )
 
 type AddItemRequest struct {
-	Request shared.Item `request:"mediaType=application/json"`
+	Request shared.ItemInput `request:"mediaType=application/json"`
 }
 
 type AddItemResponse struct {

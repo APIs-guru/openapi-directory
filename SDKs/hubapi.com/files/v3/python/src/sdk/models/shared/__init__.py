@@ -1,5 +1,6 @@
 from .collectionresponsefile import *
 from .collectionresponsefolder import *
+from .error import *
 from .errorcategory import *
 from .errordetail import *
 from .file import *

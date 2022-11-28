@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CreateBatchRequestBodyOperationEnum;
 (function (CreateBatchRequestBodyOperationEnum) {
     CreateBatchRequestBodyOperationEnum["Whois"] = "whois";
@@ -40,7 +40,7 @@ var CreateBatchRequestBodyOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], CreateBatchRequestBodyOptions.prototype, "format", void 0);
     return CreateBatchRequestBodyOptions;
@@ -52,15 +52,15 @@ var CreateBatchRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=domains" }),
+        SpeakeasyMetadata({ data: "json, name=domains" }),
         __metadata("design:type", Array)
     ], CreateBatchRequestBody.prototype, "domains", void 0);
     __decorate([
-        Metadata({ data: "json, name=operation" }),
+        SpeakeasyMetadata({ data: "json, name=operation" }),
         __metadata("design:type", String)
     ], CreateBatchRequestBody.prototype, "operation", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", CreateBatchRequestBodyOptions)
     ], CreateBatchRequestBody.prototype, "options", void 0);
     return CreateBatchRequestBody;
@@ -72,7 +72,7 @@ var CreateBatchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateBatchRequestBody)
     ], CreateBatchRequest.prototype, "request", void 0);
     return CreateBatchRequest;
@@ -84,15 +84,15 @@ var CreateBatchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateBatchResponse.prototype, "batch", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateBatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateBatchResponse.prototype, "statusCode", void 0);
     return CreateBatchResponse;

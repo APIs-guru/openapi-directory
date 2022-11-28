@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeLocalGatewayRouteTablesActionEnum(str, Enum):
     DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLES = "DescribeLocalGatewayRouteTables"
@@ -10,10 +14,10 @@ class PostDescribeLocalGatewayRouteTablesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeLocalGatewayRouteTablesQueryParams:
-    action: PostDescribeLocalGatewayRouteTablesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeLocalGatewayRouteTablesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeLocalGatewayRouteTablesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeLocalGatewayRouteTablesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeLocalGatewayRouteTablesHeaders:
 
 @dataclass
 class PostDescribeLocalGatewayRouteTablesRequest:
-    query_params: PostDescribeLocalGatewayRouteTablesQueryParams = field(default=None)
-    headers: PostDescribeLocalGatewayRouteTablesHeaders = field(default=None)
+    headers: PostDescribeLocalGatewayRouteTablesHeaders = field()
+    query_params: PostDescribeLocalGatewayRouteTablesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeLocalGatewayRouteTablesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
+
 
 
 // ProjectMetadataConnectionsVideos
@@ -7,13 +8,13 @@ import { User } from "./user";
  * A standard connection object indicating how to get all the videos in this project.
 **/
 export class ProjectMetadataConnectionsVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -23,7 +24,7 @@ export class ProjectMetadataConnectionsVideos extends SpeakeasyBase {
  * A list of resource URIs related to the project.
 **/
 export class ProjectMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos: ProjectMetadataConnectionsVideos;
 }
 
@@ -33,30 +34,30 @@ export class ProjectMetadataConnections extends SpeakeasyBase {
  * The project's metadata.
 **/
 export class ProjectMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: ProjectMetadataConnections;
 }
 
 
 export class Project extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_time" })
+  @SpeakeasyMetadata({ data: "json, name=created_time" })
   createdTime: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: ProjectMetadata;
 
-  @Metadata({ data: "json, name=modified_time" })
+  @SpeakeasyMetadata({ data: "json, name=modified_time" })
   modifiedTime: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: User;
 }

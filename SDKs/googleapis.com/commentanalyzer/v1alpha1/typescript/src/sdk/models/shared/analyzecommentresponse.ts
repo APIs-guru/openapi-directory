@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeScores } from "./attributescores";
+
 
 
 // AnalyzeCommentResponse
@@ -8,15 +8,15 @@ import { AttributeScores } from "./attributescores";
  * The comment analysis response message.
 **/
 export class AnalyzeCommentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeScores", elemType: shared.AttributeScores })
+  @SpeakeasyMetadata({ data: "json, name=attributeScores", elemType: AttributeScores })
   attributeScores?: Map<string, AttributeScores>;
 
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=detectedLanguages" })
+  @SpeakeasyMetadata({ data: "json, name=detectedLanguages" })
   detectedLanguages?: string[];
 
-  @Metadata({ data: "json, name=languages" })
+  @SpeakeasyMetadata({ data: "json, name=languages" })
   languages?: string[];
 }

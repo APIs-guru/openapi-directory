@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetRandomPasswordRequest = /** @class */ (function (_super) {
     __extends(GetRandomPasswordRequest, _super);
     function GetRandomPasswordRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ExcludeCharacters" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludeCharacters" }),
         __metadata("design:type", String)
     ], GetRandomPasswordRequest.prototype, "excludeCharacters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExcludeLowercase" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludeLowercase" }),
         __metadata("design:type", Boolean)
     ], GetRandomPasswordRequest.prototype, "excludeLowercase", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExcludeNumbers" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludeNumbers" }),
         __metadata("design:type", Boolean)
     ], GetRandomPasswordRequest.prototype, "excludeNumbers", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExcludePunctuation" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludePunctuation" }),
         __metadata("design:type", Boolean)
     ], GetRandomPasswordRequest.prototype, "excludePunctuation", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExcludeUppercase" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludeUppercase" }),
         __metadata("design:type", Boolean)
     ], GetRandomPasswordRequest.prototype, "excludeUppercase", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeSpace" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeSpace" }),
         __metadata("design:type", Boolean)
     ], GetRandomPasswordRequest.prototype, "includeSpace", void 0);
     __decorate([
-        Metadata({ data: "json, name=PasswordLength" }),
+        SpeakeasyMetadata({ data: "json, name=PasswordLength" }),
         __metadata("design:type", Number)
     ], GetRandomPasswordRequest.prototype, "passwordLength", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequireEachIncludedType" }),
+        SpeakeasyMetadata({ data: "json, name=RequireEachIncludedType" }),
         __metadata("design:type", Boolean)
     ], GetRandomPasswordRequest.prototype, "requireEachIncludedType", void 0);
     return GetRandomPasswordRequest;

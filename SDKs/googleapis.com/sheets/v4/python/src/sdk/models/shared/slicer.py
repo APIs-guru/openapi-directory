@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import embeddedobjectposition
-from . import slicerspec
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Slicer:
-    position: Optional[embeddedobjectposition.EmbeddedObjectPosition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
-    slicer_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slicerId' }})
-    spec: Optional[slicerspec.SlicerSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
+    r"""Slicer
+    A slicer in a sheet.
+    """
+    
+    position: Optional[EmbeddedObjectPosition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
+    slicer_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('slicerId') }})
+    spec: Optional[SlicerSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
     

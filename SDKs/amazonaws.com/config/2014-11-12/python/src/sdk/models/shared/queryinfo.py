@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import fieldinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class QueryInfo:
-    select_fields: Optional[List[fieldinfo.FieldInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SelectFields' }})
+    r"""QueryInfo
+    Details about the query.
+    """
+    
+    select_fields: Optional[List[FieldInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SelectFields') }})
     

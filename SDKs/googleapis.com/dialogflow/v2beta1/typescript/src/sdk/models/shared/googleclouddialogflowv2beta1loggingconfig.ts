@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1LoggingConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines logging behavior for conversation lifecycle events.
 **/
 export class GoogleCloudDialogflowV2beta1LoggingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableStackdriverLogging" })
+  @SpeakeasyMetadata({ data: "json, name=enableStackdriverLogging" })
   enableStackdriverLogging?: boolean;
 }

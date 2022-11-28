@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import gridcoordinate
+from sdk import utils
+from . import *
 
 class PasteDataRequestTypeEnum(str, Enum):
     PASTE_NORMAL = "PASTE_NORMAL"
@@ -16,9 +18,13 @@ class PasteDataRequestTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PasteDataRequest:
-    coordinate: Optional[gridcoordinate.GridCoordinate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coordinate' }})
-    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    delimiter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delimiter' }})
-    html: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
-    type: Optional[PasteDataRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""PasteDataRequest
+    Inserts data into the spreadsheet starting at the specified coordinate.
+    """
+    
+    coordinate: Optional[GridCoordinate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coordinate') }})
+    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    delimiter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('delimiter') }})
+    html: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('html') }})
+    type: Optional[PasteDataRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

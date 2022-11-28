@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIdentityAccesscontextmanagerV1MethodSelector } from "./googleidentityaccesscontextmanagerv1methodselector";
+
 
 
 // GoogleIdentityAccesscontextmanagerV1ApiOperation
@@ -8,9 +8,9 @@ import { GoogleIdentityAccesscontextmanagerV1MethodSelector } from "./googleiden
  * Identification for an API Operation.
 **/
 export class GoogleIdentityAccesscontextmanagerV1ApiOperation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=methodSelectors", elemType: shared.GoogleIdentityAccesscontextmanagerV1MethodSelector })
+  @SpeakeasyMetadata({ data: "json, name=methodSelectors", elemType: GoogleIdentityAccesscontextmanagerV1MethodSelector })
   methodSelectors?: GoogleIdentityAccesscontextmanagerV1MethodSelector[];
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

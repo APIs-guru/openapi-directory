@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import component
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListComponentsResponse:
-    components: Optional[List[component.Component]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'components' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    components: Optional[List[Component]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('components') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

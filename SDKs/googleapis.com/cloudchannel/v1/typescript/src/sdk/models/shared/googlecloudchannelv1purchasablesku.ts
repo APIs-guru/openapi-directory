@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudChannelV1Sku } from "./googlecloudchannelv1sku";
+
 
 
 // GoogleCloudChannelV1PurchasableSku
@@ -7,6 +8,6 @@ import { GoogleCloudChannelV1Sku } from "./googlecloudchannelv1sku";
  * SKU that you can purchase. This is used in ListPurchasableSku API response.
 **/
 export class GoogleCloudChannelV1PurchasableSku extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku?: GoogleCloudChannelV1Sku;
 }

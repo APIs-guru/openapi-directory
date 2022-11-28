@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteInstanceEventWindowActionEnum(str, Enum):
     DELETE_INSTANCE_EVENT_WINDOW = "DeleteInstanceEventWindow"
@@ -10,11 +14,11 @@ class GetDeleteInstanceEventWindowVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteInstanceEventWindowQueryParams:
-    action: GetDeleteInstanceEventWindowActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteInstanceEventWindowActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_event_window_id: str = field(metadata={'query_param': { 'field_name': 'InstanceEventWindowId', 'style': 'form', 'explode': True }})
+    version: GetDeleteInstanceEventWindowVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     force_delete: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ForceDelete', 'style': 'form', 'explode': True }})
-    instance_event_window_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceEventWindowId', 'style': 'form', 'explode': True }})
-    version: GetDeleteInstanceEventWindowVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDeleteInstanceEventWindowHeaders:
 
 @dataclass
 class GetDeleteInstanceEventWindowRequest:
-    query_params: GetDeleteInstanceEventWindowQueryParams = field(default=None)
-    headers: GetDeleteInstanceEventWindowHeaders = field(default=None)
+    headers: GetDeleteInstanceEventWindowHeaders = field()
+    query_params: GetDeleteInstanceEventWindowQueryParams = field()
     
 
 @dataclass
 class GetDeleteInstanceEventWindowResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

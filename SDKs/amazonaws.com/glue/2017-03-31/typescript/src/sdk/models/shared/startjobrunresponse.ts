@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartJobRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobRunId" })
+  @SpeakeasyMetadata({ data: "json, name=JobRunId" })
   jobRunId?: string;
 }

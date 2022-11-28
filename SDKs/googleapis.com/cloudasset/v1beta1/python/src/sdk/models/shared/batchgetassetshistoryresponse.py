@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import temporalasset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetAssetsHistoryResponse:
-    assets: Optional[List[temporalasset.TemporalAsset]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assets' }})
+    r"""BatchGetAssetsHistoryResponse
+    Batch get assets history response.
+    """
+    
+    assets: Optional[List[TemporalAsset]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assets') }})
     

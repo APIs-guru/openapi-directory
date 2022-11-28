@@ -1,0 +1,64 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Action } from "./action";
+import { Compliance } from "./compliance";
+import { FindingProviderFields } from "./findingproviderfields";
+import { Malware } from "./malware";
+import { Network } from "./network";
+import { NetworkPathComponent } from "./networkpathcomponent";
+import { Note } from "./note";
+import { PatchSummary } from "./patchsummary";
+import { ProcessDetails } from "./processdetails";
+import { RecordStateEnum } from "./recordstateenum";
+import { RelatedFinding } from "./relatedfinding";
+import { Remediation } from "./remediation";
+import { Resource } from "./resource";
+import { Severity } from "./severity";
+import { ThreatIntelIndicator } from "./threatintelindicator";
+import { VerificationStateEnum } from "./verificationstateenum";
+import { Vulnerability } from "./vulnerability";
+import { Workflow } from "./workflow";
+import { WorkflowStateEnum } from "./workflowstateenum";
+/**
+ * <p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between Amazon Web Services security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by Amazon Web Services services or by the integrated third-party solutions and standards checks.</p> </note>
+**/
+export declare class AwsSecurityFinding extends SpeakeasyBase {
+    action?: Action;
+    awsAccountId: string;
+    companyName?: string;
+    compliance?: Compliance;
+    confidence?: number;
+    createdAt: string;
+    criticality?: number;
+    description: string;
+    findingProviderFields?: FindingProviderFields;
+    firstObservedAt?: string;
+    generatorId: string;
+    id: string;
+    lastObservedAt?: string;
+    malware?: Malware[];
+    network?: Network;
+    networkPath?: NetworkPathComponent[];
+    note?: Note;
+    patchSummary?: PatchSummary;
+    process?: ProcessDetails;
+    productArn: string;
+    productFields?: Map<string, string>;
+    productName?: string;
+    recordState?: RecordStateEnum;
+    region?: string;
+    relatedFindings?: RelatedFinding[];
+    remediation?: Remediation;
+    resources: Resource[];
+    schemaVersion: string;
+    severity?: Severity;
+    sourceUrl?: string;
+    threatIntelIndicators?: ThreatIntelIndicator[];
+    title: string;
+    types?: string[];
+    updatedAt: string;
+    userDefinedFields?: Map<string, string>;
+    verificationState?: VerificationStateEnum;
+    vulnerabilities?: Vulnerability[];
+    workflow?: Workflow;
+    workflowState?: WorkflowStateEnum;
+}

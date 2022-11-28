@@ -1,5 +1,7 @@
 package shared
 
+// ImageAsset
+// An image asset object.
 type ImageAsset struct {
 	Height *int32  `json:"height,omitempty"`
 	Kind   *string `json:"kind,omitempty"`

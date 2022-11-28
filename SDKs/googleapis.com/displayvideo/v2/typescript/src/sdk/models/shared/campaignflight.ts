@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DateRange } from "./daterange";
+
 
 
 // CampaignFlight
@@ -7,9 +8,9 @@ import { DateRange } from "./daterange";
  * Settings that track the planned spend and duration of a campaign.
 **/
 export class CampaignFlight extends SpeakeasyBase {
-  @Metadata({ data: "json, name=plannedDates" })
+  @SpeakeasyMetadata({ data: "json, name=plannedDates" })
   plannedDates?: DateRange;
 
-  @Metadata({ data: "json, name=plannedSpendAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=plannedSpendAmountMicros" })
   plannedSpendAmountMicros?: string;
 }

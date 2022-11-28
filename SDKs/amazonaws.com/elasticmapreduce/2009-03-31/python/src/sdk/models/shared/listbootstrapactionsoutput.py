@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import command
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListBootstrapActionsOutput:
-    bootstrap_actions: Optional[List[command.Command]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BootstrapActions' }})
-    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Marker' }})
+    r"""ListBootstrapActionsOutput
+    This output contains the bootstrap actions detail.
+    """
+    
+    bootstrap_actions: Optional[List[Command]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BootstrapActions') }})
+    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Marker') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityMention } from "./entitymention";
 import { Sentiment } from "./sentiment";
 export declare enum EntityTypeEnum {

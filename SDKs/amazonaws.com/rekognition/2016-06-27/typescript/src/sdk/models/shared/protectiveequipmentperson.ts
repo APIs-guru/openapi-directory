@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProtectiveEquipmentBodyPart } from "./protectiveequipmentbodypart";
 import { BoundingBox } from "./boundingbox";
+
 
 
 // ProtectiveEquipmentPerson
@@ -9,15 +9,15 @@ import { BoundingBox } from "./boundingbox";
  * A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns all persons detected in the input image in an array of <code>ProtectiveEquipmentPerson</code> objects.
 **/
 export class ProtectiveEquipmentPerson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BodyParts", elemType: shared.ProtectiveEquipmentBodyPart })
+  @SpeakeasyMetadata({ data: "json, name=BodyParts", elemType: ProtectiveEquipmentBodyPart })
   bodyParts?: ProtectiveEquipmentBodyPart[];
 
-  @Metadata({ data: "json, name=BoundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=BoundingBox" })
   boundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 }

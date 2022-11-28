@@ -18,6 +18,8 @@ type UpdateEmailChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateEmailChannelRequestBodyEmailChannelRequest
+// Specifies the status and settings of the email channel for an application.
 type UpdateEmailChannelRequestBodyEmailChannelRequest struct {
 	ConfigurationSet *string `json:"ConfigurationSet,omitempty"`
 	Enabled          *bool   `json:"Enabled,omitempty"`

@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteCssTemplatePkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class DeleteCssTemplatePkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteCssTemplatePkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteCssTemplatePkPathParams;
-
-  @Metadata()
-  security: DeleteCssTemplatePkSecurity;
-}
-
-
 export class DeleteCssTemplatePk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteCssTemplatePk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteCssTemplatePk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteCssTemplatePk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteCssTemplatePkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteCssTemplatePkPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteCssTemplatePkSecurity;
+}
+
+
 export class DeleteCssTemplatePkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCssTemplatePk200ApplicationJsonObject?: DeleteCssTemplatePk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCssTemplatePk404ApplicationJsonObject?: DeleteCssTemplatePk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCssTemplatePk422ApplicationJsonObject?: DeleteCssTemplatePk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCssTemplatePk500ApplicationJsonObject?: DeleteCssTemplatePk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

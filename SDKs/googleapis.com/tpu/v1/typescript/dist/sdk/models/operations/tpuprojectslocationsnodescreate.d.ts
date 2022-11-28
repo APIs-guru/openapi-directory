@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class TpuProjectsLocationsNodesCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class TpuProjectsLocationsNodesCreateSecurity extends SpeakeasyBa
 export declare class TpuProjectsLocationsNodesCreateRequest extends SpeakeasyBase {
     pathParams: TpuProjectsLocationsNodesCreatePathParams;
     queryParams: TpuProjectsLocationsNodesCreateQueryParams;
-    request?: shared.Node;
+    request?: shared.NodeInput;
     security: TpuProjectsLocationsNodesCreateSecurity;
 }
 export declare class TpuProjectsLocationsNodesCreateResponse extends SpeakeasyBase {

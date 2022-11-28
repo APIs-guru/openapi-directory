@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InputDescription } from "./inputdescription";
 var AddApplicationInputResponse = /** @class */ (function (_super) {
     __extends(AddApplicationInputResponse, _super);
     function AddApplicationInputResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationARN" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationARN" }),
         __metadata("design:type", String)
     ], AddApplicationInputResponse.prototype, "applicationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationVersionId" }),
         __metadata("design:type", Number)
     ], AddApplicationInputResponse.prototype, "applicationVersionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDescriptions", elemType: shared.InputDescription }),
+        SpeakeasyMetadata({ data: "json, name=InputDescriptions", elemType: InputDescription }),
         __metadata("design:type", Array)
     ], AddApplicationInputResponse.prototype, "inputDescriptions", void 0);
     return AddApplicationInputResponse;

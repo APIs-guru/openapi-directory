@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentSequenceStep } from "./segmentsequencestep";
+
 
 
 // SequenceSegment
@@ -8,9 +8,9 @@ import { SegmentSequenceStep } from "./segmentsequencestep";
  * Sequence conditions consist of one or more steps, where each step is defined by one or more dimension/metric conditions. Multiple steps can be combined with special sequence operators.
 **/
 export class SequenceSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstStepShouldMatchFirstHit" })
+  @SpeakeasyMetadata({ data: "json, name=firstStepShouldMatchFirstHit" })
   firstStepShouldMatchFirstHit?: boolean;
 
-  @Metadata({ data: "json, name=segmentSequenceSteps", elemType: shared.SegmentSequenceStep })
+  @SpeakeasyMetadata({ data: "json, name=segmentSequenceSteps", elemType: SegmentSequenceStep })
   segmentSequenceSteps?: SegmentSequenceStep[];
 }

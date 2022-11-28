@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InlineSecret
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Pairs a set of secret environment variables mapped to encrypted values with the Cloud KMS key to use to decrypt the value.
 **/
 export class InlineSecret extends SpeakeasyBase {
-  @Metadata({ data: "json, name=envMap" })
+  @SpeakeasyMetadata({ data: "json, name=envMap" })
   envMap?: Map<string, string>;
 
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 }

@@ -15,6 +15,8 @@ type CreateFunctionDefinitionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateFunctionDefinitionRequestBodyInitialVersion
+// Information about a function definition version.
 type CreateFunctionDefinitionRequestBodyInitialVersion struct {
 	DefaultConfig *shared.FunctionDefaultConfig `json:"DefaultConfig,omitempty"`
 	Functions     []shared.Function             `json:"Functions,omitempty"`

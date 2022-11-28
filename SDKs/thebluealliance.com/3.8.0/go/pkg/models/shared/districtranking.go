@@ -10,6 +10,8 @@ type DistrictRankingEventPoints struct {
 	Total          int64  `json:"total"`
 }
 
+// DistrictRanking
+// Rank of a team in a district.
 type DistrictRanking struct {
 	EventPoints []DistrictRankingEventPoints `json:"event_points,omitempty"`
 	PointTotal  int64                        `json:"point_total"`

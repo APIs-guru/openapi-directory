@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IndexItemOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowUnknownGsuitePrincipals" })
+  @SpeakeasyMetadata({ data: "json, name=allowUnknownGsuitePrincipals" })
   allowUnknownGsuitePrincipals?: boolean;
 }

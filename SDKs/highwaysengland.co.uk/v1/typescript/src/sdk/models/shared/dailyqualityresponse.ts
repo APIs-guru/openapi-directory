@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Qualities } from "./qualities";
 
 
+
 export class DailyQualityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Qualities", elemType: shared.Qualities })
+  @SpeakeasyMetadata({ data: "json, name=Qualities", elemType: Qualities })
   qualities?: Qualities[];
 
-  @Metadata({ data: "json, name=row_count" })
+  @SpeakeasyMetadata({ data: "json, name=row_count" })
   rowCount?: number;
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputeEnvironmentDetail } from "./computeenvironmentdetail";
 
 
+
 export class DescribeComputeEnvironmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computeEnvironments", elemType: shared.ComputeEnvironmentDetail })
+  @SpeakeasyMetadata({ data: "json, name=computeEnvironments", elemType: ComputeEnvironmentDetail })
   computeEnvironments?: ComputeEnvironmentDetail[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

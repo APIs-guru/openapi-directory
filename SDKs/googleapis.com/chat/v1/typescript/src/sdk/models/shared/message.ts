@@ -1,15 +1,64 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionResponse } from "./actionresponse";
-import { Annotation } from "./annotation";
-import { Attachment } from "./attachment";
+import { AttachmentInput } from "./attachment";
 import { Card } from "./card";
 import { CardWithId } from "./cardwithid";
+import { UserInput } from "./user";
+import { SlashCommand } from "./slashcommand";
+import { SpaceInput } from "./space";
+import { Thread } from "./thread";
+import { Annotation } from "./annotation";
+import { Attachment } from "./attachment";
 import { MatchedUrl } from "./matchedurl";
 import { User } from "./user";
-import { SlashCommand } from "./slashcommand";
 import { Space } from "./space";
-import { Thread } from "./thread";
+
+
+
+// MessageInput
+/** 
+ * A message in Google Chat.
+**/
+export class MessageInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=actionResponse" })
+  actionResponse?: ActionResponse;
+
+  @SpeakeasyMetadata({ data: "json, name=argumentText" })
+  argumentText?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=attachment", elemType: AttachmentInput })
+  attachment?: AttachmentInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=cards", elemType: Card })
+  cards?: Card[];
+
+  @SpeakeasyMetadata({ data: "json, name=cardsV2", elemType: CardWithId })
+  cardsV2?: CardWithId[];
+
+  @SpeakeasyMetadata({ data: "json, name=clientAssignedMessageId" })
+  clientAssignedMessageId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=fallbackText" })
+  fallbackText?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sender" })
+  sender?: UserInput;
+
+  @SpeakeasyMetadata({ data: "json, name=slashCommand" })
+  slashCommand?: SlashCommand;
+
+  @SpeakeasyMetadata({ data: "json, name=space" })
+  space?: SpaceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=text" })
+  text?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=thread" })
+  thread?: Thread;
+}
 
 
 // Message
@@ -17,54 +66,57 @@ import { Thread } from "./thread";
  * A message in Google Chat.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionResponse" })
+  @SpeakeasyMetadata({ data: "json, name=actionResponse" })
   actionResponse?: ActionResponse;
 
-  @Metadata({ data: "json, name=annotations", elemType: shared.Annotation })
+  @SpeakeasyMetadata({ data: "json, name=annotations", elemType: Annotation })
   annotations?: Annotation[];
 
-  @Metadata({ data: "json, name=argumentText" })
+  @SpeakeasyMetadata({ data: "json, name=argumentText" })
   argumentText?: string;
 
-  @Metadata({ data: "json, name=attachment", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=attachment", elemType: Attachment })
   attachment?: Attachment[];
 
-  @Metadata({ data: "json, name=cards", elemType: shared.Card })
+  @SpeakeasyMetadata({ data: "json, name=cards", elemType: Card })
   cards?: Card[];
 
-  @Metadata({ data: "json, name=cardsV2", elemType: shared.CardWithId })
+  @SpeakeasyMetadata({ data: "json, name=cardsV2", elemType: CardWithId })
   cardsV2?: CardWithId[];
 
-  @Metadata({ data: "json, name=clientAssignedMessageId" })
+  @SpeakeasyMetadata({ data: "json, name=clientAssignedMessageId" })
   clientAssignedMessageId?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=fallbackText" })
+  @SpeakeasyMetadata({ data: "json, name=fallbackText" })
   fallbackText?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: string;
 
-  @Metadata({ data: "json, name=matchedUrl" })
+  @SpeakeasyMetadata({ data: "json, name=matchedUrl" })
   matchedUrl?: MatchedUrl;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sender" })
+  @SpeakeasyMetadata({ data: "json, name=sender" })
   sender?: User;
 
-  @Metadata({ data: "json, name=slashCommand" })
+  @SpeakeasyMetadata({ data: "json, name=slashCommand" })
   slashCommand?: SlashCommand;
 
-  @Metadata({ data: "json, name=space" })
+  @SpeakeasyMetadata({ data: "json, name=space" })
   space?: Space;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=thread" })
+  @SpeakeasyMetadata({ data: "json, name=thread" })
   thread?: Thread;
+
+  @SpeakeasyMetadata({ data: "json, name=threadReply" })
+  threadReply?: boolean;
 }

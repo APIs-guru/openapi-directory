@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { IssueDetected } from "./issuedetected";
 import { SentimentValueEnum } from "./sentimentvalueenum";
 // Transcript
 /**
@@ -35,35 +35,35 @@ var Transcript = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BeginOffsetMillis" }),
+        SpeakeasyMetadata({ data: "json, name=BeginOffsetMillis" }),
         __metadata("design:type", Number)
     ], Transcript.prototype, "beginOffsetMillis", void 0);
     __decorate([
-        Metadata({ data: "json, name=Content" }),
+        SpeakeasyMetadata({ data: "json, name=Content" }),
         __metadata("design:type", String)
     ], Transcript.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndOffsetMillis" }),
+        SpeakeasyMetadata({ data: "json, name=EndOffsetMillis" }),
         __metadata("design:type", Number)
     ], Transcript.prototype, "endOffsetMillis", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], Transcript.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=IssuesDetected", elemType: shared.IssueDetected }),
+        SpeakeasyMetadata({ data: "json, name=IssuesDetected", elemType: IssueDetected }),
         __metadata("design:type", Array)
     ], Transcript.prototype, "issuesDetected", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParticipantId" }),
+        SpeakeasyMetadata({ data: "json, name=ParticipantId" }),
         __metadata("design:type", String)
     ], Transcript.prototype, "participantId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParticipantRole" }),
+        SpeakeasyMetadata({ data: "json, name=ParticipantRole" }),
         __metadata("design:type", String)
     ], Transcript.prototype, "participantRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sentiment" }),
+        SpeakeasyMetadata({ data: "json, name=Sentiment" }),
         __metadata("design:type", String)
     ], Transcript.prototype, "sentiment", void 0);
     return Transcript;

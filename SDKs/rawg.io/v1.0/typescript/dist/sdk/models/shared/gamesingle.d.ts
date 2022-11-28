@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GamePlatformMetacritic } from "./gameplatformmetacritic";
 export declare enum GameSingleEsrbRatingNameEnum {
     Everyone = "Everyone",

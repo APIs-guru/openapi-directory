@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LookupUmprnPathParams = /** @class */ (function (_super) {
     __extends(LookupUmprnPathParams, _super);
@@ -30,7 +30,7 @@ var LookupUmprnPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=umprn" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=umprn" }),
         __metadata("design:type", String)
     ], LookupUmprnPathParams.prototype, "umprn", void 0);
     return LookupUmprnPathParams;
@@ -42,11 +42,11 @@ var LookupUmprnQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], LookupUmprnQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
         __metadata("design:type", String)
     ], LookupUmprnQueryParams.prototype, "licensee", void 0);
     return LookupUmprnQueryParams;
@@ -58,11 +58,11 @@ var LookupUmprnSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], LookupUmprnSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeUserToken)
     ], LookupUmprnSecurity.prototype, "userToken", void 0);
     return LookupUmprnSecurity;
@@ -74,15 +74,15 @@ var LookupUmprnRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LookupUmprnPathParams)
     ], LookupUmprnRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LookupUmprnQueryParams)
     ], LookupUmprnRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LookupUmprnSecurity)
     ], LookupUmprnRequest.prototype, "security", void 0);
     return LookupUmprnRequest;
@@ -94,19 +94,19 @@ var LookupUmprnResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddressLookupResponseSchema)
     ], LookupUmprnResponse.prototype, "addressLookupResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LookupUmprnResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponseSchema)
     ], LookupUmprnResponse.prototype, "errorResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LookupUmprnResponse.prototype, "statusCode", void 0);
     return LookupUmprnResponse;

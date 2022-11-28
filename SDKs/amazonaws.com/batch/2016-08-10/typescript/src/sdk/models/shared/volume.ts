@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EfsVolumeConfiguration } from "./efsvolumeconfiguration";
 import { Host } from "./host";
+
 
 
 // Volume
@@ -8,12 +9,12 @@ import { Host } from "./host";
  * A data volume used in a job's container properties.
 **/
 export class Volume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=efsVolumeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=efsVolumeConfiguration" })
   efsVolumeConfiguration?: EfsVolumeConfiguration;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: Host;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

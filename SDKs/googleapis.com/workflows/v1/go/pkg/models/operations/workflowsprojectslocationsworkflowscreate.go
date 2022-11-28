@@ -31,7 +31,7 @@ type WorkflowsProjectsLocationsWorkflowsCreateSecurity struct {
 type WorkflowsProjectsLocationsWorkflowsCreateRequest struct {
 	PathParams  WorkflowsProjectsLocationsWorkflowsCreatePathParams
 	QueryParams WorkflowsProjectsLocationsWorkflowsCreateQueryParams
-	Request     *shared.Workflow `request:"mediaType=application/json"`
+	Request     *shared.WorkflowInput `request:"mediaType=application/json"`
 	Security    WorkflowsProjectsLocationsWorkflowsCreateSecurity
 }
 

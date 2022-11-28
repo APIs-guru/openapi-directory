@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OsloginUsersGetLoginProfilePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class OsloginUsersGetLoginProfileViewEnum(str, Enum):
     LOGIN_PROFILE_VIEW_UNSPECIFIED = "LOGIN_PROFILE_VIEW_UNSPECIFIED"
@@ -33,26 +34,26 @@ class OsloginUsersGetLoginProfileQueryParams:
 
 @dataclass
 class OsloginUsersGetLoginProfileSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OsloginUsersGetLoginProfileSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OsloginUsersGetLoginProfileSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OsloginUsersGetLoginProfileSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -65,14 +66,14 @@ class OsloginUsersGetLoginProfileSecurity:
 
 @dataclass
 class OsloginUsersGetLoginProfileRequest:
-    path_params: OsloginUsersGetLoginProfilePathParams = field(default=None)
-    query_params: OsloginUsersGetLoginProfileQueryParams = field(default=None)
-    security: OsloginUsersGetLoginProfileSecurity = field(default=None)
+    path_params: OsloginUsersGetLoginProfilePathParams = field()
+    query_params: OsloginUsersGetLoginProfileQueryParams = field()
+    security: OsloginUsersGetLoginProfileSecurity = field()
     
 
 @dataclass
 class OsloginUsersGetLoginProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     login_profile: Optional[shared.LoginProfile] = field(default=None)
-    status_code: int = field(default=None)
     

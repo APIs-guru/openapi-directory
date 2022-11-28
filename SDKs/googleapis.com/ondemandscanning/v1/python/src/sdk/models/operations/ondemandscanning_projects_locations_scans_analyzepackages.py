@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OndemandscanningProjectsLocationsScansAnalyzePackagesPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class OndemandscanningProjectsLocationsScansAnalyzePackagesQueryParams:
 
 @dataclass
 class OndemandscanningProjectsLocationsScansAnalyzePackagesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OndemandscanningProjectsLocationsScansAnalyzePackagesRequest:
-    path_params: OndemandscanningProjectsLocationsScansAnalyzePackagesPathParams = field(default=None)
-    query_params: OndemandscanningProjectsLocationsScansAnalyzePackagesQueryParams = field(default=None)
+    path_params: OndemandscanningProjectsLocationsScansAnalyzePackagesPathParams = field()
+    query_params: OndemandscanningProjectsLocationsScansAnalyzePackagesQueryParams = field()
+    security: OndemandscanningProjectsLocationsScansAnalyzePackagesSecurity = field()
     request: Optional[shared.AnalyzePackagesRequestV1] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: OndemandscanningProjectsLocationsScansAnalyzePackagesSecurity = field(default=None)
     
 
 @dataclass
 class OndemandscanningProjectsLocationsScansAnalyzePackagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

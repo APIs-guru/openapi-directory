@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetSamlProviderActionEnum(str, Enum):
     GET_SAML_PROVIDER = "GetSAMLProvider"
@@ -10,9 +14,9 @@ class GetGetSamlProviderVersionEnum(str, Enum):
 
 @dataclass
 class GetGetSamlProviderQueryParams:
-    action: GetGetSamlProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    saml_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
-    version: GetGetSamlProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetSamlProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    saml_provider_arn: str = field(metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
+    version: GetGetSamlProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetSamlProviderHeaders:
 
 @dataclass
 class GetGetSamlProviderRequest:
-    query_params: GetGetSamlProviderQueryParams = field(default=None)
-    headers: GetGetSamlProviderHeaders = field(default=None)
+    headers: GetGetSamlProviderHeaders = field()
+    query_params: GetGetSamlProviderQueryParams = field()
     
 
 @dataclass
 class GetGetSamlProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

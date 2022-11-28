@@ -11,20 +11,20 @@ class GetAPIActivityQueryParams:
 
 @dataclass
 class GetAPIActivitySecurity:
-    connect_token: shared.SchemeConnectToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    connect_token: shared.SchemeConnectToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAPIActivityRequest:
-    query_params: GetAPIActivityQueryParams = field(default=None)
-    security: GetAPIActivitySecurity = field(default=None)
+    query_params: GetAPIActivityQueryParams = field()
+    security: GetAPIActivitySecurity = field()
     
 
 @dataclass
 class GetAPIActivityResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     api_requests: Optional[List[shared.APIRequest]] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

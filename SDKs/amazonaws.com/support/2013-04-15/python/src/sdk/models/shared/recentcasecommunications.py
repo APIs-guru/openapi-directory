@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import communication
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RecentCaseCommunications:
-    communications: Optional[List[communication.Communication]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'communications' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    r"""RecentCaseCommunications
+    The five most recent communications associated with the case.
+    """
+    
+    communications: Optional[List[Communication]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('communications') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

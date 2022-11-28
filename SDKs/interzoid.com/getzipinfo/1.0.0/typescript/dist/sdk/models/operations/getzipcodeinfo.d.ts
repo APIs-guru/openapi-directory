@@ -1,10 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetzipcodeinfoQueryParams extends SpeakeasyBase {
     license: string;
     zip: string;
-}
-export declare class GetzipcodeinfoRequest extends SpeakeasyBase {
-    queryParams: GetzipcodeinfoQueryParams;
 }
 export declare class Getzipcodeinfo200ApplicationJson extends SpeakeasyBase {
     areaSquareMiles?: string;
@@ -22,6 +19,9 @@ export declare class Getzipcodeinfo200ApplicationJson extends SpeakeasyBase {
     population?: string;
     state?: string;
     zipCode?: string;
+}
+export declare class GetzipcodeinfoRequest extends SpeakeasyBase {
+    queryParams: GetzipcodeinfoQueryParams;
 }
 export declare class GetzipcodeinfoResponse extends SpeakeasyBase {
     contentType: string;

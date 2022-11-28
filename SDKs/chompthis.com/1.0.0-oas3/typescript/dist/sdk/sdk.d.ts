@@ -1,15 +1,20 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://chompthis.com/api/v2"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * getFoodBrandedBarcodePhp - Get a branded food item using a barcode
+     *
      * ## Get data for a branded food using the food's UPC/EAN barcode.
      *
      * **Example**
@@ -19,8 +24,10 @@ export declare class SDK {
      *   * Read our **[Knowledge Base article](https://desk.zoho.com/portal/chompthis/kb/articles/im-having-trouble-getting-matches-for-barcodes-what-can-id-do)** for helpful tips and tricks.
      *
     **/
-    GetFoodBrandedBarcodePhp(req: operations.GetFoodBrandedBarcodePhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodBrandedBarcodePhpResponse>;
+    getFoodBrandedBarcodePhp(req: operations.GetFoodBrandedBarcodePhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodBrandedBarcodePhpResponse>;
     /**
+     * getFoodBrandedNamePhp - Get a branded food item by name
+     *
      * ## Search for branded food items by name.
      *
      * **Example**
@@ -32,8 +39,10 @@ export declare class SDK {
      * > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
      *
     **/
-    GetFoodBrandedNamePhp(req: operations.GetFoodBrandedNamePhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodBrandedNamePhpResponse>;
+    getFoodBrandedNamePhp(req: operations.GetFoodBrandedNamePhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodBrandedNamePhpResponse>;
     /**
+     * getFoodBrandedSearchPhp - Get data for branded food items using various search parameters
+     *
      * ## Search for branded food items using various parameters.
      *
      * **Example**
@@ -45,8 +54,10 @@ export declare class SDK {
      * > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
      *
     **/
-    GetFoodBrandedSearchPhp(req: operations.GetFoodBrandedSearchPhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodBrandedSearchPhpResponse>;
+    getFoodBrandedSearchPhp(req: operations.GetFoodBrandedSearchPhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodBrandedSearchPhpResponse>;
     /**
+     * getFoodIngredientSearchPhp - Get raw/generic food ingredient item(s)
+     *
      * ## Get data for a specific ingredient or a specific set of ingredients.
      *
      * **Example #1: Single Ingredient**
@@ -61,6 +72,6 @@ export declare class SDK {
      * > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
      *
     **/
-    GetFoodIngredientSearchPhp(req: operations.GetFoodIngredientSearchPhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodIngredientSearchPhpResponse>;
+    getFoodIngredientSearchPhp(req: operations.GetFoodIngredientSearchPhpRequest, config?: AxiosRequestConfig): Promise<operations.GetFoodIngredientSearchPhpResponse>;
 }
 export {};

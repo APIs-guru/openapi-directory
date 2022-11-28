@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ShardDetail } from "./sharddetail";
 /**
  * A list of cluster configuration options.

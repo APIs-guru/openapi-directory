@@ -10,11 +10,11 @@ class GetActionOrganizationShowQueryParams:
 
 @dataclass
 class GetActionOrganizationShowRequest:
-    query_params: GetActionOrganizationShowQueryParams = field(default=None)
+    query_params: GetActionOrganizationShowQueryParams = field()
     
 
 @dataclass
 class GetActionOrganizationShowResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,60 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserCompact } from "./usercompact";
 import { Like } from "./like";
+
 
 export enum GoalResponseMetricResourceSubtypeEnum {
     Number = "number"
 }
 
 export enum GoalResponseMetricUnitEnum {
-    None = "none"
-,    Currency = "currency"
-,    Percentage = "percentage"
+    None = "none",
+    Currency = "currency",
+    Percentage = "percentage"
 }
 
 
 export class GoalResponseMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency_code" })
+  @SpeakeasyMetadata({ data: "json, name=currency_code" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=current_display_value" })
+  @SpeakeasyMetadata({ data: "json, name=current_display_value" })
   currentDisplayValue?: string;
 
-  @Metadata({ data: "json, name=current_number_value" })
+  @SpeakeasyMetadata({ data: "json, name=current_number_value" })
   currentNumberValue?: number;
 
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=initial_number_value" })
+  @SpeakeasyMetadata({ data: "json, name=initial_number_value" })
   initialNumberValue?: number;
 
-  @Metadata({ data: "json, name=precision" })
+  @SpeakeasyMetadata({ data: "json, name=precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=resource_subtype" })
+  @SpeakeasyMetadata({ data: "json, name=resource_subtype" })
   resourceSubtype?: GoalResponseMetricResourceSubtypeEnum;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=target_number_value" })
+  @SpeakeasyMetadata({ data: "json, name=target_number_value" })
   targetNumberValue?: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: GoalResponseMetricUnitEnum;
 }
 
 
 export class GoalResponseOwner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 }
 
@@ -64,109 +64,109 @@ export class GoalResponseOwner extends SpeakeasyBase {
  * *Conditional*. This property is only present when the `workspace` provided is an organization.
 **/
 export class GoalResponseTeam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 }
 
 export enum GoalResponseTimePeriodPeriodEnum {
-    Fy = "FY"
-,    H1 = "H1"
-,    H2 = "H2"
-,    Q1 = "Q1"
-,    Q2 = "Q2"
-,    Q3 = "Q3"
-,    Q4 = "Q4"
+    Fy = "FY",
+    H1 = "H1",
+    H2 = "H2",
+    Q1 = "Q1",
+    Q2 = "Q2",
+    Q3 = "Q3",
+    Q4 = "Q4"
 }
 
 
 export class GoalResponseTimePeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end_on" })
+  @SpeakeasyMetadata({ data: "json, name=end_on" })
   endOn?: string;
 
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: GoalResponseTimePeriodPeriodEnum;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=start_on" })
+  @SpeakeasyMetadata({ data: "json, name=start_on" })
   startOn?: string;
 }
 
 
 export class GoalResponseWorkspace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 }
 
 
 export class GoalResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=due_on" })
+  @SpeakeasyMetadata({ data: "json, name=due_on" })
   dueOn?: string;
 
-  @Metadata({ data: "json, name=followers", elemType: shared.UserCompact })
+  @SpeakeasyMetadata({ data: "json, name=followers", elemType: UserCompact })
   followers?: UserCompact[];
 
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=html_notes" })
+  @SpeakeasyMetadata({ data: "json, name=html_notes" })
   htmlNotes?: string;
 
-  @Metadata({ data: "json, name=is_workspace_level" })
+  @SpeakeasyMetadata({ data: "json, name=is_workspace_level" })
   isWorkspaceLevel?: boolean;
 
-  @Metadata({ data: "json, name=liked" })
+  @SpeakeasyMetadata({ data: "json, name=liked" })
   liked?: boolean;
 
-  @Metadata({ data: "json, name=likes", elemType: shared.Like })
+  @SpeakeasyMetadata({ data: "json, name=likes", elemType: Like })
   likes?: Like[];
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: GoalResponseMetric;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=num_likes" })
+  @SpeakeasyMetadata({ data: "json, name=num_likes" })
   numLikes?: number;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: GoalResponseOwner;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=start_on" })
+  @SpeakeasyMetadata({ data: "json, name=start_on" })
   startOn?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: GoalResponseTeam;
 
-  @Metadata({ data: "json, name=time_period" })
+  @SpeakeasyMetadata({ data: "json, name=time_period" })
   timePeriod?: GoalResponseTimePeriod;
 
-  @Metadata({ data: "json, name=workspace" })
+  @SpeakeasyMetadata({ data: "json, name=workspace" })
   workspace?: GoalResponseWorkspace;
 }

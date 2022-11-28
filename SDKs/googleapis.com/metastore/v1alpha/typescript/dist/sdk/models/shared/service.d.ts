@@ -1,10 +1,13 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfig } from "./encryptionconfig";
 import { HiveMetastoreConfig } from "./hivemetastoreconfig";
 import { MaintenanceWindow } from "./maintenancewindow";
 import { MetadataIntegration } from "./metadataintegration";
 import { MetadataManagementActivity } from "./metadatamanagementactivity";
 import { NetworkConfig } from "./networkconfig";
+import { TelemetryConfig } from "./telemetryconfig";
+import { HiveMetastoreConfigInput } from "./hivemetastoreconfig";
+import { NetworkConfigInput } from "./networkconfig";
 export declare enum ServiceDatabaseTypeEnum {
     DatabaseTypeUnspecified = "DATABASE_TYPE_UNSPECIFIED",
     Mysql = "MYSQL",
@@ -51,7 +54,26 @@ export declare class Service extends SpeakeasyBase {
     releaseChannel?: ServiceReleaseChannelEnum;
     state?: ServiceStateEnum;
     stateMessage?: string;
+    telemetryConfig?: TelemetryConfig;
     tier?: ServiceTierEnum;
     uid?: string;
     updateTime?: string;
+}
+/**
+ * A managed metastore service that serves metadata queries.
+**/
+export declare class ServiceInput extends SpeakeasyBase {
+    databaseType?: ServiceDatabaseTypeEnum;
+    encryptionConfig?: EncryptionConfig;
+    hiveMetastoreConfig?: HiveMetastoreConfigInput;
+    labels?: Map<string, string>;
+    maintenanceWindow?: MaintenanceWindow;
+    metadataIntegration?: MetadataIntegration;
+    name?: string;
+    network?: string;
+    networkConfig?: NetworkConfigInput;
+    port?: number;
+    releaseChannel?: ServiceReleaseChannelEnum;
+    telemetryConfig?: TelemetryConfig;
+    tier?: ServiceTierEnum;
 }

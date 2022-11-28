@@ -15,11 +15,6 @@ type ReposMergeRequestBody struct {
 	Head          string  `json:"head"`
 }
 
-type ReposMergeRequest struct {
-	PathParams ReposMergePathParams
-	Request    *ReposMergeRequestBody `request:"mediaType=application/json"`
-}
-
 type ReposMerge404ApplicationJSON struct {
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
@@ -28,6 +23,11 @@ type ReposMerge404ApplicationJSON struct {
 type ReposMerge409ApplicationJSON struct {
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type ReposMergeRequest struct {
+	PathParams ReposMergePathParams
+	Request    *ReposMergeRequestBody `request:"mediaType=application/json"`
 }
 
 type ReposMergeResponse struct {

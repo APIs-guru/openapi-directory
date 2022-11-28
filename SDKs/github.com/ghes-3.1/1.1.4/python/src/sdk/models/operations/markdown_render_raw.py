@@ -15,8 +15,8 @@ class MarkdownRenderRawRequest:
 
 @dataclass
 class MarkdownRenderRawResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     markdown_render_raw_200_text_html_string: Optional[str] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// NodeFullBios
+// BIOS information
 type NodeFullBios struct {
 	Description *string `json:"description,omitempty"`
 	Editor      *string `json:"editor,omitempty"`
@@ -42,6 +44,8 @@ const (
 	NodeFullMachineTypeEnumVirtual  NodeFullMachineTypeEnum = "Virtual"
 )
 
+// NodeFullMachine
+// Information about the underlying machine
 type NodeFullMachine struct {
 	ID           *string                  `json:"id,omitempty"`
 	Manufacturer *string                  `json:"manufacturer,omitempty"`
@@ -58,11 +62,15 @@ type NodeFullManagementTechnology struct {
 	Version        *string  `json:"version,omitempty"`
 }
 
+// NodeFullManagementTechnologyDetails
+// Additional information about management technology
 type NodeFullManagementTechnologyDetails struct {
 	CfengineKeys []string `json:"cfengineKeys,omitempty"`
 	CfengineUser *string  `json:"cfengineUser,omitempty"`
 }
 
+// NodeFullMemories
+// Memory slots
 type NodeFullMemories struct {
 	Capacity     *int64  `json:"capacity,omitempty"`
 	Caption      *string `json:"caption,omitempty"`
@@ -95,6 +103,8 @@ const (
 	NodeFullOsTypeEnumFreeBsd NodeFullOsTypeEnum = "FreeBSD"
 )
 
+// NodeFullOs
+// Information about the operating system
 type NodeFullOs struct {
 	FullName      string             `json:"fullName"`
 	KernelVersion string             `json:"kernelVersion"`
@@ -119,6 +129,8 @@ type NodeFullPorts struct {
 	Type        *string `json:"type,omitempty"`
 }
 
+// NodeFullProcesses
+// Process information
 type NodeFullProcesses struct {
 	CPUUsage      *int64     `json:"cpuUsage,omitempty"`
 	Description   *string    `json:"description,omitempty"`
@@ -159,6 +171,8 @@ type NodeFullSlots struct {
 	Status      *string `json:"status,omitempty"`
 }
 
+// NodeFullSoftwareLicense
+// Information about the license
 type NodeFullSoftwareLicense struct {
 	Description    *string    `json:"description,omitempty"`
 	ExpirationDate *time.Time `json:"expirationDate,omitempty"`

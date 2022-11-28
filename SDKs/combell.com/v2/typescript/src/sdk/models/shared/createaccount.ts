@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ftp_password" })
+  @SpeakeasyMetadata({ data: "json, name=ftp_password" })
   ftpPassword?: string;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=servicepack_id" })
+  @SpeakeasyMetadata({ data: "json, name=servicepack_id" })
   servicepackId?: number;
 }

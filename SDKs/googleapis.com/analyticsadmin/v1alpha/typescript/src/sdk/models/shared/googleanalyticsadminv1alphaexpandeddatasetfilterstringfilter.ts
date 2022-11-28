@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilterMatchTypeEnum {
-    MatchTypeUnspecified = "MATCH_TYPE_UNSPECIFIED"
-,    Exact = "EXACT"
-,    Contains = "CONTAINS"
+    MatchTypeUnspecified = "MATCH_TYPE_UNSPECIFIED",
+    Exact = "EXACT",
+    Contains = "CONTAINS"
 }
 
 
@@ -12,12 +13,12 @@ export enum GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilterMatchTyp
  * A filter for a string-type dimension that matches a particular pattern.
 **/
 export class GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=matchType" })
+  @SpeakeasyMetadata({ data: "json, name=matchType" })
   matchType?: GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilterMatchTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

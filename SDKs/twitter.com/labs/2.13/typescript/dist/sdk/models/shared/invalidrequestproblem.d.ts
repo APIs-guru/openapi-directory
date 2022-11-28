@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class InvalidRequestProblemErrors extends SpeakeasyBase {
     message?: string;
     parameters?: Map<string, string[]>;

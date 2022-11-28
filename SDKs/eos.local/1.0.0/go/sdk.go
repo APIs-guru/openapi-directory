@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://eos.local",
 	"https://{protocol}://{host}:{port}/v1/",
 }
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Connect - connect
+// Initiate a connection to a specified peer.
 func (s *SDK) Connect(ctx context.Context, request operations.ConnectRequest) (*operations.ConnectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/net/connect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -68,7 +91,7 @@ func (s *SDK) Connect(ctx context.Context, request operations.ConnectRequest) (*
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -99,8 +122,10 @@ func (s *SDK) Connect(ctx context.Context, request operations.ConnectRequest) (*
 	return res, nil
 }
 
+// Connections - connections
+// Returns an array of all peer connection statuses.
 func (s *SDK) Connections(ctx context.Context, request operations.ConnectionsRequest) (*operations.ConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/net/connections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -115,7 +140,7 @@ func (s *SDK) Connections(ctx context.Context, request operations.ConnectionsReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -145,8 +170,10 @@ func (s *SDK) Connections(ctx context.Context, request operations.ConnectionsReq
 	return res, nil
 }
 
+// Disconnect - disconnect
+// Initiate disconnection from a specified peer.
 func (s *SDK) Disconnect(ctx context.Context, request operations.DisconnectRequest) (*operations.DisconnectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/net/disconnect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -161,7 +188,7 @@ func (s *SDK) Disconnect(ctx context.Context, request operations.DisconnectReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -192,8 +219,10 @@ func (s *SDK) Disconnect(ctx context.Context, request operations.DisconnectReque
 	return res, nil
 }
 
+// Status - status
+// Retrieves the connection status for a specified peer.
 func (s *SDK) Status(ctx context.Context, request operations.StatusRequest) (*operations.StatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/net/status"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -208,7 +237,7 @@ func (s *SDK) Status(ctx context.Context, request operations.StatusRequest) (*op
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

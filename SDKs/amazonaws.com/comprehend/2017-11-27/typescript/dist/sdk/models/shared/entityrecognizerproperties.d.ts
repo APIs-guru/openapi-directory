@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityRecognizerInputDataConfig } from "./entityrecognizerinputdataconfig";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { EntityRecognizerMetadata } from "./entityrecognizermetadata";

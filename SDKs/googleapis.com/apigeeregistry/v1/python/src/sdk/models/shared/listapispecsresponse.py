@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import apispec
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAPISpecsResponse:
-    api_specs: Optional[List[apispec.APISpec]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiSpecs' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListAPISpecsResponse
+    Response message for ListApiSpecs.
+    """
+    
+    api_specs: Optional[List[APISpec]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiSpecs') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

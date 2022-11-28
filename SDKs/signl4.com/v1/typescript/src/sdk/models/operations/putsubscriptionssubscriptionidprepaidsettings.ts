@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSubscriptionsSubscriptionIdPrepaidSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
   subscriptionId: string;
 }
 
 
 export class PutSubscriptionsSubscriptionIdPrepaidSettingsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   prepaidSettingsInfo?: shared.PrepaidSettingsInfo;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   prepaidSettingsInfo1?: shared.PrepaidSettingsInfo;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   prepaidSettingsInfo2?: shared.PrepaidSettingsInfo;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   prepaidSettingsInfo3?: shared.PrepaidSettingsInfo;
 }
 
 
 export class PutSubscriptionsSubscriptionIdPrepaidSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSubscriptionsSubscriptionIdPrepaidSettingsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutSubscriptionsSubscriptionIdPrepaidSettingsRequests;
 }
 
 
 export class PutSubscriptionsSubscriptionIdPrepaidSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   prepaidSettingsInfo?: shared.PrepaidSettingsInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

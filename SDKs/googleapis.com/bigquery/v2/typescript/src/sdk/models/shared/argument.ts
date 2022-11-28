@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardSqlDataType } from "./standardsqldatatype";
 
+
 export enum ArgumentArgumentKindEnum {
-    ArgumentKindUnspecified = "ARGUMENT_KIND_UNSPECIFIED"
-,    FixedType = "FIXED_TYPE"
-,    AnyType = "ANY_TYPE"
+    ArgumentKindUnspecified = "ARGUMENT_KIND_UNSPECIFIED",
+    FixedType = "FIXED_TYPE",
+    AnyType = "ANY_TYPE"
 }
 
 export enum ArgumentModeEnum {
-    ModeUnspecified = "MODE_UNSPECIFIED"
-,    In = "IN"
-,    Out = "OUT"
-,    Inout = "INOUT"
+    ModeUnspecified = "MODE_UNSPECIFIED",
+    In = "IN",
+    Out = "OUT",
+    Inout = "INOUT"
 }
 
 
@@ -20,15 +21,15 @@ export enum ArgumentModeEnum {
  * Input/output argument of a function or a stored procedure.
 **/
 export class Argument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=argumentKind" })
+  @SpeakeasyMetadata({ data: "json, name=argumentKind" })
   argumentKind?: ArgumentArgumentKindEnum;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: StandardSqlDataType;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: ArgumentModeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

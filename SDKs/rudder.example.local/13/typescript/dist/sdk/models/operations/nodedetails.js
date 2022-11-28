@@ -1,0 +1,131 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var NodeDetailsPathParams = /** @class */ (function (_super) {
+    __extends(NodeDetailsPathParams, _super);
+    function NodeDetailsPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" }),
+        __metadata("design:type", String)
+    ], NodeDetailsPathParams.prototype, "nodeId", void 0);
+    return NodeDetailsPathParams;
+}(SpeakeasyBase));
+export { NodeDetailsPathParams };
+var NodeDetailsQueryParams = /** @class */ (function (_super) {
+    __extends(NodeDetailsQueryParams, _super);
+    function NodeDetailsQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" }),
+        __metadata("design:type", String)
+    ], NodeDetailsQueryParams.prototype, "include", void 0);
+    return NodeDetailsQueryParams;
+}(SpeakeasyBase));
+export { NodeDetailsQueryParams };
+export var NodeDetails200ApplicationJsonActionEnum;
+(function (NodeDetails200ApplicationJsonActionEnum) {
+    NodeDetails200ApplicationJsonActionEnum["NodeDetails"] = "nodeDetails";
+})(NodeDetails200ApplicationJsonActionEnum || (NodeDetails200ApplicationJsonActionEnum = {}));
+// NodeDetails200ApplicationJsonData
+/**
+ * Information about the node
+**/
+var NodeDetails200ApplicationJsonData = /** @class */ (function (_super) {
+    __extends(NodeDetails200ApplicationJsonData, _super);
+    function NodeDetails200ApplicationJsonData() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=nodes", elemType: shared.NodeFull }),
+        __metadata("design:type", Array)
+    ], NodeDetails200ApplicationJsonData.prototype, "nodes", void 0);
+    return NodeDetails200ApplicationJsonData;
+}(SpeakeasyBase));
+export { NodeDetails200ApplicationJsonData };
+export var NodeDetails200ApplicationJsonResultEnum;
+(function (NodeDetails200ApplicationJsonResultEnum) {
+    NodeDetails200ApplicationJsonResultEnum["Success"] = "success";
+    NodeDetails200ApplicationJsonResultEnum["Error"] = "error";
+})(NodeDetails200ApplicationJsonResultEnum || (NodeDetails200ApplicationJsonResultEnum = {}));
+var NodeDetails200ApplicationJson = /** @class */ (function (_super) {
+    __extends(NodeDetails200ApplicationJson, _super);
+    function NodeDetails200ApplicationJson() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=action" }),
+        __metadata("design:type", String)
+    ], NodeDetails200ApplicationJson.prototype, "action", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=data" }),
+        __metadata("design:type", NodeDetails200ApplicationJsonData)
+    ], NodeDetails200ApplicationJson.prototype, "data", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=result" }),
+        __metadata("design:type", String)
+    ], NodeDetails200ApplicationJson.prototype, "result", void 0);
+    return NodeDetails200ApplicationJson;
+}(SpeakeasyBase));
+export { NodeDetails200ApplicationJson };
+var NodeDetailsRequest = /** @class */ (function (_super) {
+    __extends(NodeDetailsRequest, _super);
+    function NodeDetailsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", NodeDetailsPathParams)
+    ], NodeDetailsRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", NodeDetailsQueryParams)
+    ], NodeDetailsRequest.prototype, "queryParams", void 0);
+    return NodeDetailsRequest;
+}(SpeakeasyBase));
+export { NodeDetailsRequest };
+var NodeDetailsResponse = /** @class */ (function (_super) {
+    __extends(NodeDetailsResponse, _super);
+    function NodeDetailsResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], NodeDetailsResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], NodeDetailsResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", NodeDetails200ApplicationJson)
+    ], NodeDetailsResponse.prototype, "nodeDetails200ApplicationJsonObject", void 0);
+    return NodeDetailsResponse;
+}(SpeakeasyBase));
+export { NodeDetailsResponse };

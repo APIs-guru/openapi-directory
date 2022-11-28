@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PaymentServiceProviderLinkInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional information required for PAYMENT_SERVICE_PROVIDER link type.
 **/
 export class PaymentServiceProviderLinkInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalAccountBusinessCountry" })
+  @SpeakeasyMetadata({ data: "json, name=externalAccountBusinessCountry" })
   externalAccountBusinessCountry?: string;
 
-  @Metadata({ data: "json, name=externalAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=externalAccountId" })
   externalAccountId?: string;
 }

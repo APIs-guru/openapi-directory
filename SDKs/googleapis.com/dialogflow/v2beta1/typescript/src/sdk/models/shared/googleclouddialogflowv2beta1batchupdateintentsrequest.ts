@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudDialogflowV2beta1IntentBatch } from "./googleclouddialogflowv2beta1intentbatch";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDialogflowV2beta1IntentBatchInput } from "./googleclouddialogflowv2beta1intentbatch";
+
 
 export enum GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequestIntentViewEnum {
-    IntentViewUnspecified = "INTENT_VIEW_UNSPECIFIED"
-,    IntentViewFull = "INTENT_VIEW_FULL"
+    IntentViewUnspecified = "INTENT_VIEW_UNSPECIFIED",
+    IntentViewFull = "INTENT_VIEW_FULL"
 }
 
 
-// GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequest
+// GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequestInput
 /** 
  * The request message for Intents.BatchUpdateIntents.
 **/
-export class GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intentBatchInline" })
-  intentBatchInline?: GoogleCloudDialogflowV2beta1IntentBatch;
+export class GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=intentBatchInline" })
+  intentBatchInline?: GoogleCloudDialogflowV2beta1IntentBatchInput;
 
-  @Metadata({ data: "json, name=intentBatchUri" })
+  @SpeakeasyMetadata({ data: "json, name=intentBatchUri" })
   intentBatchUri?: string;
 
-  @Metadata({ data: "json, name=intentView" })
+  @SpeakeasyMetadata({ data: "json, name=intentView" })
   intentView?: GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequestIntentViewEnum;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

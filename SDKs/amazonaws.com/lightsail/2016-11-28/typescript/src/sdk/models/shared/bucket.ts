@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessRules } from "./accessrules";
 import { ResourceLocation } from "./resourcelocation";
 import { ResourceReceivingAccess } from "./resourcereceivingaccess";
@@ -7,53 +6,54 @@ import { BucketState } from "./bucketstate";
 import { Tag } from "./tag";
 
 
+
 // Bucket
 /** 
  * Describes an Amazon Lightsail bucket.
 **/
 export class Bucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ableToUpdateBundle" })
+  @SpeakeasyMetadata({ data: "json, name=ableToUpdateBundle" })
   ableToUpdateBundle?: boolean;
 
-  @Metadata({ data: "json, name=accessRules" })
+  @SpeakeasyMetadata({ data: "json, name=accessRules" })
   accessRules?: AccessRules;
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ResourceLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=objectVersioning" })
+  @SpeakeasyMetadata({ data: "json, name=objectVersioning" })
   objectVersioning?: string;
 
-  @Metadata({ data: "json, name=readonlyAccessAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=readonlyAccessAccounts" })
   readonlyAccessAccounts?: string[];
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=resourcesReceivingAccess", elemType: shared.ResourceReceivingAccess })
+  @SpeakeasyMetadata({ data: "json, name=resourcesReceivingAccess", elemType: ResourceReceivingAccess })
   resourcesReceivingAccess?: ResourceReceivingAccess[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: BucketState;
 
-  @Metadata({ data: "json, name=supportCode" })
+  @SpeakeasyMetadata({ data: "json, name=supportCode" })
   supportCode?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Order } from "./order";
 
 
+
 export class CreateOrderOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Order" })
+  @SpeakeasyMetadata({ data: "json, name=Order" })
   order?: Order;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// EntityRecognizerEvaluationMetrics
+// Detailed information about the accuracy of an entity recognizer.
 type EntityRecognizerEvaluationMetrics struct {
 	F1Score   *float64 `json:"F1Score,omitempty"`
 	Precision *float64 `json:"Precision,omitempty"`

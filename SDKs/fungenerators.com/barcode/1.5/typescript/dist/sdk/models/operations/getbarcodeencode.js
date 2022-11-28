@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBarcodeEncodeQueryParams = /** @class */ (function (_super) {
     __extends(GetBarcodeEncodeQueryParams, _super);
@@ -30,23 +30,23 @@ var GetBarcodeEncodeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=barcodeformat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=barcodeformat" }),
         __metadata("design:type", String)
     ], GetBarcodeEncodeQueryParams.prototype, "barcodeformat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=number" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" }),
         __metadata("design:type", String)
     ], GetBarcodeEncodeQueryParams.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputformat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputformat" }),
         __metadata("design:type", String)
     ], GetBarcodeEncodeQueryParams.prototype, "outputformat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=totalheight" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=totalheight" }),
         __metadata("design:type", Number)
     ], GetBarcodeEncodeQueryParams.prototype, "totalheight", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=widthfactor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=widthfactor" }),
         __metadata("design:type", Number)
     ], GetBarcodeEncodeQueryParams.prototype, "widthfactor", void 0);
     return GetBarcodeEncodeQueryParams;
@@ -58,7 +58,7 @@ var GetBarcodeEncodeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetBarcodeEncodeSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetBarcodeEncodeSecurity;
@@ -70,11 +70,11 @@ var GetBarcodeEncodeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBarcodeEncodeQueryParams)
     ], GetBarcodeEncodeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBarcodeEncodeSecurity)
     ], GetBarcodeEncodeRequest.prototype, "security", void 0);
     return GetBarcodeEncodeRequest;
@@ -86,11 +86,11 @@ var GetBarcodeEncodeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBarcodeEncodeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBarcodeEncodeResponse.prototype, "statusCode", void 0);
     return GetBarcodeEncodeResponse;

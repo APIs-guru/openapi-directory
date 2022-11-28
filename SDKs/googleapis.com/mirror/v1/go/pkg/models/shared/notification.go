@@ -1,5 +1,7 @@
 package shared
 
+// Notification
+// A notification delivered by the API.
 type Notification struct {
 	Collection  *string      `json:"collection,omitempty"`
 	ItemID      *string      `json:"itemId,omitempty"`

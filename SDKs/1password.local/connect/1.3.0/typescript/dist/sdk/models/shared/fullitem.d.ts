@@ -1,6 +1,12 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
 import { File } from "./file";
+import { FieldInput } from "./field";
+import { FileInput } from "./file";
+export declare enum FullItemStateEnum {
+    Archived = "ARCHIVED",
+    Deleted = "DELETED"
+}
 export declare enum FullItemCategoryEnum {
     Login = "LOGIN",
     Password = "PASSWORD",
@@ -27,10 +33,6 @@ export declare class FullItemSections extends SpeakeasyBase {
     id?: string;
     label?: string;
 }
-export declare enum FullItemStateEnum {
-    Archived = "ARCHIVED",
-    Deleted = "DELETED"
-}
 export declare class FullItemUrls extends SpeakeasyBase {
     href: string;
     primary?: boolean;
@@ -51,6 +53,19 @@ export declare class FullItem extends SpeakeasyBase {
     tags?: string[];
     title?: string;
     updatedAt?: Date;
+    urls?: FullItemUrls[];
+    vault: FullItemVault;
+    version?: number;
+}
+export declare class FullItemInput extends SpeakeasyBase {
+    category: FullItemCategoryEnum;
+    favorite?: boolean;
+    fields?: FieldInput[];
+    files?: FileInput[];
+    id?: string;
+    sections?: FullItemSections[];
+    tags?: string[];
+    title?: string;
     urls?: FullItemUrls[];
     vault: FullItemVault;
     version?: number;

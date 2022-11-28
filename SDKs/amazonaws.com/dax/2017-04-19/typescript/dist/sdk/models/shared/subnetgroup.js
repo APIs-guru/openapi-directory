@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Subnet } from "./subnet";
 // SubnetGroup
 /**
  * <p>Represents the output of one of the following actions:</p> <ul> <li> <p> <i>CreateSubnetGroup</i> </p> </li> <li> <p> <i>ModifySubnetGroup</i> </p> </li> </ul>
@@ -34,19 +34,19 @@ var SubnetGroup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], SubnetGroup.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetGroupName" }),
         __metadata("design:type", String)
     ], SubnetGroup.prototype, "subnetGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Subnets", elemType: shared.Subnet }),
+        SpeakeasyMetadata({ data: "json, name=Subnets", elemType: Subnet }),
         __metadata("design:type", Array)
     ], SubnetGroup.prototype, "subnets", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], SubnetGroup.prototype, "vpcId", void 0);
     return SubnetGroup;

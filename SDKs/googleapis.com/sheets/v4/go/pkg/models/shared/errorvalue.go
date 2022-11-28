@@ -15,6 +15,8 @@ const (
 	ErrorValueTypeEnumLoading              ErrorValueTypeEnum = "LOADING"
 )
 
+// ErrorValue
+// An error in a cell.
 type ErrorValue struct {
 	Message *string             `json:"message,omitempty"`
 	Type    *ErrorValueTypeEnum `json:"type,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetAttributeGroupResponse extends SpeakeasyBase {
     arn?: string;
     attributes?: string;

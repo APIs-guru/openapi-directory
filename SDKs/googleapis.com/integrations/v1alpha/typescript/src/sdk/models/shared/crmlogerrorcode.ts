@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CrmlogErrorCodeCommonErrorCodeEnum {
-    CommonErrorCodeUnspecified = "COMMON_ERROR_CODE_UNSPECIFIED"
-,    InvalidCredentials = "INVALID_CREDENTIALS"
-,    RequiredFieldsMissing = "REQUIRED_FIELDS_MISSING"
-,    InvalidFields = "INVALID_FIELDS"
-,    Backend = "BACKEND"
-,    General = "GENERAL"
-,    Internal = "INTERNAL"
-,    IoError = "IO_ERROR"
-,    NotFound = "NOT_FOUND"
-,    EventBus = "EVENT_BUS"
-,    AlreadyExists = "ALREADY_EXISTS"
-,    Concord = "CONCORD"
-,    Conversion = "CONVERSION"
-,    Flume = "FLUME"
-,    Permission = "PERMISSION"
-,    SalesForce = "SALES_FORCE"
-,    Spanner = "SPANNER"
-,    Unimplemented = "UNIMPLEMENTED"
-,    Reltio = "RELTIO"
-,    WorkflowNotFound = "WORKFLOW_NOT_FOUND"
-,    QuotaThrottled = "QUOTA_THROTTLED"
-,    QuotaEnqueued = "QUOTA_ENQUEUED"
-,    InvalidQuotaConfiguration = "INVALID_QUOTA_CONFIGURATION"
-,    TaskNotFound = "TASK_NOT_FOUND"
-,    ExecutionTimeout = "EXECUTION_TIMEOUT"
-,    InvalidEventExecutionState = "INVALID_EVENT_EXECUTION_STATE"
-,    InvalidAttribute = "INVALID_ATTRIBUTE"
-,    MissingAttribute = "MISSING_ATTRIBUTE"
-,    ClientUnauthorizedForWorkflow = "CLIENT_UNAUTHORIZED_FOR_WORKFLOW"
-,    InvalidParameter = "INVALID_PARAMETER"
-,    MissingParameter = "MISSING_PARAMETER"
-,    UnauthroizedWorkflowEditorAction = "UNAUTHROIZED_WORKFLOW_EDITOR_ACTION"
-,    FailedPrecondition = "FAILED_PRECONDITION"
-,    InvalidClient = "INVALID_CLIENT"
-,    MissingClient = "MISSING_CLIENT"
-,    InvalidWorkflow = "INVALID_WORKFLOW"
-,    MissingQuotaConfiguration = "MISSING_QUOTA_CONFIGURATION"
-,    UnhandledTaskError = "UNHANDLED_TASK_ERROR"
-,    ScriptTaskRuntimeError = "SCRIPT_TASK_RUNTIME_ERROR"
-,    Rpc = "RPC"
-,    InvalidProto = "INVALID_PROTO"
-,    UnhandledEventbusError = "UNHANDLED_EVENTBUS_ERROR"
-,    InvalidTaskState = "INVALID_TASK_STATE"
-,    TypedTaskInvalidInputOperation = "TYPED_TASK_INVALID_INPUT_OPERATION"
-,    TypedTaskInvalidOutputOperation = "TYPED_TASK_INVALID_OUTPUT_OPERATION"
-,    ValidationError = "VALIDATION_ERROR"
-,    ResumeError = "RESUME_ERROR"
-,    AppsScriptExecutionError = "APPS_SCRIPT_EXECUTION_ERROR"
-,    InvalidVectorUser = "INVALID_VECTOR_USER"
-,    Informatica = "INFORMATICA"
-,    RetryableTaskError = "RETRYABLE_TASK_ERROR"
-,    InvalidTenant = "INVALID_TENANT"
-,    WrongTenant = "WRONG_TENANT"
-,    InformaticaBackendUnavailable = "INFORMATICA_BACKEND_UNAVAILABLE"
-,    RpcPermissionDenied = "RPC_PERMISSION_DENIED"
-,    SyncEventbusExecutionTimeout = "SYNC_EVENTBUS_EXECUTION_TIMEOUT"
-,    AsyncEventbusExecutionTimeout = "ASYNC_EVENTBUS_EXECUTION_TIMEOUT"
-,    NotSupportedDataType = "NOT_SUPPORTED_DATA_TYPE"
-,    UnsanitizedUserInput = "UNSANITIZED_USER_INPUT"
-,    TransformExpressionEvaluationError = "TRANSFORM_EXPRESSION_EVALUATION_ERROR"
-,    HttpException = "HTTP_EXCEPTION"
-,    ExecutionCancelled = "EXECUTION_CANCELLED"
+    CommonErrorCodeUnspecified = "COMMON_ERROR_CODE_UNSPECIFIED",
+    InvalidCredentials = "INVALID_CREDENTIALS",
+    RequiredFieldsMissing = "REQUIRED_FIELDS_MISSING",
+    InvalidFields = "INVALID_FIELDS",
+    Backend = "BACKEND",
+    General = "GENERAL",
+    Internal = "INTERNAL",
+    IoError = "IO_ERROR",
+    NotFound = "NOT_FOUND",
+    EventBus = "EVENT_BUS",
+    AlreadyExists = "ALREADY_EXISTS",
+    Concord = "CONCORD",
+    Conversion = "CONVERSION",
+    Flume = "FLUME",
+    Permission = "PERMISSION",
+    SalesForce = "SALES_FORCE",
+    Spanner = "SPANNER",
+    Unimplemented = "UNIMPLEMENTED",
+    Reltio = "RELTIO",
+    WorkflowNotFound = "WORKFLOW_NOT_FOUND",
+    QuotaThrottled = "QUOTA_THROTTLED",
+    QuotaEnqueued = "QUOTA_ENQUEUED",
+    InvalidQuotaConfiguration = "INVALID_QUOTA_CONFIGURATION",
+    TaskNotFound = "TASK_NOT_FOUND",
+    ExecutionTimeout = "EXECUTION_TIMEOUT",
+    InvalidEventExecutionState = "INVALID_EVENT_EXECUTION_STATE",
+    InvalidAttribute = "INVALID_ATTRIBUTE",
+    MissingAttribute = "MISSING_ATTRIBUTE",
+    ClientUnauthorizedForWorkflow = "CLIENT_UNAUTHORIZED_FOR_WORKFLOW",
+    InvalidParameter = "INVALID_PARAMETER",
+    MissingParameter = "MISSING_PARAMETER",
+    UnauthroizedWorkflowEditorAction = "UNAUTHROIZED_WORKFLOW_EDITOR_ACTION",
+    FailedPrecondition = "FAILED_PRECONDITION",
+    InvalidClient = "INVALID_CLIENT",
+    MissingClient = "MISSING_CLIENT",
+    InvalidWorkflow = "INVALID_WORKFLOW",
+    MissingQuotaConfiguration = "MISSING_QUOTA_CONFIGURATION",
+    UnhandledTaskError = "UNHANDLED_TASK_ERROR",
+    ScriptTaskRuntimeError = "SCRIPT_TASK_RUNTIME_ERROR",
+    Rpc = "RPC",
+    InvalidProto = "INVALID_PROTO",
+    UnhandledEventbusError = "UNHANDLED_EVENTBUS_ERROR",
+    InvalidTaskState = "INVALID_TASK_STATE",
+    TypedTaskInvalidInputOperation = "TYPED_TASK_INVALID_INPUT_OPERATION",
+    TypedTaskInvalidOutputOperation = "TYPED_TASK_INVALID_OUTPUT_OPERATION",
+    ValidationError = "VALIDATION_ERROR",
+    ResumeError = "RESUME_ERROR",
+    AppsScriptExecutionError = "APPS_SCRIPT_EXECUTION_ERROR",
+    InvalidVectorUser = "INVALID_VECTOR_USER",
+    Informatica = "INFORMATICA",
+    RetryableTaskError = "RETRYABLE_TASK_ERROR",
+    InvalidTenant = "INVALID_TENANT",
+    WrongTenant = "WRONG_TENANT",
+    InformaticaBackendUnavailable = "INFORMATICA_BACKEND_UNAVAILABLE",
+    RpcPermissionDenied = "RPC_PERMISSION_DENIED",
+    SyncEventbusExecutionTimeout = "SYNC_EVENTBUS_EXECUTION_TIMEOUT",
+    AsyncEventbusExecutionTimeout = "ASYNC_EVENTBUS_EXECUTION_TIMEOUT",
+    NotSupportedDataType = "NOT_SUPPORTED_DATA_TYPE",
+    UnsanitizedUserInput = "UNSANITIZED_USER_INPUT",
+    TransformExpressionEvaluationError = "TRANSFORM_EXPRESSION_EVALUATION_ERROR",
+    HttpException = "HTTP_EXCEPTION",
+    ExecutionCancelled = "EXECUTION_CANCELLED"
 }
 
 
@@ -71,6 +72,6 @@ export enum CrmlogErrorCodeCommonErrorCodeEnum {
  * Registered ids for errors, as "oneof" enums. Each task or logical grouping of tasks may share the same enum.
 **/
 export class CrmlogErrorCode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commonErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=commonErrorCode" })
   commonErrorCode?: CrmlogErrorCodeCommonErrorCodeEnum;
 }

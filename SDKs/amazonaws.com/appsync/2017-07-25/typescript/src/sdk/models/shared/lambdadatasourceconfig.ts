@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LambdaDataSourceConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an Amazon Web Services Lambda data source configuration.
 **/
 export class LambdaDataSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lambdaFunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionArn" })
   lambdaFunctionArn: string;
 }

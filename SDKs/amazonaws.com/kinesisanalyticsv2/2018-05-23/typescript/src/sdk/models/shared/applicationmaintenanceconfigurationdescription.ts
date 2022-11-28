@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationMaintenanceConfigurationDescription
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The details of the maintenance configuration for the application.
 **/
 export class ApplicationMaintenanceConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationMaintenanceWindowEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationMaintenanceWindowEndTime" })
   applicationMaintenanceWindowEndTime: string;
 
-  @Metadata({ data: "json, name=ApplicationMaintenanceWindowStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationMaintenanceWindowStartTime" })
   applicationMaintenanceWindowStartTime: string;
 }

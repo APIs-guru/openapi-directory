@@ -1,5 +1,7 @@
 package shared
 
+// Actor
+// The actor of a Drive activity.
 type Actor struct {
 	Administrator map[string]interface{} `json:"administrator,omitempty"`
 	Anonymous     map[string]interface{} `json:"anonymous,omitempty"`

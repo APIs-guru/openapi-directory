@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactStateEnum } from "./artifactstateenum";
 import { ArtifactTypeEnum } from "./artifacttypeenum";
 export declare class VersionMetaData extends SpeakeasyBase {

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValidationErrorMessage } from "./validationerrormessage";
 
 
+
 export class BadRequestResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=validation_errors", elemType: shared.ValidationErrorMessage })
+  @SpeakeasyMetadata({ data: "json, name=validation_errors", elemType: ValidationErrorMessage })
   validationErrors?: ValidationErrorMessage[];
 }

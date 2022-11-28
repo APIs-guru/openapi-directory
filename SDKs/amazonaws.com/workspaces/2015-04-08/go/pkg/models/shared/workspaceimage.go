@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkspaceImage
+// Describes a WorkSpace image.
 type WorkspaceImage struct {
 	Created         *time.Time                         `json:"Created,omitempty"`
 	Description     *string                            `json:"Description,omitempty"`

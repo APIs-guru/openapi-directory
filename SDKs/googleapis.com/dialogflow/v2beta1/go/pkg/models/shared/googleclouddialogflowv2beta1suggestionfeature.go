@@ -10,6 +10,8 @@ const (
 	GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumConversationSummarization GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "CONVERSATION_SUMMARIZATION"
 )
 
+// GoogleCloudDialogflowV2beta1SuggestionFeature
+// The type of Human Agent Assistant API suggestion to perform, and the maximum number of results to return for that type. Multiple `Feature` objects can be specified in the `features` list.
 type GoogleCloudDialogflowV2beta1SuggestionFeature struct {
 	Type *GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum `json:"type,omitempty"`
 }

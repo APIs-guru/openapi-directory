@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MapConfiguration } from "./mapconfiguration";
 import { PricingPlanEnum } from "./pricingplanenum";
 export declare class DescribeMapResponse extends SpeakeasyBase {

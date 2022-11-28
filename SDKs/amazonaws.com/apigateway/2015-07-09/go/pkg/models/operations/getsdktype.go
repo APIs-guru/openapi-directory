@@ -4,11 +4,11 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetSdkTypePathParams struct {
+type GetSDKTypePathParams struct {
 	SdktypeID string `pathParam:"style=simple,explode=false,name=sdktype_id"`
 }
 
-type GetSdkTypeHeaders struct {
+type GetSDKTypeHeaders struct {
 	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
 	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
 	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
@@ -18,16 +18,16 @@ type GetSdkTypeHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
-type GetSdkTypeRequest struct {
-	PathParams GetSdkTypePathParams
-	Headers    GetSdkTypeHeaders
+type GetSDKTypeRequest struct {
+	PathParams GetSDKTypePathParams
+	Headers    GetSDKTypeHeaders
 }
 
-type GetSdkTypeResponse struct {
+type GetSDKTypeResponse struct {
 	BadRequestException      *interface{}
 	ContentType              string
 	NotFoundException        *interface{}
-	SdkType                  *shared.SdkType
+	SdkType                  *shared.SDKType
 	StatusCode               int64
 	TooManyRequestsException *interface{}
 	UnauthorizedException    *interface{}

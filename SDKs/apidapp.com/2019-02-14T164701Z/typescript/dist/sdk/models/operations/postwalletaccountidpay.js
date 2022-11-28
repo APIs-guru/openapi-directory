@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostWalletAccountIdPayPathParams = /** @class */ (function (_super) {
     __extends(PostWalletAccountIdPayPathParams, _super);
     function PostWalletAccountIdPayPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostWalletAccountIdPayPathParams.prototype, "id", void 0);
     return PostWalletAccountIdPayPathParams;
@@ -41,7 +41,7 @@ var PostWalletAccountIdPayRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostWalletAccountIdPayPathParams)
     ], PostWalletAccountIdPayRequest.prototype, "pathParams", void 0);
     return PostWalletAccountIdPayRequest;
@@ -53,15 +53,15 @@ var PostWalletAccountIdPayResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostWalletAccountIdPayResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], PostWalletAccountIdPayResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostWalletAccountIdPayResponse.prototype, "statusCode", void 0);
     return PostWalletAccountIdPayResponse;

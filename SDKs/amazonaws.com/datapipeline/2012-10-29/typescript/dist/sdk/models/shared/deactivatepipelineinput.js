@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeactivatePipelineInput
 /**
  * Contains the parameters for DeactivatePipeline.
@@ -33,11 +33,11 @@ var DeactivatePipelineInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cancelActive" }),
+        SpeakeasyMetadata({ data: "json, name=cancelActive" }),
         __metadata("design:type", Boolean)
     ], DeactivatePipelineInput.prototype, "cancelActive", void 0);
     __decorate([
-        Metadata({ data: "json, name=pipelineId" }),
+        SpeakeasyMetadata({ data: "json, name=pipelineId" }),
         __metadata("design:type", String)
     ], DeactivatePipelineInput.prototype, "pipelineId", void 0);
     return DeactivatePipelineInput;

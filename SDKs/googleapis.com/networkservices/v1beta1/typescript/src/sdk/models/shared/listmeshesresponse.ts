@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Mesh } from "./mesh";
+
 
 
 // ListMeshesResponse
@@ -8,9 +8,9 @@ import { Mesh } from "./mesh";
  * Response returned by the ListMeshes method.
 **/
 export class ListMeshesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meshes", elemType: shared.Mesh })
+  @SpeakeasyMetadata({ data: "json, name=meshes", elemType: Mesh })
   meshes?: Mesh[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

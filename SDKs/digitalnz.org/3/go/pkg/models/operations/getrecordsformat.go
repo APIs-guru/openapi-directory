@@ -117,11 +117,6 @@ type GetRecordsFormatQueryParams struct {
 	WithoutFilterField       *string                                      `queryParam:"style=form,explode=true,name=without[{filter_field}]"`
 }
 
-type GetRecordsFormatRequest struct {
-	PathParams  GetRecordsFormatPathParams
-	QueryParams GetRecordsFormatQueryParams
-}
-
 type GetRecordsFormat200ApplicationJSON struct {
 	Facets      map[string]map[string]int64 `json:"facets,omitempty"`
 	Page        *int64                      `json:"page,omitempty"`
@@ -129,6 +124,11 @@ type GetRecordsFormat200ApplicationJSON struct {
 	Records     []shared.Record             `json:"records,omitempty"`
 	RequestURL  *string                     `json:"request_url,omitempty"`
 	ResultCount *int64                      `json:"result_count,omitempty"`
+}
+
+type GetRecordsFormatRequest struct {
+	PathParams  GetRecordsFormatPathParams
+	QueryParams GetRecordsFormatQueryParams
 }
 
 type GetRecordsFormatResponse struct {

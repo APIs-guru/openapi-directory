@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityTypeConfiguration } from "./activitytypeconfiguration";
 import { ActivityTypeInfo } from "./activitytypeinfo";
+
 
 
 // ActivityTypeDetail
@@ -8,9 +9,9 @@ import { ActivityTypeInfo } from "./activitytypeinfo";
  * Detailed information about an activity type.
 **/
 export class ActivityTypeDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration: ActivityTypeConfiguration;
 
-  @Metadata({ data: "json, name=typeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=typeInfo" })
   typeInfo: ActivityTypeInfo;
 }

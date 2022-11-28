@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HomeDirectoryTypeEnum } from "./homedirectorytypeenum";
+
 
 
 // ListedAccess
@@ -7,15 +8,15 @@ import { HomeDirectoryTypeEnum } from "./homedirectorytypeenum";
  * Lists the properties for one or more specified associated accesses.
 **/
 export class ListedAccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExternalId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=HomeDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=HomeDirectory" })
   homeDirectory?: string;
 
-  @Metadata({ data: "json, name=HomeDirectoryType" })
+  @SpeakeasyMetadata({ data: "json, name=HomeDirectoryType" })
   homeDirectoryType?: HomeDirectoryTypeEnum;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string;
 }

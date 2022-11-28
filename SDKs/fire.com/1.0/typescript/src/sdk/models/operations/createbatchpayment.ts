@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreateBatchPaymentNewBatchTypeEnum {
-    BankTransfer = "BANK_TRANSFER"
-,    InternalTransfer = "INTERNAL_TRANSFER"
+    BankTransfer = "BANK_TRANSFER",
+    InternalTransfer = "INTERNAL_TRANSFER"
 }
 
 
 export class CreateBatchPaymentNewBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchName" })
+  @SpeakeasyMetadata({ data: "json, name=batchName" })
   batchName?: string;
 
-  @Metadata({ data: "json, name=callBackUrl" })
+  @SpeakeasyMetadata({ data: "json, name=callBackUrl" })
   callBackUrl?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=jobNumber" })
+  @SpeakeasyMetadata({ data: "json, name=jobNumber" })
   jobNumber?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CreateBatchPaymentNewBatchTypeEnum;
 }
 
 
-export class CreateBatchPaymentRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateBatchPaymentNewBatch;
-}
-
-
 export class CreateBatchPaymentNewBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchUuid" })
+  @SpeakeasyMetadata({ data: "json, name=batchUuid" })
   batchUuid?: string;
 }
 
 
+export class CreateBatchPaymentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateBatchPaymentNewBatch;
+}
+
+
 export class CreateBatchPaymentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   newBatchResponse?: CreateBatchPaymentNewBatchResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

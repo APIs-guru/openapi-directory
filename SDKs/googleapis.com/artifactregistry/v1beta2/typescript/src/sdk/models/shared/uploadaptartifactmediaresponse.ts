@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Operation } from "./operation";
+
 
 
 // UploadAptArtifactMediaResponse
@@ -7,6 +8,6 @@ import { Operation } from "./operation";
  * The response to upload an artifact.
 **/
 export class UploadAptArtifactMediaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: Operation;
 }

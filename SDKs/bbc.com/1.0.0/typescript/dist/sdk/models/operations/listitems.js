@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListItemsItemTypeEnum;
 (function (ListItemsItemTypeEnum) {
@@ -53,67 +53,67 @@ var ListItemsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=authority" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authority" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "authority", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", Array)
     ], ListItemsQueryParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id_type" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "idType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=item_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=item_type" }),
         __metadata("design:type", Array)
     ], ListItemsQueryParams.prototype, "itemType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], ListItemsQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ListItemsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], ListItemsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
         __metadata("design:type", Array)
     ], ListItemsQueryParams.prototype, "partnerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
         __metadata("design:type", Array)
     ], ListItemsQueryParams.prototype, "partnerPid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=people" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=people" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "people", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pid" }),
         __metadata("design:type", Array)
     ], ListItemsQueryParams.prototype, "pid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=programme" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=programme" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "programme", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=segment_event" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=segment_event" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "segmentEvent", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
         __metadata("design:type", String)
     ], ListItemsQueryParams.prototype, "sortDirection", void 0);
     return ListItemsQueryParams;
@@ -125,7 +125,7 @@ var ListItemsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListItemsQueryParams)
     ], ListItemsRequest.prototype, "queryParams", void 0);
     return ListItemsRequest;
@@ -137,23 +137,23 @@ var ListItemsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ListItemsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListItemsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], ListItemsResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListItemsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListItemsResponse.prototype, "nitro", void 0);
     return ListItemsResponse;

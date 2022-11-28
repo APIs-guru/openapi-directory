@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GitLabRepositoryId } from "./gitlabrepositoryid";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GitLabRepositoryIdInput } from "./gitlabrepositoryid";
 
 
-// RemoveGitLabConnectedRepositoryRequest
+
+// RemoveGitLabConnectedRepositoryRequestInput
 /** 
  * RPC request object accepted by RemoveGitLabConnectedRepository RPC method.
 **/
-export class RemoveGitLabConnectedRepositoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectedRepository" })
-  connectedRepository?: GitLabRepositoryId;
+export class RemoveGitLabConnectedRepositoryRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=connectedRepository" })
+  connectedRepository?: GitLabRepositoryIdInput;
 }

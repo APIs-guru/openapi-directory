@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSessionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botAlias" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botAlias" })
   botAlias: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botName" })
   botName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class PutSessionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -46,87 +47,87 @@ export class PutSessionHeaders extends SpeakeasyBase {
  * Describes the next action that the bot should take in its interaction with the user and provides information about the context in which the action takes place. Use the <code>DialogAction</code> data type to set the interaction to a specific state, or to return the interaction to a previous state.
 **/
 export class PutSessionRequestBodyDialogAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fulfillmentState" })
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentState" })
   fulfillmentState?: shared.FulfillmentStateEnum;
 
-  @Metadata({ data: "json, name=intentName" })
+  @SpeakeasyMetadata({ data: "json, name=intentName" })
   intentName?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=messageFormat" })
+  @SpeakeasyMetadata({ data: "json, name=messageFormat" })
   messageFormat?: shared.MessageFormatTypeEnum;
 
-  @Metadata({ data: "json, name=slotToElicit" })
+  @SpeakeasyMetadata({ data: "json, name=slotToElicit" })
   slotToElicit?: string;
 
-  @Metadata({ data: "json, name=slots" })
+  @SpeakeasyMetadata({ data: "json, name=slots" })
   slots?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: shared.DialogActionTypeEnum;
 }
 
 
 export class PutSessionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext })
+  @SpeakeasyMetadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext })
   activeContexts?: shared.ActiveContext[];
 
-  @Metadata({ data: "json, name=dialogAction" })
+  @SpeakeasyMetadata({ data: "json, name=dialogAction" })
   dialogAction?: PutSessionRequestBodyDialogAction;
 
-  @Metadata({ data: "json, name=recentIntentSummaryView", elemType: shared.IntentSummary })
+  @SpeakeasyMetadata({ data: "json, name=recentIntentSummaryView", elemType: shared.IntentSummary })
   recentIntentSummaryView?: shared.IntentSummary[];
 
-  @Metadata({ data: "json, name=sessionAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=sessionAttributes" })
   sessionAttributes?: Map<string, string>;
 }
 
 
 export class PutSessionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSessionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutSessionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutSessionRequestBody;
 }
 
 
 export class PutSessionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badGatewayException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dependencyFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notAcceptableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSessionResponse?: shared.PutSessionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

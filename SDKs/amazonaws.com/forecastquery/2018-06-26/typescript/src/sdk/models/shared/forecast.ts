@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataPoint } from "./datapoint";
+
 
 
 // Forecast
@@ -8,6 +8,6 @@ import { DataPoint } from "./datapoint";
  * Provides information about a forecast. Returned as part of the <a>QueryForecast</a> response.
 **/
 export class Forecast extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Predictions", elemType: shared.DataPoint, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=Predictions", elemType: DataPoint, elemDepth: 2 })
   predictions?: Map<string, DataPoint[]>;
 }

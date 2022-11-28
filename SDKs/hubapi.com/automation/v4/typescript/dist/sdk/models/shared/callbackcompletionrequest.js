@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CallbackCompletionRequest
 /**
  * Any information to send back to Workflows when completing an action callback.
@@ -33,7 +33,7 @@ var CallbackCompletionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=outputFields" }),
+        SpeakeasyMetadata({ data: "json, name=outputFields" }),
         __metadata("design:type", Map)
     ], CallbackCompletionRequest.prototype, "outputFields", void 0);
     return CallbackCompletionRequest;

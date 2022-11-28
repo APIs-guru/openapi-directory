@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetReturnPolicyPathParams:
-    return_policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'return_policy_id', 'style': 'simple', 'explode': False }})
+    return_policy_id: str = field(metadata={'path_param': { 'field_name': 'return_policy_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetReturnPolicySecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetReturnPolicyRequest:
-    path_params: GetReturnPolicyPathParams = field(default=None)
-    security: GetReturnPolicySecurity = field(default=None)
+    path_params: GetReturnPolicyPathParams = field()
+    security: GetReturnPolicySecurity = field()
     
 
 @dataclass
 class GetReturnPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     return_policy: Optional[shared.ReturnPolicy] = field(default=None)
-    status_code: int = field(default=None)
     

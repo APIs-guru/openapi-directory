@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionTypeEnum } from "./permissiontypeenum";
+
 
 
 // ShareInvitationSummary
@@ -7,21 +8,21 @@ import { PermissionTypeEnum } from "./permissiontypeenum";
  * A share invitation summary return object.
 **/
 export class ShareInvitationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PermissionType" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionType" })
   permissionType?: PermissionTypeEnum;
 
-  @Metadata({ data: "json, name=ShareInvitationId" })
+  @SpeakeasyMetadata({ data: "json, name=ShareInvitationId" })
   shareInvitationId?: string;
 
-  @Metadata({ data: "json, name=SharedBy" })
+  @SpeakeasyMetadata({ data: "json, name=SharedBy" })
   sharedBy?: string;
 
-  @Metadata({ data: "json, name=SharedWith" })
+  @SpeakeasyMetadata({ data: "json, name=SharedWith" })
   sharedWith?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 
-  @Metadata({ data: "json, name=WorkloadName" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadName" })
   workloadName?: string;
 }

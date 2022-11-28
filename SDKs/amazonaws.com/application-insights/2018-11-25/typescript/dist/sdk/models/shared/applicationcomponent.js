@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsTypeEnum } from "./ostypeenum";
 import { TierEnum } from "./tierenum";
 // ApplicationComponent
@@ -35,31 +35,31 @@ var ApplicationComponent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComponentName" }),
+        SpeakeasyMetadata({ data: "json, name=ComponentName" }),
         __metadata("design:type", String)
     ], ApplicationComponent.prototype, "componentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ComponentRemarks" }),
+        SpeakeasyMetadata({ data: "json, name=ComponentRemarks" }),
         __metadata("design:type", String)
     ], ApplicationComponent.prototype, "componentRemarks", void 0);
     __decorate([
-        Metadata({ data: "json, name=DetectedWorkload" }),
+        SpeakeasyMetadata({ data: "json, name=DetectedWorkload" }),
         __metadata("design:type", Map)
     ], ApplicationComponent.prototype, "detectedWorkload", void 0);
     __decorate([
-        Metadata({ data: "json, name=Monitor" }),
+        SpeakeasyMetadata({ data: "json, name=Monitor" }),
         __metadata("design:type", Boolean)
     ], ApplicationComponent.prototype, "monitor", void 0);
     __decorate([
-        Metadata({ data: "json, name=OsType" }),
+        SpeakeasyMetadata({ data: "json, name=OsType" }),
         __metadata("design:type", String)
     ], ApplicationComponent.prototype, "osType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceType" }),
         __metadata("design:type", String)
     ], ApplicationComponent.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tier" }),
+        SpeakeasyMetadata({ data: "json, name=Tier" }),
         __metadata("design:type", String)
     ], ApplicationComponent.prototype, "tier", void 0);
     return ApplicationComponent;

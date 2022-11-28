@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EventTypeSummary
 /**
  * Returns information about an event that has triggered a notification rule.
@@ -33,19 +33,19 @@ var EventTypeSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EventTypeId" }),
+        SpeakeasyMetadata({ data: "json, name=EventTypeId" }),
         __metadata("design:type", String)
     ], EventTypeSummary.prototype, "eventTypeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventTypeName" }),
+        SpeakeasyMetadata({ data: "json, name=EventTypeName" }),
         __metadata("design:type", String)
     ], EventTypeSummary.prototype, "eventTypeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceType" }),
         __metadata("design:type", String)
     ], EventTypeSummary.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceName" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceName" }),
         __metadata("design:type", String)
     ], EventTypeSummary.prototype, "serviceName", void 0);
     return EventTypeSummary;

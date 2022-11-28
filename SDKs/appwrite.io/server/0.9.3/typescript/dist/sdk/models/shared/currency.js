@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Currency
 /**
  * Currency
@@ -33,31 +33,31 @@ var Currency = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], Currency.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=decimalDigits" }),
+        SpeakeasyMetadata({ data: "json, name=decimalDigits" }),
         __metadata("design:type", Number)
     ], Currency.prototype, "decimalDigits", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Currency.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=namePlural" }),
+        SpeakeasyMetadata({ data: "json, name=namePlural" }),
         __metadata("design:type", String)
     ], Currency.prototype, "namePlural", void 0);
     __decorate([
-        Metadata({ data: "json, name=rounding" }),
+        SpeakeasyMetadata({ data: "json, name=rounding" }),
         __metadata("design:type", Number)
     ], Currency.prototype, "rounding", void 0);
     __decorate([
-        Metadata({ data: "json, name=symbol" }),
+        SpeakeasyMetadata({ data: "json, name=symbol" }),
         __metadata("design:type", String)
     ], Currency.prototype, "symbol", void 0);
     __decorate([
-        Metadata({ data: "json, name=symbolNative" }),
+        SpeakeasyMetadata({ data: "json, name=symbolNative" }),
         __metadata("design:type", String)
     ], Currency.prototype, "symbolNative", void 0);
     return Currency;

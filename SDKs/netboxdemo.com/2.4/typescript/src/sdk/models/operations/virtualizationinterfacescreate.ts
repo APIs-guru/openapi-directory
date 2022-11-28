@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VirtualizationInterfacesCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableInterface;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableInterfaceInput;
 }
 
 
 export class VirtualizationInterfacesCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   interface?: shared.Interface;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

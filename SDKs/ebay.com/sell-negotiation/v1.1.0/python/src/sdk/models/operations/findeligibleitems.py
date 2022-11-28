@@ -11,24 +11,24 @@ class FindEligibleItemsQueryParams:
 
 @dataclass
 class FindEligibleItemsHeaders:
-    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
+    x_ebay_c_marketplace_id: str = field(metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FindEligibleItemsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FindEligibleItemsRequest:
-    query_params: FindEligibleItemsQueryParams = field(default=None)
-    headers: FindEligibleItemsHeaders = field(default=None)
-    security: FindEligibleItemsSecurity = field(default=None)
+    headers: FindEligibleItemsHeaders = field()
+    query_params: FindEligibleItemsQueryParams = field()
+    security: FindEligibleItemsSecurity = field()
     
 
 @dataclass
 class FindEligibleItemsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paged_eligible_item_collection: Optional[shared.PagedEligibleItemCollection] = field(default=None)
-    status_code: int = field(default=None)
     

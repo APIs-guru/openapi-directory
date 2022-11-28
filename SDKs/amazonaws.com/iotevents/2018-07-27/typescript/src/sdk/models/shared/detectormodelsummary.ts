@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetectorModelSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the detector model.
 **/
 export class DetectorModelSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=detectorModelDescription" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelDescription" })
   detectorModelDescription?: string;
 
-  @Metadata({ data: "json, name=detectorModelName" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelName" })
   detectorModelName?: string;
 }

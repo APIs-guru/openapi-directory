@@ -8,11 +8,8 @@ type PostLoadBalancersIDActionsDeleteServiceRequestBody struct {
 	ListenPort float64 `json:"listen_port"`
 }
 
-type PostLoadBalancersIDActionsDeleteServiceRequest struct {
-	PathParams PostLoadBalancersIDActionsDeleteServicePathParams
-	Request    *PostLoadBalancersIDActionsDeleteServiceRequestBody `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsDeleteServiceActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsDeleteServiceActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostLoadBalancersIDActionsDeleteServiceActionResponseAction struct {
 
 type PostLoadBalancersIDActionsDeleteServiceActionResponse struct {
 	Action PostLoadBalancersIDActionsDeleteServiceActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsDeleteServiceRequest struct {
+	PathParams PostLoadBalancersIDActionsDeleteServicePathParams
+	Request    *PostLoadBalancersIDActionsDeleteServiceRequestBody `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsDeleteServiceResponse struct {

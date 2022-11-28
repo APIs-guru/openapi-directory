@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsResetAuthorizationCodePathParams:
-    registration: str = field(default=None, metadata={'path_param': { 'field_name': 'registration', 'style': 'simple', 'explode': False }})
+    registration: str = field(metadata={'path_param': { 'field_name': 'registration', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DomainsProjectsLocationsRegistrationsResetAuthorizationCodeQueryParams:
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsResetAuthorizationCodeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsResetAuthorizationCodeRequest:
-    path_params: DomainsProjectsLocationsRegistrationsResetAuthorizationCodePathParams = field(default=None)
-    query_params: DomainsProjectsLocationsRegistrationsResetAuthorizationCodeQueryParams = field(default=None)
+    path_params: DomainsProjectsLocationsRegistrationsResetAuthorizationCodePathParams = field()
+    query_params: DomainsProjectsLocationsRegistrationsResetAuthorizationCodeQueryParams = field()
+    security: DomainsProjectsLocationsRegistrationsResetAuthorizationCodeSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DomainsProjectsLocationsRegistrationsResetAuthorizationCodeSecurity = field(default=None)
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsResetAuthorizationCodeResponse:
+    content_type: str = field()
+    status_code: int = field()
     authorization_code: Optional[shared.AuthorizationCode] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

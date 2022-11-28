@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import taskstatustype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CancelMlTaskRunResponse:
-    status: Optional[taskstatustype_enum.TaskStatusTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    task_run_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaskRunId' }})
-    transform_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransformId' }})
+    status: Optional[TaskStatusTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    task_run_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TaskRunId') }})
+    transform_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransformId') }})
     

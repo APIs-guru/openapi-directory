@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageGroup } from "./messagegroup";
+
 
 
 // PromptSpecification
@@ -8,12 +8,12 @@ import { MessageGroup } from "./messagegroup";
  * Specifies a list of message groups that Amazon Lex sends to a user to elicit a response.
 **/
 export class PromptSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowInterrupt" })
+  @SpeakeasyMetadata({ data: "json, name=allowInterrupt" })
   allowInterrupt?: boolean;
 
-  @Metadata({ data: "json, name=maxRetries" })
+  @SpeakeasyMetadata({ data: "json, name=maxRetries" })
   maxRetries: number;
 
-  @Metadata({ data: "json, name=messageGroups", elemType: shared.MessageGroup })
+  @SpeakeasyMetadata({ data: "json, name=messageGroups", elemType: MessageGroup })
   messageGroups: MessageGroup[];
 }

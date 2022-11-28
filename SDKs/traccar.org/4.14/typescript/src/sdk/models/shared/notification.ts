@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Notification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=always" })
+  @SpeakeasyMetadata({ data: "json, name=always" })
   always?: boolean;
 
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=calendarId" })
+  @SpeakeasyMetadata({ data: "json, name=calendarId" })
   calendarId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=mail" })
+  @SpeakeasyMetadata({ data: "json, name=mail" })
   mail?: boolean;
 
-  @Metadata({ data: "json, name=sms" })
+  @SpeakeasyMetadata({ data: "json, name=sms" })
   sms?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=web" })
+  @SpeakeasyMetadata({ data: "json, name=web" })
   web?: boolean;
 }

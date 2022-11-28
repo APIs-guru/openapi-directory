@@ -1,0 +1,96 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class GetItemsQueryParams extends SpeakeasyBase {
+    adjacentTo?: string;
+    albumArtistIds?: string[];
+    albumIds?: string[];
+    albums?: string[];
+    artistIds?: string[];
+    artists?: string[];
+    collapseBoxSetItems?: boolean;
+    contributingArtistIds?: string[];
+    enableImageTypes?: shared.ImageTypeEnum[];
+    enableImages?: boolean;
+    enableTotalRecordCount?: boolean;
+    enableUserData?: boolean;
+    excludeArtistIds?: string[];
+    excludeItemIds?: string[];
+    excludeItemTypes?: string[];
+    excludeLocationTypes?: shared.LocationTypeEnum[];
+    fields?: shared.ItemFieldsEnum[];
+    filters?: shared.ItemFilterEnum[];
+    genreIds?: string[];
+    genres?: string[];
+    hasImdbId?: boolean;
+    hasOfficialRating?: boolean;
+    hasOverview?: boolean;
+    hasParentalRating?: boolean;
+    hasSpecialFeature?: boolean;
+    hasSubtitles?: boolean;
+    hasThemeSong?: boolean;
+    hasThemeVideo?: boolean;
+    hasTmdbId?: boolean;
+    hasTrailer?: boolean;
+    hasTvdbId?: boolean;
+    ids?: string[];
+    imageTypeLimit?: number;
+    imageTypes?: shared.ImageTypeEnum[];
+    includeItemTypes?: string[];
+    is3D?: boolean;
+    is4K?: boolean;
+    isFavorite?: boolean;
+    isHd?: boolean;
+    isLocked?: boolean;
+    isMissing?: boolean;
+    isPlaceHolder?: boolean;
+    isPlayed?: boolean;
+    isUnaired?: boolean;
+    limit?: number;
+    locationTypes?: shared.LocationTypeEnum[];
+    maxHeight?: number;
+    maxOfficialRating?: string;
+    maxPremiereDate?: Date;
+    maxWidth?: number;
+    mediaTypes?: string[];
+    minCommunityRating?: number;
+    minCriticRating?: number;
+    minDateLastSaved?: Date;
+    minDateLastSavedForUser?: Date;
+    minHeight?: number;
+    minOfficialRating?: string;
+    minPremiereDate?: Date;
+    minWidth?: number;
+    nameLessThan?: string;
+    nameStartsWith?: string;
+    nameStartsWithOrGreater?: string;
+    officialRatings?: string[];
+    parentId?: string;
+    parentIndexNumber?: number;
+    person?: string;
+    personIds?: string[];
+    personTypes?: string[];
+    recursive?: boolean;
+    searchTerm?: string;
+    seriesStatus?: shared.SeriesStatusEnum[];
+    sortBy?: string;
+    sortOrder?: string;
+    startIndex?: number;
+    studioIds?: string[];
+    studios?: string[];
+    tags?: string[];
+    userId?: string;
+    videoTypes?: shared.VideoTypeEnum[];
+    years?: number[];
+}
+export declare class GetItemsSecurity extends SpeakeasyBase {
+    customAuthentication: shared.SchemeCustomAuthentication;
+}
+export declare class GetItemsRequest extends SpeakeasyBase {
+    queryParams: GetItemsQueryParams;
+    security: GetItemsSecurity;
+}
+export declare class GetItemsResponse extends SpeakeasyBase {
+    baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
+    contentType: string;
+    statusCode: number;
+}

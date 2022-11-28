@@ -1,5 +1,7 @@
 package shared
 
+// SubjectDescription
+// These values describe fields in an issued X.509 certificate such as the distinguished name, subject alternative names, serial number, and lifetime.
 type SubjectDescription struct {
 	HexSerialNumber *string          `json:"hexSerialNumber,omitempty"`
 	Lifetime        *string          `json:"lifetime,omitempty"`

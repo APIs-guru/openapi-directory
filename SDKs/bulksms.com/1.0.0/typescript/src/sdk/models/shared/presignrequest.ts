@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PreSignRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileExtension" })
+  @SpeakeasyMetadata({ data: "json, name=fileExtension" })
   fileExtension?: string;
 
-  @Metadata({ data: "json, name=mediaType" })
+  @SpeakeasyMetadata({ data: "json, name=mediaType" })
   mediaType?: string;
 }

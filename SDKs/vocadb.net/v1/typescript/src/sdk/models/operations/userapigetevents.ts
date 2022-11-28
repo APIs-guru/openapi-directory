@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UserApiGetEventsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum UserApiGetEventsRelationshipTypeEnum {
-    Interested = "Interested"
-,    Attending = "Attending"
+    Interested = "Interested",
+    Attending = "Attending"
 }
 
 
 export class UserApiGetEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=relationshipType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=relationshipType" })
   relationshipType: UserApiGetEventsRelationshipTypeEnum;
 }
 
 
 export class UserApiGetEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UserApiGetEventsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserApiGetEventsQueryParams;
 }
 
 
 export class UserApiGetEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ReleaseEventForApiContract })
+  @SpeakeasyMetadata({ elemType: shared.ReleaseEventForApiContract })
   releaseEventForApiContracts?: shared.ReleaseEventForApiContract[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

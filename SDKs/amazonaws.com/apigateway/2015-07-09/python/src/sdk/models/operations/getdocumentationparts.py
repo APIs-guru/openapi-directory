@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetDocumentationPartsPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 class GetDocumentationPartsLocationStatusEnum(str, Enum):
     DOCUMENTED = "DOCUMENTED"
@@ -49,18 +53,18 @@ class GetDocumentationPartsHeaders:
 
 @dataclass
 class GetDocumentationPartsRequest:
-    path_params: GetDocumentationPartsPathParams = field(default=None)
-    query_params: GetDocumentationPartsQueryParams = field(default=None)
-    headers: GetDocumentationPartsHeaders = field(default=None)
+    headers: GetDocumentationPartsHeaders = field()
+    path_params: GetDocumentationPartsPathParams = field()
+    query_params: GetDocumentationPartsQueryParams = field()
     
 
 @dataclass
 class GetDocumentationPartsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     documentation_parts: Optional[shared.DocumentationParts] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

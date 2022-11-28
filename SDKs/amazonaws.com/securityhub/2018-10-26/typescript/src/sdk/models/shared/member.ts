@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Member
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The details about a member account.
 **/
 export class Member extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=AdministratorId" })
+  @SpeakeasyMetadata({ data: "json, name=AdministratorId" })
   administratorId?: string;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=InvitedAt" })
+  @SpeakeasyMetadata({ data: "json, name=InvitedAt" })
   invitedAt?: Date;
 
-  @Metadata({ data: "json, name=MasterId" })
+  @SpeakeasyMetadata({ data: "json, name=MasterId" })
   masterId?: string;
 
-  @Metadata({ data: "json, name=MemberStatus" })
+  @SpeakeasyMetadata({ data: "json, name=MemberStatus" })
   memberStatus?: string;
 
-  @Metadata({ data: "json, name=UpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt" })
   updatedAt?: Date;
 }

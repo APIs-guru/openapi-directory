@@ -33,7 +33,7 @@ type DataprocProjectsRegionsJobsPatchSecurity struct {
 type DataprocProjectsRegionsJobsPatchRequest struct {
 	PathParams  DataprocProjectsRegionsJobsPatchPathParams
 	QueryParams DataprocProjectsRegionsJobsPatchQueryParams
-	Request     *shared.Job `request:"mediaType=application/json"`
+	Request     *shared.JobInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsRegionsJobsPatchSecurity
 }
 

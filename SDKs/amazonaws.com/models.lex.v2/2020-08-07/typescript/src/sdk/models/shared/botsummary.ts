@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BotStatusEnum } from "./botstatusenum";
+
 
 
 // BotSummary
@@ -7,21 +8,21 @@ import { BotStatusEnum } from "./botstatusenum";
  * Summary information about a bot returned by the <a>ListBots</a> operation.
 **/
 export class BotSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botId" })
+  @SpeakeasyMetadata({ data: "json, name=botId" })
   botId?: string;
 
-  @Metadata({ data: "json, name=botName" })
+  @SpeakeasyMetadata({ data: "json, name=botName" })
   botName?: string;
 
-  @Metadata({ data: "json, name=botStatus" })
+  @SpeakeasyMetadata({ data: "json, name=botStatus" })
   botStatus?: BotStatusEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=latestBotVersion" })
+  @SpeakeasyMetadata({ data: "json, name=latestBotVersion" })
   latestBotVersion?: string;
 }

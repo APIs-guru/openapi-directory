@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import jobcomparator_enum
-from . import scopefilterkey_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SimpleScopeTerm:
-    comparator: Optional[jobcomparator_enum.JobComparatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparator' }})
-    key: Optional[scopefilterkey_enum.ScopeFilterKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""SimpleScopeTerm
+    Specifies a property-based condition that determines whether an S3 object is included or excluded from a classification job.
+    """
+    
+    comparator: Optional[JobComparatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparator') }})
+    key: Optional[ScopeFilterKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

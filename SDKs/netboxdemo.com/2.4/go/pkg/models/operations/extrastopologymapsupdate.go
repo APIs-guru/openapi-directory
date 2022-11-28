@@ -10,7 +10,7 @@ type ExtrasTopologyMapsUpdatePathParams struct {
 
 type ExtrasTopologyMapsUpdateRequest struct {
 	PathParams ExtrasTopologyMapsUpdatePathParams
-	Request    shared.WritableTopologyMap `request:"mediaType=application/json"`
+	Request    shared.WritableTopologyMapInput `request:"mediaType=application/json"`
 }
 
 type ExtrasTopologyMapsUpdateResponse struct {

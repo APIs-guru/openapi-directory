@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddataplexv1schemaschemafield
+from sdk import utils
 
 class GoogleCloudDataplexV1SchemaSchemaFieldModeEnum(str, Enum):
     MODE_UNSPECIFIED = "MODE_UNSPECIFIED"
@@ -31,9 +32,13 @@ class GoogleCloudDataplexV1SchemaSchemaFieldTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1SchemaSchemaField:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    fields: Optional[List[googleclouddataplexv1schemaschemafield.GoogleCloudDataplexV1SchemaSchemaField]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    mode: Optional[GoogleCloudDataplexV1SchemaSchemaFieldModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[GoogleCloudDataplexV1SchemaSchemaFieldTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudDataplexV1SchemaSchemaField
+    Represents a column field within a table schema.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    fields: Optional[List[GoogleCloudDataplexV1SchemaSchemaField]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    mode: Optional[GoogleCloudDataplexV1SchemaSchemaFieldModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: Optional[GoogleCloudDataplexV1SchemaSchemaFieldTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DeleteLocationRulePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteLocationRuleRequest:
-    path_params: DeleteLocationRulePathParams = field(default=None)
+    path_params: DeleteLocationRulePathParams = field()
     
 
 @dataclass
 class DeleteLocationRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_default_resource: Optional[shared.ResponseDefaultResource] = field(default=None)
-    status_code: int = field(default=None)
     

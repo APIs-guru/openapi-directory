@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterResourceRestoreScope } from "./clusterresourcerestorescope";
 import { NamespacedNames } from "./namespacednames";
 import { Namespaces } from "./namespaces";
+import { SubstitutionRule } from "./substitutionrule";
 export var RestoreConfigClusterResourceConflictPolicyEnum;
 (function (RestoreConfigClusterResourceConflictPolicyEnum) {
     RestoreConfigClusterResourceConflictPolicyEnum["ClusterResourceConflictPolicyUnspecified"] = "CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED";
@@ -56,35 +56,35 @@ var RestoreConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allNamespaces" }),
+        SpeakeasyMetadata({ data: "json, name=allNamespaces" }),
         __metadata("design:type", Boolean)
     ], RestoreConfig.prototype, "allNamespaces", void 0);
     __decorate([
-        Metadata({ data: "json, name=clusterResourceConflictPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=clusterResourceConflictPolicy" }),
         __metadata("design:type", String)
     ], RestoreConfig.prototype, "clusterResourceConflictPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=clusterResourceRestoreScope" }),
+        SpeakeasyMetadata({ data: "json, name=clusterResourceRestoreScope" }),
         __metadata("design:type", ClusterResourceRestoreScope)
     ], RestoreConfig.prototype, "clusterResourceRestoreScope", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespacedResourceRestoreMode" }),
+        SpeakeasyMetadata({ data: "json, name=namespacedResourceRestoreMode" }),
         __metadata("design:type", String)
     ], RestoreConfig.prototype, "namespacedResourceRestoreMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectedApplications" }),
+        SpeakeasyMetadata({ data: "json, name=selectedApplications" }),
         __metadata("design:type", NamespacedNames)
     ], RestoreConfig.prototype, "selectedApplications", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectedNamespaces" }),
+        SpeakeasyMetadata({ data: "json, name=selectedNamespaces" }),
         __metadata("design:type", Namespaces)
     ], RestoreConfig.prototype, "selectedNamespaces", void 0);
     __decorate([
-        Metadata({ data: "json, name=substitutionRules", elemType: shared.SubstitutionRule }),
+        SpeakeasyMetadata({ data: "json, name=substitutionRules", elemType: SubstitutionRule }),
         __metadata("design:type", Array)
     ], RestoreConfig.prototype, "substitutionRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeDataRestorePolicy" }),
+        SpeakeasyMetadata({ data: "json, name=volumeDataRestorePolicy" }),
         __metadata("design:type", String)
     ], RestoreConfig.prototype, "volumeDataRestorePolicy", void 0);
     return RestoreConfig;

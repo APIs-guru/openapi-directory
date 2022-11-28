@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StudioComponentTypeEnum(str, Enum):
     ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"

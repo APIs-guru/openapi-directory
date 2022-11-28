@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import importaptartifactsgcssource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImportAptArtifactsRequest:
-    gcs_source: Optional[importaptartifactsgcssource.ImportAptArtifactsGcsSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsSource' }})
+    r"""ImportAptArtifactsRequest
+    The request to import new apt artifacts.
+    """
+    
+    gcs_source: Optional[ImportAptArtifactsGcsSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsSource') }})
     

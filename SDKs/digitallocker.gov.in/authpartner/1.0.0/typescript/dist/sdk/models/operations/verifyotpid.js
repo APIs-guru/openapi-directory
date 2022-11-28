@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VerifyOtpIdSecurity = /** @class */ (function (_super) {
     __extends(VerifyOtpIdSecurity, _super);
@@ -30,39 +30,23 @@ var VerifyOtpIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauthsecurity)
     ], VerifyOtpIdSecurity.prototype, "oauthsecurity", void 0);
     return VerifyOtpIdSecurity;
 }(SpeakeasyBase));
 export { VerifyOtpIdSecurity };
-var VerifyOtpIdRequest = /** @class */ (function (_super) {
-    __extends(VerifyOtpIdRequest, _super);
-    function VerifyOtpIdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
-        __metadata("design:type", Object)
-    ], VerifyOtpIdRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", VerifyOtpIdSecurity)
-    ], VerifyOtpIdRequest.prototype, "security", void 0);
-    return VerifyOtpIdRequest;
-}(SpeakeasyBase));
-export { VerifyOtpIdRequest };
 var VerifyOtpId401ApplicationJson = /** @class */ (function (_super) {
     __extends(VerifyOtpId401ApplicationJson, _super);
     function VerifyOtpId401ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], VerifyOtpId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], VerifyOtpId401ApplicationJson.prototype, "errorDescription", void 0);
     return VerifyOtpId401ApplicationJson;
@@ -74,43 +58,59 @@ var VerifyOtpId500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Object)
     ], VerifyOtpId500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", Object)
     ], VerifyOtpId500ApplicationJson.prototype, "errorDescription", void 0);
     return VerifyOtpId500ApplicationJson;
 }(SpeakeasyBase));
 export { VerifyOtpId500ApplicationJson };
+var VerifyOtpIdRequest = /** @class */ (function (_super) {
+    __extends(VerifyOtpIdRequest, _super);
+    function VerifyOtpIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
+        __metadata("design:type", Object)
+    ], VerifyOtpIdRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", VerifyOtpIdSecurity)
+    ], VerifyOtpIdRequest.prototype, "security", void 0);
+    return VerifyOtpIdRequest;
+}(SpeakeasyBase));
+export { VerifyOtpIdRequest };
 var VerifyOtpIdResponse = /** @class */ (function (_super) {
     __extends(VerifyOtpIdResponse, _super);
     function VerifyOtpIdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VerifyOtpIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VerifyOtpIdResponse.prototype, "demoAuthVerifyResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VerifyOtpIdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VerifyOtpIdResponse.prototype, "verifyOtpId400ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifyOtpId401ApplicationJson)
     ], VerifyOtpIdResponse.prototype, "verifyOtpId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifyOtpId500ApplicationJson)
     ], VerifyOtpIdResponse.prototype, "verifyOtpId500ApplicationJsonObject", void 0);
     return VerifyOtpIdResponse;

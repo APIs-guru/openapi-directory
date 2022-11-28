@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class PatchAPIV1EnvironmentsEnvironmentIDPathParams:
-    environment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
+    environment_id: str = field(metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,16 +21,16 @@ class PatchAPIV1EnvironmentsEnvironmentIDRequests:
 
 @dataclass
 class PatchAPIV1EnvironmentsEnvironmentIDRequest:
-    path_params: PatchAPIV1EnvironmentsEnvironmentIDPathParams = field(default=None)
+    path_params: PatchAPIV1EnvironmentsEnvironmentIDPathParams = field()
     request: Optional[PatchAPIV1EnvironmentsEnvironmentIDRequests] = field(default=None)
     
 
 @dataclass
 class PatchAPIV1EnvironmentsEnvironmentIDResponse:
-    body: bytes = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     cloud_environment_result: Optional[shared.CloudEnvironmentResult] = field(default=None)
-    content_type: str = field(default=None)
     message_codes: Optional[List[int]] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

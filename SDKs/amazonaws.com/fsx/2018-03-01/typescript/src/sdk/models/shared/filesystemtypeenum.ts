@@ -1,7 +1,8 @@
 
 
+
 export enum FileSystemTypeEnum {
-    Windows = "WINDOWS"
-,    Lustre = "LUSTRE"
-,    Ontap = "ONTAP"
+    Windows = "WINDOWS",
+    Lustre = "LUSTRE",
+    Ontap = "ONTAP"
 }

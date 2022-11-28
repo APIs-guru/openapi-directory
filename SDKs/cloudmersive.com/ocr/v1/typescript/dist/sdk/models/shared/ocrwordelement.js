@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // OcrWordElement
 /**
  * A single word in an OCR document
@@ -33,47 +33,47 @@ var OcrWordElement = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BlockNumber" }),
+        SpeakeasyMetadata({ data: "json, name=BlockNumber" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "blockNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConfidenceLevel" }),
+        SpeakeasyMetadata({ data: "json, name=ConfidenceLevel" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "confidenceLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=Height" }),
+        SpeakeasyMetadata({ data: "json, name=Height" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=LineNumber" }),
+        SpeakeasyMetadata({ data: "json, name=LineNumber" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "lineNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageNumber" }),
+        SpeakeasyMetadata({ data: "json, name=PageNumber" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "pageNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParagraphNumber" }),
+        SpeakeasyMetadata({ data: "json, name=ParagraphNumber" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "paragraphNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=Width" }),
+        SpeakeasyMetadata({ data: "json, name=Width" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "width", void 0);
     __decorate([
-        Metadata({ data: "json, name=WordNumber" }),
+        SpeakeasyMetadata({ data: "json, name=WordNumber" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "wordNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=WordText" }),
+        SpeakeasyMetadata({ data: "json, name=WordText" }),
         __metadata("design:type", String)
     ], OcrWordElement.prototype, "wordText", void 0);
     __decorate([
-        Metadata({ data: "json, name=XLeft" }),
+        SpeakeasyMetadata({ data: "json, name=XLeft" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "xLeft", void 0);
     __decorate([
-        Metadata({ data: "json, name=YTop" }),
+        SpeakeasyMetadata({ data: "json, name=YTop" }),
         __metadata("design:type", Number)
     ], OcrWordElement.prototype, "yTop", void 0);
     return OcrWordElement;

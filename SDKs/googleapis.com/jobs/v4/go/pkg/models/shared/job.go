@@ -76,6 +76,8 @@ const (
 	JobVisibilityEnumSharedWithPublic      JobVisibilityEnum = "SHARED_WITH_PUBLIC"
 )
 
+// Job
+// A Job resource represents a job posting (also referred to as a "job listing" or "job requisition"). A job belongs to a Company, which is the hiring entity responsible for the job.
 type Job struct {
 	Addresses          []string                   `json:"addresses,omitempty"`
 	ApplicationInfo    *ApplicationInfo           `json:"applicationInfo,omitempty"`
@@ -100,6 +102,38 @@ type Job struct {
 	PostingPublishTime *string                    `json:"postingPublishTime,omitempty"`
 	PostingRegion      *JobPostingRegionEnum      `json:"postingRegion,omitempty"`
 	PostingUpdateTime  *string                    `json:"postingUpdateTime,omitempty"`
+	ProcessingOptions  *ProcessingOptions         `json:"processingOptions,omitempty"`
+	PromotionValue     *int32                     `json:"promotionValue,omitempty"`
+	Qualifications     *string                    `json:"qualifications,omitempty"`
+	RequisitionID      *string                    `json:"requisitionId,omitempty"`
+	Responsibilities   *string                    `json:"responsibilities,omitempty"`
+	Title              *string                    `json:"title,omitempty"`
+	Visibility         *JobVisibilityEnum         `json:"visibility,omitempty"`
+}
+
+// JobInput
+// A Job resource represents a job posting (also referred to as a "job listing" or "job requisition"). A job belongs to a Company, which is the hiring entity responsible for the job.
+type JobInput struct {
+	Addresses          []string                   `json:"addresses,omitempty"`
+	ApplicationInfo    *ApplicationInfo           `json:"applicationInfo,omitempty"`
+	Company            *string                    `json:"company,omitempty"`
+	CompensationInfo   *CompensationInfo          `json:"compensationInfo,omitempty"`
+	CustomAttributes   map[string]CustomAttribute `json:"customAttributes,omitempty"`
+	DegreeTypes        []JobDegreeTypesEnum       `json:"degreeTypes,omitempty"`
+	Department         *string                    `json:"department,omitempty"`
+	DerivedInfo        *JobDerivedInfo            `json:"derivedInfo,omitempty"`
+	Description        *string                    `json:"description,omitempty"`
+	EmploymentTypes    []JobEmploymentTypesEnum   `json:"employmentTypes,omitempty"`
+	Incentives         *string                    `json:"incentives,omitempty"`
+	JobBenefits        []JobJobBenefitsEnum       `json:"jobBenefits,omitempty"`
+	JobEndTime         *string                    `json:"jobEndTime,omitempty"`
+	JobLevel           *JobJobLevelEnum           `json:"jobLevel,omitempty"`
+	JobStartTime       *string                    `json:"jobStartTime,omitempty"`
+	LanguageCode       *string                    `json:"languageCode,omitempty"`
+	Name               *string                    `json:"name,omitempty"`
+	PostingExpireTime  *string                    `json:"postingExpireTime,omitempty"`
+	PostingPublishTime *string                    `json:"postingPublishTime,omitempty"`
+	PostingRegion      *JobPostingRegionEnum      `json:"postingRegion,omitempty"`
 	ProcessingOptions  *ProcessingOptions         `json:"processingOptions,omitempty"`
 	PromotionValue     *int32                     `json:"promotionValue,omitempty"`
 	Qualifications     *string                    `json:"qualifications,omitempty"`

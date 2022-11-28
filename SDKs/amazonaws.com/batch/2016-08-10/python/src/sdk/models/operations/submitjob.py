@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,68 +22,88 @@ class SubmitJobHeaders:
 @dataclass_json
 @dataclass
 class SubmitJobRequestBodyArrayProperties:
-    size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
+    r"""SubmitJobRequestBodyArrayProperties
+    An object representing an Batch array job.
+    """
+    
+    size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
     
 
 @dataclass_json
 @dataclass
 class SubmitJobRequestBodyContainerOverrides:
-    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    environment: Optional[List[shared.KeyValuePair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    instance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceType' }})
-    memory: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memory' }})
-    resource_requirements: Optional[List[shared.ResourceRequirement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceRequirements' }})
-    vcpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vcpus' }})
+    r"""SubmitJobRequestBodyContainerOverrides
+    The overrides that should be sent to a container.
+    """
+    
+    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('command') }})
+    environment: Optional[List[shared.KeyValuePair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    instance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceType') }})
+    memory: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memory') }})
+    resource_requirements: Optional[List[shared.ResourceRequirement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceRequirements') }})
+    vcpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vcpus') }})
     
 
 @dataclass_json
 @dataclass
 class SubmitJobRequestBodyNodeOverrides:
-    node_property_overrides: Optional[List[shared.NodePropertyOverride]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodePropertyOverrides' }})
-    num_nodes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numNodes' }})
+    r"""SubmitJobRequestBodyNodeOverrides
+    <p>Object representing any node overrides to a job definition that's used in a <a>SubmitJob</a> API operation.</p> <note> <p>This isn't applicable to jobs that are running on Fargate resources and shouldn't be provided; use <code>containerOverrides</code> instead.</p> </note>
+    """
+    
+    node_property_overrides: Optional[List[shared.NodePropertyOverride]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodePropertyOverrides') }})
+    num_nodes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numNodes') }})
     
 
 @dataclass_json
 @dataclass
 class SubmitJobRequestBodyRetryStrategy:
-    attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attempts' }})
-    evaluate_on_exit: Optional[List[shared.EvaluateOnExit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluateOnExit' }})
+    r"""SubmitJobRequestBodyRetryStrategy
+    The retry strategy associated with a job. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html\">Automated job retries</a> in the <i>Batch User Guide</i>.
+    """
+    
+    attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attempts') }})
+    evaluate_on_exit: Optional[List[shared.EvaluateOnExit]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluateOnExit') }})
     
 
 @dataclass_json
 @dataclass
 class SubmitJobRequestBodyTimeout:
-    attempt_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attemptDurationSeconds' }})
+    r"""SubmitJobRequestBodyTimeout
+    An object representing a job timeout configuration.
+    """
+    
+    attempt_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attemptDurationSeconds') }})
     
 
 @dataclass_json
 @dataclass
 class SubmitJobRequestBody:
-    array_properties: Optional[SubmitJobRequestBodyArrayProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arrayProperties' }})
-    container_overrides: Optional[SubmitJobRequestBodyContainerOverrides] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerOverrides' }})
-    depends_on: Optional[List[shared.JobDependency]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dependsOn' }})
-    job_definition: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobDefinition' }})
-    job_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobName' }})
-    job_queue: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobQueue' }})
-    node_overrides: Optional[SubmitJobRequestBodyNodeOverrides] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeOverrides' }})
-    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
-    propagate_tags: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propagateTags' }})
-    retry_strategy: Optional[SubmitJobRequestBodyRetryStrategy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retryStrategy' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    timeout: Optional[SubmitJobRequestBodyTimeout] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeout' }})
+    job_definition: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobDefinition') }})
+    job_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobName') }})
+    job_queue: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobQueue') }})
+    array_properties: Optional[SubmitJobRequestBodyArrayProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arrayProperties') }})
+    container_overrides: Optional[SubmitJobRequestBodyContainerOverrides] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerOverrides') }})
+    depends_on: Optional[List[shared.JobDependency]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dependsOn') }})
+    node_overrides: Optional[SubmitJobRequestBodyNodeOverrides] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodeOverrides') }})
+    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
+    propagate_tags: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propagateTags') }})
+    retry_strategy: Optional[SubmitJobRequestBodyRetryStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('retryStrategy') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    timeout: Optional[SubmitJobRequestBodyTimeout] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeout') }})
     
 
 @dataclass
 class SubmitJobRequest:
-    headers: SubmitJobHeaders = field(default=None)
-    request: SubmitJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SubmitJobHeaders = field()
+    request: SubmitJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SubmitJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     submit_job_response: Optional[shared.SubmitJobResponse] = field(default=None)
     

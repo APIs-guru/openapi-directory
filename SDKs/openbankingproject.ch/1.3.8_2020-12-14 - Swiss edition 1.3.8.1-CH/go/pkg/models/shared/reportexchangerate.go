@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReportExchangeRate
+// Exchange Rate.
 type ReportExchangeRate struct {
 	ContractIdentification *string   `json:"contractIdentification,omitempty"`
 	ExchangeRate           string    `json:"exchangeRate"`

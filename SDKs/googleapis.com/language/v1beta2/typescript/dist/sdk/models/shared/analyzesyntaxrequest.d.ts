@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Document } from "./document";
 export declare enum AnalyzeSyntaxRequestEncodingTypeEnum {
     None = "NONE",

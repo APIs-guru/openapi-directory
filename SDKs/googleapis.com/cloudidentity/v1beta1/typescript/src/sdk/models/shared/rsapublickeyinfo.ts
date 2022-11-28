@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RsaPublicKeyInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information of a RSA public key.
 **/
 export class RsaPublicKeyInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keySize" })
+  @SpeakeasyMetadata({ data: "json, name=keySize" })
   keySize?: number;
 }

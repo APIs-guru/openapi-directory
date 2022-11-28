@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsFetchVerificationOptionsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessAccountsLocationsFetchVerificationOptionsQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsFetchVerificationOptionsRequest:
-    path_params: MybusinessAccountsLocationsFetchVerificationOptionsPathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsFetchVerificationOptionsQueryParams = field(default=None)
+    path_params: MybusinessAccountsLocationsFetchVerificationOptionsPathParams = field()
+    query_params: MybusinessAccountsLocationsFetchVerificationOptionsQueryParams = field()
     request: Optional[shared.FetchVerificationOptionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsFetchVerificationOptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     fetch_verification_options_response: Optional[shared.FetchVerificationOptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

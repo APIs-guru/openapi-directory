@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCategory } from "./errorcategory";
 import { ErrorDetail } from "./errordetail";
 export declare class StandardError extends SpeakeasyBase {

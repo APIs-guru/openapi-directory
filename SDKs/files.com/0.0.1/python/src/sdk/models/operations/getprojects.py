@@ -11,12 +11,12 @@ class GetProjectsQueryParams:
 
 @dataclass
 class GetProjectsRequest:
-    query_params: GetProjectsQueryParams = field(default=None)
+    query_params: GetProjectsQueryParams = field()
     
 
 @dataclass
 class GetProjectsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     project_entities: Optional[List[shared.ProjectEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

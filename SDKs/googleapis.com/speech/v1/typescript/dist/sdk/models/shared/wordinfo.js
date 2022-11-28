@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WordInfo
 /**
  * Word-specific information for recognized words.
@@ -33,23 +33,23 @@ var WordInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=confidence" }),
+        SpeakeasyMetadata({ data: "json, name=confidence" }),
         __metadata("design:type", Number)
     ], WordInfo.prototype, "confidence", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], WordInfo.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=speakerTag" }),
+        SpeakeasyMetadata({ data: "json, name=speakerTag" }),
         __metadata("design:type", Number)
     ], WordInfo.prototype, "speakerTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], WordInfo.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=word" }),
+        SpeakeasyMetadata({ data: "json, name=word" }),
         __metadata("design:type", String)
     ], WordInfo.prototype, "word", void 0);
     return WordInfo;

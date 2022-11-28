@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelApprovalStatusEnum } from "./modelapprovalstatusenum";
 import { ModelPackageTypeEnum } from "./modelpackagetypeenum";
 import { ModelPackageSortByEnum } from "./modelpackagesortbyenum";
 import { SortOrderEnum } from "./sortorderenum";
 
 
+
 export class ListModelPackagesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeAfter" })
   creationTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=CreationTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeBefore" })
   creationTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=ModelApprovalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ModelApprovalStatus" })
   modelApprovalStatus?: ModelApprovalStatusEnum;
 
-  @Metadata({ data: "json, name=ModelPackageGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageGroupName" })
   modelPackageGroupName?: string;
 
-  @Metadata({ data: "json, name=ModelPackageType" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageType" })
   modelPackageType?: ModelPackageTypeEnum;
 
-  @Metadata({ data: "json, name=NameContains" })
+  @SpeakeasyMetadata({ data: "json, name=NameContains" })
   nameContains?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: ModelPackageSortByEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderEnum;
 }

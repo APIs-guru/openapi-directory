@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FindListingRecommendationRequest
 /**
  * An list of listing ID values for which you want Promoted Listings ad configuration information.
@@ -33,7 +33,7 @@ var FindListingRecommendationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=listingIds" }),
+        SpeakeasyMetadata({ data: "json, name=listingIds" }),
         __metadata("design:type", Array)
     ], FindListingRecommendationRequest.prototype, "listingIds", void 0);
     return FindListingRecommendationRequest;

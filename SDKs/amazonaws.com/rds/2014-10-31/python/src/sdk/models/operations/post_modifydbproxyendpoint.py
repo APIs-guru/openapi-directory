@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyDbProxyEndpointActionEnum(str, Enum):
     MODIFY_DB_PROXY_ENDPOINT = "ModifyDBProxyEndpoint"
@@ -10,8 +14,8 @@ class PostModifyDbProxyEndpointVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyDbProxyEndpointQueryParams:
-    action: PostModifyDbProxyEndpointActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyDbProxyEndpointVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyDbProxyEndpointActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyDbProxyEndpointVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyDbProxyEndpointHeaders:
 
 @dataclass
 class PostModifyDbProxyEndpointRequest:
-    query_params: PostModifyDbProxyEndpointQueryParams = field(default=None)
-    headers: PostModifyDbProxyEndpointHeaders = field(default=None)
+    headers: PostModifyDbProxyEndpointHeaders = field()
+    query_params: PostModifyDbProxyEndpointQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyDbProxyEndpointResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

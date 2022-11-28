@@ -1,5 +1,7 @@
 package shared
 
+// InventoryItemsListResponse
+// Inventory item List Response
 type InventoryItemsListResponse struct {
 	InventoryItems []InventoryItem `json:"inventoryItems,omitempty"`
 	Kind           *string         `json:"kind,omitempty"`

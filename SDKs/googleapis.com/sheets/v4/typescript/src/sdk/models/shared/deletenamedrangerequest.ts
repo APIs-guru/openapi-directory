@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteNamedRangeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Removes the named range with the given ID from the spreadsheet.
 **/
 export class DeleteNamedRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namedRangeId" })
+  @SpeakeasyMetadata({ data: "json, name=namedRangeId" })
   namedRangeId?: string;
 }

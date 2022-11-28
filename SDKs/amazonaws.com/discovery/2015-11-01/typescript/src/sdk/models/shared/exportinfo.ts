@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportStatusEnum } from "./exportstatusenum";
+
 
 
 // ExportInfo
@@ -7,27 +8,27 @@ import { ExportStatusEnum } from "./exportstatusenum";
  * Information regarding the export status of discovered data. The value is an array of objects.
 **/
 export class ExportInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationsDownloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=configurationsDownloadUrl" })
   configurationsDownloadUrl?: string;
 
-  @Metadata({ data: "json, name=exportId" })
+  @SpeakeasyMetadata({ data: "json, name=exportId" })
   exportId: string;
 
-  @Metadata({ data: "json, name=exportRequestTime" })
+  @SpeakeasyMetadata({ data: "json, name=exportRequestTime" })
   exportRequestTime: Date;
 
-  @Metadata({ data: "json, name=exportStatus" })
+  @SpeakeasyMetadata({ data: "json, name=exportStatus" })
   exportStatus: ExportStatusEnum;
 
-  @Metadata({ data: "json, name=isTruncated" })
+  @SpeakeasyMetadata({ data: "json, name=isTruncated" })
   isTruncated?: boolean;
 
-  @Metadata({ data: "json, name=requestedEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=requestedEndTime" })
   requestedEndTime?: Date;
 
-  @Metadata({ data: "json, name=requestedStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=requestedStartTime" })
   requestedStartTime?: Date;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage: string;
 }

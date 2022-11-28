@@ -27,9 +27,12 @@ from .api_models_passwordreset import *
 from .api_models_passwordresetrequest import *
 from .api_models_permission import *
 from .api_models_role import *
+from .api_models_rolepermissionchange import *
+from .api_models_roleuserchange import *
 from .api_models_tokenoptions import *
 from .api_models_user import *
 from .api_models_usereffectivepermission import *
+from .api_models_userrolechange import *
 from .api_pagedresponse_api_models_log_ import *
 from .api_pagedresponse_api_models_permission_ import *
 from .api_pagedresponse_api_models_role_ import *

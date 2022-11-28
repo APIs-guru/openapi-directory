@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionIntervalUnitValuesEnum } from "./retentionintervalunitvaluesenum";
+
 
 
 // FastRestoreRule
@@ -7,15 +8,15 @@ import { RetentionIntervalUnitValuesEnum } from "./retentionintervalunitvaluesen
  * Specifies a rule for enabling fast snapshot restore. You can enable fast snapshot restore based on either a count or a time interval.
 **/
 export class FastRestoreRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZones" })
   availabilityZones: string[];
 
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Interval" })
+  @SpeakeasyMetadata({ data: "json, name=Interval" })
   interval?: number;
 
-  @Metadata({ data: "json, name=IntervalUnit" })
+  @SpeakeasyMetadata({ data: "json, name=IntervalUnit" })
   intervalUnit?: RetentionIntervalUnitValuesEnum;
 }

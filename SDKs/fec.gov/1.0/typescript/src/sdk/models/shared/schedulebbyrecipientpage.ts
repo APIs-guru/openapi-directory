@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OffsetInfo } from "./offsetinfo";
 import { ScheduleBByRecipient } from "./schedulebbyrecipient";
 
 
+
 export class ScheduleBByRecipientPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: OffsetInfo;
 
-  @Metadata({ data: "json, name=results", elemType: shared.ScheduleBByRecipient })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: ScheduleBByRecipient })
   results?: ScheduleBByRecipient[];
 }

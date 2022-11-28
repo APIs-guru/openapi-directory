@@ -1,5 +1,7 @@
 package shared
 
+// SummarizedCounter
+// The counter that describes a DDoS attack.
 type SummarizedCounter struct {
 	Average *float64 `json:"Average,omitempty"`
 	Max     *float64 `json:"Max,omitempty"`

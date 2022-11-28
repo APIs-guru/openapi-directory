@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoOffset } from "./videooffset";
-import { VideoOffset } from "./videooffset";
+
 
 
 // SkippableSetting
@@ -8,15 +8,15 @@ import { VideoOffset } from "./videooffset";
  * Skippable Settings
 **/
 export class SkippableSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=progressOffset" })
+  @SpeakeasyMetadata({ data: "json, name=progressOffset" })
   progressOffset?: VideoOffset;
 
-  @Metadata({ data: "json, name=skipOffset" })
+  @SpeakeasyMetadata({ data: "json, name=skipOffset" })
   skipOffset?: VideoOffset;
 
-  @Metadata({ data: "json, name=skippable" })
+  @SpeakeasyMetadata({ data: "json, name=skippable" })
   skippable?: boolean;
 }

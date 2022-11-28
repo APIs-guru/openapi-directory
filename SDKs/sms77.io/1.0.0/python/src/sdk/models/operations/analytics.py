@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AnalyticsGroupByEnum(str, Enum):
     DATE = "date"
@@ -18,27 +23,27 @@ class AnalyticsQueryParams:
     subaccounts: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'subaccounts', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class AnalyticsRequest:
-    query_params: AnalyticsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class Analytics200ApplicationJSON:
-    date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
-    direct: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direct' }})
-    economy: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'economy' }})
-    hlr: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hlr' }})
-    inbound: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inbound' }})
-    mnp: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mnp' }})
-    usage_eur: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'usage_eur' }})
-    voice: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'voice' }})
+    date_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date') }})
+    direct: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('direct') }})
+    economy: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('economy') }})
+    hlr: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hlr') }})
+    inbound: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inbound') }})
+    mnp: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mnp') }})
+    usage_eur: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('usage_eur') }})
+    voice: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('voice') }})
+    
+
+@dataclass
+class AnalyticsRequest:
+    query_params: AnalyticsQueryParams = field()
     
 
 @dataclass
 class AnalyticsResponse:
+    content_type: str = field()
+    status_code: int = field()
     analytics_200_application_json_object: Optional[Analytics200ApplicationJSON] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

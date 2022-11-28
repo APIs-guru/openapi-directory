@@ -1,8 +1,9 @@
 
 
+
 export enum LocationRuleTypeEnum {
-    Allow = "allow"
-,    Disallow = "disallow"
-,    Disappeared = "disappeared"
-,    Debounce = "debounce"
+    Allow = "allow",
+    Disallow = "disallow",
+    Disappeared = "disappeared",
+    Debounce = "debounce"
 }

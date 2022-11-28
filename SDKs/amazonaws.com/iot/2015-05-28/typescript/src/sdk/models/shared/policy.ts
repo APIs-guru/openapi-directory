@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Policy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an IoT policy.
 **/
 export class Policy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyArn" })
+  @SpeakeasyMetadata({ data: "json, name=policyArn" })
   policyArn?: string;
 
-  @Metadata({ data: "json, name=policyName" })
+  @SpeakeasyMetadata({ data: "json, name=policyName" })
   policyName?: string;
 }

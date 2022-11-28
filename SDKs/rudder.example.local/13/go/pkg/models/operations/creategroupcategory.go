@@ -4,10 +4,6 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateGroupCategoryRequest struct {
-	Request shared.GroupCategory `request:"mediaType=application/json"`
-}
-
 type CreateGroupCategory200ApplicationJSONActionEnum string
 
 const (
@@ -29,6 +25,10 @@ type CreateGroupCategory200ApplicationJSON struct {
 	Action CreateGroupCategory200ApplicationJSONActionEnum `json:"action"`
 	Data   CreateGroupCategory200ApplicationJSONData       `json:"data"`
 	Result CreateGroupCategory200ApplicationJSONResultEnum `json:"result"`
+}
+
+type CreateGroupCategoryRequest struct {
+	Request shared.GroupCategory `request:"mediaType=application/json"`
 }
 
 type CreateGroupCategoryResponse struct {

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportfailure
+from sdk import utils
+from . import *
 
 class ReportStatusFormatEnum(str, Enum):
     CSV = "CSV"
@@ -17,8 +19,12 @@ class ReportStatusStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReportStatus:
-    failure: Optional[reportfailure.ReportFailure] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failure' }})
-    finish_time_ms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finishTimeMs' }})
-    format: Optional[ReportStatusFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    state: Optional[ReportStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""ReportStatus
+    Report status.
+    """
+    
+    failure: Optional[ReportFailure] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failure') }})
+    finish_time_ms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('finishTimeMs') }})
+    format: Optional[ReportStatusFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    state: Optional[ReportStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

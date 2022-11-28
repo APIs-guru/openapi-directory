@@ -10,7 +10,7 @@ type ExtrasTopologyMapsPartialUpdatePathParams struct {
 
 type ExtrasTopologyMapsPartialUpdateRequest struct {
 	PathParams ExtrasTopologyMapsPartialUpdatePathParams
-	Request    shared.WritableTopologyMap `request:"mediaType=application/json"`
+	Request    shared.WritableTopologyMapInput `request:"mediaType=application/json"`
 }
 
 type ExtrasTopologyMapsPartialUpdateResponse struct {

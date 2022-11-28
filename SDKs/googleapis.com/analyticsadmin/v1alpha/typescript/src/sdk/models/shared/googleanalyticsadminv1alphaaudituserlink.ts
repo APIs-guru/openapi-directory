@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaAuditUserLink
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Read-only resource used to summarize a principal's effective roles.
 **/
 export class GoogleAnalyticsAdminV1alphaAuditUserLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directRoles" })
+  @SpeakeasyMetadata({ data: "json, name=directRoles" })
   directRoles?: string[];
 
-  @Metadata({ data: "json, name=effectiveRoles" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveRoles" })
   effectiveRoles?: string[];
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

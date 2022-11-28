@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .accessibility import *
 from .account import *
 from .accountstate import *
@@ -31,7 +31,7 @@ from .chainurl import *
 from .completeverificationrequest import *
 from .completeverificationresponse import *
 from .connectivity import *
-from .date import *
+from .date_ import *
 from .dimensionalmetricvalue import *
 from .dimensions import *
 from .drivingdirectionmetricsrequest import *

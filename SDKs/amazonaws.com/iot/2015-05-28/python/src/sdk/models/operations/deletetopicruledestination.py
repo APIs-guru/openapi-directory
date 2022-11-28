@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteTopicRuleDestinationPathParams:
-    arn: str = field(default=None, metadata={'path_param': { 'field_name': 'arn', 'style': 'simple', 'explode': False }})
+    arn: str = field(metadata={'path_param': { 'field_name': 'arn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,18 +23,18 @@ class DeleteTopicRuleDestinationHeaders:
 
 @dataclass
 class DeleteTopicRuleDestinationRequest:
-    path_params: DeleteTopicRuleDestinationPathParams = field(default=None)
-    headers: DeleteTopicRuleDestinationHeaders = field(default=None)
+    headers: DeleteTopicRuleDestinationHeaders = field()
+    path_params: DeleteTopicRuleDestinationPathParams = field()
     
 
 @dataclass
 class DeleteTopicRuleDestinationResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_resource_update_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_topic_rule_destination_response: Optional[dict[str, Any]] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

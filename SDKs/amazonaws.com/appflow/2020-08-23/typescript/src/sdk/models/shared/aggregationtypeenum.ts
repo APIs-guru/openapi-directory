@@ -1,6 +1,7 @@
 
 
+
 export enum AggregationTypeEnum {
-    None = "None"
-,    SingleFile = "SingleFile"
+    None = "None",
+    SingleFile = "SingleFile"
 }

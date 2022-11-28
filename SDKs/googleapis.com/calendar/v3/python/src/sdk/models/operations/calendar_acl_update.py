@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CalendarACLUpdatePathParams:
-    calendar_id: str = field(default=None, metadata={'path_param': { 'field_name': 'calendarId', 'style': 'simple', 'explode': False }})
-    rule_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ruleId', 'style': 'simple', 'explode': False }})
+    calendar_id: str = field(metadata={'path_param': { 'field_name': 'calendarId', 'style': 'simple', 'explode': False }})
+    rule_id: str = field(metadata={'path_param': { 'field_name': 'ruleId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +27,21 @@ class CalendarACLUpdateQueryParams:
 
 @dataclass
 class CalendarACLUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CalendarACLUpdateRequest:
-    path_params: CalendarACLUpdatePathParams = field(default=None)
-    query_params: CalendarACLUpdateQueryParams = field(default=None)
+    path_params: CalendarACLUpdatePathParams = field()
+    query_params: CalendarACLUpdateQueryParams = field()
+    security: CalendarACLUpdateSecurity = field()
     request: Optional[shared.ACLRule] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CalendarACLUpdateSecurity = field(default=None)
     
 
 @dataclass
 class CalendarACLUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     acl_rule: Optional[shared.ACLRule] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

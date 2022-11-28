@@ -1,5 +1,7 @@
 package shared
 
+// Source
+// Dataflow details for the source side.
 type Source struct {
 	ConfigDetails        *ConfigDetails            `json:"configDetails,omitempty"`
 	ConfigID             *string                   `json:"configId,omitempty"`

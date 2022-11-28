@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCopyDbSnapshotActionEnum(str, Enum):
     COPY_DB_SNAPSHOT = "CopyDBSnapshot"
@@ -10,10 +14,10 @@ class GetCopyDbSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetCopyDbSnapshotQueryParams:
-    action: GetCopyDbSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    source_db_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceDBSnapshotIdentifier', 'style': 'form', 'explode': True }})
-    target_db_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'TargetDBSnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetCopyDbSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCopyDbSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    source_db_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SourceDBSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    target_db_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'TargetDBSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetCopyDbSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetCopyDbSnapshotHeaders:
 
 @dataclass
 class GetCopyDbSnapshotRequest:
-    query_params: GetCopyDbSnapshotQueryParams = field(default=None)
-    headers: GetCopyDbSnapshotHeaders = field(default=None)
+    headers: GetCopyDbSnapshotHeaders = field()
+    query_params: GetCopyDbSnapshotQueryParams = field()
     
 
 @dataclass
 class GetCopyDbSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -19,11 +19,15 @@ type UpdateStageHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateStageRequestBodyAccessLogSettings
+// Settings for logging access in a stage.
 type UpdateStageRequestBodyAccessLogSettings struct {
 	DestinationArn *string `json:"DestinationArn,omitempty"`
 	Format         *string `json:"Format,omitempty"`
 }
 
+// UpdateStageRequestBodyDefaultRouteSettings
+// Represents a collection of route settings.
 type UpdateStageRequestBodyDefaultRouteSettings struct {
 	DataTraceEnabled       *bool                    `json:"DataTraceEnabled,omitempty"`
 	DetailedMetricsEnabled *bool                    `json:"DetailedMetricsEnabled,omitempty"`

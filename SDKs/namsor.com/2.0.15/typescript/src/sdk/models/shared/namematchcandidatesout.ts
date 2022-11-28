@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NameMatchCandidateOut } from "./namematchcandidateout";
+
 
 
 // NameMatchCandidatesOut
@@ -8,21 +8,21 @@ import { NameMatchCandidateOut } from "./namematchcandidateout";
  * Classified matched names
 **/
 export class NameMatchCandidatesOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=matchCandidates", elemType: shared.NameMatchCandidateOut })
+  @SpeakeasyMetadata({ data: "json, name=matchCandidates", elemType: NameMatchCandidateOut })
   matchCandidates?: NameMatchCandidateOut[];
 
-  @Metadata({ data: "json, name=orderOption" })
+  @SpeakeasyMetadata({ data: "json, name=orderOption" })
   orderOption?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 }

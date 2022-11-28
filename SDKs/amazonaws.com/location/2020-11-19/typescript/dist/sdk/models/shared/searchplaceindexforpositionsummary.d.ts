@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A summary of the reverse geocoding request sent using <code>SearchPlaceIndexForPosition</code>.
 **/

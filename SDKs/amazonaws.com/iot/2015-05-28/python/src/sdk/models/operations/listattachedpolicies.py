@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListAttachedPoliciesPathParams:
-    target: str = field(default=None, metadata={'path_param': { 'field_name': 'target', 'style': 'simple', 'explode': False }})
+    target: str = field(metadata={'path_param': { 'field_name': 'target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +31,21 @@ class ListAttachedPoliciesHeaders:
 
 @dataclass
 class ListAttachedPoliciesRequest:
-    path_params: ListAttachedPoliciesPathParams = field(default=None)
-    query_params: ListAttachedPoliciesQueryParams = field(default=None)
-    headers: ListAttachedPoliciesHeaders = field(default=None)
+    headers: ListAttachedPoliciesHeaders = field()
+    path_params: ListAttachedPoliciesPathParams = field()
+    query_params: ListAttachedPoliciesQueryParams = field()
     
 
 @dataclass
 class ListAttachedPoliciesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     list_attached_policies_response: Optional[shared.ListAttachedPoliciesResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

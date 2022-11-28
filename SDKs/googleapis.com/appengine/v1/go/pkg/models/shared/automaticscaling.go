@@ -1,5 +1,7 @@
 package shared
 
+// AutomaticScaling
+// Automatic scaling is based on request rate, response latencies, and other application metrics.
 type AutomaticScaling struct {
 	CoolDownPeriod            *string                    `json:"coolDownPeriod,omitempty"`
 	CPUUtilization            *CPUUtilization            `json:"cpuUtilization,omitempty"`

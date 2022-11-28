@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldReference } from "./fieldreference";
+
 
 
 // Projection
@@ -8,6 +8,6 @@ import { FieldReference } from "./fieldreference";
  * The projection of document's fields to return.
 **/
 export class Projection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.FieldReference })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: FieldReference })
   fields?: FieldReference[];
 }

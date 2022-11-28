@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deploymentcontrollertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeploymentController:
-    type: deploymentcontrollertype_enum.DeploymentControllerTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""DeploymentController
+    The deployment controller to use for the service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.
+    """
+    
+    type: DeploymentControllerTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

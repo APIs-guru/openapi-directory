@@ -31,7 +31,7 @@ type DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineSecurity struct {
 type DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineRequest struct {
 	PathParams  DataprocProjectsRegionsWorkflowTemplatesInstantiateInlinePathParams
 	QueryParams DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineQueryParams
-	Request     *shared.WorkflowTemplate `request:"mediaType=application/json"`
+	Request     *shared.WorkflowTemplateInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineSecurity
 }
 

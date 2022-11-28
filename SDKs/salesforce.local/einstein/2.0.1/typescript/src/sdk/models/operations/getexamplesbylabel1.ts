@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetExamplesByLabel1QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=labelId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=labelId" })
   labelId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 }
 
 
 export class GetExamplesByLabel1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class GetExamplesByLabel1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetExamplesByLabel1QueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetExamplesByLabel1Security;
 }
 
 
 export class GetExamplesByLabel1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   exampleList?: shared.ExampleList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

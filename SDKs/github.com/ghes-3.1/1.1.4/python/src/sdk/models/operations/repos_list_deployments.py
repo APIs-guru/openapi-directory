@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ReposListDeploymentsPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +21,14 @@ class ReposListDeploymentsQueryParams:
 
 @dataclass
 class ReposListDeploymentsRequest:
-    path_params: ReposListDeploymentsPathParams = field(default=None)
-    query_params: ReposListDeploymentsQueryParams = field(default=None)
+    path_params: ReposListDeploymentsPathParams = field()
+    query_params: ReposListDeploymentsQueryParams = field()
     
 
 @dataclass
 class ReposListDeploymentsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     deployments: Optional[List[shared.Deployment]] = field(default=None)
     

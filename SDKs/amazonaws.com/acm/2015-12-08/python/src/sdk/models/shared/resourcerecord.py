@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import recordtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceRecord:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    type: recordtype_enum.RecordTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""ResourceRecord
+    Contains a DNS record value that you can use to validate ownership or control of a domain. This is used by the <a>DescribeCertificate</a> action. 
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    type: RecordTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

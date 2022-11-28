@@ -31,7 +31,7 @@ type BaremetalsolutionProjectsLocationsVolumesPatchSecurity struct {
 type BaremetalsolutionProjectsLocationsVolumesPatchRequest struct {
 	PathParams  BaremetalsolutionProjectsLocationsVolumesPatchPathParams
 	QueryParams BaremetalsolutionProjectsLocationsVolumesPatchQueryParams
-	Request     *shared.Volume `request:"mediaType=application/json"`
+	Request     *shared.VolumeInput `request:"mediaType=application/json"`
 	Security    BaremetalsolutionProjectsLocationsVolumesPatchSecurity
 }
 

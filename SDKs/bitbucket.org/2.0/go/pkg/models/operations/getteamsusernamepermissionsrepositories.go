@@ -13,22 +13,10 @@ type GetTeamsUsernamePermissionsRepositoriesQueryParams struct {
 	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetTeamsUsernamePermissionsRepositoriesSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetTeamsUsernamePermissionsRepositoriesSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetTeamsUsernamePermissionsRepositoriesSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetTeamsUsernamePermissionsRepositoriesSecurity struct {
-	Option1 *GetTeamsUsernamePermissionsRepositoriesSecurityOption1 `security:"option"`
-	Option2 *GetTeamsUsernamePermissionsRepositoriesSecurityOption2 `security:"option"`
-	Option3 *GetTeamsUsernamePermissionsRepositoriesSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetTeamsUsernamePermissionsRepositoriesRequest struct {

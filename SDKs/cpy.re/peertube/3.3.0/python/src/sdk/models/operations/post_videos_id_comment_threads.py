@@ -1,34 +1,36 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass
 class PostVideosIDCommentThreadsPathParams:
-    id: Any = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: Any = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class PostVideosIDCommentThreadsRequestBody:
-    text: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    text: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
     
 
 @dataclass
 class PostVideosIDCommentThreadsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PostVideosIDCommentThreadsRequest:
-    path_params: PostVideosIDCommentThreadsPathParams = field(default=None)
+    path_params: PostVideosIDCommentThreadsPathParams = field()
+    security: PostVideosIDCommentThreadsSecurity = field()
     request: Optional[PostVideosIDCommentThreadsRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostVideosIDCommentThreadsSecurity = field(default=None)
     
 
 @dataclass
 class PostVideosIDCommentThreadsResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment_thread_post_response: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

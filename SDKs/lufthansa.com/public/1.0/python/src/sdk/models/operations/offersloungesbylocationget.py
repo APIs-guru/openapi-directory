@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class OffersLoungesByLocationGetPathParams:
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,25 +17,25 @@ class OffersLoungesByLocationGetQueryParams:
 
 @dataclass
 class OffersLoungesByLocationGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class OffersLoungesByLocationGetSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OffersLoungesByLocationGetRequest:
-    path_params: OffersLoungesByLocationGetPathParams = field(default=None)
-    query_params: OffersLoungesByLocationGetQueryParams = field(default=None)
-    headers: OffersLoungesByLocationGetHeaders = field(default=None)
-    security: OffersLoungesByLocationGetSecurity = field(default=None)
+    headers: OffersLoungesByLocationGetHeaders = field()
+    path_params: OffersLoungesByLocationGetPathParams = field()
+    query_params: OffersLoungesByLocationGetQueryParams = field()
+    security: OffersLoungesByLocationGetSecurity = field()
     
 
 @dataclass
 class OffersLoungesByLocationGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     offers_lounges_by_location_get_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

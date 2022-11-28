@@ -1,5 +1,7 @@
 package shared
 
+// Put
+// Represents a request to perform a <code>PutItem</code> operation.
 type Put struct {
 	ConditionExpression                 *string                                  `json:"ConditionExpression,omitempty"`
 	ExpressionAttributeNames            map[string]string                        `json:"ExpressionAttributeNames,omitempty"`

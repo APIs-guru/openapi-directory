@@ -9,6 +9,8 @@ const (
 	DeployJobRunFailureCauseEnumDeadlineExceeded        DeployJobRunFailureCauseEnum = "DEADLINE_EXCEEDED"
 )
 
+// DeployJobRun
+// DeployJobRun contains information specific to a deploy `JobRun`.
 type DeployJobRun struct {
 	Build          *string                       `json:"build,omitempty"`
 	FailureCause   *DeployJobRunFailureCauseEnum `json:"failureCause,omitempty"`

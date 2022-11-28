@@ -1,5 +1,8 @@
 package shared
 
+// Product
+//
+//	Required product attributes are primarily defined by the products data specification. See the Products Data Specification Help Center article for information. Product data. After inserting, updating, or deleting a product, it may take several minutes before changes take effect.
 type Product struct {
 	AdditionalImageLinks         []string                       `json:"additionalImageLinks,omitempty"`
 	AdditionalSizeType           *string                        `json:"additionalSizeType,omitempty"`

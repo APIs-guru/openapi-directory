@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SandboxBankAccountInfo
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * General account information
 **/
 export class SandboxBankAccountInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountSubType" })
+  @SpeakeasyMetadata({ data: "json, name=accountSubType" })
   accountSubType: string;
 
-  @Metadata({ data: "json, name=accountType" })
+  @SpeakeasyMetadata({ data: "json, name=accountType" })
   accountType: string;
 
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=availableBalance" })
+  @SpeakeasyMetadata({ data: "json, name=availableBalance" })
   availableBalance?: number;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban: string;
 
-  @Metadata({ data: "json, name=ledgerBalance" })
+  @SpeakeasyMetadata({ data: "json, name=ledgerBalance" })
   ledgerBalance?: number;
 
-  @Metadata({ data: "json, name=openingDate" })
+  @SpeakeasyMetadata({ data: "json, name=openingDate" })
   openingDate?: Date;
 
-  @Metadata({ data: "json, name=overdraftLimit" })
+  @SpeakeasyMetadata({ data: "json, name=overdraftLimit" })
   overdraftLimit?: number;
 }

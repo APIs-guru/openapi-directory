@@ -21,10 +21,6 @@ type GetQueryParams struct {
 	Hypermedia  *GetHypermediaEnum  `queryParam:"style=form,explode=true,name=hypermedia"`
 }
 
-type GetRequest struct {
-	QueryParams GetQueryParams
-}
-
 type Get200ApplicationJSONStatusEnum string
 
 const (
@@ -33,6 +29,10 @@ const (
 
 type Get200ApplicationJSON struct {
 	Status *Get200ApplicationJSONStatusEnum `json:"status,omitempty"`
+}
+
+type GetRequest struct {
+	QueryParams GetQueryParams
 }
 
 type GetResponse struct {

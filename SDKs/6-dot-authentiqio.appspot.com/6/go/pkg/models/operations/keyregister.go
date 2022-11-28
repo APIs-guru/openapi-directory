@@ -1,12 +1,12 @@
 package operations
 
-type KeyRegisterRequest struct {
-	Request []byte `request:"mediaType=application/jwt"`
-}
-
 type KeyRegister201ApplicationJSON struct {
 	Secret *string `json:"secret,omitempty"`
 	Status *string `json:"status,omitempty"`
+}
+
+type KeyRegisterRequest struct {
+	Request []byte `request:"mediaType=application/jwt"`
 }
 
 type KeyRegisterResponse struct {

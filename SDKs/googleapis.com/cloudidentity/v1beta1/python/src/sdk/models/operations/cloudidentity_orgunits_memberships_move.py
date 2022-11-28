@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityOrgUnitsMembershipsMovePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudidentityOrgUnitsMembershipsMoveQueryParams:
 
 @dataclass
 class CloudidentityOrgUnitsMembershipsMoveRequest:
-    path_params: CloudidentityOrgUnitsMembershipsMovePathParams = field(default=None)
-    query_params: CloudidentityOrgUnitsMembershipsMoveQueryParams = field(default=None)
+    path_params: CloudidentityOrgUnitsMembershipsMovePathParams = field()
+    query_params: CloudidentityOrgUnitsMembershipsMoveQueryParams = field()
     request: Optional[shared.MoveOrgMembershipRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudidentityOrgUnitsMembershipsMoveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsLocationsOperationsCancelPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudbuildProjectsLocationsOperationsCancelQueryParams:
 
 @dataclass
 class CloudbuildProjectsLocationsOperationsCancelSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsLocationsOperationsCancelRequest:
-    path_params: CloudbuildProjectsLocationsOperationsCancelPathParams = field(default=None)
-    query_params: CloudbuildProjectsLocationsOperationsCancelQueryParams = field(default=None)
+    path_params: CloudbuildProjectsLocationsOperationsCancelPathParams = field()
+    query_params: CloudbuildProjectsLocationsOperationsCancelQueryParams = field()
+    security: CloudbuildProjectsLocationsOperationsCancelSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudbuildProjectsLocationsOperationsCancelSecurity = field(default=None)
     
 
 @dataclass
 class CloudbuildProjectsLocationsOperationsCancelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

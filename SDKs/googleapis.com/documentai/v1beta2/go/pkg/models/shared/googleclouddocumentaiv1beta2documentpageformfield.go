@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta2DocumentPageFormField
+// A form field detected on the page.
 type GoogleCloudDocumentaiV1beta2DocumentPageFormField struct {
 	CorrectedKeyText       *string                                                    `json:"correctedKeyText,omitempty"`
 	CorrectedValueText     *string                                                    `json:"correctedValueText,omitempty"`

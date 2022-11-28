@@ -1,5 +1,7 @@
 package shared
 
+// AddSubnetworkRequest
+// Request to create a subnetwork in a previously peered service network.
 type AddSubnetworkRequest struct {
 	CheckServiceNetworkingUsePermission *bool                  `json:"checkServiceNetworkingUsePermission,omitempty"`
 	ComputeIdempotencyWindow            *string                `json:"computeIdempotencyWindow,omitempty"`

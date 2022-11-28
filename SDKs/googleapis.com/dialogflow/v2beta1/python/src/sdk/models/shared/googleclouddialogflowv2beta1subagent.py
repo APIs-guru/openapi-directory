@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2beta1SubAgent:
-    environment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    project: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'project' }})
+    r"""GoogleCloudDialogflowV2beta1SubAgent
+    Contains basic configuration for a sub-agent.
+    """
+    
+    environment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    project: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('project') }})
     

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapacityDescription } from "./capacitydescription";
 import { ConnectorStateEnum } from "./connectorstateenum";
 import { KafkaClusterDescription } from "./kafkaclusterdescription";
 import { KafkaClusterClientAuthenticationDescription } from "./kafkaclusterclientauthenticationdescription";
 import { KafkaClusterEncryptionInTransitDescription } from "./kafkaclusterencryptionintransitdescription";
 import { LogDeliveryDescription } from "./logdeliverydescription";
+import { PluginDescription } from "./plugindescription";
 import { WorkerConfigurationDescription } from "./workerconfigurationdescription";
 // ConnectorSummary
 /**
@@ -41,63 +41,63 @@ var ConnectorSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacity" }),
+        SpeakeasyMetadata({ data: "json, name=capacity" }),
         __metadata("design:type", CapacityDescription)
     ], ConnectorSummary.prototype, "capacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=connectorArn" }),
         __metadata("design:type", String)
     ], ConnectorSummary.prototype, "connectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=connectorDescription" }),
         __metadata("design:type", String)
     ], ConnectorSummary.prototype, "connectorDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorName" }),
+        SpeakeasyMetadata({ data: "json, name=connectorName" }),
         __metadata("design:type", String)
     ], ConnectorSummary.prototype, "connectorName", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorState" }),
+        SpeakeasyMetadata({ data: "json, name=connectorState" }),
         __metadata("design:type", String)
     ], ConnectorSummary.prototype, "connectorState", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], ConnectorSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=currentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=currentVersion" }),
         __metadata("design:type", String)
     ], ConnectorSummary.prototype, "currentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaCluster" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaCluster" }),
         __metadata("design:type", KafkaClusterDescription)
     ], ConnectorSummary.prototype, "kafkaCluster", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaClusterClientAuthentication" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaClusterClientAuthentication" }),
         __metadata("design:type", KafkaClusterClientAuthenticationDescription)
     ], ConnectorSummary.prototype, "kafkaClusterClientAuthentication", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaClusterEncryptionInTransit" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaClusterEncryptionInTransit" }),
         __metadata("design:type", KafkaClusterEncryptionInTransitDescription)
     ], ConnectorSummary.prototype, "kafkaClusterEncryptionInTransit", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaConnectVersion" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaConnectVersion" }),
         __metadata("design:type", String)
     ], ConnectorSummary.prototype, "kafkaConnectVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=logDelivery" }),
+        SpeakeasyMetadata({ data: "json, name=logDelivery" }),
         __metadata("design:type", LogDeliveryDescription)
     ], ConnectorSummary.prototype, "logDelivery", void 0);
     __decorate([
-        Metadata({ data: "json, name=plugins", elemType: shared.PluginDescription }),
+        SpeakeasyMetadata({ data: "json, name=plugins", elemType: PluginDescription }),
         __metadata("design:type", Array)
     ], ConnectorSummary.prototype, "plugins", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceExecutionRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=serviceExecutionRoleArn" }),
         __metadata("design:type", String)
     ], ConnectorSummary.prototype, "serviceExecutionRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=workerConfiguration" }),
         __metadata("design:type", WorkerConfigurationDescription)
     ], ConnectorSummary.prototype, "workerConfiguration", void 0);
     return ConnectorSummary;

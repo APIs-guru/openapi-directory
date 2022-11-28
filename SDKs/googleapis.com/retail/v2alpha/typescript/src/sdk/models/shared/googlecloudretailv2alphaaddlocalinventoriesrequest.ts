@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaLocalInventory } from "./googlecloudretailv2alphalocalinventory";
+
 
 
 // GoogleCloudRetailV2alphaAddLocalInventoriesRequest
@@ -8,15 +8,15 @@ import { GoogleCloudRetailV2alphaLocalInventory } from "./googlecloudretailv2alp
  * Request message for ProductService.AddLocalInventories method.
 **/
 export class GoogleCloudRetailV2alphaAddLocalInventoriesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addMask" })
+  @SpeakeasyMetadata({ data: "json, name=addMask" })
   addMask?: string;
 
-  @Metadata({ data: "json, name=addTime" })
+  @SpeakeasyMetadata({ data: "json, name=addTime" })
   addTime?: string;
 
-  @Metadata({ data: "json, name=allowMissing" })
+  @SpeakeasyMetadata({ data: "json, name=allowMissing" })
   allowMissing?: boolean;
 
-  @Metadata({ data: "json, name=localInventories", elemType: shared.GoogleCloudRetailV2alphaLocalInventory })
+  @SpeakeasyMetadata({ data: "json, name=localInventories", elemType: GoogleCloudRetailV2alphaLocalInventory })
   localInventories?: GoogleCloudRetailV2alphaLocalInventory[];
 }

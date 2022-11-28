@@ -1,5 +1,7 @@
 package shared
 
+// UserResponse
+// The type that defines the fields for the getUser method.
 type UserResponse struct {
 	AccountType               *string            `json:"accountType,omitempty"`
 	BusinessAccount           *BusinessAccount   `json:"businessAccount,omitempty"`

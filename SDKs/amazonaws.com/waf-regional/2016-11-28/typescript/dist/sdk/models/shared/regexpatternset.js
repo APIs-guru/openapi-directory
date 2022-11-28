@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RegexPatternSet
 /**
  * <note> <p>This is <b>AWS WAF Classic</b> documentation. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p> <p> <b>For the latest version of AWS WAF</b>, use the AWS WAFV2 API and see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. With the latest version, AWS WAF has a single set of endpoints for regional and global use. </p> </note> <p>The <code>RegexPatternSet</code> specifies the regular expression (regex) pattern that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.</p>
@@ -33,15 +33,15 @@ var RegexPatternSet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], RegexPatternSet.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegexPatternSetId" }),
+        SpeakeasyMetadata({ data: "json, name=RegexPatternSetId" }),
         __metadata("design:type", String)
     ], RegexPatternSet.prototype, "regexPatternSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegexPatternStrings" }),
+        SpeakeasyMetadata({ data: "json, name=RegexPatternStrings" }),
         __metadata("design:type", Array)
     ], RegexPatternSet.prototype, "regexPatternStrings", void 0);
     return RegexPatternSet;

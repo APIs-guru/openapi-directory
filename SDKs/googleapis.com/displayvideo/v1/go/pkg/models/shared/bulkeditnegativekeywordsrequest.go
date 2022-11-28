@@ -1,6 +1,8 @@
 package shared
 
-type BulkEditNegativeKeywordsRequest struct {
-	CreatedNegativeKeywords []NegativeKeyword `json:"createdNegativeKeywords,omitempty"`
-	DeletedNegativeKeywords []string          `json:"deletedNegativeKeywords,omitempty"`
+// BulkEditNegativeKeywordsRequestInput
+// Request message for NegativeKeywordService.BulkEditNegativeKeywords.
+type BulkEditNegativeKeywordsRequestInput struct {
+	CreatedNegativeKeywords []NegativeKeywordInput `json:"createdNegativeKeywords,omitempty"`
+	DeletedNegativeKeywords []string               `json:"deletedNegativeKeywords,omitempty"`
 }

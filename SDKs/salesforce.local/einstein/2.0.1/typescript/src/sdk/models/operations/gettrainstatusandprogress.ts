@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTrainStatusAndProgressPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
   modelId: string;
 }
 
 
 export class GetTrainStatusAndProgressSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class GetTrainStatusAndProgressRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTrainStatusAndProgressPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTrainStatusAndProgressSecurity;
 }
 
 
 export class GetTrainStatusAndProgressResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trainResponse?: shared.TrainResponse;
 }

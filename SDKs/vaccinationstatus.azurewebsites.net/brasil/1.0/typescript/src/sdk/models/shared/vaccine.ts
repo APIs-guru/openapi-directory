@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Vaccine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dose" })
+  @SpeakeasyMetadata({ data: "json, name=dose" })
   dose?: string;
 
-  @Metadata({ data: "json, name=identityType" })
+  @SpeakeasyMetadata({ data: "json, name=identityType" })
   identityType?: string;
 
-  @Metadata({ data: "json, name=identityValue" })
+  @SpeakeasyMetadata({ data: "json, name=identityValue" })
   identityValue?: string;
 
-  @Metadata({ data: "json, name=vaccinatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=vaccinatedBy" })
   vaccinatedBy?: string;
 
-  @Metadata({ data: "json, name=vaccinationDate" })
+  @SpeakeasyMetadata({ data: "json, name=vaccinationDate" })
   vaccinationDate?: string;
 
-  @Metadata({ data: "json, name=vaccinationPlace" })
+  @SpeakeasyMetadata({ data: "json, name=vaccinationPlace" })
   vaccinationPlace?: string;
 
-  @Metadata({ data: "json, name=vaccinationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=vaccinationStatus" })
   vaccinationStatus?: string;
 
-  @Metadata({ data: "json, name=vaccineName" })
+  @SpeakeasyMetadata({ data: "json, name=vaccineName" })
   vaccineName?: string;
 }

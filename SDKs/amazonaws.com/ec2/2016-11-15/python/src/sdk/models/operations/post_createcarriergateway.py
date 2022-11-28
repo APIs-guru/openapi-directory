@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateCarrierGatewayActionEnum(str, Enum):
     CREATE_CARRIER_GATEWAY = "CreateCarrierGateway"
@@ -10,8 +14,8 @@ class PostCreateCarrierGatewayVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateCarrierGatewayQueryParams:
-    action: PostCreateCarrierGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateCarrierGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateCarrierGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateCarrierGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateCarrierGatewayHeaders:
 
 @dataclass
 class PostCreateCarrierGatewayRequest:
-    query_params: PostCreateCarrierGatewayQueryParams = field(default=None)
-    headers: PostCreateCarrierGatewayHeaders = field(default=None)
+    headers: PostCreateCarrierGatewayHeaders = field()
+    query_params: PostCreateCarrierGatewayQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateCarrierGatewayResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

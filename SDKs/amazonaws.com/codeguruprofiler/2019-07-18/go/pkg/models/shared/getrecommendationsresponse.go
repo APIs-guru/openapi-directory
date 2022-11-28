@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetRecommendationsResponse
+// The structure representing the GetRecommendationsResponse.
 type GetRecommendationsResponse struct {
 	Anomalies          []Anomaly        `json:"anomalies"`
 	ProfileEndTime     time.Time        `json:"profileEndTime"`

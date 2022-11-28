@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Range } from "./range";
+
 
 
 // CreateNamedRangeRequest
@@ -7,9 +8,9 @@ import { Range } from "./range";
  * Creates a NamedRange referencing the given range.
 **/
 export class CreateNamedRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: Range;
 }

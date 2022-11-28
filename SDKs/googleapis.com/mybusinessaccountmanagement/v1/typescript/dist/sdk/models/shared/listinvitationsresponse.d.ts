@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Invitation } from "./invitation";
 /**
  * Response message for AccessControl.ListInvitations.

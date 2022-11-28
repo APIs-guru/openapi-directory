@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateAccountAliasActionEnum(str, Enum):
     CREATE_ACCOUNT_ALIAS = "CreateAccountAlias"
@@ -10,8 +14,8 @@ class PostCreateAccountAliasVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateAccountAliasQueryParams:
-    action: PostCreateAccountAliasActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateAccountAliasVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateAccountAliasActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateAccountAliasVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateAccountAliasHeaders:
 
 @dataclass
 class PostCreateAccountAliasRequest:
-    query_params: PostCreateAccountAliasQueryParams = field(default=None)
-    headers: PostCreateAccountAliasHeaders = field(default=None)
+    headers: PostCreateAccountAliasHeaders = field()
+    query_params: PostCreateAccountAliasQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateAccountAliasResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsPathParams extends SpeakeasyBase {
     attachmentId: string;
@@ -8,15 +8,9 @@ export declare class GetV4LayersScoutingObservationsScoutingObservationIdAttachm
     accept: string;
     range: string;
 }
-export declare class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsSecurityOption2 extends SpeakeasyBase {
-    oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
 export declare class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsSecurity extends SpeakeasyBase {
-    option1?: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsSecurityOption1;
-    option2?: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsSecurityOption2;
+    apiKey?: shared.SchemeApiKey;
+    oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 export declare class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsRequest extends SpeakeasyBase {
     pathParams: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsAttachmentIdContentsPathParams;

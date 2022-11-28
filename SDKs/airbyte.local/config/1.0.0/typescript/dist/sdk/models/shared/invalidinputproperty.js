@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var InvalidInputProperty = /** @class */ (function (_super) {
     __extends(InvalidInputProperty, _super);
     function InvalidInputProperty() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=invalidValue" }),
+        SpeakeasyMetadata({ data: "json, name=invalidValue" }),
         __metadata("design:type", String)
     ], InvalidInputProperty.prototype, "invalidValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], InvalidInputProperty.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=propertyPath" }),
+        SpeakeasyMetadata({ data: "json, name=propertyPath" }),
         __metadata("design:type", String)
     ], InvalidInputProperty.prototype, "propertyPath", void 0);
     return InvalidInputProperty;

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribePipelinePathParams:
-    pipeline_name: str = field(default=None, metadata={'path_param': { 'field_name': 'pipelineName', 'style': 'simple', 'explode': False }})
+    pipeline_name: str = field(metadata={'path_param': { 'field_name': 'pipelineName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DescribePipelineHeaders:
 
 @dataclass
 class DescribePipelineRequest:
-    path_params: DescribePipelinePathParams = field(default=None)
-    headers: DescribePipelineHeaders = field(default=None)
+    headers: DescribePipelineHeaders = field()
+    path_params: DescribePipelinePathParams = field()
     
 
 @dataclass
 class DescribePipelineResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_pipeline_response: Optional[shared.DescribePipelineResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum AccessControlRuleEffectEnum {
-    Allow = "ALLOW"
-,    Deny = "DENY"
+    Allow = "ALLOW",
+    Deny = "DENY"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ProcessorIdentityGetRequest
+// ProcessorIdentityGetRequest defines the request schema for `/processor/identity/get`
 type ProcessorIdentityGetRequest struct {
 	ClientID       *string `json:"client_id,omitempty"`
 	ProcessorToken string  `json:"processor_token"`

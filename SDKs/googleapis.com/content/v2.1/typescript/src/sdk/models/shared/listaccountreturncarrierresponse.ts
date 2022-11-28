@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountReturnCarrier } from "./accountreturncarrier";
+
 
 
 // ListAccountReturnCarrierResponse
@@ -8,6 +8,6 @@ import { AccountReturnCarrier } from "./accountreturncarrier";
  * Response for listing account return carriers.
 **/
 export class ListAccountReturnCarrierResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountReturnCarriers", elemType: shared.AccountReturnCarrier })
+  @SpeakeasyMetadata({ data: "json, name=accountReturnCarriers", elemType: AccountReturnCarrier })
   accountReturnCarriers?: AccountReturnCarrier[];
 }

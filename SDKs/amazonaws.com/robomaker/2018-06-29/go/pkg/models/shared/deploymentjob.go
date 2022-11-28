@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeploymentJob
+// Information about a deployment job.
 type DeploymentJob struct {
 	Arn                          *string                       `json:"arn,omitempty"`
 	CreatedAt                    *time.Time                    `json:"createdAt,omitempty"`

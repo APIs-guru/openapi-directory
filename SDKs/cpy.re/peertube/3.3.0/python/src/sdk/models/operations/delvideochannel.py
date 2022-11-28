@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DelVideoChannelPathParams:
-    channel_handle: str = field(default=None, metadata={'path_param': { 'field_name': 'channelHandle', 'style': 'simple', 'explode': False }})
+    channel_handle: str = field(metadata={'path_param': { 'field_name': 'channelHandle', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DelVideoChannelSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DelVideoChannelRequest:
-    path_params: DelVideoChannelPathParams = field(default=None)
-    security: DelVideoChannelSecurity = field(default=None)
+    path_params: DelVideoChannelPathParams = field()
+    security: DelVideoChannelSecurity = field()
     
 
 @dataclass
 class DelVideoChannelResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

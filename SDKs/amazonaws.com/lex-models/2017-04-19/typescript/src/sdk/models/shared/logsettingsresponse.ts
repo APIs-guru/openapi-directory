@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationEnum } from "./destinationenum";
 import { LogTypeEnum } from "./logtypeenum";
+
 
 
 // LogSettingsResponse
@@ -8,18 +9,18 @@ import { LogTypeEnum } from "./logtypeenum";
  * The settings for conversation logs.
 **/
 export class LogSettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: DestinationEnum;
 
-  @Metadata({ data: "json, name=kmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyArn" })
   kmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=logType" })
+  @SpeakeasyMetadata({ data: "json, name=logType" })
   logType?: LogTypeEnum;
 
-  @Metadata({ data: "json, name=resourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArn" })
   resourceArn?: string;
 
-  @Metadata({ data: "json, name=resourcePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=resourcePrefix" })
   resourcePrefix?: string;
 }

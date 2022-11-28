@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaConfigurationRequest } from "./replicaconfigurationrequest";
 import { ShardConfigurationRequest } from "./shardconfigurationrequest";
 var UpdateClusterRequest = /** @class */ (function (_super) {
@@ -31,59 +31,59 @@ var UpdateClusterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ACLName" }),
+        SpeakeasyMetadata({ data: "json, name=ACLName" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "aclName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterName" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterName" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=MaintenanceWindow" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "maintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeType" }),
+        SpeakeasyMetadata({ data: "json, name=NodeType" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "nodeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupName" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "parameterGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicaConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicaConfiguration" }),
         __metadata("design:type", ReplicaConfigurationRequest)
     ], UpdateClusterRequest.prototype, "replicaConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], UpdateClusterRequest.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShardConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=ShardConfiguration" }),
         __metadata("design:type", ShardConfigurationRequest)
     ], UpdateClusterRequest.prototype, "shardConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnapshotRetentionLimit" }),
+        SpeakeasyMetadata({ data: "json, name=SnapshotRetentionLimit" }),
         __metadata("design:type", Number)
     ], UpdateClusterRequest.prototype, "snapshotRetentionLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnapshotWindow" }),
+        SpeakeasyMetadata({ data: "json, name=SnapshotWindow" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "snapshotWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=SnsTopicArn" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "snsTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsTopicStatus" }),
+        SpeakeasyMetadata({ data: "json, name=SnsTopicStatus" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "snsTopicStatus", void 0);
     return UpdateClusterRequest;

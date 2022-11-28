@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AvailabilityZone
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Availability Zone.
 **/
 export class AvailabilityZone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=ZoneName" })
+  @SpeakeasyMetadata({ data: "json, name=ZoneName" })
   zoneName?: string;
 }

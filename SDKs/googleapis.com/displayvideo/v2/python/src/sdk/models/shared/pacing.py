@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PacingPacingPeriodEnum(str, Enum):
     PACING_PERIOD_UNSPECIFIED = "PACING_PERIOD_UNSPECIFIED"
@@ -17,8 +19,12 @@ class PacingPacingTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Pacing:
-    daily_max_impressions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dailyMaxImpressions' }})
-    daily_max_micros: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dailyMaxMicros' }})
-    pacing_period: Optional[PacingPacingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pacingPeriod' }})
-    pacing_type: Optional[PacingPacingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pacingType' }})
+    r"""Pacing
+    Settings that control the rate at which a budget is spent.
+    """
+    
+    daily_max_impressions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dailyMaxImpressions') }})
+    daily_max_micros: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dailyMaxMicros') }})
+    pacing_period: Optional[PacingPacingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pacingPeriod') }})
+    pacing_type: Optional[PacingPacingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pacingType') }})
     

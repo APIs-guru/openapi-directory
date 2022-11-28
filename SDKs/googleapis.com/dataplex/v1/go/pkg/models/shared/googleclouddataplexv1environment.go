@@ -10,6 +10,8 @@ const (
 	GoogleCloudDataplexV1EnvironmentStateEnumActionRequired   GoogleCloudDataplexV1EnvironmentStateEnum = "ACTION_REQUIRED"
 )
 
+// GoogleCloudDataplexV1Environment
+// Environment represents a user-visible compute infrastructure for analytics within a lake.
 type GoogleCloudDataplexV1Environment struct {
 	CreateTime         *string                                             `json:"createTime,omitempty"`
 	Description        *string                                             `json:"description,omitempty"`
@@ -23,4 +25,14 @@ type GoogleCloudDataplexV1Environment struct {
 	State              *GoogleCloudDataplexV1EnvironmentStateEnum          `json:"state,omitempty"`
 	UID                *string                                             `json:"uid,omitempty"`
 	UpdateTime         *string                                             `json:"updateTime,omitempty"`
+}
+
+// GoogleCloudDataplexV1EnvironmentInput
+// Environment represents a user-visible compute infrastructure for analytics within a lake.
+type GoogleCloudDataplexV1EnvironmentInput struct {
+	Description        *string                                             `json:"description,omitempty"`
+	DisplayName        *string                                             `json:"displayName,omitempty"`
+	InfrastructureSpec *GoogleCloudDataplexV1EnvironmentInfrastructureSpec `json:"infrastructureSpec,omitempty"`
+	Labels             map[string]string                                   `json:"labels,omitempty"`
+	SessionSpec        *GoogleCloudDataplexV1EnvironmentSessionSpec        `json:"sessionSpec,omitempty"`
 }

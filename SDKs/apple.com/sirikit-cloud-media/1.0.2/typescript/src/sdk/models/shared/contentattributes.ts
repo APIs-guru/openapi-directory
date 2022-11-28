@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContentAttributesArtwork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class ContentAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=albumName" })
+  @SpeakeasyMetadata({ data: "json, name=albumName" })
   albumName?: string;
 
-  @Metadata({ data: "json, name=artistName" })
+  @SpeakeasyMetadata({ data: "json, name=artistName" })
   artistName?: string;
 
-  @Metadata({ data: "json, name=artwork" })
+  @SpeakeasyMetadata({ data: "json, name=artwork" })
   artwork?: ContentAttributesArtwork;
 
-  @Metadata({ data: "json, name=composerName" })
+  @SpeakeasyMetadata({ data: "json, name=composerName" })
   composerName?: string;
 
-  @Metadata({ data: "json, name=durationInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=durationInMillis" })
   durationInMillis?: number;
 
-  @Metadata({ data: "json, name=genreNames" })
+  @SpeakeasyMetadata({ data: "json, name=genreNames" })
   genreNames?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=trackNumber" })
+  @SpeakeasyMetadata({ data: "json, name=trackNumber" })
   trackNumber?: number;
 }

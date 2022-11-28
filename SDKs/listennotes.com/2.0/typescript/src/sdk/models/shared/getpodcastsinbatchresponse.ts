@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EpisodeSimple } from "./episodesimple";
 import { PodcastSimple } from "./podcastsimple";
 
 
+
 export class GetPodcastsInBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latest_episodes", elemType: shared.EpisodeSimple })
+  @SpeakeasyMetadata({ data: "json, name=latest_episodes", elemType: EpisodeSimple })
   latestEpisodes?: EpisodeSimple[];
 
-  @Metadata({ data: "json, name=podcasts", elemType: shared.PodcastSimple })
+  @SpeakeasyMetadata({ data: "json, name=podcasts", elemType: PodcastSimple })
   podcasts: PodcastSimple[];
 }

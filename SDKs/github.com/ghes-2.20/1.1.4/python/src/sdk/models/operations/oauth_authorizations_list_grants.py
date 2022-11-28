@@ -12,14 +12,14 @@ class OauthAuthorizationsListGrantsQueryParams:
 
 @dataclass
 class OauthAuthorizationsListGrantsRequest:
-    query_params: OauthAuthorizationsListGrantsQueryParams = field(default=None)
+    query_params: OauthAuthorizationsListGrantsQueryParams = field()
     
 
 @dataclass
 class OauthAuthorizationsListGrantsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     application_grants: Optional[List[shared.ApplicationGrant]] = field(default=None)
     basic_error: Optional[shared.BasicError] = field(default=None)
     

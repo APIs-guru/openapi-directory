@@ -15,12 +15,12 @@ type GetTimePeriodsQueryParams struct {
 	Workspace string     `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetTimePeriodsRequest struct {
-	QueryParams GetTimePeriodsQueryParams
-}
-
 type GetTimePeriods200ApplicationJSON struct {
 	Data []shared.TimePeriodCompact `json:"data,omitempty"`
+}
+
+type GetTimePeriodsRequest struct {
+	QueryParams GetTimePeriodsQueryParams
 }
 
 type GetTimePeriodsResponse struct {

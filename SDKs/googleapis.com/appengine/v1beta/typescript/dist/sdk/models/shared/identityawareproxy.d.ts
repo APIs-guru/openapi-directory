@@ -1,4 +1,12 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
+/**
+ * Identity-Aware Proxy
+**/
+export declare class IdentityAwareProxyInput extends SpeakeasyBase {
+    enabled?: boolean;
+    oauth2ClientId?: string;
+    oauth2ClientSecret?: string;
+}
 /**
  * Identity-Aware Proxy
 **/

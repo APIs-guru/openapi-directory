@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegistryCreateArtifactPathParams = /** @class */ (function (_super) {
     __extends(RegistryCreateArtifactPathParams, _super);
     function RegistryCreateArtifactPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" }),
         __metadata("design:type", String)
     ], RegistryCreateArtifactPathParams.prototype, "project", void 0);
     return RegistryCreateArtifactPathParams;
@@ -41,7 +41,7 @@ var RegistryCreateArtifactQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=artifact_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=artifact_id" }),
         __metadata("design:type", String)
     ], RegistryCreateArtifactQueryParams.prototype, "artifactId", void 0);
     return RegistryCreateArtifactQueryParams;
@@ -53,15 +53,15 @@ var RegistryCreateArtifactRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryCreateArtifactPathParams)
     ], RegistryCreateArtifactRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryCreateArtifactQueryParams)
     ], RegistryCreateArtifactRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], RegistryCreateArtifactRequest.prototype, "request", void 0);
     return RegistryCreateArtifactRequest;
@@ -73,15 +73,15 @@ var RegistryCreateArtifactResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RegistryCreateArtifactResponse.prototype, "artifact", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegistryCreateArtifactResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegistryCreateArtifactResponse.prototype, "statusCode", void 0);
     return RegistryCreateArtifactResponse;

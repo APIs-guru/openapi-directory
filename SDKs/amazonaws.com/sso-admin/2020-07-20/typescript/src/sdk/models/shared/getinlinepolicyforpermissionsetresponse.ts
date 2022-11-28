@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetInlinePolicyForPermissionSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InlinePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=InlinePolicy" })
   inlinePolicy?: string;
 }

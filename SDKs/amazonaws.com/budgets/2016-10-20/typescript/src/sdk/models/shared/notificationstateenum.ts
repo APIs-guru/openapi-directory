@@ -1,6 +1,7 @@
 
 
+
 export enum NotificationStateEnum {
-    Ok = "OK"
-,    Alarm = "ALARM"
+    Ok = "OK",
+    Alarm = "ALARM"
 }

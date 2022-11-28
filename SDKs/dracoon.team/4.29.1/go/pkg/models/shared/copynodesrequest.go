@@ -8,6 +8,8 @@ const (
 	CopyNodesRequestResolutionStrategyEnumFail       CopyNodesRequestResolutionStrategyEnum = "fail"
 )
 
+// CopyNodesRequest
+// Request model for copying nodes
 type CopyNodesRequest struct {
 	Items              []CopyNode                              `json:"items,omitempty"`
 	KeepShareLinks     *bool                                   `json:"keepShareLinks,omitempty"`

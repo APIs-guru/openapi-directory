@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartyVerifyPasswordRequest
+// Request to verify the password.
 type IdentitytoolkitRelyingpartyVerifyPasswordRequest struct {
 	CaptchaChallenge       *string `json:"captchaChallenge,omitempty"`
 	CaptchaResponse        *string `json:"captchaResponse,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InfrastructureConfigurationSummary
 /**
  * The infrastructure used when building Amazon EC2 AMIs.
@@ -33,39 +33,39 @@ var InfrastructureConfigurationSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], InfrastructureConfigurationSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=dateCreated" }),
         __metadata("design:type", String)
     ], InfrastructureConfigurationSummary.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=dateUpdated" }),
         __metadata("design:type", String)
     ], InfrastructureConfigurationSummary.prototype, "dateUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], InfrastructureConfigurationSummary.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceProfileName" }),
+        SpeakeasyMetadata({ data: "json, name=instanceProfileName" }),
         __metadata("design:type", String)
     ], InfrastructureConfigurationSummary.prototype, "instanceProfileName", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceTypes" }),
+        SpeakeasyMetadata({ data: "json, name=instanceTypes" }),
         __metadata("design:type", Array)
     ], InfrastructureConfigurationSummary.prototype, "instanceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], InfrastructureConfigurationSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceTags" }),
+        SpeakeasyMetadata({ data: "json, name=resourceTags" }),
         __metadata("design:type", Map)
     ], InfrastructureConfigurationSummary.prototype, "resourceTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], InfrastructureConfigurationSummary.prototype, "tags", void 0);
     return InfrastructureConfigurationSummary;

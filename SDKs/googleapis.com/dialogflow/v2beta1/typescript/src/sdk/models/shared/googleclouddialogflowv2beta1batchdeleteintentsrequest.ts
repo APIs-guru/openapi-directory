@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudDialogflowV2beta1Intent } from "./googleclouddialogflowv2beta1intent";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDialogflowV2beta1IntentInput } from "./googleclouddialogflowv2beta1intent";
 
 
-// GoogleCloudDialogflowV2beta1BatchDeleteIntentsRequest
+
+// GoogleCloudDialogflowV2beta1BatchDeleteIntentsRequestInput
 /** 
  * The request message for Intents.BatchDeleteIntents.
 **/
-export class GoogleCloudDialogflowV2beta1BatchDeleteIntentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intents", elemType: shared.GoogleCloudDialogflowV2beta1Intent })
-  intents?: GoogleCloudDialogflowV2beta1Intent[];
+export class GoogleCloudDialogflowV2beta1BatchDeleteIntentsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=intents", elemType: GoogleCloudDialogflowV2beta1IntentInput })
+  intents?: GoogleCloudDialogflowV2beta1IntentInput[];
 }

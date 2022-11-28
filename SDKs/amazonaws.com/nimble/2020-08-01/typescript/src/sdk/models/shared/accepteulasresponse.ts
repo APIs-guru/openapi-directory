@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EulaAcceptance } from "./eulaacceptance";
 
 
+
 export class AcceptEulasResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eulaAcceptances", elemType: shared.EulaAcceptance })
+  @SpeakeasyMetadata({ data: "json, name=eulaAcceptances", elemType: EulaAcceptance })
   eulaAcceptances?: EulaAcceptance[];
 }

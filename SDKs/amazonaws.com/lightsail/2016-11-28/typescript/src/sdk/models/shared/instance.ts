@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddOn } from "./addon";
 import { InstanceHardware } from "./instancehardware";
 import { IpAddressTypeEnum } from "./ipaddresstypeenum";
@@ -10,71 +9,72 @@ import { InstanceState } from "./instancestate";
 import { Tag } from "./tag";
 
 
+
 // Instance
 /** 
  * Describes an instance (a virtual private server).
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addOns", elemType: shared.AddOn })
+  @SpeakeasyMetadata({ data: "json, name=addOns", elemType: AddOn })
   addOns?: AddOn[];
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=blueprintId" })
+  @SpeakeasyMetadata({ data: "json, name=blueprintId" })
   blueprintId?: string;
 
-  @Metadata({ data: "json, name=blueprintName" })
+  @SpeakeasyMetadata({ data: "json, name=blueprintName" })
   blueprintName?: string;
 
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=hardware" })
+  @SpeakeasyMetadata({ data: "json, name=hardware" })
   hardware?: InstanceHardware;
 
-  @Metadata({ data: "json, name=ipAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddressType" })
   ipAddressType?: IpAddressTypeEnum;
 
-  @Metadata({ data: "json, name=ipv6Addresses" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6Addresses" })
   ipv6Addresses?: string[];
 
-  @Metadata({ data: "json, name=isStaticIp" })
+  @SpeakeasyMetadata({ data: "json, name=isStaticIp" })
   isStaticIp?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ResourceLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networking" })
+  @SpeakeasyMetadata({ data: "json, name=networking" })
   networking?: InstanceNetworking;
 
-  @Metadata({ data: "json, name=privateIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=privateIpAddress" })
   privateIpAddress?: string;
 
-  @Metadata({ data: "json, name=publicIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=publicIpAddress" })
   publicIpAddress?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=sshKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=sshKeyName" })
   sshKeyName?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InstanceState;
 
-  @Metadata({ data: "json, name=supportCode" })
+  @SpeakeasyMetadata({ data: "json, name=supportCode" })
   supportCode?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

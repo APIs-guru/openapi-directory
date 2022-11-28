@@ -9,6 +9,8 @@ const (
 	GoogleAnalyticsAdminV1alphaChangeHistoryEventActorTypeEnumSupport              GoogleAnalyticsAdminV1alphaChangeHistoryEventActorTypeEnum = "SUPPORT"
 )
 
+// GoogleAnalyticsAdminV1alphaChangeHistoryEvent
+// A set of changes within a Google Analytics account or its child properties that resulted from the same cause. Common causes would be updates made in the Google Analytics UI, changes from customer support, or automatic Google Analytics system changes.
 type GoogleAnalyticsAdminV1alphaChangeHistoryEvent struct {
 	ActorType       *GoogleAnalyticsAdminV1alphaChangeHistoryEventActorTypeEnum `json:"actorType,omitempty"`
 	ChangeTime      *string                                                     `json:"changeTime,omitempty"`

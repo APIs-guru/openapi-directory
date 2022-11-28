@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 import { EventBatchingCondition } from "./eventbatchingcondition";
 import { Predicate } from "./predicate";
 import { TriggerTypeEnum } from "./triggertypeenum";
 
 
+
 export class CreateTriggerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=Actions", elemType: Action })
   actions: Action[];
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EventBatchingCondition" })
+  @SpeakeasyMetadata({ data: "json, name=EventBatchingCondition" })
   eventBatchingCondition?: EventBatchingCondition;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Predicate" })
+  @SpeakeasyMetadata({ data: "json, name=Predicate" })
   predicate?: Predicate;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: string;
 
-  @Metadata({ data: "json, name=StartOnCreation" })
+  @SpeakeasyMetadata({ data: "json, name=StartOnCreation" })
   startOnCreation?: boolean;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: TriggerTypeEnum;
 
-  @Metadata({ data: "json, name=WorkflowName" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowName" })
   workflowName?: string;
 }

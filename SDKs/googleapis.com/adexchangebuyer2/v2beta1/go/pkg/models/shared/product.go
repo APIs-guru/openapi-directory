@@ -10,6 +10,8 @@ const (
 	ProductSyndicationProductEnumGames                         ProductSyndicationProductEnum = "GAMES"
 )
 
+// Product
+// A product is a segment of inventory that a seller wants to sell. It is associated with certain terms and targeting information which helps the buyer know more about the inventory.
 type Product struct {
 	AvailableEndTime    *string                        `json:"availableEndTime,omitempty"`
 	AvailableStartTime  *string                        `json:"availableStartTime,omitempty"`

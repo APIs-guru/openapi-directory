@@ -1,5 +1,7 @@
 package shared
 
+// SoftwareRecipeArtifact
+// Specifies a resource to be used in the recipe.
 type SoftwareRecipeArtifact struct {
 	AllowInsecure *bool                         `json:"allowInsecure,omitempty"`
 	Gcs           *SoftwareRecipeArtifactGcs    `json:"gcs,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProactiveAnomalySummary
+// Details about a proactive anomaly. This object is returned by <code>DescribeAnomaly.</code>
 type ProactiveAnomalySummary struct {
 	AnomalyReportedTimeRange *AnomalyReportedTimeRange `json:"AnomalyReportedTimeRange,omitempty"`
 	AnomalyTimeRange         *AnomalyTimeRange         `json:"AnomalyTimeRange,omitempty"`

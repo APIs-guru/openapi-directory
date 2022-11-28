@@ -1,6 +1,7 @@
 
 
+
 export enum BlueprintTypeEnum {
-    Os = "os"
-,    App = "app"
+    Os = "os",
+    App = "app"
 }

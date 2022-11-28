@@ -16,12 +16,6 @@ type GetCSSTemplateRelatedColumnNameSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetCSSTemplateRelatedColumnNameRequest struct {
-	PathParams  GetCSSTemplateRelatedColumnNamePathParams
-	QueryParams GetCSSTemplateRelatedColumnNameQueryParams
-	Security    GetCSSTemplateRelatedColumnNameSecurity
-}
-
 type GetCSSTemplateRelatedColumnName400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -36,6 +30,12 @@ type GetCSSTemplateRelatedColumnName404ApplicationJSON struct {
 
 type GetCSSTemplateRelatedColumnName500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetCSSTemplateRelatedColumnNameRequest struct {
+	PathParams  GetCSSTemplateRelatedColumnNamePathParams
+	QueryParams GetCSSTemplateRelatedColumnNameQueryParams
+	Security    GetCSSTemplateRelatedColumnNameSecurity
 }
 
 type GetCSSTemplateRelatedColumnNameResponse struct {

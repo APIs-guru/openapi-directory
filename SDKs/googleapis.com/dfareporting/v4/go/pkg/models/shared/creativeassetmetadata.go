@@ -102,6 +102,8 @@ const (
 	CreativeAssetMetadataWarnedValidationRulesEnumMissingEnablerReference     CreativeAssetMetadataWarnedValidationRulesEnum = "MISSING_ENABLER_REFERENCE"
 )
 
+// CreativeAssetMetadata
+// CreativeAssets contains properties of a creative asset file which will be uploaded or has already been uploaded. Refer to the creative sample code for how to upload assets and insert a creative.
 type CreativeAssetMetadata struct {
 	AssetIdentifier       *CreativeAssetID                                 `json:"assetIdentifier,omitempty"`
 	ClickTags             []ClickTag                                       `json:"clickTags,omitempty"`

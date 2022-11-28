@@ -9,22 +9,10 @@ type GetUserPermissionsRepositoriesQueryParams struct {
 	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetUserPermissionsRepositoriesSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetUserPermissionsRepositoriesSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetUserPermissionsRepositoriesSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetUserPermissionsRepositoriesSecurity struct {
-	Option1 *GetUserPermissionsRepositoriesSecurityOption1 `security:"option"`
-	Option2 *GetUserPermissionsRepositoriesSecurityOption2 `security:"option"`
-	Option3 *GetUserPermissionsRepositoriesSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetUserPermissionsRepositoriesRequest struct {

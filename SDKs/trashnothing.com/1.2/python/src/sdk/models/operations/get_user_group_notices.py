@@ -10,12 +10,12 @@ class GetUserGroupNoticesQueryParams:
 
 @dataclass
 class GetUserGroupNoticesRequest:
-    query_params: GetUserGroupNoticesQueryParams = field(default=None)
+    query_params: GetUserGroupNoticesQueryParams = field()
     
 
 @dataclass
 class GetUserGroupNoticesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_notices: Optional[List[shared.GroupNotice]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ProvisioningIssueReasonEnum {
     ReasonUnspecified = "REASON_UNSPECIFIED",
     AuthorizationIssue = "AUTHORIZATION_ISSUE",

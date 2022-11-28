@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +10,12 @@ class RetrieveNeoFeedTodayQueryParams:
 
 @dataclass
 class RetrieveNeoFeedTodayRequest:
-    query_params: RetrieveNeoFeedTodayQueryParams = field(default=None)
+    query_params: RetrieveNeoFeedTodayQueryParams = field()
     
 
 @dataclass
 class RetrieveNeoFeedTodayResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     near_earth_object_list: Optional[shared.NearEarthObjectList] = field(default=None)
-    status_code: int = field(default=None)
     

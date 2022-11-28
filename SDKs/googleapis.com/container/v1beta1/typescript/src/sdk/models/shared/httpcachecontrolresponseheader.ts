@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpCacheControlResponseHeader
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RFC-2616: cache control support
 **/
 export class HttpCacheControlResponseHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=age" })
+  @SpeakeasyMetadata({ data: "json, name=age" })
   age?: string;
 
-  @Metadata({ data: "json, name=directive" })
+  @SpeakeasyMetadata({ data: "json, name=directive" })
   directive?: string;
 
-  @Metadata({ data: "json, name=expires" })
+  @SpeakeasyMetadata({ data: "json, name=expires" })
   expires?: string;
 }

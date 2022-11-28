@@ -10,6 +10,8 @@ const (
 	GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponseAccessEnumUnknownInfoDenied      GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponseAccessEnum = "UNKNOWN_INFO_DENIED"
 )
 
+// GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponse
+// Response for TroubleshootIamPolicy.
 type GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponse struct {
 	Access            *GoogleCloudPolicytroubleshooterV1TroubleshootIamPolicyResponseAccessEnum `json:"access,omitempty"`
 	Errors            []GoogleRPCStatus                                                         `json:"errors,omitempty"`

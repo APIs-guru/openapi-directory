@@ -1,10 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetWorkspaceQueryParams extends SpeakeasyBase {
     workspaceId: string;
-}
-export declare class GetWorkspaceRequest extends SpeakeasyBase {
-    queryParams: GetWorkspaceQueryParams;
 }
 export declare class GetWorkspace200ApplicationJson extends SpeakeasyBase {
     response?: shared.Workspace;
@@ -54,6 +51,9 @@ export declare class GetWorkspace422ApplicationJson extends SpeakeasyBase {
 export declare class GetWorkspace500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class GetWorkspaceRequest extends SpeakeasyBase {
+    queryParams: GetWorkspaceQueryParams;
 }
 export declare class GetWorkspaceResponse extends SpeakeasyBase {
     contentType: string;

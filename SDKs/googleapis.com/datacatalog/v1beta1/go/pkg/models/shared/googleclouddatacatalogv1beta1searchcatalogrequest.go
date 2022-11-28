@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatacatalogV1beta1SearchCatalogRequest
+// Request message for SearchCatalog.
 type GoogleCloudDatacatalogV1beta1SearchCatalogRequest struct {
 	OrderBy   *string                                                 `json:"orderBy,omitempty"`
 	PageSize  *int32                                                  `json:"pageSize,omitempty"`

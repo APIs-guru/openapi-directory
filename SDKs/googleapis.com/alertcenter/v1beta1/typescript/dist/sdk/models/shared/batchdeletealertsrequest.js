@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BatchDeleteAlertsRequest
 /**
  * A request to perform batch delete on alerts.
@@ -33,11 +33,11 @@ var BatchDeleteAlertsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alertId" }),
+        SpeakeasyMetadata({ data: "json, name=alertId" }),
         __metadata("design:type", Array)
     ], BatchDeleteAlertsRequest.prototype, "alertId", void 0);
     __decorate([
-        Metadata({ data: "json, name=customerId" }),
+        SpeakeasyMetadata({ data: "json, name=customerId" }),
         __metadata("design:type", String)
     ], BatchDeleteAlertsRequest.prototype, "customerId", void 0);
     return BatchDeleteAlertsRequest;

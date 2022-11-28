@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPendingParticipantsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetPendingParticipantsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
   numberOfResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchPointer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchPointer" })
   searchPointer?: string;
 }
 
 
 export class GetPendingParticipantsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetPendingParticipantsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPendingParticipantsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPendingParticipantsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPendingParticipantsSecurity;
 }
 
 
 export class GetPendingParticipantsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   participantsSearchResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Progress
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Estimated fractional progress for each step, from `0` to `1`.
 **/
 export class Progress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzed" })
+  @SpeakeasyMetadata({ data: "json, name=analyzed" })
   analyzed?: number;
 
-  @Metadata({ data: "json, name=encoded" })
+  @SpeakeasyMetadata({ data: "json, name=encoded" })
   encoded?: number;
 
-  @Metadata({ data: "json, name=notified" })
+  @SpeakeasyMetadata({ data: "json, name=notified" })
   notified?: number;
 
-  @Metadata({ data: "json, name=uploaded" })
+  @SpeakeasyMetadata({ data: "json, name=uploaded" })
   uploaded?: number;
 }

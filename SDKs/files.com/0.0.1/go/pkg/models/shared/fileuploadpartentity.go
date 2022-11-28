@@ -1,5 +1,7 @@
 package shared
 
+// FileUploadPartEntity
+// Begin file upload
 type FileUploadPartEntity struct {
 	Action             *string                `json:"action,omitempty"`
 	AskAboutOverwrites *bool                  `json:"ask_about_overwrites,omitempty"`

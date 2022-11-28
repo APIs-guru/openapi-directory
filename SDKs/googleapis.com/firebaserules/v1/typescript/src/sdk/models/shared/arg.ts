@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Arg
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Arg matchers for the mock function.
 **/
 export class Arg extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anyValue" })
+  @SpeakeasyMetadata({ data: "json, name=anyValue" })
   anyValue?: Map<string, any>;
 
-  @Metadata({ data: "json, name=exactValue" })
+  @SpeakeasyMetadata({ data: "json, name=exactValue" })
   exactValue?: any;
 }

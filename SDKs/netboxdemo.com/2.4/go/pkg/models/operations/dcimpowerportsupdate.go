@@ -10,7 +10,7 @@ type DcimPowerPortsUpdatePathParams struct {
 
 type DcimPowerPortsUpdateRequest struct {
 	PathParams DcimPowerPortsUpdatePathParams
-	Request    shared.WritablePowerPort `request:"mediaType=application/json"`
+	Request    shared.WritablePowerPortInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerPortsUpdateResponse struct {

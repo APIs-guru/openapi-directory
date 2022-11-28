@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogTargetConfiguration } from "./logtargetconfiguration";
 
 
+
 export class ListV2LoggingLevelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logTargetConfigurations", elemType: shared.LogTargetConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=logTargetConfigurations", elemType: LogTargetConfiguration })
   logTargetConfigurations?: LogTargetConfiguration[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

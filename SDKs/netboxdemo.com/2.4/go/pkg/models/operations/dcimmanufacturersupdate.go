@@ -10,7 +10,7 @@ type DcimManufacturersUpdatePathParams struct {
 
 type DcimManufacturersUpdateRequest struct {
 	PathParams DcimManufacturersUpdatePathParams
-	Request    shared.Manufacturer `request:"mediaType=application/json"`
+	Request    shared.ManufacturerInput `request:"mediaType=application/json"`
 }
 
 type DcimManufacturersUpdateResponse struct {

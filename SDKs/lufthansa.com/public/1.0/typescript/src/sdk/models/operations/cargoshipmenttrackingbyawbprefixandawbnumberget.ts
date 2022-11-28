@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=aWBNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aWBNumber" })
   aWbNumber: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=aWBPrefix" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aWBPrefix" })
   aWbPrefix: string;
 }
 
 
 export class CargoShipmentTrackingByAwbPrefixAndAwbNumberGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 }
 
 
 export class CargoShipmentTrackingByAwbPrefixAndAwbNumberGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   auth: shared.SchemeAuth;
 }
 
 
 export class CargoShipmentTrackingByAwbPrefixAndAwbNumberGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CargoShipmentTrackingByAwbPrefixAndAwbNumberGetHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CargoShipmentTrackingByAwbPrefixAndAwbNumberGetSecurity;
 }
 
 
 export class CargoShipmentTrackingByAwbPrefixAndAwbNumberGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   cargoShipmentTrackingByAwbPrefixAndAwbNumberGet200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

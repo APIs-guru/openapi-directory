@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metadata
-from . import digitalsignaturemethod_enum
-from . import entitlementdata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CheckoutBorrowLicenseRequest:
-    checkout_metadata: Optional[List[metadata.Metadata]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CheckoutMetadata' }})
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    digital_signature_method: digitalsignaturemethod_enum.DigitalSignatureMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DigitalSignatureMethod' }})
-    entitlements: List[entitlementdata.EntitlementData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Entitlements' }})
-    license_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseArn' }})
-    node_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NodeId' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    digital_signature_method: DigitalSignatureMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DigitalSignatureMethod') }})
+    entitlements: List[EntitlementData] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Entitlements') }})
+    license_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseArn') }})
+    checkout_metadata: Optional[List[Metadata]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CheckoutMetadata') }})
+    node_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NodeId') }})
     

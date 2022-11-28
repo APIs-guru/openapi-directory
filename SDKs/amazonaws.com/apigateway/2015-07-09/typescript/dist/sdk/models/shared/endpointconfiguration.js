@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EndpointConfiguration
 /**
  * The endpoint configuration to indicate the types of endpoints an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>) has.
@@ -33,11 +33,11 @@ var EndpointConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=types" }),
+        SpeakeasyMetadata({ data: "json, name=types" }),
         __metadata("design:type", Array)
     ], EndpointConfiguration.prototype, "types", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcEndpointIds" }),
+        SpeakeasyMetadata({ data: "json, name=vpcEndpointIds" }),
         __metadata("design:type", Array)
     ], EndpointConfiguration.prototype, "vpcEndpointIds", void 0);
     return EndpointConfiguration;

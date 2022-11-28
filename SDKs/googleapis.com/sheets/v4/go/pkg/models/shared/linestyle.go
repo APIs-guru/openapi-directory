@@ -14,6 +14,8 @@ const (
 	LineStyleTypeEnumLongDashedDotted        LineStyleTypeEnum = "LONG_DASHED_DOTTED"
 )
 
+// LineStyle
+// Properties that describe the style of a line.
 type LineStyle struct {
 	Type  *LineStyleTypeEnum `json:"type,omitempty"`
 	Width *int32             `json:"width,omitempty"`

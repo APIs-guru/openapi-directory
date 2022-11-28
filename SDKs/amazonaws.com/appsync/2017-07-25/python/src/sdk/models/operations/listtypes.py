@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListTypesPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 class ListTypesFormatEnum(str, Enum):
     SDL = "SDL"
@@ -14,7 +18,7 @@ class ListTypesFormatEnum(str, Enum):
 
 @dataclass
 class ListTypesQueryParams:
-    format: ListTypesFormatEnum = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
+    format: ListTypesFormatEnum = field(metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
     
@@ -32,19 +36,19 @@ class ListTypesHeaders:
 
 @dataclass
 class ListTypesRequest:
-    path_params: ListTypesPathParams = field(default=None)
-    query_params: ListTypesQueryParams = field(default=None)
-    headers: ListTypesHeaders = field(default=None)
+    headers: ListTypesHeaders = field()
+    path_params: ListTypesPathParams = field()
+    query_params: ListTypesQueryParams = field()
     
 
 @dataclass
 class ListTypesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     list_types_response: Optional[shared.ListTypesResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import gluedatacatalogconfigurationdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CatalogConfigurationDescription:
-    glue_data_catalog_configuration_description: gluedatacatalogconfigurationdescription.GlueDataCatalogConfigurationDescription = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GlueDataCatalogConfigurationDescription' }})
+    r"""CatalogConfigurationDescription
+    The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
+    """
+    
+    glue_data_catalog_configuration_description: GlueDataCatalogConfigurationDescription = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GlueDataCatalogConfigurationDescription') }})
     

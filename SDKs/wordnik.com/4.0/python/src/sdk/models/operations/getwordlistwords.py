@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetWordListWordsPathParams:
-    permalink: str = field(default=None, metadata={'path_param': { 'field_name': 'permalink', 'style': 'simple', 'explode': False }})
+    permalink: str = field(metadata={'path_param': { 'field_name': 'permalink', 'style': 'simple', 'explode': False }})
     
 class GetWordListWordsSortByEnum(str, Enum):
     CREATE_DATE = "createDate"
@@ -21,19 +22,19 @@ class GetWordListWordsQueryParams:
 
 @dataclass
 class GetWordListWordsHeaders:
-    auth_token: str = field(default=None, metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
+    auth_token: str = field(metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWordListWordsRequest:
-    path_params: GetWordListWordsPathParams = field(default=None)
-    query_params: GetWordListWordsQueryParams = field(default=None)
-    headers: GetWordListWordsHeaders = field(default=None)
+    headers: GetWordListWordsHeaders = field()
+    path_params: GetWordListWordsPathParams = field()
+    query_params: GetWordListWordsQueryParams = field()
     
 
 @dataclass
 class GetWordListWordsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

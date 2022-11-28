@@ -10,6 +10,8 @@ const (
 	DeviceRegistryLogLevelEnumDebug               DeviceRegistryLogLevelEnum = "DEBUG"
 )
 
+// DeviceRegistry
+// A container for a group of devices.
 type DeviceRegistry struct {
 	Credentials              []RegistryCredential        `json:"credentials,omitempty"`
 	EventNotificationConfigs []EventNotificationConfig   `json:"eventNotificationConfigs,omitempty"`

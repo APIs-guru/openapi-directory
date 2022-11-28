@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DisruptionsGetDisruptionByIDPathParams:
-    disruption_id: int = field(default=None, metadata={'path_param': { 'field_name': 'disruption_id', 'style': 'simple', 'explode': False }})
+    disruption_id: int = field(metadata={'path_param': { 'field_name': 'disruption_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,15 +17,15 @@ class DisruptionsGetDisruptionByIDQueryParams:
 
 @dataclass
 class DisruptionsGetDisruptionByIDRequest:
-    path_params: DisruptionsGetDisruptionByIDPathParams = field(default=None)
-    query_params: DisruptionsGetDisruptionByIDQueryParams = field(default=None)
+    path_params: DisruptionsGetDisruptionByIDPathParams = field()
+    query_params: DisruptionsGetDisruptionByIDQueryParams = field()
     
 
 @dataclass
 class DisruptionsGetDisruptionByIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_disruption_response: Optional[shared.V3DisruptionResponse] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     

@@ -5,7 +5,7 @@ import (
 )
 
 type IpamAggregatesCreateRequest struct {
-	Request shared.WritableAggregate `request:"mediaType=application/json"`
+	Request shared.WritableAggregateInput `request:"mediaType=application/json"`
 }
 
 type IpamAggregatesCreateResponse struct {

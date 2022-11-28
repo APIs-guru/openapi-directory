@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pollingoptions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AsyncOptions:
-    method_match: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'methodMatch' }})
-    polling_options: Optional[pollingoptions.PollingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pollingOptions' }})
+    r"""AsyncOptions
+    Async options that determine when a resource should finish.
+    """
+    
+    method_match: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('methodMatch') }})
+    polling_options: Optional[PollingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pollingOptions') }})
     

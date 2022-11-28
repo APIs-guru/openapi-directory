@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NfsExportOptions } from "./nfsexportoptions";
 export var ShareStateEnum;
 (function (ShareStateEnum) {
     ShareStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -41,37 +41,69 @@ var Share = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacityGb" }),
+        SpeakeasyMetadata({ data: "json, name=capacityGb" }),
         __metadata("design:type", String)
     ], Share.prototype, "capacityGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Share.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Share.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Share.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=mountName" }),
+        SpeakeasyMetadata({ data: "json, name=mountName" }),
         __metadata("design:type", String)
     ], Share.prototype, "mountName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Share.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nfsExportOptions", elemType: shared.NfsExportOptions }),
+        SpeakeasyMetadata({ data: "json, name=nfsExportOptions", elemType: NfsExportOptions }),
         __metadata("design:type", Array)
     ], Share.prototype, "nfsExportOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Share.prototype, "state", void 0);
     return Share;
 }(SpeakeasyBase));
 export { Share };
+// ShareInput
+/**
+ * A Filestore share.
+**/
+var ShareInput = /** @class */ (function (_super) {
+    __extends(ShareInput, _super);
+    function ShareInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=capacityGb" }),
+        __metadata("design:type", String)
+    ], ShareInput.prototype, "capacityGb", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ShareInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], ShareInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=mountName" }),
+        __metadata("design:type", String)
+    ], ShareInput.prototype, "mountName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=nfsExportOptions", elemType: NfsExportOptions }),
+        __metadata("design:type", Array)
+    ], ShareInput.prototype, "nfsExportOptions", void 0);
+    return ShareInput;
+}(SpeakeasyBase));
+export { ShareInput };

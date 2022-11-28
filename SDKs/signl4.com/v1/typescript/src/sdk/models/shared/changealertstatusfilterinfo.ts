@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChangeAlertStatusFilterInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryIds" })
+  @SpeakeasyMetadata({ data: "json, name=categoryIds" })
   categoryIds?: string[];
 
-  @Metadata({ data: "json, name=maxDate" })
+  @SpeakeasyMetadata({ data: "json, name=maxDate" })
   maxDate?: Date;
 
-  @Metadata({ data: "json, name=minDate" })
+  @SpeakeasyMetadata({ data: "json, name=minDate" })
   minDate?: Date;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: number;
 
-  @Metadata({ data: "json, name=teamIds" })
+  @SpeakeasyMetadata({ data: "json, name=teamIds" })
   teamIds?: string[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// SearchTargetingOptionsRequest
+// Request message for SearchTargetingOptions.
 type SearchTargetingOptionsRequest struct {
 	AdvertiserID             *string                   `json:"advertiserId,omitempty"`
 	BusinessChainSearchTerms *BusinessChainSearchTerms `json:"businessChainSearchTerms,omitempty"`

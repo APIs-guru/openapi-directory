@@ -30,7 +30,7 @@ type IapProjectsBrandsCreateSecurity struct {
 type IapProjectsBrandsCreateRequest struct {
 	PathParams  IapProjectsBrandsCreatePathParams
 	QueryParams IapProjectsBrandsCreateQueryParams
-	Request     *shared.Brand `request:"mediaType=application/json"`
+	Request     *shared.BrandInput `request:"mediaType=application/json"`
 	Security    IapProjectsBrandsCreateSecurity
 }
 

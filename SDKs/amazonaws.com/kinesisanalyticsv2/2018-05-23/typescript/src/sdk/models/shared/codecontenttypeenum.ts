@@ -1,6 +1,7 @@
 
 
+
 export enum CodeContentTypeEnum {
-    Plaintext = "PLAINTEXT"
-,    Zipfile = "ZIPFILE"
+    Plaintext = "PLAINTEXT",
+    Zipfile = "ZIPFILE"
 }

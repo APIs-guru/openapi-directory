@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InspectorEventEnum } from "./inspectoreventenum";
 import { AssessmentRunNotificationSnsStatusCodeEnum } from "./assessmentrunnotificationsnsstatuscodeenum";
+
 
 
 // AssessmentRunNotification
@@ -8,21 +9,21 @@ import { AssessmentRunNotificationSnsStatusCodeEnum } from "./assessmentrunnotif
  * Used as one of the elements of the <a>AssessmentRun</a> data type.
 **/
 export class AssessmentRunNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date: Date;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: boolean;
 
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event: InspectorEventEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=snsPublishStatusCode" })
+  @SpeakeasyMetadata({ data: "json, name=snsPublishStatusCode" })
   snsPublishStatusCode?: AssessmentRunNotificationSnsStatusCodeEnum;
 
-  @Metadata({ data: "json, name=snsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=snsTopicArn" })
   snsTopicArn?: string;
 }

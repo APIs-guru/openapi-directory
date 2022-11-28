@@ -41,7 +41,7 @@ type MonitoringServicesCreateSecurity struct {
 type MonitoringServicesCreateRequest struct {
 	PathParams  MonitoringServicesCreatePathParams
 	QueryParams MonitoringServicesCreateQueryParams
-	Request     *shared.Service `request:"mediaType=application/json"`
+	Request     *shared.ServiceInput `request:"mediaType=application/json"`
 	Security    MonitoringServicesCreateSecurity
 }
 

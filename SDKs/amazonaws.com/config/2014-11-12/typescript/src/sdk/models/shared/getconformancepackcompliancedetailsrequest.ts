@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConformancePackEvaluationFilters } from "./conformancepackevaluationfilters";
 
 
+
 export class GetConformancePackComplianceDetailsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConformancePackName" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackName" })
   conformancePackName: string;
 
-  @Metadata({ data: "json, name=Filters" })
+  @SpeakeasyMetadata({ data: "json, name=Filters" })
   filters?: ConformancePackEvaluationFilters;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AddTargetedPublishersRequestTargetingModeEnum(str, Enum):
     TARGETING_MODE_UNSPECIFIED = "TARGETING_MODE_UNSPECIFIED"
@@ -11,6 +13,10 @@ class AddTargetedPublishersRequestTargetingModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AddTargetedPublishersRequest:
-    publisher_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisherIds' }})
-    targeting_mode: Optional[AddTargetedPublishersRequestTargetingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetingMode' }})
+    r"""AddTargetedPublishersRequest
+    A request to start targeting the provided publishers in a specific pretargeting configuration. The pretargeting configuration itself specifies how these publishers are targeted in PretargetingConfig.publisherTargeting.
+    """
+    
+    publisher_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherIds') }})
+    targeting_mode: Optional[AddTargetedPublishersRequestTargetingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetingMode') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudConnectorsV1Connection
+// Connection represents an instance of connector.
 type GoogleCloudConnectorsV1Connection struct {
 	AuthConfig         *GoogleCloudConnectorsV1AuthConfig         `json:"authConfig,omitempty"`
 	ConfigVariables    []GoogleCloudConnectorsV1ConfigVariable    `json:"configVariables,omitempty"`

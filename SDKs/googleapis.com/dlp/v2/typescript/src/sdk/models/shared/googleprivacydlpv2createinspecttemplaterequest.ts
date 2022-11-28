@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GooglePrivacyDlpV2InspectTemplate } from "./googleprivacydlpv2inspecttemplate";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GooglePrivacyDlpV2InspectTemplateInput } from "./googleprivacydlpv2inspecttemplate";
 
 
-// GooglePrivacyDlpV2CreateInspectTemplateRequest
+
+// GooglePrivacyDlpV2CreateInspectTemplateRequestInput
 /** 
  * Request message for CreateInspectTemplate.
 **/
-export class GooglePrivacyDlpV2CreateInspectTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inspectTemplate" })
-  inspectTemplate?: GooglePrivacyDlpV2InspectTemplate;
+export class GooglePrivacyDlpV2CreateInspectTemplateRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=inspectTemplate" })
+  inspectTemplate?: GooglePrivacyDlpV2InspectTemplateInput;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=templateId" })
+  @SpeakeasyMetadata({ data: "json, name=templateId" })
   templateId?: string;
 }

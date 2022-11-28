@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RatingCounts
@@ -11,18 +12,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class RatingCounts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=1" })
+  @SpeakeasyMetadata({ data: "json, name=1" })
   one?: number;
 
-  @Metadata({ data: "json, name=2" })
+  @SpeakeasyMetadata({ data: "json, name=2" })
   two?: number;
 
-  @Metadata({ data: "json, name=3" })
+  @SpeakeasyMetadata({ data: "json, name=3" })
   three?: number;
 
-  @Metadata({ data: "json, name=4" })
+  @SpeakeasyMetadata({ data: "json, name=4" })
   four?: number;
 
-  @Metadata({ data: "json, name=5" })
+  @SpeakeasyMetadata({ data: "json, name=5" })
   five?: number;
 }

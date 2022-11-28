@@ -1,5 +1,7 @@
 package shared
 
+// ListAnswersOutput
+// Output of a list answers call.
 type ListAnswersOutput struct {
 	AnswerSummaries []AnswerSummary `json:"AnswerSummaries,omitempty"`
 	LensAlias       *string         `json:"LensAlias,omitempty"`

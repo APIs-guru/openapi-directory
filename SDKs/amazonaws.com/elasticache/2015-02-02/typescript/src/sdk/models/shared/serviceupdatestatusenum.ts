@@ -1,7 +1,8 @@
 
 
+
 export enum ServiceUpdateStatusEnum {
-    Available = "available"
-,    Cancelled = "cancelled"
-,    Expired = "expired"
+    Available = "available",
+    Cancelled = "cancelled",
+    Expired = "expired"
 }

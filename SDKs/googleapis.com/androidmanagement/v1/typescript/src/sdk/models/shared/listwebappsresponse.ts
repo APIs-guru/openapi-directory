@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebApp } from "./webapp";
+
 
 
 // ListWebAppsResponse
@@ -8,9 +8,9 @@ import { WebApp } from "./webapp";
  * Response to a request to list web apps for a given enterprise.
 **/
 export class ListWebAppsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=webApps", elemType: shared.WebApp })
+  @SpeakeasyMetadata({ data: "json, name=webApps", elemType: WebApp })
   webApps?: WebApp[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SubstringMatchCriteria
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A criteria that matches a specific string of text in a shape or table.
 **/
 export class SubstringMatchCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchCase" })
+  @SpeakeasyMetadata({ data: "json, name=matchCase" })
   matchCase?: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

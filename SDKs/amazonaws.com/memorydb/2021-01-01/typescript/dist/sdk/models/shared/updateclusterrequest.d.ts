@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaConfigurationRequest } from "./replicaconfigurationrequest";
 import { ShardConfigurationRequest } from "./shardconfigurationrequest";
 export declare class UpdateClusterRequest extends SpeakeasyBase {

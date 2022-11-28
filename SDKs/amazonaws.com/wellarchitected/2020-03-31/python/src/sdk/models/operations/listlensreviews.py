@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListLensReviewsPathParams:
-    workload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
+    workload_id: str = field(metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,19 +31,19 @@ class ListLensReviewsHeaders:
 
 @dataclass
 class ListLensReviewsRequest:
-    path_params: ListLensReviewsPathParams = field(default=None)
-    query_params: ListLensReviewsQueryParams = field(default=None)
-    headers: ListLensReviewsHeaders = field(default=None)
+    headers: ListLensReviewsHeaders = field()
+    path_params: ListLensReviewsPathParams = field()
+    query_params: ListLensReviewsQueryParams = field()
     
 
 @dataclass
 class ListLensReviewsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_lens_reviews_output: Optional[shared.ListLensReviewsOutput] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

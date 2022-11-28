@@ -10,7 +10,7 @@ type IpamVrfsUpdatePathParams struct {
 
 type IpamVrfsUpdateRequest struct {
 	PathParams IpamVrfsUpdatePathParams
-	Request    shared.WritableVrf `request:"mediaType=application/json"`
+	Request    shared.WritableVrfInput `request:"mediaType=application/json"`
 }
 
 type IpamVrfsUpdateResponse struct {

@@ -9,12 +9,12 @@ class GetPeersQueryParams:
 
 @dataclass
 class GetPeersRequest:
-    query_params: GetPeersQueryParams = field(default=None)
+    query_params: GetPeersQueryParams = field()
     
 
 @dataclass
 class GetPeersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_peers_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// WorkerSettings
+// Provides data to pass through to the worker harness.
 type WorkerSettings struct {
 	BaseURL            *string `json:"baseUrl,omitempty"`
 	ReportingEnabled   *bool   `json:"reportingEnabled,omitempty"`

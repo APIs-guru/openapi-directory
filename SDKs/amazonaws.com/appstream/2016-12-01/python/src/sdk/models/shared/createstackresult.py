@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import stack
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateStackResult:
-    stack: Optional[stack.Stack] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Stack' }})
+    stack: Optional[Stack] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Stack') }})
     

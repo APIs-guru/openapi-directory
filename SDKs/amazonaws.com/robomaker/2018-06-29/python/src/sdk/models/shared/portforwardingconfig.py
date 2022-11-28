@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import portmapping
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PortForwardingConfig:
-    port_mappings: Optional[List[portmapping.PortMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portMappings' }})
+    r"""PortForwardingConfig
+    Configuration information for port forwarding.
+    """
+    
+    port_mappings: Optional[List[PortMapping]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('portMappings') }})
     

@@ -1,4 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudIntegrationsV1alphaSfdcChannelInput
+/** 
+ * The SfdcChannel that points to a CDC or Platform Event Channel.
+**/
+export class GoogleCloudIntegrationsV1alphaSfdcChannelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=channelTopic" })
+  channelTopic?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
+  isActive?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=lastReplayId" })
+  lastReplayId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+}
 
 
 // GoogleCloudIntegrationsV1alphaSfdcChannel
@@ -6,30 +32,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The SfdcChannel that points to a CDC or Platform Event Channel.
 **/
 export class GoogleCloudIntegrationsV1alphaSfdcChannel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelTopic" })
+  @SpeakeasyMetadata({ data: "json, name=channelTopic" })
   channelTopic?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTime" })
   deleteTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=lastReplayId" })
+  @SpeakeasyMetadata({ data: "json, name=lastReplayId" })
   lastReplayId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

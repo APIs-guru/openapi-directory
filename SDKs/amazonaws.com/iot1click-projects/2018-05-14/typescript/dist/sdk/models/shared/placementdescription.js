@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PlacementDescription
 /**
  * An object describing a project's placement.
@@ -33,23 +33,23 @@ var PlacementDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributes" }),
+        SpeakeasyMetadata({ data: "json, name=attributes" }),
         __metadata("design:type", Map)
     ], PlacementDescription.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdDate" }),
+        SpeakeasyMetadata({ data: "json, name=createdDate" }),
         __metadata("design:type", Date)
     ], PlacementDescription.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=placementName" }),
+        SpeakeasyMetadata({ data: "json, name=placementName" }),
         __metadata("design:type", String)
     ], PlacementDescription.prototype, "placementName", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectName" }),
+        SpeakeasyMetadata({ data: "json, name=projectName" }),
         __metadata("design:type", String)
     ], PlacementDescription.prototype, "projectName", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedDate" }),
+        SpeakeasyMetadata({ data: "json, name=updatedDate" }),
         __metadata("design:type", Date)
     ], PlacementDescription.prototype, "updatedDate", void 0);
     return PlacementDescription;

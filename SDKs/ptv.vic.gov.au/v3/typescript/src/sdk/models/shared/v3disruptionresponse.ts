@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { V3Disruption } from "./v3disruption";
 import { V3Status } from "./v3status";
 
 
+
 export class V3DisruptionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disruption" })
+  @SpeakeasyMetadata({ data: "json, name=disruption" })
   disruption?: V3Disruption;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: V3Status;
 }

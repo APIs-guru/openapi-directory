@@ -1,15 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { AccountReports } from "./accountreports";
+import { DetailedLeadReports } from "./detailedleadreports";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://localservices.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    accountReports: AccountReports;
+    detailedLeadReports: DetailedLeadReports;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    LocalservicesAccountReportsSearch(req: operations.LocalservicesAccountReportsSearchRequest, config?: AxiosRequestConfig): Promise<operations.LocalservicesAccountReportsSearchResponse>;
-    LocalservicesDetailedLeadReportsSearch(req: operations.LocalservicesDetailedLeadReportsSearchRequest, config?: AxiosRequestConfig): Promise<operations.LocalservicesDetailedLeadReportsSearchResponse>;
 }
 export {};

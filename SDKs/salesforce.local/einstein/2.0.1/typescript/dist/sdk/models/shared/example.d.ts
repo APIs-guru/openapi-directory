@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
 export declare class Example extends SpeakeasyBase {
     createdAt?: Date;

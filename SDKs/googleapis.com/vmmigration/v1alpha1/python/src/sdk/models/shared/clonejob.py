@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import computeenginetargetdetails
-from . import targetvmdetails
-from . import status
-from . import clonestep
-from . import targetvmdetails
+from sdk import utils
+from . import *
 
 class CloneJobStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -20,15 +18,32 @@ class CloneJobStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class CloneJobInput:
+    r"""CloneJobInput
+    CloneJob describes the process of creating a clone of a MigratingVM to the requested target based on the latest successful uploaded snapshots. While the migration cycles of a MigratingVm take place, it is possible to verify the uploaded VM can be started in the cloud, by creating a clone. The clone can be created without any downtime, and it is created using the latest snapshots which are already in the cloud. The cloneJob is only responsible for its work, not its products, which means once it is finished, it will never touch the instance it created. It will only delete it in case of the CloneJob being cancelled or upon failure to clone.
+    """
+    
+    compute_engine_target_details: Optional[ComputeEngineTargetDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEngineTargetDetails') }})
+    compute_engine_vm_details: Optional[TargetVMDetailsInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEngineVmDetails') }})
+    error: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    target_details: Optional[TargetVMDetailsInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetDetails') }})
+    
+
+@dataclass_json
+@dataclass
 class CloneJob:
-    compute_engine_target_details: Optional[computeenginetargetdetails.ComputeEngineTargetDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeEngineTargetDetails' }})
-    compute_engine_vm_details: Optional[targetvmdetails.TargetVMDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeEngineVmDetails' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    error: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    state: Optional[CloneJobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateTime' }})
-    steps: Optional[List[clonestep.CloneStep]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
-    target_details: Optional[targetvmdetails.TargetVMDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetDetails' }})
+    r"""CloneJob
+    CloneJob describes the process of creating a clone of a MigratingVM to the requested target based on the latest successful uploaded snapshots. While the migration cycles of a MigratingVm take place, it is possible to verify the uploaded VM can be started in the cloud, by creating a clone. The clone can be created without any downtime, and it is created using the latest snapshots which are already in the cloud. The cloneJob is only responsible for its work, not its products, which means once it is finished, it will never touch the instance it created. It will only delete it in case of the CloneJob being cancelled or upon failure to clone.
+    """
+    
+    compute_engine_target_details: Optional[ComputeEngineTargetDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEngineTargetDetails') }})
+    compute_engine_vm_details: Optional[TargetVMDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEngineVmDetails') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    error: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    state: Optional[CloneJobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateTime') }})
+    steps: Optional[List[CloneStep]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('steps') }})
+    target_details: Optional[TargetVMDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetDetails') }})
     

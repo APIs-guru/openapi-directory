@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import distribution
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MetricDistribution:
-    basis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'basis' }})
-    data: Optional[List[distribution.Distribution]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    r"""MetricDistribution
+    This complex data type describes the metric distribution by basis.
+    """
+    
+    basis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('basis') }})
+    data: Optional[List[Distribution]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

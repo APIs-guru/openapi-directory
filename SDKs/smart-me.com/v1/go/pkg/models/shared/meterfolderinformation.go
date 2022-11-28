@@ -1,5 +1,7 @@
 package shared
 
+// MeterFolderInformation
+// Container Class for the Web API
 type MeterFolderInformation struct {
 	CommunicationModuleFirmwareVersion *int32              `json:"CommunicationModuleFirmwareVersion,omitempty"`
 	CommunicationModuleHardwareVersion *int32              `json:"CommunicationModuleHardwareVersion,omitempty"`

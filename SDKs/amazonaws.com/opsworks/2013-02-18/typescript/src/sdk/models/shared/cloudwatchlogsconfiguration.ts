@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsLogStream } from "./cloudwatchlogslogstream";
+
 
 
 // CloudWatchLogsConfiguration
@@ -8,9 +8,9 @@ import { CloudWatchLogsLogStream } from "./cloudwatchlogslogstream";
  * Describes the Amazon CloudWatch logs configuration for a layer.
 **/
 export class CloudWatchLogsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=LogStreams", elemType: shared.CloudWatchLogsLogStream })
+  @SpeakeasyMetadata({ data: "json, name=LogStreams", elemType: CloudWatchLogsLogStream })
   logStreams?: CloudWatchLogsLogStream[];
 }

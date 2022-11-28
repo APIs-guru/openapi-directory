@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -20,14 +20,14 @@ class PublishedOralQuestionTimeGetQueryParams:
 
 @dataclass
 class PublishedOralQuestionTimeGetRequest:
-    query_params: PublishedOralQuestionTimeGetQueryParams = field(default=None)
+    query_params: PublishedOralQuestionTimeGetQueryParams = field()
     
 
 @dataclass
 class PublishedOralQuestionTimeGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_response_list_published_written_question_: Optional[shared.APIResponseListPublishedWrittenQuestion] = field(default=None)
     api_response_object_: Optional[shared.APIResponseObject] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

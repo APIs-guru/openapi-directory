@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DisableImportFindingsForProductPathParams:
-    product_subscription_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'ProductSubscriptionArn', 'style': 'simple', 'explode': False }})
+    product_subscription_arn: str = field(metadata={'path_param': { 'field_name': 'ProductSubscriptionArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,18 +23,18 @@ class DisableImportFindingsForProductHeaders:
 
 @dataclass
 class DisableImportFindingsForProductRequest:
-    path_params: DisableImportFindingsForProductPathParams = field(default=None)
-    headers: DisableImportFindingsForProductHeaders = field(default=None)
+    headers: DisableImportFindingsForProductHeaders = field()
+    path_params: DisableImportFindingsForProductPathParams = field()
     
 
 @dataclass
 class DisableImportFindingsForProductResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     disable_import_findings_for_product_response: Optional[dict[str, Any]] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

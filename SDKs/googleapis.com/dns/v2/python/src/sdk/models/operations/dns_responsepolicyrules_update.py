@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DNSResponsePolicyRulesUpdatePathParams:
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    response_policy: str = field(default=None, metadata={'path_param': { 'field_name': 'responsePolicy', 'style': 'simple', 'explode': False }})
-    response_policy_rule: str = field(default=None, metadata={'path_param': { 'field_name': 'responsePolicyRule', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    response_policy: str = field(metadata={'path_param': { 'field_name': 'responsePolicy', 'style': 'simple', 'explode': False }})
+    response_policy_rule: str = field(metadata={'path_param': { 'field_name': 'responsePolicyRule', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class DNSResponsePolicyRulesUpdateQueryParams:
 
 @dataclass
 class DNSResponsePolicyRulesUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DNSResponsePolicyRulesUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -47,15 +51,15 @@ class DNSResponsePolicyRulesUpdateSecurity:
 
 @dataclass
 class DNSResponsePolicyRulesUpdateRequest:
-    path_params: DNSResponsePolicyRulesUpdatePathParams = field(default=None)
-    query_params: DNSResponsePolicyRulesUpdateQueryParams = field(default=None)
+    path_params: DNSResponsePolicyRulesUpdatePathParams = field()
+    query_params: DNSResponsePolicyRulesUpdateQueryParams = field()
+    security: DNSResponsePolicyRulesUpdateSecurity = field()
     request: Optional[shared.ResponsePolicyRule] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DNSResponsePolicyRulesUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DNSResponsePolicyRulesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_policy_rules_update_response: Optional[shared.ResponsePolicyRulesUpdateResponse] = field(default=None)
-    status_code: int = field(default=None)
     

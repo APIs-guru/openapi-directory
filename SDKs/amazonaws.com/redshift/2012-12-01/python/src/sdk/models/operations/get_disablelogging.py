@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisableLoggingActionEnum(str, Enum):
     DISABLE_LOGGING = "DisableLogging"
@@ -10,9 +14,9 @@ class GetDisableLoggingVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableLoggingQueryParams:
-    action: GetDisableLoggingActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDisableLoggingVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDisableLoggingActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDisableLoggingVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDisableLoggingHeaders:
 
 @dataclass
 class GetDisableLoggingRequest:
-    query_params: GetDisableLoggingQueryParams = field(default=None)
-    headers: GetDisableLoggingHeaders = field(default=None)
+    headers: GetDisableLoggingHeaders = field()
+    query_params: GetDisableLoggingQueryParams = field()
     
 
 @dataclass
 class GetDisableLoggingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

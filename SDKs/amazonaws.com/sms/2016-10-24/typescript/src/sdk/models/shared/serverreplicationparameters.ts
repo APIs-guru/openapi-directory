@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseTypeEnum } from "./licensetypeenum";
+
 
 
 // ServerReplicationParameters
@@ -7,24 +8,24 @@ import { LicenseTypeEnum } from "./licensetypeenum";
  * The replication parameters for replicating a server.
 **/
 export class ServerReplicationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: number;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=licenseType" })
+  @SpeakeasyMetadata({ data: "json, name=licenseType" })
   licenseType?: LicenseTypeEnum;
 
-  @Metadata({ data: "json, name=numberOfRecentAmisToKeep" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfRecentAmisToKeep" })
   numberOfRecentAmisToKeep?: number;
 
-  @Metadata({ data: "json, name=runOnce" })
+  @SpeakeasyMetadata({ data: "json, name=runOnce" })
   runOnce?: boolean;
 
-  @Metadata({ data: "json, name=seedTime" })
+  @SpeakeasyMetadata({ data: "json, name=seedTime" })
   seedTime?: Date;
 }

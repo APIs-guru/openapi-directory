@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointMessageResult } from "./endpointmessageresult";
+
 
 
 // SendUsersMessageResponse
@@ -8,12 +8,12 @@ import { EndpointMessageResult } from "./endpointmessageresult";
  * Provides information about which users and endpoints a message was sent to.
 **/
 export class SendUsersMessageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=RequestId" })
+  @SpeakeasyMetadata({ data: "json, name=RequestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=Result", elemType: shared.EndpointMessageResult, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=Result", elemType: EndpointMessageResult, elemDepth: 2 })
   result?: Map<string, Map<string, EndpointMessageResult>>;
 }

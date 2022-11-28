@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductSetPurgeConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config to control which ProductSet contains the Products to be deleted.
 **/
 export class ProductSetPurgeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=productSetId" })
+  @SpeakeasyMetadata({ data: "json, name=productSetId" })
   productSetId?: string;
 }

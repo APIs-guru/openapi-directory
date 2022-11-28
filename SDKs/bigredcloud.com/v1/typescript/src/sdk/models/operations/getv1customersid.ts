@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV1CustomersIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetV1CustomersIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=needBalance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=needBalance" })
   needBalance?: boolean;
 }
 
 
 export class GetV1CustomersIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetV1CustomersIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV1CustomersIdQueryParams;
 }
 
 
 export class GetV1CustomersIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   customerDto?: shared.CustomerDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

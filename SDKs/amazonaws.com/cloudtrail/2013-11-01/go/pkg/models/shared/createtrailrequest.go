@@ -1,5 +1,7 @@
 package shared
 
+// CreateTrailRequest
+// Specifies the settings for each trail.
 type CreateTrailRequest struct {
 	CloudWatchLogsLogGroupArn  *string `json:"CloudWatchLogsLogGroupArn,omitempty"`
 	CloudWatchLogsRoleArn      *string `json:"CloudWatchLogsRoleArn,omitempty"`

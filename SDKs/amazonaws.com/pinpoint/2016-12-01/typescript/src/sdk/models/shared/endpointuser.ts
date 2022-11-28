@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EndpointUser
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies data for one or more attributes that describe the user who's associated with an endpoint.
 **/
 export class EndpointUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=UserAttributes" })
   userAttributes?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 }

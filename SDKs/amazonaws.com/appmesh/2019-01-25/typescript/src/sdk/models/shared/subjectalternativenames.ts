@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubjectAlternativeNameMatchers } from "./subjectalternativenamematchers";
+
 
 
 // SubjectAlternativeNames
@@ -7,6 +8,6 @@ import { SubjectAlternativeNameMatchers } from "./subjectalternativenamematchers
  * An object that represents the subject alternative names secured by the certificate.
 **/
 export class SubjectAlternativeNames extends SpeakeasyBase {
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match: SubjectAlternativeNameMatchers;
 }

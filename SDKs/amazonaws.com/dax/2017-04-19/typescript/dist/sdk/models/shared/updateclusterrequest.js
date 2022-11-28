@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateClusterRequest = /** @class */ (function (_super) {
     __extends(UpdateClusterRequest, _super);
     function UpdateClusterRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterName" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterName" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotificationTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=NotificationTopicArn" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "notificationTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotificationTopicStatus" }),
+        SpeakeasyMetadata({ data: "json, name=NotificationTopicStatus" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "notificationTopicStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupName" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "parameterGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], UpdateClusterRequest.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], UpdateClusterRequest.prototype, "securityGroupIds", void 0);
     return UpdateClusterRequest;

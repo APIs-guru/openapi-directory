@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import errorresponse
-from . import node
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class S3FileUploadStatus:
-    error_details: Optional[errorresponse.ErrorResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDetails' }})
-    node: Optional[node.Node] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node' }})
-    status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""S3FileUploadStatus
+    S3 file upload status information
+    """
+    
+    status: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    error_details: Optional[ErrorResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDetails') }})
+    node: Optional[Node] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('node') }})
     

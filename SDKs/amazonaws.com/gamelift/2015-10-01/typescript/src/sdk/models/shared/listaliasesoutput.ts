@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alias } from "./alias";
+
 
 
 // ListAliasesOutput
@@ -8,9 +8,9 @@ import { Alias } from "./alias";
  * Represents the returned data in response to a request operation.
 **/
 export class ListAliasesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Aliases", elemType: shared.Alias })
+  @SpeakeasyMetadata({ data: "json, name=Aliases", elemType: Alias })
   aliases?: Alias[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

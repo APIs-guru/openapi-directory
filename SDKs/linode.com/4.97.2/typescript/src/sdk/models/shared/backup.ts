@@ -1,32 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilesystemEnum } from "./filesystemenum";
 
 
+
 export class BackupDisks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filesystem" })
+  @SpeakeasyMetadata({ data: "json, name=filesystem" })
   filesystem?: FilesystemEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 }
 
 export enum BackupStatusEnum {
-    Paused = "paused"
-,    Pending = "pending"
-,    Running = "running"
-,    NeedsPostProcessing = "needsPostProcessing"
-,    Successful = "successful"
-,    Failed = "failed"
-,    UserAborted = "userAborted"
+    Paused = "paused",
+    Pending = "pending",
+    Running = "running",
+    NeedsPostProcessing = "needsPostProcessing",
+    Successful = "successful",
+    Failed = "failed",
+    UserAborted = "userAborted"
 }
 
 export enum BackupTypeEnum {
-    Auto = "auto"
-,    Snapshot = "snapshot"
+    Auto = "auto",
+    Snapshot = "snapshot"
 }
 
 
@@ -36,30 +36,30 @@ export enum BackupTypeEnum {
  * 
 **/
 export class Backup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configs" })
+  @SpeakeasyMetadata({ data: "json, name=configs" })
   configs?: string[];
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=disks", elemType: shared.BackupDisks })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: BackupDisks })
   disks?: BackupDisks[];
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: BackupStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: BackupTypeEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

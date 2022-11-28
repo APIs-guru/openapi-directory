@@ -17,6 +17,8 @@ const (
 	ClusterUpdateDesiredPrivateIpv6GoogleAccessEnumPrivateIpv6GoogleAccessBidirectional ClusterUpdateDesiredPrivateIpv6GoogleAccessEnum = "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL"
 )
 
+// ClusterUpdate
+// ClusterUpdate describes an update to the cluster. Exactly one update can be applied to a cluster with each request, so at most one field can be provided.
 type ClusterUpdate struct {
 	DesiredAddonsConfig                   *AddonsConfig                                    `json:"desiredAddonsConfig,omitempty"`
 	DesiredAuthenticatorGroupsConfig      *AuthenticatorGroupsConfig                       `json:"desiredAuthenticatorGroupsConfig,omitempty"`
@@ -28,6 +30,8 @@ type ClusterUpdate struct {
 	DesiredDatapathProvider               *ClusterUpdateDesiredDatapathProviderEnum        `json:"desiredDatapathProvider,omitempty"`
 	DesiredDefaultSnatStatus              *DefaultSnatStatus                               `json:"desiredDefaultSnatStatus,omitempty"`
 	DesiredDNSConfig                      *DNSConfig                                       `json:"desiredDnsConfig,omitempty"`
+	DesiredEnablePrivateEndpoint          *bool                                            `json:"desiredEnablePrivateEndpoint,omitempty"`
+	DesiredGatewayAPIConfig               *GatewayAPIConfig                                `json:"desiredGatewayApiConfig,omitempty"`
 	DesiredGcfsConfig                     *GcfsConfig                                      `json:"desiredGcfsConfig,omitempty"`
 	DesiredIdentityServiceConfig          *IdentityServiceConfig                           `json:"desiredIdentityServiceConfig,omitempty"`
 	DesiredImageType                      *string                                          `json:"desiredImageType,omitempty"`

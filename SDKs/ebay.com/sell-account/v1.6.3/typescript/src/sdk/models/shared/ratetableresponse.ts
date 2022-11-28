@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RateTable } from "./ratetable";
+
 
 
 // RateTableResponse
@@ -8,6 +8,6 @@ import { RateTable } from "./ratetable";
  * The response container for with information on a seller's shipping rate tables.
 **/
 export class RateTableResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rateTables", elemType: shared.RateTable })
+  @SpeakeasyMetadata({ data: "json, name=rateTables", elemType: RateTable })
   rateTables?: RateTable[];
 }

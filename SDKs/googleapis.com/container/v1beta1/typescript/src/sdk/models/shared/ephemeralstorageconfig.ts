@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EphemeralStorageConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * EphemeralStorageConfig contains configuration for the ephemeral storage filesystem.
 **/
 export class EphemeralStorageConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localSsdCount" })
+  @SpeakeasyMetadata({ data: "json, name=localSsdCount" })
   localSsdCount?: number;
 }

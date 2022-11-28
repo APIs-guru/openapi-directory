@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SyntaxToken } from "./syntaxtoken";
 
 
+
 export class DetectSyntaxResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SyntaxTokens", elemType: shared.SyntaxToken })
+  @SpeakeasyMetadata({ data: "json, name=SyntaxTokens", elemType: SyntaxToken })
   syntaxTokens?: SyntaxToken[];
 }

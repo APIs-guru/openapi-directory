@@ -20,6 +20,8 @@ type UpdateBotLocaleHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateBotLocaleRequestBodyVoiceSettings
+// Defines settings for using an Amazon Polly voice to communicate with a user.
 type UpdateBotLocaleRequestBodyVoiceSettings struct {
 	VoiceID *string `json:"voiceId,omitempty"`
 }

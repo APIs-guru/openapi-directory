@@ -8,6 +8,8 @@ const (
 	GoogleCloudChannelV1RepricingConfigRebillingBasisEnumDirectCustomerCost        GoogleCloudChannelV1RepricingConfigRebillingBasisEnum = "DIRECT_CUSTOMER_COST"
 )
 
+// GoogleCloudChannelV1RepricingConfig
+// Configuration for repricing a Google bill over a period of time.
 type GoogleCloudChannelV1RepricingConfig struct {
 	Adjustment                *GoogleCloudChannelV1RepricingAdjustment                   `json:"adjustment,omitempty"`
 	ChannelPartnerGranularity map[string]interface{}                                     `json:"channelPartnerGranularity,omitempty"`

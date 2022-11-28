@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class BeyondcorpProjectsLocationsInsightsListViewEnum(str, Enum):
     INSIGHT_VIEW_UNSPECIFIED = "INSIGHT_VIEW_UNSPECIFIED"
@@ -35,20 +36,20 @@ class BeyondcorpProjectsLocationsInsightsListQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsListRequest:
-    path_params: BeyondcorpProjectsLocationsInsightsListPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsInsightsListQueryParams = field(default=None)
-    security: BeyondcorpProjectsLocationsInsightsListSecurity = field(default=None)
+    path_params: BeyondcorpProjectsLocationsInsightsListPathParams = field()
+    query_params: BeyondcorpProjectsLocationsInsightsListQueryParams = field()
+    security: BeyondcorpProjectsLocationsInsightsListSecurity = field()
     
 
 @dataclass
 class BeyondcorpProjectsLocationsInsightsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_beyondcorp_saasplatform_insights_v1alpha_list_insights_response: Optional[shared.GoogleCloudBeyondcorpSaasplatformInsightsV1alphaListInsightsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

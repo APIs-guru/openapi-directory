@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedSnippets
+// A paginated list of snippets.
 type PaginatedSnippets struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

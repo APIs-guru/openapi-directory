@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArimaForecastingMetrics } from "./arimaforecastingmetrics";
 import { BinaryClassificationMetrics } from "./binaryclassificationmetrics";
 import { ClusteringMetrics } from "./clusteringmetrics";
@@ -8,29 +8,30 @@ import { RankingMetrics } from "./rankingmetrics";
 import { RegressionMetrics } from "./regressionmetrics";
 
 
+
 // EvaluationMetrics
 /** 
  * Evaluation metrics of a model. These are either computed on all training data or just the eval data based on whether eval data was used during training. These are not present for imported models.
 **/
 export class EvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arimaForecastingMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=arimaForecastingMetrics" })
   arimaForecastingMetrics?: ArimaForecastingMetrics;
 
-  @Metadata({ data: "json, name=binaryClassificationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=binaryClassificationMetrics" })
   binaryClassificationMetrics?: BinaryClassificationMetrics;
 
-  @Metadata({ data: "json, name=clusteringMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=clusteringMetrics" })
   clusteringMetrics?: ClusteringMetrics;
 
-  @Metadata({ data: "json, name=dimensionalityReductionMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionalityReductionMetrics" })
   dimensionalityReductionMetrics?: DimensionalityReductionMetrics;
 
-  @Metadata({ data: "json, name=multiClassClassificationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=multiClassClassificationMetrics" })
   multiClassClassificationMetrics?: MultiClassClassificationMetrics;
 
-  @Metadata({ data: "json, name=rankingMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=rankingMetrics" })
   rankingMetrics?: RankingMetrics;
 
-  @Metadata({ data: "json, name=regressionMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=regressionMetrics" })
   regressionMetrics?: RegressionMetrics;
 }

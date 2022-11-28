@@ -1,5 +1,7 @@
 package shared
 
+// ValidationConfig
+// Contains the configuration for FHIR profiles and validation.
 type ValidationConfig struct {
 	DisableFhirpathValidation      *bool    `json:"disableFhirpathValidation,omitempty"`
 	DisableProfileValidation       *bool    `json:"disableProfileValidation,omitempty"`

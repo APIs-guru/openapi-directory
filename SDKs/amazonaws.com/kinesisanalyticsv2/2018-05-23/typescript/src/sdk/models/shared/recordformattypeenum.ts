@@ -1,6 +1,7 @@
 
 
+
 export enum RecordFormatTypeEnum {
-    Json = "JSON"
-,    Csv = "CSV"
+    Json = "JSON",
+    Csv = "CSV"
 }

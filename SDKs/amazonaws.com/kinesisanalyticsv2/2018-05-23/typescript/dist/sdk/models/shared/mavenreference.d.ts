@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The information required to specify a Maven reference. You can use Maven references to specify dependency JAR files.
 **/

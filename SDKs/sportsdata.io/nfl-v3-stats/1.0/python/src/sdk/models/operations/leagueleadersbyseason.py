@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class LeagueLeadersBySeasonColumnEnum(str, Enum):
     FANTASY_POINTS = "FantasyPoints"
@@ -30,20 +31,20 @@ class LeagueLeadersBySeasonPositionEnum(str, Enum):
 
 @dataclass
 class LeagueLeadersBySeasonPathParams:
-    column: LeagueLeadersBySeasonColumnEnum = field(default=None, metadata={'path_param': { 'field_name': 'column', 'style': 'simple', 'explode': False }})
-    format: LeagueLeadersBySeasonFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    position: LeagueLeadersBySeasonPositionEnum = field(default=None, metadata={'path_param': { 'field_name': 'position', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    column: LeagueLeadersBySeasonColumnEnum = field(metadata={'path_param': { 'field_name': 'column', 'style': 'simple', 'explode': False }})
+    format: LeagueLeadersBySeasonFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    position: LeagueLeadersBySeasonPositionEnum = field(metadata={'path_param': { 'field_name': 'position', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LeagueLeadersBySeasonRequest:
-    path_params: LeagueLeadersBySeasonPathParams = field(default=None)
+    path_params: LeagueLeadersBySeasonPathParams = field()
     
 
 @dataclass
 class LeagueLeadersBySeasonResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_seasons: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

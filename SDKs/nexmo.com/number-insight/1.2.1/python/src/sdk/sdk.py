@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://developer.nexmo.com/api/number-insight"""
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,30 +14,64 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://developer.nexmo.com/api/number-insight"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def get_number_insight_advanced(self, request: operations.GetNumberInsightAdvancedRequest) -> operations.GetNumberInsightAdvancedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Advanced Number Insight (sync)
+        Provides [advanced number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number synchronously, in the same way that the basic and standard endpoints do.
+        
+        Vonage recommends accessing the Advanced API **asynchronously** using the `/advanced/async` endpoint, to avoid timeouts.
+        
+        Note that this endpoint also supports `POST` requests.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/advanced/{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -51,15 +88,21 @@ class SDK:
 
     
     def get_number_insight_async(self, request: operations.GetNumberInsightAsyncRequest) -> operations.GetNumberInsightAsyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Advanced Number Insight (async)
+        Provides [advanced number insight](/number-insight/overview#basic-standard-and-advanced-apis) number information **asynchronously** using the URL specified in the `callback` parameter.  recommends asynchronous use of the Number Insight Advanced API, to avoid timeouts.
+        
+        Note that this endpoint also supports `POST` requests.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/advanced/async/{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -76,15 +119,21 @@ class SDK:
 
     
     def get_number_insight_basic(self, request: operations.GetNumberInsightBasicRequest) -> operations.GetNumberInsightBasicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Basic Number Insight
+        Provides [basic number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number.
+        
+        Note that this endpoint also supports `POST` requests.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/basic/{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -101,15 +150,21 @@ class SDK:
 
     
     def get_number_insight_standard(self, request: operations.GetNumberInsightStandardRequest) -> operations.GetNumberInsightStandardResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Standard Number Insight
+        Provides [standard number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number.
+        
+        Note that this endpoint also supports `POST` requests.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/standard/{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

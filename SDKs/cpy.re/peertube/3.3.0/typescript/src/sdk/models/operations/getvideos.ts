@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVideosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=categoryOneOf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=categoryOneOf" })
   categoryOneOf?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: shared.FilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isLive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isLive" })
   isLive?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=languageOneOf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=languageOneOf" })
   languageOneOf?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=licenceOneOf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=licenceOneOf" })
   licenceOneOf?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nsfw" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nsfw" })
   nsfw?: shared.NsfwEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skipCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skipCount" })
   skipCount?: shared.SkipCountEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: shared.VideosSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=tagsAllOf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tagsAllOf" })
   tagsAllOf?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=tagsOneOf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tagsOneOf" })
   tagsOneOf?: any;
 }
 
 
 export class GetVideosRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVideosQueryParams;
 }
 
 
 export class GetVideosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   videoListResponse?: any;
 }

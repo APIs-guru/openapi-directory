@@ -3,7 +3,7 @@ import { ParamDecorator } from "./pathparams";
 export declare class SpeakeasyBase {
     constructor(payload?: Record<string | symbol, unknown>);
 }
-export declare function Metadata<T extends SpeakeasyBase = Record<string | symbol, unknown>>(params?: {
+export declare function SpeakeasyMetadata<T extends SpeakeasyBase = Record<string | symbol, unknown>>(params?: {
     data?: string;
     elemType?: {
         new (): T;

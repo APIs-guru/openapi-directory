@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGenerateOrganizationsAccessReportActionEnum(str, Enum):
     GENERATE_ORGANIZATIONS_ACCESS_REPORT = "GenerateOrganizationsAccessReport"
@@ -10,10 +14,10 @@ class GetGenerateOrganizationsAccessReportVersionEnum(str, Enum):
 
 @dataclass
 class GetGenerateOrganizationsAccessReportQueryParams:
-    action: GetGenerateOrganizationsAccessReportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    entity_path: str = field(default=None, metadata={'query_param': { 'field_name': 'EntityPath', 'style': 'form', 'explode': True }})
+    action: GetGenerateOrganizationsAccessReportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    entity_path: str = field(metadata={'query_param': { 'field_name': 'EntityPath', 'style': 'form', 'explode': True }})
+    version: GetGenerateOrganizationsAccessReportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     organizations_policy_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'OrganizationsPolicyId', 'style': 'form', 'explode': True }})
-    version: GetGenerateOrganizationsAccessReportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetGenerateOrganizationsAccessReportHeaders:
 
 @dataclass
 class GetGenerateOrganizationsAccessReportRequest:
-    query_params: GetGenerateOrganizationsAccessReportQueryParams = field(default=None)
-    headers: GetGenerateOrganizationsAccessReportHeaders = field(default=None)
+    headers: GetGenerateOrganizationsAccessReportHeaders = field()
+    query_params: GetGenerateOrganizationsAccessReportQueryParams = field()
     
 
 @dataclass
 class GetGenerateOrganizationsAccessReportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

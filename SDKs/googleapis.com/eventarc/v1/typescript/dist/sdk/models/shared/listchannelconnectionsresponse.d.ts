@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ChannelConnection } from "./channelconnection";
 /**
  * The response message for the `ListChannelConnections` method.

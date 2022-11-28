@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional
+
+
 GET_VISUAL_CROSSING_WEB_SERVICES_REST_SERVICES_WEATHERDATA_FORECAST_SERVERS = [
 	"https://weather.visualcrossing.com",
 ]
@@ -19,12 +21,12 @@ class GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams:
 
 @dataclass
 class GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest:
+    query_params: GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams = field()
     server_url: Optional[str] = field(default=None)
-    query_params: GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams = field(default=None)
     
 
 @dataclass
 class GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

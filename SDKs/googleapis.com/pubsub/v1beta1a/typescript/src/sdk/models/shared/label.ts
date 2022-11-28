@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Label
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A key-value pair applied to a given object.
 **/
 export class Label extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=numValue" })
+  @SpeakeasyMetadata({ data: "json, name=numValue" })
   numValue?: string;
 
-  @Metadata({ data: "json, name=strValue" })
+  @SpeakeasyMetadata({ data: "json, name=strValue" })
   strValue?: string;
 }

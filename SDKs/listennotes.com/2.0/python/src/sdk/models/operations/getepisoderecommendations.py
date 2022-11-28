@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetEpisodeRecommendationsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetEpisodeRecommendationsQueryParams:
 
 @dataclass
 class GetEpisodeRecommendationsHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEpisodeRecommendationsRequest:
-    path_params: GetEpisodeRecommendationsPathParams = field(default=None)
-    query_params: GetEpisodeRecommendationsQueryParams = field(default=None)
-    headers: GetEpisodeRecommendationsHeaders = field(default=None)
+    headers: GetEpisodeRecommendationsHeaders = field()
+    path_params: GetEpisodeRecommendationsPathParams = field()
+    query_params: GetEpisodeRecommendationsQueryParams = field()
     
 
 @dataclass
 class GetEpisodeRecommendationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_episode_recommendations_response: Optional[shared.GetEpisodeRecommendationsResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

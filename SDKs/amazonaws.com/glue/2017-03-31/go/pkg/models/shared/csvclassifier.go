@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CsvClassifier
+// A classifier for custom <code>CSV</code> content.
 type CsvClassifier struct {
 	AllowSingleColumn    *bool                `json:"AllowSingleColumn,omitempty"`
 	ContainsHeader       *CsvHeaderOptionEnum `json:"ContainsHeader,omitempty"`

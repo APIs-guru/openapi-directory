@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OrderByEnum } from "./orderbyenum";
 export declare class DescribeLogStreamsRequest extends SpeakeasyBase {
     descending?: boolean;

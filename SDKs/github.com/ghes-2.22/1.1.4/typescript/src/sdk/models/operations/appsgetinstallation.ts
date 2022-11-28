@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AppsGetInstallationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=installation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=installation_id" })
   installationId: number;
 }
 
 
-export class AppsGetInstallationRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AppsGetInstallationPathParams;
-}
-
-
 export class AppsGetInstallation415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class AppsGetInstallationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AppsGetInstallationPathParams;
+}
+
+
 export class AppsGetInstallationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   appsGetInstallation415ApplicationJsonObject?: AppsGetInstallation415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   installationGhes2?: shared.InstallationGhes2;
 }

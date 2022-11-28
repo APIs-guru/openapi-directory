@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SectionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insert_after" })
+  @SpeakeasyMetadata({ data: "json, name=insert_after" })
   insertAfter?: string;
 
-  @Metadata({ data: "json, name=insert_before" })
+  @SpeakeasyMetadata({ data: "json, name=insert_before" })
   insertBefore?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project: string;
 }

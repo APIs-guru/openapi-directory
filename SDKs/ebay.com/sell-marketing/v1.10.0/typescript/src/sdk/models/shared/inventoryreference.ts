@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InventoryReference
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This complex type is used to identify an item that is managed by the Inventory API. The type defines the fields contained in an inventory reference ID.
 **/
 export class InventoryReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inventoryReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceId" })
   inventoryReferenceId?: string;
 
-  @Metadata({ data: "json, name=inventoryReferenceType" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceType" })
   inventoryReferenceType?: string;
 }

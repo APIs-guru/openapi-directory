@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TlsPolicyEnum } from "./tlspolicyenum";
+
 
 
 // DeliveryOptions
@@ -7,9 +8,9 @@ import { TlsPolicyEnum } from "./tlspolicyenum";
  * Used to associate a configuration set with a dedicated IP pool.
 **/
 export class DeliveryOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SendingPoolName" })
+  @SpeakeasyMetadata({ data: "json, name=SendingPoolName" })
   sendingPoolName?: string;
 
-  @Metadata({ data: "json, name=TlsPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=TlsPolicy" })
   tlsPolicy?: TlsPolicyEnum;
 }

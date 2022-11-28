@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // CreateReplicationSubnetGroupMessage
@@ -8,15 +8,15 @@ import { Tag } from "./tag";
  * <p/>
 **/
 export class CreateReplicationSubnetGroupMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationSubnetGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroupDescription" })
   replicationSubnetGroupDescription: string;
 
-  @Metadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
   replicationSubnetGroupIdentifier: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Options
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains query options.
 **/
 export class Options extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzeServiceAccountImpersonation" })
+  @SpeakeasyMetadata({ data: "json, name=analyzeServiceAccountImpersonation" })
   analyzeServiceAccountImpersonation?: boolean;
 
-  @Metadata({ data: "json, name=expandGroups" })
+  @SpeakeasyMetadata({ data: "json, name=expandGroups" })
   expandGroups?: boolean;
 
-  @Metadata({ data: "json, name=expandResources" })
+  @SpeakeasyMetadata({ data: "json, name=expandResources" })
   expandResources?: boolean;
 
-  @Metadata({ data: "json, name=expandRoles" })
+  @SpeakeasyMetadata({ data: "json, name=expandRoles" })
   expandRoles?: boolean;
 
-  @Metadata({ data: "json, name=outputGroupEdges" })
+  @SpeakeasyMetadata({ data: "json, name=outputGroupEdges" })
   outputGroupEdges?: boolean;
 
-  @Metadata({ data: "json, name=outputResourceEdges" })
+  @SpeakeasyMetadata({ data: "json, name=outputResourceEdges" })
   outputResourceEdges?: boolean;
 }

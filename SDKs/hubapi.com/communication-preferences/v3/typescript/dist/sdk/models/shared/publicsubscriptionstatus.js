@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PublicSubscriptionStatusLegalBasisEnum;
 (function (PublicSubscriptionStatusLegalBasisEnum) {
     PublicSubscriptionStatusLegalBasisEnum["LegitimateInterestPql"] = "LEGITIMATE_INTEREST_PQL";
@@ -54,39 +54,39 @@ var PublicSubscriptionStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=brandId" }),
+        SpeakeasyMetadata({ data: "json, name=brandId" }),
         __metadata("design:type", Number)
     ], PublicSubscriptionStatus.prototype, "brandId", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=legalBasis" }),
+        SpeakeasyMetadata({ data: "json, name=legalBasis" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "legalBasis", void 0);
     __decorate([
-        Metadata({ data: "json, name=legalBasisExplanation" }),
+        SpeakeasyMetadata({ data: "json, name=legalBasisExplanation" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "legalBasisExplanation", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=preferenceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=preferenceGroupName" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "preferenceGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceOfStatus" }),
+        SpeakeasyMetadata({ data: "json, name=sourceOfStatus" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "sourceOfStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], PublicSubscriptionStatus.prototype, "status", void 0);
     return PublicSubscriptionStatus;

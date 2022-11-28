@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListPanoramaFirewallsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class ListPanoramaFirewallsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListPanoramaFirewallsSecurity;
 }
 
 
 export class ListPanoramaFirewallsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dataSourceListResponse?: shared.DataSourceListResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

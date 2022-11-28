@@ -1,5 +1,7 @@
 package shared
 
+// NodeConfig
+// Parameters that describe the nodes in a cluster. GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead.
 type NodeConfig struct {
 	Accelerators            []AcceleratorConfig      `json:"accelerators,omitempty"`
 	AdvancedMachineFeatures *AdvancedMachineFeatures `json:"advancedMachineFeatures,omitempty"`
@@ -8,6 +10,7 @@ type NodeConfig struct {
 	DiskSizeGb              *int32                   `json:"diskSizeGb,omitempty"`
 	DiskType                *string                  `json:"diskType,omitempty"`
 	EphemeralStorageConfig  *EphemeralStorageConfig  `json:"ephemeralStorageConfig,omitempty"`
+	FastSocket              *FastSocket              `json:"fastSocket,omitempty"`
 	GcfsConfig              *GcfsConfig              `json:"gcfsConfig,omitempty"`
 	Gvnic                   *VirtualNic              `json:"gvnic,omitempty"`
 	ImageType               *string                  `json:"imageType,omitempty"`
@@ -23,6 +26,7 @@ type NodeConfig struct {
 	OauthScopes             []string                 `json:"oauthScopes,omitempty"`
 	Preemptible             *bool                    `json:"preemptible,omitempty"`
 	ReservationAffinity     *ReservationAffinity     `json:"reservationAffinity,omitempty"`
+	ResourceLabels          map[string]string        `json:"resourceLabels,omitempty"`
 	SandboxConfig           *SandboxConfig           `json:"sandboxConfig,omitempty"`
 	ServiceAccount          *string                  `json:"serviceAccount,omitempty"`
 	ShieldedInstanceConfig  *ShieldedInstanceConfig  `json:"shieldedInstanceConfig,omitempty"`

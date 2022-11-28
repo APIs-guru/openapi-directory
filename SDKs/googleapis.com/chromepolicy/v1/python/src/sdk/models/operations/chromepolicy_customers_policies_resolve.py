@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromepolicyCustomersPoliciesResolvePathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class ChromepolicyCustomersPoliciesResolveQueryParams:
 
 @dataclass
 class ChromepolicyCustomersPoliciesResolveSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesResolveSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class ChromepolicyCustomersPoliciesResolveSecurity:
 
 @dataclass
 class ChromepolicyCustomersPoliciesResolveRequest:
-    path_params: ChromepolicyCustomersPoliciesResolvePathParams = field(default=None)
-    query_params: ChromepolicyCustomersPoliciesResolveQueryParams = field(default=None)
+    path_params: ChromepolicyCustomersPoliciesResolvePathParams = field()
+    query_params: ChromepolicyCustomersPoliciesResolveQueryParams = field()
+    security: ChromepolicyCustomersPoliciesResolveSecurity = field()
     request: Optional[shared.GoogleChromePolicyVersionsV1ResolveRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ChromepolicyCustomersPoliciesResolveSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesResolveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_policy_versions_v1_resolve_response: Optional[shared.GoogleChromePolicyVersionsV1ResolveResponse] = field(default=None)
-    status_code: int = field(default=None)
     

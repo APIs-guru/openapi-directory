@@ -1,23 +1,7 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
-import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+import { V1 } from "./v1";
+export var ServerList = [
     "https://sts.googleapis.com/",
 ];
 export function WithServerURL(serverURL, params) {
@@ -25,15 +9,15 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
-// SDK Documentation: http://cloud.google.com/iam/docs/workload-identity-federation
+/* SDK Documentation: http://cloud.google.com/iam/docs/workload-identity-federation*/
 var SDK = /** @class */ (function () {
     function SDK() {
         var opts = [];
@@ -41,112 +25,21 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
+        this.v1 = new V1(this._defaultClient, this._securityClient, this._serverURL, this._language, this._sdkVersion, this._genVersion);
     }
-    // StsIntrospect - Gets information about a Google OAuth 2.0 access token issued by the Google Cloud [Security Token Service API](https://cloud.google.com/iam/docs/reference/sts/rest).
-    SDK.prototype.StsIntrospect = function (req, config) {
-        var _a;
-        if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.StsIntrospectRequest(req);
-        }
-        var baseURL = this.serverURL;
-        var url = baseURL.replace(/\/$/, "") + "/v1/introspect";
-        var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
-        try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
-        }
-        catch (e) {
-            if (e instanceof Error) {
-                throw new Error("Error serializing request body, cause: ".concat(e.message));
-            }
-        }
-        var client = this.defaultClient;
-        var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
-        var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
-        var body;
-        if (reqBody instanceof FormData)
-            body = reqBody;
-        else
-            body = __assign({}, reqBody);
-        return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
-            var _a, _b;
-            var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
-            if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
-                throw new Error("status code not found in response: ".concat(httpRes));
-            var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
-                        res.googleIdentityStsV1IntrospectTokenResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
-                    }
-                    break;
-            }
-            return res;
-        })
-            .catch(function (error) { throw error; });
-    };
-    // StsToken - Exchanges a credential for a Google OAuth 2.0 access token. The token asserts an external identity within an identity pool, or it applies a Credential Access Boundary to a Google access token. Note that workforce pools do not support Credential Access Boundary at the moment. When you call this method, do not send the `Authorization` HTTP header in the request. This method does not require the `Authorization` header, and using the header can cause the request to fail.
-    SDK.prototype.StsToken = function (req, config) {
-        var _a;
-        if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.StsTokenRequest(req);
-        }
-        var baseURL = this.serverURL;
-        var url = baseURL.replace(/\/$/, "") + "/v1/token";
-        var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
-        try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
-        }
-        catch (e) {
-            if (e instanceof Error) {
-                throw new Error("Error serializing request body, cause: ".concat(e.message));
-            }
-        }
-        var client = this.defaultClient;
-        var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
-        var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
-        var body;
-        if (reqBody instanceof FormData)
-            body = reqBody;
-        else
-            body = __assign({}, reqBody);
-        return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
-            var _a, _b;
-            var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
-            if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
-                throw new Error("status code not found in response: ".concat(httpRes));
-            var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
-                        res.googleIdentityStsV1ExchangeTokenResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
-                    }
-                    break;
-            }
-            return res;
-        })
-            .catch(function (error) { throw error; });
-    };
     return SDK;
 }());
 export { SDK };

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobExecutionSummary
+// The job execution summary.
 type JobExecutionSummary struct {
 	ExecutionNumber *int64                  `json:"executionNumber,omitempty"`
 	LastUpdatedAt   *time.Time              `json:"lastUpdatedAt,omitempty"`

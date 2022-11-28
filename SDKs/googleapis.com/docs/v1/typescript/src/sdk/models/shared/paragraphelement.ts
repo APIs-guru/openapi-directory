@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoText } from "./autotext";
 import { ColumnBreak } from "./columnbreak";
 import { Equation } from "./equation";
@@ -6,9 +6,55 @@ import { FootnoteReference } from "./footnotereference";
 import { HorizontalRule } from "./horizontalrule";
 import { InlineObjectElement } from "./inlineobjectelement";
 import { PageBreak } from "./pagebreak";
+import { PersonInput } from "./person";
+import { RichLinkInput } from "./richlink";
+import { TextRun } from "./textrun";
 import { Person } from "./person";
 import { RichLink } from "./richlink";
-import { TextRun } from "./textrun";
+
+
+
+// ParagraphElementInput
+/** 
+ * A ParagraphElement describes content within a Paragraph.
+**/
+export class ParagraphElementInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=autoText" })
+  autoText?: AutoText;
+
+  @SpeakeasyMetadata({ data: "json, name=columnBreak" })
+  columnBreak?: ColumnBreak;
+
+  @SpeakeasyMetadata({ data: "json, name=endIndex" })
+  endIndex?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=equation" })
+  equation?: Equation;
+
+  @SpeakeasyMetadata({ data: "json, name=footnoteReference" })
+  footnoteReference?: FootnoteReference;
+
+  @SpeakeasyMetadata({ data: "json, name=horizontalRule" })
+  horizontalRule?: HorizontalRule;
+
+  @SpeakeasyMetadata({ data: "json, name=inlineObjectElement" })
+  inlineObjectElement?: InlineObjectElement;
+
+  @SpeakeasyMetadata({ data: "json, name=pageBreak" })
+  pageBreak?: PageBreak;
+
+  @SpeakeasyMetadata({ data: "json, name=person" })
+  person?: PersonInput;
+
+  @SpeakeasyMetadata({ data: "json, name=richLink" })
+  richLink?: RichLinkInput;
+
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
+  startIndex?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=textRun" })
+  textRun?: TextRun;
+}
 
 
 // ParagraphElement
@@ -16,39 +62,39 @@ import { TextRun } from "./textrun";
  * A ParagraphElement describes content within a Paragraph.
 **/
 export class ParagraphElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoText" })
+  @SpeakeasyMetadata({ data: "json, name=autoText" })
   autoText?: AutoText;
 
-  @Metadata({ data: "json, name=columnBreak" })
+  @SpeakeasyMetadata({ data: "json, name=columnBreak" })
   columnBreak?: ColumnBreak;
 
-  @Metadata({ data: "json, name=endIndex" })
+  @SpeakeasyMetadata({ data: "json, name=endIndex" })
   endIndex?: number;
 
-  @Metadata({ data: "json, name=equation" })
+  @SpeakeasyMetadata({ data: "json, name=equation" })
   equation?: Equation;
 
-  @Metadata({ data: "json, name=footnoteReference" })
+  @SpeakeasyMetadata({ data: "json, name=footnoteReference" })
   footnoteReference?: FootnoteReference;
 
-  @Metadata({ data: "json, name=horizontalRule" })
+  @SpeakeasyMetadata({ data: "json, name=horizontalRule" })
   horizontalRule?: HorizontalRule;
 
-  @Metadata({ data: "json, name=inlineObjectElement" })
+  @SpeakeasyMetadata({ data: "json, name=inlineObjectElement" })
   inlineObjectElement?: InlineObjectElement;
 
-  @Metadata({ data: "json, name=pageBreak" })
+  @SpeakeasyMetadata({ data: "json, name=pageBreak" })
   pageBreak?: PageBreak;
 
-  @Metadata({ data: "json, name=person" })
+  @SpeakeasyMetadata({ data: "json, name=person" })
   person?: Person;
 
-  @Metadata({ data: "json, name=richLink" })
+  @SpeakeasyMetadata({ data: "json, name=richLink" })
   richLink?: RichLink;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=textRun" })
+  @SpeakeasyMetadata({ data: "json, name=textRun" })
   textRun?: TextRun;
 }

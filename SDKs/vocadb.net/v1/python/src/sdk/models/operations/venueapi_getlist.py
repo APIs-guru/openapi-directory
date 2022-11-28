@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class VenueAPIGetListDistanceUnitEnum(str, Enum):
@@ -51,13 +52,13 @@ class VenueAPIGetListQueryParams:
 
 @dataclass
 class VenueAPIGetListRequest:
-    query_params: VenueAPIGetListQueryParams = field(default=None)
+    query_params: VenueAPIGetListQueryParams = field()
     
 
 @dataclass
 class VenueAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_venue_for_api_contract_: Optional[shared.PartialFindResultVenueForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

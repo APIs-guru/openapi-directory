@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorldSummary
+// Information about a world.
 type WorldSummary struct {
 	Arn           *string    `json:"arn,omitempty"`
 	CreatedAt     *time.Time `json:"createdAt,omitempty"`

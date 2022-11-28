@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeadLetterPolicy
 /**
  * Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times. If validation on any of the fields fails at subscription creation/updation, the create/update subscription request will fail.
@@ -33,11 +33,11 @@ var DeadLetterPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deadLetterTopic" }),
+        SpeakeasyMetadata({ data: "json, name=deadLetterTopic" }),
         __metadata("design:type", String)
     ], DeadLetterPolicy.prototype, "deadLetterTopic", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxDeliveryAttempts" }),
+        SpeakeasyMetadata({ data: "json, name=maxDeliveryAttempts" }),
         __metadata("design:type", Number)
     ], DeadLetterPolicy.prototype, "maxDeliveryAttempts", void 0);
     return DeadLetterPolicy;

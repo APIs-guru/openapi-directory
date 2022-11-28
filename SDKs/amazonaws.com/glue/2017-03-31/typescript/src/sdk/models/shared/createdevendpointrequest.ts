@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerTypeEnum } from "./workertypeenum";
 
 
+
 export class CreateDevEndpointRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arguments" })
+  @SpeakeasyMetadata({ data: "json, name=Arguments" })
   arguments?: Map<string, string>;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName: string;
 
-  @Metadata({ data: "json, name=ExtraJarsS3Path" })
+  @SpeakeasyMetadata({ data: "json, name=ExtraJarsS3Path" })
   extraJarsS3Path?: string;
 
-  @Metadata({ data: "json, name=ExtraPythonLibsS3Path" })
+  @SpeakeasyMetadata({ data: "json, name=ExtraPythonLibsS3Path" })
   extraPythonLibsS3Path?: string;
 
-  @Metadata({ data: "json, name=GlueVersion" })
+  @SpeakeasyMetadata({ data: "json, name=GlueVersion" })
   glueVersion?: string;
 
-  @Metadata({ data: "json, name=NumberOfNodes" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfNodes" })
   numberOfNodes?: number;
 
-  @Metadata({ data: "json, name=NumberOfWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfWorkers" })
   numberOfWorkers?: number;
 
-  @Metadata({ data: "json, name=PublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKey" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=PublicKeys" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKeys" })
   publicKeys?: string[];
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=SecurityConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityConfiguration" })
   securityConfiguration?: string;
 
-  @Metadata({ data: "json, name=SecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=WorkerType" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerType" })
   workerType?: WorkerTypeEnum;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum(str, Enum):
     ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED = "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED"
@@ -27,8 +29,12 @@ class GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnu
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAttributionSettings:
-    acquisition_conversion_event_lookback_window: Optional[GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acquisitionConversionEventLookbackWindow' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    other_conversion_event_lookback_window: Optional[GoogleAnalyticsAdminV1alphaAttributionSettingsOtherConversionEventLookbackWindowEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'otherConversionEventLookbackWindow' }})
-    reporting_attribution_model: Optional[GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportingAttributionModel' }})
+    r"""GoogleAnalyticsAdminV1alphaAttributionSettings
+    The attribution settings used for a given property. This is a singleton resource.
+    """
+    
+    acquisition_conversion_event_lookback_window: Optional[GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acquisitionConversionEventLookbackWindow') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    other_conversion_event_lookback_window: Optional[GoogleAnalyticsAdminV1alphaAttributionSettingsOtherConversionEventLookbackWindowEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('otherConversionEventLookbackWindow') }})
+    reporting_attribution_model: Optional[GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportingAttributionModel') }})
     

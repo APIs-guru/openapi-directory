@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TransferCertificateResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output from the TransferCertificate operation.
 **/
 export class TransferCertificateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transferredCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=transferredCertificateArn" })
   transferredCertificateArn?: string;
 }

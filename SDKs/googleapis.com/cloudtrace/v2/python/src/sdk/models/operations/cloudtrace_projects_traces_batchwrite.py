@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudtraceProjectsTracesBatchWritePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudtraceProjectsTracesBatchWriteQueryParams:
 
 @dataclass
 class CloudtraceProjectsTracesBatchWriteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudtraceProjectsTracesBatchWriteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudtraceProjectsTracesBatchWriteSecurity:
 
 @dataclass
 class CloudtraceProjectsTracesBatchWriteRequest:
-    path_params: CloudtraceProjectsTracesBatchWritePathParams = field(default=None)
-    query_params: CloudtraceProjectsTracesBatchWriteQueryParams = field(default=None)
+    path_params: CloudtraceProjectsTracesBatchWritePathParams = field()
+    query_params: CloudtraceProjectsTracesBatchWriteQueryParams = field()
+    security: CloudtraceProjectsTracesBatchWriteSecurity = field()
     request: Optional[shared.BatchWriteSpansRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudtraceProjectsTracesBatchWriteSecurity = field(default=None)
     
 
 @dataclass
 class CloudtraceProjectsTracesBatchWriteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

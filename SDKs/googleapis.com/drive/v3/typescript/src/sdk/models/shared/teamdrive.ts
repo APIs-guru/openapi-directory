@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TeamDriveBackgroundImageFile
@@ -6,16 +7,16 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
 **/
 export class TeamDriveBackgroundImageFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 
-  @Metadata({ data: "json, name=xCoordinate" })
+  @SpeakeasyMetadata({ data: "json, name=xCoordinate" })
   xCoordinate?: number;
 
-  @Metadata({ data: "json, name=yCoordinate" })
+  @SpeakeasyMetadata({ data: "json, name=yCoordinate" })
   yCoordinate?: number;
 }
 
@@ -25,64 +26,64 @@ export class TeamDriveBackgroundImageFile extends SpeakeasyBase {
  * Capabilities the current user has on this Team Drive.
 **/
 export class TeamDriveCapabilities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canAddChildren" })
+  @SpeakeasyMetadata({ data: "json, name=canAddChildren" })
   canAddChildren?: boolean;
 
-  @Metadata({ data: "json, name=canChangeCopyRequiresWriterPermissionRestriction" })
+  @SpeakeasyMetadata({ data: "json, name=canChangeCopyRequiresWriterPermissionRestriction" })
   canChangeCopyRequiresWriterPermissionRestriction?: boolean;
 
-  @Metadata({ data: "json, name=canChangeDomainUsersOnlyRestriction" })
+  @SpeakeasyMetadata({ data: "json, name=canChangeDomainUsersOnlyRestriction" })
   canChangeDomainUsersOnlyRestriction?: boolean;
 
-  @Metadata({ data: "json, name=canChangeTeamDriveBackground" })
+  @SpeakeasyMetadata({ data: "json, name=canChangeTeamDriveBackground" })
   canChangeTeamDriveBackground?: boolean;
 
-  @Metadata({ data: "json, name=canChangeTeamMembersOnlyRestriction" })
+  @SpeakeasyMetadata({ data: "json, name=canChangeTeamMembersOnlyRestriction" })
   canChangeTeamMembersOnlyRestriction?: boolean;
 
-  @Metadata({ data: "json, name=canComment" })
+  @SpeakeasyMetadata({ data: "json, name=canComment" })
   canComment?: boolean;
 
-  @Metadata({ data: "json, name=canCopy" })
+  @SpeakeasyMetadata({ data: "json, name=canCopy" })
   canCopy?: boolean;
 
-  @Metadata({ data: "json, name=canDeleteChildren" })
+  @SpeakeasyMetadata({ data: "json, name=canDeleteChildren" })
   canDeleteChildren?: boolean;
 
-  @Metadata({ data: "json, name=canDeleteTeamDrive" })
+  @SpeakeasyMetadata({ data: "json, name=canDeleteTeamDrive" })
   canDeleteTeamDrive?: boolean;
 
-  @Metadata({ data: "json, name=canDownload" })
+  @SpeakeasyMetadata({ data: "json, name=canDownload" })
   canDownload?: boolean;
 
-  @Metadata({ data: "json, name=canEdit" })
+  @SpeakeasyMetadata({ data: "json, name=canEdit" })
   canEdit?: boolean;
 
-  @Metadata({ data: "json, name=canListChildren" })
+  @SpeakeasyMetadata({ data: "json, name=canListChildren" })
   canListChildren?: boolean;
 
-  @Metadata({ data: "json, name=canManageMembers" })
+  @SpeakeasyMetadata({ data: "json, name=canManageMembers" })
   canManageMembers?: boolean;
 
-  @Metadata({ data: "json, name=canReadRevisions" })
+  @SpeakeasyMetadata({ data: "json, name=canReadRevisions" })
   canReadRevisions?: boolean;
 
-  @Metadata({ data: "json, name=canRemoveChildren" })
+  @SpeakeasyMetadata({ data: "json, name=canRemoveChildren" })
   canRemoveChildren?: boolean;
 
-  @Metadata({ data: "json, name=canRename" })
+  @SpeakeasyMetadata({ data: "json, name=canRename" })
   canRename?: boolean;
 
-  @Metadata({ data: "json, name=canRenameTeamDrive" })
+  @SpeakeasyMetadata({ data: "json, name=canRenameTeamDrive" })
   canRenameTeamDrive?: boolean;
 
-  @Metadata({ data: "json, name=canResetTeamDriveRestrictions" })
+  @SpeakeasyMetadata({ data: "json, name=canResetTeamDriveRestrictions" })
   canResetTeamDriveRestrictions?: boolean;
 
-  @Metadata({ data: "json, name=canShare" })
+  @SpeakeasyMetadata({ data: "json, name=canShare" })
   canShare?: boolean;
 
-  @Metadata({ data: "json, name=canTrashChildren" })
+  @SpeakeasyMetadata({ data: "json, name=canTrashChildren" })
   canTrashChildren?: boolean;
 }
 
@@ -92,16 +93,16 @@ export class TeamDriveCapabilities extends SpeakeasyBase {
  * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
 **/
 export class TeamDriveRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminManagedRestrictions" })
+  @SpeakeasyMetadata({ data: "json, name=adminManagedRestrictions" })
   adminManagedRestrictions?: boolean;
 
-  @Metadata({ data: "json, name=copyRequiresWriterPermission" })
+  @SpeakeasyMetadata({ data: "json, name=copyRequiresWriterPermission" })
   copyRequiresWriterPermission?: boolean;
 
-  @Metadata({ data: "json, name=domainUsersOnly" })
+  @SpeakeasyMetadata({ data: "json, name=domainUsersOnly" })
   domainUsersOnly?: boolean;
 
-  @Metadata({ data: "json, name=teamMembersOnly" })
+  @SpeakeasyMetadata({ data: "json, name=teamMembersOnly" })
   teamMembersOnly?: boolean;
 }
 
@@ -111,36 +112,36 @@ export class TeamDriveRestrictions extends SpeakeasyBase {
  * Deprecated: use the drive collection instead.
 **/
 export class TeamDrive extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backgroundImageFile" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundImageFile" })
   backgroundImageFile?: TeamDriveBackgroundImageFile;
 
-  @Metadata({ data: "json, name=backgroundImageLink" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundImageLink" })
   backgroundImageLink?: string;
 
-  @Metadata({ data: "json, name=capabilities" })
+  @SpeakeasyMetadata({ data: "json, name=capabilities" })
   capabilities?: TeamDriveCapabilities;
 
-  @Metadata({ data: "json, name=colorRgb" })
+  @SpeakeasyMetadata({ data: "json, name=colorRgb" })
   colorRgb?: string;
 
-  @Metadata({ data: "json, name=createdTime" })
+  @SpeakeasyMetadata({ data: "json, name=createdTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=orgUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitId" })
   orgUnitId?: string;
 
-  @Metadata({ data: "json, name=restrictions" })
+  @SpeakeasyMetadata({ data: "json, name=restrictions" })
   restrictions?: TeamDriveRestrictions;
 
-  @Metadata({ data: "json, name=themeId" })
+  @SpeakeasyMetadata({ data: "json, name=themeId" })
   themeId?: string;
 }

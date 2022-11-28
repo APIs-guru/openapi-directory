@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryHeadSourceCodeType } from "./repositoryheadsourcecodetype";
 import { SourceCodeType } from "./sourcecodetype";
 // RepositoryAnalysis
@@ -35,11 +35,11 @@ var RepositoryAnalysis = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RepositoryHead" }),
+        SpeakeasyMetadata({ data: "json, name=RepositoryHead" }),
         __metadata("design:type", RepositoryHeadSourceCodeType)
     ], RepositoryAnalysis.prototype, "repositoryHead", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceCodeType" }),
+        SpeakeasyMetadata({ data: "json, name=SourceCodeType" }),
         __metadata("design:type", SourceCodeType)
     ], RepositoryAnalysis.prototype, "sourceCodeType", void 0);
     return RepositoryAnalysis;

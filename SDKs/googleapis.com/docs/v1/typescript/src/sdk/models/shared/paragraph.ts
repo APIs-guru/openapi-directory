@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Bullet } from "./bullet";
 import { ParagraphElement } from "./paragraphelement";
 import { ParagraphStyle } from "./paragraphstyle";
 import { SuggestedBullet } from "./suggestedbullet";
 import { SuggestedParagraphStyle } from "./suggestedparagraphstyle";
 import { ObjectReferences } from "./objectreferences";
+import { ParagraphElementInput } from "./paragraphelement";
+
 
 
 // Paragraph
@@ -13,24 +14,52 @@ import { ObjectReferences } from "./objectreferences";
  * A StructuralElement representing a paragraph. A paragraph is a range of content that's terminated with a newline character.
 **/
 export class Paragraph extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bullet" })
+  @SpeakeasyMetadata({ data: "json, name=bullet" })
   bullet?: Bullet;
 
-  @Metadata({ data: "json, name=elements", elemType: shared.ParagraphElement })
+  @SpeakeasyMetadata({ data: "json, name=elements", elemType: ParagraphElement })
   elements?: ParagraphElement[];
 
-  @Metadata({ data: "json, name=paragraphStyle" })
+  @SpeakeasyMetadata({ data: "json, name=paragraphStyle" })
   paragraphStyle?: ParagraphStyle;
 
-  @Metadata({ data: "json, name=positionedObjectIds" })
+  @SpeakeasyMetadata({ data: "json, name=positionedObjectIds" })
   positionedObjectIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedBulletChanges", elemType: shared.SuggestedBullet })
+  @SpeakeasyMetadata({ data: "json, name=suggestedBulletChanges", elemType: SuggestedBullet })
   suggestedBulletChanges?: Map<string, SuggestedBullet>;
 
-  @Metadata({ data: "json, name=suggestedParagraphStyleChanges", elemType: shared.SuggestedParagraphStyle })
+  @SpeakeasyMetadata({ data: "json, name=suggestedParagraphStyleChanges", elemType: SuggestedParagraphStyle })
   suggestedParagraphStyleChanges?: Map<string, SuggestedParagraphStyle>;
 
-  @Metadata({ data: "json, name=suggestedPositionedObjectIds", elemType: shared.ObjectReferences })
+  @SpeakeasyMetadata({ data: "json, name=suggestedPositionedObjectIds", elemType: ObjectReferences })
+  suggestedPositionedObjectIds?: Map<string, ObjectReferences>;
+}
+
+
+// ParagraphInput
+/** 
+ * A StructuralElement representing a paragraph. A paragraph is a range of content that's terminated with a newline character.
+**/
+export class ParagraphInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bullet" })
+  bullet?: Bullet;
+
+  @SpeakeasyMetadata({ data: "json, name=elements", elemType: ParagraphElementInput })
+  elements?: ParagraphElementInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=paragraphStyle" })
+  paragraphStyle?: ParagraphStyle;
+
+  @SpeakeasyMetadata({ data: "json, name=positionedObjectIds" })
+  positionedObjectIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=suggestedBulletChanges", elemType: SuggestedBullet })
+  suggestedBulletChanges?: Map<string, SuggestedBullet>;
+
+  @SpeakeasyMetadata({ data: "json, name=suggestedParagraphStyleChanges", elemType: SuggestedParagraphStyle })
+  suggestedParagraphStyleChanges?: Map<string, SuggestedParagraphStyle>;
+
+  @SpeakeasyMetadata({ data: "json, name=suggestedPositionedObjectIds", elemType: ObjectReferences })
   suggestedPositionedObjectIds?: Map<string, ObjectReferences>;
 }

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedZoneCloudLoggingConfig } from "./managedzonecloudloggingconfig";
 import { ManagedZoneDnsSecConfig } from "./managedzonednssecconfig";
 import { ManagedZoneForwardingConfig } from "./managedzoneforwardingconfig";
@@ -7,9 +7,10 @@ import { ManagedZonePrivateVisibilityConfig } from "./managedzoneprivatevisibili
 import { ManagedZoneReverseLookupConfig } from "./managedzonereverselookupconfig";
 import { ManagedZoneServiceDirectoryConfig } from "./managedzoneservicedirectoryconfig";
 
+
 export enum ManagedZoneVisibilityEnum {
-    Public = "public"
-,    Private = "private"
+    Public = "public",
+    Private = "private"
 }
 
 
@@ -18,54 +19,54 @@ export enum ManagedZoneVisibilityEnum {
  * A zone is a subtree of the DNS namespace under one administrative responsibility. A ManagedZone is a resource that represents a DNS zone hosted by the Cloud DNS service.
 **/
 export class ManagedZone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudLoggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=cloudLoggingConfig" })
   cloudLoggingConfig?: ManagedZoneCloudLoggingConfig;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=dnsName" })
+  @SpeakeasyMetadata({ data: "json, name=dnsName" })
   dnsName?: string;
 
-  @Metadata({ data: "json, name=dnssecConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dnssecConfig" })
   dnssecConfig?: ManagedZoneDnsSecConfig;
 
-  @Metadata({ data: "json, name=forwardingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=forwardingConfig" })
   forwardingConfig?: ManagedZoneForwardingConfig;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nameServerSet" })
+  @SpeakeasyMetadata({ data: "json, name=nameServerSet" })
   nameServerSet?: string;
 
-  @Metadata({ data: "json, name=nameServers" })
+  @SpeakeasyMetadata({ data: "json, name=nameServers" })
   nameServers?: string[];
 
-  @Metadata({ data: "json, name=peeringConfig" })
+  @SpeakeasyMetadata({ data: "json, name=peeringConfig" })
   peeringConfig?: ManagedZonePeeringConfig;
 
-  @Metadata({ data: "json, name=privateVisibilityConfig" })
+  @SpeakeasyMetadata({ data: "json, name=privateVisibilityConfig" })
   privateVisibilityConfig?: ManagedZonePrivateVisibilityConfig;
 
-  @Metadata({ data: "json, name=reverseLookupConfig" })
+  @SpeakeasyMetadata({ data: "json, name=reverseLookupConfig" })
   reverseLookupConfig?: ManagedZoneReverseLookupConfig;
 
-  @Metadata({ data: "json, name=serviceDirectoryConfig" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDirectoryConfig" })
   serviceDirectoryConfig?: ManagedZoneServiceDirectoryConfig;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: ManagedZoneVisibilityEnum;
 }

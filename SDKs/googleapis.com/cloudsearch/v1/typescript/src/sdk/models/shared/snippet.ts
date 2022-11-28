@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchRange } from "./matchrange";
+
 
 
 // Snippet
@@ -8,9 +8,9 @@ import { MatchRange } from "./matchrange";
  * Snippet of the search result, which summarizes the content of the resulting page.
 **/
 export class Snippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchRanges", elemType: shared.MatchRange })
+  @SpeakeasyMetadata({ data: "json, name=matchRanges", elemType: MatchRange })
   matchRanges?: MatchRange[];
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationTypeEnum } from "./authorizationtypeenum";
 import { AwsIamConfig } from "./awsiamconfig";
 /**

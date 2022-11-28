@@ -9,7 +9,7 @@ type AddKeySecurity struct {
 }
 
 type AddKeyRequest struct {
-	Request  shared.Key `request:"mediaType=application/json"`
+	Request  shared.KeyInput `request:"mediaType=application/json"`
 	Security AddKeySecurity
 }
 

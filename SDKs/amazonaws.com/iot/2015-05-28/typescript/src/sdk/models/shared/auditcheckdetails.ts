@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditCheckRunStatusEnum } from "./auditcheckrunstatusenum";
+
 
 
 // AuditCheckDetails
@@ -7,24 +8,24 @@ import { AuditCheckRunStatusEnum } from "./auditcheckrunstatusenum";
  * Information about the audit check.
 **/
 export class AuditCheckDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkCompliant" })
+  @SpeakeasyMetadata({ data: "json, name=checkCompliant" })
   checkCompliant?: boolean;
 
-  @Metadata({ data: "json, name=checkRunStatus" })
+  @SpeakeasyMetadata({ data: "json, name=checkRunStatus" })
   checkRunStatus?: AuditCheckRunStatusEnum;
 
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=nonCompliantResourcesCount" })
+  @SpeakeasyMetadata({ data: "json, name=nonCompliantResourcesCount" })
   nonCompliantResourcesCount?: number;
 
-  @Metadata({ data: "json, name=suppressedNonCompliantResourcesCount" })
+  @SpeakeasyMetadata({ data: "json, name=suppressedNonCompliantResourcesCount" })
   suppressedNonCompliantResourcesCount?: number;
 
-  @Metadata({ data: "json, name=totalResourcesCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalResourcesCount" })
   totalResourcesCount?: number;
 }

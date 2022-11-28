@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MaintenanceExclusionOptionsScopeEnum {
-    NoUpgrades = "NO_UPGRADES"
-,    NoMinorUpgrades = "NO_MINOR_UPGRADES"
-,    NoMinorOrNodeUpgrades = "NO_MINOR_OR_NODE_UPGRADES"
+    NoUpgrades = "NO_UPGRADES",
+    NoMinorUpgrades = "NO_MINOR_UPGRADES",
+    NoMinorOrNodeUpgrades = "NO_MINOR_OR_NODE_UPGRADES"
 }
 
 
@@ -12,6 +13,6 @@ export enum MaintenanceExclusionOptionsScopeEnum {
  * Represents the Maintenance exclusion option.
 **/
 export class MaintenanceExclusionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: MaintenanceExclusionOptionsScopeEnum;
 }

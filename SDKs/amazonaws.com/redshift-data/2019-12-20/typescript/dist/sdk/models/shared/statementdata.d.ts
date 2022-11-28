@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SqlParameter } from "./sqlparameter";
 import { StatusStringEnum } from "./statusstringenum";
 /**

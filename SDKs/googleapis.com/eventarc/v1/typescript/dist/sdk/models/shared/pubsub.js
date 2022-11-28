@@ -22,7 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// PubsubInput
+/**
+ * Represents a Pub/Sub transport.
+**/
+var PubsubInput = /** @class */ (function (_super) {
+    __extends(PubsubInput, _super);
+    function PubsubInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=topic" }),
+        __metadata("design:type", String)
+    ], PubsubInput.prototype, "topic", void 0);
+    return PubsubInput;
+}(SpeakeasyBase));
+export { PubsubInput };
 // Pubsub
 /**
  * Represents a Pub/Sub transport.
@@ -33,11 +49,11 @@ var Pubsub = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=subscription" }),
+        SpeakeasyMetadata({ data: "json, name=subscription" }),
         __metadata("design:type", String)
     ], Pubsub.prototype, "subscription", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", String)
     ], Pubsub.prototype, "topic", void 0);
     return Pubsub;

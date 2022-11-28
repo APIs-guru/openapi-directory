@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceType } from "./devicetype";
+
 
 
 // AdminListDevicesResponse
@@ -8,9 +8,9 @@ import { DeviceType } from "./devicetype";
  * Lists the device's response, as an administrator.
 **/
 export class AdminListDevicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Devices", elemType: shared.DeviceType })
+  @SpeakeasyMetadata({ data: "json, name=Devices", elemType: DeviceType })
   devices?: DeviceType[];
 
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 }

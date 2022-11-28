@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import rulegroup
-from . import rulegroupresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeRuleGroupResponse:
-    rule_group: Optional[rulegroup.RuleGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleGroup' }})
-    rule_group_response: rulegroupresponse.RuleGroupResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleGroupResponse' }})
-    update_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateToken' }})
+    rule_group_response: RuleGroupResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleGroupResponse') }})
+    update_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateToken') }})
+    rule_group: Optional[RuleGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleGroup') }})
     

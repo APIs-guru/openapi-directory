@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObBankTransactionCodeStructure1
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Set of elements used to fully identify the type of underlying transaction resulting in an entry.
 **/
 export class ObBankTransactionCodeStructure1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code: string;
 
-  @Metadata({ data: "json, name=SubCode" })
+  @SpeakeasyMetadata({ data: "json, name=SubCode" })
   subCode: string;
 }

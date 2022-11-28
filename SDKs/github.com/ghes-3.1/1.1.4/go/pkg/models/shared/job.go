@@ -29,6 +29,8 @@ type JobSteps struct {
 	Status      JobStepsStatusEnum `json:"status"`
 }
 
+// Job
+// Information of a job execution in a workflow run
 type Job struct {
 	CheckRunURL string        `json:"check_run_url"`
 	CompletedAt time.Time     `json:"completed_at"`

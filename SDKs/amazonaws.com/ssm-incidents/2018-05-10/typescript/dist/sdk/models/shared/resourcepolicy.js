@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ResourcePolicy
 /**
  * The resource policy that allows Incident Manager to perform actions on resources on your behalf.
@@ -33,15 +33,15 @@ var ResourcePolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=policyDocument" }),
+        SpeakeasyMetadata({ data: "json, name=policyDocument" }),
         __metadata("design:type", String)
     ], ResourcePolicy.prototype, "policyDocument", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyId" }),
+        SpeakeasyMetadata({ data: "json, name=policyId" }),
         __metadata("design:type", String)
     ], ResourcePolicy.prototype, "policyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ramResourceShareRegion" }),
+        SpeakeasyMetadata({ data: "json, name=ramResourceShareRegion" }),
         __metadata("design:type", String)
     ], ResourcePolicy.prototype, "ramResourceShareRegion", void 0);
     return ResourcePolicy;

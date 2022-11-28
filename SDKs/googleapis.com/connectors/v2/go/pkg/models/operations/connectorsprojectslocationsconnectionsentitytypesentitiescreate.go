@@ -30,7 +30,7 @@ type ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreateSecurity str
 type ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreateRequest struct {
 	PathParams  ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreatePathParams
 	QueryParams ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreateQueryParams
-	Request     *shared.Entity `request:"mediaType=application/json"`
+	Request     *shared.EntityInput `request:"mediaType=application/json"`
 	Security    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreateSecurity
 }
 

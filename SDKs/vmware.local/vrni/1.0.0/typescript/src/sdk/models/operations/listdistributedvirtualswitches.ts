@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListDistributedVirtualSwitchesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_time" })
   endTime?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_time" })
   startTime?: number;
 }
 
 
 export class ListDistributedVirtualSwitchesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class ListDistributedVirtualSwitchesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListDistributedVirtualSwitchesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListDistributedVirtualSwitchesSecurity;
 }
 
 
 export class ListDistributedVirtualSwitchesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pagedListResponseWithTime?: shared.PagedListResponseWithTime;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

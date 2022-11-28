@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTranscriptionJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TranscriptionJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TranscriptionJobName" })
   transcriptionJobName: string;
 }

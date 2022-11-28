@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetApplyPendingMaintenanceActionActionEnum(str, Enum):
     APPLY_PENDING_MAINTENANCE_ACTION = "ApplyPendingMaintenanceAction"
@@ -10,11 +14,11 @@ class GetApplyPendingMaintenanceActionVersionEnum(str, Enum):
 
 @dataclass
 class GetApplyPendingMaintenanceActionQueryParams:
-    action: GetApplyPendingMaintenanceActionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    apply_action: str = field(default=None, metadata={'query_param': { 'field_name': 'ApplyAction', 'style': 'form', 'explode': True }})
-    opt_in_type: str = field(default=None, metadata={'query_param': { 'field_name': 'OptInType', 'style': 'form', 'explode': True }})
-    resource_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ResourceIdentifier', 'style': 'form', 'explode': True }})
-    version: GetApplyPendingMaintenanceActionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetApplyPendingMaintenanceActionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    apply_action: str = field(metadata={'query_param': { 'field_name': 'ApplyAction', 'style': 'form', 'explode': True }})
+    opt_in_type: str = field(metadata={'query_param': { 'field_name': 'OptInType', 'style': 'form', 'explode': True }})
+    resource_identifier: str = field(metadata={'query_param': { 'field_name': 'ResourceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetApplyPendingMaintenanceActionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetApplyPendingMaintenanceActionHeaders:
 
 @dataclass
 class GetApplyPendingMaintenanceActionRequest:
-    query_params: GetApplyPendingMaintenanceActionQueryParams = field(default=None)
-    headers: GetApplyPendingMaintenanceActionHeaders = field(default=None)
+    headers: GetApplyPendingMaintenanceActionHeaders = field()
+    query_params: GetApplyPendingMaintenanceActionQueryParams = field()
     
 
 @dataclass
 class GetApplyPendingMaintenanceActionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

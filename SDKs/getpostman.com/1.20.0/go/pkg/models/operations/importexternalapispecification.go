@@ -90,10 +90,6 @@ type ImportExternalAPISpecificationRequestBody struct {
 	Type  *string                                         `json:"type,omitempty"`
 }
 
-type ImportExternalAPISpecificationRequest struct {
-	Request *ImportExternalAPISpecificationRequestBody `request:"mediaType=application/json"`
-}
-
 type ImportExternalAPISpecification200ApplicationJSONCollections struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -116,6 +112,10 @@ type ImportExternalAPISpecification400ApplicationJSONError struct {
 
 type ImportExternalAPISpecification400ApplicationJSON struct {
 	Error *ImportExternalAPISpecification400ApplicationJSONError `json:"error,omitempty"`
+}
+
+type ImportExternalAPISpecificationRequest struct {
+	Request *ImportExternalAPISpecificationRequestBody `request:"mediaType=application/json"`
 }
 
 type ImportExternalAPISpecificationResponse struct {

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InspectUrlIndexRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Index inspection request.
 **/
 export class InspectUrlIndexRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inspectionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=inspectionUrl" })
   inspectionUrl?: string;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=siteUrl" })
+  @SpeakeasyMetadata({ data: "json, name=siteUrl" })
   siteUrl?: string;
 }

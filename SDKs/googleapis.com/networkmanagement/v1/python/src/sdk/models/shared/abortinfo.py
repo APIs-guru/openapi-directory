@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AbortInfoCauseEnum(str, Enum):
     CAUSE_UNSPECIFIED = "CAUSE_UNSPECIFIED"
@@ -19,12 +21,18 @@ class AbortInfoCauseEnum(str, Enum):
     DESTINATION_ENDPOINT_NOT_FOUND = "DESTINATION_ENDPOINT_NOT_FOUND"
     MISMATCHED_DESTINATION_NETWORK = "MISMATCHED_DESTINATION_NETWORK"
     UNSUPPORTED = "UNSUPPORTED"
+    MISMATCHED_IP_VERSION = "MISMATCHED_IP_VERSION"
+    GKE_KONNECTIVITY_PROXY_UNSUPPORTED = "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"
 
 
 @dataclass_json
 @dataclass
 class AbortInfo:
-    cause: Optional[AbortInfoCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cause' }})
-    projects_missing_permission: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectsMissingPermission' }})
-    resource_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceUri' }})
+    r"""AbortInfo
+    Details of the final state \"abort\" and associated resource.
+    """
+    
+    cause: Optional[AbortInfoCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cause') }})
+    projects_missing_permission: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectsMissingPermission') }})
+    resource_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceUri') }})
     

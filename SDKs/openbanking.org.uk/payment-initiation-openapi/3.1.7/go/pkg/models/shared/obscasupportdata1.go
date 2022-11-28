@@ -19,6 +19,8 @@ const (
 	ObscaSupportData1RequestedScaExemptionTypeEnumPartyToParty      ObscaSupportData1RequestedScaExemptionTypeEnum = "PartyToParty"
 )
 
+// ObscaSupportData1
+// Supporting Data provided by TPP, when requesting SCA Exemption.
 type ObscaSupportData1 struct {
 	AppliedAuthenticationApproach *ObscaSupportData1AppliedAuthenticationApproachEnum `json:"AppliedAuthenticationApproach,omitempty"`
 	ReferencePaymentOrderID       *string                                             `json:"ReferencePaymentOrderId,omitempty"`

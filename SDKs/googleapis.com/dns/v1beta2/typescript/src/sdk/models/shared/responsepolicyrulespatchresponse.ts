@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResponseHeader } from "./responseheader";
 import { ResponsePolicyRule } from "./responsepolicyrule";
 
 
+
 export class ResponsePolicyRulesPatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: ResponseHeader;
 
-  @Metadata({ data: "json, name=responsePolicyRule" })
+  @SpeakeasyMetadata({ data: "json, name=responsePolicyRule" })
   responsePolicyRule?: ResponsePolicyRule;
 }

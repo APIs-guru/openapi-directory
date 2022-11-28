@@ -9,6 +9,8 @@ const (
 	BasicChartAxisPositionEnumRightAxis                         BasicChartAxisPositionEnum = "RIGHT_AXIS"
 )
 
+// BasicChartAxis
+// An axis of the chart. A chart may not have more than one axis per axis position.
 type BasicChartAxis struct {
 	Format            *TextFormat                 `json:"format,omitempty"`
 	Position          *BasicChartAxisPositionEnum `json:"position,omitempty"`

@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.nytimes.com/svc/books/v3",
 }
 
@@ -17,10 +17,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: http://developer.nytimes.com/
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetListsBestSellersHistoryJSON - Best Seller History List
 func (s *SDK) GetListsBestSellersHistoryJSON(ctx context.Context, request operations.GetListsBestSellersHistoryJSONRequest) (*operations.GetListsBestSellersHistoryJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lists/best-sellers/history.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +84,7 @@ func (s *SDK) GetListsBestSellersHistoryJSON(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -91,8 +114,9 @@ func (s *SDK) GetListsBestSellersHistoryJSON(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetListsDateListJSON - Best Seller List by Date
 func (s *SDK) GetListsDateListJSON(ctx context.Context, request operations.GetListsDateListJSONRequest) (*operations.GetListsDateListJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lists/{date}/{list}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -102,7 +126,7 @@ func (s *SDK) GetListsDateListJSON(ctx context.Context, request operations.GetLi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -132,8 +156,9 @@ func (s *SDK) GetListsDateListJSON(ctx context.Context, request operations.GetLi
 	return res, nil
 }
 
+// GetListsFormat - Best Seller List
 func (s *SDK) GetListsFormat(ctx context.Context, request operations.GetListsFormatRequest) (*operations.GetListsFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lists.{format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -143,7 +168,7 @@ func (s *SDK) GetListsFormat(ctx context.Context, request operations.GetListsFor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -173,8 +198,9 @@ func (s *SDK) GetListsFormat(ctx context.Context, request operations.GetListsFor
 	return res, nil
 }
 
+// GetListsNamesFormat - Best Seller List Names
 func (s *SDK) GetListsNamesFormat(ctx context.Context, request operations.GetListsNamesFormatRequest) (*operations.GetListsNamesFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lists/names.{format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -184,7 +210,7 @@ func (s *SDK) GetListsNamesFormat(ctx context.Context, request operations.GetLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -214,8 +240,9 @@ func (s *SDK) GetListsNamesFormat(ctx context.Context, request operations.GetLis
 	return res, nil
 }
 
+// GetListsOverviewFormat - Best Seller List Overview
 func (s *SDK) GetListsOverviewFormat(ctx context.Context, request operations.GetListsOverviewFormatRequest) (*operations.GetListsOverviewFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lists/overview.{format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -225,7 +252,7 @@ func (s *SDK) GetListsOverviewFormat(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -255,8 +282,9 @@ func (s *SDK) GetListsOverviewFormat(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetReviewsFormat - Reviews
 func (s *SDK) GetReviewsFormat(ctx context.Context, request operations.GetReviewsFormatRequest) (*operations.GetReviewsFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reviews.{format}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -266,7 +294,7 @@ func (s *SDK) GetReviewsFormat(ctx context.Context, request operations.GetReview
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

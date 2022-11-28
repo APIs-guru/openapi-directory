@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CloudidentityGroupsMembershipsCheckTransitiveMembershipPathParams = /** @class */ (function (_super) {
     __extends(CloudidentityGroupsMembershipsCheckTransitiveMembershipPathParams, _super);
@@ -30,7 +30,7 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipPathParams = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipPathParams.prototype, "parent", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipPathParams;
@@ -42,51 +42,51 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams.prototype, "uploadProtocol", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams;
@@ -98,11 +98,11 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption1 = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption1.prototype, "oauth2c", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption1;
@@ -114,11 +114,11 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption2 = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption2.prototype, "oauth2c", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption2;
@@ -130,11 +130,11 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption3 = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption3.prototype, "oauth2c", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption3;
@@ -146,15 +146,15 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurity = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption1)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption2)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurityOption3)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurity.prototype, "option3", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurity;
@@ -166,15 +166,15 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipRequest = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudidentityGroupsMembershipsCheckTransitiveMembershipPathParams)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudidentityGroupsMembershipsCheckTransitiveMembershipQueryParams)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudidentityGroupsMembershipsCheckTransitiveMembershipSecurity)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipRequest.prototype, "security", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipRequest;
@@ -186,15 +186,15 @@ var CloudidentityGroupsMembershipsCheckTransitiveMembershipResponse = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CheckTransitiveMembershipResponse)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipResponse.prototype, "checkTransitiveMembershipResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CloudidentityGroupsMembershipsCheckTransitiveMembershipResponse.prototype, "statusCode", void 0);
     return CloudidentityGroupsMembershipsCheckTransitiveMembershipResponse;

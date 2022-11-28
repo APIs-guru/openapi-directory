@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import awss3bucketbucketlifecycleconfigurationrulesfilterpredicatedetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails:
-    predicate: Optional[awss3bucketbucketlifecycleconfigurationrulesfilterpredicatedetails.AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Predicate' }})
+    r"""AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails
+    Identifies the objects that a rule applies to.
+    """
+    
+    predicate: Optional[AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Predicate') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReceivedMessage } from "./receivedmessage";
 /**
  * Response for the `Pull` method.

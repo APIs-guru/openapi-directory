@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VpcConfigurationDescription } from "./vpcconfigurationdescription";
 export declare class AddApplicationVpcConfigurationResponse extends SpeakeasyBase {
     applicationArn?: string;

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var AddEvidenceServers = []string{
+var AddEvidenceServerList = []string{
 	"https://apiz.ebay.com{basePath}",
 }
 

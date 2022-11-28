@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RetryPolicy
 /**
  * A policy that specifies how Cloud Pub/Sub retries message delivery. Retry delay will be exponential based on provided minimum and maximum backoffs. https://en.wikipedia.org/wiki/Exponential_backoff. RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded events for a given message. Retry Policy is implemented on a best effort basis. At times, the delay between consecutive deliveries may not match the configuration. That is, delay can be more or less than configured backoff.
@@ -33,11 +33,11 @@ var RetryPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maximumBackoff" }),
+        SpeakeasyMetadata({ data: "json, name=maximumBackoff" }),
         __metadata("design:type", String)
     ], RetryPolicy.prototype, "maximumBackoff", void 0);
     __decorate([
-        Metadata({ data: "json, name=minimumBackoff" }),
+        SpeakeasyMetadata({ data: "json, name=minimumBackoff" }),
         __metadata("design:type", String)
     ], RetryPolicy.prototype, "minimumBackoff", void 0);
     return RetryPolicy;

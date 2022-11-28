@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LensSummary
 /**
  * A lens summary of a lens.
@@ -33,19 +33,19 @@ var LensSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], LensSummary.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=LensAlias" }),
+        SpeakeasyMetadata({ data: "json, name=LensAlias" }),
         __metadata("design:type", String)
     ], LensSummary.prototype, "lensAlias", void 0);
     __decorate([
-        Metadata({ data: "json, name=LensName" }),
+        SpeakeasyMetadata({ data: "json, name=LensName" }),
         __metadata("design:type", String)
     ], LensSummary.prototype, "lensName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LensVersion" }),
+        SpeakeasyMetadata({ data: "json, name=LensVersion" }),
         __metadata("design:type", String)
     ], LensSummary.prototype, "lensVersion", void 0);
     return LensSummary;

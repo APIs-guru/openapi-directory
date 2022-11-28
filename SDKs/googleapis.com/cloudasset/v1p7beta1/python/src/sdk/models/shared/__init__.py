@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlecloudassetv1p7beta1bigquerydestination import *
 from .googlecloudassetv1p7beta1exportassetsrequest import *

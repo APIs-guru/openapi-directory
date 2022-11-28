@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GooglePrivacyDlpV2ByteContentItemTypeEnum(str, Enum):
     BYTES_TYPE_UNSPECIFIED = "BYTES_TYPE_UNSPECIFIED"
@@ -22,6 +24,10 @@ class GooglePrivacyDlpV2ByteContentItemTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2ByteContentItem:
-    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    type: Optional[GooglePrivacyDlpV2ByteContentItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GooglePrivacyDlpV2ByteContentItem
+    Container for bytes to inspect or redact.
+    """
+    
+    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    type: Optional[GooglePrivacyDlpV2ByteContentItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

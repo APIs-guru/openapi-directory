@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class TpuProjectsLocationsNodesPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class TpuProjectsLocationsNodesPatchSecurity extends SpeakeasyBas
 export declare class TpuProjectsLocationsNodesPatchRequest extends SpeakeasyBase {
     pathParams: TpuProjectsLocationsNodesPatchPathParams;
     queryParams: TpuProjectsLocationsNodesPatchQueryParams;
-    request?: shared.Node;
+    request?: shared.NodeInput;
     security: TpuProjectsLocationsNodesPatchSecurity;
 }
 export declare class TpuProjectsLocationsNodesPatchResponse extends SpeakeasyBase {

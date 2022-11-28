@@ -23,6 +23,8 @@ const (
 	ProjectAudienceGenderEnumPlanningAudienceGenderFemale ProjectAudienceGenderEnum = "PLANNING_AUDIENCE_GENDER_FEMALE"
 )
 
+// Project
+// Contains properties of a Planning project.
 type Project struct {
 	AccountID                *string                      `json:"accountId,omitempty"`
 	AdvertiserID             *string                      `json:"advertiserId,omitempty"`

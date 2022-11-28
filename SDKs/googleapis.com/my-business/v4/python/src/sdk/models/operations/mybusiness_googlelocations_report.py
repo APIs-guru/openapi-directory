@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessGoogleLocationsReportPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessGoogleLocationsReportQueryParams:
 
 @dataclass
 class MybusinessGoogleLocationsReportRequest:
-    path_params: MybusinessGoogleLocationsReportPathParams = field(default=None)
-    query_params: MybusinessGoogleLocationsReportQueryParams = field(default=None)
+    path_params: MybusinessGoogleLocationsReportPathParams = field()
+    query_params: MybusinessGoogleLocationsReportQueryParams = field()
     request: Optional[shared.ReportGoogleLocationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessGoogleLocationsReportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

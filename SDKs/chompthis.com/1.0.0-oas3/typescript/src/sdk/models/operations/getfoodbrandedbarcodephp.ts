@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFoodBrandedBarcodePhpQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" })
   code: string;
 }
 
 
 export class GetFoodBrandedBarcodePhpSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class GetFoodBrandedBarcodePhpRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFoodBrandedBarcodePhpQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFoodBrandedBarcodePhpSecurity;
 }
 
 
 export class GetFoodBrandedBarcodePhpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   brandedFoodObject?: shared.BrandedFoodObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

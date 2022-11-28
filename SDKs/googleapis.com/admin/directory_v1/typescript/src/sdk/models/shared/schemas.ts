@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Schema } from "./schema";
+
 
 
 // Schemas
@@ -8,12 +8,12 @@ import { Schema } from "./schema";
  * JSON response template for List Schema operation in Directory API.
 **/
 export class Schemas extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=schemas", elemType: shared.Schema })
+  @SpeakeasyMetadata({ data: "json, name=schemas", elemType: Schema })
   schemas?: Schema[];
 }

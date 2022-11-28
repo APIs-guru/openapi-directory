@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerMasterKeySpecEnum } from "./customermasterkeyspecenum";
 import { EncryptionAlgorithmSpecEnum } from "./encryptionalgorithmspecenum";
 import { ExpirationModelTypeEnum } from "./expirationmodeltypeenum";
@@ -11,74 +11,75 @@ import { OriginTypeEnum } from "./origintypeenum";
 import { SigningAlgorithmSpecEnum } from "./signingalgorithmspecenum";
 
 
+
 // KeyMetadata
 /** 
  * <p>Contains metadata about a KMS key.</p> <p>This data type is used as a response element for the <a>CreateKey</a> and <a>DescribeKey</a> operations.</p>
 **/
 export class KeyMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AWSAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AWSAccountId" })
   awsAccountId?: string;
 
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CloudHsmClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=CloudHsmClusterId" })
   cloudHsmClusterId?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=CustomKeyStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomKeyStoreId" })
   customKeyStoreId?: string;
 
-  @Metadata({ data: "json, name=CustomerMasterKeySpec" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerMasterKeySpec" })
   customerMasterKeySpec?: CustomerMasterKeySpecEnum;
 
-  @Metadata({ data: "json, name=DeletionDate" })
+  @SpeakeasyMetadata({ data: "json, name=DeletionDate" })
   deletionDate?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=EncryptionAlgorithms" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionAlgorithms" })
   encryptionAlgorithms?: EncryptionAlgorithmSpecEnum[];
 
-  @Metadata({ data: "json, name=ExpirationModel" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationModel" })
   expirationModel?: ExpirationModelTypeEnum;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=KeyManager" })
+  @SpeakeasyMetadata({ data: "json, name=KeyManager" })
   keyManager?: KeyManagerTypeEnum;
 
-  @Metadata({ data: "json, name=KeySpec" })
+  @SpeakeasyMetadata({ data: "json, name=KeySpec" })
   keySpec?: KeySpecEnum;
 
-  @Metadata({ data: "json, name=KeyState" })
+  @SpeakeasyMetadata({ data: "json, name=KeyState" })
   keyState?: KeyStateEnum;
 
-  @Metadata({ data: "json, name=KeyUsage" })
+  @SpeakeasyMetadata({ data: "json, name=KeyUsage" })
   keyUsage?: KeyUsageTypeEnum;
 
-  @Metadata({ data: "json, name=MultiRegion" })
+  @SpeakeasyMetadata({ data: "json, name=MultiRegion" })
   multiRegion?: boolean;
 
-  @Metadata({ data: "json, name=MultiRegionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=MultiRegionConfiguration" })
   multiRegionConfiguration?: MultiRegionConfiguration;
 
-  @Metadata({ data: "json, name=Origin" })
+  @SpeakeasyMetadata({ data: "json, name=Origin" })
   origin?: OriginTypeEnum;
 
-  @Metadata({ data: "json, name=PendingDeletionWindowInDays" })
+  @SpeakeasyMetadata({ data: "json, name=PendingDeletionWindowInDays" })
   pendingDeletionWindowInDays?: number;
 
-  @Metadata({ data: "json, name=SigningAlgorithms" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAlgorithms" })
   signingAlgorithms?: SigningAlgorithmSpecEnum[];
 
-  @Metadata({ data: "json, name=ValidTo" })
+  @SpeakeasyMetadata({ data: "json, name=ValidTo" })
   validTo?: Date;
 }

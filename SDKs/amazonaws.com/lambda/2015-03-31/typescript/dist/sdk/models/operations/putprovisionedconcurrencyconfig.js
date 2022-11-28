@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutProvisionedConcurrencyConfigPathParams = /** @class */ (function (_super) {
     __extends(PutProvisionedConcurrencyConfigPathParams, _super);
@@ -30,7 +30,7 @@ var PutProvisionedConcurrencyConfigPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigPathParams.prototype, "functionName", void 0);
     return PutProvisionedConcurrencyConfigPathParams;
@@ -42,7 +42,7 @@ var PutProvisionedConcurrencyConfigQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Qualifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Qualifier" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigQueryParams.prototype, "qualifier", void 0);
     return PutProvisionedConcurrencyConfigQueryParams;
@@ -54,31 +54,31 @@ var PutProvisionedConcurrencyConfigHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigHeaders.prototype, "xAmzSignedHeaders", void 0);
     return PutProvisionedConcurrencyConfigHeaders;
@@ -90,7 +90,7 @@ var PutProvisionedConcurrencyConfigRequestBody = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ProvisionedConcurrentExecutions" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedConcurrentExecutions" }),
         __metadata("design:type", Number)
     ], PutProvisionedConcurrencyConfigRequestBody.prototype, "provisionedConcurrentExecutions", void 0);
     return PutProvisionedConcurrencyConfigRequestBody;
@@ -102,19 +102,19 @@ var PutProvisionedConcurrencyConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutProvisionedConcurrencyConfigPathParams)
     ], PutProvisionedConcurrencyConfigRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutProvisionedConcurrencyConfigQueryParams)
     ], PutProvisionedConcurrencyConfigRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutProvisionedConcurrencyConfigHeaders)
     ], PutProvisionedConcurrencyConfigRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PutProvisionedConcurrencyConfigRequestBody)
     ], PutProvisionedConcurrencyConfigRequest.prototype, "request", void 0);
     return PutProvisionedConcurrencyConfigRequest;
@@ -126,35 +126,35 @@ var PutProvisionedConcurrencyConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PutProvisionedConcurrencyConfigResponse)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "putProvisionedConcurrencyConfigResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "resourceConflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "tooManyRequestsException", void 0);
     return PutProvisionedConcurrencyConfigResponse;

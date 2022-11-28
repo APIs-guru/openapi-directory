@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3intent
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowCxV3MatchMatchTypeEnum(str, Enum):
     MATCH_TYPE_UNSPECIFIED = "MATCH_TYPE_UNSPECIFIED"
@@ -16,10 +18,14 @@ class GoogleCloudDialogflowCxV3MatchMatchTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3Match:
-    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'confidence' }})
-    event: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    intent: Optional[googleclouddialogflowcxv3intent.GoogleCloudDialogflowCxV3Intent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intent' }})
-    match_type: Optional[GoogleCloudDialogflowCxV3MatchMatchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchType' }})
-    parameters: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
-    resolved_input: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolvedInput' }})
+    r"""GoogleCloudDialogflowCxV3Match
+    Represents one match result of MatchIntent.
+    """
+    
+    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('confidence') }})
+    event: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    intent: Optional[GoogleCloudDialogflowCxV3Intent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intent') }})
+    match_type: Optional[GoogleCloudDialogflowCxV3MatchMatchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchType') }})
+    parameters: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
+    resolved_input: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolvedInput') }})
     

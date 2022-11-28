@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MobileUsabilityIssue } from "./mobileusabilityissue";
 
+
 export enum MobileUsabilityInspectionResultVerdictEnum {
-    VerdictUnspecified = "VERDICT_UNSPECIFIED"
-,    Pass = "PASS"
-,    Partial = "PARTIAL"
-,    Fail = "FAIL"
-,    Neutral = "NEUTRAL"
+    VerdictUnspecified = "VERDICT_UNSPECIFIED",
+    Pass = "PASS",
+    Partial = "PARTIAL",
+    Fail = "FAIL",
+    Neutral = "NEUTRAL"
 }
 
 
@@ -16,9 +16,9 @@ export enum MobileUsabilityInspectionResultVerdictEnum {
  * Mobile-usability inspection results.
 **/
 export class MobileUsabilityInspectionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issues", elemType: shared.MobileUsabilityIssue })
+  @SpeakeasyMetadata({ data: "json, name=issues", elemType: MobileUsabilityIssue })
   issues?: MobileUsabilityIssue[];
 
-  @Metadata({ data: "json, name=verdict" })
+  @SpeakeasyMetadata({ data: "json, name=verdict" })
   verdict?: MobileUsabilityInspectionResultVerdictEnum;
 }

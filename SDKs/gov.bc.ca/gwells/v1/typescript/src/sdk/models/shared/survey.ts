@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SurveyPageEnum {
-    W = "w"
-,    R = "r"
-,    S = "s"
-,    A = "a"
+    W = "w",
+    R = "r",
+    S = "s",
+    A = "a"
 }
 
 
 export class Survey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=survey_guid" })
+  @SpeakeasyMetadata({ data: "json, name=survey_guid" })
   surveyGuid?: string;
 
-  @Metadata({ data: "json, name=survey_introduction_text" })
+  @SpeakeasyMetadata({ data: "json, name=survey_introduction_text" })
   surveyIntroductionText?: string;
 
-  @Metadata({ data: "json, name=survey_link" })
+  @SpeakeasyMetadata({ data: "json, name=survey_link" })
   surveyLink?: string;
 
-  @Metadata({ data: "json, name=survey_page" })
+  @SpeakeasyMetadata({ data: "json, name=survey_page" })
   surveyPage?: SurveyPageEnum;
 }

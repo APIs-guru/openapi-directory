@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstitutionalIdentification2
@@ -8,9 +9,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class InstitutionalIdentification2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clearingSystemIdCode" })
+  @SpeakeasyMetadata({ data: "json, name=clearingSystemIdCode" })
   clearingSystemIdCode: string;
 
-  @Metadata({ data: "json, name=clearingSystemMemberId" })
+  @SpeakeasyMetadata({ data: "json, name=clearingSystemMemberId" })
   clearingSystemMemberId: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageTypeEnum } from "./imagetypeenum";
+
 
 
 // ImageProviderInfo
@@ -7,9 +8,9 @@ import { ImageTypeEnum } from "./imagetypeenum";
  * Class ImageProviderInfo.
 **/
 export class ImageProviderInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SupportedImages" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedImages" })
   supportedImages?: ImageTypeEnum[];
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnnotateImageRequest } from "./annotateimagerequest";
+
 
 
 // BatchAnnotateImagesRequest
@@ -8,9 +8,9 @@ import { AnnotateImageRequest } from "./annotateimagerequest";
  * Multiple image annotation requests are batched into a single service call.
 **/
 export class BatchAnnotateImagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=requests", elemType: shared.AnnotateImageRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: AnnotateImageRequest })
   requests?: AnnotateImageRequest[];
 }

@@ -1,0 +1,19 @@
+export var SecondaryStatusEnum;
+(function (SecondaryStatusEnum) {
+    SecondaryStatusEnum["Starting"] = "Starting";
+    SecondaryStatusEnum["LaunchingMlInstances"] = "LaunchingMLInstances";
+    SecondaryStatusEnum["PreparingTrainingStack"] = "PreparingTrainingStack";
+    SecondaryStatusEnum["Downloading"] = "Downloading";
+    SecondaryStatusEnum["DownloadingTrainingImage"] = "DownloadingTrainingImage";
+    SecondaryStatusEnum["Training"] = "Training";
+    SecondaryStatusEnum["Uploading"] = "Uploading";
+    SecondaryStatusEnum["Stopping"] = "Stopping";
+    SecondaryStatusEnum["Stopped"] = "Stopped";
+    SecondaryStatusEnum["MaxRuntimeExceeded"] = "MaxRuntimeExceeded";
+    SecondaryStatusEnum["Completed"] = "Completed";
+    SecondaryStatusEnum["Failed"] = "Failed";
+    SecondaryStatusEnum["Interrupted"] = "Interrupted";
+    SecondaryStatusEnum["MaxWaitTimeExceeded"] = "MaxWaitTimeExceeded";
+    SecondaryStatusEnum["Updating"] = "Updating";
+    SecondaryStatusEnum["Restarting"] = "Restarting";
+})(SecondaryStatusEnum || (SecondaryStatusEnum = {}));

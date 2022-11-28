@@ -22,6 +22,8 @@ const (
 	GoogleCloudRunV2ServiceLaunchStageEnumDeprecated             GoogleCloudRunV2ServiceLaunchStageEnum = "DEPRECATED"
 )
 
+// GoogleCloudRunV2Service
+// Service acts as a top-level container that manages a set of configurations and revision templates which implement a network service. Service exists to provide a singular abstraction which can be access controlled, reasoned about, and which encapsulates software lifecycle decisions such as rollout policy and team resource ownership.
 type GoogleCloudRunV2Service struct {
 	Annotations           map[string]string                       `json:"annotations,omitempty"`
 	BinaryAuthorization   *GoogleCloudRunV2BinaryAuthorization    `json:"binaryAuthorization,omitempty"`
@@ -51,4 +53,21 @@ type GoogleCloudRunV2Service struct {
 	UID                   *string                                 `json:"uid,omitempty"`
 	UpdateTime            *string                                 `json:"updateTime,omitempty"`
 	URI                   *string                                 `json:"uri,omitempty"`
+}
+
+// GoogleCloudRunV2ServiceInput
+// Service acts as a top-level container that manages a set of configurations and revision templates which implement a network service. Service exists to provide a singular abstraction which can be access controlled, reasoned about, and which encapsulates software lifecycle decisions such as rollout policy and team resource ownership.
+type GoogleCloudRunV2ServiceInput struct {
+	Annotations         map[string]string                       `json:"annotations,omitempty"`
+	BinaryAuthorization *GoogleCloudRunV2BinaryAuthorization    `json:"binaryAuthorization,omitempty"`
+	Client              *string                                 `json:"client,omitempty"`
+	ClientVersion       *string                                 `json:"clientVersion,omitempty"`
+	Description         *string                                 `json:"description,omitempty"`
+	Ingress             *GoogleCloudRunV2ServiceIngressEnum     `json:"ingress,omitempty"`
+	Labels              map[string]string                       `json:"labels,omitempty"`
+	LaunchStage         *GoogleCloudRunV2ServiceLaunchStageEnum `json:"launchStage,omitempty"`
+	Name                *string                                 `json:"name,omitempty"`
+	Template            *GoogleCloudRunV2RevisionTemplate       `json:"template,omitempty"`
+	TerminalCondition   *GoogleCloudRunV2Condition              `json:"terminalCondition,omitempty"`
+	Traffic             []GoogleCloudRunV2TrafficTarget         `json:"traffic,omitempty"`
 }

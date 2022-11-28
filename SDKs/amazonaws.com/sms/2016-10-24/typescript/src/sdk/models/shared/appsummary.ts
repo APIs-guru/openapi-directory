@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppLaunchConfigurationStatusEnum } from "./applaunchconfigurationstatusenum";
 import { LaunchDetails } from "./launchdetails";
 import { AppLaunchStatusEnum } from "./applaunchstatusenum";
@@ -7,65 +7,66 @@ import { AppReplicationStatusEnum } from "./appreplicationstatusenum";
 import { AppStatusEnum } from "./appstatusenum";
 
 
+
 // AppSummary
 /** 
  * Information about the application.
 **/
 export class AppSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=importedAppId" })
+  @SpeakeasyMetadata({ data: "json, name=importedAppId" })
   importedAppId?: string;
 
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=latestReplicationTime" })
+  @SpeakeasyMetadata({ data: "json, name=latestReplicationTime" })
   latestReplicationTime?: Date;
 
-  @Metadata({ data: "json, name=launchConfigurationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=launchConfigurationStatus" })
   launchConfigurationStatus?: AppLaunchConfigurationStatusEnum;
 
-  @Metadata({ data: "json, name=launchDetails" })
+  @SpeakeasyMetadata({ data: "json, name=launchDetails" })
   launchDetails?: LaunchDetails;
 
-  @Metadata({ data: "json, name=launchStatus" })
+  @SpeakeasyMetadata({ data: "json, name=launchStatus" })
   launchStatus?: AppLaunchStatusEnum;
 
-  @Metadata({ data: "json, name=launchStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=launchStatusMessage" })
   launchStatusMessage?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=replicationConfigurationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=replicationConfigurationStatus" })
   replicationConfigurationStatus?: AppReplicationConfigurationStatusEnum;
 
-  @Metadata({ data: "json, name=replicationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=replicationStatus" })
   replicationStatus?: AppReplicationStatusEnum;
 
-  @Metadata({ data: "json, name=replicationStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=replicationStatusMessage" })
   replicationStatusMessage?: string;
 
-  @Metadata({ data: "json, name=roleName" })
+  @SpeakeasyMetadata({ data: "json, name=roleName" })
   roleName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AppStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=totalServerGroups" })
+  @SpeakeasyMetadata({ data: "json, name=totalServerGroups" })
   totalServerGroups?: number;
 
-  @Metadata({ data: "json, name=totalServers" })
+  @SpeakeasyMetadata({ data: "json, name=totalServers" })
   totalServers?: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicPerfSampleSeries } from "./basicperfsampleseries";
+
 
 
 // PerfSampleSeries
@@ -7,21 +8,21 @@ import { BasicPerfSampleSeries } from "./basicperfsampleseries";
  * Resource representing a collection of performance samples (or data points)
 **/
 export class PerfSampleSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicPerfSampleSeries" })
+  @SpeakeasyMetadata({ data: "json, name=basicPerfSampleSeries" })
   basicPerfSampleSeries?: BasicPerfSampleSeries;
 
-  @Metadata({ data: "json, name=executionId" })
+  @SpeakeasyMetadata({ data: "json, name=executionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=historyId" })
+  @SpeakeasyMetadata({ data: "json, name=historyId" })
   historyId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=sampleSeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=sampleSeriesId" })
   sampleSeriesId?: string;
 
-  @Metadata({ data: "json, name=stepId" })
+  @SpeakeasyMetadata({ data: "json, name=stepId" })
   stepId?: string;
 }

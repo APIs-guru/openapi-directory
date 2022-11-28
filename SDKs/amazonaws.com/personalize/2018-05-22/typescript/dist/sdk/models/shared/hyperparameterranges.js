@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CategoricalHyperParameterRange } from "./categoricalhyperparameterrange";
+import { ContinuousHyperParameterRange } from "./continuoushyperparameterrange";
+import { IntegerHyperParameterRange } from "./integerhyperparameterrange";
 // HyperParameterRanges
 /**
  * Specifies the hyperparameters and their ranges. Hyperparameters can be categorical, continuous, or integer-valued.
@@ -34,15 +36,15 @@ var HyperParameterRanges = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=categoricalHyperParameterRanges", elemType: shared.CategoricalHyperParameterRange }),
+        SpeakeasyMetadata({ data: "json, name=categoricalHyperParameterRanges", elemType: CategoricalHyperParameterRange }),
         __metadata("design:type", Array)
     ], HyperParameterRanges.prototype, "categoricalHyperParameterRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=continuousHyperParameterRanges", elemType: shared.ContinuousHyperParameterRange }),
+        SpeakeasyMetadata({ data: "json, name=continuousHyperParameterRanges", elemType: ContinuousHyperParameterRange }),
         __metadata("design:type", Array)
     ], HyperParameterRanges.prototype, "continuousHyperParameterRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=integerHyperParameterRanges", elemType: shared.IntegerHyperParameterRange }),
+        SpeakeasyMetadata({ data: "json, name=integerHyperParameterRanges", elemType: IntegerHyperParameterRange }),
         __metadata("design:type", Array)
     ], HyperParameterRanges.prototype, "integerHyperParameterRanges", void 0);
     return HyperParameterRanges;

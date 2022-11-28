@@ -9,6 +9,8 @@ const (
 	AppIntegrityAppRecognitionVerdictEnumUnevaluated         AppIntegrityAppRecognitionVerdictEnum = "UNEVALUATED"
 )
 
+// AppIntegrity
+// Contains the application integrity information.
 type AppIntegrity struct {
 	AppRecognitionVerdict   *AppIntegrityAppRecognitionVerdictEnum `json:"appRecognitionVerdict,omitempty"`
 	CertificateSha256Digest []string                               `json:"certificateSha256Digest,omitempty"`

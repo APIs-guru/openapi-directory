@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TrustedAdvisorResourceDetail:
-    is_suppressed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isSuppressed' }})
-    metadata: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    resource_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceId' }})
-    status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""TrustedAdvisorResourceDetail
+    Contains information about a resource identified by a Trusted Advisor check.
+    """
+    
+    metadata: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    resource_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceId') }})
+    status: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    is_suppressed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isSuppressed') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
     

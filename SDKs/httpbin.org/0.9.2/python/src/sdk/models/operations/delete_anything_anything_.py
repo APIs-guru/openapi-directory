@@ -4,16 +4,16 @@ from typing import Any
 
 @dataclass
 class DeleteAnythingAnythingPathParams:
-    anything: str = field(default=None, metadata={'path_param': { 'field_name': 'anything', 'style': 'simple', 'explode': False }})
+    anything: str = field(metadata={'path_param': { 'field_name': 'anything', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteAnythingAnythingRequest:
-    path_params: DeleteAnythingAnythingPathParams = field(default=None)
+    path_params: DeleteAnythingAnythingPathParams = field()
     
 
 @dataclass
 class DeleteAnythingAnythingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

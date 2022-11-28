@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import country_enum
+from sdk import utils
+from . import *
 
 class TaxTaxCategoryEnum(str, Enum):
     STANDARD = "standard"
@@ -35,8 +37,8 @@ class TaxTaxCategoryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tax:
-    amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    category: Optional[TaxTaxCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    country: country_enum.CountryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
-    percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percentage' }})
+    country: CountryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('country') }})
+    amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    category: Optional[TaxTaxCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('percentage') }})
     

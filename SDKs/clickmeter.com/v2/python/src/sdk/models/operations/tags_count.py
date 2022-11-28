@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 class TagsCountTypeEnum(str, Enum):
     TP = "tp"
@@ -18,12 +19,12 @@ class TagsCountQueryParams:
 
 @dataclass
 class TagsCountRequest:
-    query_params: TagsCountQueryParams = field(default=None)
+    query_params: TagsCountQueryParams = field()
     
 
 @dataclass
 class TagsCountResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     system_object: Optional[dict[str, Any]] = field(default=None)
     

@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class CreatePayorLinksSecurity:
-    o_auth_velo_back_office: shared.SchemeOAuthVeloBackOffice = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth_velo_back_office: shared.SchemeOAuthVeloBackOffice = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreatePayorLinksRequest:
-    request: shared.CreatePayorLinkRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreatePayorLinksSecurity = field(default=None)
+    request: shared.CreatePayorLinkRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreatePayorLinksSecurity = field()
     
 
 @dataclass
 class CreatePayorLinksResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)
     inline_response_404: Optional[Any] = field(default=None)

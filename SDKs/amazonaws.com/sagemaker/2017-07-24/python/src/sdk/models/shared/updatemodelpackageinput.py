@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import modelapprovalstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateModelPackageInput:
-    approval_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApprovalDescription' }})
-    model_approval_status: modelapprovalstatus_enum.ModelApprovalStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelApprovalStatus' }})
-    model_package_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelPackageArn' }})
+    model_approval_status: ModelApprovalStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelApprovalStatus') }})
+    model_package_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelPackageArn') }})
+    approval_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApprovalDescription') }})
     

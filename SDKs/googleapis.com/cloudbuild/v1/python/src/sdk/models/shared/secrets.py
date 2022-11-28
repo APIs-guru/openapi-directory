@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import inlinesecret
-from . import secretmanagersecret
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Secrets:
-    inline: Optional[List[inlinesecret.InlineSecret]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inline' }})
-    secret_manager: Optional[List[secretmanagersecret.SecretManagerSecret]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secretManager' }})
+    r"""Secrets
+    Secrets and secret environment variables.
+    """
+    
+    inline: Optional[List[InlineSecret]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inline') }})
+    secret_manager: Optional[List[SecretManagerSecret]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secretManager') }})
     

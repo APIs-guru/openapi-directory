@@ -1,5 +1,7 @@
 package shared
 
+// AwsElbLoadBalancerListener
+// Information about a load balancer listener.
 type AwsElbLoadBalancerListener struct {
 	InstancePort     *int64  `json:"InstancePort,omitempty"`
 	InstanceProtocol *string `json:"InstanceProtocol,omitempty"`

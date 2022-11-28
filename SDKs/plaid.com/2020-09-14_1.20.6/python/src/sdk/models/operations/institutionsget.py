@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class InstitutionsGetRequest:
-    request: shared.InstitutionsGetRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.InstitutionsGetRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class InstitutionsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     institutions_get_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

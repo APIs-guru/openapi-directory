@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import datafilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchClearValuesByDataFilterRequest:
-    data_filters: Optional[List[datafilter.DataFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataFilters' }})
+    r"""BatchClearValuesByDataFilterRequest
+    The request for clearing more than one range selected by a DataFilter in a spreadsheet.
+    """
+    
+    data_filters: Optional[List[DataFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataFilters') }})
     

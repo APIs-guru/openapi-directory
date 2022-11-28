@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UploadFunctionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
   functionName: string;
 }
 
@@ -17,90 +18,90 @@ export enum UploadFunctionRuntimeEnum {
 
 
 export class UploadFunctionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Handler" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Handler" })
   handler: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MemorySize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MemorySize" })
   memorySize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Mode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Mode" })
   mode: UploadFunctionModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Role" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Role" })
   role: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Runtime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Runtime" })
   runtime: UploadFunctionRuntimeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timeout" })
   timeout?: number;
 }
 
 
 export class UploadFunctionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class UploadFunctionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FunctionZip" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionZip" })
   functionZip: string;
 }
 
 
 export class UploadFunctionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UploadFunctionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UploadFunctionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UploadFunctionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UploadFunctionRequestBody;
 }
 
 
 export class UploadFunctionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   functionConfiguration?: shared.FunctionConfiguration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: shared.InvalidParameterValueException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: shared.ResourceNotFoundException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: shared.ServiceException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

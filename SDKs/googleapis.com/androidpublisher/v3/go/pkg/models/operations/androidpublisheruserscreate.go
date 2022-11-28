@@ -30,7 +30,7 @@ type AndroidpublisherUsersCreateSecurity struct {
 type AndroidpublisherUsersCreateRequest struct {
 	PathParams  AndroidpublisherUsersCreatePathParams
 	QueryParams AndroidpublisherUsersCreateQueryParams
-	Request     *shared.User `request:"mediaType=application/json"`
+	Request     *shared.UserInput `request:"mediaType=application/json"`
 	Security    AndroidpublisherUsersCreateSecurity
 }
 

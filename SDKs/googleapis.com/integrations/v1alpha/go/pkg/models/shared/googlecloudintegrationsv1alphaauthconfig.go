@@ -37,6 +37,28 @@ const (
 	GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnumClientVisible                   GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum = "CLIENT_VISIBLE"
 )
 
+// GoogleCloudIntegrationsV1alphaAuthConfigInput
+// The AuthConfig resource use to hold channels and connection config data.
+type GoogleCloudIntegrationsV1alphaAuthConfigInput struct {
+	CertificateID              *string                                                     `json:"certificateId,omitempty"`
+	CreatorEmail               *string                                                     `json:"creatorEmail,omitempty"`
+	CredentialType             *GoogleCloudIntegrationsV1alphaAuthConfigCredentialTypeEnum `json:"credentialType,omitempty"`
+	DecryptedCredential        *GoogleCloudIntegrationsV1alphaCredential                   `json:"decryptedCredential,omitempty"`
+	Description                *string                                                     `json:"description,omitempty"`
+	DisplayName                *string                                                     `json:"displayName,omitempty"`
+	EncryptedCredential        *string                                                     `json:"encryptedCredential,omitempty"`
+	ExpiryNotificationDuration []string                                                    `json:"expiryNotificationDuration,omitempty"`
+	LastModifierEmail          *string                                                     `json:"lastModifierEmail,omitempty"`
+	Name                       *string                                                     `json:"name,omitempty"`
+	OverrideValidTime          *string                                                     `json:"overrideValidTime,omitempty"`
+	Reason                     *string                                                     `json:"reason,omitempty"`
+	State                      *GoogleCloudIntegrationsV1alphaAuthConfigStateEnum          `json:"state,omitempty"`
+	ValidTime                  *string                                                     `json:"validTime,omitempty"`
+	Visibility                 *GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum     `json:"visibility,omitempty"`
+}
+
+// GoogleCloudIntegrationsV1alphaAuthConfig
+// The AuthConfig resource use to hold channels and connection config data.
 type GoogleCloudIntegrationsV1alphaAuthConfig struct {
 	CertificateID              *string                                                     `json:"certificateId,omitempty"`
 	CreateTime                 *string                                                     `json:"createTime,omitempty"`

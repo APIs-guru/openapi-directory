@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddExamplePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
   datasetId: string;
 }
 
 
 export class AddExampleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=data" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=data" })
   data?: string;
 
-  @Metadata({ data: "multipart_form, name=labelId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=labelId" })
   labelId?: number;
 
-  @Metadata({ data: "multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=name" })
   name?: string;
 }
 
 
 export class AddExampleSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class AddExampleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddExamplePathParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: AddExampleRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddExampleSecurity;
 }
 
 
 export class AddExampleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   example?: shared.Example;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

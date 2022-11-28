@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Phone } from "./phone";
 import { Address } from "./address";
-import { Phone } from "./phone";
+
 
 
 // IndividualAccount
@@ -9,21 +9,21 @@ import { Phone } from "./phone";
  * The type that defines the fields for the information of an individual account.
 **/
 export class IndividualAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=primaryPhone" })
+  @SpeakeasyMetadata({ data: "json, name=primaryPhone" })
   primaryPhone?: Phone;
 
-  @Metadata({ data: "json, name=registrationAddress" })
+  @SpeakeasyMetadata({ data: "json, name=registrationAddress" })
   registrationAddress?: Address;
 
-  @Metadata({ data: "json, name=secondaryPhone" })
+  @SpeakeasyMetadata({ data: "json, name=secondaryPhone" })
   secondaryPhone?: Phone;
 }

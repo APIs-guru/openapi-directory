@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
 export declare class ListFirewallRulesRequest extends SpeakeasyBase {
     action?: ActionEnum;

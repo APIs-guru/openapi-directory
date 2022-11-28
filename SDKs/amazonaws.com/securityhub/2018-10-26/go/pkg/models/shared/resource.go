@@ -1,5 +1,7 @@
 package shared
 
+// Resource
+// A resource related to a finding.
 type Resource struct {
 	DataClassification *DataClassificationDetails `json:"DataClassification,omitempty"`
 	Details            *ResourceDetails           `json:"Details,omitempty"`

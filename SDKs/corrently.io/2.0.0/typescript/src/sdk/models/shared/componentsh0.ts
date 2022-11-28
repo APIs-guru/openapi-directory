@@ -1,21 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Componentsh0 } from "./componentsh0";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Componentsh0 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=components", elemType: shared.Componentsh0 })
+  @SpeakeasyMetadata({ data: "json, name=components", elemType: Componentsh0 })
   components?: Componentsh0[];
 
-  @Metadata({ data: "json, name=describtion" })
+  @SpeakeasyMetadata({ data: "json, name=describtion" })
   describtion?: string;
 
-  @Metadata({ data: "json, name=mutlityplier" })
+  @SpeakeasyMetadata({ data: "json, name=mutlityplier" })
   mutlityplier?: string;
 
-  @Metadata({ data: "json, name=per" })
+  @SpeakeasyMetadata({ data: "json, name=per" })
   per?: number;
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum?: number;
 }

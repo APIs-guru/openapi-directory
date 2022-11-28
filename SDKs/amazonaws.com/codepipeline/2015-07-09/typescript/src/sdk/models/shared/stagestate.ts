@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionState } from "./actionstate";
 import { StageExecution } from "./stageexecution";
 import { TransitionState } from "./transitionstate";
-import { StageExecution } from "./stageexecution";
+
 
 
 // StageState
@@ -11,18 +10,18 @@ import { StageExecution } from "./stageexecution";
  * Represents information about the state of the stage.
 **/
 export class StageState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionStates", elemType: shared.ActionState })
+  @SpeakeasyMetadata({ data: "json, name=actionStates", elemType: ActionState })
   actionStates?: ActionState[];
 
-  @Metadata({ data: "json, name=inboundExecution" })
+  @SpeakeasyMetadata({ data: "json, name=inboundExecution" })
   inboundExecution?: StageExecution;
 
-  @Metadata({ data: "json, name=inboundTransitionState" })
+  @SpeakeasyMetadata({ data: "json, name=inboundTransitionState" })
   inboundTransitionState?: TransitionState;
 
-  @Metadata({ data: "json, name=latestExecution" })
+  @SpeakeasyMetadata({ data: "json, name=latestExecution" })
   latestExecution?: StageExecution;
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// PerformanceReport
+// The configuration data for an Ad Exchange performance report list.
 type PerformanceReport struct {
 	BidRate                 *float64      `json:"bidRate,omitempty"`
 	BidRequestRate          *float64      `json:"bidRequestRate,omitempty"`

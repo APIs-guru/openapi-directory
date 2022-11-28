@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var VerifyRequestLgEnum;
 (function (VerifyRequestLgEnum) {
     VerifyRequestLgEnum["ArXa"] = "ar-xa";
@@ -71,47 +71,47 @@ var VerifyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=api_key;" }),
         __metadata("design:type", String)
     ], VerifyRequest.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=api_secret;" }),
+        SpeakeasyMetadata({ data: "form, name=api_secret;" }),
         __metadata("design:type", String)
     ], VerifyRequest.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "form, name=brand;" }),
+        SpeakeasyMetadata({ data: "form, name=brand;" }),
         __metadata("design:type", String)
     ], VerifyRequest.prototype, "brand", void 0);
     __decorate([
-        Metadata({ data: "form, name=code_length;" }),
+        SpeakeasyMetadata({ data: "form, name=code_length;" }),
         __metadata("design:type", Number)
     ], VerifyRequest.prototype, "codeLength", void 0);
     __decorate([
-        Metadata({ data: "form, name=country;" }),
+        SpeakeasyMetadata({ data: "form, name=country;" }),
         __metadata("design:type", String)
     ], VerifyRequest.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "form, name=lg;" }),
+        SpeakeasyMetadata({ data: "form, name=lg;" }),
         __metadata("design:type", String)
     ], VerifyRequest.prototype, "lg", void 0);
     __decorate([
-        Metadata({ data: "form, name=next_event_wait;" }),
+        SpeakeasyMetadata({ data: "form, name=next_event_wait;" }),
         __metadata("design:type", Number)
     ], VerifyRequest.prototype, "nextEventWait", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], VerifyRequest.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "form, name=pin_expiry;" }),
+        SpeakeasyMetadata({ data: "form, name=pin_expiry;" }),
         __metadata("design:type", Number)
     ], VerifyRequest.prototype, "pinExpiry", void 0);
     __decorate([
-        Metadata({ data: "form, name=sender_id;" }),
+        SpeakeasyMetadata({ data: "form, name=sender_id;" }),
         __metadata("design:type", String)
     ], VerifyRequest.prototype, "senderId", void 0);
     __decorate([
-        Metadata({ data: "form, name=workflow_id;" }),
+        SpeakeasyMetadata({ data: "form, name=workflow_id;" }),
         __metadata("design:type", Number)
     ], VerifyRequest.prototype, "workflowId", void 0);
     return VerifyRequest;

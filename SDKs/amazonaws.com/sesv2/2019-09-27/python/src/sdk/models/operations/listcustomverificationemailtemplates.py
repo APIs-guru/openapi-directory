@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,15 +25,15 @@ class ListCustomVerificationEmailTemplatesHeaders:
 
 @dataclass
 class ListCustomVerificationEmailTemplatesRequest:
-    query_params: ListCustomVerificationEmailTemplatesQueryParams = field(default=None)
-    headers: ListCustomVerificationEmailTemplatesHeaders = field(default=None)
+    headers: ListCustomVerificationEmailTemplatesHeaders = field()
+    query_params: ListCustomVerificationEmailTemplatesQueryParams = field()
     
 
 @dataclass
 class ListCustomVerificationEmailTemplatesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_custom_verification_email_templates_response: Optional[shared.ListCustomVerificationEmailTemplatesResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountQuota
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deprecated
 **/
 export class AccountQuota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quotaRemaining" })
+  @SpeakeasyMetadata({ data: "json, name=quotaRemaining" })
   quotaRemaining?: number;
 
-  @Metadata({ data: "json, name=quotaTotal" })
+  @SpeakeasyMetadata({ data: "json, name=quotaTotal" })
   quotaTotal?: number;
 
-  @Metadata({ data: "json, name=quotaUsed" })
+  @SpeakeasyMetadata({ data: "json, name=quotaUsed" })
   quotaUsed?: number;
 }
 
 
 export class Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=features" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
   features?: string[];
 
-  @Metadata({ data: "json, name=quota" })
+  @SpeakeasyMetadata({ data: "json, name=quota" })
   quota?: AccountQuota;
 }

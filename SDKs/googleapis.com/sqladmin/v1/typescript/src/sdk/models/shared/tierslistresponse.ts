@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tier } from "./tier";
+
 
 
 // TiersListResponse
@@ -8,9 +8,9 @@ import { Tier } from "./tier";
  * Tiers list response.
 **/
 export class TiersListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Tier })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Tier })
   items?: Tier[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

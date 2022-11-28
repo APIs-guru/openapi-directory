@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1OutputConfig } from "./googleclouddatalabelingv1beta1outputconfig";
+
 
 
 // GoogleCloudDatalabelingV1beta1ExportDataRequest
@@ -7,15 +8,15 @@ import { GoogleCloudDatalabelingV1beta1OutputConfig } from "./googleclouddatalab
  * Request message for ExportData API.
 **/
 export class GoogleCloudDatalabelingV1beta1ExportDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotatedDataset" })
+  @SpeakeasyMetadata({ data: "json, name=annotatedDataset" })
   annotatedDataset?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: GoogleCloudDatalabelingV1beta1OutputConfig;
 
-  @Metadata({ data: "json, name=userEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=userEmailAddress" })
   userEmailAddress?: string;
 }

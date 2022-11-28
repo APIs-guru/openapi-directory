@@ -1,19 +1,20 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ListingNestExtraAttributes:
-    dealer_added_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealer_added_f' }})
-    electronics_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'electronics_f' }})
-    exterior_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exterior_f' }})
-    features: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'features' }})
-    interior_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interior_f' }})
-    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    safety_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'safety_f' }})
-    seller_comments: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seller_comments' }})
-    standard_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'standard_f' }})
-    technical_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'technical_f' }})
+    dealer_added_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealer_added_f') }})
+    electronics_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('electronics_f') }})
+    exterior_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exterior_f') }})
+    features: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('features') }})
+    interior_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('interior_f') }})
+    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    safety_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('safety_f') }})
+    seller_comments: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('seller_comments') }})
+    standard_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('standard_f') }})
+    technical_f: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('technical_f') }})
     

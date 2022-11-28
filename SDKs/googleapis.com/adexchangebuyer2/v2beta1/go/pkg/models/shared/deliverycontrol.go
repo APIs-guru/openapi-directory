@@ -17,6 +17,8 @@ const (
 	DeliveryControlDeliveryRateTypeEnumAsFastAsPossible            DeliveryControlDeliveryRateTypeEnum = "AS_FAST_AS_POSSIBLE"
 )
 
+// DeliveryControl
+// Message contains details about how the deals will be paced.
 type DeliveryControl struct {
 	CreativeBlockingLevel *DeliveryControlCreativeBlockingLevelEnum `json:"creativeBlockingLevel,omitempty"`
 	DeliveryRateType      *DeliveryControlDeliveryRateTypeEnum      `json:"deliveryRateType,omitempty"`

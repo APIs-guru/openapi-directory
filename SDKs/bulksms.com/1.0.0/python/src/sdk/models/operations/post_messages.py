@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -16,20 +16,20 @@ class PostMessagesQueryParams:
 
 @dataclass
 class PostMessagesSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostMessagesRequest:
-    query_params: PostMessagesQueryParams = field(default=None)
-    request: List[shared.SubmissionEntry] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostMessagesSecurity = field(default=None)
+    query_params: PostMessagesQueryParams = field()
+    request: List[shared.SubmissionEntry] = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: PostMessagesSecurity = field()
     
 
 @dataclass
 class PostMessagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     messages: Optional[List[shared.Message]] = field(default=None)
-    status_code: int = field(default=None)
     

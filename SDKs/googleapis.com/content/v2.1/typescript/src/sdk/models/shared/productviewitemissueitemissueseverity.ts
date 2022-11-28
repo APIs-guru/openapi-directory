@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductViewItemIssueIssueSeverityPerDestination } from "./productviewitemissueissueseverityperdestination";
 
+
 export enum ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnum {
-    AggregatedIssueSeverityUnspecified = "AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED"
-,    Disapproved = "DISAPPROVED"
-,    Demoted = "DEMOTED"
-,    Pending = "PENDING"
+    AggregatedIssueSeverityUnspecified = "AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED",
+    Disapproved = "DISAPPROVED",
+    Demoted = "DEMOTED",
+    Pending = "PENDING"
 }
 
 
@@ -15,9 +15,9 @@ export enum ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnum {
  * Severity of an issue per destination in a region, and aggregated severity.
 **/
 export class ProductViewItemIssueItemIssueSeverity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregatedSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=aggregatedSeverity" })
   aggregatedSeverity?: ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnum;
 
-  @Metadata({ data: "json, name=severityPerDestination", elemType: shared.ProductViewItemIssueIssueSeverityPerDestination })
+  @SpeakeasyMetadata({ data: "json, name=severityPerDestination", elemType: ProductViewItemIssueIssueSeverityPerDestination })
   severityPerDestination?: ProductViewItemIssueIssueSeverityPerDestination[];
 }

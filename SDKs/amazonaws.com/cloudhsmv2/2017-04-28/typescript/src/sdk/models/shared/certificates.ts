@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Certificates
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains one or more certificates or a certificate signing request (CSR).
 **/
 export class Certificates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AwsHardwareCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=AwsHardwareCertificate" })
   awsHardwareCertificate?: string;
 
-  @Metadata({ data: "json, name=ClusterCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterCertificate" })
   clusterCertificate?: string;
 
-  @Metadata({ data: "json, name=ClusterCsr" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterCsr" })
   clusterCsr?: string;
 
-  @Metadata({ data: "json, name=HsmCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=HsmCertificate" })
   hsmCertificate?: string;
 
-  @Metadata({ data: "json, name=ManufacturerHardwareCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=ManufacturerHardwareCertificate" })
   manufacturerHardwareCertificate?: string;
 }

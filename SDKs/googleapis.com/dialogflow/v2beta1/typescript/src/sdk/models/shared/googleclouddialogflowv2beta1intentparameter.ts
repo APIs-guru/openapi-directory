@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentParameter
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents intent parameters.
 **/
 export class GoogleCloudDialogflowV2beta1IntentParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=defaultValue" })
   defaultValue?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=entityTypeDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=entityTypeDisplayName" })
   entityTypeDisplayName?: string;
 
-  @Metadata({ data: "json, name=isList" })
+  @SpeakeasyMetadata({ data: "json, name=isList" })
   isList?: boolean;
 
-  @Metadata({ data: "json, name=mandatory" })
+  @SpeakeasyMetadata({ data: "json, name=mandatory" })
   mandatory?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=prompts" })
+  @SpeakeasyMetadata({ data: "json, name=prompts" })
   prompts?: string[];
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

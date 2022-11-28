@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypeEnum } from "./typeenum";
+
 
 
 // Grantee
@@ -7,18 +8,18 @@ import { TypeEnum } from "./typeenum";
  * Contains information about the grantee.
 **/
 export class Grantee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=EmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EmailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=ID" })
+  @SpeakeasyMetadata({ data: "json, name=ID" })
   id?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: TypeEnum;
 
-  @Metadata({ data: "json, name=URI" })
+  @SpeakeasyMetadata({ data: "json, name=URI" })
   uri?: string;
 }

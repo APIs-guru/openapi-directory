@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class BatchGetApplicationsXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class BatchGetApplicationsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class BatchGetApplicationsHeaders:
+    x_amz_target: BatchGetApplicationsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,22 +20,21 @@ class BatchGetApplicationsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: BatchGetApplicationsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class BatchGetApplicationsRequest:
-    headers: BatchGetApplicationsHeaders = field(default=None)
-    request: shared.BatchGetApplicationsInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchGetApplicationsHeaders = field()
+    request: shared.BatchGetApplicationsInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchGetApplicationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     application_does_not_exist_exception: Optional[Any] = field(default=None)
     application_name_required_exception: Optional[Any] = field(default=None)
     batch_get_applications_output: Optional[shared.BatchGetApplicationsOutput] = field(default=None)
     batch_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_application_name_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

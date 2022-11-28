@@ -1,5 +1,7 @@
 package shared
 
+// Commit
+// Returns information about a specific commit.
 type Commit struct {
 	AdditionalData *string   `json:"additionalData,omitempty"`
 	Author         *UserInfo `json:"author,omitempty"`

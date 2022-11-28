@@ -9,6 +9,8 @@ const (
 	UpdateLineCategoryRequestLineCategoryEnumCurved                  UpdateLineCategoryRequestLineCategoryEnum = "CURVED"
 )
 
+// UpdateLineCategoryRequest
+// Updates the category of a line.
 type UpdateLineCategoryRequest struct {
 	LineCategory *UpdateLineCategoryRequestLineCategoryEnum `json:"lineCategory,omitempty"`
 	ObjectID     *string                                    `json:"objectId,omitempty"`

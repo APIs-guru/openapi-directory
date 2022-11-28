@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.pdfblocks.com",
 	"https://eu.api.pdfblocks.com",
 }
@@ -20,10 +20,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://www.pdfblocks.com/docs/api/v1 - Documentation and examples
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +39,57 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddImageWatermarkV1 - Add an image watermark to a PDF
+// Add an image watermark to each page of a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/add-watermark-image - Documentation and examples
 func (s *SDK) AddImageWatermarkV1(ctx context.Context, request operations.AddImageWatermarkV1Request) (*operations.AddImageWatermarkV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/add_watermark/image"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -78,7 +107,7 @@ func (s *SDK) AddImageWatermarkV1(ctx context.Context, request operations.AddIma
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -118,8 +147,11 @@ func (s *SDK) AddImageWatermarkV1(ctx context.Context, request operations.AddIma
 	return res, nil
 }
 
+// AddPasswordV1 - Add a password to a PDF
+// Protect a PDF document with a password. Encrypt the PDF document to prevent unauthorized access.
+// https://www.pdfblocks.com/docs/api/v1/add-password - Documentation and examples
 func (s *SDK) AddPasswordV1(ctx context.Context, request operations.AddPasswordV1Request) (*operations.AddPasswordV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/add_password"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -137,7 +169,7 @@ func (s *SDK) AddPasswordV1(ctx context.Context, request operations.AddPasswordV
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -177,8 +209,11 @@ func (s *SDK) AddPasswordV1(ctx context.Context, request operations.AddPasswordV
 	return res, nil
 }
 
+// AddRestrictionsV1 - Add restrictions to a PDF
+// Add restrictions to prevent copying, printing, and modifying a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/add-restrictions - Documentation and examples
 func (s *SDK) AddRestrictionsV1(ctx context.Context, request operations.AddRestrictionsV1Request) (*operations.AddRestrictionsV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/add_restrictions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -196,7 +231,7 @@ func (s *SDK) AddRestrictionsV1(ctx context.Context, request operations.AddRestr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -236,8 +271,11 @@ func (s *SDK) AddRestrictionsV1(ctx context.Context, request operations.AddRestr
 	return res, nil
 }
 
+// AddTextWatermarkV1 - Add a text watermark to a PDF
+// Add a text watermark to each page of a PDF document. Choose from several watermark templates.
+// https://www.pdfblocks.com/docs/api/v1/add-watermark-text - Documentation and examples
 func (s *SDK) AddTextWatermarkV1(ctx context.Context, request operations.AddTextWatermarkV1Request) (*operations.AddTextWatermarkV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/add_watermark/text"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -255,7 +293,7 @@ func (s *SDK) AddTextWatermarkV1(ctx context.Context, request operations.AddText
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -295,8 +333,11 @@ func (s *SDK) AddTextWatermarkV1(ctx context.Context, request operations.AddText
 	return res, nil
 }
 
+// ExtractPagesV1 - Extract pages from a PDF
+// Extract one or more pages from a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/extract-pages - Documentation and examples
 func (s *SDK) ExtractPagesV1(ctx context.Context, request operations.ExtractPagesV1Request) (*operations.ExtractPagesV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/extract_pages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -314,7 +355,7 @@ func (s *SDK) ExtractPagesV1(ctx context.Context, request operations.ExtractPage
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -354,8 +395,11 @@ func (s *SDK) ExtractPagesV1(ctx context.Context, request operations.ExtractPage
 	return res, nil
 }
 
+// MergeDocumentsV1 - Merge PDF documents
+// Combine multiple PDF documents into a single PDF document.
+// https://www.pdfblocks.com/docs/api/v1/merge-documents - Documentation and examples
 func (s *SDK) MergeDocumentsV1(ctx context.Context, request operations.MergeDocumentsV1Request) (*operations.MergeDocumentsV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/merge_documents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -373,7 +417,7 @@ func (s *SDK) MergeDocumentsV1(ctx context.Context, request operations.MergeDocu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -413,8 +457,11 @@ func (s *SDK) MergeDocumentsV1(ctx context.Context, request operations.MergeDocu
 	return res, nil
 }
 
+// RemovePagesV1 - Remove pages from a PDF
+// Remove one or more pages from a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/remove-pages - Documentation and examples
 func (s *SDK) RemovePagesV1(ctx context.Context, request operations.RemovePagesV1Request) (*operations.RemovePagesV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/remove_pages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -432,7 +479,7 @@ func (s *SDK) RemovePagesV1(ctx context.Context, request operations.RemovePagesV
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -472,8 +519,11 @@ func (s *SDK) RemovePagesV1(ctx context.Context, request operations.RemovePagesV
 	return res, nil
 }
 
+// RemovePasswordV1 - Remove the password from a PDF
+// Remove the password from an encrypted PDF document. The PDF document will no longer require a password to open.
+// https://www.pdfblocks.com/docs/api/v1/remove-password - Documentation and examples
 func (s *SDK) RemovePasswordV1(ctx context.Context, request operations.RemovePasswordV1Request) (*operations.RemovePasswordV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/remove_password"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -491,7 +541,7 @@ func (s *SDK) RemovePasswordV1(ctx context.Context, request operations.RemovePas
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -531,8 +581,11 @@ func (s *SDK) RemovePasswordV1(ctx context.Context, request operations.RemovePas
 	return res, nil
 }
 
+// RemoveRestrictionsV1 - Remove the restrictions from a PDF
+// Remove all the restrictions from a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/remove-restrictions - Documentation and examples
 func (s *SDK) RemoveRestrictionsV1(ctx context.Context, request operations.RemoveRestrictionsV1Request) (*operations.RemoveRestrictionsV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/remove_restrictions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -550,7 +603,7 @@ func (s *SDK) RemoveRestrictionsV1(ctx context.Context, request operations.Remov
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -590,8 +643,11 @@ func (s *SDK) RemoveRestrictionsV1(ctx context.Context, request operations.Remov
 	return res, nil
 }
 
+// RemoveSignaturesV1 - Remove the signatures from a PDF
+// Remove the cryptographic signatures and timestamps from a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/remove-signatures - Documentation and examples
 func (s *SDK) RemoveSignaturesV1(ctx context.Context, request operations.RemoveSignaturesV1Request) (*operations.RemoveSignaturesV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/remove_signatures"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -609,7 +665,7 @@ func (s *SDK) RemoveSignaturesV1(ctx context.Context, request operations.RemoveS
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -649,8 +705,11 @@ func (s *SDK) RemoveSignaturesV1(ctx context.Context, request operations.RemoveS
 	return res, nil
 }
 
+// ReversePagesV1 - Reverse the pages of a PDF
+// Reverse the order of the pages of a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/reverse-pages - Documentation and examples
 func (s *SDK) ReversePagesV1(ctx context.Context, request operations.ReversePagesV1Request) (*operations.ReversePagesV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/reverse_pages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -668,7 +727,7 @@ func (s *SDK) ReversePagesV1(ctx context.Context, request operations.ReversePage
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -708,8 +767,11 @@ func (s *SDK) ReversePagesV1(ctx context.Context, request operations.ReversePage
 	return res, nil
 }
 
+// RotatePagesV1 - Rotate pages in a PDF
+// Rotate one or more pages in a PDF document.
+// https://www.pdfblocks.com/docs/api/v1/rotate-pages - Documentation and examples
 func (s *SDK) RotatePagesV1(ctx context.Context, request operations.RotatePagesV1Request) (*operations.RotatePagesV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/rotate_pages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -727,7 +789,7 @@ func (s *SDK) RotatePagesV1(ctx context.Context, request operations.RotatePagesV
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

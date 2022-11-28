@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TextRotation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The rotation applied to text in a cell.
 **/
 export class TextRotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=angle" })
+  @SpeakeasyMetadata({ data: "json, name=angle" })
   angle?: number;
 
-  @Metadata({ data: "json, name=vertical" })
+  @SpeakeasyMetadata({ data: "json, name=vertical" })
   vertical?: boolean;
 }

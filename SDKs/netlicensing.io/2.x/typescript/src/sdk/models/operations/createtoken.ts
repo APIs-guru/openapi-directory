@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum CreateTokenRequestBodyActionEnum {
     LicenseeLogin = "licenseeLogin"
 }
 
 export enum CreateTokenRequestBodyApiKeyRoleEnum {
-    RoleApikeyLicensee = "ROLE_APIKEY_LICENSEE"
-,    RoleApikeyAnalytics = "ROLE_APIKEY_ANALYTICS"
-,    RoleApikeyOperation = "ROLE_APIKEY_OPERATION"
-,    RoleApikeyMaintenance = "ROLE_APIKEY_MAINTENANCE"
-,    RoleApikeyAdmin = "ROLE_APIKEY_ADMIN"
+    RoleApikeyLicensee = "ROLE_APIKEY_LICENSEE",
+    RoleApikeyAnalytics = "ROLE_APIKEY_ANALYTICS",
+    RoleApikeyOperation = "ROLE_APIKEY_OPERATION",
+    RoleApikeyMaintenance = "ROLE_APIKEY_MAINTENANCE",
+    RoleApikeyAdmin = "ROLE_APIKEY_ADMIN"
 }
 
 export enum CreateTokenRequestBodyTokenTypeEnum {
-    Default = "DEFAULT"
-,    Shop = "SHOP"
-,    Apikey = "APIKEY"
+    Default = "DEFAULT",
+    Shop = "SHOP",
+    Apikey = "APIKEY"
 }
 
 export enum CreateTokenRequestBodyTypeEnum {
@@ -25,72 +26,72 @@ export enum CreateTokenRequestBodyTypeEnum {
 
 
 export class CreateTokenRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=action;" })
+  @SpeakeasyMetadata({ data: "form, name=action;" })
   action?: CreateTokenRequestBodyActionEnum;
 
-  @Metadata({ data: "form, name=apiKeyRole;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKeyRole;" })
   apiKeyRole?: CreateTokenRequestBodyApiKeyRoleEnum;
 
-  @Metadata({ data: "form, name=cancelURL;" })
+  @SpeakeasyMetadata({ data: "form, name=cancelURL;" })
   cancelUrl?: string;
 
-  @Metadata({ data: "form, name=cancelURLTitle;" })
+  @SpeakeasyMetadata({ data: "form, name=cancelURLTitle;" })
   cancelUrlTitle?: string;
 
-  @Metadata({ data: "form, name=licenseTemplateNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=licenseTemplateNumber;" })
   licenseTemplateNumber?: string;
 
-  @Metadata({ data: "form, name=licenseeNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=licenseeNumber;" })
   licenseeNumber?: string;
 
-  @Metadata({ data: "form, name=predefinedShoppingItem;" })
+  @SpeakeasyMetadata({ data: "form, name=predefinedShoppingItem;" })
   predefinedShoppingItem?: string;
 
-  @Metadata({ data: "form, name=privateKey;" })
+  @SpeakeasyMetadata({ data: "form, name=privateKey;" })
   privateKey?: string;
 
-  @Metadata({ data: "form, name=productNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=productNumber;" })
   productNumber?: string;
 
-  @Metadata({ data: "form, name=successURL;" })
+  @SpeakeasyMetadata({ data: "form, name=successURL;" })
   successUrl?: string;
 
-  @Metadata({ data: "form, name=successURLTitle;" })
+  @SpeakeasyMetadata({ data: "form, name=successURLTitle;" })
   successUrlTitle?: string;
 
-  @Metadata({ data: "form, name=tokenType;" })
+  @SpeakeasyMetadata({ data: "form, name=tokenType;" })
   tokenType: CreateTokenRequestBodyTokenTypeEnum;
 
-  @Metadata({ data: "form, name=type;" })
+  @SpeakeasyMetadata({ data: "form, name=type;" })
   type?: CreateTokenRequestBodyTypeEnum;
 }
 
 
 export class CreateTokenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class CreateTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: CreateTokenRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateTokenSecurity;
 }
 
 
 export class CreateTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   netlicensing?: any;
 }

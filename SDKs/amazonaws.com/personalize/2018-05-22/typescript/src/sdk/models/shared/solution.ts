@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlResult } from "./automlresult";
 import { SolutionVersionSummary } from "./solutionversionsummary";
 import { SolutionConfig } from "./solutionconfig";
+
 
 
 // Solution
@@ -9,42 +10,42 @@ import { SolutionConfig } from "./solutionconfig";
  * An object that provides information about a solution. A solution is a trained model that can be deployed as a campaign.
 **/
 export class Solution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoMLResult" })
+  @SpeakeasyMetadata({ data: "json, name=autoMLResult" })
   autoMlResult?: AutoMlResult;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=datasetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=datasetGroupArn" })
   datasetGroupArn?: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=latestSolutionVersion" })
+  @SpeakeasyMetadata({ data: "json, name=latestSolutionVersion" })
   latestSolutionVersion?: SolutionVersionSummary;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=performAutoML" })
+  @SpeakeasyMetadata({ data: "json, name=performAutoML" })
   performAutoMl?: boolean;
 
-  @Metadata({ data: "json, name=performHPO" })
+  @SpeakeasyMetadata({ data: "json, name=performHPO" })
   performHpo?: boolean;
 
-  @Metadata({ data: "json, name=recipeArn" })
+  @SpeakeasyMetadata({ data: "json, name=recipeArn" })
   recipeArn?: string;
 
-  @Metadata({ data: "json, name=solutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionArn" })
   solutionArn?: string;
 
-  @Metadata({ data: "json, name=solutionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=solutionConfig" })
   solutionConfig?: SolutionConfig;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateLunaClientResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the output of the <a>CreateLunaClient</a> action.
 **/
 export class CreateLunaClientResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClientArn" })
   clientArn?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AnalyzedResource
+// Contains details about the analyzed resource.
 type AnalyzedResource struct {
 	Actions              []string           `json:"actions,omitempty"`
 	AnalyzedAt           time.Time          `json:"analyzedAt"`

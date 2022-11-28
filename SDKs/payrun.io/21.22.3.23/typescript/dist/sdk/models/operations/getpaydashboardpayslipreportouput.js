@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPayDashboardPayslipReportOuputQueryParams = /** @class */ (function (_super) {
     __extends(GetPayDashboardPayslipReportOuputQueryParams, _super);
@@ -30,39 +30,39 @@ var GetPayDashboardPayslipReportOuputQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployeeCodes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployeeCodes" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "employeeCodes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "employerKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "maxIndex", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "payScheduleKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" }),
         __metadata("design:type", Date)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "paymentDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PublicationDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PublicationDate" }),
         __metadata("design:type", Date)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "publicationDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=StartIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartIndex" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "startIndex", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputQueryParams.prototype, "transformDefinitionKey", void 0);
     return GetPayDashboardPayslipReportOuputQueryParams;
@@ -74,11 +74,11 @@ var GetPayDashboardPayslipReportOuputHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputHeaders.prototype, "authorization", void 0);
     return GetPayDashboardPayslipReportOuputHeaders;
@@ -90,11 +90,11 @@ var GetPayDashboardPayslipReportOuputRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPayDashboardPayslipReportOuputQueryParams)
     ], GetPayDashboardPayslipReportOuputRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPayDashboardPayslipReportOuputHeaders)
     ], GetPayDashboardPayslipReportOuputRequest.prototype, "headers", void 0);
     return GetPayDashboardPayslipReportOuputRequest;
@@ -106,19 +106,19 @@ var GetPayDashboardPayslipReportOuputResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPayDashboardPayslipReportOuputResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetPayDashboardPayslipReportOuputResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPayDashboardPayslipReportOuputResponse.prototype, "getPayDashboardPayslipReportOuput200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPayDashboardPayslipReportOuputResponse.prototype, "statusCode", void 0);
     return GetPayDashboardPayslipReportOuputResponse;

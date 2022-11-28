@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import inventoryitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutInventoryRequest:
-    instance_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceId' }})
-    items: List[inventoryitem.InventoryItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Items' }})
+    instance_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceId') }})
+    items: List[InventoryItem] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Items') }})
     

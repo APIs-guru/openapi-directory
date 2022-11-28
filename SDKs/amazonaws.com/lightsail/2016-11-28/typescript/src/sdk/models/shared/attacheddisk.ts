@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AttachedDisk
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a block storage disk that is attached to an instance, and is included in an automatic snapshot.
 **/
 export class AttachedDisk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=sizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeInGb" })
   sizeInGb?: number;
 }

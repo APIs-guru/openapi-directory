@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import sites
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SiteTypeLayer:
-    sites: Optional[List[sites.Sites]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sites' }})
+    sites: Optional[List[Sites]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Sites') }})
     

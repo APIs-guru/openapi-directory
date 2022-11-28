@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetIdentityFeedbackForwardingEnabledActionEnum(str, Enum):
     SET_IDENTITY_FEEDBACK_FORWARDING_ENABLED = "SetIdentityFeedbackForwardingEnabled"
@@ -10,8 +14,8 @@ class PostSetIdentityFeedbackForwardingEnabledVersionEnum(str, Enum):
 
 @dataclass
 class PostSetIdentityFeedbackForwardingEnabledQueryParams:
-    action: PostSetIdentityFeedbackForwardingEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetIdentityFeedbackForwardingEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetIdentityFeedbackForwardingEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetIdentityFeedbackForwardingEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetIdentityFeedbackForwardingEnabledHeaders:
 
 @dataclass
 class PostSetIdentityFeedbackForwardingEnabledRequest:
-    query_params: PostSetIdentityFeedbackForwardingEnabledQueryParams = field(default=None)
-    headers: PostSetIdentityFeedbackForwardingEnabledHeaders = field(default=None)
+    headers: PostSetIdentityFeedbackForwardingEnabledHeaders = field()
+    query_params: PostSetIdentityFeedbackForwardingEnabledQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetIdentityFeedbackForwardingEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

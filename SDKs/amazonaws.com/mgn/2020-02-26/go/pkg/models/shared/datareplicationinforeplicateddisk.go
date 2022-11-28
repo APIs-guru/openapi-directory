@@ -1,5 +1,7 @@
 package shared
 
+// DataReplicationInfoReplicatedDisk
+// Request to query disks replicated.
 type DataReplicationInfoReplicatedDisk struct {
 	BackloggedStorageBytes *int64  `json:"backloggedStorageBytes,omitempty"`
 	DeviceName             *string `json:"deviceName,omitempty"`

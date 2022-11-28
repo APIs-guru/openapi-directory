@@ -18,6 +18,8 @@ const (
 	AcceleratorStateEnumUnknown          AcceleratorStateEnum = "UNKNOWN"
 )
 
+// Accelerator
+// Identifies Data Fusion accelerators for an instance.
 type Accelerator struct {
 	AcceleratorType *AcceleratorAcceleratorTypeEnum `json:"acceleratorType,omitempty"`
 	State           *AcceleratorStateEnum           `json:"state,omitempty"`

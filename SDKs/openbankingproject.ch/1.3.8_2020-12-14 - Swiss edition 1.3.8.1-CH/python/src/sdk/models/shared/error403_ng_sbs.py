@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import hreftype
-from . import tppmessage403_sbs
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Error403NgSbs:
-    links: Optional[dict[str, hreftype.HrefType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    tpp_messages: Optional[List[tppmessage403_sbs.TppMessage403Sbs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tppMessages' }})
+    r"""Error403NgSbs
+    NextGen specific definition of reporting error information in case of a HTTP error code 403.
+    
+    """
+    
+    links: Optional[dict[str, HrefType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    tpp_messages: Optional[List[TppMessage403Sbs]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tppMessages') }})
     

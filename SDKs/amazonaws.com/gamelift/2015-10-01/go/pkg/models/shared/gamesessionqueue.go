@@ -1,5 +1,7 @@
 package shared
 
+// GameSessionQueue
+// <p>Configuration for a game session placement mechanism that processes requests for new game sessions. A queue can be used on its own or as part of a matchmaking solution.</p> <p> <b>Related actions</b> </p> <p> <a>CreateGameSessionQueue</a> | <a>DescribeGameSessionQueues</a> | <a>UpdateGameSessionQueue</a> </p>
 type GameSessionQueue struct {
 	CustomEventData       *string                       `json:"CustomEventData,omitempty"`
 	Destinations          []GameSessionQueueDestination `json:"Destinations,omitempty"`

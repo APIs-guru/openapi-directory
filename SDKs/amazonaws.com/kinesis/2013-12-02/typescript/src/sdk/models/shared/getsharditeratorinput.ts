@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShardIteratorTypeEnum } from "./sharditeratortypeenum";
+
 
 
 // GetShardIteratorInput
@@ -7,18 +8,18 @@ import { ShardIteratorTypeEnum } from "./sharditeratortypeenum";
  * Represents the input for <code>GetShardIterator</code>.
 **/
 export class GetShardIteratorInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShardId" })
+  @SpeakeasyMetadata({ data: "json, name=ShardId" })
   shardId: string;
 
-  @Metadata({ data: "json, name=ShardIteratorType" })
+  @SpeakeasyMetadata({ data: "json, name=ShardIteratorType" })
   shardIteratorType: ShardIteratorTypeEnum;
 
-  @Metadata({ data: "json, name=StartingSequenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=StartingSequenceNumber" })
   startingSequenceNumber?: string;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 }

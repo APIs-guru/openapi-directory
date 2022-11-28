@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesCustomDimensionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class AnalyticsadminPropertiesCustomDimensionsListQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesCustomDimensionsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesCustomDimensionsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class AnalyticsadminPropertiesCustomDimensionsListSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesCustomDimensionsListRequest:
-    path_params: AnalyticsadminPropertiesCustomDimensionsListPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesCustomDimensionsListQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesCustomDimensionsListSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesCustomDimensionsListPathParams = field()
+    query_params: AnalyticsadminPropertiesCustomDimensionsListQueryParams = field()
+    security: AnalyticsadminPropertiesCustomDimensionsListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesCustomDimensionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_custom_dimensions_response: Optional[shared.GoogleAnalyticsAdminV1alphaListCustomDimensionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

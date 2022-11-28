@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationCodeConfigurationDescription } from "./applicationcodeconfigurationdescription";
 import { ApplicationSnapshotConfigurationDescription } from "./applicationsnapshotconfigurationdescription";
 import { EnvironmentPropertyDescriptions } from "./environmentpropertydescriptions";
 import { FlinkApplicationConfigurationDescription } from "./flinkapplicationconfigurationdescription";
 import { RunConfigurationDescription } from "./runconfigurationdescription";
 import { SqlApplicationConfigurationDescription } from "./sqlapplicationconfigurationdescription";
+import { VpcConfigurationDescription } from "./vpcconfigurationdescription";
 import { ZeppelinApplicationConfigurationDescription } from "./zeppelinapplicationconfigurationdescription";
 // ApplicationConfigurationDescription
 /**
@@ -41,35 +41,35 @@ var ApplicationConfigurationDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationCodeConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationCodeConfigurationDescription" }),
         __metadata("design:type", ApplicationCodeConfigurationDescription)
     ], ApplicationConfigurationDescription.prototype, "applicationCodeConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationSnapshotConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationSnapshotConfigurationDescription" }),
         __metadata("design:type", ApplicationSnapshotConfigurationDescription)
     ], ApplicationConfigurationDescription.prototype, "applicationSnapshotConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnvironmentPropertyDescriptions" }),
+        SpeakeasyMetadata({ data: "json, name=EnvironmentPropertyDescriptions" }),
         __metadata("design:type", EnvironmentPropertyDescriptions)
     ], ApplicationConfigurationDescription.prototype, "environmentPropertyDescriptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=FlinkApplicationConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=FlinkApplicationConfigurationDescription" }),
         __metadata("design:type", FlinkApplicationConfigurationDescription)
     ], ApplicationConfigurationDescription.prototype, "flinkApplicationConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=RunConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=RunConfigurationDescription" }),
         __metadata("design:type", RunConfigurationDescription)
     ], ApplicationConfigurationDescription.prototype, "runConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=SqlApplicationConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=SqlApplicationConfigurationDescription" }),
         __metadata("design:type", SqlApplicationConfigurationDescription)
     ], ApplicationConfigurationDescription.prototype, "sqlApplicationConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfigurationDescriptions", elemType: shared.VpcConfigurationDescription }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfigurationDescriptions", elemType: VpcConfigurationDescription }),
         __metadata("design:type", Array)
     ], ApplicationConfigurationDescription.prototype, "vpcConfigurationDescriptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=ZeppelinApplicationConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ZeppelinApplicationConfigurationDescription" }),
         __metadata("design:type", ZeppelinApplicationConfigurationDescription)
     ], ApplicationConfigurationDescription.prototype, "zeppelinApplicationConfigurationDescription", void 0);
     return ApplicationConfigurationDescription;

@@ -22,10 +22,6 @@ type GetCurrentUserPostsQueryParams struct {
 	UserState        *string    `queryParam:"style=form,explode=true,name=user_state"`
 }
 
-type GetCurrentUserPostsRequest struct {
-	QueryParams GetCurrentUserPostsQueryParams
-}
-
 type GetCurrentUserPosts200ApplicationJSON struct {
 	EndIndex         *int64        `json:"end_index,omitempty"`
 	GroupIds         []string      `json:"group_ids,omitempty"`
@@ -36,6 +32,10 @@ type GetCurrentUserPosts200ApplicationJSON struct {
 	PerPage          *int64        `json:"per_page,omitempty"`
 	Posts            []shared.Post `json:"posts,omitempty"`
 	StartIndex       *int64        `json:"start_index,omitempty"`
+}
+
+type GetCurrentUserPostsRequest struct {
+	QueryParams GetCurrentUserPostsQueryParams
 }
 
 type GetCurrentUserPostsResponse struct {

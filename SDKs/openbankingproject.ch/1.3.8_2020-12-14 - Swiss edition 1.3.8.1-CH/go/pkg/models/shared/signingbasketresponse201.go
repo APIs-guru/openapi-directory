@@ -1,5 +1,7 @@
 package shared
 
+// SigningBasketResponse201
+// Body of the JSON response for a successful create signing basket request.
 type SigningBasketResponse201 struct {
 	Links             LinksSigningBasket       `json:"_links"`
 	BasketID          string                   `json:"basketId"`

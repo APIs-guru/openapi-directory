@@ -1,10 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+import { FieldMetadataInput } from "./fieldmetadata";
+
 
 export enum BiographyContentTypeEnum {
-    ContentTypeUnspecified = "CONTENT_TYPE_UNSPECIFIED"
-,    TextPlain = "TEXT_PLAIN"
-,    TextHtml = "TEXT_HTML"
+    ContentTypeUnspecified = "CONTENT_TYPE_UNSPECIFIED",
+    TextPlain = "TEXT_PLAIN",
+    TextHtml = "TEXT_HTML"
 }
 
 
@@ -13,12 +15,28 @@ export enum BiographyContentTypeEnum {
  * A person's short biography.
 **/
 export class Biography extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentType" })
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
   contentType?: BiographyContentTypeEnum;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
+  value?: string;
+}
+
+
+// BiographyInput
+/** 
+ * A person's short biography.
+**/
+export class BiographyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
+  contentType?: BiographyContentTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

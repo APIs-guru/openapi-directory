@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDataflowEndpointGroupPathParams:
-    dataflow_endpoint_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dataflowEndpointGroupId', 'style': 'simple', 'explode': False }})
+    dataflow_endpoint_group_id: str = field(metadata={'path_param': { 'field_name': 'dataflowEndpointGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetDataflowEndpointGroupHeaders:
 
 @dataclass
 class GetDataflowEndpointGroupRequest:
-    path_params: GetDataflowEndpointGroupPathParams = field(default=None)
-    headers: GetDataflowEndpointGroupHeaders = field(default=None)
+    headers: GetDataflowEndpointGroupHeaders = field()
+    path_params: GetDataflowEndpointGroupPathParams = field()
     
 
 @dataclass
 class GetDataflowEndpointGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dependency_exception: Optional[Any] = field(default=None)
     get_dataflow_endpoint_group_response: Optional[shared.GetDataflowEndpointGroupResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

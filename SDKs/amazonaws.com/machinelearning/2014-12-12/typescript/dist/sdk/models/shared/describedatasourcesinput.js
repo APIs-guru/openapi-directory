@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceFilterVariableEnum } from "./datasourcefiltervariableenum";
 import { SortOrderEnum } from "./sortorderenum";
 var DescribeDataSourcesInput = /** @class */ (function (_super) {
@@ -31,47 +31,47 @@ var DescribeDataSourcesInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EQ" }),
+        SpeakeasyMetadata({ data: "json, name=EQ" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "eq", void 0);
     __decorate([
-        Metadata({ data: "json, name=FilterVariable" }),
+        SpeakeasyMetadata({ data: "json, name=FilterVariable" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "filterVariable", void 0);
     __decorate([
-        Metadata({ data: "json, name=GE" }),
+        SpeakeasyMetadata({ data: "json, name=GE" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "ge", void 0);
     __decorate([
-        Metadata({ data: "json, name=GT" }),
+        SpeakeasyMetadata({ data: "json, name=GT" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "gt", void 0);
     __decorate([
-        Metadata({ data: "json, name=LE" }),
+        SpeakeasyMetadata({ data: "json, name=LE" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "le", void 0);
     __decorate([
-        Metadata({ data: "json, name=LT" }),
+        SpeakeasyMetadata({ data: "json, name=LT" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "lt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Limit" }),
+        SpeakeasyMetadata({ data: "json, name=Limit" }),
         __metadata("design:type", Number)
     ], DescribeDataSourcesInput.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=NE" }),
+        SpeakeasyMetadata({ data: "json, name=NE" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "ne", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Prefix" }),
+        SpeakeasyMetadata({ data: "json, name=Prefix" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "prefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=SortOrder" }),
+        SpeakeasyMetadata({ data: "json, name=SortOrder" }),
         __metadata("design:type", String)
     ], DescribeDataSourcesInput.prototype, "sortOrder", void 0);
     return DescribeDataSourcesInput;

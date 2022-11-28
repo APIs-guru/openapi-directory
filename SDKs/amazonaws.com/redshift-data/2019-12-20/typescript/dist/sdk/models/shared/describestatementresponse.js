@@ -22,84 +22,85 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SqlParameter } from "./sqlparameter";
 import { StatusStringEnum } from "./statusstringenum";
+import { SubStatementData } from "./substatementdata";
 var DescribeStatementResponse = /** @class */ (function (_super) {
     __extends(DescribeStatementResponse, _super);
     function DescribeStatementResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "clusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], DescribeStatementResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Database" }),
+        SpeakeasyMetadata({ data: "json, name=Database" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "database", void 0);
     __decorate([
-        Metadata({ data: "json, name=DbUser" }),
+        SpeakeasyMetadata({ data: "json, name=DbUser" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "dbUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=Duration" }),
+        SpeakeasyMetadata({ data: "json, name=Duration" }),
         __metadata("design:type", Number)
     ], DescribeStatementResponse.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Error" }),
+        SpeakeasyMetadata({ data: "json, name=Error" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=HasResultSet" }),
+        SpeakeasyMetadata({ data: "json, name=HasResultSet" }),
         __metadata("design:type", Boolean)
     ], DescribeStatementResponse.prototype, "hasResultSet", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryParameters", elemType: shared.SqlParameter }),
+        SpeakeasyMetadata({ data: "json, name=QueryParameters", elemType: SqlParameter }),
         __metadata("design:type", Array)
     ], DescribeStatementResponse.prototype, "queryParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryString" }),
+        SpeakeasyMetadata({ data: "json, name=QueryString" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "queryString", void 0);
     __decorate([
-        Metadata({ data: "json, name=RedshiftPid" }),
+        SpeakeasyMetadata({ data: "json, name=RedshiftPid" }),
         __metadata("design:type", Number)
     ], DescribeStatementResponse.prototype, "redshiftPid", void 0);
     __decorate([
-        Metadata({ data: "json, name=RedshiftQueryId" }),
+        SpeakeasyMetadata({ data: "json, name=RedshiftQueryId" }),
         __metadata("design:type", Number)
     ], DescribeStatementResponse.prototype, "redshiftQueryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResultRows" }),
+        SpeakeasyMetadata({ data: "json, name=ResultRows" }),
         __metadata("design:type", Number)
     ], DescribeStatementResponse.prototype, "resultRows", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResultSize" }),
+        SpeakeasyMetadata({ data: "json, name=ResultSize" }),
         __metadata("design:type", Number)
     ], DescribeStatementResponse.prototype, "resultSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretArn" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "secretArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribeStatementResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubStatements", elemType: shared.SubStatementData }),
+        SpeakeasyMetadata({ data: "json, name=SubStatements", elemType: SubStatementData }),
         __metadata("design:type", Array)
     ], DescribeStatementResponse.prototype, "subStatements", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=UpdatedAt" }),
         __metadata("design:type", Date)
     ], DescribeStatementResponse.prototype, "updatedAt", void 0);
     return DescribeStatementResponse;

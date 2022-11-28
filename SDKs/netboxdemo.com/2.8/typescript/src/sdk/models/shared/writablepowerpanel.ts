@@ -1,19 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritablePowerPanel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
-  id?: number;
 
-  @Metadata({ data: "json, name=name" })
+export class WritablePowerPanelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=powerfeed_count" })
-  powerfeedCount?: number;
-
-  @Metadata({ data: "json, name=rack_group" })
+  @SpeakeasyMetadata({ data: "json, name=rack_group" })
   rackGroup?: number;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site: number;
 }

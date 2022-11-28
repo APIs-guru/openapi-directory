@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DecryptRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for KeyManagementService.Decrypt.
 **/
 export class DecryptRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalAuthenticatedData" })
+  @SpeakeasyMetadata({ data: "json, name=additionalAuthenticatedData" })
   additionalAuthenticatedData?: string;
 
-  @Metadata({ data: "json, name=additionalAuthenticatedDataCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=additionalAuthenticatedDataCrc32c" })
   additionalAuthenticatedDataCrc32c?: string;
 
-  @Metadata({ data: "json, name=ciphertext" })
+  @SpeakeasyMetadata({ data: "json, name=ciphertext" })
   ciphertext?: string;
 
-  @Metadata({ data: "json, name=ciphertextCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=ciphertextCrc32c" })
   ciphertextCrc32c?: string;
 }

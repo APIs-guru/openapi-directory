@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResultImage
@@ -7,25 +7,25 @@ import * as shared from "../shared";
  * Image belonging to a custom search result.
 **/
 export class ResultImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=byteSize" })
+  @SpeakeasyMetadata({ data: "json, name=byteSize" })
   byteSize?: number;
 
-  @Metadata({ data: "json, name=contextLink" })
+  @SpeakeasyMetadata({ data: "json, name=contextLink" })
   contextLink?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=thumbnailHeight" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailHeight" })
   thumbnailHeight?: number;
 
-  @Metadata({ data: "json, name=thumbnailLink" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailLink" })
   thumbnailLink?: string;
 
-  @Metadata({ data: "json, name=thumbnailWidth" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailWidth" })
   thumbnailWidth?: number;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -35,13 +35,13 @@ export class ResultImage extends SpeakeasyBase {
  * Refinement label associated with a custom search result.
 **/
 export class ResultLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=label_with_op" })
+  @SpeakeasyMetadata({ data: "json, name=label_with_op" })
   labelWithOp?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -51,48 +51,48 @@ export class ResultLabels extends SpeakeasyBase {
  * A custom search result.
 **/
 export class Result extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cacheId" })
+  @SpeakeasyMetadata({ data: "json, name=cacheId" })
   cacheId?: string;
 
-  @Metadata({ data: "json, name=displayLink" })
+  @SpeakeasyMetadata({ data: "json, name=displayLink" })
   displayLink?: string;
 
-  @Metadata({ data: "json, name=fileFormat" })
+  @SpeakeasyMetadata({ data: "json, name=fileFormat" })
   fileFormat?: string;
 
-  @Metadata({ data: "json, name=formattedUrl" })
+  @SpeakeasyMetadata({ data: "json, name=formattedUrl" })
   formattedUrl?: string;
 
-  @Metadata({ data: "json, name=htmlFormattedUrl" })
+  @SpeakeasyMetadata({ data: "json, name=htmlFormattedUrl" })
   htmlFormattedUrl?: string;
 
-  @Metadata({ data: "json, name=htmlSnippet" })
+  @SpeakeasyMetadata({ data: "json, name=htmlSnippet" })
   htmlSnippet?: string;
 
-  @Metadata({ data: "json, name=htmlTitle" })
+  @SpeakeasyMetadata({ data: "json, name=htmlTitle" })
   htmlTitle?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: ResultImage;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.ResultLabels })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: ResultLabels })
   labels?: ResultLabels[];
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=mime" })
+  @SpeakeasyMetadata({ data: "json, name=mime" })
   mime?: string;
 
-  @Metadata({ data: "json, name=pagemap" })
+  @SpeakeasyMetadata({ data: "json, name=pagemap" })
   pagemap?: Map<string, any>;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

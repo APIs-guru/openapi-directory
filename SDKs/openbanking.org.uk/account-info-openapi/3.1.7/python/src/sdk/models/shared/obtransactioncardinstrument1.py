@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ObTransactionCardInstrument1AuthorisationTypeEnum(str, Enum):
     CONSUMER_DEVICE = "ConsumerDevice"
@@ -19,8 +21,12 @@ class ObTransactionCardInstrument1CardSchemeNameEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ObTransactionCardInstrument1:
-    authorisation_type: Optional[ObTransactionCardInstrument1AuthorisationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthorisationType' }})
-    card_scheme_name: ObTransactionCardInstrument1CardSchemeNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CardSchemeName' }})
-    identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Identification' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""ObTransactionCardInstrument1
+    Set of elements to describe the card instrument used in the transaction.
+    """
+    
+    card_scheme_name: ObTransactionCardInstrument1CardSchemeNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CardSchemeName') }})
+    authorisation_type: Optional[ObTransactionCardInstrument1AuthorisationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthorisationType') }})
+    identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Identification') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

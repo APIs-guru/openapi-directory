@@ -1,101 +1,101 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationSummary } from "./classificationsummary";
 import { ExclusionRule } from "./exclusionrule";
 
+
 export enum EntitlementDeliveryTypeEnum {
-    Stream = "Stream"
-,    Download = "Download"
-,    StreamOrDownload = "StreamOrDownload"
-,    ProgressiveDownload = "ProgressiveDownload"
-,    None = "None"
+    Stream = "Stream",
+    Download = "Download",
+    StreamOrDownload = "StreamOrDownload",
+    ProgressiveDownload = "ProgressiveDownload",
+    None = "None"
 }
 
 export enum EntitlementItemTypeEnum {
-    Movie = "movie"
-,    Show = "show"
-,    Season = "season"
-,    Episode = "episode"
-,    Program = "program"
-,    Link = "link"
-,    Trailer = "trailer"
-,    Channel = "channel"
-,    CustomAsset = "customAsset"
+    Movie = "movie",
+    Show = "show",
+    Season = "season",
+    Episode = "episode",
+    Program = "program",
+    Link = "link",
+    Trailer = "trailer",
+    Channel = "channel",
+    CustomAsset = "customAsset"
 }
 
 export enum EntitlementOwnershipEnum {
-    Subscription = "Subscription"
-,    Free = "Free"
-,    Rent = "Rent"
-,    Own = "Own"
-,    None = "None"
+    Subscription = "Subscription",
+    Free = "Free",
+    Rent = "Rent",
+    Own = "Own",
+    None = "None"
 }
 
 export enum EntitlementResolutionEnum {
-    Sd = "SD"
-,    Hd720 = "HD-720"
-,    Hd1080 = "HD-1080"
-,    Hd4K = "HD-4K"
-,    External = "External"
-,    Unknown = "Unknown"
+    Sd = "SD",
+    Hd720 = "HD-720",
+    Hd1080 = "HD-1080",
+    Hd4K = "HD-4K",
+    External = "External",
+    Unknown = "Unknown"
 }
 
 
 export class Entitlement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activationDate" })
+  @SpeakeasyMetadata({ data: "json, name=activationDate" })
   activationDate?: Date;
 
-  @Metadata({ data: "json, name=classification" })
+  @SpeakeasyMetadata({ data: "json, name=classification" })
   classification?: ClassificationSummary;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=deliveryType" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryType" })
   deliveryType: EntitlementDeliveryTypeEnum;
 
-  @Metadata({ data: "json, name=exclusionRules", elemType: shared.ExclusionRule })
+  @SpeakeasyMetadata({ data: "json, name=exclusionRules", elemType: ExclusionRule })
   exclusionRules?: ExclusionRule[];
 
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=itemType" })
+  @SpeakeasyMetadata({ data: "json, name=itemType" })
   itemType?: EntitlementItemTypeEnum;
 
-  @Metadata({ data: "json, name=maxDownloads" })
+  @SpeakeasyMetadata({ data: "json, name=maxDownloads" })
   maxDownloads?: number;
 
-  @Metadata({ data: "json, name=maxPlays" })
+  @SpeakeasyMetadata({ data: "json, name=maxPlays" })
   maxPlays?: number;
 
-  @Metadata({ data: "json, name=mediaDuration" })
+  @SpeakeasyMetadata({ data: "json, name=mediaDuration" })
   mediaDuration?: number;
 
-  @Metadata({ data: "json, name=ownership" })
+  @SpeakeasyMetadata({ data: "json, name=ownership" })
   ownership: EntitlementOwnershipEnum;
 
-  @Metadata({ data: "json, name=planId" })
+  @SpeakeasyMetadata({ data: "json, name=planId" })
   planId?: string;
 
-  @Metadata({ data: "json, name=playCount" })
+  @SpeakeasyMetadata({ data: "json, name=playCount" })
   playCount?: number;
 
-  @Metadata({ data: "json, name=playPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=playPeriod" })
   playPeriod?: number;
 
-  @Metadata({ data: "json, name=remainingDownloads" })
+  @SpeakeasyMetadata({ data: "json, name=remainingDownloads" })
   remainingDownloads?: number;
 
-  @Metadata({ data: "json, name=rentalPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=rentalPeriod" })
   rentalPeriod?: number;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution: EntitlementResolutionEnum;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes: string[];
 }

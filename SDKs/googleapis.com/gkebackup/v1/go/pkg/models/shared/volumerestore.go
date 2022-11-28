@@ -18,6 +18,8 @@ const (
 	VolumeRestoreVolumeTypeEnumGcePersistentDisk     VolumeRestoreVolumeTypeEnum = "GCE_PERSISTENT_DISK"
 )
 
+// VolumeRestore
+// Represents the operation of restoring a volume from a VolumeBackup. Next id: 13
 type VolumeRestore struct {
 	CompleteTime *string                      `json:"completeTime,omitempty"`
 	CreateTime   *string                      `json:"createTime,omitempty"`

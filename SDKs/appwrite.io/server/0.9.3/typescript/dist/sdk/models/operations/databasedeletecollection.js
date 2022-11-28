@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DatabaseDeleteCollectionPathParams = /** @class */ (function (_super) {
     __extends(DatabaseDeleteCollectionPathParams, _super);
@@ -30,7 +30,7 @@ var DatabaseDeleteCollectionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=collectionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectionId" }),
         __metadata("design:type", String)
     ], DatabaseDeleteCollectionPathParams.prototype, "collectionId", void 0);
     return DatabaseDeleteCollectionPathParams;
@@ -42,11 +42,11 @@ var DatabaseDeleteCollectionSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], DatabaseDeleteCollectionSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], DatabaseDeleteCollectionSecurity.prototype, "project", void 0);
     return DatabaseDeleteCollectionSecurity;
@@ -58,11 +58,11 @@ var DatabaseDeleteCollectionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseDeleteCollectionPathParams)
     ], DatabaseDeleteCollectionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseDeleteCollectionSecurity)
     ], DatabaseDeleteCollectionRequest.prototype, "security", void 0);
     return DatabaseDeleteCollectionRequest;
@@ -74,11 +74,11 @@ var DatabaseDeleteCollectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DatabaseDeleteCollectionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DatabaseDeleteCollectionResponse.prototype, "statusCode", void 0);
     return DatabaseDeleteCollectionResponse;

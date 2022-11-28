@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DocumentReadActionEnum } from "./documentreadactionenum";
 import { DocumentReadModeEnum } from "./documentreadmodeenum";
 import { DocumentReadFeatureTypesEnum } from "./documentreadfeaturetypesenum";

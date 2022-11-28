@@ -17,6 +17,8 @@ const (
 	FhirStoreVersionEnumR4                 FhirStoreVersionEnum = "R4"
 )
 
+// FhirStore
+// Represents a FHIR store.
 type FhirStore struct {
 	ComplexDataTypeReferenceParsing *FhirStoreComplexDataTypeReferenceParsingEnum `json:"complexDataTypeReferenceParsing,omitempty"`
 	DefaultSearchHandlingStrict     *bool                                         `json:"defaultSearchHandlingStrict,omitempty"`

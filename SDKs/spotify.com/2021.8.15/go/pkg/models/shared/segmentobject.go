@@ -1,5 +1,8 @@
 package shared
 
+// SegmentObject
+
+// https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/#segment-object - Find more info on the official Spotify Web API Reference
 type SegmentObject struct {
 	Confidence      *float64  `json:"confidence,omitempty"`
 	Duration        *float64  `json:"duration,omitempty"`

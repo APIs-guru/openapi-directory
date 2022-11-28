@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetWebhooksWebhookIDLogsPathParams:
-    webhook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
+    webhook_id: str = field(metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetWebhooksWebhookIDLogsQueryParams:
 
 @dataclass
 class GetWebhooksWebhookIDLogsRequest:
-    path_params: GetWebhooksWebhookIDLogsPathParams = field(default=None)
-    query_params: GetWebhooksWebhookIDLogsQueryParams = field(default=None)
+    path_params: GetWebhooksWebhookIDLogsPathParams = field()
+    query_params: GetWebhooksWebhookIDLogsQueryParams = field()
     
 
 @dataclass
 class GetWebhooksWebhookIDLogsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_webhook_delivery_logs_response: Optional[shared.ListWebhookDeliveryLogsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

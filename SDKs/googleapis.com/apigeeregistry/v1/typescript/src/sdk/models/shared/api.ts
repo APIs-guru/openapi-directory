@@ -1,4 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// ApiInput
+/** 
+ * A top-level description of an API. Produced by producers and are commitments to provide services.
+**/
+export class ApiInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
+  annotations?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=availability" })
+  availability?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=recommendedDeployment" })
+  recommendedDeployment?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=recommendedVersion" })
+  recommendedVersion?: string;
+}
 
 
 // Api
@@ -6,33 +38,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A top-level description of an API. Produced by producers and are commitments to provide services.
 **/
 export class Api extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: Map<string, string>;
 
-  @Metadata({ data: "json, name=availability" })
+  @SpeakeasyMetadata({ data: "json, name=availability" })
   availability?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=recommendedDeployment" })
+  @SpeakeasyMetadata({ data: "json, name=recommendedDeployment" })
   recommendedDeployment?: string;
 
-  @Metadata({ data: "json, name=recommendedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=recommendedVersion" })
   recommendedVersion?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

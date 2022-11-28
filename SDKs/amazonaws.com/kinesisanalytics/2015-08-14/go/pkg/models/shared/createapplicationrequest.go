@@ -1,5 +1,7 @@
 package shared
 
+// CreateApplicationRequest
+// TBD
 type CreateApplicationRequest struct {
 	ApplicationCode          *string                   `json:"ApplicationCode,omitempty"`
 	ApplicationDescription   *string                   `json:"ApplicationDescription,omitempty"`

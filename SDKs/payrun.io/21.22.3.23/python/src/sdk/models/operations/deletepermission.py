@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class DeletePermissionPathParams:
-    permission_id: str = field(default=None, metadata={'path_param': { 'field_name': 'PermissionId', 'style': 'simple', 'explode': False }})
+    permission_id: str = field(metadata={'path_param': { 'field_name': 'PermissionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeletePermissionHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeletePermissionRequest:
-    path_params: DeletePermissionPathParams = field(default=None)
-    headers: DeletePermissionHeaders = field(default=None)
+    headers: DeletePermissionHeaders = field()
+    path_params: DeletePermissionPathParams = field()
     
 
 @dataclass
 class DeletePermissionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -28,11 +28,11 @@ class SearchGeoShapefileFipsQueryParams:
 
 @dataclass
 class SearchGeoShapefileFipsRequest:
-    query_params: SearchGeoShapefileFipsQueryParams = field(default=None)
+    query_params: SearchGeoShapefileFipsQueryParams = field()
     
 
 @dataclass
 class SearchGeoShapefileFipsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

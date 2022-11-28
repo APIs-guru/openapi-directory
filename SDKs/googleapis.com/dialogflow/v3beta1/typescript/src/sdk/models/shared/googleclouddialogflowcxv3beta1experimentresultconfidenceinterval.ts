@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1ExperimentResultConfidenceInterval
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A confidence interval is a range of possible values for the experiment objective you are trying to measure.
 **/
 export class GoogleCloudDialogflowCxV3beta1ExperimentResultConfidenceInterval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidenceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=confidenceLevel" })
   confidenceLevel?: number;
 
-  @Metadata({ data: "json, name=lowerBound" })
+  @SpeakeasyMetadata({ data: "json, name=lowerBound" })
   lowerBound?: number;
 
-  @Metadata({ data: "json, name=ratio" })
+  @SpeakeasyMetadata({ data: "json, name=ratio" })
   ratio?: number;
 
-  @Metadata({ data: "json, name=upperBound" })
+  @SpeakeasyMetadata({ data: "json, name=upperBound" })
   upperBound?: number;
 }

@@ -1,44 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { BaseItemDto } from "./baseitemdto";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BaseItemDtoInput } from "./baseitemdto";
 import { QueueItem } from "./queueitem";
 
 
-// PlaybackStopInfo
+
+// PlaybackStopInfoInput
 /** 
  * Class PlaybackStopInfo.
 **/
-export class PlaybackStopInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Failed" })
+export class PlaybackStopInfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=Failed" })
   failed?: boolean;
 
-  @Metadata({ data: "json, name=Item" })
-  item?: BaseItemDto;
+  @SpeakeasyMetadata({ data: "json, name=Item" })
+  item?: BaseItemDtoInput;
 
-  @Metadata({ data: "json, name=ItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ItemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=LiveStreamId" })
+  @SpeakeasyMetadata({ data: "json, name=LiveStreamId" })
   liveStreamId?: string;
 
-  @Metadata({ data: "json, name=MediaSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=MediaSourceId" })
   mediaSourceId?: string;
 
-  @Metadata({ data: "json, name=NextMediaType" })
+  @SpeakeasyMetadata({ data: "json, name=NextMediaType" })
   nextMediaType?: string;
 
-  @Metadata({ data: "json, name=NowPlayingQueue", elemType: shared.QueueItem })
+  @SpeakeasyMetadata({ data: "json, name=NowPlayingQueue", elemType: QueueItem })
   nowPlayingQueue?: QueueItem[];
 
-  @Metadata({ data: "json, name=PlaySessionId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaySessionId" })
   playSessionId?: string;
 
-  @Metadata({ data: "json, name=PlaylistItemId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemId" })
   playlistItemId?: string;
 
-  @Metadata({ data: "json, name=PositionTicks" })
+  @SpeakeasyMetadata({ data: "json, name=PositionTicks" })
   positionTicks?: number;
 
-  @Metadata({ data: "json, name=SessionId" })
+  @SpeakeasyMetadata({ data: "json, name=SessionId" })
   sessionId?: string;
 }

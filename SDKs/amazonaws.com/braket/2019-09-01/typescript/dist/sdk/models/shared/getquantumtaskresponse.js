@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuantumTaskStatusEnum } from "./quantumtaskstatusenum";
 var GetQuantumTaskResponse = /** @class */ (function (_super) {
     __extends(GetQuantumTaskResponse, _super);
@@ -30,47 +30,47 @@ var GetQuantumTaskResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], GetQuantumTaskResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceArn" }),
+        SpeakeasyMetadata({ data: "json, name=deviceArn" }),
         __metadata("design:type", String)
     ], GetQuantumTaskResponse.prototype, "deviceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceParameters" }),
+        SpeakeasyMetadata({ data: "json, name=deviceParameters" }),
         __metadata("design:type", String)
     ], GetQuantumTaskResponse.prototype, "deviceParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=endedAt" }),
+        SpeakeasyMetadata({ data: "json, name=endedAt" }),
         __metadata("design:type", Date)
     ], GetQuantumTaskResponse.prototype, "endedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], GetQuantumTaskResponse.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputS3Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=outputS3Bucket" }),
         __metadata("design:type", String)
     ], GetQuantumTaskResponse.prototype, "outputS3Bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputS3Directory" }),
+        SpeakeasyMetadata({ data: "json, name=outputS3Directory" }),
         __metadata("design:type", String)
     ], GetQuantumTaskResponse.prototype, "outputS3Directory", void 0);
     __decorate([
-        Metadata({ data: "json, name=quantumTaskArn" }),
+        SpeakeasyMetadata({ data: "json, name=quantumTaskArn" }),
         __metadata("design:type", String)
     ], GetQuantumTaskResponse.prototype, "quantumTaskArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=shots" }),
+        SpeakeasyMetadata({ data: "json, name=shots" }),
         __metadata("design:type", Number)
     ], GetQuantumTaskResponse.prototype, "shots", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetQuantumTaskResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], GetQuantumTaskResponse.prototype, "tags", void 0);
     return GetQuantumTaskResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardSqlField } from "./standardsqlfield";
+
 
 
 // StandardSqlTableType
@@ -8,6 +8,6 @@ import { StandardSqlField } from "./standardsqlfield";
  * A table type
 **/
 export class StandardSqlTableType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns", elemType: shared.StandardSqlField })
+  @SpeakeasyMetadata({ data: "json, name=columns", elemType: StandardSqlField })
   columns?: StandardSqlField[];
 }

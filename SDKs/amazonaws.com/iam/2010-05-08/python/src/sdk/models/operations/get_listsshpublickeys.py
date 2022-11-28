@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListSSHPublicKeysActionEnum(str, Enum):
     LIST_SSH_PUBLIC_KEYS = "ListSSHPublicKeys"
@@ -10,11 +14,11 @@ class GetListSSHPublicKeysVersionEnum(str, Enum):
 
 @dataclass
 class GetListSSHPublicKeysQueryParams:
-    action: GetListSSHPublicKeysActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListSSHPublicKeysActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListSSHPublicKeysVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetListSSHPublicKeysVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListSSHPublicKeysHeaders:
 
 @dataclass
 class GetListSSHPublicKeysRequest:
-    query_params: GetListSSHPublicKeysQueryParams = field(default=None)
-    headers: GetListSSHPublicKeysHeaders = field(default=None)
+    headers: GetListSSHPublicKeysHeaders = field()
+    query_params: GetListSSHPublicKeysQueryParams = field()
     
 
 @dataclass
 class GetListSSHPublicKeysResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

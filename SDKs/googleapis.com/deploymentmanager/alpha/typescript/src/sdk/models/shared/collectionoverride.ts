@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MethodMap } from "./methodmap";
 import { Options } from "./options";
+
 
 
 // CollectionOverride
@@ -8,12 +9,12 @@ import { Options } from "./options";
  * CollectionOverride allows resource handling overrides for specific resources within a BaseType
 **/
 export class CollectionOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=methodMap" })
+  @SpeakeasyMetadata({ data: "json, name=methodMap" })
   methodMap?: MethodMap;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: Options;
 }

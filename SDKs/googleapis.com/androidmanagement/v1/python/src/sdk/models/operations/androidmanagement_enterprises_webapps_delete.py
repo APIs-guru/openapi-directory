@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidmanagementEnterprisesWebAppsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class AndroidmanagementEnterprisesWebAppsDeleteWipeDataFlagsEnum(str, Enum):
     WIPE_DATA_FLAG_UNSPECIFIED = "WIPE_DATA_FLAG_UNSPECIFIED"
@@ -32,20 +33,20 @@ class AndroidmanagementEnterprisesWebAppsDeleteQueryParams:
 
 @dataclass
 class AndroidmanagementEnterprisesWebAppsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidmanagementEnterprisesWebAppsDeleteRequest:
-    path_params: AndroidmanagementEnterprisesWebAppsDeletePathParams = field(default=None)
-    query_params: AndroidmanagementEnterprisesWebAppsDeleteQueryParams = field(default=None)
-    security: AndroidmanagementEnterprisesWebAppsDeleteSecurity = field(default=None)
+    path_params: AndroidmanagementEnterprisesWebAppsDeletePathParams = field()
+    query_params: AndroidmanagementEnterprisesWebAppsDeleteQueryParams = field()
+    security: AndroidmanagementEnterprisesWebAppsDeleteSecurity = field()
     
 
 @dataclass
 class AndroidmanagementEnterprisesWebAppsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

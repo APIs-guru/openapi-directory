@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmRolesRoleNameCompositesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=role-name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=role-name" })
   roleName: string;
 }
 
 
 export class GetRealmRolesRoleNameCompositesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmRolesRoleNameCompositesPathParams;
 }
 
 
 export class GetRealmRolesRoleNameCompositesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.RoleRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.RoleRepresentation })
   roleRepresentations?: shared.RoleRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

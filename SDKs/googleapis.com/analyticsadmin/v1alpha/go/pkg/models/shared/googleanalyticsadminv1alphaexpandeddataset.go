@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaExpandedDataSet
+// A resource message representing a GA4 ExpandedDataSet.
 type GoogleAnalyticsAdminV1alphaExpandedDataSet struct {
 	DataCollectionStartTime   *string                                                     `json:"dataCollectionStartTime,omitempty"`
 	Description               *string                                                     `json:"description,omitempty"`

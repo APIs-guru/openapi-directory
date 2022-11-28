@@ -10,13 +10,13 @@ class RequestSyslogConfigHeaders:
 
 @dataclass
 class RequestSyslogConfigRequest:
-    headers: RequestSyslogConfigHeaders = field(default=None)
+    headers: RequestSyslogConfigHeaders = field()
     
 
 @dataclass
 class RequestSyslogConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     syslog_config: Optional[shared.SyslogConfig] = field(default=None)
     

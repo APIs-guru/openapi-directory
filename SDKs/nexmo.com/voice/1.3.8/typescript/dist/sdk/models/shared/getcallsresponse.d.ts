@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GetCallResponse } from "./getcallresponse";
 /**
  * A list of call objects. See the [get details of a specific call](#getCall) response fields for a description of the nested objects

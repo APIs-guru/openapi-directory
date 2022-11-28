@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceResizePolicy } from "./instanceresizepolicy";
+
 
 
 // ShrinkPolicy
@@ -7,9 +8,9 @@ import { InstanceResizePolicy } from "./instanceresizepolicy";
  * Policy for customizing shrink operations. Allows configuration of decommissioning timeout and targeted instance shrinking.
 **/
 export class ShrinkPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DecommissionTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=DecommissionTimeout" })
   decommissionTimeout?: number;
 
-  @Metadata({ data: "json, name=InstanceResizePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceResizePolicy" })
   instanceResizePolicy?: InstanceResizePolicy;
 }

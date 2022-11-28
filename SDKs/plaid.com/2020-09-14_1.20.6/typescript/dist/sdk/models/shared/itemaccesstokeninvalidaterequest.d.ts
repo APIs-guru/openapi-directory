@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * ItemAccessTokenInvalidateRequest defines the request schema for `/item/access_token/invalidate`
 **/

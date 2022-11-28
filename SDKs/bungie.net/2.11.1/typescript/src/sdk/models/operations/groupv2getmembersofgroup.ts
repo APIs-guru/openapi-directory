@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GroupV2GetMembersOfGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
   groupId: number;
 }
 
 
 export class GroupV2GetMembersOfGroupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentpage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentpage" })
   currentpage: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=memberType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=memberType" })
   memberType?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameSearch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameSearch" })
   nameSearch?: string;
 }
 
 
 export class GroupV2GetMembersOfGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupV2GetMembersOfGroupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GroupV2GetMembersOfGroupQueryParams;
 }
 
 
 export class GroupV2GetMembersOfGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

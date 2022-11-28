@@ -73,7 +73,7 @@ type DriveFilesCopySecurity struct {
 type DriveFilesCopyRequest struct {
 	PathParams  DriveFilesCopyPathParams
 	QueryParams DriveFilesCopyQueryParams
-	Request     *shared.File `request:"mediaType=application/json"`
+	Request     *shared.FileInput `request:"mediaType=application/json"`
 	Security    DriveFilesCopySecurity
 }
 

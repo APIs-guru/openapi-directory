@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import devicestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeviceSummary:
-    device_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceId' }})
-    device_status: Optional[devicestatus_enum.DeviceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceStatus' }})
+    r"""DeviceSummary
+    The summary of devices.
+    """
+    
+    device_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceId') }})
+    device_status: Optional[DeviceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceStatus') }})
     

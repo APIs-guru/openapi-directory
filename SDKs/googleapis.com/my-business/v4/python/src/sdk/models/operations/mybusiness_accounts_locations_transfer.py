@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsTransferPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessAccountsLocationsTransferQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsTransferRequest:
-    path_params: MybusinessAccountsLocationsTransferPathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsTransferQueryParams = field(default=None)
+    path_params: MybusinessAccountsLocationsTransferPathParams = field()
+    query_params: MybusinessAccountsLocationsTransferQueryParams = field()
     request: Optional[shared.TransferLocationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsTransferResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     location: Optional[shared.Location] = field(default=None)
-    status_code: int = field(default=None)
     

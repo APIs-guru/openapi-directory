@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class HealthcareProjectsLocationsDatasetsHl7V2StoresListQueryParams:
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresListRequest:
-    path_params: HealthcareProjectsLocationsDatasetsHl7V2StoresListPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsHl7V2StoresListQueryParams = field(default=None)
-    security: HealthcareProjectsLocationsDatasetsHl7V2StoresListSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsHl7V2StoresListPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsHl7V2StoresListQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsHl7V2StoresListSecurity = field()
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsHl7V2StoresListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_hl7_v2_stores_response: Optional[shared.ListHl7V2StoresResponse] = field(default=None)
-    status_code: int = field(default=None)
     

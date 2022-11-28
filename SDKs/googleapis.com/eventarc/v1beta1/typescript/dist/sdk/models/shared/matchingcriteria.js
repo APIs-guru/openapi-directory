@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MatchingCriteria
 /**
  * Matches events based on exact matches on the CloudEvents attributes.
@@ -33,11 +33,11 @@ var MatchingCriteria = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attribute" }),
+        SpeakeasyMetadata({ data: "json, name=attribute" }),
         __metadata("design:type", String)
     ], MatchingCriteria.prototype, "attribute", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], MatchingCriteria.prototype, "value", void 0);
     return MatchingCriteria;

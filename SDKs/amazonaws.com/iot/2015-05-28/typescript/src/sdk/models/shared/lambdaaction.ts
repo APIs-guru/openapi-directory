@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LambdaAction
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an action to invoke a Lambda function.
 **/
 export class LambdaAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=functionArn" })
+  @SpeakeasyMetadata({ data: "json, name=functionArn" })
   functionArn: string;
 }

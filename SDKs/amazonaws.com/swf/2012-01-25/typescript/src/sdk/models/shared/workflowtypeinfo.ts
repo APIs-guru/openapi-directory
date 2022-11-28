@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegistrationStatusEnum } from "./registrationstatusenum";
 import { WorkflowType } from "./workflowtype";
+
 
 
 // WorkflowTypeInfo
@@ -8,18 +9,18 @@ import { WorkflowType } from "./workflowtype";
  * Contains information about a workflow type.
 **/
 export class WorkflowTypeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=deprecationDate" })
+  @SpeakeasyMetadata({ data: "json, name=deprecationDate" })
   deprecationDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: RegistrationStatusEnum;
 
-  @Metadata({ data: "json, name=workflowType" })
+  @SpeakeasyMetadata({ data: "json, name=workflowType" })
   workflowType: WorkflowType;
 }

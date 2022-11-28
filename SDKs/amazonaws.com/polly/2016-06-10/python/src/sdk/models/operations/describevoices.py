@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DescribeVoicesEngineEnum(str, Enum):
@@ -61,15 +65,15 @@ class DescribeVoicesHeaders:
 
 @dataclass
 class DescribeVoicesRequest:
-    query_params: DescribeVoicesQueryParams = field(default=None)
-    headers: DescribeVoicesHeaders = field(default=None)
+    headers: DescribeVoicesHeaders = field()
+    query_params: DescribeVoicesQueryParams = field()
     
 
 @dataclass
 class DescribeVoicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_voices_output: Optional[shared.DescribeVoicesOutput] = field(default=None)
     invalid_next_token_exception: Optional[Any] = field(default=None)
     service_failure_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

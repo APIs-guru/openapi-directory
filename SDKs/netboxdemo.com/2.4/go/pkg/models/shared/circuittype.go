@@ -5,3 +5,8 @@ type CircuitType struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 }
+
+type CircuitTypeInput struct {
+	Name string `json:"name"`
+	Slug string `json:"slug"`
+}

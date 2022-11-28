@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PostRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams:
-    content_type: shared.ContentTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'contentType', 'style': 'simple', 'explode': False }})
-    origin: str = field(default=None, metadata={'path_param': { 'field_name': 'origin', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    content_type: shared.ContentTypeEnum = field(metadata={'path_param': { 'field_name': 'contentType', 'style': 'simple', 'explode': False }})
+    origin: str = field(metadata={'path_param': { 'field_name': 'origin', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 class PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeVehicleEngineTypeEnum(str, Enum):
     COMBUSTION = "combustion"
@@ -51,19 +52,19 @@ class PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParam
 
 @dataclass
 class PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
     calculate_reachable_range_post_data_parameters: Optional[shared.CalculateReachableRangePostDataParameters] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest:
-    path_params: PostRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams = field(default=None)
-    query_params: PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams = field(default=None)
+    path_params: PostRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams = field()
+    query_params: PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams = field()
     request: Optional[PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequests] = field(default=None)
     
 
 @dataclass
 class PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

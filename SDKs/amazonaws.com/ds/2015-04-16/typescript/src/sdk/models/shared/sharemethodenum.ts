@@ -1,6 +1,7 @@
 
 
+
 export enum ShareMethodEnum {
-    Organizations = "ORGANIZATIONS"
-,    Handshake = "HANDSHAKE"
+    Organizations = "ORGANIZATIONS",
+    Handshake = "HANDSHAKE"
 }

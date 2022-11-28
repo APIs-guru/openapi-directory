@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DeviceTemplate } from "./devicetemplate";
 // PlacementTemplate
 /**
  * An object defining the template for a placement.
@@ -34,11 +34,11 @@ var PlacementTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defaultAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=defaultAttributes" }),
         __metadata("design:type", Map)
     ], PlacementTemplate.prototype, "defaultAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceTemplates", elemType: shared.DeviceTemplate }),
+        SpeakeasyMetadata({ data: "json, name=deviceTemplates", elemType: DeviceTemplate }),
         __metadata("design:type", Map)
     ], PlacementTemplate.prototype, "deviceTemplates", void 0);
     return PlacementTemplate;

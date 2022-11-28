@@ -5,10 +5,6 @@ type SendClientsMessageUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type SendClientsMessageUsingGetRequest struct {
-	QueryParams SendClientsMessageUsingGetQueryParams
-}
-
 type SendClientsMessageUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type SendClientsMessageUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type SendClientsMessageUsingGetRequest struct {
+	QueryParams SendClientsMessageUsingGetQueryParams
 }
 
 type SendClientsMessageUsingGetResponse struct {

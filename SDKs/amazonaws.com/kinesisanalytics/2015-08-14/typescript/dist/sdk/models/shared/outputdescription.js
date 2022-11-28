@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationSchema } from "./destinationschema";
 import { KinesisFirehoseOutputDescription } from "./kinesisfirehoseoutputdescription";
 import { KinesisStreamsOutputDescription } from "./kinesisstreamsoutputdescription";
@@ -37,27 +37,27 @@ var OutputDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationSchema" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationSchema" }),
         __metadata("design:type", DestinationSchema)
     ], OutputDescription.prototype, "destinationSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisFirehoseOutputDescription" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisFirehoseOutputDescription" }),
         __metadata("design:type", KinesisFirehoseOutputDescription)
     ], OutputDescription.prototype, "kinesisFirehoseOutputDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisStreamsOutputDescription" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisStreamsOutputDescription" }),
         __metadata("design:type", KinesisStreamsOutputDescription)
     ], OutputDescription.prototype, "kinesisStreamsOutputDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=LambdaOutputDescription" }),
+        SpeakeasyMetadata({ data: "json, name=LambdaOutputDescription" }),
         __metadata("design:type", LambdaOutputDescription)
     ], OutputDescription.prototype, "lambdaOutputDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], OutputDescription.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputId" }),
+        SpeakeasyMetadata({ data: "json, name=OutputId" }),
         __metadata("design:type", String)
     ], OutputDescription.prototype, "outputId", void 0);
     return OutputDescription;

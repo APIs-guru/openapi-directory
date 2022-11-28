@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementBinauthzConfig } from "./configmanagementbinauthzconfig";
 import { ConfigManagementConfigSync } from "./configmanagementconfigsync";
 import { ConfigManagementHierarchyControllerConfig } from "./configmanagementhierarchycontrollerconfig";

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import joberrorcode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class JobError:
-    code: joberrorcode_enum.JobErrorCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""JobError
+    Contains the details about the policy generation error.
+    """
+    
+    code: JobErrorCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

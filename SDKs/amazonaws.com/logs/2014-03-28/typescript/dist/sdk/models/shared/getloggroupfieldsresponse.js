@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LogGroupField } from "./loggroupfield";
 var GetLogGroupFieldsResponse = /** @class */ (function (_super) {
     __extends(GetLogGroupFieldsResponse, _super);
     function GetLogGroupFieldsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=logGroupFields", elemType: shared.LogGroupField }),
+        SpeakeasyMetadata({ data: "json, name=logGroupFields", elemType: LogGroupField }),
         __metadata("design:type", Array)
     ], GetLogGroupFieldsResponse.prototype, "logGroupFields", void 0);
     return GetLogGroupFieldsResponse;

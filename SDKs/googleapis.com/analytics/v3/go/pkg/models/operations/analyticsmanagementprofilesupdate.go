@@ -28,7 +28,7 @@ type AnalyticsManagementProfilesUpdateSecurity struct {
 type AnalyticsManagementProfilesUpdateRequest struct {
 	PathParams  AnalyticsManagementProfilesUpdatePathParams
 	QueryParams AnalyticsManagementProfilesUpdateQueryParams
-	Request     *shared.Profile `request:"mediaType=application/json"`
+	Request     *shared.ProfileInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementProfilesUpdateSecurity
 }
 

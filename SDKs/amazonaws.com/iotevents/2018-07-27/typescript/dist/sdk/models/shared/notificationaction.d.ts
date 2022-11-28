@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NotificationTargetActions } from "./notificationtargetactions";
 import { EmailConfiguration } from "./emailconfiguration";
 import { SmsConfiguration } from "./smsconfiguration";

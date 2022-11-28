@@ -8,6 +8,8 @@ const (
 	StreamingComputationTaskTaskTypeEnumStreamingComputationTaskStart   StreamingComputationTaskTaskTypeEnum = "STREAMING_COMPUTATION_TASK_START"
 )
 
+// StreamingComputationTask
+// A task which describes what action should be performed for the specified streaming computation ranges.
 type StreamingComputationTask struct {
 	ComputationRanges []StreamingComputationRanges          `json:"computationRanges,omitempty"`
 	DataDisks         []MountedDataDisk                     `json:"dataDisks,omitempty"`

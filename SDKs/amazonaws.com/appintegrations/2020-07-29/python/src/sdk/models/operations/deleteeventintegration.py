@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteEventIntegrationPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,18 +23,18 @@ class DeleteEventIntegrationHeaders:
 
 @dataclass
 class DeleteEventIntegrationRequest:
-    path_params: DeleteEventIntegrationPathParams = field(default=None)
-    headers: DeleteEventIntegrationHeaders = field(default=None)
+    headers: DeleteEventIntegrationHeaders = field()
+    path_params: DeleteEventIntegrationPathParams = field()
     
 
 @dataclass
 class DeleteEventIntegrationResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_event_integration_response: Optional[dict[str, Any]] = field(default=None)
     internal_service_error: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

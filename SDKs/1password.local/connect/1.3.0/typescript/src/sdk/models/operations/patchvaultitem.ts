@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchVaultItemPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
   itemUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
   vaultUuid: string;
 }
 
 
 export class PatchVaultItemSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   connectToken: shared.SchemeConnectToken;
 }
 
 
 export class PatchVaultItemRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchVaultItemPathParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.Patch })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Patch })
   request?: shared.Patch[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PatchVaultItemSecurity;
 }
 
 
 export class PatchVaultItemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fullItem?: shared.FullItem;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

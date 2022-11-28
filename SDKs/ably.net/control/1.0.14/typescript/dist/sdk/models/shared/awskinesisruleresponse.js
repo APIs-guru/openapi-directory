@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var AwsKinesisRuleResponseRequestModeEnum;
 (function (AwsKinesisRuleResponseRequestModeEnum) {
@@ -47,27 +47,27 @@ var AwsKinesisRuleResponseTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authentication" }),
+        SpeakeasyMetadata({ data: "json, name=authentication" }),
         __metadata("design:type", Object)
     ], AwsKinesisRuleResponseTarget.prototype, "authentication", void 0);
     __decorate([
-        Metadata({ data: "json, name=enveloped" }),
+        SpeakeasyMetadata({ data: "json, name=enveloped" }),
         __metadata("design:type", Boolean)
     ], AwsKinesisRuleResponseTarget.prototype, "enveloped", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponseTarget.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=partitionKey" }),
+        SpeakeasyMetadata({ data: "json, name=partitionKey" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponseTarget.prototype, "partitionKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponseTarget.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=streamName" }),
+        SpeakeasyMetadata({ data: "json, name=streamName" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponseTarget.prototype, "streamName", void 0);
     return AwsKinesisRuleResponseTarget;
@@ -79,47 +79,47 @@ var AwsKinesisRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Map)
     ], AwsKinesisRuleResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponse.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Number)
     ], AwsKinesisRuleResponse.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=modified" }),
+        SpeakeasyMetadata({ data: "json, name=modified" }),
         __metadata("design:type", Number)
     ], AwsKinesisRuleResponse.prototype, "modified", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponse.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponse.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], AwsKinesisRuleResponse.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", AwsKinesisRuleResponseTarget)
     ], AwsKinesisRuleResponse.prototype, "target", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], AwsKinesisRuleResponse.prototype, "version", void 0);
     return AwsKinesisRuleResponse;

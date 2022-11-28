@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsPurgePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RetailProjectsLocationsCatalogsUserEventsPurgeQueryParams:
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsPurgeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsPurgeRequest:
-    path_params: RetailProjectsLocationsCatalogsUserEventsPurgePathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsUserEventsPurgeQueryParams = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsUserEventsPurgePathParams = field()
+    query_params: RetailProjectsLocationsCatalogsUserEventsPurgeQueryParams = field()
+    security: RetailProjectsLocationsCatalogsUserEventsPurgeSecurity = field()
     request: Optional[shared.GoogleCloudRetailV2betaPurgeUserEventsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RetailProjectsLocationsCatalogsUserEventsPurgeSecurity = field(default=None)
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsPurgeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

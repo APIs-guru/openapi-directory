@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBeyondcorpAppconnectorsV1AppConnectorInstanceConfig } from "./googlecloudbeyondcorpappconnectorsv1appconnectorinstanceconfig";
+
 
 
 // GoogleCloudBeyondcorpAppconnectorsV1ResolveInstanceConfigResponse
@@ -7,6 +8,6 @@ import { GoogleCloudBeyondcorpAppconnectorsV1AppConnectorInstanceConfig } from "
  * Response message for BeyondCorp.ResolveInstanceConfig.
 **/
 export class GoogleCloudBeyondcorpAppconnectorsV1ResolveInstanceConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=instanceConfig" })
   instanceConfig?: GoogleCloudBeyondcorpAppconnectorsV1AppConnectorInstanceConfig;
 }

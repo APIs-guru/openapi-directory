@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayMediaControlCommandSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookmarkTrack" })
+  @SpeakeasyMetadata({ data: "json, name=bookmarkTrack" })
   bookmarkTrack?: boolean;
 
-  @Metadata({ data: "json, name=dislikeTrack" })
+  @SpeakeasyMetadata({ data: "json, name=dislikeTrack" })
   dislikeTrack?: boolean;
 
-  @Metadata({ data: "json, name=likeTrack" })
+  @SpeakeasyMetadata({ data: "json, name=likeTrack" })
   likeTrack?: boolean;
 
-  @Metadata({ data: "json, name=nextTrack" })
+  @SpeakeasyMetadata({ data: "json, name=nextTrack" })
   nextTrack?: boolean;
 
-  @Metadata({ data: "json, name=preferSkipBackward" })
+  @SpeakeasyMetadata({ data: "json, name=preferSkipBackward" })
   preferSkipBackward?: boolean;
 
-  @Metadata({ data: "json, name=preferSkipForward" })
+  @SpeakeasyMetadata({ data: "json, name=preferSkipForward" })
   preferSkipForward?: boolean;
 
-  @Metadata({ data: "json, name=previousTrack" })
+  @SpeakeasyMetadata({ data: "json, name=previousTrack" })
   previousTrack?: boolean;
 
-  @Metadata({ data: "json, name=seekToPlaybackPosition" })
+  @SpeakeasyMetadata({ data: "json, name=seekToPlaybackPosition" })
   seekToPlaybackPosition?: boolean;
 
-  @Metadata({ data: "json, name=skipBackward" })
+  @SpeakeasyMetadata({ data: "json, name=skipBackward" })
   skipBackward?: boolean;
 
-  @Metadata({ data: "json, name=skipForward" })
+  @SpeakeasyMetadata({ data: "json, name=skipForward" })
   skipForward?: boolean;
 }

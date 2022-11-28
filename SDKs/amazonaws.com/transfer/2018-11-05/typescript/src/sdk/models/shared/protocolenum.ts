@@ -1,7 +1,8 @@
 
 
+
 export enum ProtocolEnum {
-    Sftp = "SFTP"
-,    Ftp = "FTP"
-,    Ftps = "FTPS"
+    Sftp = "SFTP",
+    Ftp = "FTP",
+    Ftps = "FTPS"
 }

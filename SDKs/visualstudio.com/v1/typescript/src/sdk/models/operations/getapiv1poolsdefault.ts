@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1PoolsDefaultQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skuName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skuName" })
   skuName: string[];
 }
 
 
 export class GetApiV1PoolsDefaultRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV1PoolsDefaultQueryParams;
 }
 
 
 export class GetApiV1PoolsDefaultResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PoolStatusResponseBody })
+  @SpeakeasyMetadata({ elemType: shared.PoolStatusResponseBody })
   poolStatusResponseBodies?: shared.PoolStatusResponseBody[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

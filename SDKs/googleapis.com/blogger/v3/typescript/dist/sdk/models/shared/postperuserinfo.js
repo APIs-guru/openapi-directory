@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostPerUserInfo = /** @class */ (function (_super) {
     __extends(PostPerUserInfo, _super);
     function PostPerUserInfo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blogId" }),
+        SpeakeasyMetadata({ data: "json, name=blogId" }),
         __metadata("design:type", String)
     ], PostPerUserInfo.prototype, "blogId", void 0);
     __decorate([
-        Metadata({ data: "json, name=hasEditAccess" }),
+        SpeakeasyMetadata({ data: "json, name=hasEditAccess" }),
         __metadata("design:type", Boolean)
     ], PostPerUserInfo.prototype, "hasEditAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], PostPerUserInfo.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=postId" }),
+        SpeakeasyMetadata({ data: "json, name=postId" }),
         __metadata("design:type", String)
     ], PostPerUserInfo.prototype, "postId", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], PostPerUserInfo.prototype, "userId", void 0);
     return PostPerUserInfo;

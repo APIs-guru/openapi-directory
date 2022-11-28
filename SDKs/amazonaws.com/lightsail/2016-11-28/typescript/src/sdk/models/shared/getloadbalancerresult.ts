@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoadBalancer } from "./loadbalancer";
 
 
+
 export class GetLoadBalancerResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=loadBalancer" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancer" })
   loadBalancer?: LoadBalancer;
 }

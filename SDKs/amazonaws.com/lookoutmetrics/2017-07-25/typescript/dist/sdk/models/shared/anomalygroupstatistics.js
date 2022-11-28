@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ItemizedMetricStats } from "./itemizedmetricstats";
 // AnomalyGroupStatistics
 /**
  * Aggregated statistics for a group of anomalous metrics.
@@ -34,15 +34,15 @@ var AnomalyGroupStatistics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EvaluationStartDate" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationStartDate" }),
         __metadata("design:type", String)
     ], AnomalyGroupStatistics.prototype, "evaluationStartDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ItemizedMetricStatsList", elemType: shared.ItemizedMetricStats }),
+        SpeakeasyMetadata({ data: "json, name=ItemizedMetricStatsList", elemType: ItemizedMetricStats }),
         __metadata("design:type", Array)
     ], AnomalyGroupStatistics.prototype, "itemizedMetricStatsList", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalCount" }),
+        SpeakeasyMetadata({ data: "json, name=TotalCount" }),
         __metadata("design:type", Number)
     ], AnomalyGroupStatistics.prototype, "totalCount", void 0);
     return AnomalyGroupStatistics;

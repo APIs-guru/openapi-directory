@@ -19,10 +19,14 @@ type ListFindingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListFindingsRequestBodyFindingCriteria
+// Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.
 type ListFindingsRequestBodyFindingCriteria struct {
 	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion,omitempty"`
 }
 
+// ListFindingsRequestBodySortCriteria
+// Specifies criteria for sorting the results of a request for findings.
 type ListFindingsRequestBodySortCriteria struct {
 	AttributeName *string             `json:"attributeName,omitempty"`
 	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`

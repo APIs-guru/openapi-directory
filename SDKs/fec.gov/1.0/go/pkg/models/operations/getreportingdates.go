@@ -23,13 +23,13 @@ type GetReportingDatesQueryParams struct {
 	SortNullsLast *bool      `queryParam:"style=form,explode=true,name=sort_nulls_last"`
 }
 
-type GetReportingDatesRequest struct {
-	QueryParams GetReportingDatesQueryParams
-}
-
 type GetReportingDatesDefaultApplicationJSON struct {
 	Pagination *shared.OffsetInfo  `json:"pagination,omitempty"`
 	Results    []shared.ReportDate `json:"results,omitempty"`
+}
+
+type GetReportingDatesRequest struct {
+	QueryParams GetReportingDatesQueryParams
 }
 
 type GetReportingDatesResponse struct {

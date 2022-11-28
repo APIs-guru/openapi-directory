@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyBinding } from "./policybinding";
+
 
 
 // TenantProjectPolicy
@@ -8,6 +8,6 @@ import { PolicyBinding } from "./policybinding";
  * Describes policy settings that can be applied to a newly created tenant project.
 **/
 export class TenantProjectPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyBindings", elemType: shared.PolicyBinding })
+  @SpeakeasyMetadata({ data: "json, name=policyBindings", elemType: PolicyBinding })
   policyBindings?: PolicyBinding[];
 }

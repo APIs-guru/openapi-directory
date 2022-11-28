@@ -1,5 +1,7 @@
 package shared
 
+// AwsRedshiftClusterPendingModifiedValues
+// Changes to the Amazon Redshift cluster that are currently pending.
 type AwsRedshiftClusterPendingModifiedValues struct {
 	AutomatedSnapshotRetentionPeriod *int64  `json:"AutomatedSnapshotRetentionPeriod,omitempty"`
 	ClusterIdentifier                *string `json:"ClusterIdentifier,omitempty"`

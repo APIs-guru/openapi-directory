@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttClientSetBrokerPathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttClientSetBrokerPathParams, _super);
     function ProtocolMqttClientSetBrokerPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetBrokerPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=brokerAddr" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=brokerAddr" }),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetBrokerPathParams.prototype, "brokerAddr", void 0);
     return ProtocolMqttClientSetBrokerPathParams;
@@ -45,7 +45,7 @@ var ProtocolMqttClientSetBrokerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttClientSetBrokerPathParams)
     ], ProtocolMqttClientSetBrokerRequest.prototype, "pathParams", void 0);
     return ProtocolMqttClientSetBrokerRequest;
@@ -57,15 +57,15 @@ var ProtocolMqttClientSetBrokerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetBrokerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetBrokerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolMqttClientSetBrokerResponse.prototype, "protocolMqttClientSetBroker200ApplicationJsonInt32Integers", void 0);
     return ProtocolMqttClientSetBrokerResponse;

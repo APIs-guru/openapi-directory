@@ -1,5 +1,7 @@
 package shared
 
+// MatchingBucket
+// Provides statistical data and other information about an S3 bucket that Amazon Macie monitors and analyzes.
 type MatchingBucket struct {
 	AccountID                       *string                      `json:"accountId,omitempty"`
 	BucketName                      *string                      `json:"bucketName,omitempty"`

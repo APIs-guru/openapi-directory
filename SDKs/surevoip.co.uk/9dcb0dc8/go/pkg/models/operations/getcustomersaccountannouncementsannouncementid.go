@@ -9,12 +9,12 @@ type GetCustomersAccountAnnouncementsAnnouncementIDPathParams struct {
 	AnnouncementID string `pathParam:"style=simple,explode=false,name=announcement_id"`
 }
 
-type GetCustomersAccountAnnouncementsAnnouncementIDRequest struct {
-	PathParams GetCustomersAccountAnnouncementsAnnouncementIDPathParams
-}
-
 type GetCustomersAccountAnnouncementsAnnouncementID404ApplicationJSON struct {
 	Error *string `json:"error,omitempty"`
+}
+
+type GetCustomersAccountAnnouncementsAnnouncementIDRequest struct {
+	PathParams GetCustomersAccountAnnouncementsAnnouncementIDPathParams
 }
 
 type GetCustomersAccountAnnouncementsAnnouncementIDResponse struct {

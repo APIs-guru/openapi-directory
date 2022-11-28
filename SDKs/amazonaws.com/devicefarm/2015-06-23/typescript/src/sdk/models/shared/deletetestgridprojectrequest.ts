@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteTestGridProjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectArn" })
+  @SpeakeasyMetadata({ data: "json, name=projectArn" })
   projectArn: string;
 }

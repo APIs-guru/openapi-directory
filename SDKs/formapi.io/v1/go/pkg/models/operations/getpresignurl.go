@@ -8,10 +8,6 @@ type GetPresignURLSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type GetPresignURLRequest struct {
-	Security GetPresignURLSecurity
-}
-
 type GetPresignURLUploadPresignFields struct {
 	Key            string `json:"key"`
 	Policy         string `json:"policy"`
@@ -32,6 +28,10 @@ type GetPresignURLUploadPresign struct {
 	Headers map[string]interface{}                `json:"headers"`
 	Method  *GetPresignURLUploadPresignMethodEnum `json:"method,omitempty"`
 	URL     string                                `json:"url"`
+}
+
+type GetPresignURLRequest struct {
+	Security GetPresignURLSecurity
 }
 
 type GetPresignURLResponse struct {

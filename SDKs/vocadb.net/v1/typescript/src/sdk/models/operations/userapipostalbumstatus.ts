@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserApiPostAlbumStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=albumId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=albumId" })
   albumId: number;
 }
 
 export enum UserApiPostAlbumStatusCollectionStatusEnum {
-    Nothing = "Nothing"
-,    Wishlisted = "Wishlisted"
-,    Ordered = "Ordered"
-,    Owned = "Owned"
+    Nothing = "Nothing",
+    Wishlisted = "Wishlisted",
+    Ordered = "Ordered",
+    Owned = "Owned"
 }
 
 export enum UserApiPostAlbumStatusMediaTypeEnum {
-    PhysicalDisc = "PhysicalDisc"
-,    DigitalDownload = "DigitalDownload"
-,    Other = "Other"
+    PhysicalDisc = "PhysicalDisc",
+    DigitalDownload = "DigitalDownload",
+    Other = "Other"
 }
 
 
 export class UserApiPostAlbumStatusQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=collectionStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=collectionStatus" })
   collectionStatus: UserApiPostAlbumStatusCollectionStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mediaType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mediaType" })
   mediaType: UserApiPostAlbumStatusMediaTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rating" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rating" })
   rating: number;
 }
 
 
 export class UserApiPostAlbumStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UserApiPostAlbumStatusPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserApiPostAlbumStatusQueryParams;
 }
 
 
 export class UserApiPostAlbumStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiPostAlbumStatus200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiPostAlbumStatus200ApplicationJavascriptString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiPostAlbumStatus200ApplicationJsonpString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiPostAlbumStatus200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiPostAlbumStatus200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiPostAlbumStatus200TextJavascriptString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiPostAlbumStatus200TextXmlString?: string;
 }

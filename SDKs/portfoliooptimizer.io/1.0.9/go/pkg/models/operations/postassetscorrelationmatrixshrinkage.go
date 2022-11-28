@@ -22,12 +22,12 @@ type PostAssetsCorrelationMatrixShrinkageRequestBody2 struct {
 	ShrinkageTargetCorrelationMatrix [][]float64 `json:"shrinkageTargetCorrelationMatrix"`
 }
 
-type PostAssetsCorrelationMatrixShrinkageRequest struct {
-	Request interface{} `request:"mediaType=application/json"`
-}
-
 type PostAssetsCorrelationMatrixShrinkage200ApplicationJSON struct {
 	AssetsCorrelationMatrix [][]float64 `json:"assetsCorrelationMatrix"`
+}
+
+type PostAssetsCorrelationMatrixShrinkageRequest struct {
+	Request interface{} `request:"mediaType=application/json"`
 }
 
 type PostAssetsCorrelationMatrixShrinkageResponse struct {

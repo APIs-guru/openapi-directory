@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class FileDownloadPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class FileDownloadQueryParams:
 
 @dataclass
 class FileDownloadRequest:
-    path_params: FileDownloadPathParams = field(default=None)
-    query_params: FileDownloadQueryParams = field(default=None)
+    path_params: FileDownloadPathParams = field()
+    query_params: FileDownloadQueryParams = field()
     
 
 @dataclass
 class FileDownloadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_entity: Optional[shared.FileEntity] = field(default=None)
-    status_code: int = field(default=None)
     

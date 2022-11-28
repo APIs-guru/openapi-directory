@@ -1,5 +1,7 @@
 package shared
 
+// AwsSecurityFinding
+// <p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between Amazon Web Services security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by Amazon Web Services services or by the integrated third-party solutions and standards checks.</p> </note>
 type AwsSecurityFinding struct {
 	Action                *Action                `json:"Action,omitempty"`
 	AwsAccountID          string                 `json:"AwsAccountId"`

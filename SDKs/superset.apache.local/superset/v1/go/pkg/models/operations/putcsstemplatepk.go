@@ -12,12 +12,6 @@ type PutCSSTemplatePkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutCSSTemplatePkRequest struct {
-	PathParams PutCSSTemplatePkPathParams
-	Request    shared.CSSTemplateRestAPIPut `request:"mediaType=application/json"`
-	Security   PutCSSTemplatePkSecurity
-}
-
 type PutCSSTemplatePk200ApplicationJSON struct {
 	Result *shared.CSSTemplateRestAPIPut `json:"result,omitempty"`
 }
@@ -40,6 +34,12 @@ type PutCSSTemplatePk422ApplicationJSON struct {
 
 type PutCSSTemplatePk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutCSSTemplatePkRequest struct {
+	PathParams PutCSSTemplatePkPathParams
+	Request    shared.CSSTemplateRestAPIPut `request:"mediaType=application/json"`
+	Security   PutCSSTemplatePkSecurity
 }
 
 type PutCSSTemplatePkResponse struct {

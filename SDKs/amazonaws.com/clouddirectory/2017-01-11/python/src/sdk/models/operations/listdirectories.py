@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -29,28 +34,28 @@ class ListDirectoriesRequestBodyStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListDirectoriesRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    state: Optional[ListDirectoriesRequestBodyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    state: Optional[ListDirectoriesRequestBodyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     
 
 @dataclass
 class ListDirectoriesRequest:
-    query_params: ListDirectoriesQueryParams = field(default=None)
-    headers: ListDirectoriesHeaders = field(default=None)
-    request: ListDirectoriesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListDirectoriesHeaders = field()
+    query_params: ListDirectoriesQueryParams = field()
+    request: ListDirectoriesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListDirectoriesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     invalid_arn_exception: Optional[Any] = field(default=None)
     invalid_next_token_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     list_directories_response: Optional[shared.ListDirectoriesResponse] = field(default=None)
     retryable_conflict_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

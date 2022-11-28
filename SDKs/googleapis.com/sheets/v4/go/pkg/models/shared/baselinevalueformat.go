@@ -8,6 +8,8 @@ const (
 	BaselineValueFormatComparisonTypeEnumPercentageDifference    BaselineValueFormatComparisonTypeEnum = "PERCENTAGE_DIFFERENCE"
 )
 
+// BaselineValueFormat
+// Formatting options for baseline value.
 type BaselineValueFormat struct {
 	ComparisonType     *BaselineValueFormatComparisonTypeEnum `json:"comparisonType,omitempty"`
 	Description        *string                                `json:"description,omitempty"`

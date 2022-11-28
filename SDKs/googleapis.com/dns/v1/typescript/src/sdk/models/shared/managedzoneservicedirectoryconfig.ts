@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedZoneServiceDirectoryConfigNamespace } from "./managedzoneservicedirectoryconfignamespace";
+
 
 
 // ManagedZoneServiceDirectoryConfig
@@ -7,9 +8,9 @@ import { ManagedZoneServiceDirectoryConfigNamespace } from "./managedzoneservice
  * Contains information about Service Directory-backed zones.
 **/
 export class ManagedZoneServiceDirectoryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=namespace" })
+  @SpeakeasyMetadata({ data: "json, name=namespace" })
   namespace?: ManagedZoneServiceDirectoryConfigNamespace;
 }

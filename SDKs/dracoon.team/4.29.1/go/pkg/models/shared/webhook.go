@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Webhook
+// Webhook information
 type Webhook struct {
 	CreatedAt      time.Time `json:"createdAt"`
 	CreatedBy      *UserInfo `json:"createdBy,omitempty"`

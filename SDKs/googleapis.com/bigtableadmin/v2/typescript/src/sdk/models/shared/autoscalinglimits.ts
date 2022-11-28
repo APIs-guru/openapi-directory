@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoscalingLimits
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Limits for the number of nodes a Cluster can autoscale up/down to.
 **/
 export class AutoscalingLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxServeNodes" })
+  @SpeakeasyMetadata({ data: "json, name=maxServeNodes" })
   maxServeNodes?: number;
 
-  @Metadata({ data: "json, name=minServeNodes" })
+  @SpeakeasyMetadata({ data: "json, name=minServeNodes" })
   minServeNodes?: number;
 }

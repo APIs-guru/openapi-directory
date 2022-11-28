@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OperatorDbt = /** @class */ (function (_super) {
     __extends(OperatorDbt, _super);
     function OperatorDbt() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dbtArguments" }),
+        SpeakeasyMetadata({ data: "json, name=dbtArguments" }),
         __metadata("design:type", String)
     ], OperatorDbt.prototype, "dbtArguments", void 0);
     __decorate([
-        Metadata({ data: "json, name=dockerImage" }),
+        SpeakeasyMetadata({ data: "json, name=dockerImage" }),
         __metadata("design:type", String)
     ], OperatorDbt.prototype, "dockerImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=gitRepoBranch" }),
+        SpeakeasyMetadata({ data: "json, name=gitRepoBranch" }),
         __metadata("design:type", String)
     ], OperatorDbt.prototype, "gitRepoBranch", void 0);
     __decorate([
-        Metadata({ data: "json, name=gitRepoUrl" }),
+        SpeakeasyMetadata({ data: "json, name=gitRepoUrl" }),
         __metadata("design:type", String)
     ], OperatorDbt.prototype, "gitRepoUrl", void 0);
     return OperatorDbt;

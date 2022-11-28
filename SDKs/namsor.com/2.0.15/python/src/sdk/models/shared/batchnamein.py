@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import namein
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchNameIn:
-    proper_nouns: Optional[List[namein.NameIn]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properNouns' }})
+    proper_nouns: Optional[List[NameIn]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properNouns') }})
     

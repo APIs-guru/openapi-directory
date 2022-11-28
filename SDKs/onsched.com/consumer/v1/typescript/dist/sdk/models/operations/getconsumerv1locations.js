@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetConsumerV1LocationsQueryParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1LocationsQueryParams, _super);
     function GetConsumerV1LocationsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ignorePrimary" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignorePrimary" }),
         __metadata("design:type", Boolean)
     ], GetConsumerV1LocationsQueryParams.prototype, "ignorePrimary", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetConsumerV1LocationsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], GetConsumerV1LocationsQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nearestTo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nearestTo" }),
         __metadata("design:type", String)
     ], GetConsumerV1LocationsQueryParams.prototype, "nearestTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetConsumerV1LocationsQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=proximity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity" }),
         __metadata("design:type", Number)
     ], GetConsumerV1LocationsQueryParams.prototype, "proximity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionId" }),
         __metadata("design:type", String)
     ], GetConsumerV1LocationsQueryParams.prototype, "regionId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceId" }),
         __metadata("design:type", String)
     ], GetConsumerV1LocationsQueryParams.prototype, "serviceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=units" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=units" }),
         __metadata("design:type", String)
     ], GetConsumerV1LocationsQueryParams.prototype, "units", void 0);
     return GetConsumerV1LocationsQueryParams;
@@ -73,7 +73,7 @@ var GetConsumerV1LocationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1LocationsQueryParams)
     ], GetConsumerV1LocationsRequest.prototype, "queryParams", void 0);
     return GetConsumerV1LocationsRequest;
@@ -85,15 +85,15 @@ var GetConsumerV1LocationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1LocationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetConsumerV1LocationsResponse.prototype, "locationListViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1LocationsResponse.prototype, "statusCode", void 0);
     return GetConsumerV1LocationsResponse;

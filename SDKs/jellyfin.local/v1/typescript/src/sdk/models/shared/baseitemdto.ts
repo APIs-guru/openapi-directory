@@ -1,14 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DayOfWeekEnum } from "./dayofweekenum";
-import { NameGuidPair } from "./nameguidpair";
 import { NameGuidPair } from "./nameguidpair";
 import { ProgramAudioEnum } from "./programaudioenum";
 import { ChannelTypeEnum } from "./channeltypeenum";
 import { ChapterInfo } from "./chapterinfo";
-import { BaseItemDto } from "./baseitemdto";
 import { ExternalUrl } from "./externalurl";
-import { NameGuidPair } from "./nameguidpair";
 import { ImageOrientationEnum } from "./imageorientationenum";
 import { IsoTypeEnum } from "./isotypeenum";
 import { LocationTypeEnum } from "./locationtypeenum";
@@ -18,10 +14,12 @@ import { MediaStream } from "./mediastream";
 import { BaseItemPerson } from "./baseitemperson";
 import { PlayAccessEnum } from "./playaccessenum";
 import { MediaUrl } from "./mediaurl";
-import { NameGuidPair } from "./nameguidpair";
 import { UserItemDataDto } from "./useritemdatadto";
 import { Video3DFormatEnum } from "./video3dformatenum";
 import { VideoTypeEnum } from "./videotypeenum";
+import { MediaSourceInfoInput } from "./mediasourceinfo";
+import { MediaStreamInput } from "./mediastream";
+
 
 
 // BaseItemDtoImageBlurHashes
@@ -30,43 +28,43 @@ import { VideoTypeEnum } from "./videotypeenum";
  * Maps image type to dictionary mapping image tag to blurhash value.
 **/
 export class BaseItemDtoImageBlurHashes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Art" })
+  @SpeakeasyMetadata({ data: "json, name=Art" })
   art?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Backdrop" })
+  @SpeakeasyMetadata({ data: "json, name=Backdrop" })
   backdrop?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Banner" })
+  @SpeakeasyMetadata({ data: "json, name=Banner" })
   banner?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Box" })
+  @SpeakeasyMetadata({ data: "json, name=Box" })
   box?: Map<string, string>;
 
-  @Metadata({ data: "json, name=BoxRear" })
+  @SpeakeasyMetadata({ data: "json, name=BoxRear" })
   boxRear?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Chapter" })
+  @SpeakeasyMetadata({ data: "json, name=Chapter" })
   chapter?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Disc" })
+  @SpeakeasyMetadata({ data: "json, name=Disc" })
   disc?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Logo" })
+  @SpeakeasyMetadata({ data: "json, name=Logo" })
   logo?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Menu" })
+  @SpeakeasyMetadata({ data: "json, name=Menu" })
   menu?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Primary" })
+  @SpeakeasyMetadata({ data: "json, name=Primary" })
   primary?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Profile" })
+  @SpeakeasyMetadata({ data: "json, name=Profile" })
   profile?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Screenshot" })
+  @SpeakeasyMetadata({ data: "json, name=Screenshot" })
   screenshot?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Thumb" })
+  @SpeakeasyMetadata({ data: "json, name=Thumb" })
   thumb?: Map<string, string>;
 }
 
@@ -77,456 +75,917 @@ export class BaseItemDtoImageBlurHashes extends SpeakeasyBase {
  * This holds information about a BaseItem in a format that is convenient for the client.
 **/
 export class BaseItemDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AirDays" })
+  @SpeakeasyMetadata({ data: "json, name=AirDays" })
   airDays?: DayOfWeekEnum[];
 
-  @Metadata({ data: "json, name=AirTime" })
+  @SpeakeasyMetadata({ data: "json, name=AirTime" })
   airTime?: string;
 
-  @Metadata({ data: "json, name=AirsAfterSeasonNumber" })
+  @SpeakeasyMetadata({ data: "json, name=AirsAfterSeasonNumber" })
   airsAfterSeasonNumber?: number;
 
-  @Metadata({ data: "json, name=AirsBeforeEpisodeNumber" })
+  @SpeakeasyMetadata({ data: "json, name=AirsBeforeEpisodeNumber" })
   airsBeforeEpisodeNumber?: number;
 
-  @Metadata({ data: "json, name=AirsBeforeSeasonNumber" })
+  @SpeakeasyMetadata({ data: "json, name=AirsBeforeSeasonNumber" })
   airsBeforeSeasonNumber?: number;
 
-  @Metadata({ data: "json, name=Album" })
+  @SpeakeasyMetadata({ data: "json, name=Album" })
   album?: string;
 
-  @Metadata({ data: "json, name=AlbumArtist" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumArtist" })
   albumArtist?: string;
 
-  @Metadata({ data: "json, name=AlbumArtists", elemType: shared.NameGuidPair })
+  @SpeakeasyMetadata({ data: "json, name=AlbumArtists", elemType: NameGuidPair })
   albumArtists?: NameGuidPair[];
 
-  @Metadata({ data: "json, name=AlbumCount" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumCount" })
   albumCount?: number;
 
-  @Metadata({ data: "json, name=AlbumId" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumId" })
   albumId?: string;
 
-  @Metadata({ data: "json, name=AlbumPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumPrimaryImageTag" })
   albumPrimaryImageTag?: string;
 
-  @Metadata({ data: "json, name=Altitude" })
+  @SpeakeasyMetadata({ data: "json, name=Altitude" })
   altitude?: number;
 
-  @Metadata({ data: "json, name=Aperture" })
+  @SpeakeasyMetadata({ data: "json, name=Aperture" })
   aperture?: number;
 
-  @Metadata({ data: "json, name=ArtistCount" })
+  @SpeakeasyMetadata({ data: "json, name=ArtistCount" })
   artistCount?: number;
 
-  @Metadata({ data: "json, name=ArtistItems", elemType: shared.NameGuidPair })
+  @SpeakeasyMetadata({ data: "json, name=ArtistItems", elemType: NameGuidPair })
   artistItems?: NameGuidPair[];
 
-  @Metadata({ data: "json, name=Artists" })
+  @SpeakeasyMetadata({ data: "json, name=Artists" })
   artists?: string[];
 
-  @Metadata({ data: "json, name=AspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=Audio" })
+  @SpeakeasyMetadata({ data: "json, name=Audio" })
   audio?: ProgramAudioEnum;
 
-  @Metadata({ data: "json, name=BackdropImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=BackdropImageTags" })
   backdropImageTags?: string[];
 
-  @Metadata({ data: "json, name=CameraMake" })
+  @SpeakeasyMetadata({ data: "json, name=CameraMake" })
   cameraMake?: string;
 
-  @Metadata({ data: "json, name=CameraModel" })
+  @SpeakeasyMetadata({ data: "json, name=CameraModel" })
   cameraModel?: string;
 
-  @Metadata({ data: "json, name=CanDelete" })
+  @SpeakeasyMetadata({ data: "json, name=CanDelete" })
   canDelete?: boolean;
 
-  @Metadata({ data: "json, name=CanDownload" })
+  @SpeakeasyMetadata({ data: "json, name=CanDownload" })
   canDownload?: boolean;
 
-  @Metadata({ data: "json, name=ChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=ChannelName" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=ChannelNumber" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelNumber" })
   channelNumber?: string;
 
-  @Metadata({ data: "json, name=ChannelPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelPrimaryImageTag" })
   channelPrimaryImageTag?: string;
 
-  @Metadata({ data: "json, name=ChannelType" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelType" })
   channelType?: ChannelTypeEnum;
 
-  @Metadata({ data: "json, name=Chapters", elemType: shared.ChapterInfo })
+  @SpeakeasyMetadata({ data: "json, name=Chapters", elemType: ChapterInfo })
   chapters?: ChapterInfo[];
 
-  @Metadata({ data: "json, name=ChildCount" })
+  @SpeakeasyMetadata({ data: "json, name=ChildCount" })
   childCount?: number;
 
-  @Metadata({ data: "json, name=CollectionType" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionType" })
   collectionType?: string;
 
-  @Metadata({ data: "json, name=CommunityRating" })
+  @SpeakeasyMetadata({ data: "json, name=CommunityRating" })
   communityRating?: number;
 
-  @Metadata({ data: "json, name=CompletionPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionPercentage" })
   completionPercentage?: number;
 
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=CriticRating" })
+  @SpeakeasyMetadata({ data: "json, name=CriticRating" })
   criticRating?: number;
 
-  @Metadata({ data: "json, name=CumulativeRunTimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=CumulativeRunTimeTicks" })
   cumulativeRunTimeTicks?: number;
 
-  @Metadata({ data: "json, name=CurrentProgram" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentProgram" })
   currentProgram?: BaseItemDto;
 
-  @Metadata({ data: "json, name=CustomRating" })
+  @SpeakeasyMetadata({ data: "json, name=CustomRating" })
   customRating?: string;
 
-  @Metadata({ data: "json, name=DateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=DateCreated" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=DateLastMediaAdded" })
+  @SpeakeasyMetadata({ data: "json, name=DateLastMediaAdded" })
   dateLastMediaAdded?: Date;
 
-  @Metadata({ data: "json, name=DisplayOrder" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayOrder" })
   displayOrder?: string;
 
-  @Metadata({ data: "json, name=DisplayPreferencesId" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayPreferencesId" })
   displayPreferencesId?: string;
 
-  @Metadata({ data: "json, name=EnableMediaSourceDisplay" })
+  @SpeakeasyMetadata({ data: "json, name=EnableMediaSourceDisplay" })
   enableMediaSourceDisplay?: boolean;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=EpisodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=EpisodeCount" })
   episodeCount?: number;
 
-  @Metadata({ data: "json, name=EpisodeTitle" })
+  @SpeakeasyMetadata({ data: "json, name=EpisodeTitle" })
   episodeTitle?: string;
 
-  @Metadata({ data: "json, name=Etag" })
+  @SpeakeasyMetadata({ data: "json, name=Etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=ExposureTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExposureTime" })
   exposureTime?: number;
 
-  @Metadata({ data: "json, name=ExternalUrls", elemType: shared.ExternalUrl })
+  @SpeakeasyMetadata({ data: "json, name=ExternalUrls", elemType: ExternalUrl })
   externalUrls?: ExternalUrl[];
 
-  @Metadata({ data: "json, name=ExtraType" })
+  @SpeakeasyMetadata({ data: "json, name=ExtraType" })
   extraType?: string;
 
-  @Metadata({ data: "json, name=FocalLength" })
+  @SpeakeasyMetadata({ data: "json, name=FocalLength" })
   focalLength?: number;
 
-  @Metadata({ data: "json, name=ForcedSortName" })
+  @SpeakeasyMetadata({ data: "json, name=ForcedSortName" })
   forcedSortName?: string;
 
-  @Metadata({ data: "json, name=GenreItems", elemType: shared.NameGuidPair })
+  @SpeakeasyMetadata({ data: "json, name=GenreItems", elemType: NameGuidPair })
   genreItems?: NameGuidPair[];
 
-  @Metadata({ data: "json, name=Genres" })
+  @SpeakeasyMetadata({ data: "json, name=Genres" })
   genres?: string[];
 
-  @Metadata({ data: "json, name=HasSubtitles" })
+  @SpeakeasyMetadata({ data: "json, name=HasSubtitles" })
   hasSubtitles?: boolean;
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ImageBlurHashes" })
+  @SpeakeasyMetadata({ data: "json, name=ImageBlurHashes" })
   imageBlurHashes?: BaseItemDtoImageBlurHashes;
 
-  @Metadata({ data: "json, name=ImageOrientation" })
+  @SpeakeasyMetadata({ data: "json, name=ImageOrientation" })
   imageOrientation?: ImageOrientationEnum;
 
-  @Metadata({ data: "json, name=ImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=ImageTags" })
   imageTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=IndexNumber" })
+  @SpeakeasyMetadata({ data: "json, name=IndexNumber" })
   indexNumber?: number;
 
-  @Metadata({ data: "json, name=IndexNumberEnd" })
+  @SpeakeasyMetadata({ data: "json, name=IndexNumberEnd" })
   indexNumberEnd?: number;
 
-  @Metadata({ data: "json, name=IsFolder" })
+  @SpeakeasyMetadata({ data: "json, name=IsFolder" })
   isFolder?: boolean;
 
-  @Metadata({ data: "json, name=IsHD" })
+  @SpeakeasyMetadata({ data: "json, name=IsHD" })
   isHd?: boolean;
 
-  @Metadata({ data: "json, name=IsKids" })
+  @SpeakeasyMetadata({ data: "json, name=IsKids" })
   isKids?: boolean;
 
-  @Metadata({ data: "json, name=IsLive" })
+  @SpeakeasyMetadata({ data: "json, name=IsLive" })
   isLive?: boolean;
 
-  @Metadata({ data: "json, name=IsMovie" })
+  @SpeakeasyMetadata({ data: "json, name=IsMovie" })
   isMovie?: boolean;
 
-  @Metadata({ data: "json, name=IsNews" })
+  @SpeakeasyMetadata({ data: "json, name=IsNews" })
   isNews?: boolean;
 
-  @Metadata({ data: "json, name=IsPlaceHolder" })
+  @SpeakeasyMetadata({ data: "json, name=IsPlaceHolder" })
   isPlaceHolder?: boolean;
 
-  @Metadata({ data: "json, name=IsPremiere" })
+  @SpeakeasyMetadata({ data: "json, name=IsPremiere" })
   isPremiere?: boolean;
 
-  @Metadata({ data: "json, name=IsRepeat" })
+  @SpeakeasyMetadata({ data: "json, name=IsRepeat" })
   isRepeat?: boolean;
 
-  @Metadata({ data: "json, name=IsSeries" })
+  @SpeakeasyMetadata({ data: "json, name=IsSeries" })
   isSeries?: boolean;
 
-  @Metadata({ data: "json, name=IsSports" })
+  @SpeakeasyMetadata({ data: "json, name=IsSports" })
   isSports?: boolean;
 
-  @Metadata({ data: "json, name=IsoSpeedRating" })
+  @SpeakeasyMetadata({ data: "json, name=IsoSpeedRating" })
   isoSpeedRating?: number;
 
-  @Metadata({ data: "json, name=IsoType" })
+  @SpeakeasyMetadata({ data: "json, name=IsoType" })
   isoType?: IsoTypeEnum;
 
-  @Metadata({ data: "json, name=Latitude" })
+  @SpeakeasyMetadata({ data: "json, name=Latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=LocalTrailerCount" })
+  @SpeakeasyMetadata({ data: "json, name=LocalTrailerCount" })
   localTrailerCount?: number;
 
-  @Metadata({ data: "json, name=LocationType" })
+  @SpeakeasyMetadata({ data: "json, name=LocationType" })
   locationType?: LocationTypeEnum;
 
-  @Metadata({ data: "json, name=LockData" })
+  @SpeakeasyMetadata({ data: "json, name=LockData" })
   lockData?: boolean;
 
-  @Metadata({ data: "json, name=LockedFields" })
+  @SpeakeasyMetadata({ data: "json, name=LockedFields" })
   lockedFields?: MetadataFieldEnum[];
 
-  @Metadata({ data: "json, name=Longitude" })
+  @SpeakeasyMetadata({ data: "json, name=Longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=MediaSourceCount" })
+  @SpeakeasyMetadata({ data: "json, name=MediaSourceCount" })
   mediaSourceCount?: number;
 
-  @Metadata({ data: "json, name=MediaSources", elemType: shared.MediaSourceInfo })
+  @SpeakeasyMetadata({ data: "json, name=MediaSources", elemType: MediaSourceInfo })
   mediaSources?: MediaSourceInfo[];
 
-  @Metadata({ data: "json, name=MediaStreams", elemType: shared.MediaStream })
+  @SpeakeasyMetadata({ data: "json, name=MediaStreams", elemType: MediaStream })
   mediaStreams?: MediaStream[];
 
-  @Metadata({ data: "json, name=MediaType" })
+  @SpeakeasyMetadata({ data: "json, name=MediaType" })
   mediaType?: string;
 
-  @Metadata({ data: "json, name=MovieCount" })
+  @SpeakeasyMetadata({ data: "json, name=MovieCount" })
   movieCount?: number;
 
-  @Metadata({ data: "json, name=MusicVideoCount" })
+  @SpeakeasyMetadata({ data: "json, name=MusicVideoCount" })
   musicVideoCount?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Number" })
+  @SpeakeasyMetadata({ data: "json, name=Number" })
   number?: string;
 
-  @Metadata({ data: "json, name=OfficialRating" })
+  @SpeakeasyMetadata({ data: "json, name=OfficialRating" })
   officialRating?: string;
 
-  @Metadata({ data: "json, name=OriginalTitle" })
+  @SpeakeasyMetadata({ data: "json, name=OriginalTitle" })
   originalTitle?: string;
 
-  @Metadata({ data: "json, name=Overview" })
+  @SpeakeasyMetadata({ data: "json, name=Overview" })
   overview?: string;
 
-  @Metadata({ data: "json, name=ParentArtImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ParentArtImageTag" })
   parentArtImageTag?: string;
 
-  @Metadata({ data: "json, name=ParentArtItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentArtItemId" })
   parentArtItemId?: string;
 
-  @Metadata({ data: "json, name=ParentBackdropImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropImageTags" })
   parentBackdropImageTags?: string[];
 
-  @Metadata({ data: "json, name=ParentBackdropItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropItemId" })
   parentBackdropItemId?: string;
 
-  @Metadata({ data: "json, name=ParentId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentId" })
   parentId?: string;
 
-  @Metadata({ data: "json, name=ParentIndexNumber" })
+  @SpeakeasyMetadata({ data: "json, name=ParentIndexNumber" })
   parentIndexNumber?: number;
 
-  @Metadata({ data: "json, name=ParentLogoImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ParentLogoImageTag" })
   parentLogoImageTag?: string;
 
-  @Metadata({ data: "json, name=ParentLogoItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentLogoItemId" })
   parentLogoItemId?: string;
 
-  @Metadata({ data: "json, name=ParentPrimaryImageItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentPrimaryImageItemId" })
   parentPrimaryImageItemId?: string;
 
-  @Metadata({ data: "json, name=ParentPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ParentPrimaryImageTag" })
   parentPrimaryImageTag?: string;
 
-  @Metadata({ data: "json, name=ParentThumbImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ParentThumbImageTag" })
   parentThumbImageTag?: string;
 
-  @Metadata({ data: "json, name=ParentThumbItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentThumbItemId" })
   parentThumbItemId?: string;
 
-  @Metadata({ data: "json, name=PartCount" })
+  @SpeakeasyMetadata({ data: "json, name=PartCount" })
   partCount?: number;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=People", elemType: shared.BaseItemPerson })
+  @SpeakeasyMetadata({ data: "json, name=People", elemType: BaseItemPerson })
   people?: BaseItemPerson[];
 
-  @Metadata({ data: "json, name=PlayAccess" })
+  @SpeakeasyMetadata({ data: "json, name=PlayAccess" })
   playAccess?: PlayAccessEnum;
 
-  @Metadata({ data: "json, name=PlaylistItemId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemId" })
   playlistItemId?: string;
 
-  @Metadata({ data: "json, name=PreferredMetadataCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataCountryCode" })
   preferredMetadataCountryCode?: string;
 
-  @Metadata({ data: "json, name=PreferredMetadataLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataLanguage" })
   preferredMetadataLanguage?: string;
 
-  @Metadata({ data: "json, name=PremiereDate" })
+  @SpeakeasyMetadata({ data: "json, name=PremiereDate" })
   premiereDate?: Date;
 
-  @Metadata({ data: "json, name=PrimaryImageAspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageAspectRatio" })
   primaryImageAspectRatio?: number;
 
-  @Metadata({ data: "json, name=ProductionLocations" })
+  @SpeakeasyMetadata({ data: "json, name=ProductionLocations" })
   productionLocations?: string[];
 
-  @Metadata({ data: "json, name=ProductionYear" })
+  @SpeakeasyMetadata({ data: "json, name=ProductionYear" })
   productionYear?: number;
 
-  @Metadata({ data: "json, name=ProgramCount" })
+  @SpeakeasyMetadata({ data: "json, name=ProgramCount" })
   programCount?: number;
 
-  @Metadata({ data: "json, name=ProgramId" })
+  @SpeakeasyMetadata({ data: "json, name=ProgramId" })
   programId?: string;
 
-  @Metadata({ data: "json, name=ProviderIds" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderIds" })
   providerIds?: Map<string, string>;
 
-  @Metadata({ data: "json, name=RecursiveItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=RecursiveItemCount" })
   recursiveItemCount?: number;
 
-  @Metadata({ data: "json, name=RemoteTrailers", elemType: shared.MediaUrl })
+  @SpeakeasyMetadata({ data: "json, name=RemoteTrailers", elemType: MediaUrl })
   remoteTrailers?: MediaUrl[];
 
-  @Metadata({ data: "json, name=RunTimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=RunTimeTicks" })
   runTimeTicks?: number;
 
-  @Metadata({ data: "json, name=ScreenshotImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=ScreenshotImageTags" })
   screenshotImageTags?: string[];
 
-  @Metadata({ data: "json, name=SeasonId" })
+  @SpeakeasyMetadata({ data: "json, name=SeasonId" })
   seasonId?: string;
 
-  @Metadata({ data: "json, name=SeasonName" })
+  @SpeakeasyMetadata({ data: "json, name=SeasonName" })
   seasonName?: string;
 
-  @Metadata({ data: "json, name=SeriesCount" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesCount" })
   seriesCount?: number;
 
-  @Metadata({ data: "json, name=SeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesId" })
   seriesId?: string;
 
-  @Metadata({ data: "json, name=SeriesName" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesName" })
   seriesName?: string;
 
-  @Metadata({ data: "json, name=SeriesPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesPrimaryImageTag" })
   seriesPrimaryImageTag?: string;
 
-  @Metadata({ data: "json, name=SeriesStudio" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesStudio" })
   seriesStudio?: string;
 
-  @Metadata({ data: "json, name=SeriesThumbImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesThumbImageTag" })
   seriesThumbImageTag?: string;
 
-  @Metadata({ data: "json, name=SeriesTimerId" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesTimerId" })
   seriesTimerId?: string;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=ShutterSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=ShutterSpeed" })
   shutterSpeed?: number;
 
-  @Metadata({ data: "json, name=Software" })
+  @SpeakeasyMetadata({ data: "json, name=Software" })
   software?: string;
 
-  @Metadata({ data: "json, name=SongCount" })
+  @SpeakeasyMetadata({ data: "json, name=SongCount" })
   songCount?: number;
 
-  @Metadata({ data: "json, name=SortName" })
+  @SpeakeasyMetadata({ data: "json, name=SortName" })
   sortName?: string;
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: string;
 
-  @Metadata({ data: "json, name=SpecialFeatureCount" })
+  @SpeakeasyMetadata({ data: "json, name=SpecialFeatureCount" })
   specialFeatureCount?: number;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=Studios", elemType: shared.NameGuidPair })
+  @SpeakeasyMetadata({ data: "json, name=Studios", elemType: NameGuidPair })
   studios?: NameGuidPair[];
 
-  @Metadata({ data: "json, name=SupportsSync" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsSync" })
   supportsSync?: boolean;
 
-  @Metadata({ data: "json, name=Taglines" })
+  @SpeakeasyMetadata({ data: "json, name=Taglines" })
   taglines?: string[];
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=TimerId" })
+  @SpeakeasyMetadata({ data: "json, name=TimerId" })
   timerId?: string;
 
-  @Metadata({ data: "json, name=TrailerCount" })
+  @SpeakeasyMetadata({ data: "json, name=TrailerCount" })
   trailerCount?: number;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=UserData" })
+  @SpeakeasyMetadata({ data: "json, name=UserData" })
   userData?: UserItemDataDto;
 
-  @Metadata({ data: "json, name=Video3DFormat" })
+  @SpeakeasyMetadata({ data: "json, name=Video3DFormat" })
   video3DFormat?: Video3DFormatEnum;
 
-  @Metadata({ data: "json, name=VideoType" })
+  @SpeakeasyMetadata({ data: "json, name=VideoType" })
   videoType?: VideoTypeEnum;
 
-  @Metadata({ data: "json, name=Width" })
+  @SpeakeasyMetadata({ data: "json, name=Width" })
+  width?: number;
+}
+
+
+// BaseItemDtoInput
+/** 
+ * This is strictly used as a data transfer object from the api layer.
+ * This holds information about a BaseItem in a format that is convenient for the client.
+**/
+export class BaseItemDtoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AirDays" })
+  airDays?: DayOfWeekEnum[];
+
+  @SpeakeasyMetadata({ data: "json, name=AirTime" })
+  airTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=AirsAfterSeasonNumber" })
+  airsAfterSeasonNumber?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=AirsBeforeEpisodeNumber" })
+  airsBeforeEpisodeNumber?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=AirsBeforeSeasonNumber" })
+  airsBeforeSeasonNumber?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Album" })
+  album?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=AlbumArtist" })
+  albumArtist?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=AlbumArtists", elemType: NameGuidPair })
+  albumArtists?: NameGuidPair[];
+
+  @SpeakeasyMetadata({ data: "json, name=AlbumCount" })
+  albumCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=AlbumId" })
+  albumId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=AlbumPrimaryImageTag" })
+  albumPrimaryImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Altitude" })
+  altitude?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Aperture" })
+  aperture?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ArtistCount" })
+  artistCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ArtistItems", elemType: NameGuidPair })
+  artistItems?: NameGuidPair[];
+
+  @SpeakeasyMetadata({ data: "json, name=Artists" })
+  artists?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
+  aspectRatio?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Audio" })
+  audio?: ProgramAudioEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=BackdropImageTags" })
+  backdropImageTags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=CameraMake" })
+  cameraMake?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CameraModel" })
+  cameraModel?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CanDelete" })
+  canDelete?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=CanDownload" })
+  canDownload?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelId" })
+  channelId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
+  channelName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelNumber" })
+  channelNumber?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelPrimaryImageTag" })
+  channelPrimaryImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelType" })
+  channelType?: ChannelTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Chapters", elemType: ChapterInfo })
+  chapters?: ChapterInfo[];
+
+  @SpeakeasyMetadata({ data: "json, name=ChildCount" })
+  childCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=CollectionType" })
+  collectionType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CommunityRating" })
+  communityRating?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=CompletionPercentage" })
+  completionPercentage?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Container" })
+  container?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CriticRating" })
+  criticRating?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=CumulativeRunTimeTicks" })
+  cumulativeRunTimeTicks?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=CurrentProgram" })
+  currentProgram?: BaseItemDto;
+
+  @SpeakeasyMetadata({ data: "json, name=CustomRating" })
+  customRating?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=DateCreated" })
+  dateCreated?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=DateLastMediaAdded" })
+  dateLastMediaAdded?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=DisplayOrder" })
+  displayOrder?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=DisplayPreferencesId" })
+  displayPreferencesId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableMediaSourceDisplay" })
+  enableMediaSourceDisplay?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
+  endDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=EpisodeCount" })
+  episodeCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=EpisodeTitle" })
+  episodeTitle?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ExposureTime" })
+  exposureTime?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ExternalUrls", elemType: ExternalUrl })
+  externalUrls?: ExternalUrl[];
+
+  @SpeakeasyMetadata({ data: "json, name=ExtraType" })
+  extraType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=FocalLength" })
+  focalLength?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ForcedSortName" })
+  forcedSortName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=GenreItems", elemType: NameGuidPair })
+  genreItems?: NameGuidPair[];
+
+  @SpeakeasyMetadata({ data: "json, name=Genres" })
+  genres?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=HasSubtitles" })
+  hasSubtitles?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Height" })
+  height?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ImageBlurHashes" })
+  imageBlurHashes?: BaseItemDtoImageBlurHashes;
+
+  @SpeakeasyMetadata({ data: "json, name=ImageOrientation" })
+  imageOrientation?: ImageOrientationEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=ImageTags" })
+  imageTags?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=IndexNumber" })
+  indexNumber?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=IndexNumberEnd" })
+  indexNumberEnd?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=IsFolder" })
+  isFolder?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsHD" })
+  isHd?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsKids" })
+  isKids?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsLive" })
+  isLive?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsMovie" })
+  isMovie?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsNews" })
+  isNews?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsPlaceHolder" })
+  isPlaceHolder?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsPremiere" })
+  isPremiere?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsRepeat" })
+  isRepeat?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsSeries" })
+  isSeries?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsSports" })
+  isSports?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsoSpeedRating" })
+  isoSpeedRating?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=IsoType" })
+  isoType?: IsoTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Latitude" })
+  latitude?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=LocalTrailerCount" })
+  localTrailerCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=LocationType" })
+  locationType?: LocationTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=LockData" })
+  lockData?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=LockedFields" })
+  lockedFields?: MetadataFieldEnum[];
+
+  @SpeakeasyMetadata({ data: "json, name=Longitude" })
+  longitude?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MediaSourceCount" })
+  mediaSourceCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MediaSources", elemType: MediaSourceInfoInput })
+  mediaSources?: MediaSourceInfoInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=MediaStreams", elemType: MediaStreamInput })
+  mediaStreams?: MediaStreamInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=MediaType" })
+  mediaType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=MovieCount" })
+  movieCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MusicVideoCount" })
+  musicVideoCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Number" })
+  number?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=OfficialRating" })
+  officialRating?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=OriginalTitle" })
+  originalTitle?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Overview" })
+  overview?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentArtImageTag" })
+  parentArtImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentArtItemId" })
+  parentArtItemId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropImageTags" })
+  parentBackdropImageTags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropItemId" })
+  parentBackdropItemId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentId" })
+  parentId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentIndexNumber" })
+  parentIndexNumber?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentLogoImageTag" })
+  parentLogoImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentLogoItemId" })
+  parentLogoItemId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentPrimaryImageItemId" })
+  parentPrimaryImageItemId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentPrimaryImageTag" })
+  parentPrimaryImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentThumbImageTag" })
+  parentThumbImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentThumbItemId" })
+  parentThumbItemId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PartCount" })
+  partCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Path" })
+  path?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=People", elemType: BaseItemPerson })
+  people?: BaseItemPerson[];
+
+  @SpeakeasyMetadata({ data: "json, name=PlayAccess" })
+  playAccess?: PlayAccessEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemId" })
+  playlistItemId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataCountryCode" })
+  preferredMetadataCountryCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataLanguage" })
+  preferredMetadataLanguage?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PremiereDate" })
+  premiereDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageAspectRatio" })
+  primaryImageAspectRatio?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ProductionLocations" })
+  productionLocations?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=ProductionYear" })
+  productionYear?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ProgramCount" })
+  programCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ProgramId" })
+  programId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ProviderIds" })
+  providerIds?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=RecursiveItemCount" })
+  recursiveItemCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=RemoteTrailers", elemType: MediaUrl })
+  remoteTrailers?: MediaUrl[];
+
+  @SpeakeasyMetadata({ data: "json, name=RunTimeTicks" })
+  runTimeTicks?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ScreenshotImageTags" })
+  screenshotImageTags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=SeasonId" })
+  seasonId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SeasonName" })
+  seasonName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesCount" })
+  seriesCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesId" })
+  seriesId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesName" })
+  seriesName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesPrimaryImageTag" })
+  seriesPrimaryImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesStudio" })
+  seriesStudio?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesThumbImageTag" })
+  seriesThumbImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesTimerId" })
+  seriesTimerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
+  serverId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ShutterSpeed" })
+  shutterSpeed?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Software" })
+  software?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SongCount" })
+  songCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=SortName" })
+  sortName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
+  sourceType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SpecialFeatureCount" })
+  specialFeatureCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
+  startDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=Status" })
+  status?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Studios", elemType: NameGuidPair })
+  studios?: NameGuidPair[];
+
+  @SpeakeasyMetadata({ data: "json, name=SupportsSync" })
+  supportsSync?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Taglines" })
+  taglines?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
+  tags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=TimerId" })
+  timerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=TrailerCount" })
+  trailerCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=UserData" })
+  userData?: UserItemDataDto;
+
+  @SpeakeasyMetadata({ data: "json, name=Video3DFormat" })
+  video3DFormat?: Video3DFormatEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=VideoType" })
+  videoType?: VideoTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Width" })
   width?: number;
 }

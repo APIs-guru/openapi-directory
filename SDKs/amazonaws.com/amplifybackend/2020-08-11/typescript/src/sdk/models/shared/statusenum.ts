@@ -1,6 +1,7 @@
 
 
+
 export enum StatusEnum {
-    Latest = "LATEST"
-,    Stale = "STALE"
+    Latest = "LATEST",
+    Stale = "STALE"
 }

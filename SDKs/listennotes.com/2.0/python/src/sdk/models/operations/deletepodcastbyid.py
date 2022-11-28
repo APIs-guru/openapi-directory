@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DeletePodcastByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class DeletePodcastByIDQueryParams:
 
 @dataclass
 class DeletePodcastByIDHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeletePodcastByIDRequest:
-    path_params: DeletePodcastByIDPathParams = field(default=None)
-    query_params: DeletePodcastByIDQueryParams = field(default=None)
-    headers: DeletePodcastByIDHeaders = field(default=None)
+    headers: DeletePodcastByIDHeaders = field()
+    path_params: DeletePodcastByIDPathParams = field()
+    query_params: DeletePodcastByIDQueryParams = field()
     
 
 @dataclass
 class DeletePodcastByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     delete_podcast_response: Optional[shared.DeletePodcastResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

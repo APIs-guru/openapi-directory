@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// FindingsReportSummary
+//
+//	Information about potential recommendations that might be created from the analysis of profiling data.
 type FindingsReportSummary struct {
 	ID                    *string    `json:"id,omitempty"`
 	ProfileEndTime        *time.Time `json:"profileEndTime,omitempty"`

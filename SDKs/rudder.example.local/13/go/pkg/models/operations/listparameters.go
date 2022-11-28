@@ -10,6 +10,8 @@ const (
 	ListParameters200ApplicationJSONActionEnumListParameters ListParameters200ApplicationJSONActionEnum = "listParameters"
 )
 
+// ListParameters200ApplicationJSONData
+// Parameters
 type ListParameters200ApplicationJSONData struct {
 	Parameters []shared.Parameter `json:"parameters"`
 }

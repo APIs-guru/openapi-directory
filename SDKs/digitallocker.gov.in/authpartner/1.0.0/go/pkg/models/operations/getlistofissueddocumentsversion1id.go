@@ -8,13 +8,13 @@ type GetListOfIssuedDocumentsVersion1IDSecurity struct {
 	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetListOfIssuedDocumentsVersion1IDRequest struct {
-	Security GetListOfIssuedDocumentsVersion1IDSecurity
-}
-
 type GetListOfIssuedDocumentsVersion1ID401ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type GetListOfIssuedDocumentsVersion1IDRequest struct {
+	Security GetListOfIssuedDocumentsVersion1IDSecurity
 }
 
 type GetListOfIssuedDocumentsVersion1IDResponse struct {

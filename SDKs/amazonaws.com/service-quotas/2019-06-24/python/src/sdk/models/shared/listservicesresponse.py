@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import serviceinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListServicesResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    services: Optional[List[serviceinfo.ServiceInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Services' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    services: Optional[List[ServiceInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Services') }})
     

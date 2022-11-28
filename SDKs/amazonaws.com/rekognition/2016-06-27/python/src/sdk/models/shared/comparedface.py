@@ -1,22 +1,22 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import boundingbox
-from . import emotion
-from . import landmark
-from . import pose
-from . import imagequality
-from . import smile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ComparedFace:
-    bounding_box: Optional[boundingbox.BoundingBox] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BoundingBox' }})
-    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Confidence' }})
-    emotions: Optional[List[emotion.Emotion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Emotions' }})
-    landmarks: Optional[List[landmark.Landmark]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Landmarks' }})
-    pose: Optional[pose.Pose] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Pose' }})
-    quality: Optional[imagequality.ImageQuality] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Quality' }})
-    smile: Optional[smile.Smile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Smile' }})
+    r"""ComparedFace
+    Provides face metadata for target image faces that are analyzed by <code>CompareFaces</code> and <code>RecognizeCelebrities</code>.
+    """
+    
+    bounding_box: Optional[BoundingBox] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BoundingBox') }})
+    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Confidence') }})
+    emotions: Optional[List[Emotion]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Emotions') }})
+    landmarks: Optional[List[Landmark]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Landmarks') }})
+    pose: Optional[Pose] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Pose') }})
+    quality: Optional[ImageQuality] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Quality') }})
+    smile: Optional[Smile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Smile') }})
     

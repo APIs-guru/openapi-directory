@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ConnectorConfigResponse
 /**
  * The full description of your connected cluster.
@@ -33,23 +33,23 @@ var ConnectorConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activationCode" }),
+        SpeakeasyMetadata({ data: "json, name=activationCode" }),
         __metadata("design:type", String)
     ], ConnectorConfigResponse.prototype, "activationCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=activationExpiry" }),
+        SpeakeasyMetadata({ data: "json, name=activationExpiry" }),
         __metadata("design:type", Date)
     ], ConnectorConfigResponse.prototype, "activationExpiry", void 0);
     __decorate([
-        Metadata({ data: "json, name=activationId" }),
+        SpeakeasyMetadata({ data: "json, name=activationId" }),
         __metadata("design:type", String)
     ], ConnectorConfigResponse.prototype, "activationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=provider" }),
+        SpeakeasyMetadata({ data: "json, name=provider" }),
         __metadata("design:type", String)
     ], ConnectorConfigResponse.prototype, "provider", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], ConnectorConfigResponse.prototype, "roleArn", void 0);
     return ConnectorConfigResponse;

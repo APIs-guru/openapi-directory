@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UpgradeHistoryEntryActionEnum {
-    ActionUnspecified = "ACTION_UNSPECIFIED"
-,    Upgrade = "UPGRADE"
-,    Rollback = "ROLLBACK"
+    ActionUnspecified = "ACTION_UNSPECIFIED",
+    Upgrade = "UPGRADE",
+    Rollback = "ROLLBACK"
 }
 
 export enum UpgradeHistoryEntryStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Started = "STARTED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Started = "STARTED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }
 
 
@@ -19,33 +20,33 @@ export enum UpgradeHistoryEntryStateEnum {
  * The entry of VM image upgrade history.
 **/
 export class UpgradeHistoryEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: UpgradeHistoryEntryActionEnum;
 
-  @Metadata({ data: "json, name=containerImage" })
+  @SpeakeasyMetadata({ data: "json, name=containerImage" })
   containerImage?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=framework" })
+  @SpeakeasyMetadata({ data: "json, name=framework" })
   framework?: string;
 
-  @Metadata({ data: "json, name=snapshot" })
+  @SpeakeasyMetadata({ data: "json, name=snapshot" })
   snapshot?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: UpgradeHistoryEntryStateEnum;
 
-  @Metadata({ data: "json, name=targetImage" })
+  @SpeakeasyMetadata({ data: "json, name=targetImage" })
   targetImage?: string;
 
-  @Metadata({ data: "json, name=targetVersion" })
+  @SpeakeasyMetadata({ data: "json, name=targetVersion" })
   targetVersion?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 
-  @Metadata({ data: "json, name=vmImage" })
+  @SpeakeasyMetadata({ data: "json, name=vmImage" })
   vmImage?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceResizePolicy
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.
 **/
 export class InstanceResizePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceTerminationTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceTerminationTimeout" })
   instanceTerminationTimeout?: number;
 
-  @Metadata({ data: "json, name=InstancesToProtect" })
+  @SpeakeasyMetadata({ data: "json, name=InstancesToProtect" })
   instancesToProtect?: string[];
 
-  @Metadata({ data: "json, name=InstancesToTerminate" })
+  @SpeakeasyMetadata({ data: "json, name=InstancesToTerminate" })
   instancesToTerminate?: string[];
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum NotebookOutputOptionEnum {
-    Allowed = "Allowed"
-,    Disabled = "Disabled"
+    Allowed = "Allowed",
+    Disabled = "Disabled"
 }

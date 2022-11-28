@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class DelcsRequestBodyCertificateParameters extends SpeakeasyBase {
     applicationNo: string;
@@ -16,10 +16,6 @@ export declare class DelcsRequestBody extends SpeakeasyBase {
 export declare class DelcsSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class DelcsRequest extends SpeakeasyBase {
-    request?: DelcsRequestBody;
-    security: DelcsSecurity;
 }
 export declare enum Delcs400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Delcs504ApplicationJsonErrorDescriptionEnum {
 export declare class Delcs504ApplicationJson extends SpeakeasyBase {
     error?: Delcs504ApplicationJsonErrorEnum;
     errorDescription?: Delcs504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class DelcsRequest extends SpeakeasyBase {
+    request?: DelcsRequestBody;
+    security: DelcsSecurity;
 }
 export declare class DelcsResponse extends SpeakeasyBase {
     contentType: string;

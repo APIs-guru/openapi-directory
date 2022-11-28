@@ -1,106 +1,107 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAuthorizableKeystorePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=authorizableId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=authorizableId" })
   authorizableId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=intermediatePath" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=intermediatePath" })
   intermediatePath: string;
 }
 
 
 export class PostAuthorizableKeystoreQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=:operation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=:operation" })
   operation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alias" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alias" })
   alias?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentPassword" })
   currentPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyPassword" })
   keyPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyStorePass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyStorePass" })
   keyStorePass?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newAlias" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newAlias" })
   newAlias?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newPassword" })
   newPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rePassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rePassword" })
   rePassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=removeAlias" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=removeAlias" })
   removeAlias?: string;
 }
 
 
 export class PostAuthorizableKeystoreRequestBodyCertChain extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=cert-chain" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=cert-chain" })
   certChain: string;
 
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 }
 
 
 export class PostAuthorizableKeystoreRequestBodyKeyStore extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=keyStore" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=keyStore" })
   keyStore: string;
 }
 
 
 export class PostAuthorizableKeystoreRequestBodyPk extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=pk" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=pk" })
   pk: string;
 }
 
 
 export class PostAuthorizableKeystoreRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   certChain?: PostAuthorizableKeystoreRequestBodyCertChain;
 
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   keyStore?: PostAuthorizableKeystoreRequestBodyKeyStore;
 
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   pk?: PostAuthorizableKeystoreRequestBodyPk;
 }
 
 
 export class PostAuthorizableKeystoreRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostAuthorizableKeystorePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostAuthorizableKeystoreQueryParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostAuthorizableKeystoreRequestBody;
 }
 
 
 export class PostAuthorizableKeystoreResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAuthorizableKeystoreDefaultTextPlainString?: string;
 }

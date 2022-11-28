@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetUserRateLimitsQueryParams = /** @class */ (function (_super) {
     __extends(GetUserRateLimitsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetUserRateLimitsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_context" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_context" }),
         __metadata("design:type", String)
     ], GetUserRateLimitsQueryParams.prototype, "apiContext", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_name" }),
         __metadata("design:type", String)
     ], GetUserRateLimitsQueryParams.prototype, "apiName", void 0);
     return GetUserRateLimitsQueryParams;
@@ -46,59 +46,59 @@ var GetUserRateLimitsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], GetUserRateLimitsSecurity.prototype, "apiAuth", void 0);
     return GetUserRateLimitsSecurity;
 }(SpeakeasyBase));
 export { GetUserRateLimitsSecurity };
-var GetUserRateLimitsRequest = /** @class */ (function (_super) {
-    __extends(GetUserRateLimitsRequest, _super);
-    function GetUserRateLimitsRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetUserRateLimitsQueryParams)
-    ], GetUserRateLimitsRequest.prototype, "queryParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetUserRateLimitsSecurity)
-    ], GetUserRateLimitsRequest.prototype, "security", void 0);
-    return GetUserRateLimitsRequest;
-}(SpeakeasyBase));
-export { GetUserRateLimitsRequest };
 var GetUserRateLimits500ApplicationJson = /** @class */ (function (_super) {
     __extends(GetUserRateLimits500ApplicationJson, _super);
     function GetUserRateLimits500ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.Error }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.Error }),
         __metadata("design:type", Array)
     ], GetUserRateLimits500ApplicationJson.prototype, "errors", void 0);
     return GetUserRateLimits500ApplicationJson;
 }(SpeakeasyBase));
 export { GetUserRateLimits500ApplicationJson };
+var GetUserRateLimitsRequest = /** @class */ (function (_super) {
+    __extends(GetUserRateLimitsRequest, _super);
+    function GetUserRateLimitsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetUserRateLimitsQueryParams)
+    ], GetUserRateLimitsRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetUserRateLimitsSecurity)
+    ], GetUserRateLimitsRequest.prototype, "security", void 0);
+    return GetUserRateLimitsRequest;
+}(SpeakeasyBase));
+export { GetUserRateLimitsRequest };
 var GetUserRateLimitsResponse = /** @class */ (function (_super) {
     __extends(GetUserRateLimitsResponse, _super);
     function GetUserRateLimitsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUserRateLimitsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.RateLimitsResponse)
     ], GetUserRateLimitsResponse.prototype, "rateLimitsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUserRateLimitsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUserRateLimits500ApplicationJson)
     ], GetUserRateLimitsResponse.prototype, "getUserRateLimits500ApplicationJsonObject", void 0);
     return GetUserRateLimitsResponse;

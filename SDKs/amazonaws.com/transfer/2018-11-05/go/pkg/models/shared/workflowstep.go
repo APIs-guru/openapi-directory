@@ -1,5 +1,7 @@
 package shared
 
+// WorkflowStep
+// The basic building block of a workflow.
 type WorkflowStep struct {
 	CopyStepDetails   *CopyStepDetails      `json:"CopyStepDetails,omitempty"`
 	CustomStepDetails *CustomStepDetails    `json:"CustomStepDetails,omitempty"`

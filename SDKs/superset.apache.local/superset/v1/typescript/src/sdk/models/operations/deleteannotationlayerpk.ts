@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteAnnotationLayerPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class DeleteAnnotationLayerPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteAnnotationLayerPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteAnnotationLayerPkPathParams;
-
-  @Metadata()
-  security: DeleteAnnotationLayerPkSecurity;
-}
-
-
 export class DeleteAnnotationLayerPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteAnnotationLayerPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteAnnotationLayerPk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteAnnotationLayerPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteAnnotationLayerPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteAnnotationLayerPkPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteAnnotationLayerPkSecurity;
+}
+
+
 export class DeleteAnnotationLayerPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayerPk200ApplicationJsonObject?: DeleteAnnotationLayerPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayerPk404ApplicationJsonObject?: DeleteAnnotationLayerPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayerPk422ApplicationJsonObject?: DeleteAnnotationLayerPk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnnotationLayerPk500ApplicationJsonObject?: DeleteAnnotationLayerPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

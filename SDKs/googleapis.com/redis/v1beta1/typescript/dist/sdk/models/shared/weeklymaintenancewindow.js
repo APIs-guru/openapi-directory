@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeOfDay } from "./timeofday";
 export var WeeklyMaintenanceWindowDayEnum;
 (function (WeeklyMaintenanceWindowDayEnum) {
@@ -45,17 +45,37 @@ var WeeklyMaintenanceWindow = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=day" }),
+        SpeakeasyMetadata({ data: "json, name=day" }),
         __metadata("design:type", String)
     ], WeeklyMaintenanceWindow.prototype, "day", void 0);
     __decorate([
-        Metadata({ data: "json, name=duration" }),
+        SpeakeasyMetadata({ data: "json, name=duration" }),
         __metadata("design:type", String)
     ], WeeklyMaintenanceWindow.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", TimeOfDay)
     ], WeeklyMaintenanceWindow.prototype, "startTime", void 0);
     return WeeklyMaintenanceWindow;
 }(SpeakeasyBase));
 export { WeeklyMaintenanceWindow };
+// WeeklyMaintenanceWindowInput
+/**
+ * Time window in which disruptive maintenance updates occur. Non-disruptive updates can occur inside or outside this window.
+**/
+var WeeklyMaintenanceWindowInput = /** @class */ (function (_super) {
+    __extends(WeeklyMaintenanceWindowInput, _super);
+    function WeeklyMaintenanceWindowInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=day" }),
+        __metadata("design:type", String)
+    ], WeeklyMaintenanceWindowInput.prototype, "day", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
+        __metadata("design:type", TimeOfDay)
+    ], WeeklyMaintenanceWindowInput.prototype, "startTime", void 0);
+    return WeeklyMaintenanceWindowInput;
+}(SpeakeasyBase));
+export { WeeklyMaintenanceWindowInput };

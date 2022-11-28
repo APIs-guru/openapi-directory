@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class TripcRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -16,10 +16,6 @@ export declare class TripcRequestBody extends SpeakeasyBase {
 export declare class TripcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class TripcRequest extends SpeakeasyBase {
-    request?: TripcRequestBody;
-    security: TripcSecurity;
 }
 export declare enum Tripc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Tripc504ApplicationJsonErrorDescriptionEnum {
 export declare class Tripc504ApplicationJson extends SpeakeasyBase {
     error?: Tripc504ApplicationJsonErrorEnum;
     errorDescription?: Tripc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class TripcRequest extends SpeakeasyBase {
+    request?: TripcRequestBody;
+    security: TripcSecurity;
 }
 export declare class TripcResponse extends SpeakeasyBase {
     contentType: string;

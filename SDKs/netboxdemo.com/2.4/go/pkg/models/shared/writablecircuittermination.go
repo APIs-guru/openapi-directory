@@ -7,9 +7,8 @@ const (
 	WritableCircuitTerminationTerminationEnumZ WritableCircuitTerminationTerminationEnum = "Z"
 )
 
-type WritableCircuitTermination struct {
+type WritableCircuitTerminationInput struct {
 	Circuit       int64                                     `json:"circuit"`
-	ID            *int64                                    `json:"id,omitempty"`
 	Interface     *int64                                    `json:"interface,omitempty"`
 	PortSpeed     int64                                     `json:"port_speed"`
 	PpInfo        *string                                   `json:"pp_info,omitempty"`

@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ResourceShareAssociation } from "./resourceshareassociation";
 var DisassociateResourceShareResponse = /** @class */ (function (_super) {
     __extends(DisassociateResourceShareResponse, _super);
     function DisassociateResourceShareResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], DisassociateResourceShareResponse.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareAssociations", elemType: shared.ResourceShareAssociation }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareAssociations", elemType: ResourceShareAssociation }),
         __metadata("design:type", Array)
     ], DisassociateResourceShareResponse.prototype, "resourceShareAssociations", void 0);
     return DisassociateResourceShareResponse;

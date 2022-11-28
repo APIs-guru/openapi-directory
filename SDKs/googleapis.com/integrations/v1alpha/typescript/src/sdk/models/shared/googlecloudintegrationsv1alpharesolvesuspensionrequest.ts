@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudIntegrationsV1alphaSuspension } from "./googlecloudintegrationsv1alphasuspension";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudIntegrationsV1alphaSuspensionInput } from "./googlecloudintegrationsv1alphasuspension";
 
 
-// GoogleCloudIntegrationsV1alphaResolveSuspensionRequest
+
+// GoogleCloudIntegrationsV1alphaResolveSuspensionRequestInput
 /** 
  * Request for [Suspensions.ResolveSuspensions].
 **/
-export class GoogleCloudIntegrationsV1alphaResolveSuspensionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=suspension" })
-  suspension?: GoogleCloudIntegrationsV1alphaSuspension;
+export class GoogleCloudIntegrationsV1alphaResolveSuspensionRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=suspension" })
+  suspension?: GoogleCloudIntegrationsV1alphaSuspensionInput;
 }

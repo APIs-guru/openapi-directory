@@ -1,0 +1,35 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { DistrictList } from "./districtlist";
+import { Webcast } from "./webcast";
+export declare class Event extends SpeakeasyBase {
+    address?: string;
+    city?: string;
+    country?: string;
+    district?: DistrictList;
+    divisionKeys?: string[];
+    endDate: Date;
+    eventCode: string;
+    eventType: number;
+    eventTypeString: string;
+    firstEventCode?: string;
+    firstEventId?: string;
+    gmapsPlaceId?: string;
+    gmapsUrl?: string;
+    key: string;
+    lat?: number;
+    lng?: number;
+    locationName?: string;
+    name: string;
+    parentEventKey?: string;
+    playoffType?: number;
+    playoffTypeString?: string;
+    postalCode?: string;
+    shortName?: string;
+    startDate: Date;
+    stateProv?: string;
+    timezone?: string;
+    webcasts?: Webcast[];
+    website?: string;
+    week?: number;
+    year: number;
+}

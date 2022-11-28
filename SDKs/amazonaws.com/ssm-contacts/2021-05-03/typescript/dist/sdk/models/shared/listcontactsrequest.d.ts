@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ContactTypeEnum } from "./contacttypeenum";
 export declare class ListContactsRequest extends SpeakeasyBase {
     aliasPrefix?: string;

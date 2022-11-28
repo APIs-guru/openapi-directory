@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BucketCountBySharedAccessType
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the number of S3 buckets that are or aren't shared with other Amazon Web Services accounts.
 **/
 export class BucketCountBySharedAccessType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=external" })
+  @SpeakeasyMetadata({ data: "json, name=external" })
   external?: number;
 
-  @Metadata({ data: "json, name=internal" })
+  @SpeakeasyMetadata({ data: "json, name=internal" })
   internal?: number;
 
-  @Metadata({ data: "json, name=notShared" })
+  @SpeakeasyMetadata({ data: "json, name=notShared" })
   notShared?: number;
 
-  @Metadata({ data: "json, name=unknown" })
+  @SpeakeasyMetadata({ data: "json, name=unknown" })
   unknown?: number;
 }

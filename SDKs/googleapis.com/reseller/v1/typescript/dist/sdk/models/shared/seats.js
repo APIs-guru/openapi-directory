@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Seats
 /**
  * JSON template for subscription seats.
@@ -33,19 +33,19 @@ var Seats = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Seats.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=licensedNumberOfSeats" }),
+        SpeakeasyMetadata({ data: "json, name=licensedNumberOfSeats" }),
         __metadata("design:type", Number)
     ], Seats.prototype, "licensedNumberOfSeats", void 0);
     __decorate([
-        Metadata({ data: "json, name=maximumNumberOfSeats" }),
+        SpeakeasyMetadata({ data: "json, name=maximumNumberOfSeats" }),
         __metadata("design:type", Number)
     ], Seats.prototype, "maximumNumberOfSeats", void 0);
     __decorate([
-        Metadata({ data: "json, name=numberOfSeats" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfSeats" }),
         __metadata("design:type", Number)
     ], Seats.prototype, "numberOfSeats", void 0);
     return Seats;

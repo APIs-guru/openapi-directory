@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RevisionLocation } from "./revisionlocation";
+
 
 
 // RegisterApplicationRevisionInput
@@ -7,12 +8,12 @@ import { RevisionLocation } from "./revisionlocation";
  * Represents the input of a RegisterApplicationRevision operation.
 **/
 export class RegisterApplicationRevisionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision: RevisionLocation;
 }

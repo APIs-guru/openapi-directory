@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// DeviceMakeModelAssignedTargetingOptionDetailsInput
+/** 
+ * Assigned device make and model targeting option details. This will be populated in the device_make_model_details field when targeting_type is `TARGETING_TYPE_DEVICE_MAKE_MODEL`.
+**/
+export class DeviceMakeModelAssignedTargetingOptionDetailsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=negative" })
+  negative?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=targetingOptionId" })
+  targetingOptionId?: string;
+}
 
 
 // DeviceMakeModelAssignedTargetingOptionDetails
@@ -6,12 +20,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Assigned device make and model targeting option details. This will be populated in the device_make_model_details field when targeting_type is `TARGETING_TYPE_DEVICE_MAKE_MODEL`.
 **/
 export class DeviceMakeModelAssignedTargetingOptionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=negative" })
+  @SpeakeasyMetadata({ data: "json, name=negative" })
   negative?: boolean;
 
-  @Metadata({ data: "json, name=targetingOptionId" })
+  @SpeakeasyMetadata({ data: "json, name=targetingOptionId" })
   targetingOptionId?: string;
 }

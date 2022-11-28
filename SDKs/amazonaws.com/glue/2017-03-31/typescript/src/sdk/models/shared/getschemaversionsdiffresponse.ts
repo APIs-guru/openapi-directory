@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSchemaVersionsDiffResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Diff" })
+  @SpeakeasyMetadata({ data: "json, name=Diff" })
   diff?: string;
 }

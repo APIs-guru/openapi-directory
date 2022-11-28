@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ClusterMetadata
+// Contains metadata about a specific cluster.
 type ClusterMetadata struct {
 	AddressID                    *string                       `json:"AddressId,omitempty"`
 	ClusterID                    *string                       `json:"ClusterId,omitempty"`

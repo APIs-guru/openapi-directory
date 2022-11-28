@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFactFodCategoriesSecurity = /** @class */ (function (_super) {
     __extends(GetFactFodCategoriesSecurity, _super);
@@ -30,7 +30,7 @@ var GetFactFodCategoriesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetFactFodCategoriesSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetFactFodCategoriesSecurity;
@@ -42,7 +42,7 @@ var GetFactFodCategoriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactFodCategoriesSecurity)
     ], GetFactFodCategoriesRequest.prototype, "security", void 0);
     return GetFactFodCategoriesRequest;
@@ -54,11 +54,11 @@ var GetFactFodCategoriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFactFodCategoriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFactFodCategoriesResponse.prototype, "statusCode", void 0);
     return GetFactFodCategoriesResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BenefitSetup
 /**
  * The benefit setup model
@@ -33,27 +33,27 @@ var BenefitSetup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=benefitClass" }),
+        SpeakeasyMetadata({ data: "json, name=benefitClass" }),
         __metadata("design:type", String)
     ], BenefitSetup.prototype, "benefitClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=benefitClassEffectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=benefitClassEffectiveDate" }),
         __metadata("design:type", String)
     ], BenefitSetup.prototype, "benefitClassEffectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=benefitSalary" }),
+        SpeakeasyMetadata({ data: "json, name=benefitSalary" }),
         __metadata("design:type", Number)
     ], BenefitSetup.prototype, "benefitSalary", void 0);
     __decorate([
-        Metadata({ data: "json, name=benefitSalaryEffectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=benefitSalaryEffectiveDate" }),
         __metadata("design:type", String)
     ], BenefitSetup.prototype, "benefitSalaryEffectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=doNotApplyAdministrativePeriod" }),
+        SpeakeasyMetadata({ data: "json, name=doNotApplyAdministrativePeriod" }),
         __metadata("design:type", Boolean)
     ], BenefitSetup.prototype, "doNotApplyAdministrativePeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=isMeasureAcaEligibility" }),
+        SpeakeasyMetadata({ data: "json, name=isMeasureAcaEligibility" }),
         __metadata("design:type", Boolean)
     ], BenefitSetup.prototype, "isMeasureAcaEligibility", void 0);
     return BenefitSetup;

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetListOfIssuedDocumentsVersion1IdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
-export class GetListOfIssuedDocumentsVersion1IdRequest extends SpeakeasyBase {
-  @Metadata()
-  security: GetListOfIssuedDocumentsVersion1IdSecurity;
-}
-
-
 export class GetListOfIssuedDocumentsVersion1Id401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
+export class GetListOfIssuedDocumentsVersion1IdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: GetListOfIssuedDocumentsVersion1IdSecurity;
+}
+
+
 export class GetListOfIssuedDocumentsVersion1IdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfIssuedDocumentsVersion1Id401ApplicationJsonObject?: GetListOfIssuedDocumentsVersion1Id401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfIssuedDocumentsVersion1Id500ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sample?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

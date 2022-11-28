@@ -76,6 +76,8 @@ const (
 	MetadataOptionsUIDEnumUIDNumber      MetadataOptionsUIDEnum = "UID_NUMBER"
 )
 
+// MetadataOptions
+// Specifies the metadata options for running a transfer.
 type MetadataOptions struct {
 	ACL           *MetadataOptionsACLEnum           `json:"acl,omitempty"`
 	Gid           *MetadataOptionsGidEnum           `json:"gid,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MedicalTranscript
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the location of a medical transcript.
 **/
 export class MedicalTranscript extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TranscriptFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=TranscriptFileUri" })
   transcriptFileUri?: string;
 }

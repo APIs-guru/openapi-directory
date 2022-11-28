@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WebcastTypeEnum(str, Enum):
     YOUTUBE = "youtube"
@@ -20,8 +25,8 @@ class WebcastTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Webcast:
-    channel: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channel' }})
-    date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
-    file: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'file' }})
-    type: WebcastTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    channel: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channel') }})
+    type: WebcastTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    date_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date') }})
+    file: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('file') }})
     

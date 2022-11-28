@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteListenerActionEnum(str, Enum):
     DELETE_LISTENER = "DeleteListener"
@@ -10,8 +14,8 @@ class PostDeleteListenerVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteListenerQueryParams:
-    action: PostDeleteListenerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteListenerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteListenerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteListenerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteListenerHeaders:
 
 @dataclass
 class PostDeleteListenerRequest:
-    query_params: PostDeleteListenerQueryParams = field(default=None)
-    headers: PostDeleteListenerHeaders = field(default=None)
+    headers: PostDeleteListenerHeaders = field()
+    query_params: PostDeleteListenerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteListenerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

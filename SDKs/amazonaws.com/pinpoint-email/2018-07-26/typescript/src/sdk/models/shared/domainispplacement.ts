@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DomainIspPlacement
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains inbox placement data for email sent from one of your email domains to a specific email provider.
 **/
 export class DomainIspPlacement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InboxPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=InboxPercentage" })
   inboxPercentage?: number;
 
-  @Metadata({ data: "json, name=InboxRawCount" })
+  @SpeakeasyMetadata({ data: "json, name=InboxRawCount" })
   inboxRawCount?: number;
 
-  @Metadata({ data: "json, name=IspName" })
+  @SpeakeasyMetadata({ data: "json, name=IspName" })
   ispName?: string;
 
-  @Metadata({ data: "json, name=SpamPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=SpamPercentage" })
   spamPercentage?: number;
 
-  @Metadata({ data: "json, name=SpamRawCount" })
+  @SpeakeasyMetadata({ data: "json, name=SpamRawCount" })
   spamRawCount?: number;
 }

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FormsFormsBatchUpdatePathParams:
-    form_id: str = field(default=None, metadata={'path_param': { 'field_name': 'formId', 'style': 'simple', 'explode': False }})
+    form_id: str = field(metadata={'path_param': { 'field_name': 'formId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +29,20 @@ class FormsFormsBatchUpdateQueryParams:
 
 @dataclass
 class FormsFormsBatchUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FormsFormsBatchUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FormsFormsBatchUpdateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +54,15 @@ class FormsFormsBatchUpdateSecurity:
 
 @dataclass
 class FormsFormsBatchUpdateRequest:
-    path_params: FormsFormsBatchUpdatePathParams = field(default=None)
-    query_params: FormsFormsBatchUpdateQueryParams = field(default=None)
-    request: Optional[shared.BatchUpdateFormRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FormsFormsBatchUpdateSecurity = field(default=None)
+    path_params: FormsFormsBatchUpdatePathParams = field()
+    query_params: FormsFormsBatchUpdateQueryParams = field()
+    security: FormsFormsBatchUpdateSecurity = field()
+    request: Optional[shared.BatchUpdateFormRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class FormsFormsBatchUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_update_form_response: Optional[shared.BatchUpdateFormResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

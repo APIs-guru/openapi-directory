@@ -15,6 +15,8 @@ type CreateConnectorDefinitionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateConnectorDefinitionRequestBodyInitialVersion
+// Information about the connector definition version, which is a container for connectors.
 type CreateConnectorDefinitionRequestBodyInitialVersion struct {
 	Connectors []shared.Connector `json:"Connectors,omitempty"`
 }

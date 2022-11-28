@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAdsHomeservicesLocalservicesV1PhoneLead
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container for phone lead specific information.
 **/
 export class GoogleAdsHomeservicesLocalservicesV1PhoneLead extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chargedCallTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=chargedCallTimestamp" })
   chargedCallTimestamp?: string;
 
-  @Metadata({ data: "json, name=chargedConnectedCallDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=chargedConnectedCallDurationSeconds" })
   chargedConnectedCallDurationSeconds?: string;
 
-  @Metadata({ data: "json, name=consumerPhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=consumerPhoneNumber" })
   consumerPhoneNumber?: string;
 }

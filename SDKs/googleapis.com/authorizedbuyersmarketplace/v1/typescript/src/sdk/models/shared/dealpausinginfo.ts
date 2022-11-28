@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DealPausingInfoPauseRoleEnum {
-    BuyerSellerRoleUnspecified = "BUYER_SELLER_ROLE_UNSPECIFIED"
-,    Buyer = "BUYER"
-,    Seller = "SELLER"
+    BuyerSellerRoleUnspecified = "BUYER_SELLER_ROLE_UNSPECIFIED",
+    Buyer = "BUYER",
+    Seller = "SELLER"
 }
 
 
@@ -12,12 +13,12 @@ export enum DealPausingInfoPauseRoleEnum {
  * Information related to deal pausing.
 **/
 export class DealPausingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pauseReason" })
+  @SpeakeasyMetadata({ data: "json, name=pauseReason" })
   pauseReason?: string;
 
-  @Metadata({ data: "json, name=pauseRole" })
+  @SpeakeasyMetadata({ data: "json, name=pauseRole" })
   pauseRole?: DealPausingInfoPauseRoleEnum;
 
-  @Metadata({ data: "json, name=pausingConsented" })
+  @SpeakeasyMetadata({ data: "json, name=pausingConsented" })
   pausingConsented?: boolean;
 }

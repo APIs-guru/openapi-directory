@@ -1,12 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import additionalconstraintselement_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateBackendAuthPasswordPolicyConfig:
-    additional_constraints: Optional[List[additionalconstraintselement_enum.AdditionalConstraintsElementEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalConstraints' }})
-    minimum_length: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumLength' }})
+    r"""UpdateBackendAuthPasswordPolicyConfig
+    Describes the password policy for your Amazon Cognito user pool configured as a part of your Amplify project.
+    """
+    
+    additional_constraints: Optional[List[AdditionalConstraintsElementEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalConstraints') }})
+    minimum_length: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumLength') }})
     

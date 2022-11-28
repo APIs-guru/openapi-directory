@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2SearchResponse
+// Response message for SearchService.Search method.
 type GoogleCloudRetailV2SearchResponse struct {
 	AppliedControls            []string                                                      `json:"appliedControls,omitempty"`
 	AttributionToken           *string                                                       `json:"attributionToken,omitempty"`

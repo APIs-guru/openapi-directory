@@ -8,6 +8,8 @@ const (
 	RunTaskRequestResponseViewEnumFull            RunTaskRequestResponseViewEnum = "FULL"
 )
 
+// RunTaskRequest
+// Request message for forcing a task to run now using RunTask.
 type RunTaskRequest struct {
 	ResponseView *RunTaskRequestResponseViewEnum `json:"responseView,omitempty"`
 }

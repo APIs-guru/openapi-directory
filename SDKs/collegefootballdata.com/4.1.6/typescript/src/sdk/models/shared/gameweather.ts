@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GameWeather extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awayConference" })
+  @SpeakeasyMetadata({ data: "json, name=awayConference" })
   awayConference?: string;
 
-  @Metadata({ data: "json, name=awayTeam" })
+  @SpeakeasyMetadata({ data: "json, name=awayTeam" })
   awayTeam?: string;
 
-  @Metadata({ data: "json, name=dewPoint" })
+  @SpeakeasyMetadata({ data: "json, name=dewPoint" })
   dewPoint?: number;
 
-  @Metadata({ data: "json, name=homeConference" })
+  @SpeakeasyMetadata({ data: "json, name=homeConference" })
   homeConference?: string;
 
-  @Metadata({ data: "json, name=homeTeam" })
+  @SpeakeasyMetadata({ data: "json, name=homeTeam" })
   homeTeam?: string;
 
-  @Metadata({ data: "json, name=humidity" })
+  @SpeakeasyMetadata({ data: "json, name=humidity" })
   humidity?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isStartTimeTBD" })
+  @SpeakeasyMetadata({ data: "json, name=isStartTimeTBD" })
   isStartTimeTbd?: boolean;
 
-  @Metadata({ data: "json, name=precipitation" })
+  @SpeakeasyMetadata({ data: "json, name=precipitation" })
   precipitation?: number;
 
-  @Metadata({ data: "json, name=pressure" })
+  @SpeakeasyMetadata({ data: "json, name=pressure" })
   pressure?: number;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=seasonType" })
+  @SpeakeasyMetadata({ data: "json, name=seasonType" })
   seasonType?: string;
 
-  @Metadata({ data: "json, name=snowfall" })
+  @SpeakeasyMetadata({ data: "json, name=snowfall" })
   snowfall?: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=temperature" })
+  @SpeakeasyMetadata({ data: "json, name=temperature" })
   temperature?: number;
 
-  @Metadata({ data: "json, name=venue" })
+  @SpeakeasyMetadata({ data: "json, name=venue" })
   venue?: string;
 
-  @Metadata({ data: "json, name=venueId" })
+  @SpeakeasyMetadata({ data: "json, name=venueId" })
   venueId?: number;
 
-  @Metadata({ data: "json, name=weatherCondition" })
+  @SpeakeasyMetadata({ data: "json, name=weatherCondition" })
   weatherCondition?: string;
 
-  @Metadata({ data: "json, name=weatherConditionCode" })
+  @SpeakeasyMetadata({ data: "json, name=weatherConditionCode" })
   weatherConditionCode?: number;
 
-  @Metadata({ data: "json, name=week" })
+  @SpeakeasyMetadata({ data: "json, name=week" })
   week?: number;
 
-  @Metadata({ data: "json, name=windDirection" })
+  @SpeakeasyMetadata({ data: "json, name=windDirection" })
   windDirection?: number;
 
-  @Metadata({ data: "json, name=windSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=windSpeed" })
   windSpeed?: number;
 }

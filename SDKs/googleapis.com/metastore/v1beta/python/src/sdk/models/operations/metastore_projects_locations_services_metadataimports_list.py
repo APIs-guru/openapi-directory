@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MetastoreProjectsLocationsServicesMetadataImportsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class MetastoreProjectsLocationsServicesMetadataImportsListQueryParams:
 
 @dataclass
 class MetastoreProjectsLocationsServicesMetadataImportsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MetastoreProjectsLocationsServicesMetadataImportsListRequest:
-    path_params: MetastoreProjectsLocationsServicesMetadataImportsListPathParams = field(default=None)
-    query_params: MetastoreProjectsLocationsServicesMetadataImportsListQueryParams = field(default=None)
-    security: MetastoreProjectsLocationsServicesMetadataImportsListSecurity = field(default=None)
+    path_params: MetastoreProjectsLocationsServicesMetadataImportsListPathParams = field()
+    query_params: MetastoreProjectsLocationsServicesMetadataImportsListQueryParams = field()
+    security: MetastoreProjectsLocationsServicesMetadataImportsListSecurity = field()
     
 
 @dataclass
 class MetastoreProjectsLocationsServicesMetadataImportsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_metadata_imports_response: Optional[shared.ListMetadataImportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

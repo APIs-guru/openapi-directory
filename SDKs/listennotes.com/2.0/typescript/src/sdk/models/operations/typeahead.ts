@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TypeaheadQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=safe_mode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=safe_mode" })
   safeMode?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=show_genres" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=show_genres" })
   showGenres?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=show_podcasts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=show_podcasts" })
   showPodcasts?: number;
 }
 
 
 export class TypeaheadHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
   xListenApiKey: string;
 }
 
 
 export class TypeaheadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TypeaheadQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TypeaheadHeaders;
 }
 
 
 export class TypeaheadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   typeaheadResponse?: shared.TypeaheadResponse;
 }

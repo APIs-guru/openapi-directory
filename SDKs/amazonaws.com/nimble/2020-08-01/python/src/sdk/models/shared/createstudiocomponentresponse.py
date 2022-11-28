@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import studiocomponent
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateStudioComponentResponse:
-    studio_component: Optional[studiocomponent.StudioComponent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'studioComponent' }})
+    studio_component: Optional[StudioComponent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('studioComponent') }})
     

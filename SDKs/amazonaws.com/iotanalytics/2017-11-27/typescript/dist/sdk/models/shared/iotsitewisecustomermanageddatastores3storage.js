@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IotSiteWiseCustomerManagedDatastoreS3Storage
 /**
  *  Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. You can't change the choice of Amazon S3 storage after your data store is created.
@@ -33,11 +33,11 @@ var IotSiteWiseCustomerManagedDatastoreS3Storage = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], IotSiteWiseCustomerManagedDatastoreS3Storage.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=keyPrefix" }),
         __metadata("design:type", String)
     ], IotSiteWiseCustomerManagedDatastoreS3Storage.prototype, "keyPrefix", void 0);
     return IotSiteWiseCustomerManagedDatastoreS3Storage;

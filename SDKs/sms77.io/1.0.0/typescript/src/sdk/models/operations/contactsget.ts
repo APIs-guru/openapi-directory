@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ContactsGetActionEnum {
     Read = "read"
@@ -6,30 +7,30 @@ export enum ContactsGetActionEnum {
 
 
 export class ContactsGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=action" })
   action: ContactsGetActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=json" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=json" })
   json?: number;
 }
 
 
 export class ContactsGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContactsGetQueryParams;
 }
 
 
 export class ContactsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contactsGet200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contactsGet200TextCsvString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

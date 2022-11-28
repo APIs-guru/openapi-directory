@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageStateChangeReasonCodeEnum } from "./imagestatechangereasoncodeenum";
 /**
  * Describes the reason why the last image state change occurred.

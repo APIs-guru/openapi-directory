@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetGroupCertificateAuthorityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupCertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorityArn" })
   groupCertificateAuthorityArn?: string;
 
-  @Metadata({ data: "json, name=GroupCertificateAuthorityId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorityId" })
   groupCertificateAuthorityId?: string;
 
-  @Metadata({ data: "json, name=PemEncodedCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=PemEncodedCertificate" })
   pemEncodedCertificate?: string;
 }

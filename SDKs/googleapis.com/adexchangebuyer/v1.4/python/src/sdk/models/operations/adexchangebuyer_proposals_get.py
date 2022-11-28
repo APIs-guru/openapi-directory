@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerProposalsGetPathParams:
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class AdexchangebuyerProposalsGetQueryParams:
 
 @dataclass
 class AdexchangebuyerProposalsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerProposalsGetRequest:
-    path_params: AdexchangebuyerProposalsGetPathParams = field(default=None)
-    query_params: AdexchangebuyerProposalsGetQueryParams = field(default=None)
-    security: AdexchangebuyerProposalsGetSecurity = field(default=None)
+    path_params: AdexchangebuyerProposalsGetPathParams = field()
+    query_params: AdexchangebuyerProposalsGetQueryParams = field()
+    security: AdexchangebuyerProposalsGetSecurity = field()
     
 
 @dataclass
 class AdexchangebuyerProposalsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     proposal: Optional[shared.Proposal] = field(default=None)
-    status_code: int = field(default=None)
     

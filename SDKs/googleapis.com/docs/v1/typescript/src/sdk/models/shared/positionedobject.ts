@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PositionedObjectProperties } from "./positionedobjectproperties";
 import { SuggestedPositionedObjectProperties } from "./suggestedpositionedobjectproperties";
+
 
 
 // PositionedObject
@@ -9,18 +9,18 @@ import { SuggestedPositionedObjectProperties } from "./suggestedpositionedobject
  * An object that's tethered to a Paragraph and positioned relative to the beginning of the paragraph. A PositionedObject contains an EmbeddedObject such as an image.
 **/
 export class PositionedObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=positionedObjectProperties" })
+  @SpeakeasyMetadata({ data: "json, name=positionedObjectProperties" })
   positionedObjectProperties?: PositionedObjectProperties;
 
-  @Metadata({ data: "json, name=suggestedDeletionIds" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedDeletionIds" })
   suggestedDeletionIds?: string[];
 
-  @Metadata({ data: "json, name=suggestedInsertionId" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedInsertionId" })
   suggestedInsertionId?: string;
 
-  @Metadata({ data: "json, name=suggestedPositionedObjectPropertiesChanges", elemType: shared.SuggestedPositionedObjectProperties })
+  @SpeakeasyMetadata({ data: "json, name=suggestedPositionedObjectPropertiesChanges", elemType: SuggestedPositionedObjectProperties })
   suggestedPositionedObjectPropertiesChanges?: Map<string, SuggestedPositionedObjectProperties>;
 }

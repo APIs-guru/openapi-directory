@@ -1,57 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ApiCoreDtoAggregatedAggregatedResult } from "./apicoredtoaggregatedaggregatedresult";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoAggregatedAggregatedResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityDay" })
+  @SpeakeasyMetadata({ data: "json, name=activityDay" })
   activityDay?: string;
 
-  @Metadata({ data: "json, name=commissionsCost" })
+  @SpeakeasyMetadata({ data: "json, name=commissionsCost" })
   commissionsCost?: number;
 
-  @Metadata({ data: "json, name=conversionsCost" })
+  @SpeakeasyMetadata({ data: "json, name=conversionsCost" })
   conversionsCost?: number;
 
-  @Metadata({ data: "json, name=conversionsValue" })
+  @SpeakeasyMetadata({ data: "json, name=conversionsValue" })
   conversionsValue?: number;
 
-  @Metadata({ data: "json, name=convertedClicks" })
+  @SpeakeasyMetadata({ data: "json, name=convertedClicks" })
   convertedClicks?: number;
 
-  @Metadata({ data: "json, name=entityData" })
+  @SpeakeasyMetadata({ data: "json, name=entityData" })
   entityData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=fromDay" })
+  @SpeakeasyMetadata({ data: "json, name=fromDay" })
   fromDay?: string;
 
-  @Metadata({ data: "json, name=hourlyBreakDown", elemType: shared.ApiCoreDtoAggregatedAggregatedResult })
+  @SpeakeasyMetadata({ data: "json, name=hourlyBreakDown", elemType: ApiCoreDtoAggregatedAggregatedResult })
   hourlyBreakDown?: Map<string, ApiCoreDtoAggregatedAggregatedResult>;
 
-  @Metadata({ data: "json, name=lastHitDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastHitDate" })
   lastHitDate?: string;
 
-  @Metadata({ data: "json, name=spiderHitsCount" })
+  @SpeakeasyMetadata({ data: "json, name=spiderHitsCount" })
   spiderHitsCount?: number;
 
-  @Metadata({ data: "json, name=toDay" })
+  @SpeakeasyMetadata({ data: "json, name=toDay" })
   toDay?: string;
 
-  @Metadata({ data: "json, name=totalClicks" })
+  @SpeakeasyMetadata({ data: "json, name=totalClicks" })
   totalClicks?: number;
 
-  @Metadata({ data: "json, name=totalViews" })
+  @SpeakeasyMetadata({ data: "json, name=totalViews" })
   totalViews?: number;
 
-  @Metadata({ data: "json, name=uniqueClicks" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueClicks" })
   uniqueClicks?: number;
 
-  @Metadata({ data: "json, name=uniqueConversions" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueConversions" })
   uniqueConversions?: number;
 
-  @Metadata({ data: "json, name=uniqueViews" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueViews" })
   uniqueViews?: number;
 }

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -60,23 +61,23 @@ class ExtrasConfigContextsListQueryParams:
     tenant_id_n: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tenant_id__n', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class ExtrasConfigContextsListRequest:
-    query_params: ExtrasConfigContextsListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class ExtrasConfigContextsList200ApplicationJSON:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    results: List[shared.ConfigContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    results: List[shared.ConfigContext] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    
+
+@dataclass
+class ExtrasConfigContextsListRequest:
+    query_params: ExtrasConfigContextsListQueryParams = field()
     
 
 @dataclass
 class ExtrasConfigContextsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     extras_config_contexts_list_200_application_json_object: Optional[ExtrasConfigContextsList200ApplicationJSON] = field(default=None)
     

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchOutputConfig } from "./cloudwatchoutputconfig";
 import { CommandPlugin } from "./commandplugin";
 import { NotificationConfig } from "./notificationconfig";
 import { CommandInvocationStatusEnum } from "./commandinvocationstatusenum";
+
 
 
 // CommandInvocation
@@ -11,51 +11,51 @@ import { CommandInvocationStatusEnum } from "./commandinvocationstatusenum";
  * An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user runs SendCommand against three instances, then a command invocation is created for each requested instance ID. A command invocation returns status and detail information about a command you ran. 
 **/
 export class CommandInvocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchOutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchOutputConfig" })
   cloudWatchOutputConfig?: CloudWatchOutputConfig;
 
-  @Metadata({ data: "json, name=CommandId" })
+  @SpeakeasyMetadata({ data: "json, name=CommandId" })
   commandId?: string;
 
-  @Metadata({ data: "json, name=CommandPlugins", elemType: shared.CommandPlugin })
+  @SpeakeasyMetadata({ data: "json, name=CommandPlugins", elemType: CommandPlugin })
   commandPlugins?: CommandPlugin[];
 
-  @Metadata({ data: "json, name=Comment" })
+  @SpeakeasyMetadata({ data: "json, name=Comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=DocumentName" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentName" })
   documentName?: string;
 
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=InstanceName" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceName" })
   instanceName?: string;
 
-  @Metadata({ data: "json, name=NotificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationConfig" })
   notificationConfig?: NotificationConfig;
 
-  @Metadata({ data: "json, name=RequestedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RequestedDateTime" })
   requestedDateTime?: Date;
 
-  @Metadata({ data: "json, name=ServiceRole" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceRole" })
   serviceRole?: string;
 
-  @Metadata({ data: "json, name=StandardErrorUrl" })
+  @SpeakeasyMetadata({ data: "json, name=StandardErrorUrl" })
   standardErrorUrl?: string;
 
-  @Metadata({ data: "json, name=StandardOutputUrl" })
+  @SpeakeasyMetadata({ data: "json, name=StandardOutputUrl" })
   standardOutputUrl?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: CommandInvocationStatusEnum;
 
-  @Metadata({ data: "json, name=StatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=StatusDetails" })
   statusDetails?: string;
 
-  @Metadata({ data: "json, name=TraceOutput" })
+  @SpeakeasyMetadata({ data: "json, name=TraceOutput" })
   traceOutput?: string;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,24 +11,24 @@ class GetAPISpecificationQueryParams:
 
 @dataclass
 class GetAPISpecificationHeaders:
-    x_readme_version: str = field(default=None, metadata={'header': { 'field_name': 'x-readme-version', 'style': 'simple', 'explode': False }})
+    x_readme_version: str = field(metadata={'header': { 'field_name': 'x-readme-version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAPISpecificationSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetAPISpecificationRequest:
-    query_params: GetAPISpecificationQueryParams = field(default=None)
-    headers: GetAPISpecificationHeaders = field(default=None)
-    security: GetAPISpecificationSecurity = field(default=None)
+    headers: GetAPISpecificationHeaders = field()
+    query_params: GetAPISpecificationQueryParams = field()
+    security: GetAPISpecificationSecurity = field()
     
 
 @dataclass
 class GetAPISpecificationResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SelectionRule } from "./selectionrule";
+
 
 
 // CampaignCriterion
@@ -8,12 +8,12 @@ import { SelectionRule } from "./selectionrule";
  * This type defines the fields for specifying the criterion (selection rule) settings of an ad campaign.
 **/
 export class CampaignCriterion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoSelectFutureInventory" })
+  @SpeakeasyMetadata({ data: "json, name=autoSelectFutureInventory" })
   autoSelectFutureInventory?: boolean;
 
-  @Metadata({ data: "json, name=criterionType" })
+  @SpeakeasyMetadata({ data: "json, name=criterionType" })
   criterionType?: string;
 
-  @Metadata({ data: "json, name=selectionRules", elemType: shared.SelectionRule })
+  @SpeakeasyMetadata({ data: "json, name=selectionRules", elemType: SelectionRule })
   selectionRules?: SelectionRule[];
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class BuildSignatureKeyTypeEnum(str, Enum):
     KEY_TYPE_UNSPECIFIED = "KEY_TYPE_UNSPECIFIED"
@@ -11,8 +13,12 @@ class BuildSignatureKeyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BuildSignature:
-    key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyId' }})
-    key_type: Optional[BuildSignatureKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyType' }})
-    public_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicKey' }})
-    signature: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signature' }})
+    r"""BuildSignature
+    Message encapsulating the signature of the verified build.
+    """
+    
+    key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyId') }})
+    key_type: Optional[BuildSignatureKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyType') }})
+    public_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicKey') }})
+    signature: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signature') }})
     

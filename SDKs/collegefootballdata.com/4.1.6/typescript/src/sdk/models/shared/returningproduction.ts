@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReturningProduction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conference" })
+  @SpeakeasyMetadata({ data: "json, name=conference" })
   conference?: string;
 
-  @Metadata({ data: "json, name=passingUsage" })
+  @SpeakeasyMetadata({ data: "json, name=passingUsage" })
   passingUsage?: number;
 
-  @Metadata({ data: "json, name=percentPPA" })
+  @SpeakeasyMetadata({ data: "json, name=percentPPA" })
   percentPpa?: number;
 
-  @Metadata({ data: "json, name=percentPassingPPA" })
+  @SpeakeasyMetadata({ data: "json, name=percentPassingPPA" })
   percentPassingPpa?: number;
 
-  @Metadata({ data: "json, name=percentReceivingPPA" })
+  @SpeakeasyMetadata({ data: "json, name=percentReceivingPPA" })
   percentReceivingPpa?: number;
 
-  @Metadata({ data: "json, name=percentRushingPPA" })
+  @SpeakeasyMetadata({ data: "json, name=percentRushingPPA" })
   percentRushingPpa?: number;
 
-  @Metadata({ data: "json, name=receivingUsage" })
+  @SpeakeasyMetadata({ data: "json, name=receivingUsage" })
   receivingUsage?: number;
 
-  @Metadata({ data: "json, name=rushingUsage" })
+  @SpeakeasyMetadata({ data: "json, name=rushingUsage" })
   rushingUsage?: number;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=totalPPA" })
+  @SpeakeasyMetadata({ data: "json, name=totalPPA" })
   totalPpa?: number;
 
-  @Metadata({ data: "json, name=totalPassingPPA" })
+  @SpeakeasyMetadata({ data: "json, name=totalPassingPPA" })
   totalPassingPpa?: number;
 
-  @Metadata({ data: "json, name=totalReceivingPPA" })
+  @SpeakeasyMetadata({ data: "json, name=totalReceivingPPA" })
   totalReceivingPpa?: number;
 
-  @Metadata({ data: "json, name=totalRushingPPA" })
+  @SpeakeasyMetadata({ data: "json, name=totalRushingPPA" })
   totalRushingPpa?: number;
 
-  @Metadata({ data: "json, name=usage" })
+  @SpeakeasyMetadata({ data: "json, name=usage" })
   usage?: number;
 }

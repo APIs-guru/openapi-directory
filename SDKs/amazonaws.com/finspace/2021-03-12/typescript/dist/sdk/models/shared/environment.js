@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FederationModeEnum } from "./federationmodeenum";
 import { FederationParameters } from "./federationparameters";
 import { EnvironmentStatusEnum } from "./environmentstatusenum";
@@ -36,51 +36,51 @@ var Environment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awsAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=awsAccountId" }),
         __metadata("design:type", String)
     ], Environment.prototype, "awsAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=dedicatedServiceAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=dedicatedServiceAccountId" }),
         __metadata("design:type", String)
     ], Environment.prototype, "dedicatedServiceAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Environment.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentArn" }),
+        SpeakeasyMetadata({ data: "json, name=environmentArn" }),
         __metadata("design:type", String)
     ], Environment.prototype, "environmentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentId" }),
+        SpeakeasyMetadata({ data: "json, name=environmentId" }),
         __metadata("design:type", String)
     ], Environment.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentUrl" }),
+        SpeakeasyMetadata({ data: "json, name=environmentUrl" }),
         __metadata("design:type", String)
     ], Environment.prototype, "environmentUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationMode" }),
+        SpeakeasyMetadata({ data: "json, name=federationMode" }),
         __metadata("design:type", String)
     ], Environment.prototype, "federationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationParameters" }),
+        SpeakeasyMetadata({ data: "json, name=federationParameters" }),
         __metadata("design:type", FederationParameters)
     ], Environment.prototype, "federationParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyId" }),
         __metadata("design:type", String)
     ], Environment.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Environment.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=sageMakerStudioDomainUrl" }),
+        SpeakeasyMetadata({ data: "json, name=sageMakerStudioDomainUrl" }),
         __metadata("design:type", String)
     ], Environment.prototype, "sageMakerStudioDomainUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Environment.prototype, "status", void 0);
     return Environment;

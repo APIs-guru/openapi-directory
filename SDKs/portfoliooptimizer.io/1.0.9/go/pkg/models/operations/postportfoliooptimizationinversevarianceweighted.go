@@ -5,12 +5,12 @@ type PostPortfolioOptimizationInverseVarianceWeightedRequestBody struct {
 	AssetsVariances []float64 `json:"assetsVariances"`
 }
 
-type PostPortfolioOptimizationInverseVarianceWeightedRequest struct {
-	Request PostPortfolioOptimizationInverseVarianceWeightedRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationInverseVarianceWeighted200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationInverseVarianceWeightedRequest struct {
+	Request PostPortfolioOptimizationInverseVarianceWeightedRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationInverseVarianceWeightedResponse struct {

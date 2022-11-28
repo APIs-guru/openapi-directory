@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Entry
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single replacement configuration.
 **/
 export class Entry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=replace" })
+  @SpeakeasyMetadata({ data: "json, name=replace" })
   replace?: string;
 
-  @Metadata({ data: "json, name=search" })
+  @SpeakeasyMetadata({ data: "json, name=search" })
   search?: string;
 }

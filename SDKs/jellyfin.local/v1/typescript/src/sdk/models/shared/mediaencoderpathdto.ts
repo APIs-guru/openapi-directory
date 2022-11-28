@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MediaEncoderPathDto
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Media Encoder Path Dto.
 **/
 export class MediaEncoderPathDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=PathType" })
+  @SpeakeasyMetadata({ data: "json, name=PathType" })
   pathType?: string;
 }

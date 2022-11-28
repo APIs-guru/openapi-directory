@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamFile } from "./streamfile";
+
 
 
 // StreamInfo
@@ -8,27 +8,27 @@ import { StreamFile } from "./streamfile";
  * Information about a stream.
 **/
 export class StreamInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=files", elemType: shared.StreamFile })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: StreamFile })
   files?: StreamFile[];
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=streamArn" })
+  @SpeakeasyMetadata({ data: "json, name=streamArn" })
   streamArn?: string;
 
-  @Metadata({ data: "json, name=streamId" })
+  @SpeakeasyMetadata({ data: "json, name=streamId" })
   streamId?: string;
 
-  @Metadata({ data: "json, name=streamVersion" })
+  @SpeakeasyMetadata({ data: "json, name=streamVersion" })
   streamVersion?: number;
 }

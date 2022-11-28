@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ApplicationSource } from "./applicationsource";
 var DescribeScalingPlansRequest = /** @class */ (function (_super) {
     __extends(DescribeScalingPlansRequest, _super);
     function DescribeScalingPlansRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationSources", elemType: shared.ApplicationSource }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationSources", elemType: ApplicationSource }),
         __metadata("design:type", Array)
     ], DescribeScalingPlansRequest.prototype, "applicationSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], DescribeScalingPlansRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeScalingPlansRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanNames" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanNames" }),
         __metadata("design:type", Array)
     ], DescribeScalingPlansRequest.prototype, "scalingPlanNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" }),
         __metadata("design:type", Number)
     ], DescribeScalingPlansRequest.prototype, "scalingPlanVersion", void 0);
     return DescribeScalingPlansRequest;

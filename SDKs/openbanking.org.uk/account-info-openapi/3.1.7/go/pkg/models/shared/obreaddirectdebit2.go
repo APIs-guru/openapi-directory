@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObReadDirectDebit2DataDirectDebit
+// Account to or from which a cash entry is made.
 type ObReadDirectDebit2DataDirectDebit struct {
 	AccountID               string                                `json:"AccountId"`
 	DirectDebitID           *string                               `json:"DirectDebitId,omitempty"`

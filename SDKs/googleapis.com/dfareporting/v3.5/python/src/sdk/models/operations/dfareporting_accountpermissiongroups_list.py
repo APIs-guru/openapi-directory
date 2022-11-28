@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingAccountPermissionGroupsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DfareportingAccountPermissionGroupsListQueryParams:
 
 @dataclass
 class DfareportingAccountPermissionGroupsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingAccountPermissionGroupsListRequest:
-    path_params: DfareportingAccountPermissionGroupsListPathParams = field(default=None)
-    query_params: DfareportingAccountPermissionGroupsListQueryParams = field(default=None)
-    security: DfareportingAccountPermissionGroupsListSecurity = field(default=None)
+    path_params: DfareportingAccountPermissionGroupsListPathParams = field()
+    query_params: DfareportingAccountPermissionGroupsListQueryParams = field()
+    security: DfareportingAccountPermissionGroupsListSecurity = field()
     
 
 @dataclass
 class DfareportingAccountPermissionGroupsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_permission_groups_list_response: Optional[shared.AccountPermissionGroupsListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PubsubProjectsSubscriptionsAcknowledgePathParams = /** @class */ (function (_super) {
     __extends(PubsubProjectsSubscriptionsAcknowledgePathParams, _super);
@@ -30,7 +30,7 @@ var PubsubProjectsSubscriptionsAcknowledgePathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subscription" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscription" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgePathParams.prototype, "subscription", void 0);
     return PubsubProjectsSubscriptionsAcknowledgePathParams;
@@ -42,47 +42,47 @@ var PubsubProjectsSubscriptionsAcknowledgeQueryParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeQueryParams.prototype, "uploadProtocol", void 0);
     return PubsubProjectsSubscriptionsAcknowledgeQueryParams;
@@ -94,11 +94,11 @@ var PubsubProjectsSubscriptionsAcknowledgeSecurityOption1 = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], PubsubProjectsSubscriptionsAcknowledgeSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], PubsubProjectsSubscriptionsAcknowledgeSecurityOption1.prototype, "oauth2c", void 0);
     return PubsubProjectsSubscriptionsAcknowledgeSecurityOption1;
@@ -110,11 +110,11 @@ var PubsubProjectsSubscriptionsAcknowledgeSecurityOption2 = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], PubsubProjectsSubscriptionsAcknowledgeSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], PubsubProjectsSubscriptionsAcknowledgeSecurityOption2.prototype, "oauth2c", void 0);
     return PubsubProjectsSubscriptionsAcknowledgeSecurityOption2;
@@ -126,11 +126,11 @@ var PubsubProjectsSubscriptionsAcknowledgeSecurity = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", PubsubProjectsSubscriptionsAcknowledgeSecurityOption1)
     ], PubsubProjectsSubscriptionsAcknowledgeSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", PubsubProjectsSubscriptionsAcknowledgeSecurityOption2)
     ], PubsubProjectsSubscriptionsAcknowledgeSecurity.prototype, "option2", void 0);
     return PubsubProjectsSubscriptionsAcknowledgeSecurity;
@@ -142,19 +142,19 @@ var PubsubProjectsSubscriptionsAcknowledgeRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PubsubProjectsSubscriptionsAcknowledgePathParams)
     ], PubsubProjectsSubscriptionsAcknowledgeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PubsubProjectsSubscriptionsAcknowledgeQueryParams)
     ], PubsubProjectsSubscriptionsAcknowledgeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.AcknowledgeRequest)
     ], PubsubProjectsSubscriptionsAcknowledgeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PubsubProjectsSubscriptionsAcknowledgeSecurity)
     ], PubsubProjectsSubscriptionsAcknowledgeRequest.prototype, "security", void 0);
     return PubsubProjectsSubscriptionsAcknowledgeRequest;
@@ -166,15 +166,15 @@ var PubsubProjectsSubscriptionsAcknowledgeResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PubsubProjectsSubscriptionsAcknowledgeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], PubsubProjectsSubscriptionsAcknowledgeResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PubsubProjectsSubscriptionsAcknowledgeResponse.prototype, "statusCode", void 0);
     return PubsubProjectsSubscriptionsAcknowledgeResponse;

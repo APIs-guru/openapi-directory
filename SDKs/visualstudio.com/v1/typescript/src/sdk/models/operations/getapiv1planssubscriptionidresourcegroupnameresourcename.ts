@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1PlansSubscriptionIdResourceGroupNameResourceNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=resourceGroupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resourceGroupName" })
   resourceGroupName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=resourceName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resourceName" })
   resourceName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
   subscriptionId: string;
 }
 
 
 export class GetApiV1PlansSubscriptionIdResourceGroupNameResourceNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1PlansSubscriptionIdResourceGroupNameResourceNamePathParams;
 }
 
 
 export class GetApiV1PlansSubscriptionIdResourceGroupNameResourceNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   planResult?: shared.PlanResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// PlacementStatistics
+// An object that contains inbox placement data for an email provider.
 type PlacementStatistics struct {
 	DkimPercentage    *float64 `json:"DkimPercentage,omitempty"`
 	InboxPercentage   *float64 `json:"InboxPercentage,omitempty"`

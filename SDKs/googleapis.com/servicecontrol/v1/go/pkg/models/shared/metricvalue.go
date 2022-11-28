@@ -1,5 +1,7 @@
 package shared
 
+// MetricValue
+// Represents a single metric value.
 type MetricValue struct {
 	BoolValue         *bool             `json:"boolValue,omitempty"`
 	DistributionValue *Distribution     `json:"distributionValue,omitempty"`

@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThingGroupDocument } from "./thinggroupdocument";
 import { ThingDocument } from "./thingdocument";
 
 
+
 export class SearchIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=thingGroups", elemType: shared.ThingGroupDocument })
+  @SpeakeasyMetadata({ data: "json, name=thingGroups", elemType: ThingGroupDocument })
   thingGroups?: ThingGroupDocument[];
 
-  @Metadata({ data: "json, name=things", elemType: shared.ThingDocument })
+  @SpeakeasyMetadata({ data: "json, name=things", elemType: ThingDocument })
   things?: ThingDocument[];
 }

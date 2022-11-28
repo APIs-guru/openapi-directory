@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MeshData } from "./meshdata";
 
 
+
 export class DescribeMeshOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mesh" })
+  @SpeakeasyMetadata({ data: "json, name=mesh" })
   mesh?: MeshData;
 }

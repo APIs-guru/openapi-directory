@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ActivityListReposStarredByUserPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +19,15 @@ class ActivityListReposStarredByUserQueryParams:
 
 @dataclass
 class ActivityListReposStarredByUserRequest:
-    path_params: ActivityListReposStarredByUserPathParams = field(default=None)
-    query_params: ActivityListReposStarredByUserQueryParams = field(default=None)
+    path_params: ActivityListReposStarredByUserPathParams = field()
+    query_params: ActivityListReposStarredByUserQueryParams = field()
     
 
 @dataclass
 class ActivityListReposStarredByUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     repositories: Optional[List[shared.Repository]] = field(default=None)
     starred_repositories: Optional[List[shared.StarredRepository]] = field(default=None)
     

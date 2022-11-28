@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Key } from "./key";
 import { ReadOptions } from "./readoptions";
+
 
 
 // LookupRequest
@@ -9,12 +9,12 @@ import { ReadOptions } from "./readoptions";
  * The request for Datastore.Lookup.
 **/
 export class LookupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseId" })
+  @SpeakeasyMetadata({ data: "json, name=databaseId" })
   databaseId?: string;
 
-  @Metadata({ data: "json, name=keys", elemType: shared.Key })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: Key })
   keys?: Key[];
 
-  @Metadata({ data: "json, name=readOptions" })
+  @SpeakeasyMetadata({ data: "json, name=readOptions" })
   readOptions?: ReadOptions;
 }

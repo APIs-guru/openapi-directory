@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudwatchAlarmAction
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an action that updates a CloudWatch alarm.
 **/
 export class CloudwatchAlarmAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmName" })
+  @SpeakeasyMetadata({ data: "json, name=alarmName" })
   alarmName: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=stateReason" })
+  @SpeakeasyMetadata({ data: "json, name=stateReason" })
   stateReason: string;
 
-  @Metadata({ data: "json, name=stateValue" })
+  @SpeakeasyMetadata({ data: "json, name=stateValue" })
   stateValue: string;
 }

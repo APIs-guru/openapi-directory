@@ -1,8 +1,9 @@
 
 
+
 export enum InitiatedByEnum {
-    StartTest = "START_TEST"
-,    StartCutover = "START_CUTOVER"
-,    Diagnostic = "DIAGNOSTIC"
-,    Terminate = "TERMINATE"
+    StartTest = "START_TEST",
+    StartCutover = "START_CUTOVER",
+    Diagnostic = "DIAGNOSTIC",
+    Terminate = "TERMINATE"
 }

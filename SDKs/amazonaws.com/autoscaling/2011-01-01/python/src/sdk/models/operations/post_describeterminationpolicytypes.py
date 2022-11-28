@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeTerminationPolicyTypesActionEnum(str, Enum):
     DESCRIBE_TERMINATION_POLICY_TYPES = "DescribeTerminationPolicyTypes"
@@ -10,8 +14,8 @@ class PostDescribeTerminationPolicyTypesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeTerminationPolicyTypesQueryParams:
-    action: PostDescribeTerminationPolicyTypesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeTerminationPolicyTypesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeTerminationPolicyTypesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeTerminationPolicyTypesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDescribeTerminationPolicyTypesHeaders:
 
 @dataclass
 class PostDescribeTerminationPolicyTypesRequest:
-    query_params: PostDescribeTerminationPolicyTypesQueryParams = field(default=None)
-    headers: PostDescribeTerminationPolicyTypesHeaders = field(default=None)
+    headers: PostDescribeTerminationPolicyTypesHeaders = field()
+    query_params: PostDescribeTerminationPolicyTypesQueryParams = field()
     
 
 @dataclass
 class PostDescribeTerminationPolicyTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

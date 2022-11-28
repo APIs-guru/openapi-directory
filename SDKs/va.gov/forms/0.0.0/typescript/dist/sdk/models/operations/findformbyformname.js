@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FindFormByFormNamePathParams = /** @class */ (function (_super) {
     __extends(FindFormByFormNamePathParams, _super);
@@ -30,7 +30,7 @@ var FindFormByFormNamePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=form_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=form_name" }),
         __metadata("design:type", String)
     ], FindFormByFormNamePathParams.prototype, "formName", void 0);
     return FindFormByFormNamePathParams;
@@ -42,35 +42,19 @@ var FindFormByFormNameSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], FindFormByFormNameSecurity.prototype, "apikey", void 0);
     return FindFormByFormNameSecurity;
 }(SpeakeasyBase));
 export { FindFormByFormNameSecurity };
-var FindFormByFormNameRequest = /** @class */ (function (_super) {
-    __extends(FindFormByFormNameRequest, _super);
-    function FindFormByFormNameRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", FindFormByFormNamePathParams)
-    ], FindFormByFormNameRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", FindFormByFormNameSecurity)
-    ], FindFormByFormNameRequest.prototype, "security", void 0);
-    return FindFormByFormNameRequest;
-}(SpeakeasyBase));
-export { FindFormByFormNameRequest };
 var FindFormByFormName200ApplicationJson = /** @class */ (function (_super) {
     __extends(FindFormByFormName200ApplicationJson, _super);
     function FindFormByFormName200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Object)
     ], FindFormByFormName200ApplicationJson.prototype, "data", void 0);
     return FindFormByFormName200ApplicationJson;
@@ -82,39 +66,55 @@ var FindFormByFormName404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Array)
     ], FindFormByFormName404ApplicationJson.prototype, "errors", void 0);
     return FindFormByFormName404ApplicationJson;
 }(SpeakeasyBase));
 export { FindFormByFormName404ApplicationJson };
+var FindFormByFormNameRequest = /** @class */ (function (_super) {
+    __extends(FindFormByFormNameRequest, _super);
+    function FindFormByFormNameRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FindFormByFormNamePathParams)
+    ], FindFormByFormNameRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FindFormByFormNameSecurity)
+    ], FindFormByFormNameRequest.prototype, "security", void 0);
+    return FindFormByFormNameRequest;
+}(SpeakeasyBase));
+export { FindFormByFormNameRequest };
 var FindFormByFormNameResponse = /** @class */ (function (_super) {
     __extends(FindFormByFormNameResponse, _super);
     function FindFormByFormNameResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FindFormByFormNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FindFormByFormNameResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindFormByFormName200ApplicationJson)
     ], FindFormByFormNameResponse.prototype, "findFormByFormName200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindFormByFormNameResponse.prototype, "findFormByFormName401ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindFormByFormName404ApplicationJson)
     ], FindFormByFormNameResponse.prototype, "findFormByFormName404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindFormByFormNameResponse.prototype, "findFormByFormName429ApplicationJsonAny", void 0);
     return FindFormByFormNameResponse;

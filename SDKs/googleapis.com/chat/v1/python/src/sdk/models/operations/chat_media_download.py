@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChatMediaDownloadPathParams:
-    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +25,33 @@ class ChatMediaDownloadQueryParams:
     
 
 @dataclass
+class ChatMediaDownloadSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class ChatMediaDownloadSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class ChatMediaDownloadSecurity:
+    option1: Optional[ChatMediaDownloadSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[ChatMediaDownloadSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    
+
+@dataclass
 class ChatMediaDownloadRequest:
-    path_params: ChatMediaDownloadPathParams = field(default=None)
-    query_params: ChatMediaDownloadQueryParams = field(default=None)
+    path_params: ChatMediaDownloadPathParams = field()
+    query_params: ChatMediaDownloadQueryParams = field()
+    security: ChatMediaDownloadSecurity = field()
     
 
 @dataclass
 class ChatMediaDownloadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media: Optional[shared.Media] = field(default=None)
-    status_code: int = field(default=None)
     

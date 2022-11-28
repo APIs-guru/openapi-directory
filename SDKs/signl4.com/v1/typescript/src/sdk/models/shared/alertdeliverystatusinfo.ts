@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserDeliveryStatusInfo } from "./userdeliverystatusinfo";
 
 
+
 export class AlertDeliveryStatusInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 
-  @Metadata({ data: "json, name=users", elemType: shared.UserDeliveryStatusInfo })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: UserDeliveryStatusInfo })
   users?: UserDeliveryStatusInfo[];
 }

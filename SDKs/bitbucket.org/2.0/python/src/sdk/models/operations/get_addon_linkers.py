@@ -1,37 +1,23 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
-
-@dataclass
-class GetAddonLinkersSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetAddonLinkersSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetAddonLinkersSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
 
 @dataclass
 class GetAddonLinkersSecurity:
-    option1: Optional[GetAddonLinkersSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetAddonLinkersSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetAddonLinkersSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAddonLinkersRequest:
-    security: GetAddonLinkersSecurity = field(default=None)
+    security: GetAddonLinkersSecurity = field()
     
 
 @dataclass
 class GetAddonLinkersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     

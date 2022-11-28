@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromePolicyVersionsV1RemoveCertificateRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request object for removing a certificate.
 **/
 export class GoogleChromePolicyVersionsV1RemoveCertificateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkId" })
+  @SpeakeasyMetadata({ data: "json, name=networkId" })
   networkId?: string;
 
-  @Metadata({ data: "json, name=targetResource" })
+  @SpeakeasyMetadata({ data: "json, name=targetResource" })
   targetResource?: string;
 }

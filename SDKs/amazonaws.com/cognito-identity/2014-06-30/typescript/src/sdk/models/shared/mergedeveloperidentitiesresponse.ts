@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MergeDeveloperIdentitiesResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returned in response to a successful <code>MergeDeveloperIdentities</code> action.
 **/
 export class MergeDeveloperIdentitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityId" })
   identityId?: string;
 }

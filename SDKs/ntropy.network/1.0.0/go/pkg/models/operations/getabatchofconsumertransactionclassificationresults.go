@@ -4,10 +4,6 @@ type GetABatchOfConsumerTransactionClassificationResultsPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetABatchOfConsumerTransactionClassificationResultsRequest struct {
-	PathParams GetABatchOfConsumerTransactionClassificationResultsPathParams
-}
-
 type GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResultsContact struct {
 	Email *string `json:"email,omitempty"`
 	Phone *string `json:"phone,omitempty"`
@@ -45,6 +41,10 @@ type GetABatchOfConsumerTransactionClassificationResults200ApplicationJSON struc
 	Results   []GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONResults `json:"results,omitempty"`
 	Status    *string                                                                        `json:"status,omitempty"`
 	UpdatedAt *string                                                                        `json:"updated_at,omitempty"`
+}
+
+type GetABatchOfConsumerTransactionClassificationResultsRequest struct {
+	PathParams GetABatchOfConsumerTransactionClassificationResultsPathParams
 }
 
 type GetABatchOfConsumerTransactionClassificationResultsResponse struct {

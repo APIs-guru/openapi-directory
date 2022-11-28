@@ -15,13 +15,13 @@ type GetTagQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTag200ApplicationJSON struct {
+	Data *shared.TagResponse `json:"data,omitempty"`
+}
+
 type GetTagRequest struct {
 	PathParams  GetTagPathParams
 	QueryParams GetTagQueryParams
-}
-
-type GetTag200ApplicationJSON struct {
-	Data *shared.TagResponse `json:"data,omitempty"`
 }
 
 type GetTagResponse struct {

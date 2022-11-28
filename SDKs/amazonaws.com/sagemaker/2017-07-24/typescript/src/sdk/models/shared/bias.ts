@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricsSource } from "./metricssource";
+
 
 
 // Bias
@@ -7,6 +8,6 @@ import { MetricsSource } from "./metricssource";
  * Contains bias metrics for a model.
 **/
 export class Bias extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Report" })
+  @SpeakeasyMetadata({ data: "json, name=Report" })
   report?: MetricsSource;
 }

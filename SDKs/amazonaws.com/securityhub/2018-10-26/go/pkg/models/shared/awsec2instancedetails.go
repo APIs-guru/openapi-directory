@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2InstanceDetails
+// The details of an EC2 instance.
 type AwsEc2InstanceDetails struct {
 	IamInstanceProfileArn *string                                  `json:"IamInstanceProfileArn,omitempty"`
 	ImageID               *string                                  `json:"ImageId,omitempty"`

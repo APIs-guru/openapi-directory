@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Blueprint } from "./blueprint";
 
 
+
 export class BatchGetBlueprintsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Blueprints", elemType: shared.Blueprint })
+  @SpeakeasyMetadata({ data: "json, name=Blueprints", elemType: Blueprint })
   blueprints?: Blueprint[];
 
-  @Metadata({ data: "json, name=MissingBlueprints" })
+  @SpeakeasyMetadata({ data: "json, name=MissingBlueprints" })
   missingBlueprints?: string[];
 }

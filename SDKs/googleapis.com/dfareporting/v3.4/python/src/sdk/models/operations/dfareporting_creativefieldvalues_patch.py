@@ -1,22 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingCreativeFieldValuesPatchPathParams:
-    creative_field_id: str = field(default=None, metadata={'path_param': { 'field_name': 'creativeFieldId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    creative_field_id: str = field(metadata={'path_param': { 'field_name': 'creativeFieldId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DfareportingCreativeFieldValuesPatchQueryParams:
+    id: str = field(metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
-    id: str = field(default=None, metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
@@ -27,21 +28,21 @@ class DfareportingCreativeFieldValuesPatchQueryParams:
 
 @dataclass
 class DfareportingCreativeFieldValuesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingCreativeFieldValuesPatchRequest:
-    path_params: DfareportingCreativeFieldValuesPatchPathParams = field(default=None)
-    query_params: DfareportingCreativeFieldValuesPatchQueryParams = field(default=None)
+    path_params: DfareportingCreativeFieldValuesPatchPathParams = field()
+    query_params: DfareportingCreativeFieldValuesPatchQueryParams = field()
+    security: DfareportingCreativeFieldValuesPatchSecurity = field()
     request: Optional[shared.CreativeFieldValue] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingCreativeFieldValuesPatchSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingCreativeFieldValuesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_field_value: Optional[shared.CreativeFieldValue] = field(default=None)
-    status_code: int = field(default=None)
     

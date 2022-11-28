@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedScalingPolicy } from "./managedscalingpolicy";
 
 
+
 export class PutManagedScalingPolicyInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 
-  @Metadata({ data: "json, name=ManagedScalingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ManagedScalingPolicy" })
   managedScalingPolicy: ManagedScalingPolicy;
 }

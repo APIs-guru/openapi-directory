@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import crawledurl
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListCrawledUrlsResponse:
-    crawled_urls: Optional[List[crawledurl.CrawledURL]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'crawledUrls' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListCrawledUrlsResponse
+    Response for the `ListCrawledUrls` method.
+    """
+    
+    crawled_urls: Optional[List[CrawledURL]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('crawledUrls') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
 
+
 export enum MergeCellsRequestMergeTypeEnum {
-    MergeAll = "MERGE_ALL"
-,    MergeColumns = "MERGE_COLUMNS"
-,    MergeRows = "MERGE_ROWS"
+    MergeAll = "MERGE_ALL",
+    MergeColumns = "MERGE_COLUMNS",
+    MergeRows = "MERGE_ROWS"
 }
 
 
@@ -13,9 +14,9 @@ export enum MergeCellsRequestMergeTypeEnum {
  * Merges all cells in the range.
 **/
 export class MergeCellsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mergeType" })
+  @SpeakeasyMetadata({ data: "json, name=mergeType" })
   mergeType?: MergeCellsRequestMergeTypeEnum;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 }

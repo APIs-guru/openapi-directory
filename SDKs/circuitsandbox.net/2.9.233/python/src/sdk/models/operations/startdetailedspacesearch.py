@@ -1,8 +1,10 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 class StartDetailedSpaceSearchScopeEnum(str, Enum):
     ALL = "ALL"
@@ -16,29 +18,29 @@ class StartDetailedSpaceSearchScopeEnum(str, Enum):
 
 @dataclass
 class StartDetailedSpaceSearchQueryParams:
+    scope: StartDetailedSpaceSearchScopeEnum = field(metadata={'query_param': { 'field_name': 'scope', 'style': 'form', 'explode': True }})
+    search_term: str = field(metadata={'query_param': { 'field_name': 'searchTerm', 'style': 'form', 'explode': True }})
+    space_id: str = field(metadata={'query_param': { 'field_name': 'spaceId', 'style': 'form', 'explode': True }})
     end_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'endTime', 'style': 'form', 'explode': True }})
-    scope: StartDetailedSpaceSearchScopeEnum = field(default=None, metadata={'query_param': { 'field_name': 'scope', 'style': 'form', 'explode': True }})
     search_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'searchId', 'style': 'form', 'explode': True }})
-    search_term: str = field(default=None, metadata={'query_param': { 'field_name': 'searchTerm', 'style': 'form', 'explode': True }})
-    space_id: str = field(default=None, metadata={'query_param': { 'field_name': 'spaceId', 'style': 'form', 'explode': True }})
     start_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'startTime', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class StartDetailedSpaceSearchSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StartDetailedSpaceSearchRequest:
-    query_params: StartDetailedSpaceSearchQueryParams = field(default=None)
-    security: StartDetailedSpaceSearchSecurity = field(default=None)
+    query_params: StartDetailedSpaceSearchQueryParams = field()
+    security: StartDetailedSpaceSearchSecurity = field()
     
 
 @dataclass
 class StartDetailedSpaceSearchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     space_search_result_detailed_backs: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

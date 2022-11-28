@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Application
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an application in the application catalog.
 **/
 export class Application extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=IconURL" })
+  @SpeakeasyMetadata({ data: "json, name=IconURL" })
   iconUrl?: string;
 
-  @Metadata({ data: "json, name=LaunchParameters" })
+  @SpeakeasyMetadata({ data: "json, name=LaunchParameters" })
   launchParameters?: string;
 
-  @Metadata({ data: "json, name=LaunchPath" })
+  @SpeakeasyMetadata({ data: "json, name=LaunchPath" })
   launchPath?: string;
 
-  @Metadata({ data: "json, name=Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=Metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

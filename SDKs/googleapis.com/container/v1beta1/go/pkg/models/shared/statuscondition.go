@@ -34,6 +34,8 @@ const (
 	StatusConditionCodeEnumCaExpiring               StatusConditionCodeEnum = "CA_EXPIRING"
 )
 
+// StatusCondition
+// StatusCondition describes why a cluster or a node pool has a certain status (e.g., ERROR or DEGRADED).
 type StatusCondition struct {
 	CanonicalCode *StatusConditionCanonicalCodeEnum `json:"canonicalCode,omitempty"`
 	Code          *StatusConditionCodeEnum          `json:"code,omitempty"`

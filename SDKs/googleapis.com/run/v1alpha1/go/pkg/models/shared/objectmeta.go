@@ -1,5 +1,7 @@
 package shared
 
+// ObjectMeta
+// k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
 type ObjectMeta struct {
 	Annotations                map[string]string `json:"annotations,omitempty"`
 	ClusterName                *string           `json:"clusterName,omitempty"`

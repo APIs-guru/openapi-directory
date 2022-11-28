@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -40,11 +40,11 @@ class SearchCampaignDonorsQueryParams:
 
 @dataclass
 class SearchCampaignDonorsRequest:
-    query_params: SearchCampaignDonorsQueryParams = field(default=None)
+    query_params: SearchCampaignDonorsQueryParams = field()
     
 
 @dataclass
 class SearchCampaignDonorsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

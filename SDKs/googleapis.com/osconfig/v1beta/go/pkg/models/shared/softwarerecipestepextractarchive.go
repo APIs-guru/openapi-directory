@@ -12,6 +12,8 @@ const (
 	SoftwareRecipeStepExtractArchiveTypeEnumZip                    SoftwareRecipeStepExtractArchiveTypeEnum = "ZIP"
 )
 
+// SoftwareRecipeStepExtractArchive
+// Extracts an archive of the type specified in the specified directory.
 type SoftwareRecipeStepExtractArchive struct {
 	ArtifactID  *string                                   `json:"artifactId,omitempty"`
 	Destination *string                                   `json:"destination,omitempty"`

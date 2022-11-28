@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceTypeValuesEnum {
-    Volume = "VOLUME"
-,    Instance = "INSTANCE"
+    Volume = "VOLUME",
+    Instance = "INSTANCE"
 }

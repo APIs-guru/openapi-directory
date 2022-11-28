@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SampledHttpRequest } from "./sampledhttprequest";
 import { TimeWindow } from "./timewindow";
 
 
+
 export class GetSampledRequestsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PopulationSize" })
+  @SpeakeasyMetadata({ data: "json, name=PopulationSize" })
   populationSize?: number;
 
-  @Metadata({ data: "json, name=SampledRequests", elemType: shared.SampledHttpRequest })
+  @SpeakeasyMetadata({ data: "json, name=SampledRequests", elemType: SampledHttpRequest })
   sampledRequests?: SampledHttpRequest[];
 
-  @Metadata({ data: "json, name=TimeWindow" })
+  @SpeakeasyMetadata({ data: "json, name=TimeWindow" })
   timeWindow?: TimeWindow;
 }

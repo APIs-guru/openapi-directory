@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FirstHref } from "./firsthref";
 import { NextHref } from "./nexthref";
 import { PrevHref } from "./prevhref";

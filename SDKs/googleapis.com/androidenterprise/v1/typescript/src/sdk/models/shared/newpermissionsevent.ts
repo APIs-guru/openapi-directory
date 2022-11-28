@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NewPermissionsEvent
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An event generated when new permissions are added to an app.
 **/
 export class NewPermissionsEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvedPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=approvedPermissions" })
   approvedPermissions?: string[];
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=requestedPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=requestedPermissions" })
   requestedPermissions?: string[];
 }

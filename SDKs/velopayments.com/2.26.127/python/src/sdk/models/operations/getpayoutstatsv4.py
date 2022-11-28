@@ -10,14 +10,14 @@ class GetPayoutStatsV4QueryParams:
 
 @dataclass
 class GetPayoutStatsV4Request:
-    query_params: GetPayoutStatsV4QueryParams = field(default=None)
+    query_params: GetPayoutStatsV4QueryParams = field()
     
 
 @dataclass
 class GetPayoutStatsV4Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_payout_statistics: Optional[shared.GetPayoutStatistics] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

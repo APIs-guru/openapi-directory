@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationStatusEnum } from "./applicationstatusenum";
+
 
 
 // ApplicationState
@@ -7,12 +8,12 @@ import { ApplicationStatusEnum } from "./applicationstatusenum";
  * The state of an application discovered through Migration Hub import, the AWS Agentless Discovery Connector, or the AWS Application Discovery Agent.
 **/
 export class ApplicationState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId?: string;
 
-  @Metadata({ data: "json, name=ApplicationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationStatus" })
   applicationStatus?: ApplicationStatusEnum;
 
-  @Metadata({ data: "json, name=LastUpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTime" })
   lastUpdatedTime?: Date;
 }

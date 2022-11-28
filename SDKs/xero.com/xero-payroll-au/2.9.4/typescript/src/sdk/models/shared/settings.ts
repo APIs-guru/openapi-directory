@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Account } from "./account";
+
 
 
 // SettingsTrackingCategoriesEmployeeGroups
@@ -8,10 +8,10 @@ import { Account } from "./account";
  * The tracking category used for employees
 **/
 export class SettingsTrackingCategoriesEmployeeGroups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TrackingCategoryID" })
+  @SpeakeasyMetadata({ data: "json, name=TrackingCategoryID" })
   trackingCategoryId?: string;
 
-  @Metadata({ data: "json, name=TrackingCategoryName" })
+  @SpeakeasyMetadata({ data: "json, name=TrackingCategoryName" })
   trackingCategoryName?: string;
 }
 
@@ -21,10 +21,10 @@ export class SettingsTrackingCategoriesEmployeeGroups extends SpeakeasyBase {
  * The tracking category used for timesheets
 **/
 export class SettingsTrackingCategoriesTimesheetCategories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TrackingCategoryID" })
+  @SpeakeasyMetadata({ data: "json, name=TrackingCategoryID" })
   trackingCategoryId?: string;
 
-  @Metadata({ data: "json, name=TrackingCategoryName" })
+  @SpeakeasyMetadata({ data: "json, name=TrackingCategoryName" })
   trackingCategoryName?: string;
 }
 
@@ -34,21 +34,21 @@ export class SettingsTrackingCategoriesTimesheetCategories extends SpeakeasyBase
  * Tracking categories for Employees and Timesheets
 **/
 export class SettingsTrackingCategories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EmployeeGroups" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeGroups" })
   employeeGroups?: SettingsTrackingCategoriesEmployeeGroups;
 
-  @Metadata({ data: "json, name=TimesheetCategories" })
+  @SpeakeasyMetadata({ data: "json, name=TimesheetCategories" })
   timesheetCategories?: SettingsTrackingCategoriesTimesheetCategories;
 }
 
 
 export class Settings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Accounts", elemType: shared.Account })
+  @SpeakeasyMetadata({ data: "json, name=Accounts", elemType: Account })
   accounts?: Account[];
 
-  @Metadata({ data: "json, name=DaysInPayrollYear" })
+  @SpeakeasyMetadata({ data: "json, name=DaysInPayrollYear" })
   daysInPayrollYear?: number;
 
-  @Metadata({ data: "json, name=TrackingCategories" })
+  @SpeakeasyMetadata({ data: "json, name=TrackingCategories" })
   trackingCategories?: SettingsTrackingCategories;
 }

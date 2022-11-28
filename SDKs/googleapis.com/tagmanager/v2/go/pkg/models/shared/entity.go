@@ -10,6 +10,8 @@ const (
 	EntityChangeStatusEnumUpdated                 EntityChangeStatusEnum = "updated"
 )
 
+// Entity
+// A workspace entity that may represent a tag, trigger, variable, or folder in addition to its status in the workspace.
 type Entity struct {
 	ChangeStatus *EntityChangeStatusEnum `json:"changeStatus,omitempty"`
 	Client       *Client                 `json:"client,omitempty"`

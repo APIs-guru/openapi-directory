@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class DeleteLicenseePathParams:
-    licensee_number: str = field(default=None, metadata={'path_param': { 'field_name': 'licenseeNumber', 'style': 'simple', 'explode': False }})
+    licensee_number: str = field(metadata={'path_param': { 'field_name': 'licenseeNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,20 +15,20 @@ class DeleteLicenseeQueryParams:
 
 @dataclass
 class DeleteLicenseeSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class DeleteLicenseeRequest:
-    path_params: DeleteLicenseePathParams = field(default=None)
-    query_params: DeleteLicenseeQueryParams = field(default=None)
-    security: DeleteLicenseeSecurity = field(default=None)
+    path_params: DeleteLicenseePathParams = field()
+    query_params: DeleteLicenseeQueryParams = field()
+    security: DeleteLicenseeSecurity = field()
     
 
 @dataclass
 class DeleteLicenseeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensing: Optional[Any] = field(default=None)
     

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMessagesIdRelatedReceivedMessagesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetMessagesIdRelatedReceivedMessagesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class GetMessagesIdRelatedReceivedMessagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMessagesIdRelatedReceivedMessagesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetMessagesIdRelatedReceivedMessagesSecurity;
 }
 
 
 export class GetMessagesIdRelatedReceivedMessagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.Message })
+  @SpeakeasyMetadata({ elemType: shared.Message })
   messages?: shared.Message[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

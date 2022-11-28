@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TeamRobot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=robot_name" })
+  @SpeakeasyMetadata({ data: "json, name=robot_name" })
   robotName: string;
 
-  @Metadata({ data: "json, name=team_key" })
+  @SpeakeasyMetadata({ data: "json, name=team_key" })
   teamKey: string;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCloudFrontDistributionOriginGroupFailoverStatusCodes } from "./awscloudfrontdistributionorigingroupfailoverstatuscodes";
+
 
 
 // AwsCloudFrontDistributionOriginGroupFailover
@@ -7,6 +8,6 @@ import { AwsCloudFrontDistributionOriginGroupFailoverStatusCodes } from "./awscl
  * Provides information about when an origin group fails over.
 **/
 export class AwsCloudFrontDistributionOriginGroupFailover extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StatusCodes" })
+  @SpeakeasyMetadata({ data: "json, name=StatusCodes" })
   statusCodes?: AwsCloudFrontDistributionOriginGroupFailoverStatusCodes;
 }

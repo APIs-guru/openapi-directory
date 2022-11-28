@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionKey } from "./encryptionkey";
+
 
 
 // TerminologyProperties
@@ -7,33 +8,33 @@ import { EncryptionKey } from "./encryptionkey";
  * The properties of the custom terminology.
 **/
 export class TerminologyProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EncryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionKey" })
   encryptionKey?: EncryptionKey;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=SizeBytes" })
   sizeBytes?: number;
 
-  @Metadata({ data: "json, name=SourceLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=SourceLanguageCode" })
   sourceLanguageCode?: string;
 
-  @Metadata({ data: "json, name=TargetLanguageCodes" })
+  @SpeakeasyMetadata({ data: "json, name=TargetLanguageCodes" })
   targetLanguageCodes?: string[];
 
-  @Metadata({ data: "json, name=TermCount" })
+  @SpeakeasyMetadata({ data: "json, name=TermCount" })
   termCount?: number;
 }

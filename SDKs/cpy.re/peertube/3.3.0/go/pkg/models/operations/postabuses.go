@@ -30,17 +30,17 @@ type PostAbusesSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type PostAbusesRequest struct {
-	Request  PostAbusesRequestBody `request:"mediaType=application/json"`
-	Security PostAbusesSecurity
-}
-
 type PostAbuses200ApplicationJSONAbuse struct {
 	ID *int64 `json:"id,omitempty"`
 }
 
 type PostAbuses200ApplicationJSON struct {
 	Abuse *PostAbuses200ApplicationJSONAbuse `json:"abuse,omitempty"`
+}
+
+type PostAbusesRequest struct {
+	Request  PostAbusesRequestBody `request:"mediaType=application/json"`
+	Security PostAbusesSecurity
 }
 
 type PostAbusesResponse struct {

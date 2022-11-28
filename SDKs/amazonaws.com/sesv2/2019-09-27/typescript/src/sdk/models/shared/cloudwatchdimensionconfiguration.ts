@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValueSourceEnum } from "./dimensionvaluesourceenum";
+
 
 
 // CloudWatchDimensionConfiguration
@@ -7,12 +8,12 @@ import { DimensionValueSourceEnum } from "./dimensionvaluesourceenum";
  * An object that defines the dimension configuration to use when you send email events to Amazon CloudWatch.
 **/
 export class CloudWatchDimensionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultDimensionValue" })
   defaultDimensionValue: string;
 
-  @Metadata({ data: "json, name=DimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=DimensionName" })
   dimensionName: string;
 
-  @Metadata({ data: "json, name=DimensionValueSource" })
+  @SpeakeasyMetadata({ data: "json, name=DimensionValueSource" })
   dimensionValueSource: DimensionValueSourceEnum;
 }

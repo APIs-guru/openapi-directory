@@ -1,5 +1,7 @@
 package shared
 
+// GroupFindingsRequest
+// Request message for grouping by findings.
 type GroupFindingsRequest struct {
 	Filter    *string `json:"filter,omitempty"`
 	GroupBy   *string `json:"groupBy,omitempty"`

@@ -11,17 +11,23 @@ const (
 	ObWriteDomesticScheduledConsentResponse5DataAuthorisationAuthorisationTypeEnumSingle ObWriteDomesticScheduledConsentResponse5DataAuthorisationAuthorisationTypeEnum = "Single"
 )
 
+// ObWriteDomesticScheduledConsentResponse5DataAuthorisation
+// The authorisation type request from the TPP.
 type ObWriteDomesticScheduledConsentResponse5DataAuthorisation struct {
 	AuthorisationType  ObWriteDomesticScheduledConsentResponse5DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
 	CompletionDateTime *time.Time                                                                     `json:"CompletionDateTime,omitempty"`
 }
 
+// ObWriteDomesticScheduledConsentResponse5DataCharges
+// Set of elements used to provide details of a charge for the payment initiation.
 type ObWriteDomesticScheduledConsentResponse5DataCharges struct {
 	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
 	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
 	Type         string                              `json:"Type"`
 }
 
+// ObWriteDomesticScheduledConsentResponse5DataInitiationCreditorAccount
+// Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.
 type ObWriteDomesticScheduledConsentResponse5DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -29,6 +35,8 @@ type ObWriteDomesticScheduledConsentResponse5DataInitiationCreditorAccount struc
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticScheduledConsentResponse5DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteDomesticScheduledConsentResponse5DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -36,16 +44,23 @@ type ObWriteDomesticScheduledConsentResponse5DataInitiationDebtorAccount struct 
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticScheduledConsentResponse5DataInitiationInstructedAmount
+// Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
+// Usage: This amount has to be transported unchanged through the transaction chain.
 type ObWriteDomesticScheduledConsentResponse5DataInitiationInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticScheduledConsentResponse5DataInitiationRemittanceInformation
+// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 type ObWriteDomesticScheduledConsentResponse5DataInitiationRemittanceInformation struct {
 	Reference    *string `json:"Reference,omitempty"`
 	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
+// ObWriteDomesticScheduledConsentResponse5DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a single scheduled domestic payment.
 type ObWriteDomesticScheduledConsentResponse5DataInitiation struct {
 	CreditorAccount            ObWriteDomesticScheduledConsentResponse5DataInitiationCreditorAccount        `json:"CreditorAccount"`
 	CreditorPostalAddress      *ObPostalAddress6                                                            `json:"CreditorPostalAddress,omitempty"`

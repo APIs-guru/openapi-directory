@@ -8,16 +8,14 @@ type UpdateParameterPathParams struct {
 	ParameterID string `pathParam:"style=simple,explode=false,name=parameterId"`
 }
 
-type UpdateParameterRequest struct {
-	PathParams UpdateParameterPathParams
-}
-
 type UpdateParameter200ApplicationJSONActionEnum string
 
 const (
 	UpdateParameter200ApplicationJSONActionEnumUpdateParameter UpdateParameter200ApplicationJSONActionEnum = "updateParameter"
 )
 
+// UpdateParameter200ApplicationJSONData
+// Parameters
 type UpdateParameter200ApplicationJSONData struct {
 	Parameters []shared.Parameter `json:"parameters"`
 }
@@ -34,6 +32,10 @@ type UpdateParameter200ApplicationJSON struct {
 	Data   UpdateParameter200ApplicationJSONData       `json:"data"`
 	ID     string                                      `json:"id"`
 	Result UpdateParameter200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateParameterRequest struct {
+	PathParams UpdateParameterPathParams
 }
 
 type UpdateParameterResponse struct {

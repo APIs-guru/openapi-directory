@@ -1,15 +1,21 @@
 package shared
 
+// PortfolioMetadataConnectionsVideos
+// Information about the videos contained within this portfolio.
 type PortfolioMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// PortfolioMetadataConnections
+// A list of resource URIs related to the album.
 type PortfolioMetadataConnections struct {
 	Videos PortfolioMetadataConnectionsVideos `json:"videos"`
 }
 
+// PortfolioMetadata
+// Metadata about the album.
 type PortfolioMetadata struct {
 	Connections PortfolioMetadataConnections `json:"connections"`
 }

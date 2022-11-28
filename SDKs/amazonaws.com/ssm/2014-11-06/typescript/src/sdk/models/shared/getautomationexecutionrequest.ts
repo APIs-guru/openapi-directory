@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAutomationExecutionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomationExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=AutomationExecutionId" })
   automationExecutionId: string;
 }

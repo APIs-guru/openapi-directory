@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MnrgaRequestBodyCertificateParameters extends SpeakeasyBase {
     udf1: string;
@@ -15,10 +15,6 @@ export declare class MnrgaRequestBody extends SpeakeasyBase {
 export declare class MnrgaSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MnrgaRequest extends SpeakeasyBase {
-    request?: MnrgaRequestBody;
-    security: MnrgaSecurity;
 }
 export declare enum Mnrga400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Mnrga504ApplicationJsonErrorDescriptionEnum {
 export declare class Mnrga504ApplicationJson extends SpeakeasyBase {
     error?: Mnrga504ApplicationJsonErrorEnum;
     errorDescription?: Mnrga504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MnrgaRequest extends SpeakeasyBase {
+    request?: MnrgaRequestBody;
+    security: MnrgaSecurity;
 }
 export declare class MnrgaResponse extends SpeakeasyBase {
     contentType: string;

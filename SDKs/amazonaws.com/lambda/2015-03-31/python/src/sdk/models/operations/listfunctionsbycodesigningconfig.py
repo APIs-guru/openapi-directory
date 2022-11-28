@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListFunctionsByCodeSigningConfigPathParams:
-    code_signing_config_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
+    code_signing_config_arn: str = field(metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class ListFunctionsByCodeSigningConfigHeaders:
 
 @dataclass
 class ListFunctionsByCodeSigningConfigRequest:
-    path_params: ListFunctionsByCodeSigningConfigPathParams = field(default=None)
-    query_params: ListFunctionsByCodeSigningConfigQueryParams = field(default=None)
-    headers: ListFunctionsByCodeSigningConfigHeaders = field(default=None)
+    headers: ListFunctionsByCodeSigningConfigHeaders = field()
+    path_params: ListFunctionsByCodeSigningConfigPathParams = field()
+    query_params: ListFunctionsByCodeSigningConfigQueryParams = field()
     
 
 @dataclass
 class ListFunctionsByCodeSigningConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_functions_by_code_signing_config_response: Optional[shared.ListFunctionsByCodeSigningConfigResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

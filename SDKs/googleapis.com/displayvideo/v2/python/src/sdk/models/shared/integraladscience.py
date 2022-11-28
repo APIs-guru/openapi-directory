@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class IntegralAdScienceDisplayViewabilityEnum(str, Enum):
     PERFORMANCE_VIEWABILITY_UNSPECIFIED = "PERFORMANCE_VIEWABILITY_UNSPECIFIED"
@@ -75,18 +77,22 @@ class IntegralAdScienceVideoViewabilityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class IntegralAdScience:
-    custom_segment_id: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customSegmentId' }})
-    display_viewability: Optional[IntegralAdScienceDisplayViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayViewability' }})
-    exclude_unrateable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludeUnrateable' }})
-    excluded_ad_fraud_risk: Optional[IntegralAdScienceExcludedAdFraudRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedAdFraudRisk' }})
-    excluded_adult_risk: Optional[IntegralAdScienceExcludedAdultRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedAdultRisk' }})
-    excluded_alcohol_risk: Optional[IntegralAdScienceExcludedAlcoholRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedAlcoholRisk' }})
-    excluded_drugs_risk: Optional[IntegralAdScienceExcludedDrugsRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedDrugsRisk' }})
-    excluded_gambling_risk: Optional[IntegralAdScienceExcludedGamblingRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedGamblingRisk' }})
-    excluded_hate_speech_risk: Optional[IntegralAdScienceExcludedHateSpeechRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedHateSpeechRisk' }})
-    excluded_illegal_downloads_risk: Optional[IntegralAdScienceExcludedIllegalDownloadsRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedIllegalDownloadsRisk' }})
-    excluded_offensive_language_risk: Optional[IntegralAdScienceExcludedOffensiveLanguageRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedOffensiveLanguageRisk' }})
-    excluded_violence_risk: Optional[IntegralAdScienceExcludedViolenceRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedViolenceRisk' }})
-    traq_score_option: Optional[IntegralAdScienceTraqScoreOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'traqScoreOption' }})
-    video_viewability: Optional[IntegralAdScienceVideoViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoViewability' }})
+    r"""IntegralAdScience
+    Details of Integral Ad Science settings.
+    """
+    
+    custom_segment_id: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customSegmentId') }})
+    display_viewability: Optional[IntegralAdScienceDisplayViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayViewability') }})
+    exclude_unrateable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeUnrateable') }})
+    excluded_ad_fraud_risk: Optional[IntegralAdScienceExcludedAdFraudRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedAdFraudRisk') }})
+    excluded_adult_risk: Optional[IntegralAdScienceExcludedAdultRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedAdultRisk') }})
+    excluded_alcohol_risk: Optional[IntegralAdScienceExcludedAlcoholRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedAlcoholRisk') }})
+    excluded_drugs_risk: Optional[IntegralAdScienceExcludedDrugsRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedDrugsRisk') }})
+    excluded_gambling_risk: Optional[IntegralAdScienceExcludedGamblingRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedGamblingRisk') }})
+    excluded_hate_speech_risk: Optional[IntegralAdScienceExcludedHateSpeechRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedHateSpeechRisk') }})
+    excluded_illegal_downloads_risk: Optional[IntegralAdScienceExcludedIllegalDownloadsRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedIllegalDownloadsRisk') }})
+    excluded_offensive_language_risk: Optional[IntegralAdScienceExcludedOffensiveLanguageRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedOffensiveLanguageRisk') }})
+    excluded_violence_risk: Optional[IntegralAdScienceExcludedViolenceRiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedViolenceRisk') }})
+    traq_score_option: Optional[IntegralAdScienceTraqScoreOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('traqScoreOption') }})
+    video_viewability: Optional[IntegralAdScienceVideoViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoViewability') }})
     

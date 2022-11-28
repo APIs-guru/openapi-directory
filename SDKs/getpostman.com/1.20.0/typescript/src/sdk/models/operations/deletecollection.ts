@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteCollectionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collection_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collection_uid" })
   collectionUid: string;
 }
 
 
-export class DeleteCollectionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteCollectionPathParams;
-}
-
-
 export class DeleteCollection200ApplicationJsonCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class DeleteCollection200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: DeleteCollection200ApplicationJsonCollection;
 }
 
 
 export class DeleteCollection404ApplicationJsonErrorDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: string;
 }
 
 
 export class DeleteCollection404ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: DeleteCollection404ApplicationJsonErrorDetails;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class DeleteCollection404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: DeleteCollection404ApplicationJsonError;
 }
 
 
+export class DeleteCollectionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteCollectionPathParams;
+}
+
+
 export class DeleteCollectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCollection200ApplicationJsonObject?: DeleteCollection200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteCollection404ApplicationJsonObject?: DeleteCollection404ApplicationJson;
 }

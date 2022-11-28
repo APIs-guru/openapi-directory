@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchScriptPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scriptId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scriptId" })
   scriptId: string;
 }
 
 
 export class PatchScriptSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class PatchScriptRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchScriptPathParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.Patch })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Patch })
   request?: shared.Patch[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PatchScriptSecurity;
 }
 
 
 export class PatchScriptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   script?: shared.Script;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

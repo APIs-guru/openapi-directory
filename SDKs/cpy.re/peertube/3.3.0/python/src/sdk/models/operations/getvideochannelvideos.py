@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVideoChannelVideosPathParams:
-    channel_handle: str = field(default=None, metadata={'path_param': { 'field_name': 'channelHandle', 'style': 'simple', 'explode': False }})
+    channel_handle: str = field(metadata={'path_param': { 'field_name': 'channelHandle', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,13 +27,13 @@ class GetVideoChannelVideosQueryParams:
 
 @dataclass
 class GetVideoChannelVideosRequest:
-    path_params: GetVideoChannelVideosPathParams = field(default=None)
-    query_params: GetVideoChannelVideosQueryParams = field(default=None)
+    path_params: GetVideoChannelVideosPathParams = field()
+    query_params: GetVideoChannelVideosQueryParams = field()
     
 
 @dataclass
 class GetVideoChannelVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_list_response: Optional[Any] = field(default=None)
     

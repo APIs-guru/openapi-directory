@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LiveChatFanFundingEventDetails } from "./livechatfanfundingeventdetails";
 import { LiveChatGiftMembershipReceivedDetails } from "./livechatgiftmembershipreceiveddetails";
 import { LiveChatMemberMilestoneChatDetails } from "./livechatmembermilestonechatdetails";
@@ -11,23 +11,24 @@ import { LiveChatSuperStickerDetails } from "./livechatsuperstickerdetails";
 import { LiveChatTextMessageDetails } from "./livechattextmessagedetails";
 import { LiveChatUserBannedMessageDetails } from "./livechatuserbannedmessagedetails";
 
+
 export enum LiveChatMessageSnippetTypeEnum {
-    InvalidType = "invalidType"
-,    TextMessageEvent = "textMessageEvent"
-,    Tombstone = "tombstone"
-,    FanFundingEvent = "fanFundingEvent"
-,    ChatEndedEvent = "chatEndedEvent"
-,    SponsorOnlyModeStartedEvent = "sponsorOnlyModeStartedEvent"
-,    SponsorOnlyModeEndedEvent = "sponsorOnlyModeEndedEvent"
-,    NewSponsorEvent = "newSponsorEvent"
-,    MemberMilestoneChatEvent = "memberMilestoneChatEvent"
-,    MembershipGiftingEvent = "membershipGiftingEvent"
-,    GiftMembershipReceivedEvent = "giftMembershipReceivedEvent"
-,    MessageDeletedEvent = "messageDeletedEvent"
-,    MessageRetractedEvent = "messageRetractedEvent"
-,    UserBannedEvent = "userBannedEvent"
-,    SuperChatEvent = "superChatEvent"
-,    SuperStickerEvent = "superStickerEvent"
+    InvalidType = "invalidType",
+    TextMessageEvent = "textMessageEvent",
+    Tombstone = "tombstone",
+    FanFundingEvent = "fanFundingEvent",
+    ChatEndedEvent = "chatEndedEvent",
+    SponsorOnlyModeStartedEvent = "sponsorOnlyModeStartedEvent",
+    SponsorOnlyModeEndedEvent = "sponsorOnlyModeEndedEvent",
+    NewSponsorEvent = "newSponsorEvent",
+    MemberMilestoneChatEvent = "memberMilestoneChatEvent",
+    MembershipGiftingEvent = "membershipGiftingEvent",
+    GiftMembershipReceivedEvent = "giftMembershipReceivedEvent",
+    MessageDeletedEvent = "messageDeletedEvent",
+    MessageRetractedEvent = "messageRetractedEvent",
+    UserBannedEvent = "userBannedEvent",
+    SuperChatEvent = "superChatEvent",
+    SuperStickerEvent = "superStickerEvent"
 }
 
 
@@ -36,54 +37,54 @@ export enum LiveChatMessageSnippetTypeEnum {
  * Next ID: 33
 **/
 export class LiveChatMessageSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=authorChannelId" })
   authorChannelId?: string;
 
-  @Metadata({ data: "json, name=displayMessage" })
+  @SpeakeasyMetadata({ data: "json, name=displayMessage" })
   displayMessage?: string;
 
-  @Metadata({ data: "json, name=fanFundingEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=fanFundingEventDetails" })
   fanFundingEventDetails?: LiveChatFanFundingEventDetails;
 
-  @Metadata({ data: "json, name=giftMembershipReceivedDetails" })
+  @SpeakeasyMetadata({ data: "json, name=giftMembershipReceivedDetails" })
   giftMembershipReceivedDetails?: LiveChatGiftMembershipReceivedDetails;
 
-  @Metadata({ data: "json, name=hasDisplayContent" })
+  @SpeakeasyMetadata({ data: "json, name=hasDisplayContent" })
   hasDisplayContent?: boolean;
 
-  @Metadata({ data: "json, name=liveChatId" })
+  @SpeakeasyMetadata({ data: "json, name=liveChatId" })
   liveChatId?: string;
 
-  @Metadata({ data: "json, name=memberMilestoneChatDetails" })
+  @SpeakeasyMetadata({ data: "json, name=memberMilestoneChatDetails" })
   memberMilestoneChatDetails?: LiveChatMemberMilestoneChatDetails;
 
-  @Metadata({ data: "json, name=membershipGiftingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=membershipGiftingDetails" })
   membershipGiftingDetails?: LiveChatMembershipGiftingDetails;
 
-  @Metadata({ data: "json, name=messageDeletedDetails" })
+  @SpeakeasyMetadata({ data: "json, name=messageDeletedDetails" })
   messageDeletedDetails?: LiveChatMessageDeletedDetails;
 
-  @Metadata({ data: "json, name=messageRetractedDetails" })
+  @SpeakeasyMetadata({ data: "json, name=messageRetractedDetails" })
   messageRetractedDetails?: LiveChatMessageRetractedDetails;
 
-  @Metadata({ data: "json, name=newSponsorDetails" })
+  @SpeakeasyMetadata({ data: "json, name=newSponsorDetails" })
   newSponsorDetails?: LiveChatNewSponsorDetails;
 
-  @Metadata({ data: "json, name=publishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=publishedAt" })
   publishedAt?: Date;
 
-  @Metadata({ data: "json, name=superChatDetails" })
+  @SpeakeasyMetadata({ data: "json, name=superChatDetails" })
   superChatDetails?: LiveChatSuperChatDetails;
 
-  @Metadata({ data: "json, name=superStickerDetails" })
+  @SpeakeasyMetadata({ data: "json, name=superStickerDetails" })
   superStickerDetails?: LiveChatSuperStickerDetails;
 
-  @Metadata({ data: "json, name=textMessageDetails" })
+  @SpeakeasyMetadata({ data: "json, name=textMessageDetails" })
   textMessageDetails?: LiveChatTextMessageDetails;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: LiveChatMessageSnippetTypeEnum;
 
-  @Metadata({ data: "json, name=userBannedDetails" })
+  @SpeakeasyMetadata({ data: "json, name=userBannedDetails" })
   userBannedDetails?: LiveChatUserBannedMessageDetails;
 }

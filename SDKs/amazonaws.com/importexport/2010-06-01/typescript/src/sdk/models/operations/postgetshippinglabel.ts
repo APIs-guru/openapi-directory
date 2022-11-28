@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PostGetShippingLabelActionEnum {
     GetShippingLabel = "GetShippingLabel"
@@ -14,48 +15,48 @@ export enum PostGetShippingLabelVersionEnum {
 
 
 export class PostGetShippingLabelQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
   awsAccessKeyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: PostGetShippingLabelActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Operation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Operation" })
   operation: PostGetShippingLabelOperationEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" })
   signature: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
   signatureMethod: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
   signatureVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
   timestamp: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: PostGetShippingLabelVersionEnum;
 }
 
 
 export class PostGetShippingLabelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostGetShippingLabelQueryParams;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   request?: Uint8Array;
 }
 
 
 export class PostGetShippingLabelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

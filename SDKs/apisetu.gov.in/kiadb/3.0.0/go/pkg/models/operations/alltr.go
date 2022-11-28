@@ -29,11 +29,6 @@ type AlltrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type AlltrRequest struct {
-	Request  *AlltrRequestBody `request:"mediaType=application/json"`
-	Security AlltrSecurity
-}
-
 type Alltr400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Alltr504ApplicationJSON struct {
 	Error            *Alltr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Alltr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type AlltrRequest struct {
+	Request  *AlltrRequestBody `request:"mediaType=application/json"`
+	Security AlltrSecurity
 }
 
 type AlltrResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactTypeEnum } from "./artifacttypeenum";
 import { MavenReference } from "./mavenreference";
 import { S3ContentLocation } from "./s3contentlocation";

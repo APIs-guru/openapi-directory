@@ -9,10 +9,6 @@ type CopyTemplateQueryParams struct {
 	TemplateID int64   `queryParam:"style=form,explode=true,name=templateId"`
 }
 
-type CopyTemplateRequest struct {
-	QueryParams CopyTemplateQueryParams
-}
-
 type CopyTemplate200ApplicationJSON struct {
 	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
@@ -78,6 +74,10 @@ type CopyTemplate422ApplicationJSON struct {
 type CopyTemplate500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type CopyTemplateRequest struct {
+	QueryParams CopyTemplateQueryParams
 }
 
 type CopyTemplateResponse struct {

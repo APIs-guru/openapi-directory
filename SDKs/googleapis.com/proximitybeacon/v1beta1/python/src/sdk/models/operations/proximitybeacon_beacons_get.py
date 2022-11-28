@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProximitybeaconBeaconsGetPathParams:
-    beacon_name: str = field(default=None, metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
+    beacon_name: str = field(metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ProximitybeaconBeaconsGetQueryParams:
 
 @dataclass
 class ProximitybeaconBeaconsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProximitybeaconBeaconsGetRequest:
-    path_params: ProximitybeaconBeaconsGetPathParams = field(default=None)
-    query_params: ProximitybeaconBeaconsGetQueryParams = field(default=None)
-    security: ProximitybeaconBeaconsGetSecurity = field(default=None)
+    path_params: ProximitybeaconBeaconsGetPathParams = field()
+    query_params: ProximitybeaconBeaconsGetQueryParams = field()
+    security: ProximitybeaconBeaconsGetSecurity = field()
     
 
 @dataclass
 class ProximitybeaconBeaconsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     beacon: Optional[shared.Beacon] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

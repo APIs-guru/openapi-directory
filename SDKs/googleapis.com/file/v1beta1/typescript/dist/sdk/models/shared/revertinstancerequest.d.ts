@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * RevertInstanceRequest reverts the given instance's file share to the specified snapshot.
 **/

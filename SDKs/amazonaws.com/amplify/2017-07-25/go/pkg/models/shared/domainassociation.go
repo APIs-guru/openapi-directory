@@ -1,5 +1,8 @@
 package shared
 
+// DomainAssociation
+//
+//	Describes a domain association that associates a custom domain with an Amplify app.
 type DomainAssociation struct {
 	AutoSubDomainCreationPatterns    []string         `json:"autoSubDomainCreationPatterns,omitempty"`
 	AutoSubDomainIamRole             *string          `json:"autoSubDomainIAMRole,omitempty"`

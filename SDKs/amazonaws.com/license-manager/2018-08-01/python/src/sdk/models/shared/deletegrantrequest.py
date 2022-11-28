@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DeleteGrantRequest:
-    grant_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GrantArn' }})
-    status_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusReason' }})
-    version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Version' }})
+    grant_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GrantArn') }})
+    version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Version') }})
+    status_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusReason') }})
     

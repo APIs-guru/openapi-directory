@@ -19,6 +19,45 @@ const (
 	GoogleCloudRetailV2betaProductTypeEnumCollection      GoogleCloudRetailV2betaProductTypeEnum = "COLLECTION"
 )
 
+// GoogleCloudRetailV2betaProductInput
+// Product captures all metadata information of items to be recommended or searched.
+type GoogleCloudRetailV2betaProductInput struct {
+	Attributes          map[string]GoogleCloudRetailV2betaCustomAttribute `json:"attributes,omitempty"`
+	Audience            *GoogleCloudRetailV2betaAudience                  `json:"audience,omitempty"`
+	Availability        *GoogleCloudRetailV2betaProductAvailabilityEnum   `json:"availability,omitempty"`
+	AvailableQuantity   *int32                                            `json:"availableQuantity,omitempty"`
+	AvailableTime       *string                                           `json:"availableTime,omitempty"`
+	Brands              []string                                          `json:"brands,omitempty"`
+	Categories          []string                                          `json:"categories,omitempty"`
+	CollectionMemberIds []string                                          `json:"collectionMemberIds,omitempty"`
+	ColorInfo           *GoogleCloudRetailV2betaColorInfo                 `json:"colorInfo,omitempty"`
+	Conditions          []string                                          `json:"conditions,omitempty"`
+	Description         *string                                           `json:"description,omitempty"`
+	ExpireTime          *string                                           `json:"expireTime,omitempty"`
+	FulfillmentInfo     []GoogleCloudRetailV2betaFulfillmentInfo          `json:"fulfillmentInfo,omitempty"`
+	Gtin                *string                                           `json:"gtin,omitempty"`
+	ID                  *string                                           `json:"id,omitempty"`
+	Images              []GoogleCloudRetailV2betaImage                    `json:"images,omitempty"`
+	LanguageCode        *string                                           `json:"languageCode,omitempty"`
+	Materials           []string                                          `json:"materials,omitempty"`
+	Name                *string                                           `json:"name,omitempty"`
+	Patterns            []string                                          `json:"patterns,omitempty"`
+	PriceInfo           *GoogleCloudRetailV2betaPriceInfo                 `json:"priceInfo,omitempty"`
+	PrimaryProductID    *string                                           `json:"primaryProductId,omitempty"`
+	Promotions          []GoogleCloudRetailV2betaPromotion                `json:"promotions,omitempty"`
+	PublishTime         *string                                           `json:"publishTime,omitempty"`
+	Rating              *GoogleCloudRetailV2betaRating                    `json:"rating,omitempty"`
+	RetrievableFields   *string                                           `json:"retrievableFields,omitempty"`
+	Sizes               []string                                          `json:"sizes,omitempty"`
+	Tags                []string                                          `json:"tags,omitempty"`
+	Title               *string                                           `json:"title,omitempty"`
+	TTL                 *string                                           `json:"ttl,omitempty"`
+	Type                *GoogleCloudRetailV2betaProductTypeEnum           `json:"type,omitempty"`
+	URI                 *string                                           `json:"uri,omitempty"`
+}
+
+// GoogleCloudRetailV2betaProduct
+// Product captures all metadata information of items to be recommended or searched.
 type GoogleCloudRetailV2betaProduct struct {
 	Attributes          map[string]GoogleCloudRetailV2betaCustomAttribute `json:"attributes,omitempty"`
 	Audience            *GoogleCloudRetailV2betaAudience                  `json:"audience,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatalabelingProjectsOperationsCancelPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DatalabelingProjectsOperationsCancelQueryParams:
 
 @dataclass
 class DatalabelingProjectsOperationsCancelSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatalabelingProjectsOperationsCancelRequest:
-    path_params: DatalabelingProjectsOperationsCancelPathParams = field(default=None)
-    query_params: DatalabelingProjectsOperationsCancelQueryParams = field(default=None)
-    security: DatalabelingProjectsOperationsCancelSecurity = field(default=None)
+    path_params: DatalabelingProjectsOperationsCancelPathParams = field()
+    query_params: DatalabelingProjectsOperationsCancelQueryParams = field()
+    security: DatalabelingProjectsOperationsCancelSecurity = field()
     
 
 @dataclass
 class DatalabelingProjectsOperationsCancelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

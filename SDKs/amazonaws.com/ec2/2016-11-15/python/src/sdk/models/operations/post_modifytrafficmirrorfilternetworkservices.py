@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyTrafficMirrorFilterNetworkServicesActionEnum(str, Enum):
     MODIFY_TRAFFIC_MIRROR_FILTER_NETWORK_SERVICES = "ModifyTrafficMirrorFilterNetworkServices"
@@ -10,8 +14,8 @@ class PostModifyTrafficMirrorFilterNetworkServicesVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyTrafficMirrorFilterNetworkServicesQueryParams:
-    action: PostModifyTrafficMirrorFilterNetworkServicesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyTrafficMirrorFilterNetworkServicesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyTrafficMirrorFilterNetworkServicesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyTrafficMirrorFilterNetworkServicesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyTrafficMirrorFilterNetworkServicesHeaders:
 
 @dataclass
 class PostModifyTrafficMirrorFilterNetworkServicesRequest:
-    query_params: PostModifyTrafficMirrorFilterNetworkServicesQueryParams = field(default=None)
-    headers: PostModifyTrafficMirrorFilterNetworkServicesHeaders = field(default=None)
+    headers: PostModifyTrafficMirrorFilterNetworkServicesHeaders = field()
+    query_params: PostModifyTrafficMirrorFilterNetworkServicesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyTrafficMirrorFilterNetworkServicesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

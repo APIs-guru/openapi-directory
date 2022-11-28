@@ -1,51 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingSessionStateEnum } from "./streamingsessionstateenum";
 import { StreamingSessionStatusCodeEnum } from "./streamingsessionstatuscodeenum";
 
 
+
 export class StreamingSession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=ec2InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=ec2InstanceType" })
   ec2InstanceType?: string;
 
-  @Metadata({ data: "json, name=launchProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=launchProfileId" })
   launchProfileId?: string;
 
-  @Metadata({ data: "json, name=ownedBy" })
+  @SpeakeasyMetadata({ data: "json, name=ownedBy" })
   ownedBy?: string;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: StreamingSessionStateEnum;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: StreamingSessionStatusCodeEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=streamingImageId" })
+  @SpeakeasyMetadata({ data: "json, name=streamingImageId" })
   streamingImageId?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=terminateAt" })
+  @SpeakeasyMetadata({ data: "json, name=terminateAt" })
   terminateAt?: Date;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=updatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=updatedBy" })
   updatedBy?: string;
 }

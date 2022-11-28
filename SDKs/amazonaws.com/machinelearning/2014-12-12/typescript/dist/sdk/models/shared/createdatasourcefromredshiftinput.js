@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RedshiftDataSpec } from "./redshiftdataspec";
 var CreateDataSourceFromRedshiftInput = /** @class */ (function (_super) {
     __extends(CreateDataSourceFromRedshiftInput, _super);
@@ -30,23 +30,23 @@ var CreateDataSourceFromRedshiftInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComputeStatistics" }),
+        SpeakeasyMetadata({ data: "json, name=ComputeStatistics" }),
         __metadata("design:type", Boolean)
     ], CreateDataSourceFromRedshiftInput.prototype, "computeStatistics", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSourceId" }),
+        SpeakeasyMetadata({ data: "json, name=DataSourceId" }),
         __metadata("design:type", String)
     ], CreateDataSourceFromRedshiftInput.prototype, "dataSourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSourceName" }),
+        SpeakeasyMetadata({ data: "json, name=DataSourceName" }),
         __metadata("design:type", String)
     ], CreateDataSourceFromRedshiftInput.prototype, "dataSourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSpec" }),
+        SpeakeasyMetadata({ data: "json, name=DataSpec" }),
         __metadata("design:type", RedshiftDataSpec)
     ], CreateDataSourceFromRedshiftInput.prototype, "dataSpec", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleARN" }),
+        SpeakeasyMetadata({ data: "json, name=RoleARN" }),
         __metadata("design:type", String)
     ], CreateDataSourceFromRedshiftInput.prototype, "roleArn", void 0);
     return CreateDataSourceFromRedshiftInput;

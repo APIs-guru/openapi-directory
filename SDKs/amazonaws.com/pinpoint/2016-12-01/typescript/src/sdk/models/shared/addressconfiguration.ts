@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelTypeEnum } from "./channeltypeenum";
+
 
 
 // AddressConfiguration
@@ -7,21 +8,21 @@ import { ChannelTypeEnum } from "./channeltypeenum";
  * Specifies address-based configuration settings for a message that's sent directly to an endpoint.
 **/
 export class AddressConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BodyOverride" })
+  @SpeakeasyMetadata({ data: "json, name=BodyOverride" })
   bodyOverride?: string;
 
-  @Metadata({ data: "json, name=ChannelType" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelType" })
   channelType?: ChannelTypeEnum;
 
-  @Metadata({ data: "json, name=Context" })
+  @SpeakeasyMetadata({ data: "json, name=Context" })
   context?: Map<string, string>;
 
-  @Metadata({ data: "json, name=RawContent" })
+  @SpeakeasyMetadata({ data: "json, name=RawContent" })
   rawContent?: string;
 
-  @Metadata({ data: "json, name=Substitutions" })
+  @SpeakeasyMetadata({ data: "json, name=Substitutions" })
   substitutions?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=TitleOverride" })
+  @SpeakeasyMetadata({ data: "json, name=TitleOverride" })
   titleOverride?: string;
 }

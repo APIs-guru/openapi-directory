@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetMessagesSendQueryParams = /** @class */ (function (_super) {
     __extends(GetMessagesSendQueryParams, _super);
@@ -30,15 +30,15 @@ var GetMessagesSendQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=body" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=body" }),
         __metadata("design:type", String)
     ], GetMessagesSendQueryParams.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=deduplication-id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deduplication-id" }),
         __metadata("design:type", Number)
     ], GetMessagesSendQueryParams.prototype, "deduplicationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" }),
         __metadata("design:type", String)
     ], GetMessagesSendQueryParams.prototype, "to", void 0);
     return GetMessagesSendQueryParams;
@@ -50,7 +50,7 @@ var GetMessagesSendSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], GetMessagesSendSecurity.prototype, "basicAuth", void 0);
     return GetMessagesSendSecurity;
@@ -62,11 +62,11 @@ var GetMessagesSendRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMessagesSendQueryParams)
     ], GetMessagesSendRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMessagesSendSecurity)
     ], GetMessagesSendRequest.prototype, "security", void 0);
     return GetMessagesSendRequest;
@@ -78,19 +78,19 @@ var GetMessagesSendResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMessagesSendResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetMessagesSendResponse.prototype, "error", void 0);
     __decorate([
-        Metadata({ elemType: shared.Message }),
+        SpeakeasyMetadata({ elemType: shared.Message }),
         __metadata("design:type", Array)
     ], GetMessagesSendResponse.prototype, "messages", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMessagesSendResponse.prototype, "statusCode", void 0);
     return GetMessagesSendResponse;

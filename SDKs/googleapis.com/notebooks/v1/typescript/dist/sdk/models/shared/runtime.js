@@ -22,7 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RuntimeAccessConfigInput } from "./runtimeaccessconfig";
+import { RuntimeSoftwareConfigInput } from "./runtimesoftwareconfig";
+import { VirtualMachineInput } from "./virtualmachine";
 import { RuntimeAccessConfig } from "./runtimeaccessconfig";
 import { RuntimeMetrics } from "./runtimemetrics";
 import { RuntimeSoftwareConfig } from "./runtimesoftwareconfig";
@@ -47,6 +50,30 @@ export var RuntimeStateEnum;
     RuntimeStateEnum["Upgrading"] = "UPGRADING";
     RuntimeStateEnum["Initializing"] = "INITIALIZING";
 })(RuntimeStateEnum || (RuntimeStateEnum = {}));
+// RuntimeInput
+/**
+ * The definition of a Runtime for a managed notebook instance.
+**/
+var RuntimeInput = /** @class */ (function (_super) {
+    __extends(RuntimeInput, _super);
+    function RuntimeInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=accessConfig" }),
+        __metadata("design:type", RuntimeAccessConfigInput)
+    ], RuntimeInput.prototype, "accessConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=softwareConfig" }),
+        __metadata("design:type", RuntimeSoftwareConfigInput)
+    ], RuntimeInput.prototype, "softwareConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=virtualMachine" }),
+        __metadata("design:type", VirtualMachineInput)
+    ], RuntimeInput.prototype, "virtualMachine", void 0);
+    return RuntimeInput;
+}(SpeakeasyBase));
+export { RuntimeInput };
 // Runtime
 /**
  * The definition of a Runtime for a managed notebook instance.
@@ -57,39 +84,39 @@ var Runtime = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessConfig" }),
+        SpeakeasyMetadata({ data: "json, name=accessConfig" }),
         __metadata("design:type", RuntimeAccessConfig)
     ], Runtime.prototype, "accessConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthState" }),
+        SpeakeasyMetadata({ data: "json, name=healthState" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "healthState", void 0);
     __decorate([
-        Metadata({ data: "json, name=metrics" }),
+        SpeakeasyMetadata({ data: "json, name=metrics" }),
         __metadata("design:type", RuntimeMetrics)
     ], Runtime.prototype, "metrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=softwareConfig" }),
+        SpeakeasyMetadata({ data: "json, name=softwareConfig" }),
         __metadata("design:type", RuntimeSoftwareConfig)
     ], Runtime.prototype, "softwareConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=virtualMachine" }),
+        SpeakeasyMetadata({ data: "json, name=virtualMachine" }),
         __metadata("design:type", VirtualMachine)
     ], Runtime.prototype, "virtualMachine", void 0);
     return Runtime;

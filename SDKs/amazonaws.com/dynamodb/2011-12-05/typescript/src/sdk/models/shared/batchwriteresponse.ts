@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BatchWriteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacityUnits" })
   consumedCapacityUnits?: number;
 }

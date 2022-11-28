@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3QueryResult
+// Represents the result of a conversational query.
 type GoogleCloudDialogflowCxV3QueryResult struct {
 	CurrentPage               *GoogleCloudDialogflowCxV3Page                    `json:"currentPage,omitempty"`
 	DiagnosticInfo            map[string]interface{}                            `json:"diagnosticInfo,omitempty"`

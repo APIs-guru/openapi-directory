@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VmCreationConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * VM creation configuration message
 **/
 export class VmCreationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subnet" })
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
   subnet?: string;
 
-  @Metadata({ data: "json, name=vmMachineType" })
+  @SpeakeasyMetadata({ data: "json, name=vmMachineType" })
   vmMachineType?: string;
 
-  @Metadata({ data: "json, name=vmZone" })
+  @SpeakeasyMetadata({ data: "json, name=vmZone" })
   vmZone?: string;
 }

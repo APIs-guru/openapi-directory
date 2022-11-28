@@ -1,6 +1,7 @@
 
 
+
 export enum DevicePoolTypeEnum {
-    Curated = "CURATED"
-,    Private = "PRIVATE"
+    Curated = "CURATED",
+    Private = "PRIVATE"
 }

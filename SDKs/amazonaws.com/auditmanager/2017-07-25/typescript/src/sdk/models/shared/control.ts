@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControlMappingSource } from "./controlmappingsource";
 import { ControlTypeEnum } from "./controltypeenum";
+
 
 
 // Control
@@ -9,48 +9,48 @@ import { ControlTypeEnum } from "./controltypeenum";
  *  A control in Audit Manager. 
 **/
 export class Control extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionPlanInstructions" })
+  @SpeakeasyMetadata({ data: "json, name=actionPlanInstructions" })
   actionPlanInstructions?: string;
 
-  @Metadata({ data: "json, name=actionPlanTitle" })
+  @SpeakeasyMetadata({ data: "json, name=actionPlanTitle" })
   actionPlanTitle?: string;
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=controlMappingSources", elemType: shared.ControlMappingSource })
+  @SpeakeasyMetadata({ data: "json, name=controlMappingSources", elemType: ControlMappingSource })
   controlMappingSources?: ControlMappingSource[];
 
-  @Metadata({ data: "json, name=controlSources" })
+  @SpeakeasyMetadata({ data: "json, name=controlSources" })
   controlSources?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedBy" })
   lastUpdatedBy?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=testingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=testingInformation" })
   testingInformation?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ControlTypeEnum;
 }

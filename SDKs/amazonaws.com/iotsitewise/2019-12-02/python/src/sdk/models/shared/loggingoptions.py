@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import logginglevel_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LoggingOptions:
-    level: logginglevel_enum.LoggingLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
+    r"""LoggingOptions
+    Contains logging options.
+    """
+    
+    level: LoggingLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
     

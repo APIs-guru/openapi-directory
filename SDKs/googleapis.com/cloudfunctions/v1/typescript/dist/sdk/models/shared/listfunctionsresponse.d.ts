@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudFunction } from "./cloudfunction";
 /**
  * Response for the `ListFunctions` method.

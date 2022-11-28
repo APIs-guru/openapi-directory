@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PutTIDStatusJSONPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutTIDStatusJSONHeaders:
-    api_key: str = field(default=None, metadata={'header': { 'field_name': 'Api-Key', 'style': 'simple', 'explode': False }})
-    api_username: str = field(default=None, metadata={'header': { 'field_name': 'Api-Username', 'style': 'simple', 'explode': False }})
+    api_key: str = field(metadata={'header': { 'field_name': 'Api-Key', 'style': 'simple', 'explode': False }})
+    api_username: str = field(metadata={'header': { 'field_name': 'Api-Username', 'style': 'simple', 'explode': False }})
     
 class PutTIDStatusJSONRequestBodyEnabledEnum(str, Enum):
     TRUE = "true"
@@ -28,28 +33,28 @@ class PutTIDStatusJSONRequestBodyStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutTIDStatusJSONRequestBody:
-    enabled: PutTIDStatusJSONRequestBodyEnabledEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    status: PutTIDStatusJSONRequestBodyStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    until: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'until' }})
-    
-
-@dataclass
-class PutTIDStatusJSONRequest:
-    path_params: PutTIDStatusJSONPathParams = field(default=None)
-    headers: PutTIDStatusJSONHeaders = field(default=None)
-    request: Optional[PutTIDStatusJSONRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    enabled: PutTIDStatusJSONRequestBodyEnabledEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    status: PutTIDStatusJSONRequestBodyStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    until: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('until') }})
     
 
 @dataclass_json
 @dataclass
 class PutTIDStatusJSON200ApplicationJSON:
-    success: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'success' }})
-    topic_status_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topic_status_update' }})
+    success: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('success') }})
+    topic_status_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topic_status_update') }})
+    
+
+@dataclass
+class PutTIDStatusJSONRequest:
+    headers: PutTIDStatusJSONHeaders = field()
+    path_params: PutTIDStatusJSONPathParams = field()
+    request: Optional[PutTIDStatusJSONRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutTIDStatusJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     put_t_id_status_json_200_application_json_object: Optional[PutTIDStatusJSON200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

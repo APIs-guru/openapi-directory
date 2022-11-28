@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventBatchRecordFailure } from "./eventbatchrecordfailure";
 import { EventRecordFailure } from "./eventrecordfailure";
 import { PlayerEvent } from "./playerevent";
+
 
 
 // EventUpdateResponse
@@ -10,15 +10,15 @@ import { PlayerEvent } from "./playerevent";
  * An event period update resource.
 **/
 export class EventUpdateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchFailures", elemType: shared.EventBatchRecordFailure })
+  @SpeakeasyMetadata({ data: "json, name=batchFailures", elemType: EventBatchRecordFailure })
   batchFailures?: EventBatchRecordFailure[];
 
-  @Metadata({ data: "json, name=eventFailures", elemType: shared.EventRecordFailure })
+  @SpeakeasyMetadata({ data: "json, name=eventFailures", elemType: EventRecordFailure })
   eventFailures?: EventRecordFailure[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=playerEvents", elemType: shared.PlayerEvent })
+  @SpeakeasyMetadata({ data: "json, name=playerEvents", elemType: PlayerEvent })
   playerEvents?: PlayerEvent[];
 }

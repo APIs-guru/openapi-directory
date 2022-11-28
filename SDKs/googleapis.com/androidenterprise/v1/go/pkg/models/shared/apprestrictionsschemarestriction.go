@@ -13,6 +13,8 @@ const (
 	AppRestrictionsSchemaRestrictionRestrictionTypeEnumBundleArray AppRestrictionsSchemaRestrictionRestrictionTypeEnum = "bundleArray"
 )
 
+// AppRestrictionsSchemaRestriction
+// A restriction in the App Restriction Schema represents a piece of configuration that may be pre-applied.
 type AppRestrictionsSchemaRestriction struct {
 	DefaultValue      *AppRestrictionsSchemaRestrictionRestrictionValue    `json:"defaultValue,omitempty"`
 	Description       *string                                              `json:"description,omitempty"`

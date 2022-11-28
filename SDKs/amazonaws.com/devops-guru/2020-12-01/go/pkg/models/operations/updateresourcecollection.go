@@ -21,6 +21,9 @@ const (
 	UpdateResourceCollectionRequestBodyActionEnumRemove UpdateResourceCollectionRequestBodyActionEnum = "REMOVE"
 )
 
+// UpdateResourceCollectionRequestBodyResourceCollection
+//
+//	Contains information used to update a collection of AWS resources.
 type UpdateResourceCollectionRequestBodyResourceCollection struct {
 	CloudFormation *shared.UpdateCloudFormationCollectionFilter `json:"CloudFormation,omitempty"`
 }

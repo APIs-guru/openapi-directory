@@ -38,6 +38,8 @@ const (
 	DeploymentStatusStateEnumInProgress DeploymentStatusStateEnum = "in_progress"
 )
 
+// DeploymentStatus
+// The status of a deployment.
 type DeploymentStatus struct {
 	CreatedAt             time.Time                  `json:"created_at"`
 	Creator               DeploymentStatusSimpleUser `json:"creator"`

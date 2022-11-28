@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MonitoringSchedule
+// A schedule for a model monitoring job. For information about model monitor, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html">Amazon SageMaker Model Monitor</a>.
 type MonitoringSchedule struct {
 	CreationTime                   *time.Time                  `json:"CreationTime,omitempty"`
 	EndpointName                   *string                     `json:"EndpointName,omitempty"`

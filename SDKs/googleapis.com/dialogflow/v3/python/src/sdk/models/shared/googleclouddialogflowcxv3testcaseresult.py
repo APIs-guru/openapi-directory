@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3conversationturn
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowCxV3TestCaseResultTestResultEnum(str, Enum):
     TEST_RESULT_UNSPECIFIED = "TEST_RESULT_UNSPECIFIED"
@@ -12,9 +14,27 @@ class GoogleCloudDialogflowCxV3TestCaseResultTestResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3TestCaseResult:
-    conversation_turns: Optional[List[googleclouddialogflowcxv3conversationturn.GoogleCloudDialogflowCxV3ConversationTurn]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversationTurns' }})
-    environment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    test_result: Optional[GoogleCloudDialogflowCxV3TestCaseResultTestResultEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testResult' }})
-    test_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testTime' }})
+    r"""GoogleCloudDialogflowCxV3TestCaseResult
+    Represents a result from running a test case in an agent environment.
+    """
+    
+    conversation_turns: Optional[List[GoogleCloudDialogflowCxV3ConversationTurn]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationTurns') }})
+    environment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    test_result: Optional[GoogleCloudDialogflowCxV3TestCaseResultTestResultEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testResult') }})
+    test_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testTime') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleCloudDialogflowCxV3TestCaseResultInput:
+    r"""GoogleCloudDialogflowCxV3TestCaseResultInput
+    Represents a result from running a test case in an agent environment.
+    """
+    
+    conversation_turns: Optional[List[GoogleCloudDialogflowCxV3ConversationTurnInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationTurns') }})
+    environment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    test_result: Optional[GoogleCloudDialogflowCxV3TestCaseResultTestResultEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testResult') }})
+    test_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testTime') }})
     

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DsaPublicKeyInfo } from "./dsapublickeyinfo";
 import { RsaPublicKeyInfo } from "./rsapublickeyinfo";
 
 
+
 // IdpCredential
 /** 
- * The identity provider's credentials (for signing assertions, etc).
+ * Credential for verifying signatures produced by the Identity Provider.
 **/
 export class IdpCredential extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dsaKeyInfo" })
+  @SpeakeasyMetadata({ data: "json, name=dsaKeyInfo" })
   dsaKeyInfo?: DsaPublicKeyInfo;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rsaKeyInfo" })
+  @SpeakeasyMetadata({ data: "json, name=rsaKeyInfo" })
   rsaKeyInfo?: RsaPublicKeyInfo;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

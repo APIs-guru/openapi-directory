@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class TemplatesCreatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TemplatesCreateSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TemplatesCreateRequest:
-    path_params: TemplatesCreatePathParams = field(default=None)
+    path_params: TemplatesCreatePathParams = field()
+    security: TemplatesCreateSecurity = field()
     request: Optional[shared.TemplateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TemplatesCreateSecurity = field(default=None)
     
 
 @dataclass
 class TemplatesCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     templates_response: Optional[shared.TemplatesResponse] = field(default=None)
     

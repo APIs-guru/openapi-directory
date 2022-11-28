@@ -1,7 +1,10 @@
 import setuptools
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+try:
+    with open("README.md", "r") as fh:
+        long_description = fh.read()
+except FileNotFoundError:
+    long_description = ""
 
 setuptools.setup(
     name="openapi",
@@ -14,7 +17,7 @@ setuptools.setup(
     install_requires=[
         "certifi==2022.6.15",
         "charset-normalizer==2.1.1",
-        "dataclasses-json==0.5.7",
+        "dataclasses-json-speakeasy==0.5.8",
         "idna==3.3",
         "marshmallow==3.17.1",
         "marshmallow-enum==1.5.1",
@@ -29,5 +32,5 @@ setuptools.setup(
         "urllib3==1.26.12",
     ],
     package_dir={'': 'src'},
-    python_requires='>=3.10'
+    python_requires='>=3.9'
 )

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostUserSample = /** @class */ (function (_super) {
     __extends(PostUserSample, _super);
@@ -30,19 +30,19 @@ var PostUserSample = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=admin" }),
+        SpeakeasyMetadata({ data: "json, name=admin" }),
         __metadata("design:type", Boolean)
     ], PostUserSample.prototype, "admin", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], PostUserSample.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PostUserSample.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=read_only" }),
+        SpeakeasyMetadata({ data: "json, name=read_only" }),
         __metadata("design:type", Boolean)
     ], PostUserSample.prototype, "readOnly", void 0);
     return PostUserSample;
@@ -54,7 +54,7 @@ var PostUserRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PostUserSample)
     ], PostUserRequest.prototype, "request", void 0);
     return PostUserRequest;
@@ -66,19 +66,19 @@ var PostUserResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostUserResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostUserResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateUserResponse)
     ], PostUserResponse.prototype, "createUserResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidToken)
     ], PostUserResponse.prototype, "invalidToken", void 0);
     return PostUserResponse;

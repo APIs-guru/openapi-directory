@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeEndpointResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output from the DescribeEndpoint operation.
 **/
 export class DescribeEndpointResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpointAddress" })
+  @SpeakeasyMetadata({ data: "json, name=endpointAddress" })
   endpointAddress?: string;
 }

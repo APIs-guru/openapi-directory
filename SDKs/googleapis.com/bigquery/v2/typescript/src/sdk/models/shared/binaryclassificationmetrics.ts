@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregateClassificationMetrics } from "./aggregateclassificationmetrics";
 import { BinaryConfusionMatrix } from "./binaryconfusionmatrix";
+
 
 
 // BinaryClassificationMetrics
@@ -9,15 +9,15 @@ import { BinaryConfusionMatrix } from "./binaryconfusionmatrix";
  * Evaluation metrics for binary classification/classifier models.
 **/
 export class BinaryClassificationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregateClassificationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=aggregateClassificationMetrics" })
   aggregateClassificationMetrics?: AggregateClassificationMetrics;
 
-  @Metadata({ data: "json, name=binaryConfusionMatrixList", elemType: shared.BinaryConfusionMatrix })
+  @SpeakeasyMetadata({ data: "json, name=binaryConfusionMatrixList", elemType: BinaryConfusionMatrix })
   binaryConfusionMatrixList?: BinaryConfusionMatrix[];
 
-  @Metadata({ data: "json, name=negativeLabel" })
+  @SpeakeasyMetadata({ data: "json, name=negativeLabel" })
   negativeLabel?: string;
 
-  @Metadata({ data: "json, name=positiveLabel" })
+  @SpeakeasyMetadata({ data: "json, name=positiveLabel" })
   positiveLabel?: string;
 }

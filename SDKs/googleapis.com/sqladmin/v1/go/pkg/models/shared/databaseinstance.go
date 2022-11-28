@@ -40,6 +40,8 @@ const (
 	DatabaseInstanceDatabaseVersionEnumSqlserver2019Web              DatabaseInstanceDatabaseVersionEnum = "SQLSERVER_2019_WEB"
 )
 
+// DatabaseInstanceFailoverReplica
+// The name and status of the failover replica.
 type DatabaseInstanceFailoverReplica struct {
 	Available *bool   `json:"available,omitempty"`
 	Name      *string `json:"name,omitempty"`
@@ -77,6 +79,8 @@ const (
 	DatabaseInstanceSuspensionReasonEnumKmsKeyIssue                    DatabaseInstanceSuspensionReasonEnum = "KMS_KEY_ISSUE"
 )
 
+// DatabaseInstance
+// A Cloud SQL instance resource.
 type DatabaseInstance struct {
 	AvailableMaintenanceVersions []string                               `json:"availableMaintenanceVersions,omitempty"`
 	BackendType                  *DatabaseInstanceBackendTypeEnum       `json:"backendType,omitempty"`
@@ -84,6 +88,45 @@ type DatabaseInstance struct {
 	CreateTime                   *string                                `json:"createTime,omitempty"`
 	CurrentDiskSize              *string                                `json:"currentDiskSize,omitempty"`
 	DatabaseInstalledVersion     *string                                `json:"databaseInstalledVersion,omitempty"`
+	DatabaseVersion              *DatabaseInstanceDatabaseVersionEnum   `json:"databaseVersion,omitempty"`
+	DiskEncryptionConfiguration  *DiskEncryptionConfiguration           `json:"diskEncryptionConfiguration,omitempty"`
+	DiskEncryptionStatus         *DiskEncryptionStatus                  `json:"diskEncryptionStatus,omitempty"`
+	Etag                         *string                                `json:"etag,omitempty"`
+	FailoverReplica              *DatabaseInstanceFailoverReplica       `json:"failoverReplica,omitempty"`
+	GceZone                      *string                                `json:"gceZone,omitempty"`
+	InstanceType                 *DatabaseInstanceInstanceTypeEnum      `json:"instanceType,omitempty"`
+	IPAddresses                  []IPMapping                            `json:"ipAddresses,omitempty"`
+	Ipv6Address                  *string                                `json:"ipv6Address,omitempty"`
+	Kind                         *string                                `json:"kind,omitempty"`
+	MaintenanceVersion           *string                                `json:"maintenanceVersion,omitempty"`
+	MasterInstanceName           *string                                `json:"masterInstanceName,omitempty"`
+	MaxDiskSize                  *string                                `json:"maxDiskSize,omitempty"`
+	Name                         *string                                `json:"name,omitempty"`
+	OnPremisesConfiguration      *OnPremisesConfiguration               `json:"onPremisesConfiguration,omitempty"`
+	OutOfDiskReport              *SQLOutOfDiskReport                    `json:"outOfDiskReport,omitempty"`
+	Project                      *string                                `json:"project,omitempty"`
+	Region                       *string                                `json:"region,omitempty"`
+	ReplicaConfiguration         *ReplicaConfiguration                  `json:"replicaConfiguration,omitempty"`
+	ReplicaNames                 []string                               `json:"replicaNames,omitempty"`
+	RootPassword                 *string                                `json:"rootPassword,omitempty"`
+	SatisfiesPzs                 *bool                                  `json:"satisfiesPzs,omitempty"`
+	ScheduledMaintenance         *SQLScheduledMaintenance               `json:"scheduledMaintenance,omitempty"`
+	SecondaryGceZone             *string                                `json:"secondaryGceZone,omitempty"`
+	SelfLink                     *string                                `json:"selfLink,omitempty"`
+	ServerCaCert                 *SslCert                               `json:"serverCaCert,omitempty"`
+	ServiceAccountEmailAddress   *string                                `json:"serviceAccountEmailAddress,omitempty"`
+	Settings                     *Settings                              `json:"settings,omitempty"`
+	State                        *DatabaseInstanceStateEnum             `json:"state,omitempty"`
+	SuspensionReason             []DatabaseInstanceSuspensionReasonEnum `json:"suspensionReason,omitempty"`
+}
+
+// DatabaseInstanceInput
+// A Cloud SQL instance resource.
+type DatabaseInstanceInput struct {
+	AvailableMaintenanceVersions []string                               `json:"availableMaintenanceVersions,omitempty"`
+	BackendType                  *DatabaseInstanceBackendTypeEnum       `json:"backendType,omitempty"`
+	ConnectionName               *string                                `json:"connectionName,omitempty"`
+	CurrentDiskSize              *string                                `json:"currentDiskSize,omitempty"`
 	DatabaseVersion              *DatabaseInstanceDatabaseVersionEnum   `json:"databaseVersion,omitempty"`
 	DiskEncryptionConfiguration  *DiskEncryptionConfiguration           `json:"diskEncryptionConfiguration,omitempty"`
 	DiskEncryptionStatus         *DiskEncryptionStatus                  `json:"diskEncryptionStatus,omitempty"`

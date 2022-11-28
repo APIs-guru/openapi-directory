@@ -1,5 +1,7 @@
 package shared
 
+// BaiduChannelResponse
+// Provides information about the status and settings of the Baidu (Baidu Cloud Push) channel for an application.
 type BaiduChannelResponse struct {
 	ApplicationID    *string `json:"ApplicationId,omitempty"`
 	CreationDate     *string `json:"CreationDate,omitempty"`

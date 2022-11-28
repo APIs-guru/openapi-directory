@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2betaListLimits } from "./googleappsdrivelabelsv2betalistlimits";
+
 
 
 // GoogleAppsDriveLabelsV2betaSelectionLimits
@@ -7,18 +8,18 @@ import { GoogleAppsDriveLabelsV2betaListLimits } from "./googleappsdrivelabelsv2
  * Limits for selection Field type.
 **/
 export class GoogleAppsDriveLabelsV2betaSelectionLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listLimits" })
+  @SpeakeasyMetadata({ data: "json, name=listLimits" })
   listLimits?: GoogleAppsDriveLabelsV2betaListLimits;
 
-  @Metadata({ data: "json, name=maxChoices" })
+  @SpeakeasyMetadata({ data: "json, name=maxChoices" })
   maxChoices?: number;
 
-  @Metadata({ data: "json, name=maxDeletedChoices" })
+  @SpeakeasyMetadata({ data: "json, name=maxDeletedChoices" })
   maxDeletedChoices?: number;
 
-  @Metadata({ data: "json, name=maxDisplayNameLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxDisplayNameLength" })
   maxDisplayNameLength?: number;
 
-  @Metadata({ data: "json, name=maxIdLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxIdLength" })
   maxIdLength?: number;
 }

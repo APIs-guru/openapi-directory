@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeObjectsInput
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the parameters for DescribeObjects.
 **/
 export class DescribeObjectsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evaluateExpressions" })
+  @SpeakeasyMetadata({ data: "json, name=evaluateExpressions" })
   evaluateExpressions?: boolean;
 
-  @Metadata({ data: "json, name=marker" })
+  @SpeakeasyMetadata({ data: "json, name=marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=objectIds" })
+  @SpeakeasyMetadata({ data: "json, name=objectIds" })
   objectIds: string[];
 
-  @Metadata({ data: "json, name=pipelineId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineId" })
   pipelineId: string;
 }

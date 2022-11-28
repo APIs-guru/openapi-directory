@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatetimeRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a time range, in ISO8601-UTC format.
 **/
 export class DatetimeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Begin" })
+  @SpeakeasyMetadata({ data: "json, name=Begin" })
   begin: string;
 
-  @Metadata({ data: "json, name=End" })
+  @SpeakeasyMetadata({ data: "json, name=End" })
   end?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContaineranalysisProjectsNotesBatchCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ContaineranalysisProjectsNotesBatchCreateQueryParams:
 
 @dataclass
 class ContaineranalysisProjectsNotesBatchCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContaineranalysisProjectsNotesBatchCreateRequest:
-    path_params: ContaineranalysisProjectsNotesBatchCreatePathParams = field(default=None)
-    query_params: ContaineranalysisProjectsNotesBatchCreateQueryParams = field(default=None)
+    path_params: ContaineranalysisProjectsNotesBatchCreatePathParams = field()
+    query_params: ContaineranalysisProjectsNotesBatchCreateQueryParams = field()
+    security: ContaineranalysisProjectsNotesBatchCreateSecurity = field()
     request: Optional[shared.BatchCreateNotesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContaineranalysisProjectsNotesBatchCreateSecurity = field(default=None)
     
 
 @dataclass
 class ContaineranalysisProjectsNotesBatchCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_create_notes_response: Optional[shared.BatchCreateNotesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOfferingsOfferingIdLearnersPendingSubmissionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 
 export class GetOfferingsOfferingIdLearnersPendingSubmissionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=days" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=days" })
   days?: string;
 }
 
 
 export class GetOfferingsOfferingIdLearnersPendingSubmissionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOfferingsOfferingIdLearnersPendingSubmissionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOfferingsOfferingIdLearnersPendingSubmissionQueryParams;
 }
 
 
 export class GetOfferingsOfferingIdLearnersPendingSubmissionResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AssessmentPendingSubmission })
+  @SpeakeasyMetadata({ elemType: shared.AssessmentPendingSubmission })
   assessmentPendingSubmissions?: shared.AssessmentPendingSubmission[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProperNounCategorizedOut
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Classified typed proper names
 **/
 export class ProperNounCategorizedOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commonType" })
+  @SpeakeasyMetadata({ data: "json, name=commonType" })
   commonType?: string;
 
-  @Metadata({ data: "json, name=commonTypeAlt" })
+  @SpeakeasyMetadata({ data: "json, name=commonTypeAlt" })
   commonTypeAlt?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 }

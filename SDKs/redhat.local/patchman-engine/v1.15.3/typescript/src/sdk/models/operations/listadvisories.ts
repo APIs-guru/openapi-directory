@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListAdvisoriesSortEnum {
-    Id = "id"
-,    Name = "name"
-,    AdvisoryType = "advisory_type"
-,    Synopsis = "synopsis"
-,    PublicDate = "public_date"
-,    ApplicableSystems = "applicable_systems"
+    Id = "id",
+    Name = "name",
+    AdvisoryType = "advisory_type",
+    Synopsis = "synopsis",
+    PublicDate = "public_date",
+    ApplicableSystems = "applicable_systems"
 }
 
 
 export class ListAdvisoriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" })
   filterAdvisoryType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[applicable_systems]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[applicable_systems]" })
   filterApplicableSystems?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[description]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[description]" })
   filterDescription?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
   filterId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" })
   filterPublicDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" })
   filterSeverity?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" })
   filterSynopsis?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" })
   filterSystemProfileSapSidsIn?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" })
   filterSystemProfileSapSystem?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ListAdvisoriesSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string[];
 }
 
 
 export class ListAdvisoriesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   rhIdentity: shared.SchemeRhIdentity;
 }
 
 
 export class ListAdvisoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListAdvisoriesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListAdvisoriesSecurity;
 }
 
 
 export class ListAdvisoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   controllersAdvisoriesResponse?: shared.ControllersAdvisoriesResponse;
 }

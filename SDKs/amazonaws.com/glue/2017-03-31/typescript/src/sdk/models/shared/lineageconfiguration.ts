@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrawlerLineageSettingsEnum } from "./crawlerlineagesettingsenum";
+
 
 
 // LineageConfiguration
@@ -7,6 +8,6 @@ import { CrawlerLineageSettingsEnum } from "./crawlerlineagesettingsenum";
  * Specifies data lineage configuration settings for the crawler.
 **/
 export class LineageConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CrawlerLineageSettings" })
+  @SpeakeasyMetadata({ data: "json, name=CrawlerLineageSettings" })
   crawlerLineageSettings?: CrawlerLineageSettingsEnum;
 }

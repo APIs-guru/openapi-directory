@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlobalResourcesSharedModelsTranslationRequest } from "./globalresourcessharedmodelstranslationrequest";
 import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
 
 
+
 export class ApiIPagedResponseGlobalResourcesSharedModelsTranslationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.GlobalResourcesSharedModelsTranslationRequest })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: GlobalResourcesSharedModelsTranslationRequest })
   entities?: GlobalResourcesSharedModelsTranslationRequest[];
 
-  @Metadata({ data: "json, name=Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=Metadata" })
   metadata?: ApiPagedResponseMetadata;
 }

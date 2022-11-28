@@ -55,6 +55,8 @@ const (
 	GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolenceEnumVeryLikely   GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolenceEnum = "VERY_LIKELY"
 )
 
+// GoogleCloudVisionV1p1beta1SafeSearchAnnotation
+// Set of features pertaining to the image, computed by computer vision methods over safe-search verticals (for example, adult, spoof, medical, violence).
 type GoogleCloudVisionV1p1beta1SafeSearchAnnotation struct {
 	Adult    *GoogleCloudVisionV1p1beta1SafeSearchAnnotationAdultEnum    `json:"adult,omitempty"`
 	Medical  *GoogleCloudVisionV1p1beta1SafeSearchAnnotationMedicalEnum  `json:"medical,omitempty"`

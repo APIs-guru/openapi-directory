@@ -13,22 +13,10 @@ type GetWorkspacesWorkspacePermissionsRepositoriesQueryParams struct {
 	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetWorkspacesWorkspacePermissionsRepositoriesSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetWorkspacesWorkspacePermissionsRepositoriesSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetWorkspacesWorkspacePermissionsRepositoriesSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetWorkspacesWorkspacePermissionsRepositoriesSecurity struct {
-	Option1 *GetWorkspacesWorkspacePermissionsRepositoriesSecurityOption1 `security:"option"`
-	Option2 *GetWorkspacesWorkspacePermissionsRepositoriesSecurityOption2 `security:"option"`
-	Option3 *GetWorkspacesWorkspacePermissionsRepositoriesSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetWorkspacesWorkspacePermissionsRepositoriesRequest struct {

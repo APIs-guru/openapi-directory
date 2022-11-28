@@ -5,41 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class GetTeamsUsernameHooksPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetTeamsUsernameHooksSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetTeamsUsernameHooksSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetTeamsUsernameHooksSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTeamsUsernameHooksSecurity:
-    option1: Optional[GetTeamsUsernameHooksSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetTeamsUsernameHooksSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetTeamsUsernameHooksSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTeamsUsernameHooksRequest:
-    path_params: GetTeamsUsernameHooksPathParams = field(default=None)
-    security: GetTeamsUsernameHooksSecurity = field(default=None)
+    path_params: GetTeamsUsernameHooksPathParams = field()
+    security: GetTeamsUsernameHooksSecurity = field()
     
 
 @dataclass
 class GetTeamsUsernameHooksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_webhook_subscriptions: Optional[shared.PaginatedWebhookSubscriptions] = field(default=None)
     

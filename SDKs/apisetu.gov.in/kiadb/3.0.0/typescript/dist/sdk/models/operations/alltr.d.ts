@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AlltrRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class AlltrRequestBody extends SpeakeasyBase {
 export declare class AlltrSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class AlltrRequest extends SpeakeasyBase {
-    request?: AlltrRequestBody;
-    security: AlltrSecurity;
 }
 export declare enum Alltr400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Alltr504ApplicationJsonErrorDescriptionEnum {
 export declare class Alltr504ApplicationJson extends SpeakeasyBase {
     error?: Alltr504ApplicationJsonErrorEnum;
     errorDescription?: Alltr504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class AlltrRequest extends SpeakeasyBase {
+    request?: AlltrRequestBody;
+    security: AlltrSecurity;
 }
 export declare class AlltrResponse extends SpeakeasyBase {
     contentType: string;

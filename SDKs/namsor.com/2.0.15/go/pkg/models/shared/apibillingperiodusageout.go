@@ -1,5 +1,7 @@
 package shared
 
+// APIBillingPeriodUsageOut
+// The current billing period.
 type APIBillingPeriodUsageOut struct {
 	APIKey                   *string `json:"apiKey,omitempty"`
 	BillingStatus            *string `json:"billingStatus,omitempty"`

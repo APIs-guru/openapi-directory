@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetModelSummary } from "./assetmodelsummary";
 export declare class ListAssetModelsResponse extends SpeakeasyBase {
     assetModelSummaries: AssetModelSummary[];

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Transactions } from "./transactions";
+
 
 
 // TransactionDetailsBody
@@ -7,6 +8,6 @@ import { Transactions } from "./transactions";
  * Transaction details.
 **/
 export class TransactionDetailsBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=transactionDetails" })
   transactionDetails: Transactions;
 }

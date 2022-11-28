@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OracleProfile
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Oracle database profile.
 **/
 export class OracleProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=connectionAttributes" })
   connectionAttributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=databaseService" })
+  @SpeakeasyMetadata({ data: "json, name=databaseService" })
   databaseService?: string;
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

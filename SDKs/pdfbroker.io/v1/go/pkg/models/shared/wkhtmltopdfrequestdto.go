@@ -1,5 +1,7 @@
 package shared
 
+// WkHTMLToPdfRequestDto
+// WkHtmlToPdfRequestDto is the data transfer object for generating a pdf using wkhtmltopdf;
 type WkHTMLToPdfRequestDto struct {
 	HTMLBase64String     *string           `json:"HtmlBase64String,omitempty"`
 	Resources            map[string]string `json:"Resources,omitempty"`

@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class DeletedApplicationsRestorePathParams:
-    object_id: str = field(default=None, metadata={'path_param': { 'field_name': 'objectId', 'style': 'simple', 'explode': False }})
-    tenant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
+    object_id: str = field(metadata={'path_param': { 'field_name': 'objectId', 'style': 'simple', 'explode': False }})
+    tenant_id: str = field(metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeletedApplicationsRestoreQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class DeletedApplicationsRestoreRequest:
-    path_params: DeletedApplicationsRestorePathParams = field(default=None)
-    query_params: DeletedApplicationsRestoreQueryParams = field(default=None)
+    path_params: DeletedApplicationsRestorePathParams = field()
+    query_params: DeletedApplicationsRestoreQueryParams = field()
     
 
 @dataclass
 class DeletedApplicationsRestoreResponse:
+    content_type: str = field()
+    status_code: int = field()
     application: Optional[dict[str, dict[str, Any]]] = field(default=None)
-    content_type: str = field(default=None)
     graph_error: Optional[shared.GraphError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudconnectorsv1secret
-from . import googlecloudconnectorsv1secret
-from . import googlecloudconnectorsv1secret
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudConnectorsV1AuthConfigSSHPublicKey:
-    cert_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certType' }})
-    password: Optional[googlecloudconnectorsv1secret.GoogleCloudConnectorsV1Secret] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'password' }})
-    ssh_client_cert: Optional[googlecloudconnectorsv1secret.GoogleCloudConnectorsV1Secret] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sshClientCert' }})
-    ssh_client_cert_pass: Optional[googlecloudconnectorsv1secret.GoogleCloudConnectorsV1Secret] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sshClientCertPass' }})
-    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'username' }})
+    r"""GoogleCloudConnectorsV1AuthConfigSSHPublicKey
+    Parameters to support Ssh public key Authentication.
+    """
+    
+    cert_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certType') }})
+    ssh_client_cert: Optional[GoogleCloudConnectorsV1Secret] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sshClientCert') }})
+    ssh_client_cert_pass: Optional[GoogleCloudConnectorsV1Secret] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sshClientCertPass') }})
+    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('username') }})
     

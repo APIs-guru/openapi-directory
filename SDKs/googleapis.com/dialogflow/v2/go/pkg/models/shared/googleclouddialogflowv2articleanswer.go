@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2ArticleAnswer
+// Represents article answer.
 type GoogleCloudDialogflowV2ArticleAnswer struct {
 	AnswerRecord *string           `json:"answerRecord,omitempty"`
 	Confidence   *float32          `json:"confidence,omitempty"`

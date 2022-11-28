@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class HouseMembershipViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=membershipFrom" })
+  @SpeakeasyMetadata({ data: "json, name=membershipFrom" })
   membershipFrom?: string;
 }

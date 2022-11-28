@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SetupTag
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a reference to atag that fires before another tag in order to set up dependencies.
 **/
 export class SetupTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stopOnSetupFailure" })
+  @SpeakeasyMetadata({ data: "json, name=stopOnSetupFailure" })
   stopOnSetupFailure?: boolean;
 
-  @Metadata({ data: "json, name=tagName" })
+  @SpeakeasyMetadata({ data: "json, name=tagName" })
   tagName?: string;
 }

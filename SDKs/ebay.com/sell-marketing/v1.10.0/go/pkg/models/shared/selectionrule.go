@@ -1,5 +1,7 @@
 package shared
 
+// SelectionRule
+// This type specifies the selection rules used to create a campaign.
 type SelectionRule struct {
 	Brands              []string `json:"brands,omitempty"`
 	CategoryIds         []string `json:"categoryIds,omitempty"`

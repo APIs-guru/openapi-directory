@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeGlobalReplicationGroupsActionEnum(str, Enum):
     DESCRIBE_GLOBAL_REPLICATION_GROUPS = "DescribeGlobalReplicationGroups"
@@ -10,12 +14,12 @@ class GetDescribeGlobalReplicationGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeGlobalReplicationGroupsQueryParams:
-    action: GetDescribeGlobalReplicationGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeGlobalReplicationGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeGlobalReplicationGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     global_replication_group_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     show_member_info: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ShowMemberInfo', 'style': 'form', 'explode': True }})
-    version: GetDescribeGlobalReplicationGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDescribeGlobalReplicationGroupsHeaders:
 
 @dataclass
 class GetDescribeGlobalReplicationGroupsRequest:
-    query_params: GetDescribeGlobalReplicationGroupsQueryParams = field(default=None)
-    headers: GetDescribeGlobalReplicationGroupsHeaders = field(default=None)
+    headers: GetDescribeGlobalReplicationGroupsHeaders = field()
+    query_params: GetDescribeGlobalReplicationGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeGlobalReplicationGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

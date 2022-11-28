@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRejectDataShareActionEnum(str, Enum):
     REJECT_DATA_SHARE = "RejectDataShare"
@@ -10,8 +14,8 @@ class PostRejectDataShareVersionEnum(str, Enum):
 
 @dataclass
 class PostRejectDataShareQueryParams:
-    action: PostRejectDataShareActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRejectDataShareVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRejectDataShareActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRejectDataShareVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRejectDataShareHeaders:
 
 @dataclass
 class PostRejectDataShareRequest:
-    query_params: PostRejectDataShareQueryParams = field(default=None)
-    headers: PostRejectDataShareHeaders = field(default=None)
+    headers: PostRejectDataShareHeaders = field()
+    query_params: PostRejectDataShareQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRejectDataShareResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

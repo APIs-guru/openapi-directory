@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Author } from "./author";
 // Answer
 /**
@@ -34,29 +34,49 @@ var Answer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=author" }),
+        SpeakeasyMetadata({ data: "json, name=author" }),
         __metadata("design:type", Author)
     ], Answer.prototype, "author", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Answer.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Answer.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], Answer.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Answer.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=upvoteCount" }),
+        SpeakeasyMetadata({ data: "json, name=upvoteCount" }),
         __metadata("design:type", Number)
     ], Answer.prototype, "upvoteCount", void 0);
     return Answer;
 }(SpeakeasyBase));
 export { Answer };
+// AnswerInput
+/**
+ * Represents an answer to a question
+**/
+var AnswerInput = /** @class */ (function (_super) {
+    __extends(AnswerInput, _super);
+    function AnswerInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=author" }),
+        __metadata("design:type", Author)
+    ], AnswerInput.prototype, "author", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=text" }),
+        __metadata("design:type", String)
+    ], AnswerInput.prototype, "text", void 0);
+    return AnswerInput;
+}(SpeakeasyBase));
+export { AnswerInput };

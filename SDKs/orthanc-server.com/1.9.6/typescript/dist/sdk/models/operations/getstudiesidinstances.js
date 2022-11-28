@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetStudiesIdInstancesPathParams = /** @class */ (function (_super) {
     __extends(GetStudiesIdInstancesPathParams, _super);
     function GetStudiesIdInstancesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetStudiesIdInstancesPathParams.prototype, "id", void 0);
     return GetStudiesIdInstancesPathParams;
@@ -41,11 +41,11 @@ var GetStudiesIdInstancesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=full" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=full" }),
         __metadata("design:type", Boolean)
     ], GetStudiesIdInstancesQueryParams.prototype, "full", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=short" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" }),
         __metadata("design:type", Boolean)
     ], GetStudiesIdInstancesQueryParams.prototype, "short", void 0);
     return GetStudiesIdInstancesQueryParams;
@@ -57,11 +57,11 @@ var GetStudiesIdInstancesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetStudiesIdInstancesPathParams)
     ], GetStudiesIdInstancesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetStudiesIdInstancesQueryParams)
     ], GetStudiesIdInstancesRequest.prototype, "queryParams", void 0);
     return GetStudiesIdInstancesRequest;
@@ -73,15 +73,15 @@ var GetStudiesIdInstancesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetStudiesIdInstancesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetStudiesIdInstancesResponse.prototype, "getStudiesIdInstances200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetStudiesIdInstancesResponse.prototype, "statusCode", void 0);
     return GetStudiesIdInstancesResponse;

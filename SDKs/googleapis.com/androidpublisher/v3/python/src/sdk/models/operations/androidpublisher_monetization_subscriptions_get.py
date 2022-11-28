@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsGetPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AndroidpublisherMonetizationSubscriptionsGetQueryParams:
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsGetRequest:
-    path_params: AndroidpublisherMonetizationSubscriptionsGetPathParams = field(default=None)
-    query_params: AndroidpublisherMonetizationSubscriptionsGetQueryParams = field(default=None)
-    security: AndroidpublisherMonetizationSubscriptionsGetSecurity = field(default=None)
+    path_params: AndroidpublisherMonetizationSubscriptionsGetPathParams = field()
+    query_params: AndroidpublisherMonetizationSubscriptionsGetQueryParams = field()
+    security: AndroidpublisherMonetizationSubscriptionsGetSecurity = field()
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscription: Optional[shared.Subscription] = field(default=None)
     

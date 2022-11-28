@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MergeDeveloperIdentitiesInput
 /**
  * Input to the <code>MergeDeveloperIdentities</code> action.
@@ -33,19 +33,19 @@ var MergeDeveloperIdentitiesInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationUserIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationUserIdentifier" }),
         __metadata("design:type", String)
     ], MergeDeveloperIdentitiesInput.prototype, "destinationUserIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeveloperProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=DeveloperProviderName" }),
         __metadata("design:type", String)
     ], MergeDeveloperIdentitiesInput.prototype, "developerProviderName", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], MergeDeveloperIdentitiesInput.prototype, "identityPoolId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceUserIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=SourceUserIdentifier" }),
         __metadata("design:type", String)
     ], MergeDeveloperIdentitiesInput.prototype, "sourceUserIdentifier", void 0);
     return MergeDeveloperIdentitiesInput;

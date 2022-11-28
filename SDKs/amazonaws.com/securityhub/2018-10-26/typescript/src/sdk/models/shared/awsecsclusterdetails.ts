@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsClusterClusterSettingsDetails } from "./awsecsclusterclustersettingsdetails";
 import { AwsEcsClusterConfigurationDetails } from "./awsecsclusterconfigurationdetails";
 import { AwsEcsClusterDefaultCapacityProviderStrategyDetails } from "./awsecsclusterdefaultcapacityproviderstrategydetails";
+
 
 
 // AwsEcsClusterDetails
@@ -10,15 +10,15 @@ import { AwsEcsClusterDefaultCapacityProviderStrategyDetails } from "./awsecsclu
  * provides details about an ECS cluster.
 **/
 export class AwsEcsClusterDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CapacityProviders" })
+  @SpeakeasyMetadata({ data: "json, name=CapacityProviders" })
   capacityProviders?: string[];
 
-  @Metadata({ data: "json, name=ClusterSettings", elemType: shared.AwsEcsClusterClusterSettingsDetails })
+  @SpeakeasyMetadata({ data: "json, name=ClusterSettings", elemType: AwsEcsClusterClusterSettingsDetails })
   clusterSettings?: AwsEcsClusterClusterSettingsDetails[];
 
-  @Metadata({ data: "json, name=Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
   configuration?: AwsEcsClusterConfigurationDetails;
 
-  @Metadata({ data: "json, name=DefaultCapacityProviderStrategy", elemType: shared.AwsEcsClusterDefaultCapacityProviderStrategyDetails })
+  @SpeakeasyMetadata({ data: "json, name=DefaultCapacityProviderStrategy", elemType: AwsEcsClusterDefaultCapacityProviderStrategyDetails })
   defaultCapacityProviderStrategy?: AwsEcsClusterDefaultCapacityProviderStrategyDetails[];
 }

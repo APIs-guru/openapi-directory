@@ -32,22 +32,12 @@ type GetFilesV3FilesSearchDoSearchQueryParams struct {
 	Width                 *int32     `queryParam:"style=form,explode=true,name=width"`
 }
 
-type GetFilesV3FilesSearchDoSearchSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
-type GetFilesV3FilesSearchDoSearchSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type GetFilesV3FilesSearchDoSearchSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type GetFilesV3FilesSearchDoSearchSecurity struct {
-	Option1 *GetFilesV3FilesSearchDoSearchSecurityOption1 `security:"option"`
-	Option2 *GetFilesV3FilesSearchDoSearchSecurityOption2 `security:"option"`
-	Option3 *GetFilesV3FilesSearchDoSearchSecurityOption3 `security:"option"`
+	PrivateAppsLegacy  *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy       *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	Hapikey            *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy1 *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy1      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type GetFilesV3FilesSearchDoSearchRequest struct {

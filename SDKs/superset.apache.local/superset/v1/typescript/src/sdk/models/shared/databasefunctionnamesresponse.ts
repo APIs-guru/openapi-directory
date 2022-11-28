@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DatabaseFunctionNamesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=function_names" })
+  @SpeakeasyMetadata({ data: "json, name=function_names" })
   functionNames?: string[];
 }

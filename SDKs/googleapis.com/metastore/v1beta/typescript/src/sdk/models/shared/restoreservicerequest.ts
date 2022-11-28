@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RestoreServiceRequestRestoreTypeEnum {
-    RestoreTypeUnspecified = "RESTORE_TYPE_UNSPECIFIED"
-,    Full = "FULL"
-,    MetadataOnly = "METADATA_ONLY"
+    RestoreTypeUnspecified = "RESTORE_TYPE_UNSPECIFIED",
+    Full = "FULL",
+    MetadataOnly = "METADATA_ONLY"
 }
 
 
@@ -12,12 +13,12 @@ export enum RestoreServiceRequestRestoreTypeEnum {
  * Request message for DataprocMetastore.Restore.
 **/
 export class RestoreServiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backup" })
+  @SpeakeasyMetadata({ data: "json, name=backup" })
   backup?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=restoreType" })
+  @SpeakeasyMetadata({ data: "json, name=restoreType" })
   restoreType?: RestoreServiceRequestRestoreTypeEnum;
 }

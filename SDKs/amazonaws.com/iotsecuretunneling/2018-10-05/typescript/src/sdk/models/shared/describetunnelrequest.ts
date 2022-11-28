@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeTunnelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tunnelId" })
+  @SpeakeasyMetadata({ data: "json, name=tunnelId" })
   tunnelId: string;
 }

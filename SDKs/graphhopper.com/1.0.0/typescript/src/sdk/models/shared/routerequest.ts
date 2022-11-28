@@ -1,94 +1,95 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VehicleProfileIdEnum } from "./vehicleprofileidenum";
 
+
 export enum RouteRequestAlgorithmEnum {
-    RoundTrip = "round_trip"
-,    AlternativeRoute = "alternative_route"
+    RoundTrip = "round_trip",
+    AlternativeRoute = "alternative_route"
 }
 
 export enum RouteRequestCurbsidesEnum {
-    Any = "any"
-,    Right = "right"
-,    Left = "left"
+    Any = "any",
+    Right = "right",
+    Left = "left"
 }
 
 
 export class RouteRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: RouteRequestAlgorithmEnum;
 
-  @Metadata({ data: "json, name=alternative_route.max_paths" })
+  @SpeakeasyMetadata({ data: "json, name=alternative_route.max_paths" })
   alternativeRouteMaxPaths?: number;
 
-  @Metadata({ data: "json, name=alternative_route.max_share_factor" })
+  @SpeakeasyMetadata({ data: "json, name=alternative_route.max_share_factor" })
   alternativeRouteMaxShareFactor?: number;
 
-  @Metadata({ data: "json, name=alternative_route.max_weight_factor" })
+  @SpeakeasyMetadata({ data: "json, name=alternative_route.max_weight_factor" })
   alternativeRouteMaxWeightFactor?: number;
 
-  @Metadata({ data: "json, name=avoid" })
+  @SpeakeasyMetadata({ data: "json, name=avoid" })
   avoid?: string;
 
-  @Metadata({ data: "json, name=block_area" })
+  @SpeakeasyMetadata({ data: "json, name=block_area" })
   blockArea?: string;
 
-  @Metadata({ data: "json, name=calc_points" })
+  @SpeakeasyMetadata({ data: "json, name=calc_points" })
   calcPoints?: boolean;
 
-  @Metadata({ data: "json, name=ch.disable" })
+  @SpeakeasyMetadata({ data: "json, name=ch.disable" })
   chDisable?: boolean;
 
-  @Metadata({ data: "json, name=curbsides" })
+  @SpeakeasyMetadata({ data: "json, name=curbsides" })
   curbsides?: RouteRequestCurbsidesEnum[];
 
-  @Metadata({ data: "json, name=debug" })
+  @SpeakeasyMetadata({ data: "json, name=debug" })
   debug?: boolean;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string[];
 
-  @Metadata({ data: "json, name=elevation" })
+  @SpeakeasyMetadata({ data: "json, name=elevation" })
   elevation?: boolean;
 
-  @Metadata({ data: "json, name=heading_penalty" })
+  @SpeakeasyMetadata({ data: "json, name=heading_penalty" })
   headingPenalty?: number;
 
-  @Metadata({ data: "json, name=headings" })
+  @SpeakeasyMetadata({ data: "json, name=headings" })
   headings?: number[];
 
-  @Metadata({ data: "json, name=instructions" })
+  @SpeakeasyMetadata({ data: "json, name=instructions" })
   instructions?: boolean;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=optimize" })
+  @SpeakeasyMetadata({ data: "json, name=optimize" })
   optimize?: string;
 
-  @Metadata({ data: "json, name=pass_through" })
+  @SpeakeasyMetadata({ data: "json, name=pass_through" })
   passThrough?: boolean;
 
-  @Metadata({ data: "json, name=point_hints" })
+  @SpeakeasyMetadata({ data: "json, name=point_hints" })
   pointHints?: string[];
 
-  @Metadata({ data: "json, name=points" })
+  @SpeakeasyMetadata({ data: "json, name=points" })
   points?: number[][];
 
-  @Metadata({ data: "json, name=points_encoded" })
+  @SpeakeasyMetadata({ data: "json, name=points_encoded" })
   pointsEncoded?: boolean;
 
-  @Metadata({ data: "json, name=round_trip.distance" })
+  @SpeakeasyMetadata({ data: "json, name=round_trip.distance" })
   roundTripDistance?: number;
 
-  @Metadata({ data: "json, name=round_trip.seed" })
+  @SpeakeasyMetadata({ data: "json, name=round_trip.seed" })
   roundTripSeed?: number;
 
-  @Metadata({ data: "json, name=snap_preventions" })
+  @SpeakeasyMetadata({ data: "json, name=snap_preventions" })
   snapPreventions?: string[];
 
-  @Metadata({ data: "json, name=vehicle" })
+  @SpeakeasyMetadata({ data: "json, name=vehicle" })
   vehicle?: VehicleProfileIdEnum;
 
-  @Metadata({ data: "json, name=weighting" })
+  @SpeakeasyMetadata({ data: "json, name=weighting" })
   weighting?: string;
 }

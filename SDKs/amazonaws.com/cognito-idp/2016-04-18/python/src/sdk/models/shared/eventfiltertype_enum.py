@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class EventFilterTypeEnum(str, Enum):
     SIGN_IN = "SIGN_IN"

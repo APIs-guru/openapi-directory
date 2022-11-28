@@ -1,13 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ResourceInfo } from "./resourceinfo";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ResourceInfoStatusEnum {
-    HealthStatusUnspecified = "HEALTH_STATUS_UNSPECIFIED"
-,    Healthy = "HEALTHY"
-,    Unhealthy = "UNHEALTHY"
-,    Unresponsive = "UNRESPONSIVE"
-,    Degraded = "DEGRADED"
+    HealthStatusUnspecified = "HEALTH_STATUS_UNSPECIFIED",
+    Healthy = "HEALTHY",
+    Unhealthy = "UNHEALTHY",
+    Unresponsive = "UNRESPONSIVE",
+    Degraded = "DEGRADED"
 }
 
 
@@ -16,18 +15,18 @@ export enum ResourceInfoStatusEnum {
  * ResourceInfo represents the information/status of the associated resource.
 **/
 export class ResourceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: Map<string, any>;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ResourceInfoStatusEnum;
 
-  @Metadata({ data: "json, name=sub", elemType: shared.ResourceInfo })
+  @SpeakeasyMetadata({ data: "json, name=sub", elemType: ResourceInfo })
   sub?: ResourceInfo[];
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 }

@@ -17,14 +17,14 @@ class PostForecastOptimalParameterRequests:
 
 @dataclass
 class PostForecastOptimalParameterRequest:
-    headers: PostForecastOptimalParameterHeaders = field(default=None)
+    headers: PostForecastOptimalParameterHeaders = field()
     request: Optional[PostForecastOptimalParameterRequests] = field(default=None)
     
 
 @dataclass
 class PostForecastOptimalParameterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     optimal_parameter_response: Optional[shared.OptimalParameterResponse] = field(default=None)
-    status_code: int = field(default=None)
     

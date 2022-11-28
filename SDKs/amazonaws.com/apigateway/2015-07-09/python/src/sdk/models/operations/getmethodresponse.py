@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetMethodResponsePathParams:
-    http_method: str = field(default=None, metadata={'path_param': { 'field_name': 'http_method', 'style': 'simple', 'explode': False }})
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'resource_id', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
-    status_code: str = field(default=None, metadata={'path_param': { 'field_name': 'status_code', 'style': 'simple', 'explode': False }})
+    http_method: str = field(metadata={'path_param': { 'field_name': 'http_method', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'resource_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    status_code: str = field(metadata={'path_param': { 'field_name': 'status_code', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,16 +27,16 @@ class GetMethodResponseHeaders:
 
 @dataclass
 class GetMethodResponseRequest:
-    path_params: GetMethodResponsePathParams = field(default=None)
-    headers: GetMethodResponseHeaders = field(default=None)
+    headers: GetMethodResponseHeaders = field()
+    path_params: GetMethodResponsePathParams = field()
     
 
 @dataclass
 class GetMethodResponseResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     method_response: Optional[shared.MethodResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

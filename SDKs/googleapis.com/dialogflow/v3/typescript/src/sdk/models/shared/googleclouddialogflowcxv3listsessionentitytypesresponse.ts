@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3SessionEntityType } from "./googleclouddialogflowcxv3sessionentitytype";
+
 
 
 // GoogleCloudDialogflowCxV3ListSessionEntityTypesResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowCxV3SessionEntityType } from "./googleclouddialogf
  * The response message for SessionEntityTypes.ListSessionEntityTypes.
 **/
 export class GoogleCloudDialogflowCxV3ListSessionEntityTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=sessionEntityTypes", elemType: shared.GoogleCloudDialogflowCxV3SessionEntityType })
+  @SpeakeasyMetadata({ data: "json, name=sessionEntityTypes", elemType: GoogleCloudDialogflowCxV3SessionEntityType })
   sessionEntityTypes?: GoogleCloudDialogflowCxV3SessionEntityType[];
 }

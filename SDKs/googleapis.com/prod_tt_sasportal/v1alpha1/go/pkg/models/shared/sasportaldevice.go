@@ -22,3 +22,16 @@ type SasPortalDevice struct {
 	SerialNumber         *string                     `json:"serialNumber,omitempty"`
 	State                *SasPortalDeviceStateEnum   `json:"state,omitempty"`
 }
+
+type SasPortalDeviceInput struct {
+	ActiveConfig         *SasPortalDeviceConfig        `json:"activeConfig,omitempty"`
+	DeviceMetadata       *SasPortalDeviceMetadataInput `json:"deviceMetadata,omitempty"`
+	DisplayName          *string                       `json:"displayName,omitempty"`
+	FccID                *string                       `json:"fccId,omitempty"`
+	GrantRangeAllowlists []SasPortalFrequencyRange     `json:"grantRangeAllowlists,omitempty"`
+	Grants               []SasPortalDeviceGrant        `json:"grants,omitempty"`
+	Name                 *string                       `json:"name,omitempty"`
+	PreloadedConfig      *SasPortalDeviceConfig        `json:"preloadedConfig,omitempty"`
+	SerialNumber         *string                       `json:"serialNumber,omitempty"`
+	State                *SasPortalDeviceStateEnum     `json:"state,omitempty"`
+}

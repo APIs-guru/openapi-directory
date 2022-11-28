@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PeopleContactGroupsUpdatePathParams:
-    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class PeopleContactGroupsUpdateQueryParams:
 
 @dataclass
 class PeopleContactGroupsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PeopleContactGroupsUpdateRequest:
-    path_params: PeopleContactGroupsUpdatePathParams = field(default=None)
-    query_params: PeopleContactGroupsUpdateQueryParams = field(default=None)
-    request: Optional[shared.UpdateContactGroupRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PeopleContactGroupsUpdateSecurity = field(default=None)
+    path_params: PeopleContactGroupsUpdatePathParams = field()
+    query_params: PeopleContactGroupsUpdateQueryParams = field()
+    security: PeopleContactGroupsUpdateSecurity = field()
+    request: Optional[shared.UpdateContactGroupRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PeopleContactGroupsUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     contact_group: Optional[shared.ContactGroup] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

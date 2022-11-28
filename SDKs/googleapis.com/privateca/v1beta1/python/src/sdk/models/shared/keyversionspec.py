@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class KeyVersionSpecAlgorithmEnum(str, Enum):
     SIGN_HASH_ALGORITHM_UNSPECIFIED = "SIGN_HASH_ALGORITHM_UNSPECIFIED"
@@ -17,6 +19,10 @@ class KeyVersionSpecAlgorithmEnum(str, Enum):
 @dataclass_json
 @dataclass
 class KeyVersionSpec:
-    algorithm: Optional[KeyVersionSpecAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
-    cloud_kms_key_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudKmsKeyVersion' }})
+    r"""KeyVersionSpec
+    A Cloud KMS key configuration that a CertificateAuthority will use.
+    """
+    
+    algorithm: Optional[KeyVersionSpecAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('algorithm') }})
+    cloud_kms_key_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudKmsKeyVersion') }})
     

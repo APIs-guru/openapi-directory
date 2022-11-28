@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { SdkType } from "./sdktype";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SDKType } from "./sdktype";
 
 
-// SdkTypes
+
+// SDKTypes
 /** 
  * The collection of <a>SdkType</a> instances.
 **/
-export class SdkTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.SdkType })
-  items?: SdkType[];
+export class SDKTypes extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: SDKType })
+  items?: SDKType[];
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 }

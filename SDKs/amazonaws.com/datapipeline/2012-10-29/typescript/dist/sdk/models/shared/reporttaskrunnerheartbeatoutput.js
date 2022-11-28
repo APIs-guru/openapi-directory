@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReportTaskRunnerHeartbeatOutput
 /**
  * Contains the output of ReportTaskRunnerHeartbeat.
@@ -33,7 +33,7 @@ var ReportTaskRunnerHeartbeatOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=terminate" }),
+        SpeakeasyMetadata({ data: "json, name=terminate" }),
         __metadata("design:type", Boolean)
     ], ReportTaskRunnerHeartbeatOutput.prototype, "terminate", void 0);
     return ReportTaskRunnerHeartbeatOutput;

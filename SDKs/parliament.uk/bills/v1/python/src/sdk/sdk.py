@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_api_v1_bill_types(self, request: operations.GetAPIV1BillTypesRequest) -> operations.GetAPIV1BillTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Bill types.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/BillTypes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -61,15 +85,17 @@ class SDK:
 
     
     def get_api_v1_bills_bill_id_stages(self, request: operations.GetAPIV1BillsBillIDStagesRequest) -> operations.GetAPIV1BillsBillIDStagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all Bill stages.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}/Stages", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -107,13 +133,16 @@ class SDK:
 
     
     def get_api_v1_bills_bill_id_stages_stage_id_publications(self, request: operations.GetAPIV1BillsBillIDStagesStageIDPublicationsRequest) -> operations.GetAPIV1BillsBillIDStagesStageIDPublicationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a list of Bill stage publications.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}/Stages/{stageId}/Publications", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -151,15 +180,17 @@ class SDK:
 
     
     def get_api_v1_publication_types(self, request: operations.GetAPIV1PublicationTypesRequest) -> operations.GetAPIV1PublicationTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of publication types.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/PublicationTypes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -188,13 +219,16 @@ class SDK:
 
     
     def get_api_v1_publications_publication_id_documents_document_id_(self, request: operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDRequest) -> operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return information on a document.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Publications/{publicationId}/Documents/{documentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -232,13 +266,16 @@ class SDK:
 
     
     def get_api_v1_publications_publication_id_documents_document_id_download(self, request: operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownloadRequest) -> operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a document.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Publications/{publicationId}/Documents/{documentId}/Download", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -269,13 +306,16 @@ class SDK:
 
     
     def get_api_v1_rss_bills_id_rss(self, request: operations.GetAPIV1RssBillsIDRssRequest) -> operations.GetAPIV1RssBillsIDRssResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an Rss feed of a certain Bill.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Rss/Bills/{id}.rss", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -306,13 +346,16 @@ class SDK:
 
     
     def get_api_v1_rss_allbills_rss(self) -> operations.GetAPIV1RssAllbillsRssResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an Rss feed of all Bills.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/Rss/allbills.rss"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -325,13 +368,16 @@ class SDK:
 
     
     def get_api_v1_rss_privatebills_rss(self) -> operations.GetAPIV1RssPrivatebillsRssResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an Rss feed of private Bills.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/Rss/privatebills.rss"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -344,13 +390,16 @@ class SDK:
 
     
     def get_api_v1_rss_publicbills_rss(self) -> operations.GetAPIV1RssPublicbillsRssResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an Rss feed of public Bills.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/Rss/publicbills.rss"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -363,15 +412,17 @@ class SDK:
 
     
     def get_api_v1_stages(self, request: operations.GetAPIV1StagesRequest) -> operations.GetAPIV1StagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Bill stages.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/Stages"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -400,13 +451,16 @@ class SDK:
 
     
     def get_amendment(self, request: operations.GetAmendmentRequest) -> operations.GetAmendmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns an amendment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}/Stages/{billStageId}/Amendments/{amendmentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -444,15 +498,17 @@ class SDK:
 
     
     def get_amendments(self, request: operations.GetAmendmentsRequest) -> operations.GetAmendmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of amendments.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}/Stages/{billStageId}/Amendments", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -490,13 +546,16 @@ class SDK:
 
     
     def get_bill(self, request: operations.GetBillRequest) -> operations.GetBillResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a Bill.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -534,13 +593,16 @@ class SDK:
 
     
     def get_bill_publication(self, request: operations.GetBillPublicationRequest) -> operations.GetBillPublicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a list of Bill publications.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}/Publications", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -578,13 +640,16 @@ class SDK:
 
     
     def get_bill_stage_details(self, request: operations.GetBillStageDetailsRequest) -> operations.GetBillStageDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a Bill stage.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}/Stages/{billStageId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -622,15 +687,17 @@ class SDK:
 
     
     def get_bills(self, request: operations.GetBillsRequest) -> operations.GetBillsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Bills.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/Bills"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -659,15 +726,17 @@ class SDK:
 
     
     def get_news_articles(self, request: operations.GetNewsArticlesRequest) -> operations.GetNewsArticlesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of news articles for a Bill.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v1/Bills/{billId}/NewsArticles", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -705,15 +774,17 @@ class SDK:
 
     
     def get_sittings(self, request: operations.GetSittingsRequest) -> operations.GetSittingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Sittings.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v1/Sittings"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

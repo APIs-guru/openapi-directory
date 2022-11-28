@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UsersGetPublicSshKeyForAuthenticatedPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key_id" })
   keyId: number;
 }
 
 
 export class UsersGetPublicSshKeyForAuthenticatedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UsersGetPublicSshKeyForAuthenticatedPathParams;
 }
 
 
 export class UsersGetPublicSshKeyForAuthenticatedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   key?: shared.Key;
 }

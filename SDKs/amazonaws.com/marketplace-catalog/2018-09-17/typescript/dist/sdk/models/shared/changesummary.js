@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
+import { ErrorDetail } from "./errordetail";
 // ChangeSummary
 /**
  * This object is a container for common summary information about the change. The summary doesn't contain the whole change structure.
@@ -35,23 +35,23 @@ var ChangeSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeName" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeName" }),
         __metadata("design:type", String)
     ], ChangeSummary.prototype, "changeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ChangeType" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeType" }),
         __metadata("design:type", String)
     ], ChangeSummary.prototype, "changeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Details" }),
+        SpeakeasyMetadata({ data: "json, name=Details" }),
         __metadata("design:type", String)
     ], ChangeSummary.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=Entity" }),
+        SpeakeasyMetadata({ data: "json, name=Entity" }),
         __metadata("design:type", Entity)
     ], ChangeSummary.prototype, "entity", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorDetailList", elemType: shared.ErrorDetail }),
+        SpeakeasyMetadata({ data: "json, name=ErrorDetailList", elemType: ErrorDetail }),
         __metadata("design:type", Array)
     ], ChangeSummary.prototype, "errorDetailList", void 0);
     return ChangeSummary;

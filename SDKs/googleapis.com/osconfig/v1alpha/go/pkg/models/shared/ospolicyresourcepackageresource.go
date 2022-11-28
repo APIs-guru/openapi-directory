@@ -8,6 +8,8 @@ const (
 	OsPolicyResourcePackageResourceDesiredStateEnumRemoved                 OsPolicyResourcePackageResourceDesiredStateEnum = "REMOVED"
 )
 
+// OsPolicyResourcePackageResource
+// A resource that manages a system package.
 type OsPolicyResourcePackageResource struct {
 	Apt          *OsPolicyResourcePackageResourceApt              `json:"apt,omitempty"`
 	Deb          *OsPolicyResourcePackageResourceDeb              `json:"deb,omitempty"`

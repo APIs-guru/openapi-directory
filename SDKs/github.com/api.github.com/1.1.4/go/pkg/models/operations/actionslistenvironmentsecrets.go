@@ -14,14 +14,14 @@ type ActionsListEnvironmentSecretsQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListEnvironmentSecretsRequest struct {
-	PathParams  ActionsListEnvironmentSecretsPathParams
-	QueryParams ActionsListEnvironmentSecretsQueryParams
-}
-
 type ActionsListEnvironmentSecrets200ApplicationJSON struct {
 	Secrets    []shared.ActionsSecret `json:"secrets"`
 	TotalCount int64                  `json:"total_count"`
+}
+
+type ActionsListEnvironmentSecretsRequest struct {
+	PathParams  ActionsListEnvironmentSecretsPathParams
+	QueryParams ActionsListEnvironmentSecretsQueryParams
 }
 
 type ActionsListEnvironmentSecretsResponse struct {

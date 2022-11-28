@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestRoleUsersPathParams:
-    role_id: int = field(default=None, metadata={'path_param': { 'field_name': 'role_id', 'style': 'simple', 'explode': False }})
+    role_id: int = field(metadata={'path_param': { 'field_name': 'role_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,15 +22,15 @@ class RequestRoleUsersHeaders:
 
 @dataclass
 class RequestRoleUsersRequest:
-    path_params: RequestRoleUsersPathParams = field(default=None)
-    query_params: RequestRoleUsersQueryParams = field(default=None)
-    headers: RequestRoleUsersHeaders = field(default=None)
+    headers: RequestRoleUsersHeaders = field()
+    path_params: RequestRoleUsersPathParams = field()
+    query_params: RequestRoleUsersQueryParams = field()
     
 
 @dataclass
 class RequestRoleUsersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     role_user_list: Optional[shared.RoleUserList] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DatasetGroupSummary
 /**
  * Provides a summary of the dataset group properties used in the <a>ListDatasetGroups</a> operation. To get the complete set of properties, call the <a>DescribeDatasetGroup</a> operation, and provide the <code>DatasetGroupArn</code>.
@@ -33,19 +33,19 @@ var DatasetGroupSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DatasetGroupSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetGroupArn" }),
         __metadata("design:type", String)
     ], DatasetGroupSummary.prototype, "datasetGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetGroupName" }),
         __metadata("design:type", String)
     ], DatasetGroupSummary.prototype, "datasetGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], DatasetGroupSummary.prototype, "lastModificationTime", void 0);
     return DatasetGroupSummary;

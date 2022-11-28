@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSendTemplatedEmailActionEnum(str, Enum):
     SEND_TEMPLATED_EMAIL = "SendTemplatedEmail"
@@ -10,8 +14,8 @@ class PostSendTemplatedEmailVersionEnum(str, Enum):
 
 @dataclass
 class PostSendTemplatedEmailQueryParams:
-    action: PostSendTemplatedEmailActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSendTemplatedEmailVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSendTemplatedEmailActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSendTemplatedEmailVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSendTemplatedEmailHeaders:
 
 @dataclass
 class PostSendTemplatedEmailRequest:
-    query_params: PostSendTemplatedEmailQueryParams = field(default=None)
-    headers: PostSendTemplatedEmailHeaders = field(default=None)
+    headers: PostSendTemplatedEmailHeaders = field()
+    query_params: PostSendTemplatedEmailQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSendTemplatedEmailResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSchedulesScheduleEEfileCandidateOfficeEnum(str, Enum):
@@ -18,7 +19,7 @@ class GetSchedulesScheduleEEfileSupportOpposeIndicatorEnum(str, Enum):
 
 @dataclass
 class GetSchedulesScheduleEEfileQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     candidate_office: Optional[GetSchedulesScheduleEEfileCandidateOfficeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_office', 'style': 'form', 'explode': True }})
     candidate_office_district: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_office_district', 'style': 'form', 'explode': True }})
@@ -29,14 +30,14 @@ class GetSchedulesScheduleEEfileQueryParams:
     filing_form: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'filing_form', 'style': 'form', 'explode': True }})
     image_number: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'image_number', 'style': 'form', 'explode': True }})
     is_notice: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'is_notice', 'style': 'form', 'explode': True }})
-    max_dissemination_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_dissemination_date', 'style': 'form', 'explode': True }})
+    max_dissemination_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_dissemination_date', 'style': 'form', 'explode': True }})
     max_expenditure_amount: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'max_expenditure_amount', 'style': 'form', 'explode': True }})
-    max_expenditure_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_expenditure_date', 'style': 'form', 'explode': True }})
-    max_filed_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_filed_date', 'style': 'form', 'explode': True }})
-    min_dissemination_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_dissemination_date', 'style': 'form', 'explode': True }})
+    max_expenditure_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_expenditure_date', 'style': 'form', 'explode': True }})
+    max_filed_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_filed_date', 'style': 'form', 'explode': True }})
+    min_dissemination_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_dissemination_date', 'style': 'form', 'explode': True }})
     min_expenditure_amount: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'min_expenditure_amount', 'style': 'form', 'explode': True }})
-    min_expenditure_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_expenditure_date', 'style': 'form', 'explode': True }})
-    min_filed_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_filed_date', 'style': 'form', 'explode': True }})
+    min_expenditure_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_expenditure_date', 'style': 'form', 'explode': True }})
+    min_filed_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_filed_date', 'style': 'form', 'explode': True }})
     most_recent: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'most_recent', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     payee_name: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'payee_name', 'style': 'form', 'explode': True }})
@@ -51,12 +52,12 @@ class GetSchedulesScheduleEEfileQueryParams:
 
 @dataclass
 class GetSchedulesScheduleEEfileRequest:
-    query_params: GetSchedulesScheduleEEfileQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleEEfileQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleEEfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_e_efile_page: Optional[shared.ScheduleEEfilePage] = field(default=None)
-    status_code: int = field(default=None)
     

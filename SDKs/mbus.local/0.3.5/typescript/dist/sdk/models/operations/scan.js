@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ScanPathParams = /** @class */ (function (_super) {
     __extends(ScanPathParams, _super);
     function ScanPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=baudrate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=baudrate" }),
         __metadata("design:type", Number)
     ], ScanPathParams.prototype, "baudrate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=device" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=device" }),
         __metadata("design:type", String)
     ], ScanPathParams.prototype, "device", void 0);
     return ScanPathParams;
@@ -45,7 +45,7 @@ var ScanRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ScanPathParams)
     ], ScanRequest.prototype, "pathParams", void 0);
     return ScanRequest;
@@ -57,19 +57,19 @@ var ScanResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ScanResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ScanResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ScanResponse.prototype, "slaves", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ScanResponse.prototype, "textError", void 0);
     return ScanResponse;

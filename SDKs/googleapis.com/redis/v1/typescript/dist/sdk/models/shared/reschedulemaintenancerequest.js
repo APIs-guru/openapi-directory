@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RescheduleMaintenanceRequestRescheduleTypeEnum;
 (function (RescheduleMaintenanceRequestRescheduleTypeEnum) {
     RescheduleMaintenanceRequestRescheduleTypeEnum["RescheduleTypeUnspecified"] = "RESCHEDULE_TYPE_UNSPECIFIED";
@@ -40,11 +40,11 @@ var RescheduleMaintenanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rescheduleType" }),
+        SpeakeasyMetadata({ data: "json, name=rescheduleType" }),
         __metadata("design:type", String)
     ], RescheduleMaintenanceRequest.prototype, "rescheduleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheduleTime" }),
+        SpeakeasyMetadata({ data: "json, name=scheduleTime" }),
         __metadata("design:type", String)
     ], RescheduleMaintenanceRequest.prototype, "scheduleTime", void 0);
     return RescheduleMaintenanceRequest;

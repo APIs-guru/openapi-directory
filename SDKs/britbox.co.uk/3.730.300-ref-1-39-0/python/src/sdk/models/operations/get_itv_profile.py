@@ -10,19 +10,19 @@ class GetItvProfileQueryParams:
 
 @dataclass
 class GetItvProfileSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetItvProfileRequest:
-    query_params: GetItvProfileQueryParams = field(default=None)
-    security: GetItvProfileSecurity = field(default=None)
+    query_params: GetItvProfileQueryParams = field()
+    security: GetItvProfileSecurity = field()
     
 
 @dataclass
 class GetItvProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_itv_profile_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// EntityAnnotation
+// Set of detected entity features.
 type EntityAnnotation struct {
 	BoundingPoly *BoundingPoly  `json:"boundingPoly,omitempty"`
 	Confidence   *float32       `json:"confidence,omitempty"`

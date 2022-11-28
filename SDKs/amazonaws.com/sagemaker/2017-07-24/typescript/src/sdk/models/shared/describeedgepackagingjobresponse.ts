@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EdgePackagingJobStatusEnum } from "./edgepackagingjobstatusenum";
 import { EdgeOutputConfig } from "./edgeoutputconfig";
 import { EdgePresetDeploymentOutput } from "./edgepresetdeploymentoutput";
 
 
+
 export class DescribeEdgePackagingJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompilationJobName" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobName" })
   compilationJobName?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=EdgePackagingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobArn" })
   edgePackagingJobArn: string;
 
-  @Metadata({ data: "json, name=EdgePackagingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobName" })
   edgePackagingJobName: string;
 
-  @Metadata({ data: "json, name=EdgePackagingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobStatus" })
   edgePackagingJobStatus: EdgePackagingJobStatusEnum;
 
-  @Metadata({ data: "json, name=EdgePackagingJobStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobStatusMessage" })
   edgePackagingJobStatusMessage?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=ModelArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=ModelArtifact" })
   modelArtifact?: string;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName?: string;
 
-  @Metadata({ data: "json, name=ModelSignature" })
+  @SpeakeasyMetadata({ data: "json, name=ModelSignature" })
   modelSignature?: string;
 
-  @Metadata({ data: "json, name=ModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ModelVersion" })
   modelVersion?: string;
 
-  @Metadata({ data: "json, name=OutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputConfig" })
   outputConfig?: EdgeOutputConfig;
 
-  @Metadata({ data: "json, name=PresetDeploymentOutput" })
+  @SpeakeasyMetadata({ data: "json, name=PresetDeploymentOutput" })
   presetDeploymentOutput?: EdgePresetDeploymentOutput;
 
-  @Metadata({ data: "json, name=ResourceKey" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceKey" })
   resourceKey?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 }

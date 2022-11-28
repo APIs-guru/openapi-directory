@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FhirVersionEnum } from "./fhirversionenum";
 import { PreloadDataConfig } from "./preloaddataconfig";
 import { SseConfiguration } from "./sseconfiguration";
+import { Tag } from "./tag";
 var CreateFhirDatastoreRequest = /** @class */ (function (_super) {
     __extends(CreateFhirDatastoreRequest, _super);
     function CreateFhirDatastoreRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], CreateFhirDatastoreRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreName" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreName" }),
         __metadata("design:type", String)
     ], CreateFhirDatastoreRequest.prototype, "datastoreName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreTypeVersion" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreTypeVersion" }),
         __metadata("design:type", String)
     ], CreateFhirDatastoreRequest.prototype, "datastoreTypeVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreloadDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=PreloadDataConfig" }),
         __metadata("design:type", PreloadDataConfig)
     ], CreateFhirDatastoreRequest.prototype, "preloadDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=SseConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=SseConfiguration" }),
         __metadata("design:type", SseConfiguration)
     ], CreateFhirDatastoreRequest.prototype, "sseConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateFhirDatastoreRequest.prototype, "tags", void 0);
     return CreateFhirDatastoreRequest;

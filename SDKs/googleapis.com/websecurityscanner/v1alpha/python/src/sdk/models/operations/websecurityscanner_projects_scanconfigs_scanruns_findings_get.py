@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetQueryParams:
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetRequest:
-    path_params: WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetPathParams = field(default=None)
-    query_params: WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetQueryParams = field(default=None)
-    security: WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetSecurity = field(default=None)
+    path_params: WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetPathParams = field()
+    query_params: WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetQueryParams = field()
+    security: WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetSecurity = field()
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsFindingsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     finding: Optional[shared.Finding] = field(default=None)
-    status_code: int = field(default=None)
     

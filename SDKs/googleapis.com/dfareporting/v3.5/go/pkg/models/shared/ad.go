@@ -25,6 +25,8 @@ const (
 	AdTypeEnumAdServingBrandSafeAd  AdTypeEnum = "AD_SERVING_BRAND_SAFE_AD"
 )
 
+// Ad
+// Contains properties of a Campaign Manager ad.
 type Ad struct {
 	AccountID                             *string                                `json:"accountId,omitempty"`
 	Active                                *bool                                  `json:"active,omitempty"`

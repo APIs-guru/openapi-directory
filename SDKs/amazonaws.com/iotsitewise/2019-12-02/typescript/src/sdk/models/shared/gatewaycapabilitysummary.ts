@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapabilitySyncStatusEnum } from "./capabilitysyncstatusenum";
+
 
 
 // GatewayCapabilitySummary
@@ -7,9 +8,9 @@ import { CapabilitySyncStatusEnum } from "./capabilitysyncstatusenum";
  * Contains a summary of a gateway capability configuration.
 **/
 export class GatewayCapabilitySummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capabilityNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=capabilityNamespace" })
   capabilityNamespace: string;
 
-  @Metadata({ data: "json, name=capabilitySyncStatus" })
+  @SpeakeasyMetadata({ data: "json, name=capabilitySyncStatus" })
   capabilitySyncStatus: CapabilitySyncStatusEnum;
 }

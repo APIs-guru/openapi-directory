@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetEvidenceFolderPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
-    control_set_id: str = field(default=None, metadata={'path_param': { 'field_name': 'controlSetId', 'style': 'simple', 'explode': False }})
-    evidence_folder_id: str = field(default=None, metadata={'path_param': { 'field_name': 'evidenceFolderId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    control_set_id: str = field(metadata={'path_param': { 'field_name': 'controlSetId', 'style': 'simple', 'explode': False }})
+    evidence_folder_id: str = field(metadata={'path_param': { 'field_name': 'evidenceFolderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,17 +26,17 @@ class GetEvidenceFolderHeaders:
 
 @dataclass
 class GetEvidenceFolderRequest:
-    path_params: GetEvidenceFolderPathParams = field(default=None)
-    headers: GetEvidenceFolderHeaders = field(default=None)
+    headers: GetEvidenceFolderHeaders = field()
+    path_params: GetEvidenceFolderPathParams = field()
     
 
 @dataclass
 class GetEvidenceFolderResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_evidence_folder_response: Optional[shared.GetEvidenceFolderResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

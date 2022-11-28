@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowExecutionCancelRequestedCauseEnum } from "./workflowexecutioncancelrequestedcauseenum";
 import { WorkflowExecution } from "./workflowexecution";
+
 
 
 // WorkflowExecutionCancelRequestedEventAttributes
@@ -8,12 +9,12 @@ import { WorkflowExecution } from "./workflowexecution";
  * Provides the details of the <code>WorkflowExecutionCancelRequested</code> event.
 **/
 export class WorkflowExecutionCancelRequestedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause?: WorkflowExecutionCancelRequestedCauseEnum;
 
-  @Metadata({ data: "json, name=externalInitiatedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=externalInitiatedEventId" })
   externalInitiatedEventId?: number;
 
-  @Metadata({ data: "json, name=externalWorkflowExecution" })
+  @SpeakeasyMetadata({ data: "json, name=externalWorkflowExecution" })
   externalWorkflowExecution?: WorkflowExecution;
 }

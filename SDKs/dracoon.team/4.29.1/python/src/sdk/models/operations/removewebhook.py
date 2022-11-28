@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveWebhookPathParams:
-    webhook_id: int = field(default=None, metadata={'path_param': { 'field_name': 'webhook_id', 'style': 'simple', 'explode': False }})
+    webhook_id: int = field(metadata={'path_param': { 'field_name': 'webhook_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveWebhookHeaders:
 
 @dataclass
 class RemoveWebhookRequest:
-    path_params: RemoveWebhookPathParams = field(default=None)
-    headers: RemoveWebhookHeaders = field(default=None)
+    headers: RemoveWebhookHeaders = field()
+    path_params: RemoveWebhookPathParams = field()
     
 
 @dataclass
 class RemoveWebhookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

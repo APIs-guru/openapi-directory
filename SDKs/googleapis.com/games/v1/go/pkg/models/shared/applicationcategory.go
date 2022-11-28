@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationCategory
+// An application category object.
 type ApplicationCategory struct {
 	Kind      *string `json:"kind,omitempty"`
 	Primary   *string `json:"primary,omitempty"`

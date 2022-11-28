@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Campaign } from "./campaign";
+import { ExtendedAttribute } from "./extendedattribute";
 import { Language } from "./language";
 import { Source } from "./source";
 var MediaItem = /** @class */ (function (_super) {
@@ -32,99 +33,99 @@ var MediaItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=campaigns", elemType: shared.Campaign }),
+        SpeakeasyMetadata({ data: "json, name=campaigns", elemType: Campaign }),
         __metadata("design:type", Array)
     ], MediaItem.prototype, "campaigns", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdBy" }),
+        SpeakeasyMetadata({ data: "json, name=createdBy" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=customAttributionUrl" }),
+        SpeakeasyMetadata({ data: "json, name=customAttributionUrl" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "customAttributionUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=customPreviewUrl" }),
+        SpeakeasyMetadata({ data: "json, name=customPreviewUrl" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "customPreviewUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=customThumbnailUrl" }),
+        SpeakeasyMetadata({ data: "json, name=customThumbnailUrl" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "customThumbnailUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateContentAuthored" }),
+        SpeakeasyMetadata({ data: "json, name=dateContentAuthored" }),
         __metadata("design:type", Date)
     ], MediaItem.prototype, "dateContentAuthored", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateContentPublished" }),
+        SpeakeasyMetadata({ data: "json, name=dateContentPublished" }),
         __metadata("design:type", Date)
     ], MediaItem.prototype, "dateContentPublished", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateContentReviewed" }),
+        SpeakeasyMetadata({ data: "json, name=dateContentReviewed" }),
         __metadata("design:type", Date)
     ], MediaItem.prototype, "dateContentReviewed", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateContentUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=dateContentUpdated" }),
         __metadata("design:type", Date)
     ], MediaItem.prototype, "dateContentUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateSyndicationCaptured" }),
+        SpeakeasyMetadata({ data: "json, name=dateSyndicationCaptured" }),
         __metadata("design:type", Date)
     ], MediaItem.prototype, "dateSyndicationCaptured", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateSyndicationUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=dateSyndicationUpdated" }),
         __metadata("design:type", Date)
     ], MediaItem.prototype, "dateSyndicationUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateSyndicationVisible" }),
+        SpeakeasyMetadata({ data: "json, name=dateSyndicationVisible" }),
         __metadata("design:type", Date)
     ], MediaItem.prototype, "dateSyndicationVisible", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=extendedAttributes", elemType: shared.ExtendedAttribute }),
+        SpeakeasyMetadata({ data: "json, name=extendedAttributes", elemType: ExtendedAttribute }),
         __metadata("design:type", Array)
     ], MediaItem.prototype, "extendedAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalGuid" }),
+        SpeakeasyMetadata({ data: "json, name=externalGuid" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "externalGuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=foreignSyndicationAPIUrl" }),
+        SpeakeasyMetadata({ data: "json, name=foreignSyndicationAPIUrl" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "foreignSyndicationApiUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=hash" }),
+        SpeakeasyMetadata({ data: "json, name=hash" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "hash", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], MediaItem.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=language" }),
+        SpeakeasyMetadata({ data: "json, name=language" }),
         __metadata("design:type", Language)
     ], MediaItem.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "json, name=mediaType" }),
+        SpeakeasyMetadata({ data: "json, name=mediaType" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "mediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", Source)
     ], MediaItem.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceUrl" }),
+        SpeakeasyMetadata({ data: "json, name=sourceUrl" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "sourceUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetUrl" }),
+        SpeakeasyMetadata({ data: "json, name=targetUrl" }),
         __metadata("design:type", String)
     ], MediaItem.prototype, "targetUrl", void 0);
     return MediaItem;

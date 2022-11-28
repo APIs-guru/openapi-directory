@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum LocalDiskInitializeParamsDiskTypeEnum {
     DiskTypeUnspecified = "DISK_TYPE_UNSPECIFIED",
     PdStandard = "PD_STANDARD",

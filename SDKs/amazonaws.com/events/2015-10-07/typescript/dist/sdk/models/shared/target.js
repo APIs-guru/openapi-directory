@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchParameters } from "./batchparameters";
 import { DeadLetterConfig } from "./deadletterconfig";
 import { EcsParameters } from "./ecsparameters";
@@ -44,67 +44,67 @@ var Target = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], Target.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=BatchParameters" }),
+        SpeakeasyMetadata({ data: "json, name=BatchParameters" }),
         __metadata("design:type", BatchParameters)
     ], Target.prototype, "batchParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeadLetterConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DeadLetterConfig" }),
         __metadata("design:type", DeadLetterConfig)
     ], Target.prototype, "deadLetterConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=EcsParameters" }),
+        SpeakeasyMetadata({ data: "json, name=EcsParameters" }),
         __metadata("design:type", EcsParameters)
     ], Target.prototype, "ecsParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=HttpParameters" }),
+        SpeakeasyMetadata({ data: "json, name=HttpParameters" }),
         __metadata("design:type", HttpParameters)
     ], Target.prototype, "httpParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], Target.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Input" }),
+        SpeakeasyMetadata({ data: "json, name=Input" }),
         __metadata("design:type", String)
     ], Target.prototype, "input", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputPath" }),
+        SpeakeasyMetadata({ data: "json, name=InputPath" }),
         __metadata("design:type", String)
     ], Target.prototype, "inputPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputTransformer" }),
+        SpeakeasyMetadata({ data: "json, name=InputTransformer" }),
         __metadata("design:type", InputTransformer)
     ], Target.prototype, "inputTransformer", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisParameters" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisParameters" }),
         __metadata("design:type", KinesisParameters)
     ], Target.prototype, "kinesisParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=RedshiftDataParameters" }),
+        SpeakeasyMetadata({ data: "json, name=RedshiftDataParameters" }),
         __metadata("design:type", RedshiftDataParameters)
     ], Target.prototype, "redshiftDataParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetryPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=RetryPolicy" }),
         __metadata("design:type", RetryPolicy)
     ], Target.prototype, "retryPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], Target.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=RunCommandParameters" }),
+        SpeakeasyMetadata({ data: "json, name=RunCommandParameters" }),
         __metadata("design:type", RunCommandParameters)
     ], Target.prototype, "runCommandParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=SageMakerPipelineParameters" }),
+        SpeakeasyMetadata({ data: "json, name=SageMakerPipelineParameters" }),
         __metadata("design:type", SageMakerPipelineParameters)
     ], Target.prototype, "sageMakerPipelineParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=SqsParameters" }),
+        SpeakeasyMetadata({ data: "json, name=SqsParameters" }),
         __metadata("design:type", SqsParameters)
     ], Target.prototype, "sqsParameters", void 0);
     return Target;

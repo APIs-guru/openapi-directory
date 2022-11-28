@@ -14,18 +14,18 @@ class GetOrdersQueryParams:
 
 @dataclass
 class GetOrdersSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetOrdersRequest:
-    query_params: GetOrdersQueryParams = field(default=None)
-    security: GetOrdersSecurity = field(default=None)
+    query_params: GetOrdersQueryParams = field()
+    security: GetOrdersSecurity = field()
     
 
 @dataclass
 class GetOrdersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     order_search_paged_collection: Optional[shared.OrderSearchPagedCollection] = field(default=None)
-    status_code: int = field(default=None)
     

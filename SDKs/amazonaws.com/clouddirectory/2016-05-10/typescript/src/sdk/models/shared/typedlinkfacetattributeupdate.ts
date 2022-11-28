@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateActionTypeEnum } from "./updateactiontypeenum";
 import { TypedLinkAttributeDefinition } from "./typedlinkattributedefinition";
+
 
 
 // TypedLinkFacetAttributeUpdate
@@ -8,9 +9,9 @@ import { TypedLinkAttributeDefinition } from "./typedlinkattributedefinition";
  * A typed link facet attribute update.
 **/
 export class TypedLinkFacetAttributeUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: UpdateActionTypeEnum;
 
-  @Metadata({ data: "json, name=Attribute" })
+  @SpeakeasyMetadata({ data: "json, name=Attribute" })
   attribute: TypedLinkAttributeDefinition;
 }

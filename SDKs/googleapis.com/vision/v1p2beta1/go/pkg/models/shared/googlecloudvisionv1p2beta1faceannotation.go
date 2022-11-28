@@ -77,6 +77,8 @@ const (
 	GoogleCloudVisionV1p2beta1FaceAnnotationUnderExposedLikelihoodEnumVeryLikely   GoogleCloudVisionV1p2beta1FaceAnnotationUnderExposedLikelihoodEnum = "VERY_LIKELY"
 )
 
+// GoogleCloudVisionV1p2beta1FaceAnnotation
+// A face annotation object contains the results of face detection.
 type GoogleCloudVisionV1p2beta1FaceAnnotation struct {
 	AngerLikelihood        *GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihoodEnum        `json:"angerLikelihood,omitempty"`
 	BlurredLikelihood      *GoogleCloudVisionV1p2beta1FaceAnnotationBlurredLikelihoodEnum      `json:"blurredLikelihood,omitempty"`

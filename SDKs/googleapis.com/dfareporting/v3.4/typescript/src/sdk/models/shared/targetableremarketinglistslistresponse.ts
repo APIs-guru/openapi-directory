@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetableRemarketingList } from "./targetableremarketinglist";
+
 
 
 // TargetableRemarketingListsListResponse
@@ -8,12 +8,12 @@ import { TargetableRemarketingList } from "./targetableremarketinglist";
  * Targetable remarketing list response
 **/
 export class TargetableRemarketingListsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=targetableRemarketingLists", elemType: shared.TargetableRemarketingList })
+  @SpeakeasyMetadata({ data: "json, name=targetableRemarketingLists", elemType: TargetableRemarketingList })
   targetableRemarketingLists?: TargetableRemarketingList[];
 }

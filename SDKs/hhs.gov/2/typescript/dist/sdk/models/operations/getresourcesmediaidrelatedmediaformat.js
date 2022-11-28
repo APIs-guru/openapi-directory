@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesMediaIdRelatedMediaFormatPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesMediaIdRelatedMediaFormatPathParams, _super);
@@ -30,11 +30,11 @@ var GetResourcesMediaIdRelatedMediaFormatPathParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetResourcesMediaIdRelatedMediaFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdRelatedMediaFormatPathParams.prototype, "id", void 0);
     return GetResourcesMediaIdRelatedMediaFormatPathParams;
@@ -46,15 +46,15 @@ var GetResourcesMediaIdRelatedMediaFormatQueryParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdRelatedMediaFormatQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdRelatedMediaFormatQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesMediaIdRelatedMediaFormatQueryParams.prototype, "sort", void 0);
     return GetResourcesMediaIdRelatedMediaFormatQueryParams;
@@ -66,11 +66,11 @@ var GetResourcesMediaIdRelatedMediaFormatRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaIdRelatedMediaFormatPathParams)
     ], GetResourcesMediaIdRelatedMediaFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaIdRelatedMediaFormatQueryParams)
     ], GetResourcesMediaIdRelatedMediaFormatRequest.prototype, "queryParams", void 0);
     return GetResourcesMediaIdRelatedMediaFormatRequest;
@@ -82,15 +82,15 @@ var GetResourcesMediaIdRelatedMediaFormatResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesMediaIdRelatedMediaFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.MediaItemWrapped }),
+        SpeakeasyMetadata({ elemType: shared.MediaItemWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesMediaIdRelatedMediaFormatResponse.prototype, "mediaItemWrappeds", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdRelatedMediaFormatResponse.prototype, "statusCode", void 0);
     return GetResourcesMediaIdRelatedMediaFormatResponse;

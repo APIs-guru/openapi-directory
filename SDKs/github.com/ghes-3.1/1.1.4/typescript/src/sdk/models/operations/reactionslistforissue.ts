@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReactionsListForIssuePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=issue_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=issue_number" })
   issueNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReactionsListForIssueContentEnum {
-    Plus1 = "+1"
-,    Minus1 = "-1"
-,    Laugh = "laugh"
-,    Confused = "confused"
-,    Heart = "heart"
-,    Hooray = "hooray"
-,    Rocket = "rocket"
-,    Eyes = "eyes"
+    Plus1 = "+1",
+    Minus1 = "-1",
+    Laugh = "laugh",
+    Confused = "confused",
+    Heart = "heart",
+    Hooray = "hooray",
+    Rocket = "rocket",
+    Eyes = "eyes"
 }
 
 
 export class ReactionsListForIssueQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=content" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=content" })
   content?: ReactionsListForIssueContentEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class ReactionsListForIssueRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReactionsListForIssuePathParams;
-
-  @Metadata()
-  queryParams: ReactionsListForIssueQueryParams;
-}
-
-
 export class ReactionsListForIssue415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ReactionsListForIssueRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReactionsListForIssuePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: ReactionsListForIssueQueryParams;
+}
+
+
 export class ReactionsListForIssueResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.Reaction })
+  @SpeakeasyMetadata({ elemType: shared.Reaction })
   reactions?: shared.Reaction[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reactionsListForIssue415ApplicationJsonObject?: ReactionsListForIssue415ApplicationJson;
 }

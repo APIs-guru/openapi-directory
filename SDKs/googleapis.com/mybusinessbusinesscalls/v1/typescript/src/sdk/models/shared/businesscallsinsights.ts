@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregateMetrics } from "./aggregatemetrics";
 
+
 export enum BusinessCallsInsightsMetricTypeEnum {
-    MetricTypeUnspecified = "METRIC_TYPE_UNSPECIFIED"
-,    AggregateCount = "AGGREGATE_COUNT"
+    MetricTypeUnspecified = "METRIC_TYPE_UNSPECIFIED",
+    AggregateCount = "AGGREGATE_COUNT"
 }
 
 
@@ -12,12 +13,12 @@ export enum BusinessCallsInsightsMetricTypeEnum {
  * Insights for calls made to a location.
 **/
 export class BusinessCallsInsights extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregateMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=aggregateMetrics" })
   aggregateMetrics?: AggregateMetrics;
 
-  @Metadata({ data: "json, name=metricType" })
+  @SpeakeasyMetadata({ data: "json, name=metricType" })
   metricType?: BusinessCallsInsightsMetricTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

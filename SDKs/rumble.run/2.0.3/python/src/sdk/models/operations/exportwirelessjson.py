@@ -11,18 +11,18 @@ class ExportWirelessJSONQueryParams:
 
 @dataclass
 class ExportWirelessJSONSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExportWirelessJSONRequest:
-    query_params: ExportWirelessJSONQueryParams = field(default=None)
-    security: ExportWirelessJSONSecurity = field(default=None)
+    query_params: ExportWirelessJSONQueryParams = field()
+    security: ExportWirelessJSONSecurity = field()
     
 
 @dataclass
 class ExportWirelessJSONResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     wirelesses: Optional[List[shared.Wireless]] = field(default=None)
     

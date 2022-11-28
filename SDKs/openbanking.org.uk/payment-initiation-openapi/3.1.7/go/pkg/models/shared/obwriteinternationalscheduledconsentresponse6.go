@@ -11,11 +11,15 @@ const (
 	ObWriteInternationalScheduledConsentResponse6DataAuthorisationAuthorisationTypeEnumSingle ObWriteInternationalScheduledConsentResponse6DataAuthorisationAuthorisationTypeEnum = "Single"
 )
 
+// ObWriteInternationalScheduledConsentResponse6DataAuthorisation
+// The authorisation type request from the TPP.
 type ObWriteInternationalScheduledConsentResponse6DataAuthorisation struct {
 	AuthorisationType  ObWriteInternationalScheduledConsentResponse6DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
 	CompletionDateTime *time.Time                                                                          `json:"CompletionDateTime,omitempty"`
 }
 
+// ObWriteInternationalScheduledConsentResponse6DataCharges
+// Set of elements used to provide details of a charge for the payment initiation.
 type ObWriteInternationalScheduledConsentResponse6DataCharges struct {
 	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
 	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
@@ -30,6 +34,8 @@ const (
 	ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformationRateTypeEnumIndicative ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformationRateTypeEnum = "Indicative"
 )
 
+// ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformation
+// Further detailed information on the exchange rate that has been used in the payment transaction.
 type ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformation struct {
 	ContractIdentification *string                                                                              `json:"ContractIdentification,omitempty"`
 	ExchangeRate           float64                                                                              `json:"ExchangeRate"`
@@ -38,11 +44,15 @@ type ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformation st
 	UnitCurrency           string                                                                               `json:"UnitCurrency"`
 }
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor
+// Party to which an amount of money is due.
 type ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor struct {
 	Name          *string           `json:"Name,omitempty"`
 	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAccount
+// Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.
 type ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -50,6 +60,8 @@ type ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAccount 
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAgent
+// Financial institution servicing an account for the creditor.
 type ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAgent struct {
 	Identification *string           `json:"Identification,omitempty"`
 	Name           *string           `json:"Name,omitempty"`
@@ -57,6 +69,8 @@ type ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAgent st
 	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteInternationalScheduledConsentResponse6DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -72,6 +86,8 @@ const (
 	ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformationRateTypeEnumIndicative ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformationRateTypeEnum = "Indicative"
 )
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformation
+// Provides details on the currency exchange rate and contract.
 type ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformation struct {
 	ContractIdentification *string                                                                                        `json:"ContractIdentification,omitempty"`
 	ExchangeRate           *float64                                                                                       `json:"ExchangeRate,omitempty"`
@@ -79,6 +95,9 @@ type ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInfo
 	UnitCurrency           string                                                                                         `json:"UnitCurrency"`
 }
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiationInstructedAmount
+// Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
+// Usage: This amount has to be transported unchanged through the transaction chain.
 type ObWriteInternationalScheduledConsentResponse6DataInitiationInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
@@ -91,11 +110,15 @@ const (
 	ObWriteInternationalScheduledConsentResponse6DataInitiationInstructionPriorityEnumUrgent ObWriteInternationalScheduledConsentResponse6DataInitiationInstructionPriorityEnum = "Urgent"
 )
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiationRemittanceInformation
+// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 type ObWriteInternationalScheduledConsentResponse6DataInitiationRemittanceInformation struct {
 	Reference    *string `json:"Reference,omitempty"`
 	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
+// ObWriteInternationalScheduledConsentResponse6DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a single scheduled international payment.
 type ObWriteInternationalScheduledConsentResponse6DataInitiation struct {
 	ChargeBearer               *ObChargeBearerType1CodeEnum                                                        `json:"ChargeBearer,omitempty"`
 	Creditor                   *ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor                `json:"Creditor,omitempty"`

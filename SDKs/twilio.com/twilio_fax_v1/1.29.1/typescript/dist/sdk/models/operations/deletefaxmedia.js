@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export var DELETEFAXMEDIA_SERVERS = [
+export var DeleteFaxMediaServerList = [
     "https://fax.twilio.com",
 ];
 var DeleteFaxMediaPathParams = /** @class */ (function (_super) {
@@ -33,11 +33,11 @@ var DeleteFaxMediaPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" }),
         __metadata("design:type", String)
     ], DeleteFaxMediaPathParams.prototype, "faxSid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=Sid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" }),
         __metadata("design:type", String)
     ], DeleteFaxMediaPathParams.prototype, "sid", void 0);
     return DeleteFaxMediaPathParams;
@@ -49,7 +49,7 @@ var DeleteFaxMediaSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeAccountSidAuthToken)
     ], DeleteFaxMediaSecurity.prototype, "accountSidAuthToken", void 0);
     return DeleteFaxMediaSecurity;
@@ -61,15 +61,15 @@ var DeleteFaxMediaRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFaxMediaRequest.prototype, "serverUrl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFaxMediaPathParams)
     ], DeleteFaxMediaRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFaxMediaSecurity)
     ], DeleteFaxMediaRequest.prototype, "security", void 0);
     return DeleteFaxMediaRequest;
@@ -81,11 +81,11 @@ var DeleteFaxMediaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFaxMediaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteFaxMediaResponse.prototype, "statusCode", void 0);
     return DeleteFaxMediaResponse;

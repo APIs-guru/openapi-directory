@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import jobstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PolicyGeneration:
-    completed_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completedOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobId' }})
-    principal_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principalArn' }})
-    started_on: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startedOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status: jobstatus_enum.JobStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""PolicyGeneration
+    Contains details about the policy generation status and properties.
+    """
+    
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobId') }})
+    principal_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('principalArn') }})
+    started_on: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startedOn'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status: JobStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    completed_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('completedOn'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

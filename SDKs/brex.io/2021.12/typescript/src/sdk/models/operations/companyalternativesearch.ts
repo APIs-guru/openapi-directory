@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompanyAlternativeSearchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" })
   country: string;
 }
 
 
 export class CompanyAlternativeSearchRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=address;" })
+  @SpeakeasyMetadata({ data: "form, name=address;" })
   address?: string;
 
-  @Metadata({ data: "form, name=name;" })
+  @SpeakeasyMetadata({ data: "form, name=name;" })
   name?: string;
 
-  @Metadata({ data: "form, name=number;" })
+  @SpeakeasyMetadata({ data: "form, name=number;" })
   number?: string;
 
-  @Metadata({ data: "form, name=phone;" })
+  @SpeakeasyMetadata({ data: "form, name=phone;" })
   phone?: string;
 
-  @Metadata({ data: "form, name=url;" })
+  @SpeakeasyMetadata({ data: "form, name=url;" })
   url?: string;
 
-  @Metadata({ data: "form, name=vat;" })
+  @SpeakeasyMetadata({ data: "form, name=vat;" })
   vat?: string;
 }
 
 
 export class CompanyAlternativeSearchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class CompanyAlternativeSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompanyAlternativeSearchPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: CompanyAlternativeSearchRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CompanyAlternativeSearchSecurity;
 }
 
 
 export class CompanyAlternativeSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companyAlternativeSearch200ApplicationJsonAnies?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   companyAlternativeSearchDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

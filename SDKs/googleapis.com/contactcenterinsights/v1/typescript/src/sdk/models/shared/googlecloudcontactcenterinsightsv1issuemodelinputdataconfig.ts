@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigMediumEnum {
-    MediumUnspecified = "MEDIUM_UNSPECIFIED"
-,    PhoneCall = "PHONE_CALL"
-,    Chat = "CHAT"
+    MediumUnspecified = "MEDIUM_UNSPECIFIED",
+    PhoneCall = "PHONE_CALL",
+    Chat = "CHAT"
 }
 
 
@@ -12,12 +13,25 @@ export enum GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigMediumEnu
  * Configs for the input data used to create the issue model.
 **/
 export class GoogleCloudContactcenterinsightsV1IssueModelInputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=medium" })
+  @SpeakeasyMetadata({ data: "json, name=medium" })
   medium?: GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigMediumEnum;
 
-  @Metadata({ data: "json, name=trainingConversationsCount" })
+  @SpeakeasyMetadata({ data: "json, name=trainingConversationsCount" })
   trainingConversationsCount?: string;
+}
+
+
+// GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigInput
+/** 
+ * Configs for the input data used to create the issue model.
+**/
+export class GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=filter" })
+  filter?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=medium" })
+  medium?: GoogleCloudContactcenterinsightsV1IssueModelInputDataConfigMediumEnum;
 }

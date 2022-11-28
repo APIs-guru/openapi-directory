@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class ListConflictingAliases20200531QueryParams:
-    alias: str = field(default=None, metadata={'query_param': { 'field_name': 'Alias', 'style': 'form', 'explode': True }})
-    distribution_id: str = field(default=None, metadata={'query_param': { 'field_name': 'DistributionId', 'style': 'form', 'explode': True }})
+    alias: str = field(metadata={'query_param': { 'field_name': 'Alias', 'style': 'form', 'explode': True }})
+    distribution_id: str = field(metadata={'query_param': { 'field_name': 'DistributionId', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     
@@ -23,13 +26,13 @@ class ListConflictingAliases20200531Headers:
 
 @dataclass
 class ListConflictingAliases20200531Request:
-    query_params: ListConflictingAliases20200531QueryParams = field(default=None)
-    headers: ListConflictingAliases20200531Headers = field(default=None)
+    headers: ListConflictingAliases20200531Headers = field()
+    query_params: ListConflictingAliases20200531QueryParams = field()
     
 
 @dataclass
 class ListConflictingAliases20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum RoutingStrategyTypeEnum {
-    Simple = "SIMPLE"
-,    Terminal = "TERMINAL"
+    Simple = "SIMPLE",
+    Terminal = "TERMINAL"
 }

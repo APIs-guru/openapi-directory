@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class StartDeviceAuthorizationHeaders:
 @dataclass_json
 @dataclass
 class StartDeviceAuthorizationRequestBody:
-    client_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientId' }})
-    client_secret: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientSecret' }})
-    start_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startUrl' }})
+    client_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientId') }})
+    client_secret: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientSecret') }})
+    start_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startUrl') }})
     
 
 @dataclass
 class StartDeviceAuthorizationRequest:
-    headers: StartDeviceAuthorizationHeaders = field(default=None)
-    request: StartDeviceAuthorizationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartDeviceAuthorizationHeaders = field()
+    request: StartDeviceAuthorizationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartDeviceAuthorizationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_client_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     slow_down_exception: Optional[Any] = field(default=None)
     start_device_authorization_response: Optional[shared.StartDeviceAuthorizationResponse] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_client_exception: Optional[Any] = field(default=None)
     

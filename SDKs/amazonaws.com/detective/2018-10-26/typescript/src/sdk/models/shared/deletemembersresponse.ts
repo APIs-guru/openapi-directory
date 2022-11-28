@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnprocessedAccount } from "./unprocessedaccount";
 
 
+
 export class DeleteMembersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountIds" })
+  @SpeakeasyMetadata({ data: "json, name=AccountIds" })
   accountIds?: string[];
 
-  @Metadata({ data: "json, name=UnprocessedAccounts", elemType: shared.UnprocessedAccount })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedAccounts", elemType: UnprocessedAccount })
   unprocessedAccounts?: UnprocessedAccount[];
 }

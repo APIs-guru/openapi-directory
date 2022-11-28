@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MultiClusterIngressFeatureSpecBillingEnum {
-    BillingUnspecified = "BILLING_UNSPECIFIED"
-,    PayAsYouGo = "PAY_AS_YOU_GO"
-,    AnthosLicense = "ANTHOS_LICENSE"
+    BillingUnspecified = "BILLING_UNSPECIFIED",
+    PayAsYouGo = "PAY_AS_YOU_GO",
+    AnthosLicense = "ANTHOS_LICENSE"
 }
 
 
@@ -12,9 +13,9 @@ export enum MultiClusterIngressFeatureSpecBillingEnum {
  * **Multi-cluster Ingress**: The configuration for the MultiClusterIngress feature.
 **/
 export class MultiClusterIngressFeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billing" })
+  @SpeakeasyMetadata({ data: "json, name=billing" })
   billing?: MultiClusterIngressFeatureSpecBillingEnum;
 
-  @Metadata({ data: "json, name=configMembership" })
+  @SpeakeasyMetadata({ data: "json, name=configMembership" })
   configMembership?: string;
 }

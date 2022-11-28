@@ -1,5 +1,7 @@
 package shared
 
+// EventItem
+// The detailed data returned for the event item.
 type EventItem struct {
 	AdditionalImages      []Image          `json:"additionalImages,omitempty"`
 	CategoryAncestorIds   []string         `json:"categoryAncestorIds,omitempty"`

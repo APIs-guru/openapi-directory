@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class FindFormsQueryParams extends SpeakeasyBase {
     query?: string;
@@ -6,12 +6,12 @@ export declare class FindFormsQueryParams extends SpeakeasyBase {
 export declare class FindFormsSecurity extends SpeakeasyBase {
     apikey: shared.SchemeApikey;
 }
+export declare class FindForms200ApplicationJson extends SpeakeasyBase {
+    data: any[];
+}
 export declare class FindFormsRequest extends SpeakeasyBase {
     queryParams: FindFormsQueryParams;
     security: FindFormsSecurity;
-}
-export declare class FindForms200ApplicationJson extends SpeakeasyBase {
-    data: any[];
 }
 export declare class FindFormsResponse extends SpeakeasyBase {
     contentType: string;

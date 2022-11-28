@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
 /**
  * The entity-level sentiment analysis response message.

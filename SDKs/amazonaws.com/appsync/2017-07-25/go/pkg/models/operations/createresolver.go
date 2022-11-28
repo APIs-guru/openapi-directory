@@ -19,6 +19,8 @@ type CreateResolverHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateResolverRequestBodyCachingConfig
+// The caching configuration for a resolver that has caching enabled.
 type CreateResolverRequestBodyCachingConfig struct {
 	CachingKeys []string `json:"cachingKeys,omitempty"`
 	TTL         *int64   `json:"ttl,omitempty"`
@@ -31,10 +33,14 @@ const (
 	CreateResolverRequestBodyKindEnumPipeline CreateResolverRequestBodyKindEnum = "PIPELINE"
 )
 
+// CreateResolverRequestBodyPipelineConfig
+// The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
 type CreateResolverRequestBodyPipelineConfig struct {
 	Functions []string `json:"functions,omitempty"`
 }
 
+// CreateResolverRequestBodySyncConfig
+// <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
 type CreateResolverRequestBodySyncConfig struct {
 	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection,omitempty"`
 	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler,omitempty"`

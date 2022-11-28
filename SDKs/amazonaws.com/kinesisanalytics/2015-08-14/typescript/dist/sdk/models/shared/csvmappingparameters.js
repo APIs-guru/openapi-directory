@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CsvMappingParameters
 /**
  * <p>Provides additional mapping information when the record format uses delimiters, such as CSV. For example, the following sample records use CSV format, where the records use the <i>'\n'</i> as the row delimiter and a comma (",") as the column delimiter: </p> <p> <code>"name1", "address1"</code> </p> <p> <code>"name2", "address2"</code> </p>
@@ -33,11 +33,11 @@ var CsvMappingParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RecordColumnDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=RecordColumnDelimiter" }),
         __metadata("design:type", String)
     ], CsvMappingParameters.prototype, "recordColumnDelimiter", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordRowDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=RecordRowDelimiter" }),
         __metadata("design:type", String)
     ], CsvMappingParameters.prototype, "recordRowDelimiter", void 0);
     return CsvMappingParameters;

@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckoutTypeEnum } from "./checkouttypeenum";
 import { EntitlementData } from "./entitlementdata";
 
 
+
 export class CheckoutLicenseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Beneficiary" })
+  @SpeakeasyMetadata({ data: "json, name=Beneficiary" })
   beneficiary?: string;
 
-  @Metadata({ data: "json, name=CheckoutType" })
+  @SpeakeasyMetadata({ data: "json, name=CheckoutType" })
   checkoutType: CheckoutTypeEnum;
 
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=Entitlements", elemType: shared.EntitlementData })
+  @SpeakeasyMetadata({ data: "json, name=Entitlements", elemType: EntitlementData })
   entitlements: EntitlementData[];
 
-  @Metadata({ data: "json, name=KeyFingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=KeyFingerprint" })
   keyFingerprint: string;
 
-  @Metadata({ data: "json, name=NodeId" })
+  @SpeakeasyMetadata({ data: "json, name=NodeId" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=ProductSKU" })
+  @SpeakeasyMetadata({ data: "json, name=ProductSKU" })
   productSku: string;
 }

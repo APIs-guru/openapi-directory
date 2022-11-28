@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum {
     ProviderUnspecified = "PROVIDER_UNSPECIFIED",
     PhoneSms = "PHONE_SMS"

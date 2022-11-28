@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams:
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsCancelRequest:
-    path_params: PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams = field(default=None)
-    query_params: PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams = field(default=None)
+    path_params: PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams = field()
+    query_params: PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams = field()
     request: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsCancelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_payments_reseller_subscription_v1_cancel_subscription_response: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

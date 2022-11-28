@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateTrackerPathParams:
-    tracker_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
+    tracker_name: str = field(metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,25 +33,25 @@ class UpdateTrackerRequestBodyPricingPlanEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateTrackerRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    pricing_plan: Optional[UpdateTrackerRequestBodyPricingPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PricingPlan' }})
-    pricing_plan_data_source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PricingPlanDataSource' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    pricing_plan: Optional[UpdateTrackerRequestBodyPricingPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PricingPlan') }})
+    pricing_plan_data_source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PricingPlanDataSource') }})
     
 
 @dataclass
 class UpdateTrackerRequest:
-    path_params: UpdateTrackerPathParams = field(default=None)
-    headers: UpdateTrackerHeaders = field(default=None)
-    request: UpdateTrackerRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateTrackerHeaders = field()
+    path_params: UpdateTrackerPathParams = field()
+    request: UpdateTrackerRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateTrackerResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_tracker_response: Optional[shared.UpdateTrackerResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

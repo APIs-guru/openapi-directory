@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TimingInformation } from "./timinginformation";
 /**
  * Contains the details of the started session.

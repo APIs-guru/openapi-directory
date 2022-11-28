@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypeEnum } from "./entitytypeenum";
 
 
+
 export class Application extends SpeakeasyBase {
-  @Metadata({ data: "json, name=create_time" })
+  @SpeakeasyMetadata({ data: "json, name=create_time" })
   createTime?: number;
 
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=entity_id" })
+  @SpeakeasyMetadata({ data: "json, name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: EntityTypeEnum;
 
-  @Metadata({ data: "json, name=last_modified_by" })
+  @SpeakeasyMetadata({ data: "json, name=last_modified_by" })
   lastModifiedBy?: string;
 
-  @Metadata({ data: "json, name=last_modified_time" })
+  @SpeakeasyMetadata({ data: "json, name=last_modified_time" })
   lastModifiedTime?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

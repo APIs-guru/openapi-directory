@@ -10,12 +10,12 @@ class GetV3CustomersCurrentHeaders:
 
 @dataclass
 class GetV3CustomersCurrentRequest:
-    headers: GetV3CustomersCurrentHeaders = field(default=None)
+    headers: GetV3CustomersCurrentHeaders = field()
     
 
 @dataclass
 class GetV3CustomersCurrentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_info_response: Optional[shared.CustomerInfoResponse] = field(default=None)
-    status_code: int = field(default=None)
     

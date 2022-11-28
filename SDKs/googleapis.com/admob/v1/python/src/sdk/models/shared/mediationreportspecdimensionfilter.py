@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import stringlist
+from sdk import utils
+from . import *
 
 class MediationReportSpecDimensionFilterDimensionEnum(str, Enum):
     DIMENSION_UNSPECIFIED = "DIMENSION_UNSPECIFIED"
@@ -25,6 +27,10 @@ class MediationReportSpecDimensionFilterDimensionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MediationReportSpecDimensionFilter:
-    dimension: Optional[MediationReportSpecDimensionFilterDimensionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimension' }})
-    matches_any: Optional[stringlist.StringList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchesAny' }})
+    r"""MediationReportSpecDimensionFilter
+    Describes which report rows to match based on their dimension values.
+    """
+    
+    dimension: Optional[MediationReportSpecDimensionFilterDimensionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimension') }})
+    matches_any: Optional[StringList] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchesAny') }})
     

@@ -1,7 +1,8 @@
 
 
+
 export enum NotificationLevelEnum {
-    Normal = "Normal"
-,    Warning = "Warning"
-,    Error = "Error"
+    Normal = "Normal",
+    Warning = "Warning",
+    Error = "Error"
 }

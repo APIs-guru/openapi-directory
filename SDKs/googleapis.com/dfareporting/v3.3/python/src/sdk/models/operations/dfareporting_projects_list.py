@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingProjectsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingProjectsListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -40,20 +41,20 @@ class DfareportingProjectsListQueryParams:
 
 @dataclass
 class DfareportingProjectsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingProjectsListRequest:
-    path_params: DfareportingProjectsListPathParams = field(default=None)
-    query_params: DfareportingProjectsListQueryParams = field(default=None)
-    security: DfareportingProjectsListSecurity = field(default=None)
+    path_params: DfareportingProjectsListPathParams = field()
+    query_params: DfareportingProjectsListQueryParams = field()
+    security: DfareportingProjectsListSecurity = field()
     
 
 @dataclass
 class DfareportingProjectsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     projects_list_response: Optional[shared.ProjectsListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

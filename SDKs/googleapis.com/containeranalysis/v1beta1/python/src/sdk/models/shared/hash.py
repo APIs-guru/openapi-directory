@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class HashTypeEnum(str, Enum):
     HASH_TYPE_UNSPECIFIED = "HASH_TYPE_UNSPECIFIED"
@@ -10,6 +12,10 @@ class HashTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Hash:
-    type: Optional[HashTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""Hash
+    Container message for hash values.
+    """
+    
+    type: Optional[HashTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

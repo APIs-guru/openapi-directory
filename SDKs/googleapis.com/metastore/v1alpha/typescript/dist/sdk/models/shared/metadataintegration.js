@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataCatalogConfig } from "./datacatalogconfig";
 import { DataplexConfig } from "./dataplexconfig";
 // MetadataIntegration
@@ -35,11 +35,11 @@ var MetadataIntegration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataCatalogConfig" }),
+        SpeakeasyMetadata({ data: "json, name=dataCatalogConfig" }),
         __metadata("design:type", DataCatalogConfig)
     ], MetadataIntegration.prototype, "dataCatalogConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataplexConfig" }),
+        SpeakeasyMetadata({ data: "json, name=dataplexConfig" }),
         __metadata("design:type", DataplexConfig)
     ], MetadataIntegration.prototype, "dataplexConfig", void 0);
     return MetadataIntegration;

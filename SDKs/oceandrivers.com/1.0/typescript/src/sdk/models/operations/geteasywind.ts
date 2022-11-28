@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEasywindPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=easywindId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=easywindId" })
   easywindId: string;
 }
 
 
 export class GetEasywindQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=period" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=period" })
   period: string;
 }
 
 
 export class GetEasywindRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEasywindPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEasywindQueryParams;
 }
 
 
 export class GetEasywindResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

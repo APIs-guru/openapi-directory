@@ -5,6 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDrivesQueryParams:
+    year: int = field(metadata={'query_param': { 'field_name': 'year', 'style': 'form', 'explode': True }})
     conference: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'conference', 'style': 'form', 'explode': True }})
     defense: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'defense', 'style': 'form', 'explode': True }})
     defense_conference: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'defenseConference', 'style': 'form', 'explode': True }})
@@ -13,17 +14,16 @@ class GetDrivesQueryParams:
     season_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'seasonType', 'style': 'form', 'explode': True }})
     team: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'team', 'style': 'form', 'explode': True }})
     week: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'week', 'style': 'form', 'explode': True }})
-    year: int = field(default=None, metadata={'query_param': { 'field_name': 'year', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetDrivesRequest:
-    query_params: GetDrivesQueryParams = field(default=None)
+    query_params: GetDrivesQueryParams = field()
     
 
 @dataclass
 class GetDrivesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     drives: Optional[List[shared.Drive]] = field(default=None)
-    status_code: int = field(default=None)
     

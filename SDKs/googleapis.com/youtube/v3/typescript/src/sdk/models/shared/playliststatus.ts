@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlaylistStatusPrivacyStatusEnum {
-    Public = "public"
-,    Unlisted = "unlisted"
-,    Private = "private"
+    Public = "public",
+    Unlisted = "unlisted",
+    Private = "private"
 }
 
 
 export class PlaylistStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privacyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=privacyStatus" })
   privacyStatus?: PlaylistStatusPrivacyStatusEnum;
 }

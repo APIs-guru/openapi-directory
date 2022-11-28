@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FaceDetail } from "./facedetail";
 import { OrientationCorrectionEnum } from "./orientationcorrectionenum";
 
 
+
 export class DetectFacesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FaceDetails", elemType: shared.FaceDetail })
+  @SpeakeasyMetadata({ data: "json, name=FaceDetails", elemType: FaceDetail })
   faceDetails?: FaceDetail[];
 
-  @Metadata({ data: "json, name=OrientationCorrection" })
+  @SpeakeasyMetadata({ data: "json, name=OrientationCorrection" })
   orientationCorrection?: OrientationCorrectionEnum;
 }

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CachePostRequest = /** @class */ (function (_super) {
     __extends(CachePostRequest, _super);
     function CachePostRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=current_user_id" }),
+        SpeakeasyMetadata({ data: "json, name=current_user_id" }),
         __metadata("design:type", String)
     ], CachePostRequest.prototype, "currentUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=nonce" }),
+        SpeakeasyMetadata({ data: "json, name=nonce" }),
         __metadata("design:type", String)
     ], CachePostRequest.prototype, "nonce", void 0);
     __decorate([
-        Metadata({ data: "json, name=subdocument" }),
+        SpeakeasyMetadata({ data: "json, name=subdocument" }),
         __metadata("design:type", String)
     ], CachePostRequest.prototype, "subdocument", void 0);
     return CachePostRequest;

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,26 +15,48 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get(self, request: operations.GetRequest) -> operations.GetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets data from the slave identified by {address}
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/mbus/get/{device}/{baudrate}/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -51,13 +76,16 @@ class SDK:
 
     
     def get_multi(self, request: operations.GetMultiRequest) -> operations.GetMultiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets data from the slave identified by {address}, and supports multiple responses from the slave
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/mbus/getMulti/{device}/{baudrate}/{address}/{maxframes}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -77,13 +105,16 @@ class SDK:
 
     
     def hat(self) -> operations.HatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets Raspberry Pi Hat information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/mbus/hat"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -101,13 +132,16 @@ class SDK:
 
     
     def hat_off(self) -> operations.HatOffResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Turns off power to the M-Bus
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/mbus/hat/off"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -123,13 +157,16 @@ class SDK:
 
     
     def hat_on(self) -> operations.HatOnResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Turns on power to the M-Bus
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/mbus/hat/on"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -145,13 +182,16 @@ class SDK:
 
     
     def mbus_api(self) -> operations.MbusAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns this API specification
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/mbus/api"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -168,13 +208,16 @@ class SDK:
 
     
     def scan(self, request: operations.ScanRequest) -> operations.ScanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Scan the specified device for slaves
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/mbus/scan/{device}/{baudrate}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 

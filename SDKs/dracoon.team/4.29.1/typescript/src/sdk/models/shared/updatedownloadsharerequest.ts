@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectExpiration } from "./objectexpiration";
+
 
 
 // UpdateDownloadShareRequest
@@ -7,45 +8,45 @@ import { ObjectExpiration } from "./objectexpiration";
  * Request model for updating a Download Share
 **/
 export class UpdateDownloadShareRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultCountry" })
+  @SpeakeasyMetadata({ data: "json, name=defaultCountry" })
   defaultCountry?: string;
 
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: ObjectExpiration;
 
-  @Metadata({ data: "json, name=internalNotes" })
+  @SpeakeasyMetadata({ data: "json, name=internalNotes" })
   internalNotes?: string;
 
-  @Metadata({ data: "json, name=maxDownloads" })
+  @SpeakeasyMetadata({ data: "json, name=maxDownloads" })
   maxDownloads?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=notifyCreator" })
+  @SpeakeasyMetadata({ data: "json, name=notifyCreator" })
   notifyCreator?: boolean;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=receiverLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=receiverLanguage" })
   receiverLanguage?: string;
 
-  @Metadata({ data: "json, name=resetMaxDownloads" })
+  @SpeakeasyMetadata({ data: "json, name=resetMaxDownloads" })
   resetMaxDownloads?: boolean;
 
-  @Metadata({ data: "json, name=resetPassword" })
+  @SpeakeasyMetadata({ data: "json, name=resetPassword" })
   resetPassword?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorName" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorName" })
   showCreatorName?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorUsername" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorUsername" })
   showCreatorUsername?: boolean;
 
-  @Metadata({ data: "json, name=textMessageRecipients" })
+  @SpeakeasyMetadata({ data: "json, name=textMessageRecipients" })
   textMessageRecipients?: string[];
 }

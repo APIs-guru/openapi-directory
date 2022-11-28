@@ -1,5 +1,7 @@
 package shared
 
+// SearchFoldersRequest
+// The request message for searching folders.
 type SearchFoldersRequest struct {
 	PageSize  *int32  `json:"pageSize,omitempty"`
 	PageToken *string `json:"pageToken,omitempty"`

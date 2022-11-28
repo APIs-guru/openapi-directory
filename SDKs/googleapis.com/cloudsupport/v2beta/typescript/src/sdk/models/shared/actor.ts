@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Actor
@@ -6,12 +7,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object containing information about the effective user and authenticated principal responsible for an action.
 **/
 export class Actor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=googleSupport" })
+  @SpeakeasyMetadata({ data: "json, name=googleSupport" })
   googleSupport?: boolean;
+}
+
+
+// ActorInput
+/** 
+ * An object containing information about the effective user and authenticated principal responsible for an action.
+**/
+export class ActorInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
 }

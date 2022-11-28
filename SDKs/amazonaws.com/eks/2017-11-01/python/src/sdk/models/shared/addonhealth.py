@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import addonissue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AddonHealth:
-    issues: Optional[List[addonissue.AddonIssue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issues' }})
+    r"""AddonHealth
+    The health of the add-on.
+    """
+    
+    issues: Optional[List[AddonIssue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issues') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LabelFieldModification
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A modification to a label's field.
 **/
 export class LabelFieldModification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldId" })
+  @SpeakeasyMetadata({ data: "json, name=fieldId" })
   fieldId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=setDateValues" })
+  @SpeakeasyMetadata({ data: "json, name=setDateValues" })
   setDateValues?: Date[];
 
-  @Metadata({ data: "json, name=setIntegerValues" })
+  @SpeakeasyMetadata({ data: "json, name=setIntegerValues" })
   setIntegerValues?: string[];
 
-  @Metadata({ data: "json, name=setSelectionValues" })
+  @SpeakeasyMetadata({ data: "json, name=setSelectionValues" })
   setSelectionValues?: string[];
 
-  @Metadata({ data: "json, name=setTextValues" })
+  @SpeakeasyMetadata({ data: "json, name=setTextValues" })
   setTextValues?: string[];
 
-  @Metadata({ data: "json, name=setUserValues" })
+  @SpeakeasyMetadata({ data: "json, name=setUserValues" })
   setUserValues?: string[];
 
-  @Metadata({ data: "json, name=unsetValues" })
+  @SpeakeasyMetadata({ data: "json, name=unsetValues" })
   unsetValues?: boolean;
 }

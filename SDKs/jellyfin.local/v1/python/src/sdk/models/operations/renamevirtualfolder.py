@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -11,18 +12,18 @@ class RenameVirtualFolderQueryParams:
 
 @dataclass
 class RenameVirtualFolderSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class RenameVirtualFolderRequest:
-    query_params: RenameVirtualFolderQueryParams = field(default=None)
-    security: RenameVirtualFolderSecurity = field(default=None)
+    query_params: RenameVirtualFolderQueryParams = field()
+    security: RenameVirtualFolderSecurity = field()
     
 
 @dataclass
 class RenameVirtualFolderResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

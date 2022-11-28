@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterStateEnum } from "./clusterstateenum";
 import { ClusterStateChangeReason } from "./clusterstatechangereason";
 import { ClusterTimeline } from "./clustertimeline";
+
 
 
 // ClusterStatus
@@ -9,12 +10,12 @@ import { ClusterTimeline } from "./clustertimeline";
  * The detailed status of the cluster.
 **/
 export class ClusterStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ClusterStateEnum;
 
-  @Metadata({ data: "json, name=StateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateChangeReason" })
   stateChangeReason?: ClusterStateChangeReason;
 
-  @Metadata({ data: "json, name=Timeline" })
+  @SpeakeasyMetadata({ data: "json, name=Timeline" })
   timeline?: ClusterTimeline;
 }

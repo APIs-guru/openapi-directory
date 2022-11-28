@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DisassociateServiceActionFromProvisioningArtifactInput = /** @class */ (function (_super) {
     __extends(DisassociateServiceActionFromProvisioningArtifactInput, _super);
     function DisassociateServiceActionFromProvisioningArtifactInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], DisassociateServiceActionFromProvisioningArtifactInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], DisassociateServiceActionFromProvisioningArtifactInput.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], DisassociateServiceActionFromProvisioningArtifactInput.prototype, "provisioningArtifactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceActionId" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceActionId" }),
         __metadata("design:type", String)
     ], DisassociateServiceActionFromProvisioningArtifactInput.prototype, "serviceActionId", void 0);
     return DisassociateServiceActionFromProvisioningArtifactInput;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisassociateRouteTableActionEnum(str, Enum):
     DISASSOCIATE_ROUTE_TABLE = "DisassociateRouteTable"
@@ -10,10 +14,10 @@ class GetDisassociateRouteTableVersionEnum(str, Enum):
 
 @dataclass
 class GetDisassociateRouteTableQueryParams:
-    action: GetDisassociateRouteTableActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    association_id: str = field(default=None, metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
+    action: GetDisassociateRouteTableActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    association_id: str = field(metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
+    version: GetDisassociateRouteTableVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDisassociateRouteTableVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDisassociateRouteTableHeaders:
 
 @dataclass
 class GetDisassociateRouteTableRequest:
-    query_params: GetDisassociateRouteTableQueryParams = field(default=None)
-    headers: GetDisassociateRouteTableHeaders = field(default=None)
+    headers: GetDisassociateRouteTableHeaders = field()
+    query_params: GetDisassociateRouteTableQueryParams = field()
     
 
 @dataclass
 class GetDisassociateRouteTableResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Metadata } from "./metadata";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // LicenseOperationFailure
@@ -9,27 +9,27 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Describes the failure of a license operation.
 **/
 export class LicenseOperationFailure extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=FailureTime" })
+  @SpeakeasyMetadata({ data: "json, name=FailureTime" })
   failureTime?: Date;
 
-  @Metadata({ data: "json, name=MetadataList", elemType: shared.Metadata })
+  @SpeakeasyMetadata({ data: "json, name=MetadataList", elemType: Metadata })
   metadataList?: Metadata[];
 
-  @Metadata({ data: "json, name=OperationName" })
+  @SpeakeasyMetadata({ data: "json, name=OperationName" })
   operationName?: string;
 
-  @Metadata({ data: "json, name=OperationRequestedBy" })
+  @SpeakeasyMetadata({ data: "json, name=OperationRequestedBy" })
   operationRequestedBy?: string;
 
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn?: string;
 
-  @Metadata({ data: "json, name=ResourceOwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceOwnerId" })
   resourceOwnerId?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 }

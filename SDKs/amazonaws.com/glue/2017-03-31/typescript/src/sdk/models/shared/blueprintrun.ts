@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BlueprintRunStateEnum } from "./blueprintrunstateenum";
+
 
 
 // BlueprintRun
@@ -7,33 +8,33 @@ import { BlueprintRunStateEnum } from "./blueprintrunstateenum";
  * The details of a blueprint run.
 **/
 export class BlueprintRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlueprintName" })
+  @SpeakeasyMetadata({ data: "json, name=BlueprintName" })
   blueprintName?: string;
 
-  @Metadata({ data: "json, name=CompletedOn" })
+  @SpeakeasyMetadata({ data: "json, name=CompletedOn" })
   completedOn?: Date;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=RollbackErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=RollbackErrorMessage" })
   rollbackErrorMessage?: string;
 
-  @Metadata({ data: "json, name=RunId" })
+  @SpeakeasyMetadata({ data: "json, name=RunId" })
   runId?: string;
 
-  @Metadata({ data: "json, name=StartedOn" })
+  @SpeakeasyMetadata({ data: "json, name=StartedOn" })
   startedOn?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: BlueprintRunStateEnum;
 
-  @Metadata({ data: "json, name=WorkflowName" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowName" })
   workflowName?: string;
 }

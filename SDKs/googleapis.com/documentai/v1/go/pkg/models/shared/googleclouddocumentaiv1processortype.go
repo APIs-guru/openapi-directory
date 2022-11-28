@@ -13,6 +13,8 @@ const (
 	GoogleCloudDocumentaiV1ProcessorTypeLaunchStageEnumDeprecated             GoogleCloudDocumentaiV1ProcessorTypeLaunchStageEnum = "DEPRECATED"
 )
 
+// GoogleCloudDocumentaiV1ProcessorType
+// A processor type is responsible for performing a certain document understanding task on a certain type of document.
 type GoogleCloudDocumentaiV1ProcessorType struct {
 	AllowCreation      *bool                                                `json:"allowCreation,omitempty"`
 	AvailableLocations []GoogleCloudDocumentaiV1ProcessorTypeLocationInfo   `json:"availableLocations,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// UpdatePsuIdenticationResponse
+// Body of the JSON response for a successful update PSU identification request.
 type UpdatePsuIdenticationResponse struct {
 	Links                              map[string]HrefType    `json:"_links"`
 	CurrencyConversionFees             *Amount                `json:"currencyConversionFees,omitempty"`

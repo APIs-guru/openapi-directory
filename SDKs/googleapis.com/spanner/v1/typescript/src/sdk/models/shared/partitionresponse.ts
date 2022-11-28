@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Partition } from "./partition";
 import { Transaction } from "./transaction";
+
 
 
 // PartitionResponse
@@ -9,9 +9,9 @@ import { Transaction } from "./transaction";
  * The response for PartitionQuery or PartitionRead
 **/
 export class PartitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partitions", elemType: shared.Partition })
+  @SpeakeasyMetadata({ data: "json, name=partitions", elemType: Partition })
   partitions?: Partition[];
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: Transaction;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ScriptProjectsDeploymentsUpdatePathParams:
-    deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
-    script_id: str = field(default=None, metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
+    deployment_id: str = field(metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
+    script_id: str = field(metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class ScriptProjectsDeploymentsUpdateQueryParams:
 
 @dataclass
 class ScriptProjectsDeploymentsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ScriptProjectsDeploymentsUpdateRequest:
-    path_params: ScriptProjectsDeploymentsUpdatePathParams = field(default=None)
-    query_params: ScriptProjectsDeploymentsUpdateQueryParams = field(default=None)
+    path_params: ScriptProjectsDeploymentsUpdatePathParams = field()
+    query_params: ScriptProjectsDeploymentsUpdateQueryParams = field()
+    security: ScriptProjectsDeploymentsUpdateSecurity = field()
     request: Optional[shared.UpdateDeploymentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ScriptProjectsDeploymentsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class ScriptProjectsDeploymentsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deployment: Optional[shared.Deployment] = field(default=None)
-    status_code: int = field(default=None)
     

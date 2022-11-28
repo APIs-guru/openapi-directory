@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import clustersetting
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateClusterSettingsRequest:
-    cluster: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cluster' }})
-    settings: List[clustersetting.ClusterSetting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    cluster: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cluster') }})
+    settings: List[ClusterSetting] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 import { SuspendedState } from "./suspendedstate";
@@ -36,35 +36,35 @@ var ScalableTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], ScalableTarget.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=MaxCapacity" }),
         __metadata("design:type", Number)
     ], ScalableTarget.prototype, "maxCapacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=MinCapacity" }),
         __metadata("design:type", Number)
     ], ScalableTarget.prototype, "minCapacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceId" }),
         __metadata("design:type", String)
     ], ScalableTarget.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleARN" }),
+        SpeakeasyMetadata({ data: "json, name=RoleARN" }),
         __metadata("design:type", String)
     ], ScalableTarget.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalableDimension" }),
+        SpeakeasyMetadata({ data: "json, name=ScalableDimension" }),
         __metadata("design:type", String)
     ], ScalableTarget.prototype, "scalableDimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceNamespace" }),
         __metadata("design:type", String)
     ], ScalableTarget.prototype, "serviceNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=SuspendedState" }),
+        SpeakeasyMetadata({ data: "json, name=SuspendedState" }),
         __metadata("design:type", SuspendedState)
     ], ScalableTarget.prototype, "suspendedState", void 0);
     return ScalableTarget;

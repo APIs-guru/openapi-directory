@@ -9,10 +9,6 @@ type GetPhotostreamContextByIDQueryParams struct {
 	PhotoID string `queryParam:"style=form,explode=true,name=photo_id"`
 }
 
-type GetPhotostreamContextByIDRequest struct {
-	QueryParams GetPhotostreamContextByIDQueryParams
-}
-
 type GetPhotostreamContextByID200ApplicationJSONCount struct {
 	Content *string `json:"_content,omitempty"`
 }
@@ -22,6 +18,10 @@ type GetPhotostreamContextByID200ApplicationJSON struct {
 	Nextphoto *shared.ContextPhoto                              `json:"nextphoto,omitempty"`
 	Prevphoto *shared.ContextPhoto                              `json:"prevphoto,omitempty"`
 	Stat      *string                                           `json:"stat,omitempty"`
+}
+
+type GetPhotostreamContextByIDRequest struct {
+	QueryParams GetPhotostreamContextByIDQueryParams
 }
 
 type GetPhotostreamContextByIDResponse struct {

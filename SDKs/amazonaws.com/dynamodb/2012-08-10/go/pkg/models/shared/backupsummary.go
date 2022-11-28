@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BackupSummary
+// Contains details for the backup.
 type BackupSummary struct {
 	BackupArn              *string           `json:"BackupArn,omitempty"`
 	BackupCreationDateTime *time.Time        `json:"BackupCreationDateTime,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// Policy
+// A policy is a collection of DNS rules applied to one or more Virtual Private Cloud resources.
 type Policy struct {
 	AlternativeNameServerConfig *PolicyAlternativeNameServerConfig `json:"alternativeNameServerConfig,omitempty"`
 	Description                 *string                            `json:"description,omitempty"`

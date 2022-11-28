@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetActivePayInstructionsReportOutputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ActiveOn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ActiveOn" })
   activeOn?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" })
   employeeKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=FromDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FromDate" })
   fromDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ToDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ToDate" })
   toDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Type" })
   type?: string;
 }
 
 
 export class GetActivePayInstructionsReportOutputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetActivePayInstructionsReportOutputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetActivePayInstructionsReportOutputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetActivePayInstructionsReportOutputHeaders;
 }
 
 
 export class GetActivePayInstructionsReportOutputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getActivePayInstructionsReportOutput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

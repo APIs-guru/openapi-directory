@@ -112,6 +112,8 @@ const (
 	UserDefinedVariableConfigurationVariableTypeEnumU100 UserDefinedVariableConfigurationVariableTypeEnum = "U100"
 )
 
+// UserDefinedVariableConfiguration
+// User Defined Variable configuration.
 type UserDefinedVariableConfiguration struct {
 	DataType     *UserDefinedVariableConfigurationDataTypeEnum     `json:"dataType,omitempty"`
 	ReportName   *string                                           `json:"reportName,omitempty"`

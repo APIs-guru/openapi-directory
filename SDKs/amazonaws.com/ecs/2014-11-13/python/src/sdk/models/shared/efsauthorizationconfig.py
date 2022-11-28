@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import efsauthorizationconfigiam_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EfsAuthorizationConfig:
-    access_point_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessPointId' }})
-    iam: Optional[efsauthorizationconfigiam_enum.EfsAuthorizationConfigIamEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iam' }})
+    r"""EfsAuthorizationConfig
+    The authorization configuration details for the Amazon EFS file system.
+    """
+    
+    access_point_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessPointId') }})
+    iam: Optional[EfsAuthorizationConfigIamEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iam') }})
     

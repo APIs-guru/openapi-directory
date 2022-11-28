@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DatasetImportJobSummary
+// Provides a summary of the properties of a dataset import job. For a complete listing, call the <a>DescribeDatasetImportJob</a> API.
 type DatasetImportJobSummary struct {
 	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
 	DatasetImportJobArn *string    `json:"datasetImportJobArn,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigPathParams:
-    connector: str = field(default=None, metadata={'path_param': { 'field_name': 'connector', 'style': 'simple', 'explode': False }})
+    connector: str = field(metadata={'path_param': { 'field_name': 'connector', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigRequest:
-    path_params: BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigQueryParams = field(default=None)
-    security: BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigSecurity = field(default=None)
+    path_params: BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigPathParams = field()
+    query_params: BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigQueryParams = field()
+    security: BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigSecurity = field()
     
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsResolveInstanceConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resolve_instance_config_response: Optional[shared.ResolveInstanceConfigResponse] = field(default=None)
-    status_code: int = field(default=None)
     

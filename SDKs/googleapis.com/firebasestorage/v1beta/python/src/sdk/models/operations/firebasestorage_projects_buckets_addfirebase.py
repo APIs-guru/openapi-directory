@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasestorageProjectsBucketsAddFirebasePathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebasestorageProjectsBucketsAddFirebaseQueryParams:
 
 @dataclass
 class FirebasestorageProjectsBucketsAddFirebaseSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasestorageProjectsBucketsAddFirebaseSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebasestorageProjectsBucketsAddFirebaseSecurity:
 
 @dataclass
 class FirebasestorageProjectsBucketsAddFirebaseRequest:
-    path_params: FirebasestorageProjectsBucketsAddFirebasePathParams = field(default=None)
-    query_params: FirebasestorageProjectsBucketsAddFirebaseQueryParams = field(default=None)
+    path_params: FirebasestorageProjectsBucketsAddFirebasePathParams = field()
+    query_params: FirebasestorageProjectsBucketsAddFirebaseQueryParams = field()
+    security: FirebasestorageProjectsBucketsAddFirebaseSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasestorageProjectsBucketsAddFirebaseSecurity = field(default=None)
     
 
 @dataclass
 class FirebasestorageProjectsBucketsAddFirebaseResponse:
+    content_type: str = field()
+    status_code: int = field()
     bucket: Optional[shared.Bucket] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

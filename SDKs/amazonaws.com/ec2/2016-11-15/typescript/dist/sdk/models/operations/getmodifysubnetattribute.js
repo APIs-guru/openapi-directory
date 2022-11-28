@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifySubnetAttributeActionEnum;
 (function (GetModifySubnetAttributeActionEnum) {
     GetModifySubnetAttributeActionEnum["ModifySubnetAttribute"] = "ModifySubnetAttribute";
@@ -37,7 +37,7 @@ var GetModifySubnetAttributeAssignIpv6AddressOnCreation = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Value" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Value" }),
         __metadata("design:type", Boolean)
     ], GetModifySubnetAttributeAssignIpv6AddressOnCreation.prototype, "value", void 0);
     return GetModifySubnetAttributeAssignIpv6AddressOnCreation;
@@ -53,7 +53,7 @@ var GetModifySubnetAttributeMapCustomerOwnedIpOnLaunch = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Value" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Value" }),
         __metadata("design:type", Boolean)
     ], GetModifySubnetAttributeMapCustomerOwnedIpOnLaunch.prototype, "value", void 0);
     return GetModifySubnetAttributeMapCustomerOwnedIpOnLaunch;
@@ -69,7 +69,7 @@ var GetModifySubnetAttributeMapPublicIpOnLaunch = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=Value" }),
+        SpeakeasyMetadata({ data: "queryParam, name=Value" }),
         __metadata("design:type", Boolean)
     ], GetModifySubnetAttributeMapPublicIpOnLaunch.prototype, "value", void 0);
     return GetModifySubnetAttributeMapPublicIpOnLaunch;
@@ -85,31 +85,31 @@ var GetModifySubnetAttributeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AssignIpv6AddressOnCreation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AssignIpv6AddressOnCreation" }),
         __metadata("design:type", GetModifySubnetAttributeAssignIpv6AddressOnCreation)
     ], GetModifySubnetAttributeQueryParams.prototype, "assignIpv6AddressOnCreation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CustomerOwnedIpv4Pool" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CustomerOwnedIpv4Pool" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeQueryParams.prototype, "customerOwnedIpv4Pool", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MapCustomerOwnedIpOnLaunch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MapCustomerOwnedIpOnLaunch" }),
         __metadata("design:type", GetModifySubnetAttributeMapCustomerOwnedIpOnLaunch)
     ], GetModifySubnetAttributeQueryParams.prototype, "mapCustomerOwnedIpOnLaunch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MapPublicIpOnLaunch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MapPublicIpOnLaunch" }),
         __metadata("design:type", GetModifySubnetAttributeMapPublicIpOnLaunch)
     ], GetModifySubnetAttributeQueryParams.prototype, "mapPublicIpOnLaunch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SubnetId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SubnetId" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeQueryParams.prototype, "subnetId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeQueryParams.prototype, "version", void 0);
     return GetModifySubnetAttributeQueryParams;
@@ -121,31 +121,31 @@ var GetModifySubnetAttributeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifySubnetAttributeHeaders;
@@ -157,11 +157,11 @@ var GetModifySubnetAttributeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifySubnetAttributeQueryParams)
     ], GetModifySubnetAttributeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifySubnetAttributeHeaders)
     ], GetModifySubnetAttributeRequest.prototype, "headers", void 0);
     return GetModifySubnetAttributeRequest;
@@ -173,11 +173,11 @@ var GetModifySubnetAttributeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifySubnetAttributeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifySubnetAttributeResponse.prototype, "statusCode", void 0);
     return GetModifySubnetAttributeResponse;

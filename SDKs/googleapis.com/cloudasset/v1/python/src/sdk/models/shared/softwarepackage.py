@@ -1,27 +1,27 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import versionedpackage
-from . import versionedpackage
-from . import versionedpackage
-from . import windowsquickfixengineeringpackage
-from . import windowsapplication
-from . import windowsupdatepackage
-from . import versionedpackage
-from . import versionedpackage
-from . import zypperpatch
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SoftwarePackage:
-    apt_package: Optional[versionedpackage.VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aptPackage' }})
-    cos_package: Optional[versionedpackage.VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cosPackage' }})
-    googet_package: Optional[versionedpackage.VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'googetPackage' }})
-    qfe_package: Optional[windowsquickfixengineeringpackage.WindowsQuickFixEngineeringPackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'qfePackage' }})
-    windows_application: Optional[windowsapplication.WindowsApplication] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'windowsApplication' }})
-    wua_package: Optional[windowsupdatepackage.WindowsUpdatePackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wuaPackage' }})
-    yum_package: Optional[versionedpackage.VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'yumPackage' }})
-    zypper_package: Optional[versionedpackage.VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zypperPackage' }})
-    zypper_patch: Optional[zypperpatch.ZypperPatch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zypperPatch' }})
+    r"""SoftwarePackage
+    Software package information of the operating system.
+    """
+    
+    apt_package: Optional[VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aptPackage') }})
+    cos_package: Optional[VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cosPackage') }})
+    googet_package: Optional[VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('googetPackage') }})
+    qfe_package: Optional[WindowsQuickFixEngineeringPackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('qfePackage') }})
+    windows_application: Optional[WindowsApplication] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('windowsApplication') }})
+    wua_package: Optional[WindowsUpdatePackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wuaPackage') }})
+    yum_package: Optional[VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('yumPackage') }})
+    zypper_package: Optional[VersionedPackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zypperPackage') }})
+    zypper_patch: Optional[ZypperPatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zypperPatch') }})
     

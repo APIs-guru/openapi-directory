@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EnvironmentAccountConnectionSummary
+// A summary of the environment account connection detail data.
 type EnvironmentAccountConnectionSummary struct {
 	Arn                  string                                 `json:"arn"`
 	EnvironmentAccountID string                                 `json:"environmentAccountId"`

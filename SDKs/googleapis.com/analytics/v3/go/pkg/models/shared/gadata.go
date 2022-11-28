@@ -25,6 +25,8 @@ type GaDataDataTable struct {
 	Rows []GaDataDataTableRows `json:"rows,omitempty"`
 }
 
+// GaDataProfileInfo
+// Information for the view (profile), for which the Analytics data was requested.
 type GaDataProfileInfo struct {
 	AccountID             *string `json:"accountId,omitempty"`
 	InternalWebPropertyID *string `json:"internalWebPropertyId,omitempty"`
@@ -34,6 +36,8 @@ type GaDataProfileInfo struct {
 	WebPropertyID         *string `json:"webPropertyId,omitempty"`
 }
 
+// GaDataQuery
+// Analytics data request query parameters.
 type GaDataQuery struct {
 	Dimensions    *string  `json:"dimensions,omitempty"`
 	EndDate       *string  `json:"end-date,omitempty"`
@@ -48,6 +52,8 @@ type GaDataQuery struct {
 	StartIndex    *int32   `json:"start-index,omitempty"`
 }
 
+// GaData
+// Analytics data for a given view (profile).
 type GaData struct {
 	ColumnHeaders       []GaDataColumnHeaders `json:"columnHeaders,omitempty"`
 	ContainsSampledData *bool                 `json:"containsSampledData,omitempty"`

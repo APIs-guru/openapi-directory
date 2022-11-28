@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterThingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificatePem" })
+  @SpeakeasyMetadata({ data: "json, name=certificatePem" })
   certificatePem?: string;
 
-  @Metadata({ data: "json, name=resourceArns" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArns" })
   resourceArns?: Map<string, string>;
 }

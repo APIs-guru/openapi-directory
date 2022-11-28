@@ -1,5 +1,7 @@
 package shared
 
+// Response
+// A single response from an update.
 type Response struct {
 	AddBanding                   *AddBandingResponse                   `json:"addBanding,omitempty"`
 	AddChart                     *AddChartResponse                     `json:"addChart,omitempty"`

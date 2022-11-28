@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var WhoisPathParams = /** @class */ (function (_super) {
     __extends(WhoisPathParams, _super);
     function WhoisPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=domain" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domain" }),
         __metadata("design:type", String)
     ], WhoisPathParams.prototype, "domain", void 0);
     return WhoisPathParams;
@@ -47,7 +47,7 @@ var WhoisQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], WhoisQueryParams.prototype, "format", void 0);
     return WhoisQueryParams;
@@ -59,11 +59,11 @@ var WhoisRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WhoisPathParams)
     ], WhoisRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WhoisQueryParams)
     ], WhoisRequest.prototype, "queryParams", void 0);
     return WhoisRequest;
@@ -75,11 +75,11 @@ var WhoisResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], WhoisResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], WhoisResponse.prototype, "statusCode", void 0);
     return WhoisResponse;

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualGatewayListenerTlsCertificate } from "./virtualgatewaylistenertlscertificate";
 import { VirtualGatewayListenerTlsModeEnum } from "./virtualgatewaylistenertlsmodeenum";
 import { VirtualGatewayListenerTlsValidationContext } from "./virtualgatewaylistenertlsvalidationcontext";
+
 
 
 // VirtualGatewayListenerTls
@@ -9,12 +10,12 @@ import { VirtualGatewayListenerTlsValidationContext } from "./virtualgatewaylist
  * An object that represents the Transport Layer Security (TLS) properties for a listener.
 **/
 export class VirtualGatewayListenerTls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate: VirtualGatewayListenerTlsCertificate;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode: VirtualGatewayListenerTlsModeEnum;
 
-  @Metadata({ data: "json, name=validation" })
+  @SpeakeasyMetadata({ data: "json, name=validation" })
   validation?: VirtualGatewayListenerTlsValidationContext;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import rule_source
+from sdk import utils
+from . import *
 
 class AmqpRulePostRequestModeEnum(str, Enum):
     SINGLE = "single"
@@ -17,25 +19,25 @@ class AmqpRulePostStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AmqpRulePostTargetHeaders:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class AmqpRulePostTarget:
-    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enveloped' }})
-    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    headers: Optional[List[AmqpRulePostTargetHeaders]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headers' }})
-    queue_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queueId' }})
+    queue_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('queueId') }})
+    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enveloped') }})
+    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    headers: Optional[List[AmqpRulePostTargetHeaders]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('headers') }})
     
 
 @dataclass_json
 @dataclass
 class AmqpRulePost:
-    request_mode: AmqpRulePostRequestModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestMode' }})
-    rule_type: AmqpRulePostRuleTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ruleType' }})
-    source: rule_source.RuleSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    status: Optional[AmqpRulePostStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    target: AmqpRulePostTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    request_mode: AmqpRulePostRequestModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestMode') }})
+    rule_type: AmqpRulePostRuleTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ruleType') }})
+    source: RuleSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    target: AmqpRulePostTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
+    status: Optional[AmqpRulePostStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

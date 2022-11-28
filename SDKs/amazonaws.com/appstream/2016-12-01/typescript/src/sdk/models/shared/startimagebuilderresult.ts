@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageBuilder } from "./imagebuilder";
 
 
+
 export class StartImageBuilderResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageBuilder" })
+  @SpeakeasyMetadata({ data: "json, name=ImageBuilder" })
   imageBuilder?: ImageBuilder;
 }

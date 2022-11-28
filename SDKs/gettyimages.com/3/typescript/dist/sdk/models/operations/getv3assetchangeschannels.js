@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3AssetChangesChannelsResponse = /** @class */ (function (_super) {
     __extends(GetV3AssetChangesChannelsResponse, _super);
@@ -30,15 +30,15 @@ var GetV3AssetChangesChannelsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.Channel }),
+        SpeakeasyMetadata({ elemType: shared.Channel }),
         __metadata("design:type", Array)
     ], GetV3AssetChangesChannelsResponse.prototype, "channels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3AssetChangesChannelsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3AssetChangesChannelsResponse.prototype, "statusCode", void 0);
     return GetV3AssetChangesChannelsResponse;

@@ -9,10 +9,6 @@ type PostAnnouncementsRequestBody struct {
 	File        *string `multipartForm:"name=file"`
 }
 
-type PostAnnouncementsRequest struct {
-	Request PostAnnouncementsRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type PostAnnouncements201ApplicationJSONAnnouncementURL struct {
 	Download *string `json:"download,omitempty"`
 	Href     *string `json:"href,omitempty"`
@@ -45,6 +41,10 @@ type PostAnnouncements400ApplicationJSON struct {
 
 type PostAnnouncements403ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostAnnouncementsRequest struct {
+	Request PostAnnouncementsRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type PostAnnouncementsResponse struct {

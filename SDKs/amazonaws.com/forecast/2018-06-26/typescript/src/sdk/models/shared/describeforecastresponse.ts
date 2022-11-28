@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeForecastResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DatasetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetGroupArn" })
   datasetGroupArn?: string;
 
-  @Metadata({ data: "json, name=EstimatedTimeRemainingInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=EstimatedTimeRemainingInMinutes" })
   estimatedTimeRemainingInMinutes?: number;
 
-  @Metadata({ data: "json, name=ForecastArn" })
+  @SpeakeasyMetadata({ data: "json, name=ForecastArn" })
   forecastArn?: string;
 
-  @Metadata({ data: "json, name=ForecastName" })
+  @SpeakeasyMetadata({ data: "json, name=ForecastName" })
   forecastName?: string;
 
-  @Metadata({ data: "json, name=ForecastTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ForecastTypes" })
   forecastTypes?: string[];
 
-  @Metadata({ data: "json, name=LastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModificationTime" })
   lastModificationTime?: Date;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=PredictorArn" })
+  @SpeakeasyMetadata({ data: "json, name=PredictorArn" })
   predictorArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

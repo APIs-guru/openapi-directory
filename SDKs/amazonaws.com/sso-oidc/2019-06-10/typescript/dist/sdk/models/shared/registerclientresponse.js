@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegisterClientResponse = /** @class */ (function (_super) {
     __extends(RegisterClientResponse, _super);
     function RegisterClientResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authorizationEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=authorizationEndpoint" }),
         __metadata("design:type", String)
     ], RegisterClientResponse.prototype, "authorizationEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientId" }),
+        SpeakeasyMetadata({ data: "json, name=clientId" }),
         __metadata("design:type", String)
     ], RegisterClientResponse.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientIdIssuedAt" }),
+        SpeakeasyMetadata({ data: "json, name=clientIdIssuedAt" }),
         __metadata("design:type", Number)
     ], RegisterClientResponse.prototype, "clientIdIssuedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientSecret" }),
+        SpeakeasyMetadata({ data: "json, name=clientSecret" }),
         __metadata("design:type", String)
     ], RegisterClientResponse.prototype, "clientSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientSecretExpiresAt" }),
+        SpeakeasyMetadata({ data: "json, name=clientSecretExpiresAt" }),
         __metadata("design:type", Number)
     ], RegisterClientResponse.prototype, "clientSecretExpiresAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=tokenEndpoint" }),
         __metadata("design:type", String)
     ], RegisterClientResponse.prototype, "tokenEndpoint", void 0);
     return RegisterClientResponse;

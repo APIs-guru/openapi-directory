@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import compositefilter
-from . import fieldfilter
-from . import unaryfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Filter:
-    composite_filter: Optional[compositefilter.CompositeFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compositeFilter' }})
-    field_filter: Optional[fieldfilter.FieldFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldFilter' }})
-    unary_filter: Optional[unaryfilter.UnaryFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unaryFilter' }})
+    r"""Filter
+    A filter.
+    """
+    
+    composite_filter: Optional[CompositeFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compositeFilter') }})
+    field_filter: Optional[FieldFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldFilter') }})
+    unary_filter: Optional[UnaryFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unaryFilter') }})
     

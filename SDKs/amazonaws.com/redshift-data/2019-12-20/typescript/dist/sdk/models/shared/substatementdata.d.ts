@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StatementStatusStringEnum } from "./statementstatusstringenum";
 /**
  * Information about an SQL statement.

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetEventSourceMappingPathParams:
-    uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'UUID', 'style': 'simple', 'explode': False }})
+    uuid: str = field(metadata={'path_param': { 'field_name': 'UUID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetEventSourceMappingHeaders:
 
 @dataclass
 class GetEventSourceMappingRequest:
-    path_params: GetEventSourceMappingPathParams = field(default=None)
-    headers: GetEventSourceMappingHeaders = field(default=None)
+    headers: GetEventSourceMappingHeaders = field()
+    path_params: GetEventSourceMappingPathParams = field()
     
 
 @dataclass
 class GetEventSourceMappingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_source_mapping_configuration: Optional[shared.EventSourceMappingConfiguration] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

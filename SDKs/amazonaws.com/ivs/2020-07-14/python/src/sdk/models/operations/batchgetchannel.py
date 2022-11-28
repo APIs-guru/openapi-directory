@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,18 +22,18 @@ class BatchGetChannelHeaders:
 @dataclass_json
 @dataclass
 class BatchGetChannelRequestBody:
-    arns: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arns' }})
+    arns: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arns') }})
     
 
 @dataclass
 class BatchGetChannelRequest:
-    headers: BatchGetChannelHeaders = field(default=None)
-    request: BatchGetChannelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchGetChannelHeaders = field()
+    request: BatchGetChannelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchGetChannelResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_get_channel_response: Optional[shared.BatchGetChannelResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,59 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HyperParameterTrainingJobSummary } from "./hyperparametertrainingjobsummary";
 import { HyperParameterTuningJobConfig } from "./hyperparametertuningjobconfig";
 import { HyperParameterTuningJobStatusEnum } from "./hyperparametertuningjobstatusenum";
 import { ObjectiveStatusCounters } from "./objectivestatuscounters";
-import { HyperParameterTrainingJobSummary } from "./hyperparametertrainingjobsummary";
-import { HyperParameterTrainingJobDefinition } from "./hyperparametertrainingjobdefinition";
 import { HyperParameterTrainingJobDefinition } from "./hyperparametertrainingjobdefinition";
 import { TrainingJobStatusCounters } from "./trainingjobstatuscounters";
 import { HyperParameterTuningJobWarmStartConfig } from "./hyperparametertuningjobwarmstartconfig";
 
 
+
 export class DescribeHyperParameterTuningJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BestTrainingJob" })
+  @SpeakeasyMetadata({ data: "json, name=BestTrainingJob" })
   bestTrainingJob?: HyperParameterTrainingJobSummary;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=HyperParameterTuningEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningEndTime" })
   hyperParameterTuningEndTime?: Date;
 
-  @Metadata({ data: "json, name=HyperParameterTuningJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobArn" })
   hyperParameterTuningJobArn: string;
 
-  @Metadata({ data: "json, name=HyperParameterTuningJobConfig" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobConfig" })
   hyperParameterTuningJobConfig: HyperParameterTuningJobConfig;
 
-  @Metadata({ data: "json, name=HyperParameterTuningJobName" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobName" })
   hyperParameterTuningJobName: string;
 
-  @Metadata({ data: "json, name=HyperParameterTuningJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HyperParameterTuningJobStatus" })
   hyperParameterTuningJobStatus: HyperParameterTuningJobStatusEnum;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=ObjectiveStatusCounters" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectiveStatusCounters" })
   objectiveStatusCounters: ObjectiveStatusCounters;
 
-  @Metadata({ data: "json, name=OverallBestTrainingJob" })
+  @SpeakeasyMetadata({ data: "json, name=OverallBestTrainingJob" })
   overallBestTrainingJob?: HyperParameterTrainingJobSummary;
 
-  @Metadata({ data: "json, name=TrainingJobDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobDefinition" })
   trainingJobDefinition?: HyperParameterTrainingJobDefinition;
 
-  @Metadata({ data: "json, name=TrainingJobDefinitions", elemType: shared.HyperParameterTrainingJobDefinition })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobDefinitions", elemType: HyperParameterTrainingJobDefinition })
   trainingJobDefinitions?: HyperParameterTrainingJobDefinition[];
 
-  @Metadata({ data: "json, name=TrainingJobStatusCounters" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobStatusCounters" })
   trainingJobStatusCounters: TrainingJobStatusCounters;
 
-  @Metadata({ data: "json, name=WarmStartConfig" })
+  @SpeakeasyMetadata({ data: "json, name=WarmStartConfig" })
   warmStartConfig?: HyperParameterTuningJobWarmStartConfig;
 }

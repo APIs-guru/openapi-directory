@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DownloadCertificatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sha1Fingerprint" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sha1Fingerprint" })
   sha1Fingerprint: string;
 }
 
 
 export class DownloadCertificateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=file_format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=file_format" })
   fileFormat: shared.SslCertificateFileFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=password" })
   password: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sha1_fingerprint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sha1_fingerprint" })
   sha1Fingerprint: string;
 }
 
 
 export class DownloadCertificateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DownloadCertificatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DownloadCertificateQueryParams;
 }
 
 
 export class DownloadCertificateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   downloadCertificate200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

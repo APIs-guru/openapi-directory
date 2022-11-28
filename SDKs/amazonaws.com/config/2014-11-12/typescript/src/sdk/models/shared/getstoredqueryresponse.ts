@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StoredQuery } from "./storedquery";
 
 
+
 export class GetStoredQueryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StoredQuery" })
+  @SpeakeasyMetadata({ data: "json, name=StoredQuery" })
   storedQuery?: StoredQuery;
 }

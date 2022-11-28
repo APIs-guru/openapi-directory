@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateEntityRecognizerResponse = /** @class */ (function (_super) {
     __extends(CreateEntityRecognizerResponse, _super);
     function CreateEntityRecognizerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EntityRecognizerArn" }),
+        SpeakeasyMetadata({ data: "json, name=EntityRecognizerArn" }),
         __metadata("design:type", String)
     ], CreateEntityRecognizerResponse.prototype, "entityRecognizerArn", void 0);
     return CreateEntityRecognizerResponse;

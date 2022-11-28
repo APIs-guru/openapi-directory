@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VehicleSummary
+// Represents the summary of a vehicle background check
 type VehicleSummary struct {
 	Capacity                          *int64     `json:"capacity,omitempty"`
 	Color                             *string    `json:"color,omitempty"`

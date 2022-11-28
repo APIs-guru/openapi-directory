@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Experiment
+// Describes an experiment.
 type Experiment struct {
 	Actions              map[string]ExperimentAction `json:"actions,omitempty"`
 	CreationTime         *time.Time                  `json:"creationTime,omitempty"`

@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class GetInstancesIDFramesFrameImageUint16PathParams:
-    frame: float = field(default=None, metadata={'path_param': { 'field_name': 'frame', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    frame: float = field(metadata={'path_param': { 'field_name': 'frame', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +20,14 @@ class GetInstancesIDFramesFrameImageUint16Headers:
 
 @dataclass
 class GetInstancesIDFramesFrameImageUint16Request:
-    path_params: GetInstancesIDFramesFrameImageUint16PathParams = field(default=None)
-    query_params: GetInstancesIDFramesFrameImageUint16QueryParams = field(default=None)
-    headers: GetInstancesIDFramesFrameImageUint16Headers = field(default=None)
+    headers: GetInstancesIDFramesFrameImageUint16Headers = field()
+    path_params: GetInstancesIDFramesFrameImageUint16PathParams = field()
+    query_params: GetInstancesIDFramesFrameImageUint16QueryParams = field()
     
 
 @dataclass
 class GetInstancesIDFramesFrameImageUint16Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -72,6 +72,8 @@ const (
 	PoliciesSmokeFreePropertyExceptionEnumDependentOnDayOfWeek PoliciesSmokeFreePropertyExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Policies
+// Property rules that impact guests.
 type Policies struct {
 	AllInclusiveAvailable          *bool                                       `json:"allInclusiveAvailable,omitempty"`
 	AllInclusiveAvailableException *PoliciesAllInclusiveAvailableExceptionEnum `json:"allInclusiveAvailableException,omitempty"`

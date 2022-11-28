@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LifeCycleLastCutover } from "./lifecyclelastcutover";
 import { LifeCycleLastTest } from "./lifecyclelasttest";
 import { LifeCycleStateEnum } from "./lifecyclestateenum";

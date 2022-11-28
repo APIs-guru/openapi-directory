@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuperFundProduct } from "./superfundproduct";
 
 
+
 export class SuperFundProducts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SuperFundProducts", elemType: shared.SuperFundProduct })
+  @SpeakeasyMetadata({ data: "json, name=SuperFundProducts", elemType: SuperFundProduct })
   superFundProducts?: SuperFundProduct[];
 }

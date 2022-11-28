@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { DnsSettings } from "./dnssettings";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DnsSettingsInput } from "./dnssettings";
 
 
-// ConfigureDnsSettingsRequest
+
+// ConfigureDnsSettingsRequestInput
 /** 
  * Request for the `ConfigureDnsSettings` method.
 **/
-export class ConfigureDnsSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dnsSettings" })
-  dnsSettings?: DnsSettings;
+export class ConfigureDnsSettingsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=dnsSettings" })
+  dnsSettings?: DnsSettingsInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

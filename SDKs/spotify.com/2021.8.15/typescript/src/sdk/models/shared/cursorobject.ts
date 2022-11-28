@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CursorObject
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * https://developer.spotify.com/documentation/web-api/reference/#object-cursorobject - Find more info on the official Spotify Web API Reference
 **/
 export class CursorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=after" })
+  @SpeakeasyMetadata({ data: "json, name=after" })
   after?: string;
 }

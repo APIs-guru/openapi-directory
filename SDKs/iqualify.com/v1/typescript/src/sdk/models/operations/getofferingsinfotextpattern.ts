@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOfferingsInfoTextPatternPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=textPattern" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=textPattern" })
   textPattern: string;
 }
 
 
 export class GetOfferingsInfoTextPatternRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOfferingsInfoTextPatternPathParams;
 }
 
 
 export class GetOfferingsInfoTextPatternResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.PortfolioActivations })
+  @SpeakeasyMetadata({ elemType: shared.PortfolioActivations })
   portfolioActivations?: shared.PortfolioActivations[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

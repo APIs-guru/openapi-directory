@@ -8,6 +8,8 @@ const (
 	PosixAccountOperatingSystemTypeEnumWindows                        PosixAccountOperatingSystemTypeEnum = "WINDOWS"
 )
 
+// PosixAccount
+// The POSIX account information associated with a Google account.
 type PosixAccount struct {
 	AccountID           *string                              `json:"accountId,omitempty"`
 	Gecos               *string                              `json:"gecos,omitempty"`

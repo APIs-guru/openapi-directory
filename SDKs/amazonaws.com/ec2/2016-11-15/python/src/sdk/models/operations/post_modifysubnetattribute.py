@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifySubnetAttributeActionEnum(str, Enum):
     MODIFY_SUBNET_ATTRIBUTE = "ModifySubnetAttribute"
@@ -10,8 +14,8 @@ class PostModifySubnetAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostModifySubnetAttributeQueryParams:
-    action: PostModifySubnetAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifySubnetAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifySubnetAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifySubnetAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostModifySubnetAttributeHeaders:
 
 @dataclass
 class PostModifySubnetAttributeRequest:
-    query_params: PostModifySubnetAttributeQueryParams = field(default=None)
-    headers: PostModifySubnetAttributeHeaders = field(default=None)
+    headers: PostModifySubnetAttributeHeaders = field()
+    query_params: PostModifySubnetAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifySubnetAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AppengineAppsServicesVersionsInstancesDeletePathParams = /** @class */ (function (_super) {
     __extends(AppengineAppsServicesVersionsInstancesDeletePathParams, _super);
@@ -30,19 +30,19 @@ var AppengineAppsServicesVersionsInstancesDeletePathParams = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appsId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appsId" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeletePathParams.prototype, "appsId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=instancesId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instancesId" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeletePathParams.prototype, "instancesId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=servicesId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=servicesId" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeletePathParams.prototype, "servicesId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionsId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionsId" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeletePathParams.prototype, "versionsId", void 0);
     return AppengineAppsServicesVersionsInstancesDeletePathParams;
@@ -54,47 +54,47 @@ var AppengineAppsServicesVersionsInstancesDeleteQueryParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteQueryParams.prototype, "uploadProtocol", void 0);
     return AppengineAppsServicesVersionsInstancesDeleteQueryParams;
@@ -106,11 +106,11 @@ var AppengineAppsServicesVersionsInstancesDeleteSecurity = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AppengineAppsServicesVersionsInstancesDeleteSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AppengineAppsServicesVersionsInstancesDeleteSecurity.prototype, "oauth2c", void 0);
     return AppengineAppsServicesVersionsInstancesDeleteSecurity;
@@ -122,15 +122,15 @@ var AppengineAppsServicesVersionsInstancesDeleteRequest = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineAppsServicesVersionsInstancesDeletePathParams)
     ], AppengineAppsServicesVersionsInstancesDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineAppsServicesVersionsInstancesDeleteQueryParams)
     ], AppengineAppsServicesVersionsInstancesDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineAppsServicesVersionsInstancesDeleteSecurity)
     ], AppengineAppsServicesVersionsInstancesDeleteRequest.prototype, "security", void 0);
     return AppengineAppsServicesVersionsInstancesDeleteRequest;
@@ -142,15 +142,15 @@ var AppengineAppsServicesVersionsInstancesDeleteResponse = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AppengineAppsServicesVersionsInstancesDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], AppengineAppsServicesVersionsInstancesDeleteResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AppengineAppsServicesVersionsInstancesDeleteResponse.prototype, "statusCode", void 0);
     return AppengineAppsServicesVersionsInstancesDeleteResponse;

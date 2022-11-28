@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateDhcpOptionsActionEnum(str, Enum):
     CREATE_DHCP_OPTIONS = "CreateDhcpOptions"
@@ -10,8 +14,8 @@ class PostCreateDhcpOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateDhcpOptionsQueryParams:
-    action: PostCreateDhcpOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateDhcpOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateDhcpOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateDhcpOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateDhcpOptionsHeaders:
 
 @dataclass
 class PostCreateDhcpOptionsRequest:
-    query_params: PostCreateDhcpOptionsQueryParams = field(default=None)
-    headers: PostCreateDhcpOptionsHeaders = field(default=None)
+    headers: PostCreateDhcpOptionsHeaders = field()
+    query_params: PostCreateDhcpOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateDhcpOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

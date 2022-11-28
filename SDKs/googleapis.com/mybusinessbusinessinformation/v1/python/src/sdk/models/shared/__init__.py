@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .adwordslocationextensions import *
 from .alt_enum import *
 from .associatelocationrequest import *
@@ -13,7 +13,7 @@ from .category import *
 from .chain import *
 from .chainname import *
 from .chainuri import *
-from .date import *
+from .date_ import *
 from .freeformserviceitem import *
 from .googlelocation import *
 from .label import *

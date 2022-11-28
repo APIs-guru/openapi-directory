@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemErrorCodeEnum } from "./batchitemerrorcodeenum";
 /**
  * Contains the batch request error details associated with the request.

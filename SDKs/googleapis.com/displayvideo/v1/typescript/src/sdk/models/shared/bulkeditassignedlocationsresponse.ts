@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignedLocation } from "./assignedlocation";
+
 
 
 // BulkEditAssignedLocationsResponse
@@ -8,6 +8,6 @@ import { AssignedLocation } from "./assignedlocation";
  * Response message for AssignedLocationService.BulkEditAssignedLocations.
 **/
 export class BulkEditAssignedLocationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignedLocations", elemType: shared.AssignedLocation })
+  @SpeakeasyMetadata({ data: "json, name=assignedLocations", elemType: AssignedLocation })
   assignedLocations?: AssignedLocation[];
 }

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAccountsAccountPositionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account" })
   account: string;
 }
 
 
-export class GetAccountsAccountPositionsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetAccountsAccountPositionsPathParams;
-}
-
-
 export class GetAccountsAccountPositions200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AverageCost" })
+  @SpeakeasyMetadata({ data: "json, name=AverageCost" })
   averageCost?: number;
 
-  @Metadata({ data: "json, name=ContractId" })
+  @SpeakeasyMetadata({ data: "json, name=ContractId" })
   contractId?: number;
 
-  @Metadata({ data: "json, name=Position" })
+  @SpeakeasyMetadata({ data: "json, name=Position" })
   position?: number;
 }
 
 
+export class GetAccountsAccountPositionsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetAccountsAccountPositionsPathParams;
+}
+
+
 export class GetAccountsAccountPositionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: operations.GetAccountsAccountPositions200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetAccountsAccountPositions200ApplicationJson })
   getAccountsAccountPositions200ApplicationJsonObjects?: GetAccountsAccountPositions200ApplicationJson[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

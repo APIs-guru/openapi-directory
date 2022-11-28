@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InstanceIdentity } from "./instanceidentity";
 /**
  * Contains the parameters for PollForTask.

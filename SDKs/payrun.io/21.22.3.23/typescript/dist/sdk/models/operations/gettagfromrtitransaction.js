@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTagFromRtiTransactionPathParams = /** @class */ (function (_super) {
     __extends(GetTagFromRtiTransactionPathParams, _super);
@@ -30,15 +30,15 @@ var GetTagFromRtiTransactionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetTagFromRtiTransactionPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=RtiTransactionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=RtiTransactionId" }),
         __metadata("design:type", String)
     ], GetTagFromRtiTransactionPathParams.prototype, "rtiTransactionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=TagId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=TagId" }),
         __metadata("design:type", String)
     ], GetTagFromRtiTransactionPathParams.prototype, "tagId", void 0);
     return GetTagFromRtiTransactionPathParams;
@@ -50,11 +50,11 @@ var GetTagFromRtiTransactionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetTagFromRtiTransactionHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetTagFromRtiTransactionHeaders.prototype, "authorization", void 0);
     return GetTagFromRtiTransactionHeaders;
@@ -66,11 +66,11 @@ var GetTagFromRtiTransactionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTagFromRtiTransactionPathParams)
     ], GetTagFromRtiTransactionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTagFromRtiTransactionHeaders)
     ], GetTagFromRtiTransactionRequest.prototype, "headers", void 0);
     return GetTagFromRtiTransactionRequest;
@@ -82,19 +82,19 @@ var GetTagFromRtiTransactionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTagFromRtiTransactionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetTagFromRtiTransactionResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTagFromRtiTransactionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Tag)
     ], GetTagFromRtiTransactionResponse.prototype, "tag", void 0);
     return GetTagFromRtiTransactionResponse;

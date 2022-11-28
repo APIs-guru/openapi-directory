@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricsSource } from "./metricssource";
-import { MetricsSource } from "./metricssource";
+
 
 
 // ModelDataQuality
@@ -8,9 +8,9 @@ import { MetricsSource } from "./metricssource";
  * Data quality constraints and statistics for a model.
 **/
 export class ModelDataQuality extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Constraints" })
+  @SpeakeasyMetadata({ data: "json, name=Constraints" })
   constraints?: MetricsSource;
 
-  @Metadata({ data: "json, name=Statistics" })
+  @SpeakeasyMetadata({ data: "json, name=Statistics" })
   statistics?: MetricsSource;
 }

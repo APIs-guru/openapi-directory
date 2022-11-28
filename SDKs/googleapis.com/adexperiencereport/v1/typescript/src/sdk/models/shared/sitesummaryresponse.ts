@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlatformSummary } from "./platformsummary";
-import { PlatformSummary } from "./platformsummary";
+
 
 
 // SiteSummaryResponse
@@ -8,12 +8,12 @@ import { PlatformSummary } from "./platformsummary";
  * Response message for GetSiteSummary.
 **/
 export class SiteSummaryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=desktopSummary" })
+  @SpeakeasyMetadata({ data: "json, name=desktopSummary" })
   desktopSummary?: PlatformSummary;
 
-  @Metadata({ data: "json, name=mobileSummary" })
+  @SpeakeasyMetadata({ data: "json, name=mobileSummary" })
   mobileSummary?: PlatformSummary;
 
-  @Metadata({ data: "json, name=reviewedSite" })
+  @SpeakeasyMetadata({ data: "json, name=reviewedSite" })
   reviewedSite?: string;
 }

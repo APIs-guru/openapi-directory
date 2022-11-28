@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DkimAttributes } from "./dkimattributes";
 import { IdentityTypeEnum } from "./identitytypeenum";
 import { MailFromAttributes } from "./mailfromattributes";
 import { Tag } from "./tag";
+
 
 
 // GetEmailIdentityResponse
@@ -11,27 +11,27 @@ import { Tag } from "./tag";
  * Details about an email identity.
 **/
 export class GetEmailIdentityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationSetName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationSetName" })
   configurationSetName?: string;
 
-  @Metadata({ data: "json, name=DkimAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=DkimAttributes" })
   dkimAttributes?: DkimAttributes;
 
-  @Metadata({ data: "json, name=FeedbackForwardingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackForwardingStatus" })
   feedbackForwardingStatus?: boolean;
 
-  @Metadata({ data: "json, name=IdentityType" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityType" })
   identityType?: IdentityTypeEnum;
 
-  @Metadata({ data: "json, name=MailFromAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=MailFromAttributes" })
   mailFromAttributes?: MailFromAttributes;
 
-  @Metadata({ data: "json, name=Policies" })
+  @SpeakeasyMetadata({ data: "json, name=Policies" })
   policies?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VerifiedForSendingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=VerifiedForSendingStatus" })
   verifiedForSendingStatus?: boolean;
 }

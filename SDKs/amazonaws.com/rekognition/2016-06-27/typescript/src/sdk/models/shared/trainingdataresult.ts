@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { TrainingData } from "./trainingdata";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrainingData } from "./trainingdata";
 import { ValidationData } from "./validationdata";
+
 
 
 // TrainingDataResult
@@ -9,12 +9,12 @@ import { ValidationData } from "./validationdata";
  * Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.
 **/
 export class TrainingDataResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Input" })
+  @SpeakeasyMetadata({ data: "json, name=Input" })
   input?: TrainingData;
 
-  @Metadata({ data: "json, name=Output" })
+  @SpeakeasyMetadata({ data: "json, name=Output" })
   output?: TrainingData;
 
-  @Metadata({ data: "json, name=Validation" })
+  @SpeakeasyMetadata({ data: "json, name=Validation" })
   validation?: ValidationData;
 }

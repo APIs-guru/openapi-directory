@@ -1,5 +1,7 @@
 package shared
 
+// FindMatchesParameters
+// The parameters to configure the find matches transform.
 type FindMatchesParameters struct {
 	AccuracyCostTradeoff    *float64 `json:"AccuracyCostTradeoff,omitempty"`
 	EnforceProvidedLabels   *bool    `json:"EnforceProvidedLabels,omitempty"`

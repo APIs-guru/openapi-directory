@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterArn" })
+  @SpeakeasyMetadata({ data: "json, name=filterArn" })
   filterArn: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
+
 
 
 // ChartSourceRange
@@ -8,6 +8,6 @@ import { GridRange } from "./gridrange";
  * Source ranges for a chart.
 **/
 export class ChartSourceRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sources", elemType: shared.GridRange })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: GridRange })
   sources?: GridRange[];
 }

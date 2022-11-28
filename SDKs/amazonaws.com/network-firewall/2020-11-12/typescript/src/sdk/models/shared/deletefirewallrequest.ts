@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteFirewallRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirewallArn" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallArn" })
   firewallArn?: string;
 
-  @Metadata({ data: "json, name=FirewallName" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallName" })
   firewallName?: string;
 }

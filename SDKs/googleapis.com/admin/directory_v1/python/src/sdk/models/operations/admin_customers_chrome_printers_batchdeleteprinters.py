@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdminCustomersChromePrintersBatchDeletePrintersPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AdminCustomersChromePrintersBatchDeletePrintersQueryParams:
 
 @dataclass
 class AdminCustomersChromePrintersBatchDeletePrintersSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdminCustomersChromePrintersBatchDeletePrintersRequest:
-    path_params: AdminCustomersChromePrintersBatchDeletePrintersPathParams = field(default=None)
-    query_params: AdminCustomersChromePrintersBatchDeletePrintersQueryParams = field(default=None)
+    path_params: AdminCustomersChromePrintersBatchDeletePrintersPathParams = field()
+    query_params: AdminCustomersChromePrintersBatchDeletePrintersQueryParams = field()
+    security: AdminCustomersChromePrintersBatchDeletePrintersSecurity = field()
     request: Optional[shared.BatchDeletePrintersRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdminCustomersChromePrintersBatchDeletePrintersSecurity = field(default=None)
     
 
 @dataclass
 class AdminCustomersChromePrintersBatchDeletePrintersResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_delete_printers_response: Optional[shared.BatchDeletePrintersResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

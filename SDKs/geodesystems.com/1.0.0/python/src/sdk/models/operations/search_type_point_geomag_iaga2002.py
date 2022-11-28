@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -34,11 +34,11 @@ class SearchTypePointGeomagIaga2002QueryParams:
 
 @dataclass
 class SearchTypePointGeomagIaga2002Request:
-    query_params: SearchTypePointGeomagIaga2002QueryParams = field(default=None)
+    query_params: SearchTypePointGeomagIaga2002QueryParams = field()
     
 
 @dataclass
 class SearchTypePointGeomagIaga2002Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

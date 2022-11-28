@@ -1,5 +1,7 @@
 package shared
 
+// VoiceChannelResponse
+// Provides information about the status and settings of the voice channel for an application.
 type VoiceChannelResponse struct {
 	ApplicationID    *string `json:"ApplicationId,omitempty"`
 	CreationDate     *string `json:"CreationDate,omitempty"`

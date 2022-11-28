@@ -1,49 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetUsersTopArtistsAndTracksPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: string;
 }
 
 
 export class EndpointGetUsersTopArtistsAndTracksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time_range" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time_range" })
   timeRange?: string;
 }
 
 
 export class EndpointGetUsersTopArtistsAndTracksHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetUsersTopArtistsAndTracksSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
-}
-
-
-export class EndpointGetUsersTopArtistsAndTracksRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: EndpointGetUsersTopArtistsAndTracksPathParams;
-
-  @Metadata()
-  queryParams: EndpointGetUsersTopArtistsAndTracksQueryParams;
-
-  @Metadata()
-  headers: EndpointGetUsersTopArtistsAndTracksHeaders;
-
-  @Metadata()
-  security: EndpointGetUsersTopArtistsAndTracksSecurity;
 }
 
 
@@ -52,39 +38,54 @@ export class EndpointGetUsersTopArtistsAndTracksRequest extends SpeakeasyBase {
  * https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 **/
 export class EndpointGetUsersTopArtistsAndTracks200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=items" })
+  @SpeakeasyMetadata({ data: "json, name=items" })
   items?: any[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
+export class EndpointGetUsersTopArtistsAndTracksRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: EndpointGetUsersTopArtistsAndTracksPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: EndpointGetUsersTopArtistsAndTracksQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: EndpointGetUsersTopArtistsAndTracksHeaders;
+
+  @SpeakeasyMetadata()
+  security: EndpointGetUsersTopArtistsAndTracksSecurity;
+}
+
+
 export class EndpointGetUsersTopArtistsAndTracksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   endpointGetUsersTopArtistsAndTracks200ApplicationJsonObject?: EndpointGetUsersTopArtistsAndTracks200ApplicationJson;
 }

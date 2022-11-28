@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesStatesListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class CloudiotProjectsLocationsRegistriesDevicesStatesListQueryParams:
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesStatesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesStatesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class CloudiotProjectsLocationsRegistriesDevicesStatesListSecurity:
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesStatesListRequest:
-    path_params: CloudiotProjectsLocationsRegistriesDevicesStatesListPathParams = field(default=None)
-    query_params: CloudiotProjectsLocationsRegistriesDevicesStatesListQueryParams = field(default=None)
-    security: CloudiotProjectsLocationsRegistriesDevicesStatesListSecurity = field(default=None)
+    path_params: CloudiotProjectsLocationsRegistriesDevicesStatesListPathParams = field()
+    query_params: CloudiotProjectsLocationsRegistriesDevicesStatesListQueryParams = field()
+    security: CloudiotProjectsLocationsRegistriesDevicesStatesListSecurity = field()
     
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesStatesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_device_states_response: Optional[shared.ListDeviceStatesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

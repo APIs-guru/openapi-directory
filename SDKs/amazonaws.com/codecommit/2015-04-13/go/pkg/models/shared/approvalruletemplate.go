@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ApprovalRuleTemplate
+// Returns information about an approval rule template.
 type ApprovalRuleTemplate struct {
 	ApprovalRuleTemplateContent     *string    `json:"approvalRuleTemplateContent,omitempty"`
 	ApprovalRuleTemplateDescription *string    `json:"approvalRuleTemplateDescription,omitempty"`

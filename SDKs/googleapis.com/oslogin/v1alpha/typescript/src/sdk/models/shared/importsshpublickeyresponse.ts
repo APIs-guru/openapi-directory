@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoginProfile } from "./loginprofile";
+
 
 
 // ImportSshPublicKeyResponse
@@ -7,9 +8,9 @@ import { LoginProfile } from "./loginprofile";
  * A response message for importing an SSH public key.
 **/
 export class ImportSshPublicKeyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=loginProfile" })
+  @SpeakeasyMetadata({ data: "json, name=loginProfile" })
   loginProfile?: LoginProfile;
 }

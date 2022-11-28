@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIPicoLoadmanagementgroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     pico_loadmanagement_group_dtos: Optional[List[shared.PicoLoadmanagementGroupDto]] = field(default=None)
-    status_code: int = field(default=None)
     

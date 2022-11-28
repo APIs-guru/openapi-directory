@@ -231,14 +231,14 @@ from .dcim_virtual_chassis_list import *
 from .dcim_virtual_chassis_partial_update import *
 from .dcim_virtual_chassis_read import *
 from .dcim_virtual_chassis_update import *
-from .extras__custom_field_choices_list import *
-from .extras__custom_field_choices_read import *
 from .extras_config_contexts_create import *
 from .extras_config_contexts_delete import *
 from .extras_config_contexts_list import *
 from .extras_config_contexts_partial_update import *
 from .extras_config_contexts_read import *
 from .extras_config_contexts_update import *
+from .extras_custom_field_choices_list import *
+from .extras_custom_field_choices_read import *
 from .extras_export_templates_create import *
 from .extras_export_templates_delete import *
 from .extras_export_templates_list import *

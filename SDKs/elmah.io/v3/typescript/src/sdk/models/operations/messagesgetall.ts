@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MessagesGetAllPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=logId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=logId" })
   logId: string;
 }
 
 
 export class MessagesGetAllQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeHeaders" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeHeaders" })
   includeHeaders?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageIndex" })
   pageIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to?: Date;
 }
 
 
 export class MessagesGetAllRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MessagesGetAllPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MessagesGetAllQueryParams;
 }
 
 
 export class MessagesGetAllResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messagesResult?: shared.MessagesResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

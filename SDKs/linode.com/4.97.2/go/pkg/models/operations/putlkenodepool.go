@@ -9,17 +9,9 @@ type PutLkeNodePoolPathParams struct {
 	PoolID    int64 `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
-type PutLkeNodePoolSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type PutLkeNodePoolSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type PutLkeNodePoolSecurity struct {
-	Option1 *PutLkeNodePoolSecurityOption1 `security:"option"`
-	Option2 *PutLkeNodePoolSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type PutLkeNodePoolRequest struct {

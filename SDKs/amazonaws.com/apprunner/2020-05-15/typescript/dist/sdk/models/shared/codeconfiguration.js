@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeConfigurationValues } from "./codeconfigurationvalues";
 import { ConfigurationSourceEnum } from "./configurationsourceenum";
 // CodeConfiguration
@@ -35,11 +35,11 @@ var CodeConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CodeConfigurationValues" }),
+        SpeakeasyMetadata({ data: "json, name=CodeConfigurationValues" }),
         __metadata("design:type", CodeConfigurationValues)
     ], CodeConfiguration.prototype, "codeConfigurationValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConfigurationSource" }),
+        SpeakeasyMetadata({ data: "json, name=ConfigurationSource" }),
         __metadata("design:type", String)
     ], CodeConfiguration.prototype, "configurationSource", void 0);
     return CodeConfiguration;

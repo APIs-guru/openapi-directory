@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum HttpConfigHttpEnabledStateEnum {
     HttpStateUnspecified = "HTTP_STATE_UNSPECIFIED",
     HttpEnabled = "HTTP_ENABLED",

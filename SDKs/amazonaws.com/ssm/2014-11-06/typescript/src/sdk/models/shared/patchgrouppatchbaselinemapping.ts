@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchBaselineIdentity } from "./patchbaselineidentity";
+
 
 
 // PatchGroupPatchBaselineMapping
@@ -7,9 +8,9 @@ import { PatchBaselineIdentity } from "./patchbaselineidentity";
  * The mapping between a patch group and the patch baseline the patch group is registered with.
 **/
 export class PatchGroupPatchBaselineMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BaselineIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=BaselineIdentity" })
   baselineIdentity?: PatchBaselineIdentity;
 
-  @Metadata({ data: "json, name=PatchGroup" })
+  @SpeakeasyMetadata({ data: "json, name=PatchGroup" })
   patchGroup?: string;
 }

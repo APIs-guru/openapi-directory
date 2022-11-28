@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPaymentsForPayoutV4PathParams:
-    payout_id: str = field(default=None, metadata={'path_param': { 'field_name': 'payoutId', 'style': 'simple', 'explode': False }})
+    payout_id: str = field(metadata={'path_param': { 'field_name': 'payoutId', 'style': 'simple', 'explode': False }})
     
 class GetPaymentsForPayoutV4StatusEnum(str, Enum):
     ACCEPTED = "ACCEPTED"
@@ -42,22 +43,22 @@ class GetPaymentsForPayoutV4QueryParams:
     source_amount_from: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'sourceAmountFrom', 'style': 'form', 'explode': True }})
     source_amount_to: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'sourceAmountTo', 'style': 'form', 'explode': True }})
     status: Optional[GetPaymentsForPayoutV4StatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
-    submitted_date_from: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateFrom', 'style': 'form', 'explode': True }})
-    submitted_date_to: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateTo', 'style': 'form', 'explode': True }})
+    submitted_date_from: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateFrom', 'style': 'form', 'explode': True }})
+    submitted_date_to: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'submittedDateTo', 'style': 'form', 'explode': True }})
     transmission_type: Optional[GetPaymentsForPayoutV4TransmissionTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'transmissionType', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetPaymentsForPayoutV4Request:
-    path_params: GetPaymentsForPayoutV4PathParams = field(default=None)
-    query_params: GetPaymentsForPayoutV4QueryParams = field(default=None)
+    path_params: GetPaymentsForPayoutV4PathParams = field()
+    query_params: GetPaymentsForPayoutV4QueryParams = field()
     
 
 @dataclass
 class GetPaymentsForPayoutV4Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_payments_for_payout_response_v4: Optional[shared.GetPaymentsForPayoutResponseV4] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FindDevicesByOwnerRequestSectionTypeEnum {
-    SectionTypeUnspecified = "SECTION_TYPE_UNSPECIFIED"
-,    SectionTypeSimLock = "SECTION_TYPE_SIM_LOCK"
-,    SectionTypeZeroTouch = "SECTION_TYPE_ZERO_TOUCH"
+    SectionTypeUnspecified = "SECTION_TYPE_UNSPECIFIED",
+    SectionTypeSimLock = "SECTION_TYPE_SIM_LOCK",
+    SectionTypeZeroTouch = "SECTION_TYPE_ZERO_TOUCH"
 }
 
 
@@ -12,15 +13,18 @@ export enum FindDevicesByOwnerRequestSectionTypeEnum {
  * Request to find devices by customers.
 **/
 export class FindDevicesByOwnerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=googleWorkspaceCustomerId" })
+  googleWorkspaceCustomerId?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: string;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=sectionType" })
+  @SpeakeasyMetadata({ data: "json, name=sectionType" })
   sectionType?: FindDevicesByOwnerRequestSectionTypeEnum;
 }

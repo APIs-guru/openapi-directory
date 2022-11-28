@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransactionResource } from "./transactionresource";
 
 
+
 export class ListTransactionsResponseLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next: string;
 
-  @Metadata({ data: "json, name=prev" })
+  @SpeakeasyMetadata({ data: "json, name=prev" })
   prev: string;
 }
 
@@ -20,9 +20,9 @@ export class ListTransactionsResponseLinks extends SpeakeasyBase {
  * 
 **/
 export class ListTransactionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.TransactionResource })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: TransactionResource })
   data: TransactionResource[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links: ListTransactionsResponseLinks;
 }

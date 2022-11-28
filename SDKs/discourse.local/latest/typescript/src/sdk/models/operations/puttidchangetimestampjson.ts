@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutTIdChangeTimestampJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutTIdChangeTimestampJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Key" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Username" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Username" })
   apiUsername: string;
 }
 
 
 export class PutTIdChangeTimestampJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: string;
 }
 
 
-export class PutTIdChangeTimestampJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutTIdChangeTimestampJsonPathParams;
-
-  @Metadata()
-  headers: PutTIdChangeTimestampJsonHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PutTIdChangeTimestampJsonRequestBody;
-}
-
-
 export class PutTIdChangeTimestampJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: string;
 }
 
 
+export class PutTIdChangeTimestampJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutTIdChangeTimestampJsonPathParams;
+
+  @SpeakeasyMetadata()
+  headers: PutTIdChangeTimestampJsonHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PutTIdChangeTimestampJsonRequestBody;
+}
+
+
 export class PutTIdChangeTimestampJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putTIdChangeTimestampJson200ApplicationJsonObject?: PutTIdChangeTimestampJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

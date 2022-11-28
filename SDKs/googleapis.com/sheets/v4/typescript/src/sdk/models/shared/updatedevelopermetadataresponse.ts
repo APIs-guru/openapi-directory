@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeveloperMetadata } from "./developermetadata";
+
 
 
 // UpdateDeveloperMetadataResponse
@@ -8,6 +8,6 @@ import { DeveloperMetadata } from "./developermetadata";
  * The response from updating developer metadata.
 **/
 export class UpdateDeveloperMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=developerMetadata", elemType: shared.DeveloperMetadata })
+  @SpeakeasyMetadata({ data: "json, name=developerMetadata", elemType: DeveloperMetadata })
   developerMetadata?: DeveloperMetadata[];
 }

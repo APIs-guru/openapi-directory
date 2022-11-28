@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GameEsrbRatingNameEnum;
 (function (GameEsrbRatingNameEnum) {
     GameEsrbRatingNameEnum["Everyone"] = "Everyone";
@@ -48,15 +47,15 @@ var GameEsrbRating = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GameEsrbRating.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GameEsrbRating.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=slug" }),
+        SpeakeasyMetadata({ data: "json, name=slug" }),
         __metadata("design:type", String)
     ], GameEsrbRating.prototype, "slug", void 0);
     return GameEsrbRating;
@@ -68,15 +67,15 @@ var GamePlatformsPlatform = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GamePlatformsPlatform.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GamePlatformsPlatform.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=slug" }),
+        SpeakeasyMetadata({ data: "json, name=slug" }),
         __metadata("design:type", String)
     ], GamePlatformsPlatform.prototype, "slug", void 0);
     return GamePlatformsPlatform;
@@ -88,11 +87,11 @@ var GamePlatformsRequirements = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=minimum" }),
+        SpeakeasyMetadata({ data: "json, name=minimum" }),
         __metadata("design:type", String)
     ], GamePlatformsRequirements.prototype, "minimum", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommended" }),
+        SpeakeasyMetadata({ data: "json, name=recommended" }),
         __metadata("design:type", String)
     ], GamePlatformsRequirements.prototype, "recommended", void 0);
     return GamePlatformsRequirements;
@@ -104,15 +103,15 @@ var GamePlatforms = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", GamePlatformsPlatform)
     ], GamePlatforms.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "json, name=released_at" }),
+        SpeakeasyMetadata({ data: "json, name=released_at" }),
         __metadata("design:type", String)
     ], GamePlatforms.prototype, "releasedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=requirements" }),
+        SpeakeasyMetadata({ data: "json, name=requirements" }),
         __metadata("design:type", GamePlatformsRequirements)
     ], GamePlatforms.prototype, "requirements", void 0);
     return GamePlatforms;
@@ -124,79 +123,79 @@ var Game = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=added" }),
+        SpeakeasyMetadata({ data: "json, name=added" }),
         __metadata("design:type", Number)
     ], Game.prototype, "added", void 0);
     __decorate([
-        Metadata({ data: "json, name=added_by_status" }),
+        SpeakeasyMetadata({ data: "json, name=added_by_status" }),
         __metadata("design:type", Map)
     ], Game.prototype, "addedByStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=background_image" }),
+        SpeakeasyMetadata({ data: "json, name=background_image" }),
         __metadata("design:type", String)
     ], Game.prototype, "backgroundImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=esrb_rating" }),
+        SpeakeasyMetadata({ data: "json, name=esrb_rating" }),
         __metadata("design:type", GameEsrbRating)
     ], Game.prototype, "esrbRating", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Game.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=metacritic" }),
+        SpeakeasyMetadata({ data: "json, name=metacritic" }),
         __metadata("design:type", Number)
     ], Game.prototype, "metacritic", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Game.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=platforms", elemType: shared.GamePlatforms }),
+        SpeakeasyMetadata({ data: "json, name=platforms", elemType: GamePlatforms }),
         __metadata("design:type", Array)
     ], Game.prototype, "platforms", void 0);
     __decorate([
-        Metadata({ data: "json, name=playtime" }),
+        SpeakeasyMetadata({ data: "json, name=playtime" }),
         __metadata("design:type", Number)
     ], Game.prototype, "playtime", void 0);
     __decorate([
-        Metadata({ data: "json, name=rating" }),
+        SpeakeasyMetadata({ data: "json, name=rating" }),
         __metadata("design:type", Number)
     ], Game.prototype, "rating", void 0);
     __decorate([
-        Metadata({ data: "json, name=rating_top" }),
+        SpeakeasyMetadata({ data: "json, name=rating_top" }),
         __metadata("design:type", Number)
     ], Game.prototype, "ratingTop", void 0);
     __decorate([
-        Metadata({ data: "json, name=ratings" }),
+        SpeakeasyMetadata({ data: "json, name=ratings" }),
         __metadata("design:type", Map)
     ], Game.prototype, "ratings", void 0);
     __decorate([
-        Metadata({ data: "json, name=ratings_count" }),
+        SpeakeasyMetadata({ data: "json, name=ratings_count" }),
         __metadata("design:type", Number)
     ], Game.prototype, "ratingsCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=released" }),
+        SpeakeasyMetadata({ data: "json, name=released" }),
         __metadata("design:type", Date)
     ], Game.prototype, "released", void 0);
     __decorate([
-        Metadata({ data: "json, name=reviews_text_count" }),
+        SpeakeasyMetadata({ data: "json, name=reviews_text_count" }),
         __metadata("design:type", String)
     ], Game.prototype, "reviewsTextCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=slug" }),
+        SpeakeasyMetadata({ data: "json, name=slug" }),
         __metadata("design:type", String)
     ], Game.prototype, "slug", void 0);
     __decorate([
-        Metadata({ data: "json, name=suggestions_count" }),
+        SpeakeasyMetadata({ data: "json, name=suggestions_count" }),
         __metadata("design:type", Number)
     ], Game.prototype, "suggestionsCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=tba" }),
+        SpeakeasyMetadata({ data: "json, name=tba" }),
         __metadata("design:type", Boolean)
     ], Game.prototype, "tba", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", Date)
     ], Game.prototype, "updated", void 0);
     return Game;

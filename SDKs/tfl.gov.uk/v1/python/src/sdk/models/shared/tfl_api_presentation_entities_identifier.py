@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import tfl_api_presentation_entities_crowding
+from sdk import utils
+from . import *
 
 class TflAPIPresentationEntitiesIdentifierRouteTypeEnum(str, Enum):
     UNKNOWN = "Unknown"
@@ -26,12 +28,12 @@ class TflAPIPresentationEntitiesIdentifierStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TflAPIPresentationEntitiesIdentifier:
-    crowding: Optional[tfl_api_presentation_entities_crowding.TflAPIPresentationEntitiesCrowding] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'crowding' }})
-    full_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fullName' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    route_type: Optional[TflAPIPresentationEntitiesIdentifierRouteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routeType' }})
-    status: Optional[TflAPIPresentationEntitiesIdentifierStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    crowding: Optional[TflAPIPresentationEntitiesCrowding] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('crowding') }})
+    full_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fullName') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    route_type: Optional[TflAPIPresentationEntitiesIdentifierRouteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routeType') }})
+    status: Optional[TflAPIPresentationEntitiesIdentifierStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

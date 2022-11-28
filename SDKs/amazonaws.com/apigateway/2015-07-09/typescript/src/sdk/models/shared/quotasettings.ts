@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuotaPeriodTypeEnum } from "./quotaperiodtypeenum";
+
 
 
 // QuotaSettings
@@ -7,12 +8,12 @@ import { QuotaPeriodTypeEnum } from "./quotaperiodtypeenum";
  * Quotas configured for a usage plan.
 **/
 export class QuotaSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: QuotaPeriodTypeEnum;
 }

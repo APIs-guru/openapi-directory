@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AccountActiveAdSummaryActiveAdsLimitTierEnum(str, Enum):
     ACTIVE_ADS_TIER_40_K = "ACTIVE_ADS_TIER_40K"
@@ -16,9 +18,13 @@ class AccountActiveAdSummaryActiveAdsLimitTierEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AccountActiveAdSummary:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountId' }})
-    active_ads: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeAds' }})
-    active_ads_limit_tier: Optional[AccountActiveAdSummaryActiveAdsLimitTierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeAdsLimitTier' }})
-    available_ads: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availableAds' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    r"""AccountActiveAdSummary
+    Gets a summary of active ads in an account.
+    """
+    
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountId') }})
+    active_ads: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeAds') }})
+    active_ads_limit_tier: Optional[AccountActiveAdSummaryActiveAdsLimitTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeAdsLimitTier') }})
+    available_ads: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableAds') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

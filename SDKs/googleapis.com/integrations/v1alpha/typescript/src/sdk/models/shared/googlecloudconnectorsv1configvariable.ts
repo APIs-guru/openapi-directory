@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudConnectorsV1Secret } from "./googlecloudconnectorsv1secret";
+
 
 
 // GoogleCloudConnectorsV1ConfigVariable
@@ -7,18 +8,18 @@ import { GoogleCloudConnectorsV1Secret } from "./googlecloudconnectorsv1secret";
  * ConfigVariable represents a configuration variable present in a Connection. or AuthConfig.
 **/
 export class GoogleCloudConnectorsV1ConfigVariable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=intValue" })
+  @SpeakeasyMetadata({ data: "json, name=intValue" })
   intValue?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=secretValue" })
+  @SpeakeasyMetadata({ data: "json, name=secretValue" })
   secretValue?: GoogleCloudConnectorsV1Secret;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

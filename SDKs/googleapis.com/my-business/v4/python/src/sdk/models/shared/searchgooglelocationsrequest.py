@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import location
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class SearchGoogleLocationsRequest:
-    location: Optional[location.Location] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'query' }})
-    result_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resultCount' }})
+class SearchGoogleLocationsRequestInput:
+    r"""SearchGoogleLocationsRequestInput
+    Request message for GoogleLocations.SearchGoogleLocations.
+    """
+    
+    location: Optional[LocationInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('query') }})
+    result_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resultCount') }})
     

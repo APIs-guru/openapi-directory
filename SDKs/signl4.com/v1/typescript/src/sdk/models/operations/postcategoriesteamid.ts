@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostCategoriesTeamIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
-export class PostCategoriesTeamIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  categoryInfo?: shared.CategoryInfo;
+export class PostCategoriesTeamIdRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  categoryInfo?: shared.CategoryInfoInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  categoryInfo1?: shared.CategoryInfo;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  categoryInfo1?: shared.CategoryInfoInput;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
-  categoryInfo2?: shared.CategoryInfo;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
+  categoryInfo2?: shared.CategoryInfoInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  categoryInfo3?: shared.CategoryInfo;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  categoryInfo3?: shared.CategoryInfoInput;
 }
 
 
 export class PostCategoriesTeamIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostCategoriesTeamIdPathParams;
 
-  @Metadata()
-  request?: PostCategoriesTeamIdRequests;
+  @SpeakeasyMetadata()
+  request?: PostCategoriesTeamIdRequestsInput;
 }
 
 
 export class PostCategoriesTeamIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   categoryInfo?: shared.CategoryInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCopyFpgaImageActionEnum(str, Enum):
     COPY_FPGA_IMAGE = "CopyFpgaImage"
@@ -10,8 +14,8 @@ class PostCopyFpgaImageVersionEnum(str, Enum):
 
 @dataclass
 class PostCopyFpgaImageQueryParams:
-    action: PostCopyFpgaImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCopyFpgaImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCopyFpgaImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCopyFpgaImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCopyFpgaImageHeaders:
 
 @dataclass
 class PostCopyFpgaImageRequest:
-    query_params: PostCopyFpgaImageQueryParams = field(default=None)
-    headers: PostCopyFpgaImageHeaders = field(default=None)
+    headers: PostCopyFpgaImageHeaders = field()
+    query_params: PostCopyFpgaImageQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCopyFpgaImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

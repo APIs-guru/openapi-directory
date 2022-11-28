@@ -1,8 +1,9 @@
 
 
+
 export enum JobStatusEnum {
-    InProgress = "IN_PROGRESS"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Canceled = "CANCELED"
+    InProgress = "IN_PROGRESS",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Canceled = "CANCELED"
 }

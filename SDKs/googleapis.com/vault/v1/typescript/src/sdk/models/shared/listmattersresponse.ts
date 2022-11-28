@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Matter } from "./matter";
+
 
 
 // ListMattersResponse
@@ -8,9 +8,9 @@ import { Matter } from "./matter";
  * Provides the list of matters.
 **/
 export class ListMattersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matters", elemType: shared.Matter })
+  @SpeakeasyMetadata({ data: "json, name=matters", elemType: Matter })
   matters?: Matter[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Value } from "./value";
+
 
 
 // WriteResult
@@ -8,9 +8,9 @@ import { Value } from "./value";
  * The result of applying a write.
 **/
 export class WriteResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transformResults", elemType: shared.Value })
+  @SpeakeasyMetadata({ data: "json, name=transformResults", elemType: Value })
   transformResults?: Value[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

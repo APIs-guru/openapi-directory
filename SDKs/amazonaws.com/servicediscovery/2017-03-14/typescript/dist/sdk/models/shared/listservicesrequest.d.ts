@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceFilter } from "./servicefilter";
 export declare class ListServicesRequest extends SpeakeasyBase {
     filters?: ServiceFilter[];

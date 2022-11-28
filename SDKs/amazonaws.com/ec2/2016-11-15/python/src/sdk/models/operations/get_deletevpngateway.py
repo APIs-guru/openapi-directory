@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteVpnGatewayActionEnum(str, Enum):
     DELETE_VPN_GATEWAY = "DeleteVpnGateway"
@@ -10,10 +14,10 @@ class GetDeleteVpnGatewayVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVpnGatewayQueryParams:
-    action: GetDeleteVpnGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteVpnGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteVpnGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpn_gateway_id: str = field(metadata={'query_param': { 'field_name': 'VpnGatewayId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeleteVpnGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpn_gateway_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnGatewayId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteVpnGatewayHeaders:
 
 @dataclass
 class GetDeleteVpnGatewayRequest:
-    query_params: GetDeleteVpnGatewayQueryParams = field(default=None)
-    headers: GetDeleteVpnGatewayHeaders = field(default=None)
+    headers: GetDeleteVpnGatewayHeaders = field()
+    query_params: GetDeleteVpnGatewayQueryParams = field()
     
 
 @dataclass
 class GetDeleteVpnGatewayResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

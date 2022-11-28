@@ -13,13 +13,13 @@ type DeleteProjectStatusQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeleteProjectStatus200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeleteProjectStatusRequest struct {
 	PathParams  DeleteProjectStatusPathParams
 	QueryParams DeleteProjectStatusQueryParams
-}
-
-type DeleteProjectStatus200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteProjectStatusResponse struct {

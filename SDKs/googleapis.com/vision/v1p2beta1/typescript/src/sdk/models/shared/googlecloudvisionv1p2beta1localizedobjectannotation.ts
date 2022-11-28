@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVisionV1p2beta1BoundingPoly } from "./googlecloudvisionv1p2beta1boundingpoly";
+
 
 
 // GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
@@ -7,18 +8,18 @@ import { GoogleCloudVisionV1p2beta1BoundingPoly } from "./googlecloudvisionv1p2b
  * Set of detected objects with bounding boxes.
 **/
 export class GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=boundingPoly" })
   boundingPoly?: GoogleCloudVisionV1p2beta1BoundingPoly;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=mid" })
+  @SpeakeasyMetadata({ data: "json, name=mid" })
   mid?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ReportsReadPathParams:
-    report_number: str = field(default=None, metadata={'path_param': { 'field_name': 'report_number', 'style': 'simple', 'explode': False }})
+    report_number: str = field(metadata={'path_param': { 'field_name': 'report_number', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReportsReadRequest:
-    path_params: ReportsReadPathParams = field(default=None)
+    path_params: ReportsReadPathParams = field()
     
 
 @dataclass
 class ReportsReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report: Optional[shared.Report] = field(default=None)
-    status_code: int = field(default=None)
     

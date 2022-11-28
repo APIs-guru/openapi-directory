@@ -8,10 +8,10 @@ type UpdateUserPathParams struct {
 	UserID string `pathParam:"style=simple,explode=false,name=userId"`
 }
 
-type UpdateUserRequests struct {
-	UserDto  *shared.UserDto `request:"mediaType=application/*+json"`
-	UserDto1 *shared.UserDto `request:"mediaType=application/json"`
-	UserDto2 *shared.UserDto `request:"mediaType=text/json"`
+type UpdateUserRequestsInput struct {
+	UserDto  *shared.UserDtoInput `request:"mediaType=application/*+json"`
+	UserDto1 *shared.UserDtoInput `request:"mediaType=application/json"`
+	UserDto2 *shared.UserDtoInput `request:"mediaType=text/json"`
 }
 
 type UpdateUserSecurity struct {
@@ -20,7 +20,7 @@ type UpdateUserSecurity struct {
 
 type UpdateUserRequest struct {
 	PathParams UpdateUserPathParams
-	Request    UpdateUserRequests
+	Request    UpdateUserRequestsInput
 	Security   UpdateUserSecurity
 }
 

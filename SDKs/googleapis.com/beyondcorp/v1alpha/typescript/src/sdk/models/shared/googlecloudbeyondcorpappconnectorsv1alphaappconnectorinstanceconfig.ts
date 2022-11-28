@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBeyondcorpAppconnectorsV1alphaImageConfig } from "./googlecloudbeyondcorpappconnectorsv1alphaimageconfig";
 import { GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfig } from "./googlecloudbeyondcorpappconnectorsv1alphanotificationconfig";
+
 
 
 // GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorInstanceConfig
@@ -8,15 +9,15 @@ import { GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfig } from "./g
  * AppConnectorInstanceConfig defines the instance config of a AppConnector.
 **/
 export class GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorInstanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=imageConfig" })
   imageConfig?: GoogleCloudBeyondcorpAppconnectorsV1alphaImageConfig;
 
-  @Metadata({ data: "json, name=instanceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=instanceConfig" })
   instanceConfig?: Map<string, any>;
 
-  @Metadata({ data: "json, name=notificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfig" })
   notificationConfig?: GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfig;
 
-  @Metadata({ data: "json, name=sequenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=sequenceNumber" })
   sequenceNumber?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TeamsListDiscussionsPathParams:
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,20 +18,20 @@ class TeamsListDiscussionsQueryParams:
 
 @dataclass
 class TeamsListDiscussionsHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TeamsListDiscussionsRequest:
-    path_params: TeamsListDiscussionsPathParams = field(default=None)
-    query_params: TeamsListDiscussionsQueryParams = field(default=None)
-    headers: TeamsListDiscussionsHeaders = field(default=None)
+    headers: TeamsListDiscussionsHeaders = field()
+    path_params: TeamsListDiscussionsPathParams = field()
+    query_params: TeamsListDiscussionsQueryParams = field()
     
 
 @dataclass
 class TeamsListDiscussionsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     team_discussions: Optional[List[shared.TeamDiscussion]] = field(default=None)
     

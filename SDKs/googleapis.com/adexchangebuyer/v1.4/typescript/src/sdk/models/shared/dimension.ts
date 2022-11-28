@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionDimensionValue } from "./dimensiondimensionvalue";
+
 
 
 // Dimension
@@ -8,9 +8,9 @@ import { DimensionDimensionValue } from "./dimensiondimensionvalue";
  * This message carries publisher provided breakdown. E.g. {dimension_type: 'COUNTRY', [{dimension_value: {id: 1, name: 'US'}}, {dimension_value: {id: 2, name: 'UK'}}]}
 **/
 export class Dimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionType" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionType" })
   dimensionType?: string;
 
-  @Metadata({ data: "json, name=dimensionValues", elemType: shared.DimensionDimensionValue })
+  @SpeakeasyMetadata({ data: "json, name=dimensionValues", elemType: DimensionDimensionValue })
   dimensionValues?: DimensionDimensionValue[];
 }

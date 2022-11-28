@@ -1,6 +1,7 @@
 
 
+
 export enum AssignPublicIpEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Command
+// Describes a command.
 type Command struct {
 	AcknowledgedAt *string `json:"AcknowledgedAt,omitempty"`
 	CommandID      *string `json:"CommandId,omitempty"`

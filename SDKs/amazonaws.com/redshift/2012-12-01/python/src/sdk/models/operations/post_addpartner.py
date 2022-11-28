@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAddPartnerActionEnum(str, Enum):
     ADD_PARTNER = "AddPartner"
@@ -10,8 +14,8 @@ class PostAddPartnerVersionEnum(str, Enum):
 
 @dataclass
 class PostAddPartnerQueryParams:
-    action: PostAddPartnerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAddPartnerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAddPartnerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAddPartnerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAddPartnerHeaders:
 
 @dataclass
 class PostAddPartnerRequest:
-    query_params: PostAddPartnerQueryParams = field(default=None)
-    headers: PostAddPartnerHeaders = field(default=None)
+    headers: PostAddPartnerHeaders = field()
+    query_params: PostAddPartnerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAddPartnerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

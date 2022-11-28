@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchStopJobRunSuccessfulSubmission
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Records a successful request to stop a specified <code>JobRun</code>.
 **/
 export class BatchStopJobRunSuccessfulSubmission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=JobRunId" })
+  @SpeakeasyMetadata({ data: "json, name=JobRunId" })
   jobRunId?: string;
 }

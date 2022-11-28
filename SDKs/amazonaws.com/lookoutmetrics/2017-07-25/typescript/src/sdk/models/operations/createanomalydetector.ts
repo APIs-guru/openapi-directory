@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAnomalyDetectorHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,63 +32,63 @@ export class CreateAnomalyDetectorHeaders extends SpeakeasyBase {
  * Contains information about a detector's configuration.
 **/
 export class CreateAnomalyDetectorRequestBodyAnomalyDetectorConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyDetectorFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorFrequency" })
   anomalyDetectorFrequency?: shared.FrequencyEnum;
 }
 
 
 export class CreateAnomalyDetectorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyDetectorConfig" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorConfig" })
   anomalyDetectorConfig: CreateAnomalyDetectorRequestBodyAnomalyDetectorConfig;
 
-  @Metadata({ data: "json, name=AnomalyDetectorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorDescription" })
   anomalyDetectorDescription?: string;
 
-  @Metadata({ data: "json, name=AnomalyDetectorName" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorName" })
   anomalyDetectorName: string;
 
-  @Metadata({ data: "json, name=KmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyArn" })
   kmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateAnomalyDetectorRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAnomalyDetectorHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateAnomalyDetectorRequestBody;
 }
 
 
 export class CreateAnomalyDetectorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAnomalyDetectorResponse?: shared.CreateAnomalyDetectorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

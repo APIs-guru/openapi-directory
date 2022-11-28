@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleAppsCloudidentityDevicesV1CustomAttributeValue } from "./googleappscloudidentitydevicesv1customattributevalue";
 export var GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum;
 (function (GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum) {
     GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum["ComplianceStateUnspecified"] = "COMPLIANCE_STATE_UNSPECIFIED";
@@ -61,51 +61,51 @@ var GoogleAppsCloudidentityDevicesV1ClientState = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetTags" }),
+        SpeakeasyMetadata({ data: "json, name=assetTags" }),
         __metadata("design:type", Array)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "assetTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=complianceState" }),
+        SpeakeasyMetadata({ data: "json, name=complianceState" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "complianceState", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=customId" }),
+        SpeakeasyMetadata({ data: "json, name=customId" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "customId", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthScore" }),
+        SpeakeasyMetadata({ data: "json, name=healthScore" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "healthScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyValuePairs", elemType: shared.GoogleAppsCloudidentityDevicesV1CustomAttributeValue }),
+        SpeakeasyMetadata({ data: "json, name=keyValuePairs", elemType: GoogleAppsCloudidentityDevicesV1CustomAttributeValue }),
         __metadata("design:type", Map)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "keyValuePairs", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=managed" }),
+        SpeakeasyMetadata({ data: "json, name=managed" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "managed", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerType" }),
+        SpeakeasyMetadata({ data: "json, name=ownerType" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "ownerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=scoreReason" }),
+        SpeakeasyMetadata({ data: "json, name=scoreReason" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1ClientState.prototype, "scoreReason", void 0);
     return GoogleAppsCloudidentityDevicesV1ClientState;

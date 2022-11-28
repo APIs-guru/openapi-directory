@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDevelopersDeveloperIdPathParams = /** @class */ (function (_super) {
     __extends(GetDevelopersDeveloperIdPathParams, _super);
     function GetDevelopersDeveloperIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
         __metadata("design:type", String)
     ], GetDevelopersDeveloperIdPathParams.prototype, "developerId", void 0);
     return GetDevelopersDeveloperIdPathParams;
@@ -41,7 +41,7 @@ var GetDevelopersDeveloperIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDevelopersDeveloperIdPathParams)
     ], GetDevelopersDeveloperIdRequest.prototype, "pathParams", void 0);
     return GetDevelopersDeveloperIdRequest;
@@ -53,15 +53,15 @@ var GetDevelopersDeveloperIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDevelopersDeveloperIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDevelopersDeveloperIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDevelopersDeveloperIdResponse.prototype, "statusCode", void 0);
     return GetDevelopersDeveloperIdResponse;

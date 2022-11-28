@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum SchemaTypeEnum {
     TypeUnspecified = "TYPE_UNSPECIFIED",
     ProtocolBuffer = "PROTOCOL_BUFFER",
@@ -12,5 +12,13 @@ export declare class Schema extends SpeakeasyBase {
     name?: string;
     revisionCreateTime?: string;
     revisionId?: string;
+    type?: SchemaTypeEnum;
+}
+/**
+ * A schema resource.
+**/
+export declare class SchemaInput extends SpeakeasyBase {
+    definition?: string;
+    name?: string;
     type?: SchemaTypeEnum;
 }

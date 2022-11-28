@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartyVerifyPasswordRequest
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to verify the password.
 **/
 export class IdentitytoolkitRelyingpartyVerifyPasswordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=captchaChallenge" })
+  @SpeakeasyMetadata({ data: "json, name=captchaChallenge" })
   captchaChallenge?: string;
 
-  @Metadata({ data: "json, name=captchaResponse" })
+  @SpeakeasyMetadata({ data: "json, name=captchaResponse" })
   captchaResponse?: string;
 
-  @Metadata({ data: "json, name=delegatedProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=delegatedProjectNumber" })
   delegatedProjectNumber?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=pendingIdToken" })
+  @SpeakeasyMetadata({ data: "json, name=pendingIdToken" })
   pendingIdToken?: string;
 
-  @Metadata({ data: "json, name=returnSecureToken" })
+  @SpeakeasyMetadata({ data: "json, name=returnSecureToken" })
   returnSecureToken?: boolean;
 
-  @Metadata({ data: "json, name=tenantId" })
+  @SpeakeasyMetadata({ data: "json, name=tenantId" })
   tenantId?: string;
 
-  @Metadata({ data: "json, name=tenantProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=tenantProjectNumber" })
   tenantProjectNumber?: string;
 }

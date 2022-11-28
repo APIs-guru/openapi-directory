@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,31 +22,31 @@ class CreateAPIKeyHeaders:
 @dataclass_json
 @dataclass
 class CreateAPIKeyRequestBody:
-    customer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerId' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    generate_distinct_id: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'generateDistinctId' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    stage_keys: Optional[List[shared.StageKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stageKeys' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    customer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    generate_distinct_id: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('generateDistinctId') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    stage_keys: Optional[List[shared.StageKey]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageKeys') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass
 class CreateAPIKeyRequest:
-    headers: CreateAPIKeyHeaders = field(default=None)
-    request: CreateAPIKeyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAPIKeyHeaders = field()
+    request: CreateAPIKeyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAPIKeyResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key: Optional[shared.APIKey] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UrlChannel } from "./urlchannel";
+
 
 
 // ListUrlChannelsResponse
@@ -8,9 +8,9 @@ import { UrlChannel } from "./urlchannel";
  * Response definition for the url channels list rpc.
 **/
 export class ListUrlChannelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=urlChannels", elemType: shared.UrlChannel })
+  @SpeakeasyMetadata({ data: "json, name=urlChannels", elemType: UrlChannel })
   urlChannels?: UrlChannel[];
 }

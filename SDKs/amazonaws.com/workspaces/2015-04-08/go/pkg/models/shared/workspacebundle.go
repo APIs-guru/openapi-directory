@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkspaceBundle
+// Describes a WorkSpace bundle.
 type WorkspaceBundle struct {
 	BundleID        *string      `json:"BundleId,omitempty"`
 	ComputeType     *ComputeType `json:"ComputeType,omitempty"`

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetFindPathwaysByXrefFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Html = "html"
-,    Dump = "dump"
-,    Jpg = "jpg"
-,    Pdf = "pdf"
+    Json = "json",
+    Xml = "xml",
+    Html = "html",
+    Dump = "dump",
+    Jpg = "jpg",
+    Pdf = "pdf"
 }
 
 
 export class GetFindPathwaysByXrefQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=codes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=codes" })
   codes?: any[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetFindPathwaysByXrefFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
   ids: any[];
 }
 
 
 export class GetFindPathwaysByXrefRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFindPathwaysByXrefQueryParams;
 }
 
 
 export class GetFindPathwaysByXrefResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

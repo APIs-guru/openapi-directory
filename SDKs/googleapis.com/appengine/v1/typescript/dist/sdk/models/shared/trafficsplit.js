@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var TrafficSplitShardByEnum;
 (function (TrafficSplitShardByEnum) {
     TrafficSplitShardByEnum["Unspecified"] = "UNSPECIFIED";
@@ -40,11 +40,11 @@ var TrafficSplit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allocations" }),
+        SpeakeasyMetadata({ data: "json, name=allocations" }),
         __metadata("design:type", Map)
     ], TrafficSplit.prototype, "allocations", void 0);
     __decorate([
-        Metadata({ data: "json, name=shardBy" }),
+        SpeakeasyMetadata({ data: "json, name=shardBy" }),
         __metadata("design:type", String)
     ], TrafficSplit.prototype, "shardBy", void 0);
     return TrafficSplit;

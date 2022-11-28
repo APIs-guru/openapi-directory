@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutCategoriesTeamIdCategoryIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=categoryId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=categoryId" })
   categoryId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
-export class PutCategoriesTeamIdCategoryIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  categoryInfo?: shared.CategoryInfo;
+export class PutCategoriesTeamIdCategoryIdRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  categoryInfo?: shared.CategoryInfoInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  categoryInfo1?: shared.CategoryInfo;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  categoryInfo1?: shared.CategoryInfoInput;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
-  categoryInfo2?: shared.CategoryInfo;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
+  categoryInfo2?: shared.CategoryInfoInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  categoryInfo3?: shared.CategoryInfo;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  categoryInfo3?: shared.CategoryInfoInput;
 }
 
 
 export class PutCategoriesTeamIdCategoryIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutCategoriesTeamIdCategoryIdPathParams;
 
-  @Metadata()
-  request?: PutCategoriesTeamIdCategoryIdRequests;
+  @SpeakeasyMetadata()
+  request?: PutCategoriesTeamIdCategoryIdRequestsInput;
 }
 
 
 export class PutCategoriesTeamIdCategoryIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   categoryInfo?: shared.CategoryInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

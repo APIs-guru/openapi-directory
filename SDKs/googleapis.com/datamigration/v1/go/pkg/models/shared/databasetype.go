@@ -18,6 +18,8 @@ const (
 	DatabaseTypeProviderEnumAlloydb                     DatabaseTypeProviderEnum = "ALLOYDB"
 )
 
+// DatabaseType
+// A message defining the database engine and provider.
 type DatabaseType struct {
 	Engine   *DatabaseTypeEngineEnum   `json:"engine,omitempty"`
 	Provider *DatabaseTypeProviderEnum `json:"provider,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Certificate
@@ -6,30 +7,40 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Certificate represents an X.509 certificate used to authenticate HTTPS connections to EKM replicas.
 **/
 export class Certificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=notAfterTime" })
+  @SpeakeasyMetadata({ data: "json, name=notAfterTime" })
   notAfterTime?: string;
 
-  @Metadata({ data: "json, name=notBeforeTime" })
+  @SpeakeasyMetadata({ data: "json, name=notBeforeTime" })
   notBeforeTime?: string;
 
-  @Metadata({ data: "json, name=parsed" })
+  @SpeakeasyMetadata({ data: "json, name=parsed" })
   parsed?: boolean;
 
-  @Metadata({ data: "json, name=rawDer" })
+  @SpeakeasyMetadata({ data: "json, name=rawDer" })
   rawDer?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=sha256Fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=sha256Fingerprint" })
   sha256Fingerprint?: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=subjectAlternativeDnsNames" })
+  @SpeakeasyMetadata({ data: "json, name=subjectAlternativeDnsNames" })
   subjectAlternativeDnsNames?: string[];
+}
+
+
+// CertificateInput
+/** 
+ * A Certificate represents an X.509 certificate used to authenticate HTTPS connections to EKM replicas.
+**/
+export class CertificateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=rawDer" })
+  rawDer?: string;
 }

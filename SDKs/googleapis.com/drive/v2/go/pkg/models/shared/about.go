@@ -47,6 +47,8 @@ type AboutTeamDriveThemes struct {
 	ID                  *string `json:"id,omitempty"`
 }
 
+// About
+// An item with user information and settings.
 type About struct {
 	AdditionalRoleInfo      []AboutAdditionalRoleInfo  `json:"additionalRoleInfo,omitempty"`
 	CanCreateDrives         *bool                      `json:"canCreateDrives,omitempty"`

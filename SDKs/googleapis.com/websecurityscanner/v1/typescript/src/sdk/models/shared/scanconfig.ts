@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Authentication } from "./authentication";
 import { Schedule } from "./schedule";
 
+
 export enum ScanConfigExportToSecurityCommandCenterEnum {
-    ExportToSecurityCommandCenterUnspecified = "EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    ExportToSecurityCommandCenterUnspecified = "EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 export enum ScanConfigRiskLevelEnum {
-    RiskLevelUnspecified = "RISK_LEVEL_UNSPECIFIED"
-,    Normal = "NORMAL"
-,    Low = "LOW"
+    RiskLevelUnspecified = "RISK_LEVEL_UNSPECIFIED",
+    Normal = "NORMAL",
+    Low = "LOW"
 }
 
 export enum ScanConfigUserAgentEnum {
-    UserAgentUnspecified = "USER_AGENT_UNSPECIFIED"
-,    ChromeLinux = "CHROME_LINUX"
-,    ChromeAndroid = "CHROME_ANDROID"
-,    SafariIphone = "SAFARI_IPHONE"
+    UserAgentUnspecified = "USER_AGENT_UNSPECIFIED",
+    ChromeLinux = "CHROME_LINUX",
+    ChromeAndroid = "CHROME_ANDROID",
+    SafariIphone = "SAFARI_IPHONE"
 }
 
 
@@ -27,42 +28,42 @@ export enum ScanConfigUserAgentEnum {
  * A ScanConfig resource contains the configurations to launch a scan.
 **/
 export class ScanConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authentication" })
+  @SpeakeasyMetadata({ data: "json, name=authentication" })
   authentication?: Authentication;
 
-  @Metadata({ data: "json, name=blacklistPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=blacklistPatterns" })
   blacklistPatterns?: string[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=exportToSecurityCommandCenter" })
+  @SpeakeasyMetadata({ data: "json, name=exportToSecurityCommandCenter" })
   exportToSecurityCommandCenter?: ScanConfigExportToSecurityCommandCenterEnum;
 
-  @Metadata({ data: "json, name=ignoreHttpStatusErrors" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreHttpStatusErrors" })
   ignoreHttpStatusErrors?: boolean;
 
-  @Metadata({ data: "json, name=managedScan" })
+  @SpeakeasyMetadata({ data: "json, name=managedScan" })
   managedScan?: boolean;
 
-  @Metadata({ data: "json, name=maxQps" })
+  @SpeakeasyMetadata({ data: "json, name=maxQps" })
   maxQps?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=riskLevel" })
+  @SpeakeasyMetadata({ data: "json, name=riskLevel" })
   riskLevel?: ScanConfigRiskLevelEnum;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: Schedule;
 
-  @Metadata({ data: "json, name=startingUrls" })
+  @SpeakeasyMetadata({ data: "json, name=startingUrls" })
   startingUrls?: string[];
 
-  @Metadata({ data: "json, name=staticIpScan" })
+  @SpeakeasyMetadata({ data: "json, name=staticIpScan" })
   staticIpScan?: boolean;
 
-  @Metadata({ data: "json, name=userAgent" })
+  @SpeakeasyMetadata({ data: "json, name=userAgent" })
   userAgent?: ScanConfigUserAgentEnum;
 }

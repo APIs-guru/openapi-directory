@@ -1,5 +1,7 @@
 package shared
 
+// AwsElasticsearchDomainServiceSoftwareOptions
+// Information about the state of the domain relative to the latest service software.
 type AwsElasticsearchDomainServiceSoftwareOptions struct {
 	AutomatedUpdateDate *string `json:"AutomatedUpdateDate,omitempty"`
 	Cancellable         *bool   `json:"Cancellable,omitempty"`

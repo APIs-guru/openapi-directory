@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LaunchDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the latest launch of an application.
 **/
 export class LaunchDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latestLaunchTime" })
+  @SpeakeasyMetadata({ data: "json, name=latestLaunchTime" })
   latestLaunchTime?: Date;
 
-  @Metadata({ data: "json, name=stackId" })
+  @SpeakeasyMetadata({ data: "json, name=stackId" })
   stackId?: string;
 
-  @Metadata({ data: "json, name=stackName" })
+  @SpeakeasyMetadata({ data: "json, name=stackName" })
   stackName?: string;
 }

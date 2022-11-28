@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeleteFileEntry } from "./deletefileentry";
 import { PutFileEntry } from "./putfileentry";
 import { SetFileModeEntry } from "./setfilemodeentry";
 
 
+
 export class CreateCommitInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorName" })
+  @SpeakeasyMetadata({ data: "json, name=authorName" })
   authorName?: string;
 
-  @Metadata({ data: "json, name=branchName" })
+  @SpeakeasyMetadata({ data: "json, name=branchName" })
   branchName: string;
 
-  @Metadata({ data: "json, name=commitMessage" })
+  @SpeakeasyMetadata({ data: "json, name=commitMessage" })
   commitMessage?: string;
 
-  @Metadata({ data: "json, name=deleteFiles", elemType: shared.DeleteFileEntry })
+  @SpeakeasyMetadata({ data: "json, name=deleteFiles", elemType: DeleteFileEntry })
   deleteFiles?: DeleteFileEntry[];
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=keepEmptyFolders" })
+  @SpeakeasyMetadata({ data: "json, name=keepEmptyFolders" })
   keepEmptyFolders?: boolean;
 
-  @Metadata({ data: "json, name=parentCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=parentCommitId" })
   parentCommitId?: string;
 
-  @Metadata({ data: "json, name=putFiles", elemType: shared.PutFileEntry })
+  @SpeakeasyMetadata({ data: "json, name=putFiles", elemType: PutFileEntry })
   putFiles?: PutFileEntry[];
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=setFileModes", elemType: shared.SetFileModeEntry })
+  @SpeakeasyMetadata({ data: "json, name=setFileModes", elemType: SetFileModeEntry })
   setFileModes?: SetFileModeEntry[];
 }

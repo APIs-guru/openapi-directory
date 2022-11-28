@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ManufacturersAccountsProductsUpdatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class ManufacturersAccountsProductsUpdateQueryParams:
 
 @dataclass
 class ManufacturersAccountsProductsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ManufacturersAccountsProductsUpdateRequest:
-    path_params: ManufacturersAccountsProductsUpdatePathParams = field(default=None)
-    query_params: ManufacturersAccountsProductsUpdateQueryParams = field(default=None)
+    path_params: ManufacturersAccountsProductsUpdatePathParams = field()
+    query_params: ManufacturersAccountsProductsUpdateQueryParams = field()
+    security: ManufacturersAccountsProductsUpdateSecurity = field()
     request: Optional[shared.Attributes] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ManufacturersAccountsProductsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class ManufacturersAccountsProductsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

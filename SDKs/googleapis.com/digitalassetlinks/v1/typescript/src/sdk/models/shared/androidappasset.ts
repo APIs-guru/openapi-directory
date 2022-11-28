@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateInfo } from "./certificateinfo";
+
 
 
 // AndroidAppAsset
@@ -7,9 +8,9 @@ import { CertificateInfo } from "./certificateinfo";
  * Describes an android app asset.
 **/
 export class AndroidAppAsset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate?: CertificateInfo;
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 }

@@ -9,6 +9,8 @@ const (
 	ExecStepConfigInterpreterEnumPowershell             ExecStepConfigInterpreterEnum = "POWERSHELL"
 )
 
+// ExecStepConfig
+// Common configurations for an ExecStep.
 type ExecStepConfig struct {
 	AllowedSuccessCodes []int32                        `json:"allowedSuccessCodes,omitempty"`
 	GcsObject           *GcsObject                     `json:"gcsObject,omitempty"`

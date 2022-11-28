@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeAutoScalingInstancesActionEnum(str, Enum):
     DESCRIBE_AUTO_SCALING_INSTANCES = "DescribeAutoScalingInstances"
@@ -10,11 +14,11 @@ class GetDescribeAutoScalingInstancesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAutoScalingInstancesQueryParams:
-    action: GetDescribeAutoScalingInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAutoScalingInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAutoScalingInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     instance_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceIds', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeAutoScalingInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeAutoScalingInstancesHeaders:
 
 @dataclass
 class GetDescribeAutoScalingInstancesRequest:
-    query_params: GetDescribeAutoScalingInstancesQueryParams = field(default=None)
-    headers: GetDescribeAutoScalingInstancesHeaders = field(default=None)
+    headers: GetDescribeAutoScalingInstancesHeaders = field()
+    query_params: GetDescribeAutoScalingInstancesQueryParams = field()
     
 
 @dataclass
 class GetDescribeAutoScalingInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

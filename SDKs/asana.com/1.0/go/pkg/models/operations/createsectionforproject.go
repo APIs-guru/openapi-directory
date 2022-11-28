@@ -17,14 +17,14 @@ type CreateSectionForProjectRequestBody struct {
 	Data *shared.SectionRequest `json:"data,omitempty"`
 }
 
+type CreateSectionForProject201ApplicationJSON struct {
+	Data *shared.SectionResponse `json:"data,omitempty"`
+}
+
 type CreateSectionForProjectRequest struct {
 	PathParams  CreateSectionForProjectPathParams
 	QueryParams CreateSectionForProjectQueryParams
 	Request     CreateSectionForProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateSectionForProject201ApplicationJSON struct {
-	Data *shared.SectionResponse `json:"data,omitempty"`
 }
 
 type CreateSectionForProjectResponse struct {

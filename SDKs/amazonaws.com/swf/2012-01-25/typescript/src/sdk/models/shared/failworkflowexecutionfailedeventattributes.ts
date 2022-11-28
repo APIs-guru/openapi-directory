@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailWorkflowExecutionFailedCauseEnum } from "./failworkflowexecutionfailedcauseenum";
+
 
 
 // FailWorkflowExecutionFailedEventAttributes
@@ -7,9 +8,9 @@ import { FailWorkflowExecutionFailedCauseEnum } from "./failworkflowexecutionfai
  * Provides the details of the <code>FailWorkflowExecutionFailed</code> event.
 **/
 export class FailWorkflowExecutionFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause: FailWorkflowExecutionFailedCauseEnum;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 }

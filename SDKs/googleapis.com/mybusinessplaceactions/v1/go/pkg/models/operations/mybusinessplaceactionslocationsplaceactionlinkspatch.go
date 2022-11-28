@@ -26,7 +26,7 @@ type MybusinessplaceactionsLocationsPlaceActionLinksPatchQueryParams struct {
 type MybusinessplaceactionsLocationsPlaceActionLinksPatchRequest struct {
 	PathParams  MybusinessplaceactionsLocationsPlaceActionLinksPatchPathParams
 	QueryParams MybusinessplaceactionsLocationsPlaceActionLinksPatchQueryParams
-	Request     *shared.PlaceActionLink `request:"mediaType=application/json"`
+	Request     *shared.PlaceActionLinkInput `request:"mediaType=application/json"`
 }
 
 type MybusinessplaceactionsLocationsPlaceActionLinksPatchResponse struct {

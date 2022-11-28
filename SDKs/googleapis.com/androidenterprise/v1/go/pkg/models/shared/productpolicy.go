@@ -18,6 +18,8 @@ const (
 	ProductPolicyTracksEnumAlpha               ProductPolicyTracksEnum = "alpha"
 )
 
+// ProductPolicy
+// The policy for a product.
 type ProductPolicy struct {
 	AutoInstallPolicy                      *AutoInstallPolicy                      `json:"autoInstallPolicy,omitempty"`
 	AutoUpdateMode                         *ProductPolicyAutoUpdateModeEnum        `json:"autoUpdateMode,omitempty"`

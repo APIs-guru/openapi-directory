@@ -31,7 +31,7 @@ type StreetviewpublishPhotoUpdateSecurity struct {
 type StreetviewpublishPhotoUpdateRequest struct {
 	PathParams  StreetviewpublishPhotoUpdatePathParams
 	QueryParams StreetviewpublishPhotoUpdateQueryParams
-	Request     *shared.Photo `request:"mediaType=application/json"`
+	Request     *shared.PhotoInput `request:"mediaType=application/json"`
 	Security    StreetviewpublishPhotoUpdateSecurity
 }
 

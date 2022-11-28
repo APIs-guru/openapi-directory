@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SamplingStatisticSummary
+// Aggregated request sampling data for a sampling rule across all services for a 10-second window.
 type SamplingStatisticSummary struct {
 	BorrowCount  *int64     `json:"BorrowCount,omitempty"`
 	RequestCount *int64     `json:"RequestCount,omitempty"`

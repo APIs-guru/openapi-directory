@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceExecutionSummary } from "./complianceexecutionsummary";
 import { ComplianceItemEntry } from "./complianceitementry";
 import { ComplianceUploadTypeEnum } from "./complianceuploadtypeenum";
 
 
+
 export class PutComplianceItemsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType: string;
 
-  @Metadata({ data: "json, name=ExecutionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionSummary" })
   executionSummary: ComplianceExecutionSummary;
 
-  @Metadata({ data: "json, name=ItemContentHash" })
+  @SpeakeasyMetadata({ data: "json, name=ItemContentHash" })
   itemContentHash?: string;
 
-  @Metadata({ data: "json, name=Items", elemType: shared.ComplianceItemEntry })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: ComplianceItemEntry })
   items: ComplianceItemEntry[];
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType: string;
 
-  @Metadata({ data: "json, name=UploadType" })
+  @SpeakeasyMetadata({ data: "json, name=UploadType" })
   uploadType?: ComplianceUploadTypeEnum;
 }

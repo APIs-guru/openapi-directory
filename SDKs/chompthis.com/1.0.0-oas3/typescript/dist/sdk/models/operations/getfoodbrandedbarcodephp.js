@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFoodBrandedBarcodePhpQueryParams = /** @class */ (function (_super) {
     __extends(GetFoodBrandedBarcodePhpQueryParams, _super);
@@ -30,7 +30,7 @@ var GetFoodBrandedBarcodePhpQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" }),
         __metadata("design:type", String)
     ], GetFoodBrandedBarcodePhpQueryParams.prototype, "code", void 0);
     return GetFoodBrandedBarcodePhpQueryParams;
@@ -42,7 +42,7 @@ var GetFoodBrandedBarcodePhpSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKeyAuth)
     ], GetFoodBrandedBarcodePhpSecurity.prototype, "apiKeyAuth", void 0);
     return GetFoodBrandedBarcodePhpSecurity;
@@ -54,11 +54,11 @@ var GetFoodBrandedBarcodePhpRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFoodBrandedBarcodePhpQueryParams)
     ], GetFoodBrandedBarcodePhpRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFoodBrandedBarcodePhpSecurity)
     ], GetFoodBrandedBarcodePhpRequest.prototype, "security", void 0);
     return GetFoodBrandedBarcodePhpRequest;
@@ -70,15 +70,15 @@ var GetFoodBrandedBarcodePhpResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BrandedFoodObject)
     ], GetFoodBrandedBarcodePhpResponse.prototype, "brandedFoodObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFoodBrandedBarcodePhpResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFoodBrandedBarcodePhpResponse.prototype, "statusCode", void 0);
     return GetFoodBrandedBarcodePhpResponse;

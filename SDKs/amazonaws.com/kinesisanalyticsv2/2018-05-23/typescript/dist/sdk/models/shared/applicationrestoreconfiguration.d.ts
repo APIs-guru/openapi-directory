@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationRestoreTypeEnum } from "./applicationrestoretypeenum";
 /**
  * Specifies the method and snapshot to use when restarting an application using previously saved application state.

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRevokeSecurityGroupEgressActionEnum(str, Enum):
     REVOKE_SECURITY_GROUP_EGRESS = "RevokeSecurityGroupEgress"
@@ -10,8 +14,8 @@ class PostRevokeSecurityGroupEgressVersionEnum(str, Enum):
 
 @dataclass
 class PostRevokeSecurityGroupEgressQueryParams:
-    action: PostRevokeSecurityGroupEgressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRevokeSecurityGroupEgressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRevokeSecurityGroupEgressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRevokeSecurityGroupEgressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRevokeSecurityGroupEgressHeaders:
 
 @dataclass
 class PostRevokeSecurityGroupEgressRequest:
-    query_params: PostRevokeSecurityGroupEgressQueryParams = field(default=None)
-    headers: PostRevokeSecurityGroupEgressHeaders = field(default=None)
+    headers: PostRevokeSecurityGroupEgressHeaders = field()
+    query_params: PostRevokeSecurityGroupEgressQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRevokeSecurityGroupEgressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

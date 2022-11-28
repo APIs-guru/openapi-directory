@@ -14,6 +14,8 @@ type CreateAppHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateAppRequestBodyCreateApplicationRequest
+// Specifies the display name of an application and the tags to associate with the application.
 type CreateAppRequestBodyCreateApplicationRequest struct {
 	Name *string           `json:"Name,omitempty"`
 	Tags map[string]string `json:"tags,omitempty"`

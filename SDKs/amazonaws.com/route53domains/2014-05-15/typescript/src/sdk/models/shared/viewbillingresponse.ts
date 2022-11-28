@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingRecord } from "./billingrecord";
+
 
 
 // ViewBillingResponse
@@ -8,9 +8,9 @@ import { BillingRecord } from "./billingrecord";
  * The ViewBilling response includes the following elements.
 **/
 export class ViewBillingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BillingRecords", elemType: shared.BillingRecord })
+  @SpeakeasyMetadata({ data: "json, name=BillingRecords", elemType: BillingRecord })
   billingRecords?: BillingRecord[];
 
-  @Metadata({ data: "json, name=NextPageMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageMarker" })
   nextPageMarker?: string;
 }

@@ -28,6 +28,8 @@ const (
 	DeviceUserPasswordStateEnumPasswordNotSet           DeviceUserPasswordStateEnum = "PASSWORD_NOT_SET"
 )
 
+// DeviceUser
+// Represents a user's use of a Device in the Cloud Identity Devices API. A DeviceUser is a resource representing a user's use of a Device
 type DeviceUser struct {
 	CompromisedState *DeviceUserCompromisedStateEnum `json:"compromisedState,omitempty"`
 	CreateTime       *string                         `json:"createTime,omitempty"`

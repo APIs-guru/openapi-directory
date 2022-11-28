@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObAccount6Account
+// Provides the details to identify an account.
 type ObAccount6Account struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -11,6 +13,14 @@ type ObAccount6Account struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObAccount6
+// Unambiguous identification of the account to which credit and debit entries are made. The following fields are optional only for accounts that are switched:
+//
+//   - Data.Currency
+//   - Data.AccountType
+//   - Data.AccountSubType
+//
+// For all other accounts, the fields must be populated by the ASPSP.
 type ObAccount6 struct {
 	Account              []ObAccount6Account                              `json:"Account,omitempty"`
 	AccountID            string                                           `json:"AccountId"`

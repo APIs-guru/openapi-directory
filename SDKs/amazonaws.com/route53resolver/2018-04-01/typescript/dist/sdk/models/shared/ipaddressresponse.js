@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressStatusEnum } from "./ipaddressstatusenum";
 // IpAddressResponse
 /**
@@ -34,31 +34,31 @@ var IpAddressResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", String)
     ], IpAddressResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Ip" }),
+        SpeakeasyMetadata({ data: "json, name=Ip" }),
         __metadata("design:type", String)
     ], IpAddressResponse.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "json, name=IpId" }),
+        SpeakeasyMetadata({ data: "json, name=IpId" }),
         __metadata("design:type", String)
     ], IpAddressResponse.prototype, "ipId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=ModificationTime" }),
         __metadata("design:type", String)
     ], IpAddressResponse.prototype, "modificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], IpAddressResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], IpAddressResponse.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetId" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetId" }),
         __metadata("design:type", String)
     ], IpAddressResponse.prototype, "subnetId", void 0);
     return IpAddressResponse;

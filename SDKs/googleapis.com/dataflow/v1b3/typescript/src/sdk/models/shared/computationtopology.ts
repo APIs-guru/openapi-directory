@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamLocation } from "./streamlocation";
 import { KeyRangeLocation } from "./keyrangelocation";
-import { StreamLocation } from "./streamlocation";
 import { StateFamilyConfig } from "./statefamilyconfig";
+
 
 
 // ComputationTopology
@@ -11,21 +10,21 @@ import { StateFamilyConfig } from "./statefamilyconfig";
  * All configuration data for a particular Computation.
 **/
 export class ComputationTopology extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computationId" })
+  @SpeakeasyMetadata({ data: "json, name=computationId" })
   computationId?: string;
 
-  @Metadata({ data: "json, name=inputs", elemType: shared.StreamLocation })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: StreamLocation })
   inputs?: StreamLocation[];
 
-  @Metadata({ data: "json, name=keyRanges", elemType: shared.KeyRangeLocation })
+  @SpeakeasyMetadata({ data: "json, name=keyRanges", elemType: KeyRangeLocation })
   keyRanges?: KeyRangeLocation[];
 
-  @Metadata({ data: "json, name=outputs", elemType: shared.StreamLocation })
+  @SpeakeasyMetadata({ data: "json, name=outputs", elemType: StreamLocation })
   outputs?: StreamLocation[];
 
-  @Metadata({ data: "json, name=stateFamilies", elemType: shared.StateFamilyConfig })
+  @SpeakeasyMetadata({ data: "json, name=stateFamilies", elemType: StateFamilyConfig })
   stateFamilies?: StateFamilyConfig[];
 
-  @Metadata({ data: "json, name=systemStageName" })
+  @SpeakeasyMetadata({ data: "json, name=systemStageName" })
   systemStageName?: string;
 }

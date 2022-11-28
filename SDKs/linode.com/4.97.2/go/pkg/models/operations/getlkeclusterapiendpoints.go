@@ -8,24 +8,13 @@ type GetLkeClusterAPIEndpointsPathParams struct {
 	ClusterID int64 `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type GetLkeClusterAPIEndpointsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLkeClusterAPIEndpointsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLkeClusterAPIEndpointsSecurity struct {
-	Option1 *GetLkeClusterAPIEndpointsSecurityOption1 `security:"option"`
-	Option2 *GetLkeClusterAPIEndpointsSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
-type GetLkeClusterAPIEndpointsRequest struct {
-	PathParams GetLkeClusterAPIEndpointsPathParams
-	Security   GetLkeClusterAPIEndpointsSecurity
-}
-
+// GetLkeClusterAPIEndpoints200ApplicationJSONData
+// The Kubernetes API server endpoints for this cluster.
 type GetLkeClusterAPIEndpoints200ApplicationJSONData struct {
 	Endpoint *string `json:"endpoint,omitempty"`
 }
@@ -39,6 +28,11 @@ type GetLkeClusterAPIEndpoints200ApplicationJSON struct {
 
 type GetLkeClusterAPIEndpointsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLkeClusterAPIEndpointsRequest struct {
+	PathParams GetLkeClusterAPIEndpointsPathParams
+	Security   GetLkeClusterAPIEndpointsSecurity
 }
 
 type GetLkeClusterAPIEndpointsResponse struct {

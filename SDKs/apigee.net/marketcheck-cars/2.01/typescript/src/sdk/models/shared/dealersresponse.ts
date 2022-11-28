@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dealer } from "./dealer";
+
 
 
 // DealersResponse
@@ -8,9 +8,9 @@ import { Dealer } from "./dealer";
  * Dealers Response
 **/
 export class DealersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dealers", elemType: shared.Dealer })
+  @SpeakeasyMetadata({ data: "json, name=dealers", elemType: Dealer })
   dealers?: Dealer[];
 
-  @Metadata({ data: "json, name=num_found" })
+  @SpeakeasyMetadata({ data: "json, name=num_found" })
   numFound?: number;
 }

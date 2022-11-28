@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Subnet } from "./subnet";
 /**
  * Describes a subnet group in response to a request by the <code>DescribeReplicationSubnetGroups</code> operation.

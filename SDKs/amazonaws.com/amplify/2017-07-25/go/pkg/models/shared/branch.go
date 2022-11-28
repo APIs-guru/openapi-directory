@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Branch
+//
+//	The branch for an Amplify app, which maps to a third-party repository branch.
 type Branch struct {
 	ActiveJobID                string            `json:"activeJobId"`
 	AssociatedResources        []string          `json:"associatedResources,omitempty"`

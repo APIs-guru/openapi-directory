@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceSummary } from "./compliancesummary";
+
 
 
 // ComplianceSummaryByResourceType
@@ -7,9 +8,9 @@ import { ComplianceSummary } from "./compliancesummary";
  * The number of Amazon Web Services resources of a specific type that are compliant or noncompliant, up to a maximum of 100 for each.
 **/
 export class ComplianceSummaryByResourceType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceSummary" })
   complianceSummary?: ComplianceSummary;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 }

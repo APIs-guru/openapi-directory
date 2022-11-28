@@ -9,6 +9,8 @@ const (
 	PlayerScoreResponseBeatenScoreTimeSpansEnumDaily                    PlayerScoreResponseBeatenScoreTimeSpansEnum = "DAILY"
 )
 
+// PlayerScoreResponse
+// A list of leaderboard entry resources.
 type PlayerScoreResponse struct {
 	BeatenScoreTimeSpans []PlayerScoreResponseBeatenScoreTimeSpansEnum `json:"beatenScoreTimeSpans,omitempty"`
 	FormattedScore       *string                                       `json:"formattedScore,omitempty"`

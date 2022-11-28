@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnprocessedIdentityId } from "./unprocessedidentityid";
+
 
 
 // DeleteIdentitiesResponse
@@ -8,6 +8,6 @@ import { UnprocessedIdentityId } from "./unprocessedidentityid";
  * Returned in response to a successful <code>DeleteIdentities</code> operation.
 **/
 export class DeleteIdentitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UnprocessedIdentityIds", elemType: shared.UnprocessedIdentityId })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedIdentityIds", elemType: UnprocessedIdentityId })
   unprocessedIdentityIds?: UnprocessedIdentityId[];
 }

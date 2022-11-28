@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,28 +17,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def dfs_slates_by_date(self, request: operations.DfsSlatesByDateRequest) -> operations.DfsSlatesByDateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DFS Slates by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/DfsSlatesByDate/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -50,13 +82,16 @@ class SDK:
 
     
     def projected_player_game_stats_by_date_w_injuries_dfs_salaries(self, request: operations.ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesRequest) -> operations.ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Projected Player Game Stats by Date (w/ Injuries, DFS Salaries)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerGameProjectionStatsByDate/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -71,13 +106,16 @@ class SDK:
 
     
     def projected_player_game_stats_by_player_w_injuries_dfs_salaries(self, request: operations.ProjectedPlayerGameStatsByPlayerWInjuriesDfsSalariesRequest) -> operations.ProjectedPlayerGameStatsByPlayerWInjuriesDfsSalariesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Projected Player Game Stats by Player (w/ Injuries, DFS Salaries)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

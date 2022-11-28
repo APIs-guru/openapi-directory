@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .adddnsrecordsetrequest import *
 from .adddnszonerequest import *
 from .addrolesrequest import *

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WebBackendConnectionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId: string;
 
-  @Metadata({ data: "json, name=withRefreshedCatalog" })
+  @SpeakeasyMetadata({ data: "json, name=withRefreshedCatalog" })
   withRefreshedCatalog?: boolean;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PartnerUnclaim } from "./partnerunclaim";
 /**
  * Request to unclaim devices asynchronously in batch.

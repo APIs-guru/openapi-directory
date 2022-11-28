@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import portfoliodetail
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdatePortfolioOutput:
-    portfolio_detail: Optional[portfoliodetail.PortfolioDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PortfolioDetail' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    portfolio_detail: Optional[PortfolioDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PortfolioDetail') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

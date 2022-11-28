@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class S3BucketRegionEnum(str, Enum):
     AP_EAST_1 = "ap-east-1"

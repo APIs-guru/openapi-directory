@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiveChatMemberMilestoneChatDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memberLevelName" })
+  @SpeakeasyMetadata({ data: "json, name=memberLevelName" })
   memberLevelName?: string;
 
-  @Metadata({ data: "json, name=memberMonth" })
+  @SpeakeasyMetadata({ data: "json, name=memberMonth" })
   memberMonth?: number;
 
-  @Metadata({ data: "json, name=userComment" })
+  @SpeakeasyMetadata({ data: "json, name=userComment" })
   userComment?: string;
 }

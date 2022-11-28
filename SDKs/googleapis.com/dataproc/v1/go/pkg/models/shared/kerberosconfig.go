@@ -1,5 +1,7 @@
 package shared
 
+// KerberosConfig
+// Specifies Kerberos related configuration.
 type KerberosConfig struct {
 	CrossRealmTrustAdminServer       *string `json:"crossRealmTrustAdminServer,omitempty"`
 	CrossRealmTrustKdc               *string `json:"crossRealmTrustKdc,omitempty"`

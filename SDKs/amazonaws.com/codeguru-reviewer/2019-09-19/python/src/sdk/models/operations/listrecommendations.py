@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListRecommendationsPathParams:
-    code_review_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'CodeReviewArn', 'style': 'simple', 'explode': False }})
+    code_review_arn: str = field(metadata={'path_param': { 'field_name': 'CodeReviewArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class ListRecommendationsHeaders:
 
 @dataclass
 class ListRecommendationsRequest:
-    path_params: ListRecommendationsPathParams = field(default=None)
-    query_params: ListRecommendationsQueryParams = field(default=None)
-    headers: ListRecommendationsHeaders = field(default=None)
+    headers: ListRecommendationsHeaders = field()
+    path_params: ListRecommendationsPathParams = field()
+    query_params: ListRecommendationsQueryParams = field()
     
 
 @dataclass
 class ListRecommendationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_recommendations_response: Optional[shared.ListRecommendationsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

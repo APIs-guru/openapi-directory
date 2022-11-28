@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RemoteAccessSession
+// Represents information about the remote access session.
 type RemoteAccessSession struct {
 	Arn                 *string              `json:"arn,omitempty"`
 	BillingMethod       *BillingMethodEnum   `json:"billingMethod,omitempty"`

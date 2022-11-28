@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorMetric } from "./errormetric";
 import { WeightedQuantileLoss } from "./weightedquantileloss";
 /**

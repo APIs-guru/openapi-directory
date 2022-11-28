@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class PostAPIV1GenevaActionsConfigurationTargetPathParams:
-    target: str = field(default=None, metadata={'path_param': { 'field_name': 'target', 'style': 'simple', 'explode': False }})
+    target: str = field(metadata={'path_param': { 'field_name': 'target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +21,15 @@ class PostAPIV1GenevaActionsConfigurationTargetRequests:
 
 @dataclass
 class PostAPIV1GenevaActionsConfigurationTargetRequest:
-    path_params: PostAPIV1GenevaActionsConfigurationTargetPathParams = field(default=None)
-    request: PostAPIV1GenevaActionsConfigurationTargetRequests = field(default=None)
+    path_params: PostAPIV1GenevaActionsConfigurationTargetPathParams = field()
+    request: PostAPIV1GenevaActionsConfigurationTargetRequests = field()
     
 
 @dataclass
 class PostAPIV1GenevaActionsConfigurationTargetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     system_configuration_response: Optional[shared.SystemConfigurationResponse] = field(default=None)
     

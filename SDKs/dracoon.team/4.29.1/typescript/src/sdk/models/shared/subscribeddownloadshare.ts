@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SubscribedDownloadShare
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Subscribed download share information
 **/
 export class SubscribedDownloadShare extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authParentId" })
+  @SpeakeasyMetadata({ data: "json, name=authParentId" })
   authParentId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationLevelEnum } from "./notificationlevelenum";
+
 
 
 // NotificationsSummaryDto
@@ -7,9 +8,9 @@ import { NotificationLevelEnum } from "./notificationlevelenum";
  * The notification summary DTO.
 **/
 export class NotificationsSummaryDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxUnreadNotificationLevel" })
+  @SpeakeasyMetadata({ data: "json, name=MaxUnreadNotificationLevel" })
   maxUnreadNotificationLevel?: NotificationLevelEnum;
 
-  @Metadata({ data: "json, name=UnreadCount" })
+  @SpeakeasyMetadata({ data: "json, name=UnreadCount" })
   unreadCount?: number;
 }

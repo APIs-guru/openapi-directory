@@ -1,6 +1,7 @@
 
 
+
 export enum EngineEnum {
-    Standard = "standard"
-,    Neural = "neural"
+    Standard = "standard",
+    Neural = "neural"
 }

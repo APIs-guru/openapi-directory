@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Dimension } from "./dimension";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 import { Metric } from "./metric";
+
 
 
 // FloodlightReportCompatibleFields
@@ -10,15 +9,15 @@ import { Metric } from "./metric";
  * Represents fields that are compatible to be selected for a report of type "FlOODLIGHT".
 **/
 export class FloodlightReportCompatibleFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionFilters", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensionFilters", elemType: Dimension })
   dimensionFilters?: Dimension[];
 
-  @Metadata({ data: "json, name=dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 }

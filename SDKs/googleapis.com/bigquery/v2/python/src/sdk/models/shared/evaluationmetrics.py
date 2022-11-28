@@ -1,23 +1,22 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import arimaforecastingmetrics
-from . import binaryclassificationmetrics
-from . import clusteringmetrics
-from . import dimensionalityreductionmetrics
-from . import multiclassclassificationmetrics
-from . import rankingmetrics
-from . import regressionmetrics
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EvaluationMetrics:
-    arima_forecasting_metrics: Optional[arimaforecastingmetrics.ArimaForecastingMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arimaForecastingMetrics' }})
-    binary_classification_metrics: Optional[binaryclassificationmetrics.BinaryClassificationMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'binaryClassificationMetrics' }})
-    clustering_metrics: Optional[clusteringmetrics.ClusteringMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusteringMetrics' }})
-    dimensionality_reduction_metrics: Optional[dimensionalityreductionmetrics.DimensionalityReductionMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionalityReductionMetrics' }})
-    multi_class_classification_metrics: Optional[multiclassclassificationmetrics.MultiClassClassificationMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'multiClassClassificationMetrics' }})
-    ranking_metrics: Optional[rankingmetrics.RankingMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rankingMetrics' }})
-    regression_metrics: Optional[regressionmetrics.RegressionMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regressionMetrics' }})
+    r"""EvaluationMetrics
+    Evaluation metrics of a model. These are either computed on all training data or just the eval data based on whether eval data was used during training. These are not present for imported models.
+    """
+    
+    arima_forecasting_metrics: Optional[ArimaForecastingMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arimaForecastingMetrics') }})
+    binary_classification_metrics: Optional[BinaryClassificationMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('binaryClassificationMetrics') }})
+    clustering_metrics: Optional[ClusteringMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusteringMetrics') }})
+    dimensionality_reduction_metrics: Optional[DimensionalityReductionMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionalityReductionMetrics') }})
+    multi_class_classification_metrics: Optional[MultiClassClassificationMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('multiClassClassificationMetrics') }})
+    ranking_metrics: Optional[RankingMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rankingMetrics') }})
+    regression_metrics: Optional[RegressionMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regressionMetrics') }})
     

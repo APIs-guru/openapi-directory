@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PatchComplianceData
+// Information about the state of a patch on a particular instance as it relates to the patch baseline used to patch the instance.
 type PatchComplianceData struct {
 	CveIds         *string                      `json:"CVEIds,omitempty"`
 	Classification string                       `json:"Classification"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
+
 
 
 // CategoryProperties
@@ -8,15 +8,15 @@ import { Rule } from "./rule";
  * An object that contains the rules and additional information about a call analytics category.
 **/
 export class CategoryProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CategoryName" })
+  @SpeakeasyMetadata({ data: "json, name=CategoryName" })
   categoryName?: string;
 
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=LastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=Rules", elemType: shared.Rule })
+  @SpeakeasyMetadata({ data: "json, name=Rules", elemType: Rule })
   rules?: Rule[];
 }

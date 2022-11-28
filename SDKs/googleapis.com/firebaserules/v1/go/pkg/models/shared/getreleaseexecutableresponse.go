@@ -16,6 +16,8 @@ const (
 	GetReleaseExecutableResponseLanguageEnumEventFlowTriggers   GetReleaseExecutableResponseLanguageEnum = "EVENT_FLOW_TRIGGERS"
 )
 
+// GetReleaseExecutableResponse
+// The response for FirebaseRulesService.GetReleaseExecutable
 type GetReleaseExecutableResponse struct {
 	Executable        *string                                            `json:"executable,omitempty"`
 	ExecutableVersion *GetReleaseExecutableResponseExecutableVersionEnum `json:"executableVersion,omitempty"`

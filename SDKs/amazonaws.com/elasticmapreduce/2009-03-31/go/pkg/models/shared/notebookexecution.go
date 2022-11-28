@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// NotebookExecution
+// A notebook execution. An execution is a specific instance that an EMR Notebook is run using the <code>StartNotebookExecution</code> action.
 type NotebookExecution struct {
 	Arn                             *string                      `json:"Arn,omitempty"`
 	EditorID                        *string                      `json:"EditorId,omitempty"`

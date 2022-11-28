@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UploadMetadata
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Fields to be used while uploading the attachment.
 **/
 export class UploadMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HeadersToInclude" })
+  @SpeakeasyMetadata({ data: "json, name=HeadersToInclude" })
   headersToInclude?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=UrlExpiry" })
+  @SpeakeasyMetadata({ data: "json, name=UrlExpiry" })
   urlExpiry?: string;
 }

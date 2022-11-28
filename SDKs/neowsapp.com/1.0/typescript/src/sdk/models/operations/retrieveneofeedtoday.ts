@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveNeoFeedTodayQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=detailed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=detailed" })
   detailed?: boolean;
 }
 
 
 export class RetrieveNeoFeedTodayRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RetrieveNeoFeedTodayQueryParams;
 }
 
 
 export class RetrieveNeoFeedTodayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nearEarthObjectList?: shared.NearEarthObjectList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// SessionInput
+/** 
+ * A session in the Cloud Spanner API.
+**/
+export class SessionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=creatorRole" })
+  creatorRole?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+}
 
 
 // Session
@@ -6,18 +20,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A session in the Cloud Spanner API.
 **/
 export class Session extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approximateLastUseTime" })
+  @SpeakeasyMetadata({ data: "json, name=approximateLastUseTime" })
   approximateLastUseTime?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creatorRole" })
+  @SpeakeasyMetadata({ data: "json, name=creatorRole" })
   creatorRole?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

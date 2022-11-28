@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://codedeploy.{region}.amazonaws.com",
 	"https://codedeploy.{region}.amazonaws.com",
 	"http://codedeploy.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/codedeploy/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddTagsToOnPremisesInstances - Adds tags to on-premises instances.
 func (s *SDK) AddTagsToOnPremisesInstances(ctx context.Context, request operations.AddTagsToOnPremisesInstancesRequest) (*operations.AddTagsToOnPremisesInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.AddTagsToOnPremisesInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AddTagsToOnPremisesInstances(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -172,8 +199,9 @@ func (s *SDK) AddTagsToOnPremisesInstances(ctx context.Context, request operatio
 	return res, nil
 }
 
+// BatchGetApplicationRevisions - Gets information about one or more application revisions. The maximum number of application revisions that can be returned is 25.
 func (s *SDK) BatchGetApplicationRevisions(ctx context.Context, request operations.BatchGetApplicationRevisionsRequest) (*operations.BatchGetApplicationRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetApplicationRevisions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -193,7 +221,7 @@ func (s *SDK) BatchGetApplicationRevisions(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -283,8 +311,9 @@ func (s *SDK) BatchGetApplicationRevisions(ctx context.Context, request operatio
 	return res, nil
 }
 
+// BatchGetApplications - Gets information about one or more applications. The maximum number of applications that can be returned is 100.
 func (s *SDK) BatchGetApplications(ctx context.Context, request operations.BatchGetApplicationsRequest) (*operations.BatchGetApplicationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetApplications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -304,7 +333,7 @@ func (s *SDK) BatchGetApplications(ctx context.Context, request operations.Batch
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -374,8 +403,9 @@ func (s *SDK) BatchGetApplications(ctx context.Context, request operations.Batch
 	return res, nil
 }
 
+// BatchGetDeploymentGroups - Gets information about one or more deployment groups.
 func (s *SDK) BatchGetDeploymentGroups(ctx context.Context, request operations.BatchGetDeploymentGroupsRequest) (*operations.BatchGetDeploymentGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -395,7 +425,7 @@ func (s *SDK) BatchGetDeploymentGroups(ctx context.Context, request operations.B
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -495,8 +525,9 @@ func (s *SDK) BatchGetDeploymentGroups(ctx context.Context, request operations.B
 	return res, nil
 }
 
+// BatchGetDeploymentInstances - <note> <p> This method works, but is deprecated. Use <code>BatchGetDeploymentTargets</code> instead. </p> </note> <p> Returns an array of one or more instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer <code>BatchGetDeploymentTargets</code> works with all compute platforms. The maximum number of instances that can be returned is 25.</p>
 func (s *SDK) BatchGetDeploymentInstances(ctx context.Context, request operations.BatchGetDeploymentInstancesRequest) (*operations.BatchGetDeploymentInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -516,7 +547,7 @@ func (s *SDK) BatchGetDeploymentInstances(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -616,8 +647,9 @@ func (s *SDK) BatchGetDeploymentInstances(ctx context.Context, request operation
 	return res, nil
 }
 
+// BatchGetDeploymentTargets - <p> Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated <code>BatchGetDeploymentInstances</code>. The maximum number of targets that can be returned is 25.</p> <p> The type of targets returned depends on the deployment's compute platform or deployment method: </p> <ul> <li> <p> <b>EC2/On-premises</b>: Information about EC2 instance targets. </p> </li> <li> <p> <b>AWS Lambda</b>: Information about Lambda functions targets. </p> </li> <li> <p> <b>Amazon ECS</b>: Information about Amazon ECS service targets. </p> </li> <li> <p> <b>CloudFormation</b>: Information about targets of blue/green deployments initiated by a CloudFormation stack update.</p> </li> </ul>
 func (s *SDK) BatchGetDeploymentTargets(ctx context.Context, request operations.BatchGetDeploymentTargetsRequest) (*operations.BatchGetDeploymentTargetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentTargets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -637,7 +669,7 @@ func (s *SDK) BatchGetDeploymentTargets(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -757,8 +789,9 @@ func (s *SDK) BatchGetDeploymentTargets(ctx context.Context, request operations.
 	return res, nil
 }
 
+// BatchGetDeployments - Gets information about one or more deployments. The maximum number of deployments that can be returned is 25.
 func (s *SDK) BatchGetDeployments(ctx context.Context, request operations.BatchGetDeploymentsRequest) (*operations.BatchGetDeploymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeployments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -778,7 +811,7 @@ func (s *SDK) BatchGetDeployments(ctx context.Context, request operations.BatchG
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -838,8 +871,9 @@ func (s *SDK) BatchGetDeployments(ctx context.Context, request operations.BatchG
 	return res, nil
 }
 
+// BatchGetOnPremisesInstances - Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.
 func (s *SDK) BatchGetOnPremisesInstances(ctx context.Context, request operations.BatchGetOnPremisesInstancesRequest) (*operations.BatchGetOnPremisesInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetOnPremisesInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -859,7 +893,7 @@ func (s *SDK) BatchGetOnPremisesInstances(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -919,8 +953,9 @@ func (s *SDK) BatchGetOnPremisesInstances(ctx context.Context, request operation
 	return res, nil
 }
 
+// ContinueDeployment - For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.)
 func (s *SDK) ContinueDeployment(ctx context.Context, request operations.ContinueDeploymentRequest) (*operations.ContinueDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ContinueDeployment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -940,7 +975,7 @@ func (s *SDK) ContinueDeployment(ctx context.Context, request operations.Continu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1041,8 +1076,9 @@ func (s *SDK) ContinueDeployment(ctx context.Context, request operations.Continu
 	return res, nil
 }
 
+// CreateApplication - Creates an application.
 func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateApplicationRequest) (*operations.CreateApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1062,7 +1098,7 @@ func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateAp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1152,8 +1188,9 @@ func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateAp
 	return res, nil
 }
 
+// CreateDeployment - Deploys an application revision through the specified deployment group.
 func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDeploymentRequest) (*operations.CreateDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateDeployment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1173,7 +1210,7 @@ func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1443,8 +1480,9 @@ func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDep
 	return res, nil
 }
 
+// CreateDeploymentConfig -  Creates a deployment configuration.
 func (s *SDK) CreateDeploymentConfig(ctx context.Context, request operations.CreateDeploymentConfigRequest) (*operations.CreateDeploymentConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentConfig"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1464,7 +1502,7 @@ func (s *SDK) CreateDeploymentConfig(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1564,8 +1602,9 @@ func (s *SDK) CreateDeploymentConfig(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateDeploymentGroup - Creates a deployment group to which application revisions are deployed.
 func (s *SDK) CreateDeploymentGroup(ctx context.Context, request operations.CreateDeploymentGroupRequest) (*operations.CreateDeploymentGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1585,7 +1624,7 @@ func (s *SDK) CreateDeploymentGroup(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1945,8 +1984,9 @@ func (s *SDK) CreateDeploymentGroup(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// DeleteApplication - Deletes an application.
 func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteApplicationRequest) (*operations.DeleteApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1966,7 +2006,7 @@ func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteAp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2017,8 +2057,9 @@ func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteAp
 	return res, nil
 }
 
+// DeleteDeploymentConfig - <p>Deletes a deployment configuration.</p> <note> <p>A deployment configuration cannot be deleted if it is currently in use. Predefined configurations cannot be deleted.</p> </note>
 func (s *SDK) DeleteDeploymentConfig(ctx context.Context, request operations.DeleteDeploymentConfigRequest) (*operations.DeleteDeploymentConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentConfig"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2038,7 +2079,7 @@ func (s *SDK) DeleteDeploymentConfig(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2099,8 +2140,9 @@ func (s *SDK) DeleteDeploymentConfig(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteDeploymentGroup - Deletes a deployment group.
 func (s *SDK) DeleteDeploymentGroup(ctx context.Context, request operations.DeleteDeploymentGroupRequest) (*operations.DeleteDeploymentGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2120,7 +2162,7 @@ func (s *SDK) DeleteDeploymentGroup(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2200,8 +2242,9 @@ func (s *SDK) DeleteDeploymentGroup(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteGitHubAccountToken - Deletes a GitHub account connection.
 func (s *SDK) DeleteGitHubAccountToken(ctx context.Context, request operations.DeleteGitHubAccountTokenRequest) (*operations.DeleteGitHubAccountTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteGitHubAccountToken"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2221,7 +2264,7 @@ func (s *SDK) DeleteGitHubAccountToken(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2301,8 +2344,9 @@ func (s *SDK) DeleteGitHubAccountToken(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteResourcesByExternalID - Deletes resources linked to an external ID.
 func (s *SDK) DeleteResourcesByExternalID(ctx context.Context, request operations.DeleteResourcesByExternalIDRequest) (*operations.DeleteResourcesByExternalIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteResourcesByExternalId"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2322,7 +2366,7 @@ func (s *SDK) DeleteResourcesByExternalID(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2352,8 +2396,9 @@ func (s *SDK) DeleteResourcesByExternalID(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeregisterOnPremisesInstance - Deregisters an on-premises instance.
 func (s *SDK) DeregisterOnPremisesInstance(ctx context.Context, request operations.DeregisterOnPremisesInstanceRequest) (*operations.DeregisterOnPremisesInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.DeregisterOnPremisesInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2373,7 +2418,7 @@ func (s *SDK) DeregisterOnPremisesInstance(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2414,8 +2459,9 @@ func (s *SDK) DeregisterOnPremisesInstance(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetApplication - Gets information about an application.
 func (s *SDK) GetApplication(ctx context.Context, request operations.GetApplicationRequest) (*operations.GetApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2435,7 +2481,7 @@ func (s *SDK) GetApplication(ctx context.Context, request operations.GetApplicat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2495,8 +2541,9 @@ func (s *SDK) GetApplication(ctx context.Context, request operations.GetApplicat
 	return res, nil
 }
 
+// GetApplicationRevision - Gets information about an application revision.
 func (s *SDK) GetApplicationRevision(ctx context.Context, request operations.GetApplicationRevisionRequest) (*operations.GetApplicationRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetApplicationRevision"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2516,7 +2563,7 @@ func (s *SDK) GetApplicationRevision(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2606,8 +2653,9 @@ func (s *SDK) GetApplicationRevision(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetDeployment - <p>Gets information about a deployment.</p> <note> <p> The <code>content</code> property of the <code>appSpecContent</code> object in the returned revision is always null. Use <code>GetApplicationRevision</code> and the <code>sha256</code> property of the returned <code>appSpecContent</code> object to get the content of the deployment’s AppSpec file. </p> </note>
 func (s *SDK) GetDeployment(ctx context.Context, request operations.GetDeploymentRequest) (*operations.GetDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeployment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2627,7 +2675,7 @@ func (s *SDK) GetDeployment(ctx context.Context, request operations.GetDeploymen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2687,8 +2735,9 @@ func (s *SDK) GetDeployment(ctx context.Context, request operations.GetDeploymen
 	return res, nil
 }
 
+// GetDeploymentConfig - Gets information about a deployment configuration.
 func (s *SDK) GetDeploymentConfig(ctx context.Context, request operations.GetDeploymentConfigRequest) (*operations.GetDeploymentConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentConfig"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2708,7 +2757,7 @@ func (s *SDK) GetDeploymentConfig(ctx context.Context, request operations.GetDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2778,8 +2827,9 @@ func (s *SDK) GetDeploymentConfig(ctx context.Context, request operations.GetDep
 	return res, nil
 }
 
+// GetDeploymentGroup - Gets information about a deployment group.
 func (s *SDK) GetDeploymentGroup(ctx context.Context, request operations.GetDeploymentGroupRequest) (*operations.GetDeploymentGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2799,7 +2849,7 @@ func (s *SDK) GetDeploymentGroup(ctx context.Context, request operations.GetDepl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2899,8 +2949,9 @@ func (s *SDK) GetDeploymentGroup(ctx context.Context, request operations.GetDepl
 	return res, nil
 }
 
+// GetDeploymentInstance - Gets information about an instance as part of a deployment.
 func (s *SDK) GetDeploymentInstance(ctx context.Context, request operations.GetDeploymentInstanceRequest) (*operations.GetDeploymentInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2920,7 +2971,7 @@ func (s *SDK) GetDeploymentInstance(ctx context.Context, request operations.GetD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3020,8 +3071,9 @@ func (s *SDK) GetDeploymentInstance(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetDeploymentTarget -  Returns information about a deployment target.
 func (s *SDK) GetDeploymentTarget(ctx context.Context, request operations.GetDeploymentTargetRequest) (*operations.GetDeploymentTargetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentTarget"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3041,7 +3093,7 @@ func (s *SDK) GetDeploymentTarget(ctx context.Context, request operations.GetDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3151,8 +3203,9 @@ func (s *SDK) GetDeploymentTarget(ctx context.Context, request operations.GetDep
 	return res, nil
 }
 
+// GetOnPremisesInstance -  Gets information about an on-premises instance.
 func (s *SDK) GetOnPremisesInstance(ctx context.Context, request operations.GetOnPremisesInstanceRequest) (*operations.GetOnPremisesInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.GetOnPremisesInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3172,7 +3225,7 @@ func (s *SDK) GetOnPremisesInstance(ctx context.Context, request operations.GetO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3232,8 +3285,9 @@ func (s *SDK) GetOnPremisesInstance(ctx context.Context, request operations.GetO
 	return res, nil
 }
 
+// ListApplicationRevisions - Lists information about revisions for an application.
 func (s *SDK) ListApplicationRevisions(ctx context.Context, request operations.ListApplicationRevisionsRequest) (*operations.ListApplicationRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListApplicationRevisions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3255,7 +3309,7 @@ func (s *SDK) ListApplicationRevisions(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3385,8 +3439,9 @@ func (s *SDK) ListApplicationRevisions(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListApplications - Lists the applications registered with the IAM user or AWS account.
 func (s *SDK) ListApplications(ctx context.Context, request operations.ListApplicationsRequest) (*operations.ListApplicationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListApplications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3408,7 +3463,7 @@ func (s *SDK) ListApplications(ctx context.Context, request operations.ListAppli
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3448,8 +3503,9 @@ func (s *SDK) ListApplications(ctx context.Context, request operations.ListAppli
 	return res, nil
 }
 
+// ListDeploymentConfigs - Lists the deployment configurations with the IAM user or AWS account.
 func (s *SDK) ListDeploymentConfigs(ctx context.Context, request operations.ListDeploymentConfigsRequest) (*operations.ListDeploymentConfigsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentConfigs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3471,7 +3527,7 @@ func (s *SDK) ListDeploymentConfigs(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3511,8 +3567,9 @@ func (s *SDK) ListDeploymentConfigs(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListDeploymentGroups - Lists the deployment groups for an application registered with the IAM user or AWS account.
 func (s *SDK) ListDeploymentGroups(ctx context.Context, request operations.ListDeploymentGroupsRequest) (*operations.ListDeploymentGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3534,7 +3591,7 @@ func (s *SDK) ListDeploymentGroups(ctx context.Context, request operations.ListD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3604,8 +3661,9 @@ func (s *SDK) ListDeploymentGroups(ctx context.Context, request operations.ListD
 	return res, nil
 }
 
+// ListDeploymentInstances - <note> <p> The newer <code>BatchGetDeploymentTargets</code> should be used instead because it works with all compute types. <code>ListDeploymentInstances</code> throws an exception if it is used with a compute platform other than EC2/On-premises or AWS Lambda. </p> </note> <p> Lists the instance for a deployment associated with the IAM user or AWS account. </p>
 func (s *SDK) ListDeploymentInstances(ctx context.Context, request operations.ListDeploymentInstancesRequest) (*operations.ListDeploymentInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3627,7 +3685,7 @@ func (s *SDK) ListDeploymentInstances(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3757,8 +3815,9 @@ func (s *SDK) ListDeploymentInstances(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListDeploymentTargets -  Returns an array of target IDs that are associated a deployment.
 func (s *SDK) ListDeploymentTargets(ctx context.Context, request operations.ListDeploymentTargetsRequest) (*operations.ListDeploymentTargetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentTargets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3778,7 +3837,7 @@ func (s *SDK) ListDeploymentTargets(ctx context.Context, request operations.List
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3888,8 +3947,9 @@ func (s *SDK) ListDeploymentTargets(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListDeployments - Lists the deployments in a deployment group for an application registered with the IAM user or AWS account.
 func (s *SDK) ListDeployments(ctx context.Context, request operations.ListDeploymentsRequest) (*operations.ListDeploymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeployments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3911,7 +3971,7 @@ func (s *SDK) ListDeployments(ctx context.Context, request operations.ListDeploy
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4051,8 +4111,9 @@ func (s *SDK) ListDeployments(ctx context.Context, request operations.ListDeploy
 	return res, nil
 }
 
+// ListGitHubAccountTokenNames - Lists the names of stored connections to GitHub accounts.
 func (s *SDK) ListGitHubAccountTokenNames(ctx context.Context, request operations.ListGitHubAccountTokenNamesRequest) (*operations.ListGitHubAccountTokenNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListGitHubAccountTokenNames"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4072,7 +4133,7 @@ func (s *SDK) ListGitHubAccountTokenNames(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4132,8 +4193,9 @@ func (s *SDK) ListGitHubAccountTokenNames(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListOnPremisesInstances - <p>Gets a list of names for one or more on-premises instances.</p> <p>Unless otherwise specified, both registered and deregistered on-premises instance names are listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.</p>
 func (s *SDK) ListOnPremisesInstances(ctx context.Context, request operations.ListOnPremisesInstancesRequest) (*operations.ListOnPremisesInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListOnPremisesInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4153,7 +4215,7 @@ func (s *SDK) ListOnPremisesInstances(ctx context.Context, request operations.Li
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4213,8 +4275,9 @@ func (s *SDK) ListOnPremisesInstances(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListTagsForResource -  Returns a list of tags for the resource identified by a specified Amazon Resource Name (ARN). Tags are used to organize and categorize your CodeDeploy resources.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4234,7 +4297,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4294,8 +4357,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutLifecycleEventHookExecutionStatus -  Sets the result of a Lambda validation function. The function validates lifecycle hooks during a deployment that uses the AWS Lambda or Amazon ECS compute platform. For AWS Lambda deployments, the available lifecycle hooks are <code>BeforeAllowTraffic</code> and <code>AfterAllowTraffic</code>. For Amazon ECS deployments, the available lifecycle hooks are <code>BeforeInstall</code>, <code>AfterInstall</code>, <code>AfterAllowTestTraffic</code>, <code>BeforeAllowTraffic</code>, and <code>AfterAllowTraffic</code>. Lambda validation functions return <code>Succeeded</code> or <code>Failed</code>. For more information, see <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda">AppSpec 'hooks' Section for an AWS Lambda Deployment </a> and <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs">AppSpec 'hooks' Section for an Amazon ECS Deployment</a>.
 func (s *SDK) PutLifecycleEventHookExecutionStatus(ctx context.Context, request operations.PutLifecycleEventHookExecutionStatusRequest) (*operations.PutLifecycleEventHookExecutionStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.PutLifecycleEventHookExecutionStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4315,7 +4379,7 @@ func (s *SDK) PutLifecycleEventHookExecutionStatus(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4415,8 +4479,9 @@ func (s *SDK) PutLifecycleEventHookExecutionStatus(ctx context.Context, request 
 	return res, nil
 }
 
+// RegisterApplicationRevision - Registers with AWS CodeDeploy a revision for the specified application.
 func (s *SDK) RegisterApplicationRevision(ctx context.Context, request operations.RegisterApplicationRevisionRequest) (*operations.RegisterApplicationRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.RegisterApplicationRevision"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4436,7 +4501,7 @@ func (s *SDK) RegisterApplicationRevision(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4517,8 +4582,9 @@ func (s *SDK) RegisterApplicationRevision(ctx context.Context, request operation
 	return res, nil
 }
 
+// RegisterOnPremisesInstance - <p>Registers an on-premises instance.</p> <note> <p>Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both.</p> </note>
 func (s *SDK) RegisterOnPremisesInstance(ctx context.Context, request operations.RegisterOnPremisesInstanceRequest) (*operations.RegisterOnPremisesInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.RegisterOnPremisesInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4538,7 +4604,7 @@ func (s *SDK) RegisterOnPremisesInstance(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4659,8 +4725,9 @@ func (s *SDK) RegisterOnPremisesInstance(ctx context.Context, request operations
 	return res, nil
 }
 
+// RemoveTagsFromOnPremisesInstances - Removes one or more tags from one or more on-premises instances.
 func (s *SDK) RemoveTagsFromOnPremisesInstances(ctx context.Context, request operations.RemoveTagsFromOnPremisesInstancesRequest) (*operations.RemoveTagsFromOnPremisesInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.RemoveTagsFromOnPremisesInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4680,7 +4747,7 @@ func (s *SDK) RemoveTagsFromOnPremisesInstances(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4771,8 +4838,9 @@ func (s *SDK) RemoveTagsFromOnPremisesInstances(ctx context.Context, request ope
 	return res, nil
 }
 
+// SkipWaitTimeForInstanceTermination - In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is complete.
 func (s *SDK) SkipWaitTimeForInstanceTermination(ctx context.Context, request operations.SkipWaitTimeForInstanceTerminationRequest) (*operations.SkipWaitTimeForInstanceTerminationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.SkipWaitTimeForInstanceTermination"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4792,7 +4860,7 @@ func (s *SDK) SkipWaitTimeForInstanceTermination(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4873,8 +4941,9 @@ func (s *SDK) SkipWaitTimeForInstanceTermination(ctx context.Context, request op
 	return res, nil
 }
 
+// StopDeployment - Attempts to stop an ongoing deployment.
 func (s *SDK) StopDeployment(ctx context.Context, request operations.StopDeploymentRequest) (*operations.StopDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.StopDeployment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4894,7 +4963,7 @@ func (s *SDK) StopDeployment(ctx context.Context, request operations.StopDeploym
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4984,8 +5053,9 @@ func (s *SDK) StopDeployment(ctx context.Context, request operations.StopDeploym
 	return res, nil
 }
 
+// TagResource -  Associates the list of tags in the input <code>Tags</code> parameter with the resource identified by the <code>ResourceArn</code> input parameter.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5005,7 +5075,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5115,8 +5185,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource -  Disassociates a resource from a list of tags. The resource is identified by the <code>ResourceArn</code> input parameter. The tags are identified by the list of keys in the <code>TagKeys</code> input parameter.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5136,7 +5207,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5246,8 +5317,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateApplication - Changes the name of an application.
 func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateApplicationRequest) (*operations.UpdateApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.UpdateApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5267,7 +5339,7 @@ func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateAp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5328,8 +5400,9 @@ func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateAp
 	return res, nil
 }
 
+// UpdateDeploymentGroup - Changes information about a deployment group.
 func (s *SDK) UpdateDeploymentGroup(ctx context.Context, request operations.UpdateDeploymentGroupRequest) (*operations.UpdateDeploymentGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeDeploy_20141006.UpdateDeploymentGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5349,7 +5422,7 @@ func (s *SDK) UpdateDeploymentGroup(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

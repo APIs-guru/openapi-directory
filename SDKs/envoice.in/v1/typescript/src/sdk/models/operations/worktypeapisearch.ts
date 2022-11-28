@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum WorkTypeApiSearchQueryOptionsOrderEnum {
-    None = "None"
-,    Asc = "Asc"
-,    Desc = "Desc"
+    None = "None",
+    Asc = "Asc",
+    Desc = "Desc"
 }
 
 
 export class WorkTypeApiSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=queryOptions.order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=queryOptions.order" })
   queryOptionsOrder?: WorkTypeApiSearchQueryOptionsOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=queryOptions.orderBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=queryOptions.orderBy" })
   queryOptionsOrderBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=queryOptions.page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=queryOptions.page" })
   queryOptionsPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=queryOptions.pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=queryOptions.pageSize" })
   queryOptionsPageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=queryOptions.query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=queryOptions.query" })
   queryOptionsQuery?: string;
 }
 
 
 export class WorkTypeApiSearchHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class WorkTypeApiSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: WorkTypeApiSearchQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: WorkTypeApiSearchHeaders;
 }
 
 
 export class WorkTypeApiSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.WorkTypeDetailsApiModel })
+  @SpeakeasyMetadata({ elemType: shared.WorkTypeDetailsApiModel })
   workTypeDetailsApiModels?: shared.WorkTypeDetailsApiModel[];
 }

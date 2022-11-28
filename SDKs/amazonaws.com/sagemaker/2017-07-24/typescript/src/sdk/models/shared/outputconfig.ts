@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetDeviceEnum } from "./targetdeviceenum";
 import { TargetPlatform } from "./targetplatform";
+
 
 
 // OutputConfig
@@ -8,18 +9,18 @@ import { TargetPlatform } from "./targetplatform";
  * Contains information about the output location for the compiled model and the target device that the model runs on. <code>TargetDevice</code> and <code>TargetPlatform</code> are mutually exclusive, so you need to choose one between the two to specify your target device or platform. If you cannot find your device you want to use from the <code>TargetDevice</code> list, use <code>TargetPlatform</code> to describe the platform of your edge device and <code>CompilerOptions</code> if there are specific settings that are required or recommended to use for particular TargetPlatform.
 **/
 export class OutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompilerOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CompilerOptions" })
   compilerOptions?: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=S3OutputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=S3OutputLocation" })
   s3OutputLocation: string;
 
-  @Metadata({ data: "json, name=TargetDevice" })
+  @SpeakeasyMetadata({ data: "json, name=TargetDevice" })
   targetDevice?: TargetDeviceEnum;
 
-  @Metadata({ data: "json, name=TargetPlatform" })
+  @SpeakeasyMetadata({ data: "json, name=TargetPlatform" })
   targetPlatform?: TargetPlatform;
 }

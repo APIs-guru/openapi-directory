@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeLocationNfsResponse
+// DescribeLocationNfsResponse
 type DescribeLocationNfsResponse struct {
 	CreationTime *time.Time       `json:"CreationTime,omitempty"`
 	LocationArn  *string          `json:"LocationArn,omitempty"`

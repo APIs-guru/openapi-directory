@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import invoiceresponseclarification
+from sdk import utils
+from . import *
 
 class DocumentInvoiceResponseResponseCodeEnum(str, Enum):
     AB = "AB"
@@ -15,8 +20,12 @@ class DocumentInvoiceResponseResponseCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DocumentInvoiceResponse:
-    clarifications: Optional[List[invoiceresponseclarification.InvoiceResponseClarification]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clarifications' }})
-    effective_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'effectiveDate' }})
-    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'note' }})
-    response_code: DocumentInvoiceResponseResponseCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseCode' }})
+    r"""DocumentInvoiceResponse
+    The invoice response to send.
+    """
+    
+    response_code: DocumentInvoiceResponseResponseCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseCode') }})
+    clarifications: Optional[List[InvoiceResponseClarification]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clarifications') }})
+    effective_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('effectiveDate') }})
+    note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('note') }})
     

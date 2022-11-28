@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsCollectPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,8 +19,10 @@ class RetailProjectsLocationsCatalogsUserEventsCollectQueryParams:
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
+    prebuilt_rule: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'prebuiltRule', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
     quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
+    raw_json: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'rawJson', 'style': 'form', 'explode': True }})
     upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
     upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
     uri: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uri', 'style': 'form', 'explode': True }})
@@ -28,20 +31,20 @@ class RetailProjectsLocationsCatalogsUserEventsCollectQueryParams:
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsCollectSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsCollectRequest:
-    path_params: RetailProjectsLocationsCatalogsUserEventsCollectPathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsUserEventsCollectQueryParams = field(default=None)
-    security: RetailProjectsLocationsCatalogsUserEventsCollectSecurity = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsUserEventsCollectPathParams = field()
+    query_params: RetailProjectsLocationsCatalogsUserEventsCollectQueryParams = field()
+    security: RetailProjectsLocationsCatalogsUserEventsCollectSecurity = field()
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsUserEventsCollectResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_api_http_body: Optional[shared.GoogleAPIHTTPBody] = field(default=None)
-    status_code: int = field(default=None)
     

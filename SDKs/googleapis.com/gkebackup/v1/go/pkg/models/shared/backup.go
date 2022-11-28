@@ -11,6 +11,21 @@ const (
 	BackupStateEnumDeleting         BackupStateEnum = "DELETING"
 )
 
+// BackupInput
+// Represents a request to perform a single point-in-time capture of some portion of the state of a GKE cluster, the record of the backup operation itself, and an anchor for the underlying artifacts that comprise the Backup (the config backup and VolumeBackups). Next id: 28
+type BackupInput struct {
+	ClusterMetadata      *ClusterMetadata  `json:"clusterMetadata,omitempty"`
+	DeleteLockDays       *int32            `json:"deleteLockDays,omitempty"`
+	Description          *string           `json:"description,omitempty"`
+	EncryptionKey        *EncryptionKey    `json:"encryptionKey,omitempty"`
+	Labels               map[string]string `json:"labels,omitempty"`
+	RetainDays           *int32            `json:"retainDays,omitempty"`
+	SelectedApplications *NamespacedNames  `json:"selectedApplications,omitempty"`
+	SelectedNamespaces   *Namespaces       `json:"selectedNamespaces,omitempty"`
+}
+
+// Backup
+// Represents a request to perform a single point-in-time capture of some portion of the state of a GKE cluster, the record of the backup operation itself, and an anchor for the underlying artifacts that comprise the Backup (the config backup and VolumeBackups). Next id: 28
 type Backup struct {
 	AllNamespaces         *bool             `json:"allNamespaces,omitempty"`
 	ClusterMetadata       *ClusterMetadata  `json:"clusterMetadata,omitempty"`

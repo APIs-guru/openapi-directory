@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PortMapping
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a port mapping.
 **/
 export class PortMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationPort" })
+  @SpeakeasyMetadata({ data: "json, name=applicationPort" })
   applicationPort: number;
 
-  @Metadata({ data: "json, name=enableOnPublicIp" })
+  @SpeakeasyMetadata({ data: "json, name=enableOnPublicIp" })
   enableOnPublicIp?: boolean;
 
-  @Metadata({ data: "json, name=jobPort" })
+  @SpeakeasyMetadata({ data: "json, name=jobPort" })
   jobPort: number;
 }

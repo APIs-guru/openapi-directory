@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostEnableAvailabilityZonesForLoadBalancerActionEnum(str, Enum):
     ENABLE_AVAILABILITY_ZONES_FOR_LOAD_BALANCER = "EnableAvailabilityZonesForLoadBalancer"
@@ -10,8 +14,8 @@ class PostEnableAvailabilityZonesForLoadBalancerVersionEnum(str, Enum):
 
 @dataclass
 class PostEnableAvailabilityZonesForLoadBalancerQueryParams:
-    action: PostEnableAvailabilityZonesForLoadBalancerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostEnableAvailabilityZonesForLoadBalancerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostEnableAvailabilityZonesForLoadBalancerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostEnableAvailabilityZonesForLoadBalancerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostEnableAvailabilityZonesForLoadBalancerHeaders:
 
 @dataclass
 class PostEnableAvailabilityZonesForLoadBalancerRequest:
-    query_params: PostEnableAvailabilityZonesForLoadBalancerQueryParams = field(default=None)
-    headers: PostEnableAvailabilityZonesForLoadBalancerHeaders = field(default=None)
+    headers: PostEnableAvailabilityZonesForLoadBalancerHeaders = field()
+    query_params: PostEnableAvailabilityZonesForLoadBalancerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostEnableAvailabilityZonesForLoadBalancerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

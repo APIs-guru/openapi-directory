@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Destiny2GetCollectibleNodeDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" })
   characterId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collectiblePresentationNodeHash" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectiblePresentationNodeHash" })
   collectiblePresentationNodeHash: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
   destinyMembershipId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class Destiny2GetCollectibleNodeDetailsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=components" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=components" })
   components?: number[];
 }
 
 
 export class Destiny2GetCollectibleNodeDetailsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: Destiny2GetCollectibleNodeDetailsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: Destiny2GetCollectibleNodeDetailsQueryParams;
 }
 
 
 export class Destiny2GetCollectibleNodeDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

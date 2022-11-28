@@ -23,11 +23,9 @@ const (
 	PortfolioRequestColorEnumLightWarmGray PortfolioRequestColorEnum = "light-warm-gray"
 )
 
-type PortfolioRequest struct {
-	Color        *PortfolioRequestColorEnum `json:"color,omitempty"`
-	Gid          *string                    `json:"gid,omitempty"`
-	Members      []string                   `json:"members,omitempty"`
-	Name         *string                    `json:"name,omitempty"`
-	ResourceType *string                    `json:"resource_type,omitempty"`
-	Workspace    *string                    `json:"workspace,omitempty"`
+type PortfolioRequestInput struct {
+	Color     *PortfolioRequestColorEnum `json:"color,omitempty"`
+	Members   []string                   `json:"members,omitempty"`
+	Name      *string                    `json:"name,omitempty"`
+	Workspace *string                    `json:"workspace,omitempty"`
 }

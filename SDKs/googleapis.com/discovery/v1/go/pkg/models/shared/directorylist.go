@@ -1,5 +1,7 @@
 package shared
 
+// DirectoryListItemsIcons
+// Links to 16x16 and 32x32 icons representing the API.
 type DirectoryListItemsIcons struct {
 	X16 *string `json:"x16,omitempty"`
 	X32 *string `json:"x32,omitempty"`

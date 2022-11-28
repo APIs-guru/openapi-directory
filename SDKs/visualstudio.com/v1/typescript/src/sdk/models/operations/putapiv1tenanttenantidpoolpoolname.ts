@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutApiV1TenantTenantIdPoolPoolNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolName" })
   poolName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
   tenantId: string;
 }
 
 
 export class PutApiV1TenantTenantIdPoolPoolNameRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   createOrUpdatePoolBody?: shared.CreateOrUpdatePoolBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   createOrUpdatePoolBody1?: shared.CreateOrUpdatePoolBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   createOrUpdatePoolBody2?: shared.CreateOrUpdatePoolBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   createOrUpdatePoolBody3?: shared.CreateOrUpdatePoolBody;
 }
 
 
 export class PutApiV1TenantTenantIdPoolPoolNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutApiV1TenantTenantIdPoolPoolNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutApiV1TenantTenantIdPoolPoolNameRequests;
 }
 
 
 export class PutApiV1TenantTenantIdPoolPoolNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   poolResult?: shared.PoolResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

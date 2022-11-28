@@ -50,6 +50,8 @@ const (
 	GoogleSecuritySafebrowsingV4ThreatInfoThreatTypesEnumSocialEngineeringLowerPrecision GoogleSecuritySafebrowsingV4ThreatInfoThreatTypesEnum = "SOCIAL_ENGINEERING_LOWER_PRECISION"
 )
 
+// GoogleSecuritySafebrowsingV4ThreatInfo
+// The information regarding one or more threats that a client submits when checking for matches in threat lists.
 type GoogleSecuritySafebrowsingV4ThreatInfo struct {
 	PlatformTypes    []GoogleSecuritySafebrowsingV4ThreatInfoPlatformTypesEnum    `json:"platformTypes,omitempty"`
 	ThreatEntries    []GoogleSecuritySafebrowsingV4ThreatEntry                    `json:"threatEntries,omitempty"`

@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AvailabilityViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=businessName" })
+  @SpeakeasyMetadata({ data: "json, name=businessName" })
   businessName?: string;
 
-  @Metadata({ data: "json, name=calendarId" })
+  @SpeakeasyMetadata({ data: "json, name=calendarId" })
   calendarId?: string;
 
-  @Metadata({ data: "json, name=calendarResourceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=calendarResourceGroupId" })
   calendarResourceGroupId?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=firstAvailableDate" })
+  @SpeakeasyMetadata({ data: "json, name=firstAvailableDate" })
   firstAvailableDate?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 
-  @Metadata({ data: "json, name=resourceDescription" })
+  @SpeakeasyMetadata({ data: "json, name=resourceDescription" })
   resourceDescription?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceIds" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIds" })
   resourceIds?: string;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=serviceDescription" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDescription" })
   serviceDescription?: string;
 
-  @Metadata({ data: "json, name=serviceDuration" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDuration" })
   serviceDuration?: number;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=tzRequested" })
+  @SpeakeasyMetadata({ data: "json, name=tzRequested" })
   tzRequested?: number;
 }

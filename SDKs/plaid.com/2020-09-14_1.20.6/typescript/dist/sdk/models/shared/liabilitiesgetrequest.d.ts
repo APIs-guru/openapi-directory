@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LiabilitiesGetRequestOptions } from "./liabilitiesgetrequestoptions";
 /**
  * LiabilitiesGetRequest defines the request schema for `/liabilities/get`

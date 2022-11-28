@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import value
-from . import slot
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Slot:
-    value: Optional[value.Value] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
-    values: Optional[List[slot.Slot]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""Slot
+    A value that Amazon Lex V2 uses to fulfill an intent. 
+    """
+    
+    value: Optional[Value] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
+    values: Optional[List[Slot]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

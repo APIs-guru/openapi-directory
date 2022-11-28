@@ -31,7 +31,7 @@ type NetworkservicesProjectsLocationsGatewaysCreateSecurity struct {
 type NetworkservicesProjectsLocationsGatewaysCreateRequest struct {
 	PathParams  NetworkservicesProjectsLocationsGatewaysCreatePathParams
 	QueryParams NetworkservicesProjectsLocationsGatewaysCreateQueryParams
-	Request     *shared.Gateway `request:"mediaType=application/json"`
+	Request     *shared.GatewayInput `request:"mediaType=application/json"`
 	Security    NetworkservicesProjectsLocationsGatewaysCreateSecurity
 }
 

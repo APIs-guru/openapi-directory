@@ -26,7 +26,7 @@ type DisplayvideoFirstAndThirdPartyAudiencesCreateSecurity struct {
 
 type DisplayvideoFirstAndThirdPartyAudiencesCreateRequest struct {
 	QueryParams DisplayvideoFirstAndThirdPartyAudiencesCreateQueryParams
-	Request     *shared.FirstAndThirdPartyAudience `request:"mediaType=application/json"`
+	Request     *shared.FirstAndThirdPartyAudienceInput `request:"mediaType=application/json"`
 	Security    DisplayvideoFirstAndThirdPartyAudiencesCreateSecurity
 }
 

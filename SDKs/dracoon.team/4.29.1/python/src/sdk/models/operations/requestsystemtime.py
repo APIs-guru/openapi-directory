@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -10,13 +13,13 @@ class RequestSystemTimeHeaders:
 
 @dataclass
 class RequestSystemTimeRequest:
-    headers: RequestSystemTimeHeaders = field(default=None)
+    headers: RequestSystemTimeHeaders = field()
     
 
 @dataclass
 class RequestSystemTimeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     sds_server_time: Optional[shared.SdsServerTime] = field(default=None)
-    status_code: int = field(default=None)
     

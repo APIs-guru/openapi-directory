@@ -10,19 +10,19 @@ class GetEntitlementsHistoryQueryParams:
 
 @dataclass
 class GetEntitlementsHistorySecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetEntitlementsHistoryRequest:
-    query_params: GetEntitlementsHistoryQueryParams = field(default=None)
-    security: GetEntitlementsHistorySecurity = field(default=None)
+    query_params: GetEntitlementsHistoryQueryParams = field()
+    security: GetEntitlementsHistorySecurity = field()
     
 
 @dataclass
 class GetEntitlementsHistoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_entitlements_history: Optional[shared.ItvEntitlementsHistory] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesPathParams:
-    nlp_service: str = field(default=None, metadata={'path_param': { 'field_name': 'nlpService', 'style': 'simple', 'explode': False }})
+    nlp_service: str = field(metadata={'path_param': { 'field_name': 'nlpService', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesQueryParams:
 
 @dataclass
 class HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesRequest:
-    path_params: HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesQueryParams = field(default=None)
+    path_params: HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesPathParams = field()
+    query_params: HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesQueryParams = field()
+    security: HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesSecurity = field()
     request: Optional[shared.AnalyzeEntitiesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesSecurity = field(default=None)
     
 
 @dataclass
 class HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesResponse:
+    content_type: str = field()
+    status_code: int = field()
     analyze_entities_response: Optional[shared.AnalyzeEntitiesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

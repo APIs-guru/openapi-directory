@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTagsPathParams = /** @class */ (function (_super) {
     __extends(GetTagsPathParams, _super);
@@ -30,7 +30,7 @@ var GetTagsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
         __metadata("design:type", String)
     ], GetTagsPathParams.prototype, "productId", void 0);
     return GetTagsPathParams;
@@ -42,7 +42,7 @@ var GetTagsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTagsPathParams)
     ], GetTagsRequest.prototype, "pathParams", void 0);
     return GetTagsRequest;
@@ -54,19 +54,19 @@ var GetTagsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTagsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTagsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TagModelHaljson }),
+        SpeakeasyMetadata({ elemType: shared.TagModelHaljson }),
         __metadata("design:type", Array)
     ], GetTagsResponse.prototype, "tagModelHaljsons", void 0);
     __decorate([
-        Metadata({ elemType: shared.TagModel }),
+        SpeakeasyMetadata({ elemType: shared.TagModel }),
         __metadata("design:type", Array)
     ], GetTagsResponse.prototype, "tagModels", void 0);
     return GetTagsResponse;

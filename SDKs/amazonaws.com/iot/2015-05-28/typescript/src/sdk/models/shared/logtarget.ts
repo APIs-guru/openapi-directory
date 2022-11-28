@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogTargetTypeEnum } from "./logtargettypeenum";
+
 
 
 // LogTarget
@@ -7,9 +8,9 @@ import { LogTargetTypeEnum } from "./logtargettypeenum";
  * A log target.
 **/
 export class LogTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=targetName" })
+  @SpeakeasyMetadata({ data: "json, name=targetName" })
   targetName?: string;
 
-  @Metadata({ data: "json, name=targetType" })
+  @SpeakeasyMetadata({ data: "json, name=targetType" })
   targetType: LogTargetTypeEnum;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class SearchByIdentifierRepresentationEnum(str, Enum):
@@ -22,9 +23,9 @@ class SearchByIdentifierTermEnum(str, Enum):
 
 @dataclass
 class SearchByIdentifierPathParams:
-    db: shared.AmbitDatabaseIDEnum = field(default=None, metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
-    representation: SearchByIdentifierRepresentationEnum = field(default=None, metadata={'path_param': { 'field_name': 'representation', 'style': 'simple', 'explode': False }})
-    term: SearchByIdentifierTermEnum = field(default=None, metadata={'path_param': { 'field_name': 'term', 'style': 'simple', 'explode': False }})
+    db: shared.AmbitDatabaseIDEnum = field(metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
+    representation: SearchByIdentifierRepresentationEnum = field(metadata={'path_param': { 'field_name': 'representation', 'style': 'simple', 'explode': False }})
+    term: SearchByIdentifierTermEnum = field(metadata={'path_param': { 'field_name': 'term', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -40,13 +41,13 @@ class SearchByIdentifierQueryParams:
 
 @dataclass
 class SearchByIdentifierRequest:
-    path_params: SearchByIdentifierPathParams = field(default=None)
-    query_params: SearchByIdentifierQueryParams = field(default=None)
+    path_params: SearchByIdentifierPathParams = field()
+    query_params: SearchByIdentifierQueryParams = field()
     
 
 @dataclass
 class SearchByIdentifierResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataset: Optional[shared.Dataset] = field(default=None)
-    status_code: int = field(default=None)
     

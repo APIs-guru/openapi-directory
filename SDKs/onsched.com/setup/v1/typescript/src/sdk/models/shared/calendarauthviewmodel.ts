@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CalendarAuthViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calendarAuthUrl" })
+  @SpeakeasyMetadata({ data: "json, name=calendarAuthUrl" })
   calendarAuthUrl?: string;
 
-  @Metadata({ data: "json, name=calendarId" })
+  @SpeakeasyMetadata({ data: "json, name=calendarId" })
   calendarId?: string;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 }

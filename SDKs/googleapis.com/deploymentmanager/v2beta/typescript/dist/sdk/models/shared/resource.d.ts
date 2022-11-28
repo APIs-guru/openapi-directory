@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAccessControl } from "./resourceaccesscontrol";
 import { ResourceUpdate } from "./resourceupdate";
 export declare enum ResourceWarningsCodeEnum {

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import subjectalternativenames
-from . import virtualgatewaytlsvalidationcontexttrust
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualGatewayTLSValidationContext:
-    subject_alternative_names: Optional[subjectalternativenames.SubjectAlternativeNames] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subjectAlternativeNames' }})
-    trust: virtualgatewaytlsvalidationcontexttrust.VirtualGatewayTLSValidationContextTrust = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trust' }})
+    r"""VirtualGatewayTLSValidationContext
+    An object that represents a Transport Layer Security (TLS) validation context.
+    """
+    
+    trust: VirtualGatewayTLSValidationContextTrust = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('trust') }})
+    subject_alternative_names: Optional[SubjectAlternativeNames] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subjectAlternativeNames') }})
     

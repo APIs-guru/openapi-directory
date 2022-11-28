@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpUrlDestinationProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * HTTP URL destination properties.
 **/
 export class HttpUrlDestinationProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confirmationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=confirmationUrl" })
   confirmationUrl?: string;
 }

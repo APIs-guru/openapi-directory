@@ -7,6 +7,8 @@ const (
 	GoogleCloudDocumentaiV1beta3ReviewDocumentRequestPriorityEnumUrgent  GoogleCloudDocumentaiV1beta3ReviewDocumentRequestPriorityEnum = "URGENT"
 )
 
+// GoogleCloudDocumentaiV1beta3ReviewDocumentRequest
+// Request message for review document method.
 type GoogleCloudDocumentaiV1beta3ReviewDocumentRequest struct {
 	Document               *GoogleCloudDocumentaiV1beta3Document                          `json:"document,omitempty"`
 	DocumentSchema         *GoogleCloudDocumentaiV1beta3DocumentSchema                    `json:"documentSchema,omitempty"`

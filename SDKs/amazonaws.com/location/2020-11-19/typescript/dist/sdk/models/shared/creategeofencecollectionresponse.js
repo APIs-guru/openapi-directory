@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateGeofenceCollectionResponse = /** @class */ (function (_super) {
     __extends(CreateGeofenceCollectionResponse, _super);
     function CreateGeofenceCollectionResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CollectionArn" }),
+        SpeakeasyMetadata({ data: "json, name=CollectionArn" }),
         __metadata("design:type", String)
     ], CreateGeofenceCollectionResponse.prototype, "collectionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CollectionName" }),
+        SpeakeasyMetadata({ data: "json, name=CollectionName" }),
         __metadata("design:type", String)
     ], CreateGeofenceCollectionResponse.prototype, "collectionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTime" }),
         __metadata("design:type", Date)
     ], CreateGeofenceCollectionResponse.prototype, "createTime", void 0);
     return CreateGeofenceCollectionResponse;

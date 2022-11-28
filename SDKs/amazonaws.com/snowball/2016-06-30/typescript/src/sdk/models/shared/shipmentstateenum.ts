@@ -1,6 +1,7 @@
 
 
+
 export enum ShipmentStateEnum {
-    Received = "RECEIVED"
-,    Returned = "RETURNED"
+    Received = "RECEIVED",
+    Returned = "RETURNED"
 }

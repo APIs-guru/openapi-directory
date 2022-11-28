@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateDisplayPreferencesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=displayPreferencesId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=displayPreferencesId" })
   displayPreferencesId: string;
 }
 
 
 export class UpdateDisplayPreferencesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client" })
   client: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId: string;
 }
 
 
 export class UpdateDisplayPreferencesRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   displayPreferencesDto?: shared.DisplayPreferencesDto;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   displayPreferencesDto1?: shared.DisplayPreferencesDto;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   displayPreferencesDto2?: shared.DisplayPreferencesDto;
 }
 
 
 export class UpdateDisplayPreferencesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateDisplayPreferencesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDisplayPreferencesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateDisplayPreferencesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdateDisplayPreferencesRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateDisplayPreferencesSecurity;
 }
 
 
 export class UpdateDisplayPreferencesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

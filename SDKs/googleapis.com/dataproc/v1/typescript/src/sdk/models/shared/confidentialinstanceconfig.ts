@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfidentialInstanceConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Confidential Instance Config for clusters using Confidential VMs (https://cloud.google.com/compute/confidential-vm/docs)
 **/
 export class ConfidentialInstanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableConfidentialCompute" })
+  @SpeakeasyMetadata({ data: "json, name=enableConfidentialCompute" })
   enableConfidentialCompute?: boolean;
 }

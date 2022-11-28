@@ -31,7 +31,7 @@ type ContentRepricingrulesPatchSecurity struct {
 type ContentRepricingrulesPatchRequest struct {
 	PathParams  ContentRepricingrulesPatchPathParams
 	QueryParams ContentRepricingrulesPatchQueryParams
-	Request     *shared.RepricingRule `request:"mediaType=application/json"`
+	Request     *shared.RepricingRuleInput `request:"mediaType=application/json"`
 	Security    ContentRepricingrulesPatchSecurity
 }
 

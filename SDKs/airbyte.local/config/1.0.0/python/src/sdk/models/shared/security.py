@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class SchemeBearerAuth:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    authorization: str = field(metadata={'security': { 'field_name': 'Authorization' }})
     
 
 @dataclass

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFreeBetsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=exclude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=exclude" })
   exclude?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" })
   fields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=include" })
   include?: string[];
 }
 
 
 export class GetFreeBetsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=apiKey" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=apiSecret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" })
   apiSecret: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=apiTicket" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiTicket" })
   apiTicket: string;
 }
 
 
 export class GetFreeBetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFreeBetsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetFreeBetsHeaders;
 }
 
 
 export class GetFreeBetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.FreeBetDetail })
+  @SpeakeasyMetadata({ elemType: shared.FreeBetDetail })
   freeBet?: shared.FreeBetDetail[];
 }

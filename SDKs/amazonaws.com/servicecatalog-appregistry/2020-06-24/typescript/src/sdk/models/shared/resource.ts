@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceIntegrations } from "./resourceintegrations";
+
 
 
 // Resource
@@ -7,15 +8,15 @@ import { ResourceIntegrations } from "./resourceintegrations";
  *  The information about the resource.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=associationTime" })
+  @SpeakeasyMetadata({ data: "json, name=associationTime" })
   associationTime?: Date;
 
-  @Metadata({ data: "json, name=integrations" })
+  @SpeakeasyMetadata({ data: "json, name=integrations" })
   integrations?: ResourceIntegrations;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

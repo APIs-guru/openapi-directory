@@ -1,6 +1,7 @@
 
 
+
 export enum IntendedUseEnum {
-    SingleUse = "SingleUse"
-,    Storage = "Storage"
+    SingleUse = "SingleUse",
+    Storage = "Storage"
 }

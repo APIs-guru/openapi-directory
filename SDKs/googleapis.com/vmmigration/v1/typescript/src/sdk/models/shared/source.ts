@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VmwareSourceDetails } from "./vmwaresourcedetails";
+
 
 
 // Source
@@ -7,21 +8,37 @@ import { VmwareSourceDetails } from "./vmwaresourcedetails";
  * Source message describes a specific vm migration Source resource. It contains the source environment information.
 **/
 export class Source extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=vmware" })
+  @SpeakeasyMetadata({ data: "json, name=vmware" })
+  vmware?: VmwareSourceDetails;
+}
+
+
+// SourceInput
+/** 
+ * Source message describes a specific vm migration Source resource. It contains the source environment information.
+**/
+export class SourceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=vmware" })
   vmware?: VmwareSourceDetails;
 }

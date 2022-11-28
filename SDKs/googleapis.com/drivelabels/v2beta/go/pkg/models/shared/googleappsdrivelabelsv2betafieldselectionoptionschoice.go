@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice
+// Selection field choice.
 type GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice struct {
 	AppliedCapabilities *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceAppliedCapabilities `json:"appliedCapabilities,omitempty"`
 	CreateTime          *string                                                                    `json:"createTime,omitempty"`
@@ -15,5 +17,20 @@ type GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice struct {
 	Publisher           *GoogleAppsDriveLabelsV2betaUserInfo                                       `json:"publisher,omitempty"`
 	SchemaCapabilities  *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceSchemaCapabilities  `json:"schemaCapabilities,omitempty"`
 	UpdateTime          *string                                                                    `json:"updateTime,omitempty"`
+	Updater             *GoogleAppsDriveLabelsV2betaUserInfo                                       `json:"updater,omitempty"`
+}
+
+// GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput
+// Selection field choice.
+type GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput struct {
+	AppliedCapabilities *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceAppliedCapabilities `json:"appliedCapabilities,omitempty"`
+	Creator             *GoogleAppsDriveLabelsV2betaUserInfo                                       `json:"creator,omitempty"`
+	Disabler            *GoogleAppsDriveLabelsV2betaUserInfo                                       `json:"disabler,omitempty"`
+	DisplayHints        *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceDisplayHints        `json:"displayHints,omitempty"`
+	ID                  *string                                                                    `json:"id,omitempty"`
+	Lifecycle           *GoogleAppsDriveLabelsV2betaLifecycleInput                                 `json:"lifecycle,omitempty"`
+	Properties          *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceProperties          `json:"properties,omitempty"`
+	Publisher           *GoogleAppsDriveLabelsV2betaUserInfo                                       `json:"publisher,omitempty"`
+	SchemaCapabilities  *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceSchemaCapabilities  `json:"schemaCapabilities,omitempty"`
 	Updater             *GoogleAppsDriveLabelsV2betaUserInfo                                       `json:"updater,omitempty"`
 }

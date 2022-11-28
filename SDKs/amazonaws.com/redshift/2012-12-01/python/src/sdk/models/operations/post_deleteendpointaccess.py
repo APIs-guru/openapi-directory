@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteEndpointAccessActionEnum(str, Enum):
     DELETE_ENDPOINT_ACCESS = "DeleteEndpointAccess"
@@ -10,8 +14,8 @@ class PostDeleteEndpointAccessVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteEndpointAccessQueryParams:
-    action: PostDeleteEndpointAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteEndpointAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteEndpointAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteEndpointAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteEndpointAccessHeaders:
 
 @dataclass
 class PostDeleteEndpointAccessRequest:
-    query_params: PostDeleteEndpointAccessQueryParams = field(default=None)
-    headers: PostDeleteEndpointAccessHeaders = field(default=None)
+    headers: PostDeleteEndpointAccessHeaders = field()
+    query_params: PostDeleteEndpointAccessQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteEndpointAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

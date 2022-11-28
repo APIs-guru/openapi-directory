@@ -1,0 +1,127 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+```bash
+go get openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```go
+package main
+
+import (
+    "openapi"
+    "openapi/pkg/models/shared"
+    "openapi/pkg/models/operations"
+)
+
+func main() {
+    s := sdk.New()
+    
+    req := operations.ServicebrokerProjectsBrokersCreateRequest{
+        Security: operations.ServicebrokerProjectsBrokersCreateSecurity{
+            Oauth2: shared.SchemeOauth2{
+                Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+            }
+            Oauth2c: shared.SchemeOauth2c{
+                Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+            },
+        },
+        PathParams: operations.ServicebrokerProjectsBrokersCreatePathParams{
+            Parent: "voluptatem",
+        },
+        QueryParams: operations.ServicebrokerProjectsBrokersCreateQueryParams{
+            DollarXgafv: "2",
+            AccessToken: "placeat",
+            Alt: "proto",
+            Callback: "itaque",
+            Fields: "animi",
+            Key: "eum",
+            OauthToken: "non",
+            PrettyPrint: false,
+            QuotaUser: "vel",
+            UploadType: "nulla",
+            UploadProtocol: "qui",
+        },
+        Request: &shared.GoogleCloudServicebrokerV1beta1Broker{
+            CreateTime: "veritatis",
+            Name: "laboriosam",
+            Title: "illum",
+            URL: "nemo",
+        },
+    }
+    
+    res, err := s.Projects.ServicebrokerProjectsBrokersCreate(ctx, req)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Body != nil {
+        // handle response
+    }
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### projects
+
+* `ServicebrokerProjectsBrokersCreate` - CreateBroker creates a Broker.
+* `ServicebrokerProjectsBrokersInstancesBindingsList` - Lists all the bindings in the instance.
+* `ServicebrokerProjectsBrokersInstancesList` - Lists all the instances in the brokers
+This API is an extension and not part of the OSB spec.
+Hence the path is a standard Google API URL.
+* `ServicebrokerProjectsBrokersList` - ListBrokers lists brokers.
+* `ServicebrokerProjectsBrokersV2CatalogList` - Lists all the Services registered with this broker for consumption for
+given service registry broker, which contains an set of services.
+Note, that Service producer API is separate from Broker API.
+* `ServicebrokerProjectsBrokersV2ServiceInstancesCreate` - Provisions a service instance.
+If `request.accepts_incomplete` is false and Broker cannot execute request
+synchronously HTTP 422 error will be returned along with
+FAILED_PRECONDITION status.
+If `request.accepts_incomplete` is true and the Broker decides to execute
+resource asynchronously then HTTP 202 response code will be returned and a
+valid polling operation in the response will be included.
+If Broker executes the request synchronously and it succeeds HTTP 201
+response will be furnished.
+If identical instance exists, then HTTP 200 response will be returned.
+If an instance with identical ID but mismatching parameters exists, then
+HTTP 409 status code will be returned.
+* `ServicebrokerProjectsBrokersV2ServiceInstancesPatch` - Updates an existing service instance.
+See CreateServiceInstance for possible response codes.
+* `ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsCreate` - CreateBinding generates a service binding to an existing service instance.
+See ProviServiceInstance for async operation details.
+* `ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDelete` - Unbinds from a service instance.
+For synchronous/asynchronous request details see CreateServiceInstance
+method.
+If binding does not exist HTTP 410 status will be returned.
+* `ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsGet` - GetBinding returns the binding information.
+* `ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsGetLastOperation` - Returns the state of the last operation for the binding.
+Only last (or current) operation can be polled.
+
+### v1beta1
+
+* `ServicebrokerGetIamPolicy` - Gets the access control policy for a resource.
+Returns an empty policy if the resource exists and does not have a policy
+set.
+* `ServicebrokerSetIamPolicy` - Sets the access control policy on the specified resource. Replaces any
+existing policy.
+
+Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+* `ServicebrokerTestIamPermissions` - Returns permissions that a caller has on the specified resource.
+If the resource does not exist, this will return an empty set of
+permissions, not a NOT_FOUND error.
+
+Note: This operation is designed to be used for building permission-aware
+UIs and command-line tools, not for authorization checking. This operation
+may "fail open" without warning.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

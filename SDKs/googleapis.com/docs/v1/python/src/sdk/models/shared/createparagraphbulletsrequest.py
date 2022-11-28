@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import range
+from sdk import utils
+from . import *
 
 class CreateParagraphBulletsRequestBulletPresetEnum(str, Enum):
     BULLET_GLYPH_PRESET_UNSPECIFIED = "BULLET_GLYPH_PRESET_UNSPECIFIED"
@@ -25,6 +30,10 @@ class CreateParagraphBulletsRequestBulletPresetEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateParagraphBulletsRequest:
-    bullet_preset: Optional[CreateParagraphBulletsRequestBulletPresetEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bulletPreset' }})
-    range: Optional[range.Range] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""CreateParagraphBulletsRequest
+    Creates bullets for all of the paragraphs that overlap with the given range. The nesting level of each paragraph will be determined by counting leading tabs in front of each paragraph. To avoid excess space between the bullet and the corresponding paragraph, these leading tabs are removed by this request. This may change the indices of parts of the text. If the paragraph immediately before paragraphs being updated is in a list with a matching preset, the paragraphs being updated are added to that preceding list.
+    """
+    
+    bullet_preset: Optional[CreateParagraphBulletsRequestBulletPresetEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bulletPreset') }})
+    range: Optional[Range] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

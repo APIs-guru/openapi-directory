@@ -8,10 +8,6 @@ type GetSecurityCsrfTokenSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetSecurityCsrfTokenRequest struct {
-	Security GetSecurityCsrfTokenSecurity
-}
-
 type GetSecurityCsrfToken200ApplicationJSON struct {
 	Result *string `json:"result,omitempty"`
 }
@@ -22,6 +18,10 @@ type GetSecurityCsrfToken401ApplicationJSON struct {
 
 type GetSecurityCsrfToken500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetSecurityCsrfTokenRequest struct {
+	Security GetSecurityCsrfTokenSecurity
 }
 
 type GetSecurityCsrfTokenResponse struct {

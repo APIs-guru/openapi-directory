@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var EkmanEmotionQueryParams = /** @class */ (function (_super) {
     __extends(EkmanEmotionQueryParams, _super);
@@ -30,7 +30,7 @@ var EkmanEmotionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=all" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" }),
         __metadata("design:type", Boolean)
     ], EkmanEmotionQueryParams.prototype, "all", void 0);
     return EkmanEmotionQueryParams;
@@ -42,11 +42,11 @@ var EkmanEmotionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EkmanEmotionQueryParams)
     ], EkmanEmotionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.Post }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Post }),
         __metadata("design:type", Array)
     ], EkmanEmotionRequest.prototype, "request", void 0);
     return EkmanEmotionRequest;
@@ -58,19 +58,19 @@ var EkmanEmotionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], EkmanEmotionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PostPredicted }),
+        SpeakeasyMetadata({ elemType: shared.PostPredicted }),
         __metadata("design:type", Array)
     ], EkmanEmotionResponse.prototype, "predictionResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], EkmanEmotionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ValidationErrors)
     ], EkmanEmotionResponse.prototype, "validationErrors", void 0);
     return EkmanEmotionResponse;

@@ -19,6 +19,8 @@ const (
 	GoogleCloudApigeeV1MetricAggregationOrderEnumDescending       GoogleCloudApigeeV1MetricAggregationOrderEnum = "DESCENDING"
 )
 
+// GoogleCloudApigeeV1MetricAggregation
+// The optionally aggregated metric to query with its ordering.
 type GoogleCloudApigeeV1MetricAggregation struct {
 	Aggregation *GoogleCloudApigeeV1MetricAggregationAggregationEnum `json:"aggregation,omitempty"`
 	Name        *string                                              `json:"name,omitempty"`

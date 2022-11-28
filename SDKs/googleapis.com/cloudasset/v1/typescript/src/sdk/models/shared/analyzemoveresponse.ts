@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MoveAnalysis } from "./moveanalysis";
+
 
 
 // AnalyzeMoveResponse
@@ -8,6 +8,6 @@ import { MoveAnalysis } from "./moveanalysis";
  * The response message for resource move analysis.
 **/
 export class AnalyzeMoveResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=moveAnalysis", elemType: shared.MoveAnalysis })
+  @SpeakeasyMetadata({ data: "json, name=moveAnalysis", elemType: MoveAnalysis })
   moveAnalysis?: MoveAnalysis[];
 }

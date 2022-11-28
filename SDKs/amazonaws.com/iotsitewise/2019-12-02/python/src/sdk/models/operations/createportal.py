@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,8 +23,12 @@ class CreatePortalHeaders:
 @dataclass_json
 @dataclass
 class CreatePortalRequestBodyAlarms:
-    alarm_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alarmRoleArn' }})
-    notification_lambda_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notificationLambdaArn' }})
+    r"""CreatePortalRequestBodyAlarms
+    Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html\">Monitoring with alarms</a> in the <i>IoT SiteWise Application Guide</i>.
+    """
+    
+    alarm_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alarmRoleArn') }})
+    notification_lambda_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notificationLambdaArn') }})
     
 class CreatePortalRequestBodyPortalAuthModeEnum(str, Enum):
     IAM = "IAM"
@@ -29,39 +38,43 @@ class CreatePortalRequestBodyPortalAuthModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreatePortalRequestBodyPortalLogoImageFile:
-    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    type: Optional[shared.ImageFileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""CreatePortalRequestBodyPortalLogoImageFile
+    Contains an image file.
+    """
+    
+    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    type: Optional[shared.ImageFileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class CreatePortalRequestBody:
-    alarms: Optional[CreatePortalRequestBodyAlarms] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alarms' }})
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    notification_sender_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notificationSenderEmail' }})
-    portal_auth_mode: Optional[CreatePortalRequestBodyPortalAuthModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portalAuthMode' }})
-    portal_contact_email: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portalContactEmail' }})
-    portal_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portalDescription' }})
-    portal_logo_image_file: Optional[CreatePortalRequestBodyPortalLogoImageFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portalLogoImageFile' }})
-    portal_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portalName' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    portal_contact_email: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('portalContactEmail') }})
+    portal_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('portalName') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    alarms: Optional[CreatePortalRequestBodyAlarms] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alarms') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    notification_sender_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notificationSenderEmail') }})
+    portal_auth_mode: Optional[CreatePortalRequestBodyPortalAuthModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('portalAuthMode') }})
+    portal_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('portalDescription') }})
+    portal_logo_image_file: Optional[CreatePortalRequestBodyPortalLogoImageFile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('portalLogoImageFile') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreatePortalRequest:
-    headers: CreatePortalHeaders = field(default=None)
-    request: CreatePortalRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreatePortalHeaders = field()
+    request: CreatePortalRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreatePortalResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_portal_response: Optional[shared.CreatePortalResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

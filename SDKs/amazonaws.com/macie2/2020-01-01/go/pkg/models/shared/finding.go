@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Finding
+// Provides the details of a finding.
 type Finding struct {
 	AccountID             *string                `json:"accountId,omitempty"`
 	Archived              *bool                  `json:"archived,omitempty"`

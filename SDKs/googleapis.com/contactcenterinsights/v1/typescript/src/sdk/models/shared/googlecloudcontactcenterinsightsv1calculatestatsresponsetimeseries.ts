@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeriesInterval } from "./googlecloudcontactcenterinsightsv1calculatestatsresponsetimeseriesinterval";
+
 
 
 // GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeries
@@ -8,9 +8,9 @@ import { GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeriesInter
  * A time series representing conversations over time.
 **/
 export class GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intervalDuration" })
+  @SpeakeasyMetadata({ data: "json, name=intervalDuration" })
   intervalDuration?: string;
 
-  @Metadata({ data: "json, name=points", elemType: shared.GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeriesInterval })
+  @SpeakeasyMetadata({ data: "json, name=points", elemType: GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeriesInterval })
   points?: GoogleCloudContactcenterinsightsV1CalculateStatsResponseTimeSeriesInterval[];
 }

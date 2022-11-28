@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AccountUpdateRecoveryRequestBody = /** @class */ (function (_super) {
     __extends(AccountUpdateRecoveryRequestBody, _super);
@@ -30,19 +30,19 @@ var AccountUpdateRecoveryRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=password" }),
+        SpeakeasyMetadata({ data: "json, name=password" }),
         __metadata("design:type", String)
     ], AccountUpdateRecoveryRequestBody.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=passwordAgain" }),
+        SpeakeasyMetadata({ data: "json, name=passwordAgain" }),
         __metadata("design:type", String)
     ], AccountUpdateRecoveryRequestBody.prototype, "passwordAgain", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], AccountUpdateRecoveryRequestBody.prototype, "secret", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], AccountUpdateRecoveryRequestBody.prototype, "userId", void 0);
     return AccountUpdateRecoveryRequestBody;
@@ -54,11 +54,11 @@ var AccountUpdateRecoverySecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], AccountUpdateRecoverySecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], AccountUpdateRecoverySecurity.prototype, "project", void 0);
     return AccountUpdateRecoverySecurity;
@@ -70,11 +70,11 @@ var AccountUpdateRecoveryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", AccountUpdateRecoveryRequestBody)
     ], AccountUpdateRecoveryRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AccountUpdateRecoverySecurity)
     ], AccountUpdateRecoveryRequest.prototype, "security", void 0);
     return AccountUpdateRecoveryRequest;
@@ -86,15 +86,15 @@ var AccountUpdateRecoveryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AccountUpdateRecoveryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AccountUpdateRecoveryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Token)
     ], AccountUpdateRecoveryResponse.prototype, "token", void 0);
     return AccountUpdateRecoveryResponse;

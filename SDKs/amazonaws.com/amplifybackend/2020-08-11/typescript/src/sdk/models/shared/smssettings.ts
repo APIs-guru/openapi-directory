@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SmsSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * SMS settings for authentication.
 **/
 export class SmsSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SmsMessage" })
+  @SpeakeasyMetadata({ data: "json, name=SmsMessage" })
   smsMessage?: string;
 }

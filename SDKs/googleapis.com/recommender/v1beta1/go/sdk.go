@@ -1,15 +1,11 @@
 package sdk
 
 import (
-	"context"
-	"fmt"
 	"net/http"
 	"openapi/internal/utils"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/shared"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://recommender.googleapis.com/",
 }
 
@@ -17,10 +13,17 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://cloud.google.com/recommender/docs/
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	Projects *Projects
+
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,384 +34,47 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
 	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
+	}
+
+	sdk.Projects = NewProjects(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
 
 	return sdk
-}
-
-func (s *SDK) RecommenderProjectsLocationsInsightTypesInsightsList(ctx context.Context, request operations.RecommenderProjectsLocationsInsightTypesInsightsListRequest) (*operations.RecommenderProjectsLocationsInsightTypesInsightsListResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{parent}/insights", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsInsightTypesInsightsListResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1ListInsightsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1ListInsightsResponse = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RecommenderProjectsLocationsInsightTypesInsightsMarkAccepted(ctx context.Context, request operations.RecommenderProjectsLocationsInsightTypesInsightsMarkAcceptedRequest) (*operations.RecommenderProjectsLocationsInsightTypesInsightsMarkAcceptedResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{name}:markAccepted", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsInsightTypesInsightsMarkAcceptedResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1Insight
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1Insight = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RecommenderProjectsLocationsRecommendersRecommendationsGet(ctx context.Context, request operations.RecommenderProjectsLocationsRecommendersRecommendationsGetRequest) (*operations.RecommenderProjectsLocationsRecommendersRecommendationsGetResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{name}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsRecommendersRecommendationsGetResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1Recommendation
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1Recommendation = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RecommenderProjectsLocationsRecommendersRecommendationsList(ctx context.Context, request operations.RecommenderProjectsLocationsRecommendersRecommendationsListRequest) (*operations.RecommenderProjectsLocationsRecommendersRecommendationsListResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{parent}/recommendations", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsRecommendersRecommendationsListResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1ListRecommendationsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1ListRecommendationsResponse = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RecommenderProjectsLocationsRecommendersRecommendationsMarkClaimed(ctx context.Context, request operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkClaimedRequest) (*operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkClaimedResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{name}:markClaimed", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkClaimedResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1Recommendation
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1Recommendation = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RecommenderProjectsLocationsRecommendersRecommendationsMarkFailed(ctx context.Context, request operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkFailedRequest) (*operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkFailedResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{name}:markFailed", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkFailedResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1Recommendation
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1Recommendation = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RecommenderProjectsLocationsRecommendersRecommendationsMarkSucceeded(ctx context.Context, request operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkSucceededRequest) (*operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkSucceededResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{name}:markSucceeded", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsRecommendersRecommendationsMarkSucceededResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1Recommendation
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1Recommendation = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RecommenderProjectsLocationsRecommendersUpdateConfig(ctx context.Context, request operations.RecommenderProjectsLocationsRecommendersUpdateConfigRequest) (*operations.RecommenderProjectsLocationsRecommendersUpdateConfigResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1beta1/{name}", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "PATCH", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.RecommenderProjectsLocationsRecommendersUpdateConfigResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudRecommenderV1beta1RecommenderConfig
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudRecommenderV1beta1RecommenderConfig = out
-		}
-	}
-
-	return res, nil
 }

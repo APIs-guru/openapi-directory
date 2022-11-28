@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2faqanswer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2SuggestFaqAnswersResponse:
-    context_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contextSize' }})
-    faq_answers: Optional[List[googleclouddialogflowv2faqanswer.GoogleCloudDialogflowV2FaqAnswer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'faqAnswers' }})
-    latest_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestMessage' }})
+    r"""GoogleCloudDialogflowV2SuggestFaqAnswersResponse
+    The request message for Participants.SuggestFaqAnswers.
+    """
+    
+    context_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contextSize') }})
+    faq_answers: Optional[List[GoogleCloudDialogflowV2FaqAnswer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('faqAnswers') }})
+    latest_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestMessage') }})
     

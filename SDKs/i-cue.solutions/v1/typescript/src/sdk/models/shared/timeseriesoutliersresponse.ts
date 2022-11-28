@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutlierResponse } from "./outlierresponse";
 
 
+
 export class TimeSeriesOutliersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outliers", elemType: shared.OutlierResponse })
+  @SpeakeasyMetadata({ data: "json, name=outliers", elemType: OutlierResponse })
   outliers?: OutlierResponse[];
 
-  @Metadata({ data: "json, name=timeSeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesId" })
   timeSeriesId?: string;
 }

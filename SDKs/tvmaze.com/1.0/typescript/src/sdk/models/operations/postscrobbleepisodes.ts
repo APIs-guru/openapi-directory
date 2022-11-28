@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostScrobbleEpisodesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=episode_id" })
+  @SpeakeasyMetadata({ data: "json, name=episode_id" })
   episodeId?: number;
 
-  @Metadata({ data: "json, name=marked_at" })
+  @SpeakeasyMetadata({ data: "json, name=marked_at" })
   markedAt?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: any;
 }
 
 
 export class PostScrobbleEpisodesRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json", elemType: operations.PostScrobbleEpisodesRequestBody })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: PostScrobbleEpisodesRequestBody })
   request?: PostScrobbleEpisodesRequestBody[];
 }
 
 
 export class PostScrobbleEpisodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bulkResponse?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

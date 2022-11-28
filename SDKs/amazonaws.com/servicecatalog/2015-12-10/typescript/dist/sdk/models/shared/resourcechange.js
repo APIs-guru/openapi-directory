@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeActionEnum } from "./changeactionenum";
+import { ResourceChangeDetail } from "./resourcechangedetail";
 import { ReplacementEnum } from "./replacementenum";
 // ResourceChange
 /**
@@ -36,31 +36,31 @@ var ResourceChange = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", String)
     ], ResourceChange.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=Details", elemType: shared.ResourceChangeDetail }),
+        SpeakeasyMetadata({ data: "json, name=Details", elemType: ResourceChangeDetail }),
         __metadata("design:type", Array)
     ], ResourceChange.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=LogicalResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=LogicalResourceId" }),
         __metadata("design:type", String)
     ], ResourceChange.prototype, "logicalResourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PhysicalResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=PhysicalResourceId" }),
         __metadata("design:type", String)
     ], ResourceChange.prototype, "physicalResourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Replacement" }),
+        SpeakeasyMetadata({ data: "json, name=Replacement" }),
         __metadata("design:type", String)
     ], ResourceChange.prototype, "replacement", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceType" }),
         __metadata("design:type", String)
     ], ResourceChange.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Scope" }),
+        SpeakeasyMetadata({ data: "json, name=Scope" }),
         __metadata("design:type", Array)
     ], ResourceChange.prototype, "scope", void 0);
     return ResourceChange;

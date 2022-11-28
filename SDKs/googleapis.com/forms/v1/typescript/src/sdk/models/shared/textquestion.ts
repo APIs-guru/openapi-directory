@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TextQuestion
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A text-based question.
 **/
 export class TextQuestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paragraph" })
+  @SpeakeasyMetadata({ data: "json, name=paragraph" })
   paragraph?: boolean;
 }

@@ -20,6 +20,8 @@ const (
 	SiteEntityWelcomeScreenEnumDisabled SiteEntityWelcomeScreenEnum = "disabled"
 )
 
+// SiteEntity
+// Show site settings
 type SiteEntity struct {
 	AdminUserID                          *int32                            `json:"admin_user_id,omitempty"`
 	AllowBundleNames                     *bool                             `json:"allow_bundle_names,omitempty"`

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ReportGroupTrendFieldTypeEnum(str, Enum):
     PASS_RATE = "PASS_RATE"

@@ -1,0 +1,5 @@
+package shared
+
+type DestinyResponsesPersonalDestinyVendorSaleItemSetComponent struct {
+	SaleItems map[string]DestinyEntitiesVendorsDestinyVendorSaleItemComponent
+}

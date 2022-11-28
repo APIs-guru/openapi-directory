@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsenseAccountsUrlchannelsListPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    ad_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    ad_client_id: str = field(metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +25,14 @@ class AdsenseAccountsUrlchannelsListQueryParams:
 
 @dataclass
 class AdsenseAccountsUrlchannelsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsenseAccountsUrlchannelsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -42,14 +43,14 @@ class AdsenseAccountsUrlchannelsListSecurity:
 
 @dataclass
 class AdsenseAccountsUrlchannelsListRequest:
-    path_params: AdsenseAccountsUrlchannelsListPathParams = field(default=None)
-    query_params: AdsenseAccountsUrlchannelsListQueryParams = field(default=None)
-    security: AdsenseAccountsUrlchannelsListSecurity = field(default=None)
+    path_params: AdsenseAccountsUrlchannelsListPathParams = field()
+    query_params: AdsenseAccountsUrlchannelsListQueryParams = field()
+    security: AdsenseAccountsUrlchannelsListSecurity = field()
     
 
 @dataclass
 class AdsenseAccountsUrlchannelsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     url_channels: Optional[shared.URLChannels] = field(default=None)
     

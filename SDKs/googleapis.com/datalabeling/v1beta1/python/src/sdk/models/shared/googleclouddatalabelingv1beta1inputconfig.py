@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddatalabelingv1beta1bigquerysource
-from . import googleclouddatalabelingv1beta1classificationmetadata
-from . import googleclouddatalabelingv1beta1gcssource
-from . import googleclouddatalabelingv1beta1textmetadata
+from sdk import utils
+from . import *
 
 class GoogleCloudDatalabelingV1beta1InputConfigAnnotationTypeEnum(str, Enum):
     ANNOTATION_TYPE_UNSPECIFIED = "ANNOTATION_TYPE_UNSPECIFIED"
@@ -33,10 +32,14 @@ class GoogleCloudDatalabelingV1beta1InputConfigDataTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDatalabelingV1beta1InputConfig:
-    annotation_type: Optional[GoogleCloudDatalabelingV1beta1InputConfigAnnotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annotationType' }})
-    bigquery_source: Optional[googleclouddatalabelingv1beta1bigquerysource.GoogleCloudDatalabelingV1beta1BigQuerySource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bigquerySource' }})
-    classification_metadata: Optional[googleclouddatalabelingv1beta1classificationmetadata.GoogleCloudDatalabelingV1beta1ClassificationMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'classificationMetadata' }})
-    data_type: Optional[GoogleCloudDatalabelingV1beta1InputConfigDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataType' }})
-    gcs_source: Optional[googleclouddatalabelingv1beta1gcssource.GoogleCloudDatalabelingV1beta1GcsSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsSource' }})
-    text_metadata: Optional[googleclouddatalabelingv1beta1textmetadata.GoogleCloudDatalabelingV1beta1TextMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textMetadata' }})
+    r"""GoogleCloudDatalabelingV1beta1InputConfig
+    The configuration of input data, including data type, location, etc.
+    """
+    
+    annotation_type: Optional[GoogleCloudDatalabelingV1beta1InputConfigAnnotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('annotationType') }})
+    bigquery_source: Optional[GoogleCloudDatalabelingV1beta1BigQuerySource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bigquerySource') }})
+    classification_metadata: Optional[GoogleCloudDatalabelingV1beta1ClassificationMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('classificationMetadata') }})
+    data_type: Optional[GoogleCloudDatalabelingV1beta1InputConfigDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataType') }})
+    gcs_source: Optional[GoogleCloudDatalabelingV1beta1GcsSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsSource') }})
+    text_metadata: Optional[GoogleCloudDatalabelingV1beta1TextMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textMetadata') }})
     

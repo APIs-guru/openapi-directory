@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IndividualStudentsOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Assignee details about a coursework/announcement. This field is set if and only if `assigneeMode` is `INDIVIDUAL_STUDENTS`.
 **/
 export class IndividualStudentsOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=studentIds" })
+  @SpeakeasyMetadata({ data: "json, name=studentIds" })
   studentIds?: string[];
 }

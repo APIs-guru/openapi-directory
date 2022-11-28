@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum StoreLayoutStoreLayoutTypeEnum {
-    Unknown = "unknown"
-,    Basic = "basic"
-,    Custom = "custom"
+    Unknown = "unknown",
+    Basic = "basic",
+    Custom = "custom"
 }
 
 
@@ -12,9 +13,9 @@ export enum StoreLayoutStoreLayoutTypeEnum {
  * General setting for the managed Google Play store layout, currently only specifying the page to display the first time the store is opened.
 **/
 export class StoreLayout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=homepageId" })
+  @SpeakeasyMetadata({ data: "json, name=homepageId" })
   homepageId?: string;
 
-  @Metadata({ data: "json, name=storeLayoutType" })
+  @SpeakeasyMetadata({ data: "json, name=storeLayoutType" })
   storeLayoutType?: StoreLayoutStoreLayoutTypeEnum;
 }

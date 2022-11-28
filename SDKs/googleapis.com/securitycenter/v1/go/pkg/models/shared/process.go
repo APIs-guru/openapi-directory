@@ -1,5 +1,7 @@
 package shared
 
+// Process
+// Represents an operating system process.
 type Process struct {
 	Args                  []string              `json:"args,omitempty"`
 	ArgumentsTruncated    *bool                 `json:"argumentsTruncated,omitempty"`

@@ -1,95 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLiveTvChannelsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=addCurrentProgram" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=addCurrentProgram" })
   addCurrentProgram?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableFavoriteSorting" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableFavoriteSorting" })
   enableFavoriteSorting?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImageTypes" })
   enableImageTypes?: shared.ImageTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableImages" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableImages" })
   enableImages?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableUserData" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableUserData" })
   enableUserData?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: shared.ItemFieldsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imageTypeLimit" })
   imageTypeLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isDisliked" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isDisliked" })
   isDisliked?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isFavorite" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isFavorite" })
   isFavorite?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isKids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isKids" })
   isKids?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isLiked" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isLiked" })
   isLiked?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isMovie" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isMovie" })
   isMovie?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isNews" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isNews" })
   isNews?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isSeries" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isSeries" })
   isSeries?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isSports" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isSports" })
   isSports?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: shared.SortOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: shared.ChannelTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetLiveTvChannelsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetLiveTvChannelsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLiveTvChannelsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLiveTvChannelsSecurity;
 }
 
 
 export class GetLiveTvChannelsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

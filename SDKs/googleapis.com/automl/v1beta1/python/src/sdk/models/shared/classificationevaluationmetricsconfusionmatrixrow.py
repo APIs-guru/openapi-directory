@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ClassificationEvaluationMetricsConfusionMatrixRow:
-    example_count: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exampleCount' }})
+    r"""ClassificationEvaluationMetricsConfusionMatrixRow
+    Output only. A row in the confusion matrix.
+    """
+    
+    example_count: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exampleCount') }})
     

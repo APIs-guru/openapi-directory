@@ -1,5 +1,7 @@
 package shared
 
+// AudioParameters
+// Parameters required for transcoding audio.
 type AudioParameters struct {
 	AudioPackingMode *string            `json:"AudioPackingMode,omitempty"`
 	BitRate          *string            `json:"BitRate,omitempty"`

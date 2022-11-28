@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateRepositoryNameInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input of an update repository description operation.
 **/
 export class UpdateRepositoryNameInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newName" })
+  @SpeakeasyMetadata({ data: "json, name=newName" })
   newName: string;
 
-  @Metadata({ data: "json, name=oldName" })
+  @SpeakeasyMetadata({ data: "json, name=oldName" })
   oldName: string;
 }

@@ -23,6 +23,8 @@ const (
 	GoogleChromeManagementV1BrowserVersionSystemEnumSystemLinux             GoogleChromeManagementV1BrowserVersionSystemEnum = "SYSTEM_LINUX"
 )
 
+// GoogleChromeManagementV1BrowserVersion
+// Describes a browser version and its install count.
 type GoogleChromeManagementV1BrowserVersion struct {
 	Channel         *GoogleChromeManagementV1BrowserVersionChannelEnum `json:"channel,omitempty"`
 	Count           *string                                            `json:"count,omitempty"`

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SendSshPublicKeyRequest = /** @class */ (function (_super) {
     __extends(SendSshPublicKeyRequest, _super);
     function SendSshPublicKeyRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], SendSshPublicKeyRequest.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceId" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceId" }),
         __metadata("design:type", String)
     ], SendSshPublicKeyRequest.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceOSUser" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceOSUser" }),
         __metadata("design:type", String)
     ], SendSshPublicKeyRequest.prototype, "instanceOsUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=SSHPublicKey" }),
+        SpeakeasyMetadata({ data: "json, name=SSHPublicKey" }),
         __metadata("design:type", String)
     ], SendSshPublicKeyRequest.prototype, "sshPublicKey", void 0);
     return SendSshPublicKeyRequest;

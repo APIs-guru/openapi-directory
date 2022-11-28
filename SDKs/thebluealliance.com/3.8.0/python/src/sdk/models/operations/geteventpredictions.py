@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetEventPredictionsPathParams:
-    event_key: str = field(default=None, metadata={'path_param': { 'field_name': 'event_key', 'style': 'simple', 'explode': False }})
+    event_key: str = field(metadata={'path_param': { 'field_name': 'event_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,20 +15,20 @@ class GetEventPredictionsHeaders:
 
 @dataclass
 class GetEventPredictionsSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetEventPredictionsRequest:
-    path_params: GetEventPredictionsPathParams = field(default=None)
-    headers: GetEventPredictionsHeaders = field(default=None)
-    security: GetEventPredictionsSecurity = field(default=None)
+    headers: GetEventPredictionsHeaders = field()
+    path_params: GetEventPredictionsPathParams = field()
+    security: GetEventPredictionsSecurity = field()
     
 
 @dataclass
 class GetEventPredictionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     event_predictions: Optional[dict[str, Any]] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

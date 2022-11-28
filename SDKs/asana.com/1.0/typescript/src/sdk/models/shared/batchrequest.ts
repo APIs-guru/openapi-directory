@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchRequestAction } from "./batchrequestaction";
+
 
 
 // BatchRequest
@@ -8,6 +8,6 @@ import { BatchRequestAction } from "./batchrequestaction";
  * A request object for use in a batch request.
 **/
 export class BatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.BatchRequestAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: BatchRequestAction })
   actions?: BatchRequestAction[];
 }

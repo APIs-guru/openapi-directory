@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateAvailabilityOptionsActionEnum(str, Enum):
     UPDATE_AVAILABILITY_OPTIONS = "UpdateAvailabilityOptions"
@@ -10,10 +14,10 @@ class GetUpdateAvailabilityOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateAvailabilityOptionsQueryParams:
-    action: GetUpdateAvailabilityOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    multi_az: bool = field(default=None, metadata={'query_param': { 'field_name': 'MultiAZ', 'style': 'form', 'explode': True }})
-    version: GetUpdateAvailabilityOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateAvailabilityOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    multi_az: bool = field(metadata={'query_param': { 'field_name': 'MultiAZ', 'style': 'form', 'explode': True }})
+    version: GetUpdateAvailabilityOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateAvailabilityOptionsHeaders:
 
 @dataclass
 class GetUpdateAvailabilityOptionsRequest:
-    query_params: GetUpdateAvailabilityOptionsQueryParams = field(default=None)
-    headers: GetUpdateAvailabilityOptionsHeaders = field(default=None)
+    headers: GetUpdateAvailabilityOptionsHeaders = field()
+    query_params: GetUpdateAvailabilityOptionsQueryParams = field()
     
 
 @dataclass
 class GetUpdateAvailabilityOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDeploymentConfigXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class GetDeploymentConfigXAmzTargetEnum(str, Enum):
 
 @dataclass
 class GetDeploymentConfigHeaders:
+    x_amz_target: GetDeploymentConfigXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,22 +20,21 @@ class GetDeploymentConfigHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: GetDeploymentConfigXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetDeploymentConfigRequest:
-    headers: GetDeploymentConfigHeaders = field(default=None)
-    request: shared.GetDeploymentConfigInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetDeploymentConfigHeaders = field()
+    request: shared.GetDeploymentConfigInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetDeploymentConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deployment_config_does_not_exist_exception: Optional[Any] = field(default=None)
     deployment_config_name_required_exception: Optional[Any] = field(default=None)
     get_deployment_config_output: Optional[shared.GetDeploymentConfigOutput] = field(default=None)
     invalid_compute_platform_exception: Optional[Any] = field(default=None)
     invalid_deployment_config_name_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

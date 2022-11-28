@@ -1,5 +1,7 @@
 package shared
 
+// InputDescription
+// Describes the application input configuration for a SQL-based Kinesis Data Analytics application.
 type InputDescription struct {
 	InAppStreamNames                        []string                                 `json:"InAppStreamNames,omitempty"`
 	InputID                                 *string                                  `json:"InputId,omitempty"`

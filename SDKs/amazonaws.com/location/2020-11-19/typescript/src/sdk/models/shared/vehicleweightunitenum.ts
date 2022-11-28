@@ -1,6 +1,7 @@
 
 
+
 export enum VehicleWeightUnitEnum {
-    Kilograms = "Kilograms"
-,    Pounds = "Pounds"
+    Kilograms = "Kilograms",
+    Pounds = "Pounds"
 }

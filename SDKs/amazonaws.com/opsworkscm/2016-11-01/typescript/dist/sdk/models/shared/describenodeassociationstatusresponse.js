@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EngineAttribute } from "./engineattribute";
 import { NodeAssociationStatusEnum } from "./nodeassociationstatusenum";
 var DescribeNodeAssociationStatusResponse = /** @class */ (function (_super) {
     __extends(DescribeNodeAssociationStatusResponse, _super);
@@ -31,11 +31,11 @@ var DescribeNodeAssociationStatusResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EngineAttributes", elemType: shared.EngineAttribute }),
+        SpeakeasyMetadata({ data: "json, name=EngineAttributes", elemType: EngineAttribute }),
         __metadata("design:type", Array)
     ], DescribeNodeAssociationStatusResponse.prototype, "engineAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeAssociationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=NodeAssociationStatus" }),
         __metadata("design:type", String)
     ], DescribeNodeAssociationStatusResponse.prototype, "nodeAssociationStatus", void 0);
     return DescribeNodeAssociationStatusResponse;

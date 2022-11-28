@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TaxSettingsUpdateRequestTaxationModeEnum {
-    Exclusive = "EXCLUSIVE"
-,    Inclusive = "INCLUSIVE"
+    Exclusive = "EXCLUSIVE",
+    Inclusive = "INCLUSIVE"
 }
 
 
 export class TaxSettingsUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taxationMode" })
+  @SpeakeasyMetadata({ data: "json, name=taxationMode" })
   taxationMode: TaxSettingsUpdateRequestTaxationModeEnum;
 }

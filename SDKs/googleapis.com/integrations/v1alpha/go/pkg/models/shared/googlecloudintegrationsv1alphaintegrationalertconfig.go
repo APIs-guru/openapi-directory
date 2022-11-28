@@ -24,6 +24,8 @@ const (
 	GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdTypeEnumExpectedMax              GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdTypeEnum = "EXPECTED_MAX"
 )
 
+// GoogleCloudIntegrationsV1alphaIntegrationAlertConfig
+// Message to be used to configure custom alerting in the {@code EventConfig} protos for an event.
 type GoogleCloudIntegrationsV1alphaIntegrationAlertConfig struct {
 	AggregationPeriod *string                                                                `json:"aggregationPeriod,omitempty"`
 	AlertThreshold    *int32                                                                 `json:"alertThreshold,omitempty"`

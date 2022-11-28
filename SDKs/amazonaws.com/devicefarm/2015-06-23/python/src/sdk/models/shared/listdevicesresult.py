@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import device
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListDevicesResult:
-    devices: Optional[List[device.Device]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devices' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    r"""ListDevicesResult
+    Represents the result of a list devices operation.
+    """
+    
+    devices: Optional[List[Device]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('devices') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

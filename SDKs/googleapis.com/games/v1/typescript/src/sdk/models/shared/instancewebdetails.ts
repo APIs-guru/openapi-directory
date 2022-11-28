@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceWebDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Web details resource.
 **/
 export class InstanceWebDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=launchUrl" })
+  @SpeakeasyMetadata({ data: "json, name=launchUrl" })
   launchUrl?: string;
 
-  @Metadata({ data: "json, name=preferred" })
+  @SpeakeasyMetadata({ data: "json, name=preferred" })
   preferred?: boolean;
 }

@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Article extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abstract" })
+  @SpeakeasyMetadata({ data: "json, name=abstract" })
   abstract?: string;
 
-  @Metadata({ data: "json, name=byline" })
+  @SpeakeasyMetadata({ data: "json, name=byline" })
   byline?: string;
 
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: string;
 
-  @Metadata({ data: "json, name=des_facet" })
+  @SpeakeasyMetadata({ data: "json, name=des_facet" })
   desFacet?: any;
 
-  @Metadata({ data: "json, name=geo_facet" })
+  @SpeakeasyMetadata({ data: "json, name=geo_facet" })
   geoFacet?: any;
 
-  @Metadata({ data: "json, name=media" })
+  @SpeakeasyMetadata({ data: "json, name=media" })
   media?: any;
 
-  @Metadata({ data: "json, name=org_facet" })
+  @SpeakeasyMetadata({ data: "json, name=org_facet" })
   orgFacet?: any[];
 
-  @Metadata({ data: "json, name=per_facet" })
+  @SpeakeasyMetadata({ data: "json, name=per_facet" })
   perFacet?: any[];
 
-  @Metadata({ data: "json, name=published_date" })
+  @SpeakeasyMetadata({ data: "json, name=published_date" })
   publishedDate?: string;
 
-  @Metadata({ data: "json, name=section" })
+  @SpeakeasyMetadata({ data: "json, name=section" })
   section?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1IssueModelLabelStats
+// Aggregated statistics about an issue model.
 type GoogleCloudContactcenterinsightsV1IssueModelLabelStats struct {
 	AnalyzedConversationsCount     *string                                                                     `json:"analyzedConversationsCount,omitempty"`
 	IssueStats                     map[string]GoogleCloudContactcenterinsightsV1IssueModelLabelStatsIssueStats `json:"issueStats,omitempty"`

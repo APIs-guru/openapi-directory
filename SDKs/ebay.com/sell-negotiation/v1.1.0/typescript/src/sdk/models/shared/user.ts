@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // User
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This complex type identifies an eBay user.
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maskedUsername" })
+  @SpeakeasyMetadata({ data: "json, name=maskedUsername" })
   maskedUsername?: string;
 }

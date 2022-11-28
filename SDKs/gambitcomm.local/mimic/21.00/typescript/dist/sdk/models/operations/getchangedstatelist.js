@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetChangedStateListResponse = /** @class */ (function (_super) {
     __extends(GetChangedStateListResponse, _super);
@@ -30,15 +30,15 @@ var GetChangedStateListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.AgentState }),
+        SpeakeasyMetadata({ elemType: shared.AgentState }),
         __metadata("design:type", Array)
     ], GetChangedStateListResponse.prototype, "agentStates", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetChangedStateListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetChangedStateListResponse.prototype, "statusCode", void 0);
     return GetChangedStateListResponse;

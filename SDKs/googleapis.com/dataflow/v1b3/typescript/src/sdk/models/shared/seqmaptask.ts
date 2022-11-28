@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SideInputInfo } from "./sideinputinfo";
 import { SeqMapTaskOutputInfo } from "./seqmaptaskoutputinfo";
+
 
 
 // SeqMapTask
@@ -9,21 +9,21 @@ import { SeqMapTaskOutputInfo } from "./seqmaptaskoutputinfo";
  * Describes a particular function to invoke.
 **/
 export class SeqMapTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputs", elemType: shared.SideInputInfo })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: SideInputInfo })
   inputs?: SideInputInfo[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=outputInfos", elemType: shared.SeqMapTaskOutputInfo })
+  @SpeakeasyMetadata({ data: "json, name=outputInfos", elemType: SeqMapTaskOutputInfo })
   outputInfos?: SeqMapTaskOutputInfo[];
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName?: string;
 
-  @Metadata({ data: "json, name=systemName" })
+  @SpeakeasyMetadata({ data: "json, name=systemName" })
   systemName?: string;
 
-  @Metadata({ data: "json, name=userFn" })
+  @SpeakeasyMetadata({ data: "json, name=userFn" })
   userFn?: Map<string, any>;
 }

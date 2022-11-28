@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -12,18 +12,18 @@ class ListDatasets1QueryParams:
 
 @dataclass
 class ListDatasets1Security:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ListDatasets1Request:
-    query_params: ListDatasets1QueryParams = field(default=None)
-    security: ListDatasets1Security = field(default=None)
+    query_params: ListDatasets1QueryParams = field()
+    security: ListDatasets1Security = field()
     
 
 @dataclass
 class ListDatasets1Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataset_list: Optional[shared.DatasetList] = field(default=None)
-    status_code: int = field(default=None)
     

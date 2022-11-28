@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GranularStats } from "./granularstats";
+
 
 
 // TimestampStats
@@ -8,6 +8,6 @@ import { GranularStats } from "./granularstats";
  * The data statistics of a series of TIMESTAMP values.
 **/
 export class TimestampStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=granularStats", elemType: shared.GranularStats })
+  @SpeakeasyMetadata({ data: "json, name=granularStats", elemType: GranularStats })
   granularStats?: Map<string, GranularStats>;
 }

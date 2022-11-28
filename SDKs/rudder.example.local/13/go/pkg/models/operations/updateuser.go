@@ -8,11 +8,6 @@ type UpdateUserPathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type UpdateUserRequest struct {
-	PathParams UpdateUserPathParams
-	Request    shared.Users `request:"mediaType=application/json"`
-}
-
 type UpdateUser200ApplicationJSONActionEnum string
 
 const (
@@ -40,6 +35,11 @@ type UpdateUser200ApplicationJSON struct {
 	Action UpdateUser200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateUser200ApplicationJSONData       `json:"data"`
 	Result UpdateUser200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateUserRequest struct {
+	PathParams UpdateUserPathParams
+	Request    shared.Users `request:"mediaType=application/json"`
 }
 
 type UpdateUserResponse struct {

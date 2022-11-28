@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DimensionContribution } from "./dimensioncontribution";
 /**
  * Details about dimensions that contributed to an anomaly.

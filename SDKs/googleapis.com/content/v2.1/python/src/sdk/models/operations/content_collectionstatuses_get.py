@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentCollectionstatusesGetPathParams:
-    collection_id: str = field(default=None, metadata={'path_param': { 'field_name': 'collectionId', 'style': 'simple', 'explode': False }})
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    collection_id: str = field(metadata={'path_param': { 'field_name': 'collectionId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ContentCollectionstatusesGetQueryParams:
 
 @dataclass
 class ContentCollectionstatusesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentCollectionstatusesGetRequest:
-    path_params: ContentCollectionstatusesGetPathParams = field(default=None)
-    query_params: ContentCollectionstatusesGetQueryParams = field(default=None)
-    security: ContentCollectionstatusesGetSecurity = field(default=None)
+    path_params: ContentCollectionstatusesGetPathParams = field()
+    query_params: ContentCollectionstatusesGetQueryParams = field()
+    security: ContentCollectionstatusesGetSecurity = field()
     
 
 @dataclass
 class ContentCollectionstatusesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     collection_status: Optional[shared.CollectionStatus] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -8,6 +8,8 @@ const (
 	VoiceExportOptionsExportFormatEnumPst                     VoiceExportOptionsExportFormatEnum = "PST"
 )
 
+// VoiceExportOptions
+// The options for Voice exports.
 type VoiceExportOptions struct {
 	ExportFormat *VoiceExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
 }

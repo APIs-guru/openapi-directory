@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetV1IdOutputFormatOutputFormatEnum;
 (function (GetV1IdOutputFormatOutputFormatEnum) {
     GetV1IdOutputFormatOutputFormatEnum["Json"] = "json";
@@ -34,11 +34,11 @@ var GetV1IdOutputFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetV1IdOutputFormatPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=output_format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=output_format" }),
         __metadata("design:type", String)
     ], GetV1IdOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetV1IdOutputFormatPathParams;
@@ -50,15 +50,15 @@ var GetV1IdOutputFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetV1IdOutputFormatQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=expired" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expired" }),
         __metadata("design:type", Boolean)
     ], GetV1IdOutputFormatQueryParams.prototype, "expired", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=poc" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=poc" }),
         __metadata("design:type", Boolean)
     ], GetV1IdOutputFormatQueryParams.prototype, "poc", void 0);
     return GetV1IdOutputFormatQueryParams;
@@ -70,11 +70,11 @@ var GetV1IdOutputFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV1IdOutputFormatPathParams)
     ], GetV1IdOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV1IdOutputFormatQueryParams)
     ], GetV1IdOutputFormatRequest.prototype, "queryParams", void 0);
     return GetV1IdOutputFormatRequest;
@@ -86,15 +86,15 @@ var GetV1IdOutputFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetV1IdOutputFormatResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV1IdOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV1IdOutputFormatResponse.prototype, "statusCode", void 0);
     return GetV1IdOutputFormatResponse;

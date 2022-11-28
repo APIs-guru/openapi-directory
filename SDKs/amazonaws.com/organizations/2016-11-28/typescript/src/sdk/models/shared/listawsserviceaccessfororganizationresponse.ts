@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnabledServicePrincipal } from "./enabledserviceprincipal";
 
 
+
 export class ListAwsServiceAccessForOrganizationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnabledServicePrincipals", elemType: shared.EnabledServicePrincipal })
+  @SpeakeasyMetadata({ data: "json, name=EnabledServicePrincipals", elemType: EnabledServicePrincipal })
   enabledServicePrincipals?: EnabledServicePrincipal[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

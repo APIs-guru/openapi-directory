@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import tabledescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateTableOutput:
-    table_description: Optional[tabledescription.TableDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TableDescription' }})
+    r"""UpdateTableOutput
+    Represents the output of an <code>UpdateTable</code> operation.
+    """
+    
+    table_description: Optional[TableDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TableDescription') }})
     

@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AppointmentAuditViewModel = /** @class */ (function (_super) {
     __extends(AppointmentAuditViewModel, _super);
     function AppointmentAuditViewModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appointmentId" }),
+        SpeakeasyMetadata({ data: "json, name=appointmentId" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "appointmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=modificationType" }),
+        SpeakeasyMetadata({ data: "json, name=modificationType" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "modificationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=modifiedBy" }),
+        SpeakeasyMetadata({ data: "json, name=modifiedBy" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "modifiedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=modifiedOn" }),
+        SpeakeasyMetadata({ data: "json, name=modifiedOn" }),
         __metadata("design:type", Date)
     ], AppointmentAuditViewModel.prototype, "modifiedOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=notesAfter" }),
+        SpeakeasyMetadata({ data: "json, name=notesAfter" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "notesAfter", void 0);
     __decorate([
-        Metadata({ data: "json, name=notesBefore" }),
+        SpeakeasyMetadata({ data: "json, name=notesBefore" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "notesBefore", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusAfter" }),
+        SpeakeasyMetadata({ data: "json, name=statusAfter" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "statusAfter", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusBefore" }),
+        SpeakeasyMetadata({ data: "json, name=statusBefore" }),
         __metadata("design:type", String)
     ], AppointmentAuditViewModel.prototype, "statusBefore", void 0);
     return AppointmentAuditViewModel;

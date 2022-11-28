@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var VpcAccessConnectorEgressSettingEnum;
 (function (VpcAccessConnectorEgressSettingEnum) {
     VpcAccessConnectorEgressSettingEnum["EgressSettingUnspecified"] = "EGRESS_SETTING_UNSPECIFIED";
@@ -39,11 +39,11 @@ var VpcAccessConnector = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=egressSetting" }),
+        SpeakeasyMetadata({ data: "json, name=egressSetting" }),
         __metadata("design:type", String)
     ], VpcAccessConnector.prototype, "egressSetting", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], VpcAccessConnector.prototype, "name", void 0);
     return VpcAccessConnector;

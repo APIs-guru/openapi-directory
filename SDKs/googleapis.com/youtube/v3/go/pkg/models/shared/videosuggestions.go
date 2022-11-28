@@ -49,6 +49,8 @@ const (
 	VideoSuggestionsProcessingWarningsEnumProblematicHdrLookupTable          VideoSuggestionsProcessingWarningsEnum = "problematicHdrLookupTable"
 )
 
+// VideoSuggestions
+// Specifies suggestions on how to improve video content, including encoding hints, tag suggestions, and editor suggestions.
 type VideoSuggestions struct {
 	EditorSuggestions  []VideoSuggestionsEditorSuggestionsEnum  `json:"editorSuggestions,omitempty"`
 	ProcessingErrors   []VideoSuggestionsProcessingErrorsEnum   `json:"processingErrors,omitempty"`

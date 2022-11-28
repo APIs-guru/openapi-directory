@@ -9,11 +9,11 @@ class PutAdministrationUserHeaders:
 
 @dataclass
 class PutAdministrationUserRequest:
-    headers: PutAdministrationUserHeaders = field(default=None)
+    headers: PutAdministrationUserHeaders = field()
     
 
 @dataclass
 class PutAdministrationUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

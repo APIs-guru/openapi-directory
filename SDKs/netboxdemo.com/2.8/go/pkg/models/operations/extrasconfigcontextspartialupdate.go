@@ -10,7 +10,7 @@ type ExtrasConfigContextsPartialUpdatePathParams struct {
 
 type ExtrasConfigContextsPartialUpdateRequest struct {
 	PathParams ExtrasConfigContextsPartialUpdatePathParams
-	Request    shared.WritableConfigContext `request:"mediaType=application/json"`
+	Request    shared.WritableConfigContextInput `request:"mediaType=application/json"`
 }
 
 type ExtrasConfigContextsPartialUpdateResponse struct {

@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Paging } from "./paging";
 import { Folder } from "./folder";
 
 
+
 export class CollectionResponseFolder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paging" })
+  @SpeakeasyMetadata({ data: "json, name=paging" })
   paging?: Paging;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Folder })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: Folder })
   results: Folder[];
 }

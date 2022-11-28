@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Deal } from "./deal";
+
 
 
 // BatchUpdateDealsResponse
@@ -8,6 +8,6 @@ import { Deal } from "./deal";
  * Response message for batch updating deals.
 **/
 export class BatchUpdateDealsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deals", elemType: shared.Deal })
+  @SpeakeasyMetadata({ data: "json, name=deals", elemType: Deal })
   deals?: Deal[];
 }

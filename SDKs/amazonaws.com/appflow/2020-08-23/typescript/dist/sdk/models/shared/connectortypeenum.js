@@ -1,0 +1,25 @@
+export var ConnectorTypeEnum;
+(function (ConnectorTypeEnum) {
+    ConnectorTypeEnum["Salesforce"] = "Salesforce";
+    ConnectorTypeEnum["Singular"] = "Singular";
+    ConnectorTypeEnum["Slack"] = "Slack";
+    ConnectorTypeEnum["Redshift"] = "Redshift";
+    ConnectorTypeEnum["S3"] = "S3";
+    ConnectorTypeEnum["Marketo"] = "Marketo";
+    ConnectorTypeEnum["Googleanalytics"] = "Googleanalytics";
+    ConnectorTypeEnum["Zendesk"] = "Zendesk";
+    ConnectorTypeEnum["Servicenow"] = "Servicenow";
+    ConnectorTypeEnum["Datadog"] = "Datadog";
+    ConnectorTypeEnum["Trendmicro"] = "Trendmicro";
+    ConnectorTypeEnum["Snowflake"] = "Snowflake";
+    ConnectorTypeEnum["Dynatrace"] = "Dynatrace";
+    ConnectorTypeEnum["Infornexus"] = "Infornexus";
+    ConnectorTypeEnum["Amplitude"] = "Amplitude";
+    ConnectorTypeEnum["Veeva"] = "Veeva";
+    ConnectorTypeEnum["EventBridge"] = "EventBridge";
+    ConnectorTypeEnum["LookoutMetrics"] = "LookoutMetrics";
+    ConnectorTypeEnum["Upsolver"] = "Upsolver";
+    ConnectorTypeEnum["Honeycode"] = "Honeycode";
+    ConnectorTypeEnum["CustomerProfiles"] = "CustomerProfiles";
+    ConnectorTypeEnum["SapoData"] = "SAPOData";
+})(ConnectorTypeEnum || (ConnectorTypeEnum = {}));

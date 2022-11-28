@@ -12,11 +12,6 @@ type GetUserContentByDateJSONSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetUserContentByDateJSONRequest struct {
-	QueryParams GetUserContentByDateJSONQueryParams
-	Security    GetUserContentByDateJSONSecurity
-}
-
 type GetUserContentByDateJSON200ApplicationJSONDebug struct {
 	Version *float64 `json:"version,omitempty"`
 }
@@ -60,6 +55,11 @@ type GetUserContentByDateJSON200ApplicationJSON struct {
 	Debug     *GetUserContentByDateJSON200ApplicationJSONDebug   `json:"debug,omitempty"`
 	Results   *GetUserContentByDateJSON200ApplicationJSONResults `json:"results,omitempty"`
 	Status    *string                                            `json:"status,omitempty"`
+}
+
+type GetUserContentByDateJSONRequest struct {
+	QueryParams GetUserContentByDateJSONQueryParams
+	Security    GetUserContentByDateJSONSecurity
 }
 
 type GetUserContentByDateJSONResponse struct {

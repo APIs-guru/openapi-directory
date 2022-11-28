@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MerchantOrderReturn } from "./merchantorderreturn";
 
 
+
 export class OrderreturnsCreateOrderReturnResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=executionStatus" })
   executionStatus?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=orderReturn" })
+  @SpeakeasyMetadata({ data: "json, name=orderReturn" })
   orderReturn?: MerchantOrderReturn;
 }

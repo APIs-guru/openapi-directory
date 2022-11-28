@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleRpcStatus } from "./googlerpcstatus";
+
 
 
 // TaskAttemptResult
@@ -7,9 +8,9 @@ import { GoogleRpcStatus } from "./googlerpcstatus";
  * Result of a task attempt.
 **/
 export class TaskAttemptResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GoogleRpcStatus;
 }

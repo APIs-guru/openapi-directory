@@ -1,6 +1,7 @@
 
 
+
 export enum RemediationActionTypeEnum {
-    Remove = "REMOVE"
-,    Modify = "MODIFY"
+    Remove = "REMOVE",
+    Modify = "MODIFY"
 }

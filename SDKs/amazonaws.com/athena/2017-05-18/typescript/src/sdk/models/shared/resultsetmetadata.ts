@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnInfo } from "./columninfo";
+
 
 
 // ResultSetMetadata
@@ -8,6 +8,6 @@ import { ColumnInfo } from "./columninfo";
  * The metadata that describes the column structure and data types of a table of query results. To return a <code>ResultSetMetadata</code> object, use <a>GetQueryResults</a>.
 **/
 export class ResultSetMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ColumnInfo", elemType: shared.ColumnInfo })
+  @SpeakeasyMetadata({ data: "json, name=ColumnInfo", elemType: ColumnInfo })
   columnInfo?: ColumnInfo[];
 }

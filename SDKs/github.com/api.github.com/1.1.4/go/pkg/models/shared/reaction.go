@@ -39,6 +39,8 @@ type ReactionSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// Reaction
+// Reactions to conversations provide a way to help people express their feelings more simply and effectively.
 type Reaction struct {
 	Content   ReactionContentEnum `json:"content"`
 	CreatedAt time.Time           `json:"created_at"`

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateAssessmentStatusPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,23 +32,23 @@ class UpdateAssessmentStatusRequestBodyStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateAssessmentStatusRequestBody:
-    status: UpdateAssessmentStatusRequestBodyStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: UpdateAssessmentStatusRequestBodyStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass
 class UpdateAssessmentStatusRequest:
-    path_params: UpdateAssessmentStatusPathParams = field(default=None)
-    headers: UpdateAssessmentStatusHeaders = field(default=None)
-    request: UpdateAssessmentStatusRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateAssessmentStatusHeaders = field()
+    path_params: UpdateAssessmentStatusPathParams = field()
+    request: UpdateAssessmentStatusRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateAssessmentStatusResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_assessment_status_response: Optional[shared.UpdateAssessmentStatusResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

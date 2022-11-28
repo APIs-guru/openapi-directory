@@ -1,5 +1,7 @@
 package shared
 
+// Tier
+// A Google Cloud SQL service tier resource.
 type Tier struct {
 	DiskQuota *string  `json:"DiskQuota,omitempty"`
 	RAM       *string  `json:"RAM,omitempty"`

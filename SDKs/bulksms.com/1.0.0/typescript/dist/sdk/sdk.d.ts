@@ -1,19 +1,31 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.bulksms.com/v1"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    DeleteWebhooksId(req: operations.DeleteWebhooksIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteWebhooksIdResponse>;
-    GetBlockedNumbers(req: operations.GetBlockedNumbersRequest, config?: AxiosRequestConfig): Promise<operations.GetBlockedNumbersResponse>;
     /**
+     * deleteWebhooksId - Delete a webhook
+    **/
+    deleteWebhooksId(req: operations.DeleteWebhooksIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteWebhooksIdResponse>;
+    /**
+     * getBlockedNumbers - List blocked numbers
+    **/
+    getBlockedNumbers(req: operations.GetBlockedNumbersRequest, config?: AxiosRequestConfig): Promise<operations.GetBlockedNumbersResponse>;
+    /**
+     * getMessages - Retrieve Messages
+     *
      * Retrieve the messages you have sent or received.
      *
      * All the parameters are optional.  If a value is not supplied for `filter`, the messages are not filtered.
@@ -48,23 +60,29 @@ export declare class SDK {
      * | userSuppliedId  | String | | Use a string value you specified in the `userSuppliedId` property when you sent the message. Only `SENT` messages will be retrieved. <br/>`filter=userSuppliedId%3Dacc009876` |
      *
     **/
-    GetMessages(req: operations.GetMessagesRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesResponse>;
+    getMessages(req: operations.GetMessagesRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesResponse>;
     /**
+     * getMessagesId - Show Message
+     *
      * Get a the message by `id`.
      * ```http
      * GET /v1/messages/4023457654
      * ```
      *
     **/
-    GetMessagesId(req: operations.GetMessagesIdRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesIdResponse>;
+    getMessagesId(req: operations.GetMessagesIdRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesIdResponse>;
     /**
+     * getMessagesIdRelatedReceivedMessages - List Related Messages
+     *
      * Get the messages related to a sent message identified by `id`.
      *
      * For more information how this work, see the `relatedSentMessageId` field in the message.
      *
     **/
-    GetMessagesIdRelatedReceivedMessages(req: operations.GetMessagesIdRelatedReceivedMessagesRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesIdRelatedReceivedMessagesResponse>;
+    getMessagesIdRelatedReceivedMessages(req: operations.GetMessagesIdRelatedReceivedMessagesRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesIdRelatedReceivedMessagesResponse>;
     /**
+     * getMessagesSend - Send message by simple GET or POST
+     *
      * A really simple interface for people who require a GET mechanism to submit a single message.
      *
      * The URI is interpreted as UTF-8. HTTP Basic Auth is used for authentication.
@@ -86,17 +104,26 @@ export declare class SDK {
      * ```
      *
     **/
-    GetMessagesSend(req: operations.GetMessagesSendRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesSendResponse>;
+    getMessagesSend(req: operations.GetMessagesSendRequest, config?: AxiosRequestConfig): Promise<operations.GetMessagesSendResponse>;
     /**
+     * getProfile - Get profile
+     *
      * Returns information about your user profile
     **/
-    GetProfile(req: operations.GetProfileRequest, config?: AxiosRequestConfig): Promise<operations.GetProfileResponse>;
+    getProfile(req: operations.GetProfileRequest, config?: AxiosRequestConfig): Promise<operations.GetProfileResponse>;
     /**
+     * getWebhooks - List webhooks
+     *
      * Contains a list of your webhooks
     **/
-    GetWebhooks(req: operations.GetWebhooksRequest, config?: AxiosRequestConfig): Promise<operations.GetWebhooksResponse>;
-    GetWebhooksId(req: operations.GetWebhooksIdRequest, config?: AxiosRequestConfig): Promise<operations.GetWebhooksIdResponse>;
+    getWebhooks(req: operations.GetWebhooksRequest, config?: AxiosRequestConfig): Promise<operations.GetWebhooksResponse>;
     /**
+     * getWebhooksId - Read a webhook
+    **/
+    getWebhooksId(req: operations.GetWebhooksIdRequest, config?: AxiosRequestConfig): Promise<operations.GetWebhooksIdResponse>;
+    /**
+     * postBlockedNumbers - Create a blocked number
+     *
      * Blocked numbers are phone numbers to which your account is not permitted to send messages.
      * The numbers can be created via this API, by a recipient replying with a STOP message to one
      * of your previous SENT messages, or by a BulkSMS administrator.
@@ -105,8 +132,10 @@ export declare class SDK {
      * `FAILED.BLOCKED`. Messages sent to blocked numbers are billed to your account.
      *
     **/
-    PostBlockedNumbers(req: operations.PostBlockedNumbersRequest, config?: AxiosRequestConfig): Promise<operations.PostBlockedNumbersResponse>;
+    postBlockedNumbers(req: operations.PostBlockedNumbersRequest, config?: AxiosRequestConfig): Promise<operations.PostBlockedNumbersResponse>;
     /**
+     * postMessages - Send Messages
+     *
      * Send messages to one or more recipients.
      *
      * You can post up to `30 000` messages in a batch.
@@ -167,8 +196,10 @@ export declare class SDK {
      * ```
      *
     **/
-    PostMessages(req: operations.PostMessagesRequest, config?: AxiosRequestConfig): Promise<operations.PostMessagesResponse>;
+    postMessages(req: operations.PostMessagesRequest, config?: AxiosRequestConfig): Promise<operations.PostMessagesResponse>;
     /**
+     * postRmmPreSignAttachment - Upload an attachment via a signed URL
+     *
      * You can send any URL as part of your SMS text.  When the recipient taps on the URL, the file to which the URL points will be downloaded and opened on the mobile device.  This handy feature is supported by most modern mobile devices.
      *
      * The best way to send an attachment is to store the file on a web server you own and use that URL in the SMS text.  Your customer will then see a URL that she will recognise as belonging to you.  This is the most flexible and the simplest solution.
@@ -186,8 +217,10 @@ export declare class SDK {
      * If you need to, take a closer look at the example program (on the right-hand side) to get a better idea of how to implement this process.
      *
     **/
-    PostRmmPreSignAttachment(req: operations.PostRmmPreSignAttachmentRequest, config?: AxiosRequestConfig): Promise<operations.PostRmmPreSignAttachmentResponse>;
+    postRmmPreSignAttachment(req: operations.PostRmmPreSignAttachmentRequest, config?: AxiosRequestConfig): Promise<operations.PostRmmPreSignAttachmentResponse>;
     /**
+     * postWebhooks - Create a webhook
+     *
      * A webhook is an URL that you can register when you want the BulkSMS system to notify you about your messages.
      * You can register multiple webhooks, and each one will be called.  (Note: you can also use our [Web App](https://www.bulksms.com/account/#!/advanced-settings/webhooks) to manage your webhooks interactively.)
      * If you want to be notified of `SENT` messages and `RECEIVED` messages you need to create two webhooks.
@@ -230,7 +263,10 @@ export declare class SDK {
      *  - A __message discarded__ email is sent after failure email is send when a message is discarded as a consequence of a non-retry-able error.
      *
     **/
-    PostWebhooks(req: operations.PostWebhooksRequest, config?: AxiosRequestConfig): Promise<operations.PostWebhooksResponse>;
-    PostWebhooksId(req: operations.PostWebhooksIdRequest, config?: AxiosRequestConfig): Promise<operations.PostWebhooksIdResponse>;
+    postWebhooks(req: operations.PostWebhooksRequest, config?: AxiosRequestConfig): Promise<operations.PostWebhooksResponse>;
+    /**
+     * postWebhooksId - Update a webhook
+    **/
+    postWebhooksId(req: operations.PostWebhooksIdRequest, config?: AxiosRequestConfig): Promise<operations.PostWebhooksIdResponse>;
 }
 export {};

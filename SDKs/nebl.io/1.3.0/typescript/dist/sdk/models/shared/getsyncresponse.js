@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetSyncResponse
 /**
  * Object containing node sync status
@@ -33,27 +33,27 @@ var GetSyncResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blockChainHeight" }),
+        SpeakeasyMetadata({ data: "json, name=blockChainHeight" }),
         __metadata("design:type", Number)
     ], GetSyncResponse.prototype, "blockChainHeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetSyncResponse.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], GetSyncResponse.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetSyncResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=syncPercentage" }),
         __metadata("design:type", Number)
     ], GetSyncResponse.prototype, "syncPercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], GetSyncResponse.prototype, "type", void 0);
     return GetSyncResponse;

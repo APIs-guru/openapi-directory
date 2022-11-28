@@ -12,11 +12,11 @@ class SendAnalyticsQueryParams:
 
 @dataclass
 class SendAnalyticsRequest:
-    query_params: SendAnalyticsQueryParams = field(default=None)
+    query_params: SendAnalyticsQueryParams = field()
     
 
 @dataclass
 class SendAnalyticsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

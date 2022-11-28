@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GitLabRepository } from "./gitlabrepository";
+
 
 
 // ListGitLabRepositoriesResponse
@@ -8,9 +8,9 @@ import { GitLabRepository } from "./gitlabrepository";
  * RPC response object returned by the ListGitLabRepositories RPC method.
 **/
 export class ListGitLabRepositoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gitlabRepositories", elemType: shared.GitLabRepository })
+  @SpeakeasyMetadata({ data: "json, name=gitlabRepositories", elemType: GitLabRepository })
   gitlabRepositories?: GitLabRepository[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

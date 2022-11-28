@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlicerSpec } from "./slicerspec";
+
 
 
 // UpdateSlicerSpecRequest
@@ -7,12 +8,12 @@ import { SlicerSpec } from "./slicerspec";
  * Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
 **/
 export class UpdateSlicerSpecRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=slicerId" })
+  @SpeakeasyMetadata({ data: "json, name=slicerId" })
   slicerId?: number;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: SlicerSpec;
 }

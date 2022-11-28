@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,7 +28,6 @@ class IntegrationsProjectsLocationsProductsIntegrationsExecutionsListQueryParams
     filter_params_parameter_value: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filterParams.parameterValue', 'style': 'form', 'explode': True }})
     filter_params_start_time: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filterParams.startTime', 'style': 'form', 'explode': True }})
     filter_params_task_statuses: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'filterParams.taskStatuses', 'style': 'form', 'explode': True }})
-    filter_params_trigger_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filterParams.triggerId', 'style': 'form', 'explode': True }})
     filter_params_workflow_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filterParams.workflowName', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
@@ -45,20 +45,20 @@ class IntegrationsProjectsLocationsProductsIntegrationsExecutionsListQueryParams
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsListRequest:
-    path_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsListPathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsListQueryParams = field(default=None)
-    security: IntegrationsProjectsLocationsProductsIntegrationsExecutionsListSecurity = field(default=None)
+    path_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsListPathParams = field()
+    query_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsListQueryParams = field()
+    security: IntegrationsProjectsLocationsProductsIntegrationsExecutionsListSecurity = field()
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_list_executions_response: Optional[shared.GoogleCloudIntegrationsV1alphaListExecutionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

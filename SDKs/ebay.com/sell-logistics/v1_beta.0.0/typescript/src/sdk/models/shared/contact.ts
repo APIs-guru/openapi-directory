@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactAddress } from "./contactaddress";
 import { PhoneNumber } from "./phonenumber";
+
 
 
 // Contact
@@ -8,15 +9,15 @@ import { PhoneNumber } from "./phonenumber";
  * This complex type contains contact information for an individual buyer or seller.
 **/
 export class Contact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=companyName" })
+  @SpeakeasyMetadata({ data: "json, name=companyName" })
   companyName?: string;
 
-  @Metadata({ data: "json, name=contactAddress" })
+  @SpeakeasyMetadata({ data: "json, name=contactAddress" })
   contactAddress?: ContactAddress;
 
-  @Metadata({ data: "json, name=fullName" })
+  @SpeakeasyMetadata({ data: "json, name=fullName" })
   fullName?: string;
 
-  @Metadata({ data: "json, name=primaryPhone" })
+  @SpeakeasyMetadata({ data: "json, name=primaryPhone" })
   primaryPhone?: PhoneNumber;
 }

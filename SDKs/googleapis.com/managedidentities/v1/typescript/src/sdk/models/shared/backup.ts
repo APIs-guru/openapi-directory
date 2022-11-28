@@ -1,17 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BackupStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Failed = "FAILED",
+    Deleting = "DELETING"
 }
 
 export enum BackupTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    OnDemand = "ON_DEMAND"
-,    Scheduled = "SCHEDULED"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    OnDemand = "ON_DEMAND",
+    Scheduled = "SCHEDULED"
+}
+
+
+// BackupInput
+/** 
+ * Represents a Managed Microsoft Identities backup.
+**/
+export class BackupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
 }
 
 
@@ -20,24 +31,24 @@ export enum BackupTypeEnum {
  * Represents a Managed Microsoft Identities backup.
 **/
 export class Backup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: BackupStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: BackupTypeEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

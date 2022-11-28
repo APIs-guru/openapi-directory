@@ -1,5 +1,7 @@
 package shared
 
+// Uploads
+// Upload collection lists Analytics uploads to which the user has access. Each custom data source can have a set of uploads. Each resource in the upload collection corresponds to a single Analytics data upload.
 type Uploads struct {
 	Items        []Upload `json:"items,omitempty"`
 	ItemsPerPage *int32   `json:"itemsPerPage,omitempty"`

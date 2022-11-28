@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueueStats
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Statistics for a queue.
 **/
 export class QueueStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=concurrentDispatchesCount" })
+  @SpeakeasyMetadata({ data: "json, name=concurrentDispatchesCount" })
   concurrentDispatchesCount?: string;
 
-  @Metadata({ data: "json, name=effectiveExecutionRate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveExecutionRate" })
   effectiveExecutionRate?: number;
 
-  @Metadata({ data: "json, name=executedLastMinuteCount" })
+  @SpeakeasyMetadata({ data: "json, name=executedLastMinuteCount" })
   executedLastMinuteCount?: string;
 
-  @Metadata({ data: "json, name=oldestEstimatedArrivalTime" })
+  @SpeakeasyMetadata({ data: "json, name=oldestEstimatedArrivalTime" })
   oldestEstimatedArrivalTime?: string;
 
-  @Metadata({ data: "json, name=tasksCount" })
+  @SpeakeasyMetadata({ data: "json, name=tasksCount" })
   tasksCount?: string;
 }

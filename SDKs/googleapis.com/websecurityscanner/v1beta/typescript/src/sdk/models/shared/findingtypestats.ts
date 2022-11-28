@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FindingTypeStats
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A FindingTypeStats resource represents stats regarding a specific FindingType of Findings under a given ScanRun.
 **/
 export class FindingTypeStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=findingCount" })
+  @SpeakeasyMetadata({ data: "json, name=findingCount" })
   findingCount?: number;
 
-  @Metadata({ data: "json, name=findingType" })
+  @SpeakeasyMetadata({ data: "json, name=findingType" })
   findingType?: string;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssociationOverview } from "./associationoverview";
 import { Target } from "./target";
+
 
 
 // Association
@@ -9,33 +9,33 @@ import { Target } from "./target";
  * Describes an association of a Amazon Web Services Systems Manager document (SSM document) and an instance.
 **/
 export class Association extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=AssociationName" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationName" })
   associationName?: string;
 
-  @Metadata({ data: "json, name=AssociationVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationVersion" })
   associationVersion?: string;
 
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=LastExecutionDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastExecutionDate" })
   lastExecutionDate?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Overview" })
+  @SpeakeasyMetadata({ data: "json, name=Overview" })
   overview?: AssociationOverview;
 
-  @Metadata({ data: "json, name=ScheduleExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleExpression" })
   scheduleExpression?: string;
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets?: Target[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskStateEnum } from "./taskstateenum";
 // TaskSummary
 /**
@@ -34,19 +34,19 @@ var TaskSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], TaskSummary.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], TaskSummary.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskArn" }),
+        SpeakeasyMetadata({ data: "json, name=taskArn" }),
         __metadata("design:type", String)
     ], TaskSummary.prototype, "taskArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskId" }),
+        SpeakeasyMetadata({ data: "json, name=taskId" }),
         __metadata("design:type", String)
     ], TaskSummary.prototype, "taskId", void 0);
     return TaskSummary;

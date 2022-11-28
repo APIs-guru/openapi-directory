@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WeekDayOfMonthDayOfWeekEnum(str, Enum):
     DAY_OF_WEEK_UNSPECIFIED = "DAY_OF_WEEK_UNSPECIFIED"
@@ -16,7 +18,11 @@ class WeekDayOfMonthDayOfWeekEnum(str, Enum):
 @dataclass_json
 @dataclass
 class WeekDayOfMonth:
-    day_of_week: Optional[WeekDayOfMonthDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfWeek' }})
-    day_offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOffset' }})
-    week_ordinal: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weekOrdinal' }})
+    r"""WeekDayOfMonth
+    Represents one week day in a month. An example is \"the 4th Sunday\".
+    """
+    
+    day_of_week: Optional[WeekDayOfMonthDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfWeek') }})
+    day_offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOffset') }})
+    week_ordinal: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weekOrdinal') }})
     

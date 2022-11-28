@@ -1,5 +1,7 @@
 package shared
 
+// AttributeValue
+// AttributeValue can be <code>String</code>, <code>Number</code>, <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>, <code>BinarySet</code>.
 type AttributeValue struct {
 	B  *string  `json:"B,omitempty"`
 	Bs []string `json:"BS,omitempty"`

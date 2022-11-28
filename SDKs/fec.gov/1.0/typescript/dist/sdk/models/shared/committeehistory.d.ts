@@ -1,0 +1,36 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class CommitteeHistory extends SpeakeasyBase {
+    affiliatedCommitteeName?: string;
+    candidateIds?: string[];
+    city?: string;
+    committeeId: string;
+    committeeType?: string;
+    committeeTypeFull?: string;
+    convertToPacFlag?: boolean;
+    cycle: number;
+    cycles?: number[];
+    cyclesHasActivity?: number[];
+    cyclesHasFinancial?: number[];
+    designation?: string;
+    designationFull?: string;
+    filingFrequency?: string;
+    formerCandidateElectionYear?: number;
+    formerCandidateId?: string;
+    formerCandidateName?: string;
+    formerCommitteeName?: string;
+    isActive?: boolean;
+    lastCycleHasActivity?: number;
+    lastCycleHasFinancial?: number;
+    name?: string;
+    organizationType?: string;
+    organizationTypeFull?: string;
+    party?: string;
+    partyFull?: string;
+    sponsorCandidateIds?: string[];
+    state?: string;
+    stateFull?: string;
+    street1?: string;
+    street2?: string;
+    treasurerName?: string;
+    zip?: string;
+}

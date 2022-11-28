@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paginationlinks
-from . import orderlineitem
+from sdk import utils
+from . import *
 
 class GetOrderOrderStatusEnum(str, Enum):
     ACTIVE = "Active"
@@ -13,10 +14,10 @@ class GetOrderOrderStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetOrder:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: Optional[paginationlinks.PaginationLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    number_of_line_items: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberOfLineItems' }})
-    order_line_items: Optional[List[orderlineitem.OrderLineItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderLineItems' }})
-    order_number: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderNumber' }})
-    order_status: GetOrderOrderStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderStatus' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    number_of_line_items: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('numberOfLineItems') }})
+    order_number: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderNumber') }})
+    order_status: GetOrderOrderStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderStatus') }})
+    links: Optional[PaginationLinks] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    order_line_items: Optional[List[OrderLineItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderLineItems') }})
     

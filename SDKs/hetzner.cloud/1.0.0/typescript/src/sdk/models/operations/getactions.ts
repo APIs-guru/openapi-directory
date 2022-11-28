@@ -1,48 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetActionsSortParameterSortEnum {
-    Id = "id"
-,    IdAsc = "id:asc"
-,    IdDesc = "id:desc"
-,    Command = "command"
-,    CommandAsc = "command:asc"
-,    CommandDesc = "command:desc"
-,    Status = "status"
-,    StatusAsc = "status:asc"
-,    StatusDesc = "status:desc"
-,    Progress = "progress"
-,    ProgressAsc = "progress:asc"
-,    ProgressDesc = "progress:desc"
-,    Started = "started"
-,    StartedAsc = "started:asc"
-,    StartedDesc = "started:desc"
-,    Finished = "finished"
-,    FinishedAsc = "finished:asc"
-,    FinishedDesc = "finished:desc"
+    Id = "id",
+    IdAsc = "id:asc",
+    IdDesc = "id:desc",
+    Command = "command",
+    CommandAsc = "command:asc",
+    CommandDesc = "command:desc",
+    Status = "status",
+    StatusAsc = "status:asc",
+    StatusDesc = "status:desc",
+    Progress = "progress",
+    ProgressAsc = "progress:asc",
+    ProgressDesc = "progress:desc",
+    Started = "started",
+    StartedAsc = "started:asc",
+    StartedDesc = "started:desc",
+    Finished = "finished",
+    FinishedAsc = "finished:asc",
+    FinishedDesc = "finished:desc"
 }
 
 export enum GetActionsStatusParameterStatusEnum {
-    Running = "running"
-,    Success = "success"
-,    Error = "error"
+    Running = "running",
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetActionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetActionsSortParameterSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: GetActionsStatusParameterStatusEnum;
-}
-
-
-export class GetActionsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetActionsQueryParams;
 }
 
 
@@ -51,99 +46,105 @@ export class GetActionsRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class GetActionsActionsResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class GetActionsActionsResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum GetActionsActionsResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class GetActionsActionsResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: GetActionsActionsResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.GetActionsActionsResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: GetActionsActionsResponseActionResources })
   resources: GetActionsActionsResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GetActionsActionsResponseActionStatusEnum;
 }
 
 
 export class GetActionsActionsResponseMetaPagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_page" })
+  @SpeakeasyMetadata({ data: "json, name=last_page" })
   lastPage: number;
 
-  @Metadata({ data: "json, name=next_page" })
+  @SpeakeasyMetadata({ data: "json, name=next_page" })
   nextPage: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage: number;
 
-  @Metadata({ data: "json, name=previous_page" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page" })
   previousPage: number;
 
-  @Metadata({ data: "json, name=total_entries" })
+  @SpeakeasyMetadata({ data: "json, name=total_entries" })
   totalEntries: number;
 }
 
 
 export class GetActionsActionsResponseMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: GetActionsActionsResponseMetaPagination;
 }
 
 
 export class GetActionsActionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: operations.GetActionsActionsResponseAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: GetActionsActionsResponseAction })
   actions: GetActionsActionsResponseAction[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: GetActionsActionsResponseMeta;
 }
 
 
+export class GetActionsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetActionsQueryParams;
+}
+
+
 export class GetActionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionsResponse?: GetActionsActionsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

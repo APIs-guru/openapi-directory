@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BookingStatusItemLevelEnum {
-    Item = "ITEM"
-,    Itinerary = "ITINERARY"
+    Item = "ITEM",
+    Itinerary = "ITINERARY"
 }
 
 export enum BookingStatusItemTypeEnum {
-    Waiting = "WAITING"
-,    Confirmed = "CONFIRMED"
-,    Unavailable = "UNAVAILABLE"
-,    Pending = "PENDING"
-,    Failed = "FAILED"
-,    Cancelled = "CANCELLED"
-,    Expired = "EXPIRED"
-,    Amended = "AMENDED"
-,    PendingAmend = "PENDING_AMEND"
-,    Rejected = "REJECTED"
-,    OnHold = "ON_HOLD"
+    Waiting = "WAITING",
+    Confirmed = "CONFIRMED",
+    Unavailable = "UNAVAILABLE",
+    Pending = "PENDING",
+    Failed = "FAILED",
+    Cancelled = "CANCELLED",
+    Expired = "EXPIRED",
+    Amended = "AMENDED",
+    PendingAmend = "PENDING_AMEND",
+    Rejected = "REJECTED",
+    OnHold = "ON_HOLD"
 }
 
 
@@ -25,30 +26,30 @@ export enum BookingStatusItemTypeEnum {
  * **object** containing item booking status information
 **/
 export class BookingStatusItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amended" })
+  @SpeakeasyMetadata({ data: "json, name=amended" })
   amended?: boolean;
 
-  @Metadata({ data: "json, name=cancelled" })
+  @SpeakeasyMetadata({ data: "json, name=cancelled" })
   cancelled?: boolean;
 
-  @Metadata({ data: "json, name=confirmed" })
+  @SpeakeasyMetadata({ data: "json, name=confirmed" })
   confirmed?: boolean;
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: boolean;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: BookingStatusItemLevelEnum;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: BookingStatusItemTypeEnum;
 }

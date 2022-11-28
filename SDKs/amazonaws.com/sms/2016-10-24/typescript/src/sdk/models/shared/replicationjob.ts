@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseTypeEnum } from "./licensetypeenum";
 import { ReplicationRun } from "./replicationrun";
 import { ServerTypeEnum } from "./servertypeenum";
@@ -7,62 +6,63 @@ import { ReplicationJobStateEnum } from "./replicationjobstateenum";
 import { VmServer } from "./vmserver";
 
 
+
 // ReplicationJob
 /** 
  * Represents a replication job.
 **/
 export class ReplicationJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: number;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=latestAmiId" })
+  @SpeakeasyMetadata({ data: "json, name=latestAmiId" })
   latestAmiId?: string;
 
-  @Metadata({ data: "json, name=licenseType" })
+  @SpeakeasyMetadata({ data: "json, name=licenseType" })
   licenseType?: LicenseTypeEnum;
 
-  @Metadata({ data: "json, name=nextReplicationRunStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=nextReplicationRunStartTime" })
   nextReplicationRunStartTime?: Date;
 
-  @Metadata({ data: "json, name=numberOfRecentAmisToKeep" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfRecentAmisToKeep" })
   numberOfRecentAmisToKeep?: number;
 
-  @Metadata({ data: "json, name=replicationJobId" })
+  @SpeakeasyMetadata({ data: "json, name=replicationJobId" })
   replicationJobId?: string;
 
-  @Metadata({ data: "json, name=replicationRunList", elemType: shared.ReplicationRun })
+  @SpeakeasyMetadata({ data: "json, name=replicationRunList", elemType: ReplicationRun })
   replicationRunList?: ReplicationRun[];
 
-  @Metadata({ data: "json, name=roleName" })
+  @SpeakeasyMetadata({ data: "json, name=roleName" })
   roleName?: string;
 
-  @Metadata({ data: "json, name=runOnce" })
+  @SpeakeasyMetadata({ data: "json, name=runOnce" })
   runOnce?: boolean;
 
-  @Metadata({ data: "json, name=seedReplicationTime" })
+  @SpeakeasyMetadata({ data: "json, name=seedReplicationTime" })
   seedReplicationTime?: Date;
 
-  @Metadata({ data: "json, name=serverId" })
+  @SpeakeasyMetadata({ data: "json, name=serverId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=serverType" })
+  @SpeakeasyMetadata({ data: "json, name=serverType" })
   serverType?: ServerTypeEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ReplicationJobStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=vmServer" })
+  @SpeakeasyMetadata({ data: "json, name=vmServer" })
   vmServer?: VmServer;
 }

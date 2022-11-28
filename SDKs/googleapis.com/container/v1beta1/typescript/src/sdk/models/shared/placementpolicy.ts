@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlacementPolicyTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Compact = "COMPACT"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Compact = "COMPACT"
 }
 
 
@@ -11,6 +12,6 @@ export enum PlacementPolicyTypeEnum {
  * PlacementPolicy defines the placement policy used by the node pool.
 **/
 export class PlacementPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PlacementPolicyTypeEnum;
 }

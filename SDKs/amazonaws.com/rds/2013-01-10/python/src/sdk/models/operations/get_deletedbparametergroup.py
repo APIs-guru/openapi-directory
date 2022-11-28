@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteDbParameterGroupActionEnum(str, Enum):
     DELETE_DB_PARAMETER_GROUP = "DeleteDBParameterGroup"
@@ -10,9 +14,9 @@ class GetDeleteDbParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteDbParameterGroupQueryParams:
-    action: GetDeleteDbParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_parameter_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBParameterGroupName', 'style': 'form', 'explode': True }})
-    version: GetDeleteDbParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteDbParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_parameter_group_name: str = field(metadata={'query_param': { 'field_name': 'DBParameterGroupName', 'style': 'form', 'explode': True }})
+    version: GetDeleteDbParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteDbParameterGroupHeaders:
 
 @dataclass
 class GetDeleteDbParameterGroupRequest:
-    query_params: GetDeleteDbParameterGroupQueryParams = field(default=None)
-    headers: GetDeleteDbParameterGroupHeaders = field(default=None)
+    headers: GetDeleteDbParameterGroupHeaders = field()
+    query_params: GetDeleteDbParameterGroupQueryParams = field()
     
 
 @dataclass
 class GetDeleteDbParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

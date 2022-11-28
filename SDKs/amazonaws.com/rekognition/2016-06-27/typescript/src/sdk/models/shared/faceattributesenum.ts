@@ -1,6 +1,7 @@
 
 
+
 export enum FaceAttributesEnum {
-    Default = "DEFAULT"
-,    All = "ALL"
+    Default = "DEFAULT",
+    All = "ALL"
 }

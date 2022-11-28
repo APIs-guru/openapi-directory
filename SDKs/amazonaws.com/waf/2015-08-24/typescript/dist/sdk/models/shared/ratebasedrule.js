@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Predicate } from "./predicate";
 import { RateKeyEnum } from "./ratekeyenum";
 // RateBasedRule
 /**
@@ -35,27 +35,27 @@ var RateBasedRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MatchPredicates", elemType: shared.Predicate }),
+        SpeakeasyMetadata({ data: "json, name=MatchPredicates", elemType: Predicate }),
         __metadata("design:type", Array)
     ], RateBasedRule.prototype, "matchPredicates", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricName" }),
+        SpeakeasyMetadata({ data: "json, name=MetricName" }),
         __metadata("design:type", String)
     ], RateBasedRule.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], RateBasedRule.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RateKey" }),
+        SpeakeasyMetadata({ data: "json, name=RateKey" }),
         __metadata("design:type", String)
     ], RateBasedRule.prototype, "rateKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=RateLimit" }),
+        SpeakeasyMetadata({ data: "json, name=RateLimit" }),
         __metadata("design:type", Number)
     ], RateBasedRule.prototype, "rateLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleId" }),
+        SpeakeasyMetadata({ data: "json, name=RuleId" }),
         __metadata("design:type", String)
     ], RateBasedRule.prototype, "ruleId", void 0);
     return RateBasedRule;

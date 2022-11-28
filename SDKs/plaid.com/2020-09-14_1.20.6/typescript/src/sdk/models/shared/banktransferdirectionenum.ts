@@ -1,6 +1,7 @@
 
 
+
 export enum BankTransferDirectionEnum {
-    Outbound = "outbound"
-,    Inbound = "inbound"
+    Outbound = "outbound",
+    Inbound = "inbound"
 }

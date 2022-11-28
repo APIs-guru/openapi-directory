@@ -1,5 +1,7 @@
 package shared
 
+// ProductionVariantSummary
+// Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateEndpointWeightsAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values.
 type ProductionVariantSummary struct {
 	CurrentInstanceCount *int64          `json:"CurrentInstanceCount,omitempty"`
 	CurrentWeight        *float32        `json:"CurrentWeight,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AliasContextKindEnum {
-    KindUnspecified = "KIND_UNSPECIFIED"
-,    Fixed = "FIXED"
-,    Movable = "MOVABLE"
-,    Other = "OTHER"
+    KindUnspecified = "KIND_UNSPECIFIED",
+    Fixed = "FIXED",
+    Movable = "MOVABLE",
+    Other = "OTHER"
 }
 
 
@@ -13,9 +14,9 @@ export enum AliasContextKindEnum {
  * An alias to a repo revision.
 **/
 export class AliasContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: AliasContextKindEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingStatusEnum } from "./streamingstatusenum";
+
 
 
 // CognitoStreams
@@ -7,12 +8,12 @@ import { StreamingStatusEnum } from "./streamingstatusenum";
  * Configuration options for configure Cognito streams.
 **/
 export class CognitoStreams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName?: string;
 
-  @Metadata({ data: "json, name=StreamingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=StreamingStatus" })
   streamingStatus?: StreamingStatusEnum;
 }

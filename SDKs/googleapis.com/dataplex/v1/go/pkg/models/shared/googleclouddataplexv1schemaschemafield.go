@@ -30,6 +30,8 @@ const (
 	GoogleCloudDataplexV1SchemaSchemaFieldTypeEnumNull            GoogleCloudDataplexV1SchemaSchemaFieldTypeEnum = "NULL"
 )
 
+// GoogleCloudDataplexV1SchemaSchemaField
+// Represents a column field within a table schema.
 type GoogleCloudDataplexV1SchemaSchemaField struct {
 	Description *string                                         `json:"description,omitempty"`
 	Fields      []GoogleCloudDataplexV1SchemaSchemaField        `json:"fields,omitempty"`

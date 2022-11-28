@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class UpdateLicensePathParams:
-    license_number: str = field(default=None, metadata={'path_param': { 'field_name': 'licenseNumber', 'style': 'simple', 'explode': False }})
+    license_number: str = field(metadata={'path_param': { 'field_name': 'licenseNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class UpdateLicenseRequestBody:
 
 @dataclass
 class UpdateLicenseSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class UpdateLicenseRequest:
-    path_params: UpdateLicensePathParams = field(default=None)
+    path_params: UpdateLicensePathParams = field()
+    security: UpdateLicenseSecurity = field()
     request: Optional[UpdateLicenseRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateLicenseSecurity = field(default=None)
     
 
 @dataclass
 class UpdateLicenseResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensing: Optional[Any] = field(default=None)
     

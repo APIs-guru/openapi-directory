@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3Environment } from "./googleclouddialogflowcxv3environment";
+
 
 
 // GoogleCloudDialogflowCxV3LookupEnvironmentHistoryResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowCxV3Environment } from "./googleclouddialogflowcxv
  * The response message for Environments.LookupEnvironmentHistory.
 **/
 export class GoogleCloudDialogflowCxV3LookupEnvironmentHistoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environments", elemType: shared.GoogleCloudDialogflowCxV3Environment })
+  @SpeakeasyMetadata({ data: "json, name=environments", elemType: GoogleCloudDialogflowCxV3Environment })
   environments?: GoogleCloudDialogflowCxV3Environment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

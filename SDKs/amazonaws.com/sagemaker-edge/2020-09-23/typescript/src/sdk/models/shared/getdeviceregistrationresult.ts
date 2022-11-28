@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDeviceRegistrationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CacheTTL" })
+  @SpeakeasyMetadata({ data: "json, name=CacheTTL" })
   cacheTtl?: string;
 
-  @Metadata({ data: "json, name=DeviceRegistration" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceRegistration" })
   deviceRegistration?: string;
 }

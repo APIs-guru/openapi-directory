@@ -1,10 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { FilterRule } from "./filterrule";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterRule } from "./filterrule";
 import { Options } from "./options";
 import { TaskExecutionResultDetail } from "./taskexecutionresultdetail";
 import { TaskExecutionStatusEnum } from "./taskexecutionstatusenum";
+
 
 
 // DescribeTaskExecutionResponse
@@ -12,39 +11,39 @@ import { TaskExecutionStatusEnum } from "./taskexecutionstatusenum";
  * DescribeTaskExecutionResponse
 **/
 export class DescribeTaskExecutionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BytesTransferred" })
+  @SpeakeasyMetadata({ data: "json, name=BytesTransferred" })
   bytesTransferred?: number;
 
-  @Metadata({ data: "json, name=BytesWritten" })
+  @SpeakeasyMetadata({ data: "json, name=BytesWritten" })
   bytesWritten?: number;
 
-  @Metadata({ data: "json, name=EstimatedBytesToTransfer" })
+  @SpeakeasyMetadata({ data: "json, name=EstimatedBytesToTransfer" })
   estimatedBytesToTransfer?: number;
 
-  @Metadata({ data: "json, name=EstimatedFilesToTransfer" })
+  @SpeakeasyMetadata({ data: "json, name=EstimatedFilesToTransfer" })
   estimatedFilesToTransfer?: number;
 
-  @Metadata({ data: "json, name=Excludes", elemType: shared.FilterRule })
+  @SpeakeasyMetadata({ data: "json, name=Excludes", elemType: FilterRule })
   excludes?: FilterRule[];
 
-  @Metadata({ data: "json, name=FilesTransferred" })
+  @SpeakeasyMetadata({ data: "json, name=FilesTransferred" })
   filesTransferred?: number;
 
-  @Metadata({ data: "json, name=Includes", elemType: shared.FilterRule })
+  @SpeakeasyMetadata({ data: "json, name=Includes", elemType: FilterRule })
   includes?: FilterRule[];
 
-  @Metadata({ data: "json, name=Options" })
+  @SpeakeasyMetadata({ data: "json, name=Options" })
   options?: Options;
 
-  @Metadata({ data: "json, name=Result" })
+  @SpeakeasyMetadata({ data: "json, name=Result" })
   result?: TaskExecutionResultDetail;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TaskExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=TaskExecutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=TaskExecutionArn" })
   taskExecutionArn?: string;
 }

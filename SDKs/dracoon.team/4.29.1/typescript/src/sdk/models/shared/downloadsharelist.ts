@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DownloadShare } from "./downloadshare";
 import { Range } from "./range";
+
 
 
 // DownloadShareList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of Download Shares
 **/
 export class DownloadShareList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.DownloadShare })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: DownloadShare })
   items: DownloadShare[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerBudgetUpdatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    billing_id: str = field(default=None, metadata={'path_param': { 'field_name': 'billingId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    billing_id: str = field(metadata={'path_param': { 'field_name': 'billingId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +26,21 @@ class AdexchangebuyerBudgetUpdateQueryParams:
 
 @dataclass
 class AdexchangebuyerBudgetUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerBudgetUpdateRequest:
-    path_params: AdexchangebuyerBudgetUpdatePathParams = field(default=None)
-    query_params: AdexchangebuyerBudgetUpdateQueryParams = field(default=None)
+    path_params: AdexchangebuyerBudgetUpdatePathParams = field()
+    query_params: AdexchangebuyerBudgetUpdateQueryParams = field()
+    security: AdexchangebuyerBudgetUpdateSecurity = field()
     request: Optional[shared.Budget] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerBudgetUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerBudgetUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     budget: Optional[shared.Budget] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContaineranalysisProvidersNotesGetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ContaineranalysisProvidersNotesGetIamPolicyQueryParams:
 
 @dataclass
 class ContaineranalysisProvidersNotesGetIamPolicySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContaineranalysisProvidersNotesGetIamPolicyRequest:
-    path_params: ContaineranalysisProvidersNotesGetIamPolicyPathParams = field(default=None)
-    query_params: ContaineranalysisProvidersNotesGetIamPolicyQueryParams = field(default=None)
+    path_params: ContaineranalysisProvidersNotesGetIamPolicyPathParams = field()
+    query_params: ContaineranalysisProvidersNotesGetIamPolicyQueryParams = field()
+    security: ContaineranalysisProvidersNotesGetIamPolicySecurity = field()
     request: Optional[shared.GetIamPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContaineranalysisProvidersNotesGetIamPolicySecurity = field(default=None)
     
 
 @dataclass
 class ContaineranalysisProvidersNotesGetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     policy: Optional[shared.Policy] = field(default=None)
-    status_code: int = field(default=None)
     

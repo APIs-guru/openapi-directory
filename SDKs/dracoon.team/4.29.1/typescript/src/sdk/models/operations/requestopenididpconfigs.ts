@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestOpenIdIdpConfigsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RequestOpenIdIdpConfigsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestOpenIdIdpConfigsHeaders;
 }
 
 
 export class RequestOpenIdIdpConfigsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata({ elemType: shared.OpenIdIdpConfig })
+  @SpeakeasyMetadata({ elemType: shared.OpenIdIdpConfig })
   openIdIdpConfigs?: shared.OpenIdIdpConfig[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

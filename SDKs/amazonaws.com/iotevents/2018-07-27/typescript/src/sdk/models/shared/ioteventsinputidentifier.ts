@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IotEventsInputIdentifier
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The identifier of the input routed to AWS IoT Events. 
 **/
 export class IotEventsInputIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputName" })
+  @SpeakeasyMetadata({ data: "json, name=inputName" })
   inputName: string;
 }

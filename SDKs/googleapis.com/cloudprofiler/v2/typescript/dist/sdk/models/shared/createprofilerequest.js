@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Deployment } from "./deployment";
 export var CreateProfileRequestProfileTypeEnum;
 (function (CreateProfileRequestProfileTypeEnum) {
@@ -45,11 +45,11 @@ var CreateProfileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deployment" }),
+        SpeakeasyMetadata({ data: "json, name=deployment" }),
         __metadata("design:type", Deployment)
     ], CreateProfileRequest.prototype, "deployment", void 0);
     __decorate([
-        Metadata({ data: "json, name=profileType" }),
+        SpeakeasyMetadata({ data: "json, name=profileType" }),
         __metadata("design:type", Array)
     ], CreateProfileRequest.prototype, "profileType", void 0);
     return CreateProfileRequest;

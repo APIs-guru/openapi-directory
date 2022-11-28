@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ImageTagPredictionModel = /** @class */ (function (_super) {
     __extends(ImageTagPredictionModel, _super);
     function ImageTagPredictionModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Probability" }),
+        SpeakeasyMetadata({ data: "json, name=Probability" }),
         __metadata("design:type", Number)
     ], ImageTagPredictionModel.prototype, "probability", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tag" }),
+        SpeakeasyMetadata({ data: "json, name=Tag" }),
         __metadata("design:type", String)
     ], ImageTagPredictionModel.prototype, "tag", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagId" }),
+        SpeakeasyMetadata({ data: "json, name=TagId" }),
         __metadata("design:type", String)
     ], ImageTagPredictionModel.prototype, "tagId", void 0);
     return ImageTagPredictionModel;

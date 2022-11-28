@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LookupDetails
 /**
  * Details about a lookup column whose value comes from the associated relationship.
@@ -33,11 +33,11 @@ var LookupDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=relationshipColumn" }),
+        SpeakeasyMetadata({ data: "json, name=relationshipColumn" }),
         __metadata("design:type", String)
     ], LookupDetails.prototype, "relationshipColumn", void 0);
     __decorate([
-        Metadata({ data: "json, name=relationshipColumnId" }),
+        SpeakeasyMetadata({ data: "json, name=relationshipColumnId" }),
         __metadata("design:type", String)
     ], LookupDetails.prototype, "relationshipColumnId", void 0);
     return LookupDetails;

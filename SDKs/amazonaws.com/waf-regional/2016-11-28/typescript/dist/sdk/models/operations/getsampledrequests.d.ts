@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetSampledRequestsXAmzTargetEnum {
     AwswafRegional20161128GetSampledRequests = "AWSWAF_Regional_20161128.GetSampledRequests"

@@ -10,14 +10,14 @@ class CreateRadiusConfigHeaders:
 
 @dataclass
 class CreateRadiusConfigRequest:
-    headers: CreateRadiusConfigHeaders = field(default=None)
-    request: shared.RadiusConfigCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRadiusConfigHeaders = field()
+    request: shared.RadiusConfigCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRadiusConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     radius_config: Optional[shared.RadiusConfig] = field(default=None)
-    status_code: int = field(default=None)
     

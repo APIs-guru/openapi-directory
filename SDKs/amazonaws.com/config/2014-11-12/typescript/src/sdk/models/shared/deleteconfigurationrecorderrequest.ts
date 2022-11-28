@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteConfigurationRecorderRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request object for the <code>DeleteConfigurationRecorder</code> action.
 **/
 export class DeleteConfigurationRecorderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationRecorderName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationRecorderName" })
   configurationRecorderName: string;
 }

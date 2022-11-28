@@ -1,6 +1,7 @@
 
 
+
 export enum DimensionTypeEnum {
-    Inclusive = "INCLUSIVE"
-,    Exclusive = "EXCLUSIVE"
+    Inclusive = "INCLUSIVE",
+    Exclusive = "EXCLUSIVE"
 }

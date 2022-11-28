@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Key } from "./key";
+
 
 
 // ReserveIdsRequest
@@ -8,9 +8,9 @@ import { Key } from "./key";
  * The request for Datastore.ReserveIds.
 **/
 export class ReserveIdsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseId" })
+  @SpeakeasyMetadata({ data: "json, name=databaseId" })
   databaseId?: string;
 
-  @Metadata({ data: "json, name=keys", elemType: shared.Key })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: Key })
   keys?: Key[];
 }

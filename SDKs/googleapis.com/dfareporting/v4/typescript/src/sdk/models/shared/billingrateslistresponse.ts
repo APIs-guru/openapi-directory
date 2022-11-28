@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingRate } from "./billingrate";
+
 
 
 // BillingRatesListResponse
@@ -8,12 +8,12 @@ import { BillingRate } from "./billingrate";
  * Billing Rate List Response
 **/
 export class BillingRatesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingRates", elemType: shared.BillingRate })
+  @SpeakeasyMetadata({ data: "json, name=billingRates", elemType: BillingRate })
   billingRates?: BillingRate[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

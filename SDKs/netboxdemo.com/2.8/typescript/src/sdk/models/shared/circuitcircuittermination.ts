@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedInterface } from "./nestedinterface";
 import { NestedSite } from "./nestedsite";
 
 
+
 export class CircuitCircuitTermination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connected_endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=connected_endpoint" })
   connectedEndpoint: NestedInterface;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=port_speed" })
+  @SpeakeasyMetadata({ data: "json, name=port_speed" })
   portSpeed: number;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site: NestedSite;
 
-  @Metadata({ data: "json, name=upstream_speed" })
+  @SpeakeasyMetadata({ data: "json, name=upstream_speed" })
   upstreamSpeed?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=xconnect_id" })
+  @SpeakeasyMetadata({ data: "json, name=xconnect_id" })
   xconnectId?: string;
 }

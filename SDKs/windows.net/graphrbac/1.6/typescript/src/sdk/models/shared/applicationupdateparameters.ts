@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppRole } from "./approle";
 import { GroupMembershipClaimsEnum } from "./groupmembershipclaimsenum";
 import { InformationalUrl } from "./informationalurl";
@@ -8,101 +7,102 @@ import { OptionalClaims } from "./optionalclaims";
 import { PreAuthorizedApplication } from "./preauthorizedapplication";
 
 
+
 // ApplicationUpdateParameters
 /** 
  * Request parameters for updating a new application.
 **/
 export class ApplicationUpdateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowGuestsSignIn" })
+  @SpeakeasyMetadata({ data: "json, name=allowGuestsSignIn" })
   allowGuestsSignIn?: boolean;
 
-  @Metadata({ data: "json, name=allowPassthroughUsers" })
+  @SpeakeasyMetadata({ data: "json, name=allowPassthroughUsers" })
   allowPassthroughUsers?: boolean;
 
-  @Metadata({ data: "json, name=appLogoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=appLogoUrl" })
   appLogoUrl?: string;
 
-  @Metadata({ data: "json, name=appPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=appPermissions" })
   appPermissions?: string[];
 
-  @Metadata({ data: "json, name=appRoles", elemType: shared.AppRole })
+  @SpeakeasyMetadata({ data: "json, name=appRoles", elemType: AppRole })
   appRoles?: AppRole[];
 
-  @Metadata({ data: "json, name=availableToOtherTenants" })
+  @SpeakeasyMetadata({ data: "json, name=availableToOtherTenants" })
   availableToOtherTenants?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=errorUrl" })
+  @SpeakeasyMetadata({ data: "json, name=errorUrl" })
   errorUrl?: string;
 
-  @Metadata({ data: "json, name=groupMembershipClaims" })
+  @SpeakeasyMetadata({ data: "json, name=groupMembershipClaims" })
   groupMembershipClaims?: GroupMembershipClaimsEnum;
 
-  @Metadata({ data: "json, name=homepage" })
+  @SpeakeasyMetadata({ data: "json, name=homepage" })
   homepage?: string;
 
-  @Metadata({ data: "json, name=identifierUris" })
+  @SpeakeasyMetadata({ data: "json, name=identifierUris" })
   identifierUris?: string[];
 
-  @Metadata({ data: "json, name=informationalUrls" })
+  @SpeakeasyMetadata({ data: "json, name=informationalUrls" })
   informationalUrls?: InformationalUrl;
 
-  @Metadata({ data: "json, name=isDeviceOnlyAuthSupported" })
+  @SpeakeasyMetadata({ data: "json, name=isDeviceOnlyAuthSupported" })
   isDeviceOnlyAuthSupported?: boolean;
 
-  @Metadata({ data: "json, name=keyCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=keyCredentials" })
   keyCredentials?: Map<string, Map<string, any>>[];
 
-  @Metadata({ data: "json, name=knownClientApplications" })
+  @SpeakeasyMetadata({ data: "json, name=knownClientApplications" })
   knownClientApplications?: string[];
 
-  @Metadata({ data: "json, name=logoutUrl" })
+  @SpeakeasyMetadata({ data: "json, name=logoutUrl" })
   logoutUrl?: string;
 
-  @Metadata({ data: "json, name=oauth2AllowImplicitFlow" })
+  @SpeakeasyMetadata({ data: "json, name=oauth2AllowImplicitFlow" })
   oauth2AllowImplicitFlow?: boolean;
 
-  @Metadata({ data: "json, name=oauth2AllowUrlPathMatching" })
+  @SpeakeasyMetadata({ data: "json, name=oauth2AllowUrlPathMatching" })
   oauth2AllowUrlPathMatching?: boolean;
 
-  @Metadata({ data: "json, name=oauth2Permissions", elemType: shared.OAuth2Permission })
+  @SpeakeasyMetadata({ data: "json, name=oauth2Permissions", elemType: OAuth2Permission })
   oauth2Permissions?: OAuth2Permission[];
 
-  @Metadata({ data: "json, name=oauth2RequirePostResponse" })
+  @SpeakeasyMetadata({ data: "json, name=oauth2RequirePostResponse" })
   oauth2RequirePostResponse?: boolean;
 
-  @Metadata({ data: "json, name=optionalClaims" })
+  @SpeakeasyMetadata({ data: "json, name=optionalClaims" })
   optionalClaims?: OptionalClaims;
 
-  @Metadata({ data: "json, name=orgRestrictions" })
+  @SpeakeasyMetadata({ data: "json, name=orgRestrictions" })
   orgRestrictions?: string[];
 
-  @Metadata({ data: "json, name=passwordCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=passwordCredentials" })
   passwordCredentials?: Map<string, Map<string, any>>[];
 
-  @Metadata({ data: "json, name=preAuthorizedApplications", elemType: shared.PreAuthorizedApplication })
+  @SpeakeasyMetadata({ data: "json, name=preAuthorizedApplications", elemType: PreAuthorizedApplication })
   preAuthorizedApplications?: PreAuthorizedApplication[];
 
-  @Metadata({ data: "json, name=publicClient" })
+  @SpeakeasyMetadata({ data: "json, name=publicClient" })
   publicClient?: boolean;
 
-  @Metadata({ data: "json, name=publisherDomain" })
+  @SpeakeasyMetadata({ data: "json, name=publisherDomain" })
   publisherDomain?: string;
 
-  @Metadata({ data: "json, name=replyUrls" })
+  @SpeakeasyMetadata({ data: "json, name=replyUrls" })
   replyUrls?: string[];
 
-  @Metadata({ data: "json, name=requiredResourceAccess" })
+  @SpeakeasyMetadata({ data: "json, name=requiredResourceAccess" })
   requiredResourceAccess?: Map<string, Map<string, any>>[];
 
-  @Metadata({ data: "json, name=samlMetadataUrl" })
+  @SpeakeasyMetadata({ data: "json, name=samlMetadataUrl" })
   samlMetadataUrl?: string;
 
-  @Metadata({ data: "json, name=signInAudience" })
+  @SpeakeasyMetadata({ data: "json, name=signInAudience" })
   signInAudience?: string;
 
-  @Metadata({ data: "json, name=wwwHomepage" })
+  @SpeakeasyMetadata({ data: "json, name=wwwHomepage" })
   wwwHomepage?: string;
 }

@@ -22,10 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Destination } from "./destination";
+import { MatchingCriteria } from "./matchingcriteria";
 import { Transport } from "./transport";
+import { TransportInput } from "./transport";
 // Trigger
 /**
  * A representation of the trigger resource.
@@ -36,41 +37,77 @@ var Trigger = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Trigger.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", Destination)
     ], Trigger.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Trigger.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Trigger.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=matchingCriteria", elemType: shared.MatchingCriteria }),
+        SpeakeasyMetadata({ data: "json, name=matchingCriteria", elemType: MatchingCriteria }),
         __metadata("design:type", Array)
     ], Trigger.prototype, "matchingCriteria", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Trigger.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], Trigger.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=transport" }),
+        SpeakeasyMetadata({ data: "json, name=transport" }),
         __metadata("design:type", Transport)
     ], Trigger.prototype, "transport", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Trigger.prototype, "updateTime", void 0);
     return Trigger;
 }(SpeakeasyBase));
 export { Trigger };
+// TriggerInput
+/**
+ * A representation of the trigger resource.
+**/
+var TriggerInput = /** @class */ (function (_super) {
+    __extends(TriggerInput, _super);
+    function TriggerInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=destination" }),
+        __metadata("design:type", Destination)
+    ], TriggerInput.prototype, "destination", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], TriggerInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=matchingCriteria", elemType: MatchingCriteria }),
+        __metadata("design:type", Array)
+    ], TriggerInput.prototype, "matchingCriteria", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], TriggerInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
+        __metadata("design:type", String)
+    ], TriggerInput.prototype, "serviceAccount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=transport" }),
+        __metadata("design:type", TransportInput)
+    ], TriggerInput.prototype, "transport", void 0);
+    return TriggerInput;
+}(SpeakeasyBase));
+export { TriggerInput };

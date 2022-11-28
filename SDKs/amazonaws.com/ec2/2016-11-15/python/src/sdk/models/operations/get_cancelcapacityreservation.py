@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCancelCapacityReservationActionEnum(str, Enum):
     CANCEL_CAPACITY_RESERVATION = "CancelCapacityReservation"
@@ -10,10 +14,10 @@ class GetCancelCapacityReservationVersionEnum(str, Enum):
 
 @dataclass
 class GetCancelCapacityReservationQueryParams:
-    action: GetCancelCapacityReservationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    capacity_reservation_id: str = field(default=None, metadata={'query_param': { 'field_name': 'CapacityReservationId', 'style': 'form', 'explode': True }})
+    action: GetCancelCapacityReservationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    capacity_reservation_id: str = field(metadata={'query_param': { 'field_name': 'CapacityReservationId', 'style': 'form', 'explode': True }})
+    version: GetCancelCapacityReservationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetCancelCapacityReservationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetCancelCapacityReservationHeaders:
 
 @dataclass
 class GetCancelCapacityReservationRequest:
-    query_params: GetCancelCapacityReservationQueryParams = field(default=None)
-    headers: GetCancelCapacityReservationHeaders = field(default=None)
+    headers: GetCancelCapacityReservationHeaders = field()
+    query_params: GetCancelCapacityReservationQueryParams = field()
     
 
 @dataclass
 class GetCancelCapacityReservationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -10,13 +10,13 @@ class RequestCustomerKeyPairHeaders:
 
 @dataclass
 class RequestCustomerKeyPairRequest:
-    headers: RequestCustomerKeyPairHeaders = field(default=None)
+    headers: RequestCustomerKeyPairHeaders = field()
     
 
 @dataclass
-class RequestCustomerKeyPairResponse:
-    content_type: str = field(default=None)
+class RequestCustomerKeyPairResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
-    user_key_pair_container: Optional[shared.UserKeyPairContainer] = field(default=None)
+    user_key_pair_container: Optional[shared.UserKeyPairContainerOutput] = field(default=None)
     

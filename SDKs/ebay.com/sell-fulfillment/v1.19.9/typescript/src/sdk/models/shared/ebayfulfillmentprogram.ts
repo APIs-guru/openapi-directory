@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EbayFulfillmentProgram
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type is used to provide details about an order line item being fulfilled by eBay or an eBay fulfillment partner.
 **/
 export class EbayFulfillmentProgram extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fulfilledBy" })
+  @SpeakeasyMetadata({ data: "json, name=fulfilledBy" })
   fulfilledBy?: string;
 }

@@ -7,6 +7,8 @@ const (
 	FieldTransformSetToServerValueEnumRequestTime            FieldTransformSetToServerValueEnum = "REQUEST_TIME"
 )
 
+// FieldTransform
+// A transformation of a field of the document.
 type FieldTransform struct {
 	AppendMissingElements *ArrayValue                         `json:"appendMissingElements,omitempty"`
 	FieldPath             *string                             `json:"fieldPath,omitempty"`

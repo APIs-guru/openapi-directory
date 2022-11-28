@@ -1,182 +1,183 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourcesMediaJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=collectionId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=collectionId" })
   collectionId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentAuthoredBeforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentAuthoredBeforeDate" })
   contentAuthoredBeforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentAuthoredInRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentAuthoredInRange" })
   contentAuthoredInRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentAuthoredSinceDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentAuthoredSinceDate" })
   contentAuthoredSinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentPublishedBeforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentPublishedBeforeDate" })
   contentPublishedBeforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentPublishedInRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentPublishedInRange" })
   contentPublishedInRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentPublishedSinceDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentPublishedSinceDate" })
   contentPublishedSinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentReviewedBeforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentReviewedBeforeDate" })
   contentReviewedBeforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentReviewedInRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentReviewedInRange" })
   contentReviewedInRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentReviewedSinceDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentReviewedSinceDate" })
   contentReviewedSinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentUpdatedBeforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentUpdatedBeforeDate" })
   contentUpdatedBeforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentUpdatedInRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentUpdatedInRange" })
   contentUpdatedInRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=contentUpdatedSinceDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=contentUpdatedSinceDate" })
   contentUpdatedSinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=createdBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=customThumbnailUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=customThumbnailUrl" })
   customThumbnailUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=customThumbnailUrlContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=customThumbnailUrlContains" })
   customThumbnailUrlContains?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=dateContentAuthored" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=dateContentAuthored" })
   dateContentAuthored?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=dateContentPublished" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=dateContentPublished" })
   dateContentPublished?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=dateContentReviewed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=dateContentReviewed" })
   dateContentReviewed?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=dateContentUpdated" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=dateContentUpdated" })
   dateContentUpdated?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=dateSyndicationCaptured" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=dateSyndicationCaptured" })
   dateSyndicationCaptured?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=dateSyndicationUpdated" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=dateSyndicationUpdated" })
   dateSyndicationUpdated?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=descriptionContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=descriptionContains" })
   descriptionContains?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=hash" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=hash" })
   hash?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=hashContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=hashContains" })
   hashContains?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=languageId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=languageId" })
   languageId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=languageIsoCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=languageIsoCode" })
   languageIsoCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=languageName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=languageName" })
   languageName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=mediaTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=mediaTypes" })
   mediaTypes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=nameContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=nameContains" })
   nameContains?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=order" })
   order?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=restrictToSet" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=restrictToSet" })
   restrictToSet?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sourceAcronym" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceAcronym" })
   sourceAcronym?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sourceAcronymContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceAcronymContains" })
   sourceAcronymContains?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sourceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceId" })
   sourceId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sourceName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceName" })
   sourceName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sourceNameContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceNameContains" })
   sourceNameContains?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sourceUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceUrl" })
   sourceUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=sourceUrlContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceUrlContains" })
   sourceUrlContains?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationCapturedBeforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationCapturedBeforeDate" })
   syndicationCapturedBeforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationCapturedInRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationCapturedInRange" })
   syndicationCapturedInRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationCapturedSinceDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationCapturedSinceDate" })
   syndicationCapturedSinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationUpdatedBeforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationUpdatedBeforeDate" })
   syndicationUpdatedBeforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationUpdatedInRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationUpdatedInRange" })
   syndicationUpdatedInRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationUpdatedSinceDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationUpdatedSinceDate" })
   syndicationUpdatedSinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationVisibleBeforeDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationVisibleBeforeDate" })
   syndicationVisibleBeforeDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationVisibleInRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationVisibleInRange" })
   syndicationVisibleInRange?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=syndicationVisibleSinceDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=syndicationVisibleSinceDate" })
   syndicationVisibleSinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=tagIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tagIds" })
   tagIds?: string;
 }
 
 
 export class GetResourcesMediaJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResourcesMediaJsonQueryParams;
 }
 
 
 export class GetResourcesMediaJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MediaItemWrapped })
+  @SpeakeasyMetadata({ elemType: shared.MediaItemWrapped })
   mediaItemWrappeds?: shared.MediaItemWrapped[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

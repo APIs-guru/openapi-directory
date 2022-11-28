@@ -10,6 +10,8 @@ const (
 	VideoFileDetailsVideoStreamRotationEnumOther            VideoFileDetailsVideoStreamRotationEnum = "other"
 )
 
+// VideoFileDetailsVideoStream
+// Information about a video stream.
 type VideoFileDetailsVideoStream struct {
 	AspectRatio  *float64                                 `json:"aspectRatio,omitempty"`
 	BitrateBps   *string                                  `json:"bitrateBps,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SasPortalDeployment
@@ -6,15 +7,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Deployment.
 **/
 export class SasPortalDeployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=frns" })
+  @SpeakeasyMetadata({ data: "json, name=frns" })
   frns?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sasUserIds" })
+  @SpeakeasyMetadata({ data: "json, name=sasUserIds" })
+  sasUserIds?: string[];
+}
+
+
+// SasPortalDeploymentInput
+/** 
+ * The Deployment.
+**/
+export class SasPortalDeploymentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sasUserIds" })
   sasUserIds?: string[];
 }

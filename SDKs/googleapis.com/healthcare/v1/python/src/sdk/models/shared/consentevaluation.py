@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ConsentEvaluationEvaluationResultEnum(str, Enum):
     EVALUATION_RESULT_UNSPECIFIED = "EVALUATION_RESULT_UNSPECIFIED"
@@ -13,5 +15,9 @@ class ConsentEvaluationEvaluationResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConsentEvaluation:
-    evaluation_result: Optional[ConsentEvaluationEvaluationResultEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluationResult' }})
+    r"""ConsentEvaluation
+    The detailed evaluation of a particular Consent.
+    """
+    
+    evaluation_result: Optional[ConsentEvaluationEvaluationResultEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluationResult') }})
     

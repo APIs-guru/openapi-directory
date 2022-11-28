@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var OsConstraintOsTypeEnum;
 (function (OsConstraintOsTypeEnum) {
     OsConstraintOsTypeEnum["OsUnspecified"] = "OS_UNSPECIFIED";
@@ -43,15 +43,15 @@ var OsConstraint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=minimumVersion" }),
+        SpeakeasyMetadata({ data: "json, name=minimumVersion" }),
         __metadata("design:type", String)
     ], OsConstraint.prototype, "minimumVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=osType" }),
+        SpeakeasyMetadata({ data: "json, name=osType" }),
         __metadata("design:type", String)
     ], OsConstraint.prototype, "osType", void 0);
     __decorate([
-        Metadata({ data: "json, name=requireVerifiedChromeOs" }),
+        SpeakeasyMetadata({ data: "json, name=requireVerifiedChromeOs" }),
         __metadata("design:type", Boolean)
     ], OsConstraint.prototype, "requireVerifiedChromeOs", void 0);
     return OsConstraint;

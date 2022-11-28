@@ -22,6 +22,8 @@ const (
 	ActionStatusStatusCodeEnumDataLoss           ActionStatusStatusCodeEnum = "DATA_LOSS"
 )
 
+// ActionStatus
+// Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs).
 type ActionStatus struct {
 	StatusCode        *ActionStatusStatusCodeEnum `json:"statusCode,omitempty"`
 	UserFacingMessage *string                     `json:"userFacingMessage,omitempty"`

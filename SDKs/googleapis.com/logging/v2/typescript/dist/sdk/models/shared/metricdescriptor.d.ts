@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LabelDescriptor } from "./labeldescriptor";
 import { MetricDescriptorMetadata } from "./metricdescriptormetadata";
 export declare enum MetricDescriptorLaunchStageEnum {

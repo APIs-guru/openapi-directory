@@ -14,6 +14,8 @@ type CreateRecordingConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateRecordingConfigurationRequestBodyDestinationConfiguration
+// A complex type that describes a location where recorded videos will be stored. Each member represents a type of destination configuration. For recording, you define one and only one type of destination configuration.
 type CreateRecordingConfigurationRequestBodyDestinationConfiguration struct {
 	S3 *shared.S3DestinationConfiguration `json:"s3,omitempty"`
 }

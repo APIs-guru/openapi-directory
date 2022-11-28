@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PageviewsCountsTimeRangeEnum;
 (function (PageviewsCountsTimeRangeEnum) {
     PageviewsCountsTimeRangeEnum["AllTime"] = "ALL_TIME";
@@ -36,11 +35,11 @@ var PageviewsCounts = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", String)
     ], PageviewsCounts.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeRange" }),
+        SpeakeasyMetadata({ data: "json, name=timeRange" }),
         __metadata("design:type", String)
     ], PageviewsCounts.prototype, "timeRange", void 0);
     return PageviewsCounts;
@@ -52,15 +51,15 @@ var Pageviews = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blogId" }),
+        SpeakeasyMetadata({ data: "json, name=blogId" }),
         __metadata("design:type", String)
     ], Pageviews.prototype, "blogId", void 0);
     __decorate([
-        Metadata({ data: "json, name=counts", elemType: shared.PageviewsCounts }),
+        SpeakeasyMetadata({ data: "json, name=counts", elemType: PageviewsCounts }),
         __metadata("design:type", Array)
     ], Pageviews.prototype, "counts", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Pageviews.prototype, "kind", void 0);
     return Pageviews;

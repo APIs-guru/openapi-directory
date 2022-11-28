@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportrecipientconfigjson
+from sdk import utils
+from . import *
 
 class ReportRecipientTypeEnum(str, Enum):
     EMAIL = "Email"
@@ -11,6 +13,6 @@ class ReportRecipientTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReportRecipient:
-    recipient_config_json: Optional[reportrecipientconfigjson.ReportRecipientConfigJSON] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recipient_config_json' }})
-    type: ReportRecipientTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: ReportRecipientTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    recipient_config_json: Optional[ReportRecipientConfigJSON] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recipient_config_json') }})
     

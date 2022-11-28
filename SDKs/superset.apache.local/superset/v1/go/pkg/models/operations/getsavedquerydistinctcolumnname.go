@@ -16,12 +16,6 @@ type GetSavedQueryDistinctColumnNameSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetSavedQueryDistinctColumnNameRequest struct {
-	PathParams  GetSavedQueryDistinctColumnNamePathParams
-	QueryParams GetSavedQueryDistinctColumnNameQueryParams
-	Security    GetSavedQueryDistinctColumnNameSecurity
-}
-
 type GetSavedQueryDistinctColumnName400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -36,6 +30,12 @@ type GetSavedQueryDistinctColumnName404ApplicationJSON struct {
 
 type GetSavedQueryDistinctColumnName500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetSavedQueryDistinctColumnNameRequest struct {
+	PathParams  GetSavedQueryDistinctColumnNamePathParams
+	QueryParams GetSavedQueryDistinctColumnNameQueryParams
+	Security    GetSavedQueryDistinctColumnNameSecurity
 }
 
 type GetSavedQueryDistinctColumnNameResponse struct {

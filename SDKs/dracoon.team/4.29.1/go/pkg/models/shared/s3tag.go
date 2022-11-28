@@ -1,5 +1,7 @@
 package shared
 
+// S3Tag
+// S3 tag information
 type S3Tag struct {
 	ID          *int64  `json:"id,omitempty"`
 	IsMandatory *bool   `json:"isMandatory,omitempty"`

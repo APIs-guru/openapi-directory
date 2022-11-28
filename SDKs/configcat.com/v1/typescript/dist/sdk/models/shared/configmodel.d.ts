@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProductModel } from "./productmodel";
 export declare class ConfigModel extends SpeakeasyBase {
     configId?: string;

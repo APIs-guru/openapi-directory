@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // DeleteFileSystemWindowsResponse
@@ -8,9 +8,9 @@ import { Tag } from "./tag";
  * The response object for the Microsoft Windows file system used in the <code>DeleteFileSystem</code> operation.
 **/
 export class DeleteFileSystemWindowsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FinalBackupId" })
+  @SpeakeasyMetadata({ data: "json, name=FinalBackupId" })
   finalBackupId?: string;
 
-  @Metadata({ data: "json, name=FinalBackupTags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=FinalBackupTags", elemType: Tag })
   finalBackupTags?: Tag[];
 }

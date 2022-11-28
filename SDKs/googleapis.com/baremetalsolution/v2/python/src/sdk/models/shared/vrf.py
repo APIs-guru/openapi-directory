@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import qospolicy
-from . import vlanattachment
+from sdk import utils
+from . import *
 
 class VrfStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -13,8 +14,12 @@ class VrfStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vrf:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    qos_policy: Optional[qospolicy.QosPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'qosPolicy' }})
-    state: Optional[VrfStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    vlan_attachments: Optional[List[vlanattachment.VlanAttachment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlanAttachments' }})
+    r"""Vrf
+    A network VRF.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    qos_policy: Optional[QosPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('qosPolicy') }})
+    state: Optional[VrfStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    vlan_attachments: Optional[List[VlanAttachment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanAttachments') }})
     

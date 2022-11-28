@@ -10,6 +10,8 @@ const (
 	DestinationNotCrawlableEvidenceReasonEnumUnknown           DestinationNotCrawlableEvidenceReasonEnum = "UNKNOWN"
 )
 
+// DestinationNotCrawlableEvidence
+// Evidence that the creative's destination URL was not crawlable by Google.
 type DestinationNotCrawlableEvidence struct {
 	CrawlTime  *string                                    `json:"crawlTime,omitempty"`
 	CrawledURL *string                                    `json:"crawledUrl,omitempty"`

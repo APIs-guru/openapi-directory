@@ -1,5 +1,7 @@
 package shared
 
+// ModelEvaluation
+// Evaluation results of a model.
 type ModelEvaluation struct {
 	AnnotationSpecID                      *string                                `json:"annotationSpecId,omitempty"`
 	ClassificationEvaluationMetrics       *ClassificationEvaluationMetrics       `json:"classificationEvaluationMetrics,omitempty"`

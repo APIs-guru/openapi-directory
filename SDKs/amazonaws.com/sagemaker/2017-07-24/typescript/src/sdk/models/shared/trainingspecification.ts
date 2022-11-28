@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricDefinition } from "./metricdefinition";
 import { HyperParameterSpecification } from "./hyperparameterspecification";
 import { TrainingInstanceTypeEnum } from "./traininginstancetypeenum";
@@ -7,32 +6,33 @@ import { HyperParameterTuningJobObjective } from "./hyperparametertuningjobobjec
 import { ChannelSpecification } from "./channelspecification";
 
 
+
 // TrainingSpecification
 /** 
  * Defines how the algorithm is used for a training job.
 **/
 export class TrainingSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetricDefinitions", elemType: shared.MetricDefinition })
+  @SpeakeasyMetadata({ data: "json, name=MetricDefinitions", elemType: MetricDefinition })
   metricDefinitions?: MetricDefinition[];
 
-  @Metadata({ data: "json, name=SupportedHyperParameters", elemType: shared.HyperParameterSpecification })
+  @SpeakeasyMetadata({ data: "json, name=SupportedHyperParameters", elemType: HyperParameterSpecification })
   supportedHyperParameters?: HyperParameterSpecification[];
 
-  @Metadata({ data: "json, name=SupportedTrainingInstanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedTrainingInstanceTypes" })
   supportedTrainingInstanceTypes: TrainingInstanceTypeEnum[];
 
-  @Metadata({ data: "json, name=SupportedTuningJobObjectiveMetrics", elemType: shared.HyperParameterTuningJobObjective })
+  @SpeakeasyMetadata({ data: "json, name=SupportedTuningJobObjectiveMetrics", elemType: HyperParameterTuningJobObjective })
   supportedTuningJobObjectiveMetrics?: HyperParameterTuningJobObjective[];
 
-  @Metadata({ data: "json, name=SupportsDistributedTraining" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsDistributedTraining" })
   supportsDistributedTraining?: boolean;
 
-  @Metadata({ data: "json, name=TrainingChannels", elemType: shared.ChannelSpecification })
+  @SpeakeasyMetadata({ data: "json, name=TrainingChannels", elemType: ChannelSpecification })
   trainingChannels: ChannelSpecification[];
 
-  @Metadata({ data: "json, name=TrainingImage" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingImage" })
   trainingImage: string;
 
-  @Metadata({ data: "json, name=TrainingImageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingImageDigest" })
   trainingImageDigest?: string;
 }

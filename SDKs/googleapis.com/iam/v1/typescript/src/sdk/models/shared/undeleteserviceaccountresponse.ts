@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccount } from "./serviceaccount";
 
 
+
 export class UndeleteServiceAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=restoredAccount" })
+  @SpeakeasyMetadata({ data: "json, name=restoredAccount" })
   restoredAccount?: ServiceAccount;
 }

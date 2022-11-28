@@ -1,7 +1,8 @@
 
 
+
 export enum HealthCheckProtocolEnum {
-    Tcp = "TCP"
-,    Http = "HTTP"
-,    Https = "HTTPS"
+    Tcp = "TCP",
+    Http = "HTTP",
+    Https = "HTTPS"
 }

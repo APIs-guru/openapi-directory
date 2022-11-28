@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlIntegration } from "./sqlintegration";
+
 
 
 // ListSqlIntegrationsResponse
@@ -8,12 +8,12 @@ import { SqlIntegration } from "./sqlintegration";
  * ListSqlIntegrationsResponse is the response message for ListSqlIntegrations method.
 **/
 export class ListSqlIntegrationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=sqlIntegrations", elemType: shared.SqlIntegration })
+  @SpeakeasyMetadata({ data: "json, name=sqlIntegrations", elemType: SqlIntegration })
   sqlIntegrations?: SqlIntegration[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

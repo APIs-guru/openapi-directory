@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchGetLinkAttributesResponse } from "./batchgetlinkattributesresponse";
 import { BatchGetObjectAttributesResponse } from "./batchgetobjectattributesresponse";
 import { BatchGetObjectInformationResponse } from "./batchgetobjectinformationresponse";
@@ -14,47 +14,48 @@ import { BatchListPolicyAttachmentsResponse } from "./batchlistpolicyattachments
 import { BatchLookupPolicyResponse } from "./batchlookuppolicyresponse";
 
 
+
 // BatchReadSuccessfulResponse
 /** 
  * Represents the output of a <code>BatchRead</code> success response operation.
 **/
 export class BatchReadSuccessfulResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GetLinkAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=GetLinkAttributes" })
   getLinkAttributes?: BatchGetLinkAttributesResponse;
 
-  @Metadata({ data: "json, name=GetObjectAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=GetObjectAttributes" })
   getObjectAttributes?: BatchGetObjectAttributesResponse;
 
-  @Metadata({ data: "json, name=GetObjectInformation" })
+  @SpeakeasyMetadata({ data: "json, name=GetObjectInformation" })
   getObjectInformation?: BatchGetObjectInformationResponse;
 
-  @Metadata({ data: "json, name=ListAttachedIndices" })
+  @SpeakeasyMetadata({ data: "json, name=ListAttachedIndices" })
   listAttachedIndices?: BatchListAttachedIndicesResponse;
 
-  @Metadata({ data: "json, name=ListIncomingTypedLinks" })
+  @SpeakeasyMetadata({ data: "json, name=ListIncomingTypedLinks" })
   listIncomingTypedLinks?: BatchListIncomingTypedLinksResponse;
 
-  @Metadata({ data: "json, name=ListIndex" })
+  @SpeakeasyMetadata({ data: "json, name=ListIndex" })
   listIndex?: BatchListIndexResponse;
 
-  @Metadata({ data: "json, name=ListObjectAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=ListObjectAttributes" })
   listObjectAttributes?: BatchListObjectAttributesResponse;
 
-  @Metadata({ data: "json, name=ListObjectChildren" })
+  @SpeakeasyMetadata({ data: "json, name=ListObjectChildren" })
   listObjectChildren?: BatchListObjectChildrenResponse;
 
-  @Metadata({ data: "json, name=ListObjectParentPaths" })
+  @SpeakeasyMetadata({ data: "json, name=ListObjectParentPaths" })
   listObjectParentPaths?: BatchListObjectParentPathsResponse;
 
-  @Metadata({ data: "json, name=ListObjectPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=ListObjectPolicies" })
   listObjectPolicies?: BatchListObjectPoliciesResponse;
 
-  @Metadata({ data: "json, name=ListOutgoingTypedLinks" })
+  @SpeakeasyMetadata({ data: "json, name=ListOutgoingTypedLinks" })
   listOutgoingTypedLinks?: BatchListOutgoingTypedLinksResponse;
 
-  @Metadata({ data: "json, name=ListPolicyAttachments" })
+  @SpeakeasyMetadata({ data: "json, name=ListPolicyAttachments" })
   listPolicyAttachments?: BatchListPolicyAttachmentsResponse;
 
-  @Metadata({ data: "json, name=LookupPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=LookupPolicy" })
   lookupPolicy?: BatchLookupPolicyResponse;
 }

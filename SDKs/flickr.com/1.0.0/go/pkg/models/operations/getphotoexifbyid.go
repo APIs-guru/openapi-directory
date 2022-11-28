@@ -6,10 +6,6 @@ type GetPhotoExifByIDQueryParams struct {
 	Secret  *string `queryParam:"style=form,explode=true,name=secret"`
 }
 
-type GetPhotoExifByIDRequest struct {
-	QueryParams GetPhotoExifByIDQueryParams
-}
-
 type GetPhotoExifByID200ApplicationJSONPhotoExifRaw struct {
 	Content *string `json:"_content,omitempty"`
 }
@@ -34,6 +30,10 @@ type GetPhotoExifByID200ApplicationJSONPhoto struct {
 type GetPhotoExifByID200ApplicationJSON struct {
 	Photo *GetPhotoExifByID200ApplicationJSONPhoto `json:"photo,omitempty"`
 	Stat  *string                                  `json:"stat,omitempty"`
+}
+
+type GetPhotoExifByIDRequest struct {
+	QueryParams GetPhotoExifByIDQueryParams
 }
 
 type GetPhotoExifByIDResponse struct {

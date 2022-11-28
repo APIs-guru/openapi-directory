@@ -1,0 +1,21 @@
+export var OperationTypeEnum;
+(function (OperationTypeEnum) {
+    OperationTypeEnum["RegisterDomain"] = "REGISTER_DOMAIN";
+    OperationTypeEnum["DeleteDomain"] = "DELETE_DOMAIN";
+    OperationTypeEnum["TransferInDomain"] = "TRANSFER_IN_DOMAIN";
+    OperationTypeEnum["UpdateDomainContact"] = "UPDATE_DOMAIN_CONTACT";
+    OperationTypeEnum["UpdateNameserver"] = "UPDATE_NAMESERVER";
+    OperationTypeEnum["ChangePrivacyProtection"] = "CHANGE_PRIVACY_PROTECTION";
+    OperationTypeEnum["DomainLock"] = "DOMAIN_LOCK";
+    OperationTypeEnum["EnableAutorenew"] = "ENABLE_AUTORENEW";
+    OperationTypeEnum["DisableAutorenew"] = "DISABLE_AUTORENEW";
+    OperationTypeEnum["AddDnssec"] = "ADD_DNSSEC";
+    OperationTypeEnum["RemoveDnssec"] = "REMOVE_DNSSEC";
+    OperationTypeEnum["ExpireDomain"] = "EXPIRE_DOMAIN";
+    OperationTypeEnum["TransferOutDomain"] = "TRANSFER_OUT_DOMAIN";
+    OperationTypeEnum["ChangeDomainOwner"] = "CHANGE_DOMAIN_OWNER";
+    OperationTypeEnum["RenewDomain"] = "RENEW_DOMAIN";
+    OperationTypeEnum["PushDomain"] = "PUSH_DOMAIN";
+    OperationTypeEnum["InternalTransferOutDomain"] = "INTERNAL_TRANSFER_OUT_DOMAIN";
+    OperationTypeEnum["InternalTransferInDomain"] = "INTERNAL_TRANSFER_IN_DOMAIN";
+})(OperationTypeEnum || (OperationTypeEnum = {}));

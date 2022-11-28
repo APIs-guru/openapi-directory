@@ -1,6 +1,7 @@
 
 
+
 export enum IpAddressAssignmentEnum {
-    Dhcp = "DHCP"
-,    Static = "STATIC"
+    Dhcp = "DHCP",
+    Static = "STATIC"
 }

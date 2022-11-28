@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2betaLifecycleDisabledPolicy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The policy that governs how to treat a disabled label, field, or selection choice in different contexts.
 **/
 export class GoogleAppsDriveLabelsV2betaLifecycleDisabledPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hideInSearch" })
+  @SpeakeasyMetadata({ data: "json, name=hideInSearch" })
   hideInSearch?: boolean;
 
-  @Metadata({ data: "json, name=showInApply" })
+  @SpeakeasyMetadata({ data: "json, name=showInApply" })
   showInApply?: boolean;
 }

@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import valuerange
+from sdk import utils
+from . import *
 
 class BatchUpdateValuesRequestResponseDateTimeRenderOptionEnum(str, Enum):
     SERIAL_NUMBER = "SERIAL_NUMBER"
@@ -21,9 +26,13 @@ class BatchUpdateValuesRequestValueInputOptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BatchUpdateValuesRequest:
-    data: Optional[List[valuerange.ValueRange]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    include_values_in_response: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'includeValuesInResponse' }})
-    response_date_time_render_option: Optional[BatchUpdateValuesRequestResponseDateTimeRenderOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseDateTimeRenderOption' }})
-    response_value_render_option: Optional[BatchUpdateValuesRequestResponseValueRenderOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseValueRenderOption' }})
-    value_input_option: Optional[BatchUpdateValuesRequestValueInputOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valueInputOption' }})
+    r"""BatchUpdateValuesRequest
+    The request for updating more than one range of values in a spreadsheet.
+    """
+    
+    data: Optional[List[ValueRange]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    include_values_in_response: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('includeValuesInResponse') }})
+    response_date_time_render_option: Optional[BatchUpdateValuesRequestResponseDateTimeRenderOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseDateTimeRenderOption') }})
+    response_value_render_option: Optional[BatchUpdateValuesRequestResponseValueRenderOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseValueRenderOption') }})
+    value_input_option: Optional[BatchUpdateValuesRequestValueInputOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valueInputOption') }})
     

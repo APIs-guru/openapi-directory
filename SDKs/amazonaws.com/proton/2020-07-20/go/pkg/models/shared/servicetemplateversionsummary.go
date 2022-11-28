@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceTemplateVersionSummary
+// A summary of the service template version detail data.
 type ServiceTemplateVersionSummary struct {
 	Arn                     string                    `json:"arn"`
 	CreatedAt               time.Time                 `json:"createdAt"`

@@ -1,17 +1,11 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetV4LayersScoutingObservationsScoutingObservationIdPathParams extends SpeakeasyBase {
     scoutingObservationId: string;
 }
-export declare class GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption2 extends SpeakeasyBase {
-    oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
 export declare class GetV4LayersScoutingObservationsScoutingObservationIdSecurity extends SpeakeasyBase {
-    option1?: GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption1;
-    option2?: GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption2;
+    apiKey?: shared.SchemeApiKey;
+    oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 export declare class GetV4LayersScoutingObservationsScoutingObservationIdRequest extends SpeakeasyBase {
     pathParams: GetV4LayersScoutingObservationsScoutingObservationIdPathParams;

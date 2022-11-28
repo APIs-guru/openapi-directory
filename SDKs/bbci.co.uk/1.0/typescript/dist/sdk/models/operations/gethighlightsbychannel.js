@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetHighlightsByChannelPathParams = /** @class */ (function (_super) {
     __extends(GetHighlightsByChannelPathParams, _super);
@@ -30,7 +30,7 @@ var GetHighlightsByChannelPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=channel" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel" }),
         __metadata("design:type", String)
     ], GetHighlightsByChannelPathParams.prototype, "channel", void 0);
     return GetHighlightsByChannelPathParams;
@@ -42,23 +42,23 @@ var GetHighlightsByChannelQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetHighlightsByChannelQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], GetHighlightsByChannelQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=live" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=live" }),
         __metadata("design:type", Boolean)
     ], GetHighlightsByChannelQueryParams.prototype, "live", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], GetHighlightsByChannelQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetHighlightsByChannelQueryParams.prototype, "rights", void 0);
     return GetHighlightsByChannelQueryParams;
@@ -70,11 +70,11 @@ var GetHighlightsByChannelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetHighlightsByChannelPathParams)
     ], GetHighlightsByChannelRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetHighlightsByChannelQueryParams)
     ], GetHighlightsByChannelRequest.prototype, "queryParams", void 0);
     return GetHighlightsByChannelRequest;
@@ -86,15 +86,15 @@ var GetHighlightsByChannelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetHighlightsByChannelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetHighlightsByChannelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetHighlightsByChannelResponse.prototype, "ibl", void 0);
     return GetHighlightsByChannelResponse;

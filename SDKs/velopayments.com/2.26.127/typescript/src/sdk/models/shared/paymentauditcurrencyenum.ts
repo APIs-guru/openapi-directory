@@ -1,7 +1,8 @@
 
 
+
 export enum PaymentAuditCurrencyEnum {
-    Usd = "USD"
-,    Gbp = "GBP"
-,    Eur = "EUR"
+    Usd = "USD",
+    Gbp = "GBP",
+    Eur = "EUR"
 }

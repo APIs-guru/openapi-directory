@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostCategoriesIdCategoryRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostCategoriesIdCategoryRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apply_to_all" })
+  @SpeakeasyMetadata({ data: "json, name=apply_to_all" })
   applyToAll?: boolean;
 
-  @Metadata({ data: "json, name=apply_to_uncategorised" })
+  @SpeakeasyMetadata({ data: "json, name=apply_to_uncategorised" })
   applyToUncategorised?: boolean;
 
-  @Metadata({ data: "json, name=payee_matches" })
+  @SpeakeasyMetadata({ data: "json, name=payee_matches" })
   payeeMatches: string;
 }
 
 
 export class PostCategoriesIdCategoryRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostCategoriesIdCategoryRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostCategoriesIdCategoryRulesRequestBody;
 }
 
 
 export class PostCategoriesIdCategoryRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   categoryRule?: shared.CategoryRule;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum SyncExecutionStatusEnum {
-    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    TimedOut = "TIMED_OUT"
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    TimedOut = "TIMED_OUT"
 }

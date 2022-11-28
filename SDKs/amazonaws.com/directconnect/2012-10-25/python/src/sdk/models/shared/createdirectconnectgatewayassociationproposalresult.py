@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import directconnectgatewayassociationproposal
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateDirectConnectGatewayAssociationProposalResult:
-    direct_connect_gateway_association_proposal: Optional[directconnectgatewayassociationproposal.DirectConnectGatewayAssociationProposal] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directConnectGatewayAssociationProposal' }})
+    direct_connect_gateway_association_proposal: Optional[DirectConnectGatewayAssociationProposal] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('directConnectGatewayAssociationProposal') }})
     

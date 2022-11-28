@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KafkaClusterClientAuthenticationTypeEnum } from "./kafkaclusterclientauthenticationtypeenum";
 // KafkaClusterClientAuthenticationDescription
 /**
@@ -34,7 +34,7 @@ var KafkaClusterClientAuthenticationDescription = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authenticationType" }),
+        SpeakeasyMetadata({ data: "json, name=authenticationType" }),
         __metadata("design:type", String)
     ], KafkaClusterClientAuthenticationDescription.prototype, "authenticationType", void 0);
     return KafkaClusterClientAuthenticationDescription;

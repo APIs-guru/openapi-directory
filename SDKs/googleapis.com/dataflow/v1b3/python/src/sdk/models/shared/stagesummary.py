@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metricupdate
-from . import progresstimeseries
-from . import stragglersummary
+from sdk import utils
+from . import *
 
 class StageSummaryStateEnum(str, Enum):
     EXECUTION_STATE_UNKNOWN = "EXECUTION_STATE_UNKNOWN"
@@ -17,11 +20,15 @@ class StageSummaryStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class StageSummary:
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    metrics: Optional[List[metricupdate.MetricUpdate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    progress: Optional[progresstimeseries.ProgressTimeseries] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    stage_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stageId' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    state: Optional[StageSummaryStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    straggler_summary: Optional[stragglersummary.StragglerSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stragglerSummary' }})
+    r"""StageSummary
+    Information about a particular execution stage of a job.
+    """
+    
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    metrics: Optional[List[MetricUpdate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
+    progress: Optional[ProgressTimeseries] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('progress') }})
+    stage_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageId') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    state: Optional[StageSummaryStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    straggler_summary: Optional[StragglerSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stragglerSummary') }})
     

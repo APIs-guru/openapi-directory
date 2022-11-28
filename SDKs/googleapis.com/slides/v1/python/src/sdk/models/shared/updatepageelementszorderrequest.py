@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UpdatePageElementsZOrderRequestOperationEnum(str, Enum):
     Z_ORDER_OPERATION_UNSPECIFIED = "Z_ORDER_OPERATION_UNSPECIFIED"
@@ -13,6 +18,10 @@ class UpdatePageElementsZOrderRequestOperationEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdatePageElementsZOrderRequest:
-    operation: Optional[UpdatePageElementsZOrderRequestOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
-    page_element_object_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageElementObjectIds' }})
+    r"""UpdatePageElementsZOrderRequest
+    Updates the Z-order of page elements. Z-order is an ordering of the elements on the page from back to front. The page element in the front may cover the elements that are behind it.
+    """
+    
+    operation: Optional[UpdatePageElementsZOrderRequestOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    page_element_object_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageElementObjectIds') }})
     

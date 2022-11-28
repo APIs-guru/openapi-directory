@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BooksMyconfigReleaseDownloadAccessQueryParams:
+    cpksver: str = field(metadata={'query_param': { 'field_name': 'cpksver', 'style': 'form', 'explode': True }})
+    volume_ids: List[str] = field(metadata={'query_param': { 'field_name': 'volumeIds', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
-    cpksver: str = field(default=None, metadata={'query_param': { 'field_name': 'cpksver', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     locale: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'locale', 'style': 'form', 'explode': True }})
@@ -19,24 +21,23 @@ class BooksMyconfigReleaseDownloadAccessQueryParams:
     source: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'source', 'style': 'form', 'explode': True }})
     upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
     upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
-    volume_ids: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'volumeIds', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class BooksMyconfigReleaseDownloadAccessSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksMyconfigReleaseDownloadAccessRequest:
-    query_params: BooksMyconfigReleaseDownloadAccessQueryParams = field(default=None)
-    security: BooksMyconfigReleaseDownloadAccessSecurity = field(default=None)
+    query_params: BooksMyconfigReleaseDownloadAccessQueryParams = field()
+    security: BooksMyconfigReleaseDownloadAccessSecurity = field()
     
 
 @dataclass
 class BooksMyconfigReleaseDownloadAccessResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     download_accesses: Optional[shared.DownloadAccesses] = field(default=None)
-    status_code: int = field(default=None)
     

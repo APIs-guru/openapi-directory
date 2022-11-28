@@ -22,98 +22,98 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SearchBioTaxonomyQueryParams = /** @class */ (function (_super) {
     __extends(SearchBioTaxonomyQueryParams, _super);
     function SearchBioTaxonomyQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
         __metadata("design:type", Date)
     ], SearchBioTaxonomyQueryParams.prototype, "changedateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
         __metadata("design:type", Date)
     ], SearchBioTaxonomyQueryParams.prototype, "changedateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
         __metadata("design:type", Date)
     ], SearchBioTaxonomyQueryParams.prototype, "createdateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
         __metadata("design:type", Date)
     ], SearchBioTaxonomyQueryParams.prototype, "createdateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "filesuffix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
         __metadata("design:type", Date)
     ], SearchBioTaxonomyQueryParams.prototype, "fromdate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], SearchBioTaxonomyQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
         __metadata("design:type", Number)
     ], SearchBioTaxonomyQueryParams.prototype, "maxlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
         __metadata("design:type", Number)
     ], SearchBioTaxonomyQueryParams.prototype, "maxlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
         __metadata("design:type", Number)
     ], SearchBioTaxonomyQueryParams.prototype, "minlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
         __metadata("design:type", Number)
     ], SearchBioTaxonomyQueryParams.prototype, "minlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.aliases" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.aliases" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "searchBioTaxonomyAliases", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.division" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.division" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "searchBioTaxonomyDivision", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.embl_code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.embl_code" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "searchBioTaxonomyEmblCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.inherited_div" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.inherited_div" }),
         __metadata("design:type", Boolean)
     ], SearchBioTaxonomyQueryParams.prototype, "searchBioTaxonomyInheritedDiv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.rank" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.bio_taxonomy.rank" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "searchBioTaxonomyRank", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=skip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" }),
         __metadata("design:type", Number)
     ], SearchBioTaxonomyQueryParams.prototype, "skip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=text" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" }),
         __metadata("design:type", String)
     ], SearchBioTaxonomyQueryParams.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=todate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" }),
         __metadata("design:type", Date)
     ], SearchBioTaxonomyQueryParams.prototype, "todate", void 0);
     return SearchBioTaxonomyQueryParams;
@@ -125,7 +125,7 @@ var SearchBioTaxonomyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchBioTaxonomyQueryParams)
     ], SearchBioTaxonomyRequest.prototype, "queryParams", void 0);
     return SearchBioTaxonomyRequest;
@@ -137,11 +137,11 @@ var SearchBioTaxonomyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchBioTaxonomyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchBioTaxonomyResponse.prototype, "statusCode", void 0);
     return SearchBioTaxonomyResponse;

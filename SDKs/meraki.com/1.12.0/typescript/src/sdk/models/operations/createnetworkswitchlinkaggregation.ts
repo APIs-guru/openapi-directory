@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkSwitchLinkAggregationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class CreateNetworkSwitchLinkAggregationRequestBodySwitchPorts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portId" })
+  @SpeakeasyMetadata({ data: "json, name=portId" })
   portId: string;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial: string;
 }
 
 
 export class CreateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portId" })
+  @SpeakeasyMetadata({ data: "json, name=portId" })
   portId: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile: string;
 }
 
 
 export class CreateNetworkSwitchLinkAggregationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=switchPorts", elemType: operations.CreateNetworkSwitchLinkAggregationRequestBodySwitchPorts })
+  @SpeakeasyMetadata({ data: "json, name=switchPorts", elemType: CreateNetworkSwitchLinkAggregationRequestBodySwitchPorts })
   switchPorts?: CreateNetworkSwitchLinkAggregationRequestBodySwitchPorts[];
 
-  @Metadata({ data: "json, name=switchProfilePorts", elemType: operations.CreateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts })
+  @SpeakeasyMetadata({ data: "json, name=switchProfilePorts", elemType: CreateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts })
   switchProfilePorts?: CreateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts[];
 }
 
 
 export class CreateNetworkSwitchLinkAggregationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkSwitchLinkAggregationPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: CreateNetworkSwitchLinkAggregationRequestBody;
 }
 
 
 export class CreateNetworkSwitchLinkAggregationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkSwitchLinkAggregation201ApplicationJsonObject?: Map<string, any>;
 }

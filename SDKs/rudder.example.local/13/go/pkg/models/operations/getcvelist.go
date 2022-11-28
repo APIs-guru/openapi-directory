@@ -4,12 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
+// GetCveListRequestBody
+// cveList
 type GetCveListRequestBody struct {
 	CveIds []string `json:"cveIds,omitempty"`
-}
-
-type GetCveListRequest struct {
-	Request *GetCveListRequestBody `request:"mediaType=application/json"`
 }
 
 type GetCveList200ApplicationJSONActionEnum string
@@ -33,6 +31,10 @@ type GetCveList200ApplicationJSON struct {
 	Action GetCveList200ApplicationJSONActionEnum `json:"action"`
 	Data   GetCveList200ApplicationJSONData       `json:"data"`
 	Result GetCveList200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetCveListRequest struct {
+	Request *GetCveListRequestBody `request:"mediaType=application/json"`
 }
 
 type GetCveListResponse struct {

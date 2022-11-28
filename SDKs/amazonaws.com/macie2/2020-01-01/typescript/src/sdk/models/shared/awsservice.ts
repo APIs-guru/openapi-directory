@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsService
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about an Amazon Web Service that performed an action on an affected resource.
 **/
 export class AwsService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=invokedBy" })
+  @SpeakeasyMetadata({ data: "json, name=invokedBy" })
   invokedBy?: string;
 }

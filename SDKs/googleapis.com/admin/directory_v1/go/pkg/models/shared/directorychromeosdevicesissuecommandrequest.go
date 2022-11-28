@@ -11,6 +11,8 @@ const (
 	DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnumRemotePowerwash        DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnum = "REMOTE_POWERWASH"
 )
 
+// DirectoryChromeosdevicesIssueCommandRequest
+// A request for issuing a command.
 type DirectoryChromeosdevicesIssueCommandRequest struct {
 	CommandType *DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnum `json:"commandType,omitempty"`
 	Payload     *string                                                     `json:"payload,omitempty"`

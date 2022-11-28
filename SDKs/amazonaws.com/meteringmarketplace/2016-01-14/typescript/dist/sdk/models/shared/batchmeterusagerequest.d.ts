@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UsageRecord } from "./usagerecord";
 /**
  * A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage within your application.

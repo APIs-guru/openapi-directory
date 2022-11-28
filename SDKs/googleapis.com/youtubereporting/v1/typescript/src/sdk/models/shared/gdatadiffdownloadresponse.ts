@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GdataCompositeMedia } from "./gdatacompositemedia";
+
 
 
 // GdataDiffDownloadResponse
@@ -7,6 +8,6 @@ import { GdataCompositeMedia } from "./gdatacompositemedia";
  * gdata
 **/
 export class GdataDiffDownloadResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectLocation" })
+  @SpeakeasyMetadata({ data: "json, name=objectLocation" })
   objectLocation?: GdataCompositeMedia;
 }

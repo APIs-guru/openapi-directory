@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InAppMessagesResponse } from "./inappmessagesresponse";
 
 
+
 export class GetInAppMessagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InAppMessagesResponse" })
+  @SpeakeasyMetadata({ data: "json, name=InAppMessagesResponse" })
   inAppMessagesResponse: InAppMessagesResponse;
 }

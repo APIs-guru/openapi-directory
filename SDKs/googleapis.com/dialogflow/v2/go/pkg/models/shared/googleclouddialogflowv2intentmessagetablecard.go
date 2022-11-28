@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2IntentMessageTableCard
+// Table card for Actions on Google.
 type GoogleCloudDialogflowV2IntentMessageTableCard struct {
 	Buttons          []GoogleCloudDialogflowV2IntentMessageBasicCardButton  `json:"buttons,omitempty"`
 	ColumnProperties []GoogleCloudDialogflowV2IntentMessageColumnProperties `json:"columnProperties,omitempty"`

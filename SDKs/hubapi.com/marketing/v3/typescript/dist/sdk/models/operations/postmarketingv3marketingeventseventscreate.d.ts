@@ -1,14 +1,9 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostMarketingV3MarketingEventsEventsCreateSecurityOption1 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class PostMarketingV3MarketingEventsEventsCreateSecurityOption2 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class PostMarketingV3MarketingEventsEventsCreateSecurity extends SpeakeasyBase {
-    option1?: PostMarketingV3MarketingEventsEventsCreateSecurityOption1;
-    option2?: PostMarketingV3MarketingEventsEventsCreateSecurityOption2;
+    hapikey?: shared.SchemeHapikey;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 export declare class PostMarketingV3MarketingEventsEventsCreateRequest extends SpeakeasyBase {
     request: shared.MarketingEventCreateRequestParams;

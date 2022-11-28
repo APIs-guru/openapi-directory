@@ -18,6 +18,8 @@ type UpdateAdmChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateAdmChannelRequestBodyAdmChannelRequest
+// Specifies the status and settings of the ADM (Amazon Device Messaging) channel for an application.
 type UpdateAdmChannelRequestBodyAdmChannelRequest struct {
 	ClientID     *string `json:"ClientId,omitempty"`
 	ClientSecret *string `json:"ClientSecret,omitempty"`

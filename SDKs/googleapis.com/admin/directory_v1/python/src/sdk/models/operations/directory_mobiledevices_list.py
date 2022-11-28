@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryMobiledevicesListPathParams:
-    customer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
+    customer_id: str = field(metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
     
 class DirectoryMobiledevicesListOrderByEnum(str, Enum):
     DEVICE_ID = "deviceId"
@@ -49,20 +50,20 @@ class DirectoryMobiledevicesListQueryParams:
 
 @dataclass
 class DirectoryMobiledevicesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryMobiledevicesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryMobiledevicesListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -74,14 +75,14 @@ class DirectoryMobiledevicesListSecurity:
 
 @dataclass
 class DirectoryMobiledevicesListRequest:
-    path_params: DirectoryMobiledevicesListPathParams = field(default=None)
-    query_params: DirectoryMobiledevicesListQueryParams = field(default=None)
-    security: DirectoryMobiledevicesListSecurity = field(default=None)
+    path_params: DirectoryMobiledevicesListPathParams = field()
+    query_params: DirectoryMobiledevicesListQueryParams = field()
+    security: DirectoryMobiledevicesListSecurity = field()
     
 
 @dataclass
 class DirectoryMobiledevicesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     mobile_devices: Optional[shared.MobileDevices] = field(default=None)
-    status_code: int = field(default=None)
     

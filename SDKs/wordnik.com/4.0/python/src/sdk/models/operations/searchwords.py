@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class SearchWordsPathParams:
-    query: str = field(default=None, metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
+    query: str = field(metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +25,13 @@ class SearchWordsQueryParams:
 
 @dataclass
 class SearchWordsRequest:
-    path_params: SearchWordsPathParams = field(default=None)
-    query_params: SearchWordsQueryParams = field(default=None)
+    path_params: SearchWordsPathParams = field()
+    query_params: SearchWordsQueryParams = field()
     
 
 @dataclass
 class SearchWordsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

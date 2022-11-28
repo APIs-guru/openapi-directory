@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetGroupSummary } from "./datasetgroupsummary";
 
 
+
 export class ListDatasetGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasetGroups", elemType: shared.DatasetGroupSummary })
+  @SpeakeasyMetadata({ data: "json, name=datasetGroups", elemType: DatasetGroupSummary })
   datasetGroups?: DatasetGroupSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

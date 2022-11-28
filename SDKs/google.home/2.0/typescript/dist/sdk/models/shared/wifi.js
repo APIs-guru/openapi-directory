@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Wifi = /** @class */ (function (_super) {
     __extends(Wifi, _super);
     function Wifi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bssid" }),
+        SpeakeasyMetadata({ data: "json, name=bssid" }),
         __metadata("design:type", String)
     ], Wifi.prototype, "bssid", void 0);
     __decorate([
-        Metadata({ data: "json, name=has_changes" }),
+        SpeakeasyMetadata({ data: "json, name=has_changes" }),
         __metadata("design:type", Boolean)
     ], Wifi.prototype, "hasChanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=noise_level" }),
+        SpeakeasyMetadata({ data: "json, name=noise_level" }),
         __metadata("design:type", Number)
     ], Wifi.prototype, "noiseLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=signal_level" }),
+        SpeakeasyMetadata({ data: "json, name=signal_level" }),
         __metadata("design:type", Number)
     ], Wifi.prototype, "signalLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssid" }),
+        SpeakeasyMetadata({ data: "json, name=ssid" }),
         __metadata("design:type", String)
     ], Wifi.prototype, "ssid", void 0);
     __decorate([
-        Metadata({ data: "json, name=wpa_configured" }),
+        SpeakeasyMetadata({ data: "json, name=wpa_configured" }),
         __metadata("design:type", Boolean)
     ], Wifi.prototype, "wpaConfigured", void 0);
     __decorate([
-        Metadata({ data: "json, name=wpa_id" }),
+        SpeakeasyMetadata({ data: "json, name=wpa_id" }),
         __metadata("design:type", Number)
     ], Wifi.prototype, "wpaId", void 0);
     __decorate([
-        Metadata({ data: "json, name=wpa_state" }),
+        SpeakeasyMetadata({ data: "json, name=wpa_state" }),
         __metadata("design:type", Number)
     ], Wifi.prototype, "wpaState", void 0);
     return Wifi;

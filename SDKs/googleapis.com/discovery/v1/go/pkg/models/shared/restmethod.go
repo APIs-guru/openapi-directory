@@ -1,31 +1,43 @@
 package shared
 
+// RestMethodMediaUploadProtocolsResumable
+// Supports the Resumable Media Upload protocol.
 type RestMethodMediaUploadProtocolsResumable struct {
 	Multipart *bool   `json:"multipart,omitempty"`
 	Path      *string `json:"path,omitempty"`
 }
 
+// RestMethodMediaUploadProtocolsSimple
+// Supports uploading as a single HTTP request.
 type RestMethodMediaUploadProtocolsSimple struct {
 	Multipart *bool   `json:"multipart,omitempty"`
 	Path      *string `json:"path,omitempty"`
 }
 
+// RestMethodMediaUploadProtocols
+// Supported upload protocols.
 type RestMethodMediaUploadProtocols struct {
 	Resumable *RestMethodMediaUploadProtocolsResumable `json:"resumable,omitempty"`
 	Simple    *RestMethodMediaUploadProtocolsSimple    `json:"simple,omitempty"`
 }
 
+// RestMethodMediaUpload
+// Media upload parameters.
 type RestMethodMediaUpload struct {
 	Accept    []string                        `json:"accept,omitempty"`
 	MaxSize   *string                         `json:"maxSize,omitempty"`
 	Protocols *RestMethodMediaUploadProtocols `json:"protocols,omitempty"`
 }
 
+// RestMethodRequest
+// The schema for the request.
 type RestMethodRequest struct {
 	DollarRef     *string `json:"$ref,omitempty"`
 	ParameterName *string `json:"parameterName,omitempty"`
 }
 
+// RestMethodResponse
+// The schema for the response.
 type RestMethodResponse struct {
 	DollarRef *string `json:"$ref,omitempty"`
 }

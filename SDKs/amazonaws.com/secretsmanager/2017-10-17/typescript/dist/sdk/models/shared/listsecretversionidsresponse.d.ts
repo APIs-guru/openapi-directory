@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SecretVersionsListEntry } from "./secretversionslistentry";
 export declare class ListSecretVersionIdsResponse extends SpeakeasyBase {
     arn?: string;

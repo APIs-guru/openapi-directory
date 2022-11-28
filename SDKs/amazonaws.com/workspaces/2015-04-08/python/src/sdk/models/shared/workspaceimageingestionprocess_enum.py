@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class WorkspaceImageIngestionProcessEnum(str, Enum):
     BYOL_REGULAR = "BYOL_REGULAR"

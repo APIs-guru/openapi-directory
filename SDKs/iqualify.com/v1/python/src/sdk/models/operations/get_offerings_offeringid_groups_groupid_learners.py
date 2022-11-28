@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetOfferingsOfferingIDGroupsGroupIDLearnersPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
-    offering_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
+    offering_id: str = field(metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOfferingsOfferingIDGroupsGroupIDLearnersRequest:
-    path_params: GetOfferingsOfferingIDGroupsGroupIDLearnersPathParams = field(default=None)
+    path_params: GetOfferingsOfferingIDGroupsGroupIDLearnersPathParams = field()
     
 
 @dataclass
 class GetOfferingsOfferingIDGroupsGroupIDLearnersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     user_responses: Optional[List[shared.UserResponse]] = field(default=None)
     

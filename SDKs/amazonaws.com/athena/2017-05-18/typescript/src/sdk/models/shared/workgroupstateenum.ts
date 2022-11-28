@@ -1,6 +1,7 @@
 
 
+
 export enum WorkGroupStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

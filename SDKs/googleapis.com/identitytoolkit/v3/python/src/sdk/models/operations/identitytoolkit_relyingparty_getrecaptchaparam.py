@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,19 +17,19 @@ class IdentitytoolkitRelyingpartyGetRecaptchaParamQueryParams:
 
 @dataclass
 class IdentitytoolkitRelyingpartyGetRecaptchaParamSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitRelyingpartyGetRecaptchaParamRequest:
-    query_params: IdentitytoolkitRelyingpartyGetRecaptchaParamQueryParams = field(default=None)
-    security: IdentitytoolkitRelyingpartyGetRecaptchaParamSecurity = field(default=None)
+    query_params: IdentitytoolkitRelyingpartyGetRecaptchaParamQueryParams = field()
+    security: IdentitytoolkitRelyingpartyGetRecaptchaParamSecurity = field()
     
 
 @dataclass
 class IdentitytoolkitRelyingpartyGetRecaptchaParamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_recaptcha_param_response: Optional[shared.GetRecaptchaParamResponse] = field(default=None)
-    status_code: int = field(default=None)
     

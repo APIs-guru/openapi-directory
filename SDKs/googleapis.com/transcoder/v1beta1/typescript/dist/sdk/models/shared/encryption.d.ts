@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Aes128Encryption } from "./aes128encryption";
 import { MpegCommonEncryption } from "./mpegcommonencryption";
 import { SampleAesEncryption } from "./sampleaesencryption";

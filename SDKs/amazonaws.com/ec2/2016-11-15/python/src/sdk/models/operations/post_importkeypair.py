@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostImportKeyPairActionEnum(str, Enum):
     IMPORT_KEY_PAIR = "ImportKeyPair"
@@ -10,8 +14,8 @@ class PostImportKeyPairVersionEnum(str, Enum):
 
 @dataclass
 class PostImportKeyPairQueryParams:
-    action: PostImportKeyPairActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostImportKeyPairVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostImportKeyPairActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostImportKeyPairVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostImportKeyPairHeaders:
 
 @dataclass
 class PostImportKeyPairRequest:
-    query_params: PostImportKeyPairQueryParams = field(default=None)
-    headers: PostImportKeyPairHeaders = field(default=None)
+    headers: PostImportKeyPairHeaders = field()
+    query_params: PostImportKeyPairQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostImportKeyPairResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

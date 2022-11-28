@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddonInfo } from "./addoninfo";
 
 
+
 export class DescribeAddonVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addons", elemType: shared.AddonInfo })
+  @SpeakeasyMetadata({ data: "json, name=addons", elemType: AddonInfo })
   addons?: AddonInfo[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

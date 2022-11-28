@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaJwt
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents JSON web token(JWT), which is a compact, URL-safe means of representing claims to be transferred between two parties, enabling the claims to be digitally signed or integrity protected.
 **/
 export class GoogleCloudIntegrationsV1alphaJwt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jwt" })
+  @SpeakeasyMetadata({ data: "json, name=jwt" })
   jwt?: string;
 
-  @Metadata({ data: "json, name=jwtHeader" })
+  @SpeakeasyMetadata({ data: "json, name=jwtHeader" })
   jwtHeader?: string;
 
-  @Metadata({ data: "json, name=jwtPayload" })
+  @SpeakeasyMetadata({ data: "json, name=jwtPayload" })
   jwtPayload?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

@@ -18,7 +18,7 @@ class PostSetupV1ServicesBookingwindowsRequest:
 
 @dataclass
 class PostSetupV1ServicesBookingwindowsResponse:
+    content_type: str = field()
+    status_code: int = field()
     booking_window_view_model: Optional[shared.BookingWindowViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

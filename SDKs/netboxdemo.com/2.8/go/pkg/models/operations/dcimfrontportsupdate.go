@@ -10,7 +10,7 @@ type DcimFrontPortsUpdatePathParams struct {
 
 type DcimFrontPortsUpdateRequest struct {
 	PathParams DcimFrontPortsUpdatePathParams
-	Request    shared.WritableFrontPort `request:"mediaType=application/json"`
+	Request    shared.WritableFrontPortInput `request:"mediaType=application/json"`
 }
 
 type DcimFrontPortsUpdateResponse struct {

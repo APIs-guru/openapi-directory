@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DriveDrivesUnhidePathParams:
-    drive_id: str = field(default=None, metadata={'path_param': { 'field_name': 'driveId', 'style': 'simple', 'explode': False }})
+    drive_id: str = field(metadata={'path_param': { 'field_name': 'driveId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class DriveDrivesUnhideQueryParams:
 
 @dataclass
 class DriveDrivesUnhideSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DriveDrivesUnhideRequest:
-    path_params: DriveDrivesUnhidePathParams = field(default=None)
-    query_params: DriveDrivesUnhideQueryParams = field(default=None)
-    security: DriveDrivesUnhideSecurity = field(default=None)
+    path_params: DriveDrivesUnhidePathParams = field()
+    query_params: DriveDrivesUnhideQueryParams = field()
+    security: DriveDrivesUnhideSecurity = field()
     
 
 @dataclass
 class DriveDrivesUnhideResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     drive: Optional[shared.Drive] = field(default=None)
-    status_code: int = field(default=None)
     

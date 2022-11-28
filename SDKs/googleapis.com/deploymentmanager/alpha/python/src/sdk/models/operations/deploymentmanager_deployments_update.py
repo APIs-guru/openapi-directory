@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerDeploymentsUpdatePathParams:
-    deployment: str = field(default=None, metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    deployment: str = field(metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 class DeploymentmanagerDeploymentsUpdateCreatePolicyEnum(str, Enum):
     CREATE_OR_ACQUIRE = "CREATE_OR_ACQUIRE"
@@ -38,14 +42,14 @@ class DeploymentmanagerDeploymentsUpdateQueryParams:
 
 @dataclass
 class DeploymentmanagerDeploymentsUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerDeploymentsUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -56,15 +60,15 @@ class DeploymentmanagerDeploymentsUpdateSecurity:
 
 @dataclass
 class DeploymentmanagerDeploymentsUpdateRequest:
-    path_params: DeploymentmanagerDeploymentsUpdatePathParams = field(default=None)
-    query_params: DeploymentmanagerDeploymentsUpdateQueryParams = field(default=None)
+    path_params: DeploymentmanagerDeploymentsUpdatePathParams = field()
+    query_params: DeploymentmanagerDeploymentsUpdateQueryParams = field()
+    security: DeploymentmanagerDeploymentsUpdateSecurity = field()
     request: Optional[shared.Deployment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DeploymentmanagerDeploymentsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DeploymentmanagerDeploymentsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

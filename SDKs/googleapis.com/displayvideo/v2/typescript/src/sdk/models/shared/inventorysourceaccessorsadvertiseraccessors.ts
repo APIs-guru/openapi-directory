@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InventorySourceAccessorsAdvertiserAccessors
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The advertisers with access to the inventory source.
 **/
 export class InventorySourceAccessorsAdvertiserAccessors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserIds" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserIds" })
   advertiserIds?: string[];
 }

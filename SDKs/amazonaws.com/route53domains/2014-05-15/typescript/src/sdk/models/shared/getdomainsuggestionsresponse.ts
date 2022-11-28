@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainSuggestion } from "./domainsuggestion";
 
 
+
 export class GetDomainSuggestionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SuggestionsList", elemType: shared.DomainSuggestion })
+  @SpeakeasyMetadata({ data: "json, name=SuggestionsList", elemType: DomainSuggestion })
   suggestionsList?: DomainSuggestion[];
 }

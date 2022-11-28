@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,20 +25,20 @@ class ListWorkerConfigurationsHeaders:
 
 @dataclass
 class ListWorkerConfigurationsRequest:
-    query_params: ListWorkerConfigurationsQueryParams = field(default=None)
-    headers: ListWorkerConfigurationsHeaders = field(default=None)
+    headers: ListWorkerConfigurationsHeaders = field()
+    query_params: ListWorkerConfigurationsQueryParams = field()
     
 
 @dataclass
 class ListWorkerConfigurationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_worker_configurations_response: Optional[shared.ListWorkerConfigurationsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

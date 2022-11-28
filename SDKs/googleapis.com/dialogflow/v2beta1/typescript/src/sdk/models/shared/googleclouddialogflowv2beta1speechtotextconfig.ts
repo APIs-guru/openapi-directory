@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2beta1SpeechToTextConfigSpeechModelVariantEnum {
-    SpeechModelVariantUnspecified = "SPEECH_MODEL_VARIANT_UNSPECIFIED"
-,    UseBestAvailable = "USE_BEST_AVAILABLE"
-,    UseStandard = "USE_STANDARD"
-,    UseEnhanced = "USE_ENHANCED"
+    SpeechModelVariantUnspecified = "SPEECH_MODEL_VARIANT_UNSPECIFIED",
+    UseBestAvailable = "USE_BEST_AVAILABLE",
+    UseStandard = "USE_STANDARD",
+    UseEnhanced = "USE_ENHANCED"
 }
 
 
@@ -13,6 +14,9 @@ export enum GoogleCloudDialogflowV2beta1SpeechToTextConfigSpeechModelVariantEnum
  * Configures speech transcription for ConversationProfile.
 **/
 export class GoogleCloudDialogflowV2beta1SpeechToTextConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=speechModelVariant" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
+  model?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=speechModelVariant" })
   speechModelVariant?: GoogleCloudDialogflowV2beta1SpeechToTextConfigSpeechModelVariantEnum;
 }

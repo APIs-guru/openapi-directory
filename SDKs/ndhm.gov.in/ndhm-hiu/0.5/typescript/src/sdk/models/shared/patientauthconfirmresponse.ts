@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatientDemographicResponse } from "./patientdemographicresponse";
 import { AccessTokenValidity } from "./accesstokenvalidity";
 import { Error } from "./error";
 import { RequestReference } from "./requestreference";
+
 
 
 // PatientAuthConfirmResponseAuth
@@ -14,30 +15,30 @@ import { RequestReference } from "./requestreference";
  * 
 **/
 export class PatientAuthConfirmResponseAuth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=patient" })
+  @SpeakeasyMetadata({ data: "json, name=patient" })
   patient?: PatientDemographicResponse;
 
-  @Metadata({ data: "json, name=validity" })
+  @SpeakeasyMetadata({ data: "json, name=validity" })
   validity?: AccessTokenValidity;
 }
 
 
 export class PatientAuthConfirmResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auth" })
+  @SpeakeasyMetadata({ data: "json, name=auth" })
   auth?: PatientAuthConfirmResponseAuth;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Error;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=resp" })
+  @SpeakeasyMetadata({ data: "json, name=resp" })
   resp: RequestReference;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

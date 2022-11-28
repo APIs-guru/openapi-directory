@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OpsItemEventSummary
+// Summary information about an OpsItem event or that associated an OpsItem with a related item.
 type OpsItemEventSummary struct {
 	CreatedBy   *OpsItemIdentity `json:"CreatedBy,omitempty"`
 	CreatedTime *time.Time       `json:"CreatedTime,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAddUserToGroupActionEnum(str, Enum):
     ADD_USER_TO_GROUP = "AddUserToGroup"
@@ -10,10 +14,10 @@ class GetAddUserToGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetAddUserToGroupQueryParams:
-    action: GetAddUserToGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetAddUserToGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAddUserToGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_name: str = field(metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetAddUserToGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAddUserToGroupHeaders:
 
 @dataclass
 class GetAddUserToGroupRequest:
-    query_params: GetAddUserToGroupQueryParams = field(default=None)
-    headers: GetAddUserToGroupHeaders = field(default=None)
+    headers: GetAddUserToGroupHeaders = field()
+    query_params: GetAddUserToGroupQueryParams = field()
     
 
 @dataclass
 class GetAddUserToGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

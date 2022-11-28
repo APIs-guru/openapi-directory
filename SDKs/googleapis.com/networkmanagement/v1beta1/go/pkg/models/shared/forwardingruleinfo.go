@@ -1,5 +1,7 @@
 package shared
 
+// ForwardingRuleInfo
+// For display only. Metadata associated with a Compute Engine forwarding rule.
 type ForwardingRuleInfo struct {
 	DisplayName      *string `json:"displayName,omitempty"`
 	MatchedPortRange *string `json:"matchedPortRange,omitempty"`

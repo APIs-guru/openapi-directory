@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PriceFormatted } from "./priceformatted";
 export declare class PlacedBetPart extends SpeakeasyBase {
     description: string;

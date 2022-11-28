@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// KeyMetadata
+// <p>Contains metadata about a KMS key.</p> <p>This data type is used as a response element for the <a>CreateKey</a> and <a>DescribeKey</a> operations.</p>
 type KeyMetadata struct {
 	AwsAccountID                *string                       `json:"AWSAccountId,omitempty"`
 	Arn                         *string                       `json:"Arn,omitempty"`

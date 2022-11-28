@@ -5,7 +5,7 @@ import (
 )
 
 type CircuitsCircuitTerminationsCreateRequest struct {
-	Request shared.WritableCircuitTermination `request:"mediaType=application/json"`
+	Request shared.WritableCircuitTerminationInput `request:"mediaType=application/json"`
 }
 
 type CircuitsCircuitTerminationsCreateResponse struct {

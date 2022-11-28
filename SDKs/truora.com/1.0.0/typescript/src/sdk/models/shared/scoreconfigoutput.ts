@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScoreConfig } from "./scoreconfig";
+
 
 
 // ScoreConfigOutput
@@ -8,6 +8,6 @@ import { ScoreConfig } from "./scoreconfig";
  * Represents a list of score configurations that apply in the country
 **/
 export class ScoreConfigOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ScoreConfigByCountry", elemType: shared.ScoreConfig })
+  @SpeakeasyMetadata({ data: "json, name=ScoreConfigByCountry", elemType: ScoreConfig })
   scoreConfigByCountry?: ScoreConfig[];
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AnnotationLayerRestApiPut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=descr" })
+  @SpeakeasyMetadata({ data: "json, name=descr" })
   descr?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

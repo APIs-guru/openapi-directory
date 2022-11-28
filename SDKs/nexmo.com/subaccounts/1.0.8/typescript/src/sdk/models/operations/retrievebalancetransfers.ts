@@ -1,54 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveBalanceTransfersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
   apiKey: string;
 }
 
 
 export class RetrieveBalanceTransfersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subaccount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subaccount" })
   subaccount?: string;
 }
 
 
 export class RetrieveBalanceTransfersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
-export class RetrieveBalanceTransfersRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RetrieveBalanceTransfersPathParams;
-
-  @Metadata()
-  queryParams: RetrieveBalanceTransfersQueryParams;
-
-  @Metadata()
-  security: RetrieveBalanceTransfersSecurity;
-}
-
-
 export class RetrieveBalanceTransfers401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
@@ -58,36 +47,48 @@ export class RetrieveBalanceTransfers401ApplicationJson extends SpeakeasyBase {
  * Invalid API Key
 **/
 export class RetrieveBalanceTransfers404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
+export class RetrieveBalanceTransfersRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RetrieveBalanceTransfersPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: RetrieveBalanceTransfersQueryParams;
+
+  @SpeakeasyMetadata()
+  security: RetrieveBalanceTransfersSecurity;
+}
+
+
 export class RetrieveBalanceTransfersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listBalanceTransfersResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unprovisionedErrorResponse?: shared.UnprovisionedErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveBalanceTransfers401ApplicationJsonObject?: RetrieveBalanceTransfers401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveBalanceTransfers404ApplicationJsonObject?: RetrieveBalanceTransfers404ApplicationJson;
 }

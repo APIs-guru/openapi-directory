@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OperatorDbt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dbtArguments" })
+  @SpeakeasyMetadata({ data: "json, name=dbtArguments" })
   dbtArguments?: string;
 
-  @Metadata({ data: "json, name=dockerImage" })
+  @SpeakeasyMetadata({ data: "json, name=dockerImage" })
   dockerImage?: string;
 
-  @Metadata({ data: "json, name=gitRepoBranch" })
+  @SpeakeasyMetadata({ data: "json, name=gitRepoBranch" })
   gitRepoBranch?: string;
 
-  @Metadata({ data: "json, name=gitRepoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=gitRepoUrl" })
   gitRepoUrl: string;
 }

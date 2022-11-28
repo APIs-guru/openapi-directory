@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PermissionCustomRolesSupportLevelEnum;
 (function (PermissionCustomRolesSupportLevelEnum) {
     PermissionCustomRolesSupportLevelEnum["Supported"] = "SUPPORTED";
@@ -46,35 +46,35 @@ var Permission = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiDisabled" }),
+        SpeakeasyMetadata({ data: "json, name=apiDisabled" }),
         __metadata("design:type", Boolean)
     ], Permission.prototype, "apiDisabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=customRolesSupportLevel" }),
+        SpeakeasyMetadata({ data: "json, name=customRolesSupportLevel" }),
         __metadata("design:type", String)
     ], Permission.prototype, "customRolesSupportLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Permission.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Permission.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=onlyInPredefinedRoles" }),
+        SpeakeasyMetadata({ data: "json, name=onlyInPredefinedRoles" }),
         __metadata("design:type", Boolean)
     ], Permission.prototype, "onlyInPredefinedRoles", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryPermission" }),
+        SpeakeasyMetadata({ data: "json, name=primaryPermission" }),
         __metadata("design:type", String)
     ], Permission.prototype, "primaryPermission", void 0);
     __decorate([
-        Metadata({ data: "json, name=stage" }),
+        SpeakeasyMetadata({ data: "json, name=stage" }),
         __metadata("design:type", String)
     ], Permission.prototype, "stage", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Permission.prototype, "title", void 0);
     return Permission;

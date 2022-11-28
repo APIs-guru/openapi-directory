@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StartTimerFailedCauseEnum(str, Enum):
     TIMER_ID_ALREADY_IN_USE = "TIMER_ID_ALREADY_IN_USE"

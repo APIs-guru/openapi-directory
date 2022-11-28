@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRunV1Condition } from "./googlecloudrunv1condition";
 import { TaskAttemptResult } from "./taskattemptresult";
+
 
 
 // TaskStatus
@@ -9,27 +9,27 @@ import { TaskAttemptResult } from "./taskattemptresult";
  * TaskStatus represents the status of a task.
 **/
 export class TaskStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionTime" })
+  @SpeakeasyMetadata({ data: "json, name=completionTime" })
   completionTime?: string;
 
-  @Metadata({ data: "json, name=conditions", elemType: shared.GoogleCloudRunV1Condition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: GoogleCloudRunV1Condition })
   conditions?: GoogleCloudRunV1Condition[];
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=lastAttemptResult" })
+  @SpeakeasyMetadata({ data: "json, name=lastAttemptResult" })
   lastAttemptResult?: TaskAttemptResult;
 
-  @Metadata({ data: "json, name=logUri" })
+  @SpeakeasyMetadata({ data: "json, name=logUri" })
   logUri?: string;
 
-  @Metadata({ data: "json, name=observedGeneration" })
+  @SpeakeasyMetadata({ data: "json, name=observedGeneration" })
   observedGeneration?: number;
 
-  @Metadata({ data: "json, name=retried" })
+  @SpeakeasyMetadata({ data: "json, name=retried" })
   retried?: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

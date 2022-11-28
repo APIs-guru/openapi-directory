@@ -17,14 +17,14 @@ type AddDependentsForTaskRequestBody struct {
 	Data *shared.ModifyDependentsRequest `json:"data,omitempty"`
 }
 
+type AddDependentsForTask200ApplicationJSON struct {
+	Data []shared.TaskCompact `json:"data,omitempty"`
+}
+
 type AddDependentsForTaskRequest struct {
 	PathParams  AddDependentsForTaskPathParams
 	QueryParams AddDependentsForTaskQueryParams
 	Request     AddDependentsForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type AddDependentsForTask200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type AddDependentsForTaskResponse struct {

@@ -8,6 +8,8 @@ const (
 	SigninDetailAllowPersonalUsageEnumPersonalUsageDisallowed       SigninDetailAllowPersonalUsageEnum = "PERSONAL_USAGE_DISALLOWED"
 )
 
+// SigninDetail
+// A resource containing sign in details for an enterprise.
 type SigninDetail struct {
 	AllowPersonalUsage    *SigninDetailAllowPersonalUsageEnum `json:"allowPersonalUsage,omitempty"`
 	QrCode                *string                             `json:"qrCode,omitempty"`

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// ProjectDetails
+//
+//	Detailed information about an AWS Mobile Hub project.
 type ProjectDetails struct {
 	ConsoleURL      *string           `json:"consoleUrl,omitempty"`
 	CreatedDate     *time.Time        `json:"createdDate,omitempty"`

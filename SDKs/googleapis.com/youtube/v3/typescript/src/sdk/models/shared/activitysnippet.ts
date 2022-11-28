@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThumbnailDetails } from "./thumbnaildetails";
 
+
 export enum ActivitySnippetTypeEnum {
-    TypeUnspecified = "typeUnspecified"
-,    Upload = "upload"
-,    Like = "like"
-,    Favorite = "favorite"
-,    Comment = "comment"
-,    Subscription = "subscription"
-,    PlaylistItem = "playlistItem"
-,    Recommendation = "recommendation"
-,    Bulletin = "bulletin"
-,    Social = "social"
-,    ChannelItem = "channelItem"
-,    PromotedItem = "promotedItem"
+    TypeUnspecified = "typeUnspecified",
+    Upload = "upload",
+    Like = "like",
+    Favorite = "favorite",
+    Comment = "comment",
+    Subscription = "subscription",
+    PlaylistItem = "playlistItem",
+    Recommendation = "recommendation",
+    Bulletin = "bulletin",
+    Social = "social",
+    ChannelItem = "channelItem",
+    PromotedItem = "promotedItem"
 }
 
 
@@ -22,27 +23,27 @@ export enum ActivitySnippetTypeEnum {
  * Basic details about an activity, including title, description, thumbnails, activity type and group. Next ID: 12
 **/
 export class ActivitySnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=channelTitle" })
+  @SpeakeasyMetadata({ data: "json, name=channelTitle" })
   channelTitle?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=publishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=publishedAt" })
   publishedAt?: Date;
 
-  @Metadata({ data: "json, name=thumbnails" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnails" })
   thumbnails?: ThumbnailDetails;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ActivitySnippetTypeEnum;
 }

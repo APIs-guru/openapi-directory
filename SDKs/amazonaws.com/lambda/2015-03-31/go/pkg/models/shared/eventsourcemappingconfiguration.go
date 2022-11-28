@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EventSourceMappingConfiguration
+// A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.
 type EventSourceMappingConfiguration struct {
 	BatchSize                      *int64                      `json:"BatchSize,omitempty"`
 	BisectBatchOnFunctionError     *bool                       `json:"BisectBatchOnFunctionError,omitempty"`

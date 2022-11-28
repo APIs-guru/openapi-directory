@@ -1,5 +1,7 @@
 package shared
 
+// OpenIDProvider
+// OpenID Connect provider information
 type OpenIDProvider struct {
 	ID                int32   `json:"id"`
 	IsGlobalAvailable bool    `json:"isGlobalAvailable"`

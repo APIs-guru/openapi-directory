@@ -8,8 +8,18 @@ const (
 	GoogleAppsDriveLabelsV2betaFieldDateOptionsDateFormatTypeEnumShortDate             GoogleAppsDriveLabelsV2betaFieldDateOptionsDateFormatTypeEnum = "SHORT_DATE"
 )
 
+// GoogleAppsDriveLabelsV2betaFieldDateOptions
+// Options for the date field type.
 type GoogleAppsDriveLabelsV2betaFieldDateOptions struct {
 	DateFormat     *string                                                        `json:"dateFormat,omitempty"`
+	DateFormatType *GoogleAppsDriveLabelsV2betaFieldDateOptionsDateFormatTypeEnum `json:"dateFormatType,omitempty"`
+	MaxValue       *GoogleTypeDate                                                `json:"maxValue,omitempty"`
+	MinValue       *GoogleTypeDate                                                `json:"minValue,omitempty"`
+}
+
+// GoogleAppsDriveLabelsV2betaFieldDateOptionsInput
+// Options for the date field type.
+type GoogleAppsDriveLabelsV2betaFieldDateOptionsInput struct {
 	DateFormatType *GoogleAppsDriveLabelsV2betaFieldDateOptionsDateFormatTypeEnum `json:"dateFormatType,omitempty"`
 	MaxValue       *GoogleTypeDate                                                `json:"maxValue,omitempty"`
 	MinValue       *GoogleTypeDate                                                `json:"minValue,omitempty"`

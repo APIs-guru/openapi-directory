@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MultipleValuesSetting } from "./multiplevaluessetting";
 import { ObfuscationSetting } from "./obfuscationsetting";
 import { SlotValueElicitationSetting } from "./slotvalueelicitationsetting";
 
 
+
 export class UpdateSlotResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botId" })
+  @SpeakeasyMetadata({ data: "json, name=botId" })
   botId?: string;
 
-  @Metadata({ data: "json, name=botVersion" })
+  @SpeakeasyMetadata({ data: "json, name=botVersion" })
   botVersion?: string;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=intentId" })
+  @SpeakeasyMetadata({ data: "json, name=intentId" })
   intentId?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=multipleValuesSetting" })
+  @SpeakeasyMetadata({ data: "json, name=multipleValuesSetting" })
   multipleValuesSetting?: MultipleValuesSetting;
 
-  @Metadata({ data: "json, name=obfuscationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscationSetting" })
   obfuscationSetting?: ObfuscationSetting;
 
-  @Metadata({ data: "json, name=slotId" })
+  @SpeakeasyMetadata({ data: "json, name=slotId" })
   slotId?: string;
 
-  @Metadata({ data: "json, name=slotName" })
+  @SpeakeasyMetadata({ data: "json, name=slotName" })
   slotName?: string;
 
-  @Metadata({ data: "json, name=slotTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeId" })
   slotTypeId?: string;
 
-  @Metadata({ data: "json, name=valueElicitationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=valueElicitationSetting" })
   valueElicitationSetting?: SlotValueElicitationSetting;
 }

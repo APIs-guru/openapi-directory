@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPlayerGamePpaQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" })
   excludeGarbageTime?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=playerId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=playerId" })
   playerId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=position" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" })
   position?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" })
   seasonType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=threshold" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=threshold" })
   threshold?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=week" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=week" })
   week?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class GetPlayerGamePpaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPlayerGamePpaQueryParams;
 }
 
 
 export class GetPlayerGamePpaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PlayerGamePpa })
+  @SpeakeasyMetadata({ elemType: shared.PlayerGamePpa })
   playerGamePpas?: shared.PlayerGamePpa[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

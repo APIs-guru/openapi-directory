@@ -1,190 +1,191 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GmailUsersMessagesImportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 export enum GmailUsersMessagesImportInternalDateSourceEnum {
-    ReceivedTime = "receivedTime"
-,    DateHeader = "dateHeader"
+    ReceivedTime = "receivedTime",
+    DateHeader = "dateHeader"
 }
 
 
 export class GmailUsersMessagesImportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deleted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=internalDateSource" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=internalDateSource" })
   internalDateSource?: GmailUsersMessagesImportInternalDateSourceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=neverMarkSpam" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=neverMarkSpam" })
   neverMarkSpam?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=processForCalendar" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=processForCalendar" })
   processForCalendar?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 }
 
 
 export class GmailUsersMessagesImportRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=message/cpim" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/cpim" })
   messageCpim: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/delivery-status" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/delivery-status" })
   messageDeliveryStatus: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/disposition-notification" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/disposition-notification" })
   messageDispositionNotification: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/external-body" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/external-body" })
   messageExternalBody: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/feedback-report" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/feedback-report" })
   messageFeedbackReport: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/global" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/global" })
   messageGlobal: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/global-delivery-status" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/global-delivery-status" })
   messageGlobalDeliveryStatus: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/global-disposition-notification" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/global-disposition-notification" })
   messageGlobalDispositionNotification: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/global-headers" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/global-headers" })
   messageGlobalHeaders: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/http" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/http" })
   messageHttp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/imdn+xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/imdn+xml" })
   messageImdnPlusXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/news" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/news" })
   messageNews: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/partial" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/partial" })
   messagePartial: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/rfc822" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/rfc822" })
   messageRfc822: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/s-http" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/s-http" })
   messageShttp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/sip" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/sip" })
   messageSip: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/sipfrag" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/sipfrag" })
   messageSipfrag: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/tracking-status" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/tracking-status" })
   messageTrackingStatus: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/vnd.si.simp" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/vnd.si.simp" })
   messageVndSiSimp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=message/vnd.wfa.wsc" })
+  @SpeakeasyMetadata({ data: "request, media_type=message/vnd.wfa.wsc" })
   messageVndWfaWsc: Uint8Array;
 }
 
 
 export class GmailUsersMessagesImportSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class GmailUsersMessagesImportSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class GmailUsersMessagesImportSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class GmailUsersMessagesImportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: GmailUsersMessagesImportSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: GmailUsersMessagesImportSecurityOption2;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option3?: GmailUsersMessagesImportSecurityOption3;
 }
 
 
 export class GmailUsersMessagesImportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GmailUsersMessagesImportPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GmailUsersMessagesImportQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: GmailUsersMessagesImportRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GmailUsersMessagesImportSecurity;
 }
 
 
 export class GmailUsersMessagesImportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   message?: shared.Message;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

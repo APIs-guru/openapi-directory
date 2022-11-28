@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MasterAuth } from "./masterauth";
 
+
 export enum SetMasterAuthRequestActionEnum {
-    Unknown = "UNKNOWN"
-,    SetPassword = "SET_PASSWORD"
-,    GeneratePassword = "GENERATE_PASSWORD"
-,    SetUsername = "SET_USERNAME"
+    Unknown = "UNKNOWN",
+    SetPassword = "SET_PASSWORD",
+    GeneratePassword = "GENERATE_PASSWORD",
+    SetUsername = "SET_USERNAME"
 }
 
 
@@ -14,21 +15,21 @@ export enum SetMasterAuthRequestActionEnum {
  * SetMasterAuthRequest updates the admin password of a cluster.
 **/
 export class SetMasterAuthRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: SetMasterAuthRequestActionEnum;
 
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=update" })
+  @SpeakeasyMetadata({ data: "json, name=update" })
   update?: MasterAuth;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

@@ -9,11 +9,11 @@ class QuittungTseDataQueryParams:
 
 @dataclass
 class QuittungTseDataRequest:
-    query_params: QuittungTseDataQueryParams = field(default=None)
+    query_params: QuittungTseDataQueryParams = field()
     
 
 @dataclass
 class QuittungTseDataResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

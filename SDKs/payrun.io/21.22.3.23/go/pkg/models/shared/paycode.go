@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PayCodePayCodeNominalCode
+// The pay codes' nominal code
 type PayCodePayCodeNominalCode struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

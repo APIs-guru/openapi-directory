@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AttributeValue
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Values for use in <a>Player</a> attribute key-value pairs. This object lets you specify an attribute value using any of the valid data types: string, number, string array, or data map. Each <code>AttributeValue</code> object can use only one of the available properties.
 **/
 export class AttributeValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=N" })
+  @SpeakeasyMetadata({ data: "json, name=N" })
   n?: number;
 
-  @Metadata({ data: "json, name=S" })
+  @SpeakeasyMetadata({ data: "json, name=S" })
   s?: string;
 
-  @Metadata({ data: "json, name=SDM" })
+  @SpeakeasyMetadata({ data: "json, name=SDM" })
   sdm?: Map<string, number>;
 
-  @Metadata({ data: "json, name=SL" })
+  @SpeakeasyMetadata({ data: "json, name=SL" })
   sl?: string[];
 }

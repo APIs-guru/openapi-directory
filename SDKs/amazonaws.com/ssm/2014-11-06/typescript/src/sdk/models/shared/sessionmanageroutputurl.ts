@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SessionManagerOutputUrl
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Reserved for future use.
 **/
 export class SessionManagerOutputUrl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchOutputUrl" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchOutputUrl" })
   cloudWatchOutputUrl?: string;
 
-  @Metadata({ data: "json, name=S3OutputUrl" })
+  @SpeakeasyMetadata({ data: "json, name=S3OutputUrl" })
   s3OutputUrl?: string;
 }

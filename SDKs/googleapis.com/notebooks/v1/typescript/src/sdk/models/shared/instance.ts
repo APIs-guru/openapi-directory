@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceleratorConfig } from "./acceleratorconfig";
 import { ContainerImage } from "./containerimage";
 import { Disk } from "./disk";
@@ -8,47 +7,48 @@ import { ShieldedInstanceConfig } from "./shieldedinstanceconfig";
 import { UpgradeHistoryEntry } from "./upgradehistoryentry";
 import { VmImage } from "./vmimage";
 
+
 export enum InstanceBootDiskTypeEnum {
-    DiskTypeUnspecified = "DISK_TYPE_UNSPECIFIED"
-,    PdStandard = "PD_STANDARD"
-,    PdSsd = "PD_SSD"
-,    PdBalanced = "PD_BALANCED"
-,    PdExtreme = "PD_EXTREME"
+    DiskTypeUnspecified = "DISK_TYPE_UNSPECIFIED",
+    PdStandard = "PD_STANDARD",
+    PdSsd = "PD_SSD",
+    PdBalanced = "PD_BALANCED",
+    PdExtreme = "PD_EXTREME"
 }
 
 export enum InstanceDataDiskTypeEnum {
-    DiskTypeUnspecified = "DISK_TYPE_UNSPECIFIED"
-,    PdStandard = "PD_STANDARD"
-,    PdSsd = "PD_SSD"
-,    PdBalanced = "PD_BALANCED"
-,    PdExtreme = "PD_EXTREME"
+    DiskTypeUnspecified = "DISK_TYPE_UNSPECIFIED",
+    PdStandard = "PD_STANDARD",
+    PdSsd = "PD_SSD",
+    PdBalanced = "PD_BALANCED",
+    PdExtreme = "PD_EXTREME"
 }
 
 export enum InstanceDiskEncryptionEnum {
-    DiskEncryptionUnspecified = "DISK_ENCRYPTION_UNSPECIFIED"
-,    Gmek = "GMEK"
-,    Cmek = "CMEK"
+    DiskEncryptionUnspecified = "DISK_ENCRYPTION_UNSPECIFIED",
+    Gmek = "GMEK",
+    Cmek = "CMEK"
 }
 
 export enum InstanceNicTypeEnum {
-    UnspecifiedNicType = "UNSPECIFIED_NIC_TYPE"
-,    VirtioNet = "VIRTIO_NET"
-,    Gvnic = "GVNIC"
+    UnspecifiedNicType = "UNSPECIFIED_NIC_TYPE",
+    VirtioNet = "VIRTIO_NET",
+    Gvnic = "GVNIC"
 }
 
 export enum InstanceStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Starting = "STARTING"
-,    Provisioning = "PROVISIONING"
-,    Active = "ACTIVE"
-,    Stopping = "STOPPING"
-,    Stopped = "STOPPED"
-,    Deleted = "DELETED"
-,    Upgrading = "UPGRADING"
-,    Initializing = "INITIALIZING"
-,    Registering = "REGISTERING"
-,    Suspending = "SUSPENDING"
-,    Suspended = "SUSPENDED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Starting = "STARTING",
+    Provisioning = "PROVISIONING",
+    Active = "ACTIVE",
+    Stopping = "STOPPING",
+    Stopped = "STOPPED",
+    Deleted = "DELETED",
+    Upgrading = "UPGRADING",
+    Initializing = "INITIALIZING",
+    Registering = "REGISTERING",
+    Suspending = "SUSPENDING",
+    Suspended = "SUSPENDED"
 }
 
 
@@ -57,111 +57,205 @@ export enum InstanceStateEnum {
  * The definition of a notebook instance.
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceleratorConfig" })
+  @SpeakeasyMetadata({ data: "json, name=acceleratorConfig" })
   acceleratorConfig?: AcceleratorConfig;
 
-  @Metadata({ data: "json, name=bootDiskSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=bootDiskSizeGb" })
   bootDiskSizeGb?: string;
 
-  @Metadata({ data: "json, name=bootDiskType" })
+  @SpeakeasyMetadata({ data: "json, name=bootDiskType" })
   bootDiskType?: InstanceBootDiskTypeEnum;
 
-  @Metadata({ data: "json, name=canIpForward" })
+  @SpeakeasyMetadata({ data: "json, name=canIpForward" })
   canIpForward?: boolean;
 
-  @Metadata({ data: "json, name=containerImage" })
+  @SpeakeasyMetadata({ data: "json, name=containerImage" })
   containerImage?: ContainerImage;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: string;
 
-  @Metadata({ data: "json, name=customGpuDriverPath" })
+  @SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" })
   customGpuDriverPath?: string;
 
-  @Metadata({ data: "json, name=dataDiskSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=dataDiskSizeGb" })
   dataDiskSizeGb?: string;
 
-  @Metadata({ data: "json, name=dataDiskType" })
+  @SpeakeasyMetadata({ data: "json, name=dataDiskType" })
   dataDiskType?: InstanceDataDiskTypeEnum;
 
-  @Metadata({ data: "json, name=diskEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=diskEncryption" })
   diskEncryption?: InstanceDiskEncryptionEnum;
 
-  @Metadata({ data: "json, name=disks", elemType: shared.Disk })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: Disk })
   disks?: Disk[];
 
-  @Metadata({ data: "json, name=installGpuDriver" })
+  @SpeakeasyMetadata({ data: "json, name=installGpuDriver" })
   installGpuDriver?: boolean;
 
-  @Metadata({ data: "json, name=instanceOwners" })
+  @SpeakeasyMetadata({ data: "json, name=instanceOwners" })
   instanceOwners?: string[];
 
-  @Metadata({ data: "json, name=kmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKey" })
   kmsKey?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=machineType" })
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
   machineType?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=nicType" })
+  @SpeakeasyMetadata({ data: "json, name=nicType" })
   nicType?: InstanceNicTypeEnum;
 
-  @Metadata({ data: "json, name=noProxyAccess" })
+  @SpeakeasyMetadata({ data: "json, name=noProxyAccess" })
   noProxyAccess?: boolean;
 
-  @Metadata({ data: "json, name=noPublicIp" })
+  @SpeakeasyMetadata({ data: "json, name=noPublicIp" })
   noPublicIp?: boolean;
 
-  @Metadata({ data: "json, name=noRemoveDataDisk" })
+  @SpeakeasyMetadata({ data: "json, name=noRemoveDataDisk" })
   noRemoveDataDisk?: boolean;
 
-  @Metadata({ data: "json, name=postStartupScript" })
+  @SpeakeasyMetadata({ data: "json, name=postStartupScript" })
   postStartupScript?: string;
 
-  @Metadata({ data: "json, name=proxyUri" })
+  @SpeakeasyMetadata({ data: "json, name=proxyUri" })
   proxyUri?: string;
 
-  @Metadata({ data: "json, name=reservationAffinity" })
+  @SpeakeasyMetadata({ data: "json, name=reservationAffinity" })
   reservationAffinity?: ReservationAffinity;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=serviceAccountScopes" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountScopes" })
   serviceAccountScopes?: string[];
 
-  @Metadata({ data: "json, name=shieldedInstanceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=shieldedInstanceConfig" })
   shieldedInstanceConfig?: ShieldedInstanceConfig;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InstanceStateEnum;
 
-  @Metadata({ data: "json, name=subnet" })
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
   subnet?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=upgradeHistory", elemType: shared.UpgradeHistoryEntry })
+  @SpeakeasyMetadata({ data: "json, name=upgradeHistory", elemType: UpgradeHistoryEntry })
   upgradeHistory?: UpgradeHistoryEntry[];
 
-  @Metadata({ data: "json, name=vmImage" })
+  @SpeakeasyMetadata({ data: "json, name=vmImage" })
+  vmImage?: VmImage;
+}
+
+
+// InstanceInput
+/** 
+ * The definition of a notebook instance.
+**/
+export class InstanceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=acceleratorConfig" })
+  acceleratorConfig?: AcceleratorConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=bootDiskSizeGb" })
+  bootDiskSizeGb?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=bootDiskType" })
+  bootDiskType?: InstanceBootDiskTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=canIpForward" })
+  canIpForward?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=containerImage" })
+  containerImage?: ContainerImage;
+
+  @SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" })
+  customGpuDriverPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=dataDiskSizeGb" })
+  dataDiskSizeGb?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=dataDiskType" })
+  dataDiskType?: InstanceDataDiskTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=diskEncryption" })
+  diskEncryption?: InstanceDiskEncryptionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=installGpuDriver" })
+  installGpuDriver?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=instanceOwners" })
+  instanceOwners?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=kmsKey" })
+  kmsKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
+  machineType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=network" })
+  network?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=nicType" })
+  nicType?: InstanceNicTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=noProxyAccess" })
+  noProxyAccess?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=noPublicIp" })
+  noPublicIp?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=noRemoveDataDisk" })
+  noRemoveDataDisk?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=postStartupScript" })
+  postStartupScript?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=reservationAffinity" })
+  reservationAffinity?: ReservationAffinity;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
+  serviceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountScopes" })
+  serviceAccountScopes?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=shieldedInstanceConfig" })
+  shieldedInstanceConfig?: ShieldedInstanceConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
+  subnet?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=upgradeHistory", elemType: UpgradeHistoryEntry })
+  upgradeHistory?: UpgradeHistoryEntry[];
+
+  @SpeakeasyMetadata({ data: "json, name=vmImage" })
   vmImage?: VmImage;
 }

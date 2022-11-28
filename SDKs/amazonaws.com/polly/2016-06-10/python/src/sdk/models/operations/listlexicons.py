@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -21,15 +24,15 @@ class ListLexiconsHeaders:
 
 @dataclass
 class ListLexiconsRequest:
-    query_params: ListLexiconsQueryParams = field(default=None)
-    headers: ListLexiconsHeaders = field(default=None)
+    headers: ListLexiconsHeaders = field()
+    query_params: ListLexiconsQueryParams = field()
     
 
 @dataclass
 class ListLexiconsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_next_token_exception: Optional[Any] = field(default=None)
     list_lexicons_output: Optional[shared.ListLexiconsOutput] = field(default=None)
     service_failure_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

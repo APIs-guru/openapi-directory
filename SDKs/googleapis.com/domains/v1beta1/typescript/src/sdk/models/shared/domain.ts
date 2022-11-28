@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
 
+
 export enum DomainResourceStateEnum {
-    ResourceStateUnspecified = "RESOURCE_STATE_UNSPECIFIED"
-,    Importable = "IMPORTABLE"
-,    Unsupported = "UNSUPPORTED"
-,    Suspended = "SUSPENDED"
-,    Expired = "EXPIRED"
-,    Deleted = "DELETED"
+    ResourceStateUnspecified = "RESOURCE_STATE_UNSPECIFIED",
+    Importable = "IMPORTABLE",
+    Unsupported = "UNSUPPORTED",
+    Suspended = "SUSPENDED",
+    Expired = "EXPIRED",
+    Deleted = "DELETED"
 }
 
 
@@ -16,12 +17,12 @@ export enum DomainResourceStateEnum {
  * A domain that the calling user manages in Google Domains.
 **/
 export class Domain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=resourceState" })
+  @SpeakeasyMetadata({ data: "json, name=resourceState" })
   resourceState?: DomainResourceStateEnum;
 
-  @Metadata({ data: "json, name=yearlyPrice" })
+  @SpeakeasyMetadata({ data: "json, name=yearlyPrice" })
   yearlyPrice?: Money;
 }

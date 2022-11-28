@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import workflowexecution
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExternalWorkflowExecutionSignaledEventAttributes:
-    initiated_event_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initiatedEventId' }})
-    workflow_execution: workflowexecution.WorkflowExecution = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workflowExecution' }})
+    r"""ExternalWorkflowExecutionSignaledEventAttributes
+    Provides the details of the <code>ExternalWorkflowExecutionSignaled</code> event.
+    """
+    
+    initiated_event_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('initiatedEventId') }})
+    workflow_execution: WorkflowExecution = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('workflowExecution') }})
     

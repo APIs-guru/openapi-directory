@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var OrderHeaderOrderStatusEnum;
 (function (OrderHeaderOrderStatusEnum) {
     OrderHeaderOrderStatusEnum["Active"] = "Active";
@@ -35,19 +35,19 @@ var OrderHeader = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], OrderHeader.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=numberOfLineItems" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfLineItems" }),
         __metadata("design:type", Number)
     ], OrderHeader.prototype, "numberOfLineItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderNumber" }),
+        SpeakeasyMetadata({ data: "json, name=orderNumber" }),
         __metadata("design:type", String)
     ], OrderHeader.prototype, "orderNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderStatus" }),
+        SpeakeasyMetadata({ data: "json, name=orderStatus" }),
         __metadata("design:type", String)
     ], OrderHeader.prototype, "orderStatus", void 0);
     return OrderHeader;

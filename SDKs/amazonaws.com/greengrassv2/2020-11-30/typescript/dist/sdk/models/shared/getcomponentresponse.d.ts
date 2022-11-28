@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecipeOutputFormatEnum } from "./recipeoutputformatenum";
 export declare class GetComponentResponse extends SpeakeasyBase {
     recipe: string;

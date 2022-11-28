@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cycle } from "./cycle";
 import { Metric } from "./metric";
+
 
 
 // StandardsProfile
@@ -9,21 +9,21 @@ import { Metric } from "./metric";
  * A complex type that defines a seller profile.
 **/
 export class StandardsProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cycle" })
+  @SpeakeasyMetadata({ data: "json, name=cycle" })
   cycle?: Cycle;
 
-  @Metadata({ data: "json, name=defaultProgram" })
+  @SpeakeasyMetadata({ data: "json, name=defaultProgram" })
   defaultProgram?: boolean;
 
-  @Metadata({ data: "json, name=evaluationReason" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationReason" })
   evaluationReason?: string;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 
-  @Metadata({ data: "json, name=program" })
+  @SpeakeasyMetadata({ data: "json, name=program" })
   program?: string;
 
-  @Metadata({ data: "json, name=standardsLevel" })
+  @SpeakeasyMetadata({ data: "json, name=standardsLevel" })
   standardsLevel?: string;
 }

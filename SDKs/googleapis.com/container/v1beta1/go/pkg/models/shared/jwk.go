@@ -1,5 +1,7 @@
 package shared
 
+// Jwk
+// Jwk is a JSON Web Key as specified in RFC 7517
 type Jwk struct {
 	Alg *string `json:"alg,omitempty"`
 	Crv *string `json:"crv,omitempty"`

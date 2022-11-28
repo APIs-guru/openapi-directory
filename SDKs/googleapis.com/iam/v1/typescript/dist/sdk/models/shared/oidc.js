@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Oidc
 /**
  * Represents an OpenId Connect 1.0 identity provider.
@@ -33,11 +33,11 @@ var Oidc = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowedAudiences" }),
+        SpeakeasyMetadata({ data: "json, name=allowedAudiences" }),
         __metadata("design:type", Array)
     ], Oidc.prototype, "allowedAudiences", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuerUri" }),
+        SpeakeasyMetadata({ data: "json, name=issuerUri" }),
         __metadata("design:type", String)
     ], Oidc.prototype, "issuerUri", void 0);
     return Oidc;

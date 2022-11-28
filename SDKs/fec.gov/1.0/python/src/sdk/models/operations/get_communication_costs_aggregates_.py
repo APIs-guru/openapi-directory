@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum(str, Enum):
@@ -9,7 +13,7 @@ class GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum(str, Enum):
 
 @dataclass
 class GetCommunicationCostsAggregatesQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
@@ -24,12 +28,12 @@ class GetCommunicationCostsAggregatesQueryParams:
 
 @dataclass
 class GetCommunicationCostsAggregatesRequest:
-    query_params: GetCommunicationCostsAggregatesQueryParams = field(default=None)
+    query_params: GetCommunicationCostsAggregatesQueryParams = field()
     
 
 @dataclass
 class GetCommunicationCostsAggregatesResponse:
+    content_type: str = field()
+    status_code: int = field()
     communication_cost_by_candidate_page: Optional[shared.CommunicationCostByCandidatePage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

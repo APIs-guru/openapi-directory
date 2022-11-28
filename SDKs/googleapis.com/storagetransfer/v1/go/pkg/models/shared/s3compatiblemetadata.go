@@ -32,6 +32,8 @@ const (
 	S3CompatibleMetadataRequestModelEnumRequestModelPathStyle          S3CompatibleMetadataRequestModelEnum = "REQUEST_MODEL_PATH_STYLE"
 )
 
+// S3CompatibleMetadata
+// S3CompatibleMetadata contains the metadata fields that apply to the basic types of S3-compatible data providers.
 type S3CompatibleMetadata struct {
 	AuthMethod   *S3CompatibleMetadataAuthMethodEnum   `json:"authMethod,omitempty"`
 	ListAPI      *S3CompatibleMetadataListAPIEnum      `json:"listApi,omitempty"`

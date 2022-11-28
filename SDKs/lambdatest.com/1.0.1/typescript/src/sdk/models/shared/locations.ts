@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LocationsLocations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class Locations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locations", elemType: shared.LocationsLocations })
+  @SpeakeasyMetadata({ data: "json, name=locations", elemType: LocationsLocations })
   locations?: LocationsLocations[];
 }

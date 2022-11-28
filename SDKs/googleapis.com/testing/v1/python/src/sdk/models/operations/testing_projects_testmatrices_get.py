@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TestingProjectsTestMatricesGetPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    test_matrix_id: str = field(default=None, metadata={'path_param': { 'field_name': 'testMatrixId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    test_matrix_id: str = field(metadata={'path_param': { 'field_name': 'testMatrixId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class TestingProjectsTestMatricesGetQueryParams:
 
 @dataclass
 class TestingProjectsTestMatricesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TestingProjectsTestMatricesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class TestingProjectsTestMatricesGetSecurity:
 
 @dataclass
 class TestingProjectsTestMatricesGetRequest:
-    path_params: TestingProjectsTestMatricesGetPathParams = field(default=None)
-    query_params: TestingProjectsTestMatricesGetQueryParams = field(default=None)
-    security: TestingProjectsTestMatricesGetSecurity = field(default=None)
+    path_params: TestingProjectsTestMatricesGetPathParams = field()
+    query_params: TestingProjectsTestMatricesGetQueryParams = field()
+    security: TestingProjectsTestMatricesGetSecurity = field()
     
 
 @dataclass
 class TestingProjectsTestMatricesGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_matrix: Optional[shared.TestMatrix] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PortfolioDetail
+// Information about a portfolio.
 type PortfolioDetail struct {
 	Arn          *string    `json:"ARN,omitempty"`
 	CreatedTime  *time.Time `json:"CreatedTime,omitempty"`

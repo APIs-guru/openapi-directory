@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import message
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HistoryLabelRemoved:
-    label_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelIds' }})
-    message: Optional[message.Message] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    label_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labelIds') }})
+    message: Optional[Message] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

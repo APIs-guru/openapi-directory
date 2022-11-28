@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GuardianInvitationStateEnum {
-    GuardianInvitationStateUnspecified = "GUARDIAN_INVITATION_STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Complete = "COMPLETE"
+    GuardianInvitationStateUnspecified = "GUARDIAN_INVITATION_STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Complete = "COMPLETE"
 }
 
 
@@ -12,18 +13,18 @@ export enum GuardianInvitationStateEnum {
  * An invitation to become the guardian of a specified user, sent to a specified email address.
 **/
 export class GuardianInvitation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=invitationId" })
+  @SpeakeasyMetadata({ data: "json, name=invitationId" })
   invitationId?: string;
 
-  @Metadata({ data: "json, name=invitedEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=invitedEmailAddress" })
   invitedEmailAddress?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GuardianInvitationStateEnum;
 
-  @Metadata({ data: "json, name=studentId" })
+  @SpeakeasyMetadata({ data: "json, name=studentId" })
   studentId?: string;
 }

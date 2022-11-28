@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloneContext } from "./clonecontext";
+
 
 
 // InstancesCloneRequest
@@ -7,6 +8,6 @@ import { CloneContext } from "./clonecontext";
  * Database instance clone request.
 **/
 export class InstancesCloneRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloneContext" })
+  @SpeakeasyMetadata({ data: "json, name=cloneContext" })
   cloneContext?: CloneContext;
 }

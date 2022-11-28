@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UplinkSpectrumConfig } from "./uplinkspectrumconfig";
 import { Eirp } from "./eirp";
+
 
 
 // AntennaUplinkConfig
@@ -8,12 +9,12 @@ import { Eirp } from "./eirp";
  * Information about the uplink <code>Config</code> of an antenna.
 **/
 export class AntennaUplinkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=spectrumConfig" })
+  @SpeakeasyMetadata({ data: "json, name=spectrumConfig" })
   spectrumConfig: UplinkSpectrumConfig;
 
-  @Metadata({ data: "json, name=targetEirp" })
+  @SpeakeasyMetadata({ data: "json, name=targetEirp" })
   targetEirp: Eirp;
 
-  @Metadata({ data: "json, name=transmitDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=transmitDisabled" })
   transmitDisabled?: boolean;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import peeredvpc
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Egress:
-    peered_vpc: Optional[peeredvpc.PeeredVpc] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'peeredVpc' }})
+    r"""Egress
+    The details of the egress info. One of the following options should be set.
+    """
+    
+    peered_vpc: Optional[PeeredVpc] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('peeredVpc') }})
     

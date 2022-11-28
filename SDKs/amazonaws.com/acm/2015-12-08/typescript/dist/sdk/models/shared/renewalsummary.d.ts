@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainValidation } from "./domainvalidation";
 import { RenewalStatusEnum } from "./renewalstatusenum";
 import { FailureReasonEnum } from "./failurereasonenum";

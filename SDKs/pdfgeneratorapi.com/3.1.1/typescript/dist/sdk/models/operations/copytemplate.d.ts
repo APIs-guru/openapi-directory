@@ -1,11 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CopyTemplateQueryParams extends SpeakeasyBase {
     name?: string;
     templateId: number;
-}
-export declare class CopyTemplateRequest extends SpeakeasyBase {
-    queryParams: CopyTemplateQueryParams;
 }
 export declare class CopyTemplate200ApplicationJson extends SpeakeasyBase {
     response?: shared.TemplateDefinition;
@@ -55,6 +52,9 @@ export declare class CopyTemplate422ApplicationJson extends SpeakeasyBase {
 export declare class CopyTemplate500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class CopyTemplateRequest extends SpeakeasyBase {
+    queryParams: CopyTemplateQueryParams;
 }
 export declare class CopyTemplateResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DatabaseCreateDocumentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
   collectionId: string;
 }
 
 
 export class DatabaseCreateDocumentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: Map<string, any>;
 
-  @Metadata({ data: "json, name=parentDocument" })
+  @SpeakeasyMetadata({ data: "json, name=parentDocument" })
   parentDocument?: string;
 
-  @Metadata({ data: "json, name=parentProperty" })
+  @SpeakeasyMetadata({ data: "json, name=parentProperty" })
   parentProperty?: string;
 
-  @Metadata({ data: "json, name=parentPropertyType" })
+  @SpeakeasyMetadata({ data: "json, name=parentPropertyType" })
   parentPropertyType?: string;
 
-  @Metadata({ data: "json, name=read" })
+  @SpeakeasyMetadata({ data: "json, name=read" })
   read?: string[];
 
-  @Metadata({ data: "json, name=write" })
+  @SpeakeasyMetadata({ data: "json, name=write" })
   write?: string[];
 }
 
 
 export class DatabaseCreateDocumentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   jwt: shared.SchemeJwt;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class DatabaseCreateDocumentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DatabaseCreateDocumentPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: DatabaseCreateDocumentRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DatabaseCreateDocumentSecurity;
 }
 
 
 export class DatabaseCreateDocumentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   document?: Map<string, any>;
 }

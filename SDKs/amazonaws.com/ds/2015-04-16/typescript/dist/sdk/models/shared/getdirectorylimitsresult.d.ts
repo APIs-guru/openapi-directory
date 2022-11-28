@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DirectoryLimits } from "./directorylimits";
 /**
  * Contains the results of the <a>GetDirectoryLimits</a> operation.

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StackErrorCodeEnum } from "./stackerrorcodeenum";
 /**
  * Describes a stack error.

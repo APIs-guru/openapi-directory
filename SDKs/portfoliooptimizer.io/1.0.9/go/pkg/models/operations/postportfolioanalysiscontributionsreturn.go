@@ -11,10 +11,6 @@ type PostPortfolioAnalysisContributionsReturnRequestBody struct {
 	Portfolios    []PostPortfolioAnalysisContributionsReturnRequestBodyPortfolios `json:"portfolios"`
 }
 
-type PostPortfolioAnalysisContributionsReturnRequest struct {
-	Request PostPortfolioAnalysisContributionsReturnRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisContributionsReturn200ApplicationJSONPortfolios struct {
 	AssetsGroupsReturnContributions []float64 `json:"assetsGroupsReturnContributions,omitempty"`
 	AssetsReturnContributions       []float64 `json:"assetsReturnContributions"`
@@ -22,6 +18,10 @@ type PostPortfolioAnalysisContributionsReturn200ApplicationJSONPortfolios struct
 
 type PostPortfolioAnalysisContributionsReturn200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisContributionsReturn200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisContributionsReturnRequest struct {
+	Request PostPortfolioAnalysisContributionsReturnRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisContributionsReturnResponse struct {

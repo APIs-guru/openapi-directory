@@ -10,6 +10,8 @@ const (
 	AppliedLabelChangeDetailTypesEnumLabelAppliedByItemCreate AppliedLabelChangeDetailTypesEnum = "LABEL_APPLIED_BY_ITEM_CREATE"
 )
 
+// AppliedLabelChangeDetail
+// A change made to a Label on the Target.
 type AppliedLabelChangeDetail struct {
 	FieldChanges []FieldValueChange                  `json:"fieldChanges,omitempty"`
 	Label        *string                             `json:"label,omitempty"`

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellLocation } from "./tablecelllocation";
 import { Range } from "./range";
+
 
 
 // DeleteTextRequest
@@ -8,12 +9,12 @@ import { Range } from "./range";
  * Deletes text from a shape or a table cell.
 **/
 export class DeleteTextRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cellLocation" })
+  @SpeakeasyMetadata({ data: "json, name=cellLocation" })
   cellLocation?: TableCellLocation;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=textRange" })
+  @SpeakeasyMetadata({ data: "json, name=textRange" })
   textRange?: Range;
 }

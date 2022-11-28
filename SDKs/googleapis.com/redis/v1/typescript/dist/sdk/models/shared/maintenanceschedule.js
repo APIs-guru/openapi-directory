@@ -22,7 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// MaintenanceScheduleInput
+/**
+ * Upcoming maintenance schedule. If no maintenance is scheduled, fields are not populated.
+**/
+var MaintenanceScheduleInput = /** @class */ (function (_super) {
+    __extends(MaintenanceScheduleInput, _super);
+    function MaintenanceScheduleInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=canReschedule" }),
+        __metadata("design:type", Boolean)
+    ], MaintenanceScheduleInput.prototype, "canReschedule", void 0);
+    return MaintenanceScheduleInput;
+}(SpeakeasyBase));
+export { MaintenanceScheduleInput };
 // MaintenanceSchedule
 /**
  * Upcoming maintenance schedule. If no maintenance is scheduled, fields are not populated.
@@ -33,19 +49,19 @@ var MaintenanceSchedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=canReschedule" }),
+        SpeakeasyMetadata({ data: "json, name=canReschedule" }),
         __metadata("design:type", Boolean)
     ], MaintenanceSchedule.prototype, "canReschedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], MaintenanceSchedule.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheduleDeadlineTime" }),
+        SpeakeasyMetadata({ data: "json, name=scheduleDeadlineTime" }),
         __metadata("design:type", String)
     ], MaintenanceSchedule.prototype, "scheduleDeadlineTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], MaintenanceSchedule.prototype, "startTime", void 0);
     return MaintenanceSchedule;

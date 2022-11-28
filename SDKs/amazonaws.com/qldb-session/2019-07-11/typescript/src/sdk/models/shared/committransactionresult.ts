@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoUsage } from "./iousage";
 import { TimingInformation } from "./timinginformation";
+
 
 
 // CommitTransactionResult
@@ -8,15 +9,15 @@ import { TimingInformation } from "./timinginformation";
  * Contains the details of the committed transaction.
 **/
 export class CommitTransactionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CommitDigest" })
+  @SpeakeasyMetadata({ data: "json, name=CommitDigest" })
   commitDigest?: string;
 
-  @Metadata({ data: "json, name=ConsumedIOs" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedIOs" })
   consumedIOs?: IoUsage;
 
-  @Metadata({ data: "json, name=TimingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=TimingInformation" })
   timingInformation?: TimingInformation;
 
-  @Metadata({ data: "json, name=TransactionId" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionId" })
   transactionId?: string;
 }

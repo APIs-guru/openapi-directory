@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import rgbcolor
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Color:
-    rgb_color: Optional[rgbcolor.RgbColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rgbColor' }})
+    r"""Color
+    A solid color.
+    """
+    
+    rgb_color: Optional[RgbColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rgbColor') }})
     

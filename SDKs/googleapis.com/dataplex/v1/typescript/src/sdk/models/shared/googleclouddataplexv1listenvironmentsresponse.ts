@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1Environment } from "./googleclouddataplexv1environment";
+
 
 
 // GoogleCloudDataplexV1ListEnvironmentsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDataplexV1Environment } from "./googleclouddataplexv1environ
  * List environments response.
 **/
 export class GoogleCloudDataplexV1ListEnvironmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environments", elemType: shared.GoogleCloudDataplexV1Environment })
+  @SpeakeasyMetadata({ data: "json, name=environments", elemType: GoogleCloudDataplexV1Environment })
   environments?: GoogleCloudDataplexV1Environment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

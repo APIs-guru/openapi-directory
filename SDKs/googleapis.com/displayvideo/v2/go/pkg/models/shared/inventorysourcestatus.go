@@ -30,10 +30,19 @@ const (
 	InventorySourceStatusSellerStatusEnumEntityStatusScheduledForDeletion InventorySourceStatusSellerStatusEnum = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
 )
 
+// InventorySourceStatus
+// The status related settings of the inventory source.
 type InventorySourceStatus struct {
 	ConfigStatus      *InventorySourceStatusConfigStatusEnum `json:"configStatus,omitempty"`
 	EntityPauseReason *string                                `json:"entityPauseReason,omitempty"`
 	EntityStatus      *InventorySourceStatusEntityStatusEnum `json:"entityStatus,omitempty"`
 	SellerPauseReason *string                                `json:"sellerPauseReason,omitempty"`
 	SellerStatus      *InventorySourceStatusSellerStatusEnum `json:"sellerStatus,omitempty"`
+}
+
+// InventorySourceStatusInput
+// The status related settings of the inventory source.
+type InventorySourceStatusInput struct {
+	EntityPauseReason *string                                `json:"entityPauseReason,omitempty"`
+	EntityStatus      *InventorySourceStatusEntityStatusEnum `json:"entityStatus,omitempty"`
 }

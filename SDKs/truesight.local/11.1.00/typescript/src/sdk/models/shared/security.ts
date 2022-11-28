@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeCookie extends SpeakeasyBase {
-  @Metadata({ data: "security, name=Cookie" })
+  @SpeakeasyMetadata({ data: "security, name=Cookie" })
   apiKey: string;
 }

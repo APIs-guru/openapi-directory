@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExpectedRoute
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the expected route in the route table.
 **/
 export class ExpectedRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedTargets" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedTargets" })
   allowedTargets?: string[];
 
-  @Metadata({ data: "json, name=ContributingSubnets" })
+  @SpeakeasyMetadata({ data: "json, name=ContributingSubnets" })
   contributingSubnets?: string[];
 
-  @Metadata({ data: "json, name=IpV4Cidr" })
+  @SpeakeasyMetadata({ data: "json, name=IpV4Cidr" })
   ipV4Cidr?: string;
 
-  @Metadata({ data: "json, name=IpV6Cidr" })
+  @SpeakeasyMetadata({ data: "json, name=IpV6Cidr" })
   ipV6Cidr?: string;
 
-  @Metadata({ data: "json, name=PrefixListId" })
+  @SpeakeasyMetadata({ data: "json, name=PrefixListId" })
   prefixListId?: string;
 
-  @Metadata({ data: "json, name=RouteTableId" })
+  @SpeakeasyMetadata({ data: "json, name=RouteTableId" })
   routeTableId?: string;
 }

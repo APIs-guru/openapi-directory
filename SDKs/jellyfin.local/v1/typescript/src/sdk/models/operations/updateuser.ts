@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
-export class UpdateUserRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  userDto?: shared.UserDto;
+export class UpdateUserRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  userDto?: shared.UserDtoInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  userDto1?: shared.UserDto;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  userDto1?: shared.UserDtoInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  userDto2?: shared.UserDto;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  userDto2?: shared.UserDtoInput;
 }
 
 
 export class UpdateUserSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateUserPathParams;
 
-  @Metadata()
-  request: UpdateUserRequests;
+  @SpeakeasyMetadata()
+  request: UpdateUserRequestsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateUserSecurity;
 }
 
 
 export class UpdateUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NeighborConnectionDetail } from "./neighborconnectiondetail";
 
 
+
 export class ListServerNeighborsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=knownDependencyCount" })
+  @SpeakeasyMetadata({ data: "json, name=knownDependencyCount" })
   knownDependencyCount?: number;
 
-  @Metadata({ data: "json, name=neighbors", elemType: shared.NeighborConnectionDetail })
+  @SpeakeasyMetadata({ data: "json, name=neighbors", elemType: NeighborConnectionDetail })
   neighbors: NeighborConnectionDetail[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ForwardingAddressVerificationStatusEnum {
-    VerificationStatusUnspecified = "verificationStatusUnspecified"
-,    Accepted = "accepted"
-,    Pending = "pending"
+    VerificationStatusUnspecified = "verificationStatusUnspecified",
+    Accepted = "accepted",
+    Pending = "pending"
 }
 
 
@@ -12,9 +13,9 @@ export enum ForwardingAddressVerificationStatusEnum {
  * Settings for a forwarding address.
 **/
 export class ForwardingAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forwardingEmail" })
+  @SpeakeasyMetadata({ data: "json, name=forwardingEmail" })
   forwardingEmail?: string;
 
-  @Metadata({ data: "json, name=verificationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=verificationStatus" })
   verificationStatus?: ForwardingAddressVerificationStatusEnum;
 }

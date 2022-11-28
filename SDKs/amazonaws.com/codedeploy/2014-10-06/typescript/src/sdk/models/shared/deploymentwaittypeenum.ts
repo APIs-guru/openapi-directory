@@ -1,6 +1,7 @@
 
 
+
 export enum DeploymentWaitTypeEnum {
-    ReadyWait = "READY_WAIT"
-,    TerminationWait = "TERMINATION_WAIT"
+    ReadyWait = "READY_WAIT",
+    TerminationWait = "TERMINATION_WAIT"
 }

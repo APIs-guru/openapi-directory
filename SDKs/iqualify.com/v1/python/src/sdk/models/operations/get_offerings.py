@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetOfferingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     offering_metadata_responses: Optional[List[shared.OfferingMetadataResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

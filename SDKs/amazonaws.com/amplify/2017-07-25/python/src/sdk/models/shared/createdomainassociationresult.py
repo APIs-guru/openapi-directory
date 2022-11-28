@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import domainassociation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateDomainAssociationResult:
-    domain_association: domainassociation.DomainAssociation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainAssociation' }})
+    r"""CreateDomainAssociationResult
+     The result structure for the create domain association request. 
+    """
+    
+    domain_association: DomainAssociation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainAssociation') }})
     

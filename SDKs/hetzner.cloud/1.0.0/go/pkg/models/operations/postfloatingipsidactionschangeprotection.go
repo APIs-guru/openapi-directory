@@ -8,11 +8,8 @@ type PostFloatingIpsIDActionsChangeProtectionChangeProtectionRequest struct {
 	Delete *bool `json:"delete,omitempty"`
 }
 
-type PostFloatingIpsIDActionsChangeProtectionRequest struct {
-	PathParams PostFloatingIpsIDActionsChangeProtectionPathParams
-	Request    *PostFloatingIpsIDActionsChangeProtectionChangeProtectionRequest `request:"mediaType=application/json"`
-}
-
+// PostFloatingIpsIDActionsChangeProtectionActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFloatingIpsIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostFloatingIpsIDActionsChangeProtectionActionResponseAction struct {
 
 type PostFloatingIpsIDActionsChangeProtectionActionResponse struct {
 	Action PostFloatingIpsIDActionsChangeProtectionActionResponseAction `json:"action"`
+}
+
+type PostFloatingIpsIDActionsChangeProtectionRequest struct {
+	PathParams PostFloatingIpsIDActionsChangeProtectionPathParams
+	Request    *PostFloatingIpsIDActionsChangeProtectionChangeProtectionRequest `request:"mediaType=application/json"`
 }
 
 type PostFloatingIpsIDActionsChangeProtectionResponse struct {

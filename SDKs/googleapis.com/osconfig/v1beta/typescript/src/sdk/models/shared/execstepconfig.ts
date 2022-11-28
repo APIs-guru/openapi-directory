@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcsObject } from "./gcsobject";
 
+
 export enum ExecStepConfigInterpreterEnum {
-    InterpreterUnspecified = "INTERPRETER_UNSPECIFIED"
-,    None = "NONE"
-,    Shell = "SHELL"
-,    Powershell = "POWERSHELL"
+    InterpreterUnspecified = "INTERPRETER_UNSPECIFIED",
+    None = "NONE",
+    Shell = "SHELL",
+    Powershell = "POWERSHELL"
 }
 
 
@@ -14,15 +15,15 @@ export enum ExecStepConfigInterpreterEnum {
  * Common configurations for an ExecStep.
 **/
 export class ExecStepConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedSuccessCodes" })
+  @SpeakeasyMetadata({ data: "json, name=allowedSuccessCodes" })
   allowedSuccessCodes?: number[];
 
-  @Metadata({ data: "json, name=gcsObject" })
+  @SpeakeasyMetadata({ data: "json, name=gcsObject" })
   gcsObject?: GcsObject;
 
-  @Metadata({ data: "json, name=interpreter" })
+  @SpeakeasyMetadata({ data: "json, name=interpreter" })
   interpreter?: ExecStepConfigInterpreterEnum;
 
-  @Metadata({ data: "json, name=localPath" })
+  @SpeakeasyMetadata({ data: "json, name=localPath" })
   localPath?: string;
 }

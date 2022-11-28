@@ -12,12 +12,12 @@ class PermissionsGetPermissionsQueryParams:
 
 @dataclass
 class PermissionsGetPermissionsRequest:
-    query_params: PermissionsGetPermissionsQueryParams = field(default=None)
+    query_params: PermissionsGetPermissionsQueryParams = field()
     
 
 @dataclass
 class PermissionsGetPermissionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_paged_response_api_models_permission_: Optional[shared.APIPagedResponseAPIModelsPermission] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

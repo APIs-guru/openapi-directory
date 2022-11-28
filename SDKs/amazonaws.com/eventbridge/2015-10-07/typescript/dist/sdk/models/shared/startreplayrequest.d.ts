@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplayDestination } from "./replaydestination";
 export declare class StartReplayRequest extends SpeakeasyBase {
     description?: string;

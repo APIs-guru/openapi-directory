@@ -1,9 +1,16 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum SnapshotStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Creating = "CREATING",
     Ready = "READY",
     Deleting = "DELETING"
+}
+/**
+ * A Filestore snapshot.
+**/
+export declare class SnapshotInput extends SpeakeasyBase {
+    description?: string;
+    labels?: Map<string, string>;
 }
 /**
  * A Filestore snapshot.

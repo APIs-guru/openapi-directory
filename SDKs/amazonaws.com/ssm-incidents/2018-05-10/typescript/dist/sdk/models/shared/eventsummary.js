@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EventSummary
 /**
  * Details about a timeline event during an incident.
@@ -33,23 +33,23 @@ var EventSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eventId" }),
+        SpeakeasyMetadata({ data: "json, name=eventId" }),
         __metadata("design:type", String)
     ], EventSummary.prototype, "eventId", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTime" }),
+        SpeakeasyMetadata({ data: "json, name=eventTime" }),
         __metadata("design:type", Date)
     ], EventSummary.prototype, "eventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventType" }),
+        SpeakeasyMetadata({ data: "json, name=eventType" }),
         __metadata("design:type", String)
     ], EventSummary.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=eventUpdatedTime" }),
         __metadata("design:type", Date)
     ], EventSummary.prototype, "eventUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=incidentRecordArn" }),
+        SpeakeasyMetadata({ data: "json, name=incidentRecordArn" }),
         __metadata("design:type", String)
     ], EventSummary.prototype, "incidentRecordArn", void 0);
     return EventSummary;

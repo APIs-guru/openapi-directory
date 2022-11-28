@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceDataSyncOrganizationalUnit } from "./resourcedatasyncorganizationalunit";
+
 
 
 // ResourceDataSyncAwsOrganizationsSource
@@ -8,9 +8,9 @@ import { ResourceDataSyncOrganizationalUnit } from "./resourcedatasyncorganizati
  * Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync source of this type can synchronize data from Organizations or, if an Amazon Web Services organization isn't present, from multiple Amazon Web Services Regions.
 **/
 export class ResourceDataSyncAwsOrganizationsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OrganizationSourceType" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationSourceType" })
   organizationSourceType: string;
 
-  @Metadata({ data: "json, name=OrganizationalUnits", elemType: shared.ResourceDataSyncOrganizationalUnit })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnits", elemType: ResourceDataSyncOrganizationalUnit })
   organizationalUnits?: ResourceDataSyncOrganizationalUnit[];
 }

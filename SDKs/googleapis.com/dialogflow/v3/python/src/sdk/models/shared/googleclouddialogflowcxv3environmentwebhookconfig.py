@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3webhook
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3EnvironmentWebhookConfig:
-    webhook_overrides: Optional[List[googleclouddialogflowcxv3webhook.GoogleCloudDialogflowCxV3Webhook]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhookOverrides' }})
+    r"""GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+    Configuration for webhooks.
+    """
+    
+    webhook_overrides: Optional[List[GoogleCloudDialogflowCxV3Webhook]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhookOverrides') }})
     

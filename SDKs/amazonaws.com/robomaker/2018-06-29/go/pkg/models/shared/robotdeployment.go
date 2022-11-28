@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RobotDeployment
+// Information about a robot deployment.
 type RobotDeployment struct {
 	Arn                  *string                     `json:"arn,omitempty"`
 	DeploymentFinishTime *time.Time                  `json:"deploymentFinishTime,omitempty"`

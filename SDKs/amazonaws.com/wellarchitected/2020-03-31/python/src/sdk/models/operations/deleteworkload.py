@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteWorkloadPathParams:
-    workload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
+    workload_id: str = field(metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteWorkloadQueryParams:
-    client_request_token: str = field(default=None, metadata={'query_param': { 'field_name': 'ClientRequestToken', 'style': 'form', 'explode': True }})
+    client_request_token: str = field(metadata={'query_param': { 'field_name': 'ClientRequestToken', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,19 +28,19 @@ class DeleteWorkloadHeaders:
 
 @dataclass
 class DeleteWorkloadRequest:
-    path_params: DeleteWorkloadPathParams = field(default=None)
-    query_params: DeleteWorkloadQueryParams = field(default=None)
-    headers: DeleteWorkloadHeaders = field(default=None)
+    headers: DeleteWorkloadHeaders = field()
+    path_params: DeleteWorkloadPathParams = field()
+    query_params: DeleteWorkloadQueryParams = field()
     
 
 @dataclass
 class DeleteWorkloadResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

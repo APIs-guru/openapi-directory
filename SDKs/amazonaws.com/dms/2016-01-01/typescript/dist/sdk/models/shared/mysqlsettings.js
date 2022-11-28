@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetDbTypeEnum } from "./targetdbtypeenum";
 // MySqlSettings
 /**
@@ -34,59 +34,59 @@ var MySqlSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AfterConnectScript" }),
+        SpeakeasyMetadata({ data: "json, name=AfterConnectScript" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "afterConnectScript", void 0);
     __decorate([
-        Metadata({ data: "json, name=CleanSourceMetadataOnMismatch" }),
+        SpeakeasyMetadata({ data: "json, name=CleanSourceMetadataOnMismatch" }),
         __metadata("design:type", Boolean)
     ], MySqlSettings.prototype, "cleanSourceMetadataOnMismatch", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventsPollInterval" }),
+        SpeakeasyMetadata({ data: "json, name=EventsPollInterval" }),
         __metadata("design:type", Number)
     ], MySqlSettings.prototype, "eventsPollInterval", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxFileSize" }),
+        SpeakeasyMetadata({ data: "json, name=MaxFileSize" }),
         __metadata("design:type", Number)
     ], MySqlSettings.prototype, "maxFileSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParallelLoadThreads" }),
+        SpeakeasyMetadata({ data: "json, name=ParallelLoadThreads" }),
         __metadata("design:type", Number)
     ], MySqlSettings.prototype, "parallelLoadThreads", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], MySqlSettings.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "secretsManagerAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerSecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "secretsManagerSecretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerTimezone" }),
+        SpeakeasyMetadata({ data: "json, name=ServerTimezone" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "serverTimezone", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetDbType" }),
+        SpeakeasyMetadata({ data: "json, name=TargetDbType" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "targetDbType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], MySqlSettings.prototype, "username", void 0);
     return MySqlSettings;

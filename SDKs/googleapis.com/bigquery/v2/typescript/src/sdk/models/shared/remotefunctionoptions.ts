@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RemoteFunctionOptions
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for a remote user-defined function.
 **/
 export class RemoteFunctionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection" })
+  @SpeakeasyMetadata({ data: "json, name=connection" })
   connection?: string;
 
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=maxBatchingRows" })
+  @SpeakeasyMetadata({ data: "json, name=maxBatchingRows" })
   maxBatchingRows?: string;
 
-  @Metadata({ data: "json, name=userDefinedContext" })
+  @SpeakeasyMetadata({ data: "json, name=userDefinedContext" })
   userDefinedContext?: Map<string, string>;
 }

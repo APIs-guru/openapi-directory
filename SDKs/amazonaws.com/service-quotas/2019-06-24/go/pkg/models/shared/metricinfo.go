@@ -1,5 +1,7 @@
 package shared
 
+// MetricInfo
+// Information about the CloudWatch metric that reflects quota usage.
 type MetricInfo struct {
 	MetricDimensions              map[string]string `json:"MetricDimensions,omitempty"`
 	MetricName                    *string           `json:"MetricName,omitempty"`

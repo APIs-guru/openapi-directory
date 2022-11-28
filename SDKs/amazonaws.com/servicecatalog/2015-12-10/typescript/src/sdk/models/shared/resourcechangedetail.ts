@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationTypeEnum } from "./evaluationtypeenum";
 import { ResourceTargetDefinition } from "./resourcetargetdefinition";
+
 
 
 // ResourceChangeDetail
@@ -8,12 +9,12 @@ import { ResourceTargetDefinition } from "./resourcetargetdefinition";
  * Information about a change to a resource attribute.
 **/
 export class ResourceChangeDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CausingEntity" })
+  @SpeakeasyMetadata({ data: "json, name=CausingEntity" })
   causingEntity?: string;
 
-  @Metadata({ data: "json, name=Evaluation" })
+  @SpeakeasyMetadata({ data: "json, name=Evaluation" })
   evaluation?: EvaluationTypeEnum;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target?: ResourceTargetDefinition;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ClusterTelemetryTypeEnum {
-    Unspecified = "UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
-,    SystemOnly = "SYSTEM_ONLY"
+    Unspecified = "UNSPECIFIED",
+    Disabled = "DISABLED",
+    Enabled = "ENABLED",
+    SystemOnly = "SYSTEM_ONLY"
 }
 
 
@@ -13,6 +14,6 @@ export enum ClusterTelemetryTypeEnum {
  * Telemetry integration for the cluster.
 **/
 export class ClusterTelemetry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ClusterTelemetryTypeEnum;
 }

@@ -113,6 +113,27 @@ const (
 	InventorySourceInventorySourceTypeEnumInventorySourceTypeAuctionPackage InventorySourceInventorySourceTypeEnum = "INVENTORY_SOURCE_TYPE_AUCTION_PACKAGE"
 )
 
+// InventorySourceInput
+// An inventory source.
+type InventorySourceInput struct {
+	Commitment          *InventorySourceCommitmentEnum          `json:"commitment,omitempty"`
+	CreativeConfigs     []CreativeConfig                        `json:"creativeConfigs,omitempty"`
+	DealID              *string                                 `json:"dealId,omitempty"`
+	DeliveryMethod      *InventorySourceDeliveryMethodEnum      `json:"deliveryMethod,omitempty"`
+	DisplayName         *string                                 `json:"displayName,omitempty"`
+	Exchange            *InventorySourceExchangeEnum            `json:"exchange,omitempty"`
+	GuaranteedOrderID   *string                                 `json:"guaranteedOrderId,omitempty"`
+	InventorySourceType *InventorySourceInventorySourceTypeEnum `json:"inventorySourceType,omitempty"`
+	PublisherName       *string                                 `json:"publisherName,omitempty"`
+	RateDetails         *RateDetails                            `json:"rateDetails,omitempty"`
+	ReadWriteAccessors  *InventorySourceAccessors               `json:"readWriteAccessors,omitempty"`
+	Status              *InventorySourceStatusInput             `json:"status,omitempty"`
+	SubSitePropertyID   *string                                 `json:"subSitePropertyId,omitempty"`
+	TimeRange           *TimeRange                              `json:"timeRange,omitempty"`
+}
+
+// InventorySource
+// An inventory source.
 type InventorySource struct {
 	Commitment                 *InventorySourceCommitmentEnum                 `json:"commitment,omitempty"`
 	CreativeConfigs            []CreativeConfig                               `json:"creativeConfigs,omitempty"`

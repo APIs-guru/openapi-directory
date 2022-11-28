@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceptCodeValidationEnum } from "./acceptcodevalidationenum";
 import { AcceptTypeEnum } from "./accepttypeenum";
 var AcceptPageRequest = /** @class */ (function (_super) {
@@ -31,27 +31,27 @@ var AcceptPageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptCode" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptCode" }),
         __metadata("design:type", String)
     ], AcceptPageRequest.prototype, "acceptCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=AcceptCodeValidation" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptCodeValidation" }),
         __metadata("design:type", String)
     ], AcceptPageRequest.prototype, "acceptCodeValidation", void 0);
     __decorate([
-        Metadata({ data: "json, name=AcceptType" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptType" }),
         __metadata("design:type", String)
     ], AcceptPageRequest.prototype, "acceptType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ContactChannelId" }),
+        SpeakeasyMetadata({ data: "json, name=ContactChannelId" }),
         __metadata("design:type", String)
     ], AcceptPageRequest.prototype, "contactChannelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Note" }),
+        SpeakeasyMetadata({ data: "json, name=Note" }),
         __metadata("design:type", String)
     ], AcceptPageRequest.prototype, "note", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageId" }),
+        SpeakeasyMetadata({ data: "json, name=PageId" }),
         __metadata("design:type", String)
     ], AcceptPageRequest.prototype, "pageId", void 0);
     return AcceptPageRequest;

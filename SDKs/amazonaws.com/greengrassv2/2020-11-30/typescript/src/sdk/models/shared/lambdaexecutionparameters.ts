@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaEventSource } from "./lambdaeventsource";
 import { LambdaInputPayloadEncodingTypeEnum } from "./lambdainputpayloadencodingtypeenum";
 import { LambdaLinuxProcessParams } from "./lambdalinuxprocessparams";
+
 
 
 // LambdaExecutionParameters
@@ -10,36 +10,36 @@ import { LambdaLinuxProcessParams } from "./lambdalinuxprocessparams";
  * Contains parameters for a Lambda function that runs on IoT Greengrass.
 **/
 export class LambdaExecutionParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentVariables" })
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables" })
   environmentVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=eventSources", elemType: shared.LambdaEventSource })
+  @SpeakeasyMetadata({ data: "json, name=eventSources", elemType: LambdaEventSource })
   eventSources?: LambdaEventSource[];
 
-  @Metadata({ data: "json, name=execArgs" })
+  @SpeakeasyMetadata({ data: "json, name=execArgs" })
   execArgs?: string[];
 
-  @Metadata({ data: "json, name=inputPayloadEncodingType" })
+  @SpeakeasyMetadata({ data: "json, name=inputPayloadEncodingType" })
   inputPayloadEncodingType?: LambdaInputPayloadEncodingTypeEnum;
 
-  @Metadata({ data: "json, name=linuxProcessParams" })
+  @SpeakeasyMetadata({ data: "json, name=linuxProcessParams" })
   linuxProcessParams?: LambdaLinuxProcessParams;
 
-  @Metadata({ data: "json, name=maxIdleTimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxIdleTimeInSeconds" })
   maxIdleTimeInSeconds?: number;
 
-  @Metadata({ data: "json, name=maxInstancesCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxInstancesCount" })
   maxInstancesCount?: number;
 
-  @Metadata({ data: "json, name=maxQueueSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxQueueSize" })
   maxQueueSize?: number;
 
-  @Metadata({ data: "json, name=pinned" })
+  @SpeakeasyMetadata({ data: "json, name=pinned" })
   pinned?: boolean;
 
-  @Metadata({ data: "json, name=statusTimeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=statusTimeoutInSeconds" })
   statusTimeoutInSeconds?: number;
 
-  @Metadata({ data: "json, name=timeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutInSeconds" })
   timeoutInSeconds?: number;
 }

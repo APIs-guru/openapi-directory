@@ -1,5 +1,7 @@
 package shared
 
+// ObParty2Address
+// Postal address of a party.
 type ObParty2Address struct {
 	AddressLine        []string               `json:"AddressLine,omitempty"`
 	AddressType        *ObAddressTypeCodeEnum `json:"AddressType,omitempty"`

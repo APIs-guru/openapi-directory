@@ -11,6 +11,8 @@ type FeedLinks struct {
 	User                     LinkWithType   `json:"user"`
 }
 
+// Feed
+// Feed
 type Feed struct {
 	Links                       FeedLinks `json:"_links"`
 	CurrentUserActorURL         *string   `json:"current_user_actor_url,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NodeTypeSpecificValue
 /**
  * Represents a parameter value that is applicable to a particular node type.
@@ -33,11 +33,11 @@ var NodeTypeSpecificValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NodeType" }),
+        SpeakeasyMetadata({ data: "json, name=NodeType" }),
         __metadata("design:type", String)
     ], NodeTypeSpecificValue.prototype, "nodeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", String)
     ], NodeTypeSpecificValue.prototype, "value", void 0);
     return NodeTypeSpecificValue;

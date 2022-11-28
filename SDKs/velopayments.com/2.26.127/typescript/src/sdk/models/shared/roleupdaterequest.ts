@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RoleUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=roles" })
+  @SpeakeasyMetadata({ data: "json, name=roles" })
   roles: string[];
 
-  @Metadata({ data: "json, name=verificationCode" })
+  @SpeakeasyMetadata({ data: "json, name=verificationCode" })
   verificationCode?: string;
 }

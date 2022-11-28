@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ControllersLinks = /** @class */ (function (_super) {
     __extends(ControllersLinks, _super);
     function ControllersLinks() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=first" }),
+        SpeakeasyMetadata({ data: "json, name=first" }),
         __metadata("design:type", String)
     ], ControllersLinks.prototype, "first", void 0);
     __decorate([
-        Metadata({ data: "json, name=last" }),
+        SpeakeasyMetadata({ data: "json, name=last" }),
         __metadata("design:type", String)
     ], ControllersLinks.prototype, "last", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], ControllersLinks.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=previous" }),
+        SpeakeasyMetadata({ data: "json, name=previous" }),
         __metadata("design:type", String)
     ], ControllersLinks.prototype, "previous", void 0);
     return ControllersLinks;

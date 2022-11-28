@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetMlModelOutput
+// Represents the output of a <code>GetMLModel</code> operation, and provides detailed information about a <code>MLModel</code>.
 type GetMlModelOutput struct {
 	ComputeTime                 *int64                `json:"ComputeTime,omitempty"`
 	CreatedAt                   *time.Time            `json:"CreatedAt,omitempty"`

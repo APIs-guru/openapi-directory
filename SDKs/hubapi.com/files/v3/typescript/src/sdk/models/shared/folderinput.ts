@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FolderInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Object for creating a folder.
 **/
 export class FolderInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parentFolderId" })
+  @SpeakeasyMetadata({ data: "json, name=parentFolderId" })
   parentFolderId?: string;
 
-  @Metadata({ data: "json, name=parentPath" })
+  @SpeakeasyMetadata({ data: "json, name=parentPath" })
   parentPath?: string;
 }

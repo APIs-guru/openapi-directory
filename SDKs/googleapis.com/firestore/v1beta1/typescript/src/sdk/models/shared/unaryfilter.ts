@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldReference } from "./fieldreference";
 
+
 export enum UnaryFilterOpEnum {
-    OperatorUnspecified = "OPERATOR_UNSPECIFIED"
-,    IsNan = "IS_NAN"
-,    IsNull = "IS_NULL"
-,    IsNotNan = "IS_NOT_NAN"
-,    IsNotNull = "IS_NOT_NULL"
+    OperatorUnspecified = "OPERATOR_UNSPECIFIED",
+    IsNan = "IS_NAN",
+    IsNull = "IS_NULL",
+    IsNotNan = "IS_NOT_NAN",
+    IsNotNull = "IS_NOT_NULL"
 }
 
 
@@ -15,9 +16,9 @@ export enum UnaryFilterOpEnum {
  * A filter with a single operand.
 **/
 export class UnaryFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: FieldReference;
 
-  @Metadata({ data: "json, name=op" })
+  @SpeakeasyMetadata({ data: "json, name=op" })
   op?: UnaryFilterOpEnum;
 }

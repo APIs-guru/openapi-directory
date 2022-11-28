@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DatabaseDeleteDocumentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
   collectionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=documentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=documentId" })
   documentId: string;
 }
 
 
 export class DatabaseDeleteDocumentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   jwt: shared.SchemeJwt;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   key: shared.SchemeKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class DatabaseDeleteDocumentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DatabaseDeleteDocumentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DatabaseDeleteDocumentSecurity;
 }
 
 
 export class DatabaseDeleteDocumentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

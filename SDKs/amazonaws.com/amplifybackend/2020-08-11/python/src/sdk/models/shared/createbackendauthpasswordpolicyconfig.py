@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import additionalconstraintselement_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateBackendAuthPasswordPolicyConfig:
-    additional_constraints: Optional[List[additionalconstraintselement_enum.AdditionalConstraintsElementEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalConstraints' }})
-    minimum_length: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumLength' }})
+    r"""CreateBackendAuthPasswordPolicyConfig
+    The password policy configuration for the backend to your Amplify project.
+    """
+    
+    minimum_length: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumLength') }})
+    additional_constraints: Optional[List[AdditionalConstraintsElementEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalConstraints') }})
     

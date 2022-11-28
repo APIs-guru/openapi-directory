@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlsaBuilder } from "./slsabuilder";
 import { Material } from "./material";
 import { SlsaMetadata } from "./slsametadata";
 import { SlsaRecipe } from "./slsarecipe";
+
 
 
 // SlsaProvenance
@@ -11,15 +11,15 @@ import { SlsaRecipe } from "./slsarecipe";
  * SlsaProvenance is the slsa provenance as defined by the slsa spec.
 **/
 export class SlsaProvenance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=builder" })
+  @SpeakeasyMetadata({ data: "json, name=builder" })
   builder?: SlsaBuilder;
 
-  @Metadata({ data: "json, name=materials", elemType: shared.Material })
+  @SpeakeasyMetadata({ data: "json, name=materials", elemType: Material })
   materials?: Material[];
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: SlsaMetadata;
 
-  @Metadata({ data: "json, name=recipe" })
+  @SpeakeasyMetadata({ data: "json, name=recipe" })
   recipe?: SlsaRecipe;
 }

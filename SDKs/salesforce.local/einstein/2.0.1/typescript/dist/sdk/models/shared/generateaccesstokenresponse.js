@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GenerateAccessTokenResponse = /** @class */ (function (_super) {
     __extends(GenerateAccessTokenResponse, _super);
     function GenerateAccessTokenResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access_token" }),
+        SpeakeasyMetadata({ data: "json, name=access_token" }),
         __metadata("design:type", String)
     ], GenerateAccessTokenResponse.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=expires_in" }),
+        SpeakeasyMetadata({ data: "json, name=expires_in" }),
         __metadata("design:type", String)
     ], GenerateAccessTokenResponse.prototype, "expiresIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=refresh_token" }),
+        SpeakeasyMetadata({ data: "json, name=refresh_token" }),
         __metadata("design:type", String)
     ], GenerateAccessTokenResponse.prototype, "refreshToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=token_type" }),
+        SpeakeasyMetadata({ data: "json, name=token_type" }),
         __metadata("design:type", String)
     ], GenerateAccessTokenResponse.prototype, "tokenType", void 0);
     return GenerateAccessTokenResponse;

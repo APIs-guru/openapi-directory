@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
+
 
 
 // AppDevExperienceFeatureState
@@ -7,6 +8,6 @@ import { Status } from "./status";
  * State for App Dev Exp Feature.
 **/
 export class AppDevExperienceFeatureState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkingInstallSucceeded" })
+  @SpeakeasyMetadata({ data: "json, name=networkingInstallSucceeded" })
   networkingInstallSucceeded?: Status;
 }

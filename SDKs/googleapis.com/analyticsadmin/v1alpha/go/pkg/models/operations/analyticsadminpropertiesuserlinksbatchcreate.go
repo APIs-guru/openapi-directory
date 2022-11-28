@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesUserLinksBatchCreateSecurity struct {
 type AnalyticsadminPropertiesUserLinksBatchCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesUserLinksBatchCreatePathParams
 	QueryParams AnalyticsadminPropertiesUserLinksBatchCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequestInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesUserLinksBatchCreateSecurity
 }
 

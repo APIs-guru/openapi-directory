@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContributionMatrix } from "./contributionmatrix";
 // MetricLevelImpact
 /**
@@ -34,15 +34,15 @@ var MetricLevelImpact = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContributionMatrix" }),
+        SpeakeasyMetadata({ data: "json, name=ContributionMatrix" }),
         __metadata("design:type", ContributionMatrix)
     ], MetricLevelImpact.prototype, "contributionMatrix", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricName" }),
+        SpeakeasyMetadata({ data: "json, name=MetricName" }),
         __metadata("design:type", String)
     ], MetricLevelImpact.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumTimeSeries" }),
+        SpeakeasyMetadata({ data: "json, name=NumTimeSeries" }),
         __metadata("design:type", Number)
     ], MetricLevelImpact.prototype, "numTimeSeries", void 0);
     return MetricLevelImpact;

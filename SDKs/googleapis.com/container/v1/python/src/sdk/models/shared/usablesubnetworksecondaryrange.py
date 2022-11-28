@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UsableSubnetworkSecondaryRangeStatusEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -13,7 +15,11 @@ class UsableSubnetworkSecondaryRangeStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UsableSubnetworkSecondaryRange:
-    ip_cidr_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipCidrRange' }})
-    range_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rangeName' }})
-    status: Optional[UsableSubnetworkSecondaryRangeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""UsableSubnetworkSecondaryRange
+    Secondary IP range of a usable subnetwork.
+    """
+    
+    ip_cidr_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipCidrRange') }})
+    range_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rangeName') }})
+    status: Optional[UsableSubnetworkSecondaryRangeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

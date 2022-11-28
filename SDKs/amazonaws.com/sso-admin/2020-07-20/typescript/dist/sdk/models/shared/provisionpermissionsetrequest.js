@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionTargetTypeEnum } from "./provisiontargettypeenum";
 var ProvisionPermissionSetRequest = /** @class */ (function (_super) {
     __extends(ProvisionPermissionSetRequest, _super);
@@ -30,19 +30,19 @@ var ProvisionPermissionSetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceArn" }),
         __metadata("design:type", String)
     ], ProvisionPermissionSetRequest.prototype, "instanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=PermissionSetArn" }),
+        SpeakeasyMetadata({ data: "json, name=PermissionSetArn" }),
         __metadata("design:type", String)
     ], ProvisionPermissionSetRequest.prototype, "permissionSetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetId" }),
+        SpeakeasyMetadata({ data: "json, name=TargetId" }),
         __metadata("design:type", String)
     ], ProvisionPermissionSetRequest.prototype, "targetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetType" }),
+        SpeakeasyMetadata({ data: "json, name=TargetType" }),
         __metadata("design:type", String)
     ], ProvisionPermissionSetRequest.prototype, "targetType", void 0);
     return ProvisionPermissionSetRequest;

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeedConnection } from "./feedconnection";
 import { Pagination } from "./pagination";
+
 
 
 // FeedConnections
@@ -9,9 +9,9 @@ import { Pagination } from "./pagination";
  * https://developer.xero.com/documentation/bank-feeds-api/feed-connections
 **/
 export class FeedConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.FeedConnection })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: FeedConnection })
   items?: FeedConnection[];
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: Pagination;
 }

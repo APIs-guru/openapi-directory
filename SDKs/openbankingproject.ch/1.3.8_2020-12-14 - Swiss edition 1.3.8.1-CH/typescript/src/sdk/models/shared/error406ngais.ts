@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { TppMessage406Ais } from "./tppmessage406ais";
+
 
 
 // Error406NgAis
@@ -10,9 +10,9 @@ import { TppMessage406Ais } from "./tppmessage406ais";
  * 
 **/
 export class Error406NgAis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links?: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=tppMessages", elemType: shared.TppMessage406Ais })
+  @SpeakeasyMetadata({ data: "json, name=tppMessages", elemType: TppMessage406Ais })
   tppMessages?: TppMessage406Ais[];
 }

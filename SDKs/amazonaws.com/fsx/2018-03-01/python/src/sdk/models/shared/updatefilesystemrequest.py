@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import updatefilesystemlustreconfiguration
-from . import updatefilesystemontapconfiguration
-from . import updatefilesystemwindowsconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateFileSystemRequest:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    lustre_configuration: Optional[updatefilesystemlustreconfiguration.UpdateFileSystemLustreConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LustreConfiguration' }})
-    ontap_configuration: Optional[updatefilesystemontapconfiguration.UpdateFileSystemOntapConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OntapConfiguration' }})
-    storage_capacity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StorageCapacity' }})
-    windows_configuration: Optional[updatefilesystemwindowsconfiguration.UpdateFileSystemWindowsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WindowsConfiguration' }})
+    r"""UpdateFileSystemRequest
+    The request object for the <code>UpdateFileSystem</code> operation.
+    """
+    
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
+    lustre_configuration: Optional[UpdateFileSystemLustreConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LustreConfiguration') }})
+    ontap_configuration: Optional[UpdateFileSystemOntapConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OntapConfiguration') }})
+    storage_capacity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StorageCapacity') }})
+    windows_configuration: Optional[UpdateFileSystemWindowsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WindowsConfiguration') }})
     

@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
-export enum SdkInfoLanguageEnum {
-    Unknown = "UNKNOWN"
-,    Java = "JAVA"
-,    Python = "PYTHON"
-,    Go = "GO"
+
+export enum SDKInfoLanguageEnum {
+    Unknown = "UNKNOWN",
+    Java = "JAVA",
+    Python = "PYTHON",
+    Go = "GO"
 }
 
 
-// SdkInfo
+// SDKInfo
 /** 
  * SDK Information.
 **/
-export class SdkInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=language" })
-  language?: SdkInfoLanguageEnum;
+export class SDKInfo extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=language" })
+  language?: SDKInfoLanguageEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

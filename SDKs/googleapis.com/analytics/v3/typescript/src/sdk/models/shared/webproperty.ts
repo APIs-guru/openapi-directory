@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WebpropertyChildLink
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Child link for this web property. Points to the list of views (profiles) for this web property.
 **/
 export class WebpropertyChildLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -19,10 +20,10 @@ export class WebpropertyChildLink extends SpeakeasyBase {
  * Parent link for this web property. Points to the account to which this web property belongs.
 **/
 export class WebpropertyParentLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -32,7 +33,7 @@ export class WebpropertyParentLink extends SpeakeasyBase {
  * Permissions the user has for this web property.
 **/
 export class WebpropertyPermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effective" })
+  @SpeakeasyMetadata({ data: "json, name=effective" })
   effective?: string[];
 }
 
@@ -42,60 +43,100 @@ export class WebpropertyPermissions extends SpeakeasyBase {
  * JSON template for an Analytics web property.
 **/
 export class Webproperty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=childLink" })
+  @SpeakeasyMetadata({ data: "json, name=childLink" })
   childLink?: WebpropertyChildLink;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=dataRetentionResetOnNewActivity" })
+  @SpeakeasyMetadata({ data: "json, name=dataRetentionResetOnNewActivity" })
   dataRetentionResetOnNewActivity?: boolean;
 
-  @Metadata({ data: "json, name=dataRetentionTtl" })
+  @SpeakeasyMetadata({ data: "json, name=dataRetentionTtl" })
   dataRetentionTtl?: string;
 
-  @Metadata({ data: "json, name=defaultProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultProfileId" })
   defaultProfileId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=industryVertical" })
+  @SpeakeasyMetadata({ data: "json, name=industryVertical" })
   industryVertical?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentLink" })
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
   parentLink?: WebpropertyParentLink;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: WebpropertyPermissions;
 
-  @Metadata({ data: "json, name=profileCount" })
+  @SpeakeasyMetadata({ data: "json, name=profileCount" })
   profileCount?: number;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=starred" })
+  @SpeakeasyMetadata({ data: "json, name=starred" })
   starred?: boolean;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=websiteUrl" })
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
+  websiteUrl?: string;
+}
+
+
+// WebpropertyInput
+/** 
+ * JSON template for an Analytics web property.
+**/
+export class WebpropertyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
+  accountId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=childLink" })
+  childLink?: WebpropertyChildLink;
+
+  @SpeakeasyMetadata({ data: "json, name=dataRetentionResetOnNewActivity" })
+  dataRetentionResetOnNewActivity?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=dataRetentionTtl" })
+  dataRetentionTtl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=defaultProfileId" })
+  defaultProfileId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=industryVertical" })
+  industryVertical?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
+  parentLink?: WebpropertyParentLink;
+
+  @SpeakeasyMetadata({ data: "json, name=starred" })
+  starred?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
   websiteUrl?: string;
 }

@@ -11,14 +11,14 @@ class UsersListGpgKeysForAuthenticatedQueryParams:
 
 @dataclass
 class UsersListGpgKeysForAuthenticatedRequest:
-    query_params: UsersListGpgKeysForAuthenticatedQueryParams = field(default=None)
+    query_params: UsersListGpgKeysForAuthenticatedQueryParams = field()
     
 
 @dataclass
 class UsersListGpgKeysForAuthenticatedResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     gpg_keys: Optional[List[shared.GpgKey]] = field(default=None)
     

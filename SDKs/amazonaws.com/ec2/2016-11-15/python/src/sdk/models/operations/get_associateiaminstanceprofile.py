@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateIamInstanceProfileActionEnum(str, Enum):
     ASSOCIATE_IAM_INSTANCE_PROFILE = "AssociateIamInstanceProfile"
@@ -7,6 +11,10 @@ class GetAssociateIamInstanceProfileActionEnum(str, Enum):
 
 @dataclass
 class GetAssociateIamInstanceProfileIamInstanceProfile:
+    r"""GetAssociateIamInstanceProfileIamInstanceProfile
+    Describes an IAM instance profile.
+    """
+    
     arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Arn' }})
     name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Name' }})
     
@@ -16,10 +24,10 @@ class GetAssociateIamInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateIamInstanceProfileQueryParams:
-    action: GetAssociateIamInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    iam_instance_profile: GetAssociateIamInstanceProfileIamInstanceProfile = field(default=None, metadata={'query_param': { 'field_name': 'IamInstanceProfile', 'style': 'form', 'explode': True }})
-    instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    version: GetAssociateIamInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAssociateIamInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    iam_instance_profile: GetAssociateIamInstanceProfileIamInstanceProfile = field(metadata={'query_param': { 'field_name': 'IamInstanceProfile', 'style': 'form', 'explode': True }})
+    instance_id: str = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    version: GetAssociateIamInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +43,13 @@ class GetAssociateIamInstanceProfileHeaders:
 
 @dataclass
 class GetAssociateIamInstanceProfileRequest:
-    query_params: GetAssociateIamInstanceProfileQueryParams = field(default=None)
-    headers: GetAssociateIamInstanceProfileHeaders = field(default=None)
+    headers: GetAssociateIamInstanceProfileHeaders = field()
+    query_params: GetAssociateIamInstanceProfileQueryParams = field()
     
 
 @dataclass
 class GetAssociateIamInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

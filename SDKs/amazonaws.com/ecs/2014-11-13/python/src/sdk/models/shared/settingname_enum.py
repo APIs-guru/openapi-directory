@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SettingNameEnum(str, Enum):
     SERVICE_LONG_ARN_FORMAT = "serviceLongArnFormat"

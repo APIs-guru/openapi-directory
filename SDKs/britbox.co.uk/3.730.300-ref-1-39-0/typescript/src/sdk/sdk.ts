@@ -1,17 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://britbox.co.uk/api",
+export const ServerList = [
+	"https://britbox.co.uk/api",
 ] as const;
 
 export function WithServerURL(
@@ -22,51 +19,51 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // DeleteItvPurchasePlatform - Cancel a plan subscription.
-
-A cancelled subscription will continue to be valid until the subscription
-expiry date or next renewal date.
-
-  DeleteItvPurchasePlatform(
+  /**
+   * deleteItvPurchasePlatform - Cancel a plan subscription.
+   * 
+   * A cancelled subscription will continue to be valid until the subscription
+   * expiry date or next renewal date.
+   * 
+  **/
+  deleteItvPurchasePlatform(
     req: operations.DeleteItvPurchasePlatformRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteItvPurchasePlatformResponse> {
@@ -74,22 +71,22 @@ expiry date or next renewal date.
       req = new operations.DeleteItvPurchasePlatformRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/purchase/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -97,43 +94,47 @@ expiry date or next renewal date.
       paramsSerializer: qpSerializer,
     };
     
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteItvPurchasePlatformResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteItvPurchasePlatformResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -145,8 +146,10 @@ expiry date or next renewal date.
   }
 
   
-  // GetEePlans - Returns all the plans available for EE flow including additional description data.
-  GetEePlans(
+  /**
+   * getEePlans - Returns all the plans available for EE flow including additional description data.
+  **/
+  getEePlans(
     req: operations.GetEePlansRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEePlansResponse> {
@@ -154,12 +157,11 @@ expiry date or next renewal date.
       req = new operations.GetEePlansRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ee/plans";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -168,42 +170,43 @@ expiry date or next renewal date.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEePlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEePlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eePlans = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -215,8 +218,10 @@ expiry date or next renewal date.
   }
 
   
-  // GetItvItemsummaryExternalId - Redirects to corresponding Axis Item details page.
-  GetItvItemsummaryExternalId(
+  /**
+   * getItvItemsummaryExternalId - Redirects to corresponding Axis Item details page.
+  **/
+  getItvItemsummaryExternalId(
     req: operations.GetItvItemsummaryExternalIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItvItemsummaryExternalIdResponse> {
@@ -224,48 +229,48 @@ expiry date or next renewal date.
       req = new operations.GetItvItemsummaryExternalIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/itemsummary/{externalId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItvItemsummaryExternalIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 302:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItvItemsummaryExternalIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 302:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getItvItemsummaryExternalId302ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -277,8 +282,10 @@ expiry date or next renewal date.
   }
 
   
-  // GetItvPlansPlatform - Returns the plans available for specified payment platform.
-  GetItvPlansPlatform(
+  /**
+   * getItvPlansPlatform - Returns the plans available for specified payment platform.
+  **/
+  getItvPlansPlatform(
     req: operations.GetItvPlansPlatformRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItvPlansPlatformResponse> {
@@ -286,11 +293,12 @@ expiry date or next renewal date.
       req = new operations.GetItvPlansPlatformRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/plans/{platform}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -299,42 +307,43 @@ expiry date or next renewal date.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItvPlansPlatformResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItvPlansPlatformResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvPlans = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -346,8 +355,10 @@ expiry date or next renewal date.
   }
 
   
-  // GetItvProfile - Returns the ITV profile object.
-  GetItvProfile(
+  /**
+   * getItvProfile - Returns the ITV profile object.
+  **/
+  getItvProfile(
     req: operations.GetItvProfileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItvProfileResponse> {
@@ -355,11 +366,12 @@ expiry date or next renewal date.
       req = new operations.GetItvProfileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/profile";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -368,42 +380,43 @@ expiry date or next renewal date.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItvProfileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItvProfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getItvProfile200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -415,8 +428,10 @@ expiry date or next renewal date.
   }
 
   
-  // GetItvRokuPlans - Gets available Roku plans.
-  GetItvRokuPlans(
+  /**
+   * getItvRokuPlans - Gets available Roku plans.
+  **/
+  getItvRokuPlans(
     req: operations.GetItvRokuPlansRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItvRokuPlansResponse> {
@@ -424,12 +439,11 @@ expiry date or next renewal date.
       req = new operations.GetItvRokuPlansRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/roku/plans";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -438,42 +452,43 @@ expiry date or next renewal date.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItvRokuPlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItvRokuPlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rokuPlans = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -485,8 +500,10 @@ expiry date or next renewal date.
   }
 
   
-  // GetPlansId - Returns the details of a Plan with the specified id.
-  GetPlansId(
+  /**
+   * getPlansId - Returns the details of a Plan with the specified id.
+  **/
+  getPlansId(
     req: operations.GetPlansIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPlansIdResponse> {
@@ -494,12 +511,11 @@ expiry date or next renewal date.
       req = new operations.GetPlansIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/plans/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -508,42 +524,43 @@ expiry date or next renewal date.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPlansIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPlansIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.plan = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -555,8 +572,10 @@ expiry date or next renewal date.
   }
 
   
-  // ActivateSaveOffer - Activates the discount for a user. Only Stripe platform is currently supported.
-  ActivateSaveOffer(
+  /**
+   * activateSaveOffer - Activates the discount for a user. Only Stripe platform is currently supported.
+  **/
+  activateSaveOffer(
     req: operations.ActivateSaveOfferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ActivateSaveOfferResponse> {
@@ -564,22 +583,22 @@ expiry date or next renewal date.
       req = new operations.ActivateSaveOfferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/save-offer";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -590,27 +609,27 @@ expiry date or next renewal date.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ActivateSaveOfferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ActivateSaveOfferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
         }
 
@@ -620,8 +639,10 @@ expiry date or next renewal date.
   }
 
   
-  // AddPaymentMethod - Add a new payment method to an account.
-  AddPaymentMethod(
+  /**
+   * addPaymentMethod - Add a new payment method to an account.
+  **/
+  addPaymentMethod(
     req: operations.AddPaymentMethodRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddPaymentMethodResponse> {
@@ -629,22 +650,22 @@ expiry date or next renewal date.
       req = new operations.AddPaymentMethodRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/billing/methods";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -655,57 +676,57 @@ expiry date or next renewal date.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddPaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AddPaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentMethod = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -717,8 +738,10 @@ expiry date or next renewal date.
   }
 
   
-  // AssignMsisdn - Assigns a msisdn to a profile on ITV side.
-  AssignMsisdn(
+  /**
+   * assignMsisdn - Assigns a msisdn to a profile on ITV side.
+  **/
+  assignMsisdn(
     req: operations.AssignMsisdnRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AssignMsisdnResponse> {
@@ -726,22 +749,22 @@ expiry date or next renewal date.
       req = new operations.AssignMsisdnRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ee/msisdn";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -752,26 +775,26 @@ expiry date or next renewal date.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AssignMsisdnResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.AssignMsisdnResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -783,8 +806,10 @@ expiry date or next renewal date.
   }
 
   
-  // AssignToken - Assigns an UserToken to a profile on the ITV side. Currently throws an exception.
-  AssignToken(
+  /**
+   * assignToken - Assigns an UserToken to a profile on the ITV side. Currently throws an exception.
+  **/
+  assignToken(
     req: operations.AssignTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AssignTokenResponse> {
@@ -792,22 +817,22 @@ expiry date or next renewal date.
       req = new operations.AssignTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/bt/token/assign";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -818,26 +843,26 @@ expiry date or next renewal date.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AssignTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.AssignTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -849,22 +874,24 @@ expiry date or next renewal date.
   }
 
   
-  // AuthorizeDevice - Authorize a device from a generated device authorization code.
-
-This is the second step in the process of authorizing a device by pin code.
-
-Firstly the device must request a generated authorization code via the
-`/authorization/device/code` endpoint.
-
-This endpoint then authorizes the device associated with the code to sign in
-to a user account. Typically this endpoint will be called from a page
-presented in the web app under the account section.
-
-Once authorized, the device will then be able to sign in to that account
-via the `/authorization/device` endpoint, without needing to provide the 
-credentials of the user.
-
-  AuthorizeDevice(
+  /**
+   * authorizeDevice - Authorize a device from a generated device authorization code.
+   * 
+   * This is the second step in the process of authorizing a device by pin code.
+   * 
+   * Firstly the device must request a generated authorization code via the
+   * `/authorization/device/code` endpoint.
+   * 
+   * This endpoint then authorizes the device associated with the code to sign in
+   * to a user account. Typically this endpoint will be called from a page
+   * presented in the web app under the account section.
+   * 
+   * Once authorized, the device will then be able to sign in to that account
+   * via the `/authorization/device` endpoint, without needing to provide the 
+   * credentials of the user.
+   * 
+  **/
+  authorizeDevice(
     req: operations.AuthorizeDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AuthorizeDeviceResponse> {
@@ -872,22 +899,22 @@ credentials of the user.
       req = new operations.AuthorizeDeviceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/devices/authorization";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -898,44 +925,44 @@ credentials of the user.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AuthorizeDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.AuthorizeDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -947,11 +974,13 @@ credentials of the user.
   }
 
   
-  // BookmarkItem - Bookmark an item under the active profile.
-
-Creates one if it doesn't exist, overwrites one if it does.
-
-  BookmarkItem(
+  /**
+   * bookmarkItem - Bookmark an item under the active profile.
+   * 
+   * Creates one if it doesn't exist, overwrites one if it does.
+   * 
+  **/
+  bookmarkItem(
     req: operations.BookmarkItemRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BookmarkItemResponse> {
@@ -959,11 +988,12 @@ Creates one if it doesn't exist, overwrites one if it does.
       req = new operations.BookmarkItemRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/bookmarks/{itemId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -972,52 +1002,53 @@ Creates one if it doesn't exist, overwrites one if it does.
     };
     
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BookmarkItemResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BookmarkItemResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bookmark = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1029,12 +1060,14 @@ Creates one if it doesn't exist, overwrites one if it does.
   }
 
   
-  // CancelSubscription - Cancel a plan subscription.
-
-A cancelled subscription will continue to be valid until the subscription
-expiry date or next renewal date.
-
-  CancelSubscription(
+  /**
+   * cancelSubscription - Cancel a plan subscription.
+   * 
+   * A cancelled subscription will continue to be valid until the subscription
+   * expiry date or next renewal date.
+   * 
+  **/
+  cancelSubscription(
     req: operations.CancelSubscriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CancelSubscriptionResponse> {
@@ -1042,11 +1075,12 @@ expiry date or next renewal date.
       req = new operations.CancelSubscriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/billing/subscriptions/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1055,49 +1089,50 @@ expiry date or next renewal date.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CancelSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CancelSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1109,8 +1144,10 @@ expiry date or next renewal date.
   }
 
   
-  // ChangeCardDetails - Change payment card details.
-  ChangeCardDetails(
+  /**
+   * changeCardDetails - Change payment card details.
+  **/
+  changeCardDetails(
     req: operations.ChangeCardDetailsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ChangeCardDetailsResponse> {
@@ -1118,22 +1155,22 @@ expiry date or next renewal date.
       req = new operations.ChangeCardDetailsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/cards/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1144,44 +1181,44 @@ expiry date or next renewal date.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ChangeCardDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ChangeCardDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1193,11 +1230,13 @@ expiry date or next renewal date.
   }
 
   
-  // ChangeEmail - Change email address related to account/profile.
-
-The expected token scope is Settings.
-
-  ChangeEmail(
+  /**
+   * changeEmail - Change email address related to account/profile.
+   * 
+   * The expected token scope is Settings.
+   * 
+  **/
+  changeEmail(
     req: operations.ChangeEmailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ChangeEmailResponse> {
@@ -1205,22 +1244,22 @@ The expected token scope is Settings.
       req = new operations.ChangeEmailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/changeemail";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1231,44 +1270,44 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ChangeEmailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ChangeEmailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1280,11 +1319,13 @@ The expected token scope is Settings.
   }
 
   
-  // ChangeMarketing - Change marketing preferences related to account/profile.
-
-The expected token scope is Settings.
-
-  ChangeMarketing(
+  /**
+   * changeMarketing - Change marketing preferences related to account/profile.
+   * 
+   * The expected token scope is Settings.
+   * 
+  **/
+  changeMarketing(
     req: operations.ChangeMarketingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ChangeMarketingResponse> {
@@ -1292,22 +1333,22 @@ The expected token scope is Settings.
       req = new operations.ChangeMarketingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/changemarketing";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1318,44 +1359,44 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ChangeMarketingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ChangeMarketingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1367,11 +1408,13 @@ The expected token scope is Settings.
   }
 
   
-  // ChangePassword - Change the password of an account.
-
-The expected token scope is Settings.
-
-  ChangePassword(
+  /**
+   * changePassword - Change the password of an account.
+   * 
+   * The expected token scope is Settings.
+   * 
+  **/
+  changePassword(
     req: operations.ChangePasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ChangePasswordResponse> {
@@ -1379,22 +1422,22 @@ The expected token scope is Settings.
       req = new operations.ChangePasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/password";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1405,54 +1448,54 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ChangePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ChangePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1464,8 +1507,10 @@ The expected token scope is Settings.
   }
 
   
-  // ChangePin - Change the pin of an account.
-  ChangePin(
+  /**
+   * changePin - Change the pin of an account.
+  **/
+  changePin(
     req: operations.ChangePinRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ChangePinResponse> {
@@ -1473,22 +1518,22 @@ The expected token scope is Settings.
       req = new operations.ChangePinRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/pin";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1499,54 +1544,54 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ChangePinResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ChangePinResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1558,8 +1603,10 @@ The expected token scope is Settings.
   }
 
   
-  // CheckEeBtEligibility - Check whether or not a user is eligible for switching to Bt or EE offers.
-  CheckEeBtEligibility(
+  /**
+   * checkEeBtEligibility - Check whether or not a user is eligible for switching to Bt or EE offers.
+  **/
+  checkEeBtEligibility(
     req: operations.CheckEeBtEligibilityRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CheckEeBtEligibilityResponse> {
@@ -1567,11 +1614,12 @@ The expected token scope is Settings.
       req = new operations.CheckEeBtEligibilityRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ee-bt/eligibility";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1580,21 +1628,22 @@ The expected token scope is Settings.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CheckEeBtEligibilityResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CheckEeBtEligibilityResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eeBtEligibility = httpRes?.data;
             }
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
         }
 
@@ -1604,8 +1653,10 @@ The expected token scope is Settings.
   }
 
   
-  // CheckPreviousEntitlements - Check whether the user has been previously entitled.
-  CheckPreviousEntitlements(
+  /**
+   * checkPreviousEntitlements - Check whether the user has been previously entitled.
+  **/
+  checkPreviousEntitlements(
     req: operations.CheckPreviousEntitlementsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CheckPreviousEntitlementsResponse> {
@@ -1613,11 +1664,12 @@ The expected token scope is Settings.
       req = new operations.CheckPreviousEntitlementsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/had/entitlements";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1626,42 +1678,43 @@ The expected token scope is Settings.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CheckPreviousEntitlementsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CheckPreviousEntitlementsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvHadEntitlement = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1673,9 +1726,11 @@ The expected token scope is Settings.
   }
 
   
-  // CheckUserToken - Checks a provided token for BT eligible user.
-
-  CheckUserToken(
+  /**
+   * checkUserToken - Checks a provided token for BT eligible user.
+   * 
+  **/
+  checkUserToken(
     req: operations.CheckUserTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CheckUserTokenResponse> {
@@ -1683,12 +1738,11 @@ The expected token scope is Settings.
       req = new operations.CheckUserTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/bt/token/validate";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1697,39 +1751,40 @@ The expected token scope is Settings.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CheckUserTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CheckUserTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1741,8 +1796,10 @@ The expected token scope is Settings.
   }
 
   
-  // CheckVoucher - Validates the coupon/voucher for specified payment platform.
-  CheckVoucher(
+  /**
+   * checkVoucher - Validates the coupon/voucher for specified payment platform.
+  **/
+  checkVoucher(
     req: operations.CheckVoucherRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CheckVoucherResponse> {
@@ -1750,22 +1807,22 @@ The expected token scope is Settings.
       req = new operations.CheckVoucherRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/voucher/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1776,47 +1833,47 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CheckVoucherResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CheckVoucherResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvVoucher = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1828,8 +1885,10 @@ The expected token scope is Settings.
   }
 
   
-  // ConfirmPurchase - Confirms purchase and returns the details of purchased subscription for specified payment platform.
-  ConfirmPurchase(
+  /**
+   * confirmPurchase - Confirms purchase and returns the details of purchased subscription for specified payment platform.
+  **/
+  confirmPurchase(
     req: operations.ConfirmPurchaseRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPurchaseResponse> {
@@ -1837,22 +1896,22 @@ The expected token scope is Settings.
       req = new operations.ConfirmPurchaseRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/purchase/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1863,47 +1922,47 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPurchaseResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ConfirmPurchaseResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvPurchase = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -1915,8 +1974,10 @@ The expected token scope is Settings.
   }
 
   
-  // ConfirmPurchaseStrong - Confirms purchase and returns the details of purchased subscription for specified payment platform.
-  ConfirmPurchaseStrong(
+  /**
+   * confirmPurchaseStrong - Confirms purchase and returns the details of purchased subscription for specified payment platform.
+  **/
+  confirmPurchaseStrong(
     req: operations.ConfirmPurchaseStrongRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPurchaseStrongResponse> {
@@ -1924,22 +1985,22 @@ The expected token scope is Settings.
       req = new operations.ConfirmPurchaseStrongRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/purchase/{platform}/strong", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1950,47 +2011,47 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPurchaseStrongResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ConfirmPurchaseStrongResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvPurchaseStrongResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2002,8 +2063,10 @@ The expected token scope is Settings.
   }
 
   
-  // ConfirmPurchaseWithOffer - Confirms purchase and returns the details of purchased subscription for specified payment platform.
-  ConfirmPurchaseWithOffer(
+  /**
+   * confirmPurchaseWithOffer - Confirms purchase and returns the details of purchased subscription for specified payment platform.
+  **/
+  confirmPurchaseWithOffer(
     req: operations.ConfirmPurchaseWithOfferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPurchaseWithOfferResponse> {
@@ -2011,22 +2074,22 @@ The expected token scope is Settings.
       req = new operations.ConfirmPurchaseWithOfferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/purchase/{platform}/withoffer", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2037,47 +2100,47 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPurchaseWithOfferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ConfirmPurchaseWithOfferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvPurchaseWithOfferResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2089,11 +2152,13 @@ The expected token scope is Settings.
   }
 
   
-  // CreatePinRequest - Creates a PIN request that will send an SMS to the given msisdn.
-This call is to validate MSISDN entered by a user not comming through EE network.
-This call should be followed by POST ee/pin.
-
-  CreatePinRequest(
+  /**
+   * createPinRequest - Creates a PIN request that will send an SMS to the given msisdn.
+   * This call is to validate MSISDN entered by a user not comming through EE network.
+   * This call should be followed by POST ee/pin.
+   * 
+  **/
+  createPinRequest(
     req: operations.CreatePinRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePinRequestResponse> {
@@ -2101,23 +2166,21 @@ This call should be followed by POST ee/pin.
       req = new operations.CreatePinRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ee/pin";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2128,47 +2191,47 @@ This call should be followed by POST ee/pin.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePinRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePinRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eeCreatePinResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2180,8 +2243,10 @@ This call should be followed by POST ee/pin.
   }
 
   
-  // CreateProfile - Create a new profile under the active account.
-  CreateProfile(
+  /**
+   * createProfile - Create a new profile under the active account.
+  **/
+  createProfile(
     req: operations.CreateProfileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateProfileResponse> {
@@ -2189,22 +2254,22 @@ This call should be followed by POST ee/pin.
       req = new operations.CreateProfileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profiles";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2215,57 +2280,57 @@ This call should be followed by POST ee/pin.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateProfileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateProfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.profileDetail = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2277,53 +2342,54 @@ This call should be followed by POST ee/pin.
   }
 
   
-  // CreateToken - Returns a token for later calls to EE API. TTL is one hour. Recommended is FE refreshes this token before each call.
-  CreateToken(
-    
+  /**
+   * createToken - Returns a token for later calls to EE API. TTL is one hour. Recommended is FE refreshes this token before each call.
+  **/
+  createToken(
     config?: AxiosRequestConfig
   ): Promise<operations.CreateTokenResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ee/token/create";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eeCreateTokenResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2335,11 +2401,13 @@ This call should be followed by POST ee/pin.
   }
 
   
-  // DeleteAccount - Delete account in compliance with GDPR.
-
-The expected token scope is Settings.
-
-  DeleteAccount(
+  /**
+   * deleteAccount - Delete account in compliance with GDPR.
+   * 
+   * The expected token scope is Settings.
+   * 
+  **/
+  deleteAccount(
     req: operations.DeleteAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAccountResponse> {
@@ -2347,22 +2415,22 @@ The expected token scope is Settings.
       req = new operations.DeleteAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/deleteaccount";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2373,44 +2441,44 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2422,8 +2490,10 @@ The expected token scope is Settings.
   }
 
   
-  // DeleteItemBookmark - Unbookmark an item under the active profile.
-  DeleteItemBookmark(
+  /**
+   * deleteItemBookmark - Unbookmark an item under the active profile.
+  **/
+  deleteItemBookmark(
     req: operations.DeleteItemBookmarkRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteItemBookmarkResponse> {
@@ -2431,11 +2501,12 @@ The expected token scope is Settings.
       req = new operations.DeleteItemBookmarkRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/bookmarks/{itemId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2444,49 +2515,50 @@ The expected token scope is Settings.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteItemBookmarkResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteItemBookmarkResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2498,11 +2570,13 @@ The expected token scope is Settings.
   }
 
   
-  // DeleteProfileWithId - Delete a profile with a specific id under the active account.
-
-Note that you cannot delete the primary profile.
-
-  DeleteProfileWithId(
+  /**
+   * deleteProfileWithId - Delete a profile with a specific id under the active account.
+   * 
+   * Note that you cannot delete the primary profile.
+   * 
+  **/
+  deleteProfileWithId(
     req: operations.DeleteProfileWithIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteProfileWithIdResponse> {
@@ -2510,11 +2584,12 @@ Note that you cannot delete the primary profile.
       req = new operations.DeleteProfileWithIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profiles/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2523,49 +2598,50 @@ Note that you cannot delete the primary profile.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteProfileWithIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteProfileWithIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2577,12 +2653,14 @@ Note that you cannot delete the primary profile.
   }
 
   
-  // DeleteWatched - Remove the watched status of items under the active profile. Passing in
-specific `itemId`s to the `item_ids` query parameter will cause only these
-items to be removed. **If this list is missing all watched items will be
-removed**
-
-  DeleteWatched(
+  /**
+   * deleteWatched - Remove the watched status of items under the active profile. Passing in
+   * specific `itemId`s to the `item_ids` query parameter will cause only these
+   * items to be removed. **If this list is missing all watched items will be
+   * removed**
+   * 
+  **/
+  deleteWatched(
     req: operations.DeleteWatchedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteWatchedResponse> {
@@ -2590,11 +2668,12 @@ removed**
       req = new operations.DeleteWatchedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/watched";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2603,49 +2682,50 @@ removed**
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteWatchedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteWatchedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2657,8 +2737,10 @@ removed**
   }
 
   
-  // DeregisterDevice - Deregister a playback device from an account.
-  DeregisterDevice(
+  /**
+   * deregisterDevice - Deregister a playback device from an account.
+  **/
+  deregisterDevice(
     req: operations.DeregisterDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeregisterDeviceResponse> {
@@ -2666,11 +2748,12 @@ removed**
       req = new operations.DeregisterDeviceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/devices/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2679,49 +2762,50 @@ removed**
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeregisterDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeregisterDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2733,8 +2817,10 @@ removed**
   }
 
   
-  // ExecuteTransaction - Sends request to execute specified transaction.
-  ExecuteTransaction(
+  /**
+   * executeTransaction - Sends request to execute specified transaction.
+  **/
+  executeTransaction(
     req: operations.ExecuteTransactionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExecuteTransactionResponse> {
@@ -2742,23 +2828,21 @@ removed**
       req = new operations.ExecuteTransactionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/roku/transaction/{transactionid}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2769,44 +2853,44 @@ removed**
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExecuteTransactionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ExecuteTransactionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2818,18 +2902,20 @@ removed**
   }
 
   
-  // ForgotPassword - Request the password of an account's primary profile be reset.
-
-Should be called when a user has forgotten their password.
-
-This will send an email with a password reset link to the email address of the
-primary profile of an account.
-
-The link, once clicked, should take the user to the "reset-password" page of the
-website. Here they will enter their new password and submit to the /reset-password
-endpoint here, along with the password reset token provided in the original link.
-
-  ForgotPassword(
+  /**
+   * forgotPassword - Request the password of an account's primary profile be reset.
+   * 
+   * Should be called when a user has forgotten their password.
+   * 
+   * This will send an email with a password reset link to the email address of the
+   * primary profile of an account.
+   * 
+   * The link, once clicked, should take the user to the "reset-password" page of the
+   * website. Here they will enter their new password and submit to the /reset-password
+   * endpoint here, along with the password reset token provided in the original link.
+   * 
+  **/
+  forgotPassword(
     req: operations.ForgotPasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ForgotPasswordResponse> {
@@ -2837,23 +2923,21 @@ endpoint here, along with the password reset token provided in the original link
       req = new operations.ForgotPasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/request-password-reset";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2864,54 +2948,54 @@ endpoint here, along with the password reset token provided in the original link
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ForgotPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ForgotPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -2923,22 +3007,24 @@ endpoint here, along with the password reset token provided in the original link
   }
 
   
-  // GenerateDeviceAuthorizationCode - Get a generated device authorization code.
-
-This is the first step in the process of authorizing a device by pin code.
-The device will make a request to this endpoint providing a unique identifier
-for the device such as a serial number. This endpoint will then return a
-generated code which is tied to the given device.
-
-The code may subsequently be used to authorize the device to sign in to an
-account via the `/account/devices/authorization` endpoint. Typically this
-will be from a page presented in the web app under the account section.
-
-Once authorized, the device will then be able to sign in to that account
-via the `/authorization/device` endpoint, without needing to provide the 
-credentials of the user.
-
-  GenerateDeviceAuthorizationCode(
+  /**
+   * generateDeviceAuthorizationCode - Get a generated device authorization code.
+   * 
+   * This is the first step in the process of authorizing a device by pin code.
+   * The device will make a request to this endpoint providing a unique identifier
+   * for the device such as a serial number. This endpoint will then return a
+   * generated code which is tied to the given device.
+   * 
+   * The code may subsequently be used to authorize the device to sign in to an
+   * account via the `/account/devices/authorization` endpoint. Typically this
+   * will be from a page presented in the web app under the account section.
+   * 
+   * Once authorized, the device will then be able to sign in to that account
+   * via the `/authorization/device` endpoint, without needing to provide the 
+   * credentials of the user.
+   * 
+  **/
+  generateDeviceAuthorizationCode(
     req: operations.GenerateDeviceAuthorizationCodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenerateDeviceAuthorizationCodeResponse> {
@@ -2946,23 +3032,21 @@ credentials of the user.
       req = new operations.GenerateDeviceAuthorizationCodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/authorization/device/code";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2973,47 +3057,47 @@ credentials of the user.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenerateDeviceAuthorizationCodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GenerateDeviceAuthorizationCodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceAuthorizationCode = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3025,17 +3109,19 @@ credentials of the user.
   }
 
   
-  // GenerateNonce - Generate a new account nonce.
-
-A nonce may be required to help sign a response from a third party
-service which will be passed back to these services.
-
-For example a Facebook single-sign-on request initiated by a client
-application may first get a nonce from here to include in the request.
-Facebook will then include the nonce in the auth token it issues. This
-token can be passed back to our services and the nonce checked for validity.
-
-  GenerateNonce(
+  /**
+   * generateNonce - Generate a new account nonce.
+   * 
+   * A nonce may be required to help sign a response from a third party
+   * service which will be passed back to these services.
+   * 
+   * For example a Facebook single-sign-on request initiated by a client
+   * application may first get a nonce from here to include in the request.
+   * Facebook will then include the nonce in the auth token it issues. This
+   * token can be passed back to our services and the nonce checked for validity.
+   * 
+  **/
+  generateNonce(
     req: operations.GenerateNonceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenerateNonceResponse> {
@@ -3043,11 +3129,12 @@ token can be passed back to our services and the nonce checked for validity.
       req = new operations.GenerateNonceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/nonce";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3056,52 +3143,53 @@ token can be passed back to our services and the nonce checked for validity.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenerateNonceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GenerateNonceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accountNonce = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3113,8 +3201,10 @@ token can be passed back to our services and the nonce checked for validity.
   }
 
   
-  // GetAccount - Get the details of an account along with the profiles and entitlements under it.
-  GetAccount(
+  /**
+   * getAccount - Get the details of an account along with the profiles and entitlements under it.
+  **/
+  getAccount(
     req: operations.GetAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountResponse> {
@@ -3122,11 +3212,12 @@ token can be passed back to our services and the nonce checked for validity.
       req = new operations.GetAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3135,52 +3226,53 @@ token can be passed back to our services and the nonce checked for validity.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.account = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3192,18 +3284,20 @@ token can be passed back to our services and the nonce checked for validity.
   }
 
   
-  // GetAccountToken - Request one or more `Account` level authorization tokens each with a chosen scope.
-
-Tokens are used to access restricted service endpoints. These restricted endpoints
-will require a specific token type (e.g Account) with a specific scope (e.g. Catalog)
-before access is granted.
-
-For convenience, where a Profile level token with the same scope exists it will also be returned.
-
-Authorization with pin is not supported on this endpoint anymore. Use `/itv/pinauthorization`
-endpoint instead.
-
-  GetAccountToken(
+  /**
+   * getAccountToken - Request one or more `Account` level authorization tokens each with a chosen scope.
+   * 
+   * Tokens are used to access restricted service endpoints. These restricted endpoints
+   * will require a specific token type (e.g Account) with a specific scope (e.g. Catalog)
+   * before access is granted.
+   * 
+   * For convenience, where a Profile level token with the same scope exists it will also be returned.
+   * 
+   * Authorization with pin is not supported on this endpoint anymore. Use `/itv/pinauthorization`
+   * endpoint instead.
+   * 
+  **/
+  getAccountToken(
     req: operations.GetAccountTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountTokenResponse> {
@@ -3211,23 +3305,21 @@ endpoint instead.
       req = new operations.GetAccountTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/authorization";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3238,57 +3330,57 @@ endpoint instead.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessTokens = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3300,22 +3392,24 @@ endpoint instead.
   }
 
   
-  // GetAccountTokenByCode - Get Catalog tokens for an account using a device authorization code.
-Where a Profile level token of Catalog scope exists it will also be returned.
-
-This is the final step in the process of authorizing a device by pin code.
-
-Firstly the device must request a generated authorization code via the
-`/authorization/device/code` endpoint.
-
-The code is subsequently used to authorize the device to sign in to a given
-account via the `/account/devices/authorization` endpoint. Typically this
-will be from a page presented in the web app under the account section.
-
-Once authorized, this endpoint will allow the device to sign in without
-needing to provide the credentials of the user.
-
-  GetAccountTokenByCode(
+  /**
+   * getAccountTokenByCode - Get Catalog tokens for an account using a device authorization code.
+   * Where a Profile level token of Catalog scope exists it will also be returned.
+   * 
+   * This is the final step in the process of authorizing a device by pin code.
+   * 
+   * Firstly the device must request a generated authorization code via the
+   * `/authorization/device/code` endpoint.
+   * 
+   * The code is subsequently used to authorize the device to sign in to a given
+   * account via the `/account/devices/authorization` endpoint. Typically this
+   * will be from a page presented in the web app under the account section.
+   * 
+   * Once authorized, this endpoint will allow the device to sign in without
+   * needing to provide the credentials of the user.
+   * 
+  **/
+  getAccountTokenByCode(
     req: operations.GetAccountTokenByCodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountTokenByCodeResponse> {
@@ -3323,23 +3417,21 @@ needing to provide the credentials of the user.
       req = new operations.GetAccountTokenByCodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/authorization/device";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3350,57 +3442,57 @@ needing to provide the credentials of the user.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountTokenByCodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountTokenByCodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessTokens = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3412,15 +3504,17 @@ needing to provide the credentials of the user.
   }
 
   
-  // GetAccountTokenWithPin - Provides authorization with parental control pin.
-
-Returns an array containing account token with Playback scope.
-
-Requires access token with Catalog scope.
-
-Pin must be a 4-digit string
-
-  GetAccountTokenWithPin(
+  /**
+   * getAccountTokenWithPin - Provides authorization with parental control pin.
+   * 
+   * Returns an array containing account token with Playback scope.
+   * 
+   * Requires access token with Catalog scope.
+   * 
+   * Pin must be a 4-digit string
+   * 
+  **/
+  getAccountTokenWithPin(
     req: operations.GetAccountTokenWithPinRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountTokenWithPinResponse> {
@@ -3428,22 +3522,22 @@ Pin must be a 4-digit string
       req = new operations.GetAccountTokenWithPinRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/pinauthorization";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3454,47 +3548,47 @@ Pin must be a 4-digit string
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountTokenWithPinResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountTokenWithPinResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessTokens = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3506,10 +3600,12 @@ Pin must be a 4-digit string
   }
 
   
-  // GetAnonNextPlaybackItem - Identical to GET /account/profile/items/{itemId}/next route but for users
-that are not logged in i.e. this endpoint does not require authorisation
-
-  GetAnonNextPlaybackItem(
+  /**
+   * getAnonNextPlaybackItem - Identical to GET /account/profile/items/{itemId}/next route but for users
+   * that are not logged in i.e. this endpoint does not require authorisation
+   * 
+  **/
+  getAnonNextPlaybackItem(
     req: operations.GetAnonNextPlaybackItemRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnonNextPlaybackItemResponse> {
@@ -3517,12 +3613,11 @@ that are not logged in i.e. this endpoint does not require authorisation
       req = new operations.GetAnonNextPlaybackItemRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/items/{itemId}/next", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3531,42 +3626,43 @@ that are not logged in i.e. this endpoint does not require authorisation
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnonNextPlaybackItemResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAnonNextPlaybackItemResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nextPlaybackItem = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3578,15 +3674,17 @@ that are not logged in i.e. this endpoint does not require authorisation
   }
 
   
-  // GetAppConfig - Get the global configuration for an application. Should be called during app statup.
-
-This includes things like device and playback rules, classifications,
-sitemap and subscriptions.
-
-You have the option to select specific configuration objects using the 'include'
-parameter, or if unspecified, getting all configuration.
-
-  GetAppConfig(
+  /**
+   * getAppConfig - Get the global configuration for an application. Should be called during app statup.
+   * 
+   * This includes things like device and playback rules, classifications,
+   * sitemap and subscriptions.
+   * 
+   * You have the option to select specific configuration objects using the 'include'
+   * parameter, or if unspecified, getting all configuration.
+   * 
+  **/
+  getAppConfig(
     req: operations.GetAppConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAppConfigResponse> {
@@ -3594,12 +3692,11 @@ parameter, or if unspecified, getting all configuration.
       req = new operations.GetAppConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/config";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3608,42 +3705,43 @@ parameter, or if unspecified, getting all configuration.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAppConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAppConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appConfig = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3655,8 +3753,10 @@ parameter, or if unspecified, getting all configuration.
   }
 
   
-  // GetBillingHistory - Returns the list of billing records for specified payment platform.
-  GetBillingHistory(
+  /**
+   * getBillingHistory - Returns the list of billing records for specified payment platform.
+  **/
+  getBillingHistory(
     req: operations.GetBillingHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBillingHistoryResponse> {
@@ -3664,22 +3764,22 @@ parameter, or if unspecified, getting all configuration.
       req = new operations.GetBillingHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/billinghistory/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3690,47 +3790,47 @@ parameter, or if unspecified, getting all configuration.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBillingHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBillingHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvBillingHistory = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3742,8 +3842,10 @@ parameter, or if unspecified, getting all configuration.
   }
 
   
-  // GetBookmarkList - Returns the list of bookmarked items under the active profile.
-  GetBookmarkList(
+  /**
+   * getBookmarkList - Returns the list of bookmarked items under the active profile.
+  **/
+  getBookmarkList(
     req: operations.GetBookmarkListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBookmarkListResponse> {
@@ -3751,11 +3853,12 @@ parameter, or if unspecified, getting all configuration.
       req = new operations.GetBookmarkListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/bookmarks/list";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3764,52 +3867,53 @@ parameter, or if unspecified, getting all configuration.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBookmarkListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBookmarkListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3821,8 +3925,10 @@ parameter, or if unspecified, getting all configuration.
   }
 
   
-  // GetBookmarks - Get the map of bookmarked item ids (itemId => creationDate) under the active profile.
-  GetBookmarks(
+  /**
+   * getBookmarks - Get the map of bookmarked item ids (itemId => creationDate) under the active profile.
+  **/
+  getBookmarks(
     req: operations.GetBookmarksRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBookmarksResponse> {
@@ -3830,11 +3936,12 @@ parameter, or if unspecified, getting all configuration.
       req = new operations.GetBookmarksRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/bookmarks";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3843,52 +3950,53 @@ parameter, or if unspecified, getting all configuration.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBookmarksResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBookmarksResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getBookmarks200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3900,8 +4008,10 @@ parameter, or if unspecified, getting all configuration.
   }
 
   
-  // GetCardDetails - Get payment card details.
-  GetCardDetails(
+  /**
+   * getCardDetails - Get payment card details.
+  **/
+  getCardDetails(
     req: operations.GetCardDetailsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCardDetailsResponse> {
@@ -3909,22 +4019,22 @@ parameter, or if unspecified, getting all configuration.
       req = new operations.GetCardDetailsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/cards/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3935,47 +4045,47 @@ parameter, or if unspecified, getting all configuration.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCardDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCardDetailsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvCardDetails = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -3987,18 +4097,20 @@ parameter, or if unspecified, getting all configuration.
   }
 
   
-  // GetContinueWatchingList - Returns a list of items which have been watched but not completed under the active
-profile.
-
-Multiple episodes under the same show may be watched or in progress, however only a
-single item belonging to a particular show will be included in the returned list.
-
-The next episode to continue watching for a particular show will be the most recent
-incompletely watched episode, or the next episode following the most recently
-completely watched episode. Based on the specified `show_item_type` type, either the next
-episode, the season of the next episode, or the show will be included in the list.
-
-  GetContinueWatchingList(
+  /**
+   * getContinueWatchingList - Returns a list of items which have been watched but not completed under the active
+   * profile.
+   * 
+   * Multiple episodes under the same show may be watched or in progress, however only a
+   * single item belonging to a particular show will be included in the returned list.
+   * 
+   * The next episode to continue watching for a particular show will be the most recent
+   * incompletely watched episode, or the next episode following the most recently
+   * completely watched episode. Based on the specified `show_item_type` type, either the next
+   * episode, the season of the next episode, or the show will be included in the list.
+   * 
+  **/
+  getContinueWatchingList(
     req: operations.GetContinueWatchingListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetContinueWatchingListResponse> {
@@ -4006,11 +4118,12 @@ episode, the season of the next episode, or the show will be included in the lis
       req = new operations.GetContinueWatchingListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/continue-watching/list";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4019,52 +4132,53 @@ episode, the season of the next episode, or the show will be included in the lis
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetContinueWatchingListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetContinueWatchingListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4076,8 +4190,10 @@ episode, the season of the next episode, or the show will be included in the lis
   }
 
   
-  // GetCurrentEntitlement - Returns current entitlement.
-  GetCurrentEntitlement(
+  /**
+   * getCurrentEntitlement - Returns current entitlement.
+  **/
+  getCurrentEntitlement(
     req: operations.GetCurrentEntitlementRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCurrentEntitlementResponse> {
@@ -4085,11 +4201,12 @@ episode, the season of the next episode, or the show will be included in the lis
       req = new operations.GetCurrentEntitlementRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/entitlements/current";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4098,42 +4215,43 @@ episode, the season of the next episode, or the show will be included in the lis
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCurrentEntitlementResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCurrentEntitlementResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvEntitlementCurrent = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4145,8 +4263,10 @@ episode, the season of the next episode, or the show will be included in the lis
   }
 
   
-  // GetCurrentSubscription - Returns the details of current subscription for specified payment platform.
-  GetCurrentSubscription(
+  /**
+   * getCurrentSubscription - Returns the details of current subscription for specified payment platform.
+  **/
+  getCurrentSubscription(
     req: operations.GetCurrentSubscriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCurrentSubscriptionResponse> {
@@ -4154,11 +4274,12 @@ episode, the season of the next episode, or the show will be included in the lis
       req = new operations.GetCurrentSubscriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/purchase/{platform}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4167,42 +4288,43 @@ episode, the season of the next episode, or the show will be included in the lis
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCurrentSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCurrentSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvCurrentSubscription = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4214,8 +4336,10 @@ episode, the season of the next episode, or the show will be included in the lis
   }
 
   
-  // GetDevice - Get a registered device.
-  GetDevice(
+  /**
+   * getDevice - Get a registered device.
+  **/
+  getDevice(
     req: operations.GetDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDeviceResponse> {
@@ -4223,11 +4347,12 @@ episode, the season of the next episode, or the show will be included in the lis
       req = new operations.GetDeviceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/devices/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4236,52 +4361,53 @@ episode, the season of the next episode, or the show will be included in the lis
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.device = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4293,11 +4419,13 @@ episode, the season of the next episode, or the show will be included in the lis
   }
 
   
-  // GetDevices - Get all devices registered under this account.
-
-Also includes information around device registration and deregistration limits.
-
-  GetDevices(
+  /**
+   * getDevices - Get all devices registered under this account.
+   * 
+   * Also includes information around device registration and deregistration limits.
+   * 
+  **/
+  getDevices(
     req: operations.GetDevicesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDevicesResponse> {
@@ -4305,11 +4433,12 @@ Also includes information around device registration and deregistration limits.
       req = new operations.GetDevicesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/devices";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4318,52 +4447,53 @@ Also includes information around device registration and deregistration limits.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDevicesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDevicesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accountDevices = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4375,11 +4505,13 @@ Also includes information around device registration and deregistration limits.
   }
 
   
-  // GetEligibleOffers - Returns eligible partner specific offers for the querying partner for an EE MSISDN.
-This call is supposed to be called after we have MSISDN accired.
-This call should be followed by POST /ee/msisdn.
-
-  GetEligibleOffers(
+  /**
+   * getEligibleOffers - Returns eligible partner specific offers for the querying partner for an EE MSISDN.
+   * This call is supposed to be called after we have MSISDN accired.
+   * This call should be followed by POST /ee/msisdn.
+   * 
+  **/
+  getEligibleOffers(
     req: operations.GetEligibleOffersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEligibleOffersResponse> {
@@ -4387,23 +4519,21 @@ This call should be followed by POST /ee/msisdn.
       req = new operations.GetEligibleOffersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ee/offers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4414,47 +4544,47 @@ This call should be followed by POST /ee/msisdn.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEligibleOffersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEligibleOffersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eeOffersResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4466,12 +4596,14 @@ This call should be followed by POST /ee/msisdn.
   }
 
   
-  // GetEntitlements - Get all entitlements under the account.
-
-This list is returned under the call to get account information so a call here is
-only required when wishing to refresh a local copy of entitlements.
-
-  GetEntitlements(
+  /**
+   * getEntitlements - Get all entitlements under the account.
+   * 
+   * This list is returned under the call to get account information so a call here is
+   * only required when wishing to refresh a local copy of entitlements.
+   * 
+  **/
+  getEntitlements(
     req: operations.GetEntitlementsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEntitlementsResponse> {
@@ -4479,11 +4611,12 @@ only required when wishing to refresh a local copy of entitlements.
       req = new operations.GetEntitlementsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/entitlements";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4492,52 +4625,53 @@ only required when wishing to refresh a local copy of entitlements.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEntitlementsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEntitlementsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.entitlements = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4549,8 +4683,10 @@ only required when wishing to refresh a local copy of entitlements.
   }
 
   
-  // GetEntitlementsHistory - Returns the state of subscription for any payment platform.
-  GetEntitlementsHistory(
+  /**
+   * getEntitlementsHistory - Returns the state of subscription for any payment platform.
+  **/
+  getEntitlementsHistory(
     req: operations.GetEntitlementsHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEntitlementsHistoryResponse> {
@@ -4558,11 +4694,12 @@ only required when wishing to refresh a local copy of entitlements.
       req = new operations.GetEntitlementsHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/entitlements/history";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4571,42 +4708,43 @@ only required when wishing to refresh a local copy of entitlements.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEntitlementsHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEntitlementsHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvEntitlementsHistory = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4618,8 +4756,10 @@ only required when wishing to refresh a local copy of entitlements.
   }
 
   
-  // GetFeatureFlag - Gets info whether or not a feature is enabled or disabled using a feature flag. Feature flags are set as a custom field within PM. It also supports custom feature flag data if needed. Such data can be return as well.
-  GetFeatureFlag(
+  /**
+   * getFeatureFlag - Gets info whether or not a feature is enabled or disabled using a feature flag. Feature flags are set as a custom field within PM. It also supports custom feature flag data if needed. Such data can be return as well.
+  **/
+  getFeatureFlag(
     req: operations.GetFeatureFlagRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFeatureFlagResponse> {
@@ -4627,12 +4767,11 @@ only required when wishing to refresh a local copy of entitlements.
       req = new operations.GetFeatureFlagRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/featureFlag/{feature}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4641,42 +4780,43 @@ only required when wishing to refresh a local copy of entitlements.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFeatureFlagResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFeatureFlagResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvFeatureFlag = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4688,8 +4828,10 @@ only required when wishing to refresh a local copy of entitlements.
   }
 
   
-  // GetFullPriceRenewal - Returns full price renewal state and reason for specific user.
-  GetFullPriceRenewal(
+  /**
+   * getFullPriceRenewal - Returns full price renewal state and reason for specific user.
+  **/
+  getFullPriceRenewal(
     req: operations.GetFullPriceRenewalRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFullPriceRenewalResponse> {
@@ -4697,11 +4839,12 @@ only required when wishing to refresh a local copy of entitlements.
       req = new operations.GetFullPriceRenewalRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/subscription/fullpricerenewal";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4710,17 +4853,18 @@ only required when wishing to refresh a local copy of entitlements.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFullPriceRenewalResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFullPriceRenewalResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvSubscriptionFullPriceRenewal = httpRes?.data;
             }
             break;
@@ -4732,8 +4876,10 @@ only required when wishing to refresh a local copy of entitlements.
   }
 
   
-  // GetItem - Returns the details of an item with the specified id.
-  GetItem(
+  /**
+   * getItem - Returns the details of an item with the specified id.
+  **/
+  getItem(
     req: operations.GetItemRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemResponse> {
@@ -4741,12 +4887,11 @@ only required when wishing to refresh a local copy of entitlements.
       req = new operations.GetItemRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/items/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4755,42 +4900,43 @@ only required when wishing to refresh a local copy of entitlements.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemDetail = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4802,8 +4948,10 @@ only required when wishing to refresh a local copy of entitlements.
   }
 
   
-  // GetItemBookmark - Get the bookmark for an item under the active profile.
-  GetItemBookmark(
+  /**
+   * getItemBookmark - Get the bookmark for an item under the active profile.
+  **/
+  getItemBookmark(
     req: operations.GetItemBookmarkRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemBookmarkResponse> {
@@ -4811,11 +4959,12 @@ only required when wishing to refresh a local copy of entitlements.
       req = new operations.GetItemBookmarkRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/bookmarks/{itemId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4824,52 +4973,53 @@ only required when wishing to refresh a local copy of entitlements.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemBookmarkResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemBookmarkResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bookmark = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4881,15 +5031,17 @@ only required when wishing to refresh a local copy of entitlements.
   }
 
   
-  // GetItemChildrenList - Returns the List of child summary items under an item.
-
-If the item is a Season then the children will be episodes and ordered by episode number.
-
-If the item is a Show then the children will be Seasons and ordered by season number.
-
-Returns 404 if no children found.
-
-  GetItemChildrenList(
+  /**
+   * getItemChildrenList - Returns the List of child summary items under an item.
+   * 
+   * If the item is a Season then the children will be episodes and ordered by episode number.
+   * 
+   * If the item is a Show then the children will be Seasons and ordered by season number.
+   * 
+   * Returns 404 if no children found.
+   * 
+  **/
+  getItemChildrenList(
     req: operations.GetItemChildrenListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemChildrenListResponse> {
@@ -4897,12 +5049,11 @@ Returns 404 if no children found.
       req = new operations.GetItemChildrenListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/items/{id}/children", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4911,42 +5062,43 @@ Returns 404 if no children found.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemChildrenListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemChildrenListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -4958,8 +5110,10 @@ Returns 404 if no children found.
   }
 
   
-  // GetItemDownloadables - Returns the details of an item with the specified id.
-  GetItemDownloadables(
+  /**
+   * getItemDownloadables - Returns the details of an item with the specified id.
+  **/
+  getItemDownloadables(
     req: operations.GetItemDownloadablesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemDownloadablesResponse> {
@@ -4967,23 +5121,21 @@ Returns 404 if no children found.
       req = new operations.GetItemDownloadablesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/items/downloadable";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4994,47 +5146,47 @@ Returns 404 if no children found.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemDownloadablesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemDownloadablesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemDownloadableList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5046,33 +5198,35 @@ Returns 404 if no children found.
   }
 
   
-  // GetItemMediaFiles - Get the video files associated with an item given maximum resolution, device type
-and one or more delivery types.
-
-This endpoint accepts an Account Catalog token, however if when requesting
-playback files you receive an *403 status code with error code 1* then the file
-you're requesting is classification restricted. This means you should switch
-to target the `/account/items/{id}/videos-guarded` endpoint, passing it an Account
-Playback token. If not already obtained, this token can be requested via the
-`/itv/pinauthorization` endpoint with an account level pin.
-
-For convenience you may also access free / public files through this endpoint
-instead of the /items/{id}/videos endpoint, when authenticated.
-
-Returns an array of video file objects which each include a url to a video.
-
-The first entry in the array contains what is predicted to be the best match.
-The remainder of the entries, if any, may contain resolutions below what was
-requests. For example if you request HD-720 the response may also contain
-SD entries.
-
-If you specify multiple delivery types, then the response array will insert
-types in the order you specify them in the query. For example `stream,progressive`
-would return an array with 0 or more stream files followed by 0 or more progressive files.
-
-If no files are found a 404 is returned.
-
-  GetItemMediaFiles(
+  /**
+   * getItemMediaFiles - Get the video files associated with an item given maximum resolution, device type
+   * and one or more delivery types.
+   * 
+   * This endpoint accepts an Account Catalog token, however if when requesting
+   * playback files you receive an *403 status code with error code 1* then the file
+   * you're requesting is classification restricted. This means you should switch
+   * to target the `/account/items/{id}/videos-guarded` endpoint, passing it an Account
+   * Playback token. If not already obtained, this token can be requested via the
+   * `/itv/pinauthorization` endpoint with an account level pin.
+   * 
+   * For convenience you may also access free / public files through this endpoint
+   * instead of the /items/{id}/videos endpoint, when authenticated.
+   * 
+   * Returns an array of video file objects which each include a url to a video.
+   * 
+   * The first entry in the array contains what is predicted to be the best match.
+   * The remainder of the entries, if any, may contain resolutions below what was
+   * requests. For example if you request HD-720 the response may also contain
+   * SD entries.
+   * 
+   * If you specify multiple delivery types, then the response array will insert
+   * types in the order you specify them in the query. For example `stream,progressive`
+   * would return an array with 0 or more stream files followed by 0 or more progressive files.
+   * 
+   * If no files are found a 404 is returned.
+   * 
+  **/
+  getItemMediaFiles(
     req: operations.GetItemMediaFilesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemMediaFilesResponse> {
@@ -5080,11 +5234,12 @@ If no files are found a 404 is returned.
       req = new operations.GetItemMediaFilesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/items/{id}/videos", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5093,52 +5248,53 @@ If no files are found a 404 is returned.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemMediaFilesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemMediaFilesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mediaFiles = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5150,28 +5306,30 @@ If no files are found a 404 is returned.
   }
 
   
-  // GetItemMediaFilesGuarded - Get the video files associated with an item given maximum resolution, device type
-and one or more delivery types.
-
-This endpoint is identical to the `/account/items/{id}/videos` however it expects
-an Account Playback token. This token, and in association this endpoint, is specifically
-for use when playback files are classification restricted and require an account
-level pin to access them.
-
-Returns an array of video file objects which each include a url to a video.
-
-The first entry in the array contains what is predicted to be the best match.
-The remainder of the entries, if any, may contain resolutions below what was
-requests. For example if you request HD-720 the response may also contain
-SD entries.
-
-If you specify multiple delivery types, then the response array will insert
-types in the order you specify them in the query. For example `stream,progressive`
-would return an array with 0 or more stream files followed by 0 or more progressive files.
-
-If no files are found a 404 is returned.
-
-  GetItemMediaFilesGuarded(
+  /**
+   * getItemMediaFilesGuarded - Get the video files associated with an item given maximum resolution, device type
+   * and one or more delivery types.
+   * 
+   * This endpoint is identical to the `/account/items/{id}/videos` however it expects
+   * an Account Playback token. This token, and in association this endpoint, is specifically
+   * for use when playback files are classification restricted and require an account
+   * level pin to access them.
+   * 
+   * Returns an array of video file objects which each include a url to a video.
+   * 
+   * The first entry in the array contains what is predicted to be the best match.
+   * The remainder of the entries, if any, may contain resolutions below what was
+   * requests. For example if you request HD-720 the response may also contain
+   * SD entries.
+   * 
+   * If you specify multiple delivery types, then the response array will insert
+   * types in the order you specify them in the query. For example `stream,progressive`
+   * would return an array with 0 or more stream files followed by 0 or more progressive files.
+   * 
+   * If no files are found a 404 is returned.
+   * 
+  **/
+  getItemMediaFilesGuarded(
     req: operations.GetItemMediaFilesGuardedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemMediaFilesGuardedResponse> {
@@ -5179,11 +5337,12 @@ If no files are found a 404 is returned.
       req = new operations.GetItemMediaFilesGuardedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/items/{id}/videos-guarded", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5192,52 +5351,53 @@ If no files are found a 404 is returned.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemMediaFilesGuardedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemMediaFilesGuardedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mediaFiles = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5249,8 +5409,10 @@ If no files are found a 404 is returned.
   }
 
   
-  // GetItemRating - Get the rating info for an item under the active profile.
-  GetItemRating(
+  /**
+   * getItemRating - Get the rating info for an item under the active profile.
+  **/
+  getItemRating(
     req: operations.GetItemRatingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemRatingResponse> {
@@ -5258,11 +5420,12 @@ If no files are found a 404 is returned.
       req = new operations.GetItemRatingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/ratings/{itemId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5271,52 +5434,53 @@ If no files are found a 404 is returned.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemRatingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemRatingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.userRating = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5328,11 +5492,13 @@ If no files are found a 404 is returned.
   }
 
   
-  // GetItemRelatedList - Returns the list of items related to the parent item.
-
-Note for now, due to the size of the list being unknown, only a single page will be returned.
-
-  GetItemRelatedList(
+  /**
+   * getItemRelatedList - Returns the list of items related to the parent item.
+   * 
+   * Note for now, due to the size of the list being unknown, only a single page will be returned.
+   * 
+  **/
+  getItemRelatedList(
     req: operations.GetItemRelatedListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemRelatedListResponse> {
@@ -5340,12 +5506,11 @@ Note for now, due to the size of the list being unknown, only a single page will
       req = new operations.GetItemRelatedListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/items/{id}/related", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5354,42 +5519,43 @@ Note for now, due to the size of the list being unknown, only a single page will
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemRelatedListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemRelatedListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5401,8 +5567,10 @@ Note for now, due to the size of the list being unknown, only a single page will
   }
 
   
-  // GetItemWatchedStatus - Get the watched status info for an item under the active profile.
-  GetItemWatchedStatus(
+  /**
+   * getItemWatchedStatus - Get the watched status info for an item under the active profile.
+  **/
+  getItemWatchedStatus(
     req: operations.GetItemWatchedStatusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemWatchedStatusResponse> {
@@ -5410,11 +5578,12 @@ Note for now, due to the size of the list being unknown, only a single page will
       req = new operations.GetItemWatchedStatusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/watched/{itemId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5423,52 +5592,53 @@ Note for now, due to the size of the list being unknown, only a single page will
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemWatchedStatusResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemWatchedStatusResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.watched = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5480,9 +5650,11 @@ Note for now, due to the size of the list being unknown, only a single page will
   }
 
   
-  // GetItemsMediaClipFiles - Get the media clip files associated with items.
-
-  GetItemsMediaClipFiles(
+  /**
+   * getItemsMediaClipFiles - Get the media clip files associated with items.
+   * 
+  **/
+  getItemsMediaClipFiles(
     req: operations.GetItemsMediaClipFilesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItemsMediaClipFilesResponse> {
@@ -5490,23 +5662,21 @@ Note for now, due to the size of the list being unknown, only a single page will
       req = new operations.GetItemsMediaClipFilesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/items/clips";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5517,47 +5687,47 @@ Note for now, due to the size of the list being unknown, only a single page will
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItemsMediaClipFilesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItemsMediaClipFilesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemClipFilesList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5569,15 +5739,17 @@ Note for now, due to the size of the list being unknown, only a single page will
   }
 
   
-  // GetItvPage - Returns a page with the specified id.
-
-This is a cut down version for low memory devices.123
-
-If targeting the search page you must url encode the search term as a parameter
-using the `q` key. For example if your browser path looks like `/search?q=the`
-then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%3Dthe`.
-
-  GetItvPage(
+  /**
+   * getItvPage - Returns a page with the specified id.
+   * 
+   * This is a cut down version for low memory devices.123
+   * 
+   * If targeting the search page you must url encode the search term as a parameter
+   * using the `q` key. For example if your browser path looks like `/search?q=the`
+   * then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%3Dthe`.
+   * 
+  **/
+  getItvPage(
     req: operations.GetItvPageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItvPageResponse> {
@@ -5585,12 +5757,11 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
       req = new operations.GetItvPageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/page";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5599,44 +5770,45 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItvPageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItvPageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.page = httpRes?.data;
             }
             break;
-          case 301:
+          case httpRes?.status == 301:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5648,8 +5820,10 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
   }
 
   
-  // GetItvProfileToken - Returns the ITV profile token.
-  GetItvProfileToken(
+  /**
+   * getItvProfileToken - Returns the ITV profile token.
+  **/
+  getItvProfileToken(
     req: operations.GetItvProfileTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetItvProfileTokenResponse> {
@@ -5657,22 +5831,22 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
       req = new operations.GetItvProfileTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/profiletoken";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5683,47 +5857,47 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetItvProfileTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetItvProfileTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvProfileToken = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5735,8 +5909,10 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
   }
 
   
-  // GetList - Returns a list of items under the specified item list
-  GetList(
+  /**
+   * getList - Returns a list of items under the specified item list
+  **/
+  getList(
     req: operations.GetListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListResponse> {
@@ -5744,12 +5920,11 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
       req = new operations.GetListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lists/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5758,42 +5933,43 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5805,8 +5981,10 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
   }
 
   
-  // GetLists - Returns an array of item lists with their first page of content resolved.
-  GetLists(
+  /**
+   * getLists - Returns an array of item lists with their first page of content resolved.
+  **/
+  getLists(
     req: operations.GetListsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetListsResponse> {
@@ -5814,12 +5992,11 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
       req = new operations.GetListsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lists";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5828,42 +6005,43 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetListsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetListsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemLists = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5875,20 +6053,22 @@ then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%
   }
 
   
-  // GetNextPlaybackItem - Returns the next item to play given a source item id.
-
-For an unwatched show it returns the first episode available to the account.
-
-For a watched show it returns the last incompletely watched episode by the profile,
-or the episode that immediately follows the last completely watched episode 
-or nothing.
-
-For an episode it always returns the immediately following episode, if available to
-the account, or nothing.
-
-If the response does not contain a `next` property then no item was found.
-
-  GetNextPlaybackItem(
+  /**
+   * getNextPlaybackItem - Returns the next item to play given a source item id.
+   * 
+   * For an unwatched show it returns the first episode available to the account.
+   * 
+   * For a watched show it returns the last incompletely watched episode by the profile,
+   * or the episode that immediately follows the last completely watched episode 
+   * or nothing.
+   * 
+   * For an episode it always returns the immediately following episode, if available to
+   * the account, or nothing.
+   * 
+   * If the response does not contain a `next` property then no item was found.
+   * 
+  **/
+  getNextPlaybackItem(
     req: operations.GetNextPlaybackItemRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNextPlaybackItemResponse> {
@@ -5896,11 +6076,12 @@ If the response does not contain a `next` property then no item was found.
       req = new operations.GetNextPlaybackItemRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/items/{itemId}/next", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5909,52 +6090,53 @@ If the response does not contain a `next` property then no item was found.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNextPlaybackItemResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNextPlaybackItemResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nextPlaybackItem = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -5966,13 +6148,15 @@ If the response does not contain a `next` property then no item was found.
   }
 
   
-  // GetPage - Returns a page with the specified id.
-
-If targeting the search page you must url encode the search term as a parameter
-using the `q` key. For example if your browser path looks like `/search?q=the`
-then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dthe`.
-
-  GetPage(
+  /**
+   * getPage - Returns a page with the specified id.
+   * 
+   * If targeting the search page you must url encode the search term as a parameter
+   * using the `q` key. For example if your browser path looks like `/search?q=the`
+   * then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dthe`.
+   * 
+  **/
+  getPage(
     req: operations.GetPageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPageResponse> {
@@ -5980,12 +6164,11 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
       req = new operations.GetPageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/page";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5994,44 +6177,45 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.page = httpRes?.data;
             }
             break;
-          case 301:
+          case httpRes?.status == 301:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6043,8 +6227,10 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
   }
 
   
-  // GetPaymentMethod - Get a payment method under an account.
-  GetPaymentMethod(
+  /**
+   * getPaymentMethod - Get a payment method under an account.
+  **/
+  getPaymentMethod(
     req: operations.GetPaymentMethodRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPaymentMethodResponse> {
@@ -6052,11 +6238,12 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
       req = new operations.GetPaymentMethodRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/billing/methods/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6065,52 +6252,53 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentMethod = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6122,8 +6310,10 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
   }
 
   
-  // GetPaymentMethods - Get the available payment methods under an account.
-  GetPaymentMethods(
+  /**
+   * getPaymentMethods - Get the available payment methods under an account.
+  **/
+  getPaymentMethods(
     req: operations.GetPaymentMethodsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPaymentMethodsResponse> {
@@ -6131,11 +6321,12 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
       req = new operations.GetPaymentMethodsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/billing/methods";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6144,52 +6335,53 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPaymentMethodsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPaymentMethodsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentMethods = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6201,8 +6393,10 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
   }
 
   
-  // GetPlan - Returns the plan description for EE flow including additional description data.
-  GetPlan(
+  /**
+   * getPlan - Returns the plan description for EE flow including additional description data.
+  **/
+  getPlan(
     req: operations.GetPlanRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPlanResponse> {
@@ -6210,12 +6404,11 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
       req = new operations.GetPlanRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ee/plans/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6224,42 +6417,43 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPlanResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPlanResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eePlanListItem = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6271,8 +6465,10 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
   }
 
   
-  // GetPlanByToken - Returns all the plans available for BT flow including additional description data.
-  GetPlanByToken(
+  /**
+   * getPlanByToken - Returns all the plans available for BT flow including additional description data.
+  **/
+  getPlanByToken(
     req: operations.GetPlanByTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPlanByTokenResponse> {
@@ -6280,12 +6476,11 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
       req = new operations.GetPlanByTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/bt/plan/{token}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6294,42 +6489,43 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPlanByTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPlanByTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.btPlanListItem = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6341,8 +6537,10 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
   }
 
   
-  // GetPlans - Returns all the plans available for BT flow including additional description data.
-  GetPlans(
+  /**
+   * getPlans - Returns all the plans available for BT flow including additional description data.
+  **/
+  getPlans(
     req: operations.GetPlansRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPlansResponse> {
@@ -6350,12 +6548,11 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
       req = new operations.GetPlansRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/bt/plans";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6364,42 +6561,43 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.btPlans = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6411,8 +6609,10 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
   }
 
   
-  // GetProfile - Get the details of the active profile, including watched, bookmarked and rated items.
-  GetProfile(
+  /**
+   * getProfile - Get the details of the active profile, including watched, bookmarked and rated items.
+  **/
+  getProfile(
     req: operations.GetProfileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileResponse> {
@@ -6420,11 +6620,12 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
       req = new operations.GetProfileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6433,52 +6634,53 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.profileDetail = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6490,13 +6692,15 @@ then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dth
   }
 
   
-  // GetProfileToken - Request one or more `Profile` level authorization tokens each with a chosen scope.
-
-Tokens are used to access restricted service endpoints. These restriced endpoints
-will require a specific token type (e.g Profile) with a specific scope (e.g. Catalog)
-before access is granted.
-
-  GetProfileToken(
+  /**
+   * getProfileToken - Request one or more `Profile` level authorization tokens each with a chosen scope.
+   * 
+   * Tokens are used to access restricted service endpoints. These restriced endpoints
+   * will require a specific token type (e.g Profile) with a specific scope (e.g. Catalog)
+   * before access is granted.
+   * 
+  **/
+  getProfileToken(
     req: operations.GetProfileTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileTokenResponse> {
@@ -6504,22 +6708,22 @@ before access is granted.
       req = new operations.GetProfileTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/authorization/profile";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6530,57 +6734,57 @@ before access is granted.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessTokens = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6592,8 +6796,10 @@ before access is granted.
   }
 
   
-  // GetProfileWithId - Get the summary of a profile with a specific id under the active account.
-  GetProfileWithId(
+  /**
+   * getProfileWithId - Get the summary of a profile with a specific id under the active account.
+  **/
+  getProfileWithId(
     req: operations.GetProfileWithIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileWithIdResponse> {
@@ -6601,11 +6807,12 @@ before access is granted.
       req = new operations.GetProfileWithIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profiles/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6614,52 +6821,53 @@ before access is granted.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileWithIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileWithIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.profileSummary = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6671,23 +6879,25 @@ before access is granted.
   }
 
   
-  // GetPublicItemMediaFiles - Get the free / public video files associated with an item given maximum resolution,
-device type and one or more delivery types.
-
-Returns an array of video file objects which each include a url to a video.
-
-The first entry in the array contains what is predicted to be the best match.
-The remainder of the entries, if any, may contain resolutions below what was
-requests. For example if you request HD-720 the response may also contain
-SD entries.
-
-If you specify multiple delivery types, then the response array will insert
-types in the order you specify them in the query. For example `stream,progressive`
-would return an array with 0 or more stream files followed by 0 or more progressive files.
-
-If no files are found a 404 is returned.
-
-  GetPublicItemMediaFiles(
+  /**
+   * getPublicItemMediaFiles - Get the free / public video files associated with an item given maximum resolution,
+   * device type and one or more delivery types.
+   * 
+   * Returns an array of video file objects which each include a url to a video.
+   * 
+   * The first entry in the array contains what is predicted to be the best match.
+   * The remainder of the entries, if any, may contain resolutions below what was
+   * requests. For example if you request HD-720 the response may also contain
+   * SD entries.
+   * 
+   * If you specify multiple delivery types, then the response array will insert
+   * types in the order you specify them in the query. For example `stream,progressive`
+   * would return an array with 0 or more stream files followed by 0 or more progressive files.
+   * 
+   * If no files are found a 404 is returned.
+   * 
+  **/
+  getPublicItemMediaFiles(
     req: operations.GetPublicItemMediaFilesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPublicItemMediaFilesResponse> {
@@ -6695,12 +6905,11 @@ If no files are found a 404 is returned.
       req = new operations.GetPublicItemMediaFilesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/items/{id}/videos", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6709,42 +6918,43 @@ If no files are found a 404 is returned.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPublicItemMediaFilesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPublicItemMediaFilesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mediaFiles = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6756,55 +6966,56 @@ If no files are found a 404 is returned.
   }
 
   
-  // GetPublicPreview - Returns public preview for Samsung based on the page '/samsung-preview' configured in PresentationManager.
-There is a hard limit of max 40 items to be returned. It splits evenly items count into the page rows, remaining items are added into the first row.
-
-  GetPublicPreview(
-    
+  /**
+   * getPublicPreview - Returns public preview for Samsung based on the page '/samsung-preview' configured in PresentationManager.
+   * There is a hard limit of max 40 items to be returned. It splits evenly items count into the page rows, remaining items are added into the first row.
+   * 
+  **/
+  getPublicPreview(
     config?: AxiosRequestConfig
   ): Promise<operations.GetPublicPreviewResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/samsung-preview";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPublicPreviewResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPublicPreviewResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.samsungPreview = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6816,8 +7027,10 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
   }
 
   
-  // GetPurchases - Get a list of all purchases made under an account.
-  GetPurchases(
+  /**
+   * getPurchases - Get a list of all purchases made under an account.
+  **/
+  getPurchases(
     req: operations.GetPurchasesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPurchasesResponse> {
@@ -6825,11 +7038,12 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
       req = new operations.GetPurchasesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/billing/purchases";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6838,52 +7052,53 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPurchasesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPurchasesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.purchases = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6895,8 +7110,10 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
   }
 
   
-  // GetRatings - Get the map of rated item ids (itemId => rating out of 10) under the active profile.
-  GetRatings(
+  /**
+   * getRatings - Get the map of rated item ids (itemId => rating out of 10) under the active profile.
+  **/
+  getRatings(
     req: operations.GetRatingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRatingsResponse> {
@@ -6904,11 +7121,12 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
       req = new operations.GetRatingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/ratings";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6917,52 +7135,53 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRatingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRatingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRatings200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -6974,8 +7193,10 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
   }
 
   
-  // GetRatingsList - Returns the list of rated items under the active profile.
-  GetRatingsList(
+  /**
+   * getRatingsList - Returns the list of rated items under the active profile.
+  **/
+  getRatingsList(
     req: operations.GetRatingsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRatingsListResponse> {
@@ -6983,11 +7204,12 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
       req = new operations.GetRatingsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/ratings/list";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6996,52 +7218,53 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRatingsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRatingsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7053,8 +7276,10 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
   }
 
   
-  // GetRecommendedList - Get the list of recommended items under the active profile.
-  GetRecommendedList(
+  /**
+   * getRecommendedList - Get the list of recommended items under the active profile.
+  **/
+  getRecommendedList(
     req: operations.GetRecommendedListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRecommendedListResponse> {
@@ -7062,11 +7287,12 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
       req = new operations.GetRecommendedListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/profile/recommendation/list";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7075,52 +7301,53 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRecommendedListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRecommendedListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7132,8 +7359,10 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
   }
 
   
-  // GetSaveOffer - Checks the provided coupon id for a user. Only Stripe platform is currently supported.
-  GetSaveOffer(
+  /**
+   * getSaveOffer - Checks the provided coupon id for a user. Only Stripe platform is currently supported.
+  **/
+  getSaveOffer(
     req: operations.GetSaveOfferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSaveOfferResponse> {
@@ -7141,11 +7370,12 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
       req = new operations.GetSaveOfferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/save-offer";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7154,42 +7384,43 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSaveOfferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSaveOfferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvGetDiscountResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7201,31 +7432,33 @@ There is a hard limit of max 40 items to be returned. It splits evenly items cou
   }
 
   
-  // GetSchedules - Returns schedules for a defined set of channels over a requested period.
-
-Schedules are requested in hour blocks and returned grouped by the channel
-they belong to.
-
-For example, to load 12 hours of schedules for channels `4343` and `5234`,
-on 21/2/2017 starting from 08:00.
-
-```
-channels=4343,5234
-date=2017-02-21
-hour=8
-duration=12
-```
-
-Please remember that `date` and `hour` combined represent a normal datetime, 
-so they should be converted to UTC on the client - this will help to avoid 
-issues with EPG schedules near midnight.
-
-If a channel id is passed which doesn't exist then this endpoint will
-return an empty schedule list for it. If instead we returned 404,
-this would invalidate all other channel schedules in the same request
-which would be unfriendly for clients presenting these channel schedules.
-
-  GetSchedules(
+  /**
+   * getSchedules - Returns schedules for a defined set of channels over a requested period.
+   * 
+   * Schedules are requested in hour blocks and returned grouped by the channel
+   * they belong to.
+   * 
+   * For example, to load 12 hours of schedules for channels `4343` and `5234`,
+   * on 21/2/2017 starting from 08:00.
+   * 
+   * ```
+   * channels=4343,5234
+   * date=2017-02-21
+   * hour=8
+   * duration=12
+   * ```
+   * 
+   * Please remember that `date` and `hour` combined represent a normal datetime, 
+   * so they should be converted to UTC on the client - this will help to avoid 
+   * issues with EPG schedules near midnight.
+   * 
+   * If a channel id is passed which doesn't exist then this endpoint will
+   * return an empty schedule list for it. If instead we returned 404,
+   * this would invalidate all other channel schedules in the same request
+   * which would be unfriendly for clients presenting these channel schedules.
+   * 
+  **/
+  getSchedules(
     req: operations.GetSchedulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSchedulesResponse> {
@@ -7233,12 +7466,11 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetSchedulesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/schedules";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7247,42 +7479,43 @@ which would be unfriendly for clients presenting these channel schedules.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSchedulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSchedulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemScheduleLists = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7294,8 +7527,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GetSubscriptionData - Returns the details of subscription data for a user with specified id.
-  GetSubscriptionData(
+  /**
+   * getSubscriptionData - Returns the details of subscription data for a user with specified id.
+  **/
+  getSubscriptionData(
     req: operations.GetSubscriptionDataRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSubscriptionDataResponse> {
@@ -7303,48 +7538,48 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetSubscriptionDataRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/check-subscription/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSubscriptionDataResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSubscriptionDataResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.subscriptionDetails = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7356,8 +7591,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GetSubscriptionState - Returns the state of subscription for any payment platform.
-  GetSubscriptionState(
+  /**
+   * getSubscriptionState - Returns the state of subscription for any payment platform.
+  **/
+  getSubscriptionState(
     req: operations.GetSubscriptionStateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSubscriptionStateResponse> {
@@ -7365,11 +7602,12 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetSubscriptionStateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/subscriptionstate";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7378,42 +7616,43 @@ which would be unfriendly for clients presenting these channel schedules.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSubscriptionStateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSubscriptionStateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvSubscriptionState = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7425,8 +7664,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GetSubscriptionStatus - Returns status of latest payment intent.
-  GetSubscriptionStatus(
+  /**
+   * getSubscriptionStatus - Returns status of latest payment intent.
+  **/
+  getSubscriptionStatus(
     req: operations.GetSubscriptionStatusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSubscriptionStatusResponse> {
@@ -7434,11 +7675,12 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetSubscriptionStatusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/subscription/status/{platform}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7447,17 +7689,18 @@ which would be unfriendly for clients presenting these channel schedules.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSubscriptionStatusResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSubscriptionStatusResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvSubscriptionStatusResponse = httpRes?.data;
             }
             break;
@@ -7469,8 +7712,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GetUpcomingInvoice - Returns an upcoming invoice
-  GetUpcomingInvoice(
+  /**
+   * getUpcomingInvoice - Returns an upcoming invoice
+  **/
+  getUpcomingInvoice(
     req: operations.GetUpcomingInvoiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUpcomingInvoiceResponse> {
@@ -7478,11 +7723,12 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetUpcomingInvoiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/upcominginvoice";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7491,42 +7737,43 @@ which would be unfriendly for clients presenting these channel schedules.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUpcomingInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUpcomingInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvGetDiscountResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7538,8 +7785,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GetVoucherById - Checks the provided coupon id for a user. Only Stripe platform is currently supported.
-  GetVoucherById(
+  /**
+   * getVoucherById - Checks the provided coupon id for a user. Only Stripe platform is currently supported.
+  **/
+  getVoucherById(
     req: operations.GetVoucherByIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetVoucherByIdResponse> {
@@ -7547,11 +7796,12 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetVoucherByIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/voucher/{planId}/{voucherId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7560,42 +7810,43 @@ which would be unfriendly for clients presenting these channel schedules.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetVoucherByIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetVoucherByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvVoucher = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7607,8 +7858,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GetWatched - Get the map of watched item ids (itemId => last playhead position) under the active profile.
-  GetWatched(
+  /**
+   * getWatched - Get the map of watched item ids (itemId => last playhead position) under the active profile.
+  **/
+  getWatched(
     req: operations.GetWatchedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetWatchedResponse> {
@@ -7616,11 +7869,12 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetWatchedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/watched";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7629,52 +7883,53 @@ which would be unfriendly for clients presenting these channel schedules.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetWatchedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetWatchedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getWatched200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7686,8 +7941,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GetWatchedList - Returns the list of watched items under the active profile.
-  GetWatchedList(
+  /**
+   * getWatchedList - Returns the list of watched items under the active profile.
+  **/
+  getWatchedList(
     req: operations.GetWatchedListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetWatchedListResponse> {
@@ -7695,11 +7952,12 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GetWatchedListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/profile/watched/list";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7708,52 +7966,53 @@ which would be unfriendly for clients presenting these channel schedules.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetWatchedListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetWatchedListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itemList = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7765,8 +8024,10 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // GooglePaySubscription - Get the list of recommended items under the active profile.
-  GooglePaySubscription(
+  /**
+   * googlePaySubscription - Get the list of recommended items under the active profile.
+  **/
+  googlePaySubscription(
     req: operations.GooglePaySubscriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GooglePaySubscriptionResponse> {
@@ -7774,22 +8035,22 @@ which would be unfriendly for clients presenting these channel schedules.
       req = new operations.GooglePaySubscriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/googlepay/subscription";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7800,31 +8061,31 @@ which would be unfriendly for clients presenting these channel schedules.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GooglePaySubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.GooglePaySubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 409:
+          case httpRes?.status == 409:
             break;
-          case 415:
+          case httpRes?.status == 415:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
         }
 
@@ -7834,10 +8095,12 @@ which would be unfriendly for clients presenting these channel schedules.
   }
 
   
-  // MakePurchase - Purchase a plan or item offer.
-The result of a successful transaction is a new entitlement.
-
-  MakePurchase(
+  /**
+   * makePurchase - Purchase a plan or item offer.
+   * The result of a successful transaction is a new entitlement.
+   * 
+  **/
+  makePurchase(
     req: operations.MakePurchaseRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MakePurchaseResponse> {
@@ -7845,22 +8108,22 @@ The result of a successful transaction is a new entitlement.
       req = new operations.MakePurchaseRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/billing/purchases";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7871,57 +8134,57 @@ The result of a successful transaction is a new entitlement.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MakePurchaseResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MakePurchaseResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.entitlement = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -7933,11 +8196,13 @@ The result of a successful transaction is a new entitlement.
   }
 
   
-  // RateItem - Rate an item under the active profile.
-
-Creates one if it doesn't exist, overwrites one if it does.
-
-  RateItem(
+  /**
+   * rateItem - Rate an item under the active profile.
+   * 
+   * Creates one if it doesn't exist, overwrites one if it does.
+   * 
+  **/
+  rateItem(
     req: operations.RateItemRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RateItemResponse> {
@@ -7945,11 +8210,12 @@ Creates one if it doesn't exist, overwrites one if it does.
       req = new operations.RateItemRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/ratings/{itemId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7958,52 +8224,53 @@ Creates one if it doesn't exist, overwrites one if it does.
     };
     
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RateItemResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RateItemResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.userRating = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8015,8 +8282,10 @@ Creates one if it doesn't exist, overwrites one if it does.
   }
 
   
-  // RefreshToken - Refresh an account or profile level authorization token which is marked as refreshable.
-  RefreshToken(
+  /**
+   * refreshToken - Refresh an account or profile level authorization token which is marked as refreshable.
+  **/
+  refreshToken(
     req: operations.RefreshTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RefreshTokenResponse> {
@@ -8024,23 +8293,21 @@ Creates one if it doesn't exist, overwrites one if it does.
       req = new operations.RefreshTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/authorization/refresh";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8051,57 +8318,57 @@ Creates one if it doesn't exist, overwrites one if it does.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RefreshTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RefreshTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessToken = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8113,20 +8380,22 @@ Creates one if it doesn't exist, overwrites one if it does.
   }
 
   
-  // Register - Register a new user, creating them an account.
-
-Registration, when successful, will return an array of access tokens so the user is
-immediately signed in.
-
-It returns Catalog and Commerce scoped tokens for both Account and Profile.
-The Commerce ones are intended to allow the purchase of a subscription plan
-in the step after registration, without the user being prompted to enter
-their username and password again.
-
-An email will also be sent with a link they need to click to confirm their
-email address. This confirmation is done via the /verify-email endpoint.
-
-  Register(
+  /**
+   * register - Register a new user, creating them an account.
+   * 
+   * Registration, when successful, will return an array of access tokens so the user is
+   * immediately signed in.
+   * 
+   * It returns Catalog and Commerce scoped tokens for both Account and Profile.
+   * The Commerce ones are intended to allow the purchase of a subscription plan
+   * in the step after registration, without the user being prompted to enter
+   * their username and password again.
+   * 
+   * An email will also be sent with a link they need to click to confirm their
+   * email address. This confirmation is done via the /verify-email endpoint.
+   * 
+  **/
+  register(
     req: operations.RegisterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegisterResponse> {
@@ -8134,23 +8403,21 @@ email address. This confirmation is done via the /verify-email endpoint.
       req = new operations.RegisterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/register";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8161,57 +8428,57 @@ email address. This confirmation is done via the /verify-email endpoint.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegisterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RegisterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessTokens = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8223,11 +8490,13 @@ email address. This confirmation is done via the /verify-email endpoint.
   }
 
   
-  // RegisterDevice - Register a playback device under an account.
-
-If a device with the same id already exists a `409` conflict will be returned.
-
-  RegisterDevice(
+  /**
+   * registerDevice - Register a playback device under an account.
+   * 
+   * If a device with the same id already exists a `409` conflict will be returned.
+   * 
+  **/
+  registerDevice(
     req: operations.RegisterDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegisterDeviceResponse> {
@@ -8235,22 +8504,22 @@ If a device with the same id already exists a `409` conflict will be returned.
       req = new operations.RegisterDeviceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/devices";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8261,62 +8530,62 @@ If a device with the same id already exists a `409` conflict will be returned.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegisterDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RegisterDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.device = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8328,8 +8597,10 @@ If a device with the same id already exists a `409` conflict will be returned.
   }
 
   
-  // RemovePaymentMethod - Remove a payment method from an account.
-  RemovePaymentMethod(
+  /**
+   * removePaymentMethod - Remove a payment method from an account.
+  **/
+  removePaymentMethod(
     req: operations.RemovePaymentMethodRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RemovePaymentMethodResponse> {
@@ -8337,11 +8608,12 @@ If a device with the same id already exists a `409` conflict will be returned.
       req = new operations.RemovePaymentMethodRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/billing/methods/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8350,49 +8622,50 @@ If a device with the same id already exists a `409` conflict will be returned.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RemovePaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.RemovePaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8404,8 +8677,10 @@ If a device with the same id already exists a `409` conflict will be returned.
   }
 
   
-  // RenameDevice - Rename a device
-  RenameDevice(
+  /**
+   * renameDevice - Rename a device
+  **/
+  renameDevice(
     req: operations.RenameDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RenameDeviceResponse> {
@@ -8413,11 +8688,12 @@ If a device with the same id already exists a `409` conflict will be returned.
       req = new operations.RenameDeviceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/devices/{id}/name", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8426,49 +8702,50 @@ If a device with the same id already exists a `409` conflict will be returned.
     };
     
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RenameDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.RenameDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8480,19 +8757,21 @@ If a device with the same id already exists a `409` conflict will be returned.
   }
 
   
-  // RequestEmailVerification - Request that the email address tied to an account be verified.
-
-This will send a verification email to the email address of the primary profile containing
-a link which, once clicked, completes the verification process via the /verify-email endpoint.
-
-Note that when an account is created this email is sent automatically so there's no need
-to call this directly.
-
-If the user doesn't click the link before it expires then this endpoint can be called
-to request a new verification email. In the future it may also be used if we add support
-for changing an account email address.
-
-  RequestEmailVerification(
+  /**
+   * requestEmailVerification - Request that the email address tied to an account be verified.
+   * 
+   * This will send a verification email to the email address of the primary profile containing
+   * a link which, once clicked, completes the verification process via the /verify-email endpoint.
+   * 
+   * Note that when an account is created this email is sent automatically so there's no need
+   * to call this directly.
+   * 
+   * If the user doesn't click the link before it expires then this endpoint can be called
+   * to request a new verification email. In the future it may also be used if we add support
+   * for changing an account email address.
+   * 
+  **/
+  requestEmailVerification(
     req: operations.RequestEmailVerificationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RequestEmailVerificationResponse> {
@@ -8500,11 +8779,12 @@ for changing an account email address.
       req = new operations.RequestEmailVerificationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/request-email-verification";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8513,49 +8793,50 @@ for changing an account email address.
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RequestEmailVerificationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.RequestEmailVerificationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8567,17 +8848,19 @@ for changing an account email address.
   }
 
   
-  // ResetPassword - When a user requests to reset their password via the /request-password-reset endpoint, an
-email is sent to the email address of the primary profile of the account. This email contains a link
-with a reset token as query parameter. The link should take the user to the "reset-password"
-page of the website.
-
-From the reset-password page a user should enter the new password they wish to use. 
-It should then be submitted to this endpoint,
-along with the reset token from the email link. 
-The token should be provided in the body as resetToken property.
-
-  ResetPassword(
+  /**
+   * resetPassword - When a user requests to reset their password via the /request-password-reset endpoint, an
+   * email is sent to the email address of the primary profile of the account. This email contains a link
+   * with a reset token as query parameter. The link should take the user to the "reset-password"
+   * page of the website.
+   * 
+   * From the reset-password page a user should enter the new password they wish to use. 
+   * It should then be submitted to this endpoint,
+   * along with the reset token from the email link. 
+   * The token should be provided in the body as resetToken property.
+   * 
+  **/
+  resetPassword(
     req: operations.ResetPasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResetPasswordResponse> {
@@ -8585,23 +8868,21 @@ The token should be provided in the body as resetToken property.
       req = new operations.ResetPasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/reset-password";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8612,54 +8893,54 @@ The token should be provided in the body as resetToken property.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResetPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ResetPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8671,8 +8952,10 @@ The token should be provided in the body as resetToken property.
   }
 
   
-  // Resubscribe - Resubscription for a user.
-  Resubscribe(
+  /**
+   * resubscribe - Resubscription for a user.
+  **/
+  resubscribe(
     req: operations.ResubscribeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResubscribeResponse> {
@@ -8680,11 +8963,12 @@ The token should be provided in the body as resetToken property.
       req = new operations.ResubscribeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/resubscribe/{platform}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8693,29 +8977,30 @@ The token should be provided in the body as resetToken property.
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResubscribeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ResubscribeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resubscribe200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 409:
+          case httpRes?.status == 409:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
         }
 
@@ -8725,8 +9010,10 @@ The token should be provided in the body as resetToken property.
   }
 
   
-  // Search - Search the catalog of items and people.
-  Search(
+  /**
+   * search - Search the catalog of items and people.
+  **/
+  search(
     req: operations.SearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SearchResponse> {
@@ -8734,12 +9021,11 @@ The token should be provided in the body as resetToken property.
       req = new operations.SearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8748,42 +9034,43 @@ The token should be provided in the body as resetToken property.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.searchResults = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8795,13 +9082,15 @@ The token should be provided in the body as resetToken property.
   }
 
   
-  // SetItemWatchedStatus - Record the watched playhead position of a video under the active profile.
-
-Can be used later to resume a video from where it was last watched.
-
-Creates one if it doesn't exist, overwrites one if it does.
-
-  SetItemWatchedStatus(
+  /**
+   * setItemWatchedStatus - Record the watched playhead position of a video under the active profile.
+   * 
+   * Can be used later to resume a video from where it was last watched.
+   * 
+   * Creates one if it doesn't exist, overwrites one if it does.
+   * 
+  **/
+  setItemWatchedStatus(
     req: operations.SetItemWatchedStatusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetItemWatchedStatusResponse> {
@@ -8809,11 +9098,12 @@ Creates one if it doesn't exist, overwrites one if it does.
       req = new operations.SetItemWatchedStatusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profile/watched/{itemId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8822,54 +9112,55 @@ Creates one if it doesn't exist, overwrites one if it does.
     };
     
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetItemWatchedStatusResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetItemWatchedStatusResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.watched = httpRes?.data;
             }
             break;
-          case 204:
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8881,10 +9172,12 @@ Creates one if it doesn't exist, overwrites one if it does.
   }
 
   
-  // SignOut - When a user signs out of an application we need to clear some
-basic cookies we assigned them during token authorization.
-
-  SignOut(
+  /**
+   * signOut - When a user signs out of an application we need to clear some
+   * basic cookies we assigned them during token authorization.
+   * 
+  **/
+  signOut(
     req: operations.SignOutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SignOutResponse> {
@@ -8892,12 +9185,11 @@ basic cookies we assigned them during token authorization.
       req = new operations.SignOutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/authorization";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8906,39 +9198,40 @@ basic cookies we assigned them during token authorization.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SignOutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.SignOutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -8950,8 +9243,10 @@ basic cookies we assigned them during token authorization.
   }
 
   
-  // SingleSignOn - Exchange a third party single-sign-on token for our own authorization tokens.
-  SingleSignOn(
+  /**
+   * singleSignOn - Exchange a third party single-sign-on token for our own authorization tokens.
+  **/
+  singleSignOn(
     req: operations.SingleSignOnRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SingleSignOnResponse> {
@@ -8959,23 +9254,21 @@ basic cookies we assigned them during token authorization.
       req = new operations.SingleSignOnRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/authorization/sso";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8986,47 +9279,47 @@ basic cookies we assigned them during token authorization.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SingleSignOnResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SingleSignOnResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessTokens = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9038,14 +9331,16 @@ basic cookies we assigned them during token authorization.
   }
 
   
-  // UpdateAccount - Update the details of an account.
-
-With the exception of the address, this supports partial updates, so you can send just the
-properties you wish to update.
-
-When the address is provided any properties which are omitted from the address will be cleared.
-
-  UpdateAccount(
+  /**
+   * updateAccount - Update the details of an account.
+   * 
+   * With the exception of the address, this supports partial updates, so you can send just the
+   * properties you wish to update.
+   * 
+   * When the address is provided any properties which are omitted from the address will be cleared.
+   * 
+  **/
+  updateAccount(
     req: operations.UpdateAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateAccountResponse> {
@@ -9053,22 +9348,22 @@ When the address is provided any properties which are omitted from the address w
       req = new operations.UpdateAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9079,54 +9374,54 @@ When the address is provided any properties which are omitted from the address w
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UpdateAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9138,8 +9433,10 @@ When the address is provided any properties which are omitted from the address w
   }
 
   
-  // UpdatePaymentIntentStrong - Change payment method details.
-  UpdatePaymentIntentStrong(
+  /**
+   * updatePaymentIntentStrong - Change payment method details.
+  **/
+  updatePaymentIntentStrong(
     req: operations.UpdatePaymentIntentStrongRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePaymentIntentStrongResponse> {
@@ -9147,22 +9444,22 @@ When the address is provided any properties which are omitted from the address w
       req = new operations.UpdatePaymentIntentStrongRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/updateIntent/strong/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9173,47 +9470,47 @@ When the address is provided any properties which are omitted from the address w
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePaymentIntentStrongResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdatePaymentIntentStrongResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.itvUpdateIntentStrongResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9225,8 +9522,10 @@ When the address is provided any properties which are omitted from the address w
   }
 
   
-  // UpdatePaymentMethodStrong - Change payment method details.
-  UpdatePaymentMethodStrong(
+  /**
+   * updatePaymentMethodStrong - Change payment method details.
+  **/
+  updatePaymentMethodStrong(
     req: operations.UpdatePaymentMethodStrongRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePaymentMethodStrongResponse> {
@@ -9234,22 +9533,22 @@ When the address is provided any properties which are omitted from the address w
       req = new operations.UpdatePaymentMethodStrongRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/updatePayment/strong/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9260,44 +9559,44 @@ When the address is provided any properties which are omitted from the address w
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePaymentMethodStrongResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UpdatePaymentMethodStrongResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9309,11 +9608,13 @@ When the address is provided any properties which are omitted from the address w
   }
 
   
-  // UpdateProfile - Update ITV profile.
-
-The expected token scope is Settings.
-
-  UpdateProfile(
+  /**
+   * updateProfile - Update ITV profile.
+   * 
+   * The expected token scope is Settings.
+   * 
+  **/
+  updateProfile(
     req: operations.UpdateProfileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateProfileResponse> {
@@ -9321,22 +9622,22 @@ The expected token scope is Settings.
       req = new operations.UpdateProfileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/itv/profile";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9347,44 +9648,44 @@ The expected token scope is Settings.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateProfileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UpdateProfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9396,11 +9697,13 @@ The expected token scope is Settings.
   }
 
   
-  // UpdateProfileWithId - Update the summary of a profile with a specific id under the active account.
-
-This supports partial updates so you can send just the properties you wish to update.
-
-  UpdateProfileWithId(
+  /**
+   * updateProfileWithId - Update the summary of a profile with a specific id under the active account.
+   * 
+   * This supports partial updates so you can send just the properties you wish to update.
+   * 
+  **/
+  updateProfileWithId(
     req: operations.UpdateProfileWithIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateProfileWithIdResponse> {
@@ -9408,22 +9711,22 @@ This supports partial updates so you can send just the properties you wish to up
       req = new operations.UpdateProfileWithIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/profiles/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9434,54 +9737,54 @@ This supports partial updates so you can send just the properties you wish to up
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateProfileWithIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UpdateProfileWithIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9493,15 +9796,17 @@ This supports partial updates so you can send just the properties you wish to up
   }
 
   
-  // UpdateSubscription - Renew a cancelled subscription or switch subscription to a different plan.
-
-When renewing a cancelled subscription membership, hit this endpoint with
-the id of subscription to renew.
-
-To switch plans provide the id of the current active subscription membership
-of the account, and in the query specify the id of the plan to switch to.
-
-  UpdateSubscription(
+  /**
+   * updateSubscription - Renew a cancelled subscription or switch subscription to a different plan.
+   * 
+   * When renewing a cancelled subscription membership, hit this endpoint with
+   * the id of subscription to renew.
+   * 
+   * To switch plans provide the id of the current active subscription membership
+   * of the account, and in the query specify the id of the plan to switch to.
+   * 
+  **/
+  updateSubscription(
     req: operations.UpdateSubscriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateSubscriptionResponse> {
@@ -9509,11 +9814,12 @@ of the account, and in the query specify the id of the plan to switch to.
       req = new operations.UpdateSubscriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/billing/subscriptions/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9522,49 +9828,50 @@ of the account, and in the query specify the id of the plan to switch to.
     };
     
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UpdateSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9576,8 +9883,10 @@ of the account, and in the query specify the id of the plan to switch to.
   }
 
   
-  // UpgradePlan - Upgrades the plan for the current user.
-  UpgradePlan(
+  /**
+   * upgradePlan - Upgrades the plan for the current user.
+  **/
+  upgradePlan(
     req: operations.UpgradePlanRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpgradePlanResponse> {
@@ -9585,22 +9894,22 @@ of the account, and in the query specify the id of the plan to switch to.
       req = new operations.UpgradePlanRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/itv/plan/{platform}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9611,44 +9920,44 @@ of the account, and in the query specify the id of the plan to switch to.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpgradePlanResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpgradePlanResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9660,8 +9969,10 @@ of the account, and in the query specify the id of the plan to switch to.
   }
 
   
-  // ValidatePinRequest - Validate PIN request created by calling POST /ee/pin This call is to validate MSISDN entered by a user not comming through EE network. This call should be called after PUT /ee/pin. This call should be followed by POST /ee/offers.
-  ValidatePinRequest(
+  /**
+   * validatePinRequest - Validate PIN request created by calling POST /ee/pin This call is to validate MSISDN entered by a user not comming through EE network. This call should be called after PUT /ee/pin. This call should be followed by POST /ee/offers.
+  **/
+  validatePinRequest(
     req: operations.ValidatePinRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ValidatePinRequestResponse> {
@@ -9669,23 +9980,21 @@ of the account, and in the query specify the id of the plan to switch to.
       req = new operations.ValidatePinRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ee/pin";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9696,47 +10005,47 @@ of the account, and in the query specify the id of the plan to switch to.
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ValidatePinRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ValidatePinRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eeValidatePinResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
@@ -9748,17 +10057,19 @@ of the account, and in the query specify the id of the plan to switch to.
   }
 
   
-  // VerifyEmail - When an account is created an email is sent to the email address of the new account.
-This contains a link, which once clicked, verifies the email address of the account is correct.
-
-The link contains a token as a query parameter which should be passed as the authorization
-bearer token to this endpoint to complete email verification.
-
-The token has en expiry, so if the link is not clicked before it expires, the account holder
-may need to request a new verification email be sent. This can be done via the endpoint
-/account/request-email-verification.
-
-  VerifyEmail(
+  /**
+   * verifyEmail - When an account is created an email is sent to the email address of the new account.
+   * This contains a link, which once clicked, verifies the email address of the account is correct.
+   * 
+   * The link contains a token as a query parameter which should be passed as the authorization
+   * bearer token to this endpoint to complete email verification.
+   * 
+   * The token has en expiry, so if the link is not clicked before it expires, the account holder
+   * may need to request a new verification email be sent. This can be done via the endpoint
+   * /account/request-email-verification.
+   * 
+  **/
+  verifyEmail(
     req: operations.VerifyEmailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VerifyEmailResponse> {
@@ -9766,11 +10077,12 @@ may need to request a new verification email be sent. This can be done via the e
       req = new operations.VerifyEmailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/verify-email";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9779,49 +10091,50 @@ may need to request a new verification email be sent. This can be done via the e
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VerifyEmailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.VerifyEmailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 415:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 415:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceError = httpRes?.data;
             }
             break;

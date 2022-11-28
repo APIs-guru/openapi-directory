@@ -14,6 +14,8 @@ type UpdateComputeEnvironmentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateComputeEnvironmentRequestBodyComputeResources
+// An object representing the attributes of a compute environment that can be updated. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>Batch User Guide</i>.
 type UpdateComputeEnvironmentRequestBodyComputeResources struct {
 	DesiredvCpus     *int64   `json:"desiredvCpus,omitempty"`
 	MaxvCpus         *int64   `json:"maxvCpus,omitempty"`

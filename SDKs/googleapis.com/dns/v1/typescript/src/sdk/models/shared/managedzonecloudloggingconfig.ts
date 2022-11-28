@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ManagedZoneCloudLoggingConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Cloud Logging configurations for publicly visible zones.
 **/
 export class ManagedZoneCloudLoggingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableLogging" })
+  @SpeakeasyMetadata({ data: "json, name=enableLogging" })
   enableLogging?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

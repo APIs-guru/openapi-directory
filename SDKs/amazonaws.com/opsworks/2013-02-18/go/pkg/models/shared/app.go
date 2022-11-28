@@ -1,5 +1,7 @@
 package shared
 
+// App
+// A description of the app.
 type App struct {
 	AppID            *string               `json:"AppId,omitempty"`
 	AppSource        *Source               `json:"AppSource,omitempty"`

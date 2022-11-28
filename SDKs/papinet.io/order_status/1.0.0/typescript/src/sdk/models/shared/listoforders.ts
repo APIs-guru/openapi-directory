@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PaginationLinks } from "./paginationlinks";
 import { OrderHeader } from "./orderheader";
 
 
+
 export class ListOfOrders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: PaginationLinks;
 
-  @Metadata({ data: "json, name=orders", elemType: shared.OrderHeader })
+  @SpeakeasyMetadata({ data: "json, name=orders", elemType: OrderHeader })
   orders?: OrderHeader[];
 }

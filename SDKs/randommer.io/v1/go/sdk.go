@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://randommer.io",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAPICard - Get Card
 func (s *SDK) GetAPICard(ctx context.Context, request operations.GetAPICardRequest) (*operations.GetAPICardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Card"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) GetAPICard(ctx context.Context, request operations.GetAPICardReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -84,8 +106,9 @@ func (s *SDK) GetAPICard(ctx context.Context, request operations.GetAPICardReque
 	return res, nil
 }
 
+// GetAPICardTypes - Get available card types
 func (s *SDK) GetAPICardTypes(ctx context.Context, request operations.GetAPICardTypesRequest) (*operations.GetAPICardTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Card/Types"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -95,7 +118,7 @@ func (s *SDK) GetAPICardTypes(ctx context.Context, request operations.GetAPICard
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -117,7 +140,7 @@ func (s *SDK) GetAPICardTypes(ctx context.Context, request operations.GetAPICard
 }
 
 func (s *SDK) GetAPIMiscCultures(ctx context.Context, request operations.GetAPIMiscCulturesRequest) (*operations.GetAPIMiscCulturesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Misc/Cultures"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -127,7 +150,7 @@ func (s *SDK) GetAPIMiscCultures(ctx context.Context, request operations.GetAPIM
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -149,7 +172,7 @@ func (s *SDK) GetAPIMiscCultures(ctx context.Context, request operations.GetAPIM
 }
 
 func (s *SDK) GetAPIMiscRandomAddress(ctx context.Context, request operations.GetAPIMiscRandomAddressRequest) (*operations.GetAPIMiscRandomAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Misc/Random-Address"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -161,7 +184,7 @@ func (s *SDK) GetAPIMiscRandomAddress(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -182,8 +205,9 @@ func (s *SDK) GetAPIMiscRandomAddress(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAPIName - Get name
 func (s *SDK) GetAPIName(ctx context.Context, request operations.GetAPINameRequest) (*operations.GetAPINameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Name"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -195,7 +219,7 @@ func (s *SDK) GetAPIName(ctx context.Context, request operations.GetAPINameReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -216,8 +240,9 @@ func (s *SDK) GetAPIName(ctx context.Context, request operations.GetAPINameReque
 	return res, nil
 }
 
+// GetAPINameSuggestions - Get business name suggestions
 func (s *SDK) GetAPINameSuggestions(ctx context.Context, request operations.GetAPINameSuggestionsRequest) (*operations.GetAPINameSuggestionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Name/Suggestions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -229,7 +254,7 @@ func (s *SDK) GetAPINameSuggestions(ctx context.Context, request operations.GetA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -250,8 +275,9 @@ func (s *SDK) GetAPINameSuggestions(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAPIPhoneCountries - Get available countries
 func (s *SDK) GetAPIPhoneCountries(ctx context.Context, request operations.GetAPIPhoneCountriesRequest) (*operations.GetAPIPhoneCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Phone/Countries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -261,7 +287,7 @@ func (s *SDK) GetAPIPhoneCountries(ctx context.Context, request operations.GetAP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +308,9 @@ func (s *SDK) GetAPIPhoneCountries(ctx context.Context, request operations.GetAP
 	return res, nil
 }
 
+// GetAPIPhoneGenerate - Get bulk telephone numbers for a country
 func (s *SDK) GetAPIPhoneGenerate(ctx context.Context, request operations.GetAPIPhoneGenerateRequest) (*operations.GetAPIPhoneGenerateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Phone/Generate"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -295,7 +322,7 @@ func (s *SDK) GetAPIPhoneGenerate(ctx context.Context, request operations.GetAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -316,8 +343,9 @@ func (s *SDK) GetAPIPhoneGenerate(ctx context.Context, request operations.GetAPI
 	return res, nil
 }
 
+// GetAPIPhoneValidate - Validate a phone number
 func (s *SDK) GetAPIPhoneValidate(ctx context.Context, request operations.GetAPIPhoneValidateRequest) (*operations.GetAPIPhoneValidateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Phone/Validate"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -329,7 +357,7 @@ func (s *SDK) GetAPIPhoneValidate(ctx context.Context, request operations.GetAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -350,8 +378,9 @@ func (s *SDK) GetAPIPhoneValidate(ctx context.Context, request operations.GetAPI
 	return res, nil
 }
 
+// GetAPISocialNumber - Generate a social security number
 func (s *SDK) GetAPISocialNumber(ctx context.Context, request operations.GetAPISocialNumberRequest) (*operations.GetAPISocialNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/SocialNumber"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -361,7 +390,7 @@ func (s *SDK) GetAPISocialNumber(ctx context.Context, request operations.GetAPIS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -382,8 +411,9 @@ func (s *SDK) GetAPISocialNumber(ctx context.Context, request operations.GetAPIS
 	return res, nil
 }
 
+// GetAPITextLoremIpsum - Generate lorem ipsum
 func (s *SDK) GetAPITextLoremIpsum(ctx context.Context, request operations.GetAPITextLoremIpsumRequest) (*operations.GetAPITextLoremIpsumResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Text/LoremIpsum"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -395,7 +425,7 @@ func (s *SDK) GetAPITextLoremIpsum(ctx context.Context, request operations.GetAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -416,8 +446,9 @@ func (s *SDK) GetAPITextLoremIpsum(ctx context.Context, request operations.GetAP
 	return res, nil
 }
 
+// GetAPITextPassword - Generate password
 func (s *SDK) GetAPITextPassword(ctx context.Context, request operations.GetAPITextPasswordRequest) (*operations.GetAPITextPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Text/Password"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -429,7 +460,7 @@ func (s *SDK) GetAPITextPassword(ctx context.Context, request operations.GetAPIT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -450,8 +481,9 @@ func (s *SDK) GetAPITextPassword(ctx context.Context, request operations.GetAPIT
 	return res, nil
 }
 
+// PostAPISocialNumber - Validate VAT/identity numbers
 func (s *SDK) PostAPISocialNumber(ctx context.Context, request operations.PostAPISocialNumberRequest) (*operations.PostAPISocialNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/SocialNumber"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -473,7 +505,7 @@ func (s *SDK) PostAPISocialNumber(ctx context.Context, request operations.PostAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -494,8 +526,9 @@ func (s *SDK) PostAPISocialNumber(ctx context.Context, request operations.PostAP
 	return res, nil
 }
 
+// PostAPITextHumanize - Humanize text
 func (s *SDK) PostAPITextHumanize(ctx context.Context, request operations.PostAPITextHumanizeRequest) (*operations.PostAPITextHumanizeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Text/Humanize"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -515,7 +548,7 @@ func (s *SDK) PostAPITextHumanize(ctx context.Context, request operations.PostAP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -536,8 +569,9 @@ func (s *SDK) PostAPITextHumanize(ctx context.Context, request operations.PostAP
 	return res, nil
 }
 
+// PostAPITextTransform - Transform text
 func (s *SDK) PostAPITextTransform(ctx context.Context, request operations.PostAPITextTransformRequest) (*operations.PostAPITextTransformResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Text/Transform"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -559,7 +593,7 @@ func (s *SDK) PostAPITextTransform(ctx context.Context, request operations.PostA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -5,7 +5,7 @@ import (
 )
 
 type IpamPrefixesCreateRequest struct {
-	Request shared.WritablePrefix `request:"mediaType=application/json"`
+	Request shared.WritablePrefixInput `request:"mediaType=application/json"`
 }
 
 type IpamPrefixesCreateResponse struct {

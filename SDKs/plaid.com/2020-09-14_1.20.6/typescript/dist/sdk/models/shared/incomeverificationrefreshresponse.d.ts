@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VerificationRefreshStatusEnum } from "./verificationrefreshstatusenum";
 /**
  * IncomeVerificationRequestResponse defines the response schema for `/income/verification/refresh`

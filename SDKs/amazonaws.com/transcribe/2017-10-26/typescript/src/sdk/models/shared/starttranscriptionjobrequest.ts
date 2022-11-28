@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentRedaction } from "./contentredaction";
 import { JobExecutionSettings } from "./jobexecutionsettings";
-import { LanguageCodeEnum } from "./languagecodeenum";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { Media } from "./media";
 import { MediaFormatEnum } from "./mediaformatenum";
@@ -12,55 +10,56 @@ import { Subtitles } from "./subtitles";
 import { Tag } from "./tag";
 
 
+
 export class StartTranscriptionJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentRedaction" })
+  @SpeakeasyMetadata({ data: "json, name=ContentRedaction" })
   contentRedaction?: ContentRedaction;
 
-  @Metadata({ data: "json, name=IdentifyLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=IdentifyLanguage" })
   identifyLanguage?: boolean;
 
-  @Metadata({ data: "json, name=JobExecutionSettings" })
+  @SpeakeasyMetadata({ data: "json, name=JobExecutionSettings" })
   jobExecutionSettings?: JobExecutionSettings;
 
-  @Metadata({ data: "json, name=KMSEncryptionContext" })
+  @SpeakeasyMetadata({ data: "json, name=KMSEncryptionContext" })
   kmsEncryptionContext?: Map<string, string>;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=LanguageOptions" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageOptions" })
   languageOptions?: LanguageCodeEnum[];
 
-  @Metadata({ data: "json, name=Media" })
+  @SpeakeasyMetadata({ data: "json, name=Media" })
   media: Media;
 
-  @Metadata({ data: "json, name=MediaFormat" })
+  @SpeakeasyMetadata({ data: "json, name=MediaFormat" })
   mediaFormat?: MediaFormatEnum;
 
-  @Metadata({ data: "json, name=MediaSampleRateHertz" })
+  @SpeakeasyMetadata({ data: "json, name=MediaSampleRateHertz" })
   mediaSampleRateHertz?: number;
 
-  @Metadata({ data: "json, name=ModelSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ModelSettings" })
   modelSettings?: ModelSettings;
 
-  @Metadata({ data: "json, name=OutputBucketName" })
+  @SpeakeasyMetadata({ data: "json, name=OutputBucketName" })
   outputBucketName?: string;
 
-  @Metadata({ data: "json, name=OutputEncryptionKMSKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=OutputEncryptionKMSKeyId" })
   outputEncryptionKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=OutputKey" })
+  @SpeakeasyMetadata({ data: "json, name=OutputKey" })
   outputKey?: string;
 
-  @Metadata({ data: "json, name=Settings" })
+  @SpeakeasyMetadata({ data: "json, name=Settings" })
   settings?: Settings;
 
-  @Metadata({ data: "json, name=Subtitles" })
+  @SpeakeasyMetadata({ data: "json, name=Subtitles" })
   subtitles?: Subtitles;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=TranscriptionJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TranscriptionJobName" })
   transcriptionJobName: string;
 }

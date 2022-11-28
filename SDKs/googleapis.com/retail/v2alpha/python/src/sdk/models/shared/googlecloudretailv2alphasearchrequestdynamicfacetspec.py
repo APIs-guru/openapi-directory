@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum(str, Enum):
     MODE_UNSPECIFIED = "MODE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec:
-    mode: Optional[GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    r"""GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec
+    The specifications of dynamically generated facets.
+    """
+    
+    mode: Optional[GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
     

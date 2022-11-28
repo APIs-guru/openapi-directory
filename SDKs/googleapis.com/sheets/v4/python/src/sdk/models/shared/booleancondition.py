@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import conditionvalue
+from sdk import utils
+from . import *
 
 class BooleanConditionTypeEnum(str, Enum):
     CONDITION_TYPE_UNSPECIFIED = "CONDITION_TYPE_UNSPECIFIED"
@@ -41,6 +43,10 @@ class BooleanConditionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BooleanCondition:
-    type: Optional[BooleanConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    values: Optional[List[conditionvalue.ConditionValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""BooleanCondition
+    A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
+    """
+    
+    type: Optional[BooleanConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    values: Optional[List[ConditionValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

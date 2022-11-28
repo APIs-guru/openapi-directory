@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import date
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DateValues:
-    values: Optional[List[date.Date]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""DateValues
+    List of date values.
+    """
+    
+    values: Optional[List[Date]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

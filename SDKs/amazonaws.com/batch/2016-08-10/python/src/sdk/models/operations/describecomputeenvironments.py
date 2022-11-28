@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,23 +28,23 @@ class DescribeComputeEnvironmentsHeaders:
 @dataclass_json
 @dataclass
 class DescribeComputeEnvironmentsRequestBody:
-    compute_environments: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeEnvironments' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    compute_environments: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEnvironments') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class DescribeComputeEnvironmentsRequest:
-    query_params: DescribeComputeEnvironmentsQueryParams = field(default=None)
-    headers: DescribeComputeEnvironmentsHeaders = field(default=None)
-    request: DescribeComputeEnvironmentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeComputeEnvironmentsHeaders = field()
+    query_params: DescribeComputeEnvironmentsQueryParams = field()
+    request: DescribeComputeEnvironmentsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeComputeEnvironmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_compute_environments_response: Optional[shared.DescribeComputeEnvironmentsResponse] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Invitation
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about an invitation.
 **/
 export class Invitation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=InvitationId" })
+  @SpeakeasyMetadata({ data: "json, name=InvitationId" })
   invitationId?: string;
 
-  @Metadata({ data: "json, name=InvitedAt" })
+  @SpeakeasyMetadata({ data: "json, name=InvitedAt" })
   invitedAt?: Date;
 
-  @Metadata({ data: "json, name=MemberStatus" })
+  @SpeakeasyMetadata({ data: "json, name=MemberStatus" })
   memberStatus?: string;
 }

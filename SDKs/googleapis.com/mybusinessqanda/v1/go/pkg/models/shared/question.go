@@ -1,5 +1,15 @@
 package shared
 
+// QuestionInput
+// Represents a single question and some of its answers.
+type QuestionInput struct {
+	Author *Author `json:"author,omitempty"`
+	Name   *string `json:"name,omitempty"`
+	Text   *string `json:"text,omitempty"`
+}
+
+// Question
+// Represents a single question and some of its answers.
 type Question struct {
 	Author           *Author  `json:"author,omitempty"`
 	CreateTime       *string  `json:"createTime,omitempty"`

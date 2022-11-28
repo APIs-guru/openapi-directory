@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class TeamsGetDiscussionCommentLegacyPathParams:
-    comment_number: int = field(default=None, metadata={'path_param': { 'field_name': 'comment_number', 'style': 'simple', 'explode': False }})
-    discussion_number: int = field(default=None, metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    comment_number: int = field(metadata={'path_param': { 'field_name': 'comment_number', 'style': 'simple', 'explode': False }})
+    discussion_number: int = field(metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TeamsGetDiscussionCommentLegacyRequest:
-    path_params: TeamsGetDiscussionCommentLegacyPathParams = field(default=None)
+    path_params: TeamsGetDiscussionCommentLegacyPathParams = field()
     
 
 @dataclass
 class TeamsGetDiscussionCommentLegacyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_discussion_comment: Optional[shared.TeamDiscussionComment] = field(default=None)
     

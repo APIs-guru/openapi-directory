@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/ram/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/ram/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def accept_resource_share_invitation(self, request: operations.AcceptResourceShareInvitationRequest) -> operations.AcceptResourceShareInvitationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Accepts an invitation to a resource share from another Amazon Web Services account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/acceptresourceshareinvitation"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -99,22 +128,22 @@ class SDK:
 
     
     def associate_resource_share(self, request: operations.AssociateResourceShareRequest) -> operations.AssociateResourceShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates the specified resource share with the specified principals and resources.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/associateresourceshare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -177,22 +206,22 @@ class SDK:
 
     
     def associate_resource_share_permission(self, request: operations.AssociateResourceSharePermissionRequest) -> operations.AssociateResourceSharePermissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates a permission with a resource share.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/associateresourcesharepermission"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -235,22 +264,22 @@ class SDK:
 
     
     def create_resource_share(self, request: operations.CreateResourceShareRequest) -> operations.CreateResourceShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a resource share. You must provide a list of the Amazon Resource Names (ARNs) for the resources you want to share. You must also specify who you want to share the resources with, and the permissions that you grant them.</p> <note> <p>Sharing a resource makes it available for use by principals outside of the Amazon Web Services account that created the resource. Sharing doesn't change any permissions or quotas that apply to the resource in the account that created it.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createresourceshare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -309,17 +338,18 @@ class SDK:
 
     
     def delete_resource_share(self, request: operations.DeleteResourceShareRequest) -> operations.DeleteResourceShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the specified resource share.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteresourceshare#resourceShareArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -370,22 +400,22 @@ class SDK:
 
     
     def disassociate_resource_share(self, request: operations.DisassociateResourceShareRequest) -> operations.DisassociateResourceShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates the specified principals or resources from the specified resource share.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/disassociateresourceshare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -440,22 +470,22 @@ class SDK:
 
     
     def disassociate_resource_share_permission(self, request: operations.DisassociateResourceSharePermissionRequest) -> operations.DisassociateResourceSharePermissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates an RAM permission from a resource share.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/disassociateresourcesharepermission"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -502,15 +532,17 @@ class SDK:
 
     
     def enable_sharing_with_aws_organization(self, request: operations.EnableSharingWithAwsOrganizationRequest) -> operations.EnableSharingWithAwsOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Enables resource sharing within your organization in Organizations.</p> <p>The caller must be the master account for the organization.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/enablesharingwithawsorganization"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -537,22 +569,22 @@ class SDK:
 
     
     def get_permission(self, request: operations.GetPermissionRequest) -> operations.GetPermissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the contents of an RAM permission in JSON format.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getpermission"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -591,24 +623,23 @@ class SDK:
 
     
     def get_resource_policies(self, request: operations.GetResourcePoliciesRequest) -> operations.GetResourcePoliciesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the policies for the specified resources that you own and have shared.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getresourcepolicies"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -647,24 +678,23 @@ class SDK:
 
     
     def get_resource_share_associations(self, request: operations.GetResourceShareAssociationsRequest) -> operations.GetResourceShareAssociationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the resources or principals for the resource shares that you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getresourceshareassociations"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -707,24 +737,23 @@ class SDK:
 
     
     def get_resource_share_invitations(self, request: operations.GetResourceShareInvitationsRequest) -> operations.GetResourceShareInvitationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the invitations that you have received for resource shares.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getresourceshareinvitations"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -771,24 +800,23 @@ class SDK:
 
     
     def get_resource_shares(self, request: operations.GetResourceSharesRequest) -> operations.GetResourceSharesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the resource shares that you own or the resource shares that are shared with you.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getresourceshares"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -827,24 +855,23 @@ class SDK:
 
     
     def list_pending_invitation_resources(self, request: operations.ListPendingInvitationResourcesRequest) -> operations.ListPendingInvitationResourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the resources in a resource share that is shared with you but that the invitation is still pending for.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listpendinginvitationresources"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -895,24 +922,23 @@ class SDK:
 
     
     def list_permissions(self, request: operations.ListPermissionsRequest) -> operations.ListPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the RAM permissions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listpermissions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -947,24 +973,23 @@ class SDK:
 
     
     def list_principals(self, request: operations.ListPrincipalsRequest) -> operations.ListPrincipalsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the principals that you have shared resources with or that have shared resources with you.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listprincipals"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1003,24 +1028,23 @@ class SDK:
 
     
     def list_resource_share_permissions(self, request: operations.ListResourceSharePermissionsRequest) -> operations.ListResourceSharePermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the RAM permissions that are associated with a resource share.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listresourcesharepermissions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1063,24 +1087,23 @@ class SDK:
 
     
     def list_resource_types(self, request: operations.ListResourceTypesRequest) -> operations.ListResourceTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the shareable resource types supported by RAM.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listresourcetypes"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1111,24 +1134,23 @@ class SDK:
 
     
     def list_resources(self, request: operations.ListResourcesRequest) -> operations.ListResourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the resources that you added to a resource shares or the resources that are shared with you.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listresources"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1171,17 +1193,18 @@ class SDK:
 
     
     def promote_resource_share_created_from_policy(self, request: operations.PromoteResourceShareCreatedFromPolicyRequest) -> operations.PromoteResourceShareCreatedFromPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in RAM.</p> <p>Use this API action to promote the resource share. When you promote the resource share, it becomes:</p> <ul> <li> <p>Visible to all principals that it is shared with.</p> </li> <li> <p>Modifiable in RAM.</p> </li> </ul>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/promoteresourcesharecreatedfrompolicy#resourceShareArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1228,22 +1251,22 @@ class SDK:
 
     
     def reject_resource_share_invitation(self, request: operations.RejectResourceShareInvitationRequest) -> operations.RejectResourceShareInvitationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rejects an invitation to a resource share from another Amazon Web Services account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/rejectresourceshareinvitation"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1298,22 +1321,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds the specified tags to the specified resource share that you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tagresource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1360,22 +1383,22 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes the specified tags from the specified resource share that you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/untagresource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1402,22 +1425,22 @@ class SDK:
 
     
     def update_resource_share(self, request: operations.UpdateResourceShareRequest) -> operations.UpdateResourceShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the specified resource share that you own.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateresourceshare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

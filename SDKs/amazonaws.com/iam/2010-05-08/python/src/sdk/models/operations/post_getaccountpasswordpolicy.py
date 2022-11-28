@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetAccountPasswordPolicyActionEnum(str, Enum):
     GET_ACCOUNT_PASSWORD_POLICY = "GetAccountPasswordPolicy"
@@ -10,8 +14,8 @@ class PostGetAccountPasswordPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostGetAccountPasswordPolicyQueryParams:
-    action: PostGetAccountPasswordPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetAccountPasswordPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetAccountPasswordPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetAccountPasswordPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostGetAccountPasswordPolicyHeaders:
 
 @dataclass
 class PostGetAccountPasswordPolicyRequest:
-    query_params: PostGetAccountPasswordPolicyQueryParams = field(default=None)
-    headers: PostGetAccountPasswordPolicyHeaders = field(default=None)
+    headers: PostGetAccountPasswordPolicyHeaders = field()
+    query_params: PostGetAccountPasswordPolicyQueryParams = field()
     
 
 @dataclass
 class PostGetAccountPasswordPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

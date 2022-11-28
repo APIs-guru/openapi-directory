@@ -4,19 +4,19 @@ from dataclasses import dataclass, field
 
 @dataclass
 class GetDigestAuthQopUserPasswdAlgorithmPathParams:
-    algorithm: str = field(default=None, metadata={'path_param': { 'field_name': 'algorithm', 'style': 'simple', 'explode': False }})
-    passwd: str = field(default=None, metadata={'path_param': { 'field_name': 'passwd', 'style': 'simple', 'explode': False }})
-    qop: str = field(default=None, metadata={'path_param': { 'field_name': 'qop', 'style': 'simple', 'explode': False }})
-    user: str = field(default=None, metadata={'path_param': { 'field_name': 'user', 'style': 'simple', 'explode': False }})
+    algorithm: str = field(metadata={'path_param': { 'field_name': 'algorithm', 'style': 'simple', 'explode': False }})
+    passwd: str = field(metadata={'path_param': { 'field_name': 'passwd', 'style': 'simple', 'explode': False }})
+    qop: str = field(metadata={'path_param': { 'field_name': 'qop', 'style': 'simple', 'explode': False }})
+    user: str = field(metadata={'path_param': { 'field_name': 'user', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetDigestAuthQopUserPasswdAlgorithmRequest:
-    path_params: GetDigestAuthQopUserPasswdAlgorithmPathParams = field(default=None)
+    path_params: GetDigestAuthQopUserPasswdAlgorithmPathParams = field()
     
 
 @dataclass
 class GetDigestAuthQopUserPasswdAlgorithmResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

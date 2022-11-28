@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateEnvironmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=Name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Name" })
   name: string;
 }
 
 
 export class UpdateEnvironmentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,19 +38,19 @@ export class UpdateEnvironmentHeaders extends SpeakeasyBase {
  * Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.
 **/
 export class UpdateEnvironmentRequestBodyLoggingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DagProcessingLogs" })
+  @SpeakeasyMetadata({ data: "json, name=DagProcessingLogs" })
   dagProcessingLogs?: shared.ModuleLoggingConfigurationInput;
 
-  @Metadata({ data: "json, name=SchedulerLogs" })
+  @SpeakeasyMetadata({ data: "json, name=SchedulerLogs" })
   schedulerLogs?: shared.ModuleLoggingConfigurationInput;
 
-  @Metadata({ data: "json, name=TaskLogs" })
+  @SpeakeasyMetadata({ data: "json, name=TaskLogs" })
   taskLogs?: shared.ModuleLoggingConfigurationInput;
 
-  @Metadata({ data: "json, name=WebserverLogs" })
+  @SpeakeasyMetadata({ data: "json, name=WebserverLogs" })
   webserverLogs?: shared.ModuleLoggingConfigurationInput;
 
-  @Metadata({ data: "json, name=WorkerLogs" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerLogs" })
   workerLogs?: shared.ModuleLoggingConfigurationInput;
 }
 
@@ -59,98 +60,98 @@ export class UpdateEnvironmentRequestBodyLoggingConfiguration extends SpeakeasyB
  * The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.
 **/
 export class UpdateEnvironmentRequestBodyNetworkConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" })
   securityGroupIds?: string[];
 }
 
 export enum UpdateEnvironmentRequestBodyWebserverAccessModeEnum {
-    PrivateOnly = "PRIVATE_ONLY"
-,    PublicOnly = "PUBLIC_ONLY"
+    PrivateOnly = "PRIVATE_ONLY",
+    PublicOnly = "PUBLIC_ONLY"
 }
 
 
 export class UpdateEnvironmentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AirflowConfigurationOptions" })
+  @SpeakeasyMetadata({ data: "json, name=AirflowConfigurationOptions" })
   airflowConfigurationOptions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=AirflowVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AirflowVersion" })
   airflowVersion?: string;
 
-  @Metadata({ data: "json, name=DagS3Path" })
+  @SpeakeasyMetadata({ data: "json, name=DagS3Path" })
   dagS3Path?: string;
 
-  @Metadata({ data: "json, name=EnvironmentClass" })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentClass" })
   environmentClass?: string;
 
-  @Metadata({ data: "json, name=ExecutionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionRoleArn" })
   executionRoleArn?: string;
 
-  @Metadata({ data: "json, name=LoggingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingConfiguration" })
   loggingConfiguration?: UpdateEnvironmentRequestBodyLoggingConfiguration;
 
-  @Metadata({ data: "json, name=MaxWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=MaxWorkers" })
   maxWorkers?: number;
 
-  @Metadata({ data: "json, name=MinWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=MinWorkers" })
   minWorkers?: number;
 
-  @Metadata({ data: "json, name=NetworkConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkConfiguration" })
   networkConfiguration?: UpdateEnvironmentRequestBodyNetworkConfiguration;
 
-  @Metadata({ data: "json, name=PluginsS3ObjectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PluginsS3ObjectVersion" })
   pluginsS3ObjectVersion?: string;
 
-  @Metadata({ data: "json, name=PluginsS3Path" })
+  @SpeakeasyMetadata({ data: "json, name=PluginsS3Path" })
   pluginsS3Path?: string;
 
-  @Metadata({ data: "json, name=RequirementsS3ObjectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=RequirementsS3ObjectVersion" })
   requirementsS3ObjectVersion?: string;
 
-  @Metadata({ data: "json, name=RequirementsS3Path" })
+  @SpeakeasyMetadata({ data: "json, name=RequirementsS3Path" })
   requirementsS3Path?: string;
 
-  @Metadata({ data: "json, name=Schedulers" })
+  @SpeakeasyMetadata({ data: "json, name=Schedulers" })
   schedulers?: number;
 
-  @Metadata({ data: "json, name=SourceBucketArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceBucketArn" })
   sourceBucketArn?: string;
 
-  @Metadata({ data: "json, name=WebserverAccessMode" })
+  @SpeakeasyMetadata({ data: "json, name=WebserverAccessMode" })
   webserverAccessMode?: UpdateEnvironmentRequestBodyWebserverAccessModeEnum;
 
-  @Metadata({ data: "json, name=WeeklyMaintenanceWindowStart" })
+  @SpeakeasyMetadata({ data: "json, name=WeeklyMaintenanceWindowStart" })
   weeklyMaintenanceWindowStart?: string;
 }
 
 
 export class UpdateEnvironmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateEnvironmentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateEnvironmentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateEnvironmentRequestBody;
 }
 
 
 export class UpdateEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateEnvironmentOutput?: shared.UpdateEnvironmentOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

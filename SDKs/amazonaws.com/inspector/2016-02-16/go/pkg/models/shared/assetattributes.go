@@ -1,5 +1,7 @@
 package shared
 
+// AssetAttributes
+// A collection of attributes of the host from which the finding is generated.
 type AssetAttributes struct {
 	AgentID           *string            `json:"agentId,omitempty"`
 	AmiID             *string            `json:"amiId,omitempty"`

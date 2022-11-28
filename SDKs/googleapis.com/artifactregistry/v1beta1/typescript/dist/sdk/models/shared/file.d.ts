@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Hash } from "./hash";
 /**
  * Files store content that is potentially associated with Packages or Versions.

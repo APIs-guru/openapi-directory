@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,37 +14,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_images_from_data(self, request: operations.CreateImagesFromDataRequest) -> operations.CreateImagesFromDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add the provided images to the set of training images
+        This API accepts body content as multipart/form-data and application/octet-stream. When using multipart
+        multiple image files can be sent at once, with a maximum of 64 files
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/images", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -63,17 +86,18 @@ class SDK:
 
     
     def create_project(self, request: operations.CreateProjectRequest) -> operations.CreateProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a project
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/projects"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -95,17 +119,18 @@ class SDK:
 
     
     def create_tag(self, request: operations.CreateTagRequest) -> operations.CreateTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a tag for the project
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/tags", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -127,17 +152,18 @@ class SDK:
 
     
     def delete_image_tags(self, request: operations.DeleteImageTagsRequest) -> operations.DeleteImageTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a set of tags from a set of images
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/images/tags", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -150,17 +176,18 @@ class SDK:
 
     
     def delete_images(self, request: operations.DeleteImagesRequest) -> operations.DeleteImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete images from the set of training images
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/images", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -173,15 +200,17 @@ class SDK:
 
     
     def delete_iteration(self, request: operations.DeleteIterationRequest) -> operations.DeleteIterationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a specific iteration of a project
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/iterations/{iterationId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -194,17 +223,18 @@ class SDK:
 
     
     def delete_prediction(self, request: operations.DeletePredictionRequest) -> operations.DeletePredictionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a set of predicted images and their associated prediction results
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/predictions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -217,15 +247,17 @@ class SDK:
 
     
     def delete_project(self, request: operations.DeleteProjectRequest) -> operations.DeleteProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a specific project
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -238,15 +270,17 @@ class SDK:
 
     
     def delete_tag(self, request: operations.DeleteTagRequest) -> operations.DeleteTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a tag from the project
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/tags/{tagId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -259,17 +293,18 @@ class SDK:
 
     
     def export_iteration(self, request: operations.ExportIterationRequest) -> operations.ExportIterationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Export a trained iteration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/iterations/{iterationId}/export", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -291,15 +326,17 @@ class SDK:
 
     
     def get_account_info(self, request: operations.GetAccountInfoRequest) -> operations.GetAccountInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get basic information about your account
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -321,15 +358,17 @@ class SDK:
 
     
     def get_domain(self, request: operations.GetDomainRequest) -> operations.GetDomainResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about a specific domain
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domains/{domainId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -351,15 +390,17 @@ class SDK:
 
     
     def get_domains(self, request: operations.GetDomainsRequest) -> operations.GetDomainsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of the available domains
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domains"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -381,15 +422,17 @@ class SDK:
 
     
     def get_exports(self, request: operations.GetExportsRequest) -> operations.GetExportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the list of exports for a specific iteration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/iterations/{iterationId}/export", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -411,15 +454,17 @@ class SDK:
 
     
     def get_iteration(self, request: operations.GetIterationRequest) -> operations.GetIterationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific iteration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/iterations/{iterationId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -441,17 +486,18 @@ class SDK:
 
     
     def get_iteration_performance(self, request: operations.GetIterationPerformanceRequest) -> operations.GetIterationPerformanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get detailed performance information about a trained iteration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/iterations/{iterationId}/performance", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -473,15 +519,17 @@ class SDK:
 
     
     def get_iterations(self, request: operations.GetIterationsRequest) -> operations.GetIterationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get iterations for the project
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/iterations", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -503,15 +551,17 @@ class SDK:
 
     
     def get_project(self, request: operations.GetProjectRequest) -> operations.GetProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific project
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -533,15 +583,17 @@ class SDK:
 
     
     def get_projects(self, request: operations.GetProjectsRequest) -> operations.GetProjectsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get your projects
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/projects"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -563,17 +615,18 @@ class SDK:
 
     
     def get_tag(self, request: operations.GetTagRequest) -> operations.GetTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about a specific tag
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/tags/{tagId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -595,17 +648,22 @@ class SDK:
 
     
     def get_tagged_images(self, request: operations.GetTaggedImagesRequest) -> operations.GetTaggedImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get tagged images for a given project iteration
+        This API supports batching and range selection. By default it will only return first 50 images matching images.
+        Use the {take} and {skip} parameters to control how many images to return in a given batch.
+        The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will be returned
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/images/tagged", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -627,17 +685,18 @@ class SDK:
 
     
     def get_tags(self, request: operations.GetTagsRequest) -> operations.GetTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the tags for a given project and iteration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/tags", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -659,17 +718,20 @@ class SDK:
 
     
     def get_untagged_images(self, request: operations.GetUntaggedImagesRequest) -> operations.GetUntaggedImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get untagged images for a given project iteration
+        This API supports batching and range selection. By default it will only return first 50 images matching images.
+        Use the {take} and {skip} parameters to control how many images to return in a given batch.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/images/untagged", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -691,24 +753,23 @@ class SDK:
 
     
     def quick_test_image(self, request: operations.QuickTestImageRequest) -> operations.QuickTestImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Quick test an image
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/quicktest/image", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -730,24 +791,23 @@ class SDK:
 
     
     def quick_test_image_url(self, request: operations.QuickTestImageURLRequest) -> operations.QuickTestImageURLResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Quick test an image url
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/quicktest/url", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -769,15 +829,17 @@ class SDK:
 
     
     def train_project(self, request: operations.TrainProjectRequest) -> operations.TrainProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Queues project for training
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/train", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -799,22 +861,22 @@ class SDK:
 
     
     def update_iteration(self, request: operations.UpdateIterationRequest) -> operations.UpdateIterationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a specific iteration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/iterations/{iterationId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -836,22 +898,22 @@ class SDK:
 
     
     def update_project(self, request: operations.UpdateProjectRequest) -> operations.UpdateProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a specific project
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -873,22 +935,22 @@ class SDK:
 
     
     def update_tag(self, request: operations.UpdateTagRequest) -> operations.UpdateTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a tag
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}/tags/{tagId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettingsResourceTypeEnum {
-    ResourceTypeUnspecified = "RESOURCE_TYPE_UNSPECIFIED"
-,    ConsumerProject = "CONSUMER_PROJECT"
-,    ConsumerFolder = "CONSUMER_FOLDER"
-,    EncryptionKeysProject = "ENCRYPTION_KEYS_PROJECT"
-,    Keyring = "KEYRING"
+    ResourceTypeUnspecified = "RESOURCE_TYPE_UNSPECIFIED",
+    ConsumerProject = "CONSUMER_PROJECT",
+    ConsumerFolder = "CONSUMER_FOLDER",
+    EncryptionKeysProject = "ENCRYPTION_KEYS_PROJECT",
+    Keyring = "KEYRING"
 }
 
 
@@ -14,12 +15,12 @@ export enum GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettingsResourceTy
  * Represent the custom settings for the resources to be created.
 **/
 export class GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettingsResourceTypeEnum;
 }

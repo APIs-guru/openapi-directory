@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudintegrationsv1alphavaluetype
+from sdk import utils
+from . import *
 
 class GoogleCloudIntegrationsV1alphaIntegrationParameterDataTypeEnum(str, Enum):
     INTEGRATION_PARAMETER_DATA_TYPE_UNSPECIFIED = "INTEGRATION_PARAMETER_DATA_TYPE_UNSPECIFIED"
@@ -27,13 +29,17 @@ class GoogleCloudIntegrationsV1alphaIntegrationParameterInputOutputTypeEnum(str,
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaIntegrationParameter:
-    data_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationParameterDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataType' }})
-    default_value: Optional[googlecloudintegrationsv1alphavaluetype.GoogleCloudIntegrationsV1alphaValueType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultValue' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    input_output_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationParameterInputOutputTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputOutputType' }})
-    is_transient: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isTransient' }})
-    json_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jsonSchema' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    producer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'producer' }})
-    searchable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'searchable' }})
+    r"""GoogleCloudIntegrationsV1alphaIntegrationParameter
+    Integration Parameter is defined in the integration config and are used to provide information about data types of the expected parameters and provide any default values if needed. They can also be used to add custom attributes. These are static in nature and should not be used for dynamic event definition.
+    """
+    
+    data_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationParameterDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataType') }})
+    default_value: Optional[GoogleCloudIntegrationsV1alphaValueType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultValue') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    input_output_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationParameterInputOutputTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputOutputType') }})
+    is_transient: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isTransient') }})
+    json_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jsonSchema') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    producer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('producer') }})
+    searchable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchable') }})
     

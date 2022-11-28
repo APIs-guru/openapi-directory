@@ -1,5 +1,7 @@
 package shared
 
+// UserRecord
+// A team member user record
 type UserRecord struct {
 	Admin    *bool   `json:"admin,omitempty"`
 	Email    *string `json:"email,omitempty"`

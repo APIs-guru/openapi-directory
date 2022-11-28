@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlanningLevelForecastResultData } from "./planninglevelforecastresultdata";
 import { ForecastHyperparameterResponse } from "./forecasthyperparameterresponse";
 
 
+
 export class ForecastBottomUpResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forecastData", elemType: shared.PlanningLevelForecastResultData })
+  @SpeakeasyMetadata({ data: "json, name=forecastData", elemType: PlanningLevelForecastResultData })
   forecastData?: PlanningLevelForecastResultData[];
 
-  @Metadata({ data: "json, name=hyperparameters" })
+  @SpeakeasyMetadata({ data: "json, name=hyperparameters" })
   hyperparameters?: ForecastHyperparameterResponse;
 }

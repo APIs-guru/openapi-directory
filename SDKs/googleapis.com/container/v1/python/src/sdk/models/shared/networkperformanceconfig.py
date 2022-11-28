@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class NetworkPerformanceConfigTotalEgressBandwidthTierEnum(str, Enum):
     TIER_UNSPECIFIED = "TIER_UNSPECIFIED"
@@ -10,5 +12,9 @@ class NetworkPerformanceConfigTotalEgressBandwidthTierEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NetworkPerformanceConfig:
-    total_egress_bandwidth_tier: Optional[NetworkPerformanceConfigTotalEgressBandwidthTierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalEgressBandwidthTier' }})
+    r"""NetworkPerformanceConfig
+    Configuration of all network bandwidth tiers
+    """
+    
+    total_egress_bandwidth_tier: Optional[NetworkPerformanceConfigTotalEgressBandwidthTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalEgressBandwidthTier') }})
     

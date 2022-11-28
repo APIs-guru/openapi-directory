@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDialogflowV2AgentAssistantFeedbackAnswerRelevanceEnum(str, Enum):
     ANSWER_RELEVANCE_UNSPECIFIED = "ANSWER_RELEVANCE_UNSPECIFIED"
@@ -21,7 +23,11 @@ class GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentEfficiencyEnum(str, E
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2AgentAssistantFeedback:
-    answer_relevance: Optional[GoogleCloudDialogflowV2AgentAssistantFeedbackAnswerRelevanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'answerRelevance' }})
-    document_correctness: Optional[GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentCorrectnessEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentCorrectness' }})
-    document_efficiency: Optional[GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentEfficiencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentEfficiency' }})
+    r"""GoogleCloudDialogflowV2AgentAssistantFeedback
+    Detail feedback of Agent Assist result.
+    """
+    
+    answer_relevance: Optional[GoogleCloudDialogflowV2AgentAssistantFeedbackAnswerRelevanceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('answerRelevance') }})
+    document_correctness: Optional[GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentCorrectnessEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentCorrectness') }})
+    document_efficiency: Optional[GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentEfficiencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentEfficiency') }})
     

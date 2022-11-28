@@ -1,5 +1,7 @@
 package shared
 
+// Document
+// A structured text document e.g. a PDF.
 type Document struct {
 	DocumentDimensions *DocumentDimensions  `json:"documentDimensions,omitempty"`
 	DocumentText       *TextSnippet         `json:"documentText,omitempty"`

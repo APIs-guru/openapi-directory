@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicModelStats } from "./basicmodelstats";
 
 
+
 export class BasicModelStatsResp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brandName" })
+  @SpeakeasyMetadata({ data: "json, name=brandName" })
   brandName?: string;
 
-  @Metadata({ data: "json, name=cacheTimeLimit" })
+  @SpeakeasyMetadata({ data: "json, name=cacheTimeLimit" })
   cacheTimeLimit?: number;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: string;
 
-  @Metadata({ data: "json, name=data", elemType: shared.BasicModelStats })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: BasicModelStats })
   data: BasicModelStats[];
 
-  @Metadata({ data: "json, name=modelName" })
+  @SpeakeasyMetadata({ data: "json, name=modelName" })
   modelName?: string;
 
-  @Metadata({ data: "json, name=msg" })
+  @SpeakeasyMetadata({ data: "json, name=msg" })
   msg?: string;
 
-  @Metadata({ data: "json, name=regionName" })
+  @SpeakeasyMetadata({ data: "json, name=regionName" })
   regionName?: string;
 }

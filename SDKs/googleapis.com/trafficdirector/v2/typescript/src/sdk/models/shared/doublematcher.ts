@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DoubleRange } from "./doublerange";
+
 
 
 // DoubleMatcher
@@ -7,9 +8,9 @@ import { DoubleRange } from "./doublerange";
  * Specifies the way to match a double value.
 **/
 export class DoubleMatcher extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata({ data: "json, name=exact" })
   exact?: number;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: DoubleRange;
 }

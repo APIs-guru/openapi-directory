@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaAudienceSequenceFilter } from "./googleanalyticsadminv1alphaaudiencesequencefilter";
 import { GoogleAnalyticsAdminV1alphaAudienceSimpleFilter } from "./googleanalyticsadminv1alphaaudiencesimplefilter";
 
+
 export enum GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnum {
-    AudienceClauseTypeUnspecified = "AUDIENCE_CLAUSE_TYPE_UNSPECIFIED"
-,    Include = "INCLUDE"
-,    Exclude = "EXCLUDE"
+    AudienceClauseTypeUnspecified = "AUDIENCE_CLAUSE_TYPE_UNSPECIFIED",
+    Include = "INCLUDE",
+    Exclude = "EXCLUDE"
 }
 
 
@@ -14,12 +15,12 @@ export enum GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnum {
  * A clause for defining either a simple or sequence filter. A filter can be inclusive (i.e., users satisfying the filter clause are included in the Audience) or exclusive (i.e., users satisfying the filter clause are excluded from the Audience).
 **/
 export class GoogleAnalyticsAdminV1alphaAudienceFilterClause extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clauseType" })
+  @SpeakeasyMetadata({ data: "json, name=clauseType" })
   clauseType?: GoogleAnalyticsAdminV1alphaAudienceFilterClauseClauseTypeEnum;
 
-  @Metadata({ data: "json, name=sequenceFilter" })
+  @SpeakeasyMetadata({ data: "json, name=sequenceFilter" })
   sequenceFilter?: GoogleAnalyticsAdminV1alphaAudienceSequenceFilter;
 
-  @Metadata({ data: "json, name=simpleFilter" })
+  @SpeakeasyMetadata({ data: "json, name=simpleFilter" })
   simpleFilter?: GoogleAnalyticsAdminV1alphaAudienceSimpleFilter;
 }

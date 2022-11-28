@@ -30,7 +30,7 @@ type GkehubProjectsLocationsFleetsCreateSecurity struct {
 type GkehubProjectsLocationsFleetsCreateRequest struct {
 	PathParams  GkehubProjectsLocationsFleetsCreatePathParams
 	QueryParams GkehubProjectsLocationsFleetsCreateQueryParams
-	Request     *shared.Fleet `request:"mediaType=application/json"`
+	Request     *shared.FleetInput `request:"mediaType=application/json"`
 	Security    GkehubProjectsLocationsFleetsCreateSecurity
 }
 

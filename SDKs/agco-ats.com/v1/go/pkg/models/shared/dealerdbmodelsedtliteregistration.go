@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DealerDbModelsEdtLiteRegistration
+// Registration for an EDT Lite
 type DealerDbModelsEdtLiteRegistration struct {
 	DealerCode     *string   `json:"DealerCode,omitempty" form:"name=DealerCode"`
 	ExpirationDate time.Time `json:"ExpirationDate" form:"name=ExpirationDate"`

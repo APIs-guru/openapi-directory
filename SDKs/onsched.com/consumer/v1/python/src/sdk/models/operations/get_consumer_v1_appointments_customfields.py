@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +10,12 @@ class GetConsumerV1AppointmentsCustomfieldsQueryParams:
 
 @dataclass
 class GetConsumerV1AppointmentsCustomfieldsRequest:
-    query_params: GetConsumerV1AppointmentsCustomfieldsQueryParams = field(default=None)
+    query_params: GetConsumerV1AppointmentsCustomfieldsQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1AppointmentsCustomfieldsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_field_definition_list_view_model: Optional[shared.CustomFieldDefinitionListViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

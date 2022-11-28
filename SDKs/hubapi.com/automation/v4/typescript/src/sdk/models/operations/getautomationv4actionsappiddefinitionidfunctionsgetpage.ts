@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsGetPagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
   definitionId: string;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsGetPageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsGetPageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAutomationV4ActionsAppIdDefinitionIdFunctionsGetPagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAutomationV4ActionsAppIdDefinitionIdFunctionsGetPageSecurity;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsGetPageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   collectionResponseActionFunctionIdentifierNoPaging?: shared.CollectionResponseActionFunctionIdentifierNoPaging;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

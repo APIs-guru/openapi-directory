@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportWithRawData } from "./reportwithrawdata";
 import { ReportGroupTrendStats } from "./reportgrouptrendstats";
 
 
+
 export class GetReportGroupTrendOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rawData", elemType: shared.ReportWithRawData })
+  @SpeakeasyMetadata({ data: "json, name=rawData", elemType: ReportWithRawData })
   rawData?: ReportWithRawData[];
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats?: ReportGroupTrendStats;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDbSubnetGroupsActionEnum(str, Enum):
     DESCRIBE_DB_SUBNET_GROUPS = "DescribeDBSubnetGroups"
@@ -10,11 +14,11 @@ class GetDescribeDbSubnetGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDbSubnetGroupsQueryParams:
-    action: GetDescribeDbSubnetGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDbSubnetGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeDbSubnetGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_subnet_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeDbSubnetGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeDbSubnetGroupsHeaders:
 
 @dataclass
 class GetDescribeDbSubnetGroupsRequest:
-    query_params: GetDescribeDbSubnetGroupsQueryParams = field(default=None)
-    headers: GetDescribeDbSubnetGroupsHeaders = field(default=None)
+    headers: GetDescribeDbSubnetGroupsHeaders = field()
+    query_params: GetDescribeDbSubnetGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeDbSubnetGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

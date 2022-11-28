@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudintegrationsv1alphacredential
+from sdk import utils
+from . import *
 
 class GoogleCloudIntegrationsV1alphaAuthConfigCredentialTypeEnum(str, Enum):
     CREDENTIAL_TYPE_UNSPECIFIED = "CREDENTIAL_TYPE_UNSPECIFIED"
@@ -34,22 +39,50 @@ class GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class GoogleCloudIntegrationsV1alphaAuthConfigInput:
+    r"""GoogleCloudIntegrationsV1alphaAuthConfigInput
+    The AuthConfig resource use to hold channels and connection config data.
+    """
+    
+    certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateId') }})
+    creator_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creatorEmail') }})
+    credential_type: Optional[GoogleCloudIntegrationsV1alphaAuthConfigCredentialTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credentialType') }})
+    decrypted_credential: Optional[GoogleCloudIntegrationsV1alphaCredential] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('decryptedCredential') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    encrypted_credential: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptedCredential') }})
+    expiry_notification_duration: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiryNotificationDuration') }})
+    last_modifier_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModifierEmail') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    override_valid_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('overrideValidTime') }})
+    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    state: Optional[GoogleCloudIntegrationsV1alphaAuthConfigStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    valid_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validTime') }})
+    visibility: Optional[GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('visibility') }})
+    
+
+@dataclass_json
+@dataclass
 class GoogleCloudIntegrationsV1alphaAuthConfig:
-    certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateId' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    creator_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creatorEmail' }})
-    credential_type: Optional[GoogleCloudIntegrationsV1alphaAuthConfigCredentialTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credentialType' }})
-    decrypted_credential: Optional[googlecloudintegrationsv1alphacredential.GoogleCloudIntegrationsV1alphaCredential] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'decryptedCredential' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    encrypted_credential: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptedCredential' }})
-    expiry_notification_duration: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiryNotificationDuration' }})
-    last_modifier_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModifierEmail' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    override_valid_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'overrideValidTime' }})
-    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    state: Optional[GoogleCloudIntegrationsV1alphaAuthConfigStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    valid_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validTime' }})
-    visibility: Optional[GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'visibility' }})
+    r"""GoogleCloudIntegrationsV1alphaAuthConfig
+    The AuthConfig resource use to hold channels and connection config data.
+    """
+    
+    certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateId') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    creator_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creatorEmail') }})
+    credential_type: Optional[GoogleCloudIntegrationsV1alphaAuthConfigCredentialTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credentialType') }})
+    decrypted_credential: Optional[GoogleCloudIntegrationsV1alphaCredential] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('decryptedCredential') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    encrypted_credential: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptedCredential') }})
+    expiry_notification_duration: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiryNotificationDuration') }})
+    last_modifier_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModifierEmail') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    override_valid_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('overrideValidTime') }})
+    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    state: Optional[GoogleCloudIntegrationsV1alphaAuthConfigStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    valid_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validTime') }})
+    visibility: Optional[GoogleCloudIntegrationsV1alphaAuthConfigVisibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('visibility') }})
     

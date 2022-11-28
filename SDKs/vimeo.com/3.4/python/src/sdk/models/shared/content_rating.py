@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ContentRatingCodeEnum(str, Enum):
     DRUGS = "drugs"
@@ -14,7 +15,7 @@ class ContentRatingCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ContentRating:
-    code: ContentRatingCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    code: ContentRatingCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

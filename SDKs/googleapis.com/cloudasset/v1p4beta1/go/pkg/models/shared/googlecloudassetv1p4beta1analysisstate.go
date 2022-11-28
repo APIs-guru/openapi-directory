@@ -22,6 +22,8 @@ const (
 	GoogleCloudAssetV1p4beta1AnalysisStateCodeEnumDataLoss           GoogleCloudAssetV1p4beta1AnalysisStateCodeEnum = "DATA_LOSS"
 )
 
+// GoogleCloudAssetV1p4beta1AnalysisState
+// Represents the detailed state of an entity under analysis, such as a resource, an identity or an access.
 type GoogleCloudAssetV1p4beta1AnalysisState struct {
 	Cause *string                                         `json:"cause,omitempty"`
 	Code  *GoogleCloudAssetV1p4beta1AnalysisStateCodeEnum `json:"code,omitempty"`

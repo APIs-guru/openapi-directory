@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BitbucketServerConfig } from "./bitbucketserverconfig";
+
 
 
 // ListBitbucketServerConfigsResponse
@@ -8,9 +8,9 @@ import { BitbucketServerConfig } from "./bitbucketserverconfig";
  * RPC response object returned by ListBitbucketServerConfigs RPC method.
 **/
 export class ListBitbucketServerConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bitbucketServerConfigs", elemType: shared.BitbucketServerConfig })
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerConfigs", elemType: BitbucketServerConfig })
   bitbucketServerConfigs?: BitbucketServerConfig[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

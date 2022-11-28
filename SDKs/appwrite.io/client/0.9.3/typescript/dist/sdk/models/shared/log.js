@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Log
 /**
  * Log
@@ -33,71 +33,71 @@ var Log = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientCode" }),
+        SpeakeasyMetadata({ data: "json, name=clientCode" }),
         __metadata("design:type", String)
     ], Log.prototype, "clientCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientEngine" }),
+        SpeakeasyMetadata({ data: "json, name=clientEngine" }),
         __metadata("design:type", String)
     ], Log.prototype, "clientEngine", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientEngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=clientEngineVersion" }),
         __metadata("design:type", String)
     ], Log.prototype, "clientEngineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientName" }),
+        SpeakeasyMetadata({ data: "json, name=clientName" }),
         __metadata("design:type", String)
     ], Log.prototype, "clientName", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientType" }),
+        SpeakeasyMetadata({ data: "json, name=clientType" }),
         __metadata("design:type", String)
     ], Log.prototype, "clientType", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientVersion" }),
+        SpeakeasyMetadata({ data: "json, name=clientVersion" }),
         __metadata("design:type", String)
     ], Log.prototype, "clientVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=countryCode" }),
+        SpeakeasyMetadata({ data: "json, name=countryCode" }),
         __metadata("design:type", String)
     ], Log.prototype, "countryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=countryName" }),
+        SpeakeasyMetadata({ data: "json, name=countryName" }),
         __metadata("design:type", String)
     ], Log.prototype, "countryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceBrand" }),
+        SpeakeasyMetadata({ data: "json, name=deviceBrand" }),
         __metadata("design:type", String)
     ], Log.prototype, "deviceBrand", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceModel" }),
+        SpeakeasyMetadata({ data: "json, name=deviceModel" }),
         __metadata("design:type", String)
     ], Log.prototype, "deviceModel", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceName" }),
+        SpeakeasyMetadata({ data: "json, name=deviceName" }),
         __metadata("design:type", String)
     ], Log.prototype, "deviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=event" }),
+        SpeakeasyMetadata({ data: "json, name=event" }),
         __metadata("design:type", String)
     ], Log.prototype, "event", void 0);
     __decorate([
-        Metadata({ data: "json, name=ip" }),
+        SpeakeasyMetadata({ data: "json, name=ip" }),
         __metadata("design:type", String)
     ], Log.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "json, name=osCode" }),
+        SpeakeasyMetadata({ data: "json, name=osCode" }),
         __metadata("design:type", String)
     ], Log.prototype, "osCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=osName" }),
+        SpeakeasyMetadata({ data: "json, name=osName" }),
         __metadata("design:type", String)
     ], Log.prototype, "osName", void 0);
     __decorate([
-        Metadata({ data: "json, name=osVersion" }),
+        SpeakeasyMetadata({ data: "json, name=osVersion" }),
         __metadata("design:type", String)
     ], Log.prototype, "osVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=time" }),
+        SpeakeasyMetadata({ data: "json, name=time" }),
         __metadata("design:type", Number)
     ], Log.prototype, "time", void 0);
     return Log;

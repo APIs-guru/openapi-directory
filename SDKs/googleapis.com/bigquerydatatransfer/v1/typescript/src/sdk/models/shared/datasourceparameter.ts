@@ -1,15 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { DataSourceParameter } from "./datasourceparameter";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DataSourceParameterTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    String = "STRING"
-,    Integer = "INTEGER"
-,    Double = "DOUBLE"
-,    Boolean = "BOOLEAN"
-,    Record = "RECORD"
-,    PlusPage = "PLUS_PAGE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    String = "STRING",
+    Integer = "INTEGER",
+    Double = "DOUBLE",
+    Boolean = "BOOLEAN",
+    Record = "RECORD",
+    PlusPage = "PLUS_PAGE"
 }
 
 
@@ -18,51 +17,51 @@ export enum DataSourceParameterTypeEnum {
  * A parameter used to define custom fields in a data source definition.
 **/
 export class DataSourceParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedValues" })
+  @SpeakeasyMetadata({ data: "json, name=allowedValues" })
   allowedValues?: string[];
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=fields", elemType: shared.DataSourceParameter })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: DataSourceParameter })
   fields?: DataSourceParameter[];
 
-  @Metadata({ data: "json, name=immutable" })
+  @SpeakeasyMetadata({ data: "json, name=immutable" })
   immutable?: boolean;
 
-  @Metadata({ data: "json, name=maxValue" })
+  @SpeakeasyMetadata({ data: "json, name=maxValue" })
   maxValue?: number;
 
-  @Metadata({ data: "json, name=minValue" })
+  @SpeakeasyMetadata({ data: "json, name=minValue" })
   minValue?: number;
 
-  @Metadata({ data: "json, name=paramId" })
+  @SpeakeasyMetadata({ data: "json, name=paramId" })
   paramId?: string;
 
-  @Metadata({ data: "json, name=recurse" })
+  @SpeakeasyMetadata({ data: "json, name=recurse" })
   recurse?: boolean;
 
-  @Metadata({ data: "json, name=repeated" })
+  @SpeakeasyMetadata({ data: "json, name=repeated" })
   repeated?: boolean;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DataSourceParameterTypeEnum;
 
-  @Metadata({ data: "json, name=validationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=validationDescription" })
   validationDescription?: string;
 
-  @Metadata({ data: "json, name=validationHelpUrl" })
+  @SpeakeasyMetadata({ data: "json, name=validationHelpUrl" })
   validationHelpUrl?: string;
 
-  @Metadata({ data: "json, name=validationRegex" })
+  @SpeakeasyMetadata({ data: "json, name=validationRegex" })
   validationRegex?: string;
 }

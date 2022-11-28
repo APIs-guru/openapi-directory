@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class VideoPlayerSizeAssignedTargetingOptionDetailsVideoPlayerSizeEnum(str, Enum):
     VIDEO_PLAYER_SIZE_UNSPECIFIED = "VIDEO_PLAYER_SIZE_UNSPECIFIED"
@@ -13,5 +15,9 @@ class VideoPlayerSizeAssignedTargetingOptionDetailsVideoPlayerSizeEnum(str, Enum
 @dataclass_json
 @dataclass
 class VideoPlayerSizeAssignedTargetingOptionDetails:
-    video_player_size: Optional[VideoPlayerSizeAssignedTargetingOptionDetailsVideoPlayerSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoPlayerSize' }})
+    r"""VideoPlayerSizeAssignedTargetingOptionDetails
+    Video player size targeting option details. This will be populated in the video_player_size_details field when targeting_type is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`. Explicitly targeting all options is not supported. Remove all video player size targeting options to achieve this effect.
+    """
+    
+    video_player_size: Optional[VideoPlayerSizeAssignedTargetingOptionDetailsVideoPlayerSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoPlayerSize') }})
     

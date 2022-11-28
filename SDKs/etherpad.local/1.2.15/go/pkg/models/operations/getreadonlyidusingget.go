@@ -4,10 +4,6 @@ type GetReadOnlyIDUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type GetReadOnlyIDUsingGetRequest struct {
-	QueryParams GetReadOnlyIDUsingGetQueryParams
-}
-
 type GetReadOnlyIDUsingGet200ApplicationJSONData struct {
 	ReadOnlyID *string `json:"readOnlyID,omitempty"`
 }
@@ -34,6 +30,10 @@ type GetReadOnlyIDUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetReadOnlyIDUsingGetRequest struct {
+	QueryParams GetReadOnlyIDUsingGetQueryParams
 }
 
 type GetReadOnlyIDUsingGetResponse struct {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRebootDbInstanceActionEnum(str, Enum):
     REBOOT_DB_INSTANCE = "RebootDBInstance"
@@ -10,10 +14,10 @@ class GetRebootDbInstanceVersionEnum(str, Enum):
 
 @dataclass
 class GetRebootDbInstanceQueryParams:
-    action: GetRebootDbInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    action: GetRebootDbInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetRebootDbInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     force_failover: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ForceFailover', 'style': 'form', 'explode': True }})
-    version: GetRebootDbInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetRebootDbInstanceHeaders:
 
 @dataclass
 class GetRebootDbInstanceRequest:
-    query_params: GetRebootDbInstanceQueryParams = field(default=None)
-    headers: GetRebootDbInstanceHeaders = field(default=None)
+    headers: GetRebootDbInstanceHeaders = field()
+    query_params: GetRebootDbInstanceQueryParams = field()
     
 
 @dataclass
 class GetRebootDbInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

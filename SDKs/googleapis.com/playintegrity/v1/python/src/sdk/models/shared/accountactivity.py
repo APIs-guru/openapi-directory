@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AccountActivityActivityLevelEnum(str, Enum):
     ACTIVITY_LEVEL_UNSPECIFIED = "ACTIVITY_LEVEL_UNSPECIFIED"
@@ -14,5 +16,9 @@ class AccountActivityActivityLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AccountActivity:
-    activity_level: Optional[AccountActivityActivityLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activityLevel' }})
+    r"""AccountActivity
+    Contains a signal helping apps differentiating between likely genuine users and likely non-genuine traffic (such as accounts being used for fraud, accounts used by automated traffic, or accounts used in device farms) based on the presence and volume of Play store activity.
+    """
+    
+    activity_level: Optional[AccountActivityActivityLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activityLevel') }})
     

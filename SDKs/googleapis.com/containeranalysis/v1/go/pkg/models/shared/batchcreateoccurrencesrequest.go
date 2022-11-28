@@ -1,5 +1,7 @@
 package shared
 
-type BatchCreateOccurrencesRequest struct {
-	Occurrences []Occurrence `json:"occurrences,omitempty"`
+// BatchCreateOccurrencesRequestInput
+// Request to create occurrences in batch.
+type BatchCreateOccurrencesRequestInput struct {
+	Occurrences []OccurrenceInput `json:"occurrences,omitempty"`
 }

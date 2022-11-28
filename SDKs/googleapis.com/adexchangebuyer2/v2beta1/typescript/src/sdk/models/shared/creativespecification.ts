@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdSize } from "./adsize";
-import { AdSize } from "./adsize";
+
 
 
 // CreativeSpecification
@@ -9,9 +8,9 @@ import { AdSize } from "./adsize";
  * Represents information for a creative that is associated with a Programmatic Guaranteed/Preferred Deal in Ad Manager.
 **/
 export class CreativeSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeCompanionSizes", elemType: shared.AdSize })
+  @SpeakeasyMetadata({ data: "json, name=creativeCompanionSizes", elemType: AdSize })
   creativeCompanionSizes?: AdSize[];
 
-  @Metadata({ data: "json, name=creativeSize" })
+  @SpeakeasyMetadata({ data: "json, name=creativeSize" })
   creativeSize?: AdSize;
 }

@@ -1,74 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV4LayersScoutingObservationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" })
   occurredAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" })
   occurredBefore?: Date;
 }
 
 
 export class GetV4LayersScoutingObservationsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Limit" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Limit" })
   xLimit?: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
   xNextToken?: string;
 }
 
 
-export class GetV4LayersScoutingObservationsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class GetV4LayersScoutingObservationsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class GetV4LayersScoutingObservationsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetV4LayersScoutingObservationsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetV4LayersScoutingObservationsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class GetV4LayersScoutingObservationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV4LayersScoutingObservationsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV4LayersScoutingObservationsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetV4LayersScoutingObservationsSecurity;
 }
 
 
 export class GetV4LayersScoutingObservationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   empty?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scoutingObservations?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

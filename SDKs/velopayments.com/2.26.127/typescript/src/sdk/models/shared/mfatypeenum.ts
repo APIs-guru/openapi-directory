@@ -1,7 +1,8 @@
 
 
+
 export enum MfaTypeEnum {
-    Sms = "SMS"
-,    Yubikey = "YUBIKEY"
-,    Totp = "TOTP"
+    Sms = "SMS",
+    Yubikey = "YUBIKEY",
+    Totp = "TOTP"
 }

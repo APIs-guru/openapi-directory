@@ -1,5 +1,7 @@
 package shared
 
+// RdsMetadata
+// The datasource details that are specific to Amazon RDS.
 type RdsMetadata struct {
 	DataPipelineID   *string      `json:"DataPipelineId,omitempty"`
 	Database         *RdsDatabase `json:"Database,omitempty"`

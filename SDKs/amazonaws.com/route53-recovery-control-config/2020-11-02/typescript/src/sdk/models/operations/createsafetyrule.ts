@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateSafetyRuleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,19 +32,19 @@ export class CreateSafetyRuleHeaders extends SpeakeasyBase {
  * A new assertion rule for a control panel.
 **/
 export class CreateSafetyRuleRequestBodyAssertionRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssertedControls" })
+  @SpeakeasyMetadata({ data: "json, name=AssertedControls" })
   assertedControls?: string[];
 
-  @Metadata({ data: "json, name=ControlPanelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ControlPanelArn" })
   controlPanelArn?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RuleConfig" })
+  @SpeakeasyMetadata({ data: "json, name=RuleConfig" })
   ruleConfig?: shared.RuleConfig;
 
-  @Metadata({ data: "json, name=WaitPeriodMs" })
+  @SpeakeasyMetadata({ data: "json, name=WaitPeriodMs" })
   waitPeriodMs?: number;
 }
 
@@ -53,60 +54,60 @@ export class CreateSafetyRuleRequestBodyAssertionRule extends SpeakeasyBase {
  * A new gating rule for a control panel.
 **/
 export class CreateSafetyRuleRequestBodyGatingRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ControlPanelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ControlPanelArn" })
   controlPanelArn?: string;
 
-  @Metadata({ data: "json, name=GatingControls" })
+  @SpeakeasyMetadata({ data: "json, name=GatingControls" })
   gatingControls?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RuleConfig" })
+  @SpeakeasyMetadata({ data: "json, name=RuleConfig" })
   ruleConfig?: shared.RuleConfig;
 
-  @Metadata({ data: "json, name=TargetControls" })
+  @SpeakeasyMetadata({ data: "json, name=TargetControls" })
   targetControls?: string[];
 
-  @Metadata({ data: "json, name=WaitPeriodMs" })
+  @SpeakeasyMetadata({ data: "json, name=WaitPeriodMs" })
   waitPeriodMs?: number;
 }
 
 
 export class CreateSafetyRuleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssertionRule" })
+  @SpeakeasyMetadata({ data: "json, name=AssertionRule" })
   assertionRule?: CreateSafetyRuleRequestBodyAssertionRule;
 
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=GatingRule" })
+  @SpeakeasyMetadata({ data: "json, name=GatingRule" })
   gatingRule?: CreateSafetyRuleRequestBodyGatingRule;
 }
 
 
 export class CreateSafetyRuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateSafetyRuleHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateSafetyRuleRequestBody;
 }
 
 
 export class CreateSafetyRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSafetyRuleResponse?: shared.CreateSafetyRuleResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

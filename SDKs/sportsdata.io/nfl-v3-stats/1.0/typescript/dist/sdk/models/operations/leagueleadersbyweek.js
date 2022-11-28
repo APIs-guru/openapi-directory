@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var LeagueLeadersByWeekColumnEnum;
 (function (LeagueLeadersByWeekColumnEnum) {
     LeagueLeadersByWeekColumnEnum["FantasyPoints"] = "FantasyPoints";
@@ -58,23 +58,23 @@ var LeagueLeadersByWeekPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=column" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=column" }),
         __metadata("design:type", String)
     ], LeagueLeadersByWeekPathParams.prototype, "column", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], LeagueLeadersByWeekPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=position" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=position" }),
         __metadata("design:type", String)
     ], LeagueLeadersByWeekPathParams.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], LeagueLeadersByWeekPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], LeagueLeadersByWeekPathParams.prototype, "week", void 0);
     return LeagueLeadersByWeekPathParams;
@@ -86,7 +86,7 @@ var LeagueLeadersByWeekRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LeagueLeadersByWeekPathParams)
     ], LeagueLeadersByWeekRequest.prototype, "pathParams", void 0);
     return LeagueLeadersByWeekRequest;
@@ -98,15 +98,15 @@ var LeagueLeadersByWeekResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LeagueLeadersByWeekResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], LeagueLeadersByWeekResponse.prototype, "playerGames", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LeagueLeadersByWeekResponse.prototype, "statusCode", void 0);
     return LeagueLeadersByWeekResponse;

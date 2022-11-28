@@ -31,7 +31,7 @@ type ContaineranalysisProjectsOccurrencesPatchSecurity struct {
 type ContaineranalysisProjectsOccurrencesPatchRequest struct {
 	PathParams  ContaineranalysisProjectsOccurrencesPatchPathParams
 	QueryParams ContaineranalysisProjectsOccurrencesPatchQueryParams
-	Request     *shared.Occurrence `request:"mediaType=application/json"`
+	Request     *shared.OccurrenceInput `request:"mediaType=application/json"`
 	Security    ContaineranalysisProjectsOccurrencesPatchSecurity
 }
 

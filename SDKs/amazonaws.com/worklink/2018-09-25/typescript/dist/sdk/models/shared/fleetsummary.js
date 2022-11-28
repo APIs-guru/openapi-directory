@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FleetStatusEnum } from "./fleetstatusenum";
 // FleetSummary
 /**
@@ -34,35 +34,35 @@ var FleetSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CompanyCode" }),
+        SpeakeasyMetadata({ data: "json, name=CompanyCode" }),
         __metadata("design:type", String)
     ], FleetSummary.prototype, "companyCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTime" }),
         __metadata("design:type", Date)
     ], FleetSummary.prototype, "createdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], FleetSummary.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=FleetArn" }),
+        SpeakeasyMetadata({ data: "json, name=FleetArn" }),
         __metadata("design:type", String)
     ], FleetSummary.prototype, "fleetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FleetName" }),
+        SpeakeasyMetadata({ data: "json, name=FleetName" }),
         __metadata("design:type", String)
     ], FleetSummary.prototype, "fleetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=FleetStatus" }),
+        SpeakeasyMetadata({ data: "json, name=FleetStatus" }),
         __metadata("design:type", String)
     ], FleetSummary.prototype, "fleetStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedTime" }),
         __metadata("design:type", Date)
     ], FleetSummary.prototype, "lastUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], FleetSummary.prototype, "tags", void 0);
     return FleetSummary;

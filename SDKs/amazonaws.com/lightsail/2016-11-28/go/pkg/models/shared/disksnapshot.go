@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DiskSnapshot
+// Describes a block storage disk snapshot.
 type DiskSnapshot struct {
 	Arn                *string                `json:"arn,omitempty"`
 	CreatedAt          *time.Time             `json:"createdAt,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AmbiguousRoleResolutionTypeEnum } from "./ambiguousroleresolutiontypeenum";
 import { RulesConfigurationType } from "./rulesconfigurationtype";
 import { RoleMappingTypeEnum } from "./rolemappingtypeenum";

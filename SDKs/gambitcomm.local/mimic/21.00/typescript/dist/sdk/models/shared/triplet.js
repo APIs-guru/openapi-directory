@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Triplet = /** @class */ (function (_super) {
     __extends(Triplet, _super);
     function Triplet() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=device" }),
+        SpeakeasyMetadata({ data: "json, name=device" }),
         __metadata("design:type", String)
     ], Triplet.prototype, "device", void 0);
     __decorate([
-        Metadata({ data: "json, name=mib" }),
+        SpeakeasyMetadata({ data: "json, name=mib" }),
         __metadata("design:type", String)
     ], Triplet.prototype, "mib", void 0);
     __decorate([
-        Metadata({ data: "json, name=scenario" }),
+        SpeakeasyMetadata({ data: "json, name=scenario" }),
         __metadata("design:type", Number)
     ], Triplet.prototype, "scenario", void 0);
     return Triplet;

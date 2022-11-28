@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetCategorySubscriptionsAlt1DirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetCategorySubscriptionsAlt1SortEnum {
-    Alphabetical = "alphabetical"
-,    Date = "date"
-,    Name = "name"
+    Alphabetical = "alphabetical",
+    Date = "date",
+    Name = "name"
 }
 
 
 export class GetCategorySubscriptionsAlt1QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetCategorySubscriptionsAlt1DirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetCategorySubscriptionsAlt1SortEnum;
 }
 
 
 export class GetCategorySubscriptionsAlt1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class GetCategorySubscriptionsAlt1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCategorySubscriptionsAlt1QueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCategorySubscriptionsAlt1Security;
 }
 
 
 export class GetCategorySubscriptionsAlt1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Category })
+  @SpeakeasyMetadata({ elemType: shared.Category })
   categories?: shared.Category[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 }

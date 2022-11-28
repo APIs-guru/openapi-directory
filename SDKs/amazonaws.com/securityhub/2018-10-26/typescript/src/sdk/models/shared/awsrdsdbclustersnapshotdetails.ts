@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRdsDbClusterSnapshotDetails
@@ -6,57 +7,57 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Amazon RDS DB cluster snapshot.
 **/
 export class AwsRdsDbClusterSnapshotDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedStorage" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedStorage" })
   allocatedStorage?: number;
 
-  @Metadata({ data: "json, name=AvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZones" })
   availabilityZones?: string[];
 
-  @Metadata({ data: "json, name=ClusterCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterCreateTime" })
   clusterCreateTime?: string;
 
-  @Metadata({ data: "json, name=DbClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DbClusterIdentifier" })
   dbClusterIdentifier?: string;
 
-  @Metadata({ data: "json, name=DbClusterSnapshotIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DbClusterSnapshotIdentifier" })
   dbClusterSnapshotIdentifier?: string;
 
-  @Metadata({ data: "json, name=Engine" })
+  @SpeakeasyMetadata({ data: "json, name=Engine" })
   engine?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=IamDatabaseAuthenticationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=IamDatabaseAuthenticationEnabled" })
   iamDatabaseAuthenticationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LicenseModel" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseModel" })
   licenseModel?: string;
 
-  @Metadata({ data: "json, name=MasterUsername" })
+  @SpeakeasyMetadata({ data: "json, name=MasterUsername" })
   masterUsername?: string;
 
-  @Metadata({ data: "json, name=PercentProgress" })
+  @SpeakeasyMetadata({ data: "json, name=PercentProgress" })
   percentProgress?: number;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=SnapshotCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotCreateTime" })
   snapshotCreateTime?: string;
 
-  @Metadata({ data: "json, name=SnapshotType" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotType" })
   snapshotType?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=StorageEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=StorageEncrypted" })
   storageEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

@@ -36,7 +36,7 @@ type PeoplePeopleCreateContactSecurity struct {
 
 type PeoplePeopleCreateContactRequest struct {
 	QueryParams PeoplePeopleCreateContactQueryParams
-	Request     *shared.Person `request:"mediaType=application/json"`
+	Request     *shared.PersonInput `request:"mediaType=application/json"`
 	Security    PeoplePeopleCreateContactSecurity
 }
 

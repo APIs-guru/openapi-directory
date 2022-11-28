@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditRefs } from "./auditrefs";
+
 
 
 // LighthouseCategoryV5
@@ -8,21 +8,21 @@ import { AuditRefs } from "./auditrefs";
  * A Lighthouse category.
 **/
 export class LighthouseCategoryV5 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditRefs", elemType: shared.AuditRefs })
+  @SpeakeasyMetadata({ data: "json, name=auditRefs", elemType: AuditRefs })
   auditRefs?: AuditRefs[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=manualDescription" })
+  @SpeakeasyMetadata({ data: "json, name=manualDescription" })
   manualDescription?: string;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: any;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

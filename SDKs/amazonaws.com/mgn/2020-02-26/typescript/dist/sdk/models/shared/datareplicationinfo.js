@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataReplicationError } from "./datareplicationerror";
 import { DataReplicationInitiation } from "./datareplicationinitiation";
 import { DataReplicationStateEnum } from "./datareplicationstateenum";
+import { DataReplicationInfoReplicatedDisk } from "./datareplicationinforeplicateddisk";
 // DataReplicationInfo
 /**
  * Request data replication info.
@@ -37,27 +37,27 @@ var DataReplicationInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataReplicationError" }),
+        SpeakeasyMetadata({ data: "json, name=dataReplicationError" }),
         __metadata("design:type", DataReplicationError)
     ], DataReplicationInfo.prototype, "dataReplicationError", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataReplicationInitiation" }),
+        SpeakeasyMetadata({ data: "json, name=dataReplicationInitiation" }),
         __metadata("design:type", DataReplicationInitiation)
     ], DataReplicationInfo.prototype, "dataReplicationInitiation", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataReplicationState" }),
+        SpeakeasyMetadata({ data: "json, name=dataReplicationState" }),
         __metadata("design:type", String)
     ], DataReplicationInfo.prototype, "dataReplicationState", void 0);
     __decorate([
-        Metadata({ data: "json, name=etaDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=etaDateTime" }),
         __metadata("design:type", String)
     ], DataReplicationInfo.prototype, "etaDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lagDuration" }),
+        SpeakeasyMetadata({ data: "json, name=lagDuration" }),
         __metadata("design:type", String)
     ], DataReplicationInfo.prototype, "lagDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicatedDisks", elemType: shared.DataReplicationInfoReplicatedDisk }),
+        SpeakeasyMetadata({ data: "json, name=replicatedDisks", elemType: DataReplicationInfoReplicatedDisk }),
         __metadata("design:type", Array)
     ], DataReplicationInfo.prototype, "replicatedDisks", void 0);
     return DataReplicationInfo;

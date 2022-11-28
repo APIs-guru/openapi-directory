@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaPriceInfoPriceRange } from "./googlecloudretailv2alphapriceinfopricerange";
+
 
 
 // GoogleCloudRetailV2alphaPriceInfo
@@ -7,24 +8,24 @@ import { GoogleCloudRetailV2alphaPriceInfoPriceRange } from "./googlecloudretail
  * The price information of a Product.
 **/
 export class GoogleCloudRetailV2alphaPriceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cost" })
+  @SpeakeasyMetadata({ data: "json, name=cost" })
   cost?: number;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=originalPrice" })
+  @SpeakeasyMetadata({ data: "json, name=originalPrice" })
   originalPrice?: number;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=priceEffectiveTime" })
+  @SpeakeasyMetadata({ data: "json, name=priceEffectiveTime" })
   priceEffectiveTime?: string;
 
-  @Metadata({ data: "json, name=priceExpireTime" })
+  @SpeakeasyMetadata({ data: "json, name=priceExpireTime" })
   priceExpireTime?: string;
 
-  @Metadata({ data: "json, name=priceRange" })
+  @SpeakeasyMetadata({ data: "json, name=priceRange" })
   priceRange?: GoogleCloudRetailV2alphaPriceInfoPriceRange;
 }

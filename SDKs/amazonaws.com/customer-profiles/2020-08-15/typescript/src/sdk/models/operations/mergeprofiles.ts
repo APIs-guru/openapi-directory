@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MergeProfilesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=DomainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DomainName" })
   domainName: string;
 }
 
 
 export class MergeProfilesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,114 +38,114 @@ export class MergeProfilesHeaders extends SpeakeasyBase {
  * A duplicate customer profile that is to be merged into a main profile. 
 **/
 export class MergeProfilesRequestBodyFieldSourceProfileIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=AccountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=AdditionalInformation" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalInformation" })
   additionalInformation?: string;
 
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: string;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=BillingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=BillingAddress" })
   billingAddress?: string;
 
-  @Metadata({ data: "json, name=BirthDate" })
+  @SpeakeasyMetadata({ data: "json, name=BirthDate" })
   birthDate?: string;
 
-  @Metadata({ data: "json, name=BusinessEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessEmailAddress" })
   businessEmailAddress?: string;
 
-  @Metadata({ data: "json, name=BusinessName" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessName" })
   businessName?: string;
 
-  @Metadata({ data: "json, name=BusinessPhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessPhoneNumber" })
   businessPhoneNumber?: string;
 
-  @Metadata({ data: "json, name=EmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EmailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=Gender" })
+  @SpeakeasyMetadata({ data: "json, name=Gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=HomePhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=HomePhoneNumber" })
   homePhoneNumber?: string;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=MailingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=MailingAddress" })
   mailingAddress?: string;
 
-  @Metadata({ data: "json, name=MiddleName" })
+  @SpeakeasyMetadata({ data: "json, name=MiddleName" })
   middleName?: string;
 
-  @Metadata({ data: "json, name=MobilePhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MobilePhoneNumber" })
   mobilePhoneNumber?: string;
 
-  @Metadata({ data: "json, name=PartyType" })
+  @SpeakeasyMetadata({ data: "json, name=PartyType" })
   partyType?: string;
 
-  @Metadata({ data: "json, name=PersonalEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PersonalEmailAddress" })
   personalEmailAddress?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=ShippingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingAddress" })
   shippingAddress?: string;
 }
 
 
 export class MergeProfilesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FieldSourceProfileIds" })
+  @SpeakeasyMetadata({ data: "json, name=FieldSourceProfileIds" })
   fieldSourceProfileIds?: MergeProfilesRequestBodyFieldSourceProfileIds;
 
-  @Metadata({ data: "json, name=MainProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=MainProfileId" })
   mainProfileId: string;
 
-  @Metadata({ data: "json, name=ProfileIdsToBeMerged" })
+  @SpeakeasyMetadata({ data: "json, name=ProfileIdsToBeMerged" })
   profileIdsToBeMerged: string[];
 }
 
 
 export class MergeProfilesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MergeProfilesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: MergeProfilesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: MergeProfilesRequestBody;
 }
 
 
 export class MergeProfilesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mergeProfilesResponse?: shared.MergeProfilesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

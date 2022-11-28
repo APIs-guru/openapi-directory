@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HourlyMetrics
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metrics for an hour.
 **/
 export class HourlyMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hour" })
+  @SpeakeasyMetadata({ data: "json, name=hour" })
   hour?: number;
 
-  @Metadata({ data: "json, name=missedCallsCount" })
+  @SpeakeasyMetadata({ data: "json, name=missedCallsCount" })
   missedCallsCount?: number;
 }

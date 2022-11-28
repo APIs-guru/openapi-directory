@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObRisk1 } from "./obrisk1";
+
 
 
 // ObWriteDomesticStandingOrder3DataInitiationCreditorAccount
@@ -7,16 +8,16 @@ import { ObRisk1 } from "./obrisk1";
  * Identification assigned by an institution to identify an account. This identification is known by the account owner.
 **/
 export class ObWriteDomesticStandingOrder3DataInitiationCreditorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -26,16 +27,16 @@ export class ObWriteDomesticStandingOrder3DataInitiationCreditorAccount extends 
  * Provides the details to identify the debtor account.
 **/
 export class ObWriteDomesticStandingOrder3DataInitiationDebtorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -45,10 +46,10 @@ export class ObWriteDomesticStandingOrder3DataInitiationDebtorAccount extends Sp
  * The amount of the final Standing Order
 **/
 export class ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -58,10 +59,10 @@ export class ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount exten
  * The amount of the first Standing Order
 **/
 export class ObWriteDomesticStandingOrder3DataInitiationFirstPaymentAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -71,10 +72,10 @@ export class ObWriteDomesticStandingOrder3DataInitiationFirstPaymentAmount exten
  * The amount of the recurring Standing Order
 **/
 export class ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -84,57 +85,57 @@ export class ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount e
  * The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a domestic standing order.
 **/
 export class ObWriteDomesticStandingOrder3DataInitiation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreditorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorAccount" })
   creditorAccount: ObWriteDomesticStandingOrder3DataInitiationCreditorAccount;
 
-  @Metadata({ data: "json, name=DebtorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=DebtorAccount" })
   debtorAccount?: ObWriteDomesticStandingOrder3DataInitiationDebtorAccount;
 
-  @Metadata({ data: "json, name=FinalPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=FinalPaymentAmount" })
   finalPaymentAmount?: ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount;
 
-  @Metadata({ data: "json, name=FinalPaymentDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=FinalPaymentDateTime" })
   finalPaymentDateTime?: Date;
 
-  @Metadata({ data: "json, name=FirstPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=FirstPaymentAmount" })
   firstPaymentAmount: ObWriteDomesticStandingOrder3DataInitiationFirstPaymentAmount;
 
-  @Metadata({ data: "json, name=FirstPaymentDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=FirstPaymentDateTime" })
   firstPaymentDateTime: Date;
 
-  @Metadata({ data: "json, name=Frequency" })
+  @SpeakeasyMetadata({ data: "json, name=Frequency" })
   frequency: string;
 
-  @Metadata({ data: "json, name=NumberOfPayments" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfPayments" })
   numberOfPayments?: string;
 
-  @Metadata({ data: "json, name=RecurringPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=RecurringPaymentAmount" })
   recurringPaymentAmount?: ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount;
 
-  @Metadata({ data: "json, name=RecurringPaymentDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RecurringPaymentDateTime" })
   recurringPaymentDateTime?: Date;
 
-  @Metadata({ data: "json, name=Reference" })
+  @SpeakeasyMetadata({ data: "json, name=Reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=SupplementaryData" })
+  @SpeakeasyMetadata({ data: "json, name=SupplementaryData" })
   supplementaryData?: Map<string, any>;
 }
 
 
 export class ObWriteDomesticStandingOrder3Data extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsentId" })
+  @SpeakeasyMetadata({ data: "json, name=ConsentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=Initiation" })
+  @SpeakeasyMetadata({ data: "json, name=Initiation" })
   initiation: ObWriteDomesticStandingOrder3DataInitiation;
 }
 
 
 export class ObWriteDomesticStandingOrder3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: ObWriteDomesticStandingOrder3Data;
 
-  @Metadata({ data: "json, name=Risk" })
+  @SpeakeasyMetadata({ data: "json, name=Risk" })
   risk: ObRisk1;
 }

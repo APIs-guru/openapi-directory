@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum VoiceWebhooksEndpointTypeEnum {
     AnswerUrl = "answer_url",
     EventUrl = "event_url"

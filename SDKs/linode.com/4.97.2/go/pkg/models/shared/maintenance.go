@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MaintenanceEntity
+// The entity being affected by maintenance.
 type MaintenanceEntity struct {
 	ID    *float64 `json:"id,omitempty"`
 	Label *string  `json:"label,omitempty"`
@@ -26,6 +28,8 @@ const (
 	MaintenanceTypeEnumLiveMigration MaintenanceTypeEnum = "live_migration"
 )
 
+// Maintenance
+// Information about maintenance affecting an entity.
 type Maintenance struct {
 	Entity *MaintenanceEntity     `json:"entity,omitempty"`
 	Reason *string                `json:"reason,omitempty"`

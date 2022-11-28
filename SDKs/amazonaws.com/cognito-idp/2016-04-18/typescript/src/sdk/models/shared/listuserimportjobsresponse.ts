@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserImportJobType } from "./userimportjobtype";
+
 
 
 // ListUserImportJobsResponse
@@ -8,9 +8,9 @@ import { UserImportJobType } from "./userimportjobtype";
  * Represents the response from the server to the request to list the user import jobs.
 **/
 export class ListUserImportJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 
-  @Metadata({ data: "json, name=UserImportJobs", elemType: shared.UserImportJobType })
+  @SpeakeasyMetadata({ data: "json, name=UserImportJobs", elemType: UserImportJobType })
   userImportJobs?: UserImportJobType[];
 }

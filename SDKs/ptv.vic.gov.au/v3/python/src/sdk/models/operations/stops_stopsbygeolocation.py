@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class StopsStopsByGeolocationPathParams:
-    latitude: float = field(default=None, metadata={'path_param': { 'field_name': 'latitude', 'style': 'simple', 'explode': False }})
-    longitude: float = field(default=None, metadata={'path_param': { 'field_name': 'longitude', 'style': 'simple', 'explode': False }})
+    latitude: float = field(metadata={'path_param': { 'field_name': 'latitude', 'style': 'simple', 'explode': False }})
+    longitude: float = field(metadata={'path_param': { 'field_name': 'longitude', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,15 +22,15 @@ class StopsStopsByGeolocationQueryParams:
 
 @dataclass
 class StopsStopsByGeolocationRequest:
-    path_params: StopsStopsByGeolocationPathParams = field(default=None)
-    query_params: StopsStopsByGeolocationQueryParams = field(default=None)
+    path_params: StopsStopsByGeolocationPathParams = field()
+    query_params: StopsStopsByGeolocationQueryParams = field()
     
 
 @dataclass
 class StopsStopsByGeolocationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_stops_by_distance_response: Optional[shared.V3StopsByDistanceResponse] = field(default=None)
     

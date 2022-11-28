@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVideointelligenceV1p1beta1PersonDetectionConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config for PERSON_DETECTION.
 **/
 export class GoogleCloudVideointelligenceV1p1beta1PersonDetectionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=includeAttributes" })
   includeAttributes?: boolean;
 
-  @Metadata({ data: "json, name=includeBoundingBoxes" })
+  @SpeakeasyMetadata({ data: "json, name=includeBoundingBoxes" })
   includeBoundingBoxes?: boolean;
 
-  @Metadata({ data: "json, name=includePoseLandmarks" })
+  @SpeakeasyMetadata({ data: "json, name=includePoseLandmarks" })
   includePoseLandmarks?: boolean;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StreamDescription
+// Represents the output for <a>DescribeStream</a>.
 type StreamDescription struct {
 	EncryptionType          *EncryptionTypeEnum `json:"EncryptionType,omitempty"`
 	EnhancedMonitoring      []EnhancedMetrics   `json:"EnhancedMonitoring"`

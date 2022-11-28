@@ -11,12 +11,12 @@ class GetVideoChannelsQueryParams:
 
 @dataclass
 class GetVideoChannelsRequest:
-    query_params: GetVideoChannelsQueryParams = field(default=None)
+    query_params: GetVideoChannelsQueryParams = field()
     
 
 @dataclass
 class GetVideoChannelsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_channel_list: Optional[Any] = field(default=None)
     

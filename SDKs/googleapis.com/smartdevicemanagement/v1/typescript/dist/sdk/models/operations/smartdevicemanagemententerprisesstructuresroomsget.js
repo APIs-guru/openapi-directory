@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SmartdevicemanagementEnterprisesStructuresRoomsGetPathParams = /** @class */ (function (_super) {
     __extends(SmartdevicemanagementEnterprisesStructuresRoomsGetPathParams, _super);
@@ -30,7 +30,7 @@ var SmartdevicemanagementEnterprisesStructuresRoomsGetPathParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetPathParams.prototype, "name", void 0);
     return SmartdevicemanagementEnterprisesStructuresRoomsGetPathParams;
@@ -42,47 +42,47 @@ var SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams.prototype, "uploadProtocol", void 0);
     return SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams;
@@ -94,11 +94,11 @@ var SmartdevicemanagementEnterprisesStructuresRoomsGetSecurity = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetSecurity.prototype, "oauth2c", void 0);
     return SmartdevicemanagementEnterprisesStructuresRoomsGetSecurity;
@@ -110,15 +110,15 @@ var SmartdevicemanagementEnterprisesStructuresRoomsGetRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SmartdevicemanagementEnterprisesStructuresRoomsGetPathParams)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SmartdevicemanagementEnterprisesStructuresRoomsGetQueryParams)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SmartdevicemanagementEnterprisesStructuresRoomsGetSecurity)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetRequest.prototype, "security", void 0);
     return SmartdevicemanagementEnterprisesStructuresRoomsGetRequest;
@@ -130,15 +130,15 @@ var SmartdevicemanagementEnterprisesStructuresRoomsGetResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleHomeEnterpriseSdmV1Room)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetResponse.prototype, "googleHomeEnterpriseSdmV1Room", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SmartdevicemanagementEnterprisesStructuresRoomsGetResponse.prototype, "statusCode", void 0);
     return SmartdevicemanagementEnterprisesStructuresRoomsGetResponse;

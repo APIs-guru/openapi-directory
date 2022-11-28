@@ -1,5 +1,7 @@
 package shared
 
+// Membership
+// Membership
 type Membership struct {
 	DollarID string   `json:"$id"`
 	Confirm  bool     `json:"confirm"`

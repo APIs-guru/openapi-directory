@@ -1,5 +1,16 @@
 package shared
 
+type LinuxNodeConfigCgroupModeEnum string
+
+const (
+	LinuxNodeConfigCgroupModeEnumCgroupModeUnspecified LinuxNodeConfigCgroupModeEnum = "CGROUP_MODE_UNSPECIFIED"
+	LinuxNodeConfigCgroupModeEnumCgroupModeV1          LinuxNodeConfigCgroupModeEnum = "CGROUP_MODE_V1"
+	LinuxNodeConfigCgroupModeEnumCgroupModeV2          LinuxNodeConfigCgroupModeEnum = "CGROUP_MODE_V2"
+)
+
+// LinuxNodeConfig
+// Parameters that can be configured on Linux nodes.
 type LinuxNodeConfig struct {
-	Sysctls map[string]string `json:"sysctls,omitempty"`
+	CgroupMode *LinuxNodeConfigCgroupModeEnum `json:"cgroupMode,omitempty"`
+	Sysctls    map[string]string              `json:"sysctls,omitempty"`
 }

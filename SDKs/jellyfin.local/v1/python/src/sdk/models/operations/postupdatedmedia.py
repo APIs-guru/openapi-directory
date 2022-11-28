@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
@@ -12,17 +15,17 @@ class PostUpdatedMediaRequests:
 
 @dataclass
 class PostUpdatedMediaSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class PostUpdatedMediaRequest:
-    request: PostUpdatedMediaRequests = field(default=None)
-    security: PostUpdatedMediaSecurity = field(default=None)
+    request: PostUpdatedMediaRequests = field()
+    security: PostUpdatedMediaSecurity = field()
     
 
 @dataclass
 class PostUpdatedMediaResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

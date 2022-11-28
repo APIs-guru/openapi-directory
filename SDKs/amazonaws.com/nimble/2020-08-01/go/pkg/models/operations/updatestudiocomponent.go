@@ -20,6 +20,8 @@ type UpdateStudioComponentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateStudioComponentRequestBodyConfiguration
+// The configuration of the studio component, based on component type.
 type UpdateStudioComponentRequestBodyConfiguration struct {
 	ActiveDirectoryConfiguration  *shared.ActiveDirectoryConfiguration  `json:"activeDirectoryConfiguration,omitempty"`
 	ComputeFarmConfiguration      *shared.ComputeFarmConfiguration      `json:"computeFarmConfiguration,omitempty"`

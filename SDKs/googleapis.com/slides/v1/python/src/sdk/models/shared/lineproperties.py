@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import lineconnection
-from . import linefill
-from . import link
-from . import lineconnection
-from . import dimension
+from sdk import utils
+from . import *
 
 class LinePropertiesDashStyleEnum(str, Enum):
     DASH_STYLE_UNSPECIFIED = "DASH_STYLE_UNSPECIFIED"
@@ -46,12 +44,16 @@ class LinePropertiesStartArrowEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LineProperties:
-    dash_style: Optional[LinePropertiesDashStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dashStyle' }})
-    end_arrow: Optional[LinePropertiesEndArrowEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endArrow' }})
-    end_connection: Optional[lineconnection.LineConnection] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endConnection' }})
-    line_fill: Optional[linefill.LineFill] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineFill' }})
-    link: Optional[link.Link] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    start_arrow: Optional[LinePropertiesStartArrowEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startArrow' }})
-    start_connection: Optional[lineconnection.LineConnection] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startConnection' }})
-    weight: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weight' }})
+    r"""LineProperties
+    The properties of the Line. When unset, these fields default to values that match the appearance of new lines created in the Slides editor.
+    """
+    
+    dash_style: Optional[LinePropertiesDashStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dashStyle') }})
+    end_arrow: Optional[LinePropertiesEndArrowEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endArrow') }})
+    end_connection: Optional[LineConnection] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endConnection') }})
+    line_fill: Optional[LineFill] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineFill') }})
+    link: Optional[Link] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    start_arrow: Optional[LinePropertiesStartArrowEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startArrow') }})
+    start_connection: Optional[LineConnection] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startConnection') }})
+    weight: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weight') }})
     

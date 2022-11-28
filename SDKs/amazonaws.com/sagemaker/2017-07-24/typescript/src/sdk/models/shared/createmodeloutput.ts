@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateModelOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ModelArn" })
   modelArn: string;
 }

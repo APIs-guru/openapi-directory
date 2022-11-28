@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedCommitstatuses
+// A paginated list of commit status objects.
 type PaginatedCommitstatuses struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

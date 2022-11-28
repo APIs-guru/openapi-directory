@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetModifyTrafficMirrorFilterRuleActionEnum {
     ModifyTrafficMirrorFilterRule = "ModifyTrafficMirrorFilterRule"
@@ -11,16 +12,16 @@ export enum GetModifyTrafficMirrorFilterRuleActionEnum {
  * Information about the Traffic Mirror filter rule port range.
 **/
 export class GetModifyTrafficMirrorFilterRuleDestinationPortRange extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=FromPort" })
+  @SpeakeasyMetadata({ data: "queryParam, name=FromPort" })
   fromPort?: number;
 
-  @Metadata({ data: "queryParam, name=ToPort" })
+  @SpeakeasyMetadata({ data: "queryParam, name=ToPort" })
   toPort?: number;
 }
 
 export enum GetModifyTrafficMirrorFilterRuleRuleActionEnum {
-    Accept = "accept"
-,    Reject = "reject"
+    Accept = "accept",
+    Reject = "reject"
 }
 
 
@@ -29,16 +30,16 @@ export enum GetModifyTrafficMirrorFilterRuleRuleActionEnum {
  * Information about the Traffic Mirror filter rule port range.
 **/
 export class GetModifyTrafficMirrorFilterRuleSourcePortRange extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=FromPort" })
+  @SpeakeasyMetadata({ data: "queryParam, name=FromPort" })
   fromPort?: number;
 
-  @Metadata({ data: "queryParam, name=ToPort" })
+  @SpeakeasyMetadata({ data: "queryParam, name=ToPort" })
   toPort?: number;
 }
 
 export enum GetModifyTrafficMirrorFilterRuleTrafficDirectionEnum {
-    Ingress = "ingress"
-,    Egress = "egress"
+    Ingress = "ingress",
+    Egress = "egress"
 }
 
 export enum GetModifyTrafficMirrorFilterRuleVersionEnum {
@@ -47,90 +48,90 @@ export enum GetModifyTrafficMirrorFilterRuleVersionEnum {
 
 
 export class GetModifyTrafficMirrorFilterRuleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyTrafficMirrorFilterRuleActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" })
   destinationCidrBlock?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DestinationPortRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationPortRange" })
   destinationPortRange?: GetModifyTrafficMirrorFilterRuleDestinationPortRange;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Protocol" })
   protocol?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RemoveField" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RemoveField" })
   removeField?: shared.TrafficMirrorFilterRuleFieldEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RuleAction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleAction" })
   ruleAction?: GetModifyTrafficMirrorFilterRuleRuleActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" })
   ruleNumber?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SourceCidrBlock" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceCidrBlock" })
   sourceCidrBlock?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SourcePortRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourcePortRange" })
   sourcePortRange?: GetModifyTrafficMirrorFilterRuleSourcePortRange;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TrafficDirection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TrafficDirection" })
   trafficDirection?: GetModifyTrafficMirrorFilterRuleTrafficDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TrafficMirrorFilterRuleId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TrafficMirrorFilterRuleId" })
   trafficMirrorFilterRuleId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyTrafficMirrorFilterRuleVersionEnum;
 }
 
 
 export class GetModifyTrafficMirrorFilterRuleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyTrafficMirrorFilterRuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyTrafficMirrorFilterRuleQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyTrafficMirrorFilterRuleHeaders;
 }
 
 
 export class GetModifyTrafficMirrorFilterRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

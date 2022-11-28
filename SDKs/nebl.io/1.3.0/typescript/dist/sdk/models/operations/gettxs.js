@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTxsQueryParams = /** @class */ (function (_super) {
     __extends(GetTxsQueryParams, _super);
@@ -30,15 +30,15 @@ var GetTxsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=address" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=address" }),
         __metadata("design:type", String)
     ], GetTxsQueryParams.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=block" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=block" }),
         __metadata("design:type", String)
     ], GetTxsQueryParams.prototype, "block", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageNum" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageNum" }),
         __metadata("design:type", Number)
     ], GetTxsQueryParams.prototype, "pageNum", void 0);
     return GetTxsQueryParams;
@@ -50,7 +50,7 @@ var GetTxsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTxsQueryParams)
     ], GetTxsRequest.prototype, "queryParams", void 0);
     return GetTxsRequest;
@@ -62,15 +62,15 @@ var GetTxsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTxsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTxsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetTxsResponse)
     ], GetTxsResponse.prototype, "getTxsResponse", void 0);
     return GetTxsResponse;

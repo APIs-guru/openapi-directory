@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PlayPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
   sessionId: string;
 }
 
 
 export class PlayQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=itemIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemIds" })
   itemIds: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=playCommand" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=playCommand" })
   playCommand: shared.PlayCommandEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startPositionTicks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startPositionTicks" })
   startPositionTicks?: number;
 }
 
 
 export class PlaySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class PlayRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PlayPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PlayQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PlaySecurity;
 }
 
 
 export class PlayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

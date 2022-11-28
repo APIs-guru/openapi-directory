@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var PostApiV1DonationsCreateFundingSourceEnum;
 (function (PostApiV1DonationsCreateFundingSourceEnum) {
@@ -35,19 +35,19 @@ var PostApiV1DonationsCreateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=amount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amount" }),
         __metadata("design:type", String)
     ], PostApiV1DonationsCreateQueryParams.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=funding_source" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=funding_source" }),
         __metadata("design:type", String)
     ], PostApiV1DonationsCreateQueryParams.prototype, "fundingSource", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nonprofit_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nonprofit_id" }),
         __metadata("design:type", String)
     ], PostApiV1DonationsCreateQueryParams.prototype, "nonprofitId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=zip_code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip_code" }),
         __metadata("design:type", String)
     ], PostApiV1DonationsCreateQueryParams.prototype, "zipCode", void 0);
     return PostApiV1DonationsCreateQueryParams;
@@ -59,7 +59,7 @@ var PostApiV1DonationsCreateSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], PostApiV1DonationsCreateSecurity.prototype, "basicAuth", void 0);
     return PostApiV1DonationsCreateSecurity;
@@ -71,11 +71,11 @@ var PostApiV1DonationsCreateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostApiV1DonationsCreateQueryParams)
     ], PostApiV1DonationsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostApiV1DonationsCreateSecurity)
     ], PostApiV1DonationsCreateRequest.prototype, "security", void 0);
     return PostApiV1DonationsCreateRequest;
@@ -87,11 +87,11 @@ var PostApiV1DonationsCreateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostApiV1DonationsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostApiV1DonationsCreateResponse.prototype, "statusCode", void 0);
     return PostApiV1DonationsCreateResponse;

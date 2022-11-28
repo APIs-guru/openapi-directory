@@ -1,30 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Category } from "./category";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Category extends SpeakeasyBase {
-  @Metadata({ data: "json, name=children", elemType: shared.Category })
+  @SpeakeasyMetadata({ data: "json, name=children", elemType: Category })
   children?: Category[];
 
-  @Metadata({ data: "json, name=colour" })
+  @SpeakeasyMetadata({ data: "json, name=colour" })
   colour?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=is_transfer" })
+  @SpeakeasyMetadata({ data: "json, name=is_transfer" })
   isTransfer?: boolean;
 
-  @Metadata({ data: "json, name=parent_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_id" })
   parentId?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: string;
 }

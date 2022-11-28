@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProjectsAddCollaboratorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
   projectId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 export enum ProjectsAddCollaboratorRequestBodyPermissionEnum {
-    Read = "read"
-,    Write = "write"
-,    Admin = "admin"
+    Read = "read",
+    Write = "write",
+    Admin = "admin"
 }
 
 
 export class ProjectsAddCollaboratorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: ProjectsAddCollaboratorRequestBodyPermissionEnum;
 }
 
 
-export class ProjectsAddCollaboratorRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ProjectsAddCollaboratorPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ProjectsAddCollaboratorRequestBody;
-}
-
-
 export class ProjectsAddCollaborator415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ProjectsAddCollaboratorRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ProjectsAddCollaboratorPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ProjectsAddCollaboratorRequestBody;
+}
+
+
 export class ProjectsAddCollaboratorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   projectsAddCollaborator415ApplicationJsonObject?: ProjectsAddCollaborator415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

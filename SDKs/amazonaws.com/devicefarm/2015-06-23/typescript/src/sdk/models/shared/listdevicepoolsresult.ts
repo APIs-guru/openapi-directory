@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevicePool } from "./devicepool";
+
 
 
 // ListDevicePoolsResult
@@ -8,9 +8,9 @@ import { DevicePool } from "./devicepool";
  * Represents the result of a list device pools request.
 **/
 export class ListDevicePoolsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePools", elemType: shared.DevicePool })
+  @SpeakeasyMetadata({ data: "json, name=devicePools", elemType: DevicePool })
   devicePools?: DevicePool[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

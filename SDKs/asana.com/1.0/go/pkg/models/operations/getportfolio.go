@@ -13,13 +13,13 @@ type GetPortfolioQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetPortfolio200ApplicationJSON struct {
+	Data *shared.PortfolioResponse `json:"data,omitempty"`
+}
+
 type GetPortfolioRequest struct {
 	PathParams  GetPortfolioPathParams
 	QueryParams GetPortfolioQueryParams
-}
-
-type GetPortfolio200ApplicationJSON struct {
-	Data *shared.PortfolioResponse `json:"data,omitempty"`
 }
 
 type GetPortfolioResponse struct {

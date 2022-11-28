@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Mutation } from "./mutation";
 import { RequestOptions } from "./requestoptions";
 import { TransactionOptions } from "./transactionoptions";
+
 
 
 // CommitRequest
@@ -10,18 +10,18 @@ import { TransactionOptions } from "./transactionoptions";
  * The request for Commit.
 **/
 export class CommitRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mutations", elemType: shared.Mutation })
+  @SpeakeasyMetadata({ data: "json, name=mutations", elemType: Mutation })
   mutations?: Mutation[];
 
-  @Metadata({ data: "json, name=requestOptions" })
+  @SpeakeasyMetadata({ data: "json, name=requestOptions" })
   requestOptions?: RequestOptions;
 
-  @Metadata({ data: "json, name=returnCommitStats" })
+  @SpeakeasyMetadata({ data: "json, name=returnCommitStats" })
   returnCommitStats?: boolean;
 
-  @Metadata({ data: "json, name=singleUseTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=singleUseTransaction" })
   singleUseTransaction?: TransactionOptions;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 }

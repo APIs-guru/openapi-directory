@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import algorithmvalidationprofile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AlgorithmValidationSpecification:
-    validation_profiles: List[algorithmvalidationprofile.AlgorithmValidationProfile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ValidationProfiles' }})
-    validation_role: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ValidationRole' }})
+    r"""AlgorithmValidationSpecification
+    Specifies configurations for one or more training jobs that Amazon SageMaker runs to test the algorithm.
+    """
+    
+    validation_profiles: List[AlgorithmValidationProfile] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ValidationProfiles') }})
+    validation_role: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ValidationRole') }})
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import terms
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Coupon:
-    redemption_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redemptionCode' }})
-    terms: Optional[terms.Terms] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'terms' }})
+    r"""Coupon
+    The details for the coupon available for the item.
+    """
+    
+    redemption_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('redemptionCode') }})
+    terms: Optional[Terms] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('terms') }})
     

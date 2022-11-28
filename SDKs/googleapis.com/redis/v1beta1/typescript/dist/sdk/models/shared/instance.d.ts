@@ -1,4 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { MaintenancePolicyInput } from "./maintenancepolicy";
+import { MaintenanceScheduleInput } from "./maintenanceschedule";
+import { PersistenceConfigInput } from "./persistenceconfig";
 import { MaintenancePolicy } from "./maintenancepolicy";
 import { MaintenanceSchedule } from "./maintenanceschedule";
 import { NodeInfo } from "./nodeinfo";
@@ -14,17 +17,6 @@ export declare enum InstanceReadReplicasModeEnum {
     ReadReplicasDisabled = "READ_REPLICAS_DISABLED",
     ReadReplicasEnabled = "READ_REPLICAS_ENABLED"
 }
-export declare enum InstanceStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED",
-    Creating = "CREATING",
-    Ready = "READY",
-    Updating = "UPDATING",
-    Deleting = "DELETING",
-    Repairing = "REPAIRING",
-    Maintenance = "MAINTENANCE",
-    Importing = "IMPORTING",
-    FailingOver = "FAILING_OVER"
-}
 export declare enum InstanceSuspensionReasonsEnum {
     SuspensionReasonUnspecified = "SUSPENSION_REASON_UNSPECIFIED",
     CustomerManagedKeyIssue = "CUSTOMER_MANAGED_KEY_ISSUE"
@@ -38,6 +30,46 @@ export declare enum InstanceTransitEncryptionModeEnum {
     TransitEncryptionModeUnspecified = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED",
     ServerAuthentication = "SERVER_AUTHENTICATION",
     Disabled = "DISABLED"
+}
+export declare enum InstanceStateEnum {
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Updating = "UPDATING",
+    Deleting = "DELETING",
+    Repairing = "REPAIRING",
+    Maintenance = "MAINTENANCE",
+    Importing = "IMPORTING",
+    FailingOver = "FAILING_OVER"
+}
+/**
+ * A Memorystore for Redis instance.
+**/
+export declare class InstanceInput extends SpeakeasyBase {
+    alternativeLocationId?: string;
+    authEnabled?: boolean;
+    authorizedNetwork?: string;
+    availableMaintenanceVersions?: string[];
+    connectMode?: InstanceConnectModeEnum;
+    customerManagedKey?: string;
+    displayName?: string;
+    labels?: Map<string, string>;
+    locationId?: string;
+    maintenancePolicy?: MaintenancePolicyInput;
+    maintenanceSchedule?: MaintenanceScheduleInput;
+    maintenanceVersion?: string;
+    memorySizeGb?: number;
+    name?: string;
+    persistenceConfig?: PersistenceConfigInput;
+    readReplicasMode?: InstanceReadReplicasModeEnum;
+    redisConfigs?: Map<string, string>;
+    redisVersion?: string;
+    replicaCount?: number;
+    reservedIpRange?: string;
+    secondaryIpRange?: string;
+    suspensionReasons?: InstanceSuspensionReasonsEnum[];
+    tier?: InstanceTierEnum;
+    transitEncryptionMode?: InstanceTransitEncryptionModeEnum;
 }
 /**
  * A Memorystore for Redis instance.

@@ -1,5 +1,7 @@
 package shared
 
+// S3ConfigCreateRequest
+// Request model for creating a S3 configuration
 type S3ConfigCreateRequest struct {
 	AccessKey   string  `json:"accessKey"`
 	BucketName  *string `json:"bucketName,omitempty"`

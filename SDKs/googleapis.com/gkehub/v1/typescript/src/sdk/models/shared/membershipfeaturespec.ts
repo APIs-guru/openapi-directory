@@ -1,8 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { AnthosVmMembershipSpec } from "./anthosvmmembershipspec";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementMembershipSpec } from "./configmanagementmembershipspec";
-import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
+import { IdentityServiceMembershipSpecInput } from "./identityservicemembershipspec";
 import { ServiceMeshMembershipSpec } from "./servicemeshmembershipspec";
+import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
+
+
+
+// MembershipFeatureSpecInput
+/** 
+ * MembershipFeatureSpec contains configuration information for a single Membership.
+**/
+export class MembershipFeatureSpecInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=configmanagement" })
+  configmanagement?: ConfigManagementMembershipSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=fleetobservability" })
+  fleetobservability?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=identityservice" })
+  identityservice?: IdentityServiceMembershipSpecInput;
+
+  @SpeakeasyMetadata({ data: "json, name=mesh" })
+  mesh?: ServiceMeshMembershipSpec;
+}
 
 
 // MembershipFeatureSpec
@@ -10,15 +30,15 @@ import { ServiceMeshMembershipSpec } from "./servicemeshmembershipspec";
  * MembershipFeatureSpec contains configuration information for a single Membership.
 **/
 export class MembershipFeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anthosvm" })
-  anthosvm?: AnthosVmMembershipSpec;
-
-  @Metadata({ data: "json, name=configmanagement" })
+  @SpeakeasyMetadata({ data: "json, name=configmanagement" })
   configmanagement?: ConfigManagementMembershipSpec;
 
-  @Metadata({ data: "json, name=identityservice" })
+  @SpeakeasyMetadata({ data: "json, name=fleetobservability" })
+  fleetobservability?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=identityservice" })
   identityservice?: IdentityServiceMembershipSpec;
 
-  @Metadata({ data: "json, name=mesh" })
+  @SpeakeasyMetadata({ data: "json, name=mesh" })
   mesh?: ServiceMeshMembershipSpec;
 }

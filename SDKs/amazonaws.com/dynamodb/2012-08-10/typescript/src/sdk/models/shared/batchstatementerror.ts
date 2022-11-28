@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchStatementErrorCodeEnumEnum } from "./batchstatementerrorcodeenumenum";
+
 
 
 // BatchStatementError
@@ -7,9 +8,9 @@ import { BatchStatementErrorCodeEnumEnum } from "./batchstatementerrorcodeenumen
  *  An error associated with a statement in a PartiQL batch that was run. 
 **/
 export class BatchStatementError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: BatchStatementErrorCodeEnumEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GetPipelineDefinitionOutput
+// Contains the output of GetPipelineDefinition.
 type GetPipelineDefinitionOutput struct {
 	ParameterObjects []ParameterObject `json:"parameterObjects,omitempty"`
 	ParameterValues  []ParameterValue  `json:"parameterValues,omitempty"`

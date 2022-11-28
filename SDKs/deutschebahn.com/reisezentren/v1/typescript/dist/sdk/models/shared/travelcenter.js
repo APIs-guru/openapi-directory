@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TravelCenterOpeningTimes
 /**
  * Opening times of the travel center, ordered by week day
@@ -33,31 +33,31 @@ var TravelCenterOpeningTimes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fri" }),
+        SpeakeasyMetadata({ data: "json, name=fri" }),
         __metadata("design:type", Array)
     ], TravelCenterOpeningTimes.prototype, "fri", void 0);
     __decorate([
-        Metadata({ data: "json, name=mon" }),
+        SpeakeasyMetadata({ data: "json, name=mon" }),
         __metadata("design:type", Array)
     ], TravelCenterOpeningTimes.prototype, "mon", void 0);
     __decorate([
-        Metadata({ data: "json, name=sat" }),
+        SpeakeasyMetadata({ data: "json, name=sat" }),
         __metadata("design:type", Array)
     ], TravelCenterOpeningTimes.prototype, "sat", void 0);
     __decorate([
-        Metadata({ data: "json, name=sun" }),
+        SpeakeasyMetadata({ data: "json, name=sun" }),
         __metadata("design:type", Array)
     ], TravelCenterOpeningTimes.prototype, "sun", void 0);
     __decorate([
-        Metadata({ data: "json, name=thu" }),
+        SpeakeasyMetadata({ data: "json, name=thu" }),
         __metadata("design:type", Array)
     ], TravelCenterOpeningTimes.prototype, "thu", void 0);
     __decorate([
-        Metadata({ data: "json, name=tue" }),
+        SpeakeasyMetadata({ data: "json, name=tue" }),
         __metadata("design:type", Array)
     ], TravelCenterOpeningTimes.prototype, "tue", void 0);
     __decorate([
-        Metadata({ data: "json, name=wed" }),
+        SpeakeasyMetadata({ data: "json, name=wed" }),
         __metadata("design:type", Array)
     ], TravelCenterOpeningTimes.prototype, "wed", void 0);
     return TravelCenterOpeningTimes;
@@ -74,39 +74,39 @@ var TravelCenter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], TravelCenter.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], TravelCenter.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], TravelCenter.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lat" }),
+        SpeakeasyMetadata({ data: "json, name=lat" }),
         __metadata("design:type", Number)
     ], TravelCenter.prototype, "lat", void 0);
     __decorate([
-        Metadata({ data: "json, name=lon" }),
+        SpeakeasyMetadata({ data: "json, name=lon" }),
         __metadata("design:type", Number)
     ], TravelCenter.prototype, "lon", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TravelCenter.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=openingTimes" }),
+        SpeakeasyMetadata({ data: "json, name=openingTimes" }),
         __metadata("design:type", TravelCenterOpeningTimes)
     ], TravelCenter.prototype, "openingTimes", void 0);
     __decorate([
-        Metadata({ data: "json, name=postCode" }),
+        SpeakeasyMetadata({ data: "json, name=postCode" }),
         __metadata("design:type", String)
     ], TravelCenter.prototype, "postCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], TravelCenter.prototype, "type", void 0);
     return TravelCenter;

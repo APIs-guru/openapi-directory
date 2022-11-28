@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BatchGetCommitsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitIds" })
+  @SpeakeasyMetadata({ data: "json, name=commitIds" })
   commitIds: string[];
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

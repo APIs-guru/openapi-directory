@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PointInTimeRecoverySpecification
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the settings used to enable point in time recovery.
 **/
 export class PointInTimeRecoverySpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PointInTimeRecoveryEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=PointInTimeRecoveryEnabled" })
   pointInTimeRecoveryEnabled: boolean;
 }

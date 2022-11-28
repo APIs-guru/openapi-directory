@@ -1,24 +1,28 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import analyzerstatus_enum
-from . import statusreason
-from . import type_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AnalyzerSummary:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    last_resource_analyzed: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastResourceAnalyzed' }})
-    last_resource_analyzed_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastResourceAnalyzedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    status: analyzerstatus_enum.AnalyzerStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_reason: Optional[statusreason.StatusReason] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusReason' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: type_enum.TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""AnalyzerSummary
+    Contains information about the analyzer.
+    """
+    
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    status: AnalyzerStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    type: TypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    last_resource_analyzed: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastResourceAnalyzed') }})
+    last_resource_analyzed_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastResourceAnalyzedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status_reason: Optional[StatusReason] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusReason') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

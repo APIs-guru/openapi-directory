@@ -31,7 +31,7 @@ type ContentRegionsCreateSecurity struct {
 type ContentRegionsCreateRequest struct {
 	PathParams  ContentRegionsCreatePathParams
 	QueryParams ContentRegionsCreateQueryParams
-	Request     *shared.Region `request:"mediaType=application/json"`
+	Request     *shared.RegionInput `request:"mediaType=application/json"`
 	Security    ContentRegionsCreateSecurity
 }
 

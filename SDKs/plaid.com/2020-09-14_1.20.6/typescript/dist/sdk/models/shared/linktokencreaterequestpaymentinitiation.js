@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LinkTokenCreateRequestPaymentInitiation
 /**
  * Specifies options for initializing Link for use with the Payment Initiation (Europe) product. This field is required if `payment_initiation` is included in the `products` array.
@@ -33,7 +33,7 @@ var LinkTokenCreateRequestPaymentInitiation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=payment_id" }),
+        SpeakeasyMetadata({ data: "json, name=payment_id" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestPaymentInitiation.prototype, "paymentId", void 0);
     return LinkTokenCreateRequestPaymentInitiation;

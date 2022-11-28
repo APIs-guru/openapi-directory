@@ -1,20 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestDeletedNodeVersionsPathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RequestDeletedNodeVersionsQueryParams:
+    name: str = field(metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
+    type: str = field(metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
-    name: str = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     offset: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
     sort: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
-    type: str = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,15 +28,15 @@ class RequestDeletedNodeVersionsHeaders:
 
 @dataclass
 class RequestDeletedNodeVersionsRequest:
-    path_params: RequestDeletedNodeVersionsPathParams = field(default=None)
-    query_params: RequestDeletedNodeVersionsQueryParams = field(default=None)
-    headers: RequestDeletedNodeVersionsHeaders = field(default=None)
+    headers: RequestDeletedNodeVersionsHeaders = field()
+    path_params: RequestDeletedNodeVersionsPathParams = field()
+    query_params: RequestDeletedNodeVersionsQueryParams = field()
     
 
 @dataclass
 class RequestDeletedNodeVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deleted_node_versions_list: Optional[shared.DeletedNodeVersionsList] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

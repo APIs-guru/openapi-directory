@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // User
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a Drive user.
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=me" })
+  @SpeakeasyMetadata({ data: "json, name=me" })
   me?: boolean;
 
-  @Metadata({ data: "json, name=permissionId" })
+  @SpeakeasyMetadata({ data: "json, name=permissionId" })
   permissionId?: string;
 
-  @Metadata({ data: "json, name=photoLink" })
+  @SpeakeasyMetadata({ data: "json, name=photoLink" })
   photoLink?: string;
 }

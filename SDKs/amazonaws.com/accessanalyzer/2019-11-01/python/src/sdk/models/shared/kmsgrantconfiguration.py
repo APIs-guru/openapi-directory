@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import kmsgrantconstraints
-from . import kmsgrantoperation_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class KmsGrantConfiguration:
-    constraints: Optional[kmsgrantconstraints.KmsGrantConstraints] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'constraints' }})
-    grantee_principal: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'granteePrincipal' }})
-    issuing_account: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issuingAccount' }})
-    operations: List[kmsgrantoperation_enum.KmsGrantOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operations' }})
-    retiring_principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retiringPrincipal' }})
+    r"""KmsGrantConfiguration
+    A proposed grant configuration for a KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a>.
+    """
+    
+    grantee_principal: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('granteePrincipal') }})
+    issuing_account: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('issuingAccount') }})
+    operations: List[KmsGrantOperationEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operations') }})
+    constraints: Optional[KmsGrantConstraints] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('constraints') }})
+    retiring_principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('retiringPrincipal') }})
     

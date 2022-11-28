@@ -1,5 +1,7 @@
 package shared
 
+// AssetModelProperty
+// Contains information about an asset model property.
 type AssetModelProperty struct {
 	DataType     PropertyDataTypeEnum `json:"dataType"`
 	DataTypeSpec *string              `json:"dataTypeSpec,omitempty"`

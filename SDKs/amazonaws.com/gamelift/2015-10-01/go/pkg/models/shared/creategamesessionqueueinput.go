@@ -1,5 +1,7 @@
 package shared
 
+// CreateGameSessionQueueInput
+// Represents the input for a request operation.
 type CreateGameSessionQueueInput struct {
 	CustomEventData       *string                       `json:"CustomEventData,omitempty"`
 	Destinations          []GameSessionQueueDestination `json:"Destinations,omitempty"`

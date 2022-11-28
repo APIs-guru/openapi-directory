@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ExtrasTagsReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ExtrasTagsReadRequest:
-    path_params: ExtrasTagsReadPathParams = field(default=None)
+    path_params: ExtrasTagsReadPathParams = field()
     
 
 @dataclass
 class ExtrasTagsReadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tag: Optional[shared.Tag] = field(default=None)
     

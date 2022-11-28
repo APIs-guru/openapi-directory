@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvVoucherRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=voucher" })
+  @SpeakeasyMetadata({ data: "json, name=voucher" })
   voucher: string;
 }

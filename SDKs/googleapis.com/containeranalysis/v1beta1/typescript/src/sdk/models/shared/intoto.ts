@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ArtifactRule } from "./artifactrule";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactRule } from "./artifactrule";
 import { SigningKey } from "./signingkey";
+
 
 
 // InToto
@@ -10,21 +9,21 @@ import { SigningKey } from "./signingkey";
  * This contains the fields corresponding to the definition of a software supply chain step in an in-toto layout. This information goes into a Grafeas note.
 **/
 export class InToto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expectedCommand" })
+  @SpeakeasyMetadata({ data: "json, name=expectedCommand" })
   expectedCommand?: string[];
 
-  @Metadata({ data: "json, name=expectedMaterials", elemType: shared.ArtifactRule })
+  @SpeakeasyMetadata({ data: "json, name=expectedMaterials", elemType: ArtifactRule })
   expectedMaterials?: ArtifactRule[];
 
-  @Metadata({ data: "json, name=expectedProducts", elemType: shared.ArtifactRule })
+  @SpeakeasyMetadata({ data: "json, name=expectedProducts", elemType: ArtifactRule })
   expectedProducts?: ArtifactRule[];
 
-  @Metadata({ data: "json, name=signingKeys", elemType: shared.SigningKey })
+  @SpeakeasyMetadata({ data: "json, name=signingKeys", elemType: SigningKey })
   signingKeys?: SigningKey[];
 
-  @Metadata({ data: "json, name=stepName" })
+  @SpeakeasyMetadata({ data: "json, name=stepName" })
   stepName?: string;
 
-  @Metadata({ data: "json, name=threshold" })
+  @SpeakeasyMetadata({ data: "json, name=threshold" })
   threshold?: string;
 }

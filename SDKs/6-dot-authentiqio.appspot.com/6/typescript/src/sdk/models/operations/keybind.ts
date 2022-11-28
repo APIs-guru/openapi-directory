@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeyBindPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=PK" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PK" })
   pk: string;
 }
 
 
-export class KeyBindRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: KeyBindPathParams;
-
-  @Metadata({ data: "request, media_type=application/jwt" })
-  request: Uint8Array;
-}
-
-
 export class KeyBind200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class KeyBindRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: KeyBindPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/jwt" })
+  request: Uint8Array;
+}
+
+
 export class KeyBindResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyBind200ApplicationJsonObject?: KeyBind200ApplicationJson;
 }

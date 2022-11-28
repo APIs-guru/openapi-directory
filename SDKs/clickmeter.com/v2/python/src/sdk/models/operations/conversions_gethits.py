@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ConversionsGetHitsPathParams:
-    conversion_id: int = field(default=None, metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
+    conversion_id: int = field(metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
     
 class ConversionsGetHitsFilterEnum(str, Enum):
     SPIDERS = "spiders"
@@ -28,23 +29,23 @@ class ConversionsGetHitsTimeframeEnum(str, Enum):
 
 @dataclass
 class ConversionsGetHitsQueryParams:
+    timeframe: ConversionsGetHitsTimeframeEnum = field(metadata={'query_param': { 'field_name': 'timeframe', 'style': 'form', 'explode': True }})
     filter: Optional[ConversionsGetHitsFilterEnum] = field(default=None, metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
     offset: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
-    timeframe: ConversionsGetHitsTimeframeEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeframe', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ConversionsGetHitsRequest:
-    path_params: ConversionsGetHitsPathParams = field(default=None)
-    query_params: ConversionsGetHitsQueryParams = field(default=None)
+    path_params: ConversionsGetHitsPathParams = field()
+    query_params: ConversionsGetHitsQueryParams = field()
     
 
 @dataclass
 class ConversionsGetHitsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_click_stream_hit_list_page: Optional[shared.APICoreDtoClickStreamHitListPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

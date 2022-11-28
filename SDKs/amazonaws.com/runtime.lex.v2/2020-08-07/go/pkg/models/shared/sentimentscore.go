@@ -1,5 +1,7 @@
 package shared
 
+// SentimentScore
+// The individual sentiment responses for the utterance.
 type SentimentScore struct {
 	Mixed    *float64 `json:"mixed,omitempty"`
 	Negative *float64 `json:"negative,omitempty"`

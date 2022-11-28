@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Comment } from "./comment";
+
 
 
 // CommentThreadSnippet
@@ -7,21 +8,21 @@ import { Comment } from "./comment";
  * Basic details about a comment thread.
 **/
 export class CommentThreadSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canReply" })
+  @SpeakeasyMetadata({ data: "json, name=canReply" })
   canReply?: boolean;
 
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=isPublic" })
+  @SpeakeasyMetadata({ data: "json, name=isPublic" })
   isPublic?: boolean;
 
-  @Metadata({ data: "json, name=topLevelComment" })
+  @SpeakeasyMetadata({ data: "json, name=topLevelComment" })
   topLevelComment?: Comment;
 
-  @Metadata({ data: "json, name=totalReplyCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalReplyCount" })
   totalReplyCount?: number;
 
-  @Metadata({ data: "json, name=videoId" })
+  @SpeakeasyMetadata({ data: "json, name=videoId" })
   videoId?: string;
 }

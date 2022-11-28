@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fundingeventtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FundingEvent:
-    event_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    event_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventId' }})
-    funding_event_type: Optional[fundingeventtype_enum.FundingEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fundingEventType' }})
-    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principal' }})
+    event_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    event_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventId') }})
+    funding_event_type: Optional[FundingEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fundingEventType') }})
+    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principal') }})
     

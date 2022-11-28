@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryPlan } from "./queryplan";
+
 
 
 // ResultSetStats
@@ -7,15 +8,15 @@ import { QueryPlan } from "./queryplan";
  * Additional statistics about a ResultSet or PartialResultSet.
 **/
 export class ResultSetStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryPlan" })
+  @SpeakeasyMetadata({ data: "json, name=queryPlan" })
   queryPlan?: QueryPlan;
 
-  @Metadata({ data: "json, name=queryStats" })
+  @SpeakeasyMetadata({ data: "json, name=queryStats" })
   queryStats?: Map<string, any>;
 
-  @Metadata({ data: "json, name=rowCountExact" })
+  @SpeakeasyMetadata({ data: "json, name=rowCountExact" })
   rowCountExact?: string;
 
-  @Metadata({ data: "json, name=rowCountLowerBound" })
+  @SpeakeasyMetadata({ data: "json, name=rowCountLowerBound" })
   rowCountLowerBound?: string;
 }

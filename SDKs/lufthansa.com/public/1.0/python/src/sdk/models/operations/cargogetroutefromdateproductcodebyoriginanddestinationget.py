@@ -1,5 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum(str, Enum):
     FAN = "FAN"
@@ -23,32 +28,32 @@ class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum(s
 
 @dataclass
 class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams:
-    destination: str = field(default=None, metadata={'path_param': { 'field_name': 'destination', 'style': 'simple', 'explode': False }})
-    from_date: str = field(default=None, metadata={'path_param': { 'field_name': 'fromDate', 'style': 'simple', 'explode': False }})
-    origin: str = field(default=None, metadata={'path_param': { 'field_name': 'origin', 'style': 'simple', 'explode': False }})
-    product_code: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum = field(default=None, metadata={'path_param': { 'field_name': 'productCode', 'style': 'simple', 'explode': False }})
+    destination: str = field(metadata={'path_param': { 'field_name': 'destination', 'style': 'simple', 'explode': False }})
+    from_date: str = field(metadata={'path_param': { 'field_name': 'fromDate', 'style': 'simple', 'explode': False }})
+    origin: str = field(metadata={'path_param': { 'field_name': 'origin', 'style': 'simple', 'explode': False }})
+    product_code: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum = field(metadata={'path_param': { 'field_name': 'productCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest:
-    path_params: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams = field(default=None)
-    headers: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders = field(default=None)
-    security: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity = field(default=None)
+    headers: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders = field()
+    path_params: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams = field()
+    security: CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity = field()
     
 
 @dataclass
 class CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     cargo_get_route_from_date_product_code_by_origin_and_destination_get_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

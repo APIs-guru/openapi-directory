@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IterationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=durationMs" })
+  @SpeakeasyMetadata({ data: "json, name=durationMs" })
   durationMs?: string;
 
-  @Metadata({ data: "json, name=evalLoss" })
+  @SpeakeasyMetadata({ data: "json, name=evalLoss" })
   evalLoss?: number;
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=learnRate" })
+  @SpeakeasyMetadata({ data: "json, name=learnRate" })
   learnRate?: number;
 
-  @Metadata({ data: "json, name=trainingLoss" })
+  @SpeakeasyMetadata({ data: "json, name=trainingLoss" })
   trainingLoss?: number;
 }

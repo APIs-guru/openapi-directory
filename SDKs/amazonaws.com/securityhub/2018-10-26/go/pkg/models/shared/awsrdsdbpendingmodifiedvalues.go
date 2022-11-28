@@ -1,5 +1,7 @@
 package shared
 
+// AwsRdsDbPendingModifiedValues
+// Changes to a DB instance that are currently pending.
 type AwsRdsDbPendingModifiedValues struct {
 	AllocatedStorage             *int64                              `json:"AllocatedStorage,omitempty"`
 	BackupRetentionPeriod        *int64                              `json:"BackupRetentionPeriod,omitempty"`

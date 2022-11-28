@@ -1,5 +1,7 @@
 package shared
 
+// BaselineOverride
+// Defines the basic information about a patch baseline override.
 type BaselineOverride struct {
 	ApprovalRules                    *PatchRuleGroup           `json:"ApprovalRules,omitempty"`
 	ApprovedPatches                  []string                  `json:"ApprovedPatches,omitempty"`

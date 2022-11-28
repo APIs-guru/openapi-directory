@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GitConfigOptionsBody } from "./gitconfigoptionsbody";
 import { RepositoryInfoBody } from "./repositoryinfobody";
 
 
+
 export class SeedInfoBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gitConfig" })
+  @SpeakeasyMetadata({ data: "json, name=gitConfig" })
   gitConfig?: GitConfigOptionsBody;
 
-  @Metadata({ data: "json, name=recurseClone" })
+  @SpeakeasyMetadata({ data: "json, name=recurseClone" })
   recurseClone?: boolean;
 
-  @Metadata({ data: "json, name=repository" })
+  @SpeakeasyMetadata({ data: "json, name=repository" })
   repository?: RepositoryInfoBody;
 
-  @Metadata({ data: "json, name=seedMoniker" })
+  @SpeakeasyMetadata({ data: "json, name=seedMoniker" })
   seedMoniker?: string;
 
-  @Metadata({ data: "json, name=seedType" })
+  @SpeakeasyMetadata({ data: "json, name=seedType" })
   seedType?: string;
 }

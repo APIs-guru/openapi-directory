@@ -1,7 +1,8 @@
 
 
+
 export enum MonitoringProblemTypeEnum {
-    BinaryClassification = "BinaryClassification"
-,    MulticlassClassification = "MulticlassClassification"
-,    Regression = "Regression"
+    BinaryClassification = "BinaryClassification",
+    MulticlassClassification = "MulticlassClassification",
+    Regression = "Regression"
 }

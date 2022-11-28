@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import assessmentrunstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AssessmentRunStateChange:
-    state: assessmentrunstate_enum.AssessmentRunStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    state_changed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateChangedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""AssessmentRunStateChange
+    Used as one of the elements of the <a>AssessmentRun</a> data type.
+    """
+    
+    state: AssessmentRunStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    state_changed_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateChangedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

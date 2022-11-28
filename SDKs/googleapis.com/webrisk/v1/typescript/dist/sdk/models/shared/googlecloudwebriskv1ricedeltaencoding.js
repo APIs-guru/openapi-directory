@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudWebriskV1RiceDeltaEncoding
 /**
  * The Rice-Golomb encoded data. Used for sending compressed 4-byte hashes or compressed removal indices.
@@ -33,19 +33,19 @@ var GoogleCloudWebriskV1RiceDeltaEncoding = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=encodedData" }),
+        SpeakeasyMetadata({ data: "json, name=encodedData" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1RiceDeltaEncoding.prototype, "encodedData", void 0);
     __decorate([
-        Metadata({ data: "json, name=entryCount" }),
+        SpeakeasyMetadata({ data: "json, name=entryCount" }),
         __metadata("design:type", Number)
     ], GoogleCloudWebriskV1RiceDeltaEncoding.prototype, "entryCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstValue" }),
+        SpeakeasyMetadata({ data: "json, name=firstValue" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1RiceDeltaEncoding.prototype, "firstValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=riceParameter" }),
+        SpeakeasyMetadata({ data: "json, name=riceParameter" }),
         __metadata("design:type", Number)
     ], GoogleCloudWebriskV1RiceDeltaEncoding.prototype, "riceParameter", void 0);
     return GoogleCloudWebriskV1RiceDeltaEncoding;

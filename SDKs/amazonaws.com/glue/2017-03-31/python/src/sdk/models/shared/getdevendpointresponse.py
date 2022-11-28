@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import devendpoint
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetDevEndpointResponse:
-    dev_endpoint: Optional[devendpoint.DevEndpoint] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DevEndpoint' }})
+    dev_endpoint: Optional[DevEndpoint] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DevEndpoint') }})
     

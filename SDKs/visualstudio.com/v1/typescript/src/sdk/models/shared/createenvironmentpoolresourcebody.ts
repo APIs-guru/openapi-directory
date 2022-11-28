@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrebuildEnvironmentOptions } from "./prebuildenvironmentoptions";
 import { SecretDataBody } from "./secretdatabody";
 
 
+
 export class CreateEnvironmentPoolResourceBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentOptions" })
+  @SpeakeasyMetadata({ data: "json, name=environmentOptions" })
   environmentOptions?: PrebuildEnvironmentOptions;
 
-  @Metadata({ data: "json, name=secrets", elemType: shared.SecretDataBody })
+  @SpeakeasyMetadata({ data: "json, name=secrets", elemType: SecretDataBody })
   secrets?: SecretDataBody[];
 }

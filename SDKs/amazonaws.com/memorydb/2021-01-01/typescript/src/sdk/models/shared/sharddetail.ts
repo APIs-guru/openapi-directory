@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShardConfiguration } from "./shardconfiguration";
+
 
 
 // ShardDetail
@@ -7,15 +8,15 @@ import { ShardConfiguration } from "./shardconfiguration";
  * Provides details of a shard in a snapshot
 **/
 export class ShardDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
   configuration?: ShardConfiguration;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: string;
 
-  @Metadata({ data: "json, name=SnapshotCreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotCreationTime" })
   snapshotCreationTime?: Date;
 }

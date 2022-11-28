@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Backup } from "./backup";
 /**
  * Response message for DataprocMetastore.ListBackups.

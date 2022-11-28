@@ -5,10 +5,6 @@ type GetglobaltimeQueryParams struct {
 	Locale  string `queryParam:"style=form,explode=true,name=locale"`
 }
 
-type GetglobaltimeRequest struct {
-	QueryParams GetglobaltimeQueryParams
-}
-
 type Getglobaltime200ApplicationJSON struct {
 	ClockTime   *string `json:"ClockTime,omitempty"`
 	Code        *string `json:"Code,omitempty"`
@@ -26,6 +22,10 @@ type Getglobaltime200ApplicationJSON struct {
 	Weekday     *string `json:"Weekday,omitempty"`
 	Year        *string `json:"Year,omitempty"`
 	Zone        *string `json:"Zone,omitempty"`
+}
+
+type GetglobaltimeRequest struct {
+	QueryParams GetglobaltimeQueryParams
 }
 
 type GetglobaltimeResponse struct {

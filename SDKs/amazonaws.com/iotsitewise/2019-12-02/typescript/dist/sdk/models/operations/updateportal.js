@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdatePortalPathParams = /** @class */ (function (_super) {
     __extends(UpdatePortalPathParams, _super);
@@ -30,7 +30,7 @@ var UpdatePortalPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=portalId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portalId" }),
         __metadata("design:type", String)
     ], UpdatePortalPathParams.prototype, "portalId", void 0);
     return UpdatePortalPathParams;
@@ -42,31 +42,31 @@ var UpdatePortalHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdatePortalHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdatePortalHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdatePortalHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdatePortalHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdatePortalHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdatePortalHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdatePortalHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdatePortalHeaders;
@@ -82,11 +82,11 @@ var UpdatePortalRequestBodyAlarms = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=alarmRoleArn" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBodyAlarms.prototype, "alarmRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationLambdaArn" }),
+        SpeakeasyMetadata({ data: "json, name=notificationLambdaArn" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBodyAlarms.prototype, "notificationLambdaArn", void 0);
     return UpdatePortalRequestBodyAlarms;
@@ -102,11 +102,11 @@ var UpdatePortalRequestBodyPortalLogoImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=file" }),
+        SpeakeasyMetadata({ data: "json, name=file" }),
         __metadata("design:type", shared.ImageFile)
     ], UpdatePortalRequestBodyPortalLogoImage.prototype, "file", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBodyPortalLogoImage.prototype, "id", void 0);
     return UpdatePortalRequestBodyPortalLogoImage;
@@ -118,35 +118,35 @@ var UpdatePortalRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarms" }),
+        SpeakeasyMetadata({ data: "json, name=alarms" }),
         __metadata("design:type", UpdatePortalRequestBodyAlarms)
     ], UpdatePortalRequestBody.prototype, "alarms", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBody.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationSenderEmail" }),
+        SpeakeasyMetadata({ data: "json, name=notificationSenderEmail" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBody.prototype, "notificationSenderEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalContactEmail" }),
+        SpeakeasyMetadata({ data: "json, name=portalContactEmail" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBody.prototype, "portalContactEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalDescription" }),
+        SpeakeasyMetadata({ data: "json, name=portalDescription" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBody.prototype, "portalDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalLogoImage" }),
+        SpeakeasyMetadata({ data: "json, name=portalLogoImage" }),
         __metadata("design:type", UpdatePortalRequestBodyPortalLogoImage)
     ], UpdatePortalRequestBody.prototype, "portalLogoImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalName" }),
+        SpeakeasyMetadata({ data: "json, name=portalName" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBody.prototype, "portalName", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], UpdatePortalRequestBody.prototype, "roleArn", void 0);
     return UpdatePortalRequestBody;
@@ -158,15 +158,15 @@ var UpdatePortalRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdatePortalPathParams)
     ], UpdatePortalRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdatePortalHeaders)
     ], UpdatePortalRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdatePortalRequestBody)
     ], UpdatePortalRequest.prototype, "request", void 0);
     return UpdatePortalRequest;
@@ -178,35 +178,35 @@ var UpdatePortalResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePortalResponse.prototype, "conflictingOperationException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdatePortalResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePortalResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePortalResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePortalResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdatePortalResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePortalResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdatePortalResponse)
     ], UpdatePortalResponse.prototype, "updatePortalResponse", void 0);
     return UpdatePortalResponse;

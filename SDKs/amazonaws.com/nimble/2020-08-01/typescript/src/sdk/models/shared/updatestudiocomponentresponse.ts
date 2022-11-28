@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StudioComponent } from "./studiocomponent";
 
 
+
 export class UpdateStudioComponentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=studioComponent" })
+  @SpeakeasyMetadata({ data: "json, name=studioComponent" })
   studioComponent?: StudioComponent;
 }

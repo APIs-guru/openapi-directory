@@ -7,6 +7,8 @@ const (
 	OperationStatusEnumDone    OperationStatusEnum = "DONE"
 )
 
+// Operation
+// An operation represents a successful mutation performed on a Cloud DNS resource. Operations provide: - An audit log of server resource mutations. - A way to recover/retry API calls in the case where the response is never received by the caller. Use the caller specified client_operation_id.
 type Operation struct {
 	DNSKeyContext *OperationDNSKeyContext      `json:"dnsKeyContext,omitempty"`
 	ID            *string                      `json:"id,omitempty"`

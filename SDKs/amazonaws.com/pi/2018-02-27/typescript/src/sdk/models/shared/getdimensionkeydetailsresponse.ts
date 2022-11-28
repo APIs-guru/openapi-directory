@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionKeyDetail } from "./dimensionkeydetail";
 
 
+
 export class GetDimensionKeyDetailsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimensions", elemType: shared.DimensionKeyDetail })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions", elemType: DimensionKeyDetail })
   dimensions?: DimensionKeyDetail[];
 }

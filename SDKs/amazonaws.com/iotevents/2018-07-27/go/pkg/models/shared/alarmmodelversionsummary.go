@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AlarmModelVersionSummary
+// Contains a summary of an alarm model version.
 type AlarmModelVersionSummary struct {
 	AlarmModelArn     *string                      `json:"alarmModelArn,omitempty"`
 	AlarmModelName    *string                      `json:"alarmModelName,omitempty"`

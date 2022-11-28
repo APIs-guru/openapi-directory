@@ -10,11 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://www.healthcare.gov",
 ];
 export function WithServerURL(serverURL, params) {
@@ -22,15 +20,15 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
-// SDK Documentation: https://www.healthcare.gov/developers/
+/* SDK Documentation: https://www.healthcare.gov/developers/*/
 var SDK = /** @class */ (function () {
     function SDK() {
         var opts = [];
@@ -38,41 +36,40 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // GetApiArticlesMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetApiArticlesMediaTypeExtension = function (req, config) {
+    /**
+     * getApiArticlesMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getApiArticlesMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetApiArticlesMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/articles{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -80,32 +77,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetApiBlogMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetApiBlogMediaTypeExtension = function (req, config) {
+    /**
+     * getApiBlogMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getApiBlogMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetApiBlogMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/blog{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -113,32 +111,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetApiGlossaryMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetApiGlossaryMediaTypeExtension = function (req, config) {
+    /**
+     * getApiGlossaryMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getApiGlossaryMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetApiGlossaryMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/glossary{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -146,32 +145,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetApiQuestionsMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetApiQuestionsMediaTypeExtension = function (req, config) {
+    /**
+     * getApiQuestionsMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getApiQuestionsMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetApiQuestionsMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/questions{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -179,32 +179,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetApiStatesMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetApiStatesMediaTypeExtension = function (req, config) {
+    /**
+     * getApiStatesMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getApiStatesMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetApiStatesMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/states{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -212,32 +213,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetApiTopicsMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetApiTopicsMediaTypeExtension = function (req, config) {
+    /**
+     * getApiTopicsMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getApiTopicsMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetApiTopicsMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/api/topics{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -245,32 +247,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetBlogPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetBlogPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getBlogPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getBlogPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetBlogPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/blog/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/html")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/html")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -278,32 +281,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetEsBlogPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetEsBlogPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getEsBlogPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getEsBlogPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetEsBlogPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/es/blog/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/html")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/html")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -311,32 +315,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetEsGlossaryPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetEsGlossaryPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getEsGlossaryPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getEsGlossaryPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetEsGlossaryPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/es/glossary/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/html")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/html")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -344,32 +349,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetEsPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetEsPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getEsPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getEsPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetEsPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/es/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/html")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/html")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -377,32 +383,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetEsQuestionPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetEsQuestionPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getEsQuestionPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getEsQuestionPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetEsQuestionPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/es/question/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -410,32 +417,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetEsStateNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetEsStateNameMediaTypeExtension = function (req, config) {
+    /**
+     * getEsStateNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getEsStateNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetEsStateNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/es/{stateName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -443,32 +451,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetGlossaryPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetGlossaryPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getGlossaryPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getGlossaryPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetGlossaryPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/glossary/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/html")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/html")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -476,32 +485,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/html")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/html")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -509,32 +519,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetQuestionPageNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetQuestionPageNameMediaTypeExtension = function (req, config) {
+    /**
+     * getQuestionPageNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getQuestionPageNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetQuestionPageNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/question/{pageName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -542,32 +553,33 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetStateNameMediaTypeExtension - Returns pages content.
-    SDK.prototype.GetStateNameMediaTypeExtension = function (req, config) {
+    /**
+     * getStateNameMediaTypeExtension - Returns pages content.
+    **/
+    SDK.prototype.getStateNameMediaTypeExtension = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetStateNameMediaTypeExtensionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/{stateName}{mediaTypeExtension}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "*/*")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "*/*")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -575,7 +587,7 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;

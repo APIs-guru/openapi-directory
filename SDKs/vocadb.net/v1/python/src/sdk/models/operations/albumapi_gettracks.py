@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AlbumAPIGetTracksPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class AlbumAPIGetTracksFieldsEnum(str, Enum):
     NONE = "None"
@@ -36,14 +37,14 @@ class AlbumAPIGetTracksQueryParams:
 
 @dataclass
 class AlbumAPIGetTracksRequest:
-    path_params: AlbumAPIGetTracksPathParams = field(default=None)
-    query_params: AlbumAPIGetTracksQueryParams = field(default=None)
+    path_params: AlbumAPIGetTracksPathParams = field()
+    query_params: AlbumAPIGetTracksQueryParams = field()
     
 
 @dataclass
 class AlbumAPIGetTracksResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     song_in_album_for_api_contracts: Optional[List[shared.SongInAlbumForAPIContract]] = field(default=None)
-    status_code: int = field(default=None)
     

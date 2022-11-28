@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfig } from "./encryptionconfig";
 
+
 export enum CreateDatabaseRequestDatabaseDialectEnum {
-    DatabaseDialectUnspecified = "DATABASE_DIALECT_UNSPECIFIED"
-,    GoogleStandardSql = "GOOGLE_STANDARD_SQL"
-,    Postgresql = "POSTGRESQL"
+    DatabaseDialectUnspecified = "DATABASE_DIALECT_UNSPECIFIED",
+    GoogleStandardSql = "GOOGLE_STANDARD_SQL",
+    Postgresql = "POSTGRESQL"
 }
 
 
@@ -13,15 +14,15 @@ export enum CreateDatabaseRequestDatabaseDialectEnum {
  * The request for CreateDatabase.
 **/
 export class CreateDatabaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createStatement" })
+  @SpeakeasyMetadata({ data: "json, name=createStatement" })
   createStatement?: string;
 
-  @Metadata({ data: "json, name=databaseDialect" })
+  @SpeakeasyMetadata({ data: "json, name=databaseDialect" })
   databaseDialect?: CreateDatabaseRequestDatabaseDialectEnum;
 
-  @Metadata({ data: "json, name=encryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig" })
   encryptionConfig?: EncryptionConfig;
 
-  @Metadata({ data: "json, name=extraStatements" })
+  @SpeakeasyMetadata({ data: "json, name=extraStatements" })
   extraStatements?: string[];
 }

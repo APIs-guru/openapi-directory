@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurations" })
+  @SpeakeasyMetadata({ data: "json, name=configurations" })
   configurations?: Map<string, string>[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

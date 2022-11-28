@@ -1,5 +1,7 @@
 package shared
 
+// Sales
+// Sales count query response
 type Sales struct {
 	City          *string     `json:"city,omitempty"`
 	Counts        *int64      `json:"counts,omitempty"`

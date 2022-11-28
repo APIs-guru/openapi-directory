@@ -8,6 +8,8 @@ const (
 	GoogleCloudRunV2RevisionTemplateExecutionEnvironmentEnumExecutionEnvironmentGen2        GoogleCloudRunV2RevisionTemplateExecutionEnvironmentEnum = "EXECUTION_ENVIRONMENT_GEN2"
 )
 
+// GoogleCloudRunV2RevisionTemplate
+// RevisionTemplate describes the data a revision should have when created from a template.
 type GoogleCloudRunV2RevisionTemplate struct {
 	Annotations                   map[string]string                                         `json:"annotations,omitempty"`
 	Containers                    []GoogleCloudRunV2Container                               `json:"containers,omitempty"`

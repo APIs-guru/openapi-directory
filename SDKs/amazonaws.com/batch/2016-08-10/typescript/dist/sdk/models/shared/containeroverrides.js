@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { KeyValuePair } from "./keyvaluepair";
+import { ResourceRequirement } from "./resourcerequirement";
 // ContainerOverrides
 /**
  * The overrides that should be sent to a container.
@@ -34,27 +35,27 @@ var ContainerOverrides = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=command" }),
+        SpeakeasyMetadata({ data: "json, name=command" }),
         __metadata("design:type", Array)
     ], ContainerOverrides.prototype, "command", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment", elemType: shared.KeyValuePair }),
+        SpeakeasyMetadata({ data: "json, name=environment", elemType: KeyValuePair }),
         __metadata("design:type", Array)
     ], ContainerOverrides.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceType" }),
+        SpeakeasyMetadata({ data: "json, name=instanceType" }),
         __metadata("design:type", String)
     ], ContainerOverrides.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=memory" }),
+        SpeakeasyMetadata({ data: "json, name=memory" }),
         __metadata("design:type", Number)
     ], ContainerOverrides.prototype, "memory", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement }),
+        SpeakeasyMetadata({ data: "json, name=resourceRequirements", elemType: ResourceRequirement }),
         __metadata("design:type", Array)
     ], ContainerOverrides.prototype, "resourceRequirements", void 0);
     __decorate([
-        Metadata({ data: "json, name=vcpus" }),
+        SpeakeasyMetadata({ data: "json, name=vcpus" }),
         __metadata("design:type", Number)
     ], ContainerOverrides.prototype, "vcpus", void 0);
     return ContainerOverrides;

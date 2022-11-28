@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import virtualgatewaylistenertlsfilecertificate
-from . import virtualgatewaylistenertlssdscertificate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualGatewayClientTLSCertificate:
-    file: Optional[virtualgatewaylistenertlsfilecertificate.VirtualGatewayListenerTLSFileCertificate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'file' }})
-    sds: Optional[virtualgatewaylistenertlssdscertificate.VirtualGatewayListenerTLSSdsCertificate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sds' }})
+    r"""VirtualGatewayClientTLSCertificate
+    An object that represents the virtual gateway's client's Transport Layer Security (TLS) certificate.
+    """
+    
+    file: Optional[VirtualGatewayListenerTLSFileCertificate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('file') }})
+    sds: Optional[VirtualGatewayListenerTLSSdsCertificate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sds') }})
     

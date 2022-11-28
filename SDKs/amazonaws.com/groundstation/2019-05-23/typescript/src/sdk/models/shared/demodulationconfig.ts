@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DemodulationConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the demodulation <code>Config</code>.
 **/
 export class DemodulationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=unvalidatedJSON" })
+  @SpeakeasyMetadata({ data: "json, name=unvalidatedJSON" })
   unvalidatedJson: string;
 }

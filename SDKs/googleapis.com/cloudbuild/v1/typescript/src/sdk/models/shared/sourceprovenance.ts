@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileHashes } from "./filehashes";
 import { RepoSource } from "./reposource";
 import { StorageSource } from "./storagesource";
 import { StorageSourceManifest } from "./storagesourcemanifest";
+
 
 
 // SourceProvenance
@@ -11,15 +11,31 @@ import { StorageSourceManifest } from "./storagesourcemanifest";
  * Provenance of the source. Ways to find the original source, or verify that some source was used for this build.
 **/
 export class SourceProvenance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileHashes", elemType: shared.FileHashes })
+  @SpeakeasyMetadata({ data: "json, name=fileHashes", elemType: FileHashes })
   fileHashes?: Map<string, FileHashes>;
 
-  @Metadata({ data: "json, name=resolvedRepoSource" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedRepoSource" })
   resolvedRepoSource?: RepoSource;
 
-  @Metadata({ data: "json, name=resolvedStorageSource" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedStorageSource" })
   resolvedStorageSource?: StorageSource;
 
-  @Metadata({ data: "json, name=resolvedStorageSourceManifest" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedStorageSourceManifest" })
+  resolvedStorageSourceManifest?: StorageSourceManifest;
+}
+
+
+// SourceProvenanceInput
+/** 
+ * Provenance of the source. Ways to find the original source, or verify that some source was used for this build.
+**/
+export class SourceProvenanceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=resolvedRepoSource" })
+  resolvedRepoSource?: RepoSource;
+
+  @SpeakeasyMetadata({ data: "json, name=resolvedStorageSource" })
+  resolvedStorageSource?: StorageSource;
+
+  @SpeakeasyMetadata({ data: "json, name=resolvedStorageSourceManifest" })
   resolvedStorageSourceManifest?: StorageSourceManifest;
 }

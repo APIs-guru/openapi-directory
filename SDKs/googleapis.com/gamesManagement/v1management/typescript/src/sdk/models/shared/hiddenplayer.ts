@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Player } from "./player";
+
 
 
 // HiddenPlayer
@@ -7,12 +8,12 @@ import { Player } from "./player";
  * The HiddenPlayer resource.
 **/
 export class HiddenPlayer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hiddenTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=hiddenTimeMillis" })
   hiddenTimeMillis?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=player" })
+  @SpeakeasyMetadata({ data: "json, name=player" })
   player?: Player;
 }

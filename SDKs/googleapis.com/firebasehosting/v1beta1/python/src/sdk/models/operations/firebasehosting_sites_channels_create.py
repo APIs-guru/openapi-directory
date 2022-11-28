@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasehostingSitesChannelsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class FirebasehostingSitesChannelsCreateQueryParams:
 
 @dataclass
 class FirebasehostingSitesChannelsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasehostingSitesChannelsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class FirebasehostingSitesChannelsCreateSecurity:
 
 @dataclass
 class FirebasehostingSitesChannelsCreateRequest:
-    path_params: FirebasehostingSitesChannelsCreatePathParams = field(default=None)
-    query_params: FirebasehostingSitesChannelsCreateQueryParams = field(default=None)
-    request: Optional[shared.Channel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasehostingSitesChannelsCreateSecurity = field(default=None)
+    path_params: FirebasehostingSitesChannelsCreatePathParams = field()
+    query_params: FirebasehostingSitesChannelsCreateQueryParams = field()
+    security: FirebasehostingSitesChannelsCreateSecurity = field()
+    request: Optional[shared.ChannelInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class FirebasehostingSitesChannelsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     channel: Optional[shared.Channel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

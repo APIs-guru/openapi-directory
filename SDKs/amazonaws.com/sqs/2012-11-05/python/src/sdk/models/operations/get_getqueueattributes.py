@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetGetQueueAttributesPathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetGetQueueAttributesActionEnum(str, Enum):
     GET_QUEUE_ATTRIBUTES = "GetQueueAttributes"
@@ -17,9 +21,9 @@ class GetGetQueueAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetGetQueueAttributesQueryParams:
-    action: GetGetQueueAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetQueueAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetGetQueueAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     attribute_names: Optional[List[shared.QueueAttributeNameEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'AttributeNames', 'style': 'form', 'explode': True }})
-    version: GetGetQueueAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,14 +39,14 @@ class GetGetQueueAttributesHeaders:
 
 @dataclass
 class GetGetQueueAttributesRequest:
-    path_params: GetGetQueueAttributesPathParams = field(default=None)
-    query_params: GetGetQueueAttributesQueryParams = field(default=None)
-    headers: GetGetQueueAttributesHeaders = field(default=None)
+    headers: GetGetQueueAttributesHeaders = field()
+    path_params: GetGetQueueAttributesPathParams = field()
+    query_params: GetGetQueueAttributesQueryParams = field()
     
 
 @dataclass
 class GetGetQueueAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetReportPerformancePlanningLevelIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=planningLevelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=planningLevelId" })
   planningLevelId: string;
 }
 
 
 export class GetReportPerformancePlanningLevelIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class GetReportPerformancePlanningLevelIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetReportPerformancePlanningLevelIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetReportPerformancePlanningLevelIdHeaders;
 }
 
 
 export class GetReportPerformancePlanningLevelIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

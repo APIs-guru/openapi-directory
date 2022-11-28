@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WafAction } from "./wafaction";
 import { WebAclUpdate } from "./webaclupdate";
 export declare class UpdateWebAclRequest extends SpeakeasyBase {

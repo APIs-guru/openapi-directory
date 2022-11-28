@@ -9,6 +9,8 @@ const (
 	GoogleCloudFunctionsV2betaStateMessageSeverityEnumInfo                GoogleCloudFunctionsV2betaStateMessageSeverityEnum = "INFO"
 )
 
+// GoogleCloudFunctionsV2betaStateMessage
+// Informational messages about the state of the Cloud Function or Operation.
 type GoogleCloudFunctionsV2betaStateMessage struct {
 	Message  *string                                             `json:"message,omitempty"`
 	Severity *GoogleCloudFunctionsV2betaStateMessageSeverityEnum `json:"severity,omitempty"`

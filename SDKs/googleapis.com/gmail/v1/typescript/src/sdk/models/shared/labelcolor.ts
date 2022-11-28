@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LabelColor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundColor" })
   backgroundColor?: string;
 
-  @Metadata({ data: "json, name=textColor" })
+  @SpeakeasyMetadata({ data: "json, name=textColor" })
   textColor?: string;
 }

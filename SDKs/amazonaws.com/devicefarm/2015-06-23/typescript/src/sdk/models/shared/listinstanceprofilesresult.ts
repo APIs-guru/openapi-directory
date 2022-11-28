@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceProfile } from "./instanceprofile";
 
 
+
 export class ListInstanceProfilesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceProfiles", elemType: shared.InstanceProfile })
+  @SpeakeasyMetadata({ data: "json, name=instanceProfiles", elemType: InstanceProfile })
   instanceProfiles?: InstanceProfile[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

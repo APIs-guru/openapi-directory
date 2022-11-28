@@ -22,45 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption1, _super);
-    function PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption1.prototype, "oauth2Legacy", void 0);
-    return PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption1;
-}(SpeakeasyBase));
-export { PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption1 };
-var PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption2, _super);
-    function PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption2.prototype, "hapikey", void 0);
-    return PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption2;
-}(SpeakeasyBase));
-export { PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption2 };
 var PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity = /** @class */ (function (_super) {
     __extends(PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity, _super);
     function PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption1)
-    ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity.prototype, "oauth2Legacy", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurityOption2)
-    ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity.prototype, "hapikey", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity.prototype, "privateAppsLegacy", void 0);
     return PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity;
 }(SpeakeasyBase));
 export { PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity };
@@ -70,11 +50,11 @@ var PostAutomationV4ActionsCallbacksCompleteCompleteBatchRequest = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.BatchInputCallbackCompletionBatchRequest)
     ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAutomationV4ActionsCallbacksCompleteCompleteBatchSecurity)
     ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchRequest.prototype, "security", void 0);
     return PostAutomationV4ActionsCallbacksCompleteCompleteBatchRequest;
@@ -86,15 +66,15 @@ var PostAutomationV4ActionsCallbacksCompleteCompleteBatchResponse = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostAutomationV4ActionsCallbacksCompleteCompleteBatchResponse.prototype, "statusCode", void 0);
     return PostAutomationV4ActionsCallbacksCompleteCompleteBatchResponse;

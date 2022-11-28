@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BooleanCondition } from "./booleancondition";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
-import { Color } from "./color";
-import { ColorStyle } from "./colorstyle";
+
 
 
 // FilterCriteria
@@ -11,21 +10,21 @@ import { ColorStyle } from "./colorstyle";
  * Criteria for showing/hiding rows in a filter or filter view.
 **/
 export class FilterCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: BooleanCondition;
 
-  @Metadata({ data: "json, name=hiddenValues" })
+  @SpeakeasyMetadata({ data: "json, name=hiddenValues" })
   hiddenValues?: string[];
 
-  @Metadata({ data: "json, name=visibleBackgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=visibleBackgroundColor" })
   visibleBackgroundColor?: Color;
 
-  @Metadata({ data: "json, name=visibleBackgroundColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=visibleBackgroundColorStyle" })
   visibleBackgroundColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=visibleForegroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=visibleForegroundColor" })
   visibleForegroundColor?: Color;
 
-  @Metadata({ data: "json, name=visibleForegroundColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=visibleForegroundColorStyle" })
   visibleForegroundColorStyle?: ColorStyle;
 }

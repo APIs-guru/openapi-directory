@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import privatekeycontainer
-from . import privatekeycontainer
-from . import publickeycontainer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateKeyPairRequest:
-    previous_private_key: privatekeycontainer.PrivateKeyContainer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previousPrivateKey' }})
-    private_key_container: privatekeycontainer.PrivateKeyContainer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privateKeyContainer' }})
-    public_key_container: publickeycontainer.PublicKeyContainer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicKeyContainer' }})
+    r"""CreateKeyPairRequest
+    Request model for creating a key pair
+    """
+    
+    previous_private_key: PrivateKeyContainer = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('previousPrivateKey') }})
+    private_key_container: PrivateKeyContainer = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('privateKeyContainer') }})
+    public_key_container: PublicKeyContainer = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicKeyContainer') }})
     

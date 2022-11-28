@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AirbyteStreamConfiguration } from "./airbytestreamconfiguration";
 import { AirbyteStream } from "./airbytestream";
 /**

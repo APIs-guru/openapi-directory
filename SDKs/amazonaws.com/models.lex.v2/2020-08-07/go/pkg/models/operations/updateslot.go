@@ -22,14 +22,20 @@ type UpdateSlotHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSlotRequestBodyMultipleValuesSetting
+// Indicates whether a slot can return multiple values.
 type UpdateSlotRequestBodyMultipleValuesSetting struct {
 	AllowMultipleValues *bool `json:"allowMultipleValues,omitempty"`
 }
 
+// UpdateSlotRequestBodyObfuscationSetting
+// Determines whether Amazon Lex obscures slot values in conversation logs.
 type UpdateSlotRequestBodyObfuscationSetting struct {
 	ObfuscationSettingType *shared.ObfuscationSettingTypeEnum `json:"obfuscationSettingType,omitempty"`
 }
 
+// UpdateSlotRequestBodyValueElicitationSetting
+// Settings that you can use for eliciting a slot value.
 type UpdateSlotRequestBodyValueElicitationSetting struct {
 	DefaultValueSpecification    *shared.SlotDefaultValueSpecification `json:"defaultValueSpecification,omitempty"`
 	PromptSpecification          *shared.PromptSpecification           `json:"promptSpecification,omitempty"`

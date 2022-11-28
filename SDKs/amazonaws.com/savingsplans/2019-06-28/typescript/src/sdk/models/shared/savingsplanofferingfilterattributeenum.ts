@@ -1,6 +1,7 @@
 
 
+
 export enum SavingsPlanOfferingFilterAttributeEnum {
-    Region = "region"
-,    InstanceFamily = "instanceFamily"
+    Region = "region",
+    InstanceFamily = "instanceFamily"
 }

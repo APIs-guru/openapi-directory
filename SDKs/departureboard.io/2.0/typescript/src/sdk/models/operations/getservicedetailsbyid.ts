@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetServiceDetailsByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceID" })
   serviceId: string;
 }
 
 
 export class GetServiceDetailsByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
   apiKey: string;
 }
 
 
 export class GetServiceDetailsByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetServiceDetailsByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetServiceDetailsByIdQueryParams;
 }
 
 
 export class GetServiceDetailsByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

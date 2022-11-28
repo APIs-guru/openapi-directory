@@ -5,14 +5,14 @@ from sdk.models import shared
 
 @dataclass
 class NetworkUnblockRequest:
-    request: shared.NetworkUnblock = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.NetworkUnblock = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class NetworkUnblockResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_throttled: Optional[shared.ErrorThrottled] = field(default=None)
-    status_code: int = field(default=None)
     network_unblock_response_forbidden: Optional[shared.NetworkUnblockResponseForbidden] = field(default=None)
     network_unblock_response_not_found: Optional[shared.NetworkUnblockResponseNotFound] = field(default=None)
     network_unblock_response_ok: Optional[shared.NetworkUnblockResponseOk] = field(default=None)

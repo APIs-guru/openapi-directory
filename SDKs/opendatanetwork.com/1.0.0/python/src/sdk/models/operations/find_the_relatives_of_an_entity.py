@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class FindTheRelativesOfAnEntityRelationEnum(str, Enum):
     PARENT = "parent"
@@ -10,13 +11,13 @@ class FindTheRelativesOfAnEntityRelationEnum(str, Enum):
 
 @dataclass
 class FindTheRelativesOfAnEntityPathParams:
-    relation: FindTheRelativesOfAnEntityRelationEnum = field(default=None, metadata={'path_param': { 'field_name': 'relation', 'style': 'simple', 'explode': False }})
+    relation: FindTheRelativesOfAnEntityRelationEnum = field(metadata={'path_param': { 'field_name': 'relation', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FindTheRelativesOfAnEntityQueryParams:
+    entity_id: str = field(metadata={'query_param': { 'field_name': 'entity_id', 'style': 'form', 'explode': True }})
     app_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'app_token', 'style': 'form', 'explode': True }})
-    entity_id: str = field(default=None, metadata={'query_param': { 'field_name': 'entity_id', 'style': 'form', 'explode': True }})
     limit: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
     variable_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'variable_id', 'style': 'form', 'explode': True }})
     
@@ -28,13 +29,13 @@ class FindTheRelativesOfAnEntityHeaders:
 
 @dataclass
 class FindTheRelativesOfAnEntityRequest:
-    path_params: FindTheRelativesOfAnEntityPathParams = field(default=None)
-    query_params: FindTheRelativesOfAnEntityQueryParams = field(default=None)
-    headers: FindTheRelativesOfAnEntityHeaders = field(default=None)
+    headers: FindTheRelativesOfAnEntityHeaders = field()
+    path_params: FindTheRelativesOfAnEntityPathParams = field()
+    query_params: FindTheRelativesOfAnEntityQueryParams = field()
     
 
 @dataclass
 class FindTheRelativesOfAnEntityResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

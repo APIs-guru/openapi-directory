@@ -1,95 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InvokeEndpointPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EndpointName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EndpointName" })
   endpointName: string;
 }
 
 
 export class InvokeEndpointHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Custom-Attributes" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Custom-Attributes" })
   xAmznSageMakerCustomAttributes?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Inference-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Inference-Id" })
   xAmznSageMakerInferenceId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Target-Container-Hostname" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Target-Container-Hostname" })
   xAmznSageMakerTargetContainerHostname?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Target-Model" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Target-Model" })
   xAmznSageMakerTargetModel?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Target-Variant" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-SageMaker-Target-Variant" })
   xAmznSageMakerTargetVariant?: string;
 }
 
 
 export class InvokeEndpointRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body: string;
 }
 
 
 export class InvokeEndpointRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: InvokeEndpointPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: InvokeEndpointHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: InvokeEndpointRequestBody;
 }
 
 
 export class InvokeEndpointResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailure?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invokeEndpointOutput?: shared.InvokeEndpointOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   modelError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailable?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: any;
 }

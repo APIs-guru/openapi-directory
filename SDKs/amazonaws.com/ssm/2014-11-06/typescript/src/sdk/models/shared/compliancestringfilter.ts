@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceQueryOperatorTypeEnum } from "./compliancequeryoperatortypeenum";
+
 
 
 // ComplianceStringFilter
@@ -7,12 +8,12 @@ import { ComplianceQueryOperatorTypeEnum } from "./compliancequeryoperatortypeen
  * One or more filters. Use a filter to return a more specific list of results.
 **/
 export class ComplianceStringFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ComplianceQueryOperatorTypeEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values?: string[];
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetPictureAlt1PathParams:
-    portraitset_id: float = field(default=None, metadata={'path_param': { 'field_name': 'portraitset_id', 'style': 'simple', 'explode': False }})
+    portraitset_id: float = field(metadata={'path_param': { 'field_name': 'portraitset_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPictureAlt1Request:
-    path_params: GetPictureAlt1PathParams = field(default=None)
+    path_params: GetPictureAlt1PathParams = field()
     
 
 @dataclass
 class GetPictureAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     picture: Optional[shared.Picture] = field(default=None)
     

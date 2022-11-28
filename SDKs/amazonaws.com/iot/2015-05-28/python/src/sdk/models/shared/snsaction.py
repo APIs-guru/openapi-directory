@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import messageformat_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SnsAction:
-    message_format: Optional[messageformat_enum.MessageFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messageFormat' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    target_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetArn' }})
+    r"""SnsAction
+    Describes an action to publish to an Amazon SNS topic.
+    """
+    
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    target_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetArn') }})
+    message_format: Optional[MessageFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messageFormat') }})
     

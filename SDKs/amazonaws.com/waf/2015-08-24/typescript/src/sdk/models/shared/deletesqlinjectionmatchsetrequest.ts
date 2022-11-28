@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteSqlInjectionMatchSetRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to delete a <a>SqlInjectionMatchSet</a> from AWS WAF.
 **/
 export class DeleteSqlInjectionMatchSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=SqlInjectionMatchSetId" })
+  @SpeakeasyMetadata({ data: "json, name=SqlInjectionMatchSetId" })
   sqlInjectionMatchSetId: string;
 }

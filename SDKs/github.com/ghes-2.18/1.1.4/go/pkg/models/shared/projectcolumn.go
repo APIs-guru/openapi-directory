@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProjectColumn
+// Project columns contain cards of work.
 type ProjectColumn struct {
 	CardsURL   string    `json:"cards_url"`
 	CreatedAt  time.Time `json:"created_at"`

@@ -1,5 +1,7 @@
 package shared
 
+// TargetingValueCreativeSize
+// Next Id: 7
 type TargetingValueCreativeSize struct {
 	AllowedFormats   []string             `json:"allowedFormats,omitempty"`
 	CompanionSizes   []TargetingValueSize `json:"companionSizes,omitempty"`

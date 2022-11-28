@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdatePlacementPathParams:
-    placement_name: str = field(default=None, metadata={'path_param': { 'field_name': 'placementName', 'style': 'simple', 'explode': False }})
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    placement_name: str = field(metadata={'path_param': { 'field_name': 'placementName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,23 +27,23 @@ class UpdatePlacementHeaders:
 @dataclass_json
 @dataclass
 class UpdatePlacementRequestBody:
-    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributes') }})
     
 
 @dataclass
 class UpdatePlacementRequest:
-    path_params: UpdatePlacementPathParams = field(default=None)
-    headers: UpdatePlacementHeaders = field(default=None)
-    request: UpdatePlacementRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdatePlacementHeaders = field()
+    path_params: UpdatePlacementPathParams = field()
+    request: UpdatePlacementRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdatePlacementResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_placement_response: Optional[dict[str, Any]] = field(default=None)
     

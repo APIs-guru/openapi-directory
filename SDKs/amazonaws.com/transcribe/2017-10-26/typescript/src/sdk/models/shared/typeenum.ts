@@ -1,6 +1,7 @@
 
 
+
 export enum TypeEnum {
-    Conversation = "CONVERSATION"
-,    Dictation = "DICTATION"
+    Conversation = "CONVERSATION",
+    Dictation = "DICTATION"
 }

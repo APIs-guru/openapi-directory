@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValueOperatorEnum } from "./dimensionvalueoperatorenum";
+
 
 
 // MetricDimension
@@ -7,9 +8,9 @@ import { DimensionValueOperatorEnum } from "./dimensionvalueoperatorenum";
  * The dimension of a metric.
 **/
 export class MetricDimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionName" })
   dimensionName: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: DimensionValueOperatorEnum;
 }

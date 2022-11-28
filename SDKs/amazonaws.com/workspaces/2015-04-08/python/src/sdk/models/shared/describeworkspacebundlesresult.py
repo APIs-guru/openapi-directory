@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import workspacebundle
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeWorkspaceBundlesResult:
-    bundles: Optional[List[workspacebundle.WorkspaceBundle]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Bundles' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    bundles: Optional[List[WorkspaceBundle]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Bundles') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

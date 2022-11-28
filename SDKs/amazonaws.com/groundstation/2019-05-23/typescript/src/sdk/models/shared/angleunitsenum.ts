@@ -1,6 +1,7 @@
 
 
+
 export enum AngleUnitsEnum {
-    DegreeAngle = "DEGREE_ANGLE"
-,    Radian = "RADIAN"
+    DegreeAngle = "DEGREE_ANGLE",
+    Radian = "RADIAN"
 }

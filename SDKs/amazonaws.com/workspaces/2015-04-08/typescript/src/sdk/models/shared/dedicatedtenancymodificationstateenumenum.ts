@@ -1,7 +1,8 @@
 
 
+
 export enum DedicatedTenancyModificationStateEnumEnum {
-    Pending = "PENDING"
-,    Completed = "COMPLETED"
-,    Failed = "FAILED"
+    Pending = "PENDING",
+    Completed = "COMPLETED",
+    Failed = "FAILED"
 }

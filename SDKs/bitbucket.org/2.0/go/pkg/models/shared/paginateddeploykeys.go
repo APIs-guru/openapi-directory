@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedDeployKeys
+// A paginated list of deploy keys.
 type PaginatedDeployKeys struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

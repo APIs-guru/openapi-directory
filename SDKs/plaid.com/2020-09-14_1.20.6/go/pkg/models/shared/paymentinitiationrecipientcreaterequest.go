@@ -1,5 +1,7 @@
 package shared
 
+// PaymentInitiationRecipientCreateRequest
+// PaymentInitiationRecipientCreateRequest defines the request schema for `/payment_initiation/recipient/create`
 type PaymentInitiationRecipientCreateRequest struct {
 	Address  map[string]interface{} `json:"address,omitempty"`
 	Bacs     map[string]interface{} `json:"bacs,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageTagPredictionModel } from "./imagetagpredictionmodel";
 /**
  * result of an image prediction request

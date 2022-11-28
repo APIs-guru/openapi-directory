@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeSafetyNetTokenPathParams:
-    app: str = field(default=None, metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
+    app: str = field(metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebaseappcheckProjectsAppsExchangeSafetyNetTokenQueryParams:
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeSafetyNetTokenSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeSafetyNetTokenSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebaseappcheckProjectsAppsExchangeSafetyNetTokenSecurity:
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeSafetyNetTokenRequest:
-    path_params: FirebaseappcheckProjectsAppsExchangeSafetyNetTokenPathParams = field(default=None)
-    query_params: FirebaseappcheckProjectsAppsExchangeSafetyNetTokenQueryParams = field(default=None)
+    path_params: FirebaseappcheckProjectsAppsExchangeSafetyNetTokenPathParams = field()
+    query_params: FirebaseappcheckProjectsAppsExchangeSafetyNetTokenQueryParams = field()
+    security: FirebaseappcheckProjectsAppsExchangeSafetyNetTokenSecurity = field()
     request: Optional[shared.GoogleFirebaseAppcheckV1ExchangeSafetyNetTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebaseappcheckProjectsAppsExchangeSafetyNetTokenSecurity = field(default=None)
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeSafetyNetTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_firebase_appcheck_v1_app_check_token: Optional[shared.GoogleFirebaseAppcheckV1AppCheckToken] = field(default=None)
-    status_code: int = field(default=None)
     

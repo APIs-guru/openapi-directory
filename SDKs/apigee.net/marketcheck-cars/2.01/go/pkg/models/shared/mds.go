@@ -1,5 +1,7 @@
 package shared
 
+// Mds
+// Describes Market days supply results for year make model trim combination
 type Mds struct {
 	Make                      *string  `json:"make,omitempty"`
 	Mds                       *int64   `json:"mds,omitempty"`

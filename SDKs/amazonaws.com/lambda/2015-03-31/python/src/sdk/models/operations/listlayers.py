@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListLayersCompatibleRuntimeEnum(str, Enum):
@@ -50,16 +54,16 @@ class ListLayersHeaders:
 
 @dataclass
 class ListLayersRequest:
-    query_params: ListLayersQueryParams = field(default=None)
-    headers: ListLayersHeaders = field(default=None)
+    headers: ListLayersHeaders = field()
+    query_params: ListLayersQueryParams = field()
     
 
 @dataclass
 class ListLayersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_layers_response: Optional[shared.ListLayersResponse] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

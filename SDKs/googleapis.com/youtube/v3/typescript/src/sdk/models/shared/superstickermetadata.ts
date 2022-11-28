@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SuperStickerMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=altText" })
+  @SpeakeasyMetadata({ data: "json, name=altText" })
   altText?: string;
 
-  @Metadata({ data: "json, name=altTextLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=altTextLanguage" })
   altTextLanguage?: string;
 
-  @Metadata({ data: "json, name=stickerId" })
+  @SpeakeasyMetadata({ data: "json, name=stickerId" })
   stickerId?: string;
 }

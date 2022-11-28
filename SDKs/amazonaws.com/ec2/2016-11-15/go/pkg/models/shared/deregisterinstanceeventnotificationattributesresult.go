@@ -1,0 +1,5 @@
+package shared
+
+type DeregisterInstanceEventNotificationAttributesResult struct {
+	InstanceTagAttribute *InstanceTagNotificationAttribute
+}

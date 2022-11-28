@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesLineGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=lineIdentifier" })
   lineIdentifier?: string[];
 
-  @Metadata({ data: "json, name=naptanIdReference" })
+  @SpeakeasyMetadata({ data: "json, name=naptanIdReference" })
   naptanIdReference?: string;
 
-  @Metadata({ data: "json, name=stationAtcoCode" })
+  @SpeakeasyMetadata({ data: "json, name=stationAtcoCode" })
   stationAtcoCode?: string;
 }

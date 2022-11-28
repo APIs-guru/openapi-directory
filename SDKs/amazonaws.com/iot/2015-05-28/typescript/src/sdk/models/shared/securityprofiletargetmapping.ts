@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecurityProfileIdentifier } from "./securityprofileidentifier";
 import { SecurityProfileTarget } from "./securityprofiletarget";
+
 
 
 // SecurityProfileTargetMapping
@@ -8,9 +9,9 @@ import { SecurityProfileTarget } from "./securityprofiletarget";
  * Information about a security profile and the target associated with it.
 **/
 export class SecurityProfileTargetMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securityProfileIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileIdentifier" })
   securityProfileIdentifier?: SecurityProfileIdentifier;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: SecurityProfileTarget;
 }

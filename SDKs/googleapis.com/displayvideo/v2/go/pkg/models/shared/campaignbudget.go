@@ -16,6 +16,8 @@ const (
 	CampaignBudgetExternalBudgetSourceEnumExternalBudgetSourceMediaOcean  CampaignBudgetExternalBudgetSourceEnum = "EXTERNAL_BUDGET_SOURCE_MEDIA_OCEAN"
 )
 
+// CampaignBudget
+// Settings that control how the campaign budget is allocated.
 type CampaignBudget struct {
 	BudgetAmountMicros   *string                                 `json:"budgetAmountMicros,omitempty"`
 	BudgetID             *string                                 `json:"budgetId,omitempty"`

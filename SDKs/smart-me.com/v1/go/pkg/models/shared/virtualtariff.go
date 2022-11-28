@@ -8,6 +8,8 @@ const (
 	VirtualTariffTypeEnumNormal  VirtualTariffTypeEnum = "Normal"
 )
 
+// VirtualTariff
+// Container class for the virtual tariffs
 type VirtualTariff struct {
 	Factor *float64               `json:"Factor,omitempty"`
 	ID     *string                `json:"Id,omitempty"`

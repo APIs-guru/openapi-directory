@@ -19,6 +19,8 @@ type CreateTopicRuleHeaders struct {
 	XAmzTagging       *string `header:"style=simple,explode=false,name=x-amz-tagging"`
 }
 
+// CreateTopicRuleRequestBodyTopicRulePayload
+// Describes a rule.
 type CreateTopicRuleRequestBodyTopicRulePayload struct {
 	Actions          []shared.Action `json:"actions,omitempty"`
 	AwsIotSQLVersion *string         `json:"awsIotSqlVersion,omitempty"`

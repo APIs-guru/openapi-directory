@@ -1,17 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import loggercomponent_enum
-from . import loggerlevel_enum
-from . import loggertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Logger:
-    component: loggercomponent_enum.LoggerComponentEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Component' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    level: loggerlevel_enum.LoggerLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Level' }})
-    space: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Space' }})
-    type: loggertype_enum.LoggerTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""Logger
+    Information about a logger
+    """
+    
+    component: LoggerComponentEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Component') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    level: LoggerLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Level') }})
+    type: LoggerTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    space: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Space') }})
     

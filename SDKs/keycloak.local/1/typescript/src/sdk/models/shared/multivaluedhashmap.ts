@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MultivaluedHashMap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=empty" })
+  @SpeakeasyMetadata({ data: "json, name=empty" })
   empty?: boolean;
 
-  @Metadata({ data: "json, name=loadFactor" })
+  @SpeakeasyMetadata({ data: "json, name=loadFactor" })
   loadFactor?: number;
 
-  @Metadata({ data: "json, name=threshold" })
+  @SpeakeasyMetadata({ data: "json, name=threshold" })
   threshold?: number;
 }

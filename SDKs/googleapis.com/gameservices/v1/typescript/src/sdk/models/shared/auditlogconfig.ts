@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AuditLogConfigLogTypeEnum {
-    LogTypeUnspecified = "LOG_TYPE_UNSPECIFIED"
-,    AdminRead = "ADMIN_READ"
-,    DataWrite = "DATA_WRITE"
-,    DataRead = "DATA_READ"
+    LogTypeUnspecified = "LOG_TYPE_UNSPECIFIED",
+    AdminRead = "ADMIN_READ",
+    DataWrite = "DATA_WRITE",
+    DataRead = "DATA_READ"
 }
 
 
@@ -13,12 +14,12 @@ export enum AuditLogConfigLogTypeEnum {
  * Provides the configuration for logging a type of permissions. Example: { "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE" } ] } This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting jose@example.com from DATA_READ logging.
 **/
 export class AuditLogConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exemptedMembers" })
+  @SpeakeasyMetadata({ data: "json, name=exemptedMembers" })
   exemptedMembers?: string[];
 
-  @Metadata({ data: "json, name=ignoreChildExemptions" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreChildExemptions" })
   ignoreChildExemptions?: boolean;
 
-  @Metadata({ data: "json, name=logType" })
+  @SpeakeasyMetadata({ data: "json, name=logType" })
   logType?: AuditLogConfigLogTypeEnum;
 }

@@ -1,0 +1,22 @@
+export var SlackConnectorOperatorEnum;
+(function (SlackConnectorOperatorEnum) {
+    SlackConnectorOperatorEnum["Projection"] = "PROJECTION";
+    SlackConnectorOperatorEnum["LessThan"] = "LESS_THAN";
+    SlackConnectorOperatorEnum["GreaterThan"] = "GREATER_THAN";
+    SlackConnectorOperatorEnum["Between"] = "BETWEEN";
+    SlackConnectorOperatorEnum["LessThanOrEqualTo"] = "LESS_THAN_OR_EQUAL_TO";
+    SlackConnectorOperatorEnum["GreaterThanOrEqualTo"] = "GREATER_THAN_OR_EQUAL_TO";
+    SlackConnectorOperatorEnum["EqualTo"] = "EQUAL_TO";
+    SlackConnectorOperatorEnum["Addition"] = "ADDITION";
+    SlackConnectorOperatorEnum["Multiplication"] = "MULTIPLICATION";
+    SlackConnectorOperatorEnum["Division"] = "DIVISION";
+    SlackConnectorOperatorEnum["Subtraction"] = "SUBTRACTION";
+    SlackConnectorOperatorEnum["MaskAll"] = "MASK_ALL";
+    SlackConnectorOperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    SlackConnectorOperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    SlackConnectorOperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    SlackConnectorOperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    SlackConnectorOperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    SlackConnectorOperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    SlackConnectorOperatorEnum["NoOp"] = "NO_OP";
+})(SlackConnectorOperatorEnum || (SlackConnectorOperatorEnum = {}));

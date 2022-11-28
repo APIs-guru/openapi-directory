@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseCrmEventbusProtoBuganizerNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assigneeEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=assigneeEmailAddress" })
   assigneeEmailAddress?: string;
 
-  @Metadata({ data: "json, name=componentId" })
+  @SpeakeasyMetadata({ data: "json, name=componentId" })
   componentId?: string;
 
-  @Metadata({ data: "json, name=templateId" })
+  @SpeakeasyMetadata({ data: "json, name=templateId" })
   templateId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

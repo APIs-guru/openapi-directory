@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompleteOpenIdLoginQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" })
   code: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id_token" })
   idToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state: string;
 }
 
 
 export class CompleteOpenIdLoginRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CompleteOpenIdLoginQueryParams;
 }
 
 
 export class CompleteOpenIdLoginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   loginResponse?: shared.LoginResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,75 +1,76 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProjectsUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
   projectId: number;
 }
 
 export enum ProjectsUpdateRequestBodyOrganizationPermissionEnum {
-    Read = "read"
-,    Write = "write"
-,    Admin = "admin"
-,    None = "none"
+    Read = "read",
+    Write = "write",
+    Admin = "admin",
+    None = "none"
 }
 
 
 export class ProjectsUpdateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=organization_permission" })
+  @SpeakeasyMetadata({ data: "json, name=organization_permission" })
   organizationPermission?: ProjectsUpdateRequestBodyOrganizationPermissionEnum;
 
-  @Metadata({ data: "json, name=private" })
+  @SpeakeasyMetadata({ data: "json, name=private" })
   private?: boolean;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }
 
 
-export class ProjectsUpdateRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ProjectsUpdatePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ProjectsUpdateRequestBody;
-}
-
-
 export class ProjectsUpdate403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: string[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ProjectsUpdateRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ProjectsUpdatePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ProjectsUpdateRequestBody;
+}
+
+
 export class ProjectsUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   project?: shared.Project;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   projectsUpdate403ApplicationJsonObject?: ProjectsUpdate403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorSimple?: shared.ValidationErrorSimple;
 }

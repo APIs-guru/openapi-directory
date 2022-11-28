@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SubscriptionResponseEventTypeEnum;
 (function (SubscriptionResponseEventTypeEnum) {
     SubscriptionResponseEventTypeEnum["ContactPropertyChange"] = "contact.propertyChange";
@@ -60,27 +60,27 @@ var SubscriptionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=active" }),
+        SpeakeasyMetadata({ data: "json, name=active" }),
         __metadata("design:type", Boolean)
     ], SubscriptionResponse.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], SubscriptionResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventType" }),
+        SpeakeasyMetadata({ data: "json, name=eventType" }),
         __metadata("design:type", String)
     ], SubscriptionResponse.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SubscriptionResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=propertyName" }),
+        SpeakeasyMetadata({ data: "json, name=propertyName" }),
         __metadata("design:type", String)
     ], SubscriptionResponse.prototype, "propertyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], SubscriptionResponse.prototype, "updatedAt", void 0);
     return SubscriptionResponse;

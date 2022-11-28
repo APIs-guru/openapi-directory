@@ -1,111 +1,112 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedRegion } from "./nestedregion";
 import { NestedTenant } from "./nestedtenant";
 
+
 export enum SiteStatusLabelEnum {
-    Active = "Active"
-,    Planned = "Planned"
-,    Retired = "Retired"
+    Active = "Active",
+    Planned = "Planned",
+    Retired = "Retired"
 }
 
 export enum SiteStatusValueEnum {
-    Active = "active"
-,    Planned = "planned"
-,    Retired = "retired"
+    Active = "active",
+    Planned = "planned",
+    Retired = "retired"
 }
 
 
 export class SiteStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: SiteStatusLabelEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: SiteStatusValueEnum;
 }
 
 
 export class Site extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asn" })
+  @SpeakeasyMetadata({ data: "json, name=asn" })
   asn?: number;
 
-  @Metadata({ data: "json, name=circuit_count" })
+  @SpeakeasyMetadata({ data: "json, name=circuit_count" })
   circuitCount?: number;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=contact_email" })
+  @SpeakeasyMetadata({ data: "json, name=contact_email" })
   contactEmail?: string;
 
-  @Metadata({ data: "json, name=contact_name" })
+  @SpeakeasyMetadata({ data: "json, name=contact_name" })
   contactName?: string;
 
-  @Metadata({ data: "json, name=contact_phone" })
+  @SpeakeasyMetadata({ data: "json, name=contact_phone" })
   contactPhone?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=device_count" })
+  @SpeakeasyMetadata({ data: "json, name=device_count" })
   deviceCount?: number;
 
-  @Metadata({ data: "json, name=facility" })
+  @SpeakeasyMetadata({ data: "json, name=facility" })
   facility?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: string;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=physical_address" })
+  @SpeakeasyMetadata({ data: "json, name=physical_address" })
   physicalAddress?: string;
 
-  @Metadata({ data: "json, name=prefix_count" })
+  @SpeakeasyMetadata({ data: "json, name=prefix_count" })
   prefixCount?: number;
 
-  @Metadata({ data: "json, name=rack_count" })
+  @SpeakeasyMetadata({ data: "json, name=rack_count" })
   rackCount?: number;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: NestedRegion;
 
-  @Metadata({ data: "json, name=shipping_address" })
+  @SpeakeasyMetadata({ data: "json, name=shipping_address" })
   shippingAddress?: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SiteStatus;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=tenant" })
+  @SpeakeasyMetadata({ data: "json, name=tenant" })
   tenant?: NestedTenant;
 
-  @Metadata({ data: "json, name=time_zone" })
+  @SpeakeasyMetadata({ data: "json, name=time_zone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=virtualmachine_count" })
+  @SpeakeasyMetadata({ data: "json, name=virtualmachine_count" })
   virtualmachineCount?: number;
 
-  @Metadata({ data: "json, name=vlan_count" })
+  @SpeakeasyMetadata({ data: "json, name=vlan_count" })
   vlanCount?: number;
 }

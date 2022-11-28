@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3experimentresultconfidenceinterval
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowCxV3ExperimentResultMetricCountTypeEnum(str, Enum):
     COUNT_TYPE_UNSPECIFIED = "COUNT_TYPE_UNSPECIFIED"
@@ -21,9 +23,13 @@ class GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3ExperimentResultMetric:
-    confidence_interval: Optional[googleclouddialogflowcxv3experimentresultconfidenceinterval.GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'confidenceInterval' }})
-    count: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    count_type: Optional[GoogleCloudDialogflowCxV3ExperimentResultMetricCountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countType' }})
-    ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ratio' }})
-    type: Optional[GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudDialogflowCxV3ExperimentResultMetric
+    Metric and corresponding confidence intervals.
+    """
+    
+    confidence_interval: Optional[GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('confidenceInterval') }})
+    count: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    count_type: Optional[GoogleCloudDialogflowCxV3ExperimentResultMetricCountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countType') }})
+    ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ratio') }})
+    type: Optional[GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

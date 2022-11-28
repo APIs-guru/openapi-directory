@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Account } from "./account";
 import { Category } from "./category";
 import { CategoryGroup } from "./categorygroup";
@@ -14,55 +13,56 @@ import { SubTransaction } from "./subtransaction";
 import { TransactionSummary } from "./transactionsummary";
 
 
+
 export class BudgetDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts", elemType: shared.Account })
+  @SpeakeasyMetadata({ data: "json, name=accounts", elemType: Account })
   accounts?: Account[];
 
-  @Metadata({ data: "json, name=categories", elemType: shared.Category })
+  @SpeakeasyMetadata({ data: "json, name=categories", elemType: Category })
   categories?: Category[];
 
-  @Metadata({ data: "json, name=category_groups", elemType: shared.CategoryGroup })
+  @SpeakeasyMetadata({ data: "json, name=category_groups", elemType: CategoryGroup })
   categoryGroups?: CategoryGroup[];
 
-  @Metadata({ data: "json, name=currency_format" })
+  @SpeakeasyMetadata({ data: "json, name=currency_format" })
   currencyFormat?: CurrencyFormat;
 
-  @Metadata({ data: "json, name=date_format" })
+  @SpeakeasyMetadata({ data: "json, name=date_format" })
   dateFormat?: DateFormat;
 
-  @Metadata({ data: "json, name=first_month" })
+  @SpeakeasyMetadata({ data: "json, name=first_month" })
   firstMonth?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=last_modified_on" })
+  @SpeakeasyMetadata({ data: "json, name=last_modified_on" })
   lastModifiedOn?: Date;
 
-  @Metadata({ data: "json, name=last_month" })
+  @SpeakeasyMetadata({ data: "json, name=last_month" })
   lastMonth?: Date;
 
-  @Metadata({ data: "json, name=months", elemType: shared.MonthDetail })
+  @SpeakeasyMetadata({ data: "json, name=months", elemType: MonthDetail })
   months?: MonthDetail[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=payee_locations", elemType: shared.PayeeLocation })
+  @SpeakeasyMetadata({ data: "json, name=payee_locations", elemType: PayeeLocation })
   payeeLocations?: PayeeLocation[];
 
-  @Metadata({ data: "json, name=payees", elemType: shared.Payee })
+  @SpeakeasyMetadata({ data: "json, name=payees", elemType: Payee })
   payees?: Payee[];
 
-  @Metadata({ data: "json, name=scheduled_subtransactions", elemType: shared.ScheduledSubTransaction })
+  @SpeakeasyMetadata({ data: "json, name=scheduled_subtransactions", elemType: ScheduledSubTransaction })
   scheduledSubtransactions?: ScheduledSubTransaction[];
 
-  @Metadata({ data: "json, name=scheduled_transactions", elemType: shared.ScheduledTransactionSummary })
+  @SpeakeasyMetadata({ data: "json, name=scheduled_transactions", elemType: ScheduledTransactionSummary })
   scheduledTransactions?: ScheduledTransactionSummary[];
 
-  @Metadata({ data: "json, name=subtransactions", elemType: shared.SubTransaction })
+  @SpeakeasyMetadata({ data: "json, name=subtransactions", elemType: SubTransaction })
   subtransactions?: SubTransaction[];
 
-  @Metadata({ data: "json, name=transactions", elemType: shared.TransactionSummary })
+  @SpeakeasyMetadata({ data: "json, name=transactions", elemType: TransactionSummary })
   transactions?: TransactionSummary[];
 }

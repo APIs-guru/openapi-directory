@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CertificateValidationRecord } from "./certificatevalidationrecord";
 import { CustomDomainAssociationStatusEnum } from "./customdomainassociationstatusenum";
 // CustomDomain
 /**
@@ -35,19 +35,19 @@ var CustomDomain = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CertificateValidationRecords", elemType: shared.CertificateValidationRecord }),
+        SpeakeasyMetadata({ data: "json, name=CertificateValidationRecords", elemType: CertificateValidationRecord }),
         __metadata("design:type", Array)
     ], CustomDomain.prototype, "certificateValidationRecords", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainName" }),
+        SpeakeasyMetadata({ data: "json, name=DomainName" }),
         __metadata("design:type", String)
     ], CustomDomain.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnableWWWSubdomain" }),
+        SpeakeasyMetadata({ data: "json, name=EnableWWWSubdomain" }),
         __metadata("design:type", Boolean)
     ], CustomDomain.prototype, "enableWwwSubdomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], CustomDomain.prototype, "status", void 0);
     return CustomDomain;

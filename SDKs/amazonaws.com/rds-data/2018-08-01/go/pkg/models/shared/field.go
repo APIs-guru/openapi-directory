@@ -1,5 +1,7 @@
 package shared
 
+// Field
+// Contains a value.
 type Field struct {
 	ArrayValue   *ArrayValue `json:"arrayValue,omitempty"`
 	BlobValue    *string     `json:"blobValue,omitempty"`

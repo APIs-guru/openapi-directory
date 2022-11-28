@@ -12,27 +12,19 @@ type CloneVolumeRequestBody struct {
 	Label string `json:"label"`
 }
 
-type CloneVolumeSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CloneVolumeSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CloneVolumeSecurity struct {
-	Option1 *CloneVolumeSecurityOption1 `security:"option"`
-	Option2 *CloneVolumeSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CloneVolumeDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CloneVolumeRequest struct {
 	PathParams CloneVolumePathParams
 	Request    CloneVolumeRequestBody `request:"mediaType=application/json"`
 	Security   CloneVolumeSecurity
-}
-
-type CloneVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CloneVolumeResponse struct {

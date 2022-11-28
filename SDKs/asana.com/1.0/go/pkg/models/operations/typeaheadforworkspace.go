@@ -39,13 +39,15 @@ type TypeaheadForWorkspaceQueryParams struct {
 	Type         *TypeaheadForWorkspaceTypeEnum        `queryParam:"style=form,explode=true,name=type"`
 }
 
+// TypeaheadForWorkspace200ApplicationJSON
+// A generic list of objects, such as those returned by the typeahead search endpoint.
+type TypeaheadForWorkspace200ApplicationJSON struct {
+	Data []shared.AsanaNamedResource `json:"data,omitempty"`
+}
+
 type TypeaheadForWorkspaceRequest struct {
 	PathParams  TypeaheadForWorkspacePathParams
 	QueryParams TypeaheadForWorkspaceQueryParams
-}
-
-type TypeaheadForWorkspace200ApplicationJSON struct {
-	Data []shared.AsanaNamedResource `json:"data,omitempty"`
 }
 
 type TypeaheadForWorkspaceResponse struct {

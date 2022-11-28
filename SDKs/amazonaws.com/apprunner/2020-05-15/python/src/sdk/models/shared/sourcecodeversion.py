@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sourcecodeversiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SourceCodeVersion:
-    type: sourcecodeversiontype_enum.SourceCodeVersionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""SourceCodeVersion
+    Identifies a version of code that AWS App Runner refers to within a source code repository.
+    """
+    
+    type: SourceCodeVersionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

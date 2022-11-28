@@ -1,7 +1,8 @@
 
 
+
 export enum StackSetOperationTypeEnum {
-    Create = "CREATE"
-,    Update = "UPDATE"
-,    Delete = "DELETE"
+    Create = "CREATE",
+    Update = "UPDATE",
+    Delete = "DELETE"
 }

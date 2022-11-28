@@ -1,7 +1,8 @@
 
 
+
 export enum EndpointTypeEnum {
-    Public = "PUBLIC"
-,    Vpc = "VPC"
-,    VpcEndpoint = "VPC_ENDPOINT"
+    Public = "PUBLIC",
+    Vpc = "VPC",
+    VpcEndpoint = "VPC_ENDPOINT"
 }

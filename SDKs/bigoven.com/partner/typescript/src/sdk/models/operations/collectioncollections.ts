@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CollectionCollectionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=test" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=test" })
   test?: string;
 }
 
 
 export class CollectionCollectionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CollectionCollectionsQueryParams;
 }
 
 
 export class CollectionCollectionsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BigOvenModelApi2CollectionInfo })
+  @SpeakeasyMetadata({ elemType: shared.BigOvenModelApi2CollectionInfo })
   bigOvenModelApi2CollectionInfos?: shared.BigOvenModelApi2CollectionInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

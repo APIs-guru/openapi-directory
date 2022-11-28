@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetPutConfigurationSetDeliveryOptionsActionEnum(str, Enum):
@@ -8,6 +12,10 @@ class GetPutConfigurationSetDeliveryOptionsActionEnum(str, Enum):
 
 @dataclass
 class GetPutConfigurationSetDeliveryOptionsDeliveryOptions:
+    r"""GetPutConfigurationSetDeliveryOptionsDeliveryOptions
+    Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS).
+    """
+    
     tls_policy: Optional[shared.TLSPolicyEnum] = field(default=None, metadata={'query_param': { 'field_name': 'TlsPolicy' }})
     
 class GetPutConfigurationSetDeliveryOptionsVersionEnum(str, Enum):
@@ -16,10 +24,10 @@ class GetPutConfigurationSetDeliveryOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetPutConfigurationSetDeliveryOptionsQueryParams:
-    action: GetPutConfigurationSetDeliveryOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    configuration_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
+    action: GetPutConfigurationSetDeliveryOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    configuration_set_name: str = field(metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
+    version: GetPutConfigurationSetDeliveryOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     delivery_options: Optional[GetPutConfigurationSetDeliveryOptionsDeliveryOptions] = field(default=None, metadata={'query_param': { 'field_name': 'DeliveryOptions', 'style': 'form', 'explode': True }})
-    version: GetPutConfigurationSetDeliveryOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +43,13 @@ class GetPutConfigurationSetDeliveryOptionsHeaders:
 
 @dataclass
 class GetPutConfigurationSetDeliveryOptionsRequest:
-    query_params: GetPutConfigurationSetDeliveryOptionsQueryParams = field(default=None)
-    headers: GetPutConfigurationSetDeliveryOptionsHeaders = field(default=None)
+    headers: GetPutConfigurationSetDeliveryOptionsHeaders = field()
+    query_params: GetPutConfigurationSetDeliveryOptionsQueryParams = field()
     
 
 @dataclass
 class GetPutConfigurationSetDeliveryOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

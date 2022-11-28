@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsListPathParams:
-    debuggee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'debuggeeId', 'style': 'simple', 'explode': False }})
+    debuggee_id: str = field(metadata={'path_param': { 'field_name': 'debuggeeId', 'style': 'simple', 'explode': False }})
     
 class ClouddebuggerDebuggerDebuggeesBreakpointsListActionValueEnum(str, Enum):
     CAPTURE = "CAPTURE"
@@ -35,14 +36,14 @@ class ClouddebuggerDebuggerDebuggeesBreakpointsListQueryParams:
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -53,14 +54,14 @@ class ClouddebuggerDebuggerDebuggeesBreakpointsListSecurity:
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsListRequest:
-    path_params: ClouddebuggerDebuggerDebuggeesBreakpointsListPathParams = field(default=None)
-    query_params: ClouddebuggerDebuggerDebuggeesBreakpointsListQueryParams = field(default=None)
-    security: ClouddebuggerDebuggerDebuggeesBreakpointsListSecurity = field(default=None)
+    path_params: ClouddebuggerDebuggerDebuggeesBreakpointsListPathParams = field()
+    query_params: ClouddebuggerDebuggerDebuggeesBreakpointsListQueryParams = field()
+    security: ClouddebuggerDebuggerDebuggeesBreakpointsListSecurity = field()
     
 
 @dataclass
 class ClouddebuggerDebuggerDebuggeesBreakpointsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_breakpoints_response: Optional[shared.ListBreakpointsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

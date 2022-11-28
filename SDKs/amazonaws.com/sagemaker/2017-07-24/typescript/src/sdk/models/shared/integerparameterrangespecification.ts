@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IntegerParameterRangeSpecification
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines the possible values for an integer hyperparameter.
 **/
 export class IntegerParameterRangeSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxValue" })
+  @SpeakeasyMetadata({ data: "json, name=MaxValue" })
   maxValue: string;
 
-  @Metadata({ data: "json, name=MinValue" })
+  @SpeakeasyMetadata({ data: "json, name=MinValue" })
   minValue: string;
 }

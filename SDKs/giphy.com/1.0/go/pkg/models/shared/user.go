@@ -1,5 +1,7 @@
 package shared
 
+// User
+// The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
 type User struct {
 	AvatarURL   *string `json:"avatar_url,omitempty"`
 	BannerURL   *string `json:"banner_url,omitempty"`

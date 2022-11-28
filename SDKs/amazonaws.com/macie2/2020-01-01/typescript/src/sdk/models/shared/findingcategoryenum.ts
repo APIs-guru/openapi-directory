@@ -1,6 +1,7 @@
 
 
+
 export enum FindingCategoryEnum {
-    Classification = "CLASSIFICATION"
-,    Policy = "POLICY"
+    Classification = "CLASSIFICATION",
+    Policy = "POLICY"
 }

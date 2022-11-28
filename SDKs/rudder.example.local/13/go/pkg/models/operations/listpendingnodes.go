@@ -12,16 +12,14 @@ type ListPendingNodesQueryParams struct {
 	Where       []shared.NodeWhere          `queryParam:"serialization=json,name=where"`
 }
 
-type ListPendingNodesRequest struct {
-	QueryParams ListPendingNodesQueryParams
-}
-
 type ListPendingNodes200ApplicationJSONActionEnum string
 
 const (
 	ListPendingNodes200ApplicationJSONActionEnumListPendingNodes ListPendingNodes200ApplicationJSONActionEnum = "listPendingNodes"
 )
 
+// ListPendingNodes200ApplicationJSONData
+// Information about the nodes
 type ListPendingNodes200ApplicationJSONData struct {
 	Nodes []shared.NodeFull `json:"nodes"`
 }
@@ -37,6 +35,10 @@ type ListPendingNodes200ApplicationJSON struct {
 	Action ListPendingNodes200ApplicationJSONActionEnum `json:"action"`
 	Data   ListPendingNodes200ApplicationJSONData       `json:"data"`
 	Result ListPendingNodes200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ListPendingNodesRequest struct {
+	QueryParams ListPendingNodesQueryParams
 }
 
 type ListPendingNodesResponse struct {

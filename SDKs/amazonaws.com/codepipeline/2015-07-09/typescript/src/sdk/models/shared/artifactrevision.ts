@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ArtifactRevision
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents revision details of an artifact. 
 **/
 export class ArtifactRevision extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=revisionChangeIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=revisionChangeIdentifier" })
   revisionChangeIdentifier?: string;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=revisionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=revisionSummary" })
   revisionSummary?: string;
 
-  @Metadata({ data: "json, name=revisionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=revisionUrl" })
   revisionUrl?: string;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ListingRecommendation } from "./listingrecommendation";
 // PagedListingRecommendationCollection
 /**
  * The high-level object used to return a set of Promoted Listings ad recommendations.
@@ -34,31 +34,31 @@ var PagedListingRecommendationCollection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], PagedListingRecommendationCollection.prototype, "href", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], PagedListingRecommendationCollection.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=listingRecommendations", elemType: shared.ListingRecommendation }),
+        SpeakeasyMetadata({ data: "json, name=listingRecommendations", elemType: ListingRecommendation }),
         __metadata("design:type", Array)
     ], PagedListingRecommendationCollection.prototype, "listingRecommendations", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], PagedListingRecommendationCollection.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Number)
     ], PagedListingRecommendationCollection.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=prev" }),
+        SpeakeasyMetadata({ data: "json, name=prev" }),
         __metadata("design:type", String)
     ], PagedListingRecommendationCollection.prototype, "prev", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], PagedListingRecommendationCollection.prototype, "total", void 0);
     return PagedListingRecommendationCollection;

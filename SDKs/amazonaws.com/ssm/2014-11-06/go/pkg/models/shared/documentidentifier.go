@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DocumentIdentifier
+// Describes the name of a SSM document.
 type DocumentIdentifier struct {
 	Author          *string             `json:"Author,omitempty"`
 	CreatedDate     *time.Time          `json:"CreatedDate,omitempty"`

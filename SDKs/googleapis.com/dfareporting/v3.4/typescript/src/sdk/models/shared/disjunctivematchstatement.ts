@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventFilter } from "./eventfilter";
+
 
 
 // DisjunctiveMatchStatement
@@ -8,9 +8,9 @@ import { EventFilter } from "./eventfilter";
  * Represents a Disjunctive Match Statement resource, which is a conjunction (and) of disjunctive (or) boolean statements.
 **/
 export class DisjunctiveMatchStatement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventFilters", elemType: shared.EventFilter })
+  @SpeakeasyMetadata({ data: "json, name=eventFilters", elemType: EventFilter })
   eventFilters?: EventFilter[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

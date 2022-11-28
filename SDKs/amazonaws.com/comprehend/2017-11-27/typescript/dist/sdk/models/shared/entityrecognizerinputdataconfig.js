@@ -22,12 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityRecognizerAnnotations } from "./entityrecognizerannotations";
+import { AugmentedManifestsListItem } from "./augmentedmanifestslistitem";
 import { EntityRecognizerDataFormatEnum } from "./entityrecognizerdataformatenum";
 import { EntityRecognizerDocuments } from "./entityrecognizerdocuments";
 import { EntityRecognizerEntityList } from "./entityrecognizerentitylist";
+import { EntityTypesListItem } from "./entitytypeslistitem";
 // EntityRecognizerInputDataConfig
 /**
  * Specifies the format and location of the input data.
@@ -38,27 +39,27 @@ var EntityRecognizerInputDataConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Annotations" }),
+        SpeakeasyMetadata({ data: "json, name=Annotations" }),
         __metadata("design:type", EntityRecognizerAnnotations)
     ], EntityRecognizerInputDataConfig.prototype, "annotations", void 0);
     __decorate([
-        Metadata({ data: "json, name=AugmentedManifests", elemType: shared.AugmentedManifestsListItem }),
+        SpeakeasyMetadata({ data: "json, name=AugmentedManifests", elemType: AugmentedManifestsListItem }),
         __metadata("design:type", Array)
     ], EntityRecognizerInputDataConfig.prototype, "augmentedManifests", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataFormat" }),
+        SpeakeasyMetadata({ data: "json, name=DataFormat" }),
         __metadata("design:type", String)
     ], EntityRecognizerInputDataConfig.prototype, "dataFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=Documents" }),
+        SpeakeasyMetadata({ data: "json, name=Documents" }),
         __metadata("design:type", EntityRecognizerDocuments)
     ], EntityRecognizerInputDataConfig.prototype, "documents", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityList" }),
+        SpeakeasyMetadata({ data: "json, name=EntityList" }),
         __metadata("design:type", EntityRecognizerEntityList)
     ], EntityRecognizerInputDataConfig.prototype, "entityList", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityTypes", elemType: shared.EntityTypesListItem }),
+        SpeakeasyMetadata({ data: "json, name=EntityTypes", elemType: EntityTypesListItem }),
         __metadata("design:type", Array)
     ], EntityRecognizerInputDataConfig.prototype, "entityTypes", void 0);
     return EntityRecognizerInputDataConfig;

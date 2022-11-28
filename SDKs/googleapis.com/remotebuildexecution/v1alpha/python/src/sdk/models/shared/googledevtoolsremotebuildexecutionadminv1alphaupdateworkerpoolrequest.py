@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googledevtoolsremotebuildexecutionadminv1alphaworkerpool
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest:
-    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateMask' }})
-    worker_pool: Optional[googledevtoolsremotebuildexecutionadminv1alphaworkerpool.GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerPool' }})
+    r"""GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
+    The request used for UpdateWorkerPool.
+    """
+    
+    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateMask') }})
+    worker_pool: Optional[GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerPool') }})
     

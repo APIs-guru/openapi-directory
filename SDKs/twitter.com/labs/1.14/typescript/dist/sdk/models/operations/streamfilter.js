@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StreamFilterQueryParams = /** @class */ (function (_super) {
     __extends(StreamFilterQueryParams, _super);
     function StreamFilterQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=expansions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expansions" }),
         __metadata("design:type", Array)
     ], StreamFilterQueryParams.prototype, "expansions", void 0);
     return StreamFilterQueryParams;
@@ -41,7 +41,7 @@ var StreamFilterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StreamFilterQueryParams)
     ], StreamFilterRequest.prototype, "queryParams", void 0);
     return StreamFilterRequest;
@@ -53,23 +53,23 @@ var StreamFilterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StreamFilterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StreamFilterResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StreamFilterResponse.prototype, "problem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StreamFilterResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], StreamFilterResponse.prototype, "streamFilter200ApplicationJsonObject", void 0);
     return StreamFilterResponse;

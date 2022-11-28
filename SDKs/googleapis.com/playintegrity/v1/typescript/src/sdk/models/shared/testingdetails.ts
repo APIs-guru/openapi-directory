@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TestingDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains additional information generated for testing responses.
 **/
 export class TestingDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isTestingResponse" })
+  @SpeakeasyMetadata({ data: "json, name=isTestingResponse" })
   isTestingResponse?: boolean;
 }

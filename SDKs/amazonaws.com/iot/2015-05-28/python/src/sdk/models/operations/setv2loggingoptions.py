@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -24,22 +29,22 @@ class SetV2LoggingOptionsRequestBodyDefaultLogLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SetV2LoggingOptionsRequestBody:
-    default_log_level: Optional[SetV2LoggingOptionsRequestBodyDefaultLogLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultLogLevel' }})
-    disable_all_logs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableAllLogs' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
+    default_log_level: Optional[SetV2LoggingOptionsRequestBodyDefaultLogLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultLogLevel') }})
+    disable_all_logs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableAllLogs') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
     
 
 @dataclass
 class SetV2LoggingOptionsRequest:
-    headers: SetV2LoggingOptionsHeaders = field(default=None)
-    request: SetV2LoggingOptionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SetV2LoggingOptionsHeaders = field()
+    request: SetV2LoggingOptionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SetV2LoggingOptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

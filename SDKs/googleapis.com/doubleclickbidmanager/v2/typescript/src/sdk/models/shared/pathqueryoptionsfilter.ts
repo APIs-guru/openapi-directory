@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PathQueryOptionsFilterMatchEnum {
-    Unknown = "UNKNOWN"
-,    Exact = "EXACT"
-,    Partial = "PARTIAL"
-,    BeginsWith = "BEGINS_WITH"
-,    WildcardExpression = "WILDCARD_EXPRESSION"
+    Unknown = "UNKNOWN",
+    Exact = "EXACT",
+    Partial = "PARTIAL",
+    BeginsWith = "BEGINS_WITH",
+    WildcardExpression = "WILDCARD_EXPRESSION"
 }
 
 
@@ -14,12 +15,12 @@ export enum PathQueryOptionsFilterMatchEnum {
  * Dimension filter on path events.
 **/
 export class PathQueryOptionsFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match?: PathQueryOptionsFilterMatchEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

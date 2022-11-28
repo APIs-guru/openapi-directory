@@ -8,15 +8,15 @@ type GetContentJSONQueryParams struct {
 	URL string `queryParam:"style=form,explode=true,name=url"`
 }
 
-type GetContentJSONRequest struct {
-	QueryParams GetContentJSONQueryParams
-}
-
 type GetContentJSON200ApplicationJSON struct {
 	Copyright  *string          `json:"copyright,omitempty"`
 	NumResults *int64           `json:"num_results,omitempty"`
 	Results    []shared.Article `json:"results,omitempty"`
 	Status     *string          `json:"status,omitempty"`
+}
+
+type GetContentJSONRequest struct {
+	QueryParams GetContentJSONQueryParams
 }
 
 type GetContentJSONResponse struct {

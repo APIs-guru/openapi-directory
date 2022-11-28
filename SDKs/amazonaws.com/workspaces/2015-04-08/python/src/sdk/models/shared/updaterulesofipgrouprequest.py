@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import ipruleitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateRulesOfIPGroupRequest:
-    group_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupId' }})
-    user_rules: List[ipruleitem.IPRuleItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserRules' }})
+    group_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupId') }})
+    user_rules: List[IPRuleItem] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserRules') }})
     

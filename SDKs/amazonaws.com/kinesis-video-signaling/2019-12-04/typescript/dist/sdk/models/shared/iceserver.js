@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IceServer
 /**
  * A structure for the ICE server connection data.
@@ -33,19 +33,19 @@ var IceServer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], IceServer.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=Ttl" }),
+        SpeakeasyMetadata({ data: "json, name=Ttl" }),
         __metadata("design:type", Number)
     ], IceServer.prototype, "ttl", void 0);
     __decorate([
-        Metadata({ data: "json, name=Uris" }),
+        SpeakeasyMetadata({ data: "json, name=Uris" }),
         __metadata("design:type", Array)
     ], IceServer.prototype, "uris", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], IceServer.prototype, "username", void 0);
     return IceServer;

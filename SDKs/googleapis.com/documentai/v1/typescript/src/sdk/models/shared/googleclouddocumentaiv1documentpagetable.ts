@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1DocumentPageTableTableRow } from "./googleclouddocumentaiv1documentpagetabletablerow";
 import { GoogleCloudDocumentaiV1DocumentPageDetectedLanguage } from "./googleclouddocumentaiv1documentpagedetectedlanguage";
-import { GoogleCloudDocumentaiV1DocumentPageTableTableRow } from "./googleclouddocumentaiv1documentpagetabletablerow";
 import { GoogleCloudDocumentaiV1DocumentPageLayout } from "./googleclouddocumentaiv1documentpagelayout";
+import { GoogleCloudDocumentaiV1DocumentProvenance } from "./googleclouddocumentaiv1documentprovenance";
+
 
 
 // GoogleCloudDocumentaiV1DocumentPageTable
@@ -11,15 +11,18 @@ import { GoogleCloudDocumentaiV1DocumentPageLayout } from "./googleclouddocument
  * A table representation similar to HTML table structure.
 **/
 export class GoogleCloudDocumentaiV1DocumentPageTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bodyRows", elemType: shared.GoogleCloudDocumentaiV1DocumentPageTableTableRow })
+  @SpeakeasyMetadata({ data: "json, name=bodyRows", elemType: GoogleCloudDocumentaiV1DocumentPageTableTableRow })
   bodyRows?: GoogleCloudDocumentaiV1DocumentPageTableTableRow[];
 
-  @Metadata({ data: "json, name=detectedLanguages", elemType: shared.GoogleCloudDocumentaiV1DocumentPageDetectedLanguage })
+  @SpeakeasyMetadata({ data: "json, name=detectedLanguages", elemType: GoogleCloudDocumentaiV1DocumentPageDetectedLanguage })
   detectedLanguages?: GoogleCloudDocumentaiV1DocumentPageDetectedLanguage[];
 
-  @Metadata({ data: "json, name=headerRows", elemType: shared.GoogleCloudDocumentaiV1DocumentPageTableTableRow })
+  @SpeakeasyMetadata({ data: "json, name=headerRows", elemType: GoogleCloudDocumentaiV1DocumentPageTableTableRow })
   headerRows?: GoogleCloudDocumentaiV1DocumentPageTableTableRow[];
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: GoogleCloudDocumentaiV1DocumentPageLayout;
+
+  @SpeakeasyMetadata({ data: "json, name=provenance" })
+  provenance?: GoogleCloudDocumentaiV1DocumentProvenance;
 }

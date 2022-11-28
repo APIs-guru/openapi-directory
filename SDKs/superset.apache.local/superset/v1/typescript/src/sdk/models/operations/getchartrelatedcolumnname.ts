@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChartRelatedColumnNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=column_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=column_name" })
   columnName: string;
 }
 
 
 export class GetChartRelatedColumnNameQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetRelatedSchema;
 }
 
 
 export class GetChartRelatedColumnNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetChartRelatedColumnNameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetChartRelatedColumnNamePathParams;
-
-  @Metadata()
-  queryParams: GetChartRelatedColumnNameQueryParams;
-
-  @Metadata()
-  security: GetChartRelatedColumnNameSecurity;
-}
-
-
 export class GetChartRelatedColumnName400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartRelatedColumnName401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartRelatedColumnName404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartRelatedColumnName500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetChartRelatedColumnNameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetChartRelatedColumnNamePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetChartRelatedColumnNameQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetChartRelatedColumnNameSecurity;
+}
+
+
 export class GetChartRelatedColumnNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartRelatedColumnName400ApplicationJsonObject?: GetChartRelatedColumnName400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartRelatedColumnName401ApplicationJsonObject?: GetChartRelatedColumnName401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartRelatedColumnName404ApplicationJsonObject?: GetChartRelatedColumnName404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartRelatedColumnName500ApplicationJsonObject?: GetChartRelatedColumnName500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   relatedResponseSchema?: shared.RelatedResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SessionMappingDetail } from "./sessionmappingdetail";
 
 
+
 export class GetStudioSessionMappingOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SessionMapping" })
+  @SpeakeasyMetadata({ data: "json, name=SessionMapping" })
   sessionMapping?: SessionMappingDetail;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisableImageDeprecationActionEnum(str, Enum):
     DISABLE_IMAGE_DEPRECATION = "DisableImageDeprecation"
@@ -10,8 +14,8 @@ class PostDisableImageDeprecationVersionEnum(str, Enum):
 
 @dataclass
 class PostDisableImageDeprecationQueryParams:
-    action: PostDisableImageDeprecationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisableImageDeprecationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisableImageDeprecationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisableImageDeprecationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDisableImageDeprecationHeaders:
 
 @dataclass
 class PostDisableImageDeprecationRequest:
-    query_params: PostDisableImageDeprecationQueryParams = field(default=None)
-    headers: PostDisableImageDeprecationHeaders = field(default=None)
+    headers: PostDisableImageDeprecationHeaders = field()
+    query_params: PostDisableImageDeprecationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisableImageDeprecationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

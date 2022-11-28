@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobError } from "./joberror";
 import { JobStatusEnum } from "./jobstatusenum";
+
 
 
 // JobDetails
@@ -8,18 +9,18 @@ import { JobStatusEnum } from "./jobstatusenum";
  * Contains details about the policy generation request.
 **/
 export class JobDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completedOn" })
+  @SpeakeasyMetadata({ data: "json, name=completedOn" })
   completedOn?: Date;
 
-  @Metadata({ data: "json, name=jobError" })
+  @SpeakeasyMetadata({ data: "json, name=jobError" })
   jobError?: JobError;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId: string;
 
-  @Metadata({ data: "json, name=startedOn" })
+  @SpeakeasyMetadata({ data: "json, name=startedOn" })
   startedOn: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: JobStatusEnum;
 }

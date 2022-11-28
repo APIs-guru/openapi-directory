@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoLiveStreamingDetails
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the live streaming metadata.
 **/
 export class VideoLiveStreamingDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeLiveChatId" })
+  @SpeakeasyMetadata({ data: "json, name=activeLiveChatId" })
   activeLiveChatId?: string;
 
-  @Metadata({ data: "json, name=actualEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=actualEndTime" })
   actualEndTime?: Date;
 
-  @Metadata({ data: "json, name=actualStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=actualStartTime" })
   actualStartTime?: Date;
 
-  @Metadata({ data: "json, name=concurrentViewers" })
+  @SpeakeasyMetadata({ data: "json, name=concurrentViewers" })
   concurrentViewers?: string;
 
-  @Metadata({ data: "json, name=scheduledEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledEndTime" })
   scheduledEndTime?: Date;
 
-  @Metadata({ data: "json, name=scheduledStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledStartTime" })
   scheduledStartTime?: Date;
 }

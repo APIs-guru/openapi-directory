@@ -1,6 +1,7 @@
 
 
+
 export enum AvailabilityEnum {
-    All = "all"
-,    Available = "available"
+    All = "all",
+    Available = "available"
 }

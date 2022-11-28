@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryError } from "./repositoryerror";
 
+
 export enum PushItemTypeEnum {
-    Unspecified = "UNSPECIFIED"
-,    Modified = "MODIFIED"
-,    NotModified = "NOT_MODIFIED"
-,    RepositoryError = "REPOSITORY_ERROR"
-,    Requeue = "REQUEUE"
+    Unspecified = "UNSPECIFIED",
+    Modified = "MODIFIED",
+    NotModified = "NOT_MODIFIED",
+    RepositoryError = "REPOSITORY_ERROR",
+    Requeue = "REQUEUE"
 }
 
 
@@ -15,24 +16,24 @@ export enum PushItemTypeEnum {
  * Represents an item to be pushed to the indexing queue.
 **/
 export class PushItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentHash" })
+  @SpeakeasyMetadata({ data: "json, name=contentHash" })
   contentHash?: string;
 
-  @Metadata({ data: "json, name=metadataHash" })
+  @SpeakeasyMetadata({ data: "json, name=metadataHash" })
   metadataHash?: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: string;
 
-  @Metadata({ data: "json, name=queue" })
+  @SpeakeasyMetadata({ data: "json, name=queue" })
   queue?: string;
 
-  @Metadata({ data: "json, name=repositoryError" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryError" })
   repositoryError?: RepositoryError;
 
-  @Metadata({ data: "json, name=structuredDataHash" })
+  @SpeakeasyMetadata({ data: "json, name=structuredDataHash" })
   structuredDataHash?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PushItemTypeEnum;
 }

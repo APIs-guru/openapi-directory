@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareDetails } from "./sharedetails";
 import { ShareStatusEnum } from "./sharestatusenum";
 var DescribePortfolioShareStatusOutput = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var DescribePortfolioShareStatusOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=OrganizationNodeValue" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationNodeValue" }),
         __metadata("design:type", String)
     ], DescribePortfolioShareStatusOutput.prototype, "organizationNodeValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], DescribePortfolioShareStatusOutput.prototype, "portfolioId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioShareToken" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioShareToken" }),
         __metadata("design:type", String)
     ], DescribePortfolioShareStatusOutput.prototype, "portfolioShareToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareDetails" }),
+        SpeakeasyMetadata({ data: "json, name=ShareDetails" }),
         __metadata("design:type", ShareDetails)
     ], DescribePortfolioShareStatusOutput.prototype, "shareDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribePortfolioShareStatusOutput.prototype, "status", void 0);
     return DescribePortfolioShareStatusOutput;

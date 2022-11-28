@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudfunctionsProjectsLocationsOperationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudfunctionsProjectsLocationsOperationsGetQueryParams:
 
 @dataclass
 class CloudfunctionsProjectsLocationsOperationsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudfunctionsProjectsLocationsOperationsGetRequest:
-    path_params: CloudfunctionsProjectsLocationsOperationsGetPathParams = field(default=None)
-    query_params: CloudfunctionsProjectsLocationsOperationsGetQueryParams = field(default=None)
-    security: CloudfunctionsProjectsLocationsOperationsGetSecurity = field(default=None)
+    path_params: CloudfunctionsProjectsLocationsOperationsGetPathParams = field()
+    query_params: CloudfunctionsProjectsLocationsOperationsGetQueryParams = field()
+    security: CloudfunctionsProjectsLocationsOperationsGetSecurity = field()
     
 
 @dataclass
 class CloudfunctionsProjectsLocationsOperationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

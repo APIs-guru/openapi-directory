@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetWordListByPermalinkPathParams = /** @class */ (function (_super) {
     __extends(GetWordListByPermalinkPathParams, _super);
     function GetWordListByPermalinkPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
         __metadata("design:type", String)
     ], GetWordListByPermalinkPathParams.prototype, "permalink", void 0);
     return GetWordListByPermalinkPathParams;
@@ -41,7 +41,7 @@ var GetWordListByPermalinkHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=auth_token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=auth_token" }),
         __metadata("design:type", String)
     ], GetWordListByPermalinkHeaders.prototype, "authToken", void 0);
     return GetWordListByPermalinkHeaders;
@@ -53,11 +53,11 @@ var GetWordListByPermalinkRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWordListByPermalinkPathParams)
     ], GetWordListByPermalinkRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWordListByPermalinkHeaders)
     ], GetWordListByPermalinkRequest.prototype, "headers", void 0);
     return GetWordListByPermalinkRequest;
@@ -69,15 +69,15 @@ var GetWordListByPermalinkResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetWordListByPermalinkResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWordListByPermalinkResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWordListByPermalinkResponse.prototype, "statusCode", void 0);
     return GetWordListByPermalinkResponse;

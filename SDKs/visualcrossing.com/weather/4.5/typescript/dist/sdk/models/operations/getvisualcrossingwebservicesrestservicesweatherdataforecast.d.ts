@@ -1,5 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-export declare const GETVISUALCROSSINGWEBSERVICESRESTSERVICESWEATHERDATAFORECAST_SERVERS: string[];
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare const GetVisualCrossingWebServicesRestServicesWeatherdataForecastServerList: readonly ["https://weather.visualcrossing.com"];
 export declare class GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams extends SpeakeasyBase {
     aggregateHours?: string;
     allowAsynch?: boolean;

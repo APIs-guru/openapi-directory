@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterStateChangeReasonCodeEnum } from "./clusterstatechangereasoncodeenum";
+
 
 
 // ClusterStateChangeReason
@@ -7,9 +8,9 @@ import { ClusterStateChangeReasonCodeEnum } from "./clusterstatechangereasoncode
  * The reason that the cluster changed to its current state.
 **/
 export class ClusterStateChangeReason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: ClusterStateChangeReasonCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

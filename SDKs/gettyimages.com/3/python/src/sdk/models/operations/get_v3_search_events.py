@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -25,13 +26,13 @@ class GetV3SearchEventsHeaders:
 
 @dataclass
 class GetV3SearchEventsRequest:
-    query_params: GetV3SearchEventsQueryParams = field(default=None)
-    headers: GetV3SearchEventsHeaders = field(default=None)
+    headers: GetV3SearchEventsHeaders = field()
+    query_params: GetV3SearchEventsQueryParams = field()
     
 
 @dataclass
 class GetV3SearchEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     events_search_result: Optional[shared.EventsSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

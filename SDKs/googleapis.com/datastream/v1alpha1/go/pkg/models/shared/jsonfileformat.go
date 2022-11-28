@@ -16,6 +16,8 @@ const (
 	JSONFileFormatSchemaFileFormatEnumAvroSchemaFile              JSONFileFormatSchemaFileFormatEnum = "AVRO_SCHEMA_FILE"
 )
 
+// JSONFileFormat
+// JSON file format configuration.
 type JSONFileFormat struct {
 	Compression      *JSONFileFormatCompressionEnum      `json:"compression,omitempty"`
 	SchemaFileFormat *JSONFileFormatSchemaFileFormatEnum `json:"schemaFileFormat,omitempty"`

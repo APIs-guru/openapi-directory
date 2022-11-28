@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CaptureContentTypeHeader
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class CaptureContentTypeHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CsvContentTypes" })
+  @SpeakeasyMetadata({ data: "json, name=CsvContentTypes" })
   csvContentTypes?: string[];
 
-  @Metadata({ data: "json, name=JsonContentTypes" })
+  @SpeakeasyMetadata({ data: "json, name=JsonContentTypes" })
   jsonContentTypes?: string[];
 }

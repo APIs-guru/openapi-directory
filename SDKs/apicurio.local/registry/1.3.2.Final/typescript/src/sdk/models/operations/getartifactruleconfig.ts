@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetArtifactRuleConfigRuleEnum {
-    Validity = "VALIDITY"
-,    Compatibility = "COMPATIBILITY"
+    Validity = "VALIDITY",
+    Compatibility = "COMPATIBILITY"
 }
 
 
 export class GetArtifactRuleConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
   artifactId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=rule" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rule" })
   rule: GetArtifactRuleConfigRuleEnum;
 }
 
 
 export class GetArtifactRuleConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetArtifactRuleConfigPathParams;
 }
 
 
 export class GetArtifactRuleConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rule?: shared.Rule;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

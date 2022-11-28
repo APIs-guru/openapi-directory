@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessqandaLocationsQuestionsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class MybusinessqandaLocationsQuestionsPatchQueryParams:
 
 @dataclass
 class MybusinessqandaLocationsQuestionsPatchRequest:
-    path_params: MybusinessqandaLocationsQuestionsPatchPathParams = field(default=None)
-    query_params: MybusinessqandaLocationsQuestionsPatchQueryParams = field(default=None)
-    request: Optional[shared.Question] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: MybusinessqandaLocationsQuestionsPatchPathParams = field()
+    query_params: MybusinessqandaLocationsQuestionsPatchQueryParams = field()
+    request: Optional[shared.QuestionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessqandaLocationsQuestionsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     question: Optional[shared.Question] = field(default=None)
-    status_code: int = field(default=None)
     

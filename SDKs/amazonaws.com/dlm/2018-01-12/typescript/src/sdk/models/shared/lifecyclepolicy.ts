@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyDetails } from "./policydetails";
 import { GettablePolicyStateValuesEnum } from "./gettablepolicystatevaluesenum";
+
 
 
 // LifecyclePolicy
@@ -8,33 +9,33 @@ import { GettablePolicyStateValuesEnum } from "./gettablepolicystatevaluesenum";
  * Detailed information about a lifecycle policy.
 **/
 export class LifecyclePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=DateCreated" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=DateModified" })
+  @SpeakeasyMetadata({ data: "json, name=DateModified" })
   dateModified?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ExecutionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionRoleArn" })
   executionRoleArn?: string;
 
-  @Metadata({ data: "json, name=PolicyArn" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyArn" })
   policyArn?: string;
 
-  @Metadata({ data: "json, name=PolicyDetails" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyDetails" })
   policyDetails?: PolicyDetails;
 
-  @Metadata({ data: "json, name=PolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyId" })
   policyId?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: GettablePolicyStateValuesEnum;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

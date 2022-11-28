@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CharLengthSemanticsEnum } from "./charlengthsemanticsenum";
+
 
 
 // OracleSettings
@@ -7,123 +8,123 @@ import { CharLengthSemanticsEnum } from "./charlengthsemanticsenum";
  * Provides information that defines an Oracle endpoint.
 **/
 export class OracleSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessAlternateDirectly" })
+  @SpeakeasyMetadata({ data: "json, name=AccessAlternateDirectly" })
   accessAlternateDirectly?: boolean;
 
-  @Metadata({ data: "json, name=AddSupplementalLogging" })
+  @SpeakeasyMetadata({ data: "json, name=AddSupplementalLogging" })
   addSupplementalLogging?: boolean;
 
-  @Metadata({ data: "json, name=AdditionalArchivedLogDestId" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalArchivedLogDestId" })
   additionalArchivedLogDestId?: number;
 
-  @Metadata({ data: "json, name=AllowSelectNestedTables" })
+  @SpeakeasyMetadata({ data: "json, name=AllowSelectNestedTables" })
   allowSelectNestedTables?: boolean;
 
-  @Metadata({ data: "json, name=ArchivedLogDestId" })
+  @SpeakeasyMetadata({ data: "json, name=ArchivedLogDestId" })
   archivedLogDestId?: number;
 
-  @Metadata({ data: "json, name=ArchivedLogsOnly" })
+  @SpeakeasyMetadata({ data: "json, name=ArchivedLogsOnly" })
   archivedLogsOnly?: boolean;
 
-  @Metadata({ data: "json, name=AsmPassword" })
+  @SpeakeasyMetadata({ data: "json, name=AsmPassword" })
   asmPassword?: string;
 
-  @Metadata({ data: "json, name=AsmServer" })
+  @SpeakeasyMetadata({ data: "json, name=AsmServer" })
   asmServer?: string;
 
-  @Metadata({ data: "json, name=AsmUser" })
+  @SpeakeasyMetadata({ data: "json, name=AsmUser" })
   asmUser?: string;
 
-  @Metadata({ data: "json, name=CharLengthSemantics" })
+  @SpeakeasyMetadata({ data: "json, name=CharLengthSemantics" })
   charLengthSemantics?: CharLengthSemanticsEnum;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=DirectPathNoLog" })
+  @SpeakeasyMetadata({ data: "json, name=DirectPathNoLog" })
   directPathNoLog?: boolean;
 
-  @Metadata({ data: "json, name=DirectPathParallelLoad" })
+  @SpeakeasyMetadata({ data: "json, name=DirectPathParallelLoad" })
   directPathParallelLoad?: boolean;
 
-  @Metadata({ data: "json, name=EnableHomogenousTablespace" })
+  @SpeakeasyMetadata({ data: "json, name=EnableHomogenousTablespace" })
   enableHomogenousTablespace?: boolean;
 
-  @Metadata({ data: "json, name=ExtraArchivedLogDestIds" })
+  @SpeakeasyMetadata({ data: "json, name=ExtraArchivedLogDestIds" })
   extraArchivedLogDestIds?: number[];
 
-  @Metadata({ data: "json, name=FailTasksOnLobTruncation" })
+  @SpeakeasyMetadata({ data: "json, name=FailTasksOnLobTruncation" })
   failTasksOnLobTruncation?: boolean;
 
-  @Metadata({ data: "json, name=NumberDatatypeScale" })
+  @SpeakeasyMetadata({ data: "json, name=NumberDatatypeScale" })
   numberDatatypeScale?: number;
 
-  @Metadata({ data: "json, name=OraclePathPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=OraclePathPrefix" })
   oraclePathPrefix?: string;
 
-  @Metadata({ data: "json, name=ParallelAsmReadThreads" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelAsmReadThreads" })
   parallelAsmReadThreads?: number;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=ReadAheadBlocks" })
+  @SpeakeasyMetadata({ data: "json, name=ReadAheadBlocks" })
   readAheadBlocks?: number;
 
-  @Metadata({ data: "json, name=ReadTableSpaceName" })
+  @SpeakeasyMetadata({ data: "json, name=ReadTableSpaceName" })
   readTableSpaceName?: boolean;
 
-  @Metadata({ data: "json, name=ReplacePathPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=ReplacePathPrefix" })
   replacePathPrefix?: boolean;
 
-  @Metadata({ data: "json, name=RetryInterval" })
+  @SpeakeasyMetadata({ data: "json, name=RetryInterval" })
   retryInterval?: number;
 
-  @Metadata({ data: "json, name=SecretsManagerAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" })
   secretsManagerAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerOracleAsmAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerOracleAsmAccessRoleArn" })
   secretsManagerOracleAsmAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerOracleAsmSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerOracleAsmSecretId" })
   secretsManagerOracleAsmSecretId?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" })
   secretsManagerSecretId?: string;
 
-  @Metadata({ data: "json, name=SecurityDbEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityDbEncryption" })
   securityDbEncryption?: string;
 
-  @Metadata({ data: "json, name=SecurityDbEncryptionName" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityDbEncryptionName" })
   securityDbEncryptionName?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=SpatialDataOptionToGeoJsonFunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=SpatialDataOptionToGeoJsonFunctionName" })
   spatialDataOptionToGeoJsonFunctionName?: string;
 
-  @Metadata({ data: "json, name=StandbyDelayTime" })
+  @SpeakeasyMetadata({ data: "json, name=StandbyDelayTime" })
   standbyDelayTime?: number;
 
-  @Metadata({ data: "json, name=UseAlternateFolderForOnline" })
+  @SpeakeasyMetadata({ data: "json, name=UseAlternateFolderForOnline" })
   useAlternateFolderForOnline?: boolean;
 
-  @Metadata({ data: "json, name=UseBFile" })
+  @SpeakeasyMetadata({ data: "json, name=UseBFile" })
   useBFile?: boolean;
 
-  @Metadata({ data: "json, name=UseDirectPathFullLoad" })
+  @SpeakeasyMetadata({ data: "json, name=UseDirectPathFullLoad" })
   useDirectPathFullLoad?: boolean;
 
-  @Metadata({ data: "json, name=UseLogminerReader" })
+  @SpeakeasyMetadata({ data: "json, name=UseLogminerReader" })
   useLogminerReader?: boolean;
 
-  @Metadata({ data: "json, name=UsePathPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=UsePathPrefix" })
   usePathPrefix?: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetModifyTrafficMirrorFilterRuleActionEnum(str, Enum):
@@ -8,6 +12,10 @@ class GetModifyTrafficMirrorFilterRuleActionEnum(str, Enum):
 
 @dataclass
 class GetModifyTrafficMirrorFilterRuleDestinationPortRange:
+    r"""GetModifyTrafficMirrorFilterRuleDestinationPortRange
+    Information about the Traffic Mirror filter rule port range.
+    """
+    
     from_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FromPort' }})
     to_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ToPort' }})
     
@@ -18,6 +26,10 @@ class GetModifyTrafficMirrorFilterRuleRuleActionEnum(str, Enum):
 
 @dataclass
 class GetModifyTrafficMirrorFilterRuleSourcePortRange:
+    r"""GetModifyTrafficMirrorFilterRuleSourcePortRange
+    Information about the Traffic Mirror filter rule port range.
+    """
+    
     from_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FromPort' }})
     to_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ToPort' }})
     
@@ -31,7 +43,9 @@ class GetModifyTrafficMirrorFilterRuleVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyTrafficMirrorFilterRuleQueryParams:
-    action: GetModifyTrafficMirrorFilterRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyTrafficMirrorFilterRuleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    traffic_mirror_filter_rule_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorFilterRuleId', 'style': 'form', 'explode': True }})
+    version: GetModifyTrafficMirrorFilterRuleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     destination_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
     destination_port_range: Optional[GetModifyTrafficMirrorFilterRuleDestinationPortRange] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationPortRange', 'style': 'form', 'explode': True }})
@@ -43,8 +57,6 @@ class GetModifyTrafficMirrorFilterRuleQueryParams:
     source_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceCidrBlock', 'style': 'form', 'explode': True }})
     source_port_range: Optional[GetModifyTrafficMirrorFilterRuleSourcePortRange] = field(default=None, metadata={'query_param': { 'field_name': 'SourcePortRange', 'style': 'form', 'explode': True }})
     traffic_direction: Optional[GetModifyTrafficMirrorFilterRuleTrafficDirectionEnum] = field(default=None, metadata={'query_param': { 'field_name': 'TrafficDirection', 'style': 'form', 'explode': True }})
-    traffic_mirror_filter_rule_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorFilterRuleId', 'style': 'form', 'explode': True }})
-    version: GetModifyTrafficMirrorFilterRuleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -60,13 +72,13 @@ class GetModifyTrafficMirrorFilterRuleHeaders:
 
 @dataclass
 class GetModifyTrafficMirrorFilterRuleRequest:
-    query_params: GetModifyTrafficMirrorFilterRuleQueryParams = field(default=None)
-    headers: GetModifyTrafficMirrorFilterRuleHeaders = field(default=None)
+    headers: GetModifyTrafficMirrorFilterRuleHeaders = field()
+    query_params: GetModifyTrafficMirrorFilterRuleQueryParams = field()
     
 
 @dataclass
 class GetModifyTrafficMirrorFilterRuleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// ImageRecipe
+// An image recipe.
 type ImageRecipe struct {
 	AdditionalInstanceConfiguration *AdditionalInstanceConfiguration `json:"additionalInstanceConfiguration,omitempty"`
 	Arn                             *string                          `json:"arn,omitempty"`

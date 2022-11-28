@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationItemTypeEnum } from "./configurationitemtypeenum";
 // ConfigurationTag
 /**
@@ -34,23 +34,23 @@ var ConfigurationTag = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configurationId" }),
+        SpeakeasyMetadata({ data: "json, name=configurationId" }),
         __metadata("design:type", String)
     ], ConfigurationTag.prototype, "configurationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=configurationType" }),
+        SpeakeasyMetadata({ data: "json, name=configurationType" }),
         __metadata("design:type", String)
     ], ConfigurationTag.prototype, "configurationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], ConfigurationTag.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeOfCreation" }),
+        SpeakeasyMetadata({ data: "json, name=timeOfCreation" }),
         __metadata("design:type", Date)
     ], ConfigurationTag.prototype, "timeOfCreation", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], ConfigurationTag.prototype, "value", void 0);
     return ConfigurationTag;

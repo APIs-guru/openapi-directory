@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNotificationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=all" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" })
   all?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" })
   groupId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=refresh" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=refresh" })
   refresh?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: number;
 }
 
 
 export class GetNotificationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNotificationsQueryParams;
 }
 
 
 export class GetNotificationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Notification })
+  @SpeakeasyMetadata({ elemType: shared.Notification })
   notifications?: shared.Notification[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

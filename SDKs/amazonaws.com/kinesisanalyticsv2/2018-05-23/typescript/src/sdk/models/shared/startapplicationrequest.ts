@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RunConfiguration } from "./runconfiguration";
 
 
+
 export class StartApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=RunConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RunConfiguration" })
   runConfiguration?: RunConfiguration;
 }

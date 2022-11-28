@@ -1,5 +1,7 @@
 package shared
 
+// FederationParameters
+// Configuration information when authentication mode is FEDERATED.
 type FederationParameters struct {
 	ApplicationCallBackURL *string           `json:"applicationCallBackURL,omitempty"`
 	AttributeMap           map[string]string `json:"attributeMap,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ConfigurationTag
+// Tags for a configuration item. Tags are metadata that help you categorize IT assets.
 type ConfigurationTag struct {
 	ConfigurationID   *string                    `json:"configurationId,omitempty"`
 	ConfigurationType *ConfigurationItemTypeEnum `json:"configurationType,omitempty"`

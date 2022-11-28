@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MeshCertificates
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
 **/
 export class MeshCertificates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableCertificates" })
+  @SpeakeasyMetadata({ data: "json, name=enableCertificates" })
   enableCertificates?: boolean;
 }

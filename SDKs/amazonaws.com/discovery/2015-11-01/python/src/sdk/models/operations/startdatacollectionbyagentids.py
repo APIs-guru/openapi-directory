@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class StartDataCollectionByAgentIdsXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class StartDataCollectionByAgentIdsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class StartDataCollectionByAgentIdsHeaders:
+    x_amz_target: StartDataCollectionByAgentIdsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,23 +20,22 @@ class StartDataCollectionByAgentIdsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: StartDataCollectionByAgentIdsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StartDataCollectionByAgentIdsRequest:
-    headers: StartDataCollectionByAgentIdsHeaders = field(default=None)
-    request: shared.StartDataCollectionByAgentIdsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartDataCollectionByAgentIdsHeaders = field()
+    request: shared.StartDataCollectionByAgentIdsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartDataCollectionByAgentIdsResponse:
+    content_type: str = field()
+    status_code: int = field()
     authorization_error_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     home_region_not_set_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     server_internal_error_exception: Optional[Any] = field(default=None)
     start_data_collection_by_agent_ids_response: Optional[shared.StartDataCollectionByAgentIdsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

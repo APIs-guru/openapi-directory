@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteApiV1EnvironmentsEnvironmentIdPortsPortPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=port" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=port" })
   port: number;
 }
 
 
 export class DeleteApiV1EnvironmentsEnvironmentIdPortsPortRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteApiV1EnvironmentsEnvironmentIdPortsPortPathParams;
 }
 
 
 export class DeleteApiV1EnvironmentsEnvironmentIdPortsPortResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageCodes?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

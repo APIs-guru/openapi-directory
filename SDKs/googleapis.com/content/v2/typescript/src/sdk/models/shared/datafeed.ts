@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatafeedFetchSchedule } from "./datafeedfetchschedule";
 import { DatafeedFormat } from "./datafeedformat";
 import { DatafeedTarget } from "./datafeedtarget";
+
 
 
 // Datafeed
@@ -10,39 +10,39 @@ import { DatafeedTarget } from "./datafeedtarget";
  * Datafeed configuration data.
 **/
 export class Datafeed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=attributeLanguage" })
   attributeLanguage?: string;
 
-  @Metadata({ data: "json, name=contentLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=contentLanguage" })
   contentLanguage?: string;
 
-  @Metadata({ data: "json, name=contentType" })
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=fetchSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=fetchSchedule" })
   fetchSchedule?: DatafeedFetchSchedule;
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: DatafeedFormat;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=intendedDestinations" })
+  @SpeakeasyMetadata({ data: "json, name=intendedDestinations" })
   intendedDestinations?: string[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=targetCountry" })
+  @SpeakeasyMetadata({ data: "json, name=targetCountry" })
   targetCountry?: string;
 
-  @Metadata({ data: "json, name=targets", elemType: shared.DatafeedTarget })
+  @SpeakeasyMetadata({ data: "json, name=targets", elemType: DatafeedTarget })
   targets?: DatafeedTarget[];
 }

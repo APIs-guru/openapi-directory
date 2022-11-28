@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveProfileAttributePathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveProfileAttributeHeaders:
 
 @dataclass
 class RemoveProfileAttributeRequest:
-    path_params: RemoveProfileAttributePathParams = field(default=None)
-    headers: RemoveProfileAttributeHeaders = field(default=None)
+    headers: RemoveProfileAttributeHeaders = field()
+    path_params: RemoveProfileAttributePathParams = field()
     
 
 @dataclass
 class RemoveProfileAttributeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

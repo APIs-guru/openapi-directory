@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointDetails } from "./endpointdetails";
 import { EndpointTypeEnum } from "./endpointtypeenum";
 import { IdentityProviderDetails } from "./identityproviderdetails";
@@ -7,37 +7,38 @@ import { ProtocolEnum } from "./protocolenum";
 import { WorkflowDetails } from "./workflowdetails";
 
 
+
 export class UpdateServerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=EndpointDetails" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointDetails" })
   endpointDetails?: EndpointDetails;
 
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: EndpointTypeEnum;
 
-  @Metadata({ data: "json, name=HostKey" })
+  @SpeakeasyMetadata({ data: "json, name=HostKey" })
   hostKey?: string;
 
-  @Metadata({ data: "json, name=IdentityProviderDetails" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderDetails" })
   identityProviderDetails?: IdentityProviderDetails;
 
-  @Metadata({ data: "json, name=LoggingRole" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingRole" })
   loggingRole?: string;
 
-  @Metadata({ data: "json, name=ProtocolDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolDetails" })
   protocolDetails?: ProtocolDetails;
 
-  @Metadata({ data: "json, name=Protocols" })
+  @SpeakeasyMetadata({ data: "json, name=Protocols" })
   protocols?: ProtocolEnum[];
 
-  @Metadata({ data: "json, name=SecurityPolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityPolicyName" })
   securityPolicyName?: string;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId: string;
 
-  @Metadata({ data: "json, name=WorkflowDetails" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowDetails" })
   workflowDetails?: WorkflowDetails;
 }

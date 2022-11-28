@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionInferenceAcceleratorsDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An Elastic Inference accelerator to use for the containers in the task.
 **/
 export class AwsEcsTaskDefinitionInferenceAcceleratorsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=DeviceType" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceType" })
   deviceType?: string;
 }

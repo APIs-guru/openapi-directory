@@ -1,5 +1,7 @@
 package shared
 
+// Action
+// Specifies a single action that runs a Docker container.
 type Action struct {
 	AlwaysRun                   *bool             `json:"alwaysRun,omitempty"`
 	BlockExternalNetwork        *bool             `json:"blockExternalNetwork,omitempty"`

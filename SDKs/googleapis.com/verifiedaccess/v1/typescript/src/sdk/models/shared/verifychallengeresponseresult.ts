@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VerifyChallengeResponseResult
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Result message for VerifiedAccess.VerifyChallengeResponse.
 **/
 export class VerifyChallengeResponseResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceEnrollmentId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceEnrollmentId" })
   deviceEnrollmentId?: string;
 
-  @Metadata({ data: "json, name=devicePermanentId" })
+  @SpeakeasyMetadata({ data: "json, name=devicePermanentId" })
   devicePermanentId?: string;
 
-  @Metadata({ data: "json, name=signedPublicKeyAndChallenge" })
+  @SpeakeasyMetadata({ data: "json, name=signedPublicKeyAndChallenge" })
   signedPublicKeyAndChallenge?: string;
 
-  @Metadata({ data: "json, name=verificationOutput" })
+  @SpeakeasyMetadata({ data: "json, name=verificationOutput" })
   verificationOutput?: string;
 }

@@ -42,7 +42,7 @@ type ServicenetworkingServicesConnectionsPatchSecurity struct {
 type ServicenetworkingServicesConnectionsPatchRequest struct {
 	PathParams  ServicenetworkingServicesConnectionsPatchPathParams
 	QueryParams ServicenetworkingServicesConnectionsPatchQueryParams
-	Request     *shared.Connection `request:"mediaType=application/json"`
+	Request     *shared.ConnectionInput `request:"mediaType=application/json"`
 	Security    ServicenetworkingServicesConnectionsPatchSecurity
 }
 

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetGetUserByOrcidFormatEnum(str, Enum):
     JSON = "json"
@@ -12,17 +13,17 @@ class GetGetUserByOrcidFormatEnum(str, Enum):
 
 @dataclass
 class GetGetUserByOrcidQueryParams:
+    orcid: str = field(metadata={'query_param': { 'field_name': 'orcid', 'style': 'form', 'explode': True }})
     format: Optional[GetGetUserByOrcidFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    orcid: str = field(default=None, metadata={'query_param': { 'field_name': 'orcid', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetGetUserByOrcidRequest:
-    query_params: GetGetUserByOrcidQueryParams = field(default=None)
+    query_params: GetGetUserByOrcidQueryParams = field()
     
 
 @dataclass
 class GetGetUserByOrcidResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

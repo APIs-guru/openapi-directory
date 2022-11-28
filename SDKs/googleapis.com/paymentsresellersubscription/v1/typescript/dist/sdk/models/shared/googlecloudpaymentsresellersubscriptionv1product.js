@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig } from "./googlecloudpaymentsresellersubscriptionv1productpriceconfig";
 import { GoogleCloudPaymentsResellerSubscriptionV1Duration } from "./googlecloudpaymentsresellersubscriptionv1duration";
+import { GoogleTypeLocalizedText } from "./googletypelocalizedtext";
 // GoogleCloudPaymentsResellerSubscriptionV1Product
 /**
  * A Product resource that defines a subscription service that can be resold.
@@ -35,23 +36,23 @@ var GoogleCloudPaymentsResellerSubscriptionV1Product = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1Product.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=priceConfigs", elemType: shared.GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig }),
+        SpeakeasyMetadata({ data: "json, name=priceConfigs", elemType: GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig }),
         __metadata("design:type", Array)
     ], GoogleCloudPaymentsResellerSubscriptionV1Product.prototype, "priceConfigs", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionCodes" }),
+        SpeakeasyMetadata({ data: "json, name=regionCodes" }),
         __metadata("design:type", Array)
     ], GoogleCloudPaymentsResellerSubscriptionV1Product.prototype, "regionCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=subscriptionBillingCycleDuration" }),
+        SpeakeasyMetadata({ data: "json, name=subscriptionBillingCycleDuration" }),
         __metadata("design:type", GoogleCloudPaymentsResellerSubscriptionV1Duration)
     ], GoogleCloudPaymentsResellerSubscriptionV1Product.prototype, "subscriptionBillingCycleDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=titles", elemType: shared.GoogleTypeLocalizedText }),
+        SpeakeasyMetadata({ data: "json, name=titles", elemType: GoogleTypeLocalizedText }),
         __metadata("design:type", Array)
     ], GoogleCloudPaymentsResellerSubscriptionV1Product.prototype, "titles", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1Product;

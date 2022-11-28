@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum WmxSitePermissionLevelEnum {
     SitePermissionLevelUnspecified = "SITE_PERMISSION_LEVEL_UNSPECIFIED",
     SiteOwner = "SITE_OWNER",

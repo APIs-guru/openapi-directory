@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostConsumerV1CustomersIDSubscriptionsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostConsumerV1CustomersIDSubscriptionsRequests:
 
 @dataclass
 class PostConsumerV1CustomersIDSubscriptionsRequest:
-    path_params: PostConsumerV1CustomersIDSubscriptionsPathParams = field(default=None)
+    path_params: PostConsumerV1CustomersIDSubscriptionsPathParams = field()
     request: Optional[PostConsumerV1CustomersIDSubscriptionsRequests] = field(default=None)
     
 
 @dataclass
 class PostConsumerV1CustomersIDSubscriptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_subscription_view_model: Optional[shared.CustomerSubscriptionViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteProfileObjectTypePathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
-    object_type_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ObjectTypeName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
+    object_type_name: str = field(metadata={'path_param': { 'field_name': 'ObjectTypeName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class DeleteProfileObjectTypeHeaders:
 
 @dataclass
 class DeleteProfileObjectTypeRequest:
-    path_params: DeleteProfileObjectTypePathParams = field(default=None)
-    headers: DeleteProfileObjectTypeHeaders = field(default=None)
+    headers: DeleteProfileObjectTypeHeaders = field()
+    path_params: DeleteProfileObjectTypePathParams = field()
     
 
 @dataclass
 class DeleteProfileObjectTypeResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_profile_object_type_response: Optional[shared.DeleteProfileObjectTypeResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

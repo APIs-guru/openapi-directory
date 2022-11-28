@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiVi200ApplicationJsonLinksHolidays extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 }
 
 
 export class GetApiVi200ApplicationJsonLinksProvinces extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 }
 
 
 export class GetApiVi200ApplicationJsonLinksSelf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 }
 
 
 export class GetApiVi200ApplicationJsonLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=holidays" })
+  @SpeakeasyMetadata({ data: "json, name=holidays" })
   holidays?: GetApiVi200ApplicationJsonLinksHolidays;
 
-  @Metadata({ data: "json, name=provinces" })
+  @SpeakeasyMetadata({ data: "json, name=provinces" })
   provinces?: GetApiVi200ApplicationJsonLinksProvinces;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: GetApiVi200ApplicationJsonLinksSelf;
 }
 
 
 export class GetApiVi200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links?: GetApiVi200ApplicationJsonLinks;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetApiViResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getApiVi200ApplicationJsonObject?: GetApiVi200ApplicationJson;
 }

@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoAccountingUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boGoVal, form, name=boGoVal;" })
+  @SpeakeasyMetadata({ data: "json, name=boGoVal, form, name=boGoVal;" })
   boGoVal?: string;
 
-  @Metadata({ data: "json, name=bonusClicks, form, name=bonusClicks;" })
+  @SpeakeasyMetadata({ data: "json, name=bonusClicks, form, name=bonusClicks;" })
   bonusClicks?: number;
 
-  @Metadata({ data: "json, name=companyName, form, name=companyName;" })
+  @SpeakeasyMetadata({ data: "json, name=companyName, form, name=companyName;" })
   companyName?: string;
 
-  @Metadata({ data: "json, name=companyRole, form, name=companyRole;" })
+  @SpeakeasyMetadata({ data: "json, name=companyRole, form, name=companyRole;" })
   companyRole?: string;
 
-  @Metadata({ data: "json, name=email, form, name=email;" })
+  @SpeakeasyMetadata({ data: "json, name=email, form, name=email;" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName, form, name=firstName;" })
+  @SpeakeasyMetadata({ data: "json, name=firstName, form, name=firstName;" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastName, form, name=lastName;" })
+  @SpeakeasyMetadata({ data: "json, name=lastName, form, name=lastName;" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=phone, form, name=phone;" })
+  @SpeakeasyMetadata({ data: "json, name=phone, form, name=phone;" })
   phone?: string;
 
-  @Metadata({ data: "json, name=redirectOnly, form, name=redirectOnly;" })
+  @SpeakeasyMetadata({ data: "json, name=redirectOnly, form, name=redirectOnly;" })
   redirectOnly?: boolean;
 
-  @Metadata({ data: "json, name=registrationDate, form, name=registrationDate;" })
+  @SpeakeasyMetadata({ data: "json, name=registrationDate, form, name=registrationDate;" })
   registrationDate?: string;
 
-  @Metadata({ data: "json, name=timeframeMinDate, form, name=timeframeMinDate;" })
+  @SpeakeasyMetadata({ data: "json, name=timeframeMinDate, form, name=timeframeMinDate;" })
   timeframeMinDate?: string;
 
-  @Metadata({ data: "json, name=timezone, form, name=timezone;" })
+  @SpeakeasyMetadata({ data: "json, name=timezone, form, name=timezone;" })
   timezone?: number;
 
-  @Metadata({ data: "json, name=timezonename, form, name=timezonename;" })
+  @SpeakeasyMetadata({ data: "json, name=timezonename, form, name=timezonename;" })
   timezonename?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DatabaseUpdateDocumentPathParams = /** @class */ (function (_super) {
     __extends(DatabaseUpdateDocumentPathParams, _super);
@@ -30,11 +30,11 @@ var DatabaseUpdateDocumentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=collectionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectionId" }),
         __metadata("design:type", String)
     ], DatabaseUpdateDocumentPathParams.prototype, "collectionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=documentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=documentId" }),
         __metadata("design:type", String)
     ], DatabaseUpdateDocumentPathParams.prototype, "documentId", void 0);
     return DatabaseUpdateDocumentPathParams;
@@ -46,15 +46,15 @@ var DatabaseUpdateDocumentRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Map)
     ], DatabaseUpdateDocumentRequestBody.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=read" }),
+        SpeakeasyMetadata({ data: "json, name=read" }),
         __metadata("design:type", Array)
     ], DatabaseUpdateDocumentRequestBody.prototype, "read", void 0);
     __decorate([
-        Metadata({ data: "json, name=write" }),
+        SpeakeasyMetadata({ data: "json, name=write" }),
         __metadata("design:type", Array)
     ], DatabaseUpdateDocumentRequestBody.prototype, "write", void 0);
     return DatabaseUpdateDocumentRequestBody;
@@ -66,11 +66,11 @@ var DatabaseUpdateDocumentSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], DatabaseUpdateDocumentSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], DatabaseUpdateDocumentSecurity.prototype, "project", void 0);
     return DatabaseUpdateDocumentSecurity;
@@ -82,15 +82,15 @@ var DatabaseUpdateDocumentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseUpdateDocumentPathParams)
     ], DatabaseUpdateDocumentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", DatabaseUpdateDocumentRequestBody)
     ], DatabaseUpdateDocumentRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseUpdateDocumentSecurity)
     ], DatabaseUpdateDocumentRequest.prototype, "security", void 0);
     return DatabaseUpdateDocumentRequest;
@@ -102,15 +102,15 @@ var DatabaseUpdateDocumentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DatabaseUpdateDocumentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DatabaseUpdateDocumentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], DatabaseUpdateDocumentResponse.prototype, "document", void 0);
     return DatabaseUpdateDocumentResponse;

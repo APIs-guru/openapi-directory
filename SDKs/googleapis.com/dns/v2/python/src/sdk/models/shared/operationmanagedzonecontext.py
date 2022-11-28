@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import managedzone
-from . import managedzone
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OperationManagedZoneContext:
-    new_value: Optional[managedzone.ManagedZone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newValue' }})
-    old_value: Optional[managedzone.ManagedZone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oldValue' }})
+    new_value: Optional[ManagedZone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newValue') }})
+    old_value: Optional[ManagedZone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oldValue') }})
     

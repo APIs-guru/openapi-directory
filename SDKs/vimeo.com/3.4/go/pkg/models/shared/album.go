@@ -15,6 +15,8 @@ const (
 	AlbumPictureTypeEnumDefault AlbumPictureTypeEnum = "default"
 )
 
+// AlbumPicture
+// The custom logo for this album.
 type AlbumPicture struct {
 	Active      bool                 `json:"active"`
 	Link        *string              `json:"link,omitempty"`
@@ -24,6 +26,8 @@ type AlbumPicture struct {
 	URI         string               `json:"uri"`
 }
 
+// AlbumEmbed
+// Embed data for the album.
 type AlbumEmbed struct {
 	HTML string `json:"html"`
 }
@@ -35,37 +39,51 @@ const (
 	AlbumLayoutEnumPlayer AlbumLayoutEnum = "player"
 )
 
+// AlbumMetadataConnectionsVideos
+// Information about the videos that belong to this album.
 type AlbumMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// AlbumMetadataConnections
+// A collection of information that is connected to this resource.
 type AlbumMetadataConnections struct {
 	Videos AlbumMetadataConnectionsVideos `json:"videos"`
 }
 
+// AlbumMetadataInteractionsAddCustomThumbnails
+// An action indicating that the authenticated user is an admin of the album and may therefore add custom thumbnails. This data requires a bearer token with the `private` scope.
 type AlbumMetadataInteractionsAddCustomThumbnails struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// AlbumMetadataInteractionsAddLogos
+// An action indicating that the authenticated user is an admin of the album and may therefore add custom logos. This data requires a bearer token with the `private` scope.
 type AlbumMetadataInteractionsAddLogos struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// AlbumMetadataInteractionsAddVideos
+// An action indicating that the authenticated user is an admin of the album and may therefore add videos. This data requires a bearer token with the `private` scope.
 type AlbumMetadataInteractionsAddVideos struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// AlbumMetadataInteractions
+// A list of resource URIs related to the album.
 type AlbumMetadataInteractions struct {
 	AddCustomThumbnails AlbumMetadataInteractionsAddCustomThumbnails `json:"add_custom_thumbnails"`
 	AddLogos            AlbumMetadataInteractionsAddLogos            `json:"add_logos"`
 	AddVideos           AlbumMetadataInteractionsAddVideos           `json:"add_videos"`
 }
 
+// AlbumMetadata
+// Metadata about the album.
 type AlbumMetadata struct {
 	Connections  AlbumMetadataConnections  `json:"connections"`
 	Interactions AlbumMetadataInteractions `json:"interactions"`
@@ -79,6 +97,8 @@ const (
 	AlbumPrivacyViewEnumPassword  AlbumPrivacyViewEnum = "password"
 )
 
+// AlbumPrivacy
+// The privacy settings of the album.
 type AlbumPrivacy struct {
 	Password *string              `json:"password,omitempty"`
 	View     AlbumPrivacyViewEnum `json:"view"`

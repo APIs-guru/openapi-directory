@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DataExchange
 /**
  * A data exchange is a container that lets you share data. Along with the descriptive information about the data exchange, it contains listings that reference shared datasets.
@@ -33,33 +33,65 @@ var DataExchange = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], DataExchange.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], DataExchange.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=documentation" }),
+        SpeakeasyMetadata({ data: "json, name=documentation" }),
         __metadata("design:type", String)
     ], DataExchange.prototype, "documentation", void 0);
     __decorate([
-        Metadata({ data: "json, name=icon" }),
+        SpeakeasyMetadata({ data: "json, name=icon" }),
         __metadata("design:type", String)
     ], DataExchange.prototype, "icon", void 0);
     __decorate([
-        Metadata({ data: "json, name=listingCount" }),
+        SpeakeasyMetadata({ data: "json, name=listingCount" }),
         __metadata("design:type", Number)
     ], DataExchange.prototype, "listingCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DataExchange.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryContact" }),
+        SpeakeasyMetadata({ data: "json, name=primaryContact" }),
         __metadata("design:type", String)
     ], DataExchange.prototype, "primaryContact", void 0);
     return DataExchange;
 }(SpeakeasyBase));
 export { DataExchange };
+// DataExchangeInput
+/**
+ * A data exchange is a container that lets you share data. Along with the descriptive information about the data exchange, it contains listings that reference shared datasets.
+**/
+var DataExchangeInput = /** @class */ (function (_super) {
+    __extends(DataExchangeInput, _super);
+    function DataExchangeInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], DataExchangeInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], DataExchangeInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=documentation" }),
+        __metadata("design:type", String)
+    ], DataExchangeInput.prototype, "documentation", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=icon" }),
+        __metadata("design:type", String)
+    ], DataExchangeInput.prototype, "icon", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=primaryContact" }),
+        __metadata("design:type", String)
+    ], DataExchangeInput.prototype, "primaryContact", void 0);
+    return DataExchangeInput;
+}(SpeakeasyBase));
+export { DataExchangeInput };

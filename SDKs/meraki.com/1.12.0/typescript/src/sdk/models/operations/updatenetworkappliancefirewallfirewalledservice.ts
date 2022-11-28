@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceFirewallFirewalledServicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=service" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=service" })
   service: string;
 }
 
 export enum UpdateNetworkApplianceFirewallFirewalledServiceRequestBodyAccessEnum {
-    Blocked = "blocked"
-,    Restricted = "restricted"
-,    Unrestricted = "unrestricted"
+    Blocked = "blocked",
+    Restricted = "restricted",
+    Unrestricted = "unrestricted"
 }
 
 
 export class UpdateNetworkApplianceFirewallFirewalledServiceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access: UpdateNetworkApplianceFirewallFirewalledServiceRequestBodyAccessEnum;
 
-  @Metadata({ data: "json, name=allowedIps" })
+  @SpeakeasyMetadata({ data: "json, name=allowedIps" })
   allowedIps?: string[];
 }
 
 
 export class UpdateNetworkApplianceFirewallFirewalledServiceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceFirewallFirewalledServicePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkApplianceFirewallFirewalledServiceRequestBody;
 }
 
 
 export class UpdateNetworkApplianceFirewallFirewalledServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceFirewallFirewalledService200ApplicationJsonObject?: Map<string, any>;
 }

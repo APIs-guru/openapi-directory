@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteLifecyclePolicyXAmzTargetEnum {
     AmazonEc2ContainerRegistryV20150921DeleteLifecyclePolicy = "AmazonEC2ContainerRegistry_V20150921.DeleteLifecyclePolicy"

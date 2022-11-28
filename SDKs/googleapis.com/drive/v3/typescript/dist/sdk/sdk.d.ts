@@ -1,0 +1,35 @@
+import { AxiosInstance } from "axios";
+import { About } from "./about";
+import { Changes } from "./changes";
+import { Channels } from "./channels";
+import { Comments } from "./comments";
+import { Drives } from "./drives";
+import { Files } from "./files";
+import { Permissions } from "./permissions";
+import { Replies } from "./replies";
+import { Revisions } from "./revisions";
+import { Teamdrives } from "./teamdrives";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://www.googleapis.com/drive/v3"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    about: About;
+    changes: Changes;
+    channels: Channels;
+    comments: Comments;
+    drives: Drives;
+    files: Files;
+    permissions: Permissions;
+    replies: Replies;
+    revisions: Revisions;
+    teamdrives: Teamdrives;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

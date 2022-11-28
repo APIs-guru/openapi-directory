@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddBankTransferBatchPaymentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
   batchUuid: string;
 }
 
@@ -13,31 +14,31 @@ export enum AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode2Paye
 
 
 export class AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=destAccountHolderName" })
+  @SpeakeasyMetadata({ data: "json, name=destAccountHolderName" })
   destAccountHolderName?: string;
 
-  @Metadata({ data: "json, name=destAccountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=destAccountNumber" })
   destAccountNumber?: string;
 
-  @Metadata({ data: "json, name=destIban" })
+  @SpeakeasyMetadata({ data: "json, name=destIban" })
   destIban?: string;
 
-  @Metadata({ data: "json, name=destNsc" })
+  @SpeakeasyMetadata({ data: "json, name=destNsc" })
   destNsc?: string;
 
-  @Metadata({ data: "json, name=icanFrom" })
+  @SpeakeasyMetadata({ data: "json, name=icanFrom" })
   icanFrom?: number;
 
-  @Metadata({ data: "json, name=myRef" })
+  @SpeakeasyMetadata({ data: "json, name=myRef" })
   myRef?: string;
 
-  @Metadata({ data: "json, name=payeeType" })
+  @SpeakeasyMetadata({ data: "json, name=payeeType" })
   payeeType?: AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode2PayeeTypeEnum;
 
-  @Metadata({ data: "json, name=yourRef" })
+  @SpeakeasyMetadata({ data: "json, name=yourRef" })
   yourRef?: string;
 }
 
@@ -47,42 +48,42 @@ export enum AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode1Paye
 
 
 export class AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=icanFrom" })
+  @SpeakeasyMetadata({ data: "json, name=icanFrom" })
   icanFrom?: number;
 
-  @Metadata({ data: "json, name=myRef" })
+  @SpeakeasyMetadata({ data: "json, name=myRef" })
   myRef?: string;
 
-  @Metadata({ data: "json, name=payeeId" })
+  @SpeakeasyMetadata({ data: "json, name=payeeId" })
   payeeId?: number;
 
-  @Metadata({ data: "json, name=payeeType" })
+  @SpeakeasyMetadata({ data: "json, name=payeeType" })
   payeeType?: AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode1PayeeTypeEnum;
 
-  @Metadata({ data: "json, name=yourRef" })
+  @SpeakeasyMetadata({ data: "json, name=yourRef" })
   yourRef?: string;
 }
 
 
 export class AddBankTransferBatchPaymentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddBankTransferBatchPaymentPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: any;
 }
 
 
 export class AddBankTransferBatchPaymentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onebatches1Percent7BbatchUuidPercent7D1internaltransfersPostResponses200ContentApplication1jsonSchema?: shared.Onebatches1Percent7BbatchUuidPercent7D1internaltransfersPostResponses200ContentApplication1jsonSchema;
 }

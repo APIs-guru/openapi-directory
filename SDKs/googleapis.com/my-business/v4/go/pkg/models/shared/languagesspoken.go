@@ -153,6 +153,8 @@ const (
 	LanguagesSpokenVietnameseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenVietnameseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// LanguagesSpoken
+// Languages spoken by at least one staff member.
 type LanguagesSpoken struct {
 	ArabicSpoken              *bool                                         `json:"arabicSpoken,omitempty"`
 	ArabicSpokenException     *LanguagesSpokenArabicSpokenExceptionEnum     `json:"arabicSpokenException,omitempty"`

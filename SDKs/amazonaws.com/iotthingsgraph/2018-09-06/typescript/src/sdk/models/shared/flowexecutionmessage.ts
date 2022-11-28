@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowExecutionEventTypeEnum } from "./flowexecutioneventtypeenum";
+
 
 
 // FlowExecutionMessage
@@ -7,15 +8,15 @@ import { FlowExecutionEventTypeEnum } from "./flowexecutioneventtypeenum";
  * An object that contains information about a flow event.
 **/
 export class FlowExecutionMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: FlowExecutionEventTypeEnum;
 
-  @Metadata({ data: "json, name=messageId" })
+  @SpeakeasyMetadata({ data: "json, name=messageId" })
   messageId?: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: Date;
 }

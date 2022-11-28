@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallRule } from "./firewallrule";
+
 
 
 // BatchUpdateIngressRulesRequest
@@ -8,6 +8,6 @@ import { FirewallRule } from "./firewallrule";
  * Request message for Firewall.BatchUpdateIngressRules.
 **/
 export class BatchUpdateIngressRulesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ingressRules", elemType: shared.FirewallRule })
+  @SpeakeasyMetadata({ data: "json, name=ingressRules", elemType: FirewallRule })
   ingressRules?: FirewallRule[];
 }

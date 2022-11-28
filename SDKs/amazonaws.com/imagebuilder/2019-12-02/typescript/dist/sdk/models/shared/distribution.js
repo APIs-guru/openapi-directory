@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmiDistributionConfiguration } from "./amidistributionconfiguration";
 import { ContainerDistributionConfiguration } from "./containerdistributionconfiguration";
+import { LaunchTemplateConfiguration } from "./launchtemplateconfiguration";
 // Distribution
 /**
  *  Defines the settings for a specific Region.
@@ -36,23 +36,23 @@ var Distribution = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amiDistributionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=amiDistributionConfiguration" }),
         __metadata("design:type", AmiDistributionConfiguration)
     ], Distribution.prototype, "amiDistributionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=containerDistributionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=containerDistributionConfiguration" }),
         __metadata("design:type", ContainerDistributionConfiguration)
     ], Distribution.prototype, "containerDistributionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchTemplateConfigurations", elemType: shared.LaunchTemplateConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=launchTemplateConfigurations", elemType: LaunchTemplateConfiguration }),
         __metadata("design:type", Array)
     ], Distribution.prototype, "launchTemplateConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=licenseConfigurationArns" }),
+        SpeakeasyMetadata({ data: "json, name=licenseConfigurationArns" }),
         __metadata("design:type", Array)
     ], Distribution.prototype, "licenseConfigurationArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], Distribution.prototype, "region", void 0);
     return Distribution;

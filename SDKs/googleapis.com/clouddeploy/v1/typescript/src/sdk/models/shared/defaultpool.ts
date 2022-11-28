@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DefaultPool
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Execution using the default Cloud Build pool.
 **/
 export class DefaultPool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactStorage" })
+  @SpeakeasyMetadata({ data: "json, name=artifactStorage" })
   artifactStorage?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 }

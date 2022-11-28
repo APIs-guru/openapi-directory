@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProvisionedCapacityDescription
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The definition for a provisioned capacity unit.
 **/
 export class ProvisionedCapacityDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CapacityId" })
+  @SpeakeasyMetadata({ data: "json, name=CapacityId" })
   capacityId?: string;
 
-  @Metadata({ data: "json, name=ExpirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationDate" })
   expirationDate?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: string;
 }

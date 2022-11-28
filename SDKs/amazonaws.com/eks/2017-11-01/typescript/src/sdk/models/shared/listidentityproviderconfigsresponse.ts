@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityProviderConfig } from "./identityproviderconfig";
 
 
+
 export class ListIdentityProviderConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identityProviderConfigs", elemType: shared.IdentityProviderConfig })
+  @SpeakeasyMetadata({ data: "json, name=identityProviderConfigs", elemType: IdentityProviderConfig })
   identityProviderConfigs?: IdentityProviderConfig[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -12,6 +12,8 @@ const (
 	StringFilterMatchTypeEnumPartialRegexp        StringFilterMatchTypeEnum = "PARTIAL_REGEXP"
 )
 
+// StringFilter
+// The filter for string
 type StringFilter struct {
 	CaseSensitive *bool                      `json:"caseSensitive,omitempty"`
 	MatchType     *StringFilterMatchTypeEnum `json:"matchType,omitempty"`

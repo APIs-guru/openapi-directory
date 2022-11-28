@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import terminologyproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImportTerminologyResponse:
-    terminology_properties: Optional[terminologyproperties.TerminologyProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TerminologyProperties' }})
+    terminology_properties: Optional[TerminologyProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TerminologyProperties') }})
     

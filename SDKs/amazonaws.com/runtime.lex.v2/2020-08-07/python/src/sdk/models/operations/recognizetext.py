@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class RecognizeTextPathParams:
-    bot_alias_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botAliasId', 'style': 'simple', 'explode': False }})
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
-    locale_id: str = field(default=None, metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
-    session_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
+    bot_alias_id: str = field(metadata={'path_param': { 'field_name': 'botAliasId', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    locale_id: str = field(metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
+    session_id: str = field(metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,39 +30,43 @@ class RecognizeTextHeaders:
 @dataclass_json
 @dataclass
 class RecognizeTextRequestBodySessionState:
-    active_contexts: Optional[List[shared.ActiveContext]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeContexts' }})
-    dialog_action: Optional[shared.DialogAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dialogAction' }})
-    intent: Optional[shared.Intent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intent' }})
-    originating_request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatingRequestId' }})
-    session_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sessionAttributes' }})
+    r"""RecognizeTextRequestBodySessionState
+    The state of the user's session with Amazon Lex V2.
+    """
+    
+    active_contexts: Optional[List[shared.ActiveContext]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeContexts') }})
+    dialog_action: Optional[shared.DialogAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dialogAction') }})
+    intent: Optional[shared.Intent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intent') }})
+    originating_request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originatingRequestId') }})
+    session_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sessionAttributes') }})
     
 
 @dataclass_json
 @dataclass
 class RecognizeTextRequestBody:
-    request_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestAttributes' }})
-    session_state: Optional[RecognizeTextRequestBodySessionState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sessionState' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    request_attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestAttributes') }})
+    session_state: Optional[RecognizeTextRequestBodySessionState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sessionState') }})
     
 
 @dataclass
 class RecognizeTextRequest:
-    path_params: RecognizeTextPathParams = field(default=None)
-    headers: RecognizeTextHeaders = field(default=None)
-    request: RecognizeTextRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RecognizeTextHeaders = field()
+    path_params: RecognizeTextPathParams = field()
+    request: RecognizeTextRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RecognizeTextResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_gateway_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     dependency_failed_exception: Optional[Any] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     recognize_text_response: Optional[shared.RecognizeTextResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

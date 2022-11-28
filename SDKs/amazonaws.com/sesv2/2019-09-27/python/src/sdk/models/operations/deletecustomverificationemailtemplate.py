@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteCustomVerificationEmailTemplatePathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteCustomVerificationEmailTemplateHeaders:
 
 @dataclass
 class DeleteCustomVerificationEmailTemplateRequest:
-    path_params: DeleteCustomVerificationEmailTemplatePathParams = field(default=None)
-    headers: DeleteCustomVerificationEmailTemplateHeaders = field(default=None)
+    headers: DeleteCustomVerificationEmailTemplateHeaders = field()
+    path_params: DeleteCustomVerificationEmailTemplatePathParams = field()
     
 
 @dataclass
 class DeleteCustomVerificationEmailTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_custom_verification_email_template_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

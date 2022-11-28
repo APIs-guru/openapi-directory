@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class License extends SpeakeasyBase {
+    activatedAt?: number;
+    addressCity?: string;
+    addressCountry?: string;
+    addressPostal?: string;
+    addressRegion?: string;
+    addressStreet?: string;
+    createdAt?: number;
+    id?: string;
+    licenseExpiration?: number;
+    licenseLiveAssetCount?: number;
+    licenseMaxAssets?: number;
+    licenseProjectAssetCount?: number;
+    licenseType?: string;
+    name?: string;
+    partner?: string;
+    phone?: string;
+    settings?: Map<string, any>;
+    ssoDefaultRole?: string;
+    ssoDomain?: string;
+    ssoLoginIssuerUrl?: string;
+    ssoLoginLoginUrl?: string;
+    ssoLoginLogoutUrl?: string;
+    ssoLoginMessage?: string;
+    ssoMode?: string;
+    ssoType?: string;
+    subscriptionCancelAt?: number;
+    subscriptionCanceledAt?: number;
+    subscriptionPeriodEnd?: number;
+    subscriptionPeriodStart?: number;
+    updatedAt?: number;
+    viaReseller?: boolean;
+}

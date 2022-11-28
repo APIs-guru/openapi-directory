@@ -1,5 +1,7 @@
 package shared
 
+// ContactAddress
+// This complex type specifies the details of a geographical address.
 type ContactAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`

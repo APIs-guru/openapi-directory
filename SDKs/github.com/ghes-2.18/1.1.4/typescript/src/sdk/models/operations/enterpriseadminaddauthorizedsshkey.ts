@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminAddAuthorizedSshKeyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorized_key" })
+  @SpeakeasyMetadata({ data: "json, name=authorized_key" })
   authorizedKey: string;
 }
 
 
 export class EnterpriseAdminAddAuthorizedSshKeyRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminAddAuthorizedSshKeyRequestBody;
 }
 
 
 export class EnterpriseAdminAddAuthorizedSshKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.SshKey })
+  @SpeakeasyMetadata({ elemType: shared.SshKey })
   sshKeys?: shared.SshKey[];
 }

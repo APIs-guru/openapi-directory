@@ -8,6 +8,8 @@ const (
 	AchievementRevealResponseCurrentStateEnumUnlocked                          AchievementRevealResponseCurrentStateEnum = "UNLOCKED"
 )
 
+// AchievementRevealResponse
+// An achievement reveal response
 type AchievementRevealResponse struct {
 	CurrentState *AchievementRevealResponseCurrentStateEnum `json:"currentState,omitempty"`
 	Kind         *string                                    `json:"kind,omitempty"`

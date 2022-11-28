@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AssetUsage
 /**
  * Specifies the id, usage Quantity, and date of when an asset was used.
@@ -33,15 +33,15 @@ var AssetUsage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=asset_id" }),
+        SpeakeasyMetadata({ data: "json, name=asset_id" }),
         __metadata("design:type", String)
     ], AssetUsage.prototype, "assetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=quantity" }),
+        SpeakeasyMetadata({ data: "json, name=quantity" }),
         __metadata("design:type", Number)
     ], AssetUsage.prototype, "quantity", void 0);
     __decorate([
-        Metadata({ data: "json, name=usage_date" }),
+        SpeakeasyMetadata({ data: "json, name=usage_date" }),
         __metadata("design:type", Date)
     ], AssetUsage.prototype, "usageDate", void 0);
     return AssetUsage;

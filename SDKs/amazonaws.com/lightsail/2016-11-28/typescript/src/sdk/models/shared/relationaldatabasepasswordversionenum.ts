@@ -1,7 +1,8 @@
 
 
+
 export enum RelationalDatabasePasswordVersionEnum {
-    Current = "CURRENT"
-,    Previous = "PREVIOUS"
-,    Pending = "PENDING"
+    Current = "CURRENT",
+    Previous = "PREVIOUS",
+    Pending = "PENDING"
 }

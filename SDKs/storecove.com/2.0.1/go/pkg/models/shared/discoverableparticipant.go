@@ -12,6 +12,8 @@ const (
 	DiscoverableParticipantDocumentTypesEnumProductCatalogue     DiscoverableParticipantDocumentTypesEnum = "product_catalogue"
 )
 
+// DiscoverableParticipant
+// A participant to be discovered.
 type DiscoverableParticipant struct {
 	DocumentTypes []DiscoverableParticipantDocumentTypesEnum `json:"documentTypes,omitempty"`
 	Identifier    string                                     `json:"identifier"`

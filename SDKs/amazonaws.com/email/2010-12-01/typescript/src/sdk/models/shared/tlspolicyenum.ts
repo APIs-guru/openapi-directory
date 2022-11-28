@@ -1,6 +1,7 @@
 
 
+
 export enum TlsPolicyEnum {
-    Require = "Require"
-,    Optional = "Optional"
+    Require = "Require",
+    Optional = "Optional"
 }

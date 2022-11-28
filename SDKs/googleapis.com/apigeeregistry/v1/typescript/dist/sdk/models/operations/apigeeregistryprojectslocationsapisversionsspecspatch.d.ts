@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ApigeeregistryProjectsLocationsApisVersionsSpecsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -25,7 +25,7 @@ export declare class ApigeeregistryProjectsLocationsApisVersionsSpecsPatchSecuri
 export declare class ApigeeregistryProjectsLocationsApisVersionsSpecsPatchRequest extends SpeakeasyBase {
     pathParams: ApigeeregistryProjectsLocationsApisVersionsSpecsPatchPathParams;
     queryParams: ApigeeregistryProjectsLocationsApisVersionsSpecsPatchQueryParams;
-    request?: shared.ApiSpec;
+    request?: shared.ApiSpecInput;
     security: ApigeeregistryProjectsLocationsApisVersionsSpecsPatchSecurity;
 }
 export declare class ApigeeregistryProjectsLocationsApisVersionsSpecsPatchResponse extends SpeakeasyBase {

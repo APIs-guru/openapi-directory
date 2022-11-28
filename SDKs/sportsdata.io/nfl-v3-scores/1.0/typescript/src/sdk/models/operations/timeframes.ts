@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TimeframesFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 export enum TimeframesTypeEnum {
-    Current = "current"
-,    Upcoming = "upcoming"
-,    Completed = "completed"
-,    Recent = "recent"
-,    All = "all"
+    Current = "current",
+    Upcoming = "upcoming",
+    Completed = "completed",
+    Recent = "recent",
+    All = "all"
 }
 
 
 export class TimeframesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: TimeframesFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: TimeframesTypeEnum;
 }
 
 
 export class TimeframesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TimeframesPathParams;
 }
 
 
 export class TimeframesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   timeframes?: any[];
 }

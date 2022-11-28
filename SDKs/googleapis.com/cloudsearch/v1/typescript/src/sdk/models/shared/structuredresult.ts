@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Person } from "./person";
+
 
 
 // StructuredResult
@@ -7,6 +8,6 @@ import { Person } from "./person";
  * Structured results that are returned as part of search request.
 **/
 export class StructuredResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=person" })
+  @SpeakeasyMetadata({ data: "json, name=person" })
   person?: Person;
 }

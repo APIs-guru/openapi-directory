@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ProcessingOptionsHTMLSanitizationEnum(str, Enum):
     HTML_SANITIZATION_UNSPECIFIED = "HTML_SANITIZATION_UNSPECIFIED"
@@ -11,6 +13,10 @@ class ProcessingOptionsHTMLSanitizationEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ProcessingOptions:
-    disable_street_address_resolution: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableStreetAddressResolution' }})
-    html_sanitization: Optional[ProcessingOptionsHTMLSanitizationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'htmlSanitization' }})
+    r"""ProcessingOptions
+    Input only. Options for job processing.
+    """
+    
+    disable_street_address_resolution: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableStreetAddressResolution') }})
+    html_sanitization: Optional[ProcessingOptionsHTMLSanitizationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('htmlSanitization') }})
     

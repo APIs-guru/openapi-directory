@@ -8,6 +8,8 @@ const (
 	TableColumnPropertiesWidthTypeEnumFixedWidth           TableColumnPropertiesWidthTypeEnum = "FIXED_WIDTH"
 )
 
+// TableColumnProperties
+// The properties of a column in a table.
 type TableColumnProperties struct {
 	Width     *Dimension                          `json:"width,omitempty"`
 	WidthType *TableColumnPropertiesWidthTypeEnum `json:"widthType,omitempty"`

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutConsumerV1AppointmentsIdBookPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutConsumerV1AppointmentsIdBookRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   appointmentBookModel?: shared.AppointmentBookModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   appointmentBookModel1?: shared.AppointmentBookModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   appointmentBookModel2?: shared.AppointmentBookModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   appointmentBookModel3?: shared.AppointmentBookModel;
 }
 
 
 export class PutConsumerV1AppointmentsIdBookRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutConsumerV1AppointmentsIdBookPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutConsumerV1AppointmentsIdBookRequests;
 }
 
 
 export class PutConsumerV1AppointmentsIdBookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   appointmentViewModel?: shared.AppointmentViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

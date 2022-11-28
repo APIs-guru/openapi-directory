@@ -1,5 +1,7 @@
 package shared
 
+// CreateFileSystemRequest
+// The request object used to create a new Amazon FSx file system.
 type CreateFileSystemRequest struct {
 	ClientRequestToken   *string                               `json:"ClientRequestToken,omitempty"`
 	FileSystemType       FileSystemTypeEnum                    `json:"FileSystemType"`

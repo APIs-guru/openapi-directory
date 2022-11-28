@@ -1,5 +1,7 @@
 package shared
 
+// Table
+// A single table. NextId: 8
 type Table struct {
 	Columns     []ColumnDescription `json:"columns,omitempty"`
 	CreateTime  *string             `json:"createTime,omitempty"`

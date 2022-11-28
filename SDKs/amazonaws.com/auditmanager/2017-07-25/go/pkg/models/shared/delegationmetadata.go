@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// DelegationMetadata
+//
+//	The metadata associated with the specified delegation.
 type DelegationMetadata struct {
 	AssessmentID   *string               `json:"assessmentId,omitempty"`
 	AssessmentName *string               `json:"assessmentName,omitempty"`

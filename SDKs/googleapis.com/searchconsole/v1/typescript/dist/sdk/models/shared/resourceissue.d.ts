@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BlockedResource } from "./blockedresource";
 /**
  * Information about a resource with issue.

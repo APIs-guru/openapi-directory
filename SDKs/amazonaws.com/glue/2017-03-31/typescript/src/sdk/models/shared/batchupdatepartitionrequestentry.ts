@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartitionInput } from "./partitioninput";
+
 
 
 // BatchUpdatePartitionRequestEntry
@@ -7,9 +8,9 @@ import { PartitionInput } from "./partitioninput";
  * A structure that contains the values and structure used to update a partition.
 **/
 export class BatchUpdatePartitionRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PartitionInput" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionInput" })
   partitionInput: PartitionInput;
 
-  @Metadata({ data: "json, name=PartitionValueList" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionValueList" })
   partitionValueList: string[];
 }

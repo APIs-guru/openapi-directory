@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatefulRuleGroup } from "./statefulrulegroup";
 import { StatelessRuleGroup } from "./statelessrulegroup";
+
 
 
 // NetworkFirewallPolicyDescription
@@ -9,18 +9,18 @@ import { StatelessRuleGroup } from "./statelessrulegroup";
  * The definition of the Network Firewall firewall policy.
 **/
 export class NetworkFirewallPolicyDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StatefulRuleGroups", elemType: shared.StatefulRuleGroup })
+  @SpeakeasyMetadata({ data: "json, name=StatefulRuleGroups", elemType: StatefulRuleGroup })
   statefulRuleGroups?: StatefulRuleGroup[];
 
-  @Metadata({ data: "json, name=StatelessCustomActions" })
+  @SpeakeasyMetadata({ data: "json, name=StatelessCustomActions" })
   statelessCustomActions?: string[];
 
-  @Metadata({ data: "json, name=StatelessDefaultActions" })
+  @SpeakeasyMetadata({ data: "json, name=StatelessDefaultActions" })
   statelessDefaultActions?: string[];
 
-  @Metadata({ data: "json, name=StatelessFragmentDefaultActions" })
+  @SpeakeasyMetadata({ data: "json, name=StatelessFragmentDefaultActions" })
   statelessFragmentDefaultActions?: string[];
 
-  @Metadata({ data: "json, name=StatelessRuleGroups", elemType: shared.StatelessRuleGroup })
+  @SpeakeasyMetadata({ data: "json, name=StatelessRuleGroups", elemType: StatelessRuleGroup })
   statelessRuleGroups?: StatelessRuleGroup[];
 }

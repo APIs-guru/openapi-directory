@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdvancedFieldSelector
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single selector statement in an advanced event selector.
 **/
 export class AdvancedFieldSelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndsWith" })
+  @SpeakeasyMetadata({ data: "json, name=EndsWith" })
   endsWith?: string[];
 
-  @Metadata({ data: "json, name=Equals" })
+  @SpeakeasyMetadata({ data: "json, name=Equals" })
   equals?: string[];
 
-  @Metadata({ data: "json, name=Field" })
+  @SpeakeasyMetadata({ data: "json, name=Field" })
   field: string;
 
-  @Metadata({ data: "json, name=NotEndsWith" })
+  @SpeakeasyMetadata({ data: "json, name=NotEndsWith" })
   notEndsWith?: string[];
 
-  @Metadata({ data: "json, name=NotEquals" })
+  @SpeakeasyMetadata({ data: "json, name=NotEquals" })
   notEquals?: string[];
 
-  @Metadata({ data: "json, name=NotStartsWith" })
+  @SpeakeasyMetadata({ data: "json, name=NotStartsWith" })
   notStartsWith?: string[];
 
-  @Metadata({ data: "json, name=StartsWith" })
+  @SpeakeasyMetadata({ data: "json, name=StartsWith" })
   startsWith?: string[];
 }

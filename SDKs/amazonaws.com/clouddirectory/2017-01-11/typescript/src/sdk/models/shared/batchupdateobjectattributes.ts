@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectAttributeUpdate } from "./objectattributeupdate";
 import { ObjectReference } from "./objectreference";
+
 
 
 // BatchUpdateObjectAttributes
@@ -9,9 +9,9 @@ import { ObjectReference } from "./objectreference";
  * Represents the output of a <code>BatchUpdate</code> operation. 
 **/
 export class BatchUpdateObjectAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeUpdates", elemType: shared.ObjectAttributeUpdate })
+  @SpeakeasyMetadata({ data: "json, name=AttributeUpdates", elemType: ObjectAttributeUpdate })
   attributeUpdates: ObjectAttributeUpdate[];
 
-  @Metadata({ data: "json, name=ObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectReference" })
   objectReference: ObjectReference;
 }

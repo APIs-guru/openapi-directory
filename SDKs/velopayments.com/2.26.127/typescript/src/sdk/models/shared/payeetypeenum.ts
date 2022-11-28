@@ -1,6 +1,7 @@
 
 
+
 export enum PayeeTypeEnum {
-    Individual = "Individual"
-,    Company = "Company"
+    Individual = "Individual",
+    Company = "Company"
 }

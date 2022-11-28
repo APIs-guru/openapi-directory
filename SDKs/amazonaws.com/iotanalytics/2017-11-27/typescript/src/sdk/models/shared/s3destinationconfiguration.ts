@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlueConfiguration } from "./glueconfiguration";
+
 
 
 // S3DestinationConfiguration
@@ -7,15 +8,15 @@ import { GlueConfiguration } from "./glueconfiguration";
  * Configuration information for delivery of dataset contents to Amazon Simple Storage Service (Amazon S3).
 **/
 export class S3DestinationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket: string;
 
-  @Metadata({ data: "json, name=glueConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=glueConfiguration" })
   glueConfiguration?: GlueConfiguration;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

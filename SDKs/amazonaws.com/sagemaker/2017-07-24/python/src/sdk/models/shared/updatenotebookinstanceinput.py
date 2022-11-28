@@ -1,25 +1,28 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import notebookinstanceacceleratortype_enum
-from . import instancetype_enum
-from . import rootaccess_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateNotebookInstanceInput:
-    accelerator_types: Optional[List[notebookinstanceacceleratortype_enum.NotebookInstanceAcceleratorTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceleratorTypes' }})
-    additional_code_repositories: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalCodeRepositories' }})
-    default_code_repository: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultCodeRepository' }})
-    disassociate_accelerator_types: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisassociateAcceleratorTypes' }})
-    disassociate_additional_code_repositories: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisassociateAdditionalCodeRepositories' }})
-    disassociate_default_code_repository: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisassociateDefaultCodeRepository' }})
-    disassociate_lifecycle_config: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisassociateLifecycleConfig' }})
-    instance_type: Optional[instancetype_enum.InstanceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceType' }})
-    lifecycle_config_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LifecycleConfigName' }})
-    notebook_instance_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotebookInstanceName' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
-    root_access: Optional[rootaccess_enum.RootAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RootAccess' }})
-    volume_size_in_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VolumeSizeInGB' }})
+    notebook_instance_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotebookInstanceName') }})
+    accelerator_types: Optional[List[NotebookInstanceAcceleratorTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceleratorTypes') }})
+    additional_code_repositories: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalCodeRepositories') }})
+    default_code_repository: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultCodeRepository') }})
+    disassociate_accelerator_types: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisassociateAcceleratorTypes') }})
+    disassociate_additional_code_repositories: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisassociateAdditionalCodeRepositories') }})
+    disassociate_default_code_repository: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisassociateDefaultCodeRepository') }})
+    disassociate_lifecycle_config: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisassociateLifecycleConfig') }})
+    instance_type: Optional[InstanceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceType') }})
+    lifecycle_config_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LifecycleConfigName') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleArn') }})
+    root_access: Optional[RootAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RootAccess') }})
+    volume_size_in_gb: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VolumeSizeInGB') }})
     

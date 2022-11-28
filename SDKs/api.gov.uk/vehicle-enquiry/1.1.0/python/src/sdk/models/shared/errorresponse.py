@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import errors
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ErrorResponse:
-    errors: Optional[List[errors.Errors]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    r"""ErrorResponse
+    Error Response
+    """
+    
+    errors: Optional[List[Errors]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
     

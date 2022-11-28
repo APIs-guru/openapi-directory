@@ -1,5 +1,7 @@
 package shared
 
+// FailureDetail
+// Details for an outcome with a FAILURE outcome summary.
 type FailureDetail struct {
 	Crashed           *bool `json:"crashed,omitempty"`
 	DeviceOutOfMemory *bool `json:"deviceOutOfMemory,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Service
+// A complex type that contains information about the specified service.
 type Service struct {
 	Arn                     *string                  `json:"Arn,omitempty"`
 	CreateDate              *time.Time               `json:"CreateDate,omitempty"`

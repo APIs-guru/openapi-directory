@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PrebuildEnvironmentOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=correlationId" })
+  @SpeakeasyMetadata({ data: "json, name=correlationId" })
   correlationId?: string;
 }

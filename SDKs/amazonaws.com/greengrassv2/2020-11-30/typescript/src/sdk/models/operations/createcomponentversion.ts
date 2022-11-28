@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateComponentVersionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,78 +32,78 @@ export class CreateComponentVersionHeaders extends SpeakeasyBase {
  * Contains information about an Lambda function to import to create a component.
 **/
 export class CreateComponentVersionRequestBodyLambdaFunction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentDependencies", elemType: shared.ComponentDependencyRequirement })
+  @SpeakeasyMetadata({ data: "json, name=componentDependencies", elemType: shared.ComponentDependencyRequirement })
   componentDependencies?: Map<string, shared.ComponentDependencyRequirement>;
 
-  @Metadata({ data: "json, name=componentLambdaParameters" })
+  @SpeakeasyMetadata({ data: "json, name=componentLambdaParameters" })
   componentLambdaParameters?: shared.LambdaExecutionParameters;
 
-  @Metadata({ data: "json, name=componentName" })
+  @SpeakeasyMetadata({ data: "json, name=componentName" })
   componentName?: string;
 
-  @Metadata({ data: "json, name=componentPlatforms", elemType: shared.ComponentPlatform })
+  @SpeakeasyMetadata({ data: "json, name=componentPlatforms", elemType: shared.ComponentPlatform })
   componentPlatforms?: shared.ComponentPlatform[];
 
-  @Metadata({ data: "json, name=componentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=componentVersion" })
   componentVersion?: string;
 
-  @Metadata({ data: "json, name=lambdaArn" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaArn" })
   lambdaArn?: string;
 }
 
 
 export class CreateComponentVersionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=inlineRecipe" })
+  @SpeakeasyMetadata({ data: "json, name=inlineRecipe" })
   inlineRecipe?: string;
 
-  @Metadata({ data: "json, name=lambdaFunction" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunction" })
   lambdaFunction?: CreateComponentVersionRequestBodyLambdaFunction;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateComponentVersionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateComponentVersionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateComponentVersionRequestBody;
 }
 
 
 export class CreateComponentVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createComponentVersionResponse?: shared.CreateComponentVersionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   requestAlreadyInProgressException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartTimeRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  A time range used to specify when the behavior of an insight or anomaly started. 
 **/
 export class StartTimeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FromTime" })
+  @SpeakeasyMetadata({ data: "json, name=FromTime" })
   fromTime?: Date;
 
-  @Metadata({ data: "json, name=ToTime" })
+  @SpeakeasyMetadata({ data: "json, name=ToTime" })
   toTime?: Date;
 }

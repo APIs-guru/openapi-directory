@@ -12,6 +12,8 @@ const (
 	VersionStatusEnumCloning                  VersionStatusEnum = "CLONING"
 )
 
+// Version
+// A `Version` is a configuration and a collection of static files which determine how a site is displayed.
 type Version struct {
 	Config       *ServingConfig     `json:"config,omitempty"`
 	CreateTime   *string            `json:"createTime,omitempty"`

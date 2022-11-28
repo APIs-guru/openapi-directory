@@ -1,14 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Webhook } from "./webhook";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Webhook } from "./webhook";
 import { Auth0Config } from "./auth0config";
 import { CleverSettings } from "./cleversettings";
 import { ElasticConfig } from "./elasticconfig";
-import { ElasticConfig } from "./elasticconfig";
 import { IpFiltering } from "./ipfiltering";
 import { MailerSettings } from "./mailersettings";
-import { Auth0Config } from "./auth0config";
+
 
 
 // GlobalConfig
@@ -16,75 +13,75 @@ import { Auth0Config } from "./auth0config";
  * The global config object of Otoroshi, used to customize settings of the current Otoroshi instance
 **/
 export class GlobalConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertsEmails" })
+  @SpeakeasyMetadata({ data: "json, name=alertsEmails" })
   alertsEmails: string[];
 
-  @Metadata({ data: "json, name=alertsWebhooks", elemType: shared.Webhook })
+  @SpeakeasyMetadata({ data: "json, name=alertsWebhooks", elemType: Webhook })
   alertsWebhooks: Webhook[];
 
-  @Metadata({ data: "json, name=analyticsWebhooks", elemType: shared.Webhook })
+  @SpeakeasyMetadata({ data: "json, name=analyticsWebhooks", elemType: Webhook })
   analyticsWebhooks: Webhook[];
 
-  @Metadata({ data: "json, name=apiReadOnly" })
+  @SpeakeasyMetadata({ data: "json, name=apiReadOnly" })
   apiReadOnly: boolean;
 
-  @Metadata({ data: "json, name=autoLinkToDefaultGroup" })
+  @SpeakeasyMetadata({ data: "json, name=autoLinkToDefaultGroup" })
   autoLinkToDefaultGroup: boolean;
 
-  @Metadata({ data: "json, name=backofficeAuth0Config" })
+  @SpeakeasyMetadata({ data: "json, name=backofficeAuth0Config" })
   backofficeAuth0Config?: Auth0Config;
 
-  @Metadata({ data: "json, name=cleverSettings" })
+  @SpeakeasyMetadata({ data: "json, name=cleverSettings" })
   cleverSettings?: CleverSettings;
 
-  @Metadata({ data: "json, name=elasticReadsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=elasticReadsConfig" })
   elasticReadsConfig?: ElasticConfig;
 
-  @Metadata({ data: "json, name=elasticWritesConfigs", elemType: shared.ElasticConfig })
+  @SpeakeasyMetadata({ data: "json, name=elasticWritesConfigs", elemType: ElasticConfig })
   elasticWritesConfigs?: ElasticConfig[];
 
-  @Metadata({ data: "json, name=endlessIpAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=endlessIpAddresses" })
   endlessIpAddresses: string[];
 
-  @Metadata({ data: "json, name=ipFiltering" })
+  @SpeakeasyMetadata({ data: "json, name=ipFiltering" })
   ipFiltering: IpFiltering;
 
-  @Metadata({ data: "json, name=limitConcurrentRequests" })
+  @SpeakeasyMetadata({ data: "json, name=limitConcurrentRequests" })
   limitConcurrentRequests: boolean;
 
-  @Metadata({ data: "json, name=lines" })
+  @SpeakeasyMetadata({ data: "json, name=lines" })
   lines?: string[];
 
-  @Metadata({ data: "json, name=mailerSettings" })
+  @SpeakeasyMetadata({ data: "json, name=mailerSettings" })
   mailerSettings?: MailerSettings;
 
-  @Metadata({ data: "json, name=maxConcurrentRequests" })
+  @SpeakeasyMetadata({ data: "json, name=maxConcurrentRequests" })
   maxConcurrentRequests: number;
 
-  @Metadata({ data: "json, name=maxHttp10ResponseSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxHttp10ResponseSize" })
   maxHttp10ResponseSize?: number;
 
-  @Metadata({ data: "json, name=maxLogsSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxLogsSize" })
   maxLogsSize?: number;
 
-  @Metadata({ data: "json, name=middleFingers" })
+  @SpeakeasyMetadata({ data: "json, name=middleFingers" })
   middleFingers?: boolean;
 
-  @Metadata({ data: "json, name=perIpThrottlingQuota" })
+  @SpeakeasyMetadata({ data: "json, name=perIpThrottlingQuota" })
   perIpThrottlingQuota: number;
 
-  @Metadata({ data: "json, name=privateAppsAuth0Config" })
+  @SpeakeasyMetadata({ data: "json, name=privateAppsAuth0Config" })
   privateAppsAuth0Config?: Auth0Config;
 
-  @Metadata({ data: "json, name=streamEntityOnly" })
+  @SpeakeasyMetadata({ data: "json, name=streamEntityOnly" })
   streamEntityOnly: boolean;
 
-  @Metadata({ data: "json, name=throttlingQuota" })
+  @SpeakeasyMetadata({ data: "json, name=throttlingQuota" })
   throttlingQuota: number;
 
-  @Metadata({ data: "json, name=u2fLoginOnly" })
+  @SpeakeasyMetadata({ data: "json, name=u2fLoginOnly" })
   u2fLoginOnly: boolean;
 
-  @Metadata({ data: "json, name=useCircuitBreakers" })
+  @SpeakeasyMetadata({ data: "json, name=useCircuitBreakers" })
   useCircuitBreakers: boolean;
 }

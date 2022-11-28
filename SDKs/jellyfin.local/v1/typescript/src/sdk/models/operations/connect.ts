@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ConnectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=secret" })
   secret: string;
 }
 
 
 export class ConnectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ConnectQueryParams;
 }
 
 
 export class ConnectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   quickConnectResult?: shared.QuickConnectResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

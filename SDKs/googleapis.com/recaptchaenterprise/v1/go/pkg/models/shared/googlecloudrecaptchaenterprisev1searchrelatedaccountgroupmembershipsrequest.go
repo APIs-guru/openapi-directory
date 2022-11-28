@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsRequest
+// The request message to search related account group memberships.
 type GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsRequest struct {
 	HashedAccountID *string `json:"hashedAccountId,omitempty"`
 	PageSize        *int32  `json:"pageSize,omitempty"`

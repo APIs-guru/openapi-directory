@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import beaconinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetInfoForObservedBeaconsResponse:
-    beacons: Optional[List[beaconinfo.BeaconInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'beacons' }})
+    r"""GetInfoForObservedBeaconsResponse
+    Information about the requested beacons, optionally including attachment data.
+    """
+    
+    beacons: Optional[List[BeaconInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('beacons') }})
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteFleetsActionEnum(str, Enum):
     DELETE_FLEETS = "DeleteFleets"
@@ -10,8 +14,8 @@ class PostDeleteFleetsVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteFleetsQueryParams:
-    action: PostDeleteFleetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteFleetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteFleetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteFleetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteFleetsHeaders:
 
 @dataclass
 class PostDeleteFleetsRequest:
-    query_params: PostDeleteFleetsQueryParams = field(default=None)
-    headers: PostDeleteFleetsHeaders = field(default=None)
+    headers: PostDeleteFleetsHeaders = field()
+    query_params: PostDeleteFleetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteFleetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

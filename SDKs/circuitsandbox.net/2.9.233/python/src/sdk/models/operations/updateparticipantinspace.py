@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class UpdateParticipantInSpacePathParams:
-    space_id: str = field(default=None, metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
+    space_id: str = field(metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
     
 class UpdateParticipantInSpaceRequestBodyRoleEnum(str, Enum):
     MODERATOR = "MODERATOR"
@@ -15,24 +19,24 @@ class UpdateParticipantInSpaceRequestBodyRoleEnum(str, Enum):
 
 @dataclass
 class UpdateParticipantInSpaceRequestBody:
-    role: UpdateParticipantInSpaceRequestBodyRoleEnum = field(default=None, metadata={'form': { 'field_name': 'role' }})
-    user_id: str = field(default=None, metadata={'form': { 'field_name': 'userId' }})
+    role: UpdateParticipantInSpaceRequestBodyRoleEnum = field(metadata={'form': { 'field_name': 'role' }})
+    user_id: str = field(metadata={'form': { 'field_name': 'userId' }})
     
 
 @dataclass
 class UpdateParticipantInSpaceSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateParticipantInSpaceRequest:
-    path_params: UpdateParticipantInSpacePathParams = field(default=None)
-    request: UpdateParticipantInSpaceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateParticipantInSpaceSecurity = field(default=None)
+    path_params: UpdateParticipantInSpacePathParams = field()
+    request: UpdateParticipantInSpaceRequestBody = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: UpdateParticipantInSpaceSecurity = field()
     
 
 @dataclass
 class UpdateParticipantInSpaceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

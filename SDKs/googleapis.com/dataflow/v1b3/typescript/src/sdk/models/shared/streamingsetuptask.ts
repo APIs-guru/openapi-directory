@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingApplianceSnapshotConfig } from "./streamingappliancesnapshotconfig";
 import { TopologyConfig } from "./topologyconfig";
+
 
 
 // StreamingSetupTask
@@ -8,18 +9,18 @@ import { TopologyConfig } from "./topologyconfig";
  * A task which initializes part of a streaming Dataflow job.
 **/
 export class StreamingSetupTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=drain" })
+  @SpeakeasyMetadata({ data: "json, name=drain" })
   drain?: boolean;
 
-  @Metadata({ data: "json, name=receiveWorkPort" })
+  @SpeakeasyMetadata({ data: "json, name=receiveWorkPort" })
   receiveWorkPort?: number;
 
-  @Metadata({ data: "json, name=snapshotConfig" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotConfig" })
   snapshotConfig?: StreamingApplianceSnapshotConfig;
 
-  @Metadata({ data: "json, name=streamingComputationTopology" })
+  @SpeakeasyMetadata({ data: "json, name=streamingComputationTopology" })
   streamingComputationTopology?: TopologyConfig;
 
-  @Metadata({ data: "json, name=workerHarnessPort" })
+  @SpeakeasyMetadata({ data: "json, name=workerHarnessPort" })
   workerHarnessPort?: number;
 }

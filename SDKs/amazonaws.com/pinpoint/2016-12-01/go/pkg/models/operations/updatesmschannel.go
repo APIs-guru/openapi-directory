@@ -18,6 +18,8 @@ type UpdateSmsChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSmsChannelRequestBodySmsChannelRequest
+// Specifies the status and settings of the SMS channel for an application.
 type UpdateSmsChannelRequestBodySmsChannelRequest struct {
 	Enabled   *bool   `json:"Enabled,omitempty"`
 	SenderID  *string `json:"SenderId,omitempty"`

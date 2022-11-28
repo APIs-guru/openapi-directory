@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionTypeEnum } from "./permissiontypeenum";
 // ShareInvitationSummary
 /**
@@ -34,27 +34,27 @@ var ShareInvitationSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PermissionType" }),
+        SpeakeasyMetadata({ data: "json, name=PermissionType" }),
         __metadata("design:type", String)
     ], ShareInvitationSummary.prototype, "permissionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareInvitationId" }),
+        SpeakeasyMetadata({ data: "json, name=ShareInvitationId" }),
         __metadata("design:type", String)
     ], ShareInvitationSummary.prototype, "shareInvitationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SharedBy" }),
+        SpeakeasyMetadata({ data: "json, name=SharedBy" }),
         __metadata("design:type", String)
     ], ShareInvitationSummary.prototype, "sharedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=SharedWith" }),
+        SpeakeasyMetadata({ data: "json, name=SharedWith" }),
         __metadata("design:type", String)
     ], ShareInvitationSummary.prototype, "sharedWith", void 0);
     __decorate([
-        Metadata({ data: "json, name=WorkloadId" }),
+        SpeakeasyMetadata({ data: "json, name=WorkloadId" }),
         __metadata("design:type", String)
     ], ShareInvitationSummary.prototype, "workloadId", void 0);
     __decorate([
-        Metadata({ data: "json, name=WorkloadName" }),
+        SpeakeasyMetadata({ data: "json, name=WorkloadName" }),
         __metadata("design:type", String)
     ], ShareInvitationSummary.prototype, "workloadName", void 0);
     return ShareInvitationSummary;

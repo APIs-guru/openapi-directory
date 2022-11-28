@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetNotificationsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetNotificationsIDRequest:
-    path_params: GetNotificationsIDPathParams = field(default=None)
+    path_params: GetNotificationsIDPathParams = field()
     
 
 @dataclass
 class GetNotificationsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     notification_entity: Optional[shared.NotificationEntity] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecordColumn } from "./recordcolumn";
 import { RecordFormat } from "./recordformat";
+
 
 
 // SourceSchema
@@ -9,12 +9,12 @@ import { RecordFormat } from "./recordformat";
  * Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.
 **/
 export class SourceSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RecordColumns", elemType: shared.RecordColumn })
+  @SpeakeasyMetadata({ data: "json, name=RecordColumns", elemType: RecordColumn })
   recordColumns: RecordColumn[];
 
-  @Metadata({ data: "json, name=RecordEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=RecordEncoding" })
   recordEncoding?: string;
 
-  @Metadata({ data: "json, name=RecordFormat" })
+  @SpeakeasyMetadata({ data: "json, name=RecordFormat" })
   recordFormat: RecordFormat;
 }

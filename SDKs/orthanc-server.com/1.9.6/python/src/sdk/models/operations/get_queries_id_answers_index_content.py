@@ -4,8 +4,8 @@ from typing import Any,Optional
 
 @dataclass
 class GetQueriesIDAnswersIndexContentPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    index: str = field(default=None, metadata={'path_param': { 'field_name': 'index', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    index: str = field(metadata={'path_param': { 'field_name': 'index', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetQueriesIDAnswersIndexContentQueryParams:
 
 @dataclass
 class GetQueriesIDAnswersIndexContentRequest:
-    path_params: GetQueriesIDAnswersIndexContentPathParams = field(default=None)
-    query_params: GetQueriesIDAnswersIndexContentQueryParams = field(default=None)
+    path_params: GetQueriesIDAnswersIndexContentPathParams = field()
+    query_params: GetQueriesIDAnswersIndexContentQueryParams = field()
     
 
 @dataclass
 class GetQueriesIDAnswersIndexContentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_queries_id_answers_index_content_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

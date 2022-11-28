@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseFcmDataV1beta1Data } from "./googlefirebasefcmdatav1beta1data";
 import { GoogleTypeDate } from "./googletypedate";
+
 
 
 // GoogleFirebaseFcmDataV1beta1AndroidDeliveryData
@@ -8,15 +9,15 @@ import { GoogleTypeDate } from "./googletypedate";
  * Message delivery data for a given date, app, and analytics label combination.
 **/
 export class GoogleFirebaseFcmDataV1beta1AndroidDeliveryData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyticsLabel" })
+  @SpeakeasyMetadata({ data: "json, name=analyticsLabel" })
   analyticsLabel?: string;
 
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GoogleFirebaseFcmDataV1beta1Data;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: GoogleTypeDate;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum CapacitySizeTypeEnum {
-    InstanceCount = "INSTANCE_COUNT"
-,    CapacityPercent = "CAPACITY_PERCENT"
+    InstanceCount = "INSTANCE_COUNT",
+    CapacityPercent = "CAPACITY_PERCENT"
 }

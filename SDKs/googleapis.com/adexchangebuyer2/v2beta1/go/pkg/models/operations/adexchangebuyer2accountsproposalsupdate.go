@@ -31,7 +31,7 @@ type Adexchangebuyer2AccountsProposalsUpdateSecurity struct {
 type Adexchangebuyer2AccountsProposalsUpdateRequest struct {
 	PathParams  Adexchangebuyer2AccountsProposalsUpdatePathParams
 	QueryParams Adexchangebuyer2AccountsProposalsUpdateQueryParams
-	Request     *shared.Proposal `request:"mediaType=application/json"`
+	Request     *shared.ProposalInput `request:"mediaType=application/json"`
 	Security    Adexchangebuyer2AccountsProposalsUpdateSecurity
 }
 

@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BucketAccessControl } from "./bucketaccesscontrol";
 import { ObjectAccessControl } from "./objectaccesscontrol";
 
 
+
 export class BucketCors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxAgeSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxAgeSeconds" })
   maxAgeSeconds?: number;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string[];
 
-  @Metadata({ data: "json, name=origin" })
+  @SpeakeasyMetadata({ data: "json, name=origin" })
   origin?: string[];
 
-  @Metadata({ data: "json, name=responseHeader" })
+  @SpeakeasyMetadata({ data: "json, name=responseHeader" })
   responseHeader?: string[];
 }
 
@@ -24,7 +24,7 @@ export class BucketCors extends SpeakeasyBase {
  * The action to take.
 **/
 export class BucketLifecycleRuleAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -34,25 +34,25 @@ export class BucketLifecycleRuleAction extends SpeakeasyBase {
  * The condition(s) under which the action will be taken.
 **/
 export class BucketLifecycleRuleCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=age" })
+  @SpeakeasyMetadata({ data: "json, name=age" })
   age?: number;
 
-  @Metadata({ data: "json, name=createdBefore" })
+  @SpeakeasyMetadata({ data: "json, name=createdBefore" })
   createdBefore?: Date;
 
-  @Metadata({ data: "json, name=isLive" })
+  @SpeakeasyMetadata({ data: "json, name=isLive" })
   isLive?: boolean;
 
-  @Metadata({ data: "json, name=numNewerVersions" })
+  @SpeakeasyMetadata({ data: "json, name=numNewerVersions" })
   numNewerVersions?: number;
 }
 
 
 export class BucketLifecycleRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: BucketLifecycleRuleAction;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: BucketLifecycleRuleCondition;
 }
 
@@ -62,7 +62,7 @@ export class BucketLifecycleRule extends SpeakeasyBase {
  * The bucket's lifecycle configuration. See object lifecycle management for more information.
 **/
 export class BucketLifecycle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rule", elemType: shared.BucketLifecycleRule })
+  @SpeakeasyMetadata({ data: "json, name=rule", elemType: BucketLifecycleRule })
   rule?: BucketLifecycleRule[];
 }
 
@@ -72,10 +72,10 @@ export class BucketLifecycle extends SpeakeasyBase {
  * The bucket's logging configuration, which defines the destination bucket and optional name prefix for the current bucket's logs.
 **/
 export class BucketLogging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logBucket" })
+  @SpeakeasyMetadata({ data: "json, name=logBucket" })
   logBucket?: string;
 
-  @Metadata({ data: "json, name=logObjectPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=logObjectPrefix" })
   logObjectPrefix?: string;
 }
 
@@ -85,10 +85,10 @@ export class BucketLogging extends SpeakeasyBase {
  * The owner of the bucket. This is always the project team's owner group.
 **/
 export class BucketOwner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: string;
 
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: string;
 }
 
@@ -98,7 +98,7 @@ export class BucketOwner extends SpeakeasyBase {
  * The bucket's versioning configuration.
 **/
 export class BucketVersioning extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
@@ -108,10 +108,10 @@ export class BucketVersioning extends SpeakeasyBase {
  * The bucket's website configuration.
 **/
 export class BucketWebsite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mainPageSuffix" })
+  @SpeakeasyMetadata({ data: "json, name=mainPageSuffix" })
   mainPageSuffix?: string;
 
-  @Metadata({ data: "json, name=notFoundPage" })
+  @SpeakeasyMetadata({ data: "json, name=notFoundPage" })
   notFoundPage?: string;
 }
 
@@ -121,54 +121,54 @@ export class BucketWebsite extends SpeakeasyBase {
  * A bucket.
 **/
 export class Bucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acl", elemType: shared.BucketAccessControl })
+  @SpeakeasyMetadata({ data: "json, name=acl", elemType: BucketAccessControl })
   acl?: BucketAccessControl[];
 
-  @Metadata({ data: "json, name=cors", elemType: shared.BucketCors })
+  @SpeakeasyMetadata({ data: "json, name=cors", elemType: BucketCors })
   cors?: BucketCors[];
 
-  @Metadata({ data: "json, name=defaultObjectAcl", elemType: shared.ObjectAccessControl })
+  @SpeakeasyMetadata({ data: "json, name=defaultObjectAcl", elemType: ObjectAccessControl })
   defaultObjectAcl?: ObjectAccessControl[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycle" })
   lifecycle?: BucketLifecycle;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: BucketLogging;
 
-  @Metadata({ data: "json, name=metageneration" })
+  @SpeakeasyMetadata({ data: "json, name=metageneration" })
   metageneration?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: BucketOwner;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=storageClass" })
+  @SpeakeasyMetadata({ data: "json, name=storageClass" })
   storageClass?: string;
 
-  @Metadata({ data: "json, name=timeCreated" })
+  @SpeakeasyMetadata({ data: "json, name=timeCreated" })
   timeCreated?: Date;
 
-  @Metadata({ data: "json, name=versioning" })
+  @SpeakeasyMetadata({ data: "json, name=versioning" })
   versioning?: BucketVersioning;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: BucketWebsite;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
+
 
 
 // Get
@@ -8,15 +8,15 @@ import { AttributeValue } from "./attributevalue";
  * Specifies an item and related attribute values to retrieve in a <code>TransactGetItem</code> object.
 **/
 export class Get extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExpressionAttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=ExpressionAttributeNames" })
   expressionAttributeNames?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Key", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Key", elemType: AttributeValue })
   key: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=ProjectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectionExpression" })
   projectionExpression?: string;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

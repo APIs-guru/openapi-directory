@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMapsUsingGet1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId" })
   accId: string;
 }
 
 
 export class GetMapsUsingGet1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMapsUsingGet1PathParams;
 }
 
 
 export class GetMapsUsingGet1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMapsUsingGet1200WildcardString?: string;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CdnSettings } from "./cdnsettings";
 import { LiveStreamContentDetails } from "./livestreamcontentdetails";
 import { LiveStreamSnippet } from "./livestreamsnippet";
 import { LiveStreamStatus } from "./livestreamstatus";
+
 
 
 // LiveStream
@@ -10,24 +11,24 @@ import { LiveStreamStatus } from "./livestreamstatus";
  * A live stream describes a live ingestion point.
 **/
 export class LiveStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cdn" })
+  @SpeakeasyMetadata({ data: "json, name=cdn" })
   cdn?: CdnSettings;
 
-  @Metadata({ data: "json, name=contentDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentDetails" })
   contentDetails?: LiveStreamContentDetails;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: LiveStreamSnippet;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: LiveStreamStatus;
 }

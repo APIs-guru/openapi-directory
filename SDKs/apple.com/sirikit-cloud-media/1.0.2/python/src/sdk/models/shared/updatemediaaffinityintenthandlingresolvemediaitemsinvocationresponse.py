@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import executionmetrics
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateMediaAffinityIntentHandlingResolveMediaItemsInvocationResponse:
-    debug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'debug' }})
-    method: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    metrics: Optional[executionmetrics.ExecutionMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    result: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    method: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    result: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    debug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('debug') }})
+    metrics: Optional[ExecutionMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
     

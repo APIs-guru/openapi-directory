@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import graphqlapi
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateGraphqlAPIResponse:
-    graphql_api: Optional[graphqlapi.GraphqlAPI] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'graphqlApi' }})
+    graphql_api: Optional[GraphqlAPI] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('graphqlApi') }})
     

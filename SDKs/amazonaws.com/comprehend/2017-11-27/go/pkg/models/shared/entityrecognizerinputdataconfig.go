@@ -1,5 +1,7 @@
 package shared
 
+// EntityRecognizerInputDataConfig
+// Specifies the format and location of the input data.
 type EntityRecognizerInputDataConfig struct {
 	Annotations        *EntityRecognizerAnnotations    `json:"Annotations,omitempty"`
 	AugmentedManifests []AugmentedManifestsListItem    `json:"AugmentedManifests,omitempty"`

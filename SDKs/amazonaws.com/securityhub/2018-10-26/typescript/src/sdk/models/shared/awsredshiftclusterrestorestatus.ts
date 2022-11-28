@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterRestoreStatus
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the status of a cluster restore action. It only applies if the cluster was created by restoring a snapshot.
 **/
 export class AwsRedshiftClusterRestoreStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentRestoreRateInMegaBytesPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentRestoreRateInMegaBytesPerSecond" })
   currentRestoreRateInMegaBytesPerSecond?: number;
 
-  @Metadata({ data: "json, name=ElapsedTimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=ElapsedTimeInSeconds" })
   elapsedTimeInSeconds?: number;
 
-  @Metadata({ data: "json, name=EstimatedTimeToCompletionInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=EstimatedTimeToCompletionInSeconds" })
   estimatedTimeToCompletionInSeconds?: number;
 
-  @Metadata({ data: "json, name=ProgressInMegaBytes" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressInMegaBytes" })
   progressInMegaBytes?: number;
 
-  @Metadata({ data: "json, name=SnapshotSizeInMegaBytes" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotSizeInMegaBytes" })
   snapshotSizeInMegaBytes?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyGlobalClusterActionEnum(str, Enum):
     MODIFY_GLOBAL_CLUSTER = "ModifyGlobalCluster"
@@ -10,11 +14,11 @@ class GetModifyGlobalClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyGlobalClusterQueryParams:
-    action: GetModifyGlobalClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyGlobalClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    global_cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'GlobalClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyGlobalClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     deletion_protection: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DeletionProtection', 'style': 'form', 'explode': True }})
-    global_cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'GlobalClusterIdentifier', 'style': 'form', 'explode': True }})
     new_global_cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NewGlobalClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetModifyGlobalClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyGlobalClusterHeaders:
 
 @dataclass
 class GetModifyGlobalClusterRequest:
-    query_params: GetModifyGlobalClusterQueryParams = field(default=None)
-    headers: GetModifyGlobalClusterHeaders = field(default=None)
+    headers: GetModifyGlobalClusterHeaders = field()
+    query_params: GetModifyGlobalClusterQueryParams = field()
     
 
 @dataclass
 class GetModifyGlobalClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

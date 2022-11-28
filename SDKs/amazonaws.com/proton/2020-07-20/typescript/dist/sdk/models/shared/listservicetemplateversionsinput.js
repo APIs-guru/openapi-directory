@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListServiceTemplateVersionsInput = /** @class */ (function (_super) {
     __extends(ListServiceTemplateVersionsInput, _super);
     function ListServiceTemplateVersionsInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=majorVersion" }),
+        SpeakeasyMetadata({ data: "json, name=majorVersion" }),
         __metadata("design:type", String)
     ], ListServiceTemplateVersionsInput.prototype, "majorVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], ListServiceTemplateVersionsInput.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListServiceTemplateVersionsInput.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateName" }),
+        SpeakeasyMetadata({ data: "json, name=templateName" }),
         __metadata("design:type", String)
     ], ListServiceTemplateVersionsInput.prototype, "templateName", void 0);
     return ListServiceTemplateVersionsInput;

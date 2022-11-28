@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NiCallerIdentity } from "./nicalleridentity";
 import { NiCurrentCarrierProperties } from "./nicurrentcarrierproperties";
 import { NiInitialCarrierProperties } from "./niinitialcarrierproperties";

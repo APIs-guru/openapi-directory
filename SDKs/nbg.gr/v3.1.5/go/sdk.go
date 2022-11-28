@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://apis.nbg.gr/sandbox/uk.openbanking.accountinfo/oauth2/v3.1.5",
 	"https://services.nbg.gr/apis/open-banking/v3.1.5/aisp",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAccountAccessConsentsConsentID - Delete Account Access Consents
+// Delete Account Access Consents by Consent ID
 func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request operations.DeleteAccountAccessConsentsConsentIDRequest) (*operations.DeleteAccountAccessConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account-access-consents/{consentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -64,7 +87,7 @@ func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -156,8 +179,10 @@ func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request 
 	return res, nil
 }
 
+// DeleteSandboxSandboxID - Delete Sandbox
+// Delete Sandbox
 func (s *SDK) DeleteSandboxSandboxID(ctx context.Context, request operations.DeleteSandboxSandboxIDRequest) (*operations.DeleteSandboxSandboxIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sandbox/{sandboxId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -165,7 +190,7 @@ func (s *SDK) DeleteSandboxSandboxID(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -241,8 +266,10 @@ func (s *SDK) DeleteSandboxSandboxID(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// GetAccountAccessConsentsConsentID - Get Account Access Consents
+// Get Account Access Consents by Consent ID
 func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request operations.GetAccountAccessConsentsConsentIDRequest) (*operations.GetAccountAccessConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account-access-consents/{consentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -252,7 +279,7 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -360,8 +387,10 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetAccounts - Get Accounts
+// Get Accounts
 func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsRequest) (*operations.GetAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/accounts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -371,7 +400,7 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -479,8 +508,10 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 	return res, nil
 }
 
+// GetAccountsAccountID - Get Accounts
+// Get Accounts by Account ID
 func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAccountsAccountIDRequest) (*operations.GetAccountsAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -490,7 +521,7 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -598,8 +629,10 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 	return res, nil
 }
 
+// GetAccountsAccountIDBalances - Get Balances
+// Get Balances by Account ID
 func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operations.GetAccountsAccountIDBalancesRequest) (*operations.GetAccountsAccountIDBalancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/balances", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -609,7 +642,7 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -717,8 +750,10 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAccountsAccountIDBeneficiaries - Get Beneficiaries
+// Get Beneficiaries by Account ID
 func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request operations.GetAccountsAccountIDBeneficiariesRequest) (*operations.GetAccountsAccountIDBeneficiariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/beneficiaries", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -728,7 +763,7 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -836,8 +871,10 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetAccountsAccountIDParties - Get Parties
+// Get Parties by Account ID
 func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operations.GetAccountsAccountIDPartiesRequest) (*operations.GetAccountsAccountIDPartiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/parties", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -847,7 +884,7 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -955,8 +992,10 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAccountsAccountIDParty - Get Party
+// Get Party by Account ID
 func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.GetAccountsAccountIDPartyRequest) (*operations.GetAccountsAccountIDPartyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/party", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -966,7 +1005,7 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1074,8 +1113,10 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAccountsAccountIDScheduledPayments - Get Scheduled Payments
+// Get Scheduled Payments by Account ID
 func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request operations.GetAccountsAccountIDScheduledPaymentsRequest) (*operations.GetAccountsAccountIDScheduledPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/scheduled-payments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1085,7 +1126,7 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1193,8 +1234,10 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 	return res, nil
 }
 
+// GetAccountsAccountIDStandingOrders - Get Standing Orders
+// Get Standing Orders by Account ID
 func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request operations.GetAccountsAccountIDStandingOrdersRequest) (*operations.GetAccountsAccountIDStandingOrdersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/standing-orders", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1204,7 +1247,7 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1312,8 +1355,10 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 	return res, nil
 }
 
+// GetAccountsAccountIDStatements - Get Statements
+// Get Statements by Account ID
 func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operations.GetAccountsAccountIDStatementsRequest) (*operations.GetAccountsAccountIDStatementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/statements", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1325,7 +1370,7 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1433,8 +1478,10 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAccountsAccountIDStatementsStatementID - Get Statements
+// Get Statements by Account ID and Statement ID
 func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, request operations.GetAccountsAccountIDStatementsStatementIDRequest) (*operations.GetAccountsAccountIDStatementsStatementIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/statements/{statementId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1444,7 +1491,7 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1552,8 +1599,10 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 	return res, nil
 }
 
+// GetAccountsAccountIDStatementsStatementIDFile - Get Statements
+// Get Statement PDF File by Account ID and Statement ID
 func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context, request operations.GetAccountsAccountIDStatementsStatementIDFileRequest) (*operations.GetAccountsAccountIDStatementsStatementIDFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/statements/{statementId}/file", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1563,7 +1612,7 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1643,8 +1692,10 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 	return res, nil
 }
 
+// GetAccountsAccountIDStatementsStatementIDTransactions - Get Transactions
+// Get Transactions by Account ID and Statement ID
 func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.Context, request operations.GetAccountsAccountIDStatementsStatementIDTransactionsRequest) (*operations.GetAccountsAccountIDStatementsStatementIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/statements/{statementId}/transactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1654,7 +1705,7 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1762,8 +1813,10 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 	return res, nil
 }
 
+// GetAccountsAccountIDTransactions - Get Transactions
+// Get Transactions by Account ID
 func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request operations.GetAccountsAccountIDTransactionsRequest) (*operations.GetAccountsAccountIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{accountId}/transactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1775,7 +1828,7 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1883,8 +1936,10 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetParty - Get Party
+// Get Party
 func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) (*operations.GetPartyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/party"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1894,7 +1949,7 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2002,8 +2057,10 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 	return res, nil
 }
 
+// GetSandboxSandboxID - Export Sandbox
+// Export Sandbox
 func (s *SDK) GetSandboxSandboxID(ctx context.Context, request operations.GetSandboxSandboxIDRequest) (*operations.GetSandboxSandboxIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sandbox/{sandboxId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2011,7 +2068,7 @@ func (s *SDK) GetSandboxSandboxID(ctx context.Context, request operations.GetSan
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2103,8 +2160,10 @@ func (s *SDK) GetSandboxSandboxID(ctx context.Context, request operations.GetSan
 	return res, nil
 }
 
+// PostAccountAccessConsents - Create Account Access Consents
+// Create Account Access Consents
 func (s *SDK) PostAccountAccessConsents(ctx context.Context, request operations.PostAccountAccessConsentsRequest) (*operations.PostAccountAccessConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account-access-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2121,7 +2180,7 @@ func (s *SDK) PostAccountAccessConsents(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2232,8 +2291,10 @@ func (s *SDK) PostAccountAccessConsents(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostSandbox - Create Sandbox
+// Create Sandbox
 func (s *SDK) PostSandbox(ctx context.Context, request operations.PostSandboxRequest) (*operations.PostSandboxResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sandbox"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2248,7 +2309,7 @@ func (s *SDK) PostSandbox(ctx context.Context, request operations.PostSandboxReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2343,8 +2404,10 @@ func (s *SDK) PostSandbox(ctx context.Context, request operations.PostSandboxReq
 	return res, nil
 }
 
+// PutSandbox - Import Sandbox
+// Import Sandbox
 func (s *SDK) PutSandbox(ctx context.Context, request operations.PutSandboxRequest) (*operations.PutSandboxResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sandbox"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2359,7 +2422,7 @@ func (s *SDK) PutSandbox(ctx context.Context, request operations.PutSandboxReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

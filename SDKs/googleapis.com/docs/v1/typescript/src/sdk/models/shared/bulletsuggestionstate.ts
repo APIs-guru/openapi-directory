@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextStyleSuggestionState } from "./textstylesuggestionstate";
+
 
 
 // BulletSuggestionState
@@ -7,12 +8,12 @@ import { TextStyleSuggestionState } from "./textstylesuggestionstate";
  * A mask that indicates which of the fields on the base Bullet have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class BulletSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listIdSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=listIdSuggested" })
   listIdSuggested?: boolean;
 
-  @Metadata({ data: "json, name=nestingLevelSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=nestingLevelSuggested" })
   nestingLevelSuggested?: boolean;
 
-  @Metadata({ data: "json, name=textStyleSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=textStyleSuggestionState" })
   textStyleSuggestionState?: TextStyleSuggestionState;
 }

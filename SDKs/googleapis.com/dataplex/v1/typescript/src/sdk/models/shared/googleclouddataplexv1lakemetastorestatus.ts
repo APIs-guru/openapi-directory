@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDataplexV1LakeMetastoreStatusStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    None = "NONE"
-,    Ready = "READY"
-,    Updating = "UPDATING"
-,    Error = "ERROR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    None = "NONE",
+    Ready = "READY",
+    Updating = "UPDATING",
+    Error = "ERROR"
 }
 
 
@@ -14,15 +15,15 @@ export enum GoogleCloudDataplexV1LakeMetastoreStatusStateEnum {
  * Status of Lake and Dataproc Metastore service instance association.
 **/
 export class GoogleCloudDataplexV1LakeMetastoreStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudDataplexV1LakeMetastoreStatusStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

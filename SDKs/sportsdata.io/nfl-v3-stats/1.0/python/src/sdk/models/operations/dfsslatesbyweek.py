@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class DfsSlatesByWeekFormatEnum(str, Enum):
     XML = "XML"
@@ -8,19 +9,19 @@ class DfsSlatesByWeekFormatEnum(str, Enum):
 
 @dataclass
 class DfsSlatesByWeekPathParams:
-    format: DfsSlatesByWeekFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
-    week: str = field(default=None, metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
+    format: DfsSlatesByWeekFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    week: str = field(metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DfsSlatesByWeekRequest:
-    path_params: DfsSlatesByWeekPathParams = field(default=None)
+    path_params: DfsSlatesByWeekPathParams = field()
     
 
 @dataclass
 class DfsSlatesByWeekResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dfs_slates: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

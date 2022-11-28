@@ -6,6 +6,8 @@ const (
 	PriceRangeTypeEnumStandard PriceRangeTypeEnum = "standard"
 )
 
+// PriceRange
+// PriceRange
 type PriceRange struct {
 	Currency *string             `json:"currency,omitempty"`
 	Max      *float64            `json:"max,omitempty"`

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetPackagesSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetPackagesRequest:
-    security: GetPackagesSecurity = field(default=None)
+    security: GetPackagesSecurity = field()
     
 
 @dataclass
 class GetPackagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     package_infos: Optional[List[shared.PackageInfo]] = field(default=None)
-    status_code: int = field(default=None)
     

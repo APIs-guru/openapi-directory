@@ -9,6 +9,8 @@ const (
 	GoogleCloudDataplexV1ActionCategoryEnumDataDiscovery       GoogleCloudDataplexV1ActionCategoryEnum = "DATA_DISCOVERY"
 )
 
+// GoogleCloudDataplexV1Action
+// Action represents an issue requiring administrator action for resolution.
 type GoogleCloudDataplexV1Action struct {
 	Asset                     *string                                               `json:"asset,omitempty"`
 	Category                  *GoogleCloudDataplexV1ActionCategoryEnum              `json:"category,omitempty"`

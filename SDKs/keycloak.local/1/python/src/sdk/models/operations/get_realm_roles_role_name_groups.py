@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmRolesRoleNameGroupsPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
-    role_name: str = field(default=None, metadata={'path_param': { 'field_name': 'role-name', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    role_name: str = field(metadata={'path_param': { 'field_name': 'role-name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GetRealmRolesRoleNameGroupsQueryParams:
 
 @dataclass
 class GetRealmRolesRoleNameGroupsRequest:
-    path_params: GetRealmRolesRoleNameGroupsPathParams = field(default=None)
-    query_params: GetRealmRolesRoleNameGroupsQueryParams = field(default=None)
+    path_params: GetRealmRolesRoleNameGroupsPathParams = field()
+    query_params: GetRealmRolesRoleNameGroupsQueryParams = field()
     
 
 @dataclass
 class GetRealmRolesRoleNameGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_representations: Optional[List[shared.GroupRepresentation]] = field(default=None)
-    status_code: int = field(default=None)
     

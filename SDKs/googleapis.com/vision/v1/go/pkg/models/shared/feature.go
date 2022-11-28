@@ -18,6 +18,8 @@ const (
 	FeatureTypeEnumObjectLocalization    FeatureTypeEnum = "OBJECT_LOCALIZATION"
 )
 
+// Feature
+// The type of Google Cloud Vision API detection to perform, and the maximum number of results to return for that type. Multiple `Feature` objects can be specified in the `features` list.
 type Feature struct {
 	MaxResults *int32           `json:"maxResults,omitempty"`
 	Model      *string          `json:"model,omitempty"`

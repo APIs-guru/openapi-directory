@@ -10,13 +10,13 @@ class RequestAvatarHeaders:
 
 @dataclass
 class RequestAvatarRequest:
-    headers: RequestAvatarHeaders = field(default=None)
+    headers: RequestAvatarHeaders = field()
     
 
 @dataclass
 class RequestAvatarResponse:
+    content_type: str = field()
+    status_code: int = field()
     avatar: Optional[shared.Avatar] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

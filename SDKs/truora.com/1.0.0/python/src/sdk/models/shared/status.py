@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class StatusDataSetEnum(str, Enum):
     AFFILIATIONS_AND_INSURANCES = "affiliations_and_insurances"
@@ -22,9 +24,13 @@ class StatusDataSetEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Status:
-    data_set: Optional[StatusDataSetEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_set' }})
-    database_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'database_id' }})
-    database_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'database_name' }})
-    invalid_inputs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invalid_inputs' }})
-    status: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""Status
+    Represents the status of databases used to generate background checks
+    """
+    
+    data_set: Optional[StatusDataSetEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data_set') }})
+    database_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('database_id') }})
+    database_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('database_name') }})
+    invalid_inputs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invalid_inputs') }})
+    status: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

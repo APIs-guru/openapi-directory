@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UploadToken } from "./uploadtoken";
 import { Pagination } from "./pagination";
 
 
+
 export class TokenListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.UploadToken })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: UploadToken })
   data: UploadToken[];
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: Pagination;
 }

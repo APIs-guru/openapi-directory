@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class LicensesGetStatusEnum(str, Enum):
@@ -19,13 +20,13 @@ class LicensesGetQueryParams:
 
 @dataclass
 class LicensesGetRequest:
-    query_params: LicensesGetQueryParams = field(default=None)
+    query_params: LicensesGetQueryParams = field()
     
 
 @dataclass
 class LicensesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_dealer_db_models_license_: Optional[shared.APIPagedResponseDealerDbModelsLicense] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

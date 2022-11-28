@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserRolePermissionGroup } from "./userrolepermissiongroup";
+
 
 
 // UserRolePermissionGroupsListResponse
@@ -8,9 +8,9 @@ import { UserRolePermissionGroup } from "./userrolepermissiongroup";
  * User Role Permission Group List Response
 **/
 export class UserRolePermissionGroupsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=userRolePermissionGroups", elemType: shared.UserRolePermissionGroup })
+  @SpeakeasyMetadata({ data: "json, name=userRolePermissionGroups", elemType: UserRolePermissionGroup })
   userRolePermissionGroups?: UserRolePermissionGroup[];
 }

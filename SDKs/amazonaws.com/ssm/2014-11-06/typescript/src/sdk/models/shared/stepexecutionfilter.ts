@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepExecutionFilterKeyEnum } from "./stepexecutionfilterkeyenum";
+
 
 
 // StepExecutionFilter
@@ -7,9 +8,9 @@ import { StepExecutionFilterKeyEnum } from "./stepexecutionfilterkeyenum";
  * A filter to limit the amount of step execution information returned by the call.
 **/
 export class StepExecutionFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: StepExecutionFilterKeyEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

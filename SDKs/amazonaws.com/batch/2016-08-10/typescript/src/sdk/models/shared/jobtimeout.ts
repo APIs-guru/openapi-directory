@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobTimeout
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a job timeout configuration.
 **/
 export class JobTimeout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attemptDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=attemptDurationSeconds" })
   attemptDurationSeconds?: number;
 }

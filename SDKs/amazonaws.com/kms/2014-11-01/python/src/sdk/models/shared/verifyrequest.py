@@ -1,17 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import messagetype_enum
-from . import signingalgorithmspec_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VerifyRequest:
-    grant_tokens: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GrantTokens' }})
-    key_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyId' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
-    message_type: Optional[messagetype_enum.MessageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MessageType' }})
-    signature: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Signature' }})
-    signing_algorithm: signingalgorithmspec_enum.SigningAlgorithmSpecEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SigningAlgorithm' }})
+    key_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyId') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
+    signature: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Signature') }})
+    signing_algorithm: SigningAlgorithmSpecEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SigningAlgorithm') }})
+    grant_tokens: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GrantTokens') }})
+    message_type: Optional[MessageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MessageType') }})
     

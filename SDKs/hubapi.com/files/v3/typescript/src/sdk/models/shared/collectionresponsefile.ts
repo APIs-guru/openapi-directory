@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Paging } from "./paging";
 import { File } from "./file";
+
 
 
 // CollectionResponseFile
@@ -9,9 +9,9 @@ import { File } from "./file";
  * Collections of files
 **/
 export class CollectionResponseFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paging" })
+  @SpeakeasyMetadata({ data: "json, name=paging" })
   paging?: Paging;
 
-  @Metadata({ data: "json, name=results", elemType: shared.File })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: File })
   results: File[];
 }

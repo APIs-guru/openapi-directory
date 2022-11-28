@@ -1,5 +1,7 @@
 package shared
 
+// UpdateTaskRequest
+// UpdateTaskResponse
 type UpdateTaskRequest struct {
 	CloudWatchLogGroupArn *string       `json:"CloudWatchLogGroupArn,omitempty"`
 	Excludes              []FilterRule  `json:"Excludes,omitempty"`

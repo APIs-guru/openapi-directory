@@ -1,6 +1,7 @@
 
 
+
 export enum SnapshotTypeEnum {
-    Auto = "Auto"
-,    Manual = "Manual"
+    Auto = "Auto",
+    Manual = "Manual"
 }

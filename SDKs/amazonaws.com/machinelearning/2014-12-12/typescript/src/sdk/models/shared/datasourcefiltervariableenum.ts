@@ -1,10 +1,11 @@
 
 
+
 export enum DataSourceFilterVariableEnum {
-    CreatedAt = "CreatedAt"
-,    LastUpdatedAt = "LastUpdatedAt"
-,    Status = "Status"
-,    Name = "Name"
-,    DataLocationS3 = "DataLocationS3"
-,    IamUser = "IAMUser"
+    CreatedAt = "CreatedAt",
+    LastUpdatedAt = "LastUpdatedAt",
+    Status = "Status",
+    Name = "Name",
+    DataLocationS3 = "DataLocationS3",
+    IamUser = "IAMUser"
 }

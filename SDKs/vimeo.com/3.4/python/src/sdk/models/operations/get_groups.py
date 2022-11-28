@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetGroupsDirectionEnum(str, Enum):
@@ -29,12 +33,12 @@ class GetGroupsQueryParams:
 
 @dataclass
 class GetGroupsRequest:
-    query_params: GetGroupsQueryParams = field(default=None)
+    query_params: GetGroupsQueryParams = field()
     
 
 @dataclass
 class GetGroupsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     groups: Optional[List[shared.Group]] = field(default=None)
     

@@ -9,6 +9,8 @@ const (
 	FreeListingsProgramStatusGlobalStateEnumEnabled                 FreeListingsProgramStatusGlobalStateEnum = "ENABLED"
 )
 
+// FreeListingsProgramStatus
+// Response message for GetFreeListingsProgramStatus.
 type FreeListingsProgramStatus struct {
 	GlobalState    *FreeListingsProgramStatusGlobalStateEnum `json:"globalState,omitempty"`
 	RegionStatuses []FreeListingsProgramStatusRegionStatus   `json:"regionStatuses,omitempty"`

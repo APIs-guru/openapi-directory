@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,43 +22,47 @@ class UpdateInfrastructureConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateInfrastructureConfigurationRequestBodyLogging:
-    s3_logs: Optional[shared.S3Logs] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Logs' }})
+    r"""UpdateInfrastructureConfigurationRequestBodyLogging
+    Logging configuration defines where Image Builder uploads your logs.
+    """
+    
+    s3_logs: Optional[shared.S3Logs] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Logs') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateInfrastructureConfigurationRequestBody:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    infrastructure_configuration_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'infrastructureConfigurationArn' }})
-    instance_profile_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceProfileName' }})
-    instance_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceTypes' }})
-    key_pair: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyPair' }})
-    logging: Optional[UpdateInfrastructureConfigurationRequestBodyLogging] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logging' }})
-    resource_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceTags' }})
-    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityGroupIds' }})
-    sns_topic_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snsTopicArn' }})
-    subnet_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnetId' }})
-    terminate_instance_on_failure: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'terminateInstanceOnFailure' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    infrastructure_configuration_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('infrastructureConfigurationArn') }})
+    instance_profile_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceProfileName') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    instance_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceTypes') }})
+    key_pair: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyPair') }})
+    logging: Optional[UpdateInfrastructureConfigurationRequestBodyLogging] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logging') }})
+    resource_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceTags') }})
+    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityGroupIds') }})
+    sns_topic_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snsTopicArn') }})
+    subnet_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subnetId') }})
+    terminate_instance_on_failure: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('terminateInstanceOnFailure') }})
     
 
 @dataclass
 class UpdateInfrastructureConfigurationRequest:
-    headers: UpdateInfrastructureConfigurationHeaders = field(default=None)
-    request: UpdateInfrastructureConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateInfrastructureConfigurationHeaders = field()
+    request: UpdateInfrastructureConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateInfrastructureConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_infrastructure_configuration_response: Optional[shared.UpdateInfrastructureConfigurationResponse] = field(default=None)
     

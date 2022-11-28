@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactGroup } from "./contactgroup";
+
 
 
 // ListContactGroupsResponse
@@ -8,15 +8,15 @@ import { ContactGroup } from "./contactgroup";
  * The response to a list contact groups request.
 **/
 export class ListContactGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactGroups", elemType: shared.ContactGroup })
+  @SpeakeasyMetadata({ data: "json, name=contactGroups", elemType: ContactGroup })
   contactGroups?: ContactGroup[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=nextSyncToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextSyncToken" })
   nextSyncToken?: string;
 
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: number;
 }

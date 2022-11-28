@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateStagePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    stage_name: str = field(default=None, metadata={'path_param': { 'field_name': 'stageName', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    stage_name: str = field(metadata={'path_param': { 'field_name': 'stageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,47 +29,55 @@ class UpdateStageHeaders:
 @dataclass_json
 @dataclass
 class UpdateStageRequestBodyAccessLogSettings:
-    destination_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DestinationArn' }})
-    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Format' }})
+    r"""UpdateStageRequestBodyAccessLogSettings
+    Settings for logging access in a stage.
+    """
+    
+    destination_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DestinationArn') }})
+    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Format') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateStageRequestBodyDefaultRouteSettings:
-    data_trace_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataTraceEnabled' }})
-    detailed_metrics_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DetailedMetricsEnabled' }})
-    logging_level: Optional[shared.LoggingLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LoggingLevel' }})
-    throttling_burst_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ThrottlingBurstLimit' }})
-    throttling_rate_limit: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ThrottlingRateLimit' }})
+    r"""UpdateStageRequestBodyDefaultRouteSettings
+    Represents a collection of route settings.
+    """
+    
+    data_trace_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataTraceEnabled') }})
+    detailed_metrics_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DetailedMetricsEnabled') }})
+    logging_level: Optional[shared.LoggingLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LoggingLevel') }})
+    throttling_burst_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ThrottlingBurstLimit') }})
+    throttling_rate_limit: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ThrottlingRateLimit') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateStageRequestBody:
-    access_log_settings: Optional[UpdateStageRequestBodyAccessLogSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessLogSettings' }})
-    auto_deploy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoDeploy' }})
-    client_certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientCertificateId' }})
-    default_route_settings: Optional[UpdateStageRequestBodyDefaultRouteSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultRouteSettings' }})
-    deployment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentId' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    route_settings: Optional[dict[str, shared.RouteSettings]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routeSettings' }})
-    stage_variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stageVariables' }})
+    access_log_settings: Optional[UpdateStageRequestBodyAccessLogSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessLogSettings') }})
+    auto_deploy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoDeploy') }})
+    client_certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientCertificateId') }})
+    default_route_settings: Optional[UpdateStageRequestBodyDefaultRouteSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultRouteSettings') }})
+    deployment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    route_settings: Optional[dict[str, shared.RouteSettings]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routeSettings') }})
+    stage_variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageVariables') }})
     
 
 @dataclass
 class UpdateStageRequest:
-    path_params: UpdateStagePathParams = field(default=None)
-    headers: UpdateStageHeaders = field(default=None)
-    request: UpdateStageRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateStageHeaders = field()
+    path_params: UpdateStagePathParams = field()
+    request: UpdateStageRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateStageResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_stage_response: Optional[shared.UpdateStageResponse] = field(default=None)
     

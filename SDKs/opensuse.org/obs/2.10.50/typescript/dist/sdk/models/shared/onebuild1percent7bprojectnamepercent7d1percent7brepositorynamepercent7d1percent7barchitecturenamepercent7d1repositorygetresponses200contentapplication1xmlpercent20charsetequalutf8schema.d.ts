@@ -1,0 +1,9 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class Onebuild1Percent7BprojectNamePercent7D1Percent7BrepositoryNamePercent7D1Percent7BarchitectureNamePercent7D1RepositoryGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8SchemaBinary extends SpeakeasyBase {
+    filename?: string;
+    mtime?: string;
+    size?: string;
+}
+export declare class Onebuild1Percent7BprojectNamePercent7D1Percent7BrepositoryNamePercent7D1Percent7BarchitectureNamePercent7D1RepositoryGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8Schema extends SpeakeasyBase {
+    binary?: Onebuild1Percent7BprojectNamePercent7D1Percent7BrepositoryNamePercent7D1Percent7BarchitectureNamePercent7D1RepositoryGetResponses200ContentApplication1xmlPercent20charsetEqualUtf8SchemaBinary[];
+}

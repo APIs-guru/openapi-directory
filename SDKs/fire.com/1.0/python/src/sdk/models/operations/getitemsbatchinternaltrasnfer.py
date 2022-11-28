@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetItemsBatchInternalTrasnferPathParams:
-    batch_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'batchUuid', 'style': 'simple', 'explode': False }})
+    batch_uuid: str = field(metadata={'path_param': { 'field_name': 'batchUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetItemsBatchInternalTrasnferQueryParams:
 
 @dataclass
 class GetItemsBatchInternalTrasnferRequest:
-    path_params: GetItemsBatchInternalTrasnferPathParams = field(default=None)
-    query_params: GetItemsBatchInternalTrasnferQueryParams = field(default=None)
+    path_params: GetItemsBatchInternalTrasnferPathParams = field()
+    query_params: GetItemsBatchInternalTrasnferQueryParams = field()
     
 
 @dataclass
 class GetItemsBatchInternalTrasnferResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     onebatches_get_responses_200_content_application_1json_schema: Optional[shared.OnebatchesGetResponses200ContentApplication1jsonSchema] = field(default=None)
     

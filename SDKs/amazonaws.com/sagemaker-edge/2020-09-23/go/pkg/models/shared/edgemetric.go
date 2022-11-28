@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EdgeMetric
+// Information required for edge device metrics.
 type EdgeMetric struct {
 	Dimension  *string    `json:"Dimension,omitempty"`
 	MetricName *string    `json:"MetricName,omitempty"`

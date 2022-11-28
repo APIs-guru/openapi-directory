@@ -4,10 +4,14 @@ import (
 	"time"
 )
 
+// PayRunJobInstructionPayRunJobInstructionEmployee
+// The pay run job instructions' employees
 type PayRunJobInstructionPayRunJobInstructionEmployee struct {
 	Employee []interface{} `json:"Employee,omitempty"`
 }
 
+// PayRunJobInstructionPayRunJobInstructionPaySchedule
+// The pay run job instructions' pay schedule
 type PayRunJobInstructionPayRunJobInstructionPaySchedule struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

@@ -1,7 +1,8 @@
 
 
+
 export enum DetailStatusEnum {
-    Available = "AVAILABLE"
-,    Processing = "PROCESSING"
-,    Unavailable = "UNAVAILABLE"
+    Available = "AVAILABLE",
+    Processing = "PROCESSING",
+    Unavailable = "UNAVAILABLE"
 }

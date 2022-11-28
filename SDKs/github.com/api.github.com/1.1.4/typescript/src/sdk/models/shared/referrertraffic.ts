@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReferrerTraffic
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Referrer Traffic
 **/
 export class ReferrerTraffic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=referrer" })
+  @SpeakeasyMetadata({ data: "json, name=referrer" })
   referrer: string;
 
-  @Metadata({ data: "json, name=uniques" })
+  @SpeakeasyMetadata({ data: "json, name=uniques" })
   uniques: number;
 }

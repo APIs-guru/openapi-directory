@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MediaPropertiesAlignmentEnum(str, Enum):
     ALIGNMENT_UNSPECIFIED = "ALIGNMENT_UNSPECIFIED"
@@ -12,6 +14,10 @@ class MediaPropertiesAlignmentEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MediaProperties:
-    alignment: Optional[MediaPropertiesAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alignment' }})
-    width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    r"""MediaProperties
+    Properties of the media.
+    """
+    
+    alignment: Optional[MediaPropertiesAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alignment') }})
+    width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

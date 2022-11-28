@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsPathParams:
-    consent_store: str = field(default=None, metadata={'path_param': { 'field_name': 'consentStore', 'style': 'simple', 'explode': False }})
+    consent_store: str = field(metadata={'path_param': { 'field_name': 'consentStore', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsQueryP
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsRequest:
-    path_params: HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsQueryParams = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsSecurity = field()
     request: Optional[shared.EvaluateUserConsentsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsSecurity = field(default=None)
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     evaluate_user_consents_response: Optional[shared.EvaluateUserConsentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

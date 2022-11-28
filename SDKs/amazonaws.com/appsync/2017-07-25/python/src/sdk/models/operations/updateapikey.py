@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateAPIKeyPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,26 +28,26 @@ class UpdateAPIKeyHeaders:
 @dataclass_json
 @dataclass
 class UpdateAPIKeyRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    expires: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    expires: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expires') }})
     
 
 @dataclass
 class UpdateAPIKeyRequest:
-    path_params: UpdateAPIKeyPathParams = field(default=None)
-    headers: UpdateAPIKeyHeaders = field(default=None)
-    request: UpdateAPIKeyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateAPIKeyHeaders = field()
+    path_params: UpdateAPIKeyPathParams = field()
+    request: UpdateAPIKeyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateAPIKeyResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_validity_out_of_bounds_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_api_key_response: Optional[shared.UpdateAPIKeyResponse] = field(default=None)
     

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import schemagroup
-from . import schemasegment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GroupOrSegment:
-    group: Optional[schemagroup.SchemaGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'group' }})
-    segment: Optional[schemasegment.SchemaSegment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'segment' }})
+    r"""GroupOrSegment
+    Construct representing a logical group or a segment.
+    """
+    
+    group: Optional[SchemaGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('group') }})
+    segment: Optional[SchemaSegment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('segment') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// Profile
+// Profile for a Gmail user.
 type Profile struct {
 	EmailAddress  *string `json:"emailAddress,omitempty"`
 	HistoryID     *string `json:"historyId,omitempty"`

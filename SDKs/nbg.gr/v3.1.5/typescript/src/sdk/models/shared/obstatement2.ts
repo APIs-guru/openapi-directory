@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObExternalStatementType1CodeEnum } from "./obexternalstatementtype1codeenum";
+
 
 
 // ObStatement2
@@ -7,24 +8,24 @@ import { ObExternalStatementType1CodeEnum } from "./obexternalstatementtype1code
  * Provides further details on a statement resource.
 **/
 export class ObStatement2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime: Date;
 
-  @Metadata({ data: "json, name=EndDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndDateTime" })
   endDateTime: Date;
 
-  @Metadata({ data: "json, name=StartDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartDateTime" })
   startDateTime: Date;
 
-  @Metadata({ data: "json, name=StatementId" })
+  @SpeakeasyMetadata({ data: "json, name=StatementId" })
   statementId?: string;
 
-  @Metadata({ data: "json, name=StatementReference" })
+  @SpeakeasyMetadata({ data: "json, name=StatementReference" })
   statementReference?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: ObExternalStatementType1CodeEnum;
 }

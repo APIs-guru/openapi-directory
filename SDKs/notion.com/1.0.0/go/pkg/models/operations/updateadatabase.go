@@ -25,11 +25,6 @@ type UpdateADatabaseRequestBody struct {
 	Title      []UpdateADatabaseRequestBodyTitle     `json:"title,omitempty"`
 }
 
-type UpdateADatabaseRequest struct {
-	PathParams UpdateADatabasePathParams
-	Request    *UpdateADatabaseRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateADatabase200ApplicationJSONParent struct {
 	PageID *string `json:"page_id,omitempty"`
 	Type   *string `json:"type,omitempty"`
@@ -214,6 +209,11 @@ type UpdateADatabase200ApplicationJSON struct {
 	Parent         *UpdateADatabase200ApplicationJSONParent     `json:"parent,omitempty"`
 	Properties     *UpdateADatabase200ApplicationJSONProperties `json:"properties,omitempty"`
 	Title          []UpdateADatabase200ApplicationJSONTitle     `json:"title,omitempty"`
+}
+
+type UpdateADatabaseRequest struct {
+	PathParams UpdateADatabasePathParams
+	Request    *UpdateADatabaseRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateADatabaseResponse struct {

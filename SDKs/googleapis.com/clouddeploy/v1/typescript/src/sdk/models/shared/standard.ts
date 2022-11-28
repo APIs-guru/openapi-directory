@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Standard
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Standard represents the standard deployment strategy.
 **/
 export class Standard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=verify" })
+  @SpeakeasyMetadata({ data: "json, name=verify" })
   verify?: boolean;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateJobQueueResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobQueueArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobQueueArn" })
   jobQueueArn: string;
 
-  @Metadata({ data: "json, name=jobQueueName" })
+  @SpeakeasyMetadata({ data: "json, name=jobQueueName" })
   jobQueueName: string;
 }

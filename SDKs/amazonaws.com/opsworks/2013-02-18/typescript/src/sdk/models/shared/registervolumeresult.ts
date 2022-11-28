@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegisterVolumeResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the response to a <code>RegisterVolume</code> request.
 **/
 export class RegisterVolumeResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=VolumeId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeId" })
   volumeId?: string;
 }

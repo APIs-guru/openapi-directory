@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRequestIdPathParams = /** @class */ (function (_super) {
     __extends(GetRequestIdPathParams, _super);
@@ -30,7 +30,7 @@ var GetRequestIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetRequestIdPathParams.prototype, "id", void 0);
     return GetRequestIdPathParams;
@@ -42,11 +42,11 @@ var GetRequestIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=withfullhistory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=withfullhistory" }),
         __metadata("design:type", String)
     ], GetRequestIdQueryParams.prototype, "withfullhistory", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=withhistory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=withhistory" }),
         __metadata("design:type", String)
     ], GetRequestIdQueryParams.prototype, "withhistory", void 0);
     return GetRequestIdQueryParams;
@@ -58,7 +58,7 @@ var GetRequestIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetRequestIdSecurity.prototype, "basicAuthentication", void 0);
     return GetRequestIdSecurity;
@@ -70,15 +70,15 @@ var GetRequestIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRequestIdPathParams)
     ], GetRequestIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRequestIdQueryParams)
     ], GetRequestIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRequestIdSecurity)
     ], GetRequestIdRequest.prototype, "security", void 0);
     return GetRequestIdRequest;
@@ -90,15 +90,15 @@ var GetRequestIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetRequestIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRequestIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRequestIdResponse.prototype, "statusCode", void 0);
     return GetRequestIdResponse;

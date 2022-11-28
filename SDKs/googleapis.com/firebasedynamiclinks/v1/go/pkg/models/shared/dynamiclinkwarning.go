@@ -34,6 +34,8 @@ const (
 	DynamicLinkWarningWarningCodeEnumNotMatchingIosBundleIDAndStoreID    DynamicLinkWarningWarningCodeEnum = "NOT_MATCHING_IOS_BUNDLE_ID_AND_STORE_ID"
 )
 
+// DynamicLinkWarning
+// Dynamic Links warning messages.
 type DynamicLinkWarning struct {
 	WarningCode         *DynamicLinkWarningWarningCodeEnum `json:"warningCode,omitempty"`
 	WarningDocumentLink *string                            `json:"warningDocumentLink,omitempty"`

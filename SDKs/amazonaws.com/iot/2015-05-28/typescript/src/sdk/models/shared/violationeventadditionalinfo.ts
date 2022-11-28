@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfidenceLevelEnum } from "./confidencelevelenum";
+
 
 
 // ViolationEventAdditionalInfo
@@ -7,6 +8,6 @@ import { ConfidenceLevelEnum } from "./confidencelevelenum";
  *  The details of a violation event. 
 **/
 export class ViolationEventAdditionalInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidenceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=confidenceLevel" })
   confidenceLevel?: ConfidenceLevelEnum;
 }

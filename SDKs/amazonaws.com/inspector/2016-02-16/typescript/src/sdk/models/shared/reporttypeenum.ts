@@ -1,6 +1,7 @@
 
 
+
 export enum ReportTypeEnum {
-    Finding = "FINDING"
-,    Full = "FULL"
+    Finding = "FINDING",
+    Full = "FULL"
 }

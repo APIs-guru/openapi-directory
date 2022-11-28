@@ -1,6 +1,7 @@
 
 
+
 export enum AutoScalingTypeEnum {
-    Load = "load"
-,    Timer = "timer"
+    Load = "load",
+    Timer = "timer"
 }

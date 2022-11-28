@@ -15,6 +15,8 @@ const (
 	ListCreativeStatusBreakdownByDetailResponseDetailTypeEnumGvlID                 ListCreativeStatusBreakdownByDetailResponseDetailTypeEnum = "GVL_ID"
 )
 
+// ListCreativeStatusBreakdownByDetailResponse
+// Response message for listing all details associated with a given filtered bid reason.
 type ListCreativeStatusBreakdownByDetailResponse struct {
 	DetailType            *ListCreativeStatusBreakdownByDetailResponseDetailTypeEnum `json:"detailType,omitempty"`
 	FilteredBidDetailRows []FilteredBidDetailRow                                     `json:"filteredBidDetailRows,omitempty"`

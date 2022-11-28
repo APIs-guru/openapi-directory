@@ -9,22 +9,9 @@ type GetDomainsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetDomainsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetDomainsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetDomainsSecurity struct {
-	Option1 *GetDomainsSecurityOption1 `security:"option"`
-	Option2 *GetDomainsSecurityOption2 `security:"option"`
-}
-
-type GetDomainsRequest struct {
-	QueryParams GetDomainsQueryParams
-	Security    GetDomainsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetDomains200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetDomains200ApplicationJSON struct {
 
 type GetDomainsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetDomainsRequest struct {
+	QueryParams GetDomainsQueryParams
+	Security    GetDomainsSecurity
 }
 
 type GetDomainsResponse struct {

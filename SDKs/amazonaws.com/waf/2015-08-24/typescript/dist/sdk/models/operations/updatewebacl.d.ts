@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum UpdateWebAclxAmzTargetEnum {
     Awswaf20150824UpdateWebAcl = "AWSWAF_20150824.UpdateWebACL"

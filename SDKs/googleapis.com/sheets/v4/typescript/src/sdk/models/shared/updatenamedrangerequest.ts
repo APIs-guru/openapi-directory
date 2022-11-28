@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamedRange } from "./namedrange";
+
 
 
 // UpdateNamedRangeRequest
@@ -7,9 +8,9 @@ import { NamedRange } from "./namedrange";
  * Updates properties of the named range with the specified namedRangeId.
 **/
 export class UpdateNamedRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=namedRange" })
+  @SpeakeasyMetadata({ data: "json, name=namedRange" })
   namedRange?: NamedRange;
 }

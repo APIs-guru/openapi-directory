@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,13 +10,13 @@ class RequestSystemSettingsHeaders:
 
 @dataclass
 class RequestSystemSettingsRequest:
-    headers: RequestSystemSettingsHeaders = field(default=None)
+    headers: RequestSystemSettingsHeaders = field()
     
 
 @dataclass
 class RequestSystemSettingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     config_option_list: Optional[shared.ConfigOptionList] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

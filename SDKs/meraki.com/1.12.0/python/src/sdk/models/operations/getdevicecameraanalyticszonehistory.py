@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 
 @dataclass
 class GetDeviceCameraAnalyticsZoneHistoryPathParams:
-    serial: str = field(default=None, metadata={'path_param': { 'field_name': 'serial', 'style': 'simple', 'explode': False }})
-    zone_id: str = field(default=None, metadata={'path_param': { 'field_name': 'zoneId', 'style': 'simple', 'explode': False }})
+    serial: str = field(metadata={'path_param': { 'field_name': 'serial', 'style': 'simple', 'explode': False }})
+    zone_id: str = field(metadata={'path_param': { 'field_name': 'zoneId', 'style': 'simple', 'explode': False }})
     
 class GetDeviceCameraAnalyticsZoneHistoryObjectTypeEnum(str, Enum):
     PERSON = "person"
@@ -23,13 +24,13 @@ class GetDeviceCameraAnalyticsZoneHistoryQueryParams:
 
 @dataclass
 class GetDeviceCameraAnalyticsZoneHistoryRequest:
-    path_params: GetDeviceCameraAnalyticsZoneHistoryPathParams = field(default=None)
-    query_params: GetDeviceCameraAnalyticsZoneHistoryQueryParams = field(default=None)
+    path_params: GetDeviceCameraAnalyticsZoneHistoryPathParams = field()
+    query_params: GetDeviceCameraAnalyticsZoneHistoryQueryParams = field()
     
 
 @dataclass
 class GetDeviceCameraAnalyticsZoneHistoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_device_camera_analytics_zone_history_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

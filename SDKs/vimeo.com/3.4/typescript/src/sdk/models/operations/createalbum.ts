@@ -1,102 +1,103 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAlbumPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: number;
 }
 
 export enum CreateAlbumRequestBodyLayoutEnum {
-    Grid = "grid"
-,    Player = "player"
+    Grid = "grid",
+    Player = "player"
 }
 
 export enum CreateAlbumRequestBodyPrivacyEnum {
-    Anybody = "anybody"
-,    EmbedOnly = "embed_only"
-,    Password = "password"
+    Anybody = "anybody",
+    EmbedOnly = "embed_only",
+    Password = "password"
 }
 
 export enum CreateAlbumRequestBodySortEnum {
-    AddedFirst = "added_first"
-,    AddedLast = "added_last"
-,    Alphabetical = "alphabetical"
-,    Arranged = "arranged"
-,    Comments = "comments"
-,    Likes = "likes"
-,    Newest = "newest"
-,    Oldest = "oldest"
-,    Plays = "plays"
+    AddedFirst = "added_first",
+    AddedLast = "added_last",
+    Alphabetical = "alphabetical",
+    Arranged = "arranged",
+    Comments = "comments",
+    Likes = "likes",
+    Newest = "newest",
+    Oldest = "oldest",
+    Plays = "plays"
 }
 
 export enum CreateAlbumRequestBodyThemeEnum {
-    Dark = "dark"
-,    Standard = "standard"
+    Dark = "dark",
+    Standard = "standard"
 }
 
 
 export class CreateAlbumRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brand_color" })
+  @SpeakeasyMetadata({ data: "json, name=brand_color" })
   brandColor?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=hide_nav" })
+  @SpeakeasyMetadata({ data: "json, name=hide_nav" })
   hideNav?: boolean;
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: CreateAlbumRequestBodyLayoutEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: CreateAlbumRequestBodyPrivacyEnum;
 
-  @Metadata({ data: "json, name=review_mode" })
+  @SpeakeasyMetadata({ data: "json, name=review_mode" })
   reviewMode?: boolean;
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: CreateAlbumRequestBodySortEnum;
 
-  @Metadata({ data: "json, name=theme" })
+  @SpeakeasyMetadata({ data: "json, name=theme" })
   theme?: CreateAlbumRequestBodyThemeEnum;
 }
 
 
 export class CreateAlbumSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class CreateAlbumRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateAlbumPathParams;
 
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.album+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.album+json" })
   request: CreateAlbumRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateAlbumSecurity;
 }
 
 
 export class CreateAlbumResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   album?: shared.Album;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 }

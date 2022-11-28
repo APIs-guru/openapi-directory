@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://ec2.{region}.amazonaws.com",
 	"https://ec2.{region}.amazonaws.com",
 	"http://ec2.amazonaws.com",
@@ -24,10 +24,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/ec2/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -38,33 +43,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAcceptTransitGatewayMulticastDomainAssociations - Accepts a request to associate subnets with a transit gateway multicast domain.
 func (s *SDK) GetAcceptTransitGatewayMulticastDomainAssociations(ctx context.Context, request operations.GetAcceptTransitGatewayMulticastDomainAssociationsRequest) (*operations.GetAcceptTransitGatewayMulticastDomainAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptTransitGatewayMulticastDomainAssociations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -76,7 +103,7 @@ func (s *SDK) GetAcceptTransitGatewayMulticastDomainAssociations(ctx context.Con
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -106,8 +133,9 @@ func (s *SDK) GetAcceptTransitGatewayMulticastDomainAssociations(ctx context.Con
 	return res, nil
 }
 
+// GetAcceptTransitGatewayPeeringAttachment - Accepts a transit gateway peering attachment request. The peering attachment must be in the <code>pendingAcceptance</code> state.
 func (s *SDK) GetAcceptTransitGatewayPeeringAttachment(ctx context.Context, request operations.GetAcceptTransitGatewayPeeringAttachmentRequest) (*operations.GetAcceptTransitGatewayPeeringAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptTransitGatewayPeeringAttachment"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -119,7 +147,7 @@ func (s *SDK) GetAcceptTransitGatewayPeeringAttachment(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -149,8 +177,9 @@ func (s *SDK) GetAcceptTransitGatewayPeeringAttachment(ctx context.Context, requ
 	return res, nil
 }
 
+// GetAcceptTransitGatewayVpcAttachment - <p>Accepts a request to attach a VPC to a transit gateway.</p> <p>The VPC attachment must be in the <code>pendingAcceptance</code> state. Use <a>DescribeTransitGatewayVpcAttachments</a> to view your pending VPC attachment requests. Use <a>RejectTransitGatewayVpcAttachment</a> to reject a VPC attachment request.</p>
 func (s *SDK) GetAcceptTransitGatewayVpcAttachment(ctx context.Context, request operations.GetAcceptTransitGatewayVpcAttachmentRequest) (*operations.GetAcceptTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptTransitGatewayVpcAttachment"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -162,7 +191,7 @@ func (s *SDK) GetAcceptTransitGatewayVpcAttachment(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -192,8 +221,9 @@ func (s *SDK) GetAcceptTransitGatewayVpcAttachment(ctx context.Context, request 
 	return res, nil
 }
 
+// GetAcceptVpcEndpointConnections - Accepts one or more interface VPC endpoint connection requests to your VPC endpoint service.
 func (s *SDK) GetAcceptVpcEndpointConnections(ctx context.Context, request operations.GetAcceptVpcEndpointConnectionsRequest) (*operations.GetAcceptVpcEndpointConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptVpcEndpointConnections"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -205,7 +235,7 @@ func (s *SDK) GetAcceptVpcEndpointConnections(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -235,8 +265,9 @@ func (s *SDK) GetAcceptVpcEndpointConnections(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetAcceptVpcPeeringConnection - <p>Accept a VPC peering connection request. To accept a request, the VPC peering connection must be in the <code>pending-acceptance</code> state, and you must be the owner of the peer VPC. Use <a>DescribeVpcPeeringConnections</a> to view your outstanding VPC peering connection requests.</p> <p>For an inter-Region VPC peering connection request, you must accept the VPC peering connection in the Region of the accepter VPC.</p>
 func (s *SDK) GetAcceptVpcPeeringConnection(ctx context.Context, request operations.GetAcceptVpcPeeringConnectionRequest) (*operations.GetAcceptVpcPeeringConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptVpcPeeringConnection"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -248,7 +279,7 @@ func (s *SDK) GetAcceptVpcPeeringConnection(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -278,8 +309,9 @@ func (s *SDK) GetAcceptVpcPeeringConnection(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetAdvertiseByoipCidr - <p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from Amazon Web Services. To minimize down time, you can configure your Amazon Web Services resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through Amazon Web Services.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>
 func (s *SDK) GetAdvertiseByoipCidr(ctx context.Context, request operations.GetAdvertiseByoipCidrRequest) (*operations.GetAdvertiseByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AdvertiseByoipCidr"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -291,7 +323,7 @@ func (s *SDK) GetAdvertiseByoipCidr(ctx context.Context, request operations.GetA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -321,8 +353,9 @@ func (s *SDK) GetAdvertiseByoipCidr(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetApplySecurityGroupsToClientVpnTargetNetwork - Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.
 func (s *SDK) GetApplySecurityGroupsToClientVpnTargetNetwork(ctx context.Context, request operations.GetApplySecurityGroupsToClientVpnTargetNetworkRequest) (*operations.GetApplySecurityGroupsToClientVpnTargetNetworkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ApplySecurityGroupsToClientVpnTargetNetwork"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -334,7 +367,7 @@ func (s *SDK) GetApplySecurityGroupsToClientVpnTargetNetwork(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -364,8 +397,9 @@ func (s *SDK) GetApplySecurityGroupsToClientVpnTargetNetwork(ctx context.Context
 	return res, nil
 }
 
+// GetAssignIpv6Addresses - <p>Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI">IP Addresses Per Network Interface Per Instance Type</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify either the IPv6 addresses or the IPv6 address count in the request. </p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetAssignIpv6Addresses(ctx context.Context, request operations.GetAssignIpv6AddressesRequest) (*operations.GetAssignIpv6AddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssignIpv6Addresses"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -377,7 +411,7 @@ func (s *SDK) GetAssignIpv6Addresses(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -407,8 +441,9 @@ func (s *SDK) GetAssignIpv6Addresses(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetAssignPrivateIPAddresses - <p>Assigns one or more secondary private IP addresses to the specified network interface.</p> <p>You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved.</p> <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance metadata to confirm that the remapping is complete.</p> <p>You must specify either the IP addresses or the IP address count in the request.</p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetAssignPrivateIPAddresses(ctx context.Context, request operations.GetAssignPrivateIPAddressesRequest) (*operations.GetAssignPrivateIPAddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssignPrivateIpAddresses"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -420,7 +455,7 @@ func (s *SDK) GetAssignPrivateIPAddresses(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -450,8 +485,9 @@ func (s *SDK) GetAssignPrivateIPAddresses(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAssociateAddress - <p>Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account.</p> <p>[VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.</p> <p>[Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface. </p> <p>You cannot associate an Elastic IP address with an interface in a different network border group.</p> <important> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the <i>Elastic IP Addresses</i> section of <a href="http://aws.amazon.com/ec2/pricing/">Amazon EC2 Pricing</a>.</p> </important>
 func (s *SDK) GetAssociateAddress(ctx context.Context, request operations.GetAssociateAddressRequest) (*operations.GetAssociateAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateAddress"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -463,7 +499,7 @@ func (s *SDK) GetAssociateAddress(ctx context.Context, request operations.GetAss
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -493,8 +529,9 @@ func (s *SDK) GetAssociateAddress(ctx context.Context, request operations.GetAss
 	return res, nil
 }
 
+// GetAssociateClientVpnTargetNetwork - <p>Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.</p> <p>If you specified a VPC when you created the Client VPN endpoint or if you have previous subnet associations, the specified subnet must be in the same VPC. To specify a subnet that's in a different VPC, you must first modify the Client VPN endpoint (<a>ModifyClientVpnEndpoint</a>) and change the VPC that's associated with it.</p>
 func (s *SDK) GetAssociateClientVpnTargetNetwork(ctx context.Context, request operations.GetAssociateClientVpnTargetNetworkRequest) (*operations.GetAssociateClientVpnTargetNetworkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateClientVpnTargetNetwork"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -506,7 +543,7 @@ func (s *SDK) GetAssociateClientVpnTargetNetwork(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -536,8 +573,9 @@ func (s *SDK) GetAssociateClientVpnTargetNetwork(ctx context.Context, request op
 	return res, nil
 }
 
+// GetAssociateDhcpOptions - <p>Associates a set of DHCP options (that you've previously created) with the specified VPC, or associates no DHCP options with the VPC.</p> <p>After you associate the options with the VPC, any existing instances and all new instances that you launch in that VPC use the options. You don't need to restart or relaunch the instances. They automatically pick up the changes within a few hours, depending on how frequently the instance renews its DHCP lease. You can explicitly renew the lease using the operating system on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP options sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetAssociateDhcpOptions(ctx context.Context, request operations.GetAssociateDhcpOptionsRequest) (*operations.GetAssociateDhcpOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateDhcpOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -549,7 +587,7 @@ func (s *SDK) GetAssociateDhcpOptions(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -570,8 +608,9 @@ func (s *SDK) GetAssociateDhcpOptions(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAssociateEnclaveCertificateIamRole - <p>Associates an Identity and Access Management (IAM) role with an Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Web Services Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an Amazon Web Services managed key that has an attached attestation-based key policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the KMS key, you must grant it permission to call <code>kms:Decrypt</code> on the KMS key returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>Amazon Web Services Nitro Enclaves User Guide</i>.</p>
 func (s *SDK) GetAssociateEnclaveCertificateIamRole(ctx context.Context, request operations.GetAssociateEnclaveCertificateIamRoleRequest) (*operations.GetAssociateEnclaveCertificateIamRoleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateEnclaveCertificateIamRole"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -583,7 +622,7 @@ func (s *SDK) GetAssociateEnclaveCertificateIamRole(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -613,8 +652,9 @@ func (s *SDK) GetAssociateEnclaveCertificateIamRole(ctx context.Context, request
 	return res, nil
 }
 
+// GetAssociateIamInstanceProfile - Associates an IAM instance profile with a running or stopped instance. You cannot associate more than one IAM instance profile with an instance.
 func (s *SDK) GetAssociateIamInstanceProfile(ctx context.Context, request operations.GetAssociateIamInstanceProfileRequest) (*operations.GetAssociateIamInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateIamInstanceProfile"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -626,7 +666,7 @@ func (s *SDK) GetAssociateIamInstanceProfile(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -656,8 +696,9 @@ func (s *SDK) GetAssociateIamInstanceProfile(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAssociateRouteTable - <p>Associates a subnet in your VPC or an internet gateway or virtual private gateway attached to your VPC with a route table in your VPC. This association causes traffic from the subnet or gateway to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table later. A route table can be associated with multiple subnets.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetAssociateRouteTable(ctx context.Context, request operations.GetAssociateRouteTableRequest) (*operations.GetAssociateRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateRouteTable"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -669,7 +710,7 @@ func (s *SDK) GetAssociateRouteTable(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -699,8 +740,9 @@ func (s *SDK) GetAssociateRouteTable(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetAssociateSubnetCidrBlock - Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
 func (s *SDK) GetAssociateSubnetCidrBlock(ctx context.Context, request operations.GetAssociateSubnetCidrBlockRequest) (*operations.GetAssociateSubnetCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateSubnetCidrBlock"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -712,7 +754,7 @@ func (s *SDK) GetAssociateSubnetCidrBlock(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -742,8 +784,9 @@ func (s *SDK) GetAssociateSubnetCidrBlock(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAssociateTransitGatewayMulticastDomain - <p>Associates the specified subnets and transit gateway attachments with the specified transit gateway multicast domain.</p> <p>The transit gateway attachment must be in the available state before you can add a resource. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html">DescribeTransitGatewayAttachments</a> to see the state of the attachment.</p>
 func (s *SDK) GetAssociateTransitGatewayMulticastDomain(ctx context.Context, request operations.GetAssociateTransitGatewayMulticastDomainRequest) (*operations.GetAssociateTransitGatewayMulticastDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateTransitGatewayMulticastDomain"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -755,7 +798,7 @@ func (s *SDK) GetAssociateTransitGatewayMulticastDomain(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -785,8 +828,9 @@ func (s *SDK) GetAssociateTransitGatewayMulticastDomain(ctx context.Context, req
 	return res, nil
 }
 
+// GetAssociateTransitGatewayRouteTable - Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.
 func (s *SDK) GetAssociateTransitGatewayRouteTable(ctx context.Context, request operations.GetAssociateTransitGatewayRouteTableRequest) (*operations.GetAssociateTransitGatewayRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateTransitGatewayRouteTable"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -798,7 +842,7 @@ func (s *SDK) GetAssociateTransitGatewayRouteTable(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -828,8 +872,9 @@ func (s *SDK) GetAssociateTransitGatewayRouteTable(ctx context.Context, request 
 	return res, nil
 }
 
+// GetAssociateTrunkInterface - <note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Associates a branch network interface with a trunk network interface.</p> <p>Before you create the association, run the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html">create-network-interface</a> command and set <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>
 func (s *SDK) GetAssociateTrunkInterface(ctx context.Context, request operations.GetAssociateTrunkInterfaceRequest) (*operations.GetAssociateTrunkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateTrunkInterface"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -841,7 +886,7 @@ func (s *SDK) GetAssociateTrunkInterface(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -871,8 +916,9 @@ func (s *SDK) GetAssociateTrunkInterface(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAssociateVpcCidrBlock - <p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and subnet sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetAssociateVpcCidrBlock(ctx context.Context, request operations.GetAssociateVpcCidrBlockRequest) (*operations.GetAssociateVpcCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateVpcCidrBlock"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -884,7 +930,7 @@ func (s *SDK) GetAssociateVpcCidrBlock(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -914,8 +960,9 @@ func (s *SDK) GetAssociateVpcCidrBlock(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAttachClassicLinkVpc - <p>Links an EC2-Classic instance to a ClassicLink-enabled VPC through one or more of the VPC's security groups. You cannot link an EC2-Classic instance to more than one VPC at a time. You can only link an instance that's in the <code>running</code> state. An instance is automatically unlinked from a VPC when it's stopped - you can link it to the VPC again when you restart it.</p> <p>After you've linked an instance, you cannot change the VPC security groups that are associated with it. To change the security groups, you must first unlink the instance, and then link it again.</p> <p>Linking your instance to a VPC is sometimes referred to as <i>attaching</i> your instance.</p>
 func (s *SDK) GetAttachClassicLinkVpc(ctx context.Context, request operations.GetAttachClassicLinkVpcRequest) (*operations.GetAttachClassicLinkVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachClassicLinkVpc"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -927,7 +974,7 @@ func (s *SDK) GetAttachClassicLinkVpc(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -957,8 +1004,9 @@ func (s *SDK) GetAttachClassicLinkVpc(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAttachInternetGateway - Attaches an internet gateway or a virtual private gateway to a VPC, enabling connectivity between the internet and the VPC. For more information about your VPC and internet gateway, see the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/">Amazon Virtual Private Cloud User Guide</a>.
 func (s *SDK) GetAttachInternetGateway(ctx context.Context, request operations.GetAttachInternetGatewayRequest) (*operations.GetAttachInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachInternetGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -970,7 +1018,7 @@ func (s *SDK) GetAttachInternetGateway(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -991,8 +1039,9 @@ func (s *SDK) GetAttachInternetGateway(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAttachNetworkInterface - Attaches a network interface to an instance.
 func (s *SDK) GetAttachNetworkInterface(ctx context.Context, request operations.GetAttachNetworkInterfaceRequest) (*operations.GetAttachNetworkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachNetworkInterface"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1004,7 +1053,7 @@ func (s *SDK) GetAttachNetworkInterface(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1034,8 +1083,9 @@ func (s *SDK) GetAttachNetworkInterface(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAttachVolume - <p>Attaches an EBS volume to a running or stopped instance and exposes it to the instance with the specified device name.</p> <p>Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>After you attach an EBS volume, you must make it available. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html">Make an EBS volume available for use</a>.</p> <p>If a volume has an Amazon Web Services Marketplace product code:</p> <ul> <li> <p>The volume can be attached only to a stopped instance.</p> </li> <li> <p>Amazon Web Services Marketplace product codes are copied from the volume to the instance.</p> </li> <li> <p>You must be subscribed to the product.</p> </li> <li> <p>The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html">Attach an Amazon EBS volume to an instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetAttachVolume(ctx context.Context, request operations.GetAttachVolumeRequest) (*operations.GetAttachVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachVolume"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1047,7 +1097,7 @@ func (s *SDK) GetAttachVolume(ctx context.Context, request operations.GetAttachV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1077,8 +1127,9 @@ func (s *SDK) GetAttachVolume(ctx context.Context, request operations.GetAttachV
 	return res, nil
 }
 
+// GetAttachVpnGateway - <p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) GetAttachVpnGateway(ctx context.Context, request operations.GetAttachVpnGatewayRequest) (*operations.GetAttachVpnGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachVpnGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1090,7 +1141,7 @@ func (s *SDK) GetAttachVpnGateway(ctx context.Context, request operations.GetAtt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1120,8 +1171,9 @@ func (s *SDK) GetAttachVpnGateway(ctx context.Context, request operations.GetAtt
 	return res, nil
 }
 
+// GetAuthorizeClientVpnIngress - Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.
 func (s *SDK) GetAuthorizeClientVpnIngress(ctx context.Context, request operations.GetAuthorizeClientVpnIngressRequest) (*operations.GetAuthorizeClientVpnIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AuthorizeClientVpnIngress"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1133,7 +1185,7 @@ func (s *SDK) GetAuthorizeClientVpnIngress(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1163,8 +1215,9 @@ func (s *SDK) GetAuthorizeClientVpnIngress(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetCancelBundleTask - Cancels a bundling operation for an instance store-backed Windows instance.
 func (s *SDK) GetCancelBundleTask(ctx context.Context, request operations.GetCancelBundleTaskRequest) (*operations.GetCancelBundleTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelBundleTask"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1176,7 +1229,7 @@ func (s *SDK) GetCancelBundleTask(ctx context.Context, request operations.GetCan
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1206,8 +1259,9 @@ func (s *SDK) GetCancelBundleTask(ctx context.Context, request operations.GetCan
 	return res, nil
 }
 
+// GetCancelCapacityReservation - <p>Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to <code>cancelled</code>.</p> <p>Instances running in the reserved capacity continue running until you stop them. Stopped instances that target the Capacity Reservation can no longer launch. Modify these instances to either target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation that has matching attributes and sufficient capacity.</p>
 func (s *SDK) GetCancelCapacityReservation(ctx context.Context, request operations.GetCancelCapacityReservationRequest) (*operations.GetCancelCapacityReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelCapacityReservation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1219,7 +1273,7 @@ func (s *SDK) GetCancelCapacityReservation(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1249,8 +1303,9 @@ func (s *SDK) GetCancelCapacityReservation(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetCancelConversionTask - <p>Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html">Importing a Virtual Machine Using the Amazon EC2 CLI</a>.</p>
 func (s *SDK) GetCancelConversionTask(ctx context.Context, request operations.GetCancelConversionTaskRequest) (*operations.GetCancelConversionTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelConversionTask"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1262,7 +1317,7 @@ func (s *SDK) GetCancelConversionTask(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1283,8 +1338,9 @@ func (s *SDK) GetCancelConversionTask(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetCancelExportTask - Cancels an active export task. The request removes all artifacts of the export, including any partially-created Amazon S3 objects. If the export task is complete or is in the process of transferring the final disk image, the command fails and returns an error.
 func (s *SDK) GetCancelExportTask(ctx context.Context, request operations.GetCancelExportTaskRequest) (*operations.GetCancelExportTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelExportTask"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1296,7 +1352,7 @@ func (s *SDK) GetCancelExportTask(ctx context.Context, request operations.GetCan
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1317,8 +1373,9 @@ func (s *SDK) GetCancelExportTask(ctx context.Context, request operations.GetCan
 	return res, nil
 }
 
+// GetCancelImportTask - Cancels an in-process import virtual machine or import snapshot task.
 func (s *SDK) GetCancelImportTask(ctx context.Context, request operations.GetCancelImportTaskRequest) (*operations.GetCancelImportTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelImportTask"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1330,7 +1387,7 @@ func (s *SDK) GetCancelImportTask(ctx context.Context, request operations.GetCan
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1360,8 +1417,9 @@ func (s *SDK) GetCancelImportTask(ctx context.Context, request operations.GetCan
 	return res, nil
 }
 
+// GetCancelReservedInstancesListing - <p>Cancels the specified Reserved Instance listing in the Reserved Instance Marketplace.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetCancelReservedInstancesListing(ctx context.Context, request operations.GetCancelReservedInstancesListingRequest) (*operations.GetCancelReservedInstancesListingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelReservedInstancesListing"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1373,7 +1431,7 @@ func (s *SDK) GetCancelReservedInstancesListing(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1403,8 +1461,9 @@ func (s *SDK) GetCancelReservedInstancesListing(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetCancelSpotFleetRequests - <p>Cancels the specified Spot Fleet requests.</p> <p>After you cancel a Spot Fleet request, the Spot Fleet launches no new Spot Instances. You must specify whether the Spot Fleet should also terminate its Spot Instances. If you terminate the instances, the Spot Fleet request enters the <code>cancelled_terminating</code> state. Otherwise, the Spot Fleet request enters the <code>cancelled_running</code> state and the instances continue to run until they are interrupted or you terminate them manually.</p>
 func (s *SDK) GetCancelSpotFleetRequests(ctx context.Context, request operations.GetCancelSpotFleetRequestsRequest) (*operations.GetCancelSpotFleetRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelSpotFleetRequests"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1416,7 +1475,7 @@ func (s *SDK) GetCancelSpotFleetRequests(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1446,8 +1505,9 @@ func (s *SDK) GetCancelSpotFleetRequests(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetCancelSpotInstanceRequests - <p>Cancels one or more Spot Instance requests.</p> <important> <p>Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.</p> </important>
 func (s *SDK) GetCancelSpotInstanceRequests(ctx context.Context, request operations.GetCancelSpotInstanceRequestsRequest) (*operations.GetCancelSpotInstanceRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelSpotInstanceRequests"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1459,7 +1519,7 @@ func (s *SDK) GetCancelSpotInstanceRequests(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1489,8 +1549,9 @@ func (s *SDK) GetCancelSpotInstanceRequests(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetConfirmProductInstance - Determines whether a product code is associated with an instance. This action can only be used by the owner of the product code. It is useful when a product code owner must verify whether another user's instance is eligible for support.
 func (s *SDK) GetConfirmProductInstance(ctx context.Context, request operations.GetConfirmProductInstanceRequest) (*operations.GetConfirmProductInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ConfirmProductInstance"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1502,7 +1563,7 @@ func (s *SDK) GetConfirmProductInstance(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1532,8 +1593,9 @@ func (s *SDK) GetConfirmProductInstance(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCopyFpgaImage - Copies the specified Amazon FPGA Image (AFI) to the current Region.
 func (s *SDK) GetCopyFpgaImage(ctx context.Context, request operations.GetCopyFpgaImageRequest) (*operations.GetCopyFpgaImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CopyFpgaImage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1545,7 +1607,7 @@ func (s *SDK) GetCopyFpgaImage(ctx context.Context, request operations.GetCopyFp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1575,8 +1637,9 @@ func (s *SDK) GetCopyFpgaImage(ctx context.Context, request operations.GetCopyFp
 	return res, nil
 }
 
+// GetCopyImage - <p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html">CreateStoreImageTask</a>.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetCopyImage(ctx context.Context, request operations.GetCopyImageRequest) (*operations.GetCopyImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CopyImage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1588,7 +1651,7 @@ func (s *SDK) GetCopyImage(ctx context.Context, request operations.GetCopyImageR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1618,8 +1681,9 @@ func (s *SDK) GetCopyImage(ctx context.Context, request operations.GetCopyImageR
 	return res, nil
 }
 
+// GetCreateClientVpnRoute - Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the available destination network routes. Each route in the route table specifies the path for traﬃc to speciﬁc resources or networks.
 func (s *SDK) GetCreateClientVpnRoute(ctx context.Context, request operations.GetCreateClientVpnRouteRequest) (*operations.GetCreateClientVpnRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateClientVpnRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1631,7 +1695,7 @@ func (s *SDK) GetCreateClientVpnRoute(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1661,8 +1725,9 @@ func (s *SDK) GetCreateClientVpnRoute(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetCreateDefaultSubnet - Creates a default subnet with a size <code>/20</code> IPv4 CIDR block in the specified Availability Zone in your default VPC. You can have only one default subnet per Availability Zone. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet">Creating a default subnet</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.
 func (s *SDK) GetCreateDefaultSubnet(ctx context.Context, request operations.GetCreateDefaultSubnetRequest) (*operations.GetCreateDefaultSubnetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDefaultSubnet"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1674,7 +1739,7 @@ func (s *SDK) GetCreateDefaultSubnet(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1704,8 +1769,9 @@ func (s *SDK) GetCreateDefaultSubnet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetCreateDefaultVpc - <p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html">Default VPC and default subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.</p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the <a href="http://aws.amazon.com/vpc/faqs/#Default_VPCs">Default VPCs FAQ</a>.</p>
 func (s *SDK) GetCreateDefaultVpc(ctx context.Context, request operations.GetCreateDefaultVpcRequest) (*operations.GetCreateDefaultVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDefaultVpc"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1717,7 +1783,7 @@ func (s *SDK) GetCreateDefaultVpc(ctx context.Context, request operations.GetCre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1747,8 +1813,9 @@ func (s *SDK) GetCreateDefaultVpc(ctx context.Context, request operations.GetCre
 	return res, nil
 }
 
+// GetCreateLocalGatewayRoute - Creates a static route for the specified local gateway route table.
 func (s *SDK) GetCreateLocalGatewayRoute(ctx context.Context, request operations.GetCreateLocalGatewayRouteRequest) (*operations.GetCreateLocalGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateLocalGatewayRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1760,7 +1827,7 @@ func (s *SDK) GetCreateLocalGatewayRoute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1790,8 +1857,9 @@ func (s *SDK) GetCreateLocalGatewayRoute(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetCreateNetworkACLEntry - <p>Creates an entry (a rule) in a network ACL with the specified rule number. Each network ACL has a set of numbered ingress rules and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated with the ACL, we process the entries in the ACL according to the rule numbers, in ascending order. Each network ACL has a set of ingress rules and a separate set of egress rules.</p> <p>We recommend that you leave room between the rule numbers (for example, 100, 110, 120, ...), and not number them one right after the other (for example, 101, 102, 103, ...). This makes it easier to add a rule between existing ones without having to renumber the rules.</p> <p>After you add an entry, you can't modify it; you must either replace it, or create an entry and delete the old one.</p> <p>For more information about network ACLs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetCreateNetworkACLEntry(ctx context.Context, request operations.GetCreateNetworkACLEntryRequest) (*operations.GetCreateNetworkACLEntryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNetworkAclEntry"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1803,7 +1871,7 @@ func (s *SDK) GetCreateNetworkACLEntry(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1824,8 +1892,9 @@ func (s *SDK) GetCreateNetworkACLEntry(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetCreateNetworkInterfacePermission - <p>Grants an Amazon Web Services-authorized account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single Amazon Web Services account only, and only one account at a time.</p>
 func (s *SDK) GetCreateNetworkInterfacePermission(ctx context.Context, request operations.GetCreateNetworkInterfacePermissionRequest) (*operations.GetCreateNetworkInterfacePermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNetworkInterfacePermission"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1837,7 +1906,7 @@ func (s *SDK) GetCreateNetworkInterfacePermission(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1867,8 +1936,9 @@ func (s *SDK) GetCreateNetworkInterfacePermission(ctx context.Context, request o
 	return res, nil
 }
 
+// GetCreateRoute - <p>Creates a route in a route table within a VPC.</p> <p>You must specify one of the following targets: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, egress-only internet gateway, or transit gateway.</p> <p>When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address <code>192.0.2.3</code>, and the route table includes the following two IPv4 routes:</p> <ul> <li> <p> <code>192.0.2.0/24</code> (goes to some target A)</p> </li> <li> <p> <code>192.0.2.0/28</code> (goes to some target B)</p> </li> </ul> <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic.</p> <p>For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetCreateRoute(ctx context.Context, request operations.GetCreateRouteRequest) (*operations.GetCreateRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1880,7 +1950,7 @@ func (s *SDK) GetCreateRoute(ctx context.Context, request operations.GetCreateRo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1910,8 +1980,9 @@ func (s *SDK) GetCreateRoute(ctx context.Context, request operations.GetCreateRo
 	return res, nil
 }
 
+// GetCreateSpotDatafeedSubscription - Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html">Spot Instance data feed</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.
 func (s *SDK) GetCreateSpotDatafeedSubscription(ctx context.Context, request operations.GetCreateSpotDatafeedSubscriptionRequest) (*operations.GetCreateSpotDatafeedSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateSpotDatafeedSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1923,7 +1994,7 @@ func (s *SDK) GetCreateSpotDatafeedSubscription(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1953,8 +2024,9 @@ func (s *SDK) GetCreateSpotDatafeedSubscription(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetCreateTrafficMirrorFilterRule - <p>Creates a Traffic Mirror filter rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>
 func (s *SDK) GetCreateTrafficMirrorFilterRule(ctx context.Context, request operations.GetCreateTrafficMirrorFilterRuleRequest) (*operations.GetCreateTrafficMirrorFilterRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTrafficMirrorFilterRule"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1966,7 +2038,7 @@ func (s *SDK) GetCreateTrafficMirrorFilterRule(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1996,8 +2068,9 @@ func (s *SDK) GetCreateTrafficMirrorFilterRule(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetCreateTransitGatewayPrefixListReference - Creates a reference (route) to a prefix list in a specified transit gateway route table.
 func (s *SDK) GetCreateTransitGatewayPrefixListReference(ctx context.Context, request operations.GetCreateTransitGatewayPrefixListReferenceRequest) (*operations.GetCreateTransitGatewayPrefixListReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayPrefixListReference"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2009,7 +2082,7 @@ func (s *SDK) GetCreateTransitGatewayPrefixListReference(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2039,8 +2112,9 @@ func (s *SDK) GetCreateTransitGatewayPrefixListReference(ctx context.Context, re
 	return res, nil
 }
 
+// GetCreateTransitGatewayRoute - Creates a static route for the specified transit gateway route table.
 func (s *SDK) GetCreateTransitGatewayRoute(ctx context.Context, request operations.GetCreateTransitGatewayRouteRequest) (*operations.GetCreateTransitGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2052,7 +2126,7 @@ func (s *SDK) GetCreateTransitGatewayRoute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2082,8 +2156,9 @@ func (s *SDK) GetCreateTransitGatewayRoute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetCreateVpcEndpointConnectionNotification - <p>Creates a connection notification for a specified VPC endpoint or VPC endpoint service. A connection notification notifies you of specific endpoint events. You must create an SNS topic to receive notifications. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Create a Topic</a> in the <i>Amazon Simple Notification Service Developer Guide</i>.</p> <p>You can create a connection notification for interface endpoints only.</p>
 func (s *SDK) GetCreateVpcEndpointConnectionNotification(ctx context.Context, request operations.GetCreateVpcEndpointConnectionNotificationRequest) (*operations.GetCreateVpcEndpointConnectionNotificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpcEndpointConnectionNotification"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2095,7 +2170,7 @@ func (s *SDK) GetCreateVpcEndpointConnectionNotification(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2125,8 +2200,9 @@ func (s *SDK) GetCreateVpcEndpointConnectionNotification(ctx context.Context, re
 	return res, nil
 }
 
+// GetCreateVpnConnectionRoute - <p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) GetCreateVpnConnectionRoute(ctx context.Context, request operations.GetCreateVpnConnectionRouteRequest) (*operations.GetCreateVpnConnectionRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpnConnectionRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2138,7 +2214,7 @@ func (s *SDK) GetCreateVpnConnectionRoute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2159,8 +2235,9 @@ func (s *SDK) GetCreateVpnConnectionRoute(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetDeleteCarrierGateway - <p>Deletes a carrier gateway.</p> <important> <p>If you do not delete the route that contains the carrier gateway as the Target, the route is a blackhole route. For information about how to delete a route, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html">DeleteRoute</a>.</p> </important>
 func (s *SDK) GetDeleteCarrierGateway(ctx context.Context, request operations.GetDeleteCarrierGatewayRequest) (*operations.GetDeleteCarrierGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteCarrierGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2172,7 +2249,7 @@ func (s *SDK) GetDeleteCarrierGateway(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2202,8 +2279,9 @@ func (s *SDK) GetDeleteCarrierGateway(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeleteClientVpnEndpoint - Deletes the specified Client VPN endpoint. You must disassociate all target networks before you can delete a Client VPN endpoint.
 func (s *SDK) GetDeleteClientVpnEndpoint(ctx context.Context, request operations.GetDeleteClientVpnEndpointRequest) (*operations.GetDeleteClientVpnEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteClientVpnEndpoint"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2215,7 +2293,7 @@ func (s *SDK) GetDeleteClientVpnEndpoint(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2245,8 +2323,9 @@ func (s *SDK) GetDeleteClientVpnEndpoint(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDeleteClientVpnRoute - Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using the <b>CreateClientVpnRoute</b> action. You cannot delete routes that were automatically added when associating a subnet. To remove routes that have been automatically added, disassociate the target subnet from the Client VPN endpoint.
 func (s *SDK) GetDeleteClientVpnRoute(ctx context.Context, request operations.GetDeleteClientVpnRouteRequest) (*operations.GetDeleteClientVpnRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteClientVpnRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2258,7 +2337,7 @@ func (s *SDK) GetDeleteClientVpnRoute(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2288,8 +2367,9 @@ func (s *SDK) GetDeleteClientVpnRoute(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeleteCustomerGateway - Deletes the specified customer gateway. You must delete the VPN connection before you can delete the customer gateway.
 func (s *SDK) GetDeleteCustomerGateway(ctx context.Context, request operations.GetDeleteCustomerGatewayRequest) (*operations.GetDeleteCustomerGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteCustomerGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2301,7 +2381,7 @@ func (s *SDK) GetDeleteCustomerGateway(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2322,8 +2402,9 @@ func (s *SDK) GetDeleteCustomerGateway(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetDeleteDhcpOptions - Deletes the specified set of DHCP options. You must disassociate the set of DHCP options before you can delete it. You can disassociate the set of DHCP options by associating either a new set of options or the default set of options with the VPC.
 func (s *SDK) GetDeleteDhcpOptions(ctx context.Context, request operations.GetDeleteDhcpOptionsRequest) (*operations.GetDeleteDhcpOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDhcpOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2335,7 +2416,7 @@ func (s *SDK) GetDeleteDhcpOptions(ctx context.Context, request operations.GetDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2356,8 +2437,9 @@ func (s *SDK) GetDeleteDhcpOptions(ctx context.Context, request operations.GetDe
 	return res, nil
 }
 
+// GetDeleteEgressOnlyInternetGateway - Deletes an egress-only internet gateway.
 func (s *SDK) GetDeleteEgressOnlyInternetGateway(ctx context.Context, request operations.GetDeleteEgressOnlyInternetGatewayRequest) (*operations.GetDeleteEgressOnlyInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteEgressOnlyInternetGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2369,7 +2451,7 @@ func (s *SDK) GetDeleteEgressOnlyInternetGateway(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2399,8 +2481,9 @@ func (s *SDK) GetDeleteEgressOnlyInternetGateway(ctx context.Context, request op
 	return res, nil
 }
 
+// GetDeleteFleets - <p>Deletes the specified EC2 Fleet.</p> <p>After you delete an EC2 Fleet, it launches no new instances.</p> <p>You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the <code>deleted_terminating</code> state. Otherwise, the EC2 Fleet enters the <code>deleted_running</code> state, and the instances continue to run until they are interrupted or you terminate them manually.</p> <p>For <code>instant</code> fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted <code>instant</code> fleet with running instances is not supported.</p> <p class="title"> <b>Restrictions</b> </p> <ul> <li> <p>You can delete up to 25 <code>instant</code> fleets in a single request. If you exceed this number, no <code>instant</code> fleets are deleted and an error is returned. There is no restriction on the number of fleets of type <code>maintain</code> or <code>request</code> that can be deleted in a single request.</p> </li> <li> <p>Up to 1000 instances can be terminated in a single request to delete <code>instant</code> fleets.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#delete-fleet">Deleting an EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetDeleteFleets(ctx context.Context, request operations.GetDeleteFleetsRequest) (*operations.GetDeleteFleetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteFleets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2412,7 +2495,7 @@ func (s *SDK) GetDeleteFleets(ctx context.Context, request operations.GetDeleteF
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2442,8 +2525,9 @@ func (s *SDK) GetDeleteFleets(ctx context.Context, request operations.GetDeleteF
 	return res, nil
 }
 
+// GetDeleteFlowLogs - Deletes one or more flow logs.
 func (s *SDK) GetDeleteFlowLogs(ctx context.Context, request operations.GetDeleteFlowLogsRequest) (*operations.GetDeleteFlowLogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteFlowLogs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2455,7 +2539,7 @@ func (s *SDK) GetDeleteFlowLogs(ctx context.Context, request operations.GetDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2485,8 +2569,9 @@ func (s *SDK) GetDeleteFlowLogs(ctx context.Context, request operations.GetDelet
 	return res, nil
 }
 
+// GetDeleteFpgaImage - Deletes the specified Amazon FPGA Image (AFI).
 func (s *SDK) GetDeleteFpgaImage(ctx context.Context, request operations.GetDeleteFpgaImageRequest) (*operations.GetDeleteFpgaImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteFpgaImage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2498,7 +2583,7 @@ func (s *SDK) GetDeleteFpgaImage(ctx context.Context, request operations.GetDele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2528,8 +2613,9 @@ func (s *SDK) GetDeleteFpgaImage(ctx context.Context, request operations.GetDele
 	return res, nil
 }
 
+// GetDeleteInstanceEventWindow - <p>Deletes the specified event window.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetDeleteInstanceEventWindow(ctx context.Context, request operations.GetDeleteInstanceEventWindowRequest) (*operations.GetDeleteInstanceEventWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteInstanceEventWindow"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2541,7 +2627,7 @@ func (s *SDK) GetDeleteInstanceEventWindow(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2571,8 +2657,9 @@ func (s *SDK) GetDeleteInstanceEventWindow(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDeleteInternetGateway - Deletes the specified internet gateway. You must detach the internet gateway from the VPC before you can delete it.
 func (s *SDK) GetDeleteInternetGateway(ctx context.Context, request operations.GetDeleteInternetGatewayRequest) (*operations.GetDeleteInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteInternetGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2584,7 +2671,7 @@ func (s *SDK) GetDeleteInternetGateway(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2605,8 +2692,9 @@ func (s *SDK) GetDeleteInternetGateway(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetDeleteKeyPair - Deletes the specified key pair, by removing the public key from Amazon EC2.
 func (s *SDK) GetDeleteKeyPair(ctx context.Context, request operations.GetDeleteKeyPairRequest) (*operations.GetDeleteKeyPairResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteKeyPair"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2618,7 +2706,7 @@ func (s *SDK) GetDeleteKeyPair(ctx context.Context, request operations.GetDelete
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2639,8 +2727,9 @@ func (s *SDK) GetDeleteKeyPair(ctx context.Context, request operations.GetDelete
 	return res, nil
 }
 
+// GetDeleteLaunchTemplate - Deletes a launch template. Deleting a launch template deletes all of its versions.
 func (s *SDK) GetDeleteLaunchTemplate(ctx context.Context, request operations.GetDeleteLaunchTemplateRequest) (*operations.GetDeleteLaunchTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLaunchTemplate"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2652,7 +2741,7 @@ func (s *SDK) GetDeleteLaunchTemplate(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2682,8 +2771,9 @@ func (s *SDK) GetDeleteLaunchTemplate(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeleteLaunchTemplateVersions - Deletes one or more versions of a launch template. You cannot delete the default version of a launch template; you must first assign a different version as the default. If the default version is the only version for the launch template, you must delete the entire launch template using <a>DeleteLaunchTemplate</a>.
 func (s *SDK) GetDeleteLaunchTemplateVersions(ctx context.Context, request operations.GetDeleteLaunchTemplateVersionsRequest) (*operations.GetDeleteLaunchTemplateVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLaunchTemplateVersions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2695,7 +2785,7 @@ func (s *SDK) GetDeleteLaunchTemplateVersions(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2725,8 +2815,9 @@ func (s *SDK) GetDeleteLaunchTemplateVersions(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetDeleteLocalGatewayRoute - Deletes the specified route from the specified local gateway route table.
 func (s *SDK) GetDeleteLocalGatewayRoute(ctx context.Context, request operations.GetDeleteLocalGatewayRouteRequest) (*operations.GetDeleteLocalGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLocalGatewayRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2738,7 +2829,7 @@ func (s *SDK) GetDeleteLocalGatewayRoute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2768,8 +2859,9 @@ func (s *SDK) GetDeleteLocalGatewayRoute(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDeleteLocalGatewayRouteTableVpcAssociation - Deletes the specified association between a VPC and local gateway route table.
 func (s *SDK) GetDeleteLocalGatewayRouteTableVpcAssociation(ctx context.Context, request operations.GetDeleteLocalGatewayRouteTableVpcAssociationRequest) (*operations.GetDeleteLocalGatewayRouteTableVpcAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLocalGatewayRouteTableVpcAssociation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2781,7 +2873,7 @@ func (s *SDK) GetDeleteLocalGatewayRouteTableVpcAssociation(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2811,8 +2903,9 @@ func (s *SDK) GetDeleteLocalGatewayRouteTableVpcAssociation(ctx context.Context,
 	return res, nil
 }
 
+// GetDeleteManagedPrefixList - Deletes the specified managed prefix list. You must first remove all references to the prefix list in your resources.
 func (s *SDK) GetDeleteManagedPrefixList(ctx context.Context, request operations.GetDeleteManagedPrefixListRequest) (*operations.GetDeleteManagedPrefixListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteManagedPrefixList"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2824,7 +2917,7 @@ func (s *SDK) GetDeleteManagedPrefixList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2854,8 +2947,9 @@ func (s *SDK) GetDeleteManagedPrefixList(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDeleteNatGateway - Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
 func (s *SDK) GetDeleteNatGateway(ctx context.Context, request operations.GetDeleteNatGatewayRequest) (*operations.GetDeleteNatGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNatGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2867,7 +2961,7 @@ func (s *SDK) GetDeleteNatGateway(ctx context.Context, request operations.GetDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2897,8 +2991,9 @@ func (s *SDK) GetDeleteNatGateway(ctx context.Context, request operations.GetDel
 	return res, nil
 }
 
+// GetDeleteNetworkACL - Deletes the specified network ACL. You can't delete the ACL if it's associated with any subnets. You can't delete the default network ACL.
 func (s *SDK) GetDeleteNetworkACL(ctx context.Context, request operations.GetDeleteNetworkACLRequest) (*operations.GetDeleteNetworkACLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkAcl"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2910,7 +3005,7 @@ func (s *SDK) GetDeleteNetworkACL(ctx context.Context, request operations.GetDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2931,8 +3026,9 @@ func (s *SDK) GetDeleteNetworkACL(ctx context.Context, request operations.GetDel
 	return res, nil
 }
 
+// GetDeleteNetworkACLEntry - Deletes the specified ingress or egress entry (rule) from the specified network ACL.
 func (s *SDK) GetDeleteNetworkACLEntry(ctx context.Context, request operations.GetDeleteNetworkACLEntryRequest) (*operations.GetDeleteNetworkACLEntryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkAclEntry"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2944,7 +3040,7 @@ func (s *SDK) GetDeleteNetworkACLEntry(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2965,8 +3061,9 @@ func (s *SDK) GetDeleteNetworkACLEntry(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetDeleteNetworkInsightsAnalysis - Deletes the specified network insights analysis.
 func (s *SDK) GetDeleteNetworkInsightsAnalysis(ctx context.Context, request operations.GetDeleteNetworkInsightsAnalysisRequest) (*operations.GetDeleteNetworkInsightsAnalysisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInsightsAnalysis"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2978,7 +3075,7 @@ func (s *SDK) GetDeleteNetworkInsightsAnalysis(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3008,8 +3105,9 @@ func (s *SDK) GetDeleteNetworkInsightsAnalysis(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetDeleteNetworkInsightsPath - Deletes the specified path.
 func (s *SDK) GetDeleteNetworkInsightsPath(ctx context.Context, request operations.GetDeleteNetworkInsightsPathRequest) (*operations.GetDeleteNetworkInsightsPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInsightsPath"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3021,7 +3119,7 @@ func (s *SDK) GetDeleteNetworkInsightsPath(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3051,8 +3149,9 @@ func (s *SDK) GetDeleteNetworkInsightsPath(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDeleteNetworkInterface - Deletes the specified network interface. You must detach the network interface before you can delete it.
 func (s *SDK) GetDeleteNetworkInterface(ctx context.Context, request operations.GetDeleteNetworkInterfaceRequest) (*operations.GetDeleteNetworkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInterface"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3064,7 +3163,7 @@ func (s *SDK) GetDeleteNetworkInterface(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3085,8 +3184,9 @@ func (s *SDK) GetDeleteNetworkInterface(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDeleteNetworkInterfacePermission - Deletes a permission for a network interface. By default, you cannot delete the permission if the account for which you're removing the permission has attached the network interface to an instance. However, you can force delete the permission, regardless of any attachment.
 func (s *SDK) GetDeleteNetworkInterfacePermission(ctx context.Context, request operations.GetDeleteNetworkInterfacePermissionRequest) (*operations.GetDeleteNetworkInterfacePermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInterfacePermission"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3098,7 +3198,7 @@ func (s *SDK) GetDeleteNetworkInterfacePermission(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3128,8 +3228,9 @@ func (s *SDK) GetDeleteNetworkInterfacePermission(ctx context.Context, request o
 	return res, nil
 }
 
+// GetDeletePlacementGroup - Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement groups</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) GetDeletePlacementGroup(ctx context.Context, request operations.GetDeletePlacementGroupRequest) (*operations.GetDeletePlacementGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeletePlacementGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3141,7 +3242,7 @@ func (s *SDK) GetDeletePlacementGroup(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3162,8 +3263,9 @@ func (s *SDK) GetDeletePlacementGroup(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeleteQueuedReservedInstances - Deletes the queued purchases for the specified Reserved Instances.
 func (s *SDK) GetDeleteQueuedReservedInstances(ctx context.Context, request operations.GetDeleteQueuedReservedInstancesRequest) (*operations.GetDeleteQueuedReservedInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteQueuedReservedInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3175,7 +3277,7 @@ func (s *SDK) GetDeleteQueuedReservedInstances(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3205,8 +3307,9 @@ func (s *SDK) GetDeleteQueuedReservedInstances(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetDeleteRoute - Deletes the specified route from the specified route table.
 func (s *SDK) GetDeleteRoute(ctx context.Context, request operations.GetDeleteRouteRequest) (*operations.GetDeleteRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3218,7 +3321,7 @@ func (s *SDK) GetDeleteRoute(ctx context.Context, request operations.GetDeleteRo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3239,8 +3342,9 @@ func (s *SDK) GetDeleteRoute(ctx context.Context, request operations.GetDeleteRo
 	return res, nil
 }
 
+// GetDeleteRouteTable - Deletes the specified route table. You must disassociate the route table from any subnets before you can delete it. You can't delete the main route table.
 func (s *SDK) GetDeleteRouteTable(ctx context.Context, request operations.GetDeleteRouteTableRequest) (*operations.GetDeleteRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteRouteTable"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3252,7 +3356,7 @@ func (s *SDK) GetDeleteRouteTable(ctx context.Context, request operations.GetDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3273,8 +3377,9 @@ func (s *SDK) GetDeleteRouteTable(ctx context.Context, request operations.GetDel
 	return res, nil
 }
 
+// GetDeleteSecurityGroup - <p>Deletes a security group.</p> <p>If you attempt to delete a security group that is associated with an instance, or is referenced by another security group, the operation fails with <code>InvalidGroup.InUse</code> in EC2-Classic or <code>DependencyViolation</code> in EC2-VPC.</p>
 func (s *SDK) GetDeleteSecurityGroup(ctx context.Context, request operations.GetDeleteSecurityGroupRequest) (*operations.GetDeleteSecurityGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSecurityGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3286,7 +3391,7 @@ func (s *SDK) GetDeleteSecurityGroup(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3307,8 +3412,9 @@ func (s *SDK) GetDeleteSecurityGroup(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetDeleteSnapshot - <p>Deletes the specified snapshot.</p> <p>When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume.</p> <p>You cannot delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html">Delete an Amazon EBS snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetDeleteSnapshot(ctx context.Context, request operations.GetDeleteSnapshotRequest) (*operations.GetDeleteSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSnapshot"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3320,7 +3426,7 @@ func (s *SDK) GetDeleteSnapshot(ctx context.Context, request operations.GetDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3341,8 +3447,9 @@ func (s *SDK) GetDeleteSnapshot(ctx context.Context, request operations.GetDelet
 	return res, nil
 }
 
+// GetDeleteSpotDatafeedSubscription - Deletes the data feed for Spot Instances.
 func (s *SDK) GetDeleteSpotDatafeedSubscription(ctx context.Context, request operations.GetDeleteSpotDatafeedSubscriptionRequest) (*operations.GetDeleteSpotDatafeedSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSpotDatafeedSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3354,7 +3461,7 @@ func (s *SDK) GetDeleteSpotDatafeedSubscription(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3375,8 +3482,9 @@ func (s *SDK) GetDeleteSpotDatafeedSubscription(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetDeleteSubnet - Deletes the specified subnet. You must terminate all running instances in the subnet before you can delete the subnet.
 func (s *SDK) GetDeleteSubnet(ctx context.Context, request operations.GetDeleteSubnetRequest) (*operations.GetDeleteSubnetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSubnet"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3388,7 +3496,7 @@ func (s *SDK) GetDeleteSubnet(ctx context.Context, request operations.GetDeleteS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3409,8 +3517,9 @@ func (s *SDK) GetDeleteSubnet(ctx context.Context, request operations.GetDeleteS
 	return res, nil
 }
 
+// GetDeleteSubnetCidrReservation - Deletes a subnet CIDR reservation.
 func (s *SDK) GetDeleteSubnetCidrReservation(ctx context.Context, request operations.GetDeleteSubnetCidrReservationRequest) (*operations.GetDeleteSubnetCidrReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSubnetCidrReservation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3422,7 +3531,7 @@ func (s *SDK) GetDeleteSubnetCidrReservation(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3452,8 +3561,9 @@ func (s *SDK) GetDeleteSubnetCidrReservation(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetDeleteTrafficMirrorFilter - <p>Deletes the specified Traffic Mirror filter.</p> <p>You cannot delete a Traffic Mirror filter that is in use by a Traffic Mirror session.</p>
 func (s *SDK) GetDeleteTrafficMirrorFilter(ctx context.Context, request operations.GetDeleteTrafficMirrorFilterRequest) (*operations.GetDeleteTrafficMirrorFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorFilter"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3465,7 +3575,7 @@ func (s *SDK) GetDeleteTrafficMirrorFilter(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3495,8 +3605,9 @@ func (s *SDK) GetDeleteTrafficMirrorFilter(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDeleteTrafficMirrorFilterRule - Deletes the specified Traffic Mirror rule.
 func (s *SDK) GetDeleteTrafficMirrorFilterRule(ctx context.Context, request operations.GetDeleteTrafficMirrorFilterRuleRequest) (*operations.GetDeleteTrafficMirrorFilterRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorFilterRule"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3508,7 +3619,7 @@ func (s *SDK) GetDeleteTrafficMirrorFilterRule(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3538,8 +3649,9 @@ func (s *SDK) GetDeleteTrafficMirrorFilterRule(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetDeleteTrafficMirrorSession - Deletes the specified Traffic Mirror session.
 func (s *SDK) GetDeleteTrafficMirrorSession(ctx context.Context, request operations.GetDeleteTrafficMirrorSessionRequest) (*operations.GetDeleteTrafficMirrorSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorSession"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3551,7 +3663,7 @@ func (s *SDK) GetDeleteTrafficMirrorSession(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3581,8 +3693,9 @@ func (s *SDK) GetDeleteTrafficMirrorSession(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDeleteTrafficMirrorTarget - <p>Deletes the specified Traffic Mirror target.</p> <p>You cannot delete a Traffic Mirror target that is in use by a Traffic Mirror session.</p>
 func (s *SDK) GetDeleteTrafficMirrorTarget(ctx context.Context, request operations.GetDeleteTrafficMirrorTargetRequest) (*operations.GetDeleteTrafficMirrorTargetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorTarget"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3594,7 +3707,7 @@ func (s *SDK) GetDeleteTrafficMirrorTarget(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3624,8 +3737,9 @@ func (s *SDK) GetDeleteTrafficMirrorTarget(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDeleteTransitGateway - Deletes the specified transit gateway.
 func (s *SDK) GetDeleteTransitGateway(ctx context.Context, request operations.GetDeleteTransitGatewayRequest) (*operations.GetDeleteTransitGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3637,7 +3751,7 @@ func (s *SDK) GetDeleteTransitGateway(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3667,8 +3781,9 @@ func (s *SDK) GetDeleteTransitGateway(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeleteTransitGatewayConnect - Deletes the specified Connect attachment. You must first delete any Connect peers for the attachment.
 func (s *SDK) GetDeleteTransitGatewayConnect(ctx context.Context, request operations.GetDeleteTransitGatewayConnectRequest) (*operations.GetDeleteTransitGatewayConnectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayConnect"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3680,7 +3795,7 @@ func (s *SDK) GetDeleteTransitGatewayConnect(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3710,8 +3825,9 @@ func (s *SDK) GetDeleteTransitGatewayConnect(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetDeleteTransitGatewayConnectPeer - Deletes the specified Connect peer.
 func (s *SDK) GetDeleteTransitGatewayConnectPeer(ctx context.Context, request operations.GetDeleteTransitGatewayConnectPeerRequest) (*operations.GetDeleteTransitGatewayConnectPeerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayConnectPeer"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3723,7 +3839,7 @@ func (s *SDK) GetDeleteTransitGatewayConnectPeer(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3753,8 +3869,9 @@ func (s *SDK) GetDeleteTransitGatewayConnectPeer(ctx context.Context, request op
 	return res, nil
 }
 
+// GetDeleteTransitGatewayMulticastDomain - Deletes the specified transit gateway multicast domain.
 func (s *SDK) GetDeleteTransitGatewayMulticastDomain(ctx context.Context, request operations.GetDeleteTransitGatewayMulticastDomainRequest) (*operations.GetDeleteTransitGatewayMulticastDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayMulticastDomain"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3766,7 +3883,7 @@ func (s *SDK) GetDeleteTransitGatewayMulticastDomain(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3796,8 +3913,9 @@ func (s *SDK) GetDeleteTransitGatewayMulticastDomain(ctx context.Context, reques
 	return res, nil
 }
 
+// GetDeleteTransitGatewayPeeringAttachment - Deletes a transit gateway peering attachment.
 func (s *SDK) GetDeleteTransitGatewayPeeringAttachment(ctx context.Context, request operations.GetDeleteTransitGatewayPeeringAttachmentRequest) (*operations.GetDeleteTransitGatewayPeeringAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayPeeringAttachment"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3809,7 +3927,7 @@ func (s *SDK) GetDeleteTransitGatewayPeeringAttachment(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3839,8 +3957,9 @@ func (s *SDK) GetDeleteTransitGatewayPeeringAttachment(ctx context.Context, requ
 	return res, nil
 }
 
+// GetDeleteTransitGatewayPrefixListReference - Deletes a reference (route) to a prefix list in a specified transit gateway route table.
 func (s *SDK) GetDeleteTransitGatewayPrefixListReference(ctx context.Context, request operations.GetDeleteTransitGatewayPrefixListReferenceRequest) (*operations.GetDeleteTransitGatewayPrefixListReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayPrefixListReference"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3852,7 +3971,7 @@ func (s *SDK) GetDeleteTransitGatewayPrefixListReference(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3882,8 +4001,9 @@ func (s *SDK) GetDeleteTransitGatewayPrefixListReference(ctx context.Context, re
 	return res, nil
 }
 
+// GetDeleteTransitGatewayRoute - Deletes the specified route from the specified transit gateway route table.
 func (s *SDK) GetDeleteTransitGatewayRoute(ctx context.Context, request operations.GetDeleteTransitGatewayRouteRequest) (*operations.GetDeleteTransitGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3895,7 +4015,7 @@ func (s *SDK) GetDeleteTransitGatewayRoute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3925,8 +4045,9 @@ func (s *SDK) GetDeleteTransitGatewayRoute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDeleteTransitGatewayRouteTable - Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
 func (s *SDK) GetDeleteTransitGatewayRouteTable(ctx context.Context, request operations.GetDeleteTransitGatewayRouteTableRequest) (*operations.GetDeleteTransitGatewayRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayRouteTable"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3938,7 +4059,7 @@ func (s *SDK) GetDeleteTransitGatewayRouteTable(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3968,8 +4089,9 @@ func (s *SDK) GetDeleteTransitGatewayRouteTable(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetDeleteTransitGatewayVpcAttachment - Deletes the specified VPC attachment.
 func (s *SDK) GetDeleteTransitGatewayVpcAttachment(ctx context.Context, request operations.GetDeleteTransitGatewayVpcAttachmentRequest) (*operations.GetDeleteTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayVpcAttachment"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3981,7 +4103,7 @@ func (s *SDK) GetDeleteTransitGatewayVpcAttachment(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4011,8 +4133,9 @@ func (s *SDK) GetDeleteTransitGatewayVpcAttachment(ctx context.Context, request 
 	return res, nil
 }
 
+// GetDeleteVolume - <p>Deletes the specified EBS volume. The volume must be in the <code>available</code> state (not attached to an instance).</p> <p>The volume can remain in the <code>deleting</code> state for several minutes.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html">Delete an Amazon EBS volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetDeleteVolume(ctx context.Context, request operations.GetDeleteVolumeRequest) (*operations.GetDeleteVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVolume"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4024,7 +4147,7 @@ func (s *SDK) GetDeleteVolume(ctx context.Context, request operations.GetDeleteV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4045,8 +4168,9 @@ func (s *SDK) GetDeleteVolume(ctx context.Context, request operations.GetDeleteV
 	return res, nil
 }
 
+// GetDeleteVpc - Deletes the specified VPC. You must detach or delete all gateways and resources that are associated with the VPC before you can delete it. For example, you must terminate all instances running in the VPC, delete all security groups associated with the VPC (except the default one), delete all route tables associated with the VPC (except the default one), and so on.
 func (s *SDK) GetDeleteVpc(ctx context.Context, request operations.GetDeleteVpcRequest) (*operations.GetDeleteVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpc"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4058,7 +4182,7 @@ func (s *SDK) GetDeleteVpc(ctx context.Context, request operations.GetDeleteVpcR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4079,8 +4203,9 @@ func (s *SDK) GetDeleteVpc(ctx context.Context, request operations.GetDeleteVpcR
 	return res, nil
 }
 
+// GetDeleteVpcEndpointConnectionNotifications - Deletes one or more VPC endpoint connection notifications.
 func (s *SDK) GetDeleteVpcEndpointConnectionNotifications(ctx context.Context, request operations.GetDeleteVpcEndpointConnectionNotificationsRequest) (*operations.GetDeleteVpcEndpointConnectionNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcEndpointConnectionNotifications"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4092,7 +4217,7 @@ func (s *SDK) GetDeleteVpcEndpointConnectionNotifications(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4122,8 +4247,9 @@ func (s *SDK) GetDeleteVpcEndpointConnectionNotifications(ctx context.Context, r
 	return res, nil
 }
 
+// GetDeleteVpcEndpointServiceConfigurations - Deletes one or more VPC endpoint service configurations in your account. Before you delete the endpoint service configuration, you must reject any <code>Available</code> or <code>PendingAcceptance</code> interface endpoint connections that are attached to the service.
 func (s *SDK) GetDeleteVpcEndpointServiceConfigurations(ctx context.Context, request operations.GetDeleteVpcEndpointServiceConfigurationsRequest) (*operations.GetDeleteVpcEndpointServiceConfigurationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcEndpointServiceConfigurations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4135,7 +4261,7 @@ func (s *SDK) GetDeleteVpcEndpointServiceConfigurations(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4165,8 +4291,9 @@ func (s *SDK) GetDeleteVpcEndpointServiceConfigurations(ctx context.Context, req
 	return res, nil
 }
 
+// GetDeleteVpcEndpoints - <p>Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints. </p> <ul> <li> <p>Gateway endpoint,</p> </li> <li> <p>Gateway Load Balancer endpoint,</p> </li> <li> <p>Interface endpoint</p> </li> </ul> <p>The following rules apply when you delete a VPC endpoint:</p> <ul> <li> <p>When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.</p> </li> <li> <p>When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces. </p> <p>You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.</p> </li> <li> <p>When you delete an interface endpoint, we delete the endpoint network interfaces.</p> </li> </ul>
 func (s *SDK) GetDeleteVpcEndpoints(ctx context.Context, request operations.GetDeleteVpcEndpointsRequest) (*operations.GetDeleteVpcEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcEndpoints"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4178,7 +4305,7 @@ func (s *SDK) GetDeleteVpcEndpoints(ctx context.Context, request operations.GetD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4208,8 +4335,9 @@ func (s *SDK) GetDeleteVpcEndpoints(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetDeleteVpcPeeringConnection - Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the <code>active</code> state. The owner of the requester VPC can delete a VPC peering connection in the <code>pending-acceptance</code> state. You cannot delete a VPC peering connection that's in the <code>failed</code> state.
 func (s *SDK) GetDeleteVpcPeeringConnection(ctx context.Context, request operations.GetDeleteVpcPeeringConnectionRequest) (*operations.GetDeleteVpcPeeringConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcPeeringConnection"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4221,7 +4349,7 @@ func (s *SDK) GetDeleteVpcPeeringConnection(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4251,8 +4379,9 @@ func (s *SDK) GetDeleteVpcPeeringConnection(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDeleteVpnConnection - <p>Deletes the specified VPN connection.</p> <p>If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID.</p> <p>For certificate-based authentication, delete all AWS Certificate Manager (ACM) private certificates used for the AWS-side tunnel endpoints for the VPN connection before deleting the VPN connection.</p>
 func (s *SDK) GetDeleteVpnConnection(ctx context.Context, request operations.GetDeleteVpnConnectionRequest) (*operations.GetDeleteVpnConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpnConnection"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4264,7 +4393,7 @@ func (s *SDK) GetDeleteVpnConnection(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4285,8 +4414,9 @@ func (s *SDK) GetDeleteVpnConnection(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetDeleteVpnConnectionRoute - Deletes the specified static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.
 func (s *SDK) GetDeleteVpnConnectionRoute(ctx context.Context, request operations.GetDeleteVpnConnectionRouteRequest) (*operations.GetDeleteVpnConnectionRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpnConnectionRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4298,7 +4428,7 @@ func (s *SDK) GetDeleteVpnConnectionRoute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4319,8 +4449,9 @@ func (s *SDK) GetDeleteVpnConnectionRoute(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetDeleteVpnGateway - Deletes the specified virtual private gateway. You must first detach the virtual private gateway from the VPC. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
 func (s *SDK) GetDeleteVpnGateway(ctx context.Context, request operations.GetDeleteVpnGatewayRequest) (*operations.GetDeleteVpnGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpnGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4332,7 +4463,7 @@ func (s *SDK) GetDeleteVpnGateway(ctx context.Context, request operations.GetDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4353,8 +4484,9 @@ func (s *SDK) GetDeleteVpnGateway(ctx context.Context, request operations.GetDel
 	return res, nil
 }
 
+// GetDeprovisionByoipCidr - <p>Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p> <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its address range.</p>
 func (s *SDK) GetDeprovisionByoipCidr(ctx context.Context, request operations.GetDeprovisionByoipCidrRequest) (*operations.GetDeprovisionByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeprovisionByoipCidr"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4366,7 +4498,7 @@ func (s *SDK) GetDeprovisionByoipCidr(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4396,8 +4528,9 @@ func (s *SDK) GetDeprovisionByoipCidr(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeregisterImage - <p>Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them.</p> <p>When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.</p>
 func (s *SDK) GetDeregisterImage(ctx context.Context, request operations.GetDeregisterImageRequest) (*operations.GetDeregisterImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterImage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4409,7 +4542,7 @@ func (s *SDK) GetDeregisterImage(ctx context.Context, request operations.GetDere
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4430,8 +4563,9 @@ func (s *SDK) GetDeregisterImage(ctx context.Context, request operations.GetDere
 	return res, nil
 }
 
+// GetDeregisterInstanceEventNotificationAttributes - <p>c</p> <p>Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.</p>
 func (s *SDK) GetDeregisterInstanceEventNotificationAttributes(ctx context.Context, request operations.GetDeregisterInstanceEventNotificationAttributesRequest) (*operations.GetDeregisterInstanceEventNotificationAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterInstanceEventNotificationAttributes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4443,7 +4577,7 @@ func (s *SDK) GetDeregisterInstanceEventNotificationAttributes(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4473,8 +4607,9 @@ func (s *SDK) GetDeregisterInstanceEventNotificationAttributes(ctx context.Conte
 	return res, nil
 }
 
+// GetDeregisterTransitGatewayMulticastGroupMembers - Deregisters the specified members (network interfaces) from the transit gateway multicast group.
 func (s *SDK) GetDeregisterTransitGatewayMulticastGroupMembers(ctx context.Context, request operations.GetDeregisterTransitGatewayMulticastGroupMembersRequest) (*operations.GetDeregisterTransitGatewayMulticastGroupMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterTransitGatewayMulticastGroupMembers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4486,7 +4621,7 @@ func (s *SDK) GetDeregisterTransitGatewayMulticastGroupMembers(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4516,8 +4651,9 @@ func (s *SDK) GetDeregisterTransitGatewayMulticastGroupMembers(ctx context.Conte
 	return res, nil
 }
 
+// GetDeregisterTransitGatewayMulticastGroupSources - Deregisters the specified sources (network interfaces) from the transit gateway multicast group.
 func (s *SDK) GetDeregisterTransitGatewayMulticastGroupSources(ctx context.Context, request operations.GetDeregisterTransitGatewayMulticastGroupSourcesRequest) (*operations.GetDeregisterTransitGatewayMulticastGroupSourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterTransitGatewayMulticastGroupSources"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4529,7 +4665,7 @@ func (s *SDK) GetDeregisterTransitGatewayMulticastGroupSources(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4559,8 +4695,9 @@ func (s *SDK) GetDeregisterTransitGatewayMulticastGroupSources(ctx context.Conte
 	return res, nil
 }
 
+// GetDescribeAccountAttributes - <p>Describes attributes of your AWS account. The following are the supported account attributes:</p> <ul> <li> <p> <code>supported-platforms</code>: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.</p> </li> <li> <p> <code>default-vpc</code>: The ID of the default VPC for your account, or <code>none</code>.</p> </li> <li> <p> <code>max-instances</code>: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits">On-Demand Instance Limits</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <code>vpc-max-security-groups-per-interface</code>: The maximum number of security groups that you can assign to a network interface.</p> </li> <li> <p> <code>max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic. </p> </li> <li> <p> <code>vpc-max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.</p> </li> </ul>
 func (s *SDK) GetDescribeAccountAttributes(ctx context.Context, request operations.GetDescribeAccountAttributesRequest) (*operations.GetDescribeAccountAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAccountAttributes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4572,7 +4709,7 @@ func (s *SDK) GetDescribeAccountAttributes(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4602,8 +4739,9 @@ func (s *SDK) GetDescribeAccountAttributes(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDescribeAddressesAttribute - Describes the attributes of the specified Elastic IP addresses. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.
 func (s *SDK) GetDescribeAddressesAttribute(ctx context.Context, request operations.GetDescribeAddressesAttributeRequest) (*operations.GetDescribeAddressesAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAddressesAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4615,7 +4753,7 @@ func (s *SDK) GetDescribeAddressesAttribute(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4645,8 +4783,9 @@ func (s *SDK) GetDescribeAddressesAttribute(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDescribeAggregateIDFormat - <p>Describes the longer ID format settings for all resource types in a specific Region. This request is useful for performing a quick audit to determine whether a specific Region is fully opted in for longer IDs (17-character IDs).</p> <p>This request only returns information about resource types that support longer IDs.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>
 func (s *SDK) GetDescribeAggregateIDFormat(ctx context.Context, request operations.GetDescribeAggregateIDFormatRequest) (*operations.GetDescribeAggregateIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAggregateIdFormat"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4658,7 +4797,7 @@ func (s *SDK) GetDescribeAggregateIDFormat(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4688,8 +4827,9 @@ func (s *SDK) GetDescribeAggregateIDFormat(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDescribeByoipCidrs - <p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a> or <a>DescribeIpv6Pools</a>.</p>
 func (s *SDK) GetDescribeByoipCidrs(ctx context.Context, request operations.GetDescribeByoipCidrsRequest) (*operations.GetDescribeByoipCidrsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeByoipCidrs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4701,7 +4841,7 @@ func (s *SDK) GetDescribeByoipCidrs(ctx context.Context, request operations.GetD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4731,8 +4871,9 @@ func (s *SDK) GetDescribeByoipCidrs(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetDescribeConversionTasks - <p>Describes the specified conversion tasks or all your conversion tasks. For more information, see the <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/">VM Import/Export User Guide</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
 func (s *SDK) GetDescribeConversionTasks(ctx context.Context, request operations.GetDescribeConversionTasksRequest) (*operations.GetDescribeConversionTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeConversionTasks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4744,7 +4885,7 @@ func (s *SDK) GetDescribeConversionTasks(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4774,8 +4915,9 @@ func (s *SDK) GetDescribeConversionTasks(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDescribeFleetHistory - <p>Describes the events for the specified EC2 Fleet during the specified time.</p> <p>EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet">Monitoring your EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetDescribeFleetHistory(ctx context.Context, request operations.GetDescribeFleetHistoryRequest) (*operations.GetDescribeFleetHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFleetHistory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4787,7 +4929,7 @@ func (s *SDK) GetDescribeFleetHistory(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4817,8 +4959,9 @@ func (s *SDK) GetDescribeFleetHistory(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDescribeFpgaImageAttribute - Describes the specified attribute of the specified Amazon FPGA Image (AFI).
 func (s *SDK) GetDescribeFpgaImageAttribute(ctx context.Context, request operations.GetDescribeFpgaImageAttributeRequest) (*operations.GetDescribeFpgaImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFpgaImageAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4830,7 +4973,7 @@ func (s *SDK) GetDescribeFpgaImageAttribute(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4860,8 +5003,9 @@ func (s *SDK) GetDescribeFpgaImageAttribute(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDescribeIDFormat - <p>Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>
 func (s *SDK) GetDescribeIDFormat(ctx context.Context, request operations.GetDescribeIDFormatRequest) (*operations.GetDescribeIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIdFormat"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4873,7 +5017,7 @@ func (s *SDK) GetDescribeIDFormat(ctx context.Context, request operations.GetDes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4903,8 +5047,9 @@ func (s *SDK) GetDescribeIDFormat(ctx context.Context, request operations.GetDes
 	return res, nil
 }
 
+// GetDescribeIdentityIDFormat - <p>Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.</p>
 func (s *SDK) GetDescribeIdentityIDFormat(ctx context.Context, request operations.GetDescribeIdentityIDFormatRequest) (*operations.GetDescribeIdentityIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIdentityIdFormat"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4916,7 +5061,7 @@ func (s *SDK) GetDescribeIdentityIDFormat(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4946,8 +5091,9 @@ func (s *SDK) GetDescribeIdentityIDFormat(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetDescribeImageAttribute - Describes the specified attribute of the specified AMI. You can specify only one attribute at a time.
 func (s *SDK) GetDescribeImageAttribute(ctx context.Context, request operations.GetDescribeImageAttributeRequest) (*operations.GetDescribeImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeImageAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4959,7 +5105,7 @@ func (s *SDK) GetDescribeImageAttribute(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4989,8 +5135,9 @@ func (s *SDK) GetDescribeImageAttribute(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDescribeInstanceAttribute - Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Valid attribute values are: <code>instanceType</code> | <code>kernel</code> | <code>ramdisk</code> | <code>userData</code> | <code>disableApiTermination</code> | <code>instanceInitiatedShutdownBehavior</code> | <code>rootDeviceName</code> | <code>blockDeviceMapping</code> | <code>productCodes</code> | <code>sourceDestCheck</code> | <code>groupSet</code> | <code>ebsOptimized</code> | <code>sriovNetSupport</code>
 func (s *SDK) GetDescribeInstanceAttribute(ctx context.Context, request operations.GetDescribeInstanceAttributeRequest) (*operations.GetDescribeInstanceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5002,7 +5149,7 @@ func (s *SDK) GetDescribeInstanceAttribute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5032,8 +5179,9 @@ func (s *SDK) GetDescribeInstanceAttribute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDescribeInstanceEventNotificationAttributes - Describes the tag keys that are registered to appear in scheduled event notifications for resources in the current Region.
 func (s *SDK) GetDescribeInstanceEventNotificationAttributes(ctx context.Context, request operations.GetDescribeInstanceEventNotificationAttributesRequest) (*operations.GetDescribeInstanceEventNotificationAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceEventNotificationAttributes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5045,7 +5193,7 @@ func (s *SDK) GetDescribeInstanceEventNotificationAttributes(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5075,8 +5223,9 @@ func (s *SDK) GetDescribeInstanceEventNotificationAttributes(ctx context.Context
 	return res, nil
 }
 
+// GetDescribeNetworkInterfaceAttribute - Describes a network interface attribute. You can specify only one attribute at a time.
 func (s *SDK) GetDescribeNetworkInterfaceAttribute(ctx context.Context, request operations.GetDescribeNetworkInterfaceAttributeRequest) (*operations.GetDescribeNetworkInterfaceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNetworkInterfaceAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5088,7 +5237,7 @@ func (s *SDK) GetDescribeNetworkInterfaceAttribute(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5118,8 +5267,9 @@ func (s *SDK) GetDescribeNetworkInterfaceAttribute(ctx context.Context, request 
 	return res, nil
 }
 
+// GetDescribePrincipalIDFormat - <p>Describes the ID format settings for the root user and all IAM roles and IAM users that have explicitly specified a longer ID (17-character ID) preference. </p> <p>By default, all IAM roles and IAM users default to the same ID settings as the root user, unless they explicitly override the settings. This request is useful for identifying those IAM users and IAM roles that have overridden the default ID settings.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p>
 func (s *SDK) GetDescribePrincipalIDFormat(ctx context.Context, request operations.GetDescribePrincipalIDFormatRequest) (*operations.GetDescribePrincipalIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribePrincipalIdFormat"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5131,7 +5281,7 @@ func (s *SDK) GetDescribePrincipalIDFormat(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5161,8 +5311,9 @@ func (s *SDK) GetDescribePrincipalIDFormat(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDescribeSecurityGroupReferences - [VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
 func (s *SDK) GetDescribeSecurityGroupReferences(ctx context.Context, request operations.GetDescribeSecurityGroupReferencesRequest) (*operations.GetDescribeSecurityGroupReferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSecurityGroupReferences"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5174,7 +5325,7 @@ func (s *SDK) GetDescribeSecurityGroupReferences(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5204,8 +5355,9 @@ func (s *SDK) GetDescribeSecurityGroupReferences(ctx context.Context, request op
 	return res, nil
 }
 
+// GetDescribeSnapshotAttribute - <p>Describes the specified attribute of the specified snapshot. You can specify only one attribute at a time.</p> <p>For more information about EBS snapshots, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html">Amazon EBS snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetDescribeSnapshotAttribute(ctx context.Context, request operations.GetDescribeSnapshotAttributeRequest) (*operations.GetDescribeSnapshotAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSnapshotAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5217,7 +5369,7 @@ func (s *SDK) GetDescribeSnapshotAttribute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5247,8 +5399,9 @@ func (s *SDK) GetDescribeSnapshotAttribute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDescribeSpotDatafeedSubscription - Describes the data feed for Spot Instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html">Spot Instance data feed</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.
 func (s *SDK) GetDescribeSpotDatafeedSubscription(ctx context.Context, request operations.GetDescribeSpotDatafeedSubscriptionRequest) (*operations.GetDescribeSpotDatafeedSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotDatafeedSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5260,7 +5413,7 @@ func (s *SDK) GetDescribeSpotDatafeedSubscription(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5290,8 +5443,9 @@ func (s *SDK) GetDescribeSpotDatafeedSubscription(ctx context.Context, request o
 	return res, nil
 }
 
+// GetDescribeSpotFleetInstances - Describes the running instances for the specified Spot Fleet.
 func (s *SDK) GetDescribeSpotFleetInstances(ctx context.Context, request operations.GetDescribeSpotFleetInstancesRequest) (*operations.GetDescribeSpotFleetInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotFleetInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5303,7 +5457,7 @@ func (s *SDK) GetDescribeSpotFleetInstances(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5333,8 +5487,9 @@ func (s *SDK) GetDescribeSpotFleetInstances(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDescribeSpotFleetRequestHistory - <p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.</p>
 func (s *SDK) GetDescribeSpotFleetRequestHistory(ctx context.Context, request operations.GetDescribeSpotFleetRequestHistoryRequest) (*operations.GetDescribeSpotFleetRequestHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotFleetRequestHistory"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5346,7 +5501,7 @@ func (s *SDK) GetDescribeSpotFleetRequestHistory(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5376,8 +5531,9 @@ func (s *SDK) GetDescribeSpotFleetRequestHistory(ctx context.Context, request op
 	return res, nil
 }
 
+// GetDescribeSpotFleetRequests - <p>Describes your Spot Fleet requests.</p> <p>Spot Fleet requests are deleted 48 hours after they are canceled and their instances are terminated.</p>
 func (s *SDK) GetDescribeSpotFleetRequests(ctx context.Context, request operations.GetDescribeSpotFleetRequestsRequest) (*operations.GetDescribeSpotFleetRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotFleetRequests"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5389,7 +5545,7 @@ func (s *SDK) GetDescribeSpotFleetRequests(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5419,8 +5575,9 @@ func (s *SDK) GetDescribeSpotFleetRequests(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDescribeStaleSecurityGroups - [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
 func (s *SDK) GetDescribeStaleSecurityGroups(ctx context.Context, request operations.GetDescribeStaleSecurityGroupsRequest) (*operations.GetDescribeStaleSecurityGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeStaleSecurityGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5432,7 +5589,7 @@ func (s *SDK) GetDescribeStaleSecurityGroups(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5462,8 +5619,9 @@ func (s *SDK) GetDescribeStaleSecurityGroups(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetDescribeVolumeAttribute - <p>Describes the specified attribute of the specified volume. You can specify only one attribute at a time.</p> <p>For more information about EBS volumes, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html">Amazon EBS volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetDescribeVolumeAttribute(ctx context.Context, request operations.GetDescribeVolumeAttributeRequest) (*operations.GetDescribeVolumeAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVolumeAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5475,7 +5633,7 @@ func (s *SDK) GetDescribeVolumeAttribute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5505,8 +5663,9 @@ func (s *SDK) GetDescribeVolumeAttribute(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDescribeVpcAttribute - Describes the specified attribute of the specified VPC. You can specify only one attribute at a time.
 func (s *SDK) GetDescribeVpcAttribute(ctx context.Context, request operations.GetDescribeVpcAttributeRequest) (*operations.GetDescribeVpcAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5518,7 +5677,7 @@ func (s *SDK) GetDescribeVpcAttribute(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5548,8 +5707,9 @@ func (s *SDK) GetDescribeVpcAttribute(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDescribeVpcClassicLinkDNSSupport - Describes the ClassicLink DNS support status of one or more VPCs. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
 func (s *SDK) GetDescribeVpcClassicLinkDNSSupport(ctx context.Context, request operations.GetDescribeVpcClassicLinkDNSSupportRequest) (*operations.GetDescribeVpcClassicLinkDNSSupportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcClassicLinkDnsSupport"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5561,7 +5721,7 @@ func (s *SDK) GetDescribeVpcClassicLinkDNSSupport(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5591,8 +5751,9 @@ func (s *SDK) GetDescribeVpcClassicLinkDNSSupport(ctx context.Context, request o
 	return res, nil
 }
 
+// GetDetachClassicLinkVpc - Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the instance has been unlinked, the VPC security groups are no longer associated with it. An instance is automatically unlinked from a VPC when it's stopped.
 func (s *SDK) GetDetachClassicLinkVpc(ctx context.Context, request operations.GetDetachClassicLinkVpcRequest) (*operations.GetDetachClassicLinkVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachClassicLinkVpc"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5604,7 +5765,7 @@ func (s *SDK) GetDetachClassicLinkVpc(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5634,8 +5795,9 @@ func (s *SDK) GetDetachClassicLinkVpc(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDetachInternetGateway - Detaches an internet gateway from a VPC, disabling connectivity between the internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
 func (s *SDK) GetDetachInternetGateway(ctx context.Context, request operations.GetDetachInternetGatewayRequest) (*operations.GetDetachInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachInternetGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5647,7 +5809,7 @@ func (s *SDK) GetDetachInternetGateway(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5668,8 +5830,9 @@ func (s *SDK) GetDetachInternetGateway(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetDetachNetworkInterface - Detaches a network interface from an instance.
 func (s *SDK) GetDetachNetworkInterface(ctx context.Context, request operations.GetDetachNetworkInterfaceRequest) (*operations.GetDetachNetworkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachNetworkInterface"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5681,7 +5844,7 @@ func (s *SDK) GetDetachNetworkInterface(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5702,8 +5865,9 @@ func (s *SDK) GetDetachNetworkInterface(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDetachVolume - <p>Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the <code>busy</code> state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.</p> <p>When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the product code is no longer associated with the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html">Detach an Amazon EBS volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetDetachVolume(ctx context.Context, request operations.GetDetachVolumeRequest) (*operations.GetDetachVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachVolume"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5715,7 +5879,7 @@ func (s *SDK) GetDetachVolume(ctx context.Context, request operations.GetDetachV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5745,8 +5909,9 @@ func (s *SDK) GetDetachVolume(ctx context.Context, request operations.GetDetachV
 	return res, nil
 }
 
+// GetDetachVpnGateway - <p>Detaches a virtual private gateway from a VPC. You do this if you're planning to turn off the VPC and not use it anymore. You can confirm a virtual private gateway has been completely detached from a VPC by describing the virtual private gateway (any attachments to the virtual private gateway are also described).</p> <p>You must wait for the attachment's state to switch to <code>detached</code> before you can delete the VPC or attach a different VPC to the virtual private gateway.</p>
 func (s *SDK) GetDetachVpnGateway(ctx context.Context, request operations.GetDetachVpnGatewayRequest) (*operations.GetDetachVpnGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachVpnGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5758,7 +5923,7 @@ func (s *SDK) GetDetachVpnGateway(ctx context.Context, request operations.GetDet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5779,8 +5944,9 @@ func (s *SDK) GetDetachVpnGateway(ctx context.Context, request operations.GetDet
 	return res, nil
 }
 
+// GetDisableEbsEncryptionByDefault - <p>Disables EBS encryption by default for your account in the current Region.</p> <p>After you disable encryption by default, you can still create encrypted volumes by enabling encryption when you create each volume.</p> <p>Disabling encryption by default does not change the encryption status of your existing volumes.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetDisableEbsEncryptionByDefault(ctx context.Context, request operations.GetDisableEbsEncryptionByDefaultRequest) (*operations.GetDisableEbsEncryptionByDefaultResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableEbsEncryptionByDefault"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5792,7 +5958,7 @@ func (s *SDK) GetDisableEbsEncryptionByDefault(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5822,8 +5988,9 @@ func (s *SDK) GetDisableEbsEncryptionByDefault(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetDisableFastSnapshotRestores - Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.
 func (s *SDK) GetDisableFastSnapshotRestores(ctx context.Context, request operations.GetDisableFastSnapshotRestoresRequest) (*operations.GetDisableFastSnapshotRestoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableFastSnapshotRestores"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5835,7 +6002,7 @@ func (s *SDK) GetDisableFastSnapshotRestores(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5865,8 +6032,9 @@ func (s *SDK) GetDisableFastSnapshotRestores(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetDisableImageDeprecation - <p>Cancels the deprecation of the specified AMI.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html">Deprecate an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetDisableImageDeprecation(ctx context.Context, request operations.GetDisableImageDeprecationRequest) (*operations.GetDisableImageDeprecationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableImageDeprecation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5878,7 +6046,7 @@ func (s *SDK) GetDisableImageDeprecation(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5908,8 +6076,9 @@ func (s *SDK) GetDisableImageDeprecation(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDisableSerialConsoleAccess - Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) GetDisableSerialConsoleAccess(ctx context.Context, request operations.GetDisableSerialConsoleAccessRequest) (*operations.GetDisableSerialConsoleAccessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableSerialConsoleAccess"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5921,7 +6090,7 @@ func (s *SDK) GetDisableSerialConsoleAccess(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5951,8 +6120,9 @@ func (s *SDK) GetDisableSerialConsoleAccess(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDisableTransitGatewayRouteTablePropagation - Disables the specified resource attachment from propagating routes to the specified propagation route table.
 func (s *SDK) GetDisableTransitGatewayRouteTablePropagation(ctx context.Context, request operations.GetDisableTransitGatewayRouteTablePropagationRequest) (*operations.GetDisableTransitGatewayRouteTablePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableTransitGatewayRouteTablePropagation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5964,7 +6134,7 @@ func (s *SDK) GetDisableTransitGatewayRouteTablePropagation(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5994,8 +6164,9 @@ func (s *SDK) GetDisableTransitGatewayRouteTablePropagation(ctx context.Context,
 	return res, nil
 }
 
+// GetDisableVgwRoutePropagation - Disables a virtual private gateway (VGW) from propagating routes to a specified route table of a VPC.
 func (s *SDK) GetDisableVgwRoutePropagation(ctx context.Context, request operations.GetDisableVgwRoutePropagationRequest) (*operations.GetDisableVgwRoutePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableVgwRoutePropagation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6007,7 +6178,7 @@ func (s *SDK) GetDisableVgwRoutePropagation(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6028,8 +6199,9 @@ func (s *SDK) GetDisableVgwRoutePropagation(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDisableVpcClassicLink - Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC that has EC2-Classic instances linked to it.
 func (s *SDK) GetDisableVpcClassicLink(ctx context.Context, request operations.GetDisableVpcClassicLinkRequest) (*operations.GetDisableVpcClassicLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableVpcClassicLink"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6041,7 +6213,7 @@ func (s *SDK) GetDisableVpcClassicLink(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6071,8 +6243,9 @@ func (s *SDK) GetDisableVpcClassicLink(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetDisableVpcClassicLinkDNSSupport - <p>Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>
 func (s *SDK) GetDisableVpcClassicLinkDNSSupport(ctx context.Context, request operations.GetDisableVpcClassicLinkDNSSupportRequest) (*operations.GetDisableVpcClassicLinkDNSSupportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableVpcClassicLinkDnsSupport"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6084,7 +6257,7 @@ func (s *SDK) GetDisableVpcClassicLinkDNSSupport(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6114,8 +6287,9 @@ func (s *SDK) GetDisableVpcClassicLinkDNSSupport(ctx context.Context, request op
 	return res, nil
 }
 
+// GetDisassociateAddress - <p>Disassociates an Elastic IP address from the instance or network interface it's associated with.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>
 func (s *SDK) GetDisassociateAddress(ctx context.Context, request operations.GetDisassociateAddressRequest) (*operations.GetDisassociateAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateAddress"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6127,7 +6301,7 @@ func (s *SDK) GetDisassociateAddress(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6148,8 +6322,9 @@ func (s *SDK) GetDisassociateAddress(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetDisassociateClientVpnTargetNetwork - <p>Disassociates a target network from the specified Client VPN endpoint. When you disassociate the last target network from a Client VPN, the following happens:</p> <ul> <li> <p>The route that was automatically added for the VPC is deleted</p> </li> <li> <p>All active client connections are terminated</p> </li> <li> <p>New client connections are disallowed</p> </li> <li> <p>The Client VPN endpoint's status changes to <code>pending-associate</code> </p> </li> </ul>
 func (s *SDK) GetDisassociateClientVpnTargetNetwork(ctx context.Context, request operations.GetDisassociateClientVpnTargetNetworkRequest) (*operations.GetDisassociateClientVpnTargetNetworkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateClientVpnTargetNetwork"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6161,7 +6336,7 @@ func (s *SDK) GetDisassociateClientVpnTargetNetwork(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6191,8 +6366,9 @@ func (s *SDK) GetDisassociateClientVpnTargetNetwork(ctx context.Context, request
 	return res, nil
 }
 
+// GetDisassociateEnclaveCertificateIamRole - Disassociates an IAM role from an Certificate Manager (ACM) certificate. Disassociating an IAM role from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and encrypted private key from the Amazon S3 bucket. It also revokes the IAM role's permission to use the KMS key used to encrypt the private key. This effectively revokes the role's permission to use the certificate.
 func (s *SDK) GetDisassociateEnclaveCertificateIamRole(ctx context.Context, request operations.GetDisassociateEnclaveCertificateIamRoleRequest) (*operations.GetDisassociateEnclaveCertificateIamRoleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateEnclaveCertificateIamRole"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6204,7 +6380,7 @@ func (s *SDK) GetDisassociateEnclaveCertificateIamRole(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6234,8 +6410,9 @@ func (s *SDK) GetDisassociateEnclaveCertificateIamRole(ctx context.Context, requ
 	return res, nil
 }
 
+// GetDisassociateIamInstanceProfile - <p>Disassociates an IAM instance profile from a running or stopped instance.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>
 func (s *SDK) GetDisassociateIamInstanceProfile(ctx context.Context, request operations.GetDisassociateIamInstanceProfileRequest) (*operations.GetDisassociateIamInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateIamInstanceProfile"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6247,7 +6424,7 @@ func (s *SDK) GetDisassociateIamInstanceProfile(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6277,8 +6454,9 @@ func (s *SDK) GetDisassociateIamInstanceProfile(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetDisassociateRouteTable - <p>Disassociates a subnet or gateway from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetDisassociateRouteTable(ctx context.Context, request operations.GetDisassociateRouteTableRequest) (*operations.GetDisassociateRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateRouteTable"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6290,7 +6468,7 @@ func (s *SDK) GetDisassociateRouteTable(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6311,8 +6489,9 @@ func (s *SDK) GetDisassociateRouteTable(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDisassociateSubnetCidrBlock - Disassociates a CIDR block from a subnet. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.
 func (s *SDK) GetDisassociateSubnetCidrBlock(ctx context.Context, request operations.GetDisassociateSubnetCidrBlockRequest) (*operations.GetDisassociateSubnetCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateSubnetCidrBlock"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6324,7 +6503,7 @@ func (s *SDK) GetDisassociateSubnetCidrBlock(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6354,8 +6533,9 @@ func (s *SDK) GetDisassociateSubnetCidrBlock(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetDisassociateTransitGatewayMulticastDomain - Disassociates the specified subnets from the transit gateway multicast domain.
 func (s *SDK) GetDisassociateTransitGatewayMulticastDomain(ctx context.Context, request operations.GetDisassociateTransitGatewayMulticastDomainRequest) (*operations.GetDisassociateTransitGatewayMulticastDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateTransitGatewayMulticastDomain"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6367,7 +6547,7 @@ func (s *SDK) GetDisassociateTransitGatewayMulticastDomain(ctx context.Context, 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6397,8 +6577,9 @@ func (s *SDK) GetDisassociateTransitGatewayMulticastDomain(ctx context.Context, 
 	return res, nil
 }
 
+// GetDisassociateTransitGatewayRouteTable - Disassociates a resource attachment from a transit gateway route table.
 func (s *SDK) GetDisassociateTransitGatewayRouteTable(ctx context.Context, request operations.GetDisassociateTransitGatewayRouteTableRequest) (*operations.GetDisassociateTransitGatewayRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateTransitGatewayRouteTable"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6410,7 +6591,7 @@ func (s *SDK) GetDisassociateTransitGatewayRouteTable(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6440,8 +6621,9 @@ func (s *SDK) GetDisassociateTransitGatewayRouteTable(ctx context.Context, reque
 	return res, nil
 }
 
+// GetDisassociateTrunkInterface - <note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Removes an association between a branch network interface with a trunk network interface.</p>
 func (s *SDK) GetDisassociateTrunkInterface(ctx context.Context, request operations.GetDisassociateTrunkInterfaceRequest) (*operations.GetDisassociateTrunkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateTrunkInterface"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6453,7 +6635,7 @@ func (s *SDK) GetDisassociateTrunkInterface(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6483,8 +6665,9 @@ func (s *SDK) GetDisassociateTrunkInterface(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDisassociateVpcCidrBlock - <p>Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using <a>DescribeVpcs</a>. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. </p> <p>You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).</p>
 func (s *SDK) GetDisassociateVpcCidrBlock(ctx context.Context, request operations.GetDisassociateVpcCidrBlockRequest) (*operations.GetDisassociateVpcCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateVpcCidrBlock"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6496,7 +6679,7 @@ func (s *SDK) GetDisassociateVpcCidrBlock(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6526,8 +6709,9 @@ func (s *SDK) GetDisassociateVpcCidrBlock(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetEnableEbsEncryptionByDefault - <p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default KMS key or the KMS key that you specified when you created each volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default KMS key for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances">Supported instance types</a>.</p>
 func (s *SDK) GetEnableEbsEncryptionByDefault(ctx context.Context, request operations.GetEnableEbsEncryptionByDefaultRequest) (*operations.GetEnableEbsEncryptionByDefaultResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableEbsEncryptionByDefault"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6539,7 +6723,7 @@ func (s *SDK) GetEnableEbsEncryptionByDefault(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6569,8 +6753,9 @@ func (s *SDK) GetEnableEbsEncryptionByDefault(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetEnableFastSnapshotRestores - <p>Enables fast snapshot restores for the specified snapshots in the specified Availability Zones.</p> <p>You get the full benefit of fast snapshot restores after they enter the <code>enabled</code> state. To get the current state of fast snapshot restores, use <a>DescribeFastSnapshotRestores</a>. To disable fast snapshot restores, use <a>DisableFastSnapshotRestores</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html">Amazon EBS fast snapshot restore</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetEnableFastSnapshotRestores(ctx context.Context, request operations.GetEnableFastSnapshotRestoresRequest) (*operations.GetEnableFastSnapshotRestoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableFastSnapshotRestores"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6582,7 +6767,7 @@ func (s *SDK) GetEnableFastSnapshotRestores(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6612,8 +6797,9 @@ func (s *SDK) GetEnableFastSnapshotRestores(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetEnableImageDeprecation - <p>Enables deprecation of the specified AMI at the specified date and time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html">Deprecate an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetEnableImageDeprecation(ctx context.Context, request operations.GetEnableImageDeprecationRequest) (*operations.GetEnableImageDeprecationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableImageDeprecation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6625,7 +6811,7 @@ func (s *SDK) GetEnableImageDeprecation(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6655,8 +6841,9 @@ func (s *SDK) GetEnableImageDeprecation(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetEnableSerialConsoleAccess - Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) GetEnableSerialConsoleAccess(ctx context.Context, request operations.GetEnableSerialConsoleAccessRequest) (*operations.GetEnableSerialConsoleAccessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableSerialConsoleAccess"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6668,7 +6855,7 @@ func (s *SDK) GetEnableSerialConsoleAccess(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6698,8 +6885,9 @@ func (s *SDK) GetEnableSerialConsoleAccess(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetEnableTransitGatewayRouteTablePropagation - Enables the specified attachment to propagate routes to the specified propagation route table.
 func (s *SDK) GetEnableTransitGatewayRouteTablePropagation(ctx context.Context, request operations.GetEnableTransitGatewayRouteTablePropagationRequest) (*operations.GetEnableTransitGatewayRouteTablePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableTransitGatewayRouteTablePropagation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6711,7 +6899,7 @@ func (s *SDK) GetEnableTransitGatewayRouteTablePropagation(ctx context.Context, 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6741,8 +6929,9 @@ func (s *SDK) GetEnableTransitGatewayRouteTablePropagation(ctx context.Context, 
 	return res, nil
 }
 
+// GetEnableVgwRoutePropagation - Enables a virtual private gateway (VGW) to propagate routes to the specified route table of a VPC.
 func (s *SDK) GetEnableVgwRoutePropagation(ctx context.Context, request operations.GetEnableVgwRoutePropagationRequest) (*operations.GetEnableVgwRoutePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVgwRoutePropagation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6754,7 +6943,7 @@ func (s *SDK) GetEnableVgwRoutePropagation(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6775,8 +6964,9 @@ func (s *SDK) GetEnableVgwRoutePropagation(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetEnableVolumeIo - Enables I/O operations for a volume that had I/O operations disabled because the data on the volume was potentially inconsistent.
 func (s *SDK) GetEnableVolumeIo(ctx context.Context, request operations.GetEnableVolumeIoRequest) (*operations.GetEnableVolumeIoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVolumeIO"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6788,7 +6978,7 @@ func (s *SDK) GetEnableVolumeIo(ctx context.Context, request operations.GetEnabl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6809,8 +6999,9 @@ func (s *SDK) GetEnableVolumeIo(ctx context.Context, request operations.GetEnabl
 	return res, nil
 }
 
+// GetEnableVpcClassicLink - Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC route tables have existing routes for address ranges within the <code>10.0.0.0/8</code> IP address range, excluding local routes for VPCs in the <code>10.0.0.0/16</code> and <code>10.1.0.0/16</code> IP address ranges. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
 func (s *SDK) GetEnableVpcClassicLink(ctx context.Context, request operations.GetEnableVpcClassicLinkRequest) (*operations.GetEnableVpcClassicLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVpcClassicLink"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6822,7 +7013,7 @@ func (s *SDK) GetEnableVpcClassicLink(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6852,8 +7043,9 @@ func (s *SDK) GetEnableVpcClassicLink(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetEnableVpcClassicLinkDNSSupport - <p>Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>
 func (s *SDK) GetEnableVpcClassicLinkDNSSupport(ctx context.Context, request operations.GetEnableVpcClassicLinkDNSSupportRequest) (*operations.GetEnableVpcClassicLinkDNSSupportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVpcClassicLinkDnsSupport"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6865,7 +7057,7 @@ func (s *SDK) GetEnableVpcClassicLinkDNSSupport(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6895,8 +7087,9 @@ func (s *SDK) GetEnableVpcClassicLinkDNSSupport(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetExportClientVpnClientCertificateRevocationList - Downloads the client certificate revocation list for the specified Client VPN endpoint.
 func (s *SDK) GetExportClientVpnClientCertificateRevocationList(ctx context.Context, request operations.GetExportClientVpnClientCertificateRevocationListRequest) (*operations.GetExportClientVpnClientCertificateRevocationListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ExportClientVpnClientCertificateRevocationList"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6908,7 +7101,7 @@ func (s *SDK) GetExportClientVpnClientCertificateRevocationList(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6938,8 +7131,9 @@ func (s *SDK) GetExportClientVpnClientCertificateRevocationList(ctx context.Cont
 	return res, nil
 }
 
+// GetExportClientVpnClientConfiguration - Downloads the contents of the Client VPN endpoint configuration file for the specified Client VPN endpoint. The Client VPN endpoint configuration file includes the Client VPN endpoint and certificate information clients need to establish a connection with the Client VPN endpoint.
 func (s *SDK) GetExportClientVpnClientConfiguration(ctx context.Context, request operations.GetExportClientVpnClientConfigurationRequest) (*operations.GetExportClientVpnClientConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ExportClientVpnClientConfiguration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6951,7 +7145,7 @@ func (s *SDK) GetExportClientVpnClientConfiguration(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6981,8 +7175,9 @@ func (s *SDK) GetExportClientVpnClientConfiguration(ctx context.Context, request
 	return res, nil
 }
 
+// GetGetAssociatedEnclaveCertificateIamRoles - Returns the IAM roles that are associated with the specified ACM (ACM) certificate. It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored, and the ARN of the KMS key that's used to encrypt the private key.
 func (s *SDK) GetGetAssociatedEnclaveCertificateIamRoles(ctx context.Context, request operations.GetGetAssociatedEnclaveCertificateIamRolesRequest) (*operations.GetGetAssociatedEnclaveCertificateIamRolesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetAssociatedEnclaveCertificateIamRoles"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6994,7 +7189,7 @@ func (s *SDK) GetGetAssociatedEnclaveCertificateIamRoles(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7024,8 +7219,9 @@ func (s *SDK) GetGetAssociatedEnclaveCertificateIamRoles(ctx context.Context, re
 	return res, nil
 }
 
+// GetGetAssociatedIpv6PoolCidrs - Gets information about the IPv6 CIDR block associations for a specified IPv6 address pool.
 func (s *SDK) GetGetAssociatedIpv6PoolCidrs(ctx context.Context, request operations.GetGetAssociatedIpv6PoolCidrsRequest) (*operations.GetGetAssociatedIpv6PoolCidrsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetAssociatedIpv6PoolCidrs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7037,7 +7233,7 @@ func (s *SDK) GetGetAssociatedIpv6PoolCidrs(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7067,8 +7263,9 @@ func (s *SDK) GetGetAssociatedIpv6PoolCidrs(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetGetCapacityReservationUsage - Gets usage information about a Capacity Reservation. If the Capacity Reservation is shared, it shows usage information for the Capacity Reservation owner and each Amazon Web Services account that is currently using the shared capacity. If the Capacity Reservation is not shared, it shows only the Capacity Reservation owner's usage.
 func (s *SDK) GetGetCapacityReservationUsage(ctx context.Context, request operations.GetGetCapacityReservationUsageRequest) (*operations.GetGetCapacityReservationUsageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetCapacityReservationUsage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7080,7 +7277,7 @@ func (s *SDK) GetGetCapacityReservationUsage(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7110,8 +7307,9 @@ func (s *SDK) GetGetCapacityReservationUsage(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetGetConsoleOutput - <p>Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors.</p> <p>By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. Only the most recent 64 KB of console output is available.</p> <p>You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is supported on instance types that use the Nitro hypervisor.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output">Instance console output</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetGetConsoleOutput(ctx context.Context, request operations.GetGetConsoleOutputRequest) (*operations.GetGetConsoleOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetConsoleOutput"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7123,7 +7321,7 @@ func (s *SDK) GetGetConsoleOutput(ctx context.Context, request operations.GetGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7153,8 +7351,9 @@ func (s *SDK) GetGetConsoleOutput(ctx context.Context, request operations.GetGet
 	return res, nil
 }
 
+// GetGetConsoleScreenshot - <p>Retrieve a JPG-format screenshot of a running instance to help with troubleshooting.</p> <p>The returned content is Base64-encoded.</p>
 func (s *SDK) GetGetConsoleScreenshot(ctx context.Context, request operations.GetGetConsoleScreenshotRequest) (*operations.GetGetConsoleScreenshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetConsoleScreenshot"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7166,7 +7365,7 @@ func (s *SDK) GetGetConsoleScreenshot(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7196,8 +7395,9 @@ func (s *SDK) GetGetConsoleScreenshot(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetGetDefaultCreditSpecification - <p>Describes the default credit option for CPU usage of a burstable performance instance family.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetGetDefaultCreditSpecification(ctx context.Context, request operations.GetGetDefaultCreditSpecificationRequest) (*operations.GetGetDefaultCreditSpecificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetDefaultCreditSpecification"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7209,7 +7409,7 @@ func (s *SDK) GetGetDefaultCreditSpecification(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7239,8 +7439,9 @@ func (s *SDK) GetGetDefaultCreditSpecification(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetGetEbsDefaultKmsKeyID - <p>Describes the default KMS key for EBS encryption by default for your account in this Region. You can change the default KMS key for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetGetEbsDefaultKmsKeyID(ctx context.Context, request operations.GetGetEbsDefaultKmsKeyIDRequest) (*operations.GetGetEbsDefaultKmsKeyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetEbsDefaultKmsKeyId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7252,7 +7453,7 @@ func (s *SDK) GetGetEbsDefaultKmsKeyID(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7282,8 +7483,9 @@ func (s *SDK) GetGetEbsDefaultKmsKeyID(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetGetEbsEncryptionByDefault - <p>Describes whether EBS encryption by default is enabled for your account in the current Region.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetGetEbsEncryptionByDefault(ctx context.Context, request operations.GetGetEbsEncryptionByDefaultRequest) (*operations.GetGetEbsEncryptionByDefaultResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetEbsEncryptionByDefault"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7295,7 +7497,7 @@ func (s *SDK) GetGetEbsEncryptionByDefault(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7325,8 +7527,9 @@ func (s *SDK) GetGetEbsEncryptionByDefault(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetGetGroupsForCapacityReservation - Lists the resource groups to which a Capacity Reservation has been added.
 func (s *SDK) GetGetGroupsForCapacityReservation(ctx context.Context, request operations.GetGetGroupsForCapacityReservationRequest) (*operations.GetGetGroupsForCapacityReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetGroupsForCapacityReservation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7338,7 +7541,7 @@ func (s *SDK) GetGetGroupsForCapacityReservation(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7368,8 +7571,9 @@ func (s *SDK) GetGetGroupsForCapacityReservation(ctx context.Context, request op
 	return res, nil
 }
 
+// GetGetHostReservationPurchasePreview - <p>Preview a reservation purchase with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation.</p> <p>This is a preview of the <a>PurchaseHostReservation</a> action and does not result in the offering being purchased.</p>
 func (s *SDK) GetGetHostReservationPurchasePreview(ctx context.Context, request operations.GetGetHostReservationPurchasePreviewRequest) (*operations.GetGetHostReservationPurchasePreviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetHostReservationPurchasePreview"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7381,7 +7585,7 @@ func (s *SDK) GetGetHostReservationPurchasePreview(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7411,8 +7615,9 @@ func (s *SDK) GetGetHostReservationPurchasePreview(ctx context.Context, request 
 	return res, nil
 }
 
+// GetGetLaunchTemplateData - <p>Retrieves the configuration data of the specified instance. You can use this data to create a launch template. </p> <p>This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow <code>describe*</code> depending on your instance requirements.</p>
 func (s *SDK) GetGetLaunchTemplateData(ctx context.Context, request operations.GetGetLaunchTemplateDataRequest) (*operations.GetGetLaunchTemplateDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetLaunchTemplateData"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7424,7 +7629,7 @@ func (s *SDK) GetGetLaunchTemplateData(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7454,8 +7659,9 @@ func (s *SDK) GetGetLaunchTemplateData(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetGetManagedPrefixListAssociations - Gets information about the resources that are associated with the specified managed prefix list.
 func (s *SDK) GetGetManagedPrefixListAssociations(ctx context.Context, request operations.GetGetManagedPrefixListAssociationsRequest) (*operations.GetGetManagedPrefixListAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetManagedPrefixListAssociations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7467,7 +7673,7 @@ func (s *SDK) GetGetManagedPrefixListAssociations(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7497,8 +7703,9 @@ func (s *SDK) GetGetManagedPrefixListAssociations(ctx context.Context, request o
 	return res, nil
 }
 
+// GetGetManagedPrefixListEntries - Gets information about the entries for a specified managed prefix list.
 func (s *SDK) GetGetManagedPrefixListEntries(ctx context.Context, request operations.GetGetManagedPrefixListEntriesRequest) (*operations.GetGetManagedPrefixListEntriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetManagedPrefixListEntries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7510,7 +7717,7 @@ func (s *SDK) GetGetManagedPrefixListEntries(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7540,8 +7747,9 @@ func (s *SDK) GetGetManagedPrefixListEntries(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetGetPasswordData - <p>Retrieves the encrypted administrator password for a running Windows instance.</p> <p>The Windows password is generated at boot by the <code>EC2Config</code> service or <code>EC2Launch</code> scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html">EC2Config</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html">EC2Launch</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>For the <code>EC2Config</code> service, the password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>
 func (s *SDK) GetGetPasswordData(ctx context.Context, request operations.GetGetPasswordDataRequest) (*operations.GetGetPasswordDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetPasswordData"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7553,7 +7761,7 @@ func (s *SDK) GetGetPasswordData(ctx context.Context, request operations.GetGetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7583,8 +7791,9 @@ func (s *SDK) GetGetPasswordData(ctx context.Context, request operations.GetGetP
 	return res, nil
 }
 
+// GetGetSerialConsoleAccessStatus - Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) GetGetSerialConsoleAccessStatus(ctx context.Context, request operations.GetGetSerialConsoleAccessStatusRequest) (*operations.GetGetSerialConsoleAccessStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetSerialConsoleAccessStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7596,7 +7805,7 @@ func (s *SDK) GetGetSerialConsoleAccessStatus(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7626,8 +7835,9 @@ func (s *SDK) GetGetSerialConsoleAccessStatus(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetImportClientVpnClientCertificateRevocationList - <p>Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list.</p> <p>Uploading a client certificate revocation list resets existing client connections.</p>
 func (s *SDK) GetImportClientVpnClientCertificateRevocationList(ctx context.Context, request operations.GetImportClientVpnClientCertificateRevocationListRequest) (*operations.GetImportClientVpnClientCertificateRevocationListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportClientVpnClientCertificateRevocationList"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7639,7 +7849,7 @@ func (s *SDK) GetImportClientVpnClientCertificateRevocationList(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7669,8 +7879,9 @@ func (s *SDK) GetImportClientVpnClientCertificateRevocationList(ctx context.Cont
 	return res, nil
 }
 
+// GetImportVolume - <p>Creates an import volume task using metadata from the specified disk image.</p> <p>This API action supports only single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a> instead. To import a disk to a snapshot, use <a>ImportSnapshot</a> instead.</p> <p>This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see <a href="https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs">Importing Disks to Amazon EBS</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p> <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
 func (s *SDK) GetImportVolume(ctx context.Context, request operations.GetImportVolumeRequest) (*operations.GetImportVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportVolume"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7682,7 +7893,7 @@ func (s *SDK) GetImportVolume(ctx context.Context, request operations.GetImportV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7712,8 +7923,9 @@ func (s *SDK) GetImportVolume(ctx context.Context, request operations.GetImportV
 	return res, nil
 }
 
+// GetModifyAddressAttribute - Modifies an attribute of the specified Elastic IP address. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.
 func (s *SDK) GetModifyAddressAttribute(ctx context.Context, request operations.GetModifyAddressAttributeRequest) (*operations.GetModifyAddressAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyAddressAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7725,7 +7937,7 @@ func (s *SDK) GetModifyAddressAttribute(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7755,8 +7967,9 @@ func (s *SDK) GetModifyAddressAttribute(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetModifyAvailabilityZoneGroup - <p>Changes the opt-in status of the Local Zone and Wavelength Zone group for your account.</p> <p>Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html"> DescribeAvailabilityZones</a> to view the value for <code>GroupName</code>.</p>
 func (s *SDK) GetModifyAvailabilityZoneGroup(ctx context.Context, request operations.GetModifyAvailabilityZoneGroupRequest) (*operations.GetModifyAvailabilityZoneGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyAvailabilityZoneGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7768,7 +7981,7 @@ func (s *SDK) GetModifyAvailabilityZoneGroup(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7798,8 +8011,9 @@ func (s *SDK) GetModifyAvailabilityZoneGroup(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetModifyCapacityReservation - Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.
 func (s *SDK) GetModifyCapacityReservation(ctx context.Context, request operations.GetModifyCapacityReservationRequest) (*operations.GetModifyCapacityReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyCapacityReservation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7811,7 +8025,7 @@ func (s *SDK) GetModifyCapacityReservation(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7841,8 +8055,9 @@ func (s *SDK) GetModifyCapacityReservation(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetModifyClientVpnEndpoint - Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.
 func (s *SDK) GetModifyClientVpnEndpoint(ctx context.Context, request operations.GetModifyClientVpnEndpointRequest) (*operations.GetModifyClientVpnEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyClientVpnEndpoint"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7854,7 +8069,7 @@ func (s *SDK) GetModifyClientVpnEndpoint(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7884,8 +8099,9 @@ func (s *SDK) GetModifyClientVpnEndpoint(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetModifyDefaultCreditSpecification - <p>Modifies the default credit option for CPU usage of burstable performance instances. The default credit option is set at the account level per Amazon Web Services Region, and is specified per instance family. All new burstable performance instances in the account launch using the default credit option.</p> <p> <code>ModifyDefaultCreditSpecification</code> is an asynchronous operation, which works at an Amazon Web Services Region level and modifies the credit option for each Availability Zone. All zones in a Region are updated within five minutes. But if instances are launched during this operation, they might not get the new credit option until the zone is updated. To verify whether the update has occurred, you can call <code>GetDefaultCreditSpecification</code> and check <code>DefaultCreditSpecification</code> for updates.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetModifyDefaultCreditSpecification(ctx context.Context, request operations.GetModifyDefaultCreditSpecificationRequest) (*operations.GetModifyDefaultCreditSpecificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyDefaultCreditSpecification"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7897,7 +8113,7 @@ func (s *SDK) GetModifyDefaultCreditSpecification(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7927,8 +8143,9 @@ func (s *SDK) GetModifyDefaultCreditSpecification(ctx context.Context, request o
 	return res, nil
 }
 
+// GetModifyEbsDefaultKmsKeyID - <p>Changes the default KMS key for EBS encryption by default for your account in this Region.</p> <p>Amazon Web Services creates a unique Amazon Web Services managed KMS key in each Region for use with encryption by default. If you change the default KMS key to a symmetric customer managed KMS key, it is used instead of the Amazon Web Services managed KMS key. To reset the default KMS key to the Amazon Web Services managed KMS key for EBS, use <a>ResetEbsDefaultKmsKeyId</a>. Amazon EBS does not support asymmetric KMS keys.</p> <p>If you delete or disable the customer managed KMS key that you specified for use with encryption by default, your instances will fail to launch.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetModifyEbsDefaultKmsKeyID(ctx context.Context, request operations.GetModifyEbsDefaultKmsKeyIDRequest) (*operations.GetModifyEbsDefaultKmsKeyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyEbsDefaultKmsKeyId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7940,7 +8157,7 @@ func (s *SDK) GetModifyEbsDefaultKmsKeyID(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7970,8 +8187,9 @@ func (s *SDK) GetModifyEbsDefaultKmsKeyID(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetModifyHosts - <p>Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.</p> <p>You can also use this API action to modify a Dedicated Host to support either multiple instance types in an instance family, or to support a specific instance type only.</p>
 func (s *SDK) GetModifyHosts(ctx context.Context, request operations.GetModifyHostsRequest) (*operations.GetModifyHostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyHosts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7983,7 +8201,7 @@ func (s *SDK) GetModifyHosts(ctx context.Context, request operations.GetModifyHo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8013,8 +8231,9 @@ func (s *SDK) GetModifyHosts(ctx context.Context, request operations.GetModifyHo
 	return res, nil
 }
 
+// GetModifyIDFormat - <p>Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>
 func (s *SDK) GetModifyIDFormat(ctx context.Context, request operations.GetModifyIDFormatRequest) (*operations.GetModifyIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyIdFormat"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8026,7 +8245,7 @@ func (s *SDK) GetModifyIDFormat(ctx context.Context, request operations.GetModif
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8047,8 +8266,9 @@ func (s *SDK) GetModifyIDFormat(ctx context.Context, request operations.GetModif
 	return res, nil
 }
 
+// GetModifyIdentityIDFormat - <p>Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created. </p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>This setting applies to the principal specified in the request; it does not apply to the principal that makes the request. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>
 func (s *SDK) GetModifyIdentityIDFormat(ctx context.Context, request operations.GetModifyIdentityIDFormatRequest) (*operations.GetModifyIdentityIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyIdentityIdFormat"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8060,7 +8280,7 @@ func (s *SDK) GetModifyIdentityIDFormat(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8081,8 +8301,9 @@ func (s *SDK) GetModifyIdentityIDFormat(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetModifyInstanceEventStartTime - Modifies the start time for a scheduled Amazon EC2 instance event.
 func (s *SDK) GetModifyInstanceEventStartTime(ctx context.Context, request operations.GetModifyInstanceEventStartTimeRequest) (*operations.GetModifyInstanceEventStartTimeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceEventStartTime"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8094,7 +8315,7 @@ func (s *SDK) GetModifyInstanceEventStartTime(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8124,8 +8345,9 @@ func (s *SDK) GetModifyInstanceEventStartTime(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetModifyInstanceMetadataOptions - Modify the instance metadata parameters on a running or stopped instance. When you modify the parameters on a stopped instance, they are applied when the instance is started. When you modify the parameters on a running instance, the API responds with a state of “pending”. After the parameter modifications are successfully applied to the instance, the state of the modifications changes from “pending” to “applied” in subsequent describe-instances API calls. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance metadata and user data</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) GetModifyInstanceMetadataOptions(ctx context.Context, request operations.GetModifyInstanceMetadataOptionsRequest) (*operations.GetModifyInstanceMetadataOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceMetadataOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8137,7 +8359,7 @@ func (s *SDK) GetModifyInstanceMetadataOptions(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8167,8 +8389,9 @@ func (s *SDK) GetModifyInstanceMetadataOptions(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetModifyInstancePlacement - <p>Modifies the placement attributes for a specified instance. You can do the following:</p> <ul> <li> <p>Modify the affinity between an instance and a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html">Dedicated Host</a>. When affinity is set to <code>host</code> and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.</p> </li> <li> <p>Change the Dedicated Host with which an instance is associated.</p> </li> <li> <p>Change the instance tenancy of an instance from <code>host</code> to <code>dedicated</code>, or from <code>dedicated</code> to <code>host</code>.</p> </li> <li> <p>Move an instance to or from a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">placement group</a>.</p> </li> </ul> <p>At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request.</p> <p>To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the <code>stopped</code> state.</p>
 func (s *SDK) GetModifyInstancePlacement(ctx context.Context, request operations.GetModifyInstancePlacementRequest) (*operations.GetModifyInstancePlacementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstancePlacement"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8180,7 +8403,7 @@ func (s *SDK) GetModifyInstancePlacement(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8210,8 +8433,9 @@ func (s *SDK) GetModifyInstancePlacement(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetModifyLaunchTemplate - Modifies a launch template. You can specify which version of the launch template to set as the default version. When launching an instance, the default version applies when a launch template version is not specified.
 func (s *SDK) GetModifyLaunchTemplate(ctx context.Context, request operations.GetModifyLaunchTemplateRequest) (*operations.GetModifyLaunchTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyLaunchTemplate"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8223,7 +8447,7 @@ func (s *SDK) GetModifyLaunchTemplate(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8253,8 +8477,9 @@ func (s *SDK) GetModifyLaunchTemplate(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetModifyNetworkInterfaceAttribute - Modifies the specified network interface attribute. You can specify only one attribute at a time. You can use this action to attach and detach security groups from an existing EC2 instance.
 func (s *SDK) GetModifyNetworkInterfaceAttribute(ctx context.Context, request operations.GetModifyNetworkInterfaceAttributeRequest) (*operations.GetModifyNetworkInterfaceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyNetworkInterfaceAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8266,7 +8491,7 @@ func (s *SDK) GetModifyNetworkInterfaceAttribute(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8287,8 +8512,9 @@ func (s *SDK) GetModifyNetworkInterfaceAttribute(ctx context.Context, request op
 	return res, nil
 }
 
+// GetModifySubnetAttribute - Modifies a subnet attribute. You can only modify one attribute at a time.
 func (s *SDK) GetModifySubnetAttribute(ctx context.Context, request operations.GetModifySubnetAttributeRequest) (*operations.GetModifySubnetAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifySubnetAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8300,7 +8526,7 @@ func (s *SDK) GetModifySubnetAttribute(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8321,8 +8547,9 @@ func (s *SDK) GetModifySubnetAttribute(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetModifyTrafficMirrorFilterNetworkServices - <p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>For information about filter rule properties, see <a href="https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>
 func (s *SDK) GetModifyTrafficMirrorFilterNetworkServices(ctx context.Context, request operations.GetModifyTrafficMirrorFilterNetworkServicesRequest) (*operations.GetModifyTrafficMirrorFilterNetworkServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTrafficMirrorFilterNetworkServices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8334,7 +8561,7 @@ func (s *SDK) GetModifyTrafficMirrorFilterNetworkServices(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8364,8 +8591,9 @@ func (s *SDK) GetModifyTrafficMirrorFilterNetworkServices(ctx context.Context, r
 	return res, nil
 }
 
+// GetModifyTrafficMirrorFilterRule - <p>Modifies the specified Traffic Mirror rule.</p> <p> <code>DestinationCidrBlock</code> and <code>SourceCidrBlock</code> must both be an IPv4 range or an IPv6 range.</p>
 func (s *SDK) GetModifyTrafficMirrorFilterRule(ctx context.Context, request operations.GetModifyTrafficMirrorFilterRuleRequest) (*operations.GetModifyTrafficMirrorFilterRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTrafficMirrorFilterRule"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8377,7 +8605,7 @@ func (s *SDK) GetModifyTrafficMirrorFilterRule(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8407,8 +8635,9 @@ func (s *SDK) GetModifyTrafficMirrorFilterRule(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetModifyTrafficMirrorSession - Modifies a Traffic Mirror session.
 func (s *SDK) GetModifyTrafficMirrorSession(ctx context.Context, request operations.GetModifyTrafficMirrorSessionRequest) (*operations.GetModifyTrafficMirrorSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTrafficMirrorSession"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8420,7 +8649,7 @@ func (s *SDK) GetModifyTrafficMirrorSession(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8450,8 +8679,9 @@ func (s *SDK) GetModifyTrafficMirrorSession(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetModifyTransitGateway - Modifies the specified transit gateway. When you modify a transit gateway, the modified options are applied to new transit gateway attachments only. Your existing transit gateway attachments are not modified.
 func (s *SDK) GetModifyTransitGateway(ctx context.Context, request operations.GetModifyTransitGatewayRequest) (*operations.GetModifyTransitGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTransitGateway"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8463,7 +8693,7 @@ func (s *SDK) GetModifyTransitGateway(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8493,8 +8723,9 @@ func (s *SDK) GetModifyTransitGateway(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetModifyTransitGatewayPrefixListReference - Modifies a reference (route) to a prefix list in a specified transit gateway route table.
 func (s *SDK) GetModifyTransitGatewayPrefixListReference(ctx context.Context, request operations.GetModifyTransitGatewayPrefixListReferenceRequest) (*operations.GetModifyTransitGatewayPrefixListReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTransitGatewayPrefixListReference"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8506,7 +8737,7 @@ func (s *SDK) GetModifyTransitGatewayPrefixListReference(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8536,8 +8767,9 @@ func (s *SDK) GetModifyTransitGatewayPrefixListReference(ctx context.Context, re
 	return res, nil
 }
 
+// GetModifyTransitGatewayVpcAttachment - Modifies the specified VPC attachment.
 func (s *SDK) GetModifyTransitGatewayVpcAttachment(ctx context.Context, request operations.GetModifyTransitGatewayVpcAttachmentRequest) (*operations.GetModifyTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTransitGatewayVpcAttachment"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8549,7 +8781,7 @@ func (s *SDK) GetModifyTransitGatewayVpcAttachment(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8579,8 +8811,9 @@ func (s *SDK) GetModifyTransitGatewayVpcAttachment(ctx context.Context, request 
 	return res, nil
 }
 
+// GetModifyVolume - <p>You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you might be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying EBS volumes, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modify-volume.html">Amazon EBS Elastic Volumes</a> (Linux instances) or <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-modify-volume.html">Amazon EBS Elastic Volumes</a> (Windows instances).</p> <p>When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux">Extend a Linux file system</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows">Extend a Windows file system</a>.</p> <p> You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/">Amazon CloudWatch Events User Guide</a>. You can also track the status of a modification using <a>DescribeVolumesModifications</a>. For information about tracking status changes using either method, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html">Monitor the progress of volume modifications</a>.</p> <p>With previous-generation instance types, resizing an EBS volume might require detaching and reattaching the volume or stopping and restarting the instance.</p> <p>If you reach the maximum volume modification rate per volume limit, you must wait at least six hours before applying further modifications to the affected EBS volume.</p>
 func (s *SDK) GetModifyVolume(ctx context.Context, request operations.GetModifyVolumeRequest) (*operations.GetModifyVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVolume"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8592,7 +8825,7 @@ func (s *SDK) GetModifyVolume(ctx context.Context, request operations.GetModifyV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8622,8 +8855,9 @@ func (s *SDK) GetModifyVolume(ctx context.Context, request operations.GetModifyV
 	return res, nil
 }
 
+// GetModifyVolumeAttribute - <p>Modifies a volume attribute.</p> <p>By default, all I/O operations for the volume are suspended when the data on the volume is determined to be potentially inconsistent, to prevent undetectable, latent data corruption. The I/O access to the volume can be resumed by first enabling I/O access and then checking the data consistency on your volume.</p> <p>You can change the default behavior to resume I/O operations. We recommend that you change this only for boot volumes or for volumes that are stateless or disposable.</p>
 func (s *SDK) GetModifyVolumeAttribute(ctx context.Context, request operations.GetModifyVolumeAttributeRequest) (*operations.GetModifyVolumeAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVolumeAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8635,7 +8869,7 @@ func (s *SDK) GetModifyVolumeAttribute(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8656,8 +8890,9 @@ func (s *SDK) GetModifyVolumeAttribute(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetModifyVpcAttribute - Modifies the specified attribute of the specified VPC.
 func (s *SDK) GetModifyVpcAttribute(ctx context.Context, request operations.GetModifyVpcAttributeRequest) (*operations.GetModifyVpcAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8669,7 +8904,7 @@ func (s *SDK) GetModifyVpcAttribute(ctx context.Context, request operations.GetM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8690,8 +8925,9 @@ func (s *SDK) GetModifyVpcAttribute(ctx context.Context, request operations.GetM
 	return res, nil
 }
 
+// GetModifyVpcEndpoint - Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.
 func (s *SDK) GetModifyVpcEndpoint(ctx context.Context, request operations.GetModifyVpcEndpointRequest) (*operations.GetModifyVpcEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpoint"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8703,7 +8939,7 @@ func (s *SDK) GetModifyVpcEndpoint(ctx context.Context, request operations.GetMo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8733,8 +8969,9 @@ func (s *SDK) GetModifyVpcEndpoint(ctx context.Context, request operations.GetMo
 	return res, nil
 }
 
+// GetModifyVpcEndpointConnectionNotification - Modifies a connection notification for VPC endpoint or VPC endpoint service. You can change the SNS topic for the notification, or the events for which to be notified.
 func (s *SDK) GetModifyVpcEndpointConnectionNotification(ctx context.Context, request operations.GetModifyVpcEndpointConnectionNotificationRequest) (*operations.GetModifyVpcEndpointConnectionNotificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpointConnectionNotification"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8746,7 +8983,7 @@ func (s *SDK) GetModifyVpcEndpointConnectionNotification(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8776,8 +9013,9 @@ func (s *SDK) GetModifyVpcEndpointConnectionNotification(ctx context.Context, re
 	return res, nil
 }
 
+// GetModifyVpcEndpointServiceConfiguration - <p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetModifyVpcEndpointServiceConfiguration(ctx context.Context, request operations.GetModifyVpcEndpointServiceConfigurationRequest) (*operations.GetModifyVpcEndpointServiceConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpointServiceConfiguration"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8789,7 +9027,7 @@ func (s *SDK) GetModifyVpcEndpointServiceConfiguration(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8819,8 +9057,9 @@ func (s *SDK) GetModifyVpcEndpointServiceConfiguration(ctx context.Context, requ
 	return res, nil
 }
 
+// GetModifyVpcEndpointServicePermissions - <p>Modifies the permissions for your <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.</p> <p>If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.</p>
 func (s *SDK) GetModifyVpcEndpointServicePermissions(ctx context.Context, request operations.GetModifyVpcEndpointServicePermissionsRequest) (*operations.GetModifyVpcEndpointServicePermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpointServicePermissions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8832,7 +9071,7 @@ func (s *SDK) GetModifyVpcEndpointServicePermissions(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8862,8 +9101,9 @@ func (s *SDK) GetModifyVpcEndpointServicePermissions(ctx context.Context, reques
 	return res, nil
 }
 
+// GetModifyVpcPeeringConnectionOptions - <p>Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:</p> <ul> <li> <p>Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.</p> </li> <li> <p>Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.</p> </li> <li> <p>Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.</p> </li> </ul> <p>If the peered VPCs are in the same Amazon Web Services account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different different Amazon Web Services accounts or different Regions. For peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the Region for the requester VPC to modify the requester VPC peering options and the Region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>
 func (s *SDK) GetModifyVpcPeeringConnectionOptions(ctx context.Context, request operations.GetModifyVpcPeeringConnectionOptionsRequest) (*operations.GetModifyVpcPeeringConnectionOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcPeeringConnectionOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8875,7 +9115,7 @@ func (s *SDK) GetModifyVpcPeeringConnectionOptions(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8905,8 +9145,9 @@ func (s *SDK) GetModifyVpcPeeringConnectionOptions(ctx context.Context, request 
 	return res, nil
 }
 
+// GetModifyVpcTenancy - <p>Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to <code>default</code> only. You cannot change the instance tenancy attribute to <code>dedicated</code>.</p> <p>After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of <code>default</code>, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetModifyVpcTenancy(ctx context.Context, request operations.GetModifyVpcTenancyRequest) (*operations.GetModifyVpcTenancyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcTenancy"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8918,7 +9159,7 @@ func (s *SDK) GetModifyVpcTenancy(ctx context.Context, request operations.GetMod
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8948,8 +9189,9 @@ func (s *SDK) GetModifyVpcTenancy(ctx context.Context, request operations.GetMod
 	return res, nil
 }
 
+// GetModifyVpnConnection - <p>Modifies the customer gateway or the target gateway of an AWS Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.</p>
 func (s *SDK) GetModifyVpnConnection(ctx context.Context, request operations.GetModifyVpnConnectionRequest) (*operations.GetModifyVpnConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpnConnection"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8961,7 +9203,7 @@ func (s *SDK) GetModifyVpnConnection(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8991,8 +9233,9 @@ func (s *SDK) GetModifyVpnConnection(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetModifyVpnConnectionOptions - <p>Modifies the connection options for your Site-to-Site VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>
 func (s *SDK) GetModifyVpnConnectionOptions(ctx context.Context, request operations.GetModifyVpnConnectionOptionsRequest) (*operations.GetModifyVpnConnectionOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpnConnectionOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9004,7 +9247,7 @@ func (s *SDK) GetModifyVpnConnectionOptions(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9034,8 +9277,9 @@ func (s *SDK) GetModifyVpnConnectionOptions(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetModifyVpnTunnelCertificate - Modifies the VPN tunnel endpoint certificate.
 func (s *SDK) GetModifyVpnTunnelCertificate(ctx context.Context, request operations.GetModifyVpnTunnelCertificateRequest) (*operations.GetModifyVpnTunnelCertificateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpnTunnelCertificate"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9047,7 +9291,7 @@ func (s *SDK) GetModifyVpnTunnelCertificate(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9077,8 +9321,9 @@ func (s *SDK) GetModifyVpnTunnelCertificate(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetMonitorInstances - <p>Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html">Monitoring your instances and volumes</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>To disable detailed monitoring, see .</p>
 func (s *SDK) GetMonitorInstances(ctx context.Context, request operations.GetMonitorInstancesRequest) (*operations.GetMonitorInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=MonitorInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9090,7 +9335,7 @@ func (s *SDK) GetMonitorInstances(ctx context.Context, request operations.GetMon
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9120,8 +9365,9 @@ func (s *SDK) GetMonitorInstances(ctx context.Context, request operations.GetMon
 	return res, nil
 }
 
+// GetMoveAddressToVpc - Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the <a>RestoreAddressToClassic</a> request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform.
 func (s *SDK) GetMoveAddressToVpc(ctx context.Context, request operations.GetMoveAddressToVpcRequest) (*operations.GetMoveAddressToVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=MoveAddressToVpc"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9133,7 +9379,7 @@ func (s *SDK) GetMoveAddressToVpc(ctx context.Context, request operations.GetMov
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9163,8 +9409,9 @@ func (s *SDK) GetMoveAddressToVpc(ctx context.Context, request operations.GetMov
 	return res, nil
 }
 
+// GetPurchaseReservedInstancesOffering - <p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>To queue a purchase for a future date and time, specify a purchase time. If you do not specify a purchase time, the default is the current time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Reserved Instances</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetPurchaseReservedInstancesOffering(ctx context.Context, request operations.GetPurchaseReservedInstancesOfferingRequest) (*operations.GetPurchaseReservedInstancesOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PurchaseReservedInstancesOffering"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9176,7 +9423,7 @@ func (s *SDK) GetPurchaseReservedInstancesOffering(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9206,8 +9453,9 @@ func (s *SDK) GetPurchaseReservedInstancesOffering(ctx context.Context, request 
 	return res, nil
 }
 
+// GetRebootInstances - <p>Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored.</p> <p>If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot.</p> <p>For more information about troubleshooting, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html">Getting console output and rebooting instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetRebootInstances(ctx context.Context, request operations.GetRebootInstancesRequest) (*operations.GetRebootInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RebootInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9219,7 +9467,7 @@ func (s *SDK) GetRebootInstances(ctx context.Context, request operations.GetRebo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9240,8 +9488,9 @@ func (s *SDK) GetRebootInstances(ctx context.Context, request operations.GetRebo
 	return res, nil
 }
 
+// GetRegisterInstanceEventNotificationAttributes - <p>Registers a set of tag keys to include in scheduled event notifications for your resources. </p> <p>To remove tags, use .</p>
 func (s *SDK) GetRegisterInstanceEventNotificationAttributes(ctx context.Context, request operations.GetRegisterInstanceEventNotificationAttributesRequest) (*operations.GetRegisterInstanceEventNotificationAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RegisterInstanceEventNotificationAttributes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9253,7 +9502,7 @@ func (s *SDK) GetRegisterInstanceEventNotificationAttributes(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9283,8 +9532,9 @@ func (s *SDK) GetRegisterInstanceEventNotificationAttributes(ctx context.Context
 	return res, nil
 }
 
+// GetRegisterTransitGatewayMulticastGroupMembers - <p>Registers members (network interfaces) with the transit gateway multicast group. A member is a network interface associated with a supported EC2 instance that receives multicast traffic. For information about supported instances, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits">Multicast Consideration</a> in <i>Amazon VPC Transit Gateways</i>.</p> <p>After you add the members, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html">SearchTransitGatewayMulticastGroups</a> to verify that the members were added to the transit gateway multicast group.</p>
 func (s *SDK) GetRegisterTransitGatewayMulticastGroupMembers(ctx context.Context, request operations.GetRegisterTransitGatewayMulticastGroupMembersRequest) (*operations.GetRegisterTransitGatewayMulticastGroupMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RegisterTransitGatewayMulticastGroupMembers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9296,7 +9546,7 @@ func (s *SDK) GetRegisterTransitGatewayMulticastGroupMembers(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9326,8 +9576,9 @@ func (s *SDK) GetRegisterTransitGatewayMulticastGroupMembers(ctx context.Context
 	return res, nil
 }
 
+// GetRegisterTransitGatewayMulticastGroupSources - <p>Registers sources (network interfaces) with the specified transit gateway multicast group.</p> <p>A multicast source is a network interface attached to a supported instance that sends multicast traffic. For information about supported instances, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits">Multicast Considerations</a> in <i>Amazon VPC Transit Gateways</i>.</p> <p>After you add the source, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html">SearchTransitGatewayMulticastGroups</a> to verify that the source was added to the multicast group.</p>
 func (s *SDK) GetRegisterTransitGatewayMulticastGroupSources(ctx context.Context, request operations.GetRegisterTransitGatewayMulticastGroupSourcesRequest) (*operations.GetRegisterTransitGatewayMulticastGroupSourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RegisterTransitGatewayMulticastGroupSources"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9339,7 +9590,7 @@ func (s *SDK) GetRegisterTransitGatewayMulticastGroupSources(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9369,8 +9620,9 @@ func (s *SDK) GetRegisterTransitGatewayMulticastGroupSources(ctx context.Context
 	return res, nil
 }
 
+// GetRejectTransitGatewayMulticastDomainAssociations - Rejects a request to associate cross-account subnets with a transit gateway multicast domain.
 func (s *SDK) GetRejectTransitGatewayMulticastDomainAssociations(ctx context.Context, request operations.GetRejectTransitGatewayMulticastDomainAssociationsRequest) (*operations.GetRejectTransitGatewayMulticastDomainAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectTransitGatewayMulticastDomainAssociations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9382,7 +9634,7 @@ func (s *SDK) GetRejectTransitGatewayMulticastDomainAssociations(ctx context.Con
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9412,8 +9664,9 @@ func (s *SDK) GetRejectTransitGatewayMulticastDomainAssociations(ctx context.Con
 	return res, nil
 }
 
+// GetRejectTransitGatewayPeeringAttachment - Rejects a transit gateway peering attachment request.
 func (s *SDK) GetRejectTransitGatewayPeeringAttachment(ctx context.Context, request operations.GetRejectTransitGatewayPeeringAttachmentRequest) (*operations.GetRejectTransitGatewayPeeringAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectTransitGatewayPeeringAttachment"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9425,7 +9678,7 @@ func (s *SDK) GetRejectTransitGatewayPeeringAttachment(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9455,8 +9708,9 @@ func (s *SDK) GetRejectTransitGatewayPeeringAttachment(ctx context.Context, requ
 	return res, nil
 }
 
+// GetRejectTransitGatewayVpcAttachment - <p>Rejects a request to attach a VPC to a transit gateway.</p> <p>The VPC attachment must be in the <code>pendingAcceptance</code> state. Use <a>DescribeTransitGatewayVpcAttachments</a> to view your pending VPC attachment requests. Use <a>AcceptTransitGatewayVpcAttachment</a> to accept a VPC attachment request.</p>
 func (s *SDK) GetRejectTransitGatewayVpcAttachment(ctx context.Context, request operations.GetRejectTransitGatewayVpcAttachmentRequest) (*operations.GetRejectTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectTransitGatewayVpcAttachment"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9468,7 +9722,7 @@ func (s *SDK) GetRejectTransitGatewayVpcAttachment(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9498,8 +9752,9 @@ func (s *SDK) GetRejectTransitGatewayVpcAttachment(ctx context.Context, request 
 	return res, nil
 }
 
+// GetRejectVpcEndpointConnections - Rejects one or more VPC endpoint connection requests to your VPC endpoint service.
 func (s *SDK) GetRejectVpcEndpointConnections(ctx context.Context, request operations.GetRejectVpcEndpointConnectionsRequest) (*operations.GetRejectVpcEndpointConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectVpcEndpointConnections"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9511,7 +9766,7 @@ func (s *SDK) GetRejectVpcEndpointConnections(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9541,8 +9796,9 @@ func (s *SDK) GetRejectVpcEndpointConnections(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetRejectVpcPeeringConnection - Rejects a VPC peering connection request. The VPC peering connection must be in the <code>pending-acceptance</code> state. Use the <a>DescribeVpcPeeringConnections</a> request to view your outstanding VPC peering connection requests. To delete an active VPC peering connection, or to delete a VPC peering connection request that you initiated, use <a>DeleteVpcPeeringConnection</a>.
 func (s *SDK) GetRejectVpcPeeringConnection(ctx context.Context, request operations.GetRejectVpcPeeringConnectionRequest) (*operations.GetRejectVpcPeeringConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectVpcPeeringConnection"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9554,7 +9810,7 @@ func (s *SDK) GetRejectVpcPeeringConnection(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9584,8 +9840,9 @@ func (s *SDK) GetRejectVpcPeeringConnection(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetReleaseAddress - <p>Releases the specified Elastic IP address.</p> <p>[EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use <a>DisassociateAddress</a>.</p> <p>[Nondefault VPC] You must use <a>DisassociateAddress</a> to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (<code>InvalidIPAddress.InUse</code>).</p> <p>After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an <code>AuthFailure</code> error if the address is already allocated to another Amazon Web Services account.</p> <p>[EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see <a>AllocateAddress</a>.</p>
 func (s *SDK) GetReleaseAddress(ctx context.Context, request operations.GetReleaseAddressRequest) (*operations.GetReleaseAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReleaseAddress"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9597,7 +9854,7 @@ func (s *SDK) GetReleaseAddress(ctx context.Context, request operations.GetRelea
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9618,8 +9875,9 @@ func (s *SDK) GetReleaseAddress(ctx context.Context, request operations.GetRelea
 	return res, nil
 }
 
+// GetReleaseHosts - <p>When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, for example, to modify the host. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated Hosts are released, it may take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated Hosts. Wait a few minutes and then try again.</p> <p>Released hosts still appear in a <a>DescribeHosts</a> response.</p>
 func (s *SDK) GetReleaseHosts(ctx context.Context, request operations.GetReleaseHostsRequest) (*operations.GetReleaseHostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReleaseHosts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9631,7 +9889,7 @@ func (s *SDK) GetReleaseHosts(ctx context.Context, request operations.GetRelease
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9661,8 +9919,9 @@ func (s *SDK) GetReleaseHosts(ctx context.Context, request operations.GetRelease
 	return res, nil
 }
 
+// GetReplaceIamInstanceProfileAssociation - <p>Replaces an IAM instance profile for the specified running instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>
 func (s *SDK) GetReplaceIamInstanceProfileAssociation(ctx context.Context, request operations.GetReplaceIamInstanceProfileAssociationRequest) (*operations.GetReplaceIamInstanceProfileAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceIamInstanceProfileAssociation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9674,7 +9933,7 @@ func (s *SDK) GetReplaceIamInstanceProfileAssociation(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9704,8 +9963,9 @@ func (s *SDK) GetReplaceIamInstanceProfileAssociation(ctx context.Context, reque
 	return res, nil
 }
 
+// GetReplaceNetworkACLAssociation - <p>Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>This is an idempotent operation.</p>
 func (s *SDK) GetReplaceNetworkACLAssociation(ctx context.Context, request operations.GetReplaceNetworkACLAssociationRequest) (*operations.GetReplaceNetworkACLAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceNetworkAclAssociation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9717,7 +9977,7 @@ func (s *SDK) GetReplaceNetworkACLAssociation(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9747,8 +10007,9 @@ func (s *SDK) GetReplaceNetworkACLAssociation(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetReplaceNetworkACLEntry - Replaces an entry (rule) in a network ACL. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.
 func (s *SDK) GetReplaceNetworkACLEntry(ctx context.Context, request operations.GetReplaceNetworkACLEntryRequest) (*operations.GetReplaceNetworkACLEntryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceNetworkAclEntry"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9760,7 +10021,7 @@ func (s *SDK) GetReplaceNetworkACLEntry(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9781,8 +10042,9 @@ func (s *SDK) GetReplaceNetworkACLEntry(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetReplaceRoute - <p>Replaces an existing route within a route table in a VPC. You must provide only one of the following: internet gateway, virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, egress-only internet gateway, or transit gateway.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) GetReplaceRoute(ctx context.Context, request operations.GetReplaceRouteRequest) (*operations.GetReplaceRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9794,7 +10056,7 @@ func (s *SDK) GetReplaceRoute(ctx context.Context, request operations.GetReplace
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9815,8 +10077,9 @@ func (s *SDK) GetReplaceRoute(ctx context.Context, request operations.GetReplace
 	return res, nil
 }
 
+// GetReplaceRouteTableAssociation - <p>Changes the route table associated with a given subnet, internet gateway, or virtual private gateway in a VPC. After the operation completes, the subnet or gateway uses the routes in the new route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can also use this operation to change which table is the main route table in the VPC. Specify the main route table's association ID and the route table ID of the new main route table.</p>
 func (s *SDK) GetReplaceRouteTableAssociation(ctx context.Context, request operations.GetReplaceRouteTableAssociationRequest) (*operations.GetReplaceRouteTableAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceRouteTableAssociation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9828,7 +10091,7 @@ func (s *SDK) GetReplaceRouteTableAssociation(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9858,8 +10121,9 @@ func (s *SDK) GetReplaceRouteTableAssociation(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetReplaceTransitGatewayRoute - Replaces the specified route in the specified transit gateway route table.
 func (s *SDK) GetReplaceTransitGatewayRoute(ctx context.Context, request operations.GetReplaceTransitGatewayRouteRequest) (*operations.GetReplaceTransitGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceTransitGatewayRoute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9871,7 +10135,7 @@ func (s *SDK) GetReplaceTransitGatewayRoute(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9901,8 +10165,9 @@ func (s *SDK) GetReplaceTransitGatewayRoute(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetReportInstanceStatus - <p>Submits feedback about the status of an instance. The instance must be in the <code>running</code> state. If your experience with the instance differs from the instance status returned by <a>DescribeInstanceStatus</a>, use <a>ReportInstanceStatus</a> to report your experience with the instance. Amazon EC2 collects this information to improve the accuracy of status checks.</p> <p>Use of this action does not change the value returned by <a>DescribeInstanceStatus</a>.</p>
 func (s *SDK) GetReportInstanceStatus(ctx context.Context, request operations.GetReportInstanceStatusRequest) (*operations.GetReportInstanceStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReportInstanceStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9914,7 +10179,7 @@ func (s *SDK) GetReportInstanceStatus(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9935,8 +10200,9 @@ func (s *SDK) GetReportInstanceStatus(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetResetAddressAttribute - Resets the attribute of the specified IP address. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.
 func (s *SDK) GetResetAddressAttribute(ctx context.Context, request operations.GetResetAddressAttributeRequest) (*operations.GetResetAddressAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetAddressAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9948,7 +10214,7 @@ func (s *SDK) GetResetAddressAttribute(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9978,8 +10244,9 @@ func (s *SDK) GetResetAddressAttribute(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetResetEbsDefaultKmsKeyID - <p>Resets the default KMS key for EBS encryption for your account in this Region to the Amazon Web Services managed KMS key for EBS.</p> <p>After resetting the default KMS key to the Amazon Web Services managed KMS key, you can continue to encrypt by a customer managed KMS key by specifying it when you create the volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetResetEbsDefaultKmsKeyID(ctx context.Context, request operations.GetResetEbsDefaultKmsKeyIDRequest) (*operations.GetResetEbsDefaultKmsKeyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetEbsDefaultKmsKeyId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9991,7 +10258,7 @@ func (s *SDK) GetResetEbsDefaultKmsKeyID(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10021,8 +10288,9 @@ func (s *SDK) GetResetEbsDefaultKmsKeyID(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetResetFpgaImageAttribute - Resets the specified attribute of the specified Amazon FPGA Image (AFI) to its default value. You can only reset the load permission attribute.
 func (s *SDK) GetResetFpgaImageAttribute(ctx context.Context, request operations.GetResetFpgaImageAttributeRequest) (*operations.GetResetFpgaImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetFpgaImageAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10034,7 +10302,7 @@ func (s *SDK) GetResetFpgaImageAttribute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10064,8 +10332,9 @@ func (s *SDK) GetResetFpgaImageAttribute(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetResetImageAttribute - Resets an attribute of an AMI to its default value.
 func (s *SDK) GetResetImageAttribute(ctx context.Context, request operations.GetResetImageAttributeRequest) (*operations.GetResetImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetImageAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10077,7 +10346,7 @@ func (s *SDK) GetResetImageAttribute(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10098,8 +10367,9 @@ func (s *SDK) GetResetImageAttribute(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetResetInstanceAttribute - <p>Resets an attribute of an instance to its default value. To reset the <code>kernel</code> or <code>ramdisk</code>, the instance must be in a stopped state. To reset the <code>sourceDestCheck</code>, the instance can be either running or stopped.</p> <p>The <code>sourceDestCheck</code> attribute controls whether source/destination checking is enabled. The default value is <code>true</code>, which means checking is enabled. This value must be <code>false</code> for a NAT instance to perform NAT. For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html">NAT Instances</a> in the <i>Amazon VPC User Guide</i>.</p>
 func (s *SDK) GetResetInstanceAttribute(ctx context.Context, request operations.GetResetInstanceAttributeRequest) (*operations.GetResetInstanceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetInstanceAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10111,7 +10381,7 @@ func (s *SDK) GetResetInstanceAttribute(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10132,8 +10402,9 @@ func (s *SDK) GetResetInstanceAttribute(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetResetNetworkInterfaceAttribute - Resets a network interface attribute. You can specify only one attribute at a time.
 func (s *SDK) GetResetNetworkInterfaceAttribute(ctx context.Context, request operations.GetResetNetworkInterfaceAttributeRequest) (*operations.GetResetNetworkInterfaceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetNetworkInterfaceAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10145,7 +10416,7 @@ func (s *SDK) GetResetNetworkInterfaceAttribute(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10166,8 +10437,9 @@ func (s *SDK) GetResetNetworkInterfaceAttribute(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetResetSnapshotAttribute - <p>Resets permission settings for the specified snapshot.</p> <p>For more information about modifying snapshot permissions, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html">Share a snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) GetResetSnapshotAttribute(ctx context.Context, request operations.GetResetSnapshotAttributeRequest) (*operations.GetResetSnapshotAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetSnapshotAttribute"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10179,7 +10451,7 @@ func (s *SDK) GetResetSnapshotAttribute(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10200,8 +10472,9 @@ func (s *SDK) GetResetSnapshotAttribute(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetRestoreAddressToClassic - Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.
 func (s *SDK) GetRestoreAddressToClassic(ctx context.Context, request operations.GetRestoreAddressToClassicRequest) (*operations.GetRestoreAddressToClassicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreAddressToClassic"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10213,7 +10486,7 @@ func (s *SDK) GetRestoreAddressToClassic(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10243,8 +10516,9 @@ func (s *SDK) GetRestoreAddressToClassic(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetRestoreManagedPrefixListVersion - Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
 func (s *SDK) GetRestoreManagedPrefixListVersion(ctx context.Context, request operations.GetRestoreManagedPrefixListVersionRequest) (*operations.GetRestoreManagedPrefixListVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreManagedPrefixListVersion"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10256,7 +10530,7 @@ func (s *SDK) GetRestoreManagedPrefixListVersion(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10286,8 +10560,9 @@ func (s *SDK) GetRestoreManagedPrefixListVersion(ctx context.Context, request op
 	return res, nil
 }
 
+// GetRevokeClientVpnIngress - Removes an ingress authorization rule from a Client VPN endpoint.
 func (s *SDK) GetRevokeClientVpnIngress(ctx context.Context, request operations.GetRevokeClientVpnIngressRequest) (*operations.GetRevokeClientVpnIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RevokeClientVpnIngress"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10299,7 +10574,7 @@ func (s *SDK) GetRevokeClientVpnIngress(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10329,8 +10604,9 @@ func (s *SDK) GetRevokeClientVpnIngress(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetSendDiagnosticInterrupt - <p>Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a <i>kernel panic</i> (on Linux instances), or a <i>blue screen</i>/<i>stop error</i> (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a <i>non-maskable interrupt</i> (NMI).</p> <p>In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace.</p> <p>Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks.</p> <p>For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html">Send a diagnostic interrupt</a> (Linux instances) or <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html">Send a Diagnostic Interrupt</a> (Windows instances).</p>
 func (s *SDK) GetSendDiagnosticInterrupt(ctx context.Context, request operations.GetSendDiagnosticInterruptRequest) (*operations.GetSendDiagnosticInterruptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=SendDiagnosticInterrupt"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10342,7 +10618,7 @@ func (s *SDK) GetSendDiagnosticInterrupt(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10363,8 +10639,9 @@ func (s *SDK) GetSendDiagnosticInterrupt(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetStartInstances - <p>Starts an Amazon EBS-backed instance that you've previously stopped.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>If you attempt to start a T3 instance with <code>host</code> tenancy and the <code>unlimted</code> CPU credit option, the request fails. The <code>unlimited</code> CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to <code>standard</code>, or change its tenancy to <code>default</code> or <code>dedicated</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html">Stopping instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetStartInstances(ctx context.Context, request operations.GetStartInstancesRequest) (*operations.GetStartInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=StartInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10376,7 +10653,7 @@ func (s *SDK) GetStartInstances(ctx context.Context, request operations.GetStart
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10406,8 +10683,9 @@ func (s *SDK) GetStartInstances(ctx context.Context, request operations.GetStart
 	return res, nil
 }
 
+// GetStartVpcEndpointServicePrivateDNSVerification - <p>Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service.</p> <p>The service provider must successfully perform the verification before the consumer can use the name to access the service.</p> <p>Before the service provider runs this command, they must add a record to the DNS server. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html#add-dns-txt-record">Adding a TXT Record to Your Domain's DNS Server </a> in the <i>Amazon VPC User Guide</i>.</p>
 func (s *SDK) GetStartVpcEndpointServicePrivateDNSVerification(ctx context.Context, request operations.GetStartVpcEndpointServicePrivateDNSVerificationRequest) (*operations.GetStartVpcEndpointServicePrivateDNSVerificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=StartVpcEndpointServicePrivateDnsVerification"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10419,7 +10697,7 @@ func (s *SDK) GetStartVpcEndpointServicePrivateDNSVerification(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10449,8 +10727,9 @@ func (s *SDK) GetStartVpcEndpointServicePrivateDNSVerification(ctx context.Conte
 	return res, nil
 }
 
+// GetStopInstances - <p>Stops an Amazon EBS-backed instance.</p> <p>You can use the Stop action to hibernate an instance if the instance is <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation">enabled for hibernation</a> and it meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate your instance</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage.</p> <p>You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances">Hibernating interrupted Spot Instances</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs.</p> <p>Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Instance lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html">Troubleshooting stopping your instance</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetStopInstances(ctx context.Context, request operations.GetStopInstancesRequest) (*operations.GetStopInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=StopInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10462,7 +10741,7 @@ func (s *SDK) GetStopInstances(ctx context.Context, request operations.GetStopIn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10492,8 +10771,9 @@ func (s *SDK) GetStopInstances(ctx context.Context, request operations.GetStopIn
 	return res, nil
 }
 
+// GetTerminateClientVpnConnections - Terminates active Client VPN endpoint connections. This action can be used to terminate a specific client connection, or up to five connections established by a specific user.
 func (s *SDK) GetTerminateClientVpnConnections(ctx context.Context, request operations.GetTerminateClientVpnConnectionsRequest) (*operations.GetTerminateClientVpnConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=TerminateClientVpnConnections"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10505,7 +10785,7 @@ func (s *SDK) GetTerminateClientVpnConnections(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10535,8 +10815,9 @@ func (s *SDK) GetTerminateClientVpnConnections(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetTerminateInstances - <p>Shuts down the specified instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds. </p> <p>If you specify multiple instances and the request fails (for example, because of a single incorrect instance ID), none of the instances are terminated.</p> <p>If you terminate multiple instances across multiple Availability Zones, and one or more of the specified instances are enabled for termination protection, the request fails with the following results:</p> <ul> <li> <p>The specified instances that are in the same Availability Zone as the protected instance are not terminated.</p> </li> <li> <p>The specified instances that are in different Availability Zones, where no other specified instances are protected, are successfully terminated.</p> </li> </ul> <p>For example, say you have the following instances:</p> <ul> <li> <p>Instance A: <code>us-east-1a</code>; Not protected</p> </li> <li> <p>Instance B: <code>us-east-1a</code>; Not protected</p> </li> <li> <p>Instance C: <code>us-east-1b</code>; Protected</p> </li> <li> <p>Instance D: <code>us-east-1b</code>; not protected</p> </li> </ul> <p>If you attempt to terminate all of these instances in the same request, the request reports failure with the following results:</p> <ul> <li> <p>Instance A and Instance B are successfully terminated because none of the specified instances in <code>us-east-1a</code> are enabled for termination protection.</p> </li> <li> <p>Instance C and Instance D fail to terminate because at least one of the specified instances in <code>us-east-1b</code> (Instance C) is enabled for termination protection.</p> </li> </ul> <p>Terminated instances remain visible after termination (for approximately one hour).</p> <p>By default, Amazon EC2 deletes all EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, any attached EBS volumes with the <code>DeleteOnTermination</code> block device mapping parameter set to <code>true</code> are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Instance lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>For more information about troubleshooting, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html">Troubleshooting terminating your instance</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) GetTerminateInstances(ctx context.Context, request operations.GetTerminateInstancesRequest) (*operations.GetTerminateInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=TerminateInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10548,7 +10829,7 @@ func (s *SDK) GetTerminateInstances(ctx context.Context, request operations.GetT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10578,8 +10859,9 @@ func (s *SDK) GetTerminateInstances(ctx context.Context, request operations.GetT
 	return res, nil
 }
 
+// GetUnassignIpv6Addresses - Unassigns one or more IPv6 addresses IPv4 Prefix Delegation prefixes from a network interface.
 func (s *SDK) GetUnassignIpv6Addresses(ctx context.Context, request operations.GetUnassignIpv6AddressesRequest) (*operations.GetUnassignIpv6AddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UnassignIpv6Addresses"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10591,7 +10873,7 @@ func (s *SDK) GetUnassignIpv6Addresses(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10621,8 +10903,9 @@ func (s *SDK) GetUnassignIpv6Addresses(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetUnassignPrivateIPAddresses - Unassigns one or more secondary private IP addresses, or IPv4 Prefix Delegation prefixes from a network interface.
 func (s *SDK) GetUnassignPrivateIPAddresses(ctx context.Context, request operations.GetUnassignPrivateIPAddressesRequest) (*operations.GetUnassignPrivateIPAddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UnassignPrivateIpAddresses"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10634,7 +10917,7 @@ func (s *SDK) GetUnassignPrivateIPAddresses(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10655,8 +10938,9 @@ func (s *SDK) GetUnassignPrivateIPAddresses(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetUnmonitorInstances - Disables detailed monitoring for a running instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html">Monitoring your instances and volumes</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) GetUnmonitorInstances(ctx context.Context, request operations.GetUnmonitorInstancesRequest) (*operations.GetUnmonitorInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UnmonitorInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10668,7 +10952,7 @@ func (s *SDK) GetUnmonitorInstances(ctx context.Context, request operations.GetU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10698,8 +10982,9 @@ func (s *SDK) GetUnmonitorInstances(ctx context.Context, request operations.GetU
 	return res, nil
 }
 
+// GetWithdrawByoipCidr - <p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of BGP propagation delays.</p>
 func (s *SDK) GetWithdrawByoipCidr(ctx context.Context, request operations.GetWithdrawByoipCidrRequest) (*operations.GetWithdrawByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=WithdrawByoipCidr"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10711,7 +10996,7 @@ func (s *SDK) GetWithdrawByoipCidr(ctx context.Context, request operations.GetWi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10741,8 +11026,9 @@ func (s *SDK) GetWithdrawByoipCidr(ctx context.Context, request operations.GetWi
 	return res, nil
 }
 
+// PostAcceptReservedInstancesExchangeQuote - Accepts the Convertible Reserved Instance exchange quote described in the <a>GetReservedInstancesExchangeQuote</a> call.
 func (s *SDK) PostAcceptReservedInstancesExchangeQuote(ctx context.Context, request operations.PostAcceptReservedInstancesExchangeQuoteRequest) (*operations.PostAcceptReservedInstancesExchangeQuoteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptReservedInstancesExchangeQuote"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10761,7 +11047,7 @@ func (s *SDK) PostAcceptReservedInstancesExchangeQuote(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10791,8 +11077,9 @@ func (s *SDK) PostAcceptReservedInstancesExchangeQuote(ctx context.Context, requ
 	return res, nil
 }
 
+// PostAcceptTransitGatewayMulticastDomainAssociations - Accepts a request to associate subnets with a transit gateway multicast domain.
 func (s *SDK) PostAcceptTransitGatewayMulticastDomainAssociations(ctx context.Context, request operations.PostAcceptTransitGatewayMulticastDomainAssociationsRequest) (*operations.PostAcceptTransitGatewayMulticastDomainAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptTransitGatewayMulticastDomainAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10811,7 +11098,7 @@ func (s *SDK) PostAcceptTransitGatewayMulticastDomainAssociations(ctx context.Co
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10841,8 +11128,9 @@ func (s *SDK) PostAcceptTransitGatewayMulticastDomainAssociations(ctx context.Co
 	return res, nil
 }
 
+// PostAcceptTransitGatewayPeeringAttachment - Accepts a transit gateway peering attachment request. The peering attachment must be in the <code>pendingAcceptance</code> state.
 func (s *SDK) PostAcceptTransitGatewayPeeringAttachment(ctx context.Context, request operations.PostAcceptTransitGatewayPeeringAttachmentRequest) (*operations.PostAcceptTransitGatewayPeeringAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptTransitGatewayPeeringAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10861,7 +11149,7 @@ func (s *SDK) PostAcceptTransitGatewayPeeringAttachment(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10891,8 +11179,9 @@ func (s *SDK) PostAcceptTransitGatewayPeeringAttachment(ctx context.Context, req
 	return res, nil
 }
 
+// PostAcceptTransitGatewayVpcAttachment - <p>Accepts a request to attach a VPC to a transit gateway.</p> <p>The VPC attachment must be in the <code>pendingAcceptance</code> state. Use <a>DescribeTransitGatewayVpcAttachments</a> to view your pending VPC attachment requests. Use <a>RejectTransitGatewayVpcAttachment</a> to reject a VPC attachment request.</p>
 func (s *SDK) PostAcceptTransitGatewayVpcAttachment(ctx context.Context, request operations.PostAcceptTransitGatewayVpcAttachmentRequest) (*operations.PostAcceptTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptTransitGatewayVpcAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10911,7 +11200,7 @@ func (s *SDK) PostAcceptTransitGatewayVpcAttachment(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10941,8 +11230,9 @@ func (s *SDK) PostAcceptTransitGatewayVpcAttachment(ctx context.Context, request
 	return res, nil
 }
 
+// PostAcceptVpcEndpointConnections - Accepts one or more interface VPC endpoint connection requests to your VPC endpoint service.
 func (s *SDK) PostAcceptVpcEndpointConnections(ctx context.Context, request operations.PostAcceptVpcEndpointConnectionsRequest) (*operations.PostAcceptVpcEndpointConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptVpcEndpointConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10961,7 +11251,7 @@ func (s *SDK) PostAcceptVpcEndpointConnections(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10991,8 +11281,9 @@ func (s *SDK) PostAcceptVpcEndpointConnections(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostAcceptVpcPeeringConnection - <p>Accept a VPC peering connection request. To accept a request, the VPC peering connection must be in the <code>pending-acceptance</code> state, and you must be the owner of the peer VPC. Use <a>DescribeVpcPeeringConnections</a> to view your outstanding VPC peering connection requests.</p> <p>For an inter-Region VPC peering connection request, you must accept the VPC peering connection in the Region of the accepter VPC.</p>
 func (s *SDK) PostAcceptVpcPeeringConnection(ctx context.Context, request operations.PostAcceptVpcPeeringConnectionRequest) (*operations.PostAcceptVpcPeeringConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AcceptVpcPeeringConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11011,7 +11302,7 @@ func (s *SDK) PostAcceptVpcPeeringConnection(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11041,8 +11332,9 @@ func (s *SDK) PostAcceptVpcPeeringConnection(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostAdvertiseByoipCidr - <p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP).</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise it from Amazon Web Services. To minimize down time, you can configure your Amazon Web Services resources to use an address from a BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current location and start advertising it through Amazon Web Services.</p> <p>It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of BGP propagation delays.</p> <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>
 func (s *SDK) PostAdvertiseByoipCidr(ctx context.Context, request operations.PostAdvertiseByoipCidrRequest) (*operations.PostAdvertiseByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AdvertiseByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11061,7 +11353,7 @@ func (s *SDK) PostAdvertiseByoipCidr(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11091,8 +11383,9 @@ func (s *SDK) PostAdvertiseByoipCidr(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostAllocateAddress - <p>Allocates an Elastic IP address to your Amazon Web Services account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different Amazon Web Services account.</p> <p>You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another Amazon Web Services account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p> <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). </p>
 func (s *SDK) PostAllocateAddress(ctx context.Context, request operations.PostAllocateAddressRequest) (*operations.PostAllocateAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AllocateAddress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11111,7 +11404,7 @@ func (s *SDK) PostAllocateAddress(ctx context.Context, request operations.PostAl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11141,8 +11434,9 @@ func (s *SDK) PostAllocateAddress(ctx context.Context, request operations.PostAl
 	return res, nil
 }
 
+// PostAllocateHosts - Allocates a Dedicated Host to your account. At a minimum, specify the supported instance type or instance family, the Availability Zone in which to allocate the host, and the number of hosts to allocate.
 func (s *SDK) PostAllocateHosts(ctx context.Context, request operations.PostAllocateHostsRequest) (*operations.PostAllocateHostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AllocateHosts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11161,7 +11455,7 @@ func (s *SDK) PostAllocateHosts(ctx context.Context, request operations.PostAllo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11191,8 +11485,9 @@ func (s *SDK) PostAllocateHosts(ctx context.Context, request operations.PostAllo
 	return res, nil
 }
 
+// PostApplySecurityGroupsToClientVpnTargetNetwork - Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.
 func (s *SDK) PostApplySecurityGroupsToClientVpnTargetNetwork(ctx context.Context, request operations.PostApplySecurityGroupsToClientVpnTargetNetworkRequest) (*operations.PostApplySecurityGroupsToClientVpnTargetNetworkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ApplySecurityGroupsToClientVpnTargetNetwork"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11211,7 +11506,7 @@ func (s *SDK) PostApplySecurityGroupsToClientVpnTargetNetwork(ctx context.Contex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11241,8 +11536,9 @@ func (s *SDK) PostApplySecurityGroupsToClientVpnTargetNetwork(ctx context.Contex
 	return res, nil
 }
 
+// PostAssignIpv6Addresses - <p>Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI">IP Addresses Per Network Interface Per Instance Type</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify either the IPv6 addresses or the IPv6 address count in the request. </p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostAssignIpv6Addresses(ctx context.Context, request operations.PostAssignIpv6AddressesRequest) (*operations.PostAssignIpv6AddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssignIpv6Addresses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11261,7 +11557,7 @@ func (s *SDK) PostAssignIpv6Addresses(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11291,8 +11587,9 @@ func (s *SDK) PostAssignIpv6Addresses(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostAssignPrivateIPAddresses - <p>Assigns one or more secondary private IP addresses to the specified network interface.</p> <p>You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved.</p> <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance metadata to confirm that the remapping is complete.</p> <p>You must specify either the IP addresses or the IP address count in the request.</p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostAssignPrivateIPAddresses(ctx context.Context, request operations.PostAssignPrivateIPAddressesRequest) (*operations.PostAssignPrivateIPAddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssignPrivateIpAddresses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11311,7 +11608,7 @@ func (s *SDK) PostAssignPrivateIPAddresses(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11341,8 +11638,9 @@ func (s *SDK) PostAssignPrivateIPAddresses(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostAssociateAddress - <p>Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>[EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account.</p> <p>[VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address.</p> <p>[Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface. </p> <p>You cannot associate an Elastic IP address with an interface in a different network border group.</p> <important> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the <i>Elastic IP Addresses</i> section of <a href="http://aws.amazon.com/ec2/pricing/">Amazon EC2 Pricing</a>.</p> </important>
 func (s *SDK) PostAssociateAddress(ctx context.Context, request operations.PostAssociateAddressRequest) (*operations.PostAssociateAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateAddress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11361,7 +11659,7 @@ func (s *SDK) PostAssociateAddress(ctx context.Context, request operations.PostA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11391,8 +11689,9 @@ func (s *SDK) PostAssociateAddress(ctx context.Context, request operations.PostA
 	return res, nil
 }
 
+// PostAssociateClientVpnTargetNetwork - <p>Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.</p> <p>If you specified a VPC when you created the Client VPN endpoint or if you have previous subnet associations, the specified subnet must be in the same VPC. To specify a subnet that's in a different VPC, you must first modify the Client VPN endpoint (<a>ModifyClientVpnEndpoint</a>) and change the VPC that's associated with it.</p>
 func (s *SDK) PostAssociateClientVpnTargetNetwork(ctx context.Context, request operations.PostAssociateClientVpnTargetNetworkRequest) (*operations.PostAssociateClientVpnTargetNetworkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateClientVpnTargetNetwork"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11411,7 +11710,7 @@ func (s *SDK) PostAssociateClientVpnTargetNetwork(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11441,8 +11740,9 @@ func (s *SDK) PostAssociateClientVpnTargetNetwork(ctx context.Context, request o
 	return res, nil
 }
 
+// PostAssociateDhcpOptions - <p>Associates a set of DHCP options (that you've previously created) with the specified VPC, or associates no DHCP options with the VPC.</p> <p>After you associate the options with the VPC, any existing instances and all new instances that you launch in that VPC use the options. You don't need to restart or relaunch the instances. They automatically pick up the changes within a few hours, depending on how frequently the instance renews its DHCP lease. You can explicitly renew the lease using the operating system on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP options sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostAssociateDhcpOptions(ctx context.Context, request operations.PostAssociateDhcpOptionsRequest) (*operations.PostAssociateDhcpOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateDhcpOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11461,7 +11761,7 @@ func (s *SDK) PostAssociateDhcpOptions(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11482,8 +11782,9 @@ func (s *SDK) PostAssociateDhcpOptions(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostAssociateEnclaveCertificateIamRole - <p>Associates an Identity and Access Management (IAM) role with an Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Web Services Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an Amazon Web Services managed key that has an attached attestation-based key policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the KMS key, you must grant it permission to call <code>kms:Decrypt</code> on the KMS key returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>Amazon Web Services Nitro Enclaves User Guide</i>.</p>
 func (s *SDK) PostAssociateEnclaveCertificateIamRole(ctx context.Context, request operations.PostAssociateEnclaveCertificateIamRoleRequest) (*operations.PostAssociateEnclaveCertificateIamRoleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateEnclaveCertificateIamRole"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11502,7 +11803,7 @@ func (s *SDK) PostAssociateEnclaveCertificateIamRole(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11532,8 +11833,9 @@ func (s *SDK) PostAssociateEnclaveCertificateIamRole(ctx context.Context, reques
 	return res, nil
 }
 
+// PostAssociateIamInstanceProfile - Associates an IAM instance profile with a running or stopped instance. You cannot associate more than one IAM instance profile with an instance.
 func (s *SDK) PostAssociateIamInstanceProfile(ctx context.Context, request operations.PostAssociateIamInstanceProfileRequest) (*operations.PostAssociateIamInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateIamInstanceProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11552,7 +11854,7 @@ func (s *SDK) PostAssociateIamInstanceProfile(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11582,8 +11884,9 @@ func (s *SDK) PostAssociateIamInstanceProfile(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostAssociateInstanceEventWindow - <p>Associates one or more targets with an event window. Only one type of target (instance IDs, Dedicated Host IDs, or tags) can be specified with an event window.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostAssociateInstanceEventWindow(ctx context.Context, request operations.PostAssociateInstanceEventWindowRequest) (*operations.PostAssociateInstanceEventWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateInstanceEventWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11602,7 +11905,7 @@ func (s *SDK) PostAssociateInstanceEventWindow(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11632,8 +11935,9 @@ func (s *SDK) PostAssociateInstanceEventWindow(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostAssociateRouteTable - <p>Associates a subnet in your VPC or an internet gateway or virtual private gateway attached to your VPC with a route table in your VPC. This association causes traffic from the subnet or gateway to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table later. A route table can be associated with multiple subnets.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostAssociateRouteTable(ctx context.Context, request operations.PostAssociateRouteTableRequest) (*operations.PostAssociateRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11652,7 +11956,7 @@ func (s *SDK) PostAssociateRouteTable(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11682,8 +11986,9 @@ func (s *SDK) PostAssociateRouteTable(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostAssociateSubnetCidrBlock - Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
 func (s *SDK) PostAssociateSubnetCidrBlock(ctx context.Context, request operations.PostAssociateSubnetCidrBlockRequest) (*operations.PostAssociateSubnetCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateSubnetCidrBlock"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11702,7 +12007,7 @@ func (s *SDK) PostAssociateSubnetCidrBlock(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11732,8 +12037,9 @@ func (s *SDK) PostAssociateSubnetCidrBlock(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostAssociateTransitGatewayMulticastDomain - <p>Associates the specified subnets and transit gateway attachments with the specified transit gateway multicast domain.</p> <p>The transit gateway attachment must be in the available state before you can add a resource. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html">DescribeTransitGatewayAttachments</a> to see the state of the attachment.</p>
 func (s *SDK) PostAssociateTransitGatewayMulticastDomain(ctx context.Context, request operations.PostAssociateTransitGatewayMulticastDomainRequest) (*operations.PostAssociateTransitGatewayMulticastDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateTransitGatewayMulticastDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11752,7 +12058,7 @@ func (s *SDK) PostAssociateTransitGatewayMulticastDomain(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11782,8 +12088,9 @@ func (s *SDK) PostAssociateTransitGatewayMulticastDomain(ctx context.Context, re
 	return res, nil
 }
 
+// PostAssociateTransitGatewayRouteTable - Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.
 func (s *SDK) PostAssociateTransitGatewayRouteTable(ctx context.Context, request operations.PostAssociateTransitGatewayRouteTableRequest) (*operations.PostAssociateTransitGatewayRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateTransitGatewayRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11802,7 +12109,7 @@ func (s *SDK) PostAssociateTransitGatewayRouteTable(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11832,8 +12139,9 @@ func (s *SDK) PostAssociateTransitGatewayRouteTable(ctx context.Context, request
 	return res, nil
 }
 
+// PostAssociateTrunkInterface - <note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Associates a branch network interface with a trunk network interface.</p> <p>Before you create the association, run the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html">create-network-interface</a> command and set <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>
 func (s *SDK) PostAssociateTrunkInterface(ctx context.Context, request operations.PostAssociateTrunkInterfaceRequest) (*operations.PostAssociateTrunkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateTrunkInterface"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11852,7 +12160,7 @@ func (s *SDK) PostAssociateTrunkInterface(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11882,8 +12190,9 @@ func (s *SDK) PostAssociateTrunkInterface(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostAssociateVpcCidrBlock - <p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and subnet sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostAssociateVpcCidrBlock(ctx context.Context, request operations.PostAssociateVpcCidrBlockRequest) (*operations.PostAssociateVpcCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AssociateVpcCidrBlock"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11902,7 +12211,7 @@ func (s *SDK) PostAssociateVpcCidrBlock(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11932,8 +12241,9 @@ func (s *SDK) PostAssociateVpcCidrBlock(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostAttachClassicLinkVpc - <p>Links an EC2-Classic instance to a ClassicLink-enabled VPC through one or more of the VPC's security groups. You cannot link an EC2-Classic instance to more than one VPC at a time. You can only link an instance that's in the <code>running</code> state. An instance is automatically unlinked from a VPC when it's stopped - you can link it to the VPC again when you restart it.</p> <p>After you've linked an instance, you cannot change the VPC security groups that are associated with it. To change the security groups, you must first unlink the instance, and then link it again.</p> <p>Linking your instance to a VPC is sometimes referred to as <i>attaching</i> your instance.</p>
 func (s *SDK) PostAttachClassicLinkVpc(ctx context.Context, request operations.PostAttachClassicLinkVpcRequest) (*operations.PostAttachClassicLinkVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachClassicLinkVpc"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11952,7 +12262,7 @@ func (s *SDK) PostAttachClassicLinkVpc(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11982,8 +12292,9 @@ func (s *SDK) PostAttachClassicLinkVpc(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostAttachInternetGateway - Attaches an internet gateway or a virtual private gateway to a VPC, enabling connectivity between the internet and the VPC. For more information about your VPC and internet gateway, see the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/">Amazon Virtual Private Cloud User Guide</a>.
 func (s *SDK) PostAttachInternetGateway(ctx context.Context, request operations.PostAttachInternetGatewayRequest) (*operations.PostAttachInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachInternetGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12002,7 +12313,7 @@ func (s *SDK) PostAttachInternetGateway(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12023,8 +12334,9 @@ func (s *SDK) PostAttachInternetGateway(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostAttachNetworkInterface - Attaches a network interface to an instance.
 func (s *SDK) PostAttachNetworkInterface(ctx context.Context, request operations.PostAttachNetworkInterfaceRequest) (*operations.PostAttachNetworkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachNetworkInterface"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12043,7 +12355,7 @@ func (s *SDK) PostAttachNetworkInterface(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12073,8 +12385,9 @@ func (s *SDK) PostAttachNetworkInterface(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostAttachVolume - <p>Attaches an EBS volume to a running or stopped instance and exposes it to the instance with the specified device name.</p> <p>Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>After you attach an EBS volume, you must make it available. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html">Make an EBS volume available for use</a>.</p> <p>If a volume has an Amazon Web Services Marketplace product code:</p> <ul> <li> <p>The volume can be attached only to a stopped instance.</p> </li> <li> <p>Amazon Web Services Marketplace product codes are copied from the volume to the instance.</p> </li> <li> <p>You must be subscribed to the product.</p> </li> <li> <p>The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html">Attach an Amazon EBS volume to an instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostAttachVolume(ctx context.Context, request operations.PostAttachVolumeRequest) (*operations.PostAttachVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachVolume"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12093,7 +12406,7 @@ func (s *SDK) PostAttachVolume(ctx context.Context, request operations.PostAttac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12123,8 +12436,9 @@ func (s *SDK) PostAttachVolume(ctx context.Context, request operations.PostAttac
 	return res, nil
 }
 
+// PostAttachVpnGateway - <p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) PostAttachVpnGateway(ctx context.Context, request operations.PostAttachVpnGatewayRequest) (*operations.PostAttachVpnGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AttachVpnGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12143,7 +12457,7 @@ func (s *SDK) PostAttachVpnGateway(ctx context.Context, request operations.PostA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12173,8 +12487,9 @@ func (s *SDK) PostAttachVpnGateway(ctx context.Context, request operations.PostA
 	return res, nil
 }
 
+// PostAuthorizeClientVpnIngress - Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.
 func (s *SDK) PostAuthorizeClientVpnIngress(ctx context.Context, request operations.PostAuthorizeClientVpnIngressRequest) (*operations.PostAuthorizeClientVpnIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AuthorizeClientVpnIngress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12193,7 +12508,7 @@ func (s *SDK) PostAuthorizeClientVpnIngress(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12223,8 +12538,9 @@ func (s *SDK) PostAuthorizeClientVpnIngress(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostAuthorizeSecurityGroupEgress - <p>[VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC.</p> <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified destination security groups.</p> <p>You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p> <p>For information about VPC security group quotas, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html">Amazon VPC quotas</a>.</p>
 func (s *SDK) PostAuthorizeSecurityGroupEgress(ctx context.Context, request operations.PostAuthorizeSecurityGroupEgressRequest) (*operations.PostAuthorizeSecurityGroupEgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AuthorizeSecurityGroupEgress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12243,7 +12559,7 @@ func (s *SDK) PostAuthorizeSecurityGroupEgress(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12273,8 +12589,9 @@ func (s *SDK) PostAuthorizeSecurityGroupEgress(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostAuthorizeSecurityGroupIngress - <p>Adds the specified inbound (ingress) rules to a security group.</p> <p>An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address range, or from the instances that are associated with the specified destination security groups.</p> <p>You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p> <p>For more information about VPC security group quotas, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html">Amazon VPC quotas</a>.</p>
 func (s *SDK) PostAuthorizeSecurityGroupIngress(ctx context.Context, request operations.PostAuthorizeSecurityGroupIngressRequest) (*operations.PostAuthorizeSecurityGroupIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AuthorizeSecurityGroupIngress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12293,7 +12610,7 @@ func (s *SDK) PostAuthorizeSecurityGroupIngress(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12323,8 +12640,9 @@ func (s *SDK) PostAuthorizeSecurityGroupIngress(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostBundleInstance - <p>Bundles an Amazon instance store-backed Windows instance.</p> <p>During bundling, only the root device volume (C:\) is bundled. Data on other instance store volumes is not preserved.</p> <note> <p>This action is not applicable for Linux/Unix instances or Windows instances that are backed by Amazon EBS.</p> </note>
 func (s *SDK) PostBundleInstance(ctx context.Context, request operations.PostBundleInstanceRequest) (*operations.PostBundleInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=BundleInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12343,7 +12661,7 @@ func (s *SDK) PostBundleInstance(ctx context.Context, request operations.PostBun
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12373,8 +12691,9 @@ func (s *SDK) PostBundleInstance(ctx context.Context, request operations.PostBun
 	return res, nil
 }
 
+// PostCancelBundleTask - Cancels a bundling operation for an instance store-backed Windows instance.
 func (s *SDK) PostCancelBundleTask(ctx context.Context, request operations.PostCancelBundleTaskRequest) (*operations.PostCancelBundleTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelBundleTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12393,7 +12712,7 @@ func (s *SDK) PostCancelBundleTask(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12423,8 +12742,9 @@ func (s *SDK) PostCancelBundleTask(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCancelCapacityReservation - <p>Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to <code>cancelled</code>.</p> <p>Instances running in the reserved capacity continue running until you stop them. Stopped instances that target the Capacity Reservation can no longer launch. Modify these instances to either target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation that has matching attributes and sufficient capacity.</p>
 func (s *SDK) PostCancelCapacityReservation(ctx context.Context, request operations.PostCancelCapacityReservationRequest) (*operations.PostCancelCapacityReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelCapacityReservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12443,7 +12763,7 @@ func (s *SDK) PostCancelCapacityReservation(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12473,8 +12793,9 @@ func (s *SDK) PostCancelCapacityReservation(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostCancelConversionTask - <p>Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html">Importing a Virtual Machine Using the Amazon EC2 CLI</a>.</p>
 func (s *SDK) PostCancelConversionTask(ctx context.Context, request operations.PostCancelConversionTaskRequest) (*operations.PostCancelConversionTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelConversionTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12493,7 +12814,7 @@ func (s *SDK) PostCancelConversionTask(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12514,8 +12835,9 @@ func (s *SDK) PostCancelConversionTask(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostCancelExportTask - Cancels an active export task. The request removes all artifacts of the export, including any partially-created Amazon S3 objects. If the export task is complete or is in the process of transferring the final disk image, the command fails and returns an error.
 func (s *SDK) PostCancelExportTask(ctx context.Context, request operations.PostCancelExportTaskRequest) (*operations.PostCancelExportTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelExportTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12534,7 +12856,7 @@ func (s *SDK) PostCancelExportTask(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12555,8 +12877,9 @@ func (s *SDK) PostCancelExportTask(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCancelImportTask - Cancels an in-process import virtual machine or import snapshot task.
 func (s *SDK) PostCancelImportTask(ctx context.Context, request operations.PostCancelImportTaskRequest) (*operations.PostCancelImportTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelImportTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12575,7 +12898,7 @@ func (s *SDK) PostCancelImportTask(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12605,8 +12928,9 @@ func (s *SDK) PostCancelImportTask(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCancelReservedInstancesListing - <p>Cancels the specified Reserved Instance listing in the Reserved Instance Marketplace.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostCancelReservedInstancesListing(ctx context.Context, request operations.PostCancelReservedInstancesListingRequest) (*operations.PostCancelReservedInstancesListingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelReservedInstancesListing"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12625,7 +12949,7 @@ func (s *SDK) PostCancelReservedInstancesListing(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12655,8 +12979,9 @@ func (s *SDK) PostCancelReservedInstancesListing(ctx context.Context, request op
 	return res, nil
 }
 
+// PostCancelSpotFleetRequests - <p>Cancels the specified Spot Fleet requests.</p> <p>After you cancel a Spot Fleet request, the Spot Fleet launches no new Spot Instances. You must specify whether the Spot Fleet should also terminate its Spot Instances. If you terminate the instances, the Spot Fleet request enters the <code>cancelled_terminating</code> state. Otherwise, the Spot Fleet request enters the <code>cancelled_running</code> state and the instances continue to run until they are interrupted or you terminate them manually.</p>
 func (s *SDK) PostCancelSpotFleetRequests(ctx context.Context, request operations.PostCancelSpotFleetRequestsRequest) (*operations.PostCancelSpotFleetRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelSpotFleetRequests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12675,7 +13000,7 @@ func (s *SDK) PostCancelSpotFleetRequests(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12705,8 +13030,9 @@ func (s *SDK) PostCancelSpotFleetRequests(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostCancelSpotInstanceRequests - <p>Cancels one or more Spot Instance requests.</p> <important> <p>Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.</p> </important>
 func (s *SDK) PostCancelSpotInstanceRequests(ctx context.Context, request operations.PostCancelSpotInstanceRequestsRequest) (*operations.PostCancelSpotInstanceRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CancelSpotInstanceRequests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12725,7 +13051,7 @@ func (s *SDK) PostCancelSpotInstanceRequests(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12755,8 +13081,9 @@ func (s *SDK) PostCancelSpotInstanceRequests(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostConfirmProductInstance - Determines whether a product code is associated with an instance. This action can only be used by the owner of the product code. It is useful when a product code owner must verify whether another user's instance is eligible for support.
 func (s *SDK) PostConfirmProductInstance(ctx context.Context, request operations.PostConfirmProductInstanceRequest) (*operations.PostConfirmProductInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ConfirmProductInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12775,7 +13102,7 @@ func (s *SDK) PostConfirmProductInstance(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12805,8 +13132,9 @@ func (s *SDK) PostConfirmProductInstance(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostCopyFpgaImage - Copies the specified Amazon FPGA Image (AFI) to the current Region.
 func (s *SDK) PostCopyFpgaImage(ctx context.Context, request operations.PostCopyFpgaImageRequest) (*operations.PostCopyFpgaImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CopyFpgaImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12825,7 +13153,7 @@ func (s *SDK) PostCopyFpgaImage(ctx context.Context, request operations.PostCopy
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12855,8 +13183,9 @@ func (s *SDK) PostCopyFpgaImage(ctx context.Context, request operations.PostCopy
 	return res, nil
 }
 
+// PostCopyImage - <p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html">CreateStoreImageTask</a>.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCopyImage(ctx context.Context, request operations.PostCopyImageRequest) (*operations.PostCopyImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CopyImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12875,7 +13204,7 @@ func (s *SDK) PostCopyImage(ctx context.Context, request operations.PostCopyImag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12905,8 +13234,9 @@ func (s *SDK) PostCopyImage(ctx context.Context, request operations.PostCopyImag
 	return res, nil
 }
 
+// PostCopySnapshot - <p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy a snapshot within the same Region, from one Region to another, or from a Region to an Outpost. You can't copy a snapshot from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs).</p> <p>When copying snapshots to a Region, copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted snapshot copies use the default Key Management Service (KMS) KMS key; however, you can specify a different KMS key. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the KMS key used to encrypt the snapshot.</p> <p>Snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html">Copy an Amazon EBS snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCopySnapshot(ctx context.Context, request operations.PostCopySnapshotRequest) (*operations.PostCopySnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CopySnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12925,7 +13255,7 @@ func (s *SDK) PostCopySnapshot(ctx context.Context, request operations.PostCopyS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12955,8 +13285,9 @@ func (s *SDK) PostCopySnapshot(ctx context.Context, request operations.PostCopyS
 	return res, nil
 }
 
+// PostCreateCapacityReservation - <p>Creates a new Capacity Reservation with the specified attributes.</p> <p>Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">Capacity Reservations</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes.</p> <p>Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 Service Quotas</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostCreateCapacityReservation(ctx context.Context, request operations.PostCreateCapacityReservationRequest) (*operations.PostCreateCapacityReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateCapacityReservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12975,7 +13306,7 @@ func (s *SDK) PostCreateCapacityReservation(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13005,8 +13336,9 @@ func (s *SDK) PostCreateCapacityReservation(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostCreateCarrierGateway - Creates a carrier gateway. For more information about carrier gateways, see <a href="https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#wavelength-carrier-gateway">Carrier gateways</a> in the <i>Amazon Web Services Wavelength Developer Guide</i>.
 func (s *SDK) PostCreateCarrierGateway(ctx context.Context, request operations.PostCreateCarrierGatewayRequest) (*operations.PostCreateCarrierGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateCarrierGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13025,7 +13357,7 @@ func (s *SDK) PostCreateCarrierGateway(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13055,8 +13387,9 @@ func (s *SDK) PostCreateCarrierGateway(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostCreateClientVpnEndpoint - Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions are terminated.
 func (s *SDK) PostCreateClientVpnEndpoint(ctx context.Context, request operations.PostCreateClientVpnEndpointRequest) (*operations.PostCreateClientVpnEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateClientVpnEndpoint"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13075,7 +13408,7 @@ func (s *SDK) PostCreateClientVpnEndpoint(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13105,8 +13438,9 @@ func (s *SDK) PostCreateClientVpnEndpoint(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostCreateClientVpnRoute - Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the available destination network routes. Each route in the route table specifies the path for traﬃc to speciﬁc resources or networks.
 func (s *SDK) PostCreateClientVpnRoute(ctx context.Context, request operations.PostCreateClientVpnRouteRequest) (*operations.PostCreateClientVpnRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateClientVpnRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13125,7 +13459,7 @@ func (s *SDK) PostCreateClientVpnRoute(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13155,8 +13489,9 @@ func (s *SDK) PostCreateClientVpnRoute(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostCreateCustomerGateway - <p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:</p> <ul> <li> <p>7224 - reserved in the <code>us-east-1</code> Region</p> </li> <li> <p>9059 - reserved in the <code>eu-west-1</code> Region</p> </li> <li> <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p> </li> <li> <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p> </li> </ul> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>
 func (s *SDK) PostCreateCustomerGateway(ctx context.Context, request operations.PostCreateCustomerGatewayRequest) (*operations.PostCreateCustomerGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateCustomerGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13175,7 +13510,7 @@ func (s *SDK) PostCreateCustomerGateway(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13205,8 +13540,9 @@ func (s *SDK) PostCreateCustomerGateway(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostCreateDefaultSubnet - Creates a default subnet with a size <code>/20</code> IPv4 CIDR block in the specified Availability Zone in your default VPC. You can have only one default subnet per Availability Zone. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet">Creating a default subnet</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.
 func (s *SDK) PostCreateDefaultSubnet(ctx context.Context, request operations.PostCreateDefaultSubnetRequest) (*operations.PostCreateDefaultSubnetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDefaultSubnet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13225,7 +13561,7 @@ func (s *SDK) PostCreateDefaultSubnet(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13255,8 +13591,9 @@ func (s *SDK) PostCreateDefaultSubnet(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostCreateDefaultVpc - <p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html">Default VPC and default subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.</p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the <a href="http://aws.amazon.com/vpc/faqs/#Default_VPCs">Default VPCs FAQ</a>.</p>
 func (s *SDK) PostCreateDefaultVpc(ctx context.Context, request operations.PostCreateDefaultVpcRequest) (*operations.PostCreateDefaultVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDefaultVpc"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13275,7 +13612,7 @@ func (s *SDK) PostCreateDefaultVpc(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13305,8 +13642,9 @@ func (s *SDK) PostCreateDefaultVpc(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCreateDhcpOptions - <p>Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see <a href="http://www.ietf.org/rfc/rfc2132.txt">RFC 2132</a>.</p> <ul> <li> <p> <code>domain-name-servers</code> - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. To have your instance receive a custom DNS hostname as specified in <code>domain-name</code>, you must set <code>domain-name-servers</code> to a custom DNS server.</p> </li> <li> <p> <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>, specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in another Region, specify <code>region.compute.internal</code> (for example, <code>ap-northeast-1.compute.internal</code>). Otherwise, specify a domain name (for example, <code>ExampleCompany.com</code>). This value is used to complete unqualified DNS hostnames. <b>Important</b>: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.</p> </li> <li> <p> <code>ntp-servers</code> - The IP addresses of up to four Network Time Protocol (NTP) servers.</p> </li> <li> <p> <code>netbios-name-servers</code> - The IP addresses of up to four NetBIOS name servers.</p> </li> <li> <p> <code>netbios-node-type</code> - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see <a href="http://www.ietf.org/rfc/rfc2132.txt">RFC 2132</a>.</p> </li> </ul> <p>Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an internet gateway, make sure to set the <code>domain-name-servers</code> option either to <code>AmazonProvidedDNS</code> or to a domain name server of your choice. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP options sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateDhcpOptions(ctx context.Context, request operations.PostCreateDhcpOptionsRequest) (*operations.PostCreateDhcpOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDhcpOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13325,7 +13663,7 @@ func (s *SDK) PostCreateDhcpOptions(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13355,8 +13693,9 @@ func (s *SDK) PostCreateDhcpOptions(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostCreateEgressOnlyInternetGateway - [IPv6 only] Creates an egress-only internet gateway for your VPC. An egress-only internet gateway is used to enable outbound communication over IPv6 from instances in your VPC to the internet, and prevents hosts outside of your VPC from initiating an IPv6 connection with your instance.
 func (s *SDK) PostCreateEgressOnlyInternetGateway(ctx context.Context, request operations.PostCreateEgressOnlyInternetGatewayRequest) (*operations.PostCreateEgressOnlyInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateEgressOnlyInternetGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13375,7 +13714,7 @@ func (s *SDK) PostCreateEgressOnlyInternetGateway(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13405,8 +13744,9 @@ func (s *SDK) PostCreateEgressOnlyInternetGateway(ctx context.Context, request o
 	return res, nil
 }
 
+// PostCreateFleet - <p>Launches an EC2 Fleet.</p> <p>You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html">Launching an EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostCreateFleet(ctx context.Context, request operations.PostCreateFleetRequest) (*operations.PostCreateFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13425,7 +13765,7 @@ func (s *SDK) PostCreateFleet(ctx context.Context, request operations.PostCreate
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13455,8 +13795,9 @@ func (s *SDK) PostCreateFleet(ctx context.Context, request operations.PostCreate
 	return res, nil
 }
 
+// PostCreateFlowLogs - <p>Creates one or more flow logs to capture information about IP traffic for a specific network interface, subnet, or VPC. </p> <p>Flow log data for a monitored network interface is recorded as flow log records, which are log events consisting of fields that describe the traffic flow. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records">Flow log records</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>When publishing to CloudWatch Logs, flow log records are published to a log group, and each network interface has a unique log stream in the log group. When publishing to Amazon S3, flow log records for all of the monitored network interfaces are published to a single log file object that is stored in the specified bucket.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">VPC Flow Logs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateFlowLogs(ctx context.Context, request operations.PostCreateFlowLogsRequest) (*operations.PostCreateFlowLogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateFlowLogs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13475,7 +13816,7 @@ func (s *SDK) PostCreateFlowLogs(ctx context.Context, request operations.PostCre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13505,8 +13846,9 @@ func (s *SDK) PostCreateFlowLogs(ctx context.Context, request operations.PostCre
 	return res, nil
 }
 
+// PostCreateFpgaImage - <p>Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP).</p> <p>The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs.</p> <p>An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the <a href="https://github.com/aws/aws-fpga/">AWS FPGA Hardware Development Kit</a>.</p>
 func (s *SDK) PostCreateFpgaImage(ctx context.Context, request operations.PostCreateFpgaImageRequest) (*operations.PostCreateFpgaImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateFpgaImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13525,7 +13867,7 @@ func (s *SDK) PostCreateFpgaImage(ctx context.Context, request operations.PostCr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13555,8 +13897,9 @@ func (s *SDK) PostCreateFpgaImage(ctx context.Context, request operations.PostCr
 	return res, nil
 }
 
+// PostCreateImage - <p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.</p> <p>If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Creating Amazon EBS-Backed Linux AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateImage(ctx context.Context, request operations.PostCreateImageRequest) (*operations.PostCreateImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13575,7 +13918,7 @@ func (s *SDK) PostCreateImage(ctx context.Context, request operations.PostCreate
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13605,8 +13948,9 @@ func (s *SDK) PostCreateImage(ctx context.Context, request operations.PostCreate
 	return res, nil
 }
 
+// PostCreateInstanceEventWindow - <p>Creates an event window in which scheduled events for the associated Amazon EC2 instances can run.</p> <p>You can define either a set of time ranges or a cron expression when creating the event window, but not both. All event window times are in UTC.</p> <p>You can create up to 200 event windows per Amazon Web Services Region.</p> <p>When you create the event window, targets (instance IDs, Dedicated Host IDs, or tags) are not yet associated with it. To ensure that the event window can be used, you must associate one or more targets with it by using the <a>AssociateInstanceEventWindow</a> API.</p> <important> <p>Event windows are applicable only for scheduled events that stop, reboot, or terminate instances.</p> <p>Event windows are <i>not</i> applicable for:</p> <ul> <li> <p>Expedited scheduled events and network maintenance events. </p> </li> <li> <p>Unscheduled maintenance such as AutoRecovery and unplanned reboots.</p> </li> </ul> </important> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostCreateInstanceEventWindow(ctx context.Context, request operations.PostCreateInstanceEventWindowRequest) (*operations.PostCreateInstanceEventWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateInstanceEventWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13625,7 +13969,7 @@ func (s *SDK) PostCreateInstanceEventWindow(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13655,8 +13999,9 @@ func (s *SDK) PostCreateInstanceEventWindow(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostCreateInstanceExportTask - <p>Exports a running or stopped instance to an Amazon S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html">Exporting an instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>
 func (s *SDK) PostCreateInstanceExportTask(ctx context.Context, request operations.PostCreateInstanceExportTaskRequest) (*operations.PostCreateInstanceExportTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateInstanceExportTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13675,7 +14020,7 @@ func (s *SDK) PostCreateInstanceExportTask(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13705,8 +14050,9 @@ func (s *SDK) PostCreateInstanceExportTask(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostCreateInternetGateway - <p>Creates an internet gateway for use with a VPC. After creating the internet gateway, you attach it to a VPC using <a>AttachInternetGateway</a>.</p> <p>For more information about your VPC and internet gateway, see the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/">Amazon Virtual Private Cloud User Guide</a>.</p>
 func (s *SDK) PostCreateInternetGateway(ctx context.Context, request operations.PostCreateInternetGatewayRequest) (*operations.PostCreateInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateInternetGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13725,7 +14071,7 @@ func (s *SDK) PostCreateInternetGateway(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13755,8 +14101,9 @@ func (s *SDK) PostCreateInternetGateway(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostCreateKeyPair - <p>Creates an ED25519 or 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error.</p> <p>The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using <a>ImportKeyPair</a>.</p> <p>You can have up to 5,000 key pairs per Amazon Web Services Region.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateKeyPair(ctx context.Context, request operations.PostCreateKeyPairRequest) (*operations.PostCreateKeyPairResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateKeyPair"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13775,7 +14122,7 @@ func (s *SDK) PostCreateKeyPair(ctx context.Context, request operations.PostCrea
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13805,8 +14152,9 @@ func (s *SDK) PostCreateKeyPair(ctx context.Context, request operations.PostCrea
 	return res, nil
 }
 
+// PostCreateLaunchTemplate - Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">Launching an instance from a launch template</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.
 func (s *SDK) PostCreateLaunchTemplate(ctx context.Context, request operations.PostCreateLaunchTemplateRequest) (*operations.PostCreateLaunchTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateLaunchTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13825,7 +14173,7 @@ func (s *SDK) PostCreateLaunchTemplate(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13855,8 +14203,9 @@ func (s *SDK) PostCreateLaunchTemplate(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostCreateLaunchTemplateVersion - <p>Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version.</p> <p>Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#manage-launch-template-versions">Managing launch template versions</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateLaunchTemplateVersion(ctx context.Context, request operations.PostCreateLaunchTemplateVersionRequest) (*operations.PostCreateLaunchTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateLaunchTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13875,7 +14224,7 @@ func (s *SDK) PostCreateLaunchTemplateVersion(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13905,8 +14254,9 @@ func (s *SDK) PostCreateLaunchTemplateVersion(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostCreateLocalGatewayRoute - Creates a static route for the specified local gateway route table.
 func (s *SDK) PostCreateLocalGatewayRoute(ctx context.Context, request operations.PostCreateLocalGatewayRouteRequest) (*operations.PostCreateLocalGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateLocalGatewayRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13925,7 +14275,7 @@ func (s *SDK) PostCreateLocalGatewayRoute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13955,8 +14305,9 @@ func (s *SDK) PostCreateLocalGatewayRoute(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostCreateLocalGatewayRouteTableVpcAssociation - Associates the specified VPC with the specified local gateway route table.
 func (s *SDK) PostCreateLocalGatewayRouteTableVpcAssociation(ctx context.Context, request operations.PostCreateLocalGatewayRouteTableVpcAssociationRequest) (*operations.PostCreateLocalGatewayRouteTableVpcAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateLocalGatewayRouteTableVpcAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13975,7 +14326,7 @@ func (s *SDK) PostCreateLocalGatewayRouteTableVpcAssociation(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14005,8 +14356,9 @@ func (s *SDK) PostCreateLocalGatewayRouteTableVpcAssociation(ctx context.Context
 	return res, nil
 }
 
+// PostCreateManagedPrefixList - Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description.
 func (s *SDK) PostCreateManagedPrefixList(ctx context.Context, request operations.PostCreateManagedPrefixListRequest) (*operations.PostCreateManagedPrefixListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateManagedPrefixList"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14025,7 +14377,7 @@ func (s *SDK) PostCreateManagedPrefixList(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14055,8 +14407,9 @@ func (s *SDK) PostCreateManagedPrefixList(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostCreateNatGateway - <p>Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway.</p> <p>With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet.</p> <p>With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateNatGateway(ctx context.Context, request operations.PostCreateNatGatewayRequest) (*operations.PostCreateNatGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNatGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14075,7 +14428,7 @@ func (s *SDK) PostCreateNatGateway(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14105,8 +14458,9 @@ func (s *SDK) PostCreateNatGateway(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCreateNetworkACL - <p>Creates a network ACL in a VPC. Network ACLs provide an optional layer of security (in addition to security groups) for the instances in your VPC.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateNetworkACL(ctx context.Context, request operations.PostCreateNetworkACLRequest) (*operations.PostCreateNetworkACLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNetworkAcl"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14125,7 +14479,7 @@ func (s *SDK) PostCreateNetworkACL(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14155,8 +14509,9 @@ func (s *SDK) PostCreateNetworkACL(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCreateNetworkACLEntry - <p>Creates an entry (a rule) in a network ACL with the specified rule number. Each network ACL has a set of numbered ingress rules and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated with the ACL, we process the entries in the ACL according to the rule numbers, in ascending order. Each network ACL has a set of ingress rules and a separate set of egress rules.</p> <p>We recommend that you leave room between the rule numbers (for example, 100, 110, 120, ...), and not number them one right after the other (for example, 101, 102, 103, ...). This makes it easier to add a rule between existing ones without having to renumber the rules.</p> <p>After you add an entry, you can't modify it; you must either replace it, or create an entry and delete the old one.</p> <p>For more information about network ACLs, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateNetworkACLEntry(ctx context.Context, request operations.PostCreateNetworkACLEntryRequest) (*operations.PostCreateNetworkACLEntryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNetworkAclEntry"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14175,7 +14530,7 @@ func (s *SDK) PostCreateNetworkACLEntry(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14196,8 +14551,9 @@ func (s *SDK) PostCreateNetworkACLEntry(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostCreateNetworkInsightsPath - <p>Creates a path to analyze for reachability.</p> <p>Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/">What is Reachability Analyzer</a>.</p>
 func (s *SDK) PostCreateNetworkInsightsPath(ctx context.Context, request operations.PostCreateNetworkInsightsPathRequest) (*operations.PostCreateNetworkInsightsPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNetworkInsightsPath"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14216,7 +14572,7 @@ func (s *SDK) PostCreateNetworkInsightsPath(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14246,8 +14602,9 @@ func (s *SDK) PostCreateNetworkInsightsPath(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostCreateNetworkInterface - <p>Creates a network interface in the specified subnet.</p> <p>For more information about network interfaces, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html">Elastic Network Interfaces</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateNetworkInterface(ctx context.Context, request operations.PostCreateNetworkInterfaceRequest) (*operations.PostCreateNetworkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNetworkInterface"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14266,7 +14623,7 @@ func (s *SDK) PostCreateNetworkInterface(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14296,8 +14653,9 @@ func (s *SDK) PostCreateNetworkInterface(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostCreateNetworkInterfacePermission - <p>Grants an Amazon Web Services-authorized account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single Amazon Web Services account only, and only one account at a time.</p>
 func (s *SDK) PostCreateNetworkInterfacePermission(ctx context.Context, request operations.PostCreateNetworkInterfacePermissionRequest) (*operations.PostCreateNetworkInterfacePermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateNetworkInterfacePermission"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14316,7 +14674,7 @@ func (s *SDK) PostCreateNetworkInterfacePermission(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14346,8 +14704,9 @@ func (s *SDK) PostCreateNetworkInterfacePermission(ctx context.Context, request 
 	return res, nil
 }
 
+// PostCreatePlacementGroup - <p>Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group. </p> <p>A <code>cluster</code> placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A <code>spread</code> placement group places instances on distinct hardware. A <code>partition</code> placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement groups</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostCreatePlacementGroup(ctx context.Context, request operations.PostCreatePlacementGroupRequest) (*operations.PostCreatePlacementGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreatePlacementGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14366,7 +14725,7 @@ func (s *SDK) PostCreatePlacementGroup(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14396,8 +14755,9 @@ func (s *SDK) PostCreatePlacementGroup(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostCreateReplaceRootVolumeTask - <p>Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateReplaceRootVolumeTask(ctx context.Context, request operations.PostCreateReplaceRootVolumeTaskRequest) (*operations.PostCreateReplaceRootVolumeTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateReplaceRootVolumeTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14416,7 +14776,7 @@ func (s *SDK) PostCreateReplaceRootVolumeTask(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14446,8 +14806,9 @@ func (s *SDK) PostCreateReplaceRootVolumeTask(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostCreateReservedInstancesListing - <p>Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <note> <p>Only Standard Reserved Instances can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances cannot be sold.</p> </note> <p>The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances.</p> <p>To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostCreateReservedInstancesListing(ctx context.Context, request operations.PostCreateReservedInstancesListingRequest) (*operations.PostCreateReservedInstancesListingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateReservedInstancesListing"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14466,7 +14827,7 @@ func (s *SDK) PostCreateReservedInstancesListing(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14496,8 +14857,9 @@ func (s *SDK) PostCreateReservedInstancesListing(ctx context.Context, request op
 	return res, nil
 }
 
+// PostCreateRestoreImageTask - <p>Starts a task that restores an AMI from an Amazon S3 object that was previously created by using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html">CreateStoreImageTask</a>.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using Amazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using Amazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateRestoreImageTask(ctx context.Context, request operations.PostCreateRestoreImageTaskRequest) (*operations.PostCreateRestoreImageTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateRestoreImageTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14516,7 +14878,7 @@ func (s *SDK) PostCreateRestoreImageTask(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14546,8 +14908,9 @@ func (s *SDK) PostCreateRestoreImageTask(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostCreateRoute - <p>Creates a route in a route table within a VPC.</p> <p>You must specify one of the following targets: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, egress-only internet gateway, or transit gateway.</p> <p>When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address <code>192.0.2.3</code>, and the route table includes the following two IPv4 routes:</p> <ul> <li> <p> <code>192.0.2.0/24</code> (goes to some target A)</p> </li> <li> <p> <code>192.0.2.0/28</code> (goes to some target B)</p> </li> </ul> <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic.</p> <p>For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateRoute(ctx context.Context, request operations.PostCreateRouteRequest) (*operations.PostCreateRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14566,7 +14929,7 @@ func (s *SDK) PostCreateRoute(ctx context.Context, request operations.PostCreate
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14596,8 +14959,9 @@ func (s *SDK) PostCreateRoute(ctx context.Context, request operations.PostCreate
 	return res, nil
 }
 
+// PostCreateRouteTable - <p>Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateRouteTable(ctx context.Context, request operations.PostCreateRouteTableRequest) (*operations.PostCreateRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14616,7 +14980,7 @@ func (s *SDK) PostCreateRouteTable(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14646,8 +15010,9 @@ func (s *SDK) PostCreateRouteTable(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCreateSecurityGroup - <p>Creates a security group.</p> <p>A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Amazon EC2 security groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html">Security groups for your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name.</p> <p>You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other.</p> <p>You can add or remove rules from your security groups using <a>AuthorizeSecurityGroupIngress</a>, <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupIngress</a>, and <a>RevokeSecurityGroupEgress</a>.</p> <p>For more information about VPC security group limits, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html">Amazon VPC Limits</a>.</p>
 func (s *SDK) PostCreateSecurityGroup(ctx context.Context, request operations.PostCreateSecurityGroupRequest) (*operations.PostCreateSecurityGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateSecurityGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14666,7 +15031,7 @@ func (s *SDK) PostCreateSecurityGroup(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14696,8 +15061,9 @@ func (s *SDK) PostCreateSecurityGroup(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostCreateSnapshot - <p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance.</p> <p>You can create snapshots of volumes in a Region and volumes on an Outpost. If you create a snapshot of a volume in a Region, the snapshot must be stored in the same Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot can be stored on the same Outpost as the volume, or in the Region for that Outpost.</p> <p>When a snapshot is created, any Amazon Web Services Marketplace product codes that are associated with the source volume are propagated to the snapshot.</p> <p>You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your Amazon EBS volume at the time the snapshot command is issued; this might exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is <code>pending</code>.</p> <p>To create a snapshot for Amazon EBS volumes that serve as root devices, you should stop the instance before taking the snapshot.</p> <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected.</p> <p>You can tag your snapshots during creation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tag your Amazon EC2 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html">Amazon Elastic Block Store</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateSnapshot(ctx context.Context, request operations.PostCreateSnapshotRequest) (*operations.PostCreateSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14716,7 +15082,7 @@ func (s *SDK) PostCreateSnapshot(ctx context.Context, request operations.PostCre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14746,8 +15112,9 @@ func (s *SDK) PostCreateSnapshot(ctx context.Context, request operations.PostCre
 	return res, nil
 }
 
+// PostCreateSnapshots - <p>Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the parameters. </p> <p>You can create multi-volume snapshots of instances in a Region and instances on an Outpost. If you create snapshots from an instance in a Region, the snapshots must be stored in the same Region as the instance. If you create snapshots from an instance on an Outpost, the snapshots can be stored on the same Outpost as the instance, or in the Region for that Outpost.</p>
 func (s *SDK) PostCreateSnapshots(ctx context.Context, request operations.PostCreateSnapshotsRequest) (*operations.PostCreateSnapshotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateSnapshots"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14766,7 +15133,7 @@ func (s *SDK) PostCreateSnapshots(ctx context.Context, request operations.PostCr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14796,8 +15163,9 @@ func (s *SDK) PostCreateSnapshots(ctx context.Context, request operations.PostCr
 	return res, nil
 }
 
+// PostCreateSpotDatafeedSubscription - Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html">Spot Instance data feed</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.
 func (s *SDK) PostCreateSpotDatafeedSubscription(ctx context.Context, request operations.PostCreateSpotDatafeedSubscriptionRequest) (*operations.PostCreateSpotDatafeedSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateSpotDatafeedSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14816,7 +15184,7 @@ func (s *SDK) PostCreateSpotDatafeedSubscription(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14846,8 +15214,9 @@ func (s *SDK) PostCreateSpotDatafeedSubscription(ctx context.Context, request op
 	return res, nil
 }
 
+// PostCreateStoreImageTask - <p>Stores an AMI as a single object in an Amazon S3 bucket.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using Amazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using Amazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateStoreImageTask(ctx context.Context, request operations.PostCreateStoreImageTaskRequest) (*operations.PostCreateStoreImageTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateStoreImageTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14866,7 +15235,7 @@ func (s *SDK) PostCreateStoreImageTask(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14896,8 +15265,9 @@ func (s *SDK) PostCreateStoreImageTask(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostCreateSubnet - <p>Creates a subnet in a specified VPC.</p> <p>You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC.</p> <p>If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. </p> <important> <p>Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.</p> </important> <p>If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle.</p> <p>When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available.</p> <p>For more information about subnets, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateSubnet(ctx context.Context, request operations.PostCreateSubnetRequest) (*operations.PostCreateSubnetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateSubnet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14916,7 +15286,7 @@ func (s *SDK) PostCreateSubnet(ctx context.Context, request operations.PostCreat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14946,8 +15316,9 @@ func (s *SDK) PostCreateSubnet(ctx context.Context, request operations.PostCreat
 	return res, nil
 }
 
+// PostCreateSubnetCidrReservation - Creates a subnet CIDR reservation. For information about subnet CIDR reservations, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html">Subnet CIDR reservations</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.
 func (s *SDK) PostCreateSubnetCidrReservation(ctx context.Context, request operations.PostCreateSubnetCidrReservationRequest) (*operations.PostCreateSubnetCidrReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateSubnetCidrReservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14966,7 +15337,7 @@ func (s *SDK) PostCreateSubnetCidrReservation(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14996,8 +15367,9 @@ func (s *SDK) PostCreateSubnetCidrReservation(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostCreateTags - <p>Adds or overwrites only the specified tags for the specified Amazon EC2 resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about creating IAM policies that control users' access to resources based on tags, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html">Supported Resource-Level Permissions for Amazon EC2 API Actions</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateTags(ctx context.Context, request operations.PostCreateTagsRequest) (*operations.PostCreateTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15016,7 +15388,7 @@ func (s *SDK) PostCreateTags(ctx context.Context, request operations.PostCreateT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15037,8 +15409,9 @@ func (s *SDK) PostCreateTags(ctx context.Context, request operations.PostCreateT
 	return res, nil
 }
 
+// PostCreateTrafficMirrorFilter - <p>Creates a Traffic Mirror filter.</p> <p>A Traffic Mirror filter is a set of rules that defines the traffic to mirror.</p> <p>By default, no traffic is mirrored. To mirror traffic, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm">CreateTrafficMirrorFilterRule</a> to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html">ModifyTrafficMirrorFilterNetworkServices</a> to mirror supported network services.</p>
 func (s *SDK) PostCreateTrafficMirrorFilter(ctx context.Context, request operations.PostCreateTrafficMirrorFilterRequest) (*operations.PostCreateTrafficMirrorFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTrafficMirrorFilter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15057,7 +15430,7 @@ func (s *SDK) PostCreateTrafficMirrorFilter(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15087,8 +15460,9 @@ func (s *SDK) PostCreateTrafficMirrorFilter(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostCreateTrafficMirrorFilterRule - <p>Creates a Traffic Mirror filter rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>
 func (s *SDK) PostCreateTrafficMirrorFilterRule(ctx context.Context, request operations.PostCreateTrafficMirrorFilterRuleRequest) (*operations.PostCreateTrafficMirrorFilterRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTrafficMirrorFilterRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15107,7 +15481,7 @@ func (s *SDK) PostCreateTrafficMirrorFilterRule(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15137,8 +15511,9 @@ func (s *SDK) PostCreateTrafficMirrorFilterRule(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostCreateTrafficMirrorSession - <p>Creates a Traffic Mirror session.</p> <p>A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic.</p> <p>The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway. </p> <p>By default, no traffic is mirrored. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm">CreateTrafficMirrorFilter</a> to create filter rules that specify the traffic to mirror.</p>
 func (s *SDK) PostCreateTrafficMirrorSession(ctx context.Context, request operations.PostCreateTrafficMirrorSessionRequest) (*operations.PostCreateTrafficMirrorSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTrafficMirrorSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15157,7 +15532,7 @@ func (s *SDK) PostCreateTrafficMirrorSession(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15187,8 +15562,9 @@ func (s *SDK) PostCreateTrafficMirrorSession(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostCreateTrafficMirrorTarget - <p>Creates a target for your Traffic Mirror session.</p> <p>A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway.</p> <p>A Traffic Mirror target can be a network interface, or a Network Load Balancer.</p> <p>To use the target in a Traffic Mirror session, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm">CreateTrafficMirrorSession</a>.</p>
 func (s *SDK) PostCreateTrafficMirrorTarget(ctx context.Context, request operations.PostCreateTrafficMirrorTargetRequest) (*operations.PostCreateTrafficMirrorTargetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTrafficMirrorTarget"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15207,7 +15583,7 @@ func (s *SDK) PostCreateTrafficMirrorTarget(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15237,8 +15613,9 @@ func (s *SDK) PostCreateTrafficMirrorTarget(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostCreateTransitGateway - <p>Creates a transit gateway.</p> <p>You can use a transit gateway to interconnect your virtual private clouds (VPC) and on-premises networks. After the transit gateway enters the <code>available</code> state, you can attach your VPCs and VPN connections to the transit gateway.</p> <p>To attach your VPCs, use <a>CreateTransitGatewayVpcAttachment</a>.</p> <p>To attach a VPN connection, use <a>CreateCustomerGateway</a> to create a customer gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to <a>CreateVpnConnection</a>.</p> <p>When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table and the default propagation route table. You can use <a>CreateTransitGatewayRouteTable</a> to create additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. You can use <a>EnableTransitGatewayRouteTablePropagation</a> to propagate routes from a resource attachment to a transit gateway route table. If you disable automatic associations, you can use <a>AssociateTransitGatewayRouteTable</a> to associate a resource attachment with a transit gateway route table.</p>
 func (s *SDK) PostCreateTransitGateway(ctx context.Context, request operations.PostCreateTransitGatewayRequest) (*operations.PostCreateTransitGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15257,7 +15634,7 @@ func (s *SDK) PostCreateTransitGateway(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15287,8 +15664,9 @@ func (s *SDK) PostCreateTransitGateway(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostCreateTransitGatewayConnect - <p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p> <p>A Connect attachment uses an existing VPC or Amazon Web Services Direct Connect attachment as the underlying transport mechanism.</p>
 func (s *SDK) PostCreateTransitGatewayConnect(ctx context.Context, request operations.PostCreateTransitGatewayConnectRequest) (*operations.PostCreateTransitGatewayConnectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayConnect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15307,7 +15685,7 @@ func (s *SDK) PostCreateTransitGatewayConnect(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15337,8 +15715,9 @@ func (s *SDK) PostCreateTransitGatewayConnect(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostCreateTransitGatewayConnectPeer - <p>Creates a Connect peer for a specified transit gateway Connect attachment between a transit gateway and an appliance.</p> <p>The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer">Connect peers</a> in the <i>Transit Gateways Guide</i>.</p>
 func (s *SDK) PostCreateTransitGatewayConnectPeer(ctx context.Context, request operations.PostCreateTransitGatewayConnectPeerRequest) (*operations.PostCreateTransitGatewayConnectPeerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayConnectPeer"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15357,7 +15736,7 @@ func (s *SDK) PostCreateTransitGatewayConnectPeer(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15387,8 +15766,9 @@ func (s *SDK) PostCreateTransitGatewayConnectPeer(ctx context.Context, request o
 	return res, nil
 }
 
+// PostCreateTransitGatewayMulticastDomain - <p>Creates a multicast domain using the specified transit gateway.</p> <p>The transit gateway must be in the available state before you create a domain. Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGateways.html">DescribeTransitGateways</a> to see the state of transit gateway.</p>
 func (s *SDK) PostCreateTransitGatewayMulticastDomain(ctx context.Context, request operations.PostCreateTransitGatewayMulticastDomainRequest) (*operations.PostCreateTransitGatewayMulticastDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayMulticastDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15407,7 +15787,7 @@ func (s *SDK) PostCreateTransitGatewayMulticastDomain(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15437,8 +15817,9 @@ func (s *SDK) PostCreateTransitGatewayMulticastDomain(ctx context.Context, reque
 	return res, nil
 }
 
+// PostCreateTransitGatewayPeeringAttachment - <p>Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account.</p> <p>After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.</p>
 func (s *SDK) PostCreateTransitGatewayPeeringAttachment(ctx context.Context, request operations.PostCreateTransitGatewayPeeringAttachmentRequest) (*operations.PostCreateTransitGatewayPeeringAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayPeeringAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15457,7 +15838,7 @@ func (s *SDK) PostCreateTransitGatewayPeeringAttachment(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15487,8 +15868,9 @@ func (s *SDK) PostCreateTransitGatewayPeeringAttachment(ctx context.Context, req
 	return res, nil
 }
 
+// PostCreateTransitGatewayPrefixListReference - Creates a reference (route) to a prefix list in a specified transit gateway route table.
 func (s *SDK) PostCreateTransitGatewayPrefixListReference(ctx context.Context, request operations.PostCreateTransitGatewayPrefixListReferenceRequest) (*operations.PostCreateTransitGatewayPrefixListReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayPrefixListReference"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15507,7 +15889,7 @@ func (s *SDK) PostCreateTransitGatewayPrefixListReference(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15537,8 +15919,9 @@ func (s *SDK) PostCreateTransitGatewayPrefixListReference(ctx context.Context, r
 	return res, nil
 }
 
+// PostCreateTransitGatewayRoute - Creates a static route for the specified transit gateway route table.
 func (s *SDK) PostCreateTransitGatewayRoute(ctx context.Context, request operations.PostCreateTransitGatewayRouteRequest) (*operations.PostCreateTransitGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15557,7 +15940,7 @@ func (s *SDK) PostCreateTransitGatewayRoute(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15587,8 +15970,9 @@ func (s *SDK) PostCreateTransitGatewayRoute(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostCreateTransitGatewayRouteTable - Creates a route table for the specified transit gateway.
 func (s *SDK) PostCreateTransitGatewayRouteTable(ctx context.Context, request operations.PostCreateTransitGatewayRouteTableRequest) (*operations.PostCreateTransitGatewayRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15607,7 +15991,7 @@ func (s *SDK) PostCreateTransitGatewayRouteTable(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15637,8 +16021,9 @@ func (s *SDK) PostCreateTransitGatewayRouteTable(ctx context.Context, request op
 	return res, nil
 }
 
+// PostCreateTransitGatewayVpcAttachment - <p>Attaches the specified VPC to the specified transit gateway.</p> <p>If you attach a VPC with a CIDR range that overlaps the CIDR range of a VPC that is already attached, the new VPC CIDR range is not propagated to the default propagation route table.</p> <p>To send VPC traffic to an attached transit gateway, add a route to the VPC route table using <a>CreateRoute</a>.</p>
 func (s *SDK) PostCreateTransitGatewayVpcAttachment(ctx context.Context, request operations.PostCreateTransitGatewayVpcAttachmentRequest) (*operations.PostCreateTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateTransitGatewayVpcAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15657,7 +16042,7 @@ func (s *SDK) PostCreateTransitGatewayVpcAttachment(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15687,8 +16072,9 @@ func (s *SDK) PostCreateTransitGatewayVpcAttachment(ctx context.Context, request
 	return res, nil
 }
 
+// PostCreateVolume - <p>Creates an EBS volume that can be attached to an instance in the same Availability Zone.</p> <p>You can create a new empty volume or restore a volume from an EBS snapshot. Any Amazon Web Services Marketplace product codes from the snapshot are propagated to the volume.</p> <p>You can create encrypted volumes. Encrypted volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can tag your volumes during creation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tag your Amazon EC2 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html">Create an Amazon EBS volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateVolume(ctx context.Context, request operations.PostCreateVolumeRequest) (*operations.PostCreateVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVolume"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15707,7 +16093,7 @@ func (s *SDK) PostCreateVolume(ctx context.Context, request operations.PostCreat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15737,8 +16123,9 @@ func (s *SDK) PostCreateVolume(ctx context.Context, request operations.PostCreat
 	return res, nil
 }
 
+// PostCreateVpc - <p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>).</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP options sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateVpc(ctx context.Context, request operations.PostCreateVpcRequest) (*operations.PostCreateVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpc"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15757,7 +16144,7 @@ func (s *SDK) PostCreateVpc(ctx context.Context, request operations.PostCreateVp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15787,8 +16174,9 @@ func (s *SDK) PostCreateVpc(ctx context.Context, request operations.PostCreateVp
 	return res, nil
 }
 
+// PostCreateVpcEndpoint - <p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>
 func (s *SDK) PostCreateVpcEndpoint(ctx context.Context, request operations.PostCreateVpcEndpointRequest) (*operations.PostCreateVpcEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpcEndpoint"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15807,7 +16195,7 @@ func (s *SDK) PostCreateVpcEndpoint(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15837,8 +16225,9 @@ func (s *SDK) PostCreateVpcEndpoint(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostCreateVpcEndpointConnectionNotification - <p>Creates a connection notification for a specified VPC endpoint or VPC endpoint service. A connection notification notifies you of specific endpoint events. You must create an SNS topic to receive notifications. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Create a Topic</a> in the <i>Amazon Simple Notification Service Developer Guide</i>.</p> <p>You can create a connection notification for interface endpoints only.</p>
 func (s *SDK) PostCreateVpcEndpointConnectionNotification(ctx context.Context, request operations.PostCreateVpcEndpointConnectionNotificationRequest) (*operations.PostCreateVpcEndpointConnectionNotificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpcEndpointConnectionNotification"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15857,7 +16246,7 @@ func (s *SDK) PostCreateVpcEndpointConnectionNotification(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15887,8 +16276,9 @@ func (s *SDK) PostCreateVpcEndpointConnectionNotification(ctx context.Context, r
 	return res, nil
 }
 
+// PostCreateVpcEndpointServiceConfiguration - <p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect.</p> <p>To create an endpoint service configuration, you must first create one of the following for your service:</p> <ul> <li> <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html">Network Load Balancer</a>. Service consumers connect to your service using an interface endpoint.</p> </li> <li> <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html">Gateway Load Balancer</a>. Service consumers connect to your service using a Gateway Load Balancer endpoint.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostCreateVpcEndpointServiceConfiguration(ctx context.Context, request operations.PostCreateVpcEndpointServiceConfigurationRequest) (*operations.PostCreateVpcEndpointServiceConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpcEndpointServiceConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15907,7 +16297,7 @@ func (s *SDK) PostCreateVpcEndpointServiceConfiguration(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15937,8 +16327,9 @@ func (s *SDK) PostCreateVpcEndpointServiceConfiguration(ctx context.Context, req
 	return res, nil
 }
 
+// PostCreateVpcPeeringConnection - <p>Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another Amazon Web Services account and can be in a different Region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.</p> <note> <p>Limitations and rules apply to a VPC peering connection. For more information, see the <a href="https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations">limitations</a> section in the <i>VPC Peering Guide</i>.</p> </note> <p>The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected.</p> <p>If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of <code>failed</code>.</p>
 func (s *SDK) PostCreateVpcPeeringConnection(ctx context.Context, request operations.PostCreateVpcPeeringConnectionRequest) (*operations.PostCreateVpcPeeringConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpcPeeringConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -15957,7 +16348,7 @@ func (s *SDK) PostCreateVpcPeeringConnection(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15987,8 +16378,9 @@ func (s *SDK) PostCreateVpcPeeringConnection(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostCreateVpnConnection - <p>Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) PostCreateVpnConnection(ctx context.Context, request operations.PostCreateVpnConnectionRequest) (*operations.PostCreateVpnConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpnConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16007,7 +16399,7 @@ func (s *SDK) PostCreateVpnConnection(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16037,8 +16429,9 @@ func (s *SDK) PostCreateVpnConnection(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostCreateVpnConnectionRoute - <p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) PostCreateVpnConnectionRoute(ctx context.Context, request operations.PostCreateVpnConnectionRouteRequest) (*operations.PostCreateVpnConnectionRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpnConnectionRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16057,7 +16450,7 @@ func (s *SDK) PostCreateVpnConnectionRoute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16078,8 +16471,9 @@ func (s *SDK) PostCreateVpnConnectionRoute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostCreateVpnGateway - <p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) PostCreateVpnGateway(ctx context.Context, request operations.PostCreateVpnGatewayRequest) (*operations.PostCreateVpnGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateVpnGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16098,7 +16492,7 @@ func (s *SDK) PostCreateVpnGateway(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16128,8 +16522,9 @@ func (s *SDK) PostCreateVpnGateway(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostDeleteCarrierGateway - <p>Deletes a carrier gateway.</p> <important> <p>If you do not delete the route that contains the carrier gateway as the Target, the route is a blackhole route. For information about how to delete a route, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html">DeleteRoute</a>.</p> </important>
 func (s *SDK) PostDeleteCarrierGateway(ctx context.Context, request operations.PostDeleteCarrierGatewayRequest) (*operations.PostDeleteCarrierGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteCarrierGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16148,7 +16543,7 @@ func (s *SDK) PostDeleteCarrierGateway(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16178,8 +16573,9 @@ func (s *SDK) PostDeleteCarrierGateway(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDeleteClientVpnEndpoint - Deletes the specified Client VPN endpoint. You must disassociate all target networks before you can delete a Client VPN endpoint.
 func (s *SDK) PostDeleteClientVpnEndpoint(ctx context.Context, request operations.PostDeleteClientVpnEndpointRequest) (*operations.PostDeleteClientVpnEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteClientVpnEndpoint"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16198,7 +16594,7 @@ func (s *SDK) PostDeleteClientVpnEndpoint(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16228,8 +16624,9 @@ func (s *SDK) PostDeleteClientVpnEndpoint(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDeleteClientVpnRoute - Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using the <b>CreateClientVpnRoute</b> action. You cannot delete routes that were automatically added when associating a subnet. To remove routes that have been automatically added, disassociate the target subnet from the Client VPN endpoint.
 func (s *SDK) PostDeleteClientVpnRoute(ctx context.Context, request operations.PostDeleteClientVpnRouteRequest) (*operations.PostDeleteClientVpnRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteClientVpnRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16248,7 +16645,7 @@ func (s *SDK) PostDeleteClientVpnRoute(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16278,8 +16675,9 @@ func (s *SDK) PostDeleteClientVpnRoute(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDeleteCustomerGateway - Deletes the specified customer gateway. You must delete the VPN connection before you can delete the customer gateway.
 func (s *SDK) PostDeleteCustomerGateway(ctx context.Context, request operations.PostDeleteCustomerGatewayRequest) (*operations.PostDeleteCustomerGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteCustomerGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16298,7 +16696,7 @@ func (s *SDK) PostDeleteCustomerGateway(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16319,8 +16717,9 @@ func (s *SDK) PostDeleteCustomerGateway(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostDeleteDhcpOptions - Deletes the specified set of DHCP options. You must disassociate the set of DHCP options before you can delete it. You can disassociate the set of DHCP options by associating either a new set of options or the default set of options with the VPC.
 func (s *SDK) PostDeleteDhcpOptions(ctx context.Context, request operations.PostDeleteDhcpOptionsRequest) (*operations.PostDeleteDhcpOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDhcpOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16339,7 +16738,7 @@ func (s *SDK) PostDeleteDhcpOptions(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16360,8 +16759,9 @@ func (s *SDK) PostDeleteDhcpOptions(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostDeleteEgressOnlyInternetGateway - Deletes an egress-only internet gateway.
 func (s *SDK) PostDeleteEgressOnlyInternetGateway(ctx context.Context, request operations.PostDeleteEgressOnlyInternetGatewayRequest) (*operations.PostDeleteEgressOnlyInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteEgressOnlyInternetGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16380,7 +16780,7 @@ func (s *SDK) PostDeleteEgressOnlyInternetGateway(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16410,8 +16810,9 @@ func (s *SDK) PostDeleteEgressOnlyInternetGateway(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDeleteFleets - <p>Deletes the specified EC2 Fleet.</p> <p>After you delete an EC2 Fleet, it launches no new instances.</p> <p>You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the <code>deleted_terminating</code> state. Otherwise, the EC2 Fleet enters the <code>deleted_running</code> state, and the instances continue to run until they are interrupted or you terminate them manually.</p> <p>For <code>instant</code> fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted <code>instant</code> fleet with running instances is not supported.</p> <p class="title"> <b>Restrictions</b> </p> <ul> <li> <p>You can delete up to 25 <code>instant</code> fleets in a single request. If you exceed this number, no <code>instant</code> fleets are deleted and an error is returned. There is no restriction on the number of fleets of type <code>maintain</code> or <code>request</code> that can be deleted in a single request.</p> </li> <li> <p>Up to 1000 instances can be terminated in a single request to delete <code>instant</code> fleets.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#delete-fleet">Deleting an EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDeleteFleets(ctx context.Context, request operations.PostDeleteFleetsRequest) (*operations.PostDeleteFleetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteFleets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16430,7 +16831,7 @@ func (s *SDK) PostDeleteFleets(ctx context.Context, request operations.PostDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16460,8 +16861,9 @@ func (s *SDK) PostDeleteFleets(ctx context.Context, request operations.PostDelet
 	return res, nil
 }
 
+// PostDeleteFlowLogs - Deletes one or more flow logs.
 func (s *SDK) PostDeleteFlowLogs(ctx context.Context, request operations.PostDeleteFlowLogsRequest) (*operations.PostDeleteFlowLogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteFlowLogs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16480,7 +16882,7 @@ func (s *SDK) PostDeleteFlowLogs(ctx context.Context, request operations.PostDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16510,8 +16912,9 @@ func (s *SDK) PostDeleteFlowLogs(ctx context.Context, request operations.PostDel
 	return res, nil
 }
 
+// PostDeleteFpgaImage - Deletes the specified Amazon FPGA Image (AFI).
 func (s *SDK) PostDeleteFpgaImage(ctx context.Context, request operations.PostDeleteFpgaImageRequest) (*operations.PostDeleteFpgaImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteFpgaImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16530,7 +16933,7 @@ func (s *SDK) PostDeleteFpgaImage(ctx context.Context, request operations.PostDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16560,8 +16963,9 @@ func (s *SDK) PostDeleteFpgaImage(ctx context.Context, request operations.PostDe
 	return res, nil
 }
 
+// PostDeleteInstanceEventWindow - <p>Deletes the specified event window.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDeleteInstanceEventWindow(ctx context.Context, request operations.PostDeleteInstanceEventWindowRequest) (*operations.PostDeleteInstanceEventWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteInstanceEventWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16580,7 +16984,7 @@ func (s *SDK) PostDeleteInstanceEventWindow(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16610,8 +17014,9 @@ func (s *SDK) PostDeleteInstanceEventWindow(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDeleteInternetGateway - Deletes the specified internet gateway. You must detach the internet gateway from the VPC before you can delete it.
 func (s *SDK) PostDeleteInternetGateway(ctx context.Context, request operations.PostDeleteInternetGatewayRequest) (*operations.PostDeleteInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteInternetGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16630,7 +17035,7 @@ func (s *SDK) PostDeleteInternetGateway(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16651,8 +17056,9 @@ func (s *SDK) PostDeleteInternetGateway(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostDeleteKeyPair - Deletes the specified key pair, by removing the public key from Amazon EC2.
 func (s *SDK) PostDeleteKeyPair(ctx context.Context, request operations.PostDeleteKeyPairRequest) (*operations.PostDeleteKeyPairResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteKeyPair"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16671,7 +17077,7 @@ func (s *SDK) PostDeleteKeyPair(ctx context.Context, request operations.PostDele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16692,8 +17098,9 @@ func (s *SDK) PostDeleteKeyPair(ctx context.Context, request operations.PostDele
 	return res, nil
 }
 
+// PostDeleteLaunchTemplate - Deletes a launch template. Deleting a launch template deletes all of its versions.
 func (s *SDK) PostDeleteLaunchTemplate(ctx context.Context, request operations.PostDeleteLaunchTemplateRequest) (*operations.PostDeleteLaunchTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLaunchTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16712,7 +17119,7 @@ func (s *SDK) PostDeleteLaunchTemplate(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16742,8 +17149,9 @@ func (s *SDK) PostDeleteLaunchTemplate(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDeleteLaunchTemplateVersions - Deletes one or more versions of a launch template. You cannot delete the default version of a launch template; you must first assign a different version as the default. If the default version is the only version for the launch template, you must delete the entire launch template using <a>DeleteLaunchTemplate</a>.
 func (s *SDK) PostDeleteLaunchTemplateVersions(ctx context.Context, request operations.PostDeleteLaunchTemplateVersionsRequest) (*operations.PostDeleteLaunchTemplateVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLaunchTemplateVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16762,7 +17170,7 @@ func (s *SDK) PostDeleteLaunchTemplateVersions(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16792,8 +17200,9 @@ func (s *SDK) PostDeleteLaunchTemplateVersions(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDeleteLocalGatewayRoute - Deletes the specified route from the specified local gateway route table.
 func (s *SDK) PostDeleteLocalGatewayRoute(ctx context.Context, request operations.PostDeleteLocalGatewayRouteRequest) (*operations.PostDeleteLocalGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLocalGatewayRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16812,7 +17221,7 @@ func (s *SDK) PostDeleteLocalGatewayRoute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16842,8 +17251,9 @@ func (s *SDK) PostDeleteLocalGatewayRoute(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDeleteLocalGatewayRouteTableVpcAssociation - Deletes the specified association between a VPC and local gateway route table.
 func (s *SDK) PostDeleteLocalGatewayRouteTableVpcAssociation(ctx context.Context, request operations.PostDeleteLocalGatewayRouteTableVpcAssociationRequest) (*operations.PostDeleteLocalGatewayRouteTableVpcAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteLocalGatewayRouteTableVpcAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16862,7 +17272,7 @@ func (s *SDK) PostDeleteLocalGatewayRouteTableVpcAssociation(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16892,8 +17302,9 @@ func (s *SDK) PostDeleteLocalGatewayRouteTableVpcAssociation(ctx context.Context
 	return res, nil
 }
 
+// PostDeleteManagedPrefixList - Deletes the specified managed prefix list. You must first remove all references to the prefix list in your resources.
 func (s *SDK) PostDeleteManagedPrefixList(ctx context.Context, request operations.PostDeleteManagedPrefixListRequest) (*operations.PostDeleteManagedPrefixListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteManagedPrefixList"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16912,7 +17323,7 @@ func (s *SDK) PostDeleteManagedPrefixList(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16942,8 +17353,9 @@ func (s *SDK) PostDeleteManagedPrefixList(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDeleteNatGateway - Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
 func (s *SDK) PostDeleteNatGateway(ctx context.Context, request operations.PostDeleteNatGatewayRequest) (*operations.PostDeleteNatGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNatGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16962,7 +17374,7 @@ func (s *SDK) PostDeleteNatGateway(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16992,8 +17404,9 @@ func (s *SDK) PostDeleteNatGateway(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDeleteNetworkACL - Deletes the specified network ACL. You can't delete the ACL if it's associated with any subnets. You can't delete the default network ACL.
 func (s *SDK) PostDeleteNetworkACL(ctx context.Context, request operations.PostDeleteNetworkACLRequest) (*operations.PostDeleteNetworkACLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkAcl"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17012,7 +17425,7 @@ func (s *SDK) PostDeleteNetworkACL(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17033,8 +17446,9 @@ func (s *SDK) PostDeleteNetworkACL(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDeleteNetworkACLEntry - Deletes the specified ingress or egress entry (rule) from the specified network ACL.
 func (s *SDK) PostDeleteNetworkACLEntry(ctx context.Context, request operations.PostDeleteNetworkACLEntryRequest) (*operations.PostDeleteNetworkACLEntryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkAclEntry"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17053,7 +17467,7 @@ func (s *SDK) PostDeleteNetworkACLEntry(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17074,8 +17488,9 @@ func (s *SDK) PostDeleteNetworkACLEntry(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostDeleteNetworkInsightsAnalysis - Deletes the specified network insights analysis.
 func (s *SDK) PostDeleteNetworkInsightsAnalysis(ctx context.Context, request operations.PostDeleteNetworkInsightsAnalysisRequest) (*operations.PostDeleteNetworkInsightsAnalysisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInsightsAnalysis"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17094,7 +17509,7 @@ func (s *SDK) PostDeleteNetworkInsightsAnalysis(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17124,8 +17539,9 @@ func (s *SDK) PostDeleteNetworkInsightsAnalysis(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDeleteNetworkInsightsPath - Deletes the specified path.
 func (s *SDK) PostDeleteNetworkInsightsPath(ctx context.Context, request operations.PostDeleteNetworkInsightsPathRequest) (*operations.PostDeleteNetworkInsightsPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInsightsPath"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17144,7 +17560,7 @@ func (s *SDK) PostDeleteNetworkInsightsPath(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17174,8 +17590,9 @@ func (s *SDK) PostDeleteNetworkInsightsPath(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDeleteNetworkInterface - Deletes the specified network interface. You must detach the network interface before you can delete it.
 func (s *SDK) PostDeleteNetworkInterface(ctx context.Context, request operations.PostDeleteNetworkInterfaceRequest) (*operations.PostDeleteNetworkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInterface"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17194,7 +17611,7 @@ func (s *SDK) PostDeleteNetworkInterface(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17215,8 +17632,9 @@ func (s *SDK) PostDeleteNetworkInterface(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDeleteNetworkInterfacePermission - Deletes a permission for a network interface. By default, you cannot delete the permission if the account for which you're removing the permission has attached the network interface to an instance. However, you can force delete the permission, regardless of any attachment.
 func (s *SDK) PostDeleteNetworkInterfacePermission(ctx context.Context, request operations.PostDeleteNetworkInterfacePermissionRequest) (*operations.PostDeleteNetworkInterfacePermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteNetworkInterfacePermission"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17235,7 +17653,7 @@ func (s *SDK) PostDeleteNetworkInterfacePermission(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17265,8 +17683,9 @@ func (s *SDK) PostDeleteNetworkInterfacePermission(ctx context.Context, request 
 	return res, nil
 }
 
+// PostDeletePlacementGroup - Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement groups</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) PostDeletePlacementGroup(ctx context.Context, request operations.PostDeletePlacementGroupRequest) (*operations.PostDeletePlacementGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeletePlacementGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17285,7 +17704,7 @@ func (s *SDK) PostDeletePlacementGroup(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17306,8 +17725,9 @@ func (s *SDK) PostDeletePlacementGroup(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDeleteQueuedReservedInstances - Deletes the queued purchases for the specified Reserved Instances.
 func (s *SDK) PostDeleteQueuedReservedInstances(ctx context.Context, request operations.PostDeleteQueuedReservedInstancesRequest) (*operations.PostDeleteQueuedReservedInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteQueuedReservedInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17326,7 +17746,7 @@ func (s *SDK) PostDeleteQueuedReservedInstances(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17356,8 +17776,9 @@ func (s *SDK) PostDeleteQueuedReservedInstances(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDeleteRoute - Deletes the specified route from the specified route table.
 func (s *SDK) PostDeleteRoute(ctx context.Context, request operations.PostDeleteRouteRequest) (*operations.PostDeleteRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17376,7 +17797,7 @@ func (s *SDK) PostDeleteRoute(ctx context.Context, request operations.PostDelete
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17397,8 +17818,9 @@ func (s *SDK) PostDeleteRoute(ctx context.Context, request operations.PostDelete
 	return res, nil
 }
 
+// PostDeleteRouteTable - Deletes the specified route table. You must disassociate the route table from any subnets before you can delete it. You can't delete the main route table.
 func (s *SDK) PostDeleteRouteTable(ctx context.Context, request operations.PostDeleteRouteTableRequest) (*operations.PostDeleteRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17417,7 +17839,7 @@ func (s *SDK) PostDeleteRouteTable(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17438,8 +17860,9 @@ func (s *SDK) PostDeleteRouteTable(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDeleteSecurityGroup - <p>Deletes a security group.</p> <p>If you attempt to delete a security group that is associated with an instance, or is referenced by another security group, the operation fails with <code>InvalidGroup.InUse</code> in EC2-Classic or <code>DependencyViolation</code> in EC2-VPC.</p>
 func (s *SDK) PostDeleteSecurityGroup(ctx context.Context, request operations.PostDeleteSecurityGroupRequest) (*operations.PostDeleteSecurityGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSecurityGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17458,7 +17881,7 @@ func (s *SDK) PostDeleteSecurityGroup(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17479,8 +17902,9 @@ func (s *SDK) PostDeleteSecurityGroup(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDeleteSnapshot - <p>Deletes the specified snapshot.</p> <p>When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume.</p> <p>You cannot delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html">Delete an Amazon EBS snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDeleteSnapshot(ctx context.Context, request operations.PostDeleteSnapshotRequest) (*operations.PostDeleteSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17499,7 +17923,7 @@ func (s *SDK) PostDeleteSnapshot(ctx context.Context, request operations.PostDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17520,8 +17944,9 @@ func (s *SDK) PostDeleteSnapshot(ctx context.Context, request operations.PostDel
 	return res, nil
 }
 
+// PostDeleteSpotDatafeedSubscription - Deletes the data feed for Spot Instances.
 func (s *SDK) PostDeleteSpotDatafeedSubscription(ctx context.Context, request operations.PostDeleteSpotDatafeedSubscriptionRequest) (*operations.PostDeleteSpotDatafeedSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSpotDatafeedSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17540,7 +17965,7 @@ func (s *SDK) PostDeleteSpotDatafeedSubscription(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17561,8 +17986,9 @@ func (s *SDK) PostDeleteSpotDatafeedSubscription(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDeleteSubnet - Deletes the specified subnet. You must terminate all running instances in the subnet before you can delete the subnet.
 func (s *SDK) PostDeleteSubnet(ctx context.Context, request operations.PostDeleteSubnetRequest) (*operations.PostDeleteSubnetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSubnet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17581,7 +18007,7 @@ func (s *SDK) PostDeleteSubnet(ctx context.Context, request operations.PostDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17602,8 +18028,9 @@ func (s *SDK) PostDeleteSubnet(ctx context.Context, request operations.PostDelet
 	return res, nil
 }
 
+// PostDeleteSubnetCidrReservation - Deletes a subnet CIDR reservation.
 func (s *SDK) PostDeleteSubnetCidrReservation(ctx context.Context, request operations.PostDeleteSubnetCidrReservationRequest) (*operations.PostDeleteSubnetCidrReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteSubnetCidrReservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17622,7 +18049,7 @@ func (s *SDK) PostDeleteSubnetCidrReservation(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17652,8 +18079,9 @@ func (s *SDK) PostDeleteSubnetCidrReservation(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDeleteTags - <p>Deletes the specified set of tags from the specified set of resources.</p> <p>To list the current tags, use <a>DescribeTags</a>. For more information about tags, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDeleteTags(ctx context.Context, request operations.PostDeleteTagsRequest) (*operations.PostDeleteTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17672,7 +18100,7 @@ func (s *SDK) PostDeleteTags(ctx context.Context, request operations.PostDeleteT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17693,8 +18121,9 @@ func (s *SDK) PostDeleteTags(ctx context.Context, request operations.PostDeleteT
 	return res, nil
 }
 
+// PostDeleteTrafficMirrorFilter - <p>Deletes the specified Traffic Mirror filter.</p> <p>You cannot delete a Traffic Mirror filter that is in use by a Traffic Mirror session.</p>
 func (s *SDK) PostDeleteTrafficMirrorFilter(ctx context.Context, request operations.PostDeleteTrafficMirrorFilterRequest) (*operations.PostDeleteTrafficMirrorFilterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorFilter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17713,7 +18142,7 @@ func (s *SDK) PostDeleteTrafficMirrorFilter(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17743,8 +18172,9 @@ func (s *SDK) PostDeleteTrafficMirrorFilter(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDeleteTrafficMirrorFilterRule - Deletes the specified Traffic Mirror rule.
 func (s *SDK) PostDeleteTrafficMirrorFilterRule(ctx context.Context, request operations.PostDeleteTrafficMirrorFilterRuleRequest) (*operations.PostDeleteTrafficMirrorFilterRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorFilterRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17763,7 +18193,7 @@ func (s *SDK) PostDeleteTrafficMirrorFilterRule(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17793,8 +18223,9 @@ func (s *SDK) PostDeleteTrafficMirrorFilterRule(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDeleteTrafficMirrorSession - Deletes the specified Traffic Mirror session.
 func (s *SDK) PostDeleteTrafficMirrorSession(ctx context.Context, request operations.PostDeleteTrafficMirrorSessionRequest) (*operations.PostDeleteTrafficMirrorSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17813,7 +18244,7 @@ func (s *SDK) PostDeleteTrafficMirrorSession(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17843,8 +18274,9 @@ func (s *SDK) PostDeleteTrafficMirrorSession(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDeleteTrafficMirrorTarget - <p>Deletes the specified Traffic Mirror target.</p> <p>You cannot delete a Traffic Mirror target that is in use by a Traffic Mirror session.</p>
 func (s *SDK) PostDeleteTrafficMirrorTarget(ctx context.Context, request operations.PostDeleteTrafficMirrorTargetRequest) (*operations.PostDeleteTrafficMirrorTargetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTrafficMirrorTarget"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17863,7 +18295,7 @@ func (s *SDK) PostDeleteTrafficMirrorTarget(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17893,8 +18325,9 @@ func (s *SDK) PostDeleteTrafficMirrorTarget(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDeleteTransitGateway - Deletes the specified transit gateway.
 func (s *SDK) PostDeleteTransitGateway(ctx context.Context, request operations.PostDeleteTransitGatewayRequest) (*operations.PostDeleteTransitGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17913,7 +18346,7 @@ func (s *SDK) PostDeleteTransitGateway(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17943,8 +18376,9 @@ func (s *SDK) PostDeleteTransitGateway(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDeleteTransitGatewayConnect - Deletes the specified Connect attachment. You must first delete any Connect peers for the attachment.
 func (s *SDK) PostDeleteTransitGatewayConnect(ctx context.Context, request operations.PostDeleteTransitGatewayConnectRequest) (*operations.PostDeleteTransitGatewayConnectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayConnect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -17963,7 +18397,7 @@ func (s *SDK) PostDeleteTransitGatewayConnect(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17993,8 +18427,9 @@ func (s *SDK) PostDeleteTransitGatewayConnect(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDeleteTransitGatewayConnectPeer - Deletes the specified Connect peer.
 func (s *SDK) PostDeleteTransitGatewayConnectPeer(ctx context.Context, request operations.PostDeleteTransitGatewayConnectPeerRequest) (*operations.PostDeleteTransitGatewayConnectPeerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayConnectPeer"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18013,7 +18448,7 @@ func (s *SDK) PostDeleteTransitGatewayConnectPeer(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18043,8 +18478,9 @@ func (s *SDK) PostDeleteTransitGatewayConnectPeer(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDeleteTransitGatewayMulticastDomain - Deletes the specified transit gateway multicast domain.
 func (s *SDK) PostDeleteTransitGatewayMulticastDomain(ctx context.Context, request operations.PostDeleteTransitGatewayMulticastDomainRequest) (*operations.PostDeleteTransitGatewayMulticastDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayMulticastDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18063,7 +18499,7 @@ func (s *SDK) PostDeleteTransitGatewayMulticastDomain(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18093,8 +18529,9 @@ func (s *SDK) PostDeleteTransitGatewayMulticastDomain(ctx context.Context, reque
 	return res, nil
 }
 
+// PostDeleteTransitGatewayPeeringAttachment - Deletes a transit gateway peering attachment.
 func (s *SDK) PostDeleteTransitGatewayPeeringAttachment(ctx context.Context, request operations.PostDeleteTransitGatewayPeeringAttachmentRequest) (*operations.PostDeleteTransitGatewayPeeringAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayPeeringAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18113,7 +18550,7 @@ func (s *SDK) PostDeleteTransitGatewayPeeringAttachment(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18143,8 +18580,9 @@ func (s *SDK) PostDeleteTransitGatewayPeeringAttachment(ctx context.Context, req
 	return res, nil
 }
 
+// PostDeleteTransitGatewayPrefixListReference - Deletes a reference (route) to a prefix list in a specified transit gateway route table.
 func (s *SDK) PostDeleteTransitGatewayPrefixListReference(ctx context.Context, request operations.PostDeleteTransitGatewayPrefixListReferenceRequest) (*operations.PostDeleteTransitGatewayPrefixListReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayPrefixListReference"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18163,7 +18601,7 @@ func (s *SDK) PostDeleteTransitGatewayPrefixListReference(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18193,8 +18631,9 @@ func (s *SDK) PostDeleteTransitGatewayPrefixListReference(ctx context.Context, r
 	return res, nil
 }
 
+// PostDeleteTransitGatewayRoute - Deletes the specified route from the specified transit gateway route table.
 func (s *SDK) PostDeleteTransitGatewayRoute(ctx context.Context, request operations.PostDeleteTransitGatewayRouteRequest) (*operations.PostDeleteTransitGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18213,7 +18652,7 @@ func (s *SDK) PostDeleteTransitGatewayRoute(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18243,8 +18682,9 @@ func (s *SDK) PostDeleteTransitGatewayRoute(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDeleteTransitGatewayRouteTable - Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
 func (s *SDK) PostDeleteTransitGatewayRouteTable(ctx context.Context, request operations.PostDeleteTransitGatewayRouteTableRequest) (*operations.PostDeleteTransitGatewayRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18263,7 +18703,7 @@ func (s *SDK) PostDeleteTransitGatewayRouteTable(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18293,8 +18733,9 @@ func (s *SDK) PostDeleteTransitGatewayRouteTable(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDeleteTransitGatewayVpcAttachment - Deletes the specified VPC attachment.
 func (s *SDK) PostDeleteTransitGatewayVpcAttachment(ctx context.Context, request operations.PostDeleteTransitGatewayVpcAttachmentRequest) (*operations.PostDeleteTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteTransitGatewayVpcAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18313,7 +18754,7 @@ func (s *SDK) PostDeleteTransitGatewayVpcAttachment(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18343,8 +18784,9 @@ func (s *SDK) PostDeleteTransitGatewayVpcAttachment(ctx context.Context, request
 	return res, nil
 }
 
+// PostDeleteVolume - <p>Deletes the specified EBS volume. The volume must be in the <code>available</code> state (not attached to an instance).</p> <p>The volume can remain in the <code>deleting</code> state for several minutes.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html">Delete an Amazon EBS volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDeleteVolume(ctx context.Context, request operations.PostDeleteVolumeRequest) (*operations.PostDeleteVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVolume"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18363,7 +18805,7 @@ func (s *SDK) PostDeleteVolume(ctx context.Context, request operations.PostDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18384,8 +18826,9 @@ func (s *SDK) PostDeleteVolume(ctx context.Context, request operations.PostDelet
 	return res, nil
 }
 
+// PostDeleteVpc - Deletes the specified VPC. You must detach or delete all gateways and resources that are associated with the VPC before you can delete it. For example, you must terminate all instances running in the VPC, delete all security groups associated with the VPC (except the default one), delete all route tables associated with the VPC (except the default one), and so on.
 func (s *SDK) PostDeleteVpc(ctx context.Context, request operations.PostDeleteVpcRequest) (*operations.PostDeleteVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpc"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18404,7 +18847,7 @@ func (s *SDK) PostDeleteVpc(ctx context.Context, request operations.PostDeleteVp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18425,8 +18868,9 @@ func (s *SDK) PostDeleteVpc(ctx context.Context, request operations.PostDeleteVp
 	return res, nil
 }
 
+// PostDeleteVpcEndpointConnectionNotifications - Deletes one or more VPC endpoint connection notifications.
 func (s *SDK) PostDeleteVpcEndpointConnectionNotifications(ctx context.Context, request operations.PostDeleteVpcEndpointConnectionNotificationsRequest) (*operations.PostDeleteVpcEndpointConnectionNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcEndpointConnectionNotifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18445,7 +18889,7 @@ func (s *SDK) PostDeleteVpcEndpointConnectionNotifications(ctx context.Context, 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18475,8 +18919,9 @@ func (s *SDK) PostDeleteVpcEndpointConnectionNotifications(ctx context.Context, 
 	return res, nil
 }
 
+// PostDeleteVpcEndpointServiceConfigurations - Deletes one or more VPC endpoint service configurations in your account. Before you delete the endpoint service configuration, you must reject any <code>Available</code> or <code>PendingAcceptance</code> interface endpoint connections that are attached to the service.
 func (s *SDK) PostDeleteVpcEndpointServiceConfigurations(ctx context.Context, request operations.PostDeleteVpcEndpointServiceConfigurationsRequest) (*operations.PostDeleteVpcEndpointServiceConfigurationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcEndpointServiceConfigurations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18495,7 +18940,7 @@ func (s *SDK) PostDeleteVpcEndpointServiceConfigurations(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18525,8 +18970,9 @@ func (s *SDK) PostDeleteVpcEndpointServiceConfigurations(ctx context.Context, re
 	return res, nil
 }
 
+// PostDeleteVpcEndpoints - <p>Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints. </p> <ul> <li> <p>Gateway endpoint,</p> </li> <li> <p>Gateway Load Balancer endpoint,</p> </li> <li> <p>Interface endpoint</p> </li> </ul> <p>The following rules apply when you delete a VPC endpoint:</p> <ul> <li> <p>When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.</p> </li> <li> <p>When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces. </p> <p>You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.</p> </li> <li> <p>When you delete an interface endpoint, we delete the endpoint network interfaces.</p> </li> </ul>
 func (s *SDK) PostDeleteVpcEndpoints(ctx context.Context, request operations.PostDeleteVpcEndpointsRequest) (*operations.PostDeleteVpcEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcEndpoints"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18545,7 +18991,7 @@ func (s *SDK) PostDeleteVpcEndpoints(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18575,8 +19021,9 @@ func (s *SDK) PostDeleteVpcEndpoints(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostDeleteVpcPeeringConnection - Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the <code>active</code> state. The owner of the requester VPC can delete a VPC peering connection in the <code>pending-acceptance</code> state. You cannot delete a VPC peering connection that's in the <code>failed</code> state.
 func (s *SDK) PostDeleteVpcPeeringConnection(ctx context.Context, request operations.PostDeleteVpcPeeringConnectionRequest) (*operations.PostDeleteVpcPeeringConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpcPeeringConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18595,7 +19042,7 @@ func (s *SDK) PostDeleteVpcPeeringConnection(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18625,8 +19072,9 @@ func (s *SDK) PostDeleteVpcPeeringConnection(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDeleteVpnConnection - <p>Deletes the specified VPN connection.</p> <p>If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID.</p> <p>For certificate-based authentication, delete all AWS Certificate Manager (ACM) private certificates used for the AWS-side tunnel endpoints for the VPN connection before deleting the VPN connection.</p>
 func (s *SDK) PostDeleteVpnConnection(ctx context.Context, request operations.PostDeleteVpnConnectionRequest) (*operations.PostDeleteVpnConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpnConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18645,7 +19093,7 @@ func (s *SDK) PostDeleteVpnConnection(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18666,8 +19114,9 @@ func (s *SDK) PostDeleteVpnConnection(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDeleteVpnConnectionRoute - Deletes the specified static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.
 func (s *SDK) PostDeleteVpnConnectionRoute(ctx context.Context, request operations.PostDeleteVpnConnectionRouteRequest) (*operations.PostDeleteVpnConnectionRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpnConnectionRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18686,7 +19135,7 @@ func (s *SDK) PostDeleteVpnConnectionRoute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18707,8 +19156,9 @@ func (s *SDK) PostDeleteVpnConnectionRoute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDeleteVpnGateway - Deletes the specified virtual private gateway. You must first detach the virtual private gateway from the VPC. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.
 func (s *SDK) PostDeleteVpnGateway(ctx context.Context, request operations.PostDeleteVpnGatewayRequest) (*operations.PostDeleteVpnGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteVpnGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18727,7 +19177,7 @@ func (s *SDK) PostDeleteVpnGateway(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18748,8 +19198,9 @@ func (s *SDK) PostDeleteVpnGateway(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDeprovisionByoipCidr - <p>Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p> <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its address range.</p>
 func (s *SDK) PostDeprovisionByoipCidr(ctx context.Context, request operations.PostDeprovisionByoipCidrRequest) (*operations.PostDeprovisionByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeprovisionByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18768,7 +19219,7 @@ func (s *SDK) PostDeprovisionByoipCidr(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18798,8 +19249,9 @@ func (s *SDK) PostDeprovisionByoipCidr(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDeregisterImage - <p>Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them.</p> <p>When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.</p>
 func (s *SDK) PostDeregisterImage(ctx context.Context, request operations.PostDeregisterImageRequest) (*operations.PostDeregisterImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18818,7 +19270,7 @@ func (s *SDK) PostDeregisterImage(ctx context.Context, request operations.PostDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18839,8 +19291,9 @@ func (s *SDK) PostDeregisterImage(ctx context.Context, request operations.PostDe
 	return res, nil
 }
 
+// PostDeregisterInstanceEventNotificationAttributes - <p>c</p> <p>Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.</p>
 func (s *SDK) PostDeregisterInstanceEventNotificationAttributes(ctx context.Context, request operations.PostDeregisterInstanceEventNotificationAttributesRequest) (*operations.PostDeregisterInstanceEventNotificationAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterInstanceEventNotificationAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18859,7 +19312,7 @@ func (s *SDK) PostDeregisterInstanceEventNotificationAttributes(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18889,8 +19342,9 @@ func (s *SDK) PostDeregisterInstanceEventNotificationAttributes(ctx context.Cont
 	return res, nil
 }
 
+// PostDeregisterTransitGatewayMulticastGroupMembers - Deregisters the specified members (network interfaces) from the transit gateway multicast group.
 func (s *SDK) PostDeregisterTransitGatewayMulticastGroupMembers(ctx context.Context, request operations.PostDeregisterTransitGatewayMulticastGroupMembersRequest) (*operations.PostDeregisterTransitGatewayMulticastGroupMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterTransitGatewayMulticastGroupMembers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18909,7 +19363,7 @@ func (s *SDK) PostDeregisterTransitGatewayMulticastGroupMembers(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18939,8 +19393,9 @@ func (s *SDK) PostDeregisterTransitGatewayMulticastGroupMembers(ctx context.Cont
 	return res, nil
 }
 
+// PostDeregisterTransitGatewayMulticastGroupSources - Deregisters the specified sources (network interfaces) from the transit gateway multicast group.
 func (s *SDK) PostDeregisterTransitGatewayMulticastGroupSources(ctx context.Context, request operations.PostDeregisterTransitGatewayMulticastGroupSourcesRequest) (*operations.PostDeregisterTransitGatewayMulticastGroupSourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeregisterTransitGatewayMulticastGroupSources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -18959,7 +19414,7 @@ func (s *SDK) PostDeregisterTransitGatewayMulticastGroupSources(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18989,8 +19444,9 @@ func (s *SDK) PostDeregisterTransitGatewayMulticastGroupSources(ctx context.Cont
 	return res, nil
 }
 
+// PostDescribeAccountAttributes - <p>Describes attributes of your AWS account. The following are the supported account attributes:</p> <ul> <li> <p> <code>supported-platforms</code>: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.</p> </li> <li> <p> <code>default-vpc</code>: The ID of the default VPC for your account, or <code>none</code>.</p> </li> <li> <p> <code>max-instances</code>: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits">On-Demand Instance Limits</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <code>vpc-max-security-groups-per-interface</code>: The maximum number of security groups that you can assign to a network interface.</p> </li> <li> <p> <code>max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic. </p> </li> <li> <p> <code>vpc-max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.</p> </li> </ul>
 func (s *SDK) PostDescribeAccountAttributes(ctx context.Context, request operations.PostDescribeAccountAttributesRequest) (*operations.PostDescribeAccountAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAccountAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19009,7 +19465,7 @@ func (s *SDK) PostDescribeAccountAttributes(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19039,8 +19495,9 @@ func (s *SDK) PostDescribeAccountAttributes(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribeAddresses - <p>Describes the specified Elastic IP addresses or all of your Elastic IP addresses.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeAddresses(ctx context.Context, request operations.PostDescribeAddressesRequest) (*operations.PostDescribeAddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAddresses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19059,7 +19516,7 @@ func (s *SDK) PostDescribeAddresses(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19089,8 +19546,9 @@ func (s *SDK) PostDescribeAddresses(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostDescribeAddressesAttribute - Describes the attributes of the specified Elastic IP addresses. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.
 func (s *SDK) PostDescribeAddressesAttribute(ctx context.Context, request operations.PostDescribeAddressesAttributeRequest) (*operations.PostDescribeAddressesAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAddressesAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19109,7 +19567,7 @@ func (s *SDK) PostDescribeAddressesAttribute(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19139,8 +19597,9 @@ func (s *SDK) PostDescribeAddressesAttribute(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeAggregateIDFormat - <p>Describes the longer ID format settings for all resource types in a specific Region. This request is useful for performing a quick audit to determine whether a specific Region is fully opted in for longer IDs (17-character IDs).</p> <p>This request only returns information about resource types that support longer IDs.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>
 func (s *SDK) PostDescribeAggregateIDFormat(ctx context.Context, request operations.PostDescribeAggregateIDFormatRequest) (*operations.PostDescribeAggregateIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAggregateIdFormat"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19159,7 +19618,7 @@ func (s *SDK) PostDescribeAggregateIDFormat(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19189,8 +19648,9 @@ func (s *SDK) PostDescribeAggregateIDFormat(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribeAvailabilityZones - <p>Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone.</p> <p>For more information about Availability Zones, Local Zones, and Wavelength Zones, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">Regions, Zones and Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeAvailabilityZones(ctx context.Context, request operations.PostDescribeAvailabilityZonesRequest) (*operations.PostDescribeAvailabilityZonesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAvailabilityZones"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19209,7 +19669,7 @@ func (s *SDK) PostDescribeAvailabilityZones(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19239,8 +19699,9 @@ func (s *SDK) PostDescribeAvailabilityZones(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribeBundleTasks - <p>Describes the specified bundle tasks or all of your bundle tasks.</p> <note> <p>Completed bundle tasks are listed for only a limited time. If your bundle task is no longer in the list, you can still register an AMI from it. Just use <code>RegisterImage</code> with the Amazon S3 bucket name and image manifest name you provided to the bundle task.</p> </note>
 func (s *SDK) PostDescribeBundleTasks(ctx context.Context, request operations.PostDescribeBundleTasksRequest) (*operations.PostDescribeBundleTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeBundleTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19259,7 +19720,7 @@ func (s *SDK) PostDescribeBundleTasks(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19289,8 +19750,9 @@ func (s *SDK) PostDescribeBundleTasks(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeByoipCidrs - <p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a> or <a>DescribeIpv6Pools</a>.</p>
 func (s *SDK) PostDescribeByoipCidrs(ctx context.Context, request operations.PostDescribeByoipCidrsRequest) (*operations.PostDescribeByoipCidrsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeByoipCidrs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19309,7 +19771,7 @@ func (s *SDK) PostDescribeByoipCidrs(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19339,8 +19801,9 @@ func (s *SDK) PostDescribeByoipCidrs(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostDescribeCapacityReservations - Describes one or more of your Capacity Reservations. The results describe only the Capacity Reservations in the Amazon Web Services Region that you're currently using.
 func (s *SDK) PostDescribeCapacityReservations(ctx context.Context, request operations.PostDescribeCapacityReservationsRequest) (*operations.PostDescribeCapacityReservationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeCapacityReservations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19359,7 +19822,7 @@ func (s *SDK) PostDescribeCapacityReservations(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19389,8 +19852,9 @@ func (s *SDK) PostDescribeCapacityReservations(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeCarrierGateways - Describes one or more of your carrier gateways.
 func (s *SDK) PostDescribeCarrierGateways(ctx context.Context, request operations.PostDescribeCarrierGatewaysRequest) (*operations.PostDescribeCarrierGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeCarrierGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19409,7 +19873,7 @@ func (s *SDK) PostDescribeCarrierGateways(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19439,8 +19903,9 @@ func (s *SDK) PostDescribeCarrierGateways(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeClassicLinkInstances - Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.
 func (s *SDK) PostDescribeClassicLinkInstances(ctx context.Context, request operations.PostDescribeClassicLinkInstancesRequest) (*operations.PostDescribeClassicLinkInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeClassicLinkInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19459,7 +19924,7 @@ func (s *SDK) PostDescribeClassicLinkInstances(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19489,8 +19954,9 @@ func (s *SDK) PostDescribeClassicLinkInstances(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeClientVpnAuthorizationRules - Describes the authorization rules for a specified Client VPN endpoint.
 func (s *SDK) PostDescribeClientVpnAuthorizationRules(ctx context.Context, request operations.PostDescribeClientVpnAuthorizationRulesRequest) (*operations.PostDescribeClientVpnAuthorizationRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeClientVpnAuthorizationRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19509,7 +19975,7 @@ func (s *SDK) PostDescribeClientVpnAuthorizationRules(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19539,8 +20005,9 @@ func (s *SDK) PostDescribeClientVpnAuthorizationRules(ctx context.Context, reque
 	return res, nil
 }
 
+// PostDescribeClientVpnConnections - Describes active client connections and connections that have been terminated within the last 60 minutes for the specified Client VPN endpoint.
 func (s *SDK) PostDescribeClientVpnConnections(ctx context.Context, request operations.PostDescribeClientVpnConnectionsRequest) (*operations.PostDescribeClientVpnConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeClientVpnConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19559,7 +20026,7 @@ func (s *SDK) PostDescribeClientVpnConnections(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19589,8 +20056,9 @@ func (s *SDK) PostDescribeClientVpnConnections(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeClientVpnEndpoints - Describes one or more Client VPN endpoints in the account.
 func (s *SDK) PostDescribeClientVpnEndpoints(ctx context.Context, request operations.PostDescribeClientVpnEndpointsRequest) (*operations.PostDescribeClientVpnEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeClientVpnEndpoints"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19609,7 +20077,7 @@ func (s *SDK) PostDescribeClientVpnEndpoints(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19639,8 +20107,9 @@ func (s *SDK) PostDescribeClientVpnEndpoints(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeClientVpnRoutes - Describes the routes for the specified Client VPN endpoint.
 func (s *SDK) PostDescribeClientVpnRoutes(ctx context.Context, request operations.PostDescribeClientVpnRoutesRequest) (*operations.PostDescribeClientVpnRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeClientVpnRoutes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19659,7 +20128,7 @@ func (s *SDK) PostDescribeClientVpnRoutes(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19689,8 +20158,9 @@ func (s *SDK) PostDescribeClientVpnRoutes(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeClientVpnTargetNetworks - Describes the target networks associated with the specified Client VPN endpoint.
 func (s *SDK) PostDescribeClientVpnTargetNetworks(ctx context.Context, request operations.PostDescribeClientVpnTargetNetworksRequest) (*operations.PostDescribeClientVpnTargetNetworksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeClientVpnTargetNetworks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19709,7 +20179,7 @@ func (s *SDK) PostDescribeClientVpnTargetNetworks(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19739,8 +20209,9 @@ func (s *SDK) PostDescribeClientVpnTargetNetworks(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDescribeCoipPools - Describes the specified customer-owned address pools or all of your customer-owned address pools.
 func (s *SDK) PostDescribeCoipPools(ctx context.Context, request operations.PostDescribeCoipPoolsRequest) (*operations.PostDescribeCoipPoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeCoipPools"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19759,7 +20230,7 @@ func (s *SDK) PostDescribeCoipPools(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19789,8 +20260,9 @@ func (s *SDK) PostDescribeCoipPools(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostDescribeConversionTasks - <p>Describes the specified conversion tasks or all your conversion tasks. For more information, see the <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/">VM Import/Export User Guide</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
 func (s *SDK) PostDescribeConversionTasks(ctx context.Context, request operations.PostDescribeConversionTasksRequest) (*operations.PostDescribeConversionTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeConversionTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19809,7 +20281,7 @@ func (s *SDK) PostDescribeConversionTasks(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19839,8 +20311,9 @@ func (s *SDK) PostDescribeConversionTasks(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeCustomerGateways - <p>Describes one or more of your VPN customer gateways.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) PostDescribeCustomerGateways(ctx context.Context, request operations.PostDescribeCustomerGatewaysRequest) (*operations.PostDescribeCustomerGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeCustomerGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19859,7 +20332,7 @@ func (s *SDK) PostDescribeCustomerGateways(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19889,8 +20362,9 @@ func (s *SDK) PostDescribeCustomerGateways(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDescribeDhcpOptions - <p>Describes one or more of your DHCP options sets.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP options sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeDhcpOptions(ctx context.Context, request operations.PostDescribeDhcpOptionsRequest) (*operations.PostDescribeDhcpOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDhcpOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19909,7 +20383,7 @@ func (s *SDK) PostDescribeDhcpOptions(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19939,8 +20413,9 @@ func (s *SDK) PostDescribeDhcpOptions(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeEgressOnlyInternetGateways - Describes one or more of your egress-only internet gateways.
 func (s *SDK) PostDescribeEgressOnlyInternetGateways(ctx context.Context, request operations.PostDescribeEgressOnlyInternetGatewaysRequest) (*operations.PostDescribeEgressOnlyInternetGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEgressOnlyInternetGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -19959,7 +20434,7 @@ func (s *SDK) PostDescribeEgressOnlyInternetGateways(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19989,8 +20464,9 @@ func (s *SDK) PostDescribeEgressOnlyInternetGateways(ctx context.Context, reques
 	return res, nil
 }
 
+// PostDescribeElasticGpus - Describes the Elastic Graphics accelerator associated with your instances. For more information about Elastic Graphics, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html">Amazon Elastic Graphics</a>.
 func (s *SDK) PostDescribeElasticGpus(ctx context.Context, request operations.PostDescribeElasticGpusRequest) (*operations.PostDescribeElasticGpusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeElasticGpus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20009,7 +20485,7 @@ func (s *SDK) PostDescribeElasticGpus(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20039,8 +20515,9 @@ func (s *SDK) PostDescribeElasticGpus(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeExportImageTasks - Describes the specified export image tasks or all of your export image tasks.
 func (s *SDK) PostDescribeExportImageTasks(ctx context.Context, request operations.PostDescribeExportImageTasksRequest) (*operations.PostDescribeExportImageTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeExportImageTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20059,7 +20536,7 @@ func (s *SDK) PostDescribeExportImageTasks(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20089,8 +20566,9 @@ func (s *SDK) PostDescribeExportImageTasks(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDescribeExportTasks - Describes the specified export instance tasks or all of your export instance tasks.
 func (s *SDK) PostDescribeExportTasks(ctx context.Context, request operations.PostDescribeExportTasksRequest) (*operations.PostDescribeExportTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeExportTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20109,7 +20587,7 @@ func (s *SDK) PostDescribeExportTasks(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20139,8 +20617,9 @@ func (s *SDK) PostDescribeExportTasks(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeFastSnapshotRestores - Describes the state of fast snapshot restores for your snapshots.
 func (s *SDK) PostDescribeFastSnapshotRestores(ctx context.Context, request operations.PostDescribeFastSnapshotRestoresRequest) (*operations.PostDescribeFastSnapshotRestoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFastSnapshotRestores"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20159,7 +20638,7 @@ func (s *SDK) PostDescribeFastSnapshotRestores(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20189,8 +20668,9 @@ func (s *SDK) PostDescribeFastSnapshotRestores(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeFleetHistory - <p>Describes the events for the specified EC2 Fleet during the specified time.</p> <p>EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet">Monitoring your EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeFleetHistory(ctx context.Context, request operations.PostDescribeFleetHistoryRequest) (*operations.PostDescribeFleetHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFleetHistory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20209,7 +20689,7 @@ func (s *SDK) PostDescribeFleetHistory(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20239,8 +20719,9 @@ func (s *SDK) PostDescribeFleetHistory(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDescribeFleetInstances - <p>Describes the running instances for the specified EC2 Fleet.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet">Monitoring your EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeFleetInstances(ctx context.Context, request operations.PostDescribeFleetInstancesRequest) (*operations.PostDescribeFleetInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFleetInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20259,7 +20740,7 @@ func (s *SDK) PostDescribeFleetInstances(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20289,8 +20770,9 @@ func (s *SDK) PostDescribeFleetInstances(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDescribeFleets - <p>Describes the specified EC2 Fleets or all of your EC2 Fleets.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet">Monitoring your EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeFleets(ctx context.Context, request operations.PostDescribeFleetsRequest) (*operations.PostDescribeFleetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFleets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20309,7 +20791,7 @@ func (s *SDK) PostDescribeFleets(ctx context.Context, request operations.PostDes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20339,8 +20821,9 @@ func (s *SDK) PostDescribeFleets(ctx context.Context, request operations.PostDes
 	return res, nil
 }
 
+// PostDescribeFlowLogs - Describes one or more flow logs. To view the information in your flow logs (the log streams for the network interfaces), you must use the CloudWatch Logs console or the CloudWatch Logs API.
 func (s *SDK) PostDescribeFlowLogs(ctx context.Context, request operations.PostDescribeFlowLogsRequest) (*operations.PostDescribeFlowLogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFlowLogs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20359,7 +20842,7 @@ func (s *SDK) PostDescribeFlowLogs(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20389,8 +20872,9 @@ func (s *SDK) PostDescribeFlowLogs(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDescribeFpgaImageAttribute - Describes the specified attribute of the specified Amazon FPGA Image (AFI).
 func (s *SDK) PostDescribeFpgaImageAttribute(ctx context.Context, request operations.PostDescribeFpgaImageAttributeRequest) (*operations.PostDescribeFpgaImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFpgaImageAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20409,7 +20893,7 @@ func (s *SDK) PostDescribeFpgaImageAttribute(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20439,8 +20923,9 @@ func (s *SDK) PostDescribeFpgaImageAttribute(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeFpgaImages - Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
 func (s *SDK) PostDescribeFpgaImages(ctx context.Context, request operations.PostDescribeFpgaImagesRequest) (*operations.PostDescribeFpgaImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeFpgaImages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20459,7 +20944,7 @@ func (s *SDK) PostDescribeFpgaImages(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20489,8 +20974,9 @@ func (s *SDK) PostDescribeFpgaImages(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostDescribeHostReservationOfferings - <p>Describes the Dedicated Host reservations that are available to purchase.</p> <p>The results describe all of the Dedicated Host reservation offerings, including offerings that might not match the instance family and Region of your Dedicated Hosts. When purchasing an offering, ensure that the instance family and Region of the offering matches that of the Dedicated Hosts with which it is to be associated. For more information about supported instance types, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html">Dedicated Hosts</a> in the <i>Amazon EC2 User Guide</i>. </p>
 func (s *SDK) PostDescribeHostReservationOfferings(ctx context.Context, request operations.PostDescribeHostReservationOfferingsRequest) (*operations.PostDescribeHostReservationOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeHostReservationOfferings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20509,7 +20995,7 @@ func (s *SDK) PostDescribeHostReservationOfferings(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20539,8 +21025,9 @@ func (s *SDK) PostDescribeHostReservationOfferings(ctx context.Context, request 
 	return res, nil
 }
 
+// PostDescribeHostReservations - Describes reservations that are associated with Dedicated Hosts in your account.
 func (s *SDK) PostDescribeHostReservations(ctx context.Context, request operations.PostDescribeHostReservationsRequest) (*operations.PostDescribeHostReservationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeHostReservations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20559,7 +21046,7 @@ func (s *SDK) PostDescribeHostReservations(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20589,8 +21076,9 @@ func (s *SDK) PostDescribeHostReservations(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDescribeHosts - <p>Describes the specified Dedicated Hosts or all your Dedicated Hosts.</p> <p>The results describe only the Dedicated Hosts in the Region you're currently using. All listed instances consume capacity on your Dedicated Host. Dedicated Hosts that have recently been released are listed with the state <code>released</code>.</p>
 func (s *SDK) PostDescribeHosts(ctx context.Context, request operations.PostDescribeHostsRequest) (*operations.PostDescribeHostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeHosts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20609,7 +21097,7 @@ func (s *SDK) PostDescribeHosts(ctx context.Context, request operations.PostDesc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20639,8 +21127,9 @@ func (s *SDK) PostDescribeHosts(ctx context.Context, request operations.PostDesc
 	return res, nil
 }
 
+// PostDescribeIamInstanceProfileAssociations - Describes your IAM instance profile associations.
 func (s *SDK) PostDescribeIamInstanceProfileAssociations(ctx context.Context, request operations.PostDescribeIamInstanceProfileAssociationsRequest) (*operations.PostDescribeIamInstanceProfileAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIamInstanceProfileAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20659,7 +21148,7 @@ func (s *SDK) PostDescribeIamInstanceProfileAssociations(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20689,8 +21178,9 @@ func (s *SDK) PostDescribeIamInstanceProfileAssociations(ctx context.Context, re
 	return res, nil
 }
 
+// PostDescribeIDFormat - <p>Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>
 func (s *SDK) PostDescribeIDFormat(ctx context.Context, request operations.PostDescribeIDFormatRequest) (*operations.PostDescribeIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIdFormat"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20709,7 +21199,7 @@ func (s *SDK) PostDescribeIDFormat(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20739,8 +21229,9 @@ func (s *SDK) PostDescribeIDFormat(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDescribeIdentityIDFormat - <p>Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.</p>
 func (s *SDK) PostDescribeIdentityIDFormat(ctx context.Context, request operations.PostDescribeIdentityIDFormatRequest) (*operations.PostDescribeIdentityIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIdentityIdFormat"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20759,7 +21250,7 @@ func (s *SDK) PostDescribeIdentityIDFormat(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20789,8 +21280,9 @@ func (s *SDK) PostDescribeIdentityIDFormat(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDescribeImageAttribute - Describes the specified attribute of the specified AMI. You can specify only one attribute at a time.
 func (s *SDK) PostDescribeImageAttribute(ctx context.Context, request operations.PostDescribeImageAttributeRequest) (*operations.PostDescribeImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeImageAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20809,7 +21301,7 @@ func (s *SDK) PostDescribeImageAttribute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20839,8 +21331,9 @@ func (s *SDK) PostDescribeImageAttribute(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDescribeImages - <p>Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you.</p> <p>The images available to you include public images, private images that you own, and private images owned by other Amazon Web Services accounts for which you have explicit launch permissions.</p> <p>Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image will eventually return an error indicating that the AMI ID cannot be found.</p>
 func (s *SDK) PostDescribeImages(ctx context.Context, request operations.PostDescribeImagesRequest) (*operations.PostDescribeImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeImages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20859,7 +21352,7 @@ func (s *SDK) PostDescribeImages(ctx context.Context, request operations.PostDes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20889,8 +21382,9 @@ func (s *SDK) PostDescribeImages(ctx context.Context, request operations.PostDes
 	return res, nil
 }
 
+// PostDescribeImportImageTasks - Displays details about an import virtual machine or import snapshot tasks that are already created.
 func (s *SDK) PostDescribeImportImageTasks(ctx context.Context, request operations.PostDescribeImportImageTasksRequest) (*operations.PostDescribeImportImageTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeImportImageTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20909,7 +21403,7 @@ func (s *SDK) PostDescribeImportImageTasks(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20939,8 +21433,9 @@ func (s *SDK) PostDescribeImportImageTasks(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDescribeImportSnapshotTasks - Describes your import snapshot tasks.
 func (s *SDK) PostDescribeImportSnapshotTasks(ctx context.Context, request operations.PostDescribeImportSnapshotTasksRequest) (*operations.PostDescribeImportSnapshotTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeImportSnapshotTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -20959,7 +21454,7 @@ func (s *SDK) PostDescribeImportSnapshotTasks(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20989,8 +21484,9 @@ func (s *SDK) PostDescribeImportSnapshotTasks(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDescribeInstanceAttribute - Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Valid attribute values are: <code>instanceType</code> | <code>kernel</code> | <code>ramdisk</code> | <code>userData</code> | <code>disableApiTermination</code> | <code>instanceInitiatedShutdownBehavior</code> | <code>rootDeviceName</code> | <code>blockDeviceMapping</code> | <code>productCodes</code> | <code>sourceDestCheck</code> | <code>groupSet</code> | <code>ebsOptimized</code> | <code>sriovNetSupport</code>
 func (s *SDK) PostDescribeInstanceAttribute(ctx context.Context, request operations.PostDescribeInstanceAttributeRequest) (*operations.PostDescribeInstanceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21009,7 +21505,7 @@ func (s *SDK) PostDescribeInstanceAttribute(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21039,8 +21535,9 @@ func (s *SDK) PostDescribeInstanceAttribute(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribeInstanceCreditSpecifications - <p>Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the <code>unlimited</code> credit option, as well as instances that were previously configured as T2, T3, and T3a with the <code>unlimited</code> credit option. For example, if you resize a T2 instance, while it is configured as <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4 instance.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeInstanceCreditSpecifications(ctx context.Context, request operations.PostDescribeInstanceCreditSpecificationsRequest) (*operations.PostDescribeInstanceCreditSpecificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceCreditSpecifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21059,7 +21556,7 @@ func (s *SDK) PostDescribeInstanceCreditSpecifications(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21089,8 +21586,9 @@ func (s *SDK) PostDescribeInstanceCreditSpecifications(ctx context.Context, requ
 	return res, nil
 }
 
+// PostDescribeInstanceEventNotificationAttributes - Describes the tag keys that are registered to appear in scheduled event notifications for resources in the current Region.
 func (s *SDK) PostDescribeInstanceEventNotificationAttributes(ctx context.Context, request operations.PostDescribeInstanceEventNotificationAttributesRequest) (*operations.PostDescribeInstanceEventNotificationAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceEventNotificationAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21109,7 +21607,7 @@ func (s *SDK) PostDescribeInstanceEventNotificationAttributes(ctx context.Contex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21139,8 +21637,9 @@ func (s *SDK) PostDescribeInstanceEventNotificationAttributes(ctx context.Contex
 	return res, nil
 }
 
+// PostDescribeInstanceEventWindows - <p>Describes the specified event windows or all event windows.</p> <p>If you specify event window IDs, the output includes information for only the specified event windows. If you specify filters, the output includes information for only those event windows that meet the filter criteria. If you do not specify event windows IDs or filters, the output includes information for all event windows, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeInstanceEventWindows(ctx context.Context, request operations.PostDescribeInstanceEventWindowsRequest) (*operations.PostDescribeInstanceEventWindowsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceEventWindows"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21159,7 +21658,7 @@ func (s *SDK) PostDescribeInstanceEventWindows(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21189,8 +21688,9 @@ func (s *SDK) PostDescribeInstanceEventWindows(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeInstanceStatus - <p>Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances.</p> <p>Instance status includes the following components:</p> <ul> <li> <p> <b>Status checks</b> - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html">Status checks for your instances</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html">Troubleshooting instances with failed status checks</a> in the <i>Amazon EC2 User Guide</i>.</p> </li> <li> <p> <b>Scheduled events</b> - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html">Scheduled events for your instances</a> in the <i>Amazon EC2 User Guide</i>.</p> </li> <li> <p> <b>Instance state</b> - You can manage your instances from the moment you launch them through their termination. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Instance lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p> </li> </ul>
 func (s *SDK) PostDescribeInstanceStatus(ctx context.Context, request operations.PostDescribeInstanceStatusRequest) (*operations.PostDescribeInstanceStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21209,7 +21709,7 @@ func (s *SDK) PostDescribeInstanceStatus(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21239,8 +21739,9 @@ func (s *SDK) PostDescribeInstanceStatus(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDescribeInstanceTypeOfferings - Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.
 func (s *SDK) PostDescribeInstanceTypeOfferings(ctx context.Context, request operations.PostDescribeInstanceTypeOfferingsRequest) (*operations.PostDescribeInstanceTypeOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceTypeOfferings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21259,7 +21760,7 @@ func (s *SDK) PostDescribeInstanceTypeOfferings(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21289,8 +21790,9 @@ func (s *SDK) PostDescribeInstanceTypeOfferings(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDescribeInstanceTypes - Describes the details of the instance types that are offered in a location. The results can be filtered by the attributes of the instance types.
 func (s *SDK) PostDescribeInstanceTypes(ctx context.Context, request operations.PostDescribeInstanceTypesRequest) (*operations.PostDescribeInstanceTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstanceTypes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21309,7 +21811,7 @@ func (s *SDK) PostDescribeInstanceTypes(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21339,8 +21841,9 @@ func (s *SDK) PostDescribeInstanceTypes(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostDescribeInstances - <p>Describes the specified instances or all instances.</p> <p>If you specify instance IDs, the output includes information for only the specified instances. If you specify filters, the output includes information for only those instances that meet the filter criteria. If you do not specify instance IDs or filters, the output includes information for all instances, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully.</p> <p>If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the output.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.</p>
 func (s *SDK) PostDescribeInstances(ctx context.Context, request operations.PostDescribeInstancesRequest) (*operations.PostDescribeInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21359,7 +21862,7 @@ func (s *SDK) PostDescribeInstances(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21389,8 +21892,9 @@ func (s *SDK) PostDescribeInstances(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostDescribeInternetGateways - Describes one or more of your internet gateways.
 func (s *SDK) PostDescribeInternetGateways(ctx context.Context, request operations.PostDescribeInternetGatewaysRequest) (*operations.PostDescribeInternetGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeInternetGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21409,7 +21913,7 @@ func (s *SDK) PostDescribeInternetGateways(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21439,8 +21943,9 @@ func (s *SDK) PostDescribeInternetGateways(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDescribeIpv6Pools - Describes your IPv6 address pools.
 func (s *SDK) PostDescribeIpv6Pools(ctx context.Context, request operations.PostDescribeIpv6PoolsRequest) (*operations.PostDescribeIpv6PoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIpv6Pools"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21459,7 +21964,7 @@ func (s *SDK) PostDescribeIpv6Pools(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21489,8 +21994,9 @@ func (s *SDK) PostDescribeIpv6Pools(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostDescribeKeyPairs - <p>Describes the specified key pairs or all of your key pairs.</p> <p>For more information about key pairs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeKeyPairs(ctx context.Context, request operations.PostDescribeKeyPairsRequest) (*operations.PostDescribeKeyPairsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeKeyPairs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21509,7 +22015,7 @@ func (s *SDK) PostDescribeKeyPairs(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21539,8 +22045,9 @@ func (s *SDK) PostDescribeKeyPairs(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDescribeLaunchTemplateVersions - Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions. You can also describe all the latest versions or all the default versions of all the launch templates in your account.
 func (s *SDK) PostDescribeLaunchTemplateVersions(ctx context.Context, request operations.PostDescribeLaunchTemplateVersionsRequest) (*operations.PostDescribeLaunchTemplateVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLaunchTemplateVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21559,7 +22066,7 @@ func (s *SDK) PostDescribeLaunchTemplateVersions(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21589,8 +22096,9 @@ func (s *SDK) PostDescribeLaunchTemplateVersions(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDescribeLaunchTemplates - Describes one or more launch templates.
 func (s *SDK) PostDescribeLaunchTemplates(ctx context.Context, request operations.PostDescribeLaunchTemplatesRequest) (*operations.PostDescribeLaunchTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLaunchTemplates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21609,7 +22117,7 @@ func (s *SDK) PostDescribeLaunchTemplates(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21639,8 +22147,9 @@ func (s *SDK) PostDescribeLaunchTemplates(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations - Describes the associations between virtual interface groups and local gateway route tables.
 func (s *SDK) PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations(ctx context.Context, request operations.PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest) (*operations.PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21659,7 +22168,7 @@ func (s *SDK) PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21689,8 +22198,9 @@ func (s *SDK) PostDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociation
 	return res, nil
 }
 
+// PostDescribeLocalGatewayRouteTableVpcAssociations - Describes the specified associations between VPCs and local gateway route tables.
 func (s *SDK) PostDescribeLocalGatewayRouteTableVpcAssociations(ctx context.Context, request operations.PostDescribeLocalGatewayRouteTableVpcAssociationsRequest) (*operations.PostDescribeLocalGatewayRouteTableVpcAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLocalGatewayRouteTableVpcAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21709,7 +22219,7 @@ func (s *SDK) PostDescribeLocalGatewayRouteTableVpcAssociations(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21739,8 +22249,9 @@ func (s *SDK) PostDescribeLocalGatewayRouteTableVpcAssociations(ctx context.Cont
 	return res, nil
 }
 
+// PostDescribeLocalGatewayRouteTables - Describes one or more local gateway route tables. By default, all local gateway route tables are described. Alternatively, you can filter the results.
 func (s *SDK) PostDescribeLocalGatewayRouteTables(ctx context.Context, request operations.PostDescribeLocalGatewayRouteTablesRequest) (*operations.PostDescribeLocalGatewayRouteTablesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLocalGatewayRouteTables"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21759,7 +22270,7 @@ func (s *SDK) PostDescribeLocalGatewayRouteTables(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21789,8 +22300,9 @@ func (s *SDK) PostDescribeLocalGatewayRouteTables(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDescribeLocalGatewayVirtualInterfaceGroups - Describes the specified local gateway virtual interface groups.
 func (s *SDK) PostDescribeLocalGatewayVirtualInterfaceGroups(ctx context.Context, request operations.PostDescribeLocalGatewayVirtualInterfaceGroupsRequest) (*operations.PostDescribeLocalGatewayVirtualInterfaceGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLocalGatewayVirtualInterfaceGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21809,7 +22321,7 @@ func (s *SDK) PostDescribeLocalGatewayVirtualInterfaceGroups(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21839,8 +22351,9 @@ func (s *SDK) PostDescribeLocalGatewayVirtualInterfaceGroups(ctx context.Context
 	return res, nil
 }
 
+// PostDescribeLocalGatewayVirtualInterfaces - Describes the specified local gateway virtual interfaces.
 func (s *SDK) PostDescribeLocalGatewayVirtualInterfaces(ctx context.Context, request operations.PostDescribeLocalGatewayVirtualInterfacesRequest) (*operations.PostDescribeLocalGatewayVirtualInterfacesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLocalGatewayVirtualInterfaces"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21859,7 +22372,7 @@ func (s *SDK) PostDescribeLocalGatewayVirtualInterfaces(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21889,8 +22402,9 @@ func (s *SDK) PostDescribeLocalGatewayVirtualInterfaces(ctx context.Context, req
 	return res, nil
 }
 
+// PostDescribeLocalGateways - Describes one or more local gateways. By default, all local gateways are described. Alternatively, you can filter the results.
 func (s *SDK) PostDescribeLocalGateways(ctx context.Context, request operations.PostDescribeLocalGatewaysRequest) (*operations.PostDescribeLocalGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeLocalGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21909,7 +22423,7 @@ func (s *SDK) PostDescribeLocalGateways(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21939,8 +22453,9 @@ func (s *SDK) PostDescribeLocalGateways(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostDescribeManagedPrefixLists - <p>Describes your managed prefix lists and any Amazon Web Services-managed prefix lists.</p> <p>To view the entries for your prefix list, use <a>GetManagedPrefixListEntries</a>.</p>
 func (s *SDK) PostDescribeManagedPrefixLists(ctx context.Context, request operations.PostDescribeManagedPrefixListsRequest) (*operations.PostDescribeManagedPrefixListsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeManagedPrefixLists"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -21959,7 +22474,7 @@ func (s *SDK) PostDescribeManagedPrefixLists(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21989,8 +22504,9 @@ func (s *SDK) PostDescribeManagedPrefixLists(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeMovingAddresses - Describes your Elastic IP addresses that are being moved to the EC2-VPC platform, or that are being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
 func (s *SDK) PostDescribeMovingAddresses(ctx context.Context, request operations.PostDescribeMovingAddressesRequest) (*operations.PostDescribeMovingAddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeMovingAddresses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22009,7 +22525,7 @@ func (s *SDK) PostDescribeMovingAddresses(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22039,8 +22555,9 @@ func (s *SDK) PostDescribeMovingAddresses(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeNatGateways - Describes one or more of your NAT gateways.
 func (s *SDK) PostDescribeNatGateways(ctx context.Context, request operations.PostDescribeNatGatewaysRequest) (*operations.PostDescribeNatGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNatGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22059,7 +22576,7 @@ func (s *SDK) PostDescribeNatGateways(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22089,8 +22606,9 @@ func (s *SDK) PostDescribeNatGateways(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeNetworkAcls - <p>Describes one or more of your network ACLs.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeNetworkAcls(ctx context.Context, request operations.PostDescribeNetworkAclsRequest) (*operations.PostDescribeNetworkAclsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNetworkAcls"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22109,7 +22627,7 @@ func (s *SDK) PostDescribeNetworkAcls(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22139,8 +22657,9 @@ func (s *SDK) PostDescribeNetworkAcls(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeNetworkInsightsAnalyses - Describes one or more of your network insights analyses.
 func (s *SDK) PostDescribeNetworkInsightsAnalyses(ctx context.Context, request operations.PostDescribeNetworkInsightsAnalysesRequest) (*operations.PostDescribeNetworkInsightsAnalysesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNetworkInsightsAnalyses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22159,7 +22678,7 @@ func (s *SDK) PostDescribeNetworkInsightsAnalyses(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22189,8 +22708,9 @@ func (s *SDK) PostDescribeNetworkInsightsAnalyses(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDescribeNetworkInsightsPaths - Describes one or more of your paths.
 func (s *SDK) PostDescribeNetworkInsightsPaths(ctx context.Context, request operations.PostDescribeNetworkInsightsPathsRequest) (*operations.PostDescribeNetworkInsightsPathsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNetworkInsightsPaths"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22209,7 +22729,7 @@ func (s *SDK) PostDescribeNetworkInsightsPaths(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22239,8 +22759,9 @@ func (s *SDK) PostDescribeNetworkInsightsPaths(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeNetworkInterfaceAttribute - Describes a network interface attribute. You can specify only one attribute at a time.
 func (s *SDK) PostDescribeNetworkInterfaceAttribute(ctx context.Context, request operations.PostDescribeNetworkInterfaceAttributeRequest) (*operations.PostDescribeNetworkInterfaceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNetworkInterfaceAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22259,7 +22780,7 @@ func (s *SDK) PostDescribeNetworkInterfaceAttribute(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22289,8 +22810,9 @@ func (s *SDK) PostDescribeNetworkInterfaceAttribute(ctx context.Context, request
 	return res, nil
 }
 
+// PostDescribeNetworkInterfacePermissions - Describes the permissions for your network interfaces.
 func (s *SDK) PostDescribeNetworkInterfacePermissions(ctx context.Context, request operations.PostDescribeNetworkInterfacePermissionsRequest) (*operations.PostDescribeNetworkInterfacePermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNetworkInterfacePermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22309,7 +22831,7 @@ func (s *SDK) PostDescribeNetworkInterfacePermissions(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22339,8 +22861,9 @@ func (s *SDK) PostDescribeNetworkInterfacePermissions(ctx context.Context, reque
 	return res, nil
 }
 
+// PostDescribeNetworkInterfaces - Describes one or more of your network interfaces.
 func (s *SDK) PostDescribeNetworkInterfaces(ctx context.Context, request operations.PostDescribeNetworkInterfacesRequest) (*operations.PostDescribeNetworkInterfacesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeNetworkInterfaces"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22359,7 +22882,7 @@ func (s *SDK) PostDescribeNetworkInterfaces(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22389,8 +22912,9 @@ func (s *SDK) PostDescribeNetworkInterfaces(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribePlacementGroups - Describes the specified placement groups or all of your placement groups. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement groups</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) PostDescribePlacementGroups(ctx context.Context, request operations.PostDescribePlacementGroupsRequest) (*operations.PostDescribePlacementGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribePlacementGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22409,7 +22933,7 @@ func (s *SDK) PostDescribePlacementGroups(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22439,8 +22963,9 @@ func (s *SDK) PostDescribePlacementGroups(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribePrefixLists - <p>Describes available Amazon Web Services services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service.</p> <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>
 func (s *SDK) PostDescribePrefixLists(ctx context.Context, request operations.PostDescribePrefixListsRequest) (*operations.PostDescribePrefixListsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribePrefixLists"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22459,7 +22984,7 @@ func (s *SDK) PostDescribePrefixLists(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22489,8 +23014,9 @@ func (s *SDK) PostDescribePrefixLists(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribePrincipalIDFormat - <p>Describes the ID format settings for the root user and all IAM roles and IAM users that have explicitly specified a longer ID (17-character ID) preference. </p> <p>By default, all IAM roles and IAM users default to the same ID settings as the root user, unless they explicitly override the settings. This request is useful for identifying those IAM users and IAM roles that have overridden the default ID settings.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p>
 func (s *SDK) PostDescribePrincipalIDFormat(ctx context.Context, request operations.PostDescribePrincipalIDFormatRequest) (*operations.PostDescribePrincipalIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribePrincipalIdFormat"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22509,7 +23035,7 @@ func (s *SDK) PostDescribePrincipalIDFormat(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22539,8 +23065,9 @@ func (s *SDK) PostDescribePrincipalIDFormat(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribePublicIpv4Pools - Describes the specified IPv4 address pools.
 func (s *SDK) PostDescribePublicIpv4Pools(ctx context.Context, request operations.PostDescribePublicIpv4PoolsRequest) (*operations.PostDescribePublicIpv4PoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribePublicIpv4Pools"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22559,7 +23086,7 @@ func (s *SDK) PostDescribePublicIpv4Pools(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22589,8 +23116,9 @@ func (s *SDK) PostDescribePublicIpv4Pools(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeRegions - <p>Describes the Regions that are enabled for your account, or all Regions.</p> <p>For a list of the Regions supported by Amazon EC2, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region"> Regions and Endpoints</a>.</p> <p>For information about enabling and disabling Regions for your account, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html">Managing AWS Regions</a> in the <i>AWS General Reference</i>.</p>
 func (s *SDK) PostDescribeRegions(ctx context.Context, request operations.PostDescribeRegionsRequest) (*operations.PostDescribeRegionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeRegions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22609,7 +23137,7 @@ func (s *SDK) PostDescribeRegions(ctx context.Context, request operations.PostDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22639,8 +23167,9 @@ func (s *SDK) PostDescribeRegions(ctx context.Context, request operations.PostDe
 	return res, nil
 }
 
+// PostDescribeReplaceRootVolumeTasks - Describes a root volume replacement task. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
 func (s *SDK) PostDescribeReplaceRootVolumeTasks(ctx context.Context, request operations.PostDescribeReplaceRootVolumeTasksRequest) (*operations.PostDescribeReplaceRootVolumeTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReplaceRootVolumeTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22659,7 +23188,7 @@ func (s *SDK) PostDescribeReplaceRootVolumeTasks(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22689,8 +23218,9 @@ func (s *SDK) PostDescribeReplaceRootVolumeTasks(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDescribeReservedInstances - <p>Describes one or more of the Reserved Instances that you purchased.</p> <p>For more information about Reserved Instances, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Reserved Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeReservedInstances(ctx context.Context, request operations.PostDescribeReservedInstancesRequest) (*operations.PostDescribeReservedInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22709,7 +23239,7 @@ func (s *SDK) PostDescribeReservedInstances(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22739,8 +23269,9 @@ func (s *SDK) PostDescribeReservedInstances(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribeReservedInstancesListings - <p>Describes your account's Reserved Instance listings in the Reserved Instance Marketplace.</p> <p>The Reserved Instance Marketplace matches sellers who want to resell Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances.</p> <p>As a seller, you choose to list some or all of your Reserved Instances, and you specify the upfront price to receive for them. Your Reserved Instances are then listed in the Reserved Instance Marketplace and are available for purchase.</p> <p>As a buyer, you specify the configuration of the Reserved Instance to purchase, and the Marketplace matches what you're searching for with what's available. The Marketplace first sells the lowest priced Reserved Instances to you, and continues to sell available Reserved Instance listings to you until your demand is met. You are charged based on the total price of all of the listings that you purchase.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeReservedInstancesListings(ctx context.Context, request operations.PostDescribeReservedInstancesListingsRequest) (*operations.PostDescribeReservedInstancesListingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedInstancesListings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22759,7 +23290,7 @@ func (s *SDK) PostDescribeReservedInstancesListings(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22789,8 +23320,9 @@ func (s *SDK) PostDescribeReservedInstancesListings(ctx context.Context, request
 	return res, nil
 }
 
+// PostDescribeReservedInstancesModifications - <p>Describes the modifications made to your Reserved Instances. If no parameter is specified, information about all your Reserved Instances modification requests is returned. If a modification ID is specified, only information about the specific modification is returned.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html">Modifying Reserved Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeReservedInstancesModifications(ctx context.Context, request operations.PostDescribeReservedInstancesModificationsRequest) (*operations.PostDescribeReservedInstancesModificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedInstancesModifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22809,7 +23341,7 @@ func (s *SDK) PostDescribeReservedInstancesModifications(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22839,8 +23371,9 @@ func (s *SDK) PostDescribeReservedInstancesModifications(ctx context.Context, re
 	return res, nil
 }
 
+// PostDescribeReservedInstancesOfferings - <p>Describes Reserved Instance offerings that are available for purchase. With Reserved Instances, you purchase the right to launch instances for a period of time. During that time period, you do not receive insufficient capacity errors, and you pay a lower usage rate than the rate charged for On-Demand instances for the actual time used.</p> <p>If you have listed your own Reserved Instances for sale in the Reserved Instance Marketplace, they will be excluded from these results. This is to ensure that you do not purchase your own Reserved Instances.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDescribeReservedInstancesOfferings(ctx context.Context, request operations.PostDescribeReservedInstancesOfferingsRequest) (*operations.PostDescribeReservedInstancesOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedInstancesOfferings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22859,7 +23392,7 @@ func (s *SDK) PostDescribeReservedInstancesOfferings(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22889,8 +23422,9 @@ func (s *SDK) PostDescribeReservedInstancesOfferings(ctx context.Context, reques
 	return res, nil
 }
 
+// PostDescribeRouteTables - <p>Describes one or more of your route tables.</p> <p>Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeRouteTables(ctx context.Context, request operations.PostDescribeRouteTablesRequest) (*operations.PostDescribeRouteTablesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeRouteTables"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22909,7 +23443,7 @@ func (s *SDK) PostDescribeRouteTables(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22939,8 +23473,9 @@ func (s *SDK) PostDescribeRouteTables(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeScheduledInstanceAvailability - <p>Finds available schedules that meet the specified criteria.</p> <p>You can search for an available schedule no more than 3 months in advance. You must meet the minimum required duration of 1,200 hours per year. For example, the minimum daily schedule is 4 hours, the minimum weekly schedule is 24 hours, and the minimum monthly schedule is 100 hours.</p> <p>After you find a schedule that meets your needs, call <a>PurchaseScheduledInstances</a> to purchase Scheduled Instances with that schedule.</p>
 func (s *SDK) PostDescribeScheduledInstanceAvailability(ctx context.Context, request operations.PostDescribeScheduledInstanceAvailabilityRequest) (*operations.PostDescribeScheduledInstanceAvailabilityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeScheduledInstanceAvailability"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22959,7 +23494,7 @@ func (s *SDK) PostDescribeScheduledInstanceAvailability(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22989,8 +23524,9 @@ func (s *SDK) PostDescribeScheduledInstanceAvailability(ctx context.Context, req
 	return res, nil
 }
 
+// PostDescribeScheduledInstances - Describes the specified Scheduled Instances or all your Scheduled Instances.
 func (s *SDK) PostDescribeScheduledInstances(ctx context.Context, request operations.PostDescribeScheduledInstancesRequest) (*operations.PostDescribeScheduledInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeScheduledInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23009,7 +23545,7 @@ func (s *SDK) PostDescribeScheduledInstances(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23039,8 +23575,9 @@ func (s *SDK) PostDescribeScheduledInstances(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeSecurityGroupReferences - [VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
 func (s *SDK) PostDescribeSecurityGroupReferences(ctx context.Context, request operations.PostDescribeSecurityGroupReferencesRequest) (*operations.PostDescribeSecurityGroupReferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSecurityGroupReferences"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23059,7 +23596,7 @@ func (s *SDK) PostDescribeSecurityGroupReferences(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23089,8 +23626,9 @@ func (s *SDK) PostDescribeSecurityGroupReferences(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDescribeSecurityGroupRules - Describes one or more of your security group rules.
 func (s *SDK) PostDescribeSecurityGroupRules(ctx context.Context, request operations.PostDescribeSecurityGroupRulesRequest) (*operations.PostDescribeSecurityGroupRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSecurityGroupRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23109,7 +23647,7 @@ func (s *SDK) PostDescribeSecurityGroupRules(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23139,8 +23677,9 @@ func (s *SDK) PostDescribeSecurityGroupRules(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeSecurityGroups - <p>Describes the specified security groups or all of your security groups.</p> <p>A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Amazon EC2 security groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html">Security groups for your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeSecurityGroups(ctx context.Context, request operations.PostDescribeSecurityGroupsRequest) (*operations.PostDescribeSecurityGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSecurityGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23159,7 +23698,7 @@ func (s *SDK) PostDescribeSecurityGroups(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23189,8 +23728,9 @@ func (s *SDK) PostDescribeSecurityGroups(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDescribeSnapshotAttribute - <p>Describes the specified attribute of the specified snapshot. You can specify only one attribute at a time.</p> <p>For more information about EBS snapshots, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html">Amazon EBS snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeSnapshotAttribute(ctx context.Context, request operations.PostDescribeSnapshotAttributeRequest) (*operations.PostDescribeSnapshotAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSnapshotAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23209,7 +23749,7 @@ func (s *SDK) PostDescribeSnapshotAttribute(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23239,8 +23779,9 @@ func (s *SDK) PostDescribeSnapshotAttribute(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribeSnapshots - <p>Describes the specified EBS snapshots available to you or all of the EBS snapshots available to you.</p> <p>The snapshots available to you include public snapshots, private snapshots that you own, and private snapshots owned by other Amazon Web Services accounts for which you have explicit create volume permissions.</p> <p>The create volume permissions fall into the following categories:</p> <ul> <li> <p> <i>public</i>: The owner of the snapshot granted create volume permissions for the snapshot to the <code>all</code> group. All Amazon Web Services accounts have create volume permissions for these snapshots.</p> </li> <li> <p> <i>explicit</i>: The owner of the snapshot granted create volume permissions to a specific Amazon Web Services account.</p> </li> <li> <p> <i>implicit</i>: An Amazon Web Services account has implicit create volume permissions for all snapshots it owns.</p> </li> </ul> <p>The list of snapshots returned can be filtered by specifying snapshot IDs, snapshot owners, or Amazon Web Services accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions.</p> <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results.</p> <p>If you specify one or more snapshot owners using the <code>OwnerIds</code> option, only snapshots from the specified owners and for which you have access are returned. The results can include the Amazon Web Services account IDs of the specified owners, <code>amazon</code> for snapshots owned by Amazon, or <code>self</code> for snapshots that you own.</p> <p>If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify Amazon Web Services account IDs (if you own the snapshots), <code>self</code> for snapshots for which you own or have explicit permissions, or <code>all</code> for public snapshots.</p> <p>If you are describing a long list of snapshots, we recommend that you paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeSnapshots</code> request to retrieve the remaining results.</p> <p>To get the state of fast snapshot restores for a snapshot, use <a>DescribeFastSnapshotRestores</a>.</p> <p>For more information about EBS snapshots, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html">Amazon EBS snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeSnapshots(ctx context.Context, request operations.PostDescribeSnapshotsRequest) (*operations.PostDescribeSnapshotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSnapshots"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23259,7 +23800,7 @@ func (s *SDK) PostDescribeSnapshots(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23289,8 +23830,9 @@ func (s *SDK) PostDescribeSnapshots(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostDescribeSpotDatafeedSubscription - Describes the data feed for Spot Instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html">Spot Instance data feed</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.
 func (s *SDK) PostDescribeSpotDatafeedSubscription(ctx context.Context, request operations.PostDescribeSpotDatafeedSubscriptionRequest) (*operations.PostDescribeSpotDatafeedSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotDatafeedSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23309,7 +23851,7 @@ func (s *SDK) PostDescribeSpotDatafeedSubscription(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23339,8 +23881,9 @@ func (s *SDK) PostDescribeSpotDatafeedSubscription(ctx context.Context, request 
 	return res, nil
 }
 
+// PostDescribeSpotFleetInstances - Describes the running instances for the specified Spot Fleet.
 func (s *SDK) PostDescribeSpotFleetInstances(ctx context.Context, request operations.PostDescribeSpotFleetInstancesRequest) (*operations.PostDescribeSpotFleetInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotFleetInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23359,7 +23902,7 @@ func (s *SDK) PostDescribeSpotFleetInstances(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23389,8 +23932,9 @@ func (s *SDK) PostDescribeSpotFleetInstances(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeSpotFleetRequestHistory - <p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.</p>
 func (s *SDK) PostDescribeSpotFleetRequestHistory(ctx context.Context, request operations.PostDescribeSpotFleetRequestHistoryRequest) (*operations.PostDescribeSpotFleetRequestHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotFleetRequestHistory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23409,7 +23953,7 @@ func (s *SDK) PostDescribeSpotFleetRequestHistory(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23439,8 +23983,9 @@ func (s *SDK) PostDescribeSpotFleetRequestHistory(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDescribeSpotFleetRequests - <p>Describes your Spot Fleet requests.</p> <p>Spot Fleet requests are deleted 48 hours after they are canceled and their instances are terminated.</p>
 func (s *SDK) PostDescribeSpotFleetRequests(ctx context.Context, request operations.PostDescribeSpotFleetRequestsRequest) (*operations.PostDescribeSpotFleetRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotFleetRequests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23459,7 +24004,7 @@ func (s *SDK) PostDescribeSpotFleetRequests(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23489,8 +24034,9 @@ func (s *SDK) PostDescribeSpotFleetRequests(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostDescribeSpotInstanceRequests - <p>Describes the specified Spot Instance requests.</p> <p>You can use <code>DescribeSpotInstanceRequests</code> to find a running Spot Instance by examining the response. If the status of the Spot Instance is <code>fulfilled</code>, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances">DescribeInstances</a> with a filter to look for instances where the instance lifecycle is <code>spot</code>.</p> <p>We recommend that you set <code>MaxResults</code> to a value between 5 and 1000 to limit the number of results returned. This paginates the output, which makes the list more manageable and returns the results faster. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeSpotInstanceRequests</code> request to retrieve the remaining results.</p> <p>Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.</p>
 func (s *SDK) PostDescribeSpotInstanceRequests(ctx context.Context, request operations.PostDescribeSpotInstanceRequestsRequest) (*operations.PostDescribeSpotInstanceRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotInstanceRequests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23509,7 +24055,7 @@ func (s *SDK) PostDescribeSpotInstanceRequests(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23539,8 +24085,9 @@ func (s *SDK) PostDescribeSpotInstanceRequests(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeSpotPriceHistory - <p>Describes the Spot price history. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html">Spot Instance pricing history</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>When you specify a start and end time, the operation returns the prices of the instance types within that time range. It also returns the last price change before the start time, which is the effective price as of the start time.</p>
 func (s *SDK) PostDescribeSpotPriceHistory(ctx context.Context, request operations.PostDescribeSpotPriceHistoryRequest) (*operations.PostDescribeSpotPriceHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSpotPriceHistory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23559,7 +24106,7 @@ func (s *SDK) PostDescribeSpotPriceHistory(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23589,8 +24136,9 @@ func (s *SDK) PostDescribeSpotPriceHistory(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostDescribeStaleSecurityGroups - [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
 func (s *SDK) PostDescribeStaleSecurityGroups(ctx context.Context, request operations.PostDescribeStaleSecurityGroupsRequest) (*operations.PostDescribeStaleSecurityGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeStaleSecurityGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23609,7 +24157,7 @@ func (s *SDK) PostDescribeStaleSecurityGroups(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23639,8 +24187,9 @@ func (s *SDK) PostDescribeStaleSecurityGroups(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDescribeStoreImageTasks - <p>Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days.</p> <p>For each AMI task, the response indicates if the task is <code>InProgress</code>, <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the response shows the estimated progress as a percentage.</p> <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using Amazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using Amazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeStoreImageTasks(ctx context.Context, request operations.PostDescribeStoreImageTasksRequest) (*operations.PostDescribeStoreImageTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeStoreImageTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23659,7 +24208,7 @@ func (s *SDK) PostDescribeStoreImageTasks(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23689,8 +24238,9 @@ func (s *SDK) PostDescribeStoreImageTasks(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeSubnets - <p>Describes one or more of your subnets.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeSubnets(ctx context.Context, request operations.PostDescribeSubnetsRequest) (*operations.PostDescribeSubnetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSubnets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23709,7 +24259,7 @@ func (s *SDK) PostDescribeSubnets(ctx context.Context, request operations.PostDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23739,8 +24289,9 @@ func (s *SDK) PostDescribeSubnets(ctx context.Context, request operations.PostDe
 	return res, nil
 }
 
+// PostDescribeTags - <p>Describes the specified tags for your EC2 resources.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeTags(ctx context.Context, request operations.PostDescribeTagsRequest) (*operations.PostDescribeTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23759,7 +24310,7 @@ func (s *SDK) PostDescribeTags(ctx context.Context, request operations.PostDescr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23789,8 +24340,9 @@ func (s *SDK) PostDescribeTags(ctx context.Context, request operations.PostDescr
 	return res, nil
 }
 
+// PostDescribeTrafficMirrorFilters - Describes one or more Traffic Mirror filters.
 func (s *SDK) PostDescribeTrafficMirrorFilters(ctx context.Context, request operations.PostDescribeTrafficMirrorFiltersRequest) (*operations.PostDescribeTrafficMirrorFiltersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTrafficMirrorFilters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23809,7 +24361,7 @@ func (s *SDK) PostDescribeTrafficMirrorFilters(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23839,8 +24391,9 @@ func (s *SDK) PostDescribeTrafficMirrorFilters(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeTrafficMirrorSessions - Describes one or more Traffic Mirror sessions. By default, all Traffic Mirror sessions are described. Alternatively, you can filter the results.
 func (s *SDK) PostDescribeTrafficMirrorSessions(ctx context.Context, request operations.PostDescribeTrafficMirrorSessionsRequest) (*operations.PostDescribeTrafficMirrorSessionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTrafficMirrorSessions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23859,7 +24412,7 @@ func (s *SDK) PostDescribeTrafficMirrorSessions(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23889,8 +24442,9 @@ func (s *SDK) PostDescribeTrafficMirrorSessions(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDescribeTrafficMirrorTargets - Information about one or more Traffic Mirror targets.
 func (s *SDK) PostDescribeTrafficMirrorTargets(ctx context.Context, request operations.PostDescribeTrafficMirrorTargetsRequest) (*operations.PostDescribeTrafficMirrorTargetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTrafficMirrorTargets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23909,7 +24463,7 @@ func (s *SDK) PostDescribeTrafficMirrorTargets(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23939,8 +24493,9 @@ func (s *SDK) PostDescribeTrafficMirrorTargets(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeTransitGatewayAttachments - Describes one or more attachments between resources and transit gateways. By default, all attachments are described. Alternatively, you can filter the results by attachment ID, attachment state, resource ID, or resource owner.
 func (s *SDK) PostDescribeTransitGatewayAttachments(ctx context.Context, request operations.PostDescribeTransitGatewayAttachmentsRequest) (*operations.PostDescribeTransitGatewayAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGatewayAttachments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23959,7 +24514,7 @@ func (s *SDK) PostDescribeTransitGatewayAttachments(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23989,8 +24544,9 @@ func (s *SDK) PostDescribeTransitGatewayAttachments(ctx context.Context, request
 	return res, nil
 }
 
+// PostDescribeTransitGatewayConnectPeers - Describes one or more Connect peers.
 func (s *SDK) PostDescribeTransitGatewayConnectPeers(ctx context.Context, request operations.PostDescribeTransitGatewayConnectPeersRequest) (*operations.PostDescribeTransitGatewayConnectPeersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGatewayConnectPeers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24009,7 +24565,7 @@ func (s *SDK) PostDescribeTransitGatewayConnectPeers(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24039,8 +24595,9 @@ func (s *SDK) PostDescribeTransitGatewayConnectPeers(ctx context.Context, reques
 	return res, nil
 }
 
+// PostDescribeTransitGatewayConnects - Describes one or more Connect attachments.
 func (s *SDK) PostDescribeTransitGatewayConnects(ctx context.Context, request operations.PostDescribeTransitGatewayConnectsRequest) (*operations.PostDescribeTransitGatewayConnectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGatewayConnects"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24059,7 +24616,7 @@ func (s *SDK) PostDescribeTransitGatewayConnects(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24089,8 +24646,9 @@ func (s *SDK) PostDescribeTransitGatewayConnects(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDescribeTransitGatewayMulticastDomains - Describes one or more transit gateway multicast domains.
 func (s *SDK) PostDescribeTransitGatewayMulticastDomains(ctx context.Context, request operations.PostDescribeTransitGatewayMulticastDomainsRequest) (*operations.PostDescribeTransitGatewayMulticastDomainsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGatewayMulticastDomains"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24109,7 +24667,7 @@ func (s *SDK) PostDescribeTransitGatewayMulticastDomains(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24139,8 +24697,9 @@ func (s *SDK) PostDescribeTransitGatewayMulticastDomains(ctx context.Context, re
 	return res, nil
 }
 
+// PostDescribeTransitGatewayPeeringAttachments - Describes your transit gateway peering attachments.
 func (s *SDK) PostDescribeTransitGatewayPeeringAttachments(ctx context.Context, request operations.PostDescribeTransitGatewayPeeringAttachmentsRequest) (*operations.PostDescribeTransitGatewayPeeringAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGatewayPeeringAttachments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24159,7 +24718,7 @@ func (s *SDK) PostDescribeTransitGatewayPeeringAttachments(ctx context.Context, 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24189,8 +24748,9 @@ func (s *SDK) PostDescribeTransitGatewayPeeringAttachments(ctx context.Context, 
 	return res, nil
 }
 
+// PostDescribeTransitGatewayRouteTables - Describes one or more transit gateway route tables. By default, all transit gateway route tables are described. Alternatively, you can filter the results.
 func (s *SDK) PostDescribeTransitGatewayRouteTables(ctx context.Context, request operations.PostDescribeTransitGatewayRouteTablesRequest) (*operations.PostDescribeTransitGatewayRouteTablesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGatewayRouteTables"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24209,7 +24769,7 @@ func (s *SDK) PostDescribeTransitGatewayRouteTables(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24239,8 +24799,9 @@ func (s *SDK) PostDescribeTransitGatewayRouteTables(ctx context.Context, request
 	return res, nil
 }
 
+// PostDescribeTransitGatewayVpcAttachments - Describes one or more VPC attachments. By default, all VPC attachments are described. Alternatively, you can filter the results.
 func (s *SDK) PostDescribeTransitGatewayVpcAttachments(ctx context.Context, request operations.PostDescribeTransitGatewayVpcAttachmentsRequest) (*operations.PostDescribeTransitGatewayVpcAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGatewayVpcAttachments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24259,7 +24820,7 @@ func (s *SDK) PostDescribeTransitGatewayVpcAttachments(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24289,8 +24850,9 @@ func (s *SDK) PostDescribeTransitGatewayVpcAttachments(ctx context.Context, requ
 	return res, nil
 }
 
+// PostDescribeTransitGateways - Describes one or more transit gateways. By default, all transit gateways are described. Alternatively, you can filter the results.
 func (s *SDK) PostDescribeTransitGateways(ctx context.Context, request operations.PostDescribeTransitGatewaysRequest) (*operations.PostDescribeTransitGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTransitGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24309,7 +24871,7 @@ func (s *SDK) PostDescribeTransitGateways(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24339,8 +24901,9 @@ func (s *SDK) PostDescribeTransitGateways(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeTrunkInterfaceAssociations - <note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Describes one or more network interface trunk associations.</p>
 func (s *SDK) PostDescribeTrunkInterfaceAssociations(ctx context.Context, request operations.PostDescribeTrunkInterfaceAssociationsRequest) (*operations.PostDescribeTrunkInterfaceAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeTrunkInterfaceAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24359,7 +24922,7 @@ func (s *SDK) PostDescribeTrunkInterfaceAssociations(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24389,8 +24952,9 @@ func (s *SDK) PostDescribeTrunkInterfaceAssociations(ctx context.Context, reques
 	return res, nil
 }
 
+// PostDescribeVolumeAttribute - <p>Describes the specified attribute of the specified volume. You can specify only one attribute at a time.</p> <p>For more information about EBS volumes, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html">Amazon EBS volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeVolumeAttribute(ctx context.Context, request operations.PostDescribeVolumeAttributeRequest) (*operations.PostDescribeVolumeAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVolumeAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24409,7 +24973,7 @@ func (s *SDK) PostDescribeVolumeAttribute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24439,8 +25003,9 @@ func (s *SDK) PostDescribeVolumeAttribute(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeVolumeStatus - <p>Describes the status of the specified volumes. Volume status provides the result of the checks performed on your volumes to determine events that can impair the performance of your volumes. The performance of a volume can be affected if an issue occurs on the volume's underlying host. If the volume's underlying host experiences a power outage or system issue, after the system is restored, there could be data inconsistencies on the volume. Volume events notify you if this occurs. Volume actions notify you if any action needs to be taken in response to the event.</p> <p>The <code>DescribeVolumeStatus</code> operation provides the following information about the specified volumes:</p> <p> <i>Status</i>: Reflects the current status of the volume. The possible values are <code>ok</code>, <code>impaired</code> , <code>warning</code>, or <code>insufficient-data</code>. If all checks pass, the overall status of the volume is <code>ok</code>. If the check fails, the overall status is <code>impaired</code>. If the status is <code>insufficient-data</code>, then the checks might still be taking place on your volume at the time. We recommend that you retry the request. For more information about volume status, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html">Monitor the status of your volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p> <i>Events</i>: Reflect the cause of a volume status and might require you to take action. For example, if your volume returns an <code>impaired</code> status, then the volume event might be <code>potential-data-inconsistency</code>. This means that your volume has been affected by an issue with the underlying host, has all I/O operations disabled, and might have inconsistent data.</p> <p> <i>Actions</i>: Reflect the actions you might have to take in response to an event. For example, if the status of the volume is <code>impaired</code> and the volume event shows <code>potential-data-inconsistency</code>, then the action shows <code>enable-volume-io</code>. This means that you may want to enable the I/O operations for the volume by calling the <a>EnableVolumeIO</a> action and then check the volume for data consistency.</p> <p>Volume status is based on the volume status checks, and does not reflect the volume state. Therefore, volume status does not indicate volumes in the <code>error</code> state (for example, when a volume is incapable of accepting I/O.)</p>
 func (s *SDK) PostDescribeVolumeStatus(ctx context.Context, request operations.PostDescribeVolumeStatusRequest) (*operations.PostDescribeVolumeStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVolumeStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24459,7 +25024,7 @@ func (s *SDK) PostDescribeVolumeStatus(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24489,8 +25054,9 @@ func (s *SDK) PostDescribeVolumeStatus(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDescribeVolumes - <p>Describes the specified EBS volumes or all of your EBS volumes.</p> <p>If you are describing a long list of volumes, we recommend that you paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeVolumes</code> request to retrieve the remaining results.</p> <p>For more information about EBS volumes, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html">Amazon EBS volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeVolumes(ctx context.Context, request operations.PostDescribeVolumesRequest) (*operations.PostDescribeVolumesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVolumes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24509,7 +25075,7 @@ func (s *SDK) PostDescribeVolumes(ctx context.Context, request operations.PostDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24539,8 +25105,9 @@ func (s *SDK) PostDescribeVolumes(ctx context.Context, request operations.PostDe
 	return res, nil
 }
 
+// PostDescribeVolumesModifications - <p>Describes the most recent volume modification request for the specified EBS volumes.</p> <p>If a volume has never been modified, some information in the output will be null. If a volume has been modified more than once, the output includes only the most recent modification request.</p> <p>You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/">Amazon CloudWatch Events User Guide</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html">Monitor the progress of volume modifications</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDescribeVolumesModifications(ctx context.Context, request operations.PostDescribeVolumesModificationsRequest) (*operations.PostDescribeVolumesModificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVolumesModifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24559,7 +25126,7 @@ func (s *SDK) PostDescribeVolumesModifications(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24589,8 +25156,9 @@ func (s *SDK) PostDescribeVolumesModifications(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostDescribeVpcAttribute - Describes the specified attribute of the specified VPC. You can specify only one attribute at a time.
 func (s *SDK) PostDescribeVpcAttribute(ctx context.Context, request operations.PostDescribeVpcAttributeRequest) (*operations.PostDescribeVpcAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24609,7 +25177,7 @@ func (s *SDK) PostDescribeVpcAttribute(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24639,8 +25207,9 @@ func (s *SDK) PostDescribeVpcAttribute(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDescribeVpcClassicLink - Describes the ClassicLink status of one or more VPCs.
 func (s *SDK) PostDescribeVpcClassicLink(ctx context.Context, request operations.PostDescribeVpcClassicLinkRequest) (*operations.PostDescribeVpcClassicLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcClassicLink"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24659,7 +25228,7 @@ func (s *SDK) PostDescribeVpcClassicLink(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24689,8 +25258,9 @@ func (s *SDK) PostDescribeVpcClassicLink(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDescribeVpcClassicLinkDNSSupport - Describes the ClassicLink DNS support status of one or more VPCs. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
 func (s *SDK) PostDescribeVpcClassicLinkDNSSupport(ctx context.Context, request operations.PostDescribeVpcClassicLinkDNSSupportRequest) (*operations.PostDescribeVpcClassicLinkDNSSupportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcClassicLinkDnsSupport"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24709,7 +25279,7 @@ func (s *SDK) PostDescribeVpcClassicLinkDNSSupport(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24739,8 +25309,9 @@ func (s *SDK) PostDescribeVpcClassicLinkDNSSupport(ctx context.Context, request 
 	return res, nil
 }
 
+// PostDescribeVpcEndpointConnectionNotifications - Describes the connection notifications for VPC endpoints and VPC endpoint services.
 func (s *SDK) PostDescribeVpcEndpointConnectionNotifications(ctx context.Context, request operations.PostDescribeVpcEndpointConnectionNotificationsRequest) (*operations.PostDescribeVpcEndpointConnectionNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcEndpointConnectionNotifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24759,7 +25330,7 @@ func (s *SDK) PostDescribeVpcEndpointConnectionNotifications(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24789,8 +25360,9 @@ func (s *SDK) PostDescribeVpcEndpointConnectionNotifications(ctx context.Context
 	return res, nil
 }
 
+// PostDescribeVpcEndpointConnections - Describes the VPC endpoint connections to your VPC endpoint services, including any endpoints that are pending your acceptance.
 func (s *SDK) PostDescribeVpcEndpointConnections(ctx context.Context, request operations.PostDescribeVpcEndpointConnectionsRequest) (*operations.PostDescribeVpcEndpointConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcEndpointConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24809,7 +25381,7 @@ func (s *SDK) PostDescribeVpcEndpointConnections(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24839,8 +25411,9 @@ func (s *SDK) PostDescribeVpcEndpointConnections(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDescribeVpcEndpointServiceConfigurations - Describes the VPC endpoint service configurations in your account (your services).
 func (s *SDK) PostDescribeVpcEndpointServiceConfigurations(ctx context.Context, request operations.PostDescribeVpcEndpointServiceConfigurationsRequest) (*operations.PostDescribeVpcEndpointServiceConfigurationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcEndpointServiceConfigurations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24859,7 +25432,7 @@ func (s *SDK) PostDescribeVpcEndpointServiceConfigurations(ctx context.Context, 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24889,8 +25462,9 @@ func (s *SDK) PostDescribeVpcEndpointServiceConfigurations(ctx context.Context, 
 	return res, nil
 }
 
+// PostDescribeVpcEndpointServicePermissions - Describes the principals (service consumers) that are permitted to discover your VPC endpoint service.
 func (s *SDK) PostDescribeVpcEndpointServicePermissions(ctx context.Context, request operations.PostDescribeVpcEndpointServicePermissionsRequest) (*operations.PostDescribeVpcEndpointServicePermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcEndpointServicePermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24909,7 +25483,7 @@ func (s *SDK) PostDescribeVpcEndpointServicePermissions(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24939,8 +25513,9 @@ func (s *SDK) PostDescribeVpcEndpointServicePermissions(ctx context.Context, req
 	return res, nil
 }
 
+// PostDescribeVpcEndpointServices - <p>Describes available services to which you can create a VPC endpoint.</p> <p>When the service provider and the consumer have different accounts in multiple Availability Zones, and the consumer views the VPC endpoint service information, the response only includes the common Availability Zones. For example, when the service provider account uses <code>us-east-1a</code> and <code>us-east-1c</code> and the consumer uses <code>us-east-1a</code> and <code>us-east-1b</code>, the response includes the VPC endpoint services in the common Availability Zone, <code>us-east-1a</code>.</p>
 func (s *SDK) PostDescribeVpcEndpointServices(ctx context.Context, request operations.PostDescribeVpcEndpointServicesRequest) (*operations.PostDescribeVpcEndpointServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcEndpointServices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24959,7 +25534,7 @@ func (s *SDK) PostDescribeVpcEndpointServices(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24989,8 +25564,9 @@ func (s *SDK) PostDescribeVpcEndpointServices(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDescribeVpcEndpoints - Describes one or more of your VPC endpoints.
 func (s *SDK) PostDescribeVpcEndpoints(ctx context.Context, request operations.PostDescribeVpcEndpointsRequest) (*operations.PostDescribeVpcEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcEndpoints"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25009,7 +25585,7 @@ func (s *SDK) PostDescribeVpcEndpoints(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25039,8 +25615,9 @@ func (s *SDK) PostDescribeVpcEndpoints(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDescribeVpcPeeringConnections - Describes one or more of your VPC peering connections.
 func (s *SDK) PostDescribeVpcPeeringConnections(ctx context.Context, request operations.PostDescribeVpcPeeringConnectionsRequest) (*operations.PostDescribeVpcPeeringConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcPeeringConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25059,7 +25636,7 @@ func (s *SDK) PostDescribeVpcPeeringConnections(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25089,8 +25666,9 @@ func (s *SDK) PostDescribeVpcPeeringConnections(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDescribeVpcs - Describes one or more of your VPCs.
 func (s *SDK) PostDescribeVpcs(ctx context.Context, request operations.PostDescribeVpcsRequest) (*operations.PostDescribeVpcsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpcs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25109,7 +25687,7 @@ func (s *SDK) PostDescribeVpcs(ctx context.Context, request operations.PostDescr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25139,8 +25717,9 @@ func (s *SDK) PostDescribeVpcs(ctx context.Context, request operations.PostDescr
 	return res, nil
 }
 
+// PostDescribeVpnConnections - <p>Describes one or more of your VPN connections.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) PostDescribeVpnConnections(ctx context.Context, request operations.PostDescribeVpnConnectionsRequest) (*operations.PostDescribeVpnConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpnConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25159,7 +25738,7 @@ func (s *SDK) PostDescribeVpnConnections(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25189,8 +25768,9 @@ func (s *SDK) PostDescribeVpnConnections(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDescribeVpnGateways - <p>Describes one or more of your virtual private gateways.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>
 func (s *SDK) PostDescribeVpnGateways(ctx context.Context, request operations.PostDescribeVpnGatewaysRequest) (*operations.PostDescribeVpnGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeVpnGateways"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25209,7 +25789,7 @@ func (s *SDK) PostDescribeVpnGateways(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25239,8 +25819,9 @@ func (s *SDK) PostDescribeVpnGateways(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDetachClassicLinkVpc - Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the instance has been unlinked, the VPC security groups are no longer associated with it. An instance is automatically unlinked from a VPC when it's stopped.
 func (s *SDK) PostDetachClassicLinkVpc(ctx context.Context, request operations.PostDetachClassicLinkVpcRequest) (*operations.PostDetachClassicLinkVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachClassicLinkVpc"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25259,7 +25840,7 @@ func (s *SDK) PostDetachClassicLinkVpc(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25289,8 +25870,9 @@ func (s *SDK) PostDetachClassicLinkVpc(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDetachInternetGateway - Detaches an internet gateway from a VPC, disabling connectivity between the internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
 func (s *SDK) PostDetachInternetGateway(ctx context.Context, request operations.PostDetachInternetGatewayRequest) (*operations.PostDetachInternetGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachInternetGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25309,7 +25891,7 @@ func (s *SDK) PostDetachInternetGateway(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25330,8 +25912,9 @@ func (s *SDK) PostDetachInternetGateway(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostDetachNetworkInterface - Detaches a network interface from an instance.
 func (s *SDK) PostDetachNetworkInterface(ctx context.Context, request operations.PostDetachNetworkInterfaceRequest) (*operations.PostDetachNetworkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachNetworkInterface"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25350,7 +25933,7 @@ func (s *SDK) PostDetachNetworkInterface(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25371,8 +25954,9 @@ func (s *SDK) PostDetachNetworkInterface(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDetachVolume - <p>Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the <code>busy</code> state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first.</p> <p>When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the product code is no longer associated with the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html">Detach an Amazon EBS volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDetachVolume(ctx context.Context, request operations.PostDetachVolumeRequest) (*operations.PostDetachVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachVolume"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25391,7 +25975,7 @@ func (s *SDK) PostDetachVolume(ctx context.Context, request operations.PostDetac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25421,8 +26005,9 @@ func (s *SDK) PostDetachVolume(ctx context.Context, request operations.PostDetac
 	return res, nil
 }
 
+// PostDetachVpnGateway - <p>Detaches a virtual private gateway from a VPC. You do this if you're planning to turn off the VPC and not use it anymore. You can confirm a virtual private gateway has been completely detached from a VPC by describing the virtual private gateway (any attachments to the virtual private gateway are also described).</p> <p>You must wait for the attachment's state to switch to <code>detached</code> before you can delete the VPC or attach a different VPC to the virtual private gateway.</p>
 func (s *SDK) PostDetachVpnGateway(ctx context.Context, request operations.PostDetachVpnGatewayRequest) (*operations.PostDetachVpnGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DetachVpnGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25441,7 +26026,7 @@ func (s *SDK) PostDetachVpnGateway(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25462,8 +26047,9 @@ func (s *SDK) PostDetachVpnGateway(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDisableEbsEncryptionByDefault - <p>Disables EBS encryption by default for your account in the current Region.</p> <p>After you disable encryption by default, you can still create encrypted volumes by enabling encryption when you create each volume.</p> <p>Disabling encryption by default does not change the encryption status of your existing volumes.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDisableEbsEncryptionByDefault(ctx context.Context, request operations.PostDisableEbsEncryptionByDefaultRequest) (*operations.PostDisableEbsEncryptionByDefaultResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableEbsEncryptionByDefault"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25482,7 +26068,7 @@ func (s *SDK) PostDisableEbsEncryptionByDefault(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25512,8 +26098,9 @@ func (s *SDK) PostDisableEbsEncryptionByDefault(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDisableFastSnapshotRestores - Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.
 func (s *SDK) PostDisableFastSnapshotRestores(ctx context.Context, request operations.PostDisableFastSnapshotRestoresRequest) (*operations.PostDisableFastSnapshotRestoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableFastSnapshotRestores"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25532,7 +26119,7 @@ func (s *SDK) PostDisableFastSnapshotRestores(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25562,8 +26149,9 @@ func (s *SDK) PostDisableFastSnapshotRestores(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDisableImageDeprecation - <p>Cancels the deprecation of the specified AMI.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html">Deprecate an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostDisableImageDeprecation(ctx context.Context, request operations.PostDisableImageDeprecationRequest) (*operations.PostDisableImageDeprecationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableImageDeprecation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25582,7 +26170,7 @@ func (s *SDK) PostDisableImageDeprecation(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25612,8 +26200,9 @@ func (s *SDK) PostDisableImageDeprecation(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDisableSerialConsoleAccess - Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) PostDisableSerialConsoleAccess(ctx context.Context, request operations.PostDisableSerialConsoleAccessRequest) (*operations.PostDisableSerialConsoleAccessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableSerialConsoleAccess"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25632,7 +26221,7 @@ func (s *SDK) PostDisableSerialConsoleAccess(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25662,8 +26251,9 @@ func (s *SDK) PostDisableSerialConsoleAccess(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDisableTransitGatewayRouteTablePropagation - Disables the specified resource attachment from propagating routes to the specified propagation route table.
 func (s *SDK) PostDisableTransitGatewayRouteTablePropagation(ctx context.Context, request operations.PostDisableTransitGatewayRouteTablePropagationRequest) (*operations.PostDisableTransitGatewayRouteTablePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableTransitGatewayRouteTablePropagation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25682,7 +26272,7 @@ func (s *SDK) PostDisableTransitGatewayRouteTablePropagation(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25712,8 +26302,9 @@ func (s *SDK) PostDisableTransitGatewayRouteTablePropagation(ctx context.Context
 	return res, nil
 }
 
+// PostDisableVgwRoutePropagation - Disables a virtual private gateway (VGW) from propagating routes to a specified route table of a VPC.
 func (s *SDK) PostDisableVgwRoutePropagation(ctx context.Context, request operations.PostDisableVgwRoutePropagationRequest) (*operations.PostDisableVgwRoutePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableVgwRoutePropagation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25732,7 +26323,7 @@ func (s *SDK) PostDisableVgwRoutePropagation(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25753,8 +26344,9 @@ func (s *SDK) PostDisableVgwRoutePropagation(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDisableVpcClassicLink - Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC that has EC2-Classic instances linked to it.
 func (s *SDK) PostDisableVpcClassicLink(ctx context.Context, request operations.PostDisableVpcClassicLinkRequest) (*operations.PostDisableVpcClassicLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableVpcClassicLink"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25773,7 +26365,7 @@ func (s *SDK) PostDisableVpcClassicLink(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25803,8 +26395,9 @@ func (s *SDK) PostDisableVpcClassicLink(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostDisableVpcClassicLinkDNSSupport - <p>Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>
 func (s *SDK) PostDisableVpcClassicLinkDNSSupport(ctx context.Context, request operations.PostDisableVpcClassicLinkDNSSupportRequest) (*operations.PostDisableVpcClassicLinkDNSSupportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisableVpcClassicLinkDnsSupport"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25823,7 +26416,7 @@ func (s *SDK) PostDisableVpcClassicLinkDNSSupport(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25853,8 +26446,9 @@ func (s *SDK) PostDisableVpcClassicLinkDNSSupport(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDisassociateAddress - <p>Disassociates an Elastic IP address from the instance or network interface it's associated with.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>
 func (s *SDK) PostDisassociateAddress(ctx context.Context, request operations.PostDisassociateAddressRequest) (*operations.PostDisassociateAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateAddress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25873,7 +26467,7 @@ func (s *SDK) PostDisassociateAddress(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25894,8 +26488,9 @@ func (s *SDK) PostDisassociateAddress(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDisassociateClientVpnTargetNetwork - <p>Disassociates a target network from the specified Client VPN endpoint. When you disassociate the last target network from a Client VPN, the following happens:</p> <ul> <li> <p>The route that was automatically added for the VPC is deleted</p> </li> <li> <p>All active client connections are terminated</p> </li> <li> <p>New client connections are disallowed</p> </li> <li> <p>The Client VPN endpoint's status changes to <code>pending-associate</code> </p> </li> </ul>
 func (s *SDK) PostDisassociateClientVpnTargetNetwork(ctx context.Context, request operations.PostDisassociateClientVpnTargetNetworkRequest) (*operations.PostDisassociateClientVpnTargetNetworkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateClientVpnTargetNetwork"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25914,7 +26509,7 @@ func (s *SDK) PostDisassociateClientVpnTargetNetwork(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25944,8 +26539,9 @@ func (s *SDK) PostDisassociateClientVpnTargetNetwork(ctx context.Context, reques
 	return res, nil
 }
 
+// PostDisassociateEnclaveCertificateIamRole - Disassociates an IAM role from an Certificate Manager (ACM) certificate. Disassociating an IAM role from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and encrypted private key from the Amazon S3 bucket. It also revokes the IAM role's permission to use the KMS key used to encrypt the private key. This effectively revokes the role's permission to use the certificate.
 func (s *SDK) PostDisassociateEnclaveCertificateIamRole(ctx context.Context, request operations.PostDisassociateEnclaveCertificateIamRoleRequest) (*operations.PostDisassociateEnclaveCertificateIamRoleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateEnclaveCertificateIamRole"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25964,7 +26560,7 @@ func (s *SDK) PostDisassociateEnclaveCertificateIamRole(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25994,8 +26590,9 @@ func (s *SDK) PostDisassociateEnclaveCertificateIamRole(ctx context.Context, req
 	return res, nil
 }
 
+// PostDisassociateIamInstanceProfile - <p>Disassociates an IAM instance profile from a running or stopped instance.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>
 func (s *SDK) PostDisassociateIamInstanceProfile(ctx context.Context, request operations.PostDisassociateIamInstanceProfileRequest) (*operations.PostDisassociateIamInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateIamInstanceProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26014,7 +26611,7 @@ func (s *SDK) PostDisassociateIamInstanceProfile(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26044,8 +26641,9 @@ func (s *SDK) PostDisassociateIamInstanceProfile(ctx context.Context, request op
 	return res, nil
 }
 
+// PostDisassociateInstanceEventWindow - <p>Disassociates one or more targets from an event window.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostDisassociateInstanceEventWindow(ctx context.Context, request operations.PostDisassociateInstanceEventWindowRequest) (*operations.PostDisassociateInstanceEventWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateInstanceEventWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26064,7 +26662,7 @@ func (s *SDK) PostDisassociateInstanceEventWindow(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26094,8 +26692,9 @@ func (s *SDK) PostDisassociateInstanceEventWindow(ctx context.Context, request o
 	return res, nil
 }
 
+// PostDisassociateRouteTable - <p>Disassociates a subnet or gateway from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostDisassociateRouteTable(ctx context.Context, request operations.PostDisassociateRouteTableRequest) (*operations.PostDisassociateRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26114,7 +26713,7 @@ func (s *SDK) PostDisassociateRouteTable(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26135,8 +26734,9 @@ func (s *SDK) PostDisassociateRouteTable(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDisassociateSubnetCidrBlock - Disassociates a CIDR block from a subnet. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.
 func (s *SDK) PostDisassociateSubnetCidrBlock(ctx context.Context, request operations.PostDisassociateSubnetCidrBlockRequest) (*operations.PostDisassociateSubnetCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateSubnetCidrBlock"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26155,7 +26755,7 @@ func (s *SDK) PostDisassociateSubnetCidrBlock(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26185,8 +26785,9 @@ func (s *SDK) PostDisassociateSubnetCidrBlock(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDisassociateTransitGatewayMulticastDomain - Disassociates the specified subnets from the transit gateway multicast domain.
 func (s *SDK) PostDisassociateTransitGatewayMulticastDomain(ctx context.Context, request operations.PostDisassociateTransitGatewayMulticastDomainRequest) (*operations.PostDisassociateTransitGatewayMulticastDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateTransitGatewayMulticastDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26205,7 +26806,7 @@ func (s *SDK) PostDisassociateTransitGatewayMulticastDomain(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26235,8 +26836,9 @@ func (s *SDK) PostDisassociateTransitGatewayMulticastDomain(ctx context.Context,
 	return res, nil
 }
 
+// PostDisassociateTransitGatewayRouteTable - Disassociates a resource attachment from a transit gateway route table.
 func (s *SDK) PostDisassociateTransitGatewayRouteTable(ctx context.Context, request operations.PostDisassociateTransitGatewayRouteTableRequest) (*operations.PostDisassociateTransitGatewayRouteTableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateTransitGatewayRouteTable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26255,7 +26857,7 @@ func (s *SDK) PostDisassociateTransitGatewayRouteTable(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26285,8 +26887,9 @@ func (s *SDK) PostDisassociateTransitGatewayRouteTable(ctx context.Context, requ
 	return res, nil
 }
 
+// PostDisassociateTrunkInterface - <note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Removes an association between a branch network interface with a trunk network interface.</p>
 func (s *SDK) PostDisassociateTrunkInterface(ctx context.Context, request operations.PostDisassociateTrunkInterfaceRequest) (*operations.PostDisassociateTrunkInterfaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateTrunkInterface"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26305,7 +26908,7 @@ func (s *SDK) PostDisassociateTrunkInterface(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26335,8 +26938,9 @@ func (s *SDK) PostDisassociateTrunkInterface(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDisassociateVpcCidrBlock - <p>Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using <a>DescribeVpcs</a>. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. </p> <p>You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).</p>
 func (s *SDK) PostDisassociateVpcCidrBlock(ctx context.Context, request operations.PostDisassociateVpcCidrBlockRequest) (*operations.PostDisassociateVpcCidrBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DisassociateVpcCidrBlock"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26355,7 +26959,7 @@ func (s *SDK) PostDisassociateVpcCidrBlock(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26385,8 +26989,9 @@ func (s *SDK) PostDisassociateVpcCidrBlock(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostEnableEbsEncryptionByDefault - <p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default KMS key or the KMS key that you specified when you created each volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default KMS key for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances">Supported instance types</a>.</p>
 func (s *SDK) PostEnableEbsEncryptionByDefault(ctx context.Context, request operations.PostEnableEbsEncryptionByDefaultRequest) (*operations.PostEnableEbsEncryptionByDefaultResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableEbsEncryptionByDefault"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26405,7 +27010,7 @@ func (s *SDK) PostEnableEbsEncryptionByDefault(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26435,8 +27040,9 @@ func (s *SDK) PostEnableEbsEncryptionByDefault(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostEnableFastSnapshotRestores - <p>Enables fast snapshot restores for the specified snapshots in the specified Availability Zones.</p> <p>You get the full benefit of fast snapshot restores after they enter the <code>enabled</code> state. To get the current state of fast snapshot restores, use <a>DescribeFastSnapshotRestores</a>. To disable fast snapshot restores, use <a>DisableFastSnapshotRestores</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html">Amazon EBS fast snapshot restore</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostEnableFastSnapshotRestores(ctx context.Context, request operations.PostEnableFastSnapshotRestoresRequest) (*operations.PostEnableFastSnapshotRestoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableFastSnapshotRestores"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26455,7 +27061,7 @@ func (s *SDK) PostEnableFastSnapshotRestores(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26485,8 +27091,9 @@ func (s *SDK) PostEnableFastSnapshotRestores(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostEnableImageDeprecation - <p>Enables deprecation of the specified AMI at the specified date and time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html">Deprecate an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostEnableImageDeprecation(ctx context.Context, request operations.PostEnableImageDeprecationRequest) (*operations.PostEnableImageDeprecationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableImageDeprecation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26505,7 +27112,7 @@ func (s *SDK) PostEnableImageDeprecation(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26535,8 +27142,9 @@ func (s *SDK) PostEnableImageDeprecation(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostEnableSerialConsoleAccess - Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) PostEnableSerialConsoleAccess(ctx context.Context, request operations.PostEnableSerialConsoleAccessRequest) (*operations.PostEnableSerialConsoleAccessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableSerialConsoleAccess"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26555,7 +27163,7 @@ func (s *SDK) PostEnableSerialConsoleAccess(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26585,8 +27193,9 @@ func (s *SDK) PostEnableSerialConsoleAccess(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostEnableTransitGatewayRouteTablePropagation - Enables the specified attachment to propagate routes to the specified propagation route table.
 func (s *SDK) PostEnableTransitGatewayRouteTablePropagation(ctx context.Context, request operations.PostEnableTransitGatewayRouteTablePropagationRequest) (*operations.PostEnableTransitGatewayRouteTablePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableTransitGatewayRouteTablePropagation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26605,7 +27214,7 @@ func (s *SDK) PostEnableTransitGatewayRouteTablePropagation(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26635,8 +27244,9 @@ func (s *SDK) PostEnableTransitGatewayRouteTablePropagation(ctx context.Context,
 	return res, nil
 }
 
+// PostEnableVgwRoutePropagation - Enables a virtual private gateway (VGW) to propagate routes to the specified route table of a VPC.
 func (s *SDK) PostEnableVgwRoutePropagation(ctx context.Context, request operations.PostEnableVgwRoutePropagationRequest) (*operations.PostEnableVgwRoutePropagationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVgwRoutePropagation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26655,7 +27265,7 @@ func (s *SDK) PostEnableVgwRoutePropagation(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26676,8 +27286,9 @@ func (s *SDK) PostEnableVgwRoutePropagation(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostEnableVolumeIo - Enables I/O operations for a volume that had I/O operations disabled because the data on the volume was potentially inconsistent.
 func (s *SDK) PostEnableVolumeIo(ctx context.Context, request operations.PostEnableVolumeIoRequest) (*operations.PostEnableVolumeIoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVolumeIO"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26696,7 +27307,7 @@ func (s *SDK) PostEnableVolumeIo(ctx context.Context, request operations.PostEna
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26717,8 +27328,9 @@ func (s *SDK) PostEnableVolumeIo(ctx context.Context, request operations.PostEna
 	return res, nil
 }
 
+// PostEnableVpcClassicLink - Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC route tables have existing routes for address ranges within the <code>10.0.0.0/8</code> IP address range, excluding local routes for VPCs in the <code>10.0.0.0/16</code> and <code>10.1.0.0/16</code> IP address ranges. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.
 func (s *SDK) PostEnableVpcClassicLink(ctx context.Context, request operations.PostEnableVpcClassicLinkRequest) (*operations.PostEnableVpcClassicLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVpcClassicLink"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26737,7 +27349,7 @@ func (s *SDK) PostEnableVpcClassicLink(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26767,8 +27379,9 @@ func (s *SDK) PostEnableVpcClassicLink(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostEnableVpcClassicLinkDNSSupport - <p>Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>
 func (s *SDK) PostEnableVpcClassicLinkDNSSupport(ctx context.Context, request operations.PostEnableVpcClassicLinkDNSSupportRequest) (*operations.PostEnableVpcClassicLinkDNSSupportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=EnableVpcClassicLinkDnsSupport"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26787,7 +27400,7 @@ func (s *SDK) PostEnableVpcClassicLinkDNSSupport(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26817,8 +27430,9 @@ func (s *SDK) PostEnableVpcClassicLinkDNSSupport(ctx context.Context, request op
 	return res, nil
 }
 
+// PostExportClientVpnClientCertificateRevocationList - Downloads the client certificate revocation list for the specified Client VPN endpoint.
 func (s *SDK) PostExportClientVpnClientCertificateRevocationList(ctx context.Context, request operations.PostExportClientVpnClientCertificateRevocationListRequest) (*operations.PostExportClientVpnClientCertificateRevocationListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ExportClientVpnClientCertificateRevocationList"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26837,7 +27451,7 @@ func (s *SDK) PostExportClientVpnClientCertificateRevocationList(ctx context.Con
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26867,8 +27481,9 @@ func (s *SDK) PostExportClientVpnClientCertificateRevocationList(ctx context.Con
 	return res, nil
 }
 
+// PostExportClientVpnClientConfiguration - Downloads the contents of the Client VPN endpoint configuration file for the specified Client VPN endpoint. The Client VPN endpoint configuration file includes the Client VPN endpoint and certificate information clients need to establish a connection with the Client VPN endpoint.
 func (s *SDK) PostExportClientVpnClientConfiguration(ctx context.Context, request operations.PostExportClientVpnClientConfigurationRequest) (*operations.PostExportClientVpnClientConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ExportClientVpnClientConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26887,7 +27502,7 @@ func (s *SDK) PostExportClientVpnClientConfiguration(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26917,8 +27532,9 @@ func (s *SDK) PostExportClientVpnClientConfiguration(ctx context.Context, reques
 	return res, nil
 }
 
+// PostExportImage - Exports an Amazon Machine Image (AMI) to a VM file. For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport_image.html">Exporting a VM directly from an Amazon Machine Image (AMI)</a> in the <i>VM Import/Export User Guide</i>.
 func (s *SDK) PostExportImage(ctx context.Context, request operations.PostExportImageRequest) (*operations.PostExportImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ExportImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26937,7 +27553,7 @@ func (s *SDK) PostExportImage(ctx context.Context, request operations.PostExport
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26967,8 +27583,9 @@ func (s *SDK) PostExportImage(ctx context.Context, request operations.PostExport
 	return res, nil
 }
 
+// PostExportTransitGatewayRoutes - <p>Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.</p> <p>The routes are saved to the specified bucket in a JSON file. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-route-tables.html#tgw-export-route-tables">Export Route Tables to Amazon S3</a> in <i>Transit Gateways</i>.</p>
 func (s *SDK) PostExportTransitGatewayRoutes(ctx context.Context, request operations.PostExportTransitGatewayRoutesRequest) (*operations.PostExportTransitGatewayRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ExportTransitGatewayRoutes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26987,7 +27604,7 @@ func (s *SDK) PostExportTransitGatewayRoutes(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27017,8 +27634,9 @@ func (s *SDK) PostExportTransitGatewayRoutes(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostGetAssociatedEnclaveCertificateIamRoles - Returns the IAM roles that are associated with the specified ACM (ACM) certificate. It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored, and the ARN of the KMS key that's used to encrypt the private key.
 func (s *SDK) PostGetAssociatedEnclaveCertificateIamRoles(ctx context.Context, request operations.PostGetAssociatedEnclaveCertificateIamRolesRequest) (*operations.PostGetAssociatedEnclaveCertificateIamRolesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetAssociatedEnclaveCertificateIamRoles"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27037,7 +27655,7 @@ func (s *SDK) PostGetAssociatedEnclaveCertificateIamRoles(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27067,8 +27685,9 @@ func (s *SDK) PostGetAssociatedEnclaveCertificateIamRoles(ctx context.Context, r
 	return res, nil
 }
 
+// PostGetAssociatedIpv6PoolCidrs - Gets information about the IPv6 CIDR block associations for a specified IPv6 address pool.
 func (s *SDK) PostGetAssociatedIpv6PoolCidrs(ctx context.Context, request operations.PostGetAssociatedIpv6PoolCidrsRequest) (*operations.PostGetAssociatedIpv6PoolCidrsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetAssociatedIpv6PoolCidrs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27087,7 +27706,7 @@ func (s *SDK) PostGetAssociatedIpv6PoolCidrs(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27117,8 +27736,9 @@ func (s *SDK) PostGetAssociatedIpv6PoolCidrs(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostGetCapacityReservationUsage - Gets usage information about a Capacity Reservation. If the Capacity Reservation is shared, it shows usage information for the Capacity Reservation owner and each Amazon Web Services account that is currently using the shared capacity. If the Capacity Reservation is not shared, it shows only the Capacity Reservation owner's usage.
 func (s *SDK) PostGetCapacityReservationUsage(ctx context.Context, request operations.PostGetCapacityReservationUsageRequest) (*operations.PostGetCapacityReservationUsageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetCapacityReservationUsage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27137,7 +27757,7 @@ func (s *SDK) PostGetCapacityReservationUsage(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27167,8 +27787,9 @@ func (s *SDK) PostGetCapacityReservationUsage(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostGetCoipPoolUsage - Describes the allocations from the specified customer-owned address pool.
 func (s *SDK) PostGetCoipPoolUsage(ctx context.Context, request operations.PostGetCoipPoolUsageRequest) (*operations.PostGetCoipPoolUsageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetCoipPoolUsage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27187,7 +27808,7 @@ func (s *SDK) PostGetCoipPoolUsage(ctx context.Context, request operations.PostG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27217,8 +27838,9 @@ func (s *SDK) PostGetCoipPoolUsage(ctx context.Context, request operations.PostG
 	return res, nil
 }
 
+// PostGetConsoleOutput - <p>Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors.</p> <p>By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. Only the most recent 64 KB of console output is available.</p> <p>You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is supported on instance types that use the Nitro hypervisor.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output">Instance console output</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostGetConsoleOutput(ctx context.Context, request operations.PostGetConsoleOutputRequest) (*operations.PostGetConsoleOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetConsoleOutput"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27237,7 +27859,7 @@ func (s *SDK) PostGetConsoleOutput(ctx context.Context, request operations.PostG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27267,8 +27889,9 @@ func (s *SDK) PostGetConsoleOutput(ctx context.Context, request operations.PostG
 	return res, nil
 }
 
+// PostGetConsoleScreenshot - <p>Retrieve a JPG-format screenshot of a running instance to help with troubleshooting.</p> <p>The returned content is Base64-encoded.</p>
 func (s *SDK) PostGetConsoleScreenshot(ctx context.Context, request operations.PostGetConsoleScreenshotRequest) (*operations.PostGetConsoleScreenshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetConsoleScreenshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27287,7 +27910,7 @@ func (s *SDK) PostGetConsoleScreenshot(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27317,8 +27940,9 @@ func (s *SDK) PostGetConsoleScreenshot(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostGetDefaultCreditSpecification - <p>Describes the default credit option for CPU usage of a burstable performance instance family.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostGetDefaultCreditSpecification(ctx context.Context, request operations.PostGetDefaultCreditSpecificationRequest) (*operations.PostGetDefaultCreditSpecificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetDefaultCreditSpecification"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27337,7 +27961,7 @@ func (s *SDK) PostGetDefaultCreditSpecification(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27367,8 +27991,9 @@ func (s *SDK) PostGetDefaultCreditSpecification(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostGetEbsDefaultKmsKeyID - <p>Describes the default KMS key for EBS encryption by default for your account in this Region. You can change the default KMS key for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostGetEbsDefaultKmsKeyID(ctx context.Context, request operations.PostGetEbsDefaultKmsKeyIDRequest) (*operations.PostGetEbsDefaultKmsKeyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetEbsDefaultKmsKeyId"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27387,7 +28012,7 @@ func (s *SDK) PostGetEbsDefaultKmsKeyID(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27417,8 +28042,9 @@ func (s *SDK) PostGetEbsDefaultKmsKeyID(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostGetEbsEncryptionByDefault - <p>Describes whether EBS encryption by default is enabled for your account in the current Region.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostGetEbsEncryptionByDefault(ctx context.Context, request operations.PostGetEbsEncryptionByDefaultRequest) (*operations.PostGetEbsEncryptionByDefaultResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetEbsEncryptionByDefault"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27437,7 +28063,7 @@ func (s *SDK) PostGetEbsEncryptionByDefault(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27467,8 +28093,9 @@ func (s *SDK) PostGetEbsEncryptionByDefault(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostGetFlowLogsIntegrationTemplate - <p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. Based on the information that you provide, we configure resources in the template to do the following:</p> <ul> <li> <p>Create a table in Athena that maps fields to a custom log format</p> </li> <li> <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or monthly basis</p> </li> <li> <p>Create a table partitioned between two timestamps in the past</p> </li> <li> <p>Create a set of named queries in Athena that you can use to get started quickly</p> </li> </ul>
 func (s *SDK) PostGetFlowLogsIntegrationTemplate(ctx context.Context, request operations.PostGetFlowLogsIntegrationTemplateRequest) (*operations.PostGetFlowLogsIntegrationTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetFlowLogsIntegrationTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27487,7 +28114,7 @@ func (s *SDK) PostGetFlowLogsIntegrationTemplate(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27517,8 +28144,9 @@ func (s *SDK) PostGetFlowLogsIntegrationTemplate(ctx context.Context, request op
 	return res, nil
 }
 
+// PostGetGroupsForCapacityReservation - Lists the resource groups to which a Capacity Reservation has been added.
 func (s *SDK) PostGetGroupsForCapacityReservation(ctx context.Context, request operations.PostGetGroupsForCapacityReservationRequest) (*operations.PostGetGroupsForCapacityReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetGroupsForCapacityReservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27537,7 +28165,7 @@ func (s *SDK) PostGetGroupsForCapacityReservation(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27567,8 +28195,9 @@ func (s *SDK) PostGetGroupsForCapacityReservation(ctx context.Context, request o
 	return res, nil
 }
 
+// PostGetHostReservationPurchasePreview - <p>Preview a reservation purchase with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation.</p> <p>This is a preview of the <a>PurchaseHostReservation</a> action and does not result in the offering being purchased.</p>
 func (s *SDK) PostGetHostReservationPurchasePreview(ctx context.Context, request operations.PostGetHostReservationPurchasePreviewRequest) (*operations.PostGetHostReservationPurchasePreviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetHostReservationPurchasePreview"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27587,7 +28216,7 @@ func (s *SDK) PostGetHostReservationPurchasePreview(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27617,8 +28246,9 @@ func (s *SDK) PostGetHostReservationPurchasePreview(ctx context.Context, request
 	return res, nil
 }
 
+// PostGetLaunchTemplateData - <p>Retrieves the configuration data of the specified instance. You can use this data to create a launch template. </p> <p>This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow <code>describe*</code> depending on your instance requirements.</p>
 func (s *SDK) PostGetLaunchTemplateData(ctx context.Context, request operations.PostGetLaunchTemplateDataRequest) (*operations.PostGetLaunchTemplateDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetLaunchTemplateData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27637,7 +28267,7 @@ func (s *SDK) PostGetLaunchTemplateData(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27667,8 +28297,9 @@ func (s *SDK) PostGetLaunchTemplateData(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostGetManagedPrefixListAssociations - Gets information about the resources that are associated with the specified managed prefix list.
 func (s *SDK) PostGetManagedPrefixListAssociations(ctx context.Context, request operations.PostGetManagedPrefixListAssociationsRequest) (*operations.PostGetManagedPrefixListAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetManagedPrefixListAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27687,7 +28318,7 @@ func (s *SDK) PostGetManagedPrefixListAssociations(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27717,8 +28348,9 @@ func (s *SDK) PostGetManagedPrefixListAssociations(ctx context.Context, request 
 	return res, nil
 }
 
+// PostGetManagedPrefixListEntries - Gets information about the entries for a specified managed prefix list.
 func (s *SDK) PostGetManagedPrefixListEntries(ctx context.Context, request operations.PostGetManagedPrefixListEntriesRequest) (*operations.PostGetManagedPrefixListEntriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetManagedPrefixListEntries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27737,7 +28369,7 @@ func (s *SDK) PostGetManagedPrefixListEntries(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27767,8 +28399,9 @@ func (s *SDK) PostGetManagedPrefixListEntries(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostGetPasswordData - <p>Retrieves the encrypted administrator password for a running Windows instance.</p> <p>The Windows password is generated at boot by the <code>EC2Config</code> service or <code>EC2Launch</code> scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html">EC2Config</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html">EC2Launch</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>For the <code>EC2Config</code> service, the password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>
 func (s *SDK) PostGetPasswordData(ctx context.Context, request operations.PostGetPasswordDataRequest) (*operations.PostGetPasswordDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetPasswordData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27787,7 +28420,7 @@ func (s *SDK) PostGetPasswordData(ctx context.Context, request operations.PostGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27817,8 +28450,9 @@ func (s *SDK) PostGetPasswordData(ctx context.Context, request operations.PostGe
 	return res, nil
 }
 
+// PostGetReservedInstancesExchangeQuote - Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use <a>AcceptReservedInstancesExchangeQuote</a> to perform the exchange.
 func (s *SDK) PostGetReservedInstancesExchangeQuote(ctx context.Context, request operations.PostGetReservedInstancesExchangeQuoteRequest) (*operations.PostGetReservedInstancesExchangeQuoteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetReservedInstancesExchangeQuote"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27837,7 +28471,7 @@ func (s *SDK) PostGetReservedInstancesExchangeQuote(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27867,8 +28501,9 @@ func (s *SDK) PostGetReservedInstancesExchangeQuote(ctx context.Context, request
 	return res, nil
 }
 
+// PostGetSerialConsoleAccessStatus - Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) PostGetSerialConsoleAccessStatus(ctx context.Context, request operations.PostGetSerialConsoleAccessStatusRequest) (*operations.PostGetSerialConsoleAccessStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetSerialConsoleAccessStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27887,7 +28522,7 @@ func (s *SDK) PostGetSerialConsoleAccessStatus(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27917,8 +28552,9 @@ func (s *SDK) PostGetSerialConsoleAccessStatus(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostGetSubnetCidrReservations - Gets information about the subnet CIDR reservations.
 func (s *SDK) PostGetSubnetCidrReservations(ctx context.Context, request operations.PostGetSubnetCidrReservationsRequest) (*operations.PostGetSubnetCidrReservationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetSubnetCidrReservations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27937,7 +28573,7 @@ func (s *SDK) PostGetSubnetCidrReservations(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27967,8 +28603,9 @@ func (s *SDK) PostGetSubnetCidrReservations(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostGetTransitGatewayAttachmentPropagations - Lists the route tables to which the specified resource attachment propagates routes.
 func (s *SDK) PostGetTransitGatewayAttachmentPropagations(ctx context.Context, request operations.PostGetTransitGatewayAttachmentPropagationsRequest) (*operations.PostGetTransitGatewayAttachmentPropagationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetTransitGatewayAttachmentPropagations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27987,7 +28624,7 @@ func (s *SDK) PostGetTransitGatewayAttachmentPropagations(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28017,8 +28654,9 @@ func (s *SDK) PostGetTransitGatewayAttachmentPropagations(ctx context.Context, r
 	return res, nil
 }
 
+// PostGetTransitGatewayMulticastDomainAssociations - Gets information about the associations for the transit gateway multicast domain.
 func (s *SDK) PostGetTransitGatewayMulticastDomainAssociations(ctx context.Context, request operations.PostGetTransitGatewayMulticastDomainAssociationsRequest) (*operations.PostGetTransitGatewayMulticastDomainAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetTransitGatewayMulticastDomainAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28037,7 +28675,7 @@ func (s *SDK) PostGetTransitGatewayMulticastDomainAssociations(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28067,8 +28705,9 @@ func (s *SDK) PostGetTransitGatewayMulticastDomainAssociations(ctx context.Conte
 	return res, nil
 }
 
+// PostGetTransitGatewayPrefixListReferences - Gets information about the prefix list references in a specified transit gateway route table.
 func (s *SDK) PostGetTransitGatewayPrefixListReferences(ctx context.Context, request operations.PostGetTransitGatewayPrefixListReferencesRequest) (*operations.PostGetTransitGatewayPrefixListReferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetTransitGatewayPrefixListReferences"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28087,7 +28726,7 @@ func (s *SDK) PostGetTransitGatewayPrefixListReferences(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28117,8 +28756,9 @@ func (s *SDK) PostGetTransitGatewayPrefixListReferences(ctx context.Context, req
 	return res, nil
 }
 
+// PostGetTransitGatewayRouteTableAssociations - Gets information about the associations for the specified transit gateway route table.
 func (s *SDK) PostGetTransitGatewayRouteTableAssociations(ctx context.Context, request operations.PostGetTransitGatewayRouteTableAssociationsRequest) (*operations.PostGetTransitGatewayRouteTableAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetTransitGatewayRouteTableAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28137,7 +28777,7 @@ func (s *SDK) PostGetTransitGatewayRouteTableAssociations(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28167,8 +28807,9 @@ func (s *SDK) PostGetTransitGatewayRouteTableAssociations(ctx context.Context, r
 	return res, nil
 }
 
+// PostGetTransitGatewayRouteTablePropagations - Gets information about the route table propagations for the specified transit gateway route table.
 func (s *SDK) PostGetTransitGatewayRouteTablePropagations(ctx context.Context, request operations.PostGetTransitGatewayRouteTablePropagationsRequest) (*operations.PostGetTransitGatewayRouteTablePropagationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=GetTransitGatewayRouteTablePropagations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28187,7 +28828,7 @@ func (s *SDK) PostGetTransitGatewayRouteTablePropagations(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28217,8 +28858,9 @@ func (s *SDK) PostGetTransitGatewayRouteTablePropagations(ctx context.Context, r
 	return res, nil
 }
 
+// PostImportClientVpnClientCertificateRevocationList - <p>Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list.</p> <p>Uploading a client certificate revocation list resets existing client connections.</p>
 func (s *SDK) PostImportClientVpnClientCertificateRevocationList(ctx context.Context, request operations.PostImportClientVpnClientCertificateRevocationListRequest) (*operations.PostImportClientVpnClientCertificateRevocationListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportClientVpnClientCertificateRevocationList"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28237,7 +28879,7 @@ func (s *SDK) PostImportClientVpnClientCertificateRevocationList(ctx context.Con
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28267,8 +28909,9 @@ func (s *SDK) PostImportClientVpnClientCertificateRevocationList(ctx context.Con
 	return res, nil
 }
 
+// PostImportImage - <p>Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html">Importing a VM as an image using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>
 func (s *SDK) PostImportImage(ctx context.Context, request operations.PostImportImageRequest) (*operations.PostImportImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28287,7 +28930,7 @@ func (s *SDK) PostImportImage(ctx context.Context, request operations.PostImport
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28317,8 +28960,9 @@ func (s *SDK) PostImportImage(ctx context.Context, request operations.PostImport
 	return res, nil
 }
 
+// PostImportInstance - <p>Creates an import instance task using metadata from the specified disk image.</p> <p>This API action supports only single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a> instead.</p> <p>This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see <a href="https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#UsingVirtualMachinesinAmazonEC2">Importing a VM to Amazon EC2</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p> <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
 func (s *SDK) PostImportInstance(ctx context.Context, request operations.PostImportInstanceRequest) (*operations.PostImportInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28337,7 +28981,7 @@ func (s *SDK) PostImportInstance(ctx context.Context, request operations.PostImp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28367,8 +29011,9 @@ func (s *SDK) PostImportInstance(ctx context.Context, request operations.PostImp
 	return res, nil
 }
 
+// PostImportKeyPair - <p>Imports the public key from an RSA or ED25519 key pair that you created with a third-party tool. Compare this with <a>CreateKeyPair</a>, in which Amazon Web Services creates the key pair and gives the keys to you (Amazon Web Services keeps a copy of the public key). With ImportKeyPair, you create the key pair and give Amazon Web Services just the public key. The private key is never transferred between you and Amazon Web Services.</p> <p>For more information about key pairs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostImportKeyPair(ctx context.Context, request operations.PostImportKeyPairRequest) (*operations.PostImportKeyPairResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportKeyPair"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28387,7 +29032,7 @@ func (s *SDK) PostImportKeyPair(ctx context.Context, request operations.PostImpo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28417,8 +29062,9 @@ func (s *SDK) PostImportKeyPair(ctx context.Context, request operations.PostImpo
 	return res, nil
 }
 
+// PostImportSnapshot - <p>Imports a disk into an EBS snapshot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html">Importing a disk as a snapshot using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>
 func (s *SDK) PostImportSnapshot(ctx context.Context, request operations.PostImportSnapshotRequest) (*operations.PostImportSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28437,7 +29083,7 @@ func (s *SDK) PostImportSnapshot(ctx context.Context, request operations.PostImp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28467,8 +29113,9 @@ func (s *SDK) PostImportSnapshot(ctx context.Context, request operations.PostImp
 	return res, nil
 }
 
+// PostImportVolume - <p>Creates an import volume task using metadata from the specified disk image.</p> <p>This API action supports only single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a> instead. To import a disk to a snapshot, use <a>ImportSnapshot</a> instead.</p> <p>This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see <a href="https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs">Importing Disks to Amazon EBS</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p> <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
 func (s *SDK) PostImportVolume(ctx context.Context, request operations.PostImportVolumeRequest) (*operations.PostImportVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ImportVolume"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28487,7 +29134,7 @@ func (s *SDK) PostImportVolume(ctx context.Context, request operations.PostImpor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28517,8 +29164,9 @@ func (s *SDK) PostImportVolume(ctx context.Context, request operations.PostImpor
 	return res, nil
 }
 
+// PostModifyAddressAttribute - Modifies an attribute of the specified Elastic IP address. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.
 func (s *SDK) PostModifyAddressAttribute(ctx context.Context, request operations.PostModifyAddressAttributeRequest) (*operations.PostModifyAddressAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyAddressAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28537,7 +29185,7 @@ func (s *SDK) PostModifyAddressAttribute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28567,8 +29215,9 @@ func (s *SDK) PostModifyAddressAttribute(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostModifyAvailabilityZoneGroup - <p>Changes the opt-in status of the Local Zone and Wavelength Zone group for your account.</p> <p>Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html"> DescribeAvailabilityZones</a> to view the value for <code>GroupName</code>.</p>
 func (s *SDK) PostModifyAvailabilityZoneGroup(ctx context.Context, request operations.PostModifyAvailabilityZoneGroupRequest) (*operations.PostModifyAvailabilityZoneGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyAvailabilityZoneGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28587,7 +29236,7 @@ func (s *SDK) PostModifyAvailabilityZoneGroup(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28617,8 +29266,9 @@ func (s *SDK) PostModifyAvailabilityZoneGroup(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostModifyCapacityReservation - Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.
 func (s *SDK) PostModifyCapacityReservation(ctx context.Context, request operations.PostModifyCapacityReservationRequest) (*operations.PostModifyCapacityReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyCapacityReservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28637,7 +29287,7 @@ func (s *SDK) PostModifyCapacityReservation(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28667,8 +29317,9 @@ func (s *SDK) PostModifyCapacityReservation(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostModifyClientVpnEndpoint - Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.
 func (s *SDK) PostModifyClientVpnEndpoint(ctx context.Context, request operations.PostModifyClientVpnEndpointRequest) (*operations.PostModifyClientVpnEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyClientVpnEndpoint"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28687,7 +29338,7 @@ func (s *SDK) PostModifyClientVpnEndpoint(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28717,8 +29368,9 @@ func (s *SDK) PostModifyClientVpnEndpoint(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostModifyDefaultCreditSpecification - <p>Modifies the default credit option for CPU usage of burstable performance instances. The default credit option is set at the account level per Amazon Web Services Region, and is specified per instance family. All new burstable performance instances in the account launch using the default credit option.</p> <p> <code>ModifyDefaultCreditSpecification</code> is an asynchronous operation, which works at an Amazon Web Services Region level and modifies the credit option for each Availability Zone. All zones in a Region are updated within five minutes. But if instances are launched during this operation, they might not get the new credit option until the zone is updated. To verify whether the update has occurred, you can call <code>GetDefaultCreditSpecification</code> and check <code>DefaultCreditSpecification</code> for updates.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostModifyDefaultCreditSpecification(ctx context.Context, request operations.PostModifyDefaultCreditSpecificationRequest) (*operations.PostModifyDefaultCreditSpecificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyDefaultCreditSpecification"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28737,7 +29389,7 @@ func (s *SDK) PostModifyDefaultCreditSpecification(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28767,8 +29419,9 @@ func (s *SDK) PostModifyDefaultCreditSpecification(ctx context.Context, request 
 	return res, nil
 }
 
+// PostModifyEbsDefaultKmsKeyID - <p>Changes the default KMS key for EBS encryption by default for your account in this Region.</p> <p>Amazon Web Services creates a unique Amazon Web Services managed KMS key in each Region for use with encryption by default. If you change the default KMS key to a symmetric customer managed KMS key, it is used instead of the Amazon Web Services managed KMS key. To reset the default KMS key to the Amazon Web Services managed KMS key for EBS, use <a>ResetEbsDefaultKmsKeyId</a>. Amazon EBS does not support asymmetric KMS keys.</p> <p>If you delete or disable the customer managed KMS key that you specified for use with encryption by default, your instances will fail to launch.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostModifyEbsDefaultKmsKeyID(ctx context.Context, request operations.PostModifyEbsDefaultKmsKeyIDRequest) (*operations.PostModifyEbsDefaultKmsKeyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyEbsDefaultKmsKeyId"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28787,7 +29440,7 @@ func (s *SDK) PostModifyEbsDefaultKmsKeyID(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28817,8 +29470,9 @@ func (s *SDK) PostModifyEbsDefaultKmsKeyID(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostModifyFleet - <p>Modifies the specified EC2 Fleet.</p> <p>You can only modify an EC2 Fleet request of type <code>maintain</code>.</p> <p>While the EC2 Fleet is being modified, it is in the <code>modifying</code> state.</p> <p>To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches the additional Spot Instances according to the allocation strategy for the EC2 Fleet request. If the allocation strategy is <code>lowest-price</code>, the EC2 Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is <code>diversified</code>, the EC2 Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p> <p>To scale down your EC2 Fleet, decrease its target capacity. First, the EC2 Fleet cancels any open requests that exceed the new target capacity. You can request that the EC2 Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is <code>lowest-price</code>, the EC2 Fleet terminates the instances with the highest price per unit. If the allocation strategy is <code>capacity-optimized</code>, the EC2 Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is <code>diversified</code>, the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually.</p> <p>If you are finished with your EC2 Fleet for now, but will use it again later, you can set the target capacity to 0.</p>
 func (s *SDK) PostModifyFleet(ctx context.Context, request operations.PostModifyFleetRequest) (*operations.PostModifyFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28837,7 +29491,7 @@ func (s *SDK) PostModifyFleet(ctx context.Context, request operations.PostModify
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28867,8 +29521,9 @@ func (s *SDK) PostModifyFleet(ctx context.Context, request operations.PostModify
 	return res, nil
 }
 
+// PostModifyFpgaImageAttribute - Modifies the specified attribute of the specified Amazon FPGA Image (AFI).
 func (s *SDK) PostModifyFpgaImageAttribute(ctx context.Context, request operations.PostModifyFpgaImageAttributeRequest) (*operations.PostModifyFpgaImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyFpgaImageAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28887,7 +29542,7 @@ func (s *SDK) PostModifyFpgaImageAttribute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28917,8 +29572,9 @@ func (s *SDK) PostModifyFpgaImageAttribute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostModifyHosts - <p>Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, any instances that you launch with a tenancy of <code>host</code> but without a specific host ID are placed onto any available Dedicated Host in your account that has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID to have the instance launch onto a specific host. If no host ID is provided, the instance is launched onto a suitable host with auto-placement enabled.</p> <p>You can also use this API action to modify a Dedicated Host to support either multiple instance types in an instance family, or to support a specific instance type only.</p>
 func (s *SDK) PostModifyHosts(ctx context.Context, request operations.PostModifyHostsRequest) (*operations.PostModifyHostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyHosts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28937,7 +29593,7 @@ func (s *SDK) PostModifyHosts(ctx context.Context, request operations.PostModify
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28967,8 +29623,9 @@ func (s *SDK) PostModifyHosts(ctx context.Context, request operations.PostModify
 	return res, nil
 }
 
+// PostModifyIDFormat - <p>Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>
 func (s *SDK) PostModifyIDFormat(ctx context.Context, request operations.PostModifyIDFormatRequest) (*operations.PostModifyIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyIdFormat"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28987,7 +29644,7 @@ func (s *SDK) PostModifyIDFormat(ctx context.Context, request operations.PostMod
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29008,8 +29665,9 @@ func (s *SDK) PostModifyIDFormat(ctx context.Context, request operations.PostMod
 	return res, nil
 }
 
+// PostModifyIdentityIDFormat - <p>Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created. </p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>This setting applies to the principal specified in the request; it does not apply to the principal that makes the request. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>
 func (s *SDK) PostModifyIdentityIDFormat(ctx context.Context, request operations.PostModifyIdentityIDFormatRequest) (*operations.PostModifyIdentityIDFormatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyIdentityIdFormat"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29028,7 +29686,7 @@ func (s *SDK) PostModifyIdentityIDFormat(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29049,8 +29707,9 @@ func (s *SDK) PostModifyIdentityIDFormat(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostModifyImageAttribute - <p>Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the <code>Attribute</code> parameter to specify the attribute or one of the following parameters: <code>Description</code> or <code>LaunchPermission</code>.</p> <p>Images with an Amazon Web Services Marketplace product code cannot be made public.</p> <p>To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.</p>
 func (s *SDK) PostModifyImageAttribute(ctx context.Context, request operations.PostModifyImageAttributeRequest) (*operations.PostModifyImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyImageAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29069,7 +29728,7 @@ func (s *SDK) PostModifyImageAttribute(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29090,8 +29749,9 @@ func (s *SDK) PostModifyImageAttribute(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostModifyInstanceAttribute - <p>Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.</p> <p> <b>Note: </b>Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the <a>ModifyNetworkInterfaceAttribute</a> action.</p> <p>To modify some attributes, the instance must be stopped. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html">Modifying attributes of a stopped instance</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostModifyInstanceAttribute(ctx context.Context, request operations.PostModifyInstanceAttributeRequest) (*operations.PostModifyInstanceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29110,7 +29770,7 @@ func (s *SDK) PostModifyInstanceAttribute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29131,8 +29791,9 @@ func (s *SDK) PostModifyInstanceAttribute(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostModifyInstanceCapacityReservationAttributes - Modifies the Capacity Reservation settings for a stopped instance. Use this action to configure an instance to target a specific Capacity Reservation, run in any <code>open</code> Capacity Reservation with matching attributes, or run On-Demand Instance capacity.
 func (s *SDK) PostModifyInstanceCapacityReservationAttributes(ctx context.Context, request operations.PostModifyInstanceCapacityReservationAttributesRequest) (*operations.PostModifyInstanceCapacityReservationAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceCapacityReservationAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29151,7 +29812,7 @@ func (s *SDK) PostModifyInstanceCapacityReservationAttributes(ctx context.Contex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29181,8 +29842,9 @@ func (s *SDK) PostModifyInstanceCapacityReservationAttributes(ctx context.Contex
 	return res, nil
 }
 
+// PostModifyInstanceCreditSpecification - <p>Modifies the credit option for CPU usage on a running or stopped burstable performance instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostModifyInstanceCreditSpecification(ctx context.Context, request operations.PostModifyInstanceCreditSpecificationRequest) (*operations.PostModifyInstanceCreditSpecificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceCreditSpecification"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29201,7 +29863,7 @@ func (s *SDK) PostModifyInstanceCreditSpecification(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29231,8 +29893,9 @@ func (s *SDK) PostModifyInstanceCreditSpecification(ctx context.Context, request
 	return res, nil
 }
 
+// PostModifyInstanceEventStartTime - Modifies the start time for a scheduled Amazon EC2 instance event.
 func (s *SDK) PostModifyInstanceEventStartTime(ctx context.Context, request operations.PostModifyInstanceEventStartTimeRequest) (*operations.PostModifyInstanceEventStartTimeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceEventStartTime"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29251,7 +29914,7 @@ func (s *SDK) PostModifyInstanceEventStartTime(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29281,8 +29944,9 @@ func (s *SDK) PostModifyInstanceEventStartTime(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostModifyInstanceEventWindow - <p>Modifies the specified event window.</p> <p>You can define either a set of time ranges or a cron expression when modifying the event window, but not both.</p> <p>To modify the targets associated with the event window, use the <a>AssociateInstanceEventWindow</a> and <a>DisassociateInstanceEventWindow</a> API.</p> <p>If Amazon Web Services has already scheduled an event, modifying an event window won't change the time of the scheduled event.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostModifyInstanceEventWindow(ctx context.Context, request operations.PostModifyInstanceEventWindowRequest) (*operations.PostModifyInstanceEventWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceEventWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29301,7 +29965,7 @@ func (s *SDK) PostModifyInstanceEventWindow(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29331,8 +29995,9 @@ func (s *SDK) PostModifyInstanceEventWindow(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostModifyInstanceMetadataOptions - Modify the instance metadata parameters on a running or stopped instance. When you modify the parameters on a stopped instance, they are applied when the instance is started. When you modify the parameters on a running instance, the API responds with a state of “pending”. After the parameter modifications are successfully applied to the instance, the state of the modifications changes from “pending” to “applied” in subsequent describe-instances API calls. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance metadata and user data</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) PostModifyInstanceMetadataOptions(ctx context.Context, request operations.PostModifyInstanceMetadataOptionsRequest) (*operations.PostModifyInstanceMetadataOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstanceMetadataOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29351,7 +30016,7 @@ func (s *SDK) PostModifyInstanceMetadataOptions(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29381,8 +30046,9 @@ func (s *SDK) PostModifyInstanceMetadataOptions(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostModifyInstancePlacement - <p>Modifies the placement attributes for a specified instance. You can do the following:</p> <ul> <li> <p>Modify the affinity between an instance and a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html">Dedicated Host</a>. When affinity is set to <code>host</code> and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.</p> </li> <li> <p>Change the Dedicated Host with which an instance is associated.</p> </li> <li> <p>Change the instance tenancy of an instance from <code>host</code> to <code>dedicated</code>, or from <code>dedicated</code> to <code>host</code>.</p> </li> <li> <p>Move an instance to or from a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">placement group</a>.</p> </li> </ul> <p>At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request.</p> <p>To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the <code>stopped</code> state.</p>
 func (s *SDK) PostModifyInstancePlacement(ctx context.Context, request operations.PostModifyInstancePlacementRequest) (*operations.PostModifyInstancePlacementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyInstancePlacement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29401,7 +30067,7 @@ func (s *SDK) PostModifyInstancePlacement(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29431,8 +30097,9 @@ func (s *SDK) PostModifyInstancePlacement(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostModifyLaunchTemplate - Modifies a launch template. You can specify which version of the launch template to set as the default version. When launching an instance, the default version applies when a launch template version is not specified.
 func (s *SDK) PostModifyLaunchTemplate(ctx context.Context, request operations.PostModifyLaunchTemplateRequest) (*operations.PostModifyLaunchTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyLaunchTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29451,7 +30118,7 @@ func (s *SDK) PostModifyLaunchTemplate(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29481,8 +30148,9 @@ func (s *SDK) PostModifyLaunchTemplate(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostModifyManagedPrefixList - <p>Modifies the specified managed prefix list.</p> <p>Adding or removing entries in a prefix list creates a new version of the prefix list. Changing the name of the prefix list does not affect the version.</p> <p>If you specify a current version number that does not match the true current version number, the request fails.</p>
 func (s *SDK) PostModifyManagedPrefixList(ctx context.Context, request operations.PostModifyManagedPrefixListRequest) (*operations.PostModifyManagedPrefixListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyManagedPrefixList"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29501,7 +30169,7 @@ func (s *SDK) PostModifyManagedPrefixList(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29531,8 +30199,9 @@ func (s *SDK) PostModifyManagedPrefixList(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostModifyNetworkInterfaceAttribute - Modifies the specified network interface attribute. You can specify only one attribute at a time. You can use this action to attach and detach security groups from an existing EC2 instance.
 func (s *SDK) PostModifyNetworkInterfaceAttribute(ctx context.Context, request operations.PostModifyNetworkInterfaceAttributeRequest) (*operations.PostModifyNetworkInterfaceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyNetworkInterfaceAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29551,7 +30220,7 @@ func (s *SDK) PostModifyNetworkInterfaceAttribute(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29572,8 +30241,9 @@ func (s *SDK) PostModifyNetworkInterfaceAttribute(ctx context.Context, request o
 	return res, nil
 }
 
+// PostModifyReservedInstances - <p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html">Modifying Reserved Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostModifyReservedInstances(ctx context.Context, request operations.PostModifyReservedInstancesRequest) (*operations.PostModifyReservedInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyReservedInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29592,7 +30262,7 @@ func (s *SDK) PostModifyReservedInstances(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29622,8 +30292,9 @@ func (s *SDK) PostModifyReservedInstances(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostModifySecurityGroupRules - Modifies the rules of a security group.
 func (s *SDK) PostModifySecurityGroupRules(ctx context.Context, request operations.PostModifySecurityGroupRulesRequest) (*operations.PostModifySecurityGroupRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifySecurityGroupRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29642,7 +30313,7 @@ func (s *SDK) PostModifySecurityGroupRules(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29672,8 +30343,9 @@ func (s *SDK) PostModifySecurityGroupRules(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostModifySnapshotAttribute - <p>Adds or removes permission settings for the specified snapshot. You may add or remove specified Amazon Web Services account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single operation. If you need to both add and remove account IDs for a snapshot, you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation.</p> <p>Encrypted snapshots and snapshots with Amazon Web Services Marketplace product codes cannot be made public. Snapshots encrypted with your default KMS key cannot be shared with other accounts.</p> <p>For more information about modifying snapshot permissions, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html">Share a snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostModifySnapshotAttribute(ctx context.Context, request operations.PostModifySnapshotAttributeRequest) (*operations.PostModifySnapshotAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifySnapshotAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29692,7 +30364,7 @@ func (s *SDK) PostModifySnapshotAttribute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29713,8 +30385,9 @@ func (s *SDK) PostModifySnapshotAttribute(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostModifySpotFleetRequest - <p>Modifies the specified Spot Fleet request.</p> <p>You can only modify a Spot Fleet request of type <code>maintain</code>.</p> <p>While the Spot Fleet request is being modified, it is in the <code>modifying</code> state.</p> <p>To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is <code>lowestPrice</code>, the Spot Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is <code>diversified</code>, the Spot Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is <code>capacityOptimized</code>, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p> <p>To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is <code>lowestPrice</code>, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is <code>capacityOptimized</code>, the Spot Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is <code>diversified</code>, the Spot Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually.</p> <p>If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.</p>
 func (s *SDK) PostModifySpotFleetRequest(ctx context.Context, request operations.PostModifySpotFleetRequestRequest) (*operations.PostModifySpotFleetRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifySpotFleetRequest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29733,7 +30406,7 @@ func (s *SDK) PostModifySpotFleetRequest(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29763,8 +30436,9 @@ func (s *SDK) PostModifySpotFleetRequest(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostModifySubnetAttribute - Modifies a subnet attribute. You can only modify one attribute at a time.
 func (s *SDK) PostModifySubnetAttribute(ctx context.Context, request operations.PostModifySubnetAttributeRequest) (*operations.PostModifySubnetAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifySubnetAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29783,7 +30457,7 @@ func (s *SDK) PostModifySubnetAttribute(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29804,8 +30478,9 @@ func (s *SDK) PostModifySubnetAttribute(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostModifyTrafficMirrorFilterNetworkServices - <p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>For information about filter rule properties, see <a href="https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>
 func (s *SDK) PostModifyTrafficMirrorFilterNetworkServices(ctx context.Context, request operations.PostModifyTrafficMirrorFilterNetworkServicesRequest) (*operations.PostModifyTrafficMirrorFilterNetworkServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTrafficMirrorFilterNetworkServices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29824,7 +30499,7 @@ func (s *SDK) PostModifyTrafficMirrorFilterNetworkServices(ctx context.Context, 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29854,8 +30529,9 @@ func (s *SDK) PostModifyTrafficMirrorFilterNetworkServices(ctx context.Context, 
 	return res, nil
 }
 
+// PostModifyTrafficMirrorFilterRule - <p>Modifies the specified Traffic Mirror rule.</p> <p> <code>DestinationCidrBlock</code> and <code>SourceCidrBlock</code> must both be an IPv4 range or an IPv6 range.</p>
 func (s *SDK) PostModifyTrafficMirrorFilterRule(ctx context.Context, request operations.PostModifyTrafficMirrorFilterRuleRequest) (*operations.PostModifyTrafficMirrorFilterRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTrafficMirrorFilterRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29874,7 +30550,7 @@ func (s *SDK) PostModifyTrafficMirrorFilterRule(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29904,8 +30580,9 @@ func (s *SDK) PostModifyTrafficMirrorFilterRule(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostModifyTrafficMirrorSession - Modifies a Traffic Mirror session.
 func (s *SDK) PostModifyTrafficMirrorSession(ctx context.Context, request operations.PostModifyTrafficMirrorSessionRequest) (*operations.PostModifyTrafficMirrorSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTrafficMirrorSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29924,7 +30601,7 @@ func (s *SDK) PostModifyTrafficMirrorSession(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29954,8 +30631,9 @@ func (s *SDK) PostModifyTrafficMirrorSession(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostModifyTransitGateway - Modifies the specified transit gateway. When you modify a transit gateway, the modified options are applied to new transit gateway attachments only. Your existing transit gateway attachments are not modified.
 func (s *SDK) PostModifyTransitGateway(ctx context.Context, request operations.PostModifyTransitGatewayRequest) (*operations.PostModifyTransitGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTransitGateway"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -29974,7 +30652,7 @@ func (s *SDK) PostModifyTransitGateway(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30004,8 +30682,9 @@ func (s *SDK) PostModifyTransitGateway(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostModifyTransitGatewayPrefixListReference - Modifies a reference (route) to a prefix list in a specified transit gateway route table.
 func (s *SDK) PostModifyTransitGatewayPrefixListReference(ctx context.Context, request operations.PostModifyTransitGatewayPrefixListReferenceRequest) (*operations.PostModifyTransitGatewayPrefixListReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTransitGatewayPrefixListReference"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30024,7 +30703,7 @@ func (s *SDK) PostModifyTransitGatewayPrefixListReference(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30054,8 +30733,9 @@ func (s *SDK) PostModifyTransitGatewayPrefixListReference(ctx context.Context, r
 	return res, nil
 }
 
+// PostModifyTransitGatewayVpcAttachment - Modifies the specified VPC attachment.
 func (s *SDK) PostModifyTransitGatewayVpcAttachment(ctx context.Context, request operations.PostModifyTransitGatewayVpcAttachmentRequest) (*operations.PostModifyTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyTransitGatewayVpcAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30074,7 +30754,7 @@ func (s *SDK) PostModifyTransitGatewayVpcAttachment(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30104,8 +30784,9 @@ func (s *SDK) PostModifyTransitGatewayVpcAttachment(ctx context.Context, request
 	return res, nil
 }
 
+// PostModifyVolume - <p>You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you might be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying EBS volumes, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modify-volume.html">Amazon EBS Elastic Volumes</a> (Linux instances) or <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-modify-volume.html">Amazon EBS Elastic Volumes</a> (Windows instances).</p> <p>When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux">Extend a Linux file system</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows">Extend a Windows file system</a>.</p> <p> You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/">Amazon CloudWatch Events User Guide</a>. You can also track the status of a modification using <a>DescribeVolumesModifications</a>. For information about tracking status changes using either method, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html">Monitor the progress of volume modifications</a>.</p> <p>With previous-generation instance types, resizing an EBS volume might require detaching and reattaching the volume or stopping and restarting the instance.</p> <p>If you reach the maximum volume modification rate per volume limit, you must wait at least six hours before applying further modifications to the affected EBS volume.</p>
 func (s *SDK) PostModifyVolume(ctx context.Context, request operations.PostModifyVolumeRequest) (*operations.PostModifyVolumeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVolume"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30124,7 +30805,7 @@ func (s *SDK) PostModifyVolume(ctx context.Context, request operations.PostModif
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30154,8 +30835,9 @@ func (s *SDK) PostModifyVolume(ctx context.Context, request operations.PostModif
 	return res, nil
 }
 
+// PostModifyVolumeAttribute - <p>Modifies a volume attribute.</p> <p>By default, all I/O operations for the volume are suspended when the data on the volume is determined to be potentially inconsistent, to prevent undetectable, latent data corruption. The I/O access to the volume can be resumed by first enabling I/O access and then checking the data consistency on your volume.</p> <p>You can change the default behavior to resume I/O operations. We recommend that you change this only for boot volumes or for volumes that are stateless or disposable.</p>
 func (s *SDK) PostModifyVolumeAttribute(ctx context.Context, request operations.PostModifyVolumeAttributeRequest) (*operations.PostModifyVolumeAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVolumeAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30174,7 +30856,7 @@ func (s *SDK) PostModifyVolumeAttribute(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30195,8 +30877,9 @@ func (s *SDK) PostModifyVolumeAttribute(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostModifyVpcAttribute - Modifies the specified attribute of the specified VPC.
 func (s *SDK) PostModifyVpcAttribute(ctx context.Context, request operations.PostModifyVpcAttributeRequest) (*operations.PostModifyVpcAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30215,7 +30898,7 @@ func (s *SDK) PostModifyVpcAttribute(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30236,8 +30919,9 @@ func (s *SDK) PostModifyVpcAttribute(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostModifyVpcEndpoint - Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.
 func (s *SDK) PostModifyVpcEndpoint(ctx context.Context, request operations.PostModifyVpcEndpointRequest) (*operations.PostModifyVpcEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpoint"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30256,7 +30940,7 @@ func (s *SDK) PostModifyVpcEndpoint(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30286,8 +30970,9 @@ func (s *SDK) PostModifyVpcEndpoint(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostModifyVpcEndpointConnectionNotification - Modifies a connection notification for VPC endpoint or VPC endpoint service. You can change the SNS topic for the notification, or the events for which to be notified.
 func (s *SDK) PostModifyVpcEndpointConnectionNotification(ctx context.Context, request operations.PostModifyVpcEndpointConnectionNotificationRequest) (*operations.PostModifyVpcEndpointConnectionNotificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpointConnectionNotification"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30306,7 +30991,7 @@ func (s *SDK) PostModifyVpcEndpointConnectionNotification(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30336,8 +31021,9 @@ func (s *SDK) PostModifyVpcEndpointConnectionNotification(ctx context.Context, r
 	return res, nil
 }
 
+// PostModifyVpcEndpointServiceConfiguration - <p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostModifyVpcEndpointServiceConfiguration(ctx context.Context, request operations.PostModifyVpcEndpointServiceConfigurationRequest) (*operations.PostModifyVpcEndpointServiceConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpointServiceConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30356,7 +31042,7 @@ func (s *SDK) PostModifyVpcEndpointServiceConfiguration(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30386,8 +31072,9 @@ func (s *SDK) PostModifyVpcEndpointServiceConfiguration(ctx context.Context, req
 	return res, nil
 }
 
+// PostModifyVpcEndpointServicePermissions - <p>Modifies the permissions for your <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.</p> <p>If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.</p>
 func (s *SDK) PostModifyVpcEndpointServicePermissions(ctx context.Context, request operations.PostModifyVpcEndpointServicePermissionsRequest) (*operations.PostModifyVpcEndpointServicePermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcEndpointServicePermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30406,7 +31093,7 @@ func (s *SDK) PostModifyVpcEndpointServicePermissions(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30436,8 +31123,9 @@ func (s *SDK) PostModifyVpcEndpointServicePermissions(ctx context.Context, reque
 	return res, nil
 }
 
+// PostModifyVpcPeeringConnectionOptions - <p>Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:</p> <ul> <li> <p>Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.</p> </li> <li> <p>Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.</p> </li> <li> <p>Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.</p> </li> </ul> <p>If the peered VPCs are in the same Amazon Web Services account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different different Amazon Web Services accounts or different Regions. For peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the Region for the requester VPC to modify the requester VPC peering options and the Region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>
 func (s *SDK) PostModifyVpcPeeringConnectionOptions(ctx context.Context, request operations.PostModifyVpcPeeringConnectionOptionsRequest) (*operations.PostModifyVpcPeeringConnectionOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcPeeringConnectionOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30456,7 +31144,7 @@ func (s *SDK) PostModifyVpcPeeringConnectionOptions(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30486,8 +31174,9 @@ func (s *SDK) PostModifyVpcPeeringConnectionOptions(ctx context.Context, request
 	return res, nil
 }
 
+// PostModifyVpcTenancy - <p>Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to <code>default</code> only. You cannot change the instance tenancy attribute to <code>dedicated</code>.</p> <p>After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of <code>default</code>, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostModifyVpcTenancy(ctx context.Context, request operations.PostModifyVpcTenancyRequest) (*operations.PostModifyVpcTenancyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpcTenancy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30506,7 +31195,7 @@ func (s *SDK) PostModifyVpcTenancy(ctx context.Context, request operations.PostM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30536,8 +31225,9 @@ func (s *SDK) PostModifyVpcTenancy(ctx context.Context, request operations.PostM
 	return res, nil
 }
 
+// PostModifyVpnConnection - <p>Modifies the customer gateway or the target gateway of an AWS Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.</p>
 func (s *SDK) PostModifyVpnConnection(ctx context.Context, request operations.PostModifyVpnConnectionRequest) (*operations.PostModifyVpnConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpnConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30556,7 +31246,7 @@ func (s *SDK) PostModifyVpnConnection(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30586,8 +31276,9 @@ func (s *SDK) PostModifyVpnConnection(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostModifyVpnConnectionOptions - <p>Modifies the connection options for your Site-to-Site VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>
 func (s *SDK) PostModifyVpnConnectionOptions(ctx context.Context, request operations.PostModifyVpnConnectionOptionsRequest) (*operations.PostModifyVpnConnectionOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpnConnectionOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30606,7 +31297,7 @@ func (s *SDK) PostModifyVpnConnectionOptions(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30636,8 +31327,9 @@ func (s *SDK) PostModifyVpnConnectionOptions(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostModifyVpnTunnelCertificate - Modifies the VPN tunnel endpoint certificate.
 func (s *SDK) PostModifyVpnTunnelCertificate(ctx context.Context, request operations.PostModifyVpnTunnelCertificateRequest) (*operations.PostModifyVpnTunnelCertificateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpnTunnelCertificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30656,7 +31348,7 @@ func (s *SDK) PostModifyVpnTunnelCertificate(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30686,8 +31378,9 @@ func (s *SDK) PostModifyVpnTunnelCertificate(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostModifyVpnTunnelOptions - Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html">Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN Connection</a> in the <i>AWS Site-to-Site VPN User Guide</i>.
 func (s *SDK) PostModifyVpnTunnelOptions(ctx context.Context, request operations.PostModifyVpnTunnelOptionsRequest) (*operations.PostModifyVpnTunnelOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyVpnTunnelOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30706,7 +31399,7 @@ func (s *SDK) PostModifyVpnTunnelOptions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30736,8 +31429,9 @@ func (s *SDK) PostModifyVpnTunnelOptions(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostMonitorInstances - <p>Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html">Monitoring your instances and volumes</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>To disable detailed monitoring, see .</p>
 func (s *SDK) PostMonitorInstances(ctx context.Context, request operations.PostMonitorInstancesRequest) (*operations.PostMonitorInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=MonitorInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30756,7 +31450,7 @@ func (s *SDK) PostMonitorInstances(ctx context.Context, request operations.PostM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30786,8 +31480,9 @@ func (s *SDK) PostMonitorInstances(ctx context.Context, request operations.PostM
 	return res, nil
 }
 
+// PostMoveAddressToVpc - Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the <a>RestoreAddressToClassic</a> request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform.
 func (s *SDK) PostMoveAddressToVpc(ctx context.Context, request operations.PostMoveAddressToVpcRequest) (*operations.PostMoveAddressToVpcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=MoveAddressToVpc"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30806,7 +31501,7 @@ func (s *SDK) PostMoveAddressToVpc(ctx context.Context, request operations.PostM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30836,8 +31531,9 @@ func (s *SDK) PostMoveAddressToVpc(ctx context.Context, request operations.PostM
 	return res, nil
 }
 
+// PostProvisionByoipCidr - <p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>
 func (s *SDK) PostProvisionByoipCidr(ctx context.Context, request operations.PostProvisionByoipCidrRequest) (*operations.PostProvisionByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ProvisionByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30856,7 +31552,7 @@ func (s *SDK) PostProvisionByoipCidr(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30886,8 +31582,9 @@ func (s *SDK) PostProvisionByoipCidr(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostPurchaseHostReservation - Purchase a reservation with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This action results in the specified reservation being purchased and charged to your account.
 func (s *SDK) PostPurchaseHostReservation(ctx context.Context, request operations.PostPurchaseHostReservationRequest) (*operations.PostPurchaseHostReservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PurchaseHostReservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30906,7 +31603,7 @@ func (s *SDK) PostPurchaseHostReservation(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30936,8 +31633,9 @@ func (s *SDK) PostPurchaseHostReservation(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostPurchaseReservedInstancesOffering - <p>Purchases a Reserved Instance for use with your account. With Reserved Instances, you pay a lower hourly rate compared to On-Demand instance pricing.</p> <p>Use <a>DescribeReservedInstancesOfferings</a> to get a list of Reserved Instance offerings that match your specifications. After you've purchased a Reserved Instance, you can check for your new Reserved Instance with <a>DescribeReservedInstances</a>.</p> <p>To queue a purchase for a future date and time, specify a purchase time. If you do not specify a purchase time, the default is the current time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Reserved Instances</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html">Reserved Instance Marketplace</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostPurchaseReservedInstancesOffering(ctx context.Context, request operations.PostPurchaseReservedInstancesOfferingRequest) (*operations.PostPurchaseReservedInstancesOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PurchaseReservedInstancesOffering"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -30956,7 +31654,7 @@ func (s *SDK) PostPurchaseReservedInstancesOffering(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -30986,8 +31684,9 @@ func (s *SDK) PostPurchaseReservedInstancesOffering(ctx context.Context, request
 	return res, nil
 }
 
+// PostPurchaseScheduledInstances - <p>Purchases the Scheduled Instances with the specified schedule.</p> <p>Scheduled Instances enable you to purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you can purchase a Scheduled Instance, you must call <a>DescribeScheduledInstanceAvailability</a> to check for available schedules and obtain a purchase token. After you purchase a Scheduled Instance, you must call <a>RunScheduledInstances</a> during each scheduled time period.</p> <p>After you purchase a Scheduled Instance, you can't cancel, modify, or resell your purchase.</p>
 func (s *SDK) PostPurchaseScheduledInstances(ctx context.Context, request operations.PostPurchaseScheduledInstancesRequest) (*operations.PostPurchaseScheduledInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PurchaseScheduledInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31006,7 +31705,7 @@ func (s *SDK) PostPurchaseScheduledInstances(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31036,8 +31735,9 @@ func (s *SDK) PostPurchaseScheduledInstances(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostRebootInstances - <p>Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored.</p> <p>If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot.</p> <p>For more information about troubleshooting, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html">Getting console output and rebooting instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostRebootInstances(ctx context.Context, request operations.PostRebootInstancesRequest) (*operations.PostRebootInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RebootInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31056,7 +31756,7 @@ func (s *SDK) PostRebootInstances(ctx context.Context, request operations.PostRe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31077,8 +31777,9 @@ func (s *SDK) PostRebootInstances(ctx context.Context, request operations.PostRe
 	return res, nil
 }
 
+// PostRegisterImage - <p>Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html">Creating your own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note> <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p> </note> <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.</p> <p> <b>Register a snapshot of a root device volume</b> </p> <p>You can use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot">Create a Linux AMI from a snapshot</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html">Use encryption with Amazon EBS-backed AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p> <b>Amazon Web Services Marketplace product codes</b> </p> <p>If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI.</p> <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:</p> <ol> <li> <p>Launch an instance from an existing AMI with that billing product code.</p> </li> <li> <p>Customize the instance.</p> </li> <li> <p>Create an AMI from the instance using <a>CreateImage</a>.</p> </li> </ol> <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html">Understanding AMI billing</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostRegisterImage(ctx context.Context, request operations.PostRegisterImageRequest) (*operations.PostRegisterImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RegisterImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31097,7 +31798,7 @@ func (s *SDK) PostRegisterImage(ctx context.Context, request operations.PostRegi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31127,8 +31828,9 @@ func (s *SDK) PostRegisterImage(ctx context.Context, request operations.PostRegi
 	return res, nil
 }
 
+// PostRegisterInstanceEventNotificationAttributes - <p>Registers a set of tag keys to include in scheduled event notifications for your resources. </p> <p>To remove tags, use .</p>
 func (s *SDK) PostRegisterInstanceEventNotificationAttributes(ctx context.Context, request operations.PostRegisterInstanceEventNotificationAttributesRequest) (*operations.PostRegisterInstanceEventNotificationAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RegisterInstanceEventNotificationAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31147,7 +31849,7 @@ func (s *SDK) PostRegisterInstanceEventNotificationAttributes(ctx context.Contex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31177,8 +31879,9 @@ func (s *SDK) PostRegisterInstanceEventNotificationAttributes(ctx context.Contex
 	return res, nil
 }
 
+// PostRegisterTransitGatewayMulticastGroupMembers - <p>Registers members (network interfaces) with the transit gateway multicast group. A member is a network interface associated with a supported EC2 instance that receives multicast traffic. For information about supported instances, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits">Multicast Consideration</a> in <i>Amazon VPC Transit Gateways</i>.</p> <p>After you add the members, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html">SearchTransitGatewayMulticastGroups</a> to verify that the members were added to the transit gateway multicast group.</p>
 func (s *SDK) PostRegisterTransitGatewayMulticastGroupMembers(ctx context.Context, request operations.PostRegisterTransitGatewayMulticastGroupMembersRequest) (*operations.PostRegisterTransitGatewayMulticastGroupMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RegisterTransitGatewayMulticastGroupMembers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31197,7 +31900,7 @@ func (s *SDK) PostRegisterTransitGatewayMulticastGroupMembers(ctx context.Contex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31227,8 +31930,9 @@ func (s *SDK) PostRegisterTransitGatewayMulticastGroupMembers(ctx context.Contex
 	return res, nil
 }
 
+// PostRegisterTransitGatewayMulticastGroupSources - <p>Registers sources (network interfaces) with the specified transit gateway multicast group.</p> <p>A multicast source is a network interface attached to a supported instance that sends multicast traffic. For information about supported instances, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits">Multicast Considerations</a> in <i>Amazon VPC Transit Gateways</i>.</p> <p>After you add the source, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html">SearchTransitGatewayMulticastGroups</a> to verify that the source was added to the multicast group.</p>
 func (s *SDK) PostRegisterTransitGatewayMulticastGroupSources(ctx context.Context, request operations.PostRegisterTransitGatewayMulticastGroupSourcesRequest) (*operations.PostRegisterTransitGatewayMulticastGroupSourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RegisterTransitGatewayMulticastGroupSources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31247,7 +31951,7 @@ func (s *SDK) PostRegisterTransitGatewayMulticastGroupSources(ctx context.Contex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31277,8 +31981,9 @@ func (s *SDK) PostRegisterTransitGatewayMulticastGroupSources(ctx context.Contex
 	return res, nil
 }
 
+// PostRejectTransitGatewayMulticastDomainAssociations - Rejects a request to associate cross-account subnets with a transit gateway multicast domain.
 func (s *SDK) PostRejectTransitGatewayMulticastDomainAssociations(ctx context.Context, request operations.PostRejectTransitGatewayMulticastDomainAssociationsRequest) (*operations.PostRejectTransitGatewayMulticastDomainAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectTransitGatewayMulticastDomainAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31297,7 +32002,7 @@ func (s *SDK) PostRejectTransitGatewayMulticastDomainAssociations(ctx context.Co
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31327,8 +32032,9 @@ func (s *SDK) PostRejectTransitGatewayMulticastDomainAssociations(ctx context.Co
 	return res, nil
 }
 
+// PostRejectTransitGatewayPeeringAttachment - Rejects a transit gateway peering attachment request.
 func (s *SDK) PostRejectTransitGatewayPeeringAttachment(ctx context.Context, request operations.PostRejectTransitGatewayPeeringAttachmentRequest) (*operations.PostRejectTransitGatewayPeeringAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectTransitGatewayPeeringAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31347,7 +32053,7 @@ func (s *SDK) PostRejectTransitGatewayPeeringAttachment(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31377,8 +32083,9 @@ func (s *SDK) PostRejectTransitGatewayPeeringAttachment(ctx context.Context, req
 	return res, nil
 }
 
+// PostRejectTransitGatewayVpcAttachment - <p>Rejects a request to attach a VPC to a transit gateway.</p> <p>The VPC attachment must be in the <code>pendingAcceptance</code> state. Use <a>DescribeTransitGatewayVpcAttachments</a> to view your pending VPC attachment requests. Use <a>AcceptTransitGatewayVpcAttachment</a> to accept a VPC attachment request.</p>
 func (s *SDK) PostRejectTransitGatewayVpcAttachment(ctx context.Context, request operations.PostRejectTransitGatewayVpcAttachmentRequest) (*operations.PostRejectTransitGatewayVpcAttachmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectTransitGatewayVpcAttachment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31397,7 +32104,7 @@ func (s *SDK) PostRejectTransitGatewayVpcAttachment(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31427,8 +32134,9 @@ func (s *SDK) PostRejectTransitGatewayVpcAttachment(ctx context.Context, request
 	return res, nil
 }
 
+// PostRejectVpcEndpointConnections - Rejects one or more VPC endpoint connection requests to your VPC endpoint service.
 func (s *SDK) PostRejectVpcEndpointConnections(ctx context.Context, request operations.PostRejectVpcEndpointConnectionsRequest) (*operations.PostRejectVpcEndpointConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectVpcEndpointConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31447,7 +32155,7 @@ func (s *SDK) PostRejectVpcEndpointConnections(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31477,8 +32185,9 @@ func (s *SDK) PostRejectVpcEndpointConnections(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostRejectVpcPeeringConnection - Rejects a VPC peering connection request. The VPC peering connection must be in the <code>pending-acceptance</code> state. Use the <a>DescribeVpcPeeringConnections</a> request to view your outstanding VPC peering connection requests. To delete an active VPC peering connection, or to delete a VPC peering connection request that you initiated, use <a>DeleteVpcPeeringConnection</a>.
 func (s *SDK) PostRejectVpcPeeringConnection(ctx context.Context, request operations.PostRejectVpcPeeringConnectionRequest) (*operations.PostRejectVpcPeeringConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RejectVpcPeeringConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31497,7 +32206,7 @@ func (s *SDK) PostRejectVpcPeeringConnection(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31527,8 +32236,9 @@ func (s *SDK) PostRejectVpcPeeringConnection(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostReleaseAddress - <p>Releases the specified Elastic IP address.</p> <p>[EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use <a>DisassociateAddress</a>.</p> <p>[Nondefault VPC] You must use <a>DisassociateAddress</a> to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (<code>InvalidIPAddress.InUse</code>).</p> <p>After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an <code>AuthFailure</code> error if the address is already allocated to another Amazon Web Services account.</p> <p>[EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see <a>AllocateAddress</a>.</p>
 func (s *SDK) PostReleaseAddress(ctx context.Context, request operations.PostReleaseAddressRequest) (*operations.PostReleaseAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReleaseAddress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31547,7 +32257,7 @@ func (s *SDK) PostReleaseAddress(ctx context.Context, request operations.PostRel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31568,8 +32278,9 @@ func (s *SDK) PostReleaseAddress(ctx context.Context, request operations.PostRel
 	return res, nil
 }
 
+// PostReleaseHosts - <p>When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into <code>released</code> state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, for example, to modify the host. You must stop or terminate all instances on a host before it can be released.</p> <p>When Dedicated Hosts are released, it may take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated Hosts. Wait a few minutes and then try again.</p> <p>Released hosts still appear in a <a>DescribeHosts</a> response.</p>
 func (s *SDK) PostReleaseHosts(ctx context.Context, request operations.PostReleaseHostsRequest) (*operations.PostReleaseHostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReleaseHosts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31588,7 +32299,7 @@ func (s *SDK) PostReleaseHosts(ctx context.Context, request operations.PostRelea
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31618,8 +32329,9 @@ func (s *SDK) PostReleaseHosts(ctx context.Context, request operations.PostRelea
 	return res, nil
 }
 
+// PostReplaceIamInstanceProfileAssociation - <p>Replaces an IAM instance profile for the specified running instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>
 func (s *SDK) PostReplaceIamInstanceProfileAssociation(ctx context.Context, request operations.PostReplaceIamInstanceProfileAssociationRequest) (*operations.PostReplaceIamInstanceProfileAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceIamInstanceProfileAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31638,7 +32350,7 @@ func (s *SDK) PostReplaceIamInstanceProfileAssociation(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31668,8 +32380,9 @@ func (s *SDK) PostReplaceIamInstanceProfileAssociation(ctx context.Context, requ
 	return res, nil
 }
 
+// PostReplaceNetworkACLAssociation - <p>Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>This is an idempotent operation.</p>
 func (s *SDK) PostReplaceNetworkACLAssociation(ctx context.Context, request operations.PostReplaceNetworkACLAssociationRequest) (*operations.PostReplaceNetworkACLAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceNetworkAclAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31688,7 +32401,7 @@ func (s *SDK) PostReplaceNetworkACLAssociation(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31718,8 +32431,9 @@ func (s *SDK) PostReplaceNetworkACLAssociation(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostReplaceNetworkACLEntry - Replaces an entry (rule) in a network ACL. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.
 func (s *SDK) PostReplaceNetworkACLEntry(ctx context.Context, request operations.PostReplaceNetworkACLEntryRequest) (*operations.PostReplaceNetworkACLEntryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceNetworkAclEntry"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31738,7 +32452,7 @@ func (s *SDK) PostReplaceNetworkACLEntry(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31759,8 +32473,9 @@ func (s *SDK) PostReplaceNetworkACLEntry(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostReplaceRoute - <p>Replaces an existing route within a route table in a VPC. You must provide only one of the following: internet gateway, virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, egress-only internet gateway, or transit gateway.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
 func (s *SDK) PostReplaceRoute(ctx context.Context, request operations.PostReplaceRouteRequest) (*operations.PostReplaceRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31779,7 +32494,7 @@ func (s *SDK) PostReplaceRoute(ctx context.Context, request operations.PostRepla
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31800,8 +32515,9 @@ func (s *SDK) PostReplaceRoute(ctx context.Context, request operations.PostRepla
 	return res, nil
 }
 
+// PostReplaceRouteTableAssociation - <p>Changes the route table associated with a given subnet, internet gateway, or virtual private gateway in a VPC. After the operation completes, the subnet or gateway uses the routes in the new route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can also use this operation to change which table is the main route table in the VPC. Specify the main route table's association ID and the route table ID of the new main route table.</p>
 func (s *SDK) PostReplaceRouteTableAssociation(ctx context.Context, request operations.PostReplaceRouteTableAssociationRequest) (*operations.PostReplaceRouteTableAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceRouteTableAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31820,7 +32536,7 @@ func (s *SDK) PostReplaceRouteTableAssociation(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31850,8 +32566,9 @@ func (s *SDK) PostReplaceRouteTableAssociation(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostReplaceTransitGatewayRoute - Replaces the specified route in the specified transit gateway route table.
 func (s *SDK) PostReplaceTransitGatewayRoute(ctx context.Context, request operations.PostReplaceTransitGatewayRouteRequest) (*operations.PostReplaceTransitGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReplaceTransitGatewayRoute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31870,7 +32587,7 @@ func (s *SDK) PostReplaceTransitGatewayRoute(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31900,8 +32617,9 @@ func (s *SDK) PostReplaceTransitGatewayRoute(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostReportInstanceStatus - <p>Submits feedback about the status of an instance. The instance must be in the <code>running</code> state. If your experience with the instance differs from the instance status returned by <a>DescribeInstanceStatus</a>, use <a>ReportInstanceStatus</a> to report your experience with the instance. Amazon EC2 collects this information to improve the accuracy of status checks.</p> <p>Use of this action does not change the value returned by <a>DescribeInstanceStatus</a>.</p>
 func (s *SDK) PostReportInstanceStatus(ctx context.Context, request operations.PostReportInstanceStatusRequest) (*operations.PostReportInstanceStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ReportInstanceStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31920,7 +32638,7 @@ func (s *SDK) PostReportInstanceStatus(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31941,8 +32659,9 @@ func (s *SDK) PostReportInstanceStatus(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostRequestSpotFleet - <p>Creates a Spot Fleet request.</p> <p>The Spot Fleet request specifies the total target capacity and the On-Demand target capacity. Amazon EC2 calculates the difference between the total capacity and On-Demand capacity, and launches the difference as Spot capacity.</p> <p>You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet.</p> <p>By default, the Spot Fleet requests Spot Instances in the Spot Instance pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload.</p> <p>Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet.</p> <p>You can specify tags for the Spot Fleet request and instances launched by the fleet. You cannot tag other resource types in a Spot Fleet request because only the <code>spot-fleet-request</code> and <code>instance</code> resource types are supported.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html">Spot Fleet requests</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
 func (s *SDK) PostRequestSpotFleet(ctx context.Context, request operations.PostRequestSpotFleetRequest) (*operations.PostRequestSpotFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RequestSpotFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -31961,7 +32680,7 @@ func (s *SDK) PostRequestSpotFleet(ctx context.Context, request operations.PostR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -31991,8 +32710,9 @@ func (s *SDK) PostRequestSpotFleet(ctx context.Context, request operations.PostR
 	return res, nil
 }
 
+// PostRequestSpotInstances - <p>Creates a Spot Instance request.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html">Spot Instance requests</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
 func (s *SDK) PostRequestSpotInstances(ctx context.Context, request operations.PostRequestSpotInstancesRequest) (*operations.PostRequestSpotInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RequestSpotInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32011,7 +32731,7 @@ func (s *SDK) PostRequestSpotInstances(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32041,8 +32761,9 @@ func (s *SDK) PostRequestSpotInstances(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostResetAddressAttribute - Resets the attribute of the specified IP address. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.
 func (s *SDK) PostResetAddressAttribute(ctx context.Context, request operations.PostResetAddressAttributeRequest) (*operations.PostResetAddressAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetAddressAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32061,7 +32782,7 @@ func (s *SDK) PostResetAddressAttribute(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32091,8 +32812,9 @@ func (s *SDK) PostResetAddressAttribute(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostResetEbsDefaultKmsKeyID - <p>Resets the default KMS key for EBS encryption for your account in this Region to the Amazon Web Services managed KMS key for EBS.</p> <p>After resetting the default KMS key to the Amazon Web Services managed KMS key, you can continue to encrypt by a customer managed KMS key by specifying it when you create the volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostResetEbsDefaultKmsKeyID(ctx context.Context, request operations.PostResetEbsDefaultKmsKeyIDRequest) (*operations.PostResetEbsDefaultKmsKeyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetEbsDefaultKmsKeyId"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32111,7 +32833,7 @@ func (s *SDK) PostResetEbsDefaultKmsKeyID(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32141,8 +32863,9 @@ func (s *SDK) PostResetEbsDefaultKmsKeyID(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostResetFpgaImageAttribute - Resets the specified attribute of the specified Amazon FPGA Image (AFI) to its default value. You can only reset the load permission attribute.
 func (s *SDK) PostResetFpgaImageAttribute(ctx context.Context, request operations.PostResetFpgaImageAttributeRequest) (*operations.PostResetFpgaImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetFpgaImageAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32161,7 +32884,7 @@ func (s *SDK) PostResetFpgaImageAttribute(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32191,8 +32914,9 @@ func (s *SDK) PostResetFpgaImageAttribute(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostResetImageAttribute - Resets an attribute of an AMI to its default value.
 func (s *SDK) PostResetImageAttribute(ctx context.Context, request operations.PostResetImageAttributeRequest) (*operations.PostResetImageAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetImageAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32211,7 +32935,7 @@ func (s *SDK) PostResetImageAttribute(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32232,8 +32956,9 @@ func (s *SDK) PostResetImageAttribute(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostResetInstanceAttribute - <p>Resets an attribute of an instance to its default value. To reset the <code>kernel</code> or <code>ramdisk</code>, the instance must be in a stopped state. To reset the <code>sourceDestCheck</code>, the instance can be either running or stopped.</p> <p>The <code>sourceDestCheck</code> attribute controls whether source/destination checking is enabled. The default value is <code>true</code>, which means checking is enabled. This value must be <code>false</code> for a NAT instance to perform NAT. For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html">NAT Instances</a> in the <i>Amazon VPC User Guide</i>.</p>
 func (s *SDK) PostResetInstanceAttribute(ctx context.Context, request operations.PostResetInstanceAttributeRequest) (*operations.PostResetInstanceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetInstanceAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32252,7 +32977,7 @@ func (s *SDK) PostResetInstanceAttribute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32273,8 +32998,9 @@ func (s *SDK) PostResetInstanceAttribute(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostResetNetworkInterfaceAttribute - Resets a network interface attribute. You can specify only one attribute at a time.
 func (s *SDK) PostResetNetworkInterfaceAttribute(ctx context.Context, request operations.PostResetNetworkInterfaceAttributeRequest) (*operations.PostResetNetworkInterfaceAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetNetworkInterfaceAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32293,7 +33019,7 @@ func (s *SDK) PostResetNetworkInterfaceAttribute(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32314,8 +33040,9 @@ func (s *SDK) PostResetNetworkInterfaceAttribute(ctx context.Context, request op
 	return res, nil
 }
 
+// PostResetSnapshotAttribute - <p>Resets permission settings for the specified snapshot.</p> <p>For more information about modifying snapshot permissions, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html">Share a snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 func (s *SDK) PostResetSnapshotAttribute(ctx context.Context, request operations.PostResetSnapshotAttributeRequest) (*operations.PostResetSnapshotAttributeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetSnapshotAttribute"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32334,7 +33061,7 @@ func (s *SDK) PostResetSnapshotAttribute(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32355,8 +33082,9 @@ func (s *SDK) PostResetSnapshotAttribute(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostRestoreAddressToClassic - Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.
 func (s *SDK) PostRestoreAddressToClassic(ctx context.Context, request operations.PostRestoreAddressToClassicRequest) (*operations.PostRestoreAddressToClassicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreAddressToClassic"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32375,7 +33103,7 @@ func (s *SDK) PostRestoreAddressToClassic(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32405,8 +33133,9 @@ func (s *SDK) PostRestoreAddressToClassic(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostRestoreManagedPrefixListVersion - Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
 func (s *SDK) PostRestoreManagedPrefixListVersion(ctx context.Context, request operations.PostRestoreManagedPrefixListVersionRequest) (*operations.PostRestoreManagedPrefixListVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreManagedPrefixListVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32425,7 +33154,7 @@ func (s *SDK) PostRestoreManagedPrefixListVersion(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32455,8 +33184,9 @@ func (s *SDK) PostRestoreManagedPrefixListVersion(ctx context.Context, request o
 	return res, nil
 }
 
+// PostRevokeClientVpnIngress - Removes an ingress authorization rule from a Client VPN endpoint.
 func (s *SDK) PostRevokeClientVpnIngress(ctx context.Context, request operations.PostRevokeClientVpnIngressRequest) (*operations.PostRevokeClientVpnIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RevokeClientVpnIngress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32475,7 +33205,7 @@ func (s *SDK) PostRevokeClientVpnIngress(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32505,8 +33235,9 @@ func (s *SDK) PostRevokeClientVpnIngress(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostRevokeSecurityGroupEgress - <p>[VPC only] Removes the specified outbound (egress) rules from a security group for EC2-VPC. This action does not apply to security groups for use in EC2-Classic.</p> <p>You can specify rules using either rule IDs or security group rule properties. If you use rule properties, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule has a protocol, from and to ports, and destination (CIDR range, security group, or prefix list). For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not need to specify the description to revoke the rule.</p> <p>[Default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.</p> <p>Amazon Web Services recommends that you describe the security group to verify that the rules were removed.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>
 func (s *SDK) PostRevokeSecurityGroupEgress(ctx context.Context, request operations.PostRevokeSecurityGroupEgressRequest) (*operations.PostRevokeSecurityGroupEgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RevokeSecurityGroupEgress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32525,7 +33256,7 @@ func (s *SDK) PostRevokeSecurityGroupEgress(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32555,8 +33286,9 @@ func (s *SDK) PostRevokeSecurityGroupEgress(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostRevokeSecurityGroupIngress - <p>Removes the specified inbound (ingress) rules from a security group.</p> <p>You can specify rules using either rule IDs or security group rule properties. If you use rule properties, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule has a protocol, from and to ports, and source (CIDR range, security group, or prefix list). For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not need to specify the description to revoke the rule.</p> <p>[EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked.</p> <p>Amazon Web Services recommends that you describe the security group to verify that the rules were removed.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>
 func (s *SDK) PostRevokeSecurityGroupIngress(ctx context.Context, request operations.PostRevokeSecurityGroupIngressRequest) (*operations.PostRevokeSecurityGroupIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RevokeSecurityGroupIngress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32575,7 +33307,7 @@ func (s *SDK) PostRevokeSecurityGroupIngress(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32605,8 +33337,9 @@ func (s *SDK) PostRevokeSecurityGroupIngress(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostRunInstances - <p>Launches the specified number of instances using an AMI for which you have permissions.</p> <p>You can specify a number of options, or leave the default options. The following rules apply:</p> <ul> <li> <p>[EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.</p> </li> <li> <p>[EC2-Classic] If don't specify an Availability Zone, we choose one for you.</p> </li> <li> <p>Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types">Instance types available only in a VPC</a>.</p> </li> <li> <p>[EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.</p> </li> <li> <p>Not all instance types support IPv6 addresses. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance types</a>.</p> </li> <li> <p>If you don't specify a security group ID, we use the default security group. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Security groups</a>.</p> </li> <li> <p>If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.</p> </li> </ul> <p>You can create a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">launch template</a>, which is a resource that contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify the launch template instead of specifying the launch parameters.</p> <p>To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances.</p> <p>An instance is ready for you to use when it's in the <code>running</code> state. You can check the state of your instance using <a>DescribeInstances</a>. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see <a>CreateTags</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging your Amazon EC2 resources</a>.</p> <p>Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Key pairs</a>.</p> <p>For troubleshooting, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html">What to do if an instance immediately terminates</a>, and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html">Troubleshooting connecting to your instance</a>.</p>
 func (s *SDK) PostRunInstances(ctx context.Context, request operations.PostRunInstancesRequest) (*operations.PostRunInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RunInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32625,7 +33358,7 @@ func (s *SDK) PostRunInstances(ctx context.Context, request operations.PostRunIn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32655,8 +33388,9 @@ func (s *SDK) PostRunInstances(ctx context.Context, request operations.PostRunIn
 	return res, nil
 }
 
+// PostRunScheduledInstances - <p>Launches the specified Scheduled Instances.</p> <p>Before you can launch a Scheduled Instance, you must purchase it and obtain an identifier using <a>PurchaseScheduledInstances</a>.</p> <p>You must launch a Scheduled Instance during its scheduled time period. You can't stop or reboot a Scheduled Instance, but you can terminate it as needed. If you terminate a Scheduled Instance before the current scheduled time period ends, you can launch it again after a few minutes. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html">Scheduled Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostRunScheduledInstances(ctx context.Context, request operations.PostRunScheduledInstancesRequest) (*operations.PostRunScheduledInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RunScheduledInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32675,7 +33409,7 @@ func (s *SDK) PostRunScheduledInstances(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32705,8 +33439,9 @@ func (s *SDK) PostRunScheduledInstances(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostSearchLocalGatewayRoutes - Searches for routes in the specified local gateway route table.
 func (s *SDK) PostSearchLocalGatewayRoutes(ctx context.Context, request operations.PostSearchLocalGatewayRoutesRequest) (*operations.PostSearchLocalGatewayRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=SearchLocalGatewayRoutes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32725,7 +33460,7 @@ func (s *SDK) PostSearchLocalGatewayRoutes(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32755,8 +33490,9 @@ func (s *SDK) PostSearchLocalGatewayRoutes(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostSearchTransitGatewayMulticastGroups - Searches one or more transit gateway multicast groups and returns the group membership information.
 func (s *SDK) PostSearchTransitGatewayMulticastGroups(ctx context.Context, request operations.PostSearchTransitGatewayMulticastGroupsRequest) (*operations.PostSearchTransitGatewayMulticastGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=SearchTransitGatewayMulticastGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32775,7 +33511,7 @@ func (s *SDK) PostSearchTransitGatewayMulticastGroups(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32805,8 +33541,9 @@ func (s *SDK) PostSearchTransitGatewayMulticastGroups(ctx context.Context, reque
 	return res, nil
 }
 
+// PostSearchTransitGatewayRoutes - Searches for routes in the specified transit gateway route table.
 func (s *SDK) PostSearchTransitGatewayRoutes(ctx context.Context, request operations.PostSearchTransitGatewayRoutesRequest) (*operations.PostSearchTransitGatewayRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=SearchTransitGatewayRoutes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32825,7 +33562,7 @@ func (s *SDK) PostSearchTransitGatewayRoutes(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32855,8 +33592,9 @@ func (s *SDK) PostSearchTransitGatewayRoutes(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostSendDiagnosticInterrupt - <p>Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a <i>kernel panic</i> (on Linux instances), or a <i>blue screen</i>/<i>stop error</i> (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a <i>non-maskable interrupt</i> (NMI).</p> <p>In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace.</p> <p>Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks.</p> <p>For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html">Send a diagnostic interrupt</a> (Linux instances) or <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html">Send a Diagnostic Interrupt</a> (Windows instances).</p>
 func (s *SDK) PostSendDiagnosticInterrupt(ctx context.Context, request operations.PostSendDiagnosticInterruptRequest) (*operations.PostSendDiagnosticInterruptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=SendDiagnosticInterrupt"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32875,7 +33613,7 @@ func (s *SDK) PostSendDiagnosticInterrupt(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32896,8 +33634,9 @@ func (s *SDK) PostSendDiagnosticInterrupt(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostStartInstances - <p>Starts an Amazon EBS-backed instance that you've previously stopped.</p> <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage.</p> <p>Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM.</p> <p>Performing this operation on an instance that uses an instance store as its root device returns an error.</p> <p>If you attempt to start a T3 instance with <code>host</code> tenancy and the <code>unlimted</code> CPU credit option, the request fails. The <code>unlimited</code> CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to <code>standard</code>, or change its tenancy to <code>default</code> or <code>dedicated</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html">Stopping instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostStartInstances(ctx context.Context, request operations.PostStartInstancesRequest) (*operations.PostStartInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=StartInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32916,7 +33655,7 @@ func (s *SDK) PostStartInstances(ctx context.Context, request operations.PostSta
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32946,8 +33685,9 @@ func (s *SDK) PostStartInstances(ctx context.Context, request operations.PostSta
 	return res, nil
 }
 
+// PostStartNetworkInsightsAnalysis - Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.
 func (s *SDK) PostStartNetworkInsightsAnalysis(ctx context.Context, request operations.PostStartNetworkInsightsAnalysisRequest) (*operations.PostStartNetworkInsightsAnalysisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=StartNetworkInsightsAnalysis"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -32966,7 +33706,7 @@ func (s *SDK) PostStartNetworkInsightsAnalysis(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -32996,8 +33736,9 @@ func (s *SDK) PostStartNetworkInsightsAnalysis(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostStartVpcEndpointServicePrivateDNSVerification - <p>Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service.</p> <p>The service provider must successfully perform the verification before the consumer can use the name to access the service.</p> <p>Before the service provider runs this command, they must add a record to the DNS server. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html#add-dns-txt-record">Adding a TXT Record to Your Domain's DNS Server </a> in the <i>Amazon VPC User Guide</i>.</p>
 func (s *SDK) PostStartVpcEndpointServicePrivateDNSVerification(ctx context.Context, request operations.PostStartVpcEndpointServicePrivateDNSVerificationRequest) (*operations.PostStartVpcEndpointServicePrivateDNSVerificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=StartVpcEndpointServicePrivateDnsVerification"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33016,7 +33757,7 @@ func (s *SDK) PostStartVpcEndpointServicePrivateDNSVerification(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33046,8 +33787,9 @@ func (s *SDK) PostStartVpcEndpointServicePrivateDNSVerification(ctx context.Cont
 	return res, nil
 }
 
+// PostStopInstances - <p>Stops an Amazon EBS-backed instance.</p> <p>You can use the Stop action to hibernate an instance if the instance is <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation">enabled for hibernation</a> and it meets the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate your instance</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage.</p> <p>You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances">Hibernating interrupted Spot Instances</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs.</p> <p>Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Instance lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html">Troubleshooting stopping your instance</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostStopInstances(ctx context.Context, request operations.PostStopInstancesRequest) (*operations.PostStopInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=StopInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33066,7 +33808,7 @@ func (s *SDK) PostStopInstances(ctx context.Context, request operations.PostStop
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33096,8 +33838,9 @@ func (s *SDK) PostStopInstances(ctx context.Context, request operations.PostStop
 	return res, nil
 }
 
+// PostTerminateClientVpnConnections - Terminates active Client VPN endpoint connections. This action can be used to terminate a specific client connection, or up to five connections established by a specific user.
 func (s *SDK) PostTerminateClientVpnConnections(ctx context.Context, request operations.PostTerminateClientVpnConnectionsRequest) (*operations.PostTerminateClientVpnConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=TerminateClientVpnConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33116,7 +33859,7 @@ func (s *SDK) PostTerminateClientVpnConnections(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33146,8 +33889,9 @@ func (s *SDK) PostTerminateClientVpnConnections(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostTerminateInstances - <p>Shuts down the specified instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds. </p> <p>If you specify multiple instances and the request fails (for example, because of a single incorrect instance ID), none of the instances are terminated.</p> <p>If you terminate multiple instances across multiple Availability Zones, and one or more of the specified instances are enabled for termination protection, the request fails with the following results:</p> <ul> <li> <p>The specified instances that are in the same Availability Zone as the protected instance are not terminated.</p> </li> <li> <p>The specified instances that are in different Availability Zones, where no other specified instances are protected, are successfully terminated.</p> </li> </ul> <p>For example, say you have the following instances:</p> <ul> <li> <p>Instance A: <code>us-east-1a</code>; Not protected</p> </li> <li> <p>Instance B: <code>us-east-1a</code>; Not protected</p> </li> <li> <p>Instance C: <code>us-east-1b</code>; Protected</p> </li> <li> <p>Instance D: <code>us-east-1b</code>; not protected</p> </li> </ul> <p>If you attempt to terminate all of these instances in the same request, the request reports failure with the following results:</p> <ul> <li> <p>Instance A and Instance B are successfully terminated because none of the specified instances in <code>us-east-1a</code> are enabled for termination protection.</p> </li> <li> <p>Instance C and Instance D fail to terminate because at least one of the specified instances in <code>us-east-1b</code> (Instance C) is enabled for termination protection.</p> </li> </ul> <p>Terminated instances remain visible after termination (for approximately one hour).</p> <p>By default, Amazon EC2 deletes all EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running.</p> <p>You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, any attached EBS volumes with the <code>DeleteOnTermination</code> block device mapping parameter set to <code>true</code> are automatically deleted. For more information about the differences between stopping and terminating instances, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Instance lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>For more information about troubleshooting, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html">Troubleshooting terminating your instance</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) PostTerminateInstances(ctx context.Context, request operations.PostTerminateInstancesRequest) (*operations.PostTerminateInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=TerminateInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33166,7 +33910,7 @@ func (s *SDK) PostTerminateInstances(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33196,8 +33940,9 @@ func (s *SDK) PostTerminateInstances(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostUnassignIpv6Addresses - Unassigns one or more IPv6 addresses IPv4 Prefix Delegation prefixes from a network interface.
 func (s *SDK) PostUnassignIpv6Addresses(ctx context.Context, request operations.PostUnassignIpv6AddressesRequest) (*operations.PostUnassignIpv6AddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UnassignIpv6Addresses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33216,7 +33961,7 @@ func (s *SDK) PostUnassignIpv6Addresses(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33246,8 +33991,9 @@ func (s *SDK) PostUnassignIpv6Addresses(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostUnassignPrivateIPAddresses - Unassigns one or more secondary private IP addresses, or IPv4 Prefix Delegation prefixes from a network interface.
 func (s *SDK) PostUnassignPrivateIPAddresses(ctx context.Context, request operations.PostUnassignPrivateIPAddressesRequest) (*operations.PostUnassignPrivateIPAddressesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UnassignPrivateIpAddresses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33266,7 +34012,7 @@ func (s *SDK) PostUnassignPrivateIPAddresses(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33287,8 +34033,9 @@ func (s *SDK) PostUnassignPrivateIPAddresses(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostUnmonitorInstances - Disables detailed monitoring for a running instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html">Monitoring your instances and volumes</a> in the <i>Amazon EC2 User Guide</i>.
 func (s *SDK) PostUnmonitorInstances(ctx context.Context, request operations.PostUnmonitorInstancesRequest) (*operations.PostUnmonitorInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UnmonitorInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33307,7 +34054,7 @@ func (s *SDK) PostUnmonitorInstances(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33337,8 +34084,9 @@ func (s *SDK) PostUnmonitorInstances(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostUpdateSecurityGroupRuleDescriptionsEgress - [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can remove a description for a security group rule by omitting the description parameter in the request.
 func (s *SDK) PostUpdateSecurityGroupRuleDescriptionsEgress(ctx context.Context, request operations.PostUpdateSecurityGroupRuleDescriptionsEgressRequest) (*operations.PostUpdateSecurityGroupRuleDescriptionsEgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateSecurityGroupRuleDescriptionsEgress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33357,7 +34105,7 @@ func (s *SDK) PostUpdateSecurityGroupRuleDescriptionsEgress(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33387,8 +34135,9 @@ func (s *SDK) PostUpdateSecurityGroupRuleDescriptionsEgress(ctx context.Context,
 	return res, nil
 }
 
+// PostUpdateSecurityGroupRuleDescriptionsIngress - Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can remove a description for a security group rule by omitting the description parameter in the request.
 func (s *SDK) PostUpdateSecurityGroupRuleDescriptionsIngress(ctx context.Context, request operations.PostUpdateSecurityGroupRuleDescriptionsIngressRequest) (*operations.PostUpdateSecurityGroupRuleDescriptionsIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateSecurityGroupRuleDescriptionsIngress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33407,7 +34156,7 @@ func (s *SDK) PostUpdateSecurityGroupRuleDescriptionsIngress(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -33437,8 +34186,9 @@ func (s *SDK) PostUpdateSecurityGroupRuleDescriptionsIngress(ctx context.Context
 	return res, nil
 }
 
+// PostWithdrawByoipCidr - <p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of BGP propagation delays.</p>
 func (s *SDK) PostWithdrawByoipCidr(ctx context.Context, request operations.PostWithdrawByoipCidrRequest) (*operations.PostWithdrawByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=WithdrawByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -33457,7 +34207,7 @@ func (s *SDK) PostWithdrawByoipCidr(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

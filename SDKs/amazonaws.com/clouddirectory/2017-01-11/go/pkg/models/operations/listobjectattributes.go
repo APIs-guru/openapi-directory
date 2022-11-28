@@ -28,11 +28,15 @@ type ListObjectAttributesHeaders struct {
 	XAmzDataPartition    string                                        `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// ListObjectAttributesRequestBodyFacetFilter
+// A facet.
 type ListObjectAttributesRequestBodyFacetFilter struct {
 	FacetName *string `json:"FacetName,omitempty"`
 	SchemaArn *string `json:"SchemaArn,omitempty"`
 }
 
+// ListObjectAttributesRequestBodyObjectReference
+// The reference that identifies an object.
 type ListObjectAttributesRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

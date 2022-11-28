@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Namespace } from "./namespace";
 
 
+
 export class GetNamespaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Namespace" })
+  @SpeakeasyMetadata({ data: "json, name=Namespace" })
   namespace?: Namespace;
 }

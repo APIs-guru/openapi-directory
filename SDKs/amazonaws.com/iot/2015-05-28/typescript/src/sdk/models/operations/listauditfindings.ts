@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListAuditFindingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 }
 
 
 export class ListAuditFindingsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,87 +41,87 @@ export class ListAuditFindingsHeaders extends SpeakeasyBase {
  * Information that identifies the noncompliant resource.
 **/
 export class ListAuditFindingsRequestBodyResourceIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: string;
 
-  @Metadata({ data: "json, name=caCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificateId" })
   caCertificateId?: string;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=cognitoIdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=cognitoIdentityPoolId" })
   cognitoIdentityPoolId?: string;
 
-  @Metadata({ data: "json, name=deviceCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCertificateId" })
   deviceCertificateId?: string;
 
-  @Metadata({ data: "json, name=iamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=iamRoleArn" })
   iamRoleArn?: string;
 
-  @Metadata({ data: "json, name=policyVersionIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=policyVersionIdentifier" })
   policyVersionIdentifier?: shared.PolicyVersionIdentifier;
 
-  @Metadata({ data: "json, name=roleAliasArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleAliasArn" })
   roleAliasArn?: string;
 }
 
 
 export class ListAuditFindingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkName" })
+  @SpeakeasyMetadata({ data: "json, name=checkName" })
   checkName?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=listSuppressedFindings" })
+  @SpeakeasyMetadata({ data: "json, name=listSuppressedFindings" })
   listSuppressedFindings?: boolean;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=resourceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIdentifier" })
   resourceIdentifier?: ListAuditFindingsRequestBodyResourceIdentifier;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 }
 
 
 export class ListAuditFindingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListAuditFindingsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListAuditFindingsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: ListAuditFindingsRequestBody;
 }
 
 
 export class ListAuditFindingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listAuditFindingsResponse?: shared.ListAuditFindingsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudMlV1Measurement } from "./googlecloudmlv1measurement";
+
 
 
 // GoogleCloudMlV1CompleteTrialRequest
@@ -7,12 +8,12 @@ import { GoogleCloudMlV1Measurement } from "./googlecloudmlv1measurement";
  * The request message for the CompleteTrial service method.
 **/
 export class GoogleCloudMlV1CompleteTrialRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=finalMeasurement" })
+  @SpeakeasyMetadata({ data: "json, name=finalMeasurement" })
   finalMeasurement?: GoogleCloudMlV1Measurement;
 
-  @Metadata({ data: "json, name=infeasibleReason" })
+  @SpeakeasyMetadata({ data: "json, name=infeasibleReason" })
   infeasibleReason?: string;
 
-  @Metadata({ data: "json, name=trialInfeasible" })
+  @SpeakeasyMetadata({ data: "json, name=trialInfeasible" })
   trialInfeasible?: boolean;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ActionNotificationExportResultEntity
+// List Action Notification Export Results
 type ActionNotificationExportResultEntity struct {
 	CreatedAt      *int32  `json:"created_at,omitempty"`
 	Folder         *string `json:"folder,omitempty"`

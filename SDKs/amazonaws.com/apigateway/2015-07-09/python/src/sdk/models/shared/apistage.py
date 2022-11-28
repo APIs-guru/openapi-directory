@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import throttlesettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class APIStage:
-    api_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiId' }})
-    stage: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stage' }})
-    throttle: Optional[dict[str, throttlesettings.ThrottleSettings]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'throttle' }})
+    r"""APIStage
+    API stage name of the associated API stage in a usage plan.
+    """
+    
+    api_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiId') }})
+    stage: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stage') }})
+    throttle: Optional[dict[str, ThrottleSettings]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('throttle') }})
     

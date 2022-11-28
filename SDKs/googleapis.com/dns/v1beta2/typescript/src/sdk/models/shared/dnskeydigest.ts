@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DnsKeyDigestTypeEnum {
-    Sha1 = "sha1"
-,    Sha256 = "sha256"
-,    Sha384 = "sha384"
+    Sha1 = "sha1",
+    Sha256 = "sha256",
+    Sha384 = "sha384"
 }
 
 
 export class DnsKeyDigest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=digest" })
+  @SpeakeasyMetadata({ data: "json, name=digest" })
   digest?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DnsKeyDigestTypeEnum;
 }

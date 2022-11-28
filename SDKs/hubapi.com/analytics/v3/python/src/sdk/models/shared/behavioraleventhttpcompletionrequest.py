@@ -1,18 +1,19 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class BehavioralEventHTTPCompletionRequest:
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    event_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventName' }})
-    object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'objectId' }})
-    occurred_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'occurredAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    properties: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    utk: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'utk' }})
+    event_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventName') }})
+    properties: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('objectId') }})
+    occurred_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('occurredAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    utk: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('utk') }})
     

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SrcSearchlyApiV1ControllersSimilarityByContentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 }
 
 
 export class SrcSearchlyApiV1ControllersSimilarityByContentRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: SrcSearchlyApiV1ControllersSimilarityByContentRequestBody;
 }
 
 
 export class SrcSearchlyApiV1ControllersSimilarityByContentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseSimilarity?: shared.ApiResponseSimilarity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   srcSearchlyApiV1ControllersSimilarityByContentDefaultApplicationTextString?: string;
 }

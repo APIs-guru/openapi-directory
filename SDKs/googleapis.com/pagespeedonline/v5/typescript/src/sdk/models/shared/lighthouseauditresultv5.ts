@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LighthouseAuditResultV5
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An audit's result object in a Lighthouse result.
 **/
 export class LighthouseAuditResultV5 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: Map<string, any>;
 
-  @Metadata({ data: "json, name=displayValue" })
+  @SpeakeasyMetadata({ data: "json, name=displayValue" })
   displayValue?: string;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=explanation" })
+  @SpeakeasyMetadata({ data: "json, name=explanation" })
   explanation?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=numericUnit" })
+  @SpeakeasyMetadata({ data: "json, name=numericUnit" })
   numericUnit?: string;
 
-  @Metadata({ data: "json, name=numericValue" })
+  @SpeakeasyMetadata({ data: "json, name=numericValue" })
   numericValue?: number;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: any;
 
-  @Metadata({ data: "json, name=scoreDisplayMode" })
+  @SpeakeasyMetadata({ data: "json, name=scoreDisplayMode" })
   scoreDisplayMode?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=warnings" })
+  @SpeakeasyMetadata({ data: "json, name=warnings" })
   warnings?: any;
 }

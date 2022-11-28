@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class LockListForPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class LockListForPathQueryParams:
 
 @dataclass
 class LockListForPathRequest:
-    path_params: LockListForPathPathParams = field(default=None)
-    query_params: LockListForPathQueryParams = field(default=None)
+    path_params: LockListForPathPathParams = field()
+    query_params: LockListForPathQueryParams = field()
     
 
 @dataclass
 class LockListForPathResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     lock_entities: Optional[List[shared.LockEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

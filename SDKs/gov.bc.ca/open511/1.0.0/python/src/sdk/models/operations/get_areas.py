@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetAreasFormatEnum(str, Enum):
     JSON = "json"
@@ -13,11 +14,11 @@ class GetAreasQueryParams:
 
 @dataclass
 class GetAreasRequest:
-    query_params: GetAreasQueryParams = field(default=None)
+    query_params: GetAreasQueryParams = field()
     
 
 @dataclass
 class GetAreasResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

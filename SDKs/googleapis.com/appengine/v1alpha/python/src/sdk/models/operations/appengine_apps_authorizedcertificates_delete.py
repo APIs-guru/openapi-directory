@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesDeletePathParams:
-    apps_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
-    authorized_certificates_id: str = field(default=None, metadata={'path_param': { 'field_name': 'authorizedCertificatesId', 'style': 'simple', 'explode': False }})
+    apps_id: str = field(metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
+    authorized_certificates_id: str = field(metadata={'path_param': { 'field_name': 'authorizedCertificatesId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AppengineAppsAuthorizedCertificatesDeleteQueryParams:
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesDeleteRequest:
-    path_params: AppengineAppsAuthorizedCertificatesDeletePathParams = field(default=None)
-    query_params: AppengineAppsAuthorizedCertificatesDeleteQueryParams = field(default=None)
-    security: AppengineAppsAuthorizedCertificatesDeleteSecurity = field(default=None)
+    path_params: AppengineAppsAuthorizedCertificatesDeletePathParams = field()
+    query_params: AppengineAppsAuthorizedCertificatesDeleteQueryParams = field()
+    security: AppengineAppsAuthorizedCertificatesDeleteSecurity = field()
     
 
 @dataclass
 class AppengineAppsAuthorizedCertificatesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

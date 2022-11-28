@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChatChannel
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The AWS Chatbot chat channel used for collaboration during an incident.
 **/
 export class ChatChannel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chatbotSns" })
+  @SpeakeasyMetadata({ data: "json, name=chatbotSns" })
   chatbotSns?: string[];
 
-  @Metadata({ data: "json, name=empty" })
+  @SpeakeasyMetadata({ data: "json, name=empty" })
   empty?: Map<string, any>;
 }

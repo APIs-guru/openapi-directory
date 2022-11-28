@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Volume } from "./volume";
 // Resources
 /**
  * Machine resources for a version.
@@ -34,23 +34,23 @@ var Resources = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cpu" }),
+        SpeakeasyMetadata({ data: "json, name=cpu" }),
         __metadata("design:type", Number)
     ], Resources.prototype, "cpu", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskGb" }),
+        SpeakeasyMetadata({ data: "json, name=diskGb" }),
         __metadata("design:type", Number)
     ], Resources.prototype, "diskGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyReference" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyReference" }),
         __metadata("design:type", String)
     ], Resources.prototype, "kmsKeyReference", void 0);
     __decorate([
-        Metadata({ data: "json, name=memoryGb" }),
+        SpeakeasyMetadata({ data: "json, name=memoryGb" }),
         __metadata("design:type", Number)
     ], Resources.prototype, "memoryGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumes", elemType: shared.Volume }),
+        SpeakeasyMetadata({ data: "json, name=volumes", elemType: Volume }),
         __metadata("design:type", Array)
     ], Resources.prototype, "volumes", void 0);
     return Resources;

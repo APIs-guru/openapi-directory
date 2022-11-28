@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -107,23 +111,23 @@ class DcimRacksListQueryParams:
     width_n: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'width__n', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class DcimRacksListRequest:
-    query_params: DcimRacksListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class DcimRacksList200ApplicationJSON:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    results: List[shared.Rack] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    results: List[shared.Rack] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    
+
+@dataclass
+class DcimRacksListRequest:
+    query_params: DcimRacksListQueryParams = field()
     
 
 @dataclass
 class DcimRacksListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dcim_racks_list_200_application_json_object: Optional[DcimRacksList200ApplicationJSON] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RealtimeEndpointInfo } from "./realtimeendpointinfo";
 // CreateRealtimeEndpointOutput
 /**
@@ -34,11 +34,11 @@ var CreateRealtimeEndpointOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MLModelId" }),
+        SpeakeasyMetadata({ data: "json, name=MLModelId" }),
         __metadata("design:type", String)
     ], CreateRealtimeEndpointOutput.prototype, "mlModelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RealtimeEndpointInfo" }),
+        SpeakeasyMetadata({ data: "json, name=RealtimeEndpointInfo" }),
         __metadata("design:type", RealtimeEndpointInfo)
     ], CreateRealtimeEndpointOutput.prototype, "realtimeEndpointInfo", void 0);
     return CreateRealtimeEndpointOutput;

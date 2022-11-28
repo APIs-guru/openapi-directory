@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupOwnerSetting } from "./groupownersetting";
 // LocalVolumeResourceData
 /**
@@ -34,15 +34,15 @@ var LocalVolumeResourceData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationPath" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationPath" }),
         __metadata("design:type", String)
     ], LocalVolumeResourceData.prototype, "destinationPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupOwnerSetting" }),
+        SpeakeasyMetadata({ data: "json, name=GroupOwnerSetting" }),
         __metadata("design:type", GroupOwnerSetting)
     ], LocalVolumeResourceData.prototype, "groupOwnerSetting", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourcePath" }),
+        SpeakeasyMetadata({ data: "json, name=SourcePath" }),
         __metadata("design:type", String)
     ], LocalVolumeResourceData.prototype, "sourcePath", void 0);
     return LocalVolumeResourceData;

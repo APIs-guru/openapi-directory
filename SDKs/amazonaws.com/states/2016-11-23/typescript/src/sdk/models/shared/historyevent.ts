@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityFailedEventDetails } from "./activityfailedeventdetails";
 import { ActivityScheduleFailedEventDetails } from "./activityschedulefailedeventdetails";
 import { ActivityScheduledEventDetails } from "./activityscheduledeventdetails";
@@ -17,9 +17,6 @@ import { LambdaFunctionStartFailedEventDetails } from "./lambdafunctionstartfail
 import { LambdaFunctionSucceededEventDetails } from "./lambdafunctionsucceededeventdetails";
 import { LambdaFunctionTimedOutEventDetails } from "./lambdafunctiontimedouteventdetails";
 import { MapIterationEventDetails } from "./mapiterationeventdetails";
-import { MapIterationEventDetails } from "./mapiterationeventdetails";
-import { MapIterationEventDetails } from "./mapiterationeventdetails";
-import { MapIterationEventDetails } from "./mapiterationeventdetails";
 import { MapStateStartedEventDetails } from "./mapstatestartedeventdetails";
 import { StateEnteredEventDetails } from "./stateenteredeventdetails";
 import { StateExitedEventDetails } from "./stateexitedeventdetails";
@@ -34,116 +31,117 @@ import { TaskTimedOutEventDetails } from "./tasktimedouteventdetails";
 import { HistoryEventTypeEnum } from "./historyeventtypeenum";
 
 
+
 // HistoryEvent
 /** 
  * Contains details about the events of an execution.
 **/
 export class HistoryEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=activityFailedEventDetails" })
   activityFailedEventDetails?: ActivityFailedEventDetails;
 
-  @Metadata({ data: "json, name=activityScheduleFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=activityScheduleFailedEventDetails" })
   activityScheduleFailedEventDetails?: ActivityScheduleFailedEventDetails;
 
-  @Metadata({ data: "json, name=activityScheduledEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=activityScheduledEventDetails" })
   activityScheduledEventDetails?: ActivityScheduledEventDetails;
 
-  @Metadata({ data: "json, name=activityStartedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=activityStartedEventDetails" })
   activityStartedEventDetails?: ActivityStartedEventDetails;
 
-  @Metadata({ data: "json, name=activitySucceededEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=activitySucceededEventDetails" })
   activitySucceededEventDetails?: ActivitySucceededEventDetails;
 
-  @Metadata({ data: "json, name=activityTimedOutEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=activityTimedOutEventDetails" })
   activityTimedOutEventDetails?: ActivityTimedOutEventDetails;
 
-  @Metadata({ data: "json, name=executionAbortedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=executionAbortedEventDetails" })
   executionAbortedEventDetails?: ExecutionAbortedEventDetails;
 
-  @Metadata({ data: "json, name=executionFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=executionFailedEventDetails" })
   executionFailedEventDetails?: ExecutionFailedEventDetails;
 
-  @Metadata({ data: "json, name=executionStartedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=executionStartedEventDetails" })
   executionStartedEventDetails?: ExecutionStartedEventDetails;
 
-  @Metadata({ data: "json, name=executionSucceededEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=executionSucceededEventDetails" })
   executionSucceededEventDetails?: ExecutionSucceededEventDetails;
 
-  @Metadata({ data: "json, name=executionTimedOutEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=executionTimedOutEventDetails" })
   executionTimedOutEventDetails?: ExecutionTimedOutEventDetails;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=lambdaFunctionFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionFailedEventDetails" })
   lambdaFunctionFailedEventDetails?: LambdaFunctionFailedEventDetails;
 
-  @Metadata({ data: "json, name=lambdaFunctionScheduleFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionScheduleFailedEventDetails" })
   lambdaFunctionScheduleFailedEventDetails?: LambdaFunctionScheduleFailedEventDetails;
 
-  @Metadata({ data: "json, name=lambdaFunctionScheduledEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionScheduledEventDetails" })
   lambdaFunctionScheduledEventDetails?: LambdaFunctionScheduledEventDetails;
 
-  @Metadata({ data: "json, name=lambdaFunctionStartFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionStartFailedEventDetails" })
   lambdaFunctionStartFailedEventDetails?: LambdaFunctionStartFailedEventDetails;
 
-  @Metadata({ data: "json, name=lambdaFunctionSucceededEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionSucceededEventDetails" })
   lambdaFunctionSucceededEventDetails?: LambdaFunctionSucceededEventDetails;
 
-  @Metadata({ data: "json, name=lambdaFunctionTimedOutEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionTimedOutEventDetails" })
   lambdaFunctionTimedOutEventDetails?: LambdaFunctionTimedOutEventDetails;
 
-  @Metadata({ data: "json, name=mapIterationAbortedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=mapIterationAbortedEventDetails" })
   mapIterationAbortedEventDetails?: MapIterationEventDetails;
 
-  @Metadata({ data: "json, name=mapIterationFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=mapIterationFailedEventDetails" })
   mapIterationFailedEventDetails?: MapIterationEventDetails;
 
-  @Metadata({ data: "json, name=mapIterationStartedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=mapIterationStartedEventDetails" })
   mapIterationStartedEventDetails?: MapIterationEventDetails;
 
-  @Metadata({ data: "json, name=mapIterationSucceededEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=mapIterationSucceededEventDetails" })
   mapIterationSucceededEventDetails?: MapIterationEventDetails;
 
-  @Metadata({ data: "json, name=mapStateStartedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=mapStateStartedEventDetails" })
   mapStateStartedEventDetails?: MapStateStartedEventDetails;
 
-  @Metadata({ data: "json, name=previousEventId" })
+  @SpeakeasyMetadata({ data: "json, name=previousEventId" })
   previousEventId?: number;
 
-  @Metadata({ data: "json, name=stateEnteredEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=stateEnteredEventDetails" })
   stateEnteredEventDetails?: StateEnteredEventDetails;
 
-  @Metadata({ data: "json, name=stateExitedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=stateExitedEventDetails" })
   stateExitedEventDetails?: StateExitedEventDetails;
 
-  @Metadata({ data: "json, name=taskFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskFailedEventDetails" })
   taskFailedEventDetails?: TaskFailedEventDetails;
 
-  @Metadata({ data: "json, name=taskScheduledEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskScheduledEventDetails" })
   taskScheduledEventDetails?: TaskScheduledEventDetails;
 
-  @Metadata({ data: "json, name=taskStartFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskStartFailedEventDetails" })
   taskStartFailedEventDetails?: TaskStartFailedEventDetails;
 
-  @Metadata({ data: "json, name=taskStartedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskStartedEventDetails" })
   taskStartedEventDetails?: TaskStartedEventDetails;
 
-  @Metadata({ data: "json, name=taskSubmitFailedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskSubmitFailedEventDetails" })
   taskSubmitFailedEventDetails?: TaskSubmitFailedEventDetails;
 
-  @Metadata({ data: "json, name=taskSubmittedEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskSubmittedEventDetails" })
   taskSubmittedEventDetails?: TaskSubmittedEventDetails;
 
-  @Metadata({ data: "json, name=taskSucceededEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskSucceededEventDetails" })
   taskSucceededEventDetails?: TaskSucceededEventDetails;
 
-  @Metadata({ data: "json, name=taskTimedOutEventDetails" })
+  @SpeakeasyMetadata({ data: "json, name=taskTimedOutEventDetails" })
   taskTimedOutEventDetails?: TaskTimedOutEventDetails;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: HistoryEventTypeEnum;
 }

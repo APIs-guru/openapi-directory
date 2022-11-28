@@ -1,5 +1,7 @@
 package shared
 
+// InstanceGroupModifyConfig
+// Modify the size or configurations of an instance group.
 type InstanceGroupModifyConfig struct {
 	Configurations            []Configuration `json:"Configurations,omitempty"`
 	Ec2InstanceIdsToTerminate []string        `json:"EC2InstanceIdsToTerminate,omitempty"`

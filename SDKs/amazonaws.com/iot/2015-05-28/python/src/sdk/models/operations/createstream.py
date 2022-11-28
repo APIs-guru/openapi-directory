@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateStreamPathParams:
-    stream_id: str = field(default=None, metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
+    stream_id: str = field(metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,22 +27,23 @@ class CreateStreamHeaders:
 @dataclass_json
 @dataclass
 class CreateStreamRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    files: List[shared.StreamFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    files: List[shared.StreamFile] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('files') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateStreamRequest:
-    path_params: CreateStreamPathParams = field(default=None)
-    headers: CreateStreamHeaders = field(default=None)
-    request: CreateStreamRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateStreamHeaders = field()
+    path_params: CreateStreamPathParams = field()
+    request: CreateStreamRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateStreamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_stream_response: Optional[shared.CreateStreamResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
@@ -46,7 +51,6 @@ class CreateStreamResponse:
     resource_already_exists_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

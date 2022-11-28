@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MoveProjectRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request sent to MoveProject method.
 **/
 export class MoveProjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationParent" })
+  @SpeakeasyMetadata({ data: "json, name=destinationParent" })
   destinationParent?: string;
 }

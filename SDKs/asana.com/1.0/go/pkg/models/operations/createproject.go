@@ -9,17 +9,17 @@ type CreateProjectQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type CreateProjectRequestBody struct {
-	Data *shared.ProjectRequest `json:"data,omitempty"`
-}
-
-type CreateProjectRequest struct {
-	QueryParams CreateProjectQueryParams
-	Request     CreateProjectRequestBody `request:"mediaType=application/json"`
+type CreateProjectRequestBodyInput struct {
+	Data *shared.ProjectRequestInput `json:"data,omitempty"`
 }
 
 type CreateProject201ApplicationJSON struct {
 	Data *shared.ProjectResponse `json:"data,omitempty"`
+}
+
+type CreateProjectRequest struct {
+	QueryParams CreateProjectQueryParams
+	Request     CreateProjectRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type CreateProjectResponse struct {

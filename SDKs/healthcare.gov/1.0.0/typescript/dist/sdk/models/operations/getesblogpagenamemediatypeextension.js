@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetEsBlogPageNameMediaTypeExtensionMediaTypeExtensionEnum;
 (function (GetEsBlogPageNameMediaTypeExtensionMediaTypeExtensionEnum) {
     GetEsBlogPageNameMediaTypeExtensionMediaTypeExtensionEnum["DotJson"] = ".json";
@@ -33,11 +33,11 @@ var GetEsBlogPageNameMediaTypeExtensionPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" }),
         __metadata("design:type", String)
     ], GetEsBlogPageNameMediaTypeExtensionPathParams.prototype, "mediaTypeExtension", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pageName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageName" }),
         __metadata("design:type", String)
     ], GetEsBlogPageNameMediaTypeExtensionPathParams.prototype, "pageName", void 0);
     return GetEsBlogPageNameMediaTypeExtensionPathParams;
@@ -49,7 +49,7 @@ var GetEsBlogPageNameMediaTypeExtensionRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEsBlogPageNameMediaTypeExtensionPathParams)
     ], GetEsBlogPageNameMediaTypeExtensionRequest.prototype, "pathParams", void 0);
     return GetEsBlogPageNameMediaTypeExtensionRequest;
@@ -61,15 +61,15 @@ var GetEsBlogPageNameMediaTypeExtensionResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetEsBlogPageNameMediaTypeExtensionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEsBlogPageNameMediaTypeExtensionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEsBlogPageNameMediaTypeExtensionResponse.prototype, "statusCode", void 0);
     return GetEsBlogPageNameMediaTypeExtensionResponse;

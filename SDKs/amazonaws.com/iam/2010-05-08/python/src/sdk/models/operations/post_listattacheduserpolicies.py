@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListAttachedUserPoliciesActionEnum(str, Enum):
     LIST_ATTACHED_USER_POLICIES = "ListAttachedUserPolicies"
@@ -10,10 +14,10 @@ class PostListAttachedUserPoliciesVersionEnum(str, Enum):
 
 @dataclass
 class PostListAttachedUserPoliciesQueryParams:
-    action: PostListAttachedUserPoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostListAttachedUserPoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListAttachedUserPoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: PostListAttachedUserPoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostListAttachedUserPoliciesHeaders:
 
 @dataclass
 class PostListAttachedUserPoliciesRequest:
-    query_params: PostListAttachedUserPoliciesQueryParams = field(default=None)
-    headers: PostListAttachedUserPoliciesHeaders = field(default=None)
+    headers: PostListAttachedUserPoliciesHeaders = field()
+    query_params: PostListAttachedUserPoliciesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListAttachedUserPoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

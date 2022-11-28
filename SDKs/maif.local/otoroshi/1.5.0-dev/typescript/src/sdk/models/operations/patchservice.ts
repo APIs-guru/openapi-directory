@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchServicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
   serviceId: string;
 }
 
 
 export class PatchServiceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class PatchServiceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchServicePathParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.Patch })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Patch })
   request?: shared.Patch[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PatchServiceSecurity;
 }
 
 
 export class PatchServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   service?: shared.Service;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

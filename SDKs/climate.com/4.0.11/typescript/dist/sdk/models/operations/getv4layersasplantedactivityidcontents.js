@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV4LayersAsPlantedActivityIdContentsPathParams = /** @class */ (function (_super) {
     __extends(GetV4LayersAsPlantedActivityIdContentsPathParams, _super);
@@ -30,7 +30,7 @@ var GetV4LayersAsPlantedActivityIdContentsPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=activityId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=activityId" }),
         __metadata("design:type", String)
     ], GetV4LayersAsPlantedActivityIdContentsPathParams.prototype, "activityId", void 0);
     return GetV4LayersAsPlantedActivityIdContentsPathParams;
@@ -42,53 +42,29 @@ var GetV4LayersAsPlantedActivityIdContentsHeaders = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], GetV4LayersAsPlantedActivityIdContentsHeaders.prototype, "accept", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Range" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Range" }),
         __metadata("design:type", String)
     ], GetV4LayersAsPlantedActivityIdContentsHeaders.prototype, "range", void 0);
     return GetV4LayersAsPlantedActivityIdContentsHeaders;
 }(SpeakeasyBase));
 export { GetV4LayersAsPlantedActivityIdContentsHeaders };
-var GetV4LayersAsPlantedActivityIdContentsSecurityOption1 = /** @class */ (function (_super) {
-    __extends(GetV4LayersAsPlantedActivityIdContentsSecurityOption1, _super);
-    function GetV4LayersAsPlantedActivityIdContentsSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], GetV4LayersAsPlantedActivityIdContentsSecurityOption1.prototype, "apiKey", void 0);
-    return GetV4LayersAsPlantedActivityIdContentsSecurityOption1;
-}(SpeakeasyBase));
-export { GetV4LayersAsPlantedActivityIdContentsSecurityOption1 };
-var GetV4LayersAsPlantedActivityIdContentsSecurityOption2 = /** @class */ (function (_super) {
-    __extends(GetV4LayersAsPlantedActivityIdContentsSecurityOption2, _super);
-    function GetV4LayersAsPlantedActivityIdContentsSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], GetV4LayersAsPlantedActivityIdContentsSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return GetV4LayersAsPlantedActivityIdContentsSecurityOption2;
-}(SpeakeasyBase));
-export { GetV4LayersAsPlantedActivityIdContentsSecurityOption2 };
 var GetV4LayersAsPlantedActivityIdContentsSecurity = /** @class */ (function (_super) {
     __extends(GetV4LayersAsPlantedActivityIdContentsSecurity, _super);
     function GetV4LayersAsPlantedActivityIdContentsSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetV4LayersAsPlantedActivityIdContentsSecurityOption1)
-    ], GetV4LayersAsPlantedActivityIdContentsSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], GetV4LayersAsPlantedActivityIdContentsSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetV4LayersAsPlantedActivityIdContentsSecurityOption2)
-    ], GetV4LayersAsPlantedActivityIdContentsSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], GetV4LayersAsPlantedActivityIdContentsSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return GetV4LayersAsPlantedActivityIdContentsSecurity;
 }(SpeakeasyBase));
 export { GetV4LayersAsPlantedActivityIdContentsSecurity };
@@ -98,15 +74,15 @@ var GetV4LayersAsPlantedActivityIdContentsRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV4LayersAsPlantedActivityIdContentsPathParams)
     ], GetV4LayersAsPlantedActivityIdContentsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV4LayersAsPlantedActivityIdContentsHeaders)
     ], GetV4LayersAsPlantedActivityIdContentsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV4LayersAsPlantedActivityIdContentsSecurity)
     ], GetV4LayersAsPlantedActivityIdContentsRequest.prototype, "security", void 0);
     return GetV4LayersAsPlantedActivityIdContentsRequest;
@@ -118,27 +94,27 @@ var GetV4LayersAsPlantedActivityIdContentsResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetV4LayersAsPlantedActivityIdContentsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV4LayersAsPlantedActivityIdContentsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetV4LayersAsPlantedActivityIdContentsResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetV4LayersAsPlantedActivityIdContentsResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetV4LayersAsPlantedActivityIdContentsResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV4LayersAsPlantedActivityIdContentsResponse.prototype, "statusCode", void 0);
     return GetV4LayersAsPlantedActivityIdContentsResponse;

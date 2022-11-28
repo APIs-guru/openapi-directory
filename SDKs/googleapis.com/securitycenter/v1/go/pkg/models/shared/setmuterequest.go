@@ -9,6 +9,8 @@ const (
 	SetMuteRequestMuteEnumUndefined       SetMuteRequestMuteEnum = "UNDEFINED"
 )
 
+// SetMuteRequest
+// Request message for updating a finding's mute status.
 type SetMuteRequest struct {
 	Mute *SetMuteRequestMuteEnum `json:"mute,omitempty"`
 }

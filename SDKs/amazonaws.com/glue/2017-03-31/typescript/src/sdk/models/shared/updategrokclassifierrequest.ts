@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateGrokClassifierRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a grok classifier to update when passed to <code>UpdateClassifier</code>.
 **/
 export class UpdateGrokClassifierRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Classification" })
+  @SpeakeasyMetadata({ data: "json, name=Classification" })
   classification?: string;
 
-  @Metadata({ data: "json, name=CustomPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=CustomPatterns" })
   customPatterns?: string;
 
-  @Metadata({ data: "json, name=GrokPattern" })
+  @SpeakeasyMetadata({ data: "json, name=GrokPattern" })
   grokPattern?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

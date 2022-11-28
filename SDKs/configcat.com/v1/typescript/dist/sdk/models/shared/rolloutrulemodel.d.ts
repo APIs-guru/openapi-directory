@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RolloutRuleComparatorEnum } from "./rolloutrulecomparatorenum";
 export declare class RolloutRuleModel extends SpeakeasyBase {
     comparator?: RolloutRuleComparatorEnum;

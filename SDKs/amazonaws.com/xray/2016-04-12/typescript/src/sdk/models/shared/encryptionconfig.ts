@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionStatusEnum } from "./encryptionstatusenum";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
+
 
 
 // EncryptionConfig
@@ -8,12 +9,12 @@ import { EncryptionTypeEnum } from "./encryptiontypeenum";
  * A configuration document that specifies encryption configuration settings.
 **/
 export class EncryptionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: EncryptionStatusEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: EncryptionTypeEnum;
 }

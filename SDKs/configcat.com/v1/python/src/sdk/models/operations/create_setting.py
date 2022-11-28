@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CreateSettingPathParams:
-    config_id: str = field(default=None, metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
+    config_id: str = field(metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class CreateSettingRequests:
 
 @dataclass
 class CreateSettingRequest:
-    path_params: CreateSettingPathParams = field(default=None)
-    request: CreateSettingRequests = field(default=None)
+    path_params: CreateSettingPathParams = field()
+    request: CreateSettingRequests = field()
     
 
 @dataclass
 class CreateSettingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     setting_model: Optional[shared.SettingModel] = field(default=None)
     setting_model_haljson: Optional[shared.SettingModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

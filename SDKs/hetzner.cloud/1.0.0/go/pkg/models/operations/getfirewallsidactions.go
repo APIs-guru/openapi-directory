@@ -40,11 +40,8 @@ type GetFirewallsIDActionsQueryParams struct {
 	Status *GetFirewallsIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetFirewallsIDActionsRequest struct {
-	PathParams  GetFirewallsIDActionsPathParams
-	QueryParams GetFirewallsIDActionsQueryParams
-}
-
+// GetFirewallsIDActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetFirewallsIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -90,6 +87,11 @@ type GetFirewallsIDActionsActionsResponseMeta struct {
 type GetFirewallsIDActionsActionsResponse struct {
 	Actions []GetFirewallsIDActionsActionsResponseAction `json:"actions"`
 	Meta    *GetFirewallsIDActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetFirewallsIDActionsRequest struct {
+	PathParams  GetFirewallsIDActionsPathParams
+	QueryParams GetFirewallsIDActionsQueryParams
 }
 
 type GetFirewallsIDActionsResponse struct {

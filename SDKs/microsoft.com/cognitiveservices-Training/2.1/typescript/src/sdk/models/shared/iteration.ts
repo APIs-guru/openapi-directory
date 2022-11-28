@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IterationClassificationTypeEnum {
-    Multiclass = "Multiclass"
-,    Multilabel = "Multilabel"
+    Multiclass = "Multiclass",
+    Multilabel = "Multilabel"
 }
 
 
@@ -11,36 +12,49 @@ export enum IterationClassificationTypeEnum {
  * Iteration model to be sent over JSON
 **/
 export class Iteration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classificationType, form, name=classificationType;" })
+  @SpeakeasyMetadata({ data: "json, name=classificationType" })
   classificationType?: IterationClassificationTypeEnum;
 
-  @Metadata({ data: "json, name=created, form, name=created;" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=domainId, form, name=domainId;" })
+  @SpeakeasyMetadata({ data: "json, name=domainId" })
   domainId?: string;
 
-  @Metadata({ data: "json, name=exportable, form, name=exportable;" })
+  @SpeakeasyMetadata({ data: "json, name=exportable" })
   exportable?: boolean;
 
-  @Metadata({ data: "json, name=id, form, name=id;" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isDefault, form, name=isDefault;" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=lastModified, form, name=lastModified;" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=name, form, name=name;" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=projectId, form, name=projectId;" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=status, form, name=status;" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=trainedAt, form, name=trainedAt;" })
+  @SpeakeasyMetadata({ data: "json, name=trainedAt" })
   trainedAt?: Date;
+}
+
+
+// IterationInput
+/** 
+ * Iteration model to be sent over JSON
+**/
+export class IterationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=isDefault, form, name=isDefault;" })
+  isDefault?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;" })
+  name?: string;
 }

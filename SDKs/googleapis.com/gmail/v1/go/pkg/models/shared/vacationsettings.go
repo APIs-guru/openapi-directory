@@ -1,5 +1,7 @@
 package shared
 
+// VacationSettings
+// Vacation auto-reply settings for an account. These settings correspond to the "Vacation responder" feature in the web interface.
 type VacationSettings struct {
 	EnableAutoReply       *bool   `json:"enableAutoReply,omitempty"`
 	EndTime               *string `json:"endTime,omitempty"`

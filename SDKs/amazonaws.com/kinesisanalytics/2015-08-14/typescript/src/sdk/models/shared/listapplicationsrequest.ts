@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListApplicationsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class ListApplicationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExclusiveStartApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ExclusiveStartApplicationName" })
   exclusiveStartApplicationName?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 }

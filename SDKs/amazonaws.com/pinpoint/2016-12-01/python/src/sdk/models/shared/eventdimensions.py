@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributedimension
-from . import setdimension
-from . import metricdimension
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EventDimensions:
-    attributes: Optional[dict[str, attributedimension.AttributeDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    event_type: Optional[setdimension.SetDimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventType' }})
-    metrics: Optional[dict[str, metricdimension.MetricDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Metrics' }})
+    r"""EventDimensions
+    Specifies the dimensions for an event filter that determines when a campaign is sent or a journey activity is performed.
+    """
+    
+    attributes: Optional[dict[str, AttributeDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    event_type: Optional[SetDimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventType') }})
+    metrics: Optional[dict[str, MetricDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Metrics') }})
     

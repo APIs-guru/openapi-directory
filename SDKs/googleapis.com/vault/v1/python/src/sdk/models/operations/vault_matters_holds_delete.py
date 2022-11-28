@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersHoldsDeletePathParams:
-    hold_id: str = field(default=None, metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    hold_id: str = field(metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class VaultMattersHoldsDeleteQueryParams:
 
 @dataclass
 class VaultMattersHoldsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersHoldsDeleteRequest:
-    path_params: VaultMattersHoldsDeletePathParams = field(default=None)
-    query_params: VaultMattersHoldsDeleteQueryParams = field(default=None)
-    security: VaultMattersHoldsDeleteSecurity = field(default=None)
+    path_params: VaultMattersHoldsDeletePathParams = field()
+    query_params: VaultMattersHoldsDeleteQueryParams = field()
+    security: VaultMattersHoldsDeleteSecurity = field()
     
 
 @dataclass
 class VaultMattersHoldsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

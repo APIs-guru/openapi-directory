@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListingsByZipCodeListingsByZipCodeGetQueryParams = /** @class */ (function (_super) {
     __extends(ListingsByZipCodeListingsByZipCodeGetQueryParams, _super);
@@ -30,23 +30,23 @@ var ListingsByZipCodeListingsByZipCodeGetQueryParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], ListingsByZipCodeListingsByZipCodeGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
         __metadata("design:type", String)
     ], ListingsByZipCodeListingsByZipCodeGetQueryParams.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=newCars" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newCars" }),
         __metadata("design:type", Boolean)
     ], ListingsByZipCodeListingsByZipCodeGetQueryParams.prototype, "newCars", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ListingsByZipCodeListingsByZipCodeGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=zipCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zipCode" }),
         __metadata("design:type", Number)
     ], ListingsByZipCodeListingsByZipCodeGetQueryParams.prototype, "zipCode", void 0);
     return ListingsByZipCodeListingsByZipCodeGetQueryParams;
@@ -58,7 +58,7 @@ var ListingsByZipCodeListingsByZipCodeGetRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListingsByZipCodeListingsByZipCodeGetQueryParams)
     ], ListingsByZipCodeListingsByZipCodeGetRequest.prototype, "queryParams", void 0);
     return ListingsByZipCodeListingsByZipCodeGetRequest;
@@ -70,19 +70,19 @@ var ListingsByZipCodeListingsByZipCodeGetResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListingsByZipCodeListingsByZipCodeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], ListingsByZipCodeListingsByZipCodeGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListingResp)
     ], ListingsByZipCodeListingsByZipCodeGetResponse.prototype, "listingResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListingsByZipCodeListingsByZipCodeGetResponse.prototype, "statusCode", void 0);
     return ListingsByZipCodeListingsByZipCodeGetResponse;

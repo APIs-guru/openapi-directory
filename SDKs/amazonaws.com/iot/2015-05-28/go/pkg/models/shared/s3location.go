@@ -1,5 +1,7 @@
 package shared
 
+// S3Location
+// The S3 location.
 type S3Location struct {
 	Bucket  *string `json:"bucket,omitempty"`
 	Key     *string `json:"key,omitempty"`

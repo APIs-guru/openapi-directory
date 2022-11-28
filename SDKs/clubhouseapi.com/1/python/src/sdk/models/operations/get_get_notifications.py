@@ -10,11 +10,11 @@ class GetGetNotificationsQueryParams:
 
 @dataclass
 class GetGetNotificationsRequest:
-    query_params: GetGetNotificationsQueryParams = field(default=None)
+    query_params: GetGetNotificationsQueryParams = field()
     
 
 @dataclass
 class GetGetNotificationsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

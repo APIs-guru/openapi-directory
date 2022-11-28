@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const CANCELLATIONREASONS_SERVERS = [
-	"https://api.sandbox.viator.com/partner",
-];
 
+export const CancellationReasonsServerList = [
+	"https://api.sandbox.viator.com/partner",
+] as const;
 
 
 export class CancellationReasonsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
 }
 
 
 export class CancellationReasonsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CancellationReasonsHeaders;
 }
 
 
 export class CancellationReasonsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndOneUnauthorized?: shared.FourHundredAndOneUnauthorized;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndSixNotAcceptable?: shared.FourHundredAndSixNotAcceptable;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fiveHundredInternalServerError?: shared.FiveHundredInternalServerError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fiveHundredAndThreeServiceUnavailable?: shared.FiveHundredAndThreeServiceUnavailable;
 
-  @Metadata({ elemType: shared.CancellationReasonsResponse })
+  @SpeakeasyMetadata({ elemType: shared.CancellationReasonsResponse })
   cancellationReasonsResponses?: shared.CancellationReasonsResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

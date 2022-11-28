@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TemplateVersionResponse } from "./templateversionresponse";
+
 
 
 // TemplateVersionsResponse
@@ -8,15 +8,15 @@ import { TemplateVersionResponse } from "./templateversionresponse";
  * Provides information about all the versions of a specific message template.
 **/
 export class TemplateVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Item", elemType: shared.TemplateVersionResponse })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: TemplateVersionResponse })
   item: TemplateVersionResponse[];
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=RequestID" })
+  @SpeakeasyMetadata({ data: "json, name=RequestID" })
   requestId?: string;
 }

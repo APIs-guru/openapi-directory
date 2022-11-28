@@ -12,6 +12,8 @@ const (
 	GetStatus200ApplicationJSONDataGlobalEnumOk GetStatus200ApplicationJSONDataGlobalEnum = "OK"
 )
 
+// GetStatus200ApplicationJSONData
+// Status of the service
 type GetStatus200ApplicationJSONData struct {
 	Global *GetStatus200ApplicationJSONDataGlobalEnum `json:"global,omitempty"`
 }

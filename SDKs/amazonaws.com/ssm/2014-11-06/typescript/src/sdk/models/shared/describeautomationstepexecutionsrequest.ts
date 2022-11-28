@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepExecutionFilter } from "./stepexecutionfilter";
 
 
+
 export class DescribeAutomationStepExecutionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomationExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=AutomationExecutionId" })
   automationExecutionId: string;
 
-  @Metadata({ data: "json, name=Filters", elemType: shared.StepExecutionFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: StepExecutionFilter })
   filters?: StepExecutionFilter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ReverseOrder" })
+  @SpeakeasyMetadata({ data: "json, name=ReverseOrder" })
   reverseOrder?: boolean;
 }

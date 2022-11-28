@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSeriesFilter } from "./timeseriesfilter";
 import { TimeSeriesFilterRatio } from "./timeseriesfilterratio";
+
 
 
 // TimeSeriesQuery
@@ -8,18 +9,18 @@ import { TimeSeriesFilterRatio } from "./timeseriesfilterratio";
  * TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API.
 **/
 export class TimeSeriesQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=prometheusQuery" })
+  @SpeakeasyMetadata({ data: "json, name=prometheusQuery" })
   prometheusQuery?: string;
 
-  @Metadata({ data: "json, name=timeSeriesFilter" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesFilter" })
   timeSeriesFilter?: TimeSeriesFilter;
 
-  @Metadata({ data: "json, name=timeSeriesFilterRatio" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesFilterRatio" })
   timeSeriesFilterRatio?: TimeSeriesFilterRatio;
 
-  @Metadata({ data: "json, name=timeSeriesQueryLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesQueryLanguage" })
   timeSeriesQueryLanguage?: string;
 
-  @Metadata({ data: "json, name=unitOverride" })
+  @SpeakeasyMetadata({ data: "json, name=unitOverride" })
   unitOverride?: string;
 }

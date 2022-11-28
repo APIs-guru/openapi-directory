@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GlueDataCatalogConfigurationUpdate } from "./gluedatacatalogconfigurationupdate";
 /**
  * Updates to

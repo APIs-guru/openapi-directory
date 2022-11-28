@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirstLastNameGeoIn } from "./firstlastnamegeoin";
-import { FirstLastNameGeoIn } from "./firstlastnamegeoin";
+
 
 
 // CorridorIn
@@ -8,12 +8,12 @@ import { FirstLastNameGeoIn } from "./firstlastnamegeoin";
  * Represent any transnational interaction between names (ex. remittance, communication, cross-border investment, airline travel
 **/
 export class CorridorIn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstLastNameGeoFrom" })
+  @SpeakeasyMetadata({ data: "json, name=firstLastNameGeoFrom" })
   firstLastNameGeoFrom?: FirstLastNameGeoIn;
 
-  @Metadata({ data: "json, name=firstLastNameGeoTo" })
+  @SpeakeasyMetadata({ data: "json, name=firstLastNameGeoTo" })
   firstLastNameGeoTo?: FirstLastNameGeoIn;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

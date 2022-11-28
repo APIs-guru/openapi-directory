@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudrunv2container
-from . import googlecloudrunv2volume
-from . import googlecloudrunv2vpcaccess
+from sdk import utils
+from . import *
 
 class GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnum(str, Enum):
     EXECUTION_ENVIRONMENT_UNSPECIFIED = "EXECUTION_ENVIRONMENT_UNSPECIFIED"
@@ -14,12 +14,16 @@ class GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudRunV2TaskTemplate:
-    containers: Optional[List[googlecloudrunv2container.GoogleCloudRunV2Container]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containers' }})
-    encryption_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionKey' }})
-    execution_environment: Optional[GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionEnvironment' }})
-    max_retries: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxRetries' }})
-    service_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceAccount' }})
-    timeout: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeout' }})
-    volumes: Optional[List[googlecloudrunv2volume.GoogleCloudRunV2Volume]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volumes' }})
-    vpc_access: Optional[googlecloudrunv2vpcaccess.GoogleCloudRunV2VpcAccess] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpcAccess' }})
+    r"""GoogleCloudRunV2TaskTemplate
+    TaskTemplate describes the data a task should have when created from a template.
+    """
+    
+    containers: Optional[List[GoogleCloudRunV2Container]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containers') }})
+    encryption_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionKey') }})
+    execution_environment: Optional[GoogleCloudRunV2TaskTemplateExecutionEnvironmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionEnvironment') }})
+    max_retries: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxRetries') }})
+    service_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceAccount') }})
+    timeout: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeout') }})
+    volumes: Optional[List[GoogleCloudRunV2Volume]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('volumes') }})
+    vpc_access: Optional[GoogleCloudRunV2VpcAccess] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vpcAccess') }})
     

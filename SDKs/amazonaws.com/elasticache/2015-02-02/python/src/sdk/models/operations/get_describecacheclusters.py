@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeCacheClustersActionEnum(str, Enum):
     DESCRIBE_CACHE_CLUSTERS = "DescribeCacheClusters"
@@ -10,13 +14,13 @@ class GetDescribeCacheClustersVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeCacheClustersQueryParams:
-    action: GetDescribeCacheClustersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeCacheClustersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeCacheClustersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_cluster_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheClusterId', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     show_cache_clusters_not_in_replication_groups: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ShowCacheClustersNotInReplicationGroups', 'style': 'form', 'explode': True }})
     show_cache_node_info: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ShowCacheNodeInfo', 'style': 'form', 'explode': True }})
-    version: GetDescribeCacheClustersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribeCacheClustersHeaders:
 
 @dataclass
 class GetDescribeCacheClustersRequest:
-    query_params: GetDescribeCacheClustersQueryParams = field(default=None)
-    headers: GetDescribeCacheClustersHeaders = field(default=None)
+    headers: GetDescribeCacheClustersHeaders = field()
+    query_params: GetDescribeCacheClustersQueryParams = field()
     
 
 @dataclass
 class GetDescribeCacheClustersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupType } from "./grouptype";
 
 
+
 export class CreateGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Group" })
+  @SpeakeasyMetadata({ data: "json, name=Group" })
   group?: GroupType;
 }

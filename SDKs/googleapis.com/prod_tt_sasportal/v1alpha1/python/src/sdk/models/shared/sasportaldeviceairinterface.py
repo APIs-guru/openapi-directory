@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SasPortalDeviceAirInterfaceRadioTechnologyEnum(str, Enum):
     RADIO_TECHNOLOGY_UNSPECIFIED = "RADIO_TECHNOLOGY_UNSPECIFIED"
@@ -17,6 +19,10 @@ class SasPortalDeviceAirInterfaceRadioTechnologyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SasPortalDeviceAirInterface:
-    radio_technology: Optional[SasPortalDeviceAirInterfaceRadioTechnologyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'radioTechnology' }})
-    supported_spec: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supportedSpec' }})
+    r"""SasPortalDeviceAirInterface
+    Information about the device's air interface.
+    """
+    
+    radio_technology: Optional[SasPortalDeviceAirInterfaceRadioTechnologyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('radioTechnology') }})
+    supported_spec: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supportedSpec') }})
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Link extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@Href" })
+  @SpeakeasyMetadata({ data: "json, name=@Href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@Rel" })
+  @SpeakeasyMetadata({ data: "json, name=@Rel" })
   atRel?: string;
 }

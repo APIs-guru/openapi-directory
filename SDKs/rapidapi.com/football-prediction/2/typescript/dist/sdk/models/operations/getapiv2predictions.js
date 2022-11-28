@@ -22,58 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiV2PredictionsHeaders = /** @class */ (function (_super) {
     __extends(GetApiV2PredictionsHeaders, _super);
     function GetApiV2PredictionsHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" }),
         __metadata("design:type", String)
     ], GetApiV2PredictionsHeaders.prototype, "xRapidApiKey", void 0);
     return GetApiV2PredictionsHeaders;
 }(SpeakeasyBase));
 export { GetApiV2PredictionsHeaders };
-var GetApiV2PredictionsRequest = /** @class */ (function (_super) {
-    __extends(GetApiV2PredictionsRequest, _super);
-    function GetApiV2PredictionsRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetApiV2PredictionsHeaders)
-    ], GetApiV2PredictionsRequest.prototype, "headers", void 0);
-    return GetApiV2PredictionsRequest;
-}(SpeakeasyBase));
-export { GetApiV2PredictionsRequest };
 var GetApiV2Predictions404ApplicationJson = /** @class */ (function (_super) {
     __extends(GetApiV2Predictions404ApplicationJson, _super);
     function GetApiV2Predictions404ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Map)
     ], GetApiV2Predictions404ApplicationJson.prototype, "errors", void 0);
     return GetApiV2Predictions404ApplicationJson;
 }(SpeakeasyBase));
 export { GetApiV2Predictions404ApplicationJson };
+var GetApiV2PredictionsRequest = /** @class */ (function (_super) {
+    __extends(GetApiV2PredictionsRequest, _super);
+    function GetApiV2PredictionsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetApiV2PredictionsHeaders)
+    ], GetApiV2PredictionsRequest.prototype, "headers", void 0);
+    return GetApiV2PredictionsRequest;
+}(SpeakeasyBase));
+export { GetApiV2PredictionsRequest };
 var GetApiV2PredictionsResponse = /** @class */ (function (_super) {
     __extends(GetApiV2PredictionsResponse, _super);
     function GetApiV2PredictionsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiV2PredictionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV2Predictions404ApplicationJson)
     ], GetApiV2PredictionsResponse.prototype, "getApiV2Predictions404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiV2PredictionsResponse.prototype, "statusCode", void 0);
     return GetApiV2PredictionsResponse;

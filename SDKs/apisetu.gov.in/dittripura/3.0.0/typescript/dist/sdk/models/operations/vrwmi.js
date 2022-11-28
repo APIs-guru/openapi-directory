@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VrwmiRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(VrwmiRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var VrwmiRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RefNo" }),
+        SpeakeasyMetadata({ data: "json, name=RefNo" }),
         __metadata("design:type", String)
     ], VrwmiRequestBodyCertificateParameters.prototype, "refNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=TokenNo" }),
+        SpeakeasyMetadata({ data: "json, name=TokenNo" }),
         __metadata("design:type", String)
     ], VrwmiRequestBodyCertificateParameters.prototype, "tokenNo", void 0);
     return VrwmiRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var VrwmiRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", VrwmiRequestBodyCertificateParameters)
     ], VrwmiRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], VrwmiRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], VrwmiRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], VrwmiRequestBody.prototype, "txnId", void 0);
     return VrwmiRequestBody;
@@ -74,32 +74,16 @@ var VrwmiSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], VrwmiSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], VrwmiSecurity.prototype, "clientId", void 0);
     return VrwmiSecurity;
 }(SpeakeasyBase));
 export { VrwmiSecurity };
-var VrwmiRequest = /** @class */ (function (_super) {
-    __extends(VrwmiRequest, _super);
-    function VrwmiRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", VrwmiRequestBody)
-    ], VrwmiRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", VrwmiSecurity)
-    ], VrwmiRequest.prototype, "security", void 0);
-    return VrwmiRequest;
-}(SpeakeasyBase));
-export { VrwmiRequest };
 export var Vrwmi400ApplicationJsonErrorEnum;
 (function (Vrwmi400ApplicationJsonErrorEnum) {
     Vrwmi400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Vrwmi400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vrwmi400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vrwmi400ApplicationJson.prototype, "errorDescription", void 0);
     return Vrwmi400ApplicationJson;
@@ -148,11 +132,11 @@ var Vrwmi401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vrwmi401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vrwmi401ApplicationJson.prototype, "errorDescription", void 0);
     return Vrwmi401ApplicationJson;
@@ -174,11 +158,11 @@ var Vrwmi404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vrwmi404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vrwmi404ApplicationJson.prototype, "errorDescription", void 0);
     return Vrwmi404ApplicationJson;
@@ -198,11 +182,11 @@ var Vrwmi500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vrwmi500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vrwmi500ApplicationJson.prototype, "errorDescription", void 0);
     return Vrwmi500ApplicationJson;
@@ -222,11 +206,11 @@ var Vrwmi502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vrwmi502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vrwmi502ApplicationJson.prototype, "errorDescription", void 0);
     return Vrwmi502ApplicationJson;
@@ -246,11 +230,11 @@ var Vrwmi503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vrwmi503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vrwmi503ApplicationJson.prototype, "errorDescription", void 0);
     return Vrwmi503ApplicationJson;
@@ -270,55 +254,71 @@ var Vrwmi504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vrwmi504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vrwmi504ApplicationJson.prototype, "errorDescription", void 0);
     return Vrwmi504ApplicationJson;
 }(SpeakeasyBase));
 export { Vrwmi504ApplicationJson };
+var VrwmiRequest = /** @class */ (function (_super) {
+    __extends(VrwmiRequest, _super);
+    function VrwmiRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", VrwmiRequestBody)
+    ], VrwmiRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", VrwmiSecurity)
+    ], VrwmiRequest.prototype, "security", void 0);
+    return VrwmiRequest;
+}(SpeakeasyBase));
+export { VrwmiRequest };
 var VrwmiResponse = /** @class */ (function (_super) {
     __extends(VrwmiResponse, _super);
     function VrwmiResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VrwmiResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VrwmiResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vrwmi400ApplicationJson)
     ], VrwmiResponse.prototype, "vrwmi400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vrwmi401ApplicationJson)
     ], VrwmiResponse.prototype, "vrwmi401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vrwmi404ApplicationJson)
     ], VrwmiResponse.prototype, "vrwmi404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vrwmi500ApplicationJson)
     ], VrwmiResponse.prototype, "vrwmi500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vrwmi502ApplicationJson)
     ], VrwmiResponse.prototype, "vrwmi502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vrwmi503ApplicationJson)
     ], VrwmiResponse.prototype, "vrwmi503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vrwmi504ApplicationJson)
     ], VrwmiResponse.prototype, "vrwmi504ApplicationJsonObject", void 0);
     return VrwmiResponse;

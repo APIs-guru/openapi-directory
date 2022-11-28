@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2NotificationConfigMessageFormatEnum {
-    MessageFormatUnspecified = "MESSAGE_FORMAT_UNSPECIFIED"
-,    Proto = "PROTO"
-,    Json = "JSON"
+    MessageFormatUnspecified = "MESSAGE_FORMAT_UNSPECIFIED",
+    Proto = "PROTO",
+    Json = "JSON"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudDialogflowV2NotificationConfigMessageFormatEnum {
  * Defines notification behavior.
 **/
 export class GoogleCloudDialogflowV2NotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageFormat" })
+  @SpeakeasyMetadata({ data: "json, name=messageFormat" })
   messageFormat?: GoogleCloudDialogflowV2NotificationConfigMessageFormatEnum;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// AllowedSubjectAltNames
+// AllowedSubjectAltNames specifies the allowed values for SubjectAltNames by the CertificateAuthority when issuing Certificates.
 type AllowedSubjectAltNames struct {
 	AllowCustomSans           *bool    `json:"allowCustomSans,omitempty"`
 	AllowGlobbingDNSWildcards *bool    `json:"allowGlobbingDnsWildcards,omitempty"`

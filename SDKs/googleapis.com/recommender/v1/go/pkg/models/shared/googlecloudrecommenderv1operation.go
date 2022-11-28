@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecommenderV1Operation
+// Contains an operation for a resource loosely based on the JSON-PATCH format with support for: * Custom filters for describing partial array patch. * Extended path values for describing nested arrays. * Custom fields for describing the resource for which the operation is being described. * Allows extension to custom operations not natively supported by RFC6902. See https://tools.ietf.org/html/rfc6902 for details on the original RFC.
 type GoogleCloudRecommenderV1Operation struct {
 	Action            *string                                         `json:"action,omitempty"`
 	Path              *string                                         `json:"path,omitempty"`

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetThingRuntimeConfigurationPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ThingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'ThingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class GetThingRuntimeConfigurationHeaders:
 
 @dataclass
 class GetThingRuntimeConfigurationRequest:
-    path_params: GetThingRuntimeConfigurationPathParams = field(default=None)
-    headers: GetThingRuntimeConfigurationHeaders = field(default=None)
+    headers: GetThingRuntimeConfigurationHeaders = field()
+    path_params: GetThingRuntimeConfigurationPathParams = field()
     
 
 @dataclass
 class GetThingRuntimeConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_thing_runtime_configuration_response: Optional[shared.GetThingRuntimeConfigurationResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

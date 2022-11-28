@@ -1,0 +1,145 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+```bash
+pip install openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```python
+import sdk
+from sdk.models import operations, shared
+
+s = sdk.SDK()
+    
+req = operations.CloudtraceProjectsPatchTracesRequest(
+    security=operations.CloudtraceProjectsPatchTracesSecurity(
+        option1=operations.CloudtraceProjectsPatchTracesSecurityOption1(
+            oauth2=shared.SchemeOauth2(
+                authorization="Bearer YOUR_ACCESS_TOKEN_HERE",
+            )
+            oauth2c=shared.SchemeOauth2c(
+                authorization="Bearer YOUR_ACCESS_TOKEN_HERE",
+            )
+        ),
+    ),
+    path_params=operations.CloudtraceProjectsPatchTracesPathParams(
+        project_id="aut",
+    ),
+    query_params=operations.CloudtraceProjectsPatchTracesQueryParams(
+        dollar_xgafv="2",
+        access_token="est",
+        alt="media",
+        callback="qui",
+        fields="eius",
+        key="officia",
+        oauth_token="similique",
+        pretty_print=False,
+        quota_user="blanditiis",
+        upload_type="itaque",
+        upload_protocol="velit",
+    ),
+    request=shared.Traces(
+        traces=[
+            shared.Trace(
+                project_id="mollitia",
+                spans=[
+                    shared.TraceSpan(
+                        end_time="consectetur",
+                        kind="SPAN_KIND_UNSPECIFIED",
+                        labels={
+                            "accusantium": "et",
+                            "blanditiis": "quia",
+                        },
+                        name="hic",
+                        parent_span_id="nulla",
+                        span_id="quis",
+                        start_time="laboriosam",
+                    ),
+                    shared.TraceSpan(
+                        end_time="soluta",
+                        kind="RPC_SERVER",
+                        labels={
+                            "omnis": "repellat",
+                            "ut": "sint",
+                            "velit": "quos",
+                        },
+                        name="deleniti",
+                        parent_span_id="quasi",
+                        span_id="asperiores",
+                        start_time="voluptas",
+                    ),
+                    shared.TraceSpan(
+                        end_time="ipsum",
+                        kind="RPC_CLIENT",
+                        labels={
+                            "iusto": "et",
+                            "qui": "quibusdam",
+                            "vero": "sunt",
+                        },
+                        name="non",
+                        parent_span_id="quae",
+                        span_id="architecto",
+                        start_time="labore",
+                    ),
+                ],
+                trace_id="quo",
+            ),
+            shared.Trace(
+                project_id="harum",
+                spans=[
+                    shared.TraceSpan(
+                        end_time="et",
+                        kind="SPAN_KIND_UNSPECIFIED",
+                        labels={
+                            "ut": "dignissimos",
+                            "omnis": "quae",
+                            "nisi": "sapiente",
+                        },
+                        name="necessitatibus",
+                        parent_span_id="voluptatem",
+                        span_id="tempora",
+                        start_time="sed",
+                    ),
+                    shared.TraceSpan(
+                        end_time="non",
+                        kind="RPC_SERVER",
+                        labels={
+                            "in": "voluptas",
+                        },
+                        name="reiciendis",
+                        parent_span_id="reiciendis",
+                        span_id="sit",
+                        start_time="vel",
+                    ),
+                ],
+                trace_id="omnis",
+            ),
+        ],
+    ),
+)
+    
+res = s.projects.cloudtrace_projects_patch_traces(req)
+
+if res.empty is not None:
+    # handle response
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### projects
+
+* `cloudtrace_projects_patch_traces` - Sends new traces to Cloud Trace or updates existing traces. If the ID of a trace that you send matches that of an existing trace, any fields in the existing trace and its spans are overwritten by the provided values, and any new fields provided are merged with the existing trace data. If the ID does not match, a new trace is created.
+* `cloudtrace_projects_traces_get` - Gets a single trace by its ID.
+* `cloudtrace_projects_traces_list` - Returns a list of traces that match the specified filter conditions.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

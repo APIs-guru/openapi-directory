@@ -13,11 +13,11 @@ class GetActionResourceSearchQueryParams:
 
 @dataclass
 class GetActionResourceSearchRequest:
-    query_params: GetActionResourceSearchQueryParams = field(default=None)
+    query_params: GetActionResourceSearchQueryParams = field()
     
 
 @dataclass
 class GetActionResourceSearchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

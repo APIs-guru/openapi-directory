@@ -1,143 +1,144 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RecipeRecipeSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=any_kw" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=any_kw" })
   anyKw?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=boostmine" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=boostmine" })
   boostmine?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=champion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=champion" })
   champion?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=chs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=chs" })
   chs?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=coll" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=coll" })
   coll?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cps" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cps" })
   cps?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cuisine" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cuisine" })
   cuisine?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=db" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=db" })
   db?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dyf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dyf" })
   dyf?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_cat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_cat" })
   excludeCat?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_ing" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_ing" })
   excludeIng?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=exclude_primarycat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exclude_primarycat" })
   excludePrimarycat?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=folder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=folder" })
   folder?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=glf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=glf" })
   glf?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_cat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_cat" })
   includeCat?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_ing" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_ing" })
   includeIng?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_primarycat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_primarycat" })
   includePrimarycat?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxIngredients" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxIngredients" })
   maxIngredients?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minIngredients" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minIngredients" })
   minIngredients?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ntf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ntf" })
   ntf?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pg" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pg" })
   pg?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=photos" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=photos" })
   photos?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rmf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rmf" })
   rmf?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rpp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rpp" })
   rpp?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=servingsMin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=servingsMin" })
   servingsMin?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sff" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sff" })
   sff?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=slf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=slf" })
   slf?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=synonyms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=synonyms" })
   synonyms?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=title_kw" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=title_kw" })
   titleKw?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tnf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tnf" })
   tnf?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=totalMins" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=totalMins" })
   totalMins?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=username" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" })
   username?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userset" })
   userset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vgn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vgn" })
   vgn?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vtn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vtn" })
   vtn?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wmf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wmf" })
   wmf?: number;
 }
 
 
 export class RecipeRecipeSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RecipeRecipeSearchQueryParams;
 }
 
 
 export class RecipeRecipeSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bigOvenModelApi2RecipeSearchResult?: shared.BigOvenModelApi2RecipeSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

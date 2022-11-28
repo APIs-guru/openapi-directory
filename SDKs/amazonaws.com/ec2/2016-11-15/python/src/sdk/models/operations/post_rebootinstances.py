@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRebootInstancesActionEnum(str, Enum):
     REBOOT_INSTANCES = "RebootInstances"
@@ -10,8 +14,8 @@ class PostRebootInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostRebootInstancesQueryParams:
-    action: PostRebootInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRebootInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRebootInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRebootInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostRebootInstancesHeaders:
 
 @dataclass
 class PostRebootInstancesRequest:
-    query_params: PostRebootInstancesQueryParams = field(default=None)
-    headers: PostRebootInstancesHeaders = field(default=None)
+    headers: PostRebootInstancesHeaders = field()
+    query_params: PostRebootInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRebootInstancesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

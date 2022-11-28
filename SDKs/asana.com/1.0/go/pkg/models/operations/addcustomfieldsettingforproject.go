@@ -16,14 +16,14 @@ type AddCustomFieldSettingForProjectRequestBody struct {
 	Data *shared.AddCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
+type AddCustomFieldSettingForProject200ApplicationJSON struct {
+	Data *shared.CustomFieldSettingResponse `json:"data,omitempty"`
+}
+
 type AddCustomFieldSettingForProjectRequest struct {
 	PathParams  AddCustomFieldSettingForProjectPathParams
 	QueryParams AddCustomFieldSettingForProjectQueryParams
 	Request     AddCustomFieldSettingForProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type AddCustomFieldSettingForProject200ApplicationJSON struct {
-	Data *shared.CustomFieldSettingResponse `json:"data,omitempty"`
 }
 
 type AddCustomFieldSettingForProjectResponse struct {

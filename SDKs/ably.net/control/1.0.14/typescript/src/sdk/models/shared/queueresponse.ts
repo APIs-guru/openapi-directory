@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QueueResponseAmqp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queueName" })
+  @SpeakeasyMetadata({ data: "json, name=queueName" })
   queueName?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
@@ -15,78 +16,78 @@ export class QueueResponseAmqp extends SpeakeasyBase {
  * Details of messages in the queue.
 **/
 export class QueueResponseMessages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ready" })
+  @SpeakeasyMetadata({ data: "json, name=ready" })
   ready?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=unacknowledged" })
+  @SpeakeasyMetadata({ data: "json, name=unacknowledged" })
   unacknowledged?: number;
 }
 
 
 export class QueueResponseStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgementRate" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgementRate" })
   acknowledgementRate?: number;
 
-  @Metadata({ data: "json, name=deliveryRate" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryRate" })
   deliveryRate?: number;
 
-  @Metadata({ data: "json, name=publishRate" })
+  @SpeakeasyMetadata({ data: "json, name=publishRate" })
   publishRate?: number;
 }
 
 
 export class QueueResponseStomp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
 
 export class QueueResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amqp" })
+  @SpeakeasyMetadata({ data: "json, name=amqp" })
   amqp?: QueueResponseAmqp;
 
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=deadletter" })
+  @SpeakeasyMetadata({ data: "json, name=deadletter" })
   deadletter?: boolean;
 
-  @Metadata({ data: "json, name=deadletterId" })
+  @SpeakeasyMetadata({ data: "json, name=deadletterId" })
   deadletterId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=maxLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxLength" })
   maxLength?: number;
 
-  @Metadata({ data: "json, name=messages" })
+  @SpeakeasyMetadata({ data: "json, name=messages" })
   messages?: QueueResponseMessages;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats?: QueueResponseStats;
 
-  @Metadata({ data: "json, name=stomp" })
+  @SpeakeasyMetadata({ data: "json, name=stomp" })
   stomp?: QueueResponseStomp;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: number;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum SourceTypeEnum {
-    All = "ALL"
-,    Any = "ANY"
-,    None = "NONE"
+    All = "ALL",
+    Any = "ANY",
+    None = "NONE"
 }

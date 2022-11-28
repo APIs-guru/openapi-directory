@@ -1,7 +1,8 @@
 
 
+
 export enum CompressionFormatEnum {
-    Zip = "ZIP"
-,    Gzip = "GZIP"
-,    Parquet = "Parquet"
+    Zip = "ZIP",
+    Gzip = "GZIP",
+    Parquet = "Parquet"
 }

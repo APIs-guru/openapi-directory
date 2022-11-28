@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationRoute } from "./destinationroute";
 
+
 export enum ConfigTransportProtocolEnum {
-    TransportProtocolUnspecified = "TRANSPORT_PROTOCOL_UNSPECIFIED"
-,    Tcp = "TCP"
+    TransportProtocolUnspecified = "TRANSPORT_PROTOCOL_UNSPECIFIED",
+    Tcp = "TCP"
 }
 
 
@@ -13,9 +13,9 @@ export enum ConfigTransportProtocolEnum {
  * The basic ingress config for ClientGateways.
 **/
 export class Config extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationRoutes", elemType: shared.DestinationRoute })
+  @SpeakeasyMetadata({ data: "json, name=destinationRoutes", elemType: DestinationRoute })
   destinationRoutes?: DestinationRoute[];
 
-  @Metadata({ data: "json, name=transportProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=transportProtocol" })
   transportProtocol?: ConfigTransportProtocolEnum;
 }

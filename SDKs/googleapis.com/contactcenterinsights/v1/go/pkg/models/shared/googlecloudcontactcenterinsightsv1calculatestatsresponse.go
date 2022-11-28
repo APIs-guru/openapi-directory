@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1CalculateStatsResponse
+// The response for calculating conversation statistics.
 type GoogleCloudContactcenterinsightsV1CalculateStatsResponse struct {
 	AverageDuration             *string                                                                     `json:"averageDuration,omitempty"`
 	AverageTurnCount            *int32                                                                      `json:"averageTurnCount,omitempty"`

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ImportDocumentationPartsPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 class ImportDocumentationPartsModeEnum(str, Enum):
     MERGE = "merge"
@@ -33,26 +38,26 @@ class ImportDocumentationPartsHeaders:
 @dataclass_json
 @dataclass
 class ImportDocumentationPartsRequestBody:
-    body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
+    body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
     
 
 @dataclass
 class ImportDocumentationPartsRequest:
-    path_params: ImportDocumentationPartsPathParams = field(default=None)
-    query_params: ImportDocumentationPartsQueryParams = field(default=None)
-    headers: ImportDocumentationPartsHeaders = field(default=None)
-    request: ImportDocumentationPartsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ImportDocumentationPartsHeaders = field()
+    path_params: ImportDocumentationPartsPathParams = field()
+    query_params: ImportDocumentationPartsQueryParams = field()
+    request: ImportDocumentationPartsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ImportDocumentationPartsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     documentation_part_ids: Optional[shared.DocumentationPartIds] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

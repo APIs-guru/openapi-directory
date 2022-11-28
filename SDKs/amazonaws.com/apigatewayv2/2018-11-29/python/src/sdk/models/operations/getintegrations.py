@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetIntegrationsPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class GetIntegrationsHeaders:
 
 @dataclass
 class GetIntegrationsRequest:
-    path_params: GetIntegrationsPathParams = field(default=None)
-    query_params: GetIntegrationsQueryParams = field(default=None)
-    headers: GetIntegrationsHeaders = field(default=None)
+    headers: GetIntegrationsHeaders = field()
+    path_params: GetIntegrationsPathParams = field()
+    query_params: GetIntegrationsQueryParams = field()
     
 
 @dataclass
 class GetIntegrationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_integrations_response: Optional[shared.GetIntegrationsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

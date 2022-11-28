@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimezonesViewModel } from "./timezonesviewmodel";
 
 
+
 export class TimezoneViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regions" })
+  @SpeakeasyMetadata({ data: "json, name=regions" })
   regions?: string[];
 
-  @Metadata({ data: "json, name=timezones", elemType: shared.TimezonesViewModel })
+  @SpeakeasyMetadata({ data: "json, name=timezones", elemType: TimezonesViewModel })
   timezones?: TimezonesViewModel[];
 }

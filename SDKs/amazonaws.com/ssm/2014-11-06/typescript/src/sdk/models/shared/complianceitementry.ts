@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceSeverityEnum } from "./complianceseverityenum";
 import { ComplianceStatusEnum } from "./compliancestatusenum";
+
 
 
 // ComplianceItemEntry
@@ -8,18 +9,18 @@ import { ComplianceStatusEnum } from "./compliancestatusenum";
  * Information about a compliance item.
 **/
 export class ComplianceItemEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Details" })
+  @SpeakeasyMetadata({ data: "json, name=Details" })
   details?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity: ComplianceSeverityEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: ComplianceStatusEnum;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }

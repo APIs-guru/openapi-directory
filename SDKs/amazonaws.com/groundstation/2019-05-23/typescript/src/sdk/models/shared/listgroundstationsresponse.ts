@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroundStationData } from "./groundstationdata";
+
 
 
 // ListGroundStationsResponse
@@ -8,9 +8,9 @@ import { GroundStationData } from "./groundstationdata";
  * <p/>
 **/
 export class ListGroundStationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groundStationList", elemType: shared.GroundStationData })
+  @SpeakeasyMetadata({ data: "json, name=groundStationList", elemType: GroundStationData })
   groundStationList?: GroundStationData[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

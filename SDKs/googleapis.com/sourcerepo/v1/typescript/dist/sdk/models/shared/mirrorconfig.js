@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MirrorConfig
 /**
  * Configuration to automatically mirror a repository from another hosting service, for example GitHub or Bitbucket.
@@ -33,15 +33,15 @@ var MirrorConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deployKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=deployKeyId" }),
         __metadata("design:type", String)
     ], MirrorConfig.prototype, "deployKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], MirrorConfig.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhookId" }),
+        SpeakeasyMetadata({ data: "json, name=webhookId" }),
         __metadata("design:type", String)
     ], MirrorConfig.prototype, "webhookId", void 0);
     return MirrorConfig;

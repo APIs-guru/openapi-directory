@@ -15,6 +15,8 @@ type CreateSubscriptionDefinitionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateSubscriptionDefinitionRequestBodyInitialVersion
+// Information about a subscription definition version.
 type CreateSubscriptionDefinitionRequestBodyInitialVersion struct {
 	Subscriptions []shared.Subscription `json:"Subscriptions,omitempty"`
 }

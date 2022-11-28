@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  The time range during which anomalous behavior in a proactive anomaly or an insight is expected to occur.
 **/

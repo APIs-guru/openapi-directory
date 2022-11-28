@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PhotoObject
@@ -6,57 +7,57 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * **object** detailing a single photo from a user
 **/
 export class PhotoObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caption" })
+  @SpeakeasyMetadata({ data: "json, name=caption" })
   caption?: string;
 
-  @Metadata({ data: "json, name=editorsPick" })
+  @SpeakeasyMetadata({ data: "json, name=editorsPick" })
   editorsPick?: boolean;
 
-  @Metadata({ data: "json, name=ownerAvatarURL" })
+  @SpeakeasyMetadata({ data: "json, name=ownerAvatarURL" })
   ownerAvatarUrl?: string;
 
-  @Metadata({ data: "json, name=ownerCountry" })
+  @SpeakeasyMetadata({ data: "json, name=ownerCountry" })
   ownerCountry?: string;
 
-  @Metadata({ data: "json, name=ownerId" })
+  @SpeakeasyMetadata({ data: "json, name=ownerId" })
   ownerId?: number;
 
-  @Metadata({ data: "json, name=ownerName" })
+  @SpeakeasyMetadata({ data: "json, name=ownerName" })
   ownerName?: string;
 
-  @Metadata({ data: "json, name=photoHiResURL" })
+  @SpeakeasyMetadata({ data: "json, name=photoHiResURL" })
   photoHiResUrl?: string;
 
-  @Metadata({ data: "json, name=photoId" })
+  @SpeakeasyMetadata({ data: "json, name=photoId" })
   photoId?: number;
 
-  @Metadata({ data: "json, name=photoMediumResURL" })
+  @SpeakeasyMetadata({ data: "json, name=photoMediumResURL" })
   photoMediumResUrl?: string;
 
-  @Metadata({ data: "json, name=photoURL" })
+  @SpeakeasyMetadata({ data: "json, name=photoURL" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=productCode" })
+  @SpeakeasyMetadata({ data: "json, name=productCode" })
   productCode?: string;
 
-  @Metadata({ data: "json, name=productTitle" })
+  @SpeakeasyMetadata({ data: "json, name=productTitle" })
   productTitle?: string;
 
-  @Metadata({ data: "json, name=productUrlName" })
+  @SpeakeasyMetadata({ data: "json, name=productUrlName" })
   productUrlName?: string;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 
-  @Metadata({ data: "json, name=sslSupported" })
+  @SpeakeasyMetadata({ data: "json, name=sslSupported" })
   sslSupported?: boolean;
 
-  @Metadata({ data: "json, name=thumbnailURL" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailURL" })
   thumbnailUrl?: string;
 
-  @Metadata({ data: "json, name=timeUploaded" })
+  @SpeakeasyMetadata({ data: "json, name=timeUploaded" })
   timeUploaded?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

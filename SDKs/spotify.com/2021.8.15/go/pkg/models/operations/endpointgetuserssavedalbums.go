@@ -18,12 +18,9 @@ type EndpointGetUsersSavedAlbumsSecurity struct {
 	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
-type EndpointGetUsersSavedAlbumsRequest struct {
-	QueryParams EndpointGetUsersSavedAlbumsQueryParams
-	Headers     EndpointGetUsersSavedAlbumsHeaders
-	Security    EndpointGetUsersSavedAlbumsSecurity
-}
+// EndpointGetUsersSavedAlbums200ApplicationJSON
 
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type EndpointGetUsersSavedAlbums200ApplicationJSON struct {
 	Href     *string                   `json:"href,omitempty"`
 	Items    []shared.SavedAlbumObject `json:"items,omitempty"`
@@ -32,6 +29,12 @@ type EndpointGetUsersSavedAlbums200ApplicationJSON struct {
 	Offset   *int32                    `json:"offset,omitempty"`
 	Previous *string                   `json:"previous,omitempty"`
 	Total    *int32                    `json:"total,omitempty"`
+}
+
+type EndpointGetUsersSavedAlbumsRequest struct {
+	QueryParams EndpointGetUsersSavedAlbumsQueryParams
+	Headers     EndpointGetUsersSavedAlbumsHeaders
+	Security    EndpointGetUsersSavedAlbumsSecurity
 }
 
 type EndpointGetUsersSavedAlbumsResponse struct {

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AlgorithmSpecEnum(str, Enum):
     RSAES_PKCS1_V1_5 = "RSAES_PKCS1_V1_5"

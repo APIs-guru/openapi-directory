@@ -18,15 +18,15 @@ type AppsCreateInstallationAccessTokenRequestBody struct {
 	RepositoryIds []int64                `json:"repository_ids,omitempty"`
 }
 
+type AppsCreateInstallationAccessToken415ApplicationJSON struct {
+	DocumentationURL string `json:"documentation_url"`
+	Message          string `json:"message"`
+}
+
 type AppsCreateInstallationAccessTokenRequest struct {
 	PathParams AppsCreateInstallationAccessTokenPathParams
 	Headers    AppsCreateInstallationAccessTokenHeaders
 	Request    *AppsCreateInstallationAccessTokenRequestBody `request:"mediaType=application/json"`
-}
-
-type AppsCreateInstallationAccessToken415ApplicationJSON struct {
-	DocumentationURL string `json:"documentation_url"`
-	Message          string `json:"message"`
 }
 
 type AppsCreateInstallationAccessTokenResponse struct {

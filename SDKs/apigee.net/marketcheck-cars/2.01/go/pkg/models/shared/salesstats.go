@@ -1,5 +1,7 @@
 package shared
 
+// SalesStats
+// Sales stats response
 type SalesStats struct {
 	AbsoluteMeanDeviation       *float64 `json:"absolute_mean_deviation,omitempty"`
 	Iqr                         *float64 `json:"iqr,omitempty"`

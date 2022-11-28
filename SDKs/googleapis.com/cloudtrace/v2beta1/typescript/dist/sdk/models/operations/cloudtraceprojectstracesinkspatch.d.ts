@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudtraceProjectsTraceSinksPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class CloudtraceProjectsTraceSinksPatchSecurity extends Speakeasy
 export declare class CloudtraceProjectsTraceSinksPatchRequest extends SpeakeasyBase {
     pathParams: CloudtraceProjectsTraceSinksPatchPathParams;
     queryParams: CloudtraceProjectsTraceSinksPatchQueryParams;
-    request?: shared.TraceSink;
+    request?: shared.TraceSinkInput;
     security: CloudtraceProjectsTraceSinksPatchSecurity;
 }
 export declare class CloudtraceProjectsTraceSinksPatchResponse extends SpeakeasyBase {

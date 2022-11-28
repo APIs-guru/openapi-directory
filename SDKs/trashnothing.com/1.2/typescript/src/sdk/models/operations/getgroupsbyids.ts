@@ -1,59 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGroupsByIdsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
   groupIds: string;
 }
 
 
-export class GetGroupsByIdsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Implicit: shared.SchemeOauth2Implicit;
-}
-
-
-export class GetGroupsByIdsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Code: shared.SchemeOauth2Code;
-}
-
-
-export class GetGroupsByIdsSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetGroupsByIdsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetGroupsByIdsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Implicit?: shared.SchemeOauth2Implicit;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetGroupsByIdsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Code?: shared.SchemeOauth2Code;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetGroupsByIdsSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetGroupsByIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGroupsByIdsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetGroupsByIdsSecurity;
 }
 
 
 export class GetGroupsByIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Group })
+  @SpeakeasyMetadata({ elemType: shared.Group })
   groups?: shared.Group[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

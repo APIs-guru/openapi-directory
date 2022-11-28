@@ -126,6 +126,8 @@ const (
 	LivingAreaSleepingSyntheticPillowsExceptionEnumDependentOnDayOfWeek LivingAreaSleepingSyntheticPillowsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// LivingAreaSleeping
+// Information about sleeping features in the living area.
 type LivingAreaSleeping struct {
 	BedsCount                      *int32                                                `json:"bedsCount,omitempty"`
 	BedsCountException             *LivingAreaSleepingBedsCountExceptionEnum             `json:"bedsCountException,omitempty"`

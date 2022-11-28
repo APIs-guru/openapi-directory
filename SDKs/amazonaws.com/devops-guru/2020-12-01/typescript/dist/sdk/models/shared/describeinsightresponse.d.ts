@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProactiveInsight } from "./proactiveinsight";
 import { ReactiveInsight } from "./reactiveinsight";
 export declare class DescribeInsightResponse extends SpeakeasyBase {

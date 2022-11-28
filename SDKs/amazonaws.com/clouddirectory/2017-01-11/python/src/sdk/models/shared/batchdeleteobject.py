@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import objectreference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchDeleteObject:
-    object_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObjectReference' }})
+    r"""BatchDeleteObject
+    Represents the output of a <a>DeleteObject</a> operation.
+    """
+    
+    object_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObjectReference') }})
     

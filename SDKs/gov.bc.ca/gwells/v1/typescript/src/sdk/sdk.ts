@@ -1,16 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://apps.nrs.gov.bc.ca/gwells/api/v1/",
+export const ServerList = [
+	"https://apps.nrs.gov.bc.ca/gwells/api/v1/",
 ] as const;
 
 export function WithServerURL(
@@ -21,13 +19,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -36,41 +34,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // AquiferCodesDemandList - return a list of aquifer demand codes
-  AquiferCodesDemandList(
+  /**
+   * aquiferCodesDemandList - return a list of aquifer demand codes
+  **/
+  aquiferCodesDemandList(
     req: operations.AquiferCodesDemandListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquiferCodesDemandListResponse> {
@@ -78,11 +83,12 @@ export class SDK {
       req = new operations.AquiferCodesDemandListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifer-codes/demand/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -91,17 +97,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquiferCodesDemandListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquiferCodesDemandListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferCodesDemandList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -113,8 +120,10 @@ export class SDK {
   }
 
   
-  // AquiferCodesMaterialsList - return a list of aquifer material codes
-  AquiferCodesMaterialsList(
+  /**
+   * aquiferCodesMaterialsList - return a list of aquifer material codes
+  **/
+  aquiferCodesMaterialsList(
     req: operations.AquiferCodesMaterialsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquiferCodesMaterialsListResponse> {
@@ -122,11 +131,12 @@ export class SDK {
       req = new operations.AquiferCodesMaterialsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifer-codes/materials/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -135,17 +145,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquiferCodesMaterialsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquiferCodesMaterialsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferCodesMaterialsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -157,8 +168,10 @@ export class SDK {
   }
 
   
-  // AquiferCodesProductivityList - return a list of aquifer productivity codes
-  AquiferCodesProductivityList(
+  /**
+   * aquiferCodesProductivityList - return a list of aquifer productivity codes
+  **/
+  aquiferCodesProductivityList(
     req: operations.AquiferCodesProductivityListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquiferCodesProductivityListResponse> {
@@ -166,11 +179,12 @@ export class SDK {
       req = new operations.AquiferCodesProductivityListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifer-codes/productivity/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -179,17 +193,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquiferCodesProductivityListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquiferCodesProductivityListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferCodesProductivityList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -201,8 +216,10 @@ export class SDK {
   }
 
   
-  // AquiferCodesQualityConcernsList - return a list of quality concern codes
-  AquiferCodesQualityConcernsList(
+  /**
+   * aquiferCodesQualityConcernsList - return a list of quality concern codes
+  **/
+  aquiferCodesQualityConcernsList(
     req: operations.AquiferCodesQualityConcernsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquiferCodesQualityConcernsListResponse> {
@@ -210,11 +227,12 @@ export class SDK {
       req = new operations.AquiferCodesQualityConcernsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifer-codes/quality-concerns/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -223,17 +241,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquiferCodesQualityConcernsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquiferCodesQualityConcernsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferCodesQualityConcernsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -245,8 +264,10 @@ export class SDK {
   }
 
   
-  // AquiferCodesSubtypesList - return a list of aquifer subtype codes
-  AquiferCodesSubtypesList(
+  /**
+   * aquiferCodesSubtypesList - return a list of aquifer subtype codes
+  **/
+  aquiferCodesSubtypesList(
     req: operations.AquiferCodesSubtypesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquiferCodesSubtypesListResponse> {
@@ -254,11 +275,12 @@ export class SDK {
       req = new operations.AquiferCodesSubtypesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifer-codes/subtypes/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -267,17 +289,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquiferCodesSubtypesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquiferCodesSubtypesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferCodesSubtypesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -289,8 +312,10 @@ export class SDK {
   }
 
   
-  // AquiferCodesVulnerabilityList - return a list of aquifer vulnerability codes
-  AquiferCodesVulnerabilityList(
+  /**
+   * aquiferCodesVulnerabilityList - return a list of aquifer vulnerability codes
+  **/
+  aquiferCodesVulnerabilityList(
     req: operations.AquiferCodesVulnerabilityListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquiferCodesVulnerabilityListResponse> {
@@ -298,11 +323,12 @@ export class SDK {
       req = new operations.AquiferCodesVulnerabilityListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifer-codes/vulnerability/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -311,17 +337,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquiferCodesVulnerabilityListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquiferCodesVulnerabilityListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferCodesVulnerabilityList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -333,8 +360,10 @@ export class SDK {
   }
 
   
-  // AquiferCodesWaterUseList - return a list of water use codes
-  AquiferCodesWaterUseList(
+  /**
+   * aquiferCodesWaterUseList - return a list of water use codes
+  **/
+  aquiferCodesWaterUseList(
     req: operations.AquiferCodesWaterUseListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquiferCodesWaterUseListResponse> {
@@ -342,11 +371,12 @@ export class SDK {
       req = new operations.AquiferCodesWaterUseListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifer-codes/water-use/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -355,17 +385,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquiferCodesWaterUseListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquiferCodesWaterUseListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferCodesWaterUseList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -377,8 +408,10 @@ export class SDK {
   }
 
   
-  // AquifersFilesList - list files found for the aquifer identified in the uri
-  AquifersFilesList(
+  /**
+   * aquifersFilesList - list files found for the aquifer identified in the uri
+  **/
+  aquifersFilesList(
     req: operations.AquifersFilesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquifersFilesListResponse> {
@@ -386,22 +419,24 @@ export class SDK {
       req = new operations.AquifersFilesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/aquifers/{aquifer_id}/files", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquifersFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquifersFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquifersFilesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -413,8 +448,10 @@ export class SDK {
   }
 
   
-  // AquifersList - return a list of aquifers
-  AquifersList(
+  /**
+   * aquifersList - return a list of aquifers
+  **/
+  aquifersList(
     req: operations.AquifersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquifersListResponse> {
@@ -422,11 +459,12 @@ export class SDK {
       req = new operations.AquifersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifers/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -435,17 +473,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquifersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquifersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquifersList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -457,8 +496,10 @@ export class SDK {
   }
 
   
-  // AquifersNamesList - List all aquifers in a simplified format
-  AquifersNamesList(
+  /**
+   * aquifersNamesList - List all aquifers in a simplified format
+  **/
+  aquifersNamesList(
     req: operations.AquifersNamesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquifersNamesListResponse> {
@@ -466,11 +507,12 @@ export class SDK {
       req = new operations.AquifersNamesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/aquifers/names/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -479,17 +521,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquifersNamesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquifersNamesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquiferSerializerBasics = httpRes?.data;
             }
             break;
@@ -501,8 +544,10 @@ export class SDK {
   }
 
   
-  // AquifersRead - return details of aquifers
-  AquifersRead(
+  /**
+   * aquifersRead - return details of aquifers
+  **/
+  aquifersRead(
     req: operations.AquifersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AquifersReadResponse> {
@@ -510,22 +555,24 @@ export class SDK {
       req = new operations.AquifersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/aquifers/{aquifer_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AquifersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AquifersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aquifer = httpRes?.data;
             }
             break;
@@ -537,27 +584,30 @@ export class SDK {
   }
 
   
-  // CitiesDrillersList - returns a list of cities with a qualified, registered operator (driller or installer)
-  CitiesDrillersList(
-    
+  /**
+   * citiesDrillersList - returns a list of cities with a qualified, registered operator (driller or installer)
+  **/
+  citiesDrillersList(
     config?: AxiosRequestConfig
   ): Promise<operations.CitiesDrillersListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/cities/drillers/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CitiesDrillersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CitiesDrillersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cityLists = httpRes?.data;
             }
             break;
@@ -569,27 +619,30 @@ export class SDK {
   }
 
   
-  // CitiesInstallersList - returns a list of cities with a qualified, registered operator (driller or installer)
-  CitiesInstallersList(
-    
+  /**
+   * citiesInstallersList - returns a list of cities with a qualified, registered operator (driller or installer)
+  **/
+  citiesInstallersList(
     config?: AxiosRequestConfig
   ): Promise<operations.CitiesInstallersListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/cities/installers/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CitiesInstallersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CitiesInstallersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cityLists = httpRes?.data;
             }
             break;
@@ -601,26 +654,29 @@ export class SDK {
   }
 
   
-  // ConfigList - serves general configuration
-  ConfigList(
-    
+  /**
+   * configList - serves general configuration
+  **/
+  configList(
     config?: AxiosRequestConfig
   ): Promise<operations.ConfigListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/config";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfigListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfigListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -630,8 +686,10 @@ export class SDK {
   }
 
   
-  // DrillersFilesList - list files found for the aquifer identified in the uri
-  DrillersFilesList(
+  /**
+   * drillersFilesList - list files found for the aquifer identified in the uri
+  **/
+  drillersFilesList(
     req: operations.DrillersFilesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DrillersFilesListResponse> {
@@ -639,22 +697,24 @@ export class SDK {
       req = new operations.DrillersFilesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/drillers/{person_guid}/files/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DrillersFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DrillersFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.drillersFilesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -666,8 +726,10 @@ export class SDK {
   }
 
   
-  // DrillersList - Returns a list of all person records
-  DrillersList(
+  /**
+   * drillersList - Returns a list of all person records
+  **/
+  drillersList(
     req: operations.DrillersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DrillersListResponse> {
@@ -675,11 +737,12 @@ export class SDK {
       req = new operations.DrillersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/drillers/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -688,17 +751,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DrillersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DrillersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personLists = httpRes?.data;
             }
             break;
@@ -710,8 +774,10 @@ export class SDK {
   }
 
   
-  // DrillersNamesList - Search for a person in the Register
-  DrillersNamesList(
+  /**
+   * drillersNamesList - Search for a person in the Register
+  **/
+  drillersNamesList(
     req: operations.DrillersNamesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DrillersNamesListResponse> {
@@ -719,11 +785,12 @@ export class SDK {
       req = new operations.DrillersNamesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/drillers/names/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -732,17 +799,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DrillersNamesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DrillersNamesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personNames = httpRes?.data;
             }
             break;
@@ -754,26 +822,29 @@ export class SDK {
   }
 
   
-  // KeycloakList - serves keycloak config
-  KeycloakList(
-    
+  /**
+   * keycloakList - serves keycloak config
+  **/
+  keycloakList(
     config?: AxiosRequestConfig
   ): Promise<operations.KeycloakListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/keycloak";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.KeycloakListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.KeycloakListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -783,26 +854,29 @@ export class SDK {
   }
 
   
-  // SubmissionsOptionsList - Options required for submitting activity report forms
-  SubmissionsOptionsList(
-    
+  /**
+   * submissionsOptionsList - Options required for submitting activity report forms
+  **/
+  submissionsOptionsList(
     config?: AxiosRequestConfig
   ): Promise<operations.SubmissionsOptionsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/submissions/options/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SubmissionsOptionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.SubmissionsOptionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -812,27 +886,30 @@ export class SDK {
   }
 
   
-  // SurveysList - returns a list of active surveys
-  SurveysList(
-    
+  /**
+   * surveysList - returns a list of active surveys
+  **/
+  surveysList(
     config?: AxiosRequestConfig
   ): Promise<operations.SurveysListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/surveys/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SurveysListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SurveysListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.surveys = httpRes?.data;
             }
             break;
@@ -844,8 +921,10 @@ export class SDK {
   }
 
   
-  // WellsFilesList - list files found for the well identified in the uri
-  WellsFilesList(
+  /**
+   * wellsFilesList - list files found for the well identified in the uri
+  **/
+  wellsFilesList(
     req: operations.WellsFilesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WellsFilesListResponse> {
@@ -853,22 +932,24 @@ export class SDK {
       req = new operations.WellsFilesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/wells/{tag}/files", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WellsFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.WellsFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.wellsFilesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -880,8 +961,10 @@ export class SDK {
   }
 
   
-  // WellsList - returns a list of wells
-  WellsList(
+  /**
+   * wellsList - returns a list of wells
+  **/
+  wellsList(
     req: operations.WellsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WellsListResponse> {
@@ -889,11 +972,12 @@ export class SDK {
       req = new operations.WellsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/wells/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -902,17 +986,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WellsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.WellsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.wellsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -924,9 +1009,11 @@ export class SDK {
   }
 
   
-  // WellsRead - Return well detail.
-This view is open to all, and has no permissions.
-  WellsRead(
+  /**
+   * wellsRead - Return well detail.
+   * This view is open to all, and has no permissions.
+  **/
+  wellsRead(
     req: operations.WellsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WellsReadResponse> {
@@ -934,22 +1021,24 @@ This view is open to all, and has no permissions.
       req = new operations.WellsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/wells/{well_tag_number}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WellsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.WellsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.wellDetail = httpRes?.data;
             }
             break;
@@ -961,8 +1050,10 @@ This view is open to all, and has no permissions.
   }
 
   
-  // WellsTagsList - seach for wells by tag or owner
-  WellsTagsList(
+  /**
+   * wellsTagsList - seach for wells by tag or owner
+  **/
+  wellsTagsList(
     req: operations.WellsTagsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WellsTagsListResponse> {
@@ -970,11 +1061,12 @@ This view is open to all, and has no permissions.
       req = new operations.WellsTagsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/wells/tags/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -983,17 +1075,18 @@ This view is open to all, and has no permissions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WellsTagsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.WellsTagsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.wellTagSearches = httpRes?.data;
             }
             break;

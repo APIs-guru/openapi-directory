@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LineStatusByModePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=modes" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=modes" })
   modes: string[];
 }
 
 
 export class LineStatusByModeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=detail" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=detail" })
   detail?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=severityLevel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=severityLevel" })
   severityLevel?: string;
 }
 
 
 export class LineStatusByModeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LineStatusByModePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LineStatusByModeQueryParams;
 }
 
 
 export class LineStatusByModeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesLine })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesLine })
   tflApiPresentationEntitiesLines?: shared.TflApiPresentationEntitiesLine[];
 }

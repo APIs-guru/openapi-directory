@@ -1,5 +1,7 @@
 package shared
 
+// BatchUpdateValuesResponse
+// The response when updating a range of values in a spreadsheet.
 type BatchUpdateValuesResponse struct {
 	Responses           []UpdateValuesResponse `json:"responses,omitempty"`
 	SpreadsheetID       *string                `json:"spreadsheetId,omitempty"`

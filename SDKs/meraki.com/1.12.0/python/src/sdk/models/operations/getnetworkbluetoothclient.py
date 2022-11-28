@@ -4,8 +4,8 @@ from typing import Any,Optional
 
 @dataclass
 class GetNetworkBluetoothClientPathParams:
-    bluetooth_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'bluetoothClientId', 'style': 'simple', 'explode': False }})
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    bluetooth_client_id: str = field(metadata={'path_param': { 'field_name': 'bluetoothClientId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetNetworkBluetoothClientQueryParams:
 
 @dataclass
 class GetNetworkBluetoothClientRequest:
-    path_params: GetNetworkBluetoothClientPathParams = field(default=None)
-    query_params: GetNetworkBluetoothClientQueryParams = field(default=None)
+    path_params: GetNetworkBluetoothClientPathParams = field()
+    query_params: GetNetworkBluetoothClientQueryParams = field()
     
 
 @dataclass
 class GetNetworkBluetoothClientResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_network_bluetooth_client_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

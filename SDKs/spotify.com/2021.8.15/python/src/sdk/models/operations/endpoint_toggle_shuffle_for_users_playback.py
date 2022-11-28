@@ -5,30 +5,30 @@ from sdk.models import shared
 
 @dataclass
 class EndpointToggleShuffleForUsersPlaybackQueryParams:
+    state: bool = field(metadata={'query_param': { 'field_name': 'state', 'style': 'form', 'explode': True }})
     device_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'device_id', 'style': 'form', 'explode': True }})
-    state: bool = field(default=None, metadata={'query_param': { 'field_name': 'state', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class EndpointToggleShuffleForUsersPlaybackHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointToggleShuffleForUsersPlaybackSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointToggleShuffleForUsersPlaybackRequest:
-    query_params: EndpointToggleShuffleForUsersPlaybackQueryParams = field(default=None)
-    headers: EndpointToggleShuffleForUsersPlaybackHeaders = field(default=None)
-    security: EndpointToggleShuffleForUsersPlaybackSecurity = field(default=None)
+    headers: EndpointToggleShuffleForUsersPlaybackHeaders = field()
+    query_params: EndpointToggleShuffleForUsersPlaybackQueryParams = field()
+    security: EndpointToggleShuffleForUsersPlaybackSecurity = field()
     
 
 @dataclass
 class EndpointToggleShuffleForUsersPlaybackResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,8 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Addressable } from "./addressable";
 import { GoogleCloudRunV1Condition } from "./googlecloudrunv1condition";
+import { TrafficTargetInput } from "./traffictarget";
 import { TrafficTarget } from "./traffictarget";
+
+
+
+// ServiceStatusInput
+/** 
+ * The current state of the Service. Output only.
+**/
+export class ServiceStatusInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=address" })
+  address?: Addressable;
+
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: GoogleCloudRunV1Condition })
+  conditions?: GoogleCloudRunV1Condition[];
+
+  @SpeakeasyMetadata({ data: "json, name=latestCreatedRevisionName" })
+  latestCreatedRevisionName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=latestReadyRevisionName" })
+  latestReadyRevisionName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=observedGeneration" })
+  observedGeneration?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=traffic", elemType: TrafficTargetInput })
+  traffic?: TrafficTargetInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=url" })
+  url?: string;
+}
 
 
 // ServiceStatus
@@ -10,24 +39,24 @@ import { TrafficTarget } from "./traffictarget";
  * The current state of the Service. Output only.
 **/
 export class ServiceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: Addressable;
 
-  @Metadata({ data: "json, name=conditions", elemType: shared.GoogleCloudRunV1Condition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: GoogleCloudRunV1Condition })
   conditions?: GoogleCloudRunV1Condition[];
 
-  @Metadata({ data: "json, name=latestCreatedRevisionName" })
+  @SpeakeasyMetadata({ data: "json, name=latestCreatedRevisionName" })
   latestCreatedRevisionName?: string;
 
-  @Metadata({ data: "json, name=latestReadyRevisionName" })
+  @SpeakeasyMetadata({ data: "json, name=latestReadyRevisionName" })
   latestReadyRevisionName?: string;
 
-  @Metadata({ data: "json, name=observedGeneration" })
+  @SpeakeasyMetadata({ data: "json, name=observedGeneration" })
   observedGeneration?: number;
 
-  @Metadata({ data: "json, name=traffic", elemType: shared.TrafficTarget })
+  @SpeakeasyMetadata({ data: "json, name=traffic", elemType: TrafficTarget })
   traffic?: TrafficTarget[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

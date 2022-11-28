@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigDetails } from "./configdetails";
 import { ConfigCapabilityTypeEnum } from "./configcapabilitytypeenum";
 // Source
@@ -35,19 +35,19 @@ var Source = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configDetails" }),
+        SpeakeasyMetadata({ data: "json, name=configDetails" }),
         __metadata("design:type", ConfigDetails)
     ], Source.prototype, "configDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=configId" }),
+        SpeakeasyMetadata({ data: "json, name=configId" }),
         __metadata("design:type", String)
     ], Source.prototype, "configId", void 0);
     __decorate([
-        Metadata({ data: "json, name=configType" }),
+        SpeakeasyMetadata({ data: "json, name=configType" }),
         __metadata("design:type", String)
     ], Source.prototype, "configType", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowSourceRegion" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowSourceRegion" }),
         __metadata("design:type", String)
     ], Source.prototype, "dataflowSourceRegion", void 0);
     return Source;

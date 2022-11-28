@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlecloudassuredworkloadsv1acknowledgeviolationrequest import *
 from .googlecloudassuredworkloadsv1listviolationsresponse import *
@@ -10,6 +10,7 @@ from .googlecloudassuredworkloadsv1violationremediationinstructions import *
 from .googlecloudassuredworkloadsv1violationremediationinstructionsconsole import *
 from .googlecloudassuredworkloadsv1violationremediationinstructionsgcloud import *
 from .googlecloudassuredworkloadsv1workload import *
+from .googlecloudassuredworkloadsv1workloadcompliancestatus import *
 from .googlecloudassuredworkloadsv1workloadkmssettings import *
 from .googlecloudassuredworkloadsv1workloadresourceinfo import *
 from .googlecloudassuredworkloadsv1workloadresourcesettings import *

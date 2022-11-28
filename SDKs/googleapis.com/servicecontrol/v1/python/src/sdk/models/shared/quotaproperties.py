@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class QuotaPropertiesQuotaModeEnum(str, Enum):
     ACQUIRE = "ACQUIRE"
@@ -12,5 +14,9 @@ class QuotaPropertiesQuotaModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class QuotaProperties:
-    quota_mode: Optional[QuotaPropertiesQuotaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quotaMode' }})
+    r"""QuotaProperties
+    Represents the properties needed for quota operations.
+    """
+    
+    quota_mode: Optional[QuotaPropertiesQuotaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('quotaMode') }})
     

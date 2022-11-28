@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 
 @dataclass
 class GetDefinitionsPathParams:
-    word: str = field(default=None, metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
+    word: str = field(metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
     
 class GetDefinitionsIncludeTagsEnum(str, Enum):
     FALSE = "false"
@@ -56,13 +57,13 @@ class GetDefinitionsQueryParams:
 
 @dataclass
 class GetDefinitionsRequest:
-    path_params: GetDefinitionsPathParams = field(default=None)
-    query_params: GetDefinitionsQueryParams = field(default=None)
+    path_params: GetDefinitionsPathParams = field()
+    query_params: GetDefinitionsQueryParams = field()
     
 
 @dataclass
 class GetDefinitionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

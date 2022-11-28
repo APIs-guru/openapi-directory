@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimDeviceBaysReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimDeviceBaysReadRequest:
-    path_params: DcimDeviceBaysReadPathParams = field(default=None)
+    path_params: DcimDeviceBaysReadPathParams = field()
     
 
 @dataclass
 class DcimDeviceBaysReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device_bay: Optional[shared.DeviceBay] = field(default=None)
-    status_code: int = field(default=None)
     

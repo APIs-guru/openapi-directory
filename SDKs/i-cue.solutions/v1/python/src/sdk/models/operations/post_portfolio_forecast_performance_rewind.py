@@ -17,14 +17,14 @@ class PostPortfolioForecastPerformanceRewindRequests:
 
 @dataclass
 class PostPortfolioForecastPerformanceRewindRequest:
-    headers: PostPortfolioForecastPerformanceRewindHeaders = field(default=None)
+    headers: PostPortfolioForecastPerformanceRewindHeaders = field()
     request: Optional[PostPortfolioForecastPerformanceRewindRequests] = field(default=None)
     
 
 @dataclass
 class PostPortfolioForecastPerformanceRewindResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     rewind_response: Optional[shared.RewindResponse] = field(default=None)
-    status_code: int = field(default=None)
     

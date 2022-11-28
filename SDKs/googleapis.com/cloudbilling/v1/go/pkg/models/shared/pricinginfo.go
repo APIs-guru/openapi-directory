@@ -1,5 +1,7 @@
 package shared
 
+// PricingInfo
+// Represents the pricing information for a SKU at a single point of time.
 type PricingInfo struct {
 	AggregationInfo        *AggregationInfo   `json:"aggregationInfo,omitempty"`
 	CurrencyConversionRate *float64           `json:"currencyConversionRate,omitempty"`

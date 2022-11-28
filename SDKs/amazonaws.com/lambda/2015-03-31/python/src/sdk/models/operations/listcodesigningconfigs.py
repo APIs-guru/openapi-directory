@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,15 +25,15 @@ class ListCodeSigningConfigsHeaders:
 
 @dataclass
 class ListCodeSigningConfigsRequest:
-    query_params: ListCodeSigningConfigsQueryParams = field(default=None)
-    headers: ListCodeSigningConfigsHeaders = field(default=None)
+    headers: ListCodeSigningConfigsHeaders = field()
+    query_params: ListCodeSigningConfigsQueryParams = field()
     
 
 @dataclass
 class ListCodeSigningConfigsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_code_signing_configs_response: Optional[shared.ListCodeSigningConfigsResponse] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

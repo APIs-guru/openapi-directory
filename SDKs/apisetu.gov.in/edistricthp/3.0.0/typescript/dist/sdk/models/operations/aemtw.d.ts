@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AemtwRequestBodyCertificateParameters extends SpeakeasyBase {
     udf1: string;
@@ -15,10 +15,6 @@ export declare class AemtwRequestBody extends SpeakeasyBase {
 export declare class AemtwSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class AemtwRequest extends SpeakeasyBase {
-    request?: AemtwRequestBody;
-    security: AemtwSecurity;
 }
 export declare enum Aemtw400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Aemtw504ApplicationJsonErrorDescriptionEnum {
 export declare class Aemtw504ApplicationJson extends SpeakeasyBase {
     error?: Aemtw504ApplicationJsonErrorEnum;
     errorDescription?: Aemtw504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class AemtwRequest extends SpeakeasyBase {
+    request?: AemtwRequestBody;
+    security: AemtwSecurity;
 }
 export declare class AemtwResponse extends SpeakeasyBase {
     contentType: string;

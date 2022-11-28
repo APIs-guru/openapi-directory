@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WorkerResource
 /**
  * Configuration for resources used by Airflow workers.
@@ -33,23 +33,23 @@ var WorkerResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cpu" }),
+        SpeakeasyMetadata({ data: "json, name=cpu" }),
         __metadata("design:type", Number)
     ], WorkerResource.prototype, "cpu", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxCount" }),
+        SpeakeasyMetadata({ data: "json, name=maxCount" }),
         __metadata("design:type", Number)
     ], WorkerResource.prototype, "maxCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=memoryGb" }),
+        SpeakeasyMetadata({ data: "json, name=memoryGb" }),
         __metadata("design:type", Number)
     ], WorkerResource.prototype, "memoryGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=minCount" }),
+        SpeakeasyMetadata({ data: "json, name=minCount" }),
         __metadata("design:type", Number)
     ], WorkerResource.prototype, "minCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=storageGb" }),
+        SpeakeasyMetadata({ data: "json, name=storageGb" }),
         __metadata("design:type", Number)
     ], WorkerResource.prototype, "storageGb", void 0);
     return WorkerResource;

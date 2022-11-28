@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserImportJobType
+// The user import job type.
 type UserImportJobType struct {
 	CloudWatchLogsRoleArn *string                      `json:"CloudWatchLogsRoleArn,omitempty"`
 	CompletionDate        *time.Time                   `json:"CompletionDate,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AvatarsGetFlagPathParams = /** @class */ (function (_super) {
     __extends(AvatarsGetFlagPathParams, _super);
@@ -30,7 +30,7 @@ var AvatarsGetFlagPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=code" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=code" }),
         __metadata("design:type", String)
     ], AvatarsGetFlagPathParams.prototype, "code", void 0);
     return AvatarsGetFlagPathParams;
@@ -42,15 +42,15 @@ var AvatarsGetFlagQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", Number)
     ], AvatarsGetFlagQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quality" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quality" }),
         __metadata("design:type", Number)
     ], AvatarsGetFlagQueryParams.prototype, "quality", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], AvatarsGetFlagQueryParams.prototype, "width", void 0);
     return AvatarsGetFlagQueryParams;
@@ -62,15 +62,15 @@ var AvatarsGetFlagSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], AvatarsGetFlagSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], AvatarsGetFlagSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], AvatarsGetFlagSecurity.prototype, "project", void 0);
     return AvatarsGetFlagSecurity;
@@ -82,15 +82,15 @@ var AvatarsGetFlagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetFlagPathParams)
     ], AvatarsGetFlagRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetFlagQueryParams)
     ], AvatarsGetFlagRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetFlagSecurity)
     ], AvatarsGetFlagRequest.prototype, "security", void 0);
     return AvatarsGetFlagRequest;
@@ -102,11 +102,11 @@ var AvatarsGetFlagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AvatarsGetFlagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AvatarsGetFlagResponse.prototype, "statusCode", void 0);
     return AvatarsGetFlagResponse;

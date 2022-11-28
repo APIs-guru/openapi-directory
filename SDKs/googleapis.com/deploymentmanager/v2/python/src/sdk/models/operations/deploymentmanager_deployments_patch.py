@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerDeploymentsPatchPathParams:
-    deployment: str = field(default=None, metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    deployment: str = field(metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 class DeploymentmanagerDeploymentsPatchCreatePolicyEnum(str, Enum):
     CREATE_OR_ACQUIRE = "CREATE_OR_ACQUIRE"
@@ -37,14 +38,14 @@ class DeploymentmanagerDeploymentsPatchQueryParams:
 
 @dataclass
 class DeploymentmanagerDeploymentsPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerDeploymentsPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -55,15 +56,15 @@ class DeploymentmanagerDeploymentsPatchSecurity:
 
 @dataclass
 class DeploymentmanagerDeploymentsPatchRequest:
-    path_params: DeploymentmanagerDeploymentsPatchPathParams = field(default=None)
-    query_params: DeploymentmanagerDeploymentsPatchQueryParams = field(default=None)
+    path_params: DeploymentmanagerDeploymentsPatchPathParams = field()
+    query_params: DeploymentmanagerDeploymentsPatchQueryParams = field()
+    security: DeploymentmanagerDeploymentsPatchSecurity = field()
     request: Optional[shared.Deployment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DeploymentmanagerDeploymentsPatchSecurity = field(default=None)
     
 
 @dataclass
 class DeploymentmanagerDeploymentsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

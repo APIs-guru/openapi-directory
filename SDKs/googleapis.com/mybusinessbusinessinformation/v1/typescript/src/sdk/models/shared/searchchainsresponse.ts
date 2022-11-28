@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Chain } from "./chain";
+
 
 
 // SearchChainsResponse
@@ -8,6 +8,6 @@ import { Chain } from "./chain";
  * Response message for Locations.SearchChains.
 **/
 export class SearchChainsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chains", elemType: shared.Chain })
+  @SpeakeasyMetadata({ data: "json, name=chains", elemType: Chain })
   chains?: Chain[];
 }

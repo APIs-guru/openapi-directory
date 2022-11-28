@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthCheckConfiguration } from "./healthcheckconfiguration";
 import { InstanceConfiguration } from "./instanceconfiguration";
 import { SourceConfiguration } from "./sourceconfiguration";
 
 
+
 export class UpdateServiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingConfigurationArn" })
   autoScalingConfigurationArn?: string;
 
-  @Metadata({ data: "json, name=HealthCheckConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckConfiguration" })
   healthCheckConfiguration?: HealthCheckConfiguration;
 
-  @Metadata({ data: "json, name=InstanceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceConfiguration" })
   instanceConfiguration?: InstanceConfiguration;
 
-  @Metadata({ data: "json, name=ServiceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceArn" })
   serviceArn: string;
 
-  @Metadata({ data: "json, name=SourceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SourceConfiguration" })
   sourceConfiguration?: SourceConfiguration;
 }

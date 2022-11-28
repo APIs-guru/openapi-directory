@@ -1,5 +1,7 @@
 package shared
 
+// HumanLoopConfig
+// Describes the work to be performed by human workers.
 type HumanLoopConfig struct {
 	HumanTaskUIArn                    string                    `json:"HumanTaskUiArn"`
 	PublicWorkforceTaskPrice          *PublicWorkforceTaskPrice `json:"PublicWorkforceTaskPrice,omitempty"`

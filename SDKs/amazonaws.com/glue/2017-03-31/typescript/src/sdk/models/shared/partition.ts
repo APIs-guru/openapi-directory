@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StorageDescriptor } from "./storagedescriptor";
+
 
 
 // Partition
@@ -7,30 +8,30 @@ import { StorageDescriptor } from "./storagedescriptor";
  * Represents a slice of table data.
 **/
 export class Partition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=LastAccessTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastAccessTime" })
   lastAccessTime?: Date;
 
-  @Metadata({ data: "json, name=LastAnalyzedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastAnalyzedTime" })
   lastAnalyzedTime?: Date;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=StorageDescriptor" })
+  @SpeakeasyMetadata({ data: "json, name=StorageDescriptor" })
   storageDescriptor?: StorageDescriptor;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values?: string[];
 }

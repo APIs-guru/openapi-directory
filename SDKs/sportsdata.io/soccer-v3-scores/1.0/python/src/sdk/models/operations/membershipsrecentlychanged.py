@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class MembershipsRecentlyChangedFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class MembershipsRecentlyChangedFormatEnum(str, Enum):
 
 @dataclass
 class MembershipsRecentlyChangedPathParams:
-    days: str = field(default=None, metadata={'path_param': { 'field_name': 'days', 'style': 'simple', 'explode': False }})
-    format: MembershipsRecentlyChangedFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    days: str = field(metadata={'path_param': { 'field_name': 'days', 'style': 'simple', 'explode': False }})
+    format: MembershipsRecentlyChangedFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class MembershipsRecentlyChangedRequest:
-    path_params: MembershipsRecentlyChangedPathParams = field(default=None)
+    path_params: MembershipsRecentlyChangedPathParams = field()
     
 
 @dataclass
 class MembershipsRecentlyChangedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     memberships: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

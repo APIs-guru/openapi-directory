@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupedResourceCount } from "./groupedresourcecount";
 
 
+
 export class GetAggregateDiscoveredResourceCountsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupByKey" })
+  @SpeakeasyMetadata({ data: "json, name=GroupByKey" })
   groupByKey?: string;
 
-  @Metadata({ data: "json, name=GroupedResourceCounts", elemType: shared.GroupedResourceCount })
+  @SpeakeasyMetadata({ data: "json, name=GroupedResourceCounts", elemType: GroupedResourceCount })
   groupedResourceCounts?: GroupedResourceCount[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=TotalDiscoveredResources" })
+  @SpeakeasyMetadata({ data: "json, name=TotalDiscoveredResources" })
   totalDiscoveredResources: number;
 }

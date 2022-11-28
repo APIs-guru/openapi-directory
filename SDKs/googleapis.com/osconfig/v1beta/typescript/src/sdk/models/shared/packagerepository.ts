@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AptRepository } from "./aptrepository";
 import { GooRepository } from "./goorepository";
 import { YumRepository } from "./yumrepository";
 import { ZypperRepository } from "./zypperrepository";
+
 
 
 // PackageRepository
@@ -10,15 +11,15 @@ import { ZypperRepository } from "./zypperrepository";
  * A package repository.
 **/
 export class PackageRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apt" })
+  @SpeakeasyMetadata({ data: "json, name=apt" })
   apt?: AptRepository;
 
-  @Metadata({ data: "json, name=goo" })
+  @SpeakeasyMetadata({ data: "json, name=goo" })
   goo?: GooRepository;
 
-  @Metadata({ data: "json, name=yum" })
+  @SpeakeasyMetadata({ data: "json, name=yum" })
   yum?: YumRepository;
 
-  @Metadata({ data: "json, name=zypper" })
+  @SpeakeasyMetadata({ data: "json, name=zypper" })
   zypper?: ZypperRepository;
 }

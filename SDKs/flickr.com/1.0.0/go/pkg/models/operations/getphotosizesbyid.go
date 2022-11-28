@@ -9,10 +9,6 @@ type GetPhotoSizesByIDQueryParams struct {
 	PhotoID string `queryParam:"style=form,explode=true,name=photo_id"`
 }
 
-type GetPhotoSizesByIDRequest struct {
-	QueryParams GetPhotoSizesByIDQueryParams
-}
-
 type GetPhotoSizesByID200ApplicationJSONSizes struct {
 	Canblog     *float64      `json:"canblog,omitempty"`
 	Candownload *float64      `json:"candownload,omitempty"`
@@ -23,6 +19,10 @@ type GetPhotoSizesByID200ApplicationJSONSizes struct {
 type GetPhotoSizesByID200ApplicationJSON struct {
 	Sizes *GetPhotoSizesByID200ApplicationJSONSizes `json:"sizes,omitempty"`
 	Stat  *string                                   `json:"stat,omitempty"`
+}
+
+type GetPhotoSizesByIDRequest struct {
+	QueryParams GetPhotoSizesByIDQueryParams
 }
 
 type GetPhotoSizesByIDResponse struct {

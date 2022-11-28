@@ -1,5 +1,7 @@
 package shared
 
+// SoftwareRecipeStepCopyFile
+// Copies the artifact to the specified path on the instance.
 type SoftwareRecipeStepCopyFile struct {
 	ArtifactID  *string `json:"artifactId,omitempty"`
 	Destination *string `json:"destination,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateWorkloadShareOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input for Create Workload Share
 **/
 export class CreateWorkloadShareOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShareId" })
+  @SpeakeasyMetadata({ data: "json, name=ShareId" })
   shareId?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 }

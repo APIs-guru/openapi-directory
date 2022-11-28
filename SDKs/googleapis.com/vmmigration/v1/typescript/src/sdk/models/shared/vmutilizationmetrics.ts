@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VmUtilizationMetrics
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Utilization metrics values for a single VM.
 **/
 export class VmUtilizationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuAveragePercent" })
+  @SpeakeasyMetadata({ data: "json, name=cpuAveragePercent" })
   cpuAveragePercent?: number;
 
-  @Metadata({ data: "json, name=cpuMaxPercent" })
+  @SpeakeasyMetadata({ data: "json, name=cpuMaxPercent" })
   cpuMaxPercent?: number;
 
-  @Metadata({ data: "json, name=diskIoRateAverageKbps" })
+  @SpeakeasyMetadata({ data: "json, name=diskIoRateAverageKbps" })
   diskIoRateAverageKbps?: string;
 
-  @Metadata({ data: "json, name=diskIoRateMaxKbps" })
+  @SpeakeasyMetadata({ data: "json, name=diskIoRateMaxKbps" })
   diskIoRateMaxKbps?: string;
 
-  @Metadata({ data: "json, name=memoryAveragePercent" })
+  @SpeakeasyMetadata({ data: "json, name=memoryAveragePercent" })
   memoryAveragePercent?: number;
 
-  @Metadata({ data: "json, name=memoryMaxPercent" })
+  @SpeakeasyMetadata({ data: "json, name=memoryMaxPercent" })
   memoryMaxPercent?: number;
 
-  @Metadata({ data: "json, name=networkThroughputAverageKbps" })
+  @SpeakeasyMetadata({ data: "json, name=networkThroughputAverageKbps" })
   networkThroughputAverageKbps?: string;
 
-  @Metadata({ data: "json, name=networkThroughputMaxKbps" })
+  @SpeakeasyMetadata({ data: "json, name=networkThroughputMaxKbps" })
   networkThroughputMaxKbps?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// EncryptRequest
+// Request message for KeyManagementService.Encrypt.
 type EncryptRequest struct {
 	AdditionalAuthenticatedData       *string `json:"additionalAuthenticatedData,omitempty"`
 	AdditionalAuthenticatedDataCrc32c *string `json:"additionalAuthenticatedDataCrc32c,omitempty"`

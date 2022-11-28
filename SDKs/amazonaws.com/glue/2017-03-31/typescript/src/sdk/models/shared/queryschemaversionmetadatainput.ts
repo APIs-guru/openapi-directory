@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetadataKeyValuePair } from "./metadatakeyvaluepair";
 import { SchemaId } from "./schemaid";
 import { SchemaVersionNumber } from "./schemaversionnumber";
 
 
+
 export class QuerySchemaVersionMetadataInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=MetadataList", elemType: shared.MetadataKeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=MetadataList", elemType: MetadataKeyValuePair })
   metadataList?: MetadataKeyValuePair[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SchemaId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaId" })
   schemaId?: SchemaId;
 
-  @Metadata({ data: "json, name=SchemaVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionId" })
   schemaVersionId?: string;
 
-  @Metadata({ data: "json, name=SchemaVersionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionNumber" })
   schemaVersionNumber?: SchemaVersionNumber;
 }

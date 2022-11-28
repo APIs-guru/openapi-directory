@@ -1,88 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritableDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_tag" })
+
+export class WritableDeviceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=asset_tag" })
   assetTag?: string;
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: number;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=created" })
-  created?: Date;
-
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=device_role" })
+  @SpeakeasyMetadata({ data: "json, name=device_role" })
   deviceRole: number;
 
-  @Metadata({ data: "json, name=device_type" })
+  @SpeakeasyMetadata({ data: "json, name=device_type" })
   deviceType: number;
 
-  @Metadata({ data: "json, name=display_name" })
-  displayName?: string;
-
-  @Metadata({ data: "json, name=face" })
+  @SpeakeasyMetadata({ data: "json, name=face" })
   face?: number;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=last_updated" })
-  lastUpdated?: Date;
-
-  @Metadata({ data: "json, name=local_context_data" })
+  @SpeakeasyMetadata({ data: "json, name=local_context_data" })
   localContextData?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent_device" })
-  parentDevice?: string;
-
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: number;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=primary_ip" })
-  primaryIp?: string;
-
-  @Metadata({ data: "json, name=primary_ip4" })
+  @SpeakeasyMetadata({ data: "json, name=primary_ip4" })
   primaryIp4?: number;
 
-  @Metadata({ data: "json, name=primary_ip6" })
+  @SpeakeasyMetadata({ data: "json, name=primary_ip6" })
   primaryIp6?: number;
 
-  @Metadata({ data: "json, name=rack" })
+  @SpeakeasyMetadata({ data: "json, name=rack" })
   rack?: number;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial?: string;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=tenant" })
+  @SpeakeasyMetadata({ data: "json, name=tenant" })
   tenant?: number;
 
-  @Metadata({ data: "json, name=vc_position" })
+  @SpeakeasyMetadata({ data: "json, name=vc_position" })
   vcPosition?: number;
 
-  @Metadata({ data: "json, name=vc_priority" })
+  @SpeakeasyMetadata({ data: "json, name=vc_priority" })
   vcPriority?: number;
 
-  @Metadata({ data: "json, name=virtual_chassis" })
+  @SpeakeasyMetadata({ data: "json, name=virtual_chassis" })
   virtualChassis?: number;
 }

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://applicationinsights.{region}.amazonaws.com",
 	"https://applicationinsights.{region}.amazonaws.com",
 	"http://applicationinsights.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/applicationinsights/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateApplication - Adds an application that is created from a resource group.
 func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateApplicationRequest) (*operations.CreateApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.CreateApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateAp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateAp
 	return res, nil
 }
 
+// CreateComponent - Creates a custom component by grouping similar standalone instances to monitor.
 func (s *SDK) CreateComponent(ctx context.Context, request operations.CreateComponentRequest) (*operations.CreateComponentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.CreateComponent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) CreateComponent(ctx context.Context, request operations.CreateComp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) CreateComponent(ctx context.Context, request operations.CreateComp
 	return res, nil
 }
 
+// CreateLogPattern - Adds an log pattern to a <code>LogPatternSet</code>.
 func (s *SDK) CreateLogPattern(ctx context.Context, request operations.CreateLogPatternRequest) (*operations.CreateLogPatternResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.CreateLogPattern"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) CreateLogPattern(ctx context.Context, request operations.CreateLog
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +382,9 @@ func (s *SDK) CreateLogPattern(ctx context.Context, request operations.CreateLog
 	return res, nil
 }
 
+// DeleteApplication - Removes the specified application from monitoring. Does not delete the application.
 func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteApplicationRequest) (*operations.DeleteApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DeleteApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -374,7 +404,7 @@ func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteAp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -444,8 +474,9 @@ func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteAp
 	return res, nil
 }
 
+// DeleteComponent - Ungroups a custom component. When you ungroup custom components, all applicable monitors that are set up for the component are removed and the instances revert to their standalone status.
 func (s *SDK) DeleteComponent(ctx context.Context, request operations.DeleteComponentRequest) (*operations.DeleteComponentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DeleteComponent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -465,7 +496,7 @@ func (s *SDK) DeleteComponent(ctx context.Context, request operations.DeleteComp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -525,8 +556,9 @@ func (s *SDK) DeleteComponent(ctx context.Context, request operations.DeleteComp
 	return res, nil
 }
 
+// DeleteLogPattern - Removes the specified log pattern from a <code>LogPatternSet</code>.
 func (s *SDK) DeleteLogPattern(ctx context.Context, request operations.DeleteLogPatternRequest) (*operations.DeleteLogPatternResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DeleteLogPattern"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -546,7 +578,7 @@ func (s *SDK) DeleteLogPattern(ctx context.Context, request operations.DeleteLog
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -616,8 +648,9 @@ func (s *SDK) DeleteLogPattern(ctx context.Context, request operations.DeleteLog
 	return res, nil
 }
 
+// DescribeApplication - Describes the application.
 func (s *SDK) DescribeApplication(ctx context.Context, request operations.DescribeApplicationRequest) (*operations.DescribeApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -637,7 +670,7 @@ func (s *SDK) DescribeApplication(ctx context.Context, request operations.Descri
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -697,8 +730,9 @@ func (s *SDK) DescribeApplication(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribeComponent - Describes a component and lists the resources that are grouped together in a component.
 func (s *SDK) DescribeComponent(ctx context.Context, request operations.DescribeComponentRequest) (*operations.DescribeComponentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -718,7 +752,7 @@ func (s *SDK) DescribeComponent(ctx context.Context, request operations.Describe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -778,8 +812,9 @@ func (s *SDK) DescribeComponent(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// DescribeComponentConfiguration - Describes the monitoring configuration of the component.
 func (s *SDK) DescribeComponentConfiguration(ctx context.Context, request operations.DescribeComponentConfigurationRequest) (*operations.DescribeComponentConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -799,7 +834,7 @@ func (s *SDK) DescribeComponentConfiguration(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -859,8 +894,9 @@ func (s *SDK) DescribeComponentConfiguration(ctx context.Context, request operat
 	return res, nil
 }
 
+// DescribeComponentConfigurationRecommendation - Describes the recommended monitoring configuration of the component.
 func (s *SDK) DescribeComponentConfigurationRecommendation(ctx context.Context, request operations.DescribeComponentConfigurationRecommendationRequest) (*operations.DescribeComponentConfigurationRecommendationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -880,7 +916,7 @@ func (s *SDK) DescribeComponentConfigurationRecommendation(ctx context.Context, 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -940,8 +976,9 @@ func (s *SDK) DescribeComponentConfigurationRecommendation(ctx context.Context, 
 	return res, nil
 }
 
+// DescribeLogPattern - Describe a specific log pattern from a <code>LogPatternSet</code>.
 func (s *SDK) DescribeLogPattern(ctx context.Context, request operations.DescribeLogPatternRequest) (*operations.DescribeLogPatternResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeLogPattern"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -961,7 +998,7 @@ func (s *SDK) DescribeLogPattern(ctx context.Context, request operations.Describ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1021,8 +1058,9 @@ func (s *SDK) DescribeLogPattern(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeObservation - Describes an anomaly or error with the application.
 func (s *SDK) DescribeObservation(ctx context.Context, request operations.DescribeObservationRequest) (*operations.DescribeObservationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeObservation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1042,7 +1080,7 @@ func (s *SDK) DescribeObservation(ctx context.Context, request operations.Descri
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1102,8 +1140,9 @@ func (s *SDK) DescribeObservation(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribeProblem - Describes an application problem.
 func (s *SDK) DescribeProblem(ctx context.Context, request operations.DescribeProblemRequest) (*operations.DescribeProblemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeProblem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1123,7 +1162,7 @@ func (s *SDK) DescribeProblem(ctx context.Context, request operations.DescribePr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1183,8 +1222,9 @@ func (s *SDK) DescribeProblem(ctx context.Context, request operations.DescribePr
 	return res, nil
 }
 
+// DescribeProblemObservations - Describes the anomalies or errors associated with the problem.
 func (s *SDK) DescribeProblemObservations(ctx context.Context, request operations.DescribeProblemObservationsRequest) (*operations.DescribeProblemObservationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.DescribeProblemObservations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1204,7 +1244,7 @@ func (s *SDK) DescribeProblemObservations(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1264,8 +1304,9 @@ func (s *SDK) DescribeProblemObservations(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListApplications - Lists the IDs of the applications that you are monitoring.
 func (s *SDK) ListApplications(ctx context.Context, request operations.ListApplicationsRequest) (*operations.ListApplicationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.ListApplications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1287,7 +1328,7 @@ func (s *SDK) ListApplications(ctx context.Context, request operations.ListAppli
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1337,8 +1378,9 @@ func (s *SDK) ListApplications(ctx context.Context, request operations.ListAppli
 	return res, nil
 }
 
+// ListComponents - Lists the auto-grouped, standalone, and custom components of the application.
 func (s *SDK) ListComponents(ctx context.Context, request operations.ListComponentsRequest) (*operations.ListComponentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.ListComponents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1360,7 +1402,7 @@ func (s *SDK) ListComponents(ctx context.Context, request operations.ListCompone
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1420,8 +1462,9 @@ func (s *SDK) ListComponents(ctx context.Context, request operations.ListCompone
 	return res, nil
 }
 
+// ListConfigurationHistory - <p> Lists the INFO, WARN, and ERROR events for periodic configuration updates performed by Application Insights. Examples of events represented are: </p> <ul> <li> <p>INFO: creating a new alarm or updating an alarm threshold.</p> </li> <li> <p>WARN: alarm not created due to insufficient data points used to predict thresholds.</p> </li> <li> <p>ERROR: alarm not created due to permission errors or exceeding quotas. </p> </li> </ul>
 func (s *SDK) ListConfigurationHistory(ctx context.Context, request operations.ListConfigurationHistoryRequest) (*operations.ListConfigurationHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.ListConfigurationHistory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1443,7 +1486,7 @@ func (s *SDK) ListConfigurationHistory(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1503,8 +1546,9 @@ func (s *SDK) ListConfigurationHistory(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListLogPatternSets - Lists the log pattern sets in the specific application.
 func (s *SDK) ListLogPatternSets(ctx context.Context, request operations.ListLogPatternSetsRequest) (*operations.ListLogPatternSetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.ListLogPatternSets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1526,7 +1570,7 @@ func (s *SDK) ListLogPatternSets(ctx context.Context, request operations.ListLog
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1586,8 +1630,9 @@ func (s *SDK) ListLogPatternSets(ctx context.Context, request operations.ListLog
 	return res, nil
 }
 
+// ListLogPatterns - Lists the log patterns in the specific log <code>LogPatternSet</code>.
 func (s *SDK) ListLogPatterns(ctx context.Context, request operations.ListLogPatternsRequest) (*operations.ListLogPatternsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.ListLogPatterns"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1609,7 +1654,7 @@ func (s *SDK) ListLogPatterns(ctx context.Context, request operations.ListLogPat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1669,8 +1714,9 @@ func (s *SDK) ListLogPatterns(ctx context.Context, request operations.ListLogPat
 	return res, nil
 }
 
+// ListProblems - Lists the problems with your application.
 func (s *SDK) ListProblems(ctx context.Context, request operations.ListProblemsRequest) (*operations.ListProblemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.ListProblems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1692,7 +1738,7 @@ func (s *SDK) ListProblems(ctx context.Context, request operations.ListProblemsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1752,8 +1798,9 @@ func (s *SDK) ListProblems(ctx context.Context, request operations.ListProblemsR
 	return res, nil
 }
 
+// ListTagsForResource - Retrieve a list of the tags (keys and values) that are associated with a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Each tag consists of a required <i>tag key</i> and an optional associated <i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1773,7 +1820,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1823,8 +1870,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// TagResource - <p>Add one or more tags (keys and values) to a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Tags can help you categorize and manage application in different ways, such as by purpose, owner, environment, or other criteria. </p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1844,7 +1892,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1904,8 +1952,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Remove one or more tags (keys and values) from a specified application.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1925,7 +1974,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1975,8 +2024,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateApplication - Updates the application.
 func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateApplicationRequest) (*operations.UpdateApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.UpdateApplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1996,7 +2046,7 @@ func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateAp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2056,8 +2106,9 @@ func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateAp
 	return res, nil
 }
 
+// UpdateComponent - Updates the custom component name and/or the list of resources that make up the component.
 func (s *SDK) UpdateComponent(ctx context.Context, request operations.UpdateComponentRequest) (*operations.UpdateComponentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2077,7 +2128,7 @@ func (s *SDK) UpdateComponent(ctx context.Context, request operations.UpdateComp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2147,8 +2198,9 @@ func (s *SDK) UpdateComponent(ctx context.Context, request operations.UpdateComp
 	return res, nil
 }
 
+// UpdateComponentConfiguration - Updates the monitoring configurations for the component. The configuration input parameter is an escaped JSON of the configuration and should match the schema of what is returned by <code>DescribeComponentConfigurationRecommendation</code>.
 func (s *SDK) UpdateComponentConfiguration(ctx context.Context, request operations.UpdateComponentConfigurationRequest) (*operations.UpdateComponentConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponentConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2168,7 +2220,7 @@ func (s *SDK) UpdateComponentConfiguration(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2228,8 +2280,9 @@ func (s *SDK) UpdateComponentConfiguration(ctx context.Context, request operatio
 	return res, nil
 }
 
+// UpdateLogPattern - Adds a log pattern to a <code>LogPatternSet</code>.
 func (s *SDK) UpdateLogPattern(ctx context.Context, request operations.UpdateLogPatternRequest) (*operations.UpdateLogPatternResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=EC2WindowsBarleyService.UpdateLogPattern"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2249,7 +2302,7 @@ func (s *SDK) UpdateLogPattern(ctx context.Context, request operations.UpdateLog
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

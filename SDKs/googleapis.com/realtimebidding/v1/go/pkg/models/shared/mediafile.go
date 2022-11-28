@@ -23,6 +23,8 @@ const (
 	MediaFileMimeTypeEnumMimeAudioOgg               MediaFileMimeTypeEnum = "MIME_AUDIO_OGG"
 )
 
+// MediaFile
+// Information about each media file in the VAST.
 type MediaFile struct {
 	Bitrate  *string                `json:"bitrate,omitempty"`
 	MimeType *MediaFileMimeTypeEnum `json:"mimeType,omitempty"`

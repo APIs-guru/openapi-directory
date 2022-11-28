@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import version
+from sdk import utils
+from . import *
 
 class DistributionArchitectureEnum(str, Enum):
     ARCHITECTURE_UNSPECIFIED = "ARCHITECTURE_UNSPECIFIED"
@@ -12,10 +14,14 @@ class DistributionArchitectureEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Distribution:
-    architecture: Optional[DistributionArchitectureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'architecture' }})
-    cpe_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpeUri' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    latest_version: Optional[version.Version] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestVersion' }})
-    maintainer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maintainer' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""Distribution
+    This represents a particular channel of distribution for a given package. E.g., Debian's jessie-backports dpkg mirror.
+    """
+    
+    architecture: Optional[DistributionArchitectureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('architecture') }})
+    cpe_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpeUri') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    latest_version: Optional[Version] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestVersion') }})
+    maintainer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maintainer') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

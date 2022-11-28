@@ -14,6 +14,8 @@ type SendVoiceMessageHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SendVoiceMessageRequestBodyContent
+// An object that contains a voice message and information about the recipient that you want to send it to.
 type SendVoiceMessageRequestBodyContent struct {
 	CallInstructionsMessage *shared.CallInstructionsMessageType `json:"CallInstructionsMessage,omitempty"`
 	PlainTextMessage        *shared.PlainTextMessageType        `json:"PlainTextMessage,omitempty"`

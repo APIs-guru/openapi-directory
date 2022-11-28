@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutToolsLogLevelDicomRequest = /** @class */ (function (_super) {
     __extends(PutToolsLogLevelDicomRequest, _super);
     function PutToolsLogLevelDicomRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=text/plain" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/plain" }),
         __metadata("design:type", Uint8Array)
     ], PutToolsLogLevelDicomRequest.prototype, "request", void 0);
     return PutToolsLogLevelDicomRequest;
@@ -41,11 +41,11 @@ var PutToolsLogLevelDicomResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutToolsLogLevelDicomResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutToolsLogLevelDicomResponse.prototype, "statusCode", void 0);
     return PutToolsLogLevelDicomResponse;

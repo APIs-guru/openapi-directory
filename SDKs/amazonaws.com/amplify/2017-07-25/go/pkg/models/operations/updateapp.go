@@ -18,6 +18,9 @@ type UpdateAppHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateAppRequestBodyAutoBranchCreationConfig
+//
+//	Describes the automated branch creation configuration.
 type UpdateAppRequestBodyAutoBranchCreationConfig struct {
 	BasicAuthCredentials       *string           `json:"basicAuthCredentials,omitempty"`
 	BuildSpec                  *string           `json:"buildSpec,omitempty"`

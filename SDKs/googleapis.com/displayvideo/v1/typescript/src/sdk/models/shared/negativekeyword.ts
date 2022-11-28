@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// NegativeKeywordInput
+/** 
+ * A negatively targeted keyword that belongs to a negative keyword list.
+**/
+export class NegativeKeywordInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=keywordValue" })
+  keywordValue?: string;
+}
 
 
 // NegativeKeyword
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A negatively targeted keyword that belongs to a negative keyword list.
 **/
 export class NegativeKeyword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keywordValue" })
+  @SpeakeasyMetadata({ data: "json, name=keywordValue" })
   keywordValue?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

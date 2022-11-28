@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attributes } from "./attributes";
 import { BoundingBox } from "./boundingbox";
 // OcrResult
@@ -35,19 +35,19 @@ var OcrResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributes" }),
+        SpeakeasyMetadata({ data: "json, name=attributes" }),
         __metadata("design:type", Attributes)
     ], OcrResult.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=boundingBox" }),
+        SpeakeasyMetadata({ data: "json, name=boundingBox" }),
         __metadata("design:type", BoundingBox)
     ], OcrResult.prototype, "boundingBox", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], OcrResult.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=probability" }),
+        SpeakeasyMetadata({ data: "json, name=probability" }),
         __metadata("design:type", Number)
     ], OcrResult.prototype, "probability", void 0);
     return OcrResult;

@@ -1,5 +1,7 @@
 package shared
 
+// CustomViewabilityMetricConfiguration
+// The attributes, like playtime and percent onscreen, that define the Custom Viewability Metric.
 type CustomViewabilityMetricConfiguration struct {
 	Audible            *bool  `json:"audible,omitempty"`
 	TimeMillis         *int32 `json:"timeMillis,omitempty"`

@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { DimensionValue } from "./dimensionvalue";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
 
+
 export enum EventTagSiteFilterTypeEnum {
-    Allowlist = "ALLOWLIST"
-,    Blocklist = "BLOCKLIST"
+    Allowlist = "ALLOWLIST",
+    Blocklist = "BLOCKLIST"
 }
 
 export enum EventTagStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 export enum EventTagTypeEnum {
-    ImpressionImageEventTag = "IMPRESSION_IMAGE_EVENT_TAG"
-,    ImpressionJavascriptEventTag = "IMPRESSION_JAVASCRIPT_EVENT_TAG"
-,    ClickThroughEventTag = "CLICK_THROUGH_EVENT_TAG"
+    ImpressionImageEventTag = "IMPRESSION_IMAGE_EVENT_TAG",
+    ImpressionJavascriptEventTag = "IMPRESSION_JAVASCRIPT_EVENT_TAG",
+    ClickThroughEventTag = "CLICK_THROUGH_EVENT_TAG"
 }
 
 
@@ -24,57 +24,57 @@ export enum EventTagTypeEnum {
  * Contains properties of an event tag.
 **/
 export class EventTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=advertiserIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserIdDimensionValue" })
   advertiserIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=campaignId" })
+  @SpeakeasyMetadata({ data: "json, name=campaignId" })
   campaignId?: string;
 
-  @Metadata({ data: "json, name=campaignIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=campaignIdDimensionValue" })
   campaignIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=enabledByDefault" })
+  @SpeakeasyMetadata({ data: "json, name=enabledByDefault" })
   enabledByDefault?: boolean;
 
-  @Metadata({ data: "json, name=excludeFromAdxRequests" })
+  @SpeakeasyMetadata({ data: "json, name=excludeFromAdxRequests" })
   excludeFromAdxRequests?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=siteFilterType" })
+  @SpeakeasyMetadata({ data: "json, name=siteFilterType" })
   siteFilterType?: EventTagSiteFilterTypeEnum;
 
-  @Metadata({ data: "json, name=siteIds" })
+  @SpeakeasyMetadata({ data: "json, name=siteIds" })
   siteIds?: string[];
 
-  @Metadata({ data: "json, name=sslCompliant" })
+  @SpeakeasyMetadata({ data: "json, name=sslCompliant" })
   sslCompliant?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: EventTagStatusEnum;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: EventTagTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=urlEscapeLevels" })
+  @SpeakeasyMetadata({ data: "json, name=urlEscapeLevels" })
   urlEscapeLevels?: number;
 }

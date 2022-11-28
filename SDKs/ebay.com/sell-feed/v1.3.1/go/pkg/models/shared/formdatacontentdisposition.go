@@ -1,5 +1,7 @@
 package shared
 
+// FormDataContentDisposition
+// The metadata for the file.
 type FormDataContentDisposition struct {
 	CreationDate     *string           `multipartForm:"name=creationDate"`
 	FileName         *string           `multipartForm:"name=fileName"`

@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 class AddWebHookRequestBodyFilterEnum(str, Enum):
     CONVERSATION_CREATE = "CONVERSATION.CREATE"
@@ -14,25 +16,25 @@ class AddWebHookRequestBodyFilterEnum(str, Enum):
 
 @dataclass
 class AddWebHookRequestBody:
-    filter: List[AddWebHookRequestBodyFilterEnum] = field(default=None, metadata={'form': { 'field_name': 'filter' }})
-    url: str = field(default=None, metadata={'form': { 'field_name': 'url' }})
+    filter: List[AddWebHookRequestBodyFilterEnum] = field(metadata={'form': { 'field_name': 'filter' }})
+    url: str = field(metadata={'form': { 'field_name': 'url' }})
     
 
 @dataclass
 class AddWebHookSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AddWebHookRequest:
-    request: AddWebHookRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: AddWebHookSecurity = field(default=None)
+    request: AddWebHookRequestBody = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: AddWebHookSecurity = field()
     
 
 @dataclass
 class AddWebHookResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     web_hook: Optional[Any] = field(default=None)
     

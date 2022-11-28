@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SseTypeEnum } from "./ssetypeenum";
+
 
 
 // SseSpecification
@@ -7,12 +8,12 @@ import { SseTypeEnum } from "./ssetypeenum";
  * Represents the settings used to enable server-side encryption.
 **/
 export class SseSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=KMSMasterKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KMSMasterKeyId" })
   kmsMasterKeyId?: string;
 
-  @Metadata({ data: "json, name=SSEType" })
+  @SpeakeasyMetadata({ data: "json, name=SSEType" })
   sseType?: SseTypeEnum;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceSheetDimensionRange } from "./datasourcesheetdimensionrange";
 import { DimensionRange } from "./dimensionrange";
+
 
 
 // AutoResizeDimensionsRequest
@@ -8,9 +9,9 @@ import { DimensionRange } from "./dimensionrange";
  * Automatically resizes one or more dimensions based on the contents of the cells in that dimension.
 **/
 export class AutoResizeDimensionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceSheetDimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceSheetDimensions" })
   dataSourceSheetDimensions?: DataSourceSheetDimensionRange;
 
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: DimensionRange;
 }

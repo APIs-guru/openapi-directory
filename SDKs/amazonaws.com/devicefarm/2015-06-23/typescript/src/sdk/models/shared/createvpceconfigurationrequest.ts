@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateVpceConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceDnsName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDnsName" })
   serviceDnsName: string;
 
-  @Metadata({ data: "json, name=vpceConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=vpceConfigurationDescription" })
   vpceConfigurationDescription?: string;
 
-  @Metadata({ data: "json, name=vpceConfigurationName" })
+  @SpeakeasyMetadata({ data: "json, name=vpceConfigurationName" })
   vpceConfigurationName: string;
 
-  @Metadata({ data: "json, name=vpceServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=vpceServiceName" })
   vpceServiceName: string;
 }

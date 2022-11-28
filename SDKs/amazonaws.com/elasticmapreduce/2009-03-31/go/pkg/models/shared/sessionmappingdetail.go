@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SessionMappingDetail
+// Details for an Amazon EMR Studio session mapping including creation time, user or group ID, Studio ID, and so on.
 type SessionMappingDetail struct {
 	CreationTime     *time.Time        `json:"CreationTime,omitempty"`
 	IdentityID       *string           `json:"IdentityId,omitempty"`

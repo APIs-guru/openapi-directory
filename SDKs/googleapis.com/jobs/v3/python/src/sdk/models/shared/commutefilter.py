@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timeofday
-from . import latlng
+from sdk import utils
+from . import *
 
 class CommuteFilterCommuteMethodEnum(str, Enum):
     COMMUTE_METHOD_UNSPECIFIED = "COMMUTE_METHOD_UNSPECIFIED"
@@ -18,10 +19,14 @@ class CommuteFilterRoadTrafficEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CommuteFilter:
-    allow_imprecise_addresses: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowImpreciseAddresses' }})
-    commute_method: Optional[CommuteFilterCommuteMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commuteMethod' }})
-    departure_time: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'departureTime' }})
-    road_traffic: Optional[CommuteFilterRoadTrafficEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roadTraffic' }})
-    start_coordinates: Optional[latlng.LatLng] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startCoordinates' }})
-    travel_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'travelDuration' }})
+    r"""CommuteFilter
+    Input only. Parameters needed for commute search.
+    """
+    
+    allow_imprecise_addresses: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowImpreciseAddresses') }})
+    commute_method: Optional[CommuteFilterCommuteMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commuteMethod') }})
+    departure_time: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('departureTime') }})
+    road_traffic: Optional[CommuteFilterRoadTrafficEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roadTraffic') }})
+    start_coordinates: Optional[LatLng] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startCoordinates') }})
+    travel_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('travelDuration') }})
     

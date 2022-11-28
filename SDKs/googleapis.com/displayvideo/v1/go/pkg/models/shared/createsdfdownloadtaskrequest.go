@@ -16,6 +16,8 @@ const (
 	CreateSdfDownloadTaskRequestVersionEnumSdfVersion55          CreateSdfDownloadTaskRequestVersionEnum = "SDF_VERSION_5_5"
 )
 
+// CreateSdfDownloadTaskRequest
+// Request message for [SdfDownloadTaskService.CreateSdfDownloadTask].
 type CreateSdfDownloadTaskRequest struct {
 	AdvertiserID          *string                                  `json:"advertiserId,omitempty"`
 	IDFilter              *IDFilter                                `json:"idFilter,omitempty"`

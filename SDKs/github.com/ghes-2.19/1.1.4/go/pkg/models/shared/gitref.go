@@ -6,6 +6,8 @@ type GitRefObject struct {
 	URL  string `json:"url"`
 }
 
+// GitRef
+// Git references within a repository
 type GitRef struct {
 	NodeID string       `json:"node_id"`
 	Object GitRefObject `json:"object"`

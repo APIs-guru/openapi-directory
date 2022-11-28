@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AirbyteStreamAndConfiguration } from "./airbytestreamandconfiguration";
+
 
 
 // AirbyteCatalog
@@ -8,6 +8,6 @@ import { AirbyteStreamAndConfiguration } from "./airbytestreamandconfiguration";
  * describes the available schema (catalog).
 **/
 export class AirbyteCatalog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=streams", elemType: shared.AirbyteStreamAndConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=streams", elemType: AirbyteStreamAndConfiguration })
   streams: AirbyteStreamAndConfiguration[];
 }

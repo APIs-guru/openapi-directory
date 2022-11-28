@@ -5,7 +5,7 @@ import (
 )
 
 type DcimDeviceRolesCreateRequest struct {
-	Request shared.DeviceRole `request:"mediaType=application/json"`
+	Request shared.DeviceRoleInput `request:"mediaType=application/json"`
 }
 
 type DcimDeviceRolesCreateResponse struct {

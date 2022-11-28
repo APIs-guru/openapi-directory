@@ -8,6 +8,8 @@ const (
 	GoogleAppsCardV1BorderStyleTypeEnumStroke                GoogleAppsCardV1BorderStyleTypeEnum = "STROKE"
 )
 
+// GoogleAppsCardV1BorderStyle
+// Represents the complete border style applied to items in a widget.
 type GoogleAppsCardV1BorderStyle struct {
 	CornerRadius *int32                               `json:"cornerRadius,omitempty"`
 	StrokeColor  *Color                               `json:"strokeColor,omitempty"`

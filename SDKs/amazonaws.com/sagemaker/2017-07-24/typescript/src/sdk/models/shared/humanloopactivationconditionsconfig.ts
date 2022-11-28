@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HumanLoopActivationConditionsConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines under what conditions SageMaker creates a human loop. Used within . See for the required format of activation conditions.
 **/
 export class HumanLoopActivationConditionsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HumanLoopActivationConditions" })
+  @SpeakeasyMetadata({ data: "json, name=HumanLoopActivationConditions" })
   humanLoopActivationConditions: string;
 }

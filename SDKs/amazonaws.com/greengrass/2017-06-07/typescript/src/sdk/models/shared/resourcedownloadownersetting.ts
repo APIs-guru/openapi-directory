@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionEnum } from "./permissionenum";
+
 
 
 // ResourceDownloadOwnerSetting
@@ -7,9 +8,9 @@ import { PermissionEnum } from "./permissionenum";
  * The owner setting for downloaded machine learning resources.
 **/
 export class ResourceDownloadOwnerSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupOwner" })
+  @SpeakeasyMetadata({ data: "json, name=GroupOwner" })
   groupOwner: string;
 
-  @Metadata({ data: "json, name=GroupPermission" })
+  @SpeakeasyMetadata({ data: "json, name=GroupPermission" })
   groupPermission: PermissionEnum;
 }

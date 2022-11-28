@@ -8,6 +8,8 @@ const (
 	TextClassificationDatasetMetadataClassificationTypeEnumMultilabel                    TextClassificationDatasetMetadataClassificationTypeEnum = "MULTILABEL"
 )
 
+// TextClassificationDatasetMetadata
+// Dataset metadata for classification.
 type TextClassificationDatasetMetadata struct {
 	ClassificationType *TextClassificationDatasetMetadataClassificationTypeEnum `json:"classificationType,omitempty"`
 }

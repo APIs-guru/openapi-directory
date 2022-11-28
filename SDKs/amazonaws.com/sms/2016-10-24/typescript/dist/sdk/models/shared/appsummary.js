@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppLaunchConfigurationStatusEnum } from "./applaunchconfigurationstatusenum";
 import { LaunchDetails } from "./launchdetails";
 import { AppLaunchStatusEnum } from "./applaunchstatusenum";
@@ -39,79 +39,79 @@ var AppSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], AppSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=importedAppId" }),
+        SpeakeasyMetadata({ data: "json, name=importedAppId" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "importedAppId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModified" }),
+        SpeakeasyMetadata({ data: "json, name=lastModified" }),
         __metadata("design:type", Date)
     ], AppSummary.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=latestReplicationTime" }),
+        SpeakeasyMetadata({ data: "json, name=latestReplicationTime" }),
         __metadata("design:type", Date)
     ], AppSummary.prototype, "latestReplicationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchConfigurationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=launchConfigurationStatus" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "launchConfigurationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchDetails" }),
+        SpeakeasyMetadata({ data: "json, name=launchDetails" }),
         __metadata("design:type", LaunchDetails)
     ], AppSummary.prototype, "launchDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchStatus" }),
+        SpeakeasyMetadata({ data: "json, name=launchStatus" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "launchStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchStatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=launchStatusMessage" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "launchStatusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicationConfigurationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=replicationConfigurationStatus" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "replicationConfigurationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=replicationStatus" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "replicationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicationStatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=replicationStatusMessage" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "replicationStatusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleName" }),
+        SpeakeasyMetadata({ data: "json, name=roleName" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "roleName", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], AppSummary.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalServerGroups" }),
+        SpeakeasyMetadata({ data: "json, name=totalServerGroups" }),
         __metadata("design:type", Number)
     ], AppSummary.prototype, "totalServerGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalServers" }),
+        SpeakeasyMetadata({ data: "json, name=totalServers" }),
         __metadata("design:type", Number)
     ], AppSummary.prototype, "totalServers", void 0);
     return AppSummary;

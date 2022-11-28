@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import patchcompliancelevel_enum
-from . import patchdeploymentstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PatchStatus:
-    approval_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApprovalDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    compliance_level: Optional[patchcompliancelevel_enum.PatchComplianceLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComplianceLevel' }})
-    deployment_status: Optional[patchdeploymentstatus_enum.PatchDeploymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeploymentStatus' }})
+    r"""PatchStatus
+    Information about the approval status of a patch.
+    """
+    
+    approval_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApprovalDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    compliance_level: Optional[PatchComplianceLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComplianceLevel') }})
+    deployment_status: Optional[PatchDeploymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeploymentStatus') }})
     

@@ -14,13 +14,13 @@ type PostCoursesRootContentIDPermissionsUserEmailPermissionToBeGrantedToTheUser 
 	IsReviewer *bool `json:"isReviewer,omitempty"`
 }
 
+type PostCoursesRootContentIDPermissionsUserEmail201ApplicationJSON struct {
+	ContentID *string `json:"contentId,omitempty"`
+}
+
 type PostCoursesRootContentIDPermissionsUserEmailRequest struct {
 	PathParams PostCoursesRootContentIDPermissionsUserEmailPathParams
 	Request    PostCoursesRootContentIDPermissionsUserEmailPermissionToBeGrantedToTheUser `request:"mediaType=application/json"`
-}
-
-type PostCoursesRootContentIDPermissionsUserEmail201ApplicationJSON struct {
-	ContentID *string `json:"contentId,omitempty"`
 }
 
 type PostCoursesRootContentIDPermissionsUserEmailResponse struct {

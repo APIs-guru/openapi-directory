@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ClientCertificate
 /**
  * <p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p> <div class="remarks">Client certificates are used to authenticate an API by the backend server. To authenticate an API client (or user), use IAM roles and policies, a custom <a>Authorizer</a> or an Amazon Cognito user pool.</div> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html">Use Client-Side Certificate</a> </div>
@@ -33,27 +33,27 @@ var ClientCertificate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientCertificateId" }),
+        SpeakeasyMetadata({ data: "json, name=clientCertificateId" }),
         __metadata("design:type", String)
     ], ClientCertificate.prototype, "clientCertificateId", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdDate" }),
+        SpeakeasyMetadata({ data: "json, name=createdDate" }),
         __metadata("design:type", Date)
     ], ClientCertificate.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ClientCertificate.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=expirationDate" }),
+        SpeakeasyMetadata({ data: "json, name=expirationDate" }),
         __metadata("design:type", Date)
     ], ClientCertificate.prototype, "expirationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=pemEncodedCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=pemEncodedCertificate" }),
         __metadata("design:type", String)
     ], ClientCertificate.prototype, "pemEncodedCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], ClientCertificate.prototype, "tags", void 0);
     return ClientCertificate;

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigIpmi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary_port" })
+  @SpeakeasyMetadata({ data: "json, name=primary_port" })
   primaryPort?: number;
 
-  @Metadata({ data: "json, name=secure_port" })
+  @SpeakeasyMetadata({ data: "json, name=secure_port" })
   securePort?: number;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

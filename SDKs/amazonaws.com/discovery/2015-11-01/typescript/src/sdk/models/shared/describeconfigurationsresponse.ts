@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurations" })
+  @SpeakeasyMetadata({ data: "json, name=configurations" })
   configurations?: Map<string, string>[];
 }

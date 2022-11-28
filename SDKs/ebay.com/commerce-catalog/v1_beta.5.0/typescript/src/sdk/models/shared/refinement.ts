@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AspectDistribution } from "./aspectdistribution";
+
 
 
 // Refinement
@@ -8,9 +8,9 @@ import { AspectDistribution } from "./aspectdistribution";
  * This type identifies a product category and the aspects associated with that category. Each aspect distribution container returns the distribution of values that have been used for the aspect.
 **/
 export class Refinement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspectDistributions", elemType: shared.AspectDistribution })
+  @SpeakeasyMetadata({ data: "json, name=aspectDistributions", elemType: AspectDistribution })
   aspectDistributions?: AspectDistribution[];
 
-  @Metadata({ data: "json, name=dominantCategoryId" })
+  @SpeakeasyMetadata({ data: "json, name=dominantCategoryId" })
   dominantCategoryId?: string;
 }

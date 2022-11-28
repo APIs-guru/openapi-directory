@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNotificationsTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.NotificationType })
+  @SpeakeasyMetadata({ elemType: shared.NotificationType })
   notificationTypes?: shared.NotificationType[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

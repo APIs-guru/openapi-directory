@@ -4,6 +4,8 @@ type CreateNetworkGroupPolicyPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits
+// The bandwidth limits object, specifying upload and download speed for clients bound to the group policy. These are only enforced if 'settings' is set to 'custom'.
 type CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits struct {
 	LimitDown *int64 `json:"limitDown,omitempty"`
 	LimitUp   *int64 `json:"limitUp,omitempty"`
@@ -17,6 +19,9 @@ const (
 	CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnumCustom         CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum = "custom"
 )
 
+// CreateNetworkGroupPolicyRequestBodyBandwidth
+//
+//	The bandwidth settings for clients bound to your group policy.
 type CreateNetworkGroupPolicyRequestBodyBandwidth struct {
 	BandwidthLimits *CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits `json:"bandwidthLimits,omitempty"`
 	Settings        *CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum    `json:"settings,omitempty"`
@@ -52,6 +57,8 @@ const (
 	CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnumCustom         CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum = "custom"
 )
 
+// CreateNetworkGroupPolicyRequestBodyBonjourForwarding
+// The Bonjour settings for your group policy. Only valid if your network has a wireless configuration.
 type CreateNetworkGroupPolicyRequestBodyBonjourForwarding struct {
 	Rules    []CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules       `json:"rules,omitempty"`
 	Settings *CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum `json:"settings,omitempty"`
@@ -65,6 +72,8 @@ const (
 	CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnumOverride       CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum = "override"
 )
 
+// CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns
+// Settings for allowed URL patterns
 type CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns struct {
 	Patterns []string                                                                           `json:"patterns,omitempty"`
 	Settings *CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum `json:"settings,omitempty"`
@@ -78,6 +87,8 @@ const (
 	CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnumOverride       CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum = "override"
 )
 
+// CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories
+// Settings for blocked URL categories
 type CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories struct {
 	Categories []string                                                                             `json:"categories,omitempty"`
 	Settings   *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum `json:"settings,omitempty"`
@@ -91,11 +102,15 @@ const (
 	CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnumOverride       CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum = "override"
 )
 
+// CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns
+// Settings for blocked URL patterns
 type CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns struct {
 	Patterns []string                                                                           `json:"patterns,omitempty"`
 	Settings *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum `json:"settings,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodyContentFiltering
+// The content filtering settings for your group policy
 type CreateNetworkGroupPolicyRequestBodyContentFiltering struct {
 	AllowedURLPatterns   *CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns   `json:"allowedUrlPatterns,omitempty"`
 	BlockedURLCategories *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories `json:"blockedUrlCategories,omitempty"`
@@ -156,11 +171,16 @@ type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingR
 	Value string                                                                                             `json:"value"`
 }
 
+// CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits
+// The bandwidth limits object, specifying the upload ('limitUp') and download ('limitDown') speed in Kbps. These are only enforced if 'settings' is set to 'custom'.
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits struct {
 	LimitDown *int64 `json:"limitDown,omitempty"`
 	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits
+//
+//	An object describing the bandwidth settings for your rule.
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits struct {
 	BandwidthLimits *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits,omitempty"`
 	Settings        *string                                                                                                                 `json:"settings,omitempty"`
@@ -174,6 +194,9 @@ type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingR
 	Priority                 *string                                                                                                  `json:"priority,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping
+//
+//	The firewall and traffic shaping rules and settings for your policy.
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping struct {
 	L3FirewallRules     []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules     `json:"l3FirewallRules,omitempty"`
 	L7FirewallRules     []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules     `json:"l7FirewallRules,omitempty"`
@@ -181,48 +204,65 @@ type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping struct {
 	TrafficShapingRules []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules `json:"trafficShapingRules,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodySchedulingFriday
+// The schedule object for Friday.
 type CreateNetworkGroupPolicyRequestBodySchedulingFriday struct {
 	Active *bool   `json:"active,omitempty"`
 	From   *string `json:"from,omitempty"`
 	To     *string `json:"to,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodySchedulingMonday
+// The schedule object for Monday.
 type CreateNetworkGroupPolicyRequestBodySchedulingMonday struct {
 	Active *bool   `json:"active,omitempty"`
 	From   *string `json:"from,omitempty"`
 	To     *string `json:"to,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodySchedulingSaturday
+// The schedule object for Saturday.
 type CreateNetworkGroupPolicyRequestBodySchedulingSaturday struct {
 	Active *bool   `json:"active,omitempty"`
 	From   *string `json:"from,omitempty"`
 	To     *string `json:"to,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodySchedulingSunday
+// The schedule object for Sunday.
 type CreateNetworkGroupPolicyRequestBodySchedulingSunday struct {
 	Active *bool   `json:"active,omitempty"`
 	From   *string `json:"from,omitempty"`
 	To     *string `json:"to,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodySchedulingThursday
+// The schedule object for Thursday.
 type CreateNetworkGroupPolicyRequestBodySchedulingThursday struct {
 	Active *bool   `json:"active,omitempty"`
 	From   *string `json:"from,omitempty"`
 	To     *string `json:"to,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodySchedulingTuesday
+// The schedule object for Tuesday.
 type CreateNetworkGroupPolicyRequestBodySchedulingTuesday struct {
 	Active *bool   `json:"active,omitempty"`
 	From   *string `json:"from,omitempty"`
 	To     *string `json:"to,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodySchedulingWednesday
+// The schedule object for Wednesday.
 type CreateNetworkGroupPolicyRequestBodySchedulingWednesday struct {
 	Active *bool   `json:"active,omitempty"`
 	From   *string `json:"from,omitempty"`
 	To     *string `json:"to,omitempty"`
 }
 
+// CreateNetworkGroupPolicyRequestBodyScheduling
+//
+//	The schedule for the group policy. Schedules are applied to days of the week.
 type CreateNetworkGroupPolicyRequestBodyScheduling struct {
 	Enabled   *bool                                                   `json:"enabled,omitempty"`
 	Friday    *CreateNetworkGroupPolicyRequestBodySchedulingFriday    `json:"friday,omitempty"`
@@ -249,6 +289,8 @@ const (
 	CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnumCustom         CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum = "custom"
 )
 
+// CreateNetworkGroupPolicyRequestBodyVlanTagging
+// The VLAN tagging settings for your group policy. Only available if your network has a wireless configuration.
 type CreateNetworkGroupPolicyRequestBodyVlanTagging struct {
 	Settings *CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum `json:"settings,omitempty"`
 	VlanID   *string                                                     `json:"vlanId,omitempty"`

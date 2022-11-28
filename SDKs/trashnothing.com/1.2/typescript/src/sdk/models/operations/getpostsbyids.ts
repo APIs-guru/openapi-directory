@@ -1,59 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPostsByIdsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=post_ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=post_ids" })
   postIds: string;
 }
 
 
-export class GetPostsByIdsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Implicit: shared.SchemeOauth2Implicit;
-}
-
-
-export class GetPostsByIdsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Code: shared.SchemeOauth2Code;
-}
-
-
-export class GetPostsByIdsSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetPostsByIdsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetPostsByIdsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Implicit?: shared.SchemeOauth2Implicit;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetPostsByIdsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Code?: shared.SchemeOauth2Code;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetPostsByIdsSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetPostsByIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPostsByIdsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPostsByIdsSecurity;
 }
 
 
 export class GetPostsByIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Post })
+  @SpeakeasyMetadata({ elemType: shared.Post })
   posts?: shared.Post[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

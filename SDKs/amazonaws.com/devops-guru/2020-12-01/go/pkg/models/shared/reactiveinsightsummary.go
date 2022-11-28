@@ -1,5 +1,8 @@
 package shared
 
+// ReactiveInsightSummary
+//
+//	Information about a reactive insight. This object is returned by <code>DescribeInsight.</code>
 type ReactiveInsightSummary struct {
 	ID                 *string              `json:"Id,omitempty"`
 	InsightTimeRange   *InsightTimeRange    `json:"InsightTimeRange,omitempty"`

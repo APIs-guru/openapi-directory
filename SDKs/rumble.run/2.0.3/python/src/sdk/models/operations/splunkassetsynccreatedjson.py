@@ -12,18 +12,18 @@ class SplunkAssetSyncCreatedJSONQueryParams:
 
 @dataclass
 class SplunkAssetSyncCreatedJSONSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class SplunkAssetSyncCreatedJSONRequest:
-    query_params: SplunkAssetSyncCreatedJSONQueryParams = field(default=None)
-    security: SplunkAssetSyncCreatedJSONSecurity = field(default=None)
+    query_params: SplunkAssetSyncCreatedJSONQueryParams = field()
+    security: SplunkAssetSyncCreatedJSONSecurity = field()
     
 
 @dataclass
 class SplunkAssetSyncCreatedJSONResponse:
+    content_type: str = field()
+    status_code: int = field()
     assets_with_checkpoint: Optional[shared.AssetsWithCheckpoint] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

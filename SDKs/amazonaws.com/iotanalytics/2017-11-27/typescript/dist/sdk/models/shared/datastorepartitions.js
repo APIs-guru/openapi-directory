@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DatastorePartition } from "./datastorepartition";
 // DatastorePartitions
 /**
  *  Contains information about the partition dimensions in a data store.
@@ -34,7 +34,7 @@ var DatastorePartitions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=partitions", elemType: shared.DatastorePartition }),
+        SpeakeasyMetadata({ data: "json, name=partitions", elemType: DatastorePartition }),
         __metadata("design:type", Array)
     ], DatastorePartitions.prototype, "partitions", void 0);
     return DatastorePartitions;

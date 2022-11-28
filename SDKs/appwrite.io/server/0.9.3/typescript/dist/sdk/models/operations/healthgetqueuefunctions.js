@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var HealthGetQueueFunctionsSecurity = /** @class */ (function (_super) {
     __extends(HealthGetQueueFunctionsSecurity, _super);
@@ -30,11 +30,11 @@ var HealthGetQueueFunctionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], HealthGetQueueFunctionsSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], HealthGetQueueFunctionsSecurity.prototype, "project", void 0);
     return HealthGetQueueFunctionsSecurity;
@@ -46,7 +46,7 @@ var HealthGetQueueFunctionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", HealthGetQueueFunctionsSecurity)
     ], HealthGetQueueFunctionsRequest.prototype, "security", void 0);
     return HealthGetQueueFunctionsRequest;
@@ -58,11 +58,11 @@ var HealthGetQueueFunctionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], HealthGetQueueFunctionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], HealthGetQueueFunctionsResponse.prototype, "statusCode", void 0);
     return HealthGetQueueFunctionsResponse;

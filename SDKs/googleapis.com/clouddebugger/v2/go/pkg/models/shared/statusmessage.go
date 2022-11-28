@@ -13,6 +13,8 @@ const (
 	StatusMessageRefersToEnumVariableValue            StatusMessageRefersToEnum = "VARIABLE_VALUE"
 )
 
+// StatusMessage
+// Represents a contextual status message. The message can indicate an error or informational status, and refer to specific parts of the containing object. For example, the `Breakpoint.status` field can indicate an error referring to the `BREAKPOINT_SOURCE_LOCATION` with the message `Location not found`.
 type StatusMessage struct {
 	Description *FormatMessage             `json:"description,omitempty"`
 	IsError     *bool                      `json:"isError,omitempty"`

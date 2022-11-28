@@ -1,0 +1,45 @@
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+
+export const DeleteMemberServerList = [
+	"https://chat.twilio.com",
+] as const;
+
+
+export class DeleteMemberPathParams extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ChannelSid" })
+  channelSid: string;
+
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ServiceSid" })
+  serviceSid: string;
+
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" })
+  sid: string;
+}
+
+
+export class DeleteMemberSecurity extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+
+
+export class DeleteMemberRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: DeleteMemberPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteMemberSecurity;
+}
+
+
+export class DeleteMemberResponse extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  contentType: string;
+
+  @SpeakeasyMetadata()
+  statusCode: number;
+}

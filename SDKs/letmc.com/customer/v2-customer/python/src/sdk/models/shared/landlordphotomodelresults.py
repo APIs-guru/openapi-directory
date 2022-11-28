@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import landlordphotomodel
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LandlordPhotoModelResults:
-    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Count' }})
-    data: Optional[List[landlordphotomodel.LandlordPhotoModel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Data' }})
+    r"""LandlordPhotoModelResults
+    Holds results from a paged query returning LandlordPhotoModel values
+    """
+    
+    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Count') }})
+    data: Optional[List[LandlordPhotoModel]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Data') }})
     

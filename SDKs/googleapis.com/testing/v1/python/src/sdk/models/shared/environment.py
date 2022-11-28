@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import androiddevice
-from . import iosdevice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Environment:
-    android_device: Optional[androiddevice.AndroidDevice] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'androidDevice' }})
-    ios_device: Optional[iosdevice.IosDevice] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iosDevice' }})
+    r"""Environment
+    The environment in which the test is run.
+    """
+    
+    android_device: Optional[AndroidDevice] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('androidDevice') }})
+    ios_device: Optional[IosDevice] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iosDevice') }})
     

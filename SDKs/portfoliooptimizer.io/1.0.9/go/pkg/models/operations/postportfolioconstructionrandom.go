@@ -13,16 +13,16 @@ type PostPortfolioConstructionRandomRequestBody struct {
 	Portfolios  *int64                                                 `json:"portfolios,omitempty"`
 }
 
-type PostPortfolioConstructionRandomRequest struct {
-	Request PostPortfolioConstructionRandomRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioConstructionRandom200ApplicationJSONPortfolios struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
 }
 
 type PostPortfolioConstructionRandom200ApplicationJSON struct {
 	Portfolios []PostPortfolioConstructionRandom200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioConstructionRandomRequest struct {
+	Request PostPortfolioConstructionRandomRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioConstructionRandomResponse struct {

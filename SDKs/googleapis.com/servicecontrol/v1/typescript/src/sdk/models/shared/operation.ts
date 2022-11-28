@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogEntry } from "./logentry";
 import { MetricValueSet } from "./metricvalueset";
 import { QuotaProperties } from "./quotaproperties";
 import { ResourceInfo } from "./resourceinfo";
 import { TraceSpan } from "./tracespan";
 
+
 export enum OperationImportanceEnum {
-    Low = "LOW"
-,    High = "HIGH"
-,    Debug = "DEBUG"
+    Low = "LOW",
+    High = "HIGH",
+    Debug = "DEBUG"
 }
 
 
@@ -18,42 +18,42 @@ export enum OperationImportanceEnum {
  * Represents information regarding an operation.
 **/
 export class Operation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerId" })
+  @SpeakeasyMetadata({ data: "json, name=consumerId" })
   consumerId?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=importance" })
+  @SpeakeasyMetadata({ data: "json, name=importance" })
   importance?: OperationImportanceEnum;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=logEntries", elemType: shared.LogEntry })
+  @SpeakeasyMetadata({ data: "json, name=logEntries", elemType: LogEntry })
   logEntries?: LogEntry[];
 
-  @Metadata({ data: "json, name=metricValueSets", elemType: shared.MetricValueSet })
+  @SpeakeasyMetadata({ data: "json, name=metricValueSets", elemType: MetricValueSet })
   metricValueSets?: MetricValueSet[];
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=operationName" })
+  @SpeakeasyMetadata({ data: "json, name=operationName" })
   operationName?: string;
 
-  @Metadata({ data: "json, name=quotaProperties" })
+  @SpeakeasyMetadata({ data: "json, name=quotaProperties" })
   quotaProperties?: QuotaProperties;
 
-  @Metadata({ data: "json, name=resources", elemType: shared.ResourceInfo })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: ResourceInfo })
   resources?: ResourceInfo[];
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=traceSpans", elemType: shared.TraceSpan })
+  @SpeakeasyMetadata({ data: "json, name=traceSpans", elemType: TraceSpan })
   traceSpans?: TraceSpan[];
 
-  @Metadata({ data: "json, name=userLabels" })
+  @SpeakeasyMetadata({ data: "json, name=userLabels" })
   userLabels?: Map<string, string>;
 }

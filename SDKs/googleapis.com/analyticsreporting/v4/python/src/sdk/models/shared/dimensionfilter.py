@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DimensionFilterOperatorEnum(str, Enum):
     OPERATOR_UNSPECIFIED = "OPERATOR_UNSPECIFIED"
@@ -18,9 +20,13 @@ class DimensionFilterOperatorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DimensionFilter:
-    case_sensitive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'caseSensitive' }})
-    dimension_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionName' }})
-    expressions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expressions' }})
-    not_: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'not' }})
-    operator: Optional[DimensionFilterOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
+    r"""DimensionFilter
+    Dimension filter specifies the filtering options on a dimension.
+    """
+    
+    case_sensitive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('caseSensitive') }})
+    dimension_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionName') }})
+    expressions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expressions') }})
+    not_: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('not') }})
+    operator: Optional[DimensionFilterOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
     

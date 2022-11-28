@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CreateDataExporterConfigSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class CreateDataExporterConfigRequest:
+    security: CreateDataExporterConfigSecurity = field()
     request: Optional[shared.DataExporterConfig] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateDataExporterConfigSecurity = field(default=None)
     
 
 @dataclass
 class CreateDataExporterConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     data_exporter_config: Optional[shared.DataExporterConfig] = field(default=None)
-    status_code: int = field(default=None)
     

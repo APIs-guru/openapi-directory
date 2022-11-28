@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnrolledServiceEnrollmentLevelEnum {
-    EnrollmentLevelUnspecified = "ENROLLMENT_LEVEL_UNSPECIFIED"
-,    BlockAll = "BLOCK_ALL"
+    EnrollmentLevelUnspecified = "ENROLLMENT_LEVEL_UNSPECIFIED",
+    BlockAll = "BLOCK_ALL"
 }
 
 
@@ -11,9 +12,9 @@ export enum EnrolledServiceEnrollmentLevelEnum {
  * Represents the enrollment of a cloud resource into a specific service.
 **/
 export class EnrolledService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudProduct" })
+  @SpeakeasyMetadata({ data: "json, name=cloudProduct" })
   cloudProduct?: string;
 
-  @Metadata({ data: "json, name=enrollmentLevel" })
+  @SpeakeasyMetadata({ data: "json, name=enrollmentLevel" })
   enrollmentLevel?: EnrolledServiceEnrollmentLevelEnum;
 }

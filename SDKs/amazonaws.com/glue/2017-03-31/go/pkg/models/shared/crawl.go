@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Crawl
+// The details of a crawl in the workflow.
 type Crawl struct {
 	CompletedOn  *time.Time      `json:"CompletedOn,omitempty"`
 	ErrorMessage *string         `json:"ErrorMessage,omitempty"`

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DatafeedFormat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=columnDelimiter" })
   columnDelimiter?: string;
 
-  @Metadata({ data: "json, name=fileEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=fileEncoding" })
   fileEncoding?: string;
 
-  @Metadata({ data: "json, name=quotingMode" })
+  @SpeakeasyMetadata({ data: "json, name=quotingMode" })
   quotingMode?: string;
 }

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiV2PredictionsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" })
   xRapidApiKey?: string;
 }
 
 
-export class GetApiV2PredictionsRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: GetApiV2PredictionsHeaders;
-}
-
-
 export class GetApiV2Predictions404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Map<string, any>;
 }
 
 
+export class GetApiV2PredictionsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: GetApiV2PredictionsHeaders;
+}
+
+
 export class GetApiV2PredictionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getApiV2Predictions404ApplicationJsonObject?: GetApiV2Predictions404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

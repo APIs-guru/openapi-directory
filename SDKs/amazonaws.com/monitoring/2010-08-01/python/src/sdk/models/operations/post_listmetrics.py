@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListMetricsActionEnum(str, Enum):
     LIST_METRICS = "ListMetrics"
@@ -10,9 +14,9 @@ class PostListMetricsVersionEnum(str, Enum):
 
 @dataclass
 class PostListMetricsQueryParams:
-    action: PostListMetricsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostListMetricsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListMetricsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostListMetricsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,14 +32,14 @@ class PostListMetricsHeaders:
 
 @dataclass
 class PostListMetricsRequest:
-    query_params: PostListMetricsQueryParams = field(default=None)
-    headers: PostListMetricsHeaders = field(default=None)
+    headers: PostListMetricsHeaders = field()
+    query_params: PostListMetricsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListMetricsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

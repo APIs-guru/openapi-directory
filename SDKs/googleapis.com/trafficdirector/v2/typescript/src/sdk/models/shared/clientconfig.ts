@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Node } from "./node";
 import { PerXdsConfig } from "./perxdsconfig";
+
 
 
 // ClientConfig
@@ -9,9 +9,9 @@ import { PerXdsConfig } from "./perxdsconfig";
  * All xds configs for a particular client.
 **/
 export class ClientConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=node" })
+  @SpeakeasyMetadata({ data: "json, name=node" })
   node?: Node;
 
-  @Metadata({ data: "json, name=xdsConfig", elemType: shared.PerXdsConfig })
+  @SpeakeasyMetadata({ data: "json, name=xdsConfig", elemType: PerXdsConfig })
   xdsConfig?: PerXdsConfig[];
 }

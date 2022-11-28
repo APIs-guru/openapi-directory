@@ -11,13 +11,13 @@ class UsersListQueryParams:
 
 @dataclass
 class UsersListRequest:
-    query_params: UsersListQueryParams = field(default=None)
+    query_params: UsersListQueryParams = field()
     
 
 @dataclass
 class UsersListResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     simple_users: Optional[List[shared.SimpleUser]] = field(default=None)
     

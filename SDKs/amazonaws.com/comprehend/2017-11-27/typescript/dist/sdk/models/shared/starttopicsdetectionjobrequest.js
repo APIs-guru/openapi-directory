@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputDataConfig } from "./inputdataconfig";
 import { OutputDataConfig } from "./outputdataconfig";
+import { Tag } from "./tag";
 import { VpcConfig } from "./vpcconfig";
 var StartTopicsDetectionJobRequest = /** @class */ (function (_super) {
     __extends(StartTopicsDetectionJobRequest, _super);
@@ -33,39 +33,39 @@ var StartTopicsDetectionJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientRequestToken" }),
         __metadata("design:type", String)
     ], StartTopicsDetectionJobRequest.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" }),
         __metadata("design:type", String)
     ], StartTopicsDetectionJobRequest.prototype, "dataAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=InputDataConfig" }),
         __metadata("design:type", InputDataConfig)
     ], StartTopicsDetectionJobRequest.prototype, "inputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobName" }),
+        SpeakeasyMetadata({ data: "json, name=JobName" }),
         __metadata("design:type", String)
     ], StartTopicsDetectionJobRequest.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumberOfTopics" }),
+        SpeakeasyMetadata({ data: "json, name=NumberOfTopics" }),
         __metadata("design:type", Number)
     ], StartTopicsDetectionJobRequest.prototype, "numberOfTopics", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=OutputDataConfig" }),
         __metadata("design:type", OutputDataConfig)
     ], StartTopicsDetectionJobRequest.prototype, "outputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], StartTopicsDetectionJobRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VolumeKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=VolumeKmsKeyId" }),
         __metadata("design:type", String)
     ], StartTopicsDetectionJobRequest.prototype, "volumeKmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", VpcConfig)
     ], StartTopicsDetectionJobRequest.prototype, "vpcConfig", void 0);
     return StartTopicsDetectionJobRequest;

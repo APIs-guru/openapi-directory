@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateServiceRoleToAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=AssociatedAt" })
   associatedAt?: string;
 }

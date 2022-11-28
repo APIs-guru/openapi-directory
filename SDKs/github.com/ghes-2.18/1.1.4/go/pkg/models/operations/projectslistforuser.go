@@ -22,14 +22,14 @@ type ProjectsListForUserQueryParams struct {
 	State   *ProjectsListForUserStateEnum `queryParam:"style=form,explode=true,name=state"`
 }
 
-type ProjectsListForUserRequest struct {
-	PathParams  ProjectsListForUserPathParams
-	QueryParams ProjectsListForUserQueryParams
-}
-
 type ProjectsListForUser415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ProjectsListForUserRequest struct {
+	PathParams  ProjectsListForUserPathParams
+	QueryParams ProjectsListForUserQueryParams
 }
 
 type ProjectsListForUserResponse struct {

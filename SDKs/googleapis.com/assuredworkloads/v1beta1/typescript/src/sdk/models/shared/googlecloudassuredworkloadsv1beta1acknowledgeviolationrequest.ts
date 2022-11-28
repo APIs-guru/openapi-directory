@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest
@@ -6,6 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for acknowledging the violation Next Id: 4
 **/
 export class GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=nonCompliantOrgPolicy" })
+  nonCompliantOrgPolicy?: string;
 }

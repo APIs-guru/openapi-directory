@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Permission } from "./permission";
 /**
  * The response containing permissions which can be tested on a resource.

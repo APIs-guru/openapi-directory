@@ -25,15 +25,15 @@ type ProjectsUpdateRequestBody struct {
 	State                  *string                                              `json:"state,omitempty"`
 }
 
-type ProjectsUpdateRequest struct {
-	PathParams ProjectsUpdatePathParams
-	Request    *ProjectsUpdateRequestBody `request:"mediaType=application/json"`
-}
-
 type ProjectsUpdate403ApplicationJSON struct {
 	DocumentationURL *string  `json:"documentation_url,omitempty"`
 	Errors           []string `json:"errors,omitempty"`
 	Message          *string  `json:"message,omitempty"`
+}
+
+type ProjectsUpdateRequest struct {
+	PathParams ProjectsUpdatePathParams
+	Request    *ProjectsUpdateRequestBody `request:"mediaType=application/json"`
 }
 
 type ProjectsUpdateResponse struct {

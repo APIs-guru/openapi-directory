@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class DeleteProjectPathParams:
-    project_id: float = field(default=None, metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    project_id: float = field(metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +16,19 @@ class DeleteProjectQueryParams:
 
 @dataclass
 class DeleteProjectSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteProjectRequest:
-    path_params: DeleteProjectPathParams = field(default=None)
-    query_params: DeleteProjectQueryParams = field(default=None)
-    security: DeleteProjectSecurity = field(default=None)
+    path_params: DeleteProjectPathParams = field()
+    query_params: DeleteProjectQueryParams = field()
+    security: DeleteProjectSecurity = field()
     
 
 @dataclass
 class DeleteProjectResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     

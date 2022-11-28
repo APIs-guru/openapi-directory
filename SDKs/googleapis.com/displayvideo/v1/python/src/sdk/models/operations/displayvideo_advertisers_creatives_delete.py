@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersCreativesDeletePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    creative_id: str = field(default=None, metadata={'path_param': { 'field_name': 'creativeId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    creative_id: str = field(metadata={'path_param': { 'field_name': 'creativeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DisplayvideoAdvertisersCreativesDeleteQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersCreativesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersCreativesDeleteRequest:
-    path_params: DisplayvideoAdvertisersCreativesDeletePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersCreativesDeleteQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersCreativesDeleteSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersCreativesDeletePathParams = field()
+    query_params: DisplayvideoAdvertisersCreativesDeleteQueryParams = field()
+    security: DisplayvideoAdvertisersCreativesDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersCreativesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

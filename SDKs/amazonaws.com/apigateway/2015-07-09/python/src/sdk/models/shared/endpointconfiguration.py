@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import endpointtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EndpointConfiguration:
-    types: Optional[List[endpointtype_enum.EndpointTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'types' }})
-    vpc_endpoint_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpcEndpointIds' }})
+    r"""EndpointConfiguration
+    The endpoint configuration to indicate the types of endpoints an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>) has. 
+    """
+    
+    types: Optional[List[EndpointTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('types') }})
+    vpc_endpoint_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vpcEndpointIds') }})
     

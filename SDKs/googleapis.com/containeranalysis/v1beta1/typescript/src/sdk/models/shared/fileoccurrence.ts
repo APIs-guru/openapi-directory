@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { License } from "./license";
+
 
 
 // FileOccurrence
@@ -7,27 +8,27 @@ import { License } from "./license";
  * FileOccurrence represents an SPDX File Information section: https://spdx.github.io/spdx-spec/4-file-information/
 **/
 export class FileOccurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributions" })
+  @SpeakeasyMetadata({ data: "json, name=attributions" })
   attributions?: string[];
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=contributors" })
+  @SpeakeasyMetadata({ data: "json, name=contributors" })
   contributors?: string[];
 
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=filesLicenseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=filesLicenseInfo" })
   filesLicenseInfo?: string[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=licenseConcluded" })
+  @SpeakeasyMetadata({ data: "json, name=licenseConcluded" })
   licenseConcluded?: License;
 
-  @Metadata({ data: "json, name=notice" })
+  @SpeakeasyMetadata({ data: "json, name=notice" })
   notice?: string;
 }

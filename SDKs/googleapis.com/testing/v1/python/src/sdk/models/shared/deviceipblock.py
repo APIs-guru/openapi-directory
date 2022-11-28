@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import date
+from sdk import utils
+from . import *
 
 class DeviceIPBlockFormEnum(str, Enum):
     DEVICE_FORM_UNSPECIFIED = "DEVICE_FORM_UNSPECIFIED"
@@ -13,7 +18,11 @@ class DeviceIPBlockFormEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeviceIPBlock:
-    added_date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addedDate' }})
-    block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    form: Optional[DeviceIPBlockFormEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'form' }})
+    r"""DeviceIPBlock
+    A single device IP block
+    """
+    
+    added_date: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('addedDate') }})
+    block: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('block') }})
+    form: Optional[DeviceIPBlockFormEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('form') }})
     

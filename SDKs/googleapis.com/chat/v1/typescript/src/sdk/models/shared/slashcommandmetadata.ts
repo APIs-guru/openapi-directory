@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
 
+
 export enum SlashCommandMetadataTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Add = "ADD"
-,    Invoke = "INVOKE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Add = "ADD",
+    Invoke = "INVOKE"
 }
 
 
@@ -13,18 +14,18 @@ export enum SlashCommandMetadataTypeEnum {
  * Annotation metadata for slash commands (/).
 **/
 export class SlashCommandMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bot" })
+  @SpeakeasyMetadata({ data: "json, name=bot" })
   bot?: User;
 
-  @Metadata({ data: "json, name=commandId" })
+  @SpeakeasyMetadata({ data: "json, name=commandId" })
   commandId?: string;
 
-  @Metadata({ data: "json, name=commandName" })
+  @SpeakeasyMetadata({ data: "json, name=commandName" })
   commandName?: string;
 
-  @Metadata({ data: "json, name=triggersDialog" })
+  @SpeakeasyMetadata({ data: "json, name=triggersDialog" })
   triggersDialog?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SlashCommandMetadataTypeEnum;
 }

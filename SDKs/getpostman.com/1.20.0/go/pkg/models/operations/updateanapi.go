@@ -13,11 +13,6 @@ type UpdateAnAPIRequestBody struct {
 	API *UpdateAnAPIRequestBodyAPI `json:"api,omitempty"`
 }
 
-type UpdateAnAPIRequest struct {
-	PathParams UpdateAnAPIPathParams
-	Request    *UpdateAnAPIRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateAnAPI200ApplicationJSONAPI struct {
 	CreatedAt   *string `json:"createdAt,omitempty"`
 	CreatedBy   *string `json:"createdBy,omitempty"`
@@ -30,6 +25,11 @@ type UpdateAnAPI200ApplicationJSONAPI struct {
 
 type UpdateAnAPI200ApplicationJSON struct {
 	API *UpdateAnAPI200ApplicationJSONAPI `json:"api,omitempty"`
+}
+
+type UpdateAnAPIRequest struct {
+	PathParams UpdateAnAPIPathParams
+	Request    *UpdateAnAPIRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateAnAPIResponse struct {

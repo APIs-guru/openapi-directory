@@ -1,15 +1,17 @@
 package shared
 
-type SdkInfoLanguageEnum string
+type SDKInfoLanguageEnum string
 
 const (
-	SdkInfoLanguageEnumUnknown SdkInfoLanguageEnum = "UNKNOWN"
-	SdkInfoLanguageEnumJava    SdkInfoLanguageEnum = "JAVA"
-	SdkInfoLanguageEnumPython  SdkInfoLanguageEnum = "PYTHON"
-	SdkInfoLanguageEnumGo      SdkInfoLanguageEnum = "GO"
+	SdkInfoLanguageEnumUnknown SDKInfoLanguageEnum = "UNKNOWN"
+	SdkInfoLanguageEnumJava    SDKInfoLanguageEnum = "JAVA"
+	SdkInfoLanguageEnumPython  SDKInfoLanguageEnum = "PYTHON"
+	SdkInfoLanguageEnumGo      SDKInfoLanguageEnum = "GO"
 )
 
-type SdkInfo struct {
-	Language *SdkInfoLanguageEnum `json:"language,omitempty"`
+// SDKInfo
+// SDK Information.
+type SDKInfo struct {
+	Language *SDKInfoLanguageEnum `json:"language,omitempty"`
 	Version  *string              `json:"version,omitempty"`
 }

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmendmentSearchItem } from "./amendmentsearchitem";
 
 
+
 export class AmendmentSearchItemSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.AmendmentSearchItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: AmendmentSearchItem })
   items?: AmendmentSearchItem[];
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

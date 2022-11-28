@@ -1,221 +1,222 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSchedulesScheduleDSubIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sub_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sub_id" })
   subId: string;
 }
 
 
 export class GetSchedulesScheduleDSubIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
   sortHideNull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
   sortNullOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
   sortNullsLast?: boolean;
 }
 
 
-export class GetSchedulesScheduleDSubIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetSchedulesScheduleDSubIdPathParams;
-
-  @Metadata()
-  queryParams: GetSchedulesScheduleDSubIdQueryParams;
-}
-
-
 export class GetSchedulesScheduleDSubIdDefaultApplicationJsonResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action_code" })
+  @SpeakeasyMetadata({ data: "json, name=action_code" })
   actionCode?: string;
 
-  @Metadata({ data: "json, name=action_code_full" })
+  @SpeakeasyMetadata({ data: "json, name=action_code_full" })
   actionCodeFull?: string;
 
-  @Metadata({ data: "json, name=amount_incurred_period" })
+  @SpeakeasyMetadata({ data: "json, name=amount_incurred_period" })
   amountIncurredPeriod?: number;
 
-  @Metadata({ data: "json, name=candidate_first_name" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_first_name" })
   candidateFirstName?: string;
 
-  @Metadata({ data: "json, name=candidate_id" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_id" })
   candidateId?: string;
 
-  @Metadata({ data: "json, name=candidate_last_name" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_last_name" })
   candidateLastName?: string;
 
-  @Metadata({ data: "json, name=candidate_office" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_office" })
   candidateOffice?: string;
 
-  @Metadata({ data: "json, name=candidate_office_district" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_office_district" })
   candidateOfficeDistrict?: string;
 
-  @Metadata({ data: "json, name=candidate_office_state" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_office_state" })
   candidateOfficeState?: string;
 
-  @Metadata({ data: "json, name=candidate_office_state_full" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_office_state_full" })
   candidateOfficeStateFull?: string;
 
-  @Metadata({ data: "json, name=canidate_name" })
+  @SpeakeasyMetadata({ data: "json, name=canidate_name" })
   canidateName?: string;
 
-  @Metadata({ data: "json, name=committee" })
+  @SpeakeasyMetadata({ data: "json, name=committee" })
   committee?: shared.CommitteeHistory;
 
-  @Metadata({ data: "json, name=committee_id" })
+  @SpeakeasyMetadata({ data: "json, name=committee_id" })
   committeeId?: string;
 
-  @Metadata({ data: "json, name=committee_name" })
+  @SpeakeasyMetadata({ data: "json, name=committee_name" })
   committeeName?: string;
 
-  @Metadata({ data: "json, name=conduit_committee_city" })
+  @SpeakeasyMetadata({ data: "json, name=conduit_committee_city" })
   conduitCommitteeCity?: string;
 
-  @Metadata({ data: "json, name=conduit_committee_id" })
+  @SpeakeasyMetadata({ data: "json, name=conduit_committee_id" })
   conduitCommitteeId?: string;
 
-  @Metadata({ data: "json, name=conduit_committee_name" })
+  @SpeakeasyMetadata({ data: "json, name=conduit_committee_name" })
   conduitCommitteeName?: string;
 
-  @Metadata({ data: "json, name=conduit_committee_state" })
+  @SpeakeasyMetadata({ data: "json, name=conduit_committee_state" })
   conduitCommitteeState?: string;
 
-  @Metadata({ data: "json, name=conduit_committee_street1" })
+  @SpeakeasyMetadata({ data: "json, name=conduit_committee_street1" })
   conduitCommitteeStreet1?: string;
 
-  @Metadata({ data: "json, name=conduit_committee_street2" })
+  @SpeakeasyMetadata({ data: "json, name=conduit_committee_street2" })
   conduitCommitteeStreet2?: string;
 
-  @Metadata({ data: "json, name=conduit_committee_zip" })
+  @SpeakeasyMetadata({ data: "json, name=conduit_committee_zip" })
   conduitCommitteeZip?: number;
 
-  @Metadata({ data: "json, name=creditor_debtor_city" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_city" })
   creditorDebtorCity?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_first_name" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_first_name" })
   creditorDebtorFirstName?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_id" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_id" })
   creditorDebtorId?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_last_name" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_last_name" })
   creditorDebtorLastName?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_middle_name" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_middle_name" })
   creditorDebtorMiddleName?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_name" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_name" })
   creditorDebtorName?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_prefix" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_prefix" })
   creditorDebtorPrefix?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_state" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_state" })
   creditorDebtorState?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_street1" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_street1" })
   creditorDebtorStreet1?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_street2" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_street2" })
   creditorDebtorStreet2?: string;
 
-  @Metadata({ data: "json, name=creditor_debtor_suffix" })
+  @SpeakeasyMetadata({ data: "json, name=creditor_debtor_suffix" })
   creditorDebtorSuffix?: string;
 
-  @Metadata({ data: "json, name=election_cycle" })
+  @SpeakeasyMetadata({ data: "json, name=election_cycle" })
   electionCycle?: number;
 
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: string;
 
-  @Metadata({ data: "json, name=file_number" })
+  @SpeakeasyMetadata({ data: "json, name=file_number" })
   fileNumber?: number;
 
-  @Metadata({ data: "json, name=filing_form" })
+  @SpeakeasyMetadata({ data: "json, name=filing_form" })
   filingForm?: string;
 
-  @Metadata({ data: "json, name=image_number" })
+  @SpeakeasyMetadata({ data: "json, name=image_number" })
   imageNumber?: string;
 
-  @Metadata({ data: "json, name=line_number" })
+  @SpeakeasyMetadata({ data: "json, name=line_number" })
   lineNumber?: string;
 
-  @Metadata({ data: "json, name=link_id" })
+  @SpeakeasyMetadata({ data: "json, name=link_id" })
   linkId?: number;
 
-  @Metadata({ data: "json, name=load_date" })
+  @SpeakeasyMetadata({ data: "json, name=load_date" })
   loadDate?: Date;
 
-  @Metadata({ data: "json, name=nature_of_debt" })
+  @SpeakeasyMetadata({ data: "json, name=nature_of_debt" })
   natureOfDebt?: string;
 
-  @Metadata({ data: "json, name=original_sub_id" })
+  @SpeakeasyMetadata({ data: "json, name=original_sub_id" })
   originalSubId?: number;
 
-  @Metadata({ data: "json, name=outstanding_balance_beginning_of_period" })
+  @SpeakeasyMetadata({ data: "json, name=outstanding_balance_beginning_of_period" })
   outstandingBalanceBeginningOfPeriod?: number;
 
-  @Metadata({ data: "json, name=outstanding_balance_close_of_period" })
+  @SpeakeasyMetadata({ data: "json, name=outstanding_balance_close_of_period" })
   outstandingBalanceCloseOfPeriod?: number;
 
-  @Metadata({ data: "json, name=payment_period" })
+  @SpeakeasyMetadata({ data: "json, name=payment_period" })
   paymentPeriod?: number;
 
-  @Metadata({ data: "json, name=pdf_url" })
+  @SpeakeasyMetadata({ data: "json, name=pdf_url" })
   pdfUrl?: string;
 
-  @Metadata({ data: "json, name=report_type" })
+  @SpeakeasyMetadata({ data: "json, name=report_type" })
   reportType?: string;
 
-  @Metadata({ data: "json, name=report_year" })
+  @SpeakeasyMetadata({ data: "json, name=report_year" })
   reportYear?: number;
 
-  @Metadata({ data: "json, name=schedule_type" })
+  @SpeakeasyMetadata({ data: "json, name=schedule_type" })
   scheduleType?: string;
 
-  @Metadata({ data: "json, name=schedule_type_full" })
+  @SpeakeasyMetadata({ data: "json, name=schedule_type_full" })
   scheduleTypeFull?: string;
 
-  @Metadata({ data: "json, name=sub_id" })
+  @SpeakeasyMetadata({ data: "json, name=sub_id" })
   subId?: string;
 
-  @Metadata({ data: "json, name=transaction_id" })
+  @SpeakeasyMetadata({ data: "json, name=transaction_id" })
   transactionId?: string;
 }
 
 
 export class GetSchedulesScheduleDSubIdDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: shared.OffsetInfo;
 
-  @Metadata({ data: "json, name=results", elemType: operations.GetSchedulesScheduleDSubIdDefaultApplicationJsonResults })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: GetSchedulesScheduleDSubIdDefaultApplicationJsonResults })
   results?: GetSchedulesScheduleDSubIdDefaultApplicationJsonResults[];
 }
 
 
+export class GetSchedulesScheduleDSubIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetSchedulesScheduleDSubIdPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetSchedulesScheduleDSubIdQueryParams;
+}
+
+
 export class GetSchedulesScheduleDSubIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSchedulesScheduleDSubIdDefaultApplicationJsonObject?: GetSchedulesScheduleDSubIdDefaultApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

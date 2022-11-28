@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateInAppTemplatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=template-name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=template-name" })
   templateName: string;
 }
 
 
 export class CreateInAppTemplateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,63 +38,63 @@ export class CreateInAppTemplateHeaders extends SpeakeasyBase {
  * InApp Template Request.
 **/
 export class CreateInAppTemplateRequestBodyInAppTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Content", elemType: shared.InAppMessageContent })
+  @SpeakeasyMetadata({ data: "json, name=Content", elemType: shared.InAppMessageContent })
   content?: shared.InAppMessageContent[];
 
-  @Metadata({ data: "json, name=CustomConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CustomConfig" })
   customConfig?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Layout" })
+  @SpeakeasyMetadata({ data: "json, name=Layout" })
   layout?: shared.LayoutEnum;
 
-  @Metadata({ data: "json, name=TemplateDescription" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateDescription" })
   templateDescription?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateInAppTemplateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InAppTemplateRequest" })
+  @SpeakeasyMetadata({ data: "json, name=InAppTemplateRequest" })
   inAppTemplateRequest: CreateInAppTemplateRequestBodyInAppTemplateRequest;
 }
 
 
 export class CreateInAppTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateInAppTemplatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateInAppTemplateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateInAppTemplateRequestBody;
 }
 
 
 export class CreateInAppTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createInAppTemplateResponse?: shared.CreateInAppTemplateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

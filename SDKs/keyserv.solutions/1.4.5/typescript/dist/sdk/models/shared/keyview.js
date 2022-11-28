@@ -22,54 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var KeyView = /** @class */ (function (_super) {
     __extends(KeyView, _super);
     function KeyView() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", String)
     ], KeyView.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=callbackOnModify" }),
+        SpeakeasyMetadata({ data: "json, name=callbackOnModify" }),
         __metadata("design:type", Boolean)
     ], KeyView.prototype, "callbackOnModify", void 0);
     __decorate([
-        Metadata({ data: "json, name=callbackUrl" }),
+        SpeakeasyMetadata({ data: "json, name=callbackUrl" }),
         __metadata("design:type", String)
     ], KeyView.prototype, "callbackUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=commenced" }),
+        SpeakeasyMetadata({ data: "json, name=commenced" }),
         __metadata("design:type", Date)
     ], KeyView.prototype, "commenced", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Date)
     ], KeyView.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=current" }),
+        SpeakeasyMetadata({ data: "json, name=current" }),
         __metadata("design:type", Boolean)
     ], KeyView.prototype, "current", void 0);
     __decorate([
-        Metadata({ data: "json, name=custom" }),
+        SpeakeasyMetadata({ data: "json, name=custom" }),
         __metadata("design:type", Object)
     ], KeyView.prototype, "custom", void 0);
     __decorate([
-        Metadata({ data: "json, name=frequency" }),
+        SpeakeasyMetadata({ data: "json, name=frequency" }),
         __metadata("design:type", String)
     ], KeyView.prototype, "frequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], KeyView.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serial" }),
+        SpeakeasyMetadata({ data: "json, name=serial" }),
         __metadata("design:type", String)
     ], KeyView.prototype, "serial", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", Date)
     ], KeyView.prototype, "updated", void 0);
     return KeyView;

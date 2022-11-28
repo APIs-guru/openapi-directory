@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StoryIdFileOoxmlautomationidGetPathParams = /** @class */ (function (_super) {
     __extends(StoryIdFileOoxmlautomationidGetPathParams, _super);
     function StoryIdFileOoxmlautomationidGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], StoryIdFileOoxmlautomationidGetPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ooxml_automation_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ooxml_automation_id" }),
         __metadata("design:type", String)
     ], StoryIdFileOoxmlautomationidGetPathParams.prototype, "ooxmlAutomationId", void 0);
     return StoryIdFileOoxmlautomationidGetPathParams;
@@ -45,7 +45,7 @@ var StoryIdFileOoxmlautomationidGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdFileOoxmlautomationidGetPathParams)
     ], StoryIdFileOoxmlautomationidGetRequest.prototype, "pathParams", void 0);
     return StoryIdFileOoxmlautomationidGetRequest;
@@ -57,27 +57,27 @@ var StoryIdFileOoxmlautomationidGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdFileOoxmlautomationidGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], StoryIdFileOoxmlautomationidGetResponse.prototype, "excelSpreadsheet", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], StoryIdFileOoxmlautomationidGetResponse.prototype, "powerpointPresentation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryIdFileOoxmlautomationidGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], StoryIdFileOoxmlautomationidGetResponse.prototype, "wordDocument", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryIdFileOoxmlautomationidGetResponse.prototype, "problemDetail", void 0);
     return StoryIdFileOoxmlautomationidGetResponse;

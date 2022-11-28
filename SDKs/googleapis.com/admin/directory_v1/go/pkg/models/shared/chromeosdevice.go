@@ -9,11 +9,15 @@ type ChromeOsDeviceActiveTimeRanges struct {
 	Date       *time.Time `json:"date,omitempty"`
 }
 
+// ChromeOsDeviceCPUInfoLogicalCpusCStates
+// Status of a single C-state. C-states are various modes the CPU can transition to in order to use more or less power.
 type ChromeOsDeviceCPUInfoLogicalCpusCStates struct {
 	DisplayName     *string `json:"displayName,omitempty"`
 	SessionDuration *string `json:"sessionDuration,omitempty"`
 }
 
+// ChromeOsDeviceCPUInfoLogicalCpus
+// Status of a single logical CPU.
 type ChromeOsDeviceCPUInfoLogicalCpus struct {
 	CStates                    []ChromeOsDeviceCPUInfoLogicalCpusCStates `json:"cStates,omitempty"`
 	CurrentScalingFrequencyKhz *int32                                    `json:"currentScalingFrequencyKhz,omitempty"`
@@ -21,6 +25,8 @@ type ChromeOsDeviceCPUInfoLogicalCpus struct {
 	MaxScalingFrequencyKhz     *int32                                    `json:"maxScalingFrequencyKhz,omitempty"`
 }
 
+// ChromeOsDeviceCPUInfo
+// CPU specs for a CPU.
 type ChromeOsDeviceCPUInfo struct {
 	Architecture     *string                            `json:"architecture,omitempty"`
 	LogicalCpus      []ChromeOsDeviceCPUInfoLogicalCpus `json:"logicalCpus,omitempty"`
@@ -56,11 +62,15 @@ type ChromeOsDeviceDiskVolumeReports struct {
 	VolumeInfo []ChromeOsDeviceDiskVolumeReportsVolumeInfo `json:"volumeInfo,omitempty"`
 }
 
+// ChromeOsDeviceLastKnownNetwork
+// Information for an ip address.
 type ChromeOsDeviceLastKnownNetwork struct {
 	IPAddress    *string `json:"ipAddress,omitempty"`
 	WanIPAddress *string `json:"wanIpAddress,omitempty"`
 }
 
+// ChromeOsDeviceRecentUsers
+// A list of recent device users, in descending order, by last login time.
 type ChromeOsDeviceRecentUsers struct {
 	Email *string `json:"email,omitempty"`
 	Type  *string `json:"type,omitempty"`
@@ -78,6 +88,8 @@ type ChromeOsDeviceSystemRAMFreeReports struct {
 	SystemRAMFreeInfo []string   `json:"systemRamFreeInfo,omitempty"`
 }
 
+// ChromeOsDeviceTpmVersionInfo
+// Trusted Platform Module (TPM) (Read-only)
 type ChromeOsDeviceTpmVersionInfo struct {
 	Family          *string `json:"family,omitempty"`
 	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
@@ -87,6 +99,8 @@ type ChromeOsDeviceTpmVersionInfo struct {
 	VendorSpecific  *string `json:"vendorSpecific,omitempty"`
 }
 
+// ChromeOsDevice
+// Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
 type ChromeOsDevice struct {
 	ActiveTimeRanges     []ChromeOsDeviceActiveTimeRanges     `json:"activeTimeRanges,omitempty"`
 	AnnotatedAssetID     *string                              `json:"annotatedAssetId,omitempty"`

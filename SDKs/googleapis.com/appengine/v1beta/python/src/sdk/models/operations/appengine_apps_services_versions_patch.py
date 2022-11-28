@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppengineAppsServicesVersionsPatchPathParams:
-    apps_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
-    services_id: str = field(default=None, metadata={'path_param': { 'field_name': 'servicesId', 'style': 'simple', 'explode': False }})
-    versions_id: str = field(default=None, metadata={'path_param': { 'field_name': 'versionsId', 'style': 'simple', 'explode': False }})
+    apps_id: str = field(metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
+    services_id: str = field(metadata={'path_param': { 'field_name': 'servicesId', 'style': 'simple', 'explode': False }})
+    versions_id: str = field(metadata={'path_param': { 'field_name': 'versionsId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +32,21 @@ class AppengineAppsServicesVersionsPatchQueryParams:
 
 @dataclass
 class AppengineAppsServicesVersionsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsServicesVersionsPatchRequest:
-    path_params: AppengineAppsServicesVersionsPatchPathParams = field(default=None)
-    query_params: AppengineAppsServicesVersionsPatchQueryParams = field(default=None)
+    path_params: AppengineAppsServicesVersionsPatchPathParams = field()
+    query_params: AppengineAppsServicesVersionsPatchQueryParams = field()
+    security: AppengineAppsServicesVersionsPatchSecurity = field()
     request: Optional[shared.Version] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AppengineAppsServicesVersionsPatchSecurity = field(default=None)
     
 
 @dataclass
 class AppengineAppsServicesVersionsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,17 +11,17 @@ class PostAddedMoviesQueryParams:
 
 @dataclass
 class PostAddedMoviesSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class PostAddedMoviesRequest:
-    query_params: PostAddedMoviesQueryParams = field(default=None)
-    security: PostAddedMoviesSecurity = field(default=None)
+    query_params: PostAddedMoviesQueryParams = field()
+    security: PostAddedMoviesSecurity = field()
     
 
 @dataclass
 class PostAddedMoviesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

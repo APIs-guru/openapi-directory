@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationModelOptions } from "./classificationmodeloptions";
+
 
 
 // Features
@@ -7,21 +8,21 @@ import { ClassificationModelOptions } from "./classificationmodeloptions";
  * All available features for sentiment, syntax, and semantic analysis. Setting each one to true will enable that specific analysis for the input.
 **/
 export class Features extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classificationModelOptions" })
+  @SpeakeasyMetadata({ data: "json, name=classificationModelOptions" })
   classificationModelOptions?: ClassificationModelOptions;
 
-  @Metadata({ data: "json, name=classifyText" })
+  @SpeakeasyMetadata({ data: "json, name=classifyText" })
   classifyText?: boolean;
 
-  @Metadata({ data: "json, name=extractDocumentSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=extractDocumentSentiment" })
   extractDocumentSentiment?: boolean;
 
-  @Metadata({ data: "json, name=extractEntities" })
+  @SpeakeasyMetadata({ data: "json, name=extractEntities" })
   extractEntities?: boolean;
 
-  @Metadata({ data: "json, name=extractEntitySentiment" })
+  @SpeakeasyMetadata({ data: "json, name=extractEntitySentiment" })
   extractEntitySentiment?: boolean;
 
-  @Metadata({ data: "json, name=extractSyntax" })
+  @SpeakeasyMetadata({ data: "json, name=extractSyntax" })
   extractSyntax?: boolean;
 }

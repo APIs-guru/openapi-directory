@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnnotateFileResponse } from "./annotatefileresponse";
+
 
 
 // BatchAnnotateFilesResponse
@@ -8,6 +8,6 @@ import { AnnotateFileResponse } from "./annotatefileresponse";
  * A list of file annotation responses.
 **/
 export class BatchAnnotateFilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responses", elemType: shared.AnnotateFileResponse })
+  @SpeakeasyMetadata({ data: "json, name=responses", elemType: AnnotateFileResponse })
   responses?: AnnotateFileResponse[];
 }

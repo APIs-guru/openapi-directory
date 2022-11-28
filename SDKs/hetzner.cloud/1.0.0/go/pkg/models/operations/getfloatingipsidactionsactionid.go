@@ -5,10 +5,8 @@ type GetFloatingIpsIDActionsActionIDPathParams struct {
 	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetFloatingIpsIDActionsActionIDRequest struct {
-	PathParams GetFloatingIpsIDActionsActionIDPathParams
-}
-
+// GetFloatingIpsIDActionsActionIDActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetFloatingIpsIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type GetFloatingIpsIDActionsActionIDActionResponseAction struct {
 
 type GetFloatingIpsIDActionsActionIDActionResponse struct {
 	Action GetFloatingIpsIDActionsActionIDActionResponseAction `json:"action"`
+}
+
+type GetFloatingIpsIDActionsActionIDRequest struct {
+	PathParams GetFloatingIpsIDActionsActionIDPathParams
 }
 
 type GetFloatingIpsIDActionsActionIDResponse struct {

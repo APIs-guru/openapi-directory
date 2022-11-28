@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IceServer } from "./iceserver";
 
 
+
 export class GetIceServerConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IceServerList", elemType: shared.IceServer })
+  @SpeakeasyMetadata({ data: "json, name=IceServerList", elemType: IceServer })
   iceServerList?: IceServer[];
 }

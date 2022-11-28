@@ -1,5 +1,7 @@
 package shared
 
+// CreateEventSubscriptionMessage
+// <p/>
 type CreateEventSubscriptionMessage struct {
 	Enabled          *bool    `json:"Enabled,omitempty"`
 	EventCategories  []string `json:"EventCategories,omitempty"`

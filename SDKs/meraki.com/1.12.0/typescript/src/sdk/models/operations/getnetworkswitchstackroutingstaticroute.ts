@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkSwitchStackRoutingStaticRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=staticRouteId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=staticRouteId" })
   staticRouteId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=switchStackId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=switchStackId" })
   switchStackId: string;
 }
 
 
 export class GetNetworkSwitchStackRoutingStaticRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkSwitchStackRoutingStaticRoutePathParams;
 }
 
 
 export class GetNetworkSwitchStackRoutingStaticRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkSwitchStackRoutingStaticRoute200ApplicationJsonObject?: Map<string, any>;
 }

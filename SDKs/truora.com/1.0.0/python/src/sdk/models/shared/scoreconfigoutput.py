@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import scoreconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ScoreConfigOutput:
-    score_config_by_country: Optional[List[scoreconfig.ScoreConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScoreConfigByCountry' }})
+    r"""ScoreConfigOutput
+    Represents a list of score configurations that apply in the country
+    """
+    
+    score_config_by_country: Optional[List[ScoreConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScoreConfigByCountry') }})
     

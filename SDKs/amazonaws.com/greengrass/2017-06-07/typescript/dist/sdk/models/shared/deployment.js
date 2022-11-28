@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentTypeEnum } from "./deploymenttypeenum";
 // Deployment
 /**
@@ -34,23 +34,23 @@ var Deployment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", String)
     ], Deployment.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentArn" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentArn" }),
         __metadata("design:type", String)
     ], Deployment.prototype, "deploymentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentId" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentId" }),
         __metadata("design:type", String)
     ], Deployment.prototype, "deploymentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentType" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentType" }),
         __metadata("design:type", String)
     ], Deployment.prototype, "deploymentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=GroupArn" }),
         __metadata("design:type", String)
     ], Deployment.prototype, "groupArn", void 0);
     return Deployment;

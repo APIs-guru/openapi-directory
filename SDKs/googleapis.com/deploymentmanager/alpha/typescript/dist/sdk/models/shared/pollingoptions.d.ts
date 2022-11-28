@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Diagnostic } from "./diagnostic";
 export declare class PollingOptions extends SpeakeasyBase {
     diagnostics?: Diagnostic[];

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsS3BucketServerSideEncryptionRule } from "./awss3bucketserversideencryptionrule";
+
 
 
 // AwsS3BucketServerSideEncryptionConfiguration
@@ -8,6 +8,6 @@ import { AwsS3BucketServerSideEncryptionRule } from "./awss3bucketserversideencr
  * The encryption configuration for the S3 bucket.
 **/
 export class AwsS3BucketServerSideEncryptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Rules", elemType: shared.AwsS3BucketServerSideEncryptionRule })
+  @SpeakeasyMetadata({ data: "json, name=Rules", elemType: AwsS3BucketServerSideEncryptionRule })
   rules?: AwsS3BucketServerSideEncryptionRule[];
 }

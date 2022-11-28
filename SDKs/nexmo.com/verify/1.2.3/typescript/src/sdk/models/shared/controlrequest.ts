@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ControlRequestCmdEnum {
-    Cancel = "cancel"
-,    TriggerNextEvent = "trigger_next_event"
+    Cancel = "cancel",
+    TriggerNextEvent = "trigger_next_event"
 }
 
 
 export class ControlRequest extends SpeakeasyBase {
-  @Metadata({ data: "form, name=api_key;" })
+  @SpeakeasyMetadata({ data: "form, name=api_key;" })
   apiKey: string;
 
-  @Metadata({ data: "form, name=api_secret;" })
+  @SpeakeasyMetadata({ data: "form, name=api_secret;" })
   apiSecret: string;
 
-  @Metadata({ data: "form, name=cmd;" })
+  @SpeakeasyMetadata({ data: "form, name=cmd;" })
   cmd: ControlRequestCmdEnum;
 
-  @Metadata({ data: "form, name=request_id;" })
+  @SpeakeasyMetadata({ data: "form, name=request_id;" })
   requestId: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ZipInfo
 /**
  * The zip file information for a zip deployment.
@@ -33,11 +33,11 @@ var ZipInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filesCount" }),
+        SpeakeasyMetadata({ data: "json, name=filesCount" }),
         __metadata("design:type", Number)
     ], ZipInfo.prototype, "filesCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceUrl" }),
+        SpeakeasyMetadata({ data: "json, name=sourceUrl" }),
         __metadata("design:type", String)
     ], ZipInfo.prototype, "sourceUrl", void 0);
     return ZipInfo;

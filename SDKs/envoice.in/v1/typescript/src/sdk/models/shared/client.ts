@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Client extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address, form, name=Address;" })
+  @SpeakeasyMetadata({ data: "json, name=Address, form, name=Address;" })
   address?: string;
 
-  @Metadata({ data: "json, name=ClientCountryId, form, name=ClientCountryId;" })
+  @SpeakeasyMetadata({ data: "json, name=ClientCountryId, form, name=ClientCountryId;" })
   clientCountryId?: number;
 
-  @Metadata({ data: "json, name=ClientCurrencyId, form, name=ClientCurrencyId;" })
+  @SpeakeasyMetadata({ data: "json, name=ClientCurrencyId, form, name=ClientCurrencyId;" })
   clientCurrencyId?: number;
 
-  @Metadata({ data: "json, name=CompanyRegistrationNumber, form, name=CompanyRegistrationNumber;" })
+  @SpeakeasyMetadata({ data: "json, name=CompanyRegistrationNumber, form, name=CompanyRegistrationNumber;" })
   companyRegistrationNumber?: string;
 
-  @Metadata({ data: "json, name=DefaultDueDateInDays, form, name=DefaultDueDateInDays;" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultDueDateInDays, form, name=DefaultDueDateInDays;" })
   defaultDueDateInDays?: number;
 
-  @Metadata({ data: "json, name=Email, form, name=Email;" })
+  @SpeakeasyMetadata({ data: "json, name=Email, form, name=Email;" })
   email?: string;
 
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber, form, name=PhoneNumber;" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber, form, name=PhoneNumber;" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=UiLanguageId, form, name=UiLanguageId;" })
+  @SpeakeasyMetadata({ data: "json, name=UiLanguageId, form, name=UiLanguageId;" })
   uiLanguageId?: number;
 
-  @Metadata({ data: "json, name=UserId, form, name=UserId;" })
+  @SpeakeasyMetadata({ data: "json, name=UserId, form, name=UserId;" })
   userId?: number;
 
-  @Metadata({ data: "json, name=Vat, form, name=Vat;" })
+  @SpeakeasyMetadata({ data: "json, name=Vat, form, name=Vat;" })
   vat?: string;
 }

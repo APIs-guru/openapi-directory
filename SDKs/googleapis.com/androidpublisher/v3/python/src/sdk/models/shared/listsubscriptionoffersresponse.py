@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import subscriptionoffer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListSubscriptionOffersResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    subscription_offers: Optional[List[subscriptionoffer.SubscriptionOffer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptionOffers' }})
+    r"""ListSubscriptionOffersResponse
+    Response message for ListSubscriptionOffers.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    subscription_offers: Optional[List[SubscriptionOffer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscriptionOffers') }})
     

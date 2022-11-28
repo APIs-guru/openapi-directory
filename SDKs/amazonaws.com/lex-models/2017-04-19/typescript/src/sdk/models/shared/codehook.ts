@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CodeHook
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a Lambda function that verifies requests to a bot or fulfills the user's request to a bot..
 **/
 export class CodeHook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageVersion" })
+  @SpeakeasyMetadata({ data: "json, name=messageVersion" })
   messageVersion: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }

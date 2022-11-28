@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DestinationRead } from "./destinationread";
 import { JobStatusEnum } from "./jobstatusenum";
 import { NamespaceDefinitionTypeEnum } from "./namespacedefinitiontypeenum";

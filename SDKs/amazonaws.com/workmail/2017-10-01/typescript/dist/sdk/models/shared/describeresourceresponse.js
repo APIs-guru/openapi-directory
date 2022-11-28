@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BookingOptions } from "./bookingoptions";
 import { EntityStateEnum } from "./entitystateenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";
@@ -32,35 +32,35 @@ var DescribeResourceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BookingOptions" }),
+        SpeakeasyMetadata({ data: "json, name=BookingOptions" }),
         __metadata("design:type", BookingOptions)
     ], DescribeResourceResponse.prototype, "bookingOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisabledDate" }),
+        SpeakeasyMetadata({ data: "json, name=DisabledDate" }),
         __metadata("design:type", Date)
     ], DescribeResourceResponse.prototype, "disabledDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Email" }),
+        SpeakeasyMetadata({ data: "json, name=Email" }),
         __metadata("design:type", String)
     ], DescribeResourceResponse.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnabledDate" }),
+        SpeakeasyMetadata({ data: "json, name=EnabledDate" }),
         __metadata("design:type", Date)
     ], DescribeResourceResponse.prototype, "enabledDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DescribeResourceResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceId" }),
         __metadata("design:type", String)
     ], DescribeResourceResponse.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], DescribeResourceResponse.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], DescribeResourceResponse.prototype, "type", void 0);
     return DescribeResourceResponse;

@@ -1,7 +1,8 @@
 
 
+
 export enum PhaseStatusEnum {
-    Pending = "PENDING"
-,    Success = "SUCCESS"
-,    Error = "ERROR"
+    Pending = "PENDING",
+    Success = "SUCCESS",
+    Error = "ERROR"
 }

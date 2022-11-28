@@ -1,5 +1,7 @@
 package shared
 
+// ProfilerConfigForUpdate
+// Configuration information for updating the Debugger profile parameters, system and framework metrics configurations, and storage paths.
 type ProfilerConfigForUpdate struct {
 	DisableProfiler                 *bool             `json:"DisableProfiler,omitempty"`
 	ProfilingIntervalInMilliseconds *int64            `json:"ProfilingIntervalInMilliseconds,omitempty"`

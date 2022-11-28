@@ -8,6 +8,8 @@ const (
 	GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilterMatchTypeEnumContains             GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilterMatchTypeEnum = "CONTAINS"
 )
 
+// GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilter
+// A filter for a string-type dimension that matches a particular pattern.
 type GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilter struct {
 	CaseSensitive *bool                                                                      `json:"caseSensitive,omitempty"`
 	MatchType     *GoogleAnalyticsAdminV1alphaExpandedDataSetFilterStringFilterMatchTypeEnum `json:"matchType,omitempty"`

@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timeunitstype_enum
-from . import timeunitstype_enum
-from . import timeunitstype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TokenValidityUnitsType:
-    access_token: Optional[timeunitstype_enum.TimeUnitsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccessToken' }})
-    id_token: Optional[timeunitstype_enum.TimeUnitsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdToken' }})
-    refresh_token: Optional[timeunitstype_enum.TimeUnitsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RefreshToken' }})
+    r"""TokenValidityUnitsType
+    The data type for TokenValidityUnits that specifics the time measurements for token validity.
+    """
+    
+    access_token: Optional[TimeUnitsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccessToken') }})
+    id_token: Optional[TimeUnitsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdToken') }})
+    refresh_token: Optional[TimeUnitsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RefreshToken') }})
     

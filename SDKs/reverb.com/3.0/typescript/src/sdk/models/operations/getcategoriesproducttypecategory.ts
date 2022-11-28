@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCategoriesProductTypeCategoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=category" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=category" })
   category: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=product_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=product_type" })
   productType: string;
 }
 
 
 export class GetCategoriesProductTypeCategoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCategoriesProductTypeCategoryPathParams;
 }
 
 
 export class GetCategoriesProductTypeCategoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

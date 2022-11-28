@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductPermission } from "./productpermission";
+
 
 
 // ProductPermissions
@@ -8,9 +8,9 @@ import { ProductPermission } from "./productpermission";
  * Information about the permissions required by a specific app and whether they have been accepted by the enterprise.
 **/
 export class ProductPermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permission", elemType: shared.ProductPermission })
+  @SpeakeasyMetadata({ data: "json, name=permission", elemType: ProductPermission })
   permission?: ProductPermission[];
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 }

@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DealerDbModelsLicenseLicenseActivationTypeEnum {
-    Edt = "EDT"
-,    EdtLite = "EDTLite"
+    Edt = "EDT",
+    EdtLite = "EDTLite"
 }
 
 
 export class DealerDbModelsLicense extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Active" })
+  @SpeakeasyMetadata({ data: "json, name=Active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=DeactivatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=DeactivatedDate" })
   deactivatedDate?: Date;
 
-  @Metadata({ data: "json, name=LicenseActivationType" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseActivationType" })
   licenseActivationType?: DealerDbModelsLicenseLicenseActivationTypeEnum;
 
-  @Metadata({ data: "json, name=LicenseID" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseID" })
   licenseId?: string;
 
-  @Metadata({ data: "json, name=LicenseVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseVersion" })
   licenseVersion?: string;
 
-  @Metadata({ data: "json, name=RefreshDate" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshDate" })
   refreshDate?: Date;
 
-  @Metadata({ data: "json, name=SystemInfo" })
+  @SpeakeasyMetadata({ data: "json, name=SystemInfo" })
   systemInfo?: string;
 
-  @Metadata({ data: "json, name=UpdatedLicenseVersion" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedLicenseVersion" })
   updatedLicenseVersion?: string;
 
-  @Metadata({ data: "json, name=VoucherCode" })
+  @SpeakeasyMetadata({ data: "json, name=VoucherCode" })
   voucherCode?: string;
 }

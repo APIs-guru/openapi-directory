@@ -1,30 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetContentTypeEnum {
-    ApplicationJson = "application/json"
-,    TextHtml = "text/html"
-,    TextXml = "text/xml"
-,    ApplicationXml = "application/xml"
+    ApplicationJson = "application/json",
+    TextHtml = "text/html",
+    TextXml = "text/xml",
+    ApplicationXml = "application/xml"
 }
 
 export enum GetHypermediaEnum {
-    Yes = "yes"
-,    No = "no"
+    Yes = "yes",
+    No = "no"
 }
 
 
 export class GetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=content-type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=content-type" })
   contentType?: GetContentTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hypermedia" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hypermedia" })
   hypermedia?: GetHypermediaEnum;
-}
-
-
-export class GetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetQueryParams;
 }
 
 export enum Get200ApplicationJsonStatusEnum {
@@ -33,21 +28,27 @@ export enum Get200ApplicationJsonStatusEnum {
 
 
 export class Get200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: Get200ApplicationJsonStatusEnum;
 }
 
 
+export class GetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetQueryParams;
+}
+
+
 export class GetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   get200ApplicationJsonObject?: Get200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum CategoryEnum {
-    Payment = "payment"
-,    Payee = "payee"
-,    Debit = "debit"
+    Payment = "payment",
+    Payee = "payee",
+    Debit = "debit"
 }

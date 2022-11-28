@@ -16,20 +16,6 @@ const (
 	InstanceReadReplicasModeEnumReadReplicasEnabled         InstanceReadReplicasModeEnum = "READ_REPLICAS_ENABLED"
 )
 
-type InstanceStateEnum string
-
-const (
-	InstanceStateEnumStateUnspecified InstanceStateEnum = "STATE_UNSPECIFIED"
-	InstanceStateEnumCreating         InstanceStateEnum = "CREATING"
-	InstanceStateEnumReady            InstanceStateEnum = "READY"
-	InstanceStateEnumUpdating         InstanceStateEnum = "UPDATING"
-	InstanceStateEnumDeleting         InstanceStateEnum = "DELETING"
-	InstanceStateEnumRepairing        InstanceStateEnum = "REPAIRING"
-	InstanceStateEnumMaintenance      InstanceStateEnum = "MAINTENANCE"
-	InstanceStateEnumImporting        InstanceStateEnum = "IMPORTING"
-	InstanceStateEnumFailingOver      InstanceStateEnum = "FAILING_OVER"
-)
-
 type InstanceSuspensionReasonsEnum string
 
 const (
@@ -53,6 +39,51 @@ const (
 	InstanceTransitEncryptionModeEnumDisabled                         InstanceTransitEncryptionModeEnum = "DISABLED"
 )
 
+type InstanceStateEnum string
+
+const (
+	InstanceStateEnumStateUnspecified InstanceStateEnum = "STATE_UNSPECIFIED"
+	InstanceStateEnumCreating         InstanceStateEnum = "CREATING"
+	InstanceStateEnumReady            InstanceStateEnum = "READY"
+	InstanceStateEnumUpdating         InstanceStateEnum = "UPDATING"
+	InstanceStateEnumDeleting         InstanceStateEnum = "DELETING"
+	InstanceStateEnumRepairing        InstanceStateEnum = "REPAIRING"
+	InstanceStateEnumMaintenance      InstanceStateEnum = "MAINTENANCE"
+	InstanceStateEnumImporting        InstanceStateEnum = "IMPORTING"
+	InstanceStateEnumFailingOver      InstanceStateEnum = "FAILING_OVER"
+)
+
+// InstanceInput
+// A Memorystore for Redis instance.
+type InstanceInput struct {
+	AlternativeLocationID        *string                            `json:"alternativeLocationId,omitempty"`
+	AuthEnabled                  *bool                              `json:"authEnabled,omitempty"`
+	AuthorizedNetwork            *string                            `json:"authorizedNetwork,omitempty"`
+	AvailableMaintenanceVersions []string                           `json:"availableMaintenanceVersions,omitempty"`
+	ConnectMode                  *InstanceConnectModeEnum           `json:"connectMode,omitempty"`
+	CustomerManagedKey           *string                            `json:"customerManagedKey,omitempty"`
+	DisplayName                  *string                            `json:"displayName,omitempty"`
+	Labels                       map[string]string                  `json:"labels,omitempty"`
+	LocationID                   *string                            `json:"locationId,omitempty"`
+	MaintenancePolicy            *MaintenancePolicyInput            `json:"maintenancePolicy,omitempty"`
+	MaintenanceSchedule          *MaintenanceScheduleInput          `json:"maintenanceSchedule,omitempty"`
+	MaintenanceVersion           *string                            `json:"maintenanceVersion,omitempty"`
+	MemorySizeGb                 *int32                             `json:"memorySizeGb,omitempty"`
+	Name                         *string                            `json:"name,omitempty"`
+	PersistenceConfig            *PersistenceConfigInput            `json:"persistenceConfig,omitempty"`
+	ReadReplicasMode             *InstanceReadReplicasModeEnum      `json:"readReplicasMode,omitempty"`
+	RedisConfigs                 map[string]string                  `json:"redisConfigs,omitempty"`
+	RedisVersion                 *string                            `json:"redisVersion,omitempty"`
+	ReplicaCount                 *int32                             `json:"replicaCount,omitempty"`
+	ReservedIPRange              *string                            `json:"reservedIpRange,omitempty"`
+	SecondaryIPRange             *string                            `json:"secondaryIpRange,omitempty"`
+	SuspensionReasons            []InstanceSuspensionReasonsEnum    `json:"suspensionReasons,omitempty"`
+	Tier                         *InstanceTierEnum                  `json:"tier,omitempty"`
+	TransitEncryptionMode        *InstanceTransitEncryptionModeEnum `json:"transitEncryptionMode,omitempty"`
+}
+
+// Instance
+// A Memorystore for Redis instance.
 type Instance struct {
 	AlternativeLocationID        *string                            `json:"alternativeLocationId,omitempty"`
 	AuthEnabled                  *bool                              `json:"authEnabled,omitempty"`

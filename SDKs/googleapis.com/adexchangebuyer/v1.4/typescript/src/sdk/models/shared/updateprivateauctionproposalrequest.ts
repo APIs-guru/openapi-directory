@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketplaceNote } from "./marketplacenote";
 
 
+
 export class UpdatePrivateAuctionProposalRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalDealId" })
+  @SpeakeasyMetadata({ data: "json, name=externalDealId" })
   externalDealId?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: MarketplaceNote;
 
-  @Metadata({ data: "json, name=proposalRevisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=proposalRevisionNumber" })
   proposalRevisionNumber?: string;
 
-  @Metadata({ data: "json, name=updateAction" })
+  @SpeakeasyMetadata({ data: "json, name=updateAction" })
   updateAction?: string;
 }

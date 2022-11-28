@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserProfile } from "./userprofile";
 import { DriveFolder } from "./drivefolder";
+
 
 
 // Student
@@ -8,15 +9,15 @@ import { DriveFolder } from "./drivefolder";
  * Student in a course.
 **/
 export class Student extends SpeakeasyBase {
-  @Metadata({ data: "json, name=courseId" })
+  @SpeakeasyMetadata({ data: "json, name=courseId" })
   courseId?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: UserProfile;
 
-  @Metadata({ data: "json, name=studentWorkFolder" })
+  @SpeakeasyMetadata({ data: "json, name=studentWorkFolder" })
   studentWorkFolder?: DriveFolder;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

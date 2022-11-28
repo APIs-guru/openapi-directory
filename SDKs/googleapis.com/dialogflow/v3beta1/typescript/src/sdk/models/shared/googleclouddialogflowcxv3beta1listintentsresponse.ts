@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1Intent } from "./googleclouddialogflowcxv3beta1intent";
+
 
 
 // GoogleCloudDialogflowCxV3beta1ListIntentsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowCxV3beta1Intent } from "./googleclouddialogflowcxv
  * The response message for Intents.ListIntents.
 **/
 export class GoogleCloudDialogflowCxV3beta1ListIntentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intents", elemType: shared.GoogleCloudDialogflowCxV3beta1Intent })
+  @SpeakeasyMetadata({ data: "json, name=intents", elemType: GoogleCloudDialogflowCxV3beta1Intent })
   intents?: GoogleCloudDialogflowCxV3beta1Intent[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

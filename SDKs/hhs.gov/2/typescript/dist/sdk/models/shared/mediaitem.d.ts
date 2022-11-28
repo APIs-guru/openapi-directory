@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Campaign } from "./campaign";
 import { ExtendedAttribute } from "./extendedattribute";
 import { Language } from "./language";

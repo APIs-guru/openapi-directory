@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesRunAccessReportPathParams:
-    entity: str = field(default=None, metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
+    entity: str = field(metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AnalyticsadminPropertiesRunAccessReportQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesRunAccessReportSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesRunAccessReportSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class AnalyticsadminPropertiesRunAccessReportSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesRunAccessReportRequest:
-    path_params: AnalyticsadminPropertiesRunAccessReportPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesRunAccessReportQueryParams = field(default=None)
+    path_params: AnalyticsadminPropertiesRunAccessReportPathParams = field()
+    query_params: AnalyticsadminPropertiesRunAccessReportQueryParams = field()
+    security: AnalyticsadminPropertiesRunAccessReportSecurity = field()
     request: Optional[shared.GoogleAnalyticsAdminV1alphaRunAccessReportRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesRunAccessReportSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsadminPropertiesRunAccessReportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_run_access_report_response: Optional[shared.GoogleAnalyticsAdminV1alphaRunAccessReportResponse] = field(default=None)
-    status_code: int = field(default=None)
     

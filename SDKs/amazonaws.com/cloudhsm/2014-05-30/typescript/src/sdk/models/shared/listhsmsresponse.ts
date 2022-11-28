@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListHsmsResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the output of the <code>ListHsms</code> operation.
 **/
 export class ListHsmsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HsmList" })
+  @SpeakeasyMetadata({ data: "json, name=HsmList" })
   hsmList?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

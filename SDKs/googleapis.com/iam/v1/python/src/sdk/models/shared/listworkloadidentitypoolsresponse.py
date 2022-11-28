@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import workloadidentitypool
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListWorkloadIdentityPoolsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    workload_identity_pools: Optional[List[workloadidentitypool.WorkloadIdentityPool]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workloadIdentityPools' }})
+    r"""ListWorkloadIdentityPoolsResponse
+    Response message for ListWorkloadIdentityPools.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    workload_identity_pools: Optional[List[WorkloadIdentityPool]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workloadIdentityPools') }})
     

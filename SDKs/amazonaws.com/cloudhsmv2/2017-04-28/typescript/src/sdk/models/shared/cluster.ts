@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupPolicyEnum } from "./backuppolicyenum";
 import { BackupRetentionPolicy } from "./backupretentionpolicy";
 import { Certificates } from "./certificates";
@@ -8,53 +7,54 @@ import { ClusterStateEnum } from "./clusterstateenum";
 import { Tag } from "./tag";
 
 
+
 // Cluster
 /** 
  * Contains information about an AWS CloudHSM cluster.
 **/
 export class Cluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=BackupPolicy" })
   backupPolicy?: BackupPolicyEnum;
 
-  @Metadata({ data: "json, name=BackupRetentionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=BackupRetentionPolicy" })
   backupRetentionPolicy?: BackupRetentionPolicy;
 
-  @Metadata({ data: "json, name=Certificates" })
+  @SpeakeasyMetadata({ data: "json, name=Certificates" })
   certificates?: Certificates;
 
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=CreateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTimestamp" })
   createTimestamp?: Date;
 
-  @Metadata({ data: "json, name=HsmType" })
+  @SpeakeasyMetadata({ data: "json, name=HsmType" })
   hsmType?: string;
 
-  @Metadata({ data: "json, name=Hsms", elemType: shared.Hsm })
+  @SpeakeasyMetadata({ data: "json, name=Hsms", elemType: Hsm })
   hsms?: Hsm[];
 
-  @Metadata({ data: "json, name=PreCoPassword" })
+  @SpeakeasyMetadata({ data: "json, name=PreCoPassword" })
   preCoPassword?: string;
 
-  @Metadata({ data: "json, name=SecurityGroup" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroup" })
   securityGroup?: string;
 
-  @Metadata({ data: "json, name=SourceBackupId" })
+  @SpeakeasyMetadata({ data: "json, name=SourceBackupId" })
   sourceBackupId?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ClusterStateEnum;
 
-  @Metadata({ data: "json, name=StateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StateMessage" })
   stateMessage?: string;
 
-  @Metadata({ data: "json, name=SubnetMapping" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetMapping" })
   subnetMapping?: Map<string, string>;
 
-  @Metadata({ data: "json, name=TagList", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TagList", elemType: Tag })
   tagList?: Tag[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

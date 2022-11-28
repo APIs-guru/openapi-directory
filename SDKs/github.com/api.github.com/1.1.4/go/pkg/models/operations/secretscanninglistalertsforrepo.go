@@ -22,15 +22,15 @@ type SecretScanningListAlertsForRepoQueryParams struct {
 	State   *SecretScanningListAlertsForRepoStateEnum `queryParam:"style=form,explode=true,name=state"`
 }
 
-type SecretScanningListAlertsForRepoRequest struct {
-	PathParams  SecretScanningListAlertsForRepoPathParams
-	QueryParams SecretScanningListAlertsForRepoQueryParams
-}
-
 type SecretScanningListAlertsForRepo503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type SecretScanningListAlertsForRepoRequest struct {
+	PathParams  SecretScanningListAlertsForRepoPathParams
+	QueryParams SecretScanningListAlertsForRepoQueryParams
 }
 
 type SecretScanningListAlertsForRepoResponse struct {

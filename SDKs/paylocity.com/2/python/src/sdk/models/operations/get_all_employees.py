@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAllEmployeesPathParams:
-    company_id: str = field(default=None, metadata={'path_param': { 'field_name': 'companyId', 'style': 'simple', 'explode': False }})
+    company_id: str = field(metadata={'path_param': { 'field_name': 'companyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,20 +17,20 @@ class GetAllEmployeesQueryParams:
 
 @dataclass
 class GetAllEmployeesSecurity:
-    paylocity_auth: shared.SchemePaylocityAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    paylocity_auth: shared.SchemePaylocityAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAllEmployeesRequest:
-    path_params: GetAllEmployeesPathParams = field(default=None)
-    query_params: GetAllEmployeesQueryParams = field(default=None)
-    security: GetAllEmployeesSecurity = field(default=None)
+    path_params: GetAllEmployeesPathParams = field()
+    query_params: GetAllEmployeesQueryParams = field()
+    security: GetAllEmployeesSecurity = field()
     
 
 @dataclass
 class GetAllEmployeesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     employee_infos: Optional[List[shared.EmployeeInfo]] = field(default=None)
     errors: Optional[List[shared.Error]] = field(default=None)
     

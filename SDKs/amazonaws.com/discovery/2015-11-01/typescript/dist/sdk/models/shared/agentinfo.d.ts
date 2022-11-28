@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AgentNetworkInfo } from "./agentnetworkinfo";
 import { AgentStatusEnum } from "./agentstatusenum";
 /**

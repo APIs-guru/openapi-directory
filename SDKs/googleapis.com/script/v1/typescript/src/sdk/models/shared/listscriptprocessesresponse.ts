@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsScriptTypeProcess } from "./googleappsscripttypeprocess";
+
 
 
 // ListScriptProcessesResponse
@@ -8,9 +8,9 @@ import { GoogleAppsScriptTypeProcess } from "./googleappsscripttypeprocess";
  * Response with the list of Process resources.
 **/
 export class ListScriptProcessesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=processes", elemType: shared.GoogleAppsScriptTypeProcess })
+  @SpeakeasyMetadata({ data: "json, name=processes", elemType: GoogleAppsScriptTypeProcess })
   processes?: GoogleAppsScriptTypeProcess[];
 }

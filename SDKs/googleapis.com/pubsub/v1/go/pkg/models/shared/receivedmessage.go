@@ -1,5 +1,7 @@
 package shared
 
+// ReceivedMessage
+// A message and its corresponding acknowledgment ID.
 type ReceivedMessage struct {
 	AckID           *string        `json:"ackId,omitempty"`
 	DeliveryAttempt *int32         `json:"deliveryAttempt,omitempty"`

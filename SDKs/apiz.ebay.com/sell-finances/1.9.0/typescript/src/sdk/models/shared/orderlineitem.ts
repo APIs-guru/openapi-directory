@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
 import { Fee } from "./fee";
+
 
 
 // OrderLineItem
@@ -9,12 +9,12 @@ import { Fee } from "./fee";
  * This type is used to show the fees that are deducted from a seller payout for each line item in an order.
 **/
 export class OrderLineItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feeBasisAmount" })
+  @SpeakeasyMetadata({ data: "json, name=feeBasisAmount" })
   feeBasisAmount?: Amount;
 
-  @Metadata({ data: "json, name=lineItemId" })
+  @SpeakeasyMetadata({ data: "json, name=lineItemId" })
   lineItemId?: string;
 
-  @Metadata({ data: "json, name=marketplaceFees", elemType: shared.Fee })
+  @SpeakeasyMetadata({ data: "json, name=marketplaceFees", elemType: Fee })
   marketplaceFees?: Fee[];
 }

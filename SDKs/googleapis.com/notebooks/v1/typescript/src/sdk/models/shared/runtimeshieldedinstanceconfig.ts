@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RuntimeShieldedInstanceConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A set of Shielded Instance options. Check [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.
 **/
 export class RuntimeShieldedInstanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableIntegrityMonitoring" })
+  @SpeakeasyMetadata({ data: "json, name=enableIntegrityMonitoring" })
   enableIntegrityMonitoring?: boolean;
 
-  @Metadata({ data: "json, name=enableSecureBoot" })
+  @SpeakeasyMetadata({ data: "json, name=enableSecureBoot" })
   enableSecureBoot?: boolean;
 
-  @Metadata({ data: "json, name=enableVtpm" })
+  @SpeakeasyMetadata({ data: "json, name=enableVtpm" })
   enableVtpm?: boolean;
 }

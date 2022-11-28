@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteIpSetRequest = /** @class */ (function (_super) {
     __extends(DeleteIpSetRequest, _super);
     function DeleteIpSetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeToken" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeToken" }),
         __metadata("design:type", String)
     ], DeleteIpSetRequest.prototype, "changeToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=IPSetId" }),
+        SpeakeasyMetadata({ data: "json, name=IPSetId" }),
         __metadata("design:type", String)
     ], DeleteIpSetRequest.prototype, "ipSetId", void 0);
     return DeleteIpSetRequest;

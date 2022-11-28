@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SigninDetailAllowPersonalUsageEnum {
-    AllowPersonalUsageUnspecified = "ALLOW_PERSONAL_USAGE_UNSPECIFIED"
-,    PersonalUsageAllowed = "PERSONAL_USAGE_ALLOWED"
-,    PersonalUsageDisallowed = "PERSONAL_USAGE_DISALLOWED"
+    AllowPersonalUsageUnspecified = "ALLOW_PERSONAL_USAGE_UNSPECIFIED",
+    PersonalUsageAllowed = "PERSONAL_USAGE_ALLOWED",
+    PersonalUsageDisallowed = "PERSONAL_USAGE_DISALLOWED"
 }
 
 
@@ -12,15 +13,15 @@ export enum SigninDetailAllowPersonalUsageEnum {
  * A resource containing sign in details for an enterprise.
 **/
 export class SigninDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowPersonalUsage" })
+  @SpeakeasyMetadata({ data: "json, name=allowPersonalUsage" })
   allowPersonalUsage?: SigninDetailAllowPersonalUsageEnum;
 
-  @Metadata({ data: "json, name=qrCode" })
+  @SpeakeasyMetadata({ data: "json, name=qrCode" })
   qrCode?: string;
 
-  @Metadata({ data: "json, name=signinEnrollmentToken" })
+  @SpeakeasyMetadata({ data: "json, name=signinEnrollmentToken" })
   signinEnrollmentToken?: string;
 
-  @Metadata({ data: "json, name=signinUrl" })
+  @SpeakeasyMetadata({ data: "json, name=signinUrl" })
   signinUrl?: string;
 }

@@ -41,7 +41,7 @@ type SheetsSpreadsheetsCreateSecurity struct {
 
 type SheetsSpreadsheetsCreateRequest struct {
 	QueryParams SheetsSpreadsheetsCreateQueryParams
-	Request     *shared.Spreadsheet `request:"mediaType=application/json"`
+	Request     *shared.SpreadsheetInput `request:"mediaType=application/json"`
 	Security    SheetsSpreadsheetsCreateSecurity
 }
 

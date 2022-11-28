@@ -1,5 +1,7 @@
 package shared
 
+// EliminationAllianceBackup
+// Backup team called in, may be null.
 type EliminationAllianceBackup struct {
 	In  *string `json:"in,omitempty"`
 	Out *string `json:"out,omitempty"`

@@ -1,6 +1,7 @@
 
 
+
 export enum OperatorTypeEnum {
-    Normalization = "normalization"
-,    Dbt = "dbt"
+    Normalization = "normalization",
+    Dbt = "dbt"
 }

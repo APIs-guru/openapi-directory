@@ -32,7 +32,7 @@ type ContentBuyongoogleprogramsPatchSecurity struct {
 type ContentBuyongoogleprogramsPatchRequest struct {
 	PathParams  ContentBuyongoogleprogramsPatchPathParams
 	QueryParams ContentBuyongoogleprogramsPatchQueryParams
-	Request     *shared.BuyOnGoogleProgramStatus `request:"mediaType=application/json"`
+	Request     *shared.BuyOnGoogleProgramStatusInput `request:"mediaType=application/json"`
 	Security    ContentBuyongoogleprogramsPatchSecurity
 }
 

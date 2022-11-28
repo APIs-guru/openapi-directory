@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudapigeev1developerbalancewallet
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1DeveloperBalance:
-    wallets: Optional[List[googlecloudapigeev1developerbalancewallet.GoogleCloudApigeeV1DeveloperBalanceWallet]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wallets' }})
+    r"""GoogleCloudApigeeV1DeveloperBalance
+    Account balance for the developer.
+    """
+    
+    wallets: Optional[List[GoogleCloudApigeeV1DeveloperBalanceWallet]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wallets') }})
     

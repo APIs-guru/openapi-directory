@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmImage } from "./algorithmimage";
 import { DefaultHyperParameterRanges } from "./defaulthyperparameterranges";
+
 
 
 // Algorithm
@@ -8,33 +9,33 @@ import { DefaultHyperParameterRanges } from "./defaulthyperparameterranges";
  * Describes a custom algorithm.
 **/
 export class Algorithm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithmArn" })
+  @SpeakeasyMetadata({ data: "json, name=algorithmArn" })
   algorithmArn?: string;
 
-  @Metadata({ data: "json, name=algorithmImage" })
+  @SpeakeasyMetadata({ data: "json, name=algorithmImage" })
   algorithmImage?: AlgorithmImage;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=defaultHyperParameterRanges" })
+  @SpeakeasyMetadata({ data: "json, name=defaultHyperParameterRanges" })
   defaultHyperParameterRanges?: DefaultHyperParameterRanges;
 
-  @Metadata({ data: "json, name=defaultHyperParameters" })
+  @SpeakeasyMetadata({ data: "json, name=defaultHyperParameters" })
   defaultHyperParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=defaultResourceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=defaultResourceConfig" })
   defaultResourceConfig?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=trainingInputMode" })
+  @SpeakeasyMetadata({ data: "json, name=trainingInputMode" })
   trainingInputMode?: string;
 }

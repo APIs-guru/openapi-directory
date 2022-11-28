@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class HivePartitioningOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=requirePartitionFilter" })
+  @SpeakeasyMetadata({ data: "json, name=requirePartitionFilter" })
   requirePartitionFilter?: boolean;
 
-  @Metadata({ data: "json, name=sourceUriPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUriPrefix" })
   sourceUriPrefix?: string;
 }

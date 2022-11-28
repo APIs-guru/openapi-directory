@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2inspectconfig
-from . import googleprivacydlpv2contentitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2InspectContentRequest:
-    inspect_config: Optional[googleprivacydlpv2inspectconfig.GooglePrivacyDlpV2InspectConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inspectConfig' }})
-    inspect_template_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inspectTemplateName' }})
-    item: Optional[googleprivacydlpv2contentitem.GooglePrivacyDlpV2ContentItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'item' }})
-    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationId' }})
+    r"""GooglePrivacyDlpV2InspectContentRequest
+    Request to search for potentially sensitive info in a ContentItem.
+    """
+    
+    inspect_config: Optional[GooglePrivacyDlpV2InspectConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inspectConfig') }})
+    inspect_template_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inspectTemplateName') }})
+    item: Optional[GooglePrivacyDlpV2ContentItem] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('item') }})
+    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationId') }})
     

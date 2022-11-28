@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import virtualnodeserviceprovider
-from . import virtualrouterserviceprovider
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualServiceProvider:
-    virtual_node: Optional[virtualnodeserviceprovider.VirtualNodeServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualNode' }})
-    virtual_router: Optional[virtualrouterserviceprovider.VirtualRouterServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualRouter' }})
+    r"""VirtualServiceProvider
+    An object that represents the provider for a virtual service.
+    """
+    
+    virtual_node: Optional[VirtualNodeServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualNode') }})
+    virtual_router: Optional[VirtualRouterServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualRouter') }})
     

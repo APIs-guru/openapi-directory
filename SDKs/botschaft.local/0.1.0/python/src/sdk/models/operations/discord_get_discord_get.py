@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class DiscordGetDiscordGetQueryParams:
+    channel: str = field(metadata={'query_param': { 'field_name': 'channel', 'style': 'form', 'explode': True }})
     base64_message: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'base64_message', 'style': 'form', 'explode': True }})
-    channel: str = field(default=None, metadata={'query_param': { 'field_name': 'channel', 'style': 'form', 'explode': True }})
     message: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'message', 'style': 'form', 'explode': True }})
     
 
@@ -17,14 +17,14 @@ class DiscordGetDiscordGetHeaders:
 
 @dataclass
 class DiscordGetDiscordGetRequest:
-    query_params: DiscordGetDiscordGetQueryParams = field(default=None)
-    headers: DiscordGetDiscordGetHeaders = field(default=None)
+    headers: DiscordGetDiscordGetHeaders = field()
+    query_params: DiscordGetDiscordGetQueryParams = field()
     
 
 @dataclass
 class DiscordGetDiscordGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     discord_get_discord_get_200_application_json_any: Optional[Any] = field(default=None)
     

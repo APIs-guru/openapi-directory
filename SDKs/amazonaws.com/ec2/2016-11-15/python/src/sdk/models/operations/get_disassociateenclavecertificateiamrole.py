@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisassociateEnclaveCertificateIamRoleActionEnum(str, Enum):
     DISASSOCIATE_ENCLAVE_CERTIFICATE_IAM_ROLE = "DisassociateEnclaveCertificateIamRole"
@@ -10,11 +14,11 @@ class GetDisassociateEnclaveCertificateIamRoleVersionEnum(str, Enum):
 
 @dataclass
 class GetDisassociateEnclaveCertificateIamRoleQueryParams:
-    action: GetDisassociateEnclaveCertificateIamRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDisassociateEnclaveCertificateIamRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDisassociateEnclaveCertificateIamRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     certificate_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CertificateArn', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     role_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'RoleArn', 'style': 'form', 'explode': True }})
-    version: GetDisassociateEnclaveCertificateIamRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDisassociateEnclaveCertificateIamRoleHeaders:
 
 @dataclass
 class GetDisassociateEnclaveCertificateIamRoleRequest:
-    query_params: GetDisassociateEnclaveCertificateIamRoleQueryParams = field(default=None)
-    headers: GetDisassociateEnclaveCertificateIamRoleHeaders = field(default=None)
+    headers: GetDisassociateEnclaveCertificateIamRoleHeaders = field()
+    query_params: GetDisassociateEnclaveCertificateIamRoleQueryParams = field()
     
 
 @dataclass
 class GetDisassociateEnclaveCertificateIamRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

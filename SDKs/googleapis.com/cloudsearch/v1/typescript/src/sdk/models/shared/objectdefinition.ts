@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectOptions } from "./objectoptions";
 import { PropertyDefinition } from "./propertydefinition";
+
 
 
 // ObjectDefinition
@@ -9,12 +9,12 @@ import { PropertyDefinition } from "./propertydefinition";
  * The definition for an object within a data source.
 **/
 export class ObjectDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: ObjectOptions;
 
-  @Metadata({ data: "json, name=propertyDefinitions", elemType: shared.PropertyDefinition })
+  @SpeakeasyMetadata({ data: "json, name=propertyDefinitions", elemType: PropertyDefinition })
   propertyDefinitions?: PropertyDefinition[];
 }

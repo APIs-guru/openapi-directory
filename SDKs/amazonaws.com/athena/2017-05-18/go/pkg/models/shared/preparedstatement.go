@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PreparedStatement
+// A prepared SQL statement for use with Athena.
 type PreparedStatement struct {
 	Description      *string    `json:"Description,omitempty"`
 	LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`

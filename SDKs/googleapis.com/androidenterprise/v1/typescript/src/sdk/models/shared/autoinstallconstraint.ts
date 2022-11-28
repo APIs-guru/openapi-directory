@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AutoInstallConstraintChargingStateConstraintEnum {
-    ChargingStateConstraintUnspecified = "chargingStateConstraintUnspecified"
-,    ChargingNotRequired = "chargingNotRequired"
-,    ChargingRequired = "chargingRequired"
+    ChargingStateConstraintUnspecified = "chargingStateConstraintUnspecified",
+    ChargingNotRequired = "chargingNotRequired",
+    ChargingRequired = "chargingRequired"
 }
 
 export enum AutoInstallConstraintDeviceIdleStateConstraintEnum {
-    DeviceIdleStateConstraintUnspecified = "deviceIdleStateConstraintUnspecified"
-,    DeviceIdleNotRequired = "deviceIdleNotRequired"
-,    DeviceIdleRequired = "deviceIdleRequired"
+    DeviceIdleStateConstraintUnspecified = "deviceIdleStateConstraintUnspecified",
+    DeviceIdleNotRequired = "deviceIdleNotRequired",
+    DeviceIdleRequired = "deviceIdleRequired"
 }
 
 export enum AutoInstallConstraintNetworkTypeConstraintEnum {
-    NetworkTypeConstraintUnspecified = "networkTypeConstraintUnspecified"
-,    AnyNetwork = "anyNetwork"
-,    UnmeteredNetwork = "unmeteredNetwork"
+    NetworkTypeConstraintUnspecified = "networkTypeConstraintUnspecified",
+    AnyNetwork = "anyNetwork",
+    UnmeteredNetwork = "unmeteredNetwork"
 }
 
 
@@ -24,12 +25,12 @@ export enum AutoInstallConstraintNetworkTypeConstraintEnum {
  * The auto-install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.
 **/
 export class AutoInstallConstraint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chargingStateConstraint" })
+  @SpeakeasyMetadata({ data: "json, name=chargingStateConstraint" })
   chargingStateConstraint?: AutoInstallConstraintChargingStateConstraintEnum;
 
-  @Metadata({ data: "json, name=deviceIdleStateConstraint" })
+  @SpeakeasyMetadata({ data: "json, name=deviceIdleStateConstraint" })
   deviceIdleStateConstraint?: AutoInstallConstraintDeviceIdleStateConstraintEnum;
 
-  @Metadata({ data: "json, name=networkTypeConstraint" })
+  @SpeakeasyMetadata({ data: "json, name=networkTypeConstraint" })
   networkTypeConstraint?: AutoInstallConstraintNetworkTypeConstraintEnum;
 }

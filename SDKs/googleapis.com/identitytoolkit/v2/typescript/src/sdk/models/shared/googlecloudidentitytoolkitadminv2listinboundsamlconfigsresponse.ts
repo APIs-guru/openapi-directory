@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig } from "./googlecloudidentitytoolkitadminv2inboundsamlconfig";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2ListInboundSamlConfigsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig } from "./googleclou
  * Response for ListInboundSamlConfigs
 **/
 export class GoogleCloudIdentitytoolkitAdminV2ListInboundSamlConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inboundSamlConfigs", elemType: shared.GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig })
+  @SpeakeasyMetadata({ data: "json, name=inboundSamlConfigs", elemType: GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig })
   inboundSamlConfigs?: GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

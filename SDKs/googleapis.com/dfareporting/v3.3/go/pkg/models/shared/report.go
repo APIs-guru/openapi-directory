@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReportCriteria
+// The report criteria for a report of type "STANDARD".
 type ReportCriteria struct {
 	Activities            *Activities            `json:"activities,omitempty"`
 	CustomRichMediaEvents *CustomRichMediaEvents `json:"customRichMediaEvents,omitempty"`
@@ -22,6 +24,8 @@ const (
 	ReportCrossDimensionReachCriteriaDimensionEnumSiteByCampaign   ReportCrossDimensionReachCriteriaDimensionEnum = "SITE_BY_CAMPAIGN"
 )
 
+// ReportCrossDimensionReachCriteria
+// The report criteria for a report of type "CROSS_DIMENSION_REACH".
 type ReportCrossDimensionReachCriteria struct {
 	Breakdown          []SortedDimension                               `json:"breakdown,omitempty"`
 	DateRange          *DateRange                                      `json:"dateRange,omitempty"`
@@ -39,6 +43,8 @@ const (
 	ReportDeliveryEmailOwnerDeliveryTypeEnumAttachment ReportDeliveryEmailOwnerDeliveryTypeEnum = "ATTACHMENT"
 )
 
+// ReportDelivery
+// The report's email delivery settings.
 type ReportDelivery struct {
 	EmailOwner             *bool                                     `json:"emailOwner,omitempty"`
 	EmailOwnerDeliveryType *ReportDeliveryEmailOwnerDeliveryTypeEnum `json:"emailOwnerDeliveryType,omitempty"`
@@ -46,12 +52,16 @@ type ReportDelivery struct {
 	Recipients             []Recipient                               `json:"recipients,omitempty"`
 }
 
+// ReportFloodlightCriteriaReportProperties
+// The properties of the report.
 type ReportFloodlightCriteriaReportProperties struct {
 	IncludeAttributedIPConversions       *bool `json:"includeAttributedIPConversions,omitempty"`
 	IncludeUnattributedCookieConversions *bool `json:"includeUnattributedCookieConversions,omitempty"`
 	IncludeUnattributedIPConversions     *bool `json:"includeUnattributedIPConversions,omitempty"`
 }
 
+// ReportFloodlightCriteria
+// The report criteria for a report of type "FLOODLIGHT".
 type ReportFloodlightCriteria struct {
 	CustomRichMediaEvents []DimensionValue                          `json:"customRichMediaEvents,omitempty"`
 	DateRange             *DateRange                                `json:"dateRange,omitempty"`
@@ -69,6 +79,8 @@ const (
 	ReportFormatEnumExcel ReportFormatEnum = "EXCEL"
 )
 
+// ReportPathToConversionCriteriaReportProperties
+// The properties of the report.
 type ReportPathToConversionCriteriaReportProperties struct {
 	ClicksLookbackWindow                 *int32 `json:"clicksLookbackWindow,omitempty"`
 	ImpressionsLookbackWindow            *int32 `json:"impressionsLookbackWindow,omitempty"`
@@ -81,6 +93,8 @@ type ReportPathToConversionCriteriaReportProperties struct {
 	PivotOnInteractionPath               *bool  `json:"pivotOnInteractionPath,omitempty"`
 }
 
+// ReportPathToConversionCriteria
+// The report criteria for a report of type "PATH_TO_CONVERSION".
 type ReportPathToConversionCriteria struct {
 	ActivityFilters           []DimensionValue                                `json:"activityFilters,omitempty"`
 	ConversionDimensions      []SortedDimension                               `json:"conversionDimensions,omitempty"`
@@ -93,6 +107,8 @@ type ReportPathToConversionCriteria struct {
 	ReportProperties          *ReportPathToConversionCriteriaReportProperties `json:"reportProperties,omitempty"`
 }
 
+// ReportReachCriteria
+// The report criteria for a report of type "REACH".
 type ReportReachCriteria struct {
 	Activities                     *Activities            `json:"activities,omitempty"`
 	CustomRichMediaEvents          *CustomRichMediaEvents `json:"customRichMediaEvents,omitempty"`
@@ -123,6 +139,8 @@ const (
 	ReportScheduleRunsOnDayOfMonthEnumWeekOfMonth ReportScheduleRunsOnDayOfMonthEnum = "WEEK_OF_MONTH"
 )
 
+// ReportSchedule
+// The report's schedule. Can only be set if the report's 'dateRange' is a relative date range and the relative date range is not "TODAY".
 type ReportSchedule struct {
 	Active            *bool                                 `json:"active,omitempty"`
 	Every             *int32                                `json:"every,omitempty"`
@@ -143,6 +161,8 @@ const (
 	ReportTypeEnumFloodlight          ReportTypeEnum = "FLOODLIGHT"
 )
 
+// Report
+// Represents a Report resource.
 type Report struct {
 	AccountID                   *string                            `json:"accountId,omitempty"`
 	Criteria                    *ReportCriteria                    `json:"criteria,omitempty"`

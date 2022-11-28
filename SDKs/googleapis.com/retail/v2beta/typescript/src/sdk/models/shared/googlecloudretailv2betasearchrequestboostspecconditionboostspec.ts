@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2betaSearchRequestBoostSpecConditionBoostSpec
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Boost applies to products which match a condition.
 **/
 export class GoogleCloudRetailV2betaSearchRequestBoostSpecConditionBoostSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boost" })
+  @SpeakeasyMetadata({ data: "json, name=boost" })
   boost?: number;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: string;
 }

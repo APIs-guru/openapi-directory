@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse
 /**
  * Response message for the GeneratePlayIntegrityChallenge method.
@@ -33,11 +33,11 @@ var GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=challenge" }),
+        SpeakeasyMetadata({ data: "json, name=challenge" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse.prototype, "challenge", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse.prototype, "ttl", void 0);
     return GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse;

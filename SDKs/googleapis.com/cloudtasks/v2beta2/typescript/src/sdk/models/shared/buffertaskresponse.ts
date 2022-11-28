@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Task } from "./task";
+
 
 
 // BufferTaskResponse
@@ -7,6 +8,6 @@ import { Task } from "./task";
  * Response message for BufferTask.
 **/
 export class BufferTaskResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=task" })
+  @SpeakeasyMetadata({ data: "json, name=task" })
   task?: Task;
 }

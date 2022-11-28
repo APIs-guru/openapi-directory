@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteAPIKeyPathParams:
-    api_key: str = field(default=None, metadata={'path_param': { 'field_name': 'api_Key', 'style': 'simple', 'explode': False }})
+    api_key: str = field(metadata={'path_param': { 'field_name': 'api_Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteAPIKeyHeaders:
 
 @dataclass
 class DeleteAPIKeyRequest:
-    path_params: DeleteAPIKeyPathParams = field(default=None)
-    headers: DeleteAPIKeyHeaders = field(default=None)
+    headers: DeleteAPIKeyHeaders = field()
+    path_params: DeleteAPIKeyPathParams = field()
     
 
 @dataclass
 class DeleteAPIKeyResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TruncatableString
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a string that might be shortened to a specified length.
 **/
 export class TruncatableString extends SpeakeasyBase {
-  @Metadata({ data: "json, name=truncatedByteCount" })
+  @SpeakeasyMetadata({ data: "json, name=truncatedByteCount" })
   truncatedByteCount?: number;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

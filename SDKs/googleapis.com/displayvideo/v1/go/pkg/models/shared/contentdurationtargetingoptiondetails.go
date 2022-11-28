@@ -13,6 +13,8 @@ const (
 	ContentDurationTargetingOptionDetailsContentDurationEnumContentDurationOver60Min   ContentDurationTargetingOptionDetailsContentDurationEnum = "CONTENT_DURATION_OVER_60_MIN"
 )
 
+// ContentDurationTargetingOptionDetails
+// Represents a targetable content duration. This will be populated in the content_duration_details field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`.
 type ContentDurationTargetingOptionDetails struct {
 	ContentDuration *ContentDurationTargetingOptionDetailsContentDurationEnum `json:"contentDuration,omitempty"`
 }

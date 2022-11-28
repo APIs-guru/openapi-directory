@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PublicUploadedFileData
+// File information
 type PublicUploadedFileData struct {
 	CreatedAt time.Time `json:"createdAt"`
 	Hash      *string   `json:"hash,omitempty"`

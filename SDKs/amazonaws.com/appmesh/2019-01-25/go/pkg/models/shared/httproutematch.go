@@ -1,5 +1,7 @@
 package shared
 
+// HTTPRouteMatch
+// An object that represents the requirements for a route to match HTTP requests for a virtual router.
 type HTTPRouteMatch struct {
 	Headers         []HTTPRouteHeader    `json:"headers,omitempty"`
 	Method          *HTTPMethodEnum      `json:"method,omitempty"`

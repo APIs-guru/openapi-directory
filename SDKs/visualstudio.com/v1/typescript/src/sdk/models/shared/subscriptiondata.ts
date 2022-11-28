@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubscriptionData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computeQuota" })
+  @SpeakeasyMetadata({ data: "json, name=computeQuota" })
   computeQuota?: number;
 
-  @Metadata({ data: "json, name=computeUsage" })
+  @SpeakeasyMetadata({ data: "json, name=computeUsage" })
   computeUsage?: number;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId?: string;
 
-  @Metadata({ data: "json, name=subscriptionState" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionState" })
   subscriptionState?: string;
 }

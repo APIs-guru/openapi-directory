@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetBatchPredictionOutput
+// Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.
 type GetBatchPredictionOutput struct {
 	BatchPredictionDataSourceID *string           `json:"BatchPredictionDataSourceId,omitempty"`
 	BatchPredictionID           *string           `json:"BatchPredictionId,omitempty"`

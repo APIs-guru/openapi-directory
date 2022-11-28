@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ClusterEndpoint
 /**
  * A cluster endpoint. Specify an endpoint when you want to set or retrieve a routing control state in the cluster.
@@ -33,11 +33,11 @@ var ClusterEndpoint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Endpoint" }),
+        SpeakeasyMetadata({ data: "json, name=Endpoint" }),
         __metadata("design:type", String)
     ], ClusterEndpoint.prototype, "endpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=Region" }),
+        SpeakeasyMetadata({ data: "json, name=Region" }),
         __metadata("design:type", String)
     ], ClusterEndpoint.prototype, "region", void 0);
     return ClusterEndpoint;

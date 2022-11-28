@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingAdvertisersInsertPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DfareportingAdvertisersInsertQueryParams:
 
 @dataclass
 class DfareportingAdvertisersInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingAdvertisersInsertRequest:
-    path_params: DfareportingAdvertisersInsertPathParams = field(default=None)
-    query_params: DfareportingAdvertisersInsertQueryParams = field(default=None)
+    path_params: DfareportingAdvertisersInsertPathParams = field()
+    query_params: DfareportingAdvertisersInsertQueryParams = field()
+    security: DfareportingAdvertisersInsertSecurity = field()
     request: Optional[shared.Advertiser] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingAdvertisersInsertSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingAdvertisersInsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     advertiser: Optional[shared.Advertiser] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

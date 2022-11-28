@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsPolicyResourcePackageResourceApt } from "./ospolicyresourcepackageresourceapt";
 import { OsPolicyResourcePackageResourceDeb } from "./ospolicyresourcepackageresourcedeb";
 import { OsPolicyResourcePackageResourceGooGet } from "./ospolicyresourcepackageresourcegooget";
@@ -7,10 +7,11 @@ import { OsPolicyResourcePackageResourceRpm } from "./ospolicyresourcepackageres
 import { OsPolicyResourcePackageResourceYum } from "./ospolicyresourcepackageresourceyum";
 import { OsPolicyResourcePackageResourceZypper } from "./ospolicyresourcepackageresourcezypper";
 
+
 export enum OsPolicyResourcePackageResourceDesiredStateEnum {
-    DesiredStateUnspecified = "DESIRED_STATE_UNSPECIFIED"
-,    Installed = "INSTALLED"
-,    Removed = "REMOVED"
+    DesiredStateUnspecified = "DESIRED_STATE_UNSPECIFIED",
+    Installed = "INSTALLED",
+    Removed = "REMOVED"
 }
 
 
@@ -19,27 +20,27 @@ export enum OsPolicyResourcePackageResourceDesiredStateEnum {
  * A resource that manages a system package.
 **/
 export class OsPolicyResourcePackageResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apt" })
+  @SpeakeasyMetadata({ data: "json, name=apt" })
   apt?: OsPolicyResourcePackageResourceApt;
 
-  @Metadata({ data: "json, name=deb" })
+  @SpeakeasyMetadata({ data: "json, name=deb" })
   deb?: OsPolicyResourcePackageResourceDeb;
 
-  @Metadata({ data: "json, name=desiredState" })
+  @SpeakeasyMetadata({ data: "json, name=desiredState" })
   desiredState?: OsPolicyResourcePackageResourceDesiredStateEnum;
 
-  @Metadata({ data: "json, name=googet" })
+  @SpeakeasyMetadata({ data: "json, name=googet" })
   googet?: OsPolicyResourcePackageResourceGooGet;
 
-  @Metadata({ data: "json, name=msi" })
+  @SpeakeasyMetadata({ data: "json, name=msi" })
   msi?: OsPolicyResourcePackageResourceMsi;
 
-  @Metadata({ data: "json, name=rpm" })
+  @SpeakeasyMetadata({ data: "json, name=rpm" })
   rpm?: OsPolicyResourcePackageResourceRpm;
 
-  @Metadata({ data: "json, name=yum" })
+  @SpeakeasyMetadata({ data: "json, name=yum" })
   yum?: OsPolicyResourcePackageResourceYum;
 
-  @Metadata({ data: "json, name=zypper" })
+  @SpeakeasyMetadata({ data: "json, name=zypper" })
   zypper?: OsPolicyResourcePackageResourceZypper;
 }

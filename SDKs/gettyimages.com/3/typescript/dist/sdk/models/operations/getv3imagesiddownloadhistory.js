@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3ImagesIdDownloadhistoryPathParams = /** @class */ (function (_super) {
     __extends(GetV3ImagesIdDownloadhistoryPathParams, _super);
@@ -30,7 +30,7 @@ var GetV3ImagesIdDownloadhistoryPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetV3ImagesIdDownloadhistoryPathParams.prototype, "id", void 0);
     return GetV3ImagesIdDownloadhistoryPathParams;
@@ -42,7 +42,7 @@ var GetV3ImagesIdDownloadhistoryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=company_downloads" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company_downloads" }),
         __metadata("design:type", Boolean)
     ], GetV3ImagesIdDownloadhistoryQueryParams.prototype, "companyDownloads", void 0);
     return GetV3ImagesIdDownloadhistoryQueryParams;
@@ -54,7 +54,7 @@ var GetV3ImagesIdDownloadhistoryHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3ImagesIdDownloadhistoryHeaders.prototype, "acceptLanguage", void 0);
     return GetV3ImagesIdDownloadhistoryHeaders;
@@ -66,15 +66,15 @@ var GetV3ImagesIdDownloadhistoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesIdDownloadhistoryPathParams)
     ], GetV3ImagesIdDownloadhistoryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesIdDownloadhistoryQueryParams)
     ], GetV3ImagesIdDownloadhistoryRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesIdDownloadhistoryHeaders)
     ], GetV3ImagesIdDownloadhistoryRequest.prototype, "headers", void 0);
     return GetV3ImagesIdDownloadhistoryRequest;
@@ -86,15 +86,15 @@ var GetV3ImagesIdDownloadhistoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AssetDownloadHistoryResults)
     ], GetV3ImagesIdDownloadhistoryResponse.prototype, "assetDownloadHistoryResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3ImagesIdDownloadhistoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3ImagesIdDownloadhistoryResponse.prototype, "statusCode", void 0);
     return GetV3ImagesIdDownloadhistoryResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FeatureSettings
 /**
  * The feature specific settings to be used in the application. These define behaviors that are user configurable.
@@ -33,11 +33,11 @@ var FeatureSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=splitHealthChecks" }),
+        SpeakeasyMetadata({ data: "json, name=splitHealthChecks" }),
         __metadata("design:type", Boolean)
     ], FeatureSettings.prototype, "splitHealthChecks", void 0);
     __decorate([
-        Metadata({ data: "json, name=useContainerOptimizedOs" }),
+        SpeakeasyMetadata({ data: "json, name=useContainerOptimizedOs" }),
         __metadata("design:type", Boolean)
     ], FeatureSettings.prototype, "useContainerOptimizedOs", void 0);
     return FeatureSettings;

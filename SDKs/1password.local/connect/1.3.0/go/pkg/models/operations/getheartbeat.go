@@ -1,6 +1,6 @@
 package operations
 
-var GetHeartbeatServers = []string{
+var GetHeartbeatServerList = []string{
 	"http://localhost:8080",
 }
 

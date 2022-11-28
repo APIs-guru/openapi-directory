@@ -1,5 +1,7 @@
 package shared
 
+// FilteredLogEvent
+// Represents a matched event.
 type FilteredLogEvent struct {
 	EventID       *string `json:"eventId,omitempty"`
 	IngestionTime *int64  `json:"ingestionTime,omitempty"`

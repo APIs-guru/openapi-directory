@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventPeriodUpdate } from "./eventperiodupdate";
+
 
 
 // EventRecordRequest
@@ -8,15 +8,15 @@ import { EventPeriodUpdate } from "./eventperiodupdate";
  * An event period update resource.
 **/
 export class EventRecordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=currentTimeMillis" })
   currentTimeMillis?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=timePeriods", elemType: shared.EventPeriodUpdate })
+  @SpeakeasyMetadata({ data: "json, name=timePeriods", elemType: EventPeriodUpdate })
   timePeriods?: EventPeriodUpdate[];
 }

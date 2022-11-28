@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTypeEnumSmartReplyBertModel        GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTypeEnum = "SMART_REPLY_BERT_MODEL"
 )
 
+// GoogleCloudDialogflowV2ArticleSuggestionModelMetadata
+// Metadata for article suggestion models.
 type GoogleCloudDialogflowV2ArticleSuggestionModelMetadata struct {
 	TrainingModelType *GoogleCloudDialogflowV2ArticleSuggestionModelMetadataTrainingModelTypeEnum `json:"trainingModelType,omitempty"`
 }

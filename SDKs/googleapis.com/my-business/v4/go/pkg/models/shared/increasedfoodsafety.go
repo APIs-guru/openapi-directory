@@ -45,6 +45,8 @@ const (
 	IncreasedFoodSafetySingleUseFoodMenusExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// IncreasedFoodSafety
+// Increased food safety measures implemented by the hotel during COVID-19.
 type IncreasedFoodSafety struct {
 	DiningAreasAdditionalSanitation                    *bool                                                                      `json:"diningAreasAdditionalSanitation,omitempty"`
 	DiningAreasAdditionalSanitationException           *IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum           `json:"diningAreasAdditionalSanitationException,omitempty"`

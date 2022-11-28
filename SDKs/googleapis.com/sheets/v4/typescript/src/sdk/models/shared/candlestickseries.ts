@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChartData } from "./chartdata";
+
 
 
 // CandlestickSeries
@@ -7,6 +8,6 @@ import { ChartData } from "./chartdata";
  * The series of a CandlestickData.
 **/
 export class CandlestickSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ChartData;
 }

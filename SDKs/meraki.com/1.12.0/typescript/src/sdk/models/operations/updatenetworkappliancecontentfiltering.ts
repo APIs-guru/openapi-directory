@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceContentFilteringPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkApplianceContentFilteringRequestBodyUrlCategoryListSizeEnum {
-    TopSites = "topSites"
-,    FullList = "fullList"
+    TopSites = "topSites",
+    FullList = "fullList"
 }
 
 
 export class UpdateNetworkApplianceContentFilteringRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedUrlPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=allowedUrlPatterns" })
   allowedUrlPatterns?: string[];
 
-  @Metadata({ data: "json, name=blockedUrlCategories" })
+  @SpeakeasyMetadata({ data: "json, name=blockedUrlCategories" })
   blockedUrlCategories?: string[];
 
-  @Metadata({ data: "json, name=blockedUrlPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=blockedUrlPatterns" })
   blockedUrlPatterns?: string[];
 
-  @Metadata({ data: "json, name=urlCategoryListSize" })
+  @SpeakeasyMetadata({ data: "json, name=urlCategoryListSize" })
   urlCategoryListSize?: UpdateNetworkApplianceContentFilteringRequestBodyUrlCategoryListSizeEnum;
 }
 
 
 export class UpdateNetworkApplianceContentFilteringRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceContentFilteringPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceContentFilteringRequestBody;
 }
 
 
 export class UpdateNetworkApplianceContentFilteringResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceContentFiltering200ApplicationJsonObject?: Map<string, any>;
 }

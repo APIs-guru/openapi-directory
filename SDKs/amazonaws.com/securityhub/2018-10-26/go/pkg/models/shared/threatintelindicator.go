@@ -1,5 +1,7 @@
 package shared
 
+// ThreatIntelIndicator
+// Details about the threat intelligence related to a finding.
 type ThreatIntelIndicator struct {
 	Category       *ThreatIntelIndicatorCategoryEnum `json:"Category,omitempty"`
 	LastObservedAt *string                           `json:"LastObservedAt,omitempty"`

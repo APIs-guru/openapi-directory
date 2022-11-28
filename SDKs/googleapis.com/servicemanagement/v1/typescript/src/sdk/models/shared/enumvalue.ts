@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Option } from "./option";
+
 
 
 // EnumValue
@@ -8,12 +8,12 @@ import { Option } from "./option";
  * Enum value definition.
 **/
 export class EnumValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 
-  @Metadata({ data: "json, name=options", elemType: shared.Option })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: Option })
   options?: Option[];
 }

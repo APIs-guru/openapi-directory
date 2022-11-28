@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GetPolicyOptions } from "./getpolicyoptions";
+
 
 
 // GetIamPolicyRequest
@@ -7,6 +8,6 @@ import { GetPolicyOptions } from "./getpolicyoptions";
  * Request message for GetIamPolicy method.
 **/
 export class GetIamPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: GetPolicyOptions;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class TagResourcePathParams:
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ResourceId', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'ResourceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,22 +27,22 @@ class TagResourceHeaders:
 @dataclass_json
 @dataclass
 class TagResourceRequestBody:
-    tags: List[shared.Tag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    tags: List[shared.Tag] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class TagResourceRequest:
-    path_params: TagResourcePathParams = field(default=None)
-    headers: TagResourceHeaders = field(default=None)
-    request: TagResourceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TagResourceHeaders = field()
+    path_params: TagResourcePathParams = field()
+    request: TagResourceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TagResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_point_not_found: Optional[Any] = field(default=None)
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

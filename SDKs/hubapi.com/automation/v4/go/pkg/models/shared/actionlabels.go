@@ -1,5 +1,7 @@
 package shared
 
+// ActionLabels
+// User-facing labels for this custom workflow action.
 type ActionLabels struct {
 	ActionCardContent      *string           `json:"actionCardContent,omitempty"`
 	ActionDescription      *string           `json:"actionDescription,omitempty"`

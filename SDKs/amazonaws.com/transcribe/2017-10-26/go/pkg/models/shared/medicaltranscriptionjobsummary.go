@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MedicalTranscriptionJobSummary
+// Provides summary information about a transcription job.
 type MedicalTranscriptionJobSummary struct {
 	CompletionTime              *time.Time                            `json:"CompletionTime,omitempty"`
 	ContentIdentificationType   *MedicalContentIdentificationTypeEnum `json:"ContentIdentificationType,omitempty"`

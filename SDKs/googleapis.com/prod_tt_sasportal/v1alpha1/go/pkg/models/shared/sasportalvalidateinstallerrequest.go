@@ -1,5 +1,7 @@
 package shared
 
+// SasPortalValidateInstallerRequest
+// Request for ValidateInstaller.
 type SasPortalValidateInstallerRequest struct {
 	EncodedSecret *string `json:"encodedSecret,omitempty"`
 	InstallerID   *string `json:"installerId,omitempty"`

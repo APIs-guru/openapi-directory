@@ -1,5 +1,7 @@
 package shared
 
+// MessageConfiguration
+// Specifies the message configuration settings for a campaign.
 type MessageConfiguration struct {
 	AdmMessage     *Message               `json:"ADMMessage,omitempty"`
 	ApnsMessage    *Message               `json:"APNSMessage,omitempty"`

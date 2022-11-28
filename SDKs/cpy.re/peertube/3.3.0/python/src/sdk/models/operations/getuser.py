@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUserPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetUserQueryParams:
 
 @dataclass
 class GetUserSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUserRequest:
-    path_params: GetUserPathParams = field(default=None)
-    query_params: GetUserQueryParams = field(default=None)
-    security: GetUserSecurity = field(default=None)
+    path_params: GetUserPathParams = field()
+    query_params: GetUserQueryParams = field()
+    security: GetUserSecurity = field()
     
 
 @dataclass
 class GetUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_user_200_application_json_one_of: Optional[Any] = field(default=None)
     

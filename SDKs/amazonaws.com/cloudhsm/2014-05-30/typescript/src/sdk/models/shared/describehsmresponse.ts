@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HsmStatusEnum } from "./hsmstatusenum";
 import { SubscriptionTypeEnum } from "./subscriptiontypeenum";
+
 
 
 // DescribeHsmResponse
@@ -8,66 +9,66 @@ import { SubscriptionTypeEnum } from "./subscriptiontypeenum";
  * Contains the output of the <a>DescribeHsm</a> operation.
 **/
 export class DescribeHsmResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=EniId" })
+  @SpeakeasyMetadata({ data: "json, name=EniId" })
   eniId?: string;
 
-  @Metadata({ data: "json, name=EniIp" })
+  @SpeakeasyMetadata({ data: "json, name=EniIp" })
   eniIp?: string;
 
-  @Metadata({ data: "json, name=HsmArn" })
+  @SpeakeasyMetadata({ data: "json, name=HsmArn" })
   hsmArn?: string;
 
-  @Metadata({ data: "json, name=HsmType" })
+  @SpeakeasyMetadata({ data: "json, name=HsmType" })
   hsmType?: string;
 
-  @Metadata({ data: "json, name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamRoleArn" })
   iamRoleArn?: string;
 
-  @Metadata({ data: "json, name=Partitions" })
+  @SpeakeasyMetadata({ data: "json, name=Partitions" })
   partitions?: string[];
 
-  @Metadata({ data: "json, name=SerialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SerialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=ServerCertLastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=ServerCertLastUpdated" })
   serverCertLastUpdated?: string;
 
-  @Metadata({ data: "json, name=ServerCertUri" })
+  @SpeakeasyMetadata({ data: "json, name=ServerCertUri" })
   serverCertUri?: string;
 
-  @Metadata({ data: "json, name=SoftwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=SoftwareVersion" })
   softwareVersion?: string;
 
-  @Metadata({ data: "json, name=SshKeyLastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=SshKeyLastUpdated" })
   sshKeyLastUpdated?: string;
 
-  @Metadata({ data: "json, name=SshPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=SshPublicKey" })
   sshPublicKey?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: HsmStatusEnum;
 
-  @Metadata({ data: "json, name=StatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=StatusDetails" })
   statusDetails?: string;
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=SubscriptionEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionEndDate" })
   subscriptionEndDate?: string;
 
-  @Metadata({ data: "json, name=SubscriptionStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionStartDate" })
   subscriptionStartDate?: string;
 
-  @Metadata({ data: "json, name=SubscriptionType" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionType" })
   subscriptionType?: SubscriptionTypeEnum;
 
-  @Metadata({ data: "json, name=VendorName" })
+  @SpeakeasyMetadata({ data: "json, name=VendorName" })
   vendorName?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

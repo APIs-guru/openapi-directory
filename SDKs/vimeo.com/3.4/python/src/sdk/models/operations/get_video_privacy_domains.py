@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetVideoPrivacyDomainsPathParams:
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetVideoPrivacyDomainsQueryParams:
 
 @dataclass
 class GetVideoPrivacyDomainsRequest:
-    path_params: GetVideoPrivacyDomainsPathParams = field(default=None)
-    query_params: GetVideoPrivacyDomainsQueryParams = field(default=None)
+    path_params: GetVideoPrivacyDomainsPathParams = field()
+    query_params: GetVideoPrivacyDomainsQueryParams = field()
     
 
 @dataclass
 class GetVideoPrivacyDomainsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     domains: Optional[List[shared.Domain]] = field(default=None)
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

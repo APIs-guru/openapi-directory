@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Disk } from "./disk";
+
 
 
 // InstanceHardware
@@ -8,12 +8,12 @@ import { Disk } from "./disk";
  * Describes the hardware for the instance.
 **/
 export class InstanceHardware extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCount" })
   cpuCount?: number;
 
-  @Metadata({ data: "json, name=disks", elemType: shared.Disk })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: Disk })
   disks?: Disk[];
 
-  @Metadata({ data: "json, name=ramSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=ramSizeInGb" })
   ramSizeInGb?: number;
 }

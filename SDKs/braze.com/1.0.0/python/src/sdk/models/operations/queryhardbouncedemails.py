@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
@@ -13,11 +16,11 @@ class QueryHardBouncedEmailsQueryParams:
 
 @dataclass
 class QueryHardBouncedEmailsRequest:
-    query_params: QueryHardBouncedEmailsQueryParams = field(default=None)
+    query_params: QueryHardBouncedEmailsQueryParams = field()
     
 
 @dataclass
 class QueryHardBouncedEmailsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,6 +1,7 @@
 
 
+
 export enum ChannelProtocolEnum {
-    Wss = "WSS"
-,    Https = "HTTPS"
+    Wss = "WSS",
+    Https = "HTTPS"
 }

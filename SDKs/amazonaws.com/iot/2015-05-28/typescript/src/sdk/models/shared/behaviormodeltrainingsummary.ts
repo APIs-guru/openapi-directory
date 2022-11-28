@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelStatusEnum } from "./modelstatusenum";
+
 
 
 // BehaviorModelTrainingSummary
@@ -7,21 +8,21 @@ import { ModelStatusEnum } from "./modelstatusenum";
  *  The summary of an ML Detect behavior model. 
 **/
 export class BehaviorModelTrainingSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=behaviorName" })
+  @SpeakeasyMetadata({ data: "json, name=behaviorName" })
   behaviorName?: string;
 
-  @Metadata({ data: "json, name=datapointsCollectionPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=datapointsCollectionPercentage" })
   datapointsCollectionPercentage?: number;
 
-  @Metadata({ data: "json, name=lastModelRefreshDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModelRefreshDate" })
   lastModelRefreshDate?: Date;
 
-  @Metadata({ data: "json, name=modelStatus" })
+  @SpeakeasyMetadata({ data: "json, name=modelStatus" })
   modelStatus?: ModelStatusEnum;
 
-  @Metadata({ data: "json, name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileName" })
   securityProfileName?: string;
 
-  @Metadata({ data: "json, name=trainingDataCollectionStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=trainingDataCollectionStartDate" })
   trainingDataCollectionStartDate?: Date;
 }

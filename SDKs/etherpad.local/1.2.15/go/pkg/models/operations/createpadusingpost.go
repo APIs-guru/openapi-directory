@@ -5,10 +5,6 @@ type CreatePadUsingPostQueryParams struct {
 	Text  *string `queryParam:"style=form,explode=true,name=text"`
 }
 
-type CreatePadUsingPostRequest struct {
-	QueryParams CreatePadUsingPostQueryParams
-}
-
 type CreatePadUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type CreatePadUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreatePadUsingPostRequest struct {
+	QueryParams CreatePadUsingPostQueryParams
 }
 
 type CreatePadUsingPostResponse struct {

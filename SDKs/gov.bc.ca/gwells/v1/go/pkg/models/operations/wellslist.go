@@ -9,15 +9,15 @@ type WellsListQueryParams struct {
 	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type WellsListRequest struct {
-	QueryParams WellsListQueryParams
-}
-
 type WellsList200ApplicationJSON struct {
 	Count    int64             `json:"count"`
 	Next     *string           `json:"next,omitempty"`
 	Previous *string           `json:"previous,omitempty"`
 	Results  []shared.WellList `json:"results"`
+}
+
+type WellsListRequest struct {
+	QueryParams WellsListQueryParams
 }
 
 type WellsListResponse struct {

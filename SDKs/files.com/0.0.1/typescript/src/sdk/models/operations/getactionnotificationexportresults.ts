@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetActionNotificationExportResultsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=action_notification_export_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=action_notification_export_id" })
   actionNotificationExportId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_id" })
   userId?: number;
 }
 
 
 export class GetActionNotificationExportResultsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetActionNotificationExportResultsQueryParams;
 }
 
 
 export class GetActionNotificationExportResultsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.ActionNotificationExportResultEntity })
+  @SpeakeasyMetadata({ elemType: shared.ActionNotificationExportResultEntity })
   actionNotificationExportResultEntities?: shared.ActionNotificationExportResultEntity[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

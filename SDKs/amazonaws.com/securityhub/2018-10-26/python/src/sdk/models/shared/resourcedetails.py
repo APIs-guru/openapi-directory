@@ -1,112 +1,67 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import awsapigatewayrestapidetails
-from . import awsapigatewaystagedetails
-from . import awsapigatewayv2apidetails
-from . import awsapigatewayv2stagedetails
-from . import awsautoscalingautoscalinggroupdetails
-from . import awsautoscalinglaunchconfigurationdetails
-from . import awscertificatemanagercertificatedetails
-from . import awscloudfrontdistributiondetails
-from . import awscloudtrailtraildetails
-from . import awscodebuildprojectdetails
-from . import awsdynamodbtabledetails
-from . import awsec2eipdetails
-from . import awsec2instancedetails
-from . import awsec2networkacldetails
-from . import awsec2networkinterfacedetails
-from . import awsec2securitygroupdetails
-from . import awsec2subnetdetails
-from . import awsec2volumedetails
-from . import awsec2vpcdetails
-from . import awsec2vpnconnectiondetails
-from . import awsecrcontainerimagedetails
-from . import awsecsclusterdetails
-from . import awsecsservicedetails
-from . import awsecstaskdefinitiondetails
-from . import awselasticbeanstalkenvironmentdetails
-from . import awselasticsearchdomaindetails
-from . import awselbloadbalancerdetails
-from . import awselbv2loadbalancerdetails
-from . import awsiamaccesskeydetails
-from . import awsiamgroupdetails
-from . import awsiampolicydetails
-from . import awsiamroledetails
-from . import awsiamuserdetails
-from . import awskmskeydetails
-from . import awslambdafunctiondetails
-from . import awslambdalayerversiondetails
-from . import awsrdsdbclusterdetails
-from . import awsrdsdbclustersnapshotdetails
-from . import awsrdsdbinstancedetails
-from . import awsrdsdbsnapshotdetails
-from . import awsrdseventsubscriptiondetails
-from . import awsredshiftclusterdetails
-from . import awss3accountpublicaccessblockdetails
-from . import awss3bucketdetails
-from . import awss3objectdetails
-from . import awssecretsmanagersecretdetails
-from . import awssnstopicdetails
-from . import awssqsqueuedetails
-from . import awsssmpatchcompliancedetails
-from . import awswafwebacldetails
-from . import containerdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceDetails:
-    aws_api_gateway_rest_api: Optional[awsapigatewayrestapidetails.AwsAPIGatewayRestAPIDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsApiGatewayRestApi' }})
-    aws_api_gateway_stage: Optional[awsapigatewaystagedetails.AwsAPIGatewayStageDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsApiGatewayStage' }})
-    aws_api_gateway_v2_api: Optional[awsapigatewayv2apidetails.AwsAPIGatewayV2APIDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsApiGatewayV2Api' }})
-    aws_api_gateway_v2_stage: Optional[awsapigatewayv2stagedetails.AwsAPIGatewayV2StageDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsApiGatewayV2Stage' }})
-    aws_auto_scaling_auto_scaling_group: Optional[awsautoscalingautoscalinggroupdetails.AwsAutoScalingAutoScalingGroupDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsAutoScalingAutoScalingGroup' }})
-    aws_auto_scaling_launch_configuration: Optional[awsautoscalinglaunchconfigurationdetails.AwsAutoScalingLaunchConfigurationDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsAutoScalingLaunchConfiguration' }})
-    aws_certificate_manager_certificate: Optional[awscertificatemanagercertificatedetails.AwsCertificateManagerCertificateDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsCertificateManagerCertificate' }})
-    aws_cloud_front_distribution: Optional[awscloudfrontdistributiondetails.AwsCloudFrontDistributionDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsCloudFrontDistribution' }})
-    aws_cloud_trail_trail: Optional[awscloudtrailtraildetails.AwsCloudTrailTrailDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsCloudTrailTrail' }})
-    aws_code_build_project: Optional[awscodebuildprojectdetails.AwsCodeBuildProjectDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsCodeBuildProject' }})
-    aws_dynamo_db_table: Optional[awsdynamodbtabledetails.AwsDynamoDbTableDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsDynamoDbTable' }})
-    aws_ec2_eip: Optional[awsec2eipdetails.AwsEc2EipDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2Eip' }})
-    aws_ec2_instance: Optional[awsec2instancedetails.AwsEc2InstanceDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2Instance' }})
-    aws_ec2_network_acl: Optional[awsec2networkacldetails.AwsEc2NetworkACLDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2NetworkAcl' }})
-    aws_ec2_network_interface: Optional[awsec2networkinterfacedetails.AwsEc2NetworkInterfaceDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2NetworkInterface' }})
-    aws_ec2_security_group: Optional[awsec2securitygroupdetails.AwsEc2SecurityGroupDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2SecurityGroup' }})
-    aws_ec2_subnet: Optional[awsec2subnetdetails.AwsEc2SubnetDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2Subnet' }})
-    aws_ec2_volume: Optional[awsec2volumedetails.AwsEc2VolumeDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2Volume' }})
-    aws_ec2_vpc: Optional[awsec2vpcdetails.AwsEc2VpcDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2Vpc' }})
-    aws_ec2_vpn_connection: Optional[awsec2vpnconnectiondetails.AwsEc2VpnConnectionDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEc2VpnConnection' }})
-    aws_ecr_container_image: Optional[awsecrcontainerimagedetails.AwsEcrContainerImageDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEcrContainerImage' }})
-    aws_ecs_cluster: Optional[awsecsclusterdetails.AwsEcsClusterDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEcsCluster' }})
-    aws_ecs_service: Optional[awsecsservicedetails.AwsEcsServiceDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEcsService' }})
-    aws_ecs_task_definition: Optional[awsecstaskdefinitiondetails.AwsEcsTaskDefinitionDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsEcsTaskDefinition' }})
-    aws_elastic_beanstalk_environment: Optional[awselasticbeanstalkenvironmentdetails.AwsElasticBeanstalkEnvironmentDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsElasticBeanstalkEnvironment' }})
-    aws_elasticsearch_domain: Optional[awselasticsearchdomaindetails.AwsElasticsearchDomainDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsElasticsearchDomain' }})
-    aws_elb_load_balancer: Optional[awselbloadbalancerdetails.AwsElbLoadBalancerDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsElbLoadBalancer' }})
-    aws_elbv2_load_balancer: Optional[awselbv2loadbalancerdetails.AwsElbv2LoadBalancerDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsElbv2LoadBalancer' }})
-    aws_iam_access_key: Optional[awsiamaccesskeydetails.AwsIamAccessKeyDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsIamAccessKey' }})
-    aws_iam_group: Optional[awsiamgroupdetails.AwsIamGroupDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsIamGroup' }})
-    aws_iam_policy: Optional[awsiampolicydetails.AwsIamPolicyDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsIamPolicy' }})
-    aws_iam_role: Optional[awsiamroledetails.AwsIamRoleDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsIamRole' }})
-    aws_iam_user: Optional[awsiamuserdetails.AwsIamUserDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsIamUser' }})
-    aws_kms_key: Optional[awskmskeydetails.AwsKmsKeyDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsKmsKey' }})
-    aws_lambda_function: Optional[awslambdafunctiondetails.AwsLambdaFunctionDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsLambdaFunction' }})
-    aws_lambda_layer_version: Optional[awslambdalayerversiondetails.AwsLambdaLayerVersionDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsLambdaLayerVersion' }})
-    aws_rds_db_cluster: Optional[awsrdsdbclusterdetails.AwsRdsDbClusterDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsRdsDbCluster' }})
-    aws_rds_db_cluster_snapshot: Optional[awsrdsdbclustersnapshotdetails.AwsRdsDbClusterSnapshotDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsRdsDbClusterSnapshot' }})
-    aws_rds_db_instance: Optional[awsrdsdbinstancedetails.AwsRdsDbInstanceDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsRdsDbInstance' }})
-    aws_rds_db_snapshot: Optional[awsrdsdbsnapshotdetails.AwsRdsDbSnapshotDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsRdsDbSnapshot' }})
-    aws_rds_event_subscription: Optional[awsrdseventsubscriptiondetails.AwsRdsEventSubscriptionDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsRdsEventSubscription' }})
-    aws_redshift_cluster: Optional[awsredshiftclusterdetails.AwsRedshiftClusterDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsRedshiftCluster' }})
-    aws_s3_account_public_access_block: Optional[awss3accountpublicaccessblockdetails.AwsS3AccountPublicAccessBlockDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsS3AccountPublicAccessBlock' }})
-    aws_s3_bucket: Optional[awss3bucketdetails.AwsS3BucketDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsS3Bucket' }})
-    aws_s3_object: Optional[awss3objectdetails.AwsS3ObjectDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsS3Object' }})
-    aws_secrets_manager_secret: Optional[awssecretsmanagersecretdetails.AwsSecretsManagerSecretDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsSecretsManagerSecret' }})
-    aws_sns_topic: Optional[awssnstopicdetails.AwsSnsTopicDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsSnsTopic' }})
-    aws_sqs_queue: Optional[awssqsqueuedetails.AwsSqsQueueDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsSqsQueue' }})
-    aws_ssm_patch_compliance: Optional[awsssmpatchcompliancedetails.AwsSsmPatchComplianceDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsSsmPatchCompliance' }})
-    aws_waf_web_acl: Optional[awswafwebacldetails.AwsWafWebACLDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsWafWebAcl' }})
-    container: Optional[containerdetails.ContainerDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Container' }})
-    other: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Other' }})
+    r"""ResourceDetails
+    <p>Additional details about a resource related to a finding.</p> <p>To provide the details, use the object that corresponds to the resource type. For example, if the resource type is <code>AwsEc2Instance</code>, then you use the <code>AwsEc2Instance</code> object to provide the details.</p> <p>If the type-specific object does not contain all of the fields you want to populate, then you use the <code>Other</code> object to populate those additional fields.</p> <p>You also use the <code>Other</code> object to populate the details when the selected type does not have a corresponding object.</p>
+    """
+    
+    aws_api_gateway_rest_api: Optional[AwsAPIGatewayRestAPIDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsApiGatewayRestApi') }})
+    aws_api_gateway_stage: Optional[AwsAPIGatewayStageDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsApiGatewayStage') }})
+    aws_api_gateway_v2_api: Optional[AwsAPIGatewayV2APIDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsApiGatewayV2Api') }})
+    aws_api_gateway_v2_stage: Optional[AwsAPIGatewayV2StageDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsApiGatewayV2Stage') }})
+    aws_auto_scaling_auto_scaling_group: Optional[AwsAutoScalingAutoScalingGroupDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsAutoScalingAutoScalingGroup') }})
+    aws_auto_scaling_launch_configuration: Optional[AwsAutoScalingLaunchConfigurationDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsAutoScalingLaunchConfiguration') }})
+    aws_certificate_manager_certificate: Optional[AwsCertificateManagerCertificateDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsCertificateManagerCertificate') }})
+    aws_cloud_front_distribution: Optional[AwsCloudFrontDistributionDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsCloudFrontDistribution') }})
+    aws_cloud_trail_trail: Optional[AwsCloudTrailTrailDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsCloudTrailTrail') }})
+    aws_code_build_project: Optional[AwsCodeBuildProjectDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsCodeBuildProject') }})
+    aws_dynamo_db_table: Optional[AwsDynamoDbTableDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsDynamoDbTable') }})
+    aws_ec2_eip: Optional[AwsEc2EipDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2Eip') }})
+    aws_ec2_instance: Optional[AwsEc2InstanceDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2Instance') }})
+    aws_ec2_network_acl: Optional[AwsEc2NetworkACLDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2NetworkAcl') }})
+    aws_ec2_network_interface: Optional[AwsEc2NetworkInterfaceDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2NetworkInterface') }})
+    aws_ec2_security_group: Optional[AwsEc2SecurityGroupDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2SecurityGroup') }})
+    aws_ec2_subnet: Optional[AwsEc2SubnetDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2Subnet') }})
+    aws_ec2_volume: Optional[AwsEc2VolumeDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2Volume') }})
+    aws_ec2_vpc: Optional[AwsEc2VpcDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2Vpc') }})
+    aws_ec2_vpn_connection: Optional[AwsEc2VpnConnectionDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEc2VpnConnection') }})
+    aws_ecr_container_image: Optional[AwsEcrContainerImageDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEcrContainerImage') }})
+    aws_ecs_cluster: Optional[AwsEcsClusterDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEcsCluster') }})
+    aws_ecs_service: Optional[AwsEcsServiceDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEcsService') }})
+    aws_ecs_task_definition: Optional[AwsEcsTaskDefinitionDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsEcsTaskDefinition') }})
+    aws_elastic_beanstalk_environment: Optional[AwsElasticBeanstalkEnvironmentDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsElasticBeanstalkEnvironment') }})
+    aws_elasticsearch_domain: Optional[AwsElasticsearchDomainDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsElasticsearchDomain') }})
+    aws_elb_load_balancer: Optional[AwsElbLoadBalancerDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsElbLoadBalancer') }})
+    aws_elbv2_load_balancer: Optional[AwsElbv2LoadBalancerDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsElbv2LoadBalancer') }})
+    aws_iam_access_key: Optional[AwsIamAccessKeyDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsIamAccessKey') }})
+    aws_iam_group: Optional[AwsIamGroupDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsIamGroup') }})
+    aws_iam_policy: Optional[AwsIamPolicyDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsIamPolicy') }})
+    aws_iam_role: Optional[AwsIamRoleDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsIamRole') }})
+    aws_iam_user: Optional[AwsIamUserDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsIamUser') }})
+    aws_kms_key: Optional[AwsKmsKeyDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsKmsKey') }})
+    aws_lambda_function: Optional[AwsLambdaFunctionDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsLambdaFunction') }})
+    aws_lambda_layer_version: Optional[AwsLambdaLayerVersionDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsLambdaLayerVersion') }})
+    aws_rds_db_cluster: Optional[AwsRdsDbClusterDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsRdsDbCluster') }})
+    aws_rds_db_cluster_snapshot: Optional[AwsRdsDbClusterSnapshotDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsRdsDbClusterSnapshot') }})
+    aws_rds_db_instance: Optional[AwsRdsDbInstanceDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsRdsDbInstance') }})
+    aws_rds_db_snapshot: Optional[AwsRdsDbSnapshotDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsRdsDbSnapshot') }})
+    aws_rds_event_subscription: Optional[AwsRdsEventSubscriptionDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsRdsEventSubscription') }})
+    aws_redshift_cluster: Optional[AwsRedshiftClusterDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsRedshiftCluster') }})
+    aws_s3_account_public_access_block: Optional[AwsS3AccountPublicAccessBlockDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsS3AccountPublicAccessBlock') }})
+    aws_s3_bucket: Optional[AwsS3BucketDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsS3Bucket') }})
+    aws_s3_object: Optional[AwsS3ObjectDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsS3Object') }})
+    aws_secrets_manager_secret: Optional[AwsSecretsManagerSecretDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsSecretsManagerSecret') }})
+    aws_sns_topic: Optional[AwsSnsTopicDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsSnsTopic') }})
+    aws_sqs_queue: Optional[AwsSqsQueueDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsSqsQueue') }})
+    aws_ssm_patch_compliance: Optional[AwsSsmPatchComplianceDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsSsmPatchCompliance') }})
+    aws_waf_web_acl: Optional[AwsWafWebACLDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsWafWebAcl') }})
+    container: Optional[ContainerDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Container') }})
+    other: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Other') }})
     

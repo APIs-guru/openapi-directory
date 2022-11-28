@@ -18,10 +18,14 @@ type UpdateCodeSigningConfigHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateCodeSigningConfigRequestBodyAllowedPublishers
+// List of signing profiles that can sign a code package.
 type UpdateCodeSigningConfigRequestBodyAllowedPublishers struct {
 	SigningProfileVersionArns []string `json:"SigningProfileVersionArns,omitempty"`
 }
 
+// UpdateCodeSigningConfigRequestBodyCodeSigningPolicies
+// Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.
 type UpdateCodeSigningConfigRequestBodyCodeSigningPolicies struct {
 	UntrustedArtifactOnDeployment *shared.CodeSigningPolicyEnum `json:"UntrustedArtifactOnDeployment,omitempty"`
 }

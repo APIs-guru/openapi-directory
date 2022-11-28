@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LookbackWindow
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies how many days into the past to look when determining whether to record a conversion.
 **/
 export class LookbackWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickDays" })
+  @SpeakeasyMetadata({ data: "json, name=clickDays" })
   clickDays?: number;
 
-  @Metadata({ data: "json, name=impressionDays" })
+  @SpeakeasyMetadata({ data: "json, name=impressionDays" })
   impressionDays?: number;
 }

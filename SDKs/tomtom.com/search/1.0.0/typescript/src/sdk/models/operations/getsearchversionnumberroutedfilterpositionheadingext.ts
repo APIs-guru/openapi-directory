@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSearchVersionNumberRoutedFilterPositionHeadingExtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ext" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ext" })
   ext: shared.ExtEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=heading" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=heading" })
   heading: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=position" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=position" })
   position: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class GetSearchVersionNumberRoutedFilterPositionHeadingExtQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=poiList" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=poiList" })
   poiList: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=routingTimeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routingTimeout" })
   routingTimeout?: number;
 }
 
 
 export class GetSearchVersionNumberRoutedFilterPositionHeadingExtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSearchVersionNumberRoutedFilterPositionHeadingExtPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSearchVersionNumberRoutedFilterPositionHeadingExtQueryParams;
 }
 
 
 export class GetSearchVersionNumberRoutedFilterPositionHeadingExtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

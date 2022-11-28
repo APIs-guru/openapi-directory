@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRecommenderV1beta1Insight } from "./googlecloudrecommenderv1beta1insight";
+
 
 
 // GoogleCloudRecommenderV1beta1ListInsightsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudRecommenderV1beta1Insight } from "./googlecloudrecommenderv1
  * Response to the `ListInsights` method.
 **/
 export class GoogleCloudRecommenderV1beta1ListInsightsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insights", elemType: shared.GoogleCloudRecommenderV1beta1Insight })
+  @SpeakeasyMetadata({ data: "json, name=insights", elemType: GoogleCloudRecommenderV1beta1Insight })
   insights?: GoogleCloudRecommenderV1beta1Insight[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

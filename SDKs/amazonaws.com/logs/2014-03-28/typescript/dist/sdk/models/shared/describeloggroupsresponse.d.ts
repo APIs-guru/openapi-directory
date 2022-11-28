@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LogGroup } from "./loggroup";
 export declare class DescribeLogGroupsResponse extends SpeakeasyBase {
     logGroups?: LogGroup[];

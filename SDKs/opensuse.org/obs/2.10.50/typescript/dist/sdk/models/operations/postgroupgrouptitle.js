@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostGroupGroupTitlePathParams = /** @class */ (function (_super) {
     __extends(PostGroupGroupTitlePathParams, _super);
@@ -30,7 +30,7 @@ var PostGroupGroupTitlePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=group_title" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group_title" }),
         __metadata("design:type", String)
     ], PostGroupGroupTitlePathParams.prototype, "groupTitle", void 0);
     return PostGroupGroupTitlePathParams;
@@ -48,15 +48,15 @@ var PostGroupGroupTitleQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cmd" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cmd" }),
         __metadata("design:type", String)
     ], PostGroupGroupTitleQueryParams.prototype, "cmd", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], PostGroupGroupTitleQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userid" }),
         __metadata("design:type", String)
     ], PostGroupGroupTitleQueryParams.prototype, "userid", void 0);
     return PostGroupGroupTitleQueryParams;
@@ -68,7 +68,7 @@ var PostGroupGroupTitleSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], PostGroupGroupTitleSecurity.prototype, "basicAuthentication", void 0);
     return PostGroupGroupTitleSecurity;
@@ -80,15 +80,15 @@ var PostGroupGroupTitleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGroupGroupTitlePathParams)
     ], PostGroupGroupTitleRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGroupGroupTitleQueryParams)
     ], PostGroupGroupTitleRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGroupGroupTitleSecurity)
     ], PostGroupGroupTitleRequest.prototype, "security", void 0);
     return PostGroupGroupTitleRequest;
@@ -100,15 +100,15 @@ var PostGroupGroupTitleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostGroupGroupTitleResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGroupGroupTitleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGroupGroupTitleResponse.prototype, "statusCode", void 0);
     return PostGroupGroupTitleResponse;

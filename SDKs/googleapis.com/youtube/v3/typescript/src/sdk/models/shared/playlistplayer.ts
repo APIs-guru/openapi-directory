@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlaylistPlayer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=embedHtml" })
+  @SpeakeasyMetadata({ data: "json, name=embedHtml" })
   embedHtml?: string;
 }

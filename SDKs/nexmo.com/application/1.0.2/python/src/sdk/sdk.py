@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://developer.nexmo.com/api/developer/application"""
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,32 +14,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://developer.nexmo.com/api/developer/application"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_application(self, request: operations.CreateApplicationRequest) -> operations.CreateApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Application
+        You use a `POST` request to create a new application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -51,13 +75,17 @@ class SDK:
 
     
     def delete_application(self, request: operations.DeleteApplicationRequest) -> operations.DeleteApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Destroy Application
+        You use a `DELETE` request to delete a single application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{app_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -70,15 +98,18 @@ class SDK:
 
     
     def retrieve_application(self, request: operations.RetrieveApplicationRequest) -> operations.RetrieveApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve Application
+        You use a `GET` request to retrieve details about a single application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{app_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -93,15 +124,18 @@ class SDK:
 
     
     def retrieve_applications(self, request: operations.RetrieveApplicationsRequest) -> operations.RetrieveApplicationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Applications
+        You use a `GET` request to retrieve details of all applications associated with your account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -116,19 +150,21 @@ class SDK:
 
     
     def update_application(self, request: operations.UpdateApplicationRequest) -> operations.UpdateApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update Application
+        You use a `PUT` request to update an existing application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{app_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

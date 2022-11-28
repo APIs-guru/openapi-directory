@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestRoomRescueKeyPairsPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RequestRoomRescueKeyPairsHeaders:
 
 @dataclass
 class RequestRoomRescueKeyPairsRequest:
-    path_params: RequestRoomRescueKeyPairsPathParams = field(default=None)
-    headers: RequestRoomRescueKeyPairsHeaders = field(default=None)
+    headers: RequestRoomRescueKeyPairsHeaders = field()
+    path_params: RequestRoomRescueKeyPairsPathParams = field()
     
 
 @dataclass
-class RequestRoomRescueKeyPairsResponse:
-    content_type: str = field(default=None)
+class RequestRoomRescueKeyPairsResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
-    user_key_pair_containers: Optional[List[shared.UserKeyPairContainer]] = field(default=None)
+    user_key_pair_containers: Optional[List[shared.UserKeyPairContainerOutput]] = field(default=None)
     

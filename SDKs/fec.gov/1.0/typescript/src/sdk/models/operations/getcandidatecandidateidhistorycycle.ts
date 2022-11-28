@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCandidateCandidateIdHistoryCyclePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=candidate_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=candidate_id" })
   candidateId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cycle" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cycle" })
   cycle: number;
 }
 
 
 export class GetCandidateCandidateIdHistoryCycleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=election_full" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=election_full" })
   electionFull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
   sortHideNull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
   sortNullOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
   sortNullsLast?: boolean;
 }
 
 
 export class GetCandidateCandidateIdHistoryCycleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCandidateCandidateIdHistoryCyclePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCandidateCandidateIdHistoryCycleQueryParams;
 }
 
 
 export class GetCandidateCandidateIdHistoryCycleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   candidateHistoryPage?: shared.CandidateHistoryPage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

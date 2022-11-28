@@ -1,5 +1,7 @@
 package shared
 
+// SmimeInfo
+// An S/MIME email config.
 type SmimeInfo struct {
 	EncryptedKeyPassword *string `json:"encryptedKeyPassword,omitempty"`
 	Expiration           *string `json:"expiration,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The number of documents successfully and unsuccessfully processed during a translation job.
 **/
 export class JobDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DocumentsWithErrorsCount" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentsWithErrorsCount" })
   documentsWithErrorsCount?: number;
 
-  @Metadata({ data: "json, name=InputDocumentsCount" })
+  @SpeakeasyMetadata({ data: "json, name=InputDocumentsCount" })
   inputDocumentsCount?: number;
 
-  @Metadata({ data: "json, name=TranslatedDocumentsCount" })
+  @SpeakeasyMetadata({ data: "json, name=TranslatedDocumentsCount" })
   translatedDocumentsCount?: number;
 }

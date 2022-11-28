@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PasswordPolicyType } from "./passwordpolicytype";
+
 
 
 // UserPoolPolicyType
@@ -7,6 +8,6 @@ import { PasswordPolicyType } from "./passwordpolicytype";
  * The policy associated with a user pool.
 **/
 export class UserPoolPolicyType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PasswordPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=PasswordPolicy" })
   passwordPolicy?: PasswordPolicyType;
 }

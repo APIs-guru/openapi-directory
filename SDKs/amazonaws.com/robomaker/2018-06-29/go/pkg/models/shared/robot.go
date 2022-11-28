@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Robot
+// Information about a robot.
 type Robot struct {
 	Architecture       *ArchitectureEnum `json:"architecture,omitempty"`
 	Arn                *string           `json:"arn,omitempty"`

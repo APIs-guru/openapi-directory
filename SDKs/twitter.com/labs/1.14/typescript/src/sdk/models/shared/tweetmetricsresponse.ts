@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TweetMetrics } from "./tweetmetrics";
 import { GenericProblem } from "./genericproblem";
 import { InvalidRequestProblem } from "./invalidrequestproblem";
@@ -17,10 +16,11 @@ import { InvalidRuleProblem } from "./invalidruleproblem";
 import { DuplicateRuleProblem } from "./duplicateruleproblem";
 
 
+
 export class TweetMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.TweetMetrics })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: TweetMetrics })
   data?: TweetMetrics[];
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: any[];
 }

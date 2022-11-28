@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PlanDataTypeOfPlanBasedOnTheSourceEnum(str, Enum):
     STARTER = "STARTER"
@@ -20,7 +22,7 @@ class PlanDataServiceThatProvisionedThePlanEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PlanData:
-    amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    plan: Optional[PlanDataTypeOfPlanBasedOnTheSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plan' }})
-    source: Optional[PlanDataServiceThatProvisionedThePlanEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    plan: Optional[PlanDataTypeOfPlanBasedOnTheSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('plan') }})
+    source: Optional[PlanDataServiceThatProvisionedThePlanEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

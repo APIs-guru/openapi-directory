@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvAssignMsisdnRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eeProductId" })
+  @SpeakeasyMetadata({ data: "json, name=eeProductId" })
   eeProductId: string;
 
-  @Metadata({ data: "json, name=msisdn" })
+  @SpeakeasyMetadata({ data: "json, name=msisdn" })
   msisdn: string;
 
-  @Metadata({ data: "json, name=profileToken" })
+  @SpeakeasyMetadata({ data: "json, name=profileToken" })
   profileToken: string;
 
-  @Metadata({ data: "json, name=trackingHeader" })
+  @SpeakeasyMetadata({ data: "json, name=trackingHeader" })
   trackingHeader: string;
 }

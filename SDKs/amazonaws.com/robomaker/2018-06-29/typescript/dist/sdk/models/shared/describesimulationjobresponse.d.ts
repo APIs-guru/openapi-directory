@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComputeResponse } from "./computeresponse";
 import { DataSource } from "./datasource";
 import { FailureBehaviorEnum } from "./failurebehaviorenum";

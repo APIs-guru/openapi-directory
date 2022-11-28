@@ -1,5 +1,7 @@
 package shared
 
+// InsertTableRowsRequest
+// Inserts rows into a table.
 type InsertTableRowsRequest struct {
 	CellLocation  *TableCellLocation `json:"cellLocation,omitempty"`
 	InsertBelow   *bool              `json:"insertBelow,omitempty"`

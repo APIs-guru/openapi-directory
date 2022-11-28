@@ -1,7 +1,8 @@
 
 
+
 export enum BackupStatusEnum {
-    Creating = "CREATING"
-,    Deleted = "DELETED"
-,    Available = "AVAILABLE"
+    Creating = "CREATING",
+    Deleted = "DELETED",
+    Available = "AVAILABLE"
 }

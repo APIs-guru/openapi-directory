@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import table
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableVersion:
-    table: Optional[table.Table] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Table' }})
-    version_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VersionId' }})
+    r"""TableVersion
+    Specifies a version of a table.
+    """
+    
+    table: Optional[Table] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Table') }})
+    version_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VersionId') }})
     

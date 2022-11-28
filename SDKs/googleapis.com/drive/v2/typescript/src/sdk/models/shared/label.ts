@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LabelField } from "./labelfield";
+
 
 
 // Label
@@ -8,15 +8,15 @@ import { LabelField } from "./labelfield";
  * Representation of a label and its fields.
 **/
 export class Label extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.LabelField })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: LabelField })
   fields?: Map<string, LabelField>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 }

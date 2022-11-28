@@ -1,5 +1,7 @@
 package shared
 
+// LastAdminUserRoom
+// Room information
 type LastAdminUserRoom struct {
 	ID                 int64  `json:"id"`
 	LastAdminInGroup   bool   `json:"lastAdminInGroup"`

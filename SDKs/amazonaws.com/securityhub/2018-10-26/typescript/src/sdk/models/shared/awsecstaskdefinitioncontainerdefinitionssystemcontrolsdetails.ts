@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A namespaced kernel parameter to set in the container.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Namespace" })
+  @SpeakeasyMetadata({ data: "json, name=Namespace" })
   namespace?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

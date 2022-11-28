@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Activation
+// An activation registers one or more on-premises servers or virtual machines (VMs) with Amazon Web Services so that you can configure those servers or VMs using Run Command. A server or VM that has been registered with Amazon Web Services Systems Manager is called a managed instance.
 type Activation struct {
 	ActivationID        *string    `json:"ActivationId,omitempty"`
 	CreatedDate         *time.Time `json:"CreatedDate,omitempty"`

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import apigatewayapiconfigfile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ApigatewayAPIConfigOpenAPIDocument:
-    document: Optional[apigatewayapiconfigfile.ApigatewayAPIConfigFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document' }})
+    r"""ApigatewayAPIConfigOpenAPIDocument
+    An OpenAPI Specification Document describing an API.
+    """
+    
+    document: Optional[ApigatewayAPIConfigFile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('document') }})
     

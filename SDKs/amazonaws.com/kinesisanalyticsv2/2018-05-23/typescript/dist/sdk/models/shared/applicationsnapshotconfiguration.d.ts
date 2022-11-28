@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
 **/

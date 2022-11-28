@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccessSetEnabledPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enabledOrNot" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enabledOrNot" })
   enabledOrNot: string;
 }
 
 
 export class AccessSetEnabledRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AccessSetEnabledPathParams;
 }
 
 
 export class AccessSetEnabledResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accessSetEnabled200ApplicationJsonString?: string;
 }

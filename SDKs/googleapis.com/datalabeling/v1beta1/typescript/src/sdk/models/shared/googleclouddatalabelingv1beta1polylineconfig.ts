@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1PolylineConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config for image polyline human labeling task.
 **/
 export class GoogleCloudDatalabelingV1beta1PolylineConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSpecSet" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpecSet" })
   annotationSpecSet?: string;
 
-  @Metadata({ data: "json, name=instructionMessage" })
+  @SpeakeasyMetadata({ data: "json, name=instructionMessage" })
   instructionMessage?: string;
 }

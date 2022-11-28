@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CampaignEmailMessage
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the content and "From" address for an email message that's sent to recipients of a campaign.
 **/
 export class CampaignEmailMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=FromAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FromAddress" })
   fromAddress?: string;
 
-  @Metadata({ data: "json, name=HtmlBody" })
+  @SpeakeasyMetadata({ data: "json, name=HtmlBody" })
   htmlBody?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }

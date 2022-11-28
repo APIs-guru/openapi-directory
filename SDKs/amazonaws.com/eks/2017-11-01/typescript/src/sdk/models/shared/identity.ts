@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Oidc } from "./oidc";
+
 
 
 // Identity
@@ -7,6 +8,6 @@ import { Oidc } from "./oidc";
  * An object representing an identity provider.
 **/
 export class Identity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oidc" })
+  @SpeakeasyMetadata({ data: "json, name=oidc" })
   oidc?: Oidc;
 }

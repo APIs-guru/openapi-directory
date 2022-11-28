@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetCreateDbInstanceActionEnum {
     CreateDbInstance = "CreateDBInstance"
@@ -10,126 +11,126 @@ export enum GetCreateDbInstanceVersionEnum {
 
 
 export class GetCreateDbInstanceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetCreateDbInstanceActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AllocatedStorage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AllocatedStorage" })
   allocatedStorage: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AutoMinorVersionUpgrade" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutoMinorVersionUpgrade" })
   autoMinorVersionUpgrade?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=BackupRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BackupRetentionPeriod" })
   backupRetentionPeriod?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CharacterSetName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CharacterSetName" })
   characterSetName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBInstanceClass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBInstanceClass" })
   dbInstanceClass: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBInstanceIdentifier" })
   dbInstanceIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBName" })
   dbName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBParameterGroupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBParameterGroupName" })
   dbParameterGroupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBSecurityGroups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBSecurityGroups" })
   dbSecurityGroups?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBSubnetGroupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBSubnetGroupName" })
   dbSubnetGroupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Engine" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Engine" })
   engine: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Iops" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Iops" })
   iops?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=LicenseModel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LicenseModel" })
   licenseModel?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" })
   masterUserPassword: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MasterUsername" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MasterUsername" })
   masterUsername: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MultiAZ" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MultiAZ" })
   multiAz?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" })
   optionGroupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Port" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Port" })
   port?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PreferredBackupWindow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredBackupWindow" })
   preferredBackupWindow?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PubliclyAccessible" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PubliclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetCreateDbInstanceVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" })
   vpcSecurityGroupIds?: string[];
 }
 
 
 export class GetCreateDbInstanceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetCreateDbInstanceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCreateDbInstanceQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetCreateDbInstanceHeaders;
 }
 
 
 export class GetCreateDbInstanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudSqlInstanceInfo
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For display only. Metadata associated with a Cloud SQL instance.
 **/
 export class CloudSqlInstanceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=externalIp" })
+  @SpeakeasyMetadata({ data: "json, name=externalIp" })
   externalIp?: string;
 
-  @Metadata({ data: "json, name=internalIp" })
+  @SpeakeasyMetadata({ data: "json, name=internalIp" })
   internalIp?: string;
 
-  @Metadata({ data: "json, name=networkUri" })
+  @SpeakeasyMetadata({ data: "json, name=networkUri" })
   networkUri?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

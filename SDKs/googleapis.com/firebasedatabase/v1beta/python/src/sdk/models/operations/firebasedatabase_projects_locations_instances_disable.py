@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDisablePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebasedatabaseProjectsLocationsInstancesDisableQueryParams:
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDisableSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDisableSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebasedatabaseProjectsLocationsInstancesDisableSecurity:
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDisableRequest:
-    path_params: FirebasedatabaseProjectsLocationsInstancesDisablePathParams = field(default=None)
-    query_params: FirebasedatabaseProjectsLocationsInstancesDisableQueryParams = field(default=None)
+    path_params: FirebasedatabaseProjectsLocationsInstancesDisablePathParams = field()
+    query_params: FirebasedatabaseProjectsLocationsInstancesDisableQueryParams = field()
+    security: FirebasedatabaseProjectsLocationsInstancesDisableSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasedatabaseProjectsLocationsInstancesDisableSecurity = field(default=None)
     
 
 @dataclass
 class FirebasedatabaseProjectsLocationsInstancesDisableResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     database_instance: Optional[shared.DatabaseInstance] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobExecutionStatusEnum } from "./jobexecutionstatusenum";
 import { JobExecutionStatusDetails } from "./jobexecutionstatusdetails";
+
 
 
 // JobExecution
@@ -8,36 +9,36 @@ import { JobExecutionStatusDetails } from "./jobexecutionstatusdetails";
  * The job execution object represents the execution of a job on a particular device.
 **/
 export class JobExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approximateSecondsBeforeTimedOut" })
+  @SpeakeasyMetadata({ data: "json, name=approximateSecondsBeforeTimedOut" })
   approximateSecondsBeforeTimedOut?: number;
 
-  @Metadata({ data: "json, name=executionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=executionNumber" })
   executionNumber?: number;
 
-  @Metadata({ data: "json, name=forceCanceled" })
+  @SpeakeasyMetadata({ data: "json, name=forceCanceled" })
   forceCanceled?: boolean;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=queuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=queuedAt" })
   queuedAt?: Date;
 
-  @Metadata({ data: "json, name=startedAt" })
+  @SpeakeasyMetadata({ data: "json, name=startedAt" })
   startedAt?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JobExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=statusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=statusDetails" })
   statusDetails?: JobExecutionStatusDetails;
 
-  @Metadata({ data: "json, name=thingArn" })
+  @SpeakeasyMetadata({ data: "json, name=thingArn" })
   thingArn?: string;
 
-  @Metadata({ data: "json, name=versionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=versionNumber" })
   versionNumber?: number;
 }

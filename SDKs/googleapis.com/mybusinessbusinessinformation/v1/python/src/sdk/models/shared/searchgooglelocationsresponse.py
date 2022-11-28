@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlelocation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchGoogleLocationsResponse:
-    google_locations: Optional[List[googlelocation.GoogleLocation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'googleLocations' }})
+    r"""SearchGoogleLocationsResponse
+    Response message for GoogleLocations.SearchGoogleLocations.
+    """
+    
+    google_locations: Optional[List[GoogleLocation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('googleLocations') }})
     

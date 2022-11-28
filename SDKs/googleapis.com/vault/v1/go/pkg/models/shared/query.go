@@ -46,6 +46,8 @@ const (
 	QuerySearchMethodEnumSharedDrive             QuerySearchMethodEnum = "SHARED_DRIVE"
 )
 
+// Query
+// The query definition used for search and export.
 type Query struct {
 	AccountInfo         *AccountInfo           `json:"accountInfo,omitempty"`
 	Corpus              *QueryCorpusEnum       `json:"corpus,omitempty"`

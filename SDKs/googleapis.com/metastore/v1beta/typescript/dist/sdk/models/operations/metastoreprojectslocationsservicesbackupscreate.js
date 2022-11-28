@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var MetastoreProjectsLocationsServicesBackupsCreatePathParams = /** @class */ (function (_super) {
     __extends(MetastoreProjectsLocationsServicesBackupsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var MetastoreProjectsLocationsServicesBackupsCreatePathParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreatePathParams.prototype, "parent", void 0);
     return MetastoreProjectsLocationsServicesBackupsCreatePathParams;
@@ -42,55 +42,55 @@ var MetastoreProjectsLocationsServicesBackupsCreateQueryParams = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=backupId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=backupId" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "backupId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=requestId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requestId" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return MetastoreProjectsLocationsServicesBackupsCreateQueryParams;
@@ -102,11 +102,11 @@ var MetastoreProjectsLocationsServicesBackupsCreateSecurity = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], MetastoreProjectsLocationsServicesBackupsCreateSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], MetastoreProjectsLocationsServicesBackupsCreateSecurity.prototype, "oauth2c", void 0);
     return MetastoreProjectsLocationsServicesBackupsCreateSecurity;
@@ -118,19 +118,19 @@ var MetastoreProjectsLocationsServicesBackupsCreateRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MetastoreProjectsLocationsServicesBackupsCreatePathParams)
     ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MetastoreProjectsLocationsServicesBackupsCreateQueryParams)
     ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.Backup)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.BackupInput)
     ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MetastoreProjectsLocationsServicesBackupsCreateSecurity)
     ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "security", void 0);
     return MetastoreProjectsLocationsServicesBackupsCreateRequest;
@@ -142,15 +142,15 @@ var MetastoreProjectsLocationsServicesBackupsCreateResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], MetastoreProjectsLocationsServicesBackupsCreateResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MetastoreProjectsLocationsServicesBackupsCreateResponse.prototype, "statusCode", void 0);
     return MetastoreProjectsLocationsServicesBackupsCreateResponse;

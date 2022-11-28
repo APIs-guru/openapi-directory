@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class SubaccountEditRequest:
-    request: shared.SubaccountRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.SubaccountRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SubaccountEditResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     erreur: Optional[shared.Erreur] = field(default=None)
-    status_code: int = field(default=None)
     subaccount_response: Optional[shared.SubaccountResponse] = field(default=None)
     

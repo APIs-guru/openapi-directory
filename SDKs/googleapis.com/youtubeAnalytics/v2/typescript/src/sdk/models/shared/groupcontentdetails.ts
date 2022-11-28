@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupContentDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A group's content details.
 **/
 export class GroupContentDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemCount" })
+  @SpeakeasyMetadata({ data: "json, name=itemCount" })
   itemCount?: string;
 
-  @Metadata({ data: "json, name=itemType" })
+  @SpeakeasyMetadata({ data: "json, name=itemType" })
   itemType?: string;
 }

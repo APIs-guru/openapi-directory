@@ -1,104 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutAccountsAccountOrdersCustomerOrderIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=CustomerOrderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CustomerOrderId" })
   customerOrderId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account" })
   account: string;
 }
 
 
 export class PutAccountsAccountOrdersCustomerOrderIdRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Aux Price" })
+  @SpeakeasyMetadata({ data: "json, name=Aux Price" })
   auxPrice?: number;
 
-  @Metadata({ data: "json, name=CustomerOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerOrderId" })
   customerOrderId?: string;
 
-  @Metadata({ data: "json, name=GermanHftAlgo" })
+  @SpeakeasyMetadata({ data: "json, name=GermanHftAlgo" })
   germanHftAlgo?: boolean;
 
-  @Metadata({ data: "json, name=Mifid2Algo" })
+  @SpeakeasyMetadata({ data: "json, name=Mifid2Algo" })
   mifid2Algo?: string;
 
-  @Metadata({ data: "json, name=Mifid2DecisionMaker" })
+  @SpeakeasyMetadata({ data: "json, name=Mifid2DecisionMaker" })
   mifid2DecisionMaker?: string;
 
-  @Metadata({ data: "json, name=Mifid2ExecutionAlgo" })
+  @SpeakeasyMetadata({ data: "json, name=Mifid2ExecutionAlgo" })
   mifid2ExecutionAlgo?: string;
 
-  @Metadata({ data: "json, name=Mifid2ExecutionTrader" })
+  @SpeakeasyMetadata({ data: "json, name=Mifid2ExecutionTrader" })
   mifid2ExecutionTrader?: string;
 
-  @Metadata({ data: "json, name=Order Type" })
+  @SpeakeasyMetadata({ data: "json, name=Order Type" })
   orderType?: number;
 
-  @Metadata({ data: "json, name=OrigCustomerOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=OrigCustomerOrderId" })
   origCustomerOrderId?: string;
 
-  @Metadata({ data: "json, name=Outside RTH" })
+  @SpeakeasyMetadata({ data: "json, name=Outside RTH" })
   outsideRth?: number;
 
-  @Metadata({ data: "json, name=Price" })
+  @SpeakeasyMetadata({ data: "json, name=Price" })
   price?: number;
 
-  @Metadata({ data: "json, name=Quantity" })
+  @SpeakeasyMetadata({ data: "json, name=Quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=Side" })
+  @SpeakeasyMetadata({ data: "json, name=Side" })
   side?: number;
 
-  @Metadata({ data: "json, name=Time in Force" })
+  @SpeakeasyMetadata({ data: "json, name=Time in Force" })
   timeInForce?: number;
 }
 
 
-export class PutAccountsAccountOrdersCustomerOrderIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutAccountsAccountOrdersCustomerOrderIdPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PutAccountsAccountOrdersCustomerOrderIdRequestBody;
-}
-
-
 export class PutAccountsAccountOrdersCustomerOrderId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomerOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerOrderId" })
   customerOrderId?: string;
 
-  @Metadata({ data: "json, name=OrderQty" })
+  @SpeakeasyMetadata({ data: "json, name=OrderQty" })
   orderQty?: number;
 
-  @Metadata({ data: "json, name=OrderType" })
+  @SpeakeasyMetadata({ data: "json, name=OrderType" })
   orderType?: number;
 
-  @Metadata({ data: "json, name=Price" })
+  @SpeakeasyMetadata({ data: "json, name=Price" })
   price?: string;
 
-  @Metadata({ data: "json, name=Side" })
+  @SpeakeasyMetadata({ data: "json, name=Side" })
   side?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: shared.OrderStatusEnum;
 
-  @Metadata({ data: "json, name=Symbol" })
+  @SpeakeasyMetadata({ data: "json, name=Symbol" })
   symbol?: number;
 
-  @Metadata({ data: "json, name=Warning" })
+  @SpeakeasyMetadata({ data: "json, name=Warning" })
   warning?: string;
 }
 
 
+export class PutAccountsAccountOrdersCustomerOrderIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutAccountsAccountOrdersCustomerOrderIdPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PutAccountsAccountOrdersCustomerOrderIdRequestBody;
+}
+
+
 export class PutAccountsAccountOrdersCustomerOrderIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: operations.PutAccountsAccountOrdersCustomerOrderId200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: PutAccountsAccountOrdersCustomerOrderId200ApplicationJson })
   putAccountsAccountOrdersCustomerOrderId200ApplicationJsonObjects?: PutAccountsAccountOrdersCustomerOrderId200ApplicationJson[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

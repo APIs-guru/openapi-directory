@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2hybridcontentitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2HybridInspectJobTriggerRequest:
-    hybrid_item: Optional[googleprivacydlpv2hybridcontentitem.GooglePrivacyDlpV2HybridContentItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hybridItem' }})
+    r"""GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+    Request to search for potentially sensitive info in a custom location.
+    """
+    
+    hybrid_item: Optional[GooglePrivacyDlpV2HybridContentItem] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hybridItem') }})
     

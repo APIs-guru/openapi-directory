@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Service
+// Details on a service within a cluster
 type Service struct {
 	CapacityProviderStrategy      []CapacityProviderStrategyItem `json:"capacityProviderStrategy,omitempty"`
 	ClusterArn                    *string                        `json:"clusterArn,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DeviceClaimAdditionalServiceEnum {
     AdditionalServiceUnspecified = "ADDITIONAL_SERVICE_UNSPECIFIED",
     DeviceProtection = "DEVICE_PROTECTION"
@@ -13,6 +13,7 @@ export declare enum DeviceClaimSectionTypeEnum {
 **/
 export declare class DeviceClaim extends SpeakeasyBase {
     additionalService?: DeviceClaimAdditionalServiceEnum;
+    googleWorkspaceCustomerId?: string;
     ownerCompanyId?: string;
     resellerId?: string;
     sectionType?: DeviceClaimSectionTypeEnum;

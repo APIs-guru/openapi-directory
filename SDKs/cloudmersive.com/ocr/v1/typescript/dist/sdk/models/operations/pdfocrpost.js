@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PdfOcrPostHeaders = /** @class */ (function (_super) {
     __extends(PdfOcrPostHeaders, _super);
@@ -30,15 +30,15 @@ var PdfOcrPostHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=language" }),
         __metadata("design:type", String)
     ], PdfOcrPostHeaders.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=preprocessing" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=preprocessing" }),
         __metadata("design:type", String)
     ], PdfOcrPostHeaders.prototype, "preprocessing", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=recognitionMode" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=recognitionMode" }),
         __metadata("design:type", String)
     ], PdfOcrPostHeaders.prototype, "recognitionMode", void 0);
     return PdfOcrPostHeaders;
@@ -50,11 +50,11 @@ var PdfOcrPostRequestBodyImageFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], PdfOcrPostRequestBodyImageFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=imageFile" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=imageFile" }),
         __metadata("design:type", String)
     ], PdfOcrPostRequestBodyImageFile.prototype, "imageFile", void 0);
     return PdfOcrPostRequestBodyImageFile;
@@ -66,7 +66,7 @@ var PdfOcrPostRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", PdfOcrPostRequestBodyImageFile)
     ], PdfOcrPostRequestBody.prototype, "imageFile", void 0);
     return PdfOcrPostRequestBody;
@@ -78,7 +78,7 @@ var PdfOcrPostSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], PdfOcrPostSecurity.prototype, "apikey", void 0);
     return PdfOcrPostSecurity;
@@ -90,15 +90,15 @@ var PdfOcrPostRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PdfOcrPostHeaders)
     ], PdfOcrPostRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", PdfOcrPostRequestBody)
     ], PdfOcrPostRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PdfOcrPostSecurity)
     ], PdfOcrPostRequest.prototype, "security", void 0);
     return PdfOcrPostRequest;
@@ -110,19 +110,19 @@ var PdfOcrPostResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PdfOcrPostResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PdfOcrPostResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PdfToTextResponse)
     ], PdfOcrPostResponse.prototype, "pdfToTextResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PdfOcrPostResponse.prototype, "statusCode", void 0);
     return PdfOcrPostResponse;

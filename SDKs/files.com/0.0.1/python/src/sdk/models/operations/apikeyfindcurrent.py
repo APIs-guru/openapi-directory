@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class APIKeyFindCurrentResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_entity: Optional[shared.APIKeyEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

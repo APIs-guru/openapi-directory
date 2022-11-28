@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCre
 
 @dataclass
 class CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreateRequest:
-    path_params: CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreatePathParams = field(default=None)
-    query_params: CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreateQueryParams = field(default=None)
-    request: Optional[shared.CertificateMapEntry] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreateSecurity = field(default=None)
+    path_params: CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreatePathParams = field()
+    query_params: CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreateQueryParams = field()
+    security: CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreateSecurity = field()
+    request: Optional[shared.CertificateMapEntryInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEntriesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

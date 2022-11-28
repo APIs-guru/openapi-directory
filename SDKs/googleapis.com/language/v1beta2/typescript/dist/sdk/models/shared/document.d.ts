@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DocumentBoilerplateHandlingEnum {
     BoilerplateHandlingUnspecified = "BOILERPLATE_HANDLING_UNSPECIFIED",
     SkipBoilerplate = "SKIP_BOILERPLATE",

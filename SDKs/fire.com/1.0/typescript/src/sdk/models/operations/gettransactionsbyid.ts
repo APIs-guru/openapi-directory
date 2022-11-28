@@ -1,81 +1,76 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTransactionsByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ican" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ican" })
   ican: number;
 }
 
 
-export class GetTransactionsByIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTransactionsByIdPathParams;
-}
-
-
 export class GetTransactionsByIdTransactionRelatedCard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=cardId" })
+  @SpeakeasyMetadata({ data: "json, name=cardId" })
   cardId?: number;
 
-  @Metadata({ data: "json, name=embossBusinessName" })
+  @SpeakeasyMetadata({ data: "json, name=embossBusinessName" })
   embossBusinessName?: string;
 
-  @Metadata({ data: "json, name=embossCardName" })
+  @SpeakeasyMetadata({ data: "json, name=embossCardName" })
   embossCardName?: string;
 
-  @Metadata({ data: "json, name=expiryDate" })
+  @SpeakeasyMetadata({ data: "json, name=expiryDate" })
   expiryDate?: Date;
 
-  @Metadata({ data: "json, name=maskedPan" })
+  @SpeakeasyMetadata({ data: "json, name=maskedPan" })
   maskedPan?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: string;
 }
 
 
 export class GetTransactionsByIdTransactionFxTrade extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buyAmount" })
+  @SpeakeasyMetadata({ data: "json, name=buyAmount" })
   buyAmount?: number;
 
-  @Metadata({ data: "json, name=buyCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=buyCurrency" })
   buyCurrency?: string;
 
-  @Metadata({ data: "json, name=fixedSide" })
+  @SpeakeasyMetadata({ data: "json, name=fixedSide" })
   fixedSide?: string;
 
-  @Metadata({ data: "json, name=rate4d" })
+  @SpeakeasyMetadata({ data: "json, name=rate4d" })
   rate4d?: number;
 
-  @Metadata({ data: "json, name=sellAmount" })
+  @SpeakeasyMetadata({ data: "json, name=sellAmount" })
   sellAmount?: number;
 
-  @Metadata({ data: "json, name=sellCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=sellCurrency" })
   sellCurrency?: string;
 }
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyFireAccountAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=bic" })
+  @SpeakeasyMetadata({ data: "json, name=bic" })
   bic?: string;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=nsc" })
+  @SpeakeasyMetadata({ data: "json, name=nsc" })
   nsc?: string;
 }
 
@@ -85,31 +80,31 @@ export enum GetTransactionsByIdTransactionRelatedPartyRelatedPartyFireAccountTyp
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyFireAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyFireAccountAccount;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyFireAccountTypeEnum;
 }
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyExternalAccountAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=bic" })
+  @SpeakeasyMetadata({ data: "json, name=bic" })
   bic?: string;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=nsc" })
+  @SpeakeasyMetadata({ data: "json, name=nsc" })
   nsc?: string;
 }
 
@@ -119,31 +114,31 @@ export enum GetTransactionsByIdTransactionRelatedPartyRelatedPartyExternalAccoun
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyExternalAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyExternalAccountAccount;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyExternalAccountTypeEnum;
 }
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyPayeeAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias?: string;
 
-  @Metadata({ data: "json, name=bic" })
+  @SpeakeasyMetadata({ data: "json, name=bic" })
   bic?: string;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=nsc" })
+  @SpeakeasyMetadata({ data: "json, name=nsc" })
   nsc?: string;
 }
 
@@ -153,179 +148,185 @@ export enum GetTransactionsByIdTransactionRelatedPartyRelatedPartyPayeeTypeEnum 
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyPayee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyPayeeAccount;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyPayeeTypeEnum;
 }
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyCardPaymentCardMerchant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acquirerIdDe32" })
+  @SpeakeasyMetadata({ data: "json, name=acquirerIdDe32" })
   acquirerIdDe32?: string;
 
-  @Metadata({ data: "json, name=additionalAmtDe54" })
+  @SpeakeasyMetadata({ data: "json, name=additionalAmtDe54" })
   additionalAmtDe54?: string;
 
-  @Metadata({ data: "json, name=additionalDataDe124" })
+  @SpeakeasyMetadata({ data: "json, name=additionalDataDe124" })
   additionalDataDe124?: string;
 
-  @Metadata({ data: "json, name=additionalDataDe48" })
+  @SpeakeasyMetadata({ data: "json, name=additionalDataDe48" })
   additionalDataDe48?: string;
 
-  @Metadata({ data: "json, name=authCodeDe38" })
+  @SpeakeasyMetadata({ data: "json, name=authCodeDe38" })
   authCodeDe38?: string;
 
-  @Metadata({ data: "json, name=authorisedByGps" })
+  @SpeakeasyMetadata({ data: "json, name=authorisedByGps" })
   authorisedByGps?: string;
 
-  @Metadata({ data: "json, name=avsResult" })
+  @SpeakeasyMetadata({ data: "json, name=avsResult" })
   avsResult?: string;
 
-  @Metadata({ data: "json, name=billAmt" })
+  @SpeakeasyMetadata({ data: "json, name=billAmt" })
   billAmt?: number;
 
-  @Metadata({ data: "json, name=billCcy" })
+  @SpeakeasyMetadata({ data: "json, name=billCcy" })
   billCcy?: string;
 
-  @Metadata({ data: "json, name=expiryDate" })
+  @SpeakeasyMetadata({ data: "json, name=expiryDate" })
   expiryDate?: string;
 
-  @Metadata({ data: "json, name=mccCode" })
+  @SpeakeasyMetadata({ data: "json, name=mccCode" })
   mccCode?: string;
 
-  @Metadata({ data: "json, name=merchIdDe42" })
+  @SpeakeasyMetadata({ data: "json, name=merchIdDe42" })
   merchIdDe42?: string;
 
-  @Metadata({ data: "json, name=merchNameDe43" })
+  @SpeakeasyMetadata({ data: "json, name=merchNameDe43" })
   merchNameDe43?: string;
 
-  @Metadata({ data: "json, name=mtId" })
+  @SpeakeasyMetadata({ data: "json, name=mtId" })
   mtId?: string;
 
-  @Metadata({ data: "json, name=posDataDe22" })
+  @SpeakeasyMetadata({ data: "json, name=posDataDe22" })
   posDataDe22?: string;
 
-  @Metadata({ data: "json, name=posDataDe61" })
+  @SpeakeasyMetadata({ data: "json, name=posDataDe61" })
   posDataDe61?: string;
 
-  @Metadata({ data: "json, name=posTermnlDe41" })
+  @SpeakeasyMetadata({ data: "json, name=posTermnlDe41" })
   posTermnlDe41?: string;
 
-  @Metadata({ data: "json, name=procCode" })
+  @SpeakeasyMetadata({ data: "json, name=procCode" })
   procCode?: string;
 
-  @Metadata({ data: "json, name=recordDataDe120" })
+  @SpeakeasyMetadata({ data: "json, name=recordDataDe120" })
   recordDataDe120?: string;
 
-  @Metadata({ data: "json, name=respCodeDe39" })
+  @SpeakeasyMetadata({ data: "json, name=respCodeDe39" })
   respCodeDe39?: string;
 
-  @Metadata({ data: "json, name=retRefNoDe37" })
+  @SpeakeasyMetadata({ data: "json, name=retRefNoDe37" })
   retRefNoDe37?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=txnAmt4d" })
+  @SpeakeasyMetadata({ data: "json, name=txnAmt4d" })
   txnAmt4d?: number;
 
-  @Metadata({ data: "json, name=txnCcy" })
+  @SpeakeasyMetadata({ data: "json, name=txnCcy" })
   txnCcy?: string;
 
-  @Metadata({ data: "json, name=txnCtry" })
+  @SpeakeasyMetadata({ data: "json, name=txnCtry" })
   txnCtry?: string;
 
-  @Metadata({ data: "json, name=txnDesc" })
+  @SpeakeasyMetadata({ data: "json, name=txnDesc" })
   txnDesc?: string;
 
-  @Metadata({ data: "json, name=txnStatCode" })
+  @SpeakeasyMetadata({ data: "json, name=txnStatCode" })
   txnStatCode?: string;
 
-  @Metadata({ data: "json, name=txnType" })
+  @SpeakeasyMetadata({ data: "json, name=txnType" })
   txnType?: string;
 }
 
 export enum GetTransactionsByIdTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum {
-    CardMerchant = "CARD_MERCHANT"
-,    CardAtm = "CARD_ATM"
+    CardMerchant = "CARD_MERCHANT",
+    CardAtm = "CARD_ATM"
 }
 
 
 export class GetTransactionsByIdTransactionRelatedPartyRelatedPartyCardPayment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cardMerchant" })
+  @SpeakeasyMetadata({ data: "json, name=cardMerchant" })
   cardMerchant?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyCardPaymentCardMerchant;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GetTransactionsByIdTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum;
 }
 
 
 export class GetTransactionsByIdTransaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountAfterCharges" })
+  @SpeakeasyMetadata({ data: "json, name=amountAfterCharges" })
   amountAfterCharges?: number;
 
-  @Metadata({ data: "json, name=amountBeforeCharges" })
+  @SpeakeasyMetadata({ data: "json, name=amountBeforeCharges" })
   amountBeforeCharges?: number;
 
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=card" })
+  @SpeakeasyMetadata({ data: "json, name=card" })
   card?: GetTransactionsByIdTransactionRelatedCard;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=dateAcknowledged" })
+  @SpeakeasyMetadata({ data: "json, name=dateAcknowledged" })
   dateAcknowledged?: Date;
 
-  @Metadata({ data: "json, name=feeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=feeAmount" })
   feeAmount?: number;
 
-  @Metadata({ data: "json, name=fxTradeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=fxTradeDetails" })
   fxTradeDetails?: GetTransactionsByIdTransactionFxTrade;
 
-  @Metadata({ data: "json, name=ican" })
+  @SpeakeasyMetadata({ data: "json, name=ican" })
   ican?: number;
 
-  @Metadata({ data: "json, name=myRef" })
+  @SpeakeasyMetadata({ data: "json, name=myRef" })
   myRef?: string;
 
-  @Metadata({ data: "json, name=paymentRequestPublicCode" })
+  @SpeakeasyMetadata({ data: "json, name=paymentRequestPublicCode" })
   paymentRequestPublicCode?: string;
 
-  @Metadata({ data: "json, name=refId" })
+  @SpeakeasyMetadata({ data: "json, name=refId" })
   refId?: number;
 
-  @Metadata({ data: "json, name=relatedParty" })
+  @SpeakeasyMetadata({ data: "json, name=relatedParty" })
   relatedParty?: any;
 
-  @Metadata({ data: "json, name=taxAmount" })
+  @SpeakeasyMetadata({ data: "json, name=taxAmount" })
   taxAmount?: number;
 
-  @Metadata({ data: "json, name=txnId" })
+  @SpeakeasyMetadata({ data: "json, name=txnId" })
   txnId?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
+export class GetTransactionsByIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTransactionsByIdPathParams;
+}
+
+
 export class GetTransactionsByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   transaction?: GetTransactionsByIdTransaction;
 }

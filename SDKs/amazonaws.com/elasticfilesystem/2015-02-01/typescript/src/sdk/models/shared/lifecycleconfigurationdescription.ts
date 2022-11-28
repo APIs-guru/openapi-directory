@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LifecyclePolicy } from "./lifecyclepolicy";
 
 
+
 export class LifecycleConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LifecyclePolicies", elemType: shared.LifecyclePolicy })
+  @SpeakeasyMetadata({ data: "json, name=LifecyclePolicies", elemType: LifecyclePolicy })
   lifecyclePolicies?: LifecyclePolicy[];
 }

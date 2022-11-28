@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class ReleaseDeleteReleaseBundlePathParams:
-    bundle_id: str = field(default=None, metadata={'path_param': { 'field_name': 'BundleId', 'style': 'simple', 'explode': False }})
-    release_id: int = field(default=None, metadata={'path_param': { 'field_name': 'ReleaseId', 'style': 'simple', 'explode': False }})
+    bundle_id: str = field(metadata={'path_param': { 'field_name': 'BundleId', 'style': 'simple', 'explode': False }})
+    release_id: int = field(metadata={'path_param': { 'field_name': 'ReleaseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReleaseDeleteReleaseBundleRequest:
-    path_params: ReleaseDeleteReleaseBundlePathParams = field(default=None)
+    path_params: ReleaseDeleteReleaseBundlePathParams = field()
     
 
 @dataclass
 class ReleaseDeleteReleaseBundleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

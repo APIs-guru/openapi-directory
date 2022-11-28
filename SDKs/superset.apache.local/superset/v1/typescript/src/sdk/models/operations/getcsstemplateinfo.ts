@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCssTemplateInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetInfoSchema;
 }
 
 
 export class GetCssTemplateInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetCssTemplateInfoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetCssTemplateInfoQueryParams;
-
-  @Metadata()
-  security: GetCssTemplateInfoSecurity;
-}
-
-
 export class GetCssTemplateInfo200ApplicationJsonFiltersColumnName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: string;
 }
 
 
 export class GetCssTemplateInfo200ApplicationJsonFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name", elemType: operations.GetCssTemplateInfo200ApplicationJsonFiltersColumnName })
+  @SpeakeasyMetadata({ data: "json, name=column_name", elemType: GetCssTemplateInfo200ApplicationJsonFiltersColumnName })
   columnName?: GetCssTemplateInfo200ApplicationJsonFiltersColumnName[];
 }
 
 
 export class GetCssTemplateInfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add_columns" })
+  @SpeakeasyMetadata({ data: "json, name=add_columns" })
   addColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=edit_columns" })
+  @SpeakeasyMetadata({ data: "json, name=edit_columns" })
   editColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: GetCssTemplateInfo200ApplicationJsonFilters;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: string[];
 }
 
 
 export class GetCssTemplateInfo400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetCssTemplateInfo401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetCssTemplateInfo422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetCssTemplateInfo500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetCssTemplateInfoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetCssTemplateInfoQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetCssTemplateInfoSecurity;
+}
+
+
 export class GetCssTemplateInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplateInfo200ApplicationJsonObject?: GetCssTemplateInfo200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplateInfo400ApplicationJsonObject?: GetCssTemplateInfo400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplateInfo401ApplicationJsonObject?: GetCssTemplateInfo401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplateInfo422ApplicationJsonObject?: GetCssTemplateInfo422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCssTemplateInfo500ApplicationJsonObject?: GetCssTemplateInfo500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

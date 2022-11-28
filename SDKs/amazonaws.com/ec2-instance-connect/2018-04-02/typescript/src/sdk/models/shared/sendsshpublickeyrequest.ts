@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendSshPublicKeyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "json, name=InstanceOSUser" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceOSUser" })
   instanceOsUser: string;
 
-  @Metadata({ data: "json, name=SSHPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=SSHPublicKey" })
   sshPublicKey: string;
 }

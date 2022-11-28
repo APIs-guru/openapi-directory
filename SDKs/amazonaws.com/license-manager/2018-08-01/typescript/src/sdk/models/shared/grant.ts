@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrantStatusEnum } from "./grantstatusenum";
 import { AllowedOperationEnum } from "./allowedoperationenum";
+
 
 
 // Grant
@@ -8,33 +9,33 @@ import { AllowedOperationEnum } from "./allowedoperationenum";
  * Describes a grant.
 **/
 export class Grant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GrantArn" })
+  @SpeakeasyMetadata({ data: "json, name=GrantArn" })
   grantArn: string;
 
-  @Metadata({ data: "json, name=GrantName" })
+  @SpeakeasyMetadata({ data: "json, name=GrantName" })
   grantName: string;
 
-  @Metadata({ data: "json, name=GrantStatus" })
+  @SpeakeasyMetadata({ data: "json, name=GrantStatus" })
   grantStatus: GrantStatusEnum;
 
-  @Metadata({ data: "json, name=GrantedOperations" })
+  @SpeakeasyMetadata({ data: "json, name=GrantedOperations" })
   grantedOperations: AllowedOperationEnum[];
 
-  @Metadata({ data: "json, name=GranteePrincipalArn" })
+  @SpeakeasyMetadata({ data: "json, name=GranteePrincipalArn" })
   granteePrincipalArn: string;
 
-  @Metadata({ data: "json, name=HomeRegion" })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegion" })
   homeRegion: string;
 
-  @Metadata({ data: "json, name=LicenseArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseArn" })
   licenseArn: string;
 
-  @Metadata({ data: "json, name=ParentArn" })
+  @SpeakeasyMetadata({ data: "json, name=ParentArn" })
   parentArn: string;
 
-  @Metadata({ data: "json, name=StatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=StatusReason" })
   statusReason?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version: string;
 }

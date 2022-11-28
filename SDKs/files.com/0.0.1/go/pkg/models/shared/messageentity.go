@@ -1,5 +1,7 @@
 package shared
 
+// MessageEntity
+// List Messages
 type MessageEntity struct {
 	Body     *string               `json:"body,omitempty"`
 	Comments *MessageCommentEntity `json:"comments,omitempty"`

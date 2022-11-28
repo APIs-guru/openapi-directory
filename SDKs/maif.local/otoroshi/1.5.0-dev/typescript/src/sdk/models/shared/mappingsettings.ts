@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MappingSettings
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings to change fields of a JWT token
 **/
 export class MappingSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=map" })
+  @SpeakeasyMetadata({ data: "json, name=map" })
   map: Map<string, string>;
 
-  @Metadata({ data: "json, name=remove" })
+  @SpeakeasyMetadata({ data: "json, name=remove" })
   remove: string[];
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: Map<string, string>;
 }

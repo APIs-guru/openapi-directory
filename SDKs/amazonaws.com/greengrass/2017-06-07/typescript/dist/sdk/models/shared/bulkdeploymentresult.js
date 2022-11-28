@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentTypeEnum } from "./deploymenttypeenum";
+import { ErrorDetail } from "./errordetail";
 // BulkDeploymentResult
 /**
  * Information about an individual group deployment in a bulk deployment operation.
@@ -35,35 +35,35 @@ var BulkDeploymentResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", String)
     ], BulkDeploymentResult.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentArn" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentArn" }),
         __metadata("design:type", String)
     ], BulkDeploymentResult.prototype, "deploymentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentId" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentId" }),
         __metadata("design:type", String)
     ], BulkDeploymentResult.prototype, "deploymentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentStatus" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentStatus" }),
         __metadata("design:type", String)
     ], BulkDeploymentResult.prototype, "deploymentStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentType" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentType" }),
         __metadata("design:type", String)
     ], BulkDeploymentResult.prototype, "deploymentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorDetails", elemType: shared.ErrorDetail }),
+        SpeakeasyMetadata({ data: "json, name=ErrorDetails", elemType: ErrorDetail }),
         __metadata("design:type", Array)
     ], BulkDeploymentResult.prototype, "errorDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMessage" }),
         __metadata("design:type", String)
     ], BulkDeploymentResult.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=GroupArn" }),
         __metadata("design:type", String)
     ], BulkDeploymentResult.prototype, "groupArn", void 0);
     return BulkDeploymentResult;

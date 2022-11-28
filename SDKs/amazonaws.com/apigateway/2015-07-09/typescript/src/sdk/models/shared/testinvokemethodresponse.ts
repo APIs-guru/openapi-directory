@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TestInvokeMethodResponse
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p>Represents the response of the test invoke request in the HTTP method.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console">Test API using the API Gateway console</a> </div>
 **/
 export class TestInvokeMethodResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: Map<string, string>;
 
-  @Metadata({ data: "json, name=latency" })
+  @SpeakeasyMetadata({ data: "json, name=latency" })
   latency?: number;
 
-  @Metadata({ data: "json, name=log" })
+  @SpeakeasyMetadata({ data: "json, name=log" })
   log?: string;
 
-  @Metadata({ data: "json, name=multiValueHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=multiValueHeaders" })
   multiValueHeaders?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }

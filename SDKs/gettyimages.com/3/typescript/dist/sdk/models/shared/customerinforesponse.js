@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CustomerInfoResponse = /** @class */ (function (_super) {
     __extends(CustomerInfoResponse, _super);
     function CustomerInfoResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=first_name" }),
+        SpeakeasyMetadata({ data: "json, name=first_name" }),
         __metadata("design:type", String)
     ], CustomerInfoResponse.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_name" }),
+        SpeakeasyMetadata({ data: "json, name=last_name" }),
         __metadata("design:type", String)
     ], CustomerInfoResponse.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "json, name=middle_name" }),
+        SpeakeasyMetadata({ data: "json, name=middle_name" }),
         __metadata("design:type", String)
     ], CustomerInfoResponse.prototype, "middleName", void 0);
     return CustomerInfoResponse;

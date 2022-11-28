@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetProvisionedProductOutputsInput = /** @class */ (function (_super) {
     __extends(GetProvisionedProductOutputsInput, _super);
     function GetProvisionedProductOutputsInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], GetProvisionedProductOutputsInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputKeys" }),
+        SpeakeasyMetadata({ data: "json, name=OutputKeys" }),
         __metadata("design:type", Array)
     ], GetProvisionedProductOutputsInput.prototype, "outputKeys", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], GetProvisionedProductOutputsInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], GetProvisionedProductOutputsInput.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" }),
         __metadata("design:type", String)
     ], GetProvisionedProductOutputsInput.prototype, "provisionedProductId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" }),
         __metadata("design:type", String)
     ], GetProvisionedProductOutputsInput.prototype, "provisionedProductName", void 0);
     return GetProvisionedProductOutputsInput;

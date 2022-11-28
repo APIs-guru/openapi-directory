@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateResourceGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceGroupArn" })
   resourceGroupArn: string;
 }

@@ -11,6 +11,8 @@ const (
 	SeverityCountSeverityEnumCritical            SeverityCountSeverityEnum = "CRITICAL"
 )
 
+// SeverityCount
+// The number of occurrences created for a specific severity.
 type SeverityCount struct {
 	Count    *string                    `json:"count,omitempty"`
 	Severity *SeverityCountSeverityEnum `json:"severity,omitempty"`

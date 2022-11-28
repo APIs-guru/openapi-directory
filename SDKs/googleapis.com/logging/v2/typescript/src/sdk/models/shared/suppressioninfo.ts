@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SuppressionInfoReasonEnum {
-    ReasonUnspecified = "REASON_UNSPECIFIED"
-,    RateLimit = "RATE_LIMIT"
-,    NotConsumed = "NOT_CONSUMED"
+    ReasonUnspecified = "REASON_UNSPECIFIED",
+    RateLimit = "RATE_LIMIT",
+    NotConsumed = "NOT_CONSUMED"
 }
 
 
@@ -12,9 +13,9 @@ export enum SuppressionInfoReasonEnum {
  * Information about entries that were omitted from the session.
 **/
 export class SuppressionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: SuppressionInfoReasonEnum;
 
-  @Metadata({ data: "json, name=suppressedCount" })
+  @SpeakeasyMetadata({ data: "json, name=suppressedCount" })
   suppressedCount?: number;
 }

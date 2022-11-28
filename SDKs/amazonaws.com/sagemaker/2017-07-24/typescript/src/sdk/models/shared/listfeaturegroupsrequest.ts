@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeatureGroupStatusEnum } from "./featuregroupstatusenum";
 import { OfflineStoreStatusValueEnum } from "./offlinestorestatusvalueenum";
 import { FeatureGroupSortByEnum } from "./featuregroupsortbyenum";
 import { FeatureGroupSortOrderEnum } from "./featuregroupsortorderenum";
 
 
+
 export class ListFeatureGroupsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeAfter" })
   creationTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=CreationTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeBefore" })
   creationTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=FeatureGroupStatusEquals" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupStatusEquals" })
   featureGroupStatusEquals?: FeatureGroupStatusEnum;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NameContains" })
+  @SpeakeasyMetadata({ data: "json, name=NameContains" })
   nameContains?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=OfflineStoreStatusEquals" })
+  @SpeakeasyMetadata({ data: "json, name=OfflineStoreStatusEquals" })
   offlineStoreStatusEquals?: OfflineStoreStatusValueEnum;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: FeatureGroupSortByEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: FeatureGroupSortOrderEnum;
 }

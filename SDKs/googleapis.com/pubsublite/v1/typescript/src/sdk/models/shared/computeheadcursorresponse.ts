@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cursor } from "./cursor";
+
 
 
 // ComputeHeadCursorResponse
@@ -7,6 +8,6 @@ import { Cursor } from "./cursor";
  * Response containing the head cursor for the requested topic and partition.
 **/
 export class ComputeHeadCursorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headCursor" })
+  @SpeakeasyMetadata({ data: "json, name=headCursor" })
   headCursor?: Cursor;
 }

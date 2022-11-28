@@ -1,7 +1,8 @@
 
 
+
 export enum ProximityEnum {
-    Far = "far"
-,    Near = "near"
-,    Immediate = "immediate"
+    Far = "far",
+    Near = "near",
+    Immediate = "immediate"
 }

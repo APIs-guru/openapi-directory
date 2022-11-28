@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CloudBuildMembershipSpecSecurityPolicyEnum {
-    SecurityPolicyUnspecified = "SECURITY_POLICY_UNSPECIFIED"
-,    NonPrivileged = "NON_PRIVILEGED"
-,    Privileged = "PRIVILEGED"
+    SecurityPolicyUnspecified = "SECURITY_POLICY_UNSPECIFIED",
+    NonPrivileged = "NON_PRIVILEGED",
+    Privileged = "PRIVILEGED"
 }
 
 
@@ -12,9 +13,9 @@ export enum CloudBuildMembershipSpecSecurityPolicyEnum {
  * **Cloud Build**: Configurations for each Cloud Build enabled cluster.
 **/
 export class CloudBuildMembershipSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securityPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=securityPolicy" })
   securityPolicy?: CloudBuildMembershipSpecSecurityPolicyEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

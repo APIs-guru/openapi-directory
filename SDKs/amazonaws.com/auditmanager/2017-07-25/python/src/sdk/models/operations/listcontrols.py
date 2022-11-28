@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListControlsControlTypeEnum(str, Enum):
@@ -9,7 +13,7 @@ class ListControlsControlTypeEnum(str, Enum):
 
 @dataclass
 class ListControlsQueryParams:
-    control_type: ListControlsControlTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'controlType', 'style': 'form', 'explode': True }})
+    control_type: ListControlsControlTypeEnum = field(metadata={'query_param': { 'field_name': 'controlType', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
     
@@ -27,16 +31,16 @@ class ListControlsHeaders:
 
 @dataclass
 class ListControlsRequest:
-    query_params: ListControlsQueryParams = field(default=None)
-    headers: ListControlsHeaders = field(default=None)
+    headers: ListControlsHeaders = field()
+    query_params: ListControlsQueryParams = field()
     
 
 @dataclass
 class ListControlsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_controls_response: Optional[shared.ListControlsResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

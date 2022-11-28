@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum AdminRoleEnum {
     AdminRoleUnspecified = "ADMIN_ROLE_UNSPECIFIED",
     PrimaryOwner = "PRIMARY_OWNER",
@@ -14,5 +14,14 @@ export declare class Admin extends SpeakeasyBase {
     admin?: string;
     name?: string;
     pendingInvitation?: boolean;
+    role?: AdminRoleEnum;
+}
+/**
+ * An administrator of an Account or a location.
+**/
+export declare class AdminInput extends SpeakeasyBase {
+    account?: string;
+    admin?: string;
+    name?: string;
     role?: AdminRoleEnum;
 }

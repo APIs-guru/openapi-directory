@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelExplainabilityAppSpecification
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Docker container image configuration object for the model explainability job.
 **/
 export class ModelExplainabilityAppSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigUri" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigUri" })
   configUri: string;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUri" })
   imageUri: string;
 }

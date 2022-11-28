@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteSecretResponse = /** @class */ (function (_super) {
     __extends(DeleteSecretResponse, _super);
     function DeleteSecretResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], DeleteSecretResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeletionDate" }),
+        SpeakeasyMetadata({ data: "json, name=DeletionDate" }),
         __metadata("design:type", Date)
     ], DeleteSecretResponse.prototype, "deletionDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DeleteSecretResponse.prototype, "name", void 0);
     return DeleteSecretResponse;

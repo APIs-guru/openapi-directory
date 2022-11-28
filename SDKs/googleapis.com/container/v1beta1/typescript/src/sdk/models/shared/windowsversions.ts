@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WindowsVersion } from "./windowsversion";
+
 
 
 // WindowsVersions
@@ -8,6 +8,6 @@ import { WindowsVersion } from "./windowsversion";
  * Windows server versions.
 **/
 export class WindowsVersions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=windowsVersions", elemType: shared.WindowsVersion })
+  @SpeakeasyMetadata({ data: "json, name=windowsVersions", elemType: WindowsVersion })
   windowsVersions?: WindowsVersion[];
 }

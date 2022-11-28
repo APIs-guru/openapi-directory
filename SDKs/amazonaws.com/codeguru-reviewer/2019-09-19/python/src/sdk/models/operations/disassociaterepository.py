@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DisassociateRepositoryPathParams:
-    association_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'AssociationArn', 'style': 'simple', 'explode': False }})
+    association_arn: str = field(metadata={'path_param': { 'field_name': 'AssociationArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class DisassociateRepositoryHeaders:
 
 @dataclass
 class DisassociateRepositoryRequest:
-    path_params: DisassociateRepositoryPathParams = field(default=None)
-    headers: DisassociateRepositoryHeaders = field(default=None)
+    headers: DisassociateRepositoryHeaders = field()
+    path_params: DisassociateRepositoryPathParams = field()
     
 
 @dataclass
 class DisassociateRepositoryResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     disassociate_repository_response: Optional[shared.DisassociateRepositoryResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

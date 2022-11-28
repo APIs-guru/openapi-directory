@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelTargetInfo } from "./channeltargetinfo";
 import { ContactTargetInfo } from "./contacttargetinfo";
+
 
 
 // Target
@@ -8,9 +9,9 @@ import { ContactTargetInfo } from "./contacttargetinfo";
  * The contact or contact channel that's being engaged.
 **/
 export class Target extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelTargetInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelTargetInfo" })
   channelTargetInfo?: ChannelTargetInfo;
 
-  @Metadata({ data: "json, name=ContactTargetInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ContactTargetInfo" })
   contactTargetInfo?: ContactTargetInfo;
 }

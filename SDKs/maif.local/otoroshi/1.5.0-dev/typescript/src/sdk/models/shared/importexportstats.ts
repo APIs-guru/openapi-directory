@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImportExportStats
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Global stats for the current Otoroshi instances
 **/
 export class ImportExportStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calls" })
+  @SpeakeasyMetadata({ data: "json, name=calls" })
   calls: number;
 
-  @Metadata({ data: "json, name=dataIn" })
+  @SpeakeasyMetadata({ data: "json, name=dataIn" })
   dataIn: number;
 
-  @Metadata({ data: "json, name=dataOut" })
+  @SpeakeasyMetadata({ data: "json, name=dataOut" })
   dataOut: number;
 }

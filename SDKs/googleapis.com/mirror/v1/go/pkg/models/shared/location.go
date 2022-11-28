@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Location
+// A geographic location that can be associated with a timeline item.
 type Location struct {
 	Accuracy    *float64   `json:"accuracy,omitempty"`
 	Address     *string    `json:"address,omitempty"`

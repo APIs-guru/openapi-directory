@@ -1,6 +1,7 @@
 
 
+
 export enum ComputePlatformEnum {
-    Default = "Default"
-,    AwsLambda = "AWSLambda"
+    Default = "Default",
+    AwsLambda = "AWSLambda"
 }

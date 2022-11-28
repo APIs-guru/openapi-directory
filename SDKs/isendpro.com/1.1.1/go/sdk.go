@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://apirest.isendpro.com/cgi-bin",
 	"http://apirest.isendpro.com/cgi-bin",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddShortlink - add a shortlink
+// add a shortlink
 func (s *SDK) AddShortlink(ctx context.Context, request operations.AddShortlinkRequest) (*operations.AddShortlinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/shortlink"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -72,7 +95,7 @@ func (s *SDK) AddShortlink(ctx context.Context, request operations.AddShortlinkR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -112,8 +135,10 @@ func (s *SDK) AddShortlink(ctx context.Context, request operations.AddShortlinkR
 	return res, nil
 }
 
+// Comptage - Compter le nombre de caractère
+// Compte le nombre de SMS necessaire à un envoi
 func (s *SDK) Comptage(ctx context.Context, request operations.ComptageRequest) (*operations.ComptageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/comptage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -131,7 +156,7 @@ func (s *SDK) Comptage(ctx context.Context, request operations.ComptageRequest) 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +196,10 @@ func (s *SDK) Comptage(ctx context.Context, request operations.ComptageRequest) 
 	return res, nil
 }
 
+// DelListeNoire - Ajoute un numero en liste noire
+// Supprime un numero en liste noire
 func (s *SDK) DelListeNoire(ctx context.Context, request operations.DelListeNoireRequest) (*operations.DelListeNoireResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dellistenoire"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -182,7 +209,7 @@ func (s *SDK) DelListeNoire(ctx context.Context, request operations.DelListeNoir
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -222,8 +249,14 @@ func (s *SDK) DelListeNoire(ctx context.Context, request operations.DelListeNoir
 	return res, nil
 }
 
+// GetCampagne - Retourne les SMS envoyés sur une période donnée
+// Retourne les SMS envoyés sur une période donnée en fonction d'une date de début et d'une date de fin.
+//
+// Les dates sont au format YYYY-MM-DD hh:mm.
+//
+// Le fichier rapport de campagne est sous la forme d'un fichier zip + contenant un fichier csv contenant le détail des envois.
 func (s *SDK) GetCampagne(ctx context.Context, request operations.GetCampagneRequest) (*operations.GetCampagneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/campagne"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -233,7 +266,7 @@ func (s *SDK) GetCampagne(ctx context.Context, request operations.GetCampagneReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -287,8 +320,10 @@ func (s *SDK) GetCampagne(ctx context.Context, request operations.GetCampagneReq
 	return res, nil
 }
 
+// GetCredit - Interrogation credit
+// Retourne le credit existant associe au compte.
 func (s *SDK) GetCredit(ctx context.Context, request operations.GetCreditRequest) (*operations.GetCreditResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/credit"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -298,7 +333,7 @@ func (s *SDK) GetCredit(ctx context.Context, request operations.GetCreditRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -338,8 +373,10 @@ func (s *SDK) GetCredit(ctx context.Context, request operations.GetCreditRequest
 	return res, nil
 }
 
+// GetHlr - Vérifier la validité d'un numéro
+// Réalise un lookup HLR sur les numéros
 func (s *SDK) GetHlr(ctx context.Context, request operations.GetHlrRequest) (*operations.GetHlrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/hlr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -357,7 +394,7 @@ func (s *SDK) GetHlr(ctx context.Context, request operations.GetHlrRequest) (*op
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -397,8 +434,10 @@ func (s *SDK) GetHlr(ctx context.Context, request operations.GetHlrRequest) (*op
 	return res, nil
 }
 
+// GetListeNoire - Retourne le liste noire
+// Retourne un fichier csv zippé contenant la liste noire
 func (s *SDK) GetListeNoire(ctx context.Context, request operations.GetListeNoireRequest) (*operations.GetListeNoireResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getlistenoire"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -408,7 +447,7 @@ func (s *SDK) GetListeNoire(ctx context.Context, request operations.GetListeNoir
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -448,8 +487,10 @@ func (s *SDK) GetListeNoire(ctx context.Context, request operations.GetListeNoir
 	return res, nil
 }
 
+// Repertoire - Gestion repertoire (modification)
+// Ajoute ou supprime une liste de numéros à un répertoire existant.
 func (s *SDK) Repertoire(ctx context.Context, request operations.RepertoireRequest) (*operations.RepertoireResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/repertoire"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -467,7 +508,7 @@ func (s *SDK) Repertoire(ctx context.Context, request operations.RepertoireReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -507,8 +548,10 @@ func (s *SDK) Repertoire(ctx context.Context, request operations.RepertoireReque
 	return res, nil
 }
 
+// RepertoireCrea - Gestion repertoire (creation)
+// Cree un nouveau répertoire et retourne son identifiant. Cet identifiant pourra être utilisé pour ajouter ou supprimer des numéros via l'API.
 func (s *SDK) RepertoireCrea(ctx context.Context, request operations.RepertoireCreaRequest) (*operations.RepertoireCreaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/repertoire"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -526,7 +569,7 @@ func (s *SDK) RepertoireCrea(ctx context.Context, request operations.RepertoireC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -566,8 +609,10 @@ func (s *SDK) RepertoireCrea(ctx context.Context, request operations.RepertoireC
 	return res, nil
 }
 
+// SendSms - Envoyer un sms
+// Envoi un sms vers un unique destinataire
 func (s *SDK) SendSms(ctx context.Context, request operations.SendSmsRequest) (*operations.SendSmsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sms"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -585,7 +630,7 @@ func (s *SDK) SendSms(ctx context.Context, request operations.SendSmsRequest) (*
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -625,8 +670,10 @@ func (s *SDK) SendSms(ctx context.Context, request operations.SendSmsRequest) (*
 	return res, nil
 }
 
+// SendSmsMulti - Envoyer des SMS
+// Envoi de SMS vers 1 ou plusieurs destinataires
 func (s *SDK) SendSmsMulti(ctx context.Context, request operations.SendSmsMultiRequest) (*operations.SendSmsMultiResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/smsmulti"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -644,7 +691,7 @@ func (s *SDK) SendSmsMulti(ctx context.Context, request operations.SendSmsMultiR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -684,8 +731,10 @@ func (s *SDK) SendSmsMulti(ctx context.Context, request operations.SendSmsMultiR
 	return res, nil
 }
 
+// SetListeNoire - Ajoute un numero en liste noire
+// Ajoute un numero en liste noire. Une fois ajouté, les requêtes d'envoi de SMS marketing vers ce numéro seront refusées.
 func (s *SDK) SetListeNoire(ctx context.Context, request operations.SetListeNoireRequest) (*operations.SetListeNoireResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/setlistenoire"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -695,7 +744,7 @@ func (s *SDK) SetListeNoire(ctx context.Context, request operations.SetListeNoir
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -735,8 +784,10 @@ func (s *SDK) SetListeNoire(ctx context.Context, request operations.SetListeNoir
 	return res, nil
 }
 
+// SubaccountAdd - Ajoute un sous compte
+// Ajoute un sous compte
 func (s *SDK) SubaccountAdd(ctx context.Context, request operations.SubaccountAddRequest) (*operations.SubaccountAddResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/subaccount"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -754,7 +805,7 @@ func (s *SDK) SubaccountAdd(ctx context.Context, request operations.SubaccountAd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -794,8 +845,10 @@ func (s *SDK) SubaccountAdd(ctx context.Context, request operations.SubaccountAd
 	return res, nil
 }
 
+// SubaccountEdit - Edit a subaccount
+// Edit a subaccount
 func (s *SDK) SubaccountEdit(ctx context.Context, request operations.SubaccountEditRequest) (*operations.SubaccountEditResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/subaccount"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -813,7 +866,7 @@ func (s *SDK) SubaccountEdit(ctx context.Context, request operations.SubaccountE
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

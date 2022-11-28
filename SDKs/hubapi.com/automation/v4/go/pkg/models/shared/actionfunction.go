@@ -8,6 +8,8 @@ const (
 	ActionFunctionFunctionTypeEnumPostFetchOptions   ActionFunctionFunctionTypeEnum = "POST_FETCH_OPTIONS"
 )
 
+// ActionFunction
+// A serverless function associated with this custom workflow action.
 type ActionFunction struct {
 	FunctionSource string                         `json:"functionSource"`
 	FunctionType   ActionFunctionFunctionTypeEnum `json:"functionType"`

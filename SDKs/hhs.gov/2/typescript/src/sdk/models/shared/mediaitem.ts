@@ -1,81 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Campaign } from "./campaign";
 import { ExtendedAttribute } from "./extendedattribute";
 import { Language } from "./language";
 import { Source } from "./source";
 
 
+
 export class MediaItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=campaigns", elemType: shared.Campaign })
+  @SpeakeasyMetadata({ data: "json, name=campaigns", elemType: Campaign })
   campaigns?: Campaign[];
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=customAttributionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=customAttributionUrl" })
   customAttributionUrl?: string;
 
-  @Metadata({ data: "json, name=customPreviewUrl" })
+  @SpeakeasyMetadata({ data: "json, name=customPreviewUrl" })
   customPreviewUrl?: string;
 
-  @Metadata({ data: "json, name=customThumbnailUrl" })
+  @SpeakeasyMetadata({ data: "json, name=customThumbnailUrl" })
   customThumbnailUrl?: string;
 
-  @Metadata({ data: "json, name=dateContentAuthored" })
+  @SpeakeasyMetadata({ data: "json, name=dateContentAuthored" })
   dateContentAuthored?: Date;
 
-  @Metadata({ data: "json, name=dateContentPublished" })
+  @SpeakeasyMetadata({ data: "json, name=dateContentPublished" })
   dateContentPublished?: Date;
 
-  @Metadata({ data: "json, name=dateContentReviewed" })
+  @SpeakeasyMetadata({ data: "json, name=dateContentReviewed" })
   dateContentReviewed?: Date;
 
-  @Metadata({ data: "json, name=dateContentUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=dateContentUpdated" })
   dateContentUpdated?: Date;
 
-  @Metadata({ data: "json, name=dateSyndicationCaptured" })
+  @SpeakeasyMetadata({ data: "json, name=dateSyndicationCaptured" })
   dateSyndicationCaptured?: Date;
 
-  @Metadata({ data: "json, name=dateSyndicationUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=dateSyndicationUpdated" })
   dateSyndicationUpdated?: Date;
 
-  @Metadata({ data: "json, name=dateSyndicationVisible" })
+  @SpeakeasyMetadata({ data: "json, name=dateSyndicationVisible" })
   dateSyndicationVisible?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=extendedAttributes", elemType: shared.ExtendedAttribute })
+  @SpeakeasyMetadata({ data: "json, name=extendedAttributes", elemType: ExtendedAttribute })
   extendedAttributes?: ExtendedAttribute[];
 
-  @Metadata({ data: "json, name=externalGuid" })
+  @SpeakeasyMetadata({ data: "json, name=externalGuid" })
   externalGuid?: string;
 
-  @Metadata({ data: "json, name=foreignSyndicationAPIUrl" })
+  @SpeakeasyMetadata({ data: "json, name=foreignSyndicationAPIUrl" })
   foreignSyndicationApiUrl?: string;
 
-  @Metadata({ data: "json, name=hash" })
+  @SpeakeasyMetadata({ data: "json, name=hash" })
   hash?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: Language;
 
-  @Metadata({ data: "json, name=mediaType" })
+  @SpeakeasyMetadata({ data: "json, name=mediaType" })
   mediaType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 
-  @Metadata({ data: "json, name=sourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUrl" })
   sourceUrl?: string;
 
-  @Metadata({ data: "json, name=targetUrl" })
+  @SpeakeasyMetadata({ data: "json, name=targetUrl" })
   targetUrl?: string;
 }

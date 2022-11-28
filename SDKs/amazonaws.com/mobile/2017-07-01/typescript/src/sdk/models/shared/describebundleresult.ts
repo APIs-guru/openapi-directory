@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BundleDetails } from "./bundledetails";
+
 
 
 // DescribeBundleResult
@@ -7,6 +8,6 @@ import { BundleDetails } from "./bundledetails";
  *  Result structure contains the details of the bundle. 
 **/
 export class DescribeBundleResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: BundleDetails;
 }

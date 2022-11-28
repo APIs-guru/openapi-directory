@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupNameAndArn } from "./groupnameandarn";
+
 
 
 // ThingGroupMetadata
@@ -8,12 +8,12 @@ import { GroupNameAndArn } from "./groupnameandarn";
  * Thing group metadata.
 **/
 export class ThingGroupMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=parentGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=parentGroupName" })
   parentGroupName?: string;
 
-  @Metadata({ data: "json, name=rootToParentThingGroups", elemType: shared.GroupNameAndArn })
+  @SpeakeasyMetadata({ data: "json, name=rootToParentThingGroups", elemType: GroupNameAndArn })
   rootToParentThingGroups?: GroupNameAndArn[];
 }

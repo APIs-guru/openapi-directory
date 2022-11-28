@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetResourceDefinitionVersionPathParams:
-    resource_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ResourceDefinitionId', 'style': 'simple', 'explode': False }})
-    resource_definition_version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ResourceDefinitionVersionId', 'style': 'simple', 'explode': False }})
+    resource_definition_id: str = field(metadata={'path_param': { 'field_name': 'ResourceDefinitionId', 'style': 'simple', 'explode': False }})
+    resource_definition_version_id: str = field(metadata={'path_param': { 'field_name': 'ResourceDefinitionVersionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +25,14 @@ class GetResourceDefinitionVersionHeaders:
 
 @dataclass
 class GetResourceDefinitionVersionRequest:
-    path_params: GetResourceDefinitionVersionPathParams = field(default=None)
-    headers: GetResourceDefinitionVersionHeaders = field(default=None)
+    headers: GetResourceDefinitionVersionHeaders = field()
+    path_params: GetResourceDefinitionVersionPathParams = field()
     
 
 @dataclass
 class GetResourceDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_resource_definition_version_response: Optional[shared.GetResourceDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

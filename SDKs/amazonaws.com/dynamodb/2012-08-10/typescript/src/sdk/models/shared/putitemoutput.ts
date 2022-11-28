@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 import { ConsumedCapacity } from "./consumedcapacity";
 import { ItemCollectionMetrics } from "./itemcollectionmetrics";
+
 
 
 // PutItemOutput
@@ -10,12 +10,12 @@ import { ItemCollectionMetrics } from "./itemcollectionmetrics";
  * Represents the output of a <code>PutItem</code> operation.
 **/
 export class PutItemOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: AttributeValue })
   attributes?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=ConsumedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacity" })
   consumedCapacity?: ConsumedCapacity;
 
-  @Metadata({ data: "json, name=ItemCollectionMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=ItemCollectionMetrics" })
   itemCollectionMetrics?: ItemCollectionMetrics;
 }

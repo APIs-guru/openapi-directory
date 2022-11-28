@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListQueryParam
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListSecurity:
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListRequest:
-    path_params: ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListPathParams = field(default=None)
-    query_params: ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListQueryParams = field(default=None)
-    security: ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListSecurity = field(default=None)
+    path_params: ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListPathParams = field()
+    query_params: ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListQueryParams = field()
+    security: ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListSecurity = field()
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsAdminOverridesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_admin_overrides_response: Optional[shared.ListAdminOverridesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

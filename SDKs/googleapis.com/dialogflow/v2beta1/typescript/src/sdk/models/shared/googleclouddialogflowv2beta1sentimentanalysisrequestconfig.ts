@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1SentimentAnalysisRequestConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures the types of sentiment analysis to perform.
 **/
 export class GoogleCloudDialogflowV2beta1SentimentAnalysisRequestConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzeQueryTextSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=analyzeQueryTextSentiment" })
   analyzeQueryTextSentiment?: boolean;
 }

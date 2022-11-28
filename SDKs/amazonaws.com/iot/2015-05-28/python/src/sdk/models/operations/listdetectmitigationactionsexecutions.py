@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -30,16 +30,16 @@ class ListDetectMitigationActionsExecutionsHeaders:
 
 @dataclass
 class ListDetectMitigationActionsExecutionsRequest:
-    query_params: ListDetectMitigationActionsExecutionsQueryParams = field(default=None)
-    headers: ListDetectMitigationActionsExecutionsHeaders = field(default=None)
+    headers: ListDetectMitigationActionsExecutionsHeaders = field()
+    query_params: ListDetectMitigationActionsExecutionsQueryParams = field()
     
 
 @dataclass
 class ListDetectMitigationActionsExecutionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_detect_mitigation_actions_executions_response: Optional[shared.ListDetectMitigationActionsExecutionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

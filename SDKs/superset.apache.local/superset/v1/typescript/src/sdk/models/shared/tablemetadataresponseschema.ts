@@ -1,27 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableMetadataColumnsResponse } from "./tablemetadatacolumnsresponse";
-import { TableMetadataForeignKeysIndexesResponse } from "./tablemetadataforeignkeysindexesresponse";
 import { TableMetadataForeignKeysIndexesResponse } from "./tablemetadataforeignkeysindexesresponse";
 import { TableMetadataPrimaryKeyResponse } from "./tablemetadataprimarykeyresponse";
 
 
+
 export class TableMetadataResponseSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns", elemType: shared.TableMetadataColumnsResponse })
+  @SpeakeasyMetadata({ data: "json, name=columns", elemType: TableMetadataColumnsResponse })
   columns?: TableMetadataColumnsResponse[];
 
-  @Metadata({ data: "json, name=foreignKeys", elemType: shared.TableMetadataForeignKeysIndexesResponse })
+  @SpeakeasyMetadata({ data: "json, name=foreignKeys", elemType: TableMetadataForeignKeysIndexesResponse })
   foreignKeys?: TableMetadataForeignKeysIndexesResponse[];
 
-  @Metadata({ data: "json, name=indexes", elemType: shared.TableMetadataForeignKeysIndexesResponse })
+  @SpeakeasyMetadata({ data: "json, name=indexes", elemType: TableMetadataForeignKeysIndexesResponse })
   indexes?: TableMetadataForeignKeysIndexesResponse[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=primaryKey" })
+  @SpeakeasyMetadata({ data: "json, name=primaryKey" })
   primaryKey?: TableMetadataPrimaryKeyResponse;
 
-  @Metadata({ data: "json, name=selectStar" })
+  @SpeakeasyMetadata({ data: "json, name=selectStar" })
   selectStar?: string;
 }

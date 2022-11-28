@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirstAndThirdPartyAudience } from "./firstandthirdpartyaudience";
 
 
+
 export class ListFirstAndThirdPartyAudiencesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstAndThirdPartyAudiences", elemType: shared.FirstAndThirdPartyAudience })
+  @SpeakeasyMetadata({ data: "json, name=firstAndThirdPartyAudiences", elemType: FirstAndThirdPartyAudience })
   firstAndThirdPartyAudiences?: FirstAndThirdPartyAudience[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -9,11 +9,11 @@ class GetCookiesSetQueryParams:
 
 @dataclass
 class GetCookiesSetRequest:
-    query_params: GetCookiesSetQueryParams = field(default=None)
+    query_params: GetCookiesSetQueryParams = field()
     
 
 @dataclass
 class GetCookiesSetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

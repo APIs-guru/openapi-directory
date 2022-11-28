@@ -1,7 +1,8 @@
 
 
+
 export enum MonitoringExecutionSortKeyEnum {
-    CreationTime = "CreationTime"
-,    ScheduledTime = "ScheduledTime"
-,    Status = "Status"
+    CreationTime = "CreationTime",
+    ScheduledTime = "ScheduledTime",
+    Status = "Status"
 }

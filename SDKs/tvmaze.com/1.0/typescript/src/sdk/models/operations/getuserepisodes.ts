@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserEpisodesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=show_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=show_id" })
   showId?: number;
 }
 
 
 export class GetUserEpisodesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserEpisodesQueryParams;
 }
 
 
 export class GetUserEpisodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MarkedEpisode })
+  @SpeakeasyMetadata({ elemType: shared.MarkedEpisode })
   markedEpisodes?: shared.MarkedEpisode[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

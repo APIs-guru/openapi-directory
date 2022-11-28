@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAddClientIDToOpenIDConnectProviderActionEnum(str, Enum):
     ADD_CLIENT_ID_TO_OPEN_ID_CONNECT_PROVIDER = "AddClientIDToOpenIDConnectProvider"
@@ -10,8 +14,8 @@ class PostAddClientIDToOpenIDConnectProviderVersionEnum(str, Enum):
 
 @dataclass
 class PostAddClientIDToOpenIDConnectProviderQueryParams:
-    action: PostAddClientIDToOpenIDConnectProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAddClientIDToOpenIDConnectProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAddClientIDToOpenIDConnectProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAddClientIDToOpenIDConnectProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAddClientIDToOpenIDConnectProviderHeaders:
 
 @dataclass
 class PostAddClientIDToOpenIDConnectProviderRequest:
-    query_params: PostAddClientIDToOpenIDConnectProviderQueryParams = field(default=None)
-    headers: PostAddClientIDToOpenIDConnectProviderHeaders = field(default=None)
+    headers: PostAddClientIDToOpenIDConnectProviderHeaders = field()
+    query_params: PostAddClientIDToOpenIDConnectProviderQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAddClientIDToOpenIDConnectProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

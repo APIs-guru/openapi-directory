@@ -13,11 +13,6 @@ type BookingVoucherHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type BookingVoucherRequest struct {
-	QueryParams BookingVoucherQueryParams
-	Headers     BookingVoucherHeaders
-}
-
 type BookingVoucher200ApplicationJSON struct {
 	Data             *string                `json:"data,omitempty"`
 	DateStamp        *string                `json:"dateStamp,omitempty"`
@@ -32,6 +27,11 @@ type BookingVoucher200ApplicationJSON struct {
 	Success          *bool                  `json:"success,omitempty"`
 	TotalCount       *int64                 `json:"totalCount,omitempty"`
 	Vmid             *string                `json:"vmid,omitempty"`
+}
+
+type BookingVoucherRequest struct {
+	QueryParams BookingVoucherQueryParams
+	Headers     BookingVoucherHeaders
 }
 
 type BookingVoucherResponse struct {

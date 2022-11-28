@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetInstanceProfileActionEnum(str, Enum):
     GET_INSTANCE_PROFILE = "GetInstanceProfile"
@@ -10,8 +14,8 @@ class PostGetInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class PostGetInstanceProfileQueryParams:
-    action: PostGetInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetInstanceProfileHeaders:
 
 @dataclass
 class PostGetInstanceProfileRequest:
-    query_params: PostGetInstanceProfileQueryParams = field(default=None)
-    headers: PostGetInstanceProfileHeaders = field(default=None)
+    headers: PostGetInstanceProfileHeaders = field()
+    query_params: PostGetInstanceProfileQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

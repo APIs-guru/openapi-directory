@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetAdminRecordingsStatus200ApplicationJsonStatusEnum {
-    NeverStarted = "NeverStarted"
-,    Recording = "Recording"
-,    Stopped = "Stopped"
+    NeverStarted = "NeverStarted",
+    Recording = "Recording",
+    Stopped = "Stopped"
 }
 
 
 export class GetAdminRecordingsStatus200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetAdminRecordingsStatus200ApplicationJsonStatusEnum;
 }
 
 
 export class GetAdminRecordingsStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAdminRecordingsStatus200ApplicationJsonObject?: GetAdminRecordingsStatus200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

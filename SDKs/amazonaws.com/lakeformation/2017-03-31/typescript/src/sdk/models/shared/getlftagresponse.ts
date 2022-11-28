@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLfTagResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=TagKey" })
+  @SpeakeasyMetadata({ data: "json, name=TagKey" })
   tagKey?: string;
 
-  @Metadata({ data: "json, name=TagValues" })
+  @SpeakeasyMetadata({ data: "json, name=TagValues" })
   tagValues?: string[];
 }

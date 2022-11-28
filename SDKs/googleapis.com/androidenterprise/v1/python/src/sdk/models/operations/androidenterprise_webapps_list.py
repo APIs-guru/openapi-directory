@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseWebappsListPathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class AndroidenterpriseWebappsListQueryParams:
 
 @dataclass
 class AndroidenterpriseWebappsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseWebappsListRequest:
-    path_params: AndroidenterpriseWebappsListPathParams = field(default=None)
-    query_params: AndroidenterpriseWebappsListQueryParams = field(default=None)
-    security: AndroidenterpriseWebappsListSecurity = field(default=None)
+    path_params: AndroidenterpriseWebappsListPathParams = field()
+    query_params: AndroidenterpriseWebappsListQueryParams = field()
+    security: AndroidenterpriseWebappsListSecurity = field()
     
 
 @dataclass
 class AndroidenterpriseWebappsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     web_apps_list_response: Optional[shared.WebAppsListResponse] = field(default=None)
     

@@ -13,18 +13,18 @@ class GetTrafficReportQueryParams:
 
 @dataclass
 class GetTrafficReportSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTrafficReportRequest:
-    query_params: GetTrafficReportQueryParams = field(default=None)
-    security: GetTrafficReportSecurity = field(default=None)
+    query_params: GetTrafficReportQueryParams = field()
+    security: GetTrafficReportSecurity = field()
     
 
 @dataclass
 class GetTrafficReportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report: Optional[shared.Report] = field(default=None)
-    status_code: int = field(default=None)
     

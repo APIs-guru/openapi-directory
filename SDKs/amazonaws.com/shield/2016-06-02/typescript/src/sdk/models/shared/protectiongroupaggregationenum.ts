@@ -1,7 +1,8 @@
 
 
+
 export enum ProtectionGroupAggregationEnum {
-    Sum = "SUM"
-,    Mean = "MEAN"
-,    Max = "MAX"
+    Sum = "SUM",
+    Mean = "MEAN",
+    Max = "MAX"
 }

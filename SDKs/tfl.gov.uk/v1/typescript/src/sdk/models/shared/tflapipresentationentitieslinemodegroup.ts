@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesLineModeGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=lineIdentifier" })
   lineIdentifier?: string[];
 
-  @Metadata({ data: "json, name=modeName" })
+  @SpeakeasyMetadata({ data: "json, name=modeName" })
   modeName?: string;
 }

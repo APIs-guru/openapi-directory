@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyClientVpnEndpointActionEnum(str, Enum):
     MODIFY_CLIENT_VPN_ENDPOINT = "ModifyClientVpnEndpoint"
@@ -7,12 +11,20 @@ class GetModifyClientVpnEndpointActionEnum(str, Enum):
 
 @dataclass
 class GetModifyClientVpnEndpointClientConnectOptions:
+    r"""GetModifyClientVpnEndpointClientConnectOptions
+    The options for managing connection authorization for new client connections.
+    """
+    
     enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Enabled' }})
     lambda_function_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LambdaFunctionArn' }})
     
 
 @dataclass
 class GetModifyClientVpnEndpointConnectionLogOptions:
+    r"""GetModifyClientVpnEndpointConnectionLogOptions
+    Describes the client connection logging options for the Client VPN endpoint.
+    """
+    
     cloudwatch_log_group: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CloudwatchLogGroup' }})
     cloudwatch_log_stream: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CloudwatchLogStream' }})
     enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Enabled' }})
@@ -20,6 +32,10 @@ class GetModifyClientVpnEndpointConnectionLogOptions:
 
 @dataclass
 class GetModifyClientVpnEndpointDNSServers:
+    r"""GetModifyClientVpnEndpointDNSServers
+    Information about the DNS server to be used.
+    """
+    
     custom_dns_servers: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'CustomDnsServers' }})
     enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Enabled' }})
     
@@ -33,9 +49,10 @@ class GetModifyClientVpnEndpointVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyClientVpnEndpointQueryParams:
-    action: GetModifyClientVpnEndpointActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyClientVpnEndpointActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    client_vpn_endpoint_id: str = field(metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
+    version: GetModifyClientVpnEndpointVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     client_connect_options: Optional[GetModifyClientVpnEndpointClientConnectOptions] = field(default=None, metadata={'query_param': { 'field_name': 'ClientConnectOptions', 'style': 'form', 'explode': True }})
-    client_vpn_endpoint_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
     connection_log_options: Optional[GetModifyClientVpnEndpointConnectionLogOptions] = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionLogOptions', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     dns_servers: Optional[GetModifyClientVpnEndpointDNSServers] = field(default=None, metadata={'query_param': { 'field_name': 'DnsServers', 'style': 'form', 'explode': True }})
@@ -44,7 +61,6 @@ class GetModifyClientVpnEndpointQueryParams:
     self_service_portal: Optional[GetModifyClientVpnEndpointSelfServicePortalEnum] = field(default=None, metadata={'query_param': { 'field_name': 'SelfServicePortal', 'style': 'form', 'explode': True }})
     server_certificate_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ServerCertificateArn', 'style': 'form', 'explode': True }})
     split_tunnel: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'SplitTunnel', 'style': 'form', 'explode': True }})
-    version: GetModifyClientVpnEndpointVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     vpn_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'VpnPort', 'style': 'form', 'explode': True }})
     
@@ -62,13 +78,13 @@ class GetModifyClientVpnEndpointHeaders:
 
 @dataclass
 class GetModifyClientVpnEndpointRequest:
-    query_params: GetModifyClientVpnEndpointQueryParams = field(default=None)
-    headers: GetModifyClientVpnEndpointHeaders = field(default=None)
+    headers: GetModifyClientVpnEndpointHeaders = field()
+    query_params: GetModifyClientVpnEndpointQueryParams = field()
     
 
 @dataclass
 class GetModifyClientVpnEndpointResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GuestAttributes } from "./guestattributes";
+
 
 
 // GetGuestAttributesResponse
@@ -8,6 +8,6 @@ import { GuestAttributes } from "./guestattributes";
  * Response for GetGuestAttributes.
 **/
 export class GetGuestAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=guestAttributes", elemType: shared.GuestAttributes })
+  @SpeakeasyMetadata({ data: "json, name=guestAttributes", elemType: GuestAttributes })
   guestAttributes?: GuestAttributes[];
 }

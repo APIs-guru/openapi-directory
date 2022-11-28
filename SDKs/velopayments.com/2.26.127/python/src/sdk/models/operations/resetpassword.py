@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ResetPasswordRequest:
-    request: shared.ResetPasswordRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ResetPasswordRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ResetPasswordResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inline_response_400: Optional[Any] = field(default=None)
     

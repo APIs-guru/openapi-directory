@@ -16,6 +16,8 @@ const (
 	GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnumCa                    GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnum = "CA"
 )
 
+// GoogleCloudRecaptchaenterpriseV1WafSettings
+// Settings specific to keys that can be used for WAF (Web Application Firewall).
 type GoogleCloudRecaptchaenterpriseV1WafSettings struct {
 	WafFeature *GoogleCloudRecaptchaenterpriseV1WafSettingsWafFeatureEnum `json:"wafFeature,omitempty"`
 	WafService *GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnum `json:"wafService,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// Account
+// Represents an account passed into the Account Manager on Glass.
 type Account struct {
 	AuthTokens []AuthToken `json:"authTokens,omitempty"`
 	Features   []string    `json:"features,omitempty"`

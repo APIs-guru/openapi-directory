@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceSetting } from "./servicesetting";
+
 
 
 // GetServiceSettingResult
@@ -7,6 +8,6 @@ import { ServiceSetting } from "./servicesetting";
  * The query result body of the GetServiceSetting API operation.
 **/
 export class GetServiceSettingResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceSetting" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceSetting" })
   serviceSetting?: ServiceSetting;
 }

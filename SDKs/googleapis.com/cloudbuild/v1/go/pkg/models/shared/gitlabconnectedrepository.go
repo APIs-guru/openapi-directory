@@ -1,7 +1,9 @@
 package shared
 
-type GitLabConnectedRepository struct {
-	Parent *string             `json:"parent,omitempty"`
-	Repo   *GitLabRepositoryID `json:"repo,omitempty"`
-	Status *Status             `json:"status,omitempty"`
+// GitLabConnectedRepositoryInput
+// GitLabConnectedRepository represents a GitLab connected repository request response.
+type GitLabConnectedRepositoryInput struct {
+	Parent *string                  `json:"parent,omitempty"`
+	Repo   *GitLabRepositoryIDInput `json:"repo,omitempty"`
+	Status *Status                  `json:"status,omitempty"`
 }

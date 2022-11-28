@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdrnToAddressPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=udprn" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=udprn" })
   udprn: string;
 }
 
 
 export class UpdrnToAddressQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=licensee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" })
   licensee?: string;
 }
 
 
 export class UpdrnToAddressSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   userToken: shared.SchemeUserToken;
 }
 
 
 export class UpdrnToAddressRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdrnToAddressPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdrnToAddressQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdrnToAddressSecurity;
 }
 
 
 export class UpdrnToAddressResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseSchema?: shared.ErrorResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   udprnToAddressResponseSchema?: shared.UdprnToAddressResponseSchema;
 }

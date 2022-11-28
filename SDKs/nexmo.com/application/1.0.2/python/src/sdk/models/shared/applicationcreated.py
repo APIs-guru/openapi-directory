@@ -1,19 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import links
-from . import keyswithprivatekey
-from . import messages
-from . import voice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ApplicationCreated:
-    links: Optional[links.Links] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    keys: Optional[keyswithprivatekey.KeysWithPrivateKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keys' }})
-    messages: messages.Messages = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messages' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    voice: voice.Voice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'voice' }})
+    messages: Messages = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('messages') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    voice: Voice = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('voice') }})
+    links: Optional[Links] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    keys: Optional[KeysWithPrivateKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keys') }})
     

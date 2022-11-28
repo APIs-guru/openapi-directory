@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTransitGatewayMulticastDomainActionEnum(str, Enum):
     DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN = "DeleteTransitGatewayMulticastDomain"
@@ -10,10 +14,10 @@ class GetDeleteTransitGatewayMulticastDomainVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTransitGatewayMulticastDomainQueryParams:
-    action: GetDeleteTransitGatewayMulticastDomainActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteTransitGatewayMulticastDomainActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_multicast_domain_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayMulticastDomainId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTransitGatewayMulticastDomainVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_multicast_domain_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayMulticastDomainId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTransitGatewayMulticastDomainVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteTransitGatewayMulticastDomainHeaders:
 
 @dataclass
 class GetDeleteTransitGatewayMulticastDomainRequest:
-    query_params: GetDeleteTransitGatewayMulticastDomainQueryParams = field(default=None)
-    headers: GetDeleteTransitGatewayMulticastDomainHeaders = field(default=None)
+    headers: GetDeleteTransitGatewayMulticastDomainHeaders = field()
+    query_params: GetDeleteTransitGatewayMulticastDomainQueryParams = field()
     
 
 @dataclass
 class GetDeleteTransitGatewayMulticastDomainResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

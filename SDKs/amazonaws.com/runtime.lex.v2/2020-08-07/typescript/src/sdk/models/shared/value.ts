@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Value
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The value of a slot.
 **/
 export class Value extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interpretedValue" })
+  @SpeakeasyMetadata({ data: "json, name=interpretedValue" })
   interpretedValue: string;
 
-  @Metadata({ data: "json, name=originalValue" })
+  @SpeakeasyMetadata({ data: "json, name=originalValue" })
   originalValue?: string;
 
-  @Metadata({ data: "json, name=resolvedValues" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedValues" })
   resolvedValues?: string[];
 }

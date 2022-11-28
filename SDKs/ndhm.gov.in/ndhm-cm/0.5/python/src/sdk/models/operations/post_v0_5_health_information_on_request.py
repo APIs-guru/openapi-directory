@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class PostV05HealthInformationOnRequestHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostV05HealthInformationOnRequestRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
     hip_health_information_request_acknowledgement: Optional[shared.HipHealthInformationRequestAcknowledgement] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostV05HealthInformationOnRequestRequest:
-    headers: PostV05HealthInformationOnRequestHeaders = field(default=None)
-    request: PostV05HealthInformationOnRequestRequests = field(default=None)
+    headers: PostV05HealthInformationOnRequestHeaders = field()
+    request: PostV05HealthInformationOnRequestRequests = field()
     
 
 @dataclass
 class PostV05HealthInformationOnRequestResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

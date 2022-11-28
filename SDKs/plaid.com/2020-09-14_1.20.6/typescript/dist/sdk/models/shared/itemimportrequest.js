@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemImportRequestOptions } from "./itemimportrequestoptions";
 import { ItemImportRequestUserAuth } from "./itemimportrequestuserauth";
 // ItemImportRequest
@@ -35,23 +35,23 @@ var ItemImportRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], ItemImportRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", ItemImportRequestOptions)
     ], ItemImportRequest.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=products" }),
+        SpeakeasyMetadata({ data: "json, name=products" }),
         __metadata("design:type", Array)
     ], ItemImportRequest.prototype, "products", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], ItemImportRequest.prototype, "secret", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_auth" }),
+        SpeakeasyMetadata({ data: "json, name=user_auth" }),
         __metadata("design:type", ItemImportRequestUserAuth)
     ], ItemImportRequest.prototype, "userAuth", void 0);
     return ItemImportRequest;

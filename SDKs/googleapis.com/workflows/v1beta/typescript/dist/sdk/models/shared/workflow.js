@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var WorkflowStateEnum;
 (function (WorkflowStateEnum) {
     WorkflowStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -38,45 +38,77 @@ var Workflow = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Workflow.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionCreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=revisionCreateTime" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "revisionCreateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionId" }),
+        SpeakeasyMetadata({ data: "json, name=revisionId" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceContents" }),
+        SpeakeasyMetadata({ data: "json, name=sourceContents" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "sourceContents", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Workflow.prototype, "updateTime", void 0);
     return Workflow;
 }(SpeakeasyBase));
 export { Workflow };
+// WorkflowInput
+/**
+ * Workflow program to be executed by Workflows.
+**/
+var WorkflowInput = /** @class */ (function (_super) {
+    __extends(WorkflowInput, _super);
+    function WorkflowInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], WorkflowInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], WorkflowInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], WorkflowInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
+        __metadata("design:type", String)
+    ], WorkflowInput.prototype, "serviceAccount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceContents" }),
+        __metadata("design:type", String)
+    ], WorkflowInput.prototype, "sourceContents", void 0);
+    return WorkflowInput;
+}(SpeakeasyBase));
+export { WorkflowInput };

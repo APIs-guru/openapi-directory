@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class LandlordControllerGetLandlordCrmEntriesPathParams:
-    short_name: str = field(default=None, metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
+    short_name: str = field(metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LandlordControllerGetLandlordCrmEntriesQueryParams:
-    token: str = field(default=None, metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
+    token: str = field(metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class LandlordControllerGetLandlordCrmEntriesRequest:
-    path_params: LandlordControllerGetLandlordCrmEntriesPathParams = field(default=None)
-    query_params: LandlordControllerGetLandlordCrmEntriesQueryParams = field(default=None)
+    path_params: LandlordControllerGetLandlordCrmEntriesPathParams = field()
+    query_params: LandlordControllerGetLandlordCrmEntriesQueryParams = field()
     
 
 @dataclass
 class LandlordControllerGetLandlordCrmEntriesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     landlord_crm_entries: Optional[List[shared.LandlordCrmEntry]] = field(default=None)
-    status_code: int = field(default=None)
     

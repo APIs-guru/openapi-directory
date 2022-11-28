@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedDeployments
+// A paged list of deployments
 type PaginatedDeployments struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

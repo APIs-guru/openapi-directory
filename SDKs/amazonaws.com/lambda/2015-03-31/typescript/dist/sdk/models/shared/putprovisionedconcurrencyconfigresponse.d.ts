@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedConcurrencyStatusEnumEnum } from "./provisionedconcurrencystatusenumenum";
 export declare class PutProvisionedConcurrencyConfigResponse extends SpeakeasyBase {
     allocatedProvisionedConcurrentExecutions?: number;

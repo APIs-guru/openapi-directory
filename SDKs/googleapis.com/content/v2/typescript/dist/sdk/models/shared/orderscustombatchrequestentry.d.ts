@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { OrdersCustomBatchRequestEntryCancel } from "./orderscustombatchrequestentrycancel";
+import { OrdersCustomBatchRequestEntryCancelLineItem } from "./orderscustombatchrequestentrycancellineitem";
+import { OrdersCustomBatchRequestEntryInStoreRefundLineItem } from "./orderscustombatchrequestentryinstorerefundlineitem";
+import { OrdersCustomBatchRequestEntryRefund } from "./orderscustombatchrequestentryrefund";
+import { OrdersCustomBatchRequestEntryRejectReturnLineItem } from "./orderscustombatchrequestentryrejectreturnlineitem";
+import { OrdersCustomBatchRequestEntryReturnLineItem } from "./orderscustombatchrequestentryreturnlineitem";
+import { OrdersCustomBatchRequestEntryReturnRefundLineItem } from "./orderscustombatchrequestentryreturnrefundlineitem";
+import { OrdersCustomBatchRequestEntrySetLineItemMetadata } from "./orderscustombatchrequestentrysetlineitemmetadata";
+import { OrdersCustomBatchRequestEntryShipLineItems } from "./orderscustombatchrequestentryshiplineitems";
+import { OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails } from "./orderscustombatchrequestentryupdatelineitemshippingdetails";
+import { OrdersCustomBatchRequestEntryUpdateShipment } from "./orderscustombatchrequestentryupdateshipment";
+export declare class OrdersCustomBatchRequestEntry extends SpeakeasyBase {
+    batchId?: number;
+    cancel?: OrdersCustomBatchRequestEntryCancel;
+    cancelLineItem?: OrdersCustomBatchRequestEntryCancelLineItem;
+    inStoreRefundLineItem?: OrdersCustomBatchRequestEntryInStoreRefundLineItem;
+    merchantId?: string;
+    merchantOrderId?: string;
+    method?: string;
+    operationId?: string;
+    orderId?: string;
+    refund?: OrdersCustomBatchRequestEntryRefund;
+    rejectReturnLineItem?: OrdersCustomBatchRequestEntryRejectReturnLineItem;
+    returnLineItem?: OrdersCustomBatchRequestEntryReturnLineItem;
+    returnRefundLineItem?: OrdersCustomBatchRequestEntryReturnRefundLineItem;
+    setLineItemMetadata?: OrdersCustomBatchRequestEntrySetLineItemMetadata;
+    shipLineItems?: OrdersCustomBatchRequestEntryShipLineItems;
+    updateLineItemShippingDetails?: OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails;
+    updateShipment?: OrdersCustomBatchRequestEntryUpdateShipment;
+}

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListTablesPathParams:
-    workbook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
+    workbook_id: str = field(metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +30,21 @@ class ListTablesHeaders:
 
 @dataclass
 class ListTablesRequest:
-    path_params: ListTablesPathParams = field(default=None)
-    query_params: ListTablesQueryParams = field(default=None)
-    headers: ListTablesHeaders = field(default=None)
+    headers: ListTablesHeaders = field()
+    path_params: ListTablesPathParams = field()
+    query_params: ListTablesQueryParams = field()
     
 
 @dataclass
 class ListTablesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_tables_result: Optional[shared.ListTablesResult] = field(default=None)
     request_timeout_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

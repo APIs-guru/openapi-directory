@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetResourcesTagsIDRelatedFormatPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GetResourcesTagsIDRelatedFormatQueryParams:
 
 @dataclass
 class GetResourcesTagsIDRelatedFormatRequest:
-    path_params: GetResourcesTagsIDRelatedFormatPathParams = field(default=None)
-    query_params: GetResourcesTagsIDRelatedFormatQueryParams = field(default=None)
+    path_params: GetResourcesTagsIDRelatedFormatPathParams = field()
+    query_params: GetResourcesTagsIDRelatedFormatQueryParams = field()
     
 
 @dataclass
 class GetResourcesTagsIDRelatedFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tag_marshaller_wrappeds: Optional[List[shared.TagMarshallerWrapped]] = field(default=None)
     

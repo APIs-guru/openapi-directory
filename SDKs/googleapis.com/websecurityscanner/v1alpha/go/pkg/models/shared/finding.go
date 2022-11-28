@@ -17,6 +17,8 @@ const (
 	FindingFindingTypeEnumMismatchingSecurityHeaderValues FindingFindingTypeEnum = "MISMATCHING_SECURITY_HEADER_VALUES"
 )
 
+// Finding
+// A Finding resource represents a vulnerability instance identified during a ScanRun.
 type Finding struct {
 	Body                 *string                 `json:"body,omitempty"`
 	Description          *string                 `json:"description,omitempty"`

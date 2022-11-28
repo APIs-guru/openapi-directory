@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { IconList } from "./iconlist";
 import { Locale } from "./locale";
 import { Timezone } from "./timezone";
 var Detail = /** @class */ (function (_super) {
@@ -32,15 +32,15 @@ var Detail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=icon_list", elemType: shared.IconList }),
+        SpeakeasyMetadata({ data: "json, name=icon_list", elemType: IconList }),
         __metadata("design:type", Array)
     ], Detail.prototype, "iconList", void 0);
     __decorate([
-        Metadata({ data: "json, name=locale" }),
+        SpeakeasyMetadata({ data: "json, name=locale" }),
         __metadata("design:type", Locale)
     ], Detail.prototype, "locale", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezone" }),
+        SpeakeasyMetadata({ data: "json, name=timezone" }),
         __metadata("design:type", Timezone)
     ], Detail.prototype, "timezone", void 0);
     return Detail;

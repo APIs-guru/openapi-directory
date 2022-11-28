@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatastreamProjectsLocationsConnectionProfilesDiscoverPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DatastreamProjectsLocationsConnectionProfilesDiscoverQueryParams:
 
 @dataclass
 class DatastreamProjectsLocationsConnectionProfilesDiscoverSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatastreamProjectsLocationsConnectionProfilesDiscoverRequest:
-    path_params: DatastreamProjectsLocationsConnectionProfilesDiscoverPathParams = field(default=None)
-    query_params: DatastreamProjectsLocationsConnectionProfilesDiscoverQueryParams = field(default=None)
-    request: Optional[shared.DiscoverConnectionProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DatastreamProjectsLocationsConnectionProfilesDiscoverSecurity = field(default=None)
+    path_params: DatastreamProjectsLocationsConnectionProfilesDiscoverPathParams = field()
+    query_params: DatastreamProjectsLocationsConnectionProfilesDiscoverQueryParams = field()
+    security: DatastreamProjectsLocationsConnectionProfilesDiscoverSecurity = field()
+    request: Optional[shared.DiscoverConnectionProfileRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DatastreamProjectsLocationsConnectionProfilesDiscoverResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     discover_connection_profile_response: Optional[shared.DiscoverConnectionProfileResponse] = field(default=None)
-    status_code: int = field(default=None)
     

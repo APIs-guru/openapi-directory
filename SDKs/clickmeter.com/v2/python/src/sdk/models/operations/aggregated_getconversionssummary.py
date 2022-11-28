@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AggregatedGetConversionsSummarySortDirectionEnum(str, Enum):
@@ -30,6 +31,7 @@ class AggregatedGetConversionsSummaryTimeFrameEnum(str, Enum):
 
 @dataclass
 class AggregatedGetConversionsSummaryQueryParams:
+    time_frame: AggregatedGetConversionsSummaryTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
     offset: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
@@ -37,18 +39,17 @@ class AggregatedGetConversionsSummaryQueryParams:
     sort_direction: Optional[AggregatedGetConversionsSummarySortDirectionEnum] = field(default=None, metadata={'query_param': { 'field_name': 'sortDirection', 'style': 'form', 'explode': True }})
     status: Optional[AggregatedGetConversionsSummaryStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     text_search: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'textSearch', 'style': 'form', 'explode': True }})
-    time_frame: AggregatedGetConversionsSummaryTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class AggregatedGetConversionsSummaryRequest:
-    query_params: AggregatedGetConversionsSummaryQueryParams = field(default=None)
+    query_params: AggregatedGetConversionsSummaryQueryParams = field()
     
 
 @dataclass
 class AggregatedGetConversionsSummaryResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_aggregated_aggregated_summary_result: Optional[shared.APICoreDtoAggregatedAggregatedSummaryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

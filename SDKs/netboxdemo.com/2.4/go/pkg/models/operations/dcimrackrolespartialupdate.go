@@ -10,7 +10,7 @@ type DcimRackRolesPartialUpdatePathParams struct {
 
 type DcimRackRolesPartialUpdateRequest struct {
 	PathParams DcimRackRolesPartialUpdatePathParams
-	Request    shared.RackRole `request:"mediaType=application/json"`
+	Request    shared.RackRoleInput `request:"mediaType=application/json"`
 }
 
 type DcimRackRolesPartialUpdateResponse struct {

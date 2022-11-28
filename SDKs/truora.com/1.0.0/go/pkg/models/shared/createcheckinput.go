@@ -59,6 +59,8 @@ const (
 	CreateCheckInputTypeEnumCustomTypeName CreateCheckInputTypeEnum = "custom_type_name"
 )
 
+// CreateCheckInput
+// Represents paramaters required to create a background check
 type CreateCheckInput struct {
 	BirthCertificate  *string                     `form:"name=birth_certificate"`
 	CompanyName       *string                     `form:"name=company_name"`

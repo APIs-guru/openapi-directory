@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Query optimizer configuration.
 **/
 export class QueryOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=optimizerStatisticsPackage" })
+  @SpeakeasyMetadata({ data: "json, name=optimizerStatisticsPackage" })
   optimizerStatisticsPackage?: string;
 
-  @Metadata({ data: "json, name=optimizerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=optimizerVersion" })
   optimizerVersion?: string;
 }

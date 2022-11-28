@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
@@ -11,5 +13,9 @@ class EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EnterpriseCrmEventbusProtoSuccessPolicy:
-    final_state: Optional[EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finalState' }})
+    r"""EnterpriseCrmEventbusProtoSuccessPolicy
+    Policy that dictates the behavior for the task after it completes successfully.
+    """
+    
+    final_state: Optional[EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('finalState') }})
     

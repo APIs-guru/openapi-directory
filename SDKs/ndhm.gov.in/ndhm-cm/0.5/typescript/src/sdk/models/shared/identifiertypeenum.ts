@@ -1,6 +1,7 @@
 
 
+
 export enum IdentifierTypeEnum {
-    Mobile = "MOBILE"
-,    Mr = "MR"
+    Mobile = "MOBILE",
+    Mr = "MR"
 }

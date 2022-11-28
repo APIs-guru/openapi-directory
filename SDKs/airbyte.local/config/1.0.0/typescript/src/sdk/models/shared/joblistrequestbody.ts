@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobConfigTypeEnum } from "./jobconfigtypeenum";
 import { Pagination } from "./pagination";
 
 
+
 export class JobListRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configId" })
+  @SpeakeasyMetadata({ data: "json, name=configId" })
   configId: string;
 
-  @Metadata({ data: "json, name=configTypes" })
+  @SpeakeasyMetadata({ data: "json, name=configTypes" })
   configTypes: JobConfigTypeEnum[];
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: Pagination;
 }

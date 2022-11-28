@@ -1,24 +1,25 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import androidconfig
-from . import apnsconfig
-from . import fcmoptions
-from . import notification
-from . import webpushconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Message:
-    android: Optional[androidconfig.AndroidConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'android' }})
-    apns: Optional[apnsconfig.ApnsConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apns' }})
-    condition: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'condition' }})
-    data: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    fcm_options: Optional[fcmoptions.FcmOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fcmOptions' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    notification: Optional[notification.Notification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notification' }})
-    token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
-    topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topic' }})
-    webpush: Optional[webpushconfig.WebpushConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webpush' }})
+    r"""Message
+    Message to send by Firebase Cloud Messaging Service.
+    """
+    
+    android: Optional[AndroidConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('android') }})
+    apns: Optional[ApnsConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apns') }})
+    condition: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('condition') }})
+    data: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    fcm_options: Optional[FcmOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fcmOptions') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notification: Optional[Notification] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notification') }})
+    token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('token') }})
+    topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topic') }})
+    webpush: Optional[WebpushConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webpush') }})
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GameSession } from "./gamesession";
 import { ProtectionPolicyEnum } from "./protectionpolicyenum";
+
 
 
 // GameSessionDetail
@@ -8,9 +9,9 @@ import { ProtectionPolicyEnum } from "./protectionpolicyenum";
  * A game session's properties plus the protection policy currently in force.
 **/
 export class GameSessionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GameSession" })
+  @SpeakeasyMetadata({ data: "json, name=GameSession" })
   gameSession?: GameSession;
 
-  @Metadata({ data: "json, name=ProtectionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ProtectionPolicy" })
   protectionPolicy?: ProtectionPolicyEnum;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudOrgpolicyV2Policy } from "./googlecloudorgpolicyv2policy";
 /**
  * The response returned from the ListPolicies method. It will be empty if no `Policies` are set on the resource.

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ImporterExporterCodeVerificationApiPathParams = /** @class */ (function (_super) {
     __extends(ImporterExporterCodeVerificationApiPathParams, _super);
@@ -30,135 +30,95 @@ var ImporterExporterCodeVerificationApiPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=iec" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=iec" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApiPathParams.prototype, "iec", void 0);
     return ImporterExporterCodeVerificationApiPathParams;
 }(SpeakeasyBase));
 export { ImporterExporterCodeVerificationApiPathParams };
-var ImporterExporterCodeVerificationApiSecurityOption1 = /** @class */ (function (_super) {
-    __extends(ImporterExporterCodeVerificationApiSecurityOption1, _super);
-    function ImporterExporterCodeVerificationApiSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], ImporterExporterCodeVerificationApiSecurityOption1.prototype, "apiKey", void 0);
-    return ImporterExporterCodeVerificationApiSecurityOption1;
-}(SpeakeasyBase));
-export { ImporterExporterCodeVerificationApiSecurityOption1 };
-var ImporterExporterCodeVerificationApiSecurityOption2 = /** @class */ (function (_super) {
-    __extends(ImporterExporterCodeVerificationApiSecurityOption2, _super);
-    function ImporterExporterCodeVerificationApiSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeClientId)
-    ], ImporterExporterCodeVerificationApiSecurityOption2.prototype, "clientId", void 0);
-    return ImporterExporterCodeVerificationApiSecurityOption2;
-}(SpeakeasyBase));
-export { ImporterExporterCodeVerificationApiSecurityOption2 };
 var ImporterExporterCodeVerificationApiSecurity = /** @class */ (function (_super) {
     __extends(ImporterExporterCodeVerificationApiSecurity, _super);
     function ImporterExporterCodeVerificationApiSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", ImporterExporterCodeVerificationApiSecurityOption1)
-    ], ImporterExporterCodeVerificationApiSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], ImporterExporterCodeVerificationApiSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", ImporterExporterCodeVerificationApiSecurityOption2)
-    ], ImporterExporterCodeVerificationApiSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeClientId)
+    ], ImporterExporterCodeVerificationApiSecurity.prototype, "clientId", void 0);
     return ImporterExporterCodeVerificationApiSecurity;
 }(SpeakeasyBase));
 export { ImporterExporterCodeVerificationApiSecurity };
-var ImporterExporterCodeVerificationApiRequest = /** @class */ (function (_super) {
-    __extends(ImporterExporterCodeVerificationApiRequest, _super);
-    function ImporterExporterCodeVerificationApiRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", ImporterExporterCodeVerificationApiPathParams)
-    ], ImporterExporterCodeVerificationApiRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", ImporterExporterCodeVerificationApiSecurity)
-    ], ImporterExporterCodeVerificationApiRequest.prototype, "security", void 0);
-    return ImporterExporterCodeVerificationApiRequest;
-}(SpeakeasyBase));
-export { ImporterExporterCodeVerificationApiRequest };
 var ImporterExporterCodeVerificationApi200ApplicationJson = /** @class */ (function (_super) {
     __extends(ImporterExporterCodeVerificationApi200ApplicationJson, _super);
     function ImporterExporterCodeVerificationApi200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addressLine1" }),
+        SpeakeasyMetadata({ data: "json, name=addressLine1" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "addressLine1", void 0);
     __decorate([
-        Metadata({ data: "json, name=addressLine2" }),
+        SpeakeasyMetadata({ data: "json, name=addressLine2" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "addressLine2", void 0);
     __decorate([
-        Metadata({ data: "json, name=branch" }),
+        SpeakeasyMetadata({ data: "json, name=branch" }),
         __metadata("design:type", Array)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "branch", void 0);
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataAsOn" }),
+        SpeakeasyMetadata({ data: "json, name=dataAsOn" }),
         __metadata("design:type", Date)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "dataAsOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=directors" }),
+        SpeakeasyMetadata({ data: "json, name=directors" }),
         __metadata("design:type", Array)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "directors", void 0);
     __decorate([
-        Metadata({ data: "json, name=entityName" }),
+        SpeakeasyMetadata({ data: "json, name=entityName" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "entityName", void 0);
     __decorate([
-        Metadata({ data: "json, name=exporterType" }),
+        SpeakeasyMetadata({ data: "json, name=exporterType" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "exporterType", void 0);
     __decorate([
-        Metadata({ data: "json, name=iec" }),
+        SpeakeasyMetadata({ data: "json, name=iec" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "iec", void 0);
     __decorate([
-        Metadata({ data: "json, name=iecIssueDate" }),
+        SpeakeasyMetadata({ data: "json, name=iecIssueDate" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "iecIssueDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=iecModificationDate" }),
+        SpeakeasyMetadata({ data: "json, name=iecModificationDate" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "iecModificationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=iecStatus" }),
+        SpeakeasyMetadata({ data: "json, name=iecStatus" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "iecStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=natureOfConcern" }),
+        SpeakeasyMetadata({ data: "json, name=natureOfConcern" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "natureOfConcern", void 0);
     __decorate([
-        Metadata({ data: "json, name=pan" }),
+        SpeakeasyMetadata({ data: "json, name=pan" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "pan", void 0);
     __decorate([
-        Metadata({ data: "json, name=pin" }),
+        SpeakeasyMetadata({ data: "json, name=pin" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "pin", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi200ApplicationJson.prototype, "state", void 0);
     return ImporterExporterCodeVerificationApi200ApplicationJson;
@@ -180,11 +140,11 @@ var ImporterExporterCodeVerificationApi400ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi400ApplicationJson.prototype, "errorDescription", void 0);
     return ImporterExporterCodeVerificationApi400ApplicationJson;
@@ -206,11 +166,11 @@ var ImporterExporterCodeVerificationApi401ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi401ApplicationJson.prototype, "errorDescription", void 0);
     return ImporterExporterCodeVerificationApi401ApplicationJson;
@@ -232,11 +192,11 @@ var ImporterExporterCodeVerificationApi404ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi404ApplicationJson.prototype, "errorDescription", void 0);
     return ImporterExporterCodeVerificationApi404ApplicationJson;
@@ -256,11 +216,11 @@ var ImporterExporterCodeVerificationApi500ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi500ApplicationJson.prototype, "errorDescription", void 0);
     return ImporterExporterCodeVerificationApi500ApplicationJson;
@@ -280,11 +240,11 @@ var ImporterExporterCodeVerificationApi502ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi502ApplicationJson.prototype, "errorDescription", void 0);
     return ImporterExporterCodeVerificationApi502ApplicationJson;
@@ -304,11 +264,11 @@ var ImporterExporterCodeVerificationApi503ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi503ApplicationJson.prototype, "errorDescription", void 0);
     return ImporterExporterCodeVerificationApi503ApplicationJson;
@@ -328,59 +288,75 @@ var ImporterExporterCodeVerificationApi504ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApi504ApplicationJson.prototype, "errorDescription", void 0);
     return ImporterExporterCodeVerificationApi504ApplicationJson;
 }(SpeakeasyBase));
 export { ImporterExporterCodeVerificationApi504ApplicationJson };
+var ImporterExporterCodeVerificationApiRequest = /** @class */ (function (_super) {
+    __extends(ImporterExporterCodeVerificationApiRequest, _super);
+    function ImporterExporterCodeVerificationApiRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ImporterExporterCodeVerificationApiPathParams)
+    ], ImporterExporterCodeVerificationApiRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ImporterExporterCodeVerificationApiSecurity)
+    ], ImporterExporterCodeVerificationApiRequest.prototype, "security", void 0);
+    return ImporterExporterCodeVerificationApiRequest;
+}(SpeakeasyBase));
+export { ImporterExporterCodeVerificationApiRequest };
 var ImporterExporterCodeVerificationApiResponse = /** @class */ (function (_super) {
     __extends(ImporterExporterCodeVerificationApiResponse, _super);
     function ImporterExporterCodeVerificationApiResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi200ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi400ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi401ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi404ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi500ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi502ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi503ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImporterExporterCodeVerificationApi504ApplicationJson)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "importerExporterCodeVerificationApi504ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ImporterExporterCodeVerificationApiResponse.prototype, "statusCode", void 0);
     return ImporterExporterCodeVerificationApiResponse;

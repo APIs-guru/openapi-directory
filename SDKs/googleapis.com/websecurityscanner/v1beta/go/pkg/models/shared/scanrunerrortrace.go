@@ -12,6 +12,8 @@ const (
 	ScanRunErrorTraceCodeEnumTooManyHTTPErrors         ScanRunErrorTraceCodeEnum = "TOO_MANY_HTTP_ERRORS"
 )
 
+// ScanRunErrorTrace
+// Output only. Defines an error trace message for a ScanRun.
 type ScanRunErrorTrace struct {
 	Code                    *ScanRunErrorTraceCodeEnum `json:"code,omitempty"`
 	MostCommonHTTPErrorCode *int32                     `json:"mostCommonHttpErrorCode,omitempty"`

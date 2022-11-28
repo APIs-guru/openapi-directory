@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetInvoiceJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=guid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=guid" })
   guid: string;
 }
 
 
 export class GetInvoiceJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pmv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pmv" })
   pmv?: string;
 }
 
 
 export class GetInvoiceJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInvoiceJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetInvoiceJsonQueryParams;
 }
 
 
 export class GetInvoiceJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   purchaseInvoice?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

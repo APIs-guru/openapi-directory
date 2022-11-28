@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class DeleteVideosVideoIDChaptersLanguagePathParams:
-    language: str = field(default=None, metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
-    video_id: str = field(default=None, metadata={'path_param': { 'field_name': 'videoId', 'style': 'simple', 'explode': False }})
+    language: str = field(metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
+    video_id: str = field(metadata={'path_param': { 'field_name': 'videoId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteVideosVideoIDChaptersLanguageSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class DeleteVideosVideoIDChaptersLanguageRequest:
-    path_params: DeleteVideosVideoIDChaptersLanguagePathParams = field(default=None)
-    security: DeleteVideosVideoIDChaptersLanguageSecurity = field(default=None)
+    path_params: DeleteVideosVideoIDChaptersLanguagePathParams = field()
+    security: DeleteVideosVideoIDChaptersLanguageSecurity = field()
     
 
 @dataclass
 class DeleteVideosVideoIDChaptersLanguageResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     not_found: Optional[shared.NotFound] = field(default=None)
     

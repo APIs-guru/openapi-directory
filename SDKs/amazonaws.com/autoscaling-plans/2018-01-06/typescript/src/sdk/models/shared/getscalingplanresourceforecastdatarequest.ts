@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ForecastDataTypeEnum } from "./forecastdatatypeenum";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 
 
+
 export class GetScalingPlanResourceForecastDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime: Date;
 
-  @Metadata({ data: "json, name=ForecastDataType" })
+  @SpeakeasyMetadata({ data: "json, name=ForecastDataType" })
   forecastDataType: ForecastDataTypeEnum;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=ScalableDimension" })
+  @SpeakeasyMetadata({ data: "json, name=ScalableDimension" })
   scalableDimension: ScalableDimensionEnum;
 
-  @Metadata({ data: "json, name=ScalingPlanName" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanName" })
   scalingPlanName: string;
 
-  @Metadata({ data: "json, name=ScalingPlanVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" })
   scalingPlanVersion: number;
 
-  @Metadata({ data: "json, name=ServiceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNamespace" })
   serviceNamespace: ServiceNamespaceEnum;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime: Date;
 }

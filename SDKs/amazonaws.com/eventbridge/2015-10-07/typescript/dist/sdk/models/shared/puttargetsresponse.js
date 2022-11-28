@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PutTargetsResultEntry } from "./puttargetsresultentry";
 var PutTargetsResponse = /** @class */ (function (_super) {
     __extends(PutTargetsResponse, _super);
     function PutTargetsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FailedEntries", elemType: shared.PutTargetsResultEntry }),
+        SpeakeasyMetadata({ data: "json, name=FailedEntries", elemType: PutTargetsResultEntry }),
         __metadata("design:type", Array)
     ], PutTargetsResponse.prototype, "failedEntries", void 0);
     __decorate([
-        Metadata({ data: "json, name=FailedEntryCount" }),
+        SpeakeasyMetadata({ data: "json, name=FailedEntryCount" }),
         __metadata("design:type", Number)
     ], PutTargetsResponse.prototype, "failedEntryCount", void 0);
     return PutTargetsResponse;

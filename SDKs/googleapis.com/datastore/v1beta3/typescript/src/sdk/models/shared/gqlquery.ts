@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GqlQueryParameter } from "./gqlqueryparameter";
-import { GqlQueryParameter } from "./gqlqueryparameter";
+
 
 
 // GqlQuery
@@ -9,15 +8,15 @@ import { GqlQueryParameter } from "./gqlqueryparameter";
  * A [GQL query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
 **/
 export class GqlQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowLiterals" })
+  @SpeakeasyMetadata({ data: "json, name=allowLiterals" })
   allowLiterals?: boolean;
 
-  @Metadata({ data: "json, name=namedBindings", elemType: shared.GqlQueryParameter })
+  @SpeakeasyMetadata({ data: "json, name=namedBindings", elemType: GqlQueryParameter })
   namedBindings?: Map<string, GqlQueryParameter>;
 
-  @Metadata({ data: "json, name=positionalBindings", elemType: shared.GqlQueryParameter })
+  @SpeakeasyMetadata({ data: "json, name=positionalBindings", elemType: GqlQueryParameter })
   positionalBindings?: GqlQueryParameter[];
 
-  @Metadata({ data: "json, name=queryString" })
+  @SpeakeasyMetadata({ data: "json, name=queryString" })
   queryString?: string;
 }

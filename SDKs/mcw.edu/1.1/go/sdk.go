@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://mcw.edu//rest.rgd.mcw.edu/rgdws",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetActiveObjectCountUsingGet - Count of active objects by type, for specified species and date
 func (s *SDK) GetActiveObjectCountUsingGet(ctx context.Context, request operations.GetActiveObjectCountUsingGetRequest) (*operations.GetActiveObjectCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/activeObject/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -60,7 +82,7 @@ func (s *SDK) GetActiveObjectCountUsingGet(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -93,8 +115,9 @@ func (s *SDK) GetActiveObjectCountUsingGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetActiveObjectDiffUsingGet - Count difference of active objects, by type, for specified species and date range
 func (s *SDK) GetActiveObjectDiffUsingGet(ctx context.Context, request operations.GetActiveObjectDiffUsingGetRequest) (*operations.GetActiveObjectDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/activeObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -102,7 +125,7 @@ func (s *SDK) GetActiveObjectDiffUsingGet(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -135,8 +158,9 @@ func (s *SDK) GetActiveObjectDiffUsingGet(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAffectedGenomicModelsUsingGet - Get affected genomic models (rat strains with gene alleles) submitted by RGD to AGR by taxonId
 func (s *SDK) GetAffectedGenomicModelsUsingGet(ctx context.Context, request operations.GetAffectedGenomicModelsUsingGetRequest) (*operations.GetAffectedGenomicModelsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/agr/affectedGenomicModels/{taxonId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -144,7 +168,7 @@ func (s *SDK) GetAffectedGenomicModelsUsingGet(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -177,8 +201,9 @@ func (s *SDK) GetAffectedGenomicModelsUsingGet(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAllAnnotatedGenesUsingGet - Return a list of genes annotated to an ontology term
 func (s *SDK) GetAllAnnotatedGenesUsingGet(ctx context.Context, request operations.GetAllAnnotatedGenesUsingGetRequest) (*operations.GetAllAnnotatedGenesUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/annotation/{accId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -186,7 +211,7 @@ func (s *SDK) GetAllAnnotatedGenesUsingGet(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -219,8 +244,9 @@ func (s *SDK) GetAllAnnotatedGenesUsingGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAllStrainsUsingGet - Return all active strains in RGD
 func (s *SDK) GetAllStrainsUsingGet(ctx context.Context) (*operations.GetAllStrainsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/strains/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -228,7 +254,7 @@ func (s *SDK) GetAllStrainsUsingGet(ctx context.Context) (*operations.GetAllStra
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -261,8 +287,9 @@ func (s *SDK) GetAllStrainsUsingGet(ctx context.Context) (*operations.GetAllStra
 	return res, nil
 }
 
+// GetAllelesForTaxonUsingGet - Get gene allele records submitted by RGD to AGR by taxonId
 func (s *SDK) GetAllelesForTaxonUsingGet(ctx context.Context, request operations.GetAllelesForTaxonUsingGetRequest) (*operations.GetAllelesForTaxonUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/agr/alleles/{taxonId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -270,7 +297,7 @@ func (s *SDK) GetAllelesForTaxonUsingGet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -303,8 +330,9 @@ func (s *SDK) GetAllelesForTaxonUsingGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAnnotatedGenesUsingPost - Return a list of genes annotated to an ontology term
 func (s *SDK) GetAnnotatedGenesUsingPost(ctx context.Context, request operations.GetAnnotatedGenesUsingPostRequest) (*operations.GetAnnotatedGenesUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/genes/annotation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -319,7 +347,7 @@ func (s *SDK) GetAnnotatedGenesUsingPost(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +381,9 @@ func (s *SDK) GetAnnotatedGenesUsingPost(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAnnotationCountByAccIDAndObjectTypeUsingGet - Returns annotation count for ontology accession ID and object type
 func (s *SDK) GetAnnotationCountByAccIDAndObjectTypeUsingGet(ctx context.Context, request operations.GetAnnotationCountByAccIDAndObjectTypeUsingGetRequest) (*operations.GetAnnotationCountByAccIDAndObjectTypeUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}/{objectType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -362,7 +391,7 @@ func (s *SDK) GetAnnotationCountByAccIDAndObjectTypeUsingGet(ctx context.Context
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -395,8 +424,9 @@ func (s *SDK) GetAnnotationCountByAccIDAndObjectTypeUsingGet(ctx context.Context
 	return res, nil
 }
 
+// GetAnnotationCountByAccIDAndSpeciesUsingGet - Returns annotation count for ontology accession ID and speicies
 func (s *SDK) GetAnnotationCountByAccIDAndSpeciesUsingGet(ctx context.Context, request operations.GetAnnotationCountByAccIDAndSpeciesUsingGetRequest) (*operations.GetAnnotationCountByAccIDAndSpeciesUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -404,7 +434,7 @@ func (s *SDK) GetAnnotationCountByAccIDAndSpeciesUsingGet(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -437,8 +467,9 @@ func (s *SDK) GetAnnotationCountByAccIDAndSpeciesUsingGet(ctx context.Context, r
 	return res, nil
 }
 
+// GetAnnotationCountByAccIDUsingGet - Returns annotation count for ontology accession ID
 func (s *SDK) GetAnnotationCountByAccIDUsingGet(ctx context.Context, request operations.GetAnnotationCountByAccIDUsingGetRequest) (*operations.GetAnnotationCountByAccIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/count/{accId}/{includeChildren}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -446,7 +477,7 @@ func (s *SDK) GetAnnotationCountByAccIDUsingGet(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -479,8 +510,9 @@ func (s *SDK) GetAnnotationCountByAccIDUsingGet(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetAnnotationsByAccIDAndRgdIDUsingGet - Returns a list of annotations by RGD ID and ontology term accession ID
 func (s *SDK) GetAnnotationsByAccIDAndRgdIDUsingGet(ctx context.Context, request operations.GetAnnotationsByAccIDAndRgdIDUsingGetRequest) (*operations.GetAnnotationsByAccIDAndRgdIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/{accId}/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -488,7 +520,7 @@ func (s *SDK) GetAnnotationsByAccIDAndRgdIDUsingGet(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -521,8 +553,9 @@ func (s *SDK) GetAnnotationsByAccIDAndRgdIDUsingGet(ctx context.Context, request
 	return res, nil
 }
 
+// GetAnnotationsByRgdIDAndOntologyUsingGet - Returns a list of annotations by RGD ID and ontology prefix
 func (s *SDK) GetAnnotationsByRgdIDAndOntologyUsingGet(ctx context.Context, request operations.GetAnnotationsByRgdIDAndOntologyUsingGetRequest) (*operations.GetAnnotationsByRgdIDAndOntologyUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/rgdId/{rgdId}/{ontologyPrefix}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -530,7 +563,7 @@ func (s *SDK) GetAnnotationsByRgdIDAndOntologyUsingGet(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -563,8 +596,9 @@ func (s *SDK) GetAnnotationsByRgdIDAndOntologyUsingGet(ctx context.Context, requ
 	return res, nil
 }
 
+// GetAnnotationsByRgdIDUsingGet - Returns a list of annotations by RGD ID
 func (s *SDK) GetAnnotationsByRgdIDUsingGet(ctx context.Context, request operations.GetAnnotationsByRgdIDUsingGetRequest) (*operations.GetAnnotationsByRgdIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/rgdId/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -572,7 +606,7 @@ func (s *SDK) GetAnnotationsByRgdIDUsingGet(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -605,8 +639,9 @@ func (s *SDK) GetAnnotationsByRgdIDUsingGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetAnnotationsUsingGet - Returns a list annotations for an ontology term or a term and it's children
 func (s *SDK) GetAnnotationsUsingGet(ctx context.Context, request operations.GetAnnotationsUsingGetRequest) (*operations.GetAnnotationsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/{accId}/{speciesTypeKey}/{includeChildren}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -614,7 +649,7 @@ func (s *SDK) GetAnnotationsUsingGet(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -647,8 +682,9 @@ func (s *SDK) GetAnnotationsUsingGet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetAnnotationsUsingPost - Return a list of genes annotated to an ontology term
 func (s *SDK) GetAnnotationsUsingPost(ctx context.Context, request operations.GetAnnotationsUsingPostRequest) (*operations.GetAnnotationsUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/annotations/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -663,7 +699,7 @@ func (s *SDK) GetAnnotationsUsingPost(ctx context.Context, request operations.Ge
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -697,8 +733,9 @@ func (s *SDK) GetAnnotationsUsingPost(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAnnotsByRefrerenceUsingGet - Returns a list of annotations for a reference
 func (s *SDK) GetAnnotsByRefrerenceUsingGet(ctx context.Context, request operations.GetAnnotsByRefrerenceUsingGetRequest) (*operations.GetAnnotsByRefrerenceUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/reference/{refRgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -706,7 +743,7 @@ func (s *SDK) GetAnnotsByRefrerenceUsingGet(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -739,8 +776,9 @@ func (s *SDK) GetAnnotsByRefrerenceUsingGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetChartInfoUsingGet - Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla).  Reference RGD ID for a study works like a filter.
 func (s *SDK) GetChartInfoUsingGet(ctx context.Context, request operations.GetChartInfoUsingGetRequest) (*operations.GetChartInfoUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/phenotype/phenominer/chart/{speciesTypeKey}/{refRgdId}/{termString}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -748,7 +786,7 @@ func (s *SDK) GetChartInfoUsingGet(ctx context.Context, request operations.GetCh
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -781,8 +819,9 @@ func (s *SDK) GetChartInfoUsingGet(ctx context.Context, request operations.GetCh
 	return res, nil
 }
 
+// GetChartInfoUsingGet1 - Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla)
 func (s *SDK) GetChartInfoUsingGet1(ctx context.Context, request operations.GetChartInfoUsingGet1Request) (*operations.GetChartInfoUsingGet1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/phenotype/phenominer/chart/{speciesTypeKey}/{termString}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -790,7 +829,7 @@ func (s *SDK) GetChartInfoUsingGet1(ctx context.Context, request operations.GetC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -823,8 +862,9 @@ func (s *SDK) GetChartInfoUsingGet1(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetChromosomeByAssemblyUsingGet - Return a list of chromosomes
 func (s *SDK) GetChromosomeByAssemblyUsingGet(ctx context.Context, request operations.GetChromosomeByAssemblyUsingGetRequest) (*operations.GetChromosomeByAssemblyUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/chr/{chromosome}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -832,7 +872,7 @@ func (s *SDK) GetChromosomeByAssemblyUsingGet(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -865,8 +905,9 @@ func (s *SDK) GetChromosomeByAssemblyUsingGet(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetChromosomesByAssemblyUsingGet - Return a list of chromosomes
 func (s *SDK) GetChromosomesByAssemblyUsingGet(ctx context.Context, request operations.GetChromosomesByAssemblyUsingGetRequest) (*operations.GetChromosomesByAssemblyUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/chr/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -874,7 +915,7 @@ func (s *SDK) GetChromosomesByAssemblyUsingGet(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -907,8 +948,9 @@ func (s *SDK) GetChromosomesByAssemblyUsingGet(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetEnrichmentDataUsingPost - Return a list of genes annotated to the term.Genes are rgdids separated by comma.Species type is an integer value.term is the ontology
 func (s *SDK) GetEnrichmentDataUsingPost(ctx context.Context, request operations.GetEnrichmentDataUsingPostRequest) (*operations.GetEnrichmentDataUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/enrichment/annotatedGenes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -926,7 +968,7 @@ func (s *SDK) GetEnrichmentDataUsingPost(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -960,8 +1002,9 @@ func (s *SDK) GetEnrichmentDataUsingPost(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetEnrichmentDataUsingPost1 - Return a chart of ontology terms annotated to the genes.Genes are rgdids separated by comma.Species type is an integer value.Aspect is the Ontology group
 func (s *SDK) GetEnrichmentDataUsingPost1(ctx context.Context, request operations.GetEnrichmentDataUsingPost1Request) (*operations.GetEnrichmentDataUsingPost1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/enrichment/data"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -979,7 +1022,7 @@ func (s *SDK) GetEnrichmentDataUsingPost1(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1013,8 +1056,9 @@ func (s *SDK) GetEnrichmentDataUsingPost1(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetEnsemblGeneMappingUsingGet - Translate an RGD ID to an Ensembl Gene  ID
 func (s *SDK) GetEnsemblGeneMappingUsingGet(ctx context.Context, request operations.GetEnsemblGeneMappingUsingGetRequest) (*operations.GetEnsemblGeneMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/EnsemblGene/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1022,7 +1066,7 @@ func (s *SDK) GetEnsemblGeneMappingUsingGet(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1055,8 +1099,9 @@ func (s *SDK) GetEnsemblGeneMappingUsingGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetEnsemblGeneMappingUsingPost - Translate RGD IDs to Ensembl Gene IDs
 func (s *SDK) GetEnsemblGeneMappingUsingPost(ctx context.Context, request operations.GetEnsemblGeneMappingUsingPostRequest) (*operations.GetEnsemblGeneMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/EnsemblGene"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1071,7 +1116,7 @@ func (s *SDK) GetEnsemblGeneMappingUsingPost(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1105,8 +1150,9 @@ func (s *SDK) GetEnsemblGeneMappingUsingPost(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetEnsemblProteinMappingUsingGet - Translate an RGD ID to an Ensembl Protein ID
 func (s *SDK) GetEnsemblProteinMappingUsingGet(ctx context.Context, request operations.GetEnsemblProteinMappingUsingGetRequest) (*operations.GetEnsemblProteinMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/EnsemblProtein/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1114,7 +1160,7 @@ func (s *SDK) GetEnsemblProteinMappingUsingGet(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1147,8 +1193,9 @@ func (s *SDK) GetEnsemblProteinMappingUsingGet(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetEnsemblProteinMappingUsingPost - Translate RGD IDs to Ensembl Protein IDs
 func (s *SDK) GetEnsemblProteinMappingUsingPost(ctx context.Context, request operations.GetEnsemblProteinMappingUsingPostRequest) (*operations.GetEnsemblProteinMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/EnsemblProtein"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1163,7 +1210,7 @@ func (s *SDK) GetEnsemblProteinMappingUsingPost(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1197,8 +1244,9 @@ func (s *SDK) GetEnsemblProteinMappingUsingPost(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetEnsemblTranscriptMappingUsingGet - Translate an RGD ID to an Ensembl Transcript ID
 func (s *SDK) GetEnsemblTranscriptMappingUsingGet(ctx context.Context, request operations.GetEnsemblTranscriptMappingUsingGetRequest) (*operations.GetEnsemblTranscriptMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/EnsemblTranscript/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1206,7 +1254,7 @@ func (s *SDK) GetEnsemblTranscriptMappingUsingGet(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1239,8 +1287,9 @@ func (s *SDK) GetEnsemblTranscriptMappingUsingGet(ctx context.Context, request o
 	return res, nil
 }
 
+// GetEnsemblTranscriptMappingUsingPost - Translate RGD IDs to Ensembl Transcript IDs
 func (s *SDK) GetEnsemblTranscriptMappingUsingPost(ctx context.Context, request operations.GetEnsemblTranscriptMappingUsingPostRequest) (*operations.GetEnsemblTranscriptMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/EnsemblTranscript"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1255,7 +1304,7 @@ func (s *SDK) GetEnsemblTranscriptMappingUsingPost(ctx context.Context, request 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1289,8 +1338,9 @@ func (s *SDK) GetEnsemblTranscriptMappingUsingPost(ctx context.Context, request 
 	return res, nil
 }
 
+// GetExpressionForTaxonUsingGet - Get expression annotations submitted by RGD to AGR by taxonId
 func (s *SDK) GetExpressionForTaxonUsingGet(ctx context.Context, request operations.GetExpressionForTaxonUsingGetRequest) (*operations.GetExpressionForTaxonUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/agr/expression/{taxonId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1298,7 +1348,7 @@ func (s *SDK) GetExpressionForTaxonUsingGet(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1331,8 +1381,9 @@ func (s *SDK) GetExpressionForTaxonUsingGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetGtexMappingUsingGet - Translate an RGD ID to an GTEx ID
 func (s *SDK) GetGtexMappingUsingGet(ctx context.Context, request operations.GetGtexMappingUsingGetRequest) (*operations.GetGtexMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/GTEx/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1340,7 +1391,7 @@ func (s *SDK) GetGtexMappingUsingGet(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1373,8 +1424,9 @@ func (s *SDK) GetGtexMappingUsingGet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetGtexMappingUsingPost - Translate RGD IDs to GTEx IDs
 func (s *SDK) GetGtexMappingUsingPost(ctx context.Context, request operations.GetGtexMappingUsingPostRequest) (*operations.GetGtexMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/GTEx"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1389,7 +1441,7 @@ func (s *SDK) GetGtexMappingUsingPost(ctx context.Context, request operations.Ge
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1423,8 +1475,9 @@ func (s *SDK) GetGtexMappingUsingPost(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetGenBankNucleotideMappingUsingGet - Translate an RGD ID to a GenBank Nucleotide ID
 func (s *SDK) GetGenBankNucleotideMappingUsingGet(ctx context.Context, request operations.GetGenBankNucleotideMappingUsingGetRequest) (*operations.GetGenBankNucleotideMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/GenBankNucleotide/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1432,7 +1485,7 @@ func (s *SDK) GetGenBankNucleotideMappingUsingGet(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1465,8 +1518,9 @@ func (s *SDK) GetGenBankNucleotideMappingUsingGet(ctx context.Context, request o
 	return res, nil
 }
 
+// GetGenBankNucleotideMappingUsingPost - Translate RGD IDs to GenBank Nucleotide IDs
 func (s *SDK) GetGenBankNucleotideMappingUsingPost(ctx context.Context, request operations.GetGenBankNucleotideMappingUsingPostRequest) (*operations.GetGenBankNucleotideMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/GenBankNucleotide"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1481,7 +1535,7 @@ func (s *SDK) GetGenBankNucleotideMappingUsingPost(ctx context.Context, request 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1515,8 +1569,9 @@ func (s *SDK) GetGenBankNucleotideMappingUsingPost(ctx context.Context, request 
 	return res, nil
 }
 
+// GetGenBankProteinMappingUsingGet - Translate an RGD ID to a GenBank Protein ID
 func (s *SDK) GetGenBankProteinMappingUsingGet(ctx context.Context, request operations.GetGenBankProteinMappingUsingGetRequest) (*operations.GetGenBankProteinMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/GenBankProtein/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1524,7 +1579,7 @@ func (s *SDK) GetGenBankProteinMappingUsingGet(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1557,8 +1612,9 @@ func (s *SDK) GetGenBankProteinMappingUsingGet(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetGenBankProteinMappingUsingPost - Translate RGD IDs to GenBank Protein IDs
 func (s *SDK) GetGenBankProteinMappingUsingPost(ctx context.Context, request operations.GetGenBankProteinMappingUsingPostRequest) (*operations.GetGenBankProteinMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/GenBankProtein"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1573,7 +1629,7 @@ func (s *SDK) GetGenBankProteinMappingUsingPost(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1607,8 +1663,9 @@ func (s *SDK) GetGenBankProteinMappingUsingPost(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetGeneAllelesUsingGet - Return a list of gene alleles
 func (s *SDK) GetGeneAllelesUsingGet(ctx context.Context, request operations.GetGeneAllelesUsingGetRequest) (*operations.GetGeneAllelesUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/allele/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1616,7 +1673,7 @@ func (s *SDK) GetGeneAllelesUsingGet(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1649,8 +1706,9 @@ func (s *SDK) GetGeneAllelesUsingGet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetGeneByMapKeyUsingGet - Return a list of all genes with position information for an assembly
 func (s *SDK) GetGeneByMapKeyUsingGet(ctx context.Context, request operations.GetGeneByMapKeyUsingGetRequest) (*operations.GetGeneByMapKeyUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/map/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1658,7 +1716,7 @@ func (s *SDK) GetGeneByMapKeyUsingGet(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1691,8 +1749,9 @@ func (s *SDK) GetGeneByMapKeyUsingGet(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetGeneByRgdIDUsingGet - Get a gene record by RGD ID
 func (s *SDK) GetGeneByRgdIDUsingGet(ctx context.Context, request operations.GetGeneByRgdIDUsingGetRequest) (*operations.GetGeneByRgdIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1700,7 +1759,7 @@ func (s *SDK) GetGeneByRgdIDUsingGet(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1733,8 +1792,9 @@ func (s *SDK) GetGeneByRgdIDUsingGet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetGeneBySymbolUsingGet - Get a gene record by symbol and species type key
 func (s *SDK) GetGeneBySymbolUsingGet(ctx context.Context, request operations.GetGeneBySymbolUsingGetRequest) (*operations.GetGeneBySymbolUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/{symbol}/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1742,7 +1802,7 @@ func (s *SDK) GetGeneBySymbolUsingGet(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1775,8 +1835,9 @@ func (s *SDK) GetGeneBySymbolUsingGet(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetGeneOrthologsUsingGet - Return a list of gene orthologs
 func (s *SDK) GetGeneOrthologsUsingGet(ctx context.Context, request operations.GetGeneOrthologsUsingGetRequest) (*operations.GetGeneOrthologsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/orthologs/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1784,7 +1845,7 @@ func (s *SDK) GetGeneOrthologsUsingGet(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1817,8 +1878,9 @@ func (s *SDK) GetGeneOrthologsUsingGet(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetGeneTypeCountUsingGet - Count of gene types, for specified species and date
 func (s *SDK) GetGeneTypeCountUsingGet(ctx context.Context, request operations.GetGeneTypeCountUsingGetRequest) (*operations.GetGeneTypeCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/geneType/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1826,7 +1888,7 @@ func (s *SDK) GetGeneTypeCountUsingGet(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1859,8 +1921,9 @@ func (s *SDK) GetGeneTypeCountUsingGet(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetGeneTypeDiffUsingGet - Count difference of gene types, for specified species and date range
 func (s *SDK) GetGeneTypeDiffUsingGet(ctx context.Context, request operations.GetGeneTypeDiffUsingGetRequest) (*operations.GetGeneTypeDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/geneType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1868,7 +1931,7 @@ func (s *SDK) GetGeneTypeDiffUsingGet(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1901,8 +1964,9 @@ func (s *SDK) GetGeneTypeDiffUsingGet(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetGeneTypesUsingGet - Returns a list of gene types avialable in RGD
 func (s *SDK) GetGeneTypesUsingGet(ctx context.Context) (*operations.GetGeneTypesUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/geneTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1910,7 +1974,7 @@ func (s *SDK) GetGeneTypesUsingGet(ctx context.Context) (*operations.GetGeneType
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1943,8 +2007,9 @@ func (s *SDK) GetGeneTypesUsingGet(ctx context.Context) (*operations.GetGeneType
 	return res, nil
 }
 
+// GetGenesAnnotatedUsingGet - Return a list of genes annotated to an ontology term
 func (s *SDK) GetGenesAnnotatedUsingGet(ctx context.Context, request operations.GetGenesAnnotatedUsingGetRequest) (*operations.GetGenesAnnotatedUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/annotation/{accId}/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1952,7 +2017,7 @@ func (s *SDK) GetGenesAnnotatedUsingGet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1985,8 +2050,9 @@ func (s *SDK) GetGenesAnnotatedUsingGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetGenesByAffyIDUsingGet - Return a list of genes for an affymetrix ID
 func (s *SDK) GetGenesByAffyIDUsingGet(ctx context.Context, request operations.GetGenesByAffyIDUsingGetRequest) (*operations.GetGenesByAffyIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/affyId/{affyId}/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1994,7 +2060,7 @@ func (s *SDK) GetGenesByAffyIDUsingGet(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2027,8 +2093,9 @@ func (s *SDK) GetGenesByAffyIDUsingGet(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetGenesByAliasSymbolUsingGet - Return a list of genes for an alias and species
 func (s *SDK) GetGenesByAliasSymbolUsingGet(ctx context.Context, request operations.GetGenesByAliasSymbolUsingGetRequest) (*operations.GetGenesByAliasSymbolUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/alias/{aliasSymbol}/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2036,7 +2103,7 @@ func (s *SDK) GetGenesByAliasSymbolUsingGet(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2069,8 +2136,9 @@ func (s *SDK) GetGenesByAliasSymbolUsingGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetGenesByKeywordUsingGet - Return a list of genes by keyword and species type key
 func (s *SDK) GetGenesByKeywordUsingGet(ctx context.Context, request operations.GetGenesByKeywordUsingGetRequest) (*operations.GetGenesByKeywordUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/keyword/{keyword}/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2078,7 +2146,7 @@ func (s *SDK) GetGenesByKeywordUsingGet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2111,8 +2179,9 @@ func (s *SDK) GetGenesByKeywordUsingGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetGenesByPositionUsingGet - Return a list of genes position and map key
 func (s *SDK) GetGenesByPositionUsingGet(ctx context.Context, request operations.GetGenesByPositionUsingGetRequest) (*operations.GetGenesByPositionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/{chr}/{start}/{stop}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2120,7 +2189,7 @@ func (s *SDK) GetGenesByPositionUsingGet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2153,8 +2222,9 @@ func (s *SDK) GetGenesByPositionUsingGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetGenesBySpeciesUsingGet - Return a list of all genes for a species in RGD
 func (s *SDK) GetGenesBySpeciesUsingGet(ctx context.Context, request operations.GetGenesBySpeciesUsingGetRequest) (*operations.GetGenesBySpeciesUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/species/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2162,7 +2232,7 @@ func (s *SDK) GetGenesBySpeciesUsingGet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2195,8 +2265,9 @@ func (s *SDK) GetGenesBySpeciesUsingGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetGenesForLatestAssemblyUsingGet - Get gene records submitted by RGD to AGR by taxonId
 func (s *SDK) GetGenesForLatestAssemblyUsingGet(ctx context.Context, request operations.GetGenesForLatestAssemblyUsingGetRequest) (*operations.GetGenesForLatestAssemblyUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/agr/{taxonId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2204,7 +2275,7 @@ func (s *SDK) GetGenesForLatestAssemblyUsingGet(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2237,8 +2308,9 @@ func (s *SDK) GetGenesForLatestAssemblyUsingGet(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetGenesInRegionUsingGet - Return a list of genes in region
 func (s *SDK) GetGenesInRegionUsingGet(ctx context.Context, request operations.GetGenesInRegionUsingGetRequest) (*operations.GetGenesInRegionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/region/{chr}/{start}/{stop}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2246,7 +2318,7 @@ func (s *SDK) GetGenesInRegionUsingGet(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2279,8 +2351,9 @@ func (s *SDK) GetGenesInRegionUsingGet(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetHgncMappingUsingGet - Translate an RGD ID to an HGNC ID
 func (s *SDK) GetHgncMappingUsingGet(ctx context.Context, request operations.GetHgncMappingUsingGetRequest) (*operations.GetHgncMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/HGNC/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2288,7 +2361,7 @@ func (s *SDK) GetHgncMappingUsingGet(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2321,8 +2394,9 @@ func (s *SDK) GetHgncMappingUsingGet(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetHgncMappingUsingPost - Translate RGD IDs to HGNC IDs
 func (s *SDK) GetHgncMappingUsingPost(ctx context.Context, request operations.GetHgncMappingUsingPostRequest) (*operations.GetHgncMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/HGNC"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2337,7 +2411,7 @@ func (s *SDK) GetHgncMappingUsingPost(ctx context.Context, request operations.Ge
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2371,8 +2445,9 @@ func (s *SDK) GetHgncMappingUsingPost(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetMgiMappingUsingGet - Translate an RGD ID to an MGI ID
 func (s *SDK) GetMgiMappingUsingGet(ctx context.Context, request operations.GetMgiMappingUsingGetRequest) (*operations.GetMgiMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/MGI/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2380,7 +2455,7 @@ func (s *SDK) GetMgiMappingUsingGet(ctx context.Context, request operations.GetM
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2413,8 +2488,9 @@ func (s *SDK) GetMgiMappingUsingGet(ctx context.Context, request operations.GetM
 	return res, nil
 }
 
+// GetMgiMappingUsingPost - Translate RGD IDs to MGI IDs
 func (s *SDK) GetMgiMappingUsingPost(ctx context.Context, request operations.GetMgiMappingUsingPostRequest) (*operations.GetMgiMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/MGI"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2429,7 +2505,7 @@ func (s *SDK) GetMgiMappingUsingPost(ctx context.Context, request operations.Get
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2463,8 +2539,9 @@ func (s *SDK) GetMgiMappingUsingPost(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetMappedGenesByPositionUsingGet - Return a list of genes position and map key
 func (s *SDK) GetMappedGenesByPositionUsingGet(ctx context.Context, request operations.GetMappedGenesByPositionUsingGetRequest) (*operations.GetMappedGenesByPositionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/genes/mapped/{chr}/{start}/{stop}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2472,7 +2549,7 @@ func (s *SDK) GetMappedGenesByPositionUsingGet(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2505,8 +2582,9 @@ func (s *SDK) GetMappedGenesByPositionUsingGet(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetMappedQtlByPositionUsingGet - Returns a list QTL for given position and assembly map
 func (s *SDK) GetMappedQtlByPositionUsingGet(ctx context.Context, request operations.GetMappedQtlByPositionUsingGetRequest) (*operations.GetMappedQtlByPositionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/qtls/mapped/{chr}/{start}/{stop}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2514,7 +2592,7 @@ func (s *SDK) GetMappedQtlByPositionUsingGet(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2547,8 +2625,9 @@ func (s *SDK) GetMappedQtlByPositionUsingGet(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetMappedSslpByPositionUsingGet - Returns a list SSLP for given position and assembly map
 func (s *SDK) GetMappedSslpByPositionUsingGet(ctx context.Context, request operations.GetMappedSslpByPositionUsingGetRequest) (*operations.GetMappedSslpByPositionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sslps/mapped/{chr}/{start}/{stop}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2556,7 +2635,7 @@ func (s *SDK) GetMappedSslpByPositionUsingGet(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2589,8 +2668,9 @@ func (s *SDK) GetMappedSslpByPositionUsingGet(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetMapsBySpeciesUsingGet - Return a list of assemblies
 func (s *SDK) GetMapsBySpeciesUsingGet(ctx context.Context, request operations.GetMapsBySpeciesUsingGetRequest) (*operations.GetMapsBySpeciesUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2598,7 +2678,7 @@ func (s *SDK) GetMapsBySpeciesUsingGet(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2631,8 +2711,9 @@ func (s *SDK) GetMapsBySpeciesUsingGet(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetMapsUsingGet - Return a list assembly maps for a species
 func (s *SDK) GetMapsUsingGet(ctx context.Context, request operations.GetMapsUsingGetRequest) (*operations.GetMapsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/maps/{speciesTypeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2640,7 +2721,7 @@ func (s *SDK) GetMapsUsingGet(ctx context.Context, request operations.GetMapsUsi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2673,8 +2754,9 @@ func (s *SDK) GetMapsUsingGet(ctx context.Context, request operations.GetMapsUsi
 	return res, nil
 }
 
+// GetMapsUsingGet1 - Return a standardUnit for an ontology if it exists
 func (s *SDK) GetMapsUsingGet1(ctx context.Context, request operations.GetMapsUsingGet1Request) (*operations.GetMapsUsingGet1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/standardUnit/{accId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2682,7 +2764,7 @@ func (s *SDK) GetMapsUsingGet1(ctx context.Context, request operations.GetMapsUs
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2716,8 +2798,9 @@ func (s *SDK) GetMapsUsingGet1(ctx context.Context, request operations.GetMapsUs
 	return res, nil
 }
 
+// GetNcbiGeneMappingUsingGet - Translate an RGD ID to an NCBI Gene ID
 func (s *SDK) GetNcbiGeneMappingUsingGet(ctx context.Context, request operations.GetNcbiGeneMappingUsingGetRequest) (*operations.GetNcbiGeneMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/NCBIGene/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2725,7 +2808,7 @@ func (s *SDK) GetNcbiGeneMappingUsingGet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2758,8 +2841,9 @@ func (s *SDK) GetNcbiGeneMappingUsingGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetNcbiGeneMappingUsingPost - Translate RGD IDs to NCBI Gene IDs
 func (s *SDK) GetNcbiGeneMappingUsingPost(ctx context.Context, request operations.GetNcbiGeneMappingUsingPostRequest) (*operations.GetNcbiGeneMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/NCBIGene"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2774,7 +2858,7 @@ func (s *SDK) GetNcbiGeneMappingUsingPost(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2808,8 +2892,9 @@ func (s *SDK) GetNcbiGeneMappingUsingPost(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetObjectStatusCountUsingGet - Count of objects with given status, for specified species and date
 func (s *SDK) GetObjectStatusCountUsingGet(ctx context.Context, request operations.GetObjectStatusCountUsingGetRequest) (*operations.GetObjectStatusCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/objectStatus/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2817,7 +2902,7 @@ func (s *SDK) GetObjectStatusCountUsingGet(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2850,8 +2935,9 @@ func (s *SDK) GetObjectStatusCountUsingGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetObjectStatusDiffUsingGet - Count difference of objects with given status, for specified species and date range
 func (s *SDK) GetObjectStatusDiffUsingGet(ctx context.Context, request operations.GetObjectStatusDiffUsingGetRequest) (*operations.GetObjectStatusDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/objectStatus/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2859,7 +2945,7 @@ func (s *SDK) GetObjectStatusDiffUsingGet(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2892,8 +2978,9 @@ func (s *SDK) GetObjectStatusDiffUsingGet(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetObjectsWithRefSeqCountUsingGet - Count of objects with reference sequence(s), by object type, for specified species and date
 func (s *SDK) GetObjectsWithRefSeqCountUsingGet(ctx context.Context, request operations.GetObjectsWithRefSeqCountUsingGetRequest) (*operations.GetObjectsWithRefSeqCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/objectWithRefSeq/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2901,7 +2988,7 @@ func (s *SDK) GetObjectsWithRefSeqCountUsingGet(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2934,8 +3021,9 @@ func (s *SDK) GetObjectsWithRefSeqCountUsingGet(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetObjectsWithRefSeqDiffUsingGet - Count difference of objects with reference sequence(s), by object type, for specified species and date range
 func (s *SDK) GetObjectsWithRefSeqDiffUsingGet(ctx context.Context, request operations.GetObjectsWithRefSeqDiffUsingGetRequest) (*operations.GetObjectsWithRefSeqDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/objectWithRefSeq/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2943,7 +3031,7 @@ func (s *SDK) GetObjectsWithRefSeqDiffUsingGet(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2976,8 +3064,9 @@ func (s *SDK) GetObjectsWithRefSeqDiffUsingGet(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetObjectsWithReferenceCountUsingGet - Count of objects with reference, by object type, for specified species and date
 func (s *SDK) GetObjectsWithReferenceCountUsingGet(ctx context.Context, request operations.GetObjectsWithReferenceCountUsingGetRequest) (*operations.GetObjectsWithReferenceCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/objectWithReference/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2985,7 +3074,7 @@ func (s *SDK) GetObjectsWithReferenceCountUsingGet(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3018,8 +3107,9 @@ func (s *SDK) GetObjectsWithReferenceCountUsingGet(ctx context.Context, request 
 	return res, nil
 }
 
+// GetObjectsWithReferenceDiffUsingGet - Count difference of objects with reference, by object type, for specified species and date range
 func (s *SDK) GetObjectsWithReferenceDiffUsingGet(ctx context.Context, request operations.GetObjectsWithReferenceDiffUsingGetRequest) (*operations.GetObjectsWithReferenceDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/objectWithReference/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3027,7 +3117,7 @@ func (s *SDK) GetObjectsWithReferenceDiffUsingGet(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3060,8 +3150,9 @@ func (s *SDK) GetObjectsWithReferenceDiffUsingGet(ctx context.Context, request o
 	return res, nil
 }
 
+// GetObjectsWithXdBsCountUsingGet - Count of objects with external database ids, by database id, for specified species, object type and date
 func (s *SDK) GetObjectsWithXdBsCountUsingGet(ctx context.Context, request operations.GetObjectsWithXdBsCountUsingGetRequest) (*operations.GetObjectsWithXdBsCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3069,7 +3160,7 @@ func (s *SDK) GetObjectsWithXdBsCountUsingGet(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3102,8 +3193,9 @@ func (s *SDK) GetObjectsWithXdBsCountUsingGet(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetObjectsWithXdBsDiffUsingGet - Count difference of objects with external database ids, by database id, for specified species, object type and date range
 func (s *SDK) GetObjectsWithXdBsDiffUsingGet(ctx context.Context, request operations.GetObjectsWithXdBsDiffUsingGetRequest) (*operations.GetObjectsWithXdBsDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3111,7 +3203,7 @@ func (s *SDK) GetObjectsWithXdBsDiffUsingGet(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3144,8 +3236,9 @@ func (s *SDK) GetObjectsWithXdBsDiffUsingGet(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetOntDagsUsingGet - Returns child and parent terms for Accession ID
 func (s *SDK) GetOntDagsUsingGet(ctx context.Context, request operations.GetOntDagsUsingGetRequest) (*operations.GetOntDagsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ontology/ont/{accId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3153,7 +3246,7 @@ func (s *SDK) GetOntDagsUsingGet(ctx context.Context, request operations.GetOntD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3186,8 +3279,9 @@ func (s *SDK) GetOntDagsUsingGet(ctx context.Context, request operations.GetOntD
 	return res, nil
 }
 
+// GetOrthologsByListUsingPost - Return a list of gene orthologs
 func (s *SDK) GetOrthologsByListUsingPost(ctx context.Context, request operations.GetOrthologsByListUsingPostRequest) (*operations.GetOrthologsByListUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/genes/orthologs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3205,7 +3299,7 @@ func (s *SDK) GetOrthologsByListUsingPost(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3239,8 +3333,9 @@ func (s *SDK) GetOrthologsByListUsingPost(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetPathwaysWithDiagramsForCategoryUsingGet - Return a list of pathways based on category provided
 func (s *SDK) GetPathwaysWithDiagramsForCategoryUsingGet(ctx context.Context, request operations.GetPathwaysWithDiagramsForCategoryUsingGetRequest) (*operations.GetPathwaysWithDiagramsForCategoryUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pathways/diagramsForCategory/{category}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3248,7 +3343,7 @@ func (s *SDK) GetPathwaysWithDiagramsForCategoryUsingGet(ctx context.Context, re
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3281,8 +3376,9 @@ func (s *SDK) GetPathwaysWithDiagramsForCategoryUsingGet(ctx context.Context, re
 	return res, nil
 }
 
+// GetPhenotypesForTaxonUsingGet - Get phenotype annotations submitted by RGD to AGR by taxonId
 func (s *SDK) GetPhenotypesForTaxonUsingGet(ctx context.Context, request operations.GetPhenotypesForTaxonUsingGetRequest) (*operations.GetPhenotypesForTaxonUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/agr/phenotypes/{taxonId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3290,7 +3386,7 @@ func (s *SDK) GetPhenotypesForTaxonUsingGet(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3323,8 +3419,9 @@ func (s *SDK) GetPhenotypesForTaxonUsingGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetProteinInteractionCountUsingGet - Count of protein interactions, for specified species and date
 func (s *SDK) GetProteinInteractionCountUsingGet(ctx context.Context, request operations.GetProteinInteractionCountUsingGetRequest) (*operations.GetProteinInteractionCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/proteinInteraction/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3332,7 +3429,7 @@ func (s *SDK) GetProteinInteractionCountUsingGet(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3365,8 +3462,9 @@ func (s *SDK) GetProteinInteractionCountUsingGet(ctx context.Context, request op
 	return res, nil
 }
 
+// GetProteinInteractionDiffUsingGet - Count difference of protein interactions, for specified species and date range
 func (s *SDK) GetProteinInteractionDiffUsingGet(ctx context.Context, request operations.GetProteinInteractionDiffUsingGetRequest) (*operations.GetProteinInteractionDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/proteinInteraction/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3374,7 +3472,7 @@ func (s *SDK) GetProteinInteractionDiffUsingGet(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3407,8 +3505,9 @@ func (s *SDK) GetProteinInteractionDiffUsingGet(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetQtlByRgdIDUsingGet - Return a QTL for provided RGD ID
 func (s *SDK) GetQtlByRgdIDUsingGet(ctx context.Context, request operations.GetQtlByRgdIDUsingGetRequest) (*operations.GetQtlByRgdIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/qtls/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3416,7 +3515,7 @@ func (s *SDK) GetQtlByRgdIDUsingGet(ctx context.Context, request operations.GetQ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3449,8 +3548,9 @@ func (s *SDK) GetQtlByRgdIDUsingGet(ctx context.Context, request operations.GetQ
 	return res, nil
 }
 
+// GetQtlInheritanceTypeCountUsingGet - Count of strains, by qtl inheritance type, for specified species and date
 func (s *SDK) GetQtlInheritanceTypeCountUsingGet(ctx context.Context, request operations.GetQtlInheritanceTypeCountUsingGetRequest) (*operations.GetQtlInheritanceTypeCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/qtlInheritanceType/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3458,7 +3558,7 @@ func (s *SDK) GetQtlInheritanceTypeCountUsingGet(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3491,8 +3591,9 @@ func (s *SDK) GetQtlInheritanceTypeCountUsingGet(ctx context.Context, request op
 	return res, nil
 }
 
+// GetQtlInheritanceTypeDiffUsingGet - Count difference of strains, by qtl inheritance type, for specified species and date range
 func (s *SDK) GetQtlInheritanceTypeDiffUsingGet(ctx context.Context, request operations.GetQtlInheritanceTypeDiffUsingGetRequest) (*operations.GetQtlInheritanceTypeDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/qtlInheritanceType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3500,7 +3601,7 @@ func (s *SDK) GetQtlInheritanceTypeDiffUsingGet(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3533,8 +3634,9 @@ func (s *SDK) GetQtlInheritanceTypeDiffUsingGet(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetQtlListByPositionUsingGet - Returns a list QTL for given position and assembly map
 func (s *SDK) GetQtlListByPositionUsingGet(ctx context.Context, request operations.GetQtlListByPositionUsingGetRequest) (*operations.GetQtlListByPositionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/qtls/{chr}/{start}/{stop}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3542,7 +3644,7 @@ func (s *SDK) GetQtlListByPositionUsingGet(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3575,8 +3677,9 @@ func (s *SDK) GetQtlListByPositionUsingGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetRetiredObjectCountUsingGet - Count of retired objects by type, for specified species and date
 func (s *SDK) GetRetiredObjectCountUsingGet(ctx context.Context, request operations.GetRetiredObjectCountUsingGetRequest) (*operations.GetRetiredObjectCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/retiredObject/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3584,7 +3687,7 @@ func (s *SDK) GetRetiredObjectCountUsingGet(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3617,8 +3720,9 @@ func (s *SDK) GetRetiredObjectCountUsingGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetRetiredObjectDiffUsingGet - Count difference of retired objects, by type, for specified species and date range
 func (s *SDK) GetRetiredObjectDiffUsingGet(ctx context.Context, request operations.GetRetiredObjectDiffUsingGetRequest) (*operations.GetRetiredObjectDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/retiredObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3626,7 +3730,7 @@ func (s *SDK) GetRetiredObjectDiffUsingGet(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3659,8 +3763,9 @@ func (s *SDK) GetRetiredObjectDiffUsingGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetSpeciesTypesUsingGet - Return a Map of species type keys available in RGD
 func (s *SDK) GetSpeciesTypesUsingGet(ctx context.Context) (*operations.GetSpeciesTypesUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/speciesTypeKeys"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3668,7 +3773,7 @@ func (s *SDK) GetSpeciesTypesUsingGet(ctx context.Context) (*operations.GetSpeci
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3701,8 +3806,9 @@ func (s *SDK) GetSpeciesTypesUsingGet(ctx context.Context) (*operations.GetSpeci
 	return res, nil
 }
 
+// GetStrainByRgdIDUsingGet - Return a strain by RGD ID
 func (s *SDK) GetStrainByRgdIDUsingGet(ctx context.Context, request operations.GetStrainByRgdIDUsingGetRequest) (*operations.GetStrainByRgdIDUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/strains/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3710,7 +3816,7 @@ func (s *SDK) GetStrainByRgdIDUsingGet(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3743,8 +3849,9 @@ func (s *SDK) GetStrainByRgdIDUsingGet(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetStrainTypeCountUsingGet - Count of strain types, for specified species and date
 func (s *SDK) GetStrainTypeCountUsingGet(ctx context.Context, request operations.GetStrainTypeCountUsingGetRequest) (*operations.GetStrainTypeCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/strainType/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3752,7 +3859,7 @@ func (s *SDK) GetStrainTypeCountUsingGet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3785,8 +3892,9 @@ func (s *SDK) GetStrainTypeCountUsingGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetStrainTypeDiffUsingGet - Count difference of strain types, for specified species and date range
 func (s *SDK) GetStrainTypeDiffUsingGet(ctx context.Context, request operations.GetStrainTypeDiffUsingGetRequest) (*operations.GetStrainTypeDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/strainType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3794,7 +3902,7 @@ func (s *SDK) GetStrainTypeDiffUsingGet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3827,8 +3935,9 @@ func (s *SDK) GetStrainTypeDiffUsingGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetStrainsByPositionUsingGet - Return all active strains by position
 func (s *SDK) GetStrainsByPositionUsingGet(ctx context.Context, request operations.GetStrainsByPositionUsingGetRequest) (*operations.GetStrainsByPositionUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/strains/{chr}/{start}/{stop}/{mapKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3836,7 +3945,7 @@ func (s *SDK) GetStrainsByPositionUsingGet(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3869,8 +3978,9 @@ func (s *SDK) GetStrainsByPositionUsingGet(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetTermAccIdsUsingGet - Returns a list ontology term accession IDs annotated to an rgd object
 func (s *SDK) GetTermAccIdsUsingGet(ctx context.Context, request operations.GetTermAccIdsUsingGetRequest) (*operations.GetTermAccIdsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotations/accId/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3878,7 +3988,7 @@ func (s *SDK) GetTermAccIdsUsingGet(ctx context.Context, request operations.GetT
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3911,8 +4021,9 @@ func (s *SDK) GetTermAccIdsUsingGet(ctx context.Context, request operations.GetT
 	return res, nil
 }
 
+// GetTermStatsUsingGet - getTermStats
 func (s *SDK) GetTermStatsUsingGet(ctx context.Context, request operations.GetTermStatsUsingGetRequest) (*operations.GetTermStatsUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/term/{accId}/{filterAccId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3920,7 +4031,7 @@ func (s *SDK) GetTermStatsUsingGet(ctx context.Context, request operations.GetTe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3953,8 +4064,9 @@ func (s *SDK) GetTermStatsUsingGet(ctx context.Context, request operations.GetTe
 	return res, nil
 }
 
+// GetTermUsingGet - Returns term for Accession ID
 func (s *SDK) GetTermUsingGet(ctx context.Context, request operations.GetTermUsingGetRequest) (*operations.GetTermUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ontology/term/{accId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3962,7 +4074,7 @@ func (s *SDK) GetTermUsingGet(ctx context.Context, request operations.GetTermUsi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3995,8 +4107,9 @@ func (s *SDK) GetTermUsingGet(ctx context.Context, request operations.GetTermUsi
 	return res, nil
 }
 
+// GetUniProtMappingUsingGet - Translate an RGD ID to a UniProt ID
 func (s *SDK) GetUniProtMappingUsingGet(ctx context.Context, request operations.GetUniProtMappingUsingGetRequest) (*operations.GetUniProtMappingUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/lookup/id/map/UniProt/{rgdId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4004,7 +4117,7 @@ func (s *SDK) GetUniProtMappingUsingGet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4037,8 +4150,9 @@ func (s *SDK) GetUniProtMappingUsingGet(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetUniProtMappingUsingPost - Translate RGD IDs to UniProt IDs
 func (s *SDK) GetUniProtMappingUsingPost(ctx context.Context, request operations.GetUniProtMappingUsingPostRequest) (*operations.GetUniProtMappingUsingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lookup/id/map/UniProt"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4053,7 +4167,7 @@ func (s *SDK) GetUniProtMappingUsingPost(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4087,8 +4201,9 @@ func (s *SDK) GetUniProtMappingUsingPost(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetVariantsForTaxonUsingGet - Get basic variant records submitted by RGD to AGR by taxonId
 func (s *SDK) GetVariantsForTaxonUsingGet(ctx context.Context, request operations.GetVariantsForTaxonUsingGetRequest) (*operations.GetVariantsForTaxonUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/agr/variants/{taxonId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4096,7 +4211,7 @@ func (s *SDK) GetVariantsForTaxonUsingGet(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4129,8 +4244,9 @@ func (s *SDK) GetVariantsForTaxonUsingGet(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetWithdrawnObjectCountUsingGet - Count of withdrawn objects by type, for specified species and date
 func (s *SDK) GetWithdrawnObjectCountUsingGet(ctx context.Context, request operations.GetWithdrawnObjectCountUsingGetRequest) (*operations.GetWithdrawnObjectCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/withdrawnObject/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4138,7 +4254,7 @@ func (s *SDK) GetWithdrawnObjectCountUsingGet(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4171,8 +4287,9 @@ func (s *SDK) GetWithdrawnObjectCountUsingGet(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetWithdrawnObjectDiffUsingGet - Count difference of withdrawn objects, by type, for specified species and date range
 func (s *SDK) GetWithdrawnObjectDiffUsingGet(ctx context.Context, request operations.GetWithdrawnObjectDiffUsingGetRequest) (*operations.GetWithdrawnObjectDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/withdrawnObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4180,7 +4297,7 @@ func (s *SDK) GetWithdrawnObjectDiffUsingGet(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4213,8 +4330,9 @@ func (s *SDK) GetWithdrawnObjectDiffUsingGet(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetXdbsCountUsingGet - Count of external database ids, for specied species and date
 func (s *SDK) GetXdbsCountUsingGet(ctx context.Context, request operations.GetXdbsCountUsingGetRequest) (*operations.GetXdbsCountUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/count/xdb/{speciesTypeKey}/{dateYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4222,7 +4340,7 @@ func (s *SDK) GetXdbsCountUsingGet(ctx context.Context, request operations.GetXd
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4255,8 +4373,9 @@ func (s *SDK) GetXdbsCountUsingGet(ctx context.Context, request operations.GetXd
 	return res, nil
 }
 
+// GetXdbsDiffUsingGet - Count difference of external database ids, for specified species and date range
 func (s *SDK) GetXdbsDiffUsingGet(ctx context.Context, request operations.GetXdbsDiffUsingGetRequest) (*operations.GetXdbsDiffUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stats/diff/xdb/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4264,7 +4383,7 @@ func (s *SDK) GetXdbsDiffUsingGet(ctx context.Context, request operations.GetXdb
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4297,8 +4416,9 @@ func (s *SDK) GetXdbsDiffUsingGet(ctx context.Context, request operations.GetXdb
 	return res, nil
 }
 
+// IsDescendantOfUsingGet - Returns true or false for terms
 func (s *SDK) IsDescendantOfUsingGet(ctx context.Context, request operations.IsDescendantOfUsingGetRequest) (*operations.IsDescendantOfUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ontology/term/{accId1}/{accId2}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4306,7 +4426,7 @@ func (s *SDK) IsDescendantOfUsingGet(ctx context.Context, request operations.IsD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4339,8 +4459,9 @@ func (s *SDK) IsDescendantOfUsingGet(ctx context.Context, request operations.IsD
 	return res, nil
 }
 
+// SearchPathwaysUsingGet - Return a list of pathways based on search term
 func (s *SDK) SearchPathwaysUsingGet(ctx context.Context, request operations.SearchPathwaysUsingGetRequest) (*operations.SearchPathwaysUsingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pathways/diagrams/search/{searchString}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4348,7 +4469,7 @@ func (s *SDK) SearchPathwaysUsingGet(ctx context.Context, request operations.Sea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

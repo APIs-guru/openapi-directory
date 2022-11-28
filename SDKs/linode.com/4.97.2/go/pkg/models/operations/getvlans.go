@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetVlaNsServers = []string{
+var GetVlaNsServerList = []string{
 	"https://api.linode.com/v4",
 	"https://api.linode.com/v4beta",
 }
@@ -14,23 +14,9 @@ type GetVlaNsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetVlaNsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetVlaNsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetVlaNsSecurity struct {
-	Option1 *GetVlaNsSecurityOption1 `security:"option"`
-	Option2 *GetVlaNsSecurityOption2 `security:"option"`
-}
-
-type GetVlaNsRequest struct {
-	ServerURL   *string
-	QueryParams GetVlaNsQueryParams
-	Security    GetVlaNsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetVlaNs200ApplicationJSON struct {
@@ -42,6 +28,12 @@ type GetVlaNs200ApplicationJSON struct {
 
 type GetVlaNsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetVlaNsRequest struct {
+	ServerURL   *string
+	QueryParams GetVlaNsQueryParams
+	Security    GetVlaNsSecurity
 }
 
 type GetVlaNsResponse struct {

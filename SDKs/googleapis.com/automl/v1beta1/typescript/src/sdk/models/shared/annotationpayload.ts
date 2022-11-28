@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationAnnotation } from "./classificationannotation";
 import { ImageObjectDetectionAnnotation } from "./imageobjectdetectionannotation";
 import { TablesAnnotation } from "./tablesannotation";
@@ -9,38 +9,39 @@ import { VideoClassificationAnnotation } from "./videoclassificationannotation";
 import { VideoObjectTrackingAnnotation } from "./videoobjecttrackingannotation";
 
 
+
 // AnnotationPayload
 /** 
  * Contains annotation information that is relevant to AutoML.
 **/
 export class AnnotationPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpecId" })
   annotationSpecId?: string;
 
-  @Metadata({ data: "json, name=classification" })
+  @SpeakeasyMetadata({ data: "json, name=classification" })
   classification?: ClassificationAnnotation;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=imageObjectDetection" })
+  @SpeakeasyMetadata({ data: "json, name=imageObjectDetection" })
   imageObjectDetection?: ImageObjectDetectionAnnotation;
 
-  @Metadata({ data: "json, name=tables" })
+  @SpeakeasyMetadata({ data: "json, name=tables" })
   tables?: TablesAnnotation;
 
-  @Metadata({ data: "json, name=textExtraction" })
+  @SpeakeasyMetadata({ data: "json, name=textExtraction" })
   textExtraction?: TextExtractionAnnotation;
 
-  @Metadata({ data: "json, name=textSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=textSentiment" })
   textSentiment?: TextSentimentAnnotation;
 
-  @Metadata({ data: "json, name=translation" })
+  @SpeakeasyMetadata({ data: "json, name=translation" })
   translation?: TranslationAnnotation;
 
-  @Metadata({ data: "json, name=videoClassification" })
+  @SpeakeasyMetadata({ data: "json, name=videoClassification" })
   videoClassification?: VideoClassificationAnnotation;
 
-  @Metadata({ data: "json, name=videoObjectTracking" })
+  @SpeakeasyMetadata({ data: "json, name=videoObjectTracking" })
   videoObjectTracking?: VideoObjectTrackingAnnotation;
 }

@@ -10,6 +10,8 @@ type GitCreateTagPathParams struct {
 	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
+// GitCreateTagRequestBodyTagger
+// An object with information about the individual creating the tag.
 type GitCreateTagRequestBodyTagger struct {
 	Date  *time.Time `json:"date,omitempty"`
 	Email string     `json:"email"`

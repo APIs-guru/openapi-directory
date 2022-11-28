@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartSupportDataExportResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container for the result of the StartSupportDataExport operation.
 **/
 export class StartSupportDataExportResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSetRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=dataSetRequestId" })
   dataSetRequestId?: string;
 }

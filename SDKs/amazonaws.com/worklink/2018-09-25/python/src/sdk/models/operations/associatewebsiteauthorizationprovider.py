@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -21,26 +26,26 @@ class AssociateWebsiteAuthorizationProviderRequestBodyAuthorizationProviderTypeE
 @dataclass_json
 @dataclass
 class AssociateWebsiteAuthorizationProviderRequestBody:
-    authorization_provider_type: AssociateWebsiteAuthorizationProviderRequestBodyAuthorizationProviderTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthorizationProviderType' }})
-    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainName' }})
-    fleet_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
+    authorization_provider_type: AssociateWebsiteAuthorizationProviderRequestBodyAuthorizationProviderTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthorizationProviderType') }})
+    fleet_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
+    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainName') }})
     
 
 @dataclass
 class AssociateWebsiteAuthorizationProviderRequest:
-    headers: AssociateWebsiteAuthorizationProviderHeaders = field(default=None)
-    request: AssociateWebsiteAuthorizationProviderRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AssociateWebsiteAuthorizationProviderHeaders = field()
+    request: AssociateWebsiteAuthorizationProviderRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssociateWebsiteAuthorizationProviderResponse:
+    content_type: str = field()
+    status_code: int = field()
     associate_website_authorization_provider_response: Optional[shared.AssociateWebsiteAuthorizationProviderResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

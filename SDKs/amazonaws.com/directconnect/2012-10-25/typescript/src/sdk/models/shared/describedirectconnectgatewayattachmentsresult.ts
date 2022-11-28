@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectConnectGatewayAttachment } from "./directconnectgatewayattachment";
 
 
+
 export class DescribeDirectConnectGatewayAttachmentsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directConnectGatewayAttachments", elemType: shared.DirectConnectGatewayAttachment })
+  @SpeakeasyMetadata({ data: "json, name=directConnectGatewayAttachments", elemType: DirectConnectGatewayAttachment })
   directConnectGatewayAttachments?: DirectConnectGatewayAttachment[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

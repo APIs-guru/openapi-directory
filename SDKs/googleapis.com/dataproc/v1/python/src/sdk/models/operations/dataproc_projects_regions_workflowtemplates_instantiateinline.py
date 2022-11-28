@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesInstantiateInlinePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineRequest:
-    path_params: DataprocProjectsRegionsWorkflowTemplatesInstantiateInlinePathParams = field(default=None)
-    query_params: DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineQueryParams = field(default=None)
-    request: Optional[shared.WorkflowTemplate] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineSecurity = field(default=None)
+    path_params: DataprocProjectsRegionsWorkflowTemplatesInstantiateInlinePathParams = field()
+    query_params: DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineQueryParams = field()
+    security: DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineSecurity = field()
+    request: Optional[shared.WorkflowTemplateInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -19,6 +19,8 @@ const (
 	ScanConfigUserAgentEnumSafariIphone         ScanConfigUserAgentEnum = "SAFARI_IPHONE"
 )
 
+// ScanConfig
+// A ScanConfig resource contains the configurations to launch a scan. next id: 12
 type ScanConfig struct {
 	Authentication    *Authentication                 `json:"authentication,omitempty"`
 	BlacklistPatterns []string                        `json:"blacklistPatterns,omitempty"`

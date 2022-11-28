@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CiscoSwitchTypeEnum(str, Enum):
     CATALYST_3000 = "CATALYST_3000"

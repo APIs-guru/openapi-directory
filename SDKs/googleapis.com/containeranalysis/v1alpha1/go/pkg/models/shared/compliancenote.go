@@ -1,5 +1,7 @@
 package shared
 
+// ComplianceNote
+// ComplianceNote encapsulates all information about a specific compliance check.
 type ComplianceNote struct {
 	CisBenchmark     *CisBenchmark       `json:"cisBenchmark,omitempty"`
 	Description      *string             `json:"description,omitempty"`

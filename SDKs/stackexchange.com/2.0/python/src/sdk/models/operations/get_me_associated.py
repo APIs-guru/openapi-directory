@@ -12,12 +12,12 @@ class GetMeAssociatedQueryParams:
 
 @dataclass
 class GetMeAssociatedRequest:
-    query_params: GetMeAssociatedQueryParams = field(default=None)
+    query_params: GetMeAssociatedQueryParams = field()
     
 
 @dataclass
 class GetMeAssociatedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class FileActionMetadataPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class FileActionMetadataQueryParams:
 
 @dataclass
 class FileActionMetadataRequest:
-    path_params: FileActionMetadataPathParams = field(default=None)
-    query_params: FileActionMetadataQueryParams = field(default=None)
+    path_params: FileActionMetadataPathParams = field()
+    query_params: FileActionMetadataQueryParams = field()
     
 
 @dataclass
 class FileActionMetadataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_entity: Optional[shared.FileEntity] = field(default=None)
-    status_code: int = field(default=None)
     

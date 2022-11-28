@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeConfigurationSettingsActionEnum(str, Enum):
     DESCRIBE_CONFIGURATION_SETTINGS = "DescribeConfigurationSettings"
@@ -10,11 +14,11 @@ class GetDescribeConfigurationSettingsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeConfigurationSettingsQueryParams:
-    action: GetDescribeConfigurationSettingsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    application_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    action: GetDescribeConfigurationSettingsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    application_name: str = field(metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    version: GetDescribeConfigurationSettingsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     environment_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentName', 'style': 'form', 'explode': True }})
     template_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
-    version: GetDescribeConfigurationSettingsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeConfigurationSettingsHeaders:
 
 @dataclass
 class GetDescribeConfigurationSettingsRequest:
-    query_params: GetDescribeConfigurationSettingsQueryParams = field(default=None)
-    headers: GetDescribeConfigurationSettingsHeaders = field(default=None)
+    headers: GetDescribeConfigurationSettingsHeaders = field()
+    query_params: GetDescribeConfigurationSettingsQueryParams = field()
     
 
 @dataclass
 class GetDescribeConfigurationSettingsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

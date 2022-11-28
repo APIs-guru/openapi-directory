@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UnitReactionsFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=thumbs-down" })
+  @SpeakeasyMetadata({ data: "json, name=thumbs-down" })
   thumbsDown?: number;
 
-  @Metadata({ data: "json, name=thumbs-up" })
+  @SpeakeasyMetadata({ data: "json, name=thumbs-up" })
   thumbsUp?: number;
 }

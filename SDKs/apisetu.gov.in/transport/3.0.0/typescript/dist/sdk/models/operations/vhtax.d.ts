@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class VhtaxRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -19,10 +19,6 @@ export declare class VhtaxRequestBody extends SpeakeasyBase {
 export declare class VhtaxSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class VhtaxRequest extends SpeakeasyBase {
-    request?: VhtaxRequestBody;
-    security: VhtaxSecurity;
 }
 export declare enum Vhtax400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -105,6 +101,10 @@ export declare enum Vhtax504ApplicationJsonErrorDescriptionEnum {
 export declare class Vhtax504ApplicationJson extends SpeakeasyBase {
     error?: Vhtax504ApplicationJsonErrorEnum;
     errorDescription?: Vhtax504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class VhtaxRequest extends SpeakeasyBase {
+    request?: VhtaxRequestBody;
+    security: VhtaxSecurity;
 }
 export declare class VhtaxResponse extends SpeakeasyBase {
     contentType: string;

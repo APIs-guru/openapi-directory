@@ -1,6 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1GcsFileSpec } from "./googleclouddatacatalogv1gcsfilespec";
+
+
+
+// GoogleCloudDatacatalogV1GcsFilesetSpecInput
+/** 
+ * Describes a Cloud Storage fileset entry.
+**/
+export class GoogleCloudDatacatalogV1GcsFilesetSpecInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=filePatterns" })
+  filePatterns?: string[];
+}
 
 
 // GoogleCloudDatacatalogV1GcsFilesetSpec
@@ -8,9 +18,9 @@ import { GoogleCloudDatacatalogV1GcsFileSpec } from "./googleclouddatacatalogv1g
  * Describes a Cloud Storage fileset entry.
 **/
 export class GoogleCloudDatacatalogV1GcsFilesetSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filePatterns" })
+  @SpeakeasyMetadata({ data: "json, name=filePatterns" })
   filePatterns?: string[];
 
-  @Metadata({ data: "json, name=sampleGcsFileSpecs", elemType: shared.GoogleCloudDatacatalogV1GcsFileSpec })
+  @SpeakeasyMetadata({ data: "json, name=sampleGcsFileSpecs", elemType: GoogleCloudDatacatalogV1GcsFileSpec })
   sampleGcsFileSpecs?: GoogleCloudDatacatalogV1GcsFileSpec[];
 }

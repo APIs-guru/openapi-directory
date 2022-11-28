@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,17 +10,17 @@ class GetPirateGenerateInsultQueryParams:
 
 @dataclass
 class GetPirateGenerateInsultSecurity:
-    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetPirateGenerateInsultRequest:
-    query_params: GetPirateGenerateInsultQueryParams = field(default=None)
-    security: GetPirateGenerateInsultSecurity = field(default=None)
+    query_params: GetPirateGenerateInsultQueryParams = field()
+    security: GetPirateGenerateInsultSecurity = field()
     
 
 @dataclass
 class GetPirateGenerateInsultResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

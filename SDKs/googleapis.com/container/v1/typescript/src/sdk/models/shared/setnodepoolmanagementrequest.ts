@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodeManagement } from "./nodemanagement";
+
 
 
 // SetNodePoolManagementRequest
@@ -7,21 +8,21 @@ import { NodeManagement } from "./nodemanagement";
  * SetNodePoolManagementRequest sets the node management properties of a node pool.
 **/
 export class SetNodePoolManagementRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=management" })
+  @SpeakeasyMetadata({ data: "json, name=management" })
   management?: NodeManagement;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nodePoolId" })
+  @SpeakeasyMetadata({ data: "json, name=nodePoolId" })
   nodePoolId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

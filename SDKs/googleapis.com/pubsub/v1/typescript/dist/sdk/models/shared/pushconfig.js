@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OidcToken } from "./oidctoken";
 // PushConfig
 /**
@@ -34,15 +34,15 @@ var PushConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributes" }),
+        SpeakeasyMetadata({ data: "json, name=attributes" }),
         __metadata("design:type", Map)
     ], PushConfig.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=oidcToken" }),
+        SpeakeasyMetadata({ data: "json, name=oidcToken" }),
         __metadata("design:type", OidcToken)
     ], PushConfig.prototype, "oidcToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=pushEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=pushEndpoint" }),
         __metadata("design:type", String)
     ], PushConfig.prototype, "pushEndpoint", void 0);
     return PushConfig;

@@ -16,11 +16,6 @@ type PostInvitesJSONRequestBody struct {
 	TopicID               *int64  `json:"topic_id,omitempty"`
 }
 
-type PostInvitesJSONRequest struct {
-	Headers PostInvitesJSONHeaders
-	Request *PostInvitesJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PostInvitesJSON200ApplicationJSON struct {
 	CreatedAt     *string       `json:"created_at,omitempty"`
 	CustomMessage *string       `json:"custom_message,omitempty"`
@@ -33,6 +28,11 @@ type PostInvitesJSON200ApplicationJSON struct {
 	Link          *string       `json:"link,omitempty"`
 	Topics        []interface{} `json:"topics,omitempty"`
 	UpdatedAt     *string       `json:"updated_at,omitempty"`
+}
+
+type PostInvitesJSONRequest struct {
+	Headers PostInvitesJSONHeaders
+	Request *PostInvitesJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PostInvitesJSONResponse struct {

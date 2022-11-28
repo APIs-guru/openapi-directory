@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleSecuritySafebrowsingV4ClientInfo } from "./googlesecuritysafebrowsingv4clientinfo";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleSecuritySafebrowsingV4ClientInfo } from "./googlesecuritysafebrowsingv4clientinfo";
 import { GoogleSecuritySafebrowsingV4ThreatInfo } from "./googlesecuritysafebrowsingv4threatinfo";
+
 
 
 // GoogleSecuritySafebrowsingV4FindFullHashesRequest
@@ -9,15 +9,15 @@ import { GoogleSecuritySafebrowsingV4ThreatInfo } from "./googlesecuritysafebrow
  * Request to return full hashes matched by the provided hash prefixes.
 **/
 export class GoogleSecuritySafebrowsingV4FindFullHashesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiClient" })
+  @SpeakeasyMetadata({ data: "json, name=apiClient" })
   apiClient?: GoogleSecuritySafebrowsingV4ClientInfo;
 
-  @Metadata({ data: "json, name=client" })
+  @SpeakeasyMetadata({ data: "json, name=client" })
   client?: GoogleSecuritySafebrowsingV4ClientInfo;
 
-  @Metadata({ data: "json, name=clientStates" })
+  @SpeakeasyMetadata({ data: "json, name=clientStates" })
   clientStates?: string[];
 
-  @Metadata({ data: "json, name=threatInfo" })
+  @SpeakeasyMetadata({ data: "json, name=threatInfo" })
   threatInfo?: GoogleSecuritySafebrowsingV4ThreatInfo;
 }

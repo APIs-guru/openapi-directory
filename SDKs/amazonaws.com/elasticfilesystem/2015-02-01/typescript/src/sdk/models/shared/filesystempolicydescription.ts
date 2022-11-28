@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FileSystemPolicyDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FileSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=FileSystemId" })
   fileSystemId?: string;
 
-  @Metadata({ data: "json, name=Policy" })
+  @SpeakeasyMetadata({ data: "json, name=Policy" })
   policy?: string;
 }

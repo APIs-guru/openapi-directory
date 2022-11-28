@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutUserFollowsPeoplePersonIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=person_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=person_id" })
   personId: number;
 }
 
 
 export class PutUserFollowsPeoplePersonIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutUserFollowsPeoplePersonIdPathParams;
 }
 
 
 export class PutUserFollowsPeoplePersonIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   personFollow?: shared.PersonFollow;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

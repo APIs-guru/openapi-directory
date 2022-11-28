@@ -1,5 +1,7 @@
 package shared
 
+// ReplicationSubnetGroup
+// Describes a subnet group in response to a request by the <code>DescribeReplicationSubnetGroups</code> operation.
 type ReplicationSubnetGroup struct {
 	ReplicationSubnetGroupDescription *string  `json:"ReplicationSubnetGroupDescription,omitempty"`
 	ReplicationSubnetGroupIdentifier  *string  `json:"ReplicationSubnetGroupIdentifier,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudServicenetworkingV1betaConnection
 /**
  * Represents a private connection resource. A private connection is implemented as a VPC Network Peering connection between a service producer's VPC network and a service consumer's VPC network.
@@ -33,19 +33,19 @@ var GoogleCloudServicenetworkingV1betaConnection = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], GoogleCloudServicenetworkingV1betaConnection.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=peering" }),
+        SpeakeasyMetadata({ data: "json, name=peering" }),
         __metadata("design:type", String)
     ], GoogleCloudServicenetworkingV1betaConnection.prototype, "peering", void 0);
     __decorate([
-        Metadata({ data: "json, name=reservedPeeringRanges" }),
+        SpeakeasyMetadata({ data: "json, name=reservedPeeringRanges" }),
         __metadata("design:type", Array)
     ], GoogleCloudServicenetworkingV1betaConnection.prototype, "reservedPeeringRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=service" }),
+        SpeakeasyMetadata({ data: "json, name=service" }),
         __metadata("design:type", String)
     ], GoogleCloudServicenetworkingV1betaConnection.prototype, "service", void 0);
     return GoogleCloudServicenetworkingV1betaConnection;

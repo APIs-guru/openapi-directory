@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromeManagementV1BatterySampleReport
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Sampling data for battery. * This field is telemetry information and this will change over time as the device is utilized. * Data for this field is controlled via policy: [ReportDevicePowerStatus](https://chromeenterprise.google/policies/#ReportDevicePowerStatus) * Data Collection Frequency: Only at Upload * Default Data Reporting Frequency: 3 hours - Policy Controlled: Yes * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: No * Reported for affiliated users only: N/A
 **/
 export class GoogleChromeManagementV1BatterySampleReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chargeRate" })
+  @SpeakeasyMetadata({ data: "json, name=chargeRate" })
   chargeRate?: number;
 
-  @Metadata({ data: "json, name=current" })
+  @SpeakeasyMetadata({ data: "json, name=current" })
   current?: string;
 
-  @Metadata({ data: "json, name=dischargeRate" })
+  @SpeakeasyMetadata({ data: "json, name=dischargeRate" })
   dischargeRate?: number;
 
-  @Metadata({ data: "json, name=remainingCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=remainingCapacity" })
   remainingCapacity?: string;
 
-  @Metadata({ data: "json, name=reportTime" })
+  @SpeakeasyMetadata({ data: "json, name=reportTime" })
   reportTime?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=temperature" })
+  @SpeakeasyMetadata({ data: "json, name=temperature" })
   temperature?: number;
 
-  @Metadata({ data: "json, name=voltage" })
+  @SpeakeasyMetadata({ data: "json, name=voltage" })
   voltage?: string;
 }

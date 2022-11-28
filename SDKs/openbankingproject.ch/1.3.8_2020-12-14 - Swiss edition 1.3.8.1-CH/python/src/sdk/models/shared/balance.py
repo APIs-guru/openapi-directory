@@ -1,20 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import amount
-from . import balancetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Balance:
-    balance_amount: amount.Amount = field(default=None, metadata={'dataclasses_json': { 'field_name': 'balanceAmount' }})
-    balance_type: balancetype_enum.BalanceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'balanceType' }})
-    credit_limit_included: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditLimitIncluded' }})
-    last_change_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastChangeDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    last_committed_transaction: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastCommittedTransaction' }})
-    reference_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referenceDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""Balance
+    A single balance element.
+    
+    """
+    
+    balance_amount: Amount = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('balanceAmount') }})
+    balance_type: BalanceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('balanceType') }})
+    credit_limit_included: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creditLimitIncluded') }})
+    last_change_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastChangeDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    last_committed_transaction: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastCommittedTransaction') }})
+    reference_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('referenceDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

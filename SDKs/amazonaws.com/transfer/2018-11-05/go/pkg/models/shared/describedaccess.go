@@ -1,5 +1,7 @@
 package shared
 
+// DescribedAccess
+// Describes the properties of the access that was specified.
 type DescribedAccess struct {
 	ExternalID            *string                 `json:"ExternalId,omitempty"`
 	HomeDirectory         *string                 `json:"HomeDirectory,omitempty"`

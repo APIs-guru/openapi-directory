@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkspaceConnectionStatus
+// Describes the connection status of a WorkSpace.
 type WorkspaceConnectionStatus struct {
 	ConnectionState                  *ConnectionStateEnum `json:"ConnectionState,omitempty"`
 	ConnectionStateCheckTimestamp    *time.Time           `json:"ConnectionStateCheckTimestamp,omitempty"`

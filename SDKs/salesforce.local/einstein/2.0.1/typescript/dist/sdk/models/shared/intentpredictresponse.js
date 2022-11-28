@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LabelResult } from "./labelresult";
 var IntentPredictResponse = /** @class */ (function (_super) {
     __extends(IntentPredictResponse, _super);
     function IntentPredictResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", String)
     ], IntentPredictResponse.prototype, "object", void 0);
     __decorate([
-        Metadata({ data: "json, name=probabilities", elemType: shared.LabelResult }),
+        SpeakeasyMetadata({ data: "json, name=probabilities", elemType: LabelResult }),
         __metadata("design:type", Array)
     ], IntentPredictResponse.prototype, "probabilities", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleId" }),
+        SpeakeasyMetadata({ data: "json, name=sampleId" }),
         __metadata("design:type", String)
     ], IntentPredictResponse.prototype, "sampleId", void 0);
     return IntentPredictResponse;

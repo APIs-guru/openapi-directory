@@ -1,5 +1,7 @@
 package shared
 
+// InAppMessageCampaign
+// Targeted in-app message campaign.
 type InAppMessageCampaign struct {
 	CampaignID   *string                `json:"CampaignId,omitempty"`
 	DailyCap     *int64                 `json:"DailyCap,omitempty"`

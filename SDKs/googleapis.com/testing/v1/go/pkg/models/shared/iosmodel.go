@@ -9,6 +9,8 @@ const (
 	IosModelFormFactorEnumWearable                    IosModelFormFactorEnum = "WEARABLE"
 )
 
+// IosModel
+// A description of an iOS device tests may be run on.
 type IosModel struct {
 	DeviceCapabilities  []string                `json:"deviceCapabilities,omitempty"`
 	FormFactor          *IosModelFormFactorEnum `json:"formFactor,omitempty"`

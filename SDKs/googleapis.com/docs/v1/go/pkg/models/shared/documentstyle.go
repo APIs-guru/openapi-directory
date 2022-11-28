@@ -1,5 +1,7 @@
 package shared
 
+// DocumentStyle
+// The style of the document.
 type DocumentStyle struct {
 	Background                   *Background `json:"background,omitempty"`
 	DefaultFooterID              *string     `json:"defaultFooterId,omitempty"`

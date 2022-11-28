@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocationDrivingDirectionMetrics } from "./locationdrivingdirectionmetrics";
 import { LocationMetrics } from "./locationmetrics";
+
 
 
 // ReportLocationInsightsResponse
@@ -9,9 +9,9 @@ import { LocationMetrics } from "./locationmetrics";
  * Response message for `Insights.ReportLocationInsights`.
 **/
 export class ReportLocationInsightsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locationDrivingDirectionMetrics", elemType: shared.LocationDrivingDirectionMetrics })
+  @SpeakeasyMetadata({ data: "json, name=locationDrivingDirectionMetrics", elemType: LocationDrivingDirectionMetrics })
   locationDrivingDirectionMetrics?: LocationDrivingDirectionMetrics[];
 
-  @Metadata({ data: "json, name=locationMetrics", elemType: shared.LocationMetrics })
+  @SpeakeasyMetadata({ data: "json, name=locationMetrics", elemType: LocationMetrics })
   locationMetrics?: LocationMetrics[];
 }

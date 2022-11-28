@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAdsHomeservicesLocalservicesV1AggregatorInfo } from "./googleadshomeserviceslocalservicesv1aggregatorinfo";
 import { GoogleAdsHomeservicesLocalservicesV1BookingLead } from "./googleadshomeserviceslocalservicesv1bookinglead";
 import { GoogleAdsHomeservicesLocalservicesV1MessageLead } from "./googleadshomeserviceslocalservicesv1messagelead";
@@ -51,67 +51,67 @@ var GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=aggregatorInfo" }),
+        SpeakeasyMetadata({ data: "json, name=aggregatorInfo" }),
         __metadata("design:type", GoogleAdsHomeservicesLocalservicesV1AggregatorInfo)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "aggregatorInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=bookingLead" }),
+        SpeakeasyMetadata({ data: "json, name=bookingLead" }),
         __metadata("design:type", GoogleAdsHomeservicesLocalservicesV1BookingLead)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "bookingLead", void 0);
     __decorate([
-        Metadata({ data: "json, name=businessName" }),
+        SpeakeasyMetadata({ data: "json, name=businessName" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "businessName", void 0);
     __decorate([
-        Metadata({ data: "json, name=chargeStatus" }),
+        SpeakeasyMetadata({ data: "json, name=chargeStatus" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "chargeStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=currencyCode" }),
+        SpeakeasyMetadata({ data: "json, name=currencyCode" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "currencyCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=disputeStatus" }),
+        SpeakeasyMetadata({ data: "json, name=disputeStatus" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "disputeStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=geo" }),
+        SpeakeasyMetadata({ data: "json, name=geo" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "geo", void 0);
     __decorate([
-        Metadata({ data: "json, name=leadCategory" }),
+        SpeakeasyMetadata({ data: "json, name=leadCategory" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "leadCategory", void 0);
     __decorate([
-        Metadata({ data: "json, name=leadCreationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=leadCreationTimestamp" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "leadCreationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=leadId" }),
+        SpeakeasyMetadata({ data: "json, name=leadId" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "leadId", void 0);
     __decorate([
-        Metadata({ data: "json, name=leadPrice" }),
+        SpeakeasyMetadata({ data: "json, name=leadPrice" }),
         __metadata("design:type", Number)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "leadPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=leadType" }),
+        SpeakeasyMetadata({ data: "json, name=leadType" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "leadType", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageLead" }),
+        SpeakeasyMetadata({ data: "json, name=messageLead" }),
         __metadata("design:type", GoogleAdsHomeservicesLocalservicesV1MessageLead)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "messageLead", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneLead" }),
+        SpeakeasyMetadata({ data: "json, name=phoneLead" }),
         __metadata("design:type", GoogleAdsHomeservicesLocalservicesV1PhoneLead)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "phoneLead", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezone" }),
+        SpeakeasyMetadata({ data: "json, name=timezone" }),
         __metadata("design:type", GoogleTypeTimeZone)
     ], GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport.prototype, "timezone", void 0);
     return GoogleAdsHomeservicesLocalservicesV1DetailedLeadReport;

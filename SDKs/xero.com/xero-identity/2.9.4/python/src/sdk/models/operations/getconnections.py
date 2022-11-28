@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,18 +10,18 @@ class GetConnectionsQueryParams:
 
 @dataclass
 class GetConnectionsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetConnectionsRequest:
-    query_params: GetConnectionsQueryParams = field(default=None)
-    security: GetConnectionsSecurity = field(default=None)
+    query_params: GetConnectionsQueryParams = field()
+    security: GetConnectionsSecurity = field()
     
 
 @dataclass
 class GetConnectionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     connections: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

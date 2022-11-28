@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IndexUnusedReason } from "./indexunusedreason";
 
 
+
 export class SearchStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indexUnusedReason", elemType: shared.IndexUnusedReason })
+  @SpeakeasyMetadata({ data: "json, name=indexUnusedReason", elemType: IndexUnusedReason })
   indexUnusedReason?: IndexUnusedReason[];
 
-  @Metadata({ data: "json, name=indexUsageMode" })
+  @SpeakeasyMetadata({ data: "json, name=indexUsageMode" })
   indexUsageMode?: string;
 }

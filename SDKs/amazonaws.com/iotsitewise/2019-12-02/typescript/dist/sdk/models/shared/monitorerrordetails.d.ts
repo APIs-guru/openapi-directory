@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MonitorErrorCodeEnum } from "./monitorerrorcodeenum";
 /**
  * Contains IoT SiteWise Monitor error details.

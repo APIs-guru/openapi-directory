@@ -13,6 +13,8 @@ const (
 	GooglePrivacyDlpV2DateTimeDayOfWeekEnumSunday               GooglePrivacyDlpV2DateTimeDayOfWeekEnum = "SUNDAY"
 )
 
+// GooglePrivacyDlpV2DateTime
+// Message for a date time object. e.g. 2018-01-01, 5th August.
 type GooglePrivacyDlpV2DateTime struct {
 	Date      *GoogleTypeDate                          `json:"date,omitempty"`
 	DayOfWeek *GooglePrivacyDlpV2DateTimeDayOfWeekEnum `json:"dayOfWeek,omitempty"`

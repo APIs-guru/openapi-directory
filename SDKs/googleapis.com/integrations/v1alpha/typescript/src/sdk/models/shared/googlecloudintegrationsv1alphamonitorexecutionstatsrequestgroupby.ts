@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestGroupBy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * MashQuery GroupBy parameters.
 **/
 export class GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestGroupBy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string[];
 
-  @Metadata({ data: "json, name=reducer" })
+  @SpeakeasyMetadata({ data: "json, name=reducer" })
   reducer?: string;
 }

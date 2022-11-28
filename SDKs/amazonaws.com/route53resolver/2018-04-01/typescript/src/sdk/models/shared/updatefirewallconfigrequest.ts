@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallFailOpenStatusEnum } from "./firewallfailopenstatusenum";
 
 
+
 export class UpdateFirewallConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirewallFailOpen" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallFailOpen" })
   firewallFailOpen: FirewallFailOpenStatusEnum;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 }

@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreativeAdTechnologyProviders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectedProviderIds" })
+  @SpeakeasyMetadata({ data: "json, name=detectedProviderIds" })
   detectedProviderIds?: string[];
 
-  @Metadata({ data: "json, name=hasUnidentifiedProvider" })
+  @SpeakeasyMetadata({ data: "json, name=hasUnidentifiedProvider" })
   hasUnidentifiedProvider?: boolean;
 }
 
 
 export class CreativeCorrections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string[];
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }
 
 
 export class CreativeDisapprovalReasons extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string[];
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }
 
 
 export class CreativeFilteringReasonsReasons extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filteringCount" })
+  @SpeakeasyMetadata({ data: "json, name=filteringCount" })
   filteringCount?: string;
 
-  @Metadata({ data: "json, name=filteringStatus" })
+  @SpeakeasyMetadata({ data: "json, name=filteringStatus" })
   filteringStatus?: number;
 }
 
@@ -43,10 +43,10 @@ export class CreativeFilteringReasonsReasons extends SpeakeasyBase {
  * The filtering reasons for the creative. Read-only. This field should not be set in requests.
 **/
 export class CreativeFilteringReasons extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=reasons", elemType: shared.CreativeFilteringReasonsReasons })
+  @SpeakeasyMetadata({ data: "json, name=reasons", elemType: CreativeFilteringReasonsReasons })
   reasons?: CreativeFilteringReasonsReasons[];
 }
 
@@ -56,13 +56,13 @@ export class CreativeFilteringReasons extends SpeakeasyBase {
  * The app icon, for app download ads.
 **/
 export class CreativeNativeAdAppIcon extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -72,13 +72,13 @@ export class CreativeNativeAdAppIcon extends SpeakeasyBase {
  * A large image.
 **/
 export class CreativeNativeAdImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -88,13 +88,13 @@ export class CreativeNativeAdImage extends SpeakeasyBase {
  * A smaller image, for the advertiser logo.
 **/
 export class CreativeNativeAdLogo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -104,37 +104,37 @@ export class CreativeNativeAdLogo extends SpeakeasyBase {
  * If nativeAd is set, HTMLSnippet and videoURL should not be set.
 **/
 export class CreativeNativeAd extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiser" })
+  @SpeakeasyMetadata({ data: "json, name=advertiser" })
   advertiser?: string;
 
-  @Metadata({ data: "json, name=appIcon" })
+  @SpeakeasyMetadata({ data: "json, name=appIcon" })
   appIcon?: CreativeNativeAdAppIcon;
 
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=callToAction" })
+  @SpeakeasyMetadata({ data: "json, name=callToAction" })
   callToAction?: string;
 
-  @Metadata({ data: "json, name=clickTrackingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickTrackingUrl" })
   clickTrackingUrl?: string;
 
-  @Metadata({ data: "json, name=headline" })
+  @SpeakeasyMetadata({ data: "json, name=headline" })
   headline?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: CreativeNativeAdImage;
 
-  @Metadata({ data: "json, name=impressionTrackingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=impressionTrackingUrl" })
   impressionTrackingUrl?: string[];
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: CreativeNativeAdLogo;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: string;
 
-  @Metadata({ data: "json, name=starRating" })
+  @SpeakeasyMetadata({ data: "json, name=starRating" })
   starRating?: number;
 }
 
@@ -144,78 +144,78 @@ export class CreativeNativeAd extends SpeakeasyBase {
  * A creative and its classification data.
 **/
 export class Creative extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HTMLSnippet" })
+  @SpeakeasyMetadata({ data: "json, name=HTMLSnippet" })
   htmlSnippet?: string;
 
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: number;
 
-  @Metadata({ data: "json, name=adTechnologyProviders" })
+  @SpeakeasyMetadata({ data: "json, name=adTechnologyProviders" })
   adTechnologyProviders?: CreativeAdTechnologyProviders;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string[];
 
-  @Metadata({ data: "json, name=advertiserName" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserName" })
   advertiserName?: string;
 
-  @Metadata({ data: "json, name=agencyId" })
+  @SpeakeasyMetadata({ data: "json, name=agencyId" })
   agencyId?: string;
 
-  @Metadata({ data: "json, name=apiUploadTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=apiUploadTimestamp" })
   apiUploadTimestamp?: Date;
 
-  @Metadata({ data: "json, name=attribute" })
+  @SpeakeasyMetadata({ data: "json, name=attribute" })
   attribute?: number[];
 
-  @Metadata({ data: "json, name=buyerCreativeId" })
+  @SpeakeasyMetadata({ data: "json, name=buyerCreativeId" })
   buyerCreativeId?: string;
 
-  @Metadata({ data: "json, name=clickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrl" })
   clickThroughUrl?: string[];
 
-  @Metadata({ data: "json, name=corrections", elemType: shared.CreativeCorrections })
+  @SpeakeasyMetadata({ data: "json, name=corrections", elemType: CreativeCorrections })
   corrections?: CreativeCorrections[];
 
-  @Metadata({ data: "json, name=disapprovalReasons", elemType: shared.CreativeDisapprovalReasons })
+  @SpeakeasyMetadata({ data: "json, name=disapprovalReasons", elemType: CreativeDisapprovalReasons })
   disapprovalReasons?: CreativeDisapprovalReasons[];
 
-  @Metadata({ data: "json, name=filteringReasons" })
+  @SpeakeasyMetadata({ data: "json, name=filteringReasons" })
   filteringReasons?: CreativeFilteringReasons;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=impressionTrackingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=impressionTrackingUrl" })
   impressionTrackingUrl?: string[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nativeAd" })
+  @SpeakeasyMetadata({ data: "json, name=nativeAd" })
   nativeAd?: CreativeNativeAd;
 
-  @Metadata({ data: "json, name=productCategories" })
+  @SpeakeasyMetadata({ data: "json, name=productCategories" })
   productCategories?: number[];
 
-  @Metadata({ data: "json, name=restrictedCategories" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedCategories" })
   restrictedCategories?: number[];
 
-  @Metadata({ data: "json, name=sensitiveCategories" })
+  @SpeakeasyMetadata({ data: "json, name=sensitiveCategories" })
   sensitiveCategories?: number[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=vendorType" })
+  @SpeakeasyMetadata({ data: "json, name=vendorType" })
   vendorType?: number[];
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=videoURL" })
+  @SpeakeasyMetadata({ data: "json, name=videoURL" })
   videoUrl?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

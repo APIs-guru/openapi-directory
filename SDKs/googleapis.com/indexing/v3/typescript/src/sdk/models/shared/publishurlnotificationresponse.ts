@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UrlNotificationMetadata } from "./urlnotificationmetadata";
+
 
 
 // PublishUrlNotificationResponse
@@ -7,6 +8,6 @@ import { UrlNotificationMetadata } from "./urlnotificationmetadata";
  * Output for PublishUrlNotification
 **/
 export class PublishUrlNotificationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=urlNotificationMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=urlNotificationMetadata" })
   urlNotificationMetadata?: UrlNotificationMetadata;
 }

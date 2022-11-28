@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Invite } from "./invite";
 import { UserMetadata } from "./usermetadata";
 import { UserProfile } from "./userprofile";
 
 
+
 export class UserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatarUrl" })
+  @SpeakeasyMetadata({ data: "json, name=avatarUrl" })
   avatarUrl?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstAccessAt" })
+  @SpeakeasyMetadata({ data: "json, name=firstAccessAt" })
   firstAccessAt?: Date;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=invite" })
+  @SpeakeasyMetadata({ data: "json, name=invite" })
   invite?: Invite;
 
-  @Metadata({ data: "json, name=lastAccessAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastAccessAt" })
   lastAccessAt?: Date;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: UserMetadata;
 
-  @Metadata({ data: "json, name=personId" })
+  @SpeakeasyMetadata({ data: "json, name=personId" })
   personId?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: UserProfile;
 }

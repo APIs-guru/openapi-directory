@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionUnitEnum } from "./dimensionunitenum";
 // TruckDimensions
 /**
@@ -34,19 +34,19 @@ var TruckDimensions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Height" }),
+        SpeakeasyMetadata({ data: "json, name=Height" }),
         __metadata("design:type", Number)
     ], TruckDimensions.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=Length" }),
+        SpeakeasyMetadata({ data: "json, name=Length" }),
         __metadata("design:type", Number)
     ], TruckDimensions.prototype, "length", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unit" }),
+        SpeakeasyMetadata({ data: "json, name=Unit" }),
         __metadata("design:type", String)
     ], TruckDimensions.prototype, "unit", void 0);
     __decorate([
-        Metadata({ data: "json, name=Width" }),
+        SpeakeasyMetadata({ data: "json, name=Width" }),
         __metadata("design:type", Number)
     ], TruckDimensions.prototype, "width", void 0);
     return TruckDimensions;

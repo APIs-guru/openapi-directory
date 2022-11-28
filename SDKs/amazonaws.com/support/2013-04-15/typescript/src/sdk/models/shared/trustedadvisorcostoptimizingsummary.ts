@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrustedAdvisorCostOptimizingSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The estimated cost savings that might be realized if the recommended operations are taken.
 **/
 export class TrustedAdvisorCostOptimizingSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimatedMonthlySavings" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedMonthlySavings" })
   estimatedMonthlySavings: number;
 
-  @Metadata({ data: "json, name=estimatedPercentMonthlySavings" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedPercentMonthlySavings" })
   estimatedPercentMonthlySavings: number;
 }

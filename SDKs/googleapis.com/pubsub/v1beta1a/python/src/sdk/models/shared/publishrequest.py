@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pubsubmessage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PublishRequest:
-    message: Optional[pubsubmessage.PubsubMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topic' }})
+    r"""PublishRequest
+    Request for the Publish method.
+    """
+    
+    message: Optional[PubsubMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topic') }})
     

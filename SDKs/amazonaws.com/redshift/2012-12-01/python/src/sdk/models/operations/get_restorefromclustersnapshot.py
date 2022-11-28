@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRestoreFromClusterSnapshotActionEnum(str, Enum):
     RESTORE_FROM_CLUSTER_SNAPSHOT = "RestoreFromClusterSnapshot"
@@ -15,14 +19,16 @@ class GetRestoreFromClusterSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetRestoreFromClusterSnapshotQueryParams:
-    action: GetRestoreFromClusterSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRestoreFromClusterSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetRestoreFromClusterSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     additional_info: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AdditionalInfo', 'style': 'form', 'explode': True }})
     allow_version_upgrade: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowVersionUpgrade', 'style': 'form', 'explode': True }})
     aqua_configuration_status: Optional[GetRestoreFromClusterSnapshotAquaConfigurationStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'AquaConfigurationStatus', 'style': 'form', 'explode': True }})
     automated_snapshot_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'AutomatedSnapshotRetentionPeriod', 'style': 'form', 'explode': True }})
     availability_zone: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
     availability_zone_relocation: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZoneRelocation', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     cluster_parameter_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterParameterGroupName', 'style': 'form', 'explode': True }})
     cluster_security_groups: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterSecurityGroups', 'style': 'form', 'explode': True }})
     cluster_subnet_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterSubnetGroupName', 'style': 'form', 'explode': True }})
@@ -41,9 +47,7 @@ class GetRestoreFromClusterSnapshotQueryParams:
     preferred_maintenance_window: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PreferredMaintenanceWindow', 'style': 'form', 'explode': True }})
     publicly_accessible: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'PubliclyAccessible', 'style': 'form', 'explode': True }})
     snapshot_cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotClusterIdentifier', 'style': 'form', 'explode': True }})
-    snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
     snapshot_schedule_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotScheduleIdentifier', 'style': 'form', 'explode': True }})
-    version: GetRestoreFromClusterSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_security_group_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcSecurityGroupIds', 'style': 'form', 'explode': True }})
     
 
@@ -60,13 +64,13 @@ class GetRestoreFromClusterSnapshotHeaders:
 
 @dataclass
 class GetRestoreFromClusterSnapshotRequest:
-    query_params: GetRestoreFromClusterSnapshotQueryParams = field(default=None)
-    headers: GetRestoreFromClusterSnapshotHeaders = field(default=None)
+    headers: GetRestoreFromClusterSnapshotHeaders = field()
+    query_params: GetRestoreFromClusterSnapshotQueryParams = field()
     
 
 @dataclass
 class GetRestoreFromClusterSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

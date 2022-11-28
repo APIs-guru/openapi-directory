@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NormalizedCoordinate } from "./normalizedcoordinate";
 
+
 export enum AnimationFadeFadeTypeEnum {
-    FadeTypeUnspecified = "FADE_TYPE_UNSPECIFIED"
-,    FadeIn = "FADE_IN"
-,    FadeOut = "FADE_OUT"
+    FadeTypeUnspecified = "FADE_TYPE_UNSPECIFIED",
+    FadeIn = "FADE_IN",
+    FadeOut = "FADE_OUT"
 }
 
 
@@ -13,15 +14,15 @@ export enum AnimationFadeFadeTypeEnum {
  * Display overlay object with fade animation.
 **/
 export class AnimationFade extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeOffset" })
   endTimeOffset?: string;
 
-  @Metadata({ data: "json, name=fadeType" })
+  @SpeakeasyMetadata({ data: "json, name=fadeType" })
   fadeType?: AnimationFadeFadeTypeEnum;
 
-  @Metadata({ data: "json, name=startTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOffset" })
   startTimeOffset?: string;
 
-  @Metadata({ data: "json, name=xy" })
+  @SpeakeasyMetadata({ data: "json, name=xy" })
   xy?: NormalizedCoordinate;
 }

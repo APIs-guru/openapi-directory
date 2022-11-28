@@ -1,6 +1,7 @@
 
 
+
 export enum DiskIopsConfigurationModeEnum {
-    Automatic = "AUTOMATIC"
-,    UserProvisioned = "USER_PROVISIONED"
+    Automatic = "AUTOMATIC",
+    UserProvisioned = "USER_PROVISIONED"
 }

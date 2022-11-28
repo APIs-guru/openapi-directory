@@ -1,7 +1,8 @@
 
 
+
 export enum SourcesOrderEnum {
-    SourceName = "sourceName"
-,    FirstUpdated = "firstUpdated"
-,    LastUpdated = "lastUpdated"
+    SourceName = "sourceName",
+    FirstUpdated = "firstUpdated",
+    LastUpdated = "lastUpdated"
 }

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistributionConfigurationSummary } from "./distributionconfigurationsummary";
 
 
+
 export class ListDistributionConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distributionConfigurationSummaryList", elemType: shared.DistributionConfigurationSummary })
+  @SpeakeasyMetadata({ data: "json, name=distributionConfigurationSummaryList", elemType: DistributionConfigurationSummary })
   distributionConfigurationSummaryList?: DistributionConfigurationSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

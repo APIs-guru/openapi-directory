@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
@@ -21,13 +24,13 @@ class ListFieldLevelEncryptionProfiles20180618Headers:
 
 @dataclass
 class ListFieldLevelEncryptionProfiles20180618Request:
-    query_params: ListFieldLevelEncryptionProfiles20180618QueryParams = field(default=None)
-    headers: ListFieldLevelEncryptionProfiles20180618Headers = field(default=None)
+    headers: ListFieldLevelEncryptionProfiles20180618Headers = field()
+    query_params: ListFieldLevelEncryptionProfiles20180618QueryParams = field()
     
 
 @dataclass
 class ListFieldLevelEncryptionProfiles20180618Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VpcConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.
 **/
 export class VpcConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignPublicIp" })
+  @SpeakeasyMetadata({ data: "json, name=assignPublicIp" })
   assignPublicIp?: boolean;
 
-  @Metadata({ data: "json, name=securityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=subnets" })
+  @SpeakeasyMetadata({ data: "json, name=subnets" })
   subnets: string[];
 }

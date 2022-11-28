@@ -34,15 +34,15 @@ type ReadAccountDetailsSecurity struct {
 	BearerAuthOAuth *shared.SchemeBearerAuthOAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
+type ReadAccountDetails200ApplicationJSON struct {
+	Account shared.AccountDetails `json:"account"`
+}
+
 type ReadAccountDetailsRequest struct {
 	PathParams  ReadAccountDetailsPathParams
 	QueryParams ReadAccountDetailsQueryParams
 	Headers     ReadAccountDetailsHeaders
 	Security    ReadAccountDetailsSecurity
-}
-
-type ReadAccountDetails200ApplicationJSON struct {
-	Account shared.AccountDetails `json:"account"`
 }
 
 type ReadAccountDetailsResponse struct {

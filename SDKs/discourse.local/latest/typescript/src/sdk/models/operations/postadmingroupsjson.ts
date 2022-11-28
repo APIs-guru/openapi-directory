@@ -1,127 +1,128 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAdminGroupsJsonRequestBodyGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class PostAdminGroupsJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group: PostAdminGroupsJsonRequestBodyGroup;
 }
 
 
-export class PostAdminGroupsJsonRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostAdminGroupsJsonRequestBody;
-}
-
-
 export class PostAdminGroupsJson200ApplicationJsonBasicGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allow_membership_requests" })
+  @SpeakeasyMetadata({ data: "json, name=allow_membership_requests" })
   allowMembershipRequests?: boolean;
 
-  @Metadata({ data: "json, name=automatic" })
+  @SpeakeasyMetadata({ data: "json, name=automatic" })
   automatic?: boolean;
 
-  @Metadata({ data: "json, name=automatic_membership_email_domains" })
+  @SpeakeasyMetadata({ data: "json, name=automatic_membership_email_domains" })
   automaticMembershipEmailDomains?: string;
 
-  @Metadata({ data: "json, name=automatic_membership_retroactive" })
+  @SpeakeasyMetadata({ data: "json, name=automatic_membership_retroactive" })
   automaticMembershipRetroactive?: boolean;
 
-  @Metadata({ data: "json, name=bio_cooked" })
+  @SpeakeasyMetadata({ data: "json, name=bio_cooked" })
   bioCooked?: string;
 
-  @Metadata({ data: "json, name=bio_excerpt" })
+  @SpeakeasyMetadata({ data: "json, name=bio_excerpt" })
   bioExcerpt?: string;
 
-  @Metadata({ data: "json, name=bio_raw" })
+  @SpeakeasyMetadata({ data: "json, name=bio_raw" })
   bioRaw?: string;
 
-  @Metadata({ data: "json, name=can_see_members" })
+  @SpeakeasyMetadata({ data: "json, name=can_see_members" })
   canSeeMembers?: boolean;
 
-  @Metadata({ data: "json, name=default_notification_level" })
+  @SpeakeasyMetadata({ data: "json, name=default_notification_level" })
   defaultNotificationLevel?: number;
 
-  @Metadata({ data: "json, name=flair_bg_color" })
+  @SpeakeasyMetadata({ data: "json, name=flair_bg_color" })
   flairBgColor?: string;
 
-  @Metadata({ data: "json, name=flair_color" })
+  @SpeakeasyMetadata({ data: "json, name=flair_color" })
   flairColor?: string;
 
-  @Metadata({ data: "json, name=flair_url" })
+  @SpeakeasyMetadata({ data: "json, name=flair_url" })
   flairUrl?: string;
 
-  @Metadata({ data: "json, name=full_name" })
+  @SpeakeasyMetadata({ data: "json, name=full_name" })
   fullName?: string;
 
-  @Metadata({ data: "json, name=grant_trust_level" })
+  @SpeakeasyMetadata({ data: "json, name=grant_trust_level" })
   grantTrustLevel?: string;
 
-  @Metadata({ data: "json, name=has_messages" })
+  @SpeakeasyMetadata({ data: "json, name=has_messages" })
   hasMessages?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=incoming_email" })
+  @SpeakeasyMetadata({ data: "json, name=incoming_email" })
   incomingEmail?: string;
 
-  @Metadata({ data: "json, name=membership_request_template" })
+  @SpeakeasyMetadata({ data: "json, name=membership_request_template" })
   membershipRequestTemplate?: string;
 
-  @Metadata({ data: "json, name=membership_visibility_level" })
+  @SpeakeasyMetadata({ data: "json, name=membership_visibility_level" })
   membershipVisibilityLevel?: number;
 
-  @Metadata({ data: "json, name=mentionable_level" })
+  @SpeakeasyMetadata({ data: "json, name=mentionable_level" })
   mentionableLevel?: number;
 
-  @Metadata({ data: "json, name=messageable_level" })
+  @SpeakeasyMetadata({ data: "json, name=messageable_level" })
   messageableLevel?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=primary_group" })
+  @SpeakeasyMetadata({ data: "json, name=primary_group" })
   primaryGroup?: boolean;
 
-  @Metadata({ data: "json, name=public_admission" })
+  @SpeakeasyMetadata({ data: "json, name=public_admission" })
   publicAdmission?: boolean;
 
-  @Metadata({ data: "json, name=public_exit" })
+  @SpeakeasyMetadata({ data: "json, name=public_exit" })
   publicExit?: boolean;
 
-  @Metadata({ data: "json, name=publish_read_state" })
+  @SpeakeasyMetadata({ data: "json, name=publish_read_state" })
   publishReadState?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=user_count" })
+  @SpeakeasyMetadata({ data: "json, name=user_count" })
   userCount?: number;
 
-  @Metadata({ data: "json, name=visibility_level" })
+  @SpeakeasyMetadata({ data: "json, name=visibility_level" })
   visibilityLevel?: number;
 }
 
 
 export class PostAdminGroupsJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basic_group" })
+  @SpeakeasyMetadata({ data: "json, name=basic_group" })
   basicGroup: PostAdminGroupsJson200ApplicationJsonBasicGroup;
 }
 
 
+export class PostAdminGroupsJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostAdminGroupsJsonRequestBody;
+}
+
+
 export class PostAdminGroupsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAdminGroupsJson200ApplicationJsonObject?: PostAdminGroupsJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class TwipcRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -19,10 +19,6 @@ export declare class TwipcRequestBody extends SpeakeasyBase {
 export declare class TwipcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class TwipcRequest extends SpeakeasyBase {
-    request?: TwipcRequestBody;
-    security: TwipcSecurity;
 }
 export declare enum Twipc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -105,6 +101,10 @@ export declare enum Twipc504ApplicationJsonErrorDescriptionEnum {
 export declare class Twipc504ApplicationJson extends SpeakeasyBase {
     error?: Twipc504ApplicationJsonErrorEnum;
     errorDescription?: Twipc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class TwipcRequest extends SpeakeasyBase {
+    request?: TwipcRequestBody;
+    security: TwipcSecurity;
 }
 export declare class TwipcResponse extends SpeakeasyBase {
     contentType: string;

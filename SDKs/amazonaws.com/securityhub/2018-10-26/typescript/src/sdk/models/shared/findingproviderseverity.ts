@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeverityLabelEnum } from "./severitylabelenum";
+
 
 
 // FindingProviderSeverity
@@ -7,9 +8,9 @@ import { SeverityLabelEnum } from "./severitylabelenum";
  * The severity assigned to the finding by the finding provider.
 **/
 export class FindingProviderSeverity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Label" })
+  @SpeakeasyMetadata({ data: "json, name=Label" })
   label?: SeverityLabelEnum;
 
-  @Metadata({ data: "json, name=Original" })
+  @SpeakeasyMetadata({ data: "json, name=Original" })
   original?: string;
 }

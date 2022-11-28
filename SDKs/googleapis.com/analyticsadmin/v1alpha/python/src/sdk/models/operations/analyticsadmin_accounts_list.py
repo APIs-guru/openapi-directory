@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,14 +24,14 @@ class AnalyticsadminAccountsListQueryParams:
 
 @dataclass
 class AnalyticsadminAccountsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminAccountsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,13 +42,13 @@ class AnalyticsadminAccountsListSecurity:
 
 @dataclass
 class AnalyticsadminAccountsListRequest:
-    query_params: AnalyticsadminAccountsListQueryParams = field(default=None)
-    security: AnalyticsadminAccountsListSecurity = field(default=None)
+    query_params: AnalyticsadminAccountsListQueryParams = field()
+    security: AnalyticsadminAccountsListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminAccountsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_accounts_response: Optional[shared.GoogleAnalyticsAdminV1alphaListAccountsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

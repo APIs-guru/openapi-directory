@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SuggestStatus
 /**
  * Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
@@ -33,11 +33,11 @@ var SuggestStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rid" }),
+        SpeakeasyMetadata({ data: "json, name=rid" }),
         __metadata("design:type", String)
     ], SuggestStatus.prototype, "rid", void 0);
     __decorate([
-        Metadata({ data: "json, name=timems" }),
+        SpeakeasyMetadata({ data: "json, name=timems" }),
         __metadata("design:type", Number)
     ], SuggestStatus.prototype, "timems", void 0);
     return SuggestStatus;

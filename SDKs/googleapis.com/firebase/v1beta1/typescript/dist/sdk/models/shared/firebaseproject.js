@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefaultResources } from "./defaultresources";
 export var FirebaseProjectStateEnum;
 (function (FirebaseProjectStateEnum) {
@@ -40,35 +40,35 @@ var FirebaseProject = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=annotations" }),
+        SpeakeasyMetadata({ data: "json, name=annotations" }),
         __metadata("design:type", Map)
     ], FirebaseProject.prototype, "annotations", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], FirebaseProject.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], FirebaseProject.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FirebaseProject.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], FirebaseProject.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectNumber" }),
+        SpeakeasyMetadata({ data: "json, name=projectNumber" }),
         __metadata("design:type", String)
     ], FirebaseProject.prototype, "projectNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=resources" }),
+        SpeakeasyMetadata({ data: "json, name=resources" }),
         __metadata("design:type", DefaultResources)
     ], FirebaseProject.prototype, "resources", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], FirebaseProject.prototype, "state", void 0);
     return FirebaseProject;

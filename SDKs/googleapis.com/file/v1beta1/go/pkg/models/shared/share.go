@@ -9,6 +9,8 @@ const (
 	ShareStateEnumDeleting         ShareStateEnum = "DELETING"
 )
 
+// Share
+// A Filestore share.
 type Share struct {
 	CapacityGb       *string            `json:"capacityGb,omitempty"`
 	CreateTime       *string            `json:"createTime,omitempty"`
@@ -18,4 +20,14 @@ type Share struct {
 	Name             *string            `json:"name,omitempty"`
 	NfsExportOptions []NfsExportOptions `json:"nfsExportOptions,omitempty"`
 	State            *ShareStateEnum    `json:"state,omitempty"`
+}
+
+// ShareInput
+// A Filestore share.
+type ShareInput struct {
+	CapacityGb       *string            `json:"capacityGb,omitempty"`
+	Description      *string            `json:"description,omitempty"`
+	Labels           map[string]string  `json:"labels,omitempty"`
+	MountName        *string            `json:"mountName,omitempty"`
+	NfsExportOptions []NfsExportOptions `json:"nfsExportOptions,omitempty"`
 }

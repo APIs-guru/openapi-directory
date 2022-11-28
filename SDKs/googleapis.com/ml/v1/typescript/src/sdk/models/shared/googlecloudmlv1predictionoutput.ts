@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudMlV1PredictionOutput
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents results of a prediction job.
 **/
 export class GoogleCloudMlV1PredictionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCount" })
+  @SpeakeasyMetadata({ data: "json, name=errorCount" })
   errorCount?: string;
 
-  @Metadata({ data: "json, name=nodeHours" })
+  @SpeakeasyMetadata({ data: "json, name=nodeHours" })
   nodeHours?: number;
 
-  @Metadata({ data: "json, name=outputPath" })
+  @SpeakeasyMetadata({ data: "json, name=outputPath" })
   outputPath?: string;
 
-  @Metadata({ data: "json, name=predictionCount" })
+  @SpeakeasyMetadata({ data: "json, name=predictionCount" })
   predictionCount?: string;
 }

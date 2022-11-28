@@ -1,7 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
+
+
 UPDATE_FIREWALL_RULES_SERVERS = [
 	"https://api.linode.com/v4",
 ]
@@ -9,43 +15,33 @@ UPDATE_FIREWALL_RULES_SERVERS = [
 
 @dataclass
 class UpdateFirewallRulesPathParams:
-    firewall_id: int = field(default=None, metadata={'path_param': { 'field_name': 'firewallId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class UpdateFirewallRulesSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class UpdateFirewallRulesSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    firewall_id: int = field(metadata={'path_param': { 'field_name': 'firewallId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateFirewallRulesSecurity:
-    option1: Optional[UpdateFirewallRulesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[UpdateFirewallRulesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class UpdateFirewallRulesRequest:
-    server_url: Optional[str] = field(default=None)
-    path_params: UpdateFirewallRulesPathParams = field(default=None)
-    request: Optional[shared.Rules] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateFirewallRulesSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFirewallRulesDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class UpdateFirewallRulesRequest:
+    path_params: UpdateFirewallRulesPathParams = field()
+    security: UpdateFirewallRulesSecurity = field()
+    request: Optional[shared.Rules] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    server_url: Optional[str] = field(default=None)
     
 
 @dataclass
 class UpdateFirewallRulesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rules: Optional[shared.Rules] = field(default=None)
     update_firewall_rules_default_application_json_object: Optional[UpdateFirewallRulesDefaultApplicationJSON] = field(default=None)
     

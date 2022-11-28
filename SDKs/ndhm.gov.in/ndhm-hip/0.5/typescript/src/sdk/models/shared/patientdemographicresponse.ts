@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatientAddress } from "./patientaddress";
 import { PatientGenderEnum } from "./patientgenderenum";
 import { Identifier } from "./identifier";
 
 
+
 export class PatientDemographicResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PatientAddress;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender: PatientGenderEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=identifiers", elemType: shared.Identifier })
+  @SpeakeasyMetadata({ data: "json, name=identifiers", elemType: Identifier })
   identifiers?: Identifier[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=yearOfBirth" })
+  @SpeakeasyMetadata({ data: "json, name=yearOfBirth" })
   yearOfBirth: number;
 }

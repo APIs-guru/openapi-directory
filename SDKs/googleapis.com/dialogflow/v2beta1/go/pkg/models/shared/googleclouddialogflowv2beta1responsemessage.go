@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1ResponseMessage
+// Response messages from an automated agent.
 type GoogleCloudDialogflowV2beta1ResponseMessage struct {
 	EndInteraction        map[string]interface{}                                            `json:"endInteraction,omitempty"`
 	LiveAgentHandoff      *GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff      `json:"liveAgentHandoff,omitempty"`

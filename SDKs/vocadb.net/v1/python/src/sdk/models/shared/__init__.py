@@ -22,6 +22,7 @@ from .discussiontopiccontract import *
 from .englishtranslatedstringcontract import *
 from .entryforapicontract import *
 from .entryrefcontract import *
+from .entrythumbcontract import *
 from .entrythumbforapicontract import *
 from .localizedstringcontract import *
 from .localizedstringwithidcontract import *
@@ -60,9 +61,11 @@ from .releaseeventseriesforapicontract import *
 from .songcontract import *
 from .songforapicontract import *
 from .songinalbumforapicontract import *
+from .songinlisteditcontract import *
 from .songinlistforapicontract import *
 from .songlistbasecontract import *
 from .songlistforapicontract import *
+from .songlistforeditcontract import *
 from .songratingcontract import *
 from .tagbasecontract import *
 from .tagforapicontract import *

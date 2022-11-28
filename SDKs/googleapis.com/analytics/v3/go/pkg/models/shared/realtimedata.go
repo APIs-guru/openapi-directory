@@ -6,6 +6,8 @@ type RealtimeDataColumnHeaders struct {
 	Name       *string `json:"name,omitempty"`
 }
 
+// RealtimeDataProfileInfo
+// Information for the view (profile), for which the real time data was requested.
 type RealtimeDataProfileInfo struct {
 	AccountID             *string `json:"accountId,omitempty"`
 	InternalWebPropertyID *string `json:"internalWebPropertyId,omitempty"`
@@ -15,6 +17,8 @@ type RealtimeDataProfileInfo struct {
 	WebPropertyID         *string `json:"webPropertyId,omitempty"`
 }
 
+// RealtimeDataQuery
+// Real time data request query parameters.
 type RealtimeDataQuery struct {
 	Dimensions *string  `json:"dimensions,omitempty"`
 	Filters    *string  `json:"filters,omitempty"`
@@ -24,6 +28,8 @@ type RealtimeDataQuery struct {
 	Sort       []string `json:"sort,omitempty"`
 }
 
+// RealtimeData
+// Real time data for a given view (profile).
 type RealtimeData struct {
 	ColumnHeaders       []RealtimeDataColumnHeaders `json:"columnHeaders,omitempty"`
 	ID                  *string                     `json:"id,omitempty"`

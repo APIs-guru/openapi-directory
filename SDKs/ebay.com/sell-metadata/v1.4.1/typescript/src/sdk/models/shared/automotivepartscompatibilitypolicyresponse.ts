@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutomotivePartsCompatibilityPolicy } from "./automotivepartscompatibilitypolicy";
 import { Error } from "./error";
 
 
+
 export class AutomotivePartsCompatibilityPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=automotivePartsCompatibilityPolicies", elemType: shared.AutomotivePartsCompatibilityPolicy })
+  @SpeakeasyMetadata({ data: "json, name=automotivePartsCompatibilityPolicies", elemType: AutomotivePartsCompatibilityPolicy })
   automotivePartsCompatibilityPolicies?: AutomotivePartsCompatibilityPolicy[];
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PricingPlanEnum } from "./pricingplanenum";
+
 
 
 // ListRouteCalculatorsResponseEntry
@@ -7,21 +8,21 @@ import { PricingPlanEnum } from "./pricingplanenum";
  * A route calculator resource listed in your AWS account.
 **/
 export class ListRouteCalculatorsResponseEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CalculatorName" })
+  @SpeakeasyMetadata({ data: "json, name=CalculatorName" })
   calculatorName: string;
 
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime: Date;
 
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=PricingPlan" })
+  @SpeakeasyMetadata({ data: "json, name=PricingPlan" })
   pricingPlan: PricingPlanEnum;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime: Date;
 }

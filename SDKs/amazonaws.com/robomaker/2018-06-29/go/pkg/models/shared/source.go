@@ -1,5 +1,7 @@
 package shared
 
+// Source
+// Information about a source.
 type Source struct {
 	Architecture *ArchitectureEnum `json:"architecture,omitempty"`
 	Etag         *string           `json:"etag,omitempty"`

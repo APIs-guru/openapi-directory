@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RequestOAuthClientPathParams:
-    client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
+    client_id: str = field(metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RequestOAuthClientHeaders:
 
 @dataclass
 class RequestOAuthClientRequest:
-    path_params: RequestOAuthClientPathParams = field(default=None)
-    headers: RequestOAuthClientHeaders = field(default=None)
+    headers: RequestOAuthClientHeaders = field()
+    path_params: RequestOAuthClientPathParams = field()
     
 
 @dataclass
 class RequestOAuthClientResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     o_auth_client: Optional[shared.OAuthClient] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,6 +10,8 @@ const (
 	QuotaOperationQuotaModeEnumAdjustOnly  QuotaOperationQuotaModeEnum = "ADJUST_ONLY"
 )
 
+// QuotaOperation
+// Represents information regarding a quota operation.
 type QuotaOperation struct {
 	ConsumerID   *string                      `json:"consumerId,omitempty"`
 	Labels       map[string]string            `json:"labels,omitempty"`

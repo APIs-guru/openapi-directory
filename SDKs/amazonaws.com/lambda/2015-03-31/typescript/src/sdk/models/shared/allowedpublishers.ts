@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AllowedPublishers
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List of signing profiles that can sign a code package. 
 **/
 export class AllowedPublishers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SigningProfileVersionArns" })
+  @SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArns" })
   signingProfileVersionArns: string[];
 }

@@ -30,7 +30,7 @@ type ComposerProjectsLocationsEnvironmentsCreateSecurity struct {
 type ComposerProjectsLocationsEnvironmentsCreateRequest struct {
 	PathParams  ComposerProjectsLocationsEnvironmentsCreatePathParams
 	QueryParams ComposerProjectsLocationsEnvironmentsCreateQueryParams
-	Request     *shared.Environment `request:"mediaType=application/json"`
+	Request     *shared.EnvironmentInput `request:"mediaType=application/json"`
 	Security    ComposerProjectsLocationsEnvironmentsCreateSecurity
 }
 

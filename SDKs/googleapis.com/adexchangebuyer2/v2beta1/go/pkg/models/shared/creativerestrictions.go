@@ -17,6 +17,8 @@ const (
 	CreativeRestrictionsSkippableAdTypeEnumNotSkippable               CreativeRestrictionsSkippableAdTypeEnum = "NOT_SKIPPABLE"
 )
 
+// CreativeRestrictions
+// Represents creative restrictions associated to Programmatic Guaranteed/ Preferred Deal in Ad Manager. This doesn't apply to Private Auction and AdX Preferred Deals.
 type CreativeRestrictions struct {
 	CreativeFormat         *CreativeRestrictionsCreativeFormatEnum  `json:"creativeFormat,omitempty"`
 	CreativeSpecifications []CreativeSpecification                  `json:"creativeSpecifications,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Project
+// Information about a build project.
 type Project struct {
 	Arn                     *string                     `json:"arn,omitempty"`
 	Artifacts               *ProjectArtifacts           `json:"artifacts,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Config extends SpeakeasyBase {
-  @Metadata({ data: "json, name=providers" })
+  @SpeakeasyMetadata({ data: "json, name=providers" })
   providers: Map<string, any>;
 
-  @Metadata({ data: "json, name=topics" })
+  @SpeakeasyMetadata({ data: "json, name=topics" })
   topics: any[];
 }

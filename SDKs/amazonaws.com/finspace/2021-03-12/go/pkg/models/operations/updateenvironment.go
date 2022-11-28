@@ -25,6 +25,8 @@ const (
 	UpdateEnvironmentRequestBodyFederationModeEnumLocal     UpdateEnvironmentRequestBodyFederationModeEnum = "LOCAL"
 )
 
+// UpdateEnvironmentRequestBodyFederationParameters
+// Configuration information when authentication mode is FEDERATED.
 type UpdateEnvironmentRequestBodyFederationParameters struct {
 	ApplicationCallBackURL *string           `json:"applicationCallBackURL,omitempty"`
 	AttributeMap           map[string]string `json:"attributeMap,omitempty"`

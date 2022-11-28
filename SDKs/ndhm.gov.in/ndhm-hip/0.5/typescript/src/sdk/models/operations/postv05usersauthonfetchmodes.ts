@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostV05UsersAuthOnFetchModesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-HIP-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-HIP-ID" })
   xHipId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-HIU-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-HIU-ID" })
   xHiuId: string;
 }
 
 
 export class PostV05UsersAuthOnFetchModesRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   patientAuthModeQueryResponse?: shared.PatientAuthModeQueryResponse;
 }
 
 
 export class PostV05UsersAuthOnFetchModesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostV05UsersAuthOnFetchModesHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostV05UsersAuthOnFetchModesRequests;
 }
 
 
 export class PostV05UsersAuthOnFetchModesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

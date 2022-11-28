@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRunV1Condition } from "./googlecloudrunv1condition";
 import { ExecutionReference } from "./executionreference";
+
 
 
 // JobStatus
@@ -9,15 +9,15 @@ import { ExecutionReference } from "./executionreference";
  * JobStatus represents the current state of a Job.
 **/
 export class JobStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conditions", elemType: shared.GoogleCloudRunV1Condition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: GoogleCloudRunV1Condition })
   conditions?: GoogleCloudRunV1Condition[];
 
-  @Metadata({ data: "json, name=executionCount" })
+  @SpeakeasyMetadata({ data: "json, name=executionCount" })
   executionCount?: number;
 
-  @Metadata({ data: "json, name=latestCreatedExecution" })
+  @SpeakeasyMetadata({ data: "json, name=latestCreatedExecution" })
   latestCreatedExecution?: ExecutionReference;
 
-  @Metadata({ data: "json, name=observedGeneration" })
+  @SpeakeasyMetadata({ data: "json, name=observedGeneration" })
   observedGeneration?: number;
 }

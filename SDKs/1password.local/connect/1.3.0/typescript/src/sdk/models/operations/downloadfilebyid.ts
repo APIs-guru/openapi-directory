@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DownloadFileByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fileUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileUuid" })
   fileUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
   itemUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
   vaultUuid: string;
 }
 
 
 export class DownloadFileByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   connectToken: shared.SchemeConnectToken;
 }
 
 
 export class DownloadFileByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DownloadFileByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DownloadFileByIdSecurity;
 }
 
 
 export class DownloadFileByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   downloadFileById200ApplicationOctetStreamBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

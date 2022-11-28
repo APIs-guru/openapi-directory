@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DescribeDocumentClassifierXAmzTargetEnum {
     Comprehend20171127DescribeDocumentClassifier = "Comprehend_20171127.DescribeDocumentClassifier"

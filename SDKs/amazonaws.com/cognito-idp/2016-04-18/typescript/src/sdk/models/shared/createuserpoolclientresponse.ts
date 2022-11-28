@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserPoolClientType } from "./userpoolclienttype";
+
 
 
 // CreateUserPoolClientResponse
@@ -7,6 +8,6 @@ import { UserPoolClientType } from "./userpoolclienttype";
  * Represents the response from the server to create a user pool client.
 **/
 export class CreateUserPoolClientResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserPoolClient" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolClient" })
   userPoolClient?: UserPoolClientType;
 }

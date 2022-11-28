@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import consumerstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConsumerDescription:
-    consumer_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsumerARN' }})
-    consumer_creation_timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsumerCreationTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    consumer_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsumerName' }})
-    consumer_status: consumerstatus_enum.ConsumerStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsumerStatus' }})
-    stream_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamARN' }})
+    r"""ConsumerDescription
+    An object that represents the details of a registered consumer. This type of object is returned by <a>DescribeStreamConsumer</a>.
+    """
+    
+    consumer_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsumerARN') }})
+    consumer_creation_timestamp: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsumerCreationTimestamp'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    consumer_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsumerName') }})
+    consumer_status: ConsumerStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsumerStatus') }})
+    stream_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamARN') }})
     

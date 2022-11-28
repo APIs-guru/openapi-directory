@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWaybackV1AvailableQueryParams = /** @class */ (function (_super) {
     __extends(GetWaybackV1AvailableQueryParams, _super);
@@ -30,31 +30,31 @@ var GetWaybackV1AvailableQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GetWaybackV1AvailableQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=closest" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=closest" }),
         __metadata("design:type", String)
     ], GetWaybackV1AvailableQueryParams.prototype, "closest", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=status_code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status_code" }),
         __metadata("design:type", Number)
     ], GetWaybackV1AvailableQueryParams.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tag" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" }),
         __metadata("design:type", String)
     ], GetWaybackV1AvailableQueryParams.prototype, "tag", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], GetWaybackV1AvailableQueryParams.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
         __metadata("design:type", String)
     ], GetWaybackV1AvailableQueryParams.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], GetWaybackV1AvailableQueryParams.prototype, "url", void 0);
     return GetWaybackV1AvailableQueryParams;
@@ -66,7 +66,7 @@ var GetWaybackV1AvailableRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWaybackV1AvailableQueryParams)
     ], GetWaybackV1AvailableRequest.prototype, "queryParams", void 0);
     return GetWaybackV1AvailableRequest;
@@ -78,23 +78,23 @@ var GetWaybackV1AvailableResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AvailabilityResults)
     ], GetWaybackV1AvailableResponse.prototype, "availabilityResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetWaybackV1AvailableResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWaybackV1AvailableResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetWaybackV1AvailableResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWaybackV1AvailableResponse.prototype, "statusCode", void 0);
     return GetWaybackV1AvailableResponse;

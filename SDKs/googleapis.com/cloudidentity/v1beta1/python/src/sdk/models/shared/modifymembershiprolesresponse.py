@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import membership
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModifyMembershipRolesResponse:
-    membership: Optional[membership.Membership] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'membership' }})
+    r"""ModifyMembershipRolesResponse
+    The response message for MembershipsService.ModifyMembershipRoles.
+    """
+    
+    membership: Optional[Membership] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('membership') }})
     

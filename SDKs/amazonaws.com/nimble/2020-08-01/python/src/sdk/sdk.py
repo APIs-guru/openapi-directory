@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/nimble/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/nimble/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def accept_eulas(self, request: operations.AcceptEulasRequest) -> operations.AcceptEulasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Accept EULAs.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/eula-acceptances", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -87,22 +116,22 @@ class SDK:
 
     
     def create_launch_profile(self, request: operations.CreateLaunchProfileRequest) -> operations.CreateLaunchProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a launch profile.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -145,22 +174,22 @@ class SDK:
 
     
     def create_streaming_image(self, request: operations.CreateStreamingImageRequest) -> operations.CreateStreamingImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a streaming image resource in a studio.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-images", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -203,22 +232,22 @@ class SDK:
 
     
     def create_streaming_session(self, request: operations.CreateStreamingSessionRequest) -> operations.CreateStreamingSessionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a streaming session in a studio.</p> <p>After invoking this operation, you must poll GetStreamingSession until the streaming session is in state READY.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-sessions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -261,22 +290,22 @@ class SDK:
 
     
     def create_streaming_session_stream(self, request: operations.CreateStreamingSessionStreamRequest) -> operations.CreateStreamingSessionStreamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a streaming session stream for a streaming session.</p> <p>After invoking this API, invoke GetStreamingSessionStream with the returned streamId to poll the resource until it is in state READY.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}/streams", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -319,22 +348,22 @@ class SDK:
 
     
     def create_studio(self, request: operations.CreateStudioRequest) -> operations.CreateStudioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Create a new Studio.</p> <p>When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal.</p> <p>The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly.</p> <p>The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly.</p> <p>You may optionally specify a KMS key in the StudioEncryptionConfiguration.</p> <p>In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage.</p> <p>When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys.</p> <p>If you delete this grant, the studio will no longer be accessible to your portal users.</p> <p>If you delete the studio KMS key, your studio will no longer be accessible.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/2020-08-01/studios"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -377,22 +406,22 @@ class SDK:
 
     
     def create_studio_component(self, request: operations.CreateStudioComponentRequest) -> operations.CreateStudioComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a studio component resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/studio-components", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -435,15 +464,17 @@ class SDK:
 
     
     def delete_launch_profile(self, request: operations.DeleteLaunchProfileRequest) -> operations.DeleteLaunchProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Permanently delete a launch profile.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -486,15 +517,17 @@ class SDK:
 
     
     def delete_launch_profile_member(self, request: operations.DeleteLaunchProfileMemberRequest) -> operations.DeleteLaunchProfileMemberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a user from launch profile membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership/{principalId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -537,15 +570,17 @@ class SDK:
 
     
     def delete_streaming_image(self, request: operations.DeleteStreamingImageRequest) -> operations.DeleteStreamingImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete streaming image.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-images/{streamingImageId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -588,15 +623,17 @@ class SDK:
 
     
     def delete_streaming_session(self, request: operations.DeleteStreamingSessionRequest) -> operations.DeleteStreamingSessionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes streaming session resource.</p> <p>After invoking this operation, use GetStreamingSession to poll the resource until it transitions to a DELETED state.</p> <p>A streaming session will count against your streaming session quota until it is marked DELETED.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -639,15 +676,17 @@ class SDK:
 
     
     def delete_studio(self, request: operations.DeleteStudioRequest) -> operations.DeleteStudioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a studio resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -690,15 +729,17 @@ class SDK:
 
     
     def delete_studio_component(self, request: operations.DeleteStudioComponentRequest) -> operations.DeleteStudioComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a studio component resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/studio-components/{studioComponentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -741,15 +782,17 @@ class SDK:
 
     
     def delete_studio_member(self, request: operations.DeleteStudioMemberRequest) -> operations.DeleteStudioMemberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a user from studio membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/membership/{principalId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -792,15 +835,17 @@ class SDK:
 
     
     def get_eula(self, request: operations.GetEulaRequest) -> operations.GetEulaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Eula.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/eulas/{eulaId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -843,15 +888,17 @@ class SDK:
 
     
     def get_launch_profile(self, request: operations.GetLaunchProfileRequest) -> operations.GetLaunchProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a launch profile.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -894,15 +941,17 @@ class SDK:
 
     
     def get_launch_profile_details(self, request: operations.GetLaunchProfileDetailsRequest) -> operations.GetLaunchProfileDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Launch profile details include the launch profile resource and summary information of resources that are used by, or available to, the launch profile. This includes the name and description of all studio components used by the launch profiles, and the name and description of streaming images that can be used with this launch profile.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -945,17 +994,18 @@ class SDK:
 
     
     def get_launch_profile_initialization(self, request: operations.GetLaunchProfileInitializationRequest) -> operations.GetLaunchProfileInitializationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a launch profile initialization.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/init#launchProfileProtocolVersions&launchPurpose&platform", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -998,15 +1048,17 @@ class SDK:
 
     
     def get_launch_profile_member(self, request: operations.GetLaunchProfileMemberRequest) -> operations.GetLaunchProfileMemberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a user persona in launch profile membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership/{principalId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1049,15 +1101,17 @@ class SDK:
 
     
     def get_streaming_image(self, request: operations.GetStreamingImageRequest) -> operations.GetStreamingImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get streaming image.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-images/{streamingImageId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1100,15 +1154,17 @@ class SDK:
 
     
     def get_streaming_session(self, request: operations.GetStreamingSessionRequest) -> operations.GetStreamingSessionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Gets StreamingSession resource.</p> <p>Invoke this operation to poll for a streaming session state while creating or deleting a session.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1151,15 +1207,17 @@ class SDK:
 
     
     def get_streaming_session_stream(self, request: operations.GetStreamingSessionStreamRequest) -> operations.GetStreamingSessionStreamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Gets a StreamingSessionStream for a streaming session.</p> <p>Invoke this operation to poll the resource after invoking CreateStreamingSessionStream.</p> <p>After the StreamingSessionStream changes to the state READY, the url property will contain a stream to be used with the DCV streaming client.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}/streams/{streamId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1202,15 +1260,17 @@ class SDK:
 
     
     def get_studio(self, request: operations.GetStudioRequest) -> operations.GetStudioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Studio resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1253,15 +1313,17 @@ class SDK:
 
     
     def get_studio_component(self, request: operations.GetStudioComponentRequest) -> operations.GetStudioComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a studio component resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/studio-components/{studioComponentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1304,15 +1366,17 @@ class SDK:
 
     
     def get_studio_member(self, request: operations.GetStudioMemberRequest) -> operations.GetStudioMemberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a user's membership in a studio.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/membership/{principalId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1355,17 +1419,18 @@ class SDK:
 
     
     def list_eula_acceptances(self, request: operations.ListEulaAcceptancesRequest) -> operations.ListEulaAcceptancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List Eula Acceptances.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/eula-acceptances", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1408,17 +1473,18 @@ class SDK:
 
     
     def list_eulas(self, request: operations.ListEulasRequest) -> operations.ListEulasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List Eulas.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/2020-08-01/eulas"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1461,17 +1527,18 @@ class SDK:
 
     
     def list_launch_profile_members(self, request: operations.ListLaunchProfileMembersRequest) -> operations.ListLaunchProfileMembersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all users in a given launch profile membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1514,17 +1581,18 @@ class SDK:
 
     
     def list_launch_profiles(self, request: operations.ListLaunchProfilesRequest) -> operations.ListLaunchProfilesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all the launch profiles a studio.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1567,17 +1635,18 @@ class SDK:
 
     
     def list_streaming_images(self, request: operations.ListStreamingImagesRequest) -> operations.ListStreamingImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>List the streaming image resources available to this studio.</p> <p>This list will contain both images provided by Amazon Web Services, as well as streaming images that you have created in your studio.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-images", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1620,17 +1689,18 @@ class SDK:
 
     
     def list_streaming_sessions(self, request: operations.ListStreamingSessionsRequest) -> operations.ListStreamingSessionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the streaming image resources in a studio.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-sessions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1673,17 +1743,18 @@ class SDK:
 
     
     def list_studio_components(self, request: operations.ListStudioComponentsRequest) -> operations.ListStudioComponentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the StudioComponents in a studio.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/studio-components", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1726,17 +1797,18 @@ class SDK:
 
     
     def list_studio_members(self, request: operations.ListStudioMembersRequest) -> operations.ListStudioMembersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all users in a given studio membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/membership", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1779,17 +1851,18 @@ class SDK:
 
     
     def list_studios(self, request: operations.ListStudiosRequest) -> operations.ListStudiosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List studios in your Amazon Web Services account in the requested Amazon Web Services Region.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/2020-08-01/studios"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1832,15 +1905,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Gets the tags for a resource, given its Amazon Resource Names (ARN).</p> <p>This operation supports ARNs for all resource types in Nimble Studio that support tags, including studio, studio component, launch profile, streaming image, and streaming session. All resources that can be tagged will contain an ARN property, so you do not have to create this ARN yourself.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1883,22 +1958,22 @@ class SDK:
 
     
     def put_launch_profile_members(self, request: operations.PutLaunchProfileMembersRequest) -> operations.PutLaunchProfileMembersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add/update users with given persona to launch profile membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1941,22 +2016,22 @@ class SDK:
 
     
     def put_studio_members(self, request: operations.PutStudioMembersRequest) -> operations.PutStudioMembersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add/update users with given persona to studio membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/membership", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1999,15 +2074,17 @@ class SDK:
 
     
     def start_studio_sso_configuration_repair(self, request: operations.StartStudioSsoConfigurationRepairRequest) -> operations.StartStudioSsoConfigurationRepairResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Repairs the SSO configuration for a given studio.</p> <p>If the studio has a valid Amazon Web Services SSO configuration currently associated with it, this operation will fail with a validation error.</p> <p>If the studio does not have a valid Amazon Web Services SSO configuration currently associated with it, then a new Amazon Web Services SSO application is created for the studio and the studio is changed to the READY state.</p> <p>After the Amazon Web Services SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/sso-configuration", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2050,22 +2127,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates tags for a resource, given its ARN.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2108,17 +2185,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the tags for a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/tags/{resourceArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2161,22 +2239,22 @@ class SDK:
 
     
     def update_launch_profile(self, request: operations.UpdateLaunchProfileRequest) -> operations.UpdateLaunchProfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a launch profile.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2219,22 +2297,22 @@ class SDK:
 
     
     def update_launch_profile_member(self, request: operations.UpdateLaunchProfileMemberRequest) -> operations.UpdateLaunchProfileMemberResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a user persona in launch profile membership.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership/{principalId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2277,22 +2355,22 @@ class SDK:
 
     
     def update_streaming_image(self, request: operations.UpdateStreamingImageRequest) -> operations.UpdateStreamingImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update streaming image.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/streaming-images/{streamingImageId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2335,22 +2413,22 @@ class SDK:
 
     
     def update_studio(self, request: operations.UpdateStudioRequest) -> operations.UpdateStudioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Update a Studio resource.</p> <p>Currently, this operation only supports updating the displayName of your studio.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2393,22 +2471,22 @@ class SDK:
 
     
     def update_studio_component(self, request: operations.UpdateStudioComponentRequest) -> operations.UpdateStudioComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a studio component resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/2020-08-01/studios/{studioId}/studio-components/{studioComponentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

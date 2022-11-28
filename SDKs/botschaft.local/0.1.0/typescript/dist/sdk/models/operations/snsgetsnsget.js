@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SnsGetSnsGetQueryParams = /** @class */ (function (_super) {
     __extends(SnsGetSnsGetQueryParams, _super);
@@ -30,11 +30,11 @@ var SnsGetSnsGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
         __metadata("design:type", String)
     ], SnsGetSnsGetQueryParams.prototype, "base64Message", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" }),
         __metadata("design:type", String)
     ], SnsGetSnsGetQueryParams.prototype, "message", void 0);
     return SnsGetSnsGetQueryParams;
@@ -46,7 +46,7 @@ var SnsGetSnsGetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" }),
         __metadata("design:type", String)
     ], SnsGetSnsGetHeaders.prototype, "authorization", void 0);
     return SnsGetSnsGetHeaders;
@@ -58,11 +58,11 @@ var SnsGetSnsGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SnsGetSnsGetQueryParams)
     ], SnsGetSnsGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SnsGetSnsGetHeaders)
     ], SnsGetSnsGetRequest.prototype, "headers", void 0);
     return SnsGetSnsGetRequest;
@@ -74,19 +74,19 @@ var SnsGetSnsGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SnsGetSnsGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], SnsGetSnsGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SnsGetSnsGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SnsGetSnsGetResponse.prototype, "snsGetSnsGet200ApplicationJsonAny", void 0);
     return SnsGetSnsGetResponse;

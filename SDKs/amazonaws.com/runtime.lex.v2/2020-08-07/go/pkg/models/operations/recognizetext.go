@@ -21,6 +21,8 @@ type RecognizeTextHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// RecognizeTextRequestBodySessionState
+// The state of the user's session with Amazon Lex V2.
 type RecognizeTextRequestBodySessionState struct {
 	ActiveContexts       []shared.ActiveContext `json:"activeContexts,omitempty"`
 	DialogAction         *shared.DialogAction   `json:"dialogAction,omitempty"`

@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetPlayersPlayerIDPathParams:
-    player_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
+    player_id: str = field(metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPlayersPlayerIDSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetPlayersPlayerIDRequest:
-    path_params: GetPlayersPlayerIDPathParams = field(default=None)
-    security: GetPlayersPlayerIDSecurity = field(default=None)
+    path_params: GetPlayersPlayerIDPathParams = field()
+    security: GetPlayersPlayerIDSecurity = field()
     
 
 @dataclass
 class GetPlayersPlayerIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     not_found: Optional[shared.NotFound] = field(default=None)
     player: Optional[shared.Player] = field(default=None)
     

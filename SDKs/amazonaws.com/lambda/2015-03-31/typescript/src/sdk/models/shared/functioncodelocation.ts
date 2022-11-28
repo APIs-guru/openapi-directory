@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FunctionCodeLocation
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a function's deployment package.
 **/
 export class FunctionCodeLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 
-  @Metadata({ data: "json, name=RepositoryType" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryType" })
   repositoryType?: string;
 
-  @Metadata({ data: "json, name=ResolvedImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ResolvedImageUri" })
   resolvedImageUri?: string;
 }

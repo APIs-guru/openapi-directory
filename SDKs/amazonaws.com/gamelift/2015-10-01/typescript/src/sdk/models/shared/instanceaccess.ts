@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceCredentials } from "./instancecredentials";
 import { OperatingSystemEnum } from "./operatingsystemenum";
+
 
 
 // InstanceAccess
@@ -8,18 +9,18 @@ import { OperatingSystemEnum } from "./operatingsystemenum";
  * Information required to remotely connect to a fleet instance. Access is requested by calling <a>GetInstanceAccess</a>. 
 **/
 export class InstanceAccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Credentials" })
+  @SpeakeasyMetadata({ data: "json, name=Credentials" })
   credentials?: InstanceCredentials;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId?: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=IpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=OperatingSystem" })
+  @SpeakeasyMetadata({ data: "json, name=OperatingSystem" })
   operatingSystem?: OperatingSystemEnum;
 }

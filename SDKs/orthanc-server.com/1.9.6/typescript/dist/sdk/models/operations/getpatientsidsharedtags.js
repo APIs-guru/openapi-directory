@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetPatientsIdSharedTagsPathParams = /** @class */ (function (_super) {
     __extends(GetPatientsIdSharedTagsPathParams, _super);
     function GetPatientsIdSharedTagsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetPatientsIdSharedTagsPathParams.prototype, "id", void 0);
     return GetPatientsIdSharedTagsPathParams;
@@ -41,11 +41,11 @@ var GetPatientsIdSharedTagsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=short" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" }),
         __metadata("design:type", Boolean)
     ], GetPatientsIdSharedTagsQueryParams.prototype, "short", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=simplify" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=simplify" }),
         __metadata("design:type", Boolean)
     ], GetPatientsIdSharedTagsQueryParams.prototype, "simplify", void 0);
     return GetPatientsIdSharedTagsQueryParams;
@@ -57,11 +57,11 @@ var GetPatientsIdSharedTagsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPatientsIdSharedTagsPathParams)
     ], GetPatientsIdSharedTagsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPatientsIdSharedTagsQueryParams)
     ], GetPatientsIdSharedTagsRequest.prototype, "queryParams", void 0);
     return GetPatientsIdSharedTagsRequest;
@@ -73,15 +73,15 @@ var GetPatientsIdSharedTagsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPatientsIdSharedTagsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetPatientsIdSharedTagsResponse.prototype, "getPatientsIdSharedTags200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPatientsIdSharedTagsResponse.prototype, "statusCode", void 0);
     return GetPatientsIdSharedTagsResponse;

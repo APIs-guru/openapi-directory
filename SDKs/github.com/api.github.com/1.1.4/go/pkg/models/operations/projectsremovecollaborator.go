@@ -9,13 +9,13 @@ type ProjectsRemoveCollaboratorPathParams struct {
 	Username  string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type ProjectsRemoveCollaboratorRequest struct {
-	PathParams ProjectsRemoveCollaboratorPathParams
-}
-
 type ProjectsRemoveCollaborator415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ProjectsRemoveCollaboratorRequest struct {
+	PathParams ProjectsRemoveCollaboratorPathParams
 }
 
 type ProjectsRemoveCollaboratorResponse struct {

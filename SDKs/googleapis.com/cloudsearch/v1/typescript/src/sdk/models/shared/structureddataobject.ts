@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamedProperty } from "./namedproperty";
+
 
 
 // StructuredDataObject
@@ -8,6 +8,6 @@ import { NamedProperty } from "./namedproperty";
  * A structured data object consisting of named properties.
 **/
 export class StructuredDataObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=properties", elemType: shared.NamedProperty })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: NamedProperty })
   properties?: NamedProperty[];
 }

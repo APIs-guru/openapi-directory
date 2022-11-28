@@ -28,11 +28,6 @@ type AdcrdSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type AdcrdRequest struct {
-	Request  *AdcrdRequestBody `request:"mediaType=application/json"`
-	Security AdcrdSecurity
-}
-
 type Adcrd400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Adcrd504ApplicationJSON struct {
 	Error            *Adcrd504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Adcrd504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type AdcrdRequest struct {
+	Request  *AdcrdRequestBody `request:"mediaType=application/json"`
+	Security AdcrdSecurity
 }
 
 type AdcrdResponse struct {

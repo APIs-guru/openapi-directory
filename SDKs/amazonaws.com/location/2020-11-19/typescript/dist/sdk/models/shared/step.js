@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Step
 /**
  *  Represents an element of a leg within a route. A step contains instructions for how to move to the next step in the leg.
@@ -33,23 +33,23 @@ var Step = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Distance" }),
+        SpeakeasyMetadata({ data: "json, name=Distance" }),
         __metadata("design:type", Number)
     ], Step.prototype, "distance", void 0);
     __decorate([
-        Metadata({ data: "json, name=DurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=DurationSeconds" }),
         __metadata("design:type", Number)
     ], Step.prototype, "durationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndPosition" }),
+        SpeakeasyMetadata({ data: "json, name=EndPosition" }),
         __metadata("design:type", Array)
     ], Step.prototype, "endPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=GeometryOffset" }),
+        SpeakeasyMetadata({ data: "json, name=GeometryOffset" }),
         __metadata("design:type", Number)
     ], Step.prototype, "geometryOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartPosition" }),
+        SpeakeasyMetadata({ data: "json, name=StartPosition" }),
         __metadata("design:type", Array)
     ], Step.prototype, "startPosition", void 0);
     return Step;

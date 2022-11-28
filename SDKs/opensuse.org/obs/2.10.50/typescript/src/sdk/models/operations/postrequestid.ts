@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostRequestIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostRequestIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=by_group" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_group" })
   byGroup?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=by_package" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_package" })
   byPackage?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=by_project" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_project" })
   byProject?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=by_user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_user" })
   byUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=cmd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=cmd" })
   cmd?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=comment" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=comment" })
   comment?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=incident" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=incident" })
   incident?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newstate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newstate" })
   newstate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=priority" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=priority" })
   priority?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time" })
   time?: string;
 }
 
 
 export class PostRequestIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class PostRequestIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostRequestIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostRequestIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostRequestIdSecurity;
 }
 
 
 export class PostRequestIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

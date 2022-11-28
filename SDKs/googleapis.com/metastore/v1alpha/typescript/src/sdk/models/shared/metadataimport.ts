@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatabaseDump } from "./databasedump";
 
+
 export enum MetadataImportStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Running = "RUNNING"
-,    Succeeded = "SUCCEEDED"
-,    Updating = "UPDATING"
-,    Failed = "FAILED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Running = "RUNNING",
+    Succeeded = "SUCCEEDED",
+    Updating = "UPDATING",
+    Failed = "FAILED"
 }
 
 
@@ -15,24 +16,40 @@ export enum MetadataImportStateEnum {
  * A metastore resource that imports metadata.
 **/
 export class MetadataImport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=databaseDump" })
+  @SpeakeasyMetadata({ data: "json, name=databaseDump" })
   databaseDump?: DatabaseDump;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: MetadataImportStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// MetadataImportInput
+/** 
+ * A metastore resource that imports metadata.
+**/
+export class MetadataImportInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=databaseDump" })
+  databaseDump?: DatabaseDump;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
 }

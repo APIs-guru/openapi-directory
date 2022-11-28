@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PaginationLinksFirst = /** @class */ (function (_super) {
     __extends(PaginationLinksFirst, _super);
     function PaginationLinksFirst() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], PaginationLinksFirst.prototype, "href", void 0);
     return PaginationLinksFirst;
@@ -41,7 +41,7 @@ var PaginationLinksLast = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], PaginationLinksLast.prototype, "href", void 0);
     return PaginationLinksLast;
@@ -53,7 +53,7 @@ var PaginationLinksNext = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], PaginationLinksNext.prototype, "href", void 0);
     return PaginationLinksNext;
@@ -65,7 +65,7 @@ var PaginationLinksPrev = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], PaginationLinksPrev.prototype, "href", void 0);
     return PaginationLinksPrev;
@@ -77,19 +77,19 @@ var PaginationLinks = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=first" }),
+        SpeakeasyMetadata({ data: "json, name=first" }),
         __metadata("design:type", PaginationLinksFirst)
     ], PaginationLinks.prototype, "first", void 0);
     __decorate([
-        Metadata({ data: "json, name=last" }),
+        SpeakeasyMetadata({ data: "json, name=last" }),
         __metadata("design:type", PaginationLinksLast)
     ], PaginationLinks.prototype, "last", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", PaginationLinksNext)
     ], PaginationLinks.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=prev" }),
+        SpeakeasyMetadata({ data: "json, name=prev" }),
         __metadata("design:type", PaginationLinksPrev)
     ], PaginationLinks.prototype, "prev", void 0);
     return PaginationLinks;

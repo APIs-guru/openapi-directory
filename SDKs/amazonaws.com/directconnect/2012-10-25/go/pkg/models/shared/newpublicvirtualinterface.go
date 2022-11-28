@@ -1,5 +1,7 @@
 package shared
 
+// NewPublicVirtualInterface
+// Information about a public virtual interface.
 type NewPublicVirtualInterface struct {
 	AddressFamily        *AddressFamilyEnum  `json:"addressFamily,omitempty"`
 	AmazonAddress        *string             `json:"amazonAddress,omitempty"`

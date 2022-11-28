@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MoveOrgMembershipRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for OrgMembershipsService.MoveOrgMembership.
 **/
 export class MoveOrgMembershipRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: string;
 
-  @Metadata({ data: "json, name=destinationOrgUnit" })
+  @SpeakeasyMetadata({ data: "json, name=destinationOrgUnit" })
   destinationOrgUnit?: string;
 }

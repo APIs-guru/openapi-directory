@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostMyOrdersSellingOrderIdRefundRequestsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=order_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=order_id" })
   orderId: string;
 }
 
 
 export class PostMyOrdersSellingOrderIdRefundRequestsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class PostMyOrdersSellingOrderIdRefundRequestsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostMyOrdersSellingOrderIdRefundRequestsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostMyOrdersSellingOrderIdRefundRequestsSecurity;
 }
 
 
 export class PostMyOrdersSellingOrderIdRefundRequestsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GroupType
+// The group type.
 type GroupType struct {
 	CreationDate     *time.Time `json:"CreationDate,omitempty"`
 	Description      *string    `json:"Description,omitempty"`

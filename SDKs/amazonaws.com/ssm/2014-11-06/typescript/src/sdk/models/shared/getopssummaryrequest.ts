@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsAggregator } from "./opsaggregator";
 import { OpsFilter } from "./opsfilter";
 import { OpsResultAttribute } from "./opsresultattribute";
 
 
+
 export class GetOpsSummaryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Aggregators", elemType: shared.OpsAggregator })
+  @SpeakeasyMetadata({ data: "json, name=Aggregators", elemType: OpsAggregator })
   aggregators?: OpsAggregator[];
 
-  @Metadata({ data: "json, name=Filters", elemType: shared.OpsFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: OpsFilter })
   filters?: OpsFilter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResultAttributes", elemType: shared.OpsResultAttribute })
+  @SpeakeasyMetadata({ data: "json, name=ResultAttributes", elemType: OpsResultAttribute })
   resultAttributes?: OpsResultAttribute[];
 
-  @Metadata({ data: "json, name=SyncName" })
+  @SpeakeasyMetadata({ data: "json, name=SyncName" })
   syncName?: string;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DiscoveryApisGetRestPathParams:
-    api: str = field(default=None, metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
-    version: str = field(default=None, metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
+    api: str = field(metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
+    version: str = field(metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,13 +23,13 @@ class DiscoveryApisGetRestQueryParams:
 
 @dataclass
 class DiscoveryApisGetRestRequest:
-    path_params: DiscoveryApisGetRestPathParams = field(default=None)
-    query_params: DiscoveryApisGetRestQueryParams = field(default=None)
+    path_params: DiscoveryApisGetRestPathParams = field()
+    query_params: DiscoveryApisGetRestQueryParams = field()
     
 
 @dataclass
 class DiscoveryApisGetRestResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rest_description: Optional[shared.RestDescription] = field(default=None)
-    status_code: int = field(default=None)
     

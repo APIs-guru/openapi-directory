@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AngleUnitsEnum } from "./angleunitsenum";
 /**
  * Elevation angle of the satellite in the sky during a contact.

@@ -1,5 +1,7 @@
 package shared
 
+// DescribedUser
+// Describes the properties of a user that was specified.
 type DescribedUser struct {
 	Arn                   string                  `json:"Arn"`
 	HomeDirectory         *string                 `json:"HomeDirectory,omitempty"`

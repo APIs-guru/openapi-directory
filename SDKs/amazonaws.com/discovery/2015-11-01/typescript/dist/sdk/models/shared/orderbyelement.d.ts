@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OrderStringEnum } from "./orderstringenum";
 /**
  * A field and direction for ordered output.

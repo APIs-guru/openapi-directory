@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -41,24 +46,24 @@ class ValidatePolicyRequestBodyPolicyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ValidatePolicyRequestBody:
-    locale: Optional[ValidatePolicyRequestBodyLocaleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locale' }})
-    policy_document: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyDocument' }})
-    policy_type: ValidatePolicyRequestBodyPolicyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyType' }})
+    policy_document: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyDocument') }})
+    policy_type: ValidatePolicyRequestBodyPolicyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyType') }})
+    locale: Optional[ValidatePolicyRequestBodyLocaleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locale') }})
     
 
 @dataclass
 class ValidatePolicyRequest:
-    query_params: ValidatePolicyQueryParams = field(default=None)
-    headers: ValidatePolicyHeaders = field(default=None)
-    request: ValidatePolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ValidatePolicyHeaders = field()
+    query_params: ValidatePolicyQueryParams = field()
+    request: ValidatePolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ValidatePolicyResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validate_policy_response: Optional[shared.ValidatePolicyResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

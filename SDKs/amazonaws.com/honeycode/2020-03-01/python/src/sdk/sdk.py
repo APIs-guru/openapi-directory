@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/honeycode/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/honeycode/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def batch_create_table_rows(self, request: operations.BatchCreateTableRowsRequest) -> operations.BatchCreateTableRowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p> The BatchCreateTableRows API allows you to create one or more rows at the end of a table in a workbook. The API allows you to specify the values to set in some or all of the columns in the new rows. </p> <p> If a column is not explicitly set in a specific row, then the column level formula specified in the table will be applied to the new row. If there is no column level formula but the last row of the table has a formula, then that formula will be copied down to the new row. If there is no column level formula and no formula in the last row of the table, then that column will be left blank for the new rows. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/rows/batchcreate", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -91,22 +120,22 @@ class SDK:
 
     
     def batch_delete_table_rows(self, request: operations.BatchDeleteTableRowsRequest) -> operations.BatchDeleteTableRowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The BatchDeleteTableRows API allows you to delete one or more rows from a table in a workbook. You need to specify the ids of the rows that you want to delete from the table. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/rows/batchdelete", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -149,22 +178,22 @@ class SDK:
 
     
     def batch_update_table_rows(self, request: operations.BatchUpdateTableRowsRequest) -> operations.BatchUpdateTableRowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p> The BatchUpdateTableRows API allows you to update one or more rows in a table in a workbook. </p> <p> You can specify the values to set in some or all of the columns in the table for the specified rows. If a column is not explicitly specified in a particular row, then that column will not be updated for that row. To clear out the data in a specific cell, you need to set the value as an empty string (\"\"). </p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/rows/batchupdate", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -207,22 +236,22 @@ class SDK:
 
     
     def batch_upsert_table_rows(self, request: operations.BatchUpsertTableRowsRequest) -> operations.BatchUpsertTableRowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p> The BatchUpsertTableRows API allows you to upsert one or more rows in a table. The upsert operation takes a filter expression as input and evaluates it to find matching rows on the destination table. If matching rows are found, it will update the cells in the matching rows to new values specified in the request. If no matching rows are found, a new row is added at the end of the table and the cells in that row are set to the new values specified in the request. </p> <p> You can specify the values to set in some or all of the columns in the table for the matching or newly appended rows. If a column is not explicitly specified for a particular row, then that column will not be updated for that row. To clear out the data in a specific cell, you need to set the value as an empty string (\"\"). </p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/rows/batchupsert", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -269,15 +298,17 @@ class SDK:
 
     
     def describe_table_data_import_job(self, request: operations.DescribeTableDataImportJobRequest) -> operations.DescribeTableDataImportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The DescribeTableDataImportJob API allows you to retrieve the status and details of a table data import job. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/import/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -316,22 +347,22 @@ class SDK:
 
     
     def get_screen_data(self, request: operations.GetScreenDataRequest) -> operations.GetScreenDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The GetScreenData API allows retrieval of data from a screen in a Honeycode app. The API allows setting local variables in the screen to filter, sort or otherwise affect what will be displayed on the screen. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/screendata"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -374,22 +405,22 @@ class SDK:
 
     
     def invoke_screen_automation(self, request: operations.InvokeScreenAutomationRequest) -> operations.InvokeScreenAutomationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The InvokeScreenAutomation API allows invoking an action defined in a screen in a Honeycode app. The API allows setting local variables, which can then be used in the automation being invoked. This allows automating the Honeycode app interactions to write, update or delete data in the workbook. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/apps/{appId}/screens/{screenId}/automations/{automationId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -440,17 +471,18 @@ class SDK:
 
     
     def list_table_columns(self, request: operations.ListTableColumnsRequest) -> operations.ListTableColumnsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The ListTableColumns API allows you to retrieve a list of all the columns in a table in a workbook. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/columns", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -493,24 +525,23 @@ class SDK:
 
     
     def list_table_rows(self, request: operations.ListTableRowsRequest) -> operations.ListTableRowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The ListTableRows API allows you to retrieve a list of all the rows in a table in a workbook. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/rows/list", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -553,17 +584,18 @@ class SDK:
 
     
     def list_tables(self, request: operations.ListTablesRequest) -> operations.ListTablesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The ListTables API allows you to retrieve a list of all the tables in a workbook. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -606,24 +638,23 @@ class SDK:
 
     
     def query_table_rows(self, request: operations.QueryTableRowsRequest) -> operations.QueryTableRowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The QueryTableRows API allows you to use a filter formula to query for specific rows in a table. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/rows/query", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -666,22 +697,22 @@ class SDK:
 
     
     def start_table_data_import_job(self, request: operations.StartTableDataImportJobRequest) -> operations.StartTableDataImportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" The StartTableDataImportJob API allows you to start an import job on a table. This API will only return the id of the job that was started. To find out the status of the import request, you need to call the DescribeTableDataImportJob API. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workbooks/{workbookId}/tables/{tableId}/import", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

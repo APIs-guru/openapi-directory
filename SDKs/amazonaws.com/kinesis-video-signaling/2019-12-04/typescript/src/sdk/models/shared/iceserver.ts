@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IceServer
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure for the ICE server connection data.
 **/
 export class IceServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=Ttl" })
+  @SpeakeasyMetadata({ data: "json, name=Ttl" })
   ttl?: number;
 
-  @Metadata({ data: "json, name=Uris" })
+  @SpeakeasyMetadata({ data: "json, name=Uris" })
   uris?: string[];
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

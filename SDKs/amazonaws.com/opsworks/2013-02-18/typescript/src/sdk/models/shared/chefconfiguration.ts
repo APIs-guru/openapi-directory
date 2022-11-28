@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChefConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the Chef configuration.
 **/
 export class ChefConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BerkshelfVersion" })
+  @SpeakeasyMetadata({ data: "json, name=BerkshelfVersion" })
   berkshelfVersion?: string;
 
-  @Metadata({ data: "json, name=ManageBerkshelf" })
+  @SpeakeasyMetadata({ data: "json, name=ManageBerkshelf" })
   manageBerkshelf?: boolean;
 }

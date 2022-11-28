@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HeldAccount } from "./heldaccount";
+
 
 
 // ListHeldAccountsResponse
@@ -8,6 +8,6 @@ import { HeldAccount } from "./heldaccount";
  * Returns a list of the accounts covered by a hold.
 **/
 export class ListHeldAccountsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts", elemType: shared.HeldAccount })
+  @SpeakeasyMetadata({ data: "json, name=accounts", elemType: HeldAccount })
   accounts?: HeldAccount[];
 }

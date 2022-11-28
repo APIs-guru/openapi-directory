@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationUpdateParameters
+// Request parameters for updating a new application.
 type ApplicationUpdateParameters struct {
 	AllowGuestsSignIn          *bool                               `json:"allowGuestsSignIn,omitempty"`
 	AllowPassthroughUsers      *bool                               `json:"allowPassthroughUsers,omitempty"`

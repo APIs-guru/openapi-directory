@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PatientSmsNotifcationRequestNotificationHip extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class PatientSmsNotifcationRequestNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContextInfo" })
+  @SpeakeasyMetadata({ data: "json, name=careContextInfo" })
   careContextInfo: string;
 
-  @Metadata({ data: "json, name=deeplinkUrl" })
+  @SpeakeasyMetadata({ data: "json, name=deeplinkUrl" })
   deeplinkUrl?: string;
 
-  @Metadata({ data: "json, name=hip" })
+  @SpeakeasyMetadata({ data: "json, name=hip" })
   hip: PatientSmsNotifcationRequestNotificationHip;
 
-  @Metadata({ data: "json, name=phoneNo" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNo" })
   phoneNo: string;
 
-  @Metadata({ data: "json, name=receiverName" })
+  @SpeakeasyMetadata({ data: "json, name=receiverName" })
   receiverName?: string;
 }
 
 
 export class PatientSmsNotifcationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification: PatientSmsNotifcationRequestNotification;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

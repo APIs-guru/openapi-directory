@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GamesPlayerLevelResource
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 1P/3P metadata about a user's level.
 **/
 export class GamesPlayerLevelResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: number;
 
-  @Metadata({ data: "json, name=maxExperiencePoints" })
+  @SpeakeasyMetadata({ data: "json, name=maxExperiencePoints" })
   maxExperiencePoints?: string;
 
-  @Metadata({ data: "json, name=minExperiencePoints" })
+  @SpeakeasyMetadata({ data: "json, name=minExperiencePoints" })
   minExperiencePoints?: string;
 }

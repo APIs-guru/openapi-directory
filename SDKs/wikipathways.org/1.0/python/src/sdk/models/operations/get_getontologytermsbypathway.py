@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetGetOntologyTermsByPathwayFormatEnum(str, Enum):
     JSON = "json"
@@ -12,17 +13,17 @@ class GetGetOntologyTermsByPathwayFormatEnum(str, Enum):
 
 @dataclass
 class GetGetOntologyTermsByPathwayQueryParams:
+    pw_id: str = field(metadata={'query_param': { 'field_name': 'pwId', 'style': 'form', 'explode': True }})
     format: Optional[GetGetOntologyTermsByPathwayFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    pw_id: str = field(default=None, metadata={'query_param': { 'field_name': 'pwId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetGetOntologyTermsByPathwayRequest:
-    query_params: GetGetOntologyTermsByPathwayQueryParams = field(default=None)
+    query_params: GetGetOntologyTermsByPathwayQueryParams = field()
     
 
 @dataclass
 class GetGetOntologyTermsByPathwayResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

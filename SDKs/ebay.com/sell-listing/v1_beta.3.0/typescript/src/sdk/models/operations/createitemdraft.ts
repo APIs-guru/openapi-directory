@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateItemDraftHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Language" })
   contentLanguage?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" })
   xEbayCMarketplaceId: string;
 }
 
 
 export class CreateItemDraftSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class CreateItemDraftRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateItemDraftHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ItemDraft;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateItemDraftSecurity;
 }
 
 
 export class CreateItemDraftResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itemDraftResponse?: shared.ItemDraftResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

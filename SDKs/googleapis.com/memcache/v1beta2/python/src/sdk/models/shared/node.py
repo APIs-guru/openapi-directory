@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import memcacheparameters
+from sdk import utils
+from . import *
 
 class NodeStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -14,11 +19,11 @@ class NodeStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Node:
-    host: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'host' }})
-    node_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeId' }})
-    parameters: Optional[memcacheparameters.MemcacheParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
-    port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    state: Optional[NodeStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    update_available: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateAvailable' }})
-    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zone' }})
+    host: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('host') }})
+    node_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodeId') }})
+    parameters: Optional[MemcacheParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
+    port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('port') }})
+    state: Optional[NodeStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    update_available: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateAvailable') }})
+    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zone') }})
     

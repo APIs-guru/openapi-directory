@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum EndpointSeverityEnum {
     SeverityUnspecified = "SEVERITY_UNSPECIFIED",
     Informational = "INFORMATIONAL",
@@ -13,6 +13,16 @@ export declare enum EndpointStateEnum {
     Ready = "READY",
     Deleting = "DELETING",
     Updating = "UPDATING"
+}
+/**
+ * Endpoint describes a single IDS endpoint. It defines a forwarding rule to which packets can be sent for IDS inspection.
+**/
+export declare class EndpointInput extends SpeakeasyBase {
+    description?: string;
+    labels?: Map<string, string>;
+    network?: string;
+    severity?: EndpointSeverityEnum;
+    trafficLogs?: boolean;
 }
 /**
  * Endpoint describes a single IDS endpoint. It defines a forwarding rule to which packets can be sent for IDS inspection.

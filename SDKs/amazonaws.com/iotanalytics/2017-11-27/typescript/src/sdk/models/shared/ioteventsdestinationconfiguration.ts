@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IotEventsDestinationConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information for delivery of dataset contents to IoT Events.
 **/
 export class IotEventsDestinationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputName" })
+  @SpeakeasyMetadata({ data: "json, name=inputName" })
   inputName: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

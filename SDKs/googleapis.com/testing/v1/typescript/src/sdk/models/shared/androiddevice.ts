@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AndroidDevice
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single Android device.
 **/
 export class AndroidDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidModelId" })
+  @SpeakeasyMetadata({ data: "json, name=androidModelId" })
   androidModelId?: string;
 
-  @Metadata({ data: "json, name=androidVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=androidVersionId" })
   androidVersionId?: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=orientation" })
+  @SpeakeasyMetadata({ data: "json, name=orientation" })
   orientation?: string;
 }

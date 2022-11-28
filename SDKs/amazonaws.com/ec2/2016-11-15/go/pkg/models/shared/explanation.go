@@ -1,0 +1,51 @@
+package shared
+
+// Explanation
+// Describes an explanation code for an unreachable path. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html">Reachability Analyzer explanation codes</a>.
+type Explanation struct {
+	ACL                         *AnalysisComponent
+	ACLRule                     *AnalysisACLRule
+	Address                     *string
+	Addresses                   []string
+	AttachedTo                  *AnalysisComponent
+	AvailabilityZones           []string
+	Cidrs                       []string
+	ClassicLoadBalancerListener *AnalysisLoadBalancerListener
+	Component                   *AnalysisComponent
+	CustomerGateway             *AnalysisComponent
+	Destination                 *AnalysisComponent
+	DestinationVpc              *AnalysisComponent
+	Direction                   *string
+	ElasticLoadBalancerListener *AnalysisComponent
+	ExplanationCode             *string
+	IngressRouteTable           *AnalysisComponent
+	InternetGateway             *AnalysisComponent
+	LoadBalancerArn             *string
+	LoadBalancerListenerPort    *int64
+	LoadBalancerTarget          *AnalysisLoadBalancerTarget
+	LoadBalancerTargetGroup     *AnalysisComponent
+	LoadBalancerTargetGroups    []AnalysisComponent
+	LoadBalancerTargetPort      *int64
+	MissingComponent            *string
+	NatGateway                  *AnalysisComponent
+	NetworkInterface            *AnalysisComponent
+	PacketField                 *string
+	Port                        *int64
+	PortRanges                  []PortRange
+	PrefixList                  *AnalysisComponent
+	Protocols                   []string
+	RouteTable                  *AnalysisComponent
+	RouteTableRoute             *AnalysisRouteTableRoute
+	SecurityGroup               *AnalysisComponent
+	SecurityGroupRule           *AnalysisSecurityGroupRule
+	SecurityGroups              []AnalysisComponent
+	SourceVpc                   *AnalysisComponent
+	State                       *string
+	Subnet                      *AnalysisComponent
+	SubnetRouteTable            *AnalysisComponent
+	Vpc                         *AnalysisComponent
+	VpcEndpoint                 *AnalysisComponent
+	VpcPeeringConnection        *AnalysisComponent
+	VpnConnection               *AnalysisComponent
+	VpnGateway                  *AnalysisComponent
+}

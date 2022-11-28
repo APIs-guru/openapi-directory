@@ -12,17 +12,17 @@ class SyncPlaySetIgnoreWaitRequests:
 
 @dataclass
 class SyncPlaySetIgnoreWaitSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SyncPlaySetIgnoreWaitRequest:
-    request: SyncPlaySetIgnoreWaitRequests = field(default=None)
-    security: SyncPlaySetIgnoreWaitSecurity = field(default=None)
+    request: SyncPlaySetIgnoreWaitRequests = field()
+    security: SyncPlaySetIgnoreWaitSecurity = field()
     
 
 @dataclass
 class SyncPlaySetIgnoreWaitResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

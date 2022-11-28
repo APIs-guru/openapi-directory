@@ -10,11 +10,6 @@ type RetrievePricingCountryQueryParams struct {
 	Country   string `queryParam:"style=form,explode=true,name=country"`
 }
 
-type RetrievePricingCountryRequest struct {
-	PathParams  RetrievePricingCountryPathParams
-	QueryParams RetrievePricingCountryQueryParams
-}
-
 type RetrievePricingCountry400ApplicationJSONInvalidParameters struct {
 	Message   *string `json:"message,omitempty"`
 	Parameter *string `json:"parameter,omitempty"`
@@ -30,6 +25,11 @@ type RetrievePricingCountry401ApplicationJSON struct {
 	Code           string `json:"code"`
 	Currency       string `json:"currency"`
 	ErrorCodeLabel string `json:"error-code-label"`
+}
+
+type RetrievePricingCountryRequest struct {
+	PathParams  RetrievePricingCountryPathParams
+	QueryParams RetrievePricingCountryQueryParams
 }
 
 type RetrievePricingCountryResponse struct {

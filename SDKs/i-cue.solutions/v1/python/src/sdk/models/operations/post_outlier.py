@@ -17,14 +17,14 @@ class PostOutlierRequests:
 
 @dataclass
 class PostOutlierRequest:
-    headers: PostOutlierHeaders = field(default=None)
+    headers: PostOutlierHeaders = field()
     request: Optional[PostOutlierRequests] = field(default=None)
     
 
 @dataclass
 class PostOutlierResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     time_series_outliers_responses: Optional[List[shared.TimeSeriesOutliersResponse]] = field(default=None)
     

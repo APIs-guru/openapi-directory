@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SocketAddressProtocolEnum {
-    Tcp = "TCP"
-,    Udp = "UDP"
+    Tcp = "TCP",
+    Udp = "UDP"
 }
 
 
@@ -11,21 +12,21 @@ export enum SocketAddressProtocolEnum {
  * [#next-free-field: 7]
 **/
 export class SocketAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=ipv4Compat" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4Compat" })
   ipv4Compat?: boolean;
 
-  @Metadata({ data: "json, name=namedPort" })
+  @SpeakeasyMetadata({ data: "json, name=namedPort" })
   namedPort?: string;
 
-  @Metadata({ data: "json, name=portValue" })
+  @SpeakeasyMetadata({ data: "json, name=portValue" })
   portValue?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: SocketAddressProtocolEnum;
 
-  @Metadata({ data: "json, name=resolverName" })
+  @SpeakeasyMetadata({ data: "json, name=resolverName" })
   resolverName?: string;
 }

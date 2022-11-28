@@ -1,5 +1,7 @@
 package shared
 
+// Cluster
+// Contains all of the attributes of a specific cluster.
 type Cluster struct {
 	ACLName                 *string                   `json:"ACLName,omitempty"`
 	Arn                     *string                   `json:"ARN,omitempty"`

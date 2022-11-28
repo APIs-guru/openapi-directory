@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GuestAccelerator
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specification of a set of guest accelerators attached to a machine.
 **/
 export class GuestAccelerator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceleratorCount" })
+  @SpeakeasyMetadata({ data: "json, name=acceleratorCount" })
   acceleratorCount?: string;
 
-  @Metadata({ data: "json, name=acceleratorType" })
+  @SpeakeasyMetadata({ data: "json, name=acceleratorType" })
   acceleratorType?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FloodlightActivityGroup } from "./floodlightactivitygroup";
+
 
 
 // FloodlightActivityGroupsListResponse
@@ -8,12 +8,12 @@ import { FloodlightActivityGroup } from "./floodlightactivitygroup";
  * Floodlight Activity Group List Response
 **/
 export class FloodlightActivityGroupsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floodlightActivityGroups", elemType: shared.FloodlightActivityGroup })
+  @SpeakeasyMetadata({ data: "json, name=floodlightActivityGroups", elemType: FloodlightActivityGroup })
   floodlightActivityGroups?: FloodlightActivityGroup[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

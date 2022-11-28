@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,24 +21,24 @@ class RestoreDomainAccessHeaders:
 @dataclass_json
 @dataclass
 class RestoreDomainAccessRequestBody:
-    domain_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainName' }})
-    fleet_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
+    domain_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainName') }})
+    fleet_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
     
 
 @dataclass
 class RestoreDomainAccessRequest:
-    headers: RestoreDomainAccessHeaders = field(default=None)
-    request: RestoreDomainAccessRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RestoreDomainAccessHeaders = field()
+    request: RestoreDomainAccessRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RestoreDomainAccessResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_error_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     restore_domain_access_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

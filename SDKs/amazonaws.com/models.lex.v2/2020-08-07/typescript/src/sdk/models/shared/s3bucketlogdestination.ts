@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3BucketLogDestination
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies an Amazon S3 bucket for logging audio conversations
 **/
 export class S3BucketLogDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyArn" })
   kmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=logPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=logPrefix" })
   logPrefix: string;
 
-  @Metadata({ data: "json, name=s3BucketArn" })
+  @SpeakeasyMetadata({ data: "json, name=s3BucketArn" })
   s3BucketArn: string;
 }

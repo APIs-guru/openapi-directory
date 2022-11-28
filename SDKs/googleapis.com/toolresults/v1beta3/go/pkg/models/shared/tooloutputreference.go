@@ -1,5 +1,7 @@
 package shared
 
+// ToolOutputReference
+// A reference to a ToolExecution output file.
 type ToolOutputReference struct {
 	CreationTime *Timestamp         `json:"creationTime,omitempty"`
 	Output       *FileReference     `json:"output,omitempty"`

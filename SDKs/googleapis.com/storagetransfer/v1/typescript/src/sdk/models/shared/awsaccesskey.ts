@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsAccessKey
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AWS access key (see [AWS Security Credentials](https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html)). For information on our data retention policy for user credentials, see [User credentials](/storage-transfer/docs/data-retention#user-credentials).
 **/
 export class AwsAccessKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=accessKeyId" })
   accessKeyId?: string;
 
-  @Metadata({ data: "json, name=secretAccessKey" })
+  @SpeakeasyMetadata({ data: "json, name=secretAccessKey" })
   secretAccessKey?: string;
 }

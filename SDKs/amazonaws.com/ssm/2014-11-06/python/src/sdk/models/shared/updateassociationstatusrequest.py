@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import associationstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateAssociationStatusRequest:
-    association_status: associationstatus.AssociationStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssociationStatus' }})
-    instance_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceId' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    association_status: AssociationStatus = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssociationStatus') }})
+    instance_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceId') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

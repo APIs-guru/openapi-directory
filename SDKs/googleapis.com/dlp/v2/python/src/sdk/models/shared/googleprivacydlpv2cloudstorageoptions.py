@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2fileset
+from sdk import utils
+from . import *
 
 class GooglePrivacyDlpV2CloudStorageOptionsFileTypesEnum(str, Enum):
     FILE_TYPE_UNSPECIFIED = "FILE_TYPE_UNSPECIFIED"
@@ -25,10 +27,14 @@ class GooglePrivacyDlpV2CloudStorageOptionsSampleMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2CloudStorageOptions:
-    bytes_limit_per_file: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bytesLimitPerFile' }})
-    bytes_limit_per_file_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bytesLimitPerFilePercent' }})
-    file_set: Optional[googleprivacydlpv2fileset.GooglePrivacyDlpV2FileSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileSet' }})
-    file_types: Optional[List[GooglePrivacyDlpV2CloudStorageOptionsFileTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileTypes' }})
-    files_limit_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filesLimitPercent' }})
-    sample_method: Optional[GooglePrivacyDlpV2CloudStorageOptionsSampleMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampleMethod' }})
+    r"""GooglePrivacyDlpV2CloudStorageOptions
+    Options defining a file or a set of files within a Cloud Storage bucket.
+    """
+    
+    bytes_limit_per_file: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bytesLimitPerFile') }})
+    bytes_limit_per_file_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bytesLimitPerFilePercent') }})
+    file_set: Optional[GooglePrivacyDlpV2FileSet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileSet') }})
+    file_types: Optional[List[GooglePrivacyDlpV2CloudStorageOptionsFileTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileTypes') }})
+    files_limit_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filesLimitPercent') }})
+    sample_method: Optional[GooglePrivacyDlpV2CloudStorageOptionsSampleMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampleMethod') }})
     

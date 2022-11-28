@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateProvisionedProductPlanOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PlanId" })
+  @SpeakeasyMetadata({ data: "json, name=PlanId" })
   planId?: string;
 
-  @Metadata({ data: "json, name=PlanName" })
+  @SpeakeasyMetadata({ data: "json, name=PlanName" })
   planName?: string;
 
-  @Metadata({ data: "json, name=ProvisionProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionProductId" })
   provisionProductId?: string;
 
-  @Metadata({ data: "json, name=ProvisionedProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" })
   provisionedProductName?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId?: string;
 }

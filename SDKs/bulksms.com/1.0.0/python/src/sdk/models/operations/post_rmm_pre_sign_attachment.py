@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PostRmmPreSignAttachmentSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostRmmPreSignAttachmentRequest:
-    request: shared.PreSignRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostRmmPreSignAttachmentSecurity = field(default=None)
+    request: shared.PreSignRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: PostRmmPreSignAttachmentSecurity = field()
     
 
 @dataclass
 class PostRmmPreSignAttachmentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pre_sign_info: Optional[shared.PreSignInfo] = field(default=None)
-    status_code: int = field(default=None)
     

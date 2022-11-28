@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class OAuth2PermissionGrantListResult:
-    odata_next_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'odata.nextLink' }})
-    value: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""OAuth2PermissionGrantListResult
+    Server response for get oauth2 permissions grants
+    """
+    
+    odata_next_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('odata.nextLink') }})
+    value: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

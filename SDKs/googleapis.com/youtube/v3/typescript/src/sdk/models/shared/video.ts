@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoAgeGating } from "./videoagegating";
 import { VideoContentDetails } from "./videocontentdetails";
 import { VideoFileDetails } from "./videofiledetails";
@@ -16,62 +15,63 @@ import { VideoSuggestions } from "./videosuggestions";
 import { VideoTopicDetails } from "./videotopicdetails";
 
 
+
 // Video
 /** 
  * A *video* resource represents a YouTube video.
 **/
 export class Video extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ageGating" })
+  @SpeakeasyMetadata({ data: "json, name=ageGating" })
   ageGating?: VideoAgeGating;
 
-  @Metadata({ data: "json, name=contentDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentDetails" })
   contentDetails?: VideoContentDetails;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=fileDetails" })
+  @SpeakeasyMetadata({ data: "json, name=fileDetails" })
   fileDetails?: VideoFileDetails;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=liveStreamingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=liveStreamingDetails" })
   liveStreamingDetails?: VideoLiveStreamingDetails;
 
-  @Metadata({ data: "json, name=localizations", elemType: shared.VideoLocalization })
+  @SpeakeasyMetadata({ data: "json, name=localizations", elemType: VideoLocalization })
   localizations?: Map<string, VideoLocalization>;
 
-  @Metadata({ data: "json, name=monetizationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=monetizationDetails" })
   monetizationDetails?: VideoMonetizationDetails;
 
-  @Metadata({ data: "json, name=player" })
+  @SpeakeasyMetadata({ data: "json, name=player" })
   player?: VideoPlayer;
 
-  @Metadata({ data: "json, name=processingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=processingDetails" })
   processingDetails?: VideoProcessingDetails;
 
-  @Metadata({ data: "json, name=projectDetails" })
+  @SpeakeasyMetadata({ data: "json, name=projectDetails" })
   projectDetails?: Map<string, any>;
 
-  @Metadata({ data: "json, name=recordingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=recordingDetails" })
   recordingDetails?: VideoRecordingDetails;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: VideoSnippet;
 
-  @Metadata({ data: "json, name=statistics" })
+  @SpeakeasyMetadata({ data: "json, name=statistics" })
   statistics?: VideoStatistics;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: VideoStatus;
 
-  @Metadata({ data: "json, name=suggestions" })
+  @SpeakeasyMetadata({ data: "json, name=suggestions" })
   suggestions?: VideoSuggestions;
 
-  @Metadata({ data: "json, name=topicDetails" })
+  @SpeakeasyMetadata({ data: "json, name=topicDetails" })
   topicDetails?: VideoTopicDetails;
 }

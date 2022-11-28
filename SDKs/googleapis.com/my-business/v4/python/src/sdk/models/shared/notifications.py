@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class NotificationsNotificationTypesEnum(str, Enum):
     NOTIFICATION_TYPE_UNSPECIFIED = "NOTIFICATION_TYPE_UNSPECIFIED"
@@ -18,7 +23,11 @@ class NotificationsNotificationTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Notifications:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    notification_types: Optional[List[NotificationsNotificationTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notificationTypes' }})
-    topic_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topicName' }})
+    r"""Notifications
+    A Google Cloud Pub/Sub topic where notifications can be published when a location is updated or has a new review. There will be only one notification settings resource per-account.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notification_types: Optional[List[NotificationsNotificationTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notificationTypes') }})
+    topic_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topicName') }})
     

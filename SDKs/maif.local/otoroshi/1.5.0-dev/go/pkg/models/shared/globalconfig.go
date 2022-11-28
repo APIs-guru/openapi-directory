@@ -1,5 +1,7 @@
 package shared
 
+// GlobalConfig
+// The global config object of Otoroshi, used to customize settings of the current Otoroshi instance
 type GlobalConfig struct {
 	AlertsEmails            []string        `json:"alertsEmails"`
 	AlertsWebhooks          []Webhook       `json:"alertsWebhooks"`

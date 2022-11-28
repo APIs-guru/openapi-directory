@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DisruptionsGetDisruptionsByRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=route_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=route_id" })
   routeId: number;
 }
 
 export enum DisruptionsGetDisruptionsByRouteDisruptionStatusEnum {
-    Current = "current"
-,    Planned = "planned"
+    Current = "current",
+    Planned = "planned"
 }
 
 
 export class DisruptionsGetDisruptionsByRouteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=devid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=devid" })
   devid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=disruption_status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=disruption_status" })
   disruptionStatus?: DisruptionsGetDisruptionsByRouteDisruptionStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=signature" })
   signature?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token?: string;
 }
 
 
 export class DisruptionsGetDisruptionsByRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DisruptionsGetDisruptionsByRoutePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DisruptionsGetDisruptionsByRouteQueryParams;
 }
 
 
 export class DisruptionsGetDisruptionsByRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3DisruptionsResponse?: shared.V3DisruptionsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3ErrorResponse?: shared.V3ErrorResponse;
 }

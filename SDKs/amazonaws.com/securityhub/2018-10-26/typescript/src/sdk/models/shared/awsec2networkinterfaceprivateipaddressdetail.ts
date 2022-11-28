@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2NetworkInterfacePrivateIpAddressDetail
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about a private IPv4 address that is with the network interface.
 **/
 export class AwsEc2NetworkInterfacePrivateIpAddressDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PrivateDnsName" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateDnsName" })
   privateDnsName?: string;
 
-  @Metadata({ data: "json, name=PrivateIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateIpAddress" })
   privateIpAddress?: string;
 }

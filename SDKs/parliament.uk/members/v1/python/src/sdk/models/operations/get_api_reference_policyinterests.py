@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIReferencePolicyInterestsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     generic_reference_data: Optional[List[shared.GenericReferenceData]] = field(default=None)
-    status_code: int = field(default=None)
     

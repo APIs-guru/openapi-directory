@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Cell
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the location of an occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file.
 **/
 export class Cell extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cellReference" })
+  @SpeakeasyMetadata({ data: "json, name=cellReference" })
   cellReference?: string;
 
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: number;
 
-  @Metadata({ data: "json, name=columnName" })
+  @SpeakeasyMetadata({ data: "json, name=columnName" })
   columnName?: string;
 
-  @Metadata({ data: "json, name=row" })
+  @SpeakeasyMetadata({ data: "json, name=row" })
   row?: number;
 }

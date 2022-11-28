@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class MergeCapacityCommitmentsRequest:
-    capacity_commitment_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capacityCommitmentIds' }})
+    r"""MergeCapacityCommitmentsRequest
+    The request for ReservationService.MergeCapacityCommitments.
+    """
+    
+    capacity_commitment_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('capacityCommitmentIds') }})
     

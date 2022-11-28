@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupCertificateAuthorityProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a certificate authority for a group.
 **/
 export class GroupCertificateAuthorityProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupCertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorityArn" })
   groupCertificateAuthorityArn?: string;
 
-  @Metadata({ data: "json, name=GroupCertificateAuthorityId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorityId" })
   groupCertificateAuthorityId?: string;
 }

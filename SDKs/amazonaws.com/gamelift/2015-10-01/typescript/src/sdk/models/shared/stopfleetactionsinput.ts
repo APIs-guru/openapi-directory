@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FleetActionEnum } from "./fleetactionenum";
+
 
 
 // StopFleetActionsInput
@@ -7,12 +8,12 @@ import { FleetActionEnum } from "./fleetactionenum";
  * Represents the input for a request operation.
 **/
 export class StopFleetActionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Actions" })
+  @SpeakeasyMetadata({ data: "json, name=Actions" })
   actions: FleetActionEnum[];
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 }

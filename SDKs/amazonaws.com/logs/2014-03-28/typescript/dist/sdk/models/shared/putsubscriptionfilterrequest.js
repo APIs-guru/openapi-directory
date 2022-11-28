@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistributionEnum } from "./distributionenum";
 var PutSubscriptionFilterRequest = /** @class */ (function (_super) {
     __extends(PutSubscriptionFilterRequest, _super);
@@ -30,27 +30,27 @@ var PutSubscriptionFilterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destinationArn" }),
+        SpeakeasyMetadata({ data: "json, name=destinationArn" }),
         __metadata("design:type", String)
     ], PutSubscriptionFilterRequest.prototype, "destinationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=distribution" }),
+        SpeakeasyMetadata({ data: "json, name=distribution" }),
         __metadata("design:type", String)
     ], PutSubscriptionFilterRequest.prototype, "distribution", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterName" }),
+        SpeakeasyMetadata({ data: "json, name=filterName" }),
         __metadata("design:type", String)
     ], PutSubscriptionFilterRequest.prototype, "filterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterPattern" }),
+        SpeakeasyMetadata({ data: "json, name=filterPattern" }),
         __metadata("design:type", String)
     ], PutSubscriptionFilterRequest.prototype, "filterPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], PutSubscriptionFilterRequest.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], PutSubscriptionFilterRequest.prototype, "roleArn", void 0);
     return PutSubscriptionFilterRequest;

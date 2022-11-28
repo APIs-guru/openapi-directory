@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CharityOrg } from "./charityorg";
 /**
  * A single set of search results, with information for accessing other sets.

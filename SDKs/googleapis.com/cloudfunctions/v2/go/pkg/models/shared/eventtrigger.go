@@ -8,6 +8,8 @@ const (
 	EventTriggerRetryPolicyEnumRetryPolicyRetry       EventTriggerRetryPolicyEnum = "RETRY_POLICY_RETRY"
 )
 
+// EventTrigger
+// Describes EventTrigger, used to request events to be sent from another service.
 type EventTrigger struct {
 	Channel             *string                      `json:"channel,omitempty"`
 	EventFilters        []EventFilter                `json:"eventFilters,omitempty"`
@@ -16,5 +18,17 @@ type EventTrigger struct {
 	RetryPolicy         *EventTriggerRetryPolicyEnum `json:"retryPolicy,omitempty"`
 	ServiceAccountEmail *string                      `json:"serviceAccountEmail,omitempty"`
 	Trigger             *string                      `json:"trigger,omitempty"`
+	TriggerRegion       *string                      `json:"triggerRegion,omitempty"`
+}
+
+// EventTriggerInput
+// Describes EventTrigger, used to request events to be sent from another service.
+type EventTriggerInput struct {
+	Channel             *string                      `json:"channel,omitempty"`
+	EventFilters        []EventFilter                `json:"eventFilters,omitempty"`
+	EventType           *string                      `json:"eventType,omitempty"`
+	PubsubTopic         *string                      `json:"pubsubTopic,omitempty"`
+	RetryPolicy         *EventTriggerRetryPolicyEnum `json:"retryPolicy,omitempty"`
+	ServiceAccountEmail *string                      `json:"serviceAccountEmail,omitempty"`
 	TriggerRegion       *string                      `json:"triggerRegion,omitempty"`
 }

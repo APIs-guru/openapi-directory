@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TlsValidationContextFileTrust } from "./tlsvalidationcontextfiletrust";
 import { TlsValidationContextSdsTrust } from "./tlsvalidationcontextsdstrust";
+
 
 
 // ListenerTlsValidationContextTrust
@@ -8,9 +9,9 @@ import { TlsValidationContextSdsTrust } from "./tlsvalidationcontextsdstrust";
  * An object that represents a listener's Transport Layer Security (TLS) validation context trust.
 **/
 export class ListenerTlsValidationContextTrust extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: TlsValidationContextFileTrust;
 
-  @Metadata({ data: "json, name=sds" })
+  @SpeakeasyMetadata({ data: "json, name=sds" })
   sds?: TlsValidationContextSdsTrust;
 }

@@ -10,11 +10,11 @@ class GetAdminRequestsQueryParams:
 
 @dataclass
 class GetAdminRequestsRequest:
-    query_params: GetAdminRequestsQueryParams = field(default=None)
+    query_params: GetAdminRequestsQueryParams = field()
     
 
 @dataclass
 class GetAdminRequestsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

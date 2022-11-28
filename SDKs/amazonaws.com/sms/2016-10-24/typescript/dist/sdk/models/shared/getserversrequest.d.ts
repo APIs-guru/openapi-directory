@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VmServerAddress } from "./vmserveraddress";
 export declare class GetServersRequest extends SpeakeasyBase {
     maxResults?: number;

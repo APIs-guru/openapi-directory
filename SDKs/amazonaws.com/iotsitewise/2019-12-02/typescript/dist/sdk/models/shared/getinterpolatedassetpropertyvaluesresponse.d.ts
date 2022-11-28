@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InterpolatedAssetPropertyValue } from "./interpolatedassetpropertyvalue";
 export declare class GetInterpolatedAssetPropertyValuesResponse extends SpeakeasyBase {
     interpolatedAssetPropertyValues: InterpolatedAssetPropertyValue[];

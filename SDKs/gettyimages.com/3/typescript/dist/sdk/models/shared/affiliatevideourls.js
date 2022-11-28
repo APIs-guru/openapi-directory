@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AffiliateVideoUrls = /** @class */ (function (_super) {
     __extends(AffiliateVideoUrls, _super);
     function AffiliateVideoUrls() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=large_motion" }),
+        SpeakeasyMetadata({ data: "json, name=large_motion" }),
         __metadata("design:type", String)
     ], AffiliateVideoUrls.prototype, "largeMotion", void 0);
     __decorate([
-        Metadata({ data: "json, name=large_still" }),
+        SpeakeasyMetadata({ data: "json, name=large_still" }),
         __metadata("design:type", String)
     ], AffiliateVideoUrls.prototype, "largeStill", void 0);
     __decorate([
-        Metadata({ data: "json, name=medium_still" }),
+        SpeakeasyMetadata({ data: "json, name=medium_still" }),
         __metadata("design:type", String)
     ], AffiliateVideoUrls.prototype, "mediumStill", void 0);
     __decorate([
-        Metadata({ data: "json, name=small_motion" }),
+        SpeakeasyMetadata({ data: "json, name=small_motion" }),
         __metadata("design:type", String)
     ], AffiliateVideoUrls.prototype, "smallMotion", void 0);
     __decorate([
-        Metadata({ data: "json, name=small_still" }),
+        SpeakeasyMetadata({ data: "json, name=small_still" }),
         __metadata("design:type", String)
     ], AffiliateVideoUrls.prototype, "smallStill", void 0);
     return AffiliateVideoUrls;

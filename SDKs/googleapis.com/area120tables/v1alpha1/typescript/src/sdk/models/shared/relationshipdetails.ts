@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelationshipDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a relationship column.
 **/
 export class RelationshipDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linkedTable" })
+  @SpeakeasyMetadata({ data: "json, name=linkedTable" })
   linkedTable?: string;
 }

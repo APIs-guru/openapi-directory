@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SupportingWorkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=goal_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=goal_gid" })
   goalGid: string;
 }
 
 
 export class SupportingWorkQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class SupportingWorkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SupportingWorkPathParams;
-
-  @Metadata()
-  queryParams: SupportingWorkQueryParams;
-}
-
-
 export class SupportingWork200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.ProjectCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.ProjectCompact })
   data?: shared.ProjectCompact[];
 }
 
 
+export class SupportingWorkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SupportingWorkPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: SupportingWorkQueryParams;
+}
+
+
 export class SupportingWorkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   supportingWork200ApplicationJsonObject?: SupportingWork200ApplicationJson;
 }

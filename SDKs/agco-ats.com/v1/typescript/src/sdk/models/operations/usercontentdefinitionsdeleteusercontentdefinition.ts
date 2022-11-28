@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserContentDefinitionsDeleteUserContentDefinitionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userContentDefinitionID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userContentDefinitionID" })
   userContentDefinitionId: number;
 }
 
 
 export class UserContentDefinitionsDeleteUserContentDefinitionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UserContentDefinitionsDeleteUserContentDefinitionPathParams;
 }
 
 
 export class UserContentDefinitionsDeleteUserContentDefinitionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VoiceChannelResponse } from "./voicechannelresponse";
 
 
+
 export class UpdateVoiceChannelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=VoiceChannelResponse" })
+  @SpeakeasyMetadata({ data: "json, name=VoiceChannelResponse" })
   voiceChannelResponse: VoiceChannelResponse;
 }

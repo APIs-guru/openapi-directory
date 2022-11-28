@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Fileshare extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity?: number;
 
-  @Metadata({ data: "json, name=created_date" })
+  @SpeakeasyMetadata({ data: "json, name=created_date" })
   createdDate?: string;
 
-  @Metadata({ data: "json, name=fsName" })
+  @SpeakeasyMetadata({ data: "json, name=fsName" })
   fsName?: string;
 
-  @Metadata({ data: "json, name=hostPath" })
+  @SpeakeasyMetadata({ data: "json, name=hostPath" })
   hostPath?: string;
 
-  @Metadata({ data: "json, name=iops" })
+  @SpeakeasyMetadata({ data: "json, name=iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=iopsTotal" })
+  @SpeakeasyMetadata({ data: "json, name=iopsTotal" })
   iopsTotal?: number;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: string;
 
-  @Metadata({ data: "json, name=spaceGuid" })
+  @SpeakeasyMetadata({ data: "json, name=spaceGuid" })
   spaceGuid?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=updated_date" })
+  @SpeakeasyMetadata({ data: "json, name=updated_date" })
   updatedDate?: string;
 }

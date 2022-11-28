@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceDetail } from "./compliancedetail";
 /**
  * This type is used by each listing violation that is returned under the listingViolations container.

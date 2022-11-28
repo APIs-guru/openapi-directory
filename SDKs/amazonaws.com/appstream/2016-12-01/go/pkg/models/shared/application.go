@@ -1,5 +1,7 @@
 package shared
 
+// Application
+// Describes an application in the application catalog.
 type Application struct {
 	DisplayName      *string           `json:"DisplayName,omitempty"`
 	Enabled          *bool             `json:"Enabled,omitempty"`

@@ -1,51 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UsersGetContextForUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 export enum UsersGetContextForUserSubjectTypeEnum {
-    Organization = "organization"
-,    Repository = "repository"
-,    Issue = "issue"
-,    PullRequest = "pull_request"
+    Organization = "organization",
+    Repository = "repository",
+    Issue = "issue",
+    PullRequest = "pull_request"
 }
 
 
 export class UsersGetContextForUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subject_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subject_id" })
   subjectId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subject_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subject_type" })
   subjectType?: UsersGetContextForUserSubjectTypeEnum;
 }
 
 
 export class UsersGetContextForUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UsersGetContextForUserPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UsersGetContextForUserQueryParams;
 }
 
 
 export class UsersGetContextForUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   hovercard?: shared.Hovercard;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

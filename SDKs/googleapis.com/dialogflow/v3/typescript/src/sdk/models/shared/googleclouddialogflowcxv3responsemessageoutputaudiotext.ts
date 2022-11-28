@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3ResponseMessageOutputAudioText
@@ -6,12 +7,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A text or ssml response that is preferentially used for TTS output audio synthesis, as described in the comment on the ResponseMessage message.
 **/
 export class GoogleCloudDialogflowCxV3ResponseMessageOutputAudioText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowPlaybackInterruption" })
+  @SpeakeasyMetadata({ data: "json, name=allowPlaybackInterruption" })
   allowPlaybackInterruption?: boolean;
 
-  @Metadata({ data: "json, name=ssml" })
+  @SpeakeasyMetadata({ data: "json, name=ssml" })
   ssml?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
+  text?: string;
+}
+
+
+// GoogleCloudDialogflowCxV3ResponseMessageOutputAudioTextInput
+/** 
+ * A text or ssml response that is preferentially used for TTS output audio synthesis, as described in the comment on the ResponseMessage message.
+**/
+export class GoogleCloudDialogflowCxV3ResponseMessageOutputAudioTextInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ssml" })
+  ssml?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

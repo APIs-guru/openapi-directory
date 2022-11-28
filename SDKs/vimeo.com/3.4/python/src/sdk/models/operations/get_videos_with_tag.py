@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVideosWithTagPathParams:
-    word: str = field(default=None, metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
+    word: str = field(metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
     
 class GetVideosWithTagDirectionEnum(str, Enum):
     ASC = "asc"
@@ -27,14 +28,14 @@ class GetVideosWithTagQueryParams:
 
 @dataclass
 class GetVideosWithTagRequest:
-    path_params: GetVideosWithTagPathParams = field(default=None)
-    query_params: GetVideosWithTagQueryParams = field(default=None)
+    path_params: GetVideosWithTagPathParams = field()
+    query_params: GetVideosWithTagQueryParams = field()
     
 
 @dataclass
 class GetVideosWithTagResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     videos: Optional[List[shared.Video]] = field(default=None)
     

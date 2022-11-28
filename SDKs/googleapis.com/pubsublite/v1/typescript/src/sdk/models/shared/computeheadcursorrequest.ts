@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComputeHeadCursorRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Compute the current head cursor for a partition.
 **/
 export class ComputeHeadCursorRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partition" })
+  @SpeakeasyMetadata({ data: "json, name=partition" })
   partition?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageReportExecutionErrorCodeEnum } from "./usagereportexecutionerrorcodeenum";
+
 
 
 // LastReportGenerationExecutionError
@@ -7,9 +8,9 @@ import { UsageReportExecutionErrorCodeEnum } from "./usagereportexecutionerrorco
  * Describes the error that is returned when a usage report can't be generated.
 **/
 export class LastReportGenerationExecutionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: UsageReportExecutionErrorCodeEnum;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 }

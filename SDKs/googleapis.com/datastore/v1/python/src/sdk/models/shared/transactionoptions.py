@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import readonly
-from . import readwrite
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransactionOptions:
-    read_only: Optional[readonly.ReadOnly] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readOnly' }})
-    read_write: Optional[readwrite.ReadWrite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readWrite' }})
+    r"""TransactionOptions
+    Options for beginning a new transaction. Transactions can be created explicitly with calls to Datastore.BeginTransaction or implicitly by setting ReadOptions.new_transaction in read requests.
+    """
+    
+    read_only: Optional[ReadOnly] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readOnly') }})
+    read_write: Optional[ReadWrite] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readWrite') }})
     

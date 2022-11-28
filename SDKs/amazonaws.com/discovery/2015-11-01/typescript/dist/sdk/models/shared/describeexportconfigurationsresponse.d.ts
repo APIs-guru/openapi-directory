@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExportInfo } from "./exportinfo";
 export declare class DescribeExportConfigurationsResponse extends SpeakeasyBase {
     exportsInfo?: ExportInfo[];

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ModifyEventSubscriptionMessage
 /**
  * <p/>
@@ -33,23 +33,23 @@ var ModifyEventSubscriptionMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Enabled" }),
+        SpeakeasyMetadata({ data: "json, name=Enabled" }),
         __metadata("design:type", Boolean)
     ], ModifyEventSubscriptionMessage.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventCategories" }),
+        SpeakeasyMetadata({ data: "json, name=EventCategories" }),
         __metadata("design:type", Array)
     ], ModifyEventSubscriptionMessage.prototype, "eventCategories", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=SnsTopicArn" }),
         __metadata("design:type", String)
     ], ModifyEventSubscriptionMessage.prototype, "snsTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceType" }),
+        SpeakeasyMetadata({ data: "json, name=SourceType" }),
         __metadata("design:type", String)
     ], ModifyEventSubscriptionMessage.prototype, "sourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionName" }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionName" }),
         __metadata("design:type", String)
     ], ModifyEventSubscriptionMessage.prototype, "subscriptionName", void 0);
     return ModifyEventSubscriptionMessage;

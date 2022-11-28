@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ServiceOptionsInputModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerPadding" })
+  @SpeakeasyMetadata({ data: "json, name=consumerPadding" })
   consumerPadding?: boolean;
 
-  @Metadata({ data: "json, name=defaultService" })
+  @SpeakeasyMetadata({ data: "json, name=defaultService" })
   defaultService?: boolean;
 
-  @Metadata({ data: "json, name=durationInterval" })
+  @SpeakeasyMetadata({ data: "json, name=durationInterval" })
   durationInterval?: number;
 
-  @Metadata({ data: "json, name=durationMax" })
+  @SpeakeasyMetadata({ data: "json, name=durationMax" })
   durationMax?: number;
 
-  @Metadata({ data: "json, name=durationMin" })
+  @SpeakeasyMetadata({ data: "json, name=durationMin" })
   durationMin?: number;
 
-  @Metadata({ data: "json, name=durationSelect" })
+  @SpeakeasyMetadata({ data: "json, name=durationSelect" })
   durationSelect?: boolean;
 
-  @Metadata({ data: "json, name=padding" })
+  @SpeakeasyMetadata({ data: "json, name=padding" })
   padding?: number;
 }

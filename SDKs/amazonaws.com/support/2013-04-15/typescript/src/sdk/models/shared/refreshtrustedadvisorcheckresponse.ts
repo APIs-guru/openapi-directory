@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCheckRefreshStatus } from "./trustedadvisorcheckrefreshstatus";
+
 
 
 // RefreshTrustedAdvisorCheckResponse
@@ -7,6 +8,6 @@ import { TrustedAdvisorCheckRefreshStatus } from "./trustedadvisorcheckrefreshst
  * The current refresh status of a Trusted Advisor check.
 **/
 export class RefreshTrustedAdvisorCheckResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: TrustedAdvisorCheckRefreshStatus;
 }

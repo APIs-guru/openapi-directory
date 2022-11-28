@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LinkTokenCreateRequestUser
+// An object specifying information about the end user who will be linking their account.
 type LinkTokenCreateRequestUser struct {
 	ClientUserID             string     `json:"client_user_id"`
 	DateOfBirth              *time.Time `json:"date_of_birth,omitempty"`

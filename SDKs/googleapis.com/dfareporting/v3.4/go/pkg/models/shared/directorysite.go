@@ -17,6 +17,8 @@ const (
 	DirectorySiteInterstitialTagFormatsEnumJavascriptInterstitial       DirectorySiteInterstitialTagFormatsEnum = "JAVASCRIPT_INTERSTITIAL"
 )
 
+// DirectorySite
+// DirectorySites contains properties of a website from the Site Directory. Sites need to be added to an account via the Sites resource before they can be assigned to a placement.
 type DirectorySite struct {
 	ID                     *string                                   `json:"id,omitempty"`
 	IDDimensionValue       *DimensionValue                           `json:"idDimensionValue,omitempty"`

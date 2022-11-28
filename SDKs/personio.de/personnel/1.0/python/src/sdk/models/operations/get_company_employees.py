@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetCompanyEmployeesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     employees_response: Optional[shared.EmployeesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

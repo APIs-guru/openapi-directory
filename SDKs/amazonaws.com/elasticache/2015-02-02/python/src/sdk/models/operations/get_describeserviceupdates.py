@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDescribeServiceUpdatesActionEnum(str, Enum):
@@ -11,12 +15,12 @@ class GetDescribeServiceUpdatesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeServiceUpdatesQueryParams:
-    action: GetDescribeServiceUpdatesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeServiceUpdatesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeServiceUpdatesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     service_update_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ServiceUpdateName', 'style': 'form', 'explode': True }})
     service_update_status: Optional[List[shared.ServiceUpdateStatusEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'ServiceUpdateStatus', 'style': 'form', 'explode': True }})
-    version: GetDescribeServiceUpdatesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribeServiceUpdatesHeaders:
 
 @dataclass
 class GetDescribeServiceUpdatesRequest:
-    query_params: GetDescribeServiceUpdatesQueryParams = field(default=None)
-    headers: GetDescribeServiceUpdatesHeaders = field(default=None)
+    headers: GetDescribeServiceUpdatesHeaders = field()
+    query_params: GetDescribeServiceUpdatesQueryParams = field()
     
 
 @dataclass
 class GetDescribeServiceUpdatesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

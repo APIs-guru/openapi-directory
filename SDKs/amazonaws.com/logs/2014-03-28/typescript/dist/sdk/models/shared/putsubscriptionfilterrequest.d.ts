@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DistributionEnum } from "./distributionenum";
 export declare class PutSubscriptionFilterRequest extends SpeakeasyBase {
     destinationArn: string;

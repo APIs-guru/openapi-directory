@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ImageOcrPhotoRecognizeFormAdvancedHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=bucketID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=bucketID" })
   bucketId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=bucketSecretKey" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=bucketSecretKey" })
   bucketSecretKey?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=diagnostics" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=diagnostics" })
   diagnostics?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=preprocessing" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=preprocessing" })
   preprocessing?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=recognitionMode" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=recognitionMode" })
   recognitionMode?: string;
 }
 
 
 export class ImageOcrPhotoRecognizeFormAdvancedRequestBodyImageFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=imageFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=imageFile" })
   imageFile: string;
 }
 
 
 export class ImageOcrPhotoRecognizeFormAdvancedRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   imageFile: ImageOcrPhotoRecognizeFormAdvancedRequestBodyImageFile;
 }
 
 
 export class ImageOcrPhotoRecognizeFormAdvancedSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class ImageOcrPhotoRecognizeFormAdvancedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ImageOcrPhotoRecognizeFormAdvancedHeaders;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: ImageOcrPhotoRecognizeFormAdvancedRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ImageOcrPhotoRecognizeFormAdvancedSecurity;
 }
 
 
 export class ImageOcrPhotoRecognizeFormAdvancedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   formRecognitionResult?: shared.FormRecognitionResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

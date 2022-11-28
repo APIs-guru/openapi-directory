@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterprisesSendTestPushNotificationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageId" })
+  @SpeakeasyMetadata({ data: "json, name=messageId" })
   messageId?: string;
 
-  @Metadata({ data: "json, name=topicName" })
+  @SpeakeasyMetadata({ data: "json, name=topicName" })
   topicName?: string;
 }

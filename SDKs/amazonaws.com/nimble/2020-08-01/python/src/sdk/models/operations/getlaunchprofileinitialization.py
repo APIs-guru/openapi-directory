@@ -1,19 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetLaunchProfileInitializationPathParams:
-    launch_profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'launchProfileId', 'style': 'simple', 'explode': False }})
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    launch_profile_id: str = field(metadata={'path_param': { 'field_name': 'launchProfileId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetLaunchProfileInitializationQueryParams:
-    launch_profile_protocol_versions: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'launchProfileProtocolVersions', 'style': 'form', 'explode': True }})
-    launch_purpose: str = field(default=None, metadata={'query_param': { 'field_name': 'launchPurpose', 'style': 'form', 'explode': True }})
-    platform: str = field(default=None, metadata={'query_param': { 'field_name': 'platform', 'style': 'form', 'explode': True }})
+    launch_profile_protocol_versions: List[str] = field(metadata={'query_param': { 'field_name': 'launchProfileProtocolVersions', 'style': 'form', 'explode': True }})
+    launch_purpose: str = field(metadata={'query_param': { 'field_name': 'launchPurpose', 'style': 'form', 'explode': True }})
+    platform: str = field(metadata={'query_param': { 'field_name': 'platform', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,21 +32,21 @@ class GetLaunchProfileInitializationHeaders:
 
 @dataclass
 class GetLaunchProfileInitializationRequest:
-    path_params: GetLaunchProfileInitializationPathParams = field(default=None)
-    query_params: GetLaunchProfileInitializationQueryParams = field(default=None)
-    headers: GetLaunchProfileInitializationHeaders = field(default=None)
+    headers: GetLaunchProfileInitializationHeaders = field()
+    path_params: GetLaunchProfileInitializationPathParams = field()
+    query_params: GetLaunchProfileInitializationQueryParams = field()
     
 
 @dataclass
 class GetLaunchProfileInitializationResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_launch_profile_initialization_response: Optional[shared.GetLaunchProfileInitializationResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

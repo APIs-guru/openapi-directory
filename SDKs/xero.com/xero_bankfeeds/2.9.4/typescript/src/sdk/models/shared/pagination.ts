@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Pagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemCount" })
+  @SpeakeasyMetadata({ data: "json, name=itemCount" })
   itemCount?: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pageCount" })
+  @SpeakeasyMetadata({ data: "json, name=pageCount" })
   pageCount?: number;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseFcmDataV1beta1MessageOutcomePercents
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Percentage breakdown of message delivery outcomes. These categories are mutually exclusive. All percentages are calculated with countMessagesAccepted as the denominator. These categories may not account for all message outcomes.
 **/
 export class GoogleFirebaseFcmDataV1beta1MessageOutcomePercents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delivered" })
+  @SpeakeasyMetadata({ data: "json, name=delivered" })
   delivered?: number;
 
-  @Metadata({ data: "json, name=droppedAppForceStopped" })
+  @SpeakeasyMetadata({ data: "json, name=droppedAppForceStopped" })
   droppedAppForceStopped?: number;
 
-  @Metadata({ data: "json, name=droppedDeviceInactive" })
+  @SpeakeasyMetadata({ data: "json, name=droppedDeviceInactive" })
   droppedDeviceInactive?: number;
 
-  @Metadata({ data: "json, name=droppedTooManyPendingMessages" })
+  @SpeakeasyMetadata({ data: "json, name=droppedTooManyPendingMessages" })
   droppedTooManyPendingMessages?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 }

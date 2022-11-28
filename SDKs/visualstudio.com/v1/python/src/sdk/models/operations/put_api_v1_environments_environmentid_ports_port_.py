@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class PutAPIV1EnvironmentsEnvironmentIDPortsPortPathParams:
-    environment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
-    port: int = field(default=None, metadata={'path_param': { 'field_name': 'port', 'style': 'simple', 'explode': False }})
+    environment_id: str = field(metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
+    port: int = field(metadata={'path_param': { 'field_name': 'port', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,15 +19,15 @@ class PutAPIV1EnvironmentsEnvironmentIDPortsPortRequests:
 
 @dataclass
 class PutAPIV1EnvironmentsEnvironmentIDPortsPortRequest:
-    path_params: PutAPIV1EnvironmentsEnvironmentIDPortsPortPathParams = field(default=None)
+    path_params: PutAPIV1EnvironmentsEnvironmentIDPortsPortPathParams = field()
     request: Optional[PutAPIV1EnvironmentsEnvironmentIDPortsPortRequests] = field(default=None)
     
 
 @dataclass
 class PutAPIV1EnvironmentsEnvironmentIDPortsPortResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     message_codes: Optional[int] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

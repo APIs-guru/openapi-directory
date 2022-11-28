@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeAnalysisSchemesActionEnum(str, Enum):
     DESCRIBE_ANALYSIS_SCHEMES = "DescribeAnalysisSchemes"
@@ -10,11 +14,11 @@ class GetDescribeAnalysisSchemesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAnalysisSchemesQueryParams:
-    action: GetDescribeAnalysisSchemesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAnalysisSchemesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetDescribeAnalysisSchemesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     analysis_scheme_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AnalysisSchemeNames', 'style': 'form', 'explode': True }})
     deployed: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Deployed', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetDescribeAnalysisSchemesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeAnalysisSchemesHeaders:
 
 @dataclass
 class GetDescribeAnalysisSchemesRequest:
-    query_params: GetDescribeAnalysisSchemesQueryParams = field(default=None)
-    headers: GetDescribeAnalysisSchemesHeaders = field(default=None)
+    headers: GetDescribeAnalysisSchemesHeaders = field()
+    query_params: GetDescribeAnalysisSchemesQueryParams = field()
     
 
 @dataclass
 class GetDescribeAnalysisSchemesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

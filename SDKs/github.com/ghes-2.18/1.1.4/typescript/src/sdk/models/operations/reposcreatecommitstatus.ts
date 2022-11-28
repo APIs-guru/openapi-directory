@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposCreateCommitStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sha" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sha" })
   sha: string;
 }
 
 export enum ReposCreateCommitStatusRequestBodyStateEnum {
-    Error = "error"
-,    Failure = "failure"
-,    Pending = "pending"
-,    Success = "success"
+    Error = "error",
+    Failure = "failure",
+    Pending = "pending",
+    Success = "success"
 }
 
 
 export class ReposCreateCommitStatusRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: ReposCreateCommitStatusRequestBodyStateEnum;
 
-  @Metadata({ data: "json, name=target_url" })
+  @SpeakeasyMetadata({ data: "json, name=target_url" })
   targetUrl?: string;
 }
 
 
 export class ReposCreateCommitStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposCreateCommitStatusPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReposCreateCommitStatusRequestBody;
 }
 
 
 export class ReposCreateCommitStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   status?: shared.Status;
 }

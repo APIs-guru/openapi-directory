@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GroupsGetStatisticsListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum GroupsGetStatisticsListGroupByEnum {
-    Week = "week"
-,    Month = "month"
+    Week = "week",
+    Month = "month"
 }
 
 export enum GroupsGetStatisticsListTimeFrameEnum {
-    Today = "today"
-,    Yesterday = "yesterday"
-,    Last7 = "last7"
-,    Last30 = "last30"
-,    Lastmonth = "lastmonth"
-,    Currentmonth = "currentmonth"
-,    Previousmonth = "previousmonth"
-,    Last90 = "last90"
-,    Last120 = "last120"
-,    Last180 = "last180"
-,    Last12months = "last12months"
-,    Lastyear = "lastyear"
-,    Currentyear = "currentyear"
-,    Beginning = "beginning"
-,    Custom = "custom"
+    Today = "today",
+    Yesterday = "yesterday",
+    Last7 = "last7",
+    Last30 = "last30",
+    Lastmonth = "lastmonth",
+    Currentmonth = "currentmonth",
+    Previousmonth = "previousmonth",
+    Last90 = "last90",
+    Last120 = "last120",
+    Last180 = "last180",
+    Last12months = "last12months",
+    Lastyear = "lastyear",
+    Currentyear = "currentyear",
+    Beginning = "beginning",
+    Custom = "custom"
 }
 
 
 export class GroupsGetStatisticsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromDay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromDay" })
   fromDay?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupBy" })
   groupBy?: GroupsGetStatisticsListGroupByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeFrame" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeFrame" })
   timeFrame: GroupsGetStatisticsListTimeFrameEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toDay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toDay" })
   toDay?: string;
 }
 
 
 export class GroupsGetStatisticsListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupsGetStatisticsListPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GroupsGetStatisticsListQueryParams;
 }
 
 
 export class GroupsGetStatisticsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesEntitiesResponseApiCoreDtoAggregatedAggregatedResult?: shared.ApiCoreResponsesEntitiesResponseApiCoreDtoAggregatedAggregatedResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

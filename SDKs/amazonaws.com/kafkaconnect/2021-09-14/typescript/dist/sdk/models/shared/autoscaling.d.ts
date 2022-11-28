@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ScaleInPolicy } from "./scaleinpolicy";
 import { ScaleOutPolicy } from "./scaleoutpolicy";
 /**

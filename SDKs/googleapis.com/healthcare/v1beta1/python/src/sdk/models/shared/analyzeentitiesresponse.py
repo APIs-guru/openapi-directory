@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import entity
-from . import entitymention
-from . import entitymentionrelationship
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AnalyzeEntitiesResponse:
-    entities: Optional[List[entity.Entity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entities' }})
-    entity_mentions: Optional[List[entitymention.EntityMention]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityMentions' }})
-    relationships: Optional[List[entitymentionrelationship.EntityMentionRelationship]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    r"""AnalyzeEntitiesResponse
+    Includes recognized entity mentions and relationships between them.
+    """
+    
+    entities: Optional[List[Entity]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entities') }})
+    entity_mentions: Optional[List[EntityMention]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityMentions') }})
+    relationships: Optional[List[EntityMentionRelationship]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationships') }})
     

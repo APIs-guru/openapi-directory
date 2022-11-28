@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationTypeEnum } from "./evaluationtypeenum";
 import { Metrics } from "./metrics";
 // WindowSummary
@@ -35,23 +35,23 @@ var WindowSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EvaluationType" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationType" }),
         __metadata("design:type", String)
     ], WindowSummary.prototype, "evaluationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ItemCount" }),
+        SpeakeasyMetadata({ data: "json, name=ItemCount" }),
         __metadata("design:type", Number)
     ], WindowSummary.prototype, "itemCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=Metrics" }),
+        SpeakeasyMetadata({ data: "json, name=Metrics" }),
         __metadata("design:type", Metrics)
     ], WindowSummary.prototype, "metrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=TestWindowEnd" }),
+        SpeakeasyMetadata({ data: "json, name=TestWindowEnd" }),
         __metadata("design:type", Date)
     ], WindowSummary.prototype, "testWindowEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=TestWindowStart" }),
+        SpeakeasyMetadata({ data: "json, name=TestWindowStart" }),
         __metadata("design:type", Date)
     ], WindowSummary.prototype, "testWindowStart", void 0);
     return WindowSummary;

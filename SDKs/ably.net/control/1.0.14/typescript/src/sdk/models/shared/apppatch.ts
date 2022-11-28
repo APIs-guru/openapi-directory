@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AppPatchStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
 export class AppPatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apnsCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=apnsCertificate" })
   apnsCertificate?: string;
 
-  @Metadata({ data: "json, name=apnsPrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=apnsPrivateKey" })
   apnsPrivateKey?: string;
 
-  @Metadata({ data: "json, name=apnsUseSandboxEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=apnsUseSandboxEndpoint" })
   apnsUseSandboxEndpoint?: boolean;
 
-  @Metadata({ data: "json, name=fcmKey" })
+  @SpeakeasyMetadata({ data: "json, name=fcmKey" })
   fcmKey?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AppPatchStatusEnum;
 
-  @Metadata({ data: "json, name=tlsOnly" })
+  @SpeakeasyMetadata({ data: "json, name=tlsOnly" })
   tlsOnly?: boolean;
 }

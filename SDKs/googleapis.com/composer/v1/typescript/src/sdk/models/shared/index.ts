@@ -13,6 +13,7 @@ export * from "./listimageversionsresponse";
 export * from "./listoperationsresponse";
 export * from "./maintenancewindow";
 export * from "./masterauthorizednetworksconfig";
+export * from "./networkingconfig";
 export * from "./nodeconfig";
 export * from "./operation";
 export * from "./privateclusterconfig";

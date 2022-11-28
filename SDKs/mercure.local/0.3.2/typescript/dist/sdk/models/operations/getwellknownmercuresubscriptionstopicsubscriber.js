@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWellKnownMercureSubscriptionsTopicSubscriberPathParams = /** @class */ (function (_super) {
     __extends(GetWellKnownMercureSubscriptionsTopicSubscriberPathParams, _super);
@@ -30,11 +30,11 @@ var GetWellKnownMercureSubscriptionsTopicSubscriberPathParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subscriber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriber" }),
         __metadata("design:type", String)
     ], GetWellKnownMercureSubscriptionsTopicSubscriberPathParams.prototype, "subscriber", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=topic" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=topic" }),
         __metadata("design:type", String)
     ], GetWellKnownMercureSubscriptionsTopicSubscriberPathParams.prototype, "topic", void 0);
     return GetWellKnownMercureSubscriptionsTopicSubscriberPathParams;
@@ -46,7 +46,7 @@ var GetWellKnownMercureSubscriptionsTopicSubscriberRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWellKnownMercureSubscriptionsTopicSubscriberPathParams)
     ], GetWellKnownMercureSubscriptionsTopicSubscriberRequest.prototype, "pathParams", void 0);
     return GetWellKnownMercureSubscriptionsTopicSubscriberRequest;
@@ -58,15 +58,15 @@ var GetWellKnownMercureSubscriptionsTopicSubscriberResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWellKnownMercureSubscriptionsTopicSubscriberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWellKnownMercureSubscriptionsTopicSubscriberResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Subscriptions)
     ], GetWellKnownMercureSubscriptionsTopicSubscriberResponse.prototype, "subscriptions", void 0);
     return GetWellKnownMercureSubscriptionsTopicSubscriberResponse;

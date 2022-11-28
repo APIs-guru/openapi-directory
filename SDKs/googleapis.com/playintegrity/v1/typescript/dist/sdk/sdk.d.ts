@@ -1,14 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { V1 } from "./v1";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://playintegrity.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    v1: V1;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    PlayintegrityDecodeIntegrityToken(req: operations.PlayintegrityDecodeIntegrityTokenRequest, config?: AxiosRequestConfig): Promise<operations.PlayintegrityDecodeIntegrityTokenResponse>;
 }
 export {};

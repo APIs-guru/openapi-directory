@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OutputLogEvent } from "./outputlogevent";
 var GetLogEventsResponse = /** @class */ (function (_super) {
     __extends(GetLogEventsResponse, _super);
     function GetLogEventsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=events", elemType: shared.OutputLogEvent }),
+        SpeakeasyMetadata({ data: "json, name=events", elemType: OutputLogEvent }),
         __metadata("design:type", Array)
     ], GetLogEventsResponse.prototype, "events", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextBackwardToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextBackwardToken" }),
         __metadata("design:type", String)
     ], GetLogEventsResponse.prototype, "nextBackwardToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextForwardToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextForwardToken" }),
         __metadata("design:type", String)
     ], GetLogEventsResponse.prototype, "nextForwardToken", void 0);
     return GetLogEventsResponse;

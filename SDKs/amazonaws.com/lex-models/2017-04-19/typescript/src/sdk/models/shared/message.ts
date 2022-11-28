@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentTypeEnum } from "./contenttypeenum";
+
 
 
 // Message
@@ -7,12 +8,12 @@ import { ContentTypeEnum } from "./contenttypeenum";
  * The message object that provides the message text and its type.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content: string;
 
-  @Metadata({ data: "json, name=contentType" })
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
   contentType: ContentTypeEnum;
 
-  @Metadata({ data: "json, name=groupNumber" })
+  @SpeakeasyMetadata({ data: "json, name=groupNumber" })
   groupNumber?: number;
 }

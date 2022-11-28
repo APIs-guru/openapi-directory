@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPapdisReportOuputQueryParams = /** @class */ (function (_super) {
     __extends(GetPapdisReportOuputQueryParams, _super);
@@ -30,31 +30,31 @@ var GetPapdisReportOuputQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputQueryParams.prototype, "employerKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MessageFunctionCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MessageFunctionCode" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputQueryParams.prototype, "messageFunctionCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputQueryParams.prototype, "payScheduleKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" }),
         __metadata("design:type", Date)
     ], GetPapdisReportOuputQueryParams.prototype, "paymentDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PensionKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PensionKey" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputQueryParams.prototype, "pensionKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputQueryParams.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputQueryParams.prototype, "transformDefinitionKey", void 0);
     return GetPapdisReportOuputQueryParams;
@@ -66,11 +66,11 @@ var GetPapdisReportOuputHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetPapdisReportOuputHeaders.prototype, "authorization", void 0);
     return GetPapdisReportOuputHeaders;
@@ -82,11 +82,11 @@ var GetPapdisReportOuputRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPapdisReportOuputQueryParams)
     ], GetPapdisReportOuputRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPapdisReportOuputHeaders)
     ], GetPapdisReportOuputRequest.prototype, "headers", void 0);
     return GetPapdisReportOuputRequest;
@@ -98,19 +98,19 @@ var GetPapdisReportOuputResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPapdisReportOuputResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetPapdisReportOuputResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPapdisReportOuputResponse.prototype, "getPapdisReportOuput200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPapdisReportOuputResponse.prototype, "statusCode", void 0);
     return GetPapdisReportOuputResponse;

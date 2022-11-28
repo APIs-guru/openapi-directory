@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import featureidproto
+from sdk import utils
+from . import *
 
 class GeocodingSummaryFeatureTypeEnum(str, Enum):
     TYPE_ANY = "typeAny"
@@ -379,9 +381,13 @@ class GeocodingSummaryFeatureTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GeocodingSummary:
-    address_understood: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addressUnderstood' }})
-    feature_id: Optional[featureidproto.FeatureIDProto] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'featureId' }})
-    feature_type: Optional[GeocodingSummaryFeatureTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'featureType' }})
-    position_precision_meters: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positionPrecisionMeters' }})
-    query_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryString' }})
+    r"""GeocodingSummary
+    Detailed summary of the result from geocoding an address
+    """
+    
+    address_understood: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('addressUnderstood') }})
+    feature_id: Optional[FeatureIDProto] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('featureId') }})
+    feature_type: Optional[GeocodingSummaryFeatureTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('featureType') }})
+    position_precision_meters: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('positionPrecisionMeters') }})
+    query_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryString') }})
     

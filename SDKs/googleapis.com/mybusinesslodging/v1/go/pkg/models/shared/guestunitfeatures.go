@@ -89,6 +89,8 @@ const (
 	GuestUnitFeaturesTierExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesTierExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// GuestUnitFeatures
+// Features and available amenities in the guest unit.
 type GuestUnitFeatures struct {
 	BungalowOrVilla                  *bool                                                  `json:"bungalowOrVilla,omitempty"`
 	BungalowOrVillaException         *GuestUnitFeaturesBungalowOrVillaExceptionEnum         `json:"bungalowOrVillaException,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementPolicyControllerMonitoring } from "./configmanagementpolicycontrollermonitoring";
+
 
 
 // ConfigManagementPolicyController
@@ -7,27 +8,27 @@ import { ConfigManagementPolicyControllerMonitoring } from "./configmanagementpo
  * Configuration for Policy Controller
 **/
 export class ConfigManagementPolicyController extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditIntervalSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=auditIntervalSeconds" })
   auditIntervalSeconds?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=exemptableNamespaces" })
+  @SpeakeasyMetadata({ data: "json, name=exemptableNamespaces" })
   exemptableNamespaces?: string[];
 
-  @Metadata({ data: "json, name=logDeniesEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=logDeniesEnabled" })
   logDeniesEnabled?: boolean;
 
-  @Metadata({ data: "json, name=monitoring" })
+  @SpeakeasyMetadata({ data: "json, name=monitoring" })
   monitoring?: ConfigManagementPolicyControllerMonitoring;
 
-  @Metadata({ data: "json, name=mutationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=mutationEnabled" })
   mutationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=referentialRulesEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=referentialRulesEnabled" })
   referentialRulesEnabled?: boolean;
 
-  @Metadata({ data: "json, name=templateLibraryInstalled" })
+  @SpeakeasyMetadata({ data: "json, name=templateLibraryInstalled" })
   templateLibraryInstalled?: boolean;
 }

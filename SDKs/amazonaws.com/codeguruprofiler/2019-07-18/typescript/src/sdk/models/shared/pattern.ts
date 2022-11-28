@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Pattern
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  A set of rules used to make a recommendation during an analysis. 
 **/
 export class Pattern extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countersToAggregate" })
+  @SpeakeasyMetadata({ data: "json, name=countersToAggregate" })
   countersToAggregate?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resolutionSteps" })
+  @SpeakeasyMetadata({ data: "json, name=resolutionSteps" })
   resolutionSteps?: string;
 
-  @Metadata({ data: "json, name=targetFrames" })
+  @SpeakeasyMetadata({ data: "json, name=targetFrames" })
   targetFrames?: string[][];
 
-  @Metadata({ data: "json, name=thresholdPercent" })
+  @SpeakeasyMetadata({ data: "json, name=thresholdPercent" })
   thresholdPercent?: number;
 }

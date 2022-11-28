@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiApp } from "./apiapp";
 import { User } from "./user";
+
 
 export enum AuthTokenTypeEnum {
     Bearer = "bearer"
@@ -8,24 +9,24 @@ export enum AuthTokenTypeEnum {
 
 
 export class Auth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=app" })
+  @SpeakeasyMetadata({ data: "json, name=app" })
   app: ApiApp;
 
-  @Metadata({ data: "json, name=expires_on" })
+  @SpeakeasyMetadata({ data: "json, name=expires_on" })
   expiresOn?: string;
 
-  @Metadata({ data: "json, name=refresh_token" })
+  @SpeakeasyMetadata({ data: "json, name=refresh_token" })
   refreshToken?: string;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope: string;
 
-  @Metadata({ data: "json, name=token_type" })
+  @SpeakeasyMetadata({ data: "json, name=token_type" })
   tokenType: AuthTokenTypeEnum;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 }

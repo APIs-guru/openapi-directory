@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BatchExecuteStatementInput = /** @class */ (function (_super) {
     __extends(BatchExecuteStatementInput, _super);
     function BatchExecuteStatementInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementInput.prototype, "clusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=Database" }),
+        SpeakeasyMetadata({ data: "json, name=Database" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementInput.prototype, "database", void 0);
     __decorate([
-        Metadata({ data: "json, name=DbUser" }),
+        SpeakeasyMetadata({ data: "json, name=DbUser" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementInput.prototype, "dbUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretArn" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementInput.prototype, "secretArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sqls" }),
+        SpeakeasyMetadata({ data: "json, name=Sqls" }),
         __metadata("design:type", Array)
     ], BatchExecuteStatementInput.prototype, "sqls", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatementName" }),
+        SpeakeasyMetadata({ data: "json, name=StatementName" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementInput.prototype, "statementName", void 0);
     __decorate([
-        Metadata({ data: "json, name=WithEvent" }),
+        SpeakeasyMetadata({ data: "json, name=WithEvent" }),
         __metadata("design:type", Boolean)
     ], BatchExecuteStatementInput.prototype, "withEvent", void 0);
     return BatchExecuteStatementInput;

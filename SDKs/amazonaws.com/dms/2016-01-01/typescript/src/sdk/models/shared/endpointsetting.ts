@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointSettingTypeValueEnum } from "./endpointsettingtypevalueenum";
+
 
 
 // EndpointSetting
@@ -7,30 +8,30 @@ import { EndpointSettingTypeValueEnum } from "./endpointsettingtypevalueenum";
  * Endpoint settings.
 **/
 export class EndpointSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Applicability" })
+  @SpeakeasyMetadata({ data: "json, name=Applicability" })
   applicability?: string;
 
-  @Metadata({ data: "json, name=DefaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultValue" })
   defaultValue?: string;
 
-  @Metadata({ data: "json, name=EnumValues" })
+  @SpeakeasyMetadata({ data: "json, name=EnumValues" })
   enumValues?: string[];
 
-  @Metadata({ data: "json, name=IntValueMax" })
+  @SpeakeasyMetadata({ data: "json, name=IntValueMax" })
   intValueMax?: number;
 
-  @Metadata({ data: "json, name=IntValueMin" })
+  @SpeakeasyMetadata({ data: "json, name=IntValueMin" })
   intValueMin?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Sensitive" })
+  @SpeakeasyMetadata({ data: "json, name=Sensitive" })
   sensitive?: boolean;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: EndpointSettingTypeValueEnum;
 
-  @Metadata({ data: "json, name=Units" })
+  @SpeakeasyMetadata({ data: "json, name=Units" })
   units?: string;
 }

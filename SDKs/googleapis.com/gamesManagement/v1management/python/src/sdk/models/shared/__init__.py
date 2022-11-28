@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .achievementresetallresponse import *
 from .achievementresetmultipleforallrequest import *
 from .achievementresetresponse import *

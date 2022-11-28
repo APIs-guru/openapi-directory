@@ -1,5 +1,7 @@
 package shared
 
+// ProtocolsListDataSummary
+// Details of the Firewall Manager protocols list.
 type ProtocolsListDataSummary struct {
 	ListArn       *string  `json:"ListArn,omitempty"`
 	ListID        *string  `json:"ListId,omitempty"`

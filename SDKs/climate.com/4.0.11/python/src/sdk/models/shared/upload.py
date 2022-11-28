@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UploadContentTypeEnum(str, Enum):
     APPLICATION_VND_CLIMATE_FIELD_GEOJSON = "application/vnd.climate.field.geojson"
@@ -15,8 +17,12 @@ class UploadContentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Upload:
-    content_type: UploadContentTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentType' }})
-    length: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'length' }})
-    md5: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'md5' }})
-    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    r"""Upload
+    Client request to upload data for a user.
+    """
+    
+    content_type: UploadContentTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentType') }})
+    length: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('length') }})
+    md5: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('md5') }})
+    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
     

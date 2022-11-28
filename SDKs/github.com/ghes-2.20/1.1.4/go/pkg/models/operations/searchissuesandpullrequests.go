@@ -28,10 +28,6 @@ type SearchIssuesAndPullRequestsQueryParams struct {
 	Sort    *SearchIssuesAndPullRequestsSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type SearchIssuesAndPullRequestsRequest struct {
-	QueryParams SearchIssuesAndPullRequestsQueryParams
-}
-
 type SearchIssuesAndPullRequests200ApplicationJSON struct {
 	IncompleteResults bool                           `json:"incomplete_results"`
 	Items             []shared.IssueSearchResultItem `json:"items"`
@@ -42,6 +38,10 @@ type SearchIssuesAndPullRequests503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type SearchIssuesAndPullRequestsRequest struct {
+	QueryParams SearchIssuesAndPullRequestsQueryParams
 }
 
 type SearchIssuesAndPullRequestsResponse struct {

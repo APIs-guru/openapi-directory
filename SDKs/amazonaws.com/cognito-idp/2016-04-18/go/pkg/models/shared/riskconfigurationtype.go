@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RiskConfigurationType
+// The risk configuration type.
 type RiskConfigurationType struct {
 	AccountTakeoverRiskConfiguration        *AccountTakeoverRiskConfigurationType        `json:"AccountTakeoverRiskConfiguration,omitempty"`
 	ClientID                                *string                                      `json:"ClientId,omitempty"`

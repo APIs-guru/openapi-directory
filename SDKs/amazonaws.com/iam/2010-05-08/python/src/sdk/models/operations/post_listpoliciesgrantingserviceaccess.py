@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListPoliciesGrantingServiceAccessActionEnum(str, Enum):
     LIST_POLICIES_GRANTING_SERVICE_ACCESS = "ListPoliciesGrantingServiceAccess"
@@ -10,8 +14,8 @@ class PostListPoliciesGrantingServiceAccessVersionEnum(str, Enum):
 
 @dataclass
 class PostListPoliciesGrantingServiceAccessQueryParams:
-    action: PostListPoliciesGrantingServiceAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListPoliciesGrantingServiceAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListPoliciesGrantingServiceAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListPoliciesGrantingServiceAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListPoliciesGrantingServiceAccessHeaders:
 
 @dataclass
 class PostListPoliciesGrantingServiceAccessRequest:
-    query_params: PostListPoliciesGrantingServiceAccessQueryParams = field(default=None)
-    headers: PostListPoliciesGrantingServiceAccessHeaders = field(default=None)
+    headers: PostListPoliciesGrantingServiceAccessHeaders = field()
+    query_params: PostListPoliciesGrantingServiceAccessQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListPoliciesGrantingServiceAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

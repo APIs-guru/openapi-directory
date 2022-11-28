@@ -18,6 +18,8 @@ type UpdateApplicationSettingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateApplicationSettingsRequestBodyWriteApplicationSettingsRequest
+// Specifies the default settings for an application.
 type UpdateApplicationSettingsRequestBodyWriteApplicationSettingsRequest struct {
 	CampaignHook             *shared.CampaignHook   `json:"CampaignHook,omitempty"`
 	CloudWatchMetricsEnabled *bool                  `json:"CloudWatchMetricsEnabled,omitempty"`

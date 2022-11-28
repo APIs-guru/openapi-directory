@@ -41,7 +41,7 @@ type FormsFormsCreateSecurity struct {
 
 type FormsFormsCreateRequest struct {
 	QueryParams FormsFormsCreateQueryParams
-	Request     *shared.Form `request:"mediaType=application/json"`
+	Request     *shared.FormInput `request:"mediaType=application/json"`
 	Security    FormsFormsCreateSecurity
 }
 

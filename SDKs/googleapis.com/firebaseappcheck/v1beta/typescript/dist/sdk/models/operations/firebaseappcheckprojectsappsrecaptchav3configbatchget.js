@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetPathParams = /** @class */ (function (_super) {
     __extends(FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetPathParams, _super);
@@ -30,7 +30,7 @@ var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetPathParams = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetPathParams.prototype, "parent", void 0);
     return FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetPathParams;
@@ -42,51 +42,51 @@ var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=names" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=names" }),
         __metadata("design:type", Array)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "names", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams.prototype, "uploadProtocol", void 0);
     return FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams;
@@ -98,11 +98,11 @@ var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption1 = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption1.prototype, "oauth2c", void 0);
     return FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption1;
@@ -114,11 +114,11 @@ var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption2 = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption2.prototype, "oauth2c", void 0);
     return FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption2;
@@ -130,11 +130,11 @@ var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurity = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption1)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurityOption2)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurity.prototype, "option2", void 0);
     return FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurity;
@@ -146,15 +146,15 @@ var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetRequest = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetPathParams)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetQueryParams)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetSecurity)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetRequest.prototype, "security", void 0);
     return FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetRequest;
@@ -166,15 +166,15 @@ var FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetResponse = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleFirebaseAppcheckV1betaBatchGetRecaptchaV3ConfigsResponse)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetResponse.prototype, "googleFirebaseAppcheckV1betaBatchGetRecaptchaV3ConfigsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetResponse.prototype, "statusCode", void 0);
     return FirebaseappcheckProjectsAppsRecaptchaV3ConfigBatchGetResponse;

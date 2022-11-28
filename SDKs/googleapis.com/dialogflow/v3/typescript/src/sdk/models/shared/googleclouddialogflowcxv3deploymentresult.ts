@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3DeploymentResult
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Result of the deployment.
 **/
 export class GoogleCloudDialogflowCxV3DeploymentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentTestResults" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentTestResults" })
   deploymentTestResults?: string[];
 
-  @Metadata({ data: "json, name=experiment" })
+  @SpeakeasyMetadata({ data: "json, name=experiment" })
   experiment?: string;
 }

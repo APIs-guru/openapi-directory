@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class CustomPayload:
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""CustomPayload
+    A custom response string that Amazon Lex sends to your application. You define the content and structure the string.
+    """
+    
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

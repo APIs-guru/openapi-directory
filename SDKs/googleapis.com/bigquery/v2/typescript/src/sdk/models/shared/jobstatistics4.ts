@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class JobStatistics4 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationUriFileCounts" })
+  @SpeakeasyMetadata({ data: "json, name=destinationUriFileCounts" })
   destinationUriFileCounts?: string[];
 
-  @Metadata({ data: "json, name=inputBytes" })
+  @SpeakeasyMetadata({ data: "json, name=inputBytes" })
   inputBytes?: string;
 }

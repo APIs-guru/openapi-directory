@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NfsExportOptions } from "./nfsexportoptions";
 // FileShareConfig
 /**
  * File share configuration for the instance.
@@ -34,19 +34,19 @@ var FileShareConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacityGb" }),
+        SpeakeasyMetadata({ data: "json, name=capacityGb" }),
         __metadata("design:type", String)
     ], FileShareConfig.prototype, "capacityGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FileShareConfig.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nfsExportOptions", elemType: shared.NfsExportOptions }),
+        SpeakeasyMetadata({ data: "json, name=nfsExportOptions", elemType: NfsExportOptions }),
         __metadata("design:type", Array)
     ], FileShareConfig.prototype, "nfsExportOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceBackup" }),
+        SpeakeasyMetadata({ data: "json, name=sourceBackup" }),
         __metadata("design:type", String)
     ], FileShareConfig.prototype, "sourceBackup", void 0);
     return FileShareConfig;

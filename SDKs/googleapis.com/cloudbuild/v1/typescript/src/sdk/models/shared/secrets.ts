@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InlineSecret } from "./inlinesecret";
 import { SecretManagerSecret } from "./secretmanagersecret";
+
 
 
 // Secrets
@@ -9,9 +9,9 @@ import { SecretManagerSecret } from "./secretmanagersecret";
  * Secrets and secret environment variables.
 **/
 export class Secrets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inline", elemType: shared.InlineSecret })
+  @SpeakeasyMetadata({ data: "json, name=inline", elemType: InlineSecret })
   inline?: InlineSecret[];
 
-  @Metadata({ data: "json, name=secretManager", elemType: shared.SecretManagerSecret })
+  @SpeakeasyMetadata({ data: "json, name=secretManager", elemType: SecretManagerSecret })
   secretManager?: SecretManagerSecret[];
 }

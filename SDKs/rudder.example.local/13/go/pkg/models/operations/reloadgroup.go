@@ -8,10 +8,6 @@ type ReloadGroupPathParams struct {
 	GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
 }
 
-type ReloadGroupRequest struct {
-	PathParams ReloadGroupPathParams
-}
-
 type ReloadGroup200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type ReloadGroup200ApplicationJSON struct {
 	Action ReloadGroup200ApplicationJSONActionEnum `json:"action"`
 	Data   ReloadGroup200ApplicationJSONData       `json:"data"`
 	Result ReloadGroup200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ReloadGroupRequest struct {
+	PathParams ReloadGroupPathParams
 }
 
 type ReloadGroupResponse struct {

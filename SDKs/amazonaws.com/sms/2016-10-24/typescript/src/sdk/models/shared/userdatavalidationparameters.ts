@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptTypeEnum } from "./scripttypeenum";
 import { Source } from "./source";
+
 
 
 // UserDataValidationParameters
@@ -8,9 +9,9 @@ import { Source } from "./source";
  * Contains validation parameters.
 **/
 export class UserDataValidationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scriptType" })
+  @SpeakeasyMetadata({ data: "json, name=scriptType" })
   scriptType?: ScriptTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

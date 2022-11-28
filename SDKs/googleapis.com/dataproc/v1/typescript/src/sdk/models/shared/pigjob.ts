@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingConfig } from "./loggingconfig";
 import { QueryList } from "./querylist";
+
 
 
 // PigJob
@@ -8,24 +9,24 @@ import { QueryList } from "./querylist";
  * A Dataproc job for running Apache Pig (https://pig.apache.org/) queries on YARN.
 **/
 export class PigJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continueOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=continueOnFailure" })
   continueOnFailure?: boolean;
 
-  @Metadata({ data: "json, name=jarFileUris" })
+  @SpeakeasyMetadata({ data: "json, name=jarFileUris" })
   jarFileUris?: string[];
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: LoggingConfig;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=queryFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=queryFileUri" })
   queryFileUri?: string;
 
-  @Metadata({ data: "json, name=queryList" })
+  @SpeakeasyMetadata({ data: "json, name=queryList" })
   queryList?: QueryList;
 
-  @Metadata({ data: "json, name=scriptVariables" })
+  @SpeakeasyMetadata({ data: "json, name=scriptVariables" })
   scriptVariables?: Map<string, string>;
 }

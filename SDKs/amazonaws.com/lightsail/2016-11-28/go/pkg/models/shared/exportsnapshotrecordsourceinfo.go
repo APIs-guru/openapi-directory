@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExportSnapshotRecordSourceInfo
+// Describes the source of an export snapshot record.
 type ExportSnapshotRecordSourceInfo struct {
 	Arn                  *string                             `json:"arn,omitempty"`
 	CreatedAt            *time.Time                          `json:"createdAt,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PutEventsResultEntry
 /**
  * Represents an event that failed to be submitted.
@@ -33,15 +33,15 @@ var PutEventsResultEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ErrorCode" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorCode" }),
         __metadata("design:type", String)
     ], PutEventsResultEntry.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMessage" }),
         __metadata("design:type", String)
     ], PutEventsResultEntry.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventId" }),
+        SpeakeasyMetadata({ data: "json, name=EventId" }),
         __metadata("design:type", String)
     ], PutEventsResultEntry.prototype, "eventId", void 0);
     return PutEventsResultEntry;

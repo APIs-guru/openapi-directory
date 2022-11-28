@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputSource } from "./outputsource";
+
 
 
 // AssociationExecutionTarget
@@ -7,30 +8,30 @@ import { OutputSource } from "./outputsource";
  * Includes information about the specified association execution.
 **/
 export class AssociationExecutionTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=AssociationVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationVersion" })
   associationVersion?: string;
 
-  @Metadata({ data: "json, name=DetailedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DetailedStatus" })
   detailedStatus?: string;
 
-  @Metadata({ data: "json, name=ExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=LastExecutionDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastExecutionDate" })
   lastExecutionDate?: Date;
 
-  @Metadata({ data: "json, name=OutputSource" })
+  @SpeakeasyMetadata({ data: "json, name=OutputSource" })
   outputSource?: OutputSource;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

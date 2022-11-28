@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class NetworkUnblockRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.NetworkUnblock;
 }
 
 
 export class NetworkUnblockResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorThrottled?: shared.ErrorThrottled;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   networkUnblockResponseForbidden?: shared.NetworkUnblockResponseForbidden;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   networkUnblockResponseNotFound?: shared.NetworkUnblockResponseNotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   networkUnblockResponseOk?: shared.NetworkUnblockResponseOk;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   networkUnblock422ApplicationJsonOneOf?: any;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ReadWriteReadLockModeEnum(str, Enum):
     READ_LOCK_MODE_UNSPECIFIED = "READ_LOCK_MODE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class ReadWriteReadLockModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReadWrite:
-    read_lock_mode: Optional[ReadWriteReadLockModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readLockMode' }})
+    r"""ReadWrite
+    Message type to initiate a read-write transaction. Currently this transaction type has no options.
+    """
+    
+    read_lock_mode: Optional[ReadWriteReadLockModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readLockMode') }})
     

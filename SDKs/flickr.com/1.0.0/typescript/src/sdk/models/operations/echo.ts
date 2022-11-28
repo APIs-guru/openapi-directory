@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EchoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=echo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=echo" })
   echo?: string;
 }
 
 
-export class EchoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: EchoQueryParams;
-}
-
-
 export class Echo200ApplicationJsonEcho extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_content" })
+  @SpeakeasyMetadata({ data: "json, name=_content" })
   content?: string;
 }
 
 
 export class Echo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=echo" })
+  @SpeakeasyMetadata({ data: "json, name=echo" })
   echo?: Echo200ApplicationJsonEcho;
 }
 
 
+export class EchoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: EchoQueryParams;
+}
+
+
 export class EchoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   echo200ApplicationJsonObject?: Echo200ApplicationJson;
 }

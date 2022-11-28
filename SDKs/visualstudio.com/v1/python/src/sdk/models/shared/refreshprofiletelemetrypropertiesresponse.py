@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import profilespecifier
-from . import profilespecifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RefreshProfileTelemetryPropertiesResponse:
-    failed: Optional[List[profilespecifier.ProfileSpecifier]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failed' }})
-    succeeded: Optional[List[profilespecifier.ProfileSpecifier]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'succeeded' }})
+    failed: Optional[List[ProfileSpecifier]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failed') }})
+    succeeded: Optional[List[ProfileSpecifier]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('succeeded') }})
     

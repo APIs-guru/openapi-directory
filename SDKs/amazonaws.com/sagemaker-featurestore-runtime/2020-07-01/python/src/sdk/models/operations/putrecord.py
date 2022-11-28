@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutRecordPathParams:
-    feature_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FeatureGroupName', 'style': 'simple', 'explode': False }})
+    feature_group_name: str = field(metadata={'path_param': { 'field_name': 'FeatureGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,22 +27,22 @@ class PutRecordHeaders:
 @dataclass_json
 @dataclass
 class PutRecordRequestBody:
-    record: List[shared.FeatureValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Record' }})
+    record: List[shared.FeatureValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Record') }})
     
 
 @dataclass
 class PutRecordRequest:
-    path_params: PutRecordPathParams = field(default=None)
-    headers: PutRecordHeaders = field(default=None)
-    request: PutRecordRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutRecordHeaders = field()
+    path_params: PutRecordPathParams = field()
+    request: PutRecordRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutRecordResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_forbidden: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure: Optional[Any] = field(default=None)
     service_unavailable: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_error: Optional[Any] = field(default=None)
     

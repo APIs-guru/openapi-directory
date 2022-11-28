@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AttributePropagationSettingsOutputCredentialsEnum;
 (function (AttributePropagationSettingsOutputCredentialsEnum) {
     AttributePropagationSettingsOutputCredentialsEnum["OutputCredentialsUnspecified"] = "OUTPUT_CREDENTIALS_UNSPECIFIED";
@@ -40,15 +40,15 @@ var AttributePropagationSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enable" }),
+        SpeakeasyMetadata({ data: "json, name=enable" }),
         __metadata("design:type", Boolean)
     ], AttributePropagationSettings.prototype, "enable", void 0);
     __decorate([
-        Metadata({ data: "json, name=expression" }),
+        SpeakeasyMetadata({ data: "json, name=expression" }),
         __metadata("design:type", String)
     ], AttributePropagationSettings.prototype, "expression", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=outputCredentials" }),
         __metadata("design:type", Array)
     ], AttributePropagationSettings.prototype, "outputCredentials", void 0);
     return AttributePropagationSettings;

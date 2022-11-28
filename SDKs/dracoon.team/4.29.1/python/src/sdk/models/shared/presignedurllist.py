@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import presignedurl
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PresignedURLList:
-    urls: List[presignedurl.PresignedURL] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urls' }})
+    r"""PresignedURLList
+    List of generated presigned URLs
+    """
+    
+    urls: List[PresignedURL] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('urls') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Datum
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A piece of data (a field in the table).
 **/
 export class Datum extends SpeakeasyBase {
-  @Metadata({ data: "json, name=VarCharValue" })
+  @SpeakeasyMetadata({ data: "json, name=VarCharValue" })
   varCharValue?: string;
 }

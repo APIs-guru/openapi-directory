@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ScriptProjectsGetMetricsPathParams:
-    script_id: str = field(default=None, metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
+    script_id: str = field(metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
     
 class ScriptProjectsGetMetricsMetricsGranularityEnum(str, Enum):
     UNSPECIFIED_GRANULARITY = "UNSPECIFIED_GRANULARITY"
@@ -32,20 +33,20 @@ class ScriptProjectsGetMetricsQueryParams:
 
 @dataclass
 class ScriptProjectsGetMetricsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ScriptProjectsGetMetricsRequest:
-    path_params: ScriptProjectsGetMetricsPathParams = field(default=None)
-    query_params: ScriptProjectsGetMetricsQueryParams = field(default=None)
-    security: ScriptProjectsGetMetricsSecurity = field(default=None)
+    path_params: ScriptProjectsGetMetricsPathParams = field()
+    query_params: ScriptProjectsGetMetricsQueryParams = field()
+    security: ScriptProjectsGetMetricsSecurity = field()
     
 
 @dataclass
 class ScriptProjectsGetMetricsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     metrics: Optional[shared.Metrics] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,0 +1,24 @@
+export var OperatorEnum;
+(function (OperatorEnum) {
+    OperatorEnum["Projection"] = "PROJECTION";
+    OperatorEnum["LessThan"] = "LESS_THAN";
+    OperatorEnum["GreaterThan"] = "GREATER_THAN";
+    OperatorEnum["Contains"] = "CONTAINS";
+    OperatorEnum["Between"] = "BETWEEN";
+    OperatorEnum["LessThanOrEqualTo"] = "LESS_THAN_OR_EQUAL_TO";
+    OperatorEnum["GreaterThanOrEqualTo"] = "GREATER_THAN_OR_EQUAL_TO";
+    OperatorEnum["EqualTo"] = "EQUAL_TO";
+    OperatorEnum["NotEqualTo"] = "NOT_EQUAL_TO";
+    OperatorEnum["Addition"] = "ADDITION";
+    OperatorEnum["Multiplication"] = "MULTIPLICATION";
+    OperatorEnum["Division"] = "DIVISION";
+    OperatorEnum["Subtraction"] = "SUBTRACTION";
+    OperatorEnum["MaskAll"] = "MASK_ALL";
+    OperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    OperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    OperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    OperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    OperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    OperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    OperatorEnum["NoOp"] = "NO_OP";
+})(OperatorEnum || (OperatorEnum = {}));

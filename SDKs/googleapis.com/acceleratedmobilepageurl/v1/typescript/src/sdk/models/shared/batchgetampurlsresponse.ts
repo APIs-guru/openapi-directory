@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmpUrl } from "./ampurl";
 import { AmpUrlError } from "./ampurlerror";
+
 
 
 // BatchGetAmpUrlsResponse
@@ -9,9 +9,9 @@ import { AmpUrlError } from "./ampurlerror";
  * Batch AMP URL response.
 **/
 export class BatchGetAmpUrlsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ampUrls", elemType: shared.AmpUrl })
+  @SpeakeasyMetadata({ data: "json, name=ampUrls", elemType: AmpUrl })
   ampUrls?: AmpUrl[];
 
-  @Metadata({ data: "json, name=urlErrors", elemType: shared.AmpUrlError })
+  @SpeakeasyMetadata({ data: "json, name=urlErrors", elemType: AmpUrlError })
   urlErrors?: AmpUrlError[];
 }

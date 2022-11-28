@@ -1,5 +1,7 @@
 package shared
 
+// InstantiateWorkflowTemplateRequest
+// A request to instantiate a workflow template.
 type InstantiateWorkflowTemplateRequest struct {
 	Parameters map[string]string `json:"parameters,omitempty"`
 	RequestID  *string           `json:"requestId,omitempty"`

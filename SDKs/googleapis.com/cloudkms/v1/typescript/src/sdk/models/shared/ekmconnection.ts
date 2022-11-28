@@ -1,6 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServiceResolverInput } from "./serviceresolver";
 import { ServiceResolver } from "./serviceresolver";
+
+
+
+// EkmConnectionInput
+/** 
+ * An EkmConnection represents an individual EKM connection. It can be used for creating CryptoKeys and CryptoKeyVersions with a ProtectionLevel of EXTERNAL_VPC, as well as performing cryptographic operations using keys created within the EkmConnection.
+**/
+export class EkmConnectionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceResolvers", elemType: ServiceResolverInput })
+  serviceResolvers?: ServiceResolverInput[];
+}
 
 
 // EkmConnection
@@ -8,15 +22,15 @@ import { ServiceResolver } from "./serviceresolver";
  * An EkmConnection represents an individual EKM connection. It can be used for creating CryptoKeys and CryptoKeyVersions with a ProtectionLevel of EXTERNAL_VPC, as well as performing cryptographic operations using keys created within the EkmConnection.
 **/
 export class EkmConnection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serviceResolvers", elemType: shared.ServiceResolver })
+  @SpeakeasyMetadata({ data: "json, name=serviceResolvers", elemType: ServiceResolver })
   serviceResolvers?: ServiceResolver[];
 }

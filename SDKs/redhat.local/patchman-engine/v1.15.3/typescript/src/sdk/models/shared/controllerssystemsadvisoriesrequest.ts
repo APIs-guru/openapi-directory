@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ControllersSystemsAdvisoriesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advisories" })
+  @SpeakeasyMetadata({ data: "json, name=advisories" })
   advisories?: string[];
 
-  @Metadata({ data: "json, name=systems" })
+  @SpeakeasyMetadata({ data: "json, name=systems" })
   systems?: string[];
 }

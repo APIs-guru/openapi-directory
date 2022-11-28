@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerLogDeliveryDescription } from "./workerlogdeliverydescription";
+
 
 
 // LogDeliveryDescription
@@ -7,6 +8,6 @@ import { WorkerLogDeliveryDescription } from "./workerlogdeliverydescription";
  * The description of the log delivery settings.
 **/
 export class LogDeliveryDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workerLogDelivery" })
+  @SpeakeasyMetadata({ data: "json, name=workerLogDelivery" })
   workerLogDelivery?: WorkerLogDeliveryDescription;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeTargetGroupsActionEnum(str, Enum):
     DESCRIBE_TARGET_GROUPS = "DescribeTargetGroups"
@@ -10,13 +14,13 @@ class GetDescribeTargetGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeTargetGroupsQueryParams:
-    action: GetDescribeTargetGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeTargetGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeTargetGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     load_balancer_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerArn', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Names', 'style': 'form', 'explode': True }})
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
     target_group_arns: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TargetGroupArns', 'style': 'form', 'explode': True }})
-    version: GetDescribeTargetGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribeTargetGroupsHeaders:
 
 @dataclass
 class GetDescribeTargetGroupsRequest:
-    query_params: GetDescribeTargetGroupsQueryParams = field(default=None)
-    headers: GetDescribeTargetGroupsHeaders = field(default=None)
+    headers: GetDescribeTargetGroupsHeaders = field()
+    query_params: GetDescribeTargetGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeTargetGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// DetailedServiceAddress
+// Service location address.
 type DetailedServiceAddress struct {
 	AddressLine1          *string `json:"address_line1,omitempty"`
 	AddressLine2          *string `json:"address_line2,omitempty"`

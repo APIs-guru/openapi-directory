@@ -1,17 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://app.bigredcloud.com/API",
+export const ServerList = [
+	"https://app.bigredcloud.com/API",
 ] as const;
 
 export function WithServerURL(
@@ -22,69 +19,68 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // AccountsGet - Returns a list of company's Accounts. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" and "code" fields.
-  AccountsGet(
-    
+  /**
+   * accountsGet - Returns a list of company's Accounts. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" and "code" fields.
+  **/
+  accountsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.AccountsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/accounts";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AccountsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AccountsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultAccountDto = httpRes?.data;
             }
             break;
@@ -96,30 +92,31 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // AnalysisCategoriesGet - Returns a list of company's Analysis Categories. Supports OData querying protocol.
-Filtering is allowed by "categoryTypeId" field.
-Ordering is allowed by "id" and "orderIndex" fields.
-  AnalysisCategoriesGet(
-    
+  /**
+   * analysisCategoriesGet - Returns a list of company's Analysis Categories. Supports OData querying protocol.
+   * Filtering is allowed by "categoryTypeId" field.
+   * Ordering is allowed by "id" and "orderIndex" fields.
+  **/
+  analysisCategoriesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.AnalysisCategoriesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/analysisCategories";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AnalysisCategoriesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AnalysisCategoriesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultAnalysisCategoryDto = httpRes?.data;
             }
             break;
@@ -131,8 +128,10 @@ Ordering is allowed by "id" and "orderIndex" fields.
   }
 
   
-  // BankAccountsDelete - Removes an existing Bank Account.
-  BankAccountsDelete(
+  /**
+   * bankAccountsDelete - Removes an existing Bank Account.
+  **/
+  bankAccountsDelete(
     req: operations.BankAccountsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BankAccountsDeleteResponse> {
@@ -140,12 +139,11 @@ Ordering is allowed by "id" and "orderIndex" fields.
       req = new operations.BankAccountsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/bankAccounts/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -154,17 +152,18 @@ Ordering is allowed by "id" and "orderIndex" fields.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BankAccountsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BankAccountsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bankAccountsDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -176,30 +175,31 @@ Ordering is allowed by "id" and "orderIndex" fields.
   }
 
   
-  // BankAccountsGet - Returns a list of company's Bank Account. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" and "acCode" fields.
-  BankAccountsGet(
-    
+  /**
+   * bankAccountsGet - Returns a list of company's Bank Account. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" and "acCode" fields.
+  **/
+  bankAccountsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.BankAccountsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/bankAccounts";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BankAccountsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BankAccountsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultBankAccountQueryDto = httpRes?.data;
             }
             break;
@@ -211,8 +211,10 @@ Ordering is allowed by "id" and "acCode" fields.
   }
 
   
-  // BankAccountsPost - Creates a new Bank Account.
-  BankAccountsPost(
+  /**
+   * bankAccountsPost - Creates a new Bank Account.
+  **/
+  bankAccountsPost(
     req: operations.BankAccountsPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BankAccountsPostResponse> {
@@ -220,41 +222,39 @@ Ordering is allowed by "id" and "acCode" fields.
       req = new operations.BankAccountsPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/bankAccounts";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BankAccountsPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BankAccountsPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bankAccountsPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -266,8 +266,10 @@ Ordering is allowed by "id" and "acCode" fields.
   }
 
   
-  // BankAccountsProcessBatch - Processes a batch of Bank Accounts.
-  BankAccountsProcessBatch(
+  /**
+   * bankAccountsProcessBatch - Processes a batch of Bank Accounts.
+  **/
+  bankAccountsProcessBatch(
     req: operations.BankAccountsProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BankAccountsProcessBatchResponse> {
@@ -275,41 +277,39 @@ Ordering is allowed by "id" and "acCode" fields.
       req = new operations.BankAccountsProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/bankAccounts/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BankAccountsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BankAccountsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bankAccountsProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -321,8 +321,10 @@ Ordering is allowed by "id" and "acCode" fields.
   }
 
   
-  // BankAccountsPut - Updates an existing Bank Account.
-  BankAccountsPut(
+  /**
+   * bankAccountsPut - Updates an existing Bank Account.
+  **/
+  bankAccountsPut(
     req: operations.BankAccountsPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BankAccountsPutResponse> {
@@ -330,41 +332,39 @@ Ordering is allowed by "id" and "acCode" fields.
       req = new operations.BankAccountsPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/bankAccounts/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BankAccountsPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BankAccountsPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bankAccountsPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -376,30 +376,31 @@ Ordering is allowed by "id" and "acCode" fields.
   }
 
   
-  // BookTranTypesGet - Returns a list of global Book Transactions' Types. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" field.
-  BookTranTypesGet(
-    
+  /**
+   * bookTranTypesGet - Returns a list of global Book Transactions' Types. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" field.
+  **/
+  bookTranTypesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.BookTranTypesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/bookTranTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BookTranTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BookTranTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultBookTranTypeDto = httpRes?.data;
             }
             break;
@@ -411,8 +412,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashPaymentsDelete - Removes an existing Cash Payment.
-  CashPaymentsDelete(
+  /**
+   * cashPaymentsDelete - Removes an existing Cash Payment.
+  **/
+  cashPaymentsDelete(
     req: operations.CashPaymentsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashPaymentsDeleteResponse> {
@@ -420,12 +423,11 @@ Ordering is allowed by "id" field.
       req = new operations.CashPaymentsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/cashPayments/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -434,17 +436,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashPaymentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashPaymentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashPaymentsDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -456,30 +459,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashPaymentsGet - Returns a list of company's Cash Payments. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  CashPaymentsGet(
-    
+  /**
+   * cashPaymentsGet - Returns a list of company's Cash Payments. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  cashPaymentsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CashPaymentsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/cashPayments";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashPaymentsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashPaymentsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultCashPaymentQueryDto = httpRes?.data;
             }
             break;
@@ -491,8 +495,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashPaymentsPost - Creates a new Cash Payment.
-  CashPaymentsPost(
+  /**
+   * cashPaymentsPost - Creates a new Cash Payment.
+  **/
+  cashPaymentsPost(
     req: operations.CashPaymentsPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashPaymentsPostResponse> {
@@ -500,41 +506,39 @@ Ordering is allowed by "id" field.
       req = new operations.CashPaymentsPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/cashPayments";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashPaymentsPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashPaymentsPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashPaymentsPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -546,8 +550,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashPaymentsProcessBatch - Processes a batch of Cash Payments.
-  CashPaymentsProcessBatch(
+  /**
+   * cashPaymentsProcessBatch - Processes a batch of Cash Payments.
+  **/
+  cashPaymentsProcessBatch(
     req: operations.CashPaymentsProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashPaymentsProcessBatchResponse> {
@@ -555,41 +561,39 @@ Ordering is allowed by "id" field.
       req = new operations.CashPaymentsProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/cashPayments/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashPaymentsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashPaymentsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashPaymentsProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -601,8 +605,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashPaymentsPut - Updates an existing Cash Payment.
-  CashPaymentsPut(
+  /**
+   * cashPaymentsPut - Updates an existing Cash Payment.
+  **/
+  cashPaymentsPut(
     req: operations.CashPaymentsPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashPaymentsPutResponse> {
@@ -610,41 +616,39 @@ Ordering is allowed by "id" field.
       req = new operations.CashPaymentsPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/cashPayments/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashPaymentsPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashPaymentsPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashPaymentsPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -656,8 +660,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashReceiptsDelete - Removes an existing Cash Receipt.
-  CashReceiptsDelete(
+  /**
+   * cashReceiptsDelete - Removes an existing Cash Receipt.
+  **/
+  cashReceiptsDelete(
     req: operations.CashReceiptsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashReceiptsDeleteResponse> {
@@ -665,12 +671,11 @@ Ordering is allowed by "id" field.
       req = new operations.CashReceiptsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/cashReceipts/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -679,17 +684,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashReceiptsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashReceiptsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashReceiptsDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -701,30 +707,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashReceiptsGet - Returns a list of company's Cash Receipts. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  CashReceiptsGet(
-    
+  /**
+   * cashReceiptsGet - Returns a list of company's Cash Receipts. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  cashReceiptsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CashReceiptsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/cashReceipts";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashReceiptsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashReceiptsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultCashReceiptQueryDto = httpRes?.data;
             }
             break;
@@ -736,8 +743,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashReceiptsPost - Creates a new Cash Receipt.
-  CashReceiptsPost(
+  /**
+   * cashReceiptsPost - Creates a new Cash Receipt.
+  **/
+  cashReceiptsPost(
     req: operations.CashReceiptsPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashReceiptsPostResponse> {
@@ -745,41 +754,39 @@ Ordering is allowed by "id" field.
       req = new operations.CashReceiptsPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/cashReceipts";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashReceiptsPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashReceiptsPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashReceiptsPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -791,8 +798,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashReceiptsProcessBatch - Processes a batch of Cash Receipts.
-  CashReceiptsProcessBatch(
+  /**
+   * cashReceiptsProcessBatch - Processes a batch of Cash Receipts.
+  **/
+  cashReceiptsProcessBatch(
     req: operations.CashReceiptsProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashReceiptsProcessBatchResponse> {
@@ -800,41 +809,39 @@ Ordering is allowed by "id" field.
       req = new operations.CashReceiptsProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/cashReceipts/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashReceiptsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashReceiptsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashReceiptsProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -846,8 +853,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CashReceiptsPut - Updates an existing Cash Receipt.
-  CashReceiptsPut(
+  /**
+   * cashReceiptsPut - Updates an existing Cash Receipt.
+  **/
+  cashReceiptsPut(
     req: operations.CashReceiptsPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CashReceiptsPutResponse> {
@@ -855,41 +864,39 @@ Ordering is allowed by "id" field.
       req = new operations.CashReceiptsPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/cashReceipts/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CashReceiptsPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CashReceiptsPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashReceiptsPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -901,30 +908,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CategoryTypesGet - Returns a list of company's Category Types. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" field.
-  CategoryTypesGet(
-    
+  /**
+   * categoryTypesGet - Returns a list of company's Category Types. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" field.
+  **/
+  categoryTypesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CategoryTypesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/categoryTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CategoryTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CategoryTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultCategoryTypeDto = httpRes?.data;
             }
             break;
@@ -936,29 +944,30 @@ Ordering is allowed by "id" field.
   }
 
   
-  // CompanySettingsGet - Returns a list of company settings. Supports OData querying protocol.
-Filtering is forbidden.
-  CompanySettingsGet(
-    
+  /**
+   * companySettingsGet - Returns a list of company settings. Supports OData querying protocol.
+   * Filtering is forbidden.
+  **/
+  companySettingsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CompanySettingsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/companySettings";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompanySettingsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CompanySettingsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultCompanySettingDto = httpRes?.data;
             }
             break;
@@ -970,28 +979,29 @@ Filtering is forbidden.
   }
 
   
-  // CompanySetupConfigGet - Returns the company configuration settings.
-  CompanySetupConfigGet(
-    
+  /**
+   * companySetupConfigGet - Returns the company configuration settings.
+  **/
+  companySetupConfigGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CompanySetupConfigGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/companySetupConfig";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompanySetupConfigGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CompanySetupConfigGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.companySetupConfigViewModel = httpRes?.data;
             }
             break;
@@ -1003,28 +1013,29 @@ Filtering is forbidden.
   }
 
   
-  // CompanySetupConfigGetCompanyOptions - Returns the company option setting.
-  CompanySetupConfigGetCompanyOptions(
-    
+  /**
+   * companySetupConfigGetCompanyOptions - Returns the company option setting.
+  **/
+  companySetupConfigGetCompanyOptions(
     config?: AxiosRequestConfig
   ): Promise<operations.CompanySetupConfigGetCompanyOptionsResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/companySetupConfig/getCompanyOptions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompanySetupConfigGetCompanyOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CompanySetupConfigGetCompanyOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.companyOptionDto = httpRes?.data;
             }
             break;
@@ -1036,28 +1047,29 @@ Filtering is forbidden.
   }
 
   
-  // CompanySetupConfigGetFinancialYear - Returns the financial year.
-  CompanySetupConfigGetFinancialYear(
-    
+  /**
+   * companySetupConfigGetFinancialYear - Returns the financial year.
+  **/
+  companySetupConfigGetFinancialYear(
     config?: AxiosRequestConfig
   ): Promise<operations.CompanySetupConfigGetFinancialYearResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/companySetupConfig/getFinancialYear";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompanySetupConfigGetFinancialYearResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CompanySetupConfigGetFinancialYearResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.financialYearDto = httpRes?.data;
             }
             break;
@@ -1069,8 +1081,10 @@ Filtering is forbidden.
   }
 
   
-  // CustomersDelete - Removes an existing Customer.
-  CustomersDelete(
+  /**
+   * customersDelete - Removes an existing Customer.
+  **/
+  customersDelete(
     req: operations.CustomersDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersDeleteResponse> {
@@ -1078,12 +1092,11 @@ Filtering is forbidden.
       req = new operations.CustomersDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/customers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1092,17 +1105,18 @@ Filtering is forbidden.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customersDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1114,30 +1128,31 @@ Filtering is forbidden.
   }
 
   
-  // CustomersGet - Returns a list of company's Customers. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" and "code" fields.
-  CustomersGet(
-    
+  /**
+   * customersGet - Returns a list of company's Customers. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" and "code" fields.
+  **/
+  customersGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/customers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultCustomerQueryDto = httpRes?.data;
             }
             break;
@@ -1149,8 +1164,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // CustomersGetAccountTrans - Returns a list of Customer's account transactions.
-  CustomersGetAccountTrans(
+  /**
+   * customersGetAccountTrans - Returns a list of Customer's account transactions.
+  **/
+  customersGetAccountTrans(
     req: operations.CustomersGetAccountTransRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersGetAccountTransResponse> {
@@ -1158,23 +1175,23 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.CustomersGetAccountTransRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/customers/{itemId}/accountTrans", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersGetAccountTransResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersGetAccountTransResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accountTranDtos = httpRes?.data;
             }
             break;
@@ -1186,8 +1203,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // CustomersGetOpeningBalance - Returns a Customer's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
-  CustomersGetOpeningBalance(
+  /**
+   * customersGetOpeningBalance - Returns a Customer's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
+  **/
+  customersGetOpeningBalance(
     req: operations.CustomersGetOpeningBalanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersGetOpeningBalanceResponse> {
@@ -1195,23 +1214,23 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.CustomersGetOpeningBalanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/customers/{itemId}/openingBalance", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersGetOpeningBalanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersGetOpeningBalanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ownerOpeningBalanceInPeriodsDto = httpRes?.data;
             }
             break;
@@ -1223,8 +1242,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // CustomersGetOpeningBalanceList - Returns a list of Customer's opening balance transactions.
-  CustomersGetOpeningBalanceList(
+  /**
+   * customersGetOpeningBalanceList - Returns a list of Customer's opening balance transactions.
+  **/
+  customersGetOpeningBalanceList(
     req: operations.CustomersGetOpeningBalanceListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersGetOpeningBalanceListResponse> {
@@ -1232,23 +1253,23 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.CustomersGetOpeningBalanceListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/customers/{itemId}/openingBalanceList", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersGetOpeningBalanceListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersGetOpeningBalanceListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ownerOpeningBalanceDtos = httpRes?.data;
             }
             break;
@@ -1260,8 +1281,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // CustomersGetQuotes - Returns a list of Customer's quotes.
-  CustomersGetQuotes(
+  /**
+   * customersGetQuotes - Returns a list of Customer's quotes.
+  **/
+  customersGetQuotes(
     req: operations.CustomersGetQuotesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersGetQuotesResponse> {
@@ -1269,23 +1292,23 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.CustomersGetQuotesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/customers/{itemId}/quotes", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersGetQuotesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersGetQuotesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quoteDtos = httpRes?.data;
             }
             break;
@@ -1297,8 +1320,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // CustomersPost - Creates a new Customer.
-  CustomersPost(
+  /**
+   * customersPost - Creates a new Customer.
+  **/
+  customersPost(
     req: operations.CustomersPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersPostResponse> {
@@ -1306,41 +1331,39 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.CustomersPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/customers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customersPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1352,8 +1375,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // CustomersProcessBatch - Processes a batch of Customers.
-  CustomersProcessBatch(
+  /**
+   * customersProcessBatch - Processes a batch of Customers.
+  **/
+  customersProcessBatch(
     req: operations.CustomersProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersProcessBatchResponse> {
@@ -1361,41 +1386,39 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.CustomersProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/customers/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customersProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1407,8 +1430,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // CustomersPut - Updates an existing Customer.
-  CustomersPut(
+  /**
+   * customersPut - Updates an existing Customer.
+  **/
+  customersPut(
     req: operations.CustomersPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CustomersPutResponse> {
@@ -1416,41 +1441,39 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.CustomersPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/customers/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CustomersPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CustomersPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customersPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1462,9 +1485,11 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // EmailSendEmailStatement - Sends a Statement email.
-If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
-  EmailSendEmailStatement(
+  /**
+   * emailSendEmailStatement - Sends a Statement email.
+   * If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
+  **/
+  emailSendEmailStatement(
     req: operations.EmailSendEmailStatementRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EmailSendEmailStatementResponse> {
@@ -1472,41 +1497,39 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.EmailSendEmailStatementRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/email/sendEmailStatement";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EmailSendEmailStatementResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EmailSendEmailStatementResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.emailSendEmailStatement200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1518,9 +1541,11 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // EmailSendQuote - Sends a Quote email.
-If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
-  EmailSendQuote(
+  /**
+   * emailSendQuote - Sends a Quote email.
+   * If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
+  **/
+  emailSendQuote(
     req: operations.EmailSendQuoteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EmailSendQuoteResponse> {
@@ -1528,41 +1553,39 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.EmailSendQuoteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/email/sendQuote";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EmailSendQuoteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EmailSendQuoteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.emailSendQuote200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1574,9 +1597,11 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // EmailSendSalesInvoice - Sends a Sales Invoice email.
-If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Sales Invoice Customer's address.
-  EmailSendSalesInvoice(
+  /**
+   * emailSendSalesInvoice - Sends a Sales Invoice email.
+   * If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Sales Invoice Customer's address.
+  **/
+  emailSendSalesInvoice(
     req: operations.EmailSendSalesInvoiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EmailSendSalesInvoiceResponse> {
@@ -1584,41 +1609,39 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.EmailSendSalesInvoiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/email/sendSalesInvoice";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EmailSendSalesInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EmailSendSalesInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.emailSendSalesInvoice200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1630,8 +1653,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1BankAccountsId - Returns information about a single Bank Account.
-  GetV1BankAccountsId(
+  /**
+   * getV1BankAccountsId - Returns information about a single Bank Account.
+  **/
+  getV1BankAccountsId(
     req: operations.GetV1BankAccountsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1BankAccountsIdResponse> {
@@ -1639,23 +1664,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1BankAccountsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/bankAccounts/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1BankAccountsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1BankAccountsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bankAccountDto = httpRes?.data;
             }
             break;
@@ -1667,8 +1692,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1CashPaymentsId - Returns information about a single Cash Payment.
-  GetV1CashPaymentsId(
+  /**
+   * getV1CashPaymentsId - Returns information about a single Cash Payment.
+  **/
+  getV1CashPaymentsId(
     req: operations.GetV1CashPaymentsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1CashPaymentsIdResponse> {
@@ -1676,23 +1703,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1CashPaymentsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/cashPayments/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1CashPaymentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1CashPaymentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashPaymentDto = httpRes?.data;
             }
             break;
@@ -1704,8 +1731,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1CashReceiptsId - Returns information about a single Cash Receipt.
-  GetV1CashReceiptsId(
+  /**
+   * getV1CashReceiptsId - Returns information about a single Cash Receipt.
+  **/
+  getV1CashReceiptsId(
     req: operations.GetV1CashReceiptsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1CashReceiptsIdResponse> {
@@ -1713,23 +1742,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1CashReceiptsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/cashReceipts/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1CashReceiptsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1CashReceiptsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cashReceiptDto = httpRes?.data;
             }
             break;
@@ -1741,8 +1770,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1CustomersId - Returns information about a single Customer. You may specify that Customer's ledger balance should be calculated.
-  GetV1CustomersId(
+  /**
+   * getV1CustomersId - Returns information about a single Customer. You may specify that Customer's ledger balance should be calculated.
+  **/
+  getV1CustomersId(
     req: operations.GetV1CustomersIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1CustomersIdResponse> {
@@ -1750,12 +1781,11 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1CustomersIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/customers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1764,17 +1794,18 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerDto = httpRes?.data;
             }
             break;
@@ -1786,8 +1817,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1PaymentsId - Returns information about a single Payments.
-  GetV1PaymentsId(
+  /**
+   * getV1PaymentsId - Returns information about a single Payments.
+  **/
+  getV1PaymentsId(
     req: operations.GetV1PaymentsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1PaymentsIdResponse> {
@@ -1795,23 +1828,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1PaymentsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/payments/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1PaymentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1PaymentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentDto = httpRes?.data;
             }
             break;
@@ -1823,8 +1856,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1ProductsId - Returns information about a single Product.
-  GetV1ProductsId(
+  /**
+   * getV1ProductsId - Returns information about a single Product.
+  **/
+  getV1ProductsId(
     req: operations.GetV1ProductsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1ProductsIdResponse> {
@@ -1832,23 +1867,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1ProductsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/products/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1ProductsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1ProductsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.productDto = httpRes?.data;
             }
             break;
@@ -1860,8 +1895,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1PurchasesId - Returns information about a single Purchases.
-  GetV1PurchasesId(
+  /**
+   * getV1PurchasesId - Returns information about a single Purchases.
+  **/
+  getV1PurchasesId(
     req: operations.GetV1PurchasesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1PurchasesIdResponse> {
@@ -1869,23 +1906,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1PurchasesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/purchases/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1PurchasesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1PurchasesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.purchaseDto = httpRes?.data;
             }
             break;
@@ -1897,8 +1934,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1QuotesId - Returns information about a single Quote.
-  GetV1QuotesId(
+  /**
+   * getV1QuotesId - Returns information about a single Quote.
+  **/
+  getV1QuotesId(
     req: operations.GetV1QuotesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1QuotesIdResponse> {
@@ -1906,23 +1945,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1QuotesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/quotes/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1QuotesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1QuotesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quoteDto = httpRes?.data;
             }
             break;
@@ -1934,8 +1973,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1SalesCreditNotesId - Returns information about a single Sales Credit Note.
-  GetV1SalesCreditNotesId(
+  /**
+   * getV1SalesCreditNotesId - Returns information about a single Sales Credit Note.
+  **/
+  getV1SalesCreditNotesId(
     req: operations.GetV1SalesCreditNotesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1SalesCreditNotesIdResponse> {
@@ -1943,23 +1984,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1SalesCreditNotesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesCreditNotes/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1SalesCreditNotesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1SalesCreditNotesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesInvoiceCreditNoteDto = httpRes?.data;
             }
             break;
@@ -1971,8 +2012,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1SalesEntriesId - Returns information about a single Sales Entry.
-  GetV1SalesEntriesId(
+  /**
+   * getV1SalesEntriesId - Returns information about a single Sales Entry.
+  **/
+  getV1SalesEntriesId(
     req: operations.GetV1SalesEntriesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1SalesEntriesIdResponse> {
@@ -1980,23 +2023,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1SalesEntriesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesEntries/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1SalesEntriesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1SalesEntriesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesEntryDto = httpRes?.data;
             }
             break;
@@ -2008,8 +2051,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1SalesInvoicesId - Returns information about a single Sales Invoice.
-  GetV1SalesInvoicesId(
+  /**
+   * getV1SalesInvoicesId - Returns information about a single Sales Invoice.
+  **/
+  getV1SalesInvoicesId(
     req: operations.GetV1SalesInvoicesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1SalesInvoicesIdResponse> {
@@ -2017,23 +2062,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1SalesInvoicesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesInvoices/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1SalesInvoicesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1SalesInvoicesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesInvoiceCreditNoteDto = httpRes?.data;
             }
             break;
@@ -2045,8 +2090,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1SalesRepsId - Returns information about a single SaleRep.
-  GetV1SalesRepsId(
+  /**
+   * getV1SalesRepsId - Returns information about a single SaleRep.
+  **/
+  getV1SalesRepsId(
     req: operations.GetV1SalesRepsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1SalesRepsIdResponse> {
@@ -2054,23 +2101,23 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1SalesRepsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesReps/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1SalesRepsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1SalesRepsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saleRepsDto = httpRes?.data;
             }
             break;
@@ -2082,8 +2129,10 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // GetV1SuppliersId - Returns information about a single Supplier. You may specify that Supplier's ledger balance should be calculated.
-  GetV1SuppliersId(
+  /**
+   * getV1SuppliersId - Returns information about a single Supplier. You may specify that Supplier's ledger balance should be calculated.
+  **/
+  getV1SuppliersId(
     req: operations.GetV1SuppliersIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetV1SuppliersIdResponse> {
@@ -2091,12 +2140,11 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
       req = new operations.GetV1SuppliersIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/suppliers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2105,17 +2153,18 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetV1SuppliersIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetV1SuppliersIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.supplierDto = httpRes?.data;
             }
             break;
@@ -2127,30 +2176,31 @@ If "toAddress" is not empty then email will be sent to this address. Otherwise e
   }
 
   
-  // OwnerTypeGroupsGet - Returns a list of global Owner Type Groups. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" field.
-  OwnerTypeGroupsGet(
-    
+  /**
+   * ownerTypeGroupsGet - Returns a list of global Owner Type Groups. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" field.
+  **/
+  ownerTypeGroupsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.OwnerTypeGroupsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/ownerTypeGroups";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.OwnerTypeGroupsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.OwnerTypeGroupsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultOwnerTypeGroupDto = httpRes?.data;
             }
             break;
@@ -2162,30 +2212,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // OwnerTypesGet - Returns a list of global Owner Types. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" field.
-  OwnerTypesGet(
-    
+  /**
+   * ownerTypesGet - Returns a list of global Owner Types. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" field.
+  **/
+  ownerTypesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.OwnerTypesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/ownerTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.OwnerTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.OwnerTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultOwnerTypeDto = httpRes?.data;
             }
             break;
@@ -2197,8 +2248,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PaymentsDelete - Removes an existing Payment.
-  PaymentsDelete(
+  /**
+   * paymentsDelete - Removes an existing Payment.
+  **/
+  paymentsDelete(
     req: operations.PaymentsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PaymentsDeleteResponse> {
@@ -2206,12 +2259,11 @@ Ordering is allowed by "id" field.
       req = new operations.PaymentsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/payments/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2220,17 +2272,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PaymentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PaymentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentsDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2242,30 +2295,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PaymentsGet - Returns a list of company's Payments. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  PaymentsGet(
-    
+  /**
+   * paymentsGet - Returns a list of company's Payments. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  paymentsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.PaymentsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/payments";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PaymentsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PaymentsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultPaymentQueryDto = httpRes?.data;
             }
             break;
@@ -2277,8 +2331,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PaymentsPost - Creates a new Payment.
-  PaymentsPost(
+  /**
+   * paymentsPost - Creates a new Payment.
+  **/
+  paymentsPost(
     req: operations.PaymentsPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PaymentsPostResponse> {
@@ -2286,41 +2342,39 @@ Ordering is allowed by "id" field.
       req = new operations.PaymentsPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/payments";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PaymentsPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PaymentsPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentsPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2332,8 +2386,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PaymentsProcessBatch - Processes a batch of Payments.
-  PaymentsProcessBatch(
+  /**
+   * paymentsProcessBatch - Processes a batch of Payments.
+  **/
+  paymentsProcessBatch(
     req: operations.PaymentsProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PaymentsProcessBatchResponse> {
@@ -2341,41 +2397,39 @@ Ordering is allowed by "id" field.
       req = new operations.PaymentsProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/payments/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PaymentsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PaymentsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentsProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2387,8 +2441,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PaymentsPut - Updates an existing Payment.
-  PaymentsPut(
+  /**
+   * paymentsPut - Updates an existing Payment.
+  **/
+  paymentsPut(
     req: operations.PaymentsPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PaymentsPutResponse> {
@@ -2396,41 +2452,39 @@ Ordering is allowed by "id" field.
       req = new operations.PaymentsPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/payments/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PaymentsPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PaymentsPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.paymentsPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2442,8 +2496,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // ProductsDelete - Removes an existing Product.
-  ProductsDelete(
+  /**
+   * productsDelete - Removes an existing Product.
+  **/
+  productsDelete(
     req: operations.ProductsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProductsDeleteResponse> {
@@ -2451,12 +2507,11 @@ Ordering is allowed by "id" field.
       req = new operations.ProductsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/products/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2465,17 +2520,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProductsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProductsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.productsDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2487,30 +2543,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // ProductsGet - Returns a list of company's Products. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" and "stockCode" fields.
-  ProductsGet(
-    
+  /**
+   * productsGet - Returns a list of company's Products. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" and "stockCode" fields.
+  **/
+  productsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.ProductsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/products";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProductsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProductsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultProductDto = httpRes?.data;
             }
             break;
@@ -2522,8 +2579,10 @@ Ordering is allowed by "id" and "stockCode" fields.
   }
 
   
-  // ProductsPost - Creates a new Product.
-  ProductsPost(
+  /**
+   * productsPost - Creates a new Product.
+  **/
+  productsPost(
     req: operations.ProductsPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProductsPostResponse> {
@@ -2531,41 +2590,39 @@ Ordering is allowed by "id" and "stockCode" fields.
       req = new operations.ProductsPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/products";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProductsPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProductsPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.productsPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2577,8 +2634,10 @@ Ordering is allowed by "id" and "stockCode" fields.
   }
 
   
-  // ProductsProcessBatch - Processes a batch of Products.
-  ProductsProcessBatch(
+  /**
+   * productsProcessBatch - Processes a batch of Products.
+  **/
+  productsProcessBatch(
     req: operations.ProductsProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProductsProcessBatchResponse> {
@@ -2586,41 +2645,39 @@ Ordering is allowed by "id" and "stockCode" fields.
       req = new operations.ProductsProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/products/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProductsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProductsProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.productsProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2632,8 +2689,10 @@ Ordering is allowed by "id" and "stockCode" fields.
   }
 
   
-  // ProductsPut - Updates an existing Product.
-  ProductsPut(
+  /**
+   * productsPut - Updates an existing Product.
+  **/
+  productsPut(
     req: operations.ProductsPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProductsPutResponse> {
@@ -2641,41 +2700,39 @@ Ordering is allowed by "id" and "stockCode" fields.
       req = new operations.ProductsPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/products/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProductsPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProductsPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.productsPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2687,8 +2744,10 @@ Ordering is allowed by "id" and "stockCode" fields.
   }
 
   
-  // PurchasesDelete - Removes an existing Purchase.
-  PurchasesDelete(
+  /**
+   * purchasesDelete - Removes an existing Purchase.
+  **/
+  purchasesDelete(
     req: operations.PurchasesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PurchasesDeleteResponse> {
@@ -2696,12 +2755,11 @@ Ordering is allowed by "id" and "stockCode" fields.
       req = new operations.PurchasesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/purchases/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2710,17 +2768,18 @@ Ordering is allowed by "id" and "stockCode" fields.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PurchasesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PurchasesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.purchasesDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2732,30 +2791,31 @@ Ordering is allowed by "id" and "stockCode" fields.
   }
 
   
-  // PurchasesGet - Returns a list of company's Purchases. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  PurchasesGet(
-    
+  /**
+   * purchasesGet - Returns a list of company's Purchases. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  purchasesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.PurchasesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/purchases";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PurchasesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PurchasesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultPurchaseQueryDto = httpRes?.data;
             }
             break;
@@ -2767,8 +2827,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PurchasesPost - Creates a new Purchase.
-  PurchasesPost(
+  /**
+   * purchasesPost - Creates a new Purchase.
+  **/
+  purchasesPost(
     req: operations.PurchasesPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PurchasesPostResponse> {
@@ -2776,41 +2838,39 @@ Ordering is allowed by "id" field.
       req = new operations.PurchasesPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/purchases";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PurchasesPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PurchasesPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.purchasesPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2822,8 +2882,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PurchasesProcessBatch - Processes a batch of Purchases.
-  PurchasesProcessBatch(
+  /**
+   * purchasesProcessBatch - Processes a batch of Purchases.
+  **/
+  purchasesProcessBatch(
     req: operations.PurchasesProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PurchasesProcessBatchResponse> {
@@ -2831,41 +2893,39 @@ Ordering is allowed by "id" field.
       req = new operations.PurchasesProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/purchases/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PurchasesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PurchasesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.purchasesProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2877,8 +2937,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // PurchasesPut - Updates an existing Purchase.
-  PurchasesPut(
+  /**
+   * purchasesPut - Updates an existing Purchase.
+  **/
+  purchasesPut(
     req: operations.PurchasesPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PurchasesPutResponse> {
@@ -2886,41 +2948,39 @@ Ordering is allowed by "id" field.
       req = new operations.PurchasesPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/purchases/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PurchasesPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PurchasesPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.purchasesPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2932,8 +2992,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // QuoteClose - Close a Quote.
-  QuoteClose(
+  /**
+   * quoteClose - Close a Quote.
+  **/
+  quoteClose(
     req: operations.QuoteCloseRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuoteCloseResponse> {
@@ -2941,23 +3003,23 @@ Ordering is allowed by "id" field.
       req = new operations.QuoteCloseRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/quotes/close/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuoteCloseResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuoteCloseResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quoteClose200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2969,8 +3031,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // QuoteDelete - Removes an existing Quote.
-  QuoteDelete(
+  /**
+   * quoteDelete - Removes an existing Quote.
+  **/
+  quoteDelete(
     req: operations.QuoteDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuoteDeleteResponse> {
@@ -2978,12 +3042,11 @@ Ordering is allowed by "id" field.
       req = new operations.QuoteDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/quotes/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2992,17 +3055,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuoteDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuoteDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quoteDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3014,30 +3078,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // QuoteGet - Returns a list of company's Quotes.
-Filtering is forbidden.
-Ordering is allowed by "id".
-  QuoteGet(
-    
+  /**
+   * quoteGet - Returns a list of company's Quotes.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id".
+  **/
+  quoteGet(
     config?: AxiosRequestConfig
   ): Promise<operations.QuoteGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/quotes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuoteGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuoteGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultQuoteDto = httpRes?.data;
             }
             break;
@@ -3049,8 +3114,10 @@ Ordering is allowed by "id".
   }
 
   
-  // QuotePost - Creates a new Quote.
-  QuotePost(
+  /**
+   * quotePost - Creates a new Quote.
+  **/
+  quotePost(
     req: operations.QuotePostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuotePostResponse> {
@@ -3058,41 +3125,39 @@ Ordering is allowed by "id".
       req = new operations.QuotePostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/quotes";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuotePostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuotePostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quotePost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3104,8 +3169,10 @@ Ordering is allowed by "id".
   }
 
   
-  // QuotePostCreateQuoteWithGeneratingReference - Creates a new Quote with auto generating reference.
-  QuotePostCreateQuoteWithGeneratingReference(
+  /**
+   * quotePostCreateQuoteWithGeneratingReference - Creates a new Quote with auto generating reference.
+  **/
+  quotePostCreateQuoteWithGeneratingReference(
     req: operations.QuotePostCreateQuoteWithGeneratingReferenceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuotePostCreateQuoteWithGeneratingReferenceResponse> {
@@ -3113,41 +3180,39 @@ Ordering is allowed by "id".
       req = new operations.QuotePostCreateQuoteWithGeneratingReferenceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/quotes/createQuoteWithGeneratingReference";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuotePostCreateQuoteWithGeneratingReferenceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuotePostCreateQuoteWithGeneratingReferenceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quotePostCreateQuoteWithGeneratingReference200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3159,9 +3224,11 @@ Ordering is allowed by "id".
   }
 
   
-  // QuotePostGenerateSaleInvoice - Generate a sale invoice from a Quote.
-When sale invoice is empty, new sale invoice will be generated from Quote.
-  QuotePostGenerateSaleInvoice(
+  /**
+   * quotePostGenerateSaleInvoice - Generate a sale invoice from a Quote.
+   * When sale invoice is empty, new sale invoice will be generated from Quote.
+  **/
+  quotePostGenerateSaleInvoice(
     req: operations.QuotePostGenerateSaleInvoiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuotePostGenerateSaleInvoiceResponse> {
@@ -3169,41 +3236,39 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
       req = new operations.QuotePostGenerateSaleInvoiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/quotes/generateSaleInvoice";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuotePostGenerateSaleInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuotePostGenerateSaleInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quotePostGenerateSaleInvoice200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3215,8 +3280,10 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
   }
 
   
-  // QuoteProcessBatch - Processes a batch of Quote.
-  QuoteProcessBatch(
+  /**
+   * quoteProcessBatch - Processes a batch of Quote.
+  **/
+  quoteProcessBatch(
     req: operations.QuoteProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuoteProcessBatchResponse> {
@@ -3224,41 +3291,39 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
       req = new operations.QuoteProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/quotes/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuoteProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuoteProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quoteProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3270,8 +3335,10 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
   }
 
   
-  // QuotePut - Updates an existing Quote.
-  QuotePut(
+  /**
+   * quotePut - Updates an existing Quote.
+  **/
+  quotePut(
     req: operations.QuotePutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuotePutResponse> {
@@ -3279,41 +3346,39 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
       req = new operations.QuotePutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/quotes/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuotePutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuotePutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quotePut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3325,8 +3390,10 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
   }
 
   
-  // QuoteReopen - Reopen a Quote.
-  QuoteReopen(
+  /**
+   * quoteReopen - Reopen a Quote.
+  **/
+  quoteReopen(
     req: operations.QuoteReopenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QuoteReopenResponse> {
@@ -3334,23 +3401,23 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
       req = new operations.QuoteReopenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/quotes/reopen/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QuoteReopenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.QuoteReopenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.quoteReopen200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3362,8 +3429,10 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
   }
 
   
-  // SalesCreditNotesDelete - Removes an existing Sales Credit Note.
-  SalesCreditNotesDelete(
+  /**
+   * salesCreditNotesDelete - Removes an existing Sales Credit Note.
+  **/
+  salesCreditNotesDelete(
     req: operations.SalesCreditNotesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesCreditNotesDeleteResponse> {
@@ -3371,12 +3440,11 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
       req = new operations.SalesCreditNotesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesCreditNotes/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3385,17 +3453,18 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesCreditNotesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesCreditNotesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesCreditNotesDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3407,30 +3476,31 @@ When sale invoice is empty, new sale invoice will be generated from Quote.
   }
 
   
-  // SalesCreditNotesGet - Returns a list of company's Sales Credit Notes. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  SalesCreditNotesGet(
-    
+  /**
+   * salesCreditNotesGet - Returns a list of company's Sales Credit Notes. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  salesCreditNotesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.SalesCreditNotesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesCreditNotes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesCreditNotesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesCreditNotesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultSalesCreditNoteQueryDto = httpRes?.data;
             }
             break;
@@ -3442,8 +3512,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesCreditNotesPost - Creates a new Sales Credit Note.
-  SalesCreditNotesPost(
+  /**
+   * salesCreditNotesPost - Creates a new Sales Credit Note.
+  **/
+  salesCreditNotesPost(
     req: operations.SalesCreditNotesPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesCreditNotesPostResponse> {
@@ -3451,41 +3523,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesCreditNotesPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesCreditNotes";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesCreditNotesPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesCreditNotesPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesCreditNotesPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3497,8 +3567,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesCreditNotesProcessBatch - Processes a batch of Sales Credit Notes.
-  SalesCreditNotesProcessBatch(
+  /**
+   * salesCreditNotesProcessBatch - Processes a batch of Sales Credit Notes.
+  **/
+  salesCreditNotesProcessBatch(
     req: operations.SalesCreditNotesProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesCreditNotesProcessBatchResponse> {
@@ -3506,41 +3578,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesCreditNotesProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesCreditNotes/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesCreditNotesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesCreditNotesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesCreditNotesProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3552,8 +3622,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesCreditNotesPut - Updates an existing Sales Credit Note.
-  SalesCreditNotesPut(
+  /**
+   * salesCreditNotesPut - Updates an existing Sales Credit Note.
+  **/
+  salesCreditNotesPut(
     req: operations.SalesCreditNotesPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesCreditNotesPutResponse> {
@@ -3561,41 +3633,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesCreditNotesPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesCreditNotes/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesCreditNotesPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesCreditNotesPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesCreditNotesPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3607,8 +3677,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesEntriesDelete - Removes an existing Sales Entry.
-  SalesEntriesDelete(
+  /**
+   * salesEntriesDelete - Removes an existing Sales Entry.
+  **/
+  salesEntriesDelete(
     req: operations.SalesEntriesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesEntriesDeleteResponse> {
@@ -3616,12 +3688,11 @@ Ordering is allowed by "id" field.
       req = new operations.SalesEntriesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesEntries/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3630,17 +3701,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesEntriesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesEntriesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesEntriesDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3652,30 +3724,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesEntriesGet - Returns a list of company's Sales Entries. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  SalesEntriesGet(
-    
+  /**
+   * salesEntriesGet - Returns a list of company's Sales Entries. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  salesEntriesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.SalesEntriesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesEntries";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesEntriesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesEntriesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultSalesEntryQueryDto = httpRes?.data;
             }
             break;
@@ -3687,8 +3760,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesEntriesPost - Creates a new Sales Entry.
-  SalesEntriesPost(
+  /**
+   * salesEntriesPost - Creates a new Sales Entry.
+  **/
+  salesEntriesPost(
     req: operations.SalesEntriesPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesEntriesPostResponse> {
@@ -3696,41 +3771,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesEntriesPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesEntries";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesEntriesPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesEntriesPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesEntriesPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3742,8 +3815,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesEntriesProcessBatch - Processes a batch of Sales Entries.
-  SalesEntriesProcessBatch(
+  /**
+   * salesEntriesProcessBatch - Processes a batch of Sales Entries.
+  **/
+  salesEntriesProcessBatch(
     req: operations.SalesEntriesProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesEntriesProcessBatchResponse> {
@@ -3751,41 +3826,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesEntriesProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesEntries/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesEntriesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesEntriesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesEntriesProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3797,8 +3870,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesEntriesPut - Updates an existing Sales Entry.
-  SalesEntriesPut(
+  /**
+   * salesEntriesPut - Updates an existing Sales Entry.
+  **/
+  salesEntriesPut(
     req: operations.SalesEntriesPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesEntriesPutResponse> {
@@ -3806,41 +3881,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesEntriesPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesEntries/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesEntriesPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesEntriesPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesEntriesPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3852,8 +3925,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesInvoicesDelete - Removes an existing Sales Invoice.
-  SalesInvoicesDelete(
+  /**
+   * salesInvoicesDelete - Removes an existing Sales Invoice.
+  **/
+  salesInvoicesDelete(
     req: operations.SalesInvoicesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesInvoicesDeleteResponse> {
@@ -3861,12 +3936,11 @@ Ordering is allowed by "id" field.
       req = new operations.SalesInvoicesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesInvoices/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3875,17 +3949,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesInvoicesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesInvoicesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesInvoicesDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3897,30 +3972,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesInvoicesGet - Returns a list of company's Sales Invoices. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  SalesInvoicesGet(
-    
+  /**
+   * salesInvoicesGet - Returns a list of company's Sales Invoices. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  salesInvoicesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.SalesInvoicesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesInvoices";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesInvoicesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesInvoicesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultSalesInvoiceQueryDto = httpRes?.data;
             }
             break;
@@ -3932,8 +4008,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesInvoicesPost - Creates a new Sales Invoice.
-  SalesInvoicesPost(
+  /**
+   * salesInvoicesPost - Creates a new Sales Invoice.
+  **/
+  salesInvoicesPost(
     req: operations.SalesInvoicesPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesInvoicesPostResponse> {
@@ -3941,41 +4019,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesInvoicesPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesInvoices";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesInvoicesPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesInvoicesPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesInvoicesPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3987,8 +4063,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesInvoicesPostCreateSaleInvoiceWithGeneratingReference - Creates a new Sale Invoice with auto generating reference.
-  SalesInvoicesPostCreateSaleInvoiceWithGeneratingReference(
+  /**
+   * salesInvoicesPostCreateSaleInvoiceWithGeneratingReference - Creates a new Sale Invoice with auto generating reference.
+  **/
+  salesInvoicesPostCreateSaleInvoiceWithGeneratingReference(
     req: operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceResponse> {
@@ -3996,41 +4074,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesInvoices/createSaleInvoiceWithGeneratingReference";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesInvoicesPostCreateSaleInvoiceWithGeneratingReference200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4042,8 +4118,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesInvoicesProcessBatch - Processes a batch of Sales Invoices.
-  SalesInvoicesProcessBatch(
+  /**
+   * salesInvoicesProcessBatch - Processes a batch of Sales Invoices.
+  **/
+  salesInvoicesProcessBatch(
     req: operations.SalesInvoicesProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesInvoicesProcessBatchResponse> {
@@ -4051,41 +4129,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesInvoicesProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesInvoices/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesInvoicesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesInvoicesProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesInvoicesProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4097,8 +4173,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesInvoicesPut - Updates an existing Sales Invoice.
-  SalesInvoicesPut(
+  /**
+   * salesInvoicesPut - Updates an existing Sales Invoice.
+  **/
+  salesInvoicesPut(
     req: operations.SalesInvoicesPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesInvoicesPutResponse> {
@@ -4106,41 +4184,39 @@ Ordering is allowed by "id" field.
       req = new operations.SalesInvoicesPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesInvoices/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesInvoicesPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesInvoicesPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesInvoicesPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4152,8 +4228,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesRepDelete - Removes an existing Sale Rep.
-  SalesRepDelete(
+  /**
+   * salesRepDelete - Removes an existing Sale Rep.
+  **/
+  salesRepDelete(
     req: operations.SalesRepDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesRepDeleteResponse> {
@@ -4161,12 +4239,11 @@ Ordering is allowed by "id" field.
       req = new operations.SalesRepDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesReps/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4175,17 +4252,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesRepDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesRepDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesRepDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4197,30 +4275,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SalesRepGet - Returns a list of company's SaleRep.
-Filtering is forbidden.
-Ordering is allowed by "id".
-  SalesRepGet(
-    
+  /**
+   * salesRepGet - Returns a list of company's SaleRep.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id".
+  **/
+  salesRepGet(
     config?: AxiosRequestConfig
   ): Promise<operations.SalesRepGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesReps";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesRepGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesRepGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultSaleRepsDto = httpRes?.data;
             }
             break;
@@ -4232,8 +4311,10 @@ Ordering is allowed by "id".
   }
 
   
-  // SalesRepPost - Creates a new SaleRep.
-  SalesRepPost(
+  /**
+   * salesRepPost - Creates a new SaleRep.
+  **/
+  salesRepPost(
     req: operations.SalesRepPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesRepPostResponse> {
@@ -4241,41 +4322,39 @@ Ordering is allowed by "id".
       req = new operations.SalesRepPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesReps";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesRepPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesRepPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesRepPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4287,8 +4366,10 @@ Ordering is allowed by "id".
   }
 
   
-  // SalesRepProcessBatch - Processes a batch of Sale Rep.
-  SalesRepProcessBatch(
+  /**
+   * salesRepProcessBatch - Processes a batch of Sale Rep.
+  **/
+  salesRepProcessBatch(
     req: operations.SalesRepProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesRepProcessBatchResponse> {
@@ -4296,41 +4377,39 @@ Ordering is allowed by "id".
       req = new operations.SalesRepProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/salesReps/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesRepProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesRepProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesRepProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4342,8 +4421,10 @@ Ordering is allowed by "id".
   }
 
   
-  // SalesRepPut - Updates an existing Sale Rep.
-  SalesRepPut(
+  /**
+   * salesRepPut - Updates an existing Sale Rep.
+  **/
+  salesRepPut(
     req: operations.SalesRepPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SalesRepPutResponse> {
@@ -4351,41 +4432,39 @@ Ordering is allowed by "id".
       req = new operations.SalesRepPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/salesReps/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesRepPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesRepPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.salesRepPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4397,30 +4476,31 @@ Ordering is allowed by "id".
   }
 
   
-  // SalesGet - Returns a list of company's Sales Entries, Sales Invoices and Sales Credit Notes. Supports OData querying protocol.
-Filtering is allowed by "entryDate" field.
-Ordering is allowed by "id" field.
-  SalesGet(
-    
+  /**
+   * salesGet - Returns a list of company's Sales Entries, Sales Invoices and Sales Credit Notes. Supports OData querying protocol.
+   * Filtering is allowed by "entryDate" field.
+   * Ordering is allowed by "id" field.
+  **/
+  salesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.SalesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/sales";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SalesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SalesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultSalesQueryDto = httpRes?.data;
             }
             break;
@@ -4432,8 +4512,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SuppliersDelete - Removes an existing Supplier.
-  SuppliersDelete(
+  /**
+   * suppliersDelete - Removes an existing Supplier.
+  **/
+  suppliersDelete(
     req: operations.SuppliersDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersDeleteResponse> {
@@ -4441,12 +4523,11 @@ Ordering is allowed by "id" field.
       req = new operations.SuppliersDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/suppliers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4455,17 +4536,18 @@ Ordering is allowed by "id" field.
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.suppliersDelete200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4477,30 +4559,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // SuppliersGet - Returns a list of company's Suppliers. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" and "code" fields.
-  SuppliersGet(
-    
+  /**
+   * suppliersGet - Returns a list of company's Suppliers. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" and "code" fields.
+  **/
+  suppliersGet(
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/suppliers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultSupplierQueryDto = httpRes?.data;
             }
             break;
@@ -4512,8 +4595,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // SuppliersGetAccountTrans - Returns a list of Supplier's account transactions.
-  SuppliersGetAccountTrans(
+  /**
+   * suppliersGetAccountTrans - Returns a list of Supplier's account transactions.
+  **/
+  suppliersGetAccountTrans(
     req: operations.SuppliersGetAccountTransRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersGetAccountTransResponse> {
@@ -4521,23 +4606,23 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.SuppliersGetAccountTransRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/suppliers/{itemId}/accountTrans", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersGetAccountTransResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersGetAccountTransResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accountTranDtos = httpRes?.data;
             }
             break;
@@ -4549,8 +4634,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // SuppliersGetOpeningBalance - Returns a Supplier's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
-  SuppliersGetOpeningBalance(
+  /**
+   * suppliersGetOpeningBalance - Returns a Supplier's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
+  **/
+  suppliersGetOpeningBalance(
     req: operations.SuppliersGetOpeningBalanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersGetOpeningBalanceResponse> {
@@ -4558,23 +4645,23 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.SuppliersGetOpeningBalanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/suppliers/{itemId}/openingBalance", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersGetOpeningBalanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersGetOpeningBalanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ownerOpeningBalanceInPeriodsDto = httpRes?.data;
             }
             break;
@@ -4586,8 +4673,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // SuppliersGetOpeningBalanceList - Returns a list of Supplier's opening balance transactions.
-  SuppliersGetOpeningBalanceList(
+  /**
+   * suppliersGetOpeningBalanceList - Returns a list of Supplier's opening balance transactions.
+  **/
+  suppliersGetOpeningBalanceList(
     req: operations.SuppliersGetOpeningBalanceListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersGetOpeningBalanceListResponse> {
@@ -4595,23 +4684,23 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.SuppliersGetOpeningBalanceListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/suppliers/{itemId}/openingBalanceList", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersGetOpeningBalanceListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersGetOpeningBalanceListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ownerOpeningBalanceDtos = httpRes?.data;
             }
             break;
@@ -4623,8 +4712,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // SuppliersPost - Creates a new Supplier.
-  SuppliersPost(
+  /**
+   * suppliersPost - Creates a new Supplier.
+  **/
+  suppliersPost(
     req: operations.SuppliersPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersPostResponse> {
@@ -4632,41 +4723,39 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.SuppliersPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/suppliers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.suppliersPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4678,8 +4767,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // SuppliersProcessBatch - Processes a batch of Suppliers.
-  SuppliersProcessBatch(
+  /**
+   * suppliersProcessBatch - Processes a batch of Suppliers.
+  **/
+  suppliersProcessBatch(
     req: operations.SuppliersProcessBatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersProcessBatchResponse> {
@@ -4687,41 +4778,39 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.SuppliersProcessBatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/suppliers/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersProcessBatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.suppliersProcessBatch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4733,8 +4822,10 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // SuppliersPut - Updates an existing Supplier.
-  SuppliersPut(
+  /**
+   * suppliersPut - Updates an existing Supplier.
+  **/
+  suppliersPut(
     req: operations.SuppliersPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SuppliersPutResponse> {
@@ -4742,41 +4833,39 @@ Ordering is allowed by "id" and "code" fields.
       req = new operations.SuppliersPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/v1/suppliers/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SuppliersPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SuppliersPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.suppliersPut200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4788,30 +4877,31 @@ Ordering is allowed by "id" and "code" fields.
   }
 
   
-  // UserDefinedFieldsGet - Returns a list of company's User Defined Fields. Supports OData querying protocol.
-Filtering is allowed by "categoryTypeId" field.
-Ordering is allowed by "id" and "orderIndex" fields.
-  UserDefinedFieldsGet(
-    
+  /**
+   * userDefinedFieldsGet - Returns a list of company's User Defined Fields. Supports OData querying protocol.
+   * Filtering is allowed by "categoryTypeId" field.
+   * Ordering is allowed by "id" and "orderIndex" fields.
+  **/
+  userDefinedFieldsGet(
     config?: AxiosRequestConfig
   ): Promise<operations.UserDefinedFieldsGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/userDefinedFields";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UserDefinedFieldsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UserDefinedFieldsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultUserDefinedFieldDto = httpRes?.data;
             }
             break;
@@ -4823,30 +4913,31 @@ Ordering is allowed by "id" and "orderIndex" fields.
   }
 
   
-  // VatAnalysisTypesGet - Returns a list of global Vat Analysis Types. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" field.
-  VatAnalysisTypesGet(
-    
+  /**
+   * vatAnalysisTypesGet - Returns a list of global Vat Analysis Types. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" field.
+  **/
+  vatAnalysisTypesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.VatAnalysisTypesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/vatAnalysisTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VatAnalysisTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VatAnalysisTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultVatAnalysisTypeDto = httpRes?.data;
             }
             break;
@@ -4858,30 +4949,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // VatCategoriesGet - Returns a list of global Vat Categories. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" field.
-  VatCategoriesGet(
-    
+  /**
+   * vatCategoriesGet - Returns a list of global Vat Categories. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" field.
+  **/
+  vatCategoriesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.VatCategoriesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/vatCategories";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VatCategoriesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VatCategoriesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultVatCategoryDto = httpRes?.data;
             }
             break;
@@ -4893,8 +4985,10 @@ Ordering is allowed by "id" field.
   }
 
   
-  // VatCategoriesProcessVatRates - Process Vat Rates
-  VatCategoriesProcessVatRates(
+  /**
+   * vatCategoriesProcessVatRates - Process Vat Rates
+  **/
+  vatCategoriesProcessVatRates(
     req: operations.VatCategoriesProcessVatRatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VatCategoriesProcessVatRatesResponse> {
@@ -4902,41 +4996,39 @@ Ordering is allowed by "id" field.
       req = new operations.VatCategoriesProcessVatRatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/vatCategories/vatRates";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VatCategoriesProcessVatRatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VatCategoriesProcessVatRatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vatCategoriesProcessVatRates200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4948,30 +5040,31 @@ Ordering is allowed by "id" field.
   }
 
   
-  // VatRatesGet - Returns a list of company's Vat Rates. Supports OData querying protocol.
-Filtering is allowed by "vatCategoryId" field.
-Ordering is allowed by "id" and "orderIndex" fields.
-  VatRatesGet(
-    
+  /**
+   * vatRatesGet - Returns a list of company's Vat Rates. Supports OData querying protocol.
+   * Filtering is allowed by "vatCategoryId" field.
+   * Ordering is allowed by "id" and "orderIndex" fields.
+  **/
+  vatRatesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.VatRatesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/vatRates";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VatRatesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VatRatesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultVatRateDto = httpRes?.data;
             }
             break;
@@ -4983,30 +5076,31 @@ Ordering is allowed by "id" and "orderIndex" fields.
   }
 
   
-  // VatTypesGet - Returns a list of global Vat Types. Supports OData querying protocol.
-Filtering is forbidden.
-Ordering is allowed by "id" field.
-  VatTypesGet(
-    
+  /**
+   * vatTypesGet - Returns a list of global Vat Types. Supports OData querying protocol.
+   * Filtering is forbidden.
+   * Ordering is allowed by "id" field.
+  **/
+  vatTypesGet(
     config?: AxiosRequestConfig
   ): Promise<operations.VatTypesGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/vatTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VatTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VatTypesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pageResultVatTypeDto = httpRes?.data;
             }
             break;

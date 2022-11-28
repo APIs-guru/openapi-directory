@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LookupDeveloperIdentityResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returned in response to a successful <code>LookupDeveloperIdentity</code> action.
 **/
 export class LookupDeveloperIdentityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeveloperUserIdentifierList" })
+  @SpeakeasyMetadata({ data: "json, name=DeveloperUserIdentifierList" })
   developerUserIdentifierList?: string[];
 
-  @Metadata({ data: "json, name=IdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityId" })
   identityId?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

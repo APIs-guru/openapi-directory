@@ -5,3 +5,8 @@ type ClusterType struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 }
+
+type ClusterTypeInput struct {
+	Name string `json:"name"`
+	Slug string `json:"slug"`
+}

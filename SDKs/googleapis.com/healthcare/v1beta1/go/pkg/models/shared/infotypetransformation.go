@@ -1,5 +1,7 @@
 package shared
 
+// InfoTypeTransformation
+// A transformation to apply to text that is identified as a specific info_type.
 type InfoTypeTransformation struct {
 	CharacterMaskConfig       *CharacterMaskConfig   `json:"characterMaskConfig,omitempty"`
 	CryptoHashConfig          *CryptoHashConfig      `json:"cryptoHashConfig,omitempty"`

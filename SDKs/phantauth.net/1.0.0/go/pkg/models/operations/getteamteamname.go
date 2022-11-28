@@ -4,10 +4,6 @@ type GetTeamTeamnamePathParams struct {
 	Teamname string `pathParam:"style=simple,explode=false,name=teamname"`
 }
 
-type GetTeamTeamnameRequest struct {
-	PathParams GetTeamTeamnamePathParams
-}
-
 type GetTeamTeamname200ApplicationJSON struct {
 	AtID      *string       `json:"@id,omitempty"`
 	Logo      *string       `json:"logo,omitempty"`
@@ -16,6 +12,10 @@ type GetTeamTeamname200ApplicationJSON struct {
 	Name      *string       `json:"name,omitempty"`
 	Profile   *string       `json:"profile,omitempty"`
 	Sub       string        `json:"sub"`
+}
+
+type GetTeamTeamnameRequest struct {
+	PathParams GetTeamTeamnamePathParams
 }
 
 type GetTeamTeamnameResponse struct {

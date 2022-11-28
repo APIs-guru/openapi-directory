@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FireteamGetActivePrivateClanFireteamCountPathParams = /** @class */ (function (_super) {
     __extends(FireteamGetActivePrivateClanFireteamCountPathParams, _super);
@@ -30,7 +30,7 @@ var FireteamGetActivePrivateClanFireteamCountPathParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], FireteamGetActivePrivateClanFireteamCountPathParams.prototype, "groupId", void 0);
     return FireteamGetActivePrivateClanFireteamCountPathParams;
@@ -42,7 +42,7 @@ var FireteamGetActivePrivateClanFireteamCountSecurity = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FireteamGetActivePrivateClanFireteamCountSecurity.prototype, "oauth2", void 0);
     return FireteamGetActivePrivateClanFireteamCountSecurity;
@@ -54,11 +54,11 @@ var FireteamGetActivePrivateClanFireteamCountRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FireteamGetActivePrivateClanFireteamCountPathParams)
     ], FireteamGetActivePrivateClanFireteamCountRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FireteamGetActivePrivateClanFireteamCountSecurity)
     ], FireteamGetActivePrivateClanFireteamCountRequest.prototype, "security", void 0);
     return FireteamGetActivePrivateClanFireteamCountRequest;
@@ -70,15 +70,15 @@ var FireteamGetActivePrivateClanFireteamCountResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], FireteamGetActivePrivateClanFireteamCountResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FireteamGetActivePrivateClanFireteamCountResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FireteamGetActivePrivateClanFireteamCountResponse.prototype, "statusCode", void 0);
     return FireteamGetActivePrivateClanFireteamCountResponse;

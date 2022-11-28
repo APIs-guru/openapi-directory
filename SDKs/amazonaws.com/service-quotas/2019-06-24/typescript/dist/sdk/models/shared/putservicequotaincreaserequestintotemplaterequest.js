@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutServiceQuotaIncreaseRequestIntoTemplateRequest = /** @class */ (function (_super) {
     __extends(PutServiceQuotaIncreaseRequestIntoTemplateRequest, _super);
     function PutServiceQuotaIncreaseRequestIntoTemplateRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AwsRegion" }),
+        SpeakeasyMetadata({ data: "json, name=AwsRegion" }),
         __metadata("design:type", String)
     ], PutServiceQuotaIncreaseRequestIntoTemplateRequest.prototype, "awsRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=DesiredValue" }),
+        SpeakeasyMetadata({ data: "json, name=DesiredValue" }),
         __metadata("design:type", Number)
     ], PutServiceQuotaIncreaseRequestIntoTemplateRequest.prototype, "desiredValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuotaCode" }),
+        SpeakeasyMetadata({ data: "json, name=QuotaCode" }),
         __metadata("design:type", String)
     ], PutServiceQuotaIncreaseRequestIntoTemplateRequest.prototype, "quotaCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceCode" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceCode" }),
         __metadata("design:type", String)
     ], PutServiceQuotaIncreaseRequestIntoTemplateRequest.prototype, "serviceCode", void 0);
     return PutServiceQuotaIncreaseRequestIntoTemplateRequest;

@@ -1,5 +1,7 @@
 package shared
 
+// EpisodeSearchResult
+// When **type** is *episode*.
 type EpisodeSearchResult struct {
 	Audio                  *string                     `json:"audio,omitempty"`
 	AudioLengthSec         *int64                      `json:"audio_length_sec,omitempty"`

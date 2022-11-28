@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobRun } from "./jobrun";
+
 
 
 // JobNodeDetails
@@ -8,6 +8,6 @@ import { JobRun } from "./jobrun";
  * The details of a Job node present in the workflow.
 **/
 export class JobNodeDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobRuns", elemType: shared.JobRun })
+  @SpeakeasyMetadata({ data: "json, name=JobRuns", elemType: JobRun })
   jobRuns?: JobRun[];
 }

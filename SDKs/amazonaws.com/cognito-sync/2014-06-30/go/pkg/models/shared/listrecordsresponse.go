@@ -1,5 +1,7 @@
 package shared
 
+// ListRecordsResponse
+// Returned for a successful ListRecordsRequest.
 type ListRecordsResponse struct {
 	Count                                 *int64   `json:"Count,omitempty"`
 	DatasetDeletedAfterRequestedSyncCount *bool    `json:"DatasetDeletedAfterRequestedSyncCount,omitempty"`

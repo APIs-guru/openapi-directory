@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetFunctionCodeSigningConfigResponse = /** @class */ (function (_super) {
     __extends(GetFunctionCodeSigningConfigResponse, _super);
     function GetFunctionCodeSigningConfigResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CodeSigningConfigArn" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSigningConfigArn" }),
         __metadata("design:type", String)
     ], GetFunctionCodeSigningConfigResponse.prototype, "codeSigningConfigArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionName" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionName" }),
         __metadata("design:type", String)
     ], GetFunctionCodeSigningConfigResponse.prototype, "functionName", void 0);
     return GetFunctionCodeSigningConfigResponse;

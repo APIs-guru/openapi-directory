@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ListTagOptionsFilters } from "./listtagoptionsfilters";
 export declare class ListTagOptionsInput extends SpeakeasyBase {
     filters?: ListTagOptionsFilters;

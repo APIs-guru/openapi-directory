@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrderShippingDetailsApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address, form, name=Address;" })
+  @SpeakeasyMetadata({ data: "json, name=Address, form, name=Address;" })
   address?: string;
 
-  @Metadata({ data: "json, name=CountryId, form, name=CountryId;" })
+  @SpeakeasyMetadata({ data: "json, name=CountryId, form, name=CountryId;" })
   countryId?: number;
 
-  @Metadata({ data: "json, name=Email, form, name=Email;" })
+  @SpeakeasyMetadata({ data: "json, name=Email, form, name=Email;" })
   email?: string;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber, form, name=PhoneNumber;" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber, form, name=PhoneNumber;" })
   phoneNumber?: string;
 }

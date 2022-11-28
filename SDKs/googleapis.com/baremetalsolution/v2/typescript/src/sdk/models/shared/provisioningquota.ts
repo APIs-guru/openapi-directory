@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceQuota } from "./instancequota";
 
+
 export enum ProvisioningQuotaAssetTypeEnum {
-    AssetTypeUnspecified = "ASSET_TYPE_UNSPECIFIED"
-,    AssetTypeServer = "ASSET_TYPE_SERVER"
-,    AssetTypeStorage = "ASSET_TYPE_STORAGE"
-,    AssetTypeNetwork = "ASSET_TYPE_NETWORK"
+    AssetTypeUnspecified = "ASSET_TYPE_UNSPECIFIED",
+    AssetTypeServer = "ASSET_TYPE_SERVER",
+    AssetTypeStorage = "ASSET_TYPE_STORAGE",
+    AssetTypeNetwork = "ASSET_TYPE_NETWORK"
 }
 
 
@@ -14,30 +15,30 @@ export enum ProvisioningQuotaAssetTypeEnum {
  * A provisioning quota for a given project.
 **/
 export class ProvisioningQuota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetType" })
+  @SpeakeasyMetadata({ data: "json, name=assetType" })
   assetType?: ProvisioningQuotaAssetTypeEnum;
 
-  @Metadata({ data: "json, name=availableCount" })
+  @SpeakeasyMetadata({ data: "json, name=availableCount" })
   availableCount?: number;
 
-  @Metadata({ data: "json, name=gcpService" })
+  @SpeakeasyMetadata({ data: "json, name=gcpService" })
   gcpService?: string;
 
-  @Metadata({ data: "json, name=instanceQuota" })
+  @SpeakeasyMetadata({ data: "json, name=instanceQuota" })
   instanceQuota?: InstanceQuota;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networkBandwidth" })
+  @SpeakeasyMetadata({ data: "json, name=networkBandwidth" })
   networkBandwidth?: string;
 
-  @Metadata({ data: "json, name=serverCount" })
+  @SpeakeasyMetadata({ data: "json, name=serverCount" })
   serverCount?: string;
 
-  @Metadata({ data: "json, name=storageGib" })
+  @SpeakeasyMetadata({ data: "json, name=storageGib" })
   storageGib?: string;
 }

@@ -1,9 +1,10 @@
 
 
+
 export enum ClusterFieldEnum {
-    Attachments = "ATTACHMENTS"
-,    Configurations = "CONFIGURATIONS"
-,    Settings = "SETTINGS"
-,    Statistics = "STATISTICS"
-,    Tags = "TAGS"
+    Attachments = "ATTACHMENTS",
+    Configurations = "CONFIGURATIONS",
+    Settings = "SETTINGS",
+    Statistics = "STATISTICS",
+    Tags = "TAGS"
 }

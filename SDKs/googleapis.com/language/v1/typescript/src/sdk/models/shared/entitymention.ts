@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Sentiment } from "./sentiment";
 import { TextSpan } from "./textspan";
 
+
 export enum EntityMentionTypeEnum {
-    TypeUnknown = "TYPE_UNKNOWN"
-,    Proper = "PROPER"
-,    Common = "COMMON"
+    TypeUnknown = "TYPE_UNKNOWN",
+    Proper = "PROPER",
+    Common = "COMMON"
 }
 
 
@@ -14,12 +15,12 @@ export enum EntityMentionTypeEnum {
  * Represents a mention for an entity in the text. Currently, proper noun mentions are supported.
 **/
 export class EntityMention extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sentiment" })
+  @SpeakeasyMetadata({ data: "json, name=sentiment" })
   sentiment?: Sentiment;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: TextSpan;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: EntityMentionTypeEnum;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsPermissionsListPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class TagmanagerAccountsPermissionsListQueryParams:
 
 @dataclass
 class TagmanagerAccountsPermissionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsPermissionsListRequest:
-    path_params: TagmanagerAccountsPermissionsListPathParams = field(default=None)
-    query_params: TagmanagerAccountsPermissionsListQueryParams = field(default=None)
-    security: TagmanagerAccountsPermissionsListSecurity = field(default=None)
+    path_params: TagmanagerAccountsPermissionsListPathParams = field()
+    query_params: TagmanagerAccountsPermissionsListQueryParams = field()
+    security: TagmanagerAccountsPermissionsListSecurity = field()
     
 
 @dataclass
 class TagmanagerAccountsPermissionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_account_users_response: Optional[shared.ListAccountUsersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

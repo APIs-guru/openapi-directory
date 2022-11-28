@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Query } from "./query";
 
 
+
 export class CodereviewAlerts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixed" })
+  @SpeakeasyMetadata({ data: "json, name=fixed" })
   fixed?: number;
 
-  @Metadata({ data: "json, name=new" })
+  @SpeakeasyMetadata({ data: "json, name=new" })
   new?: number;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Query;
 }

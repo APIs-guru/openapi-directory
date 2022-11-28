@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SuggestCommentScoreResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The comment score suggestion response message.
 **/
 export class SuggestCommentScoreResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=detectedLanguages" })
+  @SpeakeasyMetadata({ data: "json, name=detectedLanguages" })
   detectedLanguages?: string[];
 
-  @Metadata({ data: "json, name=requestedLanguages" })
+  @SpeakeasyMetadata({ data: "json, name=requestedLanguages" })
   requestedLanguages?: string[];
 }

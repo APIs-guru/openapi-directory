@@ -1,5 +1,7 @@
 package shared
 
+// DatafeedFetchSchedule
+// The required fields vary based on the frequency of fetching. For a monthly fetch schedule, day_of_month and hour are required. For a weekly fetch schedule, weekday and hour are required. For a daily fetch schedule, only hour is required.
 type DatafeedFetchSchedule struct {
 	DayOfMonth   *int64  `json:"dayOfMonth,omitempty"`
 	FetchURL     *string `json:"fetchUrl,omitempty"`

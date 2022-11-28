@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p2beta1ProductSearchResultsObjectAnnotation
+// Prediction for what the object in the bounding box is.
 type GoogleCloudVisionV1p2beta1ProductSearchResultsObjectAnnotation struct {
 	LanguageCode *string  `json:"languageCode,omitempty"`
 	Mid          *string  `json:"mid,omitempty"`

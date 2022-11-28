@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1SecurityReportMetadata
+// Metadata for the security report.
 type GoogleCloudApigeeV1SecurityReportMetadata struct {
 	Dimensions     []string `json:"dimensions,omitempty"`
 	EndTimestamp   *string  `json:"endTimestamp,omitempty"`

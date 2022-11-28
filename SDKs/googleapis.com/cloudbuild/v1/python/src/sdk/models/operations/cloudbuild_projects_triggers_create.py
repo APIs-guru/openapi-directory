@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsTriggersCreatePathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class CloudbuildProjectsTriggersCreateQueryParams:
 
 @dataclass
 class CloudbuildProjectsTriggersCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsTriggersCreateRequest:
-    path_params: CloudbuildProjectsTriggersCreatePathParams = field(default=None)
-    query_params: CloudbuildProjectsTriggersCreateQueryParams = field(default=None)
-    request: Optional[shared.BuildTrigger] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudbuildProjectsTriggersCreateSecurity = field(default=None)
+    path_params: CloudbuildProjectsTriggersCreatePathParams = field()
+    query_params: CloudbuildProjectsTriggersCreateQueryParams = field()
+    security: CloudbuildProjectsTriggersCreateSecurity = field()
+    request: Optional[shared.BuildTriggerInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudbuildProjectsTriggersCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     build_trigger: Optional[shared.BuildTrigger] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

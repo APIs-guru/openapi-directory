@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypesEvaluationMetrics } from "./entitytypesevaluationmetrics";
+
 
 
 // EntityRecognizerMetadataEntityTypesListItem
@@ -7,12 +8,12 @@ import { EntityTypesEvaluationMetrics } from "./entitytypesevaluationmetrics";
  * Individual item from the list of entity types in the metadata of an entity recognizer.
 **/
 export class EntityRecognizerMetadataEntityTypesListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationMetrics" })
   evaluationMetrics?: EntityTypesEvaluationMetrics;
 
-  @Metadata({ data: "json, name=NumberOfTrainMentions" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfTrainMentions" })
   numberOfTrainMentions?: number;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

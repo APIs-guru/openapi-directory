@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import retentionintervalunitvalues_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CrossRegionCopyDeprecateRule:
-    interval: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Interval' }})
-    interval_unit: Optional[retentionintervalunitvalues_enum.RetentionIntervalUnitValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IntervalUnit' }})
+    r"""CrossRegionCopyDeprecateRule
+    Specifies an AMI deprecation rule for cross-Region AMI copies created by a cross-Region copy rule.
+    """
+    
+    interval: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Interval') }})
+    interval_unit: Optional[RetentionIntervalUnitValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IntervalUnit') }})
     

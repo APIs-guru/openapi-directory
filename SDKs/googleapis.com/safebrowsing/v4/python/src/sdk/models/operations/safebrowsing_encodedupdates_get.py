@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SafebrowsingEncodedUpdatesGetPathParams:
-    encoded_request: str = field(default=None, metadata={'path_param': { 'field_name': 'encodedRequest', 'style': 'simple', 'explode': False }})
+    encoded_request: str = field(metadata={'path_param': { 'field_name': 'encodedRequest', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class SafebrowsingEncodedUpdatesGetQueryParams:
 
 @dataclass
 class SafebrowsingEncodedUpdatesGetRequest:
-    path_params: SafebrowsingEncodedUpdatesGetPathParams = field(default=None)
-    query_params: SafebrowsingEncodedUpdatesGetQueryParams = field(default=None)
+    path_params: SafebrowsingEncodedUpdatesGetPathParams = field()
+    query_params: SafebrowsingEncodedUpdatesGetQueryParams = field()
     
 
 @dataclass
 class SafebrowsingEncodedUpdatesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_security_safebrowsing_v4_fetch_threat_list_updates_response: Optional[shared.GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

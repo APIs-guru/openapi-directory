@@ -18,6 +18,8 @@ type UpdateNetworkSwitchRoutingOspfRequestBodyAreas struct {
 	AreaType UpdateNetworkSwitchRoutingOspfRequestBodyAreasAreaTypeEnum `json:"areaType"`
 }
 
+// UpdateNetworkSwitchRoutingOspfRequestBodyMd5AuthenticationKey
+// MD5 authentication credentials. This param is only relevant if md5AuthenticationEnabled is true
 type UpdateNetworkSwitchRoutingOspfRequestBodyMd5AuthenticationKey struct {
 	ID         *int64  `json:"id,omitempty"`
 	Passphrase *string `json:"passphrase,omitempty"`

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutImagePolicyResponse = /** @class */ (function (_super) {
     __extends(PutImagePolicyResponse, _super);
     function PutImagePolicyResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imageArn" }),
+        SpeakeasyMetadata({ data: "json, name=imageArn" }),
         __metadata("design:type", String)
     ], PutImagePolicyResponse.prototype, "imageArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], PutImagePolicyResponse.prototype, "requestId", void 0);
     return PutImagePolicyResponse;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetStopActivityStreamActionEnum(str, Enum):
     STOP_ACTIVITY_STREAM = "StopActivityStream"
@@ -10,10 +14,10 @@ class GetStopActivityStreamVersionEnum(str, Enum):
 
 @dataclass
 class GetStopActivityStreamQueryParams:
-    action: GetStopActivityStreamActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetStopActivityStreamActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    resource_arn: str = field(metadata={'query_param': { 'field_name': 'ResourceArn', 'style': 'form', 'explode': True }})
+    version: GetStopActivityStreamVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     apply_immediately: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ApplyImmediately', 'style': 'form', 'explode': True }})
-    resource_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'ResourceArn', 'style': 'form', 'explode': True }})
-    version: GetStopActivityStreamVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetStopActivityStreamHeaders:
 
 @dataclass
 class GetStopActivityStreamRequest:
-    query_params: GetStopActivityStreamQueryParams = field(default=None)
-    headers: GetStopActivityStreamHeaders = field(default=None)
+    headers: GetStopActivityStreamHeaders = field()
+    query_params: GetStopActivityStreamQueryParams = field()
     
 
 @dataclass
 class GetStopActivityStreamResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

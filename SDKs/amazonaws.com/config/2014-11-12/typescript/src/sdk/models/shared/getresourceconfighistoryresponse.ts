@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationItem } from "./configurationitem";
+
 
 
 // GetResourceConfigHistoryResponse
@@ -8,9 +8,9 @@ import { ConfigurationItem } from "./configurationitem";
  * The output for the <a>GetResourceConfigHistory</a> action.
 **/
 export class GetResourceConfigHistoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationItems", elemType: shared.ConfigurationItem })
+  @SpeakeasyMetadata({ data: "json, name=configurationItems", elemType: ConfigurationItem })
   configurationItems?: ConfigurationItem[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

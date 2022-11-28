@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMergeCommitOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=baseCommitId" })
   baseCommitId?: string;
 
-  @Metadata({ data: "json, name=destinationCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCommitId" })
   destinationCommitId?: string;
 
-  @Metadata({ data: "json, name=mergedCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=mergedCommitId" })
   mergedCommitId?: string;
 
-  @Metadata({ data: "json, name=sourceCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitId" })
   sourceCommitId?: string;
 }

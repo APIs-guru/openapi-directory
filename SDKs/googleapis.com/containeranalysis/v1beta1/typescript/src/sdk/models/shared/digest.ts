@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Digest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Digest information.
 **/
 export class Digest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algo" })
+  @SpeakeasyMetadata({ data: "json, name=algo" })
   algo?: string;
 
-  @Metadata({ data: "json, name=digestBytes" })
+  @SpeakeasyMetadata({ data: "json, name=digestBytes" })
   digestBytes?: string;
 }

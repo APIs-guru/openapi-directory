@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Identity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains details about the type of identity that made the request.
 **/
 export class Identity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PrincipalId" })
+  @SpeakeasyMetadata({ data: "json, name=PrincipalId" })
   principalId?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

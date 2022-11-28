@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import action
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ActionHistoryDetails:
-    action: action.Action = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
+    r"""ActionHistoryDetails
+     The description of details of the event. 
+    """
+    
+    action: Action = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
     

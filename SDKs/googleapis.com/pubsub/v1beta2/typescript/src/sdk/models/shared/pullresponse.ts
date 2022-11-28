@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReceivedMessage } from "./receivedmessage";
+
 
 
 // PullResponse
@@ -8,6 +8,6 @@ import { ReceivedMessage } from "./receivedmessage";
  * Response for the `Pull` method.
 **/
 export class PullResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=receivedMessages", elemType: shared.ReceivedMessage })
+  @SpeakeasyMetadata({ data: "json, name=receivedMessages", elemType: ReceivedMessage })
   receivedMessages?: ReceivedMessage[];
 }

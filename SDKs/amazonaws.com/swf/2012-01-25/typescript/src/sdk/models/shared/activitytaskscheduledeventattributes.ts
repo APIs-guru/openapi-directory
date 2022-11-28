@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityType } from "./activitytype";
 import { TaskList } from "./tasklist";
+
 
 
 // ActivityTaskScheduledEventAttributes
@@ -8,36 +9,36 @@ import { TaskList } from "./tasklist";
  * Provides the details of the <code>ActivityTaskScheduled</code> event.
 **/
 export class ActivityTaskScheduledEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityId" })
+  @SpeakeasyMetadata({ data: "json, name=activityId" })
   activityId: string;
 
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType: ActivityType;
 
-  @Metadata({ data: "json, name=control" })
+  @SpeakeasyMetadata({ data: "json, name=control" })
   control?: string;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 
-  @Metadata({ data: "json, name=heartbeatTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=heartbeatTimeout" })
   heartbeatTimeout?: string;
 
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=scheduleToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleToCloseTimeout" })
   scheduleToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=scheduleToStartTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleToStartTimeout" })
   scheduleToStartTimeout?: string;
 
-  @Metadata({ data: "json, name=startToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=startToCloseTimeout" })
   startToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=taskList" })
+  @SpeakeasyMetadata({ data: "json, name=taskList" })
   taskList: TaskList;
 
-  @Metadata({ data: "json, name=taskPriority" })
+  @SpeakeasyMetadata({ data: "json, name=taskPriority" })
   taskPriority?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// RemarketingListsListResponse
+// Remarketing list response
 type RemarketingListsListResponse struct {
 	Kind             *string           `json:"kind,omitempty"`
 	NextPageToken    *string           `json:"nextPageToken,omitempty"`

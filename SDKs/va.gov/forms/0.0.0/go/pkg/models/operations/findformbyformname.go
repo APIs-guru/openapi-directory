@@ -12,17 +12,17 @@ type FindFormByFormNameSecurity struct {
 	Apikey shared.SchemeApikey `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type FindFormByFormNameRequest struct {
-	PathParams FindFormByFormNamePathParams
-	Security   FindFormByFormNameSecurity
-}
-
 type FindFormByFormName200ApplicationJSON struct {
 	Data interface{} `json:"data"`
 }
 
 type FindFormByFormName404ApplicationJSON struct {
 	Errors []interface{} `json:"errors"`
+}
+
+type FindFormByFormNameRequest struct {
+	PathParams FindFormByFormNamePathParams
+	Security   FindFormByFormNameSecurity
 }
 
 type FindFormByFormNameResponse struct {

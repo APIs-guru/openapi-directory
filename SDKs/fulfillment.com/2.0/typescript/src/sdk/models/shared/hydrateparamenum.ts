@@ -1,7 +1,8 @@
 
 
+
 export enum HydrateParamEnum {
-    Integrator = "integrator"
-,    LineItems = "lineItems"
-,    TrackingNumbersCarrier = "trackingNumbers.carrier"
+    Integrator = "integrator",
+    LineItems = "lineItems",
+    TrackingNumbersCarrier = "trackingNumbers.carrier"
 }

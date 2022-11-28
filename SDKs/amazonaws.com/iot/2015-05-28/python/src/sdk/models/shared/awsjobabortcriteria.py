@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import awsjobabortcriteriaabortaction_enum
-from . import awsjobabortcriteriafailuretype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AwsJobAbortCriteria:
-    action: awsjobabortcriteriaabortaction_enum.AwsJobAbortCriteriaAbortActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    failure_type: awsjobabortcriteriafailuretype_enum.AwsJobAbortCriteriaFailureTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureType' }})
-    min_number_of_executed_things: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minNumberOfExecutedThings' }})
-    threshold_percentage: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thresholdPercentage' }})
+    r"""AwsJobAbortCriteria
+    The criteria that determine when and how a job abort takes place.
+    """
+    
+    action: AwsJobAbortCriteriaAbortActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    failure_type: AwsJobAbortCriteriaFailureTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureType') }})
+    min_number_of_executed_things: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('minNumberOfExecutedThings') }})
+    threshold_percentage: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('thresholdPercentage') }})
     

@@ -1,11 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCoreDtoClickStreamHitBrowserInfo } from "./apicoredtoclickstreamhitbrowserinfo";
-import { ApiCoreDtoClickStreamHitConversionInfo } from "./apicoredtoclickstreamhitconversioninfo";
-import { ApiCoreDtoClickStreamHitConversionInfo } from "./apicoredtoclickstreamhitconversioninfo";
-import { ApiCoreDtoClickStreamHitConversionInfo } from "./apicoredtoclickstreamhitconversioninfo";
-import { ApiCoreDtoClickStreamHitConversionInfo } from "./apicoredtoclickstreamhitconversioninfo";
-import { ApiCoreDtoClickStreamHitConversionInfo } from "./apicoredtoclickstreamhitconversioninfo";
 import { ApiCoreDtoClickStreamHitConversionInfo } from "./apicoredtoclickstreamhitconversioninfo";
 import { ApiCoreDtoClickStreamHitDatapointInfo } from "./apicoredtoclickstreamhitdatapointinfo";
 import { ApiCoreDtoClickStreamHitLocationInfo } from "./apicoredtoclickstreamhitlocationinfo";
@@ -13,70 +7,71 @@ import { ApiCoreDtoClickStreamHitOsInfo } from "./apicoredtoclickstreamhitosinfo
 import { ApiCoreDtoClickStreamHitSource } from "./apicoredtoclickstreamhitsource";
 
 
+
 export class ApiCoreDtoClickStreamHit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessTime" })
+  @SpeakeasyMetadata({ data: "json, name=accessTime" })
   accessTime?: string;
 
-  @Metadata({ data: "json, name=browser" })
+  @SpeakeasyMetadata({ data: "json, name=browser" })
   browser?: ApiCoreDtoClickStreamHitBrowserInfo;
 
-  @Metadata({ data: "json, name=clientLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=clientLanguage" })
   clientLanguage?: string;
 
-  @Metadata({ data: "json, name=conversion1" })
+  @SpeakeasyMetadata({ data: "json, name=conversion1" })
   conversion1?: ApiCoreDtoClickStreamHitConversionInfo;
 
-  @Metadata({ data: "json, name=conversion2" })
+  @SpeakeasyMetadata({ data: "json, name=conversion2" })
   conversion2?: ApiCoreDtoClickStreamHitConversionInfo;
 
-  @Metadata({ data: "json, name=conversion3" })
+  @SpeakeasyMetadata({ data: "json, name=conversion3" })
   conversion3?: ApiCoreDtoClickStreamHitConversionInfo;
 
-  @Metadata({ data: "json, name=conversion4" })
+  @SpeakeasyMetadata({ data: "json, name=conversion4" })
   conversion4?: ApiCoreDtoClickStreamHitConversionInfo;
 
-  @Metadata({ data: "json, name=conversion5" })
+  @SpeakeasyMetadata({ data: "json, name=conversion5" })
   conversion5?: ApiCoreDtoClickStreamHitConversionInfo;
 
-  @Metadata({ data: "json, name=conversions", elemType: shared.ApiCoreDtoClickStreamHitConversionInfo })
+  @SpeakeasyMetadata({ data: "json, name=conversions", elemType: ApiCoreDtoClickStreamHitConversionInfo })
   conversions?: ApiCoreDtoClickStreamHitConversionInfo[];
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: ApiCoreDtoClickStreamHitDatapointInfo;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=isProxy" })
+  @SpeakeasyMetadata({ data: "json, name=isProxy" })
   isProxy?: string;
 
-  @Metadata({ data: "json, name=isSpider" })
+  @SpeakeasyMetadata({ data: "json, name=isSpider" })
   isSpider?: string;
 
-  @Metadata({ data: "json, name=isUnique" })
+  @SpeakeasyMetadata({ data: "json, name=isUnique" })
   isUnique?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ApiCoreDtoClickStreamHitLocationInfo;
 
-  @Metadata({ data: "json, name=org" })
+  @SpeakeasyMetadata({ data: "json, name=org" })
   org?: string;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: ApiCoreDtoClickStreamHitOsInfo;
 
-  @Metadata({ data: "json, name=queryParams" })
+  @SpeakeasyMetadata({ data: "json, name=queryParams" })
   queryParams?: string;
 
-  @Metadata({ data: "json, name=realDestinationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=realDestinationUrl" })
   realDestinationUrl?: string;
 
-  @Metadata({ data: "json, name=referer" })
+  @SpeakeasyMetadata({ data: "json, name=referer" })
   referer?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: ApiCoreDtoClickStreamHitSource;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

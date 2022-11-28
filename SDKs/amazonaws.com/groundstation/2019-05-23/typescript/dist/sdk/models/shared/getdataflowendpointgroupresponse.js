@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EndpointDetails } from "./endpointdetails";
 // GetDataflowEndpointGroupResponse
 /**
  * <p/>
@@ -34,19 +34,19 @@ var GetDataflowEndpointGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataflowEndpointGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEndpointGroupArn" }),
         __metadata("design:type", String)
     ], GetDataflowEndpointGroupResponse.prototype, "dataflowEndpointGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowEndpointGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEndpointGroupId" }),
         __metadata("design:type", String)
     ], GetDataflowEndpointGroupResponse.prototype, "dataflowEndpointGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointsDetails", elemType: shared.EndpointDetails }),
+        SpeakeasyMetadata({ data: "json, name=endpointsDetails", elemType: EndpointDetails }),
         __metadata("design:type", Array)
     ], GetDataflowEndpointGroupResponse.prototype, "endpointsDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], GetDataflowEndpointGroupResponse.prototype, "tags", void 0);
     return GetDataflowEndpointGroupResponse;

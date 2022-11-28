@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetObjectStorageBucketContentServers = []string{
+var GetObjectStorageBucketContentServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -20,17 +20,13 @@ type GetObjectStorageBucketContentQueryParams struct {
 	Prefix    *string `queryParam:"style=form,explode=true,name=prefix"`
 }
 
-type GetObjectStorageBucketContentSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetObjectStorageBucketContentSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetObjectStorageBucketContentSecurity struct {
-	Option1 *GetObjectStorageBucketContentSecurityOption1 `security:"option"`
-	Option2 *GetObjectStorageBucketContentSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetObjectStorageBucketContentDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetObjectStorageBucketContentRequest struct {
@@ -38,10 +34,6 @@ type GetObjectStorageBucketContentRequest struct {
 	PathParams  GetObjectStorageBucketContentPathParams
 	QueryParams GetObjectStorageBucketContentQueryParams
 	Security    GetObjectStorageBucketContentSecurity
-}
-
-type GetObjectStorageBucketContentDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetObjectStorageBucketContentResponse struct {

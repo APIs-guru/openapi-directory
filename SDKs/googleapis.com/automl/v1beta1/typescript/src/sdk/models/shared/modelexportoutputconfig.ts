@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcrDestination } from "./gcrdestination";
 import { GcsDestination } from "./gcsdestination";
+
 
 
 // ModelExportOutputConfig
@@ -8,15 +9,15 @@ import { GcsDestination } from "./gcsdestination";
  * Output configuration for ModelExport Action.
 **/
 export class ModelExportOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcrDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcrDestination" })
   gcrDestination?: GcrDestination;
 
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GcsDestination;
 
-  @Metadata({ data: "json, name=modelFormat" })
+  @SpeakeasyMetadata({ data: "json, name=modelFormat" })
   modelFormat?: string;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, string>;
 }

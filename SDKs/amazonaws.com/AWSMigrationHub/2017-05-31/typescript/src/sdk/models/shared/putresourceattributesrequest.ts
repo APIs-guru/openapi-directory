@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAttribute } from "./resourceattribute";
 
 
+
 export class PutResourceAttributesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DryRun" })
+  @SpeakeasyMetadata({ data: "json, name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=MigrationTaskName" })
+  @SpeakeasyMetadata({ data: "json, name=MigrationTaskName" })
   migrationTaskName: string;
 
-  @Metadata({ data: "json, name=ProgressUpdateStream" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" })
   progressUpdateStream: string;
 
-  @Metadata({ data: "json, name=ResourceAttributeList", elemType: shared.ResourceAttribute })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAttributeList", elemType: ResourceAttribute })
   resourceAttributeList: ResourceAttribute[];
 }

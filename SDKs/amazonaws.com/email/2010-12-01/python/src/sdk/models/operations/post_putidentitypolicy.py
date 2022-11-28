@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPutIdentityPolicyActionEnum(str, Enum):
     PUT_IDENTITY_POLICY = "PutIdentityPolicy"
@@ -10,8 +14,8 @@ class PostPutIdentityPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostPutIdentityPolicyQueryParams:
-    action: PostPutIdentityPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPutIdentityPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPutIdentityPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPutIdentityPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPutIdentityPolicyHeaders:
 
 @dataclass
 class PostPutIdentityPolicyRequest:
-    query_params: PostPutIdentityPolicyQueryParams = field(default=None)
-    headers: PostPutIdentityPolicyHeaders = field(default=None)
+    headers: PostPutIdentityPolicyHeaders = field()
+    query_params: PostPutIdentityPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPutIdentityPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

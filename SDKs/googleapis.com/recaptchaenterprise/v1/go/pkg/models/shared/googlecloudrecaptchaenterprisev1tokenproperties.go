@@ -13,9 +13,11 @@ const (
 )
 
 type GoogleCloudRecaptchaenterpriseV1TokenProperties struct {
-	Action        *string                                                           `json:"action,omitempty"`
-	CreateTime    *string                                                           `json:"createTime,omitempty"`
-	Hostname      *string                                                           `json:"hostname,omitempty"`
-	InvalidReason *GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum `json:"invalidReason,omitempty"`
-	Valid         *bool                                                             `json:"valid,omitempty"`
+	Action             *string                                                           `json:"action,omitempty"`
+	AndroidPackageName *string                                                           `json:"androidPackageName,omitempty"`
+	CreateTime         *string                                                           `json:"createTime,omitempty"`
+	Hostname           *string                                                           `json:"hostname,omitempty"`
+	InvalidReason      *GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum `json:"invalidReason,omitempty"`
+	IosBundleID        *string                                                           `json:"iosBundleId,omitempty"`
+	Valid              *bool                                                             `json:"valid,omitempty"`
 }

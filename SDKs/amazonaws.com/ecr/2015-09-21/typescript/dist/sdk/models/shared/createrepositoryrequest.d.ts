@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfiguration } from "./encryptionconfiguration";
 import { ImageScanningConfiguration } from "./imagescanningconfiguration";
 import { ImageTagMutabilityEnum } from "./imagetagmutabilityenum";

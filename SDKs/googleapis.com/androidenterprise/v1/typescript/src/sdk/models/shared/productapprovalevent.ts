@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProductApprovalEventApprovedEnum {
-    Unknown = "unknown"
-,    Approved = "approved"
-,    Unapproved = "unapproved"
+    Unknown = "unknown",
+    Approved = "approved",
+    Unapproved = "unapproved"
 }
 
 
@@ -12,9 +13,9 @@ export enum ProductApprovalEventApprovedEnum {
  * An event generated when a product's approval status is changed.
 **/
 export class ProductApprovalEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approved" })
+  @SpeakeasyMetadata({ data: "json, name=approved" })
   approved?: ProductApprovalEventApprovedEnum;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 }

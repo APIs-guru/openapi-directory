@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListingNestMedia extends SpeakeasyBase {
-  @Metadata({ data: "json, name=photo_links" })
+  @SpeakeasyMetadata({ data: "json, name=photo_links" })
   photoLinks?: string[];
 }

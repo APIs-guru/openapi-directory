@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerMarketplacedealsUpdatePathParams:
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +25,21 @@ class AdexchangebuyerMarketplacedealsUpdateQueryParams:
 
 @dataclass
 class AdexchangebuyerMarketplacedealsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerMarketplacedealsUpdateRequest:
-    path_params: AdexchangebuyerMarketplacedealsUpdatePathParams = field(default=None)
-    query_params: AdexchangebuyerMarketplacedealsUpdateQueryParams = field(default=None)
+    path_params: AdexchangebuyerMarketplacedealsUpdatePathParams = field()
+    query_params: AdexchangebuyerMarketplacedealsUpdateQueryParams = field()
+    security: AdexchangebuyerMarketplacedealsUpdateSecurity = field()
     request: Optional[shared.EditAllOrderDealsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerMarketplacedealsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerMarketplacedealsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     edit_all_order_deals_response: Optional[shared.EditAllOrderDealsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -12,14 +12,14 @@ class ListPipsQueryParams:
 
 @dataclass
 class ListPipsRequest:
-    query_params: ListPipsQueryParams = field(default=None)
+    query_params: ListPipsQueryParams = field()
     
 
 @dataclass
 class ListPipsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     nitro: Optional[Any] = field(default=None)
     

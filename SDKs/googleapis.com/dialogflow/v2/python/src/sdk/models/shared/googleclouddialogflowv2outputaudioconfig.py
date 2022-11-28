@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2synthesizespeechconfig
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowV2OutputAudioConfigAudioEncodingEnum(str, Enum):
     OUTPUT_AUDIO_ENCODING_UNSPECIFIED = "OUTPUT_AUDIO_ENCODING_UNSPECIFIED"
@@ -15,7 +17,11 @@ class GoogleCloudDialogflowV2OutputAudioConfigAudioEncodingEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2OutputAudioConfig:
-    audio_encoding: Optional[GoogleCloudDialogflowV2OutputAudioConfigAudioEncodingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'audioEncoding' }})
-    sample_rate_hertz: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampleRateHertz' }})
-    synthesize_speech_config: Optional[googleclouddialogflowv2synthesizespeechconfig.GoogleCloudDialogflowV2SynthesizeSpeechConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'synthesizeSpeechConfig' }})
+    r"""GoogleCloudDialogflowV2OutputAudioConfig
+    Instructs the speech synthesizer on how to generate the output audio content. If this audio config is supplied in a request, it overrides all existing text-to-speech settings applied to the agent.
+    """
+    
+    audio_encoding: Optional[GoogleCloudDialogflowV2OutputAudioConfigAudioEncodingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('audioEncoding') }})
+    sample_rate_hertz: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampleRateHertz') }})
+    synthesize_speech_config: Optional[GoogleCloudDialogflowV2SynthesizeSpeechConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('synthesizeSpeechConfig') }})
     

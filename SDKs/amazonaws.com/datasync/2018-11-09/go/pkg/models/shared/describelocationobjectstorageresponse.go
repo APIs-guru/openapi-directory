@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeLocationObjectStorageResponse
+// DescribeLocationObjectStorageResponse
 type DescribeLocationObjectStorageResponse struct {
 	AccessKey      *string                          `json:"AccessKey,omitempty"`
 	AgentArns      []string                         `json:"AgentArns,omitempty"`

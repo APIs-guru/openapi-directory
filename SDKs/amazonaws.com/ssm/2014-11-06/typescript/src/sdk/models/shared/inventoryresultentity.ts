@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryResultItem } from "./inventoryresultitem";
+
 
 
 // InventoryResultEntity
@@ -8,9 +8,9 @@ import { InventoryResultItem } from "./inventoryresultitem";
  * Inventory query results.
 **/
 export class InventoryResultEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data", elemType: shared.InventoryResultItem })
+  @SpeakeasyMetadata({ data: "json, name=Data", elemType: InventoryResultItem })
   data?: Map<string, InventoryResultItem>;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 }

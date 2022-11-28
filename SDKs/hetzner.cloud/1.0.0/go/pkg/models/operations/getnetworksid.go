@@ -4,10 +4,8 @@ type GetNetworksIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetNetworksIDRequest struct {
-	PathParams GetNetworksIDPathParams
-}
-
+// GetNetworksID200ApplicationJSONNetworkProtection
+// Protection configuration for the Network
 type GetNetworksID200ApplicationJSONNetworkProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -47,6 +45,10 @@ type GetNetworksID200ApplicationJSONNetwork struct {
 
 type GetNetworksID200ApplicationJSON struct {
 	Network *GetNetworksID200ApplicationJSONNetwork `json:"network,omitempty"`
+}
+
+type GetNetworksIDRequest struct {
+	PathParams GetNetworksIDPathParams
 }
 
 type GetNetworksIDResponse struct {

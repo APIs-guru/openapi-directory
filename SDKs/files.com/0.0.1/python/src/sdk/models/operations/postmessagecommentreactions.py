@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostMessageCommentReactionsRequestBody:
-    emoji: str = field(default=None, metadata={'multipart_form': { 'field_name': 'emoji' }})
+    emoji: str = field(metadata={'multipart_form': { 'field_name': 'emoji' }})
     user_id: Optional[int] = field(default=None, metadata={'multipart_form': { 'field_name': 'user_id' }})
     
 
@@ -16,7 +16,7 @@ class PostMessageCommentReactionsRequest:
 
 @dataclass
 class PostMessageCommentReactionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     message_comment_reaction_entity: Optional[shared.MessageCommentReactionEntity] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregateConformancePackComplianceCount } from "./aggregateconformancepackcompliancecount";
+
 
 
 // AggregateConformancePackComplianceSummary
@@ -7,9 +8,9 @@ import { AggregateConformancePackComplianceCount } from "./aggregateconformancep
  * Provides a summary of compliance based on either account ID or region. 
 **/
 export class AggregateConformancePackComplianceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceSummary" })
   complianceSummary?: AggregateConformancePackComplianceCount;
 
-  @Metadata({ data: "json, name=GroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GroupName" })
   groupName?: string;
 }

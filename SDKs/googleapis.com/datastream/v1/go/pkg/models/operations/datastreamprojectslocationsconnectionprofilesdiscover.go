@@ -30,7 +30,7 @@ type DatastreamProjectsLocationsConnectionProfilesDiscoverSecurity struct {
 type DatastreamProjectsLocationsConnectionProfilesDiscoverRequest struct {
 	PathParams  DatastreamProjectsLocationsConnectionProfilesDiscoverPathParams
 	QueryParams DatastreamProjectsLocationsConnectionProfilesDiscoverQueryParams
-	Request     *shared.DiscoverConnectionProfileRequest `request:"mediaType=application/json"`
+	Request     *shared.DiscoverConnectionProfileRequestInput `request:"mediaType=application/json"`
 	Security    DatastreamProjectsLocationsConnectionProfilesDiscoverSecurity
 }
 

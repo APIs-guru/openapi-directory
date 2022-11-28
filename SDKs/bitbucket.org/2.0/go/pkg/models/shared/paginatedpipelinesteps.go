@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedPipelineSteps
+// A paged list of pipeline steps.
 type PaginatedPipelineSteps struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1FeedbackThread } from "./googleclouddatalabelingv1beta1feedbackthread";
+
 
 
 // GoogleCloudDatalabelingV1beta1ListFeedbackThreadsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDatalabelingV1beta1FeedbackThread } from "./googleclouddatal
  * Results for listing FeedbackThreads.
 **/
 export class GoogleCloudDatalabelingV1beta1ListFeedbackThreadsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feedbackThreads", elemType: shared.GoogleCloudDatalabelingV1beta1FeedbackThread })
+  @SpeakeasyMetadata({ data: "json, name=feedbackThreads", elemType: GoogleCloudDatalabelingV1beta1FeedbackThread })
   feedbackThreads?: GoogleCloudDatalabelingV1beta1FeedbackThread[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

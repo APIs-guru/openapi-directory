@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CoreDeviceStatusEnum } from "./coredevicestatusenum";
+
 
 
 // CoreDevice
@@ -7,12 +8,12 @@ import { CoreDeviceStatusEnum } from "./coredevicestatusenum";
  * Contains information about a Greengrass core device, which is an IoT thing that runs the IoT Greengrass Core software.
 **/
 export class CoreDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coreDeviceThingName" })
+  @SpeakeasyMetadata({ data: "json, name=coreDeviceThingName" })
   coreDeviceThingName?: string;
 
-  @Metadata({ data: "json, name=lastStatusUpdateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatusUpdateTimestamp" })
   lastStatusUpdateTimestamp?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CoreDeviceStatusEnum;
 }

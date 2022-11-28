@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteFolderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=folder_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=folder_id" })
   folderId: string;
 }
 
 
 export class DeleteFolderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
 
-export class DeleteFolderRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteFolderPathParams;
-
-  @Metadata()
-  security: DeleteFolderSecurity;
-}
-
-
 export class DeleteFolderFolder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent_folder_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_folder_id" })
   parentFolderId?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }
 
 
+export class DeleteFolderRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteFolderPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteFolderSecurity;
+}
+
+
 export class DeleteFolderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   folder?: DeleteFolderFolder;
 }

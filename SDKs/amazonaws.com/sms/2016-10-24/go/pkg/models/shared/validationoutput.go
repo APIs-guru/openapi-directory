@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ValidationOutput
+// Contains validation output.
 type ValidationOutput struct {
 	AppValidationOutput    *AppValidationOutput    `json:"appValidationOutput,omitempty"`
 	LatestValidationTime   *time.Time              `json:"latestValidationTime,omitempty"`

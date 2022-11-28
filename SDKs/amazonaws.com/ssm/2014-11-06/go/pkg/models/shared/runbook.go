@@ -1,5 +1,7 @@
 package shared
 
+// Runbook
+// <p>Information about an Automation runbook used in a runbook workflow in Change Manager.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
 type Runbook struct {
 	DocumentName        string              `json:"DocumentName"`
 	DocumentVersion     *string             `json:"DocumentVersion,omitempty"`

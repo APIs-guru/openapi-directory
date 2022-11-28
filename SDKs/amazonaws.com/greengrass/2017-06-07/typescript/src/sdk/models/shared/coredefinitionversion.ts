@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Core } from "./core";
+
 
 
 // CoreDefinitionVersion
@@ -8,6 +8,6 @@ import { Core } from "./core";
  * Information about a core definition version.
 **/
 export class CoreDefinitionVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Cores", elemType: shared.Core })
+  @SpeakeasyMetadata({ data: "json, name=Cores", elemType: Core })
   cores?: Core[];
 }

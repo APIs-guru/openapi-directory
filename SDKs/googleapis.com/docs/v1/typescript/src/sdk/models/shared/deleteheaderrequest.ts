@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteHeaderRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deletes a Header from the document.
 **/
 export class DeleteHeaderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headerId" })
+  @SpeakeasyMetadata({ data: "json, name=headerId" })
   headerId?: string;
 }

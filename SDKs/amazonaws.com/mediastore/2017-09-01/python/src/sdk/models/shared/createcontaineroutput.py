@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import container
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateContainerOutput:
-    container: container.Container = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Container' }})
+    container: Container = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Container') }})
     

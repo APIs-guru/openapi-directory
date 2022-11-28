@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteUserTagsTagIdShowsShowIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=show_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=show_id" })
   showId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tag_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tag_id" })
   tagId: number;
 }
 
 
 export class DeleteUserTagsTagIdShowsShowIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteUserTagsTagIdShowsShowIdPathParams;
 }
 
 
 export class DeleteUserTagsTagIdShowsShowIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

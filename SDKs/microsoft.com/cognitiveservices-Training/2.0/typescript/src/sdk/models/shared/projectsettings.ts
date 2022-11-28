@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProjectSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents settings associated with a project
 **/
 export class ProjectSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainId, form, name=domainId;" })
+  @SpeakeasyMetadata({ data: "json, name=domainId, form, name=domainId;" })
   domainId?: string;
 }

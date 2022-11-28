@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImportProductSetsGcsSource
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Google Cloud Storage location for a csv file which preserves a list of ImportProductSetRequests in each line.
 **/
 export class ImportProductSetsGcsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=csvFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=csvFileUri" })
   csvFileUri?: string;
 }

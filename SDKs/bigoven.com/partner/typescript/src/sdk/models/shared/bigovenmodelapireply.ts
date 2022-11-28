@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigOvenModelApiUserInfoTiny } from "./bigovenmodelapiuserinfotiny";
 
 
+
 export class BigOvenModelApiReply extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Comment" })
+  @SpeakeasyMetadata({ data: "json, name=Comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=ID" })
+  @SpeakeasyMetadata({ data: "json, name=ID" })
   id?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=Poster" })
+  @SpeakeasyMetadata({ data: "json, name=Poster" })
   poster?: BigOvenModelApiUserInfoTiny;
 
-  @Metadata({ data: "json, name=ReviewID" })
+  @SpeakeasyMetadata({ data: "json, name=ReviewID" })
   reviewId?: string;
 }

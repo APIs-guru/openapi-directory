@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FolderConfiguration } from "./folderconfiguration";
 var GetDefaultRetentionPolicyResponse = /** @class */ (function (_super) {
     __extends(GetDefaultRetentionPolicyResponse, _super);
     function GetDefaultRetentionPolicyResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], GetDefaultRetentionPolicyResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=FolderConfigurations", elemType: shared.FolderConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=FolderConfigurations", elemType: FolderConfiguration }),
         __metadata("design:type", Array)
     ], GetDefaultRetentionPolicyResponse.prototype, "folderConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], GetDefaultRetentionPolicyResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], GetDefaultRetentionPolicyResponse.prototype, "name", void 0);
     return GetDefaultRetentionPolicyResponse;

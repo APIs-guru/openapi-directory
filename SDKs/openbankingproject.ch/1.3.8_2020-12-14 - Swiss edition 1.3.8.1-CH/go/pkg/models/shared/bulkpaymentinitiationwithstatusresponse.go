@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BulkPaymentInitiationWithStatusResponse
+// Generic JSON response body consistion of the corresponding bulk payment initation JSON body together with an optional transaction status field.
 type BulkPaymentInitiationWithStatusResponse struct {
 	AcceptorTransactionDateTime *time.Time                         `json:"acceptorTransactionDateTime,omitempty"`
 	BatchBookingPreferred       *bool                              `json:"batchBookingPreferred,omitempty"`

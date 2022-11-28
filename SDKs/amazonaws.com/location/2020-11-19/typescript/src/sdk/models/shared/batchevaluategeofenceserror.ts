@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemError } from "./batchitemerror";
+
 
 
 // BatchEvaluateGeofencesError
@@ -7,12 +8,12 @@ import { BatchItemError } from "./batchitemerror";
  * Contains error details for each device that failed to evaluate its position against the geofences in a given geofence collection.
 **/
 export class BatchEvaluateGeofencesError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceId" })
   deviceId: string;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error: BatchItemError;
 
-  @Metadata({ data: "json, name=SampleTime" })
+  @SpeakeasyMetadata({ data: "json, name=SampleTime" })
   sampleTime: Date;
 }

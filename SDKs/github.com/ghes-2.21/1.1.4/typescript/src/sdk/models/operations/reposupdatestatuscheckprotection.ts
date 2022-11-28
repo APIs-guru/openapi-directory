@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposUpdateStatusCheckProtectionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=branch" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=branch" })
   branch: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposUpdateStatusCheckProtectionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contexts" })
+  @SpeakeasyMetadata({ data: "json, name=contexts" })
   contexts?: string[];
 
-  @Metadata({ data: "json, name=strict" })
+  @SpeakeasyMetadata({ data: "json, name=strict" })
   strict?: boolean;
 }
 
 
 export class ReposUpdateStatusCheckProtectionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposUpdateStatusCheckProtectionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReposUpdateStatusCheckProtectionRequestBody;
 }
 
 
 export class ReposUpdateStatusCheckProtectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCheckPolicy?: shared.StatusCheckPolicy;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

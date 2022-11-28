@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Credentials
 /**
  * Credentials for the provided identity ID.
@@ -33,19 +33,19 @@ var Credentials = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=AccessKeyId" }),
         __metadata("design:type", String)
     ], Credentials.prototype, "accessKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Expiration" }),
+        SpeakeasyMetadata({ data: "json, name=Expiration" }),
         __metadata("design:type", Date)
     ], Credentials.prototype, "expiration", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretKey" }),
+        SpeakeasyMetadata({ data: "json, name=SecretKey" }),
         __metadata("design:type", String)
     ], Credentials.prototype, "secretKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=SessionToken" }),
+        SpeakeasyMetadata({ data: "json, name=SessionToken" }),
         __metadata("design:type", String)
     ], Credentials.prototype, "sessionToken", void 0);
     return Credentials;

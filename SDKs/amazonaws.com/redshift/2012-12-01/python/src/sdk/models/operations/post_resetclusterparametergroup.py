@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResetClusterParameterGroupActionEnum(str, Enum):
     RESET_CLUSTER_PARAMETER_GROUP = "ResetClusterParameterGroup"
@@ -10,8 +14,8 @@ class PostResetClusterParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostResetClusterParameterGroupQueryParams:
-    action: PostResetClusterParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResetClusterParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResetClusterParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResetClusterParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostResetClusterParameterGroupHeaders:
 
 @dataclass
 class PostResetClusterParameterGroupRequest:
-    query_params: PostResetClusterParameterGroupQueryParams = field(default=None)
-    headers: PostResetClusterParameterGroupHeaders = field(default=None)
+    headers: PostResetClusterParameterGroupHeaders = field()
+    query_params: PostResetClusterParameterGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResetClusterParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

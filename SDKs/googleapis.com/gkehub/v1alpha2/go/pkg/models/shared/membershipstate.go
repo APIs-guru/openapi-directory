@@ -11,6 +11,8 @@ const (
 	MembershipStateCodeEnumServiceUpdating MembershipStateCodeEnum = "SERVICE_UPDATING"
 )
 
+// MembershipState
+// MembershipState describes the state of a Membership resource.
 type MembershipState struct {
 	Code *MembershipStateCodeEnum `json:"code,omitempty"`
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CrossProfilePoliciesCrossProfileCopyPasteEnum(str, Enum):
     CROSS_PROFILE_COPY_PASTE_UNSPECIFIED = "CROSS_PROFILE_COPY_PASTE_UNSPECIFIED"
@@ -22,7 +24,11 @@ class CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CrossProfilePolicies:
-    cross_profile_copy_paste: Optional[CrossProfilePoliciesCrossProfileCopyPasteEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'crossProfileCopyPaste' }})
-    cross_profile_data_sharing: Optional[CrossProfilePoliciesCrossProfileDataSharingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'crossProfileDataSharing' }})
-    show_work_contacts_in_personal_profile: Optional[CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showWorkContactsInPersonalProfile' }})
+    r"""CrossProfilePolicies
+    Cross-profile policies applied on the device.
+    """
+    
+    cross_profile_copy_paste: Optional[CrossProfilePoliciesCrossProfileCopyPasteEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('crossProfileCopyPaste') }})
+    cross_profile_data_sharing: Optional[CrossProfilePoliciesCrossProfileDataSharingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('crossProfileDataSharing') }})
+    show_work_contacts_in_personal_profile: Optional[CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('showWorkContactsInPersonalProfile') }})
     

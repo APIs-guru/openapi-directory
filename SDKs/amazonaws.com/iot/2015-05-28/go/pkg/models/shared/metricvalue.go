@@ -1,5 +1,7 @@
 package shared
 
+// MetricValue
+// The value to be compared with the <code>metric</code>.
 type MetricValue struct {
 	Cidrs   []string  `json:"cidrs,omitempty"`
 	Count   *int64    `json:"count,omitempty"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RecipientDeliveryTypeEnum(str, Enum):
     LINK = "LINK"
@@ -10,7 +12,11 @@ class RecipientDeliveryTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Recipient:
-    delivery_type: Optional[RecipientDeliveryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryType' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    r"""Recipient
+    Represents a recipient.
+    """
+    
+    delivery_type: Optional[RecipientDeliveryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryType') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

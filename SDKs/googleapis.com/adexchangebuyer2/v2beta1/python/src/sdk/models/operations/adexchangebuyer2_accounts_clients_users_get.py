@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersGetPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    client_account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clientAccountId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    client_account_id: str = field(metadata={'path_param': { 'field_name': 'clientAccountId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class Adexchangebuyer2AccountsClientsUsersGetQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersGetRequest:
-    path_params: Adexchangebuyer2AccountsClientsUsersGetPathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsClientsUsersGetQueryParams = field(default=None)
-    security: Adexchangebuyer2AccountsClientsUsersGetSecurity = field(default=None)
+    path_params: Adexchangebuyer2AccountsClientsUsersGetPathParams = field()
+    query_params: Adexchangebuyer2AccountsClientsUsersGetQueryParams = field()
+    security: Adexchangebuyer2AccountsClientsUsersGetSecurity = field()
     
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_user: Optional[shared.ClientUser] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

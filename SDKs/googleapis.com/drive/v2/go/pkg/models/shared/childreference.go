@@ -1,5 +1,7 @@
 package shared
 
+// ChildReference
+// A reference to a folder's child.
 type ChildReference struct {
 	ChildLink *string `json:"childLink,omitempty"`
 	ID        *string `json:"id,omitempty"`

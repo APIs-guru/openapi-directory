@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResolverQueryLogConfigAssociation } from "./resolverquerylogconfigassociation";
 export declare class ListResolverQueryLogConfigAssociationsResponse extends SpeakeasyBase {
     nextToken?: string;

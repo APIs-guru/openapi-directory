@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatorConfiguration } from "./operatorconfiguration";
 var OperationCreate = /** @class */ (function (_super) {
     __extends(OperationCreate, _super);
@@ -30,15 +30,15 @@ var OperationCreate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], OperationCreate.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=operatorConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=operatorConfiguration" }),
         __metadata("design:type", OperatorConfiguration)
     ], OperationCreate.prototype, "operatorConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=workspaceId" }),
+        SpeakeasyMetadata({ data: "json, name=workspaceId" }),
         __metadata("design:type", String)
     ], OperationCreate.prototype, "workspaceId", void 0);
     return OperationCreate;

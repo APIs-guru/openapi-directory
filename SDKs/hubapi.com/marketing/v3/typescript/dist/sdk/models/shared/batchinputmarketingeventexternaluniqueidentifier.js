@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MarketingEventExternalUniqueIdentifier } from "./marketingeventexternaluniqueidentifier";
 var BatchInputMarketingEventExternalUniqueIdentifier = /** @class */ (function (_super) {
     __extends(BatchInputMarketingEventExternalUniqueIdentifier, _super);
     function BatchInputMarketingEventExternalUniqueIdentifier() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=inputs", elemType: shared.MarketingEventExternalUniqueIdentifier }),
+        SpeakeasyMetadata({ data: "json, name=inputs", elemType: MarketingEventExternalUniqueIdentifier }),
         __metadata("design:type", Array)
     ], BatchInputMarketingEventExternalUniqueIdentifier.prototype, "inputs", void 0);
     return BatchInputMarketingEventExternalUniqueIdentifier;

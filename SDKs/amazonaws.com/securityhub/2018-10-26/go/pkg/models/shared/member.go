@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Member
+// The details about a member account.
 type Member struct {
 	AccountID       *string    `json:"AccountId,omitempty"`
 	AdministratorID *string    `json:"AdministratorId,omitempty"`

@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetEmbedPresetVideosPathParams:
-    preset_id: float = field(default=None, metadata={'path_param': { 'field_name': 'preset_id', 'style': 'simple', 'explode': False }})
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    preset_id: float = field(metadata={'path_param': { 'field_name': 'preset_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetEmbedPresetVideosQueryParams:
 
 @dataclass
 class GetEmbedPresetVideosRequest:
-    path_params: GetEmbedPresetVideosPathParams = field(default=None)
-    query_params: GetEmbedPresetVideosQueryParams = field(default=None)
+    path_params: GetEmbedPresetVideosPathParams = field()
+    query_params: GetEmbedPresetVideosQueryParams = field()
     
 
 @dataclass
 class GetEmbedPresetVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     videos: Optional[List[shared.Video]] = field(default=None)
     

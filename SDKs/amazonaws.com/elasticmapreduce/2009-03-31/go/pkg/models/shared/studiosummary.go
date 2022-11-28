@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StudioSummary
+// Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The details do not include subnets, IAM roles, security groups, or tags associated with the Studio.
 type StudioSummary struct {
 	AuthMode     *AuthModeEnum `json:"AuthMode,omitempty"`
 	CreationTime *time.Time    `json:"CreationTime,omitempty"`

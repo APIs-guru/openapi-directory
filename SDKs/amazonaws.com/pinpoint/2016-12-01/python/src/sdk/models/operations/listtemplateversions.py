@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListTemplateVersionsPathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
-    template_type: str = field(default=None, metadata={'path_param': { 'field_name': 'template-type', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
+    template_type: str = field(metadata={'path_param': { 'field_name': 'template-type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +31,21 @@ class ListTemplateVersionsHeaders:
 
 @dataclass
 class ListTemplateVersionsRequest:
-    path_params: ListTemplateVersionsPathParams = field(default=None)
-    query_params: ListTemplateVersionsQueryParams = field(default=None)
-    headers: ListTemplateVersionsHeaders = field(default=None)
+    headers: ListTemplateVersionsHeaders = field()
+    path_params: ListTemplateVersionsPathParams = field()
+    query_params: ListTemplateVersionsQueryParams = field()
     
 
 @dataclass
 class ListTemplateVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_template_versions_response: Optional[shared.ListTemplateVersionsResponse] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

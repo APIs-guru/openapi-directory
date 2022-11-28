@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ListIntegrationItem
+// An integration in list of integrations.
 type ListIntegrationItem struct {
 	CreatedAt      time.Time         `json:"CreatedAt"`
 	DomainName     string            `json:"DomainName"`

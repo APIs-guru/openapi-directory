@@ -8,6 +8,8 @@ const (
 	ManifestTypeEnumDash                    ManifestTypeEnum = "DASH"
 )
 
+// Manifest
+// Manifest configuration.
 type Manifest struct {
 	FileName   *string           `json:"fileName,omitempty"`
 	MuxStreams []string          `json:"muxStreams,omitempty"`

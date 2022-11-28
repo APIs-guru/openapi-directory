@@ -26,7 +26,7 @@ type MybusinessqandaLocationsQuestionsPatchQueryParams struct {
 type MybusinessqandaLocationsQuestionsPatchRequest struct {
 	PathParams  MybusinessqandaLocationsQuestionsPatchPathParams
 	QueryParams MybusinessqandaLocationsQuestionsPatchQueryParams
-	Request     *shared.Question `request:"mediaType=application/json"`
+	Request     *shared.QuestionInput `request:"mediaType=application/json"`
 }
 
 type MybusinessqandaLocationsQuestionsPatchResponse struct {

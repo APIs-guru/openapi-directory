@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesSchedule } from "./tflapipresentationentitiesschedule";
 import { TflApiPresentationEntitiesStationInterval } from "./tflapipresentationentitiesstationinterval";
 
 
+
 export class TflApiPresentationEntitiesTimetableRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=schedules", elemType: shared.TflApiPresentationEntitiesSchedule })
+  @SpeakeasyMetadata({ data: "json, name=schedules", elemType: TflApiPresentationEntitiesSchedule })
   schedules?: TflApiPresentationEntitiesSchedule[];
 
-  @Metadata({ data: "json, name=stationIntervals", elemType: shared.TflApiPresentationEntitiesStationInterval })
+  @SpeakeasyMetadata({ data: "json, name=stationIntervals", elemType: TflApiPresentationEntitiesStationInterval })
   stationIntervals?: TflApiPresentationEntitiesStationInterval[];
 }

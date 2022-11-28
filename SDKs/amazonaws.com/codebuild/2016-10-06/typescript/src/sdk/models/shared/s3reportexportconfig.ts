@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportPackagingTypeEnum } from "./reportpackagingtypeenum";
+
 
 
 // S3ReportExportConfig
@@ -7,21 +8,21 @@ import { ReportPackagingTypeEnum } from "./reportpackagingtypeenum";
  *  Information about the S3 bucket where the raw data of a report are exported. 
 **/
 export class S3ReportExportConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=bucketOwner" })
+  @SpeakeasyMetadata({ data: "json, name=bucketOwner" })
   bucketOwner?: string;
 
-  @Metadata({ data: "json, name=encryptionDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionDisabled" })
   encryptionDisabled?: boolean;
 
-  @Metadata({ data: "json, name=encryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionKey" })
   encryptionKey?: string;
 
-  @Metadata({ data: "json, name=packaging" })
+  @SpeakeasyMetadata({ data: "json, name=packaging" })
   packaging?: ReportPackagingTypeEnum;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

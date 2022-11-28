@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Backup } from "./backup";
+
 
 
 // CreateBackupResponse
@@ -7,6 +8,6 @@ import { Backup } from "./backup";
  * The response object for the <code>CreateBackup</code> operation.
 **/
 export class CreateBackupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Backup" })
+  @SpeakeasyMetadata({ data: "json, name=Backup" })
   backup?: Backup;
 }

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAddWordQueryParams = /** @class */ (function (_super) {
     __extends(GetAddWordQueryParams, _super);
     function GetAddWordQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=author" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=author" }),
         __metadata("design:type", String)
     ], GetAddWordQueryParams.prototype, "author", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=definition" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=definition" }),
         __metadata("design:type", String)
     ], GetAddWordQueryParams.prototype, "definition", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=related" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=related" }),
         __metadata("design:type", String)
     ], GetAddWordQueryParams.prototype, "related", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=word" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=word" }),
         __metadata("design:type", String)
     ], GetAddWordQueryParams.prototype, "word", void 0);
     return GetAddWordQueryParams;
@@ -53,7 +53,7 @@ var GetAddWordRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAddWordQueryParams)
     ], GetAddWordRequest.prototype, "queryParams", void 0);
     return GetAddWordRequest;
@@ -65,11 +65,11 @@ var GetAddWordResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAddWordResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAddWordResponse.prototype, "statusCode", void 0);
     return GetAddWordResponse;

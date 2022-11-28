@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FulfillmentFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=external_id" })
+  @SpeakeasyMetadata({ data: "json, name=external_id" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=order_id" })
+  @SpeakeasyMetadata({ data: "json, name=order_id" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=service_type" })
+  @SpeakeasyMetadata({ data: "json, name=service_type" })
   serviceType?: string;
 
-  @Metadata({ data: "json, name=shipment_status" })
+  @SpeakeasyMetadata({ data: "json, name=shipment_status" })
   shipmentStatus?: string;
 
-  @Metadata({ data: "json, name=tracking_company" })
+  @SpeakeasyMetadata({ data: "json, name=tracking_company" })
   trackingCompany?: string;
 
-  @Metadata({ data: "json, name=tracking_number" })
+  @SpeakeasyMetadata({ data: "json, name=tracking_number" })
   trackingNumber?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

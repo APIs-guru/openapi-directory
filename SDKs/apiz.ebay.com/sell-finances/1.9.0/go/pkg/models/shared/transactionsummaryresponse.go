@@ -1,5 +1,7 @@
 package shared
 
+// TransactionSummaryResponse
+// This type is the base response type of the getTransactionSummary method, and based on the filters that are used in the getTransactionSummary call URI, the response may include total count and amount of the seller's sales and credits, total count and amount of buyer refunds, and total count and amount of seller payment holds.
 type TransactionSummaryResponse struct {
 	AdjustmentAmount            *Amount `json:"adjustmentAmount,omitempty"`
 	AdjustmentBookingEntry      *string `json:"adjustmentBookingEntry,omitempty"`

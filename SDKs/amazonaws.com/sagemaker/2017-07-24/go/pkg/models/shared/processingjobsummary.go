@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProcessingJobSummary
+// Summary of information about a processing job.
 type ProcessingJobSummary struct {
 	CreationTime        time.Time               `json:"CreationTime"`
 	ExitMessage         *string                 `json:"ExitMessage,omitempty"`

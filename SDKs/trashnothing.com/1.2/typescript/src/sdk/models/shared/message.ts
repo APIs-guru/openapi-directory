@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Photo } from "./photo";
+
 
 
 // Message
@@ -8,27 +8,27 @@ import { Photo } from "./photo";
  * A message between two users.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=email_attachments" })
+  @SpeakeasyMetadata({ data: "json, name=email_attachments" })
   emailAttachments?: string[];
 
-  @Metadata({ data: "json, name=from_user_id" })
+  @SpeakeasyMetadata({ data: "json, name=from_user_id" })
   fromUserId?: string;
 
-  @Metadata({ data: "json, name=message_id" })
+  @SpeakeasyMetadata({ data: "json, name=message_id" })
   messageId?: string;
 
-  @Metadata({ data: "json, name=photos", elemType: shared.Photo })
+  @SpeakeasyMetadata({ data: "json, name=photos", elemType: Photo })
   photos?: Photo[];
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=to_user_id" })
+  @SpeakeasyMetadata({ data: "json, name=to_user_id" })
   toUserId?: string;
 }

@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOfferingsOfferingIdUsersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 export enum GetOfferingsOfferingIdUsersFacilitatorsEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }
 
 export enum GetOfferingsOfferingIdUsersLearnersEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }
 
 export enum GetOfferingsOfferingIdUsersMarkersEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }
 
 
 export class GetOfferingsOfferingIdUsersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=facilitators" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=facilitators" })
   facilitators?: GetOfferingsOfferingIdUsersFacilitatorsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=learners" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=learners" })
   learners?: GetOfferingsOfferingIdUsersLearnersEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=markers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=markers" })
   markers?: GetOfferingsOfferingIdUsersMarkersEnum;
 }
 
 
 export class GetOfferingsOfferingIdUsersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOfferingsOfferingIdUsersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOfferingsOfferingIdUsersQueryParams;
 }
 
 
 export class GetOfferingsOfferingIdUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.OfferingUserResponse })
+  @SpeakeasyMetadata({ elemType: shared.OfferingUserResponse })
   offeringUserResponses?: shared.OfferingUserResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

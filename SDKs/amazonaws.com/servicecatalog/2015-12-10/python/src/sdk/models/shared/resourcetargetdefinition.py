@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourceattribute_enum
-from . import requiresrecreation_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceTargetDefinition:
-    attribute: Optional[resourceattribute_enum.ResourceAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attribute' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    requires_recreation: Optional[requiresrecreation_enum.RequiresRecreationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RequiresRecreation' }})
+    r"""ResourceTargetDefinition
+    Information about a change to a resource attribute.
+    """
+    
+    attribute: Optional[ResourceAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attribute') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    requires_recreation: Optional[RequiresRecreationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RequiresRecreation') }})
     

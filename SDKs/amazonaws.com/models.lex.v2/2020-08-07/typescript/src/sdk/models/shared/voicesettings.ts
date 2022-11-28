@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VoiceSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines settings for using an Amazon Polly voice to communicate with a user.
 **/
 export class VoiceSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=voiceId" })
+  @SpeakeasyMetadata({ data: "json, name=voiceId" })
   voiceId: string;
 }

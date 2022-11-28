@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchDscpToCosMappingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkSwitchDscpToCosMappingsRequestBodyMappings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cos" })
+  @SpeakeasyMetadata({ data: "json, name=cos" })
   cos: number;
 
-  @Metadata({ data: "json, name=dscp" })
+  @SpeakeasyMetadata({ data: "json, name=dscp" })
   dscp: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class UpdateNetworkSwitchDscpToCosMappingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mappings", elemType: operations.UpdateNetworkSwitchDscpToCosMappingsRequestBodyMappings })
+  @SpeakeasyMetadata({ data: "json, name=mappings", elemType: UpdateNetworkSwitchDscpToCosMappingsRequestBodyMappings })
   mappings: UpdateNetworkSwitchDscpToCosMappingsRequestBodyMappings[];
 }
 
 
 export class UpdateNetworkSwitchDscpToCosMappingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchDscpToCosMappingsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkSwitchDscpToCosMappingsRequestBody;
 }
 
 
 export class UpdateNetworkSwitchDscpToCosMappingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchDscpToCosMappings200ApplicationJsonObject?: Map<string, any>;
 }

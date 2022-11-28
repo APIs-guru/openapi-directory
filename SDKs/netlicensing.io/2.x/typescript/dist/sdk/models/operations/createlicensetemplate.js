@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateLicenseTemplateRequestBody = /** @class */ (function (_super) {
     __extends(CreateLicenseTemplateRequestBody, _super);
@@ -30,63 +30,63 @@ var CreateLicenseTemplateRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=active;" }),
+        SpeakeasyMetadata({ data: "form, name=active;" }),
         __metadata("design:type", Boolean)
     ], CreateLicenseTemplateRequestBody.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "form, name=automatic;" }),
+        SpeakeasyMetadata({ data: "form, name=automatic;" }),
         __metadata("design:type", Boolean)
     ], CreateLicenseTemplateRequestBody.prototype, "automatic", void 0);
     __decorate([
-        Metadata({ data: "form, name=currency;" }),
+        SpeakeasyMetadata({ data: "form, name=currency;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "form, name=hidden;" }),
+        SpeakeasyMetadata({ data: "form, name=hidden;" }),
         __metadata("design:type", Boolean)
     ], CreateLicenseTemplateRequestBody.prototype, "hidden", void 0);
     __decorate([
-        Metadata({ data: "form, name=hideLicenses;" }),
+        SpeakeasyMetadata({ data: "form, name=hideLicenses;" }),
         __metadata("design:type", Boolean)
     ], CreateLicenseTemplateRequestBody.prototype, "hideLicenses", void 0);
     __decorate([
-        Metadata({ data: "form, name=licenseType;" }),
+        SpeakeasyMetadata({ data: "form, name=licenseType;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "licenseType", void 0);
     __decorate([
-        Metadata({ data: "form, name=maxSessions;" }),
+        SpeakeasyMetadata({ data: "form, name=maxSessions;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "maxSessions", void 0);
     __decorate([
-        Metadata({ data: "form, name=name;" }),
+        SpeakeasyMetadata({ data: "form, name=name;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "form, name=price;" }),
+        SpeakeasyMetadata({ data: "form, name=price;" }),
         __metadata("design:type", Number)
     ], CreateLicenseTemplateRequestBody.prototype, "price", void 0);
     __decorate([
-        Metadata({ data: "form, name=productModuleNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=productModuleNumber;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "productModuleNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=quantity;" }),
+        SpeakeasyMetadata({ data: "form, name=quantity;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "quantity", void 0);
     __decorate([
-        Metadata({ data: "form, name=quota;" }),
+        SpeakeasyMetadata({ data: "form, name=quota;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "quota", void 0);
     __decorate([
-        Metadata({ data: "form, name=timeVolume;" }),
+        SpeakeasyMetadata({ data: "form, name=timeVolume;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "timeVolume", void 0);
     __decorate([
-        Metadata({ data: "form, name=timeVolumePeriod;" }),
+        SpeakeasyMetadata({ data: "form, name=timeVolumePeriod;" }),
         __metadata("design:type", String)
     ], CreateLicenseTemplateRequestBody.prototype, "timeVolumePeriod", void 0);
     return CreateLicenseTemplateRequestBody;
@@ -98,7 +98,7 @@ var CreateLicenseTemplateSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], CreateLicenseTemplateSecurity.prototype, "basicAuth", void 0);
     return CreateLicenseTemplateSecurity;
@@ -110,11 +110,11 @@ var CreateLicenseTemplateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CreateLicenseTemplateRequestBody)
     ], CreateLicenseTemplateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateLicenseTemplateSecurity)
     ], CreateLicenseTemplateRequest.prototype, "security", void 0);
     return CreateLicenseTemplateRequest;
@@ -126,19 +126,19 @@ var CreateLicenseTemplateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], CreateLicenseTemplateResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateLicenseTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateLicenseTemplateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateLicenseTemplateResponse.prototype, "netlicensing", void 0);
     return CreateLicenseTemplateResponse;

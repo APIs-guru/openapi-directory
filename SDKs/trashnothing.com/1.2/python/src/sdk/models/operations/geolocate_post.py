@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GeolocatePostPathParams:
-    post_id: str = field(default=None, metadata={'path_param': { 'field_name': 'post_id', 'style': 'simple', 'explode': False }})
+    post_id: str = field(metadata={'path_param': { 'field_name': 'post_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GeolocatePostRequestBody:
-    latitude: float = field(default=None, metadata={'multipart_form': { 'field_name': 'latitude' }})
+    latitude: float = field(metadata={'multipart_form': { 'field_name': 'latitude' }})
+    longitude: float = field(metadata={'multipart_form': { 'field_name': 'longitude' }})
     location: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'location' }})
-    longitude: float = field(default=None, metadata={'multipart_form': { 'field_name': 'longitude' }})
     
 
 @dataclass
 class GeolocatePostRequest:
-    path_params: GeolocatePostPathParams = field(default=None)
-    request: GeolocatePostRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    path_params: GeolocatePostPathParams = field()
+    request: GeolocatePostRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class GeolocatePostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post: Optional[shared.Post] = field(default=None)
-    status_code: int = field(default=None)
     

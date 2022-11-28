@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoadBalancerTlsCertificateDomainStatusEnum } from "./loadbalancertlscertificatedomainstatusenum";
+
 
 
 // LoadBalancerTlsCertificateDomainValidationOption
@@ -7,9 +8,9 @@ import { LoadBalancerTlsCertificateDomainStatusEnum } from "./loadbalancertlscer
  * Contains information about the domain names on an SSL/TLS certificate that you will use to validate domain ownership.
 **/
 export class LoadBalancerTlsCertificateDomainValidationOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=validationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=validationStatus" })
   validationStatus?: LoadBalancerTlsCertificateDomainStatusEnum;
 }

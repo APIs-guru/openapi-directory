@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ServicepacksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Servicepack })
+  @SpeakeasyMetadata({ elemType: shared.Servicepack })
   servicepacks?: shared.Servicepack[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

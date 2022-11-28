@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Meta
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Meta Data relevant to the payload
 **/
 export class Meta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirstAvailableDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=FirstAvailableDateTime" })
   firstAvailableDateTime?: Date;
 
-  @Metadata({ data: "json, name=LastAvailableDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastAvailableDateTime" })
   lastAvailableDateTime?: Date;
 
-  @Metadata({ data: "json, name=TotalPages" })
+  @SpeakeasyMetadata({ data: "json, name=TotalPages" })
   totalPages?: number;
 }

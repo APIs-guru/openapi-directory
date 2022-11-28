@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NewAttendancePeriodRequestAttendances extends SpeakeasyBase {
-  @Metadata({ data: "json, name=break" })
+  @SpeakeasyMetadata({ data: "json, name=break" })
   break: number;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date: Date;
 
-  @Metadata({ data: "json, name=employee" })
+  @SpeakeasyMetadata({ data: "json, name=employee" })
   employee: number;
 
-  @Metadata({ data: "json, name=end_time" })
+  @SpeakeasyMetadata({ data: "json, name=end_time" })
   endTime: string;
 
-  @Metadata({ data: "json, name=start_time" })
+  @SpeakeasyMetadata({ data: "json, name=start_time" })
   startTime: string;
 }
 
 
 export class NewAttendancePeriodRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attendances", elemType: shared.NewAttendancePeriodRequestAttendances })
+  @SpeakeasyMetadata({ data: "json, name=attendances", elemType: NewAttendancePeriodRequestAttendances })
   attendances?: NewAttendancePeriodRequestAttendances[];
 }

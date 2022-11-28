@@ -1,0 +1,6 @@
+package shared
+
+type ModifyInstanceCreditSpecificationResult struct {
+	SuccessfulInstanceCreditSpecifications   []SuccessfulInstanceCreditSpecificationItem
+	UnsuccessfulInstanceCreditSpecifications []UnsuccessfulInstanceCreditSpecificationItem
+}

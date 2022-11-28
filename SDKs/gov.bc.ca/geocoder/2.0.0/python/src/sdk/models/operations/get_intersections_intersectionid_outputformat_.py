@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetIntersectionsIntersectionIDOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,8 +14,8 @@ class GetIntersectionsIntersectionIDOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetIntersectionsIntersectionIDOutputFormatPathParams:
-    intersection_id: str = field(default=None, metadata={'path_param': { 'field_name': 'intersectionID', 'style': 'simple', 'explode': False }})
-    output_format: GetIntersectionsIntersectionIDOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    intersection_id: str = field(metadata={'path_param': { 'field_name': 'intersectionID', 'style': 'simple', 'explode': False }})
+    output_format: GetIntersectionsIntersectionIDOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,12 +25,12 @@ class GetIntersectionsIntersectionIDOutputFormatQueryParams:
 
 @dataclass
 class GetIntersectionsIntersectionIDOutputFormatRequest:
-    path_params: GetIntersectionsIntersectionIDOutputFormatPathParams = field(default=None)
-    query_params: GetIntersectionsIntersectionIDOutputFormatQueryParams = field(default=None)
+    path_params: GetIntersectionsIntersectionIDOutputFormatPathParams = field()
+    query_params: GetIntersectionsIntersectionIDOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetIntersectionsIntersectionIDOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

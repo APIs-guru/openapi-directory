@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VhtaxRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(VhtaxRequestBodyCertificateParameters, _super);
@@ -30,23 +30,23 @@ var VhtaxRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], VhtaxRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], VhtaxRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=chasis_no" }),
+        SpeakeasyMetadata({ data: "json, name=chasis_no" }),
         __metadata("design:type", String)
     ], VhtaxRequestBodyCertificateParameters.prototype, "chasisNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=reg_no" }),
+        SpeakeasyMetadata({ data: "json, name=reg_no" }),
         __metadata("design:type", String)
     ], VhtaxRequestBodyCertificateParameters.prototype, "regNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=swd_name" }),
+        SpeakeasyMetadata({ data: "json, name=swd_name" }),
         __metadata("design:type", String)
     ], VhtaxRequestBodyCertificateParameters.prototype, "swdName", void 0);
     return VhtaxRequestBodyCertificateParameters;
@@ -62,19 +62,19 @@ var VhtaxRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", VhtaxRequestBodyCertificateParameters)
     ], VhtaxRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], VhtaxRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], VhtaxRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], VhtaxRequestBody.prototype, "txnId", void 0);
     return VhtaxRequestBody;
@@ -86,32 +86,16 @@ var VhtaxSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], VhtaxSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], VhtaxSecurity.prototype, "clientId", void 0);
     return VhtaxSecurity;
 }(SpeakeasyBase));
 export { VhtaxSecurity };
-var VhtaxRequest = /** @class */ (function (_super) {
-    __extends(VhtaxRequest, _super);
-    function VhtaxRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", VhtaxRequestBody)
-    ], VhtaxRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", VhtaxSecurity)
-    ], VhtaxRequest.prototype, "security", void 0);
-    return VhtaxRequest;
-}(SpeakeasyBase));
-export { VhtaxRequest };
 export var Vhtax400ApplicationJsonErrorEnum;
 (function (Vhtax400ApplicationJsonErrorEnum) {
     Vhtax400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -134,11 +118,11 @@ var Vhtax400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhtax400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhtax400ApplicationJson.prototype, "errorDescription", void 0);
     return Vhtax400ApplicationJson;
@@ -160,11 +144,11 @@ var Vhtax401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhtax401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhtax401ApplicationJson.prototype, "errorDescription", void 0);
     return Vhtax401ApplicationJson;
@@ -186,11 +170,11 @@ var Vhtax404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhtax404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhtax404ApplicationJson.prototype, "errorDescription", void 0);
     return Vhtax404ApplicationJson;
@@ -210,11 +194,11 @@ var Vhtax500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhtax500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhtax500ApplicationJson.prototype, "errorDescription", void 0);
     return Vhtax500ApplicationJson;
@@ -234,11 +218,11 @@ var Vhtax502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhtax502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhtax502ApplicationJson.prototype, "errorDescription", void 0);
     return Vhtax502ApplicationJson;
@@ -258,11 +242,11 @@ var Vhtax503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhtax503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhtax503ApplicationJson.prototype, "errorDescription", void 0);
     return Vhtax503ApplicationJson;
@@ -282,55 +266,71 @@ var Vhtax504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Vhtax504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Vhtax504ApplicationJson.prototype, "errorDescription", void 0);
     return Vhtax504ApplicationJson;
 }(SpeakeasyBase));
 export { Vhtax504ApplicationJson };
+var VhtaxRequest = /** @class */ (function (_super) {
+    __extends(VhtaxRequest, _super);
+    function VhtaxRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", VhtaxRequestBody)
+    ], VhtaxRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", VhtaxSecurity)
+    ], VhtaxRequest.prototype, "security", void 0);
+    return VhtaxRequest;
+}(SpeakeasyBase));
+export { VhtaxRequest };
 var VhtaxResponse = /** @class */ (function (_super) {
     __extends(VhtaxResponse, _super);
     function VhtaxResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VhtaxResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VhtaxResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhtax400ApplicationJson)
     ], VhtaxResponse.prototype, "vhtax400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhtax401ApplicationJson)
     ], VhtaxResponse.prototype, "vhtax401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhtax404ApplicationJson)
     ], VhtaxResponse.prototype, "vhtax404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhtax500ApplicationJson)
     ], VhtaxResponse.prototype, "vhtax500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhtax502ApplicationJson)
     ], VhtaxResponse.prototype, "vhtax502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhtax503ApplicationJson)
     ], VhtaxResponse.prototype, "vhtax503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Vhtax504ApplicationJson)
     ], VhtaxResponse.prototype, "vhtax504ApplicationJsonObject", void 0);
     return VhtaxResponse;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyDbInstanceActionEnum(str, Enum):
     MODIFY_DB_INSTANCE = "ModifyDBInstance"
@@ -10,8 +14,8 @@ class PostModifyDbInstanceVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyDbInstanceQueryParams:
-    action: PostModifyDbInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyDbInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyDbInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyDbInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyDbInstanceHeaders:
 
 @dataclass
 class PostModifyDbInstanceRequest:
-    query_params: PostModifyDbInstanceQueryParams = field(default=None)
-    headers: PostModifyDbInstanceHeaders = field(default=None)
+    headers: PostModifyDbInstanceHeaders = field()
+    query_params: PostModifyDbInstanceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyDbInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

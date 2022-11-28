@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class PicoChargingGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PicoChargingGetRequest:
-    path_params: PicoChargingGetPathParams = field(default=None)
+    path_params: PicoChargingGetPathParams = field()
     
 
 @dataclass
 class PicoChargingGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pico_charging_data: Optional[shared.PicoChargingData] = field(default=None)
-    status_code: int = field(default=None)
     

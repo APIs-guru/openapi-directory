@@ -1,5 +1,7 @@
 package shared
 
+// CreateCustomActionTypeInput
+// Represents the input of a CreateCustomActionType operation.
 type CreateCustomActionTypeInput struct {
 	Category                ActionCategoryEnum            `json:"category"`
 	ConfigurationProperties []ActionConfigurationProperty `json:"configurationProperties,omitempty"`

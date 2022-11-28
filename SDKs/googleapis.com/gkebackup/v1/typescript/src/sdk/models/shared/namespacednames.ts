@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamespacedName } from "./namespacedname";
+
 
 
 // NamespacedNames
@@ -8,6 +8,6 @@ import { NamespacedName } from "./namespacedname";
  * A list of namespaced Kubernetes resources.
 **/
 export class NamespacedNames extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespacedNames", elemType: shared.NamespacedName })
+  @SpeakeasyMetadata({ data: "json, name=namespacedNames", elemType: NamespacedName })
   namespacedNames?: NamespacedName[];
 }

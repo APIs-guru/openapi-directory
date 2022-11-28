@@ -1,17 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagConsentSetting } from "./tagconsentsetting";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
 import { Parameter } from "./parameter";
 import { SetupTag } from "./setuptag";
 import { TeardownTag } from "./teardowntag";
 
+
 export enum TagTagFiringOptionEnum {
-    TagFiringOptionUnspecified = "tagFiringOptionUnspecified"
-,    Unlimited = "unlimited"
-,    OncePerEvent = "oncePerEvent"
-,    OncePerLoad = "oncePerLoad"
+    TagFiringOptionUnspecified = "tagFiringOptionUnspecified",
+    Unlimited = "unlimited",
+    OncePerEvent = "oncePerEvent",
+    OncePerLoad = "oncePerLoad"
 }
 
 
@@ -20,84 +18,84 @@ export enum TagTagFiringOptionEnum {
  * Represents a Google Tag Manager Tag.
 **/
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=blockingRuleId" })
+  @SpeakeasyMetadata({ data: "json, name=blockingRuleId" })
   blockingRuleId?: string[];
 
-  @Metadata({ data: "json, name=blockingTriggerId" })
+  @SpeakeasyMetadata({ data: "json, name=blockingTriggerId" })
   blockingTriggerId?: string[];
 
-  @Metadata({ data: "json, name=consentSettings" })
+  @SpeakeasyMetadata({ data: "json, name=consentSettings" })
   consentSettings?: TagConsentSetting;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=firingRuleId" })
+  @SpeakeasyMetadata({ data: "json, name=firingRuleId" })
   firingRuleId?: string[];
 
-  @Metadata({ data: "json, name=firingTriggerId" })
+  @SpeakeasyMetadata({ data: "json, name=firingTriggerId" })
   firingTriggerId?: string[];
 
-  @Metadata({ data: "json, name=liveOnly" })
+  @SpeakeasyMetadata({ data: "json, name=liveOnly" })
   liveOnly?: boolean;
 
-  @Metadata({ data: "json, name=monitoringMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=monitoringMetadata" })
   monitoringMetadata?: Parameter;
 
-  @Metadata({ data: "json, name=monitoringMetadataTagNameKey" })
+  @SpeakeasyMetadata({ data: "json, name=monitoringMetadataTagNameKey" })
   monitoringMetadataTagNameKey?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=parameter", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=parameter", elemType: Parameter })
   parameter?: Parameter[];
 
-  @Metadata({ data: "json, name=parentFolderId" })
+  @SpeakeasyMetadata({ data: "json, name=parentFolderId" })
   parentFolderId?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=paused" })
+  @SpeakeasyMetadata({ data: "json, name=paused" })
   paused?: boolean;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: Parameter;
 
-  @Metadata({ data: "json, name=scheduleEndMs" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleEndMs" })
   scheduleEndMs?: string;
 
-  @Metadata({ data: "json, name=scheduleStartMs" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleStartMs" })
   scheduleStartMs?: string;
 
-  @Metadata({ data: "json, name=setupTag", elemType: shared.SetupTag })
+  @SpeakeasyMetadata({ data: "json, name=setupTag", elemType: SetupTag })
   setupTag?: SetupTag[];
 
-  @Metadata({ data: "json, name=tagFiringOption" })
+  @SpeakeasyMetadata({ data: "json, name=tagFiringOption" })
   tagFiringOption?: TagTagFiringOptionEnum;
 
-  @Metadata({ data: "json, name=tagId" })
+  @SpeakeasyMetadata({ data: "json, name=tagId" })
   tagId?: string;
 
-  @Metadata({ data: "json, name=tagManagerUrl" })
+  @SpeakeasyMetadata({ data: "json, name=tagManagerUrl" })
   tagManagerUrl?: string;
 
-  @Metadata({ data: "json, name=teardownTag", elemType: shared.TeardownTag })
+  @SpeakeasyMetadata({ data: "json, name=teardownTag", elemType: TeardownTag })
   teardownTag?: TeardownTag[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=workspaceId" })
+  @SpeakeasyMetadata({ data: "json, name=workspaceId" })
   workspaceId?: string;
 }

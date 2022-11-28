@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionCategoryEnum } from "./actioncategoryenum";
+
 
 
 // DeleteCustomActionTypeInput
@@ -7,12 +8,12 @@ import { ActionCategoryEnum } from "./actioncategoryenum";
  * Represents the input of a <code>DeleteCustomActionType</code> operation. The custom action will be marked as deleted.
 **/
 export class DeleteCustomActionTypeInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: ActionCategoryEnum;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

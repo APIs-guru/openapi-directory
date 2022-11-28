@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricName } from "./metricname";
 
 
+
 export class MetricsList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.MetricName })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: MetricName })
   data?: MetricName[];
 }

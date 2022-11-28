@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayerGamePpaAveragePpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=all" })
+  @SpeakeasyMetadata({ data: "json, name=all" })
   all?: number;
 
-  @Metadata({ data: "json, name=pass" })
+  @SpeakeasyMetadata({ data: "json, name=pass" })
   pass?: number;
 
-  @Metadata({ data: "json, name=rush" })
+  @SpeakeasyMetadata({ data: "json, name=rush" })
   rush?: number;
 }
 
 
 export class PlayerGamePpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averagePPA" })
+  @SpeakeasyMetadata({ data: "json, name=averagePPA" })
   averagePpa?: PlayerGamePpaAveragePpa;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=opponent" })
+  @SpeakeasyMetadata({ data: "json, name=opponent" })
   opponent?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=week" })
+  @SpeakeasyMetadata({ data: "json, name=week" })
   week?: number;
 }

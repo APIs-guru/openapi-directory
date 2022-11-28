@@ -1,5 +1,7 @@
 package shared
 
+// RelationalDatabaseHardware
+// Describes the hardware of a database.
 type RelationalDatabaseHardware struct {
 	CPUCount     *int64   `json:"cpuCount,omitempty"`
 	DiskSizeInGb *int64   `json:"diskSizeInGb,omitempty"`

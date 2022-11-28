@@ -14,7 +14,7 @@ type CreateVaultItemSecurity struct {
 
 type CreateVaultItemRequest struct {
 	PathParams CreateVaultItemPathParams
-	Request    *shared.FullItem `request:"mediaType=application/json"`
+	Request    *shared.FullItemInput `request:"mediaType=application/json"`
 	Security   CreateVaultItemSecurity
 }
 

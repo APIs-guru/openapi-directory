@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceConfig } from "./deviceconfig";
 import { DeviceCredential } from "./devicecredential";
 import { GatewayConfig } from "./gatewayconfig";
 import { Status } from "./status";
 import { DeviceState } from "./devicestate";
 
+
 export enum DeviceLogLevelEnum {
-    LogLevelUnspecified = "LOG_LEVEL_UNSPECIFIED"
-,    None = "NONE"
-,    Error = "ERROR"
-,    Info = "INFO"
-,    Debug = "DEBUG"
+    LogLevelUnspecified = "LOG_LEVEL_UNSPECIFIED",
+    None = "NONE",
+    Error = "ERROR",
+    Info = "INFO",
+    Debug = "DEBUG"
 }
 
 
@@ -20,54 +20,54 @@ export enum DeviceLogLevelEnum {
  * The device resource.
 **/
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked?: boolean;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: DeviceConfig;
 
-  @Metadata({ data: "json, name=credentials", elemType: shared.DeviceCredential })
+  @SpeakeasyMetadata({ data: "json, name=credentials", elemType: DeviceCredential })
   credentials?: DeviceCredential[];
 
-  @Metadata({ data: "json, name=gatewayConfig" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayConfig" })
   gatewayConfig?: GatewayConfig;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastConfigAckTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastConfigAckTime" })
   lastConfigAckTime?: string;
 
-  @Metadata({ data: "json, name=lastConfigSendTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastConfigSendTime" })
   lastConfigSendTime?: string;
 
-  @Metadata({ data: "json, name=lastErrorStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lastErrorStatus" })
   lastErrorStatus?: Status;
 
-  @Metadata({ data: "json, name=lastErrorTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastErrorTime" })
   lastErrorTime?: string;
 
-  @Metadata({ data: "json, name=lastEventTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastEventTime" })
   lastEventTime?: string;
 
-  @Metadata({ data: "json, name=lastHeartbeatTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastHeartbeatTime" })
   lastHeartbeatTime?: string;
 
-  @Metadata({ data: "json, name=lastStateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastStateTime" })
   lastStateTime?: string;
 
-  @Metadata({ data: "json, name=logLevel" })
+  @SpeakeasyMetadata({ data: "json, name=logLevel" })
   logLevel?: DeviceLogLevelEnum;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=numId" })
+  @SpeakeasyMetadata({ data: "json, name=numId" })
   numId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DeviceState;
 }

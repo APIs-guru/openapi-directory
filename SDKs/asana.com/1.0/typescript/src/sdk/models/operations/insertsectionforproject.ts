@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InsertSectionForProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
   projectGid: string;
 }
 
 
 export class InsertSectionForProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
 export class InsertSectionForProjectRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.ProjectSectionInsertRequest;
 }
 
 
-export class InsertSectionForProjectRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: InsertSectionForProjectPathParams;
-
-  @Metadata()
-  queryParams: InsertSectionForProjectQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: InsertSectionForProjectRequestBody;
-}
-
-
 export class InsertSectionForProject200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 }
 
 
+export class InsertSectionForProjectRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: InsertSectionForProjectPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: InsertSectionForProjectQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: InsertSectionForProjectRequestBody;
+}
+
+
 export class InsertSectionForProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   insertSectionForProject200ApplicationJsonObject?: InsertSectionForProject200ApplicationJson;
 }

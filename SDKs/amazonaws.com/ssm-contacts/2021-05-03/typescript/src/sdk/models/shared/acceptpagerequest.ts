@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceptCodeValidationEnum } from "./acceptcodevalidationenum";
 import { AcceptTypeEnum } from "./accepttypeenum";
 
 
+
 export class AcceptPageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptCode" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptCode" })
   acceptCode: string;
 
-  @Metadata({ data: "json, name=AcceptCodeValidation" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptCodeValidation" })
   acceptCodeValidation?: AcceptCodeValidationEnum;
 
-  @Metadata({ data: "json, name=AcceptType" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptType" })
   acceptType: AcceptTypeEnum;
 
-  @Metadata({ data: "json, name=ContactChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ContactChannelId" })
   contactChannelId?: string;
 
-  @Metadata({ data: "json, name=Note" })
+  @SpeakeasyMetadata({ data: "json, name=Note" })
   note?: string;
 
-  @Metadata({ data: "json, name=PageId" })
+  @SpeakeasyMetadata({ data: "json, name=PageId" })
   pageId: string;
 }

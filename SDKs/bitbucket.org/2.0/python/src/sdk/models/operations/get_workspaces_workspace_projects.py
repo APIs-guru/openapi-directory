@@ -5,41 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class GetWorkspacesWorkspaceProjectsPathParams:
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetWorkspacesWorkspaceProjectsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetWorkspacesWorkspaceProjectsSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetWorkspacesWorkspaceProjectsSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWorkspacesWorkspaceProjectsSecurity:
-    option1: Optional[GetWorkspacesWorkspaceProjectsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetWorkspacesWorkspaceProjectsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetWorkspacesWorkspaceProjectsSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetWorkspacesWorkspaceProjectsRequest:
-    path_params: GetWorkspacesWorkspaceProjectsPathParams = field(default=None)
-    security: GetWorkspacesWorkspaceProjectsSecurity = field(default=None)
+    path_params: GetWorkspacesWorkspaceProjectsPathParams = field()
+    security: GetWorkspacesWorkspaceProjectsSecurity = field()
     
 
 @dataclass
 class GetWorkspacesWorkspaceProjectsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_projects: Optional[shared.PaginatedProjects] = field(default=None)
     

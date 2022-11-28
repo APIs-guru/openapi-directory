@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sasportalfrequencyrange
-from . import sasportaldpamovelist
+from sdk import utils
+from . import *
 
 class SasPortalDeviceGrantChannelTypeEnum(str, Enum):
     CHANNEL_TYPE_UNSPECIFIED = "CHANNEL_TYPE_UNSPECIFIED"
@@ -21,13 +22,17 @@ class SasPortalDeviceGrantStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SasPortalDeviceGrant:
-    channel_type: Optional[SasPortalDeviceGrantChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channelType' }})
-    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expireTime' }})
-    frequency_range: Optional[sasportalfrequencyrange.SasPortalFrequencyRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequencyRange' }})
-    grant_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grantId' }})
-    last_heartbeat_transmit_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastHeartbeatTransmitExpireTime' }})
-    max_eirp: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxEirp' }})
-    move_list: Optional[List[sasportaldpamovelist.SasPortalDpaMoveList]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moveList' }})
-    state: Optional[SasPortalDeviceGrantStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    suspension_reason: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspensionReason' }})
+    r"""SasPortalDeviceGrant
+    Device grant. It is an authorization provided by the Spectrum Access System to a device to transmit using specified operating parameters after a successful heartbeat by the device.
+    """
+    
+    channel_type: Optional[SasPortalDeviceGrantChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('channelType') }})
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    frequency_range: Optional[SasPortalFrequencyRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyRange') }})
+    grant_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('grantId') }})
+    last_heartbeat_transmit_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastHeartbeatTransmitExpireTime') }})
+    max_eirp: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxEirp') }})
+    move_list: Optional[List[SasPortalDpaMoveList]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('moveList') }})
+    state: Optional[SasPortalDeviceGrantStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    suspension_reason: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suspensionReason') }})
     

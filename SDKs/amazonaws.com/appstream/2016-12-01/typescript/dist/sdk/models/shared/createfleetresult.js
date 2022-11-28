@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Fleet } from "./fleet";
 var CreateFleetResult = /** @class */ (function (_super) {
     __extends(CreateFleetResult, _super);
@@ -30,7 +30,7 @@ var CreateFleetResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Fleet" }),
+        SpeakeasyMetadata({ data: "json, name=Fleet" }),
         __metadata("design:type", Fleet)
     ], CreateFleetResult.prototype, "fleet", void 0);
     return CreateFleetResult;

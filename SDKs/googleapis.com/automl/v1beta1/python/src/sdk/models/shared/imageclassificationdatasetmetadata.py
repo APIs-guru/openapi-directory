@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ImageClassificationDatasetMetadataClassificationTypeEnum(str, Enum):
     CLASSIFICATION_TYPE_UNSPECIFIED = "CLASSIFICATION_TYPE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class ImageClassificationDatasetMetadataClassificationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ImageClassificationDatasetMetadata:
-    classification_type: Optional[ImageClassificationDatasetMetadataClassificationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'classificationType' }})
+    r"""ImageClassificationDatasetMetadata
+    Dataset metadata that is specific to image classification.
+    """
+    
+    classification_type: Optional[ImageClassificationDatasetMetadataClassificationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('classificationType') }})
     

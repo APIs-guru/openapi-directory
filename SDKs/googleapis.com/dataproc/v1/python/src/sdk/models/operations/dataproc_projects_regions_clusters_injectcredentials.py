@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsClustersInjectCredentialsPathParams:
-    cluster: str = field(default=None, metadata={'path_param': { 'field_name': 'cluster', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    region: str = field(default=None, metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
+    cluster: str = field(metadata={'path_param': { 'field_name': 'cluster', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    region: str = field(metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class DataprocProjectsRegionsClustersInjectCredentialsQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsClustersInjectCredentialsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsClustersInjectCredentialsRequest:
-    path_params: DataprocProjectsRegionsClustersInjectCredentialsPathParams = field(default=None)
-    query_params: DataprocProjectsRegionsClustersInjectCredentialsQueryParams = field(default=None)
+    path_params: DataprocProjectsRegionsClustersInjectCredentialsPathParams = field()
+    query_params: DataprocProjectsRegionsClustersInjectCredentialsQueryParams = field()
+    security: DataprocProjectsRegionsClustersInjectCredentialsSecurity = field()
     request: Optional[shared.InjectCredentialsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataprocProjectsRegionsClustersInjectCredentialsSecurity = field(default=None)
     
 
 @dataclass
 class DataprocProjectsRegionsClustersInjectCredentialsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

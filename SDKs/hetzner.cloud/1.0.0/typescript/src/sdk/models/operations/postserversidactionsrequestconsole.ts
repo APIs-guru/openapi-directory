@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostServersIdActionsRequestConsolePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
-}
-
-
-export class PostServersIdActionsRequestConsoleRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostServersIdActionsRequestConsolePathParams;
 }
 
 
@@ -18,75 +13,81 @@ export class PostServersIdActionsRequestConsoleRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostServersIdActionsRequestConsole201ApplicationJsonActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostServersIdActionsRequestConsole201ApplicationJsonActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostServersIdActionsRequestConsole201ApplicationJsonActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostServersIdActionsRequestConsole201ApplicationJsonAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostServersIdActionsRequestConsole201ApplicationJsonActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostServersIdActionsRequestConsole201ApplicationJsonActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostServersIdActionsRequestConsole201ApplicationJsonActionResources })
   resources: PostServersIdActionsRequestConsole201ApplicationJsonActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersIdActionsRequestConsole201ApplicationJsonActionStatusEnum;
 }
 
 
 export class PostServersIdActionsRequestConsole201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostServersIdActionsRequestConsole201ApplicationJsonAction;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password: string;
 
-  @Metadata({ data: "json, name=wss_url" })
+  @SpeakeasyMetadata({ data: "json, name=wss_url" })
   wssUrl: string;
 }
 
 
+export class PostServersIdActionsRequestConsoleRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostServersIdActionsRequestConsolePathParams;
+}
+
+
 export class PostServersIdActionsRequestConsoleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postServersIdActionsRequestConsole201ApplicationJsonObject?: PostServersIdActionsRequestConsole201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

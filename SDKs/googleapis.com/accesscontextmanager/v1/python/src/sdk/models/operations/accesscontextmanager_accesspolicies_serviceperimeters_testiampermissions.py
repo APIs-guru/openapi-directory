@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsQuery
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsRequest:
-    path_params: AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsPathParams = field(default=None)
-    query_params: AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsQueryParams = field(default=None)
+    path_params: AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsPathParams = field()
+    query_params: AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsQueryParams = field()
+    security: AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsSecurity = field()
     request: Optional[shared.TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersTestIamPermissionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_iam_permissions_response: Optional[shared.TestIamPermissionsResponse] = field(default=None)
     

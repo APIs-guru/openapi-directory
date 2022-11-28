@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationSyncStateEnum } from "./configurationsyncstateenum";
 import { FirewallStatusValueEnum } from "./firewallstatusvalueenum";
 import { SyncState } from "./syncstate";
+
 
 
 // FirewallStatus
@@ -10,12 +10,12 @@ import { SyncState } from "./syncstate";
  * Detailed information about the current status of a <a>Firewall</a>. You can retrieve this for a firewall by calling <a>DescribeFirewall</a> and providing the firewall name and ARN.
 **/
 export class FirewallStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationSyncStateSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationSyncStateSummary" })
   configurationSyncStateSummary: ConfigurationSyncStateEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: FirewallStatusValueEnum;
 
-  @Metadata({ data: "json, name=SyncStates", elemType: shared.SyncState })
+  @SpeakeasyMetadata({ data: "json, name=SyncStates", elemType: SyncState })
   syncStates?: Map<string, SyncState>;
 }

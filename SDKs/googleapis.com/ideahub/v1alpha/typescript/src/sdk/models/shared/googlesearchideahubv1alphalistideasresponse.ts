@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleSearchIdeahubV1alphaIdea } from "./googlesearchideahubv1alphaidea";
 
 
+
 export class GoogleSearchIdeahubV1alphaListIdeasResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ideas", elemType: shared.GoogleSearchIdeahubV1alphaIdea })
+  @SpeakeasyMetadata({ data: "json, name=ideas", elemType: GoogleSearchIdeahubV1alphaIdea })
   ideas?: GoogleSearchIdeahubV1alphaIdea[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

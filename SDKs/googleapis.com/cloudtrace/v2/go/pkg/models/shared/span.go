@@ -11,6 +11,8 @@ const (
 	SpanSpanKindEnumConsumer            SpanSpanKindEnum = "CONSUMER"
 )
 
+// Span
+// A span represents a single operation within a trace. Spans can be nested to form a trace tree. Often, a trace contains a root span that describes the end-to-end latency, and one or more subspans for its sub-operations. A trace can also contain multiple root spans, or none at all. Spans do not need to be contiguous—there might be gaps or overlaps between spans in a trace.
 type Span struct {
 	Attributes              *Attributes        `json:"attributes,omitempty"`
 	ChildSpanCount          *int32             `json:"childSpanCount,omitempty"`

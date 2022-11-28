@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelConversionPing } from "./channelconversionping";
+
 
 
 // ChannelConversionPings
@@ -8,6 +8,6 @@ import { ChannelConversionPing } from "./channelconversionping";
  * The conversionPings object encapsulates information about conversion pings that need to be respected by the channel.
 **/
 export class ChannelConversionPings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pings", elemType: shared.ChannelConversionPing })
+  @SpeakeasyMetadata({ data: "json, name=pings", elemType: ChannelConversionPing })
   pings?: ChannelConversionPing[];
 }

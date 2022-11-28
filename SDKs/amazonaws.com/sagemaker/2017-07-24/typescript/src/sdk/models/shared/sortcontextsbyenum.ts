@@ -1,6 +1,7 @@
 
 
+
 export enum SortContextsByEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

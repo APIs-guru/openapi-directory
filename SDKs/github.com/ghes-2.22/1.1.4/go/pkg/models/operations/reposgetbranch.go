@@ -10,13 +10,13 @@ type ReposGetBranchPathParams struct {
 	Repo   string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
-type ReposGetBranchRequest struct {
-	PathParams ReposGetBranchPathParams
-}
-
 type ReposGetBranch415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposGetBranchRequest struct {
+	PathParams ReposGetBranchPathParams
 }
 
 type ReposGetBranchResponse struct {

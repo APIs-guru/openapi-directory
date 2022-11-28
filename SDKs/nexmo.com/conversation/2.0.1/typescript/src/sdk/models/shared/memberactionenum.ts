@@ -1,6 +1,7 @@
 
 
+
 export enum MemberActionEnum {
-    Invite = "invite"
-,    Join = "join"
+    Invite = "invite",
+    Join = "join"
 }

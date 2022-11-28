@@ -9,6 +9,8 @@ const (
 	DimensionValueMatchTypeEnumWildcardExpression DimensionValueMatchTypeEnum = "WILDCARD_EXPRESSION"
 )
 
+// DimensionValue
+// Represents a DimensionValue resource.
 type DimensionValue struct {
 	DimensionName *string                      `json:"dimensionName,omitempty"`
 	Etag          *string                      `json:"etag,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Stream } from "./stream";
+
 
 
 // ListStreamsOutput
@@ -8,9 +8,9 @@ import { Stream } from "./stream";
  * Represents the output of a <code>ListStreams</code> operation.
 **/
 export class ListStreamsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LastEvaluatedStreamArn" })
+  @SpeakeasyMetadata({ data: "json, name=LastEvaluatedStreamArn" })
   lastEvaluatedStreamArn?: string;
 
-  @Metadata({ data: "json, name=Streams", elemType: shared.Stream })
+  @SpeakeasyMetadata({ data: "json, name=Streams", elemType: Stream })
   streams?: Stream[];
 }

@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum {
-    SensitiveCategoryUnspecified = "SENSITIVE_CATEGORY_UNSPECIFIED"
-,    SensitiveCategoryAdult = "SENSITIVE_CATEGORY_ADULT"
-,    SensitiveCategoryDerogatory = "SENSITIVE_CATEGORY_DEROGATORY"
-,    SensitiveCategoryDownloadsSharing = "SENSITIVE_CATEGORY_DOWNLOADS_SHARING"
-,    SensitiveCategoryWeapons = "SENSITIVE_CATEGORY_WEAPONS"
-,    SensitiveCategoryGambling = "SENSITIVE_CATEGORY_GAMBLING"
-,    SensitiveCategoryViolence = "SENSITIVE_CATEGORY_VIOLENCE"
-,    SensitiveCategorySuggestive = "SENSITIVE_CATEGORY_SUGGESTIVE"
-,    SensitiveCategoryProfanity = "SENSITIVE_CATEGORY_PROFANITY"
-,    SensitiveCategoryAlcohol = "SENSITIVE_CATEGORY_ALCOHOL"
-,    SensitiveCategoryDrugs = "SENSITIVE_CATEGORY_DRUGS"
-,    SensitiveCategoryTobacco = "SENSITIVE_CATEGORY_TOBACCO"
-,    SensitiveCategoryPolitics = "SENSITIVE_CATEGORY_POLITICS"
-,    SensitiveCategoryReligion = "SENSITIVE_CATEGORY_RELIGION"
-,    SensitiveCategoryTragedy = "SENSITIVE_CATEGORY_TRAGEDY"
-,    SensitiveCategoryTransportationAccidents = "SENSITIVE_CATEGORY_TRANSPORTATION_ACCIDENTS"
-,    SensitiveCategorySensitiveSocialIssues = "SENSITIVE_CATEGORY_SENSITIVE_SOCIAL_ISSUES"
-,    SensitiveCategoryShocking = "SENSITIVE_CATEGORY_SHOCKING"
+    SensitiveCategoryUnspecified = "SENSITIVE_CATEGORY_UNSPECIFIED",
+    SensitiveCategoryAdult = "SENSITIVE_CATEGORY_ADULT",
+    SensitiveCategoryDerogatory = "SENSITIVE_CATEGORY_DEROGATORY",
+    SensitiveCategoryDownloadsSharing = "SENSITIVE_CATEGORY_DOWNLOADS_SHARING",
+    SensitiveCategoryWeapons = "SENSITIVE_CATEGORY_WEAPONS",
+    SensitiveCategoryGambling = "SENSITIVE_CATEGORY_GAMBLING",
+    SensitiveCategoryViolence = "SENSITIVE_CATEGORY_VIOLENCE",
+    SensitiveCategorySuggestive = "SENSITIVE_CATEGORY_SUGGESTIVE",
+    SensitiveCategoryProfanity = "SENSITIVE_CATEGORY_PROFANITY",
+    SensitiveCategoryAlcohol = "SENSITIVE_CATEGORY_ALCOHOL",
+    SensitiveCategoryDrugs = "SENSITIVE_CATEGORY_DRUGS",
+    SensitiveCategoryTobacco = "SENSITIVE_CATEGORY_TOBACCO",
+    SensitiveCategoryPolitics = "SENSITIVE_CATEGORY_POLITICS",
+    SensitiveCategoryReligion = "SENSITIVE_CATEGORY_RELIGION",
+    SensitiveCategoryTragedy = "SENSITIVE_CATEGORY_TRAGEDY",
+    SensitiveCategoryTransportationAccidents = "SENSITIVE_CATEGORY_TRANSPORTATION_ACCIDENTS",
+    SensitiveCategorySensitiveSocialIssues = "SENSITIVE_CATEGORY_SENSITIVE_SOCIAL_ISSUES",
+    SensitiveCategoryShocking = "SENSITIVE_CATEGORY_SHOCKING"
 }
 
 
@@ -27,9 +28,19 @@ export enum SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum
  * Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
 **/
 export class SensitiveCategoryAssignedTargetingOptionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludedTargetingOptionId" })
+  @SpeakeasyMetadata({ data: "json, name=excludedTargetingOptionId" })
   excludedTargetingOptionId?: string;
 
-  @Metadata({ data: "json, name=sensitiveCategory" })
+  @SpeakeasyMetadata({ data: "json, name=sensitiveCategory" })
   sensitiveCategory?: SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum;
+}
+
+
+// SensitiveCategoryAssignedTargetingOptionDetailsInput
+/** 
+ * Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
+**/
+export class SensitiveCategoryAssignedTargetingOptionDetailsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=excludedTargetingOptionId" })
+  excludedTargetingOptionId?: string;
 }

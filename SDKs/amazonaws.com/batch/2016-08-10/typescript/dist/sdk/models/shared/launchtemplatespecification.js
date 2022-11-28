@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LaunchTemplateSpecification
 /**
  * <p>An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both.</p> <p>If security groups are specified using both the <code>securityGroupIds</code> parameter of <code>CreateComputeEnvironment</code> and the launch template, the values in the <code>securityGroupIds</code> parameter of <code>CreateComputeEnvironment</code> will be used.</p> <note> <p>This object isn't applicable to jobs that are running on Fargate resources.</p> </note>
@@ -33,15 +33,15 @@ var LaunchTemplateSpecification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=launchTemplateId" }),
+        SpeakeasyMetadata({ data: "json, name=launchTemplateId" }),
         __metadata("design:type", String)
     ], LaunchTemplateSpecification.prototype, "launchTemplateId", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchTemplateName" }),
+        SpeakeasyMetadata({ data: "json, name=launchTemplateName" }),
         __metadata("design:type", String)
     ], LaunchTemplateSpecification.prototype, "launchTemplateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], LaunchTemplateSpecification.prototype, "version", void 0);
     return LaunchTemplateSpecification;

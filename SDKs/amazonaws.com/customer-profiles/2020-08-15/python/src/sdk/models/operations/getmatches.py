@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetMatchesPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class GetMatchesHeaders:
 
 @dataclass
 class GetMatchesRequest:
-    path_params: GetMatchesPathParams = field(default=None)
-    query_params: GetMatchesQueryParams = field(default=None)
-    headers: GetMatchesHeaders = field(default=None)
+    headers: GetMatchesHeaders = field()
+    path_params: GetMatchesPathParams = field()
+    query_params: GetMatchesQueryParams = field()
     
 
 @dataclass
 class GetMatchesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_matches_response: Optional[shared.GetMatchesResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

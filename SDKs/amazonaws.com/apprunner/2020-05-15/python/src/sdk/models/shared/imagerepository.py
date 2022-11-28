@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import imageconfiguration
-from . import imagerepositorytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImageRepository:
-    image_configuration: Optional[imageconfiguration.ImageConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageConfiguration' }})
-    image_identifier: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageIdentifier' }})
-    image_repository_type: imagerepositorytype_enum.ImageRepositoryTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageRepositoryType' }})
+    r"""ImageRepository
+    Describes a source image repository.
+    """
+    
+    image_identifier: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageIdentifier') }})
+    image_repository_type: ImageRepositoryTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageRepositoryType') }})
+    image_configuration: Optional[ImageConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageConfiguration') }})
     

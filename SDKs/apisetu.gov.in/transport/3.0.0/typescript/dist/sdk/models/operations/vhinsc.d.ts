@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class VhinscRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -19,10 +19,6 @@ export declare class VhinscRequestBody extends SpeakeasyBase {
 export declare class VhinscSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class VhinscRequest extends SpeakeasyBase {
-    request?: VhinscRequestBody;
-    security: VhinscSecurity;
 }
 export declare enum Vhinsc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -105,6 +101,10 @@ export declare enum Vhinsc504ApplicationJsonErrorDescriptionEnum {
 export declare class Vhinsc504ApplicationJson extends SpeakeasyBase {
     error?: Vhinsc504ApplicationJsonErrorEnum;
     errorDescription?: Vhinsc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class VhinscRequest extends SpeakeasyBase {
+    request?: VhinscRequestBody;
+    security: VhinscSecurity;
 }
 export declare class VhinscResponse extends SpeakeasyBase {
     contentType: string;

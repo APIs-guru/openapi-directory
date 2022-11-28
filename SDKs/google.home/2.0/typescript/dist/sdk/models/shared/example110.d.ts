@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectedDevice } from "./connecteddevice";
 import { RemoteSink } from "./remotesink";
 export declare class Example110 extends SpeakeasyBase {

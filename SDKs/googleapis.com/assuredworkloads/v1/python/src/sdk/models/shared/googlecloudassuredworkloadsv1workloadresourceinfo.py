@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum(str, Enum):
     RESOURCE_TYPE_UNSPECIFIED = "RESOURCE_TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum(str, Enu
 @dataclass_json
 @dataclass
 class GoogleCloudAssuredworkloadsV1WorkloadResourceInfo:
-    resource_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceId' }})
-    resource_type: Optional[GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
+    r"""GoogleCloudAssuredworkloadsV1WorkloadResourceInfo
+    Represent the resources that are children of this Workload.
+    """
+    
+    resource_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceId') }})
+    resource_type: Optional[GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
     

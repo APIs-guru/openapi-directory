@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DestinationUrlEvidence
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The full landing page URL of the destination.
 **/
 export class DestinationUrlEvidence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=destinationUrl" })
   destinationUrl?: string;
 }

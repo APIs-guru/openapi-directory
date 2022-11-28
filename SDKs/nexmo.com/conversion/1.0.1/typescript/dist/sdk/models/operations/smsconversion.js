@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SmsConversionQueryParams = /** @class */ (function (_super) {
     __extends(SmsConversionQueryParams, _super);
     function SmsConversionQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=delivered" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=delivered" }),
         __metadata("design:type", Object)
     ], SmsConversionQueryParams.prototype, "delivered", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=message-id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message-id" }),
         __metadata("design:type", String)
     ], SmsConversionQueryParams.prototype, "messageId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
         __metadata("design:type", String)
     ], SmsConversionQueryParams.prototype, "timestamp", void 0);
     return SmsConversionQueryParams;
@@ -49,7 +49,7 @@ var SmsConversionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SmsConversionQueryParams)
     ], SmsConversionRequest.prototype, "queryParams", void 0);
     return SmsConversionRequest;
@@ -61,11 +61,11 @@ var SmsConversionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SmsConversionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SmsConversionResponse.prototype, "statusCode", void 0);
     return SmsConversionResponse;

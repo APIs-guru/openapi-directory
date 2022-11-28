@@ -1,7 +1,10 @@
-import warnings
+
+
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -10,28 +13,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_add_word(self, request: operations.GetAddWordRequest) -> operations.GetAddWordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add new word
+        Add a new word. Need to be accepted by a human.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/add-word"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -44,13 +69,16 @@ class SDK:
 
     
     def get_count(self) -> operations.GetCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return the count of words in database
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/count"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -63,13 +91,16 @@ class SDK:
 
     
     def get_echo(self) -> operations.GetEchoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Response with all query params
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/echo"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -82,13 +113,16 @@ class SDK:
 
     
     def get_openapi3_json(self) -> operations.GetOpenapi3JSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Response with all query params
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/openapi3.json"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -101,13 +135,16 @@ class SDK:
 
     
     def get_random(self) -> operations.GetRandomResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a random spanish word
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/random"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

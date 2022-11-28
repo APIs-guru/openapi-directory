@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
+// Set of detected objects with bounding boxes.
 type GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation struct {
 	BoundingPoly *GoogleCloudVisionV1p1beta1BoundingPoly `json:"boundingPoly,omitempty"`
 	LanguageCode *string                                 `json:"languageCode,omitempty"`

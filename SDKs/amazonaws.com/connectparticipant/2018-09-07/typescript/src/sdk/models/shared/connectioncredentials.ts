@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConnectionCredentials
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Connection credentials. 
 **/
 export class ConnectionCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionToken" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionToken" })
   connectionToken?: string;
 
-  @Metadata({ data: "json, name=Expiry" })
+  @SpeakeasyMetadata({ data: "json, name=Expiry" })
   expiry?: string;
 }

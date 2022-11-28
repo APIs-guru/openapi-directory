@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3Changelog
+// Changelogs represents a change made to a given agent.
 type GoogleCloudDialogflowCxV3Changelog struct {
 	Action      *string `json:"action,omitempty"`
 	CreateTime  *string `json:"createTime,omitempty"`

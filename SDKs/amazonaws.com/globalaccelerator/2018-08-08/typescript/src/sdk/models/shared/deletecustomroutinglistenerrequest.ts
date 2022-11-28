@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteCustomRoutingListenerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ListenerArn" })
+  @SpeakeasyMetadata({ data: "json, name=ListenerArn" })
   listenerArn: string;
 }

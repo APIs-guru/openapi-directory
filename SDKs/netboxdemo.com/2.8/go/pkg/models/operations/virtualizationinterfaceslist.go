@@ -47,15 +47,15 @@ type VirtualizationInterfacesListQueryParams struct {
 	VirtualMachineIDN *string `queryParam:"style=form,explode=true,name=virtual_machine_id__n"`
 }
 
-type VirtualizationInterfacesListRequest struct {
-	QueryParams VirtualizationInterfacesListQueryParams
-}
-
 type VirtualizationInterfacesList200ApplicationJSON struct {
 	Count    int64                            `json:"count"`
 	Next     *string                          `json:"next,omitempty"`
 	Previous *string                          `json:"previous,omitempty"`
 	Results  []shared.VirtualMachineInterface `json:"results"`
+}
+
+type VirtualizationInterfacesListRequest struct {
+	QueryParams VirtualizationInterfacesListQueryParams
 }
 
 type VirtualizationInterfacesListResponse struct {

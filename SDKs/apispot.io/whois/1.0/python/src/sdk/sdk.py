@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,28 +15,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def check_domain(self, request: operations.CheckDomainRequest) -> operations.CheckDomainResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Check domain availability
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domains/{domain}/check", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -48,22 +80,22 @@ class SDK:
 
     
     def create_batch(self, request: operations.CreateBatchRequest) -> operations.CreateBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create batch. Batch is then being processed until all provided items have been completed. At any time it can be `get` to provide current status with results optionally.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -78,13 +110,16 @@ class SDK:
 
     
     def delete_batch(self, request: operations.DeleteBatchRequest) -> operations.DeleteBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete batch
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/batch/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -97,13 +132,16 @@ class SDK:
 
     
     def domain_rank(self, request: operations.DomainRankRequest) -> operations.DomainRankResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Check domain rank (authority).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domains/{domain}/rank", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -118,13 +156,16 @@ class SDK:
 
     
     def get_batch(self, request: operations.GetBatchRequest) -> operations.GetBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get batch
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/batch/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -139,13 +180,16 @@ class SDK:
 
     
     def get_batches(self) -> operations.GetBatchesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get your batches
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/batch"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -160,15 +204,17 @@ class SDK:
 
     
     def query_db(self, request: operations.QueryDbRequest) -> operations.QueryDbResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Query domain database
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/db"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -183,15 +229,17 @@ class SDK:
 
     
     def whois(self, request: operations.WhoisRequest) -> operations.WhoisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""WHOIS query for a domain
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domains/{domain}/whois", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

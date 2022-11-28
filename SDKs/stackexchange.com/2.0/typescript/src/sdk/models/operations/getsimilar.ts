@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSimilarOrderEnum {
-    Desc = "desc"
-,    Asc = "asc"
+    Desc = "desc",
+    Asc = "asc"
 }
 
 export enum GetSimilarSortEnum {
-    Activity = "activity"
-,    Creation = "creation"
-,    Votes = "votes"
-,    Relevance = "relevance"
+    Activity = "activity",
+    Creation = "creation",
+    Votes = "votes",
+    Relevance = "relevance"
 }
 
 
 export class GetSimilarQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min" })
   min?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nottagged" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nottagged" })
   nottagged?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: GetSimilarOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetSimilarSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagged" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagged" })
   tagged?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=title" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=title" })
   title?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: number;
 }
 
 
 export class GetSimilarRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSimilarQueryParams;
 }
 
 
 export class GetSimilarResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

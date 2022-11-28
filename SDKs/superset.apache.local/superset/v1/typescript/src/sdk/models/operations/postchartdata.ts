@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostChartDataSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostChartDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.ChartDataQueryContextSchema;
-
-  @Metadata()
-  security: PostChartDataSecurity;
-}
-
-
 export class PostChartData400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostChartData401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostChartData500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostChartDataRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.ChartDataQueryContextSchema;
+
+  @SpeakeasyMetadata()
+  security: PostChartDataSecurity;
+}
+
+
 export class PostChartDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   chartDataAsyncResponseSchema?: shared.ChartDataAsyncResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   chartDataResponseSchema?: shared.ChartDataResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postChartData400ApplicationJsonObject?: PostChartData400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postChartData401ApplicationJsonObject?: PostChartData401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postChartData500ApplicationJsonObject?: PostChartData500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

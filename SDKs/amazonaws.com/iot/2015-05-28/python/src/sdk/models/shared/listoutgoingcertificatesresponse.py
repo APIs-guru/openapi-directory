@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import outgoingcertificate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListOutgoingCertificatesResponse:
-    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextMarker' }})
-    outgoing_certificates: Optional[List[outgoingcertificate.OutgoingCertificate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outgoingCertificates' }})
+    r"""ListOutgoingCertificatesResponse
+    The output from the ListOutgoingCertificates operation.
+    """
+    
+    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextMarker') }})
+    outgoing_certificates: Optional[List[OutgoingCertificate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outgoingCertificates') }})
     

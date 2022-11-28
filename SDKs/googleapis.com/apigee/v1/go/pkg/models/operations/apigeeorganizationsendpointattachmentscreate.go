@@ -31,7 +31,7 @@ type ApigeeOrganizationsEndpointAttachmentsCreateSecurity struct {
 type ApigeeOrganizationsEndpointAttachmentsCreateRequest struct {
 	PathParams  ApigeeOrganizationsEndpointAttachmentsCreatePathParams
 	QueryParams ApigeeOrganizationsEndpointAttachmentsCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1EndpointAttachment `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1EndpointAttachmentInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsEndpointAttachmentsCreateSecurity
 }
 

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateGatewayRoutePathParams:
-    mesh_name: str = field(default=None, metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
-    virtual_gateway_name: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualGatewayName', 'style': 'simple', 'explode': False }})
+    mesh_name: str = field(metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
+    virtual_gateway_name: str = field(metadata={'path_param': { 'field_name': 'virtualGatewayName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,40 +33,44 @@ class CreateGatewayRouteHeaders:
 @dataclass_json
 @dataclass
 class CreateGatewayRouteRequestBodySpec:
-    grpc_route: Optional[shared.GrpcGatewayRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grpcRoute' }})
-    http2_route: Optional[shared.HTTPGatewayRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http2Route' }})
-    http_route: Optional[shared.HTTPGatewayRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpRoute' }})
-    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priority' }})
+    r"""CreateGatewayRouteRequestBodySpec
+    An object that represents a gateway route specification. Specify one gateway route type.
+    """
+    
+    grpc_route: Optional[shared.GrpcGatewayRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('grpcRoute') }})
+    http2_route: Optional[shared.HTTPGatewayRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('http2Route') }})
+    http_route: Optional[shared.HTTPGatewayRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpRoute') }})
+    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
     
 
 @dataclass_json
 @dataclass
 class CreateGatewayRouteRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    gateway_route_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gatewayRouteName' }})
-    spec: CreateGatewayRouteRequestBodySpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    tags: Optional[List[shared.TagRef]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    gateway_route_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gatewayRouteName') }})
+    spec: CreateGatewayRouteRequestBodySpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    tags: Optional[List[shared.TagRef]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateGatewayRouteRequest:
-    path_params: CreateGatewayRoutePathParams = field(default=None)
-    query_params: CreateGatewayRouteQueryParams = field(default=None)
-    headers: CreateGatewayRouteHeaders = field(default=None)
-    request: CreateGatewayRouteRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateGatewayRouteHeaders = field()
+    path_params: CreateGatewayRoutePathParams = field()
+    query_params: CreateGatewayRouteQueryParams = field()
+    request: CreateGatewayRouteRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateGatewayRouteResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_gateway_route_output: Optional[shared.CreateGatewayRouteOutput] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

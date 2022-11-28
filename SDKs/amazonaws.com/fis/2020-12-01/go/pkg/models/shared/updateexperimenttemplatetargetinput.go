@@ -1,5 +1,7 @@
 package shared
 
+// UpdateExperimentTemplateTargetInput
+// Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both.
 type UpdateExperimentTemplateTargetInput struct {
 	Filters       []ExperimentTemplateTargetInputFilter `json:"filters,omitempty"`
 	ResourceArns  []string                              `json:"resourceArns,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
+
 
 
 // GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
@@ -8,9 +8,9 @@ import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
  * A tuple of values for the quasi-identifier columns.
 **/
 export class GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimatedProbability" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedProbability" })
   estimatedProbability?: number;
 
-  @Metadata({ data: "json, name=quasiIdsValues", elemType: shared.GooglePrivacyDlpV2Value })
+  @SpeakeasyMetadata({ data: "json, name=quasiIdsValues", elemType: GooglePrivacyDlpV2Value })
   quasiIdsValues?: GooglePrivacyDlpV2Value[];
 }

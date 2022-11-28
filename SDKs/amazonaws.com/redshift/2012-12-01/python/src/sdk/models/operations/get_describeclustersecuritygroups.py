@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeClusterSecurityGroupsActionEnum(str, Enum):
     DESCRIBE_CLUSTER_SECURITY_GROUPS = "DescribeClusterSecurityGroups"
@@ -10,13 +14,13 @@ class GetDescribeClusterSecurityGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeClusterSecurityGroupsQueryParams:
-    action: GetDescribeClusterSecurityGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeClusterSecurityGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeClusterSecurityGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cluster_security_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterSecurityGroupName', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     tag_keys: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
     tag_values: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagValues', 'style': 'form', 'explode': True }})
-    version: GetDescribeClusterSecurityGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribeClusterSecurityGroupsHeaders:
 
 @dataclass
 class GetDescribeClusterSecurityGroupsRequest:
-    query_params: GetDescribeClusterSecurityGroupsQueryParams = field(default=None)
-    headers: GetDescribeClusterSecurityGroupsHeaders = field(default=None)
+    headers: GetDescribeClusterSecurityGroupsHeaders = field()
+    query_params: GetDescribeClusterSecurityGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeClusterSecurityGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

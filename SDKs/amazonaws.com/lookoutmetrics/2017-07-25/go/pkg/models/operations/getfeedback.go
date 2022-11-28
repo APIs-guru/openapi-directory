@@ -19,6 +19,8 @@ type GetFeedbackHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback
+// An anomalous metric in an anomaly group.
 type GetFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback struct {
 	AnomalyGroupID *string `json:"AnomalyGroupId,omitempty"`
 	TimeSeriesID   *string `json:"TimeSeriesId,omitempty"`

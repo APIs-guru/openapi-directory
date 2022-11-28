@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MemcacheParameters } from "./memcacheparameters";
 export declare enum NodeStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",

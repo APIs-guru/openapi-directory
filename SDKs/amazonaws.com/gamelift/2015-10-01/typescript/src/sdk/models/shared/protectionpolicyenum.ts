@@ -1,6 +1,7 @@
 
 
+
 export enum ProtectionPolicyEnum {
-    NoProtection = "NoProtection"
-,    FullProtection = "FullProtection"
+    NoProtection = "NoProtection",
+    FullProtection = "FullProtection"
 }

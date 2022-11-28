@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetLoggerDefinitionPathParams:
-    logger_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'LoggerDefinitionId', 'style': 'simple', 'explode': False }})
+    logger_definition_id: str = field(metadata={'path_param': { 'field_name': 'LoggerDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class GetLoggerDefinitionHeaders:
 
 @dataclass
 class GetLoggerDefinitionRequest:
-    path_params: GetLoggerDefinitionPathParams = field(default=None)
-    headers: GetLoggerDefinitionHeaders = field(default=None)
+    headers: GetLoggerDefinitionHeaders = field()
+    path_params: GetLoggerDefinitionPathParams = field()
     
 
 @dataclass
 class GetLoggerDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_logger_definition_response: Optional[shared.GetLoggerDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

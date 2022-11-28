@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Logs
 /**
  * Amazon S3 logging configuration.
@@ -33,11 +33,11 @@ var S3Logs = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=s3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=s3BucketName" }),
         __metadata("design:type", String)
     ], S3Logs.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3KeyPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=s3KeyPrefix" }),
         __metadata("design:type", String)
     ], S3Logs.prototype, "s3KeyPrefix", void 0);
     return S3Logs;

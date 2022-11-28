@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UploadLayerPartRequest = /** @class */ (function (_super) {
     __extends(UploadLayerPartRequest, _super);
     function UploadLayerPartRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=layerPartBlob" }),
+        SpeakeasyMetadata({ data: "json, name=layerPartBlob" }),
         __metadata("design:type", String)
     ], UploadLayerPartRequest.prototype, "layerPartBlob", void 0);
     __decorate([
-        Metadata({ data: "json, name=partFirstByte" }),
+        SpeakeasyMetadata({ data: "json, name=partFirstByte" }),
         __metadata("design:type", Number)
     ], UploadLayerPartRequest.prototype, "partFirstByte", void 0);
     __decorate([
-        Metadata({ data: "json, name=partLastByte" }),
+        SpeakeasyMetadata({ data: "json, name=partLastByte" }),
         __metadata("design:type", Number)
     ], UploadLayerPartRequest.prototype, "partLastByte", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], UploadLayerPartRequest.prototype, "registryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], UploadLayerPartRequest.prototype, "repositoryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadId" }),
+        SpeakeasyMetadata({ data: "json, name=uploadId" }),
         __metadata("design:type", String)
     ], UploadLayerPartRequest.prototype, "uploadId", void 0);
     return UploadLayerPartRequest;

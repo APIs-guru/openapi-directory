@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GetImagesSortEnum(str, Enum):
     ID = "id"
@@ -35,16 +37,15 @@ class GetImagesQueryParams:
     type: Optional[GetImagesTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetImagesRequest:
-    query_params: GetImagesQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetImages200ApplicationJSONImagesCreatedFrom:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""GetImages200ApplicationJSONImagesCreatedFrom
+    Information about the Server the Image was created from
+    """
+    
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 class GetImages200ApplicationJSONImagesOsFlavorEnum(str, Enum):
     UBUNTU = "ubuntu"
@@ -57,7 +58,11 @@ class GetImages200ApplicationJSONImagesOsFlavorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetImages200ApplicationJSONImagesProtection:
-    delete: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delete' }})
+    r"""GetImages200ApplicationJSONImagesProtection
+    Protection configuration for the Resource
+    """
+    
+    delete: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('delete') }})
     
 class GetImages200ApplicationJSONImagesStatusEnum(str, Enum):
     AVAILABLE = "available"
@@ -75,53 +80,58 @@ class GetImages200ApplicationJSONImagesTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetImages200ApplicationJSONImages:
-    bound_to: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bound_to' }})
-    build_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build_id' }})
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    created_from: GetImages200ApplicationJSONImagesCreatedFrom = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_from' }})
-    deleted: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleted' }})
-    deprecated: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deprecated' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    disk_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disk_size' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    image_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image_size' }})
-    labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    os_flavor: GetImages200ApplicationJSONImagesOsFlavorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'os_flavor' }})
-    os_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'os_version' }})
-    protection: GetImages200ApplicationJSONImagesProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})
-    rapid_deploy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rapid_deploy' }})
-    status: GetImages200ApplicationJSONImagesStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: GetImages200ApplicationJSONImagesTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    bound_to: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('bound_to') }})
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    created_from: GetImages200ApplicationJSONImagesCreatedFrom = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_from') }})
+    deleted: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleted') }})
+    deprecated: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deprecated') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    disk_size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('disk_size') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    image_size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('image_size') }})
+    labels: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    os_flavor: GetImages200ApplicationJSONImagesOsFlavorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('os_flavor') }})
+    os_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('os_version') }})
+    protection: GetImages200ApplicationJSONImagesProtection = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protection') }})
+    status: GetImages200ApplicationJSONImagesStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    type: GetImages200ApplicationJSONImagesTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    build_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('build_id') }})
+    rapid_deploy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rapid_deploy') }})
     
 
 @dataclass_json
 @dataclass
 class GetImages200ApplicationJSONMetaPagination:
-    last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
-    next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
-    page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    per_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'per_page' }})
-    previous_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous_page' }})
-    total_entries: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_entries' }})
+    last_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_page') }})
+    next_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_page') }})
+    page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    per_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('per_page') }})
+    previous_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous_page') }})
+    total_entries: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total_entries') }})
     
 
 @dataclass_json
 @dataclass
 class GetImages200ApplicationJSONMeta:
-    pagination: GetImages200ApplicationJSONMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+    pagination: GetImages200ApplicationJSONMetaPagination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
     
 
 @dataclass_json
 @dataclass
 class GetImages200ApplicationJSON:
-    images: List[GetImages200ApplicationJSONImages] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'images' }})
-    meta: Optional[GetImages200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    images: List[GetImages200ApplicationJSONImages] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('images') }})
+    meta: Optional[GetImages200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    
+
+@dataclass
+class GetImagesRequest:
+    query_params: GetImagesQueryParams = field()
     
 
 @dataclass
 class GetImagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_images_200_application_json_object: Optional[GetImages200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

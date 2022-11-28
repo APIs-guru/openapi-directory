@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteHsmConfigurationActionEnum(str, Enum):
     DELETE_HSM_CONFIGURATION = "DeleteHsmConfiguration"
@@ -10,8 +14,8 @@ class PostDeleteHsmConfigurationVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteHsmConfigurationQueryParams:
-    action: PostDeleteHsmConfigurationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteHsmConfigurationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteHsmConfigurationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteHsmConfigurationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteHsmConfigurationHeaders:
 
 @dataclass
 class PostDeleteHsmConfigurationRequest:
-    query_params: PostDeleteHsmConfigurationQueryParams = field(default=None)
-    headers: PostDeleteHsmConfigurationHeaders = field(default=None)
+    headers: PostDeleteHsmConfigurationHeaders = field()
+    query_params: PostDeleteHsmConfigurationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteHsmConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

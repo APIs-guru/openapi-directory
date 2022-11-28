@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // V2AndroidApplication
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifier of an Android application for key use.
 **/
 export class V2AndroidApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=sha1Fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=sha1Fingerprint" })
   sha1Fingerprint?: string;
 }

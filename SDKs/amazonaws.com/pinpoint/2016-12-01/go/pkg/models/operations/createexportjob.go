@@ -18,6 +18,8 @@ type CreateExportJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateExportJobRequestBodyExportJobRequest
+// Specifies the settings for a job that exports endpoint definitions to an Amazon Simple Storage Service (Amazon S3) bucket.
 type CreateExportJobRequestBodyExportJobRequest struct {
 	RoleArn        *string `json:"RoleArn,omitempty"`
 	S3URLPrefix    *string `json:"S3UrlPrefix,omitempty"`

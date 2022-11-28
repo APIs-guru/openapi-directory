@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import directorychromeosdevicescommandresult
+from sdk import utils
+from . import *
 
 class DirectoryChromeosdevicesCommandStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -24,11 +26,15 @@ class DirectoryChromeosdevicesCommandTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DirectoryChromeosdevicesCommand:
-    command_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commandExpireTime' }})
-    command_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commandId' }})
-    command_result: Optional[directorychromeosdevicescommandresult.DirectoryChromeosdevicesCommandResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commandResult' }})
-    issue_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issueTime' }})
-    payload: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payload' }})
-    state: Optional[DirectoryChromeosdevicesCommandStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    type: Optional[DirectoryChromeosdevicesCommandTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""DirectoryChromeosdevicesCommand
+    Information regarding a command that was issued to a device.
+    """
+    
+    command_expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commandExpireTime') }})
+    command_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commandId') }})
+    command_result: Optional[DirectoryChromeosdevicesCommandResult] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commandResult') }})
+    issue_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issueTime') }})
+    payload: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payload') }})
+    state: Optional[DirectoryChromeosdevicesCommandStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    type: Optional[DirectoryChromeosdevicesCommandTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateConnectionApiKeyAuthRequestParameters
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the API key authorization parameters to use to update the connection.
 **/
 export class UpdateConnectionApiKeyAuthRequestParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=ApiKeyName" })
   apiKeyName?: string;
 
-  @Metadata({ data: "json, name=ApiKeyValue" })
+  @SpeakeasyMetadata({ data: "json, name=ApiKeyValue" })
   apiKeyValue?: string;
 }

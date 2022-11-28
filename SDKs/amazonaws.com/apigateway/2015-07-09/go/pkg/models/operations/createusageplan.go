@@ -14,12 +14,17 @@ type CreateUsagePlanHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateUsagePlanRequestBodyQuota
+// Quotas configured for a usage plan.
 type CreateUsagePlanRequestBodyQuota struct {
 	Limit  *int64                      `json:"limit,omitempty"`
 	Offset *int64                      `json:"offset,omitempty"`
 	Period *shared.QuotaPeriodTypeEnum `json:"period,omitempty"`
 }
 
+// CreateUsagePlanRequestBodyThrottle
+//
+//	The API request rate limits.
 type CreateUsagePlanRequestBodyThrottle struct {
 	BurstLimit *int64   `json:"burstLimit,omitempty"`
 	RateLimit  *float64 `json:"rateLimit,omitempty"`

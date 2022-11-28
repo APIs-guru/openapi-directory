@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1Evaluation } from "./googleclouddatalabelingv1beta1evaluation";
+
 
 
 // GoogleCloudDatalabelingV1beta1SearchEvaluationsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDatalabelingV1beta1Evaluation } from "./googleclouddatalabel
  * Results of searching evaluations.
 **/
 export class GoogleCloudDatalabelingV1beta1SearchEvaluationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evaluations", elemType: shared.GoogleCloudDatalabelingV1beta1Evaluation })
+  @SpeakeasyMetadata({ data: "json, name=evaluations", elemType: GoogleCloudDatalabelingV1beta1Evaluation })
   evaluations?: GoogleCloudDatalabelingV1beta1Evaluation[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MaintenanceWindowExecutionTaskInvocationIdentity
+// Describes the information about a task invocation for a particular target as part of a task execution performed as part of a maintenance window execution.
 type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	EndTime           *time.Time                            `json:"EndTime,omitempty"`
 	ExecutionID       *string                               `json:"ExecutionId,omitempty"`

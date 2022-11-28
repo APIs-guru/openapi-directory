@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetHlsVideoSegmentLegacyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
   playlistId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=segmentContainer" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=segmentContainer" })
   segmentContainer: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=segmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=segmentId" })
   segmentId: string;
 }
 
 
 export class GetHlsVideoSegmentLegacyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetHlsVideoSegmentLegacyPathParams;
 }
 
 
 export class GetHlsVideoSegmentLegacyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getHlsVideoSegmentLegacy200VideoWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

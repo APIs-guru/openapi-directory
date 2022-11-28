@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteEmailTemplatePathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +29,21 @@ class DeleteEmailTemplateHeaders:
 
 @dataclass
 class DeleteEmailTemplateRequest:
-    path_params: DeleteEmailTemplatePathParams = field(default=None)
-    query_params: DeleteEmailTemplateQueryParams = field(default=None)
-    headers: DeleteEmailTemplateHeaders = field(default=None)
+    headers: DeleteEmailTemplateHeaders = field()
+    path_params: DeleteEmailTemplatePathParams = field()
+    query_params: DeleteEmailTemplateQueryParams = field()
     
 
 @dataclass
 class DeleteEmailTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_email_template_response: Optional[shared.DeleteEmailTemplateResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

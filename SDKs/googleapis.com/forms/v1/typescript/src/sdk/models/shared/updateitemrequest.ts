@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Item } from "./item";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ItemInput } from "./item";
 import { Location } from "./location";
 
 
-// UpdateItemRequest
+
+// UpdateItemRequestInput
 /** 
  * Update an item in a form.
 **/
-export class UpdateItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=item" })
-  item?: Item;
+export class UpdateItemRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=item" })
+  item?: ItemInput;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

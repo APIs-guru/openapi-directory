@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetFilesByIDOrURLQueryParams:
-    file_id_or_url: str = field(default=None, metadata={'query_param': { 'field_name': 'fileIdOrUrl', 'style': 'form', 'explode': True }})
+    file_id_or_url: str = field(metadata={'query_param': { 'field_name': 'fileIdOrUrl', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetFilesByIDOrURLRequest:
-    query_params: GetFilesByIDOrURLQueryParams = field(default=None)
+    query_params: GetFilesByIDOrURLQueryParams = field()
     
 
 @dataclass
 class GetFilesByIDOrURLResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

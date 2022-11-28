@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServerReplicationConfiguration } from "./serverreplicationconfiguration";
 /**
  * Replication configuration for a server group.

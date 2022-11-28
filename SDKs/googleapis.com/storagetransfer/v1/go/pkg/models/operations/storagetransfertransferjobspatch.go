@@ -30,7 +30,7 @@ type StoragetransferTransferJobsPatchSecurity struct {
 type StoragetransferTransferJobsPatchRequest struct {
 	PathParams  StoragetransferTransferJobsPatchPathParams
 	QueryParams StoragetransferTransferJobsPatchQueryParams
-	Request     *shared.UpdateTransferJobRequest `request:"mediaType=application/json"`
+	Request     *shared.UpdateTransferJobRequestInput `request:"mediaType=application/json"`
 	Security    StoragetransferTransferJobsPatchSecurity
 }
 

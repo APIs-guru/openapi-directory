@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class PostJobsIDPausePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostJobsIDPauseRequest:
-    path_params: PostJobsIDPausePathParams = field(default=None)
+    path_params: PostJobsIDPausePathParams = field()
     
 
 @dataclass
 class PostJobsIDPauseResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_jobs_id_pause_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

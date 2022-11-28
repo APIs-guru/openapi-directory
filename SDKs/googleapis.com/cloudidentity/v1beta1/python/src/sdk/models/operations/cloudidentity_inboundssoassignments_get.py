@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class CloudidentityInboundSsoAssignmentsGetQueryParams:
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class CloudidentityInboundSsoAssignmentsGetSecurity:
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsGetRequest:
-    path_params: CloudidentityInboundSsoAssignmentsGetPathParams = field(default=None)
-    query_params: CloudidentityInboundSsoAssignmentsGetQueryParams = field(default=None)
-    security: CloudidentityInboundSsoAssignmentsGetSecurity = field(default=None)
+    path_params: CloudidentityInboundSsoAssignmentsGetPathParams = field()
+    query_params: CloudidentityInboundSsoAssignmentsGetQueryParams = field()
+    security: CloudidentityInboundSsoAssignmentsGetSecurity = field()
     
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inbound_sso_assignment: Optional[shared.InboundSsoAssignment] = field(default=None)
-    status_code: int = field(default=None)
     

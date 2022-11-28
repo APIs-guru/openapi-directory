@@ -27,11 +27,6 @@ type MpkbySecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MpkbyRequest struct {
-	Request  *MpkbyRequestBody `request:"mediaType=application/json"`
-	Security MpkbySecurity
-}
-
 type Mpkby400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Mpkby504ApplicationJSON struct {
 	Error            *Mpkby504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Mpkby504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MpkbyRequest struct {
+	Request  *MpkbyRequestBody `request:"mediaType=application/json"`
+	Security MpkbySecurity
 }
 
 type MpkbyResponse struct {

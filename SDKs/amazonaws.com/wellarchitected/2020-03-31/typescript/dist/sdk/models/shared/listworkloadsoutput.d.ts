@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WorkloadSummary } from "./workloadsummary";
 /**
  * Output of a list workloads call.

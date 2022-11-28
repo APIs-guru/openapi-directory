@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingInstanceTypeEnum } from "./processinginstancetypeenum";
+
 
 
 // ProcessingClusterConfig
@@ -7,15 +8,15 @@ import { ProcessingInstanceTypeEnum } from "./processinginstancetypeenum";
  * Configuration for the cluster used to run a processing job.
 **/
 export class ProcessingClusterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCount" })
   instanceCount: number;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType: ProcessingInstanceTypeEnum;
 
-  @Metadata({ data: "json, name=VolumeKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeKmsKeyId" })
   volumeKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=VolumeSizeInGB" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeSizeInGB" })
   volumeSizeInGb: number;
 }

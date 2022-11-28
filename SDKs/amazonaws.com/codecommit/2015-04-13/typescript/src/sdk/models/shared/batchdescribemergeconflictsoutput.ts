@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Conflict } from "./conflict";
 import { BatchDescribeMergeConflictsError } from "./batchdescribemergeconflictserror";
 
 
+
 export class BatchDescribeMergeConflictsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=baseCommitId" })
   baseCommitId?: string;
 
-  @Metadata({ data: "json, name=conflicts", elemType: shared.Conflict })
+  @SpeakeasyMetadata({ data: "json, name=conflicts", elemType: Conflict })
   conflicts: Conflict[];
 
-  @Metadata({ data: "json, name=destinationCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCommitId" })
   destinationCommitId: string;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.BatchDescribeMergeConflictsError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: BatchDescribeMergeConflictsError })
   errors?: BatchDescribeMergeConflictsError[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=sourceCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitId" })
   sourceCommitId: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FulfillmentStateEnum } from "./fulfillmentstateenum";
 import { MessageFormatTypeEnum } from "./messageformattypeenum";
 import { DialogActionTypeEnum } from "./dialogactiontypeenum";

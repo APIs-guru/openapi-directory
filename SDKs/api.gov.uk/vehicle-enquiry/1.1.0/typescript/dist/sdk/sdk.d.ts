@@ -1,17 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Vehicle } from "./vehicle";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry", "https://uat.driver-vehicle-licensing.api.gov.uk/vehicle-enquiry"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    vehicle: Vehicle;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * Returns vehicle details based on registration number
-    **/
-    GetVehicleDetailsByRegistrationNumber(req: operations.GetVehicleDetailsByRegistrationNumberRequest, config?: AxiosRequestConfig): Promise<operations.GetVehicleDetailsByRegistrationNumberResponse>;
 }
 export {};

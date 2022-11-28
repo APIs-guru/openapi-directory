@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetAutomationV4ActionsAppIdDefinitionIdRevisionsGetPagePathParams extends SpeakeasyBase {
     appId: number;

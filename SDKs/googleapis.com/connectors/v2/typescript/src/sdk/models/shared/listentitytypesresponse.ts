@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityType } from "./entitytype";
+
 
 
 // ListEntityTypesResponse
@@ -8,12 +8,12 @@ import { EntityType } from "./entitytype";
  * Response message for EntityService.ListEntityTypes
 **/
 export class ListEntityTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=types", elemType: shared.EntityType })
+  @SpeakeasyMetadata({ data: "json, name=types", elemType: EntityType })
   types?: EntityType[];
 
-  @Metadata({ data: "json, name=unsupportedTypeNames" })
+  @SpeakeasyMetadata({ data: "json, name=unsupportedTypeNames" })
   unsupportedTypeNames?: string[];
 }

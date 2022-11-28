@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class Example111 extends SpeakeasyBase {
     bondDate: number;
     deviceClass: number;

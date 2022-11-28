@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class WebsecurityscannerProjectsScanConfigsScanRunsListQueryParams:
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsListRequest:
-    path_params: WebsecurityscannerProjectsScanConfigsScanRunsListPathParams = field(default=None)
-    query_params: WebsecurityscannerProjectsScanConfigsScanRunsListQueryParams = field(default=None)
-    security: WebsecurityscannerProjectsScanConfigsScanRunsListSecurity = field(default=None)
+    path_params: WebsecurityscannerProjectsScanConfigsScanRunsListPathParams = field()
+    query_params: WebsecurityscannerProjectsScanConfigsScanRunsListQueryParams = field()
+    security: WebsecurityscannerProjectsScanConfigsScanRunsListSecurity = field()
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_scan_runs_response: Optional[shared.ListScanRunsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

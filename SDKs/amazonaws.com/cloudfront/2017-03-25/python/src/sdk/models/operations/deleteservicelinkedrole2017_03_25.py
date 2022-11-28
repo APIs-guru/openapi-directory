@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class DeleteServiceLinkedRole20170325PathParams:
-    role_name: str = field(default=None, metadata={'path_param': { 'field_name': 'RoleName', 'style': 'simple', 'explode': False }})
+    role_name: str = field(metadata={'path_param': { 'field_name': 'RoleName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,13 +23,13 @@ class DeleteServiceLinkedRole20170325Headers:
 
 @dataclass
 class DeleteServiceLinkedRole20170325Request:
-    path_params: DeleteServiceLinkedRole20170325PathParams = field(default=None)
-    headers: DeleteServiceLinkedRole20170325Headers = field(default=None)
+    headers: DeleteServiceLinkedRole20170325Headers = field()
+    path_params: DeleteServiceLinkedRole20170325PathParams = field()
     
 
 @dataclass
 class DeleteServiceLinkedRole20170325Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

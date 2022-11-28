@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import filterview
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AddFilterViewResponse:
-    filter: Optional[filterview.FilterView] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
+    r"""AddFilterViewResponse
+    The result of adding a filter view.
+    """
+    
+    filter: Optional[FilterView] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
     

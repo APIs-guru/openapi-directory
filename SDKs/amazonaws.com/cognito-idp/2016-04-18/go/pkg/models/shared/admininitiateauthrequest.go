@@ -1,5 +1,7 @@
 package shared
 
+// AdminInitiateAuthRequest
+// Initiates the authorization request, as an administrator.
 type AdminInitiateAuthRequest struct {
 	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	AuthFlow          AuthFlowTypeEnum       `json:"AuthFlow"`

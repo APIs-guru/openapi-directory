@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeverityLevelEnum } from "./severitylevelenum";
 import { StatusEnum } from "./statusenum";
 // Problem
@@ -35,43 +35,43 @@ var Problem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AffectedResource" }),
+        SpeakeasyMetadata({ data: "json, name=AffectedResource" }),
         __metadata("design:type", String)
     ], Problem.prototype, "affectedResource", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], Problem.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Feedback" }),
+        SpeakeasyMetadata({ data: "json, name=Feedback" }),
         __metadata("design:type", Map)
     ], Problem.prototype, "feedback", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], Problem.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Insights" }),
+        SpeakeasyMetadata({ data: "json, name=Insights" }),
         __metadata("design:type", String)
     ], Problem.prototype, "insights", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceGroupName" }),
         __metadata("design:type", String)
     ], Problem.prototype, "resourceGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SeverityLevel" }),
+        SpeakeasyMetadata({ data: "json, name=SeverityLevel" }),
         __metadata("design:type", String)
     ], Problem.prototype, "severityLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], Problem.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Problem.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=Title" }),
+        SpeakeasyMetadata({ data: "json, name=Title" }),
         __metadata("design:type", String)
     ], Problem.prototype, "title", void 0);
     return Problem;

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CallToActionActionTypeEnum(str, Enum):
     ACTION_TYPE_UNSPECIFIED = "ACTION_TYPE_UNSPECIFIED"
@@ -16,6 +18,10 @@ class CallToActionActionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CallToAction:
-    action_type: Optional[CallToActionActionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionType' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""CallToAction
+    An action that is performed when the user clicks through the post
+    """
+    
+    action_type: Optional[CallToActionActionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actionType') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

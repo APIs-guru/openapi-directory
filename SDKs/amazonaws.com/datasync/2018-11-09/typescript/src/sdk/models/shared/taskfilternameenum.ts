@@ -1,6 +1,7 @@
 
 
+
 export enum TaskFilterNameEnum {
-    LocationId = "LocationId"
-,    CreationTime = "CreationTime"
+    LocationId = "LocationId",
+    CreationTime = "CreationTime"
 }

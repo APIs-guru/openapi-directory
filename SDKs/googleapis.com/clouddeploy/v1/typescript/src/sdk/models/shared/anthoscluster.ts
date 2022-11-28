@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AnthosCluster
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information specifying an Anthos Cluster.
 **/
 export class AnthosCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=membership" })
+  @SpeakeasyMetadata({ data: "json, name=membership" })
   membership?: string;
 }

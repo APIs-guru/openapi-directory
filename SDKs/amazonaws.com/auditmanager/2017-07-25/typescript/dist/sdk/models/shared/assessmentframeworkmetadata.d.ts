@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FrameworkTypeEnum } from "./frameworktypeenum";
 /**
  *  The metadata associated with a standard or custom framework.

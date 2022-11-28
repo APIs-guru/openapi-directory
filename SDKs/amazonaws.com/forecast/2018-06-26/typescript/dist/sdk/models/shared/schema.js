@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SchemaAttribute } from "./schemaattribute";
 // Schema
 /**
  * Defines the fields of a dataset. You specify this object in the <a>CreateDataset</a> request.
@@ -34,7 +34,7 @@ var Schema = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Attributes", elemType: shared.SchemaAttribute }),
+        SpeakeasyMetadata({ data: "json, name=Attributes", elemType: SchemaAttribute }),
         __metadata("design:type", Array)
     ], Schema.prototype, "attributes", void 0);
     return Schema;

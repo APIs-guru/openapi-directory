@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CollectionsLinkedNodesRelationshipsCreatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collection_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collection_id" })
   collectionId: string;
 }
 
 
 export class CollectionsLinkedNodesRelationshipsCreateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CollectionsLinkedNodesRelationshipsCreatePathParams;
 }
 
 
 export class CollectionsLinkedNodesRelationshipsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

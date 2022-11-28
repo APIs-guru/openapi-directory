@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasehostingSitesVersionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class FirebasehostingSitesVersionsCreateQueryParams:
 
 @dataclass
 class FirebasehostingSitesVersionsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasehostingSitesVersionsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,15 +46,15 @@ class FirebasehostingSitesVersionsCreateSecurity:
 
 @dataclass
 class FirebasehostingSitesVersionsCreateRequest:
-    path_params: FirebasehostingSitesVersionsCreatePathParams = field(default=None)
-    query_params: FirebasehostingSitesVersionsCreateQueryParams = field(default=None)
+    path_params: FirebasehostingSitesVersionsCreatePathParams = field()
+    query_params: FirebasehostingSitesVersionsCreateQueryParams = field()
+    security: FirebasehostingSitesVersionsCreateSecurity = field()
     request: Optional[shared.Version] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasehostingSitesVersionsCreateSecurity = field(default=None)
     
 
 @dataclass
 class FirebasehostingSitesVersionsCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     version: Optional[shared.Version] = field(default=None)
     

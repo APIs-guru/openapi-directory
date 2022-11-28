@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiSpec } from "./apispec";
 /**
  * Response message for ListApiSpecRevisionsResponse.

@@ -18,6 +18,8 @@ const (
 	UtilizationReportTimeFrameEnumYear                 UtilizationReportTimeFrameEnum = "YEAR"
 )
 
+// UtilizationReport
+// Utilization report details the utilization (CPU, memory, etc.) of selected source VMs.
 type UtilizationReport struct {
 	CreateTime   *string                         `json:"createTime,omitempty"`
 	DisplayName  *string                         `json:"displayName,omitempty"`
@@ -29,4 +31,13 @@ type UtilizationReport struct {
 	TimeFrame    *UtilizationReportTimeFrameEnum `json:"timeFrame,omitempty"`
 	VMCount      *int32                          `json:"vmCount,omitempty"`
 	Vms          []VMUtilizationInfo             `json:"vms,omitempty"`
+}
+
+// UtilizationReportInput
+// Utilization report details the utilization (CPU, memory, etc.) of selected source VMs.
+type UtilizationReportInput struct {
+	DisplayName *string                         `json:"displayName,omitempty"`
+	Error       *Status                         `json:"error,omitempty"`
+	TimeFrame   *UtilizationReportTimeFrameEnum `json:"timeFrame,omitempty"`
+	Vms         []VMUtilizationInfoInput        `json:"vms,omitempty"`
 }

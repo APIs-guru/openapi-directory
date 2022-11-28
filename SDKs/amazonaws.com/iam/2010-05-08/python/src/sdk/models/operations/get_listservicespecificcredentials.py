@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListServiceSpecificCredentialsActionEnum(str, Enum):
     LIST_SERVICE_SPECIFIC_CREDENTIALS = "ListServiceSpecificCredentials"
@@ -10,10 +14,10 @@ class GetListServiceSpecificCredentialsVersionEnum(str, Enum):
 
 @dataclass
 class GetListServiceSpecificCredentialsQueryParams:
-    action: GetListServiceSpecificCredentialsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListServiceSpecificCredentialsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListServiceSpecificCredentialsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     service_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ServiceName', 'style': 'form', 'explode': True }})
     user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetListServiceSpecificCredentialsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetListServiceSpecificCredentialsHeaders:
 
 @dataclass
 class GetListServiceSpecificCredentialsRequest:
-    query_params: GetListServiceSpecificCredentialsQueryParams = field(default=None)
-    headers: GetListServiceSpecificCredentialsHeaders = field(default=None)
+    headers: GetListServiceSpecificCredentialsHeaders = field()
+    query_params: GetListServiceSpecificCredentialsQueryParams = field()
     
 
 @dataclass
 class GetListServiceSpecificCredentialsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

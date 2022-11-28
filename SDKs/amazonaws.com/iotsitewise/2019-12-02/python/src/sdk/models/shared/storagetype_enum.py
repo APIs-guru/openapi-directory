@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StorageTypeEnum(str, Enum):
     SITEWISE_DEFAULT_STORAGE = "SITEWISE_DEFAULT_STORAGE"

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MaintenanceWindowDayOfWeekEnum;
 (function (MaintenanceWindowDayOfWeekEnum) {
     MaintenanceWindowDayOfWeekEnum["DayOfWeekUnspecified"] = "DAY_OF_WEEK_UNSPECIFIED";
@@ -44,11 +44,11 @@ var MaintenanceWindow = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dayOfWeek" }),
+        SpeakeasyMetadata({ data: "json, name=dayOfWeek" }),
         __metadata("design:type", String)
     ], MaintenanceWindow.prototype, "dayOfWeek", void 0);
     __decorate([
-        Metadata({ data: "json, name=hourOfDay" }),
+        SpeakeasyMetadata({ data: "json, name=hourOfDay" }),
         __metadata("design:type", Number)
     ], MaintenanceWindow.prototype, "hourOfDay", void 0);
     return MaintenanceWindow;

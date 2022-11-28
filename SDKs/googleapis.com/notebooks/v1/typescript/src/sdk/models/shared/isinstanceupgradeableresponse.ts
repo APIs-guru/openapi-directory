@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IsInstanceUpgradeableResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for checking if a notebook instance is upgradeable.
 **/
 export class IsInstanceUpgradeableResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=upgradeImage" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeImage" })
   upgradeImage?: string;
 
-  @Metadata({ data: "json, name=upgradeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeInfo" })
   upgradeInfo?: string;
 
-  @Metadata({ data: "json, name=upgradeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeVersion" })
   upgradeVersion?: string;
 
-  @Metadata({ data: "json, name=upgradeable" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeable" })
   upgradeable?: boolean;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// TranslateTextRequest
+// The request message for synchronous translation.
 type TranslateTextRequest struct {
 	Contents           []string                     `json:"contents,omitempty"`
 	GlossaryConfig     *TranslateTextGlossaryConfig `json:"glossaryConfig,omitempty"`

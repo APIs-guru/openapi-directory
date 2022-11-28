@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GroupKind
 /**
  * This is a direct map to the Kubernetes GroupKind type [GroupKind](https://godoc.org/k8s.io/apimachinery/pkg/runtime/schema#GroupKind) and is used for identifying specific "types" of resources to restore.
@@ -33,11 +33,11 @@ var GroupKind = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resourceGroup" }),
+        SpeakeasyMetadata({ data: "json, name=resourceGroup" }),
         __metadata("design:type", String)
     ], GroupKind.prototype, "resourceGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceKind" }),
+        SpeakeasyMetadata({ data: "json, name=resourceKind" }),
         __metadata("design:type", String)
     ], GroupKind.prototype, "resourceKind", void 0);
     return GroupKind;

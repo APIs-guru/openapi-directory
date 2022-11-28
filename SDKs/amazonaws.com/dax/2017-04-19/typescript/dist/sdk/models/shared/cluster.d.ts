@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
 import { ClusterEndpointEncryptionTypeEnum } from "./clusterendpointencryptiontypeenum";
 import { Node } from "./node";

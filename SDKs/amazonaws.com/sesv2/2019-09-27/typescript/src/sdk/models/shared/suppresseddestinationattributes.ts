@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SuppressedDestinationAttributes
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains additional attributes that are related an email address that is on the suppression list for your account.
 **/
 export class SuppressedDestinationAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeedbackId" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackId" })
   feedbackId?: string;
 
-  @Metadata({ data: "json, name=MessageId" })
+  @SpeakeasyMetadata({ data: "json, name=MessageId" })
   messageId?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserFileKey } from "./userfilekey";
+
 
 
 // UserFileKeyList
@@ -8,6 +8,6 @@ import { UserFileKey } from "./userfilekey";
  * List of user file keys
 **/
 export class UserFileKeyList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.UserFileKey })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: UserFileKey })
   items?: UserFileKey[];
 }

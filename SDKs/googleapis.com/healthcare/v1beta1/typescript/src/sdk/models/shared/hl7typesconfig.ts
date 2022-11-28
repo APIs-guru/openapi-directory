@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Type } from "./type";
 import { VersionSource } from "./versionsource";
+
 
 
 // Hl7TypesConfig
@@ -9,9 +9,9 @@ import { VersionSource } from "./versionsource";
  * Root config for HL7v2 datatype definitions for a specific HL7v2 version.
 **/
 export class Hl7TypesConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type", elemType: shared.Type })
+  @SpeakeasyMetadata({ data: "json, name=type", elemType: Type })
   type?: Type[];
 
-  @Metadata({ data: "json, name=version", elemType: shared.VersionSource })
+  @SpeakeasyMetadata({ data: "json, name=version", elemType: VersionSource })
   version?: VersionSource[];
 }

@@ -1,0 +1,33 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class PresidentialSummary extends SpeakeasyBase {
+    candidateContributionsLessRepayments?: number;
+    candidateId?: string;
+    candidateLastName?: string;
+    candidateName?: string;
+    candidatePartyAffiliation?: string;
+    cashOnHandEnd?: number;
+    committeeDesignation?: string;
+    committeeId?: string;
+    committeeName?: string;
+    committeeType?: string;
+    debtsOwedByCommittee?: number;
+    disbursementsLessOffsets?: number;
+    electionYear?: number;
+    exemptLegalAccountingDisbursement?: number;
+    federalFunds?: number;
+    fundraisingDisbursements?: number;
+    individualContributionsLessRefunds?: number;
+    netReceipts?: number;
+    offsetsToOperatingExpenditures?: number;
+    operatingExpenditures?: number;
+    otherDisbursements?: number;
+    pacContributionsLessRefunds?: number;
+    partyContributionsLessRefunds?: number;
+    repaymentsLoansMadeByCandidate?: number;
+    repaymentsOtherLoans?: number;
+    roundedNetReceipts?: number;
+    totalContributionRefunds?: number;
+    totalLoanRepaymentsMade?: number;
+    transfersFromAffiliatedCommittees?: number;
+    transfersToOtherAuthorizedCommittees?: number;
+}

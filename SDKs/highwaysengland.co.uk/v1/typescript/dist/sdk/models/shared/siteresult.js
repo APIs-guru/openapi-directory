@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SiteResult = /** @class */ (function (_super) {
     __extends(SiteResult, _super);
     function SiteResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], SiteResult.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], SiteResult.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Latitude" }),
+        SpeakeasyMetadata({ data: "json, name=Latitude" }),
         __metadata("design:type", Number)
     ], SiteResult.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=Longitude" }),
+        SpeakeasyMetadata({ data: "json, name=Longitude" }),
         __metadata("design:type", Number)
     ], SiteResult.prototype, "longitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], SiteResult.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], SiteResult.prototype, "status", void 0);
     return SiteResult;

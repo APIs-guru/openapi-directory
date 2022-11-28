@@ -32,7 +32,7 @@ type VmmigrationProjectsLocationsSourcesDatacenterConnectorsCreateSecurity struc
 type VmmigrationProjectsLocationsSourcesDatacenterConnectorsCreateRequest struct {
 	PathParams  VmmigrationProjectsLocationsSourcesDatacenterConnectorsCreatePathParams
 	QueryParams VmmigrationProjectsLocationsSourcesDatacenterConnectorsCreateQueryParams
-	Request     *shared.DatacenterConnector `request:"mediaType=application/json"`
+	Request     *shared.DatacenterConnectorInput `request:"mediaType=application/json"`
 	Security    VmmigrationProjectsLocationsSourcesDatacenterConnectorsCreateSecurity
 }
 

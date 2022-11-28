@@ -1,75 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { PaymentAuditCurrencyV3Enum } from "./paymentauditcurrencyv3enum";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PaymentAuditCurrencyV3Enum } from "./paymentauditcurrencyv3enum";
 
+
 export enum PaymentEventResponseV3EventTypeEnum {
-    PayoutSubmitted = "PAYOUT_SUBMITTED"
-,    PayoutCompleted = "PAYOUT_COMPLETED"
-,    PayoutInstructedV3 = "PAYOUT_INSTRUCTED_V3"
-,    BankPaymentRequested = "BANK_PAYMENT_REQUESTED"
-,    SourceAmountConfirmed = "SOURCE_AMOUNT_CONFIRMED"
-,    PaymentSubmitted = "PAYMENT_SUBMITTED"
-,    PaymentSubmittedAccepted = "PAYMENT_SUBMITTED_ACCEPTED"
-,    PaymentSubmittedRejected = "PAYMENT_SUBMITTED_REJECTED"
-,    PaymentConfirmed = "PAYMENT_CONFIRMED"
-,    PaymentAwaitingFunds = "PAYMENT_AWAITING_FUNDS"
-,    PaymentFunded = "PAYMENT_FUNDED"
-,    PaymentUnfunded = "PAYMENT_UNFUNDED"
-,    PaymentFailed = "PAYMENT_FAILED"
-,    AchSubmittedToOdfi = "ACH_SUBMITTED_TO_ODFI"
-,    PaymentAcceptedByRails = "PAYMENT_ACCEPTED_BY_RAILS"
-,    AchReturnReceived = "ACH_RETURN_RECEIVED"
-,    ReturnPaymentFundingRequested = "RETURN_PAYMENT_FUNDING_REQUESTED"
-,    PayoutBatchExecuted = "PAYOUT_BATCH_EXECUTED"
-,    PayoutBatchQuoteExpired = "PAYOUT_BATCH_QUOTE_EXPIRED"
-,    PayoutBatchFunded = "PAYOUT_BATCH_FUNDED"
-,    PayoutBatchFundsReturnRequest = "PAYOUT_BATCH_FUNDS_RETURN_REQUEST"
-,    PayoutBatchFundsReturned = "PAYOUT_BATCH_FUNDS_RETURNED"
-,    PayoutFundsRequest = "PAYOUT_FUNDS_REQUEST"
-,    PayoutFundsGranted = "PAYOUT_FUNDS_GRANTED"
-,    PayoutFundsDenied = "PAYOUT_FUNDS_DENIED"
-,    PayoutBatchQuoted = "PAYOUT_BATCH_QUOTED"
-,    PayoutQuoted = "PAYOUT_QUOTED"
-,    AchPaymentReturnCancelled = "ACH_PAYMENT_RETURN_CANCELLED"
-,    ReturnPaymentCancellationRequested = "RETURN_PAYMENT_CANCELLATION_REQUESTED"
-,    PayoutWithdrawn = "PAYOUT_WITHDRAWN"
+    PayoutSubmitted = "PAYOUT_SUBMITTED",
+    PayoutCompleted = "PAYOUT_COMPLETED",
+    PayoutInstructedV3 = "PAYOUT_INSTRUCTED_V3",
+    BankPaymentRequested = "BANK_PAYMENT_REQUESTED",
+    SourceAmountConfirmed = "SOURCE_AMOUNT_CONFIRMED",
+    PaymentSubmitted = "PAYMENT_SUBMITTED",
+    PaymentSubmittedAccepted = "PAYMENT_SUBMITTED_ACCEPTED",
+    PaymentSubmittedRejected = "PAYMENT_SUBMITTED_REJECTED",
+    PaymentConfirmed = "PAYMENT_CONFIRMED",
+    PaymentAwaitingFunds = "PAYMENT_AWAITING_FUNDS",
+    PaymentFunded = "PAYMENT_FUNDED",
+    PaymentUnfunded = "PAYMENT_UNFUNDED",
+    PaymentFailed = "PAYMENT_FAILED",
+    AchSubmittedToOdfi = "ACH_SUBMITTED_TO_ODFI",
+    PaymentAcceptedByRails = "PAYMENT_ACCEPTED_BY_RAILS",
+    AchReturnReceived = "ACH_RETURN_RECEIVED",
+    ReturnPaymentFundingRequested = "RETURN_PAYMENT_FUNDING_REQUESTED",
+    PayoutBatchExecuted = "PAYOUT_BATCH_EXECUTED",
+    PayoutBatchQuoteExpired = "PAYOUT_BATCH_QUOTE_EXPIRED",
+    PayoutBatchFunded = "PAYOUT_BATCH_FUNDED",
+    PayoutBatchFundsReturnRequest = "PAYOUT_BATCH_FUNDS_RETURN_REQUEST",
+    PayoutBatchFundsReturned = "PAYOUT_BATCH_FUNDS_RETURNED",
+    PayoutFundsRequest = "PAYOUT_FUNDS_REQUEST",
+    PayoutFundsGranted = "PAYOUT_FUNDS_GRANTED",
+    PayoutFundsDenied = "PAYOUT_FUNDS_DENIED",
+    PayoutBatchQuoted = "PAYOUT_BATCH_QUOTED",
+    PayoutQuoted = "PAYOUT_QUOTED",
+    AchPaymentReturnCancelled = "ACH_PAYMENT_RETURN_CANCELLED",
+    ReturnPaymentCancellationRequested = "RETURN_PAYMENT_CANCELLATION_REQUESTED",
+    PayoutWithdrawn = "PAYOUT_WITHDRAWN"
 }
 
 
 export class PaymentEventResponseV3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountName" })
+  @SpeakeasyMetadata({ data: "json, name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=eventDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=eventDateTime" })
   eventDateTime: Date;
 
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType: PaymentEventResponseV3EventTypeEnum;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=paymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=paymentAmount" })
   paymentAmount?: number;
 
-  @Metadata({ data: "json, name=paymentCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=paymentCurrency" })
   paymentCurrency?: PaymentAuditCurrencyV3Enum;
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: string;
 
-  @Metadata({ data: "json, name=routingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=routingNumber" })
   routingNumber?: string;
 
-  @Metadata({ data: "json, name=sourceAmount" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAmount" })
   sourceAmount?: number;
 
-  @Metadata({ data: "json, name=sourceCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCurrency" })
   sourceCurrency?: PaymentAuditCurrencyV3Enum;
 }

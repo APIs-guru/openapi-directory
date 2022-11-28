@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteFolderPathParams = /** @class */ (function (_super) {
     __extends(DeleteFolderPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteFolderPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FolderId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FolderId" }),
         __metadata("design:type", String)
     ], DeleteFolderPathParams.prototype, "folderId", void 0);
     return DeleteFolderPathParams;
@@ -42,7 +42,7 @@ var DeleteFolderHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], DeleteFolderHeaders.prototype, "xeroTenantId", void 0);
     return DeleteFolderHeaders;
@@ -54,7 +54,7 @@ var DeleteFolderSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], DeleteFolderSecurity.prototype, "oAuth2", void 0);
     return DeleteFolderSecurity;
@@ -66,15 +66,15 @@ var DeleteFolderRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFolderPathParams)
     ], DeleteFolderRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFolderHeaders)
     ], DeleteFolderRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFolderSecurity)
     ], DeleteFolderRequest.prototype, "security", void 0);
     return DeleteFolderRequest;
@@ -86,11 +86,11 @@ var DeleteFolderResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFolderResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteFolderResponse.prototype, "statusCode", void 0);
     return DeleteFolderResponse;

@@ -1,37 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Blob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blob_key" })
+  @SpeakeasyMetadata({ data: "json, name=blob_key" })
   blobKey?: string;
 
-  @Metadata({ data: "json, name=content_type" })
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=download_url" })
+  @SpeakeasyMetadata({ data: "json, name=download_url" })
   downloadUrl?: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=hash" })
+  @SpeakeasyMetadata({ data: "json, name=hash" })
   hash?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=time_created" })
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_last_accessed" })
+  @SpeakeasyMetadata({ data: "json, name=time_last_accessed" })
   timeLastAccessed?: string;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
 
-  @Metadata({ data: "json, name=upload_url" })
+  @SpeakeasyMetadata({ data: "json, name=upload_url" })
   uploadUrl?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
+}
+
+
+export class BlobInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=blob_key" })
+  blobKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
+  contentType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=filename" })
+  filename?: string;
 }

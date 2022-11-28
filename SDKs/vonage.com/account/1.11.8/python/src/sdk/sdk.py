@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,48 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def account_ctrl_get_account_services_by_account_id(self, request: operations.AccountCtrlGetAccountServicesByAccountIDRequest) -> operations.AccountCtrlGetAccountServicesByAccountIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get account data by ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/accounts/{account_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -47,13 +72,16 @@ class SDK:
 
     
     def account_ctrl_get_location_by_id(self, request: operations.AccountCtrlGetLocationByIDRequest) -> operations.AccountCtrlGetLocationByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get location data by account ID and location ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/accounts/{account_id}/locations/{location_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -70,13 +98,16 @@ class SDK:
 
     
     def account_ctrl_get_locations_by_account_id(self, request: operations.AccountCtrlGetLocationsByAccountIDRequest) -> operations.AccountCtrlGetLocationsByAccountIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get account locations data by account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/accounts/{account_id}/locations", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

@@ -1,5 +1,7 @@
 package shared
 
+// Event
+// The result set for the event search.
 type Event struct {
 	ApplicableCoupons    []Coupon `json:"applicableCoupons,omitempty"`
 	Description          *string  `json:"description,omitempty"`

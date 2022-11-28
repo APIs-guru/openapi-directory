@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Domain } from "./domain";
 import { DriveReference } from "./drivereference";
 import { TeamDriveReference } from "./teamdrivereference";
 import { User } from "./user";
+
 
 
 // Owner
@@ -10,15 +11,15 @@ import { User } from "./user";
  * Information about the owner of a Drive item.
 **/
 export class Owner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: Domain;
 
-  @Metadata({ data: "json, name=drive" })
+  @SpeakeasyMetadata({ data: "json, name=drive" })
   drive?: DriveReference;
 
-  @Metadata({ data: "json, name=teamDrive" })
+  @SpeakeasyMetadata({ data: "json, name=teamDrive" })
   teamDrive?: TeamDriveReference;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 }

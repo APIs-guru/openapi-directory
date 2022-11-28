@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import priceamount
+from sdk import utils
+from . import *
 
 class ReturnPolicyOnlineReturnShippingFeeTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class ReturnPolicyOnlineReturnShippingFeeTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReturnPolicyOnlineReturnShippingFee:
-    fixed_fee: Optional[priceamount.PriceAmount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fixedFee' }})
-    type: Optional[ReturnPolicyOnlineReturnShippingFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ReturnPolicyOnlineReturnShippingFee
+    The return shipping fee. This can either be a fixed fee or a boolean to indicate that the customer pays the actual shipping cost.
+    """
+    
+    fixed_fee: Optional[PriceAmount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fixedFee') }})
+    type: Optional[ReturnPolicyOnlineReturnShippingFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

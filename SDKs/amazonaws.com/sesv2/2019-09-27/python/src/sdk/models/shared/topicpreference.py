@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import subscriptionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TopicPreference:
-    subscription_status: subscriptionstatus_enum.SubscriptionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubscriptionStatus' }})
-    topic_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TopicName' }})
+    r"""TopicPreference
+    The contact's preference for being opted-in to or opted-out of a topic.
+    """
+    
+    subscription_status: SubscriptionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubscriptionStatus') }})
+    topic_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TopicName') }})
     

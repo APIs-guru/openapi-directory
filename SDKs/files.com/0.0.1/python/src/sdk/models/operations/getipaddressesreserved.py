@@ -11,12 +11,12 @@ class GetIPAddressesReservedQueryParams:
 
 @dataclass
 class GetIPAddressesReservedRequest:
-    query_params: GetIPAddressesReservedQueryParams = field(default=None)
+    query_params: GetIPAddressesReservedQueryParams = field()
     
 
 @dataclass
 class GetIPAddressesReservedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     public_ip_address_entities: Optional[List[shared.PublicIPAddressEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

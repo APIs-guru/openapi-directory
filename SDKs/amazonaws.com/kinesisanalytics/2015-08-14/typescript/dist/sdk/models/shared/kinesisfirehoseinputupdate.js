@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // KinesisFirehoseInputUpdate
 /**
  * When updating application input configuration, provides information about an Amazon Kinesis Firehose delivery stream as the streaming source.
@@ -33,11 +33,11 @@ var KinesisFirehoseInputUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ResourceARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceARNUpdate" }),
         __metadata("design:type", String)
     ], KinesisFirehoseInputUpdate.prototype, "resourceArnUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=RoleARNUpdate" }),
         __metadata("design:type", String)
     ], KinesisFirehoseInputUpdate.prototype, "roleArnUpdate", void 0);
     return KinesisFirehoseInputUpdate;

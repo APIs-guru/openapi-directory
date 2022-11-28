@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepStateEnum } from "./stepstateenum";
+
 
 
 // ListStepsInput
@@ -7,15 +8,15 @@ import { StepStateEnum } from "./stepstateenum";
  * This input determines which steps to list.
 **/
 export class ListStepsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=StepIds" })
+  @SpeakeasyMetadata({ data: "json, name=StepIds" })
   stepIds?: string[];
 
-  @Metadata({ data: "json, name=StepStates" })
+  @SpeakeasyMetadata({ data: "json, name=StepStates" })
   stepStates?: StepStateEnum[];
 }

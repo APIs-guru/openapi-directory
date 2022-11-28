@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetPrivilegesSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPrivilegesRequest:
-    security: GetPrivilegesSecurity = field(default=None)
+    security: GetPrivilegesSecurity = field()
     
 
 @dataclass
 class GetPrivilegesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     selling_privileges: Optional[shared.SellingPrivileges] = field(default=None)
-    status_code: int = field(default=None)
     

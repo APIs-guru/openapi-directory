@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignPublicIpEnum } from "./assignpublicipenum";
 // AwsVpcConfiguration
 /**
@@ -34,15 +34,15 @@ var AwsVpcConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssignPublicIp" }),
+        SpeakeasyMetadata({ data: "json, name=AssignPublicIp" }),
         __metadata("design:type", String)
     ], AwsVpcConfiguration.prototype, "assignPublicIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroups" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroups" }),
         __metadata("design:type", Array)
     ], AwsVpcConfiguration.prototype, "securityGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=Subnets" }),
+        SpeakeasyMetadata({ data: "json, name=Subnets" }),
         __metadata("design:type", Array)
     ], AwsVpcConfiguration.prototype, "subnets", void 0);
     return AwsVpcConfiguration;

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFulfillmentPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fulfillmentPolicyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fulfillmentPolicyId" })
   fulfillmentPolicyId: string;
 }
 
 
 export class GetFulfillmentPolicySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetFulfillmentPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFulfillmentPolicyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFulfillmentPolicySecurity;
 }
 
 
 export class GetFulfillmentPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fulfillmentPolicy?: shared.FulfillmentPolicy;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

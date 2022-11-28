@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GenderFullGeoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
   countryIso2: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fullName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fullName" })
   fullName: string;
 }
 
 
 export class GenderFullGeoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GenderFullGeoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GenderFullGeoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GenderFullGeoSecurity;
 }
 
 
 export class GenderFullGeoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   personalNameGenderedOut?: shared.PersonalNameGenderedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

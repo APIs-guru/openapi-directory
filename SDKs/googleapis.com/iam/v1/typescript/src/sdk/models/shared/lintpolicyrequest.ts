@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Expr } from "./expr";
+
 
 
 // LintPolicyRequest
@@ -7,9 +8,9 @@ import { Expr } from "./expr";
  * The request to lint a Cloud IAM policy object.
 **/
 export class LintPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: Expr;
 
-  @Metadata({ data: "json, name=fullResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=fullResourceName" })
   fullResourceName?: string;
 }

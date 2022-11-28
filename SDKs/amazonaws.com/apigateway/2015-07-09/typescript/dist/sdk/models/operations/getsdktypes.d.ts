@@ -1,10 +1,10 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class GetSdkTypesQueryParams extends SpeakeasyBase {
+export declare class GetSDKTypesQueryParams extends SpeakeasyBase {
     limit?: number;
     position?: string;
 }
-export declare class GetSdkTypesHeaders extends SpeakeasyBase {
+export declare class GetSDKTypesHeaders extends SpeakeasyBase {
     xAmzAlgorithm?: string;
     xAmzContentSha256?: string;
     xAmzCredential?: string;
@@ -13,15 +13,15 @@ export declare class GetSdkTypesHeaders extends SpeakeasyBase {
     xAmzSignature?: string;
     xAmzSignedHeaders?: string;
 }
-export declare class GetSdkTypesRequest extends SpeakeasyBase {
-    queryParams: GetSdkTypesQueryParams;
-    headers: GetSdkTypesHeaders;
+export declare class GetSDKTypesRequest extends SpeakeasyBase {
+    queryParams: GetSDKTypesQueryParams;
+    headers: GetSDKTypesHeaders;
 }
-export declare class GetSdkTypesResponse extends SpeakeasyBase {
+export declare class GetSDKTypesResponse extends SpeakeasyBase {
     badRequestException?: any;
     contentType: string;
     notFoundException?: any;
-    sdkTypes?: shared.SdkTypes;
+    sdkTypes?: shared.SDKTypes;
     statusCode: number;
     tooManyRequestsException?: any;
     unauthorizedException?: any;

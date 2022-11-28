@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WorkerLifecycleEventEventEnum(str, Enum):
     UNKNOWN_EVENT = "UNKNOWN_EVENT"
@@ -16,7 +18,11 @@ class WorkerLifecycleEventEventEnum(str, Enum):
 @dataclass_json
 @dataclass
 class WorkerLifecycleEvent:
-    container_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerStartTime' }})
-    event: Optional[WorkerLifecycleEventEventEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    r"""WorkerLifecycleEvent
+    A report of an event in a worker's lifecycle. The proto contains one event, because the worker is expected to asynchronously send each message immediately after the event. Due to this asynchrony, messages may arrive out of order (or missing), and it is up to the consumer to interpret. The timestamp of the event is in the enclosing WorkerMessage proto.
+    """
+    
+    container_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerStartTime') }})
+    event: Optional[WorkerLifecycleEventEventEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
     

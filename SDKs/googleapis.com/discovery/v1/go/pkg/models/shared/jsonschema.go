@@ -1,5 +1,7 @@
 package shared
 
+// JSONSchemaAnnotations
+// Additional information about this property.
 type JSONSchemaAnnotations struct {
 	Required []string `json:"required,omitempty"`
 }
@@ -9,6 +11,8 @@ type JSONSchemaVariantMap struct {
 	TypeValue *string `json:"type_value,omitempty"`
 }
 
+// JSONSchemaVariant
+// In a variant data type, the value of one property is used to determine how to interpret the entire entity. Its value must exist in a map of descriminant values to schema names.
 type JSONSchemaVariant struct {
 	Discriminant *string                `json:"discriminant,omitempty"`
 	Map          []JSONSchemaVariantMap `json:"map,omitempty"`

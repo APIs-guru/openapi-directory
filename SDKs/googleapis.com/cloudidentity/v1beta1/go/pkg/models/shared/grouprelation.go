@@ -9,6 +9,8 @@ const (
 	GroupRelationRelationTypeEnumDirectAndIndirect       GroupRelationRelationTypeEnum = "DIRECT_AND_INDIRECT"
 )
 
+// GroupRelation
+// Message representing a transitive group of a user or a group.
 type GroupRelation struct {
 	DisplayName  *string                        `json:"displayName,omitempty"`
 	Group        *string                        `json:"group,omitempty"`

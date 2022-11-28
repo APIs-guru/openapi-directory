@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Network
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * VM networking options.
 **/
 export class Network extends SpeakeasyBase {
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=subnetwork" })
+  @SpeakeasyMetadata({ data: "json, name=subnetwork" })
   subnetwork?: string;
 
-  @Metadata({ data: "json, name=usePrivateAddress" })
+  @SpeakeasyMetadata({ data: "json, name=usePrivateAddress" })
   usePrivateAddress?: boolean;
 }

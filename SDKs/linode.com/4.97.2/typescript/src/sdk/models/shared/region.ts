@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegionResolvers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipv4" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4" })
   ipv4?: string;
 
-  @Metadata({ data: "json, name=ipv6" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6" })
   ipv6?: string;
 }
 
 export enum RegionStatusEnum {
-    Ok = "ok"
-,    Outage = "outage"
+    Ok = "ok",
+    Outage = "outage"
 }
 
 
@@ -20,18 +21,18 @@ export enum RegionStatusEnum {
  * An area where Linode services are available.
 **/
 export class Region extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capabilities" })
+  @SpeakeasyMetadata({ data: "json, name=capabilities" })
   capabilities?: string[];
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=resolvers" })
+  @SpeakeasyMetadata({ data: "json, name=resolvers" })
   resolvers?: RegionResolvers;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: RegionStatusEnum;
 }

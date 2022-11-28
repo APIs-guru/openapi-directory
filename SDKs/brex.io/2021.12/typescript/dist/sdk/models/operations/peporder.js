@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var PepOrderTypeEnum;
 (function (PepOrderTypeEnum) {
@@ -36,11 +36,11 @@ var PepOrderPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=search" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=search" }),
         __metadata("design:type", String)
     ], PepOrderPathParams.prototype, "search", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" }),
         __metadata("design:type", String)
     ], PepOrderPathParams.prototype, "type", void 0);
     return PepOrderPathParams;
@@ -52,67 +52,67 @@ var PepOrderRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=Aliases;" }),
+        SpeakeasyMetadata({ data: "form, name=Aliases;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "aliases", void 0);
     __decorate([
-        Metadata({ data: "form, name=Country;" }),
+        SpeakeasyMetadata({ data: "form, name=Country;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "form, name=DOB;" }),
+        SpeakeasyMetadata({ data: "form, name=DOB;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "form, name=FamilyName;" }),
+        SpeakeasyMetadata({ data: "form, name=FamilyName;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "familyName", void 0);
     __decorate([
-        Metadata({ data: "form, name=Filters;" }),
+        SpeakeasyMetadata({ data: "form, name=Filters;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "form, name=GivenName;" }),
+        SpeakeasyMetadata({ data: "form, name=GivenName;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "givenName", void 0);
     __decorate([
-        Metadata({ data: "form, name=LEI;" }),
+        SpeakeasyMetadata({ data: "form, name=LEI;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "lei", void 0);
     __decorate([
-        Metadata({ data: "form, name=Locale;" }),
+        SpeakeasyMetadata({ data: "form, name=Locale;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "locale", void 0);
     __decorate([
-        Metadata({ data: "form, name=Medialists;" }),
+        SpeakeasyMetadata({ data: "form, name=Medialists;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "medialists", void 0);
     __decorate([
-        Metadata({ data: "form, name=MiddleName;" }),
+        SpeakeasyMetadata({ data: "form, name=MiddleName;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "middleName", void 0);
     __decorate([
-        Metadata({ data: "form, name=Monitoring;" }),
+        SpeakeasyMetadata({ data: "form, name=Monitoring;" }),
         __metadata("design:type", Boolean)
     ], PepOrderRequestBody.prototype, "monitoring", void 0);
     __decorate([
-        Metadata({ data: "form, name=Peplists;" }),
+        SpeakeasyMetadata({ data: "form, name=Peplists;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "peplists", void 0);
     __decorate([
-        Metadata({ data: "form, name=Region;" }),
+        SpeakeasyMetadata({ data: "form, name=Region;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "form, name=SmartMatch;" }),
+        SpeakeasyMetadata({ data: "form, name=SmartMatch;" }),
         __metadata("design:type", Boolean)
     ], PepOrderRequestBody.prototype, "smartMatch", void 0);
     __decorate([
-        Metadata({ data: "form, name=Watchlists;" }),
+        SpeakeasyMetadata({ data: "form, name=Watchlists;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "watchlists", void 0);
     __decorate([
-        Metadata({ data: "form, name=Webhook;" }),
+        SpeakeasyMetadata({ data: "form, name=Webhook;" }),
         __metadata("design:type", String)
     ], PepOrderRequestBody.prototype, "webhook", void 0);
     return PepOrderRequestBody;
@@ -124,7 +124,7 @@ var PepOrderSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], PepOrderSecurity.prototype, "userKey", void 0);
     return PepOrderSecurity;
@@ -136,15 +136,15 @@ var PepOrderRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PepOrderPathParams)
     ], PepOrderRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", PepOrderRequestBody)
     ], PepOrderRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PepOrderSecurity)
     ], PepOrderRequest.prototype, "security", void 0);
     return PepOrderRequest;
@@ -156,19 +156,19 @@ var PepOrderResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PepOrderResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PepOrderResponse.prototype, "pepOrder200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PepOrderResponse.prototype, "pepOrderDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PepOrderResponse.prototype, "statusCode", void 0);
     return PepOrderResponse;

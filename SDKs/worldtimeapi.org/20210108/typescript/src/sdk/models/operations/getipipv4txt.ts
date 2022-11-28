@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetIpIpv4TxtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ipv4" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ipv4" })
   ipv4: string;
 }
 
 
 export class GetIpIpv4TxtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetIpIpv4TxtPathParams;
 }
 
 
 export class GetIpIpv4TxtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dateTimeTextResponse?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorTextResponse?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceColumn } from "./datasourcecolumn";
 import { DataExecutionStatus } from "./dataexecutionstatus";
+
 
 
 // DataSourceSheetProperties
@@ -9,12 +9,12 @@ import { DataExecutionStatus } from "./dataexecutionstatus";
  * Additional properties of a DATA_SOURCE sheet.
 **/
 export class DataSourceSheetProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns", elemType: shared.DataSourceColumn })
+  @SpeakeasyMetadata({ data: "json, name=columns", elemType: DataSourceColumn })
   columns?: DataSourceColumn[];
 
-  @Metadata({ data: "json, name=dataExecutionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=dataExecutionStatus" })
   dataExecutionStatus?: DataExecutionStatus;
 
-  @Metadata({ data: "json, name=dataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceId" })
   dataSourceId?: string;
 }

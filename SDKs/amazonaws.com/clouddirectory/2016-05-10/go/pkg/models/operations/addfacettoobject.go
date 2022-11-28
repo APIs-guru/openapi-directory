@@ -15,10 +15,14 @@ type AddFacetToObjectHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// AddFacetToObjectRequestBodyObjectReference
+// The reference that identifies an object.
 type AddFacetToObjectRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// AddFacetToObjectRequestBodySchemaFacet
+// A facet.
 type AddFacetToObjectRequestBodySchemaFacet struct {
 	FacetName *string `json:"FacetName,omitempty"`
 	SchemaArn *string `json:"SchemaArn,omitempty"`

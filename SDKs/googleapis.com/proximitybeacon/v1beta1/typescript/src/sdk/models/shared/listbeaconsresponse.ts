@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Beacon } from "./beacon";
+
 
 
 // ListBeaconsResponse
@@ -8,12 +8,12 @@ import { Beacon } from "./beacon";
  * Response that contains list beacon results and pagination help.
 **/
 export class ListBeaconsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=beacons", elemType: shared.Beacon })
+  @SpeakeasyMetadata({ data: "json, name=beacons", elemType: Beacon })
   beacons?: Beacon[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: string;
 }

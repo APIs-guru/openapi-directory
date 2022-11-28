@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import api_core_dto_accounting_domainwhitelistentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class APICoreResponsesEntitiesResponseAPICoreDtoAccountingDomainWhitelistEntry:
-    entities: Optional[List[api_core_dto_accounting_domainwhitelistentry.APICoreDtoAccountingDomainWhitelistEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entities' }})
+    entities: Optional[List[APICoreDtoAccountingDomainWhitelistEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entities') }})
     

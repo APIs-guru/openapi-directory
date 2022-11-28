@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var EnvironmentStateEnum;
 (function (EnvironmentStateEnum) {
     EnvironmentStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -41,39 +41,39 @@ var Environment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dockerImage" }),
+        SpeakeasyMetadata({ data: "json, name=dockerImage" }),
         __metadata("design:type", String)
     ], Environment.prototype, "dockerImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Environment.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Environment.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=publicKeys" }),
+        SpeakeasyMetadata({ data: "json, name=publicKeys" }),
         __metadata("design:type", Array)
     ], Environment.prototype, "publicKeys", void 0);
     __decorate([
-        Metadata({ data: "json, name=sshHost" }),
+        SpeakeasyMetadata({ data: "json, name=sshHost" }),
         __metadata("design:type", String)
     ], Environment.prototype, "sshHost", void 0);
     __decorate([
-        Metadata({ data: "json, name=sshPort" }),
+        SpeakeasyMetadata({ data: "json, name=sshPort" }),
         __metadata("design:type", Number)
     ], Environment.prototype, "sshPort", void 0);
     __decorate([
-        Metadata({ data: "json, name=sshUsername" }),
+        SpeakeasyMetadata({ data: "json, name=sshUsername" }),
         __metadata("design:type", String)
     ], Environment.prototype, "sshUsername", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Environment.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=webHost" }),
+        SpeakeasyMetadata({ data: "json, name=webHost" }),
         __metadata("design:type", String)
     ], Environment.prototype, "webHost", void 0);
     return Environment;

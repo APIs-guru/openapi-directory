@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutSeriesIdAttachmentsNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class PutSeriesIdAttachmentsNameHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Match" })
   ifMatch?: string;
 }
 
 
 export class PutSeriesIdAttachmentsNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSeriesIdAttachmentsNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutSeriesIdAttachmentsNameHeaders;
 
-  @Metadata({ data: "request, media_type=application/octet-stream" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/octet-stream" })
   request?: Uint8Array;
 }
 
 
 export class PutSeriesIdAttachmentsNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSeriesIdAttachmentsName200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

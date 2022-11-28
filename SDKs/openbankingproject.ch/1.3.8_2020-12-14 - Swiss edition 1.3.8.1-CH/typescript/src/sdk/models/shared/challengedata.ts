@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChallengeDataOtpFormatEnum {
-    Characters = "characters"
-,    Integer = "integer"
+    Characters = "characters",
+    Integer = "integer"
 }
 
 
@@ -13,21 +14,21 @@ export enum ChallengeDataOtpFormatEnum {
  * 
 **/
 export class ChallengeData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalInformation" })
+  @SpeakeasyMetadata({ data: "json, name=additionalInformation" })
   additionalInformation?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=imageLink" })
+  @SpeakeasyMetadata({ data: "json, name=imageLink" })
   imageLink?: string;
 
-  @Metadata({ data: "json, name=otpFormat" })
+  @SpeakeasyMetadata({ data: "json, name=otpFormat" })
   otpFormat?: ChallengeDataOtpFormatEnum;
 
-  @Metadata({ data: "json, name=otpMaxLength" })
+  @SpeakeasyMetadata({ data: "json, name=otpMaxLength" })
   otpMaxLength?: number;
 }

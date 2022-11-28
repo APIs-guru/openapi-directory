@@ -1,5 +1,7 @@
 package shared
 
+// Connection
+// Status of the connection between an endpoint and a replication instance, including Amazon Resource Names (ARNs) and the last error message issued.
 type Connection struct {
 	EndpointArn                   *string `json:"EndpointArn,omitempty"`
 	EndpointIdentifier            *string `json:"EndpointIdentifier,omitempty"`

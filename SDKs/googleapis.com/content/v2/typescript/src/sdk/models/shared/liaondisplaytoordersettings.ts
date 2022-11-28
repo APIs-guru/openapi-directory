@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiaOnDisplayToOrderSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=shippingCostPolicyUrl" })
+  @SpeakeasyMetadata({ data: "json, name=shippingCostPolicyUrl" })
   shippingCostPolicyUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

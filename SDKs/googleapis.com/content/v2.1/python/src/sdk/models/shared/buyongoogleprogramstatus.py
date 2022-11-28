@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class BuyOnGoogleProgramStatusBusinessModelEnum(str, Enum):
     BUSINESS_MODEL_UNSPECIFIED = "BUSINESS_MODEL_UNSPECIFIED"
@@ -28,14 +30,32 @@ class BuyOnGoogleProgramStatusParticipationStageEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class BuyOnGoogleProgramStatusInput:
+    r"""BuyOnGoogleProgramStatusInput
+    Response message for the GetProgramStatus method.
+    """
+    
+    business_model: Optional[List[BuyOnGoogleProgramStatusBusinessModelEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('businessModel') }})
+    customer_service_pending_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServicePendingEmail') }})
+    customer_service_pending_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServicePendingPhoneNumber') }})
+    customer_service_pending_phone_region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServicePendingPhoneRegionCode') }})
+    online_sales_channel: Optional[BuyOnGoogleProgramStatusOnlineSalesChannelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onlineSalesChannel') }})
+    
+
+@dataclass_json
+@dataclass
 class BuyOnGoogleProgramStatus:
-    business_model: Optional[List[BuyOnGoogleProgramStatusBusinessModelEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'businessModel' }})
-    customer_service_pending_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerServicePendingEmail' }})
-    customer_service_pending_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerServicePendingPhoneNumber' }})
-    customer_service_pending_phone_region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerServicePendingPhoneRegionCode' }})
-    customer_service_verified_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerServiceVerifiedEmail' }})
-    customer_service_verified_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerServiceVerifiedPhoneNumber' }})
-    customer_service_verified_phone_region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerServiceVerifiedPhoneRegionCode' }})
-    online_sales_channel: Optional[BuyOnGoogleProgramStatusOnlineSalesChannelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onlineSalesChannel' }})
-    participation_stage: Optional[BuyOnGoogleProgramStatusParticipationStageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participationStage' }})
+    r"""BuyOnGoogleProgramStatus
+    Response message for the GetProgramStatus method.
+    """
+    
+    business_model: Optional[List[BuyOnGoogleProgramStatusBusinessModelEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('businessModel') }})
+    customer_service_pending_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServicePendingEmail') }})
+    customer_service_pending_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServicePendingPhoneNumber') }})
+    customer_service_pending_phone_region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServicePendingPhoneRegionCode') }})
+    customer_service_verified_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServiceVerifiedEmail') }})
+    customer_service_verified_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServiceVerifiedPhoneNumber') }})
+    customer_service_verified_phone_region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerServiceVerifiedPhoneRegionCode') }})
+    online_sales_channel: Optional[BuyOnGoogleProgramStatusOnlineSalesChannelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onlineSalesChannel') }})
+    participation_stage: Optional[BuyOnGoogleProgramStatusParticipationStageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('participationStage') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LifecyclePolicyPreviewResult
+// The result of the lifecycle policy preview.
 type LifecyclePolicyPreviewResult struct {
 	Action              *LifecyclePolicyRuleAction `json:"action,omitempty"`
 	AppliedRulePriority *int64                     `json:"appliedRulePriority,omitempty"`

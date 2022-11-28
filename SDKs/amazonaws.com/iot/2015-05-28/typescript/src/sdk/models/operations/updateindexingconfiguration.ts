@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateIndexingConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,13 +32,13 @@ export class UpdateIndexingConfigurationHeaders extends SpeakeasyBase {
  * Thing group indexing configuration.
 **/
 export class UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=customFields", elemType: shared.Field })
   customFields?: shared.Field[];
 
-  @Metadata({ data: "json, name=managedFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=managedFields", elemType: shared.Field })
   managedFields?: shared.Field[];
 
-  @Metadata({ data: "json, name=thingGroupIndexingMode" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupIndexingMode" })
   thingGroupIndexingMode?: shared.ThingGroupIndexingModeEnum;
 }
 
@@ -47,60 +48,60 @@ export class UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfigurati
  * The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing Thing Indexing</a>.
 **/
 export class UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=customFields", elemType: shared.Field })
   customFields?: shared.Field[];
 
-  @Metadata({ data: "json, name=managedFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=managedFields", elemType: shared.Field })
   managedFields?: shared.Field[];
 
-  @Metadata({ data: "json, name=thingConnectivityIndexingMode" })
+  @SpeakeasyMetadata({ data: "json, name=thingConnectivityIndexingMode" })
   thingConnectivityIndexingMode?: shared.ThingConnectivityIndexingModeEnum;
 
-  @Metadata({ data: "json, name=thingIndexingMode" })
+  @SpeakeasyMetadata({ data: "json, name=thingIndexingMode" })
   thingIndexingMode?: shared.ThingIndexingModeEnum;
 }
 
 
 export class UpdateIndexingConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=thingGroupIndexingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupIndexingConfiguration" })
   thingGroupIndexingConfiguration?: UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration;
 
-  @Metadata({ data: "json, name=thingIndexingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=thingIndexingConfiguration" })
   thingIndexingConfiguration?: UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration;
 }
 
 
 export class UpdateIndexingConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateIndexingConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateIndexingConfigurationRequestBody;
 }
 
 
 export class UpdateIndexingConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateIndexingConfigurationResponse?: Map<string, any>;
 }

@@ -1,16 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class GetIsosIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetIsosIDRequest:
-    path_params: GetIsosIDPathParams = field(default=None)
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class GetIsosID200ApplicationJSONIsoTypeEnum(str, Enum):
     PUBLIC = "public"
@@ -20,22 +17,27 @@ class GetIsosID200ApplicationJSONIsoTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetIsosID200ApplicationJSONIso:
-    deprecated: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deprecated' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: GetIsosID200ApplicationJSONIsoTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    deprecated: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deprecated') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: GetIsosID200ApplicationJSONIsoTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class GetIsosID200ApplicationJSON:
-    iso: GetIsosID200ApplicationJSONIso = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso' }})
+    iso: GetIsosID200ApplicationJSONIso = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('iso') }})
+    
+
+@dataclass
+class GetIsosIDRequest:
+    path_params: GetIsosIDPathParams = field()
     
 
 @dataclass
 class GetIsosIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_isos_id_200_application_json_object: Optional[GetIsosID200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

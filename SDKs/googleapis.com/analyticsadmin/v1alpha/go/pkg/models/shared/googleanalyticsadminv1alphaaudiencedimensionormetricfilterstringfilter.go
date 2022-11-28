@@ -11,6 +11,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnumFullRegexp           GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnum = "FULL_REGEXP"
 )
 
+// GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilter
+// A filter for a string-type dimension that matches a particular pattern.
 type GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilter struct {
 	CaseSensitive *bool                                                                                `json:"caseSensitive,omitempty"`
 	MatchType     *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnum `json:"matchType,omitempty"`

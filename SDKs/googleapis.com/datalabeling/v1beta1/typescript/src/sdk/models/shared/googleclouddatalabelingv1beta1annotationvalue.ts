@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1ImageBoundingPolyAnnotation } from "./googleclouddatalabelingv1beta1imageboundingpolyannotation";
 import { GoogleCloudDatalabelingV1beta1ImageClassificationAnnotation } from "./googleclouddatalabelingv1beta1imageclassificationannotation";
 import { GoogleCloudDatalabelingV1beta1ImagePolylineAnnotation } from "./googleclouddatalabelingv1beta1imagepolylineannotation";
@@ -10,35 +10,36 @@ import { GoogleCloudDatalabelingV1beta1VideoEventAnnotation } from "./googleclou
 import { GoogleCloudDatalabelingV1beta1VideoObjectTrackingAnnotation } from "./googleclouddatalabelingv1beta1videoobjecttrackingannotation";
 
 
+
 // GoogleCloudDatalabelingV1beta1AnnotationValue
 /** 
  * Annotation value for an example.
 **/
 export class GoogleCloudDatalabelingV1beta1AnnotationValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageBoundingPolyAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=imageBoundingPolyAnnotation" })
   imageBoundingPolyAnnotation?: GoogleCloudDatalabelingV1beta1ImageBoundingPolyAnnotation;
 
-  @Metadata({ data: "json, name=imageClassificationAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=imageClassificationAnnotation" })
   imageClassificationAnnotation?: GoogleCloudDatalabelingV1beta1ImageClassificationAnnotation;
 
-  @Metadata({ data: "json, name=imagePolylineAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=imagePolylineAnnotation" })
   imagePolylineAnnotation?: GoogleCloudDatalabelingV1beta1ImagePolylineAnnotation;
 
-  @Metadata({ data: "json, name=imageSegmentationAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=imageSegmentationAnnotation" })
   imageSegmentationAnnotation?: GoogleCloudDatalabelingV1beta1ImageSegmentationAnnotation;
 
-  @Metadata({ data: "json, name=textClassificationAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=textClassificationAnnotation" })
   textClassificationAnnotation?: GoogleCloudDatalabelingV1beta1TextClassificationAnnotation;
 
-  @Metadata({ data: "json, name=textEntityExtractionAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=textEntityExtractionAnnotation" })
   textEntityExtractionAnnotation?: GoogleCloudDatalabelingV1beta1TextEntityExtractionAnnotation;
 
-  @Metadata({ data: "json, name=videoClassificationAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=videoClassificationAnnotation" })
   videoClassificationAnnotation?: GoogleCloudDatalabelingV1beta1VideoClassificationAnnotation;
 
-  @Metadata({ data: "json, name=videoEventAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=videoEventAnnotation" })
   videoEventAnnotation?: GoogleCloudDatalabelingV1beta1VideoEventAnnotation;
 
-  @Metadata({ data: "json, name=videoObjectTrackingAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=videoObjectTrackingAnnotation" })
   videoObjectTrackingAnnotation?: GoogleCloudDatalabelingV1beta1VideoObjectTrackingAnnotation;
 }

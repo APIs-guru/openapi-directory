@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LaunchTemplateConfiguration
 /**
  * Identifies an Amazon EC2 launch template to use for a specific account.
@@ -33,15 +33,15 @@ var LaunchTemplateConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], LaunchTemplateConfiguration.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchTemplateId" }),
+        SpeakeasyMetadata({ data: "json, name=launchTemplateId" }),
         __metadata("design:type", String)
     ], LaunchTemplateConfiguration.prototype, "launchTemplateId", void 0);
     __decorate([
-        Metadata({ data: "json, name=setDefaultVersion" }),
+        SpeakeasyMetadata({ data: "json, name=setDefaultVersion" }),
         __metadata("design:type", Boolean)
     ], LaunchTemplateConfiguration.prototype, "setDefaultVersion", void 0);
     return LaunchTemplateConfiguration;

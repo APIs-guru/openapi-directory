@@ -8,6 +8,8 @@ const (
 	CloudAuditOptionsLogNameEnumDataAccess         CloudAuditOptionsLogNameEnum = "DATA_ACCESS"
 )
 
+// CloudAuditOptions
+// Write a Cloud Audit log
 type CloudAuditOptions struct {
 	AuthorizationLoggingOptions *AuthorizationLoggingOptions  `json:"authorizationLoggingOptions,omitempty"`
 	LogName                     *CloudAuditOptionsLogNameEnum `json:"logName,omitempty"`

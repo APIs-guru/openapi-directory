@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BucketPolicy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the permissions settings of the bucket policy for an S3 bucket.
 **/
 export class BucketPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowsPublicReadAccess" })
+  @SpeakeasyMetadata({ data: "json, name=allowsPublicReadAccess" })
   allowsPublicReadAccess?: boolean;
 
-  @Metadata({ data: "json, name=allowsPublicWriteAccess" })
+  @SpeakeasyMetadata({ data: "json, name=allowsPublicWriteAccess" })
   allowsPublicWriteAccess?: boolean;
 }

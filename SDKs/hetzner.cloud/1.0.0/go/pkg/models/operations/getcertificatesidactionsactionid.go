@@ -5,10 +5,8 @@ type GetCertificatesIDActionsActionIDPathParams struct {
 	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetCertificatesIDActionsActionIDRequest struct {
-	PathParams GetCertificatesIDActionsActionIDPathParams
-}
-
+// GetCertificatesIDActionsActionIDActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetCertificatesIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type GetCertificatesIDActionsActionIDActionResponseAction struct {
 
 type GetCertificatesIDActionsActionIDActionResponse struct {
 	Action GetCertificatesIDActionsActionIDActionResponseAction `json:"action"`
+}
+
+type GetCertificatesIDActionsActionIDRequest struct {
+	PathParams GetCertificatesIDActionsActionIDPathParams
 }
 
 type GetCertificatesIDActionsActionIDResponse struct {

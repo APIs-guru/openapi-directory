@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserUndelete extends SpeakeasyBase {
-  @Metadata({ data: "json, name=orgUnitPath" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitPath" })
   orgUnitPath?: string;
 }

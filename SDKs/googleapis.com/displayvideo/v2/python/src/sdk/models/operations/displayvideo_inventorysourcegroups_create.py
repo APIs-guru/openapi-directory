@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,20 +23,20 @@ class DisplayvideoInventorySourceGroupsCreateQueryParams:
 
 @dataclass
 class DisplayvideoInventorySourceGroupsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsCreateRequest:
-    query_params: DisplayvideoInventorySourceGroupsCreateQueryParams = field(default=None)
-    request: Optional[shared.InventorySourceGroup] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoInventorySourceGroupsCreateSecurity = field(default=None)
+    query_params: DisplayvideoInventorySourceGroupsCreateQueryParams = field()
+    security: DisplayvideoInventorySourceGroupsCreateSecurity = field()
+    request: Optional[shared.InventorySourceGroupInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inventory_source_group: Optional[shared.InventorySourceGroup] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataCatalogTypeEnum } from "./datacatalogtypeenum";
+
 
 
 // DataCatalogSummary
@@ -7,9 +8,9 @@ import { DataCatalogTypeEnum } from "./datacatalogtypeenum";
  * The summary information for the data catalog, which includes its name and type.
 **/
 export class DataCatalogSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogName" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogName" })
   catalogName?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: DataCatalogTypeEnum;
 }

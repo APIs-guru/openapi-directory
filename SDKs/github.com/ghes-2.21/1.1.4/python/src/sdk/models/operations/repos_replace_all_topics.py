@@ -1,38 +1,39 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ReposReplaceAllTopicsPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class ReposReplaceAllTopicsRequestBody:
-    names: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'names' }})
-    
-
-@dataclass
-class ReposReplaceAllTopicsRequest:
-    path_params: ReposReplaceAllTopicsPathParams = field(default=None)
-    request: Optional[ReposReplaceAllTopicsRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    names: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('names') }})
     
 
 @dataclass_json
 @dataclass
 class ReposReplaceAllTopics415ApplicationJSON:
-    documentation_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentation_url' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    documentation_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentation_url') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    
+
+@dataclass
+class ReposReplaceAllTopicsRequest:
+    path_params: ReposReplaceAllTopicsPathParams = field()
+    request: Optional[ReposReplaceAllTopicsRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ReposReplaceAllTopicsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     repos_replace_all_topics_415_application_json_object: Optional[ReposReplaceAllTopics415ApplicationJSON] = field(default=None)
     topic: Optional[shared.Topic] = field(default=None)

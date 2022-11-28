@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
+
 
 
 // PublisherProvidedForecast
@@ -8,12 +8,12 @@ import { Dimension } from "./dimension";
  * This message carries publisher provided forecasting information.
 **/
 export class PublisherProvidedForecast extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=weeklyImpressions" })
+  @SpeakeasyMetadata({ data: "json, name=weeklyImpressions" })
   weeklyImpressions?: string;
 
-  @Metadata({ data: "json, name=weeklyUniques" })
+  @SpeakeasyMetadata({ data: "json, name=weeklyUniques" })
   weeklyUniques?: string;
 }

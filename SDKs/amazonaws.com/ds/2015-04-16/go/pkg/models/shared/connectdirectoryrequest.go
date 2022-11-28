@@ -1,5 +1,7 @@
 package shared
 
+// ConnectDirectoryRequest
+// Contains the inputs for the <a>ConnectDirectory</a> operation.
 type ConnectDirectoryRequest struct {
 	ConnectSettings DirectoryConnectSettings `json:"ConnectSettings"`
 	Description     *string                  `json:"Description,omitempty"`

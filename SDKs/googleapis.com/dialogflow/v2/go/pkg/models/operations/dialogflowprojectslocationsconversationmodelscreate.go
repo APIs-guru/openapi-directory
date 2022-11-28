@@ -40,7 +40,7 @@ type DialogflowProjectsLocationsConversationModelsCreateSecurity struct {
 type DialogflowProjectsLocationsConversationModelsCreateRequest struct {
 	PathParams  DialogflowProjectsLocationsConversationModelsCreatePathParams
 	QueryParams DialogflowProjectsLocationsConversationModelsCreateQueryParams
-	Request     *shared.GoogleCloudDialogflowV2ConversationModel `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowV2ConversationModelInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsConversationModelsCreateSecurity
 }
 

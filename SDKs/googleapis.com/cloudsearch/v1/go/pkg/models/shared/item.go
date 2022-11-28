@@ -9,6 +9,8 @@ const (
 	ItemItemTypeEnumVirtualContainerItem ItemItemTypeEnum = "VIRTUAL_CONTAINER_ITEM"
 )
 
+// Item
+// Represents a single object that is an item in the search index, such as a file, folder, or a database record.
 type Item struct {
 	ACL            *ItemACL            `json:"acl,omitempty"`
 	Content        *ItemContent        `json:"content,omitempty"`

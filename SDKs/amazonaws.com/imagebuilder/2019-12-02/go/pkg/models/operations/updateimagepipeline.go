@@ -14,11 +14,15 @@ type UpdateImagePipelineHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateImagePipelineRequestBodyImageTestsConfiguration
+// Image tests configuration.
 type UpdateImagePipelineRequestBodyImageTestsConfiguration struct {
 	ImageTestsEnabled *bool  `json:"imageTestsEnabled,omitempty"`
 	TimeoutMinutes    *int64 `json:"timeoutMinutes,omitempty"`
 }
 
+// UpdateImagePipelineRequestBodySchedule
+// A schedule configures how often and when a pipeline will automatically create a new image.
 type UpdateImagePipelineRequestBodySchedule struct {
 	PipelineExecutionStartCondition *shared.PipelineExecutionStartConditionEnum `json:"pipelineExecutionStartCondition,omitempty"`
 	ScheduleExpression              *string                                     `json:"scheduleExpression,omitempty"`

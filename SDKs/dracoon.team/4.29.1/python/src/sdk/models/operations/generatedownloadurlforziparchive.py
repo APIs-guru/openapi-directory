@@ -10,14 +10,14 @@ class GenerateDownloadURLForZipArchiveHeaders:
 
 @dataclass
 class GenerateDownloadURLForZipArchiveRequest:
-    headers: GenerateDownloadURLForZipArchiveHeaders = field(default=None)
-    request: shared.ZipDownloadRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GenerateDownloadURLForZipArchiveHeaders = field()
+    request: shared.ZipDownloadRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GenerateDownloadURLForZipArchiveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     download_token_generate_response: Optional[shared.DownloadTokenGenerateResponse] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

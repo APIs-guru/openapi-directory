@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PatchChargeStationVariablePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum PatchChargeStationVariableRequestBodyVariableEnum {
-    MeterValueSampleInterval = "MeterValueSampleInterval"
-,    HeartbeatInterval = "HeartbeatInterval"
-,    ConnectionTimeOut = "ConnectionTimeOut"
-,    WebSocketPingInterval = "WebSocketPingInterval"
-,    TransactionMessageRetryInterval = "TransactionMessageRetryInterval"
-,    TransactionMessageAttempts = "TransactionMessageAttempts"
+    MeterValueSampleInterval = "MeterValueSampleInterval",
+    HeartbeatInterval = "HeartbeatInterval",
+    ConnectionTimeOut = "ConnectionTimeOut",
+    WebSocketPingInterval = "WebSocketPingInterval",
+    TransactionMessageRetryInterval = "TransactionMessageRetryInterval",
+    TransactionMessageAttempts = "TransactionMessageAttempts"
 }
 
 
 export class PatchChargeStationVariableRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 
-  @Metadata({ data: "json, name=variable" })
+  @SpeakeasyMetadata({ data: "json, name=variable" })
   variable?: PatchChargeStationVariableRequestBodyVariableEnum;
 }
 
 
-export class PatchChargeStationVariableRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PatchChargeStationVariablePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PatchChargeStationVariableRequestBody;
-}
-
-
 export class PatchChargeStationVariable201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok?: boolean;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: Map<string, any>;
 }
 
 
+export class PatchChargeStationVariableRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PatchChargeStationVariablePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PatchChargeStationVariableRequestBody;
+}
+
+
 export class PatchChargeStationVariableResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   patchChargeStationVariable201ApplicationJsonObject?: PatchChargeStationVariable201ApplicationJson;
 }

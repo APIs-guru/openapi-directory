@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TemplateSummary
+// Summary information for a template.
 type TemplateSummary struct {
 	Arn           *string    `json:"arn,omitempty"`
 	CreatedAt     *time.Time `json:"createdAt,omitempty"`

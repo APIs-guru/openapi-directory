@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListDashboardsActionEnum(str, Enum):
     LIST_DASHBOARDS = "ListDashboards"
@@ -10,9 +14,9 @@ class PostListDashboardsVersionEnum(str, Enum):
 
 @dataclass
 class PostListDashboardsQueryParams:
-    action: PostListDashboardsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostListDashboardsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListDashboardsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostListDashboardsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,14 +32,14 @@ class PostListDashboardsHeaders:
 
 @dataclass
 class PostListDashboardsRequest:
-    query_params: PostListDashboardsQueryParams = field(default=None)
-    headers: PostListDashboardsHeaders = field(default=None)
+    headers: PostListDashboardsHeaders = field()
+    query_params: PostListDashboardsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListDashboardsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

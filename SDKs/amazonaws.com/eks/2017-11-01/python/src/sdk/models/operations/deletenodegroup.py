@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteNodegroupPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    nodegroup_name: str = field(default=None, metadata={'path_param': { 'field_name': 'nodegroupName', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    nodegroup_name: str = field(metadata={'path_param': { 'field_name': 'nodegroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,19 +25,19 @@ class DeleteNodegroupHeaders:
 
 @dataclass
 class DeleteNodegroupRequest:
-    path_params: DeleteNodegroupPathParams = field(default=None)
-    headers: DeleteNodegroupHeaders = field(default=None)
+    headers: DeleteNodegroupHeaders = field()
+    path_params: DeleteNodegroupPathParams = field()
     
 
 @dataclass
 class DeleteNodegroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_nodegroup_response: Optional[shared.DeleteNodegroupResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

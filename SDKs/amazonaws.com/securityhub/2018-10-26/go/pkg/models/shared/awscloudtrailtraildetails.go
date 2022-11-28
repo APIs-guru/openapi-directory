@@ -1,5 +1,7 @@
 package shared
 
+// AwsCloudTrailTrailDetails
+// Provides details about a CloudTrail trail.
 type AwsCloudTrailTrailDetails struct {
 	CloudWatchLogsLogGroupArn  *string `json:"CloudWatchLogsLogGroupArn,omitempty"`
 	CloudWatchLogsRoleArn      *string `json:"CloudWatchLogsRoleArn,omitempty"`

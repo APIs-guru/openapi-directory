@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1Export
+// Details of an export job.
 type GoogleCloudApigeeV1Export struct {
 	Created       *string `json:"created,omitempty"`
 	DatastoreName *string `json:"datastoreName,omitempty"`

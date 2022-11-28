@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BranchDiffSourceCodeType } from "./branchdiffsourcecodetype";
 import { CommitDiffSourceCodeType } from "./commitdiffsourcecodetype";
 import { RepositoryHeadSourceCodeType } from "./repositoryheadsourcecodetype";

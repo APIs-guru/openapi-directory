@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetCompositeModel } from "./assetcompositemodel";
 import { AssetHierarchy } from "./assethierarchy";
 import { AssetProperty } from "./assetproperty";
 import { AssetStatus } from "./assetstatus";
 
 
+
 export class DescribeAssetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetArn" })
+  @SpeakeasyMetadata({ data: "json, name=assetArn" })
   assetArn: string;
 
-  @Metadata({ data: "json, name=assetCompositeModels", elemType: shared.AssetCompositeModel })
+  @SpeakeasyMetadata({ data: "json, name=assetCompositeModels", elemType: AssetCompositeModel })
   assetCompositeModels?: AssetCompositeModel[];
 
-  @Metadata({ data: "json, name=assetCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=assetCreationDate" })
   assetCreationDate: Date;
 
-  @Metadata({ data: "json, name=assetHierarchies", elemType: shared.AssetHierarchy })
+  @SpeakeasyMetadata({ data: "json, name=assetHierarchies", elemType: AssetHierarchy })
   assetHierarchies: AssetHierarchy[];
 
-  @Metadata({ data: "json, name=assetId" })
+  @SpeakeasyMetadata({ data: "json, name=assetId" })
   assetId: string;
 
-  @Metadata({ data: "json, name=assetLastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=assetLastUpdateDate" })
   assetLastUpdateDate: Date;
 
-  @Metadata({ data: "json, name=assetModelId" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelId" })
   assetModelId: string;
 
-  @Metadata({ data: "json, name=assetName" })
+  @SpeakeasyMetadata({ data: "json, name=assetName" })
   assetName: string;
 
-  @Metadata({ data: "json, name=assetProperties", elemType: shared.AssetProperty })
+  @SpeakeasyMetadata({ data: "json, name=assetProperties", elemType: AssetProperty })
   assetProperties: AssetProperty[];
 
-  @Metadata({ data: "json, name=assetStatus" })
+  @SpeakeasyMetadata({ data: "json, name=assetStatus" })
   assetStatus: AssetStatus;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalResponse
+// Response message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
 type GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalResponse struct {
 	DisplayVideo360AdvertiserLink *GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink `json:"displayVideo360AdvertiserLink,omitempty"`
 }

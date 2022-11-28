@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LastActiveDefinition } from "./lastactivedefinition";
 import { BlueprintStatusEnum } from "./blueprintstatusenum";
+
 
 
 // Blueprint
@@ -8,33 +9,33 @@ import { BlueprintStatusEnum } from "./blueprintstatusenum";
  * The details of a blueprint.
 **/
 export class Blueprint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlueprintLocation" })
+  @SpeakeasyMetadata({ data: "json, name=BlueprintLocation" })
   blueprintLocation?: string;
 
-  @Metadata({ data: "json, name=BlueprintServiceLocation" })
+  @SpeakeasyMetadata({ data: "json, name=BlueprintServiceLocation" })
   blueprintServiceLocation?: string;
 
-  @Metadata({ data: "json, name=CreatedOn" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedOn" })
   createdOn?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=LastActiveDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=LastActiveDefinition" })
   lastActiveDefinition?: LastActiveDefinition;
 
-  @Metadata({ data: "json, name=LastModifiedOn" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedOn" })
   lastModifiedOn?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ParameterSpec" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterSpec" })
   parameterSpec?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: BlueprintStatusEnum;
 }

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTermStatsUsingGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId" })
   accId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=filterAccId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=filterAccId" })
   filterAccId: string;
 }
 
 
 export class GetTermStatsUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTermStatsUsingGetPathParams;
 }
 
 
 export class GetTermStatsUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

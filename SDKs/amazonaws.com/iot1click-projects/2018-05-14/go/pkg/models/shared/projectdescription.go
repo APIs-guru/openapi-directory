@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProjectDescription
+// An object providing detailed information for a particular project associated with an AWS account and region.
 type ProjectDescription struct {
 	Arn               *string            `json:"arn,omitempty"`
 	CreatedDate       time.Time          `json:"createdDate"`

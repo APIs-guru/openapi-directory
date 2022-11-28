@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetUpcomingScheduledCampaignsAndCanvasesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_time" })
   endTime?: string;
 }
 
 
 export class GetUpcomingScheduledCampaignsAndCanvasesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUpcomingScheduledCampaignsAndCanvasesQueryParams;
 }
 
 
 export class GetUpcomingScheduledCampaignsAndCanvasesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

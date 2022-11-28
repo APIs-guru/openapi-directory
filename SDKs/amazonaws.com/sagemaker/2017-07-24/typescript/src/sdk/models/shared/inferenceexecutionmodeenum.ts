@@ -1,6 +1,7 @@
 
 
+
 export enum InferenceExecutionModeEnum {
-    Serial = "Serial"
-,    Direct = "Direct"
+    Serial = "Serial",
+    Direct = "Direct"
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateUserImportJobRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the request to create the user import job.
 **/
 export class CreateUserImportJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogsRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsRoleArn" })
   cloudWatchLogsRoleArn: string;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName: string;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

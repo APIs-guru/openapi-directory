@@ -1,5 +1,7 @@
 package shared
 
+// WorkflowRunStatistics
+// Workflow run statistics provides statistics about the workflow run.
 type WorkflowRunStatistics struct {
 	FailedActions    *int64 `json:"FailedActions,omitempty"`
 	RunningActions   *int64 `json:"RunningActions,omitempty"`

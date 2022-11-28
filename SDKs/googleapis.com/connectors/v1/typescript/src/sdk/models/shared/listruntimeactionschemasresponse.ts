@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuntimeActionSchema } from "./runtimeactionschema";
+
 
 
 // ListRuntimeActionSchemasResponse
@@ -8,9 +8,9 @@ import { RuntimeActionSchema } from "./runtimeactionschema";
  * Response message for ConnectorsService.ListRuntimeActionSchemas.
 **/
 export class ListRuntimeActionSchemasResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=runtimeActionSchemas", elemType: shared.RuntimeActionSchema })
+  @SpeakeasyMetadata({ data: "json, name=runtimeActionSchemas", elemType: RuntimeActionSchema })
   runtimeActionSchemas?: RuntimeActionSchema[];
 }

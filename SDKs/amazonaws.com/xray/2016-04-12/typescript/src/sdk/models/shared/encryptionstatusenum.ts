@@ -1,6 +1,7 @@
 
 
+
 export enum EncryptionStatusEnum {
-    Updating = "UPDATING"
-,    Active = "ACTIVE"
+    Updating = "UPDATING",
+    Active = "ACTIVE"
 }

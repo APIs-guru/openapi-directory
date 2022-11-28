@@ -30,6 +30,8 @@ from .displayvideo_advertisers_insertionorders_get import *
 from .displayvideo_advertisers_insertionorders_list import *
 from .displayvideo_advertisers_insertionorders_listassignedtargetingoptions import *
 from .displayvideo_advertisers_insertionorders_patch import *
+from .displayvideo_advertisers_insertionorders_targetingtypes_assignedtargetingoptions_create import *
+from .displayvideo_advertisers_insertionorders_targetingtypes_assignedtargetingoptions_delete import *
 from .displayvideo_advertisers_insertionorders_targetingtypes_assignedtargetingoptions_get import *
 from .displayvideo_advertisers_insertionorders_targetingtypes_assignedtargetingoptions_list import *
 from .displayvideo_advertisers_invoices_list import *
@@ -39,6 +41,7 @@ from .displayvideo_advertisers_lineitems_bulklistassignedtargetingoptions import
 from .displayvideo_advertisers_lineitems_bulkupdate import *
 from .displayvideo_advertisers_lineitems_create import *
 from .displayvideo_advertisers_lineitems_delete import *
+from .displayvideo_advertisers_lineitems_duplicate import *
 from .displayvideo_advertisers_lineitems_generatedefault import *
 from .displayvideo_advertisers_lineitems_get import *
 from .displayvideo_advertisers_lineitems_list import *

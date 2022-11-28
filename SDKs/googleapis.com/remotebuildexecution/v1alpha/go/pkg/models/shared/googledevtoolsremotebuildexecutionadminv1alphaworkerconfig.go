@@ -1,5 +1,7 @@
 package shared
 
+// GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
+// Defines the configuration to be used for creating workers in the worker pool.
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig struct {
 	Accelerator          *GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig `json:"accelerator,omitempty"`
 	DiskSizeGb           *string                                                          `json:"diskSizeGb,omitempty"`

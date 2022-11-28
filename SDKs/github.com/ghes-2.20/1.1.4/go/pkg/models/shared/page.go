@@ -8,6 +8,8 @@ const (
 	PageStatusEnumErrored  PageStatusEnum = "errored"
 )
 
+// Page
+// The configuration for GitHub Pages for a repository.
 type Page struct {
 	Cname            string                 `json:"cname"`
 	Custom404        bool                   `json:"custom_404"`

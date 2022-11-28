@@ -1,5 +1,7 @@
 package shared
 
+// TargetTrackingConfiguration
+// Describes a target tracking configuration to use with AWS Auto Scaling. Used with <a>ScalingInstruction</a> and <a>ScalingPolicy</a>.
 type TargetTrackingConfiguration struct {
 	CustomizedScalingMetricSpecification *CustomizedScalingMetricSpecification `json:"CustomizedScalingMetricSpecification,omitempty"`
 	DisableScaleIn                       *bool                                 `json:"DisableScaleIn,omitempty"`

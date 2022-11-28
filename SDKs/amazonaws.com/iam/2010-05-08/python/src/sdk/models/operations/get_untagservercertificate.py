@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUntagServerCertificateActionEnum(str, Enum):
     UNTAG_SERVER_CERTIFICATE = "UntagServerCertificate"
@@ -10,10 +14,10 @@ class GetUntagServerCertificateVersionEnum(str, Enum):
 
 @dataclass
 class GetUntagServerCertificateQueryParams:
-    action: GetUntagServerCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    server_certificate_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ServerCertificateName', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
-    version: GetUntagServerCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUntagServerCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    server_certificate_name: str = field(metadata={'query_param': { 'field_name': 'ServerCertificateName', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetUntagServerCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUntagServerCertificateHeaders:
 
 @dataclass
 class GetUntagServerCertificateRequest:
-    query_params: GetUntagServerCertificateQueryParams = field(default=None)
-    headers: GetUntagServerCertificateHeaders = field(default=None)
+    headers: GetUntagServerCertificateHeaders = field()
+    query_params: GetUntagServerCertificateQueryParams = field()
     
 
 @dataclass
 class GetUntagServerCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

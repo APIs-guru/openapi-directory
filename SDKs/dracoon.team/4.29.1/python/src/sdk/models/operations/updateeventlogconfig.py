@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -10,14 +13,14 @@ class UpdateEventlogConfigHeaders:
 
 @dataclass
 class UpdateEventlogConfigRequest:
-    headers: UpdateEventlogConfigHeaders = field(default=None)
-    request: shared.UpdateEventlogConfig = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateEventlogConfigHeaders = field()
+    request: shared.UpdateEventlogConfig = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateEventlogConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     eventlog_config: Optional[shared.EventlogConfig] = field(default=None)
-    status_code: int = field(default=None)
     

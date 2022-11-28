@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Target } from "./target";
 
 
+
 export class UpdateMaintenanceWindowTargetResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OwnerInformation" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerInformation" })
   ownerInformation?: string;
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets?: Target[];
 
-  @Metadata({ data: "json, name=WindowId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowId" })
   windowId?: string;
 
-  @Metadata({ data: "json, name=WindowTargetId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowTargetId" })
   windowTargetId?: string;
 }

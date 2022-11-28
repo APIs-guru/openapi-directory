@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelStatusEnum } from "./channelstatusenum";
 import { ChannelTypeEnum } from "./channeltypeenum";
+
 
 
 // BotChannelAssociation
@@ -8,30 +9,30 @@ import { ChannelTypeEnum } from "./channeltypeenum";
  * Represents an association between an Amazon Lex bot and an external messaging platform.
 **/
 export class BotChannelAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botAlias" })
+  @SpeakeasyMetadata({ data: "json, name=botAlias" })
   botAlias?: string;
 
-  @Metadata({ data: "json, name=botConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=botConfiguration" })
   botConfiguration?: Map<string, string>;
 
-  @Metadata({ data: "json, name=botName" })
+  @SpeakeasyMetadata({ data: "json, name=botName" })
   botName?: string;
 
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ChannelStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ChannelTypeEnum;
 }

@@ -10,6 +10,8 @@ const (
 	NonBillableWinningBidStatusRowStatusEnumLostInMediation   NonBillableWinningBidStatusRowStatusEnum = "LOST_IN_MEDIATION"
 )
 
+// NonBillableWinningBidStatusRow
+// The number of winning bids with the specified dimension values for which the buyer was not billed, as described by the specified status.
 type NonBillableWinningBidStatusRow struct {
 	BidCount      *MetricValue                              `json:"bidCount,omitempty"`
 	RowDimensions *RowDimensions                            `json:"rowDimensions,omitempty"`

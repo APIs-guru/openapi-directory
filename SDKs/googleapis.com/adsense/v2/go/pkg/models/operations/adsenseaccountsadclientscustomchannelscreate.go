@@ -30,7 +30,7 @@ type AdsenseAccountsAdclientsCustomchannelsCreateSecurity struct {
 type AdsenseAccountsAdclientsCustomchannelsCreateRequest struct {
 	PathParams  AdsenseAccountsAdclientsCustomchannelsCreatePathParams
 	QueryParams AdsenseAccountsAdclientsCustomchannelsCreateQueryParams
-	Request     *shared.CustomChannel `request:"mediaType=application/json"`
+	Request     *shared.CustomChannelInput `request:"mediaType=application/json"`
 	Security    AdsenseAccountsAdclientsCustomchannelsCreateSecurity
 }
 

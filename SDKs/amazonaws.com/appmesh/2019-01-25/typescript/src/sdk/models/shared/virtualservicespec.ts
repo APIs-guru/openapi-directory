@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualServiceProvider } from "./virtualserviceprovider";
+
 
 
 // VirtualServiceSpec
@@ -7,6 +8,6 @@ import { VirtualServiceProvider } from "./virtualserviceprovider";
  * An object that represents the specification of a virtual service.
 **/
 export class VirtualServiceSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: VirtualServiceProvider;
 }

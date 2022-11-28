@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import retentionconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutRetentionConfigurationResponse:
-    retention_configuration: Optional[retentionconfiguration.RetentionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RetentionConfiguration' }})
+    retention_configuration: Optional[RetentionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RetentionConfiguration') }})
     

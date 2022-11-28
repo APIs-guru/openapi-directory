@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
+
 
 
 // RegionalBasePlanConfig
@@ -7,12 +8,12 @@ import { Money } from "./money";
  * Configuration for a base plan specific to a region.
 **/
 export class RegionalBasePlanConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newSubscriberAvailability" })
+  @SpeakeasyMetadata({ data: "json, name=newSubscriberAvailability" })
   newSubscriberAvailability?: boolean;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Money;
 
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 }

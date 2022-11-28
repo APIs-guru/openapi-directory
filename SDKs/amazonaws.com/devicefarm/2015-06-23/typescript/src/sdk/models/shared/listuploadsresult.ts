@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Upload } from "./upload";
+
 
 
 // ListUploadsResult
@@ -8,9 +8,9 @@ import { Upload } from "./upload";
  * Represents the result of a list uploads request.
 **/
 export class ListUploadsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=uploads", elemType: shared.Upload })
+  @SpeakeasyMetadata({ data: "json, name=uploads", elemType: Upload })
   uploads?: Upload[];
 }

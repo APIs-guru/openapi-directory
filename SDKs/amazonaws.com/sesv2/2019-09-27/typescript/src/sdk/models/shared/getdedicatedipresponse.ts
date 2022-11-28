@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DedicatedIp } from "./dedicatedip";
+
 
 
 // GetDedicatedIpResponse
@@ -7,6 +8,6 @@ import { DedicatedIp } from "./dedicatedip";
  * Information about a dedicated IP address.
 **/
 export class GetDedicatedIpResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DedicatedIp" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedIp" })
   dedicatedIp?: DedicatedIp;
 }

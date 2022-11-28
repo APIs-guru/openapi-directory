@@ -1,31 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PaginationLinks } from "./paginationlinks";
 import { OrderLineItem } from "./orderlineitem";
 
+
 export enum GetOrderOrderStatusEnum {
-    Active = "Active"
-,    Cancelled = "Cancelled"
-,    Completed = "Completed"
+    Active = "Active",
+    Cancelled = "Cancelled",
+    Completed = "Completed"
 }
 
 
 export class GetOrder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: PaginationLinks;
 
-  @Metadata({ data: "json, name=numberOfLineItems" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfLineItems" })
   numberOfLineItems: number;
 
-  @Metadata({ data: "json, name=orderLineItems", elemType: shared.OrderLineItem })
+  @SpeakeasyMetadata({ data: "json, name=orderLineItems", elemType: OrderLineItem })
   orderLineItems?: OrderLineItem[];
 
-  @Metadata({ data: "json, name=orderNumber" })
+  @SpeakeasyMetadata({ data: "json, name=orderNumber" })
   orderNumber: string;
 
-  @Metadata({ data: "json, name=orderStatus" })
+  @SpeakeasyMetadata({ data: "json, name=orderStatus" })
   orderStatus: GetOrderOrderStatusEnum;
 }

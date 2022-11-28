@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class Ec2TagFilterTypeEnum(str, Enum):
     KEY_ONLY = "KEY_ONLY"

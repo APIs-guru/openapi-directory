@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortalResource } from "./portalresource";
 import { ProjectResource } from "./projectresource";
+
 
 
 // Resource
@@ -8,9 +9,9 @@ import { ProjectResource } from "./projectresource";
  * Contains an IoT SiteWise Monitor resource ID for a portal or project.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portal" })
+  @SpeakeasyMetadata({ data: "json, name=portal" })
   portal?: PortalResource;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: ProjectResource;
 }

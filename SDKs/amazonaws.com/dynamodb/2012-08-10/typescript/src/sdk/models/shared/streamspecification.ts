@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamViewTypeEnum } from "./streamviewtypeenum";
+
 
 
 // StreamSpecification
@@ -7,9 +8,9 @@ import { StreamViewTypeEnum } from "./streamviewtypeenum";
  * Represents the DynamoDB Streams configuration for a table in DynamoDB.
 **/
 export class StreamSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StreamEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=StreamEnabled" })
   streamEnabled: boolean;
 
-  @Metadata({ data: "json, name=StreamViewType" })
+  @SpeakeasyMetadata({ data: "json, name=StreamViewType" })
   streamViewType?: StreamViewTypeEnum;
 }

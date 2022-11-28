@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class GetGetInsightRuleReportActionEnum(str, Enum):
     GET_INSIGHT_RULE_REPORT = "GetInsightRuleReport"
@@ -13,15 +14,15 @@ class GetGetInsightRuleReportVersionEnum(str, Enum):
 
 @dataclass
 class GetGetInsightRuleReportQueryParams:
-    action: GetGetInsightRuleReportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    end_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
+    action: GetGetInsightRuleReportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    end_time: datetime = field(metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
+    period: int = field(metadata={'query_param': { 'field_name': 'Period', 'style': 'form', 'explode': True }})
+    rule_name: str = field(metadata={'query_param': { 'field_name': 'RuleName', 'style': 'form', 'explode': True }})
+    start_time: datetime = field(metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
+    version: GetGetInsightRuleReportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_contributor_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxContributorCount', 'style': 'form', 'explode': True }})
     metrics: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Metrics', 'style': 'form', 'explode': True }})
     order_by: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'OrderBy', 'style': 'form', 'explode': True }})
-    period: int = field(default=None, metadata={'query_param': { 'field_name': 'Period', 'style': 'form', 'explode': True }})
-    rule_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleName', 'style': 'form', 'explode': True }})
-    start_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
-    version: GetGetInsightRuleReportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -37,13 +38,13 @@ class GetGetInsightRuleReportHeaders:
 
 @dataclass
 class GetGetInsightRuleReportRequest:
-    query_params: GetGetInsightRuleReportQueryParams = field(default=None)
-    headers: GetGetInsightRuleReportHeaders = field(default=None)
+    headers: GetGetInsightRuleReportHeaders = field()
+    query_params: GetGetInsightRuleReportQueryParams = field()
     
 
 @dataclass
 class GetGetInsightRuleReportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

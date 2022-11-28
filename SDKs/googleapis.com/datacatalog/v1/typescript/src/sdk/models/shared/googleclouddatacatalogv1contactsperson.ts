@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1ContactsPerson
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A contact person for the entry.
 **/
 export class GoogleCloudDatacatalogV1ContactsPerson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=designation" })
+  @SpeakeasyMetadata({ data: "json, name=designation" })
   designation?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 }

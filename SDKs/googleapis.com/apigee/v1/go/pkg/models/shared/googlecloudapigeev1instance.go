@@ -23,6 +23,8 @@ const (
 	GoogleCloudApigeeV1InstanceStateEnumUpdating         GoogleCloudApigeeV1InstanceStateEnum = "UPDATING"
 )
 
+// GoogleCloudApigeeV1Instance
+// Apigee runtime instance.
 type GoogleCloudApigeeV1Instance struct {
 	ConsumerAcceptList    []string                                         `json:"consumerAcceptList,omitempty"`
 	CreatedAt             *string                                          `json:"createdAt,omitempty"`
@@ -39,4 +41,17 @@ type GoogleCloudApigeeV1Instance struct {
 	RuntimeVersion        *string                                          `json:"runtimeVersion,omitempty"`
 	ServiceAttachment     *string                                          `json:"serviceAttachment,omitempty"`
 	State                 *GoogleCloudApigeeV1InstanceStateEnum            `json:"state,omitempty"`
+}
+
+// GoogleCloudApigeeV1InstanceInput
+// Apigee runtime instance.
+type GoogleCloudApigeeV1InstanceInput struct {
+	ConsumerAcceptList    []string                                         `json:"consumerAcceptList,omitempty"`
+	Description           *string                                          `json:"description,omitempty"`
+	DiskEncryptionKeyName *string                                          `json:"diskEncryptionKeyName,omitempty"`
+	DisplayName           *string                                          `json:"displayName,omitempty"`
+	IPRange               *string                                          `json:"ipRange,omitempty"`
+	Location              *string                                          `json:"location,omitempty"`
+	Name                  *string                                          `json:"name,omitempty"`
+	PeeringCidrRange      *GoogleCloudApigeeV1InstancePeeringCidrRangeEnum `json:"peeringCidrRange,omitempty"`
 }

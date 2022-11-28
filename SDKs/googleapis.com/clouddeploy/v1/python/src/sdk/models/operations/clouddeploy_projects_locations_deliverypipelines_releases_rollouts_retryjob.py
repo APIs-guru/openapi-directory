@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobPathParams:
-    rollout: str = field(default=None, metadata={'path_param': { 'field_name': 'rollout', 'style': 'simple', 'explode': False }})
+    rollout: str = field(metadata={'path_param': { 'field_name': 'rollout', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobQuery
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobRequest:
-    path_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobPathParams = field(default=None)
-    query_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobQueryParams = field(default=None)
+    path_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobPathParams = field()
+    query_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobQueryParams = field()
+    security: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobSecurity = field()
     request: Optional[shared.RetryJobRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobSecurity = field(default=None)
     
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetryJobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     retry_job_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

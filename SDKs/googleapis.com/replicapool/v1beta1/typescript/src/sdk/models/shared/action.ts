@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvVariable } from "./envvariable";
+
 
 
 // Action
@@ -8,12 +8,12 @@ import { EnvVariable } from "./envvariable";
  * An action that gets executed during initialization of the replicas.
 **/
 export class Action extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commands" })
+  @SpeakeasyMetadata({ data: "json, name=commands" })
   commands?: string[];
 
-  @Metadata({ data: "json, name=envVariables", elemType: shared.EnvVariable })
+  @SpeakeasyMetadata({ data: "json, name=envVariables", elemType: EnvVariable })
   envVariables?: EnvVariable[];
 
-  @Metadata({ data: "json, name=timeoutMilliSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutMilliSeconds" })
   timeoutMilliSeconds?: number;
 }

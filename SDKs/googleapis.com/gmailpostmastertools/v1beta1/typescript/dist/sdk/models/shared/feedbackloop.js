@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FeedbackLoop
 /**
  * [Feedback loop](https://support.google.com/mail/answer/6254652) identifier information.
@@ -33,11 +33,11 @@ var FeedbackLoop = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], FeedbackLoop.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=spamRatio" }),
+        SpeakeasyMetadata({ data: "json, name=spamRatio" }),
         __metadata("design:type", Number)
     ], FeedbackLoop.prototype, "spamRatio", void 0);
     return FeedbackLoop;

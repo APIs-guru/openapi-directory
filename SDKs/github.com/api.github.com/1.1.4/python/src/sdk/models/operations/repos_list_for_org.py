@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReposListForOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 class ReposListForOrgDirectionEnum(str, Enum):
     ASC = "asc"
@@ -38,14 +42,14 @@ class ReposListForOrgQueryParams:
 
 @dataclass
 class ReposListForOrgRequest:
-    path_params: ReposListForOrgPathParams = field(default=None)
-    query_params: ReposListForOrgQueryParams = field(default=None)
+    path_params: ReposListForOrgPathParams = field()
+    query_params: ReposListForOrgQueryParams = field()
     
 
 @dataclass
 class ReposListForOrgResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     minimal_repositories: Optional[List[shared.MinimalRepository]] = field(default=None)
     

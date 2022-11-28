@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateTagsPathParams:
-    file_system_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
+    file_system_id: str = field(metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +27,21 @@ class CreateTagsHeaders:
 @dataclass_json
 @dataclass
 class CreateTagsRequestBody:
-    tags: List[shared.Tag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    tags: List[shared.Tag] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateTagsRequest:
-    path_params: CreateTagsPathParams = field(default=None)
-    headers: CreateTagsHeaders = field(default=None)
-    request: CreateTagsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateTagsHeaders = field()
+    path_params: CreateTagsPathParams = field()
+    request: CreateTagsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTagsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

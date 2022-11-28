@@ -4,10 +4,6 @@ type GetClientClientIDPathParams struct {
 	ClientID string `pathParam:"style=simple,explode=false,name=client_id"`
 }
 
-type GetClientClientIDRequest struct {
-	PathParams GetClientClientIDPathParams
-}
-
 type GetClientClientID200ApplicationJSON struct {
 	AtID                    *string       `json:"@id,omitempty"`
 	ClientID                string        `json:"client_id"`
@@ -28,6 +24,10 @@ type GetClientClientID200ApplicationJSON struct {
 	SoftwareVersion         *string       `json:"software_version,omitempty"`
 	TokenEndpointAuthMethod *string       `json:"token_endpoint_auth_method,omitempty"`
 	TosURI                  *string       `json:"tos_uri,omitempty"`
+}
+
+type GetClientClientIDRequest struct {
+	PathParams GetClientClientIDPathParams
 }
 
 type GetClientClientIDResponse struct {

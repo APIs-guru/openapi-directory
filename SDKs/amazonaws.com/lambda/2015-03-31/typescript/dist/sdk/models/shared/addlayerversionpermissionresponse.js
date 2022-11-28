@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AddLayerVersionPermissionResponse = /** @class */ (function (_super) {
     __extends(AddLayerVersionPermissionResponse, _super);
     function AddLayerVersionPermissionResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=RevisionId" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionResponse.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Statement" }),
+        SpeakeasyMetadata({ data: "json, name=Statement" }),
         __metadata("design:type", String)
     ], AddLayerVersionPermissionResponse.prototype, "statement", void 0);
     return AddLayerVersionPermissionResponse;

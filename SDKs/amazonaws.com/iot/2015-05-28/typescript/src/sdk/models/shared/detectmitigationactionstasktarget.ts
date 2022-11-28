@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetectMitigationActionsTaskTarget
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The target of a mitigation action task. 
 **/
 export class DetectMitigationActionsTaskTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=behaviorName" })
+  @SpeakeasyMetadata({ data: "json, name=behaviorName" })
   behaviorName?: string;
 
-  @Metadata({ data: "json, name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileName" })
   securityProfileName?: string;
 
-  @Metadata({ data: "json, name=violationIds" })
+  @SpeakeasyMetadata({ data: "json, name=violationIds" })
   violationIds?: string[];
 }

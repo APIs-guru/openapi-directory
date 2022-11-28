@@ -22,15 +22,65 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BigQueryOptionsInput } from "./bigqueryoptions";
+import { LogExclusionInput } from "./logexclusion";
 import { BigQueryOptions } from "./bigqueryoptions";
+import { LogExclusion } from "./logexclusion";
 export var LogSinkOutputVersionFormatEnum;
 (function (LogSinkOutputVersionFormatEnum) {
     LogSinkOutputVersionFormatEnum["VersionFormatUnspecified"] = "VERSION_FORMAT_UNSPECIFIED";
     LogSinkOutputVersionFormatEnum["V2"] = "V2";
     LogSinkOutputVersionFormatEnum["V1"] = "V1";
 })(LogSinkOutputVersionFormatEnum || (LogSinkOutputVersionFormatEnum = {}));
+// LogSinkInput
+/**
+ * Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a Pub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder.
+**/
+var LogSinkInput = /** @class */ (function (_super) {
+    __extends(LogSinkInput, _super);
+    function LogSinkInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=bigqueryOptions" }),
+        __metadata("design:type", BigQueryOptionsInput)
+    ], LogSinkInput.prototype, "bigqueryOptions", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], LogSinkInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=destination" }),
+        __metadata("design:type", String)
+    ], LogSinkInput.prototype, "destination", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
+        __metadata("design:type", Boolean)
+    ], LogSinkInput.prototype, "disabled", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=exclusions", elemType: LogExclusionInput }),
+        __metadata("design:type", Array)
+    ], LogSinkInput.prototype, "exclusions", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=filter" }),
+        __metadata("design:type", String)
+    ], LogSinkInput.prototype, "filter", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=includeChildren" }),
+        __metadata("design:type", Boolean)
+    ], LogSinkInput.prototype, "includeChildren", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], LogSinkInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=outputVersionFormat" }),
+        __metadata("design:type", String)
+    ], LogSinkInput.prototype, "outputVersionFormat", void 0);
+    return LogSinkInput;
+}(SpeakeasyBase));
+export { LogSinkInput };
 // LogSink
 /**
  * Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a Pub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder.
@@ -41,51 +91,51 @@ var LogSink = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bigqueryOptions" }),
+        SpeakeasyMetadata({ data: "json, name=bigqueryOptions" }),
         __metadata("design:type", BigQueryOptions)
     ], LogSink.prototype, "bigqueryOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=disabled" }),
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
         __metadata("design:type", Boolean)
     ], LogSink.prototype, "disabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=exclusions", elemType: shared.LogExclusion }),
+        SpeakeasyMetadata({ data: "json, name=exclusions", elemType: LogExclusion }),
         __metadata("design:type", Array)
     ], LogSink.prototype, "exclusions", void 0);
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeChildren" }),
+        SpeakeasyMetadata({ data: "json, name=includeChildren" }),
         __metadata("design:type", Boolean)
     ], LogSink.prototype, "includeChildren", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputVersionFormat" }),
+        SpeakeasyMetadata({ data: "json, name=outputVersionFormat" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "outputVersionFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=writerIdentity" }),
+        SpeakeasyMetadata({ data: "json, name=writerIdentity" }),
         __metadata("design:type", String)
     ], LogSink.prototype, "writerIdentity", void 0);
     return LogSink;

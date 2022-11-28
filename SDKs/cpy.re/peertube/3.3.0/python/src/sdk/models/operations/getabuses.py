@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetAbusesFilterEnum(str, Enum):
@@ -32,25 +34,25 @@ class GetAbusesQueryParams:
 
 @dataclass
 class GetAbusesSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetAbusesRequest:
-    query_params: GetAbusesQueryParams = field(default=None)
-    security: GetAbusesSecurity = field(default=None)
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass_json
 @dataclass
 class GetAbuses200ApplicationJSON:
-    data: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    data: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    
+
+@dataclass
+class GetAbusesRequest:
+    query_params: GetAbusesQueryParams = field()
+    security: GetAbusesSecurity = field()
     
 
 @dataclass
 class GetAbusesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_abuses_200_application_json_object: Optional[GetAbuses200ApplicationJSON] = field(default=None)
     

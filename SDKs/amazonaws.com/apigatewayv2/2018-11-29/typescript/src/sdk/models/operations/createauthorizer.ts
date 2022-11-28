@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAuthorizerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
 export class CreateAuthorizerHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateAuthorizerRequestBodyAuthorizerTypeEnum {
-    Request = "REQUEST"
-,    Jwt = "JWT"
+    Request = "REQUEST",
+    Jwt = "JWT"
 }
 
 
@@ -42,78 +43,78 @@ export enum CreateAuthorizerRequestBodyAuthorizerTypeEnum {
  * Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs.
 **/
 export class CreateAuthorizerRequestBodyJwtConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Audience" })
+  @SpeakeasyMetadata({ data: "json, name=Audience" })
   audience?: string[];
 
-  @Metadata({ data: "json, name=Issuer" })
+  @SpeakeasyMetadata({ data: "json, name=Issuer" })
   issuer?: string;
 }
 
 
 export class CreateAuthorizerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizerCredentialsArn" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerCredentialsArn" })
   authorizerCredentialsArn?: string;
 
-  @Metadata({ data: "json, name=authorizerPayloadFormatVersion" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerPayloadFormatVersion" })
   authorizerPayloadFormatVersion?: string;
 
-  @Metadata({ data: "json, name=authorizerResultTtlInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerResultTtlInSeconds" })
   authorizerResultTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=authorizerType" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerType" })
   authorizerType: CreateAuthorizerRequestBodyAuthorizerTypeEnum;
 
-  @Metadata({ data: "json, name=authorizerUri" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerUri" })
   authorizerUri?: string;
 
-  @Metadata({ data: "json, name=enableSimpleResponses" })
+  @SpeakeasyMetadata({ data: "json, name=enableSimpleResponses" })
   enableSimpleResponses?: boolean;
 
-  @Metadata({ data: "json, name=identitySource" })
+  @SpeakeasyMetadata({ data: "json, name=identitySource" })
   identitySource: string[];
 
-  @Metadata({ data: "json, name=identityValidationExpression" })
+  @SpeakeasyMetadata({ data: "json, name=identityValidationExpression" })
   identityValidationExpression?: string;
 
-  @Metadata({ data: "json, name=jwtConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=jwtConfiguration" })
   jwtConfiguration?: CreateAuthorizerRequestBodyJwtConfiguration;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class CreateAuthorizerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateAuthorizerPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAuthorizerHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateAuthorizerRequestBody;
 }
 
 
 export class CreateAuthorizerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAuthorizerResponse?: shared.CreateAuthorizerResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

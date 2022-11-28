@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
 export declare class StartCutoverResponse extends SpeakeasyBase {
     job?: Job;

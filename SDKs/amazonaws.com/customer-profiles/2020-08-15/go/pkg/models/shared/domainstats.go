@@ -1,5 +1,7 @@
 package shared
 
+// DomainStats
+// Usage-specific statistics about the domain.
 type DomainStats struct {
 	MeteringProfileCount *int64 `json:"MeteringProfileCount,omitempty"`
 	ObjectCount          *int64 `json:"ObjectCount,omitempty"`

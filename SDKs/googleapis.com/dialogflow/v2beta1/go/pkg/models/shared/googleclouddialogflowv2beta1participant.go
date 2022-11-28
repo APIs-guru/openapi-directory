@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowV2beta1ParticipantRoleEnumEndUser         GoogleCloudDialogflowV2beta1ParticipantRoleEnum = "END_USER"
 )
 
+// GoogleCloudDialogflowV2beta1Participant
+// Represents a conversation participant (human agent, virtual agent, end-user).
 type GoogleCloudDialogflowV2beta1Participant struct {
 	DocumentsMetadataFilters map[string]string                                `json:"documentsMetadataFilters,omitempty"`
 	Name                     *string                                          `json:"name,omitempty"`

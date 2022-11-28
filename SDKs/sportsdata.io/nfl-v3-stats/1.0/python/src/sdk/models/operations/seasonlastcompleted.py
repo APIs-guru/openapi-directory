@@ -4,17 +4,17 @@ from typing import Optional
 
 @dataclass
 class SeasonLastCompletedPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SeasonLastCompletedRequest:
-    path_params: SeasonLastCompletedPathParams = field(default=None)
+    path_params: SeasonLastCompletedPathParams = field()
     
 
 @dataclass
 class SeasonLastCompletedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     season_last_completed_200_application_json_integer: Optional[int] = field(default=None)
-    status_code: int = field(default=None)
     

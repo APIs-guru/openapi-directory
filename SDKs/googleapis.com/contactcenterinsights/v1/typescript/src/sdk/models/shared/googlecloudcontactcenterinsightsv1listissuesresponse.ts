@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1Issue } from "./googlecloudcontactcenterinsightsv1issue";
+
 
 
 // GoogleCloudContactcenterinsightsV1ListIssuesResponse
@@ -8,6 +8,6 @@ import { GoogleCloudContactcenterinsightsV1Issue } from "./googlecloudcontactcen
  * The response of listing issues.
 **/
 export class GoogleCloudContactcenterinsightsV1ListIssuesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issues", elemType: shared.GoogleCloudContactcenterinsightsV1Issue })
+  @SpeakeasyMetadata({ data: "json, name=issues", elemType: GoogleCloudContactcenterinsightsV1Issue })
   issues?: GoogleCloudContactcenterinsightsV1Issue[];
 }

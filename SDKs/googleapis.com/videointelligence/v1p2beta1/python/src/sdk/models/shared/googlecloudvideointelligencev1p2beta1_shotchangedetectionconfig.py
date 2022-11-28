@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudVideointelligenceV1p2beta1ShotChangeDetectionConfig:
-    model: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'model' }})
+    r"""GoogleCloudVideointelligenceV1p2beta1ShotChangeDetectionConfig
+    Config for SHOT_CHANGE_DETECTION.
+    """
+    
+    model: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('model') }})
     

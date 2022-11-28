@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import gameserver
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeGameServerOutput:
-    game_server: Optional[gameserver.GameServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GameServer' }})
+    game_server: Optional[GameServer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GameServer') }})
     

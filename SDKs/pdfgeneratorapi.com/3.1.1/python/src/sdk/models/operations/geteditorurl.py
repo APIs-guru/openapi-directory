@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GetEditorURLLanguageEnum(str, Enum):
     EN = "en"
@@ -12,20 +14,14 @@ class GetEditorURLLanguageEnum(str, Enum):
 
 @dataclass
 class GetEditorURLQueryParams:
+    template_id: int = field(metadata={'query_param': { 'field_name': 'templateId', 'style': 'form', 'explode': True }})
     language: Optional[GetEditorURLLanguageEnum] = field(default=None, metadata={'query_param': { 'field_name': 'language', 'style': 'form', 'explode': True }})
-    template_id: int = field(default=None, metadata={'query_param': { 'field_name': 'templateId', 'style': 'form', 'explode': True }})
-    
-
-@dataclass
-class GetEditorURLRequest:
-    query_params: GetEditorURLQueryParams = field(default=None)
-    request: dict[str, Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
 class GetEditorURL200ApplicationJSON:
-    response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
     
 class GetEditorURL401ApplicationJSONErrorEnum(str, Enum):
     AUTHENTICATION_FAILED_REQUEST_EXPIRED = "Authentication failed: request expired"
@@ -43,8 +39,8 @@ class GetEditorURL401ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetEditorURL401ApplicationJSON:
-    error: Optional[GetEditorURL401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetEditorURL401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetEditorURL403ApplicationJSONErrorEnum(str, Enum):
     YOUR_ACCOUNT_HAS_EXCEEDED_THE_MONTHLY_DOCUMENT_GENERATION_LIMIT_ = "Your account has exceeded the monthly document generation limit."
@@ -53,8 +49,8 @@ class GetEditorURL403ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetEditorURL403ApplicationJSON:
-    error: Optional[GetEditorURL403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetEditorURL403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetEditorURL404ApplicationJSONErrorEnum(str, Enum):
     ENTITY_NOT_FOUND = "Entity not found"
@@ -65,8 +61,8 @@ class GetEditorURL404ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetEditorURL404ApplicationJSON:
-    error: Optional[GetEditorURL404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetEditorURL404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetEditorURL422ApplicationJSONErrorEnum(str, Enum):
     UNABLE_TO_PARSE_JSON_PLEASE_CHECK_FORMATTING = "Unable to parse JSON, please check formatting"
@@ -78,21 +74,27 @@ class GetEditorURL422ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetEditorURL422ApplicationJSON:
-    error: Optional[GetEditorURL422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetEditorURL422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class GetEditorURL500ApplicationJSON:
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    
+
+@dataclass
+class GetEditorURLRequest:
+    query_params: GetEditorURLQueryParams = field()
+    request: dict[str, Any] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetEditorURLResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_editor_url_200_application_json_object: Optional[GetEditorURL200ApplicationJSON] = field(default=None)
     get_editor_url_401_application_json_object: Optional[GetEditorURL401ApplicationJSON] = field(default=None)
     get_editor_url_403_application_json_object: Optional[GetEditorURL403ApplicationJSON] = field(default=None)

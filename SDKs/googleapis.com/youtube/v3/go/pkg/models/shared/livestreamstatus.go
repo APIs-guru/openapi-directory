@@ -10,6 +10,8 @@ const (
 	LiveStreamStatusStreamStatusEnumError    LiveStreamStatusStreamStatusEnum = "error"
 )
 
+// LiveStreamStatus
+// Brief description of the live stream status.
 type LiveStreamStatus struct {
 	HealthStatus *LiveStreamHealthStatus           `json:"healthStatus,omitempty"`
 	StreamStatus *LiveStreamStatusStreamStatusEnum `json:"streamStatus,omitempty"`

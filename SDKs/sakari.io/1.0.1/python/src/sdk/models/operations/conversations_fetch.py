@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class ConversationsFetchPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    conversation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'conversationId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    conversation_id: str = field(metadata={'path_param': { 'field_name': 'conversationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ConversationsFetchSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConversationsFetchRequest:
-    path_params: ConversationsFetchPathParams = field(default=None)
-    security: ConversationsFetchSecurity = field(default=None)
+    path_params: ConversationsFetchPathParams = field()
+    security: ConversationsFetchSecurity = field()
     
 
 @dataclass
 class ConversationsFetchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     conversation_response: Optional[shared.ConversationResponse] = field(default=None)
-    status_code: int = field(default=None)
     

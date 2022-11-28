@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class DevicesGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     devices: Optional[List[shared.Device]] = field(default=None)
-    status_code: int = field(default=None)
     

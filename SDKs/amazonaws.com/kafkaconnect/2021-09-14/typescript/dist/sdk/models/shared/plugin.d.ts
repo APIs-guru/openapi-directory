@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomPlugin } from "./customplugin";
 /**
  * A plugin is an AWS resource that contains the code that defines your connector logic.

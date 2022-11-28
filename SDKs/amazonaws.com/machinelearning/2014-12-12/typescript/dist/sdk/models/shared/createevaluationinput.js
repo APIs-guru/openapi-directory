@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateEvaluationInput = /** @class */ (function (_super) {
     __extends(CreateEvaluationInput, _super);
     function CreateEvaluationInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EvaluationDataSourceId" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationDataSourceId" }),
         __metadata("design:type", String)
     ], CreateEvaluationInput.prototype, "evaluationDataSourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationId" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationId" }),
         __metadata("design:type", String)
     ], CreateEvaluationInput.prototype, "evaluationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationName" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationName" }),
         __metadata("design:type", String)
     ], CreateEvaluationInput.prototype, "evaluationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MLModelId" }),
+        SpeakeasyMetadata({ data: "json, name=MLModelId" }),
         __metadata("design:type", String)
     ], CreateEvaluationInput.prototype, "mlModelId", void 0);
     return CreateEvaluationInput;

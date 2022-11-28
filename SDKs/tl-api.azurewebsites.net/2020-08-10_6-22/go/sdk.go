@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://tl-api.azurewebsites.net",
 	"https://triviallife.azure-api.net/v1",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +38,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ArticleAddMeasureUnit - Add measure unit
 func (s *SDK) ArticleAddMeasureUnit(ctx context.Context, request operations.ArticleAddMeasureUnitRequest) (*operations.ArticleAddMeasureUnitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article/MeasureUnit"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -78,7 +104,7 @@ func (s *SDK) ArticleAddMeasureUnit(ctx context.Context, request operations.Arti
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -118,8 +144,9 @@ func (s *SDK) ArticleAddMeasureUnit(ctx context.Context, request operations.Arti
 	return res, nil
 }
 
+// ArticleDelete - Delete article from the system
 func (s *SDK) ArticleDelete(ctx context.Context, request operations.ArticleDeleteRequest) (*operations.ArticleDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -129,7 +156,7 @@ func (s *SDK) ArticleDelete(ctx context.Context, request operations.ArticleDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -180,7 +207,7 @@ func (s *SDK) ArticleDelete(ctx context.Context, request operations.ArticleDelet
 }
 
 func (s *SDK) ArticleGetAddons(ctx context.Context, request operations.ArticleGetAddonsRequest) (*operations.ArticleGetAddonsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article/GetAddons"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -190,7 +217,7 @@ func (s *SDK) ArticleGetAddons(ctx context.Context, request operations.ArticleGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -240,8 +267,9 @@ func (s *SDK) ArticleGetAddons(ctx context.Context, request operations.ArticleGe
 	return res, nil
 }
 
+// ArticleGetMeasureUnits - Get mesure units
 func (s *SDK) ArticleGetMeasureUnits(ctx context.Context, request operations.ArticleGetMeasureUnitsRequest) (*operations.ArticleGetMeasureUnitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article/MeasureUnits"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -251,7 +279,7 @@ func (s *SDK) ArticleGetMeasureUnits(ctx context.Context, request operations.Art
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -291,8 +319,9 @@ func (s *SDK) ArticleGetMeasureUnits(ctx context.Context, request operations.Art
 	return res, nil
 }
 
+// ArticleGetRevenueAccounts - Get Revenue Accounts
 func (s *SDK) ArticleGetRevenueAccounts(ctx context.Context) (*operations.ArticleGetRevenueAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article/RevenueAccounts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -300,7 +329,7 @@ func (s *SDK) ArticleGetRevenueAccounts(ctx context.Context) (*operations.Articl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -340,8 +369,9 @@ func (s *SDK) ArticleGetRevenueAccounts(ctx context.Context) (*operations.Articl
 	return res, nil
 }
 
+// ArticleGymArticleDetails - Get Gym specific properties for article
 func (s *SDK) ArticleGymArticleDetails(ctx context.Context, request operations.ArticleGymArticleDetailsRequest) (*operations.ArticleGymArticleDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Article/GymArticle/{articleId}/{gymId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -349,7 +379,7 @@ func (s *SDK) ArticleGymArticleDetails(ctx context.Context, request operations.A
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -399,8 +429,9 @@ func (s *SDK) ArticleGymArticleDetails(ctx context.Context, request operations.A
 	return res, nil
 }
 
+// ArticlePost - Add new article
 func (s *SDK) ArticlePost(ctx context.Context, request operations.ArticlePostRequest) (*operations.ArticlePostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -418,7 +449,7 @@ func (s *SDK) ArticlePost(ctx context.Context, request operations.ArticlePostReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -458,8 +489,9 @@ func (s *SDK) ArticlePost(ctx context.Context, request operations.ArticlePostReq
 	return res, nil
 }
 
+// ArticlePut - update existing article
 func (s *SDK) ArticlePut(ctx context.Context, request operations.ArticlePutRequest) (*operations.ArticlePutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -477,7 +509,7 @@ func (s *SDK) ArticlePut(ctx context.Context, request operations.ArticlePutReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -517,8 +549,10 @@ func (s *SDK) ArticlePut(ctx context.Context, request operations.ArticlePutReque
 	return res, nil
 }
 
+// ArticleSearch - Search articles
+// It will only return basic information of article
 func (s *SDK) ArticleSearch(ctx context.Context, request operations.ArticleSearchRequest) (*operations.ArticleSearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article/Search"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -528,7 +562,7 @@ func (s *SDK) ArticleSearch(ctx context.Context, request operations.ArticleSearc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -578,8 +612,9 @@ func (s *SDK) ArticleSearch(ctx context.Context, request operations.ArticleSearc
 	return res, nil
 }
 
+// ArticleUpdateArticleGymDetails - Add article details that associate with a Gym
 func (s *SDK) ArticleUpdateArticleGymDetails(ctx context.Context, request operations.ArticleUpdateArticleGymDetailsRequest) (*operations.ArticleUpdateArticleGymDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article/ArticleGymDetails"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -597,7 +632,7 @@ func (s *SDK) ArticleUpdateArticleGymDetails(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -637,8 +672,9 @@ func (s *SDK) ArticleUpdateArticleGymDetails(ctx context.Context, request operat
 	return res, nil
 }
 
+// ArticleUpdateStatus - Deactivate existing article
 func (s *SDK) ArticleUpdateStatus(ctx context.Context, request operations.ArticleUpdateStatusRequest) (*operations.ArticleUpdateStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Article/UpdateStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -648,7 +684,7 @@ func (s *SDK) ArticleUpdateStatus(ctx context.Context, request operations.Articl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -698,8 +734,10 @@ func (s *SDK) ArticleUpdateStatus(ctx context.Context, request operations.Articl
 	return res, nil
 }
 
+// ArticleGet - Get article details
+// This will return all properties related to article entity
 func (s *SDK) ArticleGet(ctx context.Context, request operations.ArticleGetRequest) (*operations.ArticleGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Article/{articleID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -707,7 +745,7 @@ func (s *SDK) ArticleGet(ctx context.Context, request operations.ArticleGetReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -747,8 +785,9 @@ func (s *SDK) ArticleGet(ctx context.Context, request operations.ArticleGetReque
 	return res, nil
 }
 
+// AuthLogin - Authenticate and provide token for autherizations.
 func (s *SDK) AuthLogin(ctx context.Context, request operations.AuthLoginRequest) (*operations.AuthLoginResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Auth/login"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -766,7 +805,7 @@ func (s *SDK) AuthLogin(ctx context.Context, request operations.AuthLoginRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -796,8 +835,10 @@ func (s *SDK) AuthLogin(ctx context.Context, request operations.AuthLoginRequest
 	return res, nil
 }
 
+// GymGet - Get gym details
+// This will return all properties related to gym entity
 func (s *SDK) GymGet(ctx context.Context, request operations.GymGetRequest) (*operations.GymGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Gym/{gymID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -805,7 +846,7 @@ func (s *SDK) GymGet(ctx context.Context, request operations.GymGetRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -845,8 +886,10 @@ func (s *SDK) GymGet(ctx context.Context, request operations.GymGetRequest) (*op
 	return res, nil
 }
 
+// MembershipGet - Get all of the members details
+// This will return all properties related to member entity
 func (s *SDK) MembershipGet(ctx context.Context, request operations.MembershipGetRequest) (*operations.MembershipGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Membership"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -854,7 +897,7 @@ func (s *SDK) MembershipGet(ctx context.Context, request operations.MembershipGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -894,8 +937,9 @@ func (s *SDK) MembershipGet(ctx context.Context, request operations.MembershipGe
 	return res, nil
 }
 
+// MembershipPost - Add new Member
 func (s *SDK) MembershipPost(ctx context.Context, request operations.MembershipPostRequest) (*operations.MembershipPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Membership"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -913,7 +957,7 @@ func (s *SDK) MembershipPost(ctx context.Context, request operations.MembershipP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -953,8 +997,9 @@ func (s *SDK) MembershipPost(ctx context.Context, request operations.MembershipP
 	return res, nil
 }
 
+// PackageDelete - Delete existing package
 func (s *SDK) PackageDelete(ctx context.Context, request operations.PackageDeleteRequest) (*operations.PackageDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Package"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -964,7 +1009,7 @@ func (s *SDK) PackageDelete(ctx context.Context, request operations.PackageDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1024,8 +1069,9 @@ func (s *SDK) PackageDelete(ctx context.Context, request operations.PackageDelet
 	return res, nil
 }
 
+// PackageGet - Get package details by packageId
 func (s *SDK) PackageGet(ctx context.Context, request operations.PackageGetRequest) (*operations.PackageGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Package"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1035,7 +1081,7 @@ func (s *SDK) PackageGet(ctx context.Context, request operations.PackageGetReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1085,8 +1131,9 @@ func (s *SDK) PackageGet(ctx context.Context, request operations.PackageGetReque
 	return res, nil
 }
 
+// PackagePost - Insert new package into the system
 func (s *SDK) PackagePost(ctx context.Context, request operations.PackagePostRequest) (*operations.PackagePostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Package"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1104,7 +1151,7 @@ func (s *SDK) PackagePost(ctx context.Context, request operations.PackagePostReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1144,8 +1191,9 @@ func (s *SDK) PackagePost(ctx context.Context, request operations.PackagePostReq
 	return res, nil
 }
 
+// PackagePut - Update existing package by its ID
 func (s *SDK) PackagePut(ctx context.Context, request operations.PackagePutRequest) (*operations.PackagePutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Package"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1163,7 +1211,7 @@ func (s *SDK) PackagePut(ctx context.Context, request operations.PackagePutReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1203,8 +1251,9 @@ func (s *SDK) PackagePut(ctx context.Context, request operations.PackagePutReque
 	return res, nil
 }
 
+// PackageSearch - Search packages
 func (s *SDK) PackageSearch(ctx context.Context, request operations.PackageSearchRequest) (*operations.PackageSearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Package/Search"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1214,7 +1263,7 @@ func (s *SDK) PackageSearch(ctx context.Context, request operations.PackageSearc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1264,8 +1313,9 @@ func (s *SDK) PackageSearch(ctx context.Context, request operations.PackageSearc
 	return res, nil
 }
 
+// PackageUpdateStatus - Status update of existing package
 func (s *SDK) PackageUpdateStatus(ctx context.Context, request operations.PackageUpdateStatusRequest) (*operations.PackageUpdateStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Package/UpdateStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -1275,7 +1325,7 @@ func (s *SDK) PackageUpdateStatus(ctx context.Context, request operations.Packag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1335,8 +1385,9 @@ func (s *SDK) PackageUpdateStatus(ctx context.Context, request operations.Packag
 	return res, nil
 }
 
+// StatusGet - Get the current status of message
 func (s *SDK) StatusGet(ctx context.Context, request operations.StatusGetRequest) (*operations.StatusGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Status"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1346,7 +1397,7 @@ func (s *SDK) StatusGet(ctx context.Context, request operations.StatusGetRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1386,8 +1437,9 @@ func (s *SDK) StatusGet(ctx context.Context, request operations.StatusGetRequest
 	return res, nil
 }
 
+// TestGet - Get the all Test objects.
 func (s *SDK) TestGet(ctx context.Context) (*operations.TestGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Test"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1395,7 +1447,7 @@ func (s *SDK) TestGet(ctx context.Context) (*operations.TestGetResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1425,8 +1477,10 @@ func (s *SDK) TestGet(ctx context.Context) (*operations.TestGetResponse, error) 
 	return res, nil
 }
 
+// UserGet - Get all Users detail
+// This will return all properties related to User entity
 func (s *SDK) UserGet(ctx context.Context) (*operations.UserGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/User"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1434,7 +1488,7 @@ func (s *SDK) UserGet(ctx context.Context) (*operations.UserGetResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1464,8 +1518,9 @@ func (s *SDK) UserGet(ctx context.Context) (*operations.UserGetResponse, error) 
 	return res, nil
 }
 
+// UserRegisterUser - Register a new User
 func (s *SDK) UserRegisterUser(ctx context.Context, request operations.UserRegisterUserRequest) (*operations.UserRegisterUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/User/registerUser"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1475,7 +1530,7 @@ func (s *SDK) UserRegisterUser(ctx context.Context, request operations.UserRegis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1497,8 +1552,9 @@ func (s *SDK) UserRegisterUser(ctx context.Context, request operations.UserRegis
 	return res, nil
 }
 
+// UserUpdateUser - Update an exsisting User
 func (s *SDK) UserUpdateUser(ctx context.Context, request operations.UserUpdateUserRequest) (*operations.UserUpdateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/User/updateuser"
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -1508,7 +1564,7 @@ func (s *SDK) UserUpdateUser(ctx context.Context, request operations.UserUpdateU
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

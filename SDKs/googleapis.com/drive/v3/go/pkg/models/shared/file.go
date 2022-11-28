@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FileCapabilities
+// Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
 type FileCapabilities struct {
 	CanAcceptOwnership                    *bool `json:"canAcceptOwnership,omitempty"`
 	CanAddChildren                        *bool `json:"canAddChildren,omitempty"`
@@ -45,22 +47,30 @@ type FileCapabilities struct {
 	CanUntrash                            *bool `json:"canUntrash,omitempty"`
 }
 
+// FileContentHintsThumbnail
+// A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
 type FileContentHintsThumbnail struct {
 	Image    *string `json:"image,omitempty"`
 	MimeType *string `json:"mimeType,omitempty"`
 }
 
+// FileContentHints
+// Additional information about the content of the file. These fields are never populated in responses.
 type FileContentHints struct {
 	IndexableText *string                    `json:"indexableText,omitempty"`
 	Thumbnail     *FileContentHintsThumbnail `json:"thumbnail,omitempty"`
 }
 
+// FileImageMediaMetadataLocation
+// Geographic location information stored in the image.
 type FileImageMediaMetadataLocation struct {
 	Altitude  *float64 `json:"altitude,omitempty"`
 	Latitude  *float64 `json:"latitude,omitempty"`
 	Longitude *float64 `json:"longitude,omitempty"`
 }
 
+// FileImageMediaMetadata
+// Additional metadata about image media, if available.
 type FileImageMediaMetadata struct {
 	Aperture         *float32                        `json:"aperture,omitempty"`
 	CameraMake       *string                         `json:"cameraMake,omitempty"`
@@ -85,27 +95,37 @@ type FileImageMediaMetadata struct {
 	Width            *int32                          `json:"width,omitempty"`
 }
 
+// FileLabelInfo
+// An overview of the labels on the file.
 type FileLabelInfo struct {
 	Labels []Label `json:"labels,omitempty"`
 }
 
+// FileLinkShareMetadata
+// Contains details about the link URLs that clients are using to refer to this item.
 type FileLinkShareMetadata struct {
 	SecurityUpdateEligible *bool `json:"securityUpdateEligible,omitempty"`
 	SecurityUpdateEnabled  *bool `json:"securityUpdateEnabled,omitempty"`
 }
 
+// FileShortcutDetails
+// Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
 type FileShortcutDetails struct {
 	TargetID          *string `json:"targetId,omitempty"`
 	TargetMimeType    *string `json:"targetMimeType,omitempty"`
 	TargetResourceKey *string `json:"targetResourceKey,omitempty"`
 }
 
+// FileVideoMediaMetadata
+// Additional metadata about video media. This may not be available immediately upon upload.
 type FileVideoMediaMetadata struct {
 	DurationMillis *string `json:"durationMillis,omitempty"`
 	Height         *int32  `json:"height,omitempty"`
 	Width          *int32  `json:"width,omitempty"`
 }
 
+// File
+// The metadata for a file.
 type File struct {
 	AppProperties                map[string]string       `json:"appProperties,omitempty"`
 	Capabilities                 *FileCapabilities       `json:"capabilities,omitempty"`
@@ -143,6 +163,72 @@ type File struct {
 	Parents                      []string                `json:"parents,omitempty"`
 	PermissionIds                []string                `json:"permissionIds,omitempty"`
 	Permissions                  []Permission            `json:"permissions,omitempty"`
+	Properties                   map[string]string       `json:"properties,omitempty"`
+	QuotaBytesUsed               *string                 `json:"quotaBytesUsed,omitempty"`
+	ResourceKey                  *string                 `json:"resourceKey,omitempty"`
+	Sha1Checksum                 *string                 `json:"sha1Checksum,omitempty"`
+	Sha256Checksum               *string                 `json:"sha256Checksum,omitempty"`
+	Shared                       *bool                   `json:"shared,omitempty"`
+	SharedWithMeTime             *time.Time              `json:"sharedWithMeTime,omitempty"`
+	SharingUser                  *User                   `json:"sharingUser,omitempty"`
+	ShortcutDetails              *FileShortcutDetails    `json:"shortcutDetails,omitempty"`
+	Size                         *string                 `json:"size,omitempty"`
+	Spaces                       []string                `json:"spaces,omitempty"`
+	Starred                      *bool                   `json:"starred,omitempty"`
+	TeamDriveID                  *string                 `json:"teamDriveId,omitempty"`
+	ThumbnailLink                *string                 `json:"thumbnailLink,omitempty"`
+	ThumbnailVersion             *string                 `json:"thumbnailVersion,omitempty"`
+	Trashed                      *bool                   `json:"trashed,omitempty"`
+	TrashedTime                  *time.Time              `json:"trashedTime,omitempty"`
+	TrashingUser                 *User                   `json:"trashingUser,omitempty"`
+	Version                      *string                 `json:"version,omitempty"`
+	VideoMediaMetadata           *FileVideoMediaMetadata `json:"videoMediaMetadata,omitempty"`
+	ViewedByMe                   *bool                   `json:"viewedByMe,omitempty"`
+	ViewedByMeTime               *time.Time              `json:"viewedByMeTime,omitempty"`
+	ViewersCanCopyContent        *bool                   `json:"viewersCanCopyContent,omitempty"`
+	WebContentLink               *string                 `json:"webContentLink,omitempty"`
+	WebViewLink                  *string                 `json:"webViewLink,omitempty"`
+	WritersCanShare              *bool                   `json:"writersCanShare,omitempty"`
+}
+
+// FileInput
+// The metadata for a file.
+type FileInput struct {
+	AppProperties                map[string]string       `json:"appProperties,omitempty"`
+	Capabilities                 *FileCapabilities       `json:"capabilities,omitempty"`
+	ContentHints                 *FileContentHints       `json:"contentHints,omitempty"`
+	ContentRestrictions          []ContentRestriction    `json:"contentRestrictions,omitempty"`
+	CopyRequiresWriterPermission *bool                   `json:"copyRequiresWriterPermission,omitempty"`
+	CreatedTime                  *time.Time              `json:"createdTime,omitempty"`
+	Description                  *string                 `json:"description,omitempty"`
+	DriveID                      *string                 `json:"driveId,omitempty"`
+	ExplicitlyTrashed            *bool                   `json:"explicitlyTrashed,omitempty"`
+	FileExtension                *string                 `json:"fileExtension,omitempty"`
+	FolderColorRgb               *string                 `json:"folderColorRgb,omitempty"`
+	FullFileExtension            *string                 `json:"fullFileExtension,omitempty"`
+	HasAugmentedPermissions      *bool                   `json:"hasAugmentedPermissions,omitempty"`
+	HasThumbnail                 *bool                   `json:"hasThumbnail,omitempty"`
+	HeadRevisionID               *string                 `json:"headRevisionId,omitempty"`
+	IconLink                     *string                 `json:"iconLink,omitempty"`
+	ID                           *string                 `json:"id,omitempty"`
+	ImageMediaMetadata           *FileImageMediaMetadata `json:"imageMediaMetadata,omitempty"`
+	IsAppAuthorized              *bool                   `json:"isAppAuthorized,omitempty"`
+	Kind                         *string                 `json:"kind,omitempty"`
+	LabelInfo                    *FileLabelInfo          `json:"labelInfo,omitempty"`
+	LastModifyingUser            *User                   `json:"lastModifyingUser,omitempty"`
+	LinkShareMetadata            *FileLinkShareMetadata  `json:"linkShareMetadata,omitempty"`
+	Md5Checksum                  *string                 `json:"md5Checksum,omitempty"`
+	MimeType                     *string                 `json:"mimeType,omitempty"`
+	ModifiedByMe                 *bool                   `json:"modifiedByMe,omitempty"`
+	ModifiedByMeTime             *time.Time              `json:"modifiedByMeTime,omitempty"`
+	ModifiedTime                 *time.Time              `json:"modifiedTime,omitempty"`
+	Name                         *string                 `json:"name,omitempty"`
+	OriginalFilename             *string                 `json:"originalFilename,omitempty"`
+	OwnedByMe                    *bool                   `json:"ownedByMe,omitempty"`
+	Owners                       []User                  `json:"owners,omitempty"`
+	Parents                      []string                `json:"parents,omitempty"`
+	PermissionIds                []string                `json:"permissionIds,omitempty"`
+	Permissions                  []PermissionInput       `json:"permissions,omitempty"`
 	Properties                   map[string]string       `json:"properties,omitempty"`
 	QuotaBytesUsed               *string                 `json:"quotaBytesUsed,omitempty"`
 	ResourceKey                  *string                 `json:"resourceKey,omitempty"`

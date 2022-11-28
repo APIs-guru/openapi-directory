@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EventAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileId" })
+  @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: string;
 
-  @Metadata({ data: "json, name=fileUrl" })
+  @SpeakeasyMetadata({ data: "json, name=fileUrl" })
   fileUrl?: string;
 
-  @Metadata({ data: "json, name=iconLink" })
+  @SpeakeasyMetadata({ data: "json, name=iconLink" })
   iconLink?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

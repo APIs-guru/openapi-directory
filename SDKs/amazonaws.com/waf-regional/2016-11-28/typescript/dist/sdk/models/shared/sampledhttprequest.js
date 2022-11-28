@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRequest } from "./httprequest";
 // SampledHttpRequest
 /**
@@ -34,23 +34,23 @@ var SampledHttpRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", String)
     ], SampledHttpRequest.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=Request" }),
+        SpeakeasyMetadata({ data: "json, name=Request" }),
         __metadata("design:type", HttpRequest)
     ], SampledHttpRequest.prototype, "request", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleWithinRuleGroup" }),
+        SpeakeasyMetadata({ data: "json, name=RuleWithinRuleGroup" }),
         __metadata("design:type", String)
     ], SampledHttpRequest.prototype, "ruleWithinRuleGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=Timestamp" }),
         __metadata("design:type", Date)
     ], SampledHttpRequest.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Weight" }),
+        SpeakeasyMetadata({ data: "json, name=Weight" }),
         __metadata("design:type", Number)
     ], SampledHttpRequest.prototype, "weight", void 0);
     return SampledHttpRequest;

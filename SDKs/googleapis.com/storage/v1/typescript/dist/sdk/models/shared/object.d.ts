@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ObjectAccessControl } from "./objectaccesscontrol";
 /**
  * Metadata of customer-supplied encryption key, if the object is encrypted by such a key.

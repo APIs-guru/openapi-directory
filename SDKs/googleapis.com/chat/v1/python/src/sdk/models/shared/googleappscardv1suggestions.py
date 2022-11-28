@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleappscardv1suggestionitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsCardV1Suggestions:
-    items: Optional[List[googleappscardv1suggestionitem.GoogleAppsCardV1SuggestionItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
+    r"""GoogleAppsCardV1Suggestions
+    Suggested values that users can enter. These values appear when users click inside the text input field. As users type, the suggested values dynamically filter to match what the users have typed. For example, a text input field for programming language might suggest Java, JavaScript, Python, and C++. When users start typing \"Jav\", the list of suggestions filters to show just Java and JavaScript. Suggested values help guide users to enter values that your app can make sense of. When referring to JavaScript, some users might enter \"javascript\" and others \"java script\". Suggesting \"JavaScript\" can standardize how users interact with your app. When specified, `TextInput.type` is always `SINGLE_LINE`, even if it is set to `MULTIPLE_LINE`.
+    """
+    
+    items: Optional[List[GoogleAppsCardV1SuggestionItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
     

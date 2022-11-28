@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateSuiteDefinitionResponse = /** @class */ (function (_super) {
     __extends(UpdateSuiteDefinitionResponse, _super);
     function UpdateSuiteDefinitionResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], UpdateSuiteDefinitionResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], UpdateSuiteDefinitionResponse.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteDefinitionArn" }),
+        SpeakeasyMetadata({ data: "json, name=suiteDefinitionArn" }),
         __metadata("design:type", String)
     ], UpdateSuiteDefinitionResponse.prototype, "suiteDefinitionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteDefinitionId" }),
+        SpeakeasyMetadata({ data: "json, name=suiteDefinitionId" }),
         __metadata("design:type", String)
     ], UpdateSuiteDefinitionResponse.prototype, "suiteDefinitionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteDefinitionName" }),
+        SpeakeasyMetadata({ data: "json, name=suiteDefinitionName" }),
         __metadata("design:type", String)
     ], UpdateSuiteDefinitionResponse.prototype, "suiteDefinitionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiteDefinitionVersion" }),
+        SpeakeasyMetadata({ data: "json, name=suiteDefinitionVersion" }),
         __metadata("design:type", String)
     ], UpdateSuiteDefinitionResponse.prototype, "suiteDefinitionVersion", void 0);
     return UpdateSuiteDefinitionResponse;

@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class CreatePayPalPaymentSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreatePayPalPaymentSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
 
 export class CreatePayPalPaymentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreatePayPalPaymentSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreatePayPalPaymentSecurityOption2;
-}
-
-
-export class CreatePayPalPaymentRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.PayPal;
-
-  @Metadata()
-  security: CreatePayPalPaymentSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreatePayPalPayment200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkout_token" })
+  @SpeakeasyMetadata({ data: "json, name=checkout_token" })
   checkoutToken?: string;
 
-  @Metadata({ data: "json, name=payment_id" })
+  @SpeakeasyMetadata({ data: "json, name=payment_id" })
   paymentId?: string;
 }
 
 
 export class CreatePayPalPaymentDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreatePayPalPaymentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.PayPal;
+
+  @SpeakeasyMetadata()
+  security: CreatePayPalPaymentSecurity;
+}
+
+
 export class CreatePayPalPaymentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPayPalPayment200ApplicationJsonObject?: CreatePayPalPayment200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPayPalPaymentDefaultApplicationJsonObject?: CreatePayPalPaymentDefaultApplicationJson;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -15,14 +15,14 @@ class RequestLogOperationsHeaders:
 
 @dataclass
 class RequestLogOperationsRequest:
-    query_params: RequestLogOperationsQueryParams = field(default=None)
-    headers: RequestLogOperationsHeaders = field(default=None)
+    headers: RequestLogOperationsHeaders = field()
+    query_params: RequestLogOperationsQueryParams = field()
     
 
 @dataclass
 class RequestLogOperationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     log_operation_list: Optional[shared.LogOperationList] = field(default=None)
-    status_code: int = field(default=None)
     

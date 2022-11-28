@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutTeamsTeamIdMembershipsUserIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class PutTeamsTeamIdMembershipsUserIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=requesterUserId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requesterUserId" })
   requesterUserId?: string;
 }
 
 
-export class PutTeamsTeamIdMembershipsUserIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  userMembership?: shared.UserMembership;
+export class PutTeamsTeamIdMembershipsUserIdRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  userMembership?: shared.UserMembershipInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  userMembership1?: shared.UserMembership;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  userMembership1?: shared.UserMembershipInput;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
-  userMembership2?: shared.UserMembership;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
+  userMembership2?: shared.UserMembershipInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  userMembership3?: shared.UserMembership;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  userMembership3?: shared.UserMembershipInput;
 }
 
 
 export class PutTeamsTeamIdMembershipsUserIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutTeamsTeamIdMembershipsUserIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutTeamsTeamIdMembershipsUserIdQueryParams;
 
-  @Metadata()
-  request?: PutTeamsTeamIdMembershipsUserIdRequests;
+  @SpeakeasyMetadata()
+  request?: PutTeamsTeamIdMembershipsUserIdRequestsInput;
 }
 
 
 export class PutTeamsTeamIdMembershipsUserIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userInfo?: shared.UserInfo;
 }

@@ -29,6 +29,18 @@ const (
 	CapacityCommitmentStateEnumFailed           CapacityCommitmentStateEnum = "FAILED"
 )
 
+// CapacityCommitmentInput
+// Capacity commitment is a way to purchase compute capacity for BigQuery jobs (in the form of slots) with some committed period of usage. Annual commitments renew by default. Commitments can be removed after their commitment end time passes. In order to remove annual commitment, its plan needs to be changed to monthly or flex first. A capacity commitment resource exists as a child resource of the admin project.
+type CapacityCommitmentInput struct {
+	FailureStatus        *Status                            `json:"failureStatus,omitempty"`
+	MultiRegionAuxiliary *bool                              `json:"multiRegionAuxiliary,omitempty"`
+	Plan                 *CapacityCommitmentPlanEnum        `json:"plan,omitempty"`
+	RenewalPlan          *CapacityCommitmentRenewalPlanEnum `json:"renewalPlan,omitempty"`
+	SlotCount            *string                            `json:"slotCount,omitempty"`
+}
+
+// CapacityCommitment
+// Capacity commitment is a way to purchase compute capacity for BigQuery jobs (in the form of slots) with some committed period of usage. Annual commitments renew by default. Commitments can be removed after their commitment end time passes. In order to remove annual commitment, its plan needs to be changed to monthly or flex first. A capacity commitment resource exists as a child resource of the admin project.
 type CapacityCommitment struct {
 	CommitmentEndTime    *string                            `json:"commitmentEndTime,omitempty"`
 	CommitmentStartTime  *string                            `json:"commitmentStartTime,omitempty"`

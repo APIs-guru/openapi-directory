@@ -1,100 +1,101 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppendBlockChildrenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class AppendBlockChildrenRequestBodyChildrenHeading2TextText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 }
 
 
 export class AppendBlockChildrenRequestBodyChildrenHeading2Text extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: AppendBlockChildrenRequestBodyChildrenHeading2TextText;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class AppendBlockChildrenRequestBodyChildrenHeading2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text", elemType: operations.AppendBlockChildrenRequestBodyChildrenHeading2Text })
+  @SpeakeasyMetadata({ data: "json, name=text", elemType: AppendBlockChildrenRequestBodyChildrenHeading2Text })
   text?: AppendBlockChildrenRequestBodyChildrenHeading2Text[];
 }
 
 
 export class AppendBlockChildrenRequestBodyChildren extends SpeakeasyBase {
-  @Metadata({ data: "json, name=heading_2" })
+  @SpeakeasyMetadata({ data: "json, name=heading_2" })
   heading2?: AppendBlockChildrenRequestBodyChildrenHeading2;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class AppendBlockChildrenRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=children", elemType: operations.AppendBlockChildrenRequestBodyChildren })
+  @SpeakeasyMetadata({ data: "json, name=children", elemType: AppendBlockChildrenRequestBodyChildren })
   children?: AppendBlockChildrenRequestBodyChildren[];
 }
 
 
-export class AppendBlockChildrenRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AppendBlockChildrenPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: AppendBlockChildrenRequestBody;
-}
-
-
 export class AppendBlockChildren200ApplicationJsonChildPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class AppendBlockChildren200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=child_page" })
+  @SpeakeasyMetadata({ data: "json, name=child_page" })
   childPage?: AppendBlockChildren200ApplicationJsonChildPage;
 
-  @Metadata({ data: "json, name=created_time" })
+  @SpeakeasyMetadata({ data: "json, name=created_time" })
   createdTime?: string;
 
-  @Metadata({ data: "json, name=has_children" })
+  @SpeakeasyMetadata({ data: "json, name=has_children" })
   hasChildren?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=last_edited_time" })
+  @SpeakeasyMetadata({ data: "json, name=last_edited_time" })
   lastEditedTime?: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
+export class AppendBlockChildrenRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AppendBlockChildrenPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: AppendBlockChildrenRequestBody;
+}
+
+
 export class AppendBlockChildrenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   appendBlockChildren200ApplicationJsonObject?: AppendBlockChildren200ApplicationJson;
 }

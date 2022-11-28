@@ -18,6 +18,8 @@ type CreateDocumentationPartHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateDocumentationPartRequestBodyLocation
+// Specifies the target API entity to which the documentation applies.
 type CreateDocumentationPartRequestBodyLocation struct {
 	Method     *string                           `json:"method,omitempty"`
 	Name       *string                           `json:"name,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleDefinition } from "./ruledefinition";
+
 
 
 // StatelessRule
@@ -7,9 +8,9 @@ import { RuleDefinition } from "./ruledefinition";
  * A single stateless rule. This is used in <a>StatelessRulesAndCustomActions</a>.
 **/
 export class StatelessRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority: number;
 
-  @Metadata({ data: "json, name=RuleDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=RuleDefinition" })
   ruleDefinition: RuleDefinition;
 }

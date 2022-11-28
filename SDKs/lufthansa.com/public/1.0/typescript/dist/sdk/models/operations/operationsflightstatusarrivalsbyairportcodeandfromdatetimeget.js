@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetPathParams = /** @class */ (function (_super) {
     __extends(OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetPathParams, _super);
@@ -30,11 +30,11 @@ var OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetPathParams = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=airportCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=airportCode" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetPathParams.prototype, "airportCode", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fromDateTime" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fromDateTime" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetPathParams.prototype, "fromDateTime", void 0);
     return OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetPathParams;
@@ -46,11 +46,11 @@ var OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetQueryParams = /
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetQueryParams.prototype, "offset", void 0);
     return OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetQueryParams;
@@ -62,7 +62,7 @@ var OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetHeaders = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetHeaders.prototype, "accept", void 0);
     return OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetHeaders;
@@ -74,7 +74,7 @@ var OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetSecurity = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetSecurity.prototype, "auth", void 0);
     return OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetSecurity;
@@ -86,19 +86,19 @@ var OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetRequest = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetPathParams)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetQueryParams)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetHeaders)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetSecurity)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetRequest.prototype, "security", void 0);
     return OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetRequest;
@@ -110,15 +110,15 @@ var OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetResponse = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetResponse.prototype, "operationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetResponse.prototype, "statusCode", void 0);
     return OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetResponse;

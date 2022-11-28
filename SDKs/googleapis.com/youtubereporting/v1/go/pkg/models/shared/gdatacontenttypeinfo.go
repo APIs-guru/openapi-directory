@@ -1,5 +1,7 @@
 package shared
 
+// GdataContentTypeInfo
+// gdata
 type GdataContentTypeInfo struct {
 	BestGuess    *string `json:"bestGuess,omitempty"`
 	FromBytes    *string `json:"fromBytes,omitempty"`

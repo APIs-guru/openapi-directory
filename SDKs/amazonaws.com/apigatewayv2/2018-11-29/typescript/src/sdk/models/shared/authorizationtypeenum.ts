@@ -1,8 +1,9 @@
 
 
+
 export enum AuthorizationTypeEnum {
-    None = "NONE"
-,    AwsIam = "AWS_IAM"
-,    Custom = "CUSTOM"
-,    Jwt = "JWT"
+    None = "NONE",
+    AwsIam = "AWS_IAM",
+    Custom = "CUSTOM",
+    Jwt = "JWT"
 }

@@ -1,6 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { StructuralElementInput } from "./structuralelement";
 import { StructuralElement } from "./structuralelement";
+
+
+
+// FootnoteInput
+/** 
+ * A document footnote.
+**/
+export class FootnoteInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElementInput })
+  content?: StructuralElementInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=footnoteId" })
+  footnoteId?: string;
+}
 
 
 // Footnote
@@ -8,9 +22,9 @@ import { StructuralElement } from "./structuralelement";
  * A document footnote.
 **/
 export class Footnote extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.StructuralElement })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElement })
   content?: StructuralElement[];
 
-  @Metadata({ data: "json, name=footnoteId" })
+  @SpeakeasyMetadata({ data: "json, name=footnoteId" })
   footnoteId?: string;
 }

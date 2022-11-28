@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetErrorCodeEnum } from "./asseterrorcodeenum";
 /**
  * Contains error details for the requested associate project asset action.

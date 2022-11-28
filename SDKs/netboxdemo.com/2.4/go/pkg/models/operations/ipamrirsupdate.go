@@ -10,7 +10,7 @@ type IpamRirsUpdatePathParams struct {
 
 type IpamRirsUpdateRequest struct {
 	PathParams IpamRirsUpdatePathParams
-	Request    shared.Rir `request:"mediaType=application/json"`
+	Request    shared.RirInput `request:"mediaType=application/json"`
 }
 
 type IpamRirsUpdateResponse struct {

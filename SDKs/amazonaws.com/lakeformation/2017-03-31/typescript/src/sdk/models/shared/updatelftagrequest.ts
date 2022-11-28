@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateLfTagRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=TagKey" })
+  @SpeakeasyMetadata({ data: "json, name=TagKey" })
   tagKey: string;
 
-  @Metadata({ data: "json, name=TagValuesToAdd" })
+  @SpeakeasyMetadata({ data: "json, name=TagValuesToAdd" })
   tagValuesToAdd?: string[];
 
-  @Metadata({ data: "json, name=TagValuesToDelete" })
+  @SpeakeasyMetadata({ data: "json, name=TagValuesToDelete" })
   tagValuesToDelete?: string[];
 }

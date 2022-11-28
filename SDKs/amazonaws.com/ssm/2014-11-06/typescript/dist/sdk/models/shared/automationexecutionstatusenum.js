@@ -1,0 +1,21 @@
+export var AutomationExecutionStatusEnum;
+(function (AutomationExecutionStatusEnum) {
+    AutomationExecutionStatusEnum["Pending"] = "Pending";
+    AutomationExecutionStatusEnum["InProgress"] = "InProgress";
+    AutomationExecutionStatusEnum["Waiting"] = "Waiting";
+    AutomationExecutionStatusEnum["Success"] = "Success";
+    AutomationExecutionStatusEnum["TimedOut"] = "TimedOut";
+    AutomationExecutionStatusEnum["Cancelling"] = "Cancelling";
+    AutomationExecutionStatusEnum["Cancelled"] = "Cancelled";
+    AutomationExecutionStatusEnum["Failed"] = "Failed";
+    AutomationExecutionStatusEnum["PendingApproval"] = "PendingApproval";
+    AutomationExecutionStatusEnum["Approved"] = "Approved";
+    AutomationExecutionStatusEnum["Rejected"] = "Rejected";
+    AutomationExecutionStatusEnum["Scheduled"] = "Scheduled";
+    AutomationExecutionStatusEnum["RunbookInProgress"] = "RunbookInProgress";
+    AutomationExecutionStatusEnum["PendingChangeCalendarOverride"] = "PendingChangeCalendarOverride";
+    AutomationExecutionStatusEnum["ChangeCalendarOverrideApproved"] = "ChangeCalendarOverrideApproved";
+    AutomationExecutionStatusEnum["ChangeCalendarOverrideRejected"] = "ChangeCalendarOverrideRejected";
+    AutomationExecutionStatusEnum["CompletedWithSuccess"] = "CompletedWithSuccess";
+    AutomationExecutionStatusEnum["CompletedWithFailure"] = "CompletedWithFailure";
+})(AutomationExecutionStatusEnum || (AutomationExecutionStatusEnum = {}));

@@ -8,6 +8,8 @@ const (
 	MailExportOptionsExportFormatEnumPst                     MailExportOptionsExportFormatEnum = "PST"
 )
 
+// MailExportOptions
+// Options for Gmail exports.
 type MailExportOptions struct {
 	ExportFormat                *MailExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
 	ShowConfidentialModeContent *bool                              `json:"showConfidentialModeContent,omitempty"`

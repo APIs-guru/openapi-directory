@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecognitionAudio } from "./recognitionaudio";
-import { RecognitionConfig } from "./recognitionconfig";
-// RecognizeRequest
+import { RecognitionConfigInput } from "./recognitionconfig";
+// RecognizeRequestInput
 /**
  * The top-level message sent by the client for the `Recognize` method.
 **/
-var RecognizeRequest = /** @class */ (function (_super) {
-    __extends(RecognizeRequest, _super);
-    function RecognizeRequest() {
+var RecognizeRequestInput = /** @class */ (function (_super) {
+    __extends(RecognizeRequestInput, _super);
+    function RecognizeRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audio" }),
+        SpeakeasyMetadata({ data: "json, name=audio" }),
         __metadata("design:type", RecognitionAudio)
-    ], RecognizeRequest.prototype, "audio", void 0);
+    ], RecognizeRequestInput.prototype, "audio", void 0);
     __decorate([
-        Metadata({ data: "json, name=config" }),
-        __metadata("design:type", RecognitionConfig)
-    ], RecognizeRequest.prototype, "config", void 0);
-    return RecognizeRequest;
+        SpeakeasyMetadata({ data: "json, name=config" }),
+        __metadata("design:type", RecognitionConfigInput)
+    ], RecognizeRequestInput.prototype, "config", void 0);
+    return RecognizeRequestInput;
 }(SpeakeasyBase));
-export { RecognizeRequest };
+export { RecognizeRequestInput };

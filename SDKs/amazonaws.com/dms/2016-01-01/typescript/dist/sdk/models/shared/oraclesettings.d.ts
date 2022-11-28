@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CharLengthSemanticsEnum } from "./charlengthsemanticsenum";
 /**
  * Provides information that defines an Oracle endpoint.

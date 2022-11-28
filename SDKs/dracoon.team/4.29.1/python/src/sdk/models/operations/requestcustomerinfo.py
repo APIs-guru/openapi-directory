@@ -10,13 +10,13 @@ class RequestCustomerInfoHeaders:
 
 @dataclass
 class RequestCustomerInfoRequest:
-    headers: RequestCustomerInfoHeaders = field(default=None)
+    headers: RequestCustomerInfoHeaders = field()
     
 
 @dataclass
 class RequestCustomerInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_data: Optional[shared.CustomerData] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
 
 
+
 export class CarrierRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carrierName" })
+  @SpeakeasyMetadata({ data: "json, name=carrierName" })
   carrierName?: string;
 
-  @Metadata({ data: "json, name=carrierService" })
+  @SpeakeasyMetadata({ data: "json, name=carrierService" })
   carrierService?: string;
 
-  @Metadata({ data: "json, name=flatAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=flatAdjustment" })
   flatAdjustment?: Price;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=originPostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=originPostalCode" })
   originPostalCode?: string;
 
-  @Metadata({ data: "json, name=percentageAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=percentageAdjustment" })
   percentageAdjustment?: string;
 }

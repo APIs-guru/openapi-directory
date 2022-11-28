@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRegisterInstanceEventNotificationAttributesActionEnum(str, Enum):
     REGISTER_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES = "RegisterInstanceEventNotificationAttributes"
@@ -7,6 +11,10 @@ class GetRegisterInstanceEventNotificationAttributesActionEnum(str, Enum):
 
 @dataclass
 class GetRegisterInstanceEventNotificationAttributesInstanceTagAttribute:
+    r"""GetRegisterInstanceEventNotificationAttributesInstanceTagAttribute
+    Information about the tag keys to register for the current Region. You can either specify individual tag keys or register all tag keys in the current Region. You must specify either <code>IncludeAllTagsOfInstance</code> or <code>InstanceTagKeys</code> in the request
+    """
+    
     include_all_tags_of_instance: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'IncludeAllTagsOfInstance' }})
     instance_tag_keys: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceTagKeys' }})
     
@@ -16,10 +24,10 @@ class GetRegisterInstanceEventNotificationAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetRegisterInstanceEventNotificationAttributesQueryParams:
-    action: GetRegisterInstanceEventNotificationAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRegisterInstanceEventNotificationAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetRegisterInstanceEventNotificationAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     instance_tag_attribute: Optional[GetRegisterInstanceEventNotificationAttributesInstanceTagAttribute] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceTagAttribute', 'style': 'form', 'explode': True }})
-    version: GetRegisterInstanceEventNotificationAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +43,13 @@ class GetRegisterInstanceEventNotificationAttributesHeaders:
 
 @dataclass
 class GetRegisterInstanceEventNotificationAttributesRequest:
-    query_params: GetRegisterInstanceEventNotificationAttributesQueryParams = field(default=None)
-    headers: GetRegisterInstanceEventNotificationAttributesHeaders = field(default=None)
+    headers: GetRegisterInstanceEventNotificationAttributesHeaders = field()
+    query_params: GetRegisterInstanceEventNotificationAttributesQueryParams = field()
     
 
 @dataclass
 class GetRegisterInstanceEventNotificationAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

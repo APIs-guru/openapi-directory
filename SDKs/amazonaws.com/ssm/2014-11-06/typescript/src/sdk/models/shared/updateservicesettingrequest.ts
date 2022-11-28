@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateServiceSettingRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request body of the UpdateServiceSetting API operation.
 **/
 export class UpdateServiceSettingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SettingId" })
+  @SpeakeasyMetadata({ data: "json, name=SettingId" })
   settingId: string;
 
-  @Metadata({ data: "json, name=SettingValue" })
+  @SpeakeasyMetadata({ data: "json, name=SettingValue" })
   settingValue: string;
 }

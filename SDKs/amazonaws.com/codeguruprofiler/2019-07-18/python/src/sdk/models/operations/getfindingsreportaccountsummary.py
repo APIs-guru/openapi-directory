@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -23,16 +26,16 @@ class GetFindingsReportAccountSummaryHeaders:
 
 @dataclass
 class GetFindingsReportAccountSummaryRequest:
-    query_params: GetFindingsReportAccountSummaryQueryParams = field(default=None)
-    headers: GetFindingsReportAccountSummaryHeaders = field(default=None)
+    headers: GetFindingsReportAccountSummaryHeaders = field()
+    query_params: GetFindingsReportAccountSummaryQueryParams = field()
     
 
 @dataclass
 class GetFindingsReportAccountSummaryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_findings_report_account_summary_response: Optional[shared.GetFindingsReportAccountSummaryResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

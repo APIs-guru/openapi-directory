@@ -5,36 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class FetchUploadStatusByIDPathParams:
-    upload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'uploadId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class FetchUploadStatusByIDSecurityOption1:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class FetchUploadStatusByIDSecurityOption2:
-    oauth2_authorization_code: shared.SchemeOauth2AuthorizationCode = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    upload_id: str = field(metadata={'path_param': { 'field_name': 'uploadId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FetchUploadStatusByIDSecurity:
-    option1: Optional[FetchUploadStatusByIDSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[FetchUploadStatusByIDSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    oauth2_authorization_code: Optional[shared.SchemeOauth2AuthorizationCode] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FetchUploadStatusByIDRequest:
-    path_params: FetchUploadStatusByIDPathParams = field(default=None)
-    security: FetchUploadStatusByIDSecurity = field(default=None)
+    path_params: FetchUploadStatusByIDPathParams = field()
+    security: FetchUploadStatusByIDSecurity = field()
     
 
 @dataclass
 class FetchUploadStatusByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     upload_status: Optional[shared.UploadStatus] = field(default=None)
     

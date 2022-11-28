@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WebpushFcmOptions } from "./webpushfcmoptions";
 /**
  * [Webpush protocol](https://tools.ietf.org/html/rfc8030) options.

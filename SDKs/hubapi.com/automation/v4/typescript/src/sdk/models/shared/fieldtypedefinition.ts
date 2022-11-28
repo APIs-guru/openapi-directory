@@ -1,101 +1,101 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Option } from "./option";
 
+
 export enum FieldTypeDefinitionFieldTypeEnum {
-    Booleancheckbox = "booleancheckbox"
-,    Checkbox = "checkbox"
-,    Date = "date"
-,    File = "file"
-,    Number = "number"
-,    Phonenumber = "phonenumber"
-,    Radio = "radio"
-,    Select = "select"
-,    Text = "text"
-,    Textarea = "textarea"
-,    CalculationEquation = "calculation_equation"
-,    CalculationRollup = "calculation_rollup"
-,    CalculationScore = "calculation_score"
-,    CalculationReadTime = "calculation_read_time"
-,    Unknown = "unknown"
+    Booleancheckbox = "booleancheckbox",
+    Checkbox = "checkbox",
+    Date = "date",
+    File = "file",
+    Number = "number",
+    Phonenumber = "phonenumber",
+    Radio = "radio",
+    Select = "select",
+    Text = "text",
+    Textarea = "textarea",
+    CalculationEquation = "calculation_equation",
+    CalculationRollup = "calculation_rollup",
+    CalculationScore = "calculation_score",
+    CalculationReadTime = "calculation_read_time",
+    Unknown = "unknown"
 }
 
 export enum FieldTypeDefinitionReferencedObjectTypeEnum {
-    Contact = "CONTACT"
-,    Company = "COMPANY"
-,    Deal = "DEAL"
-,    Engagement = "ENGAGEMENT"
-,    Ticket = "TICKET"
-,    Owner = "OWNER"
-,    Product = "PRODUCT"
-,    LineItem = "LINE_ITEM"
-,    BetDeliverableService = "BET_DELIVERABLE_SERVICE"
-,    Content = "CONTENT"
-,    Conversation = "CONVERSATION"
-,    BetAlert = "BET_ALERT"
-,    Portal = "PORTAL"
-,    Quote = "QUOTE"
-,    FormSubmissionInbounddb = "FORM_SUBMISSION_INBOUNDDB"
-,    Quota = "QUOTA"
-,    Unsubscribe = "UNSUBSCRIBE"
-,    Communication = "COMMUNICATION"
-,    FeedbackSubmission = "FEEDBACK_SUBMISSION"
-,    Attribution = "ATTRIBUTION"
-,    SalesforceSyncError = "SALESFORCE_SYNC_ERROR"
-,    RestorableCrmObject = "RESTORABLE_CRM_OBJECT"
-,    Hub = "HUB"
-,    LandingPage = "LANDING_PAGE"
-,    ProductOrFolder = "PRODUCT_OR_FOLDER"
-,    Task = "TASK"
-,    Form = "FORM"
-,    MarketingEmail = "MARKETING_EMAIL"
-,    AdAccount = "AD_ACCOUNT"
-,    AdCampaign = "AD_CAMPAIGN"
-,    AdGroup = "AD_GROUP"
-,    Ad = "AD"
-,    Keyword = "KEYWORD"
-,    Campaign = "CAMPAIGN"
-,    SocialChannel = "SOCIAL_CHANNEL"
-,    SocialPost = "SOCIAL_POST"
-,    SitePage = "SITE_PAGE"
-,    BlogPost = "BLOG_POST"
-,    Import = "IMPORT"
-,    Export = "EXPORT"
-,    Cta = "CTA"
-,    TaskTemplate = "TASK_TEMPLATE"
-,    AutomationPlatformFlow = "AUTOMATION_PLATFORM_FLOW"
-,    ObjectList = "OBJECT_LIST"
-,    Note = "NOTE"
-,    MeetingEvent = "MEETING_EVENT"
-,    Call = "CALL"
-,    Email = "EMAIL"
-,    PublishingTask = "PUBLISHING_TASK"
-,    ConversationSession = "CONVERSATION_SESSION"
-,    ContactCreateAttribution = "CONTACT_CREATE_ATTRIBUTION"
-,    Invoice = "INVOICE"
-,    MarketingEvent = "MARKETING_EVENT"
-,    ConversationInbox = "CONVERSATION_INBOX"
-,    Chatflow = "CHATFLOW"
-,    MediaBridge = "MEDIA_BRIDGE"
-,    Sequence = "SEQUENCE"
-,    SequenceStep = "SEQUENCE_STEP"
-,    Forecast = "FORECAST"
-,    Snippet = "SNIPPET"
-,    Template = "TEMPLATE"
-,    Unknown = "UNKNOWN"
+    Contact = "CONTACT",
+    Company = "COMPANY",
+    Deal = "DEAL",
+    Engagement = "ENGAGEMENT",
+    Ticket = "TICKET",
+    Owner = "OWNER",
+    Product = "PRODUCT",
+    LineItem = "LINE_ITEM",
+    BetDeliverableService = "BET_DELIVERABLE_SERVICE",
+    Content = "CONTENT",
+    Conversation = "CONVERSATION",
+    BetAlert = "BET_ALERT",
+    Portal = "PORTAL",
+    Quote = "QUOTE",
+    FormSubmissionInbounddb = "FORM_SUBMISSION_INBOUNDDB",
+    Quota = "QUOTA",
+    Unsubscribe = "UNSUBSCRIBE",
+    Communication = "COMMUNICATION",
+    FeedbackSubmission = "FEEDBACK_SUBMISSION",
+    Attribution = "ATTRIBUTION",
+    SalesforceSyncError = "SALESFORCE_SYNC_ERROR",
+    RestorableCrmObject = "RESTORABLE_CRM_OBJECT",
+    Hub = "HUB",
+    LandingPage = "LANDING_PAGE",
+    ProductOrFolder = "PRODUCT_OR_FOLDER",
+    Task = "TASK",
+    Form = "FORM",
+    MarketingEmail = "MARKETING_EMAIL",
+    AdAccount = "AD_ACCOUNT",
+    AdCampaign = "AD_CAMPAIGN",
+    AdGroup = "AD_GROUP",
+    Ad = "AD",
+    Keyword = "KEYWORD",
+    Campaign = "CAMPAIGN",
+    SocialChannel = "SOCIAL_CHANNEL",
+    SocialPost = "SOCIAL_POST",
+    SitePage = "SITE_PAGE",
+    BlogPost = "BLOG_POST",
+    Import = "IMPORT",
+    Export = "EXPORT",
+    Cta = "CTA",
+    TaskTemplate = "TASK_TEMPLATE",
+    AutomationPlatformFlow = "AUTOMATION_PLATFORM_FLOW",
+    ObjectList = "OBJECT_LIST",
+    Note = "NOTE",
+    MeetingEvent = "MEETING_EVENT",
+    Call = "CALL",
+    Email = "EMAIL",
+    PublishingTask = "PUBLISHING_TASK",
+    ConversationSession = "CONVERSATION_SESSION",
+    ContactCreateAttribution = "CONTACT_CREATE_ATTRIBUTION",
+    Invoice = "INVOICE",
+    MarketingEvent = "MARKETING_EVENT",
+    ConversationInbox = "CONVERSATION_INBOX",
+    Chatflow = "CHATFLOW",
+    MediaBridge = "MEDIA_BRIDGE",
+    Sequence = "SEQUENCE",
+    SequenceStep = "SEQUENCE_STEP",
+    Forecast = "FORECAST",
+    Snippet = "SNIPPET",
+    Template = "TEMPLATE",
+    Unknown = "UNKNOWN"
 }
 
 export enum FieldTypeDefinitionTypeEnum {
-    String = "string"
-,    Number = "number"
-,    Bool = "bool"
-,    Datetime = "datetime"
-,    Enumeration = "enumeration"
-,    Date = "date"
-,    PhoneNumber = "phone_number"
-,    CurrencyNumber = "currency_number"
-,    Json = "json"
-,    ObjectCoordinates = "object_coordinates"
+    String = "string",
+    Number = "number",
+    Bool = "bool",
+    Datetime = "datetime",
+    Enumeration = "enumeration",
+    Date = "date",
+    PhoneNumber = "phone_number",
+    CurrencyNumber = "currency_number",
+    Json = "json",
+    ObjectCoordinates = "object_coordinates"
 }
 
 
@@ -104,21 +104,21 @@ export enum FieldTypeDefinitionTypeEnum {
  * The data type expected by an input field.
 **/
 export class FieldTypeDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldType" })
+  @SpeakeasyMetadata({ data: "json, name=fieldType" })
   fieldType?: FieldTypeDefinitionFieldTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=options", elemType: shared.Option })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: Option })
   options: Option[];
 
-  @Metadata({ data: "json, name=optionsUrl" })
+  @SpeakeasyMetadata({ data: "json, name=optionsUrl" })
   optionsUrl?: string;
 
-  @Metadata({ data: "json, name=referencedObjectType" })
+  @SpeakeasyMetadata({ data: "json, name=referencedObjectType" })
   referencedObjectType?: FieldTypeDefinitionReferencedObjectTypeEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: FieldTypeDefinitionTypeEnum;
 }

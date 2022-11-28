@@ -1,5 +1,7 @@
 package shared
 
+// CreateRemoteAccessSessionRequest
+// Creates and submits a request to start a remote access session.
 type CreateRemoteAccessSessionRequest struct {
 	ClientID            *string                                 `json:"clientId,omitempty"`
 	Configuration       *CreateRemoteAccessSessionConfiguration `json:"configuration,omitempty"`

@@ -1,53 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMarketingV3MarketingEventsAppIdSettingsGetAllPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 }
 
 
-export class GetMarketingV3MarketingEventsAppIdSettingsGetAllSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class GetMarketingV3MarketingEventsAppIdSettingsGetAllSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  developerHapikey: shared.SchemeDeveloperHapikey;
-}
-
-
 export class GetMarketingV3MarketingEventsAppIdSettingsGetAllSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetMarketingV3MarketingEventsAppIdSettingsGetAllSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetMarketingV3MarketingEventsAppIdSettingsGetAllSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  developerHapikey?: shared.SchemeDeveloperHapikey;
 }
 
 
 export class GetMarketingV3MarketingEventsAppIdSettingsGetAllRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMarketingV3MarketingEventsAppIdSettingsGetAllPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetMarketingV3MarketingEventsAppIdSettingsGetAllSecurity;
 }
 
 
 export class GetMarketingV3MarketingEventsAppIdSettingsGetAllResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   eventDetailSettings?: shared.EventDetailSettings;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

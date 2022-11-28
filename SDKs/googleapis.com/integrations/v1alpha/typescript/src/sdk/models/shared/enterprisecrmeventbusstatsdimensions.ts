@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnterpriseCrmEventbusStatsDimensionsEnumFilterTypeEnum {
-    DefaultInclusive = "DEFAULT_INCLUSIVE"
-,    Exclusive = "EXCLUSIVE"
+    DefaultInclusive = "DEFAULT_INCLUSIVE",
+    Exclusive = "EXCLUSIVE"
 }
 
 export enum EnterpriseCrmEventbusStatsDimensionsRetryAttemptEnum {
-    Unspecified = "UNSPECIFIED"
-,    Final = "FINAL"
-,    Retryable = "RETRYABLE"
-,    Canceled = "CANCELED"
+    Unspecified = "UNSPECIFIED",
+    Final = "FINAL",
+    Retryable = "RETRYABLE",
+    Canceled = "CANCELED"
 }
 
 
 export class EnterpriseCrmEventbusStatsDimensions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=enumFilterType" })
+  @SpeakeasyMetadata({ data: "json, name=enumFilterType" })
   enumFilterType?: EnterpriseCrmEventbusStatsDimensionsEnumFilterTypeEnum;
 
-  @Metadata({ data: "json, name=errorEnumString" })
+  @SpeakeasyMetadata({ data: "json, name=errorEnumString" })
   errorEnumString?: string;
 
-  @Metadata({ data: "json, name=retryAttempt" })
+  @SpeakeasyMetadata({ data: "json, name=retryAttempt" })
   retryAttempt?: EnterpriseCrmEventbusStatsDimensionsRetryAttemptEnum;
 
-  @Metadata({ data: "json, name=taskName" })
+  @SpeakeasyMetadata({ data: "json, name=taskName" })
   taskName?: string;
 
-  @Metadata({ data: "json, name=taskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=taskNumber" })
   taskNumber?: string;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 
-  @Metadata({ data: "json, name=warningEnumString" })
+  @SpeakeasyMetadata({ data: "json, name=warningEnumString" })
   warningEnumString?: string;
 
-  @Metadata({ data: "json, name=workflowId" })
+  @SpeakeasyMetadata({ data: "json, name=workflowId" })
   workflowId?: string;
 
-  @Metadata({ data: "json, name=workflowName" })
+  @SpeakeasyMetadata({ data: "json, name=workflowName" })
   workflowName?: string;
 }

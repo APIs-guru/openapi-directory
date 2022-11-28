@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostScriptsInstancesInstanceIdEnablePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=instanceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instanceId" })
   instanceId: string;
 }
 
 
 export class PostScriptsInstancesInstanceIdEnableRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostScriptsInstancesInstanceIdEnablePathParams;
 }
 
 
 export class PostScriptsInstancesInstanceIdEnableResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scriptInstanceDetails?: shared.ScriptInstanceDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

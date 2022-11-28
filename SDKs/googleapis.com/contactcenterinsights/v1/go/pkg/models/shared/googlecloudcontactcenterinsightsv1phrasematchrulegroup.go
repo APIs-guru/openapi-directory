@@ -8,6 +8,8 @@ const (
 	GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnumAnyOf                               GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum = "ANY_OF"
 )
 
+// GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup
+// A message representing a rule in the phrase matcher.
 type GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup struct {
 	PhraseMatchRules []GoogleCloudContactcenterinsightsV1PhraseMatchRule             `json:"phraseMatchRules,omitempty"`
 	Type             *GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum `json:"type,omitempty"`

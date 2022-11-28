@@ -8,11 +8,6 @@ type PostCSSTemplateSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostCSSTemplateRequest struct {
-	Request  shared.CSSTemplateRestAPIPost `request:"mediaType=application/json"`
-	Security PostCSSTemplateSecurity
-}
-
 type PostCSSTemplate201ApplicationJSON struct {
 	ID     *string                        `json:"id,omitempty"`
 	Result *shared.CSSTemplateRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostCSSTemplate422ApplicationJSON struct {
 
 type PostCSSTemplate500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostCSSTemplateRequest struct {
+	Request  shared.CSSTemplateRestAPIPost `request:"mediaType=application/json"`
+	Security PostCSSTemplateSecurity
 }
 
 type PostCSSTemplateResponse struct {

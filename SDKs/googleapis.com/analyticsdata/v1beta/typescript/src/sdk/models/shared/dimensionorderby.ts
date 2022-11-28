@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DimensionOrderByOrderTypeEnum {
-    OrderTypeUnspecified = "ORDER_TYPE_UNSPECIFIED"
-,    Alphanumeric = "ALPHANUMERIC"
-,    CaseInsensitiveAlphanumeric = "CASE_INSENSITIVE_ALPHANUMERIC"
-,    Numeric = "NUMERIC"
+    OrderTypeUnspecified = "ORDER_TYPE_UNSPECIFIED",
+    Alphanumeric = "ALPHANUMERIC",
+    CaseInsensitiveAlphanumeric = "CASE_INSENSITIVE_ALPHANUMERIC",
+    Numeric = "NUMERIC"
 }
 
 
@@ -13,9 +14,9 @@ export enum DimensionOrderByOrderTypeEnum {
  * Sorts by dimension values.
 **/
 export class DimensionOrderBy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionName" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionName" })
   dimensionName?: string;
 
-  @Metadata({ data: "json, name=orderType" })
+  @SpeakeasyMetadata({ data: "json, name=orderType" })
   orderType?: DimensionOrderByOrderTypeEnum;
 }

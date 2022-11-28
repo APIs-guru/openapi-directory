@@ -1,13 +1,13 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://www.healthcare.gov",
+export const ServerList = [
+	"https://www.healthcare.gov",
 ] as const;
 
 export function WithServerURL(
@@ -18,47 +18,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
-// SDK Documentation: https://www.healthcare.gov/developers/
+/* SDK Documentation: https://www.healthcare.gov/developers/*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetApiArticlesMediaTypeExtension - Returns pages content.
-  GetApiArticlesMediaTypeExtension(
+  /**
+   * getApiArticlesMediaTypeExtension - Returns pages content.
+  **/
+  getApiArticlesMediaTypeExtension(
     req: operations.GetApiArticlesMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiArticlesMediaTypeExtensionResponse> {
@@ -66,30 +66,30 @@ export class SDK {
       req = new operations.GetApiArticlesMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/articles{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiArticlesMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetApiArticlesMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -99,8 +99,10 @@ export class SDK {
   }
 
   
-  // GetApiBlogMediaTypeExtension - Returns pages content.
-  GetApiBlogMediaTypeExtension(
+  /**
+   * getApiBlogMediaTypeExtension - Returns pages content.
+  **/
+  getApiBlogMediaTypeExtension(
     req: operations.GetApiBlogMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiBlogMediaTypeExtensionResponse> {
@@ -108,30 +110,30 @@ export class SDK {
       req = new operations.GetApiBlogMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/blog{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiBlogMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetApiBlogMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -141,8 +143,10 @@ export class SDK {
   }
 
   
-  // GetApiGlossaryMediaTypeExtension - Returns pages content.
-  GetApiGlossaryMediaTypeExtension(
+  /**
+   * getApiGlossaryMediaTypeExtension - Returns pages content.
+  **/
+  getApiGlossaryMediaTypeExtension(
     req: operations.GetApiGlossaryMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiGlossaryMediaTypeExtensionResponse> {
@@ -150,30 +154,30 @@ export class SDK {
       req = new operations.GetApiGlossaryMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/glossary{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiGlossaryMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetApiGlossaryMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -183,8 +187,10 @@ export class SDK {
   }
 
   
-  // GetApiQuestionsMediaTypeExtension - Returns pages content.
-  GetApiQuestionsMediaTypeExtension(
+  /**
+   * getApiQuestionsMediaTypeExtension - Returns pages content.
+  **/
+  getApiQuestionsMediaTypeExtension(
     req: operations.GetApiQuestionsMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiQuestionsMediaTypeExtensionResponse> {
@@ -192,30 +198,30 @@ export class SDK {
       req = new operations.GetApiQuestionsMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/questions{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiQuestionsMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetApiQuestionsMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -225,8 +231,10 @@ export class SDK {
   }
 
   
-  // GetApiStatesMediaTypeExtension - Returns pages content.
-  GetApiStatesMediaTypeExtension(
+  /**
+   * getApiStatesMediaTypeExtension - Returns pages content.
+  **/
+  getApiStatesMediaTypeExtension(
     req: operations.GetApiStatesMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiStatesMediaTypeExtensionResponse> {
@@ -234,30 +242,30 @@ export class SDK {
       req = new operations.GetApiStatesMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/states{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiStatesMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetApiStatesMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -267,8 +275,10 @@ export class SDK {
   }
 
   
-  // GetApiTopicsMediaTypeExtension - Returns pages content.
-  GetApiTopicsMediaTypeExtension(
+  /**
+   * getApiTopicsMediaTypeExtension - Returns pages content.
+  **/
+  getApiTopicsMediaTypeExtension(
     req: operations.GetApiTopicsMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiTopicsMediaTypeExtensionResponse> {
@@ -276,30 +286,30 @@ export class SDK {
       req = new operations.GetApiTopicsMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/topics{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiTopicsMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetApiTopicsMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -309,8 +319,10 @@ export class SDK {
   }
 
   
-  // GetBlogPageNameMediaTypeExtension - Returns pages content.
-  GetBlogPageNameMediaTypeExtension(
+  /**
+   * getBlogPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getBlogPageNameMediaTypeExtension(
     req: operations.GetBlogPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBlogPageNameMediaTypeExtensionResponse> {
@@ -318,30 +330,30 @@ export class SDK {
       req = new operations.GetBlogPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/blog/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBlogPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/html`)) {
+        const res: operations.GetBlogPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/html`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -351,8 +363,10 @@ export class SDK {
   }
 
   
-  // GetEsBlogPageNameMediaTypeExtension - Returns pages content.
-  GetEsBlogPageNameMediaTypeExtension(
+  /**
+   * getEsBlogPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getEsBlogPageNameMediaTypeExtension(
     req: operations.GetEsBlogPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEsBlogPageNameMediaTypeExtensionResponse> {
@@ -360,30 +374,30 @@ export class SDK {
       req = new operations.GetEsBlogPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/es/blog/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEsBlogPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/html`)) {
+        const res: operations.GetEsBlogPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/html`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -393,8 +407,10 @@ export class SDK {
   }
 
   
-  // GetEsGlossaryPageNameMediaTypeExtension - Returns pages content.
-  GetEsGlossaryPageNameMediaTypeExtension(
+  /**
+   * getEsGlossaryPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getEsGlossaryPageNameMediaTypeExtension(
     req: operations.GetEsGlossaryPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEsGlossaryPageNameMediaTypeExtensionResponse> {
@@ -402,30 +418,30 @@ export class SDK {
       req = new operations.GetEsGlossaryPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/es/glossary/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEsGlossaryPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/html`)) {
+        const res: operations.GetEsGlossaryPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/html`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -435,8 +451,10 @@ export class SDK {
   }
 
   
-  // GetEsPageNameMediaTypeExtension - Returns pages content.
-  GetEsPageNameMediaTypeExtension(
+  /**
+   * getEsPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getEsPageNameMediaTypeExtension(
     req: operations.GetEsPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEsPageNameMediaTypeExtensionResponse> {
@@ -444,30 +462,30 @@ export class SDK {
       req = new operations.GetEsPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/es/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEsPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/html`)) {
+        const res: operations.GetEsPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/html`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -477,8 +495,10 @@ export class SDK {
   }
 
   
-  // GetEsQuestionPageNameMediaTypeExtension - Returns pages content.
-  GetEsQuestionPageNameMediaTypeExtension(
+  /**
+   * getEsQuestionPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getEsQuestionPageNameMediaTypeExtension(
     req: operations.GetEsQuestionPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEsQuestionPageNameMediaTypeExtensionResponse> {
@@ -486,30 +506,30 @@ export class SDK {
       req = new operations.GetEsQuestionPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/es/question/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEsQuestionPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEsQuestionPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -519,8 +539,10 @@ export class SDK {
   }
 
   
-  // GetEsStateNameMediaTypeExtension - Returns pages content.
-  GetEsStateNameMediaTypeExtension(
+  /**
+   * getEsStateNameMediaTypeExtension - Returns pages content.
+  **/
+  getEsStateNameMediaTypeExtension(
     req: operations.GetEsStateNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEsStateNameMediaTypeExtensionResponse> {
@@ -528,30 +550,30 @@ export class SDK {
       req = new operations.GetEsStateNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/es/{stateName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEsStateNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEsStateNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -561,8 +583,10 @@ export class SDK {
   }
 
   
-  // GetGlossaryPageNameMediaTypeExtension - Returns pages content.
-  GetGlossaryPageNameMediaTypeExtension(
+  /**
+   * getGlossaryPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getGlossaryPageNameMediaTypeExtension(
     req: operations.GetGlossaryPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGlossaryPageNameMediaTypeExtensionResponse> {
@@ -570,30 +594,30 @@ export class SDK {
       req = new operations.GetGlossaryPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/glossary/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGlossaryPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/html`)) {
+        const res: operations.GetGlossaryPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/html`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -603,8 +627,10 @@ export class SDK {
   }
 
   
-  // GetPageNameMediaTypeExtension - Returns pages content.
-  GetPageNameMediaTypeExtension(
+  /**
+   * getPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getPageNameMediaTypeExtension(
     req: operations.GetPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPageNameMediaTypeExtensionResponse> {
@@ -612,30 +638,30 @@ export class SDK {
       req = new operations.GetPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/html`)) {
+        const res: operations.GetPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/html`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -645,8 +671,10 @@ export class SDK {
   }
 
   
-  // GetQuestionPageNameMediaTypeExtension - Returns pages content.
-  GetQuestionPageNameMediaTypeExtension(
+  /**
+   * getQuestionPageNameMediaTypeExtension - Returns pages content.
+  **/
+  getQuestionPageNameMediaTypeExtension(
     req: operations.GetQuestionPageNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionPageNameMediaTypeExtensionResponse> {
@@ -654,30 +682,30 @@ export class SDK {
       req = new operations.GetQuestionPageNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/question/{pageName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionPageNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -687,8 +715,10 @@ export class SDK {
   }
 
   
-  // GetStateNameMediaTypeExtension - Returns pages content.
-  GetStateNameMediaTypeExtension(
+  /**
+   * getStateNameMediaTypeExtension - Returns pages content.
+  **/
+  getStateNameMediaTypeExtension(
     req: operations.GetStateNameMediaTypeExtensionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStateNameMediaTypeExtensionResponse> {
@@ -696,30 +726,30 @@ export class SDK {
       req = new operations.GetStateNameMediaTypeExtensionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{stateName}{mediaTypeExtension}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStateNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetStateNameMediaTypeExtensionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 

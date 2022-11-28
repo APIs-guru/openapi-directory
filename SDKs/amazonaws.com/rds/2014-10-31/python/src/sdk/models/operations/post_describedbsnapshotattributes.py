@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeDbSnapshotAttributesActionEnum(str, Enum):
     DESCRIBE_DB_SNAPSHOT_ATTRIBUTES = "DescribeDBSnapshotAttributes"
@@ -10,8 +14,8 @@ class PostDescribeDbSnapshotAttributesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeDbSnapshotAttributesQueryParams:
-    action: PostDescribeDbSnapshotAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeDbSnapshotAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeDbSnapshotAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeDbSnapshotAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeDbSnapshotAttributesHeaders:
 
 @dataclass
 class PostDescribeDbSnapshotAttributesRequest:
-    query_params: PostDescribeDbSnapshotAttributesQueryParams = field(default=None)
-    headers: PostDescribeDbSnapshotAttributesHeaders = field(default=None)
+    headers: PostDescribeDbSnapshotAttributesHeaders = field()
+    query_params: PostDescribeDbSnapshotAttributesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeDbSnapshotAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

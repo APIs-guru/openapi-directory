@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    campaign_id: str = field(default=None, metadata={'path_param': { 'field_name': 'campaignId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    campaign_id: str = field(metadata={'path_param': { 'field_name': 'campaignId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,20 +31,20 @@ class DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsQu
 
 @dataclass
 class DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsRequest:
-    path_params: DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsPathParams = field()
+    query_params: DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsQueryParams = field()
+    security: DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersCampaignsBulkListCampaignAssignedTargetingOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_list_campaign_assigned_targeting_options_response: Optional[shared.BulkListCampaignAssignedTargetingOptionsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BackupPolicyEnum } from "./backuppolicyenum";
 import { BackupRetentionPolicy } from "./backupretentionpolicy";
 import { Certificates } from "./certificates";

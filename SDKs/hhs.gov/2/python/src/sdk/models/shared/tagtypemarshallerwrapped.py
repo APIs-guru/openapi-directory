@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import meta
-from . import tagtypemarshaller
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TagTypeMarshallerWrapped:
-    callback: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'callback' }})
-    meta: Optional[meta.Meta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
-    results: Optional[List[tagtypemarshaller.TagTypeMarshaller]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    callback: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('callback') }})
+    meta: Optional[Meta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    results: Optional[List[TagTypeMarshaller]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

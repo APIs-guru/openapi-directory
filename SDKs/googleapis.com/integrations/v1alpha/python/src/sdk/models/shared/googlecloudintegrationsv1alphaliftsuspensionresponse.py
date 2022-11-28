@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaLiftSuspensionResponse:
-    event_execution_info_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventExecutionInfoId' }})
+    r"""GoogleCloudIntegrationsV1alphaLiftSuspensionResponse
+    Response of lift Suspense
+    """
+    
+    event_execution_info_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventExecutionInfoId') }})
     

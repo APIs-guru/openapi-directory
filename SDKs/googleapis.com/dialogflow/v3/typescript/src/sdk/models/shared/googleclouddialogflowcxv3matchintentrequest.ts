@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3QueryInput } from "./googleclouddialogflowcxv3queryinput";
 import { GoogleCloudDialogflowCxV3QueryParameters } from "./googleclouddialogflowcxv3queryparameters";
+
 
 
 // GoogleCloudDialogflowCxV3MatchIntentRequest
@@ -8,9 +9,9 @@ import { GoogleCloudDialogflowCxV3QueryParameters } from "./googleclouddialogflo
  * Request of MatchIntent.
 **/
 export class GoogleCloudDialogflowCxV3MatchIntentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryInput" })
+  @SpeakeasyMetadata({ data: "json, name=queryInput" })
   queryInput?: GoogleCloudDialogflowCxV3QueryInput;
 
-  @Metadata({ data: "json, name=queryParams" })
+  @SpeakeasyMetadata({ data: "json, name=queryParams" })
   queryParams?: GoogleCloudDialogflowCxV3QueryParameters;
 }

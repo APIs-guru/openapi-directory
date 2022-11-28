@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import tcpflag_enum
-from . import tcpflag_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TCPFlagField:
-    flags: List[tcpflag_enum.TCPFlagEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Flags' }})
-    masks: Optional[List[tcpflag_enum.TCPFlagEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Masks' }})
+    r"""TCPFlagField
+    TCP flags and masks to inspect packets for, used in stateless rules <a>MatchAttributes</a> settings.
+    """
+    
+    flags: List[TCPFlagEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Flags') }})
+    masks: Optional[List[TCPFlagEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Masks') }})
     

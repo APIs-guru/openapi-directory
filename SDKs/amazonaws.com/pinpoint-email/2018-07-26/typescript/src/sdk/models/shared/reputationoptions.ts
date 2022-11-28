@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReputationOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Enable or disable collection of reputation metrics for emails that you send using this configuration set in the current AWS Region. 
 **/
 export class ReputationOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LastFreshStart" })
+  @SpeakeasyMetadata({ data: "json, name=LastFreshStart" })
   lastFreshStart?: Date;
 
-  @Metadata({ data: "json, name=ReputationMetricsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=ReputationMetricsEnabled" })
   reputationMetricsEnabled?: boolean;
 }

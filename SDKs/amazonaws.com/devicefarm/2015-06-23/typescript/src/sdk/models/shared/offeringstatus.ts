@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Offering } from "./offering";
 import { OfferingTransactionTypeEnum } from "./offeringtransactiontypeenum";
+
 
 
 // OfferingStatus
@@ -8,15 +9,15 @@ import { OfferingTransactionTypeEnum } from "./offeringtransactiontypeenum";
  * The status of the offering.
 **/
 export class OfferingStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effectiveOn" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveOn" })
   effectiveOn?: Date;
 
-  @Metadata({ data: "json, name=offering" })
+  @SpeakeasyMetadata({ data: "json, name=offering" })
   offering?: Offering;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: OfferingTransactionTypeEnum;
 }

@@ -5,32 +5,32 @@ from sdk.models import shared
 
 @dataclass
 class PatchSiteRequestBodyIcon128File:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    icon128_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'icon128_file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    icon128_file: str = field(metadata={'multipart_form': { 'field_name': 'icon128_file' }})
     
 
 @dataclass
 class PatchSiteRequestBodyIcon16File:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    icon16_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'icon16_file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    icon16_file: str = field(metadata={'multipart_form': { 'field_name': 'icon16_file' }})
     
 
 @dataclass
 class PatchSiteRequestBodyIcon32File:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    icon32_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'icon32_file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    icon32_file: str = field(metadata={'multipart_form': { 'field_name': 'icon32_file' }})
     
 
 @dataclass
 class PatchSiteRequestBodyIcon48File:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    icon48_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'icon48_file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    icon48_file: str = field(metadata={'multipart_form': { 'field_name': 'icon48_file' }})
     
 
 @dataclass
 class PatchSiteRequestBodyLogoFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    logo_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'logo_file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    logo_file: str = field(metadata={'multipart_form': { 'field_name': 'logo_file' }})
     
 
 @dataclass
@@ -153,7 +153,7 @@ class PatchSiteRequest:
 
 @dataclass
 class PatchSiteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     site_entity: Optional[shared.SiteEntity] = field(default=None)
-    status_code: int = field(default=None)
     

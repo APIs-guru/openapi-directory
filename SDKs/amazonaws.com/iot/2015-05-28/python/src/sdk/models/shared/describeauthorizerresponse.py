@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import authorizerdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeAuthorizerResponse:
-    authorizer_description: Optional[authorizerdescription.AuthorizerDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerDescription' }})
+    authorizer_description: Optional[AuthorizerDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerDescription') }})
     

@@ -55,6 +55,8 @@ const (
 	VideoStatusUploadStatusEnumDeleted   VideoStatusUploadStatusEnum = "deleted"
 )
 
+// VideoStatus
+// Basic details about a video category, such as its localized title. Next Id: 18
 type VideoStatus struct {
 	Embeddable              *bool                           `json:"embeddable,omitempty"`
 	FailureReason           *VideoStatusFailureReasonEnum   `json:"failureReason,omitempty"`

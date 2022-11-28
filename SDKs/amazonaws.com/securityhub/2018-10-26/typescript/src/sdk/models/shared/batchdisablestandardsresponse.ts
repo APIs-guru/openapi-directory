@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardsSubscription } from "./standardssubscription";
 
 
+
 export class BatchDisableStandardsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StandardsSubscriptions", elemType: shared.StandardsSubscription })
+  @SpeakeasyMetadata({ data: "json, name=StandardsSubscriptions", elemType: StandardsSubscription })
   standardsSubscriptions?: StandardsSubscription[];
 }

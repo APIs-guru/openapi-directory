@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceDownloadOwnerSetting } from "./resourcedownloadownersetting";
+
 
 
 // S3MachineLearningModelResourceData
@@ -7,12 +8,12 @@ import { ResourceDownloadOwnerSetting } from "./resourcedownloadownersetting";
  * Attributes that define an Amazon S3 machine learning resource.
 **/
 export class S3MachineLearningModelResourceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationPath" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationPath" })
   destinationPath?: string;
 
-  @Metadata({ data: "json, name=OwnerSetting" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerSetting" })
   ownerSetting?: ResourceDownloadOwnerSetting;
 
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JourneyPushMessage } from "./journeypushmessage";
+
 
 
 // PushMessageActivity
@@ -7,15 +8,15 @@ import { JourneyPushMessage } from "./journeypushmessage";
  * Specifies the settings for a push notification activity in a journey. This type of activity sends a push notification to participants.
 **/
 export class PushMessageActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MessageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=MessageConfig" })
   messageConfig?: JourneyPushMessage;
 
-  @Metadata({ data: "json, name=NextActivity" })
+  @SpeakeasyMetadata({ data: "json, name=NextActivity" })
   nextActivity?: string;
 
-  @Metadata({ data: "json, name=TemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateName" })
   templateName?: string;
 
-  @Metadata({ data: "json, name=TemplateVersion" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateVersion" })
   templateVersion?: string;
 }

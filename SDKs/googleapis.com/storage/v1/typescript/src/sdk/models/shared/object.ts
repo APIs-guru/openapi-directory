@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectAccessControl } from "./objectaccesscontrol";
+
 
 
 // ObjectCustomerEncryption
@@ -8,10 +8,10 @@ import { ObjectAccessControl } from "./objectaccesscontrol";
  * Metadata of customer-supplied encryption key, if the object is encrypted by such a key.
 **/
 export class ObjectCustomerEncryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encryptionAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionAlgorithm" })
   encryptionAlgorithm?: string;
 
-  @Metadata({ data: "json, name=keySha256" })
+  @SpeakeasyMetadata({ data: "json, name=keySha256" })
   keySha256?: string;
 }
 
@@ -21,10 +21,10 @@ export class ObjectCustomerEncryption extends SpeakeasyBase {
  * The owner of the object. This will always be the uploader of the object.
 **/
 export class ObjectOwner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: string;
 
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: string;
 }
 
@@ -34,99 +34,99 @@ export class ObjectOwner extends SpeakeasyBase {
  * An object.
 **/
 export class Object extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acl", elemType: shared.ObjectAccessControl })
+  @SpeakeasyMetadata({ data: "json, name=acl", elemType: ObjectAccessControl })
   acl?: ObjectAccessControl[];
 
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=cacheControl" })
+  @SpeakeasyMetadata({ data: "json, name=cacheControl" })
   cacheControl?: string;
 
-  @Metadata({ data: "json, name=componentCount" })
+  @SpeakeasyMetadata({ data: "json, name=componentCount" })
   componentCount?: number;
 
-  @Metadata({ data: "json, name=contentDisposition" })
+  @SpeakeasyMetadata({ data: "json, name=contentDisposition" })
   contentDisposition?: string;
 
-  @Metadata({ data: "json, name=contentEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=contentEncoding" })
   contentEncoding?: string;
 
-  @Metadata({ data: "json, name=contentLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=contentLanguage" })
   contentLanguage?: string;
 
-  @Metadata({ data: "json, name=contentType" })
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=crc32c" })
+  @SpeakeasyMetadata({ data: "json, name=crc32c" })
   crc32c?: string;
 
-  @Metadata({ data: "json, name=customTime" })
+  @SpeakeasyMetadata({ data: "json, name=customTime" })
   customTime?: Date;
 
-  @Metadata({ data: "json, name=customerEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=customerEncryption" })
   customerEncryption?: ObjectCustomerEncryption;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=eventBasedHold" })
+  @SpeakeasyMetadata({ data: "json, name=eventBasedHold" })
   eventBasedHold?: boolean;
 
-  @Metadata({ data: "json, name=generation" })
+  @SpeakeasyMetadata({ data: "json, name=generation" })
   generation?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 
-  @Metadata({ data: "json, name=md5Hash" })
+  @SpeakeasyMetadata({ data: "json, name=md5Hash" })
   md5Hash?: string;
 
-  @Metadata({ data: "json, name=mediaLink" })
+  @SpeakeasyMetadata({ data: "json, name=mediaLink" })
   mediaLink?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=metageneration" })
+  @SpeakeasyMetadata({ data: "json, name=metageneration" })
   metageneration?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: ObjectOwner;
 
-  @Metadata({ data: "json, name=retentionExpirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=retentionExpirationTime" })
   retentionExpirationTime?: Date;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 
-  @Metadata({ data: "json, name=storageClass" })
+  @SpeakeasyMetadata({ data: "json, name=storageClass" })
   storageClass?: string;
 
-  @Metadata({ data: "json, name=temporaryHold" })
+  @SpeakeasyMetadata({ data: "json, name=temporaryHold" })
   temporaryHold?: boolean;
 
-  @Metadata({ data: "json, name=timeCreated" })
+  @SpeakeasyMetadata({ data: "json, name=timeCreated" })
   timeCreated?: Date;
 
-  @Metadata({ data: "json, name=timeDeleted" })
+  @SpeakeasyMetadata({ data: "json, name=timeDeleted" })
   timeDeleted?: Date;
 
-  @Metadata({ data: "json, name=timeStorageClassUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=timeStorageClassUpdated" })
   timeStorageClassUpdated?: Date;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

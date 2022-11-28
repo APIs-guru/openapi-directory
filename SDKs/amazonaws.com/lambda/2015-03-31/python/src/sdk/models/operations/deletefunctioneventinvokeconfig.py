@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteFunctionEventInvokeConfigPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteFunctionEventInvokeConfigHeaders:
 
 @dataclass
 class DeleteFunctionEventInvokeConfigRequest:
-    path_params: DeleteFunctionEventInvokeConfigPathParams = field(default=None)
-    query_params: DeleteFunctionEventInvokeConfigQueryParams = field(default=None)
-    headers: DeleteFunctionEventInvokeConfigHeaders = field(default=None)
+    headers: DeleteFunctionEventInvokeConfigHeaders = field()
+    path_params: DeleteFunctionEventInvokeConfigPathParams = field()
+    query_params: DeleteFunctionEventInvokeConfigQueryParams = field()
     
 
 @dataclass
 class DeleteFunctionEventInvokeConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

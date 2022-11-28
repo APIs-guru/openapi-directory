@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ProvisioningArtifactDetail } from "./provisioningartifactdetail";
 var ListProvisioningArtifactsOutput = /** @class */ (function (_super) {
     __extends(ListProvisioningArtifactsOutput, _super);
     function ListProvisioningArtifactsOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextPageToken" }),
         __metadata("design:type", String)
     ], ListProvisioningArtifactsOutput.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactDetails", elemType: shared.ProvisioningArtifactDetail }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactDetails", elemType: ProvisioningArtifactDetail }),
         __metadata("design:type", Array)
     ], ListProvisioningArtifactsOutput.prototype, "provisioningArtifactDetails", void 0);
     return ListProvisioningArtifactsOutput;

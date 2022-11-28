@@ -1,5 +1,7 @@
 package shared
 
+// CommitRequest
+// The request for Commit.
 type CommitRequest struct {
 	Mutations            []Mutation          `json:"mutations,omitempty"`
 	RequestOptions       *RequestOptions     `json:"requestOptions,omitempty"`

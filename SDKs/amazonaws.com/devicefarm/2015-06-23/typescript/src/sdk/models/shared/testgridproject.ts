@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestGridVpcConfig } from "./testgridvpcconfig";
+
 
 
 // TestGridProject
@@ -7,18 +8,18 @@ import { TestGridVpcConfig } from "./testgridvpcconfig";
  * A Selenium testing project. Projects are used to collect and collate sessions.
 **/
 export class TestGridProject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=vpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=vpcConfig" })
   vpcConfig?: TestGridVpcConfig;
 }

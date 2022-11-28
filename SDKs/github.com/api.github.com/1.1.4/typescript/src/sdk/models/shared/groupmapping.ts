@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GroupMappingGroups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group_description" })
+  @SpeakeasyMetadata({ data: "json, name=group_description" })
   groupDescription: string;
 
-  @Metadata({ data: "json, name=group_id" })
+  @SpeakeasyMetadata({ data: "json, name=group_id" })
   groupId: string;
 
-  @Metadata({ data: "json, name=group_name" })
+  @SpeakeasyMetadata({ data: "json, name=group_name" })
   groupName: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=synced_at" })
+  @SpeakeasyMetadata({ data: "json, name=synced_at" })
   syncedAt?: string;
 }
 
@@ -25,6 +25,6 @@ export class GroupMappingGroups extends SpeakeasyBase {
  * External Groups to be mapped to a team for membership
 **/
 export class GroupMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groups", elemType: shared.GroupMappingGroups })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: GroupMappingGroups })
   groups?: GroupMappingGroups[];
 }

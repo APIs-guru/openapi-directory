@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AppPackageGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appPkgId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appPkgId" })
   appPkgId: string;
 }
 
 
 export class AppPackageGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AppPackageGetPathParams;
 }
 
 
 export class AppPackageGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   appPkgInfo?: shared.AppPkgInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: shared.ProblemDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

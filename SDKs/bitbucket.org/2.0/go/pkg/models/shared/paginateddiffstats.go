@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedDiffstats
+// A paginated list of diffstats.
 type PaginatedDiffstats struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

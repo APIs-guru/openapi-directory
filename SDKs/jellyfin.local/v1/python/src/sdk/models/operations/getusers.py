@@ -11,18 +11,18 @@ class GetUsersQueryParams:
 
 @dataclass
 class GetUsersSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetUsersRequest:
-    query_params: GetUsersQueryParams = field(default=None)
-    security: GetUsersSecurity = field(default=None)
+    query_params: GetUsersQueryParams = field()
+    security: GetUsersSecurity = field()
     
 
 @dataclass
 class GetUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_dtos: Optional[List[shared.UserDto]] = field(default=None)
     

@@ -10,6 +10,8 @@ const (
 	SegmentsProgramEnumBuyOnGoogleListing      SegmentsProgramEnum = "BUY_ON_GOOGLE_LISTING"
 )
 
+// Segments
+// Dimensions according to which metrics are segmented in the response. Values of product dimensions, such as `offer_id`, reflect the state of a product at the time of the corresponding event, for example, impression or order. Segment fields cannot be selected in queries without also selecting at least one metric field. Values are only set for dimensions requested explicitly in the request's search query.
 type Segments struct {
 	Brand               *string              `json:"brand,omitempty"`
 	CategoryL1          *string              `json:"categoryL1,omitempty"`

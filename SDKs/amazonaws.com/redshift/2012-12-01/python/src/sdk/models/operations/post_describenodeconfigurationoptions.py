@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeNodeConfigurationOptionsActionEnum(str, Enum):
     DESCRIBE_NODE_CONFIGURATION_OPTIONS = "DescribeNodeConfigurationOptions"
@@ -10,10 +14,10 @@ class PostDescribeNodeConfigurationOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeNodeConfigurationOptionsQueryParams:
-    action: PostDescribeNodeConfigurationOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeNodeConfigurationOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeNodeConfigurationOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeNodeConfigurationOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeNodeConfigurationOptionsHeaders:
 
 @dataclass
 class PostDescribeNodeConfigurationOptionsRequest:
-    query_params: PostDescribeNodeConfigurationOptionsQueryParams = field(default=None)
-    headers: PostDescribeNodeConfigurationOptionsHeaders = field(default=None)
+    headers: PostDescribeNodeConfigurationOptionsHeaders = field()
+    query_params: PostDescribeNodeConfigurationOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeNodeConfigurationOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

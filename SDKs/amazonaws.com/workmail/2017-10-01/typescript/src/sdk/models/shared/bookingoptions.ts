@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BookingOptions
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * At least one delegate must be associated to the resource to disable automatic replies from the resource.
 **/
 export class BookingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoAcceptRequests" })
+  @SpeakeasyMetadata({ data: "json, name=AutoAcceptRequests" })
   autoAcceptRequests?: boolean;
 
-  @Metadata({ data: "json, name=AutoDeclineConflictingRequests" })
+  @SpeakeasyMetadata({ data: "json, name=AutoDeclineConflictingRequests" })
   autoDeclineConflictingRequests?: boolean;
 
-  @Metadata({ data: "json, name=AutoDeclineRecurringRequests" })
+  @SpeakeasyMetadata({ data: "json, name=AutoDeclineRecurringRequests" })
   autoDeclineRecurringRequests?: boolean;
 }

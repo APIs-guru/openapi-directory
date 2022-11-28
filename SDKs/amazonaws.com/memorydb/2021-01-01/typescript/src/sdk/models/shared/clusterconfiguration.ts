@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShardDetail } from "./sharddetail";
+
 
 
 // ClusterConfiguration
@@ -8,45 +8,45 @@ import { ShardDetail } from "./sharddetail";
  * A list of cluster configuration options. 
 **/
 export class ClusterConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=MaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=MaintenanceWindow" })
   maintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NodeType" })
+  @SpeakeasyMetadata({ data: "json, name=NodeType" })
   nodeType?: string;
 
-  @Metadata({ data: "json, name=NumShards" })
+  @SpeakeasyMetadata({ data: "json, name=NumShards" })
   numShards?: number;
 
-  @Metadata({ data: "json, name=ParameterGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupName" })
   parameterGroupName?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=Shards", elemType: shared.ShardDetail })
+  @SpeakeasyMetadata({ data: "json, name=Shards", elemType: ShardDetail })
   shards?: ShardDetail[];
 
-  @Metadata({ data: "json, name=SnapshotRetentionLimit" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotRetentionLimit" })
   snapshotRetentionLimit?: number;
 
-  @Metadata({ data: "json, name=SnapshotWindow" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotWindow" })
   snapshotWindow?: string;
 
-  @Metadata({ data: "json, name=SubnetGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetGroupName" })
   subnetGroupName?: string;
 
-  @Metadata({ data: "json, name=TopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=TopicArn" })
   topicArn?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

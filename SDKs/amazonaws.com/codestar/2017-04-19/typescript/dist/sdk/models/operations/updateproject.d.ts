@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum UpdateProjectXAmzTargetEnum {
     CodeStar20170419UpdateProject = "CodeStar_20170419.UpdateProject"

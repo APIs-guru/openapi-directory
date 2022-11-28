@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkCellularGatewayUplinkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,36 +13,36 @@ export class UpdateNetworkCellularGatewayUplinkPathParams extends SpeakeasyBase 
  * The bandwidth settings for the 'cellular' uplink
 **/
 export class UpdateNetworkCellularGatewayUplinkRequestBodyBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limitDown" })
+  @SpeakeasyMetadata({ data: "json, name=limitDown" })
   limitDown?: number;
 
-  @Metadata({ data: "json, name=limitUp" })
+  @SpeakeasyMetadata({ data: "json, name=limitUp" })
   limitUp?: number;
 }
 
 
 export class UpdateNetworkCellularGatewayUplinkRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimits" })
   bandwidthLimits?: UpdateNetworkCellularGatewayUplinkRequestBodyBandwidthLimits;
 }
 
 
 export class UpdateNetworkCellularGatewayUplinkRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkCellularGatewayUplinkPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkCellularGatewayUplinkRequestBody;
 }
 
 
 export class UpdateNetworkCellularGatewayUplinkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkCellularGatewayUplink200ApplicationJsonObject?: Map<string, any>;
 }

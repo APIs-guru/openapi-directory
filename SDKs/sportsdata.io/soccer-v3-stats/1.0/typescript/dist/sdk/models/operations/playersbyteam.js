@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlayersByTeamFormatEnum;
 (function (PlayersByTeamFormatEnum) {
     PlayersByTeamFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var PlayersByTeamPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PlayersByTeamPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=teamid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamid" }),
         __metadata("design:type", String)
     ], PlayersByTeamPathParams.prototype, "teamid", void 0);
     return PlayersByTeamPathParams;
@@ -50,7 +50,7 @@ var PlayersByTeamRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlayersByTeamPathParams)
     ], PlayersByTeamRequest.prototype, "pathParams", void 0);
     return PlayersByTeamRequest;
@@ -62,15 +62,15 @@ var PlayersByTeamResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlayersByTeamResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PlayersByTeamResponse.prototype, "players", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlayersByTeamResponse.prototype, "statusCode", void 0);
     return PlayersByTeamResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExportProjectResult
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Result structure used for requests to export project configuration details. 
 **/
 export class ExportProjectResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=downloadUrl" })
   downloadUrl?: string;
 
-  @Metadata({ data: "json, name=shareUrl" })
+  @SpeakeasyMetadata({ data: "json, name=shareUrl" })
   shareUrl?: string;
 
-  @Metadata({ data: "json, name=snapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotId" })
   snapshotId?: string;
 }

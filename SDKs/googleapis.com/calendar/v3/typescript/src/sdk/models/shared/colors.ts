@@ -1,19 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColorDefinition } from "./colordefinition";
-import { ColorDefinition } from "./colordefinition";
+
 
 
 export class Colors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calendar", elemType: shared.ColorDefinition })
+  @SpeakeasyMetadata({ data: "json, name=calendar", elemType: ColorDefinition })
   calendar?: Map<string, ColorDefinition>;
 
-  @Metadata({ data: "json, name=event", elemType: shared.ColorDefinition })
+  @SpeakeasyMetadata({ data: "json, name=event", elemType: ColorDefinition })
   event?: Map<string, ColorDefinition>;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

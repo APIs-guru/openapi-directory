@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var MarketingEventExternalUniqueIdentifier = /** @class */ (function (_super) {
     __extends(MarketingEventExternalUniqueIdentifier, _super);
     function MarketingEventExternalUniqueIdentifier() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", Number)
     ], MarketingEventExternalUniqueIdentifier.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=externalAccountId" }),
         __metadata("design:type", String)
     ], MarketingEventExternalUniqueIdentifier.prototype, "externalAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalEventId" }),
+        SpeakeasyMetadata({ data: "json, name=externalEventId" }),
         __metadata("design:type", String)
     ], MarketingEventExternalUniqueIdentifier.prototype, "externalEventId", void 0);
     return MarketingEventExternalUniqueIdentifier;

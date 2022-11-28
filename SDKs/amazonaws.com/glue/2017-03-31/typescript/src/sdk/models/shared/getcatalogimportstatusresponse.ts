@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CatalogImportStatus } from "./catalogimportstatus";
 
 
+
 export class GetCatalogImportStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImportStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ImportStatus" })
   importStatus?: CatalogImportStatus;
 }

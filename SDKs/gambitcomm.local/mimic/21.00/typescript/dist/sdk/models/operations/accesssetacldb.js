@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AccessSetAcldbPathParams = /** @class */ (function (_super) {
     __extends(AccessSetAcldbPathParams, _super);
     function AccessSetAcldbPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=databaseName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=databaseName" }),
         __metadata("design:type", String)
     ], AccessSetAcldbPathParams.prototype, "databaseName", void 0);
     return AccessSetAcldbPathParams;
@@ -41,7 +41,7 @@ var AccessSetAcldbRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AccessSetAcldbPathParams)
     ], AccessSetAcldbRequest.prototype, "pathParams", void 0);
     return AccessSetAcldbRequest;
@@ -53,15 +53,15 @@ var AccessSetAcldbResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AccessSetAcldbResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AccessSetAcldbResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AccessSetAcldbResponse.prototype, "accessSetAcldb200ApplicationJsonString", void 0);
     return AccessSetAcldbResponse;

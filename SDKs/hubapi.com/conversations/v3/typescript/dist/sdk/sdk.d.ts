@@ -1,17 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Generate } from "./generate";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.hubapi.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    generate: Generate;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
-    **/
-    PostVisitorIdentificationV3TokensCreateGenerateToken(req: operations.PostVisitorIdentificationV3TokensCreateGenerateTokenRequest, config?: AxiosRequestConfig): Promise<operations.PostVisitorIdentificationV3TokensCreateGenerateTokenResponse>;
 }
 export {};

@@ -1,5 +1,7 @@
 package shared
 
+// MathActivity
+// An activity that computes an arithmetic expression using the message's attributes.
 type MathActivity struct {
 	Attribute string  `json:"attribute"`
 	Math      string  `json:"math"`

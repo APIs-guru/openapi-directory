@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EdgePresetDeploymentTypeEnum } from "./edgepresetdeploymenttypeenum";
+
 
 
 // EdgeOutputConfig
@@ -7,15 +8,15 @@ import { EdgePresetDeploymentTypeEnum } from "./edgepresetdeploymenttypeenum";
  * The output configuration.
 **/
 export class EdgeOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=PresetDeploymentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=PresetDeploymentConfig" })
   presetDeploymentConfig?: string;
 
-  @Metadata({ data: "json, name=PresetDeploymentType" })
+  @SpeakeasyMetadata({ data: "json, name=PresetDeploymentType" })
   presetDeploymentType?: EdgePresetDeploymentTypeEnum;
 
-  @Metadata({ data: "json, name=S3OutputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=S3OutputLocation" })
   s3OutputLocation: string;
 }

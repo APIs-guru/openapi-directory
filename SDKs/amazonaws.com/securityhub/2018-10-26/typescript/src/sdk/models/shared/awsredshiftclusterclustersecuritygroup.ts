@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterClusterSecurityGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A security group that is associated with the cluster.
 **/
 export class AwsRedshiftClusterClusterSecurityGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterSecurityGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterSecurityGroupName" })
   clusterSecurityGroupName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

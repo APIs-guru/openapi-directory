@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDetailsSingleBatchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
   batchUuid: string;
 }
 
 
 export class GetDetailsSingleBatchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDetailsSingleBatchPathParams;
 }
 
 
 export class GetDetailsSingleBatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onebatchesGetResponses200ContentApplication1jsonSchemaPropertiesItemsItems?: shared.OnebatchesGetResponses200ContentApplication1jsonSchemaPropertiesItemsItems;
 }

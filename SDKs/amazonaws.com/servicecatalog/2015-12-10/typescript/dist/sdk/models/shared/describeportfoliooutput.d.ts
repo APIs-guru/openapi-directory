@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BudgetDetail } from "./budgetdetail";
 import { PortfolioDetail } from "./portfoliodetail";
 import { TagOptionDetail } from "./tagoptiondetail";

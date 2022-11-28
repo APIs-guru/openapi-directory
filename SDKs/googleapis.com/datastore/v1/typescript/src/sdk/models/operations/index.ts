@@ -14,4 +14,5 @@ export * from "./datastoreprojectsoperationsget";
 export * from "./datastoreprojectsoperationslist";
 export * from "./datastoreprojectsreserveids";
 export * from "./datastoreprojectsrollback";
+export * from "./datastoreprojectsrunaggregationquery";
 export * from "./datastoreprojectsrunquery";

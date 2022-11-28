@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TransformFilterCriteria
+// The criteria used to filter the machine learning transforms.
 type TransformFilterCriteria struct {
 	CreatedAfter       *time.Time               `json:"CreatedAfter,omitempty"`
 	CreatedBefore      *time.Time               `json:"CreatedBefore,omitempty"`

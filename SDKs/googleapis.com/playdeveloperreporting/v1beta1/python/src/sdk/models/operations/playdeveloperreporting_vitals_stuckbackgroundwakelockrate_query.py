@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryQueryParams:
 
 @dataclass
 class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryRequest:
-    path_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryPathParams = field(default=None)
-    query_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryQueryParams = field(default=None)
+    path_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryPathParams = field()
+    query_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryQueryParams = field()
     request: Optional[shared.GooglePlayDeveloperReportingV1beta1QueryStuckBackgroundWakelockRateMetricSetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_play_developer_reporting_v1beta1_query_stuck_background_wakelock_rate_metric_set_response: Optional[shared.GooglePlayDeveloperReportingV1beta1QueryStuckBackgroundWakelockRateMetricSetResponse] = field(default=None)
-    status_code: int = field(default=None)
     

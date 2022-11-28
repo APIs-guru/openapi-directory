@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,16 +26,16 @@ class ListGroundStationsHeaders:
 
 @dataclass
 class ListGroundStationsRequest:
-    query_params: ListGroundStationsQueryParams = field(default=None)
-    headers: ListGroundStationsHeaders = field(default=None)
+    headers: ListGroundStationsHeaders = field()
+    query_params: ListGroundStationsQueryParams = field()
     
 
 @dataclass
 class ListGroundStationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_ground_stations_response: Optional[shared.ListGroundStationsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

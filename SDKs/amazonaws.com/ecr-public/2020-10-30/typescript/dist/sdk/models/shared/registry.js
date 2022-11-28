@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RegistryAlias } from "./registryalias";
 // Registry
 /**
  * The details of a public registry.
@@ -34,23 +34,23 @@ var Registry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aliases", elemType: shared.RegistryAlias }),
+        SpeakeasyMetadata({ data: "json, name=aliases", elemType: RegistryAlias }),
         __metadata("design:type", Array)
     ], Registry.prototype, "aliases", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryArn" }),
+        SpeakeasyMetadata({ data: "json, name=registryArn" }),
         __metadata("design:type", String)
     ], Registry.prototype, "registryArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], Registry.prototype, "registryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryUri" }),
+        SpeakeasyMetadata({ data: "json, name=registryUri" }),
         __metadata("design:type", String)
     ], Registry.prototype, "registryUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=verified" }),
+        SpeakeasyMetadata({ data: "json, name=verified" }),
         __metadata("design:type", Boolean)
     ], Registry.prototype, "verified", void 0);
     return Registry;

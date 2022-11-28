@@ -27,11 +27,6 @@ type QueryADatabaseRequestBody struct {
 	Sorts  []QueryADatabaseRequestBodySorts `json:"sorts,omitempty"`
 }
 
-type QueryADatabaseRequest struct {
-	PathParams QueryADatabasePathParams
-	Request    *QueryADatabaseRequestBody `request:"mediaType=application/json"`
-}
-
 type QueryADatabase200ApplicationJSONResultsParent struct {
 	DatabaseID *string `json:"database_id,omitempty"`
 	Type       *string `json:"type,omitempty"`
@@ -182,6 +177,11 @@ type QueryADatabase200ApplicationJSON struct {
 	NextCursor *interface{}                              `json:"next_cursor,omitempty"`
 	Object     *string                                   `json:"object,omitempty"`
 	Results    []QueryADatabase200ApplicationJSONResults `json:"results,omitempty"`
+}
+
+type QueryADatabaseRequest struct {
+	PathParams QueryADatabasePathParams
+	Request    *QueryADatabaseRequestBody `request:"mediaType=application/json"`
 }
 
 type QueryADatabaseResponse struct {

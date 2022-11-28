@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BucketByTimePeriodTypeEnum {
-    Day = "day"
-,    Week = "week"
-,    Month = "month"
+    Day = "day",
+    Week = "week",
+    Month = "month"
 }
 
 
 export class BucketByTimePeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timeZoneId" })
+  @SpeakeasyMetadata({ data: "json, name=timeZoneId" })
   timeZoneId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: BucketByTimePeriodTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

@@ -31,7 +31,7 @@ type DatacatalogProjectsLocationsTagTemplatesFieldsCreateSecurity struct {
 type DatacatalogProjectsLocationsTagTemplatesFieldsCreateRequest struct {
 	PathParams  DatacatalogProjectsLocationsTagTemplatesFieldsCreatePathParams
 	QueryParams DatacatalogProjectsLocationsTagTemplatesFieldsCreateQueryParams
-	Request     *shared.GoogleCloudDatacatalogV1beta1TagTemplateField `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDatacatalogV1beta1TagTemplateFieldInput `request:"mediaType=application/json"`
 	Security    DatacatalogProjectsLocationsTagTemplatesFieldsCreateSecurity
 }
 

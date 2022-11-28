@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatingSystemConfigurationManager } from "./operatingsystemconfigurationmanager";
+
 
 
 // OperatingSystem
@@ -8,24 +8,24 @@ import { OperatingSystemConfigurationManager } from "./operatingsystemconfigurat
  * Describes supported operating systems in AWS OpsWorks Stacks.
 **/
 export class OperatingSystem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationManagers", elemType: shared.OperatingSystemConfigurationManager })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationManagers", elemType: OperatingSystemConfigurationManager })
   configurationManagers?: OperatingSystemConfigurationManager[];
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ReportedName" })
+  @SpeakeasyMetadata({ data: "json, name=ReportedName" })
   reportedName?: string;
 
-  @Metadata({ data: "json, name=ReportedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ReportedVersion" })
   reportedVersion?: string;
 
-  @Metadata({ data: "json, name=Supported" })
+  @SpeakeasyMetadata({ data: "json, name=Supported" })
   supported?: boolean;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

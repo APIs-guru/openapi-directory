@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class NoteGetNotesPathParams:
-    recipe_id: int = field(default=None, metadata={'path_param': { 'field_name': 'recipeId', 'style': 'simple', 'explode': False }})
+    recipe_id: int = field(metadata={'path_param': { 'field_name': 'recipeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class NoteGetNotesQueryParams:
 
 @dataclass
 class NoteGetNotesRequest:
-    path_params: NoteGetNotesPathParams = field(default=None)
-    query_params: NoteGetNotesQueryParams = field(default=None)
+    path_params: NoteGetNotesPathParams = field()
+    query_params: NoteGetNotesQueryParams = field()
     
 
 @dataclass
 class NoteGetNotesResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_api_recipe_note_list: Optional[shared.BigOvenModelAPIRecipeNoteList] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

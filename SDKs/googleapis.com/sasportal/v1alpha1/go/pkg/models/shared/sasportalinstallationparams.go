@@ -8,6 +8,8 @@ const (
 	SasPortalInstallationParamsHeightTypeEnumHeightTypeAmsl        SasPortalInstallationParamsHeightTypeEnum = "HEIGHT_TYPE_AMSL"
 )
 
+// SasPortalInstallationParams
+// Information about the device installation parameters.
 type SasPortalInstallationParams struct {
 	AntennaAzimuth     *int32                                     `json:"antennaAzimuth,omitempty"`
 	AntennaBeamwidth   *int32                                     `json:"antennaBeamwidth,omitempty"`

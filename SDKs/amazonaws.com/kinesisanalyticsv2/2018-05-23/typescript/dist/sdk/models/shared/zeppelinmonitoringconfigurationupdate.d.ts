@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LogLevelEnum } from "./loglevelenum";
 /**
  * Updates to the monitoring configuration for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.

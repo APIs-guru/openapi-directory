@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrpcGatewayRoute } from "./grpcgatewayroute";
 import { HttpGatewayRoute } from "./httpgatewayroute";
-import { HttpGatewayRoute } from "./httpgatewayroute";
+
 
 
 // GatewayRouteSpec
@@ -9,15 +9,15 @@ import { HttpGatewayRoute } from "./httpgatewayroute";
  * An object that represents a gateway route specification. Specify one gateway route type.
 **/
 export class GatewayRouteSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=grpcRoute" })
+  @SpeakeasyMetadata({ data: "json, name=grpcRoute" })
   grpcRoute?: GrpcGatewayRoute;
 
-  @Metadata({ data: "json, name=http2Route" })
+  @SpeakeasyMetadata({ data: "json, name=http2Route" })
   http2Route?: HttpGatewayRoute;
 
-  @Metadata({ data: "json, name=httpRoute" })
+  @SpeakeasyMetadata({ data: "json, name=httpRoute" })
   httpRoute?: HttpGatewayRoute;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 }

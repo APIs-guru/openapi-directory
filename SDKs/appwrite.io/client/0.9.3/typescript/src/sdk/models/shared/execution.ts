@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Execution
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Execution
 **/
 export class Execution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$id" })
+  @SpeakeasyMetadata({ data: "json, name=$id" })
   dollarId: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated: number;
 
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode: number;
 
-  @Metadata({ data: "json, name=functionId" })
+  @SpeakeasyMetadata({ data: "json, name=functionId" })
   functionId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=stderr" })
+  @SpeakeasyMetadata({ data: "json, name=stderr" })
   stderr: string;
 
-  @Metadata({ data: "json, name=stdout" })
+  @SpeakeasyMetadata({ data: "json, name=stdout" })
   stdout: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time: number;
 
-  @Metadata({ data: "json, name=trigger" })
+  @SpeakeasyMetadata({ data: "json, name=trigger" })
   trigger: string;
 }

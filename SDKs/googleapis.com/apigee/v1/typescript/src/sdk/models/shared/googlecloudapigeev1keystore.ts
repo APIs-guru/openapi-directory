@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudApigeeV1KeystoreInput
+/** 
+ * Datastore for Certificates and Aliases.
+**/
+export class GoogleCloudApigeeV1KeystoreInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+}
 
 
 // GoogleCloudApigeeV1Keystore
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Datastore for Certificates and Aliases.
 **/
 export class GoogleCloudApigeeV1Keystore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliases" })
+  @SpeakeasyMetadata({ data: "json, name=aliases" })
   aliases?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

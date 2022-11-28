@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransformProcessingConfig } from "./transformprocessingconfig";
+import { ExpressionVariable } from "./expressionvariable";
 // Transform
 /**
  * <p>Contains an asset transform property. A transform is a one-to-one mapping of a property's data points from one form to another. For example, you can use a transform to convert a Celsius data stream to Fahrenheit by applying the transformation expression to each data point of the Celsius stream. A transform can only have a data type of <code>DOUBLE</code> and consume properties with data types of <code>INTEGER</code> or <code>DOUBLE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms">Transforms</a> in the <i>IoT SiteWise User Guide</i>.</p>
@@ -35,15 +35,15 @@ var Transform = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=expression" }),
+        SpeakeasyMetadata({ data: "json, name=expression" }),
         __metadata("design:type", String)
     ], Transform.prototype, "expression", void 0);
     __decorate([
-        Metadata({ data: "json, name=processingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=processingConfig" }),
         __metadata("design:type", TransformProcessingConfig)
     ], Transform.prototype, "processingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=variables", elemType: shared.ExpressionVariable }),
+        SpeakeasyMetadata({ data: "json, name=variables", elemType: ExpressionVariable }),
         __metadata("design:type", Array)
     ], Transform.prototype, "variables", void 0);
     return Transform;

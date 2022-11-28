@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoRollbackConfiguration } from "./autorollbackconfiguration";
 import { FileExistsBehaviorEnum } from "./fileexistsbehaviorenum";
 import { RevisionLocation } from "./revisionlocation";
 import { TargetInstances } from "./targetinstances";
+
 
 
 // CreateDeploymentInput
@@ -10,33 +11,33 @@ import { TargetInstances } from "./targetinstances";
  * Represents the input of a <code>CreateDeployment</code> operation.
 **/
 export class CreateDeploymentInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=autoRollbackConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=autoRollbackConfiguration" })
   autoRollbackConfiguration?: AutoRollbackConfiguration;
 
-  @Metadata({ data: "json, name=deploymentConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfigName" })
   deploymentConfigName?: string;
 
-  @Metadata({ data: "json, name=deploymentGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentGroupName" })
   deploymentGroupName?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fileExistsBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=fileExistsBehavior" })
   fileExistsBehavior?: FileExistsBehaviorEnum;
 
-  @Metadata({ data: "json, name=ignoreApplicationStopFailures" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreApplicationStopFailures" })
   ignoreApplicationStopFailures?: boolean;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: RevisionLocation;
 
-  @Metadata({ data: "json, name=targetInstances" })
+  @SpeakeasyMetadata({ data: "json, name=targetInstances" })
   targetInstances?: TargetInstances;
 
-  @Metadata({ data: "json, name=updateOutdatedInstancesOnly" })
+  @SpeakeasyMetadata({ data: "json, name=updateOutdatedInstancesOnly" })
   updateOutdatedInstancesOnly?: boolean;
 }

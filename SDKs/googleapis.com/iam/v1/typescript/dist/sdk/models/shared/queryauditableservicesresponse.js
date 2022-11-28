@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AuditableService } from "./auditableservice";
 // QueryAuditableServicesResponse
 /**
  * A response containing a list of auditable services for a resource.
@@ -34,7 +34,7 @@ var QueryAuditableServicesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=services", elemType: shared.AuditableService }),
+        SpeakeasyMetadata({ data: "json, name=services", elemType: AuditableService }),
         __metadata("design:type", Array)
     ], QueryAuditableServicesResponse.prototype, "services", void 0);
     return QueryAuditableServicesResponse;

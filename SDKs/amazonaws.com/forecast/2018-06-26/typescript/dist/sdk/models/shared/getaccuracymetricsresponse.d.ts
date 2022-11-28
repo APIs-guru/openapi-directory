@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlOverrideStrategyEnum } from "./automloverridestrategyenum";
 import { OptimizationMetricEnum } from "./optimizationmetricenum";
 import { EvaluationResult } from "./evaluationresult";

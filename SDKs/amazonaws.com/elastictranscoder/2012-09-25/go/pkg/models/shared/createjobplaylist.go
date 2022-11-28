@@ -1,5 +1,7 @@
 package shared
 
+// CreateJobPlaylist
+// Information about the master playlist.
 type CreateJobPlaylist struct {
 	Format               *string               `json:"Format,omitempty"`
 	HlsContentProtection *HlsContentProtection `json:"HlsContentProtection,omitempty"`

@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationCustomRuleMetadata } from "./organizationcustomrulemetadata";
 import { OrganizationManagedRuleMetadata } from "./organizationmanagedrulemetadata";
 
 
+
 export class PutOrganizationConfigRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExcludedAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=ExcludedAccounts" })
   excludedAccounts?: string[];
 
-  @Metadata({ data: "json, name=OrganizationConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConfigRuleName" })
   organizationConfigRuleName: string;
 
-  @Metadata({ data: "json, name=OrganizationCustomRuleMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationCustomRuleMetadata" })
   organizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
 
-  @Metadata({ data: "json, name=OrganizationManagedRuleMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationManagedRuleMetadata" })
   organizationManagedRuleMetadata?: OrganizationManagedRuleMetadata;
 }

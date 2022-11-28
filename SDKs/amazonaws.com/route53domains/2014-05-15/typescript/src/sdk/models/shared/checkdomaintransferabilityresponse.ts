@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainTransferability } from "./domaintransferability";
+
 
 
 // CheckDomainTransferabilityResponse
@@ -7,6 +8,6 @@ import { DomainTransferability } from "./domaintransferability";
  * The CheckDomainTransferability response includes the following elements.
 **/
 export class CheckDomainTransferabilityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Transferability" })
+  @SpeakeasyMetadata({ data: "json, name=Transferability" })
   transferability: DomainTransferability;
 }

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PicoLoadmanagementSetDynamicCurrentPostPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: number;
 }
 
 
 export class PicoLoadmanagementSetDynamicCurrentPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=current" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=current" })
   current: number;
 }
 
 
 export class PicoLoadmanagementSetDynamicCurrentPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PicoLoadmanagementSetDynamicCurrentPostPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PicoLoadmanagementSetDynamicCurrentPostQueryParams;
 }
 
 
 export class PicoLoadmanagementSetDynamicCurrentPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   object?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

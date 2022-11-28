@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcsDestination } from "./gcsdestination";
+
 
 
 // OutputConfig
@@ -7,9 +8,9 @@ import { GcsDestination } from "./gcsdestination";
  * The desired output location and metadata.
 **/
 export class OutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchSize" })
+  @SpeakeasyMetadata({ data: "json, name=batchSize" })
   batchSize?: number;
 
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GcsDestination;
 }

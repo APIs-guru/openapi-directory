@@ -26,6 +26,8 @@ const (
 	LocalPostTopicTypeEnumAlert                         LocalPostTopicTypeEnum = "ALERT"
 )
 
+// LocalPost
+// Represents a [local post](https://support.google.com/business/answer/7662907) for a location.
 type LocalPost struct {
 	AlertType    *LocalPostAlertTypeEnum `json:"alertType,omitempty"`
 	CallToAction *CallToAction           `json:"callToAction,omitempty"`

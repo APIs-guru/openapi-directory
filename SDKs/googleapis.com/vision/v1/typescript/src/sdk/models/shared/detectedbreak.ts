@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DetectedBreakTypeEnum {
-    Unknown = "UNKNOWN"
-,    Space = "SPACE"
-,    SureSpace = "SURE_SPACE"
-,    EolSureSpace = "EOL_SURE_SPACE"
-,    Hyphen = "HYPHEN"
-,    LineBreak = "LINE_BREAK"
+    Unknown = "UNKNOWN",
+    Space = "SPACE",
+    SureSpace = "SURE_SPACE",
+    EolSureSpace = "EOL_SURE_SPACE",
+    Hyphen = "HYPHEN",
+    LineBreak = "LINE_BREAK"
 }
 
 
@@ -15,9 +16,9 @@ export enum DetectedBreakTypeEnum {
  * Detected start or end of a structural component.
 **/
 export class DetectedBreak extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=isPrefix" })
   isPrefix?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DetectedBreakTypeEnum;
 }

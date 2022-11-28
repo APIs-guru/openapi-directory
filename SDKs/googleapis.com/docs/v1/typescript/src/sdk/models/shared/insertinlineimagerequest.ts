@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndOfSegmentLocation } from "./endofsegmentlocation";
 import { Location } from "./location";
 import { Size } from "./size";
+
 
 
 // InsertInlineImageRequest
@@ -9,15 +10,15 @@ import { Size } from "./size";
  * Inserts an InlineObject containing an image at the given location.
 **/
 export class InsertInlineImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endOfSegmentLocation" })
+  @SpeakeasyMetadata({ data: "json, name=endOfSegmentLocation" })
   endOfSegmentLocation?: EndOfSegmentLocation;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=objectSize" })
+  @SpeakeasyMetadata({ data: "json, name=objectSize" })
   objectSize?: Size;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

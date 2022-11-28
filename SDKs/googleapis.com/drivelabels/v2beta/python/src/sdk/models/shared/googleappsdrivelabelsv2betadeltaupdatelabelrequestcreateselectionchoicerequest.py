@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleappsdrivelabelsv2betafieldselectionoptionschoice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequest:
-    choice: Optional[googleappsdrivelabelsv2betafieldselectionoptionschoice.GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'choice' }})
-    field_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldId' }})
+class GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequestInput:
+    r"""GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequestInput
+    Request to create a Selection Choice.
+    """
+    
+    choice: Optional[GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('choice') }})
+    field_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldId') }})
     

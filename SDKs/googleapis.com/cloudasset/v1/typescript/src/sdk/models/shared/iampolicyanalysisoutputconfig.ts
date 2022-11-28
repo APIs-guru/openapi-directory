@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssetV1BigQueryDestination } from "./googlecloudassetv1bigquerydestination";
 import { GoogleCloudAssetV1GcsDestination } from "./googlecloudassetv1gcsdestination";
+
 
 
 // IamPolicyAnalysisOutputConfig
@@ -8,9 +9,9 @@ import { GoogleCloudAssetV1GcsDestination } from "./googlecloudassetv1gcsdestina
  * Output configuration for export IAM policy analysis destination.
 **/
 export class IamPolicyAnalysisOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigqueryDestination" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryDestination" })
   bigqueryDestination?: GoogleCloudAssetV1BigQueryDestination;
 
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GoogleCloudAssetV1GcsDestination;
 }

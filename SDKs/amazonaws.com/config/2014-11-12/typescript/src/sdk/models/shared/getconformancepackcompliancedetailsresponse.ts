@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConformancePackEvaluationResult } from "./conformancepackevaluationresult";
 
 
+
 export class GetConformancePackComplianceDetailsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConformancePackName" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackName" })
   conformancePackName: string;
 
-  @Metadata({ data: "json, name=ConformancePackRuleEvaluationResults", elemType: shared.ConformancePackEvaluationResult })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackRuleEvaluationResults", elemType: ConformancePackEvaluationResult })
   conformancePackRuleEvaluationResults?: ConformancePackEvaluationResult[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

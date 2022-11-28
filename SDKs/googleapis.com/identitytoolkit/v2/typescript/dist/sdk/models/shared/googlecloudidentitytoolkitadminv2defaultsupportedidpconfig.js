@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig } from "./googlecloudidentitytoolkitadminv2applesigninconfig";
 // GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig
 /**
@@ -34,23 +34,23 @@ var GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appleSignInConfig" }),
+        SpeakeasyMetadata({ data: "json, name=appleSignInConfig" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig)
     ], GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig.prototype, "appleSignInConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientId" }),
+        SpeakeasyMetadata({ data: "json, name=clientId" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientSecret" }),
+        SpeakeasyMetadata({ data: "json, name=clientSecret" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig.prototype, "clientSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig.prototype, "name", void 0);
     return GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig;

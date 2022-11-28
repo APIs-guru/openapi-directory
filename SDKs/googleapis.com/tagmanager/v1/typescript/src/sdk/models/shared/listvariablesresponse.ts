@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Variable } from "./variable";
+
 
 
 // ListVariablesResponse
@@ -8,6 +8,6 @@ import { Variable } from "./variable";
  * List Variables Response.
 **/
 export class ListVariablesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=variables", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variables", elemType: Variable })
   variables?: Variable[];
 }

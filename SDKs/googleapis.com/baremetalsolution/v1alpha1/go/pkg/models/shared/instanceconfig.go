@@ -1,5 +1,7 @@
 package shared
 
+// InstanceConfig
+// Configuration parameters for a new instance.
 type InstanceConfig struct {
 	ClientNetwork  *NetworkAddress `json:"clientNetwork,omitempty"`
 	Hyperthreading *bool           `json:"hyperthreading,omitempty"`

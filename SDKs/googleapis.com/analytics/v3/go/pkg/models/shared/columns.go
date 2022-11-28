@@ -1,5 +1,7 @@
 package shared
 
+// Columns
+// Lists columns (dimensions and metrics) for a particular report type.
 type Columns struct {
 	AttributeNames []string `json:"attributeNames,omitempty"`
 	Etag           *string  `json:"etag,omitempty"`

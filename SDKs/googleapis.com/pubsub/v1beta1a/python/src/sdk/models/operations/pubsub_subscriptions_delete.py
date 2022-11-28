@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubSubscriptionsDeletePathParams:
-    subscription: str = field(default=None, metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
+    subscription: str = field(metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubSubscriptionsDeleteQueryParams:
 
 @dataclass
 class PubsubSubscriptionsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubSubscriptionsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class PubsubSubscriptionsDeleteSecurity:
 
 @dataclass
 class PubsubSubscriptionsDeleteRequest:
-    path_params: PubsubSubscriptionsDeletePathParams = field(default=None)
-    query_params: PubsubSubscriptionsDeleteQueryParams = field(default=None)
-    security: PubsubSubscriptionsDeleteSecurity = field(default=None)
+    path_params: PubsubSubscriptionsDeletePathParams = field()
+    query_params: PubsubSubscriptionsDeleteQueryParams = field()
+    security: PubsubSubscriptionsDeleteSecurity = field()
     
 
 @dataclass
 class PubsubSubscriptionsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

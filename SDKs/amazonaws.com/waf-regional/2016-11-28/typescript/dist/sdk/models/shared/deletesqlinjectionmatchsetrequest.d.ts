@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A request to delete a <a>SqlInjectionMatchSet</a> from AWS WAF.
 **/

@@ -15,16 +15,16 @@ type SubmitPostRequestBody struct {
 	Type        string   `multipartForm:"name=type"`
 }
 
-type SubmitPostRequest struct {
-	Request *SubmitPostRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type SubmitPost200ApplicationJSON struct {
 	Identifier    *string           `json:"identifier,omitempty"`
 	Message       *string           `json:"message,omitempty"`
 	PreferenceKey *string           `json:"preference_key,omitempty"`
 	Result        *string           `json:"result,omitempty"`
 	Session       map[string]string `json:"session,omitempty"`
+}
+
+type SubmitPostRequest struct {
+	Request *SubmitPostRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type SubmitPostResponse struct {

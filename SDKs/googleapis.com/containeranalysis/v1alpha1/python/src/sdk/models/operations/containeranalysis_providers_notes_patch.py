@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContaineranalysisProvidersNotesPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class ContaineranalysisProvidersNotesPatchQueryParams:
 
 @dataclass
 class ContaineranalysisProvidersNotesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContaineranalysisProvidersNotesPatchRequest:
-    path_params: ContaineranalysisProvidersNotesPatchPathParams = field(default=None)
-    query_params: ContaineranalysisProvidersNotesPatchQueryParams = field(default=None)
+    path_params: ContaineranalysisProvidersNotesPatchPathParams = field()
+    query_params: ContaineranalysisProvidersNotesPatchQueryParams = field()
+    security: ContaineranalysisProvidersNotesPatchSecurity = field()
     request: Optional[shared.Note] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContaineranalysisProvidersNotesPatchSecurity = field(default=None)
     
 
 @dataclass
 class ContaineranalysisProvidersNotesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     note: Optional[shared.Note] = field(default=None)
-    status_code: int = field(default=None)
     

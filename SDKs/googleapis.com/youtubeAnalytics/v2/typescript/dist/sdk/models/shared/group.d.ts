@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GroupContentDetails } from "./groupcontentdetails";
 import { Errors } from "./errors";
 import { GroupSnippet } from "./groupsnippet";

@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcrContainerImageDetails
+// Information about an Amazon ECR image.
 type AwsEcrContainerImageDetails struct {
 	Architecture     *string  `json:"Architecture,omitempty"`
 	ImageDigest      *string  `json:"ImageDigest,omitempty"`

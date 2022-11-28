@@ -1,40 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CheckAvailabilityOfFundsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Digest" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Digest" })
   digest?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Signature" })
   signature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=TPP-Signature-Certificate" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=TPP-Signature-Certificate" })
   tppSignatureCertificate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Request-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Request-ID" })
   xRequestId: string;
 }
 
 
 export class CheckAvailabilityOfFundsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuthOAuth?: shared.SchemeBearerAuthOAuth;
-}
-
-
-export class CheckAvailabilityOfFundsRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: CheckAvailabilityOfFundsHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.ConfirmationOfFunds;
-
-  @Metadata()
-  security: CheckAvailabilityOfFundsSecurity;
 }
 
 
@@ -45,57 +34,69 @@ export class CheckAvailabilityOfFundsRequest extends SpeakeasyBase {
  * 
 **/
 export class CheckAvailabilityOfFunds200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fundsAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=fundsAvailable" })
   fundsAvailable: boolean;
 }
 
 
+export class CheckAvailabilityOfFundsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: CheckAvailabilityOfFundsHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.ConfirmationOfFunds;
+
+  @SpeakeasyMetadata()
+  security: CheckAvailabilityOfFundsSecurity;
+}
+
+
 export class CheckAvailabilityOfFundsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400Ais?: shared.Error400Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400NgAis?: shared.Error400NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error401NgPiis?: shared.Error401NgPiis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error401Piis?: shared.Error401Piis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error403NgPiis?: shared.Error403NgPiis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error403Piis?: shared.Error403Piis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error404NgPiis?: shared.Error404NgPiis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error404Piis?: shared.Error404Piis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error405NgPiis?: shared.Error405NgPiis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error405Piis?: shared.Error405Piis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error409NgPiis?: shared.Error409NgPiis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error409Piis?: shared.Error409Piis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   checkAvailabilityOfFunds200ApplicationJsonObject?: CheckAvailabilityOfFunds200ApplicationJson;
 }

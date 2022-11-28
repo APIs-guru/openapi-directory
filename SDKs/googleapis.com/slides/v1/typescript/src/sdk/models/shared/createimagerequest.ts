@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PageElementProperties } from "./pageelementproperties";
+
 
 
 // CreateImageRequest
@@ -7,12 +8,12 @@ import { PageElementProperties } from "./pageelementproperties";
  * Creates an image.
 **/
 export class CreateImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elementProperties" })
+  @SpeakeasyMetadata({ data: "json, name=elementProperties" })
   elementProperties?: PageElementProperties;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
+
 
 
 // Tax
@@ -7,9 +8,9 @@ import { Amount } from "./amount";
  * This type contains information about any sales tax applied to a line item.
 **/
 export class Tax extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: Amount;
 
-  @Metadata({ data: "json, name=taxType" })
+  @SpeakeasyMetadata({ data: "json, name=taxType" })
   taxType?: string;
 }

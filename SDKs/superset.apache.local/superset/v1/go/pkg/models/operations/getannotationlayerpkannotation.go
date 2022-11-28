@@ -16,12 +16,6 @@ type GetAnnotationLayerPkAnnotationSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetAnnotationLayerPkAnnotationRequest struct {
-	PathParams  GetAnnotationLayerPkAnnotationPathParams
-	QueryParams GetAnnotationLayerPkAnnotationQueryParams
-	Security    GetAnnotationLayerPkAnnotationSecurity
-}
-
 type GetAnnotationLayerPkAnnotation200ApplicationJSON struct {
 	Count  *float64                          `json:"count,omitempty"`
 	Ids    []string                          `json:"ids,omitempty"`
@@ -42,6 +36,12 @@ type GetAnnotationLayerPkAnnotation422ApplicationJSON struct {
 
 type GetAnnotationLayerPkAnnotation500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetAnnotationLayerPkAnnotationRequest struct {
+	PathParams  GetAnnotationLayerPkAnnotationPathParams
+	QueryParams GetAnnotationLayerPkAnnotationQueryParams
+	Security    GetAnnotationLayerPkAnnotationSecurity
 }
 
 type GetAnnotationLayerPkAnnotationResponse struct {

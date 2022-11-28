@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import fleetcapacity
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeFleetLocationCapacityOutput:
-    fleet_capacity: Optional[fleetcapacity.FleetCapacity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetCapacity' }})
+    r"""DescribeFleetLocationCapacityOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    fleet_capacity: Optional[FleetCapacity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetCapacity') }})
     

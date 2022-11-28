@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import deletefilesystemlustreconfiguration
-from . import deletefilesystemwindowsconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteFileSystemRequest:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    lustre_configuration: Optional[deletefilesystemlustreconfiguration.DeleteFileSystemLustreConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LustreConfiguration' }})
-    windows_configuration: Optional[deletefilesystemwindowsconfiguration.DeleteFileSystemWindowsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WindowsConfiguration' }})
+    r"""DeleteFileSystemRequest
+    The request object for <code>DeleteFileSystem</code> operation.
+    """
+    
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
+    lustre_configuration: Optional[DeleteFileSystemLustreConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LustreConfiguration') }})
+    windows_configuration: Optional[DeleteFileSystemWindowsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WindowsConfiguration') }})
     

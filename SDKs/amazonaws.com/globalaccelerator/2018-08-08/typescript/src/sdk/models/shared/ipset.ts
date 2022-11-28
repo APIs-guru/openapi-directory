@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IpSet
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex type for the set of IP addresses for an accelerator.
 **/
 export class IpSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IpAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddresses" })
   ipAddresses?: string[];
 
-  @Metadata({ data: "json, name=IpFamily" })
+  @SpeakeasyMetadata({ data: "json, name=IpFamily" })
   ipFamily?: string;
 }

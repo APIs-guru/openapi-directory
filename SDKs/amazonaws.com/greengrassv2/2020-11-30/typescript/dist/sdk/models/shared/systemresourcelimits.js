@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SystemResourceLimits
 /**
  * Contains information about system resource limits that the IoT Greengrass Core software applies to a component's processes. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits">Configure system resource limits for components</a>.
@@ -33,11 +33,11 @@ var SystemResourceLimits = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cpus" }),
+        SpeakeasyMetadata({ data: "json, name=cpus" }),
         __metadata("design:type", Number)
     ], SystemResourceLimits.prototype, "cpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=memory" }),
+        SpeakeasyMetadata({ data: "json, name=memory" }),
         __metadata("design:type", Number)
     ], SystemResourceLimits.prototype, "memory", void 0);
     return SystemResourceLimits;

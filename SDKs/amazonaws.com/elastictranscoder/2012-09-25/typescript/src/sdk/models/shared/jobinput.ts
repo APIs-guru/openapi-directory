@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectedProperties } from "./detectedproperties";
 import { Encryption } from "./encryption";
 import { InputCaptions } from "./inputcaptions";
 import { TimeSpan } from "./timespan";
+
 
 
 // JobInput
@@ -10,33 +11,33 @@ import { TimeSpan } from "./timespan";
  * Information about the file that you're transcoding.
 **/
 export class JobInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=DetectedProperties" })
+  @SpeakeasyMetadata({ data: "json, name=DetectedProperties" })
   detectedProperties?: DetectedProperties;
 
-  @Metadata({ data: "json, name=Encryption" })
+  @SpeakeasyMetadata({ data: "json, name=Encryption" })
   encryption?: Encryption;
 
-  @Metadata({ data: "json, name=FrameRate" })
+  @SpeakeasyMetadata({ data: "json, name=FrameRate" })
   frameRate?: string;
 
-  @Metadata({ data: "json, name=InputCaptions" })
+  @SpeakeasyMetadata({ data: "json, name=InputCaptions" })
   inputCaptions?: InputCaptions;
 
-  @Metadata({ data: "json, name=Interlaced" })
+  @SpeakeasyMetadata({ data: "json, name=Interlaced" })
   interlaced?: string;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=Resolution" })
+  @SpeakeasyMetadata({ data: "json, name=Resolution" })
   resolution?: string;
 
-  @Metadata({ data: "json, name=TimeSpan" })
+  @SpeakeasyMetadata({ data: "json, name=TimeSpan" })
   timeSpan?: TimeSpan;
 }

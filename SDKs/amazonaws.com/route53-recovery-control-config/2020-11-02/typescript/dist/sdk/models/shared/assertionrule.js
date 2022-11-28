@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleConfig } from "./ruleconfig";
 import { StatusEnum } from "./statusenum";
 // AssertionRule
@@ -35,31 +35,31 @@ var AssertionRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssertedControls" }),
+        SpeakeasyMetadata({ data: "json, name=AssertedControls" }),
         __metadata("design:type", Array)
     ], AssertionRule.prototype, "assertedControls", void 0);
     __decorate([
-        Metadata({ data: "json, name=ControlPanelArn" }),
+        SpeakeasyMetadata({ data: "json, name=ControlPanelArn" }),
         __metadata("design:type", String)
     ], AssertionRule.prototype, "controlPanelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], AssertionRule.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleConfig" }),
+        SpeakeasyMetadata({ data: "json, name=RuleConfig" }),
         __metadata("design:type", RuleConfig)
     ], AssertionRule.prototype, "ruleConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=SafetyRuleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SafetyRuleArn" }),
         __metadata("design:type", String)
     ], AssertionRule.prototype, "safetyRuleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], AssertionRule.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=WaitPeriodMs" }),
+        SpeakeasyMetadata({ data: "json, name=WaitPeriodMs" }),
         __metadata("design:type", Number)
     ], AssertionRule.prototype, "waitPeriodMs", void 0);
     return AssertionRule;

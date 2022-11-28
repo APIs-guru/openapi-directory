@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetItvPageItemDetailExpandEnum(str, Enum):
@@ -18,6 +19,7 @@ class GetItvPageTextEntryFormatEnum(str, Enum):
 
 @dataclass
 class GetItvPageQueryParams:
+    path: str = field(metadata={'query_param': { 'field_name': 'path', 'style': 'form', 'explode': True }})
     device: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'device', 'style': 'form', 'explode': True }})
     ff: Optional[List[shared.FeatureFlagsEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'ff', 'style': 'form', 'explode': False }})
     item_detail_expand: Optional[GetItvPageItemDetailExpandEnum] = field(default=None, metadata={'query_param': { 'field_name': 'item_detail_expand', 'style': 'form', 'explode': True }})
@@ -27,7 +29,6 @@ class GetItvPageQueryParams:
     list_page_size_large: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'list_page_size_large', 'style': 'form', 'explode': True }})
     max_list_prefetch: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'max_list_prefetch', 'style': 'form', 'explode': True }})
     max_rating: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_rating', 'style': 'form', 'explode': True }})
-    path: str = field(default=None, metadata={'query_param': { 'field_name': 'path', 'style': 'form', 'explode': True }})
     segments: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'segments', 'style': 'form', 'explode': False }})
     sub: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sub', 'style': 'form', 'explode': True }})
     text_entry_format: Optional[GetItvPageTextEntryFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'text_entry_format', 'style': 'form', 'explode': True }})
@@ -35,13 +36,13 @@ class GetItvPageQueryParams:
 
 @dataclass
 class GetItvPageRequest:
-    query_params: GetItvPageQueryParams = field(default=None)
+    query_params: GetItvPageQueryParams = field()
     
 
 @dataclass
 class GetItvPageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     page: Optional[shared.Page] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

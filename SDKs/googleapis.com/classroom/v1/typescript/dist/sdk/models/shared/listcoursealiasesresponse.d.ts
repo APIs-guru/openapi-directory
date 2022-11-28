@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CourseAlias } from "./coursealias";
 /**
  * Response when listing course aliases.

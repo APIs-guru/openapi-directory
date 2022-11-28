@@ -1,6 +1,7 @@
 
 
+
 export enum ModeEnum {
-    Delivery = "DELIVERY"
-,    Filter = "FILTER"
+    Delivery = "DELIVERY",
+    Filter = "FILTER"
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsRecordSet } from "./dnsrecordset";
+
 
 
 // AddDnsRecordSetRequest
@@ -7,12 +8,12 @@ import { DnsRecordSet } from "./dnsrecordset";
  * Request to add a record set to a private managed DNS zone in the shared producer host project.
 **/
 export class AddDnsRecordSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=consumerNetwork" })
   consumerNetwork?: string;
 
-  @Metadata({ data: "json, name=dnsRecordSet" })
+  @SpeakeasyMetadata({ data: "json, name=dnsRecordSet" })
   dnsRecordSet?: DnsRecordSet;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportDestination } from "./exportdestination";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { JobStatusEnum } from "./jobstatusenum";
@@ -36,31 +36,31 @@ var RecommendationExportJob = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=creationTimestamp" }),
         __metadata("design:type", Date)
     ], RecommendationExportJob.prototype, "creationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", ExportDestination)
     ], RecommendationExportJob.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], RecommendationExportJob.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobId" }),
+        SpeakeasyMetadata({ data: "json, name=jobId" }),
         __metadata("design:type", String)
     ], RecommendationExportJob.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestamp" }),
         __metadata("design:type", Date)
     ], RecommendationExportJob.prototype, "lastUpdatedTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceType" }),
+        SpeakeasyMetadata({ data: "json, name=resourceType" }),
         __metadata("design:type", String)
     ], RecommendationExportJob.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], RecommendationExportJob.prototype, "status", void 0);
     return RecommendationExportJob;

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteUsersMeSubscriptionsSubscriptionHandlePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionHandle" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionHandle" })
   subscriptionHandle: string;
 }
 
 
 export class DeleteUsersMeSubscriptionsSubscriptionHandleSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class DeleteUsersMeSubscriptionsSubscriptionHandleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteUsersMeSubscriptionsSubscriptionHandlePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteUsersMeSubscriptionsSubscriptionHandleSecurity;
 }
 
 
 export class DeleteUsersMeSubscriptionsSubscriptionHandleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

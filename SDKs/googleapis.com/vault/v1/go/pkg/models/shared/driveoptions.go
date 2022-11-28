@@ -9,6 +9,8 @@ const (
 	DriveOptionsClientSideEncryptedOptionEnumClientSideEncryptedOptionUnencrypted DriveOptionsClientSideEncryptedOptionEnum = "CLIENT_SIDE_ENCRYPTED_OPTION_UNENCRYPTED"
 )
 
+// DriveOptions
+// Additional options for Drive search
 type DriveOptions struct {
 	ClientSideEncryptedOption *DriveOptionsClientSideEncryptedOptionEnum `json:"clientSideEncryptedOption,omitempty"`
 	IncludeSharedDrives       *bool                                      `json:"includeSharedDrives,omitempty"`

@@ -12,12 +12,12 @@ class GetUserAs2KeysQueryParams:
 
 @dataclass
 class GetUserAs2KeysRequest:
-    query_params: GetUserAs2KeysQueryParams = field(default=None)
+    query_params: GetUserAs2KeysQueryParams = field()
     
 
 @dataclass
 class GetUserAs2KeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     as2_key_entities: Optional[List[shared.As2KeyEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

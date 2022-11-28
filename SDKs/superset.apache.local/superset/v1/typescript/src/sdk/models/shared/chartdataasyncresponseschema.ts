@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChartDataAsyncResponseSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channel_id" })
+  @SpeakeasyMetadata({ data: "json, name=channel_id" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=job_id" })
+  @SpeakeasyMetadata({ data: "json, name=job_id" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=result_url" })
+  @SpeakeasyMetadata({ data: "json, name=result_url" })
   resultUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: string;
 }

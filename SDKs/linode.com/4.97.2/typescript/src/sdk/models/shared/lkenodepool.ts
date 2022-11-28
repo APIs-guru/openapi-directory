@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LkeNodeStatus } from "./lkenodestatus";
 
+
 export enum LkeNodePoolDisksTypeEnum {
-    Raw = "raw"
-,    Ext4 = "ext4"
+    Raw = "raw",
+    Ext4 = "ext4"
 }
 
 
@@ -14,10 +14,10 @@ export enum LkeNodePoolDisksTypeEnum {
  * 
 **/
 export class LkeNodePoolDisks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: LkeNodePoolDisksTypeEnum;
 }
 
@@ -28,21 +28,21 @@ export class LkeNodePoolDisks extends SpeakeasyBase {
  * 
 **/
 export class LkeNodePool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=disks", elemType: shared.LkeNodePoolDisks })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: LkeNodePoolDisks })
   disks?: LkeNodePoolDisks[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=nodes", elemType: shared.LkeNodeStatus })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: LkeNodeStatus })
   nodes?: LkeNodeStatus[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

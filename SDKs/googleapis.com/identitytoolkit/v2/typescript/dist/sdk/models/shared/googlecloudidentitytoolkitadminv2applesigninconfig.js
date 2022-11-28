@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig } from "./googlecloudidentitytoolkitadminv2codeflowconfig";
 // GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig
 /**
@@ -34,11 +34,11 @@ var GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bundleIds" }),
+        SpeakeasyMetadata({ data: "json, name=bundleIds" }),
         __metadata("design:type", Array)
     ], GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig.prototype, "bundleIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=codeFlowConfig" }),
+        SpeakeasyMetadata({ data: "json, name=codeFlowConfig" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig)
     ], GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig.prototype, "codeFlowConfig", void 0);
     return GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig;

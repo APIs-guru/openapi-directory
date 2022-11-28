@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeCacheParameterGroupsActionEnum(str, Enum):
     DESCRIBE_CACHE_PARAMETER_GROUPS = "DescribeCacheParameterGroups"
@@ -10,10 +14,10 @@ class PostDescribeCacheParameterGroupsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeCacheParameterGroupsQueryParams:
-    action: PostDescribeCacheParameterGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeCacheParameterGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeCacheParameterGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeCacheParameterGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeCacheParameterGroupsHeaders:
 
 @dataclass
 class PostDescribeCacheParameterGroupsRequest:
-    query_params: PostDescribeCacheParameterGroupsQueryParams = field(default=None)
-    headers: PostDescribeCacheParameterGroupsHeaders = field(default=None)
+    headers: PostDescribeCacheParameterGroupsHeaders = field()
+    query_params: PostDescribeCacheParameterGroupsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeCacheParameterGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

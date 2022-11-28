@@ -1,5 +1,7 @@
 package shared
 
+// InstanceAndroidDetails
+// The Android instance details resource.
 type InstanceAndroidDetails struct {
 	EnablePiracyCheck *bool   `json:"enablePiracyCheck,omitempty"`
 	Kind              *string `json:"kind,omitempty"`

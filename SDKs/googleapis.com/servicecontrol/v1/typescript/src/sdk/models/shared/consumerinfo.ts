@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConsumerInfoTypeEnum {
-    ConsumerTypeUnspecified = "CONSUMER_TYPE_UNSPECIFIED"
-,    Project = "PROJECT"
-,    Folder = "FOLDER"
-,    Organization = "ORGANIZATION"
-,    ServiceSpecific = "SERVICE_SPECIFIC"
+    ConsumerTypeUnspecified = "CONSUMER_TYPE_UNSPECIFIED",
+    Project = "PROJECT",
+    Folder = "FOLDER",
+    Organization = "ORGANIZATION",
+    ServiceSpecific = "SERVICE_SPECIFIC"
 }
 
 
@@ -14,12 +15,12 @@ export enum ConsumerInfoTypeEnum {
  * `ConsumerInfo` provides information about the consumer.
 **/
 export class ConsumerInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerNumber" })
+  @SpeakeasyMetadata({ data: "json, name=consumerNumber" })
   consumerNumber?: string;
 
-  @Metadata({ data: "json, name=projectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=projectNumber" })
   projectNumber?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ConsumerInfoTypeEnum;
 }

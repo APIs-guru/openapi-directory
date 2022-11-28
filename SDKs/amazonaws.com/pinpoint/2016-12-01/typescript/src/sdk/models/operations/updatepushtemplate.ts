@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePushTemplatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=template-name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=template-name" })
   templateName: string;
 }
 
 
 export class UpdatePushTemplateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=create-new-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=create-new-version" })
   createNewVersion?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" })
   version?: string;
 }
 
 
 export class UpdatePushTemplateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -46,84 +47,84 @@ export class UpdatePushTemplateHeaders extends SpeakeasyBase {
  * Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.
 **/
 export class UpdatePushTemplateRequestBodyPushNotificationTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ADM" })
+  @SpeakeasyMetadata({ data: "json, name=ADM" })
   adm?: shared.AndroidPushNotificationTemplate;
 
-  @Metadata({ data: "json, name=APNS" })
+  @SpeakeasyMetadata({ data: "json, name=APNS" })
   apns?: shared.ApnsPushNotificationTemplate;
 
-  @Metadata({ data: "json, name=Baidu" })
+  @SpeakeasyMetadata({ data: "json, name=Baidu" })
   baidu?: shared.AndroidPushNotificationTemplate;
 
-  @Metadata({ data: "json, name=Default" })
+  @SpeakeasyMetadata({ data: "json, name=Default" })
   default?: shared.DefaultPushNotificationTemplate;
 
-  @Metadata({ data: "json, name=DefaultSubstitutions" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSubstitutions" })
   defaultSubstitutions?: string;
 
-  @Metadata({ data: "json, name=GCM" })
+  @SpeakeasyMetadata({ data: "json, name=GCM" })
   gcm?: shared.AndroidPushNotificationTemplate;
 
-  @Metadata({ data: "json, name=RecommenderId" })
+  @SpeakeasyMetadata({ data: "json, name=RecommenderId" })
   recommenderId?: string;
 
-  @Metadata({ data: "json, name=TemplateDescription" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateDescription" })
   templateDescription?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class UpdatePushTemplateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PushNotificationTemplateRequest" })
+  @SpeakeasyMetadata({ data: "json, name=PushNotificationTemplateRequest" })
   pushNotificationTemplateRequest: UpdatePushTemplateRequestBodyPushNotificationTemplateRequest;
 }
 
 
 export class UpdatePushTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdatePushTemplatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdatePushTemplateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdatePushTemplateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdatePushTemplateRequestBody;
 }
 
 
 export class UpdatePushTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatePushTemplateResponse?: shared.UpdatePushTemplateResponse;
 }

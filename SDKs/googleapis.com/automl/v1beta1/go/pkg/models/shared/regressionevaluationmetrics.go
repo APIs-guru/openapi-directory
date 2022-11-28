@@ -1,5 +1,7 @@
 package shared
 
+// RegressionEvaluationMetrics
+// Metrics for regression problems.
 type RegressionEvaluationMetrics struct {
 	MeanAbsoluteError           *float32 `json:"meanAbsoluteError,omitempty"`
 	MeanAbsolutePercentageError *float32 `json:"meanAbsolutePercentageError,omitempty"`

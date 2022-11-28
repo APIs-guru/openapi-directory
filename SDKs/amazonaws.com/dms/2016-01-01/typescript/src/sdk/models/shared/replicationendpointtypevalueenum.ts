@@ -1,6 +1,7 @@
 
 
+
 export enum ReplicationEndpointTypeValueEnum {
-    Source = "source"
-,    Target = "target"
+    Source = "source",
+    Target = "target"
 }

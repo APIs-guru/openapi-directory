@@ -12,12 +12,12 @@ class TestnetGetTxsQueryParams:
 
 @dataclass
 class TestnetGetTxsRequest:
-    query_params: TestnetGetTxsQueryParams = field(default=None)
+    query_params: TestnetGetTxsQueryParams = field()
     
 
 @dataclass
 class TestnetGetTxsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_txs_response: Optional[shared.GetTxsResponse] = field(default=None)
     

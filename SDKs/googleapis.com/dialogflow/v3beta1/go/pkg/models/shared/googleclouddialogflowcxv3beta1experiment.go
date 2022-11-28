@@ -10,6 +10,8 @@ const (
 	GoogleCloudDialogflowCxV3beta1ExperimentStateEnumRolloutFailed    GoogleCloudDialogflowCxV3beta1ExperimentStateEnum = "ROLLOUT_FAILED"
 )
 
+// GoogleCloudDialogflowCxV3beta1Experiment
+// Represents an experiment in an environment.
 type GoogleCloudDialogflowCxV3beta1Experiment struct {
 	CreateTime           *string                                             `json:"createTime,omitempty"`
 	Definition           *GoogleCloudDialogflowCxV3beta1ExperimentDefinition `json:"definition,omitempty"`

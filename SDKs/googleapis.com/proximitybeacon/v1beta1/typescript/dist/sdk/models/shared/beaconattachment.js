@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BeaconAttachment
 /**
  * Project-specific data associated with a beacon.
@@ -33,23 +33,23 @@ var BeaconAttachment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachmentName" }),
+        SpeakeasyMetadata({ data: "json, name=attachmentName" }),
         __metadata("design:type", String)
     ], BeaconAttachment.prototype, "attachmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTimeMs" }),
+        SpeakeasyMetadata({ data: "json, name=creationTimeMs" }),
         __metadata("design:type", String)
     ], BeaconAttachment.prototype, "creationTimeMs", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", String)
     ], BeaconAttachment.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxDistanceMeters" }),
+        SpeakeasyMetadata({ data: "json, name=maxDistanceMeters" }),
         __metadata("design:type", Number)
     ], BeaconAttachment.prototype, "maxDistanceMeters", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespacedType" }),
+        SpeakeasyMetadata({ data: "json, name=namespacedType" }),
         __metadata("design:type", String)
     ], BeaconAttachment.prototype, "namespacedType", void 0);
     return BeaconAttachment;

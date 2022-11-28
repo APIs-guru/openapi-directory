@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SlotTypeSummary
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides summary information about a slot type.
 **/
 export class SlotTypeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=parentSlotTypeSignature" })
+  @SpeakeasyMetadata({ data: "json, name=parentSlotTypeSignature" })
   parentSlotTypeSignature?: string;
 
-  @Metadata({ data: "json, name=slotTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeId" })
   slotTypeId?: string;
 
-  @Metadata({ data: "json, name=slotTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeName" })
   slotTypeName?: string;
 }

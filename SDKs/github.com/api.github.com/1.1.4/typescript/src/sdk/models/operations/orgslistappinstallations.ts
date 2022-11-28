@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OrgsListAppInstallationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 }
 
 
 export class OrgsListAppInstallationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class OrgsListAppInstallationsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: OrgsListAppInstallationsPathParams;
-
-  @Metadata()
-  queryParams: OrgsListAppInstallationsQueryParams;
-}
-
-
 export class OrgsListAppInstallations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=installations", elemType: shared.Installation })
+  @SpeakeasyMetadata({ data: "json, name=installations", elemType: shared.Installation })
   installations: shared.Installation[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class OrgsListAppInstallationsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: OrgsListAppInstallationsPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: OrgsListAppInstallationsQueryParams;
+}
+
+
 export class OrgsListAppInstallationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   orgsListAppInstallations200ApplicationJsonObject?: OrgsListAppInstallations200ApplicationJson;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2intentmessagemediacontentresponsemediaobject
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowV2IntentMessageMediaContentMediaTypeEnum(str, Enum):
     RESPONSE_MEDIA_TYPE_UNSPECIFIED = "RESPONSE_MEDIA_TYPE_UNSPECIFIED"
@@ -11,6 +13,10 @@ class GoogleCloudDialogflowV2IntentMessageMediaContentMediaTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2IntentMessageMediaContent:
-    media_objects: Optional[List[googleclouddialogflowv2intentmessagemediacontentresponsemediaobject.GoogleCloudDialogflowV2IntentMessageMediaContentResponseMediaObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mediaObjects' }})
-    media_type: Optional[GoogleCloudDialogflowV2IntentMessageMediaContentMediaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mediaType' }})
+    r"""GoogleCloudDialogflowV2IntentMessageMediaContent
+    The media content card for Actions on Google.
+    """
+    
+    media_objects: Optional[List[GoogleCloudDialogflowV2IntentMessageMediaContentResponseMediaObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mediaObjects') }})
+    media_type: Optional[GoogleCloudDialogflowV2IntentMessageMediaContentMediaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mediaType') }})
     

@@ -10,6 +10,8 @@ const (
 	GoogleCloudWebriskV1SubmissionThreatTypesEnumSocialEngineeringExtendedCoverage GoogleCloudWebriskV1SubmissionThreatTypesEnum = "SOCIAL_ENGINEERING_EXTENDED_COVERAGE"
 )
 
+// GoogleCloudWebriskV1Submission
+// Wraps a URI that might be displaying malicious content.
 type GoogleCloudWebriskV1Submission struct {
 	ThreatTypes []GoogleCloudWebriskV1SubmissionThreatTypesEnum `json:"threatTypes,omitempty"`
 	URI         *string                                         `json:"uri,omitempty"`

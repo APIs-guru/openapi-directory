@@ -19,6 +19,8 @@ type GetTraceSummariesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetTraceSummariesRequestBodySamplingStrategy
+// The name and value of a sampling rule to apply to a trace summary.
 type GetTraceSummariesRequestBodySamplingStrategy struct {
 	Name  *shared.SamplingStrategyNameEnum `json:"Name,omitempty"`
 	Value *float64                         `json:"Value,omitempty"`

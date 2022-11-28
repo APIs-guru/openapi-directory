@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetUserVotesShowsEmbedEnum(str, Enum):
@@ -13,12 +14,12 @@ class GetUserVotesShowsQueryParams:
 
 @dataclass
 class GetUserVotesShowsRequest:
-    query_params: GetUserVotesShowsQueryParams = field(default=None)
+    query_params: GetUserVotesShowsQueryParams = field()
     
 
 @dataclass
 class GetUserVotesShowsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     show_votes: Optional[List[shared.ShowVote]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricsNameEnum } from "./metricsnameenum";
+
 
 
 // EnhancedMetrics
@@ -7,6 +8,6 @@ import { MetricsNameEnum } from "./metricsnameenum";
  * Represents enhanced metrics types.
 **/
 export class EnhancedMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShardLevelMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=ShardLevelMetrics" })
   shardLevelMetrics?: MetricsNameEnum[];
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,29 +22,33 @@ class SubscribeHeaders:
 @dataclass_json
 @dataclass
 class SubscribeRequestBodyTarget:
-    target_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetAddress' }})
-    target_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetType' }})
+    r"""SubscribeRequestBodyTarget
+    Information about the SNS topics associated with a notification rule.
+    """
+    
+    target_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetAddress') }})
+    target_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetType') }})
     
 
 @dataclass_json
 @dataclass
 class SubscribeRequestBody:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Arn' }})
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
-    target: SubscribeRequestBodyTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Target' }})
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Arn') }})
+    target: SubscribeRequestBodyTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Target') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
     
 
 @dataclass
 class SubscribeRequest:
-    headers: SubscribeHeaders = field(default=None)
-    request: SubscribeRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SubscribeHeaders = field()
+    request: SubscribeRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SubscribeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     subscribe_result: Optional[shared.SubscribeResult] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

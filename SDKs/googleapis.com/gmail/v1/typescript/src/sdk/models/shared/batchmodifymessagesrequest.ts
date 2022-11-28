@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BatchModifyMessagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addLabelIds" })
+  @SpeakeasyMetadata({ data: "json, name=addLabelIds" })
   addLabelIds?: string[];
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=removeLabelIds" })
+  @SpeakeasyMetadata({ data: "json, name=removeLabelIds" })
   removeLabelIds?: string[];
 }

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDomainsUpdatesAddedDownloadQueryParams = /** @class */ (function (_super) {
     __extends(GetDomainsUpdatesAddedDownloadQueryParams, _super);
     function GetDomainsUpdatesAddedDownloadQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetDomainsUpdatesAddedDownloadQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" }),
         __metadata("design:type", String)
     ], GetDomainsUpdatesAddedDownloadQueryParams.prototype, "date", void 0);
     return GetDomainsUpdatesAddedDownloadQueryParams;
@@ -45,7 +45,7 @@ var GetDomainsUpdatesAddedDownloadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDomainsUpdatesAddedDownloadQueryParams)
     ], GetDomainsUpdatesAddedDownloadRequest.prototype, "queryParams", void 0);
     return GetDomainsUpdatesAddedDownloadRequest;
@@ -57,11 +57,11 @@ var GetDomainsUpdatesAddedDownloadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDomainsUpdatesAddedDownloadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDomainsUpdatesAddedDownloadResponse.prototype, "statusCode", void 0);
     return GetDomainsUpdatesAddedDownloadResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectDeal } from "./directdeal";
+
 
 
 // DirectDealsList
@@ -8,9 +8,9 @@ import { DirectDeal } from "./directdeal";
  * A direct deals feed lists Direct Deals the Ad Exchange buyer account has access to. This includes direct deals set up for the buyer account as well as its merged stream seats.
 **/
 export class DirectDealsList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directDeals", elemType: shared.DirectDeal })
+  @SpeakeasyMetadata({ data: "json, name=directDeals", elemType: DirectDeal })
   directDeals?: DirectDeal[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

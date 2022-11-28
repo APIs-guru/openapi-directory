@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TunnelDestGroup
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A TunnelDestGroup.
 **/
 export class TunnelDestGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cidrs" })
+  @SpeakeasyMetadata({ data: "json, name=cidrs" })
   cidrs?: string[];
 
-  @Metadata({ data: "json, name=fqdns" })
+  @SpeakeasyMetadata({ data: "json, name=fqdns" })
   fqdns?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

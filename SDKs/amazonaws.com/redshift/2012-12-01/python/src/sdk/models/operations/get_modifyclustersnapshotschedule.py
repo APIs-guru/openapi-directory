@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyClusterSnapshotScheduleActionEnum(str, Enum):
     MODIFY_CLUSTER_SNAPSHOT_SCHEDULE = "ModifyClusterSnapshotSchedule"
@@ -10,11 +14,11 @@ class GetModifyClusterSnapshotScheduleVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyClusterSnapshotScheduleQueryParams:
-    action: GetModifyClusterSnapshotScheduleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    action: GetModifyClusterSnapshotScheduleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyClusterSnapshotScheduleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     disassociate_schedule: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DisassociateSchedule', 'style': 'form', 'explode': True }})
     schedule_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ScheduleIdentifier', 'style': 'form', 'explode': True }})
-    version: GetModifyClusterSnapshotScheduleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyClusterSnapshotScheduleHeaders:
 
 @dataclass
 class GetModifyClusterSnapshotScheduleRequest:
-    query_params: GetModifyClusterSnapshotScheduleQueryParams = field(default=None)
-    headers: GetModifyClusterSnapshotScheduleHeaders = field(default=None)
+    headers: GetModifyClusterSnapshotScheduleHeaders = field()
+    query_params: GetModifyClusterSnapshotScheduleQueryParams = field()
     
 
 @dataclass
 class GetModifyClusterSnapshotScheduleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

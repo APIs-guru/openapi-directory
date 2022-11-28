@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchPutAssetPropertyValueErrorCodeEnum } from "./batchputassetpropertyvalueerrorcodeenum";
 import { TimeInNanos } from "./timeinnanos";
+
 
 
 // BatchPutAssetPropertyError
@@ -9,12 +9,12 @@ import { TimeInNanos } from "./timeinnanos";
  * Contains error information from updating a batch of asset property values.
 **/
 export class BatchPutAssetPropertyError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode: BatchPutAssetPropertyValueErrorCodeEnum;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage: string;
 
-  @Metadata({ data: "json, name=timestamps", elemType: shared.TimeInNanos })
+  @SpeakeasyMetadata({ data: "json, name=timestamps", elemType: TimeInNanos })
   timestamps: TimeInNanos[];
 }

@@ -8,6 +8,8 @@ const (
 	GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnumAuto            GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum = "AUTO"
 )
 
+// GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpec
+// The specification for query spell correction.
 type GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpec struct {
 	Mode *GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum `json:"mode,omitempty"`
 }

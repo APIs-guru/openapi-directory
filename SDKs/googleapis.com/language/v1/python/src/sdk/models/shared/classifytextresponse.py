@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import classificationcategory
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ClassifyTextResponse:
-    categories: Optional[List[classificationcategory.ClassificationCategory]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
+    r"""ClassifyTextResponse
+    The document classification response message.
+    """
+    
+    categories: Optional[List[ClassificationCategory]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
     

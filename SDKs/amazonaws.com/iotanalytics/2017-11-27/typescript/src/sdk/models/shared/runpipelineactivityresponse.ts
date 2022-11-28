@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RunPipelineActivityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logResult" })
+  @SpeakeasyMetadata({ data: "json, name=logResult" })
   logResult?: string;
 
-  @Metadata({ data: "json, name=payloads" })
+  @SpeakeasyMetadata({ data: "json, name=payloads" })
   payloads?: string[];
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import loadbasedautoscalingconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeLoadBasedAutoScalingResult:
-    load_based_auto_scaling_configurations: Optional[List[loadbasedautoscalingconfiguration.LoadBasedAutoScalingConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LoadBasedAutoScalingConfigurations' }})
+    r"""DescribeLoadBasedAutoScalingResult
+    Contains the response to a <code>DescribeLoadBasedAutoScaling</code> request.
+    """
+    
+    load_based_auto_scaling_configurations: Optional[List[LoadBasedAutoScalingConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LoadBasedAutoScalingConfigurations') }})
     

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CpuInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuProcessor" })
+  @SpeakeasyMetadata({ data: "json, name=cpuProcessor" })
   cpuProcessor?: string;
 
-  @Metadata({ data: "json, name=cpuSpeedInGhz" })
+  @SpeakeasyMetadata({ data: "json, name=cpuSpeedInGhz" })
   cpuSpeedInGhz?: number;
 
-  @Metadata({ data: "json, name=numberOfCores" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfCores" })
   numberOfCores?: number;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class ActivityRunsGetActivityRunsStatusEnum(str, Enum):
@@ -19,13 +20,13 @@ class ActivityRunsGetActivityRunsQueryParams:
 
 @dataclass
 class ActivityRunsGetActivityRunsRequest:
-    query_params: ActivityRunsGetActivityRunsQueryParams = field(default=None)
+    query_params: ActivityRunsGetActivityRunsQueryParams = field()
     
 
 @dataclass
 class ActivityRunsGetActivityRunsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_build_system_shared_dto_activity_run_: Optional[shared.APIPagedResponseBuildSystemSharedDtoActivityRun] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

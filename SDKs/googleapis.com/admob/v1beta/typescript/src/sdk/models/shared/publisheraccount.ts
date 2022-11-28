@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PublisherAccount
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A publisher account contains information relevant to the use of this API, such as the time zone used for the reports.
 **/
 export class PublisherAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=publisherId" })
+  @SpeakeasyMetadata({ data: "json, name=publisherId" })
   publisherId?: string;
 
-  @Metadata({ data: "json, name=reportingTimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=reportingTimeZone" })
   reportingTimeZone?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// EventItemSearchResponse
+// The result set for the event item search.
 type EventItemSearchResponse struct {
 	EventItems []EventItem `json:"eventItems,omitempty"`
 	Href       *string     `json:"href,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChannelPriceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=smsPerMessage" })
+  @SpeakeasyMetadata({ data: "json, name=smsPerMessage" })
   smsPerMessage?: number;
 
-  @Metadata({ data: "json, name=voicePerMinute" })
+  @SpeakeasyMetadata({ data: "json, name=voicePerMinute" })
   voicePerMinute?: number;
 }

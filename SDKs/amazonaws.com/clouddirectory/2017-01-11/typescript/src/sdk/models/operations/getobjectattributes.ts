@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetObjectAttributesXAmzConsistencyLevelEnum {
-    Serializable = "SERIALIZABLE"
-,    Eventual = "EVENTUAL"
+    Serializable = "SERIALIZABLE",
+    Eventual = "EVENTUAL"
 }
 
 
 export class GetObjectAttributesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-amz-consistency-level" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-amz-consistency-level" })
   xAmzConsistencyLevel?: GetObjectAttributesXAmzConsistencyLevelEnum;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
   xAmzDataPartition: string;
 }
 
@@ -42,7 +43,7 @@ export class GetObjectAttributesHeaders extends SpeakeasyBase {
  * The reference that identifies an object.
 **/
 export class GetObjectAttributesRequestBodyObjectReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Selector" })
+  @SpeakeasyMetadata({ data: "json, name=Selector" })
   selector?: string;
 }
 
@@ -52,69 +53,69 @@ export class GetObjectAttributesRequestBodyObjectReference extends SpeakeasyBase
  * A facet.
 **/
 export class GetObjectAttributesRequestBodySchemaFacet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FacetName" })
+  @SpeakeasyMetadata({ data: "json, name=FacetName" })
   facetName?: string;
 
-  @Metadata({ data: "json, name=SchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaArn" })
   schemaArn?: string;
 }
 
 
 export class GetObjectAttributesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeNames" })
   attributeNames: string[];
 
-  @Metadata({ data: "json, name=ObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectReference" })
   objectReference: GetObjectAttributesRequestBodyObjectReference;
 
-  @Metadata({ data: "json, name=SchemaFacet" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaFacet" })
   schemaFacet: GetObjectAttributesRequestBodySchemaFacet;
 }
 
 
 export class GetObjectAttributesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetObjectAttributesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: GetObjectAttributesRequestBody;
 }
 
 
 export class GetObjectAttributesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   directoryNotEnabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   facetValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getObjectAttributesResponse?: shared.GetObjectAttributesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArnException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retryableConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

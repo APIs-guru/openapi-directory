@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,List,Optional
@@ -8,8 +8,8 @@ from sdk.models import shared
 
 @dataclass
 class FareEstimateGetFareEstimateByZonePathParams:
-    max_zone: int = field(default=None, metadata={'path_param': { 'field_name': 'maxZone', 'style': 'simple', 'explode': False }})
-    min_zone: int = field(default=None, metadata={'path_param': { 'field_name': 'minZone', 'style': 'simple', 'explode': False }})
+    max_zone: int = field(metadata={'path_param': { 'field_name': 'maxZone', 'style': 'simple', 'explode': False }})
+    min_zone: int = field(metadata={'path_param': { 'field_name': 'minZone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,15 +25,15 @@ class FareEstimateGetFareEstimateByZoneQueryParams:
 
 @dataclass
 class FareEstimateGetFareEstimateByZoneRequest:
-    path_params: FareEstimateGetFareEstimateByZonePathParams = field(default=None)
-    query_params: FareEstimateGetFareEstimateByZoneQueryParams = field(default=None)
+    path_params: FareEstimateGetFareEstimateByZonePathParams = field()
+    query_params: FareEstimateGetFareEstimateByZoneQueryParams = field()
     
 
 @dataclass
 class FareEstimateGetFareEstimateByZoneResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_fare_estimate_response: Optional[Any] = field(default=None)
     

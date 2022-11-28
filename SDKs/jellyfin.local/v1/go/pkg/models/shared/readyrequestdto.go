@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReadyRequestDto
+// Class ReadyRequest.
 type ReadyRequestDto struct {
 	IsPlaying      *bool      `json:"IsPlaying,omitempty"`
 	PlaylistItemID *string    `json:"PlaylistItemId,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IdentityProviderConfig } from "./identityproviderconfig";
 export declare class ListIdentityProviderConfigsResponse extends SpeakeasyBase {
     identityProviderConfigs?: IdentityProviderConfig[];

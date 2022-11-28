@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PublicDnsPropertiesMutableChange } from "./publicdnspropertiesmutablechange";
 /**
  * Updated properties for the public DNS namespace.

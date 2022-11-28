@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreStatusEnum } from "./datastorestatusenum";
 
 
+
 export class DeleteFhirDatastoreResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatastoreArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreArn" })
   datastoreArn: string;
 
-  @Metadata({ data: "json, name=DatastoreEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreEndpoint" })
   datastoreEndpoint: string;
 
-  @Metadata({ data: "json, name=DatastoreId" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreId" })
   datastoreId: string;
 
-  @Metadata({ data: "json, name=DatastoreStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreStatus" })
   datastoreStatus: DatastoreStatusEnum;
 }

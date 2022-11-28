@@ -1,6 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1ContentNotebook } from "./googleclouddataplexv1contentnotebook";
 import { GoogleCloudDataplexV1ContentSqlScript } from "./googleclouddataplexv1contentsqlscript";
+
+
+
+// GoogleCloudDataplexV1ContentInput
+/** 
+ * Content represents a user-visible notebook or a sql script
+**/
+export class GoogleCloudDataplexV1ContentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=dataText" })
+  dataText?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=notebook" })
+  notebook?: GoogleCloudDataplexV1ContentNotebook;
+
+  @SpeakeasyMetadata({ data: "json, name=path" })
+  path?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sqlScript" })
+  sqlScript?: GoogleCloudDataplexV1ContentSqlScript;
+}
 
 
 // GoogleCloudDataplexV1Content
@@ -8,33 +34,33 @@ import { GoogleCloudDataplexV1ContentSqlScript } from "./googleclouddataplexv1co
  * Content represents a user-visible notebook or a sql script
 **/
 export class GoogleCloudDataplexV1Content extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=dataText" })
+  @SpeakeasyMetadata({ data: "json, name=dataText" })
   dataText?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notebook" })
+  @SpeakeasyMetadata({ data: "json, name=notebook" })
   notebook?: GoogleCloudDataplexV1ContentNotebook;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=sqlScript" })
+  @SpeakeasyMetadata({ data: "json, name=sqlScript" })
   sqlScript?: GoogleCloudDataplexV1ContentSqlScript;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

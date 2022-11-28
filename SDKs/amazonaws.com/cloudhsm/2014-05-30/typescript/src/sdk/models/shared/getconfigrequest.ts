@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientVersionEnum } from "./clientversionenum";
 
 
+
 export class GetConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClientArn" })
   clientArn: string;
 
-  @Metadata({ data: "json, name=ClientVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ClientVersion" })
   clientVersion: ClientVersionEnum;
 
-  @Metadata({ data: "json, name=HapgList" })
+  @SpeakeasyMetadata({ data: "json, name=HapgList" })
   hapgList: string[];
 }

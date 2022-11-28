@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VolumeConfiguration
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an Amazon EBS volume configuration.
 **/
 export class VolumeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=Encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=Iops" })
+  @SpeakeasyMetadata({ data: "json, name=Iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=MountPoint" })
+  @SpeakeasyMetadata({ data: "json, name=MountPoint" })
   mountPoint: string;
 
-  @Metadata({ data: "json, name=NumberOfDisks" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfDisks" })
   numberOfDisks: number;
 
-  @Metadata({ data: "json, name=RaidLevel" })
+  @SpeakeasyMetadata({ data: "json, name=RaidLevel" })
   raidLevel?: number;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size: number;
 
-  @Metadata({ data: "json, name=VolumeType" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeType" })
   volumeType?: string;
 }

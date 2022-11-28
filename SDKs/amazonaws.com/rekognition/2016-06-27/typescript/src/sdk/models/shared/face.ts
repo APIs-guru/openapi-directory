@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBox } from "./boundingbox";
+
 
 
 // Face
@@ -7,18 +8,18 @@ import { BoundingBox } from "./boundingbox";
  * Describes the face properties such as the bounding box, face ID, image ID of the input image, and external image ID that you assigned. 
 **/
 export class Face extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BoundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=BoundingBox" })
   boundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=ExternalImageId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalImageId" })
   externalImageId?: string;
 
-  @Metadata({ data: "json, name=FaceId" })
+  @SpeakeasyMetadata({ data: "json, name=FaceId" })
   faceId?: string;
 
-  @Metadata({ data: "json, name=ImageId" })
+  @SpeakeasyMetadata({ data: "json, name=ImageId" })
   imageId?: string;
 }

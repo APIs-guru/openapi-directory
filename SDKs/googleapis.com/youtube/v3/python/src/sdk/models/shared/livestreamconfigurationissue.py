@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LiveStreamConfigurationIssueSeverityEnum(str, Enum):
     INFO = "info"
@@ -47,8 +49,8 @@ class LiveStreamConfigurationIssueTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LiveStreamConfigurationIssue:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    severity: Optional[LiveStreamConfigurationIssueSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
-    type: Optional[LiveStreamConfigurationIssueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    severity: Optional[LiveStreamConfigurationIssueSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
+    type: Optional[LiveStreamConfigurationIssueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

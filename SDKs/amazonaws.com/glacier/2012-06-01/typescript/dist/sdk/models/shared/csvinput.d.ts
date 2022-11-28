@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FileHeaderInfoEnum } from "./fileheaderinfoenum";
 /**
  * Contains information about the comma-separated value (CSV) file to select from.

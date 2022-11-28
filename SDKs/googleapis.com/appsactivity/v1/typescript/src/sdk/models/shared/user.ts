@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Photo } from "./photo";
+
 
 
 // User
@@ -7,18 +8,18 @@ import { Photo } from "./photo";
  * A representation of a user.
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isDeleted" })
+  @SpeakeasyMetadata({ data: "json, name=isDeleted" })
   isDeleted?: boolean;
 
-  @Metadata({ data: "json, name=isMe" })
+  @SpeakeasyMetadata({ data: "json, name=isMe" })
   isMe?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=permissionId" })
+  @SpeakeasyMetadata({ data: "json, name=permissionId" })
   permissionId?: string;
 
-  @Metadata({ data: "json, name=photo" })
+  @SpeakeasyMetadata({ data: "json, name=photo" })
   photo?: Photo;
 }

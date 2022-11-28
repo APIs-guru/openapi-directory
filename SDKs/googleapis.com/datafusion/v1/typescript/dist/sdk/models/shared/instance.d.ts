@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Accelerator } from "./accelerator";
 import { Version } from "./version";
 import { CryptoKeyConfig } from "./cryptokeyconfig";
@@ -58,6 +58,28 @@ export declare class Instance extends SpeakeasyBase {
     tenantProjectId?: string;
     type?: InstanceTypeEnum;
     updateTime?: string;
+    version?: string;
+    zone?: string;
+}
+/**
+ * Represents a Data Fusion instance.
+**/
+export declare class InstanceInput extends SpeakeasyBase {
+    accelerators?: Accelerator[];
+    availableVersion?: Version[];
+    cryptoKeyConfig?: CryptoKeyConfig;
+    dataprocServiceAccount?: string;
+    description?: string;
+    displayName?: string;
+    enableRbac?: boolean;
+    enableStackdriverLogging?: boolean;
+    enableStackdriverMonitoring?: boolean;
+    eventPublishConfig?: EventPublishConfig;
+    labels?: Map<string, string>;
+    networkConfig?: NetworkConfig;
+    options?: Map<string, string>;
+    privateInstance?: boolean;
+    type?: InstanceTypeEnum;
     version?: string;
     zone?: string;
 }

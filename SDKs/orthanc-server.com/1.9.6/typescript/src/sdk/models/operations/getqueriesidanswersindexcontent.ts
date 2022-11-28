@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetQueriesIdAnswersIndexContentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=index" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" })
   index: string;
 }
 
 
 export class GetQueriesIdAnswersIndexContentQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=short" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" })
   short?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=simplify" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=simplify" })
   simplify?: boolean;
 }
 
 
 export class GetQueriesIdAnswersIndexContentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetQueriesIdAnswersIndexContentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetQueriesIdAnswersIndexContentQueryParams;
 }
 
 
 export class GetQueriesIdAnswersIndexContentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getQueriesIdAnswersIndexContent200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

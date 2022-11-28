@@ -1,65 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TeamMatchupGames extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awayScore" })
+  @SpeakeasyMetadata({ data: "json, name=awayScore" })
   awayScore?: number;
 
-  @Metadata({ data: "json, name=awayTeam" })
+  @SpeakeasyMetadata({ data: "json, name=awayTeam" })
   awayTeam?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=homeScore" })
+  @SpeakeasyMetadata({ data: "json, name=homeScore" })
   homeScore?: number;
 
-  @Metadata({ data: "json, name=homeTeam" })
+  @SpeakeasyMetadata({ data: "json, name=homeTeam" })
   homeTeam?: string;
 
-  @Metadata({ data: "json, name=neutralSite" })
+  @SpeakeasyMetadata({ data: "json, name=neutralSite" })
   neutralSite?: boolean;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=season_type" })
+  @SpeakeasyMetadata({ data: "json, name=season_type" })
   seasonType?: string;
 
-  @Metadata({ data: "json, name=venue" })
+  @SpeakeasyMetadata({ data: "json, name=venue" })
   venue?: string;
 
-  @Metadata({ data: "json, name=week" })
+  @SpeakeasyMetadata({ data: "json, name=week" })
   week?: number;
 
-  @Metadata({ data: "json, name=winner" })
+  @SpeakeasyMetadata({ data: "json, name=winner" })
   winner?: string;
 }
 
 
 export class TeamMatchup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endYear" })
+  @SpeakeasyMetadata({ data: "json, name=endYear" })
   endYear?: number;
 
-  @Metadata({ data: "json, name=games", elemType: shared.TeamMatchupGames })
+  @SpeakeasyMetadata({ data: "json, name=games", elemType: TeamMatchupGames })
   games?: TeamMatchupGames[];
 
-  @Metadata({ data: "json, name=startYear" })
+  @SpeakeasyMetadata({ data: "json, name=startYear" })
   startYear?: number;
 
-  @Metadata({ data: "json, name=team1" })
+  @SpeakeasyMetadata({ data: "json, name=team1" })
   team1?: string;
 
-  @Metadata({ data: "json, name=team1Wins" })
+  @SpeakeasyMetadata({ data: "json, name=team1Wins" })
   team1Wins?: number;
 
-  @Metadata({ data: "json, name=team2" })
+  @SpeakeasyMetadata({ data: "json, name=team2" })
   team2?: string;
 
-  @Metadata({ data: "json, name=team2Wins" })
+  @SpeakeasyMetadata({ data: "json, name=team2Wins" })
   team2Wins?: number;
 
-  @Metadata({ data: "json, name=ties" })
+  @SpeakeasyMetadata({ data: "json, name=ties" })
   ties?: number;
 }

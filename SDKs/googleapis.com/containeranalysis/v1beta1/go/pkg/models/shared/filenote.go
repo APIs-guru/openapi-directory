@@ -17,6 +17,8 @@ const (
 	FileNoteFileTypeEnumOther               FileNoteFileTypeEnum = "OTHER"
 )
 
+// FileNote
+// FileNote represents an SPDX File Information section: https://spdx.github.io/spdx-spec/4-file-information/
 type FileNote struct {
 	Checksum []string              `json:"checksum,omitempty"`
 	FileType *FileNoteFileTypeEnum `json:"fileType,omitempty"`

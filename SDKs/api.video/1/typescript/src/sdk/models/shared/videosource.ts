@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoSourceLiveStream } from "./videosourcelivestream";
+
 
 
 // VideoSource
@@ -7,12 +8,12 @@ import { VideoSourceLiveStream } from "./videosourcelivestream";
  * Source information about the video.
 **/
 export class VideoSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=liveStream" })
+  @SpeakeasyMetadata({ data: "json, name=liveStream" })
   liveStream?: VideoSourceLiveStream;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

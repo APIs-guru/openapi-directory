@@ -1,5 +1,7 @@
 package shared
 
+// Group
+// A group.
 type Group struct {
 	ContentDetails *GroupContentDetails `json:"contentDetails,omitempty"`
 	Errors         *Errors              `json:"errors,omitempty"`

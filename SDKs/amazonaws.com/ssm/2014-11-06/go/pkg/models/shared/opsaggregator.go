@@ -1,5 +1,7 @@
 package shared
 
+// OpsAggregator
+// One or more aggregators for viewing counts of OpsData using different dimensions such as <code>Source</code>, <code>CreatedTime</code>, or <code>Source and CreatedTime</code>, to name a few.
 type OpsAggregator struct {
 	AggregatorType *string           `json:"AggregatorType,omitempty"`
 	Aggregators    []OpsAggregator   `json:"Aggregators,omitempty"`

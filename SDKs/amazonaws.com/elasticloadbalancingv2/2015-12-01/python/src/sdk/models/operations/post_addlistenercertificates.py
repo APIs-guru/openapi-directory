@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAddListenerCertificatesActionEnum(str, Enum):
     ADD_LISTENER_CERTIFICATES = "AddListenerCertificates"
@@ -10,8 +14,8 @@ class PostAddListenerCertificatesVersionEnum(str, Enum):
 
 @dataclass
 class PostAddListenerCertificatesQueryParams:
-    action: PostAddListenerCertificatesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAddListenerCertificatesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAddListenerCertificatesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAddListenerCertificatesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAddListenerCertificatesHeaders:
 
 @dataclass
 class PostAddListenerCertificatesRequest:
-    query_params: PostAddListenerCertificatesQueryParams = field(default=None)
-    headers: PostAddListenerCertificatesHeaders = field(default=None)
+    headers: PostAddListenerCertificatesHeaders = field()
+    query_params: PostAddListenerCertificatesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAddListenerCertificatesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

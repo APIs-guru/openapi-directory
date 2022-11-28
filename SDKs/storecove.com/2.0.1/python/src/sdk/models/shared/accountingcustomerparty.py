@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import party
-from . import publicidentifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AccountingCustomerParty:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountId' }})
-    party: party.Party = field(default=None, metadata={'dataclasses_json': { 'field_name': 'party' }})
-    public_identifiers: Optional[List[publicidentifier.PublicIdentifier]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicIdentifiers' }})
+    r"""AccountingCustomerParty
+    The customer receiving the invoice.
+    """
+    
+    party: Party = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('party') }})
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountId') }})
+    public_identifiers: Optional[List[PublicIdentifier]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicIdentifiers') }})
     

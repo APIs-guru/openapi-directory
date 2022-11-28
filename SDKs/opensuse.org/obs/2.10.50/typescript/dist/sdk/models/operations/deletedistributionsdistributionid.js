@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteDistributionsDistributionIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteDistributionsDistributionIdPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteDistributionsDistributionIdPathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=distribution_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=distribution_id" }),
         __metadata("design:type", Number)
     ], DeleteDistributionsDistributionIdPathParams.prototype, "distributionId", void 0);
     return DeleteDistributionsDistributionIdPathParams;
@@ -42,7 +42,7 @@ var DeleteDistributionsDistributionIdSecurity = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], DeleteDistributionsDistributionIdSecurity.prototype, "basicAuthentication", void 0);
     return DeleteDistributionsDistributionIdSecurity;
@@ -54,11 +54,11 @@ var DeleteDistributionsDistributionIdRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDistributionsDistributionIdPathParams)
     ], DeleteDistributionsDistributionIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDistributionsDistributionIdSecurity)
     ], DeleteDistributionsDistributionIdRequest.prototype, "security", void 0);
     return DeleteDistributionsDistributionIdRequest;
@@ -70,15 +70,15 @@ var DeleteDistributionsDistributionIdResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteDistributionsDistributionIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteDistributionsDistributionIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteDistributionsDistributionIdResponse.prototype, "statusCode", void 0);
     return DeleteDistributionsDistributionIdResponse;

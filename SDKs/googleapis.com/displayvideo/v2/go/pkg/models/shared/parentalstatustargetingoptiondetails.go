@@ -9,6 +9,8 @@ const (
 	ParentalStatusTargetingOptionDetailsParentalStatusEnumParentalStatusUnknown     ParentalStatusTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_UNKNOWN"
 )
 
+// ParentalStatusTargetingOptionDetails
+// Represents a targetable parental status. This will be populated in the parental_status_details field of a TargetingOption when targeting_type is `TARGETING_TYPE_PARENTAL_STATUS`.
 type ParentalStatusTargetingOptionDetails struct {
 	ParentalStatus *ParentalStatusTargetingOptionDetailsParentalStatusEnum `json:"parentalStatus,omitempty"`
 }

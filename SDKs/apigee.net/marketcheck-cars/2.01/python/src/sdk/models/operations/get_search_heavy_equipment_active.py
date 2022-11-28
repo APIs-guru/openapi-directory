@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -53,13 +54,13 @@ class GetSearchHeavyEquipmentActiveQueryParams:
 
 @dataclass
 class GetSearchHeavyEquipmentActiveRequest:
-    query_params: GetSearchHeavyEquipmentActiveQueryParams = field(default=None)
+    query_params: GetSearchHeavyEquipmentActiveQueryParams = field()
     
 
 @dataclass
 class GetSearchHeavyEquipmentActiveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     heavy_equipments_search_response: Optional[shared.HeavyEquipmentsSearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

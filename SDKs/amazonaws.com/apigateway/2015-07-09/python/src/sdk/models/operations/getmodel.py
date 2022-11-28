@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetModelPathParams:
-    model_name: str = field(default=None, metadata={'path_param': { 'field_name': 'model_name', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    model_name: str = field(metadata={'path_param': { 'field_name': 'model_name', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class GetModelHeaders:
 
 @dataclass
 class GetModelRequest:
-    path_params: GetModelPathParams = field(default=None)
-    query_params: GetModelQueryParams = field(default=None)
-    headers: GetModelHeaders = field(default=None)
+    headers: GetModelHeaders = field()
+    path_params: GetModelPathParams = field()
+    query_params: GetModelQueryParams = field()
     
 
 @dataclass
 class GetModelResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     model: Optional[shared.Model] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

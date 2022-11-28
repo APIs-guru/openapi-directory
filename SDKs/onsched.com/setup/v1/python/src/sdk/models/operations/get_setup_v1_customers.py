@@ -15,12 +15,12 @@ class GetSetupV1CustomersQueryParams:
 
 @dataclass
 class GetSetupV1CustomersRequest:
-    query_params: GetSetupV1CustomersQueryParams = field(default=None)
+    query_params: GetSetupV1CustomersQueryParams = field()
     
 
 @dataclass
 class GetSetupV1CustomersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

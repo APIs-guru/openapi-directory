@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import accounttakeoveractionstype
-from . import notifyconfigurationtype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AccountTakeoverRiskConfigurationType:
-    actions: accounttakeoveractionstype.AccountTakeoverActionsType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Actions' }})
-    notify_configuration: Optional[notifyconfigurationtype.NotifyConfigurationType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotifyConfiguration' }})
+    r"""AccountTakeoverRiskConfigurationType
+    Configuration for mitigation actions and notification for different levels of risk detected for a potential account takeover.
+    """
+    
+    actions: AccountTakeoverActionsType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Actions') }})
+    notify_configuration: Optional[NotifyConfigurationType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotifyConfiguration') }})
     

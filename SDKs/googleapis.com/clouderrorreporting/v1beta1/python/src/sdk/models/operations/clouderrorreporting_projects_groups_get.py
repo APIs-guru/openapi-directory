@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouderrorreportingProjectsGroupsGetPathParams:
-    group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'groupName', 'style': 'simple', 'explode': False }})
+    group_name: str = field(metadata={'path_param': { 'field_name': 'groupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class ClouderrorreportingProjectsGroupsGetQueryParams:
 
 @dataclass
 class ClouderrorreportingProjectsGroupsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouderrorreportingProjectsGroupsGetRequest:
-    path_params: ClouderrorreportingProjectsGroupsGetPathParams = field(default=None)
-    query_params: ClouderrorreportingProjectsGroupsGetQueryParams = field(default=None)
-    security: ClouderrorreportingProjectsGroupsGetSecurity = field(default=None)
+    path_params: ClouderrorreportingProjectsGroupsGetPathParams = field()
+    query_params: ClouderrorreportingProjectsGroupsGetQueryParams = field()
+    security: ClouderrorreportingProjectsGroupsGetSecurity = field()
     
 
 @dataclass
 class ClouderrorreportingProjectsGroupsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_group: Optional[shared.ErrorGroup] = field(default=None)
-    status_code: int = field(default=None)
     

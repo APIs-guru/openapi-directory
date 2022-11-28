@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var IpAlias = /** @class */ (function (_super) {
     __extends(IpAlias, _super);
     function IpAlias() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IP" }),
+        SpeakeasyMetadata({ data: "json, name=IP" }),
         __metadata("design:type", String)
     ], IpAlias.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "json, name=interface" }),
+        SpeakeasyMetadata({ data: "json, name=interface" }),
         __metadata("design:type", String)
     ], IpAlias.prototype, "interface", void 0);
     __decorate([
-        Metadata({ data: "json, name=mask" }),
+        SpeakeasyMetadata({ data: "json, name=mask" }),
         __metadata("design:type", String)
     ], IpAlias.prototype, "mask", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", Number)
     ], IpAlias.prototype, "port", void 0);
     return IpAlias;

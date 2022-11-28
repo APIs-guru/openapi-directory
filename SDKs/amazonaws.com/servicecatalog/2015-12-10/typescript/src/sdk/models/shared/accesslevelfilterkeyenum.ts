@@ -1,7 +1,8 @@
 
 
+
 export enum AccessLevelFilterKeyEnum {
-    Account = "Account"
-,    Role = "Role"
-,    User = "User"
+    Account = "Account",
+    Role = "Role",
+    User = "User"
 }

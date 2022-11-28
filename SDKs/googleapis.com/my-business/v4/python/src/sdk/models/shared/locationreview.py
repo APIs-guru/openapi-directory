@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import review
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LocationReview:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    review: Optional[review.Review] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'review' }})
+    r"""LocationReview
+    Represents a review with location information.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    review: Optional[Review] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('review') }})
     

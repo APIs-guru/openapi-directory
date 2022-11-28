@@ -1,6 +1,7 @@
 
 
+
 export enum ChannelLatencyModeEnum {
-    Normal = "NORMAL"
-,    Low = "LOW"
+    Normal = "NORMAL",
+    Low = "LOW"
 }

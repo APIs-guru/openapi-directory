@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Permission } from "./permission";
+
 
 
 // DescribePermissionsResult
@@ -8,6 +8,6 @@ import { Permission } from "./permission";
  * Contains the response to a <code>DescribePermissions</code> request.
 **/
 export class DescribePermissionsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Permissions", elemType: shared.Permission })
+  @SpeakeasyMetadata({ data: "json, name=Permissions", elemType: Permission })
   permissions?: Permission[];
 }

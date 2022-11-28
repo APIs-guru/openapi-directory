@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HistoryEvent } from "./historyevent";
 
 
+
 export class GetExecutionHistoryOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events", elemType: shared.HistoryEvent })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: HistoryEvent })
   events: HistoryEvent[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

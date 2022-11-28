@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryTrigger } from "./repositorytrigger";
+
 
 
 // GetRepositoryTriggersOutput
@@ -8,9 +8,9 @@ import { RepositoryTrigger } from "./repositorytrigger";
  * Represents the output of a get repository triggers operation.
 **/
 export class GetRepositoryTriggersOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationId" })
+  @SpeakeasyMetadata({ data: "json, name=configurationId" })
   configurationId?: string;
 
-  @Metadata({ data: "json, name=triggers", elemType: shared.RepositoryTrigger })
+  @SpeakeasyMetadata({ data: "json, name=triggers", elemType: RepositoryTrigger })
   triggers?: RepositoryTrigger[];
 }

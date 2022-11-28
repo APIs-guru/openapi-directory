@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductPurchasesAcknowledgeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for the product.purchases.acknowledge API.
 **/
 export class ProductPurchasesAcknowledgeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=developerPayload" })
+  @SpeakeasyMetadata({ data: "json, name=developerPayload" })
   developerPayload?: string;
 }

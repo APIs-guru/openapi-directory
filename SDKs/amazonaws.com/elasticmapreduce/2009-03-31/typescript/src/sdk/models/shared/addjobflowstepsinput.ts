@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepConfig } from "./stepconfig";
+
 
 
 // AddJobFlowStepsInput
@@ -8,9 +8,9 @@ import { StepConfig } from "./stepconfig";
  *  The input argument to the <a>AddJobFlowSteps</a> operation. 
 **/
 export class AddJobFlowStepsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobFlowId" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowId" })
   jobFlowId: string;
 
-  @Metadata({ data: "json, name=Steps", elemType: shared.StepConfig })
+  @SpeakeasyMetadata({ data: "json, name=Steps", elemType: StepConfig })
   steps: StepConfig[];
 }

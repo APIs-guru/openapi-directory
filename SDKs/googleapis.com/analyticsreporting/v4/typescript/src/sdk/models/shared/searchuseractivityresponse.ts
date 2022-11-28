@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserActivitySession } from "./useractivitysession";
+
 
 
 // SearchUserActivityResponse
@@ -8,15 +8,15 @@ import { UserActivitySession } from "./useractivitysession";
  * The response from `userActivity:get` call.
 **/
 export class SearchUserActivityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=sampleRate" })
+  @SpeakeasyMetadata({ data: "json, name=sampleRate" })
   sampleRate?: number;
 
-  @Metadata({ data: "json, name=sessions", elemType: shared.UserActivitySession })
+  @SpeakeasyMetadata({ data: "json, name=sessions", elemType: UserActivitySession })
   sessions?: UserActivitySession[];
 
-  @Metadata({ data: "json, name=totalRows" })
+  @SpeakeasyMetadata({ data: "json, name=totalRows" })
   totalRows?: number;
 }

@@ -35,6 +35,8 @@ const (
 	RolloutStateEnumPendingRelease   RolloutStateEnum = "PENDING_RELEASE"
 )
 
+// Rollout
+// A `Rollout` resource in the Google Cloud Deploy API. A `Rollout` contains information around a specific deployment to a `Target`.
 type Rollout struct {
 	Annotations        map[string]string              `json:"annotations,omitempty"`
 	ApprovalState      *RolloutApprovalStateEnum      `json:"approvalState,omitempty"`
@@ -55,4 +57,16 @@ type Rollout struct {
 	State              *RolloutStateEnum              `json:"state,omitempty"`
 	TargetID           *string                        `json:"targetId,omitempty"`
 	UID                *string                        `json:"uid,omitempty"`
+}
+
+// RolloutInput
+// A `Rollout` resource in the Google Cloud Deploy API. A `Rollout` contains information around a specific deployment to a `Target`.
+type RolloutInput struct {
+	Annotations map[string]string `json:"annotations,omitempty"`
+	Description *string           `json:"description,omitempty"`
+	Etag        *string           `json:"etag,omitempty"`
+	Labels      map[string]string `json:"labels,omitempty"`
+	Metadata    *Metadata         `json:"metadata,omitempty"`
+	Name        *string           `json:"name,omitempty"`
+	TargetID    *string           `json:"targetId,omitempty"`
 }

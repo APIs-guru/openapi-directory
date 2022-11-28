@@ -22,9 +22,25 @@ type ChatMediaDownloadQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
+type ChatMediaDownloadSecurityOption1 struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type ChatMediaDownloadSecurityOption2 struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type ChatMediaDownloadSecurity struct {
+	Option1 *ChatMediaDownloadSecurityOption1 `security:"option"`
+	Option2 *ChatMediaDownloadSecurityOption2 `security:"option"`
+}
+
 type ChatMediaDownloadRequest struct {
 	PathParams  ChatMediaDownloadPathParams
 	QueryParams ChatMediaDownloadQueryParams
+	Security    ChatMediaDownloadSecurity
 }
 
 type ChatMediaDownloadResponse struct {

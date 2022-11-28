@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricsSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about metrics summaries. 
 **/
 export class MetricsSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FindingsCount" })
+  @SpeakeasyMetadata({ data: "json, name=FindingsCount" })
   findingsCount?: number;
 
-  @Metadata({ data: "json, name=MeteredLinesOfCodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=MeteredLinesOfCodeCount" })
   meteredLinesOfCodeCount?: number;
 }

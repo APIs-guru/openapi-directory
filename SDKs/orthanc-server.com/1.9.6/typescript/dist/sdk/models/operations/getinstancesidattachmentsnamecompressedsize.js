@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetInstancesIdAttachmentsNameCompressedSizePathParams = /** @class */ (function (_super) {
     __extends(GetInstancesIdAttachmentsNameCompressedSizePathParams, _super);
     function GetInstancesIdAttachmentsNameCompressedSizePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetInstancesIdAttachmentsNameCompressedSizePathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], GetInstancesIdAttachmentsNameCompressedSizePathParams.prototype, "name", void 0);
     return GetInstancesIdAttachmentsNameCompressedSizePathParams;
@@ -45,7 +45,7 @@ var GetInstancesIdAttachmentsNameCompressedSizeHeaders = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=If-None-Match" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-None-Match" }),
         __metadata("design:type", String)
     ], GetInstancesIdAttachmentsNameCompressedSizeHeaders.prototype, "ifNoneMatch", void 0);
     return GetInstancesIdAttachmentsNameCompressedSizeHeaders;
@@ -57,11 +57,11 @@ var GetInstancesIdAttachmentsNameCompressedSizeRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdAttachmentsNameCompressedSizePathParams)
     ], GetInstancesIdAttachmentsNameCompressedSizeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdAttachmentsNameCompressedSizeHeaders)
     ], GetInstancesIdAttachmentsNameCompressedSizeRequest.prototype, "headers", void 0);
     return GetInstancesIdAttachmentsNameCompressedSizeRequest;
@@ -73,19 +73,19 @@ var GetInstancesIdAttachmentsNameCompressedSizeResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetInstancesIdAttachmentsNameCompressedSizeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetInstancesIdAttachmentsNameCompressedSizeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetInstancesIdAttachmentsNameCompressedSizeResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetInstancesIdAttachmentsNameCompressedSizeResponse.prototype, "statusCode", void 0);
     return GetInstancesIdAttachmentsNameCompressedSizeResponse;

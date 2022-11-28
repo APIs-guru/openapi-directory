@@ -8,6 +8,8 @@ const (
 	AptRepositoryArchiveTypeEnumDebSrc                 AptRepositoryArchiveTypeEnum = "DEB_SRC"
 )
 
+// AptRepository
+// Represents a single Apt package repository. This repository is added to a repo file that is stored at `/etc/apt/sources.list.d/google_osconfig.list`.
 type AptRepository struct {
 	ArchiveType  *AptRepositoryArchiveTypeEnum `json:"archiveType,omitempty"`
 	Components   []string                      `json:"components,omitempty"`

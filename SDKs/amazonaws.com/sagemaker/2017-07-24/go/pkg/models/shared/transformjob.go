@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TransformJob
+// A batch transform job. For information about SageMaker batch transform, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html">Use Batch Transform</a>.
 type TransformJob struct {
 	AutoMlJobArn            *string                 `json:"AutoMLJobArn,omitempty"`
 	BatchStrategy           *BatchStrategyEnum      `json:"BatchStrategy,omitempty"`

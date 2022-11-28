@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeAccountHealthResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetricsAnalyzed" })
+  @SpeakeasyMetadata({ data: "json, name=MetricsAnalyzed" })
   metricsAnalyzed: number;
 
-  @Metadata({ data: "json, name=OpenProactiveInsights" })
+  @SpeakeasyMetadata({ data: "json, name=OpenProactiveInsights" })
   openProactiveInsights: number;
 
-  @Metadata({ data: "json, name=OpenReactiveInsights" })
+  @SpeakeasyMetadata({ data: "json, name=OpenReactiveInsights" })
   openReactiveInsights: number;
 
-  @Metadata({ data: "json, name=ResourceHours" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceHours" })
   resourceHours: number;
 }

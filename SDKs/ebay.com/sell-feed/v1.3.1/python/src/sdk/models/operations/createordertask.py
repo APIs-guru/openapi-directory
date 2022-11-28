@@ -10,18 +10,18 @@ class CreateOrderTaskHeaders:
 
 @dataclass
 class CreateOrderTaskSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateOrderTaskRequest:
-    headers: CreateOrderTaskHeaders = field(default=None)
-    request: shared.CreateOrderTaskRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateOrderTaskSecurity = field(default=None)
+    headers: CreateOrderTaskHeaders = field()
+    request: shared.CreateOrderTaskRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateOrderTaskSecurity = field()
     
 
 @dataclass
 class CreateOrderTaskResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

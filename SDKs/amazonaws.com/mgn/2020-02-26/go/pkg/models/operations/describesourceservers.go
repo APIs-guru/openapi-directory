@@ -19,6 +19,8 @@ type DescribeSourceServersHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// DescribeSourceServersRequestBodyFilters
+// Request to filter Source Servers list.
 type DescribeSourceServersRequestBodyFilters struct {
 	IsArchived      *bool    `json:"isArchived,omitempty"`
 	SourceServerIDs []string `json:"sourceServerIDs,omitempty"`

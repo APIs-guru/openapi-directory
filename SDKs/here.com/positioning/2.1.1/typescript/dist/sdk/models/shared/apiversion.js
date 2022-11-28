@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ApiVersion = /** @class */ (function (_super) {
     __extends(ApiVersion, _super);
     function ApiVersion() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiVersion" }),
+        SpeakeasyMetadata({ data: "json, name=apiVersion" }),
         __metadata("design:type", String)
     ], ApiVersion.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceVersion" }),
+        SpeakeasyMetadata({ data: "json, name=serviceVersion" }),
         __metadata("design:type", String)
     ], ApiVersion.prototype, "serviceVersion", void 0);
     return ApiVersion;

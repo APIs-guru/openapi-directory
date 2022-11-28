@@ -1,24 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Projects } from "./projects";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://connectors.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    projects: Projects;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    ConnectorsProjectsLocationsConnectionsActionsExecute(req: operations.ConnectorsProjectsLocationsConnectionsActionsExecuteRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsActionsExecuteResponse>;
-    ConnectorsProjectsLocationsConnectionsActionsList(req: operations.ConnectorsProjectsLocationsConnectionsActionsListRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsActionsListResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreate(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreateRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreateResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesDelete(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesDeleteRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesDeleteResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesDeleteEntitiesWithConditions(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesDeleteEntitiesWithConditionsRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesDeleteEntitiesWithConditionsResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesGet(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesGetRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesGetResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesList(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesListRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesListResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesPatch(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesPatchRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesPatchResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWithConditions(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWithConditionsRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWithConditionsResponse>;
-    ConnectorsProjectsLocationsConnectionsEntityTypesList(req: operations.ConnectorsProjectsLocationsConnectionsEntityTypesListRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsEntityTypesListResponse>;
-    ConnectorsProjectsLocationsConnectionsExecuteSqlQuery(req: operations.ConnectorsProjectsLocationsConnectionsExecuteSqlQueryRequest, config?: AxiosRequestConfig): Promise<operations.ConnectorsProjectsLocationsConnectionsExecuteSqlQueryResponse>;
 }
 export {};

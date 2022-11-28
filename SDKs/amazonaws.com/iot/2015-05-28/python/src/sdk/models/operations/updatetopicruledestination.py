@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -24,24 +29,24 @@ class UpdateTopicRuleDestinationRequestBodyStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateTopicRuleDestinationRequestBody:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    status: UpdateTopicRuleDestinationRequestBodyStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    status: UpdateTopicRuleDestinationRequestBodyStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass
 class UpdateTopicRuleDestinationRequest:
-    headers: UpdateTopicRuleDestinationHeaders = field(default=None)
-    request: UpdateTopicRuleDestinationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateTopicRuleDestinationHeaders = field()
+    request: UpdateTopicRuleDestinationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateTopicRuleDestinationResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_resource_update_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_topic_rule_destination_response: Optional[dict[str, Any]] = field(default=None)
     

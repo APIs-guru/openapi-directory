@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NegativeKeywordList
@@ -6,18 +7,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of negative keywords used for targeting.
 **/
 export class NegativeKeywordList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=negativeKeywordListId" })
+  @SpeakeasyMetadata({ data: "json, name=negativeKeywordListId" })
   negativeKeywordListId?: string;
 
-  @Metadata({ data: "json, name=targetedLineItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=targetedLineItemCount" })
   targetedLineItemCount?: string;
+}
+
+
+// NegativeKeywordListInput
+/** 
+ * A list of negative keywords used for targeting.
+**/
+export class NegativeKeywordListInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
 }

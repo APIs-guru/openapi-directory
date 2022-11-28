@@ -32,7 +32,7 @@ type PrivatecaProjectsLocationsCertificateAuthoritiesCertificatesCreateSecurity 
 type PrivatecaProjectsLocationsCertificateAuthoritiesCertificatesCreateRequest struct {
 	PathParams  PrivatecaProjectsLocationsCertificateAuthoritiesCertificatesCreatePathParams
 	QueryParams PrivatecaProjectsLocationsCertificateAuthoritiesCertificatesCreateQueryParams
-	Request     *shared.Certificate `request:"mediaType=application/json"`
+	Request     *shared.CertificateInput `request:"mediaType=application/json"`
 	Security    PrivatecaProjectsLocationsCertificateAuthoritiesCertificatesCreateSecurity
 }
 

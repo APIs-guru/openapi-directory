@@ -1,17 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attestationnote
-from . import buildnote
-from . import compliancenote
-from . import deploymentnote
-from . import discoverynote
-from . import dsseattestationnote
-from . import imagenote
-from . import packagenote
-from . import relatedurl
-from . import upgradenote
-from . import vulnerabilitynote
+from sdk import utils
+from . import *
 
 class NoteKindEnum(str, Enum):
     NOTE_KIND_UNSPECIFIED = "NOTE_KIND_UNSPECIFIED"
@@ -30,23 +25,27 @@ class NoteKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Note:
-    attestation: Optional[attestationnote.AttestationNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attestation' }})
-    build: Optional[buildnote.BuildNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build' }})
-    compliance: Optional[compliancenote.ComplianceNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compliance' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    deployment: Optional[deploymentnote.DeploymentNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployment' }})
-    discovery: Optional[discoverynote.DiscoveryNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'discovery' }})
-    dsse_attestation: Optional[dsseattestationnote.DsseAttestationNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dsseAttestation' }})
-    expiration_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expirationTime' }})
-    image: Optional[imagenote.ImageNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
-    kind: Optional[NoteKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    long_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'longDescription' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    package: Optional[packagenote.PackageNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'package' }})
-    related_note_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedNoteNames' }})
-    related_url: Optional[List[relatedurl.RelatedURL]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedUrl' }})
-    short_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shortDescription' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    upgrade: Optional[upgradenote.UpgradeNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upgrade' }})
-    vulnerability: Optional[vulnerabilitynote.VulnerabilityNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vulnerability' }})
+    r"""Note
+    A type of analysis that can be done for a resource.
+    """
+    
+    attestation: Optional[AttestationNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attestation') }})
+    build: Optional[BuildNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('build') }})
+    compliance: Optional[ComplianceNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compliance') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    deployment: Optional[DeploymentNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployment') }})
+    discovery: Optional[DiscoveryNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('discovery') }})
+    dsse_attestation: Optional[DsseAttestationNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dsseAttestation') }})
+    expiration_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expirationTime') }})
+    image: Optional[ImageNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image') }})
+    kind: Optional[NoteKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    long_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('longDescription') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    package: Optional[PackageNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('package') }})
+    related_note_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedNoteNames') }})
+    related_url: Optional[List[RelatedURL]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedUrl') }})
+    short_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shortDescription') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    upgrade: Optional[UpgradeNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upgrade') }})
+    vulnerability: Optional[VulnerabilityNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vulnerability') }})
     

@@ -32,7 +32,7 @@ type DisplayvideoAdvertisersNegativeKeywordListsPatchSecurity struct {
 type DisplayvideoAdvertisersNegativeKeywordListsPatchRequest struct {
 	PathParams  DisplayvideoAdvertisersNegativeKeywordListsPatchPathParams
 	QueryParams DisplayvideoAdvertisersNegativeKeywordListsPatchQueryParams
-	Request     *shared.NegativeKeywordList `request:"mediaType=application/json"`
+	Request     *shared.NegativeKeywordListInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersNegativeKeywordListsPatchSecurity
 }
 

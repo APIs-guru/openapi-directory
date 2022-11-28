@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubProjectsSnapshotsDeletePathParams:
-    snapshot: str = field(default=None, metadata={'path_param': { 'field_name': 'snapshot', 'style': 'simple', 'explode': False }})
+    snapshot: str = field(metadata={'path_param': { 'field_name': 'snapshot', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubProjectsSnapshotsDeleteQueryParams:
 
 @dataclass
 class PubsubProjectsSnapshotsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubProjectsSnapshotsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class PubsubProjectsSnapshotsDeleteSecurity:
 
 @dataclass
 class PubsubProjectsSnapshotsDeleteRequest:
-    path_params: PubsubProjectsSnapshotsDeletePathParams = field(default=None)
-    query_params: PubsubProjectsSnapshotsDeleteQueryParams = field(default=None)
-    security: PubsubProjectsSnapshotsDeleteSecurity = field(default=None)
+    path_params: PubsubProjectsSnapshotsDeletePathParams = field()
+    query_params: PubsubProjectsSnapshotsDeleteQueryParams = field()
+    security: PubsubProjectsSnapshotsDeleteSecurity = field()
     
 
 @dataclass
 class PubsubProjectsSnapshotsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

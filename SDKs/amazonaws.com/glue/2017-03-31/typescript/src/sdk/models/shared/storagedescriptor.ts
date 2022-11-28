@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Column } from "./column";
 import { SchemaReference } from "./schemareference";
 import { SerDeInfo } from "./serdeinfo";
@@ -7,47 +6,48 @@ import { SkewedInfo } from "./skewedinfo";
 import { Order } from "./order";
 
 
+
 // StorageDescriptor
 /** 
  * Describes the physical storage of table data.
 **/
 export class StorageDescriptor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BucketColumns" })
+  @SpeakeasyMetadata({ data: "json, name=BucketColumns" })
   bucketColumns?: string[];
 
-  @Metadata({ data: "json, name=Columns", elemType: shared.Column })
+  @SpeakeasyMetadata({ data: "json, name=Columns", elemType: Column })
   columns?: Column[];
 
-  @Metadata({ data: "json, name=Compressed" })
+  @SpeakeasyMetadata({ data: "json, name=Compressed" })
   compressed?: boolean;
 
-  @Metadata({ data: "json, name=InputFormat" })
+  @SpeakeasyMetadata({ data: "json, name=InputFormat" })
   inputFormat?: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 
-  @Metadata({ data: "json, name=NumberOfBuckets" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfBuckets" })
   numberOfBuckets?: number;
 
-  @Metadata({ data: "json, name=OutputFormat" })
+  @SpeakeasyMetadata({ data: "json, name=OutputFormat" })
   outputFormat?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=SchemaReference" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaReference" })
   schemaReference?: SchemaReference;
 
-  @Metadata({ data: "json, name=SerdeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=SerdeInfo" })
   serdeInfo?: SerDeInfo;
 
-  @Metadata({ data: "json, name=SkewedInfo" })
+  @SpeakeasyMetadata({ data: "json, name=SkewedInfo" })
   skewedInfo?: SkewedInfo;
 
-  @Metadata({ data: "json, name=SortColumns", elemType: shared.Order })
+  @SpeakeasyMetadata({ data: "json, name=SortColumns", elemType: Order })
   sortColumns?: Order[];
 
-  @Metadata({ data: "json, name=StoredAsSubDirectories" })
+  @SpeakeasyMetadata({ data: "json, name=StoredAsSubDirectories" })
   storedAsSubDirectories?: boolean;
 }

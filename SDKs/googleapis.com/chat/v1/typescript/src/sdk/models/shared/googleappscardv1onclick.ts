@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1Action } from "./googleappscardv1action";
 import { GoogleAppsCardV1Card } from "./googleappscardv1card";
-import { GoogleAppsCardV1Action } from "./googleappscardv1action";
 import { GoogleAppsCardV1OpenLink } from "./googleappscardv1openlink";
+
 
 
 // GoogleAppsCardV1OnClick
 /** 
- * Represents the response to an `onClick` event.
+ * Represents how to respond when users click an interactive element on a card, such as a button.
 **/
 export class GoogleAppsCardV1OnClick extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: GoogleAppsCardV1Action;
 
-  @Metadata({ data: "json, name=card" })
+  @SpeakeasyMetadata({ data: "json, name=card" })
   card?: GoogleAppsCardV1Card;
 
-  @Metadata({ data: "json, name=openDynamicLinkAction" })
+  @SpeakeasyMetadata({ data: "json, name=openDynamicLinkAction" })
   openDynamicLinkAction?: GoogleAppsCardV1Action;
 
-  @Metadata({ data: "json, name=openLink" })
+  @SpeakeasyMetadata({ data: "json, name=openLink" })
   openLink?: GoogleAppsCardV1OpenLink;
 }

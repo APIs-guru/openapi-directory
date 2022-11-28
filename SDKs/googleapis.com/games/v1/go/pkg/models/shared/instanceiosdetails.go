@@ -1,5 +1,7 @@
 package shared
 
+// InstanceIosDetails
+// The iOS details resource.
 type InstanceIosDetails struct {
 	BundleIdentifier   *string `json:"bundleIdentifier,omitempty"`
 	ItunesAppID        *string `json:"itunesAppId,omitempty"`

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAssetsCovarianceMatrixSampleRequestBodyAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetReturns" })
   assetReturns: number[];
 }
 
 
 export class PostAssetsCovarianceMatrixSampleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsCovarianceMatrixSampleRequestBodyAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsCovarianceMatrixSampleRequestBodyAssets })
   assets: PostAssetsCovarianceMatrixSampleRequestBodyAssets[];
 }
 
 
-export class PostAssetsCovarianceMatrixSampleRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostAssetsCovarianceMatrixSampleRequestBody;
-}
-
-
 export class PostAssetsCovarianceMatrixSample200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsCovarianceMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=assetsCovarianceMatrix" })
   assetsCovarianceMatrix: number[][];
 }
 
 
+export class PostAssetsCovarianceMatrixSampleRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostAssetsCovarianceMatrixSampleRequestBody;
+}
+
+
 export class PostAssetsCovarianceMatrixSampleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAssetsCovarianceMatrixSample200ApplicationJsonObject?: PostAssetsCovarianceMatrixSample200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

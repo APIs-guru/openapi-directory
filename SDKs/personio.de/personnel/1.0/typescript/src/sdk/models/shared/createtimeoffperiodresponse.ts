@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreateTimeOffPeriodResponseDataTypeEnum {
     TimeOffPeriod = "TimeOffPeriod"
@@ -6,18 +7,18 @@ export enum CreateTimeOffPeriodResponseDataTypeEnum {
 
 
 export class CreateTimeOffPeriodResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: any;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CreateTimeOffPeriodResponseDataTypeEnum;
 }
 
 
 export class CreateTimeOffPeriodResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreateTimeOffPeriodResponseData;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success: boolean;
 }

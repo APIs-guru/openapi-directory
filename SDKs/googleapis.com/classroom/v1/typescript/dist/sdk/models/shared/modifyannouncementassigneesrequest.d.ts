@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ModifyIndividualStudentsOptions } from "./modifyindividualstudentsoptions";
 export declare enum ModifyAnnouncementAssigneesRequestAssigneeModeEnum {
     AssigneeModeUnspecified = "ASSIGNEE_MODE_UNSPECIFIED",

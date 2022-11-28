@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Observation } from "./observation";
 // GetInfoForObservedBeaconsRequest
 /**
  * Request for beacon and attachment information about beacons that a mobile client has encountered "in the wild".
@@ -34,11 +34,11 @@ var GetInfoForObservedBeaconsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=namespacedTypes" }),
+        SpeakeasyMetadata({ data: "json, name=namespacedTypes" }),
         __metadata("design:type", Array)
     ], GetInfoForObservedBeaconsRequest.prototype, "namespacedTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=observations", elemType: shared.Observation }),
+        SpeakeasyMetadata({ data: "json, name=observations", elemType: Observation }),
         __metadata("design:type", Array)
     ], GetInfoForObservedBeaconsRequest.prototype, "observations", void 0);
     return GetInfoForObservedBeaconsRequest;

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PolicyControllerOnClusterStateStateEnum {
-    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED"
-,    NotInstalled = "NOT_INSTALLED"
-,    Installing = "INSTALLING"
-,    Active = "ACTIVE"
-,    Updating = "UPDATING"
-,    Decomissioning = "DECOMISSIONING"
-,    ClusterError = "CLUSTER_ERROR"
-,    HubError = "HUB_ERROR"
-,    Suspended = "SUSPENDED"
+    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
+    NotInstalled = "NOT_INSTALLED",
+    Installing = "INSTALLING",
+    Active = "ACTIVE",
+    Updating = "UPDATING",
+    Decomissioning = "DECOMISSIONING",
+    ClusterError = "CLUSTER_ERROR",
+    HubError = "HUB_ERROR",
+    Suspended = "SUSPENDED"
 }
 
 
@@ -18,9 +19,9 @@ export enum PolicyControllerOnClusterStateStateEnum {
  * OnClusterState represents the state of a sub-component of Policy Controller.
 **/
 export class PolicyControllerOnClusterState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: PolicyControllerOnClusterStateStateEnum;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UsageAllocation } from "./usageallocation";
 // UsageRecord
 /**
  * <p>A UsageRecord indicates a quantity of usage for a given product, customer, dimension and time.</p> <p>Multiple requests with the same UsageRecords as input will be deduplicated to prevent double charges.</p>
@@ -34,23 +34,23 @@ var UsageRecord = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CustomerIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerIdentifier" }),
         __metadata("design:type", String)
     ], UsageRecord.prototype, "customerIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=Dimension" }),
+        SpeakeasyMetadata({ data: "json, name=Dimension" }),
         __metadata("design:type", String)
     ], UsageRecord.prototype, "dimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=Quantity" }),
+        SpeakeasyMetadata({ data: "json, name=Quantity" }),
         __metadata("design:type", Number)
     ], UsageRecord.prototype, "quantity", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=Timestamp" }),
         __metadata("design:type", Date)
     ], UsageRecord.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=UsageAllocations", elemType: shared.UsageAllocation }),
+        SpeakeasyMetadata({ data: "json, name=UsageAllocations", elemType: UsageAllocation }),
         __metadata("design:type", Array)
     ], UsageRecord.prototype, "usageAllocations", void 0);
     return UsageRecord;

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import databaseinput
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDatabaseRequest:
-    catalog_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CatalogId' }})
-    database_input: databaseinput.DatabaseInput = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatabaseInput' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    database_input: DatabaseInput = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatabaseInput') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    catalog_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CatalogId') }})
     

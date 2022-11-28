@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListResourcesForTagOptionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PageSize" })
+  @SpeakeasyMetadata({ data: "json, name=PageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=PageToken" })
+  @SpeakeasyMetadata({ data: "json, name=PageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=TagOptionId" })
+  @SpeakeasyMetadata({ data: "json, name=TagOptionId" })
   tagOptionId: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmEventbusProtoCombinedCondition } from "./enterprisecrmeventbusprotocombinedcondition";
+
 
 
 // EnterpriseCrmEventbusProtoNextTask
@@ -8,21 +8,21 @@ import { EnterpriseCrmEventbusProtoCombinedCondition } from "./enterprisecrmeven
  * The task that is next in line to be executed, if the condition specified evaluated to true.
 **/
 export class EnterpriseCrmEventbusProtoNextTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=combinedConditions", elemType: shared.EnterpriseCrmEventbusProtoCombinedCondition })
+  @SpeakeasyMetadata({ data: "json, name=combinedConditions", elemType: EnterpriseCrmEventbusProtoCombinedCondition })
   combinedConditions?: EnterpriseCrmEventbusProtoCombinedCondition[];
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=taskConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=taskConfigId" })
   taskConfigId?: string;
 
-  @Metadata({ data: "json, name=taskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=taskNumber" })
   taskNumber?: string;
 }

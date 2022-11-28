@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBasePathMappingPathParams:
-    base_path: str = field(default=None, metadata={'path_param': { 'field_name': 'base_path', 'style': 'simple', 'explode': False }})
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domain_name', 'style': 'simple', 'explode': False }})
+    base_path: str = field(metadata={'path_param': { 'field_name': 'base_path', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domain_name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class GetBasePathMappingHeaders:
 
 @dataclass
 class GetBasePathMappingRequest:
-    path_params: GetBasePathMappingPathParams = field(default=None)
-    headers: GetBasePathMappingHeaders = field(default=None)
+    headers: GetBasePathMappingHeaders = field()
+    path_params: GetBasePathMappingPathParams = field()
     
 
 @dataclass
 class GetBasePathMappingResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     base_path_mapping: Optional[shared.BasePathMapping] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

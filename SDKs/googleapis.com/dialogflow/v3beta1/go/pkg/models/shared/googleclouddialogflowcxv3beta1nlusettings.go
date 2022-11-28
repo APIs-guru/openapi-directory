@@ -16,6 +16,8 @@ const (
 	GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnumModelTypeAdvanced    GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum = "MODEL_TYPE_ADVANCED"
 )
 
+// GoogleCloudDialogflowCxV3beta1NluSettings
+// Settings related to NLU.
 type GoogleCloudDialogflowCxV3beta1NluSettings struct {
 	ClassificationThreshold *float32                                                        `json:"classificationThreshold,omitempty"`
 	ModelTrainingMode       *GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum `json:"modelTrainingMode,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LensReviewSummary
+// A lens review summary of a workload.
 type LensReviewSummary struct {
 	LensAlias   *string          `json:"LensAlias,omitempty"`
 	LensName    *string          `json:"LensName,omitempty"`

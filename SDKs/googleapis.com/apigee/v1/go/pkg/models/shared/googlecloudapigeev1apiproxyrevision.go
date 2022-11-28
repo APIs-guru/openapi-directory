@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1APIProxyRevision
+// API proxy revision.
 type GoogleCloudApigeeV1APIProxyRevision struct {
 	Archive                    *string                           `json:"archive,omitempty"`
 	Basepaths                  []string                          `json:"basepaths,omitempty"`

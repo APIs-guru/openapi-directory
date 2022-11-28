@@ -40,7 +40,7 @@ type SQLInstancesInsertSecurity struct {
 type SQLInstancesInsertRequest struct {
 	PathParams  SQLInstancesInsertPathParams
 	QueryParams SQLInstancesInsertQueryParams
-	Request     *shared.DatabaseInstance `request:"mediaType=application/json"`
+	Request     *shared.DatabaseInstanceInput `request:"mediaType=application/json"`
 	Security    SQLInstancesInsertSecurity
 }
 

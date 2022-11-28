@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class TagDataFormatEnum(str, Enum):
     PLACEMENT_TAG_STANDARD = "PLACEMENT_TAG_STANDARD"
@@ -28,9 +30,13 @@ class TagDataFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TagData:
-    ad_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'adId' }})
-    click_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clickTag' }})
-    creative_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeId' }})
-    format: Optional[TagDataFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    impression_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'impressionTag' }})
+    r"""TagData
+    Placement Tag Data
+    """
+    
+    ad_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('adId') }})
+    click_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clickTag') }})
+    creative_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeId') }})
+    format: Optional[TagDataFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    impression_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('impressionTag') }})
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import newpublicvirtualinterface
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreatePublicVirtualInterfaceRequest:
-    connection_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionId' }})
-    new_public_virtual_interface: newpublicvirtualinterface.NewPublicVirtualInterface = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newPublicVirtualInterface' }})
+    connection_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionId') }})
+    new_public_virtual_interface: NewPublicVirtualInterface = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('newPublicVirtualInterface') }})
     

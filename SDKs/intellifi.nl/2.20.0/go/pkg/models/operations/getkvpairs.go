@@ -27,10 +27,6 @@ type GetKvPairsQueryParams struct {
 	UntilID     *string    `queryParam:"style=form,explode=true,name=until_id"`
 }
 
-type GetKvPairsRequest struct {
-	QueryParams GetKvPairsQueryParams
-}
-
 type GetKvPairs200ApplicationJSON struct {
 	Count           *int64                `json:"count,omitempty"`
 	CountCurrent    *int64                `json:"count_current,omitempty"`
@@ -39,6 +35,10 @@ type GetKvPairs200ApplicationJSON struct {
 	QueryDurationMs *int64                `json:"query_duration_ms,omitempty"`
 	Results         []shared.KeyValuePair `json:"results,omitempty"`
 	URL             *string               `json:"url,omitempty"`
+}
+
+type GetKvPairsRequest struct {
+	QueryParams GetKvPairsQueryParams
 }
 
 type GetKvPairsResponse struct {

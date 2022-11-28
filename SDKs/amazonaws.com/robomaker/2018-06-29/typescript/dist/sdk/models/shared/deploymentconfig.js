@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Object } from "./s3object";
 // DeploymentConfig
 /**
@@ -34,19 +34,19 @@ var DeploymentConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=concurrentDeploymentPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=concurrentDeploymentPercentage" }),
         __metadata("design:type", Number)
     ], DeploymentConfig.prototype, "concurrentDeploymentPercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=downloadConditionFile" }),
+        SpeakeasyMetadata({ data: "json, name=downloadConditionFile" }),
         __metadata("design:type", S3Object)
     ], DeploymentConfig.prototype, "downloadConditionFile", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureThresholdPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=failureThresholdPercentage" }),
         __metadata("design:type", Number)
     ], DeploymentConfig.prototype, "failureThresholdPercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotDeploymentTimeoutInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=robotDeploymentTimeoutInSeconds" }),
         __metadata("design:type", Number)
     ], DeploymentConfig.prototype, "robotDeploymentTimeoutInSeconds", void 0);
     return DeploymentConfig;

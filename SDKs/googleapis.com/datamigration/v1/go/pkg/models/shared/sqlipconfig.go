@@ -1,5 +1,7 @@
 package shared
 
+// SQLIPConfig
+// IP Management configuration.
 type SQLIPConfig struct {
 	AuthorizedNetworks []SQLACLEntry `json:"authorizedNetworks,omitempty"`
 	EnableIpv4         *bool         `json:"enableIpv4,omitempty"`

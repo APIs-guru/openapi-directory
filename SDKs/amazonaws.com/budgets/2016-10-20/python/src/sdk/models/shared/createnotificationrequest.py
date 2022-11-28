@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import notification
-from . import subscriber
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateNotificationRequest:
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountId' }})
-    budget_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BudgetName' }})
-    notification: notification.Notification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notification' }})
-    subscribers: List[subscriber.Subscriber] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Subscribers' }})
+    r"""CreateNotificationRequest
+     Request of CreateNotification 
+    """
+    
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountId') }})
+    budget_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BudgetName') }})
+    notification: Notification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notification') }})
+    subscribers: List[Subscriber] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Subscribers') }})
     

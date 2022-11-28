@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2FieldTransformation
+// The transformation to apply to the field.
 type GooglePrivacyDlpV2FieldTransformation struct {
 	Condition               *GooglePrivacyDlpV2RecordCondition         `json:"condition,omitempty"`
 	Fields                  []GooglePrivacyDlpV2FieldID                `json:"fields,omitempty"`

@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 export enum TeamsUpdateRequestBodyPermissionEnum {
-    Pull = "pull"
-,    Push = "push"
-,    Admin = "admin"
+    Pull = "pull",
+    Push = "push",
+    Admin = "admin"
 }
 
 export enum TeamsUpdateRequestBodyPrivacyEnum {
-    Secret = "secret"
-,    Closed = "closed"
+    Secret = "secret",
+    Closed = "closed"
 }
 
 
 export class TeamsUpdateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent_team_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_team_id" })
   parentTeamId?: number;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: TeamsUpdateRequestBodyPermissionEnum;
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: TeamsUpdateRequestBodyPrivacyEnum;
 }
 
 
 export class TeamsUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: TeamsUpdateRequestBody;
 }
 
 
 export class TeamsUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamFull?: shared.TeamFull;
 }

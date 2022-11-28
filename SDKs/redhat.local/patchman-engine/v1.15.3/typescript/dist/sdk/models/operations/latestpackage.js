@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LatestPackagePathParams = /** @class */ (function (_super) {
     __extends(LatestPackagePathParams, _super);
@@ -30,7 +30,7 @@ var LatestPackagePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=package_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=package_name" }),
         __metadata("design:type", String)
     ], LatestPackagePathParams.prototype, "packageName", void 0);
     return LatestPackagePathParams;
@@ -42,7 +42,7 @@ var LatestPackageSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeRhIdentity)
     ], LatestPackageSecurity.prototype, "rhIdentity", void 0);
     return LatestPackageSecurity;
@@ -54,11 +54,11 @@ var LatestPackageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LatestPackagePathParams)
     ], LatestPackageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LatestPackageSecurity)
     ], LatestPackageRequest.prototype, "security", void 0);
     return LatestPackageRequest;
@@ -70,15 +70,15 @@ var LatestPackageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LatestPackageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LatestPackageResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ControllersPackageDetailResponse)
     ], LatestPackageResponse.prototype, "controllersPackageDetailResponse", void 0);
     return LatestPackageResponse;

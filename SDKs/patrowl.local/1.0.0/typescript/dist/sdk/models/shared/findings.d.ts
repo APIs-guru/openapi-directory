@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class FindingsMetaRisk extends SpeakeasyBase {
     cvssBaseScore?: string[];
     cvssVector?: string[];

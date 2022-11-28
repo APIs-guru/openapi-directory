@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import presale
-from . import publicsaledates
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EventSalesDates:
-    presales: Optional[List[presale.Presale]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'presales' }})
-    public: Optional[publicsaledates.PublicSaleDates] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'public' }})
+    r"""EventSalesDates
+    Event's Sales Dates
+    """
+    
+    presales: Optional[List[Presale]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('presales') }})
+    public: Optional[PublicSaleDates] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('public') }})
     

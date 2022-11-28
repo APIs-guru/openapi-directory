@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsEnvironmentsTestIamPermissionsQueryParams:
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsTestIamPermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsTestIamPermissionsRequest:
-    path_params: ApigeeOrganizationsEnvironmentsTestIamPermissionsPathParams = field(default=None)
-    query_params: ApigeeOrganizationsEnvironmentsTestIamPermissionsQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsEnvironmentsTestIamPermissionsPathParams = field()
+    query_params: ApigeeOrganizationsEnvironmentsTestIamPermissionsQueryParams = field()
+    security: ApigeeOrganizationsEnvironmentsTestIamPermissionsSecurity = field()
     request: Optional[shared.GoogleIamV1TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsEnvironmentsTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsTestIamPermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_iam_v1_test_iam_permissions_response: Optional[shared.GoogleIamV1TestIamPermissionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

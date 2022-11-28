@@ -9,14 +9,14 @@ class GetDashboardConfigurationPageQueryParams:
 
 @dataclass
 class GetDashboardConfigurationPageRequest:
-    query_params: GetDashboardConfigurationPageQueryParams = field(default=None)
+    query_params: GetDashboardConfigurationPageQueryParams = field()
     
 
 @dataclass
 class GetDashboardConfigurationPageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_dashboard_configuration_page_200_application_x_javascript_binary_string: Optional[bytes] = field(default=None)
     get_dashboard_configuration_page_200_text_html_binary_string: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

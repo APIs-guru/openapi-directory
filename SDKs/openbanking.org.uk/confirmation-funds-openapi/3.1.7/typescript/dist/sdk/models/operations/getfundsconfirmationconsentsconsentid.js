@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFundsConfirmationConsentsConsentIdPathParams = /** @class */ (function (_super) {
     __extends(GetFundsConfirmationConsentsConsentIdPathParams, _super);
@@ -30,7 +30,7 @@ var GetFundsConfirmationConsentsConsentIdPathParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ConsentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ConsentId" }),
         __metadata("design:type", String)
     ], GetFundsConfirmationConsentsConsentIdPathParams.prototype, "consentId", void 0);
     return GetFundsConfirmationConsentsConsentIdPathParams;
@@ -42,23 +42,23 @@ var GetFundsConfirmationConsentsConsentIdHeaders = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetFundsConfirmationConsentsConsentIdHeaders.prototype, "authorization", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" }),
         __metadata("design:type", String)
     ], GetFundsConfirmationConsentsConsentIdHeaders.prototype, "xCustomerUserAgent", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" }),
         __metadata("design:type", String)
     ], GetFundsConfirmationConsentsConsentIdHeaders.prototype, "xFapiAuthDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" }),
         __metadata("design:type", String)
     ], GetFundsConfirmationConsentsConsentIdHeaders.prototype, "xFapiCustomerIpAddress", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" }),
         __metadata("design:type", String)
     ], GetFundsConfirmationConsentsConsentIdHeaders.prototype, "xFapiInteractionId", void 0);
     return GetFundsConfirmationConsentsConsentIdHeaders;
@@ -70,7 +70,7 @@ var GetFundsConfirmationConsentsConsentIdSecurity = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeTppoAuth2Security)
     ], GetFundsConfirmationConsentsConsentIdSecurity.prototype, "tppoAuth2Security", void 0);
     return GetFundsConfirmationConsentsConsentIdSecurity;
@@ -82,15 +82,15 @@ var GetFundsConfirmationConsentsConsentIdRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFundsConfirmationConsentsConsentIdPathParams)
     ], GetFundsConfirmationConsentsConsentIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFundsConfirmationConsentsConsentIdHeaders)
     ], GetFundsConfirmationConsentsConsentIdRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFundsConfirmationConsentsConsentIdSecurity)
     ], GetFundsConfirmationConsentsConsentIdRequest.prototype, "security", void 0);
     return GetFundsConfirmationConsentsConsentIdRequest;
@@ -102,23 +102,23 @@ var GetFundsConfirmationConsentsConsentIdResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFundsConfirmationConsentsConsentIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetFundsConfirmationConsentsConsentIdResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ObErrorResponse1)
     ], GetFundsConfirmationConsentsConsentIdResponse.prototype, "obErrorResponse1", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ObFundsConfirmationConsentResponse1)
     ], GetFundsConfirmationConsentsConsentIdResponse.prototype, "obFundsConfirmationConsentResponse1", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFundsConfirmationConsentsConsentIdResponse.prototype, "statusCode", void 0);
     return GetFundsConfirmationConsentsConsentIdResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Repository } from "./repository";
+
 
 
 // StarredRepository
@@ -7,9 +8,9 @@ import { Repository } from "./repository";
  * Starred Repository
 **/
 export class StarredRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repo" })
+  @SpeakeasyMetadata({ data: "json, name=repo" })
   repo: Repository;
 
-  @Metadata({ data: "json, name=starred_at" })
+  @SpeakeasyMetadata({ data: "json, name=starred_at" })
   starredAt: Date;
 }

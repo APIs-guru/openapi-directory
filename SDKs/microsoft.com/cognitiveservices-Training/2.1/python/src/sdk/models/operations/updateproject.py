@@ -1,38 +1,41 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateProjectPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateProjectHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
-class UpdateProjectRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
-    project: Optional[shared.Project] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    project1: Optional[shared.Project] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    project2: Optional[shared.Project] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
-    text_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+class UpdateProjectRequestsInput:
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
+    text_xml: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
+    project: Optional[shared.ProjectInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    project1: Optional[shared.ProjectInput] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    project2: Optional[shared.ProjectInput] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
     
 
 @dataclass
 class UpdateProjectRequest:
-    path_params: UpdateProjectPathParams = field(default=None)
-    headers: UpdateProjectHeaders = field(default=None)
-    request: UpdateProjectRequests = field(default=None)
+    headers: UpdateProjectHeaders = field()
+    path_params: UpdateProjectPathParams = field()
+    request: UpdateProjectRequestsInput = field()
     
 
 @dataclass
 class UpdateProjectResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     project: Optional[shared.Project] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -6,6 +6,8 @@ type TeamProjectPermissions struct {
 	Write bool `json:"write"`
 }
 
+// TeamProject
+// A team's access to a project.
 type TeamProject struct {
 	Body                   string                 `json:"body"`
 	ColumnsURL             string                 `json:"columns_url"`

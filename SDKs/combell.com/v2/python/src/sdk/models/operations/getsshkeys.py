@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetSSHKeysPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSSHKeysQueryParams:
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetSSHKeysRequest:
-    path_params: GetSSHKeysPathParams = field(default=None)
-    query_params: GetSSHKeysQueryParams = field(default=None)
+    path_params: GetSSHKeysPathParams = field()
+    query_params: GetSSHKeysQueryParams = field()
     
 
 @dataclass
 class GetSSHKeysResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ssh_keys: Optional[List[shared.SSHKey]] = field(default=None)
-    status_code: int = field(default=None)
     

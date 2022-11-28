@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SitesUrlInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The published site URLs of new Google Sites to search
 **/
 export class SitesUrlInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=urls" })
+  @SpeakeasyMetadata({ data: "json, name=urls" })
   urls?: string[];
 }

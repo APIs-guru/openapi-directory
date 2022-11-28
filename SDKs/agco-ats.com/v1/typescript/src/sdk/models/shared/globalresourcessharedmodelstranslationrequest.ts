@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GlobalResourcesSharedModelsTranslationRequestStateEnum {
-    NotSubmitted = "NotSubmitted"
-,    Submitted = "Submitted"
-,    Cancelled = "Cancelled"
-,    Completed = "Completed"
+    NotSubmitted = "NotSubmitted",
+    Submitted = "Submitted",
+    Cancelled = "Cancelled",
+    Completed = "Completed"
 }
 
 
@@ -13,39 +14,39 @@ export enum GlobalResourcesSharedModelsTranslationRequestStateEnum {
  * A request to translate specified strings into specified locales
 **/
 export class GlobalResourcesSharedModelsTranslationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApprovalUserId, form, name=ApprovalUserId;" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovalUserId, form, name=ApprovalUserId;" })
   approvalUserId?: number;
 
-  @Metadata({ data: "json, name=CCEmailAddresses, form, name=CCEmailAddresses;" })
+  @SpeakeasyMetadata({ data: "json, name=CCEmailAddresses, form, name=CCEmailAddresses;" })
   ccEmailAddresses: string[];
 
-  @Metadata({ data: "json, name=ChargeToAccount, form, name=ChargeToAccount;" })
+  @SpeakeasyMetadata({ data: "json, name=ChargeToAccount, form, name=ChargeToAccount;" })
   chargeToAccount: string;
 
-  @Metadata({ data: "json, name=Deadline, form, name=Deadline;" })
+  @SpeakeasyMetadata({ data: "json, name=Deadline, form, name=Deadline;" })
   deadline: Date;
 
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=LocaleIds, form, name=LocaleIds;" })
+  @SpeakeasyMetadata({ data: "json, name=LocaleIds, form, name=LocaleIds;" })
   localeIds: number[];
 
-  @Metadata({ data: "json, name=Notes, form, name=Notes;" })
+  @SpeakeasyMetadata({ data: "json, name=Notes, form, name=Notes;" })
   notes: string;
 
-  @Metadata({ data: "json, name=QuestionsUserId, form, name=QuestionsUserId;" })
+  @SpeakeasyMetadata({ data: "json, name=QuestionsUserId, form, name=QuestionsUserId;" })
   questionsUserId?: number;
 
-  @Metadata({ data: "json, name=State, form, name=State;" })
+  @SpeakeasyMetadata({ data: "json, name=State, form, name=State;" })
   state: GlobalResourcesSharedModelsTranslationRequestStateEnum;
 
-  @Metadata({ data: "json, name=SubmittedBy, form, name=SubmittedBy;" })
+  @SpeakeasyMetadata({ data: "json, name=SubmittedBy, form, name=SubmittedBy;" })
   submittedBy?: number;
 
-  @Metadata({ data: "json, name=TranslatorEmail, form, name=TranslatorEmail;" })
+  @SpeakeasyMetadata({ data: "json, name=TranslatorEmail, form, name=TranslatorEmail;" })
   translatorEmail?: string;
 
-  @Metadata({ data: "json, name=TranslatorName, form, name=TranslatorName;" })
+  @SpeakeasyMetadata({ data: "json, name=TranslatorName, form, name=TranslatorName;" })
   translatorName?: string;
 }

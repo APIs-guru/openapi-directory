@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IstioConfigAuthEnum {
-    AuthNone = "AUTH_NONE"
-,    AuthMutualTls = "AUTH_MUTUAL_TLS"
+    AuthNone = "AUTH_NONE",
+    AuthMutualTls = "AUTH_MUTUAL_TLS"
 }
 
 
@@ -11,9 +12,9 @@ export enum IstioConfigAuthEnum {
  * Configuration options for Istio addon.
 **/
 export class IstioConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auth" })
+  @SpeakeasyMetadata({ data: "json, name=auth" })
   auth?: IstioConfigAuthEnum;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 }

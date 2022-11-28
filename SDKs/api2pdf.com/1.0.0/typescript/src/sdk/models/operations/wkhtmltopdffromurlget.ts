@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class WkhtmltopdfFromUrlGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=output" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=output" })
   output?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" })
   url: string;
 }
 
 
 export class WkhtmltopdfFromUrlGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   queryApiKey: shared.SchemeQueryApiKey;
 }
 
 
 export class WkhtmltopdfFromUrlGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: WkhtmltopdfFromUrlGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: WkhtmltopdfFromUrlGetSecurity;
 }
 
 
 export class WkhtmltopdfFromUrlGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseFailure?: shared.ApiResponseFailure;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseSuccess?: shared.ApiResponseSuccess;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wkhtmltopdfFromUrlGet200ApplicationPdfBinaryString?: Uint8Array;
 }

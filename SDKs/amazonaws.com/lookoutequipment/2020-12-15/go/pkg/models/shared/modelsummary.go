@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ModelSummary
+// Provides information about the specified ML model, including dataset and model names and ARNs, as well as status.
 type ModelSummary struct {
 	CreatedAt   *time.Time       `json:"CreatedAt,omitempty"`
 	DatasetArn  *string          `json:"DatasetArn,omitempty"`

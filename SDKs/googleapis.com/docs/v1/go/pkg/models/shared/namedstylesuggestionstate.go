@@ -15,6 +15,8 @@ const (
 	NamedStyleSuggestionStateNamedStyleTypeEnumHeading6                  NamedStyleSuggestionStateNamedStyleTypeEnum = "HEADING_6"
 )
 
+// NamedStyleSuggestionState
+// A suggestion state of a NamedStyle message.
 type NamedStyleSuggestionState struct {
 	NamedStyleType                *NamedStyleSuggestionStateNamedStyleTypeEnum `json:"namedStyleType,omitempty"`
 	ParagraphStyleSuggestionState *ParagraphStyleSuggestionState               `json:"paragraphStyleSuggestionState,omitempty"`

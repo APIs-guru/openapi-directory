@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudChannelV1PercentageAdjustment } from "./googlecloudchannelv1percentageadjustment";
+
 
 
 // GoogleCloudChannelV1RepricingAdjustment
@@ -7,6 +8,6 @@ import { GoogleCloudChannelV1PercentageAdjustment } from "./googlecloudchannelv1
  * A type that represents the various adjustments you can apply to a bill.
 **/
 export class GoogleCloudChannelV1RepricingAdjustment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentageAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=percentageAdjustment" })
   percentageAdjustment?: GoogleCloudChannelV1PercentageAdjustment;
 }

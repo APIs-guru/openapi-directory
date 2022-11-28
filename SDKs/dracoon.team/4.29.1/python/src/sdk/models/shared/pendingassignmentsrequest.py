@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import pendingassignment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PendingAssignmentsRequest:
-    items: List[pendingassignment.PendingAssignment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
+    r"""PendingAssignmentsRequest
+    Request model for handling pending assignments
+    """
+    
+    items: List[PendingAssignment] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
     

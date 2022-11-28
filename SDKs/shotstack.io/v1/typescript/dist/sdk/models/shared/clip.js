@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Offset } from "./offset";
 import { Transition } from "./transition";
 export var ClipEffectEnum;
@@ -73,47 +73,47 @@ var Clip = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=asset" }),
+        SpeakeasyMetadata({ data: "json, name=asset" }),
         __metadata("design:type", Object)
     ], Clip.prototype, "asset", void 0);
     __decorate([
-        Metadata({ data: "json, name=effect" }),
+        SpeakeasyMetadata({ data: "json, name=effect" }),
         __metadata("design:type", String)
     ], Clip.prototype, "effect", void 0);
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], Clip.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=fit" }),
+        SpeakeasyMetadata({ data: "json, name=fit" }),
         __metadata("design:type", String)
     ], Clip.prototype, "fit", void 0);
     __decorate([
-        Metadata({ data: "json, name=length" }),
+        SpeakeasyMetadata({ data: "json, name=length" }),
         __metadata("design:type", Number)
     ], Clip.prototype, "length", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Offset)
     ], Clip.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=opacity" }),
+        SpeakeasyMetadata({ data: "json, name=opacity" }),
         __metadata("design:type", Number)
     ], Clip.prototype, "opacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], Clip.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=scale" }),
+        SpeakeasyMetadata({ data: "json, name=scale" }),
         __metadata("design:type", Number)
     ], Clip.prototype, "scale", void 0);
     __decorate([
-        Metadata({ data: "json, name=start" }),
+        SpeakeasyMetadata({ data: "json, name=start" }),
         __metadata("design:type", Number)
     ], Clip.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "json, name=transition" }),
+        SpeakeasyMetadata({ data: "json, name=transition" }),
         __metadata("design:type", Transition)
     ], Clip.prototype, "transition", void 0);
     return Clip;

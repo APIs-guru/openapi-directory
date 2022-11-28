@@ -23,6 +23,8 @@ const (
 	PricingSchedulePricingTypeEnumPricingTypeCpmActiveview       PricingSchedulePricingTypeEnum = "PRICING_TYPE_CPM_ACTIVEVIEW"
 )
 
+// PricingSchedule
+// Pricing Schedule
 type PricingSchedule struct {
 	CapCostOption        *PricingScheduleCapCostOptionEnum `json:"capCostOption,omitempty"`
 	EndDate              *time.Time                        `json:"endDate,omitempty"`

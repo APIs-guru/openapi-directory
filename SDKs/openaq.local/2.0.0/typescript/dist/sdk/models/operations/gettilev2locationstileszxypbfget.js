@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTileV2LocationsTilesZXYPbfGetPathParams = /** @class */ (function (_super) {
     __extends(GetTileV2LocationsTilesZXYPbfGetPathParams, _super);
@@ -30,15 +30,15 @@ var GetTileV2LocationsTilesZXYPbfGetPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=x" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=x" }),
         __metadata("design:type", Number)
     ], GetTileV2LocationsTilesZXYPbfGetPathParams.prototype, "x", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=y" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=y" }),
         __metadata("design:type", Number)
     ], GetTileV2LocationsTilesZXYPbfGetPathParams.prototype, "y", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=z" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=z" }),
         __metadata("design:type", Number)
     ], GetTileV2LocationsTilesZXYPbfGetPathParams.prototype, "z", void 0);
     return GetTileV2LocationsTilesZXYPbfGetPathParams;
@@ -50,31 +50,31 @@ var GetTileV2LocationsTilesZXYPbfGetQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
         __metadata("design:type", Boolean)
     ], GetTileV2LocationsTilesZXYPbfGetQueryParams.prototype, "isAnalysis", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
         __metadata("design:type", Boolean)
     ], GetTileV2LocationsTilesZXYPbfGetQueryParams.prototype, "isMobile", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedFrom" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedFrom" }),
         __metadata("design:type", Object)
     ], GetTileV2LocationsTilesZXYPbfGetQueryParams.prototype, "lastUpdatedFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedTo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastUpdatedTo" }),
         __metadata("design:type", Object)
     ], GetTileV2LocationsTilesZXYPbfGetQueryParams.prototype, "lastUpdatedTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=location" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location" }),
         __metadata("design:type", Array)
     ], GetTileV2LocationsTilesZXYPbfGetQueryParams.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
         __metadata("design:type", Object)
     ], GetTileV2LocationsTilesZXYPbfGetQueryParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=project" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" }),
         __metadata("design:type", Number)
     ], GetTileV2LocationsTilesZXYPbfGetQueryParams.prototype, "project", void 0);
     return GetTileV2LocationsTilesZXYPbfGetQueryParams;
@@ -86,11 +86,11 @@ var GetTileV2LocationsTilesZXYPbfGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTileV2LocationsTilesZXYPbfGetPathParams)
     ], GetTileV2LocationsTilesZXYPbfGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTileV2LocationsTilesZXYPbfGetQueryParams)
     ], GetTileV2LocationsTilesZXYPbfGetRequest.prototype, "queryParams", void 0);
     return GetTileV2LocationsTilesZXYPbfGetRequest;
@@ -102,15 +102,15 @@ var GetTileV2LocationsTilesZXYPbfGetResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTileV2LocationsTilesZXYPbfGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetTileV2LocationsTilesZXYPbfGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTileV2LocationsTilesZXYPbfGetResponse.prototype, "statusCode", void 0);
     return GetTileV2LocationsTilesZXYPbfGetResponse;

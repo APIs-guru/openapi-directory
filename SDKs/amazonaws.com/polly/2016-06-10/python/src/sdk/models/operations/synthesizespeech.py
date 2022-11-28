@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -132,26 +137,27 @@ class SynthesizeSpeechRequestBodyVoiceIDEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SynthesizeSpeechRequestBody:
-    engine: Optional[SynthesizeSpeechRequestBodyEngineEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Engine' }})
-    language_code: Optional[SynthesizeSpeechRequestBodyLanguageCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LanguageCode' }})
-    lexicon_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LexiconNames' }})
-    output_format: SynthesizeSpeechRequestBodyOutputFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutputFormat' }})
-    sample_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SampleRate' }})
-    speech_mark_types: Optional[List[shared.SpeechMarkTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SpeechMarkTypes' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Text' }})
-    text_type: Optional[SynthesizeSpeechRequestBodyTextTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TextType' }})
-    voice_id: SynthesizeSpeechRequestBodyVoiceIDEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VoiceId' }})
+    output_format: SynthesizeSpeechRequestBodyOutputFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutputFormat') }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Text') }})
+    voice_id: SynthesizeSpeechRequestBodyVoiceIDEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VoiceId') }})
+    engine: Optional[SynthesizeSpeechRequestBodyEngineEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Engine') }})
+    language_code: Optional[SynthesizeSpeechRequestBodyLanguageCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LanguageCode') }})
+    lexicon_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LexiconNames') }})
+    sample_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SampleRate') }})
+    speech_mark_types: Optional[List[shared.SpeechMarkTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SpeechMarkTypes') }})
+    text_type: Optional[SynthesizeSpeechRequestBodyTextTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TextType') }})
     
 
 @dataclass
 class SynthesizeSpeechRequest:
-    headers: SynthesizeSpeechHeaders = field(default=None)
-    request: SynthesizeSpeechRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SynthesizeSpeechHeaders = field()
+    request: SynthesizeSpeechRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SynthesizeSpeechResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     engine_not_supported_exception: Optional[Any] = field(default=None)
     invalid_sample_rate_exception: Optional[Any] = field(default=None)
     invalid_ssml_exception: Optional[Any] = field(default=None)
@@ -160,7 +166,6 @@ class SynthesizeSpeechResponse:
     marks_not_supported_for_format_exception: Optional[Any] = field(default=None)
     service_failure_exception: Optional[Any] = field(default=None)
     ssml_marks_not_supported_for_text_type_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     synthesize_speech_output: Optional[shared.SynthesizeSpeechOutput] = field(default=None)
     text_length_exceeded_exception: Optional[Any] = field(default=None)
     

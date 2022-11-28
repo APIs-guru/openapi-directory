@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateEmailChannelPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,36 +27,40 @@ class UpdateEmailChannelHeaders:
 @dataclass_json
 @dataclass
 class UpdateEmailChannelRequestBodyEmailChannelRequest:
-    configuration_set: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationSet' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Enabled' }})
-    from_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FromAddress' }})
-    identity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Identity' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
+    r"""UpdateEmailChannelRequestBodyEmailChannelRequest
+    Specifies the status and settings of the email channel for an application.
+    """
+    
+    configuration_set: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationSet') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Enabled') }})
+    from_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FromAddress') }})
+    identity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Identity') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleArn') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateEmailChannelRequestBody:
-    email_channel_request: UpdateEmailChannelRequestBodyEmailChannelRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailChannelRequest' }})
+    email_channel_request: UpdateEmailChannelRequestBodyEmailChannelRequest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailChannelRequest') }})
     
 
 @dataclass
 class UpdateEmailChannelRequest:
-    path_params: UpdateEmailChannelPathParams = field(default=None)
-    headers: UpdateEmailChannelHeaders = field(default=None)
-    request: UpdateEmailChannelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateEmailChannelHeaders = field()
+    path_params: UpdateEmailChannelPathParams = field()
+    request: UpdateEmailChannelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateEmailChannelResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_email_channel_response: Optional[shared.UpdateEmailChannelResponse] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateEnvironmentOperationsRoleActionEnum(str, Enum):
     ASSOCIATE_ENVIRONMENT_OPERATIONS_ROLE = "AssociateEnvironmentOperationsRole"
@@ -10,10 +14,10 @@ class GetAssociateEnvironmentOperationsRoleVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateEnvironmentOperationsRoleQueryParams:
-    action: GetAssociateEnvironmentOperationsRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    environment_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentName', 'style': 'form', 'explode': True }})
-    operations_role: str = field(default=None, metadata={'query_param': { 'field_name': 'OperationsRole', 'style': 'form', 'explode': True }})
-    version: GetAssociateEnvironmentOperationsRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAssociateEnvironmentOperationsRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    environment_name: str = field(metadata={'query_param': { 'field_name': 'EnvironmentName', 'style': 'form', 'explode': True }})
+    operations_role: str = field(metadata={'query_param': { 'field_name': 'OperationsRole', 'style': 'form', 'explode': True }})
+    version: GetAssociateEnvironmentOperationsRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAssociateEnvironmentOperationsRoleHeaders:
 
 @dataclass
 class GetAssociateEnvironmentOperationsRoleRequest:
-    query_params: GetAssociateEnvironmentOperationsRoleQueryParams = field(default=None)
-    headers: GetAssociateEnvironmentOperationsRoleHeaders = field(default=None)
+    headers: GetAssociateEnvironmentOperationsRoleHeaders = field()
+    query_params: GetAssociateEnvironmentOperationsRoleQueryParams = field()
     
 
 @dataclass
 class GetAssociateEnvironmentOperationsRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

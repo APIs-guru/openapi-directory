@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import orderstring_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OrderByElement:
-    field_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldName' }})
-    sort_order: Optional[orderstring_enum.OrderStringEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortOrder' }})
+    r"""OrderByElement
+    A field and direction for ordered output.
+    """
+    
+    field_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldName') }})
+    sort_order: Optional[OrderStringEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortOrder') }})
     

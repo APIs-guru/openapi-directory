@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpsertActionEnum } from "./upsertactionenum";
 // UpsertRowsResult
 /**
@@ -34,11 +34,11 @@ var UpsertRowsResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rowIds" }),
+        SpeakeasyMetadata({ data: "json, name=rowIds" }),
         __metadata("design:type", Array)
     ], UpsertRowsResult.prototype, "rowIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=upsertAction" }),
+        SpeakeasyMetadata({ data: "json, name=upsertAction" }),
         __metadata("design:type", String)
     ], UpsertRowsResult.prototype, "upsertAction", void 0);
     return UpsertRowsResult;

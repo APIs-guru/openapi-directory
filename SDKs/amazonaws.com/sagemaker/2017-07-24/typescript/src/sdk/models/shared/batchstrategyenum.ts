@@ -1,6 +1,7 @@
 
 
+
 export enum BatchStrategyEnum {
-    MultiRecord = "MultiRecord"
-,    SingleRecord = "SingleRecord"
+    MultiRecord = "MultiRecord",
+    SingleRecord = "SingleRecord"
 }

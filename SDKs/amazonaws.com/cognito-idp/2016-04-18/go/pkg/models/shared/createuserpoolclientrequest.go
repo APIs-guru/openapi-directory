@@ -1,5 +1,7 @@
 package shared
 
+// CreateUserPoolClientRequest
+// Represents the request to create a user pool client.
 type CreateUserPoolClientRequest struct {
 	AccessTokenValidity             *int64                              `json:"AccessTokenValidity,omitempty"`
 	AllowedOAuthFlows               []OAuthFlowTypeEnum                 `json:"AllowedOAuthFlows,omitempty"`

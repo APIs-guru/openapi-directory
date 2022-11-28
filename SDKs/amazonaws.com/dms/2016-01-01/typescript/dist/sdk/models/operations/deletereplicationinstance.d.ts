@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteReplicationInstanceXAmzTargetEnum {
     AmazonDmSv20160101DeleteReplicationInstance = "AmazonDMSv20160101.DeleteReplicationInstance"

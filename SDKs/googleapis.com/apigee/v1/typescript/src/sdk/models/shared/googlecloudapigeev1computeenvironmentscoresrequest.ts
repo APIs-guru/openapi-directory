@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1ComputeEnvironmentScoresRequestFilter } from "./googlecloudapigeev1computeenvironmentscoresrequestfilter";
 import { GoogleTypeInterval } from "./googletypeinterval";
+
 
 
 // GoogleCloudApigeeV1ComputeEnvironmentScoresRequest
@@ -9,15 +9,15 @@ import { GoogleTypeInterval } from "./googletypeinterval";
  * Request for ComputeEnvironmentScores.
 **/
 export class GoogleCloudApigeeV1ComputeEnvironmentScoresRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.GoogleCloudApigeeV1ComputeEnvironmentScoresRequestFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: GoogleCloudApigeeV1ComputeEnvironmentScoresRequestFilter })
   filters?: GoogleCloudApigeeV1ComputeEnvironmentScoresRequestFilter[];
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=timeRange" })
+  @SpeakeasyMetadata({ data: "json, name=timeRange" })
   timeRange?: GoogleTypeInterval;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RetentionPeriod } from "./retentionperiod";
 export declare class CreateDatasetResponse extends SpeakeasyBase {
     datasetArn?: string;

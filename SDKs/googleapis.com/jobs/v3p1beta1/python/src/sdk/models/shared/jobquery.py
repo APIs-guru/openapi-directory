@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import commutefilter
-from . import compensationfilter
-from . import locationfilter
-from . import timestamprange
+from sdk import utils
+from . import *
 
 class JobQueryEmploymentTypesEnum(str, Enum):
     EMPLOYMENT_TYPE_UNSPECIFIED = "EMPLOYMENT_TYPE_UNSPECIFIED"
@@ -56,18 +55,22 @@ class JobQueryJobCategoriesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class JobQuery:
-    commute_filter: Optional[commutefilter.CommuteFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commuteFilter' }})
-    company_display_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companyDisplayNames' }})
-    company_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companyNames' }})
-    compensation_filter: Optional[compensationfilter.CompensationFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compensationFilter' }})
-    custom_attribute_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customAttributeFilter' }})
-    disable_spell_check: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableSpellCheck' }})
-    employment_types: Optional[List[JobQueryEmploymentTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'employmentTypes' }})
-    excluded_jobs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedJobs' }})
-    job_categories: Optional[List[JobQueryJobCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobCategories' }})
-    language_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCodes' }})
-    location_filters: Optional[List[locationfilter.LocationFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationFilters' }})
-    publish_time_range: Optional[timestamprange.TimestampRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publishTimeRange' }})
-    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'query' }})
-    query_language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryLanguageCode' }})
+    r"""JobQuery
+    Input only. The query required to perform a search query.
+    """
+    
+    commute_filter: Optional[CommuteFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commuteFilter') }})
+    company_display_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companyDisplayNames') }})
+    company_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companyNames') }})
+    compensation_filter: Optional[CompensationFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compensationFilter') }})
+    custom_attribute_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customAttributeFilter') }})
+    disable_spell_check: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableSpellCheck') }})
+    employment_types: Optional[List[JobQueryEmploymentTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('employmentTypes') }})
+    excluded_jobs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedJobs') }})
+    job_categories: Optional[List[JobQueryJobCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobCategories') }})
+    language_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCodes') }})
+    location_filters: Optional[List[LocationFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationFilters') }})
+    publish_time_range: Optional[TimestampRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publishTimeRange') }})
+    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('query') }})
+    query_language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryLanguageCode') }})
     

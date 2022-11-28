@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class CreatePayItemHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreatePayItemSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreatePayItemRequest:
-    headers: CreatePayItemHeaders = field(default=None)
-    request: shared.PayItem = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreatePayItemSecurity = field(default=None)
+    headers: CreatePayItemHeaders = field()
+    request: shared.PayItemInput = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreatePayItemSecurity = field()
     
 
 @dataclass
 class CreatePayItemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pay_items: Optional[shared.PayItems] = field(default=None)
-    status_code: int = field(default=None)
     

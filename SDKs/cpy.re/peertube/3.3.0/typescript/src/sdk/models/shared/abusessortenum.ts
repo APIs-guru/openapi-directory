@@ -1,7 +1,8 @@
 
 
+
 export enum AbusesSortEnum {
-    MinusId = "-id"
-,    MinusCreatedAt = "-createdAt"
-,    MinusState = "-state"
+    MinusId = "-id",
+    MinusCreatedAt = "-createdAt",
+    MinusState = "-state"
 }

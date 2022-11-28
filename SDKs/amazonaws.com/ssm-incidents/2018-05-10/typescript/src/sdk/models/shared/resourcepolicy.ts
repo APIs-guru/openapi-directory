@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResourcePolicy
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The resource policy that allows Incident Manager to perform actions on resources on your behalf.
 **/
 export class ResourcePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyDocument" })
+  @SpeakeasyMetadata({ data: "json, name=policyDocument" })
   policyDocument: string;
 
-  @Metadata({ data: "json, name=policyId" })
+  @SpeakeasyMetadata({ data: "json, name=policyId" })
   policyId: string;
 
-  @Metadata({ data: "json, name=ramResourceShareRegion" })
+  @SpeakeasyMetadata({ data: "json, name=ramResourceShareRegion" })
   ramResourceShareRegion: string;
 }

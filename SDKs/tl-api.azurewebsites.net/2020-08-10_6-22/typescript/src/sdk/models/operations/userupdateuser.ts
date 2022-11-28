@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserUpdateUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AccountNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AccountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ExternalEntityNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ExternalEntityNumber" })
   externalEntityNumber?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Guardian" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Guardian" })
   guardian?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=GymNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GymNumber" })
   gymNumber?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IntroduceBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IntroduceBy" })
   introduceBy?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Number" })
   number?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TypeId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TypeId" })
   typeId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=UserId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UserId" })
   userId?: number;
 }
 
 
 export class UserUpdateUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserUpdateUserQueryParams;
 }
 
 
 export class UserUpdateUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

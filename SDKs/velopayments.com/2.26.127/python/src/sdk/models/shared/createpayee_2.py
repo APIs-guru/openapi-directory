@@ -1,27 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import createpayeeaddress_2
-from . import challenge_2
-from . import company_2
-from . import createindividual_2
-from . import createpaymentchannel_2
-from . import payeepayorref
-from . import payeetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class CreatePayee2:
-    address: createpayeeaddress_2.CreatePayeeAddress2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    challenge: Optional[challenge_2.Challenge2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'challenge' }})
-    company: Optional[company_2.Company2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'company' }})
-    email: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    individual: Optional[createindividual_2.CreateIndividual2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'individual' }})
-    language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
-    payee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeId' }})
-    payment_channel: Optional[createpaymentchannel_2.CreatePaymentChannel2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentChannel' }})
-    payor_refs: Optional[List[payeepayorref.PayeePayorRef]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payorRefs' }})
-    remote_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remoteId' }})
-    type: payeetype_enum.PayeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class CreatePayee2Input:
+    address: CreatePayeeAddress2 = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
+    email: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    remote_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('remoteId') }})
+    type: PayeeTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    challenge: Optional[Challenge2] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('challenge') }})
+    company: Optional[Company2] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('company') }})
+    individual: Optional[CreateIndividual2] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('individual') }})
+    language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('language') }})
+    payment_channel: Optional[CreatePaymentChannel2] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentChannel') }})
     

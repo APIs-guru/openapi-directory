@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1AssetDiscoveryStatusStats } from "./googleclouddataplexv1assetdiscoverystatusstats";
 
+
 export enum GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Scheduled = "SCHEDULED"
-,    InProgress = "IN_PROGRESS"
-,    Paused = "PAUSED"
-,    Disabled = "DISABLED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Scheduled = "SCHEDULED",
+    InProgress = "IN_PROGRESS",
+    Paused = "PAUSED",
+    Disabled = "DISABLED"
 }
 
 
@@ -15,21 +16,21 @@ export enum GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum {
  * Status of discovery for an asset.
 **/
 export class GoogleCloudDataplexV1AssetDiscoveryStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastRunDuration" })
+  @SpeakeasyMetadata({ data: "json, name=lastRunDuration" })
   lastRunDuration?: string;
 
-  @Metadata({ data: "json, name=lastRunTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastRunTime" })
   lastRunTime?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats?: GoogleCloudDataplexV1AssetDiscoveryStatusStats;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

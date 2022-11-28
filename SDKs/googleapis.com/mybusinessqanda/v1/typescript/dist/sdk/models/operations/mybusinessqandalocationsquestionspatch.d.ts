@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MybusinessqandaLocationsQuestionsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -20,7 +20,7 @@ export declare class MybusinessqandaLocationsQuestionsPatchQueryParams extends S
 export declare class MybusinessqandaLocationsQuestionsPatchRequest extends SpeakeasyBase {
     pathParams: MybusinessqandaLocationsQuestionsPatchPathParams;
     queryParams: MybusinessqandaLocationsQuestionsPatchQueryParams;
-    request?: shared.Question;
+    request?: shared.QuestionInput;
 }
 export declare class MybusinessqandaLocationsQuestionsPatchResponse extends SpeakeasyBase {
     contentType: string;

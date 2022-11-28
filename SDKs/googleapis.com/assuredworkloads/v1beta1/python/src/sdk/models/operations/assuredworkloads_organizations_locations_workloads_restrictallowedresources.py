@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesQue
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesRequest:
-    path_params: AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesPathParams = field(default=None)
-    query_params: AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesQueryParams = field(default=None)
+    path_params: AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesPathParams = field()
+    query_params: AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesQueryParams = field()
+    security: AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesSecurity = field()
     request: Optional[shared.GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesSecurity = field(default=None)
     
 
 @dataclass
 class AssuredworkloadsOrganizationsLocationsWorkloadsRestrictAllowedResourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_assuredworkloads_v1beta1_restrict_allowed_resources_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

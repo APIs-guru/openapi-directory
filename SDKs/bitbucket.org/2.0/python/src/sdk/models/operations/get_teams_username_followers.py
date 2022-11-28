@@ -5,41 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class GetTeamsUsernameFollowersPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetTeamsUsernameFollowersSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetTeamsUsernameFollowersSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetTeamsUsernameFollowersSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTeamsUsernameFollowersSecurity:
-    option1: Optional[GetTeamsUsernameFollowersSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetTeamsUsernameFollowersSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetTeamsUsernameFollowersSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTeamsUsernameFollowersRequest:
-    path_params: GetTeamsUsernameFollowersPathParams = field(default=None)
-    security: GetTeamsUsernameFollowersSecurity = field(default=None)
+    path_params: GetTeamsUsernameFollowersPathParams = field()
+    security: GetTeamsUsernameFollowersSecurity = field()
     
 
 @dataclass
 class GetTeamsUsernameFollowersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_users: Optional[shared.PaginatedUsers] = field(default=None)
     

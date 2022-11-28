@@ -11,6 +11,8 @@ const (
 	IndividualOutcomeOutcomeSummaryEnumFlaky        IndividualOutcomeOutcomeSummaryEnum = "flaky"
 )
 
+// IndividualOutcome
+// Step Id and outcome of each individual step that was run as a group with other steps with the same configuration.
 type IndividualOutcome struct {
 	MultistepNumber *int32                               `json:"multistepNumber,omitempty"`
 	OutcomeSummary  *IndividualOutcomeOutcomeSummaryEnum `json:"outcomeSummary,omitempty"`

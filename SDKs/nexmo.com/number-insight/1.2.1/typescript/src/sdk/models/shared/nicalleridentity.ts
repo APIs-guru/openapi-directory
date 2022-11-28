@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NiCallerIdentityCallerTypeEnum {
-    Business = "business"
-,    Consumer = "consumer"
-,    Unknown = "unknown"
+    Business = "business",
+    Consumer = "consumer",
+    Unknown = "unknown"
 }
 
 
@@ -12,15 +13,15 @@ export enum NiCallerIdentityCallerTypeEnum {
  * Information about the network `number` is currently connected to.
 **/
 export class NiCallerIdentity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caller_name" })
+  @SpeakeasyMetadata({ data: "json, name=caller_name" })
   callerName?: string;
 
-  @Metadata({ data: "json, name=caller_type" })
+  @SpeakeasyMetadata({ data: "json, name=caller_type" })
   callerType?: NiCallerIdentityCallerTypeEnum;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: string;
 }

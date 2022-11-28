@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleAnalyticsAdminV1alphaAccount } from "./googleanalyticsadminv1alphaaccount";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleAnalyticsAdminV1alphaAccountInput } from "./googleanalyticsadminv1alphaaccount";
 
 
-// GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequest
+
+// GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequestInput
 /** 
  * Request message for ProvisionAccountTicket RPC.
 **/
-export class GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
-  account?: GoogleAnalyticsAdminV1alphaAccount;
+export class GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=account" })
+  account?: GoogleAnalyticsAdminV1alphaAccountInput;
 
-  @Metadata({ data: "json, name=redirectUri" })
+  @SpeakeasyMetadata({ data: "json, name=redirectUri" })
   redirectUri?: string;
 }

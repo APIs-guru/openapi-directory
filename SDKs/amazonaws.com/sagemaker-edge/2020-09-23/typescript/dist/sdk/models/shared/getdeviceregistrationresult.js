@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDeviceRegistrationResult = /** @class */ (function (_super) {
     __extends(GetDeviceRegistrationResult, _super);
     function GetDeviceRegistrationResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CacheTTL" }),
+        SpeakeasyMetadata({ data: "json, name=CacheTTL" }),
         __metadata("design:type", String)
     ], GetDeviceRegistrationResult.prototype, "cacheTtl", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceRegistration" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceRegistration" }),
         __metadata("design:type", String)
     ], GetDeviceRegistrationResult.prototype, "deviceRegistration", void 0);
     return GetDeviceRegistrationResult;

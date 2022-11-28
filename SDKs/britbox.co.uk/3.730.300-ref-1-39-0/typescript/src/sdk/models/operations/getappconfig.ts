@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetAppConfigIncludeEnum {
-    Classification = "classification"
-,    Playback = "playback"
-,    Sitemap = "sitemap"
-,    Navigation = "navigation"
-,    Subscription = "subscription"
-,    General = "general"
-,    Display = "display"
-,    I18n = "i18n"
-,    Linear = "linear"
+    Classification = "classification",
+    Playback = "playback",
+    Sitemap = "sitemap",
+    Navigation = "navigation",
+    Subscription = "subscription",
+    General = "general",
+    Display = "display",
+    I18n = "i18n",
+    Linear = "linear"
 }
 
 
 export class GetAppConfigQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ff" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ff" })
   ff?: shared.FeatureFlagsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=include" })
   include?: GetAppConfigIncludeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=segments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=segments" })
   segments?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sub" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sub" })
   sub?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=system" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=system" })
   system?: string;
 }
 
 
 export class GetAppConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAppConfigQueryParams;
 }
 
 
 export class GetAppConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   appConfig?: shared.AppConfig;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

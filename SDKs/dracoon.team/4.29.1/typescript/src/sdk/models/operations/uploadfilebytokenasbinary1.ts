@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UploadFileByTokenAsBinary1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=token" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token" })
   token: string;
 }
 
 
 export class UploadFileByTokenAsBinary1Headers extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Range" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Range" })
   contentRange?: string;
 }
 
 
 export class UploadFileByTokenAsBinary1RequestBodyFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=file" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file" })
   file: string;
 }
 
 
 export class UploadFileByTokenAsBinary1RequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   file?: UploadFileByTokenAsBinary1RequestBodyFile;
 }
 
 
 export class UploadFileByTokenAsBinary1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UploadFileByTokenAsBinary1PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UploadFileByTokenAsBinary1Headers;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: UploadFileByTokenAsBinary1RequestBody;
 }
 
 
 export class UploadFileByTokenAsBinary1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   chunkUploadResponse?: shared.ChunkUploadResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileByTokenAsBinary1400ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileByTokenAsBinary1401ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileByTokenAsBinary1403ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileByTokenAsBinary1404ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileByTokenAsBinary1406ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadFileByTokenAsBinary1507ApplicationJsonOneOf?: any;
 }

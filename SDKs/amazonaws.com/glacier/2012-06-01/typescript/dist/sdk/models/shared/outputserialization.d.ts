@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CsvOutput } from "./csvoutput";
 /**
  * Describes how the select output is serialized.

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum AddCommunicationToCaseXAmzTargetEnum {
     AwsSupport20130415AddCommunicationToCase = "AWSSupport_20130415.AddCommunicationToCase"

@@ -29,11 +29,6 @@ type LicerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type LicerRequest struct {
-	Request  *LicerRequestBody `request:"mediaType=application/json"`
-	Security LicerSecurity
-}
-
 type Licer400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Licer504ApplicationJSON struct {
 	Error            *Licer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Licer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type LicerRequest struct {
+	Request  *LicerRequestBody `request:"mediaType=application/json"`
+	Security LicerSecurity
 }
 
 type LicerResponse struct {

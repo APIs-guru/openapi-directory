@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveNodePathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveNodeHeaders:
 
 @dataclass
 class RemoveNodeRequest:
-    path_params: RemoveNodePathParams = field(default=None)
-    headers: RemoveNodeHeaders = field(default=None)
+    headers: RemoveNodeHeaders = field()
+    path_params: RemoveNodePathParams = field()
     
 
 @dataclass
 class RemoveNodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

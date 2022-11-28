@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class ItemRemoveRequest:
-    request: shared.ItemRemoveRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ItemRemoveRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ItemRemoveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     item_remove_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

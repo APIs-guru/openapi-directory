@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class VMServerAddress:
-    vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmId' }})
-    vm_manager_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmManagerId' }})
+    r"""VMServerAddress
+    Represents a VM server location.
+    """
+    
+    vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmId') }})
+    vm_manager_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmManagerId') }})
     

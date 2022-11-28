@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Destination } from "./destination";
 import { MatchingCriteria } from "./matchingcriteria";
 import { Transport } from "./transport";
+import { TransportInput } from "./transport";
+
 
 
 // Trigger
@@ -10,30 +11,55 @@ import { Transport } from "./transport";
  * A representation of the trigger resource.
 **/
 export class Trigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: Destination;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=matchingCriteria", elemType: shared.MatchingCriteria })
+  @SpeakeasyMetadata({ data: "json, name=matchingCriteria", elemType: MatchingCriteria })
   matchingCriteria?: MatchingCriteria[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=transport" })
+  @SpeakeasyMetadata({ data: "json, name=transport" })
   transport?: Transport;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// TriggerInput
+/** 
+ * A representation of the trigger resource.
+**/
+export class TriggerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=destination" })
+  destination?: Destination;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=matchingCriteria", elemType: MatchingCriteria })
+  matchingCriteria?: MatchingCriteria[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
+  serviceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=transport" })
+  transport?: TransportInput;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ResourceUnauthorizedProblemResourceTypeEnum;
 (function (ResourceUnauthorizedProblemResourceTypeEnum) {
     ResourceUnauthorizedProblemResourceTypeEnum["Tweet"] = "tweet";
@@ -44,27 +44,27 @@ var ResourceUnauthorizedProblem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", String)
     ], ResourceUnauthorizedProblem.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=resource_id" }),
+        SpeakeasyMetadata({ data: "json, name=resource_id" }),
         __metadata("design:type", String)
     ], ResourceUnauthorizedProblem.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=resource_type" }),
+        SpeakeasyMetadata({ data: "json, name=resource_type" }),
         __metadata("design:type", String)
     ], ResourceUnauthorizedProblem.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=section" }),
+        SpeakeasyMetadata({ data: "json, name=section" }),
         __metadata("design:type", String)
     ], ResourceUnauthorizedProblem.prototype, "section", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], ResourceUnauthorizedProblem.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ResourceUnauthorizedProblem.prototype, "type", void 0);
     return ResourceUnauthorizedProblem;

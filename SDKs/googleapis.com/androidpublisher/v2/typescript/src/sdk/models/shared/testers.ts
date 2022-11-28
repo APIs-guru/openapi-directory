@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Testers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleGroups" })
+  @SpeakeasyMetadata({ data: "json, name=googleGroups" })
   googleGroups?: string[];
 }

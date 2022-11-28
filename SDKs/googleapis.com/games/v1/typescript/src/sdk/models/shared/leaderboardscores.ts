@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LeaderboardEntry } from "./leaderboardentry";
-import { LeaderboardEntry } from "./leaderboardentry";
+
 
 
 // LeaderboardScores
@@ -9,21 +8,21 @@ import { LeaderboardEntry } from "./leaderboardentry";
  * A ListScores response.
 **/
 export class LeaderboardScores extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.LeaderboardEntry })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: LeaderboardEntry })
   items?: LeaderboardEntry[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=numScores" })
+  @SpeakeasyMetadata({ data: "json, name=numScores" })
   numScores?: string;
 
-  @Metadata({ data: "json, name=playerScore" })
+  @SpeakeasyMetadata({ data: "json, name=playerScore" })
   playerScore?: LeaderboardEntry;
 
-  @Metadata({ data: "json, name=prevPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=prevPageToken" })
   prevPageToken?: string;
 }

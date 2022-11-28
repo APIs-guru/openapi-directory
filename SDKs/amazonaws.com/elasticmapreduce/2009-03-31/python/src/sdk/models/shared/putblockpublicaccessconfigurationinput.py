@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import blockpublicaccessconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutBlockPublicAccessConfigurationInput:
-    block_public_access_configuration: blockpublicaccessconfiguration.BlockPublicAccessConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BlockPublicAccessConfiguration' }})
+    block_public_access_configuration: BlockPublicAccessConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BlockPublicAccessConfiguration') }})
     

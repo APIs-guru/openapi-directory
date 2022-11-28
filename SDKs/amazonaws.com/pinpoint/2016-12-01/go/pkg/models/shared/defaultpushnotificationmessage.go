@@ -1,5 +1,7 @@
 package shared
 
+// DefaultPushNotificationMessage
+// Specifies the default settings and content for a push notification that's sent directly to an endpoint.
 type DefaultPushNotificationMessage struct {
 	Action        *ActionEnum         `json:"Action,omitempty"`
 	Body          *string             `json:"Body,omitempty"`

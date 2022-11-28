@@ -1,11 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Usage } from "./usage";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Usage } from "./usage";
 import { DualRegional } from "./dualregional";
 import { MultiRegional } from "./multiregional";
-import { Usage } from "./usage";
-import { Usage } from "./usage";
 import { Regional } from "./regional";
+
 
 
 // CloudStorageWorkload
@@ -13,27 +11,27 @@ import { Regional } from "./regional";
  * Specifies usage of Cloud Storage resources.
 **/
 export class CloudStorageWorkload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataRetrieval" })
+  @SpeakeasyMetadata({ data: "json, name=dataRetrieval" })
   dataRetrieval?: Usage;
 
-  @Metadata({ data: "json, name=dataStored" })
+  @SpeakeasyMetadata({ data: "json, name=dataStored" })
   dataStored?: Usage;
 
-  @Metadata({ data: "json, name=dualRegion" })
+  @SpeakeasyMetadata({ data: "json, name=dualRegion" })
   dualRegion?: DualRegional;
 
-  @Metadata({ data: "json, name=multiRegion" })
+  @SpeakeasyMetadata({ data: "json, name=multiRegion" })
   multiRegion?: MultiRegional;
 
-  @Metadata({ data: "json, name=operationA" })
+  @SpeakeasyMetadata({ data: "json, name=operationA" })
   operationA?: Usage;
 
-  @Metadata({ data: "json, name=operationB" })
+  @SpeakeasyMetadata({ data: "json, name=operationB" })
   operationB?: Usage;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: Regional;
 
-  @Metadata({ data: "json, name=storageClass" })
+  @SpeakeasyMetadata({ data: "json, name=storageClass" })
   storageClass?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherInternalappsharingartifactsUploadapkPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class AndroidpublisherInternalappsharingartifactsUploadapkQueryParams:
 
 @dataclass
 class AndroidpublisherInternalappsharingartifactsUploadapkSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherInternalappsharingartifactsUploadapkRequest:
-    path_params: AndroidpublisherInternalappsharingartifactsUploadapkPathParams = field(default=None)
-    query_params: AndroidpublisherInternalappsharingartifactsUploadapkQueryParams = field(default=None)
-    security: AndroidpublisherInternalappsharingartifactsUploadapkSecurity = field(default=None)
+    path_params: AndroidpublisherInternalappsharingartifactsUploadapkPathParams = field()
+    query_params: AndroidpublisherInternalappsharingartifactsUploadapkQueryParams = field()
+    security: AndroidpublisherInternalappsharingartifactsUploadapkSecurity = field()
     
 
 @dataclass
 class AndroidpublisherInternalappsharingartifactsUploadapkResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_app_sharing_artifact: Optional[shared.InternalAppSharingArtifact] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -19,6 +19,8 @@ type GroupQueryWhere struct {
 	Value      *string `json:"value,omitempty"`
 }
 
+// GroupQuery
+// The criteria defining the group
 type GroupQuery struct {
 	Composition *GroupQueryCompositionEnum `json:"composition,omitempty"`
 	Select      *string                    `json:"select,omitempty"`

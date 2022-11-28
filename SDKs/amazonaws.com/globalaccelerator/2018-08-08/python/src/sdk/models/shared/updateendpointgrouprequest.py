@@ -1,21 +1,24 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import endpointconfiguration
-from . import healthcheckprotocol_enum
-from . import portoverride
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEndpointGroupRequest:
-    endpoint_configurations: Optional[List[endpointconfiguration.EndpointConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointConfigurations' }})
-    endpoint_group_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointGroupArn' }})
-    health_check_interval_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HealthCheckIntervalSeconds' }})
-    health_check_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HealthCheckPath' }})
-    health_check_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HealthCheckPort' }})
-    health_check_protocol: Optional[healthcheckprotocol_enum.HealthCheckProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HealthCheckProtocol' }})
-    port_overrides: Optional[List[portoverride.PortOverride]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PortOverrides' }})
-    threshold_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ThresholdCount' }})
-    traffic_dial_percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrafficDialPercentage' }})
+    endpoint_group_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointGroupArn') }})
+    endpoint_configurations: Optional[List[EndpointConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointConfigurations') }})
+    health_check_interval_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HealthCheckIntervalSeconds') }})
+    health_check_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HealthCheckPath') }})
+    health_check_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HealthCheckPort') }})
+    health_check_protocol: Optional[HealthCheckProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HealthCheckProtocol') }})
+    port_overrides: Optional[List[PortOverride]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PortOverrides') }})
+    threshold_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ThresholdCount') }})
+    traffic_dial_percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrafficDialPercentage') }})
     

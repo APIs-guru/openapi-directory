@@ -1,5 +1,7 @@
 package shared
 
+// Contact
+// A person or group that can be used as a creator or a contact.
 type Contact struct {
 	AcceptCommands  []Command `json:"acceptCommands,omitempty"`
 	AcceptTypes     []string  `json:"acceptTypes,omitempty"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3BucketCriteriaForJob } from "./s3bucketcriteriaforjob";
 import { S3BucketDefinitionForJob } from "./s3bucketdefinitionforjob";
 import { JobStatusEnum } from "./jobstatusenum";
@@ -8,35 +7,36 @@ import { LastRunErrorStatus } from "./lastrunerrorstatus";
 import { UserPausedDetails } from "./userpauseddetails";
 
 
+
 // JobSummary
 /** 
  * Provides information about a classification job, including the current status of the job.
 **/
 export class JobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=bucketCriteria" })
   bucketCriteria?: S3BucketCriteriaForJob;
 
-  @Metadata({ data: "json, name=bucketDefinitions", elemType: shared.S3BucketDefinitionForJob })
+  @SpeakeasyMetadata({ data: "json, name=bucketDefinitions", elemType: S3BucketDefinitionForJob })
   bucketDefinitions?: S3BucketDefinitionForJob[];
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=jobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=jobStatus" })
   jobStatus?: JobStatusEnum;
 
-  @Metadata({ data: "json, name=jobType" })
+  @SpeakeasyMetadata({ data: "json, name=jobType" })
   jobType?: JobTypeEnum;
 
-  @Metadata({ data: "json, name=lastRunErrorStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lastRunErrorStatus" })
   lastRunErrorStatus?: LastRunErrorStatus;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=userPausedDetails" })
+  @SpeakeasyMetadata({ data: "json, name=userPausedDetails" })
   userPausedDetails?: UserPausedDetails;
 }

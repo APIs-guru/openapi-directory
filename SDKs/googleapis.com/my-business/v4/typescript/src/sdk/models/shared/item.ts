@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
 import { Money } from "./money";
+
 
 
 // Item
@@ -9,12 +9,12 @@ import { Money } from "./money";
  * A single list item. Each variation of an item in the price list should have its own Item with its own price data.
 **/
 export class Item extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.Label })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: Label })
   labels?: Label[];
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Money;
 }

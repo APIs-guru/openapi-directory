@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetNamesChangesOutputFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Kml = "kml"
-,    Csv = "csv"
+    Json = "json",
+    Xml = "xml",
+    Kml = "kml",
+    Csv = "csv"
 }
 
 export enum GetNamesChangesOutputStyleEnum {
-    Summary = "summary"
-,    Detail = "detail"
+    Summary = "summary",
+    Detail = "detail"
 }
 
 export enum GetNamesChangesSortByEnum {
-    Name = "name"
-,    FeatureType = "featureType"
-,    DecisionDate = "decisionDate"
+    Name = "name",
+    FeatureType = "featureType",
+    DecisionDate = "decisionDate"
 }
 
 
 export class GetNamesChangesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=embed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" })
   embed?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featureCategory" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureCategory" })
   featureCategory?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featureClass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureClass" })
   featureClass?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featureType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featureType" })
   featureType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromDate" })
   fromDate: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputFormat" })
   outputFormat: GetNamesChangesOutputFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
   outputSrs?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputStyle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputStyle" })
   outputStyle?: GetNamesChangesOutputStyleEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: GetNamesChangesSortByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toDate" })
   toDate: number;
 }
 
 
 export class GetNamesChangesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNamesChangesQueryParams;
 }
 
 
 export class GetNamesChangesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

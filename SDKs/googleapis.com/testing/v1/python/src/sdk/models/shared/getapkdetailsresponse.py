@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import apkdetail
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetApkDetailsResponse:
-    apk_detail: Optional[apkdetail.ApkDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apkDetail' }})
+    r"""GetApkDetailsResponse
+    Response containing the details of the specified Android application APK.
+    """
+    
+    apk_detail: Optional[ApkDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apkDetail') }})
     

@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import podcastminimum
+from sdk import utils
+from . import *
 
 class SubmitPodcastResponseStatusEnum(str, Enum):
     FOUND = "found"
@@ -11,6 +12,6 @@ class SubmitPodcastResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SubmitPodcastResponse:
-    podcast: podcastminimum.PodcastMinimum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'podcast' }})
-    status: SubmitPodcastResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    podcast: PodcastMinimum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('podcast') }})
+    status: SubmitPodcastResponseStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

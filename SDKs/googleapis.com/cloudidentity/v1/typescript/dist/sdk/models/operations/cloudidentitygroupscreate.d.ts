@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CloudidentityGroupsCreateInitialGroupConfigEnum {
     InitialGroupConfigUnspecified = "INITIAL_GROUP_CONFIG_UNSPECIFIED",
@@ -33,7 +33,7 @@ export declare class CloudidentityGroupsCreateSecurity extends SpeakeasyBase {
 }
 export declare class CloudidentityGroupsCreateRequest extends SpeakeasyBase {
     queryParams: CloudidentityGroupsCreateQueryParams;
-    request?: shared.Group;
+    request?: shared.GroupInput;
     security: CloudidentityGroupsCreateSecurity;
 }
 export declare class CloudidentityGroupsCreateResponse extends SpeakeasyBase {

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserPoolDescriptionType
+// A user pool description.
 type UserPoolDescriptionType struct {
 	CreationDate     *time.Time        `json:"CreationDate,omitempty"`
 	ID               *string           `json:"Id,omitempty"`

@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectTypeEnumEnum } from "./objecttypeenumenum";
-import { ObjectTypeEnumEnum } from "./objecttypeenumenum";
-import { ObjectTypeEnumEnum } from "./objecttypeenumenum";
+
 
 
 // ObjectTypes
@@ -9,12 +8,12 @@ import { ObjectTypeEnumEnum } from "./objecttypeenumenum";
  * Information about the type of an object in a merge operation.
 **/
 export class ObjectTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=base" })
+  @SpeakeasyMetadata({ data: "json, name=base" })
   base?: ObjectTypeEnumEnum;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: ObjectTypeEnumEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: ObjectTypeEnumEnum;
 }

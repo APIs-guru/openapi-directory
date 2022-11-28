@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeCommitCodeDestination } from "./codecommitcodedestination";
 import { GitHubCodeDestination } from "./githubcodedestination";
 // CodeDestination
@@ -35,11 +35,11 @@ var CodeDestination = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=codeCommit" }),
+        SpeakeasyMetadata({ data: "json, name=codeCommit" }),
         __metadata("design:type", CodeCommitCodeDestination)
     ], CodeDestination.prototype, "codeCommit", void 0);
     __decorate([
-        Metadata({ data: "json, name=gitHub" }),
+        SpeakeasyMetadata({ data: "json, name=gitHub" }),
         __metadata("design:type", GitHubCodeDestination)
     ], CodeDestination.prototype, "gitHub", void 0);
     return CodeDestination;

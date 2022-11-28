@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CombineOrganizationNetworksPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class CombineOrganizationNetworksRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enrollmentString" })
+  @SpeakeasyMetadata({ data: "json, name=enrollmentString" })
   enrollmentString?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=networkIds" })
+  @SpeakeasyMetadata({ data: "json, name=networkIds" })
   networkIds: string[];
 }
 
 
 export class CombineOrganizationNetworksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CombineOrganizationNetworksPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CombineOrganizationNetworksRequestBody;
 }
 
 
 export class CombineOrganizationNetworksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   combineOrganizationNetworks200ApplicationJsonObject?: Map<string, any>;
 }

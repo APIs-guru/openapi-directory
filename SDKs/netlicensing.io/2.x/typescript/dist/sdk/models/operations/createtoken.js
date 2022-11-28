@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var CreateTokenRequestBodyActionEnum;
 (function (CreateTokenRequestBodyActionEnum) {
@@ -52,55 +52,55 @@ var CreateTokenRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=action;" }),
+        SpeakeasyMetadata({ data: "form, name=action;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "form, name=apiKeyRole;" }),
+        SpeakeasyMetadata({ data: "form, name=apiKeyRole;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "apiKeyRole", void 0);
     __decorate([
-        Metadata({ data: "form, name=cancelURL;" }),
+        SpeakeasyMetadata({ data: "form, name=cancelURL;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "cancelUrl", void 0);
     __decorate([
-        Metadata({ data: "form, name=cancelURLTitle;" }),
+        SpeakeasyMetadata({ data: "form, name=cancelURLTitle;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "cancelUrlTitle", void 0);
     __decorate([
-        Metadata({ data: "form, name=licenseTemplateNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=licenseTemplateNumber;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "licenseTemplateNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=licenseeNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=licenseeNumber;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "licenseeNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=predefinedShoppingItem;" }),
+        SpeakeasyMetadata({ data: "form, name=predefinedShoppingItem;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "predefinedShoppingItem", void 0);
     __decorate([
-        Metadata({ data: "form, name=privateKey;" }),
+        SpeakeasyMetadata({ data: "form, name=privateKey;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "privateKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=productNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=productNumber;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "productNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=successURL;" }),
+        SpeakeasyMetadata({ data: "form, name=successURL;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "successUrl", void 0);
     __decorate([
-        Metadata({ data: "form, name=successURLTitle;" }),
+        SpeakeasyMetadata({ data: "form, name=successURLTitle;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "successUrlTitle", void 0);
     __decorate([
-        Metadata({ data: "form, name=tokenType;" }),
+        SpeakeasyMetadata({ data: "form, name=tokenType;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "tokenType", void 0);
     __decorate([
-        Metadata({ data: "form, name=type;" }),
+        SpeakeasyMetadata({ data: "form, name=type;" }),
         __metadata("design:type", String)
     ], CreateTokenRequestBody.prototype, "type", void 0);
     return CreateTokenRequestBody;
@@ -112,7 +112,7 @@ var CreateTokenSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], CreateTokenSecurity.prototype, "basicAuth", void 0);
     return CreateTokenSecurity;
@@ -124,11 +124,11 @@ var CreateTokenRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CreateTokenRequestBody)
     ], CreateTokenRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateTokenSecurity)
     ], CreateTokenRequest.prototype, "security", void 0);
     return CreateTokenRequest;
@@ -140,19 +140,19 @@ var CreateTokenResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], CreateTokenResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateTokenResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateTokenResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateTokenResponse.prototype, "netlicensing", void 0);
     return CreateTokenResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RetrieveApiSecretPathParams = /** @class */ (function (_super) {
     __extends(RetrieveApiSecretPathParams, _super);
@@ -30,11 +30,11 @@ var RetrieveApiSecretPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" }),
         __metadata("design:type", String)
     ], RetrieveApiSecretPathParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=secret_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=secret_id" }),
         __metadata("design:type", String)
     ], RetrieveApiSecretPathParams.prototype, "secretId", void 0);
     return RetrieveApiSecretPathParams;
@@ -46,7 +46,7 @@ var RetrieveApiSecretSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], RetrieveApiSecretSecurity.prototype, "basicAuth", void 0);
     return RetrieveApiSecretSecurity;
@@ -58,11 +58,11 @@ var RetrieveApiSecretRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RetrieveApiSecretPathParams)
     ], RetrieveApiSecretRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RetrieveApiSecretSecurity)
     ], RetrieveApiSecretRequest.prototype, "security", void 0);
     return RetrieveApiSecretRequest;
@@ -74,23 +74,23 @@ var RetrieveApiSecretResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RetrieveApiSecretResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RetrieveApiSecretResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RetrieveApiSecretResponse.prototype, "retrieveApiSecret401ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RetrieveApiSecretResponse.prototype, "retrieveApiSecret404ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SecretInfo)
     ], RetrieveApiSecretResponse.prototype, "secretInfo", void 0);
     return RetrieveApiSecretResponse;

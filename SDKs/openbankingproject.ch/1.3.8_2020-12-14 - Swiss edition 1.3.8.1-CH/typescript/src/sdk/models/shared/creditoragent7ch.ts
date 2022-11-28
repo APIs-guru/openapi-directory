@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalAddress6Ch } from "./postaladdress6ch";
 import { InstitutionalIdentification2 } from "./institutionalidentification2";
+
 
 
 // CreditorAgent7Ch
@@ -14,15 +15,15 @@ import { InstitutionalIdentification2 } from "./institutionalidentification2";
  * 
 **/
 export class CreditorAgent7Ch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PostalAddress6Ch;
 
-  @Metadata({ data: "json, name=bic" })
+  @SpeakeasyMetadata({ data: "json, name=bic" })
   bic?: string;
 
-  @Metadata({ data: "json, name=iid" })
+  @SpeakeasyMetadata({ data: "json, name=iid" })
   iid?: InstitutionalIdentification2;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

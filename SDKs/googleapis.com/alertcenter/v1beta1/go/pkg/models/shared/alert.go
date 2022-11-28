@@ -1,5 +1,7 @@
 package shared
 
+// Alert
+// An alert affecting a customer.
 type Alert struct {
 	AlertID                       *string                `json:"alertId,omitempty"`
 	CreateTime                    *string                `json:"createTime,omitempty"`

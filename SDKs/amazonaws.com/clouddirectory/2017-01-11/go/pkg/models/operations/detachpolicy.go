@@ -11,10 +11,14 @@ type DetachPolicyHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// DetachPolicyRequestBodyObjectReference
+// The reference that identifies an object.
 type DetachPolicyRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// DetachPolicyRequestBodyPolicyReference
+// The reference that identifies an object.
 type DetachPolicyRequestBodyPolicyReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateRelationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 }
 
 
 export class CreateRelationsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contracttest" })
+  @SpeakeasyMetadata({ data: "json, name=contracttest" })
   contracttest?: string[];
 
-  @Metadata({ data: "json, name=documentation" })
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
   documentation?: string[];
 
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: string[];
 
-  @Metadata({ data: "json, name=testsuite" })
+  @SpeakeasyMetadata({ data: "json, name=testsuite" })
+  testsuite?: string[];
+}
+
+
+export class CreateRelations200ApplicationJson extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contracttest" })
+  contracttest?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
+  documentation?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=testsuite" })
   testsuite?: string[];
 }
 
 
 export class CreateRelationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateRelationsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: CreateRelationsRequestBody;
 }
 
 
-export class CreateRelations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contracttest" })
-  contracttest?: string[];
-
-  @Metadata({ data: "json, name=documentation" })
-  documentation?: string[];
-
-  @Metadata({ data: "json, name=testsuite" })
-  testsuite?: string[];
-}
-
-
 export class CreateRelationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createRelations200ApplicationJsonObject?: CreateRelations200ApplicationJson;
 }

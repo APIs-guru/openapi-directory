@@ -1,5 +1,7 @@
 package shared
 
+// DescribeTableStatisticsMessage
+// <p/>
 type DescribeTableStatisticsMessage struct {
 	Filters            []Filter `json:"Filters,omitempty"`
 	Marker             *string  `json:"Marker,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalTime } from "./localtime";
+
 
 
 // StartDates
@@ -7,24 +8,24 @@ import { LocalTime } from "./localtime";
  * Event's Start Dates
 **/
 export class StartDates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dateTBA" })
+  @SpeakeasyMetadata({ data: "json, name=dateTBA" })
   dateTba?: boolean;
 
-  @Metadata({ data: "json, name=dateTBD" })
+  @SpeakeasyMetadata({ data: "json, name=dateTBD" })
   dateTbd?: boolean;
 
-  @Metadata({ data: "json, name=dateTime" })
+  @SpeakeasyMetadata({ data: "json, name=dateTime" })
   dateTime?: Date;
 
-  @Metadata({ data: "json, name=localDate" })
+  @SpeakeasyMetadata({ data: "json, name=localDate" })
   localDate?: Date;
 
-  @Metadata({ data: "json, name=localTime" })
+  @SpeakeasyMetadata({ data: "json, name=localTime" })
   localTime?: LocalTime;
 
-  @Metadata({ data: "json, name=noSpecificTime" })
+  @SpeakeasyMetadata({ data: "json, name=noSpecificTime" })
   noSpecificTime?: boolean;
 
-  @Metadata({ data: "json, name=timeTBA" })
+  @SpeakeasyMetadata({ data: "json, name=timeTBA" })
   timeTba?: boolean;
 }

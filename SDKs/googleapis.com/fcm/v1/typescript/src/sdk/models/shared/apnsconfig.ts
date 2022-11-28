@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApnsFcmOptions } from "./apnsfcmoptions";
+
 
 
 // ApnsConfig
@@ -7,12 +8,12 @@ import { ApnsFcmOptions } from "./apnsfcmoptions";
  * [Apple Push Notification Service](https://goo.gl/MXRTPa) specific options.
 **/
 export class ApnsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fcmOptions" })
+  @SpeakeasyMetadata({ data: "json, name=fcmOptions" })
   fcmOptions?: ApnsFcmOptions;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: Map<string, string>;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Map<string, any>;
 }

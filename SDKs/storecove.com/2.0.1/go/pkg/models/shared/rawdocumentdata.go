@@ -8,6 +8,8 @@ const (
 	RawDocumentDataParseStrategyEnumIdoc RawDocumentDataParseStrategyEnum = "idoc"
 )
 
+// RawDocumentData
+// A document to send, in base64 encoded format.
 type RawDocumentData struct {
 	Document       string                            `json:"document"`
 	DocumentTypeID *string                           `json:"documentTypeId,omitempty"`

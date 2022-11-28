@@ -6,15 +6,21 @@ const (
 	GetModifyNetworkInterfaceAttributeActionEnumModifyNetworkInterfaceAttribute GetModifyNetworkInterfaceAttributeActionEnum = "ModifyNetworkInterfaceAttribute"
 )
 
+// GetModifyNetworkInterfaceAttributeAttachment
+// Describes an attachment change.
 type GetModifyNetworkInterfaceAttributeAttachment struct {
 	AttachmentID        *string `queryParam:"name=AttachmentId"`
 	DeleteOnTermination *bool   `queryParam:"name=DeleteOnTermination"`
 }
 
+// GetModifyNetworkInterfaceAttributeDescription
+// Describes a value for a resource attribute that is a String.
 type GetModifyNetworkInterfaceAttributeDescription struct {
 	Value *string `queryParam:"name=Value"`
 }
 
+// GetModifyNetworkInterfaceAttributeSourceDestCheck
+// Describes a value for a resource attribute that is a Boolean value.
 type GetModifyNetworkInterfaceAttributeSourceDestCheck struct {
 	Value *bool `queryParam:"name=Value"`
 }

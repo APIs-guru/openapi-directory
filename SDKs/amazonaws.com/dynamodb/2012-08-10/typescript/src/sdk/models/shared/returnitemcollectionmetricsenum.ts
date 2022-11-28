@@ -1,6 +1,7 @@
 
 
+
 export enum ReturnItemCollectionMetricsEnum {
-    Size = "SIZE"
-,    None = "NONE"
+    Size = "SIZE",
+    None = "NONE"
 }

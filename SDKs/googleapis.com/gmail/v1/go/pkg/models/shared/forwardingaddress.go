@@ -8,6 +8,8 @@ const (
 	ForwardingAddressVerificationStatusEnumPending                       ForwardingAddressVerificationStatusEnum = "pending"
 )
 
+// ForwardingAddress
+// Settings for a forwarding address.
 type ForwardingAddress struct {
 	ForwardingEmail    *string                                  `json:"forwardingEmail,omitempty"`
 	VerificationStatus *ForwardingAddressVerificationStatusEnum `json:"verificationStatus,omitempty"`

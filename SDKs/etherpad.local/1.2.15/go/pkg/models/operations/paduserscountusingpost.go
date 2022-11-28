@@ -4,10 +4,6 @@ type PadUsersCountUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type PadUsersCountUsingPostRequest struct {
-	QueryParams PadUsersCountUsingPostQueryParams
-}
-
 type PadUsersCountUsingPost200ApplicationJSONData struct {
 	PadUsersCount *int64 `json:"padUsersCount,omitempty"`
 }
@@ -34,6 +30,10 @@ type PadUsersCountUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type PadUsersCountUsingPostRequest struct {
+	QueryParams PadUsersCountUsingPostQueryParams
 }
 
 type PadUsersCountUsingPostResponse struct {

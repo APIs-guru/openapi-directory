@@ -1,37 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LeavePeriod } from "./leaveperiod";
 import { ValidationError } from "./validationerror";
 
 
+
 export class LeaveApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EmployeeID" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
   employeeId?: string;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=LeaveApplicationID" })
+  @SpeakeasyMetadata({ data: "json, name=LeaveApplicationID" })
   leaveApplicationId?: string;
 
-  @Metadata({ data: "json, name=LeavePeriods", elemType: shared.LeavePeriod })
+  @SpeakeasyMetadata({ data: "json, name=LeavePeriods", elemType: LeavePeriod })
   leavePeriods?: LeavePeriod[];
 
-  @Metadata({ data: "json, name=LeaveTypeID" })
+  @SpeakeasyMetadata({ data: "json, name=LeaveTypeID" })
   leaveTypeId?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 
-  @Metadata({ data: "json, name=ValidationErrors", elemType: shared.ValidationError })
+  @SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationError })
+  validationErrors?: ValidationError[];
+}
+
+
+export class LeaveApplicationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=Description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
+  employeeId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
+  endDate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=LeaveApplicationID" })
+  leaveApplicationId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=LeavePeriods", elemType: LeavePeriod })
+  leavePeriods?: LeavePeriod[];
+
+  @SpeakeasyMetadata({ data: "json, name=LeaveTypeID" })
+  leaveTypeId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
+  startDate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Title" })
+  title?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationError })
   validationErrors?: ValidationError[];
 }

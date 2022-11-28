@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AssociateDeviceWithPlacementPathParams = /** @class */ (function (_super) {
     __extends(AssociateDeviceWithPlacementPathParams, _super);
     function AssociateDeviceWithPlacementPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=deviceTemplateName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceTemplateName" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementPathParams.prototype, "deviceTemplateName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=placementName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=placementName" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementPathParams.prototype, "placementName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=projectName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectName" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementPathParams.prototype, "projectName", void 0);
     return AssociateDeviceWithPlacementPathParams;
@@ -49,31 +49,31 @@ var AssociateDeviceWithPlacementHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementHeaders.prototype, "xAmzSignedHeaders", void 0);
     return AssociateDeviceWithPlacementHeaders;
@@ -85,7 +85,7 @@ var AssociateDeviceWithPlacementRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceId" }),
+        SpeakeasyMetadata({ data: "json, name=deviceId" }),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementRequestBody.prototype, "deviceId", void 0);
     return AssociateDeviceWithPlacementRequestBody;
@@ -97,15 +97,15 @@ var AssociateDeviceWithPlacementRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AssociateDeviceWithPlacementPathParams)
     ], AssociateDeviceWithPlacementRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AssociateDeviceWithPlacementHeaders)
     ], AssociateDeviceWithPlacementRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", AssociateDeviceWithPlacementRequestBody)
     ], AssociateDeviceWithPlacementRequest.prototype, "request", void 0);
     return AssociateDeviceWithPlacementRequest;
@@ -117,31 +117,31 @@ var AssociateDeviceWithPlacementResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], AssociateDeviceWithPlacementResponse.prototype, "associateDeviceWithPlacementResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AssociateDeviceWithPlacementResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateDeviceWithPlacementResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateDeviceWithPlacementResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateDeviceWithPlacementResponse.prototype, "resourceConflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateDeviceWithPlacementResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AssociateDeviceWithPlacementResponse.prototype, "statusCode", void 0);
     return AssociateDeviceWithPlacementResponse;

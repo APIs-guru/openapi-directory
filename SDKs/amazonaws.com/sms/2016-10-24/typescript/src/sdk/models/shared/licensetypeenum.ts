@@ -1,6 +1,7 @@
 
 
+
 export enum LicenseTypeEnum {
-    Aws = "AWS"
-,    Byol = "BYOL"
+    Aws = "AWS",
+    Byol = "BYOL"
 }

@@ -17,6 +17,8 @@ const (
 	DNSKeySpecKeyTypeEnumZoneSigning DNSKeySpecKeyTypeEnum = "ZONE_SIGNING"
 )
 
+// DNSKeySpec
+// Parameters for DnsKey key generation. Used for generating initial keys for a new ManagedZone and as default when adding a new DnsKey.
 type DNSKeySpec struct {
 	Algorithm *DNSKeySpecAlgorithmEnum `json:"algorithm,omitempty"`
 	KeyLength *int64                   `json:"keyLength,omitempty"`

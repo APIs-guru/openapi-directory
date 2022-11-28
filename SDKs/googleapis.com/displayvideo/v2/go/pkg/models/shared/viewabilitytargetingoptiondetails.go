@@ -15,6 +15,8 @@ const (
 	ViewabilityTargetingOptionDetailsViewabilityEnumViewability90PercentOrMore ViewabilityTargetingOptionDetailsViewabilityEnum = "VIEWABILITY_90_PERCENT_OR_MORE"
 )
 
+// ViewabilityTargetingOptionDetails
+// Represents a targetable viewability. This will be populated in the viewability_details field of a TargetingOption when targeting_type is `TARGETING_TYPE_VIEWABILITY`.
 type ViewabilityTargetingOptionDetails struct {
 	Viewability *ViewabilityTargetingOptionDetailsViewabilityEnum `json:"viewability,omitempty"`
 }

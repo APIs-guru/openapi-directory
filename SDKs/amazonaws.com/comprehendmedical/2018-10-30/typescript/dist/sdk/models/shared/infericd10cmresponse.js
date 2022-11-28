@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Icd10CmEntity } from "./icd10cmentity";
 var InferIcd10CmResponse = /** @class */ (function (_super) {
     __extends(InferIcd10CmResponse, _super);
     function InferIcd10CmResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Entities", elemType: shared.Icd10CmEntity }),
+        SpeakeasyMetadata({ data: "json, name=Entities", elemType: Icd10CmEntity }),
         __metadata("design:type", Array)
     ], InferIcd10CmResponse.prototype, "entities", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ModelVersion" }),
         __metadata("design:type", String)
     ], InferIcd10CmResponse.prototype, "modelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaginationToken" }),
+        SpeakeasyMetadata({ data: "json, name=PaginationToken" }),
         __metadata("design:type", String)
     ], InferIcd10CmResponse.prototype, "paginationToken", void 0);
     return InferIcd10CmResponse;

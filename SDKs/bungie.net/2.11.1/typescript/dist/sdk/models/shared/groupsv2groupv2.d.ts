@@ -1,0 +1,33 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { GroupsV2GroupV2ClanInfoAndInvestment } from "./groupsv2groupv2claninfoandinvestment";
+import { GroupsV2GroupFeatures } from "./groupsv2groupfeatures";
+export declare class GroupsV2GroupV2 extends SpeakeasyBase {
+    about?: string;
+    allowChat?: boolean;
+    avatarImageIndex?: number;
+    avatarPath?: string;
+    banExpireDate?: Date;
+    bannerPath?: string;
+    chatSecurity?: number;
+    clanInfo?: GroupsV2GroupV2ClanInfoAndInvestment;
+    conversationId?: number;
+    creationDate?: Date;
+    defaultPublicity?: number;
+    enableInvitationMessagingForAdmins?: boolean;
+    features?: GroupsV2GroupFeatures;
+    groupId?: number;
+    groupType?: number;
+    homepage?: number;
+    isDefaultPostPublic?: boolean;
+    isPublic?: boolean;
+    isPublicTopicAdminOnly?: boolean;
+    locale?: string;
+    memberCount?: number;
+    membershipIdCreated?: number;
+    membershipOption?: number;
+    modificationDate?: Date;
+    motto?: string;
+    name?: string;
+    tags?: string[];
+    theme?: string;
+}

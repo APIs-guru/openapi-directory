@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CommitTransactionRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the details of the transaction to commit.
 **/
 export class CommitTransactionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CommitDigest" })
+  @SpeakeasyMetadata({ data: "json, name=CommitDigest" })
   commitDigest: string;
 
-  @Metadata({ data: "json, name=TransactionId" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionId" })
   transactionId: string;
 }

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLeaveApplicationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=LeaveApplicationID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LeaveApplicationID" })
   leaveApplicationId: string;
 }
 
 
 export class GetLeaveApplicationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class GetLeaveApplicationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetLeaveApplicationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetLeaveApplicationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetLeaveApplicationHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLeaveApplicationSecurity;
 }
 
 
 export class GetLeaveApplicationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   leaveApplications?: shared.LeaveApplications;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

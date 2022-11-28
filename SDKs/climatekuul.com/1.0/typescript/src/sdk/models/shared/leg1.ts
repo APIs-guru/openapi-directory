@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Leg1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination_airport_code" })
+  @SpeakeasyMetadata({ data: "json, name=destination_airport_code" })
   destinationAirportCode: string;
 
-  @Metadata({ data: "json, name=origin_airport_code" })
+  @SpeakeasyMetadata({ data: "json, name=origin_airport_code" })
   originAirportCode: string;
 
-  @Metadata({ data: "json, name=travel_class" })
+  @SpeakeasyMetadata({ data: "json, name=travel_class" })
   travelClass: string;
 }

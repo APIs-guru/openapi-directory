@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   refreshProfileTelemetryPropertiesRequest?: shared.RefreshProfileTelemetryPropertiesRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   refreshProfileTelemetryPropertiesRequest1?: shared.RefreshProfileTelemetryPropertiesRequest;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   refreshProfileTelemetryPropertiesRequest2?: shared.RefreshProfileTelemetryPropertiesRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   refreshProfileTelemetryPropertiesRequest3?: shared.RefreshProfileTelemetryPropertiesRequest;
 }
 
 
 export class PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequests;
 }
 
 
 export class PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   refreshProfileTelemetryPropertiesResponse?: shared.RefreshProfileTelemetryPropertiesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

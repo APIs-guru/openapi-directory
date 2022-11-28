@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamedRange } from "./namedrange";
+
 
 
 // AddNamedRangeRequest
@@ -7,6 +8,6 @@ import { NamedRange } from "./namedrange";
  * Adds a named range to the spreadsheet.
 **/
 export class AddNamedRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namedRange" })
+  @SpeakeasyMetadata({ data: "json, name=namedRange" })
   namedRange?: NamedRange;
 }

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetChargeStationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetChargeStationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_evses" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_evses" })
   includeEvses?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_location" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_location" })
   includeLocation?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
   includeOrganization?: boolean;
 }
 
 
 export class GetChargeStationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetChargeStationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetChargeStationQueryParams;
 }
 
 
 export class GetChargeStationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

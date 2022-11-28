@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSetupV1ResourcesTimezonesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     system_timezone_view_model: Optional[shared.SystemTimezoneViewModel] = field(default=None)
     

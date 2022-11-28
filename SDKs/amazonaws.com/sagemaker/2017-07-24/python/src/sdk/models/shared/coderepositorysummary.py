@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import gitconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CodeRepositorySummary:
-    code_repository_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeRepositoryArn' }})
-    code_repository_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeRepositoryName' }})
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    git_config: Optional[gitconfig.GitConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GitConfig' }})
-    last_modified_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastModifiedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""CodeRepositorySummary
+    Specifies summary information about a Git repository.
+    """
+    
+    code_repository_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeRepositoryArn') }})
+    code_repository_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeRepositoryName') }})
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    last_modified_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastModifiedTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    git_config: Optional[GitConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GitConfig') }})
     

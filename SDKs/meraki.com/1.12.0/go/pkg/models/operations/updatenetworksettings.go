@@ -4,6 +4,8 @@ type UpdateNetworkSettingsPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkSettingsRequestBodySecureConnect
+// A hash of SecureConnect options applied to the Network.
 type UpdateNetworkSettingsRequestBodySecureConnect struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }

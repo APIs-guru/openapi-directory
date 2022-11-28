@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Destiny2GetHistoricalStatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" })
   characterId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
   destinyMembershipId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class Destiny2GetHistoricalStatsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dayend" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dayend" })
   dayend?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=daystart" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=daystart" })
   daystart?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=groups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=groups" })
   groups?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=modes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=modes" })
   modes?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=periodType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=periodType" })
   periodType?: number;
 }
 
 
 export class Destiny2GetHistoricalStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: Destiny2GetHistoricalStatsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: Destiny2GetHistoricalStatsQueryParams;
 }
 
 
 export class Destiny2GetHistoricalStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

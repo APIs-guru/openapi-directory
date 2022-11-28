@@ -8,6 +8,8 @@ const (
 	MetricAggregationEnumSum                    MetricAggregationEnum = "SUM"
 )
 
+// Metric
+// A message representing the actual monitoring data, values for each key bucket over time, of a metric.
 type Metric struct {
 	Aggregation          *MetricAggregationEnum          `json:"aggregation,omitempty"`
 	Category             *LocalizedString                `json:"category,omitempty"`

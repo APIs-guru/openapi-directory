@@ -1,5 +1,7 @@
 package shared
 
+// APIKeyOut
+// The API Key.
 type APIKeyOut struct {
 	Admin      *bool   `json:"admin,omitempty"`
 	Anonymized *bool   `json:"anonymized,omitempty"`

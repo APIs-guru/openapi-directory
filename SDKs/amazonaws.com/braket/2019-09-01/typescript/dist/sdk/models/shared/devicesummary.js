@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceStatusEnum } from "./devicestatusenum";
 import { DeviceTypeEnum } from "./devicetypeenum";
 // DeviceSummary
@@ -35,23 +35,23 @@ var DeviceSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceArn" }),
+        SpeakeasyMetadata({ data: "json, name=deviceArn" }),
         __metadata("design:type", String)
     ], DeviceSummary.prototype, "deviceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceName" }),
+        SpeakeasyMetadata({ data: "json, name=deviceName" }),
         __metadata("design:type", String)
     ], DeviceSummary.prototype, "deviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceStatus" }),
+        SpeakeasyMetadata({ data: "json, name=deviceStatus" }),
         __metadata("design:type", String)
     ], DeviceSummary.prototype, "deviceStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceType" }),
+        SpeakeasyMetadata({ data: "json, name=deviceType" }),
         __metadata("design:type", String)
     ], DeviceSummary.prototype, "deviceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=providerName" }),
+        SpeakeasyMetadata({ data: "json, name=providerName" }),
         __metadata("design:type", String)
     ], DeviceSummary.prototype, "providerName", void 0);
     return DeviceSummary;

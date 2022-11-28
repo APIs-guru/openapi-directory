@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateTagPathParams:
-    tag_id: int = field(default=None, metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
+    tag_id: int = field(metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +20,14 @@ class UpdateTagRequests:
 
 @dataclass
 class UpdateTagRequest:
-    path_params: UpdateTagPathParams = field(default=None)
-    request: UpdateTagRequests = field(default=None)
+    path_params: UpdateTagPathParams = field()
+    request: UpdateTagRequests = field()
     
 
 @dataclass
 class UpdateTagResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tag_model: Optional[shared.TagModel] = field(default=None)
     tag_model_haljson: Optional[shared.TagModelHaljson] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetIosReopenAttributionRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for iSDK to get reopen attribution for app universal link open deeplinking. This endpoint is meant for only iOS requests.
 **/
 export class GetIosReopenAttributionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=requestedLink" })
+  @SpeakeasyMetadata({ data: "json, name=requestedLink" })
   requestedLink?: string;
 
-  @Metadata({ data: "json, name=sdkVersion" })
+  @SpeakeasyMetadata({ data: "json, name=sdkVersion" })
   sdkVersion?: string;
 }

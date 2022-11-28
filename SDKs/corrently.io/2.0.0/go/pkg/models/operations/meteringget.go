@@ -4,10 +4,6 @@ type MeteringGetQueryParams struct {
 	Account *string `queryParam:"style=form,explode=true,name=account"`
 }
 
-type MeteringGetRequest struct {
-	QueryParams MeteringGetQueryParams
-}
-
 type MeteringGet200ApplicationJSON struct {
 	One80          *int64       `json:"1.8.0,omitempty"`
 	One81          *int64       `json:"1.8.1,omitempty"`
@@ -19,6 +15,10 @@ type MeteringGet200ApplicationJSON struct {
 	Credits        *interface{} `json:"credits,omitempty"`
 	TimeStamp      *int64       `json:"timeStamp,omitempty"`
 	TTL            *int64       `json:"ttl,omitempty"`
+}
+
+type MeteringGetRequest struct {
+	QueryParams MeteringGetQueryParams
 }
 
 type MeteringGetResponse struct {

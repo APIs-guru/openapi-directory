@@ -1,5 +1,7 @@
 package shared
 
+// PollingLocation
+// A location where a voter can vote. This may be an early vote site, an election day voting location, or a drop off location for a completed ballot.
 type PollingLocation struct {
 	Address       *SimpleAddressType `json:"address,omitempty"`
 	EndDate       *string            `json:"endDate,omitempty"`

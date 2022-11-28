@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Earning
@@ -6,69 +7,69 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The employee earning model
 **/
 export class Earning extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agency" })
+  @SpeakeasyMetadata({ data: "json, name=agency" })
   agency?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=annualMaximum" })
+  @SpeakeasyMetadata({ data: "json, name=annualMaximum" })
   annualMaximum?: number;
 
-  @Metadata({ data: "json, name=calculationCode" })
+  @SpeakeasyMetadata({ data: "json, name=calculationCode" })
   calculationCode?: string;
 
-  @Metadata({ data: "json, name=costCenter1" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter1" })
   costCenter1?: string;
 
-  @Metadata({ data: "json, name=costCenter2" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter2" })
   costCenter2?: string;
 
-  @Metadata({ data: "json, name=costCenter3" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter3" })
   costCenter3?: string;
 
-  @Metadata({ data: "json, name=earningCode" })
+  @SpeakeasyMetadata({ data: "json, name=earningCode" })
   earningCode: string;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: string;
 
-  @Metadata({ data: "json, name=goal" })
+  @SpeakeasyMetadata({ data: "json, name=goal" })
   goal?: number;
 
-  @Metadata({ data: "json, name=hoursOrUnits" })
+  @SpeakeasyMetadata({ data: "json, name=hoursOrUnits" })
   hoursOrUnits?: number;
 
-  @Metadata({ data: "json, name=isSelfInsured" })
+  @SpeakeasyMetadata({ data: "json, name=isSelfInsured" })
   isSelfInsured?: boolean;
 
-  @Metadata({ data: "json, name=jobCode" })
+  @SpeakeasyMetadata({ data: "json, name=jobCode" })
   jobCode?: string;
 
-  @Metadata({ data: "json, name=miscellaneousInfo" })
+  @SpeakeasyMetadata({ data: "json, name=miscellaneousInfo" })
   miscellaneousInfo?: string;
 
-  @Metadata({ data: "json, name=paidTowardsGoal" })
+  @SpeakeasyMetadata({ data: "json, name=paidTowardsGoal" })
   paidTowardsGoal?: number;
 
-  @Metadata({ data: "json, name=payPeriodMaximum" })
+  @SpeakeasyMetadata({ data: "json, name=payPeriodMaximum" })
   payPeriodMaximum?: number;
 
-  @Metadata({ data: "json, name=payPeriodMinimum" })
+  @SpeakeasyMetadata({ data: "json, name=payPeriodMinimum" })
   payPeriodMinimum?: number;
 
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate?: number;
 
-  @Metadata({ data: "json, name=rateCode" })
+  @SpeakeasyMetadata({ data: "json, name=rateCode" })
   rateCode?: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFilesystemPermissionEnum } from "./lambdafilesystempermissionenum";
 /**
  * Contains information about a device that Linux processes in a container can access.

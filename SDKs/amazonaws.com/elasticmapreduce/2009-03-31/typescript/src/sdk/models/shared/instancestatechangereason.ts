@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceStateChangeReasonCodeEnum } from "./instancestatechangereasoncodeenum";
+
 
 
 // InstanceStateChangeReason
@@ -7,9 +8,9 @@ import { InstanceStateChangeReasonCodeEnum } from "./instancestatechangereasonco
  * The details of the status change reason for the instance.
 **/
 export class InstanceStateChangeReason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: InstanceStateChangeReasonCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

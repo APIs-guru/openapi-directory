@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemUpdateInfo } from "./systemupdateinfo";
+
 
 
 // SoftwareInfo
@@ -7,36 +8,36 @@ import { SystemUpdateInfo } from "./systemupdateinfo";
  * Information about device software.
 **/
 export class SoftwareInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidBuildNumber" })
+  @SpeakeasyMetadata({ data: "json, name=androidBuildNumber" })
   androidBuildNumber?: string;
 
-  @Metadata({ data: "json, name=androidBuildTime" })
+  @SpeakeasyMetadata({ data: "json, name=androidBuildTime" })
   androidBuildTime?: string;
 
-  @Metadata({ data: "json, name=androidDevicePolicyVersionCode" })
+  @SpeakeasyMetadata({ data: "json, name=androidDevicePolicyVersionCode" })
   androidDevicePolicyVersionCode?: number;
 
-  @Metadata({ data: "json, name=androidDevicePolicyVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=androidDevicePolicyVersionName" })
   androidDevicePolicyVersionName?: string;
 
-  @Metadata({ data: "json, name=androidVersion" })
+  @SpeakeasyMetadata({ data: "json, name=androidVersion" })
   androidVersion?: string;
 
-  @Metadata({ data: "json, name=bootloaderVersion" })
+  @SpeakeasyMetadata({ data: "json, name=bootloaderVersion" })
   bootloaderVersion?: string;
 
-  @Metadata({ data: "json, name=deviceBuildSignature" })
+  @SpeakeasyMetadata({ data: "json, name=deviceBuildSignature" })
   deviceBuildSignature?: string;
 
-  @Metadata({ data: "json, name=deviceKernelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=deviceKernelVersion" })
   deviceKernelVersion?: string;
 
-  @Metadata({ data: "json, name=primaryLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=primaryLanguageCode" })
   primaryLanguageCode?: string;
 
-  @Metadata({ data: "json, name=securityPatchLevel" })
+  @SpeakeasyMetadata({ data: "json, name=securityPatchLevel" })
   securityPatchLevel?: string;
 
-  @Metadata({ data: "json, name=systemUpdateInfo" })
+  @SpeakeasyMetadata({ data: "json, name=systemUpdateInfo" })
   systemUpdateInfo?: SystemUpdateInfo;
 }

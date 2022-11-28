@@ -4,10 +4,6 @@ type SingleEnvironmentPathParams struct {
 	EnvironmentUID string `pathParam:"style=simple,explode=false,name=environment_uid"`
 }
 
-type SingleEnvironmentRequest struct {
-	PathParams SingleEnvironmentPathParams
-}
-
 type SingleEnvironment200ApplicationJSONEnvironmentValues struct {
 	Enabled *bool   `json:"enabled,omitempty"`
 	Hovered *bool   `json:"hovered,omitempty"`
@@ -24,6 +20,10 @@ type SingleEnvironment200ApplicationJSONEnvironment struct {
 
 type SingleEnvironment200ApplicationJSON struct {
 	Environment *SingleEnvironment200ApplicationJSONEnvironment `json:"environment,omitempty"`
+}
+
+type SingleEnvironmentRequest struct {
+	PathParams SingleEnvironmentPathParams
 }
 
 type SingleEnvironmentResponse struct {

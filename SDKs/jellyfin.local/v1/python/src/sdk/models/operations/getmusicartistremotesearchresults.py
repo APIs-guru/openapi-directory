@@ -12,18 +12,18 @@ class GetMusicArtistRemoteSearchResultsRequests:
 
 @dataclass
 class GetMusicArtistRemoteSearchResultsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetMusicArtistRemoteSearchResultsRequest:
-    request: GetMusicArtistRemoteSearchResultsRequests = field(default=None)
-    security: GetMusicArtistRemoteSearchResultsSecurity = field(default=None)
+    request: GetMusicArtistRemoteSearchResultsRequests = field()
+    security: GetMusicArtistRemoteSearchResultsSecurity = field()
     
 
 @dataclass
 class GetMusicArtistRemoteSearchResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remote_search_results: Optional[List[shared.RemoteSearchResult]] = field(default=None)
-    status_code: int = field(default=None)
     

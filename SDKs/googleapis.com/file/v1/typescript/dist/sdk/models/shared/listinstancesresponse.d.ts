@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Instance } from "./instance";
 /**
  * ListInstancesResponse is the result of ListInstancesRequest.

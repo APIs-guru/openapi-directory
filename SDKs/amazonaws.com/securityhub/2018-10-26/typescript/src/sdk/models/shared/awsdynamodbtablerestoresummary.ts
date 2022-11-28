@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsDynamoDbTableRestoreSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the restore for the table.
 **/
 export class AwsDynamoDbTableRestoreSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RestoreDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RestoreDateTime" })
   restoreDateTime?: string;
 
-  @Metadata({ data: "json, name=RestoreInProgress" })
+  @SpeakeasyMetadata({ data: "json, name=RestoreInProgress" })
   restoreInProgress?: boolean;
 
-  @Metadata({ data: "json, name=SourceBackupArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceBackupArn" })
   sourceBackupArn?: string;
 
-  @Metadata({ data: "json, name=SourceTableArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceTableArn" })
   sourceTableArn?: string;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import listnotificationrulesfiltername_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListNotificationRulesFilter:
-    name: listnotificationrulesfiltername_enum.ListNotificationRulesFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""ListNotificationRulesFilter
+    Information about a filter to apply to the list of returned notification rules. You can filter by event type, owner, resource, or target.
+    """
+    
+    name: ListNotificationRulesFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

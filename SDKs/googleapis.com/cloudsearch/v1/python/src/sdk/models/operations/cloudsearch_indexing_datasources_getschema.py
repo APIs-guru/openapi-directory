@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsearchIndexingDatasourcesGetSchemaPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class CloudsearchIndexingDatasourcesGetSchemaQueryParams:
 
 @dataclass
 class CloudsearchIndexingDatasourcesGetSchemaSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesGetSchemaSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesGetSchemaSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class CloudsearchIndexingDatasourcesGetSchemaSecurity:
 
 @dataclass
 class CloudsearchIndexingDatasourcesGetSchemaRequest:
-    path_params: CloudsearchIndexingDatasourcesGetSchemaPathParams = field(default=None)
-    query_params: CloudsearchIndexingDatasourcesGetSchemaQueryParams = field(default=None)
-    security: CloudsearchIndexingDatasourcesGetSchemaSecurity = field(default=None)
+    path_params: CloudsearchIndexingDatasourcesGetSchemaPathParams = field()
+    query_params: CloudsearchIndexingDatasourcesGetSchemaQueryParams = field()
+    security: CloudsearchIndexingDatasourcesGetSchemaSecurity = field()
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesGetSchemaResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schema: Optional[shared.Schema] = field(default=None)
-    status_code: int = field(default=None)
     

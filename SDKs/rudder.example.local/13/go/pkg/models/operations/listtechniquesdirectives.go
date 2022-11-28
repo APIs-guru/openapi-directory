@@ -8,10 +8,6 @@ type ListTechniquesDirectivesPathParams struct {
 	TechniqueName string `pathParam:"style=simple,explode=false,name=techniqueName"`
 }
 
-type ListTechniquesDirectivesRequest struct {
-	PathParams ListTechniquesDirectivesPathParams
-}
-
 type ListTechniquesDirectives200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type ListTechniquesDirectives200ApplicationJSON struct {
 	Action ListTechniquesDirectives200ApplicationJSONActionEnum `json:"action"`
 	Data   ListTechniquesDirectives200ApplicationJSONData       `json:"data"`
 	Result ListTechniquesDirectives200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ListTechniquesDirectivesRequest struct {
+	PathParams ListTechniquesDirectivesPathParams
 }
 
 type ListTechniquesDirectivesResponse struct {

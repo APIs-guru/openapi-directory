@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -26,25 +31,25 @@ class UpdateNotificationRuleRequestBodyStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateNotificationRuleRequestBody:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Arn' }})
-    detail_type: Optional[UpdateNotificationRuleRequestBodyDetailTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DetailType' }})
-    event_type_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventTypeIds' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    status: Optional[UpdateNotificationRuleRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    targets: Optional[List[shared.Target]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Targets' }})
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Arn') }})
+    detail_type: Optional[UpdateNotificationRuleRequestBodyDetailTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DetailType') }})
+    event_type_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventTypeIds') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    status: Optional[UpdateNotificationRuleRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    targets: Optional[List[shared.Target]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Targets') }})
     
 
 @dataclass
 class UpdateNotificationRuleRequest:
-    headers: UpdateNotificationRuleHeaders = field(default=None)
-    request: UpdateNotificationRuleRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateNotificationRuleHeaders = field()
+    request: UpdateNotificationRuleRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateNotificationRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_notification_rule_result: Optional[dict[str, Any]] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

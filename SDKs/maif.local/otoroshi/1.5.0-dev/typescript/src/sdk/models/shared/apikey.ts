@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiKey
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An Otoroshi Api Key. An Api Key is defined for a group of services to allow usage of the same Api Key for multiple services.
 **/
 export class ApiKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizedEntities" })
+  @SpeakeasyMetadata({ data: "json, name=authorizedEntities" })
   authorizedEntities: string[];
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=clientName" })
+  @SpeakeasyMetadata({ data: "json, name=clientName" })
   clientName: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret: string;
 
-  @Metadata({ data: "json, name=dailyQuota" })
+  @SpeakeasyMetadata({ data: "json, name=dailyQuota" })
   dailyQuota?: number;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=monthlyQuota" })
+  @SpeakeasyMetadata({ data: "json, name=monthlyQuota" })
   monthlyQuota?: number;
 
-  @Metadata({ data: "json, name=throttlingQuota" })
+  @SpeakeasyMetadata({ data: "json, name=throttlingQuota" })
   throttlingQuota?: number;
 }

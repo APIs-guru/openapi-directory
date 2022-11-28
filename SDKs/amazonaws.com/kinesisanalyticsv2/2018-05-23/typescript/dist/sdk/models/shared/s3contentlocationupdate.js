@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3ContentLocationUpdate
 /**
  * Describes an update for the Amazon S3 code content location for an application.
@@ -33,15 +33,15 @@ var S3ContentLocationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=BucketARNUpdate" }),
         __metadata("design:type", String)
     ], S3ContentLocationUpdate.prototype, "bucketArnUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileKeyUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=FileKeyUpdate" }),
         __metadata("design:type", String)
     ], S3ContentLocationUpdate.prototype, "fileKeyUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ObjectVersionUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ObjectVersionUpdate" }),
         __metadata("design:type", String)
     ], S3ContentLocationUpdate.prototype, "objectVersionUpdate", void 0);
     return S3ContentLocationUpdate;

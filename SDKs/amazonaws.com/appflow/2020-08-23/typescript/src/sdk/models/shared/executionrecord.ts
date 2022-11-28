@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionResult } from "./executionresult";
 import { ExecutionStatusEnum } from "./executionstatusenum";
+
 
 
 // ExecutionRecord
@@ -8,24 +9,24 @@ import { ExecutionStatusEnum } from "./executionstatusenum";
  *  Specifies information about the past flow run instances for a given flow. 
 **/
 export class ExecutionRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataPullEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=dataPullEndTime" })
   dataPullEndTime?: Date;
 
-  @Metadata({ data: "json, name=dataPullStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=dataPullStartTime" })
   dataPullStartTime?: Date;
 
-  @Metadata({ data: "json, name=executionId" })
+  @SpeakeasyMetadata({ data: "json, name=executionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=executionResult" })
+  @SpeakeasyMetadata({ data: "json, name=executionResult" })
   executionResult?: ExecutionResult;
 
-  @Metadata({ data: "json, name=executionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=executionStatus" })
   executionStatus?: ExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=startedAt" })
+  @SpeakeasyMetadata({ data: "json, name=startedAt" })
   startedAt?: Date;
 }

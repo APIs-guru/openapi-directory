@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://data.iotevents.{region}.amazonaws.com",
 	"https://data.iotevents.{region}.amazonaws.com",
 	"http://data.iotevents.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/iotevents/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BatchAcknowledgeAlarm - Acknowledges one or more alarms. The alarms change to the <code>ACKNOWLEDGED</code> state after you acknowledge them.
 func (s *SDK) BatchAcknowledgeAlarm(ctx context.Context, request operations.BatchAcknowledgeAlarmRequest) (*operations.BatchAcknowledgeAlarmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alarms/acknowledge"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) BatchAcknowledgeAlarm(ctx context.Context, request operations.Batc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) BatchAcknowledgeAlarm(ctx context.Context, request operations.Batc
 	return res, nil
 }
 
+// BatchDisableAlarm - Disables one or more alarms. The alarms change to the <code>DISABLED</code> state after you disable them.
 func (s *SDK) BatchDisableAlarm(ctx context.Context, request operations.BatchDisableAlarmRequest) (*operations.BatchDisableAlarmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alarms/disable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) BatchDisableAlarm(ctx context.Context, request operations.BatchDis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +270,9 @@ func (s *SDK) BatchDisableAlarm(ctx context.Context, request operations.BatchDis
 	return res, nil
 }
 
+// BatchEnableAlarm - Enables one or more alarms. The alarms change to the <code>NORMAL</code> state after you enable them.
 func (s *SDK) BatchEnableAlarm(ctx context.Context, request operations.BatchEnableAlarmRequest) (*operations.BatchEnableAlarmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alarms/enable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -263,7 +292,7 @@ func (s *SDK) BatchEnableAlarm(ctx context.Context, request operations.BatchEnab
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -333,8 +362,9 @@ func (s *SDK) BatchEnableAlarm(ctx context.Context, request operations.BatchEnab
 	return res, nil
 }
 
+// BatchPutMessage - Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify (<code>"inputName"</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
 func (s *SDK) BatchPutMessage(ctx context.Context, request operations.BatchPutMessageRequest) (*operations.BatchPutMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/inputs/messages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -354,7 +384,7 @@ func (s *SDK) BatchPutMessage(ctx context.Context, request operations.BatchPutMe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +454,9 @@ func (s *SDK) BatchPutMessage(ctx context.Context, request operations.BatchPutMe
 	return res, nil
 }
 
+// BatchResetAlarm - Resets one or more alarms. The alarms return to the <code>NORMAL</code> state after you reset them.
 func (s *SDK) BatchResetAlarm(ctx context.Context, request operations.BatchResetAlarmRequest) (*operations.BatchResetAlarmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alarms/reset"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -445,7 +476,7 @@ func (s *SDK) BatchResetAlarm(ctx context.Context, request operations.BatchReset
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -515,8 +546,9 @@ func (s *SDK) BatchResetAlarm(ctx context.Context, request operations.BatchReset
 	return res, nil
 }
 
+// BatchSnoozeAlarm - Changes one or more alarms to the snooze mode. The alarms change to the <code>SNOOZE_DISABLED</code> state after you set them to the snooze mode.
 func (s *SDK) BatchSnoozeAlarm(ctx context.Context, request operations.BatchSnoozeAlarmRequest) (*operations.BatchSnoozeAlarmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alarms/snooze"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -536,7 +568,7 @@ func (s *SDK) BatchSnoozeAlarm(ctx context.Context, request operations.BatchSnoo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -606,8 +638,9 @@ func (s *SDK) BatchSnoozeAlarm(ctx context.Context, request operations.BatchSnoo
 	return res, nil
 }
 
+// BatchUpdateDetector - Updates the state, variable values, and timer settings of one or more detectors (instances) of a specified detector model.
 func (s *SDK) BatchUpdateDetector(ctx context.Context, request operations.BatchUpdateDetectorRequest) (*operations.BatchUpdateDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/detectors"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -627,7 +660,7 @@ func (s *SDK) BatchUpdateDetector(ctx context.Context, request operations.BatchU
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -697,8 +730,9 @@ func (s *SDK) BatchUpdateDetector(ctx context.Context, request operations.BatchU
 	return res, nil
 }
 
+// DescribeAlarm - Retrieves information about an alarm.
 func (s *SDK) DescribeAlarm(ctx context.Context, request operations.DescribeAlarmRequest) (*operations.DescribeAlarmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alarms/{alarmModelName}/keyValues/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -710,7 +744,7 @@ func (s *SDK) DescribeAlarm(ctx context.Context, request operations.DescribeAlar
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -790,8 +824,9 @@ func (s *SDK) DescribeAlarm(ctx context.Context, request operations.DescribeAlar
 	return res, nil
 }
 
+// DescribeDetector - Returns information about the specified detector (instance).
 func (s *SDK) DescribeDetector(ctx context.Context, request operations.DescribeDetectorRequest) (*operations.DescribeDetectorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/detectors/{detectorModelName}/keyValues/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -803,7 +838,7 @@ func (s *SDK) DescribeDetector(ctx context.Context, request operations.DescribeD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -883,8 +918,9 @@ func (s *SDK) DescribeDetector(ctx context.Context, request operations.DescribeD
 	return res, nil
 }
 
+// ListAlarms - Lists one or more alarms. The operation returns only the metadata associated with each alarm.
 func (s *SDK) ListAlarms(ctx context.Context, request operations.ListAlarmsRequest) (*operations.ListAlarmsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alarms/{alarmModelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -896,7 +932,7 @@ func (s *SDK) ListAlarms(ctx context.Context, request operations.ListAlarmsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -976,8 +1012,9 @@ func (s *SDK) ListAlarms(ctx context.Context, request operations.ListAlarmsReque
 	return res, nil
 }
 
+// ListDetectors - Lists detectors (the instances of a detector model).
 func (s *SDK) ListDetectors(ctx context.Context, request operations.ListDetectorsRequest) (*operations.ListDetectorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/detectors/{detectorModelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -989,7 +1026,7 @@ func (s *SDK) ListDetectors(ctx context.Context, request operations.ListDetector
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

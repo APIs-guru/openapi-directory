@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class GetAPIPhoneValidateQueryParams:
+    telephone: str = field(metadata={'query_param': { 'field_name': 'telephone', 'style': 'form', 'explode': True }})
     country_code: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CountryCode', 'style': 'form', 'explode': True }})
-    telephone: str = field(default=None, metadata={'query_param': { 'field_name': 'telephone', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -15,12 +18,12 @@ class GetAPIPhoneValidateHeaders:
 
 @dataclass
 class GetAPIPhoneValidateRequest:
-    query_params: GetAPIPhoneValidateQueryParams = field(default=None)
-    headers: GetAPIPhoneValidateHeaders = field(default=None)
+    headers: GetAPIPhoneValidateHeaders = field()
+    query_params: GetAPIPhoneValidateQueryParams = field()
     
 
 @dataclass
 class GetAPIPhoneValidateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

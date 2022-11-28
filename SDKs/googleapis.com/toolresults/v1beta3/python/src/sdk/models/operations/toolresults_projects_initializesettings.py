@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsInitializeSettingsPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class ToolresultsProjectsInitializeSettingsQueryParams:
 
 @dataclass
 class ToolresultsProjectsInitializeSettingsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsInitializeSettingsRequest:
-    path_params: ToolresultsProjectsInitializeSettingsPathParams = field(default=None)
-    query_params: ToolresultsProjectsInitializeSettingsQueryParams = field(default=None)
-    security: ToolresultsProjectsInitializeSettingsSecurity = field(default=None)
+    path_params: ToolresultsProjectsInitializeSettingsPathParams = field()
+    query_params: ToolresultsProjectsInitializeSettingsQueryParams = field()
+    security: ToolresultsProjectsInitializeSettingsSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsInitializeSettingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     project_settings: Optional[shared.ProjectSettings] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeletePendingAggregationRequestRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RequesterAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=RequesterAccountId" })
   requesterAccountId: string;
 
-  @Metadata({ data: "json, name=RequesterAwsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=RequesterAwsRegion" })
   requesterAwsRegion: string;
 }

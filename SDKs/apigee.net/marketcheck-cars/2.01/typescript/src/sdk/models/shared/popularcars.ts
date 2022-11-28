@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasePopular } from "./basepopular";
-import { BasePopular } from "./basepopular";
+
 
 
 // PopularCars
@@ -9,9 +8,9 @@ import { BasePopular } from "./basepopular";
  * Top 50 popular cars
 **/
 export class PopularCars extends SpeakeasyBase {
-  @Metadata({ data: "json, name=new_top50", elemType: shared.BasePopular })
+  @SpeakeasyMetadata({ data: "json, name=new_top50", elemType: BasePopular })
   newTop50?: BasePopular[];
 
-  @Metadata({ data: "json, name=used_top50", elemType: shared.BasePopular })
+  @SpeakeasyMetadata({ data: "json, name=used_top50", elemType: BasePopular })
   usedTop50?: BasePopular[];
 }

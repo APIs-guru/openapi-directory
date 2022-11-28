@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=remaining_api_calls" })
+  @SpeakeasyMetadata({ data: "json, name=remaining_api_calls" })
   remainingApiCalls?: number;
 
-  @Metadata({ data: "json, name=remaining_concurrency" })
+  @SpeakeasyMetadata({ data: "json, name=remaining_concurrency" })
   remainingConcurrency?: number;
 
-  @Metadata({ data: "json, name=resets_at" })
+  @SpeakeasyMetadata({ data: "json, name=resets_at" })
   resetsAt?: number;
 }

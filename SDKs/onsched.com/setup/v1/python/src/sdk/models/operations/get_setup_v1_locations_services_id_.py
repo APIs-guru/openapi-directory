@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetSetupV1LocationsServicesIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSetupV1LocationsServicesIDRequest:
-    path_params: GetSetupV1LocationsServicesIDPathParams = field(default=None)
+    path_params: GetSetupV1LocationsServicesIDPathParams = field()
     
 
 @dataclass
 class GetSetupV1LocationsServicesIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     business_service_view_model: Optional[shared.BusinessServiceViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

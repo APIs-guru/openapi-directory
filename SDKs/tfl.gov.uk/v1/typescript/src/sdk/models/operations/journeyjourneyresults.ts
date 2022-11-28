@@ -1,153 +1,154 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class JourneyJourneyResultsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=from" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=from" })
   from: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=to" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=to" })
   to: string;
 }
 
 export enum JourneyJourneyResultsAccessibilityPreferenceEnum {
-    NoRequirements = "NoRequirements"
-,    NoSolidStairs = "NoSolidStairs"
-,    NoEscalators = "NoEscalators"
-,    NoElevators = "NoElevators"
-,    StepFreeToVehicle = "StepFreeToVehicle"
-,    StepFreeToPlatform = "StepFreeToPlatform"
+    NoRequirements = "NoRequirements",
+    NoSolidStairs = "NoSolidStairs",
+    NoEscalators = "NoEscalators",
+    NoElevators = "NoElevators",
+    StepFreeToVehicle = "StepFreeToVehicle",
+    StepFreeToPlatform = "StepFreeToPlatform"
 }
 
 export enum JourneyJourneyResultsBikeProficiencyEnum {
-    Easy = "Easy"
-,    Moderate = "Moderate"
-,    Fast = "Fast"
+    Easy = "Easy",
+    Moderate = "Moderate",
+    Fast = "Fast"
 }
 
 export enum JourneyJourneyResultsCyclePreferenceEnum {
-    None = "None"
-,    LeaveAtStation = "LeaveAtStation"
-,    TakeOnTransport = "TakeOnTransport"
-,    AllTheWay = "AllTheWay"
-,    CycleHire = "CycleHire"
+    None = "None",
+    LeaveAtStation = "LeaveAtStation",
+    TakeOnTransport = "TakeOnTransport",
+    AllTheWay = "AllTheWay",
+    CycleHire = "CycleHire"
 }
 
 export enum JourneyJourneyResultsJourneyPreferenceEnum {
-    LeastInterchange = "LeastInterchange"
-,    LeastTime = "LeastTime"
-,    LeastWalking = "LeastWalking"
+    LeastInterchange = "LeastInterchange",
+    LeastTime = "LeastTime",
+    LeastWalking = "LeastWalking"
 }
 
 export enum JourneyJourneyResultsTimeIsEnum {
-    Arriving = "Arriving"
-,    Departing = "Departing"
+    Arriving = "Arriving",
+    Departing = "Departing"
 }
 
 export enum JourneyJourneyResultsWalkingSpeedEnum {
-    Slow = "Slow"
-,    Average = "Average"
-,    Fast = "Fast"
+    Slow = "Slow",
+    Average = "Average",
+    Fast = "Fast"
 }
 
 
 export class JourneyJourneyResultsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=accessibilityPreference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accessibilityPreference" })
   accessibilityPreference?: JourneyJourneyResultsAccessibilityPreferenceEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=adjustment" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=adjustment" })
   adjustment?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alternativeCycle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alternativeCycle" })
   alternativeCycle?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alternativeWalking" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alternativeWalking" })
   alternativeWalking?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=applyHtmlMarkup" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=applyHtmlMarkup" })
   applyHtmlMarkup?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=bikeProficiency" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bikeProficiency" })
   bikeProficiency?: JourneyJourneyResultsBikeProficiencyEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cyclePreference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cyclePreference" })
   cyclePreference?: JourneyJourneyResultsCyclePreferenceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromName" })
   fromName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=journeyPreference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=journeyPreference" })
   journeyPreference?: JourneyJourneyResultsJourneyPreferenceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxTransferMinutes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxTransferMinutes" })
   maxTransferMinutes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxWalkingMinutes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxWalkingMinutes" })
   maxWalkingMinutes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mode" })
   mode?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nationalSearch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nationalSearch" })
   nationalSearch?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=routeBetweenEntrances" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routeBetweenEntrances" })
   routeBetweenEntrances?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=taxiOnlyTrip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=taxiOnlyTrip" })
   taxiOnlyTrip?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time" })
   time?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeIs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeIs" })
   timeIs?: JourneyJourneyResultsTimeIsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toName" })
   toName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useMultiModalCall" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useMultiModalCall" })
   useMultiModalCall?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useRealTimeLiveArrivals" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useRealTimeLiveArrivals" })
   useRealTimeLiveArrivals?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=via" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=via" })
   via?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=viaName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=viaName" })
   viaName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=walkingOptimization" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=walkingOptimization" })
   walkingOptimization?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=walkingSpeed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=walkingSpeed" })
   walkingSpeed?: JourneyJourneyResultsWalkingSpeedEnum;
 }
 
 
 export class JourneyJourneyResultsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: JourneyJourneyResultsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: JourneyJourneyResultsQueryParams;
 }
 
 
 export class JourneyJourneyResultsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tflApiPresentationEntitiesJourneyPlannerItineraryResult?: shared.TflApiPresentationEntitiesJourneyPlannerItineraryResult;
 }

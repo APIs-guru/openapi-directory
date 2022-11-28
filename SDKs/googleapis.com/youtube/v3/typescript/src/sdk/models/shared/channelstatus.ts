@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChannelStatusLongUploadsStatusEnum {
-    LongUploadsUnspecified = "longUploadsUnspecified"
-,    Allowed = "allowed"
-,    Eligible = "eligible"
-,    Disallowed = "disallowed"
+    LongUploadsUnspecified = "longUploadsUnspecified",
+    Allowed = "allowed",
+    Eligible = "eligible",
+    Disallowed = "disallowed"
 }
 
 export enum ChannelStatusPrivacyStatusEnum {
-    Public = "public"
-,    Unlisted = "unlisted"
-,    Private = "private"
+    Public = "public",
+    Unlisted = "unlisted",
+    Private = "private"
 }
 
 
@@ -19,18 +20,18 @@ export enum ChannelStatusPrivacyStatusEnum {
  * JSON template for the status part of a channel.
 **/
 export class ChannelStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isLinked" })
+  @SpeakeasyMetadata({ data: "json, name=isLinked" })
   isLinked?: boolean;
 
-  @Metadata({ data: "json, name=longUploadsStatus" })
+  @SpeakeasyMetadata({ data: "json, name=longUploadsStatus" })
   longUploadsStatus?: ChannelStatusLongUploadsStatusEnum;
 
-  @Metadata({ data: "json, name=madeForKids" })
+  @SpeakeasyMetadata({ data: "json, name=madeForKids" })
   madeForKids?: boolean;
 
-  @Metadata({ data: "json, name=privacyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=privacyStatus" })
   privacyStatus?: ChannelStatusPrivacyStatusEnum;
 
-  @Metadata({ data: "json, name=selfDeclaredMadeForKids" })
+  @SpeakeasyMetadata({ data: "json, name=selfDeclaredMadeForKids" })
   selfDeclaredMadeForKids?: boolean;
 }

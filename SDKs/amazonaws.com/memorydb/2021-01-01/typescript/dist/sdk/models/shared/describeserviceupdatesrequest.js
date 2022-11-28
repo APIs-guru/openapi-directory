@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeServiceUpdatesRequest = /** @class */ (function (_super) {
     __extends(DescribeServiceUpdatesRequest, _super);
     function DescribeServiceUpdatesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterNames" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterNames" }),
         __metadata("design:type", Array)
     ], DescribeServiceUpdatesRequest.prototype, "clusterNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], DescribeServiceUpdatesRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeServiceUpdatesRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceUpdateName" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceUpdateName" }),
         __metadata("design:type", String)
     ], DescribeServiceUpdatesRequest.prototype, "serviceUpdateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", Array)
     ], DescribeServiceUpdatesRequest.prototype, "status", void 0);
     return DescribeServiceUpdatesRequest;

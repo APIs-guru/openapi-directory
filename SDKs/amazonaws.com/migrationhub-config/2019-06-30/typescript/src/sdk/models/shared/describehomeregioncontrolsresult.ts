@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HomeRegionControl } from "./homeregioncontrol";
 
 
+
 export class DescribeHomeRegionControlsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HomeRegionControls", elemType: shared.HomeRegionControl })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegionControls", elemType: HomeRegionControl })
   homeRegionControls?: HomeRegionControl[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetOrganizationPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class GetOrganizationQueryParams:
 
 @dataclass
 class GetOrganizationRequest:
-    path_params: GetOrganizationPathParams = field(default=None)
-    query_params: GetOrganizationQueryParams = field(default=None)
+    path_params: GetOrganizationPathParams = field()
+    query_params: GetOrganizationQueryParams = field()
     
 
 @dataclass
 class GetOrganizationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

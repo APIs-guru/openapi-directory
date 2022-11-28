@@ -17,6 +17,8 @@ const (
 	AchievementDefinitionInitialStateEnumUnlocked                           AchievementDefinitionInitialStateEnum = "UNLOCKED"
 )
 
+// AchievementDefinition
+// An achievement definition object.
 type AchievementDefinition struct {
 	AchievementType          *AchievementDefinitionAchievementTypeEnum `json:"achievementType,omitempty"`
 	Description              *string                                   `json:"description,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NormalizedCoordinate } from "./normalizedcoordinate";
 export declare enum AnimationFadeFadeTypeEnum {
     FadeTypeUnspecified = "FADE_TYPE_UNSPECIFIED",

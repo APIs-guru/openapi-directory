@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSearchVersionNumberReverseGeocodeCrossStreetPositionExtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ext" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ext" })
   ext: shared.ExtEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=position" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=position" })
   position: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class GetSearchVersionNumberReverseGeocodeCrossStreetPositionExtQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=heading" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=heading" })
   heading?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=radius" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" })
   radius?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=spatialKeys" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=spatialKeys" })
   spatialKeys?: boolean;
 }
 
 
 export class GetSearchVersionNumberReverseGeocodeCrossStreetPositionExtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSearchVersionNumberReverseGeocodeCrossStreetPositionExtPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSearchVersionNumberReverseGeocodeCrossStreetPositionExtQueryParams;
 }
 
 
 export class GetSearchVersionNumberReverseGeocodeCrossStreetPositionExtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

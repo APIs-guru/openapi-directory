@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Blueprint } from "./blueprint";
 
 
+
 export class GetBlueprintResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Blueprint" })
+  @SpeakeasyMetadata({ data: "json, name=Blueprint" })
   blueprint?: Blueprint;
 }

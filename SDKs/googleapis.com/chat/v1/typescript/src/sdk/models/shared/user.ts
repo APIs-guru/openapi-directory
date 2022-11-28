@@ -1,9 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UserTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Human = "HUMAN"
-,    Bot = "BOT"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Human = "HUMAN",
+    Bot = "BOT"
+}
+
+
+// UserInput
+/** 
+ * A user in Google Chat.
+**/
+export class UserInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=domainId" })
+  domainId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: UserTypeEnum;
 }
 
 
@@ -12,18 +29,18 @@ export enum UserTypeEnum {
  * A user in Google Chat.
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=domainId" })
+  @SpeakeasyMetadata({ data: "json, name=domainId" })
   domainId?: string;
 
-  @Metadata({ data: "json, name=isAnonymous" })
+  @SpeakeasyMetadata({ data: "json, name=isAnonymous" })
   isAnonymous?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UserTypeEnum;
 }

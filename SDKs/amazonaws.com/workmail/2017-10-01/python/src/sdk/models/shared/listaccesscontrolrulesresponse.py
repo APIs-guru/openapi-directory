@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import accesscontrolrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAccessControlRulesResponse:
-    rules: Optional[List[accesscontrolrule.AccessControlRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Rules' }})
+    rules: Optional[List[AccessControlRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Rules') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Describes the status of a security group associated with the virtual private cloud (VPC) hosting your replication and DB instances.
 **/

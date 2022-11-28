@@ -7,6 +7,18 @@ const (
 	WorkflowStateEnumActive           WorkflowStateEnum = "ACTIVE"
 )
 
+// WorkflowInput
+// Workflow program to be executed by Workflows.
+type WorkflowInput struct {
+	Description    *string           `json:"description,omitempty"`
+	Labels         map[string]string `json:"labels,omitempty"`
+	Name           *string           `json:"name,omitempty"`
+	ServiceAccount *string           `json:"serviceAccount,omitempty"`
+	SourceContents *string           `json:"sourceContents,omitempty"`
+}
+
+// Workflow
+// Workflow program to be executed by Workflows.
 type Workflow struct {
 	CreateTime         *string            `json:"createTime,omitempty"`
 	Description        *string            `json:"description,omitempty"`

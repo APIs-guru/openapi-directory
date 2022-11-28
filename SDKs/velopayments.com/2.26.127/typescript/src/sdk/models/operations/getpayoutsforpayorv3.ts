@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetPayoutsForPayorV3StatusEnum {
-    Accepted = "ACCEPTED"
-,    Rejected = "REJECTED"
-,    Submitted = "SUBMITTED"
-,    Quoted = "QUOTED"
-,    Instructed = "INSTRUCTED"
-,    Completed = "COMPLETED"
-,    Incomplete = "INCOMPLETE"
-,    Confirmed = "CONFIRMED"
-,    Withdrawn = "WITHDRAWN"
+    Accepted = "ACCEPTED",
+    Rejected = "REJECTED",
+    Submitted = "SUBMITTED",
+    Quoted = "QUOTED",
+    Instructed = "INSTRUCTED",
+    Completed = "COMPLETED",
+    Incomplete = "INCOMPLETE",
+    Confirmed = "CONFIRMED",
+    Withdrawn = "WITHDRAWN"
 }
 
 
 export class GetPayoutsForPayorV3QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payorId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" })
   payorId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payoutMemo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payoutMemo" })
   payoutMemo?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: GetPayoutsForPayorV3StatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=submittedDateFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=submittedDateFrom" })
   submittedDateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=submittedDateTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=submittedDateTo" })
   submittedDateTo?: Date;
 }
 
 
 export class GetPayoutsForPayorV3Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPayoutsForPayorV3QueryParams;
 }
 
 
 export class GetPayoutsForPayorV3Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPayoutsResponseV3?: shared.GetPayoutsResponseV3;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

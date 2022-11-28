@@ -27,15 +27,15 @@ type IpamIPAddressesListQueryParams struct {
 	VrfID            *string  `queryParam:"style=form,explode=true,name=vrf_id"`
 }
 
-type IpamIPAddressesListRequest struct {
-	QueryParams IpamIPAddressesListQueryParams
-}
-
 type IpamIPAddressesList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.IPAddress `json:"results"`
+}
+
+type IpamIPAddressesListRequest struct {
+	QueryParams IpamIPAddressesListQueryParams
 }
 
 type IpamIPAddressesListResponse struct {

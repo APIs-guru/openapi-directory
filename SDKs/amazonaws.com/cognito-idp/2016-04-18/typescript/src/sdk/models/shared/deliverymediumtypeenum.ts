@@ -1,6 +1,7 @@
 
 
+
 export enum DeliveryMediumTypeEnum {
-    Sms = "SMS"
-,    Email = "EMAIL"
+    Sms = "SMS",
+    Email = "EMAIL"
 }

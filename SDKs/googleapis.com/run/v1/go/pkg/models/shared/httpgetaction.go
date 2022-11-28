@@ -1,5 +1,7 @@
 package shared
 
+// HTTPGetAction
+// HTTPGetAction describes an action based on HTTP Get requests.
 type HTTPGetAction struct {
 	Host        *string      `json:"host,omitempty"`
 	HTTPHeaders []HTTPHeader `json:"httpHeaders,omitempty"`

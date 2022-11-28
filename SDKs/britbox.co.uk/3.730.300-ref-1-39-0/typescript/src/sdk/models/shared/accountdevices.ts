@@ -1,20 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceRegistrationWindow } from "./deviceregistrationwindow";
 import { Device } from "./device";
-import { DeviceRegistrationWindow } from "./deviceregistrationwindow";
+
 
 
 export class AccountDevices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deregistrationWindow" })
+  @SpeakeasyMetadata({ data: "json, name=deregistrationWindow" })
   deregistrationWindow?: DeviceRegistrationWindow;
 
-  @Metadata({ data: "json, name=devices", elemType: shared.Device })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: Device })
   devices: Device[];
 
-  @Metadata({ data: "json, name=maxRegistered" })
+  @SpeakeasyMetadata({ data: "json, name=maxRegistered" })
   maxRegistered: number;
 
-  @Metadata({ data: "json, name=registrationWindow" })
+  @SpeakeasyMetadata({ data: "json, name=registrationWindow" })
   registrationWindow?: DeviceRegistrationWindow;
 }

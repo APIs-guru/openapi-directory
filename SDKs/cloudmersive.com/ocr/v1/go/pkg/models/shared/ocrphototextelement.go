@@ -1,5 +1,7 @@
 package shared
 
+// OcrPhotoTextElement
+// A single text in an OCR document
 type OcrPhotoTextElement struct {
 	BoundingPoints  []Point  `json:"BoundingPoints,omitempty"`
 	ConfidenceLevel *float64 `json:"ConfidenceLevel,omitempty"`

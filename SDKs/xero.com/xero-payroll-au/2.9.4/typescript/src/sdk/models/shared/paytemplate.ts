@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeductionLine } from "./deductionline";
 import { EarningsLine } from "./earningsline";
 import { LeaveLine } from "./leaveline";
@@ -7,19 +6,20 @@ import { ReimbursementLine } from "./reimbursementline";
 import { SuperLine } from "./superline";
 
 
+
 export class PayTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeductionLines", elemType: shared.DeductionLine })
+  @SpeakeasyMetadata({ data: "json, name=DeductionLines", elemType: DeductionLine })
   deductionLines?: DeductionLine[];
 
-  @Metadata({ data: "json, name=EarningsLines", elemType: shared.EarningsLine })
+  @SpeakeasyMetadata({ data: "json, name=EarningsLines", elemType: EarningsLine })
   earningsLines?: EarningsLine[];
 
-  @Metadata({ data: "json, name=LeaveLines", elemType: shared.LeaveLine })
+  @SpeakeasyMetadata({ data: "json, name=LeaveLines", elemType: LeaveLine })
   leaveLines?: LeaveLine[];
 
-  @Metadata({ data: "json, name=ReimbursementLines", elemType: shared.ReimbursementLine })
+  @SpeakeasyMetadata({ data: "json, name=ReimbursementLines", elemType: ReimbursementLine })
   reimbursementLines?: ReimbursementLine[];
 
-  @Metadata({ data: "json, name=SuperLines", elemType: shared.SuperLine })
+  @SpeakeasyMetadata({ data: "json, name=SuperLines", elemType: SuperLine })
   superLines?: SuperLine[];
 }

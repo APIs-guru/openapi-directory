@@ -12,11 +12,6 @@ type GetTemplateSchemaSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type GetTemplateSchemaRequest struct {
-	PathParams GetTemplateSchemaPathParams
-	Security   GetTemplateSchemaSecurity
-}
-
 type GetTemplateSchemaTemplateSchema struct {
 	DollarSchema         *string                `json:"$schema,omitempty"`
 	AdditionalProperties *bool                  `json:"additionalProperties,omitempty"`
@@ -27,6 +22,11 @@ type GetTemplateSchemaTemplateSchema struct {
 	Required             []interface{}          `json:"required,omitempty"`
 	Title                *string                `json:"title,omitempty"`
 	Type                 *string                `json:"type,omitempty"`
+}
+
+type GetTemplateSchemaRequest struct {
+	PathParams GetTemplateSchemaPathParams
+	Security   GetTemplateSchemaSecurity
 }
 
 type GetTemplateSchemaResponse struct {

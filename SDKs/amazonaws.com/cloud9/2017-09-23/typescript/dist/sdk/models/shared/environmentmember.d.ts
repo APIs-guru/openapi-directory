@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PermissionsEnum } from "./permissionsenum";
 /**
  * Information about an environment member for an Cloud9 development environment.

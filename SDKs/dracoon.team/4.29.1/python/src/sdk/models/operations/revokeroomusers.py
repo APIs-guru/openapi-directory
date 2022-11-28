@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RevokeRoomUsersPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RevokeRoomUsersHeaders:
 
 @dataclass
 class RevokeRoomUsersRequest:
-    path_params: RevokeRoomUsersPathParams = field(default=None)
-    headers: RevokeRoomUsersHeaders = field(default=None)
-    request: shared.RoomUsersDeleteBatchRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RevokeRoomUsersHeaders = field()
+    path_params: RevokeRoomUsersPathParams = field()
+    request: shared.RoomUsersDeleteBatchRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RevokeRoomUsersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

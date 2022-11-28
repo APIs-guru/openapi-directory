@@ -1,6 +1,7 @@
 
 
+
 export enum SortEnum {
-    Created = "created"
-,    Updated = "updated"
+    Created = "created",
+    Updated = "updated"
 }

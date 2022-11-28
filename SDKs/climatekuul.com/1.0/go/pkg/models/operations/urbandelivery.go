@@ -1,6 +1,6 @@
 package operations
 
-var UrbanDeliveryServers = []string{
+var UrbanDeliveryServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTeamMatchupQueryParams = /** @class */ (function (_super) {
     __extends(GetTeamMatchupQueryParams, _super);
@@ -30,19 +30,19 @@ var GetTeamMatchupQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxYear" }),
         __metadata("design:type", Number)
     ], GetTeamMatchupQueryParams.prototype, "maxYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minYear" }),
         __metadata("design:type", Number)
     ], GetTeamMatchupQueryParams.prototype, "minYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team1" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team1" }),
         __metadata("design:type", String)
     ], GetTeamMatchupQueryParams.prototype, "team1", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team2" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team2" }),
         __metadata("design:type", String)
     ], GetTeamMatchupQueryParams.prototype, "team2", void 0);
     return GetTeamMatchupQueryParams;
@@ -54,7 +54,7 @@ var GetTeamMatchupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeamMatchupQueryParams)
     ], GetTeamMatchupRequest.prototype, "queryParams", void 0);
     return GetTeamMatchupRequest;
@@ -66,15 +66,15 @@ var GetTeamMatchupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeamMatchupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeamMatchupResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TeamMatchup)
     ], GetTeamMatchupResponse.prototype, "teamMatchup", void 0);
     return GetTeamMatchupResponse;

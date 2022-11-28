@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTrafficMirrorFilterActionEnum(str, Enum):
     DELETE_TRAFFIC_MIRROR_FILTER = "DeleteTrafficMirrorFilter"
@@ -10,10 +14,10 @@ class GetDeleteTrafficMirrorFilterVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTrafficMirrorFilterQueryParams:
-    action: GetDeleteTrafficMirrorFilterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteTrafficMirrorFilterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    traffic_mirror_filter_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTrafficMirrorFilterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    traffic_mirror_filter_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTrafficMirrorFilterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteTrafficMirrorFilterHeaders:
 
 @dataclass
 class GetDeleteTrafficMirrorFilterRequest:
-    query_params: GetDeleteTrafficMirrorFilterQueryParams = field(default=None)
-    headers: GetDeleteTrafficMirrorFilterHeaders = field(default=None)
+    headers: GetDeleteTrafficMirrorFilterHeaders = field()
+    query_params: GetDeleteTrafficMirrorFilterQueryParams = field()
     
 
 @dataclass
 class GetDeleteTrafficMirrorFilterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

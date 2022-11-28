@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverDnssecValidationStatusEnum } from "./resolverdnssecvalidationstatusenum";
+
 
 
 // ResolverDnssecConfig
@@ -7,15 +8,15 @@ import { ResolverDnssecValidationStatusEnum } from "./resolverdnssecvalidationst
  * A complex type that contains information about a configuration for DNSSEC validation.
 **/
 export class ResolverDnssecConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=OwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=ValidationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationStatus" })
   validationStatus?: ResolverDnssecValidationStatusEnum;
 }

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CannedAclForObjectsValueEnum } from "./cannedaclforobjectsvalueenum";
 import { CompressionTypeValueEnum } from "./compressiontypevalueenum";
 import { DataFormatValueEnum } from "./dataformatvalueenum";
@@ -9,116 +9,117 @@ import { EncryptionModeValueEnum } from "./encryptionmodevalueenum";
 import { ParquetVersionValueEnum } from "./parquetversionvalueenum";
 
 
+
 // S3Settings
 /** 
  * Settings for exporting data to Amazon S3. 
 **/
 export class S3Settings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddColumnName" })
+  @SpeakeasyMetadata({ data: "json, name=AddColumnName" })
   addColumnName?: boolean;
 
-  @Metadata({ data: "json, name=BucketFolder" })
+  @SpeakeasyMetadata({ data: "json, name=BucketFolder" })
   bucketFolder?: string;
 
-  @Metadata({ data: "json, name=BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=BucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=CannedAclForObjects" })
+  @SpeakeasyMetadata({ data: "json, name=CannedAclForObjects" })
   cannedAclForObjects?: CannedAclForObjectsValueEnum;
 
-  @Metadata({ data: "json, name=CdcInsertsAndUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=CdcInsertsAndUpdates" })
   cdcInsertsAndUpdates?: boolean;
 
-  @Metadata({ data: "json, name=CdcInsertsOnly" })
+  @SpeakeasyMetadata({ data: "json, name=CdcInsertsOnly" })
   cdcInsertsOnly?: boolean;
 
-  @Metadata({ data: "json, name=CdcMaxBatchInterval" })
+  @SpeakeasyMetadata({ data: "json, name=CdcMaxBatchInterval" })
   cdcMaxBatchInterval?: number;
 
-  @Metadata({ data: "json, name=CdcMinFileSize" })
+  @SpeakeasyMetadata({ data: "json, name=CdcMinFileSize" })
   cdcMinFileSize?: number;
 
-  @Metadata({ data: "json, name=CdcPath" })
+  @SpeakeasyMetadata({ data: "json, name=CdcPath" })
   cdcPath?: string;
 
-  @Metadata({ data: "json, name=CompressionType" })
+  @SpeakeasyMetadata({ data: "json, name=CompressionType" })
   compressionType?: CompressionTypeValueEnum;
 
-  @Metadata({ data: "json, name=CsvDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=CsvDelimiter" })
   csvDelimiter?: string;
 
-  @Metadata({ data: "json, name=CsvNoSupValue" })
+  @SpeakeasyMetadata({ data: "json, name=CsvNoSupValue" })
   csvNoSupValue?: string;
 
-  @Metadata({ data: "json, name=CsvNullValue" })
+  @SpeakeasyMetadata({ data: "json, name=CsvNullValue" })
   csvNullValue?: string;
 
-  @Metadata({ data: "json, name=CsvRowDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=CsvRowDelimiter" })
   csvRowDelimiter?: string;
 
-  @Metadata({ data: "json, name=DataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DataFormat" })
   dataFormat?: DataFormatValueEnum;
 
-  @Metadata({ data: "json, name=DataPageSize" })
+  @SpeakeasyMetadata({ data: "json, name=DataPageSize" })
   dataPageSize?: number;
 
-  @Metadata({ data: "json, name=DatePartitionDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=DatePartitionDelimiter" })
   datePartitionDelimiter?: DatePartitionDelimiterValueEnum;
 
-  @Metadata({ data: "json, name=DatePartitionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DatePartitionEnabled" })
   datePartitionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=DatePartitionSequence" })
+  @SpeakeasyMetadata({ data: "json, name=DatePartitionSequence" })
   datePartitionSequence?: DatePartitionSequenceValueEnum;
 
-  @Metadata({ data: "json, name=DictPageSizeLimit" })
+  @SpeakeasyMetadata({ data: "json, name=DictPageSizeLimit" })
   dictPageSizeLimit?: number;
 
-  @Metadata({ data: "json, name=EnableStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=EnableStatistics" })
   enableStatistics?: boolean;
 
-  @Metadata({ data: "json, name=EncodingType" })
+  @SpeakeasyMetadata({ data: "json, name=EncodingType" })
   encodingType?: EncodingTypeValueEnum;
 
-  @Metadata({ data: "json, name=EncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionMode" })
   encryptionMode?: EncryptionModeValueEnum;
 
-  @Metadata({ data: "json, name=ExternalTableDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalTableDefinition" })
   externalTableDefinition?: string;
 
-  @Metadata({ data: "json, name=IgnoreHeaderRows" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreHeaderRows" })
   ignoreHeaderRows?: number;
 
-  @Metadata({ data: "json, name=IncludeOpForFullLoad" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeOpForFullLoad" })
   includeOpForFullLoad?: boolean;
 
-  @Metadata({ data: "json, name=MaxFileSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFileSize" })
   maxFileSize?: number;
 
-  @Metadata({ data: "json, name=ParquetTimestampInMillisecond" })
+  @SpeakeasyMetadata({ data: "json, name=ParquetTimestampInMillisecond" })
   parquetTimestampInMillisecond?: boolean;
 
-  @Metadata({ data: "json, name=ParquetVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ParquetVersion" })
   parquetVersion?: ParquetVersionValueEnum;
 
-  @Metadata({ data: "json, name=PreserveTransactions" })
+  @SpeakeasyMetadata({ data: "json, name=PreserveTransactions" })
   preserveTransactions?: boolean;
 
-  @Metadata({ data: "json, name=Rfc4180" })
+  @SpeakeasyMetadata({ data: "json, name=Rfc4180" })
   rfc4180?: boolean;
 
-  @Metadata({ data: "json, name=RowGroupLength" })
+  @SpeakeasyMetadata({ data: "json, name=RowGroupLength" })
   rowGroupLength?: number;
 
-  @Metadata({ data: "json, name=ServerSideEncryptionKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideEncryptionKmsKeyId" })
   serverSideEncryptionKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=TimestampColumnName" })
+  @SpeakeasyMetadata({ data: "json, name=TimestampColumnName" })
   timestampColumnName?: string;
 
-  @Metadata({ data: "json, name=UseCsvNoSupValue" })
+  @SpeakeasyMetadata({ data: "json, name=UseCsvNoSupValue" })
   useCsvNoSupValue?: boolean;
 }

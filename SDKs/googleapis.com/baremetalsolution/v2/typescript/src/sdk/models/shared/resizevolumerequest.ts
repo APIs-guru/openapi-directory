@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResizeVolumeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for emergency resize Volume.
 **/
 export class ResizeVolumeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sizeGib" })
+  @SpeakeasyMetadata({ data: "json, name=sizeGib" })
   sizeGib?: string;
 }

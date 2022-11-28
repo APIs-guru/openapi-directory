@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersIDTransactionAccountsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetUsersIDTransactionAccountsRequest:
-    path_params: GetUsersIDTransactionAccountsPathParams = field(default=None)
+    path_params: GetUsersIDTransactionAccountsPathParams = field()
     
 
 @dataclass
 class GetUsersIDTransactionAccountsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     transaction_accounts: Optional[List[shared.TransactionAccount]] = field(default=None)
     

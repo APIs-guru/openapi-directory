@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventData
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents all the details pertaining to an event.
 **/
 export class EventData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventAction" })
+  @SpeakeasyMetadata({ data: "json, name=eventAction" })
   eventAction?: string;
 
-  @Metadata({ data: "json, name=eventCategory" })
+  @SpeakeasyMetadata({ data: "json, name=eventCategory" })
   eventCategory?: string;
 
-  @Metadata({ data: "json, name=eventCount" })
+  @SpeakeasyMetadata({ data: "json, name=eventCount" })
   eventCount?: string;
 
-  @Metadata({ data: "json, name=eventLabel" })
+  @SpeakeasyMetadata({ data: "json, name=eventLabel" })
   eventLabel?: string;
 
-  @Metadata({ data: "json, name=eventValue" })
+  @SpeakeasyMetadata({ data: "json, name=eventValue" })
   eventValue?: string;
 }

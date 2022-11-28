@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApiDimensionFilterDimensionEnum {
-    Query = "QUERY"
-,    Page = "PAGE"
-,    Country = "COUNTRY"
-,    Device = "DEVICE"
-,    SearchAppearance = "SEARCH_APPEARANCE"
+    Query = "QUERY",
+    Page = "PAGE",
+    Country = "COUNTRY",
+    Device = "DEVICE",
+    SearchAppearance = "SEARCH_APPEARANCE"
 }
 
 export enum ApiDimensionFilterOperatorEnum {
-    Equals = "EQUALS"
-,    NotEquals = "NOT_EQUALS"
-,    Contains = "CONTAINS"
-,    NotContains = "NOT_CONTAINS"
-,    IncludingRegex = "INCLUDING_REGEX"
-,    ExcludingRegex = "EXCLUDING_REGEX"
+    Equals = "EQUALS",
+    NotEquals = "NOT_EQUALS",
+    Contains = "CONTAINS",
+    NotContains = "NOT_CONTAINS",
+    IncludingRegex = "INCLUDING_REGEX",
+    ExcludingRegex = "EXCLUDING_REGEX"
 }
 
 
@@ -23,12 +24,12 @@ export enum ApiDimensionFilterOperatorEnum {
  * A filter test to be applied to each row in the data set, where a match can return the row. Filters are string comparisons, and values and dimension names are not case-sensitive. Individual filters are either AND'ed or OR'ed within their parent filter group, according to the group's group type. You do not need to group by a specified dimension to filter against it.
 **/
 export class ApiDimensionFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimension" })
+  @SpeakeasyMetadata({ data: "json, name=dimension" })
   dimension?: ApiDimensionFilterDimensionEnum;
 
-  @Metadata({ data: "json, name=expression" })
+  @SpeakeasyMetadata({ data: "json, name=expression" })
   expression?: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: ApiDimensionFilterOperatorEnum;
 }

@@ -50,6 +50,8 @@ const (
 	GoogleSecuritySafebrowsingV4ThreatMatchThreatTypeEnumSocialEngineeringLowerPrecision GoogleSecuritySafebrowsingV4ThreatMatchThreatTypeEnum = "SOCIAL_ENGINEERING_LOWER_PRECISION"
 )
 
+// GoogleSecuritySafebrowsingV4ThreatMatch
+// A match when checking a threat entry in the Safe Browsing threat lists.
 type GoogleSecuritySafebrowsingV4ThreatMatch struct {
 	CacheDuration       *string                                                     `json:"cacheDuration,omitempty"`
 	PlatformType        *GoogleSecuritySafebrowsingV4ThreatMatchPlatformTypeEnum    `json:"platformType,omitempty"`

@@ -11,6 +11,8 @@ const (
 	GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnumLowConfidenceScore              GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnum = "LOW_CONFIDENCE_SCORE"
 )
 
+// GoogleCloudRecaptchaenterpriseV1RiskAnalysis
+// Risk analysis result for an event.
 type GoogleCloudRecaptchaenterpriseV1RiskAnalysis struct {
 	Reasons []GoogleCloudRecaptchaenterpriseV1RiskAnalysisReasonsEnum `json:"reasons,omitempty"`
 	Score   *float32                                                  `json:"score,omitempty"`

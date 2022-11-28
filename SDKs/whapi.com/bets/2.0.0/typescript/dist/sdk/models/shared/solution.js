@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Solution = /** @class */ (function (_super) {
     __extends(Solution, _super);
     function Solution() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=betNum" }),
+        SpeakeasyMetadata({ data: "json, name=betNum" }),
         __metadata("design:type", String)
     ], Solution.prototype, "betNum", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventId" }),
+        SpeakeasyMetadata({ data: "json, name=eventId" }),
         __metadata("design:type", String)
     ], Solution.prototype, "eventId", void 0);
     __decorate([
-        Metadata({ data: "json, name=handicap" }),
+        SpeakeasyMetadata({ data: "json, name=handicap" }),
         __metadata("design:type", String)
     ], Solution.prototype, "handicap", void 0);
     __decorate([
-        Metadata({ data: "json, name=handicapPrecision" }),
+        SpeakeasyMetadata({ data: "json, name=handicapPrecision" }),
         __metadata("design:type", String)
     ], Solution.prototype, "handicapPrecision", void 0);
     __decorate([
-        Metadata({ data: "json, name=priceDen" }),
+        SpeakeasyMetadata({ data: "json, name=priceDen" }),
         __metadata("design:type", String)
     ], Solution.prototype, "priceDen", void 0);
     __decorate([
-        Metadata({ data: "json, name=priceNum" }),
+        SpeakeasyMetadata({ data: "json, name=priceNum" }),
         __metadata("design:type", String)
     ], Solution.prototype, "priceNum", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectionHandicap" }),
+        SpeakeasyMetadata({ data: "json, name=selectionHandicap" }),
         __metadata("design:type", String)
     ], Solution.prototype, "selectionHandicap", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectionId" }),
+        SpeakeasyMetadata({ data: "json, name=selectionId" }),
         __metadata("design:type", String)
     ], Solution.prototype, "selectionId", void 0);
     return Solution;

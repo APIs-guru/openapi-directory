@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationNodeTypeEnum } from "./organizationnodetypeenum";
+
 
 
 // OrganizationNode
@@ -7,9 +8,9 @@ import { OrganizationNodeTypeEnum } from "./organizationnodetypeenum";
  * Information about the organization node.
 **/
 export class OrganizationNode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: OrganizationNodeTypeEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

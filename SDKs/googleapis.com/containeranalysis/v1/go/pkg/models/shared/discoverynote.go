@@ -16,6 +16,8 @@ const (
 	DiscoveryNoteAnalysisKindEnumDsseAttestation     DiscoveryNoteAnalysisKindEnum = "DSSE_ATTESTATION"
 )
 
+// DiscoveryNote
+// A note that indicates a type of analysis a provider would perform. This note exists in a provider's project. A `Discovery` occurrence is created in a consumer's project at the start of analysis.
 type DiscoveryNote struct {
 	AnalysisKind *DiscoveryNoteAnalysisKindEnum `json:"analysisKind,omitempty"`
 }

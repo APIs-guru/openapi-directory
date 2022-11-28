@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AwsIamConfig
 /**
  * The Identity and Access Management configuration.
@@ -33,11 +33,11 @@ var AwsIamConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=signingRegion" }),
+        SpeakeasyMetadata({ data: "json, name=signingRegion" }),
         __metadata("design:type", String)
     ], AwsIamConfig.prototype, "signingRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingServiceName" }),
+        SpeakeasyMetadata({ data: "json, name=signingServiceName" }),
         __metadata("design:type", String)
     ], AwsIamConfig.prototype, "signingServiceName", void 0);
     return AwsIamConfig;

@@ -22,43 +22,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Comment } from "./comment";
 var CommentFeed = /** @class */ (function (_super) {
     __extends(CommentFeed, _super);
     function CommentFeed() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], CommentFeed.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], CommentFeed.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=items", elemType: shared.Comment }),
+        SpeakeasyMetadata({ data: "json, name=items", elemType: Comment }),
         __metadata("design:type", Array)
     ], CommentFeed.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], CommentFeed.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextLink" }),
+        SpeakeasyMetadata({ data: "json, name=nextLink" }),
         __metadata("design:type", String)
     ], CommentFeed.prototype, "nextLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], CommentFeed.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], CommentFeed.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", Date)
     ], CommentFeed.prototype, "updated", void 0);
     return CommentFeed;

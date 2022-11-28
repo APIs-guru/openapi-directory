@@ -24,6 +24,8 @@ const (
 	SectionStyleSectionTypeEnumNextPage               SectionStyleSectionTypeEnum = "NEXT_PAGE"
 )
 
+// SectionStyle
+// The styling that applies to a section.
 type SectionStyle struct {
 	ColumnProperties         []SectionColumnProperties             `json:"columnProperties,omitempty"`
 	ColumnSeparatorStyle     *SectionStyleColumnSeparatorStyleEnum `json:"columnSeparatorStyle,omitempty"`

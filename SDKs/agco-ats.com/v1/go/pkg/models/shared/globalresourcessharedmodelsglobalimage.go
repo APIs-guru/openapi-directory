@@ -12,6 +12,8 @@ const (
 	GlobalResourcesSharedModelsGlobalImageStateEnumRemoved   GlobalResourcesSharedModelsGlobalImageStateEnum = "Removed"
 )
 
+// GlobalResourcesSharedModelsGlobalImage
+// An image from the Global Image library.
 type GlobalResourcesSharedModelsGlobalImage struct {
 	Crc           string                                           `json:"CRC"`
 	Categories    []GlobalResourcesSharedModelsGlobalImageCategory `json:"Categories,omitempty"`

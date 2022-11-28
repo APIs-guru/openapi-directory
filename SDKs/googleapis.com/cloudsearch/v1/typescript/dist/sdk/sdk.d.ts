@@ -1,0 +1,31 @@
+import { AxiosInstance } from "axios";
+import { Debug } from "./debug";
+import { Indexing } from "./indexing";
+import { Media } from "./media";
+import { Operations } from "./operations";
+import { Query } from "./query";
+import { Settings } from "./settings";
+import { Stats } from "./stats";
+import { V1 } from "./v1";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://cloudsearch.googleapis.com/"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    debug: Debug;
+    indexing: Indexing;
+    media: Media;
+    operations: Operations;
+    query: Query;
+    settings: Settings;
+    stats: Stats;
+    v1: V1;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

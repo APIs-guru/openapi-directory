@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationReportingSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings controlling the behavior of application reports.
 **/
 export class ApplicationReportingSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeRemovedApps" })
+  @SpeakeasyMetadata({ data: "json, name=includeRemovedApps" })
   includeRemovedApps?: boolean;
 }

@@ -1,87 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EpisodeMinimum } from "./episodeminimum";
 import { PodcastExtraField } from "./podcastextrafield";
 import { PodcastLookingForField } from "./podcastlookingforfield";
 import { PodcastTypeFieldEnum } from "./podcasttypefieldenum";
 
 
+
 export class PodcastFull extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=earliest_pub_date_ms" })
+  @SpeakeasyMetadata({ data: "json, name=earliest_pub_date_ms" })
   earliestPubDateMs?: number;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=episodes", elemType: shared.EpisodeMinimum })
+  @SpeakeasyMetadata({ data: "json, name=episodes", elemType: EpisodeMinimum })
   episodes?: EpisodeMinimum[];
 
-  @Metadata({ data: "json, name=explicit_content" })
+  @SpeakeasyMetadata({ data: "json, name=explicit_content" })
   explicitContent?: boolean;
 
-  @Metadata({ data: "json, name=extra" })
+  @SpeakeasyMetadata({ data: "json, name=extra" })
   extra?: PodcastExtraField;
 
-  @Metadata({ data: "json, name=genre_ids" })
+  @SpeakeasyMetadata({ data: "json, name=genre_ids" })
   genreIds?: number[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=is_claimed" })
+  @SpeakeasyMetadata({ data: "json, name=is_claimed" })
   isClaimed?: boolean;
 
-  @Metadata({ data: "json, name=itunes_id" })
+  @SpeakeasyMetadata({ data: "json, name=itunes_id" })
   itunesId?: number;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=latest_pub_date_ms" })
+  @SpeakeasyMetadata({ data: "json, name=latest_pub_date_ms" })
   latestPubDateMs?: number;
 
-  @Metadata({ data: "json, name=listen_score" })
+  @SpeakeasyMetadata({ data: "json, name=listen_score" })
   listenScore?: number;
 
-  @Metadata({ data: "json, name=listen_score_global_rank" })
+  @SpeakeasyMetadata({ data: "json, name=listen_score_global_rank" })
   listenScoreGlobalRank?: string;
 
-  @Metadata({ data: "json, name=listennotes_url" })
+  @SpeakeasyMetadata({ data: "json, name=listennotes_url" })
   listennotesUrl?: string;
 
-  @Metadata({ data: "json, name=looking_for" })
+  @SpeakeasyMetadata({ data: "json, name=looking_for" })
   lookingFor?: PodcastLookingForField;
 
-  @Metadata({ data: "json, name=next_episode_pub_date" })
+  @SpeakeasyMetadata({ data: "json, name=next_episode_pub_date" })
   nextEpisodePubDate?: number;
 
-  @Metadata({ data: "json, name=publisher" })
+  @SpeakeasyMetadata({ data: "json, name=publisher" })
   publisher?: string;
 
-  @Metadata({ data: "json, name=rss" })
+  @SpeakeasyMetadata({ data: "json, name=rss" })
   rss?: string;
 
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=total_episodes" })
+  @SpeakeasyMetadata({ data: "json, name=total_episodes" })
   totalEpisodes?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PodcastTypeFieldEnum;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 }

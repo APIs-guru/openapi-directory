@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class PostNotificationsRequest:
-    request: shared.Notification = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.Notification = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostNotificationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     notification: Optional[shared.Notification] = field(default=None)
-    status_code: int = field(default=None)
     

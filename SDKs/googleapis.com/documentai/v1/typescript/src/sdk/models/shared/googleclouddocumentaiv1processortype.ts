@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1ProcessorTypeLocationInfo } from "./googleclouddocumentaiv1processortypelocationinfo";
 
+
 export enum GoogleCloudDocumentaiV1ProcessorTypeLaunchStageEnum {
-    LaunchStageUnspecified = "LAUNCH_STAGE_UNSPECIFIED"
-,    Unimplemented = "UNIMPLEMENTED"
-,    Prelaunch = "PRELAUNCH"
-,    EarlyAccess = "EARLY_ACCESS"
-,    Alpha = "ALPHA"
-,    Beta = "BETA"
-,    Ga = "GA"
-,    Deprecated = "DEPRECATED"
+    LaunchStageUnspecified = "LAUNCH_STAGE_UNSPECIFIED",
+    Unimplemented = "UNIMPLEMENTED",
+    Prelaunch = "PRELAUNCH",
+    EarlyAccess = "EARLY_ACCESS",
+    Alpha = "ALPHA",
+    Beta = "BETA",
+    Ga = "GA",
+    Deprecated = "DEPRECATED"
 }
 
 
@@ -19,21 +19,21 @@ export enum GoogleCloudDocumentaiV1ProcessorTypeLaunchStageEnum {
  * A processor type is responsible for performing a certain document understanding task on a certain type of document.
 **/
 export class GoogleCloudDocumentaiV1ProcessorType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowCreation" })
+  @SpeakeasyMetadata({ data: "json, name=allowCreation" })
   allowCreation?: boolean;
 
-  @Metadata({ data: "json, name=availableLocations", elemType: shared.GoogleCloudDocumentaiV1ProcessorTypeLocationInfo })
+  @SpeakeasyMetadata({ data: "json, name=availableLocations", elemType: GoogleCloudDocumentaiV1ProcessorTypeLocationInfo })
   availableLocations?: GoogleCloudDocumentaiV1ProcessorTypeLocationInfo[];
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=launchStage" })
+  @SpeakeasyMetadata({ data: "json, name=launchStage" })
   launchStage?: GoogleCloudDocumentaiV1ProcessorTypeLaunchStageEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

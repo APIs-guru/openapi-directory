@@ -1,5 +1,7 @@
 package shared
 
+// AdUnit
+// Describes an AdMob ad unit.
 type AdUnit struct {
 	AdFormat    *string  `json:"adFormat,omitempty"`
 	AdTypes     []string `json:"adTypes,omitempty"`

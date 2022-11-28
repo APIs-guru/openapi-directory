@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityGroupsMembershipsModifyMembershipRolesPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudidentityGroupsMembershipsModifyMembershipRolesQueryParams:
 
 @dataclass
 class CloudidentityGroupsMembershipsModifyMembershipRolesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityGroupsMembershipsModifyMembershipRolesSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudidentityGroupsMembershipsModifyMembershipRolesSecurity:
 
 @dataclass
 class CloudidentityGroupsMembershipsModifyMembershipRolesRequest:
-    path_params: CloudidentityGroupsMembershipsModifyMembershipRolesPathParams = field(default=None)
-    query_params: CloudidentityGroupsMembershipsModifyMembershipRolesQueryParams = field(default=None)
+    path_params: CloudidentityGroupsMembershipsModifyMembershipRolesPathParams = field()
+    query_params: CloudidentityGroupsMembershipsModifyMembershipRolesQueryParams = field()
+    security: CloudidentityGroupsMembershipsModifyMembershipRolesSecurity = field()
     request: Optional[shared.ModifyMembershipRolesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudidentityGroupsMembershipsModifyMembershipRolesSecurity = field(default=None)
     
 
 @dataclass
 class CloudidentityGroupsMembershipsModifyMembershipRolesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     modify_membership_roles_response: Optional[shared.ModifyMembershipRolesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateConnectionAliasResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionIdentifier" })
   connectionIdentifier?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// HeavyEquipmentsListing
+// Represents a full list of attributes available with Marketcheck for a car
 type HeavyEquipmentsListing struct {
 	Build           *RvBuild                    `json:"build,omitempty"`
 	Dealer          *NestDealer                 `json:"dealer,omitempty"`

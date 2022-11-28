@@ -1,5 +1,8 @@
 package shared
 
+// SimplifiedEpisodeObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedepisodeobject - Find more info on the official Spotify Web API Reference
 type SimplifiedEpisodeObject struct {
 	AudioPreviewURL      *string                   `json:"audio_preview_url,omitempty"`
 	Description          *string                   `json:"description,omitempty"`

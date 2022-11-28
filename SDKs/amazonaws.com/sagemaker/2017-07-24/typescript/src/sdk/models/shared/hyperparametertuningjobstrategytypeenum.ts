@@ -1,6 +1,7 @@
 
 
+
 export enum HyperParameterTuningJobStrategyTypeEnum {
-    Bayesian = "Bayesian"
-,    Random = "Random"
+    Bayesian = "Bayesian",
+    Random = "Random"
 }

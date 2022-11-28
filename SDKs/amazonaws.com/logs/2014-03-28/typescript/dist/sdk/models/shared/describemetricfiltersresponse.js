@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MetricFilter } from "./metricfilter";
 var DescribeMetricFiltersResponse = /** @class */ (function (_super) {
     __extends(DescribeMetricFiltersResponse, _super);
     function DescribeMetricFiltersResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=metricFilters", elemType: shared.MetricFilter }),
+        SpeakeasyMetadata({ data: "json, name=metricFilters", elemType: MetricFilter }),
         __metadata("design:type", Array)
     ], DescribeMetricFiltersResponse.prototype, "metricFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeMetricFiltersResponse.prototype, "nextToken", void 0);
     return DescribeMetricFiltersResponse;

@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://apisetu.gov.in/edistricthp/v3",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Aecmw - Application for Renewal of Contractor Migrant Workmen license
+// API to verify Application for Renewal of Contractor Migrant Workmen license.
 func (s *SDK) Aecmw(ctx context.Context, request operations.AecmwRequest) (*operations.AecmwResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aecmw/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -66,7 +89,7 @@ func (s *SDK) Aecmw(ctx context.Context, request operations.AecmwRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -157,8 +180,10 @@ func (s *SDK) Aecmw(ctx context.Context, request operations.AecmwRequest) (*oper
 	return res, nil
 }
 
+// Aemtw - Application for Renewal of Motor Transport Worker Registration
+// API to verify Application for Renewal of Motor Transport Worker Registration.
 func (s *SDK) Aemtw(ctx context.Context, request operations.AemtwRequest) (*operations.AemtwResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aemtw/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -173,7 +198,7 @@ func (s *SDK) Aemtw(ctx context.Context, request operations.AemtwRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -264,8 +289,10 @@ func (s *SDK) Aemtw(ctx context.Context, request operations.AemtwRequest) (*oper
 	return res, nil
 }
 
+// Agcer - Agriculture/ Agriculturist Certificate
+// API to verify Agriculture/ Agriculturist Certificate.
 func (s *SDK) Agcer(ctx context.Context, request operations.AgcerRequest) (*operations.AgcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/agcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -280,7 +307,7 @@ func (s *SDK) Agcer(ctx context.Context, request operations.AgcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -371,8 +398,10 @@ func (s *SDK) Agcer(ctx context.Context, request operations.AgcerRequest) (*oper
 	return res, nil
 }
 
+// Alimw - Application for License for Inter State Migrant Workmen
+// API to verify Application for License for Inter State Migrant Workmen.
 func (s *SDK) Alimw(ctx context.Context, request operations.AlimwRequest) (*operations.AlimwResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alimw/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -387,7 +416,7 @@ func (s *SDK) Alimw(ctx context.Context, request operations.AlimwRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -478,8 +507,10 @@ func (s *SDK) Alimw(ctx context.Context, request operations.AlimwRequest) (*oper
 	return res, nil
 }
 
+// Arcmw - Application for Registration of Contractor Migrant Workmen license
+// API to verify Application for Registration of Contractor Migrant Workmen license.
 func (s *SDK) Arcmw(ctx context.Context, request operations.ArcmwRequest) (*operations.ArcmwResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/arcmw/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -494,7 +525,7 @@ func (s *SDK) Arcmw(ctx context.Context, request operations.ArcmwRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -585,8 +616,10 @@ func (s *SDK) Arcmw(ctx context.Context, request operations.ArcmwRequest) (*oper
 	return res, nil
 }
 
+// Armtw - Application for Registration of Motor Transport Worker Registration
+// API to verify Application for Registration of Motor Transport Worker Registration.
 func (s *SDK) Armtw(ctx context.Context, request operations.ArmtwRequest) (*operations.ArmtwResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/armtw/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -601,7 +634,7 @@ func (s *SDK) Armtw(ctx context.Context, request operations.ArmtwRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -692,8 +725,10 @@ func (s *SDK) Armtw(ctx context.Context, request operations.ArmtwRequest) (*oper
 	return res, nil
 }
 
+// Bacer - Backward Area Certificate
+// API to verify Backward Area Certificate.
 func (s *SDK) Bacer(ctx context.Context, request operations.BacerRequest) (*operations.BacerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bacer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -708,7 +743,7 @@ func (s *SDK) Bacer(ctx context.Context, request operations.BacerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -799,8 +834,10 @@ func (s *SDK) Bacer(ctx context.Context, request operations.BacerRequest) (*oper
 	return res, nil
 }
 
+// Bhcer - Bonafide Certificate
+// API to verify Bonafide Certificate.
 func (s *SDK) Bhcer(ctx context.Context, request operations.BhcerRequest) (*operations.BhcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bhcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -815,7 +852,7 @@ func (s *SDK) Bhcer(ctx context.Context, request operations.BhcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -906,8 +943,10 @@ func (s *SDK) Bhcer(ctx context.Context, request operations.BhcerRequest) (*oper
 	return res, nil
 }
 
+// Bpcrd - BPL Card
+// API to verify BPL Card.
 func (s *SDK) Bpcrd(ctx context.Context, request operations.BpcrdRequest) (*operations.BpcrdResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bpcrd/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -922,7 +961,7 @@ func (s *SDK) Bpcrd(ctx context.Context, request operations.BpcrdRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1013,8 +1052,10 @@ func (s *SDK) Bpcrd(ctx context.Context, request operations.BpcrdRequest) (*oper
 	return res, nil
 }
 
+// Btcer - Birth Certificate
+// API to verify Birth Certificate.
 func (s *SDK) Btcer(ctx context.Context, request operations.BtcerRequest) (*operations.BtcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/btcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1029,7 +1070,7 @@ func (s *SDK) Btcer(ctx context.Context, request operations.BtcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1120,8 +1161,10 @@ func (s *SDK) Btcer(ctx context.Context, request operations.BtcerRequest) (*oper
 	return res, nil
 }
 
+// Cecer - Renewal Certificate of Contract Labour License
+// API to verify Renewal Certificate of Contract Labour License.
 func (s *SDK) Cecer(ctx context.Context, request operations.CecerRequest) (*operations.CecerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cecer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1136,7 +1179,7 @@ func (s *SDK) Cecer(ctx context.Context, request operations.CecerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1227,8 +1270,10 @@ func (s *SDK) Cecer(ctx context.Context, request operations.CecerRequest) (*oper
 	return res, nil
 }
 
+// Chcer - Character Certificate
+// API to verify Character Certificate.
 func (s *SDK) Chcer(ctx context.Context, request operations.ChcerRequest) (*operations.ChcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1243,7 +1288,7 @@ func (s *SDK) Chcer(ctx context.Context, request operations.ChcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1334,8 +1379,10 @@ func (s *SDK) Chcer(ctx context.Context, request operations.ChcerRequest) (*oper
 	return res, nil
 }
 
+// Clcer - Registration Certificate for Contract Labour License
+// API to verify Registration Certificate for Contract Labour License.
 func (s *SDK) Clcer(ctx context.Context, request operations.ClcerRequest) (*operations.ClcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/clcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1350,7 +1397,7 @@ func (s *SDK) Clcer(ctx context.Context, request operations.ClcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1441,8 +1488,10 @@ func (s *SDK) Clcer(ctx context.Context, request operations.ClcerRequest) (*oper
 	return res, nil
 }
 
+// Coprg - Copy of Pariwar Register
+// API to verify Copy of Pariwar Register.
 func (s *SDK) Coprg(ctx context.Context, request operations.CoprgRequest) (*operations.CoprgResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/coprg/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1457,7 +1506,7 @@ func (s *SDK) Coprg(ctx context.Context, request operations.CoprgRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1548,8 +1597,10 @@ func (s *SDK) Coprg(ctx context.Context, request operations.CoprgRequest) (*oper
 	return res, nil
 }
 
+// Dccer - Dogra Class Certificate
+// API to verify Dogra Class Certificate.
 func (s *SDK) Dccer(ctx context.Context, request operations.DccerRequest) (*operations.DccerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dccer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1564,7 +1615,7 @@ func (s *SDK) Dccer(ctx context.Context, request operations.DccerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1655,8 +1706,10 @@ func (s *SDK) Dccer(ctx context.Context, request operations.DccerRequest) (*oper
 	return res, nil
 }
 
+// Dmcer - Domicile Certificate
+// API to verify Domicile Certificate.
 func (s *SDK) Dmcer(ctx context.Context, request operations.DmcerRequest) (*operations.DmcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dmcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1671,7 +1724,7 @@ func (s *SDK) Dmcer(ctx context.Context, request operations.DmcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1762,8 +1815,10 @@ func (s *SDK) Dmcer(ctx context.Context, request operations.DmcerRequest) (*oper
 	return res, nil
 }
 
+// Dpicr - Disabled Person Identity Card/ Certificate
+// API to verify Disabled Person Identity Card/ Certificate.
 func (s *SDK) Dpicr(ctx context.Context, request operations.DpicrRequest) (*operations.DpicrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dpicr/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1778,7 +1833,7 @@ func (s *SDK) Dpicr(ctx context.Context, request operations.DpicrRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1869,8 +1924,10 @@ func (s *SDK) Dpicr(ctx context.Context, request operations.DpicrRequest) (*oper
 	return res, nil
 }
 
+// Dtcer - Death Certificate
+// API to verify Death Certificate.
 func (s *SDK) Dtcer(ctx context.Context, request operations.DtcerRequest) (*operations.DtcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dtcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1885,7 +1942,7 @@ func (s *SDK) Dtcer(ctx context.Context, request operations.DtcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1976,8 +2033,10 @@ func (s *SDK) Dtcer(ctx context.Context, request operations.DtcerRequest) (*oper
 	return res, nil
 }
 
+// Ercer - Registration Certificate of Establishment Employing Contract Labour
+// API to verify Registration Certificate of Establishment Employing Contract Labour.
 func (s *SDK) Ercer(ctx context.Context, request operations.ErcerRequest) (*operations.ErcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ercer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1992,7 +2051,7 @@ func (s *SDK) Ercer(ctx context.Context, request operations.ErcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2083,8 +2142,10 @@ func (s *SDK) Ercer(ctx context.Context, request operations.ErcerRequest) (*oper
 	return res, nil
 }
 
+// Ffcer - Freedom Fighter Certificate
+// API to verify Freedom Fighter Certificate.
 func (s *SDK) Ffcer(ctx context.Context, request operations.FfcerRequest) (*operations.FfcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ffcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2099,7 +2160,7 @@ func (s *SDK) Ffcer(ctx context.Context, request operations.FfcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2190,8 +2251,10 @@ func (s *SDK) Ffcer(ctx context.Context, request operations.FfcerRequest) (*oper
 	return res, nil
 }
 
+// Igcer - Indigent (Needy Person) Certificate
+// API to verify Indigent (Needy Person) Certificate.
 func (s *SDK) Igcer(ctx context.Context, request operations.IgcerRequest) (*operations.IgcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/igcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2206,7 +2269,7 @@ func (s *SDK) Igcer(ctx context.Context, request operations.IgcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2297,8 +2360,10 @@ func (s *SDK) Igcer(ctx context.Context, request operations.IgcerRequest) (*oper
 	return res, nil
 }
 
+// Incer - Income Certificate
+// API to verify Income Certificate.
 func (s *SDK) Incer(ctx context.Context, request operations.IncerRequest) (*operations.IncerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/incer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2313,7 +2378,7 @@ func (s *SDK) Incer(ctx context.Context, request operations.IncerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2404,8 +2469,10 @@ func (s *SDK) Incer(ctx context.Context, request operations.IncerRequest) (*oper
 	return res, nil
 }
 
+// Lhcer - Legal Heir Certificate
+// API to verify Legal Heir Certificate.
 func (s *SDK) Lhcer(ctx context.Context, request operations.LhcerRequest) (*operations.LhcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/lhcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2420,7 +2487,7 @@ func (s *SDK) Lhcer(ctx context.Context, request operations.LhcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2511,8 +2578,10 @@ func (s *SDK) Lhcer(ctx context.Context, request operations.LhcerRequest) (*oper
 	return res, nil
 }
 
+// Mncer - Minority Certificate
+// API to verify Minority Certificate.
 func (s *SDK) Mncer(ctx context.Context, request operations.MncerRequest) (*operations.MncerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/mncer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2527,7 +2596,7 @@ func (s *SDK) Mncer(ctx context.Context, request operations.MncerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2618,8 +2687,10 @@ func (s *SDK) Mncer(ctx context.Context, request operations.MncerRequest) (*oper
 	return res, nil
 }
 
+// Mnrga - MNREGA Job Card
+// API to verify MNREGA Job Card.
 func (s *SDK) Mnrga(ctx context.Context, request operations.MnrgaRequest) (*operations.MnrgaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/mnrga/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2634,7 +2705,7 @@ func (s *SDK) Mnrga(ctx context.Context, request operations.MnrgaRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2725,8 +2796,10 @@ func (s *SDK) Mnrga(ctx context.Context, request operations.MnrgaRequest) (*oper
 	return res, nil
 }
 
+// Obcer - OBC Certificate
+// API to verify OBC Certificate.
 func (s *SDK) Obcer(ctx context.Context, request operations.ObcerRequest) (*operations.ObcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/obcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2741,7 +2814,7 @@ func (s *SDK) Obcer(ctx context.Context, request operations.ObcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2832,8 +2905,10 @@ func (s *SDK) Obcer(ctx context.Context, request operations.ObcerRequest) (*oper
 	return res, nil
 }
 
+// Racer - Rural Area Certificate
+// API to verify Rural Area Certificate.
 func (s *SDK) Racer(ctx context.Context, request operations.RacerRequest) (*operations.RacerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/racer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2848,7 +2923,7 @@ func (s *SDK) Racer(ctx context.Context, request operations.RacerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2939,8 +3014,10 @@ func (s *SDK) Racer(ctx context.Context, request operations.RacerRequest) (*oper
 	return res, nil
 }
 
+// Rmcer - Marriage Certificate
+// API to verify Marriage Certificate.
 func (s *SDK) Rmcer(ctx context.Context, request operations.RmcerRequest) (*operations.RmcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/rmcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2955,7 +3032,7 @@ func (s *SDK) Rmcer(ctx context.Context, request operations.RmcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3046,8 +3123,10 @@ func (s *SDK) Rmcer(ctx context.Context, request operations.RmcerRequest) (*oper
 	return res, nil
 }
 
+// Secer - Renewal Certificate of Shops And Commercial Establishment
+// API to verify Renewal Certificate of Shops And Commercial Establishment.
 func (s *SDK) Secer(ctx context.Context, request operations.SecerRequest) (*operations.SecerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/secer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3062,7 +3141,7 @@ func (s *SDK) Secer(ctx context.Context, request operations.SecerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3153,8 +3232,10 @@ func (s *SDK) Secer(ctx context.Context, request operations.SecerRequest) (*oper
 	return res, nil
 }
 
+// Shcer - SC/ST  Certificate
+// API to verify SC/ST  Certificate.
 func (s *SDK) Shcer(ctx context.Context, request operations.ShcerRequest) (*operations.ShcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/shcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3169,7 +3250,7 @@ func (s *SDK) Shcer(ctx context.Context, request operations.ShcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3260,8 +3341,10 @@ func (s *SDK) Shcer(ctx context.Context, request operations.ShcerRequest) (*oper
 	return res, nil
 }
 
+// Sicrd - Senior Citizen Identity Card/ Certificate
+// API to verify Senior Citizen Identity Card/ Certificate.
 func (s *SDK) Sicrd(ctx context.Context, request operations.SicrdRequest) (*operations.SicrdResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sicrd/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3276,7 +3359,7 @@ func (s *SDK) Sicrd(ctx context.Context, request operations.SicrdRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3367,8 +3450,10 @@ func (s *SDK) Sicrd(ctx context.Context, request operations.SicrdRequest) (*oper
 	return res, nil
 }
 
+// Srcer - Registration Certificate of Shops And Commercial Establishment
+// API to verify Registration Certificate of Shops And Commercial Establishment.
 func (s *SDK) Srcer(ctx context.Context, request operations.SrcerRequest) (*operations.SrcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/srcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3383,7 +3468,7 @@ func (s *SDK) Srcer(ctx context.Context, request operations.SrcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 
 
 @dataclass
 class RegistryListAPIVersionsPathParams:
-    api: str = field(default=None, metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    api: str = field(metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class RegistryListAPIVersionsQueryParams:
 
 @dataclass
 class RegistryListAPIVersionsRequest:
-    path_params: RegistryListAPIVersionsPathParams = field(default=None)
-    query_params: RegistryListAPIVersionsQueryParams = field(default=None)
+    path_params: RegistryListAPIVersionsPathParams = field()
+    query_params: RegistryListAPIVersionsQueryParams = field()
     
 
 @dataclass
 class RegistryListAPIVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_api_versions_response: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

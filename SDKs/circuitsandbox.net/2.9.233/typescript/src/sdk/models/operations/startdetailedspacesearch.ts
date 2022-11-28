@@ -1,63 +1,64 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum StartDetailedSpaceSearchScopeEnum {
-    All = "ALL"
-,    Spaces = "SPACES"
-,    Topicby = "TOPICBY"
-,    Files = "FILES"
-,    Tags = "TAGS"
-,    Labels = "LABELS"
-,    Date = "DATE"
+    All = "ALL",
+    Spaces = "SPACES",
+    Topicby = "TOPICBY",
+    Files = "FILES",
+    Tags = "TAGS",
+    Labels = "LABELS",
+    Date = "DATE"
 }
 
 
 export class StartDetailedSpaceSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scope" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scope" })
   scope: StartDetailedSpaceSearchScopeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchId" })
   searchId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
   searchTerm: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=spaceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=spaceId" })
   spaceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startTime" })
   startTime?: Date;
 }
 
 
 export class StartDetailedSpaceSearchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class StartDetailedSpaceSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StartDetailedSpaceSearchQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: StartDetailedSpaceSearchSecurity;
 }
 
 
 export class StartDetailedSpaceSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   spaceSearchResultDetailedBacks?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

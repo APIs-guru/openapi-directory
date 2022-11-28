@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class OrgsListForUserPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class OrgsListForUserQueryParams:
 
 @dataclass
 class OrgsListForUserRequest:
-    path_params: OrgsListForUserPathParams = field(default=None)
-    query_params: OrgsListForUserQueryParams = field(default=None)
+    path_params: OrgsListForUserPathParams = field()
+    query_params: OrgsListForUserQueryParams = field()
     
 
 @dataclass
 class OrgsListForUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     organization_simples: Optional[List[shared.OrganizationSimple]] = field(default=None)
     

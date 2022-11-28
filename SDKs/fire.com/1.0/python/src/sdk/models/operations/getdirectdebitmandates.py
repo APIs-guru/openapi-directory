@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum(str, Enum):
@@ -52,40 +54,40 @@ class GetDirectDebitMandatesMandatesMandateStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetDirectDebitMandatesMandatesMandate:
-    alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
-    currency: Optional[shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    date_cancelled: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateCancelled', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    date_completed: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateCompleted', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateCreated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    fire_rejection_reason: Optional[GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fireRejectionReason' }})
-    last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastUpdated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    latest_direct_debit_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestDirectDebitAmount' }})
-    latest_direct_debit_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestDirectDebitDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    mandate_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mandateReference' }})
-    mandate_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mandateUuid' }})
-    number_of_direct_debit_collected: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberOfDirectDebitCollected' }})
-    originator_alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatorAlias' }})
-    originator_logo_url_large: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatorLogoUrlLarge' }})
-    originator_logo_url_small: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatorLogoUrlSmall' }})
-    originator_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatorName' }})
-    originator_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatorReference' }})
-    scheme_cancel_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemeCancelReason' }})
-    scheme_cancel_reason_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemeCancelReasonCode' }})
-    status: Optional[GetDirectDebitMandatesMandatesMandateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    target_ican: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetIcan' }})
-    value_of_direct_debit_collected: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valueOfDirectDebitCollected' }})
+    alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alias') }})
+    currency: Optional[shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    date_cancelled: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateCancelled'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    date_completed: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateCompleted'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateCreated'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    fire_rejection_reason: Optional[GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fireRejectionReason') }})
+    last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastUpdated'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    latest_direct_debit_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestDirectDebitAmount') }})
+    latest_direct_debit_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestDirectDebitDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    mandate_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mandateReference') }})
+    mandate_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mandateUuid') }})
+    number_of_direct_debit_collected: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numberOfDirectDebitCollected') }})
+    originator_alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originatorAlias') }})
+    originator_logo_url_large: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originatorLogoUrlLarge') }})
+    originator_logo_url_small: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originatorLogoUrlSmall') }})
+    originator_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originatorName') }})
+    originator_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originatorReference') }})
+    scheme_cancel_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemeCancelReason') }})
+    scheme_cancel_reason_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemeCancelReasonCode') }})
+    status: Optional[GetDirectDebitMandatesMandatesMandateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    target_ican: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetIcan') }})
+    value_of_direct_debit_collected: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valueOfDirectDebitCollected') }})
     
 
 @dataclass_json
 @dataclass
 class GetDirectDebitMandatesMandates:
-    mandates: Optional[List[GetDirectDebitMandatesMandatesMandate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mandates' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    mandates: Optional[List[GetDirectDebitMandatesMandatesMandate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mandates') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
     
 
 @dataclass
 class GetDirectDebitMandatesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     mandates: Optional[GetDirectDebitMandatesMandates] = field(default=None)
-    status_code: int = field(default=None)
     

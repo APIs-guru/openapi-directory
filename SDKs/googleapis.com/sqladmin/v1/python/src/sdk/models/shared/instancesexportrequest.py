@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import exportcontext
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InstancesExportRequest:
-    export_context: Optional[exportcontext.ExportContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exportContext' }})
+    r"""InstancesExportRequest
+    Database instance export request.
+    """
+    
+    export_context: Optional[ExportContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exportContext') }})
     

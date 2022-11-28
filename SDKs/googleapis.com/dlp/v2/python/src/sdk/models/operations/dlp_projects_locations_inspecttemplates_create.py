@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DlpProjectsLocationsInspectTemplatesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DlpProjectsLocationsInspectTemplatesCreateQueryParams:
 
 @dataclass
 class DlpProjectsLocationsInspectTemplatesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DlpProjectsLocationsInspectTemplatesCreateRequest:
-    path_params: DlpProjectsLocationsInspectTemplatesCreatePathParams = field(default=None)
-    query_params: DlpProjectsLocationsInspectTemplatesCreateQueryParams = field(default=None)
-    request: Optional[shared.GooglePrivacyDlpV2CreateInspectTemplateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DlpProjectsLocationsInspectTemplatesCreateSecurity = field(default=None)
+    path_params: DlpProjectsLocationsInspectTemplatesCreatePathParams = field()
+    query_params: DlpProjectsLocationsInspectTemplatesCreateQueryParams = field()
+    security: DlpProjectsLocationsInspectTemplatesCreateSecurity = field()
+    request: Optional[shared.GooglePrivacyDlpV2CreateInspectTemplateRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DlpProjectsLocationsInspectTemplatesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_privacy_dlp_v2_inspect_template: Optional[shared.GooglePrivacyDlpV2InspectTemplate] = field(default=None)
-    status_code: int = field(default=None)
     

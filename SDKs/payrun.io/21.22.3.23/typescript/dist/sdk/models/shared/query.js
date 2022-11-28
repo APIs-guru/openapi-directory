@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // QueryQueryGroup
 /**
  * The querys' groups
@@ -33,7 +33,7 @@ var QueryQueryGroup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Group" }),
+        SpeakeasyMetadata({ data: "json, name=Group" }),
         __metadata("design:type", Array)
     ], QueryQueryGroup.prototype, "group", void 0);
     return QueryQueryGroup;
@@ -49,7 +49,7 @@ var QueryQueryVariable = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Variable" }),
+        SpeakeasyMetadata({ data: "json, name=Variable" }),
         __metadata("design:type", Array)
     ], QueryQueryVariable.prototype, "variable", void 0);
     return QueryQueryVariable;
@@ -61,23 +61,23 @@ var QueryQuery = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ExcludeNullOrEmptyElements" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludeNullOrEmptyElements" }),
         __metadata("design:type", Boolean)
     ], QueryQuery.prototype, "excludeNullOrEmptyElements", void 0);
     __decorate([
-        Metadata({ data: "json, name=Groups" }),
+        SpeakeasyMetadata({ data: "json, name=Groups" }),
         __metadata("design:type", QueryQueryGroup)
     ], QueryQuery.prototype, "groups", void 0);
     __decorate([
-        Metadata({ data: "json, name=RootNodeName" }),
+        SpeakeasyMetadata({ data: "json, name=RootNodeName" }),
         __metadata("design:type", String)
     ], QueryQuery.prototype, "rootNodeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SuppressMetricAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=SuppressMetricAttributes" }),
         __metadata("design:type", Boolean)
     ], QueryQuery.prototype, "suppressMetricAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=Variables" }),
+        SpeakeasyMetadata({ data: "json, name=Variables" }),
         __metadata("design:type", QueryQueryVariable)
     ], QueryQuery.prototype, "variables", void 0);
     return QueryQuery;
@@ -89,7 +89,7 @@ var Query = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Query" }),
+        SpeakeasyMetadata({ data: "json, name=Query" }),
         __metadata("design:type", QueryQuery)
     ], Query.prototype, "query", void 0);
     return Query;

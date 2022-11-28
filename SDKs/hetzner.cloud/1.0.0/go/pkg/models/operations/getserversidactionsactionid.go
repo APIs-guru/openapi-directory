@@ -5,10 +5,8 @@ type GetServersIDActionsActionIDPathParams struct {
 	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetServersIDActionsActionIDRequest struct {
-	PathParams GetServersIDActionsActionIDPathParams
-}
-
+// GetServersIDActionsActionIDActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetServersIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type GetServersIDActionsActionIDActionResponseAction struct {
 
 type GetServersIDActionsActionIDActionResponse struct {
 	Action GetServersIDActionsActionIDActionResponseAction `json:"action"`
+}
+
+type GetServersIDActionsActionIDRequest struct {
+	PathParams GetServersIDActionsActionIDPathParams
 }
 
 type GetServersIDActionsActionIDResponse struct {

@@ -1,6 +1,7 @@
 
 
+
 export enum ScaStatusAuthorisationConfirmationEnum {
-    Finalised = "finalised"
-,    Failed = "failed"
+    Finalised = "finalised",
+    Failed = "failed"
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum AdjustmentTypeEnum {
-    ChangeInCapacity = "ChangeInCapacity"
-,    PercentChangeInCapacity = "PercentChangeInCapacity"
-,    ExactCapacity = "ExactCapacity"
+    ChangeInCapacity = "ChangeInCapacity",
+    PercentChangeInCapacity = "PercentChangeInCapacity",
+    ExactCapacity = "ExactCapacity"
 }

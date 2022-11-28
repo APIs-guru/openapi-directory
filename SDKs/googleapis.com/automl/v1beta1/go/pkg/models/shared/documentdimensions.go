@@ -9,6 +9,8 @@ const (
 	DocumentDimensionsUnitEnumPoint                            DocumentDimensionsUnitEnum = "POINT"
 )
 
+// DocumentDimensions
+// Message that describes dimension of a document.
 type DocumentDimensions struct {
 	Height *float32                    `json:"height,omitempty"`
 	Unit   *DocumentDimensionsUnitEnum `json:"unit,omitempty"`

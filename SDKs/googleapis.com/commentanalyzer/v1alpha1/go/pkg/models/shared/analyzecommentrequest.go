@@ -1,5 +1,7 @@
 package shared
 
+// AnalyzeCommentRequest
+// The comment analysis request message.
 type AnalyzeCommentRequest struct {
 	ClientToken         *string                        `json:"clientToken,omitempty"`
 	Comment             *TextEntry                     `json:"comment,omitempty"`

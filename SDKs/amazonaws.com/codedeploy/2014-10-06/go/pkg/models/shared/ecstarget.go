@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// EcsTarget
+//
+//	Information about the target of an Amazon ECS deployment.
 type EcsTarget struct {
 	DeploymentID    *string           `json:"deploymentId,omitempty"`
 	LastUpdatedAt   *time.Time        `json:"lastUpdatedAt,omitempty"`

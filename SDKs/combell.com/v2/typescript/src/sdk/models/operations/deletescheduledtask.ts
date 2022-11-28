@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteScheduledTaskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scheduledTaskId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scheduledTaskId" })
   scheduledTaskId: string;
 }
 
 
 export class DeleteScheduledTaskQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
   domainName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scheduled_task_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scheduled_task_id" })
   scheduledTaskId: string;
 }
 
 
 export class DeleteScheduledTaskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteScheduledTaskPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteScheduledTaskQueryParams;
 }
 
 
 export class DeleteScheduledTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

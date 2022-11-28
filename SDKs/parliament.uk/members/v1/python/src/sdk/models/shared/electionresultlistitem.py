@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import link
-from . import electionresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ElectionResultListItem:
-    links: Optional[List[link.Link]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    value: Optional[List[electionresult.ElectionResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    links: Optional[List[Link]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    value: Optional[List[ElectionResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

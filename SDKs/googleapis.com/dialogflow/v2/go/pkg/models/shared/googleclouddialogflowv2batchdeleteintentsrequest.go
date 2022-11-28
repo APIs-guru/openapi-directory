@@ -1,5 +1,7 @@
 package shared
 
-type GoogleCloudDialogflowV2BatchDeleteIntentsRequest struct {
-	Intents []GoogleCloudDialogflowV2Intent `json:"intents,omitempty"`
+// GoogleCloudDialogflowV2BatchDeleteIntentsRequestInput
+// The request message for Intents.BatchDeleteIntents.
+type GoogleCloudDialogflowV2BatchDeleteIntentsRequestInput struct {
+	Intents []GoogleCloudDialogflowV2IntentInput `json:"intents,omitempty"`
 }

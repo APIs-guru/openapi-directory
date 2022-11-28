@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentPlatform } from "./environmentplatform";
 
 
+
 export class ListCuratedEnvironmentImagesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=platforms", elemType: shared.EnvironmentPlatform })
+  @SpeakeasyMetadata({ data: "json, name=platforms", elemType: EnvironmentPlatform })
   platforms?: EnvironmentPlatform[];
 }

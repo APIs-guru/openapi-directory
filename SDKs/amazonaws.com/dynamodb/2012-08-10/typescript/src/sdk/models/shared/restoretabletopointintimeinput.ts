@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingModeEnum } from "./billingmodeenum";
 import { GlobalSecondaryIndex } from "./globalsecondaryindex";
 import { LocalSecondaryIndex } from "./localsecondaryindex";
@@ -7,34 +6,35 @@ import { ProvisionedThroughput } from "./provisionedthroughput";
 import { SseSpecification } from "./ssespecification";
 
 
+
 export class RestoreTableToPointInTimeInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BillingModeOverride" })
+  @SpeakeasyMetadata({ data: "json, name=BillingModeOverride" })
   billingModeOverride?: BillingModeEnum;
 
-  @Metadata({ data: "json, name=GlobalSecondaryIndexOverride", elemType: shared.GlobalSecondaryIndex })
+  @SpeakeasyMetadata({ data: "json, name=GlobalSecondaryIndexOverride", elemType: GlobalSecondaryIndex })
   globalSecondaryIndexOverride?: GlobalSecondaryIndex[];
 
-  @Metadata({ data: "json, name=LocalSecondaryIndexOverride", elemType: shared.LocalSecondaryIndex })
+  @SpeakeasyMetadata({ data: "json, name=LocalSecondaryIndexOverride", elemType: LocalSecondaryIndex })
   localSecondaryIndexOverride?: LocalSecondaryIndex[];
 
-  @Metadata({ data: "json, name=ProvisionedThroughputOverride" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughputOverride" })
   provisionedThroughputOverride?: ProvisionedThroughput;
 
-  @Metadata({ data: "json, name=RestoreDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RestoreDateTime" })
   restoreDateTime?: Date;
 
-  @Metadata({ data: "json, name=SSESpecificationOverride" })
+  @SpeakeasyMetadata({ data: "json, name=SSESpecificationOverride" })
   sseSpecificationOverride?: SseSpecification;
 
-  @Metadata({ data: "json, name=SourceTableArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceTableArn" })
   sourceTableArn?: string;
 
-  @Metadata({ data: "json, name=SourceTableName" })
+  @SpeakeasyMetadata({ data: "json, name=SourceTableName" })
   sourceTableName?: string;
 
-  @Metadata({ data: "json, name=TargetTableName" })
+  @SpeakeasyMetadata({ data: "json, name=TargetTableName" })
   targetTableName: string;
 
-  @Metadata({ data: "json, name=UseLatestRestorableTime" })
+  @SpeakeasyMetadata({ data: "json, name=UseLatestRestorableTime" })
   useLatestRestorableTime?: boolean;
 }

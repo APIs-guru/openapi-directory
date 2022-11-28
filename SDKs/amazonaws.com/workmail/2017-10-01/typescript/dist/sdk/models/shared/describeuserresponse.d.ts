@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityStateEnum } from "./entitystateenum";
 import { UserRoleEnum } from "./userroleenum";
 export declare class DescribeUserResponse extends SpeakeasyBase {

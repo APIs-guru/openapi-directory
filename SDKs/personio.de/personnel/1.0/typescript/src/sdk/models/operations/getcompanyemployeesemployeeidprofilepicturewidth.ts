@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCompanyEmployeesEmployeeIdProfilePictureWidthPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=employee_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employee_id" })
   employeeId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=width" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=width" })
   width: number;
 }
 
 
 export class GetCompanyEmployeesEmployeeIdProfilePictureWidthRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCompanyEmployeesEmployeeIdProfilePictureWidthPathParams;
 }
 
 
 export class GetCompanyEmployeesEmployeeIdProfilePictureWidthResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCompanyEmployeesEmployeeIdProfilePictureWidth200ImagePngBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

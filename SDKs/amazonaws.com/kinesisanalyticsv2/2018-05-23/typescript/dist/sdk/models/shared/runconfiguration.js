@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationRestoreConfiguration } from "./applicationrestoreconfiguration";
 import { FlinkRunConfiguration } from "./flinkrunconfiguration";
+import { SqlRunConfiguration } from "./sqlrunconfiguration";
 // RunConfiguration
 /**
  * Describes the starting parameters for an Kinesis Data Analytics application.
@@ -36,15 +36,15 @@ var RunConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationRestoreConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationRestoreConfiguration" }),
         __metadata("design:type", ApplicationRestoreConfiguration)
     ], RunConfiguration.prototype, "applicationRestoreConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=FlinkRunConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=FlinkRunConfiguration" }),
         __metadata("design:type", FlinkRunConfiguration)
     ], RunConfiguration.prototype, "flinkRunConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=SqlRunConfigurations", elemType: shared.SqlRunConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=SqlRunConfigurations", elemType: SqlRunConfiguration }),
         __metadata("design:type", Array)
     ], RunConfiguration.prototype, "sqlRunConfigurations", void 0);
     return RunConfiguration;

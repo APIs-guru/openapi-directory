@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChangePasswordPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class ChangePasswordRequestBodyNewPassword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ChangePasswordRequestBodyOldPassword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ChangePasswordRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newPassword" })
+  @SpeakeasyMetadata({ data: "json, name=newPassword" })
   newPassword?: ChangePasswordRequestBodyNewPassword;
 
-  @Metadata({ data: "json, name=oldPassword" })
+  @SpeakeasyMetadata({ data: "json, name=oldPassword" })
   oldPassword?: ChangePasswordRequestBodyOldPassword;
 }
 
 
 export class ChangePasswordRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ChangePasswordPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ChangePasswordRequestBody;
 }
 
 
 export class ChangePasswordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

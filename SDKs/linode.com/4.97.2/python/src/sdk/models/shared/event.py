@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EventActionEnum(str, Enum):
     ACCOUNT_UPDATE = "account_update"
@@ -150,19 +152,30 @@ class EventEntityTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EventEntity:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    type: Optional[EventEntityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""EventEntity
+    Detailed information about the Event's entity, including ID, type, label, and URL used to access it.
+    
+    """
+    
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    type: Optional[EventEntityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     
 
 @dataclass_json
 @dataclass
 class EventSecondaryEntity:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""EventSecondaryEntity
+    Detailed information about the Event's secondary entity, which provides additional information
+    for events such as, but not limited to, `linode_boot`, `linode_reboot`, `linode_create`, and `linode_clone` Event actions.
+    
+    """
+    
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     
 class EventStatusEnum(str, Enum):
     FAILED = "failed"
@@ -175,18 +188,24 @@ class EventStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Event:
-    action: Optional[EventActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    entity: Optional[EventEntity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entity' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    percent_complete: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percent_complete' }})
-    rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rate' }})
-    read: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'read' }})
-    secondary_entity: Optional[EventSecondaryEntity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secondary_entity' }})
-    seen: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seen' }})
-    status: Optional[EventStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    time_remaining: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_remaining' }})
-    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'username' }})
+    r"""Event
+    A collection of Event objects. An Event is an action taken against an entity related to your Account. For example, booting a Linode would create an Event.
+    The Events returned depends on your grants.
+    
+    """
+    
+    action: Optional[EventActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    entity: Optional[EventEntity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entity') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    percent_complete: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('percent_complete') }})
+    rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rate') }})
+    read: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('read') }})
+    secondary_entity: Optional[EventSecondaryEntity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secondary_entity') }})
+    seen: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('seen') }})
+    status: Optional[EventStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    time_remaining: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_remaining') }})
+    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('username') }})
     

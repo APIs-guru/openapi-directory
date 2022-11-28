@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAssessmentReportURLPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
-    assessment_report_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentReportId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    assessment_report_id: str = field(metadata={'path_param': { 'field_name': 'assessmentReportId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class GetAssessmentReportURLHeaders:
 
 @dataclass
 class GetAssessmentReportURLRequest:
-    path_params: GetAssessmentReportURLPathParams = field(default=None)
-    headers: GetAssessmentReportURLHeaders = field(default=None)
+    headers: GetAssessmentReportURLHeaders = field()
+    path_params: GetAssessmentReportURLPathParams = field()
     
 
 @dataclass
 class GetAssessmentReportURLResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_assessment_report_url_response: Optional[shared.GetAssessmentReportURLResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

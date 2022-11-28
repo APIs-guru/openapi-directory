@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Session
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about a session.
 **/
 export class Session extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=StartTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=StartTimestamp" })
   startTimestamp: string;
 
-  @Metadata({ data: "json, name=StopTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=StopTimestamp" })
   stopTimestamp?: string;
 }

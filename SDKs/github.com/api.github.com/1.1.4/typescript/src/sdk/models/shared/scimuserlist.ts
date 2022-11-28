@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScimUser } from "./scimuser";
+
 
 
 // ScimUserList
@@ -8,18 +8,18 @@ import { ScimUser } from "./scimuser";
  * SCIM User List
 **/
 export class ScimUserList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Resources", elemType: shared.ScimUser })
+  @SpeakeasyMetadata({ data: "json, name=Resources", elemType: ScimUser })
   resources: ScimUser[];
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage: number;
 
-  @Metadata({ data: "json, name=schemas" })
+  @SpeakeasyMetadata({ data: "json, name=schemas" })
   schemas: string[];
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults: number;
 }

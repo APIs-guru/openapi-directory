@@ -12,11 +12,6 @@ type GetDatabaseSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDatabaseRequest struct {
-	QueryParams GetDatabaseQueryParams
-	Security    GetDatabaseSecurity
-}
-
 type GetDatabase200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -50,6 +45,11 @@ type GetDatabase422ApplicationJSON struct {
 
 type GetDatabase500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDatabaseRequest struct {
+	QueryParams GetDatabaseQueryParams
+	Security    GetDatabaseSecurity
 }
 
 type GetDatabaseResponse struct {

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PayeeDelta } from "./payeedelta";
+
 
 
 // PayeeDeltaResponse
@@ -8,12 +8,12 @@ import { PayeeDelta } from "./payeedelta";
  * List Payee Changes Response Object
 **/
 export class PayeeDeltaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.PayeeDelta })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: PayeeDelta })
   content?: PayeeDelta[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: any[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: any;
 }

@@ -22,25 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberRestriction } from "./memberrestriction";
-// SecuritySettings
+// SecuritySettingsInput
 /**
  * The definition of security settings.
 **/
-var SecuritySettings = /** @class */ (function (_super) {
-    __extends(SecuritySettings, _super);
-    function SecuritySettings() {
+var SecuritySettingsInput = /** @class */ (function (_super) {
+    __extends(SecuritySettingsInput, _super);
+    function SecuritySettingsInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=memberRestriction" }),
+        SpeakeasyMetadata({ data: "json, name=memberRestriction" }),
         __metadata("design:type", MemberRestriction)
-    ], SecuritySettings.prototype, "memberRestriction", void 0);
-    __decorate([
-        Metadata({ data: "json, name=name" }),
-        __metadata("design:type", String)
-    ], SecuritySettings.prototype, "name", void 0);
-    return SecuritySettings;
+    ], SecuritySettingsInput.prototype, "memberRestriction", void 0);
+    return SecuritySettingsInput;
 }(SpeakeasyBase));
-export { SecuritySettings };
+export { SecuritySettingsInput };

@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dedicatedtenancysupportresultenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeAccountResult:
-    dedicated_tenancy_management_cidr_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DedicatedTenancyManagementCidrRange' }})
-    dedicated_tenancy_support: Optional[dedicatedtenancysupportresultenum_enum.DedicatedTenancySupportResultEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DedicatedTenancySupport' }})
+    dedicated_tenancy_management_cidr_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DedicatedTenancyManagementCidrRange') }})
+    dedicated_tenancy_support: Optional[DedicatedTenancySupportResultEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DedicatedTenancySupport') }})
     

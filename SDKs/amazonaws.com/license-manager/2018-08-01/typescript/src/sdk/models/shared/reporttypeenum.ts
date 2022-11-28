@@ -1,6 +1,7 @@
 
 
+
 export enum ReportTypeEnum {
-    LicenseConfigurationSummaryReport = "LicenseConfigurationSummaryReport"
-,    LicenseConfigurationUsageReport = "LicenseConfigurationUsageReport"
+    LicenseConfigurationSummaryReport = "LicenseConfigurationSummaryReport",
+    LicenseConfigurationUsageReport = "LicenseConfigurationUsageReport"
 }

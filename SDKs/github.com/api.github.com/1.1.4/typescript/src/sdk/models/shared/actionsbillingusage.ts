@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ActionsBillingUsageMinutesUsedBreakdown extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MACOS" })
+  @SpeakeasyMetadata({ data: "json, name=MACOS" })
   macos?: number;
 
-  @Metadata({ data: "json, name=UBUNTU" })
+  @SpeakeasyMetadata({ data: "json, name=UBUNTU" })
   ubuntu?: number;
 
-  @Metadata({ data: "json, name=WINDOWS" })
+  @SpeakeasyMetadata({ data: "json, name=WINDOWS" })
   windows?: number;
 }
 
 
 export class ActionsBillingUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=included_minutes" })
+  @SpeakeasyMetadata({ data: "json, name=included_minutes" })
   includedMinutes: number;
 
-  @Metadata({ data: "json, name=minutes_used_breakdown" })
+  @SpeakeasyMetadata({ data: "json, name=minutes_used_breakdown" })
   minutesUsedBreakdown: ActionsBillingUsageMinutesUsedBreakdown;
 
-  @Metadata({ data: "json, name=total_minutes_used" })
+  @SpeakeasyMetadata({ data: "json, name=total_minutes_used" })
   totalMinutesUsed: number;
 
-  @Metadata({ data: "json, name=total_paid_minutes_used" })
+  @SpeakeasyMetadata({ data: "json, name=total_paid_minutes_used" })
   totalPaidMinutesUsed: number;
 }

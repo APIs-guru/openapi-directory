@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Organization
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an organization that can access a custom app.
 **/
 export class Organization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=organizationId" })
+  @SpeakeasyMetadata({ data: "json, name=organizationId" })
   organizationId?: string;
 
-  @Metadata({ data: "json, name=organizationName" })
+  @SpeakeasyMetadata({ data: "json, name=organizationName" })
   organizationName?: string;
 }

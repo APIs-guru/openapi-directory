@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GrpcRouteHeaderMatchTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Exact = "EXACT"
-,    RegularExpression = "REGULAR_EXPRESSION"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Exact = "EXACT",
+    RegularExpression = "REGULAR_EXPRESSION"
 }
 
 
@@ -12,12 +13,12 @@ export enum GrpcRouteHeaderMatchTypeEnum {
  * A match against a collection of headers.
 **/
 export class GrpcRouteHeaderMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GrpcRouteHeaderMatchTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

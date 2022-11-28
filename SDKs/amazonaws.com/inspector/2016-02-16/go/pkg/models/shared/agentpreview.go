@@ -1,5 +1,7 @@
 package shared
 
+// AgentPreview
+// Used as a response element in the <a>PreviewAgents</a> action.
 type AgentPreview struct {
 	AgentHealth      *AgentHealthEnum `json:"agentHealth,omitempty"`
 	AgentID          string           `json:"agentId"`

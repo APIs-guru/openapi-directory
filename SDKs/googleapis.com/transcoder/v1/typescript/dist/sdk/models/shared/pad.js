@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Pad
 /**
  * Pad filter configuration for the input video. The padded input video is scaled after padding with black to match the output resolution.
@@ -33,19 +33,19 @@ var Pad = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bottomPixels" }),
+        SpeakeasyMetadata({ data: "json, name=bottomPixels" }),
         __metadata("design:type", Number)
     ], Pad.prototype, "bottomPixels", void 0);
     __decorate([
-        Metadata({ data: "json, name=leftPixels" }),
+        SpeakeasyMetadata({ data: "json, name=leftPixels" }),
         __metadata("design:type", Number)
     ], Pad.prototype, "leftPixels", void 0);
     __decorate([
-        Metadata({ data: "json, name=rightPixels" }),
+        SpeakeasyMetadata({ data: "json, name=rightPixels" }),
         __metadata("design:type", Number)
     ], Pad.prototype, "rightPixels", void 0);
     __decorate([
-        Metadata({ data: "json, name=topPixels" }),
+        SpeakeasyMetadata({ data: "json, name=topPixels" }),
         __metadata("design:type", Number)
     ], Pad.prototype, "topPixels", void 0);
     return Pad;

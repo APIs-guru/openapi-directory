@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ResourceRequirements
 /**
  * optional resource requirements to run workers (blank for unbounded allocations)
@@ -33,19 +33,19 @@ var ResourceRequirements = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cpu_limit" }),
+        SpeakeasyMetadata({ data: "json, name=cpu_limit" }),
         __metadata("design:type", String)
     ], ResourceRequirements.prototype, "cpuLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=cpu_request" }),
+        SpeakeasyMetadata({ data: "json, name=cpu_request" }),
         __metadata("design:type", String)
     ], ResourceRequirements.prototype, "cpuRequest", void 0);
     __decorate([
-        Metadata({ data: "json, name=memory_limit" }),
+        SpeakeasyMetadata({ data: "json, name=memory_limit" }),
         __metadata("design:type", String)
     ], ResourceRequirements.prototype, "memoryLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=memory_request" }),
+        SpeakeasyMetadata({ data: "json, name=memory_request" }),
         __metadata("design:type", String)
     ], ResourceRequirements.prototype, "memoryRequest", void 0);
     return ResourceRequirements;

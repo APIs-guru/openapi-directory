@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1Processor } from "./googleclouddocumentaiv1processor";
+
 
 
 // GoogleCloudDocumentaiV1ListProcessorsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDocumentaiV1Processor } from "./googleclouddocumentaiv1proce
  * Response message for list processors.
 **/
 export class GoogleCloudDocumentaiV1ListProcessorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=processors", elemType: shared.GoogleCloudDocumentaiV1Processor })
+  @SpeakeasyMetadata({ data: "json, name=processors", elemType: GoogleCloudDocumentaiV1Processor })
   processors?: GoogleCloudDocumentaiV1Processor[];
 }

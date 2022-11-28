@@ -1,17 +1,12 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class DeleteFilesV3FilesFileIdArchivePathParams extends SpeakeasyBase {
     fileId: string;
 }
-export declare class DeleteFilesV3FilesFileIdArchiveSecurityOption1 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class DeleteFilesV3FilesFileIdArchiveSecurityOption2 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class DeleteFilesV3FilesFileIdArchiveSecurity extends SpeakeasyBase {
-    option1?: DeleteFilesV3FilesFileIdArchiveSecurityOption1;
-    option2?: DeleteFilesV3FilesFileIdArchiveSecurityOption2;
+    hapikey?: shared.SchemeHapikey;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 export declare class DeleteFilesV3FilesFileIdArchiveRequest extends SpeakeasyBase {
     pathParams: DeleteFilesV3FilesFileIdArchivePathParams;

@@ -151,6 +151,8 @@ type RepositoryTemplateRepository struct {
 	WatchersCount          *int64                                   `json:"watchers_count,omitempty"`
 }
 
+// Repository
+// A git repository
 type Repository struct {
 	AllowMergeCommit       *bool                         `json:"allow_merge_commit,omitempty"`
 	AllowRebaseMerge       *bool                         `json:"allow_rebase_merge,omitempty"`

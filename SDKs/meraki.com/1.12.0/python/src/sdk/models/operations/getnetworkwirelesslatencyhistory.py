@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 
 @dataclass
 class GetNetworkWirelessLatencyHistoryPathParams:
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 class GetNetworkWirelessLatencyHistoryAccessCategoryEnum(str, Enum):
     BACKGROUND_TRAFFIC = "backgroundTraffic"
@@ -34,13 +35,13 @@ class GetNetworkWirelessLatencyHistoryQueryParams:
 
 @dataclass
 class GetNetworkWirelessLatencyHistoryRequest:
-    path_params: GetNetworkWirelessLatencyHistoryPathParams = field(default=None)
-    query_params: GetNetworkWirelessLatencyHistoryQueryParams = field(default=None)
+    path_params: GetNetworkWirelessLatencyHistoryPathParams = field()
+    query_params: GetNetworkWirelessLatencyHistoryQueryParams = field()
     
 
 @dataclass
 class GetNetworkWirelessLatencyHistoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_network_wireless_latency_history_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

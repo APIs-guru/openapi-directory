@@ -4,10 +4,6 @@ type CreateGroupIfNotExistsForUsingPostQueryParams struct {
 	GroupMapper *string `queryParam:"style=form,explode=true,name=groupMapper"`
 }
 
-type CreateGroupIfNotExistsForUsingPostRequest struct {
-	QueryParams CreateGroupIfNotExistsForUsingPostQueryParams
-}
-
 type CreateGroupIfNotExistsForUsingPost200ApplicationJSONData struct {
 	GroupID *string `json:"groupID,omitempty"`
 }
@@ -34,6 +30,10 @@ type CreateGroupIfNotExistsForUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateGroupIfNotExistsForUsingPostRequest struct {
+	QueryParams CreateGroupIfNotExistsForUsingPostQueryParams
 }
 
 type CreateGroupIfNotExistsForUsingPostResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // KinesisFirehoseOutputUpdate
 /**
  * For a SQL-based Kinesis Data Analytics application, when updating an output configuration using the <a>UpdateApplication</a> operation, provides information about a Kinesis Data Firehose delivery stream that is configured as the destination.
@@ -33,7 +33,7 @@ var KinesisFirehoseOutputUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ResourceARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceARNUpdate" }),
         __metadata("design:type", String)
     ], KinesisFirehoseOutputUpdate.prototype, "resourceArnUpdate", void 0);
     return KinesisFirehoseOutputUpdate;

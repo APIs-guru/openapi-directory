@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryRolesPatchPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
-    role_id: str = field(default=None, metadata={'path_param': { 'field_name': 'roleId', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    role_id: str = field(metadata={'path_param': { 'field_name': 'roleId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DirectoryRolesPatchQueryParams:
 
 @dataclass
 class DirectoryRolesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryRolesPatchRequest:
-    path_params: DirectoryRolesPatchPathParams = field(default=None)
-    query_params: DirectoryRolesPatchQueryParams = field(default=None)
+    path_params: DirectoryRolesPatchPathParams = field()
+    query_params: DirectoryRolesPatchQueryParams = field()
+    security: DirectoryRolesPatchSecurity = field()
     request: Optional[shared.Role] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryRolesPatchSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryRolesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     role: Optional[shared.Role] = field(default=None)
-    status_code: int = field(default=None)
     

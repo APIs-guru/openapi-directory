@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteAddonPathParams:
-    addon_name: str = field(default=None, metadata={'path_param': { 'field_name': 'addonName', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    addon_name: str = field(metadata={'path_param': { 'field_name': 'addonName', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class DeleteAddonHeaders:
 
 @dataclass
 class DeleteAddonRequest:
-    path_params: DeleteAddonPathParams = field(default=None)
-    query_params: DeleteAddonQueryParams = field(default=None)
-    headers: DeleteAddonHeaders = field(default=None)
+    headers: DeleteAddonHeaders = field()
+    path_params: DeleteAddonPathParams = field()
+    query_params: DeleteAddonQueryParams = field()
     
 
 @dataclass
 class DeleteAddonResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_addon_response: Optional[shared.DeleteAddonResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

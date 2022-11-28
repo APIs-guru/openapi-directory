@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudRunConfig } from "./cloudrunconfig";
 import { ConfigConnectorConfig } from "./configconnectorconfig";
 import { DnsCacheConfig } from "./dnscacheconfig";
@@ -13,44 +13,45 @@ import { KubernetesDashboard } from "./kubernetesdashboard";
 import { NetworkPolicyConfig } from "./networkpolicyconfig";
 
 
+
 // AddonsConfig
 /** 
  * Configuration for the addons that can be automatically spun up in the cluster, enabling additional functionality.
 **/
 export class AddonsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudRunConfig" })
+  @SpeakeasyMetadata({ data: "json, name=cloudRunConfig" })
   cloudRunConfig?: CloudRunConfig;
 
-  @Metadata({ data: "json, name=configConnectorConfig" })
+  @SpeakeasyMetadata({ data: "json, name=configConnectorConfig" })
   configConnectorConfig?: ConfigConnectorConfig;
 
-  @Metadata({ data: "json, name=dnsCacheConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dnsCacheConfig" })
   dnsCacheConfig?: DnsCacheConfig;
 
-  @Metadata({ data: "json, name=gcePersistentDiskCsiDriverConfig" })
+  @SpeakeasyMetadata({ data: "json, name=gcePersistentDiskCsiDriverConfig" })
   gcePersistentDiskCsiDriverConfig?: GcePersistentDiskCsiDriverConfig;
 
-  @Metadata({ data: "json, name=gcpFilestoreCsiDriverConfig" })
+  @SpeakeasyMetadata({ data: "json, name=gcpFilestoreCsiDriverConfig" })
   gcpFilestoreCsiDriverConfig?: GcpFilestoreCsiDriverConfig;
 
-  @Metadata({ data: "json, name=gkeBackupAgentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=gkeBackupAgentConfig" })
   gkeBackupAgentConfig?: GkeBackupAgentConfig;
 
-  @Metadata({ data: "json, name=horizontalPodAutoscaling" })
+  @SpeakeasyMetadata({ data: "json, name=horizontalPodAutoscaling" })
   horizontalPodAutoscaling?: HorizontalPodAutoscaling;
 
-  @Metadata({ data: "json, name=httpLoadBalancing" })
+  @SpeakeasyMetadata({ data: "json, name=httpLoadBalancing" })
   httpLoadBalancing?: HttpLoadBalancing;
 
-  @Metadata({ data: "json, name=istioConfig" })
+  @SpeakeasyMetadata({ data: "json, name=istioConfig" })
   istioConfig?: IstioConfig;
 
-  @Metadata({ data: "json, name=kalmConfig" })
+  @SpeakeasyMetadata({ data: "json, name=kalmConfig" })
   kalmConfig?: KalmConfig;
 
-  @Metadata({ data: "json, name=kubernetesDashboard" })
+  @SpeakeasyMetadata({ data: "json, name=kubernetesDashboard" })
   kubernetesDashboard?: KubernetesDashboard;
 
-  @Metadata({ data: "json, name=networkPolicyConfig" })
+  @SpeakeasyMetadata({ data: "json, name=networkPolicyConfig" })
   networkPolicyConfig?: NetworkPolicyConfig;
 }

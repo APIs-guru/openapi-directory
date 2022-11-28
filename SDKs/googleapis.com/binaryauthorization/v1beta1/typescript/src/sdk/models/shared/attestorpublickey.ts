@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PkixPublicKey } from "./pkixpublickey";
+
 
 
 // AttestorPublicKey
@@ -7,15 +8,15 @@ import { PkixPublicKey } from "./pkixpublickey";
  * An attestor public key that will be used to verify attestations signed by this attestor.
 **/
 export class AttestorPublicKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asciiArmoredPgpPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=asciiArmoredPgpPublicKey" })
   asciiArmoredPgpPublicKey?: string;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=pkixPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=pkixPublicKey" })
   pkixPublicKey?: PkixPublicKey;
 }

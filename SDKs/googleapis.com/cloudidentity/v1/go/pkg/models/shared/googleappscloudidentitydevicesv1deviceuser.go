@@ -28,6 +28,8 @@ const (
 	GoogleAppsCloudidentityDevicesV1DeviceUserPasswordStateEnumPasswordNotSet           GoogleAppsCloudidentityDevicesV1DeviceUserPasswordStateEnum = "PASSWORD_NOT_SET"
 )
 
+// GoogleAppsCloudidentityDevicesV1DeviceUser
+// Represents a user's use of a Device in the Cloud Identity Devices API. A DeviceUser is a resource representing a user's use of a Device
 type GoogleAppsCloudidentityDevicesV1DeviceUser struct {
 	CompromisedState *GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedStateEnum `json:"compromisedState,omitempty"`
 	CreateTime       *string                                                         `json:"createTime,omitempty"`

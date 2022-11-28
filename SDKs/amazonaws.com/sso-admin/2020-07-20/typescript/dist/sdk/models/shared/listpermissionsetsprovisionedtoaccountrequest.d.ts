@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningStatusEnum } from "./provisioningstatusenum";
 export declare class ListPermissionSetsProvisionedToAccountRequest extends SpeakeasyBase {
     accountId: string;

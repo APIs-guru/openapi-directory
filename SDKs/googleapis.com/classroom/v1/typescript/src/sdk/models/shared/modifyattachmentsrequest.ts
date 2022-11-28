@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
+
 
 
 // ModifyAttachmentsRequest
@@ -8,6 +8,6 @@ import { Attachment } from "./attachment";
  * Request to modify the attachments of a student submission.
 **/
 export class ModifyAttachmentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addAttachments", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=addAttachments", elemType: Attachment })
   addAttachments?: Attachment[];
 }

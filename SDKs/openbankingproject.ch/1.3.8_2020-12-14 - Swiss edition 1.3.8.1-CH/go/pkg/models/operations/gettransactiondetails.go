@@ -31,14 +31,14 @@ type GetTransactionDetailsSecurity struct {
 	BearerAuthOAuth *shared.SchemeBearerAuthOAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
+type GetTransactionDetails200ApplicationJSON struct {
+	TransactionsDetails shared.TransactionDetailsBody `json:"transactionsDetails"`
+}
+
 type GetTransactionDetailsRequest struct {
 	PathParams GetTransactionDetailsPathParams
 	Headers    GetTransactionDetailsHeaders
 	Security   GetTransactionDetailsSecurity
-}
-
-type GetTransactionDetails200ApplicationJSON struct {
-	TransactionsDetails shared.TransactionDetailsBody `json:"transactionsDetails"`
 }
 
 type GetTransactionDetailsResponse struct {

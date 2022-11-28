@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EndpointDemographic
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies demographic information about an endpoint, such as the applicable time zone and platform.
 **/
 export class EndpointDemographic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AppVersion" })
   appVersion?: string;
 
-  @Metadata({ data: "json, name=Locale" })
+  @SpeakeasyMetadata({ data: "json, name=Locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=Make" })
+  @SpeakeasyMetadata({ data: "json, name=Make" })
   make?: string;
 
-  @Metadata({ data: "json, name=Model" })
+  @SpeakeasyMetadata({ data: "json, name=Model" })
   model?: string;
 
-  @Metadata({ data: "json, name=ModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ModelVersion" })
   modelVersion?: string;
 
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform?: string;
 
-  @Metadata({ data: "json, name=PlatformVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PlatformVersion" })
   platformVersion?: string;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 }

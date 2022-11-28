@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PutConfigurationSetDeliveryOptionsPathParams:
-    configuration_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
+    configuration_set_name: str = field(metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,23 +31,23 @@ class PutConfigurationSetDeliveryOptionsRequestBodyTLSPolicyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutConfigurationSetDeliveryOptionsRequestBody:
-    sending_pool_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SendingPoolName' }})
-    tls_policy: Optional[PutConfigurationSetDeliveryOptionsRequestBodyTLSPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TlsPolicy' }})
+    sending_pool_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SendingPoolName') }})
+    tls_policy: Optional[PutConfigurationSetDeliveryOptionsRequestBodyTLSPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TlsPolicy') }})
     
 
 @dataclass
 class PutConfigurationSetDeliveryOptionsRequest:
-    path_params: PutConfigurationSetDeliveryOptionsPathParams = field(default=None)
-    headers: PutConfigurationSetDeliveryOptionsHeaders = field(default=None)
-    request: PutConfigurationSetDeliveryOptionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutConfigurationSetDeliveryOptionsHeaders = field()
+    path_params: PutConfigurationSetDeliveryOptionsPathParams = field()
+    request: PutConfigurationSetDeliveryOptionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutConfigurationSetDeliveryOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     put_configuration_set_delivery_options_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

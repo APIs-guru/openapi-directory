@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import storagevirtualmachinefiltername_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StorageVirtualMachineFilter:
-    name: Optional[storagevirtualmachinefiltername_enum.StorageVirtualMachineFilterNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""StorageVirtualMachineFilter
+    A filter used to restrict the results of describe calls for Amazon FSx for NetApp ONTAP storage virtual machines (SVMs). You can use multiple filters to return results that meet all applied filter requirements.
+    """
+    
+    name: Optional[StorageVirtualMachineFilterNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
     

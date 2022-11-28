@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ApplicationsCreatePathParams:
-    tenant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
+    tenant_id: str = field(metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ApplicationsCreateQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,15 +21,15 @@ class ApplicationsCreateRequests:
 
 @dataclass
 class ApplicationsCreateRequest:
-    path_params: ApplicationsCreatePathParams = field(default=None)
-    query_params: ApplicationsCreateQueryParams = field(default=None)
-    request: ApplicationsCreateRequests = field(default=None)
+    path_params: ApplicationsCreatePathParams = field()
+    query_params: ApplicationsCreateQueryParams = field()
+    request: ApplicationsCreateRequests = field()
     
 
 @dataclass
 class ApplicationsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     application: Optional[dict[str, dict[str, Any]]] = field(default=None)
-    content_type: str = field(default=None)
     graph_error: Optional[shared.GraphError] = field(default=None)
-    status_code: int = field(default=None)
     

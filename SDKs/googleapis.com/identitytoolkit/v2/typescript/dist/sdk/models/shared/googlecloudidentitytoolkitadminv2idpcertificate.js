@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudIdentitytoolkitAdminV2IdpCertificate
 /**
  * The IDP's certificate data to verify the signature in the SAMLResponse issued by the IDP.
@@ -33,7 +33,7 @@ var GoogleCloudIdentitytoolkitAdminV2IdpCertificate = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=x509Certificate" }),
+        SpeakeasyMetadata({ data: "json, name=x509Certificate" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2IdpCertificate.prototype, "x509Certificate", void 0);
     return GoogleCloudIdentitytoolkitAdminV2IdpCertificate;

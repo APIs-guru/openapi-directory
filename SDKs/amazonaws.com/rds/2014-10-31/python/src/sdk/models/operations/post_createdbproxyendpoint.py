@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateDbProxyEndpointActionEnum(str, Enum):
     CREATE_DB_PROXY_ENDPOINT = "CreateDBProxyEndpoint"
@@ -10,8 +14,8 @@ class PostCreateDbProxyEndpointVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateDbProxyEndpointQueryParams:
-    action: PostCreateDbProxyEndpointActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateDbProxyEndpointVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateDbProxyEndpointActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateDbProxyEndpointVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateDbProxyEndpointHeaders:
 
 @dataclass
 class PostCreateDbProxyEndpointRequest:
-    query_params: PostCreateDbProxyEndpointQueryParams = field(default=None)
-    headers: PostCreateDbProxyEndpointHeaders = field(default=None)
+    headers: PostCreateDbProxyEndpointHeaders = field()
+    query_params: PostCreateDbProxyEndpointQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateDbProxyEndpointResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

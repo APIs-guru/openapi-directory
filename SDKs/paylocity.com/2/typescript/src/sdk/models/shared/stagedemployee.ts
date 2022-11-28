@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StagedEmployeeAdditionalDirectDeposit
@@ -7,25 +7,25 @@ import * as shared from "../shared";
  * The additional direct deposit model
 **/
 export class StagedEmployeeAdditionalDirectDeposit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=accountType" })
+  @SpeakeasyMetadata({ data: "json, name=accountType" })
   accountType?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=amountType" })
+  @SpeakeasyMetadata({ data: "json, name=amountType" })
   amountType?: string;
 
-  @Metadata({ data: "json, name=isSkipPreNote" })
+  @SpeakeasyMetadata({ data: "json, name=isSkipPreNote" })
   isSkipPreNote?: boolean;
 
-  @Metadata({ data: "json, name=preNoteDate" })
+  @SpeakeasyMetadata({ data: "json, name=preNoteDate" })
   preNoteDate?: string;
 
-  @Metadata({ data: "json, name=routingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=routingNumber" })
   routingNumber?: string;
 }
 
@@ -35,22 +35,22 @@ export class StagedEmployeeAdditionalDirectDeposit extends SpeakeasyBase {
  * The benefit setup model
 **/
 export class StagedEmployeeBenefitSetup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=benefitClass" })
+  @SpeakeasyMetadata({ data: "json, name=benefitClass" })
   benefitClass?: string;
 
-  @Metadata({ data: "json, name=benefitClassEffectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=benefitClassEffectiveDate" })
   benefitClassEffectiveDate?: string;
 
-  @Metadata({ data: "json, name=benefitSalary" })
+  @SpeakeasyMetadata({ data: "json, name=benefitSalary" })
   benefitSalary?: number;
 
-  @Metadata({ data: "json, name=benefitSalaryEffectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=benefitSalaryEffectiveDate" })
   benefitSalaryEffectiveDate?: string;
 
-  @Metadata({ data: "json, name=doNotApplyAdministrativePeriod" })
+  @SpeakeasyMetadata({ data: "json, name=doNotApplyAdministrativePeriod" })
   doNotApplyAdministrativePeriod?: boolean;
 
-  @Metadata({ data: "json, name=isMeasureAcaEligibility" })
+  @SpeakeasyMetadata({ data: "json, name=isMeasureAcaEligibility" })
   isMeasureAcaEligibility?: boolean;
 }
 
@@ -60,13 +60,13 @@ export enum StagedEmployeeCustomBooleanFieldsCategoryEnum {
 
 
 export class StagedEmployeeCustomBooleanFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: StagedEmployeeCustomBooleanFieldsCategoryEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: boolean;
 }
 
@@ -76,13 +76,13 @@ export enum StagedEmployeeCustomDateFieldsCategoryEnum {
 
 
 export class StagedEmployeeCustomDateFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: StagedEmployeeCustomDateFieldsCategoryEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
@@ -92,13 +92,13 @@ export enum StagedEmployeeCustomDropDownFieldsCategoryEnum {
 
 
 export class StagedEmployeeCustomDropDownFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: StagedEmployeeCustomDropDownFieldsCategoryEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
@@ -108,13 +108,13 @@ export enum StagedEmployeeCustomNumberFieldsCategoryEnum {
 
 
 export class StagedEmployeeCustomNumberFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: StagedEmployeeCustomNumberFieldsCategoryEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: number;
 }
 
@@ -124,13 +124,13 @@ export enum StagedEmployeeCustomTextFieldsCategoryEnum {
 
 
 export class StagedEmployeeCustomTextFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: StagedEmployeeCustomTextFieldsCategoryEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
@@ -140,76 +140,76 @@ export class StagedEmployeeCustomTextFields extends SpeakeasyBase {
  * The Department Position model
 **/
 export class StagedEmployeeDepartmentPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changeReason" })
+  @SpeakeasyMetadata({ data: "json, name=changeReason" })
   changeReason?: string;
 
-  @Metadata({ data: "json, name=clockBadgeNumber" })
+  @SpeakeasyMetadata({ data: "json, name=clockBadgeNumber" })
   clockBadgeNumber?: string;
 
-  @Metadata({ data: "json, name=costCenter1" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter1" })
   costCenter1?: string;
 
-  @Metadata({ data: "json, name=costCenter2" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter2" })
   costCenter2?: string;
 
-  @Metadata({ data: "json, name=costCenter3" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter3" })
   costCenter3?: string;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=employeeType" })
+  @SpeakeasyMetadata({ data: "json, name=employeeType" })
   employeeType?: string;
 
-  @Metadata({ data: "json, name=equalEmploymentOpportunityClass" })
+  @SpeakeasyMetadata({ data: "json, name=equalEmploymentOpportunityClass" })
   equalEmploymentOpportunityClass?: string;
 
-  @Metadata({ data: "json, name=isMinimumWageExempt" })
+  @SpeakeasyMetadata({ data: "json, name=isMinimumWageExempt" })
   isMinimumWageExempt?: boolean;
 
-  @Metadata({ data: "json, name=isOvertimeExempt" })
+  @SpeakeasyMetadata({ data: "json, name=isOvertimeExempt" })
   isOvertimeExempt?: boolean;
 
-  @Metadata({ data: "json, name=isSupervisorReviewer" })
+  @SpeakeasyMetadata({ data: "json, name=isSupervisorReviewer" })
   isSupervisorReviewer?: boolean;
 
-  @Metadata({ data: "json, name=isUnionDuesCollected" })
+  @SpeakeasyMetadata({ data: "json, name=isUnionDuesCollected" })
   isUnionDuesCollected?: boolean;
 
-  @Metadata({ data: "json, name=isUnionInitiationCollected" })
+  @SpeakeasyMetadata({ data: "json, name=isUnionInitiationCollected" })
   isUnionInitiationCollected?: boolean;
 
-  @Metadata({ data: "json, name=jobTitle" })
+  @SpeakeasyMetadata({ data: "json, name=jobTitle" })
   jobTitle?: string;
 
-  @Metadata({ data: "json, name=payGroup" })
+  @SpeakeasyMetadata({ data: "json, name=payGroup" })
   payGroup?: string;
 
-  @Metadata({ data: "json, name=positionCode" })
+  @SpeakeasyMetadata({ data: "json, name=positionCode" })
   positionCode?: string;
 
-  @Metadata({ data: "json, name=shift" })
+  @SpeakeasyMetadata({ data: "json, name=shift" })
   shift?: string;
 
-  @Metadata({ data: "json, name=supervisorCompanyNumber" })
+  @SpeakeasyMetadata({ data: "json, name=supervisorCompanyNumber" })
   supervisorCompanyNumber?: string;
 
-  @Metadata({ data: "json, name=supervisorEmployeeId" })
+  @SpeakeasyMetadata({ data: "json, name=supervisorEmployeeId" })
   supervisorEmployeeId?: string;
 
-  @Metadata({ data: "json, name=tipped" })
+  @SpeakeasyMetadata({ data: "json, name=tipped" })
   tipped?: string;
 
-  @Metadata({ data: "json, name=unionAffiliationDate" })
+  @SpeakeasyMetadata({ data: "json, name=unionAffiliationDate" })
   unionAffiliationDate?: string;
 
-  @Metadata({ data: "json, name=unionCode" })
+  @SpeakeasyMetadata({ data: "json, name=unionCode" })
   unionCode?: string;
 
-  @Metadata({ data: "json, name=unionPosition" })
+  @SpeakeasyMetadata({ data: "json, name=unionPosition" })
   unionPosition?: string;
 
-  @Metadata({ data: "json, name=workersCompensation" })
+  @SpeakeasyMetadata({ data: "json, name=workersCompensation" })
   workersCompensation?: string;
 }
 
@@ -219,34 +219,34 @@ export class StagedEmployeeDepartmentPosition extends SpeakeasyBase {
  * The Federal Tax model
 **/
 export class StagedEmployeeFederalTax extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=deductionsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=deductionsAmount" })
   deductionsAmount?: number;
 
-  @Metadata({ data: "json, name=dependentsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=dependentsAmount" })
   dependentsAmount?: number;
 
-  @Metadata({ data: "json, name=exemptions" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions" })
   exemptions?: number;
 
-  @Metadata({ data: "json, name=filingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=filingStatus" })
   filingStatus?: string;
 
-  @Metadata({ data: "json, name=higherRate" })
+  @SpeakeasyMetadata({ data: "json, name=higherRate" })
   higherRate?: boolean;
 
-  @Metadata({ data: "json, name=otherIncomeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" })
   otherIncomeAmount?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=taxCalculationCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCalculationCode" })
   taxCalculationCode?: string;
 
-  @Metadata({ data: "json, name=w4FormYear" })
+  @SpeakeasyMetadata({ data: "json, name=w4FormYear" })
   w4FormYear?: number;
 }
 
@@ -256,34 +256,34 @@ export class StagedEmployeeFederalTax extends SpeakeasyBase {
  * The address model
 **/
 export class StagedEmployeeHomeAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address1" })
+  @SpeakeasyMetadata({ data: "json, name=address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=address2" })
+  @SpeakeasyMetadata({ data: "json, name=address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=county" })
+  @SpeakeasyMetadata({ data: "json, name=county" })
   county?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=mobilePhone" })
+  @SpeakeasyMetadata({ data: "json, name=mobilePhone" })
   mobilePhone?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }
 
@@ -293,22 +293,22 @@ export class StagedEmployeeHomeAddress extends SpeakeasyBase {
  * The Local Tax model
 **/
 export class StagedEmployeeLocalTax extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exemptions" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions" })
   exemptions?: number;
 
-  @Metadata({ data: "json, name=exemptions2" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions2" })
   exemptions2?: number;
 
-  @Metadata({ data: "json, name=filingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=filingStatus" })
   filingStatus?: string;
 
-  @Metadata({ data: "json, name=residentPSD" })
+  @SpeakeasyMetadata({ data: "json, name=residentPSD" })
   residentPsd?: string;
 
-  @Metadata({ data: "json, name=taxCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCode" })
   taxCode?: string;
 
-  @Metadata({ data: "json, name=workPSD" })
+  @SpeakeasyMetadata({ data: "json, name=workPSD" })
   workPsd?: string;
 }
 
@@ -318,19 +318,19 @@ export class StagedEmployeeLocalTax extends SpeakeasyBase {
  * The Main Direct Deposit model
 **/
 export class StagedEmployeeMainDirectDeposit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=accountType" })
+  @SpeakeasyMetadata({ data: "json, name=accountType" })
   accountType?: string;
 
-  @Metadata({ data: "json, name=isSkipPreNote" })
+  @SpeakeasyMetadata({ data: "json, name=isSkipPreNote" })
   isSkipPreNote?: boolean;
 
-  @Metadata({ data: "json, name=preNoteDate" })
+  @SpeakeasyMetadata({ data: "json, name=preNoteDate" })
   preNoteDate?: string;
 
-  @Metadata({ data: "json, name=routingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=routingNumber" })
   routingNumber?: string;
 }
 
@@ -340,46 +340,46 @@ export class StagedEmployeeMainDirectDeposit extends SpeakeasyBase {
  * The Non-Primary State Tax model
 **/
 export class StagedEmployeeNonPrimaryStateTax extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=deductionsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=deductionsAmount" })
   deductionsAmount?: number;
 
-  @Metadata({ data: "json, name=dependentsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=dependentsAmount" })
   dependentsAmount?: number;
 
-  @Metadata({ data: "json, name=exemptions" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions" })
   exemptions?: number;
 
-  @Metadata({ data: "json, name=exemptions2" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions2" })
   exemptions2?: number;
 
-  @Metadata({ data: "json, name=filingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=filingStatus" })
   filingStatus?: string;
 
-  @Metadata({ data: "json, name=higherRate" })
+  @SpeakeasyMetadata({ data: "json, name=higherRate" })
   higherRate?: boolean;
 
-  @Metadata({ data: "json, name=otherIncomeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" })
   otherIncomeAmount?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=reciprocityCode" })
+  @SpeakeasyMetadata({ data: "json, name=reciprocityCode" })
   reciprocityCode?: string;
 
-  @Metadata({ data: "json, name=specialCheckCalc" })
+  @SpeakeasyMetadata({ data: "json, name=specialCheckCalc" })
   specialCheckCalc?: string;
 
-  @Metadata({ data: "json, name=taxCalculationCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCalculationCode" })
   taxCalculationCode?: string;
 
-  @Metadata({ data: "json, name=taxCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCode" })
   taxCode?: string;
 
-  @Metadata({ data: "json, name=w4FormYear" })
+  @SpeakeasyMetadata({ data: "json, name=w4FormYear" })
   w4FormYear?: number;
 }
 
@@ -389,34 +389,34 @@ export class StagedEmployeeNonPrimaryStateTax extends SpeakeasyBase {
  * The Primary Pay Rate model
 **/
 export class StagedEmployeePrimaryPayRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseRate" })
+  @SpeakeasyMetadata({ data: "json, name=baseRate" })
   baseRate?: number;
 
-  @Metadata({ data: "json, name=changeReason" })
+  @SpeakeasyMetadata({ data: "json, name=changeReason" })
   changeReason?: string;
 
-  @Metadata({ data: "json, name=defaultHours" })
+  @SpeakeasyMetadata({ data: "json, name=defaultHours" })
   defaultHours?: number;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=isAutoPay" })
+  @SpeakeasyMetadata({ data: "json, name=isAutoPay" })
   isAutoPay?: boolean;
 
-  @Metadata({ data: "json, name=payFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=payFrequency" })
   payFrequency?: string;
 
-  @Metadata({ data: "json, name=payGrade" })
+  @SpeakeasyMetadata({ data: "json, name=payGrade" })
   payGrade?: string;
 
-  @Metadata({ data: "json, name=payType" })
+  @SpeakeasyMetadata({ data: "json, name=payType" })
   payType?: string;
 
-  @Metadata({ data: "json, name=ratePer" })
+  @SpeakeasyMetadata({ data: "json, name=ratePer" })
   ratePer?: string;
 
-  @Metadata({ data: "json, name=salary" })
+  @SpeakeasyMetadata({ data: "json, name=salary" })
   salary?: number;
 }
 
@@ -426,43 +426,43 @@ export class StagedEmployeePrimaryPayRate extends SpeakeasyBase {
  * The State Tax model
 **/
 export class StagedEmployeePrimaryStateTax extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=deductionsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=deductionsAmount" })
   deductionsAmount?: number;
 
-  @Metadata({ data: "json, name=dependentsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=dependentsAmount" })
   dependentsAmount?: number;
 
-  @Metadata({ data: "json, name=exemptions" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions" })
   exemptions?: number;
 
-  @Metadata({ data: "json, name=exemptions2" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions2" })
   exemptions2?: number;
 
-  @Metadata({ data: "json, name=filingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=filingStatus" })
   filingStatus?: string;
 
-  @Metadata({ data: "json, name=higherRate" })
+  @SpeakeasyMetadata({ data: "json, name=higherRate" })
   higherRate?: boolean;
 
-  @Metadata({ data: "json, name=otherIncomeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" })
   otherIncomeAmount?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=specialCheckCalc" })
+  @SpeakeasyMetadata({ data: "json, name=specialCheckCalc" })
   specialCheckCalc?: string;
 
-  @Metadata({ data: "json, name=taxCalculationCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCalculationCode" })
   taxCalculationCode?: string;
 
-  @Metadata({ data: "json, name=taxCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCode" })
   taxCode?: string;
 
-  @Metadata({ data: "json, name=w4FormYear" })
+  @SpeakeasyMetadata({ data: "json, name=w4FormYear" })
   w4FormYear?: number;
 }
 
@@ -472,22 +472,22 @@ export class StagedEmployeePrimaryStateTax extends SpeakeasyBase {
  * The employee status model
 **/
 export class StagedEmployeeStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adjustedSeniorityDate" })
+  @SpeakeasyMetadata({ data: "json, name=adjustedSeniorityDate" })
   adjustedSeniorityDate?: string;
 
-  @Metadata({ data: "json, name=changeReason" })
+  @SpeakeasyMetadata({ data: "json, name=changeReason" })
   changeReason?: string;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=employeeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=employeeStatus" })
   employeeStatus?: string;
 
-  @Metadata({ data: "json, name=hireDate" })
+  @SpeakeasyMetadata({ data: "json, name=hireDate" })
   hireDate?: string;
 
-  @Metadata({ data: "json, name=isEligibleForRehire" })
+  @SpeakeasyMetadata({ data: "json, name=isEligibleForRehire" })
   isEligibleForRehire?: boolean;
 }
 
@@ -497,13 +497,13 @@ export class StagedEmployeeStatus extends SpeakeasyBase {
  * Add Web Time badge number and charge rate and synchronize Web Pay and Web Time employee data.
 **/
 export class StagedEmployeeWebTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=badgeNumber" })
+  @SpeakeasyMetadata({ data: "json, name=badgeNumber" })
   badgeNumber?: string;
 
-  @Metadata({ data: "json, name=chargeRate" })
+  @SpeakeasyMetadata({ data: "json, name=chargeRate" })
   chargeRate?: number;
 
-  @Metadata({ data: "json, name=isTimeLaborEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isTimeLaborEnabled" })
   isTimeLaborEnabled?: boolean;
 }
 
@@ -513,40 +513,40 @@ export class StagedEmployeeWebTime extends SpeakeasyBase {
  * The address model
 **/
 export class StagedEmployeeWorkAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address1" })
+  @SpeakeasyMetadata({ data: "json, name=address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=address2" })
+  @SpeakeasyMetadata({ data: "json, name=address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=county" })
+  @SpeakeasyMetadata({ data: "json, name=county" })
   county?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=mobilePhone" })
+  @SpeakeasyMetadata({ data: "json, name=mobilePhone" })
   mobilePhone?: string;
 
-  @Metadata({ data: "json, name=pager" })
+  @SpeakeasyMetadata({ data: "json, name=pager" })
   pager?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=phoneExtension" })
+  @SpeakeasyMetadata({ data: "json, name=phoneExtension" })
   phoneExtension?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }
 
@@ -556,46 +556,46 @@ export class StagedEmployeeWorkAddress extends SpeakeasyBase {
  * The Work Eligibility model
 **/
 export class StagedEmployeeWorkEligibility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alienOrAdmissionDocumentNumber" })
+  @SpeakeasyMetadata({ data: "json, name=alienOrAdmissionDocumentNumber" })
   alienOrAdmissionDocumentNumber?: string;
 
-  @Metadata({ data: "json, name=attestedDate" })
+  @SpeakeasyMetadata({ data: "json, name=attestedDate" })
   attestedDate?: string;
 
-  @Metadata({ data: "json, name=countryOfIssuance" })
+  @SpeakeasyMetadata({ data: "json, name=countryOfIssuance" })
   countryOfIssuance?: string;
 
-  @Metadata({ data: "json, name=foreignPassportNumber" })
+  @SpeakeasyMetadata({ data: "json, name=foreignPassportNumber" })
   foreignPassportNumber?: string;
 
-  @Metadata({ data: "json, name=i94AdmissionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=i94AdmissionNumber" })
   i94AdmissionNumber?: string;
 
-  @Metadata({ data: "json, name=i9DateVerified" })
+  @SpeakeasyMetadata({ data: "json, name=i9DateVerified" })
   i9DateVerified?: string;
 
-  @Metadata({ data: "json, name=i9Notes" })
+  @SpeakeasyMetadata({ data: "json, name=i9Notes" })
   i9Notes?: string;
 
-  @Metadata({ data: "json, name=isI9Verified" })
+  @SpeakeasyMetadata({ data: "json, name=isI9Verified" })
   isI9Verified?: boolean;
 
-  @Metadata({ data: "json, name=isSsnVerified" })
+  @SpeakeasyMetadata({ data: "json, name=isSsnVerified" })
   isSsnVerified?: boolean;
 
-  @Metadata({ data: "json, name=ssnDateVerified" })
+  @SpeakeasyMetadata({ data: "json, name=ssnDateVerified" })
   ssnDateVerified?: string;
 
-  @Metadata({ data: "json, name=ssnNotes" })
+  @SpeakeasyMetadata({ data: "json, name=ssnNotes" })
   ssnNotes?: string;
 
-  @Metadata({ data: "json, name=visaType" })
+  @SpeakeasyMetadata({ data: "json, name=visaType" })
   visaType?: string;
 
-  @Metadata({ data: "json, name=workAuthorization" })
+  @SpeakeasyMetadata({ data: "json, name=workAuthorization" })
   workAuthorization?: string;
 
-  @Metadata({ data: "json, name=workUntil" })
+  @SpeakeasyMetadata({ data: "json, name=workUntil" })
   workUntil?: string;
 }
 
@@ -605,138 +605,138 @@ export class StagedEmployeeWorkEligibility extends SpeakeasyBase {
  * The staged employee model
 **/
 export class StagedEmployee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalDirectDeposit", elemType: shared.StagedEmployeeAdditionalDirectDeposit })
+  @SpeakeasyMetadata({ data: "json, name=additionalDirectDeposit", elemType: StagedEmployeeAdditionalDirectDeposit })
   additionalDirectDeposit?: StagedEmployeeAdditionalDirectDeposit[];
 
-  @Metadata({ data: "json, name=benefitSetup", elemType: shared.StagedEmployeeBenefitSetup })
+  @SpeakeasyMetadata({ data: "json, name=benefitSetup", elemType: StagedEmployeeBenefitSetup })
   benefitSetup?: StagedEmployeeBenefitSetup[];
 
-  @Metadata({ data: "json, name=birthDate" })
+  @SpeakeasyMetadata({ data: "json, name=birthDate" })
   birthDate?: string;
 
-  @Metadata({ data: "json, name=customBooleanFields", elemType: shared.StagedEmployeeCustomBooleanFields })
+  @SpeakeasyMetadata({ data: "json, name=customBooleanFields", elemType: StagedEmployeeCustomBooleanFields })
   customBooleanFields?: StagedEmployeeCustomBooleanFields[];
 
-  @Metadata({ data: "json, name=customDateFields", elemType: shared.StagedEmployeeCustomDateFields })
+  @SpeakeasyMetadata({ data: "json, name=customDateFields", elemType: StagedEmployeeCustomDateFields })
   customDateFields?: StagedEmployeeCustomDateFields[];
 
-  @Metadata({ data: "json, name=customDropDownFields", elemType: shared.StagedEmployeeCustomDropDownFields })
+  @SpeakeasyMetadata({ data: "json, name=customDropDownFields", elemType: StagedEmployeeCustomDropDownFields })
   customDropDownFields?: StagedEmployeeCustomDropDownFields[];
 
-  @Metadata({ data: "json, name=customNumberFields", elemType: shared.StagedEmployeeCustomNumberFields })
+  @SpeakeasyMetadata({ data: "json, name=customNumberFields", elemType: StagedEmployeeCustomNumberFields })
   customNumberFields?: StagedEmployeeCustomNumberFields[];
 
-  @Metadata({ data: "json, name=customTextFields", elemType: shared.StagedEmployeeCustomTextFields })
+  @SpeakeasyMetadata({ data: "json, name=customTextFields", elemType: StagedEmployeeCustomTextFields })
   customTextFields?: StagedEmployeeCustomTextFields[];
 
-  @Metadata({ data: "json, name=departmentPosition", elemType: shared.StagedEmployeeDepartmentPosition })
+  @SpeakeasyMetadata({ data: "json, name=departmentPosition", elemType: StagedEmployeeDepartmentPosition })
   departmentPosition?: StagedEmployeeDepartmentPosition[];
 
-  @Metadata({ data: "json, name=disabilityDescription" })
+  @SpeakeasyMetadata({ data: "json, name=disabilityDescription" })
   disabilityDescription?: string;
 
-  @Metadata({ data: "json, name=employeeId" })
+  @SpeakeasyMetadata({ data: "json, name=employeeId" })
   employeeId?: string;
 
-  @Metadata({ data: "json, name=ethnicity" })
+  @SpeakeasyMetadata({ data: "json, name=ethnicity" })
   ethnicity?: string;
 
-  @Metadata({ data: "json, name=federalTax", elemType: shared.StagedEmployeeFederalTax })
+  @SpeakeasyMetadata({ data: "json, name=federalTax", elemType: StagedEmployeeFederalTax })
   federalTax?: StagedEmployeeFederalTax[];
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=fitwExemptReason" })
+  @SpeakeasyMetadata({ data: "json, name=fitwExemptReason" })
   fitwExemptReason?: string;
 
-  @Metadata({ data: "json, name=futaExemptReason" })
+  @SpeakeasyMetadata({ data: "json, name=futaExemptReason" })
   futaExemptReason?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=homeAddress", elemType: shared.StagedEmployeeHomeAddress })
+  @SpeakeasyMetadata({ data: "json, name=homeAddress", elemType: StagedEmployeeHomeAddress })
   homeAddress?: StagedEmployeeHomeAddress[];
 
-  @Metadata({ data: "json, name=isEmployee943" })
+  @SpeakeasyMetadata({ data: "json, name=isEmployee943" })
   isEmployee943?: boolean;
 
-  @Metadata({ data: "json, name=isSmoker" })
+  @SpeakeasyMetadata({ data: "json, name=isSmoker" })
   isSmoker?: boolean;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=localTax", elemType: shared.StagedEmployeeLocalTax })
+  @SpeakeasyMetadata({ data: "json, name=localTax", elemType: StagedEmployeeLocalTax })
   localTax?: StagedEmployeeLocalTax[];
 
-  @Metadata({ data: "json, name=mainDirectDeposit", elemType: shared.StagedEmployeeMainDirectDeposit })
+  @SpeakeasyMetadata({ data: "json, name=mainDirectDeposit", elemType: StagedEmployeeMainDirectDeposit })
   mainDirectDeposit?: StagedEmployeeMainDirectDeposit[];
 
-  @Metadata({ data: "json, name=maritalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=maritalStatus" })
   maritalStatus?: string;
 
-  @Metadata({ data: "json, name=medExemptReason" })
+  @SpeakeasyMetadata({ data: "json, name=medExemptReason" })
   medExemptReason?: string;
 
-  @Metadata({ data: "json, name=middleName" })
+  @SpeakeasyMetadata({ data: "json, name=middleName" })
   middleName?: string;
 
-  @Metadata({ data: "json, name=nonPrimaryStateTax", elemType: shared.StagedEmployeeNonPrimaryStateTax })
+  @SpeakeasyMetadata({ data: "json, name=nonPrimaryStateTax", elemType: StagedEmployeeNonPrimaryStateTax })
   nonPrimaryStateTax?: StagedEmployeeNonPrimaryStateTax[];
 
-  @Metadata({ data: "json, name=preferredName" })
+  @SpeakeasyMetadata({ data: "json, name=preferredName" })
   preferredName?: string;
 
-  @Metadata({ data: "json, name=primaryPayRate", elemType: shared.StagedEmployeePrimaryPayRate })
+  @SpeakeasyMetadata({ data: "json, name=primaryPayRate", elemType: StagedEmployeePrimaryPayRate })
   primaryPayRate?: StagedEmployeePrimaryPayRate[];
 
-  @Metadata({ data: "json, name=primaryStateTax", elemType: shared.StagedEmployeePrimaryStateTax })
+  @SpeakeasyMetadata({ data: "json, name=primaryStateTax", elemType: StagedEmployeePrimaryStateTax })
   primaryStateTax?: StagedEmployeePrimaryStateTax[];
 
-  @Metadata({ data: "json, name=priorLastName" })
+  @SpeakeasyMetadata({ data: "json, name=priorLastName" })
   priorLastName?: string;
 
-  @Metadata({ data: "json, name=salutation" })
+  @SpeakeasyMetadata({ data: "json, name=salutation" })
   salutation?: string;
 
-  @Metadata({ data: "json, name=sitwExemptReason" })
+  @SpeakeasyMetadata({ data: "json, name=sitwExemptReason" })
   sitwExemptReason?: string;
 
-  @Metadata({ data: "json, name=ssExemptReason" })
+  @SpeakeasyMetadata({ data: "json, name=ssExemptReason" })
   ssExemptReason?: string;
 
-  @Metadata({ data: "json, name=ssn" })
+  @SpeakeasyMetadata({ data: "json, name=ssn" })
   ssn?: string;
 
-  @Metadata({ data: "json, name=status", elemType: shared.StagedEmployeeStatus })
+  @SpeakeasyMetadata({ data: "json, name=status", elemType: StagedEmployeeStatus })
   status?: StagedEmployeeStatus[];
 
-  @Metadata({ data: "json, name=suffix" })
+  @SpeakeasyMetadata({ data: "json, name=suffix" })
   suffix?: string;
 
-  @Metadata({ data: "json, name=suiExemptReason" })
+  @SpeakeasyMetadata({ data: "json, name=suiExemptReason" })
   suiExemptReason?: string;
 
-  @Metadata({ data: "json, name=suiState" })
+  @SpeakeasyMetadata({ data: "json, name=suiState" })
   suiState?: string;
 
-  @Metadata({ data: "json, name=taxDistributionCode1099R" })
+  @SpeakeasyMetadata({ data: "json, name=taxDistributionCode1099R" })
   taxDistributionCode1099R?: string;
 
-  @Metadata({ data: "json, name=taxForm" })
+  @SpeakeasyMetadata({ data: "json, name=taxForm" })
   taxForm?: string;
 
-  @Metadata({ data: "json, name=veteranDescription" })
+  @SpeakeasyMetadata({ data: "json, name=veteranDescription" })
   veteranDescription?: string;
 
-  @Metadata({ data: "json, name=webTime" })
+  @SpeakeasyMetadata({ data: "json, name=webTime" })
   webTime?: StagedEmployeeWebTime;
 
-  @Metadata({ data: "json, name=workAddress", elemType: shared.StagedEmployeeWorkAddress })
+  @SpeakeasyMetadata({ data: "json, name=workAddress", elemType: StagedEmployeeWorkAddress })
   workAddress?: StagedEmployeeWorkAddress[];
 
-  @Metadata({ data: "json, name=workEligibility", elemType: shared.StagedEmployeeWorkEligibility })
+  @SpeakeasyMetadata({ data: "json, name=workEligibility", elemType: StagedEmployeeWorkEligibility })
   workEligibility?: StagedEmployeeWorkEligibility[];
 }

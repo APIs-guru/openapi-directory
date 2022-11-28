@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DomainsrdapIPGetPathParams:
-    ip_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ipId', 'style': 'simple', 'explode': False }})
-    ip_id1: str = field(default=None, metadata={'path_param': { 'field_name': 'ipId1', 'style': 'simple', 'explode': False }})
+    ip_id: str = field(metadata={'path_param': { 'field_name': 'ipId', 'style': 'simple', 'explode': False }})
+    ip_id1: str = field(metadata={'path_param': { 'field_name': 'ipId1', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,13 +27,13 @@ class DomainsrdapIPGetQueryParams:
 
 @dataclass
 class DomainsrdapIPGetRequest:
-    path_params: DomainsrdapIPGetPathParams = field(default=None)
-    query_params: DomainsrdapIPGetQueryParams = field(default=None)
+    path_params: DomainsrdapIPGetPathParams = field()
+    query_params: DomainsrdapIPGetQueryParams = field()
     
 
 @dataclass
 class DomainsrdapIPGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rdap_response: Optional[shared.RdapResponse] = field(default=None)
-    status_code: int = field(default=None)
     

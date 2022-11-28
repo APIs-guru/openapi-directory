@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteApplicationCloudWatchLoggingOptionXAmzTargetEnum {
     KinesisAnalytics20150814DeleteApplicationCloudWatchLoggingOption = "KinesisAnalytics_20150814.DeleteApplicationCloudWatchLoggingOption"

@@ -28,11 +28,6 @@ type CmcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CmcerRequest struct {
-	Request  *CmcerRequestBody `request:"mediaType=application/json"`
-	Security CmcerSecurity
-}
-
 type Cmcer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Cmcer504ApplicationJSON struct {
 	Error            *Cmcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Cmcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CmcerRequest struct {
+	Request  *CmcerRequestBody `request:"mediaType=application/json"`
+	Security CmcerSecurity
 }
 
 type CmcerResponse struct {

@@ -4,10 +4,6 @@ type GetNodesStatusQueryParams struct {
 	Ids string `queryParam:"style=form,explode=true,name=ids"`
 }
 
-type GetNodesStatusRequest struct {
-	QueryParams GetNodesStatusQueryParams
-}
-
 type GetNodesStatus200ApplicationJSONActionEnum string
 
 const (
@@ -28,6 +24,8 @@ type GetNodesStatus200ApplicationJSONDataNodes struct {
 	Status GetNodesStatus200ApplicationJSONDataNodesStatusEnum `json:"status"`
 }
 
+// GetNodesStatus200ApplicationJSONData
+// List of nodeId and associated status
 type GetNodesStatus200ApplicationJSONData struct {
 	Nodes []GetNodesStatus200ApplicationJSONDataNodes `json:"nodes"`
 }
@@ -43,6 +41,10 @@ type GetNodesStatus200ApplicationJSON struct {
 	Action GetNodesStatus200ApplicationJSONActionEnum `json:"action"`
 	Data   GetNodesStatus200ApplicationJSONData       `json:"data"`
 	Result GetNodesStatus200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetNodesStatusRequest struct {
+	QueryParams GetNodesStatusQueryParams
 }
 
 type GetNodesStatusResponse struct {

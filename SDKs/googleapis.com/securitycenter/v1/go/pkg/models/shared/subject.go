@@ -9,6 +9,8 @@ const (
 	SubjectKindEnumGroup               SubjectKindEnum = "GROUP"
 )
 
+// Subject
+// Represents a Kubernetes Subject.
 type Subject struct {
 	Kind *SubjectKindEnum `json:"kind,omitempty"`
 	Name *string          `json:"name,omitempty"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RuntimeAcceleratorConfigTypeEnum(str, Enum):
     ACCELERATOR_TYPE_UNSPECIFIED = "ACCELERATOR_TYPE_UNSPECIFIED"
@@ -20,6 +22,10 @@ class RuntimeAcceleratorConfigTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RuntimeAcceleratorConfig:
-    core_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coreCount' }})
-    type: Optional[RuntimeAcceleratorConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""RuntimeAcceleratorConfig
+    Definition of the types of hardware accelerators that can be used. Definition of the types of hardware accelerators that can be used. See [Compute Engine AcceleratorTypes](https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes). Examples: * `nvidia-tesla-k80` * `nvidia-tesla-p100` * `nvidia-tesla-v100` * `nvidia-tesla-p4` * `nvidia-tesla-t4` * `nvidia-tesla-a100`
+    """
+    
+    core_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coreCount') }})
+    type: Optional[RuntimeAcceleratorConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

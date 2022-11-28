@@ -1,6 +1,7 @@
 
 
+
 export enum PlatformEnum {
-    Windows = "Windows"
-,    Linux = "Linux"
+    Windows = "Windows",
+    Linux = "Linux"
 }

@@ -1,5 +1,8 @@
 package shared
 
+// SupportTicketRequest
+// An object representing a created Support Ticket - a question or issue and request for help from the Linode support team.
+// Only one of the ID attributes (`linode_id`, `domain_id`, etc.) can be set on a single Support Ticket.
 type SupportTicketRequest struct {
 	Description      string  `json:"description"`
 	DomainID         *int64  `json:"domain_id,omitempty"`

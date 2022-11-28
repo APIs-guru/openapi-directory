@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3ReferenceDataSourceDescription
 /**
  * For a SQL-based Kinesis Data Analytics application, provides the bucket name and object key name that stores the reference data.
@@ -33,15 +33,15 @@ var S3ReferenceDataSourceDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketARN" }),
+        SpeakeasyMetadata({ data: "json, name=BucketARN" }),
         __metadata("design:type", String)
     ], S3ReferenceDataSourceDescription.prototype, "bucketArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileKey" }),
+        SpeakeasyMetadata({ data: "json, name=FileKey" }),
         __metadata("design:type", String)
     ], S3ReferenceDataSourceDescription.prototype, "fileKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReferenceRoleARN" }),
+        SpeakeasyMetadata({ data: "json, name=ReferenceRoleARN" }),
         __metadata("design:type", String)
     ], S3ReferenceDataSourceDescription.prototype, "referenceRoleArn", void 0);
     return S3ReferenceDataSourceDescription;

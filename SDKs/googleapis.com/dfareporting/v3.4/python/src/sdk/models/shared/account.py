@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportsconfiguration
+from sdk import utils
+from . import *
 
 class AccountAccountProfileEnum(str, Enum):
     ACCOUNT_PROFILE_BASIC = "ACCOUNT_PROFILE_BASIC"
@@ -21,23 +23,27 @@ class AccountActiveAdsLimitTierEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Account:
-    account_permission_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountPermissionIds' }})
-    account_profile: Optional[AccountAccountProfileEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountProfile' }})
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    active_ads_limit_tier: Optional[AccountActiveAdsLimitTierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeAdsLimitTier' }})
-    active_view_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeViewOptOut' }})
-    available_permission_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availablePermissionIds' }})
-    country_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countryId' }})
-    currency_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencyId' }})
-    default_creative_size_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultCreativeSizeId' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    locale: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locale' }})
-    maximum_image_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximumImageSize' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    nielsen_ocr_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nielsenOcrEnabled' }})
-    reports_configuration: Optional[reportsconfiguration.ReportsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportsConfiguration' }})
-    share_reports_with_twitter: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shareReportsWithTwitter' }})
-    teaser_size_limit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teaserSizeLimit' }})
+    r"""Account
+    Contains properties of a Campaign Manager account.
+    """
+    
+    account_permission_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountPermissionIds') }})
+    account_profile: Optional[AccountAccountProfileEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountProfile') }})
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    active_ads_limit_tier: Optional[AccountActiveAdsLimitTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeAdsLimitTier') }})
+    active_view_opt_out: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeViewOptOut') }})
+    available_permission_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availablePermissionIds') }})
+    country_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countryId') }})
+    currency_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencyId') }})
+    default_creative_size_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultCreativeSizeId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    locale: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locale') }})
+    maximum_image_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maximumImageSize') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    nielsen_ocr_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nielsenOcrEnabled') }})
+    reports_configuration: Optional[ReportsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportsConfiguration') }})
+    share_reports_with_twitter: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shareReportsWithTwitter') }})
+    teaser_size_limit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('teaserSizeLimit') }})
     

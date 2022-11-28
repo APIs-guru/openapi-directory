@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IngestionInputConfiguration } from "./ingestioninputconfiguration";
 import { DatasetStatusEnum } from "./datasetstatusenum";
 export declare class DescribeDatasetResponse extends SpeakeasyBase {

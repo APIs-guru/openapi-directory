@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://mercure.local",
 }
 
@@ -18,10 +18,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://mercure.rocks/spec - The Mercure protocol specification
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +37,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetWellKnownMercure - Subscribe to updates
+// https://mercure.rocks/spec#subscription - Subscription specification
 func (s *SDK) GetWellKnownMercure(ctx context.Context, request operations.GetWellKnownMercureRequest) (*operations.GetWellKnownMercureResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/.well-known/mercure"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -70,7 +98,7 @@ func (s *SDK) GetWellKnownMercure(ctx context.Context, request operations.GetWel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -93,8 +121,10 @@ func (s *SDK) GetWellKnownMercure(ctx context.Context, request operations.GetWel
 	return res, nil
 }
 
+// GetWellKnownMercureSubscriptions - Active subscriptions
+// https://mercure.rocks/spec#subscription-api - Subscription API
 func (s *SDK) GetWellKnownMercureSubscriptions(ctx context.Context) (*operations.GetWellKnownMercureSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/.well-known/mercure/subscriptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -102,7 +132,7 @@ func (s *SDK) GetWellKnownMercureSubscriptions(ctx context.Context) (*operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -133,8 +163,10 @@ func (s *SDK) GetWellKnownMercureSubscriptions(ctx context.Context) (*operations
 	return res, nil
 }
 
+// GetWellKnownMercureSubscriptionsTopic - Active subscriptions for the given topic
+// https://mercure.rocks/spec#subscription-api - Subscription API
 func (s *SDK) GetWellKnownMercureSubscriptionsTopic(ctx context.Context, request operations.GetWellKnownMercureSubscriptionsTopicRequest) (*operations.GetWellKnownMercureSubscriptionsTopicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/.well-known/mercure/subscriptions/{topic}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -142,7 +174,7 @@ func (s *SDK) GetWellKnownMercureSubscriptionsTopic(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -173,8 +205,10 @@ func (s *SDK) GetWellKnownMercureSubscriptionsTopic(ctx context.Context, request
 	return res, nil
 }
 
+// GetWellKnownMercureSubscriptionsTopicSubscriber - Active subscription for the given topic and subscriber
+// https://mercure.rocks/spec#active-subscriptions - Subscription API
 func (s *SDK) GetWellKnownMercureSubscriptionsTopicSubscriber(ctx context.Context, request operations.GetWellKnownMercureSubscriptionsTopicSubscriberRequest) (*operations.GetWellKnownMercureSubscriptionsTopicSubscriberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/.well-known/mercure/subscriptions/{topic}/{subscriber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -182,7 +216,7 @@ func (s *SDK) GetWellKnownMercureSubscriptionsTopicSubscriber(ctx context.Contex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -213,8 +247,10 @@ func (s *SDK) GetWellKnownMercureSubscriptionsTopicSubscriber(ctx context.Contex
 	return res, nil
 }
 
+// PostWellKnownMercure - Publish an update
+// https://mercure.rocks/spec#publication - Publishing specification
 func (s *SDK) PostWellKnownMercure(ctx context.Context, request operations.PostWellKnownMercureRequest) (*operations.PostWellKnownMercureResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/.well-known/mercure"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -229,7 +265,7 @@ func (s *SDK) PostWellKnownMercure(ctx context.Context, request operations.PostW
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

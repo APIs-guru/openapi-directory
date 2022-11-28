@@ -1,6 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccountActivity } from "./accountactivity";
-import { AccountRiskVerdict } from "./accountriskverdict";
 export declare enum AccountDetailsAppLicensingVerdictEnum {
     Unknown = "UNKNOWN",
     Licensed = "LICENSED",
@@ -12,6 +11,5 @@ export declare enum AccountDetailsAppLicensingVerdictEnum {
 **/
 export declare class AccountDetails extends SpeakeasyBase {
     accountActivity?: AccountActivity;
-    accountRiskVerdict?: AccountRiskVerdict;
     appLicensingVerdict?: AccountDetailsAppLicensingVerdictEnum;
 }

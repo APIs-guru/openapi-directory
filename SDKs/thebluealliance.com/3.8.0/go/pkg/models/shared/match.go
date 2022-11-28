@@ -1,5 +1,7 @@
 package shared
 
+// MatchAlliances
+// A list of alliances, the teams on the alliances, and their score.
 type MatchAlliances struct {
 	Blue *MatchAlliance `json:"blue,omitempty"`
 	Red  *MatchAlliance `json:"red,omitempty"`

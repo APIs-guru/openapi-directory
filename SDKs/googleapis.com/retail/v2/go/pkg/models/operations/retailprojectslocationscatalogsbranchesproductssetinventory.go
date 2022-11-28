@@ -30,7 +30,7 @@ type RetailProjectsLocationsCatalogsBranchesProductsSetInventorySecurity struct 
 type RetailProjectsLocationsCatalogsBranchesProductsSetInventoryRequest struct {
 	PathParams  RetailProjectsLocationsCatalogsBranchesProductsSetInventoryPathParams
 	QueryParams RetailProjectsLocationsCatalogsBranchesProductsSetInventoryQueryParams
-	Request     *shared.GoogleCloudRetailV2SetInventoryRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRetailV2SetInventoryRequestInput `request:"mediaType=application/json"`
 	Security    RetailProjectsLocationsCatalogsBranchesProductsSetInventorySecurity
 }
 

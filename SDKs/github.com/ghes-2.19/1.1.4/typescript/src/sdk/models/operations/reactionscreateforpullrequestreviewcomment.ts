@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReactionsCreateForPullRequestReviewCommentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
   commentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReactionsCreateForPullRequestReviewCommentRequestBodyContentEnum {
-    Plus1 = "+1"
-,    Minus1 = "-1"
-,    Laugh = "laugh"
-,    Confused = "confused"
-,    Heart = "heart"
-,    Hooray = "hooray"
-,    Rocket = "rocket"
-,    Eyes = "eyes"
+    Plus1 = "+1",
+    Minus1 = "-1",
+    Laugh = "laugh",
+    Confused = "confused",
+    Heart = "heart",
+    Hooray = "hooray",
+    Rocket = "rocket",
+    Eyes = "eyes"
 }
 
 
 export class ReactionsCreateForPullRequestReviewCommentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content: ReactionsCreateForPullRequestReviewCommentRequestBodyContentEnum;
 }
 
 
-export class ReactionsCreateForPullRequestReviewCommentRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReactionsCreateForPullRequestReviewCommentPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ReactionsCreateForPullRequestReviewCommentRequestBody;
-}
-
-
 export class ReactionsCreateForPullRequestReviewComment415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ReactionsCreateForPullRequestReviewCommentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReactionsCreateForPullRequestReviewCommentPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ReactionsCreateForPullRequestReviewCommentRequestBody;
+}
+
+
 export class ReactionsCreateForPullRequestReviewCommentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reaction?: shared.Reaction;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reactionsCreateForPullRequestReviewComment415ApplicationJsonObject?: ReactionsCreateForPullRequestReviewComment415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

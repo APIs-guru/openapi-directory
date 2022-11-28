@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PutRecordInput
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for <code>PutRecord</code>.
 **/
 export class PutRecordInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: string;
 
-  @Metadata({ data: "json, name=ExplicitHashKey" })
+  @SpeakeasyMetadata({ data: "json, name=ExplicitHashKey" })
   explicitHashKey?: string;
 
-  @Metadata({ data: "json, name=PartitionKey" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionKey" })
   partitionKey: string;
 
-  @Metadata({ data: "json, name=SequenceNumberForOrdering" })
+  @SpeakeasyMetadata({ data: "json, name=SequenceNumberForOrdering" })
   sequenceNumberForOrdering?: string;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 }

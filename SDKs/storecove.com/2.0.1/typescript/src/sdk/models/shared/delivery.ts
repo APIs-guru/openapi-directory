@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Address } from "./address";
 
 
+
 export class DeliveryLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: Address;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=schemeAgencyId" })
+  @SpeakeasyMetadata({ data: "json, name=schemeAgencyId" })
   schemeAgencyId?: string;
 
-  @Metadata({ data: "json, name=schemeId" })
+  @SpeakeasyMetadata({ data: "json, name=schemeId" })
   schemeId?: string;
 }
 
 
 export class Delivery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actualDate" })
+  @SpeakeasyMetadata({ data: "json, name=actualDate" })
   actualDate?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: DeliveryLocation;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectExpiration } from "./objectexpiration";
+
 
 
 // UpdateUploadSharesBulkRequest
@@ -7,36 +8,36 @@ import { ObjectExpiration } from "./objectexpiration";
  * Request model for updating a list of Download Shares
 **/
 export class UpdateUploadSharesBulkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: ObjectExpiration;
 
-  @Metadata({ data: "json, name=filesExpiryPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=filesExpiryPeriod" })
   filesExpiryPeriod?: number;
 
-  @Metadata({ data: "json, name=maxSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxSize" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=maxSlots" })
+  @SpeakeasyMetadata({ data: "json, name=maxSlots" })
   maxSlots?: number;
 
-  @Metadata({ data: "json, name=objectIds" })
+  @SpeakeasyMetadata({ data: "json, name=objectIds" })
   objectIds: number[];
 
-  @Metadata({ data: "json, name=resetFilesExpiryPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=resetFilesExpiryPeriod" })
   resetFilesExpiryPeriod?: boolean;
 
-  @Metadata({ data: "json, name=resetMaxSize" })
+  @SpeakeasyMetadata({ data: "json, name=resetMaxSize" })
   resetMaxSize?: boolean;
 
-  @Metadata({ data: "json, name=resetMaxSlots" })
+  @SpeakeasyMetadata({ data: "json, name=resetMaxSlots" })
   resetMaxSlots?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorName" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorName" })
   showCreatorName?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorUsername" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorUsername" })
   showCreatorUsername?: boolean;
 
-  @Metadata({ data: "json, name=showUploadedFiles" })
+  @SpeakeasyMetadata({ data: "json, name=showUploadedFiles" })
   showUploadedFiles?: boolean;
 }

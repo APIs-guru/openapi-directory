@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesFeaturesListPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DirectoryResourcesFeaturesListQueryParams:
 
 @dataclass
 class DirectoryResourcesFeaturesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesFeaturesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class DirectoryResourcesFeaturesListSecurity:
 
 @dataclass
 class DirectoryResourcesFeaturesListRequest:
-    path_params: DirectoryResourcesFeaturesListPathParams = field(default=None)
-    query_params: DirectoryResourcesFeaturesListQueryParams = field(default=None)
-    security: DirectoryResourcesFeaturesListSecurity = field(default=None)
+    path_params: DirectoryResourcesFeaturesListPathParams = field()
+    query_params: DirectoryResourcesFeaturesListQueryParams = field()
+    security: DirectoryResourcesFeaturesListSecurity = field()
     
 
 @dataclass
 class DirectoryResourcesFeaturesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     features: Optional[shared.Features] = field(default=None)
-    status_code: int = field(default=None)
     

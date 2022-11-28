@@ -1,10 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingModeSummary } from "./billingmodesummary";
 import { ReplicaGlobalSecondaryIndexSettingsDescription } from "./replicaglobalsecondaryindexsettingsdescription";
 import { AutoScalingSettingsDescription } from "./autoscalingsettingsdescription";
-import { AutoScalingSettingsDescription } from "./autoscalingsettingsdescription";
 import { ReplicaStatusEnum } from "./replicastatusenum";
+
 
 
 // ReplicaSettingsDescription
@@ -12,27 +11,27 @@ import { ReplicaStatusEnum } from "./replicastatusenum";
  * Represents the properties of a replica.
 **/
 export class ReplicaSettingsDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RegionName" })
+  @SpeakeasyMetadata({ data: "json, name=RegionName" })
   regionName: string;
 
-  @Metadata({ data: "json, name=ReplicaBillingModeSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaBillingModeSummary" })
   replicaBillingModeSummary?: BillingModeSummary;
 
-  @Metadata({ data: "json, name=ReplicaGlobalSecondaryIndexSettings", elemType: shared.ReplicaGlobalSecondaryIndexSettingsDescription })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaGlobalSecondaryIndexSettings", elemType: ReplicaGlobalSecondaryIndexSettingsDescription })
   replicaGlobalSecondaryIndexSettings?: ReplicaGlobalSecondaryIndexSettingsDescription[];
 
-  @Metadata({ data: "json, name=ReplicaProvisionedReadCapacityAutoScalingSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaProvisionedReadCapacityAutoScalingSettings" })
   replicaProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
 
-  @Metadata({ data: "json, name=ReplicaProvisionedReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaProvisionedReadCapacityUnits" })
   replicaProvisionedReadCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=ReplicaProvisionedWriteCapacityAutoScalingSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaProvisionedWriteCapacityAutoScalingSettings" })
   replicaProvisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
 
-  @Metadata({ data: "json, name=ReplicaProvisionedWriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaProvisionedWriteCapacityUnits" })
   replicaProvisionedWriteCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=ReplicaStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaStatus" })
   replicaStatus?: ReplicaStatusEnum;
 }

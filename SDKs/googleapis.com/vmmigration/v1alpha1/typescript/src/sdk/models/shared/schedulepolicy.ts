@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SchedulePolicy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A policy for scheduling replications.
 **/
 export class SchedulePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=idleDuration" })
+  @SpeakeasyMetadata({ data: "json, name=idleDuration" })
   idleDuration?: string;
 
-  @Metadata({ data: "json, name=skipOsAdaptation" })
+  @SpeakeasyMetadata({ data: "json, name=skipOsAdaptation" })
   skipOsAdaptation?: boolean;
 }

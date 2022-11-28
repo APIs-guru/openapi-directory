@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -19,27 +23,31 @@ class CreateLoggerDefinitionHeaders:
 @dataclass_json
 @dataclass
 class CreateLoggerDefinitionRequestBodyInitialVersion:
-    loggers: Optional[List[shared.Logger]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Loggers' }})
+    r"""CreateLoggerDefinitionRequestBodyInitialVersion
+    Information about a logger definition version.
+    """
+    
+    loggers: Optional[List[shared.Logger]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Loggers') }})
     
 
 @dataclass_json
 @dataclass
 class CreateLoggerDefinitionRequestBody:
-    initial_version: Optional[CreateLoggerDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InitialVersion' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    initial_version: Optional[CreateLoggerDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InitialVersion') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateLoggerDefinitionRequest:
-    headers: CreateLoggerDefinitionHeaders = field(default=None)
-    request: CreateLoggerDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateLoggerDefinitionHeaders = field()
+    request: CreateLoggerDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateLoggerDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_logger_definition_response: Optional[shared.CreateLoggerDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

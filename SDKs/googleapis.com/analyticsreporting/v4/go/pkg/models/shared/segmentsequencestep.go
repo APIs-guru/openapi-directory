@@ -8,6 +8,8 @@ const (
 	SegmentSequenceStepMatchTypeEnumImmediatelyPrecedes  SegmentSequenceStepMatchTypeEnum = "IMMEDIATELY_PRECEDES"
 )
 
+// SegmentSequenceStep
+// A segment sequence definition.
 type SegmentSequenceStep struct {
 	MatchType           *SegmentSequenceStepMatchTypeEnum `json:"matchType,omitempty"`
 	OrFiltersForSegment []OrFiltersForSegment             `json:"orFiltersForSegment,omitempty"`

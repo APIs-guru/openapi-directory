@@ -1,31 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TopicPreference } from "./topicpreference";
-import { TopicPreference } from "./topicpreference";
+
 
 
 export class GetContactResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributesData" })
+  @SpeakeasyMetadata({ data: "json, name=AttributesData" })
   attributesData?: string;
 
-  @Metadata({ data: "json, name=ContactListName" })
+  @SpeakeasyMetadata({ data: "json, name=ContactListName" })
   contactListName?: string;
 
-  @Metadata({ data: "json, name=CreatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTimestamp" })
   createdTimestamp?: Date;
 
-  @Metadata({ data: "json, name=EmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EmailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTimestamp" })
   lastUpdatedTimestamp?: Date;
 
-  @Metadata({ data: "json, name=TopicDefaultPreferences", elemType: shared.TopicPreference })
+  @SpeakeasyMetadata({ data: "json, name=TopicDefaultPreferences", elemType: TopicPreference })
   topicDefaultPreferences?: TopicPreference[];
 
-  @Metadata({ data: "json, name=TopicPreferences", elemType: shared.TopicPreference })
+  @SpeakeasyMetadata({ data: "json, name=TopicPreferences", elemType: TopicPreference })
   topicPreferences?: TopicPreference[];
 
-  @Metadata({ data: "json, name=UnsubscribeAll" })
+  @SpeakeasyMetadata({ data: "json, name=UnsubscribeAll" })
   unsubscribeAll?: boolean;
 }

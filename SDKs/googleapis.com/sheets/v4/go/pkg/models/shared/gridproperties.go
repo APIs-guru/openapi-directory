@@ -1,5 +1,7 @@
 package shared
 
+// GridProperties
+// Properties of a grid.
 type GridProperties struct {
 	ColumnCount             *int32 `json:"columnCount,omitempty"`
 	ColumnGroupControlAfter *bool  `json:"columnGroupControlAfter,omitempty"`

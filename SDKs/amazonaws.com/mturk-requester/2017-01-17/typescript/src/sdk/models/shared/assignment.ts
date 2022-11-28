@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignmentStatusEnum } from "./assignmentstatusenum";
+
 
 
 // Assignment
@@ -7,39 +8,39 @@ import { AssignmentStatusEnum } from "./assignmentstatusenum";
  *  The Assignment data structure represents a single assignment of a HIT to a Worker. The assignment tracks the Worker's efforts to complete the HIT, and contains the results for later retrieval. 
 **/
 export class Assignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptTime" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptTime" })
   acceptTime?: Date;
 
-  @Metadata({ data: "json, name=Answer" })
+  @SpeakeasyMetadata({ data: "json, name=Answer" })
   answer?: string;
 
-  @Metadata({ data: "json, name=ApprovalTime" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovalTime" })
   approvalTime?: Date;
 
-  @Metadata({ data: "json, name=AssignmentId" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentId" })
   assignmentId?: string;
 
-  @Metadata({ data: "json, name=AssignmentStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentStatus" })
   assignmentStatus?: AssignmentStatusEnum;
 
-  @Metadata({ data: "json, name=AutoApprovalTime" })
+  @SpeakeasyMetadata({ data: "json, name=AutoApprovalTime" })
   autoApprovalTime?: Date;
 
-  @Metadata({ data: "json, name=Deadline" })
+  @SpeakeasyMetadata({ data: "json, name=Deadline" })
   deadline?: Date;
 
-  @Metadata({ data: "json, name=HITId" })
+  @SpeakeasyMetadata({ data: "json, name=HITId" })
   hitId?: string;
 
-  @Metadata({ data: "json, name=RejectionTime" })
+  @SpeakeasyMetadata({ data: "json, name=RejectionTime" })
   rejectionTime?: Date;
 
-  @Metadata({ data: "json, name=RequesterFeedback" })
+  @SpeakeasyMetadata({ data: "json, name=RequesterFeedback" })
   requesterFeedback?: string;
 
-  @Metadata({ data: "json, name=SubmitTime" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTime" })
   submitTime?: Date;
 
-  @Metadata({ data: "json, name=WorkerId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerId" })
   workerId?: string;
 }

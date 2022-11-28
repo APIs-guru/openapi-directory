@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class Destiny2GetClanLeaderboardsPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class Destiny2GetClanLeaderboardsQueryParams:
 
 @dataclass
 class Destiny2GetClanLeaderboardsRequest:
-    path_params: Destiny2GetClanLeaderboardsPathParams = field(default=None)
-    query_params: Destiny2GetClanLeaderboardsQueryParams = field(default=None)
+    path_params: Destiny2GetClanLeaderboardsPathParams = field()
+    query_params: Destiny2GetClanLeaderboardsQueryParams = field()
     
 
 @dataclass
 class Destiny2GetClanLeaderboardsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

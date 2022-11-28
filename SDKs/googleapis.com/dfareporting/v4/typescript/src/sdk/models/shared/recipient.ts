@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RecipientDeliveryTypeEnum {
-    Link = "LINK"
-,    Attachment = "ATTACHMENT"
+    Link = "LINK",
+    Attachment = "ATTACHMENT"
 }
 
 
@@ -11,12 +12,12 @@ export enum RecipientDeliveryTypeEnum {
  * Represents a recipient.
 **/
 export class Recipient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryType" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryType" })
   deliveryType?: RecipientDeliveryTypeEnum;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

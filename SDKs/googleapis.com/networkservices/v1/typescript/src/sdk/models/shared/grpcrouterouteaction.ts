@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrpcRouteDestination } from "./grpcroutedestination";
 import { GrpcRouteFaultInjectionPolicy } from "./grpcroutefaultinjectionpolicy";
 import { GrpcRouteRetryPolicy } from "./grpcrouteretrypolicy";
+
 
 
 // GrpcRouteRouteAction
@@ -10,15 +10,15 @@ import { GrpcRouteRetryPolicy } from "./grpcrouteretrypolicy";
  * Specifies how to route matched traffic.
 **/
 export class GrpcRouteRouteAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations", elemType: shared.GrpcRouteDestination })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: GrpcRouteDestination })
   destinations?: GrpcRouteDestination[];
 
-  @Metadata({ data: "json, name=faultInjectionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=faultInjectionPolicy" })
   faultInjectionPolicy?: GrpcRouteFaultInjectionPolicy;
 
-  @Metadata({ data: "json, name=retryPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=retryPolicy" })
   retryPolicy?: GrpcRouteRetryPolicy;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 }

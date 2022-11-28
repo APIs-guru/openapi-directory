@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CallbackCompletionBatchRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Any information to send back to Workflows when completing an action callback as part of a batch request.
 **/
 export class CallbackCompletionBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callbackId" })
+  @SpeakeasyMetadata({ data: "json, name=callbackId" })
   callbackId: string;
 
-  @Metadata({ data: "json, name=outputFields" })
+  @SpeakeasyMetadata({ data: "json, name=outputFields" })
   outputFields: Map<string, string>;
 }

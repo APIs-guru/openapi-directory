@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1DebugToken } from "./googlefirebaseappcheckv1debugtoken";
+
 
 
 // GoogleFirebaseAppcheckV1ListDebugTokensResponse
@@ -8,9 +8,9 @@ import { GoogleFirebaseAppcheckV1DebugToken } from "./googlefirebaseappcheckv1de
  * Response message for the ListDebugTokens method.
 **/
 export class GoogleFirebaseAppcheckV1ListDebugTokensResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=debugTokens", elemType: shared.GoogleFirebaseAppcheckV1DebugToken })
+  @SpeakeasyMetadata({ data: "json, name=debugTokens", elemType: GoogleFirebaseAppcheckV1DebugToken })
   debugTokens?: GoogleFirebaseAppcheckV1DebugToken[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OtherRegionsSubscriptionOfferConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for any new locations Play may launch in specified on a subscription offer.
 **/
 export class OtherRegionsSubscriptionOfferConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=otherRegionsNewSubscriberAvailability" })
+  @SpeakeasyMetadata({ data: "json, name=otherRegionsNewSubscriberAvailability" })
   otherRegionsNewSubscriberAvailability?: boolean;
 }

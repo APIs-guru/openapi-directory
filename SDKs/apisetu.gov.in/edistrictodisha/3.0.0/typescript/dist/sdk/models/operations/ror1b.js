@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var Ror1bRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(Ror1bRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var Ror1bRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], Ror1bRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=refno" }),
+        SpeakeasyMetadata({ data: "json, name=refno" }),
         __metadata("design:type", String)
     ], Ror1bRequestBodyCertificateParameters.prototype, "refno", void 0);
     return Ror1bRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var Ror1bRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", Ror1bRequestBodyCertificateParameters)
     ], Ror1bRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], Ror1bRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], Ror1bRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], Ror1bRequestBody.prototype, "txnId", void 0);
     return Ror1bRequestBody;
@@ -74,32 +74,16 @@ var Ror1bSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], Ror1bSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], Ror1bSecurity.prototype, "clientId", void 0);
     return Ror1bSecurity;
 }(SpeakeasyBase));
 export { Ror1bSecurity };
-var Ror1bRequest = /** @class */ (function (_super) {
-    __extends(Ror1bRequest, _super);
-    function Ror1bRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", Ror1bRequestBody)
-    ], Ror1bRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", Ror1bSecurity)
-    ], Ror1bRequest.prototype, "security", void 0);
-    return Ror1bRequest;
-}(SpeakeasyBase));
-export { Ror1bRequest };
 export var Ror1b400ApplicationJsonErrorEnum;
 (function (Ror1b400ApplicationJsonErrorEnum) {
     Ror1b400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Ror1b400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ror1b400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ror1b400ApplicationJson.prototype, "errorDescription", void 0);
     return Ror1b400ApplicationJson;
@@ -148,11 +132,11 @@ var Ror1b401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ror1b401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ror1b401ApplicationJson.prototype, "errorDescription", void 0);
     return Ror1b401ApplicationJson;
@@ -174,11 +158,11 @@ var Ror1b404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ror1b404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ror1b404ApplicationJson.prototype, "errorDescription", void 0);
     return Ror1b404ApplicationJson;
@@ -198,11 +182,11 @@ var Ror1b500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ror1b500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ror1b500ApplicationJson.prototype, "errorDescription", void 0);
     return Ror1b500ApplicationJson;
@@ -222,11 +206,11 @@ var Ror1b502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ror1b502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ror1b502ApplicationJson.prototype, "errorDescription", void 0);
     return Ror1b502ApplicationJson;
@@ -246,11 +230,11 @@ var Ror1b503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ror1b503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ror1b503ApplicationJson.prototype, "errorDescription", void 0);
     return Ror1b503ApplicationJson;
@@ -270,55 +254,71 @@ var Ror1b504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ror1b504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ror1b504ApplicationJson.prototype, "errorDescription", void 0);
     return Ror1b504ApplicationJson;
 }(SpeakeasyBase));
 export { Ror1b504ApplicationJson };
+var Ror1bRequest = /** @class */ (function (_super) {
+    __extends(Ror1bRequest, _super);
+    function Ror1bRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", Ror1bRequestBody)
+    ], Ror1bRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Ror1bSecurity)
+    ], Ror1bRequest.prototype, "security", void 0);
+    return Ror1bRequest;
+}(SpeakeasyBase));
+export { Ror1bRequest };
 var Ror1bResponse = /** @class */ (function (_super) {
     __extends(Ror1bResponse, _super);
     function Ror1bResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Ror1bResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Ror1bResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ror1b400ApplicationJson)
     ], Ror1bResponse.prototype, "ror1b400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ror1b401ApplicationJson)
     ], Ror1bResponse.prototype, "ror1b401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ror1b404ApplicationJson)
     ], Ror1bResponse.prototype, "ror1b404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ror1b500ApplicationJson)
     ], Ror1bResponse.prototype, "ror1b500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ror1b502ApplicationJson)
     ], Ror1bResponse.prototype, "ror1b502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ror1b503ApplicationJson)
     ], Ror1bResponse.prototype, "ror1b503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ror1b504ApplicationJson)
     ], Ror1bResponse.prototype, "ror1b504ApplicationJsonObject", void 0);
     return Ror1bResponse;

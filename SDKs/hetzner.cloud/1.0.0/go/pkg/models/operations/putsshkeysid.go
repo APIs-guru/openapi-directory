@@ -9,11 +9,6 @@ type PutSSHKeysIDRequestBody struct {
 	Name   *string                `json:"name,omitempty"`
 }
 
-type PutSSHKeysIDRequest struct {
-	PathParams PutSSHKeysIDPathParams
-	Request    *PutSSHKeysIDRequestBody `request:"mediaType=application/json"`
-}
-
 type PutSSHKeysID200ApplicationJSONSSHKey struct {
 	Created     string            `json:"created"`
 	Fingerprint string            `json:"fingerprint"`
@@ -25,6 +20,11 @@ type PutSSHKeysID200ApplicationJSONSSHKey struct {
 
 type PutSSHKeysID200ApplicationJSON struct {
 	SSHKey PutSSHKeysID200ApplicationJSONSSHKey `json:"ssh_key"`
+}
+
+type PutSSHKeysIDRequest struct {
+	PathParams PutSSHKeysIDPathParams
+	Request    *PutSSHKeysIDRequestBody `request:"mediaType=application/json"`
 }
 
 type PutSSHKeysIDResponse struct {

@@ -17,8 +17,8 @@ type GetUserByIDRequest struct {
 	Security   GetUserByIDSecurity
 }
 
-type GetUserByIDResponse struct {
+type GetUserByIDResponseOutput struct {
 	ContentType string
 	StatusCode  int64
-	User        *shared.User
+	User        *shared.UserOutput
 }

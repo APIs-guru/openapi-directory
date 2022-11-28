@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsExtendPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PaymentsresellersubscriptionPartnersSubscriptionsExtendQueryParams:
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsExtendRequest:
-    path_params: PaymentsresellersubscriptionPartnersSubscriptionsExtendPathParams = field(default=None)
-    query_params: PaymentsresellersubscriptionPartnersSubscriptionsExtendQueryParams = field(default=None)
+    path_params: PaymentsresellersubscriptionPartnersSubscriptionsExtendPathParams = field()
+    query_params: PaymentsresellersubscriptionPartnersSubscriptionsExtendQueryParams = field()
     request: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsExtendResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_payments_reseller_subscription_v1_extend_subscription_response: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

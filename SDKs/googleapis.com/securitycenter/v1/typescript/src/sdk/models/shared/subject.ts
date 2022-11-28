@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SubjectKindEnum {
-    AuthTypeUnspecified = "AUTH_TYPE_UNSPECIFIED"
-,    User = "USER"
-,    Serviceaccount = "SERVICEACCOUNT"
-,    Group = "GROUP"
+    AuthTypeUnspecified = "AUTH_TYPE_UNSPECIFIED",
+    User = "USER",
+    Serviceaccount = "SERVICEACCOUNT",
+    Group = "GROUP"
 }
 
 
@@ -13,12 +14,12 @@ export enum SubjectKindEnum {
  * Represents a Kubernetes Subject.
 **/
 export class Subject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: SubjectKindEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ns" })
+  @SpeakeasyMetadata({ data: "json, name=ns" })
   ns?: string;
 }

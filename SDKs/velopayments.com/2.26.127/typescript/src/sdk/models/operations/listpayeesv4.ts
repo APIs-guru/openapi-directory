@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListPayeesV4QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=disabled" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=displayName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ofacStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ofacStatus" })
   ofacStatus?: shared.OfacStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=onboardedStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onboardedStatus" })
   onboardedStatus?: shared.OnboardedStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payeeCountry" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payeeCountry" })
   payeeCountry?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payeeType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payeeType" })
   payeeType?: shared.PayeeTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payorId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" })
   payorId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=remoteId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=remoteId" })
   remoteId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=watchlistStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=watchlistStatus" })
   watchlistStatus?: shared.WatchlistStatusEnum;
 }
 
 
 export class ListPayeesV4Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListPayeesV4QueryParams;
 }
 
 
 export class ListPayeesV4Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pagedPayeeResponse2?: shared.PagedPayeeResponse2;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

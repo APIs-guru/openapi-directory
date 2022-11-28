@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BaseConfigurationItem
+// The detailed configuration of a specified resource.
 type BaseConfigurationItem struct {
 	AccountID                    *string                      `json:"accountId,omitempty"`
 	Arn                          *string                      `json:"arn,omitempty"`

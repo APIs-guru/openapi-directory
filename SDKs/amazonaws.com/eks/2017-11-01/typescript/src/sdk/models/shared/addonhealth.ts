@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddonIssue } from "./addonissue";
+
 
 
 // AddonHealth
@@ -8,6 +8,6 @@ import { AddonIssue } from "./addonissue";
  * The health of the add-on.
 **/
 export class AddonHealth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issues", elemType: shared.AddonIssue })
+  @SpeakeasyMetadata({ data: "json, name=issues", elemType: AddonIssue })
   issues?: AddonIssue[];
 }

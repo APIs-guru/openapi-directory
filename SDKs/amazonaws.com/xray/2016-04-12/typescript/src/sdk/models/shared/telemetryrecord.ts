@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackendConnectionErrors } from "./backendconnectionerrors";
+
 
 
 // TelemetryRecord
@@ -7,21 +8,21 @@ import { BackendConnectionErrors } from "./backendconnectionerrors";
  * <p/>
 **/
 export class TelemetryRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackendConnectionErrors" })
+  @SpeakeasyMetadata({ data: "json, name=BackendConnectionErrors" })
   backendConnectionErrors?: BackendConnectionErrors;
 
-  @Metadata({ data: "json, name=SegmentsReceivedCount" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentsReceivedCount" })
   segmentsReceivedCount?: number;
 
-  @Metadata({ data: "json, name=SegmentsRejectedCount" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentsRejectedCount" })
   segmentsRejectedCount?: number;
 
-  @Metadata({ data: "json, name=SegmentsSentCount" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentsSentCount" })
   segmentsSentCount?: number;
 
-  @Metadata({ data: "json, name=SegmentsSpilloverCount" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentsSpilloverCount" })
   segmentsSpilloverCount?: number;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp: Date;
 }

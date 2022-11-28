@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetResourcesMediaTypesFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: string;
 }
 
 
 export class GetResourcesMediaTypesFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetResourcesMediaTypesFormatPathParams;
 }
 
 
 export class GetResourcesMediaTypesFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MediaTypeHolderWrapped })
+  @SpeakeasyMetadata({ elemType: shared.MediaTypeHolderWrapped })
   mediaTypeHolderWrappeds?: shared.MediaTypeHolderWrapped[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

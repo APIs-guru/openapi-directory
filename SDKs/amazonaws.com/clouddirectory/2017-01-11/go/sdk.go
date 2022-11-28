@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://clouddirectory.{region}.amazonaws.com",
 	"https://clouddirectory.{region}.amazonaws.com",
 	"http://clouddirectory.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/clouddirectory/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddFacetToObject - Adds a new <a>Facet</a> to an object. An object can have more than one facet applied on it.
 func (s *SDK) AddFacetToObject(ctx context.Context, request operations.AddFacetToObjectRequest) (*operations.AddFacetToObjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/facets#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AddFacetToObject(ctx context.Context, request operations.AddFacetT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -201,8 +228,9 @@ func (s *SDK) AddFacetToObject(ctx context.Context, request operations.AddFacetT
 	return res, nil
 }
 
+// ApplySchema - Copies the input published schema, at the specified version, into the <a>Directory</a> with the same name and version as that of the published schema.
 func (s *SDK) ApplySchema(ctx context.Context, request operations.ApplySchemaRequest) (*operations.ApplySchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/apply#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -222,7 +250,7 @@ func (s *SDK) ApplySchema(ctx context.Context, request operations.ApplySchemaReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -342,8 +370,9 @@ func (s *SDK) ApplySchema(ctx context.Context, request operations.ApplySchemaReq
 	return res, nil
 }
 
+// AttachObject - <p>Attaches an existing object to another object. An object can be accessed in two ways:</p> <ol> <li> <p>Using the path</p> </li> <li> <p>Using <code>ObjectIdentifier</code> </p> </li> </ol>
 func (s *SDK) AttachObject(ctx context.Context, request operations.AttachObjectRequest) (*operations.AttachObjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/attach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -363,7 +392,7 @@ func (s *SDK) AttachObject(ctx context.Context, request operations.AttachObjectR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -513,8 +542,9 @@ func (s *SDK) AttachObject(ctx context.Context, request operations.AttachObjectR
 	return res, nil
 }
 
+// AttachPolicy - Attaches a policy object to a regular object. An object can have a limited number of attached policies.
 func (s *SDK) AttachPolicy(ctx context.Context, request operations.AttachPolicyRequest) (*operations.AttachPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/policy/attach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -534,7 +564,7 @@ func (s *SDK) AttachPolicy(ctx context.Context, request operations.AttachPolicyR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -654,8 +684,9 @@ func (s *SDK) AttachPolicy(ctx context.Context, request operations.AttachPolicyR
 	return res, nil
 }
 
+// AttachToIndex - Attaches the specified object to the specified index.
 func (s *SDK) AttachToIndex(ctx context.Context, request operations.AttachToIndexRequest) (*operations.AttachToIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/index/attach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -675,7 +706,7 @@ func (s *SDK) AttachToIndex(ctx context.Context, request operations.AttachToInde
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -825,8 +856,9 @@ func (s *SDK) AttachToIndex(ctx context.Context, request operations.AttachToInde
 	return res, nil
 }
 
+// AttachTypedLink - Attaches a typed link to a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) AttachTypedLink(ctx context.Context, request operations.AttachTypedLinkRequest) (*operations.AttachTypedLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/attach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -846,7 +878,7 @@ func (s *SDK) AttachTypedLink(ctx context.Context, request operations.AttachType
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -986,8 +1018,9 @@ func (s *SDK) AttachTypedLink(ctx context.Context, request operations.AttachType
 	return res, nil
 }
 
+// BatchRead - Performs all the read operations in a batch.
 func (s *SDK) BatchRead(ctx context.Context, request operations.BatchReadRequest) (*operations.BatchReadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/batchread#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1007,7 +1040,7 @@ func (s *SDK) BatchRead(ctx context.Context, request operations.BatchReadRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1107,8 +1140,9 @@ func (s *SDK) BatchRead(ctx context.Context, request operations.BatchReadRequest
 	return res, nil
 }
 
+// BatchWrite - Performs all the write operations in a batch. Either all the operations succeed or none.
 func (s *SDK) BatchWrite(ctx context.Context, request operations.BatchWriteRequest) (*operations.BatchWriteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/batchwrite#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1128,7 +1162,7 @@ func (s *SDK) BatchWrite(ctx context.Context, request operations.BatchWriteReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1238,8 +1272,9 @@ func (s *SDK) BatchWrite(ctx context.Context, request operations.BatchWriteReque
 	return res, nil
 }
 
+// CreateDirectory - <p>Creates a <a>Directory</a> by copying the published schema into the directory. A directory cannot be created without a schema.</p> <p>You can also quickly create a directory using a managed schema, called the <code>QuickStartSchema</code>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html">Managed Schema</a> in the <i>Amazon Cloud Directory Developer Guide</i>.</p>
 func (s *SDK) CreateDirectory(ctx context.Context, request operations.CreateDirectoryRequest) (*operations.CreateDirectoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/directory/create#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1259,7 +1294,7 @@ func (s *SDK) CreateDirectory(ctx context.Context, request operations.CreateDire
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1369,8 +1404,9 @@ func (s *SDK) CreateDirectory(ctx context.Context, request operations.CreateDire
 	return res, nil
 }
 
+// CreateFacet - Creates a new <a>Facet</a> in a schema. Facet creation is allowed only in development or applied schemas.
 func (s *SDK) CreateFacet(ctx context.Context, request operations.CreateFacetRequest) (*operations.CreateFacetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/facet/create#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1390,7 +1426,7 @@ func (s *SDK) CreateFacet(ctx context.Context, request operations.CreateFacetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1520,8 +1556,9 @@ func (s *SDK) CreateFacet(ctx context.Context, request operations.CreateFacetReq
 	return res, nil
 }
 
+// CreateIndex - Creates an index object. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html">Indexing and search</a> for more information.
 func (s *SDK) CreateIndex(ctx context.Context, request operations.CreateIndexRequest) (*operations.CreateIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/index#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1541,7 +1578,7 @@ func (s *SDK) CreateIndex(ctx context.Context, request operations.CreateIndexReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1681,8 +1718,9 @@ func (s *SDK) CreateIndex(ctx context.Context, request operations.CreateIndexReq
 	return res, nil
 }
 
+// CreateObject - Creates an object in a <a>Directory</a>. Additionally attaches the object to a parent, if a parent reference and <code>LinkName</code> is specified. An object is simply a collection of <a>Facet</a> attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet.
 func (s *SDK) CreateObject(ctx context.Context, request operations.CreateObjectRequest) (*operations.CreateObjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1702,7 +1740,7 @@ func (s *SDK) CreateObject(ctx context.Context, request operations.CreateObjectR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1842,8 +1880,9 @@ func (s *SDK) CreateObject(ctx context.Context, request operations.CreateObjectR
 	return res, nil
 }
 
+// CreateSchema - <p>Creates a new schema in a development state. A schema can exist in three phases:</p> <ul> <li> <p> <i>Development:</i> This is a mutable phase of the schema. All new schemas are in the development phase. Once the schema is finalized, it can be published.</p> </li> <li> <p> <i>Published:</i> Published schemas are immutable and have a version associated with them.</p> </li> <li> <p> <i>Applied:</i> Applied schemas are mutable in a way that allows you to add new schema facets. You can also add new, nonrequired attributes to existing schema facets. You can apply only published schemas to directories. </p> </li> </ul>
 func (s *SDK) CreateSchema(ctx context.Context, request operations.CreateSchemaRequest) (*operations.CreateSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1863,7 +1902,7 @@ func (s *SDK) CreateSchema(ctx context.Context, request operations.CreateSchemaR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1973,8 +2012,9 @@ func (s *SDK) CreateSchema(ctx context.Context, request operations.CreateSchemaR
 	return res, nil
 }
 
+// CreateTypedLinkFacet - Creates a <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) CreateTypedLinkFacet(ctx context.Context, request operations.CreateTypedLinkFacetRequest) (*operations.CreateTypedLinkFacetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/create#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1994,7 +2034,7 @@ func (s *SDK) CreateTypedLinkFacet(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2124,8 +2164,9 @@ func (s *SDK) CreateTypedLinkFacet(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// DeleteDirectory - Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.
 func (s *SDK) DeleteDirectory(ctx context.Context, request operations.DeleteDirectoryRequest) (*operations.DeleteDirectoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/directory#x-amz-data-partition"
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -2135,7 +2176,7 @@ func (s *SDK) DeleteDirectory(ctx context.Context, request operations.DeleteDire
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2255,8 +2296,9 @@ func (s *SDK) DeleteDirectory(ctx context.Context, request operations.DeleteDire
 	return res, nil
 }
 
+// DeleteFacet - Deletes a given <a>Facet</a>. All attributes and <a>Rule</a>s that are associated with the facet will be deleted. Only development schema facets are allowed deletion.
 func (s *SDK) DeleteFacet(ctx context.Context, request operations.DeleteFacetRequest) (*operations.DeleteFacetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/facet/delete#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2276,7 +2318,7 @@ func (s *SDK) DeleteFacet(ctx context.Context, request operations.DeleteFacetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2396,8 +2438,9 @@ func (s *SDK) DeleteFacet(ctx context.Context, request operations.DeleteFacetReq
 	return res, nil
 }
 
+// DeleteObject - Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted. The maximum number of attributes that can be deleted during an object deletion is 30. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html">Amazon Cloud Directory Limits</a>.
 func (s *SDK) DeleteObject(ctx context.Context, request operations.DeleteObjectRequest) (*operations.DeleteObjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/delete#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2417,7 +2460,7 @@ func (s *SDK) DeleteObject(ctx context.Context, request operations.DeleteObjectR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2537,8 +2580,9 @@ func (s *SDK) DeleteObject(ctx context.Context, request operations.DeleteObjectR
 	return res, nil
 }
 
+// DeleteSchema - Deletes a given schema. Schemas in a development and published state can only be deleted.
 func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaRequest) (*operations.DeleteSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema#x-amz-data-partition"
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -2548,7 +2592,7 @@ func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2658,8 +2702,9 @@ func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaR
 	return res, nil
 }
 
+// DeleteTypedLinkFacet - Deletes a <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) DeleteTypedLinkFacet(ctx context.Context, request operations.DeleteTypedLinkFacetRequest) (*operations.DeleteTypedLinkFacetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/delete#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2679,7 +2724,7 @@ func (s *SDK) DeleteTypedLinkFacet(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2789,8 +2834,9 @@ func (s *SDK) DeleteTypedLinkFacet(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DetachFromIndex - Detaches the specified object from the specified index.
 func (s *SDK) DetachFromIndex(ctx context.Context, request operations.DetachFromIndexRequest) (*operations.DetachFromIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/index/detach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2810,7 +2856,7 @@ func (s *SDK) DetachFromIndex(ctx context.Context, request operations.DetachFrom
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2940,8 +2986,9 @@ func (s *SDK) DetachFromIndex(ctx context.Context, request operations.DetachFrom
 	return res, nil
 }
 
+// DetachObject - Detaches a given object from the parent object. The object that is to be detached from the parent is specified by the link name.
 func (s *SDK) DetachObject(ctx context.Context, request operations.DetachObjectRequest) (*operations.DetachObjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/detach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2961,7 +3008,7 @@ func (s *SDK) DetachObject(ctx context.Context, request operations.DetachObjectR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3081,8 +3128,9 @@ func (s *SDK) DetachObject(ctx context.Context, request operations.DetachObjectR
 	return res, nil
 }
 
+// DetachPolicy - Detaches a policy from an object.
 func (s *SDK) DetachPolicy(ctx context.Context, request operations.DetachPolicyRequest) (*operations.DetachPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/policy/detach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3102,7 +3150,7 @@ func (s *SDK) DetachPolicy(ctx context.Context, request operations.DetachPolicyR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3222,8 +3270,9 @@ func (s *SDK) DetachPolicy(ctx context.Context, request operations.DetachPolicyR
 	return res, nil
 }
 
+// DetachTypedLink - Detaches a typed link from a specified source and target object. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) DetachTypedLink(ctx context.Context, request operations.DetachTypedLinkRequest) (*operations.DetachTypedLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/detach#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3243,7 +3292,7 @@ func (s *SDK) DetachTypedLink(ctx context.Context, request operations.DetachType
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3354,8 +3403,9 @@ func (s *SDK) DetachTypedLink(ctx context.Context, request operations.DetachType
 	return res, nil
 }
 
+// DisableDirectory - Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.
 func (s *SDK) DisableDirectory(ctx context.Context, request operations.DisableDirectoryRequest) (*operations.DisableDirectoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/directory/disable#x-amz-data-partition"
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -3365,7 +3415,7 @@ func (s *SDK) DisableDirectory(ctx context.Context, request operations.DisableDi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3475,8 +3525,9 @@ func (s *SDK) DisableDirectory(ctx context.Context, request operations.DisableDi
 	return res, nil
 }
 
+// EnableDirectory - Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.
 func (s *SDK) EnableDirectory(ctx context.Context, request operations.EnableDirectoryRequest) (*operations.EnableDirectoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/directory/enable#x-amz-data-partition"
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -3486,7 +3537,7 @@ func (s *SDK) EnableDirectory(ctx context.Context, request operations.EnableDire
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3596,8 +3647,9 @@ func (s *SDK) EnableDirectory(ctx context.Context, request operations.EnableDire
 	return res, nil
 }
 
+// GetAppliedSchemaVersion - Returns current applied schema version ARN, including the minor version in use.
 func (s *SDK) GetAppliedSchemaVersion(ctx context.Context, request operations.GetAppliedSchemaVersionRequest) (*operations.GetAppliedSchemaVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/getappliedschema"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3617,7 +3669,7 @@ func (s *SDK) GetAppliedSchemaVersion(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3717,8 +3769,9 @@ func (s *SDK) GetAppliedSchemaVersion(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDirectory - Retrieves metadata about a directory.
 func (s *SDK) GetDirectory(ctx context.Context, request operations.GetDirectoryRequest) (*operations.GetDirectoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/directory/get#x-amz-data-partition"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3728,7 +3781,7 @@ func (s *SDK) GetDirectory(ctx context.Context, request operations.GetDirectoryR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3818,8 +3871,9 @@ func (s *SDK) GetDirectory(ctx context.Context, request operations.GetDirectoryR
 	return res, nil
 }
 
+// GetFacet - Gets details of the <a>Facet</a>, such as facet name, attributes, <a>Rule</a>s, or <code>ObjectType</code>. You can call this on all kinds of schema facets -- published, development, or applied.
 func (s *SDK) GetFacet(ctx context.Context, request operations.GetFacetRequest) (*operations.GetFacetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/facet#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3839,7 +3893,7 @@ func (s *SDK) GetFacet(ctx context.Context, request operations.GetFacetRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3949,8 +4003,9 @@ func (s *SDK) GetFacet(ctx context.Context, request operations.GetFacetRequest) 
 	return res, nil
 }
 
+// GetLinkAttributes - Retrieves attributes that are associated with a typed link.
 func (s *SDK) GetLinkAttributes(ctx context.Context, request operations.GetLinkAttributesRequest) (*operations.GetLinkAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/attributes/get#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3970,7 +4025,7 @@ func (s *SDK) GetLinkAttributes(ctx context.Context, request operations.GetLinkA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4090,8 +4145,9 @@ func (s *SDK) GetLinkAttributes(ctx context.Context, request operations.GetLinkA
 	return res, nil
 }
 
+// GetObjectAttributes - Retrieves attributes within a facet that are associated with an object.
 func (s *SDK) GetObjectAttributes(ctx context.Context, request operations.GetObjectAttributesRequest) (*operations.GetObjectAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/attributes/get#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4111,7 +4167,7 @@ func (s *SDK) GetObjectAttributes(ctx context.Context, request operations.GetObj
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4231,8 +4287,9 @@ func (s *SDK) GetObjectAttributes(ctx context.Context, request operations.GetObj
 	return res, nil
 }
 
+// GetObjectInformation - Retrieves metadata about an object.
 func (s *SDK) GetObjectInformation(ctx context.Context, request operations.GetObjectInformationRequest) (*operations.GetObjectInformationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/information#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4252,7 +4309,7 @@ func (s *SDK) GetObjectInformation(ctx context.Context, request operations.GetOb
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4362,8 +4419,9 @@ func (s *SDK) GetObjectInformation(ctx context.Context, request operations.GetOb
 	return res, nil
 }
 
+// GetSchemaAsJSON - Retrieves a JSON representation of the schema. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json">JSON Schema Format</a> for more information.
 func (s *SDK) GetSchemaAsJSON(ctx context.Context, request operations.GetSchemaAsJSONRequest) (*operations.GetSchemaAsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/json#x-amz-data-partition"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -4373,7 +4431,7 @@ func (s *SDK) GetSchemaAsJSON(ctx context.Context, request operations.GetSchemaA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4483,8 +4541,9 @@ func (s *SDK) GetSchemaAsJSON(ctx context.Context, request operations.GetSchemaA
 	return res, nil
 }
 
+// GetTypedLinkFacetInformation - Returns the identity attribute order for a specific <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) GetTypedLinkFacetInformation(ctx context.Context, request operations.GetTypedLinkFacetInformationRequest) (*operations.GetTypedLinkFacetInformationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/get#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4504,7 +4563,7 @@ func (s *SDK) GetTypedLinkFacetInformation(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4624,8 +4683,9 @@ func (s *SDK) GetTypedLinkFacetInformation(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListAppliedSchemaArns - Lists schema major versions applied to a directory. If <code>SchemaArn</code> is provided, lists the minor version.
 func (s *SDK) ListAppliedSchemaArns(ctx context.Context, request operations.ListAppliedSchemaArnsRequest) (*operations.ListAppliedSchemaArnsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/applied"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4647,7 +4707,7 @@ func (s *SDK) ListAppliedSchemaArns(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4757,8 +4817,9 @@ func (s *SDK) ListAppliedSchemaArns(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListAttachedIndices - Lists indices attached to the specified object.
 func (s *SDK) ListAttachedIndices(ctx context.Context, request operations.ListAttachedIndicesRequest) (*operations.ListAttachedIndicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/indices#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4780,7 +4841,7 @@ func (s *SDK) ListAttachedIndices(ctx context.Context, request operations.ListAt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4890,8 +4951,9 @@ func (s *SDK) ListAttachedIndices(ctx context.Context, request operations.ListAt
 	return res, nil
 }
 
+// ListDevelopmentSchemaArns - Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
 func (s *SDK) ListDevelopmentSchemaArns(ctx context.Context, request operations.ListDevelopmentSchemaArnsRequest) (*operations.ListDevelopmentSchemaArnsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/development"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4913,7 +4975,7 @@ func (s *SDK) ListDevelopmentSchemaArns(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5023,8 +5085,9 @@ func (s *SDK) ListDevelopmentSchemaArns(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListDirectories - Lists directories created within an account.
 func (s *SDK) ListDirectories(ctx context.Context, request operations.ListDirectoriesRequest) (*operations.ListDirectoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/directory/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5046,7 +5109,7 @@ func (s *SDK) ListDirectories(ctx context.Context, request operations.ListDirect
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5146,8 +5209,9 @@ func (s *SDK) ListDirectories(ctx context.Context, request operations.ListDirect
 	return res, nil
 }
 
+// ListFacetAttributes - Retrieves attributes attached to the facet.
 func (s *SDK) ListFacetAttributes(ctx context.Context, request operations.ListFacetAttributesRequest) (*operations.ListFacetAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/facet/attributes#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5169,7 +5233,7 @@ func (s *SDK) ListFacetAttributes(ctx context.Context, request operations.ListFa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5289,8 +5353,9 @@ func (s *SDK) ListFacetAttributes(ctx context.Context, request operations.ListFa
 	return res, nil
 }
 
+// ListFacetNames - Retrieves the names of facets that exist in a schema.
 func (s *SDK) ListFacetNames(ctx context.Context, request operations.ListFacetNamesRequest) (*operations.ListFacetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/facet/list#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5312,7 +5377,7 @@ func (s *SDK) ListFacetNames(ctx context.Context, request operations.ListFacetNa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5422,8 +5487,9 @@ func (s *SDK) ListFacetNames(ctx context.Context, request operations.ListFacetNa
 	return res, nil
 }
 
+// ListIncomingTypedLinks - Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) ListIncomingTypedLinks(ctx context.Context, request operations.ListIncomingTypedLinksRequest) (*operations.ListIncomingTypedLinksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/incoming#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5443,7 +5509,7 @@ func (s *SDK) ListIncomingTypedLinks(ctx context.Context, request operations.Lis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5573,8 +5639,9 @@ func (s *SDK) ListIncomingTypedLinks(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListIndex - Lists objects attached to the specified index.
 func (s *SDK) ListIndex(ctx context.Context, request operations.ListIndexRequest) (*operations.ListIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/index/targets#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5596,7 +5663,7 @@ func (s *SDK) ListIndex(ctx context.Context, request operations.ListIndexRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5736,8 +5803,9 @@ func (s *SDK) ListIndex(ctx context.Context, request operations.ListIndexRequest
 	return res, nil
 }
 
+// ListManagedSchemaArns - Lists the major version families of each managed schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
 func (s *SDK) ListManagedSchemaArns(ctx context.Context, request operations.ListManagedSchemaArnsRequest) (*operations.ListManagedSchemaArnsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/managed"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5759,7 +5827,7 @@ func (s *SDK) ListManagedSchemaArns(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5849,8 +5917,9 @@ func (s *SDK) ListManagedSchemaArns(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListObjectAttributes - Lists all attributes that are associated with an object.
 func (s *SDK) ListObjectAttributes(ctx context.Context, request operations.ListObjectAttributesRequest) (*operations.ListObjectAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/attributes#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5872,7 +5941,7 @@ func (s *SDK) ListObjectAttributes(ctx context.Context, request operations.ListO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6002,8 +6071,9 @@ func (s *SDK) ListObjectAttributes(ctx context.Context, request operations.ListO
 	return res, nil
 }
 
+// ListObjectChildren - Returns a paginated list of child objects that are associated with a given object.
 func (s *SDK) ListObjectChildren(ctx context.Context, request operations.ListObjectChildrenRequest) (*operations.ListObjectChildrenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/children#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6025,7 +6095,7 @@ func (s *SDK) ListObjectChildren(ctx context.Context, request operations.ListObj
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6155,8 +6225,9 @@ func (s *SDK) ListObjectChildren(ctx context.Context, request operations.ListObj
 	return res, nil
 }
 
+// ListObjectParentPaths - <p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.</p>
 func (s *SDK) ListObjectParentPaths(ctx context.Context, request operations.ListObjectParentPathsRequest) (*operations.ListObjectParentPathsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/parentpaths#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6178,7 +6249,7 @@ func (s *SDK) ListObjectParentPaths(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6298,8 +6369,9 @@ func (s *SDK) ListObjectParentPaths(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListObjectParents - Lists parent objects that are associated with a given object in pagination fashion.
 func (s *SDK) ListObjectParents(ctx context.Context, request operations.ListObjectParentsRequest) (*operations.ListObjectParentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/parent#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6321,7 +6393,7 @@ func (s *SDK) ListObjectParents(ctx context.Context, request operations.ListObje
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6451,8 +6523,9 @@ func (s *SDK) ListObjectParents(ctx context.Context, request operations.ListObje
 	return res, nil
 }
 
+// ListObjectPolicies - Returns policies attached to an object in pagination fashion.
 func (s *SDK) ListObjectPolicies(ctx context.Context, request operations.ListObjectPoliciesRequest) (*operations.ListObjectPoliciesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/policy#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6474,7 +6547,7 @@ func (s *SDK) ListObjectPolicies(ctx context.Context, request operations.ListObj
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6594,8 +6667,9 @@ func (s *SDK) ListObjectPolicies(ctx context.Context, request operations.ListObj
 	return res, nil
 }
 
+// ListOutgoingTypedLinks - Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) ListOutgoingTypedLinks(ctx context.Context, request operations.ListOutgoingTypedLinksRequest) (*operations.ListOutgoingTypedLinksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/outgoing#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6615,7 +6689,7 @@ func (s *SDK) ListOutgoingTypedLinks(ctx context.Context, request operations.Lis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6745,8 +6819,9 @@ func (s *SDK) ListOutgoingTypedLinks(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListPolicyAttachments - Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.
 func (s *SDK) ListPolicyAttachments(ctx context.Context, request operations.ListPolicyAttachmentsRequest) (*operations.ListPolicyAttachmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/policy/attachment#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6768,7 +6843,7 @@ func (s *SDK) ListPolicyAttachments(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6898,8 +6973,9 @@ func (s *SDK) ListPolicyAttachments(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListPublishedSchemaArns - Lists the major version families of each published schema. If a major version ARN is provided as <code>SchemaArn</code>, the minor version revisions in that family are listed instead.
 func (s *SDK) ListPublishedSchemaArns(ctx context.Context, request operations.ListPublishedSchemaArnsRequest) (*operations.ListPublishedSchemaArnsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/published"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6921,7 +6997,7 @@ func (s *SDK) ListPublishedSchemaArns(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7031,8 +7107,9 @@ func (s *SDK) ListPublishedSchemaArns(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListTagsForResource - Returns tags for a resource. Tagging is currently supported only for directories with a limit of 50 tags per directory. All 50 tags are returned for a given directory with this API call.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/tags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7054,7 +7131,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7164,8 +7241,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListTypedLinkFacetAttributes - Returns a paginated list of all attribute definitions for a particular <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) ListTypedLinkFacetAttributes(ctx context.Context, request operations.ListTypedLinkFacetAttributesRequest) (*operations.ListTypedLinkFacetAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/attributes#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7187,7 +7265,7 @@ func (s *SDK) ListTypedLinkFacetAttributes(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7307,8 +7385,9 @@ func (s *SDK) ListTypedLinkFacetAttributes(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListTypedLinkFacetNames - Returns a paginated list of <code>TypedLink</code> facet names for a particular schema. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) ListTypedLinkFacetNames(ctx context.Context, request operations.ListTypedLinkFacetNamesRequest) (*operations.ListTypedLinkFacetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/list#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7330,7 +7409,7 @@ func (s *SDK) ListTypedLinkFacetNames(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7440,8 +7519,9 @@ func (s *SDK) ListTypedLinkFacetNames(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// LookupPolicy - Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don't lead to the root from the target object are ignored. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies">Policies</a>.
 func (s *SDK) LookupPolicy(ctx context.Context, request operations.LookupPolicyRequest) (*operations.LookupPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/policy/lookup#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7463,7 +7543,7 @@ func (s *SDK) LookupPolicy(ctx context.Context, request operations.LookupPolicyR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7583,8 +7663,9 @@ func (s *SDK) LookupPolicy(ctx context.Context, request operations.LookupPolicyR
 	return res, nil
 }
 
+// PublishSchema - Publishes a development schema with a major version and a recommended minor version.
 func (s *SDK) PublishSchema(ctx context.Context, request operations.PublishSchemaRequest) (*operations.PublishSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/publish#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7604,7 +7685,7 @@ func (s *SDK) PublishSchema(ctx context.Context, request operations.PublishSchem
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7714,8 +7795,9 @@ func (s *SDK) PublishSchema(ctx context.Context, request operations.PublishSchem
 	return res, nil
 }
 
+// PutSchemaFromJSON - Allows a schema to be updated using JSON upload. Only available for development schemas. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json">JSON Schema Format</a> for more information.
 func (s *SDK) PutSchemaFromJSON(ctx context.Context, request operations.PutSchemaFromJSONRequest) (*operations.PutSchemaFromJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/json#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7735,7 +7817,7 @@ func (s *SDK) PutSchemaFromJSON(ctx context.Context, request operations.PutSchem
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7845,8 +7927,9 @@ func (s *SDK) PutSchemaFromJSON(ctx context.Context, request operations.PutSchem
 	return res, nil
 }
 
+// RemoveFacetFromObject - Removes the specified facet from the specified object.
 func (s *SDK) RemoveFacetFromObject(ctx context.Context, request operations.RemoveFacetFromObjectRequest) (*operations.RemoveFacetFromObjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/facets/delete#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7866,7 +7949,7 @@ func (s *SDK) RemoveFacetFromObject(ctx context.Context, request operations.Remo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7986,8 +8069,9 @@ func (s *SDK) RemoveFacetFromObject(ctx context.Context, request operations.Remo
 	return res, nil
 }
 
+// TagResource - An API operation for adding tags to a resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/tags/add"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8007,7 +8091,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8117,8 +8201,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - An API operation for removing tags from a resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/tags/remove"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8138,7 +8223,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8248,8 +8333,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateFacet - <p>Does the following:</p> <ol> <li> <p>Adds new <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Updates existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Deletes existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> </ol>
 func (s *SDK) UpdateFacet(ctx context.Context, request operations.UpdateFacetRequest) (*operations.UpdateFacetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/facet#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8269,7 +8355,7 @@ func (s *SDK) UpdateFacet(ctx context.Context, request operations.UpdateFacetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8409,8 +8495,9 @@ func (s *SDK) UpdateFacet(ctx context.Context, request operations.UpdateFacetReq
 	return res, nil
 }
 
+// UpdateLinkAttributes - Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>.
 func (s *SDK) UpdateLinkAttributes(ctx context.Context, request operations.UpdateLinkAttributesRequest) (*operations.UpdateLinkAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/attributes/update#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8430,7 +8517,7 @@ func (s *SDK) UpdateLinkAttributes(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8550,8 +8637,9 @@ func (s *SDK) UpdateLinkAttributes(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateObjectAttributes - Updates a given object's attributes.
 func (s *SDK) UpdateObjectAttributes(ctx context.Context, request operations.UpdateObjectAttributesRequest) (*operations.UpdateObjectAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/object/update#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8571,7 +8659,7 @@ func (s *SDK) UpdateObjectAttributes(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8701,8 +8789,9 @@ func (s *SDK) UpdateObjectAttributes(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateSchema - Updates the schema name with a new name. Only development schema names can be updated.
 func (s *SDK) UpdateSchema(ctx context.Context, request operations.UpdateSchemaRequest) (*operations.UpdateSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/update#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8722,7 +8811,7 @@ func (s *SDK) UpdateSchema(ctx context.Context, request operations.UpdateSchemaR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8822,8 +8911,9 @@ func (s *SDK) UpdateSchema(ctx context.Context, request operations.UpdateSchemaR
 	return res, nil
 }
 
+// UpdateTypedLinkFacet - Updates a <a>TypedLinkFacet</a>. For more information, see <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink">Typed Links</a>.
 func (s *SDK) UpdateTypedLinkFacet(ctx context.Context, request operations.UpdateTypedLinkFacetRequest) (*operations.UpdateTypedLinkFacetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/typedlink/facet#x-amz-data-partition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8843,7 +8933,7 @@ func (s *SDK) UpdateTypedLinkFacet(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8983,8 +9073,9 @@ func (s *SDK) UpdateTypedLinkFacet(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpgradeAppliedSchema - Upgrades a single directory in-place using the <code>PublishedSchemaArn</code> with schema updates found in <code>MinorVersion</code>. Backwards-compatible minor version upgrades are instantaneously available for readers on all objects in the directory. Note: This is a synchronous API call and upgrades only one schema on a given directory per call. To upgrade multiple directories from one schema, you would need to call this API on each directory.
 func (s *SDK) UpgradeAppliedSchema(ctx context.Context, request operations.UpgradeAppliedSchemaRequest) (*operations.UpgradeAppliedSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/upgradeapplied"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9004,7 +9095,7 @@ func (s *SDK) UpgradeAppliedSchema(ctx context.Context, request operations.Upgra
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9124,8 +9215,9 @@ func (s *SDK) UpgradeAppliedSchema(ctx context.Context, request operations.Upgra
 	return res, nil
 }
 
+// UpgradePublishedSchema - Upgrades a published schema under a new minor version revision using the current contents of <code>DevelopmentSchemaArn</code>.
 func (s *SDK) UpgradePublishedSchema(ctx context.Context, request operations.UpgradePublishedSchemaRequest) (*operations.UpgradePublishedSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/amazonclouddirectory/2017-01-11/schema/upgradepublished"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9145,7 +9237,7 @@ func (s *SDK) UpgradePublishedSchema(ctx context.Context, request operations.Upg
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

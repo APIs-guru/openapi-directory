@@ -12,6 +12,8 @@ const (
 	DeviceInfoDeviceTypeEnumOther                 DeviceInfoDeviceTypeEnum = "OTHER"
 )
 
+// DeviceInfo
+// Device information collected from the job seeker, candidate, or other entity conducting the job search. Providing this information improves the quality of the search results across devices.
 type DeviceInfo struct {
 	DeviceType *DeviceInfoDeviceTypeEnum `json:"deviceType,omitempty"`
 	ID         *string                   `json:"id,omitempty"`

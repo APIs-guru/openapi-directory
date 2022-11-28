@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigOvenModelShoppingListLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DateAdded" })
+  @SpeakeasyMetadata({ data: "json, name=DateAdded" })
   dateAdded?: Date;
 
-  @Metadata({ data: "json, name=Dept" })
+  @SpeakeasyMetadata({ data: "json, name=Dept" })
   dept?: string;
 
-  @Metadata({ data: "json, name=GUID" })
+  @SpeakeasyMetadata({ data: "json, name=GUID" })
   guid?: string;
 
-  @Metadata({ data: "json, name=HTMLItemName" })
+  @SpeakeasyMetadata({ data: "json, name=HTMLItemName" })
   htmlItemName?: string;
 
-  @Metadata({ data: "json, name=IsChecked" })
+  @SpeakeasyMetadata({ data: "json, name=IsChecked" })
   isChecked?: boolean;
 
-  @Metadata({ data: "json, name=ItemName" })
+  @SpeakeasyMetadata({ data: "json, name=ItemName" })
   itemName?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=ListID" })
+  @SpeakeasyMetadata({ data: "json, name=ListID" })
   listId?: number;
 
-  @Metadata({ data: "json, name=MealPlanID" })
+  @SpeakeasyMetadata({ data: "json, name=MealPlanID" })
   mealPlanId?: number;
 
-  @Metadata({ data: "json, name=MealPlanObjectType" })
+  @SpeakeasyMetadata({ data: "json, name=MealPlanObjectType" })
   mealPlanObjectType?: number;
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=PendingAddition" })
+  @SpeakeasyMetadata({ data: "json, name=PendingAddition" })
   pendingAddition?: boolean;
 
-  @Metadata({ data: "json, name=RecipeID" })
+  @SpeakeasyMetadata({ data: "json, name=RecipeID" })
   recipeId?: number;
 
-  @Metadata({ data: "json, name=ShoppingListLineID" })
+  @SpeakeasyMetadata({ data: "json, name=ShoppingListLineID" })
   shoppingListLineId?: number;
 
-  @Metadata({ data: "json, name=Store" })
+  @SpeakeasyMetadata({ data: "json, name=Store" })
   store?: string;
 
-  @Metadata({ data: "json, name=TextAmt" })
+  @SpeakeasyMetadata({ data: "json, name=TextAmt" })
   textAmt?: string;
 
-  @Metadata({ data: "json, name=ThirdPartyHost" })
+  @SpeakeasyMetadata({ data: "json, name=ThirdPartyHost" })
   thirdPartyHost?: string;
 
-  @Metadata({ data: "json, name=ThirdPartyTitle" })
+  @SpeakeasyMetadata({ data: "json, name=ThirdPartyTitle" })
   thirdPartyTitle?: string;
 
-  @Metadata({ data: "json, name=ThirdPartyURL" })
+  @SpeakeasyMetadata({ data: "json, name=ThirdPartyURL" })
   thirdPartyUrl?: string;
 }

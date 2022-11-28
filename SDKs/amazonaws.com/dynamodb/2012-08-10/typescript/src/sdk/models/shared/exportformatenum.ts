@@ -1,6 +1,7 @@
 
 
+
 export enum ExportFormatEnum {
-    DynamodbJson = "DYNAMODB_JSON"
-,    Ion = "ION"
+    DynamodbJson = "DYNAMODB_JSON",
+    Ion = "ION"
 }

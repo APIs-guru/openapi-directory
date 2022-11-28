@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuditCaseSubCategory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sub_category_id" })
+  @SpeakeasyMetadata({ data: "json, name=sub_category_id" })
   subCategoryId?: string;
 
-  @Metadata({ data: "json, name=sub_category_name" })
+  @SpeakeasyMetadata({ data: "json, name=sub_category_name" })
   subCategoryName?: string;
 }

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DataItemParentIdent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parentValueIdent" })
+  @SpeakeasyMetadata({ data: "json, name=parentValueIdent" })
   parentValueIdent?: string;
 
-  @Metadata({ data: "json, name=parentVariableIdent" })
+  @SpeakeasyMetadata({ data: "json, name=parentVariableIdent" })
   parentVariableIdent?: string;
 }
 
 
 export class DataItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ident" })
+  @SpeakeasyMetadata({ data: "json, name=ident" })
   ident?: string;
 
-  @Metadata({ data: "json, name=parentIdent" })
+  @SpeakeasyMetadata({ data: "json, name=parentIdent" })
   parentIdent?: DataItemParentIdent;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

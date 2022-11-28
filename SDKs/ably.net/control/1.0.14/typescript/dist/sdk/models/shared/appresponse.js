@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AppResponseStatusEnum;
 (function (AppResponseStatusEnum) {
     AppResponseStatusEnum["Enabled"] = "enabled";
@@ -34,31 +34,31 @@ var AppResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Map)
     ], AppResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], AppResponse.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=apnsUseSandboxEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=apnsUseSandboxEndpoint" }),
         __metadata("design:type", Boolean)
     ], AppResponse.prototype, "apnsUseSandboxEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AppResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AppResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AppResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tlsOnly" }),
+        SpeakeasyMetadata({ data: "json, name=tlsOnly" }),
         __metadata("design:type", Boolean)
     ], AppResponse.prototype, "tlsOnly", void 0);
     return AppResponse;

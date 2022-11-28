@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Workflow
+// A workflow is a collection of multiple dependent Glue jobs and crawlers that are run to complete a complex ETL task. A workflow manages the execution and monitoring of all its jobs and crawlers.
 type Workflow struct {
 	BlueprintDetails     *BlueprintDetails `json:"BlueprintDetails,omitempty"`
 	CreatedOn            *time.Time        `json:"CreatedOn,omitempty"`

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputeEnum } from "./computeenum";
 import { RunningModeEnum } from "./runningmodeenum";
+
 
 
 // WorkspaceProperties
@@ -8,18 +9,18 @@ import { RunningModeEnum } from "./runningmodeenum";
  * Describes a WorkSpace.
 **/
 export class WorkspaceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComputeTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=ComputeTypeName" })
   computeTypeName?: ComputeEnum;
 
-  @Metadata({ data: "json, name=RootVolumeSizeGib" })
+  @SpeakeasyMetadata({ data: "json, name=RootVolumeSizeGib" })
   rootVolumeSizeGib?: number;
 
-  @Metadata({ data: "json, name=RunningMode" })
+  @SpeakeasyMetadata({ data: "json, name=RunningMode" })
   runningMode?: RunningModeEnum;
 
-  @Metadata({ data: "json, name=RunningModeAutoStopTimeoutInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=RunningModeAutoStopTimeoutInMinutes" })
   runningModeAutoStopTimeoutInMinutes?: number;
 
-  @Metadata({ data: "json, name=UserVolumeSizeGib" })
+  @SpeakeasyMetadata({ data: "json, name=UserVolumeSizeGib" })
   userVolumeSizeGib?: number;
 }

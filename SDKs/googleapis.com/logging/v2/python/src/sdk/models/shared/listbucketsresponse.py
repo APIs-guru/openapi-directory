@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import logbucket
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListBucketsResponse:
-    buckets: Optional[List[logbucket.LogBucket]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buckets' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListBucketsResponse
+    The response from ListBuckets.
+    """
+    
+    buckets: Optional[List[LogBucket]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buckets') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

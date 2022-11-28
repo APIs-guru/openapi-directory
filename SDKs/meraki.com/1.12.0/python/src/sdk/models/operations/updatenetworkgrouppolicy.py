@@ -1,19 +1,28 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateNetworkGroupPolicyPathParams:
-    group_policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'groupPolicyId', 'style': 'simple', 'explode': False }})
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    group_policy_id: str = field(metadata={'path_param': { 'field_name': 'groupPolicyId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits:
-    limit_down: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limitDown' }})
-    limit_up: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limitUp' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits
+    The bandwidth limits object, specifying upload and download speed for clients bound to the group policy. These are only enforced if 'settings' is set to 'custom'.
+    """
+    
+    limit_down: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limitDown') }})
+    limit_up: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limitUp') }})
     
 class UpdateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum(str, Enum):
     NETWORK_DEFAULT = "network default"
@@ -24,8 +33,13 @@ class UpdateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyBandwidth:
-    bandwidth_limits: Optional[UpdateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bandwidthLimits' }})
-    settings: Optional[UpdateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyBandwidth
+        The bandwidth settings for clients bound to your group policy.
+    
+    """
+    
+    bandwidth_limits: Optional[UpdateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bandwidthLimits') }})
+    settings: Optional[UpdateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     
 class UpdateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum(str, Enum):
     ALL_SERVICES = "All Services"
@@ -44,9 +58,9 @@ class UpdateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum(str,
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyBonjourForwardingRules:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    services: List[UpdateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
-    vlan_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlanId' }})
+    services: List[UpdateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('services') }})
+    vlan_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 class UpdateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum(str, Enum):
     NETWORK_DEFAULT = "network default"
@@ -57,8 +71,12 @@ class UpdateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum(str, Enum
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyBonjourForwarding:
-    rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyBonjourForwardingRules]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
-    settings: Optional[UpdateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyBonjourForwarding
+    The Bonjour settings for your group policy. Only valid if your network has a wireless configuration.
+    """
+    
+    rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyBonjourForwardingRules]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rules') }})
+    settings: Optional[UpdateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     
 class UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum(str, Enum):
     NETWORK_DEFAULT = "network default"
@@ -69,8 +87,12 @@ class UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSetti
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns:
-    patterns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patterns' }})
-    settings: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns
+    Settings for allowed URL patterns
+    """
+    
+    patterns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('patterns') }})
+    settings: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     
 class UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum(str, Enum):
     NETWORK_DEFAULT = "network default"
@@ -81,8 +103,12 @@ class UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSet
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories:
-    categories: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    settings: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories
+    Settings for blocked URL categories
+    """
+    
+    categories: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    settings: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     
 class UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum(str, Enum):
     NETWORK_DEFAULT = "network default"
@@ -93,26 +119,34 @@ class UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSetti
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns:
-    patterns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patterns' }})
-    settings: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns
+    Settings for blocked URL patterns
+    """
+    
+    patterns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('patterns') }})
+    settings: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyContentFiltering:
-    allowed_url_patterns: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowedUrlPatterns' }})
-    blocked_url_categories: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blockedUrlCategories' }})
-    blocked_url_patterns: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blockedUrlPatterns' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyContentFiltering
+    The content filtering settings for your group policy
+    """
+    
+    allowed_url_patterns: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowedUrlPatterns') }})
+    blocked_url_categories: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('blockedUrlCategories') }})
+    blocked_url_patterns: Optional[UpdateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('blockedUrlPatterns') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules:
-    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment' }})
-    dest_cidr: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destCidr' }})
-    dest_port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destPort' }})
-    policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
-    protocol: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    dest_cidr: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('destCidr') }})
+    policy: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    protocol: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
+    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comment') }})
+    dest_port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destPort') }})
     
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesPolicyEnum(str, Enum):
     DENY = "deny"
@@ -128,9 +162,9 @@ class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRule
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules:
-    policy: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
-    type: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    policy: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    type: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum(str, Enum):
     NETWORK_DEFAULT = "network default"
@@ -149,110 +183,157 @@ class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShaping
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions:
-    type: UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitionsTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    type: UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitionsTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits:
-    limit_down: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limitDown' }})
-    limit_up: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limitUp' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits
+    The bandwidth limits object, specifying the upload ('limitUp') and download ('limitDown') speed in Kbps. These are only enforced if 'settings' is set to 'custom'.
+    """
+    
+    limit_down: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limitDown') }})
+    limit_up: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limitUp') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits:
-    bandwidth_limits: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bandwidthLimits' }})
-    settings: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits
+        An object describing the bandwidth settings for your rule.
+    
+    """
+    
+    bandwidth_limits: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bandwidthLimits') }})
+    settings: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules:
-    definitions: List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'definitions' }})
-    dscp_tag_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dscpTagValue' }})
-    pcp_tag_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pcpTagValue' }})
-    per_client_bandwidth_limits: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'perClientBandwidthLimits' }})
-    priority: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priority' }})
+    definitions: List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('definitions') }})
+    dscp_tag_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dscpTagValue') }})
+    pcp_tag_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pcpTagValue') }})
+    per_client_bandwidth_limits: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('perClientBandwidthLimits') }})
+    priority: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping:
-    l3_firewall_rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'l3FirewallRules' }})
-    l7_firewall_rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'l7FirewallRules' }})
-    settings: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
-    traffic_shaping_rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trafficShapingRules' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping
+        The firewall and traffic shaping rules and settings for your policy.
+    
+    """
+    
+    l3_firewall_rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('l3FirewallRules') }})
+    l7_firewall_rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('l7FirewallRules') }})
+    settings: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
+    traffic_shaping_rules: Optional[List[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trafficShapingRules') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodySchedulingFriday:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    r"""UpdateNetworkGroupPolicyRequestBodySchedulingFriday
+    The schedule object for Friday.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodySchedulingMonday:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    r"""UpdateNetworkGroupPolicyRequestBodySchedulingMonday
+    The schedule object for Monday.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodySchedulingSaturday:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    r"""UpdateNetworkGroupPolicyRequestBodySchedulingSaturday
+    The schedule object for Saturday.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodySchedulingSunday:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    r"""UpdateNetworkGroupPolicyRequestBodySchedulingSunday
+    The schedule object for Sunday.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodySchedulingThursday:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    r"""UpdateNetworkGroupPolicyRequestBodySchedulingThursday
+    The schedule object for Thursday.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodySchedulingTuesday:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    r"""UpdateNetworkGroupPolicyRequestBodySchedulingTuesday
+    The schedule object for Tuesday.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodySchedulingWednesday:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    r"""UpdateNetworkGroupPolicyRequestBodySchedulingWednesday
+    The schedule object for Wednesday.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    from_: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyScheduling:
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    friday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingFriday] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'friday' }})
-    monday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingMonday] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'monday' }})
-    saturday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingSaturday] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'saturday' }})
-    sunday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingSunday] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sunday' }})
-    thursday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingThursday] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thursday' }})
-    tuesday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingTuesday] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tuesday' }})
-    wednesday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingWednesday] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wednesday' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyScheduling
+        The schedule for the group policy. Schedules are applied to days of the week.
+    
+    """
+    
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    friday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingFriday] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('friday') }})
+    monday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingMonday] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('monday') }})
+    saturday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingSaturday] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('saturday') }})
+    sunday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingSunday] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sunday') }})
+    thursday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingThursday] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thursday') }})
+    tuesday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingTuesday] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tuesday') }})
+    wednesday: Optional[UpdateNetworkGroupPolicyRequestBodySchedulingWednesday] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wednesday') }})
     
 class UpdateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum(str, Enum):
     NETWORK_DEFAULT = "network default"
@@ -267,32 +348,36 @@ class UpdateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBodyVlanTagging:
-    settings: Optional[UpdateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
-    vlan_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlanId' }})
+    r"""UpdateNetworkGroupPolicyRequestBodyVlanTagging
+    The VLAN tagging settings for your group policy. Only available if your network has a wireless configuration.
+    """
+    
+    settings: Optional[UpdateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
+    vlan_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanId') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateNetworkGroupPolicyRequestBody:
-    bandwidth: Optional[UpdateNetworkGroupPolicyRequestBodyBandwidth] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bandwidth' }})
-    bonjour_forwarding: Optional[UpdateNetworkGroupPolicyRequestBodyBonjourForwarding] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bonjourForwarding' }})
-    content_filtering: Optional[UpdateNetworkGroupPolicyRequestBodyContentFiltering] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentFiltering' }})
-    firewall_and_traffic_shaping: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewallAndTrafficShaping' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    scheduling: Optional[UpdateNetworkGroupPolicyRequestBodyScheduling] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduling' }})
-    splash_auth_settings: Optional[UpdateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'splashAuthSettings' }})
-    vlan_tagging: Optional[UpdateNetworkGroupPolicyRequestBodyVlanTagging] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlanTagging' }})
+    bandwidth: Optional[UpdateNetworkGroupPolicyRequestBodyBandwidth] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bandwidth') }})
+    bonjour_forwarding: Optional[UpdateNetworkGroupPolicyRequestBodyBonjourForwarding] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bonjourForwarding') }})
+    content_filtering: Optional[UpdateNetworkGroupPolicyRequestBodyContentFiltering] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentFiltering') }})
+    firewall_and_traffic_shaping: Optional[UpdateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('firewallAndTrafficShaping') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    scheduling: Optional[UpdateNetworkGroupPolicyRequestBodyScheduling] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduling') }})
+    splash_auth_settings: Optional[UpdateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('splashAuthSettings') }})
+    vlan_tagging: Optional[UpdateNetworkGroupPolicyRequestBodyVlanTagging] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanTagging') }})
     
 
 @dataclass
 class UpdateNetworkGroupPolicyRequest:
-    path_params: UpdateNetworkGroupPolicyPathParams = field(default=None)
+    path_params: UpdateNetworkGroupPolicyPathParams = field()
     request: Optional[UpdateNetworkGroupPolicyRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateNetworkGroupPolicyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     update_network_group_policy_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

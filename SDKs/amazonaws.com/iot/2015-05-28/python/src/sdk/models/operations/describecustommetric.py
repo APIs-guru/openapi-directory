@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeCustomMetricPathParams:
-    metric_name: str = field(default=None, metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
+    metric_name: str = field(metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DescribeCustomMetricHeaders:
 
 @dataclass
 class DescribeCustomMetricRequest:
-    path_params: DescribeCustomMetricPathParams = field(default=None)
-    headers: DescribeCustomMetricHeaders = field(default=None)
+    headers: DescribeCustomMetricHeaders = field()
+    path_params: DescribeCustomMetricPathParams = field()
     
 
 @dataclass
 class DescribeCustomMetricResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_custom_metric_response: Optional[shared.DescribeCustomMetricResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

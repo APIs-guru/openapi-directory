@@ -1,5 +1,7 @@
 package shared
 
+// ScoreSubmission
+// A request to submit a score to leaderboards.
 type ScoreSubmission struct {
 	Kind          *string `json:"kind,omitempty"`
 	LeaderboardID *string `json:"leaderboardId,omitempty"`

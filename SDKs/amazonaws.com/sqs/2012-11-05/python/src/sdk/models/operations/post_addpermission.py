@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAddPermissionActionEnum(str, Enum):
     ADD_PERMISSION = "AddPermission"
@@ -10,8 +14,8 @@ class PostAddPermissionVersionEnum(str, Enum):
 
 @dataclass
 class PostAddPermissionQueryParams:
-    action: PostAddPermissionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAddPermissionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAddPermissionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAddPermissionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAddPermissionHeaders:
 
 @dataclass
 class PostAddPermissionRequest:
-    query_params: PostAddPermissionQueryParams = field(default=None)
-    headers: PostAddPermissionHeaders = field(default=None)
+    headers: PostAddPermissionHeaders = field()
+    query_params: PostAddPermissionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAddPermissionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

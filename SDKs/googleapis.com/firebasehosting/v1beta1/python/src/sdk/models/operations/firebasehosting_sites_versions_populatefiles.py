@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasehostingSitesVersionsPopulateFilesPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebasehostingSitesVersionsPopulateFilesQueryParams:
 
 @dataclass
 class FirebasehostingSitesVersionsPopulateFilesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasehostingSitesVersionsPopulateFilesSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebasehostingSitesVersionsPopulateFilesSecurity:
 
 @dataclass
 class FirebasehostingSitesVersionsPopulateFilesRequest:
-    path_params: FirebasehostingSitesVersionsPopulateFilesPathParams = field(default=None)
-    query_params: FirebasehostingSitesVersionsPopulateFilesQueryParams = field(default=None)
+    path_params: FirebasehostingSitesVersionsPopulateFilesPathParams = field()
+    query_params: FirebasehostingSitesVersionsPopulateFilesQueryParams = field()
+    security: FirebasehostingSitesVersionsPopulateFilesSecurity = field()
     request: Optional[shared.PopulateVersionFilesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasehostingSitesVersionsPopulateFilesSecurity = field(default=None)
     
 
 @dataclass
 class FirebasehostingSitesVersionsPopulateFilesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     populate_version_files_response: Optional[shared.PopulateVersionFilesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

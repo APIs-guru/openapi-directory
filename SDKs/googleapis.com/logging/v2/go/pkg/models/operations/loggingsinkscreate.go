@@ -41,7 +41,7 @@ type LoggingSinksCreateSecurity struct {
 type LoggingSinksCreateRequest struct {
 	PathParams  LoggingSinksCreatePathParams
 	QueryParams LoggingSinksCreateQueryParams
-	Request     *shared.LogSink `request:"mediaType=application/json"`
+	Request     *shared.LogSinkInput `request:"mediaType=application/json"`
 	Security    LoggingSinksCreateSecurity
 }
 

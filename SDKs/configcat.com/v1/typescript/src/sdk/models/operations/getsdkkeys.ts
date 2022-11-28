@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class GetSdkKeysPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=configId" })
+
+export class GetSDKKeysPathParams extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" })
   configId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
-export class GetSdkKeysRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetSdkKeysPathParams;
+export class GetSDKKeysRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetSDKKeysPathParams;
 }
 
 
-export class GetSdkKeysResponse extends SpeakeasyBase {
-  @Metadata()
+export class GetSDKKeysResponse extends SpeakeasyBase {
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
-  sdkKeysModel?: shared.SdkKeysModel;
+  @SpeakeasyMetadata()
+  sdkKeysModel?: shared.SDKKeysModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

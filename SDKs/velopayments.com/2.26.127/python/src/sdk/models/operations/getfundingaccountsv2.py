@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -18,14 +19,14 @@ class GetFundingAccountsV2QueryParams:
 
 @dataclass
 class GetFundingAccountsV2Request:
-    query_params: GetFundingAccountsV2QueryParams = field(default=None)
+    query_params: GetFundingAccountsV2QueryParams = field()
     
 
 @dataclass
 class GetFundingAccountsV2Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_funding_accounts_response_2: Optional[shared.ListFundingAccountsResponse2] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)
     

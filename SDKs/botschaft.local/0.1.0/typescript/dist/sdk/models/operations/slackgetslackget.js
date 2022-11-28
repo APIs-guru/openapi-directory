@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SlackGetSlackGetQueryParams = /** @class */ (function (_super) {
     __extends(SlackGetSlackGetQueryParams, _super);
@@ -30,15 +30,15 @@ var SlackGetSlackGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
         __metadata("design:type", String)
     ], SlackGetSlackGetQueryParams.prototype, "base64Message", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=channel" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=channel" }),
         __metadata("design:type", String)
     ], SlackGetSlackGetQueryParams.prototype, "channel", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" }),
         __metadata("design:type", String)
     ], SlackGetSlackGetQueryParams.prototype, "message", void 0);
     return SlackGetSlackGetQueryParams;
@@ -50,7 +50,7 @@ var SlackGetSlackGetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" }),
         __metadata("design:type", String)
     ], SlackGetSlackGetHeaders.prototype, "authorization", void 0);
     return SlackGetSlackGetHeaders;
@@ -62,11 +62,11 @@ var SlackGetSlackGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SlackGetSlackGetQueryParams)
     ], SlackGetSlackGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SlackGetSlackGetHeaders)
     ], SlackGetSlackGetRequest.prototype, "headers", void 0);
     return SlackGetSlackGetRequest;
@@ -78,19 +78,19 @@ var SlackGetSlackGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SlackGetSlackGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], SlackGetSlackGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SlackGetSlackGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SlackGetSlackGetResponse.prototype, "slackGetSlackGet200ApplicationJsonAny", void 0);
     return SlackGetSlackGetResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1TraceSamplingConfig } from "./googlecloudapigeev1tracesamplingconfig";
+
 
 
 // GoogleCloudApigeeV1TraceConfigOverride
@@ -7,12 +8,12 @@ import { GoogleCloudApigeeV1TraceSamplingConfig } from "./googlecloudapigeev1tra
  * A representation of a configuration override.
 **/
 export class GoogleCloudApigeeV1TraceConfigOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiProxy" })
+  @SpeakeasyMetadata({ data: "json, name=apiProxy" })
   apiProxy?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=samplingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=samplingConfig" })
   samplingConfig?: GoogleCloudApigeeV1TraceSamplingConfig;
 }

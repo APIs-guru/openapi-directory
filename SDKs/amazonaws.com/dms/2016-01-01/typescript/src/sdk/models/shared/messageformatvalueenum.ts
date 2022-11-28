@@ -1,6 +1,7 @@
 
 
+
 export enum MessageFormatValueEnum {
-    Json = "json"
-,    JsonUnformatted = "json-unformatted"
+    Json = "json",
+    JsonUnformatted = "json-unformatted"
 }

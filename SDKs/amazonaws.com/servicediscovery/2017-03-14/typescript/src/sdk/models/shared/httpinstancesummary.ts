@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthStatusEnum } from "./healthstatusenum";
+
 
 
 // HttpInstanceSummary
@@ -7,18 +8,18 @@ import { HealthStatusEnum } from "./healthstatusenum";
  * In a response to a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a> request, <code>HttpInstanceSummary</code> contains information about one instance that matches the values that you specified in the request.
 **/
 export class HttpInstanceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=HealthStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HealthStatus" })
   healthStatus?: HealthStatusEnum;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=NamespaceName" })
+  @SpeakeasyMetadata({ data: "json, name=NamespaceName" })
   namespaceName?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 }

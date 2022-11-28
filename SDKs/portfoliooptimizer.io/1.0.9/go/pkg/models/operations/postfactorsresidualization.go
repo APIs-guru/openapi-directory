@@ -9,12 +9,12 @@ type PostFactorsResidualizationRequestBody struct {
 	ResidualizedFactor int64                                          `json:"residualizedFactor"`
 }
 
-type PostFactorsResidualizationRequest struct {
-	Request PostFactorsResidualizationRequestBody `request:"mediaType=application/json"`
-}
-
 type PostFactorsResidualization200ApplicationJSON struct {
 	ResidualizedFactorReturns []float64 `json:"residualizedFactorReturns"`
+}
+
+type PostFactorsResidualizationRequest struct {
+	Request PostFactorsResidualizationRequestBody `request:"mediaType=application/json"`
 }
 
 type PostFactorsResidualizationResponse struct {

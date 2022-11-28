@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ArtifactSummary
+// Lists a summary of the properties of an artifact. An artifact represents a URI addressable object or data. Some examples are a dataset and a model.
 type ArtifactSummary struct {
 	ArtifactArn      *string         `json:"ArtifactArn,omitempty"`
 	ArtifactName     *string         `json:"ArtifactName,omitempty"`

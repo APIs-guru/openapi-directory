@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class DetachFromIndexHeaders:
+    x_amz_data_partition: str = field(metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -13,38 +18,46 @@ class DetachFromIndexHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_data_partition: str = field(default=None, metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class DetachFromIndexRequestBodyIndexReference:
-    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Selector' }})
+    r"""DetachFromIndexRequestBodyIndexReference
+    The reference that identifies an object.
+    """
+    
+    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Selector') }})
     
 
 @dataclass_json
 @dataclass
 class DetachFromIndexRequestBodyTargetReference:
-    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Selector' }})
+    r"""DetachFromIndexRequestBodyTargetReference
+    The reference that identifies an object.
+    """
+    
+    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Selector') }})
     
 
 @dataclass_json
 @dataclass
 class DetachFromIndexRequestBody:
-    index_reference: DetachFromIndexRequestBodyIndexReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexReference' }})
-    target_reference: DetachFromIndexRequestBodyTargetReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetReference' }})
+    index_reference: DetachFromIndexRequestBodyIndexReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexReference') }})
+    target_reference: DetachFromIndexRequestBodyTargetReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetReference') }})
     
 
 @dataclass
 class DetachFromIndexRequest:
-    headers: DetachFromIndexHeaders = field(default=None)
-    request: DetachFromIndexRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DetachFromIndexHeaders = field()
+    request: DetachFromIndexRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DetachFromIndexResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     detach_from_index_response: Optional[shared.DetachFromIndexResponse] = field(default=None)
     directory_not_enabled_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
@@ -54,6 +67,5 @@ class DetachFromIndexResponse:
     object_already_detached_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     retryable_conflict_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

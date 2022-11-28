@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CashinPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=betId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=betId" })
   betId: string;
 }
 
 
 export class CashinQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cashInValue" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cashInValue" })
   cashInValue: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cashinBetDelayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cashinBetDelayId" })
   cashinBetDelayId: string;
 }
 
 
 export class CashinHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=apiKey" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=apiSecret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" })
   apiSecret: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=apiTicket" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiTicket" })
   apiTicket: string;
 }
 
 
 export class CashinRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CashinPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CashinQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CashinHeaders;
 }
 
 
 export class CashinResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cashInResponse?: shared.CashInResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errors?: shared.Errors;
 }

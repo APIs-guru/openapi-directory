@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexperiencereportSitesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class AdexperiencereportSitesGetQueryParams:
 
 @dataclass
 class AdexperiencereportSitesGetRequest:
-    path_params: AdexperiencereportSitesGetPathParams = field(default=None)
-    query_params: AdexperiencereportSitesGetQueryParams = field(default=None)
+    path_params: AdexperiencereportSitesGetPathParams = field()
+    query_params: AdexperiencereportSitesGetQueryParams = field()
     
 
 @dataclass
 class AdexperiencereportSitesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     site_summary_response: Optional[shared.SiteSummaryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

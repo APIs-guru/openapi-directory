@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GlueDataCatalogConfigurationUpdate
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Updates to the configuration of the Glue Data Catalog that you use for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
 **/
 export class GlueDataCatalogConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatabaseARNUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseARNUpdate" })
   databaseArnUpdate?: string;
 }

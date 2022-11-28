@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetVersionIncidentsFormatIncidentTypeEnum;
 (function (GetVersionIncidentsFormatIncidentTypeEnum) {
     GetVersionIncidentsFormatIncidentTypeEnum["Crash"] = "crash";
@@ -38,35 +38,35 @@ var GetVersionIncidentsFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=incident_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=incident_type" }),
         __metadata("design:type", String)
     ], GetVersionIncidentsFormatQueryParams.prototype, "incidentType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=occurred_after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurred_after" }),
         __metadata("design:type", Number)
     ], GetVersionIncidentsFormatQueryParams.prototype, "occurredAfter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=occurred_before" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurred_before" }),
         __metadata("design:type", Number)
     ], GetVersionIncidentsFormatQueryParams.prototype, "occurredBefore", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetVersionIncidentsFormatQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
         __metadata("design:type", Number)
     ], GetVersionIncidentsFormatQueryParams.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=proximity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity" }),
         __metadata("design:type", String)
     ], GetVersionIncidentsFormatQueryParams.prototype, "proximity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=proximity_square" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity_square" }),
         __metadata("design:type", Number)
     ], GetVersionIncidentsFormatQueryParams.prototype, "proximitySquare", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], GetVersionIncidentsFormatQueryParams.prototype, "query", void 0);
     return GetVersionIncidentsFormatQueryParams;
@@ -78,7 +78,7 @@ var GetVersionIncidentsFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVersionIncidentsFormatQueryParams)
     ], GetVersionIncidentsFormatRequest.prototype, "queryParams", void 0);
     return GetVersionIncidentsFormatRequest;
@@ -90,11 +90,11 @@ var GetVersionIncidentsFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVersionIncidentsFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVersionIncidentsFormatResponse.prototype, "statusCode", void 0);
     return GetVersionIncidentsFormatResponse;

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SongRatingContractRatingEnum {
-    Nothing = "Nothing"
-,    Dislike = "Dislike"
-,    Like = "Like"
-,    Favorite = "Favorite"
+    Nothing = "Nothing",
+    Dislike = "Dislike",
+    Like = "Like",
+    Favorite = "Favorite"
 }
 
 
 export class SongRatingContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rating, form, name=rating;" })
+  @SpeakeasyMetadata({ data: "json, name=rating, form, name=rating;" })
   rating?: SongRatingContractRatingEnum;
 }

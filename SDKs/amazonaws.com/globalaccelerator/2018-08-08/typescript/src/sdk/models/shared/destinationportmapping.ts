@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { SocketAddress } from "./socketaddress";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SocketAddress } from "./socketaddress";
 import { CustomRoutingDestinationTrafficStateEnum } from "./customroutingdestinationtrafficstateenum";
 import { IpAddressTypeEnum } from "./ipaddresstypeenum";
+
 
 
 // DestinationPortMapping
@@ -11,27 +10,27 @@ import { IpAddressTypeEnum } from "./ipaddresstypeenum";
  * The port mappings for a specified endpoint IP address (destination).
 **/
 export class DestinationPortMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceleratorArn" })
+  @SpeakeasyMetadata({ data: "json, name=AcceleratorArn" })
   acceleratorArn?: string;
 
-  @Metadata({ data: "json, name=AcceleratorSocketAddresses", elemType: shared.SocketAddress })
+  @SpeakeasyMetadata({ data: "json, name=AcceleratorSocketAddresses", elemType: SocketAddress })
   acceleratorSocketAddresses?: SocketAddress[];
 
-  @Metadata({ data: "json, name=DestinationSocketAddress" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationSocketAddress" })
   destinationSocketAddress?: SocketAddress;
 
-  @Metadata({ data: "json, name=DestinationTrafficState" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationTrafficState" })
   destinationTrafficState?: CustomRoutingDestinationTrafficStateEnum;
 
-  @Metadata({ data: "json, name=EndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupArn" })
   endpointGroupArn?: string;
 
-  @Metadata({ data: "json, name=EndpointGroupRegion" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupRegion" })
   endpointGroupRegion?: string;
 
-  @Metadata({ data: "json, name=EndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointId" })
   endpointId?: string;
 
-  @Metadata({ data: "json, name=IpAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddressType" })
   ipAddressType?: IpAddressTypeEnum;
 }

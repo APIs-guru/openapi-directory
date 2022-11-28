@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResetCacheParameterGroupActionEnum(str, Enum):
     RESET_CACHE_PARAMETER_GROUP = "ResetCacheParameterGroup"
@@ -10,8 +14,8 @@ class PostResetCacheParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostResetCacheParameterGroupQueryParams:
-    action: PostResetCacheParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResetCacheParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResetCacheParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResetCacheParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostResetCacheParameterGroupHeaders:
 
 @dataclass
 class PostResetCacheParameterGroupRequest:
-    query_params: PostResetCacheParameterGroupQueryParams = field(default=None)
-    headers: PostResetCacheParameterGroupHeaders = field(default=None)
+    headers: PostResetCacheParameterGroupHeaders = field()
+    query_params: PostResetCacheParameterGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResetCacheParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -11,6 +11,8 @@ const (
 	GoogleCloudConnectorsV1AuthConfigAuthTypeEnumOauth2AuthCodeFlow      GoogleCloudConnectorsV1AuthConfigAuthTypeEnum = "OAUTH2_AUTH_CODE_FLOW"
 )
 
+// GoogleCloudConnectorsV1AuthConfig
+// AuthConfig defines details of a authentication type.
 type GoogleCloudConnectorsV1AuthConfig struct {
 	AdditionalVariables     []GoogleCloudConnectorsV1ConfigVariable                   `json:"additionalVariables,omitempty"`
 	AuthType                *GoogleCloudConnectorsV1AuthConfigAuthTypeEnum            `json:"authType,omitempty"`

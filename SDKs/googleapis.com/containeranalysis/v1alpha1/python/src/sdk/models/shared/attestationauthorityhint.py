@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AttestationAuthorityHint:
-    human_readable_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'humanReadableName' }})
+    r"""AttestationAuthorityHint
+    This submessage provides human-readable hints about the purpose of the AttestationAuthority. Because the name of a Note acts as its resource reference, it is important to disambiguate the canonical name of the Note (which might be a UUID for security purposes) from \"readable\" names more suitable for debug output. Note that these hints should NOT be used to look up AttestationAuthorities in security sensitive contexts, such as when looking up Attestations to verify.
+    """
+    
+    human_readable_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('humanReadableName') }})
     

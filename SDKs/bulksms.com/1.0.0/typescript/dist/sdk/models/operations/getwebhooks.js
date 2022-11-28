@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWebhooksSecurity = /** @class */ (function (_super) {
     __extends(GetWebhooksSecurity, _super);
@@ -30,7 +30,7 @@ var GetWebhooksSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], GetWebhooksSecurity.prototype, "basicAuth", void 0);
     return GetWebhooksSecurity;
@@ -42,7 +42,7 @@ var GetWebhooksRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWebhooksSecurity)
     ], GetWebhooksRequest.prototype, "security", void 0);
     return GetWebhooksRequest;
@@ -54,15 +54,15 @@ var GetWebhooksResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWebhooksResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWebhooksResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Webhook }),
+        SpeakeasyMetadata({ elemType: shared.Webhook }),
         __metadata("design:type", Array)
     ], GetWebhooksResponse.prototype, "webhooks", void 0);
     return GetWebhooksResponse;

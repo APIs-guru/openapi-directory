@@ -11,18 +11,18 @@ class DetectMultipartRequests:
 
 @dataclass
 class DetectMultipartSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class DetectMultipartRequest:
+    security: DetectMultipartSecurity = field()
     request: Optional[DetectMultipartRequests] = field(default=None)
-    security: DetectMultipartSecurity = field(default=None)
     
 
 @dataclass
 class DetectMultipartResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object_detection_response: Optional[shared.ObjectDetectionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

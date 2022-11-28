@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartAssessmentRunRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentRunName" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentRunName" })
   assessmentRunName?: string;
 
-  @Metadata({ data: "json, name=assessmentTemplateArn" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTemplateArn" })
   assessmentTemplateArn: string;
 }

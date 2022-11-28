@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionSource } from "./actionsource";
 import { ActionStatusEnum } from "./actionstatusenum";
+
 
 
 // ActionSummary
@@ -8,24 +9,24 @@ import { ActionStatusEnum } from "./actionstatusenum";
  * Lists the properties of an <i>action</i>. An action represents an action or activity. Some examples are a workflow step and a model deployment. Generally, an action involves at least one input artifact or output artifact.
 **/
 export class ActionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ActionArn" })
   actionArn?: string;
 
-  @Metadata({ data: "json, name=ActionName" })
+  @SpeakeasyMetadata({ data: "json, name=ActionName" })
   actionName?: string;
 
-  @Metadata({ data: "json, name=ActionType" })
+  @SpeakeasyMetadata({ data: "json, name=ActionType" })
   actionType?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: ActionSource;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ActionStatusEnum;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BetweenFilter } from "./betweenfilter";
 import { InListFilter } from "./inlistfilter";
 import { NumericFilter } from "./numericfilter";
 import { StringFilter } from "./stringfilter";
+
 
 
 // Filter
@@ -10,18 +11,18 @@ import { StringFilter } from "./stringfilter";
  * An expression to filter dimension or metric values.
 **/
 export class Filter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=betweenFilter" })
+  @SpeakeasyMetadata({ data: "json, name=betweenFilter" })
   betweenFilter?: BetweenFilter;
 
-  @Metadata({ data: "json, name=fieldName" })
+  @SpeakeasyMetadata({ data: "json, name=fieldName" })
   fieldName?: string;
 
-  @Metadata({ data: "json, name=inListFilter" })
+  @SpeakeasyMetadata({ data: "json, name=inListFilter" })
   inListFilter?: InListFilter;
 
-  @Metadata({ data: "json, name=numericFilter" })
+  @SpeakeasyMetadata({ data: "json, name=numericFilter" })
   numericFilter?: NumericFilter;
 
-  @Metadata({ data: "json, name=stringFilter" })
+  @SpeakeasyMetadata({ data: "json, name=stringFilter" })
   stringFilter?: StringFilter;
 }

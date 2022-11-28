@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetOccupantsOccupantIdOutputFormatOutputFormatEnum;
 (function (GetOccupantsOccupantIdOutputFormatOutputFormatEnum) {
     GetOccupantsOccupantIdOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,11 +39,11 @@ var GetOccupantsOccupantIdOutputFormatPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=occupantID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=occupantID" }),
         __metadata("design:type", String)
     ], GetOccupantsOccupantIdOutputFormatPathParams.prototype, "occupantId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetOccupantsOccupantIdOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetOccupantsOccupantIdOutputFormatPathParams;
@@ -64,19 +64,19 @@ var GetOccupantsOccupantIdOutputFormatQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brief" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" }),
         __metadata("design:type", Boolean)
     ], GetOccupantsOccupantIdOutputFormatQueryParams.prototype, "brief", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
         __metadata("design:type", String)
     ], GetOccupantsOccupantIdOutputFormatQueryParams.prototype, "locationDescriptor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetOccupantsOccupantIdOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
         __metadata("design:type", Number)
     ], GetOccupantsOccupantIdOutputFormatQueryParams.prototype, "setBack", void 0);
     return GetOccupantsOccupantIdOutputFormatQueryParams;
@@ -88,11 +88,11 @@ var GetOccupantsOccupantIdOutputFormatRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOccupantsOccupantIdOutputFormatPathParams)
     ], GetOccupantsOccupantIdOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOccupantsOccupantIdOutputFormatQueryParams)
     ], GetOccupantsOccupantIdOutputFormatRequest.prototype, "queryParams", void 0);
     return GetOccupantsOccupantIdOutputFormatRequest;
@@ -104,11 +104,11 @@ var GetOccupantsOccupantIdOutputFormatResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOccupantsOccupantIdOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOccupantsOccupantIdOutputFormatResponse.prototype, "statusCode", void 0);
     return GetOccupantsOccupantIdOutputFormatResponse;

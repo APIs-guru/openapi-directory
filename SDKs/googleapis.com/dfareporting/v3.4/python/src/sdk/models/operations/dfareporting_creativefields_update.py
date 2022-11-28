@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingCreativeFieldsUpdatePathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DfareportingCreativeFieldsUpdateQueryParams:
 
 @dataclass
 class DfareportingCreativeFieldsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingCreativeFieldsUpdateRequest:
-    path_params: DfareportingCreativeFieldsUpdatePathParams = field(default=None)
-    query_params: DfareportingCreativeFieldsUpdateQueryParams = field(default=None)
+    path_params: DfareportingCreativeFieldsUpdatePathParams = field()
+    query_params: DfareportingCreativeFieldsUpdateQueryParams = field()
+    security: DfareportingCreativeFieldsUpdateSecurity = field()
     request: Optional[shared.CreativeField] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingCreativeFieldsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingCreativeFieldsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_field: Optional[shared.CreativeField] = field(default=None)
-    status_code: int = field(default=None)
     

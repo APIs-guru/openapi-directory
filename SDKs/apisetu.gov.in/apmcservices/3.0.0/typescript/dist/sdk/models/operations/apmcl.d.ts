@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ApmclRequestBodyCertificateParameters extends SpeakeasyBase {
     documentNumber: string;
@@ -15,10 +15,6 @@ export declare class ApmclRequestBody extends SpeakeasyBase {
 export declare class ApmclSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class ApmclRequest extends SpeakeasyBase {
-    request?: ApmclRequestBody;
-    security: ApmclSecurity;
 }
 export declare enum Apmcl400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Apmcl504ApplicationJsonErrorDescriptionEnum {
 export declare class Apmcl504ApplicationJson extends SpeakeasyBase {
     error?: Apmcl504ApplicationJsonErrorEnum;
     errorDescription?: Apmcl504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class ApmclRequest extends SpeakeasyBase {
+    request?: ApmclRequestBody;
+    security: ApmclSecurity;
 }
 export declare class ApmclResponse extends SpeakeasyBase {
     contentType: string;

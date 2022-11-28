@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ChangesetInfo
+// A changeset is unit of data in a dataset.
 type ChangesetInfo struct {
 	ChangeType           *ChangeTypeEnum      `json:"changeType,omitempty"`
 	ChangesetArn         *string              `json:"changesetArn,omitempty"`

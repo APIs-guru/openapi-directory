@@ -1,45 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum WritableServiceProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
+    Tcp = "tcp",
+    Udp = "udp"
 }
 
 
-export class WritableService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
-  created?: Date;
-
-  @Metadata({ data: "json, name=custom_fields" })
+export class WritableServiceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device?: number;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=ipaddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ipaddresses" })
   ipaddresses?: number[];
 
-  @Metadata({ data: "json, name=last_updated" })
-  lastUpdated?: Date;
-
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: WritableServiceProtocolEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=virtual_machine" })
+  @SpeakeasyMetadata({ data: "json, name=virtual_machine" })
   virtualMachine?: number;
 }

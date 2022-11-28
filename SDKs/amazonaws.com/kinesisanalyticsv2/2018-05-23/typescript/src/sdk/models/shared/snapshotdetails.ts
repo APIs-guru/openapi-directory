@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SnapshotStatusEnum } from "./snapshotstatusenum";
+
 
 
 // SnapshotDetails
@@ -7,15 +8,15 @@ import { SnapshotStatusEnum } from "./snapshotstatusenum";
  * Provides details about a snapshot of application state.
 **/
 export class SnapshotDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationVersionId" })
   applicationVersionId: number;
 
-  @Metadata({ data: "json, name=SnapshotCreationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotCreationTimestamp" })
   snapshotCreationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=SnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotName" })
   snapshotName: string;
 
-  @Metadata({ data: "json, name=SnapshotStatus" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotStatus" })
   snapshotStatus: SnapshotStatusEnum;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ConflictDetailLevelTypeEnumEnum(str, Enum):
     FILE_LEVEL = "FILE_LEVEL"

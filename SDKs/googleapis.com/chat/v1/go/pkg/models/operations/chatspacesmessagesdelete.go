@@ -22,9 +22,15 @@ type ChatSpacesMessagesDeleteQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
+type ChatSpacesMessagesDeleteSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
 type ChatSpacesMessagesDeleteRequest struct {
 	PathParams  ChatSpacesMessagesDeletePathParams
 	QueryParams ChatSpacesMessagesDeleteQueryParams
+	Security    ChatSpacesMessagesDeleteSecurity
 }
 
 type ChatSpacesMessagesDeleteResponse struct {

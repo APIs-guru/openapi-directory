@@ -1,5 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ChoiceQuestionInput } from "./choicequestion";
 import { ChoiceQuestion } from "./choicequestion";
+
+
+
+// GridInput
+/** 
+ * A grid of choices (radio or check boxes) with each row constituting a separate question. Each row has the same choices, which are shown as the columns.
+**/
+export class GridInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=columns" })
+  columns?: ChoiceQuestionInput;
+
+  @SpeakeasyMetadata({ data: "json, name=shuffleQuestions" })
+  shuffleQuestions?: boolean;
+}
 
 
 // Grid
@@ -7,9 +22,9 @@ import { ChoiceQuestion } from "./choicequestion";
  * A grid of choices (radio or check boxes) with each row constituting a separate question. Each row has the same choices, which are shown as the columns.
 **/
 export class Grid extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns" })
+  @SpeakeasyMetadata({ data: "json, name=columns" })
   columns?: ChoiceQuestion;
 
-  @Metadata({ data: "json, name=shuffleQuestions" })
+  @SpeakeasyMetadata({ data: "json, name=shuffleQuestions" })
   shuffleQuestions?: boolean;
 }

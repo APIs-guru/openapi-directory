@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostEnableVpcClassicLinkActionEnum(str, Enum):
     ENABLE_VPC_CLASSIC_LINK = "EnableVpcClassicLink"
@@ -10,8 +14,8 @@ class PostEnableVpcClassicLinkVersionEnum(str, Enum):
 
 @dataclass
 class PostEnableVpcClassicLinkQueryParams:
-    action: PostEnableVpcClassicLinkActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostEnableVpcClassicLinkVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostEnableVpcClassicLinkActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostEnableVpcClassicLinkVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostEnableVpcClassicLinkHeaders:
 
 @dataclass
 class PostEnableVpcClassicLinkRequest:
-    query_params: PostEnableVpcClassicLinkQueryParams = field(default=None)
-    headers: PostEnableVpcClassicLinkHeaders = field(default=None)
+    headers: PostEnableVpcClassicLinkHeaders = field()
+    query_params: PostEnableVpcClassicLinkQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostEnableVpcClassicLinkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

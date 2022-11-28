@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateConnectorHeaders = /** @class */ (function (_super) {
     __extends(CreateConnectorHeaders, _super);
@@ -30,31 +30,31 @@ var CreateConnectorHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateConnectorHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateConnectorHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateConnectorHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateConnectorHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateConnectorHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateConnectorHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateConnectorHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateConnectorHeaders;
@@ -70,11 +70,11 @@ var CreateConnectorRequestBodyCapacity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=autoScaling" }),
+        SpeakeasyMetadata({ data: "json, name=autoScaling" }),
         __metadata("design:type", shared.AutoScaling)
     ], CreateConnectorRequestBodyCapacity.prototype, "autoScaling", void 0);
     __decorate([
-        Metadata({ data: "json, name=provisionedCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=provisionedCapacity" }),
         __metadata("design:type", shared.ProvisionedCapacity)
     ], CreateConnectorRequestBodyCapacity.prototype, "provisionedCapacity", void 0);
     return CreateConnectorRequestBodyCapacity;
@@ -90,7 +90,7 @@ var CreateConnectorRequestBodyKafkaCluster = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apacheKafkaCluster" }),
+        SpeakeasyMetadata({ data: "json, name=apacheKafkaCluster" }),
         __metadata("design:type", shared.ApacheKafkaCluster)
     ], CreateConnectorRequestBodyKafkaCluster.prototype, "apacheKafkaCluster", void 0);
     return CreateConnectorRequestBodyKafkaCluster;
@@ -106,7 +106,7 @@ var CreateConnectorRequestBodyKafkaClusterClientAuthentication = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authenticationType" }),
+        SpeakeasyMetadata({ data: "json, name=authenticationType" }),
         __metadata("design:type", String)
     ], CreateConnectorRequestBodyKafkaClusterClientAuthentication.prototype, "authenticationType", void 0);
     return CreateConnectorRequestBodyKafkaClusterClientAuthentication;
@@ -122,7 +122,7 @@ var CreateConnectorRequestBodyKafkaClusterEncryptionInTransit = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=encryptionType" }),
+        SpeakeasyMetadata({ data: "json, name=encryptionType" }),
         __metadata("design:type", String)
     ], CreateConnectorRequestBodyKafkaClusterEncryptionInTransit.prototype, "encryptionType", void 0);
     return CreateConnectorRequestBodyKafkaClusterEncryptionInTransit;
@@ -138,7 +138,7 @@ var CreateConnectorRequestBodyLogDelivery = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=workerLogDelivery" }),
+        SpeakeasyMetadata({ data: "json, name=workerLogDelivery" }),
         __metadata("design:type", shared.WorkerLogDelivery)
     ], CreateConnectorRequestBodyLogDelivery.prototype, "workerLogDelivery", void 0);
     return CreateConnectorRequestBodyLogDelivery;
@@ -154,11 +154,11 @@ var CreateConnectorRequestBodyWorkerConfiguration = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", Number)
     ], CreateConnectorRequestBodyWorkerConfiguration.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerConfigurationArn" }),
+        SpeakeasyMetadata({ data: "json, name=workerConfigurationArn" }),
         __metadata("design:type", String)
     ], CreateConnectorRequestBodyWorkerConfiguration.prototype, "workerConfigurationArn", void 0);
     return CreateConnectorRequestBodyWorkerConfiguration;
@@ -170,51 +170,51 @@ var CreateConnectorRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacity" }),
+        SpeakeasyMetadata({ data: "json, name=capacity" }),
         __metadata("design:type", CreateConnectorRequestBodyCapacity)
     ], CreateConnectorRequestBody.prototype, "capacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=connectorConfiguration" }),
         __metadata("design:type", Map)
     ], CreateConnectorRequestBody.prototype, "connectorConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=connectorDescription" }),
         __metadata("design:type", String)
     ], CreateConnectorRequestBody.prototype, "connectorDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorName" }),
+        SpeakeasyMetadata({ data: "json, name=connectorName" }),
         __metadata("design:type", String)
     ], CreateConnectorRequestBody.prototype, "connectorName", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaCluster" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaCluster" }),
         __metadata("design:type", CreateConnectorRequestBodyKafkaCluster)
     ], CreateConnectorRequestBody.prototype, "kafkaCluster", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaClusterClientAuthentication" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaClusterClientAuthentication" }),
         __metadata("design:type", CreateConnectorRequestBodyKafkaClusterClientAuthentication)
     ], CreateConnectorRequestBody.prototype, "kafkaClusterClientAuthentication", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaClusterEncryptionInTransit" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaClusterEncryptionInTransit" }),
         __metadata("design:type", CreateConnectorRequestBodyKafkaClusterEncryptionInTransit)
     ], CreateConnectorRequestBody.prototype, "kafkaClusterEncryptionInTransit", void 0);
     __decorate([
-        Metadata({ data: "json, name=kafkaConnectVersion" }),
+        SpeakeasyMetadata({ data: "json, name=kafkaConnectVersion" }),
         __metadata("design:type", String)
     ], CreateConnectorRequestBody.prototype, "kafkaConnectVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=logDelivery" }),
+        SpeakeasyMetadata({ data: "json, name=logDelivery" }),
         __metadata("design:type", CreateConnectorRequestBodyLogDelivery)
     ], CreateConnectorRequestBody.prototype, "logDelivery", void 0);
     __decorate([
-        Metadata({ data: "json, name=plugins", elemType: shared.Plugin }),
+        SpeakeasyMetadata({ data: "json, name=plugins", elemType: shared.Plugin }),
         __metadata("design:type", Array)
     ], CreateConnectorRequestBody.prototype, "plugins", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceExecutionRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=serviceExecutionRoleArn" }),
         __metadata("design:type", String)
     ], CreateConnectorRequestBody.prototype, "serviceExecutionRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=workerConfiguration" }),
         __metadata("design:type", CreateConnectorRequestBodyWorkerConfiguration)
     ], CreateConnectorRequestBody.prototype, "workerConfiguration", void 0);
     return CreateConnectorRequestBody;
@@ -226,11 +226,11 @@ var CreateConnectorRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateConnectorHeaders)
     ], CreateConnectorRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateConnectorRequestBody)
     ], CreateConnectorRequest.prototype, "request", void 0);
     return CreateConnectorRequest;
@@ -242,47 +242,47 @@ var CreateConnectorResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateConnectorResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateConnectorResponse)
     ], CreateConnectorResponse.prototype, "createConnectorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "forbiddenException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateConnectorResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateConnectorResponse.prototype, "unauthorizedException", void 0);
     return CreateConnectorResponse;

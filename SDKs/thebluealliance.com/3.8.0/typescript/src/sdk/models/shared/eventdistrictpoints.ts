@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EventDistrictPointsPoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alliance_points" })
+  @SpeakeasyMetadata({ data: "json, name=alliance_points" })
   alliancePoints: number;
 
-  @Metadata({ data: "json, name=award_points" })
+  @SpeakeasyMetadata({ data: "json, name=award_points" })
   awardPoints: number;
 
-  @Metadata({ data: "json, name=elim_points" })
+  @SpeakeasyMetadata({ data: "json, name=elim_points" })
   elimPoints: number;
 
-  @Metadata({ data: "json, name=qual_points" })
+  @SpeakeasyMetadata({ data: "json, name=qual_points" })
   qualPoints: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 }
 
 
 export class EventDistrictPointsTiebreakers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=highest_qual_scores" })
+  @SpeakeasyMetadata({ data: "json, name=highest_qual_scores" })
   highestQualScores?: number[];
 
-  @Metadata({ data: "json, name=qual_wins" })
+  @SpeakeasyMetadata({ data: "json, name=qual_wins" })
   qualWins?: number;
 }
 
 
 export class EventDistrictPoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=points", elemType: shared.EventDistrictPointsPoints })
+  @SpeakeasyMetadata({ data: "json, name=points", elemType: EventDistrictPointsPoints })
   points: Map<string, EventDistrictPointsPoints>;
 
-  @Metadata({ data: "json, name=tiebreakers", elemType: shared.EventDistrictPointsTiebreakers })
+  @SpeakeasyMetadata({ data: "json, name=tiebreakers", elemType: EventDistrictPointsTiebreakers })
   tiebreakers?: Map<string, EventDistrictPointsTiebreakers>;
 }

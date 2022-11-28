@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Fleet } from "./fleet";
 export declare class ListFleetsResponse extends SpeakeasyBase {
     fleetDetails?: Fleet[];

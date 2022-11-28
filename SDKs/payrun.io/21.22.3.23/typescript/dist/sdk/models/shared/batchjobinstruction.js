@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BatchJobInstructionBatchJobInstructionDelete
 /**
  * The batch job instructions' instructions
@@ -33,7 +33,7 @@ var BatchJobInstructionBatchJobInstructionDelete = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DELETE" }),
+        SpeakeasyMetadata({ data: "json, name=DELETE" }),
         __metadata("design:type", Array)
     ], BatchJobInstructionBatchJobInstructionDelete.prototype, "delete", void 0);
     return BatchJobInstructionBatchJobInstructionDelete;
@@ -45,15 +45,15 @@ var BatchJobInstructionBatchJobInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=HoldingDate" }),
+        SpeakeasyMetadata({ data: "json, name=HoldingDate" }),
         __metadata("design:type", Date)
     ], BatchJobInstructionBatchJobInstruction.prototype, "holdingDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Instructions" }),
+        SpeakeasyMetadata({ data: "json, name=Instructions" }),
         __metadata("design:type", BatchJobInstructionBatchJobInstructionDelete)
     ], BatchJobInstructionBatchJobInstruction.prototype, "instructions", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidateOnly" }),
+        SpeakeasyMetadata({ data: "json, name=ValidateOnly" }),
         __metadata("design:type", Boolean)
     ], BatchJobInstructionBatchJobInstruction.prototype, "validateOnly", void 0);
     return BatchJobInstructionBatchJobInstruction;
@@ -65,7 +65,7 @@ var BatchJobInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BatchJobInstruction" }),
+        SpeakeasyMetadata({ data: "json, name=BatchJobInstruction" }),
         __metadata("design:type", BatchJobInstructionBatchJobInstruction)
     ], BatchJobInstruction.prototype, "batchJobInstruction", void 0);
     return BatchJobInstruction;

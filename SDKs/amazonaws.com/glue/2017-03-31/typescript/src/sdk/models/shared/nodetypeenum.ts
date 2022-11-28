@@ -1,7 +1,8 @@
 
 
+
 export enum NodeTypeEnum {
-    Crawler = "CRAWLER"
-,    Job = "JOB"
-,    Trigger = "TRIGGER"
+    Crawler = "CRAWLER",
+    Job = "JOB",
+    Trigger = "TRIGGER"
 }

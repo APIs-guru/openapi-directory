@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetReplicationSetQueryParams:
-    arn: str = field(default=None, metadata={'query_param': { 'field_name': 'arn', 'style': 'form', 'explode': True }})
+    arn: str = field(metadata={'query_param': { 'field_name': 'arn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class GetReplicationSetHeaders:
 
 @dataclass
 class GetReplicationSetRequest:
-    query_params: GetReplicationSetQueryParams = field(default=None)
-    headers: GetReplicationSetHeaders = field(default=None)
+    headers: GetReplicationSetHeaders = field()
+    query_params: GetReplicationSetQueryParams = field()
     
 
 @dataclass
 class GetReplicationSetResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_replication_set_output: Optional[shared.GetReplicationSetOutput] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ClearTimerAction } from "./cleartimeraction";
 import { DynamoDbAction } from "./dynamodbaction";
 import { DynamoDBv2Action } from "./dynamodbv2action";

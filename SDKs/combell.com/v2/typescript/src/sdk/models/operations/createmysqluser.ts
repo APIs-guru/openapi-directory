@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateMySqlUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
   databaseName: string;
 }
 
 
 export class CreateMySqlUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=database_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=database_name" })
   databaseName: string;
 }
 
 
 export class CreateMySqlUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateMySqlUserPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateMySqlUserQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.CreateMySqlUser;
 }
 
 
 export class CreateMySqlUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestResponse?: shared.BadRequestResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

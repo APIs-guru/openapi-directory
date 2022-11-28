@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DomainController
+// Contains information about the domain controllers for a specified directory.
 type DomainController struct {
 	AvailabilityZone          *string                     `json:"AvailabilityZone,omitempty"`
 	DirectoryID               *string                     `json:"DirectoryId,omitempty"`

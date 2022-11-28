@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DriverRaceProjectionsEntryListFormatEnum;
 (function (DriverRaceProjectionsEntryListFormatEnum) {
     DriverRaceProjectionsEntryListFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var DriverRaceProjectionsEntryListPathParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], DriverRaceProjectionsEntryListPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=raceid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=raceid" }),
         __metadata("design:type", String)
     ], DriverRaceProjectionsEntryListPathParams.prototype, "raceid", void 0);
     return DriverRaceProjectionsEntryListPathParams;
@@ -50,7 +50,7 @@ var DriverRaceProjectionsEntryListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DriverRaceProjectionsEntryListPathParams)
     ], DriverRaceProjectionsEntryListRequest.prototype, "pathParams", void 0);
     return DriverRaceProjectionsEntryListRequest;
@@ -62,15 +62,15 @@ var DriverRaceProjectionsEntryListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DriverRaceProjectionsEntryListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], DriverRaceProjectionsEntryListResponse.prototype, "driverRaceProjections", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DriverRaceProjectionsEntryListResponse.prototype, "statusCode", void 0);
     return DriverRaceProjectionsEntryListResponse;

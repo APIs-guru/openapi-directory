@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetFindInteractionsFormatEnum(str, Enum):
     JSON = "json"
@@ -12,17 +13,17 @@ class GetFindInteractionsFormatEnum(str, Enum):
 
 @dataclass
 class GetFindInteractionsQueryParams:
+    query: str = field(metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     format: Optional[GetFindInteractionsFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    query: str = field(default=None, metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetFindInteractionsRequest:
-    query_params: GetFindInteractionsQueryParams = field(default=None)
+    query_params: GetFindInteractionsQueryParams = field()
     
 
 @dataclass
 class GetFindInteractionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

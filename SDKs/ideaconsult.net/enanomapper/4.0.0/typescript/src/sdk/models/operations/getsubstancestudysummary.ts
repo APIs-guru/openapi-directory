@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSubstanceStudySummaryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=db" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" })
   db: shared.AmbitDatabaseIdEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
   uuid: string;
 }
 
 export enum GetSubstanceStudySummaryTopEnum {
-    PChem = "P-CHEM"
-,    Ecotox = "ECOTOX"
-,    EnvFate = "ENV FATE"
-,    Tox = "TOX"
-,    Exposure = "EXPOSURE"
+    PChem = "P-CHEM",
+    Ecotox = "ECOTOX",
+    EnvFate = "ENV FATE",
+    Tox = "TOX",
+    Exposure = "EXPOSURE"
 }
 
 
 export class GetSubstanceStudySummaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=category" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" })
   category?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=property" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=property" })
   property?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=property_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=property_uri" })
   propertyUri?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=result" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=result" })
   result?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=top" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=top" })
   top?: GetSubstanceStudySummaryTopEnum;
 }
 
 
 export class GetSubstanceStudySummaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSubstanceStudySummaryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSubstanceStudySummaryQueryParams;
 }
 
 
 export class GetSubstanceStudySummaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   substanceStudySummary?: shared.SubstanceStudySummary;
 }

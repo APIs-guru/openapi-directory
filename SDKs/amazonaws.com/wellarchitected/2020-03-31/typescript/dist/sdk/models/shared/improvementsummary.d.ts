@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RiskEnum } from "./riskenum";
 /**
  * An improvement summary of a lens review in a workload.

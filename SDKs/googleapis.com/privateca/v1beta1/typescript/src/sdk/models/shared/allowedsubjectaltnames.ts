@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AllowedSubjectAltNames
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AllowedSubjectAltNames specifies the allowed values for SubjectAltNames by the CertificateAuthority when issuing Certificates.
 **/
 export class AllowedSubjectAltNames extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowCustomSans" })
+  @SpeakeasyMetadata({ data: "json, name=allowCustomSans" })
   allowCustomSans?: boolean;
 
-  @Metadata({ data: "json, name=allowGlobbingDnsWildcards" })
+  @SpeakeasyMetadata({ data: "json, name=allowGlobbingDnsWildcards" })
   allowGlobbingDnsWildcards?: boolean;
 
-  @Metadata({ data: "json, name=allowedDnsNames" })
+  @SpeakeasyMetadata({ data: "json, name=allowedDnsNames" })
   allowedDnsNames?: string[];
 
-  @Metadata({ data: "json, name=allowedEmailAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=allowedEmailAddresses" })
   allowedEmailAddresses?: string[];
 
-  @Metadata({ data: "json, name=allowedIps" })
+  @SpeakeasyMetadata({ data: "json, name=allowedIps" })
   allowedIps?: string[];
 
-  @Metadata({ data: "json, name=allowedUris" })
+  @SpeakeasyMetadata({ data: "json, name=allowedUris" })
   allowedUris?: string[];
 }

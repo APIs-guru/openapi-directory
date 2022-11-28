@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import eventcondition
-from . import segmentcondition
-from . import segmentdimensions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SimpleCondition:
-    event_condition: Optional[eventcondition.EventCondition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventCondition' }})
-    segment_condition: Optional[segmentcondition.SegmentCondition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SegmentCondition' }})
-    segment_dimensions: Optional[segmentdimensions.SegmentDimensions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SegmentDimensions' }})
+    r"""SimpleCondition
+    Specifies a condition to evaluate for an activity in a journey.
+    """
+    
+    event_condition: Optional[EventCondition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventCondition') }})
+    segment_condition: Optional[SegmentCondition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SegmentCondition') }})
+    segment_dimensions: Optional[SegmentDimensions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SegmentDimensions') }})
     

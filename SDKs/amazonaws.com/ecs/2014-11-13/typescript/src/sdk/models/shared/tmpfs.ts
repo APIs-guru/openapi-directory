@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Tmpfs
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The container path, mount options, and size of the tmpfs mount.
 **/
 export class Tmpfs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerPath" })
+  @SpeakeasyMetadata({ data: "json, name=containerPath" })
   containerPath: string;
 
-  @Metadata({ data: "json, name=mountOptions" })
+  @SpeakeasyMetadata({ data: "json, name=mountOptions" })
   mountOptions?: string[];
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
 
 
+
 export class InvoiceSummaryAdditionalChargeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=totalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=totalAmount" })
   totalAmount?: Amount;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

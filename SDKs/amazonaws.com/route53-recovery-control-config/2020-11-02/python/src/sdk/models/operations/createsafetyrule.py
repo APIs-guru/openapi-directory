@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,43 +22,51 @@ class CreateSafetyRuleHeaders:
 @dataclass_json
 @dataclass
 class CreateSafetyRuleRequestBodyAssertionRule:
-    asserted_controls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssertedControls' }})
-    control_panel_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ControlPanelArn' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    rule_config: Optional[shared.RuleConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleConfig' }})
-    wait_period_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WaitPeriodMs' }})
+    r"""CreateSafetyRuleRequestBodyAssertionRule
+    A new assertion rule for a control panel.
+    """
+    
+    asserted_controls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssertedControls') }})
+    control_panel_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ControlPanelArn') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    rule_config: Optional[shared.RuleConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleConfig') }})
+    wait_period_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WaitPeriodMs') }})
     
 
 @dataclass_json
 @dataclass
 class CreateSafetyRuleRequestBodyGatingRule:
-    control_panel_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ControlPanelArn' }})
-    gating_controls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GatingControls' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    rule_config: Optional[shared.RuleConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleConfig' }})
-    target_controls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetControls' }})
-    wait_period_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WaitPeriodMs' }})
+    r"""CreateSafetyRuleRequestBodyGatingRule
+    A new gating rule for a control panel.
+    """
+    
+    control_panel_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ControlPanelArn') }})
+    gating_controls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GatingControls') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    rule_config: Optional[shared.RuleConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleConfig') }})
+    target_controls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetControls') }})
+    wait_period_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WaitPeriodMs') }})
     
 
 @dataclass_json
 @dataclass
 class CreateSafetyRuleRequestBody:
-    assertion_rule: Optional[CreateSafetyRuleRequestBodyAssertionRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssertionRule' }})
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    gating_rule: Optional[CreateSafetyRuleRequestBodyGatingRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GatingRule' }})
+    assertion_rule: Optional[CreateSafetyRuleRequestBodyAssertionRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssertionRule') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    gating_rule: Optional[CreateSafetyRuleRequestBodyGatingRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GatingRule') }})
     
 
 @dataclass
 class CreateSafetyRuleRequest:
-    headers: CreateSafetyRuleHeaders = field(default=None)
-    request: CreateSafetyRuleRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateSafetyRuleHeaders = field()
+    request: CreateSafetyRuleRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateSafetyRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_safety_rule_response: Optional[shared.CreateSafetyRuleResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -31,7 +31,7 @@ type AppengineAppsPatchSecurity struct {
 type AppengineAppsPatchRequest struct {
 	PathParams  AppengineAppsPatchPathParams
 	QueryParams AppengineAppsPatchQueryParams
-	Request     *shared.Application `request:"mediaType=application/json"`
+	Request     *shared.ApplicationInput `request:"mediaType=application/json"`
 	Security    AppengineAppsPatchSecurity
 }
 

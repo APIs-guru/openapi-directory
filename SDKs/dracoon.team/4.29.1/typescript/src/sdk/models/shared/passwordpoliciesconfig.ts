@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionPasswordPolicies } from "./encryptionpasswordpolicies";
 import { LoginPasswordPolicies } from "./loginpasswordpolicies";
 import { SharesPasswordPolicies } from "./sharespasswordpolicies";
+
 
 
 // PasswordPoliciesConfig
@@ -9,12 +10,12 @@ import { SharesPasswordPolicies } from "./sharespasswordpolicies";
  * Set of password policies
 **/
 export class PasswordPoliciesConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encryptionPasswordPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionPasswordPolicies" })
   encryptionPasswordPolicies?: EncryptionPasswordPolicies;
 
-  @Metadata({ data: "json, name=loginPasswordPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=loginPasswordPolicies" })
   loginPasswordPolicies?: LoginPasswordPolicies;
 
-  @Metadata({ data: "json, name=sharesPasswordPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=sharesPasswordPolicies" })
   sharesPasswordPolicies?: SharesPasswordPolicies;
 }

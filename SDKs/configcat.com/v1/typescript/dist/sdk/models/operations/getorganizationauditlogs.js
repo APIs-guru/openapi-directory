@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetOrganizationAuditlogsPathParams = /** @class */ (function (_super) {
     __extends(GetOrganizationAuditlogsPathParams, _super);
@@ -30,7 +30,7 @@ var GetOrganizationAuditlogsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" }),
         __metadata("design:type", String)
     ], GetOrganizationAuditlogsPathParams.prototype, "organizationId", void 0);
     return GetOrganizationAuditlogsPathParams;
@@ -42,27 +42,27 @@ var GetOrganizationAuditlogsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auditLogType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auditLogType" }),
         __metadata("design:type", Map)
     ], GetOrganizationAuditlogsQueryParams.prototype, "auditLogType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=configId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=configId" }),
         __metadata("design:type", String)
     ], GetOrganizationAuditlogsQueryParams.prototype, "configId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=environmentId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=environmentId" }),
         __metadata("design:type", String)
     ], GetOrganizationAuditlogsQueryParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromUtcDateTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromUtcDateTime" }),
         __metadata("design:type", Date)
     ], GetOrganizationAuditlogsQueryParams.prototype, "fromUtcDateTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=productId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=productId" }),
         __metadata("design:type", String)
     ], GetOrganizationAuditlogsQueryParams.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=toUtcDateTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toUtcDateTime" }),
         __metadata("design:type", Date)
     ], GetOrganizationAuditlogsQueryParams.prototype, "toUtcDateTime", void 0);
     return GetOrganizationAuditlogsQueryParams;
@@ -74,11 +74,11 @@ var GetOrganizationAuditlogsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOrganizationAuditlogsPathParams)
     ], GetOrganizationAuditlogsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOrganizationAuditlogsQueryParams)
     ], GetOrganizationAuditlogsRequest.prototype, "queryParams", void 0);
     return GetOrganizationAuditlogsRequest;
@@ -90,15 +90,15 @@ var GetOrganizationAuditlogsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.AuditLogItemModel }),
+        SpeakeasyMetadata({ elemType: shared.AuditLogItemModel }),
         __metadata("design:type", Array)
     ], GetOrganizationAuditlogsResponse.prototype, "auditLogItemModels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOrganizationAuditlogsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOrganizationAuditlogsResponse.prototype, "statusCode", void 0);
     return GetOrganizationAuditlogsResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualGatewayStatusCodeEnum } from "./virtualgatewaystatuscodeenum";
+
 
 
 // VirtualGatewayStatus
@@ -7,6 +8,6 @@ import { VirtualGatewayStatusCodeEnum } from "./virtualgatewaystatuscodeenum";
  * An object that represents the status of the mesh resource.
 **/
 export class VirtualGatewayStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: VirtualGatewayStatusCodeEnum;
 }

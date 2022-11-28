@@ -1,5 +1,7 @@
 package shared
 
+// ConsentArtifact
+// Documentation of a user's consent.
 type ConsentArtifact struct {
 	ConsentContentScreenshots []Image           `json:"consentContentScreenshots,omitempty"`
 	ConsentContentVersion     *string           `json:"consentContentVersion,omitempty"`

@@ -4,22 +4,12 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
-type PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurity struct {
-	Option1 *PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption1 `security:"option"`
-	Option2 *PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption2 `security:"option"`
-	Option3 *PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption3 `security:"option"`
+	Oauth2Legacy       *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	Hapikey            *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	Oauth2Legacy1      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	PrivateAppsLegacy  *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	PrivateAppsLegacy1 *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PostCommunicationPreferencesV3UnsubscribeUnsubscribeRequest struct {

@@ -8,6 +8,8 @@ const (
 	VersionTypeEnumTypeGeneralAvailability VersionTypeEnum = "TYPE_GENERAL_AVAILABILITY"
 )
 
+// Version
+// The Data Fusion version.
 type Version struct {
 	AvailableFeatures []string         `json:"availableFeatures,omitempty"`
 	DefaultVersion    *bool            `json:"defaultVersion,omitempty"`

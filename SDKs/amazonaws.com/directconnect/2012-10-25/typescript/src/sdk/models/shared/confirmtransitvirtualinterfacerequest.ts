@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfirmTransitVirtualInterfaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directConnectGatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=directConnectGatewayId" })
   directConnectGatewayId: string;
 
-  @Metadata({ data: "json, name=virtualInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceId" })
   virtualInterfaceId: string;
 }

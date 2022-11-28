@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class TenancyTenantsCreateRequest:
-    request: shared.WritableTenant = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableTenantInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TenancyTenantsCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tenant: Optional[shared.Tenant] = field(default=None)
     

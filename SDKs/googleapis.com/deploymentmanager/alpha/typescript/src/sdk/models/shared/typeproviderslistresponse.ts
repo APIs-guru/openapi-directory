@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypeProvider } from "./typeprovider";
+
 
 
 // TypeProvidersListResponse
@@ -8,9 +8,9 @@ import { TypeProvider } from "./typeprovider";
  * A response that returns all Type Providers supported by Deployment Manager
 **/
 export class TypeProvidersListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=typeProviders", elemType: shared.TypeProvider })
+  @SpeakeasyMetadata({ data: "json, name=typeProviders", elemType: TypeProvider })
   typeProviders?: TypeProvider[];
 }

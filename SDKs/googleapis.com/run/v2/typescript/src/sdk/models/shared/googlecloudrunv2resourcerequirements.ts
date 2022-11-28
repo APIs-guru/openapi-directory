@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRunV2ResourceRequirements
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ResourceRequirements describes the compute resource requirements.
 **/
 export class GoogleCloudRunV2ResourceRequirements extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuIdle" })
+  @SpeakeasyMetadata({ data: "json, name=cpuIdle" })
   cpuIdle?: boolean;
 
-  @Metadata({ data: "json, name=limits" })
+  @SpeakeasyMetadata({ data: "json, name=limits" })
   limits?: Map<string, string>;
 }

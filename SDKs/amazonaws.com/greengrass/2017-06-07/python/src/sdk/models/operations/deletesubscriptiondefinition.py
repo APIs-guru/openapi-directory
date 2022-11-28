@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteSubscriptionDefinitionPathParams:
-    subscription_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'SubscriptionDefinitionId', 'style': 'simple', 'explode': False }})
+    subscription_definition_id: str = field(metadata={'path_param': { 'field_name': 'SubscriptionDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class DeleteSubscriptionDefinitionHeaders:
 
 @dataclass
 class DeleteSubscriptionDefinitionRequest:
-    path_params: DeleteSubscriptionDefinitionPathParams = field(default=None)
-    headers: DeleteSubscriptionDefinitionHeaders = field(default=None)
+    headers: DeleteSubscriptionDefinitionHeaders = field()
+    path_params: DeleteSubscriptionDefinitionPathParams = field()
     
 
 @dataclass
 class DeleteSubscriptionDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_subscription_definition_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

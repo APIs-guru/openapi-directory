@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApigatewayExpr } from "./apigatewayexpr";
 /**
  * Associates `members` with a `role`.

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingCampaignCreativeAssociationsInsertPathParams:
-    campaign_id: str = field(default=None, metadata={'path_param': { 'field_name': 'campaignId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    campaign_id: str = field(metadata={'path_param': { 'field_name': 'campaignId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DfareportingCampaignCreativeAssociationsInsertQueryParams:
 
 @dataclass
 class DfareportingCampaignCreativeAssociationsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingCampaignCreativeAssociationsInsertRequest:
-    path_params: DfareportingCampaignCreativeAssociationsInsertPathParams = field(default=None)
-    query_params: DfareportingCampaignCreativeAssociationsInsertQueryParams = field(default=None)
+    path_params: DfareportingCampaignCreativeAssociationsInsertPathParams = field()
+    query_params: DfareportingCampaignCreativeAssociationsInsertQueryParams = field()
+    security: DfareportingCampaignCreativeAssociationsInsertSecurity = field()
     request: Optional[shared.CampaignCreativeAssociation] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingCampaignCreativeAssociationsInsertSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingCampaignCreativeAssociationsInsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     campaign_creative_association: Optional[shared.CampaignCreativeAssociation] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

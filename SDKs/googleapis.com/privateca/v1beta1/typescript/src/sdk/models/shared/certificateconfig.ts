@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicKey } from "./publickey";
 import { ReusableConfigWrapper } from "./reusableconfigwrapper";
 import { SubjectConfig } from "./subjectconfig";
+
 
 
 // CertificateConfig
@@ -9,12 +10,12 @@ import { SubjectConfig } from "./subjectconfig";
  * A CertificateConfig describes an X.509 certificate or CSR that is to be created, as an alternative to using ASN.1.
 **/
 export class CertificateConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=publicKey" })
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
   publicKey?: PublicKey;
 
-  @Metadata({ data: "json, name=reusableConfig" })
+  @SpeakeasyMetadata({ data: "json, name=reusableConfig" })
   reusableConfig?: ReusableConfigWrapper;
 
-  @Metadata({ data: "json, name=subjectConfig" })
+  @SpeakeasyMetadata({ data: "json, name=subjectConfig" })
   subjectConfig?: SubjectConfig;
 }

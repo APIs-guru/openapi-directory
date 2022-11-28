@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource } from "./googleanalyticsadminv1alphachangehistorychangechangehistoryresource";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource } from "./googleanalyticsadminv1alphachangehistorychangechangehistoryresource";
 
+
 export enum GoogleAnalyticsAdminV1alphaChangeHistoryChangeActionEnum {
-    ActionTypeUnspecified = "ACTION_TYPE_UNSPECIFIED"
-,    Created = "CREATED"
-,    Updated = "UPDATED"
-,    Deleted = "DELETED"
+    ActionTypeUnspecified = "ACTION_TYPE_UNSPECIFIED",
+    Created = "CREATED",
+    Updated = "UPDATED",
+    Deleted = "DELETED"
 }
 
 
@@ -15,15 +15,15 @@ export enum GoogleAnalyticsAdminV1alphaChangeHistoryChangeActionEnum {
  * A description of a change to a single Google Analytics resource.
 **/
 export class GoogleAnalyticsAdminV1alphaChangeHistoryChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: GoogleAnalyticsAdminV1alphaChangeHistoryChangeActionEnum;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 
-  @Metadata({ data: "json, name=resourceAfterChange" })
+  @SpeakeasyMetadata({ data: "json, name=resourceAfterChange" })
   resourceAfterChange?: GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource;
 
-  @Metadata({ data: "json, name=resourceBeforeChange" })
+  @SpeakeasyMetadata({ data: "json, name=resourceBeforeChange" })
   resourceBeforeChange?: GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource;
 }

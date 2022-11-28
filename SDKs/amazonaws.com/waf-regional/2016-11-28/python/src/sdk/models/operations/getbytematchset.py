@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetByteMatchSetXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class GetByteMatchSetXAmzTargetEnum(str, Enum):
 
 @dataclass
 class GetByteMatchSetHeaders:
+    x_amz_target: GetByteMatchSetXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,20 +20,19 @@ class GetByteMatchSetHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: GetByteMatchSetXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetByteMatchSetRequest:
-    headers: GetByteMatchSetHeaders = field(default=None)
-    request: shared.GetByteMatchSetRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetByteMatchSetHeaders = field()
+    request: shared.GetByteMatchSetRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetByteMatchSetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_byte_match_set_response: Optional[shared.GetByteMatchSetResponse] = field(default=None)
-    status_code: int = field(default=None)
     waf_internal_error_exception: Optional[Any] = field(default=None)
     waf_invalid_account_exception: Optional[Any] = field(default=None)
     waf_nonexistent_item_exception: Optional[Any] = field(default=None)

@@ -19,18 +19,18 @@ class GetQueryFiltersQueryParams:
 
 @dataclass
 class GetQueryFiltersSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetQueryFiltersRequest:
-    query_params: GetQueryFiltersQueryParams = field(default=None)
-    security: GetQueryFiltersSecurity = field(default=None)
+    query_params: GetQueryFiltersQueryParams = field()
+    security: GetQueryFiltersSecurity = field()
     
 
 @dataclass
 class GetQueryFiltersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     query_filters: Optional[shared.QueryFilters] = field(default=None)
-    status_code: int = field(default=None)
     

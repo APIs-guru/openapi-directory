@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CancelShipmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shipmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shipmentId" })
   shipmentId: string;
 }
 
 
 export class CancelShipmentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class CancelShipmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CancelShipmentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CancelShipmentSecurity;
 }
 
 
 export class CancelShipmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   shipment?: shared.Shipment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

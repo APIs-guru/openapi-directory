@@ -5,31 +5,31 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetSeveralTracksQueryParams:
-    ids: str = field(default=None, metadata={'query_param': { 'field_name': 'ids', 'style': 'form', 'explode': True }})
+    ids: str = field(metadata={'query_param': { 'field_name': 'ids', 'style': 'form', 'explode': True }})
     market: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'market', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class EndpointGetSeveralTracksHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetSeveralTracksSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetSeveralTracksRequest:
-    query_params: EndpointGetSeveralTracksQueryParams = field(default=None)
-    headers: EndpointGetSeveralTracksHeaders = field(default=None)
-    security: EndpointGetSeveralTracksSecurity = field(default=None)
+    headers: EndpointGetSeveralTracksHeaders = field()
+    query_params: EndpointGetSeveralTracksQueryParams = field()
+    security: EndpointGetSeveralTracksSecurity = field()
     
 
 @dataclass
 class EndpointGetSeveralTracksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     tracks_object: Optional[shared.TracksObject] = field(default=None)
     

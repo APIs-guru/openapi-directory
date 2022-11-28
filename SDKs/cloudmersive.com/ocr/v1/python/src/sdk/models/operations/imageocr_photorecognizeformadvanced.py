@@ -14,31 +14,31 @@ class ImageOcrPhotoRecognizeFormAdvancedHeaders:
 
 @dataclass
 class ImageOcrPhotoRecognizeFormAdvancedRequestBodyImageFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    image_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'imageFile' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    image_file: str = field(metadata={'multipart_form': { 'field_name': 'imageFile' }})
     
 
 @dataclass
 class ImageOcrPhotoRecognizeFormAdvancedRequestBody:
-    image_file: ImageOcrPhotoRecognizeFormAdvancedRequestBodyImageFile = field(default=None, metadata={'multipart_form': { 'file': True }})
+    image_file: ImageOcrPhotoRecognizeFormAdvancedRequestBodyImageFile = field(metadata={'multipart_form': { 'file': True }})
     
 
 @dataclass
 class ImageOcrPhotoRecognizeFormAdvancedSecurity:
-    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    apikey: shared.SchemeApikey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ImageOcrPhotoRecognizeFormAdvancedRequest:
-    headers: ImageOcrPhotoRecognizeFormAdvancedHeaders = field(default=None)
-    request: ImageOcrPhotoRecognizeFormAdvancedRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: ImageOcrPhotoRecognizeFormAdvancedSecurity = field(default=None)
+    headers: ImageOcrPhotoRecognizeFormAdvancedHeaders = field()
+    request: ImageOcrPhotoRecognizeFormAdvancedRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
+    security: ImageOcrPhotoRecognizeFormAdvancedSecurity = field()
     
 
 @dataclass
 class ImageOcrPhotoRecognizeFormAdvancedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     form_recognition_result: Optional[shared.FormRecognitionResult] = field(default=None)
-    status_code: int = field(default=None)
     

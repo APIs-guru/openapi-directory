@@ -1,5 +1,8 @@
 package shared
 
+// Action
+//
+//	A budget action resource.
 type Action struct {
 	ActionID         string               `json:"ActionId"`
 	ActionThreshold  ActionThreshold      `json:"ActionThreshold"`

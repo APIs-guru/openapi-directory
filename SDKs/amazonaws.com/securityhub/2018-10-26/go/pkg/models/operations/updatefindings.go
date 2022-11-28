@@ -14,6 +14,8 @@ type UpdateFindingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateFindingsRequestBodyFilters
+// <p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>
 type UpdateFindingsRequestBodyFilters struct {
 	AwsAccountID                                   []shared.StringFilter  `json:"AwsAccountId,omitempty"`
 	CompanyName                                    []shared.StringFilter  `json:"CompanyName,omitempty"`
@@ -111,6 +113,8 @@ type UpdateFindingsRequestBodyFilters struct {
 	WorkflowStatus                                 []shared.StringFilter  `json:"WorkflowStatus,omitempty"`
 }
 
+// UpdateFindingsRequestBodyNote
+// The updated note.
 type UpdateFindingsRequestBodyNote struct {
 	Text      *string `json:"Text,omitempty"`
 	UpdatedBy *string `json:"UpdatedBy,omitempty"`

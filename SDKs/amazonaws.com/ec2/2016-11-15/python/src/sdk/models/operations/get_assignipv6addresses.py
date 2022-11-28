@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetAssignIpv6AddressesActionEnum(str, Enum):
     ASSIGN_IPV6_ADDRESSES = "AssignIpv6Addresses"
@@ -10,13 +14,13 @@ class GetAssignIpv6AddressesVersionEnum(str, Enum):
 
 @dataclass
 class GetAssignIpv6AddressesQueryParams:
-    action: GetAssignIpv6AddressesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssignIpv6AddressesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    version: GetAssignIpv6AddressesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     ipv6_address_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6AddressCount', 'style': 'form', 'explode': True }})
     ipv6_addresses: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6Addresses', 'style': 'form', 'explode': True }})
     ipv6_prefix: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6Prefix', 'style': 'form', 'explode': True }})
     ipv6_prefix_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6PrefixCount', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
-    version: GetAssignIpv6AddressesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetAssignIpv6AddressesHeaders:
 
 @dataclass
 class GetAssignIpv6AddressesRequest:
-    query_params: GetAssignIpv6AddressesQueryParams = field(default=None)
-    headers: GetAssignIpv6AddressesHeaders = field(default=None)
+    headers: GetAssignIpv6AddressesHeaders = field()
+    query_params: GetAssignIpv6AddressesQueryParams = field()
     
 
 @dataclass
 class GetAssignIpv6AddressesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

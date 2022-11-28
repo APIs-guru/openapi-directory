@@ -9,26 +9,18 @@ type DeleteDomainRecordPathParams struct {
 	RecordID int64 `pathParam:"style=simple,explode=false,name=recordId"`
 }
 
-type DeleteDomainRecordSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteDomainRecordSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteDomainRecordSecurity struct {
-	Option1 *DeleteDomainRecordSecurityOption1 `security:"option"`
-	Option2 *DeleteDomainRecordSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteDomainRecordDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteDomainRecordRequest struct {
 	PathParams DeleteDomainRecordPathParams
 	Security   DeleteDomainRecordSecurity
-}
-
-type DeleteDomainRecordDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteDomainRecordResponse struct {

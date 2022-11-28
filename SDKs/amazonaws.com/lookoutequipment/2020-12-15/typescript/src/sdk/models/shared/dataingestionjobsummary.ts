@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IngestionInputConfiguration } from "./ingestioninputconfiguration";
 import { IngestionJobStatusEnum } from "./ingestionjobstatusenum";
+
 
 
 // DataIngestionJobSummary
@@ -8,18 +9,18 @@ import { IngestionJobStatusEnum } from "./ingestionjobstatusenum";
  * Provides information about a specified data ingestion job, including dataset information, data ingestion configuration, and status. 
 **/
 export class DataIngestionJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatasetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetArn" })
   datasetArn?: string;
 
-  @Metadata({ data: "json, name=DatasetName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetName" })
   datasetName?: string;
 
-  @Metadata({ data: "json, name=IngestionInputConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=IngestionInputConfiguration" })
   ingestionInputConfiguration?: IngestionInputConfiguration;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: IngestionJobStatusEnum;
 }

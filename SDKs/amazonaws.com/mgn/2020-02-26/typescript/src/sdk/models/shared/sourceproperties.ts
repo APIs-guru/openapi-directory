@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cpu } from "./cpu";
 import { Disk } from "./disk";
 import { IdentificationHints } from "./identificationhints";
@@ -7,32 +6,33 @@ import { NetworkInterface } from "./networkinterface";
 import { Os } from "./os";
 
 
+
 // SourceProperties
 /** 
  * Source server properties.
 **/
 export class SourceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpus", elemType: shared.Cpu })
+  @SpeakeasyMetadata({ data: "json, name=cpus", elemType: Cpu })
   cpus?: Cpu[];
 
-  @Metadata({ data: "json, name=disks", elemType: shared.Disk })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: Disk })
   disks?: Disk[];
 
-  @Metadata({ data: "json, name=identificationHints" })
+  @SpeakeasyMetadata({ data: "json, name=identificationHints" })
   identificationHints?: IdentificationHints;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: string;
 
-  @Metadata({ data: "json, name=networkInterfaces", elemType: shared.NetworkInterface })
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NetworkInterface })
   networkInterfaces?: NetworkInterface[];
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: Os;
 
-  @Metadata({ data: "json, name=ramBytes" })
+  @SpeakeasyMetadata({ data: "json, name=ramBytes" })
   ramBytes?: number;
 
-  @Metadata({ data: "json, name=recommendedInstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=recommendedInstanceType" })
   recommendedInstanceType?: string;
 }

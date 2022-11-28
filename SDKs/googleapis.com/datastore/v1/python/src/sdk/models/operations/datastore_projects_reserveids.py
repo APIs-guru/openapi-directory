@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatastoreProjectsReserveIdsPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DatastoreProjectsReserveIdsQueryParams:
 
 @dataclass
 class DatastoreProjectsReserveIdsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatastoreProjectsReserveIdsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class DatastoreProjectsReserveIdsSecurity:
 
 @dataclass
 class DatastoreProjectsReserveIdsRequest:
-    path_params: DatastoreProjectsReserveIdsPathParams = field(default=None)
-    query_params: DatastoreProjectsReserveIdsQueryParams = field(default=None)
+    path_params: DatastoreProjectsReserveIdsPathParams = field()
+    query_params: DatastoreProjectsReserveIdsQueryParams = field()
+    security: DatastoreProjectsReserveIdsSecurity = field()
     request: Optional[shared.ReserveIdsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DatastoreProjectsReserveIdsSecurity = field(default=None)
     
 
 @dataclass
 class DatastoreProjectsReserveIdsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     reserve_ids_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

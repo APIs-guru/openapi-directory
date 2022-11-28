@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateNodegroupPathParams = /** @class */ (function (_super) {
     __extends(CreateNodegroupPathParams, _super);
@@ -30,7 +30,7 @@ var CreateNodegroupPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], CreateNodegroupPathParams.prototype, "name", void 0);
     return CreateNodegroupPathParams;
@@ -42,31 +42,31 @@ var CreateNodegroupHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateNodegroupHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateNodegroupHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateNodegroupHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateNodegroupHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateNodegroupHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateNodegroupHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateNodegroupHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateNodegroupHeaders;
@@ -94,15 +94,15 @@ var CreateNodegroupRequestBodyLaunchTemplate = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBodyLaunchTemplate.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBodyLaunchTemplate.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBodyLaunchTemplate.prototype, "version", void 0);
     return CreateNodegroupRequestBodyLaunchTemplate;
@@ -118,11 +118,11 @@ var CreateNodegroupRequestBodyRemoteAccess = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ec2SshKey" }),
+        SpeakeasyMetadata({ data: "json, name=ec2SshKey" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBodyRemoteAccess.prototype, "ec2SshKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceSecurityGroups" }),
+        SpeakeasyMetadata({ data: "json, name=sourceSecurityGroups" }),
         __metadata("design:type", Array)
     ], CreateNodegroupRequestBodyRemoteAccess.prototype, "sourceSecurityGroups", void 0);
     return CreateNodegroupRequestBodyRemoteAccess;
@@ -138,15 +138,15 @@ var CreateNodegroupRequestBodyScalingConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=desiredSize" }),
+        SpeakeasyMetadata({ data: "json, name=desiredSize" }),
         __metadata("design:type", Number)
     ], CreateNodegroupRequestBodyScalingConfig.prototype, "desiredSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxSize" }),
+        SpeakeasyMetadata({ data: "json, name=maxSize" }),
         __metadata("design:type", Number)
     ], CreateNodegroupRequestBodyScalingConfig.prototype, "maxSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=minSize" }),
+        SpeakeasyMetadata({ data: "json, name=minSize" }),
         __metadata("design:type", Number)
     ], CreateNodegroupRequestBodyScalingConfig.prototype, "minSize", void 0);
     return CreateNodegroupRequestBodyScalingConfig;
@@ -162,11 +162,11 @@ var CreateNodegroupRequestBodyUpdateConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxUnavailable" }),
+        SpeakeasyMetadata({ data: "json, name=maxUnavailable" }),
         __metadata("design:type", Number)
     ], CreateNodegroupRequestBodyUpdateConfig.prototype, "maxUnavailable", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxUnavailablePercentage" }),
+        SpeakeasyMetadata({ data: "json, name=maxUnavailablePercentage" }),
         __metadata("design:type", Number)
     ], CreateNodegroupRequestBodyUpdateConfig.prototype, "maxUnavailablePercentage", void 0);
     return CreateNodegroupRequestBodyUpdateConfig;
@@ -178,71 +178,71 @@ var CreateNodegroupRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amiType" }),
+        SpeakeasyMetadata({ data: "json, name=amiType" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBody.prototype, "amiType", void 0);
     __decorate([
-        Metadata({ data: "json, name=capacityType" }),
+        SpeakeasyMetadata({ data: "json, name=capacityType" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBody.prototype, "capacityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBody.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskSize" }),
+        SpeakeasyMetadata({ data: "json, name=diskSize" }),
         __metadata("design:type", Number)
     ], CreateNodegroupRequestBody.prototype, "diskSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceTypes" }),
+        SpeakeasyMetadata({ data: "json, name=instanceTypes" }),
         __metadata("design:type", Array)
     ], CreateNodegroupRequestBody.prototype, "instanceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], CreateNodegroupRequestBody.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=launchTemplate" }),
         __metadata("design:type", CreateNodegroupRequestBodyLaunchTemplate)
     ], CreateNodegroupRequestBody.prototype, "launchTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeRole" }),
+        SpeakeasyMetadata({ data: "json, name=nodeRole" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBody.prototype, "nodeRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodegroupName" }),
+        SpeakeasyMetadata({ data: "json, name=nodegroupName" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBody.prototype, "nodegroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=releaseVersion" }),
+        SpeakeasyMetadata({ data: "json, name=releaseVersion" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBody.prototype, "releaseVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=remoteAccess" }),
+        SpeakeasyMetadata({ data: "json, name=remoteAccess" }),
         __metadata("design:type", CreateNodegroupRequestBodyRemoteAccess)
     ], CreateNodegroupRequestBody.prototype, "remoteAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=scalingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=scalingConfig" }),
         __metadata("design:type", CreateNodegroupRequestBodyScalingConfig)
     ], CreateNodegroupRequestBody.prototype, "scalingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnets" }),
+        SpeakeasyMetadata({ data: "json, name=subnets" }),
         __metadata("design:type", Array)
     ], CreateNodegroupRequestBody.prototype, "subnets", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateNodegroupRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=taints", elemType: shared.Taint }),
+        SpeakeasyMetadata({ data: "json, name=taints", elemType: shared.Taint }),
         __metadata("design:type", Array)
     ], CreateNodegroupRequestBody.prototype, "taints", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateConfig" }),
+        SpeakeasyMetadata({ data: "json, name=updateConfig" }),
         __metadata("design:type", CreateNodegroupRequestBodyUpdateConfig)
     ], CreateNodegroupRequestBody.prototype, "updateConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], CreateNodegroupRequestBody.prototype, "version", void 0);
     return CreateNodegroupRequestBody;
@@ -254,15 +254,15 @@ var CreateNodegroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateNodegroupPathParams)
     ], CreateNodegroupRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateNodegroupHeaders)
     ], CreateNodegroupRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateNodegroupRequestBody)
     ], CreateNodegroupRequest.prototype, "request", void 0);
     return CreateNodegroupRequest;
@@ -274,43 +274,43 @@ var CreateNodegroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateNodegroupResponse.prototype, "clientException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateNodegroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateNodegroupResponse)
     ], CreateNodegroupResponse.prototype, "createNodegroupResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateNodegroupResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateNodegroupResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateNodegroupResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateNodegroupResponse.prototype, "resourceLimitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateNodegroupResponse.prototype, "serverException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateNodegroupResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateNodegroupResponse.prototype, "statusCode", void 0);
     return CreateNodegroupResponse;

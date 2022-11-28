@@ -10,13 +10,13 @@ type ReposGetReleaseAssetPathParams struct {
 	Repo    string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
-type ReposGetReleaseAssetRequest struct {
-	PathParams ReposGetReleaseAssetPathParams
-}
-
 type ReposGetReleaseAsset415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposGetReleaseAssetRequest struct {
+	PathParams ReposGetReleaseAssetPathParams
 }
 
 type ReposGetReleaseAssetResponse struct {

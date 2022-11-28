@@ -8,17 +8,9 @@ type CreateCategoriesPathParams struct {
 	OrganizationUUID string `pathParam:"style=simple,explode=false,name=organizationUuid"`
 }
 
-type CreateCategoriesSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type CreateCategoriesSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateCategoriesSecurity struct {
-	Option1 *CreateCategoriesSecurityOption1 `security:"option"`
-	Option2 *CreateCategoriesSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type CreateCategoriesRequest struct {

@@ -1,5 +1,7 @@
 package shared
 
+// BuildSystemSharedDtoJobActivity
+// A DTO for an IJobActivity
 type BuildSystemSharedDtoJobActivity struct {
 	ActivityID        *int32                                 `json:"ActivityID,omitempty"`
 	JobActivityID     *int32                                 `json:"JobActivityID,omitempty"`

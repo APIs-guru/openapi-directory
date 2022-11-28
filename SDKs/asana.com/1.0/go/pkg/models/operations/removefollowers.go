@@ -17,14 +17,14 @@ type RemoveFollowersRequestBody struct {
 	Data *shared.TaskAddFollowersRequest `json:"data,omitempty"`
 }
 
+type RemoveFollowers201ApplicationJSON struct {
+	Data *shared.GoalResponse `json:"data,omitempty"`
+}
+
 type RemoveFollowersRequest struct {
 	PathParams  RemoveFollowersPathParams
 	QueryParams RemoveFollowersQueryParams
 	Request     RemoveFollowersRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveFollowers201ApplicationJSON struct {
-	Data *shared.GoalResponse `json:"data,omitempty"`
 }
 
 type RemoveFollowersResponse struct {

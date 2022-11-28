@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import s3artifactlocation
-from . import artifactlocationtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ArtifactLocation:
-    s3_location: Optional[s3artifactlocation.S3ArtifactLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Location' }})
-    type: Optional[artifactlocationtype_enum.ArtifactLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ArtifactLocation
+    Represents information about the location of an artifact.
+    """
+    
+    s3_location: Optional[S3ArtifactLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Location') }})
+    type: Optional[ArtifactLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

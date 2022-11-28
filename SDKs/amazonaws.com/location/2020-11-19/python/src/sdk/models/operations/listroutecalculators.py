@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,24 +28,24 @@ class ListRouteCalculatorsHeaders:
 @dataclass_json
 @dataclass
 class ListRouteCalculatorsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListRouteCalculatorsRequest:
-    query_params: ListRouteCalculatorsQueryParams = field(default=None)
-    headers: ListRouteCalculatorsHeaders = field(default=None)
-    request: ListRouteCalculatorsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListRouteCalculatorsHeaders = field()
+    query_params: ListRouteCalculatorsQueryParams = field()
+    request: ListRouteCalculatorsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListRouteCalculatorsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_route_calculators_response: Optional[shared.ListRouteCalculatorsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

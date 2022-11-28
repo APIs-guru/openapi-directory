@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TaskResult
+// Class TaskExecutionInfo.
 type TaskResult struct {
 	EndTimeUtc       *time.Time                `json:"EndTimeUtc,omitempty"`
 	ErrorMessage     *string                   `json:"ErrorMessage,omitempty"`

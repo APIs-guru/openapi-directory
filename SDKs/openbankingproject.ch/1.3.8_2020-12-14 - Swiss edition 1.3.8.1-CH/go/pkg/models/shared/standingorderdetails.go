@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StandingOrderDetails
+// Details of underlying standing orders.
 type StandingOrderDetails struct {
 	DayOfExecution    *DayOfExecutionEnum     `json:"dayOfExecution,omitempty"`
 	EndDate           *time.Time              `json:"endDate,omitempty"`

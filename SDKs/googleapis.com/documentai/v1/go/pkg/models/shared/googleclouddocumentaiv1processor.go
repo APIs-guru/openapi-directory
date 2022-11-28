@@ -13,6 +13,18 @@ const (
 	GoogleCloudDocumentaiV1ProcessorStateEnumDeleting         GoogleCloudDocumentaiV1ProcessorStateEnum = "DELETING"
 )
 
+// GoogleCloudDocumentaiV1ProcessorInput
+// The first-class citizen for Document AI. Each processor defines how to extract structural information from a document.
+type GoogleCloudDocumentaiV1ProcessorInput struct {
+	CreateTime              *string `json:"createTime,omitempty"`
+	DefaultProcessorVersion *string `json:"defaultProcessorVersion,omitempty"`
+	DisplayName             *string `json:"displayName,omitempty"`
+	KmsKeyName              *string `json:"kmsKeyName,omitempty"`
+	Type                    *string `json:"type,omitempty"`
+}
+
+// GoogleCloudDocumentaiV1Processor
+// The first-class citizen for Document AI. Each processor defines how to extract structural information from a document.
 type GoogleCloudDocumentaiV1Processor struct {
 	CreateTime              *string                                    `json:"createTime,omitempty"`
 	DefaultProcessorVersion *string                                    `json:"defaultProcessorVersion,omitempty"`

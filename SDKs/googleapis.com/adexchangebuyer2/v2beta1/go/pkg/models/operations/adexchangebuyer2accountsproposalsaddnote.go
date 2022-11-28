@@ -31,7 +31,7 @@ type Adexchangebuyer2AccountsProposalsAddNoteSecurity struct {
 type Adexchangebuyer2AccountsProposalsAddNoteRequest struct {
 	PathParams  Adexchangebuyer2AccountsProposalsAddNotePathParams
 	QueryParams Adexchangebuyer2AccountsProposalsAddNoteQueryParams
-	Request     *shared.AddNoteRequest `request:"mediaType=application/json"`
+	Request     *shared.AddNoteRequestInput `request:"mediaType=application/json"`
 	Security    Adexchangebuyer2AccountsProposalsAddNoteSecurity
 }
 

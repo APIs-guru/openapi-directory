@@ -1,15 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import controllers_packageitem
-from . import controllers_links
-from . import controllers_listmeta
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ControllersPackagesResponse:
-    data: Optional[List[controllers_packageitem.ControllersPackageItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    links: Optional[controllers_links.ControllersLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    meta: Optional[controllers_listmeta.ControllersListMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    data: Optional[List[ControllersPackageItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    links: Optional[ControllersLinks] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    meta: Optional[ControllersListMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
     

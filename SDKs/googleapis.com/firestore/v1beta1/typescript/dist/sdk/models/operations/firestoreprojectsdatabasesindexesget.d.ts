@@ -1,0 +1,43 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class FirestoreProjectsDatabasesIndexesGetPathParams extends SpeakeasyBase {
+    name: string;
+}
+export declare class FirestoreProjectsDatabasesIndexesGetQueryParams extends SpeakeasyBase {
+    dollarXgafv?: shared.XgafvEnum;
+    accessToken?: string;
+    alt?: shared.AltEnum;
+    callback?: string;
+    fields?: string;
+    key?: string;
+    maskFieldPaths?: string[];
+    oauthToken?: string;
+    prettyPrint?: boolean;
+    quotaUser?: string;
+    readTime?: string;
+    transaction?: string;
+    uploadType?: string;
+    uploadProtocol?: string;
+}
+export declare class FirestoreProjectsDatabasesIndexesGetSecurityOption1 extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class FirestoreProjectsDatabasesIndexesGetSecurityOption2 extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class FirestoreProjectsDatabasesIndexesGetSecurity extends SpeakeasyBase {
+    option1?: FirestoreProjectsDatabasesIndexesGetSecurityOption1;
+    option2?: FirestoreProjectsDatabasesIndexesGetSecurityOption2;
+}
+export declare class FirestoreProjectsDatabasesIndexesGetRequest extends SpeakeasyBase {
+    pathParams: FirestoreProjectsDatabasesIndexesGetPathParams;
+    queryParams: FirestoreProjectsDatabasesIndexesGetQueryParams;
+    security: FirestoreProjectsDatabasesIndexesGetSecurity;
+}
+export declare class FirestoreProjectsDatabasesIndexesGetResponse extends SpeakeasyBase {
+    contentType: string;
+    googleFirestoreAdminV1beta1Index?: shared.GoogleFirestoreAdminV1beta1Index;
+    statusCode: number;
+}

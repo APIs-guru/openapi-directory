@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProvisioningIssueReasonEnum {
-    ReasonUnspecified = "REASON_UNSPECIFIED"
-,    AuthorizationIssue = "AUTHORIZATION_ISSUE"
-,    RateLimited = "RATE_LIMITED"
+    ReasonUnspecified = "REASON_UNSPECIFIED",
+    AuthorizationIssue = "AUTHORIZATION_ISSUE",
+    RateLimited = "RATE_LIMITED"
 }
 
 
@@ -12,9 +13,9 @@ export enum ProvisioningIssueReasonEnum {
  * Information about issues with provisioning a Managed Certificate.
 **/
 export class ProvisioningIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: ProvisioningIssueReasonEnum;
 }

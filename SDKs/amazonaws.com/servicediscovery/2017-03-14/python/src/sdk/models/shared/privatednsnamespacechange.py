@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import privatednsnamespacepropertieschange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PrivateDNSNamespaceChange:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    properties: Optional[privatednsnamespacepropertieschange.PrivateDNSNamespacePropertiesChange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Properties' }})
+    r"""PrivateDNSNamespaceChange
+    Updated properties for the private DNS namespace.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    properties: Optional[PrivateDNSNamespacePropertiesChange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Properties') }})
     

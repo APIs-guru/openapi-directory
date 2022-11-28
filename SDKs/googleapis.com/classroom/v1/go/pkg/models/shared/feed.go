@@ -9,6 +9,8 @@ const (
 	FeedFeedTypeEnumCourseWorkChanges   FeedFeedTypeEnum = "COURSE_WORK_CHANGES"
 )
 
+// Feed
+// A class of notifications that an application can register to receive. For example: "all roster changes for a domain".
 type Feed struct {
 	CourseRosterChangesInfo *CourseRosterChangesInfo `json:"courseRosterChangesInfo,omitempty"`
 	CourseWorkChangesInfo   *CourseWorkChangesInfo   `json:"courseWorkChangesInfo,omitempty"`

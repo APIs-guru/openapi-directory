@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextStyle } from "./textstyle";
 import { TextStyleSuggestionState } from "./textstylesuggestionstate";
+
 
 
 // SuggestedTextStyle
@@ -8,9 +9,9 @@ import { TextStyleSuggestionState } from "./textstylesuggestionstate";
  * A suggested change to a TextStyle.
 **/
 export class SuggestedTextStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=textStyle" })
+  @SpeakeasyMetadata({ data: "json, name=textStyle" })
   textStyle?: TextStyle;
 
-  @Metadata({ data: "json, name=textStyleSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=textStyleSuggestionState" })
   textStyleSuggestionState?: TextStyleSuggestionState;
 }

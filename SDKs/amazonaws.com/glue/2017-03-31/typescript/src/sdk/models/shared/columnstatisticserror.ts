@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnStatistics } from "./columnstatistics";
 import { ErrorDetail } from "./errordetail";
+
 
 
 // ColumnStatisticsError
@@ -8,9 +9,9 @@ import { ErrorDetail } from "./errordetail";
  * Encapsulates a <code>ColumnStatistics</code> object that failed and the reason for failure.
 **/
 export class ColumnStatisticsError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ColumnStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=ColumnStatistics" })
   columnStatistics?: ColumnStatistics;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: ErrorDetail;
 }

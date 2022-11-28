@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SigningBasket
@@ -8,9 +9,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class SigningBasket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentIds" })
+  @SpeakeasyMetadata({ data: "json, name=consentIds" })
   consentIds?: string[];
 
-  @Metadata({ data: "json, name=paymentIds" })
+  @SpeakeasyMetadata({ data: "json, name=paymentIds" })
   paymentIds?: string[];
 }

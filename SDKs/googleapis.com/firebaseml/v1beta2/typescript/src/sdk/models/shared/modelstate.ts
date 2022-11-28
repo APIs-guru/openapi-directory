@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
+
 
 
 // ModelState
@@ -7,9 +8,9 @@ import { Status } from "./status";
  * State common to all model types. Includes publishing and validation information.
 **/
 export class ModelState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: boolean;
 
-  @Metadata({ data: "json, name=validationError" })
+  @SpeakeasyMetadata({ data: "json, name=validationError" })
   validationError?: Status;
 }

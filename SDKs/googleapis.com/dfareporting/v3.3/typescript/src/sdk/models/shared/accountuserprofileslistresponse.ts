@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountUserProfile } from "./accountuserprofile";
+
 
 
 // AccountUserProfilesListResponse
@@ -8,12 +8,12 @@ import { AccountUserProfile } from "./accountuserprofile";
  * Account User Profile List Response
 **/
 export class AccountUserProfilesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountUserProfiles", elemType: shared.AccountUserProfile })
+  @SpeakeasyMetadata({ data: "json, name=accountUserProfiles", elemType: AccountUserProfile })
   accountUserProfiles?: AccountUserProfile[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

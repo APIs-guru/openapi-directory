@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetSuggestionsTypeEnum(str, Enum):
     ENTITY = "entity"
@@ -11,14 +12,14 @@ class GetSuggestionsTypeEnum(str, Enum):
 
 @dataclass
 class GetSuggestionsPathParams:
-    type: GetSuggestionsTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    type: GetSuggestionsTypeEnum = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSuggestionsQueryParams:
+    query: str = field(metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     app_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'app_token', 'style': 'form', 'explode': True }})
     limit: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
-    query: str = field(default=None, metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     variable_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'variable_id', 'style': 'form', 'explode': True }})
     
 
@@ -29,13 +30,13 @@ class GetSuggestionsHeaders:
 
 @dataclass
 class GetSuggestionsRequest:
-    path_params: GetSuggestionsPathParams = field(default=None)
-    query_params: GetSuggestionsQueryParams = field(default=None)
-    headers: GetSuggestionsHeaders = field(default=None)
+    headers: GetSuggestionsHeaders = field()
+    path_params: GetSuggestionsPathParams = field()
+    query_params: GetSuggestionsQueryParams = field()
     
 
 @dataclass
 class GetSuggestionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

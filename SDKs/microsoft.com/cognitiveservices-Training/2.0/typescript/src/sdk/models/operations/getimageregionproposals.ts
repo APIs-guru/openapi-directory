@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetImageRegionProposalsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=imageId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=imageId" })
   imageId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class GetImageRegionProposalsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class GetImageRegionProposalsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetImageRegionProposalsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetImageRegionProposalsHeaders;
 }
 
 
 export class GetImageRegionProposalsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   imageRegionProposal?: shared.ImageRegionProposal;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

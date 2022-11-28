@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ReportsIndexPathParams = /** @class */ (function (_super) {
     __extends(ReportsIndexPathParams, _super);
     function ReportsIndexPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=report_type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=report_type" }),
         __metadata("design:type", String)
     ], ReportsIndexPathParams.prototype, "reportType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], ReportsIndexPathParams.prototype, "version", void 0);
     return ReportsIndexPathParams;
@@ -45,27 +45,27 @@ var ReportsIndexQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end_date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" }),
         __metadata("design:type", String)
     ], ReportsIndexQueryParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ReportsIndexQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], ReportsIndexQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=reportSubTypeId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reportSubTypeId" }),
         __metadata("design:type", Number)
     ], ReportsIndexQueryParams.prototype, "reportSubTypeId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sites" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sites" }),
         __metadata("design:type", String)
     ], ReportsIndexQueryParams.prototype, "sites", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start_date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" }),
         __metadata("design:type", String)
     ], ReportsIndexQueryParams.prototype, "startDate", void 0);
     return ReportsIndexQueryParams;
@@ -77,11 +77,11 @@ var ReportsIndexRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReportsIndexPathParams)
     ], ReportsIndexRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReportsIndexQueryParams)
     ], ReportsIndexRequest.prototype, "queryParams", void 0);
     return ReportsIndexRequest;
@@ -93,15 +93,15 @@ var ReportsIndexResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReportsIndexResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ReportsIndexResponse.prototype, "object", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReportsIndexResponse.prototype, "statusCode", void 0);
     return ReportsIndexResponse;

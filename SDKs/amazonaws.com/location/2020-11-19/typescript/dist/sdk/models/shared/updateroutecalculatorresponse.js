@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateRouteCalculatorResponse = /** @class */ (function (_super) {
     __extends(UpdateRouteCalculatorResponse, _super);
     function UpdateRouteCalculatorResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CalculatorArn" }),
+        SpeakeasyMetadata({ data: "json, name=CalculatorArn" }),
         __metadata("design:type", String)
     ], UpdateRouteCalculatorResponse.prototype, "calculatorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CalculatorName" }),
+        SpeakeasyMetadata({ data: "json, name=CalculatorName" }),
         __metadata("design:type", String)
     ], UpdateRouteCalculatorResponse.prototype, "calculatorName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTime" }),
         __metadata("design:type", Date)
     ], UpdateRouteCalculatorResponse.prototype, "updateTime", void 0);
     return UpdateRouteCalculatorResponse;

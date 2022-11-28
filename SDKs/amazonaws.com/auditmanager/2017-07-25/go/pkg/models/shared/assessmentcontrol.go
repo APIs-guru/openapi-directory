@@ -1,5 +1,8 @@
 package shared
 
+// AssessmentControl
+//
+//	The control entity that represents a standard or custom control used in an Audit Manager assessment.
 type AssessmentControl struct {
 	AssessmentReportEvidenceCount *int64               `json:"assessmentReportEvidenceCount,omitempty"`
 	Comments                      []ControlComment     `json:"comments,omitempty"`

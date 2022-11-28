@@ -1,6 +1,7 @@
 package shared
 
-type SecuritySettings struct {
+// SecuritySettingsInput
+// The definition of security settings.
+type SecuritySettingsInput struct {
 	MemberRestriction *MemberRestriction `json:"memberRestriction,omitempty"`
-	Name              *string            `json:"name,omitempty"`
 }

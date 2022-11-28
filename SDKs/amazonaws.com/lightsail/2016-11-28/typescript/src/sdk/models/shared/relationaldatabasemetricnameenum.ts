@@ -1,10 +1,11 @@
 
 
+
 export enum RelationalDatabaseMetricNameEnum {
-    CpuUtilization = "CPUUtilization"
-,    DatabaseConnections = "DatabaseConnections"
-,    DiskQueueDepth = "DiskQueueDepth"
-,    FreeStorageSpace = "FreeStorageSpace"
-,    NetworkReceiveThroughput = "NetworkReceiveThroughput"
-,    NetworkTransmitThroughput = "NetworkTransmitThroughput"
+    CpuUtilization = "CPUUtilization",
+    DatabaseConnections = "DatabaseConnections",
+    DiskQueueDepth = "DiskQueueDepth",
+    FreeStorageSpace = "FreeStorageSpace",
+    NetworkReceiveThroughput = "NetworkReceiveThroughput",
+    NetworkTransmitThroughput = "NetworkTransmitThroughput"
 }

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GitLabRepositoryId } from "./gitlabrepositoryid";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GitLabRepositoryIdInput } from "./gitlabrepositoryid";
 import { Status } from "./status";
 
 
-// GitLabConnectedRepository
+
+// GitLabConnectedRepositoryInput
 /** 
  * GitLabConnectedRepository represents a GitLab connected repository request response.
 **/
-export class GitLabConnectedRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent" })
+export class GitLabConnectedRepositoryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=repo" })
-  repo?: GitLabRepositoryId;
+  @SpeakeasyMetadata({ data: "json, name=repo" })
+  repo?: GitLabRepositoryIdInput;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: Status;
 }

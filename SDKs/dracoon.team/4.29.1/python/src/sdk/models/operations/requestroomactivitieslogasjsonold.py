@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestRoomActivitiesLogAsJSONOldPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,15 +31,15 @@ class RequestRoomActivitiesLogAsJSONOldHeaders:
 
 @dataclass
 class RequestRoomActivitiesLogAsJSONOldRequest:
-    path_params: RequestRoomActivitiesLogAsJSONOldPathParams = field(default=None)
-    query_params: RequestRoomActivitiesLogAsJSONOldQueryParams = field(default=None)
-    headers: RequestRoomActivitiesLogAsJSONOldHeaders = field(default=None)
+    headers: RequestRoomActivitiesLogAsJSONOldHeaders = field()
+    path_params: RequestRoomActivitiesLogAsJSONOldPathParams = field()
+    query_params: RequestRoomActivitiesLogAsJSONOldQueryParams = field()
     
 
 @dataclass
 class RequestRoomActivitiesLogAsJSONOldResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     syslog_event_list: Optional[shared.SyslogEventList] = field(default=None)
     

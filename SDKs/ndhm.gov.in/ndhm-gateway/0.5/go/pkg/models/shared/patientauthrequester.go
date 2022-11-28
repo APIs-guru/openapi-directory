@@ -7,6 +7,8 @@ const (
 	PatientAuthRequesterTypeEnumHiu PatientAuthRequesterTypeEnum = "HIU"
 )
 
+// PatientAuthRequester
+// identification of requester
 type PatientAuthRequester struct {
 	ID   string                       `json:"id"`
 	Type PatientAuthRequesterTypeEnum `json:"type"`

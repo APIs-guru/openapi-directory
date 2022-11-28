@@ -1,5 +1,7 @@
 package shared
 
+// RadiusChallengeResponse
+// RADIUS challenge reply
 type RadiusChallengeResponse struct {
 	Code         int32   `json:"code"`
 	DebugInfo    *string `json:"debugInfo,omitempty"`

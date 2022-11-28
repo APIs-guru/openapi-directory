@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class UserGetMembershipFromHardLinkedCredentialPathParams:
-    cr_type: int = field(default=None, metadata={'path_param': { 'field_name': 'crType', 'style': 'simple', 'explode': False }})
-    credential: str = field(default=None, metadata={'path_param': { 'field_name': 'credential', 'style': 'simple', 'explode': False }})
+    cr_type: int = field(metadata={'path_param': { 'field_name': 'crType', 'style': 'simple', 'explode': False }})
+    credential: str = field(metadata={'path_param': { 'field_name': 'credential', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UserGetMembershipFromHardLinkedCredentialRequest:
-    path_params: UserGetMembershipFromHardLinkedCredentialPathParams = field(default=None)
+    path_params: UserGetMembershipFromHardLinkedCredentialPathParams = field()
     
 
 @dataclass
 class UserGetMembershipFromHardLinkedCredentialResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

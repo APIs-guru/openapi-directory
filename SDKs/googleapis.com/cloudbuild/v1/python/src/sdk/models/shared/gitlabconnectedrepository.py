@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import gitlabrepositoryid
-from . import status
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GitLabConnectedRepository:
-    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    repo: Optional[gitlabrepositoryid.GitLabRepositoryID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
-    status: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+class GitLabConnectedRepositoryInput:
+    r"""GitLabConnectedRepositoryInput
+    GitLabConnectedRepository represents a GitLab connected repository request response.
+    """
+    
+    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    repo: Optional[GitLabRepositoryIDInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('repo') }})
+    status: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

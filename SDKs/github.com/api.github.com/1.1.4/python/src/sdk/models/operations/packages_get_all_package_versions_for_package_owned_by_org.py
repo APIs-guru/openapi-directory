@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PackagesGetAllPackageVersionsForPackageOwnedByOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'package_name', 'style': 'simple', 'explode': False }})
-    package_type: shared.PackageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'package_type', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'package_name', 'style': 'simple', 'explode': False }})
+    package_type: shared.PackageTypeEnum = field(metadata={'path_param': { 'field_name': 'package_type', 'style': 'simple', 'explode': False }})
     
 class PackagesGetAllPackageVersionsForPackageOwnedByOrgStateEnum(str, Enum):
     ACTIVE = "active"
@@ -23,14 +24,14 @@ class PackagesGetAllPackageVersionsForPackageOwnedByOrgQueryParams:
 
 @dataclass
 class PackagesGetAllPackageVersionsForPackageOwnedByOrgRequest:
-    path_params: PackagesGetAllPackageVersionsForPackageOwnedByOrgPathParams = field(default=None)
-    query_params: PackagesGetAllPackageVersionsForPackageOwnedByOrgQueryParams = field(default=None)
+    path_params: PackagesGetAllPackageVersionsForPackageOwnedByOrgPathParams = field()
+    query_params: PackagesGetAllPackageVersionsForPackageOwnedByOrgQueryParams = field()
     
 
 @dataclass
 class PackagesGetAllPackageVersionsForPackageOwnedByOrgResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     package_versions: Optional[List[shared.PackageVersion]] = field(default=None)
     

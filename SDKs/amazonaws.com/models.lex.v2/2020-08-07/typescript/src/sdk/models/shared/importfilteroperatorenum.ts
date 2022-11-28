@@ -1,6 +1,7 @@
 
 
+
 export enum ImportFilterOperatorEnum {
-    Co = "CO"
-,    Eq = "EQ"
+    Co = "CO",
+    Eq = "EQ"
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentConfig } from "./deploymentconfig";
+
 
 
 // UpdateDeploymentRequest
@@ -7,6 +8,6 @@ import { DeploymentConfig } from "./deploymentconfig";
  * Request with deployment information to update an existing deployment.
 **/
 export class UpdateDeploymentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfig" })
   deploymentConfig?: DeploymentConfig;
 }

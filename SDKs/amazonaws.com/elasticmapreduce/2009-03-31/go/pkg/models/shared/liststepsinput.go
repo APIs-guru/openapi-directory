@@ -1,5 +1,7 @@
 package shared
 
+// ListStepsInput
+// This input determines which steps to list.
 type ListStepsInput struct {
 	ClusterID  string          `json:"ClusterId"`
 	Marker     *string         `json:"Marker,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// PhotoObject
+// **object** detailing a single photo from a user
 type PhotoObject struct {
 	Caption           *string `json:"caption,omitempty"`
 	EditorsPick       *bool   `json:"editorsPick,omitempty"`

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetMessageReactionsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetMessageReactionsIDRequest:
-    path_params: GetMessageReactionsIDPathParams = field(default=None)
+    path_params: GetMessageReactionsIDPathParams = field()
     
 
 @dataclass
 class GetMessageReactionsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     message_reaction_entity: Optional[shared.MessageReactionEntity] = field(default=None)
-    status_code: int = field(default=None)
     

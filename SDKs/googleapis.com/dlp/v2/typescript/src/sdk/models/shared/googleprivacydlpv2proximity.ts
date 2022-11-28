@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2Proximity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message for specifying a window around a finding to apply a detection rule.
 **/
 export class GooglePrivacyDlpV2Proximity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=windowAfter" })
+  @SpeakeasyMetadata({ data: "json, name=windowAfter" })
   windowAfter?: number;
 
-  @Metadata({ data: "json, name=windowBefore" })
+  @SpeakeasyMetadata({ data: "json, name=windowBefore" })
   windowBefore?: number;
 }

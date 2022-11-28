@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerBlogUserInfosGetPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class BloggerBlogUserInfosGetQueryParams:
 
 @dataclass
 class BloggerBlogUserInfosGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerBlogUserInfosGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class BloggerBlogUserInfosGetSecurity:
 
 @dataclass
 class BloggerBlogUserInfosGetRequest:
-    path_params: BloggerBlogUserInfosGetPathParams = field(default=None)
-    query_params: BloggerBlogUserInfosGetQueryParams = field(default=None)
-    security: BloggerBlogUserInfosGetSecurity = field(default=None)
+    path_params: BloggerBlogUserInfosGetPathParams = field()
+    query_params: BloggerBlogUserInfosGetQueryParams = field()
+    security: BloggerBlogUserInfosGetSecurity = field()
     
 
 @dataclass
 class BloggerBlogUserInfosGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     blog_user_info: Optional[shared.BlogUserInfo] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

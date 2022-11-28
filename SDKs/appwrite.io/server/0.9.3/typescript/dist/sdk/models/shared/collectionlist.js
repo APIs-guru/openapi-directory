@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Collection } from "./collection";
 // CollectionList
 /**
  * Collections List
@@ -34,11 +34,11 @@ var CollectionList = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=collections", elemType: shared.Collection }),
+        SpeakeasyMetadata({ data: "json, name=collections", elemType: Collection }),
         __metadata("design:type", Array)
     ], CollectionList.prototype, "collections", void 0);
     __decorate([
-        Metadata({ data: "json, name=sum" }),
+        SpeakeasyMetadata({ data: "json, name=sum" }),
         __metadata("design:type", Number)
     ], CollectionList.prototype, "sum", void 0);
     return CollectionList;

@@ -13,6 +13,8 @@ const (
 	TimeDimensionDayOfWeekEnumSunday               TimeDimensionDayOfWeekEnum = "SUNDAY"
 )
 
+// TimeDimension
+// The dimension for which data is divided over.
 type TimeDimension struct {
 	DayOfWeek *TimeDimensionDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 	TimeOfDay *TimeOfDay                  `json:"timeOfDay,omitempty"`

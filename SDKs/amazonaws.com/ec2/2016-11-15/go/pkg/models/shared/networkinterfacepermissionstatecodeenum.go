@@ -1,0 +1,10 @@
+package shared
+
+type NetworkInterfacePermissionStateCodeEnum string
+
+const (
+	NetworkInterfacePermissionStateCodeEnumPending  NetworkInterfacePermissionStateCodeEnum = "pending"
+	NetworkInterfacePermissionStateCodeEnumGranted  NetworkInterfacePermissionStateCodeEnum = "granted"
+	NetworkInterfacePermissionStateCodeEnumRevoking NetworkInterfacePermissionStateCodeEnum = "revoking"
+	NetworkInterfacePermissionStateCodeEnumRevoked  NetworkInterfacePermissionStateCodeEnum = "revoked"
+)

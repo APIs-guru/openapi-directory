@@ -18,6 +18,8 @@ const (
 	ApplicationServingStatusEnumSystemDisabled ApplicationServingStatusEnum = "SYSTEM_DISABLED"
 )
 
+// Application
+// An Application resource contains the top-level configuration of an App Engine application.
 type Application struct {
 	AuthDomain              *string                       `json:"authDomain,omitempty"`
 	CodeBucket              *string                       `json:"codeBucket,omitempty"`

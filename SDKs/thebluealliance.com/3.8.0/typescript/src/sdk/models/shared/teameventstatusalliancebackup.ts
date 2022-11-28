@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TeamEventStatusAllianceBackup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Backup status, may be null.
 **/
 export class TeamEventStatusAllianceBackup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=in" })
+  @SpeakeasyMetadata({ data: "json, name=in" })
   in?: string;
 
-  @Metadata({ data: "json, name=out" })
+  @SpeakeasyMetadata({ data: "json, name=out" })
   out?: string;
 }

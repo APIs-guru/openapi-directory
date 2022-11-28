@@ -1,7 +1,8 @@
 
 
+
 export enum VirtualGatewayPortProtocolEnum {
-    Http = "http"
-,    Http2 = "http2"
-,    Grpc = "grpc"
+    Http = "http",
+    Http2 = "http2",
+    Grpc = "grpc"
 }

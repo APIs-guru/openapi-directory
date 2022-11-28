@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelatedResultResponse } from "./relatedresultresponse";
 
 
+
 export class RelatedResponseSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=result", elemType: shared.RelatedResultResponse })
+  @SpeakeasyMetadata({ data: "json, name=result", elemType: RelatedResultResponse })
   result?: RelatedResultResponse[];
 }

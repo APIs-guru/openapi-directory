@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDocumentaiV1DocumentPageTokenDetectedBreakTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Space = "SPACE"
-,    WideSpace = "WIDE_SPACE"
-,    Hyphen = "HYPHEN"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Space = "SPACE",
+    WideSpace = "WIDE_SPACE",
+    Hyphen = "HYPHEN"
 }
 
 
@@ -13,6 +14,6 @@ export enum GoogleCloudDocumentaiV1DocumentPageTokenDetectedBreakTypeEnum {
  * Detected break at the end of a Token.
 **/
 export class GoogleCloudDocumentaiV1DocumentPageTokenDetectedBreak extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDocumentaiV1DocumentPageTokenDetectedBreakTypeEnum;
 }

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import event
-from . import event
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Activity:
-    combined_event: Optional[event.Event] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'combinedEvent' }})
-    single_events: Optional[List[event.Event]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'singleEvents' }})
+    r"""Activity
+    An Activity resource is a combined view of multiple events. An activity has a list of individual events and a combined view of the common fields among all events.
+    """
+    
+    combined_event: Optional[Event] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('combinedEvent') }})
+    single_events: Optional[List[Event]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('singleEvents') }})
     

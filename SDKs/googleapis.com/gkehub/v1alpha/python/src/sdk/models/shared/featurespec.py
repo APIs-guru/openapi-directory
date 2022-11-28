@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import membershipspec
+from sdk import utils
+from . import *
 
 class FeatureSpecProvisionGoogleCaEnum(str, Enum):
     GOOGLE_CA_PROVISIONING_UNSPECIFIED = "GOOGLE_CA_PROVISIONING_UNSPECIFIED"
@@ -12,6 +14,10 @@ class FeatureSpecProvisionGoogleCaEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FeatureSpec:
-    default_config: Optional[membershipspec.MembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultConfig' }})
-    provision_google_ca: Optional[FeatureSpecProvisionGoogleCaEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provisionGoogleCa' }})
+    r"""FeatureSpec
+    **Workload Certificate**: The Hub-wide input for the WorkloadCertificate feature.
+    """
+    
+    default_config: Optional[MembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultConfig') }})
+    provision_google_ca: Optional[FeatureSpecProvisionGoogleCaEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('provisionGoogleCa') }})
     

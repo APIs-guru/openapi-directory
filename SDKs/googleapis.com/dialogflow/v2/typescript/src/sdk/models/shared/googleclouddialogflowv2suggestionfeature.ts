@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2SuggestionFeatureTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    ArticleSuggestion = "ARTICLE_SUGGESTION"
-,    Faq = "FAQ"
-,    SmartReply = "SMART_REPLY"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    ArticleSuggestion = "ARTICLE_SUGGESTION",
+    Faq = "FAQ",
+    SmartReply = "SMART_REPLY"
 }
 
 
@@ -13,6 +14,6 @@ export enum GoogleCloudDialogflowV2SuggestionFeatureTypeEnum {
  * The type of Human Agent Assistant API suggestion to perform, and the maximum number of results to return for that type. Multiple `Feature` objects can be specified in the `features` list.
 **/
 export class GoogleCloudDialogflowV2SuggestionFeature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDialogflowV2SuggestionFeatureTypeEnum;
 }

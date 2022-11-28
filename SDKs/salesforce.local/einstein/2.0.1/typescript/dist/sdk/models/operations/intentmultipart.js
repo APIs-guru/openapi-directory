@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IntentMultipartRequests = /** @class */ (function (_super) {
     __extends(IntentMultipartRequests, _super);
@@ -30,11 +30,11 @@ var IntentMultipartRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.IntentPredictRequest)
     ], IntentMultipartRequests.prototype, "intentPredictRequest", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", shared.IntentPredictRequest)
     ], IntentMultipartRequests.prototype, "intentPredictRequest1", void 0);
     return IntentMultipartRequests;
@@ -46,7 +46,7 @@ var IntentMultipartSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], IntentMultipartSecurity.prototype, "bearerToken", void 0);
     return IntentMultipartSecurity;
@@ -58,11 +58,11 @@ var IntentMultipartRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IntentMultipartRequests)
     ], IntentMultipartRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IntentMultipartSecurity)
     ], IntentMultipartRequest.prototype, "security", void 0);
     return IntentMultipartRequest;
@@ -74,19 +74,19 @@ var IntentMultipartResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IntentMultipartResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.IntentPredictResponse)
     ], IntentMultipartResponse.prototype, "intentPredictResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PredictionErrorResponse)
     ], IntentMultipartResponse.prototype, "predictionErrorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IntentMultipartResponse.prototype, "statusCode", void 0);
     return IntentMultipartResponse;

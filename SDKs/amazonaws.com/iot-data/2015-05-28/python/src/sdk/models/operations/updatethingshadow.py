@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateThingShadowPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,27 +32,27 @@ class UpdateThingShadowHeaders:
 @dataclass_json
 @dataclass
 class UpdateThingShadowRequestBody:
-    payload: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payload' }})
+    payload: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payload') }})
     
 
 @dataclass
 class UpdateThingShadowRequest:
-    path_params: UpdateThingShadowPathParams = field(default=None)
-    query_params: UpdateThingShadowQueryParams = field(default=None)
-    headers: UpdateThingShadowHeaders = field(default=None)
-    request: UpdateThingShadowRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateThingShadowHeaders = field()
+    path_params: UpdateThingShadowPathParams = field()
+    query_params: UpdateThingShadowQueryParams = field()
+    request: UpdateThingShadowRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateThingShadowResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     request_entity_too_large_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     unsupported_document_encoding_exception: Optional[Any] = field(default=None)

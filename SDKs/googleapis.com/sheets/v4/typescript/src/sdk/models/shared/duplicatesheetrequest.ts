@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DuplicateSheetRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Duplicates the contents of a sheet.
 **/
 export class DuplicateSheetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insertSheetIndex" })
+  @SpeakeasyMetadata({ data: "json, name=insertSheetIndex" })
   insertSheetIndex?: number;
 
-  @Metadata({ data: "json, name=newSheetId" })
+  @SpeakeasyMetadata({ data: "json, name=newSheetId" })
   newSheetId?: number;
 
-  @Metadata({ data: "json, name=newSheetName" })
+  @SpeakeasyMetadata({ data: "json, name=newSheetName" })
   newSheetName?: string;
 
-  @Metadata({ data: "json, name=sourceSheetId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceSheetId" })
   sourceSheetId?: number;
 }

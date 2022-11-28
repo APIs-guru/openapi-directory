@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Stack
+// Describes a stack.
 type Stack struct {
 	AccessEndpoints     []AccessEndpoint             `json:"AccessEndpoints,omitempty"`
 	ApplicationSettings *ApplicationSettingsResponse `json:"ApplicationSettings,omitempty"`

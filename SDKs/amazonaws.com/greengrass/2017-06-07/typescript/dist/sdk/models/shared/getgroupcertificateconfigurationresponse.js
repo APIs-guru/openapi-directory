@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetGroupCertificateConfigurationResponse = /** @class */ (function (_super) {
     __extends(GetGroupCertificateConfigurationResponse, _super);
     function GetGroupCertificateConfigurationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CertificateAuthorityExpiryInMilliseconds" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateAuthorityExpiryInMilliseconds" }),
         __metadata("design:type", String)
     ], GetGroupCertificateConfigurationResponse.prototype, "certificateAuthorityExpiryInMilliseconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=CertificateExpiryInMilliseconds" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateExpiryInMilliseconds" }),
         __metadata("design:type", String)
     ], GetGroupCertificateConfigurationResponse.prototype, "certificateExpiryInMilliseconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupId" }),
+        SpeakeasyMetadata({ data: "json, name=GroupId" }),
         __metadata("design:type", String)
     ], GetGroupCertificateConfigurationResponse.prototype, "groupId", void 0);
     return GetGroupCertificateConfigurationResponse;

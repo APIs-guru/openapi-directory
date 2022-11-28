@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod } from "./googlecloudpaymentsresellersubscriptionv1serviceperiod";
+
 
 
 // GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails
@@ -7,6 +8,6 @@ import { GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod } from "./google
  * Details for a ONE_TIME recurrence line item.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=servicePeriod" })
+  @SpeakeasyMetadata({ data: "json, name=servicePeriod" })
   servicePeriod?: GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod;
 }

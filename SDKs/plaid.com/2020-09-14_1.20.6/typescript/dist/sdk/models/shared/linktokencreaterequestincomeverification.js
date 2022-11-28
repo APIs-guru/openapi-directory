@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LinkTokenCreateRequestIncomeVerification
 /**
  * Specifies options for initializing Link for use with the Income (beta) product. This field is required if `income_verification` is included in the `products` array.
@@ -33,11 +33,11 @@ var LinkTokenCreateRequestIncomeVerification = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=asset_report_id" }),
+        SpeakeasyMetadata({ data: "json, name=asset_report_id" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestIncomeVerification.prototype, "assetReportId", void 0);
     __decorate([
-        Metadata({ data: "json, name=income_verification_id" }),
+        SpeakeasyMetadata({ data: "json, name=income_verification_id" }),
         __metadata("design:type", String)
     ], LinkTokenCreateRequestIncomeVerification.prototype, "incomeVerificationId", void 0);
     return LinkTokenCreateRequestIncomeVerification;

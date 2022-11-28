@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1DocumentTextAnchorTextSegment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A text segment in the Document.text. The indices may be out of bounds which indicate that the text extends into another document shard for large sharded documents. See ShardInfo.text_offset
 **/
 export class GoogleCloudDocumentaiV1DocumentTextAnchorTextSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endIndex" })
+  @SpeakeasyMetadata({ data: "json, name=endIndex" })
   endIndex?: string;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: string;
 }

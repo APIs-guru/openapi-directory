@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PollOption } from "./polloption";
 export var PollVotingStatusEnum;
 (function (PollVotingStatusEnum) {
     PollVotingStatusEnum["Open"] = "open";
@@ -39,23 +39,23 @@ var Poll = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=duration_minutes" }),
+        SpeakeasyMetadata({ data: "json, name=duration_minutes" }),
         __metadata("design:type", Number)
     ], Poll.prototype, "durationMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_datetime" }),
+        SpeakeasyMetadata({ data: "json, name=end_datetime" }),
         __metadata("design:type", Date)
     ], Poll.prototype, "endDatetime", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Poll.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=options", elemType: shared.PollOption }),
+        SpeakeasyMetadata({ data: "json, name=options", elemType: PollOption }),
         __metadata("design:type", Array)
     ], Poll.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=voting_status" }),
+        SpeakeasyMetadata({ data: "json, name=voting_status" }),
         __metadata("design:type", String)
     ], Poll.prototype, "votingStatus", void 0);
     return Poll;

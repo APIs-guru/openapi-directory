@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2conversationphonenumber
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowV2ConversationConversationStageEnum(str, Enum):
     CONVERSATION_STAGE_UNSPECIFIED = "CONVERSATION_STAGE_UNSPECIFIED"
@@ -16,12 +18,27 @@ class GoogleCloudDialogflowV2ConversationLifecycleStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class GoogleCloudDialogflowV2ConversationInput:
+    r"""GoogleCloudDialogflowV2ConversationInput
+    Represents a conversation. A conversation is an interaction between an agent, including live agents and Dialogflow agents, and a support customer. Conversations can include phone calls and text-based chat sessions.
+    """
+    
+    conversation_profile: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationProfile') }})
+    conversation_stage: Optional[GoogleCloudDialogflowV2ConversationConversationStageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationStage') }})
+    
+
+@dataclass_json
+@dataclass
 class GoogleCloudDialogflowV2Conversation:
-    conversation_profile: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversationProfile' }})
-    conversation_stage: Optional[GoogleCloudDialogflowV2ConversationConversationStageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversationStage' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    lifecycle_state: Optional[GoogleCloudDialogflowV2ConversationLifecycleStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifecycleState' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    phone_number: Optional[googleclouddialogflowv2conversationphonenumber.GoogleCloudDialogflowV2ConversationPhoneNumber] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phoneNumber' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
+    r"""GoogleCloudDialogflowV2Conversation
+    Represents a conversation. A conversation is an interaction between an agent, including live agents and Dialogflow agents, and a support customer. Conversations can include phone calls and text-based chat sessions.
+    """
+    
+    conversation_profile: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationProfile') }})
+    conversation_stage: Optional[GoogleCloudDialogflowV2ConversationConversationStageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationStage') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    lifecycle_state: Optional[GoogleCloudDialogflowV2ConversationLifecycleStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lifecycleState') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    phone_number: Optional[GoogleCloudDialogflowV2ConversationPhoneNumber] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phoneNumber') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
     

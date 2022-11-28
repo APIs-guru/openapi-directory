@@ -1,0 +1,162 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var CreateDimensionPathParams = /** @class */ (function (_super) {
+    __extends(CreateDimensionPathParams, _super);
+    function CreateDimensionPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        __metadata("design:type", String)
+    ], CreateDimensionPathParams.prototype, "name", void 0);
+    return CreateDimensionPathParams;
+}(SpeakeasyBase));
+export { CreateDimensionPathParams };
+var CreateDimensionHeaders = /** @class */ (function (_super) {
+    __extends(CreateDimensionHeaders, _super);
+    function CreateDimensionHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], CreateDimensionHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], CreateDimensionHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], CreateDimensionHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], CreateDimensionHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], CreateDimensionHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], CreateDimensionHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], CreateDimensionHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return CreateDimensionHeaders;
+}(SpeakeasyBase));
+export { CreateDimensionHeaders };
+export var CreateDimensionRequestBodyTypeEnum;
+(function (CreateDimensionRequestBodyTypeEnum) {
+    CreateDimensionRequestBodyTypeEnum["TopicFilter"] = "TOPIC_FILTER";
+})(CreateDimensionRequestBodyTypeEnum || (CreateDimensionRequestBodyTypeEnum = {}));
+var CreateDimensionRequestBody = /** @class */ (function (_super) {
+    __extends(CreateDimensionRequestBody, _super);
+    function CreateDimensionRequestBody() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
+        __metadata("design:type", String)
+    ], CreateDimensionRequestBody.prototype, "clientRequestToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=stringValues" }),
+        __metadata("design:type", Array)
+    ], CreateDimensionRequestBody.prototype, "stringValues", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag }),
+        __metadata("design:type", Array)
+    ], CreateDimensionRequestBody.prototype, "tags", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], CreateDimensionRequestBody.prototype, "type", void 0);
+    return CreateDimensionRequestBody;
+}(SpeakeasyBase));
+export { CreateDimensionRequestBody };
+var CreateDimensionRequest = /** @class */ (function (_super) {
+    __extends(CreateDimensionRequest, _super);
+    function CreateDimensionRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CreateDimensionPathParams)
+    ], CreateDimensionRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CreateDimensionHeaders)
+    ], CreateDimensionRequest.prototype, "headers", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", CreateDimensionRequestBody)
+    ], CreateDimensionRequest.prototype, "request", void 0);
+    return CreateDimensionRequest;
+}(SpeakeasyBase));
+export { CreateDimensionRequest };
+var CreateDimensionResponse = /** @class */ (function (_super) {
+    __extends(CreateDimensionResponse, _super);
+    function CreateDimensionResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], CreateDimensionResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.CreateDimensionResponse)
+    ], CreateDimensionResponse.prototype, "createDimensionResponse", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], CreateDimensionResponse.prototype, "internalFailureException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], CreateDimensionResponse.prototype, "invalidRequestException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], CreateDimensionResponse.prototype, "limitExceededException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], CreateDimensionResponse.prototype, "resourceAlreadyExistsException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], CreateDimensionResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], CreateDimensionResponse.prototype, "throttlingException", void 0);
+    return CreateDimensionResponse;
+}(SpeakeasyBase));
+export { CreateDimensionResponse };

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceSpec
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The device spec used to generate a system APK.
 **/
 export class DeviceSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=screenDensity" })
+  @SpeakeasyMetadata({ data: "json, name=screenDensity" })
   screenDensity?: number;
 
-  @Metadata({ data: "json, name=supportedAbis" })
+  @SpeakeasyMetadata({ data: "json, name=supportedAbis" })
   supportedAbis?: string[];
 
-  @Metadata({ data: "json, name=supportedLocales" })
+  @SpeakeasyMetadata({ data: "json, name=supportedLocales" })
   supportedLocales?: string[];
 }

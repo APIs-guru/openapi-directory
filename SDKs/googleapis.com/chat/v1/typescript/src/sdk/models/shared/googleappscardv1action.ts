@@ -1,10 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1ActionParameter } from "./googleappscardv1actionparameter";
 
+
+export enum GoogleAppsCardV1ActionInteractionEnum {
+    InteractionUnspecified = "INTERACTION_UNSPECIFIED",
+    OpenDialog = "OPEN_DIALOG"
+}
+
 export enum GoogleAppsCardV1ActionLoadIndicatorEnum {
-    Spinner = "SPINNER"
-,    None = "NONE"
+    Spinner = "SPINNER",
+    None = "NONE"
 }
 
 
@@ -13,15 +18,18 @@ export enum GoogleAppsCardV1ActionLoadIndicatorEnum {
  * An action that describes the behavior when the form is submitted. For example, an Apps Script can be invoked to handle the form.
 **/
 export class GoogleAppsCardV1Action extends SpeakeasyBase {
-  @Metadata({ data: "json, name=function" })
+  @SpeakeasyMetadata({ data: "json, name=function" })
   function?: string;
 
-  @Metadata({ data: "json, name=loadIndicator" })
+  @SpeakeasyMetadata({ data: "json, name=interaction" })
+  interaction?: GoogleAppsCardV1ActionInteractionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=loadIndicator" })
   loadIndicator?: GoogleAppsCardV1ActionLoadIndicatorEnum;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.GoogleAppsCardV1ActionParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: GoogleAppsCardV1ActionParameter })
   parameters?: GoogleAppsCardV1ActionParameter[];
 
-  @Metadata({ data: "json, name=persistValues" })
+  @SpeakeasyMetadata({ data: "json, name=persistValues" })
   persistValues?: boolean;
 }

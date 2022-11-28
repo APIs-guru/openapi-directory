@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UploadSubtitlePathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,12 +17,12 @@ class UploadSubtitleRequests:
 
 @dataclass
 class UploadSubtitleRequest:
-    path_params: UploadSubtitlePathParams = field(default=None)
-    request: UploadSubtitleRequests = field(default=None)
+    path_params: UploadSubtitlePathParams = field()
+    request: UploadSubtitleRequests = field()
     
 
 @dataclass
 class UploadSubtitleResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

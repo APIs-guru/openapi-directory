@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteStreamInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for <a>DeleteStream</a>.
 **/
 export class DeleteStreamInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnforceConsumerDeletion" })
+  @SpeakeasyMetadata({ data: "json, name=EnforceConsumerDeletion" })
   enforceConsumerDeletion?: boolean;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 }

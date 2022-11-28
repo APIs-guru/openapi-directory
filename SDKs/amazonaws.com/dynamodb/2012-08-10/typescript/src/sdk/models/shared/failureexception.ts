@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FailureException
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a failure a contributor insights operation.
 **/
 export class FailureException extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExceptionDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ExceptionDescription" })
   exceptionDescription?: string;
 
-  @Metadata({ data: "json, name=ExceptionName" })
+  @SpeakeasyMetadata({ data: "json, name=ExceptionName" })
   exceptionName?: string;
 }

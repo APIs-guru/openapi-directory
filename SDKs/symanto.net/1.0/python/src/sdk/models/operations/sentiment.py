@@ -10,14 +10,14 @@ class SentimentQueryParams:
 
 @dataclass
 class SentimentRequest:
-    query_params: SentimentQueryParams = field(default=None)
+    query_params: SentimentQueryParams = field()
     request: Optional[List[shared.Post]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SentimentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     prediction_results: Optional[List[shared.PostPredicted]] = field(default=None)
-    status_code: int = field(default=None)
     validation_errors: Optional[shared.ValidationErrors] = field(default=None)
     

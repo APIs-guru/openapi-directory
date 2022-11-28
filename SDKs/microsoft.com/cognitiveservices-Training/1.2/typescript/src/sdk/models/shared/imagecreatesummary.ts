@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageCreateResult } from "./imagecreateresult";
 
 
+
 export class ImageCreateSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Images", elemType: shared.ImageCreateResult })
+  @SpeakeasyMetadata({ data: "json, name=Images", elemType: ImageCreateResult })
   images?: ImageCreateResult[];
 
-  @Metadata({ data: "json, name=IsBatchSuccessful" })
+  @SpeakeasyMetadata({ data: "json, name=IsBatchSuccessful" })
   isBatchSuccessful?: boolean;
 }

@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostUpdateNotificationConfigurationSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostUpdateNotificationConfigurationSecurityOption1, _super);
-    function PostUpdateNotificationConfigurationSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostUpdateNotificationConfigurationSecurityOption1.prototype, "basicAuth", void 0);
-    return PostUpdateNotificationConfigurationSecurityOption1;
-}(SpeakeasyBase));
-export { PostUpdateNotificationConfigurationSecurityOption1 };
-var PostUpdateNotificationConfigurationSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostUpdateNotificationConfigurationSecurityOption2, _super);
-    function PostUpdateNotificationConfigurationSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostUpdateNotificationConfigurationSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostUpdateNotificationConfigurationSecurityOption2;
-}(SpeakeasyBase));
-export { PostUpdateNotificationConfigurationSecurityOption2 };
 var PostUpdateNotificationConfigurationSecurity = /** @class */ (function (_super) {
     __extends(PostUpdateNotificationConfigurationSecurity, _super);
     function PostUpdateNotificationConfigurationSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostUpdateNotificationConfigurationSecurityOption1)
-    ], PostUpdateNotificationConfigurationSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostUpdateNotificationConfigurationSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostUpdateNotificationConfigurationSecurityOption2)
-    ], PostUpdateNotificationConfigurationSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostUpdateNotificationConfigurationSecurity.prototype, "apiKeyAuth", void 0);
     return PostUpdateNotificationConfigurationSecurity;
 }(SpeakeasyBase));
 export { PostUpdateNotificationConfigurationSecurity };
@@ -70,11 +46,11 @@ var PostUpdateNotificationConfigurationRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostUpdateNotificationConfigurationRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostUpdateNotificationConfigurationSecurity)
     ], PostUpdateNotificationConfigurationRequest.prototype, "security", void 0);
     return PostUpdateNotificationConfigurationRequest;
@@ -86,19 +62,19 @@ var PostUpdateNotificationConfigurationResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostUpdateNotificationConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostUpdateNotificationConfigurationResponse.prototype, "getNotificationConfigurationResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostUpdateNotificationConfigurationResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostUpdateNotificationConfigurationResponse.prototype, "statusCode", void 0);
     return PostUpdateNotificationConfigurationResponse;

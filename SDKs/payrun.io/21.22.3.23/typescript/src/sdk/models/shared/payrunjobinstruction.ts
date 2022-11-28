@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PayRunJobInstructionPayRunJobInstructionEmployee
@@ -6,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The pay run job instructions' employees
 **/
 export class PayRunJobInstructionPayRunJobInstructionEmployee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Employee" })
+  @SpeakeasyMetadata({ data: "json, name=Employee" })
   employee?: any[];
 }
 
@@ -16,42 +17,42 @@ export class PayRunJobInstructionPayRunJobInstructionEmployee extends SpeakeasyB
  * The pay run job instructions' pay schedule
 **/
 export class PayRunJobInstructionPayRunJobInstructionPaySchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
 
 export class PayRunJobInstructionPayRunJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Employees" })
+  @SpeakeasyMetadata({ data: "json, name=Employees" })
   employees?: PayRunJobInstructionPayRunJobInstructionEmployee;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=HoldingDate" })
+  @SpeakeasyMetadata({ data: "json, name=HoldingDate" })
   holdingDate?: Date;
 
-  @Metadata({ data: "json, name=IsSupplementary" })
+  @SpeakeasyMetadata({ data: "json, name=IsSupplementary" })
   isSupplementary?: boolean;
 
-  @Metadata({ data: "json, name=PaySchedule" })
+  @SpeakeasyMetadata({ data: "json, name=PaySchedule" })
   paySchedule?: PayRunJobInstructionPayRunJobInstructionPaySchedule;
 
-  @Metadata({ data: "json, name=PaymentDate" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentDate" })
   paymentDate?: Date;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 }
 
 
 export class PayRunJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PayRunJobInstruction" })
+  @SpeakeasyMetadata({ data: "json, name=PayRunJobInstruction" })
   payRunJobInstruction?: PayRunJobInstructionPayRunJobInstruction;
 }

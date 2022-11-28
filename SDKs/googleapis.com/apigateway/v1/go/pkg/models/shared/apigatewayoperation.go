@@ -1,5 +1,7 @@
 package shared
 
+// ApigatewayOperation
+// This resource represents a long-running operation that is the result of a network API call.
 type ApigatewayOperation struct {
 	Done     *bool                  `json:"done,omitempty"`
 	Error    *ApigatewayStatus      `json:"error,omitempty"`

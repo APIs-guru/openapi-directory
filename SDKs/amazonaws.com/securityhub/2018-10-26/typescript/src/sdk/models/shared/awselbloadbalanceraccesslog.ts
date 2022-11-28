@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElbLoadBalancerAccessLog
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the access log configuration for the load balancer.
 **/
 export class AwsElbLoadBalancerAccessLog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EmitInterval" })
+  @SpeakeasyMetadata({ data: "json, name=EmitInterval" })
   emitInterval?: number;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName?: string;
 
-  @Metadata({ data: "json, name=S3BucketPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketPrefix" })
   s3BucketPrefix?: string;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventTracker } from "./eventtracker";
 
 
+
 export class DescribeEventTrackerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventTracker" })
+  @SpeakeasyMetadata({ data: "json, name=eventTracker" })
   eventTracker?: EventTracker;
 }

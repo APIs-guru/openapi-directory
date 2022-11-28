@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControlStatusEnum } from "./controlstatusenum";
 import { SeverityRatingEnum } from "./severityratingenum";
+
 
 
 // StandardsControl
@@ -8,33 +9,33 @@ import { SeverityRatingEnum } from "./severityratingenum";
  * Details for an individual security standard control.
 **/
 export class StandardsControl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ControlId" })
+  @SpeakeasyMetadata({ data: "json, name=ControlId" })
   controlId?: string;
 
-  @Metadata({ data: "json, name=ControlStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ControlStatus" })
   controlStatus?: ControlStatusEnum;
 
-  @Metadata({ data: "json, name=ControlStatusUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=ControlStatusUpdatedAt" })
   controlStatusUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisabledReason" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledReason" })
   disabledReason?: string;
 
-  @Metadata({ data: "json, name=RelatedRequirements" })
+  @SpeakeasyMetadata({ data: "json, name=RelatedRequirements" })
   relatedRequirements?: string[];
 
-  @Metadata({ data: "json, name=RemediationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=RemediationUrl" })
   remediationUrl?: string;
 
-  @Metadata({ data: "json, name=SeverityRating" })
+  @SpeakeasyMetadata({ data: "json, name=SeverityRating" })
   severityRating?: SeverityRatingEnum;
 
-  @Metadata({ data: "json, name=StandardsControlArn" })
+  @SpeakeasyMetadata({ data: "json, name=StandardsControlArn" })
   standardsControlArn?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigRuleEvaluationStatus } from "./configruleevaluationstatus";
+
 
 
 // DescribeConfigRuleEvaluationStatusResponse
@@ -8,9 +8,9 @@ import { ConfigRuleEvaluationStatus } from "./configruleevaluationstatus";
  * <p/>
 **/
 export class DescribeConfigRuleEvaluationStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigRulesEvaluationStatus", elemType: shared.ConfigRuleEvaluationStatus })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRulesEvaluationStatus", elemType: ConfigRuleEvaluationStatus })
   configRulesEvaluationStatus?: ConfigRuleEvaluationStatus[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UserTypeEnum {
-    UserIdTypeUnspecified = "USER_ID_TYPE_UNSPECIFIED"
-,    UserId = "USER_ID"
-,    ClientId = "CLIENT_ID"
+    UserIdTypeUnspecified = "USER_ID_TYPE_UNSPECIFIED",
+    UserId = "USER_ID",
+    ClientId = "CLIENT_ID"
 }
 
 
@@ -12,9 +13,9 @@ export enum UserTypeEnum {
  * Contains information to identify a particular user uniquely.
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UserTypeEnum;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

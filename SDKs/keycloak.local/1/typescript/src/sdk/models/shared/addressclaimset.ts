@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddressClaimSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=formatted" })
+  @SpeakeasyMetadata({ data: "json, name=formatted" })
   formatted?: string;
 
-  @Metadata({ data: "json, name=locality" })
+  @SpeakeasyMetadata({ data: "json, name=locality" })
   locality?: string;
 
-  @Metadata({ data: "json, name=postal_code" })
+  @SpeakeasyMetadata({ data: "json, name=postal_code" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=street_address" })
+  @SpeakeasyMetadata({ data: "json, name=street_address" })
   streetAddress?: string;
 }

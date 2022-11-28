@@ -34,7 +34,7 @@ type DatastreamProjectsLocationsStreamsCreateSecurity struct {
 type DatastreamProjectsLocationsStreamsCreateRequest struct {
 	PathParams  DatastreamProjectsLocationsStreamsCreatePathParams
 	QueryParams DatastreamProjectsLocationsStreamsCreateQueryParams
-	Request     *shared.Stream `request:"mediaType=application/json"`
+	Request     *shared.StreamInput `request:"mediaType=application/json"`
 	Security    DatastreamProjectsLocationsStreamsCreateSecurity
 }
 

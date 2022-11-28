@@ -16,11 +16,6 @@ type PostApplicationChargeSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type PostApplicationChargeRequest struct {
-	Request  PostApplicationChargeRequestBody `request:"mediaType=application/json"`
-	Security PostApplicationChargeSecurity
-}
-
 type PostApplicationCharge201ApplicationJSONApplicationCharge struct {
 	ID         *string `json:"id,omitempty"`
 	MakeDate   *int64  `json:"make_date,omitempty"`
@@ -30,6 +25,11 @@ type PostApplicationCharge201ApplicationJSONApplicationCharge struct {
 
 type PostApplicationCharge201ApplicationJSON struct {
 	ApplicationCharge *PostApplicationCharge201ApplicationJSONApplicationCharge `json:"application_charge,omitempty"`
+}
+
+type PostApplicationChargeRequest struct {
+	Request  PostApplicationChargeRequestBody `request:"mediaType=application/json"`
+	Security PostApplicationChargeSecurity
 }
 
 type PostApplicationChargeResponse struct {

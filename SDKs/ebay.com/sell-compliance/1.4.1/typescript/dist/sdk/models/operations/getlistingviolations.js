@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetListingViolationsQueryParams = /** @class */ (function (_super) {
     __extends(GetListingViolationsQueryParams, _super);
@@ -30,23 +30,23 @@ var GetListingViolationsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=compliance_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=compliance_type" }),
         __metadata("design:type", String)
     ], GetListingViolationsQueryParams.prototype, "complianceType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], GetListingViolationsQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], GetListingViolationsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=listing_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=listing_id" }),
         __metadata("design:type", String)
     ], GetListingViolationsQueryParams.prototype, "listingId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], GetListingViolationsQueryParams.prototype, "offset", void 0);
     return GetListingViolationsQueryParams;
@@ -58,7 +58,7 @@ var GetListingViolationsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
         __metadata("design:type", String)
     ], GetListingViolationsHeaders.prototype, "xEbayCMarketplaceId", void 0);
     return GetListingViolationsHeaders;
@@ -70,7 +70,7 @@ var GetListingViolationsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], GetListingViolationsSecurity.prototype, "apiAuth", void 0);
     return GetListingViolationsSecurity;
@@ -82,15 +82,15 @@ var GetListingViolationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListingViolationsQueryParams)
     ], GetListingViolationsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListingViolationsHeaders)
     ], GetListingViolationsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListingViolationsSecurity)
     ], GetListingViolationsRequest.prototype, "security", void 0);
     return GetListingViolationsRequest;
@@ -102,15 +102,15 @@ var GetListingViolationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetListingViolationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PagedComplianceViolationCollection)
     ], GetListingViolationsResponse.prototype, "pagedComplianceViolationCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetListingViolationsResponse.prototype, "statusCode", void 0);
     return GetListingViolationsResponse;

@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var NotFoundKnownExceptionInfo = /** @class */ (function (_super) {
     __extends(NotFoundKnownExceptionInfo, _super);
     function NotFoundKnownExceptionInfo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exceptionClassName" }),
+        SpeakeasyMetadata({ data: "json, name=exceptionClassName" }),
         __metadata("design:type", String)
     ], NotFoundKnownExceptionInfo.prototype, "exceptionClassName", void 0);
     __decorate([
-        Metadata({ data: "json, name=exceptionStack" }),
+        SpeakeasyMetadata({ data: "json, name=exceptionStack" }),
         __metadata("design:type", Array)
     ], NotFoundKnownExceptionInfo.prototype, "exceptionStack", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], NotFoundKnownExceptionInfo.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], NotFoundKnownExceptionInfo.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=rootCauseExceptionClassName" }),
+        SpeakeasyMetadata({ data: "json, name=rootCauseExceptionClassName" }),
         __metadata("design:type", String)
     ], NotFoundKnownExceptionInfo.prototype, "rootCauseExceptionClassName", void 0);
     __decorate([
-        Metadata({ data: "json, name=rootCauseExceptionStack" }),
+        SpeakeasyMetadata({ data: "json, name=rootCauseExceptionStack" }),
         __metadata("design:type", Array)
     ], NotFoundKnownExceptionInfo.prototype, "rootCauseExceptionStack", void 0);
     return NotFoundKnownExceptionInfo;

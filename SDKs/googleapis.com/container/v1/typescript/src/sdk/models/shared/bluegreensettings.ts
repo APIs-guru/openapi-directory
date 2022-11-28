@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardRolloutPolicy } from "./standardrolloutpolicy";
+
 
 
 // BlueGreenSettings
@@ -7,9 +8,9 @@ import { StandardRolloutPolicy } from "./standardrolloutpolicy";
  * Settings for blue-green upgrade.
 **/
 export class BlueGreenSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodePoolSoakDuration" })
+  @SpeakeasyMetadata({ data: "json, name=nodePoolSoakDuration" })
   nodePoolSoakDuration?: string;
 
-  @Metadata({ data: "json, name=standardRolloutPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=standardRolloutPolicy" })
   standardRolloutPolicy?: StandardRolloutPolicy;
 }

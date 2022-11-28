@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetMappedSslpByPositionUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetMappedSslpByPositionUsingGetPathParams, _super);
     function GetMappedSslpByPositionUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=chr" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=chr" }),
         __metadata("design:type", String)
     ], GetMappedSslpByPositionUsingGetPathParams.prototype, "chr", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mapKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mapKey" }),
         __metadata("design:type", Number)
     ], GetMappedSslpByPositionUsingGetPathParams.prototype, "mapKey", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=start" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=start" }),
         __metadata("design:type", Number)
     ], GetMappedSslpByPositionUsingGetPathParams.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=stop" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stop" }),
         __metadata("design:type", Number)
     ], GetMappedSslpByPositionUsingGetPathParams.prototype, "stop", void 0);
     return GetMappedSslpByPositionUsingGetPathParams;
@@ -53,7 +53,7 @@ var GetMappedSslpByPositionUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMappedSslpByPositionUsingGetPathParams)
     ], GetMappedSslpByPositionUsingGetRequest.prototype, "pathParams", void 0);
     return GetMappedSslpByPositionUsingGetRequest;
@@ -65,15 +65,15 @@ var GetMappedSslpByPositionUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetMappedSslpByPositionUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMappedSslpByPositionUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMappedSslpByPositionUsingGetResponse.prototype, "statusCode", void 0);
     return GetMappedSslpByPositionUsingGetResponse;

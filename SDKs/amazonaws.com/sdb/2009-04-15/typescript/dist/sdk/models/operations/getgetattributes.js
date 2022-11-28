@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetAttributesActionEnum;
 (function (GetGetAttributesActionEnum) {
     GetGetAttributesActionEnum["GetAttributes"] = "GetAttributes";
@@ -37,47 +37,47 @@ var GetGetAttributesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "awsAccessKeyId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AttributeNames" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AttributeNames" }),
         __metadata("design:type", Array)
     ], GetGetAttributesQueryParams.prototype, "attributeNames", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ConsistentRead" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ConsistentRead" }),
         __metadata("design:type", Boolean)
     ], GetGetAttributesQueryParams.prototype, "consistentRead", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DomainName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DomainName" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ItemName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ItemName" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "itemName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "signature", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "signatureMethod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "signatureVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetGetAttributesQueryParams.prototype, "version", void 0);
     return GetGetAttributesQueryParams;
@@ -89,7 +89,7 @@ var GetGetAttributesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetAttributesQueryParams)
     ], GetGetAttributesRequest.prototype, "queryParams", void 0);
     return GetGetAttributesRequest;
@@ -101,15 +101,15 @@ var GetGetAttributesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetGetAttributesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetAttributesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetAttributesResponse.prototype, "statusCode", void 0);
     return GetGetAttributesResponse;

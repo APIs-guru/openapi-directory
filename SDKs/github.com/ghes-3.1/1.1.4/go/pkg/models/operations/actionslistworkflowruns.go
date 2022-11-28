@@ -19,14 +19,14 @@ type ActionsListWorkflowRunsQueryParams struct {
 	Status  *shared.WorkflowRunStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type ActionsListWorkflowRunsRequest struct {
-	PathParams  ActionsListWorkflowRunsPathParams
-	QueryParams ActionsListWorkflowRunsQueryParams
-}
-
 type ActionsListWorkflowRuns200ApplicationJSON struct {
 	TotalCount   int64                `json:"total_count"`
 	WorkflowRuns []shared.WorkflowRun `json:"workflow_runs"`
+}
+
+type ActionsListWorkflowRunsRequest struct {
+	PathParams  ActionsListWorkflowRunsPathParams
+	QueryParams ActionsListWorkflowRunsQueryParams
 }
 
 type ActionsListWorkflowRunsResponse struct {

@@ -1,6 +1,8 @@
 package shared
 
-type CreatePrinterRequest struct {
-	Parent  *string  `json:"parent,omitempty"`
-	Printer *Printer `json:"printer,omitempty"`
+// CreatePrinterRequestInput
+// Request for adding a new printer.
+type CreatePrinterRequestInput struct {
+	Parent  *string       `json:"parent,omitempty"`
+	Printer *PrinterInput `json:"printer,omitempty"`
 }

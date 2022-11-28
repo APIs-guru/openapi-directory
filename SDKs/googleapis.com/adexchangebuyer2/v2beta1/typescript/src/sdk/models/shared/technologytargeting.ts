@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { CriteriaTargeting } from "./criteriatargeting";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CriteriaTargeting } from "./criteriatargeting";
 import { OperatingSystemTargeting } from "./operatingsystemtargeting";
+
 
 
 // TechnologyTargeting
@@ -9,12 +9,12 @@ import { OperatingSystemTargeting } from "./operatingsystemtargeting";
  * Represents targeting about various types of technology.
 **/
 export class TechnologyTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceCapabilityTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCapabilityTargeting" })
   deviceCapabilityTargeting?: CriteriaTargeting;
 
-  @Metadata({ data: "json, name=deviceCategoryTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCategoryTargeting" })
   deviceCategoryTargeting?: CriteriaTargeting;
 
-  @Metadata({ data: "json, name=operatingSystemTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystemTargeting" })
   operatingSystemTargeting?: OperatingSystemTargeting;
 }

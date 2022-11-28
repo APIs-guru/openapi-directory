@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateUserConfigurationPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,19 +20,19 @@ class UpdateUserConfigurationRequests:
 
 @dataclass
 class UpdateUserConfigurationSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class UpdateUserConfigurationRequest:
-    path_params: UpdateUserConfigurationPathParams = field(default=None)
-    request: UpdateUserConfigurationRequests = field(default=None)
-    security: UpdateUserConfigurationSecurity = field(default=None)
+    path_params: UpdateUserConfigurationPathParams = field()
+    request: UpdateUserConfigurationRequests = field()
+    security: UpdateUserConfigurationSecurity = field()
     
 
 @dataclass
 class UpdateUserConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
-type GoogleCloudRetailV2UserEventInlineSource struct {
-	UserEvents []GoogleCloudRetailV2UserEvent `json:"userEvents,omitempty"`
+// GoogleCloudRetailV2UserEventInlineSourceInput
+// The inline source for the input config for ImportUserEvents method.
+type GoogleCloudRetailV2UserEventInlineSourceInput struct {
+	UserEvents []GoogleCloudRetailV2UserEventInput `json:"userEvents,omitempty"`
 }

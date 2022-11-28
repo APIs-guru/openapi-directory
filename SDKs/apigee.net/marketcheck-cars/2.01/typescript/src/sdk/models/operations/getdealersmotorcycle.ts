@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDealersMotorcycleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" })
   city?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: shared.NonDefaultCountryEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dealer_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dealer_type" })
   dealerType?: shared.DealerTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=facets" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=facets" })
   facets?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inventory_url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inventory_url" })
   inventoryUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=latitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=listing_count_range" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=listing_count_range" })
   listingCountRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=longitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=provider" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=provider" })
   provider?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=radius" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" })
   radius?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=range_facets" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=range_facets" })
   rangeFacets?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rows" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rows" })
   rows?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
   sortBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_order" })
   sortOrder?: shared.SortOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" })
   zip?: string;
 }
 
 
 export class GetDealersMotorcycleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDealersMotorcycleQueryParams;
 }
 
 
 export class GetDealersMotorcycleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dealersResponse?: shared.DealersResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

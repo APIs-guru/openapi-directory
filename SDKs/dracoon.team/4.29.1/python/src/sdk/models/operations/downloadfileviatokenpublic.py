@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class DownloadFileViaTokenPublicPathParams:
-    access_key: str = field(default=None, metadata={'path_param': { 'field_name': 'access_key', 'style': 'simple', 'explode': False }})
-    token: str = field(default=None, metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
+    access_key: str = field(metadata={'path_param': { 'field_name': 'access_key', 'style': 'simple', 'explode': False }})
+    token: str = field(metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +21,14 @@ class DownloadFileViaTokenPublicHeaders:
 
 @dataclass
 class DownloadFileViaTokenPublicRequest:
-    path_params: DownloadFileViaTokenPublicPathParams = field(default=None)
-    query_params: DownloadFileViaTokenPublicQueryParams = field(default=None)
-    headers: DownloadFileViaTokenPublicHeaders = field(default=None)
+    headers: DownloadFileViaTokenPublicHeaders = field()
+    path_params: DownloadFileViaTokenPublicPathParams = field()
+    query_params: DownloadFileViaTokenPublicQueryParams = field()
     
 
 @dataclass
 class DownloadFileViaTokenPublicResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

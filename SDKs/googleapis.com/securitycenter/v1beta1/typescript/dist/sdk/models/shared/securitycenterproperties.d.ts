@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Security Command Center managed properties. These properties are managed by Security Command Center and cannot be modified by the user.
 **/

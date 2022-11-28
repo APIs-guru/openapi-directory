@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersFoldersUpdatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    container_id: str = field(default=None, metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
-    folder_id: str = field(default=None, metadata={'path_param': { 'field_name': 'folderId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    container_id: str = field(metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
+    folder_id: str = field(metadata={'path_param': { 'field_name': 'folderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +32,21 @@ class TagmanagerAccountsContainersFoldersUpdateQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersFoldersUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersFoldersUpdateRequest:
-    path_params: TagmanagerAccountsContainersFoldersUpdatePathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersFoldersUpdateQueryParams = field(default=None)
+    path_params: TagmanagerAccountsContainersFoldersUpdatePathParams = field()
+    query_params: TagmanagerAccountsContainersFoldersUpdateQueryParams = field()
+    security: TagmanagerAccountsContainersFoldersUpdateSecurity = field()
     request: Optional[shared.Folder] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TagmanagerAccountsContainersFoldersUpdateSecurity = field(default=None)
     
 
 @dataclass
 class TagmanagerAccountsContainersFoldersUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     folder: Optional[shared.Folder] = field(default=None)
-    status_code: int = field(default=None)
     

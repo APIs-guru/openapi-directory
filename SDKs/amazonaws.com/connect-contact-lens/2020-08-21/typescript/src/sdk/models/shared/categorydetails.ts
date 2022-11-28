@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PointOfInterest } from "./pointofinterest";
+
 
 
 // CategoryDetails
@@ -8,6 +8,6 @@ import { PointOfInterest } from "./pointofinterest";
  * Provides information about the category rule that was matched.
 **/
 export class CategoryDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PointsOfInterest", elemType: shared.PointOfInterest })
+  @SpeakeasyMetadata({ data: "json, name=PointsOfInterest", elemType: PointOfInterest })
   pointsOfInterest: PointOfInterest[];
 }

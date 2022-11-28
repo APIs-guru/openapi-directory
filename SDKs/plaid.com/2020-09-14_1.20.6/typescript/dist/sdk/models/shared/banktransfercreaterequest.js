@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AchClassEnum } from "./achclassenum";
 import { BankTransferNetworkEnum } from "./banktransfernetworkenum";
 import { BankTransferTypeEnum } from "./banktransfertypeenum";
@@ -36,63 +36,63 @@ var BankTransferCreateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access_token" }),
+        SpeakeasyMetadata({ data: "json, name=access_token" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=account_id" }),
+        SpeakeasyMetadata({ data: "json, name=account_id" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ach_class" }),
+        SpeakeasyMetadata({ data: "json, name=ach_class" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "achClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=custom_tag" }),
+        SpeakeasyMetadata({ data: "json, name=custom_tag" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "customTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=idempotency_key" }),
+        SpeakeasyMetadata({ data: "json, name=idempotency_key" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "idempotencyKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=iso_currency_code" }),
+        SpeakeasyMetadata({ data: "json, name=iso_currency_code" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "isoCurrencyCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", Map)
     ], BankTransferCreateRequest.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=origination_account_id" }),
+        SpeakeasyMetadata({ data: "json, name=origination_account_id" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "originationAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "secret", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], BankTransferCreateRequest.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", Map)
     ], BankTransferCreateRequest.prototype, "user", void 0);
     return BankTransferCreateRequest;

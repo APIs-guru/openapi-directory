@@ -1,5 +1,7 @@
 package shared
 
+// DescribeInstancesInput
+// Represents the input for a request operation.
 type DescribeInstancesInput struct {
 	FleetID    string  `json:"FleetId"`
 	InstanceID *string `json:"InstanceId,omitempty"`

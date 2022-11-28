@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Meta
 /**
  * Meta Data relevant to the payload
@@ -33,15 +33,15 @@ var Meta = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FirstAvailableDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=FirstAvailableDateTime" }),
         __metadata("design:type", Date)
     ], Meta.prototype, "firstAvailableDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastAvailableDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastAvailableDateTime" }),
         __metadata("design:type", Date)
     ], Meta.prototype, "lastAvailableDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalPages" }),
+        SpeakeasyMetadata({ data: "json, name=TotalPages" }),
         __metadata("design:type", Number)
     ], Meta.prototype, "totalPages", void 0);
     return Meta;

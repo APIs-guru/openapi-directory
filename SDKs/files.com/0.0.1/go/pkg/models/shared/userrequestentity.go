@@ -1,5 +1,7 @@
 package shared
 
+// UserRequestEntity
+// Create User Request
 type UserRequestEntity struct {
 	Details *string `json:"details,omitempty"`
 	Email   *string `json:"email,omitempty"`

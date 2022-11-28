@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetAudioPathParams:
-    word: str = field(default=None, metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
+    word: str = field(metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
     
 class GetAudioUseCanonicalEnum(str, Enum):
     FALSE = "false"
@@ -19,13 +20,13 @@ class GetAudioQueryParams:
 
 @dataclass
 class GetAudioRequest:
-    path_params: GetAudioPathParams = field(default=None)
-    query_params: GetAudioQueryParams = field(default=None)
+    path_params: GetAudioPathParams = field()
+    query_params: GetAudioQueryParams = field()
     
 
 @dataclass
 class GetAudioResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

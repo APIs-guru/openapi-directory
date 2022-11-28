@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CertificateRawData
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An SSL certificate obtained from a certificate authority.
 **/
 export class CertificateRawData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privateKey" })
+  @SpeakeasyMetadata({ data: "json, name=privateKey" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=publicCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=publicCertificate" })
   publicCertificate?: string;
 }

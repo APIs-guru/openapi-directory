@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputStartingPositionEnum } from "./inputstartingpositionenum";
+
 
 
 // InputStartingPositionConfiguration
@@ -7,6 +8,6 @@ import { InputStartingPositionEnum } from "./inputstartingpositionenum";
  * Describes the point at which the application reads from the streaming source.
 **/
 export class InputStartingPositionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputStartingPosition" })
+  @SpeakeasyMetadata({ data: "json, name=InputStartingPosition" })
   inputStartingPosition?: InputStartingPositionEnum;
 }

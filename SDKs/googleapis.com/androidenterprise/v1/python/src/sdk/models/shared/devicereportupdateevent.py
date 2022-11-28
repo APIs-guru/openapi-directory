@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import devicereport
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeviceReportUpdateEvent:
-    device_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceId' }})
-    report: Optional[devicereport.DeviceReport] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
-    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    r"""DeviceReportUpdateEvent
+    An event generated when an updated device report is available.
+    """
+    
+    device_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceId') }})
+    report: Optional[DeviceReport] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('report') }})
+    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// RequestedScopes
+// Scope of required and optional account features or content from a ConnectedApplication.
 type RequestedScopes struct {
 	AccountFilters              *AccountFilter                  `json:"account_filters,omitempty"`
 	AccountSelectionCardinality AccountSelectionCardinalityEnum `json:"account_selection_cardinality"`

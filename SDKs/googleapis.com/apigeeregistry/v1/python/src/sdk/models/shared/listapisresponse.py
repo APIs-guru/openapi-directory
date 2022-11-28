@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import api
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListApisResponse:
-    apis: Optional[List[api.API]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apis' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListApisResponse
+    Response message for ListApis.
+    """
+    
+    apis: Optional[List[API]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apis') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

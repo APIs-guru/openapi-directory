@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Volume
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Volumes mounted within the app container. Only applicable in the App Engine flexible environment.
 **/
 export class Volume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeGb" })
   sizeGb?: number;
 
-  @Metadata({ data: "json, name=volumeType" })
+  @SpeakeasyMetadata({ data: "json, name=volumeType" })
   volumeType?: string;
 }

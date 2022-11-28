@@ -1,18 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://netboxdemo.com/api",
+export const ServerList = [
+	"https://netboxdemo.com/api",
 ] as const;
 
 export function WithServerURL(
@@ -23,13 +20,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -38,40 +35,45 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  CircuitsCircuitTerminationsCreate(
+  circuitsCircuitTerminationsCreate(
     req: operations.CircuitsCircuitTerminationsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTerminationsCreateResponse> {
@@ -79,40 +81,40 @@ export class SDK {
       req = new operations.CircuitsCircuitTerminationsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/circuit-terminations/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTerminationsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTerminationsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitTermination = httpRes?.data;
             }
             break;
@@ -124,7 +126,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitTerminationsDelete(
+  circuitsCircuitTerminationsDelete(
     req: operations.CircuitsCircuitTerminationsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTerminationsDeleteResponse> {
@@ -132,21 +134,23 @@ export class SDK {
       req = new operations.CircuitsCircuitTerminationsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-terminations/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTerminationsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CircuitsCircuitTerminationsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -156,8 +160,10 @@ export class SDK {
   }
 
   
-  // CircuitsCircuitTerminationsList - Call to super to allow for caching
-  CircuitsCircuitTerminationsList(
+  /**
+   * circuitsCircuitTerminationsList - Call to super to allow for caching
+  **/
+  circuitsCircuitTerminationsList(
     req: operations.CircuitsCircuitTerminationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTerminationsListResponse> {
@@ -165,11 +171,12 @@ export class SDK {
       req = new operations.CircuitsCircuitTerminationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/circuit-terminations/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -178,17 +185,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTerminationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTerminationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitsCircuitTerminationsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -200,7 +208,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitTerminationsPartialUpdate(
+  circuitsCircuitTerminationsPartialUpdate(
     req: operations.CircuitsCircuitTerminationsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTerminationsPartialUpdateResponse> {
@@ -208,40 +216,40 @@ export class SDK {
       req = new operations.CircuitsCircuitTerminationsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-terminations/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTerminationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTerminationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitTermination = httpRes?.data;
             }
             break;
@@ -253,8 +261,10 @@ export class SDK {
   }
 
   
-  // CircuitsCircuitTerminationsRead - Call to super to allow for caching
-  CircuitsCircuitTerminationsRead(
+  /**
+   * circuitsCircuitTerminationsRead - Call to super to allow for caching
+  **/
+  circuitsCircuitTerminationsRead(
     req: operations.CircuitsCircuitTerminationsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTerminationsReadResponse> {
@@ -262,22 +272,24 @@ export class SDK {
       req = new operations.CircuitsCircuitTerminationsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-terminations/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTerminationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTerminationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitTermination = httpRes?.data;
             }
             break;
@@ -289,7 +301,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitTerminationsUpdate(
+  circuitsCircuitTerminationsUpdate(
     req: operations.CircuitsCircuitTerminationsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTerminationsUpdateResponse> {
@@ -297,40 +309,40 @@ export class SDK {
       req = new operations.CircuitsCircuitTerminationsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-terminations/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTerminationsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTerminationsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitTermination = httpRes?.data;
             }
             break;
@@ -342,7 +354,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitTypesCreate(
+  circuitsCircuitTypesCreate(
     req: operations.CircuitsCircuitTypesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTypesCreateResponse> {
@@ -350,40 +362,40 @@ export class SDK {
       req = new operations.CircuitsCircuitTypesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/circuit-types/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTypesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTypesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitType = httpRes?.data;
             }
             break;
@@ -395,7 +407,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitTypesDelete(
+  circuitsCircuitTypesDelete(
     req: operations.CircuitsCircuitTypesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTypesDeleteResponse> {
@@ -403,21 +415,23 @@ export class SDK {
       req = new operations.CircuitsCircuitTypesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-types/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTypesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CircuitsCircuitTypesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -427,8 +441,10 @@ export class SDK {
   }
 
   
-  // CircuitsCircuitTypesList - Call to super to allow for caching
-  CircuitsCircuitTypesList(
+  /**
+   * circuitsCircuitTypesList - Call to super to allow for caching
+  **/
+  circuitsCircuitTypesList(
     req: operations.CircuitsCircuitTypesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTypesListResponse> {
@@ -436,11 +452,12 @@ export class SDK {
       req = new operations.CircuitsCircuitTypesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/circuit-types/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -449,17 +466,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTypesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTypesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitsCircuitTypesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -471,7 +489,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitTypesPartialUpdate(
+  circuitsCircuitTypesPartialUpdate(
     req: operations.CircuitsCircuitTypesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTypesPartialUpdateResponse> {
@@ -479,40 +497,40 @@ export class SDK {
       req = new operations.CircuitsCircuitTypesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-types/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTypesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTypesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitType = httpRes?.data;
             }
             break;
@@ -524,8 +542,10 @@ export class SDK {
   }
 
   
-  // CircuitsCircuitTypesRead - Call to super to allow for caching
-  CircuitsCircuitTypesRead(
+  /**
+   * circuitsCircuitTypesRead - Call to super to allow for caching
+  **/
+  circuitsCircuitTypesRead(
     req: operations.CircuitsCircuitTypesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTypesReadResponse> {
@@ -533,22 +553,24 @@ export class SDK {
       req = new operations.CircuitsCircuitTypesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-types/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTypesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTypesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitType = httpRes?.data;
             }
             break;
@@ -560,7 +582,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitTypesUpdate(
+  circuitsCircuitTypesUpdate(
     req: operations.CircuitsCircuitTypesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitTypesUpdateResponse> {
@@ -568,40 +590,40 @@ export class SDK {
       req = new operations.CircuitsCircuitTypesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuit-types/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitTypesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitTypesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitType = httpRes?.data;
             }
             break;
@@ -613,7 +635,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitsCreate(
+  circuitsCircuitsCreate(
     req: operations.CircuitsCircuitsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitsCreateResponse> {
@@ -621,40 +643,40 @@ export class SDK {
       req = new operations.CircuitsCircuitsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/circuits/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuit = httpRes?.data;
             }
             break;
@@ -666,7 +688,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitsDelete(
+  circuitsCircuitsDelete(
     req: operations.CircuitsCircuitsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitsDeleteResponse> {
@@ -674,21 +696,23 @@ export class SDK {
       req = new operations.CircuitsCircuitsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuits/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CircuitsCircuitsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -698,8 +722,10 @@ export class SDK {
   }
 
   
-  // CircuitsCircuitsList - Call to super to allow for caching
-  CircuitsCircuitsList(
+  /**
+   * circuitsCircuitsList - Call to super to allow for caching
+  **/
+  circuitsCircuitsList(
     req: operations.CircuitsCircuitsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitsListResponse> {
@@ -707,11 +733,12 @@ export class SDK {
       req = new operations.CircuitsCircuitsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/circuits/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -720,17 +747,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitsCircuitsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -742,7 +770,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitsPartialUpdate(
+  circuitsCircuitsPartialUpdate(
     req: operations.CircuitsCircuitsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitsPartialUpdateResponse> {
@@ -750,40 +778,40 @@ export class SDK {
       req = new operations.CircuitsCircuitsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuits/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuit = httpRes?.data;
             }
             break;
@@ -795,8 +823,10 @@ export class SDK {
   }
 
   
-  // CircuitsCircuitsRead - Call to super to allow for caching
-  CircuitsCircuitsRead(
+  /**
+   * circuitsCircuitsRead - Call to super to allow for caching
+  **/
+  circuitsCircuitsRead(
     req: operations.CircuitsCircuitsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitsReadResponse> {
@@ -804,22 +834,24 @@ export class SDK {
       req = new operations.CircuitsCircuitsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuits/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuit = httpRes?.data;
             }
             break;
@@ -831,7 +863,7 @@ export class SDK {
   }
 
   
-  CircuitsCircuitsUpdate(
+  circuitsCircuitsUpdate(
     req: operations.CircuitsCircuitsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsCircuitsUpdateResponse> {
@@ -839,40 +871,40 @@ export class SDK {
       req = new operations.CircuitsCircuitsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/circuits/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsCircuitsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsCircuitsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuit = httpRes?.data;
             }
             break;
@@ -884,7 +916,7 @@ export class SDK {
   }
 
   
-  CircuitsProvidersCreate(
+  circuitsProvidersCreate(
     req: operations.CircuitsProvidersCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsProvidersCreateResponse> {
@@ -892,40 +924,40 @@ export class SDK {
       req = new operations.CircuitsProvidersCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/providers/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsProvidersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsProvidersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.provider = httpRes?.data;
             }
             break;
@@ -937,7 +969,7 @@ export class SDK {
   }
 
   
-  CircuitsProvidersDelete(
+  circuitsProvidersDelete(
     req: operations.CircuitsProvidersDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsProvidersDeleteResponse> {
@@ -945,21 +977,23 @@ export class SDK {
       req = new operations.CircuitsProvidersDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/providers/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsProvidersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CircuitsProvidersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -969,8 +1003,10 @@ export class SDK {
   }
 
   
-  // CircuitsProvidersGraphs - A convenience method for rendering graphs for a particular provider.
-  CircuitsProvidersGraphs(
+  /**
+   * circuitsProvidersGraphs - A convenience method for rendering graphs for a particular provider.
+  **/
+  circuitsProvidersGraphs(
     req: operations.CircuitsProvidersGraphsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsProvidersGraphsResponse> {
@@ -978,22 +1014,24 @@ export class SDK {
       req = new operations.CircuitsProvidersGraphsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/providers/{id}/graphs/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsProvidersGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsProvidersGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.provider = httpRes?.data;
             }
             break;
@@ -1005,8 +1043,10 @@ export class SDK {
   }
 
   
-  // CircuitsProvidersList - Call to super to allow for caching
-  CircuitsProvidersList(
+  /**
+   * circuitsProvidersList - Call to super to allow for caching
+  **/
+  circuitsProvidersList(
     req: operations.CircuitsProvidersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsProvidersListResponse> {
@@ -1014,11 +1054,12 @@ export class SDK {
       req = new operations.CircuitsProvidersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/circuits/providers/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1027,17 +1068,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsProvidersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsProvidersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.circuitsProvidersList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1049,7 +1091,7 @@ export class SDK {
   }
 
   
-  CircuitsProvidersPartialUpdate(
+  circuitsProvidersPartialUpdate(
     req: operations.CircuitsProvidersPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsProvidersPartialUpdateResponse> {
@@ -1057,40 +1099,40 @@ export class SDK {
       req = new operations.CircuitsProvidersPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/providers/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsProvidersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsProvidersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.provider = httpRes?.data;
             }
             break;
@@ -1102,8 +1144,10 @@ export class SDK {
   }
 
   
-  // CircuitsProvidersRead - Call to super to allow for caching
-  CircuitsProvidersRead(
+  /**
+   * circuitsProvidersRead - Call to super to allow for caching
+  **/
+  circuitsProvidersRead(
     req: operations.CircuitsProvidersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsProvidersReadResponse> {
@@ -1111,22 +1155,24 @@ export class SDK {
       req = new operations.CircuitsProvidersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/providers/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsProvidersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsProvidersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.provider = httpRes?.data;
             }
             break;
@@ -1138,7 +1184,7 @@ export class SDK {
   }
 
   
-  CircuitsProvidersUpdate(
+  circuitsProvidersUpdate(
     req: operations.CircuitsProvidersUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CircuitsProvidersUpdateResponse> {
@@ -1146,40 +1192,40 @@ export class SDK {
       req = new operations.CircuitsProvidersUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/circuits/providers/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CircuitsProvidersUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CircuitsProvidersUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.provider = httpRes?.data;
             }
             break;
@@ -1191,7 +1237,7 @@ export class SDK {
   }
 
   
-  DcimCablesCreate(
+  dcimCablesCreate(
     req: operations.DcimCablesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimCablesCreateResponse> {
@@ -1199,40 +1245,40 @@ export class SDK {
       req = new operations.DcimCablesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/cables/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimCablesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimCablesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cable = httpRes?.data;
             }
             break;
@@ -1244,7 +1290,7 @@ export class SDK {
   }
 
   
-  DcimCablesDelete(
+  dcimCablesDelete(
     req: operations.DcimCablesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimCablesDeleteResponse> {
@@ -1252,21 +1298,23 @@ export class SDK {
       req = new operations.DcimCablesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/cables/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimCablesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimCablesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1276,8 +1324,10 @@ export class SDK {
   }
 
   
-  // DcimCablesList - Call to super to allow for caching
-  DcimCablesList(
+  /**
+   * dcimCablesList - Call to super to allow for caching
+  **/
+  dcimCablesList(
     req: operations.DcimCablesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimCablesListResponse> {
@@ -1285,11 +1335,12 @@ export class SDK {
       req = new operations.DcimCablesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/cables/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1298,17 +1349,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimCablesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimCablesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimCablesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1320,7 +1372,7 @@ export class SDK {
   }
 
   
-  DcimCablesPartialUpdate(
+  dcimCablesPartialUpdate(
     req: operations.DcimCablesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimCablesPartialUpdateResponse> {
@@ -1328,40 +1380,40 @@ export class SDK {
       req = new operations.DcimCablesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/cables/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimCablesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimCablesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cable = httpRes?.data;
             }
             break;
@@ -1373,8 +1425,10 @@ export class SDK {
   }
 
   
-  // DcimCablesRead - Call to super to allow for caching
-  DcimCablesRead(
+  /**
+   * dcimCablesRead - Call to super to allow for caching
+  **/
+  dcimCablesRead(
     req: operations.DcimCablesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimCablesReadResponse> {
@@ -1382,22 +1436,24 @@ export class SDK {
       req = new operations.DcimCablesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/cables/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimCablesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimCablesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cable = httpRes?.data;
             }
             break;
@@ -1409,7 +1465,7 @@ export class SDK {
   }
 
   
-  DcimCablesUpdate(
+  dcimCablesUpdate(
     req: operations.DcimCablesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimCablesUpdateResponse> {
@@ -1417,40 +1473,40 @@ export class SDK {
       req = new operations.DcimCablesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/cables/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimCablesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimCablesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cable = httpRes?.data;
             }
             break;
@@ -1462,13 +1518,15 @@ export class SDK {
   }
 
   
-  // DcimConnectedDeviceList - This endpoint allows a user to determine what device (if any) is connected to a given peer device and peer
-interface. This is useful in a situation where a device boots with no configuration, but can detect its neighbors
-via a protocol such as LLDP. Two query parameters must be included in the request:
-
-* `peer_device`: The name of the peer device
-* `peer_interface`: The name of the peer interface
-  DcimConnectedDeviceList(
+  /**
+   * dcimConnectedDeviceList - This endpoint allows a user to determine what device (if any) is connected to a given peer device and peer
+   * interface. This is useful in a situation where a device boots with no configuration, but can detect its neighbors
+   * via a protocol such as LLDP. Two query parameters must be included in the request:
+   * 
+   * * `peer_device`: The name of the peer device
+   * * `peer_interface`: The name of the peer interface
+  **/
+  dcimConnectedDeviceList(
     req: operations.DcimConnectedDeviceListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConnectedDeviceListResponse> {
@@ -1476,11 +1534,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConnectedDeviceListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/connected-device/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1489,17 +1548,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConnectedDeviceListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConnectedDeviceListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.device = httpRes?.data;
             }
             break;
@@ -1511,7 +1571,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleConnectionsList(
+  dcimConsoleConnectionsList(
     req: operations.DcimConsoleConnectionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleConnectionsListResponse> {
@@ -1519,11 +1579,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleConnectionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-connections/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1532,17 +1593,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleConnectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleConnectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimConsoleConnectionsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1554,7 +1616,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortTemplatesCreate(
+  dcimConsolePortTemplatesCreate(
     req: operations.DcimConsolePortTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortTemplatesCreateResponse> {
@@ -1562,40 +1624,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-port-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePortTemplate = httpRes?.data;
             }
             break;
@@ -1607,7 +1669,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortTemplatesDelete(
+  dcimConsolePortTemplatesDelete(
     req: operations.DcimConsolePortTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortTemplatesDeleteResponse> {
@@ -1615,21 +1677,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimConsolePortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1639,8 +1703,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsolePortTemplatesList - Call to super to allow for caching
-  DcimConsolePortTemplatesList(
+  /**
+   * dcimConsolePortTemplatesList - Call to super to allow for caching
+  **/
+  dcimConsolePortTemplatesList(
     req: operations.DcimConsolePortTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortTemplatesListResponse> {
@@ -1648,11 +1714,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-port-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1661,17 +1728,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimConsolePortTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1683,7 +1751,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortTemplatesPartialUpdate(
+  dcimConsolePortTemplatesPartialUpdate(
     req: operations.DcimConsolePortTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortTemplatesPartialUpdateResponse> {
@@ -1691,40 +1759,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePortTemplate = httpRes?.data;
             }
             break;
@@ -1736,8 +1804,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsolePortTemplatesRead - Call to super to allow for caching
-  DcimConsolePortTemplatesRead(
+  /**
+   * dcimConsolePortTemplatesRead - Call to super to allow for caching
+  **/
+  dcimConsolePortTemplatesRead(
     req: operations.DcimConsolePortTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortTemplatesReadResponse> {
@@ -1745,22 +1815,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePortTemplate = httpRes?.data;
             }
             break;
@@ -1772,7 +1844,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortTemplatesUpdate(
+  dcimConsolePortTemplatesUpdate(
     req: operations.DcimConsolePortTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortTemplatesUpdateResponse> {
@@ -1780,40 +1852,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePortTemplate = httpRes?.data;
             }
             break;
@@ -1825,7 +1897,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortsCreate(
+  dcimConsolePortsCreate(
     req: operations.DcimConsolePortsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortsCreateResponse> {
@@ -1833,40 +1905,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-ports/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePort = httpRes?.data;
             }
             break;
@@ -1878,7 +1950,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortsDelete(
+  dcimConsolePortsDelete(
     req: operations.DcimConsolePortsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortsDeleteResponse> {
@@ -1886,21 +1958,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimConsolePortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1910,8 +1984,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsolePortsList - Call to super to allow for caching
-  DcimConsolePortsList(
+  /**
+   * dcimConsolePortsList - Call to super to allow for caching
+  **/
+  dcimConsolePortsList(
     req: operations.DcimConsolePortsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortsListResponse> {
@@ -1919,11 +1995,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-ports/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1932,17 +2009,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimConsolePortsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1954,7 +2032,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortsPartialUpdate(
+  dcimConsolePortsPartialUpdate(
     req: operations.DcimConsolePortsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortsPartialUpdateResponse> {
@@ -1962,40 +2040,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePort = httpRes?.data;
             }
             break;
@@ -2007,8 +2085,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsolePortsRead - Call to super to allow for caching
-  DcimConsolePortsRead(
+  /**
+   * dcimConsolePortsRead - Call to super to allow for caching
+  **/
+  dcimConsolePortsRead(
     req: operations.DcimConsolePortsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortsReadResponse> {
@@ -2016,22 +2096,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePort = httpRes?.data;
             }
             break;
@@ -2043,8 +2125,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsolePortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
-  DcimConsolePortsTrace(
+  /**
+   * dcimConsolePortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
+  **/
+  dcimConsolePortsTrace(
     req: operations.DcimConsolePortsTraceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortsTraceResponse> {
@@ -2052,22 +2136,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortsTraceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-ports/{id}/trace/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePort = httpRes?.data;
             }
             break;
@@ -2079,7 +2165,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsolePortsUpdate(
+  dcimConsolePortsUpdate(
     req: operations.DcimConsolePortsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsolePortsUpdateResponse> {
@@ -2087,40 +2173,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsolePortsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsolePortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsolePortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consolePort = httpRes?.data;
             }
             break;
@@ -2132,7 +2218,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortTemplatesCreate(
+  dcimConsoleServerPortTemplatesCreate(
     req: operations.DcimConsoleServerPortTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortTemplatesCreateResponse> {
@@ -2140,40 +2226,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-server-port-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPortTemplate = httpRes?.data;
             }
             break;
@@ -2185,7 +2271,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortTemplatesDelete(
+  dcimConsoleServerPortTemplatesDelete(
     req: operations.DcimConsoleServerPortTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortTemplatesDeleteResponse> {
@@ -2193,21 +2279,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimConsoleServerPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -2217,8 +2305,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsoleServerPortTemplatesList - Call to super to allow for caching
-  DcimConsoleServerPortTemplatesList(
+  /**
+   * dcimConsoleServerPortTemplatesList - Call to super to allow for caching
+  **/
+  dcimConsoleServerPortTemplatesList(
     req: operations.DcimConsoleServerPortTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortTemplatesListResponse> {
@@ -2226,11 +2316,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-server-port-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2239,17 +2330,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimConsoleServerPortTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2261,7 +2353,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortTemplatesPartialUpdate(
+  dcimConsoleServerPortTemplatesPartialUpdate(
     req: operations.DcimConsoleServerPortTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortTemplatesPartialUpdateResponse> {
@@ -2269,40 +2361,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPortTemplate = httpRes?.data;
             }
             break;
@@ -2314,8 +2406,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsoleServerPortTemplatesRead - Call to super to allow for caching
-  DcimConsoleServerPortTemplatesRead(
+  /**
+   * dcimConsoleServerPortTemplatesRead - Call to super to allow for caching
+  **/
+  dcimConsoleServerPortTemplatesRead(
     req: operations.DcimConsoleServerPortTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortTemplatesReadResponse> {
@@ -2323,22 +2417,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPortTemplate = httpRes?.data;
             }
             break;
@@ -2350,7 +2446,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortTemplatesUpdate(
+  dcimConsoleServerPortTemplatesUpdate(
     req: operations.DcimConsoleServerPortTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortTemplatesUpdateResponse> {
@@ -2358,40 +2454,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPortTemplate = httpRes?.data;
             }
             break;
@@ -2403,7 +2499,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortsCreate(
+  dcimConsoleServerPortsCreate(
     req: operations.DcimConsoleServerPortsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortsCreateResponse> {
@@ -2411,40 +2507,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-server-ports/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPort = httpRes?.data;
             }
             break;
@@ -2456,7 +2552,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortsDelete(
+  dcimConsoleServerPortsDelete(
     req: operations.DcimConsoleServerPortsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortsDeleteResponse> {
@@ -2464,21 +2560,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimConsoleServerPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -2488,8 +2586,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsoleServerPortsList - Call to super to allow for caching
-  DcimConsoleServerPortsList(
+  /**
+   * dcimConsoleServerPortsList - Call to super to allow for caching
+  **/
+  dcimConsoleServerPortsList(
     req: operations.DcimConsoleServerPortsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortsListResponse> {
@@ -2497,11 +2597,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/console-server-ports/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2510,17 +2611,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimConsoleServerPortsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2532,7 +2634,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortsPartialUpdate(
+  dcimConsoleServerPortsPartialUpdate(
     req: operations.DcimConsoleServerPortsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortsPartialUpdateResponse> {
@@ -2540,40 +2642,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPort = httpRes?.data;
             }
             break;
@@ -2585,8 +2687,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsoleServerPortsRead - Call to super to allow for caching
-  DcimConsoleServerPortsRead(
+  /**
+   * dcimConsoleServerPortsRead - Call to super to allow for caching
+  **/
+  dcimConsoleServerPortsRead(
     req: operations.DcimConsoleServerPortsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortsReadResponse> {
@@ -2594,22 +2698,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPort = httpRes?.data;
             }
             break;
@@ -2621,8 +2727,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimConsoleServerPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
-  DcimConsoleServerPortsTrace(
+  /**
+   * dcimConsoleServerPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
+  **/
+  dcimConsoleServerPortsTrace(
     req: operations.DcimConsoleServerPortsTraceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortsTraceResponse> {
@@ -2630,22 +2738,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortsTraceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-ports/{id}/trace/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPort = httpRes?.data;
             }
             break;
@@ -2657,7 +2767,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimConsoleServerPortsUpdate(
+  dcimConsoleServerPortsUpdate(
     req: operations.DcimConsoleServerPortsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimConsoleServerPortsUpdateResponse> {
@@ -2665,40 +2775,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimConsoleServerPortsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/console-server-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimConsoleServerPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimConsoleServerPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.consoleServerPort = httpRes?.data;
             }
             break;
@@ -2710,7 +2820,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBayTemplatesCreate(
+  dcimDeviceBayTemplatesCreate(
     req: operations.DcimDeviceBayTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBayTemplatesCreateResponse> {
@@ -2718,40 +2828,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBayTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-bay-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBayTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBayTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBayTemplate = httpRes?.data;
             }
             break;
@@ -2763,7 +2873,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBayTemplatesDelete(
+  dcimDeviceBayTemplatesDelete(
     req: operations.DcimDeviceBayTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBayTemplatesDeleteResponse> {
@@ -2771,21 +2881,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBayTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bay-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBayTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimDeviceBayTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -2795,8 +2907,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceBayTemplatesList - Call to super to allow for caching
-  DcimDeviceBayTemplatesList(
+  /**
+   * dcimDeviceBayTemplatesList - Call to super to allow for caching
+  **/
+  dcimDeviceBayTemplatesList(
     req: operations.DcimDeviceBayTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBayTemplatesListResponse> {
@@ -2804,11 +2918,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBayTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-bay-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2817,17 +2932,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBayTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBayTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimDeviceBayTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2839,7 +2955,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBayTemplatesPartialUpdate(
+  dcimDeviceBayTemplatesPartialUpdate(
     req: operations.DcimDeviceBayTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBayTemplatesPartialUpdateResponse> {
@@ -2847,40 +2963,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBayTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bay-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBayTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBayTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBayTemplate = httpRes?.data;
             }
             break;
@@ -2892,8 +3008,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceBayTemplatesRead - Call to super to allow for caching
-  DcimDeviceBayTemplatesRead(
+  /**
+   * dcimDeviceBayTemplatesRead - Call to super to allow for caching
+  **/
+  dcimDeviceBayTemplatesRead(
     req: operations.DcimDeviceBayTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBayTemplatesReadResponse> {
@@ -2901,22 +3019,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBayTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bay-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBayTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBayTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBayTemplate = httpRes?.data;
             }
             break;
@@ -2928,7 +3048,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBayTemplatesUpdate(
+  dcimDeviceBayTemplatesUpdate(
     req: operations.DcimDeviceBayTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBayTemplatesUpdateResponse> {
@@ -2936,40 +3056,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBayTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bay-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBayTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBayTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBayTemplate = httpRes?.data;
             }
             break;
@@ -2981,7 +3101,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBaysCreate(
+  dcimDeviceBaysCreate(
     req: operations.DcimDeviceBaysCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBaysCreateResponse> {
@@ -2989,40 +3109,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBaysCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-bays/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBaysCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBaysCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBay = httpRes?.data;
             }
             break;
@@ -3034,7 +3154,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBaysDelete(
+  dcimDeviceBaysDelete(
     req: operations.DcimDeviceBaysDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBaysDeleteResponse> {
@@ -3042,21 +3162,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBaysDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bays/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBaysDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimDeviceBaysDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -3066,8 +3188,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceBaysList - Call to super to allow for caching
-  DcimDeviceBaysList(
+  /**
+   * dcimDeviceBaysList - Call to super to allow for caching
+  **/
+  dcimDeviceBaysList(
     req: operations.DcimDeviceBaysListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBaysListResponse> {
@@ -3075,11 +3199,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBaysListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-bays/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3088,17 +3213,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBaysListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBaysListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimDeviceBaysList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3110,7 +3236,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBaysPartialUpdate(
+  dcimDeviceBaysPartialUpdate(
     req: operations.DcimDeviceBaysPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBaysPartialUpdateResponse> {
@@ -3118,40 +3244,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBaysPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bays/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBaysPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBaysPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBay = httpRes?.data;
             }
             break;
@@ -3163,8 +3289,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceBaysRead - Call to super to allow for caching
-  DcimDeviceBaysRead(
+  /**
+   * dcimDeviceBaysRead - Call to super to allow for caching
+  **/
+  dcimDeviceBaysRead(
     req: operations.DcimDeviceBaysReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBaysReadResponse> {
@@ -3172,22 +3300,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBaysReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bays/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBaysReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBaysReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBay = httpRes?.data;
             }
             break;
@@ -3199,7 +3329,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceBaysUpdate(
+  dcimDeviceBaysUpdate(
     req: operations.DcimDeviceBaysUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceBaysUpdateResponse> {
@@ -3207,40 +3337,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceBaysUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-bays/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceBaysUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceBaysUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceBay = httpRes?.data;
             }
             break;
@@ -3252,7 +3382,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceRolesCreate(
+  dcimDeviceRolesCreate(
     req: operations.DcimDeviceRolesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceRolesCreateResponse> {
@@ -3260,40 +3390,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceRolesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-roles/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceRole = httpRes?.data;
             }
             break;
@@ -3305,7 +3435,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceRolesDelete(
+  dcimDeviceRolesDelete(
     req: operations.DcimDeviceRolesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceRolesDeleteResponse> {
@@ -3313,21 +3443,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceRolesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimDeviceRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -3337,8 +3469,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceRolesList - Call to super to allow for caching
-  DcimDeviceRolesList(
+  /**
+   * dcimDeviceRolesList - Call to super to allow for caching
+  **/
+  dcimDeviceRolesList(
     req: operations.DcimDeviceRolesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceRolesListResponse> {
@@ -3346,11 +3480,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceRolesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-roles/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3359,17 +3494,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimDeviceRolesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3381,7 +3517,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceRolesPartialUpdate(
+  dcimDeviceRolesPartialUpdate(
     req: operations.DcimDeviceRolesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceRolesPartialUpdateResponse> {
@@ -3389,40 +3525,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceRolesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceRole = httpRes?.data;
             }
             break;
@@ -3434,8 +3570,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceRolesRead - Call to super to allow for caching
-  DcimDeviceRolesRead(
+  /**
+   * dcimDeviceRolesRead - Call to super to allow for caching
+  **/
+  dcimDeviceRolesRead(
     req: operations.DcimDeviceRolesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceRolesReadResponse> {
@@ -3443,22 +3581,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceRolesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceRole = httpRes?.data;
             }
             break;
@@ -3470,7 +3610,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceRolesUpdate(
+  dcimDeviceRolesUpdate(
     req: operations.DcimDeviceRolesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceRolesUpdateResponse> {
@@ -3478,40 +3618,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceRolesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceRole = httpRes?.data;
             }
             break;
@@ -3523,7 +3663,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceTypesCreate(
+  dcimDeviceTypesCreate(
     req: operations.DcimDeviceTypesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceTypesCreateResponse> {
@@ -3531,40 +3671,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceTypesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-types/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceTypesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceTypesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceType = httpRes?.data;
             }
             break;
@@ -3576,7 +3716,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceTypesDelete(
+  dcimDeviceTypesDelete(
     req: operations.DcimDeviceTypesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceTypesDeleteResponse> {
@@ -3584,21 +3724,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceTypesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-types/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceTypesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimDeviceTypesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -3608,8 +3750,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceTypesList - Call to super to allow for caching
-  DcimDeviceTypesList(
+  /**
+   * dcimDeviceTypesList - Call to super to allow for caching
+  **/
+  dcimDeviceTypesList(
     req: operations.DcimDeviceTypesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceTypesListResponse> {
@@ -3617,11 +3761,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceTypesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/device-types/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3630,17 +3775,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceTypesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceTypesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimDeviceTypesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3652,7 +3798,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceTypesPartialUpdate(
+  dcimDeviceTypesPartialUpdate(
     req: operations.DcimDeviceTypesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceTypesPartialUpdateResponse> {
@@ -3660,40 +3806,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceTypesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-types/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceTypesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceTypesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceType = httpRes?.data;
             }
             break;
@@ -3705,8 +3851,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDeviceTypesRead - Call to super to allow for caching
-  DcimDeviceTypesRead(
+  /**
+   * dcimDeviceTypesRead - Call to super to allow for caching
+  **/
+  dcimDeviceTypesRead(
     req: operations.DcimDeviceTypesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceTypesReadResponse> {
@@ -3714,22 +3862,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceTypesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-types/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceTypesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceTypesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceType = httpRes?.data;
             }
             break;
@@ -3741,7 +3891,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDeviceTypesUpdate(
+  dcimDeviceTypesUpdate(
     req: operations.DcimDeviceTypesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDeviceTypesUpdateResponse> {
@@ -3749,40 +3899,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDeviceTypesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/device-types/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDeviceTypesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDeviceTypesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceType = httpRes?.data;
             }
             break;
@@ -3794,7 +3944,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDevicesCreate(
+  dcimDevicesCreate(
     req: operations.DcimDevicesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesCreateResponse> {
@@ -3802,40 +3952,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/devices/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDevicesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceWithConfigContext = httpRes?.data;
             }
             break;
@@ -3847,7 +3997,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDevicesDelete(
+  dcimDevicesDelete(
     req: operations.DcimDevicesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesDeleteResponse> {
@@ -3855,21 +4005,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/devices/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimDevicesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -3879,8 +4031,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDevicesGraphs - A convenience method for rendering graphs for a particular Device.
-  DcimDevicesGraphs(
+  /**
+   * dcimDevicesGraphs - A convenience method for rendering graphs for a particular Device.
+  **/
+  dcimDevicesGraphs(
     req: operations.DcimDevicesGraphsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesGraphsResponse> {
@@ -3888,22 +4042,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesGraphsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/devices/{id}/graphs/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDevicesGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceWithConfigContext = httpRes?.data;
             }
             break;
@@ -3915,8 +4071,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDevicesList - Call to super to allow for caching
-  DcimDevicesList(
+  /**
+   * dcimDevicesList - Call to super to allow for caching
+  **/
+  dcimDevicesList(
     req: operations.DcimDevicesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesListResponse> {
@@ -3924,11 +4082,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/devices/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3937,17 +4096,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDevicesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimDevicesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3959,8 +4119,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDevicesNapalm - Execute a NAPALM method on a Device
-  DcimDevicesNapalm(
+  /**
+   * dcimDevicesNapalm - Execute a NAPALM method on a Device
+  **/
+  dcimDevicesNapalm(
     req: operations.DcimDevicesNapalmRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesNapalmResponse> {
@@ -3968,11 +4130,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesNapalmRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/devices/{id}/napalm/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3981,17 +4144,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesNapalmResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDevicesNapalmResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceNapalm = httpRes?.data;
             }
             break;
@@ -4003,7 +4167,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDevicesPartialUpdate(
+  dcimDevicesPartialUpdate(
     req: operations.DcimDevicesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesPartialUpdateResponse> {
@@ -4011,40 +4175,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/devices/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDevicesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceWithConfigContext = httpRes?.data;
             }
             break;
@@ -4056,8 +4220,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimDevicesRead - Call to super to allow for caching
-  DcimDevicesRead(
+  /**
+   * dcimDevicesRead - Call to super to allow for caching
+  **/
+  dcimDevicesRead(
     req: operations.DcimDevicesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesReadResponse> {
@@ -4065,22 +4231,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/devices/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDevicesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceWithConfigContext = httpRes?.data;
             }
             break;
@@ -4092,7 +4260,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimDevicesUpdate(
+  dcimDevicesUpdate(
     req: operations.DcimDevicesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimDevicesUpdateResponse> {
@@ -4100,40 +4268,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimDevicesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/devices/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimDevicesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimDevicesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceWithConfigContext = httpRes?.data;
             }
             break;
@@ -4145,7 +4313,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortTemplatesCreate(
+  dcimFrontPortTemplatesCreate(
     req: operations.DcimFrontPortTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortTemplatesCreateResponse> {
@@ -4153,40 +4321,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/front-port-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPortTemplate = httpRes?.data;
             }
             break;
@@ -4198,7 +4366,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortTemplatesDelete(
+  dcimFrontPortTemplatesDelete(
     req: operations.DcimFrontPortTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortTemplatesDeleteResponse> {
@@ -4206,21 +4374,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimFrontPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -4230,8 +4400,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimFrontPortTemplatesList - Call to super to allow for caching
-  DcimFrontPortTemplatesList(
+  /**
+   * dcimFrontPortTemplatesList - Call to super to allow for caching
+  **/
+  dcimFrontPortTemplatesList(
     req: operations.DcimFrontPortTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortTemplatesListResponse> {
@@ -4239,11 +4411,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/front-port-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4252,17 +4425,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimFrontPortTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4274,7 +4448,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortTemplatesPartialUpdate(
+  dcimFrontPortTemplatesPartialUpdate(
     req: operations.DcimFrontPortTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortTemplatesPartialUpdateResponse> {
@@ -4282,40 +4456,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPortTemplate = httpRes?.data;
             }
             break;
@@ -4327,8 +4501,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimFrontPortTemplatesRead - Call to super to allow for caching
-  DcimFrontPortTemplatesRead(
+  /**
+   * dcimFrontPortTemplatesRead - Call to super to allow for caching
+  **/
+  dcimFrontPortTemplatesRead(
     req: operations.DcimFrontPortTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortTemplatesReadResponse> {
@@ -4336,22 +4512,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPortTemplate = httpRes?.data;
             }
             break;
@@ -4363,7 +4541,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortTemplatesUpdate(
+  dcimFrontPortTemplatesUpdate(
     req: operations.DcimFrontPortTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortTemplatesUpdateResponse> {
@@ -4371,40 +4549,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPortTemplate = httpRes?.data;
             }
             break;
@@ -4416,7 +4594,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortsCreate(
+  dcimFrontPortsCreate(
     req: operations.DcimFrontPortsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortsCreateResponse> {
@@ -4424,40 +4602,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/front-ports/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPort = httpRes?.data;
             }
             break;
@@ -4469,7 +4647,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortsDelete(
+  dcimFrontPortsDelete(
     req: operations.DcimFrontPortsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortsDeleteResponse> {
@@ -4477,21 +4655,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimFrontPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -4501,8 +4681,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimFrontPortsList - Call to super to allow for caching
-  DcimFrontPortsList(
+  /**
+   * dcimFrontPortsList - Call to super to allow for caching
+  **/
+  dcimFrontPortsList(
     req: operations.DcimFrontPortsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortsListResponse> {
@@ -4510,11 +4692,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/front-ports/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4523,17 +4706,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimFrontPortsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4545,7 +4729,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortsPartialUpdate(
+  dcimFrontPortsPartialUpdate(
     req: operations.DcimFrontPortsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortsPartialUpdateResponse> {
@@ -4553,40 +4737,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPort = httpRes?.data;
             }
             break;
@@ -4598,8 +4782,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimFrontPortsRead - Call to super to allow for caching
-  DcimFrontPortsRead(
+  /**
+   * dcimFrontPortsRead - Call to super to allow for caching
+  **/
+  dcimFrontPortsRead(
     req: operations.DcimFrontPortsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortsReadResponse> {
@@ -4607,22 +4793,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPort = httpRes?.data;
             }
             break;
@@ -4634,8 +4822,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimFrontPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
-  DcimFrontPortsTrace(
+  /**
+   * dcimFrontPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
+  **/
+  dcimFrontPortsTrace(
     req: operations.DcimFrontPortsTraceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortsTraceResponse> {
@@ -4643,22 +4833,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortsTraceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-ports/{id}/trace/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPort = httpRes?.data;
             }
             break;
@@ -4670,7 +4862,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimFrontPortsUpdate(
+  dcimFrontPortsUpdate(
     req: operations.DcimFrontPortsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimFrontPortsUpdateResponse> {
@@ -4678,40 +4870,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimFrontPortsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/front-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimFrontPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimFrontPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.frontPort = httpRes?.data;
             }
             break;
@@ -4723,7 +4915,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfaceConnectionsList(
+  dcimInterfaceConnectionsList(
     req: operations.DcimInterfaceConnectionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfaceConnectionsListResponse> {
@@ -4731,11 +4923,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfaceConnectionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/interface-connections/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4744,17 +4937,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfaceConnectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfaceConnectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimInterfaceConnectionsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4766,7 +4960,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfaceTemplatesCreate(
+  dcimInterfaceTemplatesCreate(
     req: operations.DcimInterfaceTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfaceTemplatesCreateResponse> {
@@ -4774,40 +4968,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfaceTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/interface-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfaceTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfaceTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.interfaceTemplate = httpRes?.data;
             }
             break;
@@ -4819,7 +5013,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfaceTemplatesDelete(
+  dcimInterfaceTemplatesDelete(
     req: operations.DcimInterfaceTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfaceTemplatesDeleteResponse> {
@@ -4827,21 +5021,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfaceTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interface-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfaceTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimInterfaceTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -4851,8 +5047,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInterfaceTemplatesList - Call to super to allow for caching
-  DcimInterfaceTemplatesList(
+  /**
+   * dcimInterfaceTemplatesList - Call to super to allow for caching
+  **/
+  dcimInterfaceTemplatesList(
     req: operations.DcimInterfaceTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfaceTemplatesListResponse> {
@@ -4860,11 +5058,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfaceTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/interface-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4873,17 +5072,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfaceTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfaceTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimInterfaceTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4895,7 +5095,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfaceTemplatesPartialUpdate(
+  dcimInterfaceTemplatesPartialUpdate(
     req: operations.DcimInterfaceTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfaceTemplatesPartialUpdateResponse> {
@@ -4903,40 +5103,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfaceTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interface-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfaceTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfaceTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.interfaceTemplate = httpRes?.data;
             }
             break;
@@ -4948,8 +5148,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInterfaceTemplatesRead - Call to super to allow for caching
-  DcimInterfaceTemplatesRead(
+  /**
+   * dcimInterfaceTemplatesRead - Call to super to allow for caching
+  **/
+  dcimInterfaceTemplatesRead(
     req: operations.DcimInterfaceTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfaceTemplatesReadResponse> {
@@ -4957,22 +5159,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfaceTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interface-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfaceTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfaceTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.interfaceTemplate = httpRes?.data;
             }
             break;
@@ -4984,7 +5188,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfaceTemplatesUpdate(
+  dcimInterfaceTemplatesUpdate(
     req: operations.DcimInterfaceTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfaceTemplatesUpdateResponse> {
@@ -4992,40 +5196,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfaceTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interface-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfaceTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfaceTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.interfaceTemplate = httpRes?.data;
             }
             break;
@@ -5037,7 +5241,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfacesCreate(
+  dcimInterfacesCreate(
     req: operations.DcimInterfacesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesCreateResponse> {
@@ -5045,40 +5249,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/interfaces/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfacesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceInterface = httpRes?.data;
             }
             break;
@@ -5090,7 +5294,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfacesDelete(
+  dcimInterfacesDelete(
     req: operations.DcimInterfacesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesDeleteResponse> {
@@ -5098,21 +5302,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interfaces/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimInterfacesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -5122,8 +5328,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInterfacesGraphs - A convenience method for rendering graphs for a particular interface.
-  DcimInterfacesGraphs(
+  /**
+   * dcimInterfacesGraphs - A convenience method for rendering graphs for a particular interface.
+  **/
+  dcimInterfacesGraphs(
     req: operations.DcimInterfacesGraphsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesGraphsResponse> {
@@ -5131,22 +5339,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesGraphsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interfaces/{id}/graphs/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfacesGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceInterface = httpRes?.data;
             }
             break;
@@ -5158,8 +5368,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInterfacesList - Call to super to allow for caching
-  DcimInterfacesList(
+  /**
+   * dcimInterfacesList - Call to super to allow for caching
+  **/
+  dcimInterfacesList(
     req: operations.DcimInterfacesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesListResponse> {
@@ -5167,11 +5379,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/interfaces/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5180,17 +5393,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfacesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimInterfacesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5202,7 +5416,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfacesPartialUpdate(
+  dcimInterfacesPartialUpdate(
     req: operations.DcimInterfacesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesPartialUpdateResponse> {
@@ -5210,40 +5424,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interfaces/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfacesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceInterface = httpRes?.data;
             }
             break;
@@ -5255,8 +5469,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInterfacesRead - Call to super to allow for caching
-  DcimInterfacesRead(
+  /**
+   * dcimInterfacesRead - Call to super to allow for caching
+  **/
+  dcimInterfacesRead(
     req: operations.DcimInterfacesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesReadResponse> {
@@ -5264,22 +5480,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interfaces/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfacesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceInterface = httpRes?.data;
             }
             break;
@@ -5291,8 +5509,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInterfacesTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
-  DcimInterfacesTrace(
+  /**
+   * dcimInterfacesTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
+  **/
+  dcimInterfacesTrace(
     req: operations.DcimInterfacesTraceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesTraceResponse> {
@@ -5300,22 +5520,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesTraceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interfaces/{id}/trace/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesTraceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfacesTraceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceInterface = httpRes?.data;
             }
             break;
@@ -5327,7 +5549,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInterfacesUpdate(
+  dcimInterfacesUpdate(
     req: operations.DcimInterfacesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInterfacesUpdateResponse> {
@@ -5335,40 +5557,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInterfacesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/interfaces/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInterfacesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInterfacesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deviceInterface = httpRes?.data;
             }
             break;
@@ -5380,7 +5602,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInventoryItemsCreate(
+  dcimInventoryItemsCreate(
     req: operations.DcimInventoryItemsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInventoryItemsCreateResponse> {
@@ -5388,40 +5610,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInventoryItemsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/inventory-items/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInventoryItemsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInventoryItemsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.inventoryItem = httpRes?.data;
             }
             break;
@@ -5433,7 +5655,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInventoryItemsDelete(
+  dcimInventoryItemsDelete(
     req: operations.DcimInventoryItemsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInventoryItemsDeleteResponse> {
@@ -5441,21 +5663,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInventoryItemsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/inventory-items/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInventoryItemsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimInventoryItemsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -5465,8 +5689,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInventoryItemsList - Call to super to allow for caching
-  DcimInventoryItemsList(
+  /**
+   * dcimInventoryItemsList - Call to super to allow for caching
+  **/
+  dcimInventoryItemsList(
     req: operations.DcimInventoryItemsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInventoryItemsListResponse> {
@@ -5474,11 +5700,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInventoryItemsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/inventory-items/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5487,17 +5714,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInventoryItemsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInventoryItemsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimInventoryItemsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5509,7 +5737,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInventoryItemsPartialUpdate(
+  dcimInventoryItemsPartialUpdate(
     req: operations.DcimInventoryItemsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInventoryItemsPartialUpdateResponse> {
@@ -5517,40 +5745,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInventoryItemsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/inventory-items/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInventoryItemsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInventoryItemsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.inventoryItem = httpRes?.data;
             }
             break;
@@ -5562,8 +5790,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimInventoryItemsRead - Call to super to allow for caching
-  DcimInventoryItemsRead(
+  /**
+   * dcimInventoryItemsRead - Call to super to allow for caching
+  **/
+  dcimInventoryItemsRead(
     req: operations.DcimInventoryItemsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInventoryItemsReadResponse> {
@@ -5571,22 +5801,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInventoryItemsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/inventory-items/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInventoryItemsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInventoryItemsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.inventoryItem = httpRes?.data;
             }
             break;
@@ -5598,7 +5830,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimInventoryItemsUpdate(
+  dcimInventoryItemsUpdate(
     req: operations.DcimInventoryItemsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimInventoryItemsUpdateResponse> {
@@ -5606,40 +5838,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimInventoryItemsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/inventory-items/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimInventoryItemsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimInventoryItemsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.inventoryItem = httpRes?.data;
             }
             break;
@@ -5651,7 +5883,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimManufacturersCreate(
+  dcimManufacturersCreate(
     req: operations.DcimManufacturersCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimManufacturersCreateResponse> {
@@ -5659,40 +5891,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimManufacturersCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/manufacturers/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimManufacturersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimManufacturersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manufacturer = httpRes?.data;
             }
             break;
@@ -5704,7 +5936,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimManufacturersDelete(
+  dcimManufacturersDelete(
     req: operations.DcimManufacturersDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimManufacturersDeleteResponse> {
@@ -5712,21 +5944,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimManufacturersDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/manufacturers/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimManufacturersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimManufacturersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -5736,8 +5970,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimManufacturersList - Call to super to allow for caching
-  DcimManufacturersList(
+  /**
+   * dcimManufacturersList - Call to super to allow for caching
+  **/
+  dcimManufacturersList(
     req: operations.DcimManufacturersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimManufacturersListResponse> {
@@ -5745,11 +5981,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimManufacturersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/manufacturers/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5758,17 +5995,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimManufacturersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimManufacturersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimManufacturersList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5780,7 +6018,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimManufacturersPartialUpdate(
+  dcimManufacturersPartialUpdate(
     req: operations.DcimManufacturersPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimManufacturersPartialUpdateResponse> {
@@ -5788,40 +6026,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimManufacturersPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/manufacturers/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimManufacturersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimManufacturersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manufacturer = httpRes?.data;
             }
             break;
@@ -5833,8 +6071,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimManufacturersRead - Call to super to allow for caching
-  DcimManufacturersRead(
+  /**
+   * dcimManufacturersRead - Call to super to allow for caching
+  **/
+  dcimManufacturersRead(
     req: operations.DcimManufacturersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimManufacturersReadResponse> {
@@ -5842,22 +6082,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimManufacturersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/manufacturers/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimManufacturersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimManufacturersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manufacturer = httpRes?.data;
             }
             break;
@@ -5869,7 +6111,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimManufacturersUpdate(
+  dcimManufacturersUpdate(
     req: operations.DcimManufacturersUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimManufacturersUpdateResponse> {
@@ -5877,40 +6119,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimManufacturersUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/manufacturers/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimManufacturersUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimManufacturersUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manufacturer = httpRes?.data;
             }
             break;
@@ -5922,7 +6164,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPlatformsCreate(
+  dcimPlatformsCreate(
     req: operations.DcimPlatformsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPlatformsCreateResponse> {
@@ -5930,40 +6172,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPlatformsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/platforms/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPlatformsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPlatformsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.platform = httpRes?.data;
             }
             break;
@@ -5975,7 +6217,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPlatformsDelete(
+  dcimPlatformsDelete(
     req: operations.DcimPlatformsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPlatformsDeleteResponse> {
@@ -5983,21 +6225,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPlatformsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/platforms/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPlatformsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimPlatformsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -6007,8 +6251,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPlatformsList - Call to super to allow for caching
-  DcimPlatformsList(
+  /**
+   * dcimPlatformsList - Call to super to allow for caching
+  **/
+  dcimPlatformsList(
     req: operations.DcimPlatformsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPlatformsListResponse> {
@@ -6016,11 +6262,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPlatformsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/platforms/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6029,17 +6276,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPlatformsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPlatformsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPlatformsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6051,7 +6299,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPlatformsPartialUpdate(
+  dcimPlatformsPartialUpdate(
     req: operations.DcimPlatformsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPlatformsPartialUpdateResponse> {
@@ -6059,40 +6307,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPlatformsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/platforms/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPlatformsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPlatformsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.platform = httpRes?.data;
             }
             break;
@@ -6104,8 +6352,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPlatformsRead - Call to super to allow for caching
-  DcimPlatformsRead(
+  /**
+   * dcimPlatformsRead - Call to super to allow for caching
+  **/
+  dcimPlatformsRead(
     req: operations.DcimPlatformsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPlatformsReadResponse> {
@@ -6113,22 +6363,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPlatformsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/platforms/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPlatformsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPlatformsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.platform = httpRes?.data;
             }
             break;
@@ -6140,7 +6392,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPlatformsUpdate(
+  dcimPlatformsUpdate(
     req: operations.DcimPlatformsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPlatformsUpdateResponse> {
@@ -6148,40 +6400,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPlatformsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/platforms/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPlatformsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPlatformsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.platform = httpRes?.data;
             }
             break;
@@ -6193,7 +6445,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerConnectionsList(
+  dcimPowerConnectionsList(
     req: operations.DcimPowerConnectionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerConnectionsListResponse> {
@@ -6201,11 +6453,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerConnectionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-connections/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6214,17 +6467,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerConnectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerConnectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPowerConnectionsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6236,7 +6490,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerFeedsCreate(
+  dcimPowerFeedsCreate(
     req: operations.DcimPowerFeedsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerFeedsCreateResponse> {
@@ -6244,40 +6498,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerFeedsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-feeds/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerFeedsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerFeedsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerFeed = httpRes?.data;
             }
             break;
@@ -6289,7 +6543,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerFeedsDelete(
+  dcimPowerFeedsDelete(
     req: operations.DcimPowerFeedsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerFeedsDeleteResponse> {
@@ -6297,21 +6551,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerFeedsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-feeds/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerFeedsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimPowerFeedsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -6321,8 +6577,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerFeedsList - Call to super to allow for caching
-  DcimPowerFeedsList(
+  /**
+   * dcimPowerFeedsList - Call to super to allow for caching
+  **/
+  dcimPowerFeedsList(
     req: operations.DcimPowerFeedsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerFeedsListResponse> {
@@ -6330,11 +6588,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerFeedsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-feeds/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6343,17 +6602,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerFeedsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerFeedsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPowerFeedsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6365,7 +6625,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerFeedsPartialUpdate(
+  dcimPowerFeedsPartialUpdate(
     req: operations.DcimPowerFeedsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerFeedsPartialUpdateResponse> {
@@ -6373,40 +6633,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerFeedsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-feeds/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerFeedsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerFeedsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerFeed = httpRes?.data;
             }
             break;
@@ -6418,8 +6678,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerFeedsRead - Call to super to allow for caching
-  DcimPowerFeedsRead(
+  /**
+   * dcimPowerFeedsRead - Call to super to allow for caching
+  **/
+  dcimPowerFeedsRead(
     req: operations.DcimPowerFeedsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerFeedsReadResponse> {
@@ -6427,22 +6689,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerFeedsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-feeds/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerFeedsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerFeedsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerFeed = httpRes?.data;
             }
             break;
@@ -6454,7 +6718,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerFeedsUpdate(
+  dcimPowerFeedsUpdate(
     req: operations.DcimPowerFeedsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerFeedsUpdateResponse> {
@@ -6462,40 +6726,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerFeedsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-feeds/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerFeedsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerFeedsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerFeed = httpRes?.data;
             }
             break;
@@ -6507,7 +6771,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletTemplatesCreate(
+  dcimPowerOutletTemplatesCreate(
     req: operations.DcimPowerOutletTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletTemplatesCreateResponse> {
@@ -6515,40 +6779,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-outlet-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutletTemplate = httpRes?.data;
             }
             break;
@@ -6560,7 +6824,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletTemplatesDelete(
+  dcimPowerOutletTemplatesDelete(
     req: operations.DcimPowerOutletTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletTemplatesDeleteResponse> {
@@ -6568,21 +6832,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlet-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimPowerOutletTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -6592,8 +6858,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerOutletTemplatesList - Call to super to allow for caching
-  DcimPowerOutletTemplatesList(
+  /**
+   * dcimPowerOutletTemplatesList - Call to super to allow for caching
+  **/
+  dcimPowerOutletTemplatesList(
     req: operations.DcimPowerOutletTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletTemplatesListResponse> {
@@ -6601,11 +6869,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-outlet-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6614,17 +6883,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPowerOutletTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6636,7 +6906,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletTemplatesPartialUpdate(
+  dcimPowerOutletTemplatesPartialUpdate(
     req: operations.DcimPowerOutletTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletTemplatesPartialUpdateResponse> {
@@ -6644,40 +6914,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlet-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutletTemplate = httpRes?.data;
             }
             break;
@@ -6689,8 +6959,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerOutletTemplatesRead - Call to super to allow for caching
-  DcimPowerOutletTemplatesRead(
+  /**
+   * dcimPowerOutletTemplatesRead - Call to super to allow for caching
+  **/
+  dcimPowerOutletTemplatesRead(
     req: operations.DcimPowerOutletTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletTemplatesReadResponse> {
@@ -6698,22 +6970,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlet-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutletTemplate = httpRes?.data;
             }
             break;
@@ -6725,7 +6999,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletTemplatesUpdate(
+  dcimPowerOutletTemplatesUpdate(
     req: operations.DcimPowerOutletTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletTemplatesUpdateResponse> {
@@ -6733,40 +7007,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlet-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutletTemplate = httpRes?.data;
             }
             break;
@@ -6778,7 +7052,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletsCreate(
+  dcimPowerOutletsCreate(
     req: operations.DcimPowerOutletsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletsCreateResponse> {
@@ -6786,40 +7060,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-outlets/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutlet = httpRes?.data;
             }
             break;
@@ -6831,7 +7105,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletsDelete(
+  dcimPowerOutletsDelete(
     req: operations.DcimPowerOutletsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletsDeleteResponse> {
@@ -6839,21 +7113,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlets/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimPowerOutletsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -6863,8 +7139,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerOutletsList - Call to super to allow for caching
-  DcimPowerOutletsList(
+  /**
+   * dcimPowerOutletsList - Call to super to allow for caching
+  **/
+  dcimPowerOutletsList(
     req: operations.DcimPowerOutletsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletsListResponse> {
@@ -6872,11 +7150,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-outlets/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6885,17 +7164,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPowerOutletsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6907,7 +7187,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletsPartialUpdate(
+  dcimPowerOutletsPartialUpdate(
     req: operations.DcimPowerOutletsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletsPartialUpdateResponse> {
@@ -6915,40 +7195,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlets/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutlet = httpRes?.data;
             }
             break;
@@ -6960,8 +7240,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerOutletsRead - Call to super to allow for caching
-  DcimPowerOutletsRead(
+  /**
+   * dcimPowerOutletsRead - Call to super to allow for caching
+  **/
+  dcimPowerOutletsRead(
     req: operations.DcimPowerOutletsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletsReadResponse> {
@@ -6969,22 +7251,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlets/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutlet = httpRes?.data;
             }
             break;
@@ -6996,8 +7280,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerOutletsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
-  DcimPowerOutletsTrace(
+  /**
+   * dcimPowerOutletsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
+  **/
+  dcimPowerOutletsTrace(
     req: operations.DcimPowerOutletsTraceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletsTraceResponse> {
@@ -7005,22 +7291,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletsTraceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlets/{id}/trace/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutlet = httpRes?.data;
             }
             break;
@@ -7032,7 +7320,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerOutletsUpdate(
+  dcimPowerOutletsUpdate(
     req: operations.DcimPowerOutletsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerOutletsUpdateResponse> {
@@ -7040,40 +7328,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerOutletsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-outlets/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerOutletsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerOutletsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerOutlet = httpRes?.data;
             }
             break;
@@ -7085,7 +7373,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPanelsCreate(
+  dcimPowerPanelsCreate(
     req: operations.DcimPowerPanelsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPanelsCreateResponse> {
@@ -7093,40 +7381,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPanelsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-panels/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPanelsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPanelsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPanel = httpRes?.data;
             }
             break;
@@ -7138,7 +7426,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPanelsDelete(
+  dcimPowerPanelsDelete(
     req: operations.DcimPowerPanelsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPanelsDeleteResponse> {
@@ -7146,21 +7434,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPanelsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-panels/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPanelsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimPowerPanelsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -7170,8 +7460,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerPanelsList - Call to super to allow for caching
-  DcimPowerPanelsList(
+  /**
+   * dcimPowerPanelsList - Call to super to allow for caching
+  **/
+  dcimPowerPanelsList(
     req: operations.DcimPowerPanelsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPanelsListResponse> {
@@ -7179,11 +7471,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPanelsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-panels/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7192,17 +7485,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPanelsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPanelsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPowerPanelsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7214,7 +7508,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPanelsPartialUpdate(
+  dcimPowerPanelsPartialUpdate(
     req: operations.DcimPowerPanelsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPanelsPartialUpdateResponse> {
@@ -7222,40 +7516,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPanelsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-panels/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPanelsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPanelsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPanel = httpRes?.data;
             }
             break;
@@ -7267,8 +7561,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerPanelsRead - Call to super to allow for caching
-  DcimPowerPanelsRead(
+  /**
+   * dcimPowerPanelsRead - Call to super to allow for caching
+  **/
+  dcimPowerPanelsRead(
     req: operations.DcimPowerPanelsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPanelsReadResponse> {
@@ -7276,22 +7572,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPanelsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-panels/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPanelsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPanelsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPanel = httpRes?.data;
             }
             break;
@@ -7303,7 +7601,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPanelsUpdate(
+  dcimPowerPanelsUpdate(
     req: operations.DcimPowerPanelsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPanelsUpdateResponse> {
@@ -7311,40 +7609,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPanelsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-panels/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPanelsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPanelsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPanel = httpRes?.data;
             }
             break;
@@ -7356,7 +7654,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortTemplatesCreate(
+  dcimPowerPortTemplatesCreate(
     req: operations.DcimPowerPortTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortTemplatesCreateResponse> {
@@ -7364,40 +7662,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-port-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPortTemplate = httpRes?.data;
             }
             break;
@@ -7409,7 +7707,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortTemplatesDelete(
+  dcimPowerPortTemplatesDelete(
     req: operations.DcimPowerPortTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortTemplatesDeleteResponse> {
@@ -7417,21 +7715,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimPowerPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -7441,8 +7741,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerPortTemplatesList - Call to super to allow for caching
-  DcimPowerPortTemplatesList(
+  /**
+   * dcimPowerPortTemplatesList - Call to super to allow for caching
+  **/
+  dcimPowerPortTemplatesList(
     req: operations.DcimPowerPortTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortTemplatesListResponse> {
@@ -7450,11 +7752,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-port-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7463,17 +7766,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPowerPortTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7485,7 +7789,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortTemplatesPartialUpdate(
+  dcimPowerPortTemplatesPartialUpdate(
     req: operations.DcimPowerPortTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortTemplatesPartialUpdateResponse> {
@@ -7493,40 +7797,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPortTemplate = httpRes?.data;
             }
             break;
@@ -7538,8 +7842,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerPortTemplatesRead - Call to super to allow for caching
-  DcimPowerPortTemplatesRead(
+  /**
+   * dcimPowerPortTemplatesRead - Call to super to allow for caching
+  **/
+  dcimPowerPortTemplatesRead(
     req: operations.DcimPowerPortTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortTemplatesReadResponse> {
@@ -7547,22 +7853,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPortTemplate = httpRes?.data;
             }
             break;
@@ -7574,7 +7882,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortTemplatesUpdate(
+  dcimPowerPortTemplatesUpdate(
     req: operations.DcimPowerPortTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortTemplatesUpdateResponse> {
@@ -7582,40 +7890,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPortTemplate = httpRes?.data;
             }
             break;
@@ -7627,7 +7935,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortsCreate(
+  dcimPowerPortsCreate(
     req: operations.DcimPowerPortsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortsCreateResponse> {
@@ -7635,40 +7943,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-ports/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPort = httpRes?.data;
             }
             break;
@@ -7680,7 +7988,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortsDelete(
+  dcimPowerPortsDelete(
     req: operations.DcimPowerPortsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortsDeleteResponse> {
@@ -7688,21 +7996,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimPowerPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -7712,8 +8022,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerPortsList - Call to super to allow for caching
-  DcimPowerPortsList(
+  /**
+   * dcimPowerPortsList - Call to super to allow for caching
+  **/
+  dcimPowerPortsList(
     req: operations.DcimPowerPortsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortsListResponse> {
@@ -7721,11 +8033,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/power-ports/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7734,17 +8047,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimPowerPortsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7756,7 +8070,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortsPartialUpdate(
+  dcimPowerPortsPartialUpdate(
     req: operations.DcimPowerPortsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortsPartialUpdateResponse> {
@@ -7764,40 +8078,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPort = httpRes?.data;
             }
             break;
@@ -7809,8 +8123,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerPortsRead - Call to super to allow for caching
-  DcimPowerPortsRead(
+  /**
+   * dcimPowerPortsRead - Call to super to allow for caching
+  **/
+  dcimPowerPortsRead(
     req: operations.DcimPowerPortsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortsReadResponse> {
@@ -7818,22 +8134,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPort = httpRes?.data;
             }
             break;
@@ -7845,8 +8163,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimPowerPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
-  DcimPowerPortsTrace(
+  /**
+   * dcimPowerPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
+  **/
+  dcimPowerPortsTrace(
     req: operations.DcimPowerPortsTraceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortsTraceResponse> {
@@ -7854,22 +8174,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortsTraceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-ports/{id}/trace/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPort = httpRes?.data;
             }
             break;
@@ -7881,7 +8203,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimPowerPortsUpdate(
+  dcimPowerPortsUpdate(
     req: operations.DcimPowerPortsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimPowerPortsUpdateResponse> {
@@ -7889,40 +8211,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimPowerPortsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/power-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimPowerPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimPowerPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.powerPort = httpRes?.data;
             }
             break;
@@ -7934,7 +8256,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackGroupsCreate(
+  dcimRackGroupsCreate(
     req: operations.DcimRackGroupsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackGroupsCreateResponse> {
@@ -7942,40 +8264,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackGroupsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rack-groups/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackGroup = httpRes?.data;
             }
             break;
@@ -7987,7 +8309,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackGroupsDelete(
+  dcimRackGroupsDelete(
     req: operations.DcimRackGroupsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackGroupsDeleteResponse> {
@@ -7995,21 +8317,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackGroupsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimRackGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -8019,8 +8343,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRackGroupsList - Call to super to allow for caching
-  DcimRackGroupsList(
+  /**
+   * dcimRackGroupsList - Call to super to allow for caching
+  **/
+  dcimRackGroupsList(
     req: operations.DcimRackGroupsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackGroupsListResponse> {
@@ -8028,11 +8354,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackGroupsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rack-groups/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8041,17 +8368,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimRackGroupsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8063,7 +8391,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackGroupsPartialUpdate(
+  dcimRackGroupsPartialUpdate(
     req: operations.DcimRackGroupsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackGroupsPartialUpdateResponse> {
@@ -8071,40 +8399,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackGroupsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackGroup = httpRes?.data;
             }
             break;
@@ -8116,8 +8444,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRackGroupsRead - Call to super to allow for caching
-  DcimRackGroupsRead(
+  /**
+   * dcimRackGroupsRead - Call to super to allow for caching
+  **/
+  dcimRackGroupsRead(
     req: operations.DcimRackGroupsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackGroupsReadResponse> {
@@ -8125,22 +8455,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackGroupsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackGroup = httpRes?.data;
             }
             break;
@@ -8152,7 +8484,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackGroupsUpdate(
+  dcimRackGroupsUpdate(
     req: operations.DcimRackGroupsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackGroupsUpdateResponse> {
@@ -8160,40 +8492,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackGroupsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackGroup = httpRes?.data;
             }
             break;
@@ -8205,7 +8537,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackReservationsCreate(
+  dcimRackReservationsCreate(
     req: operations.DcimRackReservationsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackReservationsCreateResponse> {
@@ -8213,40 +8545,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackReservationsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rack-reservations/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackReservationsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackReservationsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackReservation = httpRes?.data;
             }
             break;
@@ -8258,7 +8590,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackReservationsDelete(
+  dcimRackReservationsDelete(
     req: operations.DcimRackReservationsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackReservationsDeleteResponse> {
@@ -8266,21 +8598,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackReservationsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-reservations/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackReservationsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimRackReservationsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -8290,8 +8624,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRackReservationsList - Call to super to allow for caching
-  DcimRackReservationsList(
+  /**
+   * dcimRackReservationsList - Call to super to allow for caching
+  **/
+  dcimRackReservationsList(
     req: operations.DcimRackReservationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackReservationsListResponse> {
@@ -8299,11 +8635,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackReservationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rack-reservations/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8312,17 +8649,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackReservationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackReservationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimRackReservationsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8334,7 +8672,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackReservationsPartialUpdate(
+  dcimRackReservationsPartialUpdate(
     req: operations.DcimRackReservationsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackReservationsPartialUpdateResponse> {
@@ -8342,40 +8680,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackReservationsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-reservations/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackReservationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackReservationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackReservation = httpRes?.data;
             }
             break;
@@ -8387,8 +8725,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRackReservationsRead - Call to super to allow for caching
-  DcimRackReservationsRead(
+  /**
+   * dcimRackReservationsRead - Call to super to allow for caching
+  **/
+  dcimRackReservationsRead(
     req: operations.DcimRackReservationsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackReservationsReadResponse> {
@@ -8396,22 +8736,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackReservationsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-reservations/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackReservationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackReservationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackReservation = httpRes?.data;
             }
             break;
@@ -8423,7 +8765,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackReservationsUpdate(
+  dcimRackReservationsUpdate(
     req: operations.DcimRackReservationsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackReservationsUpdateResponse> {
@@ -8431,40 +8773,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackReservationsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-reservations/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackReservationsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackReservationsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackReservation = httpRes?.data;
             }
             break;
@@ -8476,7 +8818,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackRolesCreate(
+  dcimRackRolesCreate(
     req: operations.DcimRackRolesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackRolesCreateResponse> {
@@ -8484,40 +8826,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackRolesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rack-roles/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackRole = httpRes?.data;
             }
             break;
@@ -8529,7 +8871,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackRolesDelete(
+  dcimRackRolesDelete(
     req: operations.DcimRackRolesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackRolesDeleteResponse> {
@@ -8537,21 +8879,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackRolesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimRackRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -8561,8 +8905,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRackRolesList - Call to super to allow for caching
-  DcimRackRolesList(
+  /**
+   * dcimRackRolesList - Call to super to allow for caching
+  **/
+  dcimRackRolesList(
     req: operations.DcimRackRolesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackRolesListResponse> {
@@ -8570,11 +8916,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackRolesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rack-roles/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8583,17 +8930,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimRackRolesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8605,7 +8953,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackRolesPartialUpdate(
+  dcimRackRolesPartialUpdate(
     req: operations.DcimRackRolesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackRolesPartialUpdateResponse> {
@@ -8613,40 +8961,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackRolesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackRole = httpRes?.data;
             }
             break;
@@ -8658,8 +9006,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRackRolesRead - Call to super to allow for caching
-  DcimRackRolesRead(
+  /**
+   * dcimRackRolesRead - Call to super to allow for caching
+  **/
+  dcimRackRolesRead(
     req: operations.DcimRackRolesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackRolesReadResponse> {
@@ -8667,22 +9017,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackRolesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackRole = httpRes?.data;
             }
             break;
@@ -8694,7 +9046,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRackRolesUpdate(
+  dcimRackRolesUpdate(
     req: operations.DcimRackRolesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRackRolesUpdateResponse> {
@@ -8702,40 +9054,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRackRolesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rack-roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRackRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRackRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackRole = httpRes?.data;
             }
             break;
@@ -8747,7 +9099,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRacksCreate(
+  dcimRacksCreate(
     req: operations.DcimRacksCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRacksCreateResponse> {
@@ -8755,40 +9107,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRacksCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/racks/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRacksCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRacksCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rack = httpRes?.data;
             }
             break;
@@ -8800,7 +9152,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRacksDelete(
+  dcimRacksDelete(
     req: operations.DcimRacksDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRacksDeleteResponse> {
@@ -8808,21 +9160,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRacksDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/racks/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRacksDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimRacksDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -8832,8 +9186,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRacksElevation - Rack elevation representing the list of rack units. Also supports rendering the elevation as an SVG.
-  DcimRacksElevation(
+  /**
+   * dcimRacksElevation - Rack elevation representing the list of rack units. Also supports rendering the elevation as an SVG.
+  **/
+  dcimRacksElevation(
     req: operations.DcimRacksElevationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRacksElevationResponse> {
@@ -8841,11 +9197,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRacksElevationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/racks/{id}/elevation/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8854,17 +9211,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRacksElevationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRacksElevationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rackUnits = httpRes?.data;
             }
             break;
@@ -8876,8 +9234,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRacksList - Call to super to allow for caching
-  DcimRacksList(
+  /**
+   * dcimRacksList - Call to super to allow for caching
+  **/
+  dcimRacksList(
     req: operations.DcimRacksListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRacksListResponse> {
@@ -8885,11 +9245,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRacksListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/racks/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8898,17 +9259,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRacksListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRacksListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimRacksList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8920,7 +9282,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRacksPartialUpdate(
+  dcimRacksPartialUpdate(
     req: operations.DcimRacksPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRacksPartialUpdateResponse> {
@@ -8928,40 +9290,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRacksPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/racks/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRacksPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRacksPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rack = httpRes?.data;
             }
             break;
@@ -8973,8 +9335,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRacksRead - Call to super to allow for caching
-  DcimRacksRead(
+  /**
+   * dcimRacksRead - Call to super to allow for caching
+  **/
+  dcimRacksRead(
     req: operations.DcimRacksReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRacksReadResponse> {
@@ -8982,22 +9346,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRacksReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/racks/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRacksReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRacksReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rack = httpRes?.data;
             }
             break;
@@ -9009,7 +9375,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRacksUpdate(
+  dcimRacksUpdate(
     req: operations.DcimRacksUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRacksUpdateResponse> {
@@ -9017,40 +9383,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRacksUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/racks/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRacksUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRacksUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rack = httpRes?.data;
             }
             break;
@@ -9062,7 +9428,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortTemplatesCreate(
+  dcimRearPortTemplatesCreate(
     req: operations.DcimRearPortTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortTemplatesCreateResponse> {
@@ -9070,40 +9436,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rear-port-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPortTemplate = httpRes?.data;
             }
             break;
@@ -9115,7 +9481,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortTemplatesDelete(
+  dcimRearPortTemplatesDelete(
     req: operations.DcimRearPortTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortTemplatesDeleteResponse> {
@@ -9123,21 +9489,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimRearPortTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -9147,8 +9515,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRearPortTemplatesList - Call to super to allow for caching
-  DcimRearPortTemplatesList(
+  /**
+   * dcimRearPortTemplatesList - Call to super to allow for caching
+  **/
+  dcimRearPortTemplatesList(
     req: operations.DcimRearPortTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortTemplatesListResponse> {
@@ -9156,11 +9526,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rear-port-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9169,17 +9540,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimRearPortTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9191,7 +9563,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortTemplatesPartialUpdate(
+  dcimRearPortTemplatesPartialUpdate(
     req: operations.DcimRearPortTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortTemplatesPartialUpdateResponse> {
@@ -9199,40 +9571,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPortTemplate = httpRes?.data;
             }
             break;
@@ -9244,8 +9616,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRearPortTemplatesRead - Call to super to allow for caching
-  DcimRearPortTemplatesRead(
+  /**
+   * dcimRearPortTemplatesRead - Call to super to allow for caching
+  **/
+  dcimRearPortTemplatesRead(
     req: operations.DcimRearPortTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortTemplatesReadResponse> {
@@ -9253,22 +9627,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-port-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPortTemplate = httpRes?.data;
             }
             break;
@@ -9280,7 +9656,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortTemplatesUpdate(
+  dcimRearPortTemplatesUpdate(
     req: operations.DcimRearPortTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortTemplatesUpdateResponse> {
@@ -9288,40 +9664,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-port-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPortTemplate = httpRes?.data;
             }
             break;
@@ -9333,7 +9709,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortsCreate(
+  dcimRearPortsCreate(
     req: operations.DcimRearPortsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortsCreateResponse> {
@@ -9341,40 +9717,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rear-ports/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPort = httpRes?.data;
             }
             break;
@@ -9386,7 +9762,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortsDelete(
+  dcimRearPortsDelete(
     req: operations.DcimRearPortsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortsDeleteResponse> {
@@ -9394,21 +9770,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimRearPortsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -9418,8 +9796,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRearPortsList - Call to super to allow for caching
-  DcimRearPortsList(
+  /**
+   * dcimRearPortsList - Call to super to allow for caching
+  **/
+  dcimRearPortsList(
     req: operations.DcimRearPortsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortsListResponse> {
@@ -9427,11 +9807,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/rear-ports/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9440,17 +9821,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimRearPortsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9462,7 +9844,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortsPartialUpdate(
+  dcimRearPortsPartialUpdate(
     req: operations.DcimRearPortsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortsPartialUpdateResponse> {
@@ -9470,40 +9852,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPort = httpRes?.data;
             }
             break;
@@ -9515,8 +9897,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRearPortsRead - Call to super to allow for caching
-  DcimRearPortsRead(
+  /**
+   * dcimRearPortsRead - Call to super to allow for caching
+  **/
+  dcimRearPortsRead(
     req: operations.DcimRearPortsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortsReadResponse> {
@@ -9524,22 +9908,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-ports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPort = httpRes?.data;
             }
             break;
@@ -9551,8 +9937,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRearPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
-  DcimRearPortsTrace(
+  /**
+   * dcimRearPortsTrace - Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
+  **/
+  dcimRearPortsTrace(
     req: operations.DcimRearPortsTraceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortsTraceResponse> {
@@ -9560,22 +9948,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortsTraceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-ports/{id}/trace/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortsTraceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPort = httpRes?.data;
             }
             break;
@@ -9587,7 +9977,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRearPortsUpdate(
+  dcimRearPortsUpdate(
     req: operations.DcimRearPortsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRearPortsUpdateResponse> {
@@ -9595,40 +9985,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRearPortsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/rear-ports/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRearPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRearPortsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rearPort = httpRes?.data;
             }
             break;
@@ -9640,7 +10030,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRegionsCreate(
+  dcimRegionsCreate(
     req: operations.DcimRegionsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRegionsCreateResponse> {
@@ -9648,40 +10038,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRegionsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/regions/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRegionsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRegionsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.region = httpRes?.data;
             }
             break;
@@ -9693,7 +10083,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRegionsDelete(
+  dcimRegionsDelete(
     req: operations.DcimRegionsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRegionsDeleteResponse> {
@@ -9701,21 +10091,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRegionsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/regions/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRegionsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimRegionsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -9725,8 +10117,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRegionsList - Call to super to allow for caching
-  DcimRegionsList(
+  /**
+   * dcimRegionsList - Call to super to allow for caching
+  **/
+  dcimRegionsList(
     req: operations.DcimRegionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRegionsListResponse> {
@@ -9734,11 +10128,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRegionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/regions/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9747,17 +10142,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRegionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRegionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimRegionsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9769,7 +10165,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRegionsPartialUpdate(
+  dcimRegionsPartialUpdate(
     req: operations.DcimRegionsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRegionsPartialUpdateResponse> {
@@ -9777,40 +10173,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRegionsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/regions/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRegionsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRegionsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.region = httpRes?.data;
             }
             break;
@@ -9822,8 +10218,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimRegionsRead - Call to super to allow for caching
-  DcimRegionsRead(
+  /**
+   * dcimRegionsRead - Call to super to allow for caching
+  **/
+  dcimRegionsRead(
     req: operations.DcimRegionsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRegionsReadResponse> {
@@ -9831,22 +10229,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRegionsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/regions/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRegionsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRegionsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.region = httpRes?.data;
             }
             break;
@@ -9858,7 +10258,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimRegionsUpdate(
+  dcimRegionsUpdate(
     req: operations.DcimRegionsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimRegionsUpdateResponse> {
@@ -9866,40 +10266,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimRegionsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/regions/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimRegionsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimRegionsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.region = httpRes?.data;
             }
             break;
@@ -9911,7 +10311,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimSitesCreate(
+  dcimSitesCreate(
     req: operations.DcimSitesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimSitesCreateResponse> {
@@ -9919,40 +10319,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimSitesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/sites/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimSitesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimSitesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.site = httpRes?.data;
             }
             break;
@@ -9964,7 +10364,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimSitesDelete(
+  dcimSitesDelete(
     req: operations.DcimSitesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimSitesDeleteResponse> {
@@ -9972,21 +10372,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimSitesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/sites/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimSitesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimSitesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -9996,8 +10398,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimSitesGraphs - A convenience method for rendering graphs for a particular site.
-  DcimSitesGraphs(
+  /**
+   * dcimSitesGraphs - A convenience method for rendering graphs for a particular site.
+  **/
+  dcimSitesGraphs(
     req: operations.DcimSitesGraphsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimSitesGraphsResponse> {
@@ -10005,22 +10409,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimSitesGraphsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/sites/{id}/graphs/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimSitesGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimSitesGraphsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.site = httpRes?.data;
             }
             break;
@@ -10032,8 +10438,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimSitesList - Call to super to allow for caching
-  DcimSitesList(
+  /**
+   * dcimSitesList - Call to super to allow for caching
+  **/
+  dcimSitesList(
     req: operations.DcimSitesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimSitesListResponse> {
@@ -10041,11 +10449,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimSitesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/sites/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10054,17 +10463,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimSitesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimSitesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimSitesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10076,7 +10486,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimSitesPartialUpdate(
+  dcimSitesPartialUpdate(
     req: operations.DcimSitesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimSitesPartialUpdateResponse> {
@@ -10084,40 +10494,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimSitesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/sites/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimSitesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimSitesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.site = httpRes?.data;
             }
             break;
@@ -10129,8 +10539,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimSitesRead - Call to super to allow for caching
-  DcimSitesRead(
+  /**
+   * dcimSitesRead - Call to super to allow for caching
+  **/
+  dcimSitesRead(
     req: operations.DcimSitesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimSitesReadResponse> {
@@ -10138,22 +10550,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimSitesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/sites/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimSitesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimSitesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.site = httpRes?.data;
             }
             break;
@@ -10165,7 +10579,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimSitesUpdate(
+  dcimSitesUpdate(
     req: operations.DcimSitesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimSitesUpdateResponse> {
@@ -10173,40 +10587,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimSitesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/sites/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimSitesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimSitesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.site = httpRes?.data;
             }
             break;
@@ -10218,7 +10632,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimVirtualChassisCreate(
+  dcimVirtualChassisCreate(
     req: operations.DcimVirtualChassisCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimVirtualChassisCreateResponse> {
@@ -10226,40 +10640,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimVirtualChassisCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/virtual-chassis/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimVirtualChassisCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimVirtualChassisCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualChassis = httpRes?.data;
             }
             break;
@@ -10271,7 +10685,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimVirtualChassisDelete(
+  dcimVirtualChassisDelete(
     req: operations.DcimVirtualChassisDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimVirtualChassisDeleteResponse> {
@@ -10279,21 +10693,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimVirtualChassisDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/virtual-chassis/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimVirtualChassisDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DcimVirtualChassisDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -10303,8 +10719,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimVirtualChassisList - Call to super to allow for caching
-  DcimVirtualChassisList(
+  /**
+   * dcimVirtualChassisList - Call to super to allow for caching
+  **/
+  dcimVirtualChassisList(
     req: operations.DcimVirtualChassisListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimVirtualChassisListResponse> {
@@ -10312,11 +10730,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimVirtualChassisListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/dcim/virtual-chassis/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10325,17 +10744,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimVirtualChassisListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimVirtualChassisListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dcimVirtualChassisList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10347,7 +10767,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimVirtualChassisPartialUpdate(
+  dcimVirtualChassisPartialUpdate(
     req: operations.DcimVirtualChassisPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimVirtualChassisPartialUpdateResponse> {
@@ -10355,40 +10775,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimVirtualChassisPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/virtual-chassis/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimVirtualChassisPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimVirtualChassisPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualChassis = httpRes?.data;
             }
             break;
@@ -10400,8 +10820,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // DcimVirtualChassisRead - Call to super to allow for caching
-  DcimVirtualChassisRead(
+  /**
+   * dcimVirtualChassisRead - Call to super to allow for caching
+  **/
+  dcimVirtualChassisRead(
     req: operations.DcimVirtualChassisReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimVirtualChassisReadResponse> {
@@ -10409,22 +10831,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimVirtualChassisReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/virtual-chassis/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimVirtualChassisReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimVirtualChassisReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualChassis = httpRes?.data;
             }
             break;
@@ -10436,7 +10860,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  DcimVirtualChassisUpdate(
+  dcimVirtualChassisUpdate(
     req: operations.DcimVirtualChassisUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DcimVirtualChassisUpdateResponse> {
@@ -10444,40 +10868,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.DcimVirtualChassisUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/dcim/virtual-chassis/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DcimVirtualChassisUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DcimVirtualChassisUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualChassis = httpRes?.data;
             }
             break;
@@ -10489,25 +10913,26 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasCustomFieldChoicesList(
-    
+  extrasCustomFieldChoicesList(
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasCustomFieldChoicesListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/_custom_field_choices/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasCustomFieldChoicesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ExtrasCustomFieldChoicesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -10517,7 +10942,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasCustomFieldChoicesRead(
+  extrasCustomFieldChoicesRead(
     req: operations.ExtrasCustomFieldChoicesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasCustomFieldChoicesReadResponse> {
@@ -10525,21 +10950,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasCustomFieldChoicesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/_custom_field_choices/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasCustomFieldChoicesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ExtrasCustomFieldChoicesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -10549,7 +10976,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasConfigContextsCreate(
+  extrasConfigContextsCreate(
     req: operations.ExtrasConfigContextsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasConfigContextsCreateResponse> {
@@ -10557,40 +10984,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasConfigContextsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/config-contexts/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasConfigContextsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasConfigContextsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.configContext = httpRes?.data;
             }
             break;
@@ -10602,7 +11029,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasConfigContextsDelete(
+  extrasConfigContextsDelete(
     req: operations.ExtrasConfigContextsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasConfigContextsDeleteResponse> {
@@ -10610,21 +11037,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasConfigContextsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/config-contexts/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasConfigContextsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ExtrasConfigContextsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -10634,8 +11063,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasConfigContextsList - Call to super to allow for caching
-  ExtrasConfigContextsList(
+  /**
+   * extrasConfigContextsList - Call to super to allow for caching
+  **/
+  extrasConfigContextsList(
     req: operations.ExtrasConfigContextsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasConfigContextsListResponse> {
@@ -10643,11 +11074,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasConfigContextsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/config-contexts/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10656,17 +11088,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasConfigContextsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasConfigContextsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.extrasConfigContextsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10678,7 +11111,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasConfigContextsPartialUpdate(
+  extrasConfigContextsPartialUpdate(
     req: operations.ExtrasConfigContextsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasConfigContextsPartialUpdateResponse> {
@@ -10686,40 +11119,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasConfigContextsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/config-contexts/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasConfigContextsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasConfigContextsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.configContext = httpRes?.data;
             }
             break;
@@ -10731,8 +11164,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasConfigContextsRead - Call to super to allow for caching
-  ExtrasConfigContextsRead(
+  /**
+   * extrasConfigContextsRead - Call to super to allow for caching
+  **/
+  extrasConfigContextsRead(
     req: operations.ExtrasConfigContextsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasConfigContextsReadResponse> {
@@ -10740,22 +11175,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasConfigContextsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/config-contexts/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasConfigContextsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasConfigContextsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.configContext = httpRes?.data;
             }
             break;
@@ -10767,7 +11204,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasConfigContextsUpdate(
+  extrasConfigContextsUpdate(
     req: operations.ExtrasConfigContextsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasConfigContextsUpdateResponse> {
@@ -10775,40 +11212,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasConfigContextsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/config-contexts/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasConfigContextsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasConfigContextsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.configContext = httpRes?.data;
             }
             break;
@@ -10820,7 +11257,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasExportTemplatesCreate(
+  extrasExportTemplatesCreate(
     req: operations.ExtrasExportTemplatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasExportTemplatesCreateResponse> {
@@ -10828,40 +11265,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasExportTemplatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/export-templates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasExportTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasExportTemplatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.exportTemplate = httpRes?.data;
             }
             break;
@@ -10873,7 +11310,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasExportTemplatesDelete(
+  extrasExportTemplatesDelete(
     req: operations.ExtrasExportTemplatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasExportTemplatesDeleteResponse> {
@@ -10881,21 +11318,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasExportTemplatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/export-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasExportTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ExtrasExportTemplatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -10905,8 +11344,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasExportTemplatesList - Call to super to allow for caching
-  ExtrasExportTemplatesList(
+  /**
+   * extrasExportTemplatesList - Call to super to allow for caching
+  **/
+  extrasExportTemplatesList(
     req: operations.ExtrasExportTemplatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasExportTemplatesListResponse> {
@@ -10914,11 +11355,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasExportTemplatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/export-templates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10927,17 +11369,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasExportTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasExportTemplatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.extrasExportTemplatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10949,7 +11392,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasExportTemplatesPartialUpdate(
+  extrasExportTemplatesPartialUpdate(
     req: operations.ExtrasExportTemplatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasExportTemplatesPartialUpdateResponse> {
@@ -10957,40 +11400,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasExportTemplatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/export-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasExportTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasExportTemplatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.exportTemplate = httpRes?.data;
             }
             break;
@@ -11002,8 +11445,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasExportTemplatesRead - Call to super to allow for caching
-  ExtrasExportTemplatesRead(
+  /**
+   * extrasExportTemplatesRead - Call to super to allow for caching
+  **/
+  extrasExportTemplatesRead(
     req: operations.ExtrasExportTemplatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasExportTemplatesReadResponse> {
@@ -11011,22 +11456,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasExportTemplatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/export-templates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasExportTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasExportTemplatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.exportTemplate = httpRes?.data;
             }
             break;
@@ -11038,7 +11485,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasExportTemplatesUpdate(
+  extrasExportTemplatesUpdate(
     req: operations.ExtrasExportTemplatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasExportTemplatesUpdateResponse> {
@@ -11046,40 +11493,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasExportTemplatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/export-templates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasExportTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasExportTemplatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.exportTemplate = httpRes?.data;
             }
             break;
@@ -11091,7 +11538,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasGraphsCreate(
+  extrasGraphsCreate(
     req: operations.ExtrasGraphsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasGraphsCreateResponse> {
@@ -11099,40 +11546,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasGraphsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/graphs/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasGraphsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasGraphsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.graph = httpRes?.data;
             }
             break;
@@ -11144,7 +11591,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasGraphsDelete(
+  extrasGraphsDelete(
     req: operations.ExtrasGraphsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasGraphsDeleteResponse> {
@@ -11152,21 +11599,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasGraphsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/graphs/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasGraphsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ExtrasGraphsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -11176,8 +11625,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasGraphsList - Call to super to allow for caching
-  ExtrasGraphsList(
+  /**
+   * extrasGraphsList - Call to super to allow for caching
+  **/
+  extrasGraphsList(
     req: operations.ExtrasGraphsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasGraphsListResponse> {
@@ -11185,11 +11636,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasGraphsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/graphs/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11198,17 +11650,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasGraphsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasGraphsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.extrasGraphsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11220,7 +11673,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasGraphsPartialUpdate(
+  extrasGraphsPartialUpdate(
     req: operations.ExtrasGraphsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasGraphsPartialUpdateResponse> {
@@ -11228,40 +11681,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasGraphsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/graphs/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasGraphsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasGraphsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.graph = httpRes?.data;
             }
             break;
@@ -11273,8 +11726,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasGraphsRead - Call to super to allow for caching
-  ExtrasGraphsRead(
+  /**
+   * extrasGraphsRead - Call to super to allow for caching
+  **/
+  extrasGraphsRead(
     req: operations.ExtrasGraphsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasGraphsReadResponse> {
@@ -11282,22 +11737,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasGraphsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/graphs/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasGraphsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasGraphsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.graph = httpRes?.data;
             }
             break;
@@ -11309,7 +11766,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasGraphsUpdate(
+  extrasGraphsUpdate(
     req: operations.ExtrasGraphsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasGraphsUpdateResponse> {
@@ -11317,40 +11774,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasGraphsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/graphs/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasGraphsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasGraphsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.graph = httpRes?.data;
             }
             break;
@@ -11362,7 +11819,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasImageAttachmentsCreate(
+  extrasImageAttachmentsCreate(
     req: operations.ExtrasImageAttachmentsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasImageAttachmentsCreateResponse> {
@@ -11370,40 +11827,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasImageAttachmentsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/image-attachments/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasImageAttachmentsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasImageAttachmentsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.imageAttachment = httpRes?.data;
             }
             break;
@@ -11415,7 +11872,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasImageAttachmentsDelete(
+  extrasImageAttachmentsDelete(
     req: operations.ExtrasImageAttachmentsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasImageAttachmentsDeleteResponse> {
@@ -11423,21 +11880,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasImageAttachmentsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/image-attachments/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasImageAttachmentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ExtrasImageAttachmentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -11447,8 +11906,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasImageAttachmentsList - Call to super to allow for caching
-  ExtrasImageAttachmentsList(
+  /**
+   * extrasImageAttachmentsList - Call to super to allow for caching
+  **/
+  extrasImageAttachmentsList(
     req: operations.ExtrasImageAttachmentsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasImageAttachmentsListResponse> {
@@ -11456,11 +11917,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasImageAttachmentsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/image-attachments/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11469,17 +11931,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasImageAttachmentsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasImageAttachmentsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.extrasImageAttachmentsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11491,7 +11954,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasImageAttachmentsPartialUpdate(
+  extrasImageAttachmentsPartialUpdate(
     req: operations.ExtrasImageAttachmentsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasImageAttachmentsPartialUpdateResponse> {
@@ -11499,40 +11962,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasImageAttachmentsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/image-attachments/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasImageAttachmentsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasImageAttachmentsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.imageAttachment = httpRes?.data;
             }
             break;
@@ -11544,8 +12007,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasImageAttachmentsRead - Call to super to allow for caching
-  ExtrasImageAttachmentsRead(
+  /**
+   * extrasImageAttachmentsRead - Call to super to allow for caching
+  **/
+  extrasImageAttachmentsRead(
     req: operations.ExtrasImageAttachmentsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasImageAttachmentsReadResponse> {
@@ -11553,22 +12018,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasImageAttachmentsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/image-attachments/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasImageAttachmentsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasImageAttachmentsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.imageAttachment = httpRes?.data;
             }
             break;
@@ -11580,7 +12047,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasImageAttachmentsUpdate(
+  extrasImageAttachmentsUpdate(
     req: operations.ExtrasImageAttachmentsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasImageAttachmentsUpdateResponse> {
@@ -11588,40 +12055,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasImageAttachmentsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/image-attachments/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasImageAttachmentsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasImageAttachmentsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.imageAttachment = httpRes?.data;
             }
             break;
@@ -11633,8 +12100,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasObjectChangesList - Retrieve a list of recent changes.
-  ExtrasObjectChangesList(
+  /**
+   * extrasObjectChangesList - Retrieve a list of recent changes.
+  **/
+  extrasObjectChangesList(
     req: operations.ExtrasObjectChangesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasObjectChangesListResponse> {
@@ -11642,11 +12111,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasObjectChangesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/object-changes/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11655,17 +12125,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasObjectChangesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasObjectChangesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.extrasObjectChangesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11677,8 +12148,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasObjectChangesRead - Retrieve a list of recent changes.
-  ExtrasObjectChangesRead(
+  /**
+   * extrasObjectChangesRead - Retrieve a list of recent changes.
+  **/
+  extrasObjectChangesRead(
     req: operations.ExtrasObjectChangesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasObjectChangesReadResponse> {
@@ -11686,22 +12159,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasObjectChangesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/object-changes/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasObjectChangesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasObjectChangesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectChange = httpRes?.data;
             }
             break;
@@ -11713,26 +12188,29 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasReportsList - Compile all reports and their related results (if any). Result data is deferred in the list view.
-  ExtrasReportsList(
-    
+  /**
+   * extrasReportsList - Compile all reports and their related results (if any). Result data is deferred in the list view.
+  **/
+  extrasReportsList(
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasReportsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/reports/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasReportsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ExtrasReportsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -11742,8 +12220,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasReportsRead - Retrieve a single Report identified as "<module>.<report>".
-  ExtrasReportsRead(
+  /**
+   * extrasReportsRead - Retrieve a single Report identified as "<module>.<report>".
+  **/
+  extrasReportsRead(
     req: operations.ExtrasReportsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasReportsReadResponse> {
@@ -11751,21 +12231,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasReportsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/reports/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasReportsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ExtrasReportsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -11775,8 +12257,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasReportsRun - Run a Report and create a new ReportResult, overwriting any previous result for the Report.
-  ExtrasReportsRun(
+  /**
+   * extrasReportsRun - Run a Report and create a new ReportResult, overwriting any previous result for the Report.
+  **/
+  extrasReportsRun(
     req: operations.ExtrasReportsRunRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasReportsRunResponse> {
@@ -11784,21 +12268,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasReportsRunRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/reports/{id}/run/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasReportsRunResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.ExtrasReportsRunResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -11808,25 +12294,26 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasScriptsList(
-    
+  extrasScriptsList(
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasScriptsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/scripts/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasScriptsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ExtrasScriptsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -11836,7 +12323,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasScriptsRead(
+  extrasScriptsRead(
     req: operations.ExtrasScriptsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasScriptsReadResponse> {
@@ -11844,21 +12331,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasScriptsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/scripts/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasScriptsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ExtrasScriptsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -11868,7 +12357,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasTagsCreate(
+  extrasTagsCreate(
     req: operations.ExtrasTagsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasTagsCreateResponse> {
@@ -11876,40 +12365,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasTagsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/tags/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasTagsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasTagsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tag = httpRes?.data;
             }
             break;
@@ -11921,7 +12410,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasTagsDelete(
+  extrasTagsDelete(
     req: operations.ExtrasTagsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasTagsDeleteResponse> {
@@ -11929,21 +12418,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasTagsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/tags/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasTagsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.ExtrasTagsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -11953,8 +12444,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasTagsList - Call to super to allow for caching
-  ExtrasTagsList(
+  /**
+   * extrasTagsList - Call to super to allow for caching
+  **/
+  extrasTagsList(
     req: operations.ExtrasTagsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasTagsListResponse> {
@@ -11962,11 +12455,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasTagsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/extras/tags/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11975,17 +12469,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasTagsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasTagsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.extrasTagsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11997,7 +12492,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasTagsPartialUpdate(
+  extrasTagsPartialUpdate(
     req: operations.ExtrasTagsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasTagsPartialUpdateResponse> {
@@ -12005,40 +12500,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasTagsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/tags/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasTagsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasTagsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tag = httpRes?.data;
             }
             break;
@@ -12050,8 +12545,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // ExtrasTagsRead - Call to super to allow for caching
-  ExtrasTagsRead(
+  /**
+   * extrasTagsRead - Call to super to allow for caching
+  **/
+  extrasTagsRead(
     req: operations.ExtrasTagsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasTagsReadResponse> {
@@ -12059,22 +12556,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasTagsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/tags/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasTagsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasTagsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tag = httpRes?.data;
             }
             break;
@@ -12086,7 +12585,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  ExtrasTagsUpdate(
+  extrasTagsUpdate(
     req: operations.ExtrasTagsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExtrasTagsUpdateResponse> {
@@ -12094,40 +12593,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.ExtrasTagsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/extras/tags/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExtrasTagsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExtrasTagsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tag = httpRes?.data;
             }
             break;
@@ -12139,7 +12638,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamAggregatesCreate(
+  ipamAggregatesCreate(
     req: operations.IpamAggregatesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamAggregatesCreateResponse> {
@@ -12147,40 +12646,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamAggregatesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/aggregates/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamAggregatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamAggregatesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aggregate = httpRes?.data;
             }
             break;
@@ -12192,7 +12691,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamAggregatesDelete(
+  ipamAggregatesDelete(
     req: operations.IpamAggregatesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamAggregatesDeleteResponse> {
@@ -12200,21 +12699,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamAggregatesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/aggregates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamAggregatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamAggregatesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -12224,8 +12725,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // IpamAggregatesList - Call to super to allow for caching
-  IpamAggregatesList(
+  /**
+   * ipamAggregatesList - Call to super to allow for caching
+  **/
+  ipamAggregatesList(
     req: operations.IpamAggregatesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamAggregatesListResponse> {
@@ -12233,11 +12736,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamAggregatesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/aggregates/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -12246,17 +12750,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamAggregatesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamAggregatesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamAggregatesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12268,7 +12773,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamAggregatesPartialUpdate(
+  ipamAggregatesPartialUpdate(
     req: operations.IpamAggregatesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamAggregatesPartialUpdateResponse> {
@@ -12276,40 +12781,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamAggregatesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/aggregates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamAggregatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamAggregatesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aggregate = httpRes?.data;
             }
             break;
@@ -12321,8 +12826,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // IpamAggregatesRead - Call to super to allow for caching
-  IpamAggregatesRead(
+  /**
+   * ipamAggregatesRead - Call to super to allow for caching
+  **/
+  ipamAggregatesRead(
     req: operations.IpamAggregatesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamAggregatesReadResponse> {
@@ -12330,22 +12837,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamAggregatesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/aggregates/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamAggregatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamAggregatesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aggregate = httpRes?.data;
             }
             break;
@@ -12357,7 +12866,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamAggregatesUpdate(
+  ipamAggregatesUpdate(
     req: operations.IpamAggregatesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamAggregatesUpdateResponse> {
@@ -12365,40 +12874,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamAggregatesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/aggregates/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamAggregatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamAggregatesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.aggregate = httpRes?.data;
             }
             break;
@@ -12410,7 +12919,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamIpAddressesCreate(
+  ipamIpAddressesCreate(
     req: operations.IpamIpAddressesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamIpAddressesCreateResponse> {
@@ -12418,40 +12927,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamIpAddressesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/ip-addresses/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamIpAddressesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamIpAddressesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
@@ -12463,7 +12972,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamIpAddressesDelete(
+  ipamIpAddressesDelete(
     req: operations.IpamIpAddressesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamIpAddressesDeleteResponse> {
@@ -12471,21 +12980,23 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamIpAddressesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/ip-addresses/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamIpAddressesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamIpAddressesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -12495,8 +13006,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // IpamIpAddressesList - Call to super to allow for caching
-  IpamIpAddressesList(
+  /**
+   * ipamIpAddressesList - Call to super to allow for caching
+  **/
+  ipamIpAddressesList(
     req: operations.IpamIpAddressesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamIpAddressesListResponse> {
@@ -12504,11 +13017,12 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamIpAddressesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/ip-addresses/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -12517,17 +13031,18 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamIpAddressesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamIpAddressesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamIpAddressesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12539,7 +13054,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamIpAddressesPartialUpdate(
+  ipamIpAddressesPartialUpdate(
     req: operations.IpamIpAddressesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamIpAddressesPartialUpdateResponse> {
@@ -12547,40 +13062,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamIpAddressesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/ip-addresses/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamIpAddressesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamIpAddressesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
@@ -12592,8 +13107,10 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // IpamIpAddressesRead - Call to super to allow for caching
-  IpamIpAddressesRead(
+  /**
+   * ipamIpAddressesRead - Call to super to allow for caching
+  **/
+  ipamIpAddressesRead(
     req: operations.IpamIpAddressesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamIpAddressesReadResponse> {
@@ -12601,22 +13118,24 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamIpAddressesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/ip-addresses/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamIpAddressesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamIpAddressesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
@@ -12628,7 +13147,7 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  IpamIpAddressesUpdate(
+  ipamIpAddressesUpdate(
     req: operations.IpamIpAddressesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamIpAddressesUpdateResponse> {
@@ -12636,40 +13155,40 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
       req = new operations.IpamIpAddressesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/ip-addresses/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamIpAddressesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamIpAddressesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
@@ -12681,13 +13200,15 @@ via a protocol such as LLDP. Two query parameters must be included in the reques
   }
 
   
-  // IpamPrefixesAvailableIpsCreate - A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
-returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
-however results will not be paginated.
-
-The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
-invoked in parallel, which results in a race condition where multiple insertions can occur.
-  IpamPrefixesAvailableIpsCreate(
+  /**
+   * ipamPrefixesAvailableIpsCreate - A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
+   * returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
+   * however results will not be paginated.
+   * 
+   * The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
+   * invoked in parallel, which results in a race condition where multiple insertions can occur.
+  **/
+  ipamPrefixesAvailableIpsCreate(
     req: operations.IpamPrefixesAvailableIpsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesAvailableIpsCreateResponse> {
@@ -12695,40 +13216,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesAvailableIpsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/available-ips/", req.pathParams);
     
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-    
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let body: any;
-    if (reqBody instanceof FormData) body = reqBody;
-    else body = {...reqBody};
-    
-    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    const client: AxiosInstance = this._securityClient!;
     
     return client
-      .post(url, body, {
-        headers: headers,
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesAvailableIpsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesAvailableIpsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.availableIps = httpRes?.data;
             }
             break;
@@ -12740,13 +13245,15 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamPrefixesAvailableIpsRead - A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
-returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
-however results will not be paginated.
-
-The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
-invoked in parallel, which results in a race condition where multiple insertions can occur.
-  IpamPrefixesAvailableIpsRead(
+  /**
+   * ipamPrefixesAvailableIpsRead - A convenience method for returning available IP addresses within a prefix. By default, the number of IPs
+   * returned will be equivalent to PAGINATE_COUNT. An arbitrary limit (up to MAX_PAGE_SIZE, if set) may be passed,
+   * however results will not be paginated.
+   * 
+   * The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
+   * invoked in parallel, which results in a race condition where multiple insertions can occur.
+  **/
+  ipamPrefixesAvailableIpsRead(
     req: operations.IpamPrefixesAvailableIpsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesAvailableIpsReadResponse> {
@@ -12754,22 +13261,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesAvailableIpsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/available-ips/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesAvailableIpsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesAvailableIpsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.availableIps = httpRes?.data;
             }
             break;
@@ -12781,12 +13290,13 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamPrefixesAvailablePrefixesCreate - A convenience method for returning available child prefixes within a parent.
-  /** 
+  /**
+   * ipamPrefixesAvailablePrefixesCreate - A convenience method for returning available child prefixes within a parent.
+   *
    * The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
    * invoked in parallel, which results in a race condition where multiple insertions can occur.
   **/
-  IpamPrefixesAvailablePrefixesCreate(
+  ipamPrefixesAvailablePrefixesCreate(
     req: operations.IpamPrefixesAvailablePrefixesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesAvailablePrefixesCreateResponse> {
@@ -12794,40 +13304,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesAvailablePrefixesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/available-prefixes/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesAvailablePrefixesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesAvailablePrefixesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.availablePrefixes = httpRes?.data;
             }
             break;
@@ -12839,12 +13349,13 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamPrefixesAvailablePrefixesRead - A convenience method for returning available child prefixes within a parent.
-  /** 
+  /**
+   * ipamPrefixesAvailablePrefixesRead - A convenience method for returning available child prefixes within a parent.
+   *
    * The advisory lock decorator uses a PostgreSQL advisory lock to prevent this API from being
    * invoked in parallel, which results in a race condition where multiple insertions can occur.
   **/
-  IpamPrefixesAvailablePrefixesRead(
+  ipamPrefixesAvailablePrefixesRead(
     req: operations.IpamPrefixesAvailablePrefixesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesAvailablePrefixesReadResponse> {
@@ -12852,22 +13363,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesAvailablePrefixesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/available-prefixes/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesAvailablePrefixesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesAvailablePrefixesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.availablePrefixes = httpRes?.data;
             }
             break;
@@ -12879,7 +13392,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamPrefixesCreate(
+  ipamPrefixesCreate(
     req: operations.IpamPrefixesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesCreateResponse> {
@@ -12887,40 +13400,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/prefixes/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.prefix = httpRes?.data;
             }
             break;
@@ -12932,7 +13445,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamPrefixesDelete(
+  ipamPrefixesDelete(
     req: operations.IpamPrefixesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesDeleteResponse> {
@@ -12940,21 +13453,23 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamPrefixesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -12964,8 +13479,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamPrefixesList - Call to super to allow for caching
-  IpamPrefixesList(
+  /**
+   * ipamPrefixesList - Call to super to allow for caching
+  **/
+  ipamPrefixesList(
     req: operations.IpamPrefixesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesListResponse> {
@@ -12973,11 +13490,12 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/prefixes/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -12986,17 +13504,18 @@ invoked in parallel, which results in a race condition where multiple insertions
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamPrefixesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13008,7 +13527,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamPrefixesPartialUpdate(
+  ipamPrefixesPartialUpdate(
     req: operations.IpamPrefixesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesPartialUpdateResponse> {
@@ -13016,40 +13535,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.prefix = httpRes?.data;
             }
             break;
@@ -13061,8 +13580,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamPrefixesRead - Call to super to allow for caching
-  IpamPrefixesRead(
+  /**
+   * ipamPrefixesRead - Call to super to allow for caching
+  **/
+  ipamPrefixesRead(
     req: operations.IpamPrefixesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesReadResponse> {
@@ -13070,22 +13591,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.prefix = httpRes?.data;
             }
             break;
@@ -13097,7 +13620,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamPrefixesUpdate(
+  ipamPrefixesUpdate(
     req: operations.IpamPrefixesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamPrefixesUpdateResponse> {
@@ -13105,40 +13628,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamPrefixesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/prefixes/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamPrefixesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamPrefixesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.prefix = httpRes?.data;
             }
             break;
@@ -13150,7 +13673,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRirsCreate(
+  ipamRirsCreate(
     req: operations.IpamRirsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRirsCreateResponse> {
@@ -13158,40 +13681,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRirsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/rirs/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRirsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRirsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rir = httpRes?.data;
             }
             break;
@@ -13203,7 +13726,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRirsDelete(
+  ipamRirsDelete(
     req: operations.IpamRirsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRirsDeleteResponse> {
@@ -13211,21 +13734,23 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRirsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/rirs/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRirsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamRirsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -13235,8 +13760,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamRirsList - Call to super to allow for caching
-  IpamRirsList(
+  /**
+   * ipamRirsList - Call to super to allow for caching
+  **/
+  ipamRirsList(
     req: operations.IpamRirsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRirsListResponse> {
@@ -13244,11 +13771,12 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRirsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/rirs/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -13257,17 +13785,18 @@ invoked in parallel, which results in a race condition where multiple insertions
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRirsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRirsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamRirsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13279,7 +13808,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRirsPartialUpdate(
+  ipamRirsPartialUpdate(
     req: operations.IpamRirsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRirsPartialUpdateResponse> {
@@ -13287,40 +13816,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRirsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/rirs/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRirsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRirsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rir = httpRes?.data;
             }
             break;
@@ -13332,8 +13861,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamRirsRead - Call to super to allow for caching
-  IpamRirsRead(
+  /**
+   * ipamRirsRead - Call to super to allow for caching
+  **/
+  ipamRirsRead(
     req: operations.IpamRirsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRirsReadResponse> {
@@ -13341,22 +13872,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRirsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/rirs/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRirsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRirsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rir = httpRes?.data;
             }
             break;
@@ -13368,7 +13901,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRirsUpdate(
+  ipamRirsUpdate(
     req: operations.IpamRirsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRirsUpdateResponse> {
@@ -13376,40 +13909,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRirsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/rirs/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRirsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRirsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rir = httpRes?.data;
             }
             break;
@@ -13421,7 +13954,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRolesCreate(
+  ipamRolesCreate(
     req: operations.IpamRolesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRolesCreateResponse> {
@@ -13429,40 +13962,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRolesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/roles/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.role = httpRes?.data;
             }
             break;
@@ -13474,7 +14007,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRolesDelete(
+  ipamRolesDelete(
     req: operations.IpamRolesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRolesDeleteResponse> {
@@ -13482,21 +14015,23 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRolesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -13506,8 +14041,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamRolesList - Call to super to allow for caching
-  IpamRolesList(
+  /**
+   * ipamRolesList - Call to super to allow for caching
+  **/
+  ipamRolesList(
     req: operations.IpamRolesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRolesListResponse> {
@@ -13515,11 +14052,12 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRolesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/roles/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -13528,17 +14066,18 @@ invoked in parallel, which results in a race condition where multiple insertions
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamRolesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13550,7 +14089,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRolesPartialUpdate(
+  ipamRolesPartialUpdate(
     req: operations.IpamRolesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRolesPartialUpdateResponse> {
@@ -13558,40 +14097,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRolesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.role = httpRes?.data;
             }
             break;
@@ -13603,8 +14142,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamRolesRead - Call to super to allow for caching
-  IpamRolesRead(
+  /**
+   * ipamRolesRead - Call to super to allow for caching
+  **/
+  ipamRolesRead(
     req: operations.IpamRolesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRolesReadResponse> {
@@ -13612,22 +14153,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRolesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.role = httpRes?.data;
             }
             break;
@@ -13639,7 +14182,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamRolesUpdate(
+  ipamRolesUpdate(
     req: operations.IpamRolesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamRolesUpdateResponse> {
@@ -13647,40 +14190,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamRolesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.role = httpRes?.data;
             }
             break;
@@ -13692,7 +14235,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamServicesCreate(
+  ipamServicesCreate(
     req: operations.IpamServicesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamServicesCreateResponse> {
@@ -13700,40 +14243,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamServicesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/services/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamServicesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamServicesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.service = httpRes?.data;
             }
             break;
@@ -13745,7 +14288,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamServicesDelete(
+  ipamServicesDelete(
     req: operations.IpamServicesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamServicesDeleteResponse> {
@@ -13753,21 +14296,23 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamServicesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/services/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamServicesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamServicesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -13777,8 +14322,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamServicesList - Call to super to allow for caching
-  IpamServicesList(
+  /**
+   * ipamServicesList - Call to super to allow for caching
+  **/
+  ipamServicesList(
     req: operations.IpamServicesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamServicesListResponse> {
@@ -13786,11 +14333,12 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamServicesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/services/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -13799,17 +14347,18 @@ invoked in parallel, which results in a race condition where multiple insertions
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamServicesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamServicesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamServicesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13821,7 +14370,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamServicesPartialUpdate(
+  ipamServicesPartialUpdate(
     req: operations.IpamServicesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamServicesPartialUpdateResponse> {
@@ -13829,40 +14378,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamServicesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/services/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamServicesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamServicesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.service = httpRes?.data;
             }
             break;
@@ -13874,8 +14423,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamServicesRead - Call to super to allow for caching
-  IpamServicesRead(
+  /**
+   * ipamServicesRead - Call to super to allow for caching
+  **/
+  ipamServicesRead(
     req: operations.IpamServicesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamServicesReadResponse> {
@@ -13883,22 +14434,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamServicesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/services/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamServicesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamServicesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.service = httpRes?.data;
             }
             break;
@@ -13910,7 +14463,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamServicesUpdate(
+  ipamServicesUpdate(
     req: operations.IpamServicesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamServicesUpdateResponse> {
@@ -13918,40 +14471,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamServicesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/services/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamServicesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamServicesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.service = httpRes?.data;
             }
             break;
@@ -13963,7 +14516,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlanGroupsCreate(
+  ipamVlanGroupsCreate(
     req: operations.IpamVlanGroupsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlanGroupsCreateResponse> {
@@ -13971,40 +14524,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlanGroupsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/vlan-groups/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlanGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlanGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlanGroup = httpRes?.data;
             }
             break;
@@ -14016,7 +14569,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlanGroupsDelete(
+  ipamVlanGroupsDelete(
     req: operations.IpamVlanGroupsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlanGroupsDeleteResponse> {
@@ -14024,21 +14577,23 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlanGroupsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlan-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlanGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamVlanGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -14048,8 +14603,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamVlanGroupsList - Call to super to allow for caching
-  IpamVlanGroupsList(
+  /**
+   * ipamVlanGroupsList - Call to super to allow for caching
+  **/
+  ipamVlanGroupsList(
     req: operations.IpamVlanGroupsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlanGroupsListResponse> {
@@ -14057,11 +14614,12 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlanGroupsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/vlan-groups/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -14070,17 +14628,18 @@ invoked in parallel, which results in a race condition where multiple insertions
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlanGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlanGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamVlanGroupsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14092,7 +14651,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlanGroupsPartialUpdate(
+  ipamVlanGroupsPartialUpdate(
     req: operations.IpamVlanGroupsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlanGroupsPartialUpdateResponse> {
@@ -14100,40 +14659,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlanGroupsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlan-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlanGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlanGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlanGroup = httpRes?.data;
             }
             break;
@@ -14145,8 +14704,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamVlanGroupsRead - Call to super to allow for caching
-  IpamVlanGroupsRead(
+  /**
+   * ipamVlanGroupsRead - Call to super to allow for caching
+  **/
+  ipamVlanGroupsRead(
     req: operations.IpamVlanGroupsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlanGroupsReadResponse> {
@@ -14154,22 +14715,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlanGroupsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlan-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlanGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlanGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlanGroup = httpRes?.data;
             }
             break;
@@ -14181,7 +14744,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlanGroupsUpdate(
+  ipamVlanGroupsUpdate(
     req: operations.IpamVlanGroupsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlanGroupsUpdateResponse> {
@@ -14189,40 +14752,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlanGroupsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlan-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlanGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlanGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlanGroup = httpRes?.data;
             }
             break;
@@ -14234,7 +14797,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlansCreate(
+  ipamVlansCreate(
     req: operations.IpamVlansCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlansCreateResponse> {
@@ -14242,40 +14805,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlansCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/vlans/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlansCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlansCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlan = httpRes?.data;
             }
             break;
@@ -14287,7 +14850,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlansDelete(
+  ipamVlansDelete(
     req: operations.IpamVlansDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlansDeleteResponse> {
@@ -14295,21 +14858,23 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlansDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlans/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlansDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamVlansDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -14319,8 +14884,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamVlansList - Call to super to allow for caching
-  IpamVlansList(
+  /**
+   * ipamVlansList - Call to super to allow for caching
+  **/
+  ipamVlansList(
     req: operations.IpamVlansListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlansListResponse> {
@@ -14328,11 +14895,12 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlansListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/vlans/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -14341,17 +14909,18 @@ invoked in parallel, which results in a race condition where multiple insertions
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlansListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlansListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamVlansList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14363,7 +14932,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlansPartialUpdate(
+  ipamVlansPartialUpdate(
     req: operations.IpamVlansPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlansPartialUpdateResponse> {
@@ -14371,40 +14940,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlansPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlans/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlansPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlansPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlan = httpRes?.data;
             }
             break;
@@ -14416,8 +14985,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamVlansRead - Call to super to allow for caching
-  IpamVlansRead(
+  /**
+   * ipamVlansRead - Call to super to allow for caching
+  **/
+  ipamVlansRead(
     req: operations.IpamVlansReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlansReadResponse> {
@@ -14425,22 +14996,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlansReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlans/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlansReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlansReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlan = httpRes?.data;
             }
             break;
@@ -14452,7 +15025,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVlansUpdate(
+  ipamVlansUpdate(
     req: operations.IpamVlansUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVlansUpdateResponse> {
@@ -14460,40 +15033,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVlansUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vlans/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVlansUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVlansUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vlan = httpRes?.data;
             }
             break;
@@ -14505,7 +15078,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVrfsCreate(
+  ipamVrfsCreate(
     req: operations.IpamVrfsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVrfsCreateResponse> {
@@ -14513,40 +15086,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVrfsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/vrfs/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVrfsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVrfsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vrf = httpRes?.data;
             }
             break;
@@ -14558,7 +15131,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVrfsDelete(
+  ipamVrfsDelete(
     req: operations.IpamVrfsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVrfsDeleteResponse> {
@@ -14566,21 +15139,23 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVrfsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vrfs/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVrfsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IpamVrfsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -14590,8 +15165,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamVrfsList - Call to super to allow for caching
-  IpamVrfsList(
+  /**
+   * ipamVrfsList - Call to super to allow for caching
+  **/
+  ipamVrfsList(
     req: operations.IpamVrfsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVrfsListResponse> {
@@ -14599,11 +15176,12 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVrfsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/ipam/vrfs/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -14612,17 +15190,18 @@ invoked in parallel, which results in a race condition where multiple insertions
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVrfsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVrfsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipamVrfsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14634,7 +15213,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVrfsPartialUpdate(
+  ipamVrfsPartialUpdate(
     req: operations.IpamVrfsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVrfsPartialUpdateResponse> {
@@ -14642,40 +15221,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVrfsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vrfs/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVrfsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVrfsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vrf = httpRes?.data;
             }
             break;
@@ -14687,8 +15266,10 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // IpamVrfsRead - Call to super to allow for caching
-  IpamVrfsRead(
+  /**
+   * ipamVrfsRead - Call to super to allow for caching
+  **/
+  ipamVrfsRead(
     req: operations.IpamVrfsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVrfsReadResponse> {
@@ -14696,22 +15277,24 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVrfsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vrfs/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVrfsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVrfsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vrf = httpRes?.data;
             }
             break;
@@ -14723,7 +15306,7 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  IpamVrfsUpdate(
+  ipamVrfsUpdate(
     req: operations.IpamVrfsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IpamVrfsUpdateResponse> {
@@ -14731,40 +15314,40 @@ invoked in parallel, which results in a race condition where multiple insertions
       req = new operations.IpamVrfsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ipam/vrfs/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IpamVrfsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IpamVrfsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vrf = httpRes?.data;
             }
             break;
@@ -14776,32 +15359,34 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // SecretsGenerateRsaKeyPairList - This endpoint can be used to generate a new RSA key pair. The keys are returned in PEM format.
-  /** 
+  /**
+   * secretsGenerateRsaKeyPairList - This endpoint can be used to generate a new RSA key pair. The keys are returned in PEM format.
+   *
    * {
    *         "public_key": "<public key>",
    *         "private_key": "<private key>"
    *     }
   **/
-  SecretsGenerateRsaKeyPairList(
-    
+  secretsGenerateRsaKeyPairList(
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsGenerateRsaKeyPairListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/secrets/generate-rsa-key-pair/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsGenerateRsaKeyPairListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.SecretsGenerateRsaKeyPairListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -14811,39 +15396,42 @@ invoked in parallel, which results in a race condition where multiple insertions
   }
 
   
-  // SecretsGetSessionKeyCreate - Retrieve a temporary session key to use for encrypting and decrypting secrets via the API. The user's private RSA
-key is POSTed with the name `private_key`. An example:
-
-    curl -v -X POST -H "Authorization: Token <token>" -H "Accept: application/json; indent=4" \
-    --data-urlencode "private_key@<filename>" https://netbox/api/secrets/get-session-key/
-
-This request will yield a base64-encoded session key to be included in an `X-Session-Key` header in future requests:
-
-    {
-        "session_key": "+8t4SI6XikgVmB5+/urhozx9O5qCQANyOk1MNe6taRf="
-    }
-
-This endpoint accepts one optional parameter: `preserve_key`. If True and a session key exists, the existing session
-key will be returned instead of a new one.
-  SecretsGetSessionKeyCreate(
-    
+  /**
+   * secretsGetSessionKeyCreate - Retrieve a temporary session key to use for encrypting and decrypting secrets via the API. The user's private RSA
+   * key is POSTed with the name `private_key`. An example:
+   * 
+   *     curl -v -X POST -H "Authorization: Token <token>" -H "Accept: application/json; indent=4" \
+   *     --data-urlencode "private_key@<filename>" https://netbox/api/secrets/get-session-key/
+   * 
+   * This request will yield a base64-encoded session key to be included in an `X-Session-Key` header in future requests:
+   * 
+   *     {
+   *         "session_key": "+8t4SI6XikgVmB5+/urhozx9O5qCQANyOk1MNe6taRf="
+   *     }
+   * 
+   * This endpoint accepts one optional parameter: `preserve_key`. If True and a session key exists, the existing session
+   * key will be returned instead of a new one.
+  **/
+  secretsGetSessionKeyCreate(
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsGetSessionKeyCreateResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/secrets/get-session-key/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsGetSessionKeyCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.SecretsGetSessionKeyCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -14853,7 +15441,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretRolesCreate(
+  secretsSecretRolesCreate(
     req: operations.SecretsSecretRolesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretRolesCreateResponse> {
@@ -14861,40 +15449,40 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretRolesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/secrets/secret-roles/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretRolesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secretRole = httpRes?.data;
             }
             break;
@@ -14906,7 +15494,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretRolesDelete(
+  secretsSecretRolesDelete(
     req: operations.SecretsSecretRolesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretRolesDeleteResponse> {
@@ -14914,21 +15502,23 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretRolesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secret-roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.SecretsSecretRolesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -14938,8 +15528,10 @@ key will be returned instead of a new one.
   }
 
   
-  // SecretsSecretRolesList - Call to super to allow for caching
-  SecretsSecretRolesList(
+  /**
+   * secretsSecretRolesList - Call to super to allow for caching
+  **/
+  secretsSecretRolesList(
     req: operations.SecretsSecretRolesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretRolesListResponse> {
@@ -14947,11 +15539,12 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretRolesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/secrets/secret-roles/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -14960,17 +15553,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secretsSecretRolesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14982,7 +15576,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretRolesPartialUpdate(
+  secretsSecretRolesPartialUpdate(
     req: operations.SecretsSecretRolesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretRolesPartialUpdateResponse> {
@@ -14990,40 +15584,40 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretRolesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secret-roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretRolesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secretRole = httpRes?.data;
             }
             break;
@@ -15035,8 +15629,10 @@ key will be returned instead of a new one.
   }
 
   
-  // SecretsSecretRolesRead - Call to super to allow for caching
-  SecretsSecretRolesRead(
+  /**
+   * secretsSecretRolesRead - Call to super to allow for caching
+  **/
+  secretsSecretRolesRead(
     req: operations.SecretsSecretRolesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretRolesReadResponse> {
@@ -15044,22 +15640,24 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretRolesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secret-roles/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretRolesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secretRole = httpRes?.data;
             }
             break;
@@ -15071,7 +15669,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretRolesUpdate(
+  secretsSecretRolesUpdate(
     req: operations.SecretsSecretRolesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretRolesUpdateResponse> {
@@ -15079,40 +15677,40 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretRolesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secret-roles/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretRolesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secretRole = httpRes?.data;
             }
             break;
@@ -15124,7 +15722,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretsCreate(
+  secretsSecretsCreate(
     req: operations.SecretsSecretsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretsCreateResponse> {
@@ -15132,40 +15730,40 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/secrets/secrets/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secret = httpRes?.data;
             }
             break;
@@ -15177,7 +15775,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretsDelete(
+  secretsSecretsDelete(
     req: operations.SecretsSecretsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretsDeleteResponse> {
@@ -15185,21 +15783,23 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secrets/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.SecretsSecretsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -15209,7 +15809,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretsList(
+  secretsSecretsList(
     req: operations.SecretsSecretsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretsListResponse> {
@@ -15217,11 +15817,12 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/secrets/secrets/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -15230,17 +15831,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secretsSecretsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15252,7 +15854,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretsPartialUpdate(
+  secretsSecretsPartialUpdate(
     req: operations.SecretsSecretsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretsPartialUpdateResponse> {
@@ -15260,40 +15862,40 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secrets/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secret = httpRes?.data;
             }
             break;
@@ -15305,7 +15907,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretsRead(
+  secretsSecretsRead(
     req: operations.SecretsSecretsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretsReadResponse> {
@@ -15313,22 +15915,24 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secrets/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secret = httpRes?.data;
             }
             break;
@@ -15340,7 +15944,7 @@ key will be returned instead of a new one.
   }
 
   
-  SecretsSecretsUpdate(
+  secretsSecretsUpdate(
     req: operations.SecretsSecretsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SecretsSecretsUpdateResponse> {
@@ -15348,40 +15952,40 @@ key will be returned instead of a new one.
       req = new operations.SecretsSecretsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/secrets/secrets/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SecretsSecretsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SecretsSecretsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.secret = httpRes?.data;
             }
             break;
@@ -15393,7 +15997,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantGroupsCreate(
+  tenancyTenantGroupsCreate(
     req: operations.TenancyTenantGroupsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantGroupsCreateResponse> {
@@ -15401,40 +16005,40 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantGroupsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tenancy/tenant-groups/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenantGroup = httpRes?.data;
             }
             break;
@@ -15446,7 +16050,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantGroupsDelete(
+  tenancyTenantGroupsDelete(
     req: operations.TenancyTenantGroupsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantGroupsDeleteResponse> {
@@ -15454,21 +16058,23 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantGroupsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenant-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.TenancyTenantGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -15478,8 +16084,10 @@ key will be returned instead of a new one.
   }
 
   
-  // TenancyTenantGroupsList - Call to super to allow for caching
-  TenancyTenantGroupsList(
+  /**
+   * tenancyTenantGroupsList - Call to super to allow for caching
+  **/
+  tenancyTenantGroupsList(
     req: operations.TenancyTenantGroupsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantGroupsListResponse> {
@@ -15487,11 +16095,12 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantGroupsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tenancy/tenant-groups/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -15500,17 +16109,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenancyTenantGroupsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15522,7 +16132,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantGroupsPartialUpdate(
+  tenancyTenantGroupsPartialUpdate(
     req: operations.TenancyTenantGroupsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantGroupsPartialUpdateResponse> {
@@ -15530,40 +16140,40 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantGroupsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenant-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenantGroup = httpRes?.data;
             }
             break;
@@ -15575,8 +16185,10 @@ key will be returned instead of a new one.
   }
 
   
-  // TenancyTenantGroupsRead - Call to super to allow for caching
-  TenancyTenantGroupsRead(
+  /**
+   * tenancyTenantGroupsRead - Call to super to allow for caching
+  **/
+  tenancyTenantGroupsRead(
     req: operations.TenancyTenantGroupsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantGroupsReadResponse> {
@@ -15584,22 +16196,24 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantGroupsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenant-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenantGroup = httpRes?.data;
             }
             break;
@@ -15611,7 +16225,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantGroupsUpdate(
+  tenancyTenantGroupsUpdate(
     req: operations.TenancyTenantGroupsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantGroupsUpdateResponse> {
@@ -15619,40 +16233,40 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantGroupsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenant-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenantGroup = httpRes?.data;
             }
             break;
@@ -15664,7 +16278,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantsCreate(
+  tenancyTenantsCreate(
     req: operations.TenancyTenantsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantsCreateResponse> {
@@ -15672,40 +16286,40 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tenancy/tenants/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenant = httpRes?.data;
             }
             break;
@@ -15717,7 +16331,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantsDelete(
+  tenancyTenantsDelete(
     req: operations.TenancyTenantsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantsDeleteResponse> {
@@ -15725,21 +16339,23 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenants/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.TenancyTenantsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -15749,8 +16365,10 @@ key will be returned instead of a new one.
   }
 
   
-  // TenancyTenantsList - Call to super to allow for caching
-  TenancyTenantsList(
+  /**
+   * tenancyTenantsList - Call to super to allow for caching
+  **/
+  tenancyTenantsList(
     req: operations.TenancyTenantsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantsListResponse> {
@@ -15758,11 +16376,12 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tenancy/tenants/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -15771,17 +16390,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenancyTenantsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15793,7 +16413,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantsPartialUpdate(
+  tenancyTenantsPartialUpdate(
     req: operations.TenancyTenantsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantsPartialUpdateResponse> {
@@ -15801,40 +16421,40 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenants/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenant = httpRes?.data;
             }
             break;
@@ -15846,8 +16466,10 @@ key will be returned instead of a new one.
   }
 
   
-  // TenancyTenantsRead - Call to super to allow for caching
-  TenancyTenantsRead(
+  /**
+   * tenancyTenantsRead - Call to super to allow for caching
+  **/
+  tenancyTenantsRead(
     req: operations.TenancyTenantsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantsReadResponse> {
@@ -15855,22 +16477,24 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenants/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenant = httpRes?.data;
             }
             break;
@@ -15882,7 +16506,7 @@ key will be returned instead of a new one.
   }
 
   
-  TenancyTenantsUpdate(
+  tenancyTenantsUpdate(
     req: operations.TenancyTenantsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TenancyTenantsUpdateResponse> {
@@ -15890,40 +16514,40 @@ key will be returned instead of a new one.
       req = new operations.TenancyTenantsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tenancy/tenants/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TenancyTenantsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TenancyTenantsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenant = httpRes?.data;
             }
             break;
@@ -15935,7 +16559,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterGroupsCreate(
+  virtualizationClusterGroupsCreate(
     req: operations.VirtualizationClusterGroupsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterGroupsCreateResponse> {
@@ -15943,40 +16567,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterGroupsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/cluster-groups/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterGroupsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterGroup = httpRes?.data;
             }
             break;
@@ -15988,7 +16612,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterGroupsDelete(
+  virtualizationClusterGroupsDelete(
     req: operations.VirtualizationClusterGroupsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterGroupsDeleteResponse> {
@@ -15996,21 +16620,23 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterGroupsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.VirtualizationClusterGroupsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -16020,8 +16646,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationClusterGroupsList - Call to super to allow for caching
-  VirtualizationClusterGroupsList(
+  /**
+   * virtualizationClusterGroupsList - Call to super to allow for caching
+  **/
+  virtualizationClusterGroupsList(
     req: operations.VirtualizationClusterGroupsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterGroupsListResponse> {
@@ -16029,11 +16657,12 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterGroupsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/cluster-groups/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -16042,17 +16671,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterGroupsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualizationClusterGroupsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -16064,7 +16694,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterGroupsPartialUpdate(
+  virtualizationClusterGroupsPartialUpdate(
     req: operations.VirtualizationClusterGroupsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterGroupsPartialUpdateResponse> {
@@ -16072,40 +16702,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterGroupsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterGroupsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterGroup = httpRes?.data;
             }
             break;
@@ -16117,8 +16747,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationClusterGroupsRead - Call to super to allow for caching
-  VirtualizationClusterGroupsRead(
+  /**
+   * virtualizationClusterGroupsRead - Call to super to allow for caching
+  **/
+  virtualizationClusterGroupsRead(
     req: operations.VirtualizationClusterGroupsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterGroupsReadResponse> {
@@ -16126,22 +16758,24 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterGroupsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-groups/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterGroupsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterGroup = httpRes?.data;
             }
             break;
@@ -16153,7 +16787,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterGroupsUpdate(
+  virtualizationClusterGroupsUpdate(
     req: operations.VirtualizationClusterGroupsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterGroupsUpdateResponse> {
@@ -16161,40 +16795,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterGroupsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-groups/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterGroupsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterGroup = httpRes?.data;
             }
             break;
@@ -16206,7 +16840,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterTypesCreate(
+  virtualizationClusterTypesCreate(
     req: operations.VirtualizationClusterTypesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterTypesCreateResponse> {
@@ -16214,40 +16848,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterTypesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/cluster-types/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterTypesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterTypesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterType = httpRes?.data;
             }
             break;
@@ -16259,7 +16893,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterTypesDelete(
+  virtualizationClusterTypesDelete(
     req: operations.VirtualizationClusterTypesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterTypesDeleteResponse> {
@@ -16267,21 +16901,23 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterTypesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-types/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterTypesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.VirtualizationClusterTypesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -16291,8 +16927,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationClusterTypesList - Call to super to allow for caching
-  VirtualizationClusterTypesList(
+  /**
+   * virtualizationClusterTypesList - Call to super to allow for caching
+  **/
+  virtualizationClusterTypesList(
     req: operations.VirtualizationClusterTypesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterTypesListResponse> {
@@ -16300,11 +16938,12 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterTypesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/cluster-types/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -16313,17 +16952,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterTypesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterTypesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualizationClusterTypesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -16335,7 +16975,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterTypesPartialUpdate(
+  virtualizationClusterTypesPartialUpdate(
     req: operations.VirtualizationClusterTypesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterTypesPartialUpdateResponse> {
@@ -16343,40 +16983,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterTypesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-types/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterTypesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterTypesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterType = httpRes?.data;
             }
             break;
@@ -16388,8 +17028,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationClusterTypesRead - Call to super to allow for caching
-  VirtualizationClusterTypesRead(
+  /**
+   * virtualizationClusterTypesRead - Call to super to allow for caching
+  **/
+  virtualizationClusterTypesRead(
     req: operations.VirtualizationClusterTypesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterTypesReadResponse> {
@@ -16397,22 +17039,24 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterTypesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-types/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterTypesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterTypesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterType = httpRes?.data;
             }
             break;
@@ -16424,7 +17068,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClusterTypesUpdate(
+  virtualizationClusterTypesUpdate(
     req: operations.VirtualizationClusterTypesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClusterTypesUpdateResponse> {
@@ -16432,40 +17076,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClusterTypesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/cluster-types/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClusterTypesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClusterTypesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clusterType = httpRes?.data;
             }
             break;
@@ -16477,7 +17121,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClustersCreate(
+  virtualizationClustersCreate(
     req: operations.VirtualizationClustersCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClustersCreateResponse> {
@@ -16485,40 +17129,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClustersCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/clusters/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClustersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClustersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cluster = httpRes?.data;
             }
             break;
@@ -16530,7 +17174,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClustersDelete(
+  virtualizationClustersDelete(
     req: operations.VirtualizationClustersDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClustersDeleteResponse> {
@@ -16538,21 +17182,23 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClustersDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/clusters/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClustersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.VirtualizationClustersDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -16562,8 +17208,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationClustersList - Call to super to allow for caching
-  VirtualizationClustersList(
+  /**
+   * virtualizationClustersList - Call to super to allow for caching
+  **/
+  virtualizationClustersList(
     req: operations.VirtualizationClustersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClustersListResponse> {
@@ -16571,11 +17219,12 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClustersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/clusters/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -16584,17 +17233,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClustersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClustersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualizationClustersList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -16606,7 +17256,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClustersPartialUpdate(
+  virtualizationClustersPartialUpdate(
     req: operations.VirtualizationClustersPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClustersPartialUpdateResponse> {
@@ -16614,40 +17264,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClustersPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/clusters/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClustersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClustersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cluster = httpRes?.data;
             }
             break;
@@ -16659,8 +17309,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationClustersRead - Call to super to allow for caching
-  VirtualizationClustersRead(
+  /**
+   * virtualizationClustersRead - Call to super to allow for caching
+  **/
+  virtualizationClustersRead(
     req: operations.VirtualizationClustersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClustersReadResponse> {
@@ -16668,22 +17320,24 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClustersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/clusters/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClustersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClustersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cluster = httpRes?.data;
             }
             break;
@@ -16695,7 +17349,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationClustersUpdate(
+  virtualizationClustersUpdate(
     req: operations.VirtualizationClustersUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationClustersUpdateResponse> {
@@ -16703,40 +17357,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationClustersUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/clusters/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationClustersUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationClustersUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cluster = httpRes?.data;
             }
             break;
@@ -16748,7 +17402,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationInterfacesCreate(
+  virtualizationInterfacesCreate(
     req: operations.VirtualizationInterfacesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationInterfacesCreateResponse> {
@@ -16756,40 +17410,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationInterfacesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/interfaces/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationInterfacesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationInterfacesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineInterface = httpRes?.data;
             }
             break;
@@ -16801,7 +17455,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationInterfacesDelete(
+  virtualizationInterfacesDelete(
     req: operations.VirtualizationInterfacesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationInterfacesDeleteResponse> {
@@ -16809,21 +17463,23 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationInterfacesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/interfaces/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationInterfacesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.VirtualizationInterfacesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -16833,8 +17489,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationInterfacesList - Call to super to allow for caching
-  VirtualizationInterfacesList(
+  /**
+   * virtualizationInterfacesList - Call to super to allow for caching
+  **/
+  virtualizationInterfacesList(
     req: operations.VirtualizationInterfacesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationInterfacesListResponse> {
@@ -16842,11 +17500,12 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationInterfacesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/interfaces/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -16855,17 +17514,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationInterfacesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationInterfacesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualizationInterfacesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -16877,7 +17537,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationInterfacesPartialUpdate(
+  virtualizationInterfacesPartialUpdate(
     req: operations.VirtualizationInterfacesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationInterfacesPartialUpdateResponse> {
@@ -16885,40 +17545,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationInterfacesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/interfaces/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationInterfacesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationInterfacesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineInterface = httpRes?.data;
             }
             break;
@@ -16930,8 +17590,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationInterfacesRead - Call to super to allow for caching
-  VirtualizationInterfacesRead(
+  /**
+   * virtualizationInterfacesRead - Call to super to allow for caching
+  **/
+  virtualizationInterfacesRead(
     req: operations.VirtualizationInterfacesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationInterfacesReadResponse> {
@@ -16939,22 +17601,24 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationInterfacesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/interfaces/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationInterfacesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationInterfacesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineInterface = httpRes?.data;
             }
             break;
@@ -16966,7 +17630,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationInterfacesUpdate(
+  virtualizationInterfacesUpdate(
     req: operations.VirtualizationInterfacesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationInterfacesUpdateResponse> {
@@ -16974,40 +17638,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationInterfacesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/interfaces/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationInterfacesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationInterfacesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineInterface = httpRes?.data;
             }
             break;
@@ -17019,7 +17683,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationVirtualMachinesCreate(
+  virtualizationVirtualMachinesCreate(
     req: operations.VirtualizationVirtualMachinesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationVirtualMachinesCreateResponse> {
@@ -17027,40 +17691,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationVirtualMachinesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/virtual-machines/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationVirtualMachinesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationVirtualMachinesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineWithConfigContext = httpRes?.data;
             }
             break;
@@ -17072,7 +17736,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationVirtualMachinesDelete(
+  virtualizationVirtualMachinesDelete(
     req: operations.VirtualizationVirtualMachinesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationVirtualMachinesDeleteResponse> {
@@ -17080,21 +17744,23 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationVirtualMachinesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/virtual-machines/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationVirtualMachinesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.VirtualizationVirtualMachinesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -17104,8 +17770,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationVirtualMachinesList - Call to super to allow for caching
-  VirtualizationVirtualMachinesList(
+  /**
+   * virtualizationVirtualMachinesList - Call to super to allow for caching
+  **/
+  virtualizationVirtualMachinesList(
     req: operations.VirtualizationVirtualMachinesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationVirtualMachinesListResponse> {
@@ -17113,11 +17781,12 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationVirtualMachinesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/virtualization/virtual-machines/";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -17126,17 +17795,18 @@ key will be returned instead of a new one.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationVirtualMachinesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationVirtualMachinesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualizationVirtualMachinesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -17148,7 +17818,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationVirtualMachinesPartialUpdate(
+  virtualizationVirtualMachinesPartialUpdate(
     req: operations.VirtualizationVirtualMachinesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationVirtualMachinesPartialUpdateResponse> {
@@ -17156,40 +17826,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationVirtualMachinesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/virtual-machines/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationVirtualMachinesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationVirtualMachinesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineWithConfigContext = httpRes?.data;
             }
             break;
@@ -17201,8 +17871,10 @@ key will be returned instead of a new one.
   }
 
   
-  // VirtualizationVirtualMachinesRead - Call to super to allow for caching
-  VirtualizationVirtualMachinesRead(
+  /**
+   * virtualizationVirtualMachinesRead - Call to super to allow for caching
+  **/
+  virtualizationVirtualMachinesRead(
     req: operations.VirtualizationVirtualMachinesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationVirtualMachinesReadResponse> {
@@ -17210,22 +17882,24 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationVirtualMachinesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/virtual-machines/{id}/", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationVirtualMachinesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationVirtualMachinesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineWithConfigContext = httpRes?.data;
             }
             break;
@@ -17237,7 +17911,7 @@ key will be returned instead of a new one.
   }
 
   
-  VirtualizationVirtualMachinesUpdate(
+  virtualizationVirtualMachinesUpdate(
     req: operations.VirtualizationVirtualMachinesUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.VirtualizationVirtualMachinesUpdateResponse> {
@@ -17245,40 +17919,40 @@ key will be returned instead of a new one.
       req = new operations.VirtualizationVirtualMachinesUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/virtualization/virtual-machines/{id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.VirtualizationVirtualMachinesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.VirtualizationVirtualMachinesUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.virtualMachineWithConfigContext = httpRes?.data;
             }
             break;

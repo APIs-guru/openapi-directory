@@ -1,7 +1,8 @@
 
 
+
 export enum ActionConfigurationPropertyTypeEnum {
-    String = "String"
-,    Number = "Number"
-,    Boolean = "Boolean"
+    String = "String",
+    Number = "Number",
+    Boolean = "Boolean"
 }

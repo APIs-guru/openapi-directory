@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetContentproSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=terms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=terms" })
   terms: string;
 }
 
 
-export class GetContentproSearchRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetContentproSearchQueryParams;
-}
-
-
 export class GetContentproSearch200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=article" })
+  @SpeakeasyMetadata({ data: "json, name=article" })
   article?: shared.Article;
 
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: shared.ContentProCompany;
 
-  @Metadata({ data: "json, name=snippets" })
+  @SpeakeasyMetadata({ data: "json, name=snippets" })
   snippets?: shared.ContentProSnippets;
 }
 
 
 export class GetContentproSearch200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calls_per_month" })
+  @SpeakeasyMetadata({ data: "json, name=calls_per_month" })
   callsPerMonth?: string;
 
-  @Metadata({ data: "json, name=count_remaining" })
+  @SpeakeasyMetadata({ data: "json, name=count_remaining" })
   countRemaining?: string;
 
-  @Metadata({ data: "json, name=data", elemType: operations.GetContentproSearch200ApplicationJsonData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: GetContentproSearch200ApplicationJsonData })
   data?: GetContentproSearch200ApplicationJsonData[];
 
-  @Metadata({ data: "json, name=renewal_date" })
+  @SpeakeasyMetadata({ data: "json, name=renewal_date" })
   renewalDate?: string;
 }
 
 
+export class GetContentproSearchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetContentproSearchQueryParams;
+}
+
+
 export class GetContentproSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getContentproSearch200ApplicationJsonObject?: GetContentproSearch200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

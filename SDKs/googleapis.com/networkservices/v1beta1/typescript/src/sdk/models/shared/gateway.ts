@@ -1,9 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GatewayTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    OpenMesh = "OPEN_MESH"
-,    SecureWebGateway = "SECURE_WEB_GATEWAY"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    OpenMesh = "OPEN_MESH",
+    SecureWebGateway = "SECURE_WEB_GATEWAY"
+}
+
+
+// GatewayInput
+/** 
+ * Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway.
+**/
+export class GatewayInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ports" })
+  ports?: number[];
+
+  @SpeakeasyMetadata({ data: "json, name=scope" })
+  scope?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serverTlsPolicy" })
+  serverTlsPolicy?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: GatewayTypeEnum;
 }
 
 
@@ -12,33 +41,33 @@ export enum GatewayTypeEnum {
  * Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway.
 **/
 export class Gateway extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ports" })
+  @SpeakeasyMetadata({ data: "json, name=ports" })
   ports?: number[];
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=serverTlsPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=serverTlsPolicy" })
   serverTlsPolicy?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GatewayTypeEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

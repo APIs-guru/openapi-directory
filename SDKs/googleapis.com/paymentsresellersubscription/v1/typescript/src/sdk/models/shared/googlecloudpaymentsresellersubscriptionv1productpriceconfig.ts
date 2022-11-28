@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1Amount } from "./googlecloudpaymentsresellersubscriptionv1amount";
+
 
 
 // GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig
@@ -7,9 +8,9 @@ import { GoogleCloudPaymentsResellerSubscriptionV1Amount } from "./googlecloudpa
  * Configs the prices in an available region.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: GoogleCloudPaymentsResellerSubscriptionV1Amount;
 
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 }

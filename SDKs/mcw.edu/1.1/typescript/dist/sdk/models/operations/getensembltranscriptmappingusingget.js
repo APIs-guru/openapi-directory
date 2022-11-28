@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetEnsemblTranscriptMappingUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetEnsemblTranscriptMappingUsingGetPathParams, _super);
     function GetEnsemblTranscriptMappingUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
         __metadata("design:type", Number)
     ], GetEnsemblTranscriptMappingUsingGetPathParams.prototype, "rgdId", void 0);
     return GetEnsemblTranscriptMappingUsingGetPathParams;
@@ -41,7 +41,7 @@ var GetEnsemblTranscriptMappingUsingGetRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEnsemblTranscriptMappingUsingGetPathParams)
     ], GetEnsemblTranscriptMappingUsingGetRequest.prototype, "pathParams", void 0);
     return GetEnsemblTranscriptMappingUsingGetRequest;
@@ -53,15 +53,15 @@ var GetEnsemblTranscriptMappingUsingGetResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetEnsemblTranscriptMappingUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEnsemblTranscriptMappingUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEnsemblTranscriptMappingUsingGetResponse.prototype, "statusCode", void 0);
     return GetEnsemblTranscriptMappingUsingGetResponse;

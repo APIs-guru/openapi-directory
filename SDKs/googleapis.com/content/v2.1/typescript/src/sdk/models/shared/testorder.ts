@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestOrderDeliveryDetails } from "./testorderdeliverydetails";
 import { TestOrderLineItem } from "./testorderlineitem";
 import { TestOrderPickupDetails } from "./testorderpickupdetails";
@@ -7,43 +6,44 @@ import { OrderPromotion } from "./orderpromotion";
 import { Price } from "./price";
 
 
+
 export class TestOrder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryDetails" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryDetails" })
   deliveryDetails?: TestOrderDeliveryDetails;
 
-  @Metadata({ data: "json, name=enableOrderinvoices" })
+  @SpeakeasyMetadata({ data: "json, name=enableOrderinvoices" })
   enableOrderinvoices?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lineItems", elemType: shared.TestOrderLineItem })
+  @SpeakeasyMetadata({ data: "json, name=lineItems", elemType: TestOrderLineItem })
   lineItems?: TestOrderLineItem[];
 
-  @Metadata({ data: "json, name=notificationMode" })
+  @SpeakeasyMetadata({ data: "json, name=notificationMode" })
   notificationMode?: string;
 
-  @Metadata({ data: "json, name=pickupDetails" })
+  @SpeakeasyMetadata({ data: "json, name=pickupDetails" })
   pickupDetails?: TestOrderPickupDetails;
 
-  @Metadata({ data: "json, name=predefinedBillingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=predefinedBillingAddress" })
   predefinedBillingAddress?: string;
 
-  @Metadata({ data: "json, name=predefinedDeliveryAddress" })
+  @SpeakeasyMetadata({ data: "json, name=predefinedDeliveryAddress" })
   predefinedDeliveryAddress?: string;
 
-  @Metadata({ data: "json, name=predefinedEmail" })
+  @SpeakeasyMetadata({ data: "json, name=predefinedEmail" })
   predefinedEmail?: string;
 
-  @Metadata({ data: "json, name=predefinedPickupDetails" })
+  @SpeakeasyMetadata({ data: "json, name=predefinedPickupDetails" })
   predefinedPickupDetails?: string;
 
-  @Metadata({ data: "json, name=promotions", elemType: shared.OrderPromotion })
+  @SpeakeasyMetadata({ data: "json, name=promotions", elemType: OrderPromotion })
   promotions?: OrderPromotion[];
 
-  @Metadata({ data: "json, name=shippingCost" })
+  @SpeakeasyMetadata({ data: "json, name=shippingCost" })
   shippingCost?: Price;
 
-  @Metadata({ data: "json, name=shippingOption" })
+  @SpeakeasyMetadata({ data: "json, name=shippingOption" })
   shippingOption?: string;
 }

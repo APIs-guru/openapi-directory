@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicLinkInfo } from "./dynamiclinkinfo";
 export var ManagedShortLinkFlaggedAttributeEnum;
 (function (ManagedShortLinkFlaggedAttributeEnum) {
@@ -46,27 +46,27 @@ var ManagedShortLink = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", String)
     ], ManagedShortLink.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=flaggedAttribute" }),
+        SpeakeasyMetadata({ data: "json, name=flaggedAttribute" }),
         __metadata("design:type", Array)
     ], ManagedShortLink.prototype, "flaggedAttribute", void 0);
     __decorate([
-        Metadata({ data: "json, name=info" }),
+        SpeakeasyMetadata({ data: "json, name=info" }),
         __metadata("design:type", DynamicLinkInfo)
     ], ManagedShortLink.prototype, "info", void 0);
     __decorate([
-        Metadata({ data: "json, name=link" }),
+        SpeakeasyMetadata({ data: "json, name=link" }),
         __metadata("design:type", String)
     ], ManagedShortLink.prototype, "link", void 0);
     __decorate([
-        Metadata({ data: "json, name=linkName" }),
+        SpeakeasyMetadata({ data: "json, name=linkName" }),
         __metadata("design:type", String)
     ], ManagedShortLink.prototype, "linkName", void 0);
     __decorate([
-        Metadata({ data: "json, name=visibility" }),
+        SpeakeasyMetadata({ data: "json, name=visibility" }),
         __metadata("design:type", String)
     ], ManagedShortLink.prototype, "visibility", void 0);
     return ManagedShortLink;

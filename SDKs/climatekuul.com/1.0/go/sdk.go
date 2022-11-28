@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AirtravelCoordinates - airtravelCoordinates
 func (s *SDK) AirtravelCoordinates(ctx context.Context, request operations.AirtravelCoordinatesRequest) (*operations.AirtravelCoordinatesResponse, error) {
-	baseURL := operations.AirtravelCoordinatesServers[0]
+	baseURL := operations.AirtravelCoordinatesServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -72,7 +94,7 @@ func (s *SDK) AirtravelCoordinates(ctx context.Context, request operations.Airtr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -93,8 +115,9 @@ func (s *SDK) AirtravelCoordinates(ctx context.Context, request operations.Airtr
 	return res, nil
 }
 
+// AirtravelMultileg - airtravelMultileg
 func (s *SDK) AirtravelMultileg(ctx context.Context, request operations.AirtravelMultilegRequest) (*operations.AirtravelMultilegResponse, error) {
-	baseURL := operations.AirtravelMultilegServers[0]
+	baseURL := operations.AirtravelMultilegServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -116,7 +139,7 @@ func (s *SDK) AirtravelMultileg(ctx context.Context, request operations.Airtrave
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -137,8 +160,9 @@ func (s *SDK) AirtravelMultileg(ctx context.Context, request operations.Airtrave
 	return res, nil
 }
 
+// ConfirmCarbonOffset - confirmCarbonOffset
 func (s *SDK) ConfirmCarbonOffset(ctx context.Context, request operations.ConfirmCarbonOffsetRequest) (*operations.ConfirmCarbonOffsetResponse, error) {
-	baseURL := operations.ConfirmCarbonOffsetServers[0]
+	baseURL := operations.ConfirmCarbonOffsetServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -157,7 +181,7 @@ func (s *SDK) ConfirmCarbonOffset(ctx context.Context, request operations.Confir
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -178,8 +202,9 @@ func (s *SDK) ConfirmCarbonOffset(ctx context.Context, request operations.Confir
 	return res, nil
 }
 
+// ConfirmCarbonOffset1 - confirmCarbonOffset
 func (s *SDK) ConfirmCarbonOffset1(ctx context.Context, request operations.ConfirmCarbonOffset1Request) (*operations.ConfirmCarbonOffset1Response, error) {
-	baseURL := operations.ConfirmCarbonOffset1Servers[0]
+	baseURL := operations.ConfirmCarbonOffset1ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -198,7 +223,7 @@ func (s *SDK) ConfirmCarbonOffset1(ctx context.Context, request operations.Confi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -219,8 +244,9 @@ func (s *SDK) ConfirmCarbonOffset1(ctx context.Context, request operations.Confi
 	return res, nil
 }
 
+// ConfirmCarbonOffset3 - confirmCarbonOffset
 func (s *SDK) ConfirmCarbonOffset3(ctx context.Context, request operations.ConfirmCarbonOffset3Request) (*operations.ConfirmCarbonOffset3Response, error) {
-	baseURL := operations.ConfirmCarbonOffset3Servers[0]
+	baseURL := operations.ConfirmCarbonOffset3ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -239,7 +265,7 @@ func (s *SDK) ConfirmCarbonOffset3(ctx context.Context, request operations.Confi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -260,8 +286,9 @@ func (s *SDK) ConfirmCarbonOffset3(ctx context.Context, request operations.Confi
 	return res, nil
 }
 
+// ConfirmCarbonOffset4 - confirmCarbonOffset
 func (s *SDK) ConfirmCarbonOffset4(ctx context.Context, request operations.ConfirmCarbonOffset4Request) (*operations.ConfirmCarbonOffset4Response, error) {
-	baseURL := operations.ConfirmCarbonOffset4Servers[0]
+	baseURL := operations.ConfirmCarbonOffset4ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -280,7 +307,7 @@ func (s *SDK) ConfirmCarbonOffset4(ctx context.Context, request operations.Confi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -301,8 +328,9 @@ func (s *SDK) ConfirmCarbonOffset4(ctx context.Context, request operations.Confi
 	return res, nil
 }
 
+// ConfirmCarbonOffset5 - confirmCarbonOffset
 func (s *SDK) ConfirmCarbonOffset5(ctx context.Context, request operations.ConfirmCarbonOffset5Request) (*operations.ConfirmCarbonOffset5Response, error) {
-	baseURL := operations.ConfirmCarbonOffset5Servers[0]
+	baseURL := operations.ConfirmCarbonOffset5ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -321,7 +349,7 @@ func (s *SDK) ConfirmCarbonOffset5(ctx context.Context, request operations.Confi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -342,8 +370,9 @@ func (s *SDK) ConfirmCarbonOffset5(ctx context.Context, request operations.Confi
 	return res, nil
 }
 
+// ConfirmPayment - confirmPayment
 func (s *SDK) ConfirmPayment(ctx context.Context, request operations.ConfirmPaymentRequest) (*operations.ConfirmPaymentResponse, error) {
-	baseURL := operations.ConfirmPaymentServers[0]
+	baseURL := operations.ConfirmPaymentServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -362,7 +391,7 @@ func (s *SDK) ConfirmPayment(ctx context.Context, request operations.ConfirmPaym
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) ConfirmPayment(ctx context.Context, request operations.ConfirmPaym
 	return res, nil
 }
 
+// ConfirmPayment1 - confirmPayment
 func (s *SDK) ConfirmPayment1(ctx context.Context, request operations.ConfirmPayment1Request) (*operations.ConfirmPayment1Response, error) {
-	baseURL := operations.ConfirmPayment1Servers[0]
+	baseURL := operations.ConfirmPayment1ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -403,7 +433,7 @@ func (s *SDK) ConfirmPayment1(ctx context.Context, request operations.ConfirmPay
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +454,9 @@ func (s *SDK) ConfirmPayment1(ctx context.Context, request operations.ConfirmPay
 	return res, nil
 }
 
+// ConfirmPayment3 - confirmPayment
 func (s *SDK) ConfirmPayment3(ctx context.Context, request operations.ConfirmPayment3Request) (*operations.ConfirmPayment3Response, error) {
-	baseURL := operations.ConfirmPayment3Servers[0]
+	baseURL := operations.ConfirmPayment3ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -444,7 +475,7 @@ func (s *SDK) ConfirmPayment3(ctx context.Context, request operations.ConfirmPay
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -465,8 +496,9 @@ func (s *SDK) ConfirmPayment3(ctx context.Context, request operations.ConfirmPay
 	return res, nil
 }
 
+// ConfirmPayment4 - confirmPayment
 func (s *SDK) ConfirmPayment4(ctx context.Context, request operations.ConfirmPayment4Request) (*operations.ConfirmPayment4Response, error) {
-	baseURL := operations.ConfirmPayment4Servers[0]
+	baseURL := operations.ConfirmPayment4ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -485,7 +517,7 @@ func (s *SDK) ConfirmPayment4(ctx context.Context, request operations.ConfirmPay
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -506,8 +538,9 @@ func (s *SDK) ConfirmPayment4(ctx context.Context, request operations.ConfirmPay
 	return res, nil
 }
 
+// ConfirmPayment5 - confirmPayment
 func (s *SDK) ConfirmPayment5(ctx context.Context, request operations.ConfirmPayment5Request) (*operations.ConfirmPayment5Response, error) {
-	baseURL := operations.ConfirmPayment5Servers[0]
+	baseURL := operations.ConfirmPayment5ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -526,7 +559,7 @@ func (s *SDK) ConfirmPayment5(ctx context.Context, request operations.ConfirmPay
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -547,8 +580,9 @@ func (s *SDK) ConfirmPayment5(ctx context.Context, request operations.ConfirmPay
 	return res, nil
 }
 
+// ConfirmPaymentOfTransaction - confirmTransaction
 func (s *SDK) ConfirmPaymentOfTransaction(ctx context.Context, request operations.ConfirmPaymentOfTransactionRequest) (*operations.ConfirmPaymentOfTransactionResponse, error) {
-	baseURL := operations.ConfirmPaymentOfTransactionServers[0]
+	baseURL := operations.ConfirmPaymentOfTransactionServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -567,7 +601,7 @@ func (s *SDK) ConfirmPaymentOfTransaction(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -588,8 +622,9 @@ func (s *SDK) ConfirmPaymentOfTransaction(ctx context.Context, request operation
 	return res, nil
 }
 
+// ConfirmPaymentOfTransaction1 - confirmTransaction
 func (s *SDK) ConfirmPaymentOfTransaction1(ctx context.Context, request operations.ConfirmPaymentOfTransaction1Request) (*operations.ConfirmPaymentOfTransaction1Response, error) {
-	baseURL := operations.ConfirmPaymentOfTransaction1Servers[0]
+	baseURL := operations.ConfirmPaymentOfTransaction1ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -608,7 +643,7 @@ func (s *SDK) ConfirmPaymentOfTransaction1(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -629,8 +664,9 @@ func (s *SDK) ConfirmPaymentOfTransaction1(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ConfirmPaymentOfTransaction3 - confirmTransaction
 func (s *SDK) ConfirmPaymentOfTransaction3(ctx context.Context, request operations.ConfirmPaymentOfTransaction3Request) (*operations.ConfirmPaymentOfTransaction3Response, error) {
-	baseURL := operations.ConfirmPaymentOfTransaction3Servers[0]
+	baseURL := operations.ConfirmPaymentOfTransaction3ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -649,7 +685,7 @@ func (s *SDK) ConfirmPaymentOfTransaction3(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -670,8 +706,9 @@ func (s *SDK) ConfirmPaymentOfTransaction3(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ConfirmPaymentOfTransaction4 - confirmTransaction
 func (s *SDK) ConfirmPaymentOfTransaction4(ctx context.Context, request operations.ConfirmPaymentOfTransaction4Request) (*operations.ConfirmPaymentOfTransaction4Response, error) {
-	baseURL := operations.ConfirmPaymentOfTransaction4Servers[0]
+	baseURL := operations.ConfirmPaymentOfTransaction4ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -690,7 +727,7 @@ func (s *SDK) ConfirmPaymentOfTransaction4(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -711,8 +748,9 @@ func (s *SDK) ConfirmPaymentOfTransaction4(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ConfirmPaymentOfTransaction5 - confirmTransaction
 func (s *SDK) ConfirmPaymentOfTransaction5(ctx context.Context, request operations.ConfirmPaymentOfTransaction5Request) (*operations.ConfirmPaymentOfTransaction5Response, error) {
-	baseURL := operations.ConfirmPaymentOfTransaction5Servers[0]
+	baseURL := operations.ConfirmPaymentOfTransaction5ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -731,7 +769,7 @@ func (s *SDK) ConfirmPaymentOfTransaction5(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -752,8 +790,9 @@ func (s *SDK) ConfirmPaymentOfTransaction5(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ConfirmsPlanting - confirmPlanting
 func (s *SDK) ConfirmsPlanting(ctx context.Context, request operations.ConfirmsPlantingRequest) (*operations.ConfirmsPlantingResponse, error) {
-	baseURL := operations.ConfirmsPlantingServers[0]
+	baseURL := operations.ConfirmsPlantingServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -772,7 +811,7 @@ func (s *SDK) ConfirmsPlanting(ctx context.Context, request operations.ConfirmsP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -793,8 +832,9 @@ func (s *SDK) ConfirmsPlanting(ctx context.Context, request operations.ConfirmsP
 	return res, nil
 }
 
+// ConfirmsPlanting2 - confirmPlanting
 func (s *SDK) ConfirmsPlanting2(ctx context.Context, request operations.ConfirmsPlanting2Request) (*operations.ConfirmsPlanting2Response, error) {
-	baseURL := operations.ConfirmsPlanting2Servers[0]
+	baseURL := operations.ConfirmsPlanting2ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -813,7 +853,7 @@ func (s *SDK) ConfirmsPlanting2(ctx context.Context, request operations.Confirms
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -834,8 +874,9 @@ func (s *SDK) ConfirmsPlanting2(ctx context.Context, request operations.Confirms
 	return res, nil
 }
 
+// ConfirmsPlanting3 - confirmPlanting
 func (s *SDK) ConfirmsPlanting3(ctx context.Context, request operations.ConfirmsPlanting3Request) (*operations.ConfirmsPlanting3Response, error) {
-	baseURL := operations.ConfirmsPlanting3Servers[0]
+	baseURL := operations.ConfirmsPlanting3ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -854,7 +895,7 @@ func (s *SDK) ConfirmsPlanting3(ctx context.Context, request operations.Confirms
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -875,8 +916,9 @@ func (s *SDK) ConfirmsPlanting3(ctx context.Context, request operations.Confirms
 	return res, nil
 }
 
+// ConfirmsPlanting4 - confirmPlanting
 func (s *SDK) ConfirmsPlanting4(ctx context.Context, request operations.ConfirmsPlanting4Request) (*operations.ConfirmsPlanting4Response, error) {
-	baseURL := operations.ConfirmsPlanting4Servers[0]
+	baseURL := operations.ConfirmsPlanting4ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -895,7 +937,7 @@ func (s *SDK) ConfirmsPlanting4(ctx context.Context, request operations.Confirms
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -916,8 +958,9 @@ func (s *SDK) ConfirmsPlanting4(ctx context.Context, request operations.Confirms
 	return res, nil
 }
 
+// ConfirmsPlanting5 - confirmPlanting
 func (s *SDK) ConfirmsPlanting5(ctx context.Context, request operations.ConfirmsPlanting5Request) (*operations.ConfirmsPlanting5Response, error) {
-	baseURL := operations.ConfirmsPlanting5Servers[0]
+	baseURL := operations.ConfirmsPlanting5ServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -936,7 +979,7 @@ func (s *SDK) ConfirmsPlanting5(ctx context.Context, request operations.Confirms
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -957,8 +1000,9 @@ func (s *SDK) ConfirmsPlanting5(ctx context.Context, request operations.Confirms
 	return res, nil
 }
 
+// EcommerceDelivery - ecommerceDelivery
 func (s *SDK) EcommerceDelivery(ctx context.Context, request operations.EcommerceDeliveryRequest) (*operations.EcommerceDeliveryResponse, error) {
-	baseURL := operations.EcommerceDeliveryServers[0]
+	baseURL := operations.EcommerceDeliveryServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -979,7 +1023,7 @@ func (s *SDK) EcommerceDelivery(ctx context.Context, request operations.Ecommerc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1000,8 +1044,9 @@ func (s *SDK) EcommerceDelivery(ctx context.Context, request operations.Ecommerc
 	return res, nil
 }
 
+// RequestAPIKey - requestApiKey
 func (s *SDK) RequestAPIKey(ctx context.Context, request operations.RequestAPIKeyRequest) (*operations.RequestAPIKeyResponse, error) {
-	baseURL := operations.RequestAPIKeyServers[0]
+	baseURL := operations.RequestAPIKeyServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -1020,7 +1065,7 @@ func (s *SDK) RequestAPIKey(ctx context.Context, request operations.RequestAPIKe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1041,8 +1086,9 @@ func (s *SDK) RequestAPIKey(ctx context.Context, request operations.RequestAPIKe
 	return res, nil
 }
 
+// RoadDistance - RoadDistance
 func (s *SDK) RoadDistance(ctx context.Context, request operations.RoadDistanceRequest) (*operations.RoadDistanceResponse, error) {
-	baseURL := operations.RoadDistanceServers[0]
+	baseURL := operations.RoadDistanceServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -1061,7 +1107,7 @@ func (s *SDK) RoadDistance(ctx context.Context, request operations.RoadDistanceR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1082,8 +1128,9 @@ func (s *SDK) RoadDistance(ctx context.Context, request operations.RoadDistanceR
 	return res, nil
 }
 
+// UrbanDelivery - urbanDelivery
 func (s *SDK) UrbanDelivery(ctx context.Context, request operations.UrbanDeliveryRequest) (*operations.UrbanDeliveryResponse, error) {
-	baseURL := operations.UrbanDeliveryServers[0]
+	baseURL := operations.UrbanDeliveryServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -1102,7 +1149,7 @@ func (s *SDK) UrbanDelivery(ctx context.Context, request operations.UrbanDeliver
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

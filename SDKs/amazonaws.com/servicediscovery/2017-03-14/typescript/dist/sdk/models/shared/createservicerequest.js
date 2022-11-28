@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsConfig } from "./dnsconfig";
 import { HealthCheckConfig } from "./healthcheckconfig";
 import { HealthCheckCustomConfig } from "./healthcheckcustomconfig";
+import { Tag } from "./tag";
 import { ServiceTypeOptionEnum } from "./servicetypeoptionenum";
 var CreateServiceRequest = /** @class */ (function (_super) {
     __extends(CreateServiceRequest, _super);
@@ -34,39 +34,39 @@ var CreateServiceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], CreateServiceRequest.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateServiceRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DnsConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DnsConfig" }),
         __metadata("design:type", DnsConfig)
     ], CreateServiceRequest.prototype, "dnsConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=HealthCheckConfig" }),
+        SpeakeasyMetadata({ data: "json, name=HealthCheckConfig" }),
         __metadata("design:type", HealthCheckConfig)
     ], CreateServiceRequest.prototype, "healthCheckConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=HealthCheckCustomConfig" }),
+        SpeakeasyMetadata({ data: "json, name=HealthCheckCustomConfig" }),
         __metadata("design:type", HealthCheckCustomConfig)
     ], CreateServiceRequest.prototype, "healthCheckCustomConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateServiceRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=NamespaceId" }),
+        SpeakeasyMetadata({ data: "json, name=NamespaceId" }),
         __metadata("design:type", String)
     ], CreateServiceRequest.prototype, "namespaceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateServiceRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], CreateServiceRequest.prototype, "type", void 0);
     return CreateServiceRequest;

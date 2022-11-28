@@ -16,10 +16,13 @@ from .baremetalsolution_projects_locations_provisioningconfigs_create import *
 from .baremetalsolution_projects_locations_provisioningconfigs_submit import *
 from .baremetalsolution_projects_locations_provisioningquotas_list import *
 from .baremetalsolution_projects_locations_sshkeys_create import *
-from .baremetalsolution_projects_locations_sshkeys_delete import *
 from .baremetalsolution_projects_locations_sshkeys_list import *
 from .baremetalsolution_projects_locations_volumes_list import *
-from .baremetalsolution_projects_locations_volumes_luns_get import *
 from .baremetalsolution_projects_locations_volumes_luns_list import *
 from .baremetalsolution_projects_locations_volumes_patch import *
 from .baremetalsolution_projects_locations_volumes_resize import *
+from .baremetalsolution_projects_locations_volumes_snapshots_create import *
+from .baremetalsolution_projects_locations_volumes_snapshots_delete import *
+from .baremetalsolution_projects_locations_volumes_snapshots_get import *
+from .baremetalsolution_projects_locations_volumes_snapshots_list import *
+from .baremetalsolution_projects_locations_volumes_snapshots_restorevolumesnapshot import *

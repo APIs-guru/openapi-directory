@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsPackageStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientID" })
+  @SpeakeasyMetadata({ data: "json, name=ClientID" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=ClientKey" })
+  @SpeakeasyMetadata({ data: "json, name=ClientKey" })
   clientKey?: string;
 
-  @Metadata({ data: "json, name=DownloadTime" })
+  @SpeakeasyMetadata({ data: "json, name=DownloadTime" })
   downloadTime?: string;
 
-  @Metadata({ data: "json, name=Downloaded" })
+  @SpeakeasyMetadata({ data: "json, name=Downloaded" })
   downloaded?: string;
 
-  @Metadata({ data: "json, name=InstallCompleted" })
+  @SpeakeasyMetadata({ data: "json, name=InstallCompleted" })
   installCompleted?: string;
 
-  @Metadata({ data: "json, name=InstallResult" })
+  @SpeakeasyMetadata({ data: "json, name=InstallResult" })
   installResult?: string;
 
-  @Metadata({ data: "json, name=InstallStarted" })
+  @SpeakeasyMetadata({ data: "json, name=InstallStarted" })
   installStarted?: string;
 
-  @Metadata({ data: "json, name=InstallTime" })
+  @SpeakeasyMetadata({ data: "json, name=InstallTime" })
   installTime?: string;
 
-  @Metadata({ data: "json, name=Percentage" })
+  @SpeakeasyMetadata({ data: "json, name=Percentage" })
   percentage?: string;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: string;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 }

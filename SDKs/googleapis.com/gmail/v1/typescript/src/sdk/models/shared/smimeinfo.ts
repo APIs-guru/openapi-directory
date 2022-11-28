@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SmimeInfo
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An S/MIME email config.
 **/
 export class SmimeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encryptedKeyPassword" })
+  @SpeakeasyMetadata({ data: "json, name=encryptedKeyPassword" })
   encryptedKeyPassword?: string;
 
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=issuerCn" })
+  @SpeakeasyMetadata({ data: "json, name=issuerCn" })
   issuerCn?: string;
 
-  @Metadata({ data: "json, name=pem" })
+  @SpeakeasyMetadata({ data: "json, name=pem" })
   pem?: string;
 
-  @Metadata({ data: "json, name=pkcs12" })
+  @SpeakeasyMetadata({ data: "json, name=pkcs12" })
   pkcs12?: string;
 }

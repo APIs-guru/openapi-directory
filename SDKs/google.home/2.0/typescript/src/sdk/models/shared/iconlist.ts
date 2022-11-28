@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IconList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=depth" })
+  @SpeakeasyMetadata({ data: "json, name=depth" })
   depth: number;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height: number;
 
-  @Metadata({ data: "json, name=mimetype" })
+  @SpeakeasyMetadata({ data: "json, name=mimetype" })
   mimetype: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width: number;
 }

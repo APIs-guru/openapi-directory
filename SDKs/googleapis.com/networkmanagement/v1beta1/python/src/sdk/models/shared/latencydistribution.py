@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import latencypercentile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LatencyDistribution:
-    latency_percentiles: Optional[List[latencypercentile.LatencyPercentile]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latencyPercentiles' }})
+    r"""LatencyDistribution
+    Describes measured latency distribution.
+    """
+    
+    latency_percentiles: Optional[List[LatencyPercentile]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latencyPercentiles') }})
     

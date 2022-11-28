@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class CashPaymentsPostRequest:
-    request: shared.CashPaymentDto = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.CashPaymentDto = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CashPaymentsPostResponse:
+    content_type: str = field()
+    status_code: int = field()
     cash_payments_post_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

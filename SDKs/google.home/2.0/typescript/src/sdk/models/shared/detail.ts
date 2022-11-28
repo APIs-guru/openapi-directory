@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IconList } from "./iconlist";
 import { Locale } from "./locale";
 import { Timezone } from "./timezone";
 
 
+
 export class Detail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=icon_list", elemType: shared.IconList })
+  @SpeakeasyMetadata({ data: "json, name=icon_list", elemType: IconList })
   iconList: IconList[];
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale: Locale;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone: Timezone;
 }

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostImagesUploadServers = []string{
+var PostImagesUploadServerList = []string{
 	"https://api.linode.com/v4",
 	"https://api.linode.com/v4beta",
 }
@@ -15,23 +15,9 @@ type PostImagesUploadRequestBody struct {
 	Region      string  `json:"region"`
 }
 
-type PostImagesUploadSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type PostImagesUploadSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type PostImagesUploadSecurity struct {
-	Option1 *PostImagesUploadSecurityOption1 `security:"option"`
-	Option2 *PostImagesUploadSecurityOption2 `security:"option"`
-}
-
-type PostImagesUploadRequest struct {
-	ServerURL *string
-	Request   *PostImagesUploadRequestBody `request:"mediaType=application/json"`
-	Security  PostImagesUploadSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type PostImagesUpload200ApplicationJSON struct {
@@ -41,6 +27,12 @@ type PostImagesUpload200ApplicationJSON struct {
 
 type PostImagesUploadDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type PostImagesUploadRequest struct {
+	ServerURL *string
+	Request   *PostImagesUploadRequestBody `request:"mediaType=application/json"`
+	Security  PostImagesUploadSecurity
 }
 
 type PostImagesUploadResponse struct {

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import source
+from sdk import utils
+from . import *
 
 class EntitlementRelatedEntityTypeEnum(str, Enum):
     EVENT = "event"
@@ -15,10 +17,14 @@ class EntitlementSourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Entitlement:
-    data: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    related_entity_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedEntityId' }})
-    related_entity_source: Optional[source.Source] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedEntitySource' }})
-    related_entity_type: EntitlementRelatedEntityTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedEntityType' }})
-    source: EntitlementSourceEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    version_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versionNumber' }})
+    r"""Entitlement
+    This class defines an entitlement data on the Publish API
+    """
+    
+    data: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    related_entity_type: EntitlementRelatedEntityTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedEntityType') }})
+    source: EntitlementSourceEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    related_entity_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedEntityId') }})
+    related_entity_source: Optional[Source] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedEntitySource') }})
+    version_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionNumber') }})
     

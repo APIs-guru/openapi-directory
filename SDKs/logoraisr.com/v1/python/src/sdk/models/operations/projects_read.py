@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ProjectsReadPathParams:
-    project_number: str = field(default=None, metadata={'path_param': { 'field_name': 'project_number', 'style': 'simple', 'explode': False }})
+    project_number: str = field(metadata={'path_param': { 'field_name': 'project_number', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProjectsReadRequest:
-    path_params: ProjectsReadPathParams = field(default=None)
+    path_params: ProjectsReadPathParams = field()
     
 
 @dataclass
 class ProjectsReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     project: Optional[shared.Project] = field(default=None)
-    status_code: int = field(default=None)
     

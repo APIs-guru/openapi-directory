@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { V2Key } from "./v2key";
+
 
 
 // V2ListKeysResponse
@@ -8,9 +8,9 @@ import { V2Key } from "./v2key";
  * Response message for `ListKeys` method.
 **/
 export class V2ListKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keys", elemType: shared.V2Key })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: V2Key })
   keys?: V2Key[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

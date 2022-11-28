@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAnnotationCountByAccIdUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetAnnotationCountByAccIdUsingGetPathParams, _super);
     function GetAnnotationCountByAccIdUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
         __metadata("design:type", String)
     ], GetAnnotationCountByAccIdUsingGetPathParams.prototype, "accId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=includeChildren" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=includeChildren" }),
         __metadata("design:type", Boolean)
     ], GetAnnotationCountByAccIdUsingGetPathParams.prototype, "includeChildren", void 0);
     return GetAnnotationCountByAccIdUsingGetPathParams;
@@ -45,7 +45,7 @@ var GetAnnotationCountByAccIdUsingGetRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAnnotationCountByAccIdUsingGetPathParams)
     ], GetAnnotationCountByAccIdUsingGetRequest.prototype, "pathParams", void 0);
     return GetAnnotationCountByAccIdUsingGetRequest;
@@ -57,15 +57,15 @@ var GetAnnotationCountByAccIdUsingGetResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAnnotationCountByAccIdUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAnnotationCountByAccIdUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAnnotationCountByAccIdUsingGetResponse.prototype, "statusCode", void 0);
     return GetAnnotationCountByAccIdUsingGetResponse;

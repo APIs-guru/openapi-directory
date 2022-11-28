@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListRoleTagsActionEnum(str, Enum):
     LIST_ROLE_TAGS = "ListRoleTags"
@@ -10,8 +14,8 @@ class PostListRoleTagsVersionEnum(str, Enum):
 
 @dataclass
 class PostListRoleTagsQueryParams:
-    action: PostListRoleTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListRoleTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListRoleTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListRoleTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListRoleTagsHeaders:
 
 @dataclass
 class PostListRoleTagsRequest:
-    query_params: PostListRoleTagsQueryParams = field(default=None)
-    headers: PostListRoleTagsHeaders = field(default=None)
+    headers: PostListRoleTagsHeaders = field()
+    query_params: PostListRoleTagsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListRoleTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

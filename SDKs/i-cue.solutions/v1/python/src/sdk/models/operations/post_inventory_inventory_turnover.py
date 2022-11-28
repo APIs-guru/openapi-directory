@@ -9,11 +9,11 @@ class PostInventoryInventoryTurnoverHeaders:
 
 @dataclass
 class PostInventoryInventoryTurnoverRequest:
-    headers: PostInventoryInventoryTurnoverHeaders = field(default=None)
+    headers: PostInventoryInventoryTurnoverHeaders = field()
     
 
 @dataclass
 class PostInventoryInventoryTurnoverResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

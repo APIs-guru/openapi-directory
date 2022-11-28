@@ -13,12 +13,12 @@ class GetTeachersQueryParams:
 
 @dataclass
 class GetTeachersRequest:
-    query_params: GetTeachersQueryParams = field(default=None)
+    query_params: GetTeachersQueryParams = field()
     
 
 @dataclass
 class GetTeachersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     teachers_response: Optional[shared.TeachersResponse] = field(default=None)
     

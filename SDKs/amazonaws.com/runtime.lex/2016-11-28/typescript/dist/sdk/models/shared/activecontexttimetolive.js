@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ActiveContextTimeToLive
 /**
  * The length of time or number of turns that a context remains active.
@@ -33,11 +33,11 @@ var ActiveContextTimeToLive = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=timeToLiveInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=timeToLiveInSeconds" }),
         __metadata("design:type", Number)
     ], ActiveContextTimeToLive.prototype, "timeToLiveInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=turnsToLive" }),
+        SpeakeasyMetadata({ data: "json, name=turnsToLive" }),
         __metadata("design:type", Number)
     ], ActiveContextTimeToLive.prototype, "turnsToLive", void 0);
     return ActiveContextTimeToLive;

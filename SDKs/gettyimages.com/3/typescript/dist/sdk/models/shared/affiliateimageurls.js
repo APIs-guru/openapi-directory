@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AffiliateImageUrls = /** @class */ (function (_super) {
     __extends(AffiliateImageUrls, _super);
     function AffiliateImageUrls() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=large" }),
+        SpeakeasyMetadata({ data: "json, name=large" }),
         __metadata("design:type", String)
     ], AffiliateImageUrls.prototype, "large", void 0);
     __decorate([
-        Metadata({ data: "json, name=large_height" }),
+        SpeakeasyMetadata({ data: "json, name=large_height" }),
         __metadata("design:type", Number)
     ], AffiliateImageUrls.prototype, "largeHeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=large_width" }),
+        SpeakeasyMetadata({ data: "json, name=large_width" }),
         __metadata("design:type", Number)
     ], AffiliateImageUrls.prototype, "largeWidth", void 0);
     __decorate([
-        Metadata({ data: "json, name=medium" }),
+        SpeakeasyMetadata({ data: "json, name=medium" }),
         __metadata("design:type", String)
     ], AffiliateImageUrls.prototype, "medium", void 0);
     __decorate([
-        Metadata({ data: "json, name=medium_height" }),
+        SpeakeasyMetadata({ data: "json, name=medium_height" }),
         __metadata("design:type", Number)
     ], AffiliateImageUrls.prototype, "mediumHeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=medium_width" }),
+        SpeakeasyMetadata({ data: "json, name=medium_width" }),
         __metadata("design:type", Number)
     ], AffiliateImageUrls.prototype, "mediumWidth", void 0);
     __decorate([
-        Metadata({ data: "json, name=small" }),
+        SpeakeasyMetadata({ data: "json, name=small" }),
         __metadata("design:type", String)
     ], AffiliateImageUrls.prototype, "small", void 0);
     __decorate([
-        Metadata({ data: "json, name=small_height" }),
+        SpeakeasyMetadata({ data: "json, name=small_height" }),
         __metadata("design:type", Number)
     ], AffiliateImageUrls.prototype, "smallHeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=small_width" }),
+        SpeakeasyMetadata({ data: "json, name=small_width" }),
         __metadata("design:type", Number)
     ], AffiliateImageUrls.prototype, "smallWidth", void 0);
     return AffiliateImageUrls;

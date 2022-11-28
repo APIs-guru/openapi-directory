@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Availablenumber } from "./availablenumber";
 
 
+
 export class AvailableNumbers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=numbers", elemType: shared.Availablenumber })
+  @SpeakeasyMetadata({ data: "json, name=numbers", elemType: Availablenumber })
   numbers?: Availablenumber[];
 }

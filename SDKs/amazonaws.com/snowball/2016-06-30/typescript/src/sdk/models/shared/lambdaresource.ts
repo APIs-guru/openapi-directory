@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventTriggerDefinition } from "./eventtriggerdefinition";
+
 
 
 // LambdaResource
@@ -8,9 +8,9 @@ import { EventTriggerDefinition } from "./eventtriggerdefinition";
  * Identifies 
 **/
 export class LambdaResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventTriggers", elemType: shared.EventTriggerDefinition })
+  @SpeakeasyMetadata({ data: "json, name=EventTriggers", elemType: EventTriggerDefinition })
   eventTriggers?: EventTriggerDefinition[];
 
-  @Metadata({ data: "json, name=LambdaArn" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaArn" })
   lambdaArn?: string;
 }

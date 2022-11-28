@@ -27,11 +27,6 @@ type VrwmiSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type VrwmiRequest struct {
-	Request  *VrwmiRequestBody `request:"mediaType=application/json"`
-	Security VrwmiSecurity
-}
-
 type Vrwmi400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Vrwmi504ApplicationJSON struct {
 	Error            *Vrwmi504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Vrwmi504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type VrwmiRequest struct {
+	Request  *VrwmiRequestBody `request:"mediaType=application/json"`
+	Security VrwmiSecurity
 }
 
 type VrwmiResponse struct {

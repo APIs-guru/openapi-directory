@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportContext } from "./importcontext";
+
 
 
 // InstancesImportRequest
@@ -7,6 +8,6 @@ import { ImportContext } from "./importcontext";
  * Database instance import request.
 **/
 export class InstancesImportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=importContext" })
+  @SpeakeasyMetadata({ data: "json, name=importContext" })
   importContext?: ImportContext;
 }

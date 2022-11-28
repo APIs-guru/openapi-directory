@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Secret
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Secret provides a reference to entries in Secret Manager.
 **/
 export class Secret extends SpeakeasyBase {
-  @Metadata({ data: "json, name=secretVersion" })
+  @SpeakeasyMetadata({ data: "json, name=secretVersion" })
   secretVersion?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListSystemAdvisoriesPathParams = /** @class */ (function (_super) {
     __extends(ListSystemAdvisoriesPathParams, _super);
@@ -30,7 +30,7 @@ var ListSystemAdvisoriesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesPathParams.prototype, "inventoryId", void 0);
     return ListSystemAdvisoriesPathParams;
@@ -50,43 +50,43 @@ var ListSystemAdvisoriesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[advisory_type]" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "filterAdvisoryType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[description]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[description]" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "filterDescription", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[id]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[id]" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "filterId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[public_date]" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "filterPublicDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[severity]" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "filterSeverity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[synopsis]" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "filterSynopsis", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], ListSystemAdvisoriesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], ListSystemAdvisoriesQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "search", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesQueryParams.prototype, "sort", void 0);
     return ListSystemAdvisoriesQueryParams;
@@ -98,7 +98,7 @@ var ListSystemAdvisoriesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeRhIdentity)
     ], ListSystemAdvisoriesSecurity.prototype, "rhIdentity", void 0);
     return ListSystemAdvisoriesSecurity;
@@ -110,15 +110,15 @@ var ListSystemAdvisoriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListSystemAdvisoriesPathParams)
     ], ListSystemAdvisoriesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListSystemAdvisoriesQueryParams)
     ], ListSystemAdvisoriesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListSystemAdvisoriesSecurity)
     ], ListSystemAdvisoriesRequest.prototype, "security", void 0);
     return ListSystemAdvisoriesRequest;
@@ -130,15 +130,15 @@ var ListSystemAdvisoriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListSystemAdvisoriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListSystemAdvisoriesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ControllersSystemAdvisoriesResponse)
     ], ListSystemAdvisoriesResponse.prototype, "controllersSystemAdvisoriesResponse", void 0);
     return ListSystemAdvisoriesResponse;

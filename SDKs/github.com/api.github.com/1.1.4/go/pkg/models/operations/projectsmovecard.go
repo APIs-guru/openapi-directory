@@ -13,11 +13,6 @@ type ProjectsMoveCardRequestBody struct {
 	Position string `json:"position"`
 }
 
-type ProjectsMoveCardRequest struct {
-	PathParams ProjectsMoveCardPathParams
-	Request    *ProjectsMoveCardRequestBody `request:"mediaType=application/json"`
-}
-
 type ProjectsMoveCard403ApplicationJSONErrors struct {
 	Code     *string `json:"code,omitempty"`
 	Field    *string `json:"field,omitempty"`
@@ -41,6 +36,11 @@ type ProjectsMoveCard503ApplicationJSON struct {
 	DocumentationURL *string                                    `json:"documentation_url,omitempty"`
 	Errors           []ProjectsMoveCard503ApplicationJSONErrors `json:"errors,omitempty"`
 	Message          *string                                    `json:"message,omitempty"`
+}
+
+type ProjectsMoveCardRequest struct {
+	PathParams ProjectsMoveCardPathParams
+	Request    *ProjectsMoveCardRequestBody `request:"mediaType=application/json"`
 }
 
 type ProjectsMoveCardResponse struct {

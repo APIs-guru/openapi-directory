@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleAdsHomeservicesLocalservicesV1AccountReport } from "./googleadshomeserviceslocalservicesv1accountreport";
 // GoogleAdsHomeservicesLocalservicesV1SearchAccountReportsResponse
 /**
  * A page of the response received from the SearchAccountReports method. A paginated response where more pages are available has `next_page_token` set. This token can be used in a subsequent request to retrieve the next request page.
@@ -34,11 +34,11 @@ var GoogleAdsHomeservicesLocalservicesV1SearchAccountReportsResponse = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountReports", elemType: shared.GoogleAdsHomeservicesLocalservicesV1AccountReport }),
+        SpeakeasyMetadata({ data: "json, name=accountReports", elemType: GoogleAdsHomeservicesLocalservicesV1AccountReport }),
         __metadata("design:type", Array)
     ], GoogleAdsHomeservicesLocalservicesV1SearchAccountReportsResponse.prototype, "accountReports", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1SearchAccountReportsResponse.prototype, "nextPageToken", void 0);
     return GoogleAdsHomeservicesLocalservicesV1SearchAccountReportsResponse;

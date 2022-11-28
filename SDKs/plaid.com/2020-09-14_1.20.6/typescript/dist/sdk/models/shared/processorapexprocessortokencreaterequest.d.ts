@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * ProcessorApexProcessorTokenCreateRequest defines the request schema for `/processor/apex/processor_token/create`
 **/

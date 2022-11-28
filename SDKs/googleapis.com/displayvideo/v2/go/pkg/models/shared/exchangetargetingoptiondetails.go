@@ -74,6 +74,8 @@ const (
 	ExchangeTargetingOptionDetailsExchangeEnumExchangeDax               ExchangeTargetingOptionDetailsExchangeEnum = "EXCHANGE_DAX"
 )
 
+// ExchangeTargetingOptionDetails
+// Represents a targetable exchange. This will be populated in the exchange_details field of a TargetingOption when targeting_type is `TARGETING_TYPE_EXCHANGE`.
 type ExchangeTargetingOptionDetails struct {
 	Exchange *ExchangeTargetingOptionDetailsExchangeEnum `json:"exchange,omitempty"`
 }

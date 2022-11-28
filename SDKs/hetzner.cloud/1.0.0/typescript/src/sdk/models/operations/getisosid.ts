@@ -1,54 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetIsosIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
-
-export class GetIsosIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetIsosIdPathParams;
-}
-
 export enum GetIsosId200ApplicationJsonIsoTypeEnum {
-    Public = "public"
-,    Private = "private"
+    Public = "public",
+    Private = "private"
 }
 
 
 export class GetIsosId200ApplicationJsonIso extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetIsosId200ApplicationJsonIsoTypeEnum;
 }
 
 
 export class GetIsosId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iso" })
+  @SpeakeasyMetadata({ data: "json, name=iso" })
   iso: GetIsosId200ApplicationJsonIso;
 }
 
 
+export class GetIsosIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetIsosIdPathParams;
+}
+
+
 export class GetIsosIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getIsosId200ApplicationJsonObject?: GetIsosId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

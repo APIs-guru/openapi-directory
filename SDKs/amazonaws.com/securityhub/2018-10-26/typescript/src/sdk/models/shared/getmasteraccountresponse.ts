@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Invitation } from "./invitation";
 
 
+
 export class GetMasterAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Master" })
+  @SpeakeasyMetadata({ data: "json, name=Master" })
   master?: Invitation;
 }

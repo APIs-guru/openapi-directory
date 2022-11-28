@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudChannelV1PurchasableSku } from "./googlecloudchannelv1purchasablesku";
+
 
 
 // GoogleCloudChannelV1ListPurchasableSkusResponse
@@ -8,9 +8,9 @@ import { GoogleCloudChannelV1PurchasableSku } from "./googlecloudchannelv1purcha
  * Response message for ListPurchasableSkus.
 **/
 export class GoogleCloudChannelV1ListPurchasableSkusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=purchasableSkus", elemType: shared.GoogleCloudChannelV1PurchasableSku })
+  @SpeakeasyMetadata({ data: "json, name=purchasableSkus", elemType: GoogleCloudChannelV1PurchasableSku })
   purchasableSkus?: GoogleCloudChannelV1PurchasableSku[];
 }

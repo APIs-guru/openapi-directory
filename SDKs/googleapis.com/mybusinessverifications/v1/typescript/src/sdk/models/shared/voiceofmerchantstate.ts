@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplyWithGuidelines } from "./complywithguidelines";
 import { Verify } from "./verify";
+
 
 
 // VoiceOfMerchantState
@@ -8,21 +9,21 @@ import { Verify } from "./verify";
  * Response message for VoiceOfMerchant.GetVoiceOfMerchantState.
 **/
 export class VoiceOfMerchantState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=complyWithGuidelines" })
+  @SpeakeasyMetadata({ data: "json, name=complyWithGuidelines" })
   complyWithGuidelines?: ComplyWithGuidelines;
 
-  @Metadata({ data: "json, name=hasBusinessAuthority" })
+  @SpeakeasyMetadata({ data: "json, name=hasBusinessAuthority" })
   hasBusinessAuthority?: boolean;
 
-  @Metadata({ data: "json, name=hasVoiceOfMerchant" })
+  @SpeakeasyMetadata({ data: "json, name=hasVoiceOfMerchant" })
   hasVoiceOfMerchant?: boolean;
 
-  @Metadata({ data: "json, name=resolveOwnershipConflict" })
+  @SpeakeasyMetadata({ data: "json, name=resolveOwnershipConflict" })
   resolveOwnershipConflict?: Map<string, any>;
 
-  @Metadata({ data: "json, name=verify" })
+  @SpeakeasyMetadata({ data: "json, name=verify" })
   verify?: Verify;
 
-  @Metadata({ data: "json, name=waitForVoiceOfMerchant" })
+  @SpeakeasyMetadata({ data: "json, name=waitForVoiceOfMerchant" })
   waitForVoiceOfMerchant?: Map<string, any>;
 }

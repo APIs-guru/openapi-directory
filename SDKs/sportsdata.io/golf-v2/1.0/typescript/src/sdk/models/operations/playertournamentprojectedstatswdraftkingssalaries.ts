@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlayerTournamentProjectedStatsWDraftkingsSalariesFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class PlayerTournamentProjectedStatsWDraftkingsSalariesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: PlayerTournamentProjectedStatsWDraftkingsSalariesFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tournamentid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tournamentid" })
   tournamentid: string;
 }
 
 
 export class PlayerTournamentProjectedStatsWDraftkingsSalariesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PlayerTournamentProjectedStatsWDraftkingsSalariesPathParams;
 }
 
 
 export class PlayerTournamentProjectedStatsWDraftkingsSalariesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playerTournamentProjections?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

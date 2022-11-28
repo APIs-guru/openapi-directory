@@ -10,18 +10,18 @@ class GetWirelessLaNsQueryParams:
 
 @dataclass
 class GetWirelessLaNsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetWirelessLaNsRequest:
-    query_params: GetWirelessLaNsQueryParams = field(default=None)
-    security: GetWirelessLaNsSecurity = field(default=None)
+    query_params: GetWirelessLaNsQueryParams = field()
+    security: GetWirelessLaNsSecurity = field()
     
 
 @dataclass
 class GetWirelessLaNsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     wirelesses: Optional[List[shared.Wireless]] = field(default=None)
     

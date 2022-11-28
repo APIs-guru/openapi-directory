@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeneratedPolicyResult } from "./generatedpolicyresult";
 import { JobDetails } from "./jobdetails";
 
 
+
 export class GetGeneratedPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=generatedPolicyResult" })
+  @SpeakeasyMetadata({ data: "json, name=generatedPolicyResult" })
   generatedPolicyResult: GeneratedPolicyResult;
 
-  @Metadata({ data: "json, name=jobDetails" })
+  @SpeakeasyMetadata({ data: "json, name=jobDetails" })
   jobDetails: JobDetails;
 }

@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import metricvalue
-from . import rowdimensions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FilteredBidDetailRow:
-    bid_count: Optional[metricvalue.MetricValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bidCount' }})
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    detail_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detailId' }})
-    row_dimensions: Optional[rowdimensions.RowDimensions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowDimensions' }})
+    r"""FilteredBidDetailRow
+    The number of filtered bids with the specified dimension values, among those filtered due to the requested filtering reason (for example, creative status), that have the specified detail.
+    """
+    
+    bid_count: Optional[MetricValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bidCount') }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    detail_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detailId') }})
+    row_dimensions: Optional[RowDimensions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowDimensions') }})
     

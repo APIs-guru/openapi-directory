@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class MybusinessCategoriesBatchGetViewEnum(str, Enum):
@@ -29,12 +30,12 @@ class MybusinessCategoriesBatchGetQueryParams:
 
 @dataclass
 class MybusinessCategoriesBatchGetRequest:
-    query_params: MybusinessCategoriesBatchGetQueryParams = field(default=None)
+    query_params: MybusinessCategoriesBatchGetQueryParams = field()
     
 
 @dataclass
 class MybusinessCategoriesBatchGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_get_business_categories_response: Optional[shared.BatchGetBusinessCategoriesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

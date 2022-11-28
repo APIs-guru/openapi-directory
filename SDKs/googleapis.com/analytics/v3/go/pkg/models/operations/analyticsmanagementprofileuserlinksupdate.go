@@ -29,7 +29,7 @@ type AnalyticsManagementProfileUserLinksUpdateSecurity struct {
 type AnalyticsManagementProfileUserLinksUpdateRequest struct {
 	PathParams  AnalyticsManagementProfileUserLinksUpdatePathParams
 	QueryParams AnalyticsManagementProfileUserLinksUpdateQueryParams
-	Request     *shared.EntityUserLink `request:"mediaType=application/json"`
+	Request     *shared.EntityUserLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementProfileUserLinksUpdateSecurity
 }
 

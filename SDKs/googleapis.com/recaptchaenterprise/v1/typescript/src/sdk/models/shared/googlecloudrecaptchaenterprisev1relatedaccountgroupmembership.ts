@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecaptchaenterpriseV1RelatedAccountGroupMembership
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A membership in a group of related accounts.
 **/
 export class GoogleCloudRecaptchaenterpriseV1RelatedAccountGroupMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hashedAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=hashedAccountId" })
   hashedAccountId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

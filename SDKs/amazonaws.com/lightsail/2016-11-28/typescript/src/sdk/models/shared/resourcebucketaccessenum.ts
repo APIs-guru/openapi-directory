@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceBucketAccessEnum {
-    Allow = "allow"
-,    Deny = "deny"
+    Allow = "allow",
+    Deny = "deny"
 }

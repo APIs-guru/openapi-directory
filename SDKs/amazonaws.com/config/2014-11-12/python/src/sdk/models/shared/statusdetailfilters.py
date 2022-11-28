@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import memberaccountrulestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StatusDetailFilters:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountId' }})
-    member_account_rule_status: Optional[memberaccountrulestatus_enum.MemberAccountRuleStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MemberAccountRuleStatus' }})
+    r"""StatusDetailFilters
+    Status filter object to filter results based on specific member account ID or status type for an organization config rule. 
+    """
+    
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountId') }})
+    member_account_rule_status: Optional[MemberAccountRuleStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MemberAccountRuleStatus') }})
     

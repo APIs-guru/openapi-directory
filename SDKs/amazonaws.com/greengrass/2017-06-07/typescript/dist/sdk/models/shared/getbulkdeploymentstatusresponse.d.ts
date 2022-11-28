@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BulkDeploymentMetrics } from "./bulkdeploymentmetrics";
 import { BulkDeploymentStatusEnum } from "./bulkdeploymentstatusenum";
 import { ErrorDetail } from "./errordetail";

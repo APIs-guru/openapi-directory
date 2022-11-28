@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaDefinition } from "./schemadefinition";
+
 
 
 // ParquetConfiguration
@@ -7,6 +8,6 @@ import { SchemaDefinition } from "./schemadefinition";
  * Contains the configuration information of the Parquet format.
 **/
 export class ParquetConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=schemaDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=schemaDefinition" })
   schemaDefinition?: SchemaDefinition;
 }

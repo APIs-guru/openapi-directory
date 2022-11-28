@@ -41,7 +41,7 @@ type PubsubProjectsSchemasCreateSecurity struct {
 type PubsubProjectsSchemasCreateRequest struct {
 	PathParams  PubsubProjectsSchemasCreatePathParams
 	QueryParams PubsubProjectsSchemasCreateQueryParams
-	Request     *shared.Schema `request:"mediaType=application/json"`
+	Request     *shared.SchemaInput `request:"mediaType=application/json"`
 	Security    PubsubProjectsSchemasCreateSecurity
 }
 

@@ -1,25 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import consentartefactreference
-from . import consentstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HiuConsentNotificationEventNotification:
-    consent_artefacts: Optional[List[consentartefactreference.ConsentArtefactReference]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentArtefacts' }})
-    consent_request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentRequestId' }})
-    status: consentstatus_enum.ConsentStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    consent_request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentRequestId') }})
+    status: ConsentStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    consent_artefacts: Optional[List[ConsentArtefactReference]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentArtefacts') }})
     
 
 @dataclass_json
 @dataclass
 class HiuConsentNotificationEvent:
-    notification: HiuConsentNotificationEventNotification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notification' }})
-    request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    notification: HiuConsentNotificationEventNotification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('notification') }})
+    request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    timestamp: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

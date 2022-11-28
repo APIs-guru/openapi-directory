@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthorizationCodesSharedModelsCategory
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A category for Authorization Code Definitions
 **/
 export class AuthorizationCodesSharedModelsCategory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description, form, name=Description;" })
+  @SpeakeasyMetadata({ data: "json, name=Description, form, name=Description;" })
   description?: string;
 
-  @Metadata({ data: "json, name=ID, form, name=ID;" })
+  @SpeakeasyMetadata({ data: "json, name=ID, form, name=ID;" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name?: string;
 }

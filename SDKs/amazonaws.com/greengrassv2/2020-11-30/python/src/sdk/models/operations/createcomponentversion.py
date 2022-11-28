@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,39 +22,43 @@ class CreateComponentVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateComponentVersionRequestBodyLambdaFunction:
-    component_dependencies: Optional[dict[str, shared.ComponentDependencyRequirement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentDependencies' }})
-    component_lambda_parameters: Optional[shared.LambdaExecutionParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentLambdaParameters' }})
-    component_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentName' }})
-    component_platforms: Optional[List[shared.ComponentPlatform]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentPlatforms' }})
-    component_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentVersion' }})
-    lambda_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lambdaArn' }})
+    r"""CreateComponentVersionRequestBodyLambdaFunction
+    Contains information about an Lambda function to import to create a component.
+    """
+    
+    component_dependencies: Optional[dict[str, shared.ComponentDependencyRequirement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentDependencies') }})
+    component_lambda_parameters: Optional[shared.LambdaExecutionParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentLambdaParameters') }})
+    component_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentName') }})
+    component_platforms: Optional[List[shared.ComponentPlatform]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentPlatforms') }})
+    component_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentVersion') }})
+    lambda_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lambdaArn') }})
     
 
 @dataclass_json
 @dataclass
 class CreateComponentVersionRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    inline_recipe: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inlineRecipe' }})
-    lambda_function: Optional[CreateComponentVersionRequestBodyLambdaFunction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lambdaFunction' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    inline_recipe: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inlineRecipe') }})
+    lambda_function: Optional[CreateComponentVersionRequestBodyLambdaFunction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lambdaFunction') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateComponentVersionRequest:
-    headers: CreateComponentVersionHeaders = field(default=None)
-    request: CreateComponentVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateComponentVersionHeaders = field()
+    request: CreateComponentVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateComponentVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_component_version_response: Optional[shared.CreateComponentVersionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     request_already_in_progress_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

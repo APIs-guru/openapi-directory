@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SourceMetadata
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata about a Source useful for automatically optimizing and tuning the pipeline, etc.
 **/
 export class SourceMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimatedSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedSizeBytes" })
   estimatedSizeBytes?: string;
 
-  @Metadata({ data: "json, name=infinite" })
+  @SpeakeasyMetadata({ data: "json, name=infinite" })
   infinite?: boolean;
 
-  @Metadata({ data: "json, name=producesSortedKeys" })
+  @SpeakeasyMetadata({ data: "json, name=producesSortedKeys" })
   producesSortedKeys?: boolean;
 }

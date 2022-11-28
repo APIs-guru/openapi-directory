@@ -9,11 +9,11 @@ class PostInventoryCaryyingCostHeaders:
 
 @dataclass
 class PostInventoryCaryyingCostRequest:
-    headers: PostInventoryCaryyingCostHeaders = field(default=None)
+    headers: PostInventoryCaryyingCostHeaders = field()
     
 
 @dataclass
 class PostInventoryCaryyingCostResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

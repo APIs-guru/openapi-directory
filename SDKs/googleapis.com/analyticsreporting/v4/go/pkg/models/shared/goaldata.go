@@ -1,5 +1,7 @@
 package shared
 
+// GoalData
+// Represents all the details pertaining to a goal.
 type GoalData struct {
 	GoalCompletionLocation *string  `json:"goalCompletionLocation,omitempty"`
 	GoalCompletions        *string  `json:"goalCompletions,omitempty"`

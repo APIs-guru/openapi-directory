@@ -11,13 +11,15 @@ type GetEventsQueryParams struct {
 	Sync      *string  `queryParam:"style=form,explode=true,name=sync"`
 }
 
-type GetEventsRequest struct {
-	QueryParams GetEventsQueryParams
-}
-
+// GetEvents200ApplicationJSON
+// The full record for all events that have occurred since the sync token was created.
 type GetEvents200ApplicationJSON struct {
 	Data []shared.EventResponse `json:"data,omitempty"`
 	Sync *string                `json:"sync,omitempty"`
+}
+
+type GetEventsRequest struct {
+	QueryParams GetEventsQueryParams
 }
 
 type GetEventsResponse struct {

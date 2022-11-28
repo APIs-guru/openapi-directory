@@ -17,6 +17,8 @@ const (
 	TransferParametersTransferLockStateEnumLocked                       TransferParametersTransferLockStateEnum = "LOCKED"
 )
 
+// TransferParameters
+// Parameters required to transfer a domain from another registrar.
 type TransferParameters struct {
 	CurrentRegistrar    *string                                  `json:"currentRegistrar,omitempty"`
 	CurrentRegistrarURI *string                                  `json:"currentRegistrarUri,omitempty"`

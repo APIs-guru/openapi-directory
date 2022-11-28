@@ -1,18 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.linode.com/v4",
-  "https://api.linode.com/v4beta",
+export const ServerList = [
+	"https://api.linode.com/v4",
+	"https://api.linode.com/v4beta",
 ] as const;
 
 export function WithServerURL(
@@ -23,51 +20,50 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetNodebalancersNodeBalancerIdStats - NodeBalancer Statistics View
-  /** 
+  /**
+   * getNodebalancersNodeBalancerIdStats - NodeBalancer Statistics View
+   *
    * Returns detailed statistics about the requested NodeBalancer.
    * 
   **/
-  GetNodebalancersNodeBalancerIdStats(
+  getNodebalancersNodeBalancerIdStats(
     req: operations.GetNodebalancersNodeBalancerIdStatsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNodebalancersNodeBalancerIdStatsResponse> {
@@ -75,27 +71,29 @@ export class SDK {
       req = new operations.GetNodebalancersNodeBalancerIdStatsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/stats", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNodebalancersNodeBalancerIdStatsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNodebalancersNodeBalancerIdStatsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancerStats = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodebalancersNodeBalancerIdStatsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -107,8 +105,9 @@ export class SDK {
   }
 
   
-  // PostImagesUpload - Image Upload
-  /** 
+  /**
+   * postImagesUpload - Image Upload
+   *
    * Initiates an Image upload.
    * 
    * This endpoint creates a new private Image object and returns it along
@@ -132,7 +131,7 @@ export class SDK {
    * disk image (`.img`) format. A maximum compressed file size of 5GB is supported for upload at this time.
    * 
   **/
-  PostImagesUpload(
+  postImagesUpload(
     req: operations.PostImagesUploadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostImagesUploadResponse> {
@@ -140,43 +139,47 @@ export class SDK {
       req = new operations.PostImagesUploadRequest(req);
     }
     
-    let baseURL: string = operations.POSTIMAGESUPLOAD_SERVERS[0];
+    let baseURL: string = operations.PostImagesUploadServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/images/upload";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostImagesUploadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostImagesUploadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postImagesUpload200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postImagesUploadDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -188,12 +191,13 @@ export class SDK {
   }
 
   
-  // AcceptEntityTransfer - Entity Transfer Accept
-  /** 
+  /**
+   * acceptEntityTransfer - Entity Transfer Accept
+   *
    * **DEPRECATED**. Please use [Service Transfer Accept](/docs/api/account/#service-transfer-accept).
    * 
   **/
-  AcceptEntityTransfer(
+  acceptEntityTransfer(
     req: operations.AcceptEntityTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AcceptEntityTransferResponse> {
@@ -201,27 +205,29 @@ export class SDK {
       req = new operations.AcceptEntityTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/entity-transfers/{token}/accept", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AcceptEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AcceptEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.acceptEntityTransfer200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.acceptEntityTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -233,8 +239,9 @@ export class SDK {
   }
 
   
-  // AcceptServiceTransfer - Service Transfer Accept
-  /** 
+  /**
+   * acceptServiceTransfer - Service Transfer Accept
+   *
    * Accept a Service Transfer for the provided token to receive the services included in the transfer to your
    * account. At this time, only Linodes can be transferred.
    * 
@@ -271,7 +278,7 @@ export class SDK {
    * transfer's expiration to allow the transfer to be accepted by the receiving account.
    * 
   **/
-  AcceptServiceTransfer(
+  acceptServiceTransfer(
     req: operations.AcceptServiceTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AcceptServiceTransferResponse> {
@@ -279,27 +286,29 @@ export class SDK {
       req = new operations.AcceptServiceTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/service-transfers/{token}/accept", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AcceptServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AcceptServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.acceptServiceTransfer200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.acceptServiceTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -311,12 +320,13 @@ export class SDK {
   }
 
   
-  // AddLinodeConfig - Configuration Profile Create
-  /** 
+  /**
+   * addLinodeConfig - Configuration Profile Create
+   *
    * Adds a new Configuration profile to a Linode.
    * 
   **/
-  AddLinodeConfig(
+  addLinodeConfig(
     req: operations.AddLinodeConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddLinodeConfigResponse> {
@@ -324,45 +334,45 @@ export class SDK {
       req = new operations.AddLinodeConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/configs", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AddLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linodeConfig = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.addLinodeConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -374,8 +384,9 @@ export class SDK {
   }
 
   
-  // AddLinodeDisk - Disk Create
-  /** 
+  /**
+   * addLinodeDisk - Disk Create
+   *
    * Adds a new Disk to a Linode. You can optionally create a Disk
    * from an Image (see [/images](/docs/api/images/#images-list) for a list of available public images,
    * or use one of your own), and optionally provide a StackScript to deploy
@@ -385,7 +396,7 @@ export class SDK {
    * of the Image is used unless otherwise specified.
    * 
   **/
-  AddLinodeDisk(
+  addLinodeDisk(
     req: operations.AddLinodeDiskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddLinodeDiskResponse> {
@@ -393,45 +404,45 @@ export class SDK {
       req = new operations.AddLinodeDiskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddLinodeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AddLinodeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.disk = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.addLinodeDiskDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -443,12 +454,13 @@ export class SDK {
   }
 
   
-  // AddLinodeIp - IPv4 Address Allocate
-  /** 
+  /**
+   * addLinodeIp - IPv4 Address Allocate
+   *
    * Allocates a public or private IPv4 address to a Linode. Public IP Addresses, after the one included with each Linode, incur an additional monthly charge. If you need an additional public IP Address you must request one - please [open a support ticket](/docs/api/support/#support-ticket-open). You may not add more than one private IPv4 address to a single Linode.
    * 
   **/
-  AddLinodeIp(
+  addLinodeIp(
     req: operations.AddLinodeIpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddLinodeIpResponse> {
@@ -456,45 +468,45 @@ export class SDK {
       req = new operations.AddLinodeIpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/ips", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AddLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.addLinodeIpDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -506,12 +518,13 @@ export class SDK {
   }
 
   
-  // AddSshKey - SSH Key Add
-  /** 
+  /**
+   * addSshKey - SSH Key Add
+   *
    * Adds an SSH Key to your Account profile.
    * 
   **/
-  AddSshKey(
+  addSshKey(
     req: operations.AddSshKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddSshKeyResponse> {
@@ -519,43 +532,44 @@ export class SDK {
       req = new operations.AddSshKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/sshkeys";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AddSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sshKey = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.addSshKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -567,12 +581,13 @@ export class SDK {
   }
 
   
-  // AddStackScript - StackScript Create
-  /** 
+  /**
+   * addStackScript - StackScript Create
+   *
    * Creates a StackScript in your Account.
    * 
   **/
-  AddStackScript(
+  addStackScript(
     req: operations.AddStackScriptRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddStackScriptResponse> {
@@ -580,45 +595,45 @@ export class SDK {
       req = new operations.AddStackScriptRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/linode/stackscripts";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AddStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stackScript = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.addStackScriptDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -630,12 +645,13 @@ export class SDK {
   }
 
   
-  // AllocateIp - IP Address Allocate
-  /** 
+  /**
+   * allocateIp - IP Address Allocate
+   *
    * Allocates a new IPv4 Address on your Account. The Linode must be configured to support additional addresses - please [open a support ticket](/docs/api/support/#support-ticket-open) requesting additional addresses before attempting allocation.
    * 
   **/
-  AllocateIp(
+  allocateIp(
     req: operations.AllocateIpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AllocateIpResponse> {
@@ -643,45 +659,45 @@ export class SDK {
       req = new operations.AllocateIpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/networking/ips";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AllocateIpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AllocateIpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.allocateIpDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -693,12 +709,13 @@ export class SDK {
   }
 
   
-  // AssignIPs - Linodes Assign IPs
-  /** 
+  /**
+   * assignIPs - Linodes Assign IPs
+   *
    * Assign multiple IPs to multiple Linodes in one Region. This allows swapping, shuffling, or otherwise reorganizing IPv4 Addresses to your Linodes.  When the assignment is finished, all Linodes must end up with at least one public IPv4 and no more than one private IPv4.
    * 
   **/
-  AssignIPs(
+  assignIPs(
     req: operations.AssignIPsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AssignIPsResponse> {
@@ -706,45 +723,45 @@ export class SDK {
       req = new operations.AssignIPsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/networking/ipv4/assign";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AssignIPsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AssignIPsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.assignIPs200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.assignIPsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -756,12 +773,13 @@ export class SDK {
   }
 
   
-  // AttachVolume - Volume Attach
-  /** 
+  /**
+   * attachVolume - Volume Attach
+   *
    * Attaches a Volume on your Account to an existing Linode on your Account. In order for this request to complete successfully, your User must have `read_only` or `read_write` permission to the Volume and `read_write` permission to the Linode. Additionally, the Volume and Linode must be located in the same Region.
    * 
   **/
-  AttachVolume(
+  attachVolume(
     req: operations.AttachVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AttachVolumeResponse> {
@@ -769,45 +787,45 @@ export class SDK {
       req = new operations.AttachVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/volumes/{volumeId}/attach", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AttachVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AttachVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.volume = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.attachVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -819,8 +837,9 @@ export class SDK {
   }
 
   
-  // BootLinodeInstance - Linode Boot
-  /** 
+  /**
+   * bootLinodeInstance - Linode Boot
+   *
    * Boots a Linode you have permission to modify. If no parameters are given, a Config profile
    * will be chosen for this boot based on the following criteria:
    * 
@@ -830,7 +849,7 @@ export class SDK {
    *   Linode was never booted or the last booted config was deleted) an error will be returned.
    * 
   **/
-  BootLinodeInstance(
+  bootLinodeInstance(
     req: operations.BootLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BootLinodeInstanceResponse> {
@@ -838,43 +857,44 @@ export class SDK {
       req = new operations.BootLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/boot", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BootLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BootLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bootLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bootLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -886,12 +906,13 @@ export class SDK {
   }
 
   
-  // CancelAccount - Account Cancel
-  /** 
+  /**
+   * cancelAccount - Account Cancel
+   *
    * Cancels an active Linode account. This action will cause Linode to attempt to charge the credit card on file for the remaining balance. An error will occur if Linode fails to charge the credit card on file. Restricted users will not be able to cancel an account.
    * 
   **/
-  CancelAccount(
+  cancelAccount(
     req: operations.CancelAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CancelAccountResponse> {
@@ -899,50 +920,50 @@ export class SDK {
       req = new operations.CancelAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/cancel";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CancelAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CancelAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelAccount200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelAccount409ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelAccountDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -954,12 +975,13 @@ export class SDK {
   }
 
   
-  // CancelBackups - Backups Cancel
-  /** 
+  /**
+   * cancelBackups - Backups Cancel
+   *
    * Cancels the Backup service on the given Linode. Deletes all of this Linode's existing backups forever.
    * 
   **/
-  CancelBackups(
+  cancelBackups(
     req: operations.CancelBackupsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CancelBackupsResponse> {
@@ -967,27 +989,29 @@ export class SDK {
       req = new operations.CancelBackupsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/backups/cancel", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CancelBackupsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CancelBackupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelBackups200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelBackupsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -999,8 +1023,9 @@ export class SDK {
   }
 
   
-  // CancelObjectStorage - Object Storage Cancel
-  /** 
+  /**
+   * cancelObjectStorage - Object Storage Cancel
+   *
    * Cancel Object Storage on an Account. All buckets on the Account must be empty
    * before Object Storage can be cancelled:
    * 
@@ -1011,7 +1036,7 @@ export class SDK {
    * [Lifecycle Policies](/docs/platform/object-storage/lifecycle-policies/).
    * 
   **/
-  CancelObjectStorage(
+  cancelObjectStorage(
     req: operations.CancelObjectStorageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CancelObjectStorageResponse> {
@@ -1019,27 +1044,32 @@ export class SDK {
       req = new operations.CancelObjectStorageRequest(req);
     }
     
-    let baseURL: string = operations.CANCELOBJECTSTORAGE_SERVERS[0];
+    let baseURL: string = operations.CancelObjectStorageServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/object-storage/cancel";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CancelObjectStorageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CancelObjectStorageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelObjectStorage200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelObjectStorageDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1051,12 +1081,13 @@ export class SDK {
   }
 
   
-  // CloneDomain - Domain Clone
-  /** 
+  /**
+   * cloneDomain - Domain Clone
+   *
    * Clones a Domain and all associated DNS records from a Domain that is registered in Linode's DNS manager.
    * 
   **/
-  CloneDomain(
+  cloneDomain(
     req: operations.CloneDomainRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CloneDomainResponse> {
@@ -1064,45 +1095,45 @@ export class SDK {
       req = new operations.CloneDomainRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}/clone", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CloneDomainResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CloneDomainResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domain = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloneDomainDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1114,12 +1145,13 @@ export class SDK {
   }
 
   
-  // CloneLinodeDisk - Disk Clone
-  /** 
+  /**
+   * cloneLinodeDisk - Disk Clone
+   *
    * Copies a disk, byte-for-byte, into a new Disk belonging to the same Linode. The Linode must have enough storage space available to accept a new Disk of the same size as this one or this operation will fail.
    * 
   **/
-  CloneLinodeDisk(
+  cloneLinodeDisk(
     req: operations.CloneLinodeDiskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CloneLinodeDiskResponse> {
@@ -1127,27 +1159,29 @@ export class SDK {
       req = new operations.CloneLinodeDiskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks/{diskId}/clone", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CloneLinodeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CloneLinodeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.disk = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloneLinodeDiskDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1159,8 +1193,9 @@ export class SDK {
   }
 
   
-  // CloneLinodeInstance - Linode Clone
-  /** 
+  /**
+   * cloneLinodeInstance - Linode Clone
+   *
    * You can clone your Linode's existing Disks or Configuration profiles to
    * another Linode on your Account. In order for this request to complete
    * successfully, your User must have the `add_linodes` grant. Cloning to a
@@ -1176,7 +1211,7 @@ export class SDK {
    * Any [tags](/docs/api/tags/#tags-list) existing on the source Linode will be cloned to the target Linode.
    * 
   **/
-  CloneLinodeInstance(
+  cloneLinodeInstance(
     req: operations.CloneLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CloneLinodeInstanceResponse> {
@@ -1184,45 +1219,45 @@ export class SDK {
       req = new operations.CloneLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/clone", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CloneLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CloneLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloneLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1234,12 +1269,13 @@ export class SDK {
   }
 
   
-  // CloneVolume - Volume Clone
-  /** 
+  /**
+   * cloneVolume - Volume Clone
+   *
    * Creates a Volume on your Account. In order for this request to complete successfully, your User must have the `add_volumes` grant. The new Volume will have the same size and data as the source Volume. Creating a new Volume will incur a charge on your Account.
    * 
   **/
-  CloneVolume(
+  cloneVolume(
     req: operations.CloneVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CloneVolumeResponse> {
@@ -1247,45 +1283,45 @@ export class SDK {
       req = new operations.CloneVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/volumes/{volumeId}/clone", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CloneVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CloneVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.volume = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloneVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1297,12 +1333,13 @@ export class SDK {
   }
 
   
-  // CloseTicket - Support Ticket Close
-  /** 
+  /**
+   * closeTicket - Support Ticket Close
+   *
    * Closes a Support Ticket you have access to modify.
    * 
   **/
-  CloseTicket(
+  closeTicket(
     req: operations.CloseTicketRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CloseTicketResponse> {
@@ -1310,27 +1347,29 @@ export class SDK {
       req = new operations.CloseTicketRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/support/tickets/{ticketId}/close", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CloseTicketResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CloseTicketResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.closeTicket200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.closeTicketDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1342,12 +1381,13 @@ export class SDK {
   }
 
   
-  // CreateClient - OAuth Client Create
-  /** 
+  /**
+   * createClient - OAuth Client Create
+   *
    * Creates an OAuth Client, which can be used to allow users (using their Linode account) to log in to your own application, and optionally grant your application some amount of access to their Linodes or other entities.
    * 
   **/
-  CreateClient(
+  createClient(
     req: operations.CreateClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateClientResponse> {
@@ -1355,43 +1395,44 @@ export class SDK {
       req = new operations.CreateClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/oauth-clients";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.oAuthClient = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1403,14 +1444,15 @@ export class SDK {
   }
 
   
-  // CreateCreditCard - Credit Card Add/Edit
-  /** 
+  /**
+   * createCreditCard - Credit Card Add/Edit
+   *
    * **DEPRECATED**. Please use Payment Method Add ([POST /account/payment-methods](/docs/api/account/#payment-method-add)).
    * 
    * Adds a credit card Payment Method to your account and sets it as the default method.
    * 
   **/
-  CreateCreditCard(
+  createCreditCard(
     req: operations.CreateCreditCardRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateCreditCardResponse> {
@@ -1418,45 +1460,45 @@ export class SDK {
       req = new operations.CreateCreditCardRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/credit-card";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateCreditCardResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateCreditCardResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createCreditCard200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createCreditCardDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1468,12 +1510,13 @@ export class SDK {
   }
 
   
-  // CreateDomain - Domain Create
-  /** 
+  /**
+   * createDomain - Domain Create
+   *
    * Adds a new Domain to Linode's DNS Manager. Linode is not a registrar, and you must own the domain before adding it here. Be sure to point your registrar to Linode's nameservers so that the records hosted here are used.
    * 
   **/
-  CreateDomain(
+  createDomain(
     req: operations.CreateDomainRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateDomainResponse> {
@@ -1481,45 +1524,45 @@ export class SDK {
       req = new operations.CreateDomainRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/domains";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateDomainResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateDomainResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domain = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDomainDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1531,12 +1574,13 @@ export class SDK {
   }
 
   
-  // CreateDomainRecord - Domain Record Create
-  /** 
+  /**
+   * createDomainRecord - Domain Record Create
+   *
    * Adds a new Domain Record to the zonefile this Domain represents.
    * 
   **/
-  CreateDomainRecord(
+  createDomainRecord(
     req: operations.CreateDomainRecordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateDomainRecordResponse> {
@@ -1544,45 +1588,45 @@ export class SDK {
       req = new operations.CreateDomainRecordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}/records", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domainRecord = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDomainRecordDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1594,12 +1638,13 @@ export class SDK {
   }
 
   
-  // CreateEntityTransfer - Entity Transfer Create
-  /** 
+  /**
+   * createEntityTransfer - Entity Transfer Create
+   *
    * **DEPRECATED**. Please use [Service Transfer Create](/docs/api/account/#service-transfer-create).
    * 
   **/
-  CreateEntityTransfer(
+  createEntityTransfer(
     req: operations.CreateEntityTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateEntityTransferResponse> {
@@ -1607,43 +1652,44 @@ export class SDK {
       req = new operations.CreateEntityTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/entity-transfers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.entityTransfer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createEntityTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1655,8 +1701,9 @@ export class SDK {
   }
 
   
-  // CreateFirewallDevice - Firewall Device Create
-  /** 
+  /**
+   * createFirewallDevice - Firewall Device Create
+   *
    * Creates a Firewall Device, which assigns a Firewall to a Linode service (referred to
    * as the Device's `entity`). Currently, only Devices with an entity of type `linode` are accepted.
    * A Firewall can be assigned a single Linode service at a time. Additional disabled Firewalls can be
@@ -1673,7 +1720,7 @@ export class SDK {
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  CreateFirewallDevice(
+  createFirewallDevice(
     req: operations.CreateFirewallDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateFirewallDeviceResponse> {
@@ -1681,43 +1728,47 @@ export class SDK {
       req = new operations.CreateFirewallDeviceRequest(req);
     }
     
-    let baseURL: string = operations.CREATEFIREWALLDEVICE_SERVERS[0];
+    let baseURL: string = operations.CreateFirewallDeviceServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}/devices", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateFirewallDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateFirewallDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.firewallDevices = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createFirewallDeviceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1729,8 +1780,9 @@ export class SDK {
   }
 
   
-  // CreateFirewalls - Firewall Create
-  /** 
+  /**
+   * createFirewalls - Firewall Create
+   *
    * Creates a Firewall to filter network traffic. Use the `rules` property to
    * create inbound and outbound access rules. Use the `devices` property to assign the
    * Firewall to a service. Currently, Firewalls can only be assigned to Linode
@@ -1749,7 +1801,7 @@ export class SDK {
    * Certain Regions have partial Firewall availability
    * 
   **/
-  CreateFirewalls(
+  createFirewalls(
     req: operations.CreateFirewallsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateFirewallsResponse> {
@@ -1757,43 +1809,47 @@ export class SDK {
       req = new operations.CreateFirewallsRequest(req);
     }
     
-    let baseURL: string = operations.CREATEFIREWALLS_SERVERS[0];
+    let baseURL: string = operations.CreateFirewallsServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/networking/firewalls";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateFirewallsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateFirewallsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.firewall = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createFirewallsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1805,8 +1861,9 @@ export class SDK {
   }
 
   
-  // CreateImage - Image Create
-  /** 
+  /**
+   * createImage - Image Create
+   *
    * Captures a private gold-master Image from a Linode Disk.
    * 
    * **Pricing change:** Images will transition to a paid service with a
@@ -1817,7 +1874,7 @@ export class SDK {
    * cost.
    * 
   **/
-  CreateImage(
+  createImage(
     req: operations.CreateImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateImageResponse> {
@@ -1825,43 +1882,44 @@ export class SDK {
       req = new operations.CreateImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/images";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.imagePrivate = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createImageDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1873,8 +1931,9 @@ export class SDK {
   }
 
   
-  // CreateLkeCluster - Kubernetes Cluster Create
-  /** 
+  /**
+   * createLkeCluster - Kubernetes Cluster Create
+   *
    * Creates a Kubernetes cluster. The Kubernetes cluster will be created
    * asynchronously. You can use the events system to determine when the
    * Kubernetes cluster is ready to use. Please note that it often takes 2-5 minutes before the
@@ -1883,7 +1942,7 @@ export class SDK {
    * are ready.
    * 
   **/
-  CreateLkeCluster(
+  createLkeCluster(
     req: operations.CreateLkeClusterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateLkeClusterResponse> {
@@ -1891,43 +1950,44 @@ export class SDK {
       req = new operations.CreateLkeClusterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lke/clusters";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.lkeCluster = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createLkeClusterDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1939,8 +1999,9 @@ export class SDK {
   }
 
   
-  // CreateLinodeInstance - Linode Create
-  /** 
+  /**
+   * createLinodeInstance - Linode Create
+   *
    * Creates a Linode Instance on your Account. In order for this
    * request to complete successfully, your User must have the `add_linodes` grant. Creating a
    * new Linode will incur a charge on your Account.
@@ -1995,7 +2056,7 @@ export class SDK {
    * tags on Linodes.
    * 
   **/
-  CreateLinodeInstance(
+  createLinodeInstance(
     req: operations.CreateLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateLinodeInstanceResponse> {
@@ -2003,45 +2064,45 @@ export class SDK {
       req = new operations.CreateLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/linode/instances";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2053,12 +2114,13 @@ export class SDK {
   }
 
   
-  // CreateLongviewClient - Longview Client Create
-  /** 
+  /**
+   * createLongviewClient - Longview Client Create
+   *
    * Creates a Longview Client.  This Client will not begin monitoring the status of your server until you configure the Longview Client application on your Linode using the returning `install_code` and `api_key`.
    * 
   **/
-  CreateLongviewClient(
+  createLongviewClient(
     req: operations.CreateLongviewClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateLongviewClientResponse> {
@@ -2066,45 +2128,45 @@ export class SDK {
       req = new operations.CreateLongviewClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/longview/clients";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.longviewClient = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createLongviewClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2116,12 +2178,13 @@ export class SDK {
   }
 
   
-  // CreateManagedContact - Managed Contact Create
-  /** 
+  /**
+   * createManagedContact - Managed Contact Create
+   *
    * Creates a Managed Contact.  A Managed Contact is someone Linode special forces can contact in the course of attempting to resolve an issue with a Managed Service.
    * 
   **/
-  CreateManagedContact(
+  createManagedContact(
     req: operations.CreateManagedContactRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateManagedContactResponse> {
@@ -2129,43 +2192,44 @@ export class SDK {
       req = new operations.CreateManagedContactRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/contacts";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedContact = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createManagedContactDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2177,12 +2241,13 @@ export class SDK {
   }
 
   
-  // CreateManagedCredential - Managed Credential Create
-  /** 
+  /**
+   * createManagedCredential - Managed Credential Create
+   *
    * Creates a Managed Credential. A Managed Credential is stored securely to allow Linode special forces to access your Managed Services and resolve issues.
    * 
   **/
-  CreateManagedCredential(
+  createManagedCredential(
     req: operations.CreateManagedCredentialRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateManagedCredentialResponse> {
@@ -2190,43 +2255,44 @@ export class SDK {
       req = new operations.CreateManagedCredentialRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/credentials";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedCredential = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createManagedCredentialDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2238,12 +2304,13 @@ export class SDK {
   }
 
   
-  // CreateManagedService - Managed Service Create
-  /** 
+  /**
+   * createManagedService - Managed Service Create
+   *
    * Creates a Managed Service. Linode Managed will begin monitoring this service and reporting and attempting to resolve any Issues.
    * 
   **/
-  CreateManagedService(
+  createManagedService(
     req: operations.CreateManagedServiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateManagedServiceResponse> {
@@ -2251,43 +2318,44 @@ export class SDK {
       req = new operations.CreateManagedServiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/services";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedService = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createManagedServiceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2299,12 +2367,13 @@ export class SDK {
   }
 
   
-  // CreateNodeBalancer - NodeBalancer Create
-  /** 
+  /**
+   * createNodeBalancer - NodeBalancer Create
+   *
    * Creates a NodeBalancer in the requested Region. This NodeBalancer will not start serving requests until it is configured.
    * 
   **/
-  CreateNodeBalancer(
+  createNodeBalancer(
     req: operations.CreateNodeBalancerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateNodeBalancerResponse> {
@@ -2312,45 +2381,45 @@ export class SDK {
       req = new operations.CreateNodeBalancerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/nodebalancers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createNodeBalancerDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2362,12 +2431,13 @@ export class SDK {
   }
 
   
-  // CreateNodeBalancerConfig - Config Create
-  /** 
+  /**
+   * createNodeBalancerConfig - Config Create
+   *
    * Creates a NodeBalancer Config, which allows the NodeBalancer to accept traffic on a new port. You will need to add NodeBalancer Nodes to the new Config before it can actually serve requests.
    * 
   **/
-  CreateNodeBalancerConfig(
+  createNodeBalancerConfig(
     req: operations.CreateNodeBalancerConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateNodeBalancerConfigResponse> {
@@ -2375,43 +2445,44 @@ export class SDK {
       req = new operations.CreateNodeBalancerConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancerConfig = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createNodeBalancerConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2423,12 +2494,13 @@ export class SDK {
   }
 
   
-  // CreateNodeBalancerNode - Node Create
-  /** 
+  /**
+   * createNodeBalancerNode - Node Create
+   *
    * Creates a NodeBalancer Node, a backend that can accept traffic for this NodeBalancer Config. Nodes are routed requests on the configured port based on their status.
    * 
   **/
-  CreateNodeBalancerNode(
+  createNodeBalancerNode(
     req: operations.CreateNodeBalancerNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateNodeBalancerNodeResponse> {
@@ -2436,45 +2508,45 @@ export class SDK {
       req = new operations.CreateNodeBalancerNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateNodeBalancerNodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateNodeBalancerNodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancerNode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createNodeBalancerNodeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2486,8 +2558,9 @@ export class SDK {
   }
 
   
-  // CreateObjectStorageBucket - Object Storage Bucket Create
-  /** 
+  /**
+   * createObjectStorageBucket - Object Storage Bucket Create
+   *
    * Creates an Object Storage Bucket in the cluster specified. If the
    * bucket already exists and is owned by you, this endpoint will return a
    * `200` response with that bucket as if it had just been created.
@@ -2497,7 +2570,7 @@ export class SDK {
    * use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#put-bucket) directly.
    * 
   **/
-  CreateObjectStorageBucket(
+  createObjectStorageBucket(
     req: operations.CreateObjectStorageBucketRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateObjectStorageBucketResponse> {
@@ -2505,43 +2578,47 @@ export class SDK {
       req = new operations.CreateObjectStorageBucketRequest(req);
     }
     
-    let baseURL: string = operations.CREATEOBJECTSTORAGEBUCKET_SERVERS[0];
+    let baseURL: string = operations.CreateObjectStorageBucketServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/object-storage/buckets";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateObjectStorageBucketResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateObjectStorageBucketResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageBucket = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createObjectStorageBucketDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2553,8 +2630,9 @@ export class SDK {
   }
 
   
-  // CreateObjectStorageKeys - Object Storage Key Create
-  /** 
+  /**
+   * createObjectStorageKeys - Object Storage Key Create
+   *
    * Provisions a new Object Storage Key on your account.
    * 
    * * To create a Limited Access Key with specific permissions, send a `bucket_access`
@@ -2567,7 +2645,7 @@ export class SDK {
    * omit the `bucket_access` array.
    * 
   **/
-  CreateObjectStorageKeys(
+  createObjectStorageKeys(
     req: operations.CreateObjectStorageKeysRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateObjectStorageKeysResponse> {
@@ -2575,43 +2653,47 @@ export class SDK {
       req = new operations.CreateObjectStorageKeysRequest(req);
     }
     
-    let baseURL: string = operations.CREATEOBJECTSTORAGEKEYS_SERVERS[0];
+    let baseURL: string = operations.CreateObjectStorageKeysServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/object-storage/keys";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateObjectStorageKeysResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateObjectStorageKeysResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageKey = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createObjectStorageKeysDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2623,8 +2705,9 @@ export class SDK {
   }
 
   
-  // CreateObjectStorageObjectUrl - Object Storage Object URL Create
-  /** 
+  /**
+   * createObjectStorageObjectUrl - Object Storage Object URL Create
+   *
    * Creates a pre-signed URL to access a single Object in a bucket. This
    * can be used to share objects, and also to create/delete objects by using
    * the appropriate HTTP method in your request body's `method` parameter.
@@ -2635,7 +2718,7 @@ export class SDK {
    * directly.
    * 
   **/
-  CreateObjectStorageObjectUrl(
+  createObjectStorageObjectUrl(
     req: operations.CreateObjectStorageObjectUrlRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateObjectStorageObjectUrlResponse> {
@@ -2643,43 +2726,47 @@ export class SDK {
       req = new operations.CreateObjectStorageObjectUrlRequest(req);
     }
     
-    let baseURL: string = operations.CREATEOBJECTSTORAGEOBJECTURL_SERVERS[0];
+    let baseURL: string = operations.CreateObjectStorageObjectUrlServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/object-url", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateObjectStorageObjectUrlResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateObjectStorageObjectUrlResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createObjectStorageObjectUrl200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createObjectStorageObjectUrlDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2691,8 +2778,9 @@ export class SDK {
   }
 
   
-  // CreateObjectStorageSsl - Object Storage TLS/SSL Cert Upload
-  /** 
+  /**
+   * createObjectStorageSsl - Object Storage TLS/SSL Cert Upload
+   *
    * Upload a TLS/SSL certificate and private key to be served when you visit your Object Storage bucket via HTTPS.
    * Your TLS/SSL certificate and private key are stored encrypted at rest.
    * 
@@ -2701,7 +2789,7 @@ export class SDK {
    * and upload a new one.
    * 
   **/
-  CreateObjectStorageSsl(
+  createObjectStorageSsl(
     req: operations.CreateObjectStorageSslRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateObjectStorageSslResponse> {
@@ -2709,43 +2797,47 @@ export class SDK {
       req = new operations.CreateObjectStorageSslRequest(req);
     }
     
-    let baseURL: string = operations.CREATEOBJECTSTORAGESSL_SERVERS[0];
+    let baseURL: string = operations.CreateObjectStorageSslServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/ssl", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateObjectStorageSslResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateObjectStorageSslResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageSslResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createObjectStorageSslDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2757,12 +2849,13 @@ export class SDK {
   }
 
   
-  // CreatePayPalPayment - PayPal Payment Stage
-  /** 
+  /**
+   * createPayPalPayment - PayPal Payment Stage
+   *
    * This begins the process of submitting a Payment via PayPal. After calling this endpoint, you must take the resulting `payment_id` along with the `payer_id` from your PayPal account and [POST /account/payments/paypal-execute](/docs/api/account/#stagedapproved-paypal-payment-execute) to complete the Payment.
    * 
   **/
-  CreatePayPalPayment(
+  createPayPalPayment(
     req: operations.CreatePayPalPaymentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePayPalPaymentResponse> {
@@ -2770,45 +2863,45 @@ export class SDK {
       req = new operations.CreatePayPalPaymentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/payments/paypal";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePayPalPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePayPalPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPayPalPayment200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPayPalPaymentDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2820,12 +2913,13 @@ export class SDK {
   }
 
   
-  // CreatePayment - Payment Make
-  /** 
+  /**
+   * createPayment - Payment Make
+   *
    * Makes a Payment to your Account via credit card. This will charge your credit card the requested amount.
    * 
   **/
-  CreatePayment(
+  createPayment(
     req: operations.CreatePaymentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePaymentResponse> {
@@ -2833,45 +2927,45 @@ export class SDK {
       req = new operations.CreatePaymentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/payments";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePaymentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePaymentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.payment = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPaymentDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2883,15 +2977,16 @@ export class SDK {
   }
 
   
-  // CreatePaymentMethod - Payment Method Add
-  /** 
+  /**
+   * createPaymentMethod - Payment Method Add
+   *
    * Adds a Payment Method to your Account with the option to set it as the default method.
    * 
    * Prior to adding a Payment Method, ensure that your billing address information is up-to-date
    * with a valid `zip` by using the Account Update ([PUT /account](/docs/api/account/#account-update)) endpoint.
    * 
   **/
-  CreatePaymentMethod(
+  createPaymentMethod(
     req: operations.CreatePaymentMethodRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePaymentMethodResponse> {
@@ -2899,45 +2994,48 @@ export class SDK {
       req = new operations.CreatePaymentMethodRequest(req);
     }
     
-    let baseURL: string = operations.CREATEPAYMENTMETHOD_SERVERS[0];
+    let baseURL: string = operations.CreatePaymentMethodServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/account/payment-methods";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePaymentMethodResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPaymentMethod200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPaymentMethodDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2949,12 +3047,13 @@ export class SDK {
   }
 
   
-  // CreatePersonalAccessToken - Personal Access Token Create
-  /** 
+  /**
+   * createPersonalAccessToken - Personal Access Token Create
+   *
    * Creates a Personal Access Token for your User. The raw token will be returned in the response, but will never be returned again afterward so be sure to take note of it. You may create a token with _at most_ the scopes of your current token. The created token will be able to access your Account until the given expiry, or until it is revoked.
    * 
   **/
-  CreatePersonalAccessToken(
+  createPersonalAccessToken(
     req: operations.CreatePersonalAccessTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePersonalAccessTokenResponse> {
@@ -2962,45 +3061,45 @@ export class SDK {
       req = new operations.CreatePersonalAccessTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/tokens";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personalAccessToken = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPersonalAccessTokenDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3012,8 +3111,9 @@ export class SDK {
   }
 
   
-  // CreatePromoCredit - Promo Credit Add
-  /** 
+  /**
+   * createPromoCredit - Promo Credit Add
+   *
    * Adds an expiring Promo Credit to your account.
    * 
    * The following restrictions apply:
@@ -3025,7 +3125,7 @@ export class SDK {
    * * The `promo_code` must be valid and unexpired.
    * 
   **/
-  CreatePromoCredit(
+  createPromoCredit(
     req: operations.CreatePromoCreditRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePromoCreditResponse> {
@@ -3033,43 +3133,44 @@ export class SDK {
       req = new operations.CreatePromoCreditRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/promo-codes";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePromoCreditResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePromoCreditResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.promotion = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPromoCreditDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3081,8 +3182,9 @@ export class SDK {
   }
 
   
-  // CreateServiceTransfer - Service Transfer Create
-  /** 
+  /**
+   * createServiceTransfer - Service Transfer Create
+   *
    * Creates a transfer request for the specified services. A request can contain any of the specified service types
    * and any number of each service type. At this time, only Linodes can be transferred.
    * 
@@ -3121,7 +3223,7 @@ export class SDK {
    *     * have any assigned /56, /64, or /116 IPv6 ranges.
    * 
   **/
-  CreateServiceTransfer(
+  createServiceTransfer(
     req: operations.CreateServiceTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateServiceTransferResponse> {
@@ -3129,43 +3231,44 @@ export class SDK {
       req = new operations.CreateServiceTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/service-transfers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceTransfer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createServiceTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3177,13 +3280,14 @@ export class SDK {
   }
 
   
-  // CreateSnapshot - Snapshot Create
-  /** 
+  /**
+   * createSnapshot - Snapshot Create
+   *
    * Creates a snapshot Backup of a Linode.
    * ** If you already have a snapshot of this Linode, this is a destructive action. The previous snapshot will be deleted.**
    * 
   **/
-  CreateSnapshot(
+  createSnapshot(
     req: operations.CreateSnapshotRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateSnapshotResponse> {
@@ -3191,45 +3295,45 @@ export class SDK {
       req = new operations.CreateSnapshotRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/backups", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateSnapshotResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateSnapshotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.backup = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSnapshotDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3241,14 +3345,15 @@ export class SDK {
   }
 
   
-  // CreateTag - New Tag Create
-  /** 
+  /**
+   * createTag - New Tag Create
+   *
    * Creates a new Tag and optionally tags requested objects with it immediately.
    * 
    * **Important**: You must be an unrestricted User in order to add or modify Tags.
    * 
   **/
-  CreateTag(
+  createTag(
     req: operations.CreateTagRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateTagResponse> {
@@ -3256,43 +3361,44 @@ export class SDK {
       req = new operations.CreateTagRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateTagResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateTagResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tag = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createTagDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3304,13 +3410,14 @@ export class SDK {
   }
 
   
-  // CreateTicket - Support Ticket Open
-  /** 
+  /**
+   * createTicket - Support Ticket Open
+   *
    * Open a Support Ticket.
    * Only one of the ID attributes (`linode_id`, `domain_id`, etc.) can be set on a single Support Ticket.
    * 
   **/
-  CreateTicket(
+  createTicket(
     req: operations.CreateTicketRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateTicketResponse> {
@@ -3318,43 +3425,44 @@ export class SDK {
       req = new operations.CreateTicketRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/support/tickets";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateTicketResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateTicketResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.supportTicket = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createTicketDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3366,13 +3474,14 @@ export class SDK {
   }
 
   
-  // CreateTicketAttachment - Ticket Attachment Create
-  /** 
+  /**
+   * createTicketAttachment - Ticket Attachment Create
+   *
    * Adds a file attachment to an existing Support Ticket on your Account. File attachments are used to assist our Support team in resolving your Ticket. Examples of attachments are screen shots and text files that provide additional information.
    * Note: Accepted file extensions include: .gif, .jpg, .jpeg, .pjpg, .pjpeg, .tif, .tiff, .png, .pdf, or .txt.
    * 
   **/
-  CreateTicketAttachment(
+  createTicketAttachment(
     req: operations.CreateTicketAttachmentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateTicketAttachmentResponse> {
@@ -3380,45 +3489,45 @@ export class SDK {
       req = new operations.CreateTicketAttachmentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/support/tickets/{ticketId}/attachments", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateTicketAttachmentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateTicketAttachmentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createTicketAttachment200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createTicketAttachmentDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3430,12 +3539,13 @@ export class SDK {
   }
 
   
-  // CreateTicketReply - Reply Create
-  /** 
+  /**
+   * createTicketReply - Reply Create
+   *
    * Adds a reply to an existing Support Ticket.
    * 
   **/
-  CreateTicketReply(
+  createTicketReply(
     req: operations.CreateTicketReplyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateTicketReplyResponse> {
@@ -3443,45 +3553,45 @@ export class SDK {
       req = new operations.CreateTicketReplyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/support/tickets/{ticketId}/replies", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateTicketReplyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateTicketReplyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.supportTicketReply = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createTicketReplyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3493,14 +3603,15 @@ export class SDK {
   }
 
   
-  // CreateUser - User Create
-  /** 
+  /**
+   * createUser - User Create
+   *
    * Creates a User on your Account. Once created, a confirmation message containing password creation and login instructions is sent to the User's email address.
    * 
    * The User's account access is determined by whether or not they are restricted, and what grants they have been given.
    * 
   **/
-  CreateUser(
+  createUser(
     req: operations.CreateUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateUserResponse> {
@@ -3508,43 +3619,44 @@ export class SDK {
       req = new operations.CreateUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/users";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.user = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createUserDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3556,12 +3668,13 @@ export class SDK {
   }
 
   
-  // CreateVolume - Volume Create
-  /** 
+  /**
+   * createVolume - Volume Create
+   *
    * Creates a Volume on your Account. In order for this to complete successfully, your User must have the `add_volumes` grant. Creating a new Volume will start accruing additional charges on your account.
    * 
   **/
-  CreateVolume(
+  createVolume(
     req: operations.CreateVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateVolumeResponse> {
@@ -3569,45 +3682,45 @@ export class SDK {
       req = new operations.CreateVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/volumes";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.volume = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3619,12 +3732,13 @@ export class SDK {
   }
 
   
-  // DeleteClient - OAuth Client Delete
-  /** 
+  /**
+   * deleteClient - OAuth Client Delete
+   *
    * Deletes an OAuth Client registered with Linode. The Client ID and Client secret will no longer be accepted by <a target="_top" href="https://login.linode.com">https://login.linode.com</a>, and all tokens issued to this client will be invalidated (meaning that if your application was using a token, it will no longer work).
    * 
   **/
-  DeleteClient(
+  deleteClient(
     req: operations.DeleteClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteClientResponse> {
@@ -3632,27 +3746,29 @@ export class SDK {
       req = new operations.DeleteClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/oauth-clients/{clientId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteClient200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3664,14 +3780,15 @@ export class SDK {
   }
 
   
-  // DeleteDisk - Disk Delete
-  /** 
+  /**
+   * deleteDisk - Disk Delete
+   *
    * Deletes a Disk you have permission to `read_write`.
    * 
    * **Deleting a Disk is a destructive action and cannot be undone.**
    * 
   **/
-  DeleteDisk(
+  deleteDisk(
     req: operations.DeleteDiskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteDiskResponse> {
@@ -3679,27 +3796,29 @@ export class SDK {
       req = new operations.DeleteDiskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks/{diskId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteDiskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteDiskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteDisk200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteDiskDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3711,12 +3830,13 @@ export class SDK {
   }
 
   
-  // DeleteDomain - Domain Delete
-  /** 
+  /**
+   * deleteDomain - Domain Delete
+   *
    * Deletes a Domain from Linode's DNS Manager. The Domain will be removed from Linode's nameservers shortly after this operation completes. This also deletes all associated Domain Records.
    * 
   **/
-  DeleteDomain(
+  deleteDomain(
     req: operations.DeleteDomainRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteDomainResponse> {
@@ -3724,27 +3844,29 @@ export class SDK {
       req = new operations.DeleteDomainRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteDomainResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteDomainResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteDomain200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteDomainDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3756,12 +3878,13 @@ export class SDK {
   }
 
   
-  // DeleteDomainRecord - Domain Record Delete
-  /** 
+  /**
+   * deleteDomainRecord - Domain Record Delete
+   *
    * Deletes a Record on this Domain.
    * 
   **/
-  DeleteDomainRecord(
+  deleteDomainRecord(
     req: operations.DeleteDomainRecordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteDomainRecordResponse> {
@@ -3769,27 +3892,29 @@ export class SDK {
       req = new operations.DeleteDomainRecordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}/records/{recordId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteDomainRecord200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteDomainRecordDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3801,12 +3926,13 @@ export class SDK {
   }
 
   
-  // DeleteEntityTransfer - Entity Transfer Cancel
-  /** 
+  /**
+   * deleteEntityTransfer - Entity Transfer Cancel
+   *
    * **DEPRECATED**. Please use [Service Transfer Cancel](/docs/api/account/#service-transfer-cancel).
    * 
   **/
-  DeleteEntityTransfer(
+  deleteEntityTransfer(
     req: operations.DeleteEntityTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteEntityTransferResponse> {
@@ -3814,27 +3940,29 @@ export class SDK {
       req = new operations.DeleteEntityTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/entity-transfers/{token}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteEntityTransfer200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteEntityTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3846,8 +3974,9 @@ export class SDK {
   }
 
   
-  // DeleteFirewall - Firewall Delete
-  /** 
+  /**
+   * deleteFirewall - Firewall Delete
+   *
    * Delete a Firewall resource by its ID. This will remove all of the Firewall's Rules
    * from any Linode services that the Firewall was assigned to.
    * 
@@ -3856,7 +3985,7 @@ export class SDK {
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  DeleteFirewall(
+  deleteFirewall(
     req: operations.DeleteFirewallRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteFirewallResponse> {
@@ -3864,27 +3993,32 @@ export class SDK {
       req = new operations.DeleteFirewallRequest(req);
     }
     
-    let baseURL: string = operations.DELETEFIREWALL_SERVERS[0];
+    let baseURL: string = operations.DeleteFirewallServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteFirewallResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteFirewallResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteFirewall200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteFirewallDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3896,8 +4030,9 @@ export class SDK {
   }
 
   
-  // DeleteFirewallDevice - Firewall Device Delete
-  /** 
+  /**
+   * deleteFirewallDevice - Firewall Device Delete
+   *
    * Removes a Firewall Device, which removes a Firewall from the Linode service it was
    * assigned to by the Device. This will remove all of the Firewall's Rules from the Linode
    * service. If any other Firewalls have been assigned to the Linode service, then those Rules
@@ -3908,7 +4043,7 @@ export class SDK {
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  DeleteFirewallDevice(
+  deleteFirewallDevice(
     req: operations.DeleteFirewallDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteFirewallDeviceResponse> {
@@ -3916,27 +4051,32 @@ export class SDK {
       req = new operations.DeleteFirewallDeviceRequest(req);
     }
     
-    let baseURL: string = operations.DELETEFIREWALLDEVICE_SERVERS[0];
+    let baseURL: string = operations.DeleteFirewallDeviceServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}/devices/{deviceId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteFirewallDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteFirewallDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteFirewallDevice200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteFirewallDeviceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3948,15 +4088,16 @@ export class SDK {
   }
 
   
-  // DeleteImage - Image Delete
-  /** 
+  /**
+   * deleteImage - Image Delete
+   *
    * Deletes a private Image you have permission to `read_write`.
    * 
    * 
    * **Deleting an Image is a destructive action and cannot be undone.**
    * 
   **/
-  DeleteImage(
+  deleteImage(
     req: operations.DeleteImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteImageResponse> {
@@ -3964,27 +4105,29 @@ export class SDK {
       req = new operations.DeleteImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/images/{imageId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteImage200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteImageDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3996,8 +4139,9 @@ export class SDK {
   }
 
   
-  // DeleteLkeCluster - Kubernetes Cluster Delete
-  /** 
+  /**
+   * deleteLkeCluster - Kubernetes Cluster Delete
+   *
    * Deletes a Cluster you have permission to `read_write`.
    * 
    * **Deleting a Cluster is a destructive action and cannot be undone.**
@@ -4011,7 +4155,7 @@ export class SDK {
    *     cluster
    * 
   **/
-  DeleteLkeCluster(
+  deleteLkeCluster(
     req: operations.DeleteLkeClusterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteLkeClusterResponse> {
@@ -4019,27 +4163,29 @@ export class SDK {
       req = new operations.DeleteLkeClusterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLkeCluster200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLkeClusterDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4051,8 +4197,9 @@ export class SDK {
   }
 
   
-  // DeleteLkeClusterNode - Node Delete
-  /** 
+  /**
+   * deleteLkeClusterNode - Node Delete
+   *
    * Deletes a specific Node from a Node Pool.
    * 
    * **Deleting a Node is a destructive action and cannot be undone.**
@@ -4060,7 +4207,7 @@ export class SDK {
    * Deleting a Node will reduce the size of the Node Pool it belongs to.
    * 
   **/
-  DeleteLkeClusterNode(
+  deleteLkeClusterNode(
     req: operations.DeleteLkeClusterNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteLkeClusterNodeResponse> {
@@ -4068,27 +4215,29 @@ export class SDK {
       req = new operations.DeleteLkeClusterNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/nodes/{nodeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteLkeClusterNodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteLkeClusterNodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLkeClusterNode200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLkeClusterNodeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4100,8 +4249,9 @@ export class SDK {
   }
 
   
-  // DeleteLkeNodePool - Node Pool Delete
-  /** 
+  /**
+   * deleteLkeNodePool - Node Pool Delete
+   *
    * Delete a specific Node Pool from a Kubernetes cluster.
    * 
    * **Deleting a Node Pool is a destructive action and cannot be undone.**
@@ -4109,7 +4259,7 @@ export class SDK {
    * Deleting a Node Pool will delete all Linodes within that Pool.
    * 
   **/
-  DeleteLkeNodePool(
+  deleteLkeNodePool(
     req: operations.DeleteLkeNodePoolRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteLkeNodePoolResponse> {
@@ -4117,27 +4267,29 @@ export class SDK {
       req = new operations.DeleteLkeNodePoolRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/pools/{poolId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteLkeNodePoolResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteLkeNodePoolResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLkeNodePool200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLkeNodePoolDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4149,12 +4301,13 @@ export class SDK {
   }
 
   
-  // DeleteLinodeConfig - Configuration Profile Delete
-  /** 
+  /**
+   * deleteLinodeConfig - Configuration Profile Delete
+   *
    * Deletes the specified Configuration profile from the specified Linode.
    * 
   **/
-  DeleteLinodeConfig(
+  deleteLinodeConfig(
     req: operations.DeleteLinodeConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteLinodeConfigResponse> {
@@ -4162,27 +4315,29 @@ export class SDK {
       req = new operations.DeleteLinodeConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/configs/{configId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLinodeConfig200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLinodeConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4194,8 +4349,9 @@ export class SDK {
   }
 
   
-  // DeleteLinodeInstance - Linode Delete
-  /** 
+  /**
+   * deleteLinodeInstance - Linode Delete
+   *
    * Deletes a Linode you have permission to `read_write`.
    * 
    * **Deleting a Linode is a destructive action and cannot be undone.**
@@ -4208,7 +4364,7 @@ export class SDK {
    *     within the billing period the Linode was active.
    * 
   **/
-  DeleteLinodeInstance(
+  deleteLinodeInstance(
     req: operations.DeleteLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteLinodeInstanceResponse> {
@@ -4216,27 +4372,29 @@ export class SDK {
       req = new operations.DeleteLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4248,8 +4406,9 @@ export class SDK {
   }
 
   
-  // DeleteLongviewClient - Longview Client Delete
-  /** 
+  /**
+   * deleteLongviewClient - Longview Client Delete
+   *
    * Deletes a Longview Client from your Account.
    * 
    * **All information stored for this client will be lost.**
@@ -4257,7 +4416,7 @@ export class SDK {
    * This _does not_ uninstall the Longview Client application for your Linode - you must do that manually.
    * 
   **/
-  DeleteLongviewClient(
+  deleteLongviewClient(
     req: operations.DeleteLongviewClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteLongviewClientResponse> {
@@ -4265,27 +4424,29 @@ export class SDK {
       req = new operations.DeleteLongviewClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/longview/clients/{clientId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLongviewClient200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteLongviewClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4297,12 +4458,13 @@ export class SDK {
   }
 
   
-  // DeleteManagedContact - Managed Contact Delete
-  /** 
+  /**
+   * deleteManagedContact - Managed Contact Delete
+   *
    * Deletes a Managed Contact.
    * 
   **/
-  DeleteManagedContact(
+  deleteManagedContact(
     req: operations.DeleteManagedContactRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteManagedContactResponse> {
@@ -4310,27 +4472,29 @@ export class SDK {
       req = new operations.DeleteManagedContactRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/contacts/{contactId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteManagedContact200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteManagedContactDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4342,12 +4506,13 @@ export class SDK {
   }
 
   
-  // DeleteManagedCredential - Managed Credential Delete
-  /** 
+  /**
+   * deleteManagedCredential - Managed Credential Delete
+   *
    * Deletes a Managed Credential.  Linode special forces will no longer have access to this Credential when attempting to resolve issues.
    * 
   **/
-  DeleteManagedCredential(
+  deleteManagedCredential(
     req: operations.DeleteManagedCredentialRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteManagedCredentialResponse> {
@@ -4355,27 +4520,29 @@ export class SDK {
       req = new operations.DeleteManagedCredentialRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/credentials/{credentialId}/revoke", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteManagedCredential200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteManagedCredentialDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4387,12 +4554,13 @@ export class SDK {
   }
 
   
-  // DeleteManagedService - Managed Service Delete
-  /** 
+  /**
+   * deleteManagedService - Managed Service Delete
+   *
    * Deletes a Managed Service.  This service will no longer be monitored by Linode Managed.
    * 
   **/
-  DeleteManagedService(
+  deleteManagedService(
     req: operations.DeleteManagedServiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteManagedServiceResponse> {
@@ -4400,27 +4568,29 @@ export class SDK {
       req = new operations.DeleteManagedServiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/services/{serviceId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteManagedService200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteManagedServiceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4432,8 +4602,9 @@ export class SDK {
   }
 
   
-  // DeleteNodeBalancer - NodeBalancer Delete
-  /** 
+  /**
+   * deleteNodeBalancer - NodeBalancer Delete
+   *
    * Deletes a NodeBalancer.
    * 
    * **This is a destructive action and cannot be undone.**
@@ -4441,7 +4612,7 @@ export class SDK {
    * Deleting a NodeBalancer will also delete all associated Configs and Nodes, although the backend servers represented by the Nodes will not be changed or removed. Deleting a NodeBalancer will cause you to lose access to the IP Addresses assigned to this NodeBalancer.
    * 
   **/
-  DeleteNodeBalancer(
+  deleteNodeBalancer(
     req: operations.DeleteNodeBalancerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteNodeBalancerResponse> {
@@ -4449,27 +4620,29 @@ export class SDK {
       req = new operations.DeleteNodeBalancerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteNodeBalancer200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteNodeBalancerDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4481,8 +4654,9 @@ export class SDK {
   }
 
   
-  // DeleteNodeBalancerConfig - Config Delete
-  /** 
+  /**
+   * deleteNodeBalancerConfig - Config Delete
+   *
    * Deletes the Config for a port of this NodeBalancer.
    * 
    * **This cannot be undone.**
@@ -4490,7 +4664,7 @@ export class SDK {
    * Once completed, this NodeBalancer will no longer respond to requests on the given port. This also deletes all associated NodeBalancerNodes, but the Linodes they were routing traffic to will be unchanged and will not be removed.
    * 
   **/
-  DeleteNodeBalancerConfig(
+  deleteNodeBalancerConfig(
     req: operations.DeleteNodeBalancerConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteNodeBalancerConfigResponse> {
@@ -4498,27 +4672,29 @@ export class SDK {
       req = new operations.DeleteNodeBalancerConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteNodeBalancerConfig200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteNodeBalancerConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4530,14 +4706,15 @@ export class SDK {
   }
 
   
-  // DeleteNodeBalancerConfigNode - Node Delete
-  /** 
+  /**
+   * deleteNodeBalancerConfigNode - Node Delete
+   *
    * Deletes a Node from this Config. This backend will no longer receive traffic for the configured port of this NodeBalancer.
    * 
    * This does not change or remove the Linode whose address was used in the creation of this Node.
    * 
   **/
-  DeleteNodeBalancerConfigNode(
+  deleteNodeBalancerConfigNode(
     req: operations.DeleteNodeBalancerConfigNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteNodeBalancerConfigNodeResponse> {
@@ -4545,27 +4722,29 @@ export class SDK {
       req = new operations.DeleteNodeBalancerConfigNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteNodeBalancerConfigNodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteNodeBalancerConfigNodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteNodeBalancerConfigNode200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteNodeBalancerConfigNodeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4577,14 +4756,15 @@ export class SDK {
   }
 
   
-  // DeleteObjectStorageBucket - Object Storage Bucket Remove
-  /** 
+  /**
+   * deleteObjectStorageBucket - Object Storage Bucket Remove
+   *
    * Removes a single bucket. While buckets containing objects _may_ be deleted by including the `force` option in the request, such operations will fail if the bucket contains too many objects. The recommended way to empty large buckets is to use the [S3 API to configure lifecycle policies](https://docs.ceph.com/en/latest/radosgw/bucketpolicy/#) that remove all objects, then delete the bucket.
    * 
    * This endpoint is available for convenience. It is recommended that instead you use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#delete-bucket) directly.
    * 
   **/
-  DeleteObjectStorageBucket(
+  deleteObjectStorageBucket(
     req: operations.DeleteObjectStorageBucketRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteObjectStorageBucketResponse> {
@@ -4592,27 +4772,32 @@ export class SDK {
       req = new operations.DeleteObjectStorageBucketRequest(req);
     }
     
-    let baseURL: string = operations.DELETEOBJECTSTORAGEBUCKET_SERVERS[0];
+    let baseURL: string = operations.DeleteObjectStorageBucketServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteObjectStorageBucketResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteObjectStorageBucketResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteObjectStorageBucket200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteObjectStorageBucketDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4624,12 +4809,13 @@ export class SDK {
   }
 
   
-  // DeleteObjectStorageKey - Object Storage Key Revoke
-  /** 
+  /**
+   * deleteObjectStorageKey - Object Storage Key Revoke
+   *
    * Revokes an Object Storage Key.  This keypair will no longer be usable by third-party clients.
    * 
   **/
-  DeleteObjectStorageKey(
+  deleteObjectStorageKey(
     req: operations.DeleteObjectStorageKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteObjectStorageKeyResponse> {
@@ -4637,27 +4823,32 @@ export class SDK {
       req = new operations.DeleteObjectStorageKeyRequest(req);
     }
     
-    let baseURL: string = operations.DELETEOBJECTSTORAGEKEY_SERVERS[0];
+    let baseURL: string = operations.DeleteObjectStorageKeyServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/keys/{keyId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteObjectStorageKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteObjectStorageKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteObjectStorageKey200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteObjectStorageKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4669,12 +4860,13 @@ export class SDK {
   }
 
   
-  // DeleteObjectStorageSsl - Object Storage TLS/SSL Cert Delete
-  /** 
+  /**
+   * deleteObjectStorageSsl - Object Storage TLS/SSL Cert Delete
+   *
    * Deletes this Object Storage bucket's user uploaded TLS/SSL certificate and private key.
    * 
   **/
-  DeleteObjectStorageSsl(
+  deleteObjectStorageSsl(
     req: operations.DeleteObjectStorageSslRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteObjectStorageSslResponse> {
@@ -4682,27 +4874,32 @@ export class SDK {
       req = new operations.DeleteObjectStorageSslRequest(req);
     }
     
-    let baseURL: string = operations.DELETEOBJECTSTORAGESSL_SERVERS[0];
+    let baseURL: string = operations.DeleteObjectStorageSslServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/ssl", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteObjectStorageSslResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteObjectStorageSslResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteObjectStorageSsl200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteObjectStorageSslDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4714,12 +4911,13 @@ export class SDK {
   }
 
   
-  // DeletePersonalAccessToken - Personal Access Token Revoke
-  /** 
+  /**
+   * deletePersonalAccessToken - Personal Access Token Revoke
+   *
    * Revokes a Personal Access Token. The token will be invalidated immediately, and requests using that token will fail with a 401. It is possible to revoke access to the token making the request to revoke a token, but keep in mind that doing so could lose you access to the api and require you to create a new token through some other means.
    * 
   **/
-  DeletePersonalAccessToken(
+  deletePersonalAccessToken(
     req: operations.DeletePersonalAccessTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeletePersonalAccessTokenResponse> {
@@ -4727,27 +4925,29 @@ export class SDK {
       req = new operations.DeletePersonalAccessTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/tokens/{tokenId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeletePersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeletePersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePersonalAccessToken200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePersonalAccessTokenDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4759,12 +4959,13 @@ export class SDK {
   }
 
   
-  // DeleteProfileApp - App Access Revoke
-  /** 
+  /**
+   * deleteProfileApp - App Access Revoke
+   *
    * Expires this app token. This token may no longer be used to access your Account.
    * 
   **/
-  DeleteProfileApp(
+  deleteProfileApp(
     req: operations.DeleteProfileAppRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteProfileAppResponse> {
@@ -4772,27 +4973,29 @@ export class SDK {
       req = new operations.DeleteProfileAppRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/apps/{appId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteProfileAppResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteProfileAppResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteProfileApp200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteProfileAppDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4804,14 +5007,15 @@ export class SDK {
   }
 
   
-  // DeleteSshKey - SSH Key Delete
-  /** 
+  /**
+   * deleteSshKey - SSH Key Delete
+   *
    * Deletes an SSH Key you have access to.
    * 
    * **Note:** deleting an SSH Key will *not* remove it from any Linode or Disk that was deployed with `authorized_keys`. In those cases, the keys must be manually deleted on the Linode or Disk. This endpoint will only delete the key's association from your Profile.
    * 
   **/
-  DeleteSshKey(
+  deleteSshKey(
     req: operations.DeleteSshKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSshKeyResponse> {
@@ -4819,27 +5023,29 @@ export class SDK {
       req = new operations.DeleteSshKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/sshkeys/{sshKeyId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSshKey200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSshKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4851,8 +5057,9 @@ export class SDK {
   }
 
   
-  // DeleteServiceTransfer - Service Transfer Cancel
-  /** 
+  /**
+   * deleteServiceTransfer - Service Transfer Cancel
+   *
    * Cancels the Service Transfer for the provided token. Once cancelled, a transfer cannot be accepted or otherwise
    * acted on in any way. If cancelled in error, the transfer must be
    * [created](/docs/api/account/#service-transfer-create) again.
@@ -4863,7 +5070,7 @@ export class SDK {
    * This command can only be accessed by the unrestricted users of the account that created this transfer.
    * 
   **/
-  DeleteServiceTransfer(
+  deleteServiceTransfer(
     req: operations.DeleteServiceTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteServiceTransferResponse> {
@@ -4871,27 +5078,29 @@ export class SDK {
       req = new operations.DeleteServiceTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/service-transfers/{token}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteServiceTransfer200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteServiceTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4903,12 +5112,13 @@ export class SDK {
   }
 
   
-  // DeleteStackScript - StackScript Delete
-  /** 
+  /**
+   * deleteStackScript - StackScript Delete
+   *
    * Deletes a private StackScript you have permission to `read_write`. You cannot delete a public StackScript.
    * 
   **/
-  DeleteStackScript(
+  deleteStackScript(
     req: operations.DeleteStackScriptRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteStackScriptResponse> {
@@ -4916,27 +5126,29 @@ export class SDK {
       req = new operations.DeleteStackScriptRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/stackscripts/{stackscriptId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteStackScript200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteStackScriptDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4948,14 +5160,15 @@ export class SDK {
   }
 
   
-  // DeleteTag - Tag Delete
-  /** 
+  /**
+   * deleteTag - Tag Delete
+   *
    * Remove a Tag from all objects and delete it.
    * 
    * **Important**: You must be an unrestricted User in order to add or modify Tags.
    * 
   **/
-  DeleteTag(
+  deleteTag(
     req: operations.DeleteTagRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteTagResponse> {
@@ -4963,27 +5176,29 @@ export class SDK {
       req = new operations.DeleteTagRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{label}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteTagResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteTagResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteTag200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteTagDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4995,12 +5210,13 @@ export class SDK {
   }
 
   
-  // DeleteUser - User Delete
-  /** 
+  /**
+   * deleteUser - User Delete
+   *
    * Deletes a User. The deleted User will be immediately logged out and may no longer log in or perform any actions. All of the User's Grants will be removed.
    * 
   **/
-  DeleteUser(
+  deleteUser(
     req: operations.DeleteUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteUserResponse> {
@@ -5008,27 +5224,29 @@ export class SDK {
       req = new operations.DeleteUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/users/{username}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteUser200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteUserDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5040,8 +5258,9 @@ export class SDK {
   }
 
   
-  // DeleteVolume - Volume Delete
-  /** 
+  /**
+   * deleteVolume - Volume Delete
+   *
    * Deletes a Volume you have permission to `read_write`.
    * 
    * **Deleting a Volume is a destructive action and cannot be undone.**
@@ -5050,7 +5269,7 @@ export class SDK {
    * the billing period the Volume was active.
    * 
   **/
-  DeleteVolume(
+  deleteVolume(
     req: operations.DeleteVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteVolumeResponse> {
@@ -5058,27 +5277,29 @@ export class SDK {
       req = new operations.DeleteVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/volumes/{volumeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteVolume200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5090,12 +5311,13 @@ export class SDK {
   }
 
   
-  // DetachVolume - Volume Detach
-  /** 
+  /**
+   * detachVolume - Volume Detach
+   *
    * Detaches a Volume on your Account from a Linode on your Account. In order for this request to complete successfully, your User must have `read_write` access to the Volume and `read_write` access to the Linode.
    * 
   **/
-  DetachVolume(
+  detachVolume(
     req: operations.DetachVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DetachVolumeResponse> {
@@ -5103,27 +5325,29 @@ export class SDK {
       req = new operations.DetachVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/volumes/{volumeId}/detach", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DetachVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DetachVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.detachVolume200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.detachVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5135,12 +5359,13 @@ export class SDK {
   }
 
   
-  // DisableManagedService - Managed Service Disable
-  /** 
+  /**
+   * disableManagedService - Managed Service Disable
+   *
    * Temporarily disables monitoring of a Managed Service.
    * 
   **/
-  DisableManagedService(
+  disableManagedService(
     req: operations.DisableManagedServiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DisableManagedServiceResponse> {
@@ -5148,27 +5373,29 @@ export class SDK {
       req = new operations.DisableManagedServiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/services/{serviceId}/disable", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DisableManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DisableManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedService = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.disableManagedServiceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5180,12 +5407,13 @@ export class SDK {
   }
 
   
-  // EnableAccountManged - Linode Managed Enable
-  /** 
+  /**
+   * enableAccountManged - Linode Managed Enable
+   *
    * Enables Linode Managed for the entire account and sends a welcome email to the account's associated email address. Linode Managed can monitor any service or software stack reachable over TCP or HTTP. See our [Linode Managed guide](/docs/platform/linode-managed/) to learn more.
    * 
   **/
-  EnableAccountManged(
+  enableAccountManged(
     req: operations.EnableAccountMangedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EnableAccountMangedResponse> {
@@ -5193,27 +5421,29 @@ export class SDK {
       req = new operations.EnableAccountMangedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/settings/managed-enable";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EnableAccountMangedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EnableAccountMangedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.enableAccountManged200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.enableAccountMangedDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5225,12 +5455,13 @@ export class SDK {
   }
 
   
-  // EnableBackups - Backups Enable
-  /** 
+  /**
+   * enableBackups - Backups Enable
+   *
    * Enables backups for the specified Linode.
    * 
   **/
-  EnableBackups(
+  enableBackups(
     req: operations.EnableBackupsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EnableBackupsResponse> {
@@ -5238,27 +5469,29 @@ export class SDK {
       req = new operations.EnableBackupsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/backups/enable", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EnableBackupsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EnableBackupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.enableBackups200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.enableBackupsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5270,12 +5503,13 @@ export class SDK {
   }
 
   
-  // EnableManagedService - Managed Service Enable
-  /** 
+  /**
+   * enableManagedService - Managed Service Enable
+   *
    * Enables monitoring of a Managed Service.
    * 
   **/
-  EnableManagedService(
+  enableManagedService(
     req: operations.EnableManagedServiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EnableManagedServiceResponse> {
@@ -5283,27 +5517,29 @@ export class SDK {
       req = new operations.EnableManagedServiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/services/{serviceId}/enable", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EnableManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EnableManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedService = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.enableManagedServiceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5315,11 +5551,12 @@ export class SDK {
   }
 
   
-  // EventRead - Event Mark as Read
-  /** 
+  /**
+   * eventRead - Event Mark as Read
+   *
    * Marks a single Event as read.
   **/
-  EventRead(
+  eventRead(
     req: operations.EventReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EventReadResponse> {
@@ -5327,27 +5564,29 @@ export class SDK {
       req = new operations.EventReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/events/{eventId}/read", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EventReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EventReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eventRead200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eventReadDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5359,12 +5598,13 @@ export class SDK {
   }
 
   
-  // EventSeen - Event Mark as Seen
-  /** 
+  /**
+   * eventSeen - Event Mark as Seen
+   *
    * Marks all Events up to and including this Event by ID as seen.
    * 
   **/
-  EventSeen(
+  eventSeen(
     req: operations.EventSeenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EventSeenResponse> {
@@ -5372,27 +5612,29 @@ export class SDK {
       req = new operations.EventSeenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/events/{eventId}/seen", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EventSeenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EventSeenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eventSeen200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.eventSeenDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5404,12 +5646,13 @@ export class SDK {
   }
 
   
-  // ExecutePayPalPayment - Staged/Approved PayPal Payment Execute
-  /** 
+  /**
+   * executePayPalPayment - Staged/Approved PayPal Payment Execute
+   *
    * Given a PaymentID and PayerID - as generated by PayPal during the transaction authorization process - this endpoint executes the Payment to capture the funds and credit your Linode Account.
    * 
   **/
-  ExecutePayPalPayment(
+  executePayPalPayment(
     req: operations.ExecutePayPalPaymentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExecutePayPalPaymentResponse> {
@@ -5417,45 +5660,45 @@ export class SDK {
       req = new operations.ExecutePayPalPaymentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/payments/paypal/execute";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExecutePayPalPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExecutePayPalPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.executePayPalPayment200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.executePayPalPaymentDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5467,12 +5710,13 @@ export class SDK {
   }
 
   
-  // GetAccount - Account View
-  /** 
+  /**
+   * getAccount - Account View
+   *
    * Returns the contact and billing information related to your Account.
    * 
   **/
-  GetAccount(
+  getAccount(
     req: operations.GetAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountResponse> {
@@ -5480,27 +5724,29 @@ export class SDK {
       req = new operations.GetAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.account = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAccountDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5512,12 +5758,13 @@ export class SDK {
   }
 
   
-  // GetAccountLogin - Login View
-  /** 
+  /**
+   * getAccountLogin - Login View
+   *
    * Returns a Login object that displays information about a successful login. The logins that can be viewed can be for any user on the account, and are not limited to only the logins of the user that is accessing this API endpoint. This command can only be accessed by the unrestricted users of the account.
    * 
   **/
-  GetAccountLogin(
+  getAccountLogin(
     req: operations.GetAccountLoginRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountLoginResponse> {
@@ -5525,27 +5772,29 @@ export class SDK {
       req = new operations.GetAccountLoginRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/logins/{loginId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountLoginResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountLoginResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.login = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAccountLoginDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5557,12 +5806,13 @@ export class SDK {
   }
 
   
-  // GetAccountLogins - User Logins List All
-  /** 
+  /**
+   * getAccountLogins - User Logins List All
+   *
    * Returns a collection of successful logins for all users on the account during the last 90 days. This command can only be accessed by the unrestricted users of an account.
    * 
   **/
-  GetAccountLogins(
+  getAccountLogins(
     req: operations.GetAccountLoginsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountLoginsResponse> {
@@ -5570,27 +5820,29 @@ export class SDK {
       req = new operations.GetAccountLoginsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/logins";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountLoginsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountLoginsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAccountLogins200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAccountLoginsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5602,12 +5854,13 @@ export class SDK {
   }
 
   
-  // GetAccountSettings - Account Settings View
-  /** 
+  /**
+   * getAccountSettings - Account Settings View
+   *
    * Returns information related to your Account settings: Managed service subscription, Longview subscription, and network helper.
    * 
   **/
-  GetAccountSettings(
+  getAccountSettings(
     req: operations.GetAccountSettingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountSettingsResponse> {
@@ -5615,27 +5868,29 @@ export class SDK {
       req = new operations.GetAccountSettingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/settings";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accountSettings = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAccountSettingsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5647,12 +5902,13 @@ export class SDK {
   }
 
   
-  // GetBackup - Backup View
-  /** 
+  /**
+   * getBackup - Backup View
+   *
    * Returns information about a Backup.
    * 
   **/
-  GetBackup(
+  getBackup(
     req: operations.GetBackupRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBackupResponse> {
@@ -5660,27 +5916,29 @@ export class SDK {
       req = new operations.GetBackupRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/backups/{backupId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBackupResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBackupResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.backup = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getBackupDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5692,12 +5950,13 @@ export class SDK {
   }
 
   
-  // GetBackups - Backups List
-  /** 
+  /**
+   * getBackups - Backups List
+   *
    * Returns information about this Linode's available backups.
    * 
   **/
-  GetBackups(
+  getBackups(
     req: operations.GetBackupsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBackupsResponse> {
@@ -5705,27 +5964,29 @@ export class SDK {
       req = new operations.GetBackupsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/backups", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBackupsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBackupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getBackups200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getBackupsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5737,12 +5998,13 @@ export class SDK {
   }
 
   
-  // GetClient - OAuth Client View
-  /** 
+  /**
+   * getClient - OAuth Client View
+   *
    * Returns information about a single OAuth client.
    * 
   **/
-  GetClient(
+  getClient(
     req: operations.GetClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetClientResponse> {
@@ -5750,27 +6012,29 @@ export class SDK {
       req = new operations.GetClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/oauth-clients/{clientId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.oAuthClient = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5782,12 +6046,13 @@ export class SDK {
   }
 
   
-  // GetClientThumbnail - OAuth Client Thumbnail View
-  /** 
+  /**
+   * getClientThumbnail - OAuth Client Thumbnail View
+   *
    * Returns the thumbnail for this OAuth Client.  This is a publicly-viewable endpoint, and can be accessed without authentication.
    * 
   **/
-  GetClientThumbnail(
+  getClientThumbnail(
     req: operations.GetClientThumbnailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetClientThumbnailResponse> {
@@ -5795,23 +6060,23 @@ export class SDK {
       req = new operations.GetClientThumbnailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/oauth-clients/{clientId}/thumbnail", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetClientThumbnailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `image/png`)) {
+        const res: operations.GetClientThumbnailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `image/png`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5819,7 +6084,7 @@ export class SDK {
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getClientThumbnailDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5831,12 +6096,13 @@ export class SDK {
   }
 
   
-  // GetClients - OAuth Clients List
-  /** 
+  /**
+   * getClients - OAuth Clients List
+   *
    * Returns a paginated list of OAuth Clients registered to your Account.  OAuth Clients allow users to log into applications you write or host using their Linode Account, and may allow them to grant some level of access to their Linodes or other entities to your application.
    * 
   **/
-  GetClients(
+  getClients(
     req: operations.GetClientsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetClientsResponse> {
@@ -5844,11 +6110,12 @@ export class SDK {
       req = new operations.GetClientsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/oauth-clients";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5857,22 +6124,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetClientsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetClientsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getClients200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getClientsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5884,12 +6152,13 @@ export class SDK {
   }
 
   
-  // GetDevices - Trusted Devices List
-  /** 
+  /**
+   * getDevices - Trusted Devices List
+   *
    * Returns a paginated list of active TrustedDevices for your User. Browsers with an active Remember Me Session are logged into your account until the session expires or is revoked.
    * 
   **/
-  GetDevices(
+  getDevices(
     req: operations.GetDevicesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDevicesResponse> {
@@ -5897,27 +6166,29 @@ export class SDK {
       req = new operations.GetDevicesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/devices";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDevicesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDevicesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDevices200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDevicesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5929,12 +6200,13 @@ export class SDK {
   }
 
   
-  // GetDomain - Domain View
-  /** 
+  /**
+   * getDomain - Domain View
+   *
    * This is a single Domain that you have registered in Linode's DNS Manager. Linode is not a registrar, and in order for this Domain record to work you must own the domain and point your registrar at Linode's nameservers.
    * 
   **/
-  GetDomain(
+  getDomain(
     req: operations.GetDomainRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDomainResponse> {
@@ -5942,27 +6214,29 @@ export class SDK {
       req = new operations.GetDomainRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDomainResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDomainResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domain = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDomainDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5974,12 +6248,13 @@ export class SDK {
   }
 
   
-  // GetDomainRecord - Domain Record View
-  /** 
+  /**
+   * getDomainRecord - Domain Record View
+   *
    * View a single Record on this Domain.
    * 
   **/
-  GetDomainRecord(
+  getDomainRecord(
     req: operations.GetDomainRecordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDomainRecordResponse> {
@@ -5987,27 +6262,29 @@ export class SDK {
       req = new operations.GetDomainRecordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}/records/{recordId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domainRecord = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDomainRecordDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6019,13 +6296,14 @@ export class SDK {
   }
 
   
-  // GetDomainRecords - Domain Records List
-  /** 
+  /**
+   * getDomainRecords - Domain Records List
+   *
    * Returns a paginated list of Records configured on a Domain in Linode's
    * DNS Manager.
    * 
   **/
-  GetDomainRecords(
+  getDomainRecords(
     req: operations.GetDomainRecordsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDomainRecordsResponse> {
@@ -6033,11 +6311,12 @@ export class SDK {
       req = new operations.GetDomainRecordsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}/records", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6046,17 +6325,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDomainRecordsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDomainRecordsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDomainRecords200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6068,12 +6348,13 @@ export class SDK {
   }
 
   
-  // GetDomainZone - Domain Zone File View
-  /** 
+  /**
+   * getDomainZone - Domain Zone File View
+   *
    * Returns the zone file for the last rendered zone for the specified domain.
    * 
   **/
-  GetDomainZone(
+  getDomainZone(
     req: operations.GetDomainZoneRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDomainZoneResponse> {
@@ -6081,27 +6362,29 @@ export class SDK {
       req = new operations.GetDomainZoneRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}/zone-file", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDomainZoneResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDomainZoneResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDomainZone200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDomainZoneDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6113,12 +6396,13 @@ export class SDK {
   }
 
   
-  // GetDomains - Domains List
-  /** 
+  /**
+   * getDomains - Domains List
+   *
    * This is a collection of Domains that you have registered in Linode's DNS Manager.  Linode is not a registrar, and in order for these to work you must own the domains and point your registrar at Linode's nameservers.
    * 
   **/
-  GetDomains(
+  getDomains(
     req: operations.GetDomainsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDomainsResponse> {
@@ -6126,11 +6410,12 @@ export class SDK {
       req = new operations.GetDomainsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/domains";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6139,22 +6424,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDomainsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDomainsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDomains200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDomainsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6166,12 +6452,13 @@ export class SDK {
   }
 
   
-  // GetEntityTransfer - Entity Transfer View
-  /** 
+  /**
+   * getEntityTransfer - Entity Transfer View
+   *
    * **DEPRECATED**. Please use [Service Transfer View](/docs/api/account/#service-transfer-view).
    * 
   **/
-  GetEntityTransfer(
+  getEntityTransfer(
     req: operations.GetEntityTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEntityTransferResponse> {
@@ -6179,27 +6466,29 @@ export class SDK {
       req = new operations.GetEntityTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/entity-transfers/{token}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEntityTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.entityTransfer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getEntityTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6211,12 +6500,13 @@ export class SDK {
   }
 
   
-  // GetEntityTransfers - Entity Transfers List
-  /** 
+  /**
+   * getEntityTransfers - Entity Transfers List
+   *
    * **DEPRECATED**. Please use [Service Transfers List](/docs/api/account/#service-transfers-list).
    * 
   **/
-  GetEntityTransfers(
+  getEntityTransfers(
     req: operations.GetEntityTransfersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEntityTransfersResponse> {
@@ -6224,11 +6514,12 @@ export class SDK {
       req = new operations.GetEntityTransfersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/entity-transfers";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6237,22 +6528,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEntityTransfersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEntityTransfersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getEntityTransfers200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getEntityTransfersDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6264,12 +6556,13 @@ export class SDK {
   }
 
   
-  // GetEvent - Event View
-  /** 
+  /**
+   * getEvent - Event View
+   *
    * Returns a single Event object.
    * 
   **/
-  GetEvent(
+  getEvent(
     req: operations.GetEventRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEventResponse> {
@@ -6277,27 +6570,29 @@ export class SDK {
       req = new operations.GetEventRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/events/{eventId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEventResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEventResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.event = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getEventDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6309,12 +6604,13 @@ export class SDK {
   }
 
   
-  // GetEvents - Events List
-  /** 
+  /**
+   * getEvents - Events List
+   *
    * Returns a collection of Event objects representing actions taken on your Account from the last 90 days. The Events returned depend on your grants.
    * 
   **/
-  GetEvents(
+  getEvents(
     req: operations.GetEventsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEventsResponse> {
@@ -6322,11 +6618,12 @@ export class SDK {
       req = new operations.GetEventsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/events";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6335,22 +6632,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEventsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEventsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getEvents200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getEventsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6362,8 +6660,9 @@ export class SDK {
   }
 
   
-  // GetFirewall - Firewall View
-  /** 
+  /**
+   * getFirewall - Firewall View
+   *
    * Get a specific Firewall resource by its ID. The Firewall's Devices will not be
    * returned in the response. Instead, use the
    * [List Firewall Devices](/docs/api/networking/#firewall-devices-list)
@@ -6372,7 +6671,7 @@ export class SDK {
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  GetFirewall(
+  getFirewall(
     req: operations.GetFirewallRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFirewallResponse> {
@@ -6380,27 +6679,32 @@ export class SDK {
       req = new operations.GetFirewallRequest(req);
     }
     
-    let baseURL: string = operations.GETFIREWALL_SERVERS[0];
+    let baseURL: string = operations.GetFirewallServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFirewallResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFirewallResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.firewall = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFirewallDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6412,8 +6716,9 @@ export class SDK {
   }
 
   
-  // GetFirewallDevice - Firewall Device View
-  /** 
+  /**
+   * getFirewallDevice - Firewall Device View
+   *
    * Returns information for a Firewall Device, which assigns a Firewall
    * to a Linode service (referred to as the Device's `entity`). Currently,
    * only Devices with an entity of type `linode` are accepted.
@@ -6421,7 +6726,7 @@ export class SDK {
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  GetFirewallDevice(
+  getFirewallDevice(
     req: operations.GetFirewallDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFirewallDeviceResponse> {
@@ -6429,27 +6734,32 @@ export class SDK {
       req = new operations.GetFirewallDeviceRequest(req);
     }
     
-    let baseURL: string = operations.GETFIREWALLDEVICE_SERVERS[0];
+    let baseURL: string = operations.GetFirewallDeviceServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}/devices/{deviceId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFirewallDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFirewallDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.firewallDevices = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFirewallDeviceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6461,8 +6771,9 @@ export class SDK {
   }
 
   
-  // GetFirewallDevices - Firewall Devices List
-  /** 
+  /**
+   * getFirewallDevices - Firewall Devices List
+   *
    * Returns a paginated list of a Firewall's Devices. A Firewall Device assigns a
    * Firewall to a Linode service (referred to as the Device's `entity`). Currently,
    * only Devices with an entity of type `linode` are accepted.
@@ -6470,7 +6781,7 @@ export class SDK {
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  GetFirewallDevices(
+  getFirewallDevices(
     req: operations.GetFirewallDevicesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFirewallDevicesResponse> {
@@ -6478,11 +6789,15 @@ export class SDK {
       req = new operations.GetFirewallDevicesRequest(req);
     }
     
-    let baseURL: string = operations.GETFIREWALLDEVICES_SERVERS[0];
+    let baseURL: string = operations.GetFirewallDevicesServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}/devices", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6491,22 +6806,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFirewallDevicesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFirewallDevicesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFirewallDevices200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFirewallDevicesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6518,8 +6834,9 @@ export class SDK {
   }
 
   
-  // GetFirewallRules - Firewall Rules List
-  /** 
+  /**
+   * getFirewallRules - Firewall Rules List
+   *
    * Returns the inbound and outbound Rules for a Firewall.
    * 
    * This endpoint is in **beta**.
@@ -6533,7 +6850,7 @@ export class SDK {
    * beta.
    * 
   **/
-  GetFirewallRules(
+  getFirewallRules(
     req: operations.GetFirewallRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFirewallRulesResponse> {
@@ -6541,27 +6858,32 @@ export class SDK {
       req = new operations.GetFirewallRulesRequest(req);
     }
     
-    let baseURL: string = operations.GETFIREWALLRULES_SERVERS[0];
+    let baseURL: string = operations.GetFirewallRulesServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}/rules", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFirewallRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFirewallRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rules = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFirewallRulesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6573,14 +6895,15 @@ export class SDK {
   }
 
   
-  // GetFirewalls - Firewalls List
-  /** 
+  /**
+   * getFirewalls - Firewalls List
+   *
    * Returns a paginated list of your Firewalls.
    * 
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  GetFirewalls(
+  getFirewalls(
     req: operations.GetFirewallsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFirewallsResponse> {
@@ -6588,11 +6911,15 @@ export class SDK {
       req = new operations.GetFirewallsRequest(req);
     }
     
-    let baseURL: string = operations.GETFIREWALLS_SERVERS[0];
+    let baseURL: string = operations.GetFirewallsServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/networking/firewalls";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6601,22 +6928,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFirewallsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFirewallsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFirewalls200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFirewallsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6628,12 +6956,13 @@ export class SDK {
   }
 
   
-  // GetIp - IP Address View
-  /** 
+  /**
+   * getIp - IP Address View
+   *
    * Returns information about a single IP Address on your Account.
    * 
   **/
-  GetIp(
+  getIp(
     req: operations.GetIpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetIpResponse> {
@@ -6641,27 +6970,29 @@ export class SDK {
       req = new operations.GetIpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/networking/ips/{address}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetIpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetIpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getIpDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6673,12 +7004,13 @@ export class SDK {
   }
 
   
-  // GetIPs - IP Addresses List
-  /** 
+  /**
+   * getIPs - IP Addresses List
+   *
    * Returns a paginated list of IP Addresses on your Account, excluding private addresses.
    * 
   **/
-  GetIPs(
+  getIPs(
     req: operations.GetIPsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetIPsResponse> {
@@ -6686,27 +7018,29 @@ export class SDK {
       req = new operations.GetIPsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/networking/ips";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetIPsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetIPsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getIPs200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getIPsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6718,12 +7052,13 @@ export class SDK {
   }
 
   
-  // GetIPv6Pools - IPv6 Pools List
-  /** 
+  /**
+   * getIPv6Pools - IPv6 Pools List
+   *
    * Displays the IPv6 pools on your Account. A pool of IPv6 addresses are routed to all of your Linodes in a single [Region](/docs/api/regions/#regions-list). Any Linode on your Account may bring up any address in this pool at any time, with no external configuration required.
    * 
   **/
-  GetIPv6Pools(
+  getIPv6Pools(
     req: operations.GetIPv6PoolsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetIPv6PoolsResponse> {
@@ -6731,11 +7066,12 @@ export class SDK {
       req = new operations.GetIPv6PoolsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/networking/ipv6/pools";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6744,22 +7080,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetIPv6PoolsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetIPv6PoolsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getIPv6Pools200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getIPv6PoolsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6771,8 +7108,9 @@ export class SDK {
   }
 
   
-  // GetIPv6Ranges - IPv6 Ranges List
-  /** 
+  /**
+   * getIPv6Ranges - IPv6 Ranges List
+   *
    * Displays the IPv6 ranges on your Account.
    * 
    * 
@@ -6783,7 +7121,7 @@ export class SDK {
    *   * You must [open a support ticket](/docs/api/support/#support-ticket-open) to request a `/64` block of IPv6 addresses to be added to your account.
    * 
   **/
-  GetIPv6Ranges(
+  getIPv6Ranges(
     req: operations.GetIPv6RangesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetIPv6RangesResponse> {
@@ -6791,11 +7129,12 @@ export class SDK {
       req = new operations.GetIPv6RangesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/networking/ipv6/ranges";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6804,22 +7143,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetIPv6RangesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetIPv6RangesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getIPv6Ranges200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getIPv6RangesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6831,12 +7171,13 @@ export class SDK {
   }
 
   
-  // GetImage - Image View
-  /** 
+  /**
+   * getImage - Image View
+   *
    * Get information about a single Image.
    * 
   **/
-  GetImage(
+  getImage(
     req: operations.GetImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetImageResponse> {
@@ -6844,28 +7185,28 @@ export class SDK {
       req = new operations.GetImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/images/{imageId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.imagePrivate = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getImageDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6877,8 +7218,9 @@ export class SDK {
   }
 
   
-  // GetImages - Images List
-  /** 
+  /**
+   * getImages - Images List
+   *
    * Returns a paginated list of Images.
    * 
    * * **Public** Images have IDs that begin with "linode/". These distribution images are generally available to
@@ -6889,7 +7231,7 @@ export class SDK {
    * addition to public images, call this endpoint with authentication.
    * 
   **/
-  GetImages(
+  getImages(
     req: operations.GetImagesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetImagesResponse> {
@@ -6897,12 +7239,11 @@ export class SDK {
       req = new operations.GetImagesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/images";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6911,22 +7252,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetImagesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetImagesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getImages200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getImagesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6938,11 +7280,12 @@ export class SDK {
   }
 
   
-  // GetInvoice - Invoice View
-  /** 
+  /**
+   * getInvoice - Invoice View
+   *
    * Returns a single Invoice object.
   **/
-  GetInvoice(
+  getInvoice(
     req: operations.GetInvoiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetInvoiceResponse> {
@@ -6950,27 +7293,29 @@ export class SDK {
       req = new operations.GetInvoiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/invoices/{invoiceId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetInvoiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invoice = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getInvoiceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -6982,11 +7327,12 @@ export class SDK {
   }
 
   
-  // GetInvoiceItems - Invoice Items List
-  /** 
+  /**
+   * getInvoiceItems - Invoice Items List
+   *
    * Returns a paginated list of Invoice items.
   **/
-  GetInvoiceItems(
+  getInvoiceItems(
     req: operations.GetInvoiceItemsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetInvoiceItemsResponse> {
@@ -6994,11 +7340,12 @@ export class SDK {
       req = new operations.GetInvoiceItemsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/invoices/{invoiceId}/items", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7007,22 +7354,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetInvoiceItemsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetInvoiceItemsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getInvoiceItems200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getInvoiceItemsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7034,12 +7382,13 @@ export class SDK {
   }
 
   
-  // GetInvoices - Invoices List
-  /** 
+  /**
+   * getInvoices - Invoices List
+   *
    * Returns a paginated list of Invoices against your Account.
    * 
   **/
-  GetInvoices(
+  getInvoices(
     req: operations.GetInvoicesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetInvoicesResponse> {
@@ -7047,11 +7396,12 @@ export class SDK {
       req = new operations.GetInvoicesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/invoices";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7060,22 +7410,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetInvoicesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetInvoicesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getInvoices200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getInvoicesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7087,12 +7438,13 @@ export class SDK {
   }
 
   
-  // GetKernel - Kernel View
-  /** 
+  /**
+   * getKernel - Kernel View
+   *
    * Returns information about a single Kernel.
    * 
   **/
-  GetKernel(
+  getKernel(
     req: operations.GetKernelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetKernelResponse> {
@@ -7100,28 +7452,28 @@ export class SDK {
       req = new operations.GetKernelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/kernels/{kernelId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetKernelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetKernelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.kernel = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getKernelDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7133,12 +7485,13 @@ export class SDK {
   }
 
   
-  // GetKernels - Kernels List
-  /** 
+  /**
+   * getKernels - Kernels List
+   *
    * Lists available Kernels.
    * 
   **/
-  GetKernels(
+  getKernels(
     req: operations.GetKernelsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetKernelsResponse> {
@@ -7146,12 +7499,11 @@ export class SDK {
       req = new operations.GetKernelsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/linode/kernels";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7160,22 +7512,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetKernelsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetKernelsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getKernels200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getKernelsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7187,12 +7540,13 @@ export class SDK {
   }
 
   
-  // GetLkeCluster - Kubernetes Cluster View
-  /** 
+  /**
+   * getLkeCluster - Kubernetes Cluster View
+   *
    * Get a specific Cluster by ID.
    * 
   **/
-  GetLkeCluster(
+  getLkeCluster(
     req: operations.GetLkeClusterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeClusterResponse> {
@@ -7200,27 +7554,29 @@ export class SDK {
       req = new operations.GetLkeClusterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.lkeCluster = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7232,12 +7588,13 @@ export class SDK {
   }
 
   
-  // GetLkeClusterApiEndpoints - Kubernetes API Endpoints List
-  /** 
+  /**
+   * getLkeClusterApiEndpoints - Kubernetes API Endpoints List
+   *
    * List the Kubernetes API server endpoints for this cluster. Please note that it often takes 2-5 minutes before the endpoint is ready after first [creating a new cluster](/docs/api/linode-kubernetes-engine-lke/#kubernetes-cluster-create).
    * 
   **/
-  GetLkeClusterApiEndpoints(
+  getLkeClusterApiEndpoints(
     req: operations.GetLkeClusterApiEndpointsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeClusterApiEndpointsResponse> {
@@ -7245,27 +7602,29 @@ export class SDK {
       req = new operations.GetLkeClusterApiEndpointsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/api-endpoints", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeClusterApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeClusterApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterApiEndpoints200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterApiEndpointsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7277,13 +7636,14 @@ export class SDK {
   }
 
   
-  // GetLkeClusterKubeconfig - Kubeconfig View
-  /** 
+  /**
+   * getLkeClusterKubeconfig - Kubeconfig View
+   *
    * Get the Kubeconfig file for a Cluster. Please note that it often takes 2-5 minutes before
    * the Kubeconfig file is ready after first [creating a new cluster](/docs/api/linode-kubernetes-engine-lke/#kubernetes-cluster-create).
    * 
   **/
-  GetLkeClusterKubeconfig(
+  getLkeClusterKubeconfig(
     req: operations.GetLkeClusterKubeconfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeClusterKubeconfigResponse> {
@@ -7291,27 +7651,29 @@ export class SDK {
       req = new operations.GetLkeClusterKubeconfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/kubeconfig", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeClusterKubeconfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeClusterKubeconfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterKubeconfig200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterKubeconfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7323,12 +7685,13 @@ export class SDK {
   }
 
   
-  // GetLkeClusterNode - Node View
-  /** 
+  /**
+   * getLkeClusterNode - Node View
+   *
    * Returns the values for a specified node object.
    * 
   **/
-  GetLkeClusterNode(
+  getLkeClusterNode(
     req: operations.GetLkeClusterNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeClusterNodeResponse> {
@@ -7336,27 +7699,29 @@ export class SDK {
       req = new operations.GetLkeClusterNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/nodes/{nodeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeClusterNodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeClusterNodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterNode200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterNodeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7368,12 +7733,13 @@ export class SDK {
   }
 
   
-  // GetLkeClusterPools - Node Pools List
-  /** 
+  /**
+   * getLkeClusterPools - Node Pools List
+   *
    * Returns all active Node Pools on a Kubernetes cluster.
    * 
   **/
-  GetLkeClusterPools(
+  getLkeClusterPools(
     req: operations.GetLkeClusterPoolsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeClusterPoolsResponse> {
@@ -7381,27 +7747,29 @@ export class SDK {
       req = new operations.GetLkeClusterPoolsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/pools", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeClusterPoolsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeClusterPoolsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterPools200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusterPoolsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7413,12 +7781,13 @@ export class SDK {
   }
 
   
-  // GetLkeClusters - Kubernetes Clusters List
-  /** 
+  /**
+   * getLkeClusters - Kubernetes Clusters List
+   *
    * Lists current Kubernetes clusters available on your account.
    * 
   **/
-  GetLkeClusters(
+  getLkeClusters(
     req: operations.GetLkeClustersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeClustersResponse> {
@@ -7426,27 +7795,29 @@ export class SDK {
       req = new operations.GetLkeClustersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lke/clusters";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeClustersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeClustersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClusters200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeClustersDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7458,12 +7829,13 @@ export class SDK {
   }
 
   
-  // GetLkeNodePool - Node Pool View
-  /** 
+  /**
+   * getLkeNodePool - Node Pool View
+   *
    * Get a specific Node Pool by ID.
    * 
   **/
-  GetLkeNodePool(
+  getLkeNodePool(
     req: operations.GetLkeNodePoolRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeNodePoolResponse> {
@@ -7471,22 +7843,24 @@ export class SDK {
       req = new operations.GetLkeNodePoolRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/pools/{poolId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeNodePoolResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeNodePoolResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.lkeNodePool = httpRes?.data;
             }
             break;
@@ -7498,12 +7872,13 @@ export class SDK {
   }
 
   
-  // GetLkeVersion - Kubernetes Version View
-  /** 
+  /**
+   * getLkeVersion - Kubernetes Version View
+   *
    * View a Kubernetes version available for deployment to a Kubernetes cluster.
    * 
   **/
-  GetLkeVersion(
+  getLkeVersion(
     req: operations.GetLkeVersionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeVersionResponse> {
@@ -7511,27 +7886,29 @@ export class SDK {
       req = new operations.GetLkeVersionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/versions/{version}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeVersionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeVersionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.lkeVersion = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeVersionDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7543,12 +7920,13 @@ export class SDK {
   }
 
   
-  // GetLkeVersions - Kubernetes Versions List
-  /** 
+  /**
+   * getLkeVersions - Kubernetes Versions List
+   *
    * List the Kubernetes versions available for deployment to a Kubernetes cluster.
    * 
   **/
-  GetLkeVersions(
+  getLkeVersions(
     req: operations.GetLkeVersionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLkeVersionsResponse> {
@@ -7556,27 +7934,29 @@ export class SDK {
       req = new operations.GetLkeVersionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lke/versions";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLkeVersionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLkeVersionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeVersions200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLkeVersionsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7588,12 +7968,13 @@ export class SDK {
   }
 
   
-  // GetLinodeConfig - Configuration Profile View
-  /** 
+  /**
+   * getLinodeConfig - Configuration Profile View
+   *
    * Returns information about a specific Configuration profile.
    * 
   **/
-  GetLinodeConfig(
+  getLinodeConfig(
     req: operations.GetLinodeConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeConfigResponse> {
@@ -7601,27 +7982,29 @@ export class SDK {
       req = new operations.GetLinodeConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/configs/{configId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linodeConfig = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7633,12 +8016,13 @@ export class SDK {
   }
 
   
-  // GetLinodeConfigs - Configuration Profiles List
-  /** 
+  /**
+   * getLinodeConfigs - Configuration Profiles List
+   *
    * Lists Configuration profiles associated with a Linode.
    * 
   **/
-  GetLinodeConfigs(
+  getLinodeConfigs(
     req: operations.GetLinodeConfigsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeConfigsResponse> {
@@ -7646,11 +8030,12 @@ export class SDK {
       req = new operations.GetLinodeConfigsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/configs", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7659,17 +8044,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeConfigsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeConfigsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeConfigs200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7681,12 +8067,13 @@ export class SDK {
   }
 
   
-  // GetLinodeDisk - Disk View
-  /** 
+  /**
+   * getLinodeDisk - Disk View
+   *
    * View Disk information for a Disk associated with this Linode.
    * 
   **/
-  GetLinodeDisk(
+  getLinodeDisk(
     req: operations.GetLinodeDiskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeDiskResponse> {
@@ -7694,27 +8081,29 @@ export class SDK {
       req = new operations.GetLinodeDiskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks/{diskId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.disk = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeDiskDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7726,12 +8115,13 @@ export class SDK {
   }
 
   
-  // GetLinodeDisks - Disks List
-  /** 
+  /**
+   * getLinodeDisks - Disks List
+   *
    * View Disk information for Disks associated with this Linode.
    * 
   **/
-  GetLinodeDisks(
+  getLinodeDisks(
     req: operations.GetLinodeDisksRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeDisksResponse> {
@@ -7739,11 +8129,12 @@ export class SDK {
       req = new operations.GetLinodeDisksRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7752,22 +8143,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeDisksResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeDisksResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeDisks200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeDisksDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7779,12 +8171,13 @@ export class SDK {
   }
 
   
-  // GetLinodeFirewalls - Firewalls List
-  /** 
+  /**
+   * getLinodeFirewalls - Firewalls List
+   *
    * View Firewall information for Firewalls associated with this Linode.
    * 
   **/
-  GetLinodeFirewalls(
+  getLinodeFirewalls(
     req: operations.GetLinodeFirewallsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeFirewallsResponse> {
@@ -7792,11 +8185,12 @@ export class SDK {
       req = new operations.GetLinodeFirewallsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/firewalls", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7805,22 +8199,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeFirewallsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeFirewallsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeFirewalls200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeFirewallsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7832,12 +8227,13 @@ export class SDK {
   }
 
   
-  // GetLinodeIp - IP Address View
-  /** 
+  /**
+   * getLinodeIp - IP Address View
+   *
    * View information about the specified IP address associated with the specified Linode.
    * 
   **/
-  GetLinodeIp(
+  getLinodeIp(
     req: operations.GetLinodeIpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeIpResponse> {
@@ -7845,27 +8241,29 @@ export class SDK {
       req = new operations.GetLinodeIpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/ips/{address}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeIpDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7877,12 +8275,13 @@ export class SDK {
   }
 
   
-  // GetLinodeIPs - Networking Information List
-  /** 
+  /**
+   * getLinodeIPs - Networking Information List
+   *
    * Returns networking information for a single Linode.
    * 
   **/
-  GetLinodeIPs(
+  getLinodeIPs(
     req: operations.GetLinodeIPsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeIPsResponse> {
@@ -7890,27 +8289,29 @@ export class SDK {
       req = new operations.GetLinodeIPsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/ips", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeIPsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeIPsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeIPs200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeIPsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7922,11 +8323,12 @@ export class SDK {
   }
 
   
-  // GetLinodeInstance - Linode View
-  /** 
+  /**
+   * getLinodeInstance - Linode View
+   *
    * Get a specific Linode by ID.
   **/
-  GetLinodeInstance(
+  getLinodeInstance(
     req: operations.GetLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeInstanceResponse> {
@@ -7934,27 +8336,29 @@ export class SDK {
       req = new operations.GetLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -7966,12 +8370,13 @@ export class SDK {
   }
 
   
-  // GetLinodeInstances - Linodes List
-  /** 
+  /**
+   * getLinodeInstances - Linodes List
+   *
    * Returns a paginated list of Linodes you have permission to view.
    * 
   **/
-  GetLinodeInstances(
+  getLinodeInstances(
     req: operations.GetLinodeInstancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeInstancesResponse> {
@@ -7979,11 +8384,12 @@ export class SDK {
       req = new operations.GetLinodeInstancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/linode/instances";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7992,22 +8398,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeInstances200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeInstancesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8019,12 +8426,13 @@ export class SDK {
   }
 
   
-  // GetLinodeStats - Linode Statistics View
-  /** 
+  /**
+   * getLinodeStats - Linode Statistics View
+   *
    * Returns CPU, IO, IPv4, and IPv6 statistics for your Linode for the past 24 hours.
    * 
   **/
-  GetLinodeStats(
+  getLinodeStats(
     req: operations.GetLinodeStatsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeStatsResponse> {
@@ -8032,27 +8440,29 @@ export class SDK {
       req = new operations.GetLinodeStatsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/stats", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeStatsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeStatsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linodeStats = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeStatsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8064,12 +8474,13 @@ export class SDK {
   }
 
   
-  // GetLinodeStatsByYearMonth - Statistics View (year/month)
-  /** 
+  /**
+   * getLinodeStatsByYearMonth - Statistics View (year/month)
+   *
    * Returns statistics for a specific month. The year/month values must be either a date in the past, or the current month. If the current month, statistics will be retrieved for the past 30 days.
    * 
   **/
-  GetLinodeStatsByYearMonth(
+  getLinodeStatsByYearMonth(
     req: operations.GetLinodeStatsByYearMonthRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeStatsByYearMonthResponse> {
@@ -8077,27 +8488,29 @@ export class SDK {
       req = new operations.GetLinodeStatsByYearMonthRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/stats/{year}/{month}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeStatsByYearMonthResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeStatsByYearMonthResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linodeStats = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeStatsByYearMonthDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8109,12 +8522,13 @@ export class SDK {
   }
 
   
-  // GetLinodeTransfer - Network Transfer View
-  /** 
+  /**
+   * getLinodeTransfer - Network Transfer View
+   *
    * Returns a Linode's network transfer pool statistics for the current month.
    * 
   **/
-  GetLinodeTransfer(
+  getLinodeTransfer(
     req: operations.GetLinodeTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeTransferResponse> {
@@ -8122,27 +8536,29 @@ export class SDK {
       req = new operations.GetLinodeTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/transfer", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeTransfer200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8154,12 +8570,13 @@ export class SDK {
   }
 
   
-  // GetLinodeTransferByYearMonth - Network Transfer View (year/month)
-  /** 
+  /**
+   * getLinodeTransferByYearMonth - Network Transfer View (year/month)
+   *
    * Returns a Linode's network transfer statistics for a specific month. The year/month values must be either a date in the past, or the current month.
    * 
   **/
-  GetLinodeTransferByYearMonth(
+  getLinodeTransferByYearMonth(
     req: operations.GetLinodeTransferByYearMonthRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeTransferByYearMonthResponse> {
@@ -8167,27 +8584,29 @@ export class SDK {
       req = new operations.GetLinodeTransferByYearMonthRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/transfer/{year}/{month}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeTransferByYearMonthResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeTransferByYearMonthResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeTransferByYearMonth200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeTransferByYearMonthDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8199,12 +8618,13 @@ export class SDK {
   }
 
   
-  // GetLinodeType - Type View
-  /** 
+  /**
+   * getLinodeType - Type View
+   *
    * Returns information about a specific Linode Type, including pricing and specifications. This is used when [creating](/docs/api/linode-instances/#linode-create) or [resizing](/docs/api/linode-instances/#linode-resize) Linodes.
    * 
   **/
-  GetLinodeType(
+  getLinodeType(
     req: operations.GetLinodeTypeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeTypeResponse> {
@@ -8212,28 +8632,28 @@ export class SDK {
       req = new operations.GetLinodeTypeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/types/{typeId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeTypeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linodeType = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeTypeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8245,37 +8665,37 @@ export class SDK {
   }
 
   
-  // GetLinodeTypes - Types List
-  /** 
+  /**
+   * getLinodeTypes - Types List
+   *
    * Returns collection of Linode Types, including pricing and specifications for each Type. These are used when [creating](/docs/api/linode-instances/#linode-create) or [resizing](/docs/api/linode-instances/#linode-resize) Linodes.
    * 
   **/
-  GetLinodeTypes(
-    
+  getLinodeTypes(
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeTypesResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/linode/types";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeTypesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeTypesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeTypes200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeTypesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8287,12 +8707,13 @@ export class SDK {
   }
 
   
-  // GetLinodeVolumes - Linode's Volumes List
-  /** 
+  /**
+   * getLinodeVolumes - Linode's Volumes List
+   *
    * View Block Storage Volumes attached to this Linode.
    * 
   **/
-  GetLinodeVolumes(
+  getLinodeVolumes(
     req: operations.GetLinodeVolumesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLinodeVolumesResponse> {
@@ -8300,11 +8721,12 @@ export class SDK {
       req = new operations.GetLinodeVolumesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/volumes", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8313,22 +8735,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLinodeVolumesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLinodeVolumesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeVolumes200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLinodeVolumesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8340,12 +8763,13 @@ export class SDK {
   }
 
   
-  // GetLongviewClient - Longview Client View
-  /** 
+  /**
+   * getLongviewClient - Longview Client View
+   *
    * Returns a single Longview Client you can access.
    * 
   **/
-  GetLongviewClient(
+  getLongviewClient(
     req: operations.GetLongviewClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLongviewClientResponse> {
@@ -8353,27 +8777,29 @@ export class SDK {
       req = new operations.GetLongviewClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/longview/clients/{clientId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.longviewClient = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLongviewClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8385,12 +8811,13 @@ export class SDK {
   }
 
   
-  // GetLongviewClients - Longview Clients List
-  /** 
+  /**
+   * getLongviewClients - Longview Clients List
+   *
    * Returns a paginated list of Longview Clients you have access to. Longview Client is used to monitor stats on your Linode with the help of the Longview Client application.
    * 
   **/
-  GetLongviewClients(
+  getLongviewClients(
     req: operations.GetLongviewClientsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLongviewClientsResponse> {
@@ -8398,11 +8825,12 @@ export class SDK {
       req = new operations.GetLongviewClientsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/longview/clients";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8411,22 +8839,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLongviewClientsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLongviewClientsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLongviewClients200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLongviewClientsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8438,8 +8867,9 @@ export class SDK {
   }
 
   
-  // GetLongviewPlan - Longview Plan View
-  /** 
+  /**
+   * getLongviewPlan - Longview Plan View
+   *
    * Get the details of your current Longview plan. This returns a `LongviewSubscription` object for your current Longview Pro plan, or an empty set `{}` if your current plan is Longview Free.
    * 
    * You must have at least one of the following `global` [User Grants](/docs/api/account/#users-grants-view) in order to access this endpoint:
@@ -8453,7 +8883,7 @@ export class SDK {
    * To update your subscription plan, send a request to [Update Longview Plan](/docs/api/longview/#longview-plan-update).
    * 
   **/
-  GetLongviewPlan(
+  getLongviewPlan(
     req: operations.GetLongviewPlanRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLongviewPlanResponse> {
@@ -8461,27 +8891,29 @@ export class SDK {
       req = new operations.GetLongviewPlanRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/longview/plan";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLongviewPlanResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLongviewPlanResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.longviewSubscription = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLongviewPlanDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8493,12 +8925,13 @@ export class SDK {
   }
 
   
-  // GetLongviewSubscription - Longview Subscription View
-  /** 
+  /**
+   * getLongviewSubscription - Longview Subscription View
+   *
    * Get the Longview plan details as a single `LongviewSubscription` object for the provided subscription ID. This is a public endpoint and requires no authentication.
    * 
   **/
-  GetLongviewSubscription(
+  getLongviewSubscription(
     req: operations.GetLongviewSubscriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLongviewSubscriptionResponse> {
@@ -8506,28 +8939,28 @@ export class SDK {
       req = new operations.GetLongviewSubscriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/longview/subscriptions/{subscriptionId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLongviewSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLongviewSubscriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.longviewSubscription = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLongviewSubscriptionDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8539,12 +8972,13 @@ export class SDK {
   }
 
   
-  // GetLongviewSubscriptions - Longview Subscriptions List
-  /** 
+  /**
+   * getLongviewSubscriptions - Longview Subscriptions List
+   *
    * Returns a paginated list of available Longview Subscriptions. This is a public endpoint and requires no authentication.
    * 
   **/
-  GetLongviewSubscriptions(
+  getLongviewSubscriptions(
     req: operations.GetLongviewSubscriptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLongviewSubscriptionsResponse> {
@@ -8552,12 +8986,11 @@ export class SDK {
       req = new operations.GetLongviewSubscriptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/longview/subscriptions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8566,22 +8999,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLongviewSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLongviewSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLongviewSubscriptions200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLongviewSubscriptionsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8593,8 +9027,9 @@ export class SDK {
   }
 
   
-  // GetMaintenance - Maintenance List
-  /** 
+  /**
+   * getMaintenance - Maintenance List
+   *
    * Returns a collection of Maintenance objects for any entity a user has permissions to view.
    * 
    * Currently, Linodes are the only entities available for viewing.
@@ -8602,7 +9037,7 @@ export class SDK {
    * **Beta**: This endpoint is in beta. Please make sure to prepend all requests with `/v4beta` instead of `/v4`, and be aware that this endpoint may receive breaking updates in the future. This notice will be removed when this endpoint is out of beta.
    * 
   **/
-  GetMaintenance(
+  getMaintenance(
     req: operations.GetMaintenanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMaintenanceResponse> {
@@ -8610,27 +9045,32 @@ export class SDK {
       req = new operations.GetMaintenanceRequest(req);
     }
     
-    let baseURL: string = operations.GETMAINTENANCE_SERVERS[0];
+    let baseURL: string = operations.GetMaintenanceServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/account/maintenance";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMaintenanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMaintenanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getMaintenance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getMaintenanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8642,12 +9082,13 @@ export class SDK {
   }
 
   
-  // GetManagedContact - Managed Contact View
-  /** 
+  /**
+   * getManagedContact - Managed Contact View
+   *
    * Returns a single Managed Contact.
    * 
   **/
-  GetManagedContact(
+  getManagedContact(
     req: operations.GetManagedContactRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedContactResponse> {
@@ -8655,27 +9096,29 @@ export class SDK {
       req = new operations.GetManagedContactRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/contacts/{contactId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedContact = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedContactDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8687,12 +9130,13 @@ export class SDK {
   }
 
   
-  // GetManagedContacts - Managed Contacts List
-  /** 
+  /**
+   * getManagedContacts - Managed Contacts List
+   *
    * Returns a paginated list of Managed Contacts on your Account.
    * 
   **/
-  GetManagedContacts(
+  getManagedContacts(
     req: operations.GetManagedContactsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedContactsResponse> {
@@ -8700,11 +9144,12 @@ export class SDK {
       req = new operations.GetManagedContactsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/contacts";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8713,22 +9158,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedContactsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedContactsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedContacts200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedContactsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8740,12 +9186,13 @@ export class SDK {
   }
 
   
-  // GetManagedCredential - Managed Credential View
-  /** 
+  /**
+   * getManagedCredential - Managed Credential View
+   *
    * Returns a single Managed Credential.
    * 
   **/
-  GetManagedCredential(
+  getManagedCredential(
     req: operations.GetManagedCredentialRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedCredentialResponse> {
@@ -8753,27 +9200,29 @@ export class SDK {
       req = new operations.GetManagedCredentialRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/credentials/{credentialId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedCredential = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedCredentialDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8785,12 +9234,13 @@ export class SDK {
   }
 
   
-  // GetManagedCredentials - Managed Credentials List
-  /** 
+  /**
+   * getManagedCredentials - Managed Credentials List
+   *
    * Returns a paginated list of Managed Credentials on your Account.
    * 
   **/
-  GetManagedCredentials(
+  getManagedCredentials(
     req: operations.GetManagedCredentialsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedCredentialsResponse> {
@@ -8798,11 +9248,12 @@ export class SDK {
       req = new operations.GetManagedCredentialsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/credentials";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8811,22 +9262,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedCredentialsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedCredentialsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedCredentials200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedCredentialsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8838,12 +9290,13 @@ export class SDK {
   }
 
   
-  // GetManagedIssue - Managed Issue View
-  /** 
+  /**
+   * getManagedIssue - Managed Issue View
+   *
    * Returns a single Issue that is impacting or did impact one of your Managed Services.
    * 
   **/
-  GetManagedIssue(
+  getManagedIssue(
     req: operations.GetManagedIssueRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedIssueResponse> {
@@ -8851,27 +9304,29 @@ export class SDK {
       req = new operations.GetManagedIssueRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/issues/{issueId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedIssueResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedIssueResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedIssue = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedIssueDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8883,12 +9338,13 @@ export class SDK {
   }
 
   
-  // GetManagedIssues - Managed Issues List
-  /** 
+  /**
+   * getManagedIssues - Managed Issues List
+   *
    * Returns a paginated list of recent and ongoing issues detected on your Managed Services.
    * 
   **/
-  GetManagedIssues(
+  getManagedIssues(
     req: operations.GetManagedIssuesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedIssuesResponse> {
@@ -8896,11 +9352,12 @@ export class SDK {
       req = new operations.GetManagedIssuesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/issues";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8909,22 +9366,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedIssuesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedIssuesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedIssues200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedIssuesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8936,12 +9394,13 @@ export class SDK {
   }
 
   
-  // GetManagedLinodeSetting - Linode's Managed Settings View
-  /** 
+  /**
+   * getManagedLinodeSetting - Linode's Managed Settings View
+   *
    * Returns a single Linode's Managed settings.
    * 
   **/
-  GetManagedLinodeSetting(
+  getManagedLinodeSetting(
     req: operations.GetManagedLinodeSettingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedLinodeSettingResponse> {
@@ -8949,27 +9408,29 @@ export class SDK {
       req = new operations.GetManagedLinodeSettingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/linode-settings/{linodeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedLinodeSettingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedLinodeSettingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedLinodeSettings = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedLinodeSettingDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -8981,12 +9442,13 @@ export class SDK {
   }
 
   
-  // GetManagedLinodeSettings - Managed Linode Settings List
-  /** 
+  /**
+   * getManagedLinodeSettings - Managed Linode Settings List
+   *
    * Returns a paginated list of Managed Settings for your Linodes. There will be one entry per Linode on your Account.
    * 
   **/
-  GetManagedLinodeSettings(
+  getManagedLinodeSettings(
     req: operations.GetManagedLinodeSettingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedLinodeSettingsResponse> {
@@ -8994,11 +9456,12 @@ export class SDK {
       req = new operations.GetManagedLinodeSettingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/linode-settings";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9007,22 +9470,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedLinodeSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedLinodeSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedLinodeSettings200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedLinodeSettingsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9034,12 +9498,13 @@ export class SDK {
   }
 
   
-  // GetManagedService - Managed Service View
-  /** 
+  /**
+   * getManagedService - Managed Service View
+   *
    * Returns information about a single Managed Service on your Account.
    * 
   **/
-  GetManagedService(
+  getManagedService(
     req: operations.GetManagedServiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedServiceResponse> {
@@ -9047,27 +9512,29 @@ export class SDK {
       req = new operations.GetManagedServiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/services/{serviceId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedService = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedServiceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9079,12 +9546,13 @@ export class SDK {
   }
 
   
-  // GetManagedServices - Managed Services List
-  /** 
+  /**
+   * getManagedServices - Managed Services List
+   *
    * Returns a paginated list of Managed Services on your Account. These are the services Linode Managed is monitoring and will report and attempt to resolve issues with.
    * 
   **/
-  GetManagedServices(
+  getManagedServices(
     req: operations.GetManagedServicesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedServicesResponse> {
@@ -9092,27 +9560,29 @@ export class SDK {
       req = new operations.GetManagedServicesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/services";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedServicesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedServicesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedServices200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedServicesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9124,8 +9594,9 @@ export class SDK {
   }
 
   
-  // GetManagedStats - Managed Stats List
-  /** 
+  /**
+   * getManagedStats - Managed Stats List
+   *
    * Returns a list of Managed Stats on your Account in the form of x and y data points.
    * You can use these data points to plot your own graph visualizations. These stats
    * reflect the last 24 hours of combined usage across all managed Linodes on your account
@@ -9139,7 +9610,7 @@ export class SDK {
    * * network out
    * 
   **/
-  GetManagedStats(
+  getManagedStats(
     req: operations.GetManagedStatsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetManagedStatsResponse> {
@@ -9147,27 +9618,29 @@ export class SDK {
       req = new operations.GetManagedStatsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/stats";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetManagedStatsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetManagedStatsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedStats200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getManagedStatsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9179,12 +9652,13 @@ export class SDK {
   }
 
   
-  // GetNodeBalancer - NodeBalancer View
-  /** 
+  /**
+   * getNodeBalancer - NodeBalancer View
+   *
    * Returns a single NodeBalancer you can access.
    * 
   **/
-  GetNodeBalancer(
+  getNodeBalancer(
     req: operations.GetNodeBalancerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNodeBalancerResponse> {
@@ -9192,27 +9666,29 @@ export class SDK {
       req = new operations.GetNodeBalancerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancerDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9224,12 +9700,13 @@ export class SDK {
   }
 
   
-  // GetNodeBalancerConfig - Config View
-  /** 
+  /**
+   * getNodeBalancerConfig - Config View
+   *
    * Returns configuration information for a single port of this NodeBalancer.
    * 
   **/
-  GetNodeBalancerConfig(
+  getNodeBalancerConfig(
     req: operations.GetNodeBalancerConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNodeBalancerConfigResponse> {
@@ -9237,27 +9714,29 @@ export class SDK {
       req = new operations.GetNodeBalancerConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancerConfig = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancerConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9269,12 +9748,13 @@ export class SDK {
   }
 
   
-  // GetNodeBalancerConfigNodes - Nodes List
-  /** 
+  /**
+   * getNodeBalancerConfigNodes - Nodes List
+   *
    * Returns a paginated list of NodeBalancer nodes associated with this Config. These are the backends that will be sent traffic for this port.
    * 
   **/
-  GetNodeBalancerConfigNodes(
+  getNodeBalancerConfigNodes(
     req: operations.GetNodeBalancerConfigNodesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNodeBalancerConfigNodesResponse> {
@@ -9282,11 +9762,12 @@ export class SDK {
       req = new operations.GetNodeBalancerConfigNodesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9295,22 +9776,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNodeBalancerConfigNodesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNodeBalancerConfigNodesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancerConfigNodes200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancerConfigNodesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9322,14 +9804,15 @@ export class SDK {
   }
 
   
-  // GetNodeBalancerConfigs - Configs List
-  /** 
+  /**
+   * getNodeBalancerConfigs - Configs List
+   *
    * Returns a paginated list of NodeBalancer Configs associated with this NodeBalancer. NodeBalancer Configs represent individual ports that this NodeBalancer will accept traffic on, one Config per port.
    * 
    * For example, if you wanted to accept standard HTTP traffic, you would need a Config listening on port 80.
    * 
   **/
-  GetNodeBalancerConfigs(
+  getNodeBalancerConfigs(
     req: operations.GetNodeBalancerConfigsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNodeBalancerConfigsResponse> {
@@ -9337,11 +9820,12 @@ export class SDK {
       req = new operations.GetNodeBalancerConfigsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9350,22 +9834,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNodeBalancerConfigsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNodeBalancerConfigsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancerConfigs200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancerConfigsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9377,12 +9862,13 @@ export class SDK {
   }
 
   
-  // GetNodeBalancerNode - Node View
-  /** 
+  /**
+   * getNodeBalancerNode - Node View
+   *
    * Returns information about a single Node, a backend for this NodeBalancer's configured port.
    * 
   **/
-  GetNodeBalancerNode(
+  getNodeBalancerNode(
     req: operations.GetNodeBalancerNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNodeBalancerNodeResponse> {
@@ -9390,27 +9876,29 @@ export class SDK {
       req = new operations.GetNodeBalancerNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNodeBalancerNodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNodeBalancerNodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancerNode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancerNodeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9422,12 +9910,13 @@ export class SDK {
   }
 
   
-  // GetNodeBalancers - NodeBalancers List
-  /** 
+  /**
+   * getNodeBalancers - NodeBalancers List
+   *
    * Returns a paginated list of NodeBalancers you have access to.
    * 
   **/
-  GetNodeBalancers(
+  getNodeBalancers(
     req: operations.GetNodeBalancersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNodeBalancersResponse> {
@@ -9435,11 +9924,12 @@ export class SDK {
       req = new operations.GetNodeBalancersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/nodebalancers";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9448,22 +9938,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNodeBalancersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNodeBalancersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancers200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNodeBalancersDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9475,13 +9966,14 @@ export class SDK {
   }
 
   
-  // GetNotifications - Notifications List
-  /** 
+  /**
+   * getNotifications - Notifications List
+   *
    * Returns a collection of Notification objects representing important, often time-sensitive items related to your Account.
    * You cannot interact directly with Notifications, and a Notification will disappear when the circumstances causing it have been resolved. For example, if you have an important Ticket open, you must respond to the Ticket to dismiss the Notification.
    * 
   **/
-  GetNotifications(
+  getNotifications(
     req: operations.GetNotificationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNotificationsResponse> {
@@ -9489,27 +9981,29 @@ export class SDK {
       req = new operations.GetNotificationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/notifications";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNotifications200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getNotificationsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9521,8 +10015,9 @@ export class SDK {
   }
 
   
-  // GetObjectStorageBucket - Object Storage Bucket View
-  /** 
+  /**
+   * getObjectStorageBucket - Object Storage Bucket View
+   *
    * Returns a single Object Storage Bucket.
    * 
    * 
@@ -9530,7 +10025,7 @@ export class SDK {
    * use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#get-bucket) directly.
    * 
   **/
-  GetObjectStorageBucket(
+  getObjectStorageBucket(
     req: operations.GetObjectStorageBucketRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageBucketResponse> {
@@ -9538,27 +10033,32 @@ export class SDK {
       req = new operations.GetObjectStorageBucketRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGEBUCKET_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageBucketServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageBucketResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageBucketResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageBucket = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageBucketDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9570,8 +10070,9 @@ export class SDK {
   }
 
   
-  // GetObjectStorageBucketContent - Object Storage Bucket Contents List
-  /** 
+  /**
+   * getObjectStorageBucketContent - Object Storage Bucket Contents List
+   *
    * Returns the contents of a bucket. The contents are paginated using a `marker`,
    * which is the name of the last object on the previous page.  Objects may
    * be filtered by `prefix` and `delimiter` as well; see Query Parameters for more
@@ -9582,7 +10083,7 @@ export class SDK {
    * use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/objectops/#get-object) directly.
    * 
   **/
-  GetObjectStorageBucketContent(
+  getObjectStorageBucketContent(
     req: operations.GetObjectStorageBucketContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageBucketContentResponse> {
@@ -9590,11 +10091,15 @@ export class SDK {
       req = new operations.GetObjectStorageBucketContentRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGEBUCKETCONTENT_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageBucketContentServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/object-list", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9603,22 +10108,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageBucketContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageBucketContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageBucketContent200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageBucketContentDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9630,8 +10136,9 @@ export class SDK {
   }
 
   
-  // GetObjectStorageBucketinCluster - Object Storage Buckets in Cluster List
-  /** 
+  /**
+   * getObjectStorageBucketinCluster - Object Storage Buckets in Cluster List
+   *
    * Returns a list of Buckets in this cluster belonging to this Account.
    * 
    * 
@@ -9639,7 +10146,7 @@ export class SDK {
    * use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#get-bucket) directly.
    * 
   **/
-  GetObjectStorageBucketinCluster(
+  getObjectStorageBucketinCluster(
     req: operations.GetObjectStorageBucketinClusterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageBucketinClusterResponse> {
@@ -9647,27 +10154,32 @@ export class SDK {
       req = new operations.GetObjectStorageBucketinClusterRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGEBUCKETINCLUSTER_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageBucketinClusterServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageBucketinClusterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageBucketinClusterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageBucketinCluster200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageBucketinClusterDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9679,8 +10191,9 @@ export class SDK {
   }
 
   
-  // GetObjectStorageBuckets - Object Storage Buckets List
-  /** 
+  /**
+   * getObjectStorageBuckets - Object Storage Buckets List
+   *
    * Returns a paginated list of all Object Storage Buckets that you own.
    * 
    * 
@@ -9688,7 +10201,7 @@ export class SDK {
    * use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/serviceops/#list-buckets) directly.
    * 
   **/
-  GetObjectStorageBuckets(
+  getObjectStorageBuckets(
     req: operations.GetObjectStorageBucketsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageBucketsResponse> {
@@ -9696,27 +10209,32 @@ export class SDK {
       req = new operations.GetObjectStorageBucketsRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGEBUCKETS_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageBucketsServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/object-storage/buckets";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageBucketsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageBucketsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageBuckets200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageBucketsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9728,12 +10246,13 @@ export class SDK {
   }
 
   
-  // GetObjectStorageCluster - Cluster View
-  /** 
+  /**
+   * getObjectStorageCluster - Cluster View
+   *
    * Returns a single Object Storage Cluster.
    * 
   **/
-  GetObjectStorageCluster(
+  getObjectStorageCluster(
     req: operations.GetObjectStorageClusterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageClusterResponse> {
@@ -9741,28 +10260,31 @@ export class SDK {
       req = new operations.GetObjectStorageClusterRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGECLUSTER_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageClusterServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/clusters/{clusterId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageClusterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageClusterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageCluster = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageClusterDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9774,14 +10296,15 @@ export class SDK {
   }
 
   
-  // GetObjectStorageClusters - Clusters List
-  /** 
+  /**
+   * getObjectStorageClusters - Clusters List
+   *
    * Returns a paginated list of Object Storage Clusters that are available for
    * use.  Users can connect to the clusters with third party clients to create buckets
    * and upload objects.
    * 
   **/
-  GetObjectStorageClusters(
+  getObjectStorageClusters(
     req: operations.GetObjectStorageClustersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageClustersResponse> {
@@ -9789,28 +10312,31 @@ export class SDK {
       req = new operations.GetObjectStorageClustersRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGECLUSTERS_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageClustersServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/object-storage/clusters";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageClustersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageClustersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageClusters200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageClustersDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9822,12 +10348,13 @@ export class SDK {
   }
 
   
-  // GetObjectStorageKey - Object Storage Key View
-  /** 
+  /**
+   * getObjectStorageKey - Object Storage Key View
+   *
    * Returns a single Object Storage Key provisioned for your account.
    * 
   **/
-  GetObjectStorageKey(
+  getObjectStorageKey(
     req: operations.GetObjectStorageKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageKeyResponse> {
@@ -9835,27 +10362,32 @@ export class SDK {
       req = new operations.GetObjectStorageKeyRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGEKEY_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageKeyServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/keys/{keyId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageKey = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9867,13 +10399,14 @@ export class SDK {
   }
 
   
-  // GetObjectStorageKeys - Object Storage Keys List
-  /** 
+  /**
+   * getObjectStorageKeys - Object Storage Keys List
+   *
    * Returns a paginated list of Object Storage Keys for authenticating to
    * the Object Storage S3 API.
    * 
   **/
-  GetObjectStorageKeys(
+  getObjectStorageKeys(
     req: operations.GetObjectStorageKeysRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageKeysResponse> {
@@ -9881,27 +10414,32 @@ export class SDK {
       req = new operations.GetObjectStorageKeysRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGEKEYS_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageKeysServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/object-storage/keys";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageKeysResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageKeysResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageKeys200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageKeysDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9913,13 +10451,14 @@ export class SDK {
   }
 
   
-  // GetObjectStorageSsl - Object Storage TLS/SSL Cert View
-  /** 
+  /**
+   * getObjectStorageSsl - Object Storage TLS/SSL Cert View
+   *
    * Returns a boolean value indicating if this bucket has a corresponding TLS/SSL certificate that was
    * uploaded by an Account user.
    * 
   **/
-  GetObjectStorageSsl(
+  getObjectStorageSsl(
     req: operations.GetObjectStorageSslRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageSslResponse> {
@@ -9927,27 +10466,32 @@ export class SDK {
       req = new operations.GetObjectStorageSslRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGESSL_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageSslServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/ssl", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageSslResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageSslResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageSslResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageSslDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -9959,15 +10503,16 @@ export class SDK {
   }
 
   
-  // GetObjectStorageTransfer - Object Storage Transfer View
-  /** 
+  /**
+   * getObjectStorageTransfer - Object Storage Transfer View
+   *
    * The amount of outbound data transfer used by your account's Object Storage buckets.
    * Object Storage adds 1 terabyte of outbound data transfer to your data transfer pool.
    * See the [Object Storage Pricing and Limitations](/docs/guides/pricing-and-limitations/)
    * guide for details on Object Storage transfer quotas.
    * 
   **/
-  GetObjectStorageTransfer(
+  getObjectStorageTransfer(
     req: operations.GetObjectStorageTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStorageTransferResponse> {
@@ -9975,27 +10520,32 @@ export class SDK {
       req = new operations.GetObjectStorageTransferRequest(req);
     }
     
-    let baseURL: string = operations.GETOBJECTSTORAGETRANSFER_SERVERS[0];
+    let baseURL: string = operations.GetObjectStorageTransferServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/object-storage/transfer";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStorageTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetObjectStorageTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageTransfer200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getObjectStorageTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10007,12 +10557,13 @@ export class SDK {
   }
 
   
-  // GetPayment - Payment View
-  /** 
+  /**
+   * getPayment - Payment View
+   *
    * Returns information about a specific Payment.
    * 
   **/
-  GetPayment(
+  getPayment(
     req: operations.GetPaymentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPaymentResponse> {
@@ -10020,27 +10571,29 @@ export class SDK {
       req = new operations.GetPaymentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/payments/{paymentId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.payment = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPaymentDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10052,12 +10605,13 @@ export class SDK {
   }
 
   
-  // GetPaymentMethods - Payment Methods List
-  /** 
+  /**
+   * getPaymentMethods - Payment Methods List
+   *
    * Returns a paginated list of Payment Methods for this Account.
    * 
   **/
-  GetPaymentMethods(
+  getPaymentMethods(
     req: operations.GetPaymentMethodsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPaymentMethodsResponse> {
@@ -10065,11 +10619,15 @@ export class SDK {
       req = new operations.GetPaymentMethodsRequest(req);
     }
     
-    let baseURL: string = operations.GETPAYMENTMETHODS_SERVERS[0];
+    let baseURL: string = operations.GetPaymentMethodsServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/account/payment-methods";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10078,22 +10636,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPaymentMethodsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPaymentMethodsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPaymentMethods200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPaymentMethodsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10105,12 +10664,13 @@ export class SDK {
   }
 
   
-  // GetPayments - Payments List
-  /** 
+  /**
+   * getPayments - Payments List
+   *
    * Returns a paginated list of Payments made on this Account.
    * 
   **/
-  GetPayments(
+  getPayments(
     req: operations.GetPaymentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPaymentsResponse> {
@@ -10118,11 +10678,12 @@ export class SDK {
       req = new operations.GetPaymentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/payments";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10131,22 +10692,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPaymentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPaymentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPayments200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPaymentsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10158,12 +10720,13 @@ export class SDK {
   }
 
   
-  // GetPersonalAccessToken - Personal Access Token View
-  /** 
+  /**
+   * getPersonalAccessToken - Personal Access Token View
+   *
    * Returns a single Personal Access Token.
    * 
   **/
-  GetPersonalAccessToken(
+  getPersonalAccessToken(
     req: operations.GetPersonalAccessTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPersonalAccessTokenResponse> {
@@ -10171,27 +10734,29 @@ export class SDK {
       req = new operations.GetPersonalAccessTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/tokens/{tokenId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personalAccessToken = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPersonalAccessTokenDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10203,12 +10768,13 @@ export class SDK {
   }
 
   
-  // GetPersonalAccessTokens - Personal Access Tokens List
-  /** 
+  /**
+   * getPersonalAccessTokens - Personal Access Tokens List
+   *
    * Returns a paginated list of Personal Access Tokens currently active for your User.
    * 
   **/
-  GetPersonalAccessTokens(
+  getPersonalAccessTokens(
     req: operations.GetPersonalAccessTokensRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPersonalAccessTokensResponse> {
@@ -10216,27 +10782,29 @@ export class SDK {
       req = new operations.GetPersonalAccessTokensRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/tokens";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPersonalAccessTokensResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPersonalAccessTokensResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPersonalAccessTokens200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPersonalAccessTokensDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10248,14 +10816,15 @@ export class SDK {
   }
 
   
-  // GetProfile - Profile View
-  /** 
+  /**
+   * getProfile - Profile View
+   *
    * Returns information about the current User. This can be used to see who is acting in applications where more than one token is managed. For example, in third-party OAuth applications.
    * 
    * This endpoint is always accessible, no matter what OAuth scopes the acting token has.
    * 
   **/
-  GetProfile(
+  getProfile(
     req: operations.GetProfileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileResponse> {
@@ -10263,27 +10832,29 @@ export class SDK {
       req = new operations.GetProfileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.profile = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10295,12 +10866,13 @@ export class SDK {
   }
 
   
-  // GetProfileApp - Authorized App View
-  /** 
+  /**
+   * getProfileApp - Authorized App View
+   *
    * Returns information about a single app you've authorized to access your Account.
    * 
   **/
-  GetProfileApp(
+  getProfileApp(
     req: operations.GetProfileAppRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileAppResponse> {
@@ -10308,27 +10880,29 @@ export class SDK {
       req = new operations.GetProfileAppRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/apps/{appId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileAppResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileAppResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.authorizedApp = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileAppDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10340,12 +10914,13 @@ export class SDK {
   }
 
   
-  // GetProfileApps - Authorized Apps List
-  /** 
+  /**
+   * getProfileApps - Authorized Apps List
+   *
    * This is a collection of OAuth apps that you've given access to your Account, and includes the level of access granted.
    * 
   **/
-  GetProfileApps(
+  getProfileApps(
     req: operations.GetProfileAppsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileAppsResponse> {
@@ -10353,11 +10928,12 @@ export class SDK {
       req = new operations.GetProfileAppsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/apps";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10366,22 +10942,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileAppsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileAppsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileApps200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileAppsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10393,8 +10970,9 @@ export class SDK {
   }
 
   
-  // GetProfileGrants - Grants List
-  /** 
+  /**
+   * getProfileGrants - Grants List
+   *
    * This returns a GrantsResponse describing what the acting User has been granted access to.  For unrestricted users, this will return a  204 and no body because unrestricted users have access to everything without grants.  This will not return information about entities you do not have access to.  This endpoint is useful when writing third-party OAuth applications to see what options you should present to the acting User.
    * 
    * For example, if they do not have `global.add_linodes`, you might not display a button to deploy a new Linode.
@@ -10402,7 +10980,7 @@ export class SDK {
    * Any client may access this endpoint; no OAuth scopes are required.
    * 
   **/
-  GetProfileGrants(
+  getProfileGrants(
     req: operations.GetProfileGrantsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileGrantsResponse> {
@@ -10410,29 +10988,31 @@ export class SDK {
       req = new operations.GetProfileGrantsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/grants";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileGrantsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileGrantsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.grantsResponse = httpRes?.data;
             }
             break;
-          case 204:
+          case httpRes?.status == 204:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileGrantsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10444,12 +11024,13 @@ export class SDK {
   }
 
   
-  // GetProfileLogin - Login View
-  /** 
+  /**
+   * getProfileLogin - Login View
+   *
    * Returns a login object displaying information about a successful account login from this user.
    * 
   **/
-  GetProfileLogin(
+  getProfileLogin(
     req: operations.GetProfileLoginRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileLoginResponse> {
@@ -10457,27 +11038,29 @@ export class SDK {
       req = new operations.GetProfileLoginRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/logins/{loginId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileLoginResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileLoginResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.login = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileLoginDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10489,12 +11072,13 @@ export class SDK {
   }
 
   
-  // GetProfileLogins - Logins List
-  /** 
+  /**
+   * getProfileLogins - Logins List
+   *
    * Returns a collection of successful account logins from this user during the last 90 days.
    * 
   **/
-  GetProfileLogins(
+  getProfileLogins(
     req: operations.GetProfileLoginsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileLoginsResponse> {
@@ -10502,27 +11086,29 @@ export class SDK {
       req = new operations.GetProfileLoginsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/logins";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileLoginsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileLoginsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileLogins200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProfileLoginsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10534,12 +11120,13 @@ export class SDK {
   }
 
   
-  // GetRegion - Region View
-  /** 
+  /**
+   * getRegion - Region View
+   *
    * Returns a single Region.
    * 
   **/
-  GetRegion(
+  getRegion(
     req: operations.GetRegionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRegionResponse> {
@@ -10547,28 +11134,28 @@ export class SDK {
       req = new operations.GetRegionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/regions/{regionId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRegionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRegionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.region = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRegionDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10580,38 +11167,38 @@ export class SDK {
   }
 
   
-  // GetRegions - Regions List
-  /** 
+  /**
+   * getRegions - Regions List
+   *
    * Lists the Regions available for Linode services. Not all services are guaranteed to be
    * available in all Regions.
    * 
   **/
-  GetRegions(
-    
+  getRegions(
     config?: AxiosRequestConfig
   ): Promise<operations.GetRegionsResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/regions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRegionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRegionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRegions200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRegionsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10623,12 +11210,13 @@ export class SDK {
   }
 
   
-  // GetSshKey - SSH Key View
-  /** 
+  /**
+   * getSshKey - SSH Key View
+   *
    * Returns a single SSH Key object identified by `id` that you have access to view.
    * 
   **/
-  GetSshKey(
+  getSshKey(
     req: operations.GetSshKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSshKeyResponse> {
@@ -10636,27 +11224,29 @@ export class SDK {
       req = new operations.GetSshKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/sshkeys/{sshKeyId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sshKey = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSshKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10668,12 +11258,13 @@ export class SDK {
   }
 
   
-  // GetSshKeys - SSH Keys List
-  /** 
+  /**
+   * getSshKeys - SSH Keys List
+   *
    * Returns a collection of SSH Keys you've added to your Profile.
    * 
   **/
-  GetSshKeys(
+  getSshKeys(
     req: operations.GetSshKeysRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSshKeysResponse> {
@@ -10681,11 +11272,12 @@ export class SDK {
       req = new operations.GetSshKeysRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/sshkeys";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10694,22 +11286,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSshKeysResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSshKeysResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSshKeys200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSshKeysDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10721,8 +11314,9 @@ export class SDK {
   }
 
   
-  // GetServiceTransfer - Service Transfer View
-  /** 
+  /**
+   * getServiceTransfer - Service Transfer View
+   *
    * Returns the details of the Service Transfer for the provided token.
    * 
    * While a transfer is pending, any unrestricted user *of any account* can access this command. After a
@@ -10731,7 +11325,7 @@ export class SDK {
    * transfer can view it.
    * 
   **/
-  GetServiceTransfer(
+  getServiceTransfer(
     req: operations.GetServiceTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetServiceTransferResponse> {
@@ -10739,27 +11333,29 @@ export class SDK {
       req = new operations.GetServiceTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/service-transfers/{token}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetServiceTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceTransfer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getServiceTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10771,14 +11367,15 @@ export class SDK {
   }
 
   
-  // GetServiceTransfers - Service Transfers List
-  /** 
+  /**
+   * getServiceTransfers - Service Transfers List
+   *
    * Returns a collection of all created and accepted Service Transfers for this account, regardless of the user that created or accepted the transfer.
    * 
    * This command can only be accessed by the unrestricted users of an account.
    * 
   **/
-  GetServiceTransfers(
+  getServiceTransfers(
     req: operations.GetServiceTransfersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetServiceTransfersResponse> {
@@ -10786,11 +11383,12 @@ export class SDK {
       req = new operations.GetServiceTransfersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/service-transfers";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10799,22 +11397,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetServiceTransfersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetServiceTransfersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getServiceTransfers200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getServiceTransfersDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10826,12 +11425,13 @@ export class SDK {
   }
 
   
-  // GetStackScript - StackScript View
-  /** 
+  /**
+   * getStackScript - StackScript View
+   *
    * Returns all of the information about a specified StackScript, including the contents of the script.
    * 
   **/
-  GetStackScript(
+  getStackScript(
     req: operations.GetStackScriptRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStackScriptResponse> {
@@ -10839,27 +11439,29 @@ export class SDK {
       req = new operations.GetStackScriptRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/stackscripts/{stackscriptId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stackScript = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStackScriptDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10871,14 +11473,15 @@ export class SDK {
   }
 
   
-  // GetStackScripts - StackScripts List
-  /** 
+  /**
+   * getStackScripts - StackScripts List
+   *
    * If the request is not authenticated, only public StackScripts are returned.
    * 
    * For more information on StackScripts, please read our [StackScripts guides](/docs/platform/stackscripts/).
    * 
   **/
-  GetStackScripts(
+  getStackScripts(
     req: operations.GetStackScriptsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStackScriptsResponse> {
@@ -10886,11 +11489,12 @@ export class SDK {
       req = new operations.GetStackScriptsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/linode/stackscripts";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10899,22 +11503,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStackScriptsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetStackScriptsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStackScripts200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStackScriptsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10926,12 +11531,13 @@ export class SDK {
   }
 
   
-  // GetTaggedObjects - Tagged Objects List
-  /** 
+  /**
+   * getTaggedObjects - Tagged Objects List
+   *
    * Returns a paginated list of all objects you've tagged with the requested Tag. This is a mixed collection of all object types.
    * 
   **/
-  GetTaggedObjects(
+  getTaggedObjects(
     req: operations.GetTaggedObjectsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTaggedObjectsResponse> {
@@ -10939,11 +11545,12 @@ export class SDK {
       req = new operations.GetTaggedObjectsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{label}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -10952,22 +11559,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTaggedObjectsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTaggedObjectsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTaggedObjects200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTaggedObjectsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -10979,14 +11587,15 @@ export class SDK {
   }
 
   
-  // GetTags - Tags List
-  /** 
+  /**
+   * getTags - Tags List
+   *
    * Tags are User-defined labels attached to objects in your Account, such as Linodes. They are used for specifying and grouping attributes of objects that are relevant to the User.
    * 
    * This endpoint returns a paginated list of Tags on your account.
    * 
   **/
-  GetTags(
+  getTags(
     req: operations.GetTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsResponse> {
@@ -10994,11 +11603,12 @@ export class SDK {
       req = new operations.GetTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11007,22 +11617,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTags200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTagsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11034,12 +11645,13 @@ export class SDK {
   }
 
   
-  // GetTicket - Support Ticket View
-  /** 
+  /**
+   * getTicket - Support Ticket View
+   *
    * Returns a Support Ticket under your Account.
    * 
   **/
-  GetTicket(
+  getTicket(
     req: operations.GetTicketRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTicketResponse> {
@@ -11047,27 +11659,29 @@ export class SDK {
       req = new operations.GetTicketRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/support/tickets/{ticketId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTicketResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTicketResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.supportTicket = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTicketDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11079,12 +11693,13 @@ export class SDK {
   }
 
   
-  // GetTicketReplies - Replies List
-  /** 
+  /**
+   * getTicketReplies - Replies List
+   *
    * Returns a collection of replies to a Support Ticket on your Account.
    * 
   **/
-  GetTicketReplies(
+  getTicketReplies(
     req: operations.GetTicketRepliesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTicketRepliesResponse> {
@@ -11092,11 +11707,12 @@ export class SDK {
       req = new operations.GetTicketRepliesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/support/tickets/{ticketId}/replies", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11105,22 +11721,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTicketRepliesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTicketRepliesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTicketReplies200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTicketRepliesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11132,13 +11749,14 @@ export class SDK {
   }
 
   
-  // GetTickets - Support Tickets List
-  /** 
+  /**
+   * getTickets - Support Tickets List
+   *
    * Returns a collection of Support Tickets on your Account. Support Tickets can be both tickets you open with Linode for support, as well as tickets generated by Linode regarding your Account.
    * This collection includes all Support Tickets generated on your Account, with open tickets returned first.
    * 
   **/
-  GetTickets(
+  getTickets(
     req: operations.GetTicketsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTicketsResponse> {
@@ -11146,11 +11764,12 @@ export class SDK {
       req = new operations.GetTicketsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/support/tickets";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11159,22 +11778,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTicketsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTicketsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTickets200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTicketsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11186,12 +11806,13 @@ export class SDK {
   }
 
   
-  // GetTransfer - Network Utilization View
-  /** 
+  /**
+   * getTransfer - Network Utilization View
+   *
    * Returns a Transfer object showing your network utilization, in GB, for the current month.
    * 
   **/
-  GetTransfer(
+  getTransfer(
     req: operations.GetTransferRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTransferResponse> {
@@ -11199,27 +11820,29 @@ export class SDK {
       req = new operations.GetTransferRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/transfer";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTransferResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTransferResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.transfer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTransferDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11231,12 +11854,13 @@ export class SDK {
   }
 
   
-  // GetTrustedDevice - Trusted Device View
-  /** 
+  /**
+   * getTrustedDevice - Trusted Device View
+   *
    * Returns a single active TrustedDevice for your User.
    * 
   **/
-  GetTrustedDevice(
+  getTrustedDevice(
     req: operations.GetTrustedDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTrustedDeviceResponse> {
@@ -11244,27 +11868,29 @@ export class SDK {
       req = new operations.GetTrustedDeviceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/devices/{deviceId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTrustedDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTrustedDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.trustedDevice = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTrustedDeviceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11276,12 +11902,13 @@ export class SDK {
   }
 
   
-  // GetUser - User View
-  /** 
+  /**
+   * getUser - User View
+   *
    * Returns information about a single User on your Account.
    * 
   **/
-  GetUser(
+  getUser(
     req: operations.GetUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUserResponse> {
@@ -11289,27 +11916,29 @@ export class SDK {
       req = new operations.GetUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/users/{username}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.user = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11321,14 +11950,15 @@ export class SDK {
   }
 
   
-  // GetUserGrants - User's Grants View
-  /** 
+  /**
+   * getUserGrants - User's Grants View
+   *
    * Returns the full grants structure for the specified account User (other than the account owner, see below for details). This includes all entities on the Account alongside the level of access this User has to each of them.
    * 
    * The current authenticated User, including the account owner, may view their own grants at the [/profile/grants](/docs/api/profile/#grants-list) endpoint, but will not see entities that they do not have access to.
    * 
   **/
-  GetUserGrants(
+  getUserGrants(
     req: operations.GetUserGrantsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUserGrantsResponse> {
@@ -11336,29 +11966,31 @@ export class SDK {
       req = new operations.GetUserGrantsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/users/{username}/grants", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUserGrantsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUserGrantsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.grantsResponse = httpRes?.data;
             }
             break;
-          case 204:
+          case httpRes?.status == 204:
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserGrantsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11370,8 +12002,9 @@ export class SDK {
   }
 
   
-  // GetUserPreferences - User Preferences View
-  /** 
+  /**
+   * getUserPreferences - User Preferences View
+   *
    * View a list of user preferences tied to the OAuth client that generated
    * the token making the request. The user preferences endpoints allow
    * consumers of the API to store arbitrary JSON data, such as a user's font
@@ -11380,7 +12013,7 @@ export class SDK {
    * have multiple user preferences.
    * 
   **/
-  GetUserPreferences(
+  getUserPreferences(
     req: operations.GetUserPreferencesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUserPreferencesResponse> {
@@ -11388,27 +12021,29 @@ export class SDK {
       req = new operations.GetUserPreferencesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/preferences";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUserPreferencesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUserPreferencesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserPreferences200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserPreferencesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11420,12 +12055,13 @@ export class SDK {
   }
 
   
-  // GetUsers - Users List
-  /** 
+  /**
+   * getUsers - Users List
+   *
    * Returns a paginated list of Users on your Account. Users may access all or part of your Account based on their restricted status and grants.  An unrestricted User may access everything on the account, whereas restricted User may only access entities or perform actions they've been given specific grants to.
    * 
   **/
-  GetUsers(
+  getUsers(
     req: operations.GetUsersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersResponse> {
@@ -11433,11 +12069,12 @@ export class SDK {
       req = new operations.GetUsersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/users";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11446,22 +12083,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUsersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUsers200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUsersDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11473,8 +12111,9 @@ export class SDK {
   }
 
   
-  // GetVlaNs - VLANs List
-  /** 
+  /**
+   * getVlaNs - VLANs List
+   *
    * Returns a list of all Virtual Local Area Networks (VLANs) on your Account. VLANs provide
    * a mechanism for secure communication between two or more Linodes that are assigned to the
    * same VLAN and are both within the same Layer 2 broadcast domain.
@@ -11501,7 +12140,7 @@ export class SDK {
    * you will be prompted to select a different data center or contact support.
    * 
   **/
-  GetVlaNs(
+  getVlaNs(
     req: operations.GetVlaNsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetVlaNsResponse> {
@@ -11509,11 +12148,15 @@ export class SDK {
       req = new operations.GetVlaNsRequest(req);
     }
     
-    let baseURL: string = operations.GETVLANS_SERVERS[0];
+    let baseURL: string = operations.GetVlaNsServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/networking/vlans";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11522,22 +12165,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetVlaNsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetVlaNsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getVlaNs200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getVlaNsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11549,12 +12193,13 @@ export class SDK {
   }
 
   
-  // GetVolume - Volume View
-  /** 
+  /**
+   * getVolume - Volume View
+   *
    * Get information about a single Volume.
    * 
   **/
-  GetVolume(
+  getVolume(
     req: operations.GetVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetVolumeResponse> {
@@ -11562,11 +12207,12 @@ export class SDK {
       req = new operations.GetVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/volumes/{volumeId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11575,22 +12221,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.volume = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11602,12 +12249,13 @@ export class SDK {
   }
 
   
-  // GetVolumes - Volumes List
-  /** 
+  /**
+   * getVolumes - Volumes List
+   *
    * Returns a paginated list of Volumes you have permission to view.
    * 
   **/
-  GetVolumes(
+  getVolumes(
     req: operations.GetVolumesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetVolumesResponse> {
@@ -11615,11 +12263,12 @@ export class SDK {
       req = new operations.GetVolumesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/volumes";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -11628,22 +12277,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetVolumesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetVolumesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getVolumes200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getVolumesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11655,8 +12305,9 @@ export class SDK {
   }
 
   
-  // ImportDomain - Domain Import
-  /** 
+  /**
+   * importDomain - Domain Import
+   *
    * Imports a domain zone from a remote nameserver.
    * Your nameserver must allow zone transfers (AXFR) from the following IPs:
    * 
@@ -11666,7 +12317,7 @@ export class SDK {
    *   - 2600:3c00::5f
    * 
   **/
-  ImportDomain(
+  importDomain(
     req: operations.ImportDomainRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ImportDomainResponse> {
@@ -11674,43 +12325,44 @@ export class SDK {
       req = new operations.ImportDomainRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/domains/import";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ImportDomainResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ImportDomainResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domain = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importDomainDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11722,8 +12374,9 @@ export class SDK {
   }
 
   
-  // MigrateLinodeInstance - DC Migration/Pending Host Migration Initiate
-  /** 
+  /**
+   * migrateLinodeInstance - DC Migration/Pending Host Migration Initiate
+   *
    * Initiate a pending host migration that has been scheduled by Linode or initiate a cross data center (DC) migration.  A list of pending migrations, if any, can be accessed from [GET /account/notifications](/docs/api/account/#notifications-list). When the migration begins, your Linode will be shutdown if not already off. If the migration initiated the shutdown, it will reboot the Linode when completed.
    * 
    * To initiate a cross DC migration, you must pass a `region` parameter to the request body specifying the target data center region. You can view a list of all available regions and their feature capabilities from [GET /regions](/docs/api/regions/#regions-list). If your Linode has a DC migration already queued or you have initiated a previously scheduled migration, you will not be able to initiate a DC migration until it has completed.
@@ -11731,7 +12384,7 @@ export class SDK {
    * **Note:** Next Generation Network (NGN) data centers do not support IPv6 `/116` pools or IP Failover. If you have these features enabled on your Linode and attempt to migrate to an NGN data center, the migration will not initiate. If a Linode cannot be migrated because of an incompatibility, you will be prompted to select a different data center or contact support.
    * 
   **/
-  MigrateLinodeInstance(
+  migrateLinodeInstance(
     req: operations.MigrateLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MigrateLinodeInstanceResponse> {
@@ -11739,43 +12392,44 @@ export class SDK {
       req = new operations.MigrateLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/migrate", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MigrateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MigrateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.migrateLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.migrateLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11787,8 +12441,9 @@ export class SDK {
   }
 
   
-  // ModifyObjectStorageBucketAccess - Object Storage Bucket Access Modify
-  /** 
+  /**
+   * modifyObjectStorageBucketAccess - Object Storage Bucket Access Modify
+   *
    * Allows changing basic Cross-origin Resource Sharing (CORS) and Access Control Level (ACL) settings.
    * Only allows enabling/disabling CORS for all origins, and/or setting canned ACLs.
    * 
@@ -11796,7 +12451,7 @@ export class SDK {
    * For more fine-grained control of both systems, please use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#put-bucket-acl) directly.
    * 
   **/
-  ModifyObjectStorageBucketAccess(
+  modifyObjectStorageBucketAccess(
     req: operations.ModifyObjectStorageBucketAccessRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifyObjectStorageBucketAccessResponse> {
@@ -11804,43 +12459,47 @@ export class SDK {
       req = new operations.ModifyObjectStorageBucketAccessRequest(req);
     }
     
-    let baseURL: string = operations.MODIFYOBJECTSTORAGEBUCKETACCESS_SERVERS[0];
+    let baseURL: string = operations.ModifyObjectStorageBucketAccessServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/access", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifyObjectStorageBucketAccessResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifyObjectStorageBucketAccessResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyObjectStorageBucketAccess200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyObjectStorageBucketAccessDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11852,13 +12511,14 @@ export class SDK {
   }
 
   
-  // MutateLinodeInstance - Linode Upgrade
-  /** 
+  /**
+   * mutateLinodeInstance - Linode Upgrade
+   *
    * Linodes created with now-deprecated Types are entitled to a free upgrade to the next generation. A mutating Linode will be allocated any new resources the upgraded Type provides, and will be subsequently restarted if it was currently running.
    * If any actions are currently running or queued, those actions must be completed first before you can initiate a mutate.
    * 
   **/
-  MutateLinodeInstance(
+  mutateLinodeInstance(
     req: operations.MutateLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MutateLinodeInstanceResponse> {
@@ -11866,43 +12526,44 @@ export class SDK {
       req = new operations.MutateLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/mutate", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MutateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MutateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mutateLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mutateLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11914,8 +12575,9 @@ export class SDK {
   }
 
   
-  // PostLkeClusterNodeRecycle - Node Recycle
-  /** 
+  /**
+   * postLkeClusterNodeRecycle - Node Recycle
+   *
    * Recycles an individual Node in the designated Kubernetes Cluster. The Node will be deleted
    * and replaced with a new Linode, which may take a few minutes. Replacement Nodes are
    * installed with the latest available patch for the Cluster's Kubernetes Version.
@@ -11923,7 +12585,7 @@ export class SDK {
    * **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
    * 
   **/
-  PostLkeClusterNodeRecycle(
+  postLkeClusterNodeRecycle(
     req: operations.PostLkeClusterNodeRecycleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostLkeClusterNodeRecycleResponse> {
@@ -11931,27 +12593,29 @@ export class SDK {
       req = new operations.PostLkeClusterNodeRecycleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/nodes/{nodeId}/recycle", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostLkeClusterNodeRecycleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostLkeClusterNodeRecycleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postLkeClusterNodeRecycle200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postLkeClusterNodeRecycleDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -11963,8 +12627,9 @@ export class SDK {
   }
 
   
-  // PostLkeClusterPoolRecycle - Node Pool Recycle
-  /** 
+  /**
+   * postLkeClusterPoolRecycle - Node Pool Recycle
+   *
    * Recycles a Node Pool for the designated Kubernetes Cluster. All Linodes within the Node Pool will be deleted
    * and replaced with new Linodes on a rolling basis, which may take several minutes. Replacement Nodes are
    * installed with the latest available patch for the Cluster's Kubernetes Version.
@@ -11972,7 +12637,7 @@ export class SDK {
    * **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
    * 
   **/
-  PostLkeClusterPoolRecycle(
+  postLkeClusterPoolRecycle(
     req: operations.PostLkeClusterPoolRecycleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostLkeClusterPoolRecycleResponse> {
@@ -11980,27 +12645,29 @@ export class SDK {
       req = new operations.PostLkeClusterPoolRecycleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/pools/{poolId}/recycle", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostLkeClusterPoolRecycleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostLkeClusterPoolRecycleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postLkeClusterPoolRecycle200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postLkeClusterPoolRecycleDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12012,12 +12679,13 @@ export class SDK {
   }
 
   
-  // PostLkeClusterPools - Node Pool Create
-  /** 
+  /**
+   * postLkeClusterPools - Node Pool Create
+   *
    * Creates a new Node Pool for the designated Kubernetes cluster.
    * 
   **/
-  PostLkeClusterPools(
+  postLkeClusterPools(
     req: operations.PostLkeClusterPoolsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostLkeClusterPoolsResponse> {
@@ -12025,45 +12693,45 @@ export class SDK {
       req = new operations.PostLkeClusterPoolsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/pools", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostLkeClusterPoolsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostLkeClusterPoolsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.lkeNodePool = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postLkeClusterPoolsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12075,8 +12743,9 @@ export class SDK {
   }
 
   
-  // PostLkeClusterRecycle - Cluster Nodes Recycle
-  /** 
+  /**
+   * postLkeClusterRecycle - Cluster Nodes Recycle
+   *
    * Recycles all nodes in all pools of a designated Kubernetes Cluster. All Linodes within the Cluster will be deleted
    * and replaced with new Linodes on a rolling basis, which may take several minutes. Replacement Nodes are
    * installed with the latest available [patch version](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#kubernetes-release-versioning) for the Cluster's current Kubernetes minor release.
@@ -12084,7 +12753,7 @@ export class SDK {
    * **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
    * 
   **/
-  PostLkeClusterRecycle(
+  postLkeClusterRecycle(
     req: operations.PostLkeClusterRecycleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostLkeClusterRecycleResponse> {
@@ -12092,27 +12761,29 @@ export class SDK {
       req = new operations.PostLkeClusterRecycleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/recycle", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostLkeClusterRecycleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostLkeClusterRecycleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postLkeClusterRecycle200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postLkeClusterRecycleDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12124,12 +12795,13 @@ export class SDK {
   }
 
   
-  // PutLkeCluster - Kubernetes Cluster Update
-  /** 
+  /**
+   * putLkeCluster - Kubernetes Cluster Update
+   *
    * Updates a Kubernetes cluster.
    * 
   **/
-  PutLkeCluster(
+  putLkeCluster(
     req: operations.PutLkeClusterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutLkeClusterResponse> {
@@ -12137,38 +12809,39 @@ export class SDK {
       req = new operations.PutLkeClusterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutLkeClusterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.putLkeCluster200ApplicationJsonAny = httpRes?.data;
             }
             break;
@@ -12180,8 +12853,9 @@ export class SDK {
   }
 
   
-  // PutLkeNodePool - Node Pool Update
-  /** 
+  /**
+   * putLkeNodePool - Node Pool Update
+   *
    * Updates a Node Pool's count.
    * 
    * Linodes will be created or deleted to match changes to the Node Pool's count.
@@ -12189,7 +12863,7 @@ export class SDK {
    * **Any local storage on deleted Linodes (such as "hostPath" and "emptyDir" volumes, or "local" PersistentVolumes) will be erased.**
    * 
   **/
-  PutLkeNodePool(
+  putLkeNodePool(
     req: operations.PutLkeNodePoolRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutLkeNodePoolResponse> {
@@ -12197,38 +12871,39 @@ export class SDK {
       req = new operations.PutLkeNodePoolRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lke/clusters/{clusterId}/pools/{poolId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutLkeNodePoolResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutLkeNodePoolResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.lkeNodePool = httpRes?.data;
             }
             break;
@@ -12240,12 +12915,13 @@ export class SDK {
   }
 
   
-  // RebootLinodeInstance - Linode Reboot
-  /** 
+  /**
+   * rebootLinodeInstance - Linode Reboot
+   *
    * Reboots a Linode you have permission to modify. If any actions are currently running or queued, those actions must be completed first before you can initiate a reboot.
    * 
   **/
-  RebootLinodeInstance(
+  rebootLinodeInstance(
     req: operations.RebootLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RebootLinodeInstanceResponse> {
@@ -12253,43 +12929,44 @@ export class SDK {
       req = new operations.RebootLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/reboot", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RebootLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RebootLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rebootLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rebootLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12301,8 +12978,9 @@ export class SDK {
   }
 
   
-  // RebuildLinodeInstance - Linode Rebuild
-  /** 
+  /**
+   * rebuildLinodeInstance - Linode Rebuild
+   *
    * Rebuilds a Linode you have the `read_write` permission to modify.
    * A rebuild will first shut down the Linode, delete all disks and configs on the Linode, and then deploy a new `image` to the Linode with the given attributes. Additionally:
    * 
@@ -12312,7 +12990,7 @@ export class SDK {
    *     `authorized_keys` field.
    * 
   **/
-  RebuildLinodeInstance(
+  rebuildLinodeInstance(
     req: operations.RebuildLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RebuildLinodeInstanceResponse> {
@@ -12320,45 +12998,45 @@ export class SDK {
       req = new operations.RebuildLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/rebuild", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RebuildLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RebuildLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rebuildLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12370,12 +13048,13 @@ export class SDK {
   }
 
   
-  // RebuildNodeBalancerConfig - Config Rebuild
-  /** 
+  /**
+   * rebuildNodeBalancerConfig - Config Rebuild
+   *
    * Rebuilds a NodeBalancer Config and its Nodes that you have permission to modify.
    * 
   **/
-  RebuildNodeBalancerConfig(
+  rebuildNodeBalancerConfig(
     req: operations.RebuildNodeBalancerConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RebuildNodeBalancerConfigResponse> {
@@ -12383,45 +13062,45 @@ export class SDK {
       req = new operations.RebuildNodeBalancerConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/rebuild", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RebuildNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RebuildNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rebuildNodeBalancerConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12433,12 +13112,13 @@ export class SDK {
   }
 
   
-  // RemoveLinodeIp - IPv4 Address Delete
-  /** 
+  /**
+   * removeLinodeIp - IPv4 Address Delete
+   *
    * Deletes a public IPv4 address associated with this Linode. This will fail if it is the Linode's last remaining public IPv4 address. Private IPv4 addresses cannot be removed via this endpoint.
    * 
   **/
-  RemoveLinodeIp(
+  removeLinodeIp(
     req: operations.RemoveLinodeIpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RemoveLinodeIpResponse> {
@@ -12446,27 +13126,29 @@ export class SDK {
       req = new operations.RemoveLinodeIpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/ips/{address}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RemoveLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RemoveLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.removeLinodeIp200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.removeLinodeIpDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12478,13 +13160,14 @@ export class SDK {
   }
 
   
-  // RescueLinodeInstance - Linode Boot into Rescue Mode
-  /** 
+  /**
+   * rescueLinodeInstance - Linode Boot into Rescue Mode
+   *
    * Rescue Mode is a safe environment for performing many system recovery and disk management tasks. Rescue Mode is based on the Finnix recovery distribution, a self-contained and bootable Linux distribution. You can also use Rescue Mode for tasks other than disaster recovery, such as formatting disks to use different filesystems, copying data between disks, and downloading files from a disk via SSH and SFTP.
    * * Note that "sdh" is reserved and unavailable during rescue.
    * 
   **/
-  RescueLinodeInstance(
+  rescueLinodeInstance(
     req: operations.RescueLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RescueLinodeInstanceResponse> {
@@ -12492,43 +13175,44 @@ export class SDK {
       req = new operations.RescueLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/rescue", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RescueLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RescueLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rescueLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rescueLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12540,12 +13224,13 @@ export class SDK {
   }
 
   
-  // ResetClientSecret - OAuth Client Secret Reset
-  /** 
+  /**
+   * resetClientSecret - OAuth Client Secret Reset
+   *
    * Resets the OAuth Client secret for a client you own, and returns the OAuth Client with the plaintext secret. This secret is not supposed to be publicly known or disclosed anywhere. This can be used to generate a new secret in case the one you have has been leaked, or to get a new secret if you lost the original. The old secret is expired immediately, and logins to your client with the old secret will fail.
    * 
   **/
-  ResetClientSecret(
+  resetClientSecret(
     req: operations.ResetClientSecretRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResetClientSecretResponse> {
@@ -12553,27 +13238,29 @@ export class SDK {
       req = new operations.ResetClientSecretRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/oauth-clients/{clientId}/reset-secret", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResetClientSecretResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ResetClientSecretResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.oAuthClient = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resetClientSecretDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12585,12 +13272,13 @@ export class SDK {
   }
 
   
-  // ResetDiskPassword - Disk Root Password Reset
-  /** 
+  /**
+   * resetDiskPassword - Disk Root Password Reset
+   *
    * Resets the password of a Disk you have permission to `read_write`.
    * 
   **/
-  ResetDiskPassword(
+  resetDiskPassword(
     req: operations.ResetDiskPasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResetDiskPasswordResponse> {
@@ -12598,45 +13286,45 @@ export class SDK {
       req = new operations.ResetDiskPasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks/{diskId}/password", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResetDiskPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ResetDiskPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resetDiskPassword200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resetDiskPasswordDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12648,15 +13336,16 @@ export class SDK {
   }
 
   
-  // ResetLinodePassword - Linode Root Password Reset
-  /** 
+  /**
+   * resetLinodePassword - Linode Root Password Reset
+   *
    * Resets the root password for this Linode.
    * * Your Linode must be [shut down](/docs/api/linode-instances/#linode-shut-down) for a password reset to complete.
    * * If your Linode has more than one disk (not counting its swap disk), use the [Reset Disk Root Password](/docs/api/linode-instances/#disk-root-password-reset) endpoint to update a specific disk's root password.
    * * A `password_reset` event is generated when a root password reset is successful.
    * 
   **/
-  ResetLinodePassword(
+  resetLinodePassword(
     req: operations.ResetLinodePasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResetLinodePasswordResponse> {
@@ -12664,43 +13353,44 @@ export class SDK {
       req = new operations.ResetLinodePasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/password", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResetLinodePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ResetLinodePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resetLinodePassword200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resetLinodePasswordDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12712,8 +13402,9 @@ export class SDK {
   }
 
   
-  // ResizeDisk - Disk Resize
-  /** 
+  /**
+   * resizeDisk - Disk Resize
+   *
    * Resizes a Disk you have permission to `read_write`.
    * 
    * The Disk must not be in use. If the Disk is in use, the request will
@@ -12725,7 +13416,7 @@ export class SDK {
    * than what is required by the total size of the files current on the Disk.
    * 
   **/
-  ResizeDisk(
+  resizeDisk(
     req: operations.ResizeDiskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResizeDiskResponse> {
@@ -12733,45 +13424,45 @@ export class SDK {
       req = new operations.ResizeDiskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks/{diskId}/resize", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResizeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ResizeDiskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resizeDisk200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resizeDiskDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12783,8 +13474,9 @@ export class SDK {
   }
 
   
-  // ResizeLinodeInstance - Linode Resize
-  /** 
+  /**
+   * resizeLinodeInstance - Linode Resize
+   *
    * Resizes a Linode you have the `read_write` permission to a different Type. If any actions are currently running or queued, those actions must be completed first before you can initiate a resize. Additionally, the following criteria must be met in order to resize a Linode:
    * 
    *   * The Linode must not have a pending migration.
@@ -12793,7 +13485,7 @@ export class SDK {
    *     * In that situation, you must first delete or resize the disk to be smaller.
    * 
   **/
-  ResizeLinodeInstance(
+  resizeLinodeInstance(
     req: operations.ResizeLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResizeLinodeInstanceResponse> {
@@ -12801,45 +13493,45 @@ export class SDK {
       req = new operations.ResizeLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/resize", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResizeLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ResizeLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resizeLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resizeLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12851,13 +13543,14 @@ export class SDK {
   }
 
   
-  // ResizeVolume - Volume Resize
-  /** 
+  /**
+   * resizeVolume - Volume Resize
+   *
    * Resize an existing Volume on your Account. In order for this request to complete successfully, your User must have the `read_write` permissions to the Volume.
    * * Volumes can only be resized up.
    * 
   **/
-  ResizeVolume(
+  resizeVolume(
     req: operations.ResizeVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ResizeVolumeResponse> {
@@ -12865,45 +13558,45 @@ export class SDK {
       req = new operations.ResizeVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/volumes/{volumeId}/resize", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ResizeVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ResizeVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resizeVolume200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resizeVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12915,12 +13608,13 @@ export class SDK {
   }
 
   
-  // RestoreBackup - Backup Restore
-  /** 
+  /**
+   * restoreBackup - Backup Restore
+   *
    * Restores a Linode's Backup to the specified Linode.
    * 
   **/
-  RestoreBackup(
+  restoreBackup(
     req: operations.RestoreBackupRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RestoreBackupResponse> {
@@ -12928,45 +13622,45 @@ export class SDK {
       req = new operations.RestoreBackupRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/backups/{backupId}/restore", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RestoreBackupResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RestoreBackupResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreBackup200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreBackupDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -12978,12 +13672,13 @@ export class SDK {
   }
 
   
-  // RevokeTrustedDevice - Trusted Device Revoke
-  /** 
+  /**
+   * revokeTrustedDevice - Trusted Device Revoke
+   *
    * Revoke an active TrustedDevice for your User.  Once a TrustedDevice is revoked, this device will have to log in again before accessing your Linode account.
    * 
   **/
-  RevokeTrustedDevice(
+  revokeTrustedDevice(
     req: operations.RevokeTrustedDeviceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RevokeTrustedDeviceResponse> {
@@ -12991,27 +13686,29 @@ export class SDK {
       req = new operations.RevokeTrustedDeviceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/devices/{deviceId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RevokeTrustedDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RevokeTrustedDeviceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revokeTrustedDevice200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revokeTrustedDeviceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13023,12 +13720,13 @@ export class SDK {
   }
 
   
-  // SetClientThumbnail - OAuth Client Thumbnail Update
-  /** 
+  /**
+   * setClientThumbnail - OAuth Client Thumbnail Update
+   *
    * Upload a thumbnail for a client you own.  You must upload an image file that will be returned when the thumbnail is retrieved.  This image will be publicly-viewable.
    * 
   **/
-  SetClientThumbnail(
+  setClientThumbnail(
     req: operations.SetClientThumbnailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetClientThumbnailResponse> {
@@ -13036,45 +13734,45 @@ export class SDK {
       req = new operations.SetClientThumbnailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/oauth-clients/{clientId}/thumbnail", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetClientThumbnailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetClientThumbnailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setClientThumbnail200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setClientThumbnailDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13086,12 +13784,13 @@ export class SDK {
   }
 
   
-  // ShareIPs - IP Sharing Configure
-  /** 
+  /**
+   * shareIPs - IP Sharing Configure
+   *
    * Configure shared IPs.  A shared IP may be brought up on a Linode other than the one it lists in its response.  This can be used to allow one Linode to begin serving requests should another become unresponsive.
    * 
   **/
-  ShareIPs(
+  shareIPs(
     req: operations.ShareIPsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShareIPsResponse> {
@@ -13099,45 +13798,45 @@ export class SDK {
       req = new operations.ShareIPsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/networking/ipv4/share";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShareIPsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShareIPsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.shareIPs200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.shareIPsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13149,12 +13848,13 @@ export class SDK {
   }
 
   
-  // ShutdownLinodeInstance - Linode Shut Down
-  /** 
+  /**
+   * shutdownLinodeInstance - Linode Shut Down
+   *
    * Shuts down a Linode you have permission to modify. If any actions are currently running or queued, those actions must be completed first before you can initiate a shutdown.
    * 
   **/
-  ShutdownLinodeInstance(
+  shutdownLinodeInstance(
     req: operations.ShutdownLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShutdownLinodeInstanceResponse> {
@@ -13162,27 +13862,29 @@ export class SDK {
       req = new operations.ShutdownLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/shutdown", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShutdownLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShutdownLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.shutdownLinodeInstance200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.shutdownLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13194,12 +13896,13 @@ export class SDK {
   }
 
   
-  // TfaConfirm - Two Factor Authentication Confirm/Enable
-  /** 
+  /**
+   * tfaConfirm - Two Factor Authentication Confirm/Enable
+   *
    * Confirms that you can successfully generate Two Factor codes and enables TFA on your Account. Once this is complete, login attempts from untrusted computers will be required to provide a Two Factor code before they are successful.
    * 
   **/
-  TfaConfirm(
+  tfaConfirm(
     req: operations.TfaConfirmRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TfaConfirmResponse> {
@@ -13207,45 +13910,45 @@ export class SDK {
       req = new operations.TfaConfirmRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/tfa-enable-confirm";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TfaConfirmResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TfaConfirmResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tfaConfirm200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tfaConfirmDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13257,12 +13960,13 @@ export class SDK {
   }
 
   
-  // TfaDisable - Two Factor Authentication Disable
-  /** 
+  /**
+   * tfaDisable - Two Factor Authentication Disable
+   *
    * Disables Two Factor Authentication for your User. Once successful, login attempts from untrusted computers will only require a password before being successful. This is less secure, and is discouraged.
    * 
   **/
-  TfaDisable(
+  tfaDisable(
     req: operations.TfaDisableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TfaDisableResponse> {
@@ -13270,27 +13974,29 @@ export class SDK {
       req = new operations.TfaDisableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/tfa-disable";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TfaDisableResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TfaDisableResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tfaDisable200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tfaDisableDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13302,12 +14008,13 @@ export class SDK {
   }
 
   
-  // TfaEnable - Two Factor Secret Create
-  /** 
+  /**
+   * tfaEnable - Two Factor Secret Create
+   *
    * Generates a Two Factor secret for your User. TFA will not be enabled until you have successfully confirmed the code you were given with [tfa-enable-confirm](/docs/api/profile/#two-factor-secret-create) (see below). Once enabled, logins from untrusted computers will be required to provide a TFA code before they are successful.
    * 
   **/
-  TfaEnable(
+  tfaEnable(
     req: operations.TfaEnableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TfaEnableResponse> {
@@ -13315,27 +14022,29 @@ export class SDK {
       req = new operations.TfaEnableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/tfa-enable";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TfaEnableResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TfaEnableResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tfaEnable200ApplicationJsonAny = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tfaEnableDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13347,12 +14056,13 @@ export class SDK {
   }
 
   
-  // UpdateAccount - Account Update
-  /** 
+  /**
+   * updateAccount - Account Update
+   *
    * Updates contact and billing information related to your Account.
    * 
   **/
-  UpdateAccount(
+  updateAccount(
     req: operations.UpdateAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateAccountResponse> {
@@ -13360,45 +14070,45 @@ export class SDK {
       req = new operations.UpdateAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.account = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateAccountDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13410,14 +14120,15 @@ export class SDK {
   }
 
   
-  // UpdateAccountSettings - Account Settings Update
-  /** 
+  /**
+   * updateAccountSettings - Account Settings Update
+   *
    * Updates your Account settings.
    * 
    * To update your Longview subscription plan, send a request to [Update Longview Plan](/docs/api/longview/#longview-plan-update).
    * 
   **/
-  UpdateAccountSettings(
+  updateAccountSettings(
     req: operations.UpdateAccountSettingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateAccountSettingsResponse> {
@@ -13425,45 +14136,45 @@ export class SDK {
       req = new operations.UpdateAccountSettingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account/settings";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateAccountSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateAccountSettingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accountSettings = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateAccountSettingsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13475,12 +14186,13 @@ export class SDK {
   }
 
   
-  // UpdateClient - OAuth Client Update
-  /** 
+  /**
+   * updateClient - OAuth Client Update
+   *
    * Update information about an OAuth Client on your Account. This can be especially useful to update the `redirect_uri` of your client in the event that the callback url changed in your application.
    * 
   **/
-  UpdateClient(
+  updateClient(
     req: operations.UpdateClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateClientResponse> {
@@ -13488,43 +14200,44 @@ export class SDK {
       req = new operations.UpdateClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/oauth-clients/{clientId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.oAuthClient = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13536,12 +14249,13 @@ export class SDK {
   }
 
   
-  // UpdateDisk - Disk Update
-  /** 
+  /**
+   * updateDisk - Disk Update
+   *
    * Updates a Disk that you have permission to `read_write`.
    * 
   **/
-  UpdateDisk(
+  updateDisk(
     req: operations.UpdateDiskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateDiskResponse> {
@@ -13549,45 +14263,45 @@ export class SDK {
       req = new operations.UpdateDiskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/disks/{diskId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateDiskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateDiskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.disk = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateDiskDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13599,12 +14313,13 @@ export class SDK {
   }
 
   
-  // UpdateDomain - Domain Update
-  /** 
+  /**
+   * updateDomain - Domain Update
+   *
    * Update information about a Domain in Linode's DNS Manager.
    * 
   **/
-  UpdateDomain(
+  updateDomain(
     req: operations.UpdateDomainRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateDomainResponse> {
@@ -13612,45 +14327,45 @@ export class SDK {
       req = new operations.UpdateDomainRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateDomainResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateDomainResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domain = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateDomainDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13662,12 +14377,13 @@ export class SDK {
   }
 
   
-  // UpdateDomainRecord - Domain Record Update
-  /** 
+  /**
+   * updateDomainRecord - Domain Record Update
+   *
    * Updates a single Record on this Domain.
    * 
   **/
-  UpdateDomainRecord(
+  updateDomainRecord(
     req: operations.UpdateDomainRecordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateDomainRecordResponse> {
@@ -13675,45 +14391,45 @@ export class SDK {
       req = new operations.UpdateDomainRecordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/domains/{domainId}/records/{recordId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateDomainRecordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.domainRecord = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateDomainRecordDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13725,8 +14441,9 @@ export class SDK {
   }
 
   
-  // UpdateFirewall - Firewall Update
-  /** 
+  /**
+   * updateFirewall - Firewall Update
+   *
    * Updates information for a Firewall. Some parts of a Firewall's configuration cannot
    * be manipulated by this endpoint:
    * 
@@ -13750,7 +14467,7 @@ export class SDK {
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  UpdateFirewall(
+  updateFirewall(
     req: operations.UpdateFirewallRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateFirewallResponse> {
@@ -13758,43 +14475,47 @@ export class SDK {
       req = new operations.UpdateFirewallRequest(req);
     }
     
-    let baseURL: string = operations.UPDATEFIREWALL_SERVERS[0];
+    let baseURL: string = operations.UpdateFirewallServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateFirewallResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateFirewallResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.firewall = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateFirewallDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13806,15 +14527,16 @@ export class SDK {
   }
 
   
-  // UpdateFirewallRules - Firewall Rules Update
-  /** 
+  /**
+   * updateFirewallRules - Firewall Rules Update
+   *
    * Updates the inbound and outbound Rules for a Firewall. Using this endpoint will
    * replace all of a Firewall's ruleset with the Rules specified in your request.
    * 
    * Cloud Firewall is not available in every data center region. For the current list of availability, access the Regions List ([GET /regions](/docs/api/regions/#regions-list)) endpoint or see the [Cloud Firewall Product Documentation](https://www.linode.com/docs/products/networking/cloud-firewall/).
    * 
   **/
-  UpdateFirewallRules(
+  updateFirewallRules(
     req: operations.UpdateFirewallRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateFirewallRulesResponse> {
@@ -13822,43 +14544,47 @@ export class SDK {
       req = new operations.UpdateFirewallRulesRequest(req);
     }
     
-    let baseURL: string = operations.UPDATEFIREWALLRULES_SERVERS[0];
+    let baseURL: string = operations.UpdateFirewallRulesServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/networking/firewalls/{firewallId}/rules", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateFirewallRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateFirewallRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rules = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateFirewallRulesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13870,12 +14596,13 @@ export class SDK {
   }
 
   
-  // UpdateIp - IP Address RDNS Update
-  /** 
+  /**
+   * updateIp - IP Address RDNS Update
+   *
    * Sets RDNS on an IP Address. Forward DNS must already be set up for reverse DNS to be applied. If you set the RDNS to `null` for public IPv4 addresses, it will be reset to the default _members.linode.com_ RDNS value.
    * 
   **/
-  UpdateIp(
+  updateIp(
     req: operations.UpdateIpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateIpResponse> {
@@ -13883,45 +14610,45 @@ export class SDK {
       req = new operations.UpdateIpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/networking/ips/{address}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateIpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateIpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateIpDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13933,12 +14660,13 @@ export class SDK {
   }
 
   
-  // UpdateImage - Image Update
-  /** 
+  /**
+   * updateImage - Image Update
+   *
    * Updates a private Image that you have permission to `read_write`.
    * 
   **/
-  UpdateImage(
+  updateImage(
     req: operations.UpdateImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateImageResponse> {
@@ -13946,45 +14674,45 @@ export class SDK {
       req = new operations.UpdateImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/images/{imageId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.imagePrivate = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateImageDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -13996,12 +14724,13 @@ export class SDK {
   }
 
   
-  // UpdateLinodeConfig - Configuration Profile Update
-  /** 
+  /**
+   * updateLinodeConfig - Configuration Profile Update
+   *
    * Updates a Configuration profile.
    * 
   **/
-  UpdateLinodeConfig(
+  updateLinodeConfig(
     req: operations.UpdateLinodeConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateLinodeConfigResponse> {
@@ -14009,45 +14738,45 @@ export class SDK {
       req = new operations.UpdateLinodeConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/configs/{configId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateLinodeConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linodeConfig = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateLinodeConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14059,12 +14788,13 @@ export class SDK {
   }
 
   
-  // UpdateLinodeIp - IP Address Update
-  /** 
+  /**
+   * updateLinodeIp - IP Address Update
+   *
    * Updates a particular IP Address associated with this Linode. Only allows setting/resetting reverse DNS.
    * 
   **/
-  UpdateLinodeIp(
+  updateLinodeIp(
     req: operations.UpdateLinodeIpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateLinodeIpResponse> {
@@ -14072,43 +14802,44 @@ export class SDK {
       req = new operations.UpdateLinodeIpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}/ips/{address}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateLinodeIpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ipAddress = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateLinodeIpDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14120,14 +14851,15 @@ export class SDK {
   }
 
   
-  // UpdateLinodeInstance - Linode Update
-  /** 
+  /**
+   * updateLinodeInstance - Linode Update
+   *
    * Updates a Linode that you have permission to `read_write`.
    * 
    * **Important**: You must be an unrestricted User in order to add or modify tags on Linodes.
    * 
   **/
-  UpdateLinodeInstance(
+  updateLinodeInstance(
     req: operations.UpdateLinodeInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateLinodeInstanceResponse> {
@@ -14135,45 +14867,45 @@ export class SDK {
       req = new operations.UpdateLinodeInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/instances/{linodeId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateLinodeInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.linode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateLinodeInstanceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14185,12 +14917,13 @@ export class SDK {
   }
 
   
-  // UpdateLongviewClient - Longview Client Update
-  /** 
+  /**
+   * updateLongviewClient - Longview Client Update
+   *
    * Updates a Longview Client.  This cannot update how it monitors your server; use the Longview Client application on your Linode for monitoring configuration.
    * 
   **/
-  UpdateLongviewClient(
+  updateLongviewClient(
     req: operations.UpdateLongviewClientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateLongviewClientResponse> {
@@ -14198,45 +14931,45 @@ export class SDK {
       req = new operations.UpdateLongviewClientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/longview/clients/{clientId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateLongviewClientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.longviewClient = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateLongviewClientDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14248,8 +14981,9 @@ export class SDK {
   }
 
   
-  // UpdateLongviewPlan - Longview Plan Update
-  /** 
+  /**
+   * updateLongviewPlan - Longview Plan Update
+   *
    * Update your Longview plan to that of the given subcription ID. This returns a `LongviewSubscription` object for the updated Longview Pro plan, or an empty set `{}` if the updated plan is Longview Free.
    * 
    * You must have `"longview_subscription": true` configured as a `global` [User Grant](/docs/api/account/#users-grants-view) in order to access this endpoint.
@@ -14257,7 +14991,7 @@ export class SDK {
    * You can send a request to the [List Longview Subscriptions](/docs/api/longview/#longview-subscriptions-list) endpoint to receive the details, including `id`'s, of each plan.
    * 
   **/
-  UpdateLongviewPlan(
+  updateLongviewPlan(
     req: operations.UpdateLongviewPlanRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateLongviewPlanResponse> {
@@ -14265,45 +14999,45 @@ export class SDK {
       req = new operations.UpdateLongviewPlanRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/longview/plan";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateLongviewPlanResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateLongviewPlanResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.longviewSubscription = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateLongviewPlanDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14315,12 +15049,13 @@ export class SDK {
   }
 
   
-  // UpdateManagedContact - Managed Contact Update
-  /** 
+  /**
+   * updateManagedContact - Managed Contact Update
+   *
    * Updates information about a Managed Contact.
    * 
   **/
-  UpdateManagedContact(
+  updateManagedContact(
     req: operations.UpdateManagedContactRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateManagedContactResponse> {
@@ -14328,45 +15063,45 @@ export class SDK {
       req = new operations.UpdateManagedContactRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/contacts/{contactId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateManagedContactResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedContact = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateManagedContactDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14378,12 +15113,13 @@ export class SDK {
   }
 
   
-  // UpdateManagedCredential - Managed Credential Update
-  /** 
+  /**
+   * updateManagedCredential - Managed Credential Update
+   *
    * Updates the label of a Managed Credential. This endpoint does not update the username and password for a Managed Credential. To do this, use the Update Managed Credential Username and Password ([POST /managed/credentials/{credentialId}/update](https://developers.linode.com/api/docs/v4#operation/updateManagedCredentialUsernamePassword)) endpoint instead.
    * 
   **/
-  UpdateManagedCredential(
+  updateManagedCredential(
     req: operations.UpdateManagedCredentialRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateManagedCredentialResponse> {
@@ -14391,45 +15127,45 @@ export class SDK {
       req = new operations.UpdateManagedCredentialRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/credentials/{credentialId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateManagedCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedCredential = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateManagedCredentialDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14441,12 +15177,13 @@ export class SDK {
   }
 
   
-  // UpdateManagedCredentialUsernamePassword - Managed Credential Username and Password Update
-  /** 
+  /**
+   * updateManagedCredentialUsernamePassword - Managed Credential Username and Password Update
+   *
    * Updates the username and password for a Managed Credential.
    * 
   **/
-  UpdateManagedCredentialUsernamePassword(
+  updateManagedCredentialUsernamePassword(
     req: operations.UpdateManagedCredentialUsernamePasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateManagedCredentialUsernamePasswordResponse> {
@@ -14454,43 +15191,44 @@ export class SDK {
       req = new operations.UpdateManagedCredentialUsernamePasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/credentials/{credentialId}/update", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateManagedCredentialUsernamePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateManagedCredentialUsernamePasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateManagedCredentialUsernamePassword200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateManagedCredentialUsernamePasswordDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14502,12 +15240,13 @@ export class SDK {
   }
 
   
-  // UpdateManagedLinodeSetting - Linode's Managed Settings Update
-  /** 
+  /**
+   * updateManagedLinodeSetting - Linode's Managed Settings Update
+   *
    * Updates a single Linode's Managed settings.
    * 
   **/
-  UpdateManagedLinodeSetting(
+  updateManagedLinodeSetting(
     req: operations.UpdateManagedLinodeSettingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateManagedLinodeSettingResponse> {
@@ -14515,45 +15254,45 @@ export class SDK {
       req = new operations.UpdateManagedLinodeSettingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/linode-settings/{linodeId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateManagedLinodeSettingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateManagedLinodeSettingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedLinodeSettings = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateManagedLinodeSettingDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14565,12 +15304,13 @@ export class SDK {
   }
 
   
-  // UpdateManagedService - Managed Service Update
-  /** 
+  /**
+   * updateManagedService - Managed Service Update
+   *
    * Updates information about a Managed Service.
    * 
   **/
-  UpdateManagedService(
+  updateManagedService(
     req: operations.UpdateManagedServiceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateManagedServiceResponse> {
@@ -14578,45 +15318,45 @@ export class SDK {
       req = new operations.UpdateManagedServiceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/managed/services/{serviceId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateManagedServiceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.managedService = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateManagedServiceDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14628,12 +15368,13 @@ export class SDK {
   }
 
   
-  // UpdateNodeBalancer - NodeBalancer Update
-  /** 
+  /**
+   * updateNodeBalancer - NodeBalancer Update
+   *
    * Updates information about a NodeBalancer you can access.
    * 
   **/
-  UpdateNodeBalancer(
+  updateNodeBalancer(
     req: operations.UpdateNodeBalancerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateNodeBalancerResponse> {
@@ -14641,45 +15382,45 @@ export class SDK {
       req = new operations.UpdateNodeBalancerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateNodeBalancerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancer = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateNodeBalancerDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14691,12 +15432,13 @@ export class SDK {
   }
 
   
-  // UpdateNodeBalancerConfig - Config Update
-  /** 
+  /**
+   * updateNodeBalancerConfig - Config Update
+   *
    * Updates the configuration for a single port on a NodeBalancer.
    * 
   **/
-  UpdateNodeBalancerConfig(
+  updateNodeBalancerConfig(
     req: operations.UpdateNodeBalancerConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateNodeBalancerConfigResponse> {
@@ -14704,45 +15446,45 @@ export class SDK {
       req = new operations.UpdateNodeBalancerConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateNodeBalancerConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancerConfig = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateNodeBalancerConfigDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14754,12 +15496,13 @@ export class SDK {
   }
 
   
-  // UpdateNodeBalancerNode - Node Update
-  /** 
+  /**
+   * updateNodeBalancerNode - Node Update
+   *
    * Updates information about a Node, a backend for this NodeBalancer's configured port.
    * 
   **/
-  UpdateNodeBalancerNode(
+  updateNodeBalancerNode(
     req: operations.UpdateNodeBalancerNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateNodeBalancerNodeResponse> {
@@ -14767,45 +15510,45 @@ export class SDK {
       req = new operations.UpdateNodeBalancerNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateNodeBalancerNodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateNodeBalancerNodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nodeBalancerNode = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateNodeBalancerNodeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14817,8 +15560,9 @@ export class SDK {
   }
 
   
-  // UpdateObjectStorageBucketAcl - Object Storage Object ACL Config Update
-  /** 
+  /**
+   * updateObjectStorageBucketAcl - Object Storage Object ACL Config Update
+   *
    * Update an Object's configured Access Control List (ACL) in this Object Storage bucket.
    * ACLs define who can access your buckets and objects and specify the level of access
    * granted to those users.
@@ -14828,7 +15572,7 @@ export class SDK {
    * use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/objectops/#set-object-acl) directly.
    * 
   **/
-  UpdateObjectStorageBucketAcl(
+  updateObjectStorageBucketAcl(
     req: operations.UpdateObjectStorageBucketAclRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateObjectStorageBucketAclResponse> {
@@ -14836,43 +15580,47 @@ export class SDK {
       req = new operations.UpdateObjectStorageBucketAclRequest(req);
     }
     
-    let baseURL: string = operations.UPDATEOBJECTSTORAGEBUCKETACL_SERVERS[0];
+    let baseURL: string = operations.UpdateObjectStorageBucketAclServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/object-acl", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateObjectStorageBucketAclResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateObjectStorageBucketAclResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateObjectStorageBucketAcl200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateObjectStorageBucketAclDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14884,8 +15632,9 @@ export class SDK {
   }
 
   
-  // UpdateObjectStorageBucketAccess - Object Storage Bucket Access Update
-  /** 
+  /**
+   * updateObjectStorageBucketAccess - Object Storage Bucket Access Update
+   *
    * Allows changing basic Cross-origin Resource Sharing (CORS) and Access Control Level (ACL) settings.
    * Only allows enabling/disabling CORS for all origins, and/or setting canned ACLs.
    * 
@@ -14893,7 +15642,7 @@ export class SDK {
    * For more fine-grained control of both systems, please use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/bucketops/#put-bucket-acl) directly.
    * 
   **/
-  UpdateObjectStorageBucketAccess(
+  updateObjectStorageBucketAccess(
     req: operations.UpdateObjectStorageBucketAccessRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateObjectStorageBucketAccessResponse> {
@@ -14901,43 +15650,47 @@ export class SDK {
       req = new operations.UpdateObjectStorageBucketAccessRequest(req);
     }
     
-    let baseURL: string = operations.UPDATEOBJECTSTORAGEBUCKETACCESS_SERVERS[0];
+    let baseURL: string = operations.UpdateObjectStorageBucketAccessServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/access", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateObjectStorageBucketAccessResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateObjectStorageBucketAccessResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateObjectStorageBucketAccess200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateObjectStorageBucketAccessDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -14949,12 +15702,13 @@ export class SDK {
   }
 
   
-  // UpdateObjectStorageKey - Object Storage Key Update
-  /** 
+  /**
+   * updateObjectStorageKey - Object Storage Key Update
+   *
    * Updates an Object Storage Key on your account.
    * 
   **/
-  UpdateObjectStorageKey(
+  updateObjectStorageKey(
     req: operations.UpdateObjectStorageKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateObjectStorageKeyResponse> {
@@ -14962,43 +15716,47 @@ export class SDK {
       req = new operations.UpdateObjectStorageKeyRequest(req);
     }
     
-    let baseURL: string = operations.UPDATEOBJECTSTORAGEKEY_SERVERS[0];
+    let baseURL: string = operations.UpdateObjectStorageKeyServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/keys/{keyId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateObjectStorageKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateObjectStorageKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.objectStorageKey = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateObjectStorageKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15010,12 +15768,13 @@ export class SDK {
   }
 
   
-  // UpdatePersonalAccessToken - Personal Access Token Update
-  /** 
+  /**
+   * updatePersonalAccessToken - Personal Access Token Update
+   *
    * Updates a Personal Access Token.
    * 
   **/
-  UpdatePersonalAccessToken(
+  updatePersonalAccessToken(
     req: operations.UpdatePersonalAccessTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePersonalAccessTokenResponse> {
@@ -15023,45 +15782,45 @@ export class SDK {
       req = new operations.UpdatePersonalAccessTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/tokens/{tokenId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdatePersonalAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personalAccessToken = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updatePersonalAccessTokenDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15073,12 +15832,13 @@ export class SDK {
   }
 
   
-  // UpdateProfile - Profile Update
-  /** 
+  /**
+   * updateProfile - Profile Update
+   *
    * Update information in your Profile.  This endpoint requires the "account:read_write" OAuth Scope.
    * 
   **/
-  UpdateProfile(
+  updateProfile(
     req: operations.UpdateProfileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateProfileResponse> {
@@ -15086,45 +15846,45 @@ export class SDK {
       req = new operations.UpdateProfileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateProfileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateProfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.profile = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateProfileDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15136,12 +15896,13 @@ export class SDK {
   }
 
   
-  // UpdateSshKey - SSH Key Update
-  /** 
+  /**
+   * updateSshKey - SSH Key Update
+   *
    * Updates an SSH Key that you have permission to `read_write`.
    * 
   **/
-  UpdateSshKey(
+  updateSshKey(
     req: operations.UpdateSshKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateSshKeyResponse> {
@@ -15149,45 +15910,45 @@ export class SDK {
       req = new operations.UpdateSshKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/profile/sshkeys/{sshKeyId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sshKey = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateSshKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15199,14 +15960,15 @@ export class SDK {
   }
 
   
-  // UpdateStackScript - StackScript Update
-  /** 
+  /**
+   * updateStackScript - StackScript Update
+   *
    * Updates a StackScript.
    * 
    * **Once a StackScript is made public, it cannot be made private.**
    * 
   **/
-  UpdateStackScript(
+  updateStackScript(
     req: operations.UpdateStackScriptRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateStackScriptResponse> {
@@ -15214,43 +15976,44 @@ export class SDK {
       req = new operations.UpdateStackScriptRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/linode/stackscripts/{stackscriptId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateStackScriptResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stackScript = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateStackScriptDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15262,12 +16025,13 @@ export class SDK {
   }
 
   
-  // UpdateUser - User Update
-  /** 
+  /**
+   * updateUser - User Update
+   *
    * Update information about a User on your Account. This can be used to change the restricted status of a User. When making a User restricted, no grants will be configured by default and you must then set up grants in order for the User to access anything on the Account.
    * 
   **/
-  UpdateUser(
+  updateUser(
     req: operations.UpdateUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateUserResponse> {
@@ -15275,43 +16039,44 @@ export class SDK {
       req = new operations.UpdateUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/users/{username}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.user = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateUserDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15323,12 +16088,13 @@ export class SDK {
   }
 
   
-  // UpdateUserGrants - User's Grants Update
-  /** 
+  /**
+   * updateUserGrants - User's Grants Update
+   *
    * Update the grants a User has. This can be used to give a User access to new entities or actions, or take access away.  You do not need to include the grant for every entity on the Account in this request; any that are not included will remain unchanged.
    * 
   **/
-  UpdateUserGrants(
+  updateUserGrants(
     req: operations.UpdateUserGrantsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateUserGrantsResponse> {
@@ -15336,45 +16102,45 @@ export class SDK {
       req = new operations.UpdateUserGrantsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account/users/{username}/grants", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateUserGrantsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateUserGrantsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.grantsResponse = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateUserGrantsDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15386,12 +16152,13 @@ export class SDK {
   }
 
   
-  // UpdateUserPreferences - User Preferences Update
-  /** 
+  /**
+   * updateUserPreferences - User Preferences Update
+   *
    * Updates a user's preferences. These preferences are tied to the OAuth client that generated the token making the request. The user preferences endpoints allow consumers of the API to store arbitrary JSON data, such as a user's font size preference or preferred display name. An account may have multiple preferences. Preferences, and the pertaining request body, may contain any arbitrary JSON data that the user would like to store.
    * 
   **/
-  UpdateUserPreferences(
+  updateUserPreferences(
     req: operations.UpdateUserPreferencesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateUserPreferencesResponse> {
@@ -15399,45 +16166,45 @@ export class SDK {
       req = new operations.UpdateUserPreferencesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile/preferences";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateUserPreferencesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateUserPreferencesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateUserPreferences200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateUserPreferencesDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15449,12 +16216,13 @@ export class SDK {
   }
 
   
-  // UpdateVolume - Volume Update
-  /** 
+  /**
+   * updateVolume - Volume Update
+   *
    * Updates a Volume that you have permission to `read_write`.
    * 
   **/
-  UpdateVolume(
+  updateVolume(
     req: operations.UpdateVolumeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateVolumeResponse> {
@@ -15462,45 +16230,45 @@ export class SDK {
       req = new operations.UpdateVolumeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/volumes/{volumeId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateVolumeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.volume = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateVolumeDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15512,12 +16280,13 @@ export class SDK {
   }
 
   
-  // ViewManagedSshKey - Managed SSH Key View
-  /** 
+  /**
+   * viewManagedSshKey - Managed SSH Key View
+   *
    * Returns the unique SSH public key assigned to your Linode account's Managed service. If you [add this public key](/docs/platform/linode-managed/#adding-the-public-key) to a Linode on your account, Linode special forces will be able to log in to the Linode with this key when attempting to resolve issues.
    * 
   **/
-  ViewManagedSshKey(
+  viewManagedSshKey(
     req: operations.ViewManagedSshKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ViewManagedSshKeyResponse> {
@@ -15525,27 +16294,29 @@ export class SDK {
       req = new operations.ViewManagedSshKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/managed/credentials/sshkey";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ViewManagedSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ViewManagedSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.viewManagedSshKey200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.viewManagedSshKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -15557,8 +16328,9 @@ export class SDK {
   }
 
   
-  // ViewObjectStorageBucketAcl - Object Storage Object ACL Config View
-  /** 
+  /**
+   * viewObjectStorageBucketAcl - Object Storage Object ACL Config View
+   *
    * View an Object’s configured Access Control List (ACL) in this Object Storage bucket.
    * ACLs define who can access your buckets and objects and specify the level of access
    * granted to those users.
@@ -15568,7 +16340,7 @@ export class SDK {
    * use the more [fully-featured S3 API](https://docs.ceph.com/en/latest/radosgw/s3/objectops/#get-object-acl) directly.
    * 
   **/
-  ViewObjectStorageBucketAcl(
+  viewObjectStorageBucketAcl(
     req: operations.ViewObjectStorageBucketAclRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ViewObjectStorageBucketAclResponse> {
@@ -15576,11 +16348,15 @@ export class SDK {
       req = new operations.ViewObjectStorageBucketAclRequest(req);
     }
     
-    let baseURL: string = operations.VIEWOBJECTSTORAGEBUCKETACL_SERVERS[0];
+    let baseURL: string = operations.ViewObjectStorageBucketAclServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = utils.GenerateURL(baseURL, "/object-storage/buckets/{clusterId}/{bucket}/object-acl", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -15589,22 +16365,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ViewObjectStorageBucketAclResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ViewObjectStorageBucketAclResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.viewObjectStorageBucketAcl200ApplicationJsonObject = httpRes?.data;
             }
             break;
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.viewObjectStorageBucketAclDefaultApplicationJsonObject = httpRes?.data;
             }
             break;

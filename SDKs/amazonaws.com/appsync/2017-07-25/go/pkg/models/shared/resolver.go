@@ -1,5 +1,7 @@
 package shared
 
+// Resolver
+// Describes a resolver.
 type Resolver struct {
 	CachingConfig           *CachingConfig    `json:"cachingConfig,omitempty"`
 	DataSourceName          *string           `json:"dataSourceName,omitempty"`

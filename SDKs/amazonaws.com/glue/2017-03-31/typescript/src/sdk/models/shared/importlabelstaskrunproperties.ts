@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImportLabelsTaskRunProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies configuration properties for an importing labels task run.
 **/
 export class ImportLabelsTaskRunProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputS3Path" })
+  @SpeakeasyMetadata({ data: "json, name=InputS3Path" })
   inputS3Path?: string;
 
-  @Metadata({ data: "json, name=Replace" })
+  @SpeakeasyMetadata({ data: "json, name=Replace" })
   replace?: boolean;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetLastCveCheck200ApplicationJsonActionEnum {
     GetLastCveCheck = "getLastCVECheck"
@@ -7,35 +8,35 @@ export enum GetLastCveCheck200ApplicationJsonActionEnum {
 
 
 export class GetLastCveCheck200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CVEChecks", elemType: shared.CveCheck })
+  @SpeakeasyMetadata({ data: "json, name=CVEChecks", elemType: shared.CveCheck })
   cveChecks: shared.CveCheck[];
 }
 
 export enum GetLastCveCheck200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetLastCveCheck200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetLastCveCheck200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetLastCveCheck200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetLastCveCheck200ApplicationJsonResultEnum;
 }
 
 
 export class GetLastCveCheckResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLastCveCheck200ApplicationJsonObject?: GetLastCveCheck200ApplicationJson;
 }

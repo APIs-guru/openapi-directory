@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DealershipData } from "./dealershipdata";
 
 
+
 export class DealershipDataPaginated extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dealers", elemType: shared.DealershipData })
+  @SpeakeasyMetadata({ data: "json, name=dealers", elemType: DealershipData })
   dealers: DealershipData[];
 
-  @Metadata({ data: "json, name=maxPages" })
+  @SpeakeasyMetadata({ data: "json, name=maxPages" })
   maxPages: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 }

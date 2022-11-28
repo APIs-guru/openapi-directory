@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InfrastructureConfigurationSummary
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The infrastructure used when building Amazon EC2 AMIs.
 **/
 export class InfrastructureConfigurationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated?: string;
 
-  @Metadata({ data: "json, name=dateUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=dateUpdated" })
   dateUpdated?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=instanceProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceProfileName" })
   instanceProfileName?: string;
 
-  @Metadata({ data: "json, name=instanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=instanceTypes" })
   instanceTypes?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceTags" })
+  @SpeakeasyMetadata({ data: "json, name=resourceTags" })
   resourceTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

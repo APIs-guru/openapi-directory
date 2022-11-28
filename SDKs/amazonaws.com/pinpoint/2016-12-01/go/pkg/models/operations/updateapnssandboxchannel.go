@@ -18,6 +18,8 @@ type UpdateApnsSandboxChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateApnsSandboxChannelRequestBodyApnsSandboxChannelRequest
+// Specifies the status and settings of the APNs (Apple Push Notification service) sandbox channel for an application.
 type UpdateApnsSandboxChannelRequestBodyApnsSandboxChannelRequest struct {
 	BundleID                    *string `json:"BundleId,omitempty"`
 	Certificate                 *string `json:"Certificate,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaExecutionSnapshotExecutionSnapshotMetadata
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata of the execution snapshot.
 **/
 export class GoogleCloudIntegrationsV1alphaExecutionSnapshotExecutionSnapshotMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionAttempt" })
+  @SpeakeasyMetadata({ data: "json, name=executionAttempt" })
   executionAttempt?: number;
 
-  @Metadata({ data: "json, name=task" })
+  @SpeakeasyMetadata({ data: "json, name=task" })
   task?: string;
 
-  @Metadata({ data: "json, name=taskAttempt" })
+  @SpeakeasyMetadata({ data: "json, name=taskAttempt" })
   taskAttempt?: number;
 
-  @Metadata({ data: "json, name=taskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=taskNumber" })
   taskNumber?: string;
 }

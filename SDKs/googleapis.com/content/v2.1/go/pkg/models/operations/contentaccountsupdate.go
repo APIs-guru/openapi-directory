@@ -31,7 +31,7 @@ type ContentAccountsUpdateSecurity struct {
 type ContentAccountsUpdateRequest struct {
 	PathParams  ContentAccountsUpdatePathParams
 	QueryParams ContentAccountsUpdateQueryParams
-	Request     *shared.Account `request:"mediaType=application/json"`
+	Request     *shared.AccountInput `request:"mediaType=application/json"`
 	Security    ContentAccountsUpdateSecurity
 }
 

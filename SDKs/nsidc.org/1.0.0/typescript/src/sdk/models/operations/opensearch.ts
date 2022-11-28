@@ -1,63 +1,64 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OpenSearchSortKeysEnum {
-    ScoreDesc = "score,,desc"
-,    SpatialAreaAsc = "spatial_area,,asc"
-,    SpatialAreaDesc = "spatial_area,,desc"
-,    TemporalDurationAsc = "temporal_duration,,asc"
-,    TemporalDurationDesc = "temporal_duration,,desc"
-,    UpdatedDesc = "updated,,desc"
+    ScoreDesc = "score,,desc",
+    SpatialAreaAsc = "spatial_area,,asc",
+    SpatialAreaDesc = "spatial_area,,desc",
+    TemporalDurationAsc = "temporal_duration,,asc",
+    TemporalDurationDesc = "temporal_duration,,desc",
+    UpdatedDesc = "updated,,desc"
 }
 
 export enum OpenSearchSourceEnum {
-    Nsidc = "NSIDC"
-,    Ade = "ADE"
+    Nsidc = "NSIDC",
+    Ade = "ADE"
 }
 
 
 export class OpenSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=facetFilters" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=facetFilters" })
   facetFilters?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchTerms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerms" })
   searchTerms?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortKeys" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortKeys" })
   sortKeys?: OpenSearchSortKeysEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=source" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" })
   source?: OpenSearchSourceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=spatial" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=spatial" })
   spatial?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 }
 
 
 export class OpenSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: OpenSearchQueryParams;
 }
 
 
 export class OpenSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   openSearch200ApplicationAtomPlusXmlString?: string;
 }

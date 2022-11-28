@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LayerVersionsListItem
 /**
  * Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.
@@ -33,27 +33,27 @@ var LayerVersionsListItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CompatibleRuntimes" }),
+        SpeakeasyMetadata({ data: "json, name=CompatibleRuntimes" }),
         __metadata("design:type", Array)
     ], LayerVersionsListItem.prototype, "compatibleRuntimes", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedDate" }),
         __metadata("design:type", String)
     ], LayerVersionsListItem.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], LayerVersionsListItem.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=LayerVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=LayerVersionArn" }),
         __metadata("design:type", String)
     ], LayerVersionsListItem.prototype, "layerVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LicenseInfo" }),
+        SpeakeasyMetadata({ data: "json, name=LicenseInfo" }),
         __metadata("design:type", String)
     ], LayerVersionsListItem.prototype, "licenseInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=Version" }),
+        SpeakeasyMetadata({ data: "json, name=Version" }),
         __metadata("design:type", Number)
     ], LayerVersionsListItem.prototype, "version", void 0);
     return LayerVersionsListItem;

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import variant
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SystemApksListResponse:
-    variants: Optional[List[variant.Variant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'variants' }})
+    r"""SystemApksListResponse
+    Response to list previously created system APK variants.
+    """
+    
+    variants: Optional[List[Variant]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('variants') }})
     

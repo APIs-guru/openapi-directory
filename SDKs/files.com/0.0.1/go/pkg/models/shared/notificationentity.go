@@ -18,6 +18,8 @@ const (
 	NotificationEntityUnsubscribedReasonEnumMailMarkedAsSpam       NotificationEntityUnsubscribedReasonEnum = "mail_marked_as_spam"
 )
 
+// NotificationEntity
+// List Notifications
 type NotificationEntity struct {
 	GroupID            *int32                                    `json:"group_id,omitempty"`
 	GroupName          *string                                   `json:"group_name,omitempty"`

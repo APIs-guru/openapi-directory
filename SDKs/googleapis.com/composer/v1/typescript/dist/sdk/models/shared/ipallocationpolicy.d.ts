@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Configuration for controlling how IPs are allocated in the GKE cluster running the Apache Airflow software.
 **/

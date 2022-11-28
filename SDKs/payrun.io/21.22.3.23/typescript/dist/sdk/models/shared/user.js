@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UserUserPermission
 /**
  * The users' permissions
@@ -33,7 +33,7 @@ var UserUserPermission = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Permission" }),
+        SpeakeasyMetadata({ data: "json, name=Permission" }),
         __metadata("design:type", Array)
     ], UserUserPermission.prototype, "permission", void 0);
     return UserUserPermission;
@@ -49,7 +49,7 @@ var UserUserRoles = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Role" }),
+        SpeakeasyMetadata({ data: "json, name=Role" }),
         __metadata("design:type", Array)
     ], UserUserRoles.prototype, "role", void 0);
     return UserUserRoles;
@@ -61,19 +61,19 @@ var UserUser = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MetaData" }),
+        SpeakeasyMetadata({ data: "json, name=MetaData" }),
         __metadata("design:type", Map)
     ], UserUser.prototype, "metaData", void 0);
     __decorate([
-        Metadata({ data: "json, name=Permissions" }),
+        SpeakeasyMetadata({ data: "json, name=Permissions" }),
         __metadata("design:type", UserUserPermission)
     ], UserUser.prototype, "permissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Roles" }),
+        SpeakeasyMetadata({ data: "json, name=Roles" }),
         __metadata("design:type", UserUserRoles)
     ], UserUser.prototype, "roles", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=UserIdentifier" }),
         __metadata("design:type", String)
     ], UserUser.prototype, "userIdentifier", void 0);
     return UserUser;
@@ -85,7 +85,7 @@ var User = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=User" }),
+        SpeakeasyMetadata({ data: "json, name=User" }),
         __metadata("design:type", UserUser)
     ], User.prototype, "user", void 0);
     return User;

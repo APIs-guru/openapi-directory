@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetTransactionPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,12 +21,12 @@ class GetTransactionQueryParams:
 
 @dataclass
 class GetTransactionRequest:
-    path_params: GetTransactionPathParams = field(default=None)
-    query_params: GetTransactionQueryParams = field(default=None)
+    path_params: GetTransactionPathParams = field()
+    query_params: GetTransactionQueryParams = field()
     
 
 @dataclass
 class GetTransactionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

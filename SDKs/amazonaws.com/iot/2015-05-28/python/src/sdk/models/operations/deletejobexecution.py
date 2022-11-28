@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteJobExecutionPathParams:
-    execution_number: int = field(default=None, metadata={'path_param': { 'field_name': 'executionNumber', 'style': 'simple', 'explode': False }})
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
+    execution_number: int = field(metadata={'path_param': { 'field_name': 'executionNumber', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,18 +31,18 @@ class DeleteJobExecutionHeaders:
 
 @dataclass
 class DeleteJobExecutionRequest:
-    path_params: DeleteJobExecutionPathParams = field(default=None)
-    query_params: DeleteJobExecutionQueryParams = field(default=None)
-    headers: DeleteJobExecutionHeaders = field(default=None)
+    headers: DeleteJobExecutionHeaders = field()
+    path_params: DeleteJobExecutionPathParams = field()
+    query_params: DeleteJobExecutionQueryParams = field()
     
 
 @dataclass
 class DeleteJobExecutionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_request_exception: Optional[Any] = field(default=None)
     invalid_state_transition_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

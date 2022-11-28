@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchivedResult } from "./archivedresult";
 
 
+
 export class AvailabilityResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.ArchivedResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: ArchivedResult })
   results: ArchivedResult[];
 }

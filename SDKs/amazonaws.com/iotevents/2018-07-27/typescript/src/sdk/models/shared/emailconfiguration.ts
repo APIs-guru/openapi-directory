@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmailContent } from "./emailcontent";
 import { EmailRecipients } from "./emailrecipients";
+
 
 
 // EmailConfiguration
@@ -8,12 +9,12 @@ import { EmailRecipients } from "./emailrecipients";
  * Contains the configuration information of email notifications.
 **/
 export class EmailConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: EmailContent;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from: string;
 
-  @Metadata({ data: "json, name=recipients" })
+  @SpeakeasyMetadata({ data: "json, name=recipients" })
   recipients: EmailRecipients;
 }

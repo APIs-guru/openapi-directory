@@ -5,7 +5,7 @@ import (
 )
 
 type DcimConsoleServerPortTemplatesCreateRequest struct {
-	Request shared.WritableConsoleServerPortTemplate `request:"mediaType=application/json"`
+	Request shared.WritableConsoleServerPortTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimConsoleServerPortTemplatesCreateResponse struct {

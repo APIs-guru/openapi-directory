@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudChannelV1ListTransferableOffersRequest
+// Request message for CloudChannelService.ListTransferableOffers
 type GoogleCloudChannelV1ListTransferableOffersRequest struct {
 	CloudIdentityID *string `json:"cloudIdentityId,omitempty"`
 	CustomerName    *string `json:"customerName,omitempty"`

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LayoutPlaceholderIdMapping } from "./layoutplaceholderidmapping";
 import { LayoutReference } from "./layoutreference";
+
 
 
 // CreateSlideRequest
@@ -9,15 +9,15 @@ import { LayoutReference } from "./layoutreference";
  * Creates a slide.
 **/
 export class CreateSlideRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insertionIndex" })
+  @SpeakeasyMetadata({ data: "json, name=insertionIndex" })
   insertionIndex?: number;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=placeholderIdMappings", elemType: shared.LayoutPlaceholderIdMapping })
+  @SpeakeasyMetadata({ data: "json, name=placeholderIdMappings", elemType: LayoutPlaceholderIdMapping })
   placeholderIdMappings?: LayoutPlaceholderIdMapping[];
 
-  @Metadata({ data: "json, name=slideLayoutReference" })
+  @SpeakeasyMetadata({ data: "json, name=slideLayoutReference" })
   slideLayoutReference?: LayoutReference;
 }

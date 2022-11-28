@@ -9,6 +9,8 @@ const (
 	IssueSeverityEnumError               IssueSeverityEnum = "ERROR"
 )
 
+// Issue
+// Issues include warnings, errors, and deprecation notices.
 type Issue struct {
 	Description    *string            `json:"description,omitempty"`
 	Severity       *IssueSeverityEnum `json:"severity,omitempty"`

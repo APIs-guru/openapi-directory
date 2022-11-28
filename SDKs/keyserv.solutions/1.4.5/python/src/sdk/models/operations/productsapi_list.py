@@ -10,13 +10,13 @@ class ProductsAPIListQueryParams:
 
 @dataclass
 class ProductsAPIListRequest:
-    query_params: ProductsAPIListQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: ProductsAPIListQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ProductsAPIListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product_views: Optional[List[shared.ProductView]] = field(default=None)
-    status_code: int = field(default=None)
     

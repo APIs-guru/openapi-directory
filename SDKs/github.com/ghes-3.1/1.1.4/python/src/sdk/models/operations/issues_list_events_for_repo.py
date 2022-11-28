@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class IssuesListEventsForRepoPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,15 +17,15 @@ class IssuesListEventsForRepoQueryParams:
 
 @dataclass
 class IssuesListEventsForRepoRequest:
-    path_params: IssuesListEventsForRepoPathParams = field(default=None)
-    query_params: IssuesListEventsForRepoQueryParams = field(default=None)
+    path_params: IssuesListEventsForRepoPathParams = field()
+    query_params: IssuesListEventsForRepoQueryParams = field()
     
 
 @dataclass
 class IssuesListEventsForRepoResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     issue_events: Optional[List[shared.IssueEvent]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)
     

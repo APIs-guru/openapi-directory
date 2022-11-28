@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAuditCaseQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     audit_case_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'audit_case_id', 'style': 'form', 'explode': True }})
     audit_id: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'audit_id', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
@@ -29,12 +32,12 @@ class GetAuditCaseQueryParams:
 
 @dataclass
 class GetAuditCaseRequest:
-    query_params: GetAuditCaseQueryParams = field(default=None)
+    query_params: GetAuditCaseQueryParams = field()
     
 
 @dataclass
 class GetAuditCaseResponse:
+    content_type: str = field()
+    status_code: int = field()
     audit_case_page: Optional[shared.AuditCasePage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

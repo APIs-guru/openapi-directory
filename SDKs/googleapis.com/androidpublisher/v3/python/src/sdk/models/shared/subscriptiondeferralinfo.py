@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class SubscriptionDeferralInfo:
-    desired_expiry_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'desiredExpiryTimeMillis' }})
-    expected_expiry_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedExpiryTimeMillis' }})
+    r"""SubscriptionDeferralInfo
+    A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.
+    """
+    
+    desired_expiry_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('desiredExpiryTimeMillis') }})
+    expected_expiry_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedExpiryTimeMillis') }})
     

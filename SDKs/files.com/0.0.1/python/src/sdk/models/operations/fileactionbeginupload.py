@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class FileActionBeginUploadPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,13 +20,13 @@ class FileActionBeginUploadRequestBody:
 
 @dataclass
 class FileActionBeginUploadRequest:
-    path_params: FileActionBeginUploadPathParams = field(default=None)
+    path_params: FileActionBeginUploadPathParams = field()
     request: Optional[FileActionBeginUploadRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class FileActionBeginUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_upload_part_entities: Optional[List[shared.FileUploadPartEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

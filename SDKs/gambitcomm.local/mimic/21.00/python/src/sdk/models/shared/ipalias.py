@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class IPAlias:
-    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IP' }})
-    interface: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interface' }})
-    mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mask' }})
-    port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
+    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IP') }})
+    interface: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('interface') }})
+    mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mask') }})
+    port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('port') }})
     

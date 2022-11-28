@@ -1,8 +1,9 @@
 
 
+
 export enum JobStatusEnum {
-    Queued = "Queued"
-,    InProgress = "InProgress"
-,    Complete = "Complete"
-,    Failed = "Failed"
+    Queued = "Queued",
+    InProgress = "InProgress",
+    Complete = "Complete",
+    Failed = "Failed"
 }

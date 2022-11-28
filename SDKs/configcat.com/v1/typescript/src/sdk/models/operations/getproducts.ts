@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProductsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ProductModelHaljson })
+  @SpeakeasyMetadata({ elemType: shared.ProductModelHaljson })
   productModelHaljsons?: shared.ProductModelHaljson[];
 
-  @Metadata({ elemType: shared.ProductModel })
+  @SpeakeasyMetadata({ elemType: shared.ProductModel })
   productModels?: shared.ProductModel[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 import { ScalingActivityStatusCodeEnum } from "./scalingactivitystatuscodeenum";
@@ -36,47 +36,47 @@ var ScalingActivity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ActivityId" }),
+        SpeakeasyMetadata({ data: "json, name=ActivityId" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "activityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Cause" }),
+        SpeakeasyMetadata({ data: "json, name=Cause" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "cause", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Details" }),
+        SpeakeasyMetadata({ data: "json, name=Details" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], ScalingActivity.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceId" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceId" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalableDimension" }),
+        SpeakeasyMetadata({ data: "json, name=ScalableDimension" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "scalableDimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceNamespace" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "serviceNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], ScalingActivity.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusCode" }),
+        SpeakeasyMetadata({ data: "json, name=StatusCode" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], ScalingActivity.prototype, "statusMessage", void 0);
     return ScalingActivity;

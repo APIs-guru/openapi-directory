@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImageBuilder
+// Describes a virtual machine that is used to create an image.
 type ImageBuilder struct {
 	AccessEndpoints             []AccessEndpoint               `json:"AccessEndpoints,omitempty"`
 	AppstreamAgentVersion       *string                        `json:"AppstreamAgentVersion,omitempty"`

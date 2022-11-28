@@ -24,6 +24,8 @@ const (
 	GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentEfficiencyEnumEfficient                     GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentEfficiencyEnum = "EFFICIENT"
 )
 
+// GoogleCloudDialogflowV2AgentAssistantFeedback
+// Detail feedback of Agent Assist result.
 type GoogleCloudDialogflowV2AgentAssistantFeedback struct {
 	AnswerRelevance     *GoogleCloudDialogflowV2AgentAssistantFeedbackAnswerRelevanceEnum     `json:"answerRelevance,omitempty"`
 	DocumentCorrectness *GoogleCloudDialogflowV2AgentAssistantFeedbackDocumentCorrectnessEnum `json:"documentCorrectness,omitempty"`

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyValuePair } from "./keyvaluepair";
 import { ResourceRequirement } from "./resourcerequirement";
+
 
 
 // ContainerOverrides
@@ -9,21 +9,21 @@ import { ResourceRequirement } from "./resourcerequirement";
  * The overrides that should be sent to a container.
 **/
 export class ContainerOverrides extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: string[];
 
-  @Metadata({ data: "json, name=environment", elemType: shared.KeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=environment", elemType: KeyValuePair })
   environment?: KeyValuePair[];
 
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement })
+  @SpeakeasyMetadata({ data: "json, name=resourceRequirements", elemType: ResourceRequirement })
   resourceRequirements?: ResourceRequirement[];
 
-  @Metadata({ data: "json, name=vcpus" })
+  @SpeakeasyMetadata({ data: "json, name=vcpus" })
   vcpus?: number;
 }

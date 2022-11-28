@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UpdateProfileWithIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +20,20 @@ class UpdateProfileWithIDQueryParams:
 
 @dataclass
 class UpdateProfileWithIDSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateProfileWithIDRequest:
-    path_params: UpdateProfileWithIDPathParams = field(default=None)
-    query_params: UpdateProfileWithIDQueryParams = field(default=None)
-    request: shared.ProfileUpdateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateProfileWithIDSecurity = field(default=None)
+    path_params: UpdateProfileWithIDPathParams = field()
+    query_params: UpdateProfileWithIDQueryParams = field()
+    request: shared.ProfileUpdateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdateProfileWithIDSecurity = field()
     
 
 @dataclass
 class UpdateProfileWithIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContentGetContentByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=locale" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locale" })
   locale: string;
 }
 
 
 export class ContentGetContentByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=head" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=head" })
   head?: boolean;
 }
 
 
 export class ContentGetContentByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContentGetContentByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContentGetContentByIdQueryParams;
 }
 
 
 export class ContentGetContentByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

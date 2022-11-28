@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig } from "./googlecloudidentitytoolkitadminv2applesigninconfig";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig
@@ -7,18 +8,18 @@ import { GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig } from "./googleclou
  * Configurations options for authenticating with a the standard set of Identity Toolkit-trusted IDPs.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appleSignInConfig" })
+  @SpeakeasyMetadata({ data: "json, name=appleSignInConfig" })
   appleSignInConfig?: GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

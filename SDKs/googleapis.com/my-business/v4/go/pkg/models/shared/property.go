@@ -36,6 +36,8 @@ const (
 	PropertyRoomsCountExceptionEnumDependentOnDayOfWeek PropertyRoomsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Property
+// General factual information about the property's physical structure and important dates.
 type Property struct {
 	BuiltYear                  *int32                                  `json:"builtYear,omitempty"`
 	BuiltYearException         *PropertyBuiltYearExceptionEnum         `json:"builtYearException,omitempty"`

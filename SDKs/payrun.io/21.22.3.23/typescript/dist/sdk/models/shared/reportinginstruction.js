@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ReportingInstructionReportingInstruction = /** @class */ (function (_super) {
     __extends(ReportingInstructionReportingInstruction, _super);
     function ReportingInstructionReportingInstruction() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndDate" }),
+        SpeakeasyMetadata({ data: "json, name=EndDate" }),
         __metadata("design:type", Date)
     ], ReportingInstructionReportingInstruction.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartDate" }),
+        SpeakeasyMetadata({ data: "json, name=StartDate" }),
         __metadata("design:type", Date)
     ], ReportingInstructionReportingInstruction.prototype, "startDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxMonth" }),
+        SpeakeasyMetadata({ data: "json, name=TaxMonth" }),
         __metadata("design:type", Number)
     ], ReportingInstructionReportingInstruction.prototype, "taxMonth", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYear" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYear" }),
         __metadata("design:type", Number)
     ], ReportingInstructionReportingInstruction.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", Number)
     ], ReportingInstructionReportingInstruction.prototype, "value", void 0);
     return ReportingInstructionReportingInstruction;
@@ -57,7 +57,7 @@ var ReportingInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ReportingInstruction" }),
+        SpeakeasyMetadata({ data: "json, name=ReportingInstruction" }),
         __metadata("design:type", ReportingInstructionReportingInstruction)
     ], ReportingInstruction.prototype, "reportingInstruction", void 0);
     return ReportingInstruction;

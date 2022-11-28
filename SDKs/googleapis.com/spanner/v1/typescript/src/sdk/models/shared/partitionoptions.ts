@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PartitionOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for a PartitionQueryRequest and PartitionReadRequest.
 **/
 export class PartitionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxPartitions" })
+  @SpeakeasyMetadata({ data: "json, name=maxPartitions" })
   maxPartitions?: string;
 
-  @Metadata({ data: "json, name=partitionSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=partitionSizeBytes" })
   partitionSizeBytes?: string;
 }

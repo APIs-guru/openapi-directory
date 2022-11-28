@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Network } from "./network";
+
 
 
 // NetworkUsage
@@ -7,9 +8,9 @@ import { Network } from "./network";
  * Network with all used IP addresses.
 **/
 export class NetworkUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: Network;
 
-  @Metadata({ data: "json, name=usedIps" })
+  @SpeakeasyMetadata({ data: "json, name=usedIps" })
   usedIps?: string[];
 }

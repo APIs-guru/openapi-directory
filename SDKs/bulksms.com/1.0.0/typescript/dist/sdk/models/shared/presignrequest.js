@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PreSignRequest = /** @class */ (function (_super) {
     __extends(PreSignRequest, _super);
     function PreSignRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fileExtension" }),
+        SpeakeasyMetadata({ data: "json, name=fileExtension" }),
         __metadata("design:type", String)
     ], PreSignRequest.prototype, "fileExtension", void 0);
     __decorate([
-        Metadata({ data: "json, name=mediaType" }),
+        SpeakeasyMetadata({ data: "json, name=mediaType" }),
         __metadata("design:type", String)
     ], PreSignRequest.prototype, "mediaType", void 0);
     return PreSignRequest;

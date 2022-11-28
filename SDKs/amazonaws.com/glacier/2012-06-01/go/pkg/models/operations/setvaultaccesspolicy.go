@@ -15,6 +15,8 @@ type SetVaultAccessPolicyHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SetVaultAccessPolicyRequestBodyPolicy
+// Contains the vault access policy.
 type SetVaultAccessPolicyRequestBodyPolicy struct {
 	Policy *string `json:"Policy,omitempty"`
 }

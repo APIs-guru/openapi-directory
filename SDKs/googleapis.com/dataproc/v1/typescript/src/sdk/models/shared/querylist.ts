@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of queries to run on a cluster.
 **/
 export class QueryList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queries" })
+  @SpeakeasyMetadata({ data: "json, name=queries" })
   queries?: string[];
 }

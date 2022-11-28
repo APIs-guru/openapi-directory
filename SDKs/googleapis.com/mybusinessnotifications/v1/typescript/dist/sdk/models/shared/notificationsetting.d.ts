@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum NotificationSettingNotificationTypesEnum {
     NotificationTypeUnspecified = "NOTIFICATION_TYPE_UNSPECIFIED",
     GoogleUpdate = "GOOGLE_UPDATE",

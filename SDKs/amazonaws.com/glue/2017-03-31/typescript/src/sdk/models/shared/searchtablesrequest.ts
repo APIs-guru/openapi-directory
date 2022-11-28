@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PropertyPredicate } from "./propertypredicate";
 import { ResourceShareTypeEnum } from "./resourcesharetypeenum";
 import { SortCriterion } from "./sortcriterion";
 
 
+
 export class SearchTablesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=Filters", elemType: shared.PropertyPredicate })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: PropertyPredicate })
   filters?: PropertyPredicate[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResourceShareType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceShareType" })
   resourceShareType?: ResourceShareTypeEnum;
 
-  @Metadata({ data: "json, name=SearchText" })
+  @SpeakeasyMetadata({ data: "json, name=SearchText" })
   searchText?: string;
 
-  @Metadata({ data: "json, name=SortCriteria", elemType: shared.SortCriterion })
+  @SpeakeasyMetadata({ data: "json, name=SortCriteria", elemType: SortCriterion })
   sortCriteria?: SortCriterion[];
 }

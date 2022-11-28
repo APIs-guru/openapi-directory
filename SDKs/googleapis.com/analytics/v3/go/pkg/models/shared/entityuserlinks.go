@@ -1,5 +1,7 @@
 package shared
 
+// EntityUserLinks
+// An entity user link collection provides a list of Analytics ACL links Each resource in this collection corresponds to a single link.
 type EntityUserLinks struct {
 	Items        []EntityUserLink `json:"items,omitempty"`
 	ItemsPerPage *int32           `json:"itemsPerPage,omitempty"`

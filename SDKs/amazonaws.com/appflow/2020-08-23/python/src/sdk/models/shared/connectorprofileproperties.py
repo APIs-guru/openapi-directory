@@ -1,38 +1,32 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import datadogconnectorprofileproperties
-from . import dynatraceconnectorprofileproperties
-from . import infornexusconnectorprofileproperties
-from . import marketoconnectorprofileproperties
-from . import redshiftconnectorprofileproperties
-from . import sapodataconnectorprofileproperties
-from . import salesforceconnectorprofileproperties
-from . import servicenowconnectorprofileproperties
-from . import slackconnectorprofileproperties
-from . import snowflakeconnectorprofileproperties
-from . import veevaconnectorprofileproperties
-from . import zendeskconnectorprofileproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConnectorProfileProperties:
-    amplitude: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Amplitude' }})
-    datadog: Optional[datadogconnectorprofileproperties.DatadogConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Datadog' }})
-    dynatrace: Optional[dynatraceconnectorprofileproperties.DynatraceConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Dynatrace' }})
-    google_analytics: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GoogleAnalytics' }})
-    honeycode: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Honeycode' }})
-    infor_nexus: Optional[infornexusconnectorprofileproperties.InforNexusConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InforNexus' }})
-    marketo: Optional[marketoconnectorprofileproperties.MarketoConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Marketo' }})
-    redshift: Optional[redshiftconnectorprofileproperties.RedshiftConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Redshift' }})
-    sapo_data: Optional[sapodataconnectorprofileproperties.SapoDataConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SAPOData' }})
-    salesforce: Optional[salesforceconnectorprofileproperties.SalesforceConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Salesforce' }})
-    service_now: Optional[servicenowconnectorprofileproperties.ServiceNowConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceNow' }})
-    singular: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Singular' }})
-    slack: Optional[slackconnectorprofileproperties.SlackConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Slack' }})
-    snowflake: Optional[snowflakeconnectorprofileproperties.SnowflakeConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Snowflake' }})
-    trendmicro: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Trendmicro' }})
-    veeva: Optional[veevaconnectorprofileproperties.VeevaConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Veeva' }})
-    zendesk: Optional[zendeskconnectorprofileproperties.ZendeskConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Zendesk' }})
+    r"""ConnectorProfileProperties
+     The connector-specific profile properties required by each connector. 
+    """
+    
+    amplitude: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Amplitude') }})
+    datadog: Optional[DatadogConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Datadog') }})
+    dynatrace: Optional[DynatraceConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Dynatrace') }})
+    google_analytics: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GoogleAnalytics') }})
+    honeycode: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Honeycode') }})
+    infor_nexus: Optional[InforNexusConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InforNexus') }})
+    marketo: Optional[MarketoConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Marketo') }})
+    redshift: Optional[RedshiftConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Redshift') }})
+    sapo_data: Optional[SapoDataConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SAPOData') }})
+    salesforce: Optional[SalesforceConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Salesforce') }})
+    service_now: Optional[ServiceNowConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceNow') }})
+    singular: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Singular') }})
+    slack: Optional[SlackConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Slack') }})
+    snowflake: Optional[SnowflakeConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Snowflake') }})
+    trendmicro: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Trendmicro') }})
+    veeva: Optional[VeevaConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Veeva') }})
+    zendesk: Optional[ZendeskConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Zendesk') }})
     

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAdminRequestsUnmatchedNearMisses200ApplicationJsonNearMisses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absoluteUrl" })
+  @SpeakeasyMetadata({ data: "json, name=absoluteUrl" })
   absoluteUrl?: string;
 
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=cookies" })
+  @SpeakeasyMetadata({ data: "json, name=cookies" })
   cookies?: Map<string, any>;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: Map<string, any>;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class GetAdminRequestsUnmatchedNearMisses200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nearMisses", elemType: operations.GetAdminRequestsUnmatchedNearMisses200ApplicationJsonNearMisses })
+  @SpeakeasyMetadata({ data: "json, name=nearMisses", elemType: GetAdminRequestsUnmatchedNearMisses200ApplicationJsonNearMisses })
   nearMisses?: GetAdminRequestsUnmatchedNearMisses200ApplicationJsonNearMisses[];
 }
 
 
 export class GetAdminRequestsUnmatchedNearMissesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAdminRequestsUnmatchedNearMisses200ApplicationJsonObject?: GetAdminRequestsUnmatchedNearMisses200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// CrawlerTargets
+// Specifies data stores to crawl.
 type CrawlerTargets struct {
 	CatalogTargets  []CatalogTarget  `json:"CatalogTargets,omitempty"`
 	DynamoDbTargets []DynamoDbTarget `json:"DynamoDBTargets,omitempty"`

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDescribeInstanceAttributeActionEnum {
     DescribeInstanceAttribute = "DescribeInstanceAttribute"
 }
 
 export enum GetDescribeInstanceAttributeAttributeEnum {
-    InstanceType = "instanceType"
-,    Kernel = "kernel"
-,    Ramdisk = "ramdisk"
-,    UserData = "userData"
-,    DisableApiTermination = "disableApiTermination"
-,    InstanceInitiatedShutdownBehavior = "instanceInitiatedShutdownBehavior"
-,    RootDeviceName = "rootDeviceName"
-,    BlockDeviceMapping = "blockDeviceMapping"
-,    ProductCodes = "productCodes"
-,    SourceDestCheck = "sourceDestCheck"
-,    GroupSet = "groupSet"
-,    EbsOptimized = "ebsOptimized"
-,    SriovNetSupport = "sriovNetSupport"
-,    EnaSupport = "enaSupport"
-,    EnclaveOptions = "enclaveOptions"
+    InstanceType = "instanceType",
+    Kernel = "kernel",
+    Ramdisk = "ramdisk",
+    UserData = "userData",
+    DisableApiTermination = "disableApiTermination",
+    InstanceInitiatedShutdownBehavior = "instanceInitiatedShutdownBehavior",
+    RootDeviceName = "rootDeviceName",
+    BlockDeviceMapping = "blockDeviceMapping",
+    ProductCodes = "productCodes",
+    SourceDestCheck = "sourceDestCheck",
+    GroupSet = "groupSet",
+    EbsOptimized = "ebsOptimized",
+    SriovNetSupport = "sriovNetSupport",
+    EnaSupport = "enaSupport",
+    EnclaveOptions = "enclaveOptions"
 }
 
 export enum GetDescribeInstanceAttributeVersionEnum {
@@ -28,63 +29,63 @@ export enum GetDescribeInstanceAttributeVersionEnum {
 
 
 export class GetDescribeInstanceAttributeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeInstanceAttributeActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Attribute" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Attribute" })
   attribute: GetDescribeInstanceAttributeAttributeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeInstanceAttributeVersionEnum;
 }
 
 
 export class GetDescribeInstanceAttributeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeInstanceAttributeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeInstanceAttributeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeInstanceAttributeHeaders;
 }
 
 
 export class GetDescribeInstanceAttributeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

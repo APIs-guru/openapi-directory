@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RenewOrganizationLicensesSeatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class RenewOrganizationLicensesSeatsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=licenseIdToRenew" })
+  @SpeakeasyMetadata({ data: "json, name=licenseIdToRenew" })
   licenseIdToRenew: string;
 
-  @Metadata({ data: "json, name=unusedLicenseId" })
+  @SpeakeasyMetadata({ data: "json, name=unusedLicenseId" })
   unusedLicenseId: string;
 }
 
 
 export class RenewOrganizationLicensesSeatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RenewOrganizationLicensesSeatsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: RenewOrganizationLicensesSeatsRequestBody;
 }
 
 
 export class RenewOrganizationLicensesSeatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   renewOrganizationLicensesSeats200ApplicationJsonObject?: Map<string, any>;
 }

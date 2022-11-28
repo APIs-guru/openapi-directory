@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -8,8 +8,8 @@ from sdk.models import shared
 
 @dataclass
 class StopsStopsForRoutePathParams:
-    route_id: int = field(default=None, metadata={'path_param': { 'field_name': 'route_id', 'style': 'simple', 'explode': False }})
-    route_type: int = field(default=None, metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
+    route_id: int = field(metadata={'path_param': { 'field_name': 'route_id', 'style': 'simple', 'explode': False }})
+    route_type: int = field(metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,15 +25,15 @@ class StopsStopsForRouteQueryParams:
 
 @dataclass
 class StopsStopsForRouteRequest:
-    path_params: StopsStopsForRoutePathParams = field(default=None)
-    query_params: StopsStopsForRouteQueryParams = field(default=None)
+    path_params: StopsStopsForRoutePathParams = field()
+    query_params: StopsStopsForRouteQueryParams = field()
     
 
 @dataclass
 class StopsStopsForRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_stops_on_route_response: Optional[shared.V3StopsOnRouteResponse] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// AwsRdsDbClusterDetails
+// Information about an Amazon RDS DB cluster.
 type AwsRdsDbClusterDetails struct {
 	ActivityStreamStatus             *string                                `json:"ActivityStreamStatus,omitempty"`
 	AllocatedStorage                 *int64                                 `json:"AllocatedStorage,omitempty"`

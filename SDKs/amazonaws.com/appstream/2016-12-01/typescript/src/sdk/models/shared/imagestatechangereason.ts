@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageStateChangeReasonCodeEnum } from "./imagestatechangereasoncodeenum";
+
 
 
 // ImageStateChangeReason
@@ -7,9 +8,9 @@ import { ImageStateChangeReasonCodeEnum } from "./imagestatechangereasoncodeenum
  * Describes the reason why the last image state change occurred.
 **/
 export class ImageStateChangeReason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: ImageStateChangeReasonCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

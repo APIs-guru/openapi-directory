@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeAttackRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttackId" })
+  @SpeakeasyMetadata({ data: "json, name=AttackId" })
   attackId: string;
 }

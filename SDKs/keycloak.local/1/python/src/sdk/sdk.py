@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://github.com/keycloak/keycloak/tree/6.0.1/core/src/main/java/org/keycloak/representations - Schema source code"""
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://github.com/keycloak/keycloak/tree/6.0.1/core/src/main/java/org/keycloak/representations - Schema source code"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def delete_realm_(self, request: operations.DeleteRealmRequest) -> operations.DeleteRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the realm
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -45,13 +77,16 @@ class SDK:
 
     
     def delete_realm_admin_events(self, request: operations.DeleteRealmAdminEventsRequest) -> operations.DeleteRealmAdminEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete all admin events
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/admin-events", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -64,13 +99,16 @@ class SDK:
 
     
     def delete_realm_attack_detection_brute_force_users(self, request: operations.DeleteRealmAttackDetectionBruteForceUsersRequest) -> operations.DeleteRealmAttackDetectionBruteForceUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear any user login failures for all users   This can release temporary disabled users
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/attack-detection/brute-force/users", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -83,13 +121,16 @@ class SDK:
 
     
     def delete_realm_attack_detection_brute_force_users_user_id_(self, request: operations.DeleteRealmAttackDetectionBruteForceUsersUserIDRequest) -> operations.DeleteRealmAttackDetectionBruteForceUsersUserIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear any user login failures for the user   This can release temporary disabled user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/attack-detection/brute-force/users/{userId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -102,13 +143,16 @@ class SDK:
 
     
     def delete_realm_authentication_config_id_(self, request: operations.DeleteRealmAuthenticationConfigIDRequest) -> operations.DeleteRealmAuthenticationConfigIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete authenticator configuration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/config/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -121,13 +165,16 @@ class SDK:
 
     
     def delete_realm_authentication_executions_execution_id_(self, request: operations.DeleteRealmAuthenticationExecutionsExecutionIDRequest) -> operations.DeleteRealmAuthenticationExecutionsExecutionIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete execution
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/executions/{executionId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -140,13 +187,16 @@ class SDK:
 
     
     def delete_realm_authentication_flows_id_(self, request: operations.DeleteRealmAuthenticationFlowsIDRequest) -> operations.DeleteRealmAuthenticationFlowsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an authentication flow
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -159,13 +209,16 @@ class SDK:
 
     
     def delete_realm_authentication_required_actions_alias_(self, request: operations.DeleteRealmAuthenticationRequiredActionsAliasRequest) -> operations.DeleteRealmAuthenticationRequiredActionsAliasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete required action
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/required-actions/{alias}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -178,13 +231,16 @@ class SDK:
 
     
     def delete_realm_client_scopes_id1_protocol_mappers_models_id2_(self, request: operations.DeleteRealmClientScopesId1ProtocolMappersModelsId2Request) -> operations.DeleteRealmClientScopesId1ProtocolMappersModelsId2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the mapper
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id1}/protocol-mappers/models/{id2}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -197,13 +253,16 @@ class SDK:
 
     
     def delete_realm_client_scopes_id_(self, request: operations.DeleteRealmClientScopesIDRequest) -> operations.DeleteRealmClientScopesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the client scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -216,22 +275,22 @@ class SDK:
 
     
     def delete_realm_client_scopes_id_scope_mappings_clients_client_(self, request: operations.DeleteRealmClientScopesIDScopeMappingsClientsClientRequest) -> operations.DeleteRealmClientScopesIDScopeMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove client-level roles from the client’s scope.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -244,22 +303,22 @@ class SDK:
 
     
     def delete_realm_client_scopes_id_scope_mappings_realm(self, request: operations.DeleteRealmClientScopesIDScopeMappingsRealmRequest) -> operations.DeleteRealmClientScopesIDScopeMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a set of realm-level roles from the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -272,13 +331,16 @@ class SDK:
 
     
     def delete_realm_clients_id1_protocol_mappers_models_id2_(self, request: operations.DeleteRealmClientsId1ProtocolMappersModelsId2Request) -> operations.DeleteRealmClientsId1ProtocolMappersModelsId2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the mapper
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id1}/protocol-mappers/models/{id2}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -291,13 +353,16 @@ class SDK:
 
     
     def delete_realm_clients_id_(self, request: operations.DeleteRealmClientsIDRequest) -> operations.DeleteRealmClientsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -310,13 +375,13 @@ class SDK:
 
     
     def delete_realm_clients_id_default_client_scopes_client_scope_id_(self, request: operations.DeleteRealmClientsIDDefaultClientScopesClientScopeIDRequest) -> operations.DeleteRealmClientsIDDefaultClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/default-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -329,13 +394,16 @@ class SDK:
 
     
     def delete_realm_clients_id_nodes_node_(self, request: operations.DeleteRealmClientsIDNodesNodeRequest) -> operations.DeleteRealmClientsIDNodesNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unregister a cluster node from the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/nodes/{node}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -348,13 +416,13 @@ class SDK:
 
     
     def delete_realm_clients_id_optional_client_scopes_client_scope_id_(self, request: operations.DeleteRealmClientsIDOptionalClientScopesClientScopeIDRequest) -> operations.DeleteRealmClientsIDOptionalClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/optional-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -367,13 +435,16 @@ class SDK:
 
     
     def delete_realm_clients_id_roles_role_name_(self, request: operations.DeleteRealmClientsIDRolesRoleNameRequest) -> operations.DeleteRealmClientsIDRolesRoleNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a role by name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -386,22 +457,22 @@ class SDK:
 
     
     def delete_realm_clients_id_roles_role_name_composites(self, request: operations.DeleteRealmClientsIDRolesRoleNameCompositesRequest) -> operations.DeleteRealmClientsIDRolesRoleNameCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove roles from the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/composites", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -414,22 +485,22 @@ class SDK:
 
     
     def delete_realm_clients_id_scope_mappings_clients_client_(self, request: operations.DeleteRealmClientsIDScopeMappingsClientsClientRequest) -> operations.DeleteRealmClientsIDScopeMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove client-level roles from the client’s scope.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -442,22 +513,22 @@ class SDK:
 
     
     def delete_realm_clients_id_scope_mappings_realm(self, request: operations.DeleteRealmClientsIDScopeMappingsRealmRequest) -> operations.DeleteRealmClientsIDScopeMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a set of realm-level roles from the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -470,13 +541,13 @@ class SDK:
 
     
     def delete_realm_clients_initial_access_id_(self, request: operations.DeleteRealmClientsInitialAccessIDRequest) -> operations.DeleteRealmClientsInitialAccessIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients-initial-access/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -489,13 +560,13 @@ class SDK:
 
     
     def delete_realm_components_id_(self, request: operations.DeleteRealmComponentsIDRequest) -> operations.DeleteRealmComponentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/components/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -508,13 +579,13 @@ class SDK:
 
     
     def delete_realm_default_default_client_scopes_client_scope_id_(self, request: operations.DeleteRealmDefaultDefaultClientScopesClientScopeIDRequest) -> operations.DeleteRealmDefaultDefaultClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-default-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -527,13 +598,13 @@ class SDK:
 
     
     def delete_realm_default_groups_group_id_(self, request: operations.DeleteRealmDefaultGroupsGroupIDRequest) -> operations.DeleteRealmDefaultGroupsGroupIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-groups/{groupId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -546,13 +617,13 @@ class SDK:
 
     
     def delete_realm_default_optional_client_scopes_client_scope_id_(self, request: operations.DeleteRealmDefaultOptionalClientScopesClientScopeIDRequest) -> operations.DeleteRealmDefaultOptionalClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-optional-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -565,13 +636,16 @@ class SDK:
 
     
     def delete_realm_events(self, request: operations.DeleteRealmEventsRequest) -> operations.DeleteRealmEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete all events
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/events", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -584,13 +658,13 @@ class SDK:
 
     
     def delete_realm_groups_id_(self, request: operations.DeleteRealmGroupsIDRequest) -> operations.DeleteRealmGroupsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -603,22 +677,22 @@ class SDK:
 
     
     def delete_realm_groups_id_role_mappings_clients_client_(self, request: operations.DeleteRealmGroupsIDRoleMappingsClientsClientRequest) -> operations.DeleteRealmGroupsIDRoleMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete client-level roles from user role mapping
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -631,22 +705,22 @@ class SDK:
 
     
     def delete_realm_groups_id_role_mappings_realm(self, request: operations.DeleteRealmGroupsIDRoleMappingsRealmRequest) -> operations.DeleteRealmGroupsIDRoleMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete realm-level role mappings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -659,13 +733,16 @@ class SDK:
 
     
     def delete_realm_identity_provider_instances_alias_(self, request: operations.DeleteRealmIdentityProviderInstancesAliasRequest) -> operations.DeleteRealmIdentityProviderInstancesAliasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -678,13 +755,16 @@ class SDK:
 
     
     def delete_realm_identity_provider_instances_alias_mappers_id_(self, request: operations.DeleteRealmIdentityProviderInstancesAliasMappersIDRequest) -> operations.DeleteRealmIdentityProviderInstancesAliasMappersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a mapper for the identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/mappers/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -697,13 +777,16 @@ class SDK:
 
     
     def delete_realm_roles_by_id_role_id_(self, request: operations.DeleteRealmRolesByIDRoleIDRequest) -> operations.DeleteRealmRolesByIDRoleIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the role
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -716,22 +799,22 @@ class SDK:
 
     
     def delete_realm_roles_by_id_role_id_composites(self, request: operations.DeleteRealmRolesByIDRoleIDCompositesRequest) -> operations.DeleteRealmRolesByIDRoleIDCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a set of roles from the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}/composites", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -744,13 +827,16 @@ class SDK:
 
     
     def delete_realm_roles_role_name_(self, request: operations.DeleteRealmRolesRoleNameRequest) -> operations.DeleteRealmRolesRoleNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a role by name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -763,22 +849,22 @@ class SDK:
 
     
     def delete_realm_roles_role_name_composites(self, request: operations.DeleteRealmRolesRoleNameCompositesRequest) -> operations.DeleteRealmRolesRoleNameCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove roles from the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/composites", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -791,13 +877,16 @@ class SDK:
 
     
     def delete_realm_sessions_session_(self, request: operations.DeleteRealmSessionsSessionRequest) -> operations.DeleteRealmSessionsSessionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a specific user session.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/sessions/{session}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -810,13 +899,16 @@ class SDK:
 
     
     def delete_realm_users_id_(self, request: operations.DeleteRealmUsersIDRequest) -> operations.DeleteRealmUsersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -829,13 +921,16 @@ class SDK:
 
     
     def delete_realm_users_id_consents_client_(self, request: operations.DeleteRealmUsersIDConsentsClientRequest) -> operations.DeleteRealmUsersIDConsentsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Revoke consent and offline tokens for particular client from user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/consents/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -848,13 +943,16 @@ class SDK:
 
     
     def delete_realm_users_id_credentials_credential_id_(self, request: operations.DeleteRealmUsersIDCredentialsCredentialIDRequest) -> operations.DeleteRealmUsersIDCredentialsCredentialIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a credential for a user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/credentials/{credentialId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -867,13 +965,16 @@ class SDK:
 
     
     def delete_realm_users_id_federated_identity_provider_(self, request: operations.DeleteRealmUsersIDFederatedIdentityProviderRequest) -> operations.DeleteRealmUsersIDFederatedIdentityProviderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a social login provider from user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/federated-identity/{provider}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -886,13 +987,13 @@ class SDK:
 
     
     def delete_realm_users_id_groups_group_id_(self, request: operations.DeleteRealmUsersIDGroupsGroupIDRequest) -> operations.DeleteRealmUsersIDGroupsGroupIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/groups/{groupId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -905,22 +1006,22 @@ class SDK:
 
     
     def delete_realm_users_id_role_mappings_clients_client_(self, request: operations.DeleteRealmUsersIDRoleMappingsClientsClientRequest) -> operations.DeleteRealmUsersIDRoleMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete client-level roles from user role mapping
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -933,22 +1034,22 @@ class SDK:
 
     
     def delete_realm_users_id_role_mappings_realm(self, request: operations.DeleteRealmUsersIDRoleMappingsRealmRequest) -> operations.DeleteRealmUsersIDRoleMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete realm-level role mappings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -961,13 +1062,16 @@ class SDK:
 
     
     def get_(self) -> operations.GetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get themes, social providers, auth providers, and event listeners available on this server
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -982,13 +1086,16 @@ class SDK:
 
     
     def get_id_name(self, request: operations.GetIDNameRequest) -> operations.GetIDNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Need this for admin console to display simple name of provider when displaying client detail   KEYCLOAK-4328
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/name", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1003,13 +1110,16 @@ class SDK:
 
     
     def get_realm_(self, request: operations.GetRealmRequest) -> operations.GetRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the top-level representation of the realm   It will not include nested information like User and Client representations.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1024,15 +1134,17 @@ class SDK:
 
     
     def get_realm_admin_events(self, request: operations.GetRealmAdminEventsRequest) -> operations.GetRealmAdminEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get admin events   Returns all admin events, or filters events based on URL query parameters listed here
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/admin-events", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1047,13 +1159,16 @@ class SDK:
 
     
     def get_realm_attack_detection_brute_force_users_user_id_(self, request: operations.GetRealmAttackDetectionBruteForceUsersUserIDRequest) -> operations.GetRealmAttackDetectionBruteForceUsersUserIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get status of a username in brute force detection
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/attack-detection/brute-force/users/{userId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1068,13 +1183,16 @@ class SDK:
 
     
     def get_realm_authentication_authenticator_providers(self, request: operations.GetRealmAuthenticationAuthenticatorProvidersRequest) -> operations.GetRealmAuthenticationAuthenticatorProvidersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authenticator providers   Returns a list of authenticator providers.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/authenticator-providers", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1089,13 +1207,16 @@ class SDK:
 
     
     def get_realm_authentication_client_authenticator_providers(self, request: operations.GetRealmAuthenticationClientAuthenticatorProvidersRequest) -> operations.GetRealmAuthenticationClientAuthenticatorProvidersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get client authenticator providers   Returns a list of client authenticator providers.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/client-authenticator-providers", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1110,13 +1231,16 @@ class SDK:
 
     
     def get_realm_authentication_config_description_provider_id_(self, request: operations.GetRealmAuthenticationConfigDescriptionProviderIDRequest) -> operations.GetRealmAuthenticationConfigDescriptionProviderIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authenticator provider’s configuration description
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/config-description/{providerId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1131,13 +1255,16 @@ class SDK:
 
     
     def get_realm_authentication_config_id_(self, request: operations.GetRealmAuthenticationConfigIDRequest) -> operations.GetRealmAuthenticationConfigIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authenticator configuration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/config/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1152,13 +1279,16 @@ class SDK:
 
     
     def get_realm_authentication_executions_execution_id_(self, request: operations.GetRealmAuthenticationExecutionsExecutionIDRequest) -> operations.GetRealmAuthenticationExecutionsExecutionIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Single Execution
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/executions/{executionId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1171,13 +1301,16 @@ class SDK:
 
     
     def get_realm_authentication_flows(self, request: operations.GetRealmAuthenticationFlowsRequest) -> operations.GetRealmAuthenticationFlowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authentication flows   Returns a list of authentication flows.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1192,13 +1325,16 @@ class SDK:
 
     
     def get_realm_authentication_flows_flow_alias_executions(self, request: operations.GetRealmAuthenticationFlowsFlowAliasExecutionsRequest) -> operations.GetRealmAuthenticationFlowsFlowAliasExecutionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authentication executions for a flow
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{flowAlias}/executions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1211,13 +1347,16 @@ class SDK:
 
     
     def get_realm_authentication_flows_id_(self, request: operations.GetRealmAuthenticationFlowsIDRequest) -> operations.GetRealmAuthenticationFlowsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authentication flow for id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1232,13 +1371,16 @@ class SDK:
 
     
     def get_realm_authentication_form_action_providers(self, request: operations.GetRealmAuthenticationFormActionProvidersRequest) -> operations.GetRealmAuthenticationFormActionProvidersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get form action providers   Returns a list of form action providers.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/form-action-providers", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1253,13 +1395,16 @@ class SDK:
 
     
     def get_realm_authentication_form_providers(self, request: operations.GetRealmAuthenticationFormProvidersRequest) -> operations.GetRealmAuthenticationFormProvidersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get form providers   Returns a list of form providers.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/form-providers", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1274,13 +1419,16 @@ class SDK:
 
     
     def get_realm_authentication_per_client_config_description(self, request: operations.GetRealmAuthenticationPerClientConfigDescriptionRequest) -> operations.GetRealmAuthenticationPerClientConfigDescriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get configuration descriptions for all clients
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/per-client-config-description", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1295,13 +1443,16 @@ class SDK:
 
     
     def get_realm_authentication_required_actions(self, request: operations.GetRealmAuthenticationRequiredActionsRequest) -> operations.GetRealmAuthenticationRequiredActionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get required actions   Returns a list of required actions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/required-actions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1316,13 +1467,16 @@ class SDK:
 
     
     def get_realm_authentication_required_actions_alias_(self, request: operations.GetRealmAuthenticationRequiredActionsAliasRequest) -> operations.GetRealmAuthenticationRequiredActionsAliasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get required action for alias
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/required-actions/{alias}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1337,13 +1491,16 @@ class SDK:
 
     
     def get_realm_authentication_unregistered_required_actions(self, request: operations.GetRealmAuthenticationUnregisteredRequiredActionsRequest) -> operations.GetRealmAuthenticationUnregisteredRequiredActionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get unregistered required actions   Returns a list of unregistered required actions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/unregistered-required-actions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1358,13 +1515,16 @@ class SDK:
 
     
     def get_realm_client_registration_policy_providers(self, request: operations.GetRealmClientRegistrationPolicyProvidersRequest) -> operations.GetRealmClientRegistrationPolicyProvidersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Base path for retrieve providers with the configProperties properly filled
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-registration-policy/providers", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1379,13 +1539,16 @@ class SDK:
 
     
     def get_realm_client_scopes(self, request: operations.GetRealmClientScopesRequest) -> operations.GetRealmClientScopesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get client scopes belonging to the realm   Returns a list of client scopes belonging to the realm
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1400,13 +1563,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id1_protocol_mappers_models_id2_(self, request: operations.GetRealmClientScopesId1ProtocolMappersModelsId2Request) -> operations.GetRealmClientScopesId1ProtocolMappersModelsId2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mapper by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id1}/protocol-mappers/models/{id2}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1421,13 +1587,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_(self, request: operations.GetRealmClientScopesIDRequest) -> operations.GetRealmClientScopesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get representation of the client scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1442,13 +1611,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_protocol_mappers_models(self, request: operations.GetRealmClientScopesIDProtocolMappersModelsRequest) -> operations.GetRealmClientScopesIDProtocolMappersModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mappers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/protocol-mappers/models", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1463,13 +1635,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_protocol_mappers_protocol_protocol_(self, request: operations.GetRealmClientScopesIDProtocolMappersProtocolProtocolRequest) -> operations.GetRealmClientScopesIDProtocolMappersProtocolProtocolResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mappers by name for a specific protocol
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1484,13 +1659,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_scope_mappings(self, request: operations.GetRealmClientScopesIDScopeMappingsRequest) -> operations.GetRealmClientScopesIDScopeMappingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all scope mappings for the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1505,13 +1683,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_scope_mappings_clients_client_(self, request: operations.GetRealmClientScopesIDScopeMappingsClientsClientRequest) -> operations.GetRealmClientScopesIDScopeMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the roles associated with a client’s scope   Returns roles for the client.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/clients/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1526,13 +1707,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_scope_mappings_clients_client_available(self, request: operations.GetRealmClientScopesIDScopeMappingsClientsClientAvailableRequest) -> operations.GetRealmClientScopesIDScopeMappingsClientsClientAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""The available client-level roles   Returns the roles for the client that can be associated with the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1547,13 +1731,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_scope_mappings_clients_client_composite(self, request: operations.GetRealmClientScopesIDScopeMappingsClientsClientCompositeRequest) -> operations.GetRealmClientScopesIDScopeMappingsClientsClientCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective client roles   Returns the roles for the client that are associated with the client’s scope.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1568,13 +1755,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_scope_mappings_realm(self, request: operations.GetRealmClientScopesIDScopeMappingsRealmRequest) -> operations.GetRealmClientScopesIDScopeMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles associated with the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/realm", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1589,13 +1779,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_scope_mappings_realm_available(self, request: operations.GetRealmClientScopesIDScopeMappingsRealmAvailableRequest) -> operations.GetRealmClientScopesIDScopeMappingsRealmAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles that are available to attach to this client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/realm/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1610,13 +1803,16 @@ class SDK:
 
     
     def get_realm_client_scopes_id_scope_mappings_realm_composite(self, request: operations.GetRealmClientScopesIDScopeMappingsRealmCompositeRequest) -> operations.GetRealmClientScopesIDScopeMappingsRealmCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective realm-level roles associated with the client’s scope   What this does is recurse  any composite roles associated with the client’s scope and adds the roles to this lists.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/realm/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1631,13 +1827,16 @@ class SDK:
 
     
     def get_realm_client_session_stats(self, request: operations.GetRealmClientSessionStatsRequest) -> operations.GetRealmClientSessionStatsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get client session stats   Returns a JSON map.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-session-stats", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1652,15 +1851,17 @@ class SDK:
 
     
     def get_realm_clients(self, request: operations.GetRealmClientsRequest) -> operations.GetRealmClientsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get clients belonging to the realm   Returns a list of clients belonging to the realm
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1675,13 +1876,16 @@ class SDK:
 
     
     def get_realm_clients_id1_protocol_mappers_models_id2_(self, request: operations.GetRealmClientsId1ProtocolMappersModelsId2Request) -> operations.GetRealmClientsId1ProtocolMappersModelsId2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mapper by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id1}/protocol-mappers/models/{id2}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1696,13 +1900,16 @@ class SDK:
 
     
     def get_realm_clients_id_(self, request: operations.GetRealmClientsIDRequest) -> operations.GetRealmClientsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get representation of the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1717,13 +1924,16 @@ class SDK:
 
     
     def get_realm_clients_id_certificates_attr_(self, request: operations.GetRealmClientsIDCertificatesAttrRequest) -> operations.GetRealmClientsIDCertificatesAttrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get key info
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/certificates/{attr}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1738,13 +1948,16 @@ class SDK:
 
     
     def get_realm_clients_id_client_secret(self, request: operations.GetRealmClientsIDClientSecretRequest) -> operations.GetRealmClientsIDClientSecretResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the client secret
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/client-secret", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1759,13 +1972,16 @@ class SDK:
 
     
     def get_realm_clients_id_default_client_scopes(self, request: operations.GetRealmClientsIDDefaultClientScopesRequest) -> operations.GetRealmClientsIDDefaultClientScopesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get default client scopes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/default-client-scopes", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1780,15 +1996,17 @@ class SDK:
 
     
     def get_realm_clients_id_evaluate_scopes_generate_example_access_token(self, request: operations.GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenRequest) -> operations.GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create JSON with payload of example access token
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/evaluate-scopes/generate-example-access-token", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1803,15 +2021,17 @@ class SDK:
 
     
     def get_realm_clients_id_evaluate_scopes_protocol_mappers(self, request: operations.GetRealmClientsIDEvaluateScopesProtocolMappersRequest) -> operations.GetRealmClientsIDEvaluateScopesProtocolMappersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return list of all protocol mappers, which will be used when generating tokens issued for particular client.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/evaluate-scopes/protocol-mappers", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1826,15 +2046,17 @@ class SDK:
 
     
     def get_realm_clients_id_evaluate_scopes_scope_mappings_role_container_id_granted(self, request: operations.GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDGrantedRequest) -> operations.GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDGrantedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective scope mapping of all roles of particular role container, which this client is defacto allowed to have in the accessToken issued for him.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/granted", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1849,15 +2071,17 @@ class SDK:
 
     
     def get_realm_clients_id_evaluate_scopes_scope_mappings_role_container_id_not_granted(self, request: operations.GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedRequest) -> operations.GetRealmClientsIDEvaluateScopesScopeMappingsRoleContainerIDNotGrantedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get roles, which this client doesn’t have scope for and can’t have them in the accessToken issued for him.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1872,13 +2096,13 @@ class SDK:
 
     
     def get_realm_clients_id_installation_providers_provider_id_(self, request: operations.GetRealmClientsIDInstallationProvidersProviderIDRequest) -> operations.GetRealmClientsIDInstallationProvidersProviderIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/installation/providers/{providerId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1891,13 +2115,16 @@ class SDK:
 
     
     def get_realm_clients_id_management_permissions(self, request: operations.GetRealmClientsIDManagementPermissionsRequest) -> operations.GetRealmClientsIDManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether client Authorization permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/management/permissions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1912,13 +2139,16 @@ class SDK:
 
     
     def get_realm_clients_id_offline_session_count(self, request: operations.GetRealmClientsIDOfflineSessionCountRequest) -> operations.GetRealmClientsIDOfflineSessionCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get application offline session count   Returns a number of offline user sessions associated with this client   {      \"count\": number  }
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/offline-session-count", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1933,15 +2163,17 @@ class SDK:
 
     
     def get_realm_clients_id_offline_sessions(self, request: operations.GetRealmClientsIDOfflineSessionsRequest) -> operations.GetRealmClientsIDOfflineSessionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get offline sessions for client   Returns a list of offline user sessions associated with this client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/offline-sessions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1956,13 +2188,16 @@ class SDK:
 
     
     def get_realm_clients_id_optional_client_scopes(self, request: operations.GetRealmClientsIDOptionalClientScopesRequest) -> operations.GetRealmClientsIDOptionalClientScopesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get optional client scopes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/optional-client-scopes", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1977,13 +2212,16 @@ class SDK:
 
     
     def get_realm_clients_id_protocol_mappers_models(self, request: operations.GetRealmClientsIDProtocolMappersModelsRequest) -> operations.GetRealmClientsIDProtocolMappersModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mappers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/protocol-mappers/models", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1998,13 +2236,16 @@ class SDK:
 
     
     def get_realm_clients_id_protocol_mappers_protocol_protocol_(self, request: operations.GetRealmClientsIDProtocolMappersProtocolProtocolRequest) -> operations.GetRealmClientsIDProtocolMappersProtocolProtocolResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mappers by name for a specific protocol
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2019,15 +2260,17 @@ class SDK:
 
     
     def get_realm_clients_id_roles(self, request: operations.GetRealmClientsIDRolesRequest) -> operations.GetRealmClientsIDRolesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all roles for the realm or client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2042,13 +2285,16 @@ class SDK:
 
     
     def get_realm_clients_id_roles_role_name_(self, request: operations.GetRealmClientsIDRolesRoleNameRequest) -> operations.GetRealmClientsIDRolesRoleNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a role by name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2063,13 +2309,16 @@ class SDK:
 
     
     def get_realm_clients_id_roles_role_name_composites(self, request: operations.GetRealmClientsIDRolesRoleNameCompositesRequest) -> operations.GetRealmClientsIDRolesRoleNameCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get composites of the role
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/composites", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2084,13 +2333,16 @@ class SDK:
 
     
     def get_realm_clients_id_roles_role_name_composites_clients_client_(self, request: operations.GetRealmClientsIDRolesRoleNameCompositesClientsClientRequest) -> operations.GetRealmClientsIDRolesRoleNameCompositesClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""An app-level roles for the specified app for the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/composites/clients/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2105,13 +2357,16 @@ class SDK:
 
     
     def get_realm_clients_id_roles_role_name_composites_realm(self, request: operations.GetRealmClientsIDRolesRoleNameCompositesRealmRequest) -> operations.GetRealmClientsIDRolesRoleNameCompositesRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles of the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/composites/realm", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2126,15 +2381,17 @@ class SDK:
 
     
     def get_realm_clients_id_roles_role_name_groups(self, request: operations.GetRealmClientsIDRolesRoleNameGroupsRequest) -> operations.GetRealmClientsIDRolesRoleNameGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return List of Groups that have the specified role name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/groups", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2149,13 +2406,16 @@ class SDK:
 
     
     def get_realm_clients_id_roles_role_name_management_permissions(self, request: operations.GetRealmClientsIDRolesRoleNameManagementPermissionsRequest) -> operations.GetRealmClientsIDRolesRoleNameManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/management/permissions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2170,15 +2430,17 @@ class SDK:
 
     
     def get_realm_clients_id_roles_role_name_users(self, request: operations.GetRealmClientsIDRolesRoleNameUsersRequest) -> operations.GetRealmClientsIDRolesRoleNameUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return List of Users that have the specified role name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/users", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2193,13 +2455,16 @@ class SDK:
 
     
     def get_realm_clients_id_scope_mappings(self, request: operations.GetRealmClientsIDScopeMappingsRequest) -> operations.GetRealmClientsIDScopeMappingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all scope mappings for the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2214,13 +2479,16 @@ class SDK:
 
     
     def get_realm_clients_id_scope_mappings_clients_client_(self, request: operations.GetRealmClientsIDScopeMappingsClientsClientRequest) -> operations.GetRealmClientsIDScopeMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the roles associated with a client’s scope   Returns roles for the client.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/clients/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2235,13 +2503,16 @@ class SDK:
 
     
     def get_realm_clients_id_scope_mappings_clients_client_available(self, request: operations.GetRealmClientsIDScopeMappingsClientsClientAvailableRequest) -> operations.GetRealmClientsIDScopeMappingsClientsClientAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""The available client-level roles   Returns the roles for the client that can be associated with the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/clients/{client}/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2256,13 +2527,16 @@ class SDK:
 
     
     def get_realm_clients_id_scope_mappings_clients_client_composite(self, request: operations.GetRealmClientsIDScopeMappingsClientsClientCompositeRequest) -> operations.GetRealmClientsIDScopeMappingsClientsClientCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective client roles   Returns the roles for the client that are associated with the client’s scope.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/clients/{client}/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2277,13 +2551,16 @@ class SDK:
 
     
     def get_realm_clients_id_scope_mappings_realm(self, request: operations.GetRealmClientsIDScopeMappingsRealmRequest) -> operations.GetRealmClientsIDScopeMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles associated with the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/realm", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2298,13 +2575,16 @@ class SDK:
 
     
     def get_realm_clients_id_scope_mappings_realm_available(self, request: operations.GetRealmClientsIDScopeMappingsRealmAvailableRequest) -> operations.GetRealmClientsIDScopeMappingsRealmAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles that are available to attach to this client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/realm/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2319,13 +2599,16 @@ class SDK:
 
     
     def get_realm_clients_id_scope_mappings_realm_composite(self, request: operations.GetRealmClientsIDScopeMappingsRealmCompositeRequest) -> operations.GetRealmClientsIDScopeMappingsRealmCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective realm-level roles associated with the client’s scope   What this does is recurse  any composite roles associated with the client’s scope and adds the roles to this lists.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/realm/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2340,13 +2623,16 @@ class SDK:
 
     
     def get_realm_clients_id_service_account_user(self, request: operations.GetRealmClientsIDServiceAccountUserRequest) -> operations.GetRealmClientsIDServiceAccountUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a user dedicated to the service account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/service-account-user", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2361,13 +2647,16 @@ class SDK:
 
     
     def get_realm_clients_id_session_count(self, request: operations.GetRealmClientsIDSessionCountRequest) -> operations.GetRealmClientsIDSessionCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get application session count   Returns a number of user sessions associated with this client   {      \"count\": number  }
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/session-count", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2382,13 +2671,16 @@ class SDK:
 
     
     def get_realm_clients_id_test_nodes_available(self, request: operations.GetRealmClientsIDTestNodesAvailableRequest) -> operations.GetRealmClientsIDTestNodesAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Test if registered cluster nodes are available   Tests availability by sending 'ping' request to all cluster nodes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/test-nodes-available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2403,15 +2695,17 @@ class SDK:
 
     
     def get_realm_clients_id_user_sessions(self, request: operations.GetRealmClientsIDUserSessionsRequest) -> operations.GetRealmClientsIDUserSessionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user sessions for client   Returns a list of user sessions associated with this client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/user-sessions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2426,13 +2720,13 @@ class SDK:
 
     
     def get_realm_clients_initial_access(self, request: operations.GetRealmClientsInitialAccessRequest) -> operations.GetRealmClientsInitialAccessResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients-initial-access", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2447,15 +2741,14 @@ class SDK:
 
     
     def get_realm_components(self, request: operations.GetRealmComponentsRequest) -> operations.GetRealmComponentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/components", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2470,13 +2763,13 @@ class SDK:
 
     
     def get_realm_components_id_(self, request: operations.GetRealmComponentsIDRequest) -> operations.GetRealmComponentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/components/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2491,15 +2784,17 @@ class SDK:
 
     
     def get_realm_components_id_sub_component_types(self, request: operations.GetRealmComponentsIDSubComponentTypesRequest) -> operations.GetRealmComponentsIDSubComponentTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of subcomponent types that are available to configure for a particular parent component.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/components/{id}/sub-component-types", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2514,13 +2809,13 @@ class SDK:
 
     
     def get_realm_credential_registrators(self, request: operations.GetRealmCredentialRegistratorsRequest) -> operations.GetRealmCredentialRegistratorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/credential-registrators", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2535,13 +2830,16 @@ class SDK:
 
     
     def get_realm_default_default_client_scopes(self, request: operations.GetRealmDefaultDefaultClientScopesRequest) -> operations.GetRealmDefaultDefaultClientScopesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm default client scopes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-default-client-scopes", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2556,13 +2854,16 @@ class SDK:
 
     
     def get_realm_default_groups(self, request: operations.GetRealmDefaultGroupsRequest) -> operations.GetRealmDefaultGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get group hierarchy.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-groups", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2577,13 +2878,16 @@ class SDK:
 
     
     def get_realm_default_optional_client_scopes(self, request: operations.GetRealmDefaultOptionalClientScopesRequest) -> operations.GetRealmDefaultOptionalClientScopesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm optional client scopes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-optional-client-scopes", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2598,15 +2902,17 @@ class SDK:
 
     
     def get_realm_events(self, request: operations.GetRealmEventsRequest) -> operations.GetRealmEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get events   Returns all events, or filters them based on URL query parameters listed here
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/events", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2621,13 +2927,16 @@ class SDK:
 
     
     def get_realm_events_config(self, request: operations.GetRealmEventsConfigRequest) -> operations.GetRealmEventsConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the events provider configuration   Returns JSON object with events provider configuration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/events/config", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2642,13 +2951,13 @@ class SDK:
 
     
     def get_realm_group_by_path_path_(self, request: operations.GetRealmGroupByPathPathRequest) -> operations.GetRealmGroupByPathPathResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/group-by-path/{path}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2663,15 +2972,17 @@ class SDK:
 
     
     def get_realm_groups(self, request: operations.GetRealmGroupsRequest) -> operations.GetRealmGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get group hierarchy.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2686,15 +2997,17 @@ class SDK:
 
     
     def get_realm_groups_count(self, request: operations.GetRealmGroupsCountRequest) -> operations.GetRealmGroupsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the groups counts.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2709,13 +3022,13 @@ class SDK:
 
     
     def get_realm_groups_id_(self, request: operations.GetRealmGroupsIDRequest) -> operations.GetRealmGroupsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2730,13 +3043,16 @@ class SDK:
 
     
     def get_realm_groups_id_management_permissions(self, request: operations.GetRealmGroupsIDManagementPermissionsRequest) -> operations.GetRealmGroupsIDManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether client Authorization permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/management/permissions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2751,15 +3067,17 @@ class SDK:
 
     
     def get_realm_groups_id_members(self, request: operations.GetRealmGroupsIDMembersRequest) -> operations.GetRealmGroupsIDMembersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get users   Returns a list of users, filtered according to query parameters
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/members", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2774,13 +3092,16 @@ class SDK:
 
     
     def get_realm_groups_id_role_mappings(self, request: operations.GetRealmGroupsIDRoleMappingsRequest) -> operations.GetRealmGroupsIDRoleMappingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get role mappings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2795,13 +3116,16 @@ class SDK:
 
     
     def get_realm_groups_id_role_mappings_clients_client_(self, request: operations.GetRealmGroupsIDRoleMappingsClientsClientRequest) -> operations.GetRealmGroupsIDRoleMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get client-level role mappings for the user, and the app
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/clients/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2816,13 +3140,16 @@ class SDK:
 
     
     def get_realm_groups_id_role_mappings_clients_client_available(self, request: operations.GetRealmGroupsIDRoleMappingsClientsClientAvailableRequest) -> operations.GetRealmGroupsIDRoleMappingsClientsClientAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get available client-level roles that can be mapped to the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/clients/{client}/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2837,13 +3164,16 @@ class SDK:
 
     
     def get_realm_groups_id_role_mappings_clients_client_composite(self, request: operations.GetRealmGroupsIDRoleMappingsClientsClientCompositeRequest) -> operations.GetRealmGroupsIDRoleMappingsClientsClientCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective client-level role mappings   This recurses any composite roles
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/clients/{client}/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2858,13 +3188,16 @@ class SDK:
 
     
     def get_realm_groups_id_role_mappings_realm(self, request: operations.GetRealmGroupsIDRoleMappingsRealmRequest) -> operations.GetRealmGroupsIDRoleMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level role mappings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/realm", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2879,13 +3212,16 @@ class SDK:
 
     
     def get_realm_groups_id_role_mappings_realm_available(self, request: operations.GetRealmGroupsIDRoleMappingsRealmAvailableRequest) -> operations.GetRealmGroupsIDRoleMappingsRealmAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles that can be mapped
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/realm/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2900,13 +3236,16 @@ class SDK:
 
     
     def get_realm_groups_id_role_mappings_realm_composite(self, request: operations.GetRealmGroupsIDRoleMappingsRealmCompositeRequest) -> operations.GetRealmGroupsIDRoleMappingsRealmCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective realm-level role mappings   This will recurse all composite roles to get the result.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/realm/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2921,13 +3260,16 @@ class SDK:
 
     
     def get_realm_identity_provider_instances(self, request: operations.GetRealmIdentityProviderInstancesRequest) -> operations.GetRealmIdentityProviderInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get identity providers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2942,13 +3284,16 @@ class SDK:
 
     
     def get_realm_identity_provider_instances_alias_(self, request: operations.GetRealmIdentityProviderInstancesAliasRequest) -> operations.GetRealmIdentityProviderInstancesAliasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2963,15 +3308,17 @@ class SDK:
 
     
     def get_realm_identity_provider_instances_alias_export(self, request: operations.GetRealmIdentityProviderInstancesAliasExportRequest) -> operations.GetRealmIdentityProviderInstancesAliasExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Export public broker configuration for identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/export", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2984,13 +3331,16 @@ class SDK:
 
     
     def get_realm_identity_provider_instances_alias_management_permissions(self, request: operations.GetRealmIdentityProviderInstancesAliasManagementPermissionsRequest) -> operations.GetRealmIdentityProviderInstancesAliasManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether client Authorization permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/management/permissions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3005,13 +3355,16 @@ class SDK:
 
     
     def get_realm_identity_provider_instances_alias_mapper_types(self, request: operations.GetRealmIdentityProviderInstancesAliasMapperTypesRequest) -> operations.GetRealmIdentityProviderInstancesAliasMapperTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mapper types for identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/mapper-types", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3024,13 +3377,16 @@ class SDK:
 
     
     def get_realm_identity_provider_instances_alias_mappers(self, request: operations.GetRealmIdentityProviderInstancesAliasMappersRequest) -> operations.GetRealmIdentityProviderInstancesAliasMappersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mappers for identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/mappers", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3045,13 +3401,16 @@ class SDK:
 
     
     def get_realm_identity_provider_instances_alias_mappers_id_(self, request: operations.GetRealmIdentityProviderInstancesAliasMappersIDRequest) -> operations.GetRealmIdentityProviderInstancesAliasMappersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mapper by id for the identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/mappers/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3066,13 +3425,16 @@ class SDK:
 
     
     def get_realm_identity_provider_providers_provider_id_(self, request: operations.GetRealmIdentityProviderProvidersProviderIDRequest) -> operations.GetRealmIdentityProviderProvidersProviderIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get identity providers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/providers/{provider_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3085,13 +3447,13 @@ class SDK:
 
     
     def get_realm_keys(self, request: operations.GetRealmKeysRequest) -> operations.GetRealmKeysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/keys", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3106,15 +3468,17 @@ class SDK:
 
     
     def get_realm_roles(self, request: operations.GetRealmRolesRequest) -> operations.GetRealmRolesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all roles for the realm or client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3129,13 +3493,16 @@ class SDK:
 
     
     def get_realm_roles_by_id_role_id_(self, request: operations.GetRealmRolesByIDRoleIDRequest) -> operations.GetRealmRolesByIDRoleIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific role’s representation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3150,13 +3517,16 @@ class SDK:
 
     
     def get_realm_roles_by_id_role_id_composites(self, request: operations.GetRealmRolesByIDRoleIDCompositesRequest) -> operations.GetRealmRolesByIDRoleIDCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get role’s children   Returns a set of role’s children provided the role is a composite.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}/composites", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3171,13 +3541,16 @@ class SDK:
 
     
     def get_realm_roles_by_id_role_id_composites_clients_client_(self, request: operations.GetRealmRolesByIDRoleIDCompositesClientsClientRequest) -> operations.GetRealmRolesByIDRoleIDCompositesClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get client-level roles for the client that are in the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}/composites/clients/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3192,13 +3565,16 @@ class SDK:
 
     
     def get_realm_roles_by_id_role_id_composites_realm(self, request: operations.GetRealmRolesByIDRoleIDCompositesRealmRequest) -> operations.GetRealmRolesByIDRoleIDCompositesRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles that are in the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}/composites/realm", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3213,13 +3589,16 @@ class SDK:
 
     
     def get_realm_roles_by_id_role_id_management_permissions(self, request: operations.GetRealmRolesByIDRoleIDManagementPermissionsRequest) -> operations.GetRealmRolesByIDRoleIDManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}/management/permissions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3234,13 +3613,16 @@ class SDK:
 
     
     def get_realm_roles_role_name_(self, request: operations.GetRealmRolesRoleNameRequest) -> operations.GetRealmRolesRoleNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a role by name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3255,13 +3637,16 @@ class SDK:
 
     
     def get_realm_roles_role_name_composites(self, request: operations.GetRealmRolesRoleNameCompositesRequest) -> operations.GetRealmRolesRoleNameCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get composites of the role
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/composites", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3276,13 +3661,16 @@ class SDK:
 
     
     def get_realm_roles_role_name_composites_clients_client_(self, request: operations.GetRealmRolesRoleNameCompositesClientsClientRequest) -> operations.GetRealmRolesRoleNameCompositesClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""An app-level roles for the specified app for the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/composites/clients/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3297,13 +3685,16 @@ class SDK:
 
     
     def get_realm_roles_role_name_composites_realm(self, request: operations.GetRealmRolesRoleNameCompositesRealmRequest) -> operations.GetRealmRolesRoleNameCompositesRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles of the role’s composite
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/composites/realm", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3318,15 +3709,17 @@ class SDK:
 
     
     def get_realm_roles_role_name_groups(self, request: operations.GetRealmRolesRoleNameGroupsRequest) -> operations.GetRealmRolesRoleNameGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return List of Groups that have the specified role name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/groups", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3341,13 +3734,16 @@ class SDK:
 
     
     def get_realm_roles_role_name_management_permissions(self, request: operations.GetRealmRolesRoleNameManagementPermissionsRequest) -> operations.GetRealmRolesRoleNameManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/management/permissions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3362,15 +3758,17 @@ class SDK:
 
     
     def get_realm_roles_role_name_users(self, request: operations.GetRealmRolesRoleNameUsersRequest) -> operations.GetRealmRolesRoleNameUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return List of Users that have the specified role name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/users", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3385,13 +3783,16 @@ class SDK:
 
     
     def get_realm_user_storage_id_name(self, request: operations.GetRealmUserStorageIDNameRequest) -> operations.GetRealmUserStorageIDNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Need this for admin console to display simple name of provider when displaying user detail   KEYCLOAK-4328
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/user-storage/{id}/name", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3406,15 +3807,17 @@ class SDK:
 
     
     def get_realm_users(self, request: operations.GetRealmUsersRequest) -> operations.GetRealmUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get users   Returns a list of users, filtered according to query parameters
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3429,15 +3832,17 @@ class SDK:
 
     
     def get_realm_users_count(self, request: operations.GetRealmUsersCountRequest) -> operations.GetRealmUsersCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the number of users that match the given criteria.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3452,13 +3857,16 @@ class SDK:
 
     
     def get_realm_users_id_(self, request: operations.GetRealmUsersIDRequest) -> operations.GetRealmUsersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get representation of the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3473,13 +3881,16 @@ class SDK:
 
     
     def get_realm_users_id_configured_user_storage_credential_types(self, request: operations.GetRealmUsersIDConfiguredUserStorageCredentialTypesRequest) -> operations.GetRealmUsersIDConfiguredUserStorageCredentialTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return credential types, which are provided by the user storage where user is stored.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/configured-user-storage-credential-types", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3494,13 +3905,16 @@ class SDK:
 
     
     def get_realm_users_id_consents(self, request: operations.GetRealmUsersIDConsentsRequest) -> operations.GetRealmUsersIDConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get consents granted by the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/consents", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3515,13 +3929,13 @@ class SDK:
 
     
     def get_realm_users_id_credentials(self, request: operations.GetRealmUsersIDCredentialsRequest) -> operations.GetRealmUsersIDCredentialsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/credentials", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3536,13 +3950,16 @@ class SDK:
 
     
     def get_realm_users_id_federated_identity(self, request: operations.GetRealmUsersIDFederatedIdentityRequest) -> operations.GetRealmUsersIDFederatedIdentityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get social logins associated with the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/federated-identity", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3557,15 +3974,14 @@ class SDK:
 
     
     def get_realm_users_id_groups(self, request: operations.GetRealmUsersIDGroupsRequest) -> operations.GetRealmUsersIDGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/groups", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3580,15 +3996,14 @@ class SDK:
 
     
     def get_realm_users_id_groups_count(self, request: operations.GetRealmUsersIDGroupsCountRequest) -> operations.GetRealmUsersIDGroupsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/groups/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3603,13 +4018,16 @@ class SDK:
 
     
     def get_realm_users_id_offline_sessions_client_id_(self, request: operations.GetRealmUsersIDOfflineSessionsClientIDRequest) -> operations.GetRealmUsersIDOfflineSessionsClientIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get offline sessions associated with the user and client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/offline-sessions/{clientId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3624,13 +4042,16 @@ class SDK:
 
     
     def get_realm_users_id_role_mappings(self, request: operations.GetRealmUsersIDRoleMappingsRequest) -> operations.GetRealmUsersIDRoleMappingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get role mappings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3645,13 +4066,16 @@ class SDK:
 
     
     def get_realm_users_id_role_mappings_clients_client_(self, request: operations.GetRealmUsersIDRoleMappingsClientsClientRequest) -> operations.GetRealmUsersIDRoleMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get client-level role mappings for the user, and the app
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/clients/{client}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3666,13 +4090,16 @@ class SDK:
 
     
     def get_realm_users_id_role_mappings_clients_client_available(self, request: operations.GetRealmUsersIDRoleMappingsClientsClientAvailableRequest) -> operations.GetRealmUsersIDRoleMappingsClientsClientAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get available client-level roles that can be mapped to the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/clients/{client}/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3687,13 +4114,16 @@ class SDK:
 
     
     def get_realm_users_id_role_mappings_clients_client_composite(self, request: operations.GetRealmUsersIDRoleMappingsClientsClientCompositeRequest) -> operations.GetRealmUsersIDRoleMappingsClientsClientCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective client-level role mappings   This recurses any composite roles
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/clients/{client}/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3708,13 +4138,16 @@ class SDK:
 
     
     def get_realm_users_id_role_mappings_realm(self, request: operations.GetRealmUsersIDRoleMappingsRealmRequest) -> operations.GetRealmUsersIDRoleMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level role mappings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/realm", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3729,13 +4162,16 @@ class SDK:
 
     
     def get_realm_users_id_role_mappings_realm_available(self, request: operations.GetRealmUsersIDRoleMappingsRealmAvailableRequest) -> operations.GetRealmUsersIDRoleMappingsRealmAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get realm-level roles that can be mapped
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/realm/available", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3750,13 +4186,16 @@ class SDK:
 
     
     def get_realm_users_id_role_mappings_realm_composite(self, request: operations.GetRealmUsersIDRoleMappingsRealmCompositeRequest) -> operations.GetRealmUsersIDRoleMappingsRealmCompositeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get effective realm-level role mappings   This will recurse all composite roles to get the result.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/realm/composite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3771,13 +4210,16 @@ class SDK:
 
     
     def get_realm_users_id_sessions(self, request: operations.GetRealmUsersIDSessionsRequest) -> operations.GetRealmUsersIDSessionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get sessions associated with the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/sessions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3792,13 +4234,13 @@ class SDK:
 
     
     def get_realm_users_management_permissions(self, request: operations.GetRealmUsersManagementPermissionsRequest) -> operations.GetRealmUsersManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users-management-permissions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3813,22 +4255,22 @@ class SDK:
 
     
     def post_(self, request: operations.PostRequest) -> operations.PostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Import a realm   Imports a realm from a full representation of that realm.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3841,22 +4283,22 @@ class SDK:
 
     
     def post_realm_authentication_executions(self, request: operations.PostRealmAuthenticationExecutionsRequest) -> operations.PostRealmAuthenticationExecutionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add new authentication execution
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/executions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3869,22 +4311,22 @@ class SDK:
 
     
     def post_realm_authentication_executions_execution_id_config(self, request: operations.PostRealmAuthenticationExecutionsExecutionIDConfigRequest) -> operations.PostRealmAuthenticationExecutionsExecutionIDConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update execution with new configuration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/executions/{executionId}/config", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3897,13 +4339,16 @@ class SDK:
 
     
     def post_realm_authentication_executions_execution_id_lower_priority(self, request: operations.PostRealmAuthenticationExecutionsExecutionIDLowerPriorityRequest) -> operations.PostRealmAuthenticationExecutionsExecutionIDLowerPriorityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lower execution’s priority
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/executions/{executionId}/lower-priority", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3916,13 +4361,16 @@ class SDK:
 
     
     def post_realm_authentication_executions_execution_id_raise_priority(self, request: operations.PostRealmAuthenticationExecutionsExecutionIDRaisePriorityRequest) -> operations.PostRealmAuthenticationExecutionsExecutionIDRaisePriorityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Raise execution’s priority
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/executions/{executionId}/raise-priority", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3935,22 +4383,22 @@ class SDK:
 
     
     def post_realm_authentication_flows(self, request: operations.PostRealmAuthenticationFlowsRequest) -> operations.PostRealmAuthenticationFlowsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new authentication flow
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3963,22 +4411,22 @@ class SDK:
 
     
     def post_realm_authentication_flows_flow_alias_copy(self, request: operations.PostRealmAuthenticationFlowsFlowAliasCopyRequest) -> operations.PostRealmAuthenticationFlowsFlowAliasCopyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Copy existing authentication flow under a new name   The new name is given as 'newName' attribute of the passed JSON object
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{flowAlias}/copy", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3991,22 +4439,22 @@ class SDK:
 
     
     def post_realm_authentication_flows_flow_alias_executions_execution(self, request: operations.PostRealmAuthenticationFlowsFlowAliasExecutionsExecutionRequest) -> operations.PostRealmAuthenticationFlowsFlowAliasExecutionsExecutionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add new authentication execution to a flow
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{flowAlias}/executions/execution", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4019,22 +4467,22 @@ class SDK:
 
     
     def post_realm_authentication_flows_flow_alias_executions_flow(self, request: operations.PostRealmAuthenticationFlowsFlowAliasExecutionsFlowRequest) -> operations.PostRealmAuthenticationFlowsFlowAliasExecutionsFlowResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add new flow with new execution to existing flow
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{flowAlias}/executions/flow", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4047,22 +4495,22 @@ class SDK:
 
     
     def post_realm_authentication_register_required_action(self, request: operations.PostRealmAuthenticationRegisterRequiredActionRequest) -> operations.PostRealmAuthenticationRegisterRequiredActionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Register a new required actions
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/register-required-action", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4075,13 +4523,16 @@ class SDK:
 
     
     def post_realm_authentication_required_actions_alias_lower_priority(self, request: operations.PostRealmAuthenticationRequiredActionsAliasLowerPriorityRequest) -> operations.PostRealmAuthenticationRequiredActionsAliasLowerPriorityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lower required action’s priority
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/required-actions/{alias}/lower-priority", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4094,13 +4545,16 @@ class SDK:
 
     
     def post_realm_authentication_required_actions_alias_raise_priority(self, request: operations.PostRealmAuthenticationRequiredActionsAliasRaisePriorityRequest) -> operations.PostRealmAuthenticationRequiredActionsAliasRaisePriorityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Raise required action’s priority
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/required-actions/{alias}/raise-priority", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4113,13 +4567,16 @@ class SDK:
 
     
     def post_realm_clear_keys_cache(self, request: operations.PostRealmClearKeysCacheRequest) -> operations.PostRealmClearKeysCacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear cache of external public keys (Public keys of clients or Identity providers)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clear-keys-cache", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4132,13 +4589,16 @@ class SDK:
 
     
     def post_realm_clear_realm_cache(self, request: operations.PostRealmClearRealmCacheRequest) -> operations.PostRealmClearRealmCacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear realm cache
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clear-realm-cache", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4151,13 +4611,16 @@ class SDK:
 
     
     def post_realm_clear_user_cache(self, request: operations.PostRealmClearUserCacheRequest) -> operations.PostRealmClearUserCacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear user cache
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clear-user-cache", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4170,22 +4633,22 @@ class SDK:
 
     
     def post_realm_client_description_converter(self, request: operations.PostRealmClientDescriptionConverterRequest) -> operations.PostRealmClientDescriptionConverterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Base path for importing clients under this realm.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-description-converter", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4200,22 +4663,22 @@ class SDK:
 
     
     def post_realm_client_scopes(self, request: operations.PostRealmClientScopesRequest) -> operations.PostRealmClientScopesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new client scope   Client Scope’s name must be unique!
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4228,22 +4691,22 @@ class SDK:
 
     
     def post_realm_client_scopes_id_protocol_mappers_add_models(self, request: operations.PostRealmClientScopesIDProtocolMappersAddModelsRequest) -> operations.PostRealmClientScopesIDProtocolMappersAddModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create multiple mappers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/protocol-mappers/add-models", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4256,22 +4719,22 @@ class SDK:
 
     
     def post_realm_client_scopes_id_protocol_mappers_models(self, request: operations.PostRealmClientScopesIDProtocolMappersModelsRequest) -> operations.PostRealmClientScopesIDProtocolMappersModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a mapper
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/protocol-mappers/models", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4284,22 +4747,22 @@ class SDK:
 
     
     def post_realm_client_scopes_id_scope_mappings_clients_client_(self, request: operations.PostRealmClientScopesIDScopeMappingsClientsClientRequest) -> operations.PostRealmClientScopesIDScopeMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add client-level roles to the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4312,22 +4775,22 @@ class SDK:
 
     
     def post_realm_client_scopes_id_scope_mappings_realm(self, request: operations.PostRealmClientScopesIDScopeMappingsRealmRequest) -> operations.PostRealmClientScopesIDScopeMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a set of realm-level roles to the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}/scope-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4340,22 +4803,22 @@ class SDK:
 
     
     def post_realm_clients(self, request: operations.PostRealmClientsRequest) -> operations.PostRealmClientsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new client   Client’s client_id must be unique!
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4368,22 +4831,22 @@ class SDK:
 
     
     def post_realm_clients_id_certificates_attr_download(self, request: operations.PostRealmClientsIDCertificatesAttrDownloadRequest) -> operations.PostRealmClientsIDCertificatesAttrDownloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a keystore file for the client, containing private key and public certificate
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/certificates/{attr}/download", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4397,13 +4860,16 @@ class SDK:
 
     
     def post_realm_clients_id_certificates_attr_generate(self, request: operations.PostRealmClientsIDCertificatesAttrGenerateRequest) -> operations.PostRealmClientsIDCertificatesAttrGenerateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a new certificate with new key pair
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/certificates/{attr}/generate", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4418,22 +4884,22 @@ class SDK:
 
     
     def post_realm_clients_id_certificates_attr_generate_and_download(self, request: operations.PostRealmClientsIDCertificatesAttrGenerateAndDownloadRequest) -> operations.PostRealmClientsIDCertificatesAttrGenerateAndDownloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a new keypair and certificate, and get the private key file   Generates a keypair and certificate and serves the private key in a specified keystore format.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/certificates/{attr}/generate-and-download", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4447,13 +4913,16 @@ class SDK:
 
     
     def post_realm_clients_id_certificates_attr_upload(self, request: operations.PostRealmClientsIDCertificatesAttrUploadRequest) -> operations.PostRealmClientsIDCertificatesAttrUploadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upload certificate and eventually private key
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/certificates/{attr}/upload", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4468,13 +4937,16 @@ class SDK:
 
     
     def post_realm_clients_id_certificates_attr_upload_certificate(self, request: operations.PostRealmClientsIDCertificatesAttrUploadCertificateRequest) -> operations.PostRealmClientsIDCertificatesAttrUploadCertificateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upload only certificate, not private key
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/certificates/{attr}/upload-certificate", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4489,13 +4961,16 @@ class SDK:
 
     
     def post_realm_clients_id_client_secret(self, request: operations.PostRealmClientsIDClientSecretRequest) -> operations.PostRealmClientsIDClientSecretResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a new secret for the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/client-secret", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4510,22 +4985,22 @@ class SDK:
 
     
     def post_realm_clients_id_nodes(self, request: operations.PostRealmClientsIDNodesRequest) -> operations.PostRealmClientsIDNodesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Register a cluster node with the client   Manually register cluster node to this client - usually it’s not needed to call this directly as adapter should handle  by sending registration request to Keycloak
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/nodes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4538,22 +5013,22 @@ class SDK:
 
     
     def post_realm_clients_id_protocol_mappers_add_models(self, request: operations.PostRealmClientsIDProtocolMappersAddModelsRequest) -> operations.PostRealmClientsIDProtocolMappersAddModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create multiple mappers
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/protocol-mappers/add-models", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4566,22 +5041,22 @@ class SDK:
 
     
     def post_realm_clients_id_protocol_mappers_models(self, request: operations.PostRealmClientsIDProtocolMappersModelsRequest) -> operations.PostRealmClientsIDProtocolMappersModelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a mapper
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/protocol-mappers/models", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4594,13 +5069,16 @@ class SDK:
 
     
     def post_realm_clients_id_push_revocation(self, request: operations.PostRealmClientsIDPushRevocationRequest) -> operations.PostRealmClientsIDPushRevocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Push the client’s revocation policy to its admin URL   If the client has an admin URL, push revocation policy to it.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/push-revocation", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4615,13 +5093,16 @@ class SDK:
 
     
     def post_realm_clients_id_registration_access_token(self, request: operations.PostRealmClientsIDRegistrationAccessTokenRequest) -> operations.PostRealmClientsIDRegistrationAccessTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a new registration access token for the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/registration-access-token", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4636,22 +5117,22 @@ class SDK:
 
     
     def post_realm_clients_id_roles(self, request: operations.PostRealmClientsIDRolesRequest) -> operations.PostRealmClientsIDRolesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new role for the realm or client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4664,22 +5145,22 @@ class SDK:
 
     
     def post_realm_clients_id_roles_role_name_composites(self, request: operations.PostRealmClientsIDRolesRoleNameCompositesRequest) -> operations.PostRealmClientsIDRolesRoleNameCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a composite to the role
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/composites", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4692,22 +5173,22 @@ class SDK:
 
     
     def post_realm_clients_id_scope_mappings_clients_client_(self, request: operations.PostRealmClientsIDScopeMappingsClientsClientRequest) -> operations.PostRealmClientsIDScopeMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add client-level roles to the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4720,22 +5201,22 @@ class SDK:
 
     
     def post_realm_clients_id_scope_mappings_realm(self, request: operations.PostRealmClientsIDScopeMappingsRealmRequest) -> operations.PostRealmClientsIDScopeMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a set of realm-level roles to the client’s scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/scope-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4748,22 +5229,22 @@ class SDK:
 
     
     def post_realm_clients_initial_access(self, request: operations.PostRealmClientsInitialAccessRequest) -> operations.PostRealmClientsInitialAccessResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new initial access token.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients-initial-access", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4778,22 +5259,19 @@ class SDK:
 
     
     def post_realm_components(self, request: operations.PostRealmComponentsRequest) -> operations.PostRealmComponentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/components", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4806,22 +5284,22 @@ class SDK:
 
     
     def post_realm_groups(self, request: operations.PostRealmGroupsRequest) -> operations.PostRealmGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""create or add a top level realm groupSet or create child.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4834,22 +5312,22 @@ class SDK:
 
     
     def post_realm_groups_id_children(self, request: operations.PostRealmGroupsIDChildrenRequest) -> operations.PostRealmGroupsIDChildrenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set or create child.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/children", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4862,22 +5340,22 @@ class SDK:
 
     
     def post_realm_groups_id_role_mappings_clients_client_(self, request: operations.PostRealmGroupsIDRoleMappingsClientsClientRequest) -> operations.PostRealmGroupsIDRoleMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add client-level roles to the user role mapping
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4890,22 +5368,22 @@ class SDK:
 
     
     def post_realm_groups_id_role_mappings_realm(self, request: operations.PostRealmGroupsIDRoleMappingsRealmRequest) -> operations.PostRealmGroupsIDRoleMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add realm-level role mappings to the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/role-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4918,13 +5396,16 @@ class SDK:
 
     
     def post_realm_identity_provider_import_config(self, request: operations.PostRealmIdentityProviderImportConfigRequest) -> operations.PostRealmIdentityProviderImportConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Import identity provider from uploaded JSON file
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/import-config", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4939,22 +5420,22 @@ class SDK:
 
     
     def post_realm_identity_provider_instances(self, request: operations.PostRealmIdentityProviderInstancesRequest) -> operations.PostRealmIdentityProviderInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4967,22 +5448,22 @@ class SDK:
 
     
     def post_realm_identity_provider_instances_alias_mappers(self, request: operations.PostRealmIdentityProviderInstancesAliasMappersRequest) -> operations.PostRealmIdentityProviderInstancesAliasMappersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a mapper to identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/mappers", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4995,13 +5476,16 @@ class SDK:
 
     
     def post_realm_logout_all(self, request: operations.PostRealmLogoutAllRequest) -> operations.PostRealmLogoutAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes all user sessions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/logout-all", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5014,22 +5498,22 @@ class SDK:
 
     
     def post_realm_partial_import(self, request: operations.PostRealmPartialImportRequest) -> operations.PostRealmPartialImportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Partial import from a JSON file to an existing realm.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/partialImport", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5042,15 +5526,17 @@ class SDK:
 
     
     def post_realm_partial_export(self, request: operations.PostRealmPartialExportRequest) -> operations.PostRealmPartialExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Partial export of existing realm into a JSON file.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/partial-export", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5065,13 +5551,16 @@ class SDK:
 
     
     def post_realm_push_revocation(self, request: operations.PostRealmPushRevocationRequest) -> operations.PostRealmPushRevocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Push the realm’s revocation policy to any client that has an admin url associated with it.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/push-revocation", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5084,22 +5573,22 @@ class SDK:
 
     
     def post_realm_roles(self, request: operations.PostRealmRolesRequest) -> operations.PostRealmRolesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new role for the realm or client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5112,22 +5601,22 @@ class SDK:
 
     
     def post_realm_roles_by_id_role_id_composites(self, request: operations.PostRealmRolesByIDRoleIDCompositesRequest) -> operations.PostRealmRolesByIDRoleIDCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Make the role a composite role by associating some child roles
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}/composites", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5140,22 +5629,22 @@ class SDK:
 
     
     def post_realm_roles_role_name_composites(self, request: operations.PostRealmRolesRoleNameCompositesRequest) -> operations.PostRealmRolesRoleNameCompositesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a composite to the role
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/composites", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5168,22 +5657,22 @@ class SDK:
 
     
     def post_realm_test_ldap_connection(self, request: operations.PostRealmTestLdapConnectionRequest) -> operations.PostRealmTestLdapConnectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Test LDAP connection
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/testLDAPConnection", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5196,22 +5685,19 @@ class SDK:
 
     
     def post_realm_test_smtp_connection(self, request: operations.PostRealmTestSMTPConnectionRequest) -> operations.PostRealmTestSMTPConnectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/testSMTPConnection", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5224,13 +5710,16 @@ class SDK:
 
     
     def post_realm_user_storage_id_remove_imported_users(self, request: operations.PostRealmUserStorageIDRemoveImportedUsersRequest) -> operations.PostRealmUserStorageIDRemoveImportedUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove imported users
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/user-storage/{id}/remove-imported-users", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5243,15 +5732,17 @@ class SDK:
 
     
     def post_realm_user_storage_id_sync(self, request: operations.PostRealmUserStorageIDSyncRequest) -> operations.PostRealmUserStorageIDSyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger sync of users   Action can be \"triggerFullSync\" or \"triggerChangedUsersSync\"
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/user-storage/{id}/sync", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5266,13 +5757,16 @@ class SDK:
 
     
     def post_realm_user_storage_id_unlink_users(self, request: operations.PostRealmUserStorageIDUnlinkUsersRequest) -> operations.PostRealmUserStorageIDUnlinkUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unlink imported users from a storage provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/user-storage/{id}/unlink-users", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5285,15 +5779,17 @@ class SDK:
 
     
     def post_realm_user_storage_parent_id_mappers_id_sync(self, request: operations.PostRealmUserStorageParentIDMappersIDSyncRequest) -> operations.PostRealmUserStorageParentIDMappersIDSyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger sync of mapper data related to ldap mapper (roles, groups, …​)   direction is \"fedToKeycloak\" or \"keycloakToFed\"
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/user-storage/{parentId}/mappers/{id}/sync", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5308,22 +5804,22 @@ class SDK:
 
     
     def post_realm_users(self, request: operations.PostRealmUsersRequest) -> operations.PostRealmUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new user   Username must be unique.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5336,13 +5832,16 @@ class SDK:
 
     
     def post_realm_users_id_credentials_credential_id_move_after_new_previous_credential_id_(self, request: operations.PostRealmUsersIDCredentialsCredentialIDMoveAfterNewPreviousCredentialIDRequest) -> operations.PostRealmUsersIDCredentialsCredentialIDMoveAfterNewPreviousCredentialIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Move a credential to a position behind another credential
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5355,13 +5854,16 @@ class SDK:
 
     
     def post_realm_users_id_credentials_credential_id_move_to_first(self, request: operations.PostRealmUsersIDCredentialsCredentialIDMoveToFirstRequest) -> operations.PostRealmUsersIDCredentialsCredentialIDMoveToFirstResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Move a credential to a first position in the credentials list of the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/credentials/{credentialId}/moveToFirst", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5374,22 +5876,22 @@ class SDK:
 
     
     def post_realm_users_id_federated_identity_provider_(self, request: operations.PostRealmUsersIDFederatedIdentityProviderRequest) -> operations.PostRealmUsersIDFederatedIdentityProviderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a social login provider to the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/federated-identity/{provider}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5402,13 +5904,16 @@ class SDK:
 
     
     def post_realm_users_id_impersonation(self, request: operations.PostRealmUsersIDImpersonationRequest) -> operations.PostRealmUsersIDImpersonationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Impersonate the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/impersonation", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5423,13 +5928,16 @@ class SDK:
 
     
     def post_realm_users_id_logout(self, request: operations.PostRealmUsersIDLogoutRequest) -> operations.PostRealmUsersIDLogoutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove all user sessions associated with the user   Also send notification to all clients that have an admin URL to invalidate the sessions for the particular user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/logout", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5442,22 +5950,22 @@ class SDK:
 
     
     def post_realm_users_id_role_mappings_clients_client_(self, request: operations.PostRealmUsersIDRoleMappingsClientsClientRequest) -> operations.PostRealmUsersIDRoleMappingsClientsClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add client-level roles to the user role mapping
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/clients/{client}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5470,22 +5978,22 @@ class SDK:
 
     
     def post_realm_users_id_role_mappings_realm(self, request: operations.PostRealmUsersIDRoleMappingsRealmRequest) -> operations.PostRealmUsersIDRoleMappingsRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add realm-level role mappings to the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/role-mappings/realm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5498,22 +6006,22 @@ class SDK:
 
     
     def put_realm_(self, request: operations.PutRealmRequest) -> operations.PutRealmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the top-level information of the realm   Any user, roles or client information in the representation  will be ignored.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5526,22 +6034,22 @@ class SDK:
 
     
     def put_realm_authentication_config_id_(self, request: operations.PutRealmAuthenticationConfigIDRequest) -> operations.PutRealmAuthenticationConfigIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update authenticator configuration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/config/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5554,22 +6062,22 @@ class SDK:
 
     
     def put_realm_authentication_flows_flow_alias_executions(self, request: operations.PutRealmAuthenticationFlowsFlowAliasExecutionsRequest) -> operations.PutRealmAuthenticationFlowsFlowAliasExecutionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update authentication executions of a flow
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{flowAlias}/executions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5582,22 +6090,22 @@ class SDK:
 
     
     def put_realm_authentication_flows_id_(self, request: operations.PutRealmAuthenticationFlowsIDRequest) -> operations.PutRealmAuthenticationFlowsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an authentication flow
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/flows/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5610,22 +6118,22 @@ class SDK:
 
     
     def put_realm_authentication_required_actions_alias_(self, request: operations.PutRealmAuthenticationRequiredActionsAliasRequest) -> operations.PutRealmAuthenticationRequiredActionsAliasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update required action
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/authentication/required-actions/{alias}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5638,22 +6146,22 @@ class SDK:
 
     
     def put_realm_client_scopes_id1_protocol_mappers_models_id2_(self, request: operations.PutRealmClientScopesId1ProtocolMappersModelsId2Request) -> operations.PutRealmClientScopesId1ProtocolMappersModelsId2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the mapper
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id1}/protocol-mappers/models/{id2}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5666,22 +6174,22 @@ class SDK:
 
     
     def put_realm_client_scopes_id_(self, request: operations.PutRealmClientScopesIDRequest) -> operations.PutRealmClientScopesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the client scope
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/client-scopes/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5694,22 +6202,22 @@ class SDK:
 
     
     def put_realm_clients_id1_protocol_mappers_models_id2_(self, request: operations.PutRealmClientsId1ProtocolMappersModelsId2Request) -> operations.PutRealmClientsId1ProtocolMappersModelsId2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the mapper
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id1}/protocol-mappers/models/{id2}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5722,22 +6230,22 @@ class SDK:
 
     
     def put_realm_clients_id_(self, request: operations.PutRealmClientsIDRequest) -> operations.PutRealmClientsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the client
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5750,13 +6258,13 @@ class SDK:
 
     
     def put_realm_clients_id_default_client_scopes_client_scope_id_(self, request: operations.PutRealmClientsIDDefaultClientScopesClientScopeIDRequest) -> operations.PutRealmClientsIDDefaultClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/default-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5769,22 +6277,22 @@ class SDK:
 
     
     def put_realm_clients_id_management_permissions(self, request: operations.PutRealmClientsIDManagementPermissionsRequest) -> operations.PutRealmClientsIDManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether client Authorization permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/management/permissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5799,13 +6307,13 @@ class SDK:
 
     
     def put_realm_clients_id_optional_client_scopes_client_scope_id_(self, request: operations.PutRealmClientsIDOptionalClientScopesClientScopeIDRequest) -> operations.PutRealmClientsIDOptionalClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/optional-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5818,22 +6326,22 @@ class SDK:
 
     
     def put_realm_clients_id_roles_role_name_(self, request: operations.PutRealmClientsIDRolesRoleNameRequest) -> operations.PutRealmClientsIDRolesRoleNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a role by name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5846,22 +6354,22 @@ class SDK:
 
     
     def put_realm_clients_id_roles_role_name_management_permissions(self, request: operations.PutRealmClientsIDRolesRoleNameManagementPermissionsRequest) -> operations.PutRealmClientsIDRolesRoleNameManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/clients/{id}/roles/{role-name}/management/permissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5876,22 +6384,19 @@ class SDK:
 
     
     def put_realm_components_id_(self, request: operations.PutRealmComponentsIDRequest) -> operations.PutRealmComponentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/components/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5904,13 +6409,13 @@ class SDK:
 
     
     def put_realm_default_default_client_scopes_client_scope_id_(self, request: operations.PutRealmDefaultDefaultClientScopesClientScopeIDRequest) -> operations.PutRealmDefaultDefaultClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-default-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5923,13 +6428,13 @@ class SDK:
 
     
     def put_realm_default_groups_group_id_(self, request: operations.PutRealmDefaultGroupsGroupIDRequest) -> operations.PutRealmDefaultGroupsGroupIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-groups/{groupId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5942,13 +6447,13 @@ class SDK:
 
     
     def put_realm_default_optional_client_scopes_client_scope_id_(self, request: operations.PutRealmDefaultOptionalClientScopesClientScopeIDRequest) -> operations.PutRealmDefaultOptionalClientScopesClientScopeIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/default-optional-client-scopes/{clientScopeId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5961,22 +6466,22 @@ class SDK:
 
     
     def put_realm_events_config(self, request: operations.PutRealmEventsConfigRequest) -> operations.PutRealmEventsConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the events provider   Change the events provider and/or its configuration
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/events/config", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5989,22 +6494,22 @@ class SDK:
 
     
     def put_realm_groups_id_(self, request: operations.PutRealmGroupsIDRequest) -> operations.PutRealmGroupsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update group, ignores subgroups.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6017,22 +6522,22 @@ class SDK:
 
     
     def put_realm_groups_id_management_permissions(self, request: operations.PutRealmGroupsIDManagementPermissionsRequest) -> operations.PutRealmGroupsIDManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether client Authorization permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/groups/{id}/management/permissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6047,22 +6552,22 @@ class SDK:
 
     
     def put_realm_identity_provider_instances_alias_(self, request: operations.PutRealmIdentityProviderInstancesAliasRequest) -> operations.PutRealmIdentityProviderInstancesAliasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6075,22 +6580,22 @@ class SDK:
 
     
     def put_realm_identity_provider_instances_alias_management_permissions(self, request: operations.PutRealmIdentityProviderInstancesAliasManagementPermissionsRequest) -> operations.PutRealmIdentityProviderInstancesAliasManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether client Authorization permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/management/permissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6105,22 +6610,22 @@ class SDK:
 
     
     def put_realm_identity_provider_instances_alias_mappers_id_(self, request: operations.PutRealmIdentityProviderInstancesAliasMappersIDRequest) -> operations.PutRealmIdentityProviderInstancesAliasMappersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a mapper for the identity provider
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/identity-provider/instances/{alias}/mappers/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6133,22 +6638,22 @@ class SDK:
 
     
     def put_realm_roles_by_id_role_id_(self, request: operations.PutRealmRolesByIDRoleIDRequest) -> operations.PutRealmRolesByIDRoleIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the role
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6161,22 +6666,22 @@ class SDK:
 
     
     def put_realm_roles_by_id_role_id_management_permissions(self, request: operations.PutRealmRolesByIDRoleIDManagementPermissionsRequest) -> operations.PutRealmRolesByIDRoleIDManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles-by-id/{role-id}/management/permissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6191,22 +6696,22 @@ class SDK:
 
     
     def put_realm_roles_role_name_(self, request: operations.PutRealmRolesRoleNameRequest) -> operations.PutRealmRolesRoleNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a role by name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6219,22 +6724,22 @@ class SDK:
 
     
     def put_realm_roles_role_name_management_permissions(self, request: operations.PutRealmRolesRoleNameManagementPermissionsRequest) -> operations.PutRealmRolesRoleNameManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/roles/{role-name}/management/permissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6249,22 +6754,22 @@ class SDK:
 
     
     def put_realm_users_id_(self, request: operations.PutRealmUsersIDRequest) -> operations.PutRealmUsersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6277,22 +6782,22 @@ class SDK:
 
     
     def put_realm_users_id_credentials_credential_id_user_label(self, request: operations.PutRealmUsersIDCredentialsCredentialIDUserLabelRequest) -> operations.PutRealmUsersIDCredentialsCredentialIDUserLabelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a credential label for a user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/credentials/{credentialId}/userLabel", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6305,22 +6810,22 @@ class SDK:
 
     
     def put_realm_users_id_disable_credential_types(self, request: operations.PutRealmUsersIDDisableCredentialTypesRequest) -> operations.PutRealmUsersIDDisableCredentialTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disable all credentials for a user of a specific type
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/disable-credential-types", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6333,24 +6838,23 @@ class SDK:
 
     
     def put_realm_users_id_execute_actions_email(self, request: operations.PutRealmUsersIDExecuteActionsEmailRequest) -> operations.PutRealmUsersIDExecuteActionsEmailResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Send a update account email to the user   An email contains a link the user can click to perform a set of required actions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/execute-actions-email", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6363,13 +6867,13 @@ class SDK:
 
     
     def put_realm_users_id_groups_group_id_(self, request: operations.PutRealmUsersIDGroupsGroupIDRequest) -> operations.PutRealmUsersIDGroupsGroupIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/groups/{groupId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -6382,22 +6886,22 @@ class SDK:
 
     
     def put_realm_users_id_reset_password(self, request: operations.PutRealmUsersIDResetPasswordRequest) -> operations.PutRealmUsersIDResetPasswordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set up a new password for the user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/reset-password", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6410,15 +6914,17 @@ class SDK:
 
     
     def put_realm_users_id_send_verify_email(self, request: operations.PutRealmUsersIDSendVerifyEmailRequest) -> operations.PutRealmUsersIDSendVerifyEmailResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Send an email-verification email to the user   An email contains a link the user can click to verify their email address.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users/{id}/send-verify-email", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6431,22 +6937,19 @@ class SDK:
 
     
     def put_realm_users_management_permissions(self, request: operations.PutRealmUsersManagementPermissionsRequest) -> operations.PutRealmUsersManagementPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{realm}/users-management-permissions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

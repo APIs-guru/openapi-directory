@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LfTag } from "./lftag";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // LfTagPolicyResource
@@ -9,12 +9,12 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * A structure containing a list of tag conditions that apply to a resource's tag policy.
 **/
 export class LfTagPolicyResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=Expression", elemType: shared.LfTag })
+  @SpeakeasyMetadata({ data: "json, name=Expression", elemType: LfTag })
   expression: LfTag[];
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType: ResourceTypeEnum;
 }

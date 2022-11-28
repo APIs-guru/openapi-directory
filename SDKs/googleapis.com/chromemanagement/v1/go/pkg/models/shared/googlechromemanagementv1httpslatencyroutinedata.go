@@ -10,6 +10,8 @@ const (
 	GoogleChromeManagementV1HTTPSLatencyRoutineDataProblemEnumVeryHighLatency                GoogleChromeManagementV1HTTPSLatencyRoutineDataProblemEnum = "VERY_HIGH_LATENCY"
 )
 
+// GoogleChromeManagementV1HTTPSLatencyRoutineData
+// Data that describes the result of the HTTPS latency diagnostics routine, with the HTTPS requests issued to Google websites.
 type GoogleChromeManagementV1HTTPSLatencyRoutineData struct {
 	Latency *string                                                     `json:"latency,omitempty"`
 	Problem *GoogleChromeManagementV1HTTPSLatencyRoutineDataProblemEnum `json:"problem,omitempty"`

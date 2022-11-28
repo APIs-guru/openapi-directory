@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LibraryImagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageUrls" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrls" })
   imageUrls?: string[];
 }

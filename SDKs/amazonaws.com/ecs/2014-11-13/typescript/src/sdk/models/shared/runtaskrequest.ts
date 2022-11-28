@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapacityProviderStrategyItem } from "./capacityproviderstrategyitem";
 import { LaunchTypeEnum } from "./launchtypeenum";
 import { NetworkConfiguration } from "./networkconfiguration";
@@ -10,55 +9,56 @@ import { PropagateTagsEnum } from "./propagatetagsenum";
 import { Tag } from "./tag";
 
 
+
 export class RunTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacityProviderStrategy", elemType: shared.CapacityProviderStrategyItem })
+  @SpeakeasyMetadata({ data: "json, name=capacityProviderStrategy", elemType: CapacityProviderStrategyItem })
   capacityProviderStrategy?: CapacityProviderStrategyItem[];
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=enableECSManagedTags" })
+  @SpeakeasyMetadata({ data: "json, name=enableECSManagedTags" })
   enableEcsManagedTags?: boolean;
 
-  @Metadata({ data: "json, name=enableExecuteCommand" })
+  @SpeakeasyMetadata({ data: "json, name=enableExecuteCommand" })
   enableExecuteCommand?: boolean;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=launchType" })
+  @SpeakeasyMetadata({ data: "json, name=launchType" })
   launchType?: LaunchTypeEnum;
 
-  @Metadata({ data: "json, name=networkConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=networkConfiguration" })
   networkConfiguration?: NetworkConfiguration;
 
-  @Metadata({ data: "json, name=overrides" })
+  @SpeakeasyMetadata({ data: "json, name=overrides" })
   overrides?: TaskOverride;
 
-  @Metadata({ data: "json, name=placementConstraints", elemType: shared.PlacementConstraint })
+  @SpeakeasyMetadata({ data: "json, name=placementConstraints", elemType: PlacementConstraint })
   placementConstraints?: PlacementConstraint[];
 
-  @Metadata({ data: "json, name=placementStrategy", elemType: shared.PlacementStrategy })
+  @SpeakeasyMetadata({ data: "json, name=placementStrategy", elemType: PlacementStrategy })
   placementStrategy?: PlacementStrategy[];
 
-  @Metadata({ data: "json, name=platformVersion" })
+  @SpeakeasyMetadata({ data: "json, name=platformVersion" })
   platformVersion?: string;
 
-  @Metadata({ data: "json, name=propagateTags" })
+  @SpeakeasyMetadata({ data: "json, name=propagateTags" })
   propagateTags?: PropagateTagsEnum;
 
-  @Metadata({ data: "json, name=referenceId" })
+  @SpeakeasyMetadata({ data: "json, name=referenceId" })
   referenceId?: string;
 
-  @Metadata({ data: "json, name=startedBy" })
+  @SpeakeasyMetadata({ data: "json, name=startedBy" })
   startedBy?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=taskDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=taskDefinition" })
   taskDefinition: string;
 }

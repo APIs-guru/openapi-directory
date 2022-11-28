@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ImageRatioEnum {
-    OneHundredAndSixtyNine = "169"
-,    ThirtyTwo = "32"
-,    FortyThree = "43"
+    OneHundredAndSixtyNine = "169",
+    ThirtyTwo = "32",
+    FortyThree = "43"
 }
 
 
@@ -12,24 +13,24 @@ export enum ImageRatioEnum {
  * Image
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attribution" })
+  @SpeakeasyMetadata({ data: "json, name=attribution" })
   attribution?: string;
 
-  @Metadata({ data: "json, name=domains" })
+  @SpeakeasyMetadata({ data: "json, name=domains" })
   domains?: string[];
 
-  @Metadata({ data: "json, name=fallback" })
+  @SpeakeasyMetadata({ data: "json, name=fallback" })
   fallback?: boolean;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=ratio" })
+  @SpeakeasyMetadata({ data: "json, name=ratio" })
   ratio?: ImageRatioEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

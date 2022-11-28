@@ -1,0 +1,35 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare enum EvaluatePullRequestApprovalRulesXAmzTargetEnum {
+    CodeCommit20150413EvaluatePullRequestApprovalRules = "CodeCommit_20150413.EvaluatePullRequestApprovalRules"
+}
+export declare class EvaluatePullRequestApprovalRulesHeaders extends SpeakeasyBase {
+    xAmzAlgorithm?: string;
+    xAmzContentSha256?: string;
+    xAmzCredential?: string;
+    xAmzDate?: string;
+    xAmzSecurityToken?: string;
+    xAmzSignature?: string;
+    xAmzSignedHeaders?: string;
+    xAmzTarget: EvaluatePullRequestApprovalRulesXAmzTargetEnum;
+}
+export declare class EvaluatePullRequestApprovalRulesRequest extends SpeakeasyBase {
+    headers: EvaluatePullRequestApprovalRulesHeaders;
+    request: shared.EvaluatePullRequestApprovalRulesInput;
+}
+export declare class EvaluatePullRequestApprovalRulesResponse extends SpeakeasyBase {
+    contentType: string;
+    encryptionIntegrityChecksFailedException?: any;
+    encryptionKeyAccessDeniedException?: any;
+    encryptionKeyDisabledException?: any;
+    encryptionKeyNotFoundException?: any;
+    encryptionKeyUnavailableException?: any;
+    evaluatePullRequestApprovalRulesOutput?: shared.EvaluatePullRequestApprovalRulesOutput;
+    invalidPullRequestIdException?: any;
+    invalidRevisionIdException?: any;
+    pullRequestDoesNotExistException?: any;
+    pullRequestIdRequiredException?: any;
+    revisionIdRequiredException?: any;
+    revisionNotCurrentException?: any;
+    statusCode: number;
+}

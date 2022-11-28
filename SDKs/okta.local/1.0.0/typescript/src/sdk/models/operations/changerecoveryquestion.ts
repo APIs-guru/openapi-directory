@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChangeRecoveryQuestionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class ChangeRecoveryQuestionRequestBodyPassword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ChangeRecoveryQuestionRequestBodyRecoveryQuestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answer" })
+  @SpeakeasyMetadata({ data: "json, name=answer" })
   answer?: string;
 
-  @Metadata({ data: "json, name=question" })
+  @SpeakeasyMetadata({ data: "json, name=question" })
   question?: string;
 }
 
 
 export class ChangeRecoveryQuestionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: ChangeRecoveryQuestionRequestBodyPassword;
 
-  @Metadata({ data: "json, name=recovery_question" })
+  @SpeakeasyMetadata({ data: "json, name=recovery_question" })
   recoveryQuestion?: ChangeRecoveryQuestionRequestBodyRecoveryQuestion;
 }
 
 
 export class ChangeRecoveryQuestionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ChangeRecoveryQuestionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ChangeRecoveryQuestionRequestBody;
 }
 
 
 export class ChangeRecoveryQuestionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

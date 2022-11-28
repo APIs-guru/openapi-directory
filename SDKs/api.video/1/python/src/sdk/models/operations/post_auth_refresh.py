@@ -10,8 +10,8 @@ class PostAuthRefreshRequest:
 
 @dataclass
 class PostAuthRefreshResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     access_token: Optional[shared.AccessToken] = field(default=None)
     bad_request: Optional[shared.BadRequest] = field(default=None)
     

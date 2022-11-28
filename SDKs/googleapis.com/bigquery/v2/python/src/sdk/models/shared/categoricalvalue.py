@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import categorycount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CategoricalValue:
-    category_counts: Optional[List[categorycount.CategoryCount]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categoryCounts' }})
+    r"""CategoricalValue
+    Representative value of a categorical feature.
+    """
+    
+    category_counts: Optional[List[CategoryCount]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categoryCounts') }})
     

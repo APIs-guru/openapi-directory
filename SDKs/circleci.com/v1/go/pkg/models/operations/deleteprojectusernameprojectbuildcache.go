@@ -5,12 +5,12 @@ type DeleteProjectUsernameProjectBuildCachePathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type DeleteProjectUsernameProjectBuildCacheRequest struct {
-	PathParams DeleteProjectUsernameProjectBuildCachePathParams
-}
-
 type DeleteProjectUsernameProjectBuildCache200ApplicationJSON struct {
 	Status *string `json:"status,omitempty"`
+}
+
+type DeleteProjectUsernameProjectBuildCacheRequest struct {
+	PathParams DeleteProjectUsernameProjectBuildCachePathParams
 }
 
 type DeleteProjectUsernameProjectBuildCacheResponse struct {

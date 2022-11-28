@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EncryptionConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Encryption settings for the cluster.
 **/
 export class EncryptionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcePdKmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=gcePdKmsKeyName" })
   gcePdKmsKeyName?: string;
 }

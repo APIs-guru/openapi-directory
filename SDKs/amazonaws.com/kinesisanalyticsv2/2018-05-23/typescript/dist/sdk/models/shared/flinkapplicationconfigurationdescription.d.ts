@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CheckpointConfigurationDescription } from "./checkpointconfigurationdescription";
 import { MonitoringConfigurationDescription } from "./monitoringconfigurationdescription";
 import { ParallelismConfigurationDescription } from "./parallelismconfigurationdescription";

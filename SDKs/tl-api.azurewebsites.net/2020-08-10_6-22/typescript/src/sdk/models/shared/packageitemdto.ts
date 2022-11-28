@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PackageItemDto
@@ -8,30 +9,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *             
 **/
 export class PackageItemDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=articleId" })
+  @SpeakeasyMetadata({ data: "json, name=articleId" })
   articleId: number;
 
-  @Metadata({ data: "json, name=articleName" })
+  @SpeakeasyMetadata({ data: "json, name=articleName" })
   articleName?: string;
 
-  @Metadata({ data: "json, name=articleNumber" })
+  @SpeakeasyMetadata({ data: "json, name=articleNumber" })
   articleNumber?: number;
 
-  @Metadata({ data: "json, name=articlePrice" })
+  @SpeakeasyMetadata({ data: "json, name=articlePrice" })
   articlePrice?: number;
 
-  @Metadata({ data: "json, name=endOrder" })
+  @SpeakeasyMetadata({ data: "json, name=endOrder" })
   endOrder?: number;
 
-  @Metadata({ data: "json, name=isIncludeServiceInCharge" })
+  @SpeakeasyMetadata({ data: "json, name=isIncludeServiceInCharge" })
   isIncludeServiceInCharge?: boolean;
 
-  @Metadata({ data: "json, name=measureUnit" })
+  @SpeakeasyMetadata({ data: "json, name=measureUnit" })
   measureUnit?: string;
 
-  @Metadata({ data: "json, name=numberOfItems" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfItems" })
   numberOfItems?: number;
 
-  @Metadata({ data: "json, name=startOrder" })
+  @SpeakeasyMetadata({ data: "json, name=startOrder" })
   startOrder?: number;
 }

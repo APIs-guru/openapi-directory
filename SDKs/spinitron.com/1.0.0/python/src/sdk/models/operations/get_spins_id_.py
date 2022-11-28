@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSpinsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class GetSpinsIDQueryParams:
 
 @dataclass
 class GetSpinsIDRequest:
-    path_params: GetSpinsIDPathParams = field(default=None)
-    query_params: GetSpinsIDQueryParams = field(default=None)
+    path_params: GetSpinsIDPathParams = field()
+    query_params: GetSpinsIDQueryParams = field()
     
 
 @dataclass
 class GetSpinsIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     spin: Optional[shared.Spin] = field(default=None)
-    status_code: int = field(default=None)
     

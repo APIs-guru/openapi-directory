@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColorInfo } from "./colorinfo";
+
 
 
 // DominantColorsAnnotation
@@ -8,6 +8,6 @@ import { ColorInfo } from "./colorinfo";
  * Set of dominant colors and their corresponding scores.
 **/
 export class DominantColorsAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colors", elemType: shared.ColorInfo })
+  @SpeakeasyMetadata({ data: "json, name=colors", elemType: ColorInfo })
   colors?: ColorInfo[];
 }

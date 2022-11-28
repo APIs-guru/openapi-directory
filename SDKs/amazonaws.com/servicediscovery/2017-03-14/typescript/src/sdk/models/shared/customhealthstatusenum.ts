@@ -1,6 +1,7 @@
 
 
+
 export enum CustomHealthStatusEnum {
-    Healthy = "HEALTHY"
-,    Unhealthy = "UNHEALTHY"
+    Healthy = "HEALTHY",
+    Unhealthy = "UNHEALTHY"
 }

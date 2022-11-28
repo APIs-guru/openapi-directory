@@ -28,11 +28,6 @@ type GicerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type GicerRequest struct {
-	Request  *GicerRequestBody `request:"mediaType=application/json"`
-	Security GicerSecurity
-}
-
 type Gicer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Gicer504ApplicationJSON struct {
 	Error            *Gicer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Gicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type GicerRequest struct {
+	Request  *GicerRequestBody `request:"mediaType=application/json"`
+	Security GicerSecurity
 }
 
 type GicerResponse struct {

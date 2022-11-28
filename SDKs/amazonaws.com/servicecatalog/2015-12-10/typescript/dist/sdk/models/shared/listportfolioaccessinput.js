@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListPortfolioAccessInput = /** @class */ (function (_super) {
     __extends(ListPortfolioAccessInput, _super);
     function ListPortfolioAccessInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], ListPortfolioAccessInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationParentId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationParentId" }),
         __metadata("design:type", String)
     ], ListPortfolioAccessInput.prototype, "organizationParentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], ListPortfolioAccessInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], ListPortfolioAccessInput.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], ListPortfolioAccessInput.prototype, "portfolioId", void 0);
     return ListPortfolioAccessInput;

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeployJobRunMetadata } from "./deployjobrunmetadata";
 
+
 export enum DeployJobRunFailureCauseEnum {
-    FailureCauseUnspecified = "FAILURE_CAUSE_UNSPECIFIED"
-,    CloudBuildUnavailable = "CLOUD_BUILD_UNAVAILABLE"
-,    ExecutionFailed = "EXECUTION_FAILED"
-,    DeadlineExceeded = "DEADLINE_EXCEEDED"
+    FailureCauseUnspecified = "FAILURE_CAUSE_UNSPECIFIED",
+    CloudBuildUnavailable = "CLOUD_BUILD_UNAVAILABLE",
+    ExecutionFailed = "EXECUTION_FAILED",
+    DeadlineExceeded = "DEADLINE_EXCEEDED"
 }
 
 
@@ -14,15 +15,15 @@ export enum DeployJobRunFailureCauseEnum {
  * DeployJobRun contains information specific to a deploy `JobRun`.
 **/
 export class DeployJobRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=build" })
+  @SpeakeasyMetadata({ data: "json, name=build" })
   build?: string;
 
-  @Metadata({ data: "json, name=failureCause" })
+  @SpeakeasyMetadata({ data: "json, name=failureCause" })
   failureCause?: DeployJobRunFailureCauseEnum;
 
-  @Metadata({ data: "json, name=failureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=failureMessage" })
   failureMessage?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: DeployJobRunMetadata;
 }

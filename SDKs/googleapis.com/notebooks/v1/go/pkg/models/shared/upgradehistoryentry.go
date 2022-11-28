@@ -17,6 +17,8 @@ const (
 	UpgradeHistoryEntryStateEnumFailed           UpgradeHistoryEntryStateEnum = "FAILED"
 )
 
+// UpgradeHistoryEntry
+// The entry of VM image upgrade history.
 type UpgradeHistoryEntry struct {
 	Action         *UpgradeHistoryEntryActionEnum `json:"action,omitempty"`
 	ContainerImage *string                        `json:"containerImage,omitempty"`

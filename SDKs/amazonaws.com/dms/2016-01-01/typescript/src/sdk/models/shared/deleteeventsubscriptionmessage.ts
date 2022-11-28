@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteEventSubscriptionMessage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DeleteEventSubscriptionMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SubscriptionName" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionName" })
   subscriptionName: string;
 }

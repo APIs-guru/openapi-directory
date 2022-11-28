@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GicerRequestBodyCertificateParameters extends SpeakeasyBase {
     customerId: string;
@@ -17,10 +17,6 @@ export declare class GicerRequestBody extends SpeakeasyBase {
 export declare class GicerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class GicerRequest extends SpeakeasyBase {
-    request?: GicerRequestBody;
-    security: GicerSecurity;
 }
 export declare enum Gicer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Gicer504ApplicationJsonErrorDescriptionEnum {
 export declare class Gicer504ApplicationJson extends SpeakeasyBase {
     error?: Gicer504ApplicationJsonErrorEnum;
     errorDescription?: Gicer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class GicerRequest extends SpeakeasyBase {
+    request?: GicerRequestBody;
+    security: GicerSecurity;
 }
 export declare class GicerResponse extends SpeakeasyBase {
     contentType: string;

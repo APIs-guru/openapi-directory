@@ -1,5 +1,7 @@
 package shared
 
+// PagespeedAPILoadingExperienceV5
+// The CrUX loading experience object that contains CrUX data breakdowns.
 type PagespeedAPILoadingExperienceV5 struct {
 	ID              *string                         `json:"id,omitempty"`
 	InitialURL      *string                         `json:"initial_url,omitempty"`

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SupplementaryFeature } from "./supplementaryfeature";
 // InputDataConfig
 /**
  * The data used to train a predictor. The data includes a dataset group and any supplementary features. You specify this object in the <a>CreatePredictor</a> request.
@@ -34,11 +34,11 @@ var InputDataConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DatasetGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetGroupArn" }),
         __metadata("design:type", String)
     ], InputDataConfig.prototype, "datasetGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SupplementaryFeatures", elemType: shared.SupplementaryFeature }),
+        SpeakeasyMetadata({ data: "json, name=SupplementaryFeatures", elemType: SupplementaryFeature }),
         __metadata("design:type", Array)
     ], InputDataConfig.prototype, "supplementaryFeatures", void 0);
     return InputDataConfig;

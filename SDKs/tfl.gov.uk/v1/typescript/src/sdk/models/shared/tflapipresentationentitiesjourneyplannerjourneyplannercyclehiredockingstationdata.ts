@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesJourneyPlannerJourneyPlannerCycleHireDockingStationData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationId" })
   destinationId?: string;
 
-  @Metadata({ data: "json, name=destinationNumberOfBikes" })
+  @SpeakeasyMetadata({ data: "json, name=destinationNumberOfBikes" })
   destinationNumberOfBikes?: number;
 
-  @Metadata({ data: "json, name=destinationNumberOfEmptySlots" })
+  @SpeakeasyMetadata({ data: "json, name=destinationNumberOfEmptySlots" })
   destinationNumberOfEmptySlots?: number;
 
-  @Metadata({ data: "json, name=originId" })
+  @SpeakeasyMetadata({ data: "json, name=originId" })
   originId?: string;
 
-  @Metadata({ data: "json, name=originNumberOfBikes" })
+  @SpeakeasyMetadata({ data: "json, name=originNumberOfBikes" })
   originNumberOfBikes?: number;
 
-  @Metadata({ data: "json, name=originNumberOfEmptySlots" })
+  @SpeakeasyMetadata({ data: "json, name=originNumberOfEmptySlots" })
   originNumberOfEmptySlots?: number;
 }

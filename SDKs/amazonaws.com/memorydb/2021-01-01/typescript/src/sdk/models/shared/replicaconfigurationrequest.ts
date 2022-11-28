@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplicaConfigurationRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to configure the number of replicas in a shard
 **/
 export class ReplicaConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicaCount" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaCount" })
   replicaCount?: number;
 }

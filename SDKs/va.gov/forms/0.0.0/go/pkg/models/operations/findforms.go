@@ -12,13 +12,13 @@ type FindFormsSecurity struct {
 	Apikey shared.SchemeApikey `security:"scheme,type=apiKey,subtype=header"`
 }
 
+type FindForms200ApplicationJSON struct {
+	Data []interface{} `json:"data"`
+}
+
 type FindFormsRequest struct {
 	QueryParams FindFormsQueryParams
 	Security    FindFormsSecurity
-}
-
-type FindForms200ApplicationJSON struct {
-	Data []interface{} `json:"data"`
 }
 
 type FindFormsResponse struct {

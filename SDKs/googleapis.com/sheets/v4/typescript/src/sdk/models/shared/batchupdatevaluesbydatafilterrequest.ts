@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFilterValueRange } from "./datafiltervaluerange";
 
+
 export enum BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum {
-    SerialNumber = "SERIAL_NUMBER"
-,    FormattedString = "FORMATTED_STRING"
+    SerialNumber = "SERIAL_NUMBER",
+    FormattedString = "FORMATTED_STRING"
 }
 
 export enum BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum {
-    FormattedValue = "FORMATTED_VALUE"
-,    UnformattedValue = "UNFORMATTED_VALUE"
-,    Formula = "FORMULA"
+    FormattedValue = "FORMATTED_VALUE",
+    UnformattedValue = "UNFORMATTED_VALUE",
+    Formula = "FORMULA"
 }
 
 export enum BatchUpdateValuesByDataFilterRequestValueInputOptionEnum {
-    InputValueOptionUnspecified = "INPUT_VALUE_OPTION_UNSPECIFIED"
-,    Raw = "RAW"
-,    UserEntered = "USER_ENTERED"
+    InputValueOptionUnspecified = "INPUT_VALUE_OPTION_UNSPECIFIED",
+    Raw = "RAW",
+    UserEntered = "USER_ENTERED"
 }
 
 
@@ -25,18 +25,18 @@ export enum BatchUpdateValuesByDataFilterRequestValueInputOptionEnum {
  * The request for updating more than one range of values in a spreadsheet.
 **/
 export class BatchUpdateValuesByDataFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.DataFilterValueRange })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: DataFilterValueRange })
   data?: DataFilterValueRange[];
 
-  @Metadata({ data: "json, name=includeValuesInResponse" })
+  @SpeakeasyMetadata({ data: "json, name=includeValuesInResponse" })
   includeValuesInResponse?: boolean;
 
-  @Metadata({ data: "json, name=responseDateTimeRenderOption" })
+  @SpeakeasyMetadata({ data: "json, name=responseDateTimeRenderOption" })
   responseDateTimeRenderOption?: BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum;
 
-  @Metadata({ data: "json, name=responseValueRenderOption" })
+  @SpeakeasyMetadata({ data: "json, name=responseValueRenderOption" })
   responseValueRenderOption?: BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum;
 
-  @Metadata({ data: "json, name=valueInputOption" })
+  @SpeakeasyMetadata({ data: "json, name=valueInputOption" })
   valueInputOption?: BatchUpdateValuesByDataFilterRequestValueInputOptionEnum;
 }

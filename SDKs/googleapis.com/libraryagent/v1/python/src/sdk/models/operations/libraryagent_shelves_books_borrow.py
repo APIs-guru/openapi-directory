@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LibraryagentShelvesBooksBorrowPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class LibraryagentShelvesBooksBorrowQueryParams:
 
 @dataclass
 class LibraryagentShelvesBooksBorrowSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LibraryagentShelvesBooksBorrowRequest:
-    path_params: LibraryagentShelvesBooksBorrowPathParams = field(default=None)
-    query_params: LibraryagentShelvesBooksBorrowQueryParams = field(default=None)
-    security: LibraryagentShelvesBooksBorrowSecurity = field(default=None)
+    path_params: LibraryagentShelvesBooksBorrowPathParams = field()
+    query_params: LibraryagentShelvesBooksBorrowQueryParams = field()
+    security: LibraryagentShelvesBooksBorrowSecurity = field()
     
 
 @dataclass
 class LibraryagentShelvesBooksBorrowResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_example_libraryagent_v1_book: Optional[shared.GoogleExampleLibraryagentV1Book] = field(default=None)
-    status_code: int = field(default=None)
     

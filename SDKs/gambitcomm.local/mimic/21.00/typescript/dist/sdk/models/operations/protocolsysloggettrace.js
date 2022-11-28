@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProtocolSyslogGetTracePathParams = /** @class */ (function (_super) {
     __extends(ProtocolSyslogGetTracePathParams, _super);
@@ -30,7 +30,7 @@ var ProtocolSyslogGetTracePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSyslogGetTracePathParams.prototype, "agentNum", void 0);
     return ProtocolSyslogGetTracePathParams;
@@ -42,7 +42,7 @@ var ProtocolSyslogGetTraceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSyslogGetTracePathParams)
     ], ProtocolSyslogGetTraceRequest.prototype, "pathParams", void 0);
     return ProtocolSyslogGetTraceRequest;
@@ -54,15 +54,15 @@ var ProtocolSyslogGetTraceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ConfigSyslog)
     ], ProtocolSyslogGetTraceResponse.prototype, "configSyslog", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSyslogGetTraceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSyslogGetTraceResponse.prototype, "statusCode", void 0);
     return ProtocolSyslogGetTraceResponse;

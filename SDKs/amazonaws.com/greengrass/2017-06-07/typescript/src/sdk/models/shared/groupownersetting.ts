@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupOwnerSetting
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Group owner related settings for local resources.
 **/
 export class GroupOwnerSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoAddGroupOwner" })
+  @SpeakeasyMetadata({ data: "json, name=AutoAddGroupOwner" })
   autoAddGroupOwner?: boolean;
 
-  @Metadata({ data: "json, name=GroupOwner" })
+  @SpeakeasyMetadata({ data: "json, name=GroupOwner" })
   groupOwner?: string;
 }

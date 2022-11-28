@@ -15,7 +15,7 @@ type UpdateVaultItemSecurity struct {
 
 type UpdateVaultItemRequest struct {
 	PathParams UpdateVaultItemPathParams
-	Request    *shared.FullItem `request:"mediaType=application/json"`
+	Request    *shared.FullItemInput `request:"mediaType=application/json"`
 	Security   UpdateVaultItemSecurity
 }
 

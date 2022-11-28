@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SearchResult } from "./searchresult";
 var PackageSearchResult = /** @class */ (function (_super) {
     __extends(PackageSearchResult, _super);
     function PackageSearchResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=package" }),
+        SpeakeasyMetadata({ data: "json, name=package" }),
         __metadata("design:type", String)
     ], PackageSearchResult.prototype, "package", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.SearchResult }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: SearchResult }),
         __metadata("design:type", Array)
     ], PackageSearchResult.prototype, "results", void 0);
     return PackageSearchResult;

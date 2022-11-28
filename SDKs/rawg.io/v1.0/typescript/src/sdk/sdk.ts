@@ -1,15 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.rawg.io/api",
+export const ServerList = [
+	"https://api.rawg.io/api",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +18,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // CreatorRolesList - Get a list of creator positions (jobs).
-  CreatorRolesList(
+  /**
+   * creatorRolesList - Get a list of creator positions (jobs).
+  **/
+  creatorRolesList(
     req: operations.CreatorRolesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatorRolesListResponse> {
@@ -68,12 +66,11 @@ export class SDK {
       req = new operations.CreatorRolesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/creator-roles";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -82,17 +79,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatorRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatorRolesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.creatorRolesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -104,8 +102,10 @@ export class SDK {
   }
 
   
-  // CreatorsList - Get a list of game creators.
-  CreatorsList(
+  /**
+   * creatorsList - Get a list of game creators.
+  **/
+  creatorsList(
     req: operations.CreatorsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatorsListResponse> {
@@ -113,12 +113,11 @@ export class SDK {
       req = new operations.CreatorsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/creators";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -127,17 +126,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatorsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatorsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.creatorsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -149,8 +149,10 @@ export class SDK {
   }
 
   
-  // CreatorsRead - Get details of the creator.
-  CreatorsRead(
+  /**
+   * creatorsRead - Get details of the creator.
+  **/
+  creatorsRead(
     req: operations.CreatorsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatorsReadResponse> {
@@ -158,23 +160,23 @@ export class SDK {
       req = new operations.CreatorsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/creators/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatorsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatorsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personSingle = httpRes?.data;
             }
             break;
@@ -186,8 +188,10 @@ export class SDK {
   }
 
   
-  // DevelopersList - Get a list of game developers.
-  DevelopersList(
+  /**
+   * developersList - Get a list of game developers.
+  **/
+  developersList(
     req: operations.DevelopersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DevelopersListResponse> {
@@ -195,12 +199,11 @@ export class SDK {
       req = new operations.DevelopersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/developers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -209,17 +212,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DevelopersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DevelopersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.developersList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -231,8 +235,10 @@ export class SDK {
   }
 
   
-  // DevelopersRead - Get details of the developer.
-  DevelopersRead(
+  /**
+   * developersRead - Get details of the developer.
+  **/
+  developersRead(
     req: operations.DevelopersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DevelopersReadResponse> {
@@ -240,23 +246,23 @@ export class SDK {
       req = new operations.DevelopersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/developers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DevelopersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DevelopersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.developerSingle = httpRes?.data;
             }
             break;
@@ -268,8 +274,10 @@ export class SDK {
   }
 
   
-  // GamesAchievementsRead - Get a list of game achievements.
-  GamesAchievementsRead(
+  /**
+   * gamesAchievementsRead - Get a list of game achievements.
+  **/
+  gamesAchievementsRead(
     req: operations.GamesAchievementsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesAchievementsReadResponse> {
@@ -277,23 +285,23 @@ export class SDK {
       req = new operations.GamesAchievementsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{id}/achievements", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesAchievementsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesAchievementsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentAchievement = httpRes?.data;
             }
             break;
@@ -305,8 +313,10 @@ export class SDK {
   }
 
   
-  // GamesAdditionsList - Get a list of DLC's for the game, GOTY and other editions, companion apps, etc.
-  GamesAdditionsList(
+  /**
+   * gamesAdditionsList - Get a list of DLC's for the game, GOTY and other editions, companion apps, etc.
+  **/
+  gamesAdditionsList(
     req: operations.GamesAdditionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesAdditionsListResponse> {
@@ -314,12 +324,11 @@ export class SDK {
       req = new operations.GamesAdditionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{game_pk}/additions", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -328,17 +337,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesAdditionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesAdditionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gamesAdditionsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -350,8 +360,10 @@ export class SDK {
   }
 
   
-  // GamesDevelopmentTeamList - Get a list of individual creators that were part of the development team.
-  GamesDevelopmentTeamList(
+  /**
+   * gamesDevelopmentTeamList - Get a list of individual creators that were part of the development team.
+  **/
+  gamesDevelopmentTeamList(
     req: operations.GamesDevelopmentTeamListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesDevelopmentTeamListResponse> {
@@ -359,12 +371,11 @@ export class SDK {
       req = new operations.GamesDevelopmentTeamListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{game_pk}/development-team", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -373,17 +384,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesDevelopmentTeamListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesDevelopmentTeamListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gamesDevelopmentTeamList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -395,8 +407,10 @@ export class SDK {
   }
 
   
-  // GamesGameSeriesList - Get a list of games that are part of the same series.
-  GamesGameSeriesList(
+  /**
+   * gamesGameSeriesList - Get a list of games that are part of the same series.
+  **/
+  gamesGameSeriesList(
     req: operations.GamesGameSeriesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesGameSeriesListResponse> {
@@ -404,12 +418,11 @@ export class SDK {
       req = new operations.GamesGameSeriesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{game_pk}/game-series", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -418,17 +431,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesGameSeriesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesGameSeriesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gamesGameSeriesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -440,8 +454,10 @@ export class SDK {
   }
 
   
-  // GamesList - Get a list of games.
-  GamesList(
+  /**
+   * gamesList - Get a list of games.
+  **/
+  gamesList(
     req: operations.GamesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesListResponse> {
@@ -449,12 +465,11 @@ export class SDK {
       req = new operations.GamesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/games";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -463,17 +478,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gamesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -485,8 +501,10 @@ export class SDK {
   }
 
   
-  // GamesMoviesRead - Get a list of game trailers.
-  GamesMoviesRead(
+  /**
+   * gamesMoviesRead - Get a list of game trailers.
+  **/
+  gamesMoviesRead(
     req: operations.GamesMoviesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesMoviesReadResponse> {
@@ -494,23 +512,23 @@ export class SDK {
       req = new operations.GamesMoviesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{id}/movies", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesMoviesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesMoviesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movie = httpRes?.data;
             }
             break;
@@ -522,8 +540,10 @@ export class SDK {
   }
 
   
-  // GamesParentGamesList - Get a list of parent games for DLC's and editions.
-  GamesParentGamesList(
+  /**
+   * gamesParentGamesList - Get a list of parent games for DLC's and editions.
+  **/
+  gamesParentGamesList(
     req: operations.GamesParentGamesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesParentGamesListResponse> {
@@ -531,12 +551,11 @@ export class SDK {
       req = new operations.GamesParentGamesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{game_pk}/parent-games", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -545,17 +564,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesParentGamesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesParentGamesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gamesParentGamesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -567,8 +587,10 @@ export class SDK {
   }
 
   
-  // GamesRead - Get details of the game.
-  GamesRead(
+  /**
+   * gamesRead - Get details of the game.
+  **/
+  gamesRead(
     req: operations.GamesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesReadResponse> {
@@ -576,23 +598,23 @@ export class SDK {
       req = new operations.GamesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gameSingle = httpRes?.data;
             }
             break;
@@ -604,8 +626,10 @@ export class SDK {
   }
 
   
-  // GamesRedditRead - Get a list of most recent posts from the game's subreddit.
-  GamesRedditRead(
+  /**
+   * gamesRedditRead - Get a list of most recent posts from the game's subreddit.
+  **/
+  gamesRedditRead(
     req: operations.GamesRedditReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesRedditReadResponse> {
@@ -613,23 +637,23 @@ export class SDK {
       req = new operations.GamesRedditReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{id}/reddit", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesRedditReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesRedditReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.reddit = httpRes?.data;
             }
             break;
@@ -641,8 +665,10 @@ export class SDK {
   }
 
   
-  // GamesScreenshotsList - Get screenshots for the game.
-  GamesScreenshotsList(
+  /**
+   * gamesScreenshotsList - Get screenshots for the game.
+  **/
+  gamesScreenshotsList(
     req: operations.GamesScreenshotsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesScreenshotsListResponse> {
@@ -650,12 +676,11 @@ export class SDK {
       req = new operations.GamesScreenshotsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{game_pk}/screenshots", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -664,17 +689,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesScreenshotsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesScreenshotsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gamesScreenshotsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -686,8 +712,10 @@ export class SDK {
   }
 
   
-  // GamesStoresList - Get links to the stores that sell the game.
-  GamesStoresList(
+  /**
+   * gamesStoresList - Get links to the stores that sell the game.
+  **/
+  gamesStoresList(
     req: operations.GamesStoresListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesStoresListResponse> {
@@ -695,12 +723,11 @@ export class SDK {
       req = new operations.GamesStoresListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{game_pk}/stores", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -709,17 +736,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesStoresListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesStoresListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gamesStoresList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -731,8 +759,10 @@ export class SDK {
   }
 
   
-  // GamesSuggestedRead - Get a list of visually similar games, available only for business and enterprise API users.
-  GamesSuggestedRead(
+  /**
+   * gamesSuggestedRead - Get a list of visually similar games, available only for business and enterprise API users.
+  **/
+  gamesSuggestedRead(
     req: operations.GamesSuggestedReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesSuggestedReadResponse> {
@@ -740,23 +770,23 @@ export class SDK {
       req = new operations.GamesSuggestedReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{id}/suggested", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesSuggestedReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesSuggestedReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.gameSingle = httpRes?.data;
             }
             break;
@@ -768,8 +798,10 @@ export class SDK {
   }
 
   
-  // GamesTwitchRead - Get streams on Twitch associated with the game, available only for business and enterprise API users.
-  GamesTwitchRead(
+  /**
+   * gamesTwitchRead - Get streams on Twitch associated with the game, available only for business and enterprise API users.
+  **/
+  gamesTwitchRead(
     req: operations.GamesTwitchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesTwitchReadResponse> {
@@ -777,23 +809,23 @@ export class SDK {
       req = new operations.GamesTwitchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{id}/twitch", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesTwitchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesTwitchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.twitch = httpRes?.data;
             }
             break;
@@ -805,8 +837,10 @@ export class SDK {
   }
 
   
-  // GamesYoutubeRead - Get videos from YouTube associated with the game, available only for business and enterprise API users.
-  GamesYoutubeRead(
+  /**
+   * gamesYoutubeRead - Get videos from YouTube associated with the game, available only for business and enterprise API users.
+  **/
+  gamesYoutubeRead(
     req: operations.GamesYoutubeReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GamesYoutubeReadResponse> {
@@ -814,23 +848,23 @@ export class SDK {
       req = new operations.GamesYoutubeReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/games/{id}/youtube", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GamesYoutubeReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GamesYoutubeReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.youtube = httpRes?.data;
             }
             break;
@@ -842,8 +876,10 @@ export class SDK {
   }
 
   
-  // GenresList - Get a list of video game genres.
-  GenresList(
+  /**
+   * genresList - Get a list of video game genres.
+  **/
+  genresList(
     req: operations.GenresListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenresListResponse> {
@@ -851,12 +887,11 @@ export class SDK {
       req = new operations.GenresListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/genres";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -865,17 +900,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenresListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GenresListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.genresList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -887,8 +923,10 @@ export class SDK {
   }
 
   
-  // GenresRead - Get details of the genre.
-  GenresRead(
+  /**
+   * genresRead - Get details of the genre.
+  **/
+  genresRead(
     req: operations.GenresReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenresReadResponse> {
@@ -896,23 +934,23 @@ export class SDK {
       req = new operations.GenresReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genres/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenresReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GenresReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.genreSingle = httpRes?.data;
             }
             break;
@@ -924,8 +962,10 @@ export class SDK {
   }
 
   
-  // PlatformsList - Get a list of video game platforms.
-  PlatformsList(
+  /**
+   * platformsList - Get a list of video game platforms.
+  **/
+  platformsList(
     req: operations.PlatformsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlatformsListResponse> {
@@ -933,12 +973,11 @@ export class SDK {
       req = new operations.PlatformsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/platforms";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -947,17 +986,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlatformsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlatformsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.platformsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -969,11 +1009,12 @@ export class SDK {
   }
 
   
-  // PlatformsListsParentsList - Get a list of parent platforms.
-  /** 
+  /**
+   * platformsListsParentsList - Get a list of parent platforms.
+   *
    * For instance, for PS2 and PS4 the “parent platform” is PlayStation.
   **/
-  PlatformsListsParentsList(
+  platformsListsParentsList(
     req: operations.PlatformsListsParentsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlatformsListsParentsListResponse> {
@@ -981,12 +1022,11 @@ export class SDK {
       req = new operations.PlatformsListsParentsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/platforms/lists/parents";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -995,17 +1035,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlatformsListsParentsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlatformsListsParentsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.platformsListsParentsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1017,8 +1058,10 @@ export class SDK {
   }
 
   
-  // PlatformsRead - Get details of the platform.
-  PlatformsRead(
+  /**
+   * platformsRead - Get details of the platform.
+  **/
+  platformsRead(
     req: operations.PlatformsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlatformsReadResponse> {
@@ -1026,23 +1069,23 @@ export class SDK {
       req = new operations.PlatformsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/platforms/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlatformsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlatformsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.platformSingle = httpRes?.data;
             }
             break;
@@ -1054,8 +1097,10 @@ export class SDK {
   }
 
   
-  // PublishersList - Get a list of video game publishers.
-  PublishersList(
+  /**
+   * publishersList - Get a list of video game publishers.
+  **/
+  publishersList(
     req: operations.PublishersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PublishersListResponse> {
@@ -1063,12 +1108,11 @@ export class SDK {
       req = new operations.PublishersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/publishers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1077,17 +1121,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PublishersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PublishersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.publishersList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1099,8 +1144,10 @@ export class SDK {
   }
 
   
-  // PublishersRead - Get details of the publisher.
-  PublishersRead(
+  /**
+   * publishersRead - Get details of the publisher.
+  **/
+  publishersRead(
     req: operations.PublishersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PublishersReadResponse> {
@@ -1108,23 +1155,23 @@ export class SDK {
       req = new operations.PublishersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/publishers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PublishersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PublishersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.publisherSingle = httpRes?.data;
             }
             break;
@@ -1136,8 +1183,10 @@ export class SDK {
   }
 
   
-  // StoresList - Get a list of video game storefronts.
-  StoresList(
+  /**
+   * storesList - Get a list of video game storefronts.
+  **/
+  storesList(
     req: operations.StoresListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.StoresListResponse> {
@@ -1145,12 +1194,11 @@ export class SDK {
       req = new operations.StoresListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/stores";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1159,17 +1207,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.StoresListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.StoresListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.storesList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1181,8 +1230,10 @@ export class SDK {
   }
 
   
-  // StoresRead - Get details of the store.
-  StoresRead(
+  /**
+   * storesRead - Get details of the store.
+  **/
+  storesRead(
     req: operations.StoresReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.StoresReadResponse> {
@@ -1190,23 +1241,23 @@ export class SDK {
       req = new operations.StoresReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stores/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.StoresReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.StoresReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.storeSingle = httpRes?.data;
             }
             break;
@@ -1218,8 +1269,10 @@ export class SDK {
   }
 
   
-  // TagsList - Get a list of tags.
-  TagsList(
+  /**
+   * tagsList - Get a list of tags.
+  **/
+  tagsList(
     req: operations.TagsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TagsListResponse> {
@@ -1227,12 +1280,11 @@ export class SDK {
       req = new operations.TagsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1241,17 +1293,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TagsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TagsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagsList200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1263,8 +1316,10 @@ export class SDK {
   }
 
   
-  // TagsRead - Get details of the tag.
-  TagsRead(
+  /**
+   * tagsRead - Get details of the tag.
+  **/
+  tagsRead(
     req: operations.TagsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TagsReadResponse> {
@@ -1272,23 +1327,23 @@ export class SDK {
       req = new operations.TagsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TagsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TagsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagSingle = httpRes?.data;
             }
             break;

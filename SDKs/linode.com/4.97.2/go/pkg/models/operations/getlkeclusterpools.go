@@ -8,22 +8,9 @@ type GetLkeClusterPoolsPathParams struct {
 	ClusterID int64 `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type GetLkeClusterPoolsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLkeClusterPoolsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLkeClusterPoolsSecurity struct {
-	Option1 *GetLkeClusterPoolsSecurityOption1 `security:"option"`
-	Option2 *GetLkeClusterPoolsSecurityOption2 `security:"option"`
-}
-
-type GetLkeClusterPoolsRequest struct {
-	PathParams GetLkeClusterPoolsPathParams
-	Security   GetLkeClusterPoolsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLkeClusterPools200ApplicationJSON struct {
@@ -35,6 +22,11 @@ type GetLkeClusterPools200ApplicationJSON struct {
 
 type GetLkeClusterPoolsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLkeClusterPoolsRequest struct {
+	PathParams GetLkeClusterPoolsPathParams
+	Security   GetLkeClusterPoolsSecurity
 }
 
 type GetLkeClusterPoolsResponse struct {

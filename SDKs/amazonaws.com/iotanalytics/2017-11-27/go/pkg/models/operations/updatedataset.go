@@ -18,11 +18,15 @@ type UpdateDatasetHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateDatasetRequestBodyRetentionPeriod
+// How long, in days, message data is kept.
 type UpdateDatasetRequestBodyRetentionPeriod struct {
 	NumberOfDays *int64 `json:"numberOfDays,omitempty"`
 	Unlimited    *bool  `json:"unlimited,omitempty"`
 }
 
+// UpdateDatasetRequestBodyVersioningConfiguration
+// Information about the versioning of dataset contents.
 type UpdateDatasetRequestBodyVersioningConfiguration struct {
 	MaxVersions *int64 `json:"maxVersions,omitempty"`
 	Unlimited   *bool  `json:"unlimited,omitempty"`

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortalSummary } from "./portalsummary";
 
 
+
 export class ListPortalsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=portalSummaries", elemType: shared.PortalSummary })
+  @SpeakeasyMetadata({ data: "json, name=portalSummaries", elemType: PortalSummary })
   portalSummaries?: PortalSummary[];
 }

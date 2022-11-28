@@ -1,5 +1,7 @@
 package shared
 
+// TextStyleSuggestionState
+// A mask that indicates which of the fields on the base TextStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
 type TextStyleSuggestionState struct {
 	BackgroundColorSuggested    *bool `json:"backgroundColorSuggested,omitempty"`
 	BaselineOffsetSuggested     *bool `json:"baselineOffsetSuggested,omitempty"`

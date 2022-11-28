@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TrapDest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IP" })
+  @SpeakeasyMetadata({ data: "json, name=IP" })
   ip?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 }

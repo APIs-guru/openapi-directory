@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tablecolumnproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableStyle:
-    table_column_properties: Optional[List[tablecolumnproperties.TableColumnProperties]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableColumnProperties' }})
+    r"""TableStyle
+    Styles that apply to a table.
+    """
+    
+    table_column_properties: Optional[List[TableColumnProperties]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableColumnProperties') }})
     

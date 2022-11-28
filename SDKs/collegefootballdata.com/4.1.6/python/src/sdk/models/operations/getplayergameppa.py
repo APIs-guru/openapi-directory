@@ -17,12 +17,12 @@ class GetPlayerGamePpaQueryParams:
 
 @dataclass
 class GetPlayerGamePpaRequest:
-    query_params: GetPlayerGamePpaQueryParams = field(default=None)
+    query_params: GetPlayerGamePpaQueryParams = field()
     
 
 @dataclass
 class GetPlayerGamePpaResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_game_ppas: Optional[List[shared.PlayerGamePpa]] = field(default=None)
-    status_code: int = field(default=None)
     

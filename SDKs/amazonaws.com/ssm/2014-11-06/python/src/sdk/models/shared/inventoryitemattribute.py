@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inventoryattributedatatype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InventoryItemAttribute:
-    data_type: inventoryattributedatatype_enum.InventoryAttributeDataTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataType' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""InventoryItemAttribute
+    Attributes are the entries within the inventory item content. It contains name and value.
+    """
+    
+    data_type: InventoryAttributeDataTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataType') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

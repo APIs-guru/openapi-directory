@@ -1,6 +1,7 @@
 
 
+
 export enum StreamingClipboardModeEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

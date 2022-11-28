@@ -18,6 +18,8 @@ type UpdateAccessPolicyHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateAccessPolicyRequestBodyAccessPolicyIdentity
+// <p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can't use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">Amazon Web Services SSO console</a>.</p> </note>
 type UpdateAccessPolicyRequestBodyAccessPolicyIdentity struct {
 	Group   *shared.GroupIdentity   `json:"group,omitempty"`
 	IamRole *shared.IamRoleIdentity `json:"iamRole,omitempty"`
@@ -32,6 +34,8 @@ const (
 	UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnumViewer        UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum = "VIEWER"
 )
 
+// UpdateAccessPolicyRequestBodyAccessPolicyResource
+// Contains an IoT SiteWise Monitor resource ID for a portal or project.
 type UpdateAccessPolicyRequestBodyAccessPolicyResource struct {
 	Portal  *shared.PortalResource  `json:"portal,omitempty"`
 	Project *shared.ProjectResource `json:"project,omitempty"`

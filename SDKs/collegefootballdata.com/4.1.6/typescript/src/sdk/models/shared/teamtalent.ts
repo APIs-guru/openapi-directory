@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TeamTalent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=school" })
+  @SpeakeasyMetadata({ data: "json, name=school" })
   school?: string;
 
-  @Metadata({ data: "json, name=talent" })
+  @SpeakeasyMetadata({ data: "json, name=talent" })
   talent?: number;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year?: number;
 }

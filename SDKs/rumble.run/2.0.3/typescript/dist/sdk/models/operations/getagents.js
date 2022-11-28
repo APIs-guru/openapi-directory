@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAgentsSecurity = /** @class */ (function (_super) {
     __extends(GetAgentsSecurity, _super);
@@ -30,7 +30,7 @@ var GetAgentsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetAgentsSecurity.prototype, "bearerAuth", void 0);
     return GetAgentsSecurity;
@@ -42,7 +42,7 @@ var GetAgentsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAgentsSecurity)
     ], GetAgentsRequest.prototype, "security", void 0);
     return GetAgentsRequest;
@@ -54,15 +54,15 @@ var GetAgentsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.Agent }),
+        SpeakeasyMetadata({ elemType: shared.Agent }),
         __metadata("design:type", Array)
     ], GetAgentsResponse.prototype, "agents", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAgentsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAgentsResponse.prototype, "statusCode", void 0);
     return GetAgentsResponse;

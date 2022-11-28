@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sourceobjectidentifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LookupStreamObjectRequest:
-    source_object_identifier: Optional[sourceobjectidentifier.SourceObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceObjectIdentifier' }})
+    r"""LookupStreamObjectRequest
+    Request for looking up a specific stream object by its source object identifier.
+    """
+    
+    source_object_identifier: Optional[SourceObjectIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceObjectIdentifier') }})
     

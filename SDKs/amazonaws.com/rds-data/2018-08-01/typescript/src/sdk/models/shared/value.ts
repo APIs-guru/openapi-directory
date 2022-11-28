@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Value } from "./value";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructValue } from "./structvalue";
+
 
 
 // Value
@@ -9,33 +8,33 @@ import { StructValue } from "./structvalue";
  * <p>Contains the value of a column.</p> <pre><code> &lt;important&gt; &lt;p&gt;This data type is deprecated.&lt;/p&gt; &lt;/important&gt; </code></pre>
 **/
 export class Value extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayValues", elemType: shared.Value })
+  @SpeakeasyMetadata({ data: "json, name=arrayValues", elemType: Value })
   arrayValues?: Value[];
 
-  @Metadata({ data: "json, name=bigIntValue" })
+  @SpeakeasyMetadata({ data: "json, name=bigIntValue" })
   bigIntValue?: number;
 
-  @Metadata({ data: "json, name=bitValue" })
+  @SpeakeasyMetadata({ data: "json, name=bitValue" })
   bitValue?: boolean;
 
-  @Metadata({ data: "json, name=blobValue" })
+  @SpeakeasyMetadata({ data: "json, name=blobValue" })
   blobValue?: string;
 
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=intValue" })
+  @SpeakeasyMetadata({ data: "json, name=intValue" })
   intValue?: number;
 
-  @Metadata({ data: "json, name=isNull" })
+  @SpeakeasyMetadata({ data: "json, name=isNull" })
   isNull?: boolean;
 
-  @Metadata({ data: "json, name=realValue" })
+  @SpeakeasyMetadata({ data: "json, name=realValue" })
   realValue?: number;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 
-  @Metadata({ data: "json, name=structValue" })
+  @SpeakeasyMetadata({ data: "json, name=structValue" })
   structValue?: StructValue;
 }

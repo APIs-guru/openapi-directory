@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetUsersIdsMergesPathParams:
-    ids: str = field(default=None, metadata={'path_param': { 'field_name': 'ids', 'style': 'simple', 'explode': False }})
+    ids: str = field(metadata={'path_param': { 'field_name': 'ids', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetUsersIdsMergesQueryParams:
 
 @dataclass
 class GetUsersIdsMergesRequest:
-    path_params: GetUsersIdsMergesPathParams = field(default=None)
-    query_params: GetUsersIdsMergesQueryParams = field(default=None)
+    path_params: GetUsersIdsMergesPathParams = field()
+    query_params: GetUsersIdsMergesQueryParams = field()
     
 
 @dataclass
 class GetUsersIdsMergesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

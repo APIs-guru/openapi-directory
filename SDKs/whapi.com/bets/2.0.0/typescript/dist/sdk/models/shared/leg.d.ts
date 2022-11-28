@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Part } from "./part";
 export declare class Leg extends SpeakeasyBase {
     parts: Part[];

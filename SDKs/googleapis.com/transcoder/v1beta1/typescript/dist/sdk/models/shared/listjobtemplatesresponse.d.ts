@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JobTemplate } from "./jobtemplate";
 /**
  * Response message for `TranscoderService.ListJobTemplates`.

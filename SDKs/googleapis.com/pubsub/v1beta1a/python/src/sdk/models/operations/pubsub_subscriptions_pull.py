@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class PubsubSubscriptionsPullQueryParams:
 
 @dataclass
 class PubsubSubscriptionsPullSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubSubscriptionsPullSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class PubsubSubscriptionsPullSecurity:
 
 @dataclass
 class PubsubSubscriptionsPullRequest:
-    query_params: PubsubSubscriptionsPullQueryParams = field(default=None)
+    query_params: PubsubSubscriptionsPullQueryParams = field()
+    security: PubsubSubscriptionsPullSecurity = field()
     request: Optional[shared.PullRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubSubscriptionsPullSecurity = field(default=None)
     
 
 @dataclass
 class PubsubSubscriptionsPullResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pull_response: Optional[shared.PullResponse] = field(default=None)
-    status_code: int = field(default=None)
     

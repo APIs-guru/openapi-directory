@@ -1,18 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PolicyAlternativeNameServerConfigTargetNameServerForwardingPathEnum {
-    Default = "default"
-,    Private = "private"
+    Default = "default",
+    Private = "private"
 }
 
 
 export class PolicyAlternativeNameServerConfigTargetNameServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forwardingPath" })
+  @SpeakeasyMetadata({ data: "json, name=forwardingPath" })
   forwardingPath?: PolicyAlternativeNameServerConfigTargetNameServerForwardingPathEnum;
 
-  @Metadata({ data: "json, name=ipv4Address" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4Address" })
   ipv4Address?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6Address" })
+  ipv6Address?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

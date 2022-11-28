@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskDefinitionFieldEnum } from "./taskdefinitionfieldenum";
 
 
+
 export class DescribeTaskDefinitionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=include" })
+  @SpeakeasyMetadata({ data: "json, name=include" })
   include?: TaskDefinitionFieldEnum[];
 
-  @Metadata({ data: "json, name=taskDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=taskDefinition" })
   taskDefinition: string;
 }

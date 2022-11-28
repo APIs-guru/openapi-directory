@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OperationRead } from "./operationread";
 export declare class OperationReadList extends SpeakeasyBase {
     operations: OperationRead[];

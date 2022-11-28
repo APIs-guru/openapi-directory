@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3IntentCoverage } from "./googleclouddialogflowcxv3intentcoverage";
 import { GoogleCloudDialogflowCxV3TransitionRouteGroupCoverage } from "./googleclouddialogflowcxv3transitionroutegroupcoverage";
 import { GoogleCloudDialogflowCxV3TransitionCoverage } from "./googleclouddialogflowcxv3transitioncoverage";
+
 
 
 // GoogleCloudDialogflowCxV3CalculateCoverageResponse
@@ -9,15 +10,15 @@ import { GoogleCloudDialogflowCxV3TransitionCoverage } from "./googleclouddialog
  * The response message for TestCases.CalculateCoverage.
 **/
 export class GoogleCloudDialogflowCxV3CalculateCoverageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agent" })
+  @SpeakeasyMetadata({ data: "json, name=agent" })
   agent?: string;
 
-  @Metadata({ data: "json, name=intentCoverage" })
+  @SpeakeasyMetadata({ data: "json, name=intentCoverage" })
   intentCoverage?: GoogleCloudDialogflowCxV3IntentCoverage;
 
-  @Metadata({ data: "json, name=routeGroupCoverage" })
+  @SpeakeasyMetadata({ data: "json, name=routeGroupCoverage" })
   routeGroupCoverage?: GoogleCloudDialogflowCxV3TransitionRouteGroupCoverage;
 
-  @Metadata({ data: "json, name=transitionCoverage" })
+  @SpeakeasyMetadata({ data: "json, name=transitionCoverage" })
   transitionCoverage?: GoogleCloudDialogflowCxV3TransitionCoverage;
 }

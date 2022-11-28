@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreatePlatformVersionActionEnum(str, Enum):
     CREATE_PLATFORM_VERSION = "CreatePlatformVersion"
@@ -10,8 +14,8 @@ class PostCreatePlatformVersionVersionEnum(str, Enum):
 
 @dataclass
 class PostCreatePlatformVersionQueryParams:
-    action: PostCreatePlatformVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreatePlatformVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreatePlatformVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreatePlatformVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreatePlatformVersionHeaders:
 
 @dataclass
 class PostCreatePlatformVersionRequest:
-    query_params: PostCreatePlatformVersionQueryParams = field(default=None)
-    headers: PostCreatePlatformVersionHeaders = field(default=None)
+    headers: PostCreatePlatformVersionHeaders = field()
+    query_params: PostCreatePlatformVersionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreatePlatformVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

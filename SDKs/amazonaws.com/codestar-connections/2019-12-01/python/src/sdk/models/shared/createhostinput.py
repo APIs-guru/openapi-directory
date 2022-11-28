@@ -1,17 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import providertype_enum
-from . import tag
-from . import vpcconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateHostInput:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    provider_endpoint: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProviderEndpoint' }})
-    provider_type: providertype_enum.ProviderTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProviderType' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    vpc_configuration: Optional[vpcconfiguration.VpcConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcConfiguration' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    provider_endpoint: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProviderEndpoint') }})
+    provider_type: ProviderTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProviderType') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    vpc_configuration: Optional[VpcConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcConfiguration') }})
     

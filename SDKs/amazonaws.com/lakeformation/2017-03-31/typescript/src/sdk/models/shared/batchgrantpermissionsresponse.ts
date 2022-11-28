@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchPermissionsFailureEntry } from "./batchpermissionsfailureentry";
 
 
+
 export class BatchGrantPermissionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Failures", elemType: shared.BatchPermissionsFailureEntry })
+  @SpeakeasyMetadata({ data: "json, name=Failures", elemType: BatchPermissionsFailureEntry })
   failures?: BatchPermissionsFailureEntry[];
 }

@@ -12,6 +12,8 @@ const (
 	FeedContentTypeEnumRelationship           FeedContentTypeEnum = "RELATIONSHIP"
 )
 
+// Feed
+// An asset feed used to export asset updates to a destinations. An asset feed filter controls what updates are exported. The asset feed must be created within a project, organization, or folder. Supported destinations are: Pub/Sub topics.
 type Feed struct {
 	AssetNames        []string             `json:"assetNames,omitempty"`
 	AssetTypes        []string             `json:"assetTypes,omitempty"`

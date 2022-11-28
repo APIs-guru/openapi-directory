@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1EntityCompatibilityStatusCompatibility } from "./googleclouddataplexv1entitycompatibilitystatuscompatibility";
-import { GoogleCloudDataplexV1EntityCompatibilityStatusCompatibility } from "./googleclouddataplexv1entitycompatibilitystatuscompatibility";
+
 
 
 // GoogleCloudDataplexV1EntityCompatibilityStatus
@@ -8,9 +8,9 @@ import { GoogleCloudDataplexV1EntityCompatibilityStatusCompatibility } from "./g
  * Provides compatibility information for various metadata stores.
 **/
 export class GoogleCloudDataplexV1EntityCompatibilityStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigquery" })
+  @SpeakeasyMetadata({ data: "json, name=bigquery" })
   bigquery?: GoogleCloudDataplexV1EntityCompatibilityStatusCompatibility;
 
-  @Metadata({ data: "json, name=hiveMetastore" })
+  @SpeakeasyMetadata({ data: "json, name=hiveMetastore" })
   hiveMetastore?: GoogleCloudDataplexV1EntityCompatibilityStatusCompatibility;
 }

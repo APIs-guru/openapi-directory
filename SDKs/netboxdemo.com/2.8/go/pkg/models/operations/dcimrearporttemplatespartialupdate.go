@@ -10,7 +10,7 @@ type DcimRearPortTemplatesPartialUpdatePathParams struct {
 
 type DcimRearPortTemplatesPartialUpdateRequest struct {
 	PathParams DcimRearPortTemplatesPartialUpdatePathParams
-	Request    shared.WritableRearPortTemplate `request:"mediaType=application/json"`
+	Request    shared.WritableRearPortTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimRearPortTemplatesPartialUpdateResponse struct {

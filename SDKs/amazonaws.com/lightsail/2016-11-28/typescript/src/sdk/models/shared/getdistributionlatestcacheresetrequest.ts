@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDistributionLatestCacheResetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distributionName" })
+  @SpeakeasyMetadata({ data: "json, name=distributionName" })
   distributionName?: string;
 }

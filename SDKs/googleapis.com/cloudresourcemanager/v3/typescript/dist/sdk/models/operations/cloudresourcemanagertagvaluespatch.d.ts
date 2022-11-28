@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudresourcemanagerTagValuesPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -25,7 +25,7 @@ export declare class CloudresourcemanagerTagValuesPatchSecurity extends Speakeas
 export declare class CloudresourcemanagerTagValuesPatchRequest extends SpeakeasyBase {
     pathParams: CloudresourcemanagerTagValuesPatchPathParams;
     queryParams: CloudresourcemanagerTagValuesPatchQueryParams;
-    request?: shared.TagValue;
+    request?: shared.TagValueInput;
     security: CloudresourcemanagerTagValuesPatchSecurity;
 }
 export declare class CloudresourcemanagerTagValuesPatchResponse extends SpeakeasyBase {

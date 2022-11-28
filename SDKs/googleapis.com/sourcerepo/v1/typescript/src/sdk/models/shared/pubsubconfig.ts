@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PubsubConfigMessageFormatEnum {
-    MessageFormatUnspecified = "MESSAGE_FORMAT_UNSPECIFIED"
-,    Protobuf = "PROTOBUF"
-,    Json = "JSON"
+    MessageFormatUnspecified = "MESSAGE_FORMAT_UNSPECIFIED",
+    Protobuf = "PROTOBUF",
+    Json = "JSON"
 }
 
 
@@ -12,12 +13,12 @@ export enum PubsubConfigMessageFormatEnum {
  * Configuration to publish a Cloud Pub/Sub message.
 **/
 export class PubsubConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageFormat" })
+  @SpeakeasyMetadata({ data: "json, name=messageFormat" })
   messageFormat?: PubsubConfigMessageFormatEnum;
 
-  @Metadata({ data: "json, name=serviceAccountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
   serviceAccountEmail?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }

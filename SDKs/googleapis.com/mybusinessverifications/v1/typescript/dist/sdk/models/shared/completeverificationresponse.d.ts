@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Verification } from "./verification";
 /**
  * Response message for Verifications.CompleteVerificationAction.

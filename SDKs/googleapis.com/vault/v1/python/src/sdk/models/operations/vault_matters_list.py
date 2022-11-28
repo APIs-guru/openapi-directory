@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class VaultMattersListStateEnum(str, Enum):
@@ -35,14 +36,14 @@ class VaultMattersListQueryParams:
 
 @dataclass
 class VaultMattersListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -53,13 +54,13 @@ class VaultMattersListSecurity:
 
 @dataclass
 class VaultMattersListRequest:
-    query_params: VaultMattersListQueryParams = field(default=None)
-    security: VaultMattersListSecurity = field(default=None)
+    query_params: VaultMattersListQueryParams = field()
+    security: VaultMattersListSecurity = field()
     
 
 @dataclass
 class VaultMattersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_matters_response: Optional[shared.ListMattersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

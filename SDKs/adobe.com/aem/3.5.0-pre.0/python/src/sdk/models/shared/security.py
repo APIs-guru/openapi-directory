@@ -4,10 +4,11 @@ from dataclasses import dataclass, field
 
 @dataclass
 class SchemeAemAuth:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    password: str = field(metadata={'security': { 'field_name': 'password' }})
+    username: str = field(metadata={'security': { 'field_name': 'username' }})
     
 
 @dataclass
 class Security:
-    aem_auth: SchemeAemAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    aem_auth: SchemeAemAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     

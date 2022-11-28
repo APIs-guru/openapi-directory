@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class SampleChannelDataPathParams:
-    channel_name: str = field(default=None, metadata={'path_param': { 'field_name': 'channelName', 'style': 'simple', 'explode': False }})
+    channel_name: str = field(metadata={'path_param': { 'field_name': 'channelName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,19 +31,19 @@ class SampleChannelDataHeaders:
 
 @dataclass
 class SampleChannelDataRequest:
-    path_params: SampleChannelDataPathParams = field(default=None)
-    query_params: SampleChannelDataQueryParams = field(default=None)
-    headers: SampleChannelDataHeaders = field(default=None)
+    headers: SampleChannelDataHeaders = field()
+    path_params: SampleChannelDataPathParams = field()
+    query_params: SampleChannelDataQueryParams = field()
     
 
 @dataclass
 class SampleChannelDataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     sample_channel_data_response: Optional[shared.SampleChannelDataResponse] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

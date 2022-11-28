@@ -1,5 +1,7 @@
 package shared
 
+// RedshiftDestinationDescription
+// Describes a destination in Amazon Redshift.
 type RedshiftDestinationDescription struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions,omitempty"`
 	ClusterJdbcurl           string                    `json:"ClusterJDBCURL"`

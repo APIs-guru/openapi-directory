@@ -4,12 +4,16 @@ type UpdateDeviceWirelessRadioSettingsPathParams struct {
 	Serial string `pathParam:"style=simple,explode=false,name=serial"`
 }
 
+// UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings
+// Manual radio settings for 5 GHz.
 type UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings struct {
 	Channel      *int64 `json:"channel,omitempty"`
 	ChannelWidth *int64 `json:"channelWidth,omitempty"`
 	TargetPower  *int64 `json:"targetPower,omitempty"`
 }
 
+// UpdateDeviceWirelessRadioSettingsRequestBodyTwoFourGhzSettings
+// Manual radio settings for 2.4 GHz.
 type UpdateDeviceWirelessRadioSettingsRequestBodyTwoFourGhzSettings struct {
 	Channel     *int64 `json:"channel,omitempty"`
 	TargetPower *int64 `json:"targetPower,omitempty"`

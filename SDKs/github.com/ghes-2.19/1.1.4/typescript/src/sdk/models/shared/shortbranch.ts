@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BranchProtection } from "./branchprotection";
 
 
+
 export class ShortBranchCommit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
@@ -16,18 +17,18 @@ export class ShortBranchCommit extends SpeakeasyBase {
  * Short Branch
 **/
 export class ShortBranch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commit" })
+  @SpeakeasyMetadata({ data: "json, name=commit" })
   commit: ShortBranchCommit;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=protected" })
+  @SpeakeasyMetadata({ data: "json, name=protected" })
   protected: boolean;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection?: BranchProtection;
 
-  @Metadata({ data: "json, name=protection_url" })
+  @SpeakeasyMetadata({ data: "json, name=protection_url" })
   protectionUrl?: string;
 }

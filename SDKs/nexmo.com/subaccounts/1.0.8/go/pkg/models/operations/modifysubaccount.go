@@ -13,12 +13,6 @@ type ModifySubaccountSecurity struct {
 	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type ModifySubaccountRequest struct {
-	PathParams ModifySubaccountPathParams
-	Request    shared.ModifySubaccountRequest `request:"mediaType=application/json"`
-	Security   ModifySubaccountSecurity
-}
-
 type ModifySubaccount401ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -26,6 +20,8 @@ type ModifySubaccount401ApplicationJSON struct {
 	Type     string `json:"type"`
 }
 
+// ModifySubaccount404ApplicationJSON
+// Invalid API Key
 type ModifySubaccount404ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -44,6 +40,12 @@ type ModifySubaccount422ApplicationJSON struct {
 	InvalidParameters []ModifySubaccount422ApplicationJSONInvalidParameters `json:"invalid_parameters"`
 	Title             string                                                `json:"title"`
 	Type              string                                                `json:"type"`
+}
+
+type ModifySubaccountRequest struct {
+	PathParams ModifySubaccountPathParams
+	Request    shared.ModifySubaccountRequest `request:"mediaType=application/json"`
+	Security   ModifySubaccountSecurity
 }
 
 type ModifySubaccountResponse struct {

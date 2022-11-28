@@ -30,7 +30,7 @@ type AuthorizedbuyersmarketplaceBuyersProposalsAddNoteSecurity struct {
 type AuthorizedbuyersmarketplaceBuyersProposalsAddNoteRequest struct {
 	PathParams  AuthorizedbuyersmarketplaceBuyersProposalsAddNotePathParams
 	QueryParams AuthorizedbuyersmarketplaceBuyersProposalsAddNoteQueryParams
-	Request     *shared.AddNoteRequest `request:"mediaType=application/json"`
+	Request     *shared.AddNoteRequestInput `request:"mediaType=application/json"`
 	Security    AuthorizedbuyersmarketplaceBuyersProposalsAddNoteSecurity
 }
 

@@ -11,12 +11,12 @@ class WellsTagsListQueryParams:
 
 @dataclass
 class WellsTagsListRequest:
-    query_params: WellsTagsListQueryParams = field(default=None)
+    query_params: WellsTagsListQueryParams = field()
     
 
 @dataclass
 class WellsTagsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     well_tag_searches: Optional[List[shared.WellTagSearch]] = field(default=None)
     

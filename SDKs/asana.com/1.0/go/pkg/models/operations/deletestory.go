@@ -13,13 +13,13 @@ type DeleteStoryQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeleteStory200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeleteStoryRequest struct {
 	PathParams  DeleteStoryPathParams
 	QueryParams DeleteStoryQueryParams
-}
-
-type DeleteStory200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteStoryResponse struct {

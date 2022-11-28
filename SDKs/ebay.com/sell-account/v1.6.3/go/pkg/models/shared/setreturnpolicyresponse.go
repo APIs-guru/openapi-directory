@@ -1,5 +1,7 @@
 package shared
 
+// SetReturnPolicyResponse
+// Complex type that that gets populated with a response containing a return policy.
 type SetReturnPolicyResponse struct {
 	CategoryTypes                 []CategoryType                   `json:"categoryTypes,omitempty"`
 	Description                   *string                          `json:"description,omitempty"`

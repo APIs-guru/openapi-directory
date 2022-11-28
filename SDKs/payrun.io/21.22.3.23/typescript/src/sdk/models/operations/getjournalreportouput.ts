@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetJournalReportOuputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=LedgerTarget" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LedgerTarget" })
   ledgerTarget: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PayFrequency" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayFrequency" })
   payFrequency: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" })
   taxPeriod?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
   taxYear: string;
 }
 
 
 export class GetJournalReportOuputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetJournalReportOuputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetJournalReportOuputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetJournalReportOuputHeaders;
 }
 
 
 export class GetJournalReportOuputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getJournalReportOuput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

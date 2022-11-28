@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class ChromeuxreportRecordsQueryRecordQueryParams:
 
 @dataclass
 class ChromeuxreportRecordsQueryRecordRequest:
-    query_params: ChromeuxreportRecordsQueryRecordQueryParams = field(default=None)
+    query_params: ChromeuxreportRecordsQueryRecordQueryParams = field()
     request: Optional[shared.QueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ChromeuxreportRecordsQueryRecordResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     query_response: Optional[shared.QueryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

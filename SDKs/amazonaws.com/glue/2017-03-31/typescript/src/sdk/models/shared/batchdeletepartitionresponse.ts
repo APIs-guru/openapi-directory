@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartitionError } from "./partitionerror";
 
 
+
 export class BatchDeletePartitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.PartitionError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: PartitionError })
   errors?: PartitionError[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AvatarsGetCreditCardPathParams = /** @class */ (function (_super) {
     __extends(AvatarsGetCreditCardPathParams, _super);
@@ -30,7 +30,7 @@ var AvatarsGetCreditCardPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=code" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=code" }),
         __metadata("design:type", String)
     ], AvatarsGetCreditCardPathParams.prototype, "code", void 0);
     return AvatarsGetCreditCardPathParams;
@@ -42,15 +42,15 @@ var AvatarsGetCreditCardQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", Number)
     ], AvatarsGetCreditCardQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quality" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quality" }),
         __metadata("design:type", Number)
     ], AvatarsGetCreditCardQueryParams.prototype, "quality", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], AvatarsGetCreditCardQueryParams.prototype, "width", void 0);
     return AvatarsGetCreditCardQueryParams;
@@ -62,11 +62,11 @@ var AvatarsGetCreditCardSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], AvatarsGetCreditCardSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], AvatarsGetCreditCardSecurity.prototype, "project", void 0);
     return AvatarsGetCreditCardSecurity;
@@ -78,15 +78,15 @@ var AvatarsGetCreditCardRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetCreditCardPathParams)
     ], AvatarsGetCreditCardRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetCreditCardQueryParams)
     ], AvatarsGetCreditCardRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetCreditCardSecurity)
     ], AvatarsGetCreditCardRequest.prototype, "security", void 0);
     return AvatarsGetCreditCardRequest;
@@ -98,11 +98,11 @@ var AvatarsGetCreditCardResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AvatarsGetCreditCardResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AvatarsGetCreditCardResponse.prototype, "statusCode", void 0);
     return AvatarsGetCreditCardResponse;

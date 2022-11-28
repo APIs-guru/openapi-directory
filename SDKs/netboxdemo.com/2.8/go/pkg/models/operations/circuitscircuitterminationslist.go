@@ -40,15 +40,15 @@ type CircuitsCircuitTerminationsListQueryParams struct {
 	XconnectIDNisw   *string `queryParam:"style=form,explode=true,name=xconnect_id__nisw"`
 }
 
-type CircuitsCircuitTerminationsListRequest struct {
-	QueryParams CircuitsCircuitTerminationsListQueryParams
-}
-
 type CircuitsCircuitTerminationsList200ApplicationJSON struct {
 	Count    int64                       `json:"count"`
 	Next     *string                     `json:"next,omitempty"`
 	Previous *string                     `json:"previous,omitempty"`
 	Results  []shared.CircuitTermination `json:"results"`
+}
+
+type CircuitsCircuitTerminationsListRequest struct {
+	QueryParams CircuitsCircuitTerminationsListQueryParams
 }
 
 type CircuitsCircuitTerminationsListResponse struct {

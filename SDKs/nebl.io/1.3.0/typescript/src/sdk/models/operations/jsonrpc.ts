@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const JSONRPC_SERVERS = [
+
+export const JsonRpcServerList = [
 	"http://127.0.0.1:6326",
 	"http://127.0.0.1:16326",
-];
-
+] as const;
 
 
 export class JsonRpcSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   rpcAuth: shared.SchemeRpcAuth;
 }
 
 
 export class JsonRpcRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.RpcRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: JsonRpcSecurity;
 }
 
 
 export class JsonRpcResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rpcResponse?: shared.RpcResponse;
 }

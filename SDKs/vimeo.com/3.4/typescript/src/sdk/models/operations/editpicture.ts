@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EditPicturePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portraitset_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portraitset_id" })
   portraitsetId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: number;
 }
 
 
 export class EditPictureRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 }
 
 
 export class EditPictureSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class EditPictureRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EditPicturePathParams;
 
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.picture+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.picture+json" })
   request?: EditPictureRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EditPictureSecurity;
 }
 
 
 export class EditPictureResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   picture?: shared.Picture;
 }

@@ -19,7 +19,7 @@ type UpdatePayRunSecurity struct {
 type UpdatePayRunRequest struct {
 	PathParams UpdatePayRunPathParams
 	Headers    UpdatePayRunHeaders
-	Request    []shared.PayRun `request:"mediaType=application/json"`
+	Request    []shared.PayRunInput `request:"mediaType=application/json"`
 	Security   UpdatePayRunSecurity
 }
 

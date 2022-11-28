@@ -9,6 +9,8 @@ const (
 	GradeHistoryGradeChangeTypeEnumMaxPointsChange                 GradeHistoryGradeChangeTypeEnum = "MAX_POINTS_CHANGE"
 )
 
+// GradeHistory
+// The history of each grade on this submission.
 type GradeHistory struct {
 	ActorUserID     *string                          `json:"actorUserId,omitempty"`
 	GradeChangeType *GradeHistoryGradeChangeTypeEnum `json:"gradeChangeType,omitempty"`

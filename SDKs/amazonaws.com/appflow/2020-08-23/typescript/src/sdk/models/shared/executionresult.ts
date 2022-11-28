@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorInfo } from "./errorinfo";
+
 
 
 // ExecutionResult
@@ -7,15 +8,15 @@ import { ErrorInfo } from "./errorinfo";
  *  Specifies the end result of the flow run. 
 **/
 export class ExecutionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bytesProcessed" })
+  @SpeakeasyMetadata({ data: "json, name=bytesProcessed" })
   bytesProcessed?: number;
 
-  @Metadata({ data: "json, name=bytesWritten" })
+  @SpeakeasyMetadata({ data: "json, name=bytesWritten" })
   bytesWritten?: number;
 
-  @Metadata({ data: "json, name=errorInfo" })
+  @SpeakeasyMetadata({ data: "json, name=errorInfo" })
   errorInfo?: ErrorInfo;
 
-  @Metadata({ data: "json, name=recordsProcessed" })
+  @SpeakeasyMetadata({ data: "json, name=recordsProcessed" })
   recordsProcessed?: number;
 }

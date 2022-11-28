@@ -9,11 +9,11 @@ class PostResponseHeadersQueryParams:
 
 @dataclass
 class PostResponseHeadersRequest:
-    query_params: PostResponseHeadersQueryParams = field(default=None)
+    query_params: PostResponseHeadersQueryParams = field()
     
 
 @dataclass
 class PostResponseHeadersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

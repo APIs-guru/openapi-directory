@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomPluginContentTypeEnum } from "./customplugincontenttypeenum";
 import { CustomPluginFileDescription } from "./custompluginfiledescription";
 import { CustomPluginLocationDescription } from "./custompluginlocationdescription";
+
 
 
 // CustomPluginRevisionSummary
@@ -9,21 +10,21 @@ import { CustomPluginLocationDescription } from "./custompluginlocationdescripti
  * Details about the revision of a custom plugin.
 **/
 export class CustomPluginRevisionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentType" })
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
   contentType?: CustomPluginContentTypeEnum;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fileDescription" })
+  @SpeakeasyMetadata({ data: "json, name=fileDescription" })
   fileDescription?: CustomPluginFileDescription;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: CustomPluginLocationDescription;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: number;
 }

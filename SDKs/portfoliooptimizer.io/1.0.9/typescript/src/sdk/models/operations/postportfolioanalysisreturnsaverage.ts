@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioAnalysisReturnsAverageRequestBodyPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolioValues" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioValues" })
   portfolioValues: number[];
 }
 
 
 export class PostPortfolioAnalysisReturnsAverageRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisReturnsAverageRequestBodyPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisReturnsAverageRequestBodyPortfolios })
   portfolios: PostPortfolioAnalysisReturnsAverageRequestBodyPortfolios[];
 }
 
 
-export class PostPortfolioAnalysisReturnsAverageRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioAnalysisReturnsAverageRequestBody;
-}
-
-
 export class PostPortfolioAnalysisReturnsAverage200ApplicationJsonPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolioAverageReturn" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioAverageReturn" })
   portfolioAverageReturn: number;
 }
 
 
 export class PostPortfolioAnalysisReturnsAverage200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisReturnsAverage200ApplicationJsonPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisReturnsAverage200ApplicationJsonPortfolios })
   portfolios: PostPortfolioAnalysisReturnsAverage200ApplicationJsonPortfolios[];
 }
 
 
+export class PostPortfolioAnalysisReturnsAverageRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioAnalysisReturnsAverageRequestBody;
+}
+
+
 export class PostPortfolioAnalysisReturnsAverageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioAnalysisReturnsAverage200ApplicationJsonObject?: PostPortfolioAnalysisReturnsAverage200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

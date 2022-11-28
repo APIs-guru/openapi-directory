@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The simple response message containing speech or text.
 **/
 export class GoogleCloudDialogflowV2beta1IntentMessageSimpleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayText" })
+  @SpeakeasyMetadata({ data: "json, name=displayText" })
   displayText?: string;
 
-  @Metadata({ data: "json, name=ssml" })
+  @SpeakeasyMetadata({ data: "json, name=ssml" })
   ssml?: string;
 
-  @Metadata({ data: "json, name=textToSpeech" })
+  @SpeakeasyMetadata({ data: "json, name=textToSpeech" })
   textToSpeech?: string;
 }

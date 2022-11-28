@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListQueryParams:
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListRequest:
-    path_params: WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListPathParams = field(default=None)
-    query_params: WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListQueryParams = field(default=None)
-    security: WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListSecurity = field(default=None)
+    path_params: WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListPathParams = field()
+    query_params: WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListQueryParams = field()
+    security: WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListSecurity = field()
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsScanRunsCrawledUrlsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_crawled_urls_response: Optional[shared.ListCrawledUrlsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

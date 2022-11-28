@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from sdk.models import shared
+
+
 REPOS_UPLOAD_RELEASE_ASSET_SERVERS = [
 	"https://{origin}",
 ]
@@ -8,9 +10,9 @@ REPOS_UPLOAD_RELEASE_ASSET_SERVERS = [
 
 @dataclass
 class ReposUploadReleaseAssetPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    release_id: int = field(default=None, metadata={'path_param': { 'field_name': 'release_id', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    release_id: int = field(metadata={'path_param': { 'field_name': 'release_id', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +23,15 @@ class ReposUploadReleaseAssetQueryParams:
 
 @dataclass
 class ReposUploadReleaseAssetRequest:
-    server_url: Optional[str] = field(default=None)
-    path_params: ReposUploadReleaseAssetPathParams = field(default=None)
-    query_params: ReposUploadReleaseAssetQueryParams = field(default=None)
+    path_params: ReposUploadReleaseAssetPathParams = field()
+    query_params: ReposUploadReleaseAssetQueryParams = field()
     request: Optional[str] = field(default=None, metadata={'request': { 'media_type': '*/*' }})
+    server_url: Optional[str] = field(default=None)
     
 
 @dataclass
 class ReposUploadReleaseAssetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     release_asset: Optional[shared.ReleaseAsset] = field(default=None)
     

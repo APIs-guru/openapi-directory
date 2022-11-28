@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MembershipRoleRestrictionEvaluation } from "./membershiprolerestrictionevaluation";
+
 
 
 // RestrictionEvaluations
@@ -7,6 +8,6 @@ import { MembershipRoleRestrictionEvaluation } from "./membershiprolerestriction
  * Evaluations of restrictions applied to parent group on this membership.
 **/
 export class RestrictionEvaluations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memberRestrictionEvaluation" })
+  @SpeakeasyMetadata({ data: "json, name=memberRestrictionEvaluation" })
   memberRestrictionEvaluation?: MembershipRoleRestrictionEvaluation;
 }

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,33 +23,37 @@ class GetFindingsHeaders:
 @dataclass_json
 @dataclass
 class GetFindingsRequestBodySortCriteria:
-    attribute_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeName' }})
-    order_by: Optional[shared.OrderByEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderBy' }})
+    r"""GetFindingsRequestBodySortCriteria
+    Specifies criteria for sorting the results of a request for findings.
+    """
+    
+    attribute_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributeName') }})
+    order_by: Optional[shared.OrderByEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderBy') }})
     
 
 @dataclass_json
 @dataclass
 class GetFindingsRequestBody:
-    finding_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findingIds' }})
-    sort_criteria: Optional[GetFindingsRequestBodySortCriteria] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortCriteria' }})
+    finding_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('findingIds') }})
+    sort_criteria: Optional[GetFindingsRequestBodySortCriteria] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortCriteria') }})
     
 
 @dataclass
 class GetFindingsRequest:
-    headers: GetFindingsHeaders = field(default=None)
-    request: GetFindingsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetFindingsHeaders = field()
+    request: GetFindingsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetFindingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_findings_response: Optional[shared.GetFindingsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

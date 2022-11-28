@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OtaUpdateStatusEnum } from "./otaupdatestatusenum";
 
 
+
 export class CreateOtaUpdateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsIotJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=awsIotJobArn" })
   awsIotJobArn?: string;
 
-  @Metadata({ data: "json, name=awsIotJobId" })
+  @SpeakeasyMetadata({ data: "json, name=awsIotJobId" })
   awsIotJobId?: string;
 
-  @Metadata({ data: "json, name=otaUpdateArn" })
+  @SpeakeasyMetadata({ data: "json, name=otaUpdateArn" })
   otaUpdateArn?: string;
 
-  @Metadata({ data: "json, name=otaUpdateId" })
+  @SpeakeasyMetadata({ data: "json, name=otaUpdateId" })
   otaUpdateId?: string;
 
-  @Metadata({ data: "json, name=otaUpdateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=otaUpdateStatus" })
   otaUpdateStatus?: OtaUpdateStatusEnum;
 }

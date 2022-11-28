@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregationAuthorization } from "./aggregationauthorization";
 
 
+
 export class PutAggregationAuthorizationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AggregationAuthorization" })
+  @SpeakeasyMetadata({ data: "json, name=AggregationAuthorization" })
   aggregationAuthorization?: AggregationAuthorization;
 }

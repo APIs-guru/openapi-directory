@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountRecoverySettingType } from "./accountrecoverysettingtype";
 import { AdminCreateUserConfigType } from "./admincreateuserconfigtype";
 import { VerifiedAttributeTypeEnum } from "./verifiedattributetypeenum";
@@ -12,59 +12,60 @@ import { UserPoolAddOnsType } from "./userpooladdonstype";
 import { VerificationMessageTemplateType } from "./verificationmessagetemplatetype";
 
 
+
 // UpdateUserPoolRequest
 /** 
  * Represents the request to update the user pool.
 **/
 export class UpdateUserPoolRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountRecoverySetting" })
+  @SpeakeasyMetadata({ data: "json, name=AccountRecoverySetting" })
   accountRecoverySetting?: AccountRecoverySettingType;
 
-  @Metadata({ data: "json, name=AdminCreateUserConfig" })
+  @SpeakeasyMetadata({ data: "json, name=AdminCreateUserConfig" })
   adminCreateUserConfig?: AdminCreateUserConfigType;
 
-  @Metadata({ data: "json, name=AutoVerifiedAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=AutoVerifiedAttributes" })
   autoVerifiedAttributes?: VerifiedAttributeTypeEnum[];
 
-  @Metadata({ data: "json, name=DeviceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceConfiguration" })
   deviceConfiguration?: DeviceConfigurationType;
 
-  @Metadata({ data: "json, name=EmailConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=EmailConfiguration" })
   emailConfiguration?: EmailConfigurationType;
 
-  @Metadata({ data: "json, name=EmailVerificationMessage" })
+  @SpeakeasyMetadata({ data: "json, name=EmailVerificationMessage" })
   emailVerificationMessage?: string;
 
-  @Metadata({ data: "json, name=EmailVerificationSubject" })
+  @SpeakeasyMetadata({ data: "json, name=EmailVerificationSubject" })
   emailVerificationSubject?: string;
 
-  @Metadata({ data: "json, name=LambdaConfig" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaConfig" })
   lambdaConfig?: LambdaConfigType;
 
-  @Metadata({ data: "json, name=MfaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=MfaConfiguration" })
   mfaConfiguration?: UserPoolMfaTypeEnum;
 
-  @Metadata({ data: "json, name=Policies" })
+  @SpeakeasyMetadata({ data: "json, name=Policies" })
   policies?: UserPoolPolicyType;
 
-  @Metadata({ data: "json, name=SmsAuthenticationMessage" })
+  @SpeakeasyMetadata({ data: "json, name=SmsAuthenticationMessage" })
   smsAuthenticationMessage?: string;
 
-  @Metadata({ data: "json, name=SmsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SmsConfiguration" })
   smsConfiguration?: SmsConfigurationType;
 
-  @Metadata({ data: "json, name=SmsVerificationMessage" })
+  @SpeakeasyMetadata({ data: "json, name=SmsVerificationMessage" })
   smsVerificationMessage?: string;
 
-  @Metadata({ data: "json, name=UserPoolAddOns" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolAddOns" })
   userPoolAddOns?: UserPoolAddOnsType;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 
-  @Metadata({ data: "json, name=UserPoolTags" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolTags" })
   userPoolTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=VerificationMessageTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=VerificationMessageTemplate" })
   verificationMessageTemplate?: VerificationMessageTemplateType;
 }

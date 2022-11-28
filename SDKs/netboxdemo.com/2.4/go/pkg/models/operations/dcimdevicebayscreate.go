@@ -5,7 +5,7 @@ import (
 )
 
 type DcimDeviceBaysCreateRequest struct {
-	Request shared.WritableDeviceBay `request:"mediaType=application/json"`
+	Request shared.WritableDeviceBayInput `request:"mediaType=application/json"`
 }
 
 type DcimDeviceBaysCreateResponse struct {

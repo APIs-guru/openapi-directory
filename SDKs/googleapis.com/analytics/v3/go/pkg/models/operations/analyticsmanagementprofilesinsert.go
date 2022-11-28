@@ -27,7 +27,7 @@ type AnalyticsManagementProfilesInsertSecurity struct {
 type AnalyticsManagementProfilesInsertRequest struct {
 	PathParams  AnalyticsManagementProfilesInsertPathParams
 	QueryParams AnalyticsManagementProfilesInsertQueryParams
-	Request     *shared.Profile `request:"mediaType=application/json"`
+	Request     *shared.ProfileInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementProfilesInsertSecurity
 }
 

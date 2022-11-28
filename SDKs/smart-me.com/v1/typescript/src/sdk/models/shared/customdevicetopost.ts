@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDeviceValues } from "./customdevicevalues";
+
 
 
 // CustomDeviceToPost
@@ -8,18 +8,18 @@ import { CustomDeviceValues } from "./customdevicevalues";
  * Container Class for the Web API
 **/
 export class CustomDeviceToPost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Serial" })
+  @SpeakeasyMetadata({ data: "json, name=Serial" })
   serial?: number;
 
-  @Metadata({ data: "json, name=ValueDate" })
+  @SpeakeasyMetadata({ data: "json, name=ValueDate" })
   valueDate?: Date;
 
-  @Metadata({ data: "json, name=Values", elemType: shared.CustomDeviceValues })
+  @SpeakeasyMetadata({ data: "json, name=Values", elemType: CustomDeviceValues })
   values?: CustomDeviceValues[];
 }

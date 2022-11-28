@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum CreateProductRequestBodyVatModeEnum {
-    Gross = "GROSS"
-,    Net = "NET"
+    Gross = "GROSS",
+    Net = "NET"
 }
 
 
 export class CreateProductRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=active;" })
+  @SpeakeasyMetadata({ data: "form, name=active;" })
   active: boolean;
 
-  @Metadata({ data: "form, name=description;" })
+  @SpeakeasyMetadata({ data: "form, name=description;" })
   description?: string;
 
-  @Metadata({ data: "form, name=licenseeAutoCreate;" })
+  @SpeakeasyMetadata({ data: "form, name=licenseeAutoCreate;" })
   licenseeAutoCreate?: boolean;
 
-  @Metadata({ data: "form, name=licensingInfo;" })
+  @SpeakeasyMetadata({ data: "form, name=licensingInfo;" })
   licensingInfo?: string;
 
-  @Metadata({ data: "form, name=name;" })
+  @SpeakeasyMetadata({ data: "form, name=name;" })
   name: string;
 
-  @Metadata({ data: "form, name=number;" })
+  @SpeakeasyMetadata({ data: "form, name=number;" })
   number?: string;
 
-  @Metadata({ data: "form, name=vatMode;" })
+  @SpeakeasyMetadata({ data: "form, name=vatMode;" })
   vatMode?: CreateProductRequestBodyVatModeEnum;
 
-  @Metadata({ data: "form, name=version;" })
+  @SpeakeasyMetadata({ data: "form, name=version;" })
   version: string;
 }
 
 
 export class CreateProductSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class CreateProductRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: CreateProductRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateProductSecurity;
 }
 
 
 export class CreateProductResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   netlicensing?: any;
 }

@@ -15,17 +15,9 @@ type GetLibraryQueryParams struct {
 	Offset       *string `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type GetLibrarySecurityOption1 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
-type GetLibrarySecurityOption2 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetLibrarySecurity struct {
-	Option1 *GetLibrarySecurityOption1 `security:"option"`
-	Option2 *GetLibrarySecurityOption2 `security:"option"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetLibraryRequest struct {

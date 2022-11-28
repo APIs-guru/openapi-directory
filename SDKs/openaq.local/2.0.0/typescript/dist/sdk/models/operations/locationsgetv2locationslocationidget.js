@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LocationsGetV2LocationsLocationIdGetPathParams = /** @class */ (function (_super) {
     __extends(LocationsGetV2LocationsLocationIdGetPathParams, _super);
@@ -30,7 +30,7 @@ var LocationsGetV2LocationsLocationIdGetPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=location_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=location_id" }),
         __metadata("design:type", Number)
     ], LocationsGetV2LocationsLocationIdGetPathParams.prototype, "locationId", void 0);
     return LocationsGetV2LocationsLocationIdGetPathParams;
@@ -42,95 +42,95 @@ var LocationsGetV2LocationsLocationIdGetQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=city" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=coordinates" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=coordinates" }),
         __metadata("design:type", String)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "coordinates", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
         __metadata("design:type", String)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "countryId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dumpRaw" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dumpRaw" }),
         __metadata("design:type", Boolean)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "dumpRaw", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity" }),
         __metadata("design:type", String)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "entity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=has_geo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_geo" }),
         __metadata("design:type", Boolean)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "hasGeo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
         __metadata("design:type", Boolean)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "isAnalysis", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
         __metadata("design:type", Boolean)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "isMobile", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=location" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=manufacturerName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=manufacturerName" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "manufacturerName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
         __metadata("design:type", String)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
         __metadata("design:type", Number)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "parameterId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=radius" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" }),
         __metadata("design:type", Number)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "radius", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sensorType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensorType" }),
         __metadata("design:type", String)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "sensorType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "sourceName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unit" }),
         __metadata("design:type", Array)
     ], LocationsGetV2LocationsLocationIdGetQueryParams.prototype, "unit", void 0);
     return LocationsGetV2LocationsLocationIdGetQueryParams;
@@ -142,11 +142,11 @@ var LocationsGetV2LocationsLocationIdGetRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LocationsGetV2LocationsLocationIdGetPathParams)
     ], LocationsGetV2LocationsLocationIdGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LocationsGetV2LocationsLocationIdGetQueryParams)
     ], LocationsGetV2LocationsLocationIdGetRequest.prototype, "queryParams", void 0);
     return LocationsGetV2LocationsLocationIdGetRequest;
@@ -158,19 +158,19 @@ var LocationsGetV2LocationsLocationIdGetResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LocationsGetV2LocationsLocationIdGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], LocationsGetV2LocationsLocationIdGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OpenAqResult)
     ], LocationsGetV2LocationsLocationIdGetResponse.prototype, "openAqResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LocationsGetV2LocationsLocationIdGetResponse.prototype, "statusCode", void 0);
     return LocationsGetV2LocationsLocationIdGetResponse;

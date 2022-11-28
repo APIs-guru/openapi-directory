@@ -22,56 +22,56 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettingTypeEnum } from "./settingtypeenum";
+import { TagModel } from "./tagmodel";
 var SettingModel = /** @class */ (function (_super) {
     __extends(SettingModel, _super);
     function SettingModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configId" }),
+        SpeakeasyMetadata({ data: "json, name=configId" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "configId", void 0);
     __decorate([
-        Metadata({ data: "json, name=configName" }),
+        SpeakeasyMetadata({ data: "json, name=configName" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "configName", void 0);
     __decorate([
-        Metadata({ data: "json, name=expirationWarningAt" }),
+        SpeakeasyMetadata({ data: "json, name=expirationWarningAt" }),
         __metadata("design:type", Date)
     ], SettingModel.prototype, "expirationWarningAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=hint" }),
+        SpeakeasyMetadata({ data: "json, name=hint" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "hint", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerUserEmail" }),
+        SpeakeasyMetadata({ data: "json, name=ownerUserEmail" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "ownerUserEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerUserFullName" }),
+        SpeakeasyMetadata({ data: "json, name=ownerUserFullName" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "ownerUserFullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=settingId" }),
+        SpeakeasyMetadata({ data: "json, name=settingId" }),
         __metadata("design:type", Number)
     ], SettingModel.prototype, "settingId", void 0);
     __decorate([
-        Metadata({ data: "json, name=settingType" }),
+        SpeakeasyMetadata({ data: "json, name=settingType" }),
         __metadata("design:type", String)
     ], SettingModel.prototype, "settingType", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.TagModel }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: TagModel }),
         __metadata("design:type", Array)
     ], SettingModel.prototype, "tags", void 0);
     return SettingModel;

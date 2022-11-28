@@ -8,11 +8,8 @@ type PostNetworksIDActionsChangeProtectionChangeProtectionRequest struct {
 	Delete *bool `json:"delete,omitempty"`
 }
 
-type PostNetworksIDActionsChangeProtectionRequest struct {
-	PathParams PostNetworksIDActionsChangeProtectionPathParams
-	Request    *PostNetworksIDActionsChangeProtectionChangeProtectionRequest `request:"mediaType=application/json"`
-}
-
+// PostNetworksIDActionsChangeProtectionActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostNetworksIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostNetworksIDActionsChangeProtectionActionResponseAction struct {
 
 type PostNetworksIDActionsChangeProtectionActionResponse struct {
 	Action PostNetworksIDActionsChangeProtectionActionResponseAction `json:"action"`
+}
+
+type PostNetworksIDActionsChangeProtectionRequest struct {
+	PathParams PostNetworksIDActionsChangeProtectionPathParams
+	Request    *PostNetworksIDActionsChangeProtectionChangeProtectionRequest `request:"mediaType=application/json"`
 }
 
 type PostNetworksIDActionsChangeProtectionResponse struct {

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SourcePredefinedSourceEnum(str, Enum):
     NONE = "NONE"
@@ -17,6 +19,10 @@ class SourcePredefinedSourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Source:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    predefined_source: Optional[SourcePredefinedSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'predefinedSource' }})
+    r"""Source
+    Defines sources for the suggest/search APIs.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    predefined_source: Optional[SourcePredefinedSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('predefinedSource') }})
     

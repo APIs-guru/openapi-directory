@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseProductsApprovePathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AndroidenterpriseProductsApproveQueryParams:
 
 @dataclass
 class AndroidenterpriseProductsApproveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseProductsApproveRequest:
-    path_params: AndroidenterpriseProductsApprovePathParams = field(default=None)
-    query_params: AndroidenterpriseProductsApproveQueryParams = field(default=None)
+    path_params: AndroidenterpriseProductsApprovePathParams = field()
+    query_params: AndroidenterpriseProductsApproveQueryParams = field()
+    security: AndroidenterpriseProductsApproveSecurity = field()
     request: Optional[shared.ProductsApproveRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidenterpriseProductsApproveSecurity = field(default=None)
     
 
 @dataclass
 class AndroidenterpriseProductsApproveResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

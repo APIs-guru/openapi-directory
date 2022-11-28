@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StreetviewpublishPhotoGetPathParams:
-    photo_id: str = field(default=None, metadata={'path_param': { 'field_name': 'photoId', 'style': 'simple', 'explode': False }})
+    photo_id: str = field(metadata={'path_param': { 'field_name': 'photoId', 'style': 'simple', 'explode': False }})
     
 class StreetviewpublishPhotoGetViewEnum(str, Enum):
     BASIC = "BASIC"
@@ -31,20 +32,20 @@ class StreetviewpublishPhotoGetQueryParams:
 
 @dataclass
 class StreetviewpublishPhotoGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StreetviewpublishPhotoGetRequest:
-    path_params: StreetviewpublishPhotoGetPathParams = field(default=None)
-    query_params: StreetviewpublishPhotoGetQueryParams = field(default=None)
-    security: StreetviewpublishPhotoGetSecurity = field(default=None)
+    path_params: StreetviewpublishPhotoGetPathParams = field()
+    query_params: StreetviewpublishPhotoGetQueryParams = field()
+    security: StreetviewpublishPhotoGetSecurity = field()
     
 
 @dataclass
 class StreetviewpublishPhotoGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     photo: Optional[shared.Photo] = field(default=None)
-    status_code: int = field(default=None)
     

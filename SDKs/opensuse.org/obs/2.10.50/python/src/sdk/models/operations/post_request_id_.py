@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class PostRequestIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,19 +24,19 @@ class PostRequestIDQueryParams:
 
 @dataclass
 class PostRequestIDSecurity:
-    basic_authentication: shared.SchemeBasicAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_authentication: shared.SchemeBasicAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostRequestIDRequest:
-    path_params: PostRequestIDPathParams = field(default=None)
-    query_params: PostRequestIDQueryParams = field(default=None)
-    security: PostRequestIDSecurity = field(default=None)
+    path_params: PostRequestIDPathParams = field()
+    query_params: PostRequestIDQueryParams = field()
+    security: PostRequestIDSecurity = field()
     
 
 @dataclass
 class PostRequestIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// DiffChecksumsResponse
+// # gdata.* are outside protos with mising documentation
 type DiffChecksumsResponse struct {
 	ChecksumsLocation *CompositeMedia `json:"checksumsLocation,omitempty"`
 	ChunkSizeBytes    *string         `json:"chunkSizeBytes,omitempty"`

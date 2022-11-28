@@ -1,6 +1,7 @@
 
 
+
 export enum SagemakerServicecatalogStatusEnum {
-    Enabled = "Enabled"
-,    Disabled = "Disabled"
+    Enabled = "Enabled",
+    Disabled = "Disabled"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRegionsGetRegionsGetQueryParams = /** @class */ (function (_super) {
     __extends(GetRegionsGetRegionsGetQueryParams, _super);
@@ -30,7 +30,7 @@ var GetRegionsGetRegionsGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetRegionsGetRegionsGetQueryParams.prototype, "jwt", void 0);
     return GetRegionsGetRegionsGetQueryParams;
@@ -42,7 +42,7 @@ var GetRegionsGetRegionsGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRegionsGetRegionsGetQueryParams)
     ], GetRegionsGetRegionsGetRequest.prototype, "queryParams", void 0);
     return GetRegionsGetRegionsGetRequest;
@@ -54,19 +54,19 @@ var GetRegionsGetRegionsGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRegionsGetRegionsGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetRegionsGetRegionsGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.RegionResp)
     ], GetRegionsGetRegionsGetResponse.prototype, "regionResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRegionsGetRegionsGetResponse.prototype, "statusCode", void 0);
     return GetRegionsGetRegionsGetResponse;

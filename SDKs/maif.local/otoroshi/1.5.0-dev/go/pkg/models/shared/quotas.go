@@ -1,5 +1,7 @@
 package shared
 
+// Quotas
+// Quotas state for an api key on a service group
 type Quotas struct {
 	AuthorizedCallsPerDay   int64 `json:"authorizedCallsPerDay"`
 	AuthorizedCallsPerMonth int64 `json:"authorizedCallsPerMonth"`

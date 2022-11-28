@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class EndpointGetAnArtistsAlbumsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,38 +20,43 @@ class EndpointGetAnArtistsAlbumsQueryParams:
 
 @dataclass
 class EndpointGetAnArtistsAlbumsHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetAnArtistsAlbumsSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class EndpointGetAnArtistsAlbumsRequest:
-    path_params: EndpointGetAnArtistsAlbumsPathParams = field(default=None)
-    query_params: EndpointGetAnArtistsAlbumsQueryParams = field(default=None)
-    headers: EndpointGetAnArtistsAlbumsHeaders = field(default=None)
-    security: EndpointGetAnArtistsAlbumsSecurity = field(default=None)
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass_json
 @dataclass
 class EndpointGetAnArtistsAlbums200ApplicationJSON:
-    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
-    items: Optional[List[shared.SimplifiedAlbumObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limit' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offset' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    r"""EndpointGetAnArtistsAlbums200ApplicationJSON
+
+    https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
+    """
+    
+    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('href') }})
+    items: Optional[List[shared.SimplifiedAlbumObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limit') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offset') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    
+
+@dataclass
+class EndpointGetAnArtistsAlbumsRequest:
+    headers: EndpointGetAnArtistsAlbumsHeaders = field()
+    path_params: EndpointGetAnArtistsAlbumsPathParams = field()
+    query_params: EndpointGetAnArtistsAlbumsQueryParams = field()
+    security: EndpointGetAnArtistsAlbumsSecurity = field()
     
 
 @dataclass
 class EndpointGetAnArtistsAlbumsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     endpoint_get_an_artists_albums_200_application_json_object: Optional[EndpointGetAnArtistsAlbums200ApplicationJSON] = field(default=None)
     

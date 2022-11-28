@@ -4,10 +4,6 @@ type CreateAuthorUsingPostQueryParams struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type CreateAuthorUsingPostRequest struct {
-	QueryParams CreateAuthorUsingPostQueryParams
-}
-
 type CreateAuthorUsingPost200ApplicationJSONData struct {
 	AuthorID *string `json:"authorID,omitempty"`
 }
@@ -34,6 +30,10 @@ type CreateAuthorUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateAuthorUsingPostRequest struct {
+	QueryParams CreateAuthorUsingPostQueryParams
 }
 
 type CreateAuthorUsingPostResponse struct {

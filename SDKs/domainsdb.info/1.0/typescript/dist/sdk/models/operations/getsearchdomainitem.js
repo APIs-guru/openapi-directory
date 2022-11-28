@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSearchDomainItemQueryParams = /** @class */ (function (_super) {
     __extends(GetSearchDomainItemQueryParams, _super);
@@ -30,55 +30,55 @@ var GetSearchDomainItemQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=A" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=A" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "a", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CNAME" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CNAME" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "cname", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MX" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MX" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "mx", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NS" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "ns", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TXT" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TXT" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "txt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=domain" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isDead" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isDead" }),
         __metadata("design:type", Boolean)
     ], GetSearchDomainItemQueryParams.prototype, "isDead", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetSearchDomainItemQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=zone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zone" }),
         __metadata("design:type", String)
     ], GetSearchDomainItemQueryParams.prototype, "zone", void 0);
     return GetSearchDomainItemQueryParams;
@@ -90,7 +90,7 @@ var GetSearchDomainItemRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSearchDomainItemQueryParams)
     ], GetSearchDomainItemRequest.prototype, "queryParams", void 0);
     return GetSearchDomainItemRequest;
@@ -102,15 +102,15 @@ var GetSearchDomainItemResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSearchDomainItemResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SearchResults)
     ], GetSearchDomainItemResponse.prototype, "searchResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSearchDomainItemResponse.prototype, "statusCode", void 0);
     return GetSearchDomainItemResponse;

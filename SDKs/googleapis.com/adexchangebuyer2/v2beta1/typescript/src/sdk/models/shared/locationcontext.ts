@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LocationContext
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Output only. The Geo criteria the restriction applies to.
 **/
 export class LocationContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=geoCriteriaIds" })
+  @SpeakeasyMetadata({ data: "json, name=geoCriteriaIds" })
   geoCriteriaIds?: number[];
 }

@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actioncategory_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ActionTypeIdentifier:
-    category: actioncategory_enum.ActionCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    owner: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    provider: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
-    version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""ActionTypeIdentifier
+    Specifies the category, owner, provider, and version of the action type.
+    """
+    
+    category: ActionCategoryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    owner: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner') }})
+    provider: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
+    version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

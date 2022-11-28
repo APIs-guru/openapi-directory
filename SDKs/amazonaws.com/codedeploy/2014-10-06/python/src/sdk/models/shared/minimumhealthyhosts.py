@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import minimumhealthyhoststype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MinimumHealthyHosts:
-    type: Optional[minimumhealthyhoststype_enum.MinimumHealthyHostsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""MinimumHealthyHosts
+    Information about minimum healthy instance.
+    """
+    
+    type: Optional[MinimumHealthyHostsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

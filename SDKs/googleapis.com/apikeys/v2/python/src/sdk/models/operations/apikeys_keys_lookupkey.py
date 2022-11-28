@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -21,14 +22,14 @@ class ApikeysKeysLookupKeyQueryParams:
 
 @dataclass
 class ApikeysKeysLookupKeySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApikeysKeysLookupKeySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -39,13 +40,13 @@ class ApikeysKeysLookupKeySecurity:
 
 @dataclass
 class ApikeysKeysLookupKeyRequest:
-    query_params: ApikeysKeysLookupKeyQueryParams = field(default=None)
-    security: ApikeysKeysLookupKeySecurity = field(default=None)
+    query_params: ApikeysKeysLookupKeyQueryParams = field()
+    security: ApikeysKeysLookupKeySecurity = field()
     
 
 @dataclass
 class ApikeysKeysLookupKeyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     v2_lookup_key_response: Optional[shared.V2LookupKeyResponse] = field(default=None)
     

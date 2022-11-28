@@ -11,11 +11,9 @@ var __assign = (this && this.__assign) || function () {
 };
 import axios from "axios";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
-var Servers = [
+export var ServerList = [
     "https://api.tomtom.com",
 ];
 export function WithServerURL(serverURL, params) {
@@ -23,12 +21,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 export function WithSecurity(security) {
@@ -36,7 +34,7 @@ export function WithSecurity(security) {
         security = new Security(security);
     }
     return function (sdk) {
-        sdk.security = security;
+        sdk._security = security;
     };
 }
 var SDK = /** @class */ (function () {
@@ -46,305 +44,309 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
+        if (!this._securityClient) {
+            if (this._security) {
+                this._securityClient = utils.CreateSecurityClient(this._defaultClient, this._security);
             }
             else {
-                this.securityClient = this.defaultClient;
+                this._securityClient = this._defaultClient;
             }
         }
     }
-    // GetMapVersionNumberCopyrightsCaptionFormat - Captions
     /**
+     * getMapVersionNumberCopyrightsCaptionFormat - Captions
+     *
      * This API returns copyright captions for the map service.
     **/
-    SDK.prototype.GetMapVersionNumberCopyrightsCaptionFormat = function (req, config) {
+    SDK.prototype.getMapVersionNumberCopyrightsCaptionFormat = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberCopyrightsCaptionFormatRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/copyrights/caption.{format}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 304:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 304:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 410:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 410:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMapVersionNumberCopyrightsFormat - Copyrights whole world
     /**
+     * getMapVersionNumberCopyrightsFormat - Copyrights whole world
+     *
      * The Copyrights API returns copyright information for
      * the Maps API Raster Tile Service in JSON, JSONP, or XML format.
      * This call returns copyright information for the whole world.
     **/
-    SDK.prototype.GetMapVersionNumberCopyrightsFormat = function (req, config) {
+    SDK.prototype.getMapVersionNumberCopyrightsFormat = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberCopyrightsFormatRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/copyrights.{format}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 304:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 304:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 410:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 410:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormat - Copyrights bounding box
     /**
+     * getMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormat - Copyrights bounding box
+     *
      * The Copyrights API returns copyright information for
      * the Maps API Raster Tile Service in JSON, JSONP, or XML format.
      * This call returns copyright information for a specific bounding box.
     **/
-    SDK.prototype.GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormat = function (req, config) {
+    SDK.prototype.getMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormat = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/copyrights/{minLon}/{minLat}/{maxLon}/{maxLat}.{format}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 304:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 304:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 410:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 410:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMapVersionNumberCopyrightsZoomXYFormat - Copyrights tile
     /**
+     * getMapVersionNumberCopyrightsZoomXYFormat - Copyrights tile
+     *
      * The Copyrights API returns copyright information for
      * the Maps API Raster Tile Service in JSON, JSONP, or XML format.
      * This call returns copyright information for the a specific map tile.
     **/
-    SDK.prototype.GetMapVersionNumberCopyrightsZoomXYFormat = function (req, config) {
+    SDK.prototype.getMapVersionNumberCopyrightsZoomXYFormat = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberCopyrightsZoomXYFormatRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/copyrights/{zoom}/{X}/{Y}.{format}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 304:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 304:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 410:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 410:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMapVersionNumberStaticimage - Static Image
     /**
+     * getMapVersionNumberStaticimage - Static Image
+     *
      * The Static Image service renders a rectangular raster image
      * in the style, size, and zoom level specified. The image can be requested
      * using either a center point plus width and height or a bounding box.
     **/
-    SDK.prototype.GetMapVersionNumberStaticimage = function (req, config) {
+    SDK.prototype.getMapVersionNumberStaticimage = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberStaticimageRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/staticimage", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
-                case 503:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMapVersionNumberTileLayerStyleZoomXYFormat - Tile
     /**
+     * getMapVersionNumberTileLayerStyleZoomXYFormat - Tile
+     *
      * The Maps API Raster Service delivers raster tiles, which are representations of square sections of map data.
     **/
-    SDK.prototype.GetMapVersionNumberTileLayerStyleZoomXYFormat = function (req, config) {
+    SDK.prototype.getMapVersionNumberTileLayerStyleZoomXYFormat = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberTileLayerStyleZoomXYFormatRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/tile/{layer}/{style}/{zoom}/{X}/{Y}.{format}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 302:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 302:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 410:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 410:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMapVersionNumberTileLayerStyleZoomXYPbf - Tile
     /**
+     * getMapVersionNumberTileLayerStyleZoomXYPbf - Tile
+     *
      * The Maps API Vector Service delivers vector tiles, which are representations of square sections of map data.
     **/
-    SDK.prototype.GetMapVersionNumberTileLayerStyleZoomXYPbf = function (req, config) {
+    SDK.prototype.getMapVersionNumberTileLayerStyleZoomXYPbf = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberTileLayerStyleZoomXYPbfRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/tile/{layer}/{style}/{zoom}/{X}/{Y}.pbf", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
-                case 503:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXml - WMTS
     /**
+     * getMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXml - WMTS
+     *
      * The WMTS GetCapabilities call implements version 1.0.0 of
      * the <a href="http://www.opengeospatial.org/standards/wmts">Web Map Tile Service</a>
      * (WMTS) standard. It returns metadata that allows compatible calling systems to construct
@@ -352,103 +354,102 @@ var SDK = /** @class */ (function () {
      * <a href="/maps-api/maps-api-documentation-raster/wmts">documentation</a>
      * for more information on WMTS.
     **/
-    SDK.prototype.GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXml = function (req, config) {
+    SDK.prototype.getMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXml = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/wmts/{key}/{wmtsVersion}/WMTSCapabilities.xml", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetCapabilities - GetCapabilities
     /**
+     * getCapabilities - GetCapabilities
+     *
      * The GetCapabilities call is part of TomTom's implementation of version 1.1.1
      * the Web Map Service (WMS). It provides descriptions of the other calls
      * that are available in the implementation.
     **/
-    SDK.prototype.GetCapabilities = function (req, config) {
+    SDK.prototype.getCapabilities = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetCapabilitiesRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/wms//", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 202:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 202:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMap - GetMap
     /**
+     * getMap - GetMap
+     *
      * The GetMap call implements the Web Map Service 1.1.1 standard
      * to access TomTom raster map tiles. This service is described
      * in the response to the GetCapabilities API call.
     **/
-    SDK.prototype.GetMap = function (req, config) {
+    SDK.prototype.getMap = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMapRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/map/{versionNumber}/wms/", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 202:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 202:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;

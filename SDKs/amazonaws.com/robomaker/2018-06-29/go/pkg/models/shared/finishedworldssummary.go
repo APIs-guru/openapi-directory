@@ -1,5 +1,7 @@
 package shared
 
+// FinishedWorldsSummary
+// Information about worlds that finished.
 type FinishedWorldsSummary struct {
 	FailureSummary  *FailureSummary `json:"failureSummary,omitempty"`
 	FinishedCount   *int64          `json:"finishedCount,omitempty"`

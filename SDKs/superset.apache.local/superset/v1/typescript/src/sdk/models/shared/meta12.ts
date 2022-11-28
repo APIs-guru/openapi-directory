@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Meta12 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=changed_on" })
+  @SpeakeasyMetadata({ data: "json, name=changed_on" })
   changedOn?: Date;
 
-  @Metadata({ data: "json, name=created_on" })
+  @SpeakeasyMetadata({ data: "json, name=created_on" })
   createdOn?: Date;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 
-  @Metadata({ data: "json, name=fail_login_count" })
+  @SpeakeasyMetadata({ data: "json, name=fail_login_count" })
   failLoginCount?: number;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=last_login" })
+  @SpeakeasyMetadata({ data: "json, name=last_login" })
   lastLogin?: Date;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName: string;
 
-  @Metadata({ data: "json, name=login_count" })
+  @SpeakeasyMetadata({ data: "json, name=login_count" })
   loginCount?: number;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username: string;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 import { Scope } from "./scope";
+
 
 
 // Exclusion
@@ -9,21 +9,21 @@ import { Scope } from "./scope";
  * Contains information about what was excluded from an assessment run.
 **/
 export class Exclusion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=attributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
   attributes?: Attribute[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=recommendation" })
+  @SpeakeasyMetadata({ data: "json, name=recommendation" })
   recommendation: string;
 
-  @Metadata({ data: "json, name=scopes", elemType: shared.Scope })
+  @SpeakeasyMetadata({ data: "json, name=scopes", elemType: Scope })
   scopes: Scope[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

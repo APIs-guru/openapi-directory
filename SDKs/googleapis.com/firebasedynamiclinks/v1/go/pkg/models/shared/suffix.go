@@ -9,6 +9,8 @@ const (
 	SuffixOptionEnumCustom            SuffixOptionEnum = "CUSTOM"
 )
 
+// Suffix
+// Short Dynamic Link suffix.
 type Suffix struct {
 	CustomSuffix *string           `json:"customSuffix,omitempty"`
 	Option       *SuffixOptionEnum `json:"option,omitempty"`

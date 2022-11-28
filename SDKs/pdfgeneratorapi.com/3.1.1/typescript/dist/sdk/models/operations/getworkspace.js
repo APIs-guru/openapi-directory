@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWorkspaceQueryParams = /** @class */ (function (_super) {
     __extends(GetWorkspaceQueryParams, _super);
@@ -30,31 +30,19 @@ var GetWorkspaceQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=workspaceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspaceId" }),
         __metadata("design:type", String)
     ], GetWorkspaceQueryParams.prototype, "workspaceId", void 0);
     return GetWorkspaceQueryParams;
 }(SpeakeasyBase));
 export { GetWorkspaceQueryParams };
-var GetWorkspaceRequest = /** @class */ (function (_super) {
-    __extends(GetWorkspaceRequest, _super);
-    function GetWorkspaceRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetWorkspaceQueryParams)
-    ], GetWorkspaceRequest.prototype, "queryParams", void 0);
-    return GetWorkspaceRequest;
-}(SpeakeasyBase));
-export { GetWorkspaceRequest };
 var GetWorkspace200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetWorkspace200ApplicationJson, _super);
     function GetWorkspace200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=response" }),
+        SpeakeasyMetadata({ data: "json, name=response" }),
         __metadata("design:type", shared.Workspace)
     ], GetWorkspace200ApplicationJson.prototype, "response", void 0);
     return GetWorkspace200ApplicationJson;
@@ -79,11 +67,11 @@ var GetWorkspace401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetWorkspace401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetWorkspace401ApplicationJson.prototype, "status", void 0);
     return GetWorkspace401ApplicationJson;
@@ -99,11 +87,11 @@ var GetWorkspace403ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetWorkspace403ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetWorkspace403ApplicationJson.prototype, "status", void 0);
     return GetWorkspace403ApplicationJson;
@@ -121,11 +109,11 @@ var GetWorkspace404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetWorkspace404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetWorkspace404ApplicationJson.prototype, "status", void 0);
     return GetWorkspace404ApplicationJson;
@@ -144,11 +132,11 @@ var GetWorkspace422ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetWorkspace422ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetWorkspace422ApplicationJson.prototype, "status", void 0);
     return GetWorkspace422ApplicationJson;
@@ -160,51 +148,63 @@ var GetWorkspace500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetWorkspace500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], GetWorkspace500ApplicationJson.prototype, "status", void 0);
     return GetWorkspace500ApplicationJson;
 }(SpeakeasyBase));
 export { GetWorkspace500ApplicationJson };
+var GetWorkspaceRequest = /** @class */ (function (_super) {
+    __extends(GetWorkspaceRequest, _super);
+    function GetWorkspaceRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetWorkspaceQueryParams)
+    ], GetWorkspaceRequest.prototype, "queryParams", void 0);
+    return GetWorkspaceRequest;
+}(SpeakeasyBase));
+export { GetWorkspaceRequest };
 var GetWorkspaceResponse = /** @class */ (function (_super) {
     __extends(GetWorkspaceResponse, _super);
     function GetWorkspaceResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWorkspaceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWorkspaceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspace200ApplicationJson)
     ], GetWorkspaceResponse.prototype, "getWorkspace200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspace401ApplicationJson)
     ], GetWorkspaceResponse.prototype, "getWorkspace401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspace403ApplicationJson)
     ], GetWorkspaceResponse.prototype, "getWorkspace403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspace404ApplicationJson)
     ], GetWorkspaceResponse.prototype, "getWorkspace404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspace422ApplicationJson)
     ], GetWorkspaceResponse.prototype, "getWorkspace422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspace500ApplicationJson)
     ], GetWorkspaceResponse.prototype, "getWorkspace500ApplicationJsonObject", void 0);
     return GetWorkspaceResponse;

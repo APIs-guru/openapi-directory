@@ -1,10 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ClusterConfig } from "./clusterconfig";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ClusterConfigInput } from "./clusterconfig";
 import { ClusterMetrics } from "./clustermetrics";
-import { ClusterStatus } from "./clusterstatus";
-import { ClusterStatus } from "./clusterstatus";
 import { VirtualClusterConfig } from "./virtualclusterconfig";
+import { ClusterConfig } from "./clusterconfig";
+import { ClusterStatus } from "./clusterstatus";
+
+
+
+// ClusterInput
+/** 
+ * Describes the identifying information, config, and status of a Dataproc cluster
+**/
+export class ClusterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
+  clusterName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=config" })
+  config?: ClusterConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
+  metrics?: ClusterMetrics;
+
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
+  projectId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=virtualClusterConfig" })
+  virtualClusterConfig?: VirtualClusterConfig;
+}
 
 
 // Cluster
@@ -12,30 +37,30 @@ import { VirtualClusterConfig } from "./virtualclusterconfig";
  * Describes the identifying information, config, and status of a Dataproc cluster
 **/
 export class Cluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterName" })
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=clusterUuid" })
+  @SpeakeasyMetadata({ data: "json, name=clusterUuid" })
   clusterUuid?: string;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: ClusterConfig;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics?: ClusterMetrics;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ClusterStatus;
 
-  @Metadata({ data: "json, name=statusHistory", elemType: shared.ClusterStatus })
+  @SpeakeasyMetadata({ data: "json, name=statusHistory", elemType: ClusterStatus })
   statusHistory?: ClusterStatus[];
 
-  @Metadata({ data: "json, name=virtualClusterConfig" })
+  @SpeakeasyMetadata({ data: "json, name=virtualClusterConfig" })
   virtualClusterConfig?: VirtualClusterConfig;
 }

@@ -41,7 +41,7 @@ type BigqueryreservationProjectsLocationsReservationsAssignmentsPatchSecurity st
 type BigqueryreservationProjectsLocationsReservationsAssignmentsPatchRequest struct {
 	PathParams  BigqueryreservationProjectsLocationsReservationsAssignmentsPatchPathParams
 	QueryParams BigqueryreservationProjectsLocationsReservationsAssignmentsPatchQueryParams
-	Request     *shared.Assignment `request:"mediaType=application/json"`
+	Request     *shared.AssignmentInput `request:"mediaType=application/json"`
 	Security    BigqueryreservationProjectsLocationsReservationsAssignmentsPatchSecurity
 }
 

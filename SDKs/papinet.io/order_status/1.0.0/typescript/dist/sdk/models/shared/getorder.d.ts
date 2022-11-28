@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PaginationLinks } from "./paginationlinks";
 import { OrderLineItem } from "./orderlineitem";
 export declare enum GetOrderOrderStatusEnum {

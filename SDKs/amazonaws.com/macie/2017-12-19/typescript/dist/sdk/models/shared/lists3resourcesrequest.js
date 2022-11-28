@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListS3ResourcesRequest = /** @class */ (function (_super) {
     __extends(ListS3ResourcesRequest, _super);
     function ListS3ResourcesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], ListS3ResourcesRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=memberAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=memberAccountId" }),
         __metadata("design:type", String)
     ], ListS3ResourcesRequest.prototype, "memberAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListS3ResourcesRequest.prototype, "nextToken", void 0);
     return ListS3ResourcesRequest;

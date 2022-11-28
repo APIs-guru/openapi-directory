@@ -44,6 +44,8 @@ type InstallationSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// Installation
+// Installation
 type Installation struct {
 	AccessTokensURL        string                              `json:"access_tokens_url"`
 	Account                interface{}                         `json:"account"`

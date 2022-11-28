@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetVodPurchasesDirectionEnum(str, Enum):
@@ -39,19 +43,19 @@ class GetVodPurchasesQueryParams:
 
 @dataclass
 class GetVodPurchasesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetVodPurchasesRequest:
-    query_params: GetVodPurchasesQueryParams = field(default=None)
-    security: GetVodPurchasesSecurity = field(default=None)
+    query_params: GetVodPurchasesQueryParams = field()
+    security: GetVodPurchasesSecurity = field()
     
 
 @dataclass
 class GetVodPurchasesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     on_demand_pages: Optional[List[shared.OnDemandPage]] = field(default=None)
     

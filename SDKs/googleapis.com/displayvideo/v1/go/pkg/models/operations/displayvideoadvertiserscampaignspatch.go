@@ -42,7 +42,7 @@ type DisplayvideoAdvertisersCampaignsPatchSecurity struct {
 type DisplayvideoAdvertisersCampaignsPatchRequest struct {
 	PathParams  DisplayvideoAdvertisersCampaignsPatchPathParams
 	QueryParams DisplayvideoAdvertisersCampaignsPatchQueryParams
-	Request     *shared.Campaign `request:"mediaType=application/json"`
+	Request     *shared.CampaignInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersCampaignsPatchSecurity
 }
 

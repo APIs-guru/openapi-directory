@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteAgentRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * DeleteAgentRequest
 **/
 export class DeleteAgentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentArn" })
+  @SpeakeasyMetadata({ data: "json, name=AgentArn" })
   agentArn: string;
 }

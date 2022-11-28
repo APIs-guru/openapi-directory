@@ -27,6 +27,10 @@ const (
 	PublicKeyAlgorithmEnumEcSignP384Sha384                     PublicKeyAlgorithmEnum = "EC_SIGN_P384_SHA384"
 	PublicKeyAlgorithmEnumEcSignSecp256K1Sha256                PublicKeyAlgorithmEnum = "EC_SIGN_SECP256K1_SHA256"
 	PublicKeyAlgorithmEnumHmacSha256                           PublicKeyAlgorithmEnum = "HMAC_SHA256"
+	PublicKeyAlgorithmEnumHmacSha1                             PublicKeyAlgorithmEnum = "HMAC_SHA1"
+	PublicKeyAlgorithmEnumHmacSha384                           PublicKeyAlgorithmEnum = "HMAC_SHA384"
+	PublicKeyAlgorithmEnumHmacSha512                           PublicKeyAlgorithmEnum = "HMAC_SHA512"
+	PublicKeyAlgorithmEnumHmacSha224                           PublicKeyAlgorithmEnum = "HMAC_SHA224"
 	PublicKeyAlgorithmEnumExternalSymmetricEncryption          PublicKeyAlgorithmEnum = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 )
 
@@ -40,6 +44,8 @@ const (
 	PublicKeyProtectionLevelEnumExternalVpc                PublicKeyProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// PublicKey
+// The public key for a given CryptoKeyVersion. Obtained via GetPublicKey.
 type PublicKey struct {
 	Algorithm       *PublicKeyAlgorithmEnum       `json:"algorithm,omitempty"`
 	Name            *string                       `json:"name,omitempty"`

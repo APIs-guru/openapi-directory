@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class MessagesCreatePathParams:
-    log_id: str = field(default=None, metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
+    log_id: str = field(metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class MessagesCreateRequests:
 
 @dataclass
 class MessagesCreateRequest:
-    path_params: MessagesCreatePathParams = field(default=None)
+    path_params: MessagesCreatePathParams = field()
     request: Optional[MessagesCreateRequests] = field(default=None)
     
 
 @dataclass
 class MessagesCreateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     create_message_result: Optional[shared.CreateMessageResult] = field(default=None)
-    status_code: int = field(default=None)
     

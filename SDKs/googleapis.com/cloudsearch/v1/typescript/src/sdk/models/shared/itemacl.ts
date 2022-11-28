@@ -1,14 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Principal } from "./principal";
-import { Principal } from "./principal";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Principal } from "./principal";
 
+
 export enum ItemAclAclInheritanceTypeEnum {
-    NotApplicable = "NOT_APPLICABLE"
-,    ChildOverride = "CHILD_OVERRIDE"
-,    ParentOverride = "PARENT_OVERRIDE"
-,    BothPermit = "BOTH_PERMIT"
+    NotApplicable = "NOT_APPLICABLE",
+    ChildOverride = "CHILD_OVERRIDE",
+    ParentOverride = "PARENT_OVERRIDE",
+    BothPermit = "BOTH_PERMIT"
 }
 
 
@@ -17,18 +15,18 @@ export enum ItemAclAclInheritanceTypeEnum {
  * Access control list information for the item. For more information see [Map ACLs](https://developers.google.com/cloud-search/docs/guides/acls).
 **/
 export class ItemAcl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aclInheritanceType" })
+  @SpeakeasyMetadata({ data: "json, name=aclInheritanceType" })
   aclInheritanceType?: ItemAclAclInheritanceTypeEnum;
 
-  @Metadata({ data: "json, name=deniedReaders", elemType: shared.Principal })
+  @SpeakeasyMetadata({ data: "json, name=deniedReaders", elemType: Principal })
   deniedReaders?: Principal[];
 
-  @Metadata({ data: "json, name=inheritAclFrom" })
+  @SpeakeasyMetadata({ data: "json, name=inheritAclFrom" })
   inheritAclFrom?: string;
 
-  @Metadata({ data: "json, name=owners", elemType: shared.Principal })
+  @SpeakeasyMetadata({ data: "json, name=owners", elemType: Principal })
   owners?: Principal[];
 
-  @Metadata({ data: "json, name=readers", elemType: shared.Principal })
+  @SpeakeasyMetadata({ data: "json, name=readers", elemType: Principal })
   readers?: Principal[];
 }

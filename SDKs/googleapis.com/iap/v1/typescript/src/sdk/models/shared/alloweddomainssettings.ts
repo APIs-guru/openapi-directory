@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AllowedDomainsSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for IAP allowed domains. Lets you to restrict access to an app and allow access to only the domains that you list.
 **/
 export class AllowedDomainsSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domains" })
+  @SpeakeasyMetadata({ data: "json, name=domains" })
   domains?: string[];
 
-  @Metadata({ data: "json, name=enable" })
+  @SpeakeasyMetadata({ data: "json, name=enable" })
   enable?: boolean;
 }

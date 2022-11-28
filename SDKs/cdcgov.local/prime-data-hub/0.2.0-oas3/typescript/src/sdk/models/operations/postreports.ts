@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum PostReportsOptionEnum {
-    ValidatePayload = "ValidatePayload"
-,    CheckConnections = "CheckConnections"
-,    SendImmediately = "SendImmediately"
-,    SkipSend = "SkipSend"
-,    SkipInvalidItems = "SkipInvalidItems"
+    ValidatePayload = "ValidatePayload",
+    CheckConnections = "CheckConnections",
+    SendImmediately = "SendImmediately",
+    SkipSend = "SkipSend",
+    SkipInvalidItems = "SkipInvalidItems"
 }
 
 
 export class PostReportsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client" })
   client: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=default" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=default" })
   default?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=option" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=option" })
   option?: PostReportsOptionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=routeTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routeTo" })
   routeTo?: string[];
 }
 
 
 export class PostReportsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class PostReportsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostReportsQueryParams;
 
-  @Metadata({ data: "request, media_type=text/csv" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/csv" })
   request: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostReportsSecurity;
 }
 
 
 export class PostReportsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   report?: shared.Report;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

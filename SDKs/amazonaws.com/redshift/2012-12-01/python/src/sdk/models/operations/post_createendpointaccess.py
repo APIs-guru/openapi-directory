@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateEndpointAccessActionEnum(str, Enum):
     CREATE_ENDPOINT_ACCESS = "CreateEndpointAccess"
@@ -10,8 +14,8 @@ class PostCreateEndpointAccessVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateEndpointAccessQueryParams:
-    action: PostCreateEndpointAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateEndpointAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateEndpointAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateEndpointAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateEndpointAccessHeaders:
 
 @dataclass
 class PostCreateEndpointAccessRequest:
-    query_params: PostCreateEndpointAccessQueryParams = field(default=None)
-    headers: PostCreateEndpointAccessHeaders = field(default=None)
+    headers: PostCreateEndpointAccessHeaders = field()
+    query_params: PostCreateEndpointAccessQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateEndpointAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

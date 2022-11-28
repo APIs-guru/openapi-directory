@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsConfig } from "./dnsconfig";
 import { HealthCheckConfig } from "./healthcheckconfig";
 import { HealthCheckCustomConfig } from "./healthcheckcustomconfig";
 import { ServiceTypeEnum } from "./servicetypeenum";
+
 
 
 // Service
@@ -10,39 +11,39 @@ import { ServiceTypeEnum } from "./servicetypeenum";
  * A complex type that contains information about the specified service.
 **/
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreateDate" })
   createDate?: Date;
 
-  @Metadata({ data: "json, name=CreatorRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=CreatorRequestId" })
   creatorRequestId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DnsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DnsConfig" })
   dnsConfig?: DnsConfig;
 
-  @Metadata({ data: "json, name=HealthCheckConfig" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckConfig" })
   healthCheckConfig?: HealthCheckConfig;
 
-  @Metadata({ data: "json, name=HealthCheckCustomConfig" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckCustomConfig" })
   healthCheckCustomConfig?: HealthCheckCustomConfig;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=InstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCount" })
   instanceCount?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NamespaceId" })
+  @SpeakeasyMetadata({ data: "json, name=NamespaceId" })
   namespaceId?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ServiceTypeEnum;
 }

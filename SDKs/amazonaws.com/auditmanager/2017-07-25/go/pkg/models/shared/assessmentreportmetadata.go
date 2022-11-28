@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// AssessmentReportMetadata
+//
+//	The metadata objects associated with the specified assessment report.
 type AssessmentReportMetadata struct {
 	AssessmentID   *string                     `json:"assessmentId,omitempty"`
 	AssessmentName *string                     `json:"assessmentName,omitempty"`

@@ -34,6 +34,8 @@ const (
 	InvoiceRecurringAPIModelStatusEnumFinished  InvoiceRecurringAPIModelStatusEnum = "Finished"
 )
 
+// InvoiceRecurringAPIModel
+// Definition of invoice recurring profile
 type InvoiceRecurringAPIModel struct {
 	DayOfMonth        *int32                                         `json:"DayOfMonth,omitempty"`
 	DayOfWeek         *InvoiceRecurringAPIModelDayOfWeekEnum         `json:"DayOfWeek,omitempty"`

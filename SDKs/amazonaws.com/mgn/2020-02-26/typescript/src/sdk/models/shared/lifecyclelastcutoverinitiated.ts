@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LifeCycleLastCutoverInitiated
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Lifecycle last Cutover initiated.
 **/
 export class LifeCycleLastCutoverInitiated extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiCallDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=apiCallDateTime" })
   apiCallDateTime?: string;
 
-  @Metadata({ data: "json, name=jobID" })
+  @SpeakeasyMetadata({ data: "json, name=jobID" })
   jobId?: string;
 }

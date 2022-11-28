@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PaySchedulePaySchedulePayFrequencyEnum;
 (function (PaySchedulePaySchedulePayFrequencyEnum) {
     PaySchedulePaySchedulePayFrequencyEnum["Weekly"] = "Weekly";
@@ -37,15 +37,15 @@ var PaySchedulePaySchedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MetaData" }),
+        SpeakeasyMetadata({ data: "json, name=MetaData" }),
         __metadata("design:type", Map)
     ], PaySchedulePaySchedule.prototype, "metaData", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], PaySchedulePaySchedule.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=PayFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=PayFrequency" }),
         __metadata("design:type", String)
     ], PaySchedulePaySchedule.prototype, "payFrequency", void 0);
     return PaySchedulePaySchedule;
@@ -57,7 +57,7 @@ var PaySchedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PaySchedule" }),
+        SpeakeasyMetadata({ data: "json, name=PaySchedule" }),
         __metadata("design:type", PaySchedulePaySchedule)
     ], PaySchedule.prototype, "paySchedule", void 0);
     return PaySchedule;

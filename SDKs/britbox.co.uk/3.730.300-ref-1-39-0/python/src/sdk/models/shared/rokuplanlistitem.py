@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RokuPlanListItemIntervalEnum(str, Enum):
     DAY = "day"
@@ -13,14 +14,14 @@ class RokuPlanListItemIntervalEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RokuPlanListItem:
-    amount: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    interval: RokuPlanListItemIntervalEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interval' }})
-    interval_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intervalCount' }})
-    nickname: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nickname' }})
-    product: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product' }})
-    product_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productCode' }})
-    saving_label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'savingLabel' }})
-    trial_period_days: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trialPeriodDays' }})
+    amount: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    currency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    interval: RokuPlanListItemIntervalEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('interval') }})
+    interval_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('intervalCount') }})
+    nickname: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('nickname') }})
+    product: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('product') }})
+    product_code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('productCode') }})
+    saving_label: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('savingLabel') }})
+    trial_period_days: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('trialPeriodDays') }})
     

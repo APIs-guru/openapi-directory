@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import ospolicyassignment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListOsPolicyAssignmentsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    os_policy_assignments: Optional[List[ospolicyassignment.OsPolicyAssignment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'osPolicyAssignments' }})
+    r"""ListOsPolicyAssignmentsResponse
+    A response message for listing all assignments under given parent.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    os_policy_assignments: Optional[List[OsPolicyAssignment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('osPolicyAssignments') }})
     

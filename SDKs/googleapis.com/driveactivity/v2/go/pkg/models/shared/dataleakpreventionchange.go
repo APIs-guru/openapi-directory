@@ -8,6 +8,8 @@ const (
 	DataLeakPreventionChangeTypeEnumCleared         DataLeakPreventionChangeTypeEnum = "CLEARED"
 )
 
+// DataLeakPreventionChange
+// A change in the object's data leak prevention status.
 type DataLeakPreventionChange struct {
 	Type *DataLeakPreventionChangeTypeEnum `json:"type,omitempty"`
 }

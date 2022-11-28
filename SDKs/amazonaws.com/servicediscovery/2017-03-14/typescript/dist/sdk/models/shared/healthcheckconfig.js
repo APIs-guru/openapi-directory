@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthCheckTypeEnum } from "./healthchecktypeenum";
 // HealthCheckConfig
 /**
@@ -34,15 +34,15 @@ var HealthCheckConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FailureThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=FailureThreshold" }),
         __metadata("design:type", Number)
     ], HealthCheckConfig.prototype, "failureThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourcePath" }),
+        SpeakeasyMetadata({ data: "json, name=ResourcePath" }),
         __metadata("design:type", String)
     ], HealthCheckConfig.prototype, "resourcePath", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], HealthCheckConfig.prototype, "type", void 0);
     return HealthCheckConfig;

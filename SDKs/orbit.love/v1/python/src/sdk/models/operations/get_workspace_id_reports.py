@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetWorkspaceIDReportsPathParams:
-    workspace_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace_id', 'style': 'simple', 'explode': False }})
+    workspace_id: str = field(metadata={'path_param': { 'field_name': 'workspace_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,18 +22,18 @@ class GetWorkspaceIDReportsQueryParams:
 
 @dataclass
 class GetWorkspaceIDReportsSecurity:
-    bearer: shared.SchemeBearer = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    bearer: shared.SchemeBearer = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetWorkspaceIDReportsRequest:
-    path_params: GetWorkspaceIDReportsPathParams = field(default=None)
-    query_params: GetWorkspaceIDReportsQueryParams = field(default=None)
-    security: GetWorkspaceIDReportsSecurity = field(default=None)
+    path_params: GetWorkspaceIDReportsPathParams = field()
+    query_params: GetWorkspaceIDReportsQueryParams = field()
+    security: GetWorkspaceIDReportsSecurity = field()
     
 
 @dataclass
 class GetWorkspaceIDReportsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

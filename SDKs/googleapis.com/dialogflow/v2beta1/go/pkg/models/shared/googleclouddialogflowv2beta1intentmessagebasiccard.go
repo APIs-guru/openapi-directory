@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1IntentMessageBasicCard
+// The basic card message. Useful for displaying information.
 type GoogleCloudDialogflowV2beta1IntentMessageBasicCard struct {
 	Buttons       []GoogleCloudDialogflowV2beta1IntentMessageBasicCardButton `json:"buttons,omitempty"`
 	FormattedText *string                                                    `json:"formattedText,omitempty"`

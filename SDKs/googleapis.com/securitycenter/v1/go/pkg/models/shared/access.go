@@ -1,5 +1,7 @@
 package shared
 
+// Access
+// Represents an access event.
 type Access struct {
 	CallerIP                     *string                        `json:"callerIp,omitempty"`
 	CallerIPGeo                  *Geolocation                   `json:"callerIpGeo,omitempty"`

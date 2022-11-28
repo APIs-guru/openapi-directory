@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://us1.pdfgeneratorapi.com/api/v3",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CopyTemplate - Copy template
+// Creates a copy of a template to the workspace specified in authentication parameters.
 func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateRequest) (*operations.CopyTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates/templateId/copy"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -68,7 +95,7 @@ func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -148,8 +175,10 @@ func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateR
 	return res, nil
 }
 
+// CreateTemplate - Create template
+// Creates a new template. If template configuration is not specified in the request body then an empty template is created. Template is placed to the workspace specified in authentication params. Template configuration must be sent in the request body.
 func (s *SDK) CreateTemplate(ctx context.Context, request operations.CreateTemplateRequest) (*operations.CreateTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -167,7 +196,7 @@ func (s *SDK) CreateTemplate(ctx context.Context, request operations.CreateTempl
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -247,8 +276,10 @@ func (s *SDK) CreateTemplate(ctx context.Context, request operations.CreateTempl
 	return res, nil
 }
 
+// DeleteTemplate - Delete template
+// Deletes the template from workspace
 func (s *SDK) DeleteTemplate(ctx context.Context, request operations.DeleteTemplateRequest) (*operations.DeleteTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates/templateId"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -258,7 +289,7 @@ func (s *SDK) DeleteTemplate(ctx context.Context, request operations.DeleteTempl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -338,8 +369,10 @@ func (s *SDK) DeleteTemplate(ctx context.Context, request operations.DeleteTempl
 	return res, nil
 }
 
+// DeleteWorkspace - Delete workspace
+// Deletes the workspace
 func (s *SDK) DeleteWorkspace(ctx context.Context, request operations.DeleteWorkspaceRequest) (*operations.DeleteWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/workspaces/workspaceId"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -349,7 +382,7 @@ func (s *SDK) DeleteWorkspace(ctx context.Context, request operations.DeleteWork
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -429,8 +462,10 @@ func (s *SDK) DeleteWorkspace(ctx context.Context, request operations.DeleteWork
 	return res, nil
 }
 
+// GetEditorURL - Open editor
+// Returns an unique URL which you can use to redirect your user to the editor from your application or use the generated URL as iframe source to show the editor within your application.
 func (s *SDK) GetEditorURL(ctx context.Context, request operations.GetEditorURLRequest) (*operations.GetEditorURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates/templateId/editor"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -450,7 +485,7 @@ func (s *SDK) GetEditorURL(ctx context.Context, request operations.GetEditorURLR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -530,8 +565,10 @@ func (s *SDK) GetEditorURL(ctx context.Context, request operations.GetEditorURLR
 	return res, nil
 }
 
+// GetTemplate - Get template
+// Returns template configuration
 func (s *SDK) GetTemplate(ctx context.Context, request operations.GetTemplateRequest) (*operations.GetTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates/templateId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -541,7 +578,7 @@ func (s *SDK) GetTemplate(ctx context.Context, request operations.GetTemplateReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -621,8 +658,10 @@ func (s *SDK) GetTemplate(ctx context.Context, request operations.GetTemplateReq
 	return res, nil
 }
 
+// GetTemplates - Get templates
+// Returns a list of templates available for the authenticated workspace
 func (s *SDK) GetTemplates(ctx context.Context) (*operations.GetTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -630,7 +669,7 @@ func (s *SDK) GetTemplates(ctx context.Context) (*operations.GetTemplatesRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -710,8 +749,10 @@ func (s *SDK) GetTemplates(ctx context.Context) (*operations.GetTemplatesRespons
 	return res, nil
 }
 
+// GetWorkspace - Get workspace
+// Returns workspace information
 func (s *SDK) GetWorkspace(ctx context.Context, request operations.GetWorkspaceRequest) (*operations.GetWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/workspaces/workspaceId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -721,7 +762,7 @@ func (s *SDK) GetWorkspace(ctx context.Context, request operations.GetWorkspaceR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -801,8 +842,10 @@ func (s *SDK) GetWorkspace(ctx context.Context, request operations.GetWorkspaceR
 	return res, nil
 }
 
+// MergeTemplate - Generate document
+// Merges template with data and returns base64 encoded document or a public URL to a document. You can send json encoded data in request body or a public URL to your json file as the data parameter. NB! When the public URL option is used, the document is stored for 30 days and automatically deleted.
 func (s *SDK) MergeTemplate(ctx context.Context, request operations.MergeTemplateRequest) (*operations.MergeTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates/templateId/output"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -822,7 +865,7 @@ func (s *SDK) MergeTemplate(ctx context.Context, request operations.MergeTemplat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -902,8 +945,10 @@ func (s *SDK) MergeTemplate(ctx context.Context, request operations.MergeTemplat
 	return res, nil
 }
 
+// MergeTemplates - Generate document (multiple templates)
+// Allows to merge multiples template with data and returns base64 encoded document or public URL to a document. NB! When the public URL option is used, the document is stored for 30 days and automatically deleted.
 func (s *SDK) MergeTemplates(ctx context.Context, request operations.MergeTemplatesRequest) (*operations.MergeTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates/output"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -923,7 +968,7 @@ func (s *SDK) MergeTemplates(ctx context.Context, request operations.MergeTempla
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1003,8 +1048,10 @@ func (s *SDK) MergeTemplates(ctx context.Context, request operations.MergeTempla
 	return res, nil
 }
 
+// UpdateTemplate - Update template
+// Updates template configuration. The template configuration for pages and layout must be complete as the entire configuration is replaced and not merged.
 func (s *SDK) UpdateTemplate(ctx context.Context, request operations.UpdateTemplateRequest) (*operations.UpdateTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates/templateId"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1024,7 +1071,7 @@ func (s *SDK) UpdateTemplate(ctx context.Context, request operations.UpdateTempl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

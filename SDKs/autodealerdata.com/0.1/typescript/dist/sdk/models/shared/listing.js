@@ -22,66 +22,66 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Listing = /** @class */ (function (_super) {
     __extends(Listing, _super);
     function Listing() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=askPrice" }),
+        SpeakeasyMetadata({ data: "json, name=askPrice" }),
         __metadata("design:type", Number)
     ], Listing.prototype, "askPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=brandName" }),
+        SpeakeasyMetadata({ data: "json, name=brandName" }),
         __metadata("design:type", String)
     ], Listing.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "json, name=color" }),
+        SpeakeasyMetadata({ data: "json, name=color" }),
         __metadata("design:type", String)
     ], Listing.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "json, name=dealerID" }),
+        SpeakeasyMetadata({ data: "json, name=dealerID" }),
         __metadata("design:type", Number)
     ], Listing.prototype, "dealerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstSeen" }),
+        SpeakeasyMetadata({ data: "json, name=firstSeen" }),
         __metadata("design:type", Date)
     ], Listing.prototype, "firstSeen", void 0);
     __decorate([
-        Metadata({ data: "json, name=interiorColor" }),
+        SpeakeasyMetadata({ data: "json, name=interiorColor" }),
         __metadata("design:type", String)
     ], Listing.prototype, "interiorColor", void 0);
     __decorate([
-        Metadata({ data: "json, name=isNew" }),
+        SpeakeasyMetadata({ data: "json, name=isNew" }),
         __metadata("design:type", Boolean)
     ], Listing.prototype, "isNew", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastSeen" }),
+        SpeakeasyMetadata({ data: "json, name=lastSeen" }),
         __metadata("design:type", Date)
     ], Listing.prototype, "lastSeen", void 0);
     __decorate([
-        Metadata({ data: "json, name=mileage" }),
+        SpeakeasyMetadata({ data: "json, name=mileage" }),
         __metadata("design:type", Number)
     ], Listing.prototype, "mileage", void 0);
     __decorate([
-        Metadata({ data: "json, name=modelName" }),
+        SpeakeasyMetadata({ data: "json, name=modelName" }),
         __metadata("design:type", String)
     ], Listing.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=msrp" }),
+        SpeakeasyMetadata({ data: "json, name=msrp" }),
         __metadata("design:type", Number)
     ], Listing.prototype, "msrp", void 0);
     __decorate([
-        Metadata({ data: "json, name=vin" }),
+        SpeakeasyMetadata({ data: "json, name=vin" }),
         __metadata("design:type", String)
     ], Listing.prototype, "vin", void 0);
     __decorate([
-        Metadata({ data: "json, name=vinDecode" }),
+        SpeakeasyMetadata({ data: "json, name=vinDecode" }),
         __metadata("design:type", Map)
     ], Listing.prototype, "vinDecode", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], Listing.prototype, "year", void 0);
     return Listing;

@@ -1,5 +1,7 @@
 package shared
 
+// Channel
+// Object specifying a channel.
 type Channel struct {
 	Arn                       *string                 `json:"arn,omitempty"`
 	Authorized                *bool                   `json:"authorized,omitempty"`

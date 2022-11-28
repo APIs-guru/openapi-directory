@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InsightTimeRange } from "./insighttimerange";
 import { PredictionTimeRange } from "./predictiontimerange";
 import { ResourceCollection } from "./resourcecollection";
@@ -39,35 +39,35 @@ var ProactiveInsightSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ProactiveInsightSummary.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=InsightTimeRange" }),
+        SpeakeasyMetadata({ data: "json, name=InsightTimeRange" }),
         __metadata("design:type", InsightTimeRange)
     ], ProactiveInsightSummary.prototype, "insightTimeRange", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ProactiveInsightSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=PredictionTimeRange" }),
+        SpeakeasyMetadata({ data: "json, name=PredictionTimeRange" }),
         __metadata("design:type", PredictionTimeRange)
     ], ProactiveInsightSummary.prototype, "predictionTimeRange", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceCollection" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceCollection" }),
         __metadata("design:type", ResourceCollection)
     ], ProactiveInsightSummary.prototype, "resourceCollection", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceCollection" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceCollection" }),
         __metadata("design:type", ServiceCollection)
     ], ProactiveInsightSummary.prototype, "serviceCollection", void 0);
     __decorate([
-        Metadata({ data: "json, name=Severity" }),
+        SpeakeasyMetadata({ data: "json, name=Severity" }),
         __metadata("design:type", String)
     ], ProactiveInsightSummary.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ProactiveInsightSummary.prototype, "status", void 0);
     return ProactiveInsightSummary;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BiddingFunction } from "./biddingfunction";
+
 
 
 // ListBiddingFunctionsResponse
@@ -8,9 +8,9 @@ import { BiddingFunction } from "./biddingfunction";
  * A response containing a list of a bidder's bidding functions.
 **/
 export class ListBiddingFunctionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=biddingFunctions", elemType: shared.BiddingFunction })
+  @SpeakeasyMetadata({ data: "json, name=biddingFunctions", elemType: BiddingFunction })
   biddingFunctions?: BiddingFunction[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

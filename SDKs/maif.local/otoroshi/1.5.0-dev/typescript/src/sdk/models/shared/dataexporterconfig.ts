@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ElasticConfig } from "./elasticconfig";
 import { KafkaConfig } from "./kafkaconfig";
 import { PulsarDataExporterConfig } from "./pulsardataexporterconfig";
@@ -12,14 +12,15 @@ import { CustomDataExporterConfig } from "./customdataexporterconfig";
 import { Filtering } from "./filtering";
 import { Location } from "./location";
 
+
 export enum DataExporterConfigTypEnum {
-    Kafka = "kafka"
-,    Pulsar = "pulsar"
-,    File = "file"
-,    Mailer = "mailer"
-,    Elastic = "elastic"
-,    Console = "console"
-,    Custom = "custom"
+    Kafka = "kafka",
+    Pulsar = "pulsar",
+    File = "file",
+    Mailer = "mailer",
+    Elastic = "elastic",
+    Console = "console",
+    Custom = "custom"
 }
 
 
@@ -28,48 +29,48 @@ export enum DataExporterConfigTypEnum {
  * Settings to export Otorshi events
 **/
 export class DataExporterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bufferSize" })
+  @SpeakeasyMetadata({ data: "json, name=bufferSize" })
   bufferSize?: number;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: any;
 
-  @Metadata({ data: "json, name=desc" })
+  @SpeakeasyMetadata({ data: "json, name=desc" })
   desc?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: string;
 
-  @Metadata({ data: "json, name=filtering" })
+  @SpeakeasyMetadata({ data: "json, name=filtering" })
   filtering?: Filtering;
 
-  @Metadata({ data: "json, name=groupDuration" })
+  @SpeakeasyMetadata({ data: "json, name=groupDuration" })
   groupDuration?: number;
 
-  @Metadata({ data: "json, name=groupSize" })
+  @SpeakeasyMetadata({ data: "json, name=groupSize" })
   groupSize?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=jsonWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=jsonWorkers" })
   jsonWorkers?: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=projection" })
+  @SpeakeasyMetadata({ data: "json, name=projection" })
   projection?: Map<string, string>;
 
-  @Metadata({ data: "json, name=sendWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=sendWorkers" })
   sendWorkers?: number;
 
-  @Metadata({ data: "json, name=typ" })
+  @SpeakeasyMetadata({ data: "json, name=typ" })
   typ?: DataExporterConfigTypEnum;
 }

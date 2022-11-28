@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressAutocompleteHitUrls } from "./addressautocompletehiturls";
 
 
+
 export class AddressAutocompleteHit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=suggestion" })
+  @SpeakeasyMetadata({ data: "json, name=suggestion" })
   suggestion?: string;
 
-  @Metadata({ data: "json, name=udprn" })
+  @SpeakeasyMetadata({ data: "json, name=udprn" })
   udprn?: string;
 
-  @Metadata({ data: "json, name=umprn" })
+  @SpeakeasyMetadata({ data: "json, name=umprn" })
   umprn?: string;
 
-  @Metadata({ data: "json, name=urls" })
+  @SpeakeasyMetadata({ data: "json, name=urls" })
   urls?: AddressAutocompleteHitUrls;
 }

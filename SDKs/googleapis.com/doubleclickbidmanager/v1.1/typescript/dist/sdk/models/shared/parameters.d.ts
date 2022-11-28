@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FilterPair } from "./filterpair";
 import { Options } from "./options";
 export declare enum ParametersGroupBysEnum {

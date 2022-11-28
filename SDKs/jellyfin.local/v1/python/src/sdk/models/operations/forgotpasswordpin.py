@@ -17,7 +17,7 @@ class ForgotPasswordPinRequest:
 
 @dataclass
 class ForgotPasswordPinResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pin_redeem_result: Optional[shared.PinRedeemResult] = field(default=None)
-    status_code: int = field(default=None)
     

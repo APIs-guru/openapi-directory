@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleSearchIdeahubV1alphaAvailableLocale
 /**
  * Represents locales that are available for a web property.
@@ -33,11 +33,11 @@ var GoogleSearchIdeahubV1alphaAvailableLocale = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=locale" }),
+        SpeakeasyMetadata({ data: "json, name=locale" }),
         __metadata("design:type", String)
     ], GoogleSearchIdeahubV1alphaAvailableLocale.prototype, "locale", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleSearchIdeahubV1alphaAvailableLocale.prototype, "name", void 0);
     return GoogleSearchIdeahubV1alphaAvailableLocale;

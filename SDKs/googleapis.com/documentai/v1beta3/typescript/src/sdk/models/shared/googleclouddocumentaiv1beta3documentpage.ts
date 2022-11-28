@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1beta3DocumentPageBlock } from "./googleclouddocumentaiv1beta3documentpageblock";
 import { GoogleCloudDocumentaiV1beta3DocumentPageDetectedBarcode } from "./googleclouddocumentaiv1beta3documentpagedetectedbarcode";
 import { GoogleCloudDocumentaiV1beta3DocumentPageDetectedLanguage } from "./googleclouddocumentaiv1beta3documentpagedetectedlanguage";
@@ -18,59 +17,60 @@ import { GoogleCloudDocumentaiV1beta3DocumentPageMatrix } from "./googleclouddoc
 import { GoogleCloudDocumentaiV1beta3DocumentPageVisualElement } from "./googleclouddocumentaiv1beta3documentpagevisualelement";
 
 
+
 // GoogleCloudDocumentaiV1beta3DocumentPage
 /** 
  * A page in a Document.
 **/
 export class GoogleCloudDocumentaiV1beta3DocumentPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocks", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageBlock })
+  @SpeakeasyMetadata({ data: "json, name=blocks", elemType: GoogleCloudDocumentaiV1beta3DocumentPageBlock })
   blocks?: GoogleCloudDocumentaiV1beta3DocumentPageBlock[];
 
-  @Metadata({ data: "json, name=detectedBarcodes", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageDetectedBarcode })
+  @SpeakeasyMetadata({ data: "json, name=detectedBarcodes", elemType: GoogleCloudDocumentaiV1beta3DocumentPageDetectedBarcode })
   detectedBarcodes?: GoogleCloudDocumentaiV1beta3DocumentPageDetectedBarcode[];
 
-  @Metadata({ data: "json, name=detectedLanguages", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageDetectedLanguage })
+  @SpeakeasyMetadata({ data: "json, name=detectedLanguages", elemType: GoogleCloudDocumentaiV1beta3DocumentPageDetectedLanguage })
   detectedLanguages?: GoogleCloudDocumentaiV1beta3DocumentPageDetectedLanguage[];
 
-  @Metadata({ data: "json, name=dimension" })
+  @SpeakeasyMetadata({ data: "json, name=dimension" })
   dimension?: GoogleCloudDocumentaiV1beta3DocumentPageDimension;
 
-  @Metadata({ data: "json, name=formFields", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageFormField })
+  @SpeakeasyMetadata({ data: "json, name=formFields", elemType: GoogleCloudDocumentaiV1beta3DocumentPageFormField })
   formFields?: GoogleCloudDocumentaiV1beta3DocumentPageFormField[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: GoogleCloudDocumentaiV1beta3DocumentPageImage;
 
-  @Metadata({ data: "json, name=imageQualityScores" })
+  @SpeakeasyMetadata({ data: "json, name=imageQualityScores" })
   imageQualityScores?: GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScores;
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: GoogleCloudDocumentaiV1beta3DocumentPageLayout;
 
-  @Metadata({ data: "json, name=lines", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageLine })
+  @SpeakeasyMetadata({ data: "json, name=lines", elemType: GoogleCloudDocumentaiV1beta3DocumentPageLine })
   lines?: GoogleCloudDocumentaiV1beta3DocumentPageLine[];
 
-  @Metadata({ data: "json, name=pageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=pageNumber" })
   pageNumber?: number;
 
-  @Metadata({ data: "json, name=paragraphs", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageParagraph })
+  @SpeakeasyMetadata({ data: "json, name=paragraphs", elemType: GoogleCloudDocumentaiV1beta3DocumentPageParagraph })
   paragraphs?: GoogleCloudDocumentaiV1beta3DocumentPageParagraph[];
 
-  @Metadata({ data: "json, name=provenance" })
+  @SpeakeasyMetadata({ data: "json, name=provenance" })
   provenance?: GoogleCloudDocumentaiV1beta3DocumentProvenance;
 
-  @Metadata({ data: "json, name=symbols", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageSymbol })
+  @SpeakeasyMetadata({ data: "json, name=symbols", elemType: GoogleCloudDocumentaiV1beta3DocumentPageSymbol })
   symbols?: GoogleCloudDocumentaiV1beta3DocumentPageSymbol[];
 
-  @Metadata({ data: "json, name=tables", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageTable })
+  @SpeakeasyMetadata({ data: "json, name=tables", elemType: GoogleCloudDocumentaiV1beta3DocumentPageTable })
   tables?: GoogleCloudDocumentaiV1beta3DocumentPageTable[];
 
-  @Metadata({ data: "json, name=tokens", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageToken })
+  @SpeakeasyMetadata({ data: "json, name=tokens", elemType: GoogleCloudDocumentaiV1beta3DocumentPageToken })
   tokens?: GoogleCloudDocumentaiV1beta3DocumentPageToken[];
 
-  @Metadata({ data: "json, name=transforms", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageMatrix })
+  @SpeakeasyMetadata({ data: "json, name=transforms", elemType: GoogleCloudDocumentaiV1beta3DocumentPageMatrix })
   transforms?: GoogleCloudDocumentaiV1beta3DocumentPageMatrix[];
 
-  @Metadata({ data: "json, name=visualElements", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageVisualElement })
+  @SpeakeasyMetadata({ data: "json, name=visualElements", elemType: GoogleCloudDocumentaiV1beta3DocumentPageVisualElement })
   visualElements?: GoogleCloudDocumentaiV1beta3DocumentPageVisualElement[];
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum WarningPriorityEnum {
-    PriorityUnspecified = "PRIORITY_UNSPECIFIED"
-,    Info = "INFO"
-,    Warning = "WARNING"
-,    Alert = "ALERT"
+    PriorityUnspecified = "PRIORITY_UNSPECIFIED",
+    Info = "INFO",
+    Warning = "WARNING",
+    Alert = "ALERT"
 }
 
 
@@ -13,9 +14,9 @@ export enum WarningPriorityEnum {
  * A non-fatal problem encountered during the execution of the build.
 **/
 export class Warning extends SpeakeasyBase {
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: WarningPriorityEnum;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

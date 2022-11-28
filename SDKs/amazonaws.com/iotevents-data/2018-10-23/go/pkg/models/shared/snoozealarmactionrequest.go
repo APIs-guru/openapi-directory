@@ -1,5 +1,7 @@
 package shared
 
+// SnoozeAlarmActionRequest
+// Information needed to snooze the alarm.
 type SnoozeAlarmActionRequest struct {
 	AlarmModelName string  `json:"alarmModelName"`
 	KeyValue       *string `json:"keyValue,omitempty"`

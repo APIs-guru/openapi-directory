@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExpressionTypeEnum } from "./expressiontypeenum";
 import { InputSerialization } from "./inputserialization";
 import { OutputSerialization } from "./outputserialization";

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegionalInventory } from "./regionalinventory";
+
 
 
 // RegionalinventoryCustomBatchRequestEntry
@@ -7,18 +8,18 @@ import { RegionalInventory } from "./regionalinventory";
  * A batch entry encoding a single non-batch regional inventory request.
 **/
 export class RegionalinventoryCustomBatchRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchId" })
+  @SpeakeasyMetadata({ data: "json, name=batchId" })
   batchId?: number;
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=regionalInventory" })
+  @SpeakeasyMetadata({ data: "json, name=regionalInventory" })
   regionalInventory?: RegionalInventory;
 }

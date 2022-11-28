@@ -62,6 +62,8 @@ const (
 	CreateHookInputSubscriberTypeEnumEmail CreateHookInputSubscriberTypeEnum = "email"
 )
 
+// CreateHookInput
+// Creates a hook related to previous created check.
 type CreateHookInput struct {
 	Actions            []string                               `form:"name=actions"`
 	EventType          CreateHookInputEventTypeEnum           `form:"name=event_type"`

@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
 import { UnmappedAttribute } from "./unmappedattribute";
 
 
+
 export class DetectEntitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.Entity })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: Entity })
   entities: Entity[];
 
-  @Metadata({ data: "json, name=ModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ModelVersion" })
   modelVersion: string;
 
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 
-  @Metadata({ data: "json, name=UnmappedAttributes", elemType: shared.UnmappedAttribute })
+  @SpeakeasyMetadata({ data: "json, name=UnmappedAttributes", elemType: UnmappedAttribute })
   unmappedAttributes?: UnmappedAttribute[];
 }

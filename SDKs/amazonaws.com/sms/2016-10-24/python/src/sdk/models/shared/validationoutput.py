@@ -1,22 +1,26 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import appvalidationoutput
-from . import servervalidationoutput
-from . import validationstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ValidationOutput:
-    app_validation_output: Optional[appvalidationoutput.AppValidationOutput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appValidationOutput' }})
-    latest_validation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestValidationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    server_validation_output: Optional[servervalidationoutput.ServerValidationOutput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serverValidationOutput' }})
-    status: Optional[validationstatus_enum.ValidationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusMessage' }})
-    validation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validationId' }})
+    r"""ValidationOutput
+    Contains validation output.
+    """
+    
+    app_validation_output: Optional[AppValidationOutput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appValidationOutput') }})
+    latest_validation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestValidationTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    server_validation_output: Optional[ServerValidationOutput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverValidationOutput') }})
+    status: Optional[ValidationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusMessage') }})
+    validation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validationId') }})
     

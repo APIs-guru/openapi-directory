@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayerSeasonPpaAveragePpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=all" })
+  @SpeakeasyMetadata({ data: "json, name=all" })
   all?: number;
 
-  @Metadata({ data: "json, name=firstDown" })
+  @SpeakeasyMetadata({ data: "json, name=firstDown" })
   firstDown?: number;
 
-  @Metadata({ data: "json, name=pass" })
+  @SpeakeasyMetadata({ data: "json, name=pass" })
   pass?: number;
 
-  @Metadata({ data: "json, name=passingDowns" })
+  @SpeakeasyMetadata({ data: "json, name=passingDowns" })
   passingDowns?: number;
 
-  @Metadata({ data: "json, name=rush" })
+  @SpeakeasyMetadata({ data: "json, name=rush" })
   rush?: number;
 
-  @Metadata({ data: "json, name=secondDown" })
+  @SpeakeasyMetadata({ data: "json, name=secondDown" })
   secondDown?: number;
 
-  @Metadata({ data: "json, name=standardDowns" })
+  @SpeakeasyMetadata({ data: "json, name=standardDowns" })
   standardDowns?: number;
 
-  @Metadata({ data: "json, name=thirdDown" })
+  @SpeakeasyMetadata({ data: "json, name=thirdDown" })
   thirdDown?: number;
 }
 
 
 export class PlayerSeasonPpaTotalPpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=all" })
+  @SpeakeasyMetadata({ data: "json, name=all" })
   all?: number;
 
-  @Metadata({ data: "json, name=firstDown" })
+  @SpeakeasyMetadata({ data: "json, name=firstDown" })
   firstDown?: number;
 
-  @Metadata({ data: "json, name=pass" })
+  @SpeakeasyMetadata({ data: "json, name=pass" })
   pass?: number;
 
-  @Metadata({ data: "json, name=passingDowns" })
+  @SpeakeasyMetadata({ data: "json, name=passingDowns" })
   passingDowns?: number;
 
-  @Metadata({ data: "json, name=rush" })
+  @SpeakeasyMetadata({ data: "json, name=rush" })
   rush?: number;
 
-  @Metadata({ data: "json, name=secondDown" })
+  @SpeakeasyMetadata({ data: "json, name=secondDown" })
   secondDown?: number;
 
-  @Metadata({ data: "json, name=standardDowns" })
+  @SpeakeasyMetadata({ data: "json, name=standardDowns" })
   standardDowns?: number;
 
-  @Metadata({ data: "json, name=thirdDown" })
+  @SpeakeasyMetadata({ data: "json, name=thirdDown" })
   thirdDown?: number;
 }
 
 
 export class PlayerSeasonPpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averagePPA" })
+  @SpeakeasyMetadata({ data: "json, name=averagePPA" })
   averagePpa?: PlayerSeasonPpaAveragePpa;
 
-  @Metadata({ data: "json, name=conference" })
+  @SpeakeasyMetadata({ data: "json, name=conference" })
   conference?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=totalPPA" })
+  @SpeakeasyMetadata({ data: "json, name=totalPPA" })
   totalPpa?: PlayerSeasonPpaTotalPpa;
 }

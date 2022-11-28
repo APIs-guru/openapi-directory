@@ -1,5 +1,7 @@
 package shared
 
+// ActionDetail
+// Data describing the type and additional information of an action.
 type ActionDetail struct {
 	AppliedLabelChange *AppliedLabelChange       `json:"appliedLabelChange,omitempty"`
 	Comment            *Comment                  `json:"comment,omitempty"`

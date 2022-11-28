@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateAdminAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdminAccount" })
+  @SpeakeasyMetadata({ data: "json, name=AdminAccount" })
   adminAccount: string;
 }

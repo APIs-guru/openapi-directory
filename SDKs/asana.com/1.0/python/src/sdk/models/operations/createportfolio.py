@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -12,26 +13,26 @@ class CreatePortfolioQueryParams:
 
 @dataclass_json
 @dataclass
-class CreatePortfolioRequestBody:
-    data: Optional[shared.PortfolioRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    
-
-@dataclass
-class CreatePortfolioRequest:
-    query_params: CreatePortfolioQueryParams = field(default=None)
-    request: CreatePortfolioRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+class CreatePortfolioRequestBodyInput:
+    data: Optional[shared.PortfolioRequestInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     
 
 @dataclass_json
 @dataclass
 class CreatePortfolio201ApplicationJSON:
-    data: Optional[shared.PortfolioResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[shared.PortfolioResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class CreatePortfolioRequest:
+    query_params: CreatePortfolioQueryParams = field()
+    request: CreatePortfolioRequestBodyInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreatePortfolioResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     create_portfolio_201_application_json_object: Optional[CreatePortfolio201ApplicationJSON] = field(default=None)
     

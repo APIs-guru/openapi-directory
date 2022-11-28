@@ -1,5 +1,7 @@
 package shared
 
+// RoleAssignment
+// Defines an assignment of a role.
 type RoleAssignment struct {
 	AssignedTo       *string `json:"assignedTo,omitempty"`
 	Etag             *string `json:"etag,omitempty"`

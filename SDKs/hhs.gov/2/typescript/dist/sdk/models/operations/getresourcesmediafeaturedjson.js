@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesMediaFeaturedJsonQueryParams = /** @class */ (function (_super) {
     __extends(GetResourcesMediaFeaturedJsonQueryParams, _super);
@@ -30,15 +30,15 @@ var GetResourcesMediaFeaturedJsonQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaFeaturedJsonQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaFeaturedJsonQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesMediaFeaturedJsonQueryParams.prototype, "sort", void 0);
     return GetResourcesMediaFeaturedJsonQueryParams;
@@ -50,7 +50,7 @@ var GetResourcesMediaFeaturedJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaFeaturedJsonQueryParams)
     ], GetResourcesMediaFeaturedJsonRequest.prototype, "queryParams", void 0);
     return GetResourcesMediaFeaturedJsonRequest;
@@ -62,15 +62,15 @@ var GetResourcesMediaFeaturedJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesMediaFeaturedJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.MediaItem }),
+        SpeakeasyMetadata({ elemType: shared.MediaItem }),
         __metadata("design:type", Array)
     ], GetResourcesMediaFeaturedJsonResponse.prototype, "mediaItems", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesMediaFeaturedJsonResponse.prototype, "statusCode", void 0);
     return GetResourcesMediaFeaturedJsonResponse;

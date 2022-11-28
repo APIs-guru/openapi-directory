@@ -18,6 +18,8 @@ type StartSuiteRunHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartSuiteRunRequestBodySuiteRunConfiguration
+// Gets suite run configuration.
 type StartSuiteRunRequestBodySuiteRunConfiguration struct {
 	PrimaryDevice    *shared.DeviceUnderTest `json:"primaryDevice,omitempty"`
 	SelectedTestList []string                `json:"selectedTestList,omitempty"`

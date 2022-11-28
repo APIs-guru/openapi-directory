@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationResultQualifier } from "./evaluationresultqualifier";
+
 
 
 // EvaluationResultIdentifier
@@ -7,9 +8,9 @@ import { EvaluationResultQualifier } from "./evaluationresultqualifier";
  * Uniquely identifies an evaluation result.
 **/
 export class EvaluationResultIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationResultQualifier" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationResultQualifier" })
   evaluationResultQualifier?: EvaluationResultQualifier;
 
-  @Metadata({ data: "json, name=OrderingTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=OrderingTimestamp" })
   orderingTimestamp?: Date;
 }

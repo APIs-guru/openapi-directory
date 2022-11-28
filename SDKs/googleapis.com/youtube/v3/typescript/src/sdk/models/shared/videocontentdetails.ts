@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentRating } from "./contentrating";
 import { AccessPolicy } from "./accesspolicy";
 import { VideoContentDetailsRegionRestriction } from "./videocontentdetailsregionrestriction";
 
+
 export enum VideoContentDetailsCaptionEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }
 
 export enum VideoContentDetailsDefinitionEnum {
-    Sd = "sd"
-,    Hd = "hd"
+    Sd = "sd",
+    Hd = "hd"
 }
 
 export enum VideoContentDetailsProjectionEnum {
-    Rectangular = "rectangular"
-,    ThreeHundredAndSixty = "360"
+    Rectangular = "rectangular",
+    ThreeHundredAndSixty = "360"
 }
 
 
@@ -24,33 +25,33 @@ export enum VideoContentDetailsProjectionEnum {
  * Details about the content of a YouTube Video.
 **/
 export class VideoContentDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caption" })
+  @SpeakeasyMetadata({ data: "json, name=caption" })
   caption?: VideoContentDetailsCaptionEnum;
 
-  @Metadata({ data: "json, name=contentRating" })
+  @SpeakeasyMetadata({ data: "json, name=contentRating" })
   contentRating?: ContentRating;
 
-  @Metadata({ data: "json, name=countryRestriction" })
+  @SpeakeasyMetadata({ data: "json, name=countryRestriction" })
   countryRestriction?: AccessPolicy;
 
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition?: VideoContentDetailsDefinitionEnum;
 
-  @Metadata({ data: "json, name=dimension" })
+  @SpeakeasyMetadata({ data: "json, name=dimension" })
   dimension?: string;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=hasCustomThumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=hasCustomThumbnail" })
   hasCustomThumbnail?: boolean;
 
-  @Metadata({ data: "json, name=licensedContent" })
+  @SpeakeasyMetadata({ data: "json, name=licensedContent" })
   licensedContent?: boolean;
 
-  @Metadata({ data: "json, name=projection" })
+  @SpeakeasyMetadata({ data: "json, name=projection" })
   projection?: VideoContentDetailsProjectionEnum;
 
-  @Metadata({ data: "json, name=regionRestriction" })
+  @SpeakeasyMetadata({ data: "json, name=regionRestriction" })
   regionRestriction?: VideoContentDetailsRegionRestriction;
 }

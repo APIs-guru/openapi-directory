@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DnsConfig } from "./dnsconfig";
 import { HealthCheckConfig } from "./healthcheckconfig";
 import { HealthCheckCustomConfig } from "./healthcheckcustomconfig";

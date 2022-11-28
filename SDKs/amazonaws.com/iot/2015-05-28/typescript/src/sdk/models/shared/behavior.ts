@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BehaviorCriteria } from "./behaviorcriteria";
 import { MetricDimension } from "./metricdimension";
+
 
 
 // Behavior
@@ -8,18 +9,18 @@ import { MetricDimension } from "./metricdimension";
  * A Device Defender security profile behavior.
 **/
 export class Behavior extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criteria" })
+  @SpeakeasyMetadata({ data: "json, name=criteria" })
   criteria?: BehaviorCriteria;
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: string;
 
-  @Metadata({ data: "json, name=metricDimension" })
+  @SpeakeasyMetadata({ data: "json, name=metricDimension" })
   metricDimension?: MetricDimension;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=suppressAlerts" })
+  @SpeakeasyMetadata({ data: "json, name=suppressAlerts" })
   suppressAlerts?: boolean;
 }

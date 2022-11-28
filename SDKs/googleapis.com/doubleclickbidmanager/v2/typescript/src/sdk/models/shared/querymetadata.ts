@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataRange } from "./datarange";
 
+
 export enum QueryMetadataFormatEnum {
-    FormatUnspecified = "FORMAT_UNSPECIFIED"
-,    Csv = "CSV"
-,    Xlsx = "XLSX"
+    FormatUnspecified = "FORMAT_UNSPECIFIED",
+    Csv = "CSV",
+    Xlsx = "XLSX"
 }
 
 
@@ -13,18 +14,18 @@ export enum QueryMetadataFormatEnum {
  * Query metadata.
 **/
 export class QueryMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataRange" })
+  @SpeakeasyMetadata({ data: "json, name=dataRange" })
   dataRange?: DataRange;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: QueryMetadataFormatEnum;
 
-  @Metadata({ data: "json, name=sendNotification" })
+  @SpeakeasyMetadata({ data: "json, name=sendNotification" })
   sendNotification?: boolean;
 
-  @Metadata({ data: "json, name=shareEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=shareEmailAddress" })
   shareEmailAddress?: string[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

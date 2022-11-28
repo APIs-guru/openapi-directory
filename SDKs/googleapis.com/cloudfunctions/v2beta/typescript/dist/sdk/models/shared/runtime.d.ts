@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum RuntimeEnvironmentEnum {
     EnvironmentUnspecified = "ENVIRONMENT_UNSPECIFIED",
     Gen1 = "GEN_1",

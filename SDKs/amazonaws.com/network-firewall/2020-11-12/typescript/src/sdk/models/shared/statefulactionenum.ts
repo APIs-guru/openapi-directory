@@ -1,7 +1,8 @@
 
 
+
 export enum StatefulActionEnum {
-    Pass = "PASS"
-,    Drop = "DROP"
-,    Alert = "ALERT"
+    Pass = "PASS",
+    Drop = "DROP",
+    Alert = "ALERT"
 }

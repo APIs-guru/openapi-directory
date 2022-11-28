@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetGroupGroupTitlePathParams = /** @class */ (function (_super) {
     __extends(GetGroupGroupTitlePathParams, _super);
@@ -30,7 +30,7 @@ var GetGroupGroupTitlePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=group_title" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group_title" }),
         __metadata("design:type", String)
     ], GetGroupGroupTitlePathParams.prototype, "groupTitle", void 0);
     return GetGroupGroupTitlePathParams;
@@ -42,7 +42,7 @@ var GetGroupGroupTitleSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetGroupGroupTitleSecurity.prototype, "basicAuthentication", void 0);
     return GetGroupGroupTitleSecurity;
@@ -54,11 +54,11 @@ var GetGroupGroupTitleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGroupGroupTitlePathParams)
     ], GetGroupGroupTitleRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGroupGroupTitleSecurity)
     ], GetGroupGroupTitleRequest.prototype, "security", void 0);
     return GetGroupGroupTitleRequest;
@@ -70,15 +70,15 @@ var GetGroupGroupTitleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetGroupGroupTitleResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGroupGroupTitleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGroupGroupTitleResponse.prototype, "statusCode", void 0);
     return GetGroupGroupTitleResponse;

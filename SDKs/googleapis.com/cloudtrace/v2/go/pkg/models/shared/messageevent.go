@@ -8,6 +8,8 @@ const (
 	MessageEventTypeEnumReceived        MessageEventTypeEnum = "RECEIVED"
 )
 
+// MessageEvent
+// An event describing a message sent/received between Spans.
 type MessageEvent struct {
 	CompressedSizeBytes   *string               `json:"compressedSizeBytes,omitempty"`
 	ID                    *string               `json:"id,omitempty"`

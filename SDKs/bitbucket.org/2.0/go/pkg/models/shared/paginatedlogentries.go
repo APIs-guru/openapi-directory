@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedLogEntries
+// A paginated list of issue changes.
 type PaginatedLogEntries struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

@@ -1,0 +1,36 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { CountryEnum } from "./countryenum";
+export declare enum TaxTaxCategoryEnum {
+    Standard = "standard",
+    ZeroRated = "zero_rated",
+    ReverseCharge = "reverse_charge",
+    IntraCommunity = "intra_community",
+    Exempt = "exempt",
+    Export = "export",
+    OutsideScope = "outside_scope",
+    Regulation33Exempt = "regulation33_exempt",
+    Nonregulation33Exempt = "nonregulation33_exempt",
+    DeemedSupply = "deemed_supply",
+    SrcaS = "srca_s",
+    SrcaC = "srca_c",
+    NotRegistered = "not_registered",
+    SalesTax = "sales_tax",
+    SalesTaxWork = "sales_tax_work",
+    ServiceTax = "service_tax",
+    ServiceTaxImport = "service_tax_import",
+    SalesToExportMarket = "sales_to_export_market",
+    SalesToSpecialArea = "sales_to_special_area",
+    SalesToDesignatedArea = "sales_to_designated_area",
+    ExemptionScheduleA = "exemption_schedule_a",
+    ExemptionScheduleB = "exemption_schedule_b",
+    ExemptionScheduleCA = "exemption_schedule_c_a",
+    ExemptionScheduleCB = "exemption_schedule_c_b",
+    ExemptionScheduleCC = "exemption_schedule_c_c",
+    ExemptionServiceTax = "exemption_service_tax"
+}
+export declare class Tax extends SpeakeasyBase {
+    amount?: number;
+    category?: TaxTaxCategoryEnum;
+    country: CountryEnum;
+    percentage?: number;
+}

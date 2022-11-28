@@ -1,87 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const LISTFAX_SERVERS = [
-	"https://fax.twilio.com",
-];
 
+export const ListFaxServerList = [
+	"https://fax.twilio.com",
+] as const;
 
 
 export class ListFaxQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DateCreatedAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DateCreatedAfter" })
   dateCreatedAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DateCreatedOnOrBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DateCreatedOnOrBefore" })
   dateCreatedOnOrBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=From" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=From" })
   from?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=To" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=To" })
   to?: string;
 }
 
 
 export class ListFaxSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   accountSidAuthToken: shared.SchemeAccountSidAuthToken;
 }
 
 
-export class ListFaxRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  queryParams: ListFaxQueryParams;
-
-  @Metadata()
-  security: ListFaxSecurity;
-}
-
-
 export class ListFaxListFaxResponseMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=first_page_url" })
+  @SpeakeasyMetadata({ data: "json, name=first_page_url" })
   firstPageUrl?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=next_page_url" })
+  @SpeakeasyMetadata({ data: "json, name=next_page_url" })
   nextPageUrl?: string;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=page_size" })
+  @SpeakeasyMetadata({ data: "json, name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=previous_page_url" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page_url" })
   previousPageUrl?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class ListFaxListFaxResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=faxes", elemType: shared.FaxV1Fax })
+  @SpeakeasyMetadata({ data: "json, name=faxes", elemType: shared.FaxV1Fax })
   faxes?: shared.FaxV1Fax[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: ListFaxListFaxResponseMeta;
 }
 
 
+export class ListFaxRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  queryParams: ListFaxQueryParams;
+
+  @SpeakeasyMetadata()
+  security: ListFaxSecurity;
+}
+
+
 export class ListFaxResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listFaxResponse?: ListFaxListFaxResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

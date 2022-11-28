@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputInformation } from "./inputinformation";
 import { OutputInformation } from "./outputinformation";
+
 
 
 // MeterFolderInformation
@@ -9,27 +9,27 @@ import { OutputInformation } from "./outputinformation";
  * Container Class for the Web API
 **/
 export class MeterFolderInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CommunicationModuleFirmwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=CommunicationModuleFirmwareVersion" })
   communicationModuleFirmwareVersion?: number;
 
-  @Metadata({ data: "json, name=CommunicationModuleHardwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=CommunicationModuleHardwareVersion" })
   communicationModuleHardwareVersion?: number;
 
-  @Metadata({ data: "json, name=FirmwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=FirmwareVersion" })
   firmwareVersion?: number;
 
-  @Metadata({ data: "json, name=HardwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=HardwareVersion" })
   hardwareVersion?: number;
 
-  @Metadata({ data: "json, name=InputInformations", elemType: shared.InputInformation })
+  @SpeakeasyMetadata({ data: "json, name=InputInformations", elemType: InputInformation })
   inputInformations?: InputInformation[];
 
-  @Metadata({ data: "json, name=IsFolder" })
+  @SpeakeasyMetadata({ data: "json, name=IsFolder" })
   isFolder?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OutputInformations", elemType: shared.OutputInformation })
+  @SpeakeasyMetadata({ data: "json, name=OutputInformations", elemType: OutputInformation })
   outputInformations?: OutputInformation[];
 }

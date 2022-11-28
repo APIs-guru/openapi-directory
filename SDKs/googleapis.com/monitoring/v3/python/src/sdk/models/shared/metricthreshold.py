@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import aggregation
-from . import aggregation
-from . import trigger
+from sdk import utils
+from . import *
 
 class MetricThresholdComparisonEnum(str, Enum):
     COMPARISON_UNSPECIFIED = "COMPARISON_UNSPECIFIED"
@@ -24,13 +24,17 @@ class MetricThresholdEvaluationMissingDataEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MetricThreshold:
-    aggregations: Optional[List[aggregation.Aggregation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregations' }})
-    comparison: Optional[MetricThresholdComparisonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparison' }})
-    denominator_aggregations: Optional[List[aggregation.Aggregation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'denominatorAggregations' }})
-    denominator_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'denominatorFilter' }})
-    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    evaluation_missing_data: Optional[MetricThresholdEvaluationMissingDataEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluationMissingData' }})
-    filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
-    threshold_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thresholdValue' }})
-    trigger: Optional[trigger.Trigger] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trigger' }})
+    r"""MetricThreshold
+    A condition type that compares a collection of time series against a threshold.
+    """
+    
+    aggregations: Optional[List[Aggregation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregations') }})
+    comparison: Optional[MetricThresholdComparisonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparison') }})
+    denominator_aggregations: Optional[List[Aggregation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('denominatorAggregations') }})
+    denominator_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('denominatorFilter') }})
+    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    evaluation_missing_data: Optional[MetricThresholdEvaluationMissingDataEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluationMissingData') }})
+    filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
+    threshold_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thresholdValue') }})
+    trigger: Optional[Trigger] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trigger') }})
     

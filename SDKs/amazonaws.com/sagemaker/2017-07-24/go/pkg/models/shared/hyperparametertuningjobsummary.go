@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// HyperParameterTuningJobSummary
+// Provides summary information about a hyperparameter tuning job.
 type HyperParameterTuningJobSummary struct {
 	CreationTime                  time.Time                               `json:"CreationTime"`
 	HyperParameterTuningEndTime   *time.Time                              `json:"HyperParameterTuningEndTime,omitempty"`

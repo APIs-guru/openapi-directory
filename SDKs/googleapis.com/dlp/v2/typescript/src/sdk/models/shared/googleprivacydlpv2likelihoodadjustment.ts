@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum {
-    LikelihoodUnspecified = "LIKELIHOOD_UNSPECIFIED"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    LikelihoodUnspecified = "LIKELIHOOD_UNSPECIFIED",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 
@@ -15,9 +16,9 @@ export enum GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum {
  * Message for specifying an adjustment to the likelihood of a finding as part of a detection rule.
 **/
 export class GooglePrivacyDlpV2LikelihoodAdjustment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=fixedLikelihood" })
   fixedLikelihood?: GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum;
 
-  @Metadata({ data: "json, name=relativeLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=relativeLikelihood" })
   relativeLikelihood?: number;
 }

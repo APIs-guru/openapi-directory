@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DomainDetails
+// The domain's details.
 type DomainDetails struct {
 	CreationTime     *time.Time        `json:"CreationTime,omitempty"`
 	DomainArn        *string           `json:"DomainArn,omitempty"`

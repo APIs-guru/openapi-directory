@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class ProjectedFantasyDefenseSeasonStatsWByeWeekAdpFormatEnum(str, Enum):
     XML = "XML"
@@ -8,18 +9,18 @@ class ProjectedFantasyDefenseSeasonStatsWByeWeekAdpFormatEnum(str, Enum):
 
 @dataclass
 class ProjectedFantasyDefenseSeasonStatsWByeWeekAdpPathParams:
-    format: ProjectedFantasyDefenseSeasonStatsWByeWeekAdpFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    format: ProjectedFantasyDefenseSeasonStatsWByeWeekAdpFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProjectedFantasyDefenseSeasonStatsWByeWeekAdpRequest:
-    path_params: ProjectedFantasyDefenseSeasonStatsWByeWeekAdpPathParams = field(default=None)
+    path_params: ProjectedFantasyDefenseSeasonStatsWByeWeekAdpPathParams = field()
     
 
 @dataclass
 class ProjectedFantasyDefenseSeasonStatsWByeWeekAdpResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     fantasy_defense_season_projections: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

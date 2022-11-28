@@ -1,5 +1,7 @@
 package shared
 
+// AwsRedshiftClusterDetails
+// Details about an Amazon Redshift cluster.
 type AwsRedshiftClusterDetails struct {
 	AllowVersionUpgrade                    *bool                                         `json:"AllowVersionUpgrade,omitempty"`
 	AutomatedSnapshotRetentionPeriod       *int64                                        `json:"AutomatedSnapshotRetentionPeriod,omitempty"`

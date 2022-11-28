@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TokenRefreshRequestCookieTypeEnum {
-    Session = "Session"
-,    Persistent = "Persistent"
+    Session = "Session",
+    Persistent = "Persistent"
 }
 
 
 export class TokenRefreshRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cookieType" })
+  @SpeakeasyMetadata({ data: "json, name=cookieType" })
   cookieType?: TokenRefreshRequestCookieTypeEnum;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TopicStatusEnum } from "./topicstatusenum";
 /**
  * Information about Amazon SNS topic and Directory Service directory associations.

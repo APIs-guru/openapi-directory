@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExportSnapshotRecord
+// Describes an export snapshot record.
 type ExportSnapshotRecord struct {
 	Arn             *string                         `json:"arn,omitempty"`
 	CreatedAt       *time.Time                      `json:"createdAt,omitempty"`

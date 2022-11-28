@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LastModifiedInfo } from "./lastmodifiedinfo";
 
+
 export enum OrderDocumentTypeEnum {
-    PlanningOrderTypeInsertionOrder = "PLANNING_ORDER_TYPE_INSERTION_ORDER"
-,    PlanningOrderTypeChangeOrder = "PLANNING_ORDER_TYPE_CHANGE_ORDER"
+    PlanningOrderTypeInsertionOrder = "PLANNING_ORDER_TYPE_INSERTION_ORDER",
+    PlanningOrderTypeChangeOrder = "PLANNING_ORDER_TYPE_CHANGE_ORDER"
 }
 
 
@@ -12,54 +13,54 @@ export enum OrderDocumentTypeEnum {
  * Contains properties of a Planning order document.
 **/
 export class OrderDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=amendedOrderDocumentId" })
+  @SpeakeasyMetadata({ data: "json, name=amendedOrderDocumentId" })
   amendedOrderDocumentId?: string;
 
-  @Metadata({ data: "json, name=approvedByUserProfileIds" })
+  @SpeakeasyMetadata({ data: "json, name=approvedByUserProfileIds" })
   approvedByUserProfileIds?: string[];
 
-  @Metadata({ data: "json, name=cancelled" })
+  @SpeakeasyMetadata({ data: "json, name=cancelled" })
   cancelled?: boolean;
 
-  @Metadata({ data: "json, name=createdInfo" })
+  @SpeakeasyMetadata({ data: "json, name=createdInfo" })
   createdInfo?: LastModifiedInfo;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastSentRecipients" })
+  @SpeakeasyMetadata({ data: "json, name=lastSentRecipients" })
   lastSentRecipients?: string[];
 
-  @Metadata({ data: "json, name=lastSentTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastSentTime" })
   lastSentTime?: Date;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=signed" })
+  @SpeakeasyMetadata({ data: "json, name=signed" })
   signed?: boolean;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: OrderDocumentTypeEnum;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetReplaceTransitGatewayRouteActionEnum(str, Enum):
     REPLACE_TRANSIT_GATEWAY_ROUTE = "ReplaceTransitGatewayRoute"
@@ -10,13 +14,13 @@ class GetReplaceTransitGatewayRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetReplaceTransitGatewayRouteQueryParams:
-    action: GetReplaceTransitGatewayRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetReplaceTransitGatewayRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    transit_gateway_route_table_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
+    version: GetReplaceTransitGatewayRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     blackhole: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Blackhole', 'style': 'form', 'explode': True }})
-    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     transit_gateway_attachment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    transit_gateway_route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
-    version: GetReplaceTransitGatewayRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetReplaceTransitGatewayRouteHeaders:
 
 @dataclass
 class GetReplaceTransitGatewayRouteRequest:
-    query_params: GetReplaceTransitGatewayRouteQueryParams = field(default=None)
-    headers: GetReplaceTransitGatewayRouteHeaders = field(default=None)
+    headers: GetReplaceTransitGatewayRouteHeaders = field()
+    query_params: GetReplaceTransitGatewayRouteQueryParams = field()
     
 
 @dataclass
 class GetReplaceTransitGatewayRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

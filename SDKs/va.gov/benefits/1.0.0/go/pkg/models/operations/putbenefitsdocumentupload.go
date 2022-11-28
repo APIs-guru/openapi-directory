@@ -4,10 +4,6 @@ type PutBenefitsDocumentUploadHeaders struct {
 	ContentMd5 *string `header:"style=simple,explode=false,name=Content-MD5"`
 }
 
-type PutBenefitsDocumentUploadRequest struct {
-	Headers PutBenefitsDocumentUploadHeaders
-}
-
 type PutBenefitsDocumentUpload401ApplicationJSON struct {
 	Message *string `json:"Message,omitempty"`
 }
@@ -25,6 +21,10 @@ type PutBenefitsDocumentUpload500ApplicationJSON struct {
 	Detail *string `json:"detail,omitempty"`
 	Status *string `json:"status,omitempty"`
 	Title  *string `json:"title,omitempty"`
+}
+
+type PutBenefitsDocumentUploadRequest struct {
+	Headers PutBenefitsDocumentUploadHeaders
 }
 
 type PutBenefitsDocumentUploadResponse struct {

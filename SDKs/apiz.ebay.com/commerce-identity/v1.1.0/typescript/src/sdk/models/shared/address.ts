@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Address
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The type that defines the fields for an address.
 **/
 export class Address extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine1" })
   addressLine1?: string;
 
-  @Metadata({ data: "json, name=addressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine2" })
   addressLine2?: string;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=county" })
+  @SpeakeasyMetadata({ data: "json, name=county" })
   county?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=stateOrProvince" })
+  @SpeakeasyMetadata({ data: "json, name=stateOrProvince" })
   stateOrProvince?: string;
 }

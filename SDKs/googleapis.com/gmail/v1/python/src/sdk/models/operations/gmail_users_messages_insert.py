@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailUsersMessagesInsertPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 class GmailUsersMessagesInsertInternalDateSourceEnum(str, Enum):
     RECEIVED_TIME = "receivedTime"
@@ -31,44 +35,44 @@ class GmailUsersMessagesInsertQueryParams:
 
 @dataclass
 class GmailUsersMessagesInsertRequests:
-    message_cpim: bytes = field(default=None, metadata={'request': { 'media_type': 'message/cpim' }})
-    message_delivery_status: bytes = field(default=None, metadata={'request': { 'media_type': 'message/delivery-status' }})
-    message_disposition_notification: bytes = field(default=None, metadata={'request': { 'media_type': 'message/disposition-notification' }})
-    message_external_body: bytes = field(default=None, metadata={'request': { 'media_type': 'message/external-body' }})
-    message_feedback_report: bytes = field(default=None, metadata={'request': { 'media_type': 'message/feedback-report' }})
-    message_global: bytes = field(default=None, metadata={'request': { 'media_type': 'message/global' }})
-    message_global_delivery_status: bytes = field(default=None, metadata={'request': { 'media_type': 'message/global-delivery-status' }})
-    message_global_disposition_notification: bytes = field(default=None, metadata={'request': { 'media_type': 'message/global-disposition-notification' }})
-    message_global_headers: bytes = field(default=None, metadata={'request': { 'media_type': 'message/global-headers' }})
-    message_http: bytes = field(default=None, metadata={'request': { 'media_type': 'message/http' }})
-    message_imdn_plus_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'message/imdn+xml' }})
-    message_news: bytes = field(default=None, metadata={'request': { 'media_type': 'message/news' }})
-    message_partial: bytes = field(default=None, metadata={'request': { 'media_type': 'message/partial' }})
-    message_rfc822: bytes = field(default=None, metadata={'request': { 'media_type': 'message/rfc822' }})
-    message_shttp: bytes = field(default=None, metadata={'request': { 'media_type': 'message/s-http' }})
-    message_sip: bytes = field(default=None, metadata={'request': { 'media_type': 'message/sip' }})
-    message_sipfrag: bytes = field(default=None, metadata={'request': { 'media_type': 'message/sipfrag' }})
-    message_tracking_status: bytes = field(default=None, metadata={'request': { 'media_type': 'message/tracking-status' }})
-    message_vnd_si_simp: bytes = field(default=None, metadata={'request': { 'media_type': 'message/vnd.si.simp' }})
-    message_vnd_wfa_wsc: bytes = field(default=None, metadata={'request': { 'media_type': 'message/vnd.wfa.wsc' }})
+    message_cpim: bytes = field(metadata={'request': { 'media_type': 'message/cpim' }})
+    message_delivery_status: bytes = field(metadata={'request': { 'media_type': 'message/delivery-status' }})
+    message_disposition_notification: bytes = field(metadata={'request': { 'media_type': 'message/disposition-notification' }})
+    message_external_body: bytes = field(metadata={'request': { 'media_type': 'message/external-body' }})
+    message_feedback_report: bytes = field(metadata={'request': { 'media_type': 'message/feedback-report' }})
+    message_global: bytes = field(metadata={'request': { 'media_type': 'message/global' }})
+    message_global_delivery_status: bytes = field(metadata={'request': { 'media_type': 'message/global-delivery-status' }})
+    message_global_disposition_notification: bytes = field(metadata={'request': { 'media_type': 'message/global-disposition-notification' }})
+    message_global_headers: bytes = field(metadata={'request': { 'media_type': 'message/global-headers' }})
+    message_http: bytes = field(metadata={'request': { 'media_type': 'message/http' }})
+    message_imdn_plus_xml: bytes = field(metadata={'request': { 'media_type': 'message/imdn+xml' }})
+    message_news: bytes = field(metadata={'request': { 'media_type': 'message/news' }})
+    message_partial: bytes = field(metadata={'request': { 'media_type': 'message/partial' }})
+    message_rfc822: bytes = field(metadata={'request': { 'media_type': 'message/rfc822' }})
+    message_shttp: bytes = field(metadata={'request': { 'media_type': 'message/s-http' }})
+    message_sip: bytes = field(metadata={'request': { 'media_type': 'message/sip' }})
+    message_sipfrag: bytes = field(metadata={'request': { 'media_type': 'message/sipfrag' }})
+    message_tracking_status: bytes = field(metadata={'request': { 'media_type': 'message/tracking-status' }})
+    message_vnd_si_simp: bytes = field(metadata={'request': { 'media_type': 'message/vnd.si.simp' }})
+    message_vnd_wfa_wsc: bytes = field(metadata={'request': { 'media_type': 'message/vnd.wfa.wsc' }})
     
 
 @dataclass
 class GmailUsersMessagesInsertSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersMessagesInsertSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersMessagesInsertSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -80,15 +84,15 @@ class GmailUsersMessagesInsertSecurity:
 
 @dataclass
 class GmailUsersMessagesInsertRequest:
-    path_params: GmailUsersMessagesInsertPathParams = field(default=None)
-    query_params: GmailUsersMessagesInsertQueryParams = field(default=None)
+    path_params: GmailUsersMessagesInsertPathParams = field()
+    query_params: GmailUsersMessagesInsertQueryParams = field()
+    security: GmailUsersMessagesInsertSecurity = field()
     request: Optional[GmailUsersMessagesInsertRequests] = field(default=None)
-    security: GmailUsersMessagesInsertSecurity = field(default=None)
     
 
 @dataclass
 class GmailUsersMessagesInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     message: Optional[shared.Message] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,6 +10,8 @@ const (
 	BigQueryConfigStateEnumSchemaMismatch   BigQueryConfigStateEnum = "SCHEMA_MISMATCH"
 )
 
+// BigQueryConfig
+// Configuration for a BigQuery subscription.
 type BigQueryConfig struct {
 	DropUnknownFields *bool                    `json:"dropUnknownFields,omitempty"`
 	State             *BigQueryConfigStateEnum `json:"state,omitempty"`

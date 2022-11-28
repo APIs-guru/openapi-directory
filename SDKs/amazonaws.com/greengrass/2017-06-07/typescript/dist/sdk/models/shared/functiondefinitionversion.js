@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FunctionDefaultConfig } from "./functiondefaultconfig";
+import { Function } from "./function";
 // FunctionDefinitionVersion
 /**
  * Information about a function definition version.
@@ -35,11 +35,11 @@ var FunctionDefinitionVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DefaultConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultConfig" }),
         __metadata("design:type", FunctionDefaultConfig)
     ], FunctionDefinitionVersion.prototype, "defaultConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Functions", elemType: shared.Function }),
+        SpeakeasyMetadata({ data: "json, name=Functions", elemType: Function }),
         __metadata("design:type", Array)
     ], FunctionDefinitionVersion.prototype, "functions", void 0);
     return FunctionDefinitionVersion;

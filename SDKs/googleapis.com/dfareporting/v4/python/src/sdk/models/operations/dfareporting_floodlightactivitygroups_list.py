@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingFloodlightActivityGroupsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingFloodlightActivityGroupsListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -46,20 +47,20 @@ class DfareportingFloodlightActivityGroupsListQueryParams:
 
 @dataclass
 class DfareportingFloodlightActivityGroupsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingFloodlightActivityGroupsListRequest:
-    path_params: DfareportingFloodlightActivityGroupsListPathParams = field(default=None)
-    query_params: DfareportingFloodlightActivityGroupsListQueryParams = field(default=None)
-    security: DfareportingFloodlightActivityGroupsListSecurity = field(default=None)
+    path_params: DfareportingFloodlightActivityGroupsListPathParams = field()
+    query_params: DfareportingFloodlightActivityGroupsListQueryParams = field()
+    security: DfareportingFloodlightActivityGroupsListSecurity = field()
     
 
 @dataclass
 class DfareportingFloodlightActivityGroupsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     floodlight_activity_groups_list_response: Optional[shared.FloodlightActivityGroupsListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

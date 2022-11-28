@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NfsExportOptionsAccessModeEnum {
-    AccessModeUnspecified = "ACCESS_MODE_UNSPECIFIED"
-,    ReadOnly = "READ_ONLY"
-,    ReadWrite = "READ_WRITE"
+    AccessModeUnspecified = "ACCESS_MODE_UNSPECIFIED",
+    ReadOnly = "READ_ONLY",
+    ReadWrite = "READ_WRITE"
 }
 
 export enum NfsExportOptionsSquashModeEnum {
-    SquashModeUnspecified = "SQUASH_MODE_UNSPECIFIED"
-,    NoRootSquash = "NO_ROOT_SQUASH"
-,    RootSquash = "ROOT_SQUASH"
+    SquashModeUnspecified = "SQUASH_MODE_UNSPECIFIED",
+    NoRootSquash = "NO_ROOT_SQUASH",
+    RootSquash = "ROOT_SQUASH"
 }
 
 
@@ -18,18 +19,18 @@ export enum NfsExportOptionsSquashModeEnum {
  * NFS export options specifications.
 **/
 export class NfsExportOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessMode" })
+  @SpeakeasyMetadata({ data: "json, name=accessMode" })
   accessMode?: NfsExportOptionsAccessModeEnum;
 
-  @Metadata({ data: "json, name=anonGid" })
+  @SpeakeasyMetadata({ data: "json, name=anonGid" })
   anonGid?: string;
 
-  @Metadata({ data: "json, name=anonUid" })
+  @SpeakeasyMetadata({ data: "json, name=anonUid" })
   anonUid?: string;
 
-  @Metadata({ data: "json, name=ipRanges" })
+  @SpeakeasyMetadata({ data: "json, name=ipRanges" })
   ipRanges?: string[];
 
-  @Metadata({ data: "json, name=squashMode" })
+  @SpeakeasyMetadata({ data: "json, name=squashMode" })
   squashMode?: NfsExportOptionsSquashModeEnum;
 }

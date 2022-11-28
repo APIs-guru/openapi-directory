@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateDeviceWirelessRadioSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
@@ -12,13 +13,13 @@ export class UpdateDeviceWirelessRadioSettingsPathParams extends SpeakeasyBase {
  * Manual radio settings for 5 GHz.
 **/
 export class UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: number;
 
-  @Metadata({ data: "json, name=channelWidth" })
+  @SpeakeasyMetadata({ data: "json, name=channelWidth" })
   channelWidth?: number;
 
-  @Metadata({ data: "json, name=targetPower" })
+  @SpeakeasyMetadata({ data: "json, name=targetPower" })
   targetPower?: number;
 }
 
@@ -28,42 +29,42 @@ export class UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings extends
  * Manual radio settings for 2.4 GHz.
 **/
 export class UpdateDeviceWirelessRadioSettingsRequestBodyTwoFourGhzSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: number;
 
-  @Metadata({ data: "json, name=targetPower" })
+  @SpeakeasyMetadata({ data: "json, name=targetPower" })
   targetPower?: number;
 }
 
 
 export class UpdateDeviceWirelessRadioSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fiveGhzSettings" })
+  @SpeakeasyMetadata({ data: "json, name=fiveGhzSettings" })
   fiveGhzSettings?: UpdateDeviceWirelessRadioSettingsRequestBodyFiveGhzSettings;
 
-  @Metadata({ data: "json, name=rfProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=rfProfileId" })
   rfProfileId?: number;
 
-  @Metadata({ data: "json, name=twoFourGhzSettings" })
+  @SpeakeasyMetadata({ data: "json, name=twoFourGhzSettings" })
   twoFourGhzSettings?: UpdateDeviceWirelessRadioSettingsRequestBodyTwoFourGhzSettings;
 }
 
 
 export class UpdateDeviceWirelessRadioSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDeviceWirelessRadioSettingsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateDeviceWirelessRadioSettingsRequestBody;
 }
 
 
 export class UpdateDeviceWirelessRadioSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDeviceWirelessRadioSettings200ApplicationJsonObject?: Map<string, any>;
 }

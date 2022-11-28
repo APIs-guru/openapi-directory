@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SqsAction
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an action to publish data to an Amazon SQS queue.
 **/
 export class SqsAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queueUrl" })
+  @SpeakeasyMetadata({ data: "json, name=queueUrl" })
   queueUrl: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=useBase64" })
+  @SpeakeasyMetadata({ data: "json, name=useBase64" })
   useBase64?: boolean;
 }

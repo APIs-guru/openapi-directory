@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
-import { Image } from "./image";
-import { Image } from "./image";
+
 
 
 // NativeContent
@@ -9,42 +8,42 @@ import { Image } from "./image";
  * Native content for a creative.
 **/
 export class NativeContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserName" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserName" })
   advertiserName?: string;
 
-  @Metadata({ data: "json, name=appIcon" })
+  @SpeakeasyMetadata({ data: "json, name=appIcon" })
   appIcon?: Image;
 
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=callToAction" })
+  @SpeakeasyMetadata({ data: "json, name=callToAction" })
   callToAction?: string;
 
-  @Metadata({ data: "json, name=clickLinkUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickLinkUrl" })
   clickLinkUrl?: string;
 
-  @Metadata({ data: "json, name=clickTrackingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickTrackingUrl" })
   clickTrackingUrl?: string;
 
-  @Metadata({ data: "json, name=headline" })
+  @SpeakeasyMetadata({ data: "json, name=headline" })
   headline?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: Image;
 
-  @Metadata({ data: "json, name=priceDisplayText" })
+  @SpeakeasyMetadata({ data: "json, name=priceDisplayText" })
   priceDisplayText?: string;
 
-  @Metadata({ data: "json, name=starRating" })
+  @SpeakeasyMetadata({ data: "json, name=starRating" })
   starRating?: number;
 
-  @Metadata({ data: "json, name=videoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=videoUrl" })
   videoUrl?: string;
 
-  @Metadata({ data: "json, name=videoVastXml" })
+  @SpeakeasyMetadata({ data: "json, name=videoVastXml" })
   videoVastXml?: string;
 }

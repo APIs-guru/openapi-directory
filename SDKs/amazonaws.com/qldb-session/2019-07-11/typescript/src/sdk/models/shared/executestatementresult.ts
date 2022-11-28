@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoUsage } from "./iousage";
 import { Page } from "./page";
 import { TimingInformation } from "./timinginformation";
+
 
 
 // ExecuteStatementResult
@@ -9,12 +10,12 @@ import { TimingInformation } from "./timinginformation";
  * Contains the details of the executed statement.
 **/
 export class ExecuteStatementResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedIOs" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedIOs" })
   consumedIOs?: IoUsage;
 
-  @Metadata({ data: "json, name=FirstPage" })
+  @SpeakeasyMetadata({ data: "json, name=FirstPage" })
   firstPage?: Page;
 
-  @Metadata({ data: "json, name=TimingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=TimingInformation" })
   timingInformation?: TimingInformation;
 }

@@ -18,6 +18,8 @@ const (
 	GooglePrivacyDlpV2CustomInfoTypeLikelihoodEnumVeryLikely            GooglePrivacyDlpV2CustomInfoTypeLikelihoodEnum = "VERY_LIKELY"
 )
 
+// GooglePrivacyDlpV2CustomInfoType
+// Custom information type provided by the user. Used to find domain-specific sensitive information configurable to the data in question.
 type GooglePrivacyDlpV2CustomInfoType struct {
 	DetectionRules []GooglePrivacyDlpV2DetectionRule                  `json:"detectionRules,omitempty"`
 	Dictionary     *GooglePrivacyDlpV2Dictionary                      `json:"dictionary,omitempty"`

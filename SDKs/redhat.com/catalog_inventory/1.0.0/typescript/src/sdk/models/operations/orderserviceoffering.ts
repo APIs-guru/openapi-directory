@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OrderServiceOfferingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
-export class OrderServiceOfferingRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: OrderServiceOfferingPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.OrderParametersServiceOffering;
-}
-
-
 export class OrderServiceOffering200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=task_id" })
+  @SpeakeasyMetadata({ data: "json, name=task_id" })
   taskId?: string;
 }
 
 
+export class OrderServiceOfferingRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: OrderServiceOfferingPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.OrderParametersServiceOfferingInput;
+}
+
+
 export class OrderServiceOfferingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   orderServiceOffering200ApplicationJsonObject?: OrderServiceOffering200ApplicationJson;
 }

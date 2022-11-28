@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EnterpriseCrmLoggingGwsFieldLimitsLogActionEnum(str, Enum):
     LOG_ACTION_UNSPECIFIED = "LOG_ACTION_UNSPECIFIED"
@@ -26,9 +28,13 @@ class EnterpriseCrmLoggingGwsFieldLimitsShortenerTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EnterpriseCrmLoggingGwsFieldLimits:
-    log_action: Optional[EnterpriseCrmLoggingGwsFieldLimitsLogActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logAction' }})
-    log_type: Optional[List[EnterpriseCrmLoggingGwsFieldLimitsLogTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logType' }})
-    max_array_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxArraySize' }})
-    max_string_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxStringLength' }})
-    shortener_type: Optional[EnterpriseCrmLoggingGwsFieldLimitsShortenerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shortenerType' }})
+    r"""EnterpriseCrmLoggingGwsFieldLimits
+    Describes string and array limits when writing to logs. When a limit is exceeded the *shortener_type* describes how to shorten the field. next_id: 6
+    """
+    
+    log_action: Optional[EnterpriseCrmLoggingGwsFieldLimitsLogActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logAction') }})
+    log_type: Optional[List[EnterpriseCrmLoggingGwsFieldLimitsLogTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logType') }})
+    max_array_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxArraySize') }})
+    max_string_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxStringLength') }})
+    shortener_type: Optional[EnterpriseCrmLoggingGwsFieldLimitsShortenerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shortenerType') }})
     

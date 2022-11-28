@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFilter } from "./datafilter";
+
 
 
 // BatchClearValuesByDataFilterRequest
@@ -8,6 +8,6 @@ import { DataFilter } from "./datafilter";
  * The request for clearing more than one range selected by a DataFilter in a spreadsheet.
 **/
 export class BatchClearValuesByDataFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataFilters", elemType: shared.DataFilter })
+  @SpeakeasyMetadata({ data: "json, name=dataFilters", elemType: DataFilter })
   dataFilters?: DataFilter[];
 }

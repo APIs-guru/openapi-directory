@@ -11,6 +11,8 @@ const (
 	GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolStateEnumInactive         GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPoolStateEnum = "INACTIVE"
 )
 
+// GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
+// A worker pool resource in the Remote Build Execution API.
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool struct {
 	Autoscale    *GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale           `json:"autoscale,omitempty"`
 	Channel      *string                                                            `json:"channel,omitempty"`

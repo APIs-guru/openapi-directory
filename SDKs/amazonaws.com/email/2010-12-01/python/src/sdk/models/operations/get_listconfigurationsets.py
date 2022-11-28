@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListConfigurationSetsActionEnum(str, Enum):
     LIST_CONFIGURATION_SETS = "ListConfigurationSets"
@@ -10,10 +14,10 @@ class GetListConfigurationSetsVersionEnum(str, Enum):
 
 @dataclass
 class GetListConfigurationSetsQueryParams:
-    action: GetListConfigurationSetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListConfigurationSetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListConfigurationSetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetListConfigurationSetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetListConfigurationSetsHeaders:
 
 @dataclass
 class GetListConfigurationSetsRequest:
-    query_params: GetListConfigurationSetsQueryParams = field(default=None)
-    headers: GetListConfigurationSetsHeaders = field(default=None)
+    headers: GetListConfigurationSetsHeaders = field()
+    query_params: GetListConfigurationSetsQueryParams = field()
     
 
 @dataclass
 class GetListConfigurationSetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

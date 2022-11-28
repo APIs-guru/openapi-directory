@@ -1,41 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export const CONFIRMCARBONOFFSET_SERVERS = [
-	"http://api.climatekuul.com:8000/footprint",
-];
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
+export const ConfirmCarbonOffsetServerList = [
+	"http://api.climatekuul.com:8000/footprint",
+] as const;
 
 
 export class ConfirmCarbonOffsetRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=carbonOffset;" })
+  @SpeakeasyMetadata({ data: "form, name=carbonOffset;" })
   carbonOffset: string;
 
-  @Metadata({ data: "form, name=contactEmail;" })
+  @SpeakeasyMetadata({ data: "form, name=contactEmail;" })
   contactEmail?: string;
 
-  @Metadata({ data: "form, name=contactFirstName;" })
+  @SpeakeasyMetadata({ data: "form, name=contactFirstName;" })
   contactFirstName?: string;
 
-  @Metadata({ data: "form, name=contactLastName;" })
+  @SpeakeasyMetadata({ data: "form, name=contactLastName;" })
   contactLastName?: string;
 
-  @Metadata({ data: "form, name=transaction_id;" })
+  @SpeakeasyMetadata({ data: "form, name=transaction_id;" })
   transactionId: string;
 }
 
 
 export class ConfirmCarbonOffsetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: ConfirmCarbonOffsetRequestBody;
 }
 
 
 export class ConfirmCarbonOffsetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

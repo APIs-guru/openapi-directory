@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableStatistics } from "./tablestatistics";
+
 
 
 // DescribeTableStatisticsResponse
@@ -8,12 +8,12 @@ import { TableStatistics } from "./tablestatistics";
  * <p/>
 **/
 export class DescribeTableStatisticsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn?: string;
 
-  @Metadata({ data: "json, name=TableStatistics", elemType: shared.TableStatistics })
+  @SpeakeasyMetadata({ data: "json, name=TableStatistics", elemType: TableStatistics })
   tableStatistics?: TableStatistics[];
 }

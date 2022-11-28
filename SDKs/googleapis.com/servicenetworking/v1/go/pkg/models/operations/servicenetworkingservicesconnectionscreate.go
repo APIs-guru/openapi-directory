@@ -40,7 +40,7 @@ type ServicenetworkingServicesConnectionsCreateSecurity struct {
 type ServicenetworkingServicesConnectionsCreateRequest struct {
 	PathParams  ServicenetworkingServicesConnectionsCreatePathParams
 	QueryParams ServicenetworkingServicesConnectionsCreateQueryParams
-	Request     *shared.Connection `request:"mediaType=application/json"`
+	Request     *shared.ConnectionInput `request:"mediaType=application/json"`
 	Security    ServicenetworkingServicesConnectionsCreateSecurity
 }
 

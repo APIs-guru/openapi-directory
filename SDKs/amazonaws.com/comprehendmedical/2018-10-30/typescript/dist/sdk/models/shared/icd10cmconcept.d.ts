@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  The ICD-10-CM concepts that the entity could refer to, along with a score indicating the likelihood of the match.
 **/

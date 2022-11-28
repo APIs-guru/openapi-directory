@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ConfigureMailboxAutoReplyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mailboxName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mailboxName" })
   mailboxName: string;
 }
 
 
 export class ConfigureMailboxAutoReplyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mailbox_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mailbox_name" })
   mailboxName: string;
 }
 
 
 export class ConfigureMailboxAutoReplyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ConfigureMailboxAutoReplyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ConfigureMailboxAutoReplyQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.AutoReply;
 }
 
 
 export class ConfigureMailboxAutoReplyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

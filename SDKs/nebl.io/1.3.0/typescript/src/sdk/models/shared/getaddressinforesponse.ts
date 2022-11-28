@@ -1,59 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAddressInfoResponseUtxosTokens extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationPolicy" })
   aggregationPolicy?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=divisibility" })
+  @SpeakeasyMetadata({ data: "json, name=divisibility" })
   divisibility?: number;
 
-  @Metadata({ data: "json, name=issueTxid" })
+  @SpeakeasyMetadata({ data: "json, name=issueTxid" })
   issueTxid?: string;
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus?: boolean;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 }
 
 
 export class GetAddressInfoResponseUtxos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockheight" })
+  @SpeakeasyMetadata({ data: "json, name=blockheight" })
   blockheight?: number;
 
-  @Metadata({ data: "json, name=blocktime" })
+  @SpeakeasyMetadata({ data: "json, name=blocktime" })
   blocktime?: number;
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=scriptPubKey" })
+  @SpeakeasyMetadata({ data: "json, name=scriptPubKey" })
   scriptPubKey?: Map<string, any>;
 
-  @Metadata({ data: "json, name=tokens", elemType: shared.GetAddressInfoResponseUtxosTokens })
+  @SpeakeasyMetadata({ data: "json, name=tokens", elemType: GetAddressInfoResponseUtxosTokens })
   tokens?: GetAddressInfoResponseUtxosTokens[];
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }
 
 
 export class GetAddressInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=utxos", elemType: shared.GetAddressInfoResponseUtxos })
+  @SpeakeasyMetadata({ data: "json, name=utxos", elemType: GetAddressInfoResponseUtxos })
   utxos?: GetAddressInfoResponseUtxos[];
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentOrdersCanceltestorderbycustomerPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    order_id: str = field(metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ContentOrdersCanceltestorderbycustomerQueryParams:
 
 @dataclass
 class ContentOrdersCanceltestorderbycustomerSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentOrdersCanceltestorderbycustomerRequest:
-    path_params: ContentOrdersCanceltestorderbycustomerPathParams = field(default=None)
-    query_params: ContentOrdersCanceltestorderbycustomerQueryParams = field(default=None)
+    path_params: ContentOrdersCanceltestorderbycustomerPathParams = field()
+    query_params: ContentOrdersCanceltestorderbycustomerQueryParams = field()
+    security: ContentOrdersCanceltestorderbycustomerSecurity = field()
     request: Optional[shared.OrdersCancelTestOrderByCustomerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentOrdersCanceltestorderbycustomerSecurity = field(default=None)
     
 
 @dataclass
 class ContentOrdersCanceltestorderbycustomerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     orders_cancel_test_order_by_customer_response: Optional[shared.OrdersCancelTestOrderByCustomerResponse] = field(default=None)
-    status_code: int = field(default=None)
     

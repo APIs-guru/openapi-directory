@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTestSuiteRelationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 }
 
 
-export class GetTestSuiteRelationsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTestSuiteRelationsPathParams;
-}
-
-
 export class GetTestSuiteRelations200ApplicationJsonTestsuite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionId" })
+  @SpeakeasyMetadata({ data: "json, name=collectionId" })
   collectionId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 }
 
 
 export class GetTestSuiteRelations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=testsuite", elemType: operations.GetTestSuiteRelations200ApplicationJsonTestsuite })
+  @SpeakeasyMetadata({ data: "json, name=testsuite", elemType: GetTestSuiteRelations200ApplicationJsonTestsuite })
   testsuite?: GetTestSuiteRelations200ApplicationJsonTestsuite[];
 }
 
 
+export class GetTestSuiteRelationsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTestSuiteRelationsPathParams;
+}
+
+
 export class GetTestSuiteRelationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTestSuiteRelations200ApplicationJsonObject?: GetTestSuiteRelations200ApplicationJson;
 }

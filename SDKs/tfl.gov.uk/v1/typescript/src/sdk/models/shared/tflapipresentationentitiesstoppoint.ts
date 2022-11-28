@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesAdditionalProperties } from "./tflapipresentationentitiesadditionalproperties";
 import { TflApiPresentationEntitiesPlace } from "./tflapipresentationentitiesplace";
 import { TflApiPresentationEntitiesLineGroup } from "./tflapipresentationentitieslinegroup";
@@ -7,85 +6,86 @@ import { TflApiPresentationEntitiesLineModeGroup } from "./tflapipresentationent
 import { TflApiPresentationEntitiesIdentifier } from "./tflapipresentationentitiesidentifier";
 
 
+
 export class TflApiPresentationEntitiesStopPoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessibilitySummary" })
+  @SpeakeasyMetadata({ data: "json, name=accessibilitySummary" })
   accessibilitySummary?: string;
 
-  @Metadata({ data: "json, name=additionalProperties", elemType: shared.TflApiPresentationEntitiesAdditionalProperties })
+  @SpeakeasyMetadata({ data: "json, name=additionalProperties", elemType: TflApiPresentationEntitiesAdditionalProperties })
   additionalProperties?: TflApiPresentationEntitiesAdditionalProperties[];
 
-  @Metadata({ data: "json, name=children", elemType: shared.TflApiPresentationEntitiesPlace })
+  @SpeakeasyMetadata({ data: "json, name=children", elemType: TflApiPresentationEntitiesPlace })
   children?: TflApiPresentationEntitiesPlace[];
 
-  @Metadata({ data: "json, name=childrenUrls" })
+  @SpeakeasyMetadata({ data: "json, name=childrenUrls" })
   childrenUrls?: string[];
 
-  @Metadata({ data: "json, name=commonName" })
+  @SpeakeasyMetadata({ data: "json, name=commonName" })
   commonName?: string;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=fullName" })
+  @SpeakeasyMetadata({ data: "json, name=fullName" })
   fullName?: string;
 
-  @Metadata({ data: "json, name=hubNaptanCode" })
+  @SpeakeasyMetadata({ data: "json, name=hubNaptanCode" })
   hubNaptanCode?: string;
 
-  @Metadata({ data: "json, name=icsCode" })
+  @SpeakeasyMetadata({ data: "json, name=icsCode" })
   icsCode?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=indicator" })
+  @SpeakeasyMetadata({ data: "json, name=indicator" })
   indicator?: string;
 
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lineGroup", elemType: shared.TflApiPresentationEntitiesLineGroup })
+  @SpeakeasyMetadata({ data: "json, name=lineGroup", elemType: TflApiPresentationEntitiesLineGroup })
   lineGroup?: TflApiPresentationEntitiesLineGroup[];
 
-  @Metadata({ data: "json, name=lineModeGroups", elemType: shared.TflApiPresentationEntitiesLineModeGroup })
+  @SpeakeasyMetadata({ data: "json, name=lineModeGroups", elemType: TflApiPresentationEntitiesLineModeGroup })
   lineModeGroups?: TflApiPresentationEntitiesLineModeGroup[];
 
-  @Metadata({ data: "json, name=lines", elemType: shared.TflApiPresentationEntitiesIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=lines", elemType: TflApiPresentationEntitiesIdentifier })
   lines?: TflApiPresentationEntitiesIdentifier[];
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 
-  @Metadata({ data: "json, name=modes" })
+  @SpeakeasyMetadata({ data: "json, name=modes" })
   modes?: string[];
 
-  @Metadata({ data: "json, name=naptanId" })
+  @SpeakeasyMetadata({ data: "json, name=naptanId" })
   naptanId?: string;
 
-  @Metadata({ data: "json, name=naptanMode" })
+  @SpeakeasyMetadata({ data: "json, name=naptanMode" })
   naptanMode?: string;
 
-  @Metadata({ data: "json, name=placeType" })
+  @SpeakeasyMetadata({ data: "json, name=placeType" })
   placeType?: string;
 
-  @Metadata({ data: "json, name=platformName" })
+  @SpeakeasyMetadata({ data: "json, name=platformName" })
   platformName?: string;
 
-  @Metadata({ data: "json, name=smsCode" })
+  @SpeakeasyMetadata({ data: "json, name=smsCode" })
   smsCode?: string;
 
-  @Metadata({ data: "json, name=stationNaptan" })
+  @SpeakeasyMetadata({ data: "json, name=stationNaptan" })
   stationNaptan?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: boolean;
 
-  @Metadata({ data: "json, name=stopLetter" })
+  @SpeakeasyMetadata({ data: "json, name=stopLetter" })
   stopLetter?: string;
 
-  @Metadata({ data: "json, name=stopType" })
+  @SpeakeasyMetadata({ data: "json, name=stopType" })
   stopType?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

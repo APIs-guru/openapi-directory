@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2alphaCatalog
+// The catalog configuration.
 type GoogleCloudRetailV2alphaCatalog struct {
 	DisplayName                 *string                                              `json:"displayName,omitempty"`
 	MerchantCenterLinkingConfig *GoogleCloudRetailV2alphaMerchantCenterLinkingConfig `json:"merchantCenterLinkingConfig,omitempty"`

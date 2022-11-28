@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActingUser } from "./actinguser";
 import { Version } from "./version";
 
+
 export enum ReleaseTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Deploy = "DEPLOY"
-,    Rollback = "ROLLBACK"
-,    SiteDisable = "SITE_DISABLE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Deploy = "DEPLOY",
+    Rollback = "ROLLBACK",
+    SiteDisable = "SITE_DISABLE"
 }
 
 
@@ -15,21 +16,21 @@ export enum ReleaseTypeEnum {
  *  A `Release` is a particular [collection of configurations and files](sites.versions) that is set to be public at a particular time.
 **/
 export class Release extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=releaseTime" })
+  @SpeakeasyMetadata({ data: "json, name=releaseTime" })
   releaseTime?: string;
 
-  @Metadata({ data: "json, name=releaseUser" })
+  @SpeakeasyMetadata({ data: "json, name=releaseUser" })
   releaseUser?: ActingUser;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ReleaseTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: Version;
 }

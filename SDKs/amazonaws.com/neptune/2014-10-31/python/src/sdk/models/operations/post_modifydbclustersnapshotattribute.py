@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyDbClusterSnapshotAttributeActionEnum(str, Enum):
     MODIFY_DB_CLUSTER_SNAPSHOT_ATTRIBUTE = "ModifyDBClusterSnapshotAttribute"
@@ -10,8 +14,8 @@ class PostModifyDbClusterSnapshotAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyDbClusterSnapshotAttributeQueryParams:
-    action: PostModifyDbClusterSnapshotAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyDbClusterSnapshotAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyDbClusterSnapshotAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyDbClusterSnapshotAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyDbClusterSnapshotAttributeHeaders:
 
 @dataclass
 class PostModifyDbClusterSnapshotAttributeRequest:
-    query_params: PostModifyDbClusterSnapshotAttributeQueryParams = field(default=None)
-    headers: PostModifyDbClusterSnapshotAttributeHeaders = field(default=None)
+    headers: PostModifyDbClusterSnapshotAttributeHeaders = field()
+    query_params: PostModifyDbClusterSnapshotAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyDbClusterSnapshotAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

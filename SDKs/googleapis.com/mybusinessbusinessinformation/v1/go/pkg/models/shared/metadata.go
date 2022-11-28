@@ -1,5 +1,7 @@
 package shared
 
+// Metadata
+// Additional non-user-editable information about the location.
 type Metadata struct {
 	CanDelete             *bool   `json:"canDelete,omitempty"`
 	CanHaveBusinessCalls  *bool   `json:"canHaveBusinessCalls,omitempty"`

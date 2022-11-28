@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodecProfile } from "./codecprofile";
 import { ContainerProfile } from "./containerprofile";
 import { DirectPlayProfile } from "./directplayprofile";
@@ -10,125 +9,126 @@ import { TranscodingProfile } from "./transcodingprofile";
 import { XmlAttribute } from "./xmlattribute";
 
 
+
 // DeviceProfile
 /** 
  * Defines the MediaBrowser.Model.Dlna.DeviceProfile.
 **/
 export class DeviceProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlbumArtPn" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumArtPn" })
   albumArtPn?: string;
 
-  @Metadata({ data: "json, name=CodecProfiles", elemType: shared.CodecProfile })
+  @SpeakeasyMetadata({ data: "json, name=CodecProfiles", elemType: CodecProfile })
   codecProfiles?: CodecProfile[];
 
-  @Metadata({ data: "json, name=ContainerProfiles", elemType: shared.ContainerProfile })
+  @SpeakeasyMetadata({ data: "json, name=ContainerProfiles", elemType: ContainerProfile })
   containerProfiles?: ContainerProfile[];
 
-  @Metadata({ data: "json, name=DirectPlayProfiles", elemType: shared.DirectPlayProfile })
+  @SpeakeasyMetadata({ data: "json, name=DirectPlayProfiles", elemType: DirectPlayProfile })
   directPlayProfiles?: DirectPlayProfile[];
 
-  @Metadata({ data: "json, name=EnableAlbumArtInDidl" })
+  @SpeakeasyMetadata({ data: "json, name=EnableAlbumArtInDidl" })
   enableAlbumArtInDidl?: boolean;
 
-  @Metadata({ data: "json, name=EnableMSMediaReceiverRegistrar" })
+  @SpeakeasyMetadata({ data: "json, name=EnableMSMediaReceiverRegistrar" })
   enableMsMediaReceiverRegistrar?: boolean;
 
-  @Metadata({ data: "json, name=EnableSingleAlbumArtLimit" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSingleAlbumArtLimit" })
   enableSingleAlbumArtLimit?: boolean;
 
-  @Metadata({ data: "json, name=EnableSingleSubtitleLimit" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSingleSubtitleLimit" })
   enableSingleSubtitleLimit?: boolean;
 
-  @Metadata({ data: "json, name=FriendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=FriendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification?: DeviceIdentification;
 
-  @Metadata({ data: "json, name=IgnoreTranscodeByteRangeRequests" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreTranscodeByteRangeRequests" })
   ignoreTranscodeByteRangeRequests?: boolean;
 
-  @Metadata({ data: "json, name=Manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=Manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=ManufacturerUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ManufacturerUrl" })
   manufacturerUrl?: string;
 
-  @Metadata({ data: "json, name=MaxAlbumArtHeight" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAlbumArtHeight" })
   maxAlbumArtHeight?: number;
 
-  @Metadata({ data: "json, name=MaxAlbumArtWidth" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAlbumArtWidth" })
   maxAlbumArtWidth?: number;
 
-  @Metadata({ data: "json, name=MaxIconHeight" })
+  @SpeakeasyMetadata({ data: "json, name=MaxIconHeight" })
   maxIconHeight?: number;
 
-  @Metadata({ data: "json, name=MaxIconWidth" })
+  @SpeakeasyMetadata({ data: "json, name=MaxIconWidth" })
   maxIconWidth?: number;
 
-  @Metadata({ data: "json, name=MaxStaticBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=MaxStaticBitrate" })
   maxStaticBitrate?: number;
 
-  @Metadata({ data: "json, name=MaxStaticMusicBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=MaxStaticMusicBitrate" })
   maxStaticMusicBitrate?: number;
 
-  @Metadata({ data: "json, name=MaxStreamingBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=MaxStreamingBitrate" })
   maxStreamingBitrate?: number;
 
-  @Metadata({ data: "json, name=ModelDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDescription" })
   modelDescription?: string;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName?: string;
 
-  @Metadata({ data: "json, name=ModelNumber" })
+  @SpeakeasyMetadata({ data: "json, name=ModelNumber" })
   modelNumber?: string;
 
-  @Metadata({ data: "json, name=ModelUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ModelUrl" })
   modelUrl?: string;
 
-  @Metadata({ data: "json, name=MusicStreamingTranscodingBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=MusicStreamingTranscodingBitrate" })
   musicStreamingTranscodingBitrate?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ProtocolInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolInfo" })
   protocolInfo?: string;
 
-  @Metadata({ data: "json, name=RequiresPlainFolders" })
+  @SpeakeasyMetadata({ data: "json, name=RequiresPlainFolders" })
   requiresPlainFolders?: boolean;
 
-  @Metadata({ data: "json, name=RequiresPlainVideoItems" })
+  @SpeakeasyMetadata({ data: "json, name=RequiresPlainVideoItems" })
   requiresPlainVideoItems?: boolean;
 
-  @Metadata({ data: "json, name=ResponseProfiles", elemType: shared.ResponseProfile })
+  @SpeakeasyMetadata({ data: "json, name=ResponseProfiles", elemType: ResponseProfile })
   responseProfiles?: ResponseProfile[];
 
-  @Metadata({ data: "json, name=SerialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SerialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=SonyAggregationFlags" })
+  @SpeakeasyMetadata({ data: "json, name=SonyAggregationFlags" })
   sonyAggregationFlags?: string;
 
-  @Metadata({ data: "json, name=SubtitleProfiles", elemType: shared.SubtitleProfile })
+  @SpeakeasyMetadata({ data: "json, name=SubtitleProfiles", elemType: SubtitleProfile })
   subtitleProfiles?: SubtitleProfile[];
 
-  @Metadata({ data: "json, name=SupportedMediaTypes" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedMediaTypes" })
   supportedMediaTypes?: string;
 
-  @Metadata({ data: "json, name=TimelineOffsetSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TimelineOffsetSeconds" })
   timelineOffsetSeconds?: number;
 
-  @Metadata({ data: "json, name=TranscodingProfiles", elemType: shared.TranscodingProfile })
+  @SpeakeasyMetadata({ data: "json, name=TranscodingProfiles", elemType: TranscodingProfile })
   transcodingProfiles?: TranscodingProfile[];
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=XmlRootAttributes", elemType: shared.XmlAttribute })
+  @SpeakeasyMetadata({ data: "json, name=XmlRootAttributes", elemType: XmlAttribute })
   xmlRootAttributes?: XmlAttribute[];
 }

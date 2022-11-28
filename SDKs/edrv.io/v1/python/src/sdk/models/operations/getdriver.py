@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetDriverPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,12 +16,12 @@ class GetDriverQueryParams:
 
 @dataclass
 class GetDriverRequest:
-    path_params: GetDriverPathParams = field(default=None)
-    query_params: GetDriverQueryParams = field(default=None)
+    path_params: GetDriverPathParams = field()
+    query_params: GetDriverQueryParams = field()
     
 
 @dataclass
 class GetDriverResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

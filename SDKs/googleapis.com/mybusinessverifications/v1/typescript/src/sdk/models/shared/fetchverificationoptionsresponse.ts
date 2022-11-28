@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VerificationOption } from "./verificationoption";
+
 
 
 // FetchVerificationOptionsResponse
@@ -8,6 +8,6 @@ import { VerificationOption } from "./verificationoption";
  * Response message for Verifications.FetchVerificationOptions.
 **/
 export class FetchVerificationOptionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options", elemType: shared.VerificationOption })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: VerificationOption })
   options?: VerificationOption[];
 }

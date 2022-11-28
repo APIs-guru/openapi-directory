@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetTextTracksPathParams:
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTextTracksRequest:
-    path_params: GetTextTracksPathParams = field(default=None)
+    path_params: GetTextTracksPathParams = field()
     
 
 @dataclass
 class GetTextTracksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     text_tracks: Optional[List[shared.TextTrack]] = field(default=None)
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceSchema } from "./sourceschema";
 import { S3ReferenceDataSourceDescription } from "./s3referencedatasourcedescription";
+
 
 
 // ReferenceDataSourceDescription
@@ -8,15 +9,15 @@ import { S3ReferenceDataSourceDescription } from "./s3referencedatasourcedescrip
  * For a SQL-based Kinesis Data Analytics application, describes the reference data source configured for an application.
 **/
 export class ReferenceDataSourceDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceId" })
   referenceId: string;
 
-  @Metadata({ data: "json, name=ReferenceSchema" })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceSchema" })
   referenceSchema?: SourceSchema;
 
-  @Metadata({ data: "json, name=S3ReferenceDataSourceDescription" })
+  @SpeakeasyMetadata({ data: "json, name=S3ReferenceDataSourceDescription" })
   s3ReferenceDataSourceDescription: S3ReferenceDataSourceDescription;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

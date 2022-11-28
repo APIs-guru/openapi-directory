@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationConfigurationUpdate
+// Describes updates to an application's configuration.
 type ApplicationConfigurationUpdate struct {
 	ApplicationCodeConfigurationUpdate     *ApplicationCodeConfigurationUpdate     `json:"ApplicationCodeConfigurationUpdate,omitempty"`
 	ApplicationSnapshotConfigurationUpdate *ApplicationSnapshotConfigurationUpdate `json:"ApplicationSnapshotConfigurationUpdate,omitempty"`

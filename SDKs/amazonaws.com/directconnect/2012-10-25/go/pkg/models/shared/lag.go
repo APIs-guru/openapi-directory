@@ -1,5 +1,7 @@
 package shared
 
+// Lag
+// Information about a link aggregation group (LAG).
 type Lag struct {
 	AllowsHostedConnections *bool                     `json:"allowsHostedConnections,omitempty"`
 	AwsDevice               *string                   `json:"awsDevice,omitempty"`

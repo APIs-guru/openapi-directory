@@ -12,6 +12,8 @@ const (
 	VideoFileDetailsFileTypeEnumOther    VideoFileDetailsFileTypeEnum = "other"
 )
 
+// VideoFileDetails
+// Describes original video file properties, including technical details about audio and video streams, but also metadata information like content length, digitization time, or geotagging information.
 type VideoFileDetails struct {
 	AudioStreams []VideoFileDetailsAudioStream `json:"audioStreams,omitempty"`
 	BitrateBps   *string                       `json:"bitrateBps,omitempty"`

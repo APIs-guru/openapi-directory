@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class ContentRegionalinventoryCustombatchQueryParams:
 
 @dataclass
 class ContentRegionalinventoryCustombatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentRegionalinventoryCustombatchRequest:
-    query_params: ContentRegionalinventoryCustombatchQueryParams = field(default=None)
+    query_params: ContentRegionalinventoryCustombatchQueryParams = field()
+    security: ContentRegionalinventoryCustombatchSecurity = field()
     request: Optional[shared.RegionalinventoryCustomBatchRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentRegionalinventoryCustombatchSecurity = field(default=None)
     
 
 @dataclass
 class ContentRegionalinventoryCustombatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     regionalinventory_custom_batch_response: Optional[shared.RegionalinventoryCustomBatchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

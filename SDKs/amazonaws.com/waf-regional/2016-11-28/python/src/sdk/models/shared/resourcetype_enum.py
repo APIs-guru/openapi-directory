@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ResourceTypeEnum(str, Enum):
     APPLICATION_LOAD_BALANCER = "APPLICATION_LOAD_BALANCER"

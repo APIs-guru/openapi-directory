@@ -1,5 +1,7 @@
 package shared
 
+// RedshiftSourceConfig
+// Provides information about the Amazon Redshift database configuration.
 type RedshiftSourceConfig struct {
 	ClusterIdentifier string           `json:"ClusterIdentifier"`
 	DatabaseHost      string           `json:"DatabaseHost"`

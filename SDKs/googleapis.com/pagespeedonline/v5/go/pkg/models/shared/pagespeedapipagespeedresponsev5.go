@@ -1,5 +1,7 @@
 package shared
 
+// PagespeedAPIPagespeedResponseV5
+// The Pagespeed API response object.
 type PagespeedAPIPagespeedResponseV5 struct {
 	AnalysisUtcTimestamp    *string                          `json:"analysisUTCTimestamp,omitempty"`
 	CaptchaResult           *string                          `json:"captchaResult,omitempty"`

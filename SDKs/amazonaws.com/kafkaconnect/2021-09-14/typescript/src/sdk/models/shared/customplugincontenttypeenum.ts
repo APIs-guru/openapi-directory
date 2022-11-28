@@ -1,6 +1,7 @@
 
 
+
 export enum CustomPluginContentTypeEnum {
-    Jar = "JAR"
-,    Zip = "ZIP"
+    Jar = "JAR",
+    Zip = "ZIP"
 }

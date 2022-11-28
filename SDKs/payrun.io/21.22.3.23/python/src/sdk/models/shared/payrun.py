@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PayRunPayRunPayFrequencyEnum(str, Enum):
     WEEKLY = "Weekly"
@@ -16,37 +18,45 @@ class PayRunPayRunPayFrequencyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PayRunPayRunPaySchedule:
-    at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
-    at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
-    at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
+    r"""PayRunPayRunPaySchedule
+    The pay runs' pay schedule
+    """
+    
+    at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('@href') }})
+    at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('@rel') }})
+    at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('@title') }})
     
 
 @dataclass_json
 @dataclass
 class PayRunPayRunProceedingPayRun:
-    at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
-    at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
-    at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
+    r"""PayRunPayRunProceedingPayRun
+    The pay runs' proceeding pay run
+    """
+    
+    at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('@href') }})
+    at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('@rel') }})
+    at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('@title') }})
     
 
 @dataclass_json
 @dataclass
 class PayRunPayRun:
-    executed: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Executed', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    is_supplementary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsSupplementary' }})
-    pay_frequency: Optional[PayRunPayRunPayFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayFrequency' }})
-    pay_schedule: Optional[PayRunPayRunPaySchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaySchedule' }})
-    payment_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    period_end: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PeriodEnd', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    period_start: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PeriodStart', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    proceeding_pay_run: Optional[PayRunPayRunProceedingPayRun] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProceedingPayRun' }})
-    sequence: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sequence' }})
-    tax_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxPeriod' }})
-    tax_year: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxYear' }})
+    executed: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Executed'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    is_supplementary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IsSupplementary') }})
+    pay_frequency: Optional[PayRunPayRunPayFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PayFrequency') }})
+    pay_schedule: Optional[PayRunPayRunPaySchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PaySchedule') }})
+    payment_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PaymentDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    period_end: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PeriodEnd'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    period_start: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PeriodStart'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    proceeding_pay_run: Optional[PayRunPayRunProceedingPayRun] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProceedingPayRun') }})
+    sequence: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Sequence') }})
+    tax_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TaxPeriod') }})
+    tax_year: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TaxYear') }})
     
 
 @dataclass_json
 @dataclass
 class PayRun:
-    pay_run: Optional[PayRunPayRun] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayRun' }})
+    pay_run: Optional[PayRunPayRun] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PayRun') }})
     

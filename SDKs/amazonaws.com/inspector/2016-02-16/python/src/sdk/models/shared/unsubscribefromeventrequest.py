@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inspectorevent_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UnsubscribeFromEventRequest:
-    event: inspectorevent_enum.InspectorEventEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    resource_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceArn' }})
-    topic_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topicArn' }})
+    event: InspectorEventEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    resource_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceArn') }})
+    topic_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('topicArn') }})
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteDbInstanceActionEnum(str, Enum):
     DELETE_DB_INSTANCE = "DeleteDBInstance"
@@ -10,12 +14,12 @@ class GetDeleteDbInstanceVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteDbInstanceQueryParams:
-    action: GetDeleteDbInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    action: GetDeleteDbInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDeleteDbInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     delete_automated_backups: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DeleteAutomatedBackups', 'style': 'form', 'explode': True }})
     final_db_snapshot_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'FinalDBSnapshotIdentifier', 'style': 'form', 'explode': True }})
     skip_final_snapshot: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'SkipFinalSnapshot', 'style': 'form', 'explode': True }})
-    version: GetDeleteDbInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDeleteDbInstanceHeaders:
 
 @dataclass
 class GetDeleteDbInstanceRequest:
-    query_params: GetDeleteDbInstanceQueryParams = field(default=None)
-    headers: GetDeleteDbInstanceHeaders = field(default=None)
+    headers: GetDeleteDbInstanceHeaders = field()
+    query_params: GetDeleteDbInstanceQueryParams = field()
     
 
 @dataclass
 class GetDeleteDbInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedProjects
+// A paginated list of projects
 type PaginatedProjects struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

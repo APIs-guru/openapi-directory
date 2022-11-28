@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelationalDatabasePasswordVersionEnum } from "./relationaldatabasepasswordversionenum";
 
 
+
 export class GetRelationalDatabaseMasterUserPasswordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=passwordVersion" })
+  @SpeakeasyMetadata({ data: "json, name=passwordVersion" })
   passwordVersion?: RelationalDatabasePasswordVersionEnum;
 
-  @Metadata({ data: "json, name=relationalDatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseName" })
   relationalDatabaseName: string;
 }

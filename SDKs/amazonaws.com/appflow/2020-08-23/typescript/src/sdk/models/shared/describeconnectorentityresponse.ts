@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorEntityField } from "./connectorentityfield";
 
 
+
 export class DescribeConnectorEntityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectorEntityFields", elemType: shared.ConnectorEntityField })
+  @SpeakeasyMetadata({ data: "json, name=connectorEntityFields", elemType: ConnectorEntityField })
   connectorEntityFields: ConnectorEntityField[];
 }

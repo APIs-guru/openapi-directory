@@ -42,7 +42,7 @@ type CloudkmsProjectsLocationsKeyRingsCryptoKeysCreateSecurity struct {
 type CloudkmsProjectsLocationsKeyRingsCryptoKeysCreateRequest struct {
 	PathParams  CloudkmsProjectsLocationsKeyRingsCryptoKeysCreatePathParams
 	QueryParams CloudkmsProjectsLocationsKeyRingsCryptoKeysCreateQueryParams
-	Request     *shared.CryptoKey `request:"mediaType=application/json"`
+	Request     *shared.CryptoKeyInput `request:"mediaType=application/json"`
 	Security    CloudkmsProjectsLocationsKeyRingsCryptoKeysCreateSecurity
 }
 

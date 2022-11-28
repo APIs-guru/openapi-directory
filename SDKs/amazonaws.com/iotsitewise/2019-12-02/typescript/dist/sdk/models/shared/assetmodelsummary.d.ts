@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetModelStatus } from "./assetmodelstatus";
 /**
  * Contains a summary of an asset model.

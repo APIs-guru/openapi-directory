@@ -8,6 +8,8 @@ const (
 	PendingAssignmentDataStateEnumWaiting  PendingAssignmentDataStateEnum = "WAITING"
 )
 
+// PendingAssignmentData
+// Pending assignment information
 type PendingAssignmentData struct {
 	GroupID          *int64                         `json:"groupId,omitempty"`
 	GroupInfo        GroupInfo                      `json:"groupInfo"`

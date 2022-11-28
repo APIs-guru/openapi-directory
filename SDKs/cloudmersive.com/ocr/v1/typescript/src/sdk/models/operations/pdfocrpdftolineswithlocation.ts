@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PdfOcrPdfToLinesWithLocationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=language" })
   language?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=preprocessing" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=preprocessing" })
   preprocessing?: string;
 }
 
 
 export class PdfOcrPdfToLinesWithLocationRequestBodyImageFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=imageFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=imageFile" })
   imageFile: string;
 }
 
 
 export class PdfOcrPdfToLinesWithLocationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   imageFile: PdfOcrPdfToLinesWithLocationRequestBodyImageFile;
 }
 
 
 export class PdfOcrPdfToLinesWithLocationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class PdfOcrPdfToLinesWithLocationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PdfOcrPdfToLinesWithLocationHeaders;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: PdfOcrPdfToLinesWithLocationRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PdfOcrPdfToLinesWithLocationSecurity;
 }
 
 
 export class PdfOcrPdfToLinesWithLocationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pdfToLinesWithLocationResult?: shared.PdfToLinesWithLocationResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ContentAdsSettingsTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Display = "DISPLAY"
-,    Feed = "FEED"
-,    Article = "ARTICLE"
-,    MatchedContent = "MATCHED_CONTENT"
-,    Link = "LINK"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Display = "DISPLAY",
+    Feed = "FEED",
+    Article = "ARTICLE",
+    MatchedContent = "MATCHED_CONTENT",
+    Link = "LINK"
 }
 
 
@@ -15,9 +16,9 @@ export enum ContentAdsSettingsTypeEnum {
  * Settings specific to content ads (AFC).
 **/
 export class ContentAdsSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ContentAdsSettingsTypeEnum;
 }

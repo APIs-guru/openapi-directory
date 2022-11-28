@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SsoIdentity } from "./ssoidentity";
+
 
 
 // RecipientDetail
@@ -7,6 +8,6 @@ import { SsoIdentity } from "./ssoidentity";
  * The information that identifies the recipient.
 **/
 export class RecipientDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ssoIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=ssoIdentity" })
   ssoIdentity?: SsoIdentity;
 }

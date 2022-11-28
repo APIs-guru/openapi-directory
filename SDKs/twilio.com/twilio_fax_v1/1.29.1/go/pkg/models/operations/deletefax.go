@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var DeleteFaxServers = []string{
+var DeleteFaxServerList = []string{
 	"https://fax.twilio.com",
 }
 

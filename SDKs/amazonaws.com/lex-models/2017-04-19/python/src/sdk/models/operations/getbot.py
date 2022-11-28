@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBotPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    versionoralias: str = field(default=None, metadata={'path_param': { 'field_name': 'versionoralias', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    versionoralias: str = field(metadata={'path_param': { 'field_name': 'versionoralias', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class GetBotHeaders:
 
 @dataclass
 class GetBotRequest:
-    path_params: GetBotPathParams = field(default=None)
-    headers: GetBotHeaders = field(default=None)
+    headers: GetBotHeaders = field()
+    path_params: GetBotPathParams = field()
     
 
 @dataclass
 class GetBotResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_bot_response: Optional[shared.GetBotResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

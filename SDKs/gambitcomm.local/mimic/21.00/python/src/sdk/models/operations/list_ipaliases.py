@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ListIpaliasesPathParams:
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListIpaliasesRequest:
-    path_params: ListIpaliasesPathParams = field(default=None)
+    path_params: ListIpaliasesPathParams = field()
     
 
 @dataclass
 class ListIpaliasesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ip_aliases: Optional[List[shared.IPAlias]] = field(default=None)
-    status_code: int = field(default=None)
     

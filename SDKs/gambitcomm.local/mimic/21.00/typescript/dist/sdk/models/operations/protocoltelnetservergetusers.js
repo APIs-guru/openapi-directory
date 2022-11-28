@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProtocolTelnetServerGetUsersPathParams = /** @class */ (function (_super) {
     __extends(ProtocolTelnetServerGetUsersPathParams, _super);
@@ -30,7 +30,7 @@ var ProtocolTelnetServerGetUsersPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTelnetServerGetUsersPathParams.prototype, "agentNum", void 0);
     return ProtocolTelnetServerGetUsersPathParams;
@@ -42,7 +42,7 @@ var ProtocolTelnetServerGetUsersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTelnetServerGetUsersPathParams)
     ], ProtocolTelnetServerGetUsersRequest.prototype, "pathParams", void 0);
     return ProtocolTelnetServerGetUsersRequest;
@@ -54,15 +54,15 @@ var ProtocolTelnetServerGetUsersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTelnetServerGetUsersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTelnetServerGetUsersResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TelnetUser }),
+        SpeakeasyMetadata({ elemType: shared.TelnetUser }),
         __metadata("design:type", Array)
     ], ProtocolTelnetServerGetUsersResponse.prototype, "telnetUsers", void 0);
     return ProtocolTelnetServerGetUsersResponse;

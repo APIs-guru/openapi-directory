@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedReports
+// A paginated list of reports.
 type PaginatedReports struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

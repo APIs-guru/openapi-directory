@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateRouteTableActionEnum(str, Enum):
     CREATE_ROUTE_TABLE = "CreateRouteTable"
@@ -10,8 +14,8 @@ class PostCreateRouteTableVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateRouteTableQueryParams:
-    action: PostCreateRouteTableActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateRouteTableVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateRouteTableActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateRouteTableVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateRouteTableHeaders:
 
 @dataclass
 class PostCreateRouteTableRequest:
-    query_params: PostCreateRouteTableQueryParams = field(default=None)
-    headers: PostCreateRouteTableHeaders = field(default=None)
+    headers: PostCreateRouteTableHeaders = field()
+    query_params: PostCreateRouteTableQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateRouteTableResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

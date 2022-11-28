@@ -1,7 +1,8 @@
 
 
+
 export enum LogLevelEnum {
-    Off = "OFF"
-,    Basic = "BASIC"
-,    Transfer = "TRANSFER"
+    Off = "OFF",
+    Basic = "BASIC",
+    Transfer = "TRANSFER"
 }

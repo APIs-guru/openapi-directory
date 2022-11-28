@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum LineRouteSequenceDirectionEnum {
-    Inbound = "inbound"
-,    Outbound = "outbound"
-,    All = "all"
+    Inbound = "inbound",
+    Outbound = "outbound",
+    All = "all"
 }
 
 
 export class LineRouteSequencePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=direction" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=direction" })
   direction: LineRouteSequenceDirectionEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum LineRouteSequenceServiceTypesEnum {
-    Regular = "Regular"
-,    Night = "Night"
+    Regular = "Regular",
+    Night = "Night"
 }
 
 
 export class LineRouteSequenceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludeCrowding" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeCrowding" })
   excludeCrowding?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceTypes" })
   serviceTypes?: LineRouteSequenceServiceTypesEnum[];
 }
 
 
 export class LineRouteSequenceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LineRouteSequencePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LineRouteSequenceQueryParams;
 }
 
 
 export class LineRouteSequenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tflApiPresentationEntitiesRouteSequence?: shared.TflApiPresentationEntitiesRouteSequence;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TranscriptionJob
+// Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation.
 type TranscriptionJob struct {
 	CompletionTime          *time.Time                  `json:"CompletionTime,omitempty"`
 	ContentRedaction        *ContentRedaction           `json:"ContentRedaction,omitempty"`

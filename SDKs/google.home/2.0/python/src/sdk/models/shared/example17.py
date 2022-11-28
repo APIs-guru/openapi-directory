@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import window2
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Example17:
-    do_not_disturb: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'do_not_disturb' }})
-    enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    led_brightness: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'led_brightness' }})
-    volume: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volume' }})
-    windows: List[window2.Window2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'windows' }})
+    do_not_disturb: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('do_not_disturb') }})
+    enabled: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    led_brightness: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('led_brightness') }})
+    volume: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('volume') }})
+    windows: List[Window2] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('windows') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReconnectEnumEnum } from "./reconnectenumenum";
+
 
 
 // ClientProperties
@@ -7,6 +8,6 @@ import { ReconnectEnumEnum } from "./reconnectenumenum";
  * Describes an Amazon WorkSpaces client.
 **/
 export class ClientProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReconnectEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=ReconnectEnabled" })
   reconnectEnabled?: ReconnectEnumEnum;
 }

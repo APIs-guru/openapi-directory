@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldResult } from "./fieldresult";
 import { TableResult } from "./tableresult";
+
 
 
 // FormRecognitionResult
@@ -9,18 +9,18 @@ import { TableResult } from "./tableresult";
  * The result of extracting form field values
 **/
 export class FormRecognitionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BestMatchFormSettingName" })
+  @SpeakeasyMetadata({ data: "json, name=BestMatchFormSettingName" })
   bestMatchFormSettingName?: string;
 
-  @Metadata({ data: "json, name=Diagnostics" })
+  @SpeakeasyMetadata({ data: "json, name=Diagnostics" })
   diagnostics?: string[];
 
-  @Metadata({ data: "json, name=FieldValueExtractionResult", elemType: shared.FieldResult })
+  @SpeakeasyMetadata({ data: "json, name=FieldValueExtractionResult", elemType: FieldResult })
   fieldValueExtractionResult?: FieldResult[];
 
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 
-  @Metadata({ data: "json, name=TableValueExtractionResults", elemType: shared.TableResult })
+  @SpeakeasyMetadata({ data: "json, name=TableValueExtractionResults", elemType: TableResult })
   tableValueExtractionResults?: TableResult[];
 }

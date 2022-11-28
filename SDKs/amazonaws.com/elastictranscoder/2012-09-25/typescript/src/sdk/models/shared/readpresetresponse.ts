@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Preset } from "./preset";
+
 
 
 // ReadPresetResponse
@@ -7,6 +8,6 @@ import { Preset } from "./preset";
  * The <code>ReadPresetResponse</code> structure.
 **/
 export class ReadPresetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Preset" })
+  @SpeakeasyMetadata({ data: "json, name=Preset" })
   preset?: Preset;
 }

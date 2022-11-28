@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DependencyRevision
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains the ID and revision number of a workflow or system that is part of a deployment.
 **/
 export class DependencyRevision extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=revisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=revisionNumber" })
   revisionNumber?: number;
 }

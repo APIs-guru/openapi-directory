@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WorldExportJobStatusEnum } from "./worldexportjobstatusenum";
 /**
  * Information about a world export job.

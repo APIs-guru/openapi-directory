@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2DetectIntentResponse
+// The message returned from the DetectIntent method.
 type GoogleCloudDialogflowV2DetectIntentResponse struct {
 	OutputAudio       *string                                   `json:"outputAudio,omitempty"`
 	OutputAudioConfig *GoogleCloudDialogflowV2OutputAudioConfig `json:"outputAudioConfig,omitempty"`

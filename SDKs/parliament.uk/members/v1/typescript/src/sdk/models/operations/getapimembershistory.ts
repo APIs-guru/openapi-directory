@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiMembersHistoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids?: number[];
 }
 
 
 export class GetApiMembersHistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiMembersHistoryQueryParams;
 }
 
 
 export class GetApiMembersHistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MemberHistoryItem })
+  @SpeakeasyMetadata({ elemType: shared.MemberHistoryItem })
   memberHistoryItems?: shared.MemberHistoryItem[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GistsUnstarPathParams:
-    gist_id: str = field(default=None, metadata={'path_param': { 'field_name': 'gist_id', 'style': 'simple', 'explode': False }})
+    gist_id: str = field(metadata={'path_param': { 'field_name': 'gist_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GistsUnstarRequest:
-    path_params: GistsUnstarPathParams = field(default=None)
+    path_params: GistsUnstarPathParams = field()
     
 
 @dataclass
 class GistsUnstarResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     

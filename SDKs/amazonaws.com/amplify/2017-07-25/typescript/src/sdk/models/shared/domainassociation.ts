@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainStatusEnum } from "./domainstatusenum";
 import { SubDomain } from "./subdomain";
+
 
 
 // DomainAssociation
@@ -9,30 +9,30 @@ import { SubDomain } from "./subdomain";
  *  Describes a domain association that associates a custom domain with an Amplify app. 
 **/
 export class DomainAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoSubDomainCreationPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=autoSubDomainCreationPatterns" })
   autoSubDomainCreationPatterns?: string[];
 
-  @Metadata({ data: "json, name=autoSubDomainIAMRole" })
+  @SpeakeasyMetadata({ data: "json, name=autoSubDomainIAMRole" })
   autoSubDomainIamRole?: string;
 
-  @Metadata({ data: "json, name=certificateVerificationDNSRecord" })
+  @SpeakeasyMetadata({ data: "json, name=certificateVerificationDNSRecord" })
   certificateVerificationDnsRecord?: string;
 
-  @Metadata({ data: "json, name=domainAssociationArn" })
+  @SpeakeasyMetadata({ data: "json, name=domainAssociationArn" })
   domainAssociationArn: string;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=domainStatus" })
+  @SpeakeasyMetadata({ data: "json, name=domainStatus" })
   domainStatus: DomainStatusEnum;
 
-  @Metadata({ data: "json, name=enableAutoSubDomain" })
+  @SpeakeasyMetadata({ data: "json, name=enableAutoSubDomain" })
   enableAutoSubDomain: boolean;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason: string;
 
-  @Metadata({ data: "json, name=subDomains", elemType: shared.SubDomain })
+  @SpeakeasyMetadata({ data: "json, name=subDomains", elemType: SubDomain })
   subDomains: SubDomain[];
 }

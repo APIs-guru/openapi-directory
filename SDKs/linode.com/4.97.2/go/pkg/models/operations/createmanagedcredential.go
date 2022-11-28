@@ -2,37 +2,26 @@ package operations
 
 import (
 	"openapi/pkg/models/shared"
-	"time"
 )
 
-type CreateManagedCredentialRequestBody struct {
-	ID            *int64     `json:"id,omitempty"`
-	Label         string     `json:"label"`
-	LastDecrypted *time.Time `json:"last_decrypted,omitempty"`
-	Password      string     `json:"password"`
-	Username      *string    `json:"username,omitempty"`
-}
-
-type CreateManagedCredentialSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreateManagedCredentialSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+type CreateManagedCredentialRequestBodyInput struct {
+	Label    string  `json:"label"`
+	Password string  `json:"password"`
+	Username *string `json:"username,omitempty"`
 }
 
 type CreateManagedCredentialSecurity struct {
-	Option1 *CreateManagedCredentialSecurityOption1 `security:"option"`
-	Option2 *CreateManagedCredentialSecurityOption2 `security:"option"`
-}
-
-type CreateManagedCredentialRequest struct {
-	Request  *CreateManagedCredentialRequestBody `request:"mediaType=application/json"`
-	Security CreateManagedCredentialSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type CreateManagedCredentialDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type CreateManagedCredentialRequest struct {
+	Request  *CreateManagedCredentialRequestBodyInput `request:"mediaType=application/json"`
+	Security CreateManagedCredentialSecurity
 }
 
 type CreateManagedCredentialResponse struct {

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsPolicyResourceFile } from "./ospolicyresourcefile";
+
 
 
 // OsPolicyResourcePackageResourceRpm
@@ -7,9 +8,9 @@ import { OsPolicyResourceFile } from "./ospolicyresourcefile";
  * An RPM package file. RPM packages only support INSTALLED state.
 **/
 export class OsPolicyResourcePackageResourceRpm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pullDeps" })
+  @SpeakeasyMetadata({ data: "json, name=pullDeps" })
   pullDeps?: boolean;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: OsPolicyResourceFile;
 }

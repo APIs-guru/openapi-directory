@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchDimensionConfiguration } from "./cloudwatchdimensionconfiguration";
+
 
 
 // CloudWatchDestination
@@ -8,6 +8,6 @@ import { CloudWatchDimensionConfiguration } from "./cloudwatchdimensionconfigura
  * An object that defines an Amazon CloudWatch destination for email events. You can use Amazon CloudWatch to monitor and gain insights on your email sending metrics.
 **/
 export class CloudWatchDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DimensionConfigurations", elemType: shared.CloudWatchDimensionConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=DimensionConfigurations", elemType: CloudWatchDimensionConfiguration })
   dimensionConfigurations: CloudWatchDimensionConfiguration[];
 }

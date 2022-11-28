@@ -1,16 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import datasourcesheetdimensionrange
-from . import dimensionproperties
-from . import dimensionrange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDimensionPropertiesRequest:
-    data_source_sheet_range: Optional[datasourcesheetdimensionrange.DataSourceSheetDimensionRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSourceSheetRange' }})
-    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    properties: Optional[dimensionproperties.DimensionProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    range: Optional[dimensionrange.DimensionRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""UpdateDimensionPropertiesRequest
+    Updates properties of dimensions within the specified range.
+    """
+    
+    data_source_sheet_range: Optional[DataSourceSheetDimensionRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSourceSheetRange') }})
+    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    properties: Optional[DimensionProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    range: Optional[DimensionRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

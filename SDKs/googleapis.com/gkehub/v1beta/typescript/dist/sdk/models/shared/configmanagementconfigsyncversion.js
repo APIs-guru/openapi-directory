@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ConfigManagementConfigSyncVersion
 /**
  * Specific versioning information pertaining to ConfigSync's Pods
@@ -33,31 +33,31 @@ var ConfigManagementConfigSyncVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=admissionWebhook" }),
+        SpeakeasyMetadata({ data: "json, name=admissionWebhook" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSyncVersion.prototype, "admissionWebhook", void 0);
     __decorate([
-        Metadata({ data: "json, name=gitSync" }),
+        SpeakeasyMetadata({ data: "json, name=gitSync" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSyncVersion.prototype, "gitSync", void 0);
     __decorate([
-        Metadata({ data: "json, name=importer" }),
+        SpeakeasyMetadata({ data: "json, name=importer" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSyncVersion.prototype, "importer", void 0);
     __decorate([
-        Metadata({ data: "json, name=monitor" }),
+        SpeakeasyMetadata({ data: "json, name=monitor" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSyncVersion.prototype, "monitor", void 0);
     __decorate([
-        Metadata({ data: "json, name=reconcilerManager" }),
+        SpeakeasyMetadata({ data: "json, name=reconcilerManager" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSyncVersion.prototype, "reconcilerManager", void 0);
     __decorate([
-        Metadata({ data: "json, name=rootReconciler" }),
+        SpeakeasyMetadata({ data: "json, name=rootReconciler" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSyncVersion.prototype, "rootReconciler", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncer" }),
+        SpeakeasyMetadata({ data: "json, name=syncer" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSyncVersion.prototype, "syncer", void 0);
     return ConfigManagementConfigSyncVersion;

@@ -10,7 +10,7 @@ class PostV3BoardsRequest:
 
 @dataclass
 class PostV3BoardsResponse:
+    content_type: str = field()
+    status_code: int = field()
     board_created: Optional[shared.BoardCreated] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

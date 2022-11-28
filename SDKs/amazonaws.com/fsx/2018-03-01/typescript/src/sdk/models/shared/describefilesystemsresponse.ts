@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileSystem } from "./filesystem";
+
 
 
 // DescribeFileSystemsResponse
@@ -8,9 +8,9 @@ import { FileSystem } from "./filesystem";
  * The response object for <code>DescribeFileSystems</code> operation.
 **/
 export class DescribeFileSystemsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FileSystems", elemType: shared.FileSystem })
+  @SpeakeasyMetadata({ data: "json, name=FileSystems", elemType: FileSystem })
   fileSystems?: FileSystem[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

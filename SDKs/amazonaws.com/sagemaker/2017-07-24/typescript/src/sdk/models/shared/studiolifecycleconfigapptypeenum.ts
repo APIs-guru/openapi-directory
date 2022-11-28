@@ -1,6 +1,7 @@
 
 
+
 export enum StudioLifecycleConfigAppTypeEnum {
-    JupyterServer = "JupyterServer"
-,    KernelGateway = "KernelGateway"
+    JupyterServer = "JupyterServer",
+    KernelGateway = "KernelGateway"
 }

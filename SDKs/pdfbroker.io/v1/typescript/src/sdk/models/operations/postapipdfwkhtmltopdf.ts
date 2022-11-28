@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostApiPdfWkhtmltopdfRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.WkHtmlToPdfRequestDto;
 }
 
 
 export class PostApiPdfWkhtmltopdfResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseDto?: shared.ErrorResponseDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postApiPdfWkhtmltopdf200ApplicationPdfBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pdfResponseDto?: shared.PdfResponseDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -13,12 +13,12 @@ class GetTeamPpaQueryParams:
 
 @dataclass
 class GetTeamPpaRequest:
-    query_params: GetTeamPpaQueryParams = field(default=None)
+    query_params: GetTeamPpaQueryParams = field()
     
 
 @dataclass
 class GetTeamPpaResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_ppas: Optional[List[shared.TeamPpa]] = field(default=None)
     

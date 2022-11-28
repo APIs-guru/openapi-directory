@@ -24,12 +24,6 @@ type GetListsOverviewFormatSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetListsOverviewFormatRequest struct {
-	PathParams  GetListsOverviewFormatPathParams
-	QueryParams GetListsOverviewFormatQueryParams
-	Security    GetListsOverviewFormatSecurity
-}
-
 type GetListsOverviewFormat200ApplicationJSONResultsListsBooks struct {
 	AgeGroup        *string `json:"age_group,omitempty"`
 	Author          *string `json:"author,omitempty"`
@@ -66,6 +60,12 @@ type GetListsOverviewFormat200ApplicationJSON struct {
 	NumResults *int64                                           `json:"num_results,omitempty"`
 	Results    *GetListsOverviewFormat200ApplicationJSONResults `json:"results,omitempty"`
 	Status     *string                                          `json:"status,omitempty"`
+}
+
+type GetListsOverviewFormatRequest struct {
+	PathParams  GetListsOverviewFormatPathParams
+	QueryParams GetListsOverviewFormatQueryParams
+	Security    GetListsOverviewFormatSecurity
 }
 
 type GetListsOverviewFormatResponse struct {

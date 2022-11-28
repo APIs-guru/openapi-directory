@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetReservationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetReservationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_chargestation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_chargestation" })
   includeChargestation?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
   includeOrganization?: boolean;
 }
 
 
 export class GetReservationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetReservationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetReservationQueryParams;
 }
 
 
 export class GetReservationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

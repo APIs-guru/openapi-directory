@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import usagereportexecutionerrorcode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LastReportGenerationExecutionError:
-    error_code: Optional[usagereportexecutionerrorcode_enum.UsageReportExecutionErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ErrorCode' }})
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ErrorMessage' }})
+    r"""LastReportGenerationExecutionError
+    Describes the error that is returned when a usage report can't be generated.
+    """
+    
+    error_code: Optional[UsageReportExecutionErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ErrorCode') }})
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ErrorMessage') }})
     

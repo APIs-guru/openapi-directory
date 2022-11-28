@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Geometry } from "./geometry";
+
 
 
 // ExpenseDetection
@@ -7,12 +8,12 @@ import { Geometry } from "./geometry";
  * An object used to store information about the Value or Label detected by Amazon Textract.
 **/
 export class ExpenseDetection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=Geometry" })
+  @SpeakeasyMetadata({ data: "json, name=Geometry" })
   geometry?: Geometry;
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text?: string;
 }

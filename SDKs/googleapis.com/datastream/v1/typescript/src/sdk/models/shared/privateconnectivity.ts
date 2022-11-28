@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PrivateConnectivity
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Private Connectivity
 **/
 export class PrivateConnectivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privateConnection" })
+  @SpeakeasyMetadata({ data: "json, name=privateConnection" })
   privateConnection?: string;
 }

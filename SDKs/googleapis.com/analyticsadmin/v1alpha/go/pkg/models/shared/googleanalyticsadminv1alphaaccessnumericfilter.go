@@ -11,6 +11,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnumGreaterThanOrEqual   GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum = "GREATER_THAN_OR_EQUAL"
 )
 
+// GoogleAnalyticsAdminV1alphaAccessNumericFilter
+// Filters for numeric or date values.
 type GoogleAnalyticsAdminV1alphaAccessNumericFilter struct {
 	Operation *GoogleAnalyticsAdminV1alphaAccessNumericFilterOperationEnum `json:"operation,omitempty"`
 	Value     *GoogleAnalyticsAdminV1alphaNumericValue                     `json:"value,omitempty"`

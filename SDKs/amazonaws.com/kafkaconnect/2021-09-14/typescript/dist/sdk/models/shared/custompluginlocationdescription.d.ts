@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3LocationDescription } from "./s3locationdescription";
 /**
  * Information about the location of a custom plugin.

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RrSetRoutingPolicyWrrPolicyWrrPolicyItem } from "./rrsetroutingpolicywrrpolicywrrpolicyitem";
+
 
 
 // RrSetRoutingPolicyWrrPolicy
@@ -8,9 +8,9 @@ import { RrSetRoutingPolicyWrrPolicyWrrPolicyItem } from "./rrsetroutingpolicywr
  * Configures a RRSetRoutingPolicy that routes in a weighted round robin fashion.
 **/
 export class RrSetRoutingPolicyWrrPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.RrSetRoutingPolicyWrrPolicyWrrPolicyItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: RrSetRoutingPolicyWrrPolicyWrrPolicyItem })
   items?: RrSetRoutingPolicyWrrPolicyWrrPolicyItem[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

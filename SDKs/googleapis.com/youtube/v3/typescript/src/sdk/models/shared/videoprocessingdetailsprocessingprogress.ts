@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoProcessingDetailsProcessingProgress
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Video processing progress and completion time estimate.
 **/
 export class VideoProcessingDetailsProcessingProgress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partsProcessed" })
+  @SpeakeasyMetadata({ data: "json, name=partsProcessed" })
   partsProcessed?: string;
 
-  @Metadata({ data: "json, name=partsTotal" })
+  @SpeakeasyMetadata({ data: "json, name=partsTotal" })
   partsTotal?: string;
 
-  @Metadata({ data: "json, name=timeLeftMs" })
+  @SpeakeasyMetadata({ data: "json, name=timeLeftMs" })
   timeLeftMs?: string;
 }

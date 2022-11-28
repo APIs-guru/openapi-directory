@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec } from "./googlecloudpaymentsresellersubscriptionv1subscriptionpromotionspec";
 import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails } from "./googlecloudpaymentsresellersubscriptionv1subscriptionlineitemonetimerecurrencedetails";
+import { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecInput } from "./googlecloudpaymentsresellersubscriptionv1subscriptionpromotionspec";
 export var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemRecurrenceTypeEnum;
 (function (GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemRecurrenceTypeEnum) {
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemRecurrenceTypeEnum["LineItemRecurrenceTypeUnspecified"] = "LINE_ITEM_RECURRENCE_TYPE_UNSPECIFIED";
@@ -42,7 +43,7 @@ export var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemStateEnu
 })(GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemStateEnum || (GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemStateEnum = {}));
 // GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem
 /**
- * Individual line item definition of a subscription. Next id: 8
+ * Individual line item definition of a subscription. Next id: 9
 **/
 var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem = /** @class */ (function (_super) {
     __extends(GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem, _super);
@@ -50,33 +51,57 @@ var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=lineItemFreeTrialEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=lineItemFreeTrialEndTime" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem.prototype, "lineItemFreeTrialEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lineItemPromotionSpecs", elemType: shared.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec }),
+        SpeakeasyMetadata({ data: "json, name=lineItemPromotionSpecs", elemType: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec }),
         __metadata("design:type", Array)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem.prototype, "lineItemPromotionSpecs", void 0);
     __decorate([
-        Metadata({ data: "json, name=oneTimeRecurrenceDetails" }),
+        SpeakeasyMetadata({ data: "json, name=oneTimeRecurrenceDetails" }),
         __metadata("design:type", GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem.prototype, "oneTimeRecurrenceDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=product" }),
+        SpeakeasyMetadata({ data: "json, name=product" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem.prototype, "product", void 0);
     __decorate([
-        Metadata({ data: "json, name=recurrenceType" }),
+        SpeakeasyMetadata({ data: "json, name=recurrenceType" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem.prototype, "recurrenceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem.prototype, "state", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem;
 }(SpeakeasyBase));
 export { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem };
+// GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput
+/**
+ * Individual line item definition of a subscription. Next id: 9
+**/
+var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput, _super);
+    function GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=lineItemPromotionSpecs", elemType: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecInput }),
+        __metadata("design:type", Array)
+    ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput.prototype, "lineItemPromotionSpecs", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=oneTimeRecurrenceDetails" }),
+        __metadata("design:type", GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails)
+    ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput.prototype, "oneTimeRecurrenceDetails", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=product" }),
+        __metadata("design:type", String)
+    ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput.prototype, "product", void 0);
+    return GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput;
+}(SpeakeasyBase));
+export { GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemInput };

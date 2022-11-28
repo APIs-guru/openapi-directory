@@ -1,54 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessBluetoothSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkWirelessBluetoothSettingsRequestBodyMajorMinorAssignmentModeEnum {
-    Unique = "Unique"
-,    NonUnique = "Non-unique"
+    Unique = "Unique",
+    NonUnique = "Non-unique"
 }
 
 
 export class UpdateNetworkWirelessBluetoothSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertisingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=advertisingEnabled" })
   advertisingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=major" })
+  @SpeakeasyMetadata({ data: "json, name=major" })
   major?: number;
 
-  @Metadata({ data: "json, name=majorMinorAssignmentMode" })
+  @SpeakeasyMetadata({ data: "json, name=majorMinorAssignmentMode" })
   majorMinorAssignmentMode?: UpdateNetworkWirelessBluetoothSettingsRequestBodyMajorMinorAssignmentModeEnum;
 
-  @Metadata({ data: "json, name=minor" })
+  @SpeakeasyMetadata({ data: "json, name=minor" })
   minor?: number;
 
-  @Metadata({ data: "json, name=scanningEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=scanningEnabled" })
   scanningEnabled?: boolean;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid?: string;
 }
 
 
 export class UpdateNetworkWirelessBluetoothSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessBluetoothSettingsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessBluetoothSettingsRequestBody;
 }
 
 
 export class UpdateNetworkWirelessBluetoothSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessBluetoothSettings200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings for exporting conversations to [Insights](https://cloud.google.com/contact-center/insights/docs).
 **/
 export class GoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableInsightsExport" })
+  @SpeakeasyMetadata({ data: "json, name=enableInsightsExport" })
   enableInsightsExport?: boolean;
 }

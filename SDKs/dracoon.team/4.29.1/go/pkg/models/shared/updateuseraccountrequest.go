@@ -1,5 +1,7 @@
 package shared
 
+// UpdateUserAccountRequest
+// Request model for updating user account information
 type UpdateUserAccountRequest struct {
 	AcceptEula *bool   `json:"acceptEULA,omitempty"`
 	Email      *string `json:"email,omitempty"`

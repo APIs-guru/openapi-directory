@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CacheModeEnum } from "./cachemodeenum";
 import { CacheTypeEnum } from "./cachetypeenum";
+
 
 
 // ProjectCache
@@ -8,12 +9,12 @@ import { CacheTypeEnum } from "./cachetypeenum";
  * Information about the cache for the build project.
 **/
 export class ProjectCache extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=modes" })
+  @SpeakeasyMetadata({ data: "json, name=modes" })
   modes?: CacheModeEnum[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CacheTypeEnum;
 }

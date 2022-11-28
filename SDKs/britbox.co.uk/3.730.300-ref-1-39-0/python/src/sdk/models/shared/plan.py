@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PlanBillingPeriodTypeEnum(str, Enum):
     DAY = "day"
@@ -21,23 +23,23 @@ class PlanTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Plan:
-    alias: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
-    benefits: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'benefits' }})
-    billing_period_frequency: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'billingPeriodFrequency' }})
-    billing_period_type: PlanBillingPeriodTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'billingPeriodType' }})
-    currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customFields' }})
-    has_trial_period: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hasTrialPeriod' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    is_active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isActive' }})
-    is_featured: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isFeatured' }})
-    is_private: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isPrivate' }})
-    price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
-    revenue_type: PlanRevenueTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revenueType' }})
-    subscription_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptionCode' }})
-    tagline: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagline' }})
-    terms_and_conditions: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termsAndConditions' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    trial_period_days: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trialPeriodDays' }})
-    type: PlanTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    alias: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('alias') }})
+    benefits: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('benefits') }})
+    billing_period_frequency: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('billingPeriodFrequency') }})
+    billing_period_type: PlanBillingPeriodTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('billingPeriodType') }})
+    currency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    has_trial_period: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hasTrialPeriod') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    is_active: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('isActive') }})
+    is_featured: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('isFeatured') }})
+    is_private: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('isPrivate') }})
+    revenue_type: PlanRevenueTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('revenueType') }})
+    subscription_code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscriptionCode') }})
+    tagline: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagline') }})
+    terms_and_conditions: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('termsAndConditions') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    trial_period_days: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('trialPeriodDays') }})
+    type: PlanTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customFields') }})
+    price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
     

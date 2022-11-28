@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCapabilitiesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
@@ -20,30 +21,30 @@ export enum GetCapabilitiesVersionEnum {
 
 
 export class GetCapabilitiesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=request" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=request" })
   request: GetCapabilitiesRequestEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=service" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=service" })
   service: GetCapabilitiesServiceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" })
   version?: GetCapabilitiesVersionEnum;
 }
 
 
 export class GetCapabilitiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCapabilitiesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCapabilitiesQueryParams;
 }
 
 
 export class GetCapabilitiesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

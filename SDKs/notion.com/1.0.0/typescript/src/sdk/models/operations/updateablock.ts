@@ -1,136 +1,137 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateABlockPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class UpdateABlockRequestBodyParagraphTextText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 }
 
 
 export class UpdateABlockRequestBodyParagraphText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: UpdateABlockRequestBodyParagraphTextText;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class UpdateABlockRequestBodyParagraph extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text", elemType: operations.UpdateABlockRequestBodyParagraphText })
+  @SpeakeasyMetadata({ data: "json, name=text", elemType: UpdateABlockRequestBodyParagraphText })
   text?: UpdateABlockRequestBodyParagraphText[];
 }
 
 
 export class UpdateABlockRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paragraph" })
+  @SpeakeasyMetadata({ data: "json, name=paragraph" })
   paragraph?: UpdateABlockRequestBodyParagraph;
 }
 
 
-export class UpdateABlockRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateABlockPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: UpdateABlockRequestBody;
-}
-
-
 export class UpdateABlock200ApplicationJsonParagraphTextAnnotations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bold" })
+  @SpeakeasyMetadata({ data: "json, name=bold" })
   bold?: boolean;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: boolean;
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=italic" })
+  @SpeakeasyMetadata({ data: "json, name=italic" })
   italic?: boolean;
 
-  @Metadata({ data: "json, name=strikethrough" })
+  @SpeakeasyMetadata({ data: "json, name=strikethrough" })
   strikethrough?: boolean;
 
-  @Metadata({ data: "json, name=underline" })
+  @SpeakeasyMetadata({ data: "json, name=underline" })
   underline?: boolean;
 }
 
 
 export class UpdateABlock200ApplicationJsonParagraphTextText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: any;
 }
 
 
 export class UpdateABlock200ApplicationJsonParagraphText extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: UpdateABlock200ApplicationJsonParagraphTextAnnotations;
 
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: any;
 
-  @Metadata({ data: "json, name=plain_text" })
+  @SpeakeasyMetadata({ data: "json, name=plain_text" })
   plainText?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: UpdateABlock200ApplicationJsonParagraphTextText;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class UpdateABlock200ApplicationJsonParagraph extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text", elemType: operations.UpdateABlock200ApplicationJsonParagraphText })
+  @SpeakeasyMetadata({ data: "json, name=text", elemType: UpdateABlock200ApplicationJsonParagraphText })
   text?: UpdateABlock200ApplicationJsonParagraphText[];
 }
 
 
 export class UpdateABlock200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_time" })
+  @SpeakeasyMetadata({ data: "json, name=created_time" })
   createdTime?: string;
 
-  @Metadata({ data: "json, name=has_children" })
+  @SpeakeasyMetadata({ data: "json, name=has_children" })
   hasChildren?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=last_edited_time" })
+  @SpeakeasyMetadata({ data: "json, name=last_edited_time" })
   lastEditedTime?: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 
-  @Metadata({ data: "json, name=paragraph" })
+  @SpeakeasyMetadata({ data: "json, name=paragraph" })
   paragraph?: UpdateABlock200ApplicationJsonParagraph;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
+export class UpdateABlockRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateABlockPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: UpdateABlockRequestBody;
+}
+
+
 export class UpdateABlockResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateABlock200ApplicationJsonObject?: UpdateABlock200ApplicationJson;
 }

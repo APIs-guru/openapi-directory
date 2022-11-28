@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowCxV3beta1TestRunDifferenceTypeEnum {
-    DiffTypeUnspecified = "DIFF_TYPE_UNSPECIFIED"
-,    Intent = "INTENT"
-,    Page = "PAGE"
-,    Parameters = "PARAMETERS"
-,    Utterance = "UTTERANCE"
+    DiffTypeUnspecified = "DIFF_TYPE_UNSPECIFIED",
+    Intent = "INTENT",
+    Page = "PAGE",
+    Parameters = "PARAMETERS",
+    Utterance = "UTTERANCE"
 }
 
 
@@ -14,9 +15,9 @@ export enum GoogleCloudDialogflowCxV3beta1TestRunDifferenceTypeEnum {
  * The description of differences between original and replayed agent output.
 **/
 export class GoogleCloudDialogflowCxV3beta1TestRunDifference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDialogflowCxV3beta1TestRunDifferenceTypeEnum;
 }

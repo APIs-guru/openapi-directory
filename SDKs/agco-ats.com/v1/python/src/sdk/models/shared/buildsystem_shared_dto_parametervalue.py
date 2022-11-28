@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class BuildSystemSharedDtoParameterValueDirectionEnum(str, Enum):
     INPUT = "Input"
@@ -10,7 +12,11 @@ class BuildSystemSharedDtoParameterValueDirectionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BuildSystemSharedDtoParameterValue:
-    direction: Optional[BuildSystemSharedDtoParameterValueDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Direction' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""BuildSystemSharedDtoParameterValue
+    A DTO for an IParameterValue
+    """
+    
+    direction: Optional[BuildSystemSharedDtoParameterValueDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Direction') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

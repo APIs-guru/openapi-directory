@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ProtocolSnmpv3AccessDelPathParams extends SpeakeasyBase {
     accessName: string;
     agentNum: number;

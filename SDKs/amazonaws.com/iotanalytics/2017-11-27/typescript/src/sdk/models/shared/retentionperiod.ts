@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RetentionPeriod
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * How long, in days, message data is kept.
 **/
 export class RetentionPeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numberOfDays" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfDays" })
   numberOfDays?: number;
 
-  @Metadata({ data: "json, name=unlimited" })
+  @SpeakeasyMetadata({ data: "json, name=unlimited" })
   unlimited?: boolean;
 }

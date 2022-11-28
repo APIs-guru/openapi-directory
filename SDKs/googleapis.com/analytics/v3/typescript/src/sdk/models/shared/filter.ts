@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterExpression } from "./filterexpression";
-import { FilterExpression } from "./filterexpression";
+
 
 
 // FilterAdvancedDetails
@@ -8,43 +8,43 @@ import { FilterExpression } from "./filterexpression";
  * Details for the filter of the type ADVANCED.
 **/
 export class FilterAdvancedDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=extractA" })
+  @SpeakeasyMetadata({ data: "json, name=extractA" })
   extractA?: string;
 
-  @Metadata({ data: "json, name=extractB" })
+  @SpeakeasyMetadata({ data: "json, name=extractB" })
   extractB?: string;
 
-  @Metadata({ data: "json, name=fieldA" })
+  @SpeakeasyMetadata({ data: "json, name=fieldA" })
   fieldA?: string;
 
-  @Metadata({ data: "json, name=fieldAIndex" })
+  @SpeakeasyMetadata({ data: "json, name=fieldAIndex" })
   fieldAIndex?: number;
 
-  @Metadata({ data: "json, name=fieldARequired" })
+  @SpeakeasyMetadata({ data: "json, name=fieldARequired" })
   fieldARequired?: boolean;
 
-  @Metadata({ data: "json, name=fieldB" })
+  @SpeakeasyMetadata({ data: "json, name=fieldB" })
   fieldB?: string;
 
-  @Metadata({ data: "json, name=fieldBIndex" })
+  @SpeakeasyMetadata({ data: "json, name=fieldBIndex" })
   fieldBIndex?: number;
 
-  @Metadata({ data: "json, name=fieldBRequired" })
+  @SpeakeasyMetadata({ data: "json, name=fieldBRequired" })
   fieldBRequired?: boolean;
 
-  @Metadata({ data: "json, name=outputConstructor" })
+  @SpeakeasyMetadata({ data: "json, name=outputConstructor" })
   outputConstructor?: string;
 
-  @Metadata({ data: "json, name=outputToField" })
+  @SpeakeasyMetadata({ data: "json, name=outputToField" })
   outputToField?: string;
 
-  @Metadata({ data: "json, name=outputToFieldIndex" })
+  @SpeakeasyMetadata({ data: "json, name=outputToFieldIndex" })
   outputToFieldIndex?: number;
 
-  @Metadata({ data: "json, name=overrideOutputField" })
+  @SpeakeasyMetadata({ data: "json, name=overrideOutputField" })
   overrideOutputField?: boolean;
 }
 
@@ -54,10 +54,10 @@ export class FilterAdvancedDetails extends SpeakeasyBase {
  * Details for the filter of the type LOWER.
 **/
 export class FilterLowercaseDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=fieldIndex" })
+  @SpeakeasyMetadata({ data: "json, name=fieldIndex" })
   fieldIndex?: number;
 }
 
@@ -67,10 +67,10 @@ export class FilterLowercaseDetails extends SpeakeasyBase {
  * Parent link for this filter. Points to the account to which this filter belongs.
 **/
 export class FilterParentLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -80,19 +80,19 @@ export class FilterParentLink extends SpeakeasyBase {
  * Details for the filter of the type SEARCH_AND_REPLACE.
 **/
 export class FilterSearchAndReplaceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=fieldIndex" })
+  @SpeakeasyMetadata({ data: "json, name=fieldIndex" })
   fieldIndex?: number;
 
-  @Metadata({ data: "json, name=replaceString" })
+  @SpeakeasyMetadata({ data: "json, name=replaceString" })
   replaceString?: string;
 
-  @Metadata({ data: "json, name=searchString" })
+  @SpeakeasyMetadata({ data: "json, name=searchString" })
   searchString?: string;
 }
 
@@ -102,11 +102,51 @@ export class FilterSearchAndReplaceDetails extends SpeakeasyBase {
  * Details for the filter of the type UPPER.
 **/
 export class FilterUppercaseDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=fieldIndex" })
+  @SpeakeasyMetadata({ data: "json, name=fieldIndex" })
   fieldIndex?: number;
+}
+
+
+// FilterInput
+/** 
+ * JSON template for an Analytics account filter.
+**/
+export class FilterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
+  accountId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=advancedDetails" })
+  advancedDetails?: FilterAdvancedDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=excludeDetails" })
+  excludeDetails?: FilterExpression;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=includeDetails" })
+  includeDetails?: FilterExpression;
+
+  @SpeakeasyMetadata({ data: "json, name=lowercaseDetails" })
+  lowercaseDetails?: FilterLowercaseDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
+  parentLink?: FilterParentLink;
+
+  @SpeakeasyMetadata({ data: "json, name=searchAndReplaceDetails" })
+  searchAndReplaceDetails?: FilterSearchAndReplaceDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=uppercaseDetails" })
+  uppercaseDetails?: FilterUppercaseDetails;
 }
 
 
@@ -115,48 +155,48 @@ export class FilterUppercaseDetails extends SpeakeasyBase {
  * JSON template for an Analytics account filter.
 **/
 export class Filter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=advancedDetails" })
+  @SpeakeasyMetadata({ data: "json, name=advancedDetails" })
   advancedDetails?: FilterAdvancedDetails;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=excludeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=excludeDetails" })
   excludeDetails?: FilterExpression;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=includeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=includeDetails" })
   includeDetails?: FilterExpression;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lowercaseDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lowercaseDetails" })
   lowercaseDetails?: FilterLowercaseDetails;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentLink" })
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
   parentLink?: FilterParentLink;
 
-  @Metadata({ data: "json, name=searchAndReplaceDetails" })
+  @SpeakeasyMetadata({ data: "json, name=searchAndReplaceDetails" })
   searchAndReplaceDetails?: FilterSearchAndReplaceDetails;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=uppercaseDetails" })
+  @SpeakeasyMetadata({ data: "json, name=uppercaseDetails" })
   uppercaseDetails?: FilterUppercaseDetails;
 }

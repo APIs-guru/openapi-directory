@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectorModel } from "./detectormodel";
 
 
+
 export class DescribeDetectorModelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectorModel" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModel" })
   detectorModel?: DetectorModel;
 }

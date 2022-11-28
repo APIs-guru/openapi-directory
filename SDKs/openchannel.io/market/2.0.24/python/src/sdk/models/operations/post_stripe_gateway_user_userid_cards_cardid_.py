@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PostStripeGatewayUserUserIDCardsCardIDPathParams:
-    card_id: str = field(default=None, metadata={'path_param': { 'field_name': 'cardId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    card_id: str = field(metadata={'path_param': { 'field_name': 'cardId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,13 +21,13 @@ class PostStripeGatewayUserUserIDCardsCardIDQueryParams:
 
 @dataclass
 class PostStripeGatewayUserUserIDCardsCardIDRequest:
-    path_params: PostStripeGatewayUserUserIDCardsCardIDPathParams = field(default=None)
-    query_params: PostStripeGatewayUserUserIDCardsCardIDQueryParams = field(default=None)
+    path_params: PostStripeGatewayUserUserIDCardsCardIDPathParams = field()
+    query_params: PostStripeGatewayUserUserIDCardsCardIDQueryParams = field()
     
 
 @dataclass
 class PostStripeGatewayUserUserIDCardsCardIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ActivityTypeInfo
+// Detailed information about an activity type.
 type ActivityTypeInfo struct {
 	ActivityType    ActivityType           `json:"activityType"`
 	CreationDate    time.Time              `json:"creationDate"`

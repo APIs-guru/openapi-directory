@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPolicytroubleshooterV1betaAccessTuple } from "./googlecloudpolicytroubleshooterv1betaaccesstuple";
 /**
  * Request for TroubleshootIamPolicy.

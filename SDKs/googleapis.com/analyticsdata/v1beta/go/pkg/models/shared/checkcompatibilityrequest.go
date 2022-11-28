@@ -8,6 +8,8 @@ const (
 	CheckCompatibilityRequestCompatibilityFilterEnumIncompatible             CheckCompatibilityRequestCompatibilityFilterEnum = "INCOMPATIBLE"
 )
 
+// CheckCompatibilityRequest
+// The request for compatibility information for a report's dimensions and metrics. Check compatibility provides a preview of the compatibility of a report; fields shared with the `runReport` request should be the same values as in your `runReport` request.
 type CheckCompatibilityRequest struct {
 	CompatibilityFilter *CheckCompatibilityRequestCompatibilityFilterEnum `json:"compatibilityFilter,omitempty"`
 	DimensionFilter     *FilterExpression                                 `json:"dimensionFilter,omitempty"`

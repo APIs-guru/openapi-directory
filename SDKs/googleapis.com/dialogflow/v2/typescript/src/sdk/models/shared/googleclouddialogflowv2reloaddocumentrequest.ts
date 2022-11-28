@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2ReloadDocumentRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for Documents.ReloadDocument.
 **/
 export class GoogleCloudDialogflowV2ReloadDocumentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentUri" })
+  @SpeakeasyMetadata({ data: "json, name=contentUri" })
   contentUri?: string;
 
-  @Metadata({ data: "json, name=importGcsCustomMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=importGcsCustomMetadata" })
   importGcsCustomMetadata?: boolean;
 
-  @Metadata({ data: "json, name=smartMessagingPartialUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=smartMessagingPartialUpdate" })
   smartMessagingPartialUpdate?: boolean;
 }

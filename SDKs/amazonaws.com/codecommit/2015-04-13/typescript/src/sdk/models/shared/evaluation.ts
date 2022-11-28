@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Evaluation
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about the approval rules applied to a pull request and whether conditions have been met.
 **/
 export class Evaluation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRulesNotSatisfied" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRulesNotSatisfied" })
   approvalRulesNotSatisfied?: string[];
 
-  @Metadata({ data: "json, name=approvalRulesSatisfied" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRulesSatisfied" })
   approvalRulesSatisfied?: string[];
 
-  @Metadata({ data: "json, name=approved" })
+  @SpeakeasyMetadata({ data: "json, name=approved" })
   approved?: boolean;
 
-  @Metadata({ data: "json, name=overridden" })
+  @SpeakeasyMetadata({ data: "json, name=overridden" })
   overridden?: boolean;
 }

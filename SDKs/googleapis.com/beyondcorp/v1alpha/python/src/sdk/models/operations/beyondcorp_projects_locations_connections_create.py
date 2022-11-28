@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +32,21 @@ class BeyondcorpProjectsLocationsConnectionsCreateQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectionsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectionsCreateRequest:
-    path_params: BeyondcorpProjectsLocationsConnectionsCreatePathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsConnectionsCreateQueryParams = field(default=None)
-    request: Optional[shared.Connection] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BeyondcorpProjectsLocationsConnectionsCreateSecurity = field(default=None)
+    path_params: BeyondcorpProjectsLocationsConnectionsCreatePathParams = field()
+    query_params: BeyondcorpProjectsLocationsConnectionsCreateQueryParams = field()
+    security: BeyondcorpProjectsLocationsConnectionsCreateSecurity = field()
+    request: Optional[shared.ConnectionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

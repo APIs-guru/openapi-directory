@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TflAPIPresentationEntitiesJourneyPlannerJourney
+// Object that represents an end to end journey (see schematic).
 type TflAPIPresentationEntitiesJourneyPlannerJourney struct {
 	ArrivalDateTime *time.Time                                           `json:"arrivalDateTime,omitempty"`
 	Duration        *int32                                               `json:"duration,omitempty"`

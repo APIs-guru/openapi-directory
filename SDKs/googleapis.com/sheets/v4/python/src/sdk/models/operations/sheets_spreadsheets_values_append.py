@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SheetsSpreadsheetsValuesAppendPathParams:
-    range: str = field(default=None, metadata={'path_param': { 'field_name': 'range', 'style': 'simple', 'explode': False }})
-    spreadsheet_id: str = field(default=None, metadata={'path_param': { 'field_name': 'spreadsheetId', 'style': 'simple', 'explode': False }})
+    range: str = field(metadata={'path_param': { 'field_name': 'range', 'style': 'simple', 'explode': False }})
+    spreadsheet_id: str = field(metadata={'path_param': { 'field_name': 'spreadsheetId', 'style': 'simple', 'explode': False }})
     
 class SheetsSpreadsheetsValuesAppendInsertDataOptionEnum(str, Enum):
     OVERWRITE = "OVERWRITE"
@@ -49,20 +53,20 @@ class SheetsSpreadsheetsValuesAppendQueryParams:
 
 @dataclass
 class SheetsSpreadsheetsValuesAppendSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SheetsSpreadsheetsValuesAppendSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SheetsSpreadsheetsValuesAppendSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -74,15 +78,15 @@ class SheetsSpreadsheetsValuesAppendSecurity:
 
 @dataclass
 class SheetsSpreadsheetsValuesAppendRequest:
-    path_params: SheetsSpreadsheetsValuesAppendPathParams = field(default=None)
-    query_params: SheetsSpreadsheetsValuesAppendQueryParams = field(default=None)
+    path_params: SheetsSpreadsheetsValuesAppendPathParams = field()
+    query_params: SheetsSpreadsheetsValuesAppendQueryParams = field()
+    security: SheetsSpreadsheetsValuesAppendSecurity = field()
     request: Optional[shared.ValueRange] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SheetsSpreadsheetsValuesAppendSecurity = field(default=None)
     
 
 @dataclass
 class SheetsSpreadsheetsValuesAppendResponse:
+    content_type: str = field()
+    status_code: int = field()
     append_values_response: Optional[shared.AppendValuesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

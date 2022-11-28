@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetChartRelatedColumnNamePathParams:
-    column_name: str = field(default=None, metadata={'path_param': { 'field_name': 'column_name', 'style': 'simple', 'explode': False }})
+    column_name: str = field(metadata={'path_param': { 'field_name': 'column_name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,47 +17,47 @@ class GetChartRelatedColumnNameQueryParams:
 
 @dataclass
 class GetChartRelatedColumnNameSecurity:
-    jwt: shared.SchemeJwt = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetChartRelatedColumnNameRequest:
-    path_params: GetChartRelatedColumnNamePathParams = field(default=None)
-    query_params: GetChartRelatedColumnNameQueryParams = field(default=None)
-    security: GetChartRelatedColumnNameSecurity = field(default=None)
+    jwt: shared.SchemeJwt = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class GetChartRelatedColumnName400ApplicationJSON:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class GetChartRelatedColumnName401ApplicationJSON:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class GetChartRelatedColumnName404ApplicationJSON:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class GetChartRelatedColumnName500ApplicationJSON:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    
+
+@dataclass
+class GetChartRelatedColumnNameRequest:
+    path_params: GetChartRelatedColumnNamePathParams = field()
+    query_params: GetChartRelatedColumnNameQueryParams = field()
+    security: GetChartRelatedColumnNameSecurity = field()
     
 
 @dataclass
 class GetChartRelatedColumnNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_chart_related_column_name_400_application_json_object: Optional[GetChartRelatedColumnName400ApplicationJSON] = field(default=None)
     get_chart_related_column_name_401_application_json_object: Optional[GetChartRelatedColumnName401ApplicationJSON] = field(default=None)
     get_chart_related_column_name_404_application_json_object: Optional[GetChartRelatedColumnName404ApplicationJSON] = field(default=None)
     get_chart_related_column_name_500_application_json_object: Optional[GetChartRelatedColumnName500ApplicationJSON] = field(default=None)
     related_response_schema: Optional[shared.RelatedResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

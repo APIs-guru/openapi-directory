@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import userfacingmessage
-from . import userfacingmessage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TermsAndConditions:
-    content: Optional[userfacingmessage.UserFacingMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    header: Optional[userfacingmessage.UserFacingMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'header' }})
+    r"""TermsAndConditions
+    A terms and conditions page to be accepted during provisioning.
+    """
+    
+    content: Optional[UserFacingMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
+    header: Optional[UserFacingMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('header') }})
     

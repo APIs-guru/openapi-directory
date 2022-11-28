@@ -1,0 +1,20 @@
+export var WorkspaceStateEnum;
+(function (WorkspaceStateEnum) {
+    WorkspaceStateEnum["Pending"] = "PENDING";
+    WorkspaceStateEnum["Available"] = "AVAILABLE";
+    WorkspaceStateEnum["Impaired"] = "IMPAIRED";
+    WorkspaceStateEnum["Unhealthy"] = "UNHEALTHY";
+    WorkspaceStateEnum["Rebooting"] = "REBOOTING";
+    WorkspaceStateEnum["Starting"] = "STARTING";
+    WorkspaceStateEnum["Rebuilding"] = "REBUILDING";
+    WorkspaceStateEnum["Restoring"] = "RESTORING";
+    WorkspaceStateEnum["Maintenance"] = "MAINTENANCE";
+    WorkspaceStateEnum["AdminMaintenance"] = "ADMIN_MAINTENANCE";
+    WorkspaceStateEnum["Terminating"] = "TERMINATING";
+    WorkspaceStateEnum["Terminated"] = "TERMINATED";
+    WorkspaceStateEnum["Suspended"] = "SUSPENDED";
+    WorkspaceStateEnum["Updating"] = "UPDATING";
+    WorkspaceStateEnum["Stopping"] = "STOPPING";
+    WorkspaceStateEnum["Stopped"] = "STOPPED";
+    WorkspaceStateEnum["Error"] = "ERROR";
+})(WorkspaceStateEnum || (WorkspaceStateEnum = {}));

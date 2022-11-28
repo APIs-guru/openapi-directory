@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class MigrationsDeleteArchiveForOrgPathParams:
-    migration_id: int = field(default=None, metadata={'path_param': { 'field_name': 'migration_id', 'style': 'simple', 'explode': False }})
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    migration_id: int = field(metadata={'path_param': { 'field_name': 'migration_id', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class MigrationsDeleteArchiveForOrgRequest:
-    path_params: MigrationsDeleteArchiveForOrgPathParams = field(default=None)
+    path_params: MigrationsDeleteArchiveForOrgPathParams = field()
     
 
 @dataclass
 class MigrationsDeleteArchiveForOrgResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     

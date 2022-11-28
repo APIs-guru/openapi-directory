@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PredictiveScalingMaxCapacityBehaviorEnum(str, Enum):
     SET_FORECAST_CAPACITY_TO_MAX_CAPACITY = "SetForecastCapacityToMaxCapacity"

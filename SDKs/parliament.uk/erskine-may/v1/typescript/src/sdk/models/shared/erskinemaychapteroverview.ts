@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErskineMaySectionOverview } from "./erskinemaysectionoverview";
 
 
+
 export class ErskineMayChapterOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 
-  @Metadata({ data: "json, name=partNumber" })
+  @SpeakeasyMetadata({ data: "json, name=partNumber" })
   partNumber?: number;
 
-  @Metadata({ data: "json, name=sections", elemType: shared.ErskineMaySectionOverview })
+  @SpeakeasyMetadata({ data: "json, name=sections", elemType: ErskineMaySectionOverview })
   sections?: ErskineMaySectionOverview[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

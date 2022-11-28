@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PullDocumentIdSecurity = /** @class */ (function (_super) {
     __extends(PullDocumentIdSecurity, _super);
@@ -30,39 +30,23 @@ var PullDocumentIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], PullDocumentIdSecurity.prototype, "bearerAuth", void 0);
     return PullDocumentIdSecurity;
 }(SpeakeasyBase));
 export { PullDocumentIdSecurity };
-var PullDocumentIdRequest = /** @class */ (function (_super) {
-    __extends(PullDocumentIdRequest, _super);
-    function PullDocumentIdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
-        __metadata("design:type", Object)
-    ], PullDocumentIdRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PullDocumentIdSecurity)
-    ], PullDocumentIdRequest.prototype, "security", void 0);
-    return PullDocumentIdRequest;
-}(SpeakeasyBase));
-export { PullDocumentIdRequest };
 var PullDocumentId401ApplicationJson = /** @class */ (function (_super) {
     __extends(PullDocumentId401ApplicationJson, _super);
     function PullDocumentId401ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], PullDocumentId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], PullDocumentId401ApplicationJson.prototype, "errorDescription", void 0);
     return PullDocumentId401ApplicationJson;
@@ -74,47 +58,63 @@ var PullDocumentId404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Object)
     ], PullDocumentId404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", Object)
     ], PullDocumentId404ApplicationJson.prototype, "errorDescription", void 0);
     return PullDocumentId404ApplicationJson;
 }(SpeakeasyBase));
 export { PullDocumentId404ApplicationJson };
+var PullDocumentIdRequest = /** @class */ (function (_super) {
+    __extends(PullDocumentIdRequest, _super);
+    function PullDocumentIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        __metadata("design:type", Object)
+    ], PullDocumentIdRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PullDocumentIdSecurity)
+    ], PullDocumentIdRequest.prototype, "security", void 0);
+    return PullDocumentIdRequest;
+}(SpeakeasyBase));
+export { PullDocumentIdRequest };
 var PullDocumentIdResponse = /** @class */ (function (_super) {
     __extends(PullDocumentIdResponse, _super);
     function PullDocumentIdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PullDocumentIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PullDocumentIdResponse.prototype, "pullDocumentId400ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PullDocumentId401ApplicationJson)
     ], PullDocumentIdResponse.prototype, "pullDocumentId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PullDocumentId404ApplicationJson)
     ], PullDocumentIdResponse.prototype, "pullDocumentId404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PullDocumentIdResponse.prototype, "pullDocumentId500ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PullDocumentIdResponse.prototype, "sample", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PullDocumentIdResponse.prototype, "statusCode", void 0);
     return PullDocumentIdResponse;

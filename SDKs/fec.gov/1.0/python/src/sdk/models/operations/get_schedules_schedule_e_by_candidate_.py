@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSchedulesScheduleEByCandidateOfficeEnum(str, Enum):
@@ -14,7 +18,7 @@ class GetSchedulesScheduleEByCandidateSupportOpposeEnum(str, Enum):
 
 @dataclass
 class GetSchedulesScheduleEByCandidateQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
@@ -33,12 +37,12 @@ class GetSchedulesScheduleEByCandidateQueryParams:
 
 @dataclass
 class GetSchedulesScheduleEByCandidateRequest:
-    query_params: GetSchedulesScheduleEByCandidateQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleEByCandidateQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleEByCandidateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_e_by_candidate_page: Optional[shared.ScheduleEByCandidatePage] = field(default=None)
-    status_code: int = field(default=None)
     

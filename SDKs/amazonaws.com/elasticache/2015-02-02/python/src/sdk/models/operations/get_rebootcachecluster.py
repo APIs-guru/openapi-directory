@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRebootCacheClusterActionEnum(str, Enum):
     REBOOT_CACHE_CLUSTER = "RebootCacheCluster"
@@ -10,10 +14,10 @@ class GetRebootCacheClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetRebootCacheClusterQueryParams:
-    action: GetRebootCacheClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cache_cluster_id: str = field(default=None, metadata={'query_param': { 'field_name': 'CacheClusterId', 'style': 'form', 'explode': True }})
-    cache_node_ids_to_reboot: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheNodeIdsToReboot', 'style': 'form', 'explode': True }})
-    version: GetRebootCacheClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetRebootCacheClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cache_cluster_id: str = field(metadata={'query_param': { 'field_name': 'CacheClusterId', 'style': 'form', 'explode': True }})
+    cache_node_ids_to_reboot: List[str] = field(metadata={'query_param': { 'field_name': 'CacheNodeIdsToReboot', 'style': 'form', 'explode': True }})
+    version: GetRebootCacheClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetRebootCacheClusterHeaders:
 
 @dataclass
 class GetRebootCacheClusterRequest:
-    query_params: GetRebootCacheClusterQueryParams = field(default=None)
-    headers: GetRebootCacheClusterHeaders = field(default=None)
+    headers: GetRebootCacheClusterHeaders = field()
+    query_params: GetRebootCacheClusterQueryParams = field()
     
 
 @dataclass
 class GetRebootCacheClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceInfo } from "./deviceinfo";
 export declare enum GetIosPostInstallAttributionRequestRetrievalMethodEnum {
     UnknownPayloadRetrievalMethod = "UNKNOWN_PAYLOAD_RETRIEVAL_METHOD",

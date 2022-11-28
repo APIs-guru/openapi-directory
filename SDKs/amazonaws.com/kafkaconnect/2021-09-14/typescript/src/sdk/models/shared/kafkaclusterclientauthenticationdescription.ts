@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KafkaClusterClientAuthenticationTypeEnum } from "./kafkaclusterclientauthenticationtypeenum";
+
 
 
 // KafkaClusterClientAuthenticationDescription
@@ -7,6 +8,6 @@ import { KafkaClusterClientAuthenticationTypeEnum } from "./kafkaclusterclientau
  * The client authentication information used in order to authenticate with the Apache Kafka cluster.
 **/
 export class KafkaClusterClientAuthenticationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationType" })
   authenticationType?: KafkaClusterClientAuthenticationTypeEnum;
 }

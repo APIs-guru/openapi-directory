@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Encryption } from "./encryption";
 import { SegmentSettings } from "./segmentsettings";
 // MuxStream
@@ -35,27 +35,27 @@ var MuxStream = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=container" }),
+        SpeakeasyMetadata({ data: "json, name=container" }),
         __metadata("design:type", String)
     ], MuxStream.prototype, "container", void 0);
     __decorate([
-        Metadata({ data: "json, name=elementaryStreams" }),
+        SpeakeasyMetadata({ data: "json, name=elementaryStreams" }),
         __metadata("design:type", Array)
     ], MuxStream.prototype, "elementaryStreams", void 0);
     __decorate([
-        Metadata({ data: "json, name=encryption" }),
+        SpeakeasyMetadata({ data: "json, name=encryption" }),
         __metadata("design:type", Encryption)
     ], MuxStream.prototype, "encryption", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileName" }),
+        SpeakeasyMetadata({ data: "json, name=fileName" }),
         __metadata("design:type", String)
     ], MuxStream.prototype, "fileName", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], MuxStream.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=segmentSettings" }),
+        SpeakeasyMetadata({ data: "json, name=segmentSettings" }),
         __metadata("design:type", SegmentSettings)
     ], MuxStream.prototype, "segmentSettings", void 0);
     return MuxStream;

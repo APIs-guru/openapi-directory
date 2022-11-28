@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import branch
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateBranchResult:
-    branch: branch.Branch = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
+    r"""CreateBranchResult
+     The result structure for create branch request. 
+    """
+    
+    branch: Branch = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('branch') }})
     

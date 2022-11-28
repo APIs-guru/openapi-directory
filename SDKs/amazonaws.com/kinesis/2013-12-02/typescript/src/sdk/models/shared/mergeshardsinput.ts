@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MergeShardsInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for <code>MergeShards</code>.
 **/
 export class MergeShardsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdjacentShardToMerge" })
+  @SpeakeasyMetadata({ data: "json, name=AdjacentShardToMerge" })
   adjacentShardToMerge: string;
 
-  @Metadata({ data: "json, name=ShardToMerge" })
+  @SpeakeasyMetadata({ data: "json, name=ShardToMerge" })
   shardToMerge: string;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 }

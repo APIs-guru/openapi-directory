@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoOffset
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Video Offset
 **/
 export class VideoOffset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=offsetPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=offsetPercentage" })
   offsetPercentage?: number;
 
-  @Metadata({ data: "json, name=offsetSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=offsetSeconds" })
   offsetSeconds?: number;
 }

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWorkgroupListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workgroup_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workgroup_name" })
   workgroupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=workgroup_types" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=workgroup_types" })
   workgroupTypes?: string[];
 }
 
 
 export class GetWorkgroupListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWorkgroupListQueryParams;
 }
 
 
 export class GetWorkgroupListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpStatusVo?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   workgroupListVo?: any;
 }

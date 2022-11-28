@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsResponseTypeEnum } from "./dnsresponsetypeenum";
+
 
 
 // DnsServiceDiscovery
@@ -7,9 +8,9 @@ import { DnsResponseTypeEnum } from "./dnsresponsetypeenum";
  * An object that represents the DNS service discovery information for your virtual node.
 **/
 export class DnsServiceDiscovery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname: string;
 
-  @Metadata({ data: "json, name=responseType" })
+  @SpeakeasyMetadata({ data: "json, name=responseType" })
   responseType?: DnsResponseTypeEnum;
 }

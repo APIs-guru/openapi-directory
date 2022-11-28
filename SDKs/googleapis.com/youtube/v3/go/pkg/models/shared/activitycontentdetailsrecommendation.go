@@ -9,6 +9,8 @@ const (
 	ActivityContentDetailsRecommendationReasonEnumVideoWatched      ActivityContentDetailsRecommendationReasonEnum = "videoWatched"
 )
 
+// ActivityContentDetailsRecommendation
+// Information that identifies the recommended resource.
 type ActivityContentDetailsRecommendation struct {
 	Reason         *ActivityContentDetailsRecommendationReasonEnum `json:"reason,omitempty"`
 	ResourceID     *ResourceID                                     `json:"resourceId,omitempty"`

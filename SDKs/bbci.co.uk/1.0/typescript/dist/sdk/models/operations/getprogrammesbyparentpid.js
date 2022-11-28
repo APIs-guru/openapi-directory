@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetProgrammesByParentPidPathParams = /** @class */ (function (_super) {
     __extends(GetProgrammesByParentPidPathParams, _super);
@@ -30,7 +30,7 @@ var GetProgrammesByParentPidPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
         __metadata("design:type", String)
     ], GetProgrammesByParentPidPathParams.prototype, "pid", void 0);
     return GetProgrammesByParentPidPathParams;
@@ -42,15 +42,15 @@ var GetProgrammesByParentPidQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetProgrammesByParentPidQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
         __metadata("design:type", Number)
     ], GetProgrammesByParentPidQueryParams.prototype, "initialChildCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetProgrammesByParentPidQueryParams.prototype, "rights", void 0);
     return GetProgrammesByParentPidQueryParams;
@@ -62,11 +62,11 @@ var GetProgrammesByParentPidRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammesByParentPidPathParams)
     ], GetProgrammesByParentPidRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammesByParentPidQueryParams)
     ], GetProgrammesByParentPidRequest.prototype, "queryParams", void 0);
     return GetProgrammesByParentPidRequest;
@@ -78,15 +78,15 @@ var GetProgrammesByParentPidResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetProgrammesByParentPidResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetProgrammesByParentPidResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetProgrammesByParentPidResponse.prototype, "ibl", void 0);
     return GetProgrammesByParentPidResponse;

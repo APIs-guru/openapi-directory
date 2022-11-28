@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import customevent
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomEventsBatchInsertRequest:
-    custom_events: Optional[List[customevent.CustomEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customEvents' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    r"""CustomEventsBatchInsertRequest
+    Insert Custom Events Request.
+    """
+    
+    custom_events: Optional[List[CustomEvent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customEvents') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

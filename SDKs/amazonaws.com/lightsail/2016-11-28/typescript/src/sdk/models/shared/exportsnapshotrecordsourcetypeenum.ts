@@ -1,6 +1,7 @@
 
 
+
 export enum ExportSnapshotRecordSourceTypeEnum {
-    InstanceSnapshot = "InstanceSnapshot"
-,    DiskSnapshot = "DiskSnapshot"
+    InstanceSnapshot = "InstanceSnapshot",
+    DiskSnapshot = "DiskSnapshot"
 }

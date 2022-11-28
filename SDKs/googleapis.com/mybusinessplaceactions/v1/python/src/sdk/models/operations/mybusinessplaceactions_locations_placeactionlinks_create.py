@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessplaceactionsLocationsPlaceActionLinksCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessplaceactionsLocationsPlaceActionLinksCreateQueryParams:
 
 @dataclass
 class MybusinessplaceactionsLocationsPlaceActionLinksCreateRequest:
-    path_params: MybusinessplaceactionsLocationsPlaceActionLinksCreatePathParams = field(default=None)
-    query_params: MybusinessplaceactionsLocationsPlaceActionLinksCreateQueryParams = field(default=None)
-    request: Optional[shared.PlaceActionLink] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: MybusinessplaceactionsLocationsPlaceActionLinksCreatePathParams = field()
+    query_params: MybusinessplaceactionsLocationsPlaceActionLinksCreateQueryParams = field()
+    request: Optional[shared.PlaceActionLinkInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessplaceactionsLocationsPlaceActionLinksCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     place_action_link: Optional[shared.PlaceActionLink] = field(default=None)
-    status_code: int = field(default=None)
     

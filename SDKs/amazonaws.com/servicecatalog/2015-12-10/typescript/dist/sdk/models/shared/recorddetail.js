@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RecordError } from "./recorderror";
+import { RecordTag } from "./recordtag";
 import { RecordStatusEnum } from "./recordstatusenum";
 // RecordDetail
 /**
@@ -35,59 +36,59 @@ var RecordDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTime" }),
         __metadata("design:type", Date)
     ], RecordDetail.prototype, "createdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LaunchRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=LaunchRoleArn" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "launchRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=PathId" }),
+        SpeakeasyMetadata({ data: "json, name=PathId" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "pathId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "provisionedProductId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "provisionedProductName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductType" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductType" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "provisionedProductType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "provisioningArtifactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordErrors", elemType: shared.RecordError }),
+        SpeakeasyMetadata({ data: "json, name=RecordErrors", elemType: RecordError }),
         __metadata("design:type", Array)
     ], RecordDetail.prototype, "recordErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordId" }),
+        SpeakeasyMetadata({ data: "json, name=RecordId" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "recordId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordTags", elemType: shared.RecordTag }),
+        SpeakeasyMetadata({ data: "json, name=RecordTags", elemType: RecordTag }),
         __metadata("design:type", Array)
     ], RecordDetail.prototype, "recordTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordType" }),
+        SpeakeasyMetadata({ data: "json, name=RecordType" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "recordType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], RecordDetail.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdatedTime" }),
         __metadata("design:type", Date)
     ], RecordDetail.prototype, "updatedTime", void 0);
     return RecordDetail;

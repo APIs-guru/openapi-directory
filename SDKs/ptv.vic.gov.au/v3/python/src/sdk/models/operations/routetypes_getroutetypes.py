@@ -12,14 +12,14 @@ class RouteTypesGetRouteTypesQueryParams:
 
 @dataclass
 class RouteTypesGetRouteTypesRequest:
-    query_params: RouteTypesGetRouteTypesQueryParams = field(default=None)
+    query_params: RouteTypesGetRouteTypesQueryParams = field()
     
 
 @dataclass
 class RouteTypesGetRouteTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_route_types_response: Optional[shared.V3RouteTypesResponse] = field(default=None)
     

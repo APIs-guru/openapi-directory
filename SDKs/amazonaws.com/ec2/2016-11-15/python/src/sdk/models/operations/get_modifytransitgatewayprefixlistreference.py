@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyTransitGatewayPrefixListReferenceActionEnum(str, Enum):
     MODIFY_TRANSIT_GATEWAY_PREFIX_LIST_REFERENCE = "ModifyTransitGatewayPrefixListReference"
@@ -10,13 +14,13 @@ class GetModifyTransitGatewayPrefixListReferenceVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyTransitGatewayPrefixListReferenceQueryParams:
-    action: GetModifyTransitGatewayPrefixListReferenceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyTransitGatewayPrefixListReferenceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    prefix_list_id: str = field(metadata={'query_param': { 'field_name': 'PrefixListId', 'style': 'form', 'explode': True }})
+    transit_gateway_route_table_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
+    version: GetModifyTransitGatewayPrefixListReferenceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     blackhole: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Blackhole', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    prefix_list_id: str = field(default=None, metadata={'query_param': { 'field_name': 'PrefixListId', 'style': 'form', 'explode': True }})
     transit_gateway_attachment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    transit_gateway_route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
-    version: GetModifyTransitGatewayPrefixListReferenceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetModifyTransitGatewayPrefixListReferenceHeaders:
 
 @dataclass
 class GetModifyTransitGatewayPrefixListReferenceRequest:
-    query_params: GetModifyTransitGatewayPrefixListReferenceQueryParams = field(default=None)
-    headers: GetModifyTransitGatewayPrefixListReferenceHeaders = field(default=None)
+    headers: GetModifyTransitGatewayPrefixListReferenceHeaders = field()
+    query_params: GetModifyTransitGatewayPrefixListReferenceQueryParams = field()
     
 
 @dataclass
 class GetModifyTransitGatewayPrefixListReferenceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

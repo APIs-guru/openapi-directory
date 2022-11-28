@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2betaAddFulfillmentPlacesRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for ProductService.AddFulfillmentPlaces method.
 **/
 export class GoogleCloudRetailV2betaAddFulfillmentPlacesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addTime" })
+  @SpeakeasyMetadata({ data: "json, name=addTime" })
   addTime?: string;
 
-  @Metadata({ data: "json, name=allowMissing" })
+  @SpeakeasyMetadata({ data: "json, name=allowMissing" })
   allowMissing?: boolean;
 
-  @Metadata({ data: "json, name=placeIds" })
+  @SpeakeasyMetadata({ data: "json, name=placeIds" })
   placeIds?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

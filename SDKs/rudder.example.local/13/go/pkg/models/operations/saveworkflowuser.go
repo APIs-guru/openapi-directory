@@ -8,10 +8,6 @@ type SaveWorkflowUserRequestBody struct {
 	ValidatedUsers []string `json:"validatedUsers"`
 }
 
-type SaveWorkflowUserRequest struct {
-	Request SaveWorkflowUserRequestBody `request:"mediaType=application/json"`
-}
-
 type SaveWorkflowUser200ApplicationJSONActionEnum string
 
 const (
@@ -29,6 +25,10 @@ type SaveWorkflowUser200ApplicationJSON struct {
 	Action SaveWorkflowUser200ApplicationJSONActionEnum `json:"action"`
 	Data   shared.ValidatedUser                         `json:"data"`
 	Result SaveWorkflowUser200ApplicationJSONResultEnum `json:"result"`
+}
+
+type SaveWorkflowUserRequest struct {
+	Request SaveWorkflowUserRequestBody `request:"mediaType=application/json"`
 }
 
 type SaveWorkflowUserResponse struct {

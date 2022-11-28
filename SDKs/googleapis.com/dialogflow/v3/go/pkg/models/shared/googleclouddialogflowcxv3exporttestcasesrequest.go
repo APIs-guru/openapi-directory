@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnumJSON                  GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnum = "JSON"
 )
 
+// GoogleCloudDialogflowCxV3ExportTestCasesRequest
+// The request message for TestCases.ExportTestCases.
 type GoogleCloudDialogflowCxV3ExportTestCasesRequest struct {
 	DataFormat *GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnum `json:"dataFormat,omitempty"`
 	Filter     *string                                                        `json:"filter,omitempty"`

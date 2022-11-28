@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteNotificationConfigurationActionEnum(str, Enum):
     DELETE_NOTIFICATION_CONFIGURATION = "DeleteNotificationConfiguration"
@@ -10,10 +14,10 @@ class GetDeleteNotificationConfigurationVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteNotificationConfigurationQueryParams:
-    action: GetDeleteNotificationConfigurationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    topic_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'TopicARN', 'style': 'form', 'explode': True }})
-    version: GetDeleteNotificationConfigurationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteNotificationConfigurationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    topic_arn: str = field(metadata={'query_param': { 'field_name': 'TopicARN', 'style': 'form', 'explode': True }})
+    version: GetDeleteNotificationConfigurationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteNotificationConfigurationHeaders:
 
 @dataclass
 class GetDeleteNotificationConfigurationRequest:
-    query_params: GetDeleteNotificationConfigurationQueryParams = field(default=None)
-    headers: GetDeleteNotificationConfigurationHeaders = field(default=None)
+    headers: GetDeleteNotificationConfigurationHeaders = field()
+    query_params: GetDeleteNotificationConfigurationQueryParams = field()
     
 
 @dataclass
 class GetDeleteNotificationConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

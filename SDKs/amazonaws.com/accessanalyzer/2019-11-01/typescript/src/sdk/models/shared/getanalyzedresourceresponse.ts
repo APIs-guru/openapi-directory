@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalyzedResource } from "./analyzedresource";
+
 
 
 // GetAnalyzedResourceResponse
@@ -7,6 +8,6 @@ import { AnalyzedResource } from "./analyzedresource";
  * The response to the request.
 **/
 export class GetAnalyzedResourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: AnalyzedResource;
 }

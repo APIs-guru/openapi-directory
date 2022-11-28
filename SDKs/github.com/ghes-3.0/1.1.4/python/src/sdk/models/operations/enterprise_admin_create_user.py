@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class EnterpriseAdminCreateUserRequestBody:
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
+    login: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('login') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
     
 
 @dataclass
@@ -18,7 +19,7 @@ class EnterpriseAdminCreateUserRequest:
 
 @dataclass
 class EnterpriseAdminCreateUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     simple_user: Optional[shared.SimpleUser] = field(default=None)
     

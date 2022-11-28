@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Session } from "./session";
+
 
 
 // BatchCreateSessionsResponse
@@ -8,6 +8,6 @@ import { Session } from "./session";
  * The response for BatchCreateSessions.
 **/
 export class BatchCreateSessionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=session", elemType: shared.Session })
+  @SpeakeasyMetadata({ data: "json, name=session", elemType: Session })
   session?: Session[];
 }

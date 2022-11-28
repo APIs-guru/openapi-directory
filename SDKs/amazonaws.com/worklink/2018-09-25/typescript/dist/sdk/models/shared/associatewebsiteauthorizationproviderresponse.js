@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AssociateWebsiteAuthorizationProviderResponse = /** @class */ (function (_super) {
     __extends(AssociateWebsiteAuthorizationProviderResponse, _super);
     function AssociateWebsiteAuthorizationProviderResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AuthorizationProviderId" }),
+        SpeakeasyMetadata({ data: "json, name=AuthorizationProviderId" }),
         __metadata("design:type", String)
     ], AssociateWebsiteAuthorizationProviderResponse.prototype, "authorizationProviderId", void 0);
     return AssociateWebsiteAuthorizationProviderResponse;

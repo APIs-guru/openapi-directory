@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class S3CompatibleMetadataAuthMethodEnum(str, Enum):
     AUTH_METHOD_UNSPECIFIED = "AUTH_METHOD_UNSPECIFIED"
@@ -26,8 +28,12 @@ class S3CompatibleMetadataRequestModelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class S3CompatibleMetadata:
-    auth_method: Optional[S3CompatibleMetadataAuthMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authMethod' }})
-    list_api: Optional[S3CompatibleMetadataListAPIEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listApi' }})
-    protocol: Optional[S3CompatibleMetadataProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
-    request_model: Optional[S3CompatibleMetadataRequestModelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestModel' }})
+    r"""S3CompatibleMetadata
+    S3CompatibleMetadata contains the metadata fields that apply to the basic types of S3-compatible data providers.
+    """
+    
+    auth_method: Optional[S3CompatibleMetadataAuthMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authMethod') }})
+    list_api: Optional[S3CompatibleMetadataListAPIEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listApi') }})
+    protocol: Optional[S3CompatibleMetadataProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
+    request_model: Optional[S3CompatibleMetadataRequestModelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestModel') }})
     

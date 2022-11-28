@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,31 +29,35 @@ class ListSignalingChannelsHeaders:
 @dataclass_json
 @dataclass
 class ListSignalingChannelsRequestBodyChannelNameCondition:
-    comparison_operator: Optional[shared.ComparisonOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComparisonOperator' }})
-    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComparisonValue' }})
+    r"""ListSignalingChannelsRequestBodyChannelNameCondition
+    An optional input parameter for the <code>ListSignalingChannels</code> API. When this parameter is specified while invoking <code>ListSignalingChannels</code>, the API returns only the channels that satisfy a condition specified in <code>ChannelNameCondition</code>.
+    """
+    
+    comparison_operator: Optional[shared.ComparisonOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComparisonOperator') }})
+    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComparisonValue') }})
     
 
 @dataclass_json
 @dataclass
 class ListSignalingChannelsRequestBody:
-    channel_name_condition: Optional[ListSignalingChannelsRequestBodyChannelNameCondition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelNameCondition' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    channel_name_condition: Optional[ListSignalingChannelsRequestBodyChannelNameCondition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelNameCondition') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListSignalingChannelsRequest:
-    query_params: ListSignalingChannelsQueryParams = field(default=None)
-    headers: ListSignalingChannelsHeaders = field(default=None)
-    request: ListSignalingChannelsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListSignalingChannelsHeaders = field()
+    query_params: ListSignalingChannelsQueryParams = field()
+    request: ListSignalingChannelsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListSignalingChannelsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     client_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     list_signaling_channels_output: Optional[shared.ListSignalingChannelsOutput] = field(default=None)
-    status_code: int = field(default=None)
     

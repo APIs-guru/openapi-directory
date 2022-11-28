@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RoutesOneOrMoreRoutesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=devid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=devid" })
   devid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=route_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=route_name" })
   routeName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=route_types" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=route_types" })
   routeTypes?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=signature" })
   signature?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token?: string;
 }
 
 
 export class RoutesOneOrMoreRoutesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RoutesOneOrMoreRoutesQueryParams;
 }
 
 
 export class RoutesOneOrMoreRoutesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3ErrorResponse?: shared.V3ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3RouteResponse?: shared.V3RouteResponse;
 }

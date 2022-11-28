@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaAutoScalingDescription } from "./replicaautoscalingdescription";
 import { TableStatusEnum } from "./tablestatusenum";
+
 
 
 // TableAutoScalingDescription
@@ -9,12 +9,12 @@ import { TableStatusEnum } from "./tablestatusenum";
  * Represents the auto scaling configuration for a global table.
 **/
 export class TableAutoScalingDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Replicas", elemType: shared.ReplicaAutoScalingDescription })
+  @SpeakeasyMetadata({ data: "json, name=Replicas", elemType: ReplicaAutoScalingDescription })
   replicas?: ReplicaAutoScalingDescription[];
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=TableStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TableStatus" })
   tableStatus?: TableStatusEnum;
 }

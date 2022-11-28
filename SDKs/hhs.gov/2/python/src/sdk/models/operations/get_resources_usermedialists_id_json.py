@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetResourcesUserMediaListsIDJSONPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetResourcesUserMediaListsIDJSONQueryParams:
 
 @dataclass
 class GetResourcesUserMediaListsIDJSONRequest:
-    path_params: GetResourcesUserMediaListsIDJSONPathParams = field(default=None)
-    query_params: GetResourcesUserMediaListsIDJSONQueryParams = field(default=None)
+    path_params: GetResourcesUserMediaListsIDJSONPathParams = field()
+    query_params: GetResourcesUserMediaListsIDJSONQueryParams = field()
     
 
 @dataclass
 class GetResourcesUserMediaListsIDJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media_item_wrappeds: Optional[List[shared.MediaItemWrapped]] = field(default=None)
-    status_code: int = field(default=None)
     

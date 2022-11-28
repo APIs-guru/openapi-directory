@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UpdateCloudFormationCollectionFilter
 /**
  *  Contains the names of AWS CloudFormation stacks used to update a collection of stacks. You can specify up to 500 AWS CloudFormation stacks.
@@ -33,7 +33,7 @@ var UpdateCloudFormationCollectionFilter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=StackNames" }),
+        SpeakeasyMetadata({ data: "json, name=StackNames" }),
         __metadata("design:type", Array)
     ], UpdateCloudFormationCollectionFilter.prototype, "stackNames", void 0);
     return UpdateCloudFormationCollectionFilter;

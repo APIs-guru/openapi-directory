@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryRequestInput } from "./queryrequestinput";
+
 
 
 // QueryRequest
@@ -8,12 +8,12 @@ import { QueryRequestInput } from "./queryrequestinput";
  * Request type for the [`Query`](#google.home.graph.v1.HomeGraphApiService.Query) call.
 **/
 export class QueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentUserId" })
+  @SpeakeasyMetadata({ data: "json, name=agentUserId" })
   agentUserId?: string;
 
-  @Metadata({ data: "json, name=inputs", elemType: shared.QueryRequestInput })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: QueryRequestInput })
   inputs?: QueryRequestInput[];
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

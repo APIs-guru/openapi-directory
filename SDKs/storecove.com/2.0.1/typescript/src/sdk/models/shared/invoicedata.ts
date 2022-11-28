@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InvoiceDataConversionStrategyEnum {
-    Ubl = "ubl"
-,    Cii = "cii"
-,    Idoc = "idoc"
+    Ubl = "ubl",
+    Cii = "cii",
+    Idoc = "idoc"
 }
 
 
@@ -12,9 +13,9 @@ export enum InvoiceDataConversionStrategyEnum {
  * The invoice to send, in base64 encoded format. Provide either invoice, or invoiceData, but not both.
 **/
 export class InvoiceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=conversionStrategy" })
   conversionStrategy?: InvoiceDataConversionStrategyEnum;
 
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: string;
 }

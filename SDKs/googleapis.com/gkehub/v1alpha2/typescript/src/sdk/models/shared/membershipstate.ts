@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MembershipStateCodeEnum {
-    CodeUnspecified = "CODE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
-,    ServiceUpdating = "SERVICE_UPDATING"
+    CodeUnspecified = "CODE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Deleting = "DELETING",
+    Updating = "UPDATING",
+    ServiceUpdating = "SERVICE_UPDATING"
 }
 
 
@@ -15,6 +16,6 @@ export enum MembershipStateCodeEnum {
  * MembershipState describes the state of a Membership resource.
 **/
 export class MembershipState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: MembershipStateCodeEnum;
 }

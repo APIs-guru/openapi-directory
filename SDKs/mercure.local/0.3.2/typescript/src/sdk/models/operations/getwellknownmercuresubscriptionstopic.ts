@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWellKnownMercureSubscriptionsTopicPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=topic" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=topic" })
   topic: string;
 }
 
 
 export class GetWellKnownMercureSubscriptionsTopicRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWellKnownMercureSubscriptionsTopicPathParams;
 }
 
 
 export class GetWellKnownMercureSubscriptionsTopicResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subscriptions?: shared.Subscriptions;
 }

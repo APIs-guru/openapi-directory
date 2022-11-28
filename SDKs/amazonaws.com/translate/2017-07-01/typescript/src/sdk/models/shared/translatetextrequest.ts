@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TranslateTextRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=SourceLanguageCode" })
   sourceLanguageCode: string;
 
-  @Metadata({ data: "json, name=TargetLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=TargetLanguageCode" })
   targetLanguageCode: string;
 
-  @Metadata({ data: "json, name=TerminologyNames" })
+  @SpeakeasyMetadata({ data: "json, name=TerminologyNames" })
   terminologyNames?: string[];
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text: string;
 }

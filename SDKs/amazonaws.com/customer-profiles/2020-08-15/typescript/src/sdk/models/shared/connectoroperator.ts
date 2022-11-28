@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketoConnectorOperatorEnum } from "./marketoconnectoroperatorenum";
 import { S3ConnectorOperatorEnum } from "./s3connectoroperatorenum";
 import { SalesforceConnectorOperatorEnum } from "./salesforceconnectoroperatorenum";
@@ -6,23 +6,24 @@ import { ServiceNowConnectorOperatorEnum } from "./servicenowconnectoroperatoren
 import { ZendeskConnectorOperatorEnum } from "./zendeskconnectoroperatorenum";
 
 
+
 // ConnectorOperator
 /** 
  * The operation to be performed on the provided source fields.
 **/
 export class ConnectorOperator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marketo" })
+  @SpeakeasyMetadata({ data: "json, name=Marketo" })
   marketo?: MarketoConnectorOperatorEnum;
 
-  @Metadata({ data: "json, name=S3" })
+  @SpeakeasyMetadata({ data: "json, name=S3" })
   s3?: S3ConnectorOperatorEnum;
 
-  @Metadata({ data: "json, name=Salesforce" })
+  @SpeakeasyMetadata({ data: "json, name=Salesforce" })
   salesforce?: SalesforceConnectorOperatorEnum;
 
-  @Metadata({ data: "json, name=ServiceNow" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNow" })
   serviceNow?: ServiceNowConnectorOperatorEnum;
 
-  @Metadata({ data: "json, name=Zendesk" })
+  @SpeakeasyMetadata({ data: "json, name=Zendesk" })
   zendesk?: ZendeskConnectorOperatorEnum;
 }

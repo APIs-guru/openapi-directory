@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var LocalDiskInitializeParamsDiskTypeEnum;
 (function (LocalDiskInitializeParamsDiskTypeEnum) {
     LocalDiskInitializeParamsDiskTypeEnum["DiskTypeUnspecified"] = "DISK_TYPE_UNSPECIFIED";
@@ -41,23 +41,23 @@ var LocalDiskInitializeParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], LocalDiskInitializeParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskName" }),
+        SpeakeasyMetadata({ data: "json, name=diskName" }),
         __metadata("design:type", String)
     ], LocalDiskInitializeParams.prototype, "diskName", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskSizeGb" }),
+        SpeakeasyMetadata({ data: "json, name=diskSizeGb" }),
         __metadata("design:type", String)
     ], LocalDiskInitializeParams.prototype, "diskSizeGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskType" }),
+        SpeakeasyMetadata({ data: "json, name=diskType" }),
         __metadata("design:type", String)
     ], LocalDiskInitializeParams.prototype, "diskType", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], LocalDiskInitializeParams.prototype, "labels", void 0);
     return LocalDiskInitializeParams;

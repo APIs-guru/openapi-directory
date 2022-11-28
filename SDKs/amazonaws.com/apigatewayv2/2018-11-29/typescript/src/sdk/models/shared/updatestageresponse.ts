@@ -1,50 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLogSettings } from "./accesslogsettings";
 import { RouteSettings } from "./routesettings";
-import { RouteSettings } from "./routesettings";
+
 
 
 export class UpdateStageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessLogSettings" })
+  @SpeakeasyMetadata({ data: "json, name=AccessLogSettings" })
   accessLogSettings?: AccessLogSettings;
 
-  @Metadata({ data: "json, name=ApiGatewayManaged" })
+  @SpeakeasyMetadata({ data: "json, name=ApiGatewayManaged" })
   apiGatewayManaged?: boolean;
 
-  @Metadata({ data: "json, name=AutoDeploy" })
+  @SpeakeasyMetadata({ data: "json, name=AutoDeploy" })
   autoDeploy?: boolean;
 
-  @Metadata({ data: "json, name=ClientCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientCertificateId" })
   clientCertificateId?: string;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=DefaultRouteSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultRouteSettings" })
   defaultRouteSettings?: RouteSettings;
 
-  @Metadata({ data: "json, name=DeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LastDeploymentStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=LastDeploymentStatusMessage" })
   lastDeploymentStatusMessage?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedDate" })
   lastUpdatedDate?: Date;
 
-  @Metadata({ data: "json, name=RouteSettings", elemType: shared.RouteSettings })
+  @SpeakeasyMetadata({ data: "json, name=RouteSettings", elemType: RouteSettings })
   routeSettings?: Map<string, RouteSettings>;
 
-  @Metadata({ data: "json, name=StageName" })
+  @SpeakeasyMetadata({ data: "json, name=StageName" })
   stageName?: string;
 
-  @Metadata({ data: "json, name=StageVariables" })
+  @SpeakeasyMetadata({ data: "json, name=StageVariables" })
   stageVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

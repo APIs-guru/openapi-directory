@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocaleEnum } from "./localeenum";
 
 
+
 export class DescribeExclusionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclusionArns" })
+  @SpeakeasyMetadata({ data: "json, name=exclusionArns" })
   exclusionArns: string[];
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: LocaleEnum;
 }

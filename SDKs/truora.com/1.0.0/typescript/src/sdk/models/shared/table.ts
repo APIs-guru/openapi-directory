@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableRow } from "./tablerow";
+
 
 
 // Table
@@ -8,9 +8,9 @@ import { TableRow } from "./tablerow";
  * Represents a table to lay out search results
 **/
 export class Table extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rows", elemType: shared.TableRow })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: TableRow })
   rows: TableRow[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

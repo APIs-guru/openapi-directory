@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1PlayIntegrityConfig } from "./googlefirebaseappcheckv1playintegrityconfig";
 /**
  * Response message for the BatchGetPlayIntegrityConfigs method.

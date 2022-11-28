@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimPowerOutletsCreateRequest:
-    request: shared.WritablePowerOutlet = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritablePowerOutletInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimPowerOutletsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     power_outlet: Optional[shared.PowerOutlet] = field(default=None)
-    status_code: int = field(default=None)
     

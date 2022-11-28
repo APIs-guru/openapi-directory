@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Deployment } from "./deployment";
 export var ProfileProfileTypeEnum;
 (function (ProfileProfileTypeEnum) {
@@ -35,6 +35,38 @@ export var ProfileProfileTypeEnum;
     ProfileProfileTypeEnum["PeakHeap"] = "PEAK_HEAP";
     ProfileProfileTypeEnum["HeapAlloc"] = "HEAP_ALLOC";
 })(ProfileProfileTypeEnum || (ProfileProfileTypeEnum = {}));
+// ProfileInput
+/**
+ * Profile resource.
+**/
+var ProfileInput = /** @class */ (function (_super) {
+    __extends(ProfileInput, _super);
+    function ProfileInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=deployment" }),
+        __metadata("design:type", Deployment)
+    ], ProfileInput.prototype, "deployment", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=duration" }),
+        __metadata("design:type", String)
+    ], ProfileInput.prototype, "duration", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], ProfileInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=profileBytes" }),
+        __metadata("design:type", String)
+    ], ProfileInput.prototype, "profileBytes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=profileType" }),
+        __metadata("design:type", String)
+    ], ProfileInput.prototype, "profileType", void 0);
+    return ProfileInput;
+}(SpeakeasyBase));
+export { ProfileInput };
 // Profile
 /**
  * Profile resource.
@@ -45,27 +77,27 @@ var Profile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deployment" }),
+        SpeakeasyMetadata({ data: "json, name=deployment" }),
         __metadata("design:type", Deployment)
     ], Profile.prototype, "deployment", void 0);
     __decorate([
-        Metadata({ data: "json, name=duration" }),
+        SpeakeasyMetadata({ data: "json, name=duration" }),
         __metadata("design:type", String)
     ], Profile.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Profile.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Profile.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=profileBytes" }),
+        SpeakeasyMetadata({ data: "json, name=profileBytes" }),
         __metadata("design:type", String)
     ], Profile.prototype, "profileBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=profileType" }),
+        SpeakeasyMetadata({ data: "json, name=profileType" }),
         __metadata("design:type", String)
     ], Profile.prototype, "profileType", void 0);
     return Profile;

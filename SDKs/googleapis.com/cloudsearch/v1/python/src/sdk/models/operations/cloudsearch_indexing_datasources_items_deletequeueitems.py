@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsDeleteQueueItemsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudsearchIndexingDatasourcesItemsDeleteQueueItemsQueryParams:
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsDeleteQueueItemsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsDeleteQueueItemsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudsearchIndexingDatasourcesItemsDeleteQueueItemsSecurity:
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsDeleteQueueItemsRequest:
-    path_params: CloudsearchIndexingDatasourcesItemsDeleteQueueItemsPathParams = field(default=None)
-    query_params: CloudsearchIndexingDatasourcesItemsDeleteQueueItemsQueryParams = field(default=None)
+    path_params: CloudsearchIndexingDatasourcesItemsDeleteQueueItemsPathParams = field()
+    query_params: CloudsearchIndexingDatasourcesItemsDeleteQueueItemsQueryParams = field()
+    security: CloudsearchIndexingDatasourcesItemsDeleteQueueItemsSecurity = field()
     request: Optional[shared.DeleteQueueItemsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudsearchIndexingDatasourcesItemsDeleteQueueItemsSecurity = field(default=None)
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsDeleteQueueItemsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

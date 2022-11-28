@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterTierEnum } from "./parametertierenum";
 
 
+
 export class PutParameterResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Tier" })
+  @SpeakeasyMetadata({ data: "json, name=Tier" })
   tier?: ParameterTierEnum;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

@@ -1,16 +1,18 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class StartJobPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    branch_name: str = field(default=None, metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    branch_name: str = field(metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -33,29 +35,29 @@ class StartJobRequestBodyJobTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class StartJobRequestBody:
-    commit_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commitId' }})
-    commit_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commitMessage' }})
-    commit_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commitTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobId' }})
-    job_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobReason' }})
-    job_type: StartJobRequestBodyJobTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobType' }})
+    job_type: StartJobRequestBodyJobTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobType') }})
+    commit_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commitId') }})
+    commit_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commitMessage') }})
+    commit_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commitTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobId') }})
+    job_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobReason') }})
     
 
 @dataclass
 class StartJobRequest:
-    path_params: StartJobPathParams = field(default=None)
-    headers: StartJobHeaders = field(default=None)
-    request: StartJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartJobHeaders = field()
+    path_params: StartJobPathParams = field()
+    request: StartJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     start_job_result: Optional[shared.StartJobResult] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

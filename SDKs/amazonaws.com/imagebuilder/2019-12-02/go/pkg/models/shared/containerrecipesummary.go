@@ -1,5 +1,7 @@
 package shared
 
+// ContainerRecipeSummary
+// A summary of a container recipe
 type ContainerRecipeSummary struct {
 	Arn           *string            `json:"arn,omitempty"`
 	ContainerType *ContainerTypeEnum `json:"containerType,omitempty"`

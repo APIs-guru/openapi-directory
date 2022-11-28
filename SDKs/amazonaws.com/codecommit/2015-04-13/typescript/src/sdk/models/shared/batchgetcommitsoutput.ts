@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Commit } from "./commit";
 import { BatchGetCommitsError } from "./batchgetcommitserror";
 
 
+
 export class BatchGetCommitsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commits", elemType: shared.Commit })
+  @SpeakeasyMetadata({ data: "json, name=commits", elemType: Commit })
   commits?: Commit[];
 
-  @Metadata({ data: "json, name=errors", elemType: shared.BatchGetCommitsError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: BatchGetCommitsError })
   errors?: BatchGetCommitsError[];
 }

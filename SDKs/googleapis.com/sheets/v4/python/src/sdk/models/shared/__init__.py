@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .addbandingrequest import *
 from .addbandingresponse import *
 from .addchartrequest import *

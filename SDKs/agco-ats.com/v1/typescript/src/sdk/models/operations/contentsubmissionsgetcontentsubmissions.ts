@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ContentSubmissionsGetContentSubmissionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=contentDefinitionID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=contentDefinitionID" })
   contentDefinitionId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeAttributes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeAttributes" })
   includeAttributes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeDefinition" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeDefinition" })
   includeDefinition?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=releaseID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=releaseID" })
   releaseId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=typeID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=typeID" })
   typeId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userID" })
   userId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" })
   version?: number;
 }
 
 
 export class ContentSubmissionsGetContentSubmissionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContentSubmissionsGetContentSubmissionsQueryParams;
 }
 
 
 export class ContentSubmissionsGetContentSubmissionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmission?: shared.ApiPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmission;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

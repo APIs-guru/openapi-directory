@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PollOption
 /**
  * Describes a choice in a Poll object.
@@ -33,15 +33,15 @@ var PollOption = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], PollOption.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", Number)
     ], PollOption.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=votes" }),
+        SpeakeasyMetadata({ data: "json, name=votes" }),
         __metadata("design:type", Number)
     ], PollOption.prototype, "votes", void 0);
     return PollOption;

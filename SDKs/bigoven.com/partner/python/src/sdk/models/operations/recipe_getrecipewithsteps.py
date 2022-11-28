@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RecipeGetRecipeWithStepsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RecipeGetRecipeWithStepsQueryParams:
 
 @dataclass
 class RecipeGetRecipeWithStepsRequest:
-    path_params: RecipeGetRecipeWithStepsPathParams = field(default=None)
-    query_params: RecipeGetRecipeWithStepsQueryParams = field(default=None)
+    path_params: RecipeGetRecipeWithStepsPathParams = field()
+    query_params: RecipeGetRecipeWithStepsQueryParams = field()
     
 
 @dataclass
 class RecipeGetRecipeWithStepsResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_api2_recipe: Optional[shared.BigOvenModelApi2Recipe] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

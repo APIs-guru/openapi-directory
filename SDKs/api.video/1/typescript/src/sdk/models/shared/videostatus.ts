@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideostatusEncoding } from "./videostatusencoding";
 import { VideostatusIngest } from "./videostatusingest";
 
 
+
 export class Videostatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: VideostatusEncoding;
 
-  @Metadata({ data: "json, name=ingest" })
+  @SpeakeasyMetadata({ data: "json, name=ingest" })
   ingest?: VideostatusIngest;
 }

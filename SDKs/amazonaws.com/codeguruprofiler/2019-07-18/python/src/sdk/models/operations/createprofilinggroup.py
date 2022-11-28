@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateProfilingGroupQueryParams:
-    client_token: str = field(default=None, metadata={'query_param': { 'field_name': 'clientToken', 'style': 'form', 'explode': True }})
+    client_token: str = field(metadata={'query_param': { 'field_name': 'clientToken', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -23,7 +28,11 @@ class CreateProfilingGroupHeaders:
 @dataclass_json
 @dataclass
 class CreateProfilingGroupRequestBodyAgentOrchestrationConfig:
-    profiling_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'profilingEnabled' }})
+    r"""CreateProfilingGroupRequestBodyAgentOrchestrationConfig
+     Specifies whether profiling is enabled or disabled for a profiling group. It is used by <a href=\"https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html\"> <code>ConfigureAgent</code> </a> to enable or disable profiling for a profiling group. 
+    """
+    
+    profiling_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('profilingEnabled') }})
     
 class CreateProfilingGroupRequestBodyComputePlatformEnum(str, Enum):
     DEFAULT = "Default"
@@ -33,27 +42,27 @@ class CreateProfilingGroupRequestBodyComputePlatformEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateProfilingGroupRequestBody:
-    agent_orchestration_config: Optional[CreateProfilingGroupRequestBodyAgentOrchestrationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'agentOrchestrationConfig' }})
-    compute_platform: Optional[CreateProfilingGroupRequestBodyComputePlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computePlatform' }})
-    profiling_group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'profilingGroupName' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    profiling_group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('profilingGroupName') }})
+    agent_orchestration_config: Optional[CreateProfilingGroupRequestBodyAgentOrchestrationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentOrchestrationConfig') }})
+    compute_platform: Optional[CreateProfilingGroupRequestBodyComputePlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computePlatform') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateProfilingGroupRequest:
-    query_params: CreateProfilingGroupQueryParams = field(default=None)
-    headers: CreateProfilingGroupHeaders = field(default=None)
-    request: CreateProfilingGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateProfilingGroupHeaders = field()
+    query_params: CreateProfilingGroupQueryParams = field()
+    request: CreateProfilingGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateProfilingGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_profiling_group_response: Optional[shared.CreateProfilingGroupResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

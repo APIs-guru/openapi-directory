@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartSchemaExtensionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateSnapshotBeforeSchemaExtension" })
+  @SpeakeasyMetadata({ data: "json, name=CreateSnapshotBeforeSchemaExtension" })
   createSnapshotBeforeSchemaExtension: boolean;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=LdifContent" })
+  @SpeakeasyMetadata({ data: "json, name=LdifContent" })
   ldifContent: string;
 }

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class UploadDocumentsFormatEnum(str, Enum):
@@ -9,7 +14,7 @@ class UploadDocumentsFormatEnum(str, Enum):
 
 @dataclass
 class UploadDocumentsQueryParams:
-    format: UploadDocumentsFormatEnum = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
+    format: UploadDocumentsFormatEnum = field(metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
     
 class UploadDocumentsContentTypeEnum(str, Enum):
     APPLICATION_JSON = "application/json"
@@ -18,7 +23,7 @@ class UploadDocumentsContentTypeEnum(str, Enum):
 
 @dataclass
 class UploadDocumentsHeaders:
-    content_type: UploadDocumentsContentTypeEnum = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    content_type: UploadDocumentsContentTypeEnum = field(metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -31,20 +36,20 @@ class UploadDocumentsHeaders:
 @dataclass_json
 @dataclass
 class UploadDocumentsRequestBody:
-    documents: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documents' }})
+    documents: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('documents') }})
     
 
 @dataclass
 class UploadDocumentsRequest:
-    query_params: UploadDocumentsQueryParams = field(default=None)
-    headers: UploadDocumentsHeaders = field(default=None)
-    request: UploadDocumentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UploadDocumentsHeaders = field()
+    query_params: UploadDocumentsQueryParams = field()
+    request: UploadDocumentsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UploadDocumentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     document_service_exception: Optional[shared.DocumentServiceException] = field(default=None)
-    status_code: int = field(default=None)
     upload_documents_response: Optional[shared.UploadDocumentsResponse] = field(default=None)
     

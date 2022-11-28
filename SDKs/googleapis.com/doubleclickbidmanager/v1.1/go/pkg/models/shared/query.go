@@ -1,5 +1,7 @@
 package shared
 
+// Query
+// Represents a query.
 type Query struct {
 	Kind                  *string        `json:"kind,omitempty"`
 	Metadata              *QueryMetadata `json:"metadata,omitempty"`

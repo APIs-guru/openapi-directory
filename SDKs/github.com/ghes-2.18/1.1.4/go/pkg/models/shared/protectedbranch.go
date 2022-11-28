@@ -42,6 +42,8 @@ type ProtectedBranchRequiredSignatures struct {
 	URL     string `json:"url"`
 }
 
+// ProtectedBranch
+// Branch protections protect branches
 type ProtectedBranch struct {
 	AllowDeletions                 *ProtectedBranchAllowDeletions                 `json:"allow_deletions,omitempty"`
 	AllowForcePushes               *ProtectedBranchAllowForcePushes               `json:"allow_force_pushes,omitempty"`

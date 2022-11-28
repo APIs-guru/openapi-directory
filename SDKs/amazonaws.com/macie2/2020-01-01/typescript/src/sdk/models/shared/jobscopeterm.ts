@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleScopeTerm } from "./simplescopeterm";
 import { TagScopeTerm } from "./tagscopeterm";
+
 
 
 // JobScopeTerm
@@ -8,9 +9,9 @@ import { TagScopeTerm } from "./tagscopeterm";
  * Specifies a property- or tag-based condition that defines criteria for including or excluding S3 objects from a classification job. A JobScopeTerm object can contain only one simpleScopeTerm object or one tagScopeTerm object.
 **/
 export class JobScopeTerm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=simpleScopeTerm" })
+  @SpeakeasyMetadata({ data: "json, name=simpleScopeTerm" })
   simpleScopeTerm?: SimpleScopeTerm;
 
-  @Metadata({ data: "json, name=tagScopeTerm" })
+  @SpeakeasyMetadata({ data: "json, name=tagScopeTerm" })
   tagScopeTerm?: TagScopeTerm;
 }

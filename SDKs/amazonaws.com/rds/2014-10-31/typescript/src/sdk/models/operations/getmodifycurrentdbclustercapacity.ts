@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyCurrentDbClusterCapacityActionEnum {
     ModifyCurrentDbClusterCapacity = "ModifyCurrentDBClusterCapacity"
@@ -10,66 +11,66 @@ export enum GetModifyCurrentDbClusterCapacityVersionEnum {
 
 
 export class GetModifyCurrentDbClusterCapacityQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyCurrentDbClusterCapacityActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Capacity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Capacity" })
   capacity?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBClusterIdentifier" })
   dbClusterIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SecondsBeforeTimeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SecondsBeforeTimeout" })
   secondsBeforeTimeout?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TimeoutAction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TimeoutAction" })
   timeoutAction?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyCurrentDbClusterCapacityVersionEnum;
 }
 
 
 export class GetModifyCurrentDbClusterCapacityHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyCurrentDbClusterCapacityRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyCurrentDbClusterCapacityQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyCurrentDbClusterCapacityHeaders;
 }
 
 
 export class GetModifyCurrentDbClusterCapacityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

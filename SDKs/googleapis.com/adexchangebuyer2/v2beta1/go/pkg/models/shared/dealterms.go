@@ -8,6 +8,8 @@ const (
 	DealTermsBrandingTypeEnumSemiTransparent         DealTermsBrandingTypeEnum = "SEMI_TRANSPARENT"
 )
 
+// DealTerms
+// The deal terms specify the details of a Product/deal. They specify things like price per buyer, the type of pricing model (for example, fixed price, auction) and expected impressions from the publisher.
 type DealTerms struct {
 	BrandingType                 *DealTermsBrandingTypeEnum    `json:"brandingType,omitempty"`
 	Description                  *string                       `json:"description,omitempty"`

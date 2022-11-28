@@ -11,6 +11,8 @@ const (
 	GoogleCloudMlV1TrainingInputScaleTierEnumCustom    GoogleCloudMlV1TrainingInputScaleTierEnum = "CUSTOM"
 )
 
+// GoogleCloudMlV1TrainingInput
+// Represents input parameters for a training job. When using the gcloud command to submit your training job, you can specify the input parameters as command-line arguments and/or in a YAML configuration file referenced from the --config command-line argument. For details, see the guide to [submitting a training job](/ai-platform/training/docs/training-jobs).
 type GoogleCloudMlV1TrainingInput struct {
 	Args                  []string                                   `json:"args,omitempty"`
 	EnableWebAccess       *bool                                      `json:"enableWebAccess,omitempty"`

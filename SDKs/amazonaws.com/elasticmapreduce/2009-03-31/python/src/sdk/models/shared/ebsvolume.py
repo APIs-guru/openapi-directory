@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class EbsVolume:
-    device: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Device' }})
-    volume_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VolumeId' }})
+    r"""EbsVolume
+    EBS block device that's attached to an EC2 instance.
+    """
+    
+    device: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Device') }})
+    volume_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VolumeId') }})
     

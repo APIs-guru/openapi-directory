@@ -13,17 +13,14 @@ type ModifyAllowedNetworksRequestBody struct {
 	AllowedNetworks *ModifyAllowedNetworksRequestBodyAllowedNetworks `json:"allowed_networks,omitempty"`
 }
 
-type ModifyAllowedNetworksRequest struct {
-	PathParams ModifyAllowedNetworksPathParams
-	Request    ModifyAllowedNetworksRequestBody `request:"mediaType=application/json"`
-}
-
 type ModifyAllowedNetworks200ApplicationJSONActionEnum string
 
 const (
 	ModifyAllowedNetworks200ApplicationJSONActionEnumModifySetting ModifyAllowedNetworks200ApplicationJSONActionEnum = "modifySetting"
 )
 
+// ModifyAllowedNetworks200ApplicationJSONData
+// Information about the allowed_networks settings
 type ModifyAllowedNetworks200ApplicationJSONData struct {
 	AllowedNetworks []interface{} `json:"allowed_networks,omitempty"`
 }
@@ -39,6 +36,11 @@ type ModifyAllowedNetworks200ApplicationJSON struct {
 	Action ModifyAllowedNetworks200ApplicationJSONActionEnum `json:"action"`
 	Data   ModifyAllowedNetworks200ApplicationJSONData       `json:"data"`
 	Result ModifyAllowedNetworks200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ModifyAllowedNetworksRequest struct {
+	PathParams ModifyAllowedNetworksPathParams
+	Request    ModifyAllowedNetworksRequestBody `request:"mediaType=application/json"`
 }
 
 type ModifyAllowedNetworksResponse struct {

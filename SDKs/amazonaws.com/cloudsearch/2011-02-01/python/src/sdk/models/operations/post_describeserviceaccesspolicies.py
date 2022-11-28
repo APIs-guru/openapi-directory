@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeServiceAccessPoliciesActionEnum(str, Enum):
     DESCRIBE_SERVICE_ACCESS_POLICIES = "DescribeServiceAccessPolicies"
@@ -10,8 +14,8 @@ class PostDescribeServiceAccessPoliciesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeServiceAccessPoliciesQueryParams:
-    action: PostDescribeServiceAccessPoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeServiceAccessPoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeServiceAccessPoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeServiceAccessPoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeServiceAccessPoliciesHeaders:
 
 @dataclass
 class PostDescribeServiceAccessPoliciesRequest:
-    query_params: PostDescribeServiceAccessPoliciesQueryParams = field(default=None)
-    headers: PostDescribeServiceAccessPoliciesHeaders = field(default=None)
+    headers: PostDescribeServiceAccessPoliciesHeaders = field()
+    query_params: PostDescribeServiceAccessPoliciesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeServiceAccessPoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

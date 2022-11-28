@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetDescribeFleetHistoryActionEnum(str, Enum):
     DESCRIBE_FLEET_HISTORY = "DescribeFleetHistory"
@@ -18,14 +19,14 @@ class GetDescribeFleetHistoryVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeFleetHistoryQueryParams:
-    action: GetDescribeFleetHistoryActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeFleetHistoryActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    fleet_id: str = field(metadata={'query_param': { 'field_name': 'FleetId', 'style': 'form', 'explode': True }})
+    start_time: datetime = field(metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
+    version: GetDescribeFleetHistoryVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     event_type: Optional[GetDescribeFleetHistoryEventTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'EventType', 'style': 'form', 'explode': True }})
-    fleet_id: str = field(default=None, metadata={'query_param': { 'field_name': 'FleetId', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    start_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
-    version: GetDescribeFleetHistoryVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -41,13 +42,13 @@ class GetDescribeFleetHistoryHeaders:
 
 @dataclass
 class GetDescribeFleetHistoryRequest:
-    query_params: GetDescribeFleetHistoryQueryParams = field(default=None)
-    headers: GetDescribeFleetHistoryHeaders = field(default=None)
+    headers: GetDescribeFleetHistoryHeaders = field()
+    query_params: GetDescribeFleetHistoryQueryParams = field()
     
 
 @dataclass
 class GetDescribeFleetHistoryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

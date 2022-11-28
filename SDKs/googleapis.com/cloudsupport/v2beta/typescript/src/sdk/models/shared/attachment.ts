@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Actor } from "./actor";
+import { ActorInput } from "./actor";
+
 
 
 // Attachment
@@ -7,21 +9,34 @@ import { Actor } from "./actor";
  * Represents a file attached to a support case.
 **/
 export class Attachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: Actor;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=sizeBytes" })
   sizeBytes?: string;
+}
+
+
+// AttachmentInput
+/** 
+ * Represents a file attached to a support case.
+**/
+export class AttachmentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=creator" })
+  creator?: ActorInput;
+
+  @SpeakeasyMetadata({ data: "json, name=filename" })
+  filename?: string;
 }

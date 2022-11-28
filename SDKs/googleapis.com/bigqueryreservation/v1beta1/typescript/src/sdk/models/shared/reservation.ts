@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Reservation
@@ -6,24 +7,46 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reservation is a mechanism used to guarantee slots to users.
 **/
 export class Reservation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=concurrency" })
+  @SpeakeasyMetadata({ data: "json, name=concurrency" })
   concurrency?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=ignoreIdleSlots" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreIdleSlots" })
   ignoreIdleSlots?: boolean;
 
-  @Metadata({ data: "json, name=multiRegionAuxiliary" })
+  @SpeakeasyMetadata({ data: "json, name=multiRegionAuxiliary" })
   multiRegionAuxiliary?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=slotCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=slotCapacity" })
   slotCapacity?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ReservationInput
+/** 
+ * A reservation is a mechanism used to guarantee slots to users.
+**/
+export class ReservationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=concurrency" })
+  concurrency?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ignoreIdleSlots" })
+  ignoreIdleSlots?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=multiRegionAuxiliary" })
+  multiRegionAuxiliary?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=slotCapacity" })
+  slotCapacity?: string;
 }

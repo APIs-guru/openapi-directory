@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventFilter } from "./eventfilter";
 // EventIntegration
 /**
@@ -34,27 +34,27 @@ var EventIntegration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], EventIntegration.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventBridgeBus" }),
+        SpeakeasyMetadata({ data: "json, name=EventBridgeBus" }),
         __metadata("design:type", String)
     ], EventIntegration.prototype, "eventBridgeBus", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventFilter" }),
+        SpeakeasyMetadata({ data: "json, name=EventFilter" }),
         __metadata("design:type", EventFilter)
     ], EventIntegration.prototype, "eventFilter", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventIntegrationArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventIntegrationArn" }),
         __metadata("design:type", String)
     ], EventIntegration.prototype, "eventIntegrationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], EventIntegration.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], EventIntegration.prototype, "tags", void 0);
     return EventIntegration;

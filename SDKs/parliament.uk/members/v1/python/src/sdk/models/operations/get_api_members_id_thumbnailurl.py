@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIMembersIDThumbnailURLPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAPIMembersIDThumbnailURLRequest:
-    path_params: GetAPIMembersIDThumbnailURLPathParams = field(default=None)
+    path_params: GetAPIMembersIDThumbnailURLPathParams = field()
     
 
 @dataclass
 class GetAPIMembersIDThumbnailURLResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     string_item: Optional[shared.StringItem] = field(default=None)
     

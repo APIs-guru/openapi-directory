@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetGetPathwayFormatEnum(str, Enum):
     JSON = "json"
@@ -12,18 +13,18 @@ class GetGetPathwayFormatEnum(str, Enum):
 
 @dataclass
 class GetGetPathwayQueryParams:
+    pw_id: str = field(metadata={'query_param': { 'field_name': 'pwId', 'style': 'form', 'explode': True }})
     format: Optional[GetGetPathwayFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    pw_id: str = field(default=None, metadata={'query_param': { 'field_name': 'pwId', 'style': 'form', 'explode': True }})
     revision: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'revision', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetGetPathwayRequest:
-    query_params: GetGetPathwayQueryParams = field(default=None)
+    query_params: GetGetPathwayQueryParams = field()
     
 
 @dataclass
 class GetGetPathwayResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

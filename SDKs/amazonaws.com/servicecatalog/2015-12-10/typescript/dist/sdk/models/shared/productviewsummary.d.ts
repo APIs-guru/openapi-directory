@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProductTypeEnum } from "./producttypeenum";
 /**
  * Summary information about a product view.

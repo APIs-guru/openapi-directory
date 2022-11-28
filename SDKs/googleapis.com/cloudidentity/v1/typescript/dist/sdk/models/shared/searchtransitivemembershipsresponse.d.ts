@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MemberRelation } from "./memberrelation";
 /**
  * The response message for MembershipsService.SearchTransitiveMemberships.

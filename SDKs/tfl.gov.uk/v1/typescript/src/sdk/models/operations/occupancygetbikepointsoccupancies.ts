@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OccupancyGetBikePointsOccupanciesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string[];
 }
 
 
 export class OccupancyGetBikePointsOccupanciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: OccupancyGetBikePointsOccupanciesPathParams;
 }
 
 
 export class OccupancyGetBikePointsOccupanciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesBikePointOccupancy })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesBikePointOccupancy })
   tflApiPresentationEntitiesBikePointOccupancies?: shared.TflApiPresentationEntitiesBikePointOccupancy[];
 }

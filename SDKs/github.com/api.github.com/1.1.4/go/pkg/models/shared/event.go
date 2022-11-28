@@ -26,6 +26,8 @@ type EventRepo struct {
 	URL  string `json:"url"`
 }
 
+// Event
+// Event
 type Event struct {
 	Actor     Actor        `json:"actor"`
 	CreatedAt time.Time    `json:"created_at"`

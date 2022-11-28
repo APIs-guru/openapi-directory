@@ -1,5 +1,7 @@
 package shared
 
+// Server
+// Represents a server.
 type Server struct {
 	ReplicationJobID         *string         `json:"replicationJobId,omitempty"`
 	ReplicationJobTerminated *bool           `json:"replicationJobTerminated,omitempty"`

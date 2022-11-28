@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigTableIoDetails } from "./bigtableiodetails";
 import { BigQueryIoDetails } from "./bigqueryiodetails";
 import { DatastoreIoDetails } from "./datastoreiodetails";
 import { FileIoDetails } from "./fileiodetails";
 import { PubSubIoDetails } from "./pubsubiodetails";
-import { SdkVersion } from "./sdkversion";
+import { SDKVersion } from "./sdkversion";
 import { SpannerIoDetails } from "./spanneriodetails";
+
 
 
 // JobMetadata
@@ -14,24 +14,24 @@ import { SpannerIoDetails } from "./spanneriodetails";
  * Metadata available primarily for filtering jobs. Will be included in the ListJob response and Job SUMMARY view.
 **/
 export class JobMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigTableDetails", elemType: shared.BigTableIoDetails })
+  @SpeakeasyMetadata({ data: "json, name=bigTableDetails", elemType: BigTableIoDetails })
   bigTableDetails?: BigTableIoDetails[];
 
-  @Metadata({ data: "json, name=bigqueryDetails", elemType: shared.BigQueryIoDetails })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryDetails", elemType: BigQueryIoDetails })
   bigqueryDetails?: BigQueryIoDetails[];
 
-  @Metadata({ data: "json, name=datastoreDetails", elemType: shared.DatastoreIoDetails })
+  @SpeakeasyMetadata({ data: "json, name=datastoreDetails", elemType: DatastoreIoDetails })
   datastoreDetails?: DatastoreIoDetails[];
 
-  @Metadata({ data: "json, name=fileDetails", elemType: shared.FileIoDetails })
+  @SpeakeasyMetadata({ data: "json, name=fileDetails", elemType: FileIoDetails })
   fileDetails?: FileIoDetails[];
 
-  @Metadata({ data: "json, name=pubsubDetails", elemType: shared.PubSubIoDetails })
+  @SpeakeasyMetadata({ data: "json, name=pubsubDetails", elemType: PubSubIoDetails })
   pubsubDetails?: PubSubIoDetails[];
 
-  @Metadata({ data: "json, name=sdkVersion" })
-  sdkVersion?: SdkVersion;
+  @SpeakeasyMetadata({ data: "json, name=sdkVersion" })
+  sdkVersion?: SDKVersion;
 
-  @Metadata({ data: "json, name=spannerDetails", elemType: shared.SpannerIoDetails })
+  @SpeakeasyMetadata({ data: "json, name=spannerDetails", elemType: SpannerIoDetails })
   spannerDetails?: SpannerIoDetails[];
 }

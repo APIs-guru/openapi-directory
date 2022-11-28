@@ -13,6 +13,8 @@ const (
 	AccountActiveAdSummaryActiveAdsLimitTierEnumActiveAdsTier1M   AccountActiveAdSummaryActiveAdsLimitTierEnum = "ACTIVE_ADS_TIER_1M"
 )
 
+// AccountActiveAdSummary
+// Gets a summary of active ads in an account.
 type AccountActiveAdSummary struct {
 	AccountID          *string                                       `json:"accountId,omitempty"`
 	ActiveAds          *string                                       `json:"activeAds,omitempty"`

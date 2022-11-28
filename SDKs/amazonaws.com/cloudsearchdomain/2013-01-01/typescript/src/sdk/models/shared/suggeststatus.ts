@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SuggestStatus
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
 **/
 export class SuggestStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rid" })
+  @SpeakeasyMetadata({ data: "json, name=rid" })
   rid?: string;
 
-  @Metadata({ data: "json, name=timems" })
+  @SpeakeasyMetadata({ data: "json, name=timems" })
   timems?: number;
 }

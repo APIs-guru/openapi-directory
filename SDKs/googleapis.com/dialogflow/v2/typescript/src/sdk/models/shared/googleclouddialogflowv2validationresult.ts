@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2ValidationError } from "./googleclouddialogflowv2validationerror";
+
 
 
 // GoogleCloudDialogflowV2ValidationResult
@@ -8,6 +8,6 @@ import { GoogleCloudDialogflowV2ValidationError } from "./googleclouddialogflowv
  * Represents the output of agent validation.
 **/
 export class GoogleCloudDialogflowV2ValidationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=validationErrors", elemType: shared.GoogleCloudDialogflowV2ValidationError })
+  @SpeakeasyMetadata({ data: "json, name=validationErrors", elemType: GoogleCloudDialogflowV2ValidationError })
   validationErrors?: GoogleCloudDialogflowV2ValidationError[];
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1betaService } from "./googlefirebaseappcheckv1betaservice";
+
 
 
 // GoogleFirebaseAppcheckV1betaBatchUpdateServicesResponse
@@ -8,6 +8,6 @@ import { GoogleFirebaseAppcheckV1betaService } from "./googlefirebaseappcheckv1b
  * Response message for the BatchUpdateServices method.
 **/
 export class GoogleFirebaseAppcheckV1betaBatchUpdateServicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=services", elemType: shared.GoogleFirebaseAppcheckV1betaService })
+  @SpeakeasyMetadata({ data: "json, name=services", elemType: GoogleFirebaseAppcheckV1betaService })
   services?: GoogleFirebaseAppcheckV1betaService[];
 }

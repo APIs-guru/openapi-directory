@@ -8,6 +8,14 @@ const (
 	MobileAppPlatformEnumAndroid             MobileAppPlatformEnum = "ANDROID"
 )
 
+// MobileAppInput
+// A mobile app promoted by a mobile app install line item.
+type MobileAppInput struct {
+	AppID *string `json:"appId,omitempty"`
+}
+
+// MobileApp
+// A mobile app promoted by a mobile app install line item.
 type MobileApp struct {
 	AppID       *string                `json:"appId,omitempty"`
 	DisplayName *string                `json:"displayName,omitempty"`

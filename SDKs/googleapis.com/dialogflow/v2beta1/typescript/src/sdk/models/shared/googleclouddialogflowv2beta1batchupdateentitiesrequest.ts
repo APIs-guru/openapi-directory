@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1EntityTypeEntity } from "./googleclouddialogflowv2beta1entitytypeentity";
+
 
 
 // GoogleCloudDialogflowV2beta1BatchUpdateEntitiesRequest
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowV2beta1EntityTypeEntity } from "./googleclouddialo
  * The request message for EntityTypes.BatchUpdateEntities.
 **/
 export class GoogleCloudDialogflowV2beta1BatchUpdateEntitiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entities", elemType: shared.GoogleCloudDialogflowV2beta1EntityTypeEntity })
+  @SpeakeasyMetadata({ data: "json, name=entities", elemType: GoogleCloudDialogflowV2beta1EntityTypeEntity })
   entities?: GoogleCloudDialogflowV2beta1EntityTypeEntity[];
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

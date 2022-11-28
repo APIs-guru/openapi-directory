@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://covid19-api.com",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetDailyReportAllCountries - getDailyReportAllCountries
+// Get daily report for all countries. Date is mandatory parametar. Date format is by ISO 8601 standard, but you can provide different format with date-format parameter.
 func (s *SDK) GetDailyReportAllCountries(ctx context.Context, request operations.GetDailyReportAllCountriesRequest) (*operations.GetDailyReportAllCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/country/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -62,7 +85,7 @@ func (s *SDK) GetDailyReportAllCountries(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -99,8 +122,10 @@ func (s *SDK) GetDailyReportAllCountries(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDailyReportByCountryCode - getDailyReportByCountryCode
+// Get daily report for specific country. Country code and date are mandatory in parametars. Country code is in ISO 3166-1 standard. It can be 2 chars (Alpha-2) or 3 chars (Alpha-3) type. Date format is by ISO 8601 standard, but you can provide different format with date-format parameter
 func (s *SDK) GetDailyReportByCountryCode(ctx context.Context, request operations.GetDailyReportByCountryCodeRequest) (*operations.GetDailyReportByCountryCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/country/code"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -110,7 +135,7 @@ func (s *SDK) GetDailyReportByCountryCode(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -147,8 +172,10 @@ func (s *SDK) GetDailyReportByCountryCode(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetDailyReportByCountryName - getDailyReportByCountryName
+// Get daily report for specific country. Country name and date are mandatory in parametars. Date format is by ISO 8601 standard, but you can provide different format with date-format parameter
 func (s *SDK) GetDailyReportByCountryName(ctx context.Context, request operations.GetDailyReportByCountryNameRequest) (*operations.GetDailyReportByCountryNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/country/name"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -158,7 +185,7 @@ func (s *SDK) GetDailyReportByCountryName(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -195,8 +222,10 @@ func (s *SDK) GetDailyReportByCountryName(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetDailyReportTotals - getDailyReportTotals
+// Get daily report data for whole world.
 func (s *SDK) GetDailyReportTotals(ctx context.Context, request operations.GetDailyReportTotalsRequest) (*operations.GetDailyReportTotalsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/totals"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -206,7 +235,7 @@ func (s *SDK) GetDailyReportTotals(ctx context.Context, request operations.GetDa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -243,8 +272,10 @@ func (s *SDK) GetDailyReportTotals(ctx context.Context, request operations.GetDa
 	return res, nil
 }
 
+// GetLatestAllCountries - getLatestAllCountries
+// Get latest data from all countries.
 func (s *SDK) GetLatestAllCountries(ctx context.Context, request operations.GetLatestAllCountriesRequest) (*operations.GetLatestAllCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/country/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -254,7 +285,7 @@ func (s *SDK) GetLatestAllCountries(ctx context.Context, request operations.GetL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -291,8 +322,10 @@ func (s *SDK) GetLatestAllCountries(ctx context.Context, request operations.GetL
 	return res, nil
 }
 
+// GetLatestCountryDataByCode - getLatestCountryDataByCode
+// Get latest data for specific country. Country code and format are in parametars. Country code is in ISO 3166-1 standard. It can be 2 chars (Alpha-2) or 3 chars (Alpha-3) type.
 func (s *SDK) GetLatestCountryDataByCode(ctx context.Context, request operations.GetLatestCountryDataByCodeRequest) (*operations.GetLatestCountryDataByCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/country/code"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -302,7 +335,7 @@ func (s *SDK) GetLatestCountryDataByCode(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -339,8 +372,10 @@ func (s *SDK) GetLatestCountryDataByCode(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetLatestCountryDataByName - getLatestCountryDataByName
+// Get latest data for specific country. Country name and format are in parametars.
 func (s *SDK) GetLatestCountryDataByName(ctx context.Context, request operations.GetLatestCountryDataByNameRequest) (*operations.GetLatestCountryDataByNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/country"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -350,7 +385,7 @@ func (s *SDK) GetLatestCountryDataByName(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -387,8 +422,10 @@ func (s *SDK) GetLatestCountryDataByName(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetLatestTotals - getLatestTotals
+// Get latest data for whole world.
 func (s *SDK) GetLatestTotals(ctx context.Context, request operations.GetLatestTotalsRequest) (*operations.GetLatestTotalsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/totals"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -398,7 +435,7 @@ func (s *SDK) GetLatestTotals(ctx context.Context, request operations.GetLatestT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -435,8 +472,10 @@ func (s *SDK) GetLatestTotals(ctx context.Context, request operations.GetLatestT
 	return res, nil
 }
 
+// GetListOfCountries - getListOfCountries
+// Get name name, alpha-2, alpha-3 code, latitude and longitude for every country.
 func (s *SDK) GetListOfCountries(ctx context.Context, request operations.GetListOfCountriesRequest) (*operations.GetListOfCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/help/countries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -446,7 +485,7 @@ func (s *SDK) GetListOfCountries(ctx context.Context, request operations.GetList
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

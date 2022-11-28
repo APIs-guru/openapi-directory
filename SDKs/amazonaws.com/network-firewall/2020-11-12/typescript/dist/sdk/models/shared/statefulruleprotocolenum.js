@@ -1,0 +1,22 @@
+export var StatefulRuleProtocolEnum;
+(function (StatefulRuleProtocolEnum) {
+    StatefulRuleProtocolEnum["Ip"] = "IP";
+    StatefulRuleProtocolEnum["Tcp"] = "TCP";
+    StatefulRuleProtocolEnum["Udp"] = "UDP";
+    StatefulRuleProtocolEnum["Icmp"] = "ICMP";
+    StatefulRuleProtocolEnum["Http"] = "HTTP";
+    StatefulRuleProtocolEnum["Ftp"] = "FTP";
+    StatefulRuleProtocolEnum["Tls"] = "TLS";
+    StatefulRuleProtocolEnum["Smb"] = "SMB";
+    StatefulRuleProtocolEnum["Dns"] = "DNS";
+    StatefulRuleProtocolEnum["Dcerpc"] = "DCERPC";
+    StatefulRuleProtocolEnum["Ssh"] = "SSH";
+    StatefulRuleProtocolEnum["Smtp"] = "SMTP";
+    StatefulRuleProtocolEnum["Imap"] = "IMAP";
+    StatefulRuleProtocolEnum["Msn"] = "MSN";
+    StatefulRuleProtocolEnum["Krb5"] = "KRB5";
+    StatefulRuleProtocolEnum["Ikev2"] = "IKEV2";
+    StatefulRuleProtocolEnum["Tftp"] = "TFTP";
+    StatefulRuleProtocolEnum["Ntp"] = "NTP";
+    StatefulRuleProtocolEnum["Dhcp"] = "DHCP";
+})(StatefulRuleProtocolEnum || (StatefulRuleProtocolEnum = {}));

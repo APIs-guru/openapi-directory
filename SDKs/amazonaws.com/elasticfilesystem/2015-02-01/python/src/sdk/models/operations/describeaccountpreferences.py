@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,20 @@ class DescribeAccountPreferencesHeaders:
 @dataclass_json
 @dataclass
 class DescribeAccountPreferencesRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class DescribeAccountPreferencesRequest:
-    headers: DescribeAccountPreferencesHeaders = field(default=None)
-    request: DescribeAccountPreferencesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeAccountPreferencesHeaders = field()
+    request: DescribeAccountPreferencesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeAccountPreferencesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_account_preferences_response: Optional[shared.DescribeAccountPreferencesResponse] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ProductionVariantInstanceTypeEnum(str, Enum):
     ML_T2_MEDIUM = "ml.t2.medium"

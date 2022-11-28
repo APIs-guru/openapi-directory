@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatasetEntry
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The reference to a dataset entry.
 **/
 export class DatasetEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataURI" })
+  @SpeakeasyMetadata({ data: "json, name=dataURI" })
   dataUri?: string;
 
-  @Metadata({ data: "json, name=entryName" })
+  @SpeakeasyMetadata({ data: "json, name=entryName" })
   entryName?: string;
 }

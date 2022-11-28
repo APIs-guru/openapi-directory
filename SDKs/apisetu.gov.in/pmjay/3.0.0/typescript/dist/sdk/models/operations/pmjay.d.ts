@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PmjayRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class PmjayRequestBody extends SpeakeasyBase {
 export declare class PmjaySecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PmjayRequest extends SpeakeasyBase {
-    request?: PmjayRequestBody;
-    security: PmjaySecurity;
 }
 export declare enum Pmjay400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Pmjay504ApplicationJsonErrorDescriptionEnum {
 export declare class Pmjay504ApplicationJson extends SpeakeasyBase {
     error?: Pmjay504ApplicationJsonErrorEnum;
     errorDescription?: Pmjay504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PmjayRequest extends SpeakeasyBase {
+    request?: PmjayRequestBody;
+    security: PmjaySecurity;
 }
 export declare class PmjayResponse extends SpeakeasyBase {
     contentType: string;

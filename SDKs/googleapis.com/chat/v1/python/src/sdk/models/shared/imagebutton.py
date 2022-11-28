@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import onclick
+from sdk import utils
+from . import *
 
 class ImageButtonIconEnum(str, Enum):
     ICON_UNSPECIFIED = "ICON_UNSPECIFIED"
@@ -40,8 +42,12 @@ class ImageButtonIconEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ImageButton:
-    icon: Optional[ImageButtonIconEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icon' }})
-    icon_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iconUrl' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    on_click: Optional[onclick.OnClick] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onClick' }})
+    r"""ImageButton
+    An image button with an onclick action.
+    """
+    
+    icon: Optional[ImageButtonIconEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('icon') }})
+    icon_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iconUrl') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    on_click: Optional[OnClick] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onClick') }})
     

@@ -209,6 +209,8 @@ const (
 	AppPermissionsWorkflowsEnumWrite AppPermissionsWorkflowsEnum = "write"
 )
 
+// AppPermissions
+// The permissions granted to the user-to-server access token.
 type AppPermissions struct {
 	Actions                       *AppPermissionsActionsEnum                       `json:"actions,omitempty"`
 	Administration                *AppPermissionsAdministrationEnum                `json:"administration,omitempty"`

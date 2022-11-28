@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttestationAuthority } from "./attestationauthority";
 import { Basis } from "./basis";
 import { BuildType } from "./buildtype";
@@ -16,22 +15,23 @@ import { RelationshipNote } from "./relationshipnote";
 import { UpgradeNote } from "./upgradenote";
 import { VulnerabilityType } from "./vulnerabilitytype";
 
+
 export enum NoteKindEnum {
-    KindUnspecified = "KIND_UNSPECIFIED"
-,    PackageVulnerability = "PACKAGE_VULNERABILITY"
-,    BuildDetails = "BUILD_DETAILS"
-,    ImageBasis = "IMAGE_BASIS"
-,    PackageManager = "PACKAGE_MANAGER"
-,    Deployable = "DEPLOYABLE"
-,    Discovery = "DISCOVERY"
-,    AttestationAuthority = "ATTESTATION_AUTHORITY"
-,    Upgrade = "UPGRADE"
-,    Compliance = "COMPLIANCE"
-,    Sbom = "SBOM"
-,    SpdxPackage = "SPDX_PACKAGE"
-,    SpdxFile = "SPDX_FILE"
-,    SpdxRelationship = "SPDX_RELATIONSHIP"
-,    DsseAttestation = "DSSE_ATTESTATION"
+    KindUnspecified = "KIND_UNSPECIFIED",
+    PackageVulnerability = "PACKAGE_VULNERABILITY",
+    BuildDetails = "BUILD_DETAILS",
+    ImageBasis = "IMAGE_BASIS",
+    PackageManager = "PACKAGE_MANAGER",
+    Deployable = "DEPLOYABLE",
+    Discovery = "DISCOVERY",
+    AttestationAuthority = "ATTESTATION_AUTHORITY",
+    Upgrade = "UPGRADE",
+    Compliance = "COMPLIANCE",
+    Sbom = "SBOM",
+    SpdxPackage = "SPDX_PACKAGE",
+    SpdxFile = "SPDX_FILE",
+    SpdxRelationship = "SPDX_RELATIONSHIP",
+    DsseAttestation = "DSSE_ATTESTATION"
 }
 
 
@@ -40,69 +40,69 @@ export enum NoteKindEnum {
  * Provides a detailed description of a `Note`.
 **/
 export class Note extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestationAuthority" })
+  @SpeakeasyMetadata({ data: "json, name=attestationAuthority" })
   attestationAuthority?: AttestationAuthority;
 
-  @Metadata({ data: "json, name=baseImage" })
+  @SpeakeasyMetadata({ data: "json, name=baseImage" })
   baseImage?: Basis;
 
-  @Metadata({ data: "json, name=buildType" })
+  @SpeakeasyMetadata({ data: "json, name=buildType" })
   buildType?: BuildType;
 
-  @Metadata({ data: "json, name=compliance" })
+  @SpeakeasyMetadata({ data: "json, name=compliance" })
   compliance?: ComplianceNote;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deployable" })
+  @SpeakeasyMetadata({ data: "json, name=deployable" })
   deployable?: Deployable;
 
-  @Metadata({ data: "json, name=discovery" })
+  @SpeakeasyMetadata({ data: "json, name=discovery" })
   discovery?: Discovery;
 
-  @Metadata({ data: "json, name=dsseAttestation" })
+  @SpeakeasyMetadata({ data: "json, name=dsseAttestation" })
   dsseAttestation?: DsseAttestationNote;
 
-  @Metadata({ data: "json, name=expirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
   expirationTime?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: NoteKindEnum;
 
-  @Metadata({ data: "json, name=longDescription" })
+  @SpeakeasyMetadata({ data: "json, name=longDescription" })
   longDescription?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=package" })
+  @SpeakeasyMetadata({ data: "json, name=package" })
   package?: Package;
 
-  @Metadata({ data: "json, name=relatedUrl", elemType: shared.RelatedUrl })
+  @SpeakeasyMetadata({ data: "json, name=relatedUrl", elemType: RelatedUrl })
   relatedUrl?: RelatedUrl[];
 
-  @Metadata({ data: "json, name=sbom" })
+  @SpeakeasyMetadata({ data: "json, name=sbom" })
   sbom?: DocumentNote;
 
-  @Metadata({ data: "json, name=shortDescription" })
+  @SpeakeasyMetadata({ data: "json, name=shortDescription" })
   shortDescription?: string;
 
-  @Metadata({ data: "json, name=spdxFile" })
+  @SpeakeasyMetadata({ data: "json, name=spdxFile" })
   spdxFile?: FileNote;
 
-  @Metadata({ data: "json, name=spdxPackage" })
+  @SpeakeasyMetadata({ data: "json, name=spdxPackage" })
   spdxPackage?: PackageInfoNote;
 
-  @Metadata({ data: "json, name=spdxRelationship" })
+  @SpeakeasyMetadata({ data: "json, name=spdxRelationship" })
   spdxRelationship?: RelationshipNote;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=upgrade" })
+  @SpeakeasyMetadata({ data: "json, name=upgrade" })
   upgrade?: UpgradeNote;
 
-  @Metadata({ data: "json, name=vulnerabilityType" })
+  @SpeakeasyMetadata({ data: "json, name=vulnerabilityType" })
   vulnerabilityType?: VulnerabilityType;
 }

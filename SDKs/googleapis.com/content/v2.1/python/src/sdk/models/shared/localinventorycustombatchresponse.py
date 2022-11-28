@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import localinventorycustombatchresponseentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LocalinventoryCustomBatchResponse:
-    entries: Optional[List[localinventorycustombatchresponseentry.LocalinventoryCustomBatchResponseEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entries' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    entries: Optional[List[LocalinventoryCustomBatchResponseEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entries') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

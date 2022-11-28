@@ -10,6 +10,8 @@ const (
 	ManagedIssueEntityTypeEnumTicket ManagedIssueEntityTypeEnum = "ticket"
 )
 
+// ManagedIssueEntity
+// The ticket this Managed Issue opened.
 type ManagedIssueEntity struct {
 	ID    *int64                      `json:"id,omitempty"`
 	Label *string                     `json:"label,omitempty"`
@@ -17,6 +19,8 @@ type ManagedIssueEntity struct {
 	URL   *string                     `json:"url,omitempty"`
 }
 
+// ManagedIssue
+// An Issue that was detected with a service Linode is managing.
 type ManagedIssue struct {
 	Created  *time.Time          `json:"created,omitempty"`
 	Entity   *ManagedIssueEntity `json:"entity,omitempty"`

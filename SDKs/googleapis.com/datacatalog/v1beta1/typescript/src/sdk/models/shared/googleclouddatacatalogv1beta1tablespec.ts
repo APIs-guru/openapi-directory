@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1beta1TableSpec
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Normal BigQuery table spec.
 **/
 export class GoogleCloudDatacatalogV1beta1TableSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupedEntry" })
+  @SpeakeasyMetadata({ data: "json, name=groupedEntry" })
   groupedEntry?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DispatchLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=energy" })
+  @SpeakeasyMetadata({ data: "json, name=energy" })
   energy?: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Map<string, any>;
 }

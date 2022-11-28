@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PeeredDnsDomain } from "./peereddnsdomain";
+
 
 
 // ListPeeredDnsDomainsResponse
@@ -8,6 +8,6 @@ import { PeeredDnsDomain } from "./peereddnsdomain";
  * Response to list peered DNS domains for a given connection.
 **/
 export class ListPeeredDnsDomainsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=peeredDnsDomains", elemType: shared.PeeredDnsDomain })
+  @SpeakeasyMetadata({ data: "json, name=peeredDnsDomains", elemType: PeeredDnsDomain })
   peeredDnsDomains?: PeeredDnsDomain[];
 }

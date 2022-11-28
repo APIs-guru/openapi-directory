@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImportExportAdmins
+// Administrator using FIDO U2F device to access Otoroshi
 type ImportExportAdmins struct {
 	CreatedAt    int64             `json:"createdAt"`
 	Label        string            `json:"label"`
@@ -12,6 +14,8 @@ type ImportExportAdmins struct {
 	Username     string            `json:"username"`
 }
 
+// ImportExportAPIKeys
+// An Otoroshi Api Key. An Api Key is defined for a group of services to allow usage of the same Api Key for multiple services.
 type ImportExportAPIKeys struct {
 	AuthorizedEntities []string          `json:"authorizedEntities"`
 	ClientID           string            `json:"clientId"`
@@ -24,6 +28,8 @@ type ImportExportAPIKeys struct {
 	ThrottlingQuota    *int64            `json:"throttlingQuota,omitempty"`
 }
 
+// ImportExportErrorTemplates
+// Error templates for a service descriptor
 type ImportExportErrorTemplates struct {
 	Messages            map[string]string `json:"messages"`
 	ServiceID           string            `json:"serviceId"`
@@ -33,6 +39,8 @@ type ImportExportErrorTemplates struct {
 	TemplateMaintenance string            `json:"templateMaintenance"`
 }
 
+// ImportExportServiceDescriptors
+// An otoroshi service descriptor. Represent a forward HTTP call on a domain to another location with some optional api management mecanism
 type ImportExportServiceDescriptors struct {
 	Canary                     *Canary              `json:"Canary,omitempty"`
 	AdditionalHeaders          map[string]string    `json:"additionalHeaders,omitempty"`
@@ -80,12 +88,16 @@ type ImportExportServiceDescriptors struct {
 	XForwardedHeaders          *bool                `json:"xForwardedHeaders,omitempty"`
 }
 
+// ImportExportServiceGroups
+// An Otoroshi service group is just a group of service descriptor. It is useful to be able to define Api Keys for the whole group
 type ImportExportServiceGroups struct {
 	Description *string `json:"description,omitempty"`
 	ID          string  `json:"id"`
 	Name        string  `json:"name"`
 }
 
+// ImportExportSimpleAdmins
+// Administrator using just login/password tuple to access Otoroshi
 type ImportExportSimpleAdmins struct {
 	CreatedAt int64  `json:"createdAt"`
 	Label     string `json:"label"`
@@ -93,6 +105,8 @@ type ImportExportSimpleAdmins struct {
 	Username  string `json:"username"`
 }
 
+// ImportExport
+// The structure that can be imported to or exported from Otoroshi. It represent the memory state of Otoroshi
 type ImportExport struct {
 	Admins             []ImportExportAdmins             `json:"admins"`
 	APIKeys            []ImportExportAPIKeys            `json:"apiKeys"`

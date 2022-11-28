@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import screenshotcluster
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListScreenshotClustersResponse:
-    clusters: Optional[List[screenshotcluster.ScreenshotCluster]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusters' }})
+    clusters: Optional[List[ScreenshotCluster]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusters') }})
     

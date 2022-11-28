@@ -18,10 +18,6 @@ type PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierRequestBody struct 
 	Portfolios             *int64                                                                          `json:"portfolios,omitempty"`
 }
 
-type PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierRequest struct {
-	Request PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontier200ApplicationJSONPortfolios struct {
 	AssetsWeights       []float64 `json:"assetsWeights"`
 	PortfolioReturn     float64   `json:"portfolioReturn"`
@@ -30,6 +26,10 @@ type PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontier200ApplicationJSONP
 
 type PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontier200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontier200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierRequest struct {
+	Request PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierResponse struct {

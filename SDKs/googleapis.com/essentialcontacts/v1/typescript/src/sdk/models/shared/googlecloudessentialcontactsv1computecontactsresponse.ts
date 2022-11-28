@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudEssentialcontactsV1Contact } from "./googlecloudessentialcontactsv1contact";
+
 
 
 // GoogleCloudEssentialcontactsV1ComputeContactsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudEssentialcontactsV1Contact } from "./googlecloudessentialcon
  * Response message for the ComputeContacts method.
 **/
 export class GoogleCloudEssentialcontactsV1ComputeContactsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contacts", elemType: shared.GoogleCloudEssentialcontactsV1Contact })
+  @SpeakeasyMetadata({ data: "json, name=contacts", elemType: GoogleCloudEssentialcontactsV1Contact })
   contacts?: GoogleCloudEssentialcontactsV1Contact[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

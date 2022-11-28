@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchDocumentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class PatchDocumentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchDocumentPathParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.PatchesSchema })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.PatchesSchema })
   request: shared.PatchesSchema[];
 }
 
 
 export class PatchDocumentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundred?: shared.FourHundred;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndFour?: shared.FourHundredAndFour;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyInstance } from "./anomalyinstance";
 import { Metric } from "./metric";
+
 
 
 // Anomaly
@@ -9,12 +9,12 @@ import { Metric } from "./metric";
  *  Details about an anomaly in a specific metric of application profile. The anomaly is detected using analysis of the metric data over a period of time. 
 **/
 export class Anomaly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instances", elemType: shared.AnomalyInstance })
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: AnomalyInstance })
   instances: AnomalyInstance[];
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric: Metric;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string;
 }

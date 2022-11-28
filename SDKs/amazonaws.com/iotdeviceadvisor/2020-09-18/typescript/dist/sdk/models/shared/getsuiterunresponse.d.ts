@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SuiteRunStatusEnum } from "./suiterunstatusenum";
 import { SuiteRunConfiguration } from "./suiterunconfiguration";
 import { TestResult } from "./testresult";

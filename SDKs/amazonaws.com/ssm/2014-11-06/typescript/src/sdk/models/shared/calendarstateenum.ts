@@ -1,6 +1,7 @@
 
 
+
 export enum CalendarStateEnum {
-    Open = "OPEN"
-,    Closed = "CLOSED"
+    Open = "OPEN",
+    Closed = "CLOSED"
 }

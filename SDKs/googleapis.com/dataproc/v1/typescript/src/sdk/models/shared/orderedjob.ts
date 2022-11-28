@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HadoopJob } from "./hadoopjob";
 import { HiveJob } from "./hivejob";
 import { PigJob } from "./pigjob";
@@ -11,47 +11,48 @@ import { SparkSqlJob } from "./sparksqljob";
 import { TrinoJob } from "./trinojob";
 
 
+
 // OrderedJob
 /** 
  * A job executed by the workflow.
 **/
 export class OrderedJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hadoopJob" })
+  @SpeakeasyMetadata({ data: "json, name=hadoopJob" })
   hadoopJob?: HadoopJob;
 
-  @Metadata({ data: "json, name=hiveJob" })
+  @SpeakeasyMetadata({ data: "json, name=hiveJob" })
   hiveJob?: HiveJob;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=pigJob" })
+  @SpeakeasyMetadata({ data: "json, name=pigJob" })
   pigJob?: PigJob;
 
-  @Metadata({ data: "json, name=prerequisiteStepIds" })
+  @SpeakeasyMetadata({ data: "json, name=prerequisiteStepIds" })
   prerequisiteStepIds?: string[];
 
-  @Metadata({ data: "json, name=prestoJob" })
+  @SpeakeasyMetadata({ data: "json, name=prestoJob" })
   prestoJob?: PrestoJob;
 
-  @Metadata({ data: "json, name=pysparkJob" })
+  @SpeakeasyMetadata({ data: "json, name=pysparkJob" })
   pysparkJob?: PySparkJob;
 
-  @Metadata({ data: "json, name=scheduling" })
+  @SpeakeasyMetadata({ data: "json, name=scheduling" })
   scheduling?: JobScheduling;
 
-  @Metadata({ data: "json, name=sparkJob" })
+  @SpeakeasyMetadata({ data: "json, name=sparkJob" })
   sparkJob?: SparkJob;
 
-  @Metadata({ data: "json, name=sparkRJob" })
+  @SpeakeasyMetadata({ data: "json, name=sparkRJob" })
   sparkRJob?: SparkRJob;
 
-  @Metadata({ data: "json, name=sparkSqlJob" })
+  @SpeakeasyMetadata({ data: "json, name=sparkSqlJob" })
   sparkSqlJob?: SparkSqlJob;
 
-  @Metadata({ data: "json, name=stepId" })
+  @SpeakeasyMetadata({ data: "json, name=stepId" })
   stepId?: string;
 
-  @Metadata({ data: "json, name=trinoJob" })
+  @SpeakeasyMetadata({ data: "json, name=trinoJob" })
   trinoJob?: TrinoJob;
 }

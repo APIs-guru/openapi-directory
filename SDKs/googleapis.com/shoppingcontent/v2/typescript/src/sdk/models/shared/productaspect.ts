@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductAspect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspectName" })
+  @SpeakeasyMetadata({ data: "json, name=aspectName" })
   aspectName?: string;
 
-  @Metadata({ data: "json, name=destinationName" })
+  @SpeakeasyMetadata({ data: "json, name=destinationName" })
   destinationName?: string;
 
-  @Metadata({ data: "json, name=intention" })
+  @SpeakeasyMetadata({ data: "json, name=intention" })
   intention?: string;
 }

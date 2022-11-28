@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddRegionAction
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines the Region and KMS key to add to the replication set. 
 **/
 export class AddRegionAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regionName" })
+  @SpeakeasyMetadata({ data: "json, name=regionName" })
   regionName: string;
 
-  @Metadata({ data: "json, name=sseKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=sseKmsKeyId" })
   sseKmsKeyId?: string;
 }

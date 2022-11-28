@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogLevelEnum } from "./loglevelenum";
+
 
 
 // EnableIoTLoggingParams
@@ -7,9 +8,9 @@ import { LogLevelEnum } from "./loglevelenum";
  * Parameters used when defining a mitigation action that enable Amazon Web Services IoT Core logging.
 **/
 export class EnableIoTLoggingParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logLevel" })
+  @SpeakeasyMetadata({ data: "json, name=logLevel" })
   logLevel: LogLevelEnum;
 
-  @Metadata({ data: "json, name=roleArnForLogging" })
+  @SpeakeasyMetadata({ data: "json, name=roleArnForLogging" })
   roleArnForLogging: string;
 }

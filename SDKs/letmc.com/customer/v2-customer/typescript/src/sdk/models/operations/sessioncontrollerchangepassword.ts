@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SessionControllerChangePasswordPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class SessionControllerChangePasswordQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newPassword" })
   newPassword: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oldPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oldPassword" })
   oldPassword: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class SessionControllerChangePasswordRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SessionControllerChangePasswordPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SessionControllerChangePasswordQueryParams;
 }
 
 
 export class SessionControllerChangePasswordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

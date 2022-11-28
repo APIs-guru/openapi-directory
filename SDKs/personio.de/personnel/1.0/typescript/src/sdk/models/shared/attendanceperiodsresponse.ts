@@ -1,56 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AttendancePeriodsResponseDataAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=break" })
+  @SpeakeasyMetadata({ data: "json, name=break" })
   break: number;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date: Date;
 
-  @Metadata({ data: "json, name=employee" })
+  @SpeakeasyMetadata({ data: "json, name=employee" })
   employee: number;
 
-  @Metadata({ data: "json, name=end_time" })
+  @SpeakeasyMetadata({ data: "json, name=end_time" })
   endTime: string;
 
-  @Metadata({ data: "json, name=is_holiday" })
+  @SpeakeasyMetadata({ data: "json, name=is_holiday" })
   isHoliday: boolean;
 
-  @Metadata({ data: "json, name=is_on_time_off" })
+  @SpeakeasyMetadata({ data: "json, name=is_on_time_off" })
   isOnTimeOff: boolean;
 
-  @Metadata({ data: "json, name=start_time" })
+  @SpeakeasyMetadata({ data: "json, name=start_time" })
   startTime: string;
 }
 
 
 export class AttendancePeriodsResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.AttendancePeriodsResponseDataAttributes })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: AttendancePeriodsResponseDataAttributes })
   attributes: AttendancePeriodsResponseDataAttributes[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class AttendancePeriodsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.AttendancePeriodsResponseData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: AttendancePeriodsResponseData })
   data: AttendancePeriodsResponseData[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success: boolean;
 }

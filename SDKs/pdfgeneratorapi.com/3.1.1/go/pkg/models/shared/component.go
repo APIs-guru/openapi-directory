@@ -22,6 +22,8 @@ const (
 	ComponentClsEnumRadioComponent     ComponentClsEnum = "radioComponent"
 )
 
+// Component
+// Template component definition
 type Component struct {
 	Cls       *ComponentClsEnum `json:"cls,omitempty"`
 	DataIndex *string           `json:"dataIndex,omitempty"`

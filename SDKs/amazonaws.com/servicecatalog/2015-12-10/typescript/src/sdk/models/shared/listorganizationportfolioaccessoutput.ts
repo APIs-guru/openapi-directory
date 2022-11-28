@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationNode } from "./organizationnode";
 
 
+
 export class ListOrganizationPortfolioAccessOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=OrganizationNodes", elemType: shared.OrganizationNode })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationNodes", elemType: OrganizationNode })
   organizationNodes?: OrganizationNode[];
 }

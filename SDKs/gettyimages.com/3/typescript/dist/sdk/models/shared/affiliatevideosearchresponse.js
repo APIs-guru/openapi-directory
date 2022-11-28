@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoCorrections } from "./autocorrections";
+import { AffiliateVideo } from "./affiliatevideo";
 var AffiliateVideoSearchResponse = /** @class */ (function (_super) {
     __extends(AffiliateVideoSearchResponse, _super);
     function AffiliateVideoSearchResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=auto_corrections" }),
+        SpeakeasyMetadata({ data: "json, name=auto_corrections" }),
         __metadata("design:type", AutoCorrections)
     ], AffiliateVideoSearchResponse.prototype, "autoCorrections", void 0);
     __decorate([
-        Metadata({ data: "json, name=videos", elemType: shared.AffiliateVideo }),
+        SpeakeasyMetadata({ data: "json, name=videos", elemType: AffiliateVideo }),
         __metadata("design:type", Array)
     ], AffiliateVideoSearchResponse.prototype, "videos", void 0);
     return AffiliateVideoSearchResponse;

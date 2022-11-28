@@ -41,6 +41,8 @@ const (
 	BasicChartSpecStackedTypeEnumPercentStacked                   BasicChartSpecStackedTypeEnum = "PERCENT_STACKED"
 )
 
+// BasicChartSpec
+// The specification for a basic chart. See BasicChartType for the list of charts this supports.
 type BasicChartSpec struct {
 	Axis             []BasicChartAxis                  `json:"axis,omitempty"`
 	ChartType        *BasicChartSpecChartTypeEnum      `json:"chartType,omitempty"`

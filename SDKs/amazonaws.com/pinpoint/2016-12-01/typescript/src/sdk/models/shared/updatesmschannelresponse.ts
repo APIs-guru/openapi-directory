@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SmsChannelResponse } from "./smschannelresponse";
 
 
+
 export class UpdateSmsChannelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SMSChannelResponse" })
+  @SpeakeasyMetadata({ data: "json, name=SMSChannelResponse" })
   smsChannelResponse: SmsChannelResponse;
 }

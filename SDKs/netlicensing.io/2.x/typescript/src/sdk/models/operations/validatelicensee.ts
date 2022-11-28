@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ValidateLicenseePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" })
   licenseeNumber: string;
 }
 
 export enum ValidateLicenseeRequestBodyActionEnum {
-    CheckOut = "checkOut"
-,    CheckIn = "checkIn"
+    CheckOut = "checkOut",
+    CheckIn = "checkIn"
 }
 
 
 export class ValidateLicenseeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=action;" })
+  @SpeakeasyMetadata({ data: "form, name=action;" })
   action?: ValidateLicenseeRequestBodyActionEnum;
 
-  @Metadata({ data: "form, name=licenseeName;" })
+  @SpeakeasyMetadata({ data: "form, name=licenseeName;" })
   licenseeName?: string;
 
-  @Metadata({ data: "form, name=nodeSecret;" })
+  @SpeakeasyMetadata({ data: "form, name=nodeSecret;" })
   nodeSecret?: string;
 
-  @Metadata({ data: "form, name=productModuleNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=productModuleNumber;" })
   productModuleNumber?: string;
 
-  @Metadata({ data: "form, name=productNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=productNumber;" })
   productNumber?: string;
 
-  @Metadata({ data: "form, name=sessionId;" })
+  @SpeakeasyMetadata({ data: "form, name=sessionId;" })
   sessionId?: string;
 }
 
 
 export class ValidateLicenseeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class ValidateLicenseeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ValidateLicenseePathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: ValidateLicenseeRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ValidateLicenseeSecurity;
 }
 
 
 export class ValidateLicenseeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   netlicensing?: any;
 }

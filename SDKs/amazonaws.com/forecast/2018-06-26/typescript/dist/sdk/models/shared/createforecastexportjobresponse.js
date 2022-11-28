@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateForecastExportJobResponse = /** @class */ (function (_super) {
     __extends(CreateForecastExportJobResponse, _super);
     function CreateForecastExportJobResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ForecastExportJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastExportJobArn" }),
         __metadata("design:type", String)
     ], CreateForecastExportJobResponse.prototype, "forecastExportJobArn", void 0);
     return CreateForecastExportJobResponse;

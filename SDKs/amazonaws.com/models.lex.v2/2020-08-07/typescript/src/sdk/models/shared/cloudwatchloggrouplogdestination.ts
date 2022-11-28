@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchLogGroupLogDestination
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Amazon CloudWatch Logs log group where the text and metadata logs are delivered. The log group must exist before you enable logging.
 **/
 export class CloudWatchLogGroupLogDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudWatchLogGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=cloudWatchLogGroupArn" })
   cloudWatchLogGroupArn: string;
 
-  @Metadata({ data: "json, name=logPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=logPrefix" })
   logPrefix: string;
 }

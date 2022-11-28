@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMlTaskRunRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TaskRunId" })
+  @SpeakeasyMetadata({ data: "json, name=TaskRunId" })
   taskRunId: string;
 
-  @Metadata({ data: "json, name=TransformId" })
+  @SpeakeasyMetadata({ data: "json, name=TransformId" })
   transformId: string;
 }

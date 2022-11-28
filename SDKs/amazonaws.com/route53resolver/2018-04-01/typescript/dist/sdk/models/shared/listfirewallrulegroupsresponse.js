@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FirewallRuleGroupMetadata } from "./firewallrulegroupmetadata";
 var ListFirewallRuleGroupsResponse = /** @class */ (function (_super) {
     __extends(ListFirewallRuleGroupsResponse, _super);
     function ListFirewallRuleGroupsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FirewallRuleGroups", elemType: shared.FirewallRuleGroupMetadata }),
+        SpeakeasyMetadata({ data: "json, name=FirewallRuleGroups", elemType: FirewallRuleGroupMetadata }),
         __metadata("design:type", Array)
     ], ListFirewallRuleGroupsResponse.prototype, "firewallRuleGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListFirewallRuleGroupsResponse.prototype, "nextToken", void 0);
     return ListFirewallRuleGroupsResponse;

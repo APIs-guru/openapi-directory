@@ -22,6 +22,8 @@ type RepositoryCollaboratorPermissionSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// RepositoryCollaboratorPermission
+// Repository Collaborator Permission
 type RepositoryCollaboratorPermission struct {
 	Permission string                                     `json:"permission"`
 	User       RepositoryCollaboratorPermissionSimpleUser `json:"user"`

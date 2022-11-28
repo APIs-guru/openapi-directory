@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class PlayablelocationsSamplePlayableLocationsQueryParams:
 
 @dataclass
 class PlayablelocationsSamplePlayableLocationsRequest:
-    query_params: PlayablelocationsSamplePlayableLocationsQueryParams = field(default=None)
+    query_params: PlayablelocationsSamplePlayableLocationsQueryParams = field()
     request: Optional[shared.GoogleMapsPlayablelocationsV3SamplePlayableLocationsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PlayablelocationsSamplePlayableLocationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_maps_playablelocations_v3_sample_playable_locations_response: Optional[shared.GoogleMapsPlayablelocationsV3SamplePlayableLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

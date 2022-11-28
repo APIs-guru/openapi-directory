@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Execution
 /**
  * Execution
@@ -33,39 +33,39 @@ var Execution = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=$id" }),
+        SpeakeasyMetadata({ data: "json, name=$id" }),
         __metadata("design:type", String)
     ], Execution.prototype, "dollarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=dateCreated" }),
         __metadata("design:type", Number)
     ], Execution.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=exitCode" }),
+        SpeakeasyMetadata({ data: "json, name=exitCode" }),
         __metadata("design:type", Number)
     ], Execution.prototype, "exitCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionId" }),
+        SpeakeasyMetadata({ data: "json, name=functionId" }),
         __metadata("design:type", String)
     ], Execution.prototype, "functionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Execution.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=stderr" }),
+        SpeakeasyMetadata({ data: "json, name=stderr" }),
         __metadata("design:type", String)
     ], Execution.prototype, "stderr", void 0);
     __decorate([
-        Metadata({ data: "json, name=stdout" }),
+        SpeakeasyMetadata({ data: "json, name=stdout" }),
         __metadata("design:type", String)
     ], Execution.prototype, "stdout", void 0);
     __decorate([
-        Metadata({ data: "json, name=time" }),
+        SpeakeasyMetadata({ data: "json, name=time" }),
         __metadata("design:type", Number)
     ], Execution.prototype, "time", void 0);
     __decorate([
-        Metadata({ data: "json, name=trigger" }),
+        SpeakeasyMetadata({ data: "json, name=trigger" }),
         __metadata("design:type", String)
     ], Execution.prototype, "trigger", void 0);
     return Execution;

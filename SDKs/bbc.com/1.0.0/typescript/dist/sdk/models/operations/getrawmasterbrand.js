@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetRawMasterbrandPathParams = /** @class */ (function (_super) {
     __extends(GetRawMasterbrandPathParams, _super);
     function GetRawMasterbrandPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mbid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mbid" }),
         __metadata("design:type", String)
     ], GetRawMasterbrandPathParams.prototype, "mbid", void 0);
     return GetRawMasterbrandPathParams;
@@ -41,7 +41,7 @@ var GetRawMasterbrandRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRawMasterbrandPathParams)
     ], GetRawMasterbrandRequest.prototype, "pathParams", void 0);
     return GetRawMasterbrandRequest;
@@ -53,19 +53,19 @@ var GetRawMasterbrandResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetRawMasterbrandResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRawMasterbrandResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRawMasterbrandResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetRawMasterbrandResponse.prototype, "nitro", void 0);
     return GetRawMasterbrandResponse;

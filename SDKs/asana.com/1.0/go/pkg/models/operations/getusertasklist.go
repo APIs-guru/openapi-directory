@@ -13,13 +13,13 @@ type GetUserTaskListQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetUserTaskList200ApplicationJSON struct {
+	Data *shared.UserTaskListResponse `json:"data,omitempty"`
+}
+
 type GetUserTaskListRequest struct {
 	PathParams  GetUserTaskListPathParams
 	QueryParams GetUserTaskListQueryParams
-}
-
-type GetUserTaskList200ApplicationJSON struct {
-	Data *shared.UserTaskListResponse `json:"data,omitempty"`
 }
 
 type GetUserTaskListResponse struct {

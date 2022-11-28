@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TagsListQueryParams = /** @class */ (function (_super) {
     __extends(TagsListQueryParams, _super);
@@ -30,67 +30,67 @@ var TagsListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], TagsListQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], TagsListQueryParams.prototype, "pageSize", void 0);
     return TagsListQueryParams;
 }(SpeakeasyBase));
 export { TagsListQueryParams };
-var TagsListRequest = /** @class */ (function (_super) {
-    __extends(TagsListRequest, _super);
-    function TagsListRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", TagsListQueryParams)
-    ], TagsListRequest.prototype, "queryParams", void 0);
-    return TagsListRequest;
-}(SpeakeasyBase));
-export { TagsListRequest };
 var TagsList200ApplicationJson = /** @class */ (function (_super) {
     __extends(TagsList200ApplicationJson, _super);
     function TagsList200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], TagsList200ApplicationJson.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], TagsList200ApplicationJson.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=previous" }),
+        SpeakeasyMetadata({ data: "json, name=previous" }),
         __metadata("design:type", String)
     ], TagsList200ApplicationJson.prototype, "previous", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Tag }),
         __metadata("design:type", Array)
     ], TagsList200ApplicationJson.prototype, "results", void 0);
     return TagsList200ApplicationJson;
 }(SpeakeasyBase));
 export { TagsList200ApplicationJson };
+var TagsListRequest = /** @class */ (function (_super) {
+    __extends(TagsListRequest, _super);
+    function TagsListRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", TagsListQueryParams)
+    ], TagsListRequest.prototype, "queryParams", void 0);
+    return TagsListRequest;
+}(SpeakeasyBase));
+export { TagsListRequest };
 var TagsListResponse = /** @class */ (function (_super) {
     __extends(TagsListResponse, _super);
     function TagsListResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TagsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TagsListResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TagsList200ApplicationJson)
     ], TagsListResponse.prototype, "tagsList200ApplicationJsonObject", void 0);
     return TagsListResponse;

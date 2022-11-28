@@ -1,5 +1,7 @@
 package shared
 
+// CreateGameSessionInput
+// Represents the input for a request operation.
 type CreateGameSessionInput struct {
 	AliasID                   *string        `json:"AliasId,omitempty"`
 	CreatorID                 *string        `json:"CreatorId,omitempty"`

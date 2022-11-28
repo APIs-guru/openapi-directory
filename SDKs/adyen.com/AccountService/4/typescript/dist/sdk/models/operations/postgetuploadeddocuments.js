@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostGetUploadedDocumentsSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostGetUploadedDocumentsSecurityOption1, _super);
-    function PostGetUploadedDocumentsSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostGetUploadedDocumentsSecurityOption1.prototype, "basicAuth", void 0);
-    return PostGetUploadedDocumentsSecurityOption1;
-}(SpeakeasyBase));
-export { PostGetUploadedDocumentsSecurityOption1 };
-var PostGetUploadedDocumentsSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostGetUploadedDocumentsSecurityOption2, _super);
-    function PostGetUploadedDocumentsSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostGetUploadedDocumentsSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostGetUploadedDocumentsSecurityOption2;
-}(SpeakeasyBase));
-export { PostGetUploadedDocumentsSecurityOption2 };
 var PostGetUploadedDocumentsSecurity = /** @class */ (function (_super) {
     __extends(PostGetUploadedDocumentsSecurity, _super);
     function PostGetUploadedDocumentsSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetUploadedDocumentsSecurityOption1)
-    ], PostGetUploadedDocumentsSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostGetUploadedDocumentsSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetUploadedDocumentsSecurityOption2)
-    ], PostGetUploadedDocumentsSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostGetUploadedDocumentsSecurity.prototype, "apiKeyAuth", void 0);
     return PostGetUploadedDocumentsSecurity;
 }(SpeakeasyBase));
 export { PostGetUploadedDocumentsSecurity };
@@ -70,11 +46,11 @@ var PostGetUploadedDocumentsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostGetUploadedDocumentsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGetUploadedDocumentsSecurity)
     ], PostGetUploadedDocumentsRequest.prototype, "security", void 0);
     return PostGetUploadedDocumentsRequest;
@@ -86,19 +62,19 @@ var PostGetUploadedDocumentsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGetUploadedDocumentsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetUploadedDocumentsResponse.prototype, "getUploadedDocumentsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetUploadedDocumentsResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGetUploadedDocumentsResponse.prototype, "statusCode", void 0);
     return PostGetUploadedDocumentsResponse;

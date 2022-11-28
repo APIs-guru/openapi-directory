@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CognitoMemberDefinition } from "./cognitomemberdefinition";
 import { OidcMemberDefinition } from "./oidcmemberdefinition";
+
 
 
 // MemberDefinition
@@ -8,9 +9,9 @@ import { OidcMemberDefinition } from "./oidcmemberdefinition";
  * Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work team.
 **/
 export class MemberDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CognitoMemberDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=CognitoMemberDefinition" })
   cognitoMemberDefinition?: CognitoMemberDefinition;
 
-  @Metadata({ data: "json, name=OidcMemberDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=OidcMemberDefinition" })
   oidcMemberDefinition?: OidcMemberDefinition;
 }

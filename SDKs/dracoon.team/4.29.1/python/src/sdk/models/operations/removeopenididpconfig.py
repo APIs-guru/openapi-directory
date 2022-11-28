@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveOpenIDIdpConfigPathParams:
-    idp_id: int = field(default=None, metadata={'path_param': { 'field_name': 'idp_id', 'style': 'simple', 'explode': False }})
+    idp_id: int = field(metadata={'path_param': { 'field_name': 'idp_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveOpenIDIdpConfigHeaders:
 
 @dataclass
 class RemoveOpenIDIdpConfigRequest:
-    path_params: RemoveOpenIDIdpConfigPathParams = field(default=None)
-    headers: RemoveOpenIDIdpConfigHeaders = field(default=None)
+    headers: RemoveOpenIDIdpConfigHeaders = field()
+    path_params: RemoveOpenIDIdpConfigPathParams = field()
     
 
 @dataclass
 class RemoveOpenIDIdpConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

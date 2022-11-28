@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeCrossAccountAccessRoleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=registeredAt" })
+  @SpeakeasyMetadata({ data: "json, name=registeredAt" })
   registeredAt: Date;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=valid" })
+  @SpeakeasyMetadata({ data: "json, name=valid" })
   valid: boolean;
 }

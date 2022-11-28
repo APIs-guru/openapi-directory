@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum UpdateRuleXAmzTargetEnum {
     Awswaf20150824UpdateRule = "AWSWAF_20150824.UpdateRule"
@@ -7,75 +8,75 @@ export enum UpdateRuleXAmzTargetEnum {
 
 
 export class UpdateRuleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: UpdateRuleXAmzTargetEnum;
 }
 
 
 export class UpdateRuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateRuleHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.UpdateRuleRequest;
 }
 
 
 export class UpdateRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateRuleResponse?: shared.UpdateRuleResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafInternalErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafInvalidAccountException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafInvalidOperationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafInvalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafLimitsExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafNonexistentContainerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafNonexistentItemException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafReferencedItemException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafStaleDataException?: any;
 }

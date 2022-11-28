@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Beacon } from "./beacon";
 // ListBeaconsResponse
 /**
  * Response that contains list beacon results and pagination help.
@@ -34,15 +34,15 @@ var ListBeaconsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=beacons", elemType: shared.Beacon }),
+        SpeakeasyMetadata({ data: "json, name=beacons", elemType: Beacon }),
         __metadata("design:type", Array)
     ], ListBeaconsResponse.prototype, "beacons", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListBeaconsResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalCount" }),
+        SpeakeasyMetadata({ data: "json, name=totalCount" }),
         __metadata("design:type", String)
     ], ListBeaconsResponse.prototype, "totalCount", void 0);
     return ListBeaconsResponse;

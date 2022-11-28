@@ -22,13 +22,49 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var IosAppStateEnum;
 (function (IosAppStateEnum) {
     IosAppStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
     IosAppStateEnum["Active"] = "ACTIVE";
     IosAppStateEnum["Deleted"] = "DELETED";
 })(IosAppStateEnum || (IosAppStateEnum = {}));
+// IosAppInput
+/**
+ * Details of a Firebase App for iOS.
+**/
+var IosAppInput = /** @class */ (function (_super) {
+    __extends(IosAppInput, _super);
+    function IosAppInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=apiKeyId" }),
+        __metadata("design:type", String)
+    ], IosAppInput.prototype, "apiKeyId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=appStoreId" }),
+        __metadata("design:type", String)
+    ], IosAppInput.prototype, "appStoreId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=bundleId" }),
+        __metadata("design:type", String)
+    ], IosAppInput.prototype, "bundleId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], IosAppInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], IosAppInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=teamId" }),
+        __metadata("design:type", String)
+    ], IosAppInput.prototype, "teamId", void 0);
+    return IosAppInput;
+}(SpeakeasyBase));
+export { IosAppInput };
 // IosApp
 /**
  * Details of a Firebase App for iOS.
@@ -39,39 +75,39 @@ var IosApp = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=apiKeyId" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "apiKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=appStoreId" }),
+        SpeakeasyMetadata({ data: "json, name=appStoreId" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "appStoreId", void 0);
     __decorate([
-        Metadata({ data: "json, name=bundleId" }),
+        SpeakeasyMetadata({ data: "json, name=bundleId" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "bundleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=teamId" }),
+        SpeakeasyMetadata({ data: "json, name=teamId" }),
         __metadata("design:type", String)
     ], IosApp.prototype, "teamId", void 0);
     return IosApp;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CurrentRevision
+// Represents information about a current revision.
 type CurrentRevision struct {
 	ChangeIdentifier string     `json:"changeIdentifier"`
 	Created          *time.Time `json:"created,omitempty"`

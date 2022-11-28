@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleHomeEnterpriseSdmV1Structure
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Structure resource represents an instance of enterprise managed home or hotel room.
 **/
 export class GoogleHomeEnterpriseSdmV1Structure extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=traits" })
+  @SpeakeasyMetadata({ data: "json, name=traits" })
   traits?: Map<string, any>;
 }

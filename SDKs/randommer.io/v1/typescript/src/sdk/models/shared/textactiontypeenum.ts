@@ -1,6 +1,7 @@
 
 
+
 export enum TextActionTypeEnum {
-    Transform = "Transform"
-,    Replace = "Replace"
+    Transform = "Transform",
+    Replace = "Replace"
 }

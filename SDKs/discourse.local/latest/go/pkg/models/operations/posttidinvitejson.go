@@ -14,12 +14,6 @@ type PostTIDInviteJSONRequestBody struct {
 	User  *string `json:"user,omitempty"`
 }
 
-type PostTIDInviteJSONRequest struct {
-	PathParams PostTIDInviteJSONPathParams
-	Headers    PostTIDInviteJSONHeaders
-	Request    *PostTIDInviteJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PostTIDInviteJSON200ApplicationJSONUser struct {
 	AvatarTemplate *string `json:"avatar_template,omitempty"`
 	ID             *int64  `json:"id,omitempty"`
@@ -29,6 +23,12 @@ type PostTIDInviteJSON200ApplicationJSONUser struct {
 
 type PostTIDInviteJSON200ApplicationJSON struct {
 	User *PostTIDInviteJSON200ApplicationJSONUser `json:"user,omitempty"`
+}
+
+type PostTIDInviteJSONRequest struct {
+	PathParams PostTIDInviteJSONPathParams
+	Headers    PostTIDInviteJSONHeaders
+	Request    *PostTIDInviteJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PostTIDInviteJSONResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// ListLogEntriesRequest
+// The parameters to ListLogEntries.
 type ListLogEntriesRequest struct {
 	Filter        *string  `json:"filter,omitempty"`
 	OrderBy       *string  `json:"orderBy,omitempty"`

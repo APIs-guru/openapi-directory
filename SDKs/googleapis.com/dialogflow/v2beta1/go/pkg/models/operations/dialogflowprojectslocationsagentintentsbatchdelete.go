@@ -40,7 +40,7 @@ type DialogflowProjectsLocationsAgentIntentsBatchDeleteSecurity struct {
 type DialogflowProjectsLocationsAgentIntentsBatchDeleteRequest struct {
 	PathParams  DialogflowProjectsLocationsAgentIntentsBatchDeletePathParams
 	QueryParams DialogflowProjectsLocationsAgentIntentsBatchDeleteQueryParams
-	Request     *shared.GoogleCloudDialogflowV2beta1BatchDeleteIntentsRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowV2beta1BatchDeleteIntentsRequestInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsAgentIntentsBatchDeleteSecurity
 }
 

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskStatusTypeEnum } from "./taskstatustypeenum";
 import { TaskTypeEnum } from "./tasktypeenum";
+
 
 
 // TaskRunFilterCriteria
@@ -8,15 +9,15 @@ import { TaskTypeEnum } from "./tasktypeenum";
  * The criteria that are used to filter the task runs for the machine learning transform.
 **/
 export class TaskRunFilterCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StartedAfter" })
+  @SpeakeasyMetadata({ data: "json, name=StartedAfter" })
   startedAfter?: Date;
 
-  @Metadata({ data: "json, name=StartedBefore" })
+  @SpeakeasyMetadata({ data: "json, name=StartedBefore" })
   startedBefore?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TaskStatusTypeEnum;
 
-  @Metadata({ data: "json, name=TaskRunType" })
+  @SpeakeasyMetadata({ data: "json, name=TaskRunType" })
   taskRunType?: TaskTypeEnum;
 }

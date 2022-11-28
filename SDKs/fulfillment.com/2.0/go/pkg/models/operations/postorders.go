@@ -89,6 +89,8 @@ type PostOrdersOrderRequestV2ConsigneeNewV2 struct {
 	PostalCode      *string `json:"postalCode,omitempty"`
 }
 
+// PostOrdersOrderRequestV2Warehouse
+// We automatically select a warehouse based on inventory availability, requested carrier and delivery schedule, and carrier cost. You may however override this process. Because this is not recommended please inform your AE prior to using so they may enable this feature.
 type PostOrdersOrderRequestV2Warehouse struct {
 	ID *int64 `json:"id,omitempty"`
 }
@@ -108,16 +110,13 @@ type PostOrdersSecurity struct {
 	FdcAuth shared.SchemeFdcAuth `security:"scheme,type=oauth2"`
 }
 
-type PostOrdersRequest struct {
-	Request  PostOrdersOrderRequestV2 `request:"mediaType=application/json"`
-	Security PostOrdersSecurity
-}
-
 type PostOrdersErrorStandardWithContextV2 struct {
 	Context []map[string]interface{} `json:"context,omitempty"`
 	Message *string                  `json:"message,omitempty"`
 }
 
+// PostOrdersOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy
+// Responsibility for resolving this issue
 type PostOrdersOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -216,6 +215,11 @@ type PostOrdersOrderResponseV2 struct {
 	TrackingNumbers        []PostOrdersOrderResponseV2TrackingNumberV2                                              `json:"trackingNumbers,omitempty"`
 	ValidatedConsignee     shared.OneordersPostResponses201ContentApplication1jsonSchemaPropertiesOriginalConsignee `json:"validatedConsignee"`
 	Warehouse              *PostOrdersOrderResponseV2WarehouseV2                                                    `json:"warehouse,omitempty"`
+}
+
+type PostOrdersRequest struct {
+	Request  PostOrdersOrderRequestV2 `request:"mediaType=application/json"`
+	Security PostOrdersSecurity
 }
 
 type PostOrdersResponse struct {

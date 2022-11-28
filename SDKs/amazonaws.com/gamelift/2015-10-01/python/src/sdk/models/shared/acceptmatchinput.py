@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import acceptancetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AcceptMatchInput:
-    acceptance_type: acceptancetype_enum.AcceptanceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceptanceType' }})
-    player_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PlayerIds' }})
-    ticket_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TicketId' }})
+    r"""AcceptMatchInput
+    Represents the input for a request operation.
+    """
+    
+    acceptance_type: AcceptanceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceptanceType') }})
+    player_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PlayerIds') }})
+    ticket_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TicketId') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DoubleOperatorOptions } from "./doubleoperatoroptions";
+
 
 
 // DoublePropertyOptions
@@ -7,6 +8,6 @@ import { DoubleOperatorOptions } from "./doubleoperatoroptions";
  * The options for double properties.
 **/
 export class DoublePropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatorOptions" })
+  @SpeakeasyMetadata({ data: "json, name=operatorOptions" })
   operatorOptions?: DoubleOperatorOptions;
 }

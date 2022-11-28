@@ -30,7 +30,7 @@ type IapProjectsBrandsIdentityAwareProxyClientsCreateSecurity struct {
 type IapProjectsBrandsIdentityAwareProxyClientsCreateRequest struct {
 	PathParams  IapProjectsBrandsIdentityAwareProxyClientsCreatePathParams
 	QueryParams IapProjectsBrandsIdentityAwareProxyClientsCreateQueryParams
-	Request     *shared.IdentityAwareProxyClient `request:"mediaType=application/json"`
+	Request     *shared.IdentityAwareProxyClientInput `request:"mediaType=application/json"`
 	Security    IapProjectsBrandsIdentityAwareProxyClientsCreateSecurity
 }
 

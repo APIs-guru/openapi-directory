@@ -10,14 +10,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
-var Servers = [
+export var ServerList = [
     "https://api.tomtom.com",
 ];
 export function WithServerURL(serverURL, params) {
@@ -25,12 +22,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 export function WithSecurity(security) {
@@ -38,7 +35,7 @@ export function WithSecurity(security) {
         security = new Security(security);
     }
     return function (sdk) {
-        sdk.security = security;
+        sdk._security = security;
     };
 }
 var SDK = /** @class */ (function () {
@@ -48,147 +45,151 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
+        if (!this._securityClient) {
+            if (this._security) {
+                this._securityClient = utils.CreateSecurityClient(this._defaultClient, this._security);
             }
             else {
-                this.securityClient = this.defaultClient;
+                this._securityClient = this._defaultClient;
             }
         }
     }
-    // GetRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
     /**
+     * getRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
+     *
      * Calculates a set of locations that can be reached from the origin point.
     **/
-    SDK.prototype.GetRoutingVersionNumberCalculateReachableRangeOriginContentType = function (req, config) {
+    SDK.prototype.getRoutingVersionNumberCalculateReachableRangeOriginContentType = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateReachableRange/{origin}/{contentType}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 405:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 405:
                     break;
-                case 408:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 408:
                     break;
-                case 414:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 414:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
-                case 502:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
                     break;
-                case 503:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
                     break;
-                case 504:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
                     break;
-                case 596:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 596:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
     /**
+     * getRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
+     *
      * Calculates a route between an origin and a destination.
     **/
-    SDK.prototype.GetRoutingVersionNumberCalculateRouteLocationsContentType = function (req, config) {
+    SDK.prototype.getRoutingVersionNumberCalculateRouteLocationsContentType = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRoutingVersionNumberCalculateRouteLocationsContentTypeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateRoute/{locations}/{contentType}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 405:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 405:
                     break;
-                case 408:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 408:
                     break;
-                case 414:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 414:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
-                case 502:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
                     break;
-                case 503:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
                     break;
-                case 504:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
                     break;
-                case 596:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 596:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // PostRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
     /**
+     * postRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
+     *
      * Calculates a set of locations that can be reached from the origin point. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>.
     **/
-    SDK.prototype.PostRoutingVersionNumberCalculateReachableRangeOriginContentType = function (req, config) {
+    SDK.prototype.postRoutingVersionNumberCalculateReachableRangeOriginContentType = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateReachableRange/{origin}/{contentType}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
+        var client = this._securityClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -196,66 +197,66 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 405:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 405:
                     break;
-                case 408:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 408:
                     break;
-                case 414:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 414:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
-                case 502:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
                     break;
-                case 503:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
                     break;
-                case 504:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
                     break;
-                case 596:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 596:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // PostRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
     /**
+     * postRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
+     *
      * Calculates a route between an origin and a destination. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>.
     **/
-    SDK.prototype.PostRoutingVersionNumberCalculateRouteLocationsContentType = function (req, config) {
+    SDK.prototype.postRoutingVersionNumberCalculateRouteLocationsContentType = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateRoute/{locations}/{contentType}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
+        var client = this._securityClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -263,37 +264,36 @@ var SDK = /** @class */ (function () {
         else
             body = __assign({}, reqBody);
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 405:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 405:
                     break;
-                case 408:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 408:
                     break;
-                case 414:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 414:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
-                case 502:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 502:
                     break;
-                case 503:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 503:
                     break;
-                case 504:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 504:
                     break;
-                case 596:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 596:
                     break;
             }
             return res;

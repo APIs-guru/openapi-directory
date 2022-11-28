@@ -18,6 +18,8 @@ const (
 	PublisherProfileMobileApplicationAppStoreEnumXiaomi                  PublisherProfileMobileApplicationAppStoreEnum = "XIAOMI"
 )
 
+// PublisherProfileMobileApplication
+// A mobile application that contains a external app ID, name, and app store.
 type PublisherProfileMobileApplication struct {
 	AppStore      *PublisherProfileMobileApplicationAppStoreEnum `json:"appStore,omitempty"`
 	ExternalAppID *string                                        `json:"externalAppId,omitempty"`

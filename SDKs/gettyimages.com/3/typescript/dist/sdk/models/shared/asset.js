@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DisplaySize } from "./displaysize";
 var Asset = /** @class */ (function (_super) {
     __extends(Asset, _super);
     function Asset() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=asset_type" }),
+        SpeakeasyMetadata({ data: "json, name=asset_type" }),
         __metadata("design:type", String)
     ], Asset.prototype, "assetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_added" }),
+        SpeakeasyMetadata({ data: "json, name=date_added" }),
         __metadata("design:type", Date)
     ], Asset.prototype, "dateAdded", void 0);
     __decorate([
-        Metadata({ data: "json, name=display_sizes", elemType: shared.DisplaySize }),
+        SpeakeasyMetadata({ data: "json, name=display_sizes", elemType: DisplaySize }),
         __metadata("design:type", Array)
     ], Asset.prototype, "displaySizes", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Asset.prototype, "id", void 0);
     return Asset;

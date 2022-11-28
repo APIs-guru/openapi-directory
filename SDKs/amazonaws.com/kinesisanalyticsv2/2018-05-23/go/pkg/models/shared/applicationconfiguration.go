@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationConfiguration
+// Specifies the creation parameters for a Kinesis Data Analytics application.
 type ApplicationConfiguration struct {
 	ApplicationCodeConfiguration     *ApplicationCodeConfiguration     `json:"ApplicationCodeConfiguration,omitempty"`
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfiguration `json:"ApplicationSnapshotConfiguration,omitempty"`

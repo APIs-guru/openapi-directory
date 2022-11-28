@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetVideoThumbnailsPathParams:
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetVideoThumbnailsQueryParams:
 
 @dataclass
 class GetVideoThumbnailsRequest:
-    path_params: GetVideoThumbnailsPathParams = field(default=None)
-    query_params: GetVideoThumbnailsQueryParams = field(default=None)
+    path_params: GetVideoThumbnailsPathParams = field()
+    query_params: GetVideoThumbnailsQueryParams = field()
     
 
 @dataclass
 class GetVideoThumbnailsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pictures: Optional[List[shared.Picture]] = field(default=None)
     

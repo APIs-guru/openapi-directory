@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposListPullRequestsAssociatedWithCommitPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=commit_sha" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=commit_sha" })
   commitSha: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposListPullRequestsAssociatedWithCommitQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class ReposListPullRequestsAssociatedWithCommitRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReposListPullRequestsAssociatedWithCommitPathParams;
-
-  @Metadata()
-  queryParams: ReposListPullRequestsAssociatedWithCommitQueryParams;
-}
-
-
 export class ReposListPullRequestsAssociatedWithCommit415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ReposListPullRequestsAssociatedWithCommitRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReposListPullRequestsAssociatedWithCommitPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: ReposListPullRequestsAssociatedWithCommitQueryParams;
+}
+
+
 export class ReposListPullRequestsAssociatedWithCommitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.PullRequestSimple })
+  @SpeakeasyMetadata({ elemType: shared.PullRequestSimple })
   pullRequestSimples?: shared.PullRequestSimple[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposListPullRequestsAssociatedWithCommit415ApplicationJsonObject?: ReposListPullRequestsAssociatedWithCommit415ApplicationJson;
 }

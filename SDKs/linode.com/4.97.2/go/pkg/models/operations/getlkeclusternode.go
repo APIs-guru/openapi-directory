@@ -9,22 +9,9 @@ type GetLkeClusterNodePathParams struct {
 	NodeID    string `pathParam:"style=simple,explode=false,name=nodeId"`
 }
 
-type GetLkeClusterNodeSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLkeClusterNodeSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLkeClusterNodeSecurity struct {
-	Option1 *GetLkeClusterNodeSecurityOption1 `security:"option"`
-	Option2 *GetLkeClusterNodeSecurityOption2 `security:"option"`
-}
-
-type GetLkeClusterNodeRequest struct {
-	PathParams GetLkeClusterNodePathParams
-	Security   GetLkeClusterNodeSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLkeClusterNode200ApplicationJSONDataStatusEnum string
@@ -34,6 +21,8 @@ const (
 	GetLkeClusterNode200ApplicationJSONDataStatusEnumNotReady GetLkeClusterNode200ApplicationJSONDataStatusEnum = "not_ready"
 )
 
+// GetLkeClusterNode200ApplicationJSONData
+// The selected node in the cluster.
 type GetLkeClusterNode200ApplicationJSONData struct {
 	ID         *string                                            `json:"id,omitempty"`
 	InstanceID *int64                                             `json:"instance_id,omitempty"`
@@ -46,6 +35,11 @@ type GetLkeClusterNode200ApplicationJSON struct {
 
 type GetLkeClusterNodeDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLkeClusterNodeRequest struct {
+	PathParams GetLkeClusterNodePathParams
+	Security   GetLkeClusterNodeSecurity
 }
 
 type GetLkeClusterNodeResponse struct {

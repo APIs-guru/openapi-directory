@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteWorkspaceBundleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BundleId" })
+  @SpeakeasyMetadata({ data: "json, name=BundleId" })
   bundleId?: string;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AwardedResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awarded" })
+  @SpeakeasyMetadata({ data: "json, name=awarded" })
   awarded?: boolean;
 
-  @Metadata({ data: "json, name=badgeId" })
+  @SpeakeasyMetadata({ data: "json, name=badgeId" })
   badgeId?: string;
 
-  @Metadata({ data: "json, name=badgeUrl" })
+  @SpeakeasyMetadata({ data: "json, name=badgeUrl" })
   badgeUrl?: string;
 }

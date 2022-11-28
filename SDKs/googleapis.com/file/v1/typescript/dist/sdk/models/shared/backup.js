@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var BackupSourceInstanceTierEnum;
 (function (BackupSourceInstanceTierEnum) {
     BackupSourceInstanceTierEnum["TierUnspecified"] = "TIER_UNSPECIFIED";
@@ -41,6 +41,34 @@ export var BackupStateEnum;
     BackupStateEnum["Ready"] = "READY";
     BackupStateEnum["Deleting"] = "DELETING";
 })(BackupStateEnum || (BackupStateEnum = {}));
+// BackupInput
+/**
+ * A Filestore backup.
+**/
+var BackupInput = /** @class */ (function (_super) {
+    __extends(BackupInput, _super);
+    function BackupInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], BackupInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], BackupInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceFileShare" }),
+        __metadata("design:type", String)
+    ], BackupInput.prototype, "sourceFileShare", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceInstance" }),
+        __metadata("design:type", String)
+    ], BackupInput.prototype, "sourceInstance", void 0);
+    return BackupInput;
+}(SpeakeasyBase));
+export { BackupInput };
 // Backup
 /**
  * A Filestore backup.
@@ -51,51 +79,51 @@ var Backup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacityGb" }),
+        SpeakeasyMetadata({ data: "json, name=capacityGb" }),
         __metadata("design:type", String)
     ], Backup.prototype, "capacityGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Backup.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Backup.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=downloadBytes" }),
+        SpeakeasyMetadata({ data: "json, name=downloadBytes" }),
         __metadata("design:type", String)
     ], Backup.prototype, "downloadBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Backup.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Backup.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=satisfiesPzs" }),
+        SpeakeasyMetadata({ data: "json, name=satisfiesPzs" }),
         __metadata("design:type", Boolean)
     ], Backup.prototype, "satisfiesPzs", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceFileShare" }),
+        SpeakeasyMetadata({ data: "json, name=sourceFileShare" }),
         __metadata("design:type", String)
     ], Backup.prototype, "sourceFileShare", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceInstance" }),
+        SpeakeasyMetadata({ data: "json, name=sourceInstance" }),
         __metadata("design:type", String)
     ], Backup.prototype, "sourceInstance", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceInstanceTier" }),
+        SpeakeasyMetadata({ data: "json, name=sourceInstanceTier" }),
         __metadata("design:type", String)
     ], Backup.prototype, "sourceInstanceTier", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Backup.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=storageBytes" }),
+        SpeakeasyMetadata({ data: "json, name=storageBytes" }),
         __metadata("design:type", String)
     ], Backup.prototype, "storageBytes", void 0);
     return Backup;

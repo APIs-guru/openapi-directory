@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateStatusEnum } from "./certificatestatusenum";
 import { Filters } from "./filters";
 
 
+
 export class ListCertificatesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateStatuses" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateStatuses" })
   certificateStatuses?: CertificateStatusEnum[];
 
-  @Metadata({ data: "json, name=Includes" })
+  @SpeakeasyMetadata({ data: "json, name=Includes" })
   includes?: Filters;
 
-  @Metadata({ data: "json, name=MaxItems" })
+  @SpeakeasyMetadata({ data: "json, name=MaxItems" })
   maxItems?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

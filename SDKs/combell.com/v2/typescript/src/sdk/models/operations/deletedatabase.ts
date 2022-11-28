@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteDatabasePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
   databaseName: string;
 }
 
 
 export class DeleteDatabaseQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=database_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=database_name" })
   databaseName: string;
 }
 
 
 export class DeleteDatabaseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteDatabasePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteDatabaseQueryParams;
 }
 
 
 export class DeleteDatabaseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

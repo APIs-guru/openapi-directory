@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Lodging } from "./lodging";
+
 
 
 // GetGoogleUpdatedLodgingResponse
@@ -7,9 +8,9 @@ import { Lodging } from "./lodging";
  * Response message for LodgingService.GetGoogleUpdatedLodging
 **/
 export class GetGoogleUpdatedLodgingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diffMask" })
+  @SpeakeasyMetadata({ data: "json, name=diffMask" })
   diffMask?: string;
 
-  @Metadata({ data: "json, name=lodging" })
+  @SpeakeasyMetadata({ data: "json, name=lodging" })
   lodging?: Lodging;
 }

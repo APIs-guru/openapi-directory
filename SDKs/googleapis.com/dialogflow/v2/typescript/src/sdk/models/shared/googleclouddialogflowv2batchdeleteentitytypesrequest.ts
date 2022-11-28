@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for EntityTypes.BatchDeleteEntityTypes.
 **/
 export class GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityTypeNames" })
+  @SpeakeasyMetadata({ data: "json, name=entityTypeNames" })
   entityTypeNames?: string[];
 }

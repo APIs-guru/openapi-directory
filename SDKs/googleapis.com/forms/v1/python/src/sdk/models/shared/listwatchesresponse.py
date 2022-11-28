@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import watch
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListWatchesResponse:
-    watches: Optional[List[watch.Watch]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watches' }})
+    r"""ListWatchesResponse
+    The response of a ListWatchesRequest.
+    """
+    
+    watches: Optional[List[Watch]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('watches') }})
     

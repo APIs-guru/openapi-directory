@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PageviewsCountsTimeRangeEnum {
-    AllTime = "ALL_TIME"
-,    ThirtyDays = "THIRTY_DAYS"
-,    SevenDays = "SEVEN_DAYS"
+    AllTime = "ALL_TIME",
+    ThirtyDays = "THIRTY_DAYS",
+    SevenDays = "SEVEN_DAYS"
 }
 
 
 export class PageviewsCounts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 
-  @Metadata({ data: "json, name=timeRange" })
+  @SpeakeasyMetadata({ data: "json, name=timeRange" })
   timeRange?: PageviewsCountsTimeRangeEnum;
 }
 
 
 export class Pageviews extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blogId" })
+  @SpeakeasyMetadata({ data: "json, name=blogId" })
   blogId?: string;
 
-  @Metadata({ data: "json, name=counts", elemType: shared.PageviewsCounts })
+  @SpeakeasyMetadata({ data: "json, name=counts", elemType: PageviewsCounts })
   counts?: PageviewsCounts[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

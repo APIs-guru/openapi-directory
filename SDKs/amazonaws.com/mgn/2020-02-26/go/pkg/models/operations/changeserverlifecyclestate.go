@@ -14,6 +14,8 @@ type ChangeServerLifeCycleStateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ChangeServerLifeCycleStateRequestBodyLifeCycle
+// The request to change the source server migration lifecycle state.
 type ChangeServerLifeCycleStateRequestBodyLifeCycle struct {
 	State *shared.ChangeServerLifeCycleStateSourceServerLifecycleStateEnum `json:"state,omitempty"`
 }

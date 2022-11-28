@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { V2Key } from "./v2key";
 /**
  * Response message for `ListKeys` method.

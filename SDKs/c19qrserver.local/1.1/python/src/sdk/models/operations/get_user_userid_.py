@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetUserUserIDPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetUserUserIDRequest:
-    path_params: GetUserUserIDPathParams = field(default=None)
+    path_params: GetUserUserIDPathParams = field()
     
 
 @dataclass
 class GetUserUserIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_token: Optional[shared.InvalidToken] = field(default=None)
     user_record: Optional[shared.UserRecord] = field(default=None)
     

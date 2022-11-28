@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsDevelopersBalanceAdjustPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsDevelopersBalanceAdjustQueryParams:
 
 @dataclass
 class ApigeeOrganizationsDevelopersBalanceAdjustSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsDevelopersBalanceAdjustRequest:
-    path_params: ApigeeOrganizationsDevelopersBalanceAdjustPathParams = field(default=None)
-    query_params: ApigeeOrganizationsDevelopersBalanceAdjustQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsDevelopersBalanceAdjustPathParams = field()
+    query_params: ApigeeOrganizationsDevelopersBalanceAdjustQueryParams = field()
+    security: ApigeeOrganizationsDevelopersBalanceAdjustSecurity = field()
     request: Optional[shared.GoogleCloudApigeeV1AdjustDeveloperBalanceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsDevelopersBalanceAdjustSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsDevelopersBalanceAdjustResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_developer_balance: Optional[shared.GoogleCloudApigeeV1DeveloperBalance] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TextSpan
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A span of text in the provided document.
 **/
 export class TextSpan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=beginOffset" })
+  @SpeakeasyMetadata({ data: "json, name=beginOffset" })
   beginOffset?: number;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 }

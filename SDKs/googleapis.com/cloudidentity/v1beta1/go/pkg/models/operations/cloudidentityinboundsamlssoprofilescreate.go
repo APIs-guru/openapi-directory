@@ -25,7 +25,7 @@ type CloudidentityInboundSamlSsoProfilesCreateSecurity struct {
 
 type CloudidentityInboundSamlSsoProfilesCreateRequest struct {
 	QueryParams CloudidentityInboundSamlSsoProfilesCreateQueryParams
-	Request     *shared.InboundSamlSsoProfile `request:"mediaType=application/json"`
+	Request     *shared.InboundSamlSsoProfileInput `request:"mediaType=application/json"`
 	Security    CloudidentityInboundSamlSsoProfilesCreateSecurity
 }
 

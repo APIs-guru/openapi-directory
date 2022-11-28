@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { UpdateDealRequest } from "./updatedealrequest";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UpdateDealRequestInput } from "./updatedealrequest";
 
 
-// BatchUpdateDealsRequest
+
+// BatchUpdateDealsRequestInput
 /** 
  * Request message for batch updating deals.
 **/
-export class BatchUpdateDealsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.UpdateDealRequest })
-  requests?: UpdateDealRequest[];
+export class BatchUpdateDealsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: UpdateDealRequestInput })
+  requests?: UpdateDealRequestInput[];
 }

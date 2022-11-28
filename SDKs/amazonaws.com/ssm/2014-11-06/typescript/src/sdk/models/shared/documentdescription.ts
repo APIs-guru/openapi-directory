@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentInformation } from "./attachmentinformation";
 import { DocumentFormatEnum } from "./documentformatenum";
 import { DocumentTypeEnum } from "./documenttypeenum";
@@ -13,92 +12,93 @@ import { DocumentStatusEnum } from "./documentstatusenum";
 import { Tag } from "./tag";
 
 
+
 // DocumentDescription
 /** 
  * Describes a Amazon Web Services Systems Manager document (SSM document). 
 **/
 export class DocumentDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApprovedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovedVersion" })
   approvedVersion?: string;
 
-  @Metadata({ data: "json, name=AttachmentsInformation", elemType: shared.AttachmentInformation })
+  @SpeakeasyMetadata({ data: "json, name=AttachmentsInformation", elemType: AttachmentInformation })
   attachmentsInformation?: AttachmentInformation[];
 
-  @Metadata({ data: "json, name=Author" })
+  @SpeakeasyMetadata({ data: "json, name=Author" })
   author?: string;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=DefaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultVersion" })
   defaultVersion?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=DocumentFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentFormat" })
   documentFormat?: DocumentFormatEnum;
 
-  @Metadata({ data: "json, name=DocumentType" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentType" })
   documentType?: DocumentTypeEnum;
 
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=Hash" })
+  @SpeakeasyMetadata({ data: "json, name=Hash" })
   hash?: string;
 
-  @Metadata({ data: "json, name=HashType" })
+  @SpeakeasyMetadata({ data: "json, name=HashType" })
   hashType?: DocumentHashTypeEnum;
 
-  @Metadata({ data: "json, name=LatestVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LatestVersion" })
   latestVersion?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.DocumentParameter })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: DocumentParameter })
   parameters?: DocumentParameter[];
 
-  @Metadata({ data: "json, name=PendingReviewVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PendingReviewVersion" })
   pendingReviewVersion?: string;
 
-  @Metadata({ data: "json, name=PlatformTypes" })
+  @SpeakeasyMetadata({ data: "json, name=PlatformTypes" })
   platformTypes?: PlatformTypeEnum[];
 
-  @Metadata({ data: "json, name=Requires", elemType: shared.DocumentRequires })
+  @SpeakeasyMetadata({ data: "json, name=Requires", elemType: DocumentRequires })
   requires?: DocumentRequires[];
 
-  @Metadata({ data: "json, name=ReviewInformation", elemType: shared.ReviewInformation })
+  @SpeakeasyMetadata({ data: "json, name=ReviewInformation", elemType: ReviewInformation })
   reviewInformation?: ReviewInformation[];
 
-  @Metadata({ data: "json, name=ReviewStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ReviewStatus" })
   reviewStatus?: ReviewStatusEnum;
 
-  @Metadata({ data: "json, name=SchemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersion" })
   schemaVersion?: string;
 
-  @Metadata({ data: "json, name=Sha1" })
+  @SpeakeasyMetadata({ data: "json, name=Sha1" })
   sha1?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: DocumentStatusEnum;
 
-  @Metadata({ data: "json, name=StatusInformation" })
+  @SpeakeasyMetadata({ data: "json, name=StatusInformation" })
   statusInformation?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType?: string;
 
-  @Metadata({ data: "json, name=VersionName" })
+  @SpeakeasyMetadata({ data: "json, name=VersionName" })
   versionName?: string;
 }

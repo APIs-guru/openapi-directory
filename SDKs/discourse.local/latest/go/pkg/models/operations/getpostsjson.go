@@ -5,10 +5,6 @@ type GetPostsJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetPostsJSONRequest struct {
-	Headers GetPostsJSONHeaders
-}
-
 type GetPostsJSON200ApplicationJSONLatestPostsActionsSummary struct {
 	CanAct *bool  `json:"can_act,omitempty"`
 	ID     *int64 `json:"id,omitempty"`
@@ -69,6 +65,10 @@ type GetPostsJSON200ApplicationJSONLatestPosts struct {
 
 type GetPostsJSON200ApplicationJSON struct {
 	LatestPosts []GetPostsJSON200ApplicationJSONLatestPosts `json:"latest_posts,omitempty"`
+}
+
+type GetPostsJSONRequest struct {
+	Headers GetPostsJSONHeaders
 }
 
 type GetPostsJSONResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// HistogramBucket
+// A bucket of a histogram.
 type HistogramBucket struct {
 	Count *string  `json:"count,omitempty"`
 	Max   *float64 `json:"max,omitempty"`

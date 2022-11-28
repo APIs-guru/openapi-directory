@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BatchGeneratePdfV1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=template_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=template_id" })
   templateId: string;
 }
 
 
 export class BatchGeneratePdfV1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
-
-export class BatchGeneratePdfV1Request extends SpeakeasyBase {
-  @Metadata()
-  pathParams: BatchGeneratePdfV1PathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: Map<string, any>[];
-
-  @Metadata()
-  security: BatchGeneratePdfV1Security;
-}
-
 export enum BatchGeneratePdfV1CreateSubmissionResponseStatusEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class BatchGeneratePdfV1CreateSubmissionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: BatchGeneratePdfV1CreateSubmissionResponseStatusEnum;
 
-  @Metadata({ data: "json, name=submission" })
+  @SpeakeasyMetadata({ data: "json, name=submission" })
   submission: shared.Submission;
 }
 
 
+export class BatchGeneratePdfV1Request extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: BatchGeneratePdfV1PathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: Map<string, any>[];
+
+  @SpeakeasyMetadata()
+  security: BatchGeneratePdfV1Security;
+}
+
+
 export class BatchGeneratePdfV1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata({ elemType: operations.BatchGeneratePdfV1CreateSubmissionResponse })
+  @SpeakeasyMetadata({ elemType: BatchGeneratePdfV1CreateSubmissionResponse })
   createSubmissionResponses?: BatchGeneratePdfV1CreateSubmissionResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.InvalidRequest })
+  @SpeakeasyMetadata({ elemType: shared.InvalidRequest })
   invalidRequests?: shared.InvalidRequest[];
 }

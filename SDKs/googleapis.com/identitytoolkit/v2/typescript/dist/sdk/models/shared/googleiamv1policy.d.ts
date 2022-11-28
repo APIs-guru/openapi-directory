@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV1AuditConfig } from "./googleiamv1auditconfig";
 import { GoogleIamV1Binding } from "./googleiamv1binding";
 /**

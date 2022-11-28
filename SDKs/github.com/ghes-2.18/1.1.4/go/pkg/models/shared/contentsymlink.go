@@ -6,6 +6,8 @@ type ContentSymlinkLinks struct {
 	Self string `json:"self"`
 }
 
+// ContentSymlink
+// An object describing a symlink
 type ContentSymlink struct {
 	Links       ContentSymlinkLinks `json:"_links"`
 	DownloadURL string              `json:"download_url"`

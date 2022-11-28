@@ -8,27 +8,19 @@ type UpdateManagedContactPathParams struct {
 	ContactID int64 `pathParam:"style=simple,explode=false,name=contactId"`
 }
 
-type UpdateManagedContactSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type UpdateManagedContactSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateManagedContactSecurity struct {
-	Option1 *UpdateManagedContactSecurityOption1 `security:"option"`
-	Option2 *UpdateManagedContactSecurityOption2 `security:"option"`
-}
-
-type UpdateManagedContactRequest struct {
-	PathParams UpdateManagedContactPathParams
-	Request    shared.ManagedContact `request:"mediaType=application/json"`
-	Security   UpdateManagedContactSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type UpdateManagedContactDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type UpdateManagedContactRequest struct {
+	PathParams UpdateManagedContactPathParams
+	Request    shared.ManagedContactInput `request:"mediaType=application/json"`
+	Security   UpdateManagedContactSecurity
 }
 
 type UpdateManagedContactResponse struct {

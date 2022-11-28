@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Source } from "./source";
+
 
 
 // ExtractionRule
@@ -7,9 +8,9 @@ import { Source } from "./source";
  * Extraction Rule.
 **/
 export class ExtractionRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=extractionRegex" })
+  @SpeakeasyMetadata({ data: "json, name=extractionRegex" })
   extractionRegex?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

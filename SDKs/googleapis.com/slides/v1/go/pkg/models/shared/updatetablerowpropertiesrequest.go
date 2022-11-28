@@ -1,5 +1,7 @@
 package shared
 
+// UpdateTableRowPropertiesRequest
+// Updates the properties of a Table row.
 type UpdateTableRowPropertiesRequest struct {
 	Fields             *string             `json:"fields,omitempty"`
 	ObjectID           *string             `json:"objectId,omitempty"`

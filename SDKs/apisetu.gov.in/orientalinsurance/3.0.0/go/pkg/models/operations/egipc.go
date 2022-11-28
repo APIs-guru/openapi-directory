@@ -28,11 +28,6 @@ type EgipcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type EgipcRequest struct {
-	Request  *EgipcRequestBody `request:"mediaType=application/json"`
-	Security EgipcSecurity
-}
-
 type Egipc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Egipc504ApplicationJSON struct {
 	Error            *Egipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Egipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type EgipcRequest struct {
+	Request  *EgipcRequestBody `request:"mediaType=application/json"`
+	Security EgipcSecurity
 }
 
 type EgipcResponse struct {

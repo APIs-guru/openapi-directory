@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TagLanguageMarshaller } from "./taglanguagemarshaller";
 import { TagTypeMarshaller } from "./tagtypemarshaller";
 export declare class TagMarshaller extends SpeakeasyBase {

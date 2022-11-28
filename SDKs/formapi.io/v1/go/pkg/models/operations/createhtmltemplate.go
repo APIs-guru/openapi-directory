@@ -47,11 +47,6 @@ type CreateHTMLTemplateSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type CreateHTMLTemplateRequest struct {
-	Request  CreateHTMLTemplateCreateHTMLTemplateData `request:"mediaType=application/json"`
-	Security CreateHTMLTemplateSecurity
-}
-
 type CreateHTMLTemplatePendingTemplateExpirationIntervalEnum string
 
 const (
@@ -78,6 +73,11 @@ type CreateHTMLTemplatePendingTemplate struct {
 	SlackWebhookURL           string                                                   `json:"slack_webhook_url"`
 	TemplateType              string                                                   `json:"template_type"`
 	WebhookURL                string                                                   `json:"webhook_url"`
+}
+
+type CreateHTMLTemplateRequest struct {
+	Request  CreateHTMLTemplateCreateHTMLTemplateData `request:"mediaType=application/json"`
+	Security CreateHTMLTemplateSecurity
 }
 
 type CreateHTMLTemplateResponse struct {

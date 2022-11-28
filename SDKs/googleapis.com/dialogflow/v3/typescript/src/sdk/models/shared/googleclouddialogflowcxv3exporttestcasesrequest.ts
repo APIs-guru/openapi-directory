@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnum {
-    DataFormatUnspecified = "DATA_FORMAT_UNSPECIFIED"
-,    Blob = "BLOB"
-,    Json = "JSON"
+    DataFormatUnspecified = "DATA_FORMAT_UNSPECIFIED",
+    Blob = "BLOB",
+    Json = "JSON"
 }
 
 
@@ -12,12 +13,12 @@ export enum GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnum {
  * The request message for TestCases.ExportTestCases.
 **/
 export class GoogleCloudDialogflowCxV3ExportTestCasesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=dataFormat" })
   dataFormat?: GoogleCloudDialogflowCxV3ExportTestCasesRequestDataFormatEnum;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=gcsUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsUri" })
   gcsUri?: string;
 }

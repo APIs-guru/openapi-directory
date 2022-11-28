@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CfgSaveasPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cfgFile" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cfgFile" })
   cfgFile: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firstAgentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firstAgentNum" })
   firstAgentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lastAgentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lastAgentNum" })
   lastAgentNum: number;
 }
 
 
 export class CfgSaveasRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CfgSaveasPathParams;
 }
 
 
 export class CfgSaveasResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cfgSaveas200ApplicationJsonObject?: Map<string, number>;
 }

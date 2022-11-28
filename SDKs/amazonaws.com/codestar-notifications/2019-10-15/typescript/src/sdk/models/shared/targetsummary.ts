@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetStatusEnum } from "./targetstatusenum";
+
 
 
 // TargetSummary
@@ -7,12 +8,12 @@ import { TargetStatusEnum } from "./targetstatusenum";
  * Information about the targets specified for a notification rule.
 **/
 export class TargetSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TargetAddress" })
+  @SpeakeasyMetadata({ data: "json, name=TargetAddress" })
   targetAddress?: string;
 
-  @Metadata({ data: "json, name=TargetStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TargetStatus" })
   targetStatus?: TargetStatusEnum;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType?: string;
 }

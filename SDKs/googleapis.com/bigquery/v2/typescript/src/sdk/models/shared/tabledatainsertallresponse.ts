@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorProto } from "./errorproto";
 
 
+
 export class TableDataInsertAllResponseInsertErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorProto })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ErrorProto })
   errors?: ErrorProto[];
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 }
 
 
 export class TableDataInsertAllResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insertErrors", elemType: shared.TableDataInsertAllResponseInsertErrors })
+  @SpeakeasyMetadata({ data: "json, name=insertErrors", elemType: TableDataInsertAllResponseInsertErrors })
   insertErrors?: TableDataInsertAllResponseInsertErrors[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

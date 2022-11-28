@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersCreatePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DisplayvideoAdvertisersManualTriggersCreateQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersCreateRequest:
-    path_params: DisplayvideoAdvertisersManualTriggersCreatePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersManualTriggersCreateQueryParams = field(default=None)
-    request: Optional[shared.ManualTrigger] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersManualTriggersCreateSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersManualTriggersCreatePathParams = field()
+    query_params: DisplayvideoAdvertisersManualTriggersCreateQueryParams = field()
+    security: DisplayvideoAdvertisersManualTriggersCreateSecurity = field()
+    request: Optional[shared.ManualTriggerInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersManualTriggersCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     manual_trigger: Optional[shared.ManualTrigger] = field(default=None)
-    status_code: int = field(default=None)
     

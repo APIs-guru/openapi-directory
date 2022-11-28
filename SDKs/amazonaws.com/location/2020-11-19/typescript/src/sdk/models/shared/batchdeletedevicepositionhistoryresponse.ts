@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchDeleteDevicePositionHistoryError } from "./batchdeletedevicepositionhistoryerror";
 
 
+
 export class BatchDeleteDevicePositionHistoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.BatchDeleteDevicePositionHistoryError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchDeleteDevicePositionHistoryError })
   errors: BatchDeleteDevicePositionHistoryError[];
 }

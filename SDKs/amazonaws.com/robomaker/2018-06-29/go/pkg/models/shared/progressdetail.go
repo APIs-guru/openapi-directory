@@ -1,5 +1,7 @@
 package shared
 
+// ProgressDetail
+// Information about the progress of a deployment job.
 type ProgressDetail struct {
 	CurrentProgress               *RobotDeploymentStepEnum `json:"currentProgress,omitempty"`
 	EstimatedTimeRemainingSeconds *int64                   `json:"estimatedTimeRemainingSeconds,omitempty"`

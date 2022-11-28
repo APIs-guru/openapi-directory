@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ZebraGetQueryParams = /** @class */ (function (_super) {
     __extends(ZebraGetQueryParams, _super);
@@ -30,23 +30,23 @@ var ZebraGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], ZebraGetQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", Number)
     ], ZebraGetQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=showlabel" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showlabel" }),
         __metadata("design:type", Boolean)
     ], ZebraGetQueryParams.prototype, "showlabel", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=value" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=value" }),
         __metadata("design:type", String)
     ], ZebraGetQueryParams.prototype, "value", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], ZebraGetQueryParams.prototype, "width", void 0);
     return ZebraGetQueryParams;
@@ -58,7 +58,7 @@ var ZebraGetSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeQueryApiKey)
     ], ZebraGetSecurity.prototype, "queryApiKey", void 0);
     return ZebraGetSecurity;
@@ -70,11 +70,11 @@ var ZebraGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ZebraGetQueryParams)
     ], ZebraGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ZebraGetSecurity)
     ], ZebraGetRequest.prototype, "security", void 0);
     return ZebraGetRequest;
@@ -86,15 +86,15 @@ var ZebraGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ZebraGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ZebraGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ZebraGetResponse.prototype, "zebraGet200ImagePngBinaryString", void 0);
     return ZebraGetResponse;

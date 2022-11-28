@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResolverEndpointDirectionEnum } from "./resolverendpointdirectionenum";
 import { ResolverEndpointStatusEnum } from "./resolverendpointstatusenum";
 /**

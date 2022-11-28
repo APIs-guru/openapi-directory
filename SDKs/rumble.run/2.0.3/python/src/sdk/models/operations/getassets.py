@@ -10,18 +10,18 @@ class GetAssetsQueryParams:
 
 @dataclass
 class GetAssetsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAssetsRequest:
-    query_params: GetAssetsQueryParams = field(default=None)
-    security: GetAssetsSecurity = field(default=None)
+    query_params: GetAssetsQueryParams = field()
+    security: GetAssetsSecurity = field()
     
 
 @dataclass
 class GetAssetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     assets: Optional[List[shared.Asset]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

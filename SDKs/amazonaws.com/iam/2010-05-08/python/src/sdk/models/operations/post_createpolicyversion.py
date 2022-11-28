@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreatePolicyVersionActionEnum(str, Enum):
     CREATE_POLICY_VERSION = "CreatePolicyVersion"
@@ -10,8 +14,8 @@ class PostCreatePolicyVersionVersionEnum(str, Enum):
 
 @dataclass
 class PostCreatePolicyVersionQueryParams:
-    action: PostCreatePolicyVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreatePolicyVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreatePolicyVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreatePolicyVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreatePolicyVersionHeaders:
 
 @dataclass
 class PostCreatePolicyVersionRequest:
-    query_params: PostCreatePolicyVersionQueryParams = field(default=None)
-    headers: PostCreatePolicyVersionHeaders = field(default=None)
+    headers: PostCreatePolicyVersionHeaders = field()
+    query_params: PostCreatePolicyVersionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreatePolicyVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

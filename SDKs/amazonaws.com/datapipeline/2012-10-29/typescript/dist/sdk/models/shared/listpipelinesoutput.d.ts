@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PipelineIdName } from "./pipelineidname";
 /**
  * Contains the output of ListPipelines.

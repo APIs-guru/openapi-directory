@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutProductsProductIdFieldsFieldIdJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=field_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=field_id" })
   fieldId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=product_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=product_id" })
   productId: number;
 }
 
 
 export class PutProductsProductIdFieldsFieldIdJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 }
 
 
 export class PutProductsProductIdFieldsFieldIdJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutProductsProductIdFieldsFieldIdJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutProductsProductIdFieldsFieldIdJsonQueryParams;
 }
 
 
 export class PutProductsProductIdFieldsFieldIdJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   productCustomField?: shared.ProductCustomField;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

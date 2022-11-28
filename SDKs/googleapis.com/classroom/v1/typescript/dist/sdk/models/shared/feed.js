@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CourseRosterChangesInfo } from "./courserosterchangesinfo";
 import { CourseWorkChangesInfo } from "./courseworkchangesinfo";
 export var FeedFeedTypeEnum;
@@ -42,15 +42,15 @@ var Feed = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=courseRosterChangesInfo" }),
+        SpeakeasyMetadata({ data: "json, name=courseRosterChangesInfo" }),
         __metadata("design:type", CourseRosterChangesInfo)
     ], Feed.prototype, "courseRosterChangesInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseWorkChangesInfo" }),
+        SpeakeasyMetadata({ data: "json, name=courseWorkChangesInfo" }),
         __metadata("design:type", CourseWorkChangesInfo)
     ], Feed.prototype, "courseWorkChangesInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=feedType" }),
+        SpeakeasyMetadata({ data: "json, name=feedType" }),
         __metadata("design:type", String)
     ], Feed.prototype, "feedType", void 0);
     return Feed;

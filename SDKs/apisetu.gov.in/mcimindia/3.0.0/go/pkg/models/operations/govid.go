@@ -29,11 +29,6 @@ type GovidSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type GovidRequest struct {
-	Request  *GovidRequestBody `request:"mediaType=application/json"`
-	Security GovidSecurity
-}
-
 type Govid400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Govid504ApplicationJSON struct {
 	Error            *Govid504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Govid504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type GovidRequest struct {
+	Request  *GovidRequestBody `request:"mediaType=application/json"`
+	Security GovidSecurity
 }
 
 type GovidResponse struct {

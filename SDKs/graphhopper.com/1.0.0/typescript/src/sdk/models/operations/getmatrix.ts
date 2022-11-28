@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetMatrixCurbsideEnum {
-    Any = "any"
-,    Right = "right"
-,    Left = "left"
+    Any = "any",
+    Right = "right",
+    Left = "left"
 }
 
 export enum GetMatrixFromCurbsideEnum {
-    Any = "any"
-,    Right = "right"
-,    Left = "left"
+    Any = "any",
+    Right = "right",
+    Left = "left"
 }
 
 export enum GetMatrixToCurbsideEnum {
-    Any = "any"
-,    Right = "right"
-,    Left = "left"
+    Any = "any",
+    Right = "right",
+    Left = "left"
 }
 
 
 export class GetMatrixQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=curbside" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=curbside" })
   curbside?: GetMatrixCurbsideEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fail_fast" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fail_fast" })
   failFast?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from_curbside" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from_curbside" })
   fromCurbside?: GetMatrixFromCurbsideEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from_point" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from_point" })
   fromPoint?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from_point_hint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from_point_hint" })
   fromPointHint?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=out_array" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=out_array" })
   outArray?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=point" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point" })
   point?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=point_hint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point_hint" })
   pointHint?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=snap_prevention" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=snap_prevention" })
   snapPrevention?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to_curbside" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to_curbside" })
   toCurbside?: GetMatrixToCurbsideEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to_point" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to_point" })
   toPoint?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to_point_hint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to_point_hint" })
   toPointHint?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=turn_costs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=turn_costs" })
   turnCosts?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vehicle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicle" })
   vehicle?: shared.VehicleProfileIdEnum;
 }
 
 
 export class GetMatrixRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMatrixQueryParams;
 }
 
 
 export class GetMatrixResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ghError?: shared.GhError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   matrixResponse?: shared.MatrixResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

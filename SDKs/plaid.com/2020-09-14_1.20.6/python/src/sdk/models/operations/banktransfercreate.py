@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class BankTransferCreateRequest:
-    request: shared.BankTransferCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.BankTransferCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BankTransferCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bank_transfer_create_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

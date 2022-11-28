@@ -1,27 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostFloatingIpsIdActionsChangeDnsPtrPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostFloatingIpsIdActionsChangeDnsPtrChangeDnsptrRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dns_ptr" })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr" })
   dnsPtr: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
-}
-
-
-export class PostFloatingIpsIdActionsChangeDnsPtrRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostFloatingIpsIdActionsChangeDnsPtrPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostFloatingIpsIdActionsChangeDnsPtrChangeDnsptrRequest;
 }
 
 
@@ -30,69 +22,78 @@ export class PostFloatingIpsIdActionsChangeDnsPtrRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostFloatingIpsIdActionsChangeDnsPtrActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionResources })
   resources: PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostFloatingIpsIdActionsChangeDnsPtrActionResponseActionStatusEnum;
 }
 
 
 export class PostFloatingIpsIdActionsChangeDnsPtrActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostFloatingIpsIdActionsChangeDnsPtrActionResponseAction;
 }
 
 
+export class PostFloatingIpsIdActionsChangeDnsPtrRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostFloatingIpsIdActionsChangeDnsPtrPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostFloatingIpsIdActionsChangeDnsPtrChangeDnsptrRequest;
+}
+
+
 export class PostFloatingIpsIdActionsChangeDnsPtrResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostFloatingIpsIdActionsChangeDnsPtrActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,36 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LaunchProfileInitializationActiveDirectory } from "./launchprofileinitializationactivedirectory";
 import { LaunchProfilePlatformEnum } from "./launchprofileplatformenum";
 import { LaunchProfileInitializationScript } from "./launchprofileinitializationscript";
-import { LaunchProfileInitializationScript } from "./launchprofileinitializationscript";
+
 
 
 export class LaunchProfileInitialization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=activeDirectory" })
   activeDirectory?: LaunchProfileInitializationActiveDirectory;
 
-  @Metadata({ data: "json, name=ec2SecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=ec2SecurityGroupIds" })
   ec2SecurityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=launchProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=launchProfileId" })
   launchProfileId?: string;
 
-  @Metadata({ data: "json, name=launchProfileProtocolVersion" })
+  @SpeakeasyMetadata({ data: "json, name=launchProfileProtocolVersion" })
   launchProfileProtocolVersion?: string;
 
-  @Metadata({ data: "json, name=launchPurpose" })
+  @SpeakeasyMetadata({ data: "json, name=launchPurpose" })
   launchPurpose?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: LaunchProfilePlatformEnum;
 
-  @Metadata({ data: "json, name=systemInitializationScripts", elemType: shared.LaunchProfileInitializationScript })
+  @SpeakeasyMetadata({ data: "json, name=systemInitializationScripts", elemType: LaunchProfileInitializationScript })
   systemInitializationScripts?: LaunchProfileInitializationScript[];
 
-  @Metadata({ data: "json, name=userInitializationScripts", elemType: shared.LaunchProfileInitializationScript })
+  @SpeakeasyMetadata({ data: "json, name=userInitializationScripts", elemType: LaunchProfileInitializationScript })
   userInitializationScripts?: LaunchProfileInitializationScript[];
 }

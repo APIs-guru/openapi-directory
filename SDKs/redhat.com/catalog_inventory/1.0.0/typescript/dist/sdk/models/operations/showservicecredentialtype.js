@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ShowServiceCredentialTypePathParams = /** @class */ (function (_super) {
     __extends(ShowServiceCredentialTypePathParams, _super);
@@ -30,7 +30,7 @@ var ShowServiceCredentialTypePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], ShowServiceCredentialTypePathParams.prototype, "id", void 0);
     return ShowServiceCredentialTypePathParams;
@@ -42,7 +42,7 @@ var ShowServiceCredentialTypeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ShowServiceCredentialTypePathParams)
     ], ShowServiceCredentialTypeRequest.prototype, "pathParams", void 0);
     return ShowServiceCredentialTypeRequest;
@@ -54,19 +54,19 @@ var ShowServiceCredentialTypeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ShowServiceCredentialTypeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorNotFound)
     ], ShowServiceCredentialTypeResponse.prototype, "errorNotFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ServiceCredentialType)
     ], ShowServiceCredentialTypeResponse.prototype, "serviceCredentialType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ShowServiceCredentialTypeResponse.prototype, "statusCode", void 0);
     return ShowServiceCredentialTypeResponse;

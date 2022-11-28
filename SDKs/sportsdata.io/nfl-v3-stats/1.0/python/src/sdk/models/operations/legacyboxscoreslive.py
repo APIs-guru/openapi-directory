@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class LegacyBoxScoresLiveFormatEnum(str, Enum):
     XML = "XML"
@@ -8,17 +9,17 @@ class LegacyBoxScoresLiveFormatEnum(str, Enum):
 
 @dataclass
 class LegacyBoxScoresLivePathParams:
-    format: LegacyBoxScoresLiveFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: LegacyBoxScoresLiveFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LegacyBoxScoresLiveRequest:
-    path_params: LegacyBoxScoresLivePathParams = field(default=None)
+    path_params: LegacyBoxScoresLivePathParams = field()
     
 
 @dataclass
 class LegacyBoxScoresLiveResponse:
+    content_type: str = field()
+    status_code: int = field()
     box_scores: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

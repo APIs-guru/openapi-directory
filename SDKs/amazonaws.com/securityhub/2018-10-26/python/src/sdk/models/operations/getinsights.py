@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,26 +28,26 @@ class GetInsightsHeaders:
 @dataclass_json
 @dataclass
 class GetInsightsRequestBody:
-    insight_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InsightArns' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    insight_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InsightArns') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class GetInsightsRequest:
-    query_params: GetInsightsQueryParams = field(default=None)
-    headers: GetInsightsHeaders = field(default=None)
-    request: GetInsightsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetInsightsHeaders = field()
+    query_params: GetInsightsQueryParams = field()
+    request: GetInsightsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetInsightsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_insights_response: Optional[shared.GetInsightsResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

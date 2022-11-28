@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChildPolicyEnum } from "./childpolicyenum";
 import { TaskList } from "./tasklist";
 import { WorkflowType } from "./workflowtype";
+
 
 
 // WorkflowExecutionContinuedAsNewEventAttributes
@@ -9,36 +10,36 @@ import { WorkflowType } from "./workflowtype";
  * Provides the details of the <code>WorkflowExecutionContinuedAsNew</code> event.
 **/
 export class WorkflowExecutionContinuedAsNewEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=childPolicy" })
   childPolicy: ChildPolicyEnum;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 
-  @Metadata({ data: "json, name=executionStartToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=executionStartToCloseTimeout" })
   executionStartToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=lambdaRole" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaRole" })
   lambdaRole?: string;
 
-  @Metadata({ data: "json, name=newExecutionRunId" })
+  @SpeakeasyMetadata({ data: "json, name=newExecutionRunId" })
   newExecutionRunId: string;
 
-  @Metadata({ data: "json, name=tagList" })
+  @SpeakeasyMetadata({ data: "json, name=tagList" })
   tagList?: string[];
 
-  @Metadata({ data: "json, name=taskList" })
+  @SpeakeasyMetadata({ data: "json, name=taskList" })
   taskList: TaskList;
 
-  @Metadata({ data: "json, name=taskPriority" })
+  @SpeakeasyMetadata({ data: "json, name=taskPriority" })
   taskPriority?: string;
 
-  @Metadata({ data: "json, name=taskStartToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=taskStartToCloseTimeout" })
   taskStartToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=workflowType" })
+  @SpeakeasyMetadata({ data: "json, name=workflowType" })
   workflowType: WorkflowType;
 }

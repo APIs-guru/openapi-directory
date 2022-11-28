@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConformancePackComplianceTypeEnum } from "./conformancepackcompliancetypeenum";
+
 
 
 // AggregateConformancePackComplianceFilters
@@ -7,15 +8,15 @@ import { ConformancePackComplianceTypeEnum } from "./conformancepackcompliancety
  * Filters the conformance packs based on an account ID, region, compliance type, and the name of the conformance pack.
 **/
 export class AggregateConformancePackComplianceFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=AwsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=AwsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: ConformancePackComplianceTypeEnum;
 
-  @Metadata({ data: "json, name=ConformancePackName" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackName" })
   conformancePackName?: string;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import profiletime
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProfileTimesResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    profile_times: List[profiletime.ProfileTime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'profileTimes' }})
+    r"""ListProfileTimesResponse
+    The structure representing the listProfileTimesResponse.
+    """
+    
+    profile_times: List[ProfileTime] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('profileTimes') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

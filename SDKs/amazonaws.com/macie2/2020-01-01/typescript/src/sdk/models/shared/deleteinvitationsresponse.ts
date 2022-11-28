@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnprocessedAccount } from "./unprocessedaccount";
 
 
+
 export class DeleteInvitationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=unprocessedAccounts", elemType: shared.UnprocessedAccount })
+  @SpeakeasyMetadata({ data: "json, name=unprocessedAccounts", elemType: UnprocessedAccount })
   unprocessedAccounts?: UnprocessedAccount[];
 }

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TerminateRequest } from "./terminaterequest";
 
 
+
 export class TerminateWorkspacesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TerminateWorkspaceRequests", elemType: shared.TerminateRequest })
+  @SpeakeasyMetadata({ data: "json, name=TerminateWorkspaceRequests", elemType: TerminateRequest })
   terminateWorkspaceRequests: TerminateRequest[];
 }

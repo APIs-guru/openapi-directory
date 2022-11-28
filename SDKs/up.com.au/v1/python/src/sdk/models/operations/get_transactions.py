@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -18,12 +18,12 @@ class GetTransactionsQueryParams:
 
 @dataclass
 class GetTransactionsRequest:
-    query_params: GetTransactionsQueryParams = field(default=None)
+    query_params: GetTransactionsQueryParams = field()
     
 
 @dataclass
 class GetTransactionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_transactions_response: Optional[shared.ListTransactionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

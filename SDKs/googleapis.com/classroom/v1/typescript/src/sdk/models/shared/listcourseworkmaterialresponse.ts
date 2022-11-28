@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CourseWorkMaterial } from "./courseworkmaterial";
+
 
 
 // ListCourseWorkMaterialResponse
@@ -8,9 +8,9 @@ import { CourseWorkMaterial } from "./courseworkmaterial";
  * Response when listing course work material.
 **/
 export class ListCourseWorkMaterialResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=courseWorkMaterial", elemType: shared.CourseWorkMaterial })
+  @SpeakeasyMetadata({ data: "json, name=courseWorkMaterial", elemType: CourseWorkMaterial })
   courseWorkMaterial?: CourseWorkMaterial[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

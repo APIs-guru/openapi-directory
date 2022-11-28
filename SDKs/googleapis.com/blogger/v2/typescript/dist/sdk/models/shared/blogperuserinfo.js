@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var BlogPerUserInfoRoleEnum;
 (function (BlogPerUserInfoRoleEnum) {
     BlogPerUserInfoRoleEnum["ViewTypeUnspecified"] = "VIEW_TYPE_UNSPECIFIED";
@@ -36,27 +36,27 @@ var BlogPerUserInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=blogId" }),
+        SpeakeasyMetadata({ data: "json, name=blogId" }),
         __metadata("design:type", String)
     ], BlogPerUserInfo.prototype, "blogId", void 0);
     __decorate([
-        Metadata({ data: "json, name=hasAdminAccess" }),
+        SpeakeasyMetadata({ data: "json, name=hasAdminAccess" }),
         __metadata("design:type", Boolean)
     ], BlogPerUserInfo.prototype, "hasAdminAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], BlogPerUserInfo.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=photosAlbumKey" }),
+        SpeakeasyMetadata({ data: "json, name=photosAlbumKey" }),
         __metadata("design:type", String)
     ], BlogPerUserInfo.prototype, "photosAlbumKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=role" }),
+        SpeakeasyMetadata({ data: "json, name=role" }),
         __metadata("design:type", String)
     ], BlogPerUserInfo.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], BlogPerUserInfo.prototype, "userId", void 0);
     return BlogPerUserInfo;

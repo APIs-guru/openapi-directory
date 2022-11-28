@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesDisruptedPoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalInformation" })
+  @SpeakeasyMetadata({ data: "json, name=additionalInformation" })
   additionalInformation?: string;
 
-  @Metadata({ data: "json, name=appearance" })
+  @SpeakeasyMetadata({ data: "json, name=appearance" })
   appearance?: string;
 
-  @Metadata({ data: "json, name=atcoCode" })
+  @SpeakeasyMetadata({ data: "json, name=atcoCode" })
   atcoCode?: string;
 
-  @Metadata({ data: "json, name=commonName" })
+  @SpeakeasyMetadata({ data: "json, name=commonName" })
   commonName?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fromDate" })
+  @SpeakeasyMetadata({ data: "json, name=fromDate" })
   fromDate?: Date;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=stationAtcoCode" })
+  @SpeakeasyMetadata({ data: "json, name=stationAtcoCode" })
   stationAtcoCode?: string;
 
-  @Metadata({ data: "json, name=toDate" })
+  @SpeakeasyMetadata({ data: "json, name=toDate" })
   toDate?: Date;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

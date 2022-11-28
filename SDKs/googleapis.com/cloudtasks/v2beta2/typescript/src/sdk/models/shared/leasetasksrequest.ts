@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LeaseTasksRequestResponseViewEnum {
-    ViewUnspecified = "VIEW_UNSPECIFIED"
-,    Basic = "BASIC"
-,    Full = "FULL"
+    ViewUnspecified = "VIEW_UNSPECIFIED",
+    Basic = "BASIC",
+    Full = "FULL"
 }
 
 
@@ -12,15 +13,15 @@ export enum LeaseTasksRequestResponseViewEnum {
  * Request message for leasing tasks using LeaseTasks.
 **/
 export class LeaseTasksRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=leaseDuration" })
+  @SpeakeasyMetadata({ data: "json, name=leaseDuration" })
   leaseDuration?: string;
 
-  @Metadata({ data: "json, name=maxTasks" })
+  @SpeakeasyMetadata({ data: "json, name=maxTasks" })
   maxTasks?: number;
 
-  @Metadata({ data: "json, name=responseView" })
+  @SpeakeasyMetadata({ data: "json, name=responseView" })
   responseView?: LeaseTasksRequestResponseViewEnum;
 }

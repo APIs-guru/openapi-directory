@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryAspsGetPathParams:
-    code_id: int = field(default=None, metadata={'path_param': { 'field_name': 'codeId', 'style': 'simple', 'explode': False }})
-    user_key: str = field(default=None, metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
+    code_id: int = field(metadata={'path_param': { 'field_name': 'codeId', 'style': 'simple', 'explode': False }})
+    user_key: str = field(metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DirectoryAspsGetQueryParams:
 
 @dataclass
 class DirectoryAspsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryAspsGetRequest:
-    path_params: DirectoryAspsGetPathParams = field(default=None)
-    query_params: DirectoryAspsGetQueryParams = field(default=None)
-    security: DirectoryAspsGetSecurity = field(default=None)
+    path_params: DirectoryAspsGetPathParams = field()
+    query_params: DirectoryAspsGetQueryParams = field()
+    security: DirectoryAspsGetSecurity = field()
     
 
 @dataclass
 class DirectoryAspsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     asp: Optional[shared.Asp] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

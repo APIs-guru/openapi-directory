@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportDataSource } from "./importdatasource";
 import { ImportOptions } from "./importoptions";
 import { ImportJobSubmitter } from "./importjobsubmitter";
+
 
 
 // TableDataImportJobMetadata
@@ -9,15 +10,15 @@ import { ImportJobSubmitter } from "./importjobsubmitter";
  * The metadata associated with the table data import job that was submitted.
 **/
 export class TableDataImportJobMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource: ImportDataSource;
 
-  @Metadata({ data: "json, name=importOptions" })
+  @SpeakeasyMetadata({ data: "json, name=importOptions" })
   importOptions: ImportOptions;
 
-  @Metadata({ data: "json, name=submitTime" })
+  @SpeakeasyMetadata({ data: "json, name=submitTime" })
   submitTime: Date;
 
-  @Metadata({ data: "json, name=submitter" })
+  @SpeakeasyMetadata({ data: "json, name=submitter" })
   submitter: ImportJobSubmitter;
 }

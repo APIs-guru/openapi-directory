@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutUsersMeNotificationSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abuseAsModerator" })
+  @SpeakeasyMetadata({ data: "json, name=abuseAsModerator" })
   abuseAsModerator?: number;
 
-  @Metadata({ data: "json, name=autoInstanceFollowing" })
+  @SpeakeasyMetadata({ data: "json, name=autoInstanceFollowing" })
   autoInstanceFollowing?: number;
 
-  @Metadata({ data: "json, name=blacklistOnMyVideo" })
+  @SpeakeasyMetadata({ data: "json, name=blacklistOnMyVideo" })
   blacklistOnMyVideo?: number;
 
-  @Metadata({ data: "json, name=commentMention" })
+  @SpeakeasyMetadata({ data: "json, name=commentMention" })
   commentMention?: number;
 
-  @Metadata({ data: "json, name=myVideoImportFinished" })
+  @SpeakeasyMetadata({ data: "json, name=myVideoImportFinished" })
   myVideoImportFinished?: number;
 
-  @Metadata({ data: "json, name=myVideoPublished" })
+  @SpeakeasyMetadata({ data: "json, name=myVideoPublished" })
   myVideoPublished?: number;
 
-  @Metadata({ data: "json, name=newCommentOnMyVideo" })
+  @SpeakeasyMetadata({ data: "json, name=newCommentOnMyVideo" })
   newCommentOnMyVideo?: number;
 
-  @Metadata({ data: "json, name=newFollow" })
+  @SpeakeasyMetadata({ data: "json, name=newFollow" })
   newFollow?: number;
 
-  @Metadata({ data: "json, name=newInstanceFollower" })
+  @SpeakeasyMetadata({ data: "json, name=newInstanceFollower" })
   newInstanceFollower?: number;
 
-  @Metadata({ data: "json, name=newUserRegistration" })
+  @SpeakeasyMetadata({ data: "json, name=newUserRegistration" })
   newUserRegistration?: number;
 
-  @Metadata({ data: "json, name=newVideoFromSubscription" })
+  @SpeakeasyMetadata({ data: "json, name=newVideoFromSubscription" })
   newVideoFromSubscription?: number;
 
-  @Metadata({ data: "json, name=videoAutoBlacklistAsModerator" })
+  @SpeakeasyMetadata({ data: "json, name=videoAutoBlacklistAsModerator" })
   videoAutoBlacklistAsModerator?: number;
 }
 
 
 export class PutUsersMeNotificationSettingsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class PutUsersMeNotificationSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PutUsersMeNotificationSettingsRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutUsersMeNotificationSettingsSecurity;
 }
 
 
 export class PutUsersMeNotificationSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

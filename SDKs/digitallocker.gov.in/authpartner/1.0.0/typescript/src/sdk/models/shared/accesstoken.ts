@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AccessTokenGrantTypeEnum {
     AuthorizationCode = "authorization_code"
@@ -6,21 +7,21 @@ export enum AccessTokenGrantTypeEnum {
 
 
 export class AccessToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId: string;
 
-  @Metadata({ data: "json, name=client_secret" })
+  @SpeakeasyMetadata({ data: "json, name=client_secret" })
   clientSecret: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=code_verifier" })
+  @SpeakeasyMetadata({ data: "json, name=code_verifier" })
   codeVerifier?: string;
 
-  @Metadata({ data: "json, name=grant_type" })
+  @SpeakeasyMetadata({ data: "json, name=grant_type" })
   grantType: AccessTokenGrantTypeEnum;
 
-  @Metadata({ data: "json, name=redirect_uri" })
+  @SpeakeasyMetadata({ data: "json, name=redirect_uri" })
   redirectUri?: string;
 }

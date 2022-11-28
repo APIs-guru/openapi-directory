@@ -1,5 +1,7 @@
 package shared
 
+// SandboxCardInfo
+// Sandbox card information
 type SandboxCardInfo struct {
 	AvailableBalance *float64 `json:"availableBalance,omitempty"`
 	CreditLimit      *float64 `json:"creditLimit,omitempty"`

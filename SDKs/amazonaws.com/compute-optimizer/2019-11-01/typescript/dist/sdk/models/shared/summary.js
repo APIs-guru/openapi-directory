@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingEnum } from "./findingenum";
+import { ReasonCodeSummary } from "./reasoncodesummary";
 // Summary
 /**
  * The summary of a recommendation.
@@ -35,15 +35,15 @@ var Summary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Summary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=reasonCodeSummaries", elemType: shared.ReasonCodeSummary }),
+        SpeakeasyMetadata({ data: "json, name=reasonCodeSummaries", elemType: ReasonCodeSummary }),
         __metadata("design:type", Array)
     ], Summary.prototype, "reasonCodeSummaries", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "value", void 0);
     return Summary;

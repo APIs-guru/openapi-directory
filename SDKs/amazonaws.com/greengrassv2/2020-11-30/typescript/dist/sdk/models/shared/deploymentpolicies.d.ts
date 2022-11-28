@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentComponentUpdatePolicy } from "./deploymentcomponentupdatepolicy";
 import { DeploymentConfigurationValidationPolicy } from "./deploymentconfigurationvalidationpolicy";
 import { DeploymentFailureHandlingPolicyEnum } from "./deploymentfailurehandlingpolicyenum";

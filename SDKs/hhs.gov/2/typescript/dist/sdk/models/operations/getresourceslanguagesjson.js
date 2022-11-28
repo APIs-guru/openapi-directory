@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesLanguagesJsonQueryParams = /** @class */ (function (_super) {
     __extends(GetResourcesLanguagesJsonQueryParams, _super);
@@ -30,15 +30,15 @@ var GetResourcesLanguagesJsonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesLanguagesJsonQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesLanguagesJsonQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesLanguagesJsonQueryParams.prototype, "sort", void 0);
     return GetResourcesLanguagesJsonQueryParams;
@@ -50,7 +50,7 @@ var GetResourcesLanguagesJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesLanguagesJsonQueryParams)
     ], GetResourcesLanguagesJsonRequest.prototype, "queryParams", void 0);
     return GetResourcesLanguagesJsonRequest;
@@ -62,15 +62,15 @@ var GetResourcesLanguagesJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesLanguagesJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.LanguageWrapped }),
+        SpeakeasyMetadata({ elemType: shared.LanguageWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesLanguagesJsonResponse.prototype, "languageWrappeds", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesLanguagesJsonResponse.prototype, "statusCode", void 0);
     return GetResourcesLanguagesJsonResponse;

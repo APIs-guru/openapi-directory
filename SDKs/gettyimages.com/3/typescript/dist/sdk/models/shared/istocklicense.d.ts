@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetLicenseNameEnum } from "./assetlicensenameenum";
 export declare class IStockLicense extends SpeakeasyBase {
     credits?: number;

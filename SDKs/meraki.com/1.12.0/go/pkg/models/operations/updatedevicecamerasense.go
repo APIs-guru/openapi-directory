@@ -4,6 +4,8 @@ type UpdateDeviceCameraSensePathParams struct {
 	Serial string `pathParam:"style=simple,explode=false,name=serial"`
 }
 
+// UpdateDeviceCameraSenseRequestBodyAudioDetection
+// The details of the audio detection config.
 type UpdateDeviceCameraSenseRequestBodyAudioDetection struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }

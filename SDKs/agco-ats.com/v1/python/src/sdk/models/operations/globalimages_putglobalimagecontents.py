@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GlobalImagesPutGlobalImageContentsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'ID', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class GlobalImagesPutGlobalImageContentsQueryParams:
 
 @dataclass
 class GlobalImagesPutGlobalImageContentsRequest:
-    path_params: GlobalImagesPutGlobalImageContentsPathParams = field(default=None)
-    query_params: GlobalImagesPutGlobalImageContentsQueryParams = field(default=None)
+    path_params: GlobalImagesPutGlobalImageContentsPathParams = field()
+    query_params: GlobalImagesPutGlobalImageContentsQueryParams = field()
     
 
 @dataclass
 class GlobalImagesPutGlobalImageContentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     system_object: Optional[dict[str, Any]] = field(default=None)
     

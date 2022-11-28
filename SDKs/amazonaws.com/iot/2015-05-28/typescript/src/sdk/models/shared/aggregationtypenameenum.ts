@@ -1,7 +1,8 @@
 
 
+
 export enum AggregationTypeNameEnum {
-    Statistics = "Statistics"
-,    Percentiles = "Percentiles"
-,    Cardinality = "Cardinality"
+    Statistics = "Statistics",
+    Percentiles = "Percentiles",
+    Cardinality = "Cardinality"
 }

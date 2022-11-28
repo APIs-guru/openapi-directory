@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TranscodeSetting
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Transcode Settings
 **/
 export class TranscodeSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabledVideoFormats" })
+  @SpeakeasyMetadata({ data: "json, name=enabledVideoFormats" })
   enabledVideoFormats?: number[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

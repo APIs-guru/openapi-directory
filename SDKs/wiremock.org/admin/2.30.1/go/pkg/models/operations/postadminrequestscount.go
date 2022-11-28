@@ -1,5 +1,7 @@
 package operations
 
+// PostAdminRequestsCountRequestBodyBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminRequestsCountRequestBodyBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -18,12 +20,12 @@ type PostAdminRequestsCountRequestBody struct {
 	URLPattern           *string                                                `json:"urlPattern,omitempty"`
 }
 
-type PostAdminRequestsCountRequest struct {
-	Request PostAdminRequestsCountRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAdminRequestsCount200ApplicationJSON struct {
 	Count *int64 `json:"count,omitempty"`
+}
+
+type PostAdminRequestsCountRequest struct {
+	Request PostAdminRequestsCountRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAdminRequestsCountResponse struct {

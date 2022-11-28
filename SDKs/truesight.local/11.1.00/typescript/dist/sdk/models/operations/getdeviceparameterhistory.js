@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDeviceParameterHistoryPathParams = /** @class */ (function (_super) {
     __extends(GetDeviceParameterHistoryPathParams, _super);
     function GetDeviceParameterHistoryPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
         __metadata("design:type", Number)
     ], GetDeviceParameterHistoryPathParams.prototype, "deviceId", void 0);
     return GetDeviceParameterHistoryPathParams;
@@ -41,23 +41,23 @@ var GetDeviceParameterHistoryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" }),
         __metadata("design:type", Number)
     ], GetDeviceParameterHistoryQueryParams.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=monitorSid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorSid" }),
         __metadata("design:type", String)
     ], GetDeviceParameterHistoryQueryParams.prototype, "monitorSid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=monitorType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorType" }),
         __metadata("design:type", String)
     ], GetDeviceParameterHistoryQueryParams.prototype, "monitorType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameterName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameterName" }),
         __metadata("design:type", String)
     ], GetDeviceParameterHistoryQueryParams.prototype, "parameterName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" }),
         __metadata("design:type", Number)
     ], GetDeviceParameterHistoryQueryParams.prototype, "to", void 0);
     return GetDeviceParameterHistoryQueryParams;
@@ -69,11 +69,11 @@ var GetDeviceParameterHistoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeviceParameterHistoryPathParams)
     ], GetDeviceParameterHistoryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeviceParameterHistoryQueryParams)
     ], GetDeviceParameterHistoryRequest.prototype, "queryParams", void 0);
     return GetDeviceParameterHistoryRequest;
@@ -85,15 +85,15 @@ var GetDeviceParameterHistoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDeviceParameterHistoryResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDeviceParameterHistoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDeviceParameterHistoryResponse.prototype, "statusCode", void 0);
     return GetDeviceParameterHistoryResponse;

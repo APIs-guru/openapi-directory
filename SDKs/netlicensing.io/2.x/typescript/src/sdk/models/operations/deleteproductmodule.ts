@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteProductModulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productModuleNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productModuleNumber" })
   productModuleNumber: string;
 }
 
 
 export class DeleteProductModuleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=forceCascade" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forceCascade" })
   forceCascade?: boolean;
 }
 
 
 export class DeleteProductModuleSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class DeleteProductModuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteProductModulePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteProductModuleQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteProductModuleSecurity;
 }
 
 
 export class DeleteProductModuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   netlicensing?: any;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class RegionPostalCodeAreaPostalCodeRange:
-    begin: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'begin' }})
-    end: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
+    r"""RegionPostalCodeAreaPostalCodeRange
+    A range of postal codes that defines the region area.
+    """
+    
+    begin: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('begin') }})
+    end: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('end') }})
     

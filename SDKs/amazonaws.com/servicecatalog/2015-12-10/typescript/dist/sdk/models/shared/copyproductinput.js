@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CopyProductInput = /** @class */ (function (_super) {
     __extends(CopyProductInput, _super);
     function CopyProductInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], CopyProductInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=CopyOptions" }),
+        SpeakeasyMetadata({ data: "json, name=CopyOptions" }),
         __metadata("design:type", Array)
     ], CopyProductInput.prototype, "copyOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdempotencyToken" }),
+        SpeakeasyMetadata({ data: "json, name=IdempotencyToken" }),
         __metadata("design:type", String)
     ], CopyProductInput.prototype, "idempotencyToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceProductArn" }),
+        SpeakeasyMetadata({ data: "json, name=SourceProductArn" }),
         __metadata("design:type", String)
     ], CopyProductInput.prototype, "sourceProductArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceProvisioningArtifactIdentifiers" }),
+        SpeakeasyMetadata({ data: "json, name=SourceProvisioningArtifactIdentifiers" }),
         __metadata("design:type", Array)
     ], CopyProductInput.prototype, "sourceProvisioningArtifactIdentifiers", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetProductId" }),
+        SpeakeasyMetadata({ data: "json, name=TargetProductId" }),
         __metadata("design:type", String)
     ], CopyProductInput.prototype, "targetProductId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetProductName" }),
+        SpeakeasyMetadata({ data: "json, name=TargetProductName" }),
         __metadata("design:type", String)
     ], CopyProductInput.prototype, "targetProductName", void 0);
     return CopyProductInput;

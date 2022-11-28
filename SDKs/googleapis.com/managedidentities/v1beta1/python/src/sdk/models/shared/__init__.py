@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .attachtrustrequest import *
 from .backup import *
@@ -7,6 +7,8 @@ from .certificate import *
 from .checkmigrationpermissionresponse import *
 from .detachtrustrequest import *
 from .domain import *
+from .domainjoinmachinerequest import *
+from .domainjoinmachineresponse import *
 from .enablemigrationrequest import *
 from .expr import *
 from .extendschemarequest import *

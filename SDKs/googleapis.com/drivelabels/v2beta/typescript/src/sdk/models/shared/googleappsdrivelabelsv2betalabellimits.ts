@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2betaFieldLimits } from "./googleappsdrivelabelsv2betafieldlimits";
+
 
 
 // GoogleAppsDriveLabelsV2betaLabelLimits
@@ -7,24 +8,24 @@ import { GoogleAppsDriveLabelsV2betaFieldLimits } from "./googleappsdrivelabelsv
  * Label constraints governing the structure of a Label; such as, the maximum number of Fields allowed and maximum length of the label title.
 **/
 export class GoogleAppsDriveLabelsV2betaLabelLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldLimits" })
+  @SpeakeasyMetadata({ data: "json, name=fieldLimits" })
   fieldLimits?: GoogleAppsDriveLabelsV2betaFieldLimits;
 
-  @Metadata({ data: "json, name=maxDeletedFields" })
+  @SpeakeasyMetadata({ data: "json, name=maxDeletedFields" })
   maxDeletedFields?: number;
 
-  @Metadata({ data: "json, name=maxDescriptionLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxDescriptionLength" })
   maxDescriptionLength?: number;
 
-  @Metadata({ data: "json, name=maxDraftRevisions" })
+  @SpeakeasyMetadata({ data: "json, name=maxDraftRevisions" })
   maxDraftRevisions?: number;
 
-  @Metadata({ data: "json, name=maxFields" })
+  @SpeakeasyMetadata({ data: "json, name=maxFields" })
   maxFields?: number;
 
-  @Metadata({ data: "json, name=maxTitleLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxTitleLength" })
   maxTitleLength?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

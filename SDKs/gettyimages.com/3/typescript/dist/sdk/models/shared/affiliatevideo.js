@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AffiliateVideoUrls } from "./affiliatevideourls";
 var AffiliateVideo = /** @class */ (function (_super) {
     __extends(AffiliateVideo, _super);
@@ -30,27 +30,27 @@ var AffiliateVideo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=caption" }),
+        SpeakeasyMetadata({ data: "json, name=caption" }),
         __metadata("design:type", String)
     ], AffiliateVideo.prototype, "caption", void 0);
     __decorate([
-        Metadata({ data: "json, name=clip_length" }),
+        SpeakeasyMetadata({ data: "json, name=clip_length" }),
         __metadata("design:type", String)
     ], AffiliateVideo.prototype, "clipLength", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination_url" }),
+        SpeakeasyMetadata({ data: "json, name=destination_url" }),
         __metadata("design:type", String)
     ], AffiliateVideo.prototype, "destinationUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AffiliateVideo.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=preview_urls" }),
+        SpeakeasyMetadata({ data: "json, name=preview_urls" }),
         __metadata("design:type", AffiliateVideoUrls)
     ], AffiliateVideo.prototype, "previewUrls", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], AffiliateVideo.prototype, "title", void 0);
     return AffiliateVideo;

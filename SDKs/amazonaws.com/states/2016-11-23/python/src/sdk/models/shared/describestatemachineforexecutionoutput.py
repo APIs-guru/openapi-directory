@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import loggingconfiguration
-from . import tracingconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeStateMachineForExecutionOutput:
-    definition: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'definition' }})
-    logging_configuration: Optional[loggingconfiguration.LoggingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loggingConfiguration' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    state_machine_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateMachineArn' }})
-    tracing_configuration: Optional[tracingconfiguration.TracingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tracingConfiguration' }})
-    update_date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    definition: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('definition') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    state_machine_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateMachineArn') }})
+    update_date: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateDate'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    logging_configuration: Optional[LoggingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loggingConfiguration') }})
+    tracing_configuration: Optional[TracingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tracingConfiguration') }})
     

@@ -35,23 +35,23 @@ type GetUsersSecurity struct {
 	CookieSid shared.SchemeCookieSid `security:"scheme,type=apiKey,subtype=cookie"`
 }
 
+type GetUsers200ApplicationJSONOutput struct {
+	Count           *int64              `json:"count,omitempty"`
+	CountCurrent    *int64              `json:"count_current,omitempty"`
+	IsLimited       *bool               `json:"is_limited,omitempty"`
+	NextURL         *string             `json:"next_url,omitempty"`
+	QueryDurationMs *int64              `json:"query_duration_ms,omitempty"`
+	Results         []shared.UserOutput `json:"results,omitempty"`
+	URL             *string             `json:"url,omitempty"`
+}
+
 type GetUsersRequest struct {
 	QueryParams GetUsersQueryParams
 	Security    GetUsersSecurity
 }
 
-type GetUsers200ApplicationJSON struct {
-	Count           *int64        `json:"count,omitempty"`
-	CountCurrent    *int64        `json:"count_current,omitempty"`
-	IsLimited       *bool         `json:"is_limited,omitempty"`
-	NextURL         *string       `json:"next_url,omitempty"`
-	QueryDurationMs *int64        `json:"query_duration_ms,omitempty"`
-	Results         []shared.User `json:"results,omitempty"`
-	URL             *string       `json:"url,omitempty"`
-}
-
-type GetUsersResponse struct {
+type GetUsersResponseOutput struct {
 	ContentType                      string
 	StatusCode                       int64
-	GetUsers200ApplicationJSONObject *GetUsers200ApplicationJSON
+	GetUsers200ApplicationJSONObject *GetUsers200ApplicationJSONOutput
 }

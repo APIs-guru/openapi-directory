@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteInstanceEventWindowActionEnum(str, Enum):
     DELETE_INSTANCE_EVENT_WINDOW = "DeleteInstanceEventWindow"
@@ -10,8 +14,8 @@ class PostDeleteInstanceEventWindowVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteInstanceEventWindowQueryParams:
-    action: PostDeleteInstanceEventWindowActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteInstanceEventWindowVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteInstanceEventWindowActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteInstanceEventWindowVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteInstanceEventWindowHeaders:
 
 @dataclass
 class PostDeleteInstanceEventWindowRequest:
-    query_params: PostDeleteInstanceEventWindowQueryParams = field(default=None)
-    headers: PostDeleteInstanceEventWindowHeaders = field(default=None)
+    headers: PostDeleteInstanceEventWindowHeaders = field()
+    query_params: PostDeleteInstanceEventWindowQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteInstanceEventWindowResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

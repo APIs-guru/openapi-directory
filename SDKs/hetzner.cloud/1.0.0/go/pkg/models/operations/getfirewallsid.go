@@ -4,10 +4,6 @@ type GetFirewallsIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetFirewallsIDRequest struct {
-	PathParams GetFirewallsIDPathParams
-}
-
 type GetFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer struct {
 	ID int64 `json:"id"`
 }
@@ -82,6 +78,10 @@ type GetFirewallsIDFirewallResponseFirewall struct {
 
 type GetFirewallsIDFirewallResponse struct {
 	Firewall GetFirewallsIDFirewallResponseFirewall `json:"firewall"`
+}
+
+type GetFirewallsIDRequest struct {
+	PathParams GetFirewallsIDPathParams
 }
 
 type GetFirewallsIDResponse struct {

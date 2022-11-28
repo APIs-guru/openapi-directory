@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import botfiltername_enum
-from . import botfilteroperator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BotFilter:
-    name: botfiltername_enum.BotFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operator: botfilteroperator_enum.BotFilterOperatorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""BotFilter
+    Filters the responses returned by the <code>ListBots</code> operation.
+    """
+    
+    name: BotFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operator: BotFilterOperatorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

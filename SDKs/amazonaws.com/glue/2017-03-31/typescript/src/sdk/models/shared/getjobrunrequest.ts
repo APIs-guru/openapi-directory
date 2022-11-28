@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetJobRunRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName: string;
 
-  @Metadata({ data: "json, name=PredecessorsIncluded" })
+  @SpeakeasyMetadata({ data: "json, name=PredecessorsIncluded" })
   predecessorsIncluded?: boolean;
 
-  @Metadata({ data: "json, name=RunId" })
+  @SpeakeasyMetadata({ data: "json, name=RunId" })
   runId: string;
 }

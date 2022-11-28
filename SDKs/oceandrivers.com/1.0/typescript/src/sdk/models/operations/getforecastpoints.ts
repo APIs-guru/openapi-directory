@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetForecastPointsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=language" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=language" })
   language: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=yatchclubid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=yatchclubid" })
   yatchclubid: string;
 }
 
 
 export class GetForecastPointsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetForecastPointsPathParams;
 }
 
 
 export class GetForecastPointsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,15 +1,20 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://etmdb.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * cinemaDetailSearchRead - Return cinema details search result
+     *
      * Return cinema details search result
      *
      * ### Response Class (Status 200)
@@ -19,8 +24,10 @@ export declare class SDK {
      * For more details on how cinemas are listed [see here][ref].
      * [ref]: https://etmdb.com/en/cinema-list/-updated_date
     **/
-    CinemaDetailSearchRead(req: operations.CinemaDetailSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaDetailSearchReadResponse>;
+    cinemaDetailSearchRead(req: operations.CinemaDetailSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaDetailSearchReadResponse>;
     /**
+     * cinemaScheduleSearchRead - Return cinema schedule search result
+     *
      * Return cinema schedule search result
      *
      * ### Response Class (Status 200)
@@ -31,8 +38,10 @@ export declare class SDK {
      * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    CinemaScheduleSearchRead(req: operations.CinemaScheduleSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaScheduleSearchReadResponse>;
+    cinemaScheduleSearchRead(req: operations.CinemaScheduleSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaScheduleSearchReadResponse>;
     /**
+     * cinemaScheduleSearchallRead - Return cinema schedule search result
+     *
      * Return cinema schedule search result
      *
      * ### Response Class (Status 200)
@@ -45,8 +54,10 @@ export declare class SDK {
      * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    CinemaScheduleSearchallRead(req: operations.CinemaScheduleSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaScheduleSearchallReadResponse>;
+    cinemaScheduleSearchallRead(req: operations.CinemaScheduleSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaScheduleSearchallReadResponse>;
     /**
+     * cinemaSheduleShowtimeSearchRead - Return cinema schedule and showtime search result
+     *
      * Return cinema schedule and showtime search result
      *
      * ### Response Class (Status 200)
@@ -56,8 +67,10 @@ export declare class SDK {
      * For more details about cinema schedule showtime, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    CinemaSheduleShowtimeSearchRead(req: operations.CinemaSheduleShowtimeSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaSheduleShowtimeSearchReadResponse>;
+    cinemaSheduleShowtimeSearchRead(req: operations.CinemaSheduleShowtimeSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaSheduleShowtimeSearchReadResponse>;
     /**
+     * cinemaSheduleShowtimeSearchallRead - Return cinema schedule and showtime search result
+     *
      * Return cinema schedule and showtime search result
      *
      * ### Response Class (Status 200)
@@ -72,8 +85,10 @@ export declare class SDK {
      * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    CinemaSheduleShowtimeSearchallRead(req: operations.CinemaSheduleShowtimeSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaSheduleShowtimeSearchallReadResponse>;
+    cinemaSheduleShowtimeSearchallRead(req: operations.CinemaSheduleShowtimeSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaSheduleShowtimeSearchallReadResponse>;
     /**
+     * cinemaSearchRead - Return cinema search result
+     *
      * Return cinema search result
      *
      * ### Response Class (Status 200)
@@ -83,8 +98,10 @@ export declare class SDK {
      * For more details on how cinemas are listed [see here][ref].
      * [ref]: https://etmdb.com/en/cinema-list/-updated_date
     **/
-    CinemaSearchRead(req: operations.CinemaSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaSearchReadResponse>;
+    cinemaSearchRead(req: operations.CinemaSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CinemaSearchReadResponse>;
     /**
+     * companyCreditsSearchRead - Return company credits search result
+     *
      * Return company credits search result
      *
      * ### Response Class (Status 200)
@@ -95,8 +112,10 @@ export declare class SDK {
      * For more details on how company credits are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    CompanyCreditsSearchRead(req: operations.CompanyCreditsSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CompanyCreditsSearchReadResponse>;
+    companyCreditsSearchRead(req: operations.CompanyCreditsSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CompanyCreditsSearchReadResponse>;
     /**
+     * companyCreditsSearchallRead - Return company credits search result
+     *
      * Return company credits search result
      *
      * ### Response Class (Status 200)
@@ -108,8 +127,10 @@ export declare class SDK {
      * For more details on how company credits are listed [see here][ref].
      * [ref]: https://etmdb.com/en/company-list/company_name
     **/
-    CompanyCreditsSearchallRead(req: operations.CompanyCreditsSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.CompanyCreditsSearchallReadResponse>;
+    companyCreditsSearchallRead(req: operations.CompanyCreditsSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.CompanyCreditsSearchallReadResponse>;
     /**
+     * companySearchRead - Return company search result
+     *
      * Return company search result
      *
      * ### Response Class (Status 200)
@@ -119,8 +140,10 @@ export declare class SDK {
      * For more details on how companies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/company-list/-updated_date
     **/
-    CompanySearchRead(req: operations.CompanySearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CompanySearchReadResponse>;
+    companySearchRead(req: operations.CompanySearchReadRequest, config?: AxiosRequestConfig): Promise<operations.CompanySearchReadResponse>;
     /**
+     * filmographyTypeSearchRead - Return filmography type search result
+     *
      * Return filmography type search result
      *
      * ### Response Class (Status 200)
@@ -130,8 +153,10 @@ export declare class SDK {
      * For more details on how filmography types are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    FilmographyTypeSearchRead(req: operations.FilmographyTypeSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.FilmographyTypeSearchReadResponse>;
+    filmographyTypeSearchRead(req: operations.FilmographyTypeSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.FilmographyTypeSearchReadResponse>;
     /**
+     * filmographySearchRead - Return filmography search result
+     *
      * Return filmography search result
      *
      * ### Response Class (Status 200)
@@ -142,8 +167,10 @@ export declare class SDK {
      * For more details on how filmographies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    FilmographySearchRead(req: operations.FilmographySearchReadRequest, config?: AxiosRequestConfig): Promise<operations.FilmographySearchReadResponse>;
+    filmographySearchRead(req: operations.FilmographySearchReadRequest, config?: AxiosRequestConfig): Promise<operations.FilmographySearchReadResponse>;
     /**
+     * filmographySearchallRead - Return filmography search result
+     *
      * Return filmography search result
      *
      * ### Response Class (Status 200)
@@ -157,8 +184,10 @@ export declare class SDK {
      * For more details on how filmographies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    FilmographySearchallRead(req: operations.FilmographySearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.FilmographySearchallReadResponse>;
+    filmographySearchallRead(req: operations.FilmographySearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.FilmographySearchallReadResponse>;
     /**
+     * genreTypeSearchRead - Return genre type search result
+     *
      * Return genre type search result
      *
      * ### Response Class (Status 200)
@@ -168,8 +197,10 @@ export declare class SDK {
      * For more details on how genre types are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    GenreTypeSearchRead(req: operations.GenreTypeSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.GenreTypeSearchReadResponse>;
+    genreTypeSearchRead(req: operations.GenreTypeSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.GenreTypeSearchReadResponse>;
     /**
+     * genreSearchRead - Return movie genre search result
+     *
      * Return movie genre search result
      *
      * ### Response Class (Status 200)
@@ -180,8 +211,10 @@ export declare class SDK {
      * For more details on how movies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    GenreSearchRead(req: operations.GenreSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.GenreSearchReadResponse>;
+    genreSearchRead(req: operations.GenreSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.GenreSearchReadResponse>;
     /**
+     * genreSearchallRead - Return movie genre search result
+     *
      * Return movie genre search result
      *
      * ### Response Class (Status 200)
@@ -191,8 +224,10 @@ export declare class SDK {
      * For more details on how movies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    GenreSearchallRead(req: operations.GenreSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.GenreSearchallReadResponse>;
+    genreSearchallRead(req: operations.GenreSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.GenreSearchallReadResponse>;
     /**
+     * jobSearchRead - Return job details search result
+     *
      * Return job details search result
      *
      * ### Response Class (Status 200)
@@ -202,8 +237,10 @@ export declare class SDK {
      * For more details on how job are listed [see here][ref].
      * [ref]: https://etmdb.com/en/job-list/-updated_date
     **/
-    JobSearchRead(req: operations.JobSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.JobSearchReadResponse>;
+    jobSearchRead(req: operations.JobSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.JobSearchReadResponse>;
     /**
+     * jobSearchallRead - Return job details search result
+     *
      * Return job details search result
      *
      * ### Response Class (Status 200)
@@ -213,8 +250,10 @@ export declare class SDK {
      * For more details on how job are listed [see here][ref].
      * [ref]: https://etmdb.com/en/job-list/-updated_date
     **/
-    JobSearchallRead(req: operations.JobSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.JobSearchallReadResponse>;
+    jobSearchallRead(req: operations.JobSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.JobSearchallReadResponse>;
     /**
+     * mediaSearchRead - Return movie media search result
+     *
      * Return movie media search result
      *
      * ### Response Class (Status 200)
@@ -225,8 +264,10 @@ export declare class SDK {
      * For more details on how media is listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    MediaSearchRead(req: operations.MediaSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.MediaSearchReadResponse>;
+    mediaSearchRead(req: operations.MediaSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.MediaSearchReadResponse>;
     /**
+     * mediaSearchallRead - Return cast media search result
+     *
      * Return cast media search result
      *
      * ### Response Class (Status 200)
@@ -238,8 +279,10 @@ export declare class SDK {
      * For more details on how cast media is listed [see here][ref].
      * [ref]: https://etmdb.com/en/cast-list/-updated_date
     **/
-    MediaSearchallRead(req: operations.MediaSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.MediaSearchallReadResponse>;
+    mediaSearchallRead(req: operations.MediaSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.MediaSearchallReadResponse>;
     /**
+     * movieCastSearchRead - Return movie cast search result
+     *
      * Return movie cast search result
      *
      * ### Response Class (Status 200)
@@ -250,8 +293,10 @@ export declare class SDK {
      * For more details on how movie casts are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    MovieCastSearchRead(req: operations.MovieCastSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.MovieCastSearchReadResponse>;
+    movieCastSearchRead(req: operations.MovieCastSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.MovieCastSearchReadResponse>;
     /**
+     * movieCastSearchallRead - Return movie cast search result
+     *
      * Return movie cast search result
      *
      * ### Response Class (Status 200)
@@ -265,8 +310,10 @@ export declare class SDK {
      * For more details on how movie casts are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    MovieCastSearchallRead(req: operations.MovieCastSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.MovieCastSearchallReadResponse>;
+    movieCastSearchallRead(req: operations.MovieCastSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.MovieCastSearchallReadResponse>;
     /**
+     * movieSearchRead - Return movie search result
+     *
      * Return movie search result
      *
      * ### Response Class (Status 200)
@@ -277,8 +324,10 @@ export declare class SDK {
      * For more details on how movies are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    MovieSearchRead(req: operations.MovieSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.MovieSearchReadResponse>;
+    movieSearchRead(req: operations.MovieSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.MovieSearchReadResponse>;
     /**
+     * newsSearchRead - Return news or article search result
+     *
      * Return news or article search result
      *
      * ### Response Class (Status 200)
@@ -288,8 +337,10 @@ export declare class SDK {
      * For more details on how news & articles are listed [see here][ref].
      * [ref]: https://etmdb.com/en/news-list/-updated_date
     **/
-    NewsSearchRead(req: operations.NewsSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.NewsSearchReadResponse>;
+    newsSearchRead(req: operations.NewsSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.NewsSearchReadResponse>;
     /**
+     * peopleSearchRead - Return cast search result
+     *
      * Return cast search result
      *
      * ### Response Class (Status 200)
@@ -301,8 +352,10 @@ export declare class SDK {
      * For more details on how cast are listed [see here][ref].
      * [ref]: https://etmdb.com/en/cast-list/-updated_date
     **/
-    PeopleSearchRead(req: operations.PeopleSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.PeopleSearchReadResponse>;
+    peopleSearchRead(req: operations.PeopleSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.PeopleSearchReadResponse>;
     /**
+     * showtimeSearchallRead - Return showtime search result
+     *
      * Return showtime search result
      *
      * ### Response Class (Status 200)
@@ -313,8 +366,10 @@ export declare class SDK {
      * For more details about showtime, check each cinema from the cinema list [see here][ref].
      * [ref]: https://etmdb.com/en/movie-list/-updated_date
     **/
-    ShowtimeSearchallRead(req: operations.ShowtimeSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.ShowtimeSearchallReadResponse>;
+    showtimeSearchallRead(req: operations.ShowtimeSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.ShowtimeSearchallReadResponse>;
     /**
+     * watchlistSearchRead - Return watchlist search result
+     *
      * Return watchlist search result
      *
      * ### Response Class (Status 200)
@@ -325,8 +380,10 @@ export declare class SDK {
      * For more details on how watchlist are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movies/watchlist/id
     **/
-    WatchlistSearchRead(req: operations.WatchlistSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.WatchlistSearchReadResponse>;
+    watchlistSearchRead(req: operations.WatchlistSearchReadRequest, config?: AxiosRequestConfig): Promise<operations.WatchlistSearchReadResponse>;
     /**
+     * watchlistSearchallRead - Return watchlist search result
+     *
      * Return watchlist search result
      *
      * ### Response Class (Status 200)
@@ -339,6 +396,6 @@ export declare class SDK {
      * For more details on how watchlist are listed [see here][ref].
      * [ref]: https://etmdb.com/en/movies/watchlist/id
     **/
-    WatchlistSearchallRead(req: operations.WatchlistSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.WatchlistSearchallReadResponse>;
+    watchlistSearchallRead(req: operations.WatchlistSearchallReadRequest, config?: AxiosRequestConfig): Promise<operations.WatchlistSearchallReadResponse>;
 }
 export {};

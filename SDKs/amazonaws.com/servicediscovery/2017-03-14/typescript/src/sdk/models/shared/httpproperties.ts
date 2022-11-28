@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex type that contains the name of an HTTP namespace.
 **/
 export class HttpProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HttpName" })
+  @SpeakeasyMetadata({ data: "json, name=HttpName" })
   httpName?: string;
 }

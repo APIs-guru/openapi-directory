@@ -10,14 +10,14 @@ type TrendingStickersQueryParams struct {
 	Rating *string `queryParam:"style=form,explode=true,name=rating"`
 }
 
-type TrendingStickersRequest struct {
-	QueryParams TrendingStickersQueryParams
-}
-
 type TrendingStickers200ApplicationJSON struct {
 	Data       []shared.Gif       `json:"data,omitempty"`
 	Meta       *shared.Meta       `json:"meta,omitempty"`
 	Pagination *shared.Pagination `json:"pagination,omitempty"`
+}
+
+type TrendingStickersRequest struct {
+	QueryParams TrendingStickersQueryParams
 }
 
 type TrendingStickersResponse struct {

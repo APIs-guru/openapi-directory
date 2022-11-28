@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageIdentifier } from "./imageidentifier";
 import { ImageScanFindings } from "./imagescanfindings";
 import { ImageScanStatus } from "./imagescanstatus";
@@ -32,27 +32,27 @@ var DescribeImageScanFindingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imageId" }),
+        SpeakeasyMetadata({ data: "json, name=imageId" }),
         __metadata("design:type", ImageIdentifier)
     ], DescribeImageScanFindingsResponse.prototype, "imageId", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageScanFindings" }),
+        SpeakeasyMetadata({ data: "json, name=imageScanFindings" }),
         __metadata("design:type", ImageScanFindings)
     ], DescribeImageScanFindingsResponse.prototype, "imageScanFindings", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageScanStatus" }),
+        SpeakeasyMetadata({ data: "json, name=imageScanStatus" }),
         __metadata("design:type", ImageScanStatus)
     ], DescribeImageScanFindingsResponse.prototype, "imageScanStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeImageScanFindingsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], DescribeImageScanFindingsResponse.prototype, "registryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], DescribeImageScanFindingsResponse.prototype, "repositoryName", void 0);
     return DescribeImageScanFindingsResponse;

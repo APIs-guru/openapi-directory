@@ -21,6 +21,8 @@ const (
 	BackfillJobTriggerEnumManual             BackfillJobTriggerEnum = "MANUAL"
 )
 
+// BackfillJob
+// Represents a backfill job on a specific stream object.
 type BackfillJob struct {
 	Errors        []Error                 `json:"errors,omitempty"`
 	LastEndTime   *string                 `json:"lastEndTime,omitempty"`

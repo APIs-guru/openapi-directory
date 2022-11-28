@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSetupV1LocationsIdSettingsScopeSettingsScopePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=settingsScope" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingsScope" })
   settingsScope: string;
 }
 
 
 export class PutSetupV1LocationsIdSettingsScopeSettingsScopeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSetupV1LocationsIdSettingsScopeSettingsScopePathParams;
 }
 
 
 export class PutSetupV1LocationsIdSettingsScopeSettingsScopeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   locationViewModel?: shared.LocationViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

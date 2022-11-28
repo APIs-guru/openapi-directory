@@ -12,11 +12,6 @@ type GetFileFromURIIDSecurity struct {
 	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetFileFromURIIDRequest struct {
-	PathParams GetFileFromURIIDPathParams
-	Security   GetFileFromURIIDSecurity
-}
-
 type GetFileFromURIID400ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -30,6 +25,11 @@ type GetFileFromURIID401ApplicationJSON struct {
 type GetFileFromURIID404ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type GetFileFromURIIDRequest struct {
+	PathParams GetFileFromURIIDPathParams
+	Security   GetFileFromURIIDSecurity
 }
 
 type GetFileFromURIIDResponse struct {

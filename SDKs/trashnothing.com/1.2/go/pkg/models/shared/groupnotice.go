@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GroupNotice
+// Group notices are created by group moderators in order to provide useful information to the group members (eg. group rules and guidelines).
 type GroupNotice struct {
 	Content  *string    `json:"content,omitempty"`
 	Date     *time.Time `json:"date,omitempty"`

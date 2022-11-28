@@ -9,6 +9,8 @@ const (
 	PartnerRevenueModelMarkupTypeEnumPartnerRevenueModelMarkupTypeTotalMediaCostMarkup PartnerRevenueModelMarkupTypeEnum = "PARTNER_REVENUE_MODEL_MARKUP_TYPE_TOTAL_MEDIA_COST_MARKUP"
 )
 
+// PartnerRevenueModel
+// Settings that control how partner revenue is calculated.
 type PartnerRevenueModel struct {
 	MarkupAmount *string                            `json:"markupAmount,omitempty"`
 	MarkupType   *PartnerRevenueModelMarkupTypeEnum `json:"markupType,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Workflow } from "./workflow";
+
 
 
 // ListWorkflowsResponse
@@ -8,12 +8,12 @@ import { Workflow } from "./workflow";
  * Response for the ListWorkflows method.
 **/
 export class ListWorkflowsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 
-  @Metadata({ data: "json, name=workflows", elemType: shared.Workflow })
+  @SpeakeasyMetadata({ data: "json, name=workflows", elemType: Workflow })
   workflows?: Workflow[];
 }

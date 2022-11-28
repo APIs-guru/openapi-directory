@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SoftwareInformation
 /**
  * Information about the software on the device.
@@ -33,15 +33,15 @@ var SoftwareInformation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=installState" }),
+        SpeakeasyMetadata({ data: "json, name=installState" }),
         __metadata("design:type", String)
     ], SoftwareInformation.prototype, "installState", void 0);
     __decorate([
-        Metadata({ data: "json, name=installedVersion" }),
+        SpeakeasyMetadata({ data: "json, name=installedVersion" }),
         __metadata("design:type", String)
     ], SoftwareInformation.prototype, "installedVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=installingVersion" }),
+        SpeakeasyMetadata({ data: "json, name=installingVersion" }),
         __metadata("design:type", String)
     ], SoftwareInformation.prototype, "installingVersion", void 0);
     return SoftwareInformation;

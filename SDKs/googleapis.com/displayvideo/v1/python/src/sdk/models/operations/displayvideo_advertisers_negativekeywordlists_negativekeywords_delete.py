@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeletePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    keyword_value: str = field(default=None, metadata={'path_param': { 'field_name': 'keywordValue', 'style': 'simple', 'explode': False }})
-    negative_keyword_list_id: str = field(default=None, metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    keyword_value: str = field(metadata={'path_param': { 'field_name': 'keywordValue', 'style': 'simple', 'explode': False }})
+    negative_keyword_list_id: str = field(metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteQueryPara
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteRequest:
-    path_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeletePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeletePathParams = field()
+    query_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteQueryParams = field()
+    security: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

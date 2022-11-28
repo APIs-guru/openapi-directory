@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
@@ -7,7 +7,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetSetupV1ResourcesIDBlocksPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,13 +20,13 @@ class GetSetupV1ResourcesIDBlocksQueryParams:
 
 @dataclass
 class GetSetupV1ResourcesIDBlocksRequest:
-    path_params: GetSetupV1ResourcesIDBlocksPathParams = field(default=None)
-    query_params: GetSetupV1ResourcesIDBlocksQueryParams = field(default=None)
+    path_params: GetSetupV1ResourcesIDBlocksPathParams = field()
+    query_params: GetSetupV1ResourcesIDBlocksQueryParams = field()
     
 
 @dataclass
 class GetSetupV1ResourcesIDBlocksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_block_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 import { WriteResult } from "./writeresult";
+
 
 
 // BatchWriteResponse
@@ -9,9 +9,9 @@ import { WriteResult } from "./writeresult";
  * The response from Firestore.BatchWrite.
 **/
 export class BatchWriteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=status", elemType: Status })
   status?: Status[];
 
-  @Metadata({ data: "json, name=writeResults", elemType: shared.WriteResult })
+  @SpeakeasyMetadata({ data: "json, name=writeResults", elemType: WriteResult })
   writeResults?: WriteResult[];
 }

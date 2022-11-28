@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import reservation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListReservationsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    reservations: Optional[List[reservation.Reservation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reservations' }})
+    r"""ListReservationsResponse
+    The response for ReservationService.ListReservations.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    reservations: Optional[List[Reservation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reservations') }})
     

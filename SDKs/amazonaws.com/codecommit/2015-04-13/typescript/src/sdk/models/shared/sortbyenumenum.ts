@@ -1,6 +1,7 @@
 
 
+
 export enum SortByEnumEnum {
-    RepositoryName = "repositoryName"
-,    LastModifiedDate = "lastModifiedDate"
+    RepositoryName = "repositoryName",
+    LastModifiedDate = "lastModifiedDate"
 }

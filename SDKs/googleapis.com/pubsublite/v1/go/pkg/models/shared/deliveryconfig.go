@@ -8,6 +8,8 @@ const (
 	DeliveryConfigDeliveryRequirementEnumDeliverAfterStored             DeliveryConfigDeliveryRequirementEnum = "DELIVER_AFTER_STORED"
 )
 
+// DeliveryConfig
+// The settings for a subscription's message delivery.
 type DeliveryConfig struct {
 	DeliveryRequirement *DeliveryConfigDeliveryRequirementEnum `json:"deliveryRequirement,omitempty"`
 }

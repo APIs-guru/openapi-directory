@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum CryptoKeyVersionTemplateAlgorithmEnum {
     CryptoKeyVersionAlgorithmUnspecified = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED",
     GoogleSymmetricEncryption = "GOOGLE_SYMMETRIC_ENCRYPTION",
@@ -24,6 +24,10 @@ export declare enum CryptoKeyVersionTemplateAlgorithmEnum {
     EcSignP384Sha384 = "EC_SIGN_P384_SHA384",
     EcSignSecp256K1Sha256 = "EC_SIGN_SECP256K1_SHA256",
     HmacSha256 = "HMAC_SHA256",
+    HmacSha1 = "HMAC_SHA1",
+    HmacSha384 = "HMAC_SHA384",
+    HmacSha512 = "HMAC_SHA512",
+    HmacSha224 = "HMAC_SHA224",
     ExternalSymmetricEncryption = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 }
 export declare enum CryptoKeyVersionTemplateProtectionLevelEnum {

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AdlooxExcludedAdlooxCategoriesEnum(str, Enum):
     ADLOOX_UNSPECIFIED = "ADLOOX_UNSPECIFIED"
@@ -17,5 +19,9 @@ class AdlooxExcludedAdlooxCategoriesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Adloox:
-    excluded_adloox_categories: Optional[List[AdlooxExcludedAdlooxCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedAdlooxCategories' }})
+    r"""Adloox
+    Details of Adloox settings.
+    """
+    
+    excluded_adloox_categories: Optional[List[AdlooxExcludedAdlooxCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedAdlooxCategories') }})
     

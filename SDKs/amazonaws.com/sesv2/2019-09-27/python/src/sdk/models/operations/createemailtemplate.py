@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,31 +21,35 @@ class CreateEmailTemplateHeaders:
 @dataclass_json
 @dataclass
 class CreateEmailTemplateRequestBodyTemplateContent:
-    html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Html' }})
-    subject: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Subject' }})
-    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Text' }})
+    r"""CreateEmailTemplateRequestBodyTemplateContent
+    The content of the email, composed of a subject line, an HTML part, and a text-only part.
+    """
+    
+    html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Html') }})
+    subject: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Subject') }})
+    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Text') }})
     
 
 @dataclass_json
 @dataclass
 class CreateEmailTemplateRequestBody:
-    template_content: CreateEmailTemplateRequestBodyTemplateContent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateContent' }})
-    template_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateName' }})
+    template_content: CreateEmailTemplateRequestBodyTemplateContent = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateContent') }})
+    template_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateName') }})
     
 
 @dataclass
 class CreateEmailTemplateRequest:
-    headers: CreateEmailTemplateHeaders = field(default=None)
-    request: CreateEmailTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateEmailTemplateHeaders = field()
+    request: CreateEmailTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateEmailTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     already_exists_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_email_template_response: Optional[dict[str, Any]] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

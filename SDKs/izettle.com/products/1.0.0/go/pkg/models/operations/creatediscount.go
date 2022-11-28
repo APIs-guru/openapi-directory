@@ -8,17 +8,9 @@ type CreateDiscountPathParams struct {
 	OrganizationUUID string `pathParam:"style=simple,explode=false,name=organizationUuid"`
 }
 
-type CreateDiscountSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type CreateDiscountSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateDiscountSecurity struct {
-	Option1 *CreateDiscountSecurityOption1 `security:"option"`
-	Option2 *CreateDiscountSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type CreateDiscountRequest struct {

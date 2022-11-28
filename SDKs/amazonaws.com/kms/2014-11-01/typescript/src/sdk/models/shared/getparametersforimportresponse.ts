@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetParametersForImportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImportToken" })
+  @SpeakeasyMetadata({ data: "json, name=ImportToken" })
   importToken?: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=ParametersValidTo" })
+  @SpeakeasyMetadata({ data: "json, name=ParametersValidTo" })
   parametersValidTo?: Date;
 
-  @Metadata({ data: "json, name=PublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKey" })
   publicKey?: string;
 }

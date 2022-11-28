@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteLiveStreamsLiveStreamIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=liveStreamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=liveStreamId" })
   liveStreamId: string;
 }
 
 
 export class DeleteLiveStreamsLiveStreamIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class DeleteLiveStreamsLiveStreamIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteLiveStreamsLiveStreamIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteLiveStreamsLiveStreamIdSecurity;
 }
 
 
 export class DeleteLiveStreamsLiveStreamIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

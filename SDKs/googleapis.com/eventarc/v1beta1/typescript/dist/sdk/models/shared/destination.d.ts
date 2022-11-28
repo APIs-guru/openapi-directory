@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudRunService } from "./cloudrunservice";
 /**
  * Represents a target of an invocation over HTTP.

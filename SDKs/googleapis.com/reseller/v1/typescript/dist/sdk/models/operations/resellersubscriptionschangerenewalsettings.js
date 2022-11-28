@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ResellerSubscriptionsChangeRenewalSettingsPathParams = /** @class */ (function (_super) {
     __extends(ResellerSubscriptionsChangeRenewalSettingsPathParams, _super);
@@ -30,11 +30,11 @@ var ResellerSubscriptionsChangeRenewalSettingsPathParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=customerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=customerId" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsPathParams.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsPathParams.prototype, "subscriptionId", void 0);
     return ResellerSubscriptionsChangeRenewalSettingsPathParams;
@@ -46,47 +46,47 @@ var ResellerSubscriptionsChangeRenewalSettingsQueryParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsQueryParams.prototype, "uploadProtocol", void 0);
     return ResellerSubscriptionsChangeRenewalSettingsQueryParams;
@@ -98,11 +98,11 @@ var ResellerSubscriptionsChangeRenewalSettingsSecurity = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ResellerSubscriptionsChangeRenewalSettingsSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ResellerSubscriptionsChangeRenewalSettingsSecurity.prototype, "oauth2c", void 0);
     return ResellerSubscriptionsChangeRenewalSettingsSecurity;
@@ -114,19 +114,19 @@ var ResellerSubscriptionsChangeRenewalSettingsRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ResellerSubscriptionsChangeRenewalSettingsPathParams)
     ], ResellerSubscriptionsChangeRenewalSettingsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ResellerSubscriptionsChangeRenewalSettingsQueryParams)
     ], ResellerSubscriptionsChangeRenewalSettingsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.RenewalSettings)
     ], ResellerSubscriptionsChangeRenewalSettingsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ResellerSubscriptionsChangeRenewalSettingsSecurity)
     ], ResellerSubscriptionsChangeRenewalSettingsRequest.prototype, "security", void 0);
     return ResellerSubscriptionsChangeRenewalSettingsRequest;
@@ -138,15 +138,15 @@ var ResellerSubscriptionsChangeRenewalSettingsResponse = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ResellerSubscriptionsChangeRenewalSettingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ResellerSubscriptionsChangeRenewalSettingsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Subscription)
     ], ResellerSubscriptionsChangeRenewalSettingsResponse.prototype, "subscription", void 0);
     return ResellerSubscriptionsChangeRenewalSettingsResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRecommendationengineV1beta1CatalogItem } from "./googlecloudrecommendationenginev1beta1catalogitem";
+
 
 
 // GoogleCloudRecommendationengineV1beta1ListCatalogItemsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudRecommendationengineV1beta1CatalogItem } from "./googlecloud
  * Response message for ListCatalogItems method.
 **/
 export class GoogleCloudRecommendationengineV1beta1ListCatalogItemsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=catalogItems", elemType: shared.GoogleCloudRecommendationengineV1beta1CatalogItem })
+  @SpeakeasyMetadata({ data: "json, name=catalogItems", elemType: GoogleCloudRecommendationengineV1beta1CatalogItem })
   catalogItems?: GoogleCloudRecommendationengineV1beta1CatalogItem[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

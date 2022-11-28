@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceAccessTypeEnum } from "./sourceaccesstypeenum";
+
 
 
 // SourceAccessConfiguration
@@ -7,9 +8,9 @@ import { SourceAccessTypeEnum } from "./sourceaccesstypeenum";
  * To secure and define access to your event source, you can specify the authentication protocol, VPC components, or virtual host.
 **/
 export class SourceAccessConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: SourceAccessTypeEnum;
 
-  @Metadata({ data: "json, name=URI" })
+  @SpeakeasyMetadata({ data: "json, name=URI" })
   uri?: string;
 }

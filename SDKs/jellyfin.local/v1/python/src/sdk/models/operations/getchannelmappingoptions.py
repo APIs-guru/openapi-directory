@@ -10,18 +10,18 @@ class GetChannelMappingOptionsQueryParams:
 
 @dataclass
 class GetChannelMappingOptionsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetChannelMappingOptionsRequest:
-    query_params: GetChannelMappingOptionsQueryParams = field(default=None)
-    security: GetChannelMappingOptionsSecurity = field(default=None)
+    query_params: GetChannelMappingOptionsQueryParams = field()
+    security: GetChannelMappingOptionsSecurity = field()
     
 
 @dataclass
 class GetChannelMappingOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     channel_mapping_options_dto: Optional[shared.ChannelMappingOptionsDto] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

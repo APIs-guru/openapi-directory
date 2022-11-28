@@ -22,24 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-// Config
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// ConfigInput
 /**
  * Available configurations to provision an Instance.
 **/
-var Config = /** @class */ (function (_super) {
-    __extends(Config, _super);
-    function Config() {
+var ConfigInput = /** @class */ (function (_super) {
+    __extends(ConfigInput, _super);
+    function ConfigInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cmekKeyName" }),
+        SpeakeasyMetadata({ data: "json, name=cmekKeyName" }),
         __metadata("design:type", String)
-    ], Config.prototype, "cmekKeyName", void 0);
-    __decorate([
-        Metadata({ data: "json, name=location" }),
-        __metadata("design:type", String)
-    ], Config.prototype, "location", void 0);
-    return Config;
+    ], ConfigInput.prototype, "cmekKeyName", void 0);
+    return ConfigInput;
 }(SpeakeasyBase));
-export { Config };
+export { ConfigInput };

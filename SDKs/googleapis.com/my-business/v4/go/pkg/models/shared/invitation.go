@@ -10,6 +10,8 @@ const (
 	InvitationRoleEnumCommunityManager     InvitationRoleEnum = "COMMUNITY_MANAGER"
 )
 
+// Invitation
+// Output only. Represents a pending invitation.
 type Invitation struct {
 	Name           *string             `json:"name,omitempty"`
 	Role           *InvitationRoleEnum `json:"role,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// AwsElbLoadBalancerDetails
+// Contains details about a Classic Load Balancer.
 type AwsElbLoadBalancerDetails struct {
 	AvailabilityZones         []string                                     `json:"AvailabilityZones,omitempty"`
 	BackendServerDescriptions []AwsElbLoadBalancerBackendServerDescription `json:"BackendServerDescriptions,omitempty"`

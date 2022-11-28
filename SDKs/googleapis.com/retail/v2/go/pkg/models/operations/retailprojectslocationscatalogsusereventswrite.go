@@ -30,7 +30,7 @@ type RetailProjectsLocationsCatalogsUserEventsWriteSecurity struct {
 type RetailProjectsLocationsCatalogsUserEventsWriteRequest struct {
 	PathParams  RetailProjectsLocationsCatalogsUserEventsWritePathParams
 	QueryParams RetailProjectsLocationsCatalogsUserEventsWriteQueryParams
-	Request     *shared.GoogleCloudRetailV2UserEvent `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRetailV2UserEventInput `request:"mediaType=application/json"`
 	Security    RetailProjectsLocationsCatalogsUserEventsWriteSecurity
 }
 

@@ -32,7 +32,7 @@ type ContentRegionsPatchSecurity struct {
 type ContentRegionsPatchRequest struct {
 	PathParams  ContentRegionsPatchPathParams
 	QueryParams ContentRegionsPatchQueryParams
-	Request     *shared.Region `request:"mediaType=application/json"`
+	Request     *shared.RegionInput `request:"mediaType=application/json"`
 	Security    ContentRegionsPatchSecurity
 }
 

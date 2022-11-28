@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AzStatusEnum } from "./azstatusenum";
 import { Endpoint } from "./endpoint";
 import { ClusterPendingUpdates } from "./clusterpendingupdates";
@@ -7,83 +6,84 @@ import { SecurityGroupMembership } from "./securitygroupmembership";
 import { Shard } from "./shard";
 
 
+
 // Cluster
 /** 
  * Contains all of the attributes of a specific cluster.
 **/
 export class Cluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ACLName" })
+  @SpeakeasyMetadata({ data: "json, name=ACLName" })
   aclName?: string;
 
-  @Metadata({ data: "json, name=ARN" })
+  @SpeakeasyMetadata({ data: "json, name=ARN" })
   arn?: string;
 
-  @Metadata({ data: "json, name=AutoMinorVersionUpgrade" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMinorVersionUpgrade" })
   autoMinorVersionUpgrade?: boolean;
 
-  @Metadata({ data: "json, name=AvailabilityMode" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityMode" })
   availabilityMode?: AzStatusEnum;
 
-  @Metadata({ data: "json, name=ClusterEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterEndpoint" })
   clusterEndpoint?: Endpoint;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EnginePatchVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EnginePatchVersion" })
   enginePatchVersion?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=MaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=MaintenanceWindow" })
   maintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NodeType" })
+  @SpeakeasyMetadata({ data: "json, name=NodeType" })
   nodeType?: string;
 
-  @Metadata({ data: "json, name=NumberOfShards" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfShards" })
   numberOfShards?: number;
 
-  @Metadata({ data: "json, name=ParameterGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupName" })
   parameterGroupName?: string;
 
-  @Metadata({ data: "json, name=ParameterGroupStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupStatus" })
   parameterGroupStatus?: string;
 
-  @Metadata({ data: "json, name=PendingUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=PendingUpdates" })
   pendingUpdates?: ClusterPendingUpdates;
 
-  @Metadata({ data: "json, name=SecurityGroups", elemType: shared.SecurityGroupMembership })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroups", elemType: SecurityGroupMembership })
   securityGroups?: SecurityGroupMembership[];
 
-  @Metadata({ data: "json, name=Shards", elemType: shared.Shard })
+  @SpeakeasyMetadata({ data: "json, name=Shards", elemType: Shard })
   shards?: Shard[];
 
-  @Metadata({ data: "json, name=SnapshotRetentionLimit" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotRetentionLimit" })
   snapshotRetentionLimit?: number;
 
-  @Metadata({ data: "json, name=SnapshotWindow" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotWindow" })
   snapshotWindow?: string;
 
-  @Metadata({ data: "json, name=SnsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicArn" })
   snsTopicArn?: string;
 
-  @Metadata({ data: "json, name=SnsTopicStatus" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicStatus" })
   snsTopicStatus?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=SubnetGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetGroupName" })
   subnetGroupName?: string;
 
-  @Metadata({ data: "json, name=TLSEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=TLSEnabled" })
   tlsEnabled?: boolean;
 }

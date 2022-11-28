@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyCurrentDbClusterCapacityActionEnum(str, Enum):
     MODIFY_CURRENT_DB_CLUSTER_CAPACITY = "ModifyCurrentDBClusterCapacity"
@@ -10,12 +14,12 @@ class GetModifyCurrentDbClusterCapacityVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyCurrentDbClusterCapacityQueryParams:
-    action: GetModifyCurrentDbClusterCapacityActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyCurrentDbClusterCapacityActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'DBClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyCurrentDbClusterCapacityVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     capacity: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Capacity', 'style': 'form', 'explode': True }})
-    db_cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterIdentifier', 'style': 'form', 'explode': True }})
     seconds_before_timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'SecondsBeforeTimeout', 'style': 'form', 'explode': True }})
     timeout_action: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TimeoutAction', 'style': 'form', 'explode': True }})
-    version: GetModifyCurrentDbClusterCapacityVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetModifyCurrentDbClusterCapacityHeaders:
 
 @dataclass
 class GetModifyCurrentDbClusterCapacityRequest:
-    query_params: GetModifyCurrentDbClusterCapacityQueryParams = field(default=None)
-    headers: GetModifyCurrentDbClusterCapacityHeaders = field(default=None)
+    headers: GetModifyCurrentDbClusterCapacityHeaders = field()
+    query_params: GetModifyCurrentDbClusterCapacityQueryParams = field()
     
 
 @dataclass
 class GetModifyCurrentDbClusterCapacityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

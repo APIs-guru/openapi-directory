@@ -16,6 +16,8 @@ const (
 	MobileAppDirectoryEnumGenericCtvAppStore   MobileAppDirectoryEnum = "GENERIC_CTV_APP_STORE"
 )
 
+// MobileApp
+// Contains information about a mobile app. Used as a landing page deep link.
 type MobileApp struct {
 	Directory     *MobileAppDirectoryEnum `json:"directory,omitempty"`
 	ID            *string                 `json:"id,omitempty"`

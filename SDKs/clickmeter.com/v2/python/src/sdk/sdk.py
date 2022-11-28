@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,28 +15,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def account_delete_domain_whitelist(self, request: operations.AccountDeleteDomainWhitelistRequest) -> operations.AccountDeleteDomainWhitelistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an domain entry
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/domainwhitelist/{whitelistId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -59,13 +91,16 @@ class SDK:
 
     
     def account_delete_guest(self, request: operations.AccountDeleteGuestRequest) -> operations.AccountDeleteGuestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a guest
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/guests/{guestId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -91,13 +126,16 @@ class SDK:
 
     
     def account_delete_ip_blacklist(self, request: operations.AccountDeleteIPBlacklistRequest) -> operations.AccountDeleteIPBlacklistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an ip blacklist entry
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/ipblacklist/{blacklistId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -123,13 +161,16 @@ class SDK:
 
     
     def account_get(self) -> operations.AccountGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve current account data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -155,15 +196,17 @@ class SDK:
 
     
     def account_get_domain_whitelist(self, request: operations.AccountGetDomainWhitelistRequest) -> operations.AccountGetDomainWhitelistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve list of a domains allowed to redirect in DDU mode
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/domainwhitelist"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -185,13 +228,16 @@ class SDK:
 
     
     def account_get_guest(self, request: operations.AccountGetGuestRequest) -> operations.AccountGetGuestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a guest
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/guests/{guestId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -217,15 +263,17 @@ class SDK:
 
     
     def account_get_guests(self, request: operations.AccountGetGuestsRequest) -> operations.AccountGetGuestsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve list of a guest
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/guests"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -247,15 +295,17 @@ class SDK:
 
     
     def account_get_guests_count(self, request: operations.AccountGetGuestsCountRequest) -> operations.AccountGetGuestsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve count of guests
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/guests/count"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -281,15 +331,17 @@ class SDK:
 
     
     def account_get_ip_blacklist(self, request: operations.AccountGetIPBlacklistRequest) -> operations.AccountGetIPBlacklistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve list of a ip to exclude from event tracking
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/ipblacklist"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -311,15 +363,17 @@ class SDK:
 
     
     def account_get_permissions(self, request: operations.AccountGetPermissionsRequest) -> operations.AccountGetPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve permissions for a guest
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/guests/{guestId}/permissions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -341,15 +395,17 @@ class SDK:
 
     
     def account_get_permissions_count(self, request: operations.AccountGetPermissionsCountRequest) -> operations.AccountGetPermissionsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve count of the permissions for a guest
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/guests/{guestId}/permissions/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -375,13 +431,16 @@ class SDK:
 
     
     def account_get_plan(self) -> operations.AccountGetPlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve current account plan
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/plan"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -407,22 +466,22 @@ class SDK:
 
     
     def account_patch_permissions(self, request: operations.AccountPatchPermissionsRequest) -> operations.AccountPatchPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Change the permission on a shared object
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/guests/{guestId}/{type}/permissions/patch", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -448,22 +507,22 @@ class SDK:
 
     
     def account_post(self, request: operations.AccountPostRequest) -> operations.AccountPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update current account data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -489,22 +548,22 @@ class SDK:
 
     
     def account_post_guest(self, request: operations.AccountPostGuestRequest) -> operations.AccountPostGuestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a guest
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/guests/{guestId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -530,22 +589,22 @@ class SDK:
 
     
     def account_put_domain_whitelist(self, request: operations.AccountPutDomainWhitelistRequest) -> operations.AccountPutDomainWhitelistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create an domain entry
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/domainwhitelist"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -571,22 +630,22 @@ class SDK:
 
     
     def account_put_guest(self, request: operations.AccountPutGuestRequest) -> operations.AccountPutGuestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a guest
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/guests"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -612,22 +671,22 @@ class SDK:
 
     
     def account_put_ip_blacklist(self, request: operations.AccountPutIPBlacklistRequest) -> operations.AccountPutIPBlacklistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create an ip blacklist entry
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/ipblacklist"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -653,15 +712,17 @@ class SDK:
 
     
     def aggregated_get_conversions_summary(self, request: operations.AggregatedGetConversionsSummaryRequest) -> operations.AggregatedGetConversionsSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about a subset of conversions for a timeframe with conversions data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aggregated/summary/conversions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -683,15 +744,17 @@ class SDK:
 
     
     def aggregated_get_datapoints_summary(self, request: operations.AggregatedGetDatapointsSummaryRequest) -> operations.AggregatedGetDatapointsSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aggregated/summary/datapoints"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -713,15 +776,17 @@ class SDK:
 
     
     def aggregated_get_groups_summary(self, request: operations.AggregatedGetGroupsSummaryRequest) -> operations.AggregatedGetGroupsSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about a subset of groups for a timeframe with groups data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aggregated/summary/groups"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -743,15 +808,17 @@ class SDK:
 
     
     def aggregated_get_statistics_list(self, request: operations.AggregatedGetStatisticsListRequest) -> operations.AggregatedGetStatisticsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this customer for a timeframe grouped by some temporal entity (day/week/month)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aggregated/list"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -773,15 +840,17 @@ class SDK:
 
     
     def aggregated_get_statistics_single(self, request: operations.AggregatedGetStatisticsSingleRequest) -> operations.AggregatedGetStatisticsSingleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this customer for a timeframe
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/aggregated"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -803,15 +872,17 @@ class SDK:
 
     
     def click_stream_get(self, request: operations.ClickStreamGetRequest) -> operations.ClickStreamGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve the latest list of events of this account. Limited to last 100.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/clickstream"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -833,15 +904,17 @@ class SDK:
 
     
     def conversions_count(self, request: operations.ConversionsCountRequest) -> operations.ConversionsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a count of conversions
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/conversions/count"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -867,13 +940,16 @@ class SDK:
 
     
     def conversions_delete(self, request: operations.ConversionsDeleteRequest) -> operations.ConversionsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete conversion specified by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -901,15 +977,17 @@ class SDK:
 
     
     def conversions_get(self, request: operations.ConversionsGetRequest) -> operations.ConversionsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a list of conversions
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/conversions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -931,15 +1009,17 @@ class SDK:
 
     
     def conversions_get_datapoints(self, request: operations.ConversionsGetDatapointsRequest) -> operations.ConversionsGetDatapointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a list of datapoints connected to this conversion
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/datapoints", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -961,15 +1041,17 @@ class SDK:
 
     
     def conversions_get_datapoints_count(self, request: operations.ConversionsGetDatapointsCountRequest) -> operations.ConversionsGetDatapointsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a count of datapoints connected to this conversion
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/datapoints/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -995,15 +1077,17 @@ class SDK:
 
     
     def conversions_get_hits(self, request: operations.ConversionsGetHitsRequest) -> operations.ConversionsGetHitsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve the list of events related to this conversion.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/hits", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1025,15 +1109,17 @@ class SDK:
 
     
     def conversions_get_statistics_all_list(self, request: operations.ConversionsGetStatisticsAllListRequest) -> operations.ConversionsGetStatisticsAllListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this customer for a timeframe related to a subset of conversions grouped by some temporal entity (day/week/month)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/conversions/aggregated/list"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1055,15 +1141,17 @@ class SDK:
 
     
     def conversions_get_statistics_list(self, request: operations.ConversionsGetStatisticsListRequest) -> operations.ConversionsGetStatisticsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this conversion for a timeframe grouped by some temporal entity (day/week/month)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/aggregated/list", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1085,15 +1173,17 @@ class SDK:
 
     
     def conversions_get_statistics_single(self, request: operations.ConversionsGetStatisticsSingleRequest) -> operations.ConversionsGetStatisticsSingleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this conversion for a timeframe
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/aggregated", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1115,15 +1205,17 @@ class SDK:
 
     
     def conversions_get_tops(self, request: operations.ConversionsGetTopsRequest) -> operations.ConversionsGetTopsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a top report connected to this conversion
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/reports", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1147,22 +1239,22 @@ class SDK:
 
     
     def conversions_patch(self, request: operations.ConversionsPatchRequest) -> operations.ConversionsPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify the association between a conversion and a datapoint
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/datapoints/patch", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1190,22 +1282,22 @@ class SDK:
 
     
     def conversions_patch_notes(self, request: operations.ConversionsPatchNotesRequest) -> operations.ConversionsPatchNotesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fast patch the \"notes\" field of a conversion
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}/notes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1235,22 +1327,22 @@ class SDK:
 
     
     def conversions_post(self, request: operations.ConversionsPostRequest) -> operations.ConversionsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update conversion specified by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1278,22 +1370,22 @@ class SDK:
 
     
     def conversions_put(self, request: operations.ConversionsPutRequest) -> operations.ConversionsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a conversion
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/conversions"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1321,15 +1413,17 @@ class SDK:
 
     
     def data_points_count(self, request: operations.DataPointsCountRequest) -> operations.DataPointsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count the datapoints associated to the user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/datapoints/count"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1357,13 +1451,16 @@ class SDK:
 
     
     def data_points_delete(self, request: operations.DataPointsDeleteRequest) -> operations.DataPointsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a datapoint
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1391,15 +1488,17 @@ class SDK:
 
     
     def data_points_get(self, request: operations.DataPointsGetRequest) -> operations.DataPointsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the datapoints associated to the user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/datapoints"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1423,15 +1522,17 @@ class SDK:
 
     
     def data_points_get_hits(self, request: operations.DataPointsGetHitsRequest) -> operations.DataPointsGetHitsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve the list of events related to this datapoint.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}/hits", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1453,15 +1554,17 @@ class SDK:
 
     
     def data_points_get_statistics_aggregated_single(self, request: operations.DataPointsGetStatisticsAggregatedSingleRequest) -> operations.DataPointsGetStatisticsAggregatedSingleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this customer for a timeframe by groups
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/datapoints/aggregated"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1483,15 +1586,17 @@ class SDK:
 
     
     def data_points_get_statistics_all_list(self, request: operations.DataPointsGetStatisticsAllListRequest) -> operations.DataPointsGetStatisticsAllListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about all datapoints of this customer for a timeframe grouped by some temporal entity (day/week/month)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/datapoints/aggregated/list"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1513,15 +1618,17 @@ class SDK:
 
     
     def data_points_get_statistics_list(self, request: operations.DataPointsGetStatisticsListRequest) -> operations.DataPointsGetStatisticsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this datapoint for a timeframe grouped by some temporal entity (day/week/month)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}/aggregated/list", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1543,15 +1650,17 @@ class SDK:
 
     
     def data_points_get_statistics_single(self, request: operations.DataPointsGetStatisticsSingleRequest) -> operations.DataPointsGetStatisticsSingleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this datapoint for a timeframe
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}/aggregated", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1573,15 +1682,17 @@ class SDK:
 
     
     def data_points_get_tops(self, request: operations.DataPointsGetTopsRequest) -> operations.DataPointsGetTopsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a top report connected to this datapoint
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}/reports", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1605,13 +1716,16 @@ class SDK:
 
     
     def data_points_patch_favourite(self, request: operations.DataPointsPatchFavouriteRequest) -> operations.DataPointsPatchFavouriteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fast switch the \"favourite\" field of a datapoint
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}/favourite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1641,22 +1755,22 @@ class SDK:
 
     
     def data_points_patch_notes(self, request: operations.DataPointsPatchNotesRequest) -> operations.DataPointsPatchNotesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fast patch the \"notes\" field of a datapoint
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}/notes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1686,15 +1800,17 @@ class SDK:
 
     
     def domains_count(self, request: operations.DomainsCountRequest) -> operations.DomainsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve count of domains
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domains/count"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1720,13 +1836,16 @@ class SDK:
 
     
     def domains_delete(self, request: operations.DomainsDeleteRequest) -> operations.DomainsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a domain
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domains/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1752,15 +1871,17 @@ class SDK:
 
     
     def domains_get(self, request: operations.DomainsGetRequest) -> operations.DomainsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a list of domains
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domains"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1782,22 +1903,22 @@ class SDK:
 
     
     def domains_put(self, request: operations.DomainsPutRequest) -> operations.DomainsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a domain
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domains"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1823,22 +1944,22 @@ class SDK:
 
     
     def domains_update(self, request: operations.DomainsUpdateRequest) -> operations.DomainsUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a domain
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domains/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1864,13 +1985,16 @@ class SDK:
 
     
     def get_conversions_conversion_id_(self, request: operations.GetConversionsConversionIDRequest) -> operations.GetConversionsConversionIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve conversion specified by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/conversions/{conversionId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1898,13 +2022,16 @@ class SDK:
 
     
     def get_datapoints_id_(self, request: operations.GetDatapointsIDRequest) -> operations.GetDatapointsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a datapoint
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/datapoints/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1928,13 +2055,16 @@ class SDK:
 
     
     def get_domains_id_(self, request: operations.GetDomainsIDRequest) -> operations.GetDomainsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a domain
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domains/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1960,13 +2090,16 @@ class SDK:
 
     
     def get_groups_id_(self, request: operations.GetGroupsIDRequest) -> operations.GetGroupsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a group
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1990,13 +2123,16 @@ class SDK:
 
     
     def get_retargeting_id_(self, request: operations.GetRetargetingIDRequest) -> operations.GetRetargetingIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a retargeting script object
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/retargeting/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2024,13 +2160,16 @@ class SDK:
 
     
     def get_tags_tag_id_(self, request: operations.GetTagsTagIDRequest) -> operations.GetTagsTagIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a tag
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2052,15 +2191,17 @@ class SDK:
 
     
     def groups_count(self, request: operations.GroupsCountRequest) -> operations.GroupsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count the groups associated to the user.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/groups/count"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2088,13 +2229,16 @@ class SDK:
 
     
     def groups_delete(self, request: operations.GroupsDeleteRequest) -> operations.GroupsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete group specified by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2122,15 +2266,17 @@ class SDK:
 
     
     def groups_get(self, request: operations.GroupsGetRequest) -> operations.GroupsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the groups associated to the user.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/groups"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2154,15 +2300,17 @@ class SDK:
 
     
     def groups_get_datapoints(self, request: operations.GroupsGetDatapointsRequest) -> operations.GroupsGetDatapointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the datapoints associated to the user in this group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/datapoints", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2186,15 +2334,17 @@ class SDK:
 
     
     def groups_get_datapoints_count(self, request: operations.GroupsGetDatapointsCountRequest) -> operations.GroupsGetDatapointsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count the datapoints associated to the user in this group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/datapoints/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2222,15 +2372,17 @@ class SDK:
 
     
     def groups_get_datapoints_summary(self, request: operations.GroupsGetDatapointsSummaryRequest) -> operations.GroupsGetDatapointsSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/aggregated/summary", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2252,15 +2404,17 @@ class SDK:
 
     
     def groups_get_hits(self, request: operations.GroupsGetHitsRequest) -> operations.GroupsGetHitsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve the list of events related to this group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/hits", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2282,15 +2436,17 @@ class SDK:
 
     
     def groups_get_statistics_aggregated_single(self, request: operations.GroupsGetStatisticsAggregatedSingleRequest) -> operations.GroupsGetStatisticsAggregatedSingleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this customer for a timeframe by groups
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/groups/aggregated"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2312,15 +2468,17 @@ class SDK:
 
     
     def groups_get_statistics_all_list(self, request: operations.GroupsGetStatisticsAllListRequest) -> operations.GroupsGetStatisticsAllListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about all groups of this customer for a timeframe grouped by some temporal entity (day/week/month)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/groups/aggregated/list"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2342,15 +2500,17 @@ class SDK:
 
     
     def groups_get_statistics_list(self, request: operations.GroupsGetStatisticsListRequest) -> operations.GroupsGetStatisticsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this group for a timeframe grouped by some temporal entity (day/week/month)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/aggregated/list", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2372,15 +2532,17 @@ class SDK:
 
     
     def groups_get_statistics_single(self, request: operations.GroupsGetStatisticsSingleRequest) -> operations.GroupsGetStatisticsSingleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics about this group for a timeframe
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/aggregated", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2402,15 +2564,17 @@ class SDK:
 
     
     def groups_get_tops(self, request: operations.GroupsGetTopsRequest) -> operations.GroupsGetTopsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a top report connected to this group
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/reports", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2434,13 +2598,16 @@ class SDK:
 
     
     def groups_patch_favourite(self, request: operations.GroupsPatchFavouriteRequest) -> operations.GroupsPatchFavouriteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fast switch the \"favourite\" field of a group
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/favourite", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2470,22 +2637,22 @@ class SDK:
 
     
     def groups_patch_notes(self, request: operations.GroupsPatchNotesRequest) -> operations.GroupsPatchNotesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fast patch the \"notes\" field of a group
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{id}/notes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2515,15 +2682,17 @@ class SDK:
 
     
     def hits_get_hits(self, request: operations.HitsGetHitsRequest) -> operations.HitsGetHitsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve the list of events related to this account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hits"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2545,13 +2714,16 @@ class SDK:
 
     
     def me_get_me(self) -> operations.MeGetMeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve current account data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/me"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2577,13 +2749,16 @@ class SDK:
 
     
     def me_get_me_plan(self) -> operations.MeGetMePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve current account plan
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/me/plan"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2609,22 +2784,22 @@ class SDK:
 
     
     def post_account_guests_guest_id_type_permissions_patch(self, request: operations.PostAccountGuestsGuestIDTypePermissionsPatchRequest) -> operations.PostAccountGuestsGuestIDTypePermissionsPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Change the permission on a shared object
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/guests/{guestId}/{type}/permissions/patch", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2650,15 +2825,17 @@ class SDK:
 
     
     def reports_get(self, request: operations.ReportsGetRequest) -> operations.ReportsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a top report
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/reports"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2682,13 +2859,16 @@ class SDK:
 
     
     def retargeting_count(self) -> operations.RetargetingCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve count of retargeting scripts
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/retargeting/count"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2714,13 +2894,16 @@ class SDK:
 
     
     def retargeting_delete(self, request: operations.RetargetingDeleteRequest) -> operations.RetargetingDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a retargeting script (and remove associations)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/retargeting/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2748,15 +2931,17 @@ class SDK:
 
     
     def retargeting_get(self, request: operations.RetargetingGetRequest) -> operations.RetargetingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the retargeting scripts associated to the user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/retargeting"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2780,15 +2965,17 @@ class SDK:
 
     
     def retargeting_get_datapoints(self, request: operations.RetargetingGetDatapointsRequest) -> operations.RetargetingGetDatapointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the datapoints associated to the retargeting script.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/retargeting/{id}/datapoints", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2812,15 +2999,17 @@ class SDK:
 
     
     def retargeting_get_datapoints_count(self, request: operations.RetargetingGetDatapointsCountRequest) -> operations.RetargetingGetDatapointsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count the datapoints associated to the retargeting script.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/retargeting/{id}/datapoints/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2848,22 +3037,22 @@ class SDK:
 
     
     def retargeting_post(self, request: operations.RetargetingPostRequest) -> operations.RetargetingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a retargeting script
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/retargeting/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2891,22 +3080,22 @@ class SDK:
 
     
     def retargeting_put(self, request: operations.RetargetingPutRequest) -> operations.RetargetingPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a retargeting script
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/retargeting"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2934,15 +3123,17 @@ class SDK:
 
     
     def tags_count(self, request: operations.TagsCountRequest) -> operations.TagsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the groups associated to the user filtered by this tag.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tags/count"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2966,13 +3157,16 @@ class SDK:
 
     
     def tags_delete(self, request: operations.TagsDeleteRequest) -> operations.TagsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a tag
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2994,13 +3188,16 @@ class SDK:
 
     
     def tags_delete_related_datapoints(self, request: operations.TagsDeleteRelatedDatapointsRequest) -> operations.TagsDeleteRelatedDatapointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the association of this tag with all datapoints
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/datapoints", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3026,13 +3223,16 @@ class SDK:
 
     
     def tags_delete_related_groups(self, request: operations.TagsDeleteRelatedGroupsRequest) -> operations.TagsDeleteRelatedGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete the association of this tag with all groups
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/groups", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3058,15 +3258,17 @@ class SDK:
 
     
     def tags_get(self, request: operations.TagsGetRequest) -> operations.TagsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the groups associated to the user filtered by this tag.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tags"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3090,15 +3292,17 @@ class SDK:
 
     
     def tags_get_datapoints(self, request: operations.TagsGetDatapointsRequest) -> operations.TagsGetDatapointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the datapoints associated to the user filtered by this tag
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/datapoints", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3122,15 +3326,17 @@ class SDK:
 
     
     def tags_get_datapoints_count(self, request: operations.TagsGetDatapointsCountRequest) -> operations.TagsGetDatapointsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count the datapoints associated to the user filtered by this tag
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/datapoints/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3158,15 +3364,17 @@ class SDK:
 
     
     def tags_get_groups(self, request: operations.TagsGetGroupsRequest) -> operations.TagsGetGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of all the groups associated to the user filtered by this tag.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/groups", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3190,15 +3398,17 @@ class SDK:
 
     
     def tags_get_groups_count(self, request: operations.TagsGetGroupsCountRequest) -> operations.TagsGetGroupsCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count the groups associated to the user filtered by this tag
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/groups/count", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3226,22 +3436,22 @@ class SDK:
 
     
     def tags_patch_data_point(self, request: operations.TagsPatchDataPointRequest) -> operations.TagsPatchDataPointResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associate/Deassociate a tag with a datapoint
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/datapoints/patch", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3269,22 +3479,22 @@ class SDK:
 
     
     def tags_patch_group(self, request: operations.TagsPatchGroupRequest) -> operations.TagsPatchGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associate/Deassociate a tag with a group
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/groups/patch", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3312,22 +3522,22 @@ class SDK:
 
     
     def tags_patch_tag_name(self, request: operations.TagsPatchTagNameRequest) -> operations.TagsPatchTagNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fast patch a tag name
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{tagId}/name", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3353,22 +3563,22 @@ class SDK:
 
     
     def tags_put(self, request: operations.TagsPutRequest) -> operations.TagsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a tag
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tags"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

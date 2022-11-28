@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var EndpointsApiServiceRolloutStrategyEnum;
 (function (EndpointsApiServiceRolloutStrategyEnum) {
     EndpointsApiServiceRolloutStrategyEnum["UnspecifiedRolloutStrategy"] = "UNSPECIFIED_ROLLOUT_STRATEGY";
@@ -39,19 +39,19 @@ var EndpointsApiService = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configId" }),
+        SpeakeasyMetadata({ data: "json, name=configId" }),
         __metadata("design:type", String)
     ], EndpointsApiService.prototype, "configId", void 0);
     __decorate([
-        Metadata({ data: "json, name=disableTraceSampling" }),
+        SpeakeasyMetadata({ data: "json, name=disableTraceSampling" }),
         __metadata("design:type", Boolean)
     ], EndpointsApiService.prototype, "disableTraceSampling", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], EndpointsApiService.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=rolloutStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=rolloutStrategy" }),
         __metadata("design:type", String)
     ], EndpointsApiService.prototype, "rolloutStrategy", void 0);
     return EndpointsApiService;

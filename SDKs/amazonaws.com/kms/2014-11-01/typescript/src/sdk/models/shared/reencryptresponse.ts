@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionAlgorithmSpecEnum } from "./encryptionalgorithmspecenum";
-import { EncryptionAlgorithmSpecEnum } from "./encryptionalgorithmspecenum";
+
 
 
 export class ReEncryptResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CiphertextBlob" })
+  @SpeakeasyMetadata({ data: "json, name=CiphertextBlob" })
   ciphertextBlob?: string;
 
-  @Metadata({ data: "json, name=DestinationEncryptionAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationEncryptionAlgorithm" })
   destinationEncryptionAlgorithm?: EncryptionAlgorithmSpecEnum;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=SourceEncryptionAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=SourceEncryptionAlgorithm" })
   sourceEncryptionAlgorithm?: EncryptionAlgorithmSpecEnum;
 
-  @Metadata({ data: "json, name=SourceKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=SourceKeyId" })
   sourceKeyId?: string;
 }

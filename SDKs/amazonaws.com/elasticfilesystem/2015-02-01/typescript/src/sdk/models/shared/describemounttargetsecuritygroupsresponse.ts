@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeMountTargetSecurityGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroups" })
   securityGroups: string[];
 }

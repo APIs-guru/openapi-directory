@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeTagsPathParams:
-    file_system_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
+    file_system_id: str = field(metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class DescribeTagsHeaders:
 
 @dataclass
 class DescribeTagsRequest:
-    path_params: DescribeTagsPathParams = field(default=None)
-    query_params: DescribeTagsQueryParams = field(default=None)
-    headers: DescribeTagsHeaders = field(default=None)
+    headers: DescribeTagsHeaders = field()
+    path_params: DescribeTagsPathParams = field()
+    query_params: DescribeTagsQueryParams = field()
     
 
 @dataclass
 class DescribeTagsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_tags_response: Optional[shared.DescribeTagsResponse] = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

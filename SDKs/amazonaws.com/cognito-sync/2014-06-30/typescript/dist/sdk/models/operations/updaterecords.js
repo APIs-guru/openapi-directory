@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateRecordsPathParams = /** @class */ (function (_super) {
     __extends(UpdateRecordsPathParams, _super);
@@ -30,15 +30,15 @@ var UpdateRecordsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=DatasetName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DatasetName" }),
         __metadata("design:type", String)
     ], UpdateRecordsPathParams.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityId" }),
         __metadata("design:type", String)
     ], UpdateRecordsPathParams.prototype, "identityId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], UpdateRecordsPathParams.prototype, "identityPoolId", void 0);
     return UpdateRecordsPathParams;
@@ -50,35 +50,35 @@ var UpdateRecordsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzSignedHeaders", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-amz-Client-Context" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-amz-Client-Context" }),
         __metadata("design:type", String)
     ], UpdateRecordsHeaders.prototype, "xAmzClientContext", void 0);
     return UpdateRecordsHeaders;
@@ -90,15 +90,15 @@ var UpdateRecordsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeviceId" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceId" }),
         __metadata("design:type", String)
     ], UpdateRecordsRequestBody.prototype, "deviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordPatches", elemType: shared.RecordPatch }),
+        SpeakeasyMetadata({ data: "json, name=RecordPatches", elemType: shared.RecordPatch }),
         __metadata("design:type", Array)
     ], UpdateRecordsRequestBody.prototype, "recordPatches", void 0);
     __decorate([
-        Metadata({ data: "json, name=SyncSessionToken" }),
+        SpeakeasyMetadata({ data: "json, name=SyncSessionToken" }),
         __metadata("design:type", String)
     ], UpdateRecordsRequestBody.prototype, "syncSessionToken", void 0);
     return UpdateRecordsRequestBody;
@@ -110,15 +110,15 @@ var UpdateRecordsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateRecordsPathParams)
     ], UpdateRecordsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateRecordsHeaders)
     ], UpdateRecordsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateRecordsRequestBody)
     ], UpdateRecordsRequest.prototype, "request", void 0);
     return UpdateRecordsRequest;
@@ -130,51 +130,51 @@ var UpdateRecordsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateRecordsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "internalErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "invalidLambdaFunctionOutputException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "lambdaThrottledException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "notAuthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "resourceConflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateRecordsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateRecordsResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateRecordsResponse)
     ], UpdateRecordsResponse.prototype, "updateRecordsResponse", void 0);
     return UpdateRecordsResponse;

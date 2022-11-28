@@ -1,5 +1,7 @@
 package shared
 
+// PosStore
+// Store resource.
 type PosStore struct {
 	GcidCategory []string `json:"gcidCategory,omitempty"`
 	Kind         *string  `json:"kind,omitempty"`

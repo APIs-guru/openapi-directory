@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GiftDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type contains information about a digital gift card line item that was purchased as a gift, and sent to the recipient by email.
 **/
 export class GiftDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=recipientEmail" })
+  @SpeakeasyMetadata({ data: "json, name=recipientEmail" })
   recipientEmail?: string;
 
-  @Metadata({ data: "json, name=senderName" })
+  @SpeakeasyMetadata({ data: "json, name=senderName" })
   senderName?: string;
 }

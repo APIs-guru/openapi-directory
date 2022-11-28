@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutTIdStatusJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutTIdStatusJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Key" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Username" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Username" })
   apiUsername: string;
 }
 
 export enum PutTIdStatusJsonRequestBodyEnabledEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }
 
 export enum PutTIdStatusJsonRequestBodyStatusEnum {
-    Closed = "closed"
-,    Pinned = "pinned"
-,    PinnedGlobally = "pinned_globally"
-,    Archived = "archived"
-,    Visible = "visible"
+    Closed = "closed",
+    Pinned = "pinned",
+    PinnedGlobally = "pinned_globally",
+    Archived = "archived",
+    Visible = "visible"
 }
 
 
 export class PutTIdStatusJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: PutTIdStatusJsonRequestBodyEnabledEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PutTIdStatusJsonRequestBodyStatusEnum;
 
-  @Metadata({ data: "json, name=until" })
+  @SpeakeasyMetadata({ data: "json, name=until" })
   until?: string;
 }
 
 
-export class PutTIdStatusJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutTIdStatusJsonPathParams;
-
-  @Metadata()
-  headers: PutTIdStatusJsonHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PutTIdStatusJsonRequestBody;
-}
-
-
 export class PutTIdStatusJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: string;
 
-  @Metadata({ data: "json, name=topic_status_update" })
+  @SpeakeasyMetadata({ data: "json, name=topic_status_update" })
   topicStatusUpdate?: string;
 }
 
 
+export class PutTIdStatusJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutTIdStatusJsonPathParams;
+
+  @SpeakeasyMetadata()
+  headers: PutTIdStatusJsonHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PutTIdStatusJsonRequestBody;
+}
+
+
 export class PutTIdStatusJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putTIdStatusJson200ApplicationJsonObject?: PutTIdStatusJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

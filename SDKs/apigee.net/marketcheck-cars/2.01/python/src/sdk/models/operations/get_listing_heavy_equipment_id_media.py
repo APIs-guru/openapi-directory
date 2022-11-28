@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetListingHeavyEquipmentIDMediaPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetListingHeavyEquipmentIDMediaQueryParams:
 
 @dataclass
 class GetListingHeavyEquipmentIDMediaRequest:
-    path_params: GetListingHeavyEquipmentIDMediaPathParams = field(default=None)
-    query_params: GetListingHeavyEquipmentIDMediaQueryParams = field(default=None)
+    path_params: GetListingHeavyEquipmentIDMediaPathParams = field()
+    query_params: GetListingHeavyEquipmentIDMediaQueryParams = field()
     
 
 @dataclass
 class GetListingHeavyEquipmentIDMediaResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     listing_media: Optional[shared.ListingMedia] = field(default=None)
-    status_code: int = field(default=None)
     

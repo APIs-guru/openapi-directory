@@ -22,9 +22,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventTrigger } from "./eventtrigger";
+import { HttpsTriggerInput } from "./httpstrigger";
+import { SecretEnvVar } from "./secretenvvar";
+import { SecretVolume } from "./secretvolume";
+import { SourceRepositoryInput } from "./sourcerepository";
 import { HttpsTrigger } from "./httpstrigger";
 import { SourceRepository } from "./sourcerepository";
 export var CloudFunctionDockerRegistryEnum;
@@ -40,6 +43,12 @@ export var CloudFunctionIngressSettingsEnum;
     CloudFunctionIngressSettingsEnum["AllowInternalOnly"] = "ALLOW_INTERNAL_ONLY";
     CloudFunctionIngressSettingsEnum["AllowInternalAndGclb"] = "ALLOW_INTERNAL_AND_GCLB";
 })(CloudFunctionIngressSettingsEnum || (CloudFunctionIngressSettingsEnum = {}));
+export var CloudFunctionVpcConnectorEgressSettingsEnum;
+(function (CloudFunctionVpcConnectorEgressSettingsEnum) {
+    CloudFunctionVpcConnectorEgressSettingsEnum["VpcConnectorEgressSettingsUnspecified"] = "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED";
+    CloudFunctionVpcConnectorEgressSettingsEnum["PrivateRangesOnly"] = "PRIVATE_RANGES_ONLY";
+    CloudFunctionVpcConnectorEgressSettingsEnum["AllTraffic"] = "ALL_TRAFFIC";
+})(CloudFunctionVpcConnectorEgressSettingsEnum || (CloudFunctionVpcConnectorEgressSettingsEnum = {}));
 export var CloudFunctionStatusEnum;
 (function (CloudFunctionStatusEnum) {
     CloudFunctionStatusEnum["CloudFunctionStatusUnspecified"] = "CLOUD_FUNCTION_STATUS_UNSPECIFIED";
@@ -49,12 +58,130 @@ export var CloudFunctionStatusEnum;
     CloudFunctionStatusEnum["DeleteInProgress"] = "DELETE_IN_PROGRESS";
     CloudFunctionStatusEnum["Unknown"] = "UNKNOWN";
 })(CloudFunctionStatusEnum || (CloudFunctionStatusEnum = {}));
-export var CloudFunctionVpcConnectorEgressSettingsEnum;
-(function (CloudFunctionVpcConnectorEgressSettingsEnum) {
-    CloudFunctionVpcConnectorEgressSettingsEnum["VpcConnectorEgressSettingsUnspecified"] = "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED";
-    CloudFunctionVpcConnectorEgressSettingsEnum["PrivateRangesOnly"] = "PRIVATE_RANGES_ONLY";
-    CloudFunctionVpcConnectorEgressSettingsEnum["AllTraffic"] = "ALL_TRAFFIC";
-})(CloudFunctionVpcConnectorEgressSettingsEnum || (CloudFunctionVpcConnectorEgressSettingsEnum = {}));
+// CloudFunctionInput
+/**
+ * Describes a Cloud Function that contains user computation executed in response to an event. It encapsulate function and triggers configurations.
+**/
+var CloudFunctionInput = /** @class */ (function (_super) {
+    __extends(CloudFunctionInput, _super);
+    function CloudFunctionInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=availableMemoryMb" }),
+        __metadata("design:type", Number)
+    ], CloudFunctionInput.prototype, "availableMemoryMb", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=buildEnvironmentVariables" }),
+        __metadata("design:type", Map)
+    ], CloudFunctionInput.prototype, "buildEnvironmentVariables", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=buildWorkerPool" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "buildWorkerPool", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dockerRegistry" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "dockerRegistry", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dockerRepository" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "dockerRepository", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=entryPoint" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "entryPoint", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
+        __metadata("design:type", Map)
+    ], CloudFunctionInput.prototype, "environmentVariables", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=eventTrigger" }),
+        __metadata("design:type", EventTrigger)
+    ], CloudFunctionInput.prototype, "eventTrigger", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=httpsTrigger" }),
+        __metadata("design:type", HttpsTriggerInput)
+    ], CloudFunctionInput.prototype, "httpsTrigger", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ingressSettings" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "ingressSettings", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "kmsKeyName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], CloudFunctionInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=maxInstances" }),
+        __metadata("design:type", Number)
+    ], CloudFunctionInput.prototype, "maxInstances", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=minInstances" }),
+        __metadata("design:type", Number)
+    ], CloudFunctionInput.prototype, "minInstances", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=network" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "network", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=runtime" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "runtime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=secretEnvironmentVariables", elemType: SecretEnvVar }),
+        __metadata("design:type", Array)
+    ], CloudFunctionInput.prototype, "secretEnvironmentVariables", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=secretVolumes", elemType: SecretVolume }),
+        __metadata("design:type", Array)
+    ], CloudFunctionInput.prototype, "secretVolumes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "serviceAccountEmail", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceArchiveUrl" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "sourceArchiveUrl", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceRepository" }),
+        __metadata("design:type", SourceRepositoryInput)
+    ], CloudFunctionInput.prototype, "sourceRepository", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceToken" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "sourceToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceUploadUrl" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "sourceUploadUrl", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "timeout", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=vpcConnector" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "vpcConnector", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=vpcConnectorEgressSettings" }),
+        __metadata("design:type", String)
+    ], CloudFunctionInput.prototype, "vpcConnectorEgressSettings", void 0);
+    return CloudFunctionInput;
+}(SpeakeasyBase));
+export { CloudFunctionInput };
 // CloudFunction
 /**
  * Describes a Cloud Function that contains user computation executed in response to an event. It encapsulate function and triggers configurations.
@@ -65,135 +192,135 @@ var CloudFunction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=availableMemoryMb" }),
+        SpeakeasyMetadata({ data: "json, name=availableMemoryMb" }),
         __metadata("design:type", Number)
     ], CloudFunction.prototype, "availableMemoryMb", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildEnvironmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=buildEnvironmentVariables" }),
         __metadata("design:type", Map)
     ], CloudFunction.prototype, "buildEnvironmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildId" }),
+        SpeakeasyMetadata({ data: "json, name=buildId" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "buildId", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildName" }),
+        SpeakeasyMetadata({ data: "json, name=buildName" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "buildName", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildWorkerPool" }),
+        SpeakeasyMetadata({ data: "json, name=buildWorkerPool" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "buildWorkerPool", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=dockerRegistry" }),
+        SpeakeasyMetadata({ data: "json, name=dockerRegistry" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "dockerRegistry", void 0);
     __decorate([
-        Metadata({ data: "json, name=dockerRepository" }),
+        SpeakeasyMetadata({ data: "json, name=dockerRepository" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "dockerRepository", void 0);
     __decorate([
-        Metadata({ data: "json, name=entryPoint" }),
+        SpeakeasyMetadata({ data: "json, name=entryPoint" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "entryPoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
         __metadata("design:type", Map)
     ], CloudFunction.prototype, "environmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTrigger" }),
+        SpeakeasyMetadata({ data: "json, name=eventTrigger" }),
         __metadata("design:type", EventTrigger)
     ], CloudFunction.prototype, "eventTrigger", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpsTrigger" }),
+        SpeakeasyMetadata({ data: "json, name=httpsTrigger" }),
         __metadata("design:type", HttpsTrigger)
     ], CloudFunction.prototype, "httpsTrigger", void 0);
     __decorate([
-        Metadata({ data: "json, name=ingressSettings" }),
+        SpeakeasyMetadata({ data: "json, name=ingressSettings" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "ingressSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyName" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "kmsKeyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], CloudFunction.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxInstances" }),
+        SpeakeasyMetadata({ data: "json, name=maxInstances" }),
         __metadata("design:type", Number)
     ], CloudFunction.prototype, "maxInstances", void 0);
     __decorate([
-        Metadata({ data: "json, name=minInstances" }),
+        SpeakeasyMetadata({ data: "json, name=minInstances" }),
         __metadata("design:type", Number)
     ], CloudFunction.prototype, "minInstances", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtime" }),
+        SpeakeasyMetadata({ data: "json, name=runtime" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "runtime", void 0);
     __decorate([
-        Metadata({ data: "json, name=secretEnvironmentVariables", elemType: shared.SecretEnvVar }),
+        SpeakeasyMetadata({ data: "json, name=secretEnvironmentVariables", elemType: SecretEnvVar }),
         __metadata("design:type", Array)
     ], CloudFunction.prototype, "secretEnvironmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=secretVolumes", elemType: shared.SecretVolume }),
+        SpeakeasyMetadata({ data: "json, name=secretVolumes", elemType: SecretVolume }),
         __metadata("design:type", Array)
     ], CloudFunction.prototype, "secretVolumes", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountEmail" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "serviceAccountEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceArchiveUrl" }),
+        SpeakeasyMetadata({ data: "json, name=sourceArchiveUrl" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "sourceArchiveUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceRepository" }),
+        SpeakeasyMetadata({ data: "json, name=sourceRepository" }),
         __metadata("design:type", SourceRepository)
     ], CloudFunction.prototype, "sourceRepository", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceToken" }),
+        SpeakeasyMetadata({ data: "json, name=sourceToken" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "sourceToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceUploadUrl" }),
+        SpeakeasyMetadata({ data: "json, name=sourceUploadUrl" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "sourceUploadUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=versionId" }),
+        SpeakeasyMetadata({ data: "json, name=versionId" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "versionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcConnector" }),
+        SpeakeasyMetadata({ data: "json, name=vpcConnector" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "vpcConnector", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcConnectorEgressSettings" }),
+        SpeakeasyMetadata({ data: "json, name=vpcConnectorEgressSettings" }),
         __metadata("design:type", String)
     ], CloudFunction.prototype, "vpcConnectorEgressSettings", void 0);
     return CloudFunction;

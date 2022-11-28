@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoginAuthConfigReqObj } from "./loginauthconfigreqobj";
 
 
+
 export class UpdateBackendConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppId" })
+  @SpeakeasyMetadata({ data: "json, name=AppId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=BackendManagerAppId" })
+  @SpeakeasyMetadata({ data: "json, name=BackendManagerAppId" })
   backendManagerAppId?: string;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string;
 
-  @Metadata({ data: "json, name=LoginAuthConfig" })
+  @SpeakeasyMetadata({ data: "json, name=LoginAuthConfig" })
   loginAuthConfig?: LoginAuthConfigReqObj;
 }

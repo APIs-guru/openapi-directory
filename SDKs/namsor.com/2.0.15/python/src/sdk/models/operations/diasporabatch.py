@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class DiasporaBatchSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class DiasporaBatchRequest:
+    security: DiasporaBatchSecurity = field()
     request: Optional[shared.BatchFirstLastNameGeoIn] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DiasporaBatchSecurity = field(default=None)
     
 
 @dataclass
 class DiasporaBatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_first_last_name_diasporaed_out: Optional[shared.BatchFirstLastNameDiasporaedOut] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

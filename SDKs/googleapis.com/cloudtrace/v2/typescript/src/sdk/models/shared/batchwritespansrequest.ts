@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Span } from "./span";
+
 
 
 // BatchWriteSpansRequest
@@ -8,6 +8,6 @@ import { Span } from "./span";
  * The request message for the `BatchWriteSpans` method.
 **/
 export class BatchWriteSpansRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=spans", elemType: shared.Span })
+  @SpeakeasyMetadata({ data: "json, name=spans", elemType: Span })
   spans?: Span[];
 }

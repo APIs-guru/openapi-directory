@@ -11,6 +11,8 @@ type PrivateUserPlan struct {
 	Space         int64  `json:"space"`
 }
 
+// PrivateUser
+// Private User
 type PrivateUser struct {
 	AvatarURL               string           `json:"avatar_url"`
 	Bio                     string           `json:"bio"`

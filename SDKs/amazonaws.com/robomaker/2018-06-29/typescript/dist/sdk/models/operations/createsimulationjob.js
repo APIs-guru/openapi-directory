@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateSimulationJobHeaders = /** @class */ (function (_super) {
     __extends(CreateSimulationJobHeaders, _super);
@@ -30,31 +30,31 @@ var CreateSimulationJobHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateSimulationJobHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateSimulationJobHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateSimulationJobHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateSimulationJobHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateSimulationJobHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateSimulationJobHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateSimulationJobHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateSimulationJobHeaders;
@@ -70,7 +70,7 @@ var CreateSimulationJobRequestBodyCompute = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=simulationUnitLimit" }),
+        SpeakeasyMetadata({ data: "json, name=simulationUnitLimit" }),
         __metadata("design:type", Number)
     ], CreateSimulationJobRequestBodyCompute.prototype, "simulationUnitLimit", void 0);
     return CreateSimulationJobRequestBodyCompute;
@@ -91,7 +91,7 @@ var CreateSimulationJobRequestBodyLoggingConfig = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=recordAllRosTopics" }),
+        SpeakeasyMetadata({ data: "json, name=recordAllRosTopics" }),
         __metadata("design:type", Boolean)
     ], CreateSimulationJobRequestBodyLoggingConfig.prototype, "recordAllRosTopics", void 0);
     return CreateSimulationJobRequestBodyLoggingConfig;
@@ -107,11 +107,11 @@ var CreateSimulationJobRequestBodyOutputLocation = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=s3Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=s3Bucket" }),
         __metadata("design:type", String)
     ], CreateSimulationJobRequestBodyOutputLocation.prototype, "s3Bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3Prefix" }),
+        SpeakeasyMetadata({ data: "json, name=s3Prefix" }),
         __metadata("design:type", String)
     ], CreateSimulationJobRequestBodyOutputLocation.prototype, "s3Prefix", void 0);
     return CreateSimulationJobRequestBodyOutputLocation;
@@ -127,15 +127,15 @@ var CreateSimulationJobRequestBodyVpcConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assignPublicIp" }),
+        SpeakeasyMetadata({ data: "json, name=assignPublicIp" }),
         __metadata("design:type", Boolean)
     ], CreateSimulationJobRequestBodyVpcConfig.prototype, "assignPublicIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityGroups" }),
+        SpeakeasyMetadata({ data: "json, name=securityGroups" }),
         __metadata("design:type", Array)
     ], CreateSimulationJobRequestBodyVpcConfig.prototype, "securityGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnets" }),
+        SpeakeasyMetadata({ data: "json, name=subnets" }),
         __metadata("design:type", Array)
     ], CreateSimulationJobRequestBodyVpcConfig.prototype, "subnets", void 0);
     return CreateSimulationJobRequestBodyVpcConfig;
@@ -147,51 +147,51 @@ var CreateSimulationJobRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], CreateSimulationJobRequestBody.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=compute" }),
+        SpeakeasyMetadata({ data: "json, name=compute" }),
         __metadata("design:type", CreateSimulationJobRequestBodyCompute)
     ], CreateSimulationJobRequestBody.prototype, "compute", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSources", elemType: shared.DataSourceConfig }),
+        SpeakeasyMetadata({ data: "json, name=dataSources", elemType: shared.DataSourceConfig }),
         __metadata("design:type", Array)
     ], CreateSimulationJobRequestBody.prototype, "dataSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureBehavior" }),
+        SpeakeasyMetadata({ data: "json, name=failureBehavior" }),
         __metadata("design:type", String)
     ], CreateSimulationJobRequestBody.prototype, "failureBehavior", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamRole" }),
+        SpeakeasyMetadata({ data: "json, name=iamRole" }),
         __metadata("design:type", String)
     ], CreateSimulationJobRequestBody.prototype, "iamRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=loggingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=loggingConfig" }),
         __metadata("design:type", CreateSimulationJobRequestBodyLoggingConfig)
     ], CreateSimulationJobRequestBody.prototype, "loggingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxJobDurationInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=maxJobDurationInSeconds" }),
         __metadata("design:type", Number)
     ], CreateSimulationJobRequestBody.prototype, "maxJobDurationInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputLocation" }),
+        SpeakeasyMetadata({ data: "json, name=outputLocation" }),
         __metadata("design:type", CreateSimulationJobRequestBodyOutputLocation)
     ], CreateSimulationJobRequestBody.prototype, "outputLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotApplications", elemType: shared.RobotApplicationConfig }),
+        SpeakeasyMetadata({ data: "json, name=robotApplications", elemType: shared.RobotApplicationConfig }),
         __metadata("design:type", Array)
     ], CreateSimulationJobRequestBody.prototype, "robotApplications", void 0);
     __decorate([
-        Metadata({ data: "json, name=simulationApplications", elemType: shared.SimulationApplicationConfig }),
+        SpeakeasyMetadata({ data: "json, name=simulationApplications", elemType: shared.SimulationApplicationConfig }),
         __metadata("design:type", Array)
     ], CreateSimulationJobRequestBody.prototype, "simulationApplications", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateSimulationJobRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=vpcConfig" }),
         __metadata("design:type", CreateSimulationJobRequestBodyVpcConfig)
     ], CreateSimulationJobRequestBody.prototype, "vpcConfig", void 0);
     return CreateSimulationJobRequestBody;
@@ -203,11 +203,11 @@ var CreateSimulationJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateSimulationJobHeaders)
     ], CreateSimulationJobRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateSimulationJobRequestBody)
     ], CreateSimulationJobRequest.prototype, "request", void 0);
     return CreateSimulationJobRequest;
@@ -219,43 +219,43 @@ var CreateSimulationJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateSimulationJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateSimulationJobResponse)
     ], CreateSimulationJobResponse.prototype, "createSimulationJobResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSimulationJobResponse.prototype, "idempotentParameterMismatchException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSimulationJobResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSimulationJobResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSimulationJobResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSimulationJobResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSimulationJobResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateSimulationJobResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateSimulationJobResponse.prototype, "throttlingException", void 0);
     return CreateSimulationJobResponse;

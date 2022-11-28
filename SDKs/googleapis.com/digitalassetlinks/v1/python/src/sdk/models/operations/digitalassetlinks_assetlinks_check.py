@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -27,12 +28,12 @@ class DigitalassetlinksAssetlinksCheckQueryParams:
 
 @dataclass
 class DigitalassetlinksAssetlinksCheckRequest:
-    query_params: DigitalassetlinksAssetlinksCheckQueryParams = field(default=None)
+    query_params: DigitalassetlinksAssetlinksCheckQueryParams = field()
     
 
 @dataclass
 class DigitalassetlinksAssetlinksCheckResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_response: Optional[shared.CheckResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

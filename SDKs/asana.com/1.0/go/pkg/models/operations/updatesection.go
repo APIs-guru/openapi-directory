@@ -17,14 +17,14 @@ type UpdateSectionRequestBody struct {
 	Data *shared.SectionRequest `json:"data,omitempty"`
 }
 
+type UpdateSection200ApplicationJSON struct {
+	Data *shared.SectionResponse `json:"data,omitempty"`
+}
+
 type UpdateSectionRequest struct {
 	PathParams  UpdateSectionPathParams
 	QueryParams UpdateSectionQueryParams
 	Request     UpdateSectionRequestBody `request:"mediaType=application/json"`
-}
-
-type UpdateSection200ApplicationJSON struct {
-	Data *shared.SectionResponse `json:"data,omitempty"`
 }
 
 type UpdateSectionResponse struct {

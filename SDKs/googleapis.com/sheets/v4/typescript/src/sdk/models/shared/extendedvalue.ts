@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorValue } from "./errorvalue";
+
 
 
 // ExtendedValue
@@ -7,18 +8,18 @@ import { ErrorValue } from "./errorvalue";
  * The kinds of value that a cell in a spreadsheet can have.
 **/
 export class ExtendedValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=errorValue" })
+  @SpeakeasyMetadata({ data: "json, name=errorValue" })
   errorValue?: ErrorValue;
 
-  @Metadata({ data: "json, name=formulaValue" })
+  @SpeakeasyMetadata({ data: "json, name=formulaValue" })
   formulaValue?: string;
 
-  @Metadata({ data: "json, name=numberValue" })
+  @SpeakeasyMetadata({ data: "json, name=numberValue" })
   numberValue?: number;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

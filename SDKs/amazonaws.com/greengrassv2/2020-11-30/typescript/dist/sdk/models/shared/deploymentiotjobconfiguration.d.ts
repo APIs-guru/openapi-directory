@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IoTJobAbortConfig } from "./iotjobabortconfig";
 import { IoTJobExecutionsRolloutConfig } from "./iotjobexecutionsrolloutconfig";
 import { IoTJobTimeoutConfig } from "./iotjobtimeoutconfig";

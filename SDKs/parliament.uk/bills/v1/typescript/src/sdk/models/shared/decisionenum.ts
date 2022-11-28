@@ -1,10 +1,11 @@
 
 
+
 export enum DecisionEnum {
-    All = "All"
-,    NoDecision = "NoDecision"
-,    Withdrawn = "Withdrawn"
-,    Disagreed = "Disagreed"
-,    NotMoved = "NotMoved"
-,    Agreed = "Agreed"
+    All = "All",
+    NoDecision = "NoDecision",
+    Withdrawn = "Withdrawn",
+    Disagreed = "Disagreed",
+    NotMoved = "NotMoved",
+    Agreed = "Agreed"
 }

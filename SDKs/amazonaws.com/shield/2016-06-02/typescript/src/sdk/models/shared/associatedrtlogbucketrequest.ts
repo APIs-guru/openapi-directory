@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateDrtLogBucketRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogBucket" })
+  @SpeakeasyMetadata({ data: "json, name=LogBucket" })
   logBucket: string;
 }

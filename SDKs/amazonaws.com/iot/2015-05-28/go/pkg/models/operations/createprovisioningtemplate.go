@@ -14,6 +14,8 @@ type CreateProvisioningTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateProvisioningTemplateRequestBodyPreProvisioningHook
+// Structure that contains <code>payloadVersion</code> and <code>targetArn</code>.
 type CreateProvisioningTemplateRequestBodyPreProvisioningHook struct {
 	PayloadVersion *string `json:"payloadVersion,omitempty"`
 	TargetArn      *string `json:"targetArn,omitempty"`

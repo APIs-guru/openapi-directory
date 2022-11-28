@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeAutoScalingNotificationTypesActionEnum(str, Enum):
     DESCRIBE_AUTO_SCALING_NOTIFICATION_TYPES = "DescribeAutoScalingNotificationTypes"
@@ -10,8 +14,8 @@ class GetDescribeAutoScalingNotificationTypesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAutoScalingNotificationTypesQueryParams:
-    action: GetDescribeAutoScalingNotificationTypesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetDescribeAutoScalingNotificationTypesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDescribeAutoScalingNotificationTypesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAutoScalingNotificationTypesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetDescribeAutoScalingNotificationTypesHeaders:
 
 @dataclass
 class GetDescribeAutoScalingNotificationTypesRequest:
-    query_params: GetDescribeAutoScalingNotificationTypesQueryParams = field(default=None)
-    headers: GetDescribeAutoScalingNotificationTypesHeaders = field(default=None)
+    headers: GetDescribeAutoScalingNotificationTypesHeaders = field()
+    query_params: GetDescribeAutoScalingNotificationTypesQueryParams = field()
     
 
 @dataclass
 class GetDescribeAutoScalingNotificationTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

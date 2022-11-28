@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import dimensionrange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteDimensionRequest:
-    range: Optional[dimensionrange.DimensionRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""DeleteDimensionRequest
+    Deletes the dimensions from the sheet.
+    """
+    
+    range: Optional[DimensionRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

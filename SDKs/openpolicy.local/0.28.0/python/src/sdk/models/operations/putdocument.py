@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutDocumentPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class PutDocumentHeaders:
 
 @dataclass
 class PutDocumentRequest:
-    path_params: PutDocumentPathParams = field(default=None)
-    headers: PutDocumentHeaders = field(default=None)
+    headers: PutDocumentHeaders = field()
+    path_params: PutDocumentPathParams = field()
     
 
 @dataclass
 class PutDocumentResponse:
+    content_type: str = field()
+    status_code: int = field()
     four_hundred: Optional[shared.FourHundred] = field(default=None)
     four_hundred_and_four: Optional[shared.FourHundredAndFour] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

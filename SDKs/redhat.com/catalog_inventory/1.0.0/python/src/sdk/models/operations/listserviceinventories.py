@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -13,12 +13,12 @@ class ListServiceInventoriesQueryParams:
 
 @dataclass
 class ListServiceInventoriesRequest:
-    query_params: ListServiceInventoriesQueryParams = field(default=None)
+    query_params: ListServiceInventoriesQueryParams = field()
     
 
 @dataclass
 class ListServiceInventoriesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_inventories_collection: Optional[shared.ServiceInventoriesCollection] = field(default=None)
-    status_code: int = field(default=None)
     

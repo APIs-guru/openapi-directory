@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GcipSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Allows customers to configure tenant_id for GCIP instance per-app.
 **/
 export class GcipSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=loginPageUri" })
+  @SpeakeasyMetadata({ data: "json, name=loginPageUri" })
   loginPageUri?: string;
 
-  @Metadata({ data: "json, name=tenantIds" })
+  @SpeakeasyMetadata({ data: "json, name=tenantIds" })
   tenantIds?: string[];
 }

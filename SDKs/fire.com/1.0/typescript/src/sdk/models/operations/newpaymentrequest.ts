@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NewPaymentRequestNewPaymentRequestCurrencyEnum {
-    Eur = "EUR"
-,    Gbp = "GBP"
+    Eur = "EUR",
+    Gbp = "GBP"
 }
 
 
 export class NewPaymentRequestNewPaymentRequestOrderDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment1" })
+  @SpeakeasyMetadata({ data: "json, name=comment1" })
   comment1?: string;
 
-  @Metadata({ data: "json, name=comment2" })
+  @SpeakeasyMetadata({ data: "json, name=comment2" })
   comment2?: string;
 
-  @Metadata({ data: "json, name=customerNumber" })
+  @SpeakeasyMetadata({ data: "json, name=customerNumber" })
   customerNumber?: string;
 
-  @Metadata({ data: "json, name=deliveryAddressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryAddressLine1" })
   deliveryAddressLine1?: string;
 
-  @Metadata({ data: "json, name=deliveryAddressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryAddressLine2" })
   deliveryAddressLine2?: string;
 
-  @Metadata({ data: "json, name=deliveryCity" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryCity" })
   deliveryCity?: string;
 
-  @Metadata({ data: "json, name=deliveryCountry" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryCountry" })
   deliveryCountry?: string;
 
-  @Metadata({ data: "json, name=deliveryPostCode" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryPostCode" })
   deliveryPostCode?: string;
 
-  @Metadata({ data: "json, name=merchantCustomerIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=merchantCustomerIdentification" })
   merchantCustomerIdentification?: string;
 
-  @Metadata({ data: "json, name=merchantNumber" })
+  @SpeakeasyMetadata({ data: "json, name=merchantNumber" })
   merchantNumber?: string;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=variableReference" })
+  @SpeakeasyMetadata({ data: "json, name=variableReference" })
   variableReference?: string;
 }
 
@@ -53,50 +54,44 @@ export enum NewPaymentRequestNewPaymentRequestTypeEnum {
 
 
 export class NewPaymentRequestNewPaymentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalFields" })
+  @SpeakeasyMetadata({ data: "json, name=additionalFields" })
   additionalFields?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=collectFields" })
+  @SpeakeasyMetadata({ data: "json, name=collectFields" })
   collectFields?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: NewPaymentRequestNewPaymentRequestCurrencyEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: Date;
 
-  @Metadata({ data: "json, name=icanTo" })
+  @SpeakeasyMetadata({ data: "json, name=icanTo" })
   icanTo: number;
 
-  @Metadata({ data: "json, name=mandatoryFields" })
+  @SpeakeasyMetadata({ data: "json, name=mandatoryFields" })
   mandatoryFields?: string;
 
-  @Metadata({ data: "json, name=maxNumberPayments" })
+  @SpeakeasyMetadata({ data: "json, name=maxNumberPayments" })
   maxNumberPayments?: number;
 
-  @Metadata({ data: "json, name=myRef" })
+  @SpeakeasyMetadata({ data: "json, name=myRef" })
   myRef: string;
 
-  @Metadata({ data: "json, name=orderDetails" })
+  @SpeakeasyMetadata({ data: "json, name=orderDetails" })
   orderDetails?: NewPaymentRequestNewPaymentRequestOrderDetails;
 
-  @Metadata({ data: "json, name=returnUrl" })
+  @SpeakeasyMetadata({ data: "json, name=returnUrl" })
   returnUrl?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: NewPaymentRequestNewPaymentRequestTypeEnum;
-}
-
-
-export class NewPaymentRequestRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: NewPaymentRequestNewPaymentRequest;
 }
 
 export enum NewPaymentRequestNewPaymentRequestResponseTypeEnum {
@@ -105,21 +100,27 @@ export enum NewPaymentRequestNewPaymentRequestResponseTypeEnum {
 
 
 export class NewPaymentRequestNewPaymentRequestResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: NewPaymentRequestNewPaymentRequestResponseTypeEnum;
 }
 
 
+export class NewPaymentRequestRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: NewPaymentRequestNewPaymentRequest;
+}
+
+
 export class NewPaymentRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   newPaymentRequestResponse?: NewPaymentRequestNewPaymentRequestResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

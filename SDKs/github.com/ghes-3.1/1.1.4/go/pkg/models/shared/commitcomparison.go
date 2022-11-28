@@ -9,6 +9,8 @@ const (
 	CommitComparisonStatusEnumIdentical CommitComparisonStatusEnum = "identical"
 )
 
+// CommitComparison
+// Commit Comparison
 type CommitComparison struct {
 	AheadBy         int64                      `json:"ahead_by"`
 	BaseCommit      Commit                     `json:"base_commit"`

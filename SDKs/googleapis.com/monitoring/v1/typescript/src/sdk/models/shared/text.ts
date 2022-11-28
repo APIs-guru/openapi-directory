@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TextFormatEnum {
-    FormatUnspecified = "FORMAT_UNSPECIFIED"
-,    Markdown = "MARKDOWN"
-,    Raw = "RAW"
+    FormatUnspecified = "FORMAT_UNSPECIFIED",
+    Markdown = "MARKDOWN",
+    Raw = "RAW"
 }
 
 
@@ -12,9 +13,9 @@ export enum TextFormatEnum {
  * A widget that displays textual content.
 **/
 export class Text extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: TextFormatEnum;
 }

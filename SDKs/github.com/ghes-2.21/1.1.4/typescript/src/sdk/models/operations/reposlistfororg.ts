@@ -1,72 +1,73 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposListForOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 }
 
 export enum ReposListForOrgDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum ReposListForOrgSortEnum {
-    Created = "created"
-,    Updated = "updated"
-,    Pushed = "pushed"
-,    FullName = "full_name"
+    Created = "created",
+    Updated = "updated",
+    Pushed = "pushed",
+    FullName = "full_name"
 }
 
 export enum ReposListForOrgTypeEnum {
-    All = "all"
-,    Public = "public"
-,    Private = "private"
-,    Forks = "forks"
-,    Sources = "sources"
-,    Member = "member"
-,    Internal = "internal"
+    All = "all",
+    Public = "public",
+    Private = "private",
+    Forks = "forks",
+    Sources = "sources",
+    Member = "member",
+    Internal = "internal"
 }
 
 
 export class ReposListForOrgQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: ReposListForOrgDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ReposListForOrgSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: ReposListForOrgTypeEnum;
 }
 
 
 export class ReposListForOrgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposListForOrgPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposListForOrgQueryParams;
 }
 
 
 export class ReposListForOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.MinimalRepository })
+  @SpeakeasyMetadata({ elemType: shared.MinimalRepository })
   minimalRepositories?: shared.MinimalRepository[];
 }

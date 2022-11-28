@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Enterprise
+// An enterprise account
 type Enterprise struct {
 	AvatarURL   string    `json:"avatar_url"`
 	CreatedAt   time.Time `json:"created_at"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DpicrRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(DpicrRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var DpicrRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationNo" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationNo" }),
         __metadata("design:type", String)
     ], DpicrRequestBodyCertificateParameters.prototype, "applicationNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=CertificateID" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateID" }),
         __metadata("design:type", String)
     ], DpicrRequestBodyCertificateParameters.prototype, "certificateId", void 0);
     return DpicrRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var DpicrRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", DpicrRequestBodyCertificateParameters)
     ], DpicrRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], DpicrRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], DpicrRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], DpicrRequestBody.prototype, "txnId", void 0);
     return DpicrRequestBody;
@@ -74,32 +74,16 @@ var DpicrSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], DpicrSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], DpicrSecurity.prototype, "clientId", void 0);
     return DpicrSecurity;
 }(SpeakeasyBase));
 export { DpicrSecurity };
-var DpicrRequest = /** @class */ (function (_super) {
-    __extends(DpicrRequest, _super);
-    function DpicrRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", DpicrRequestBody)
-    ], DpicrRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", DpicrSecurity)
-    ], DpicrRequest.prototype, "security", void 0);
-    return DpicrRequest;
-}(SpeakeasyBase));
-export { DpicrRequest };
 export var Dpicr400ApplicationJsonErrorEnum;
 (function (Dpicr400ApplicationJsonErrorEnum) {
     Dpicr400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Dpicr400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dpicr400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dpicr400ApplicationJson.prototype, "errorDescription", void 0);
     return Dpicr400ApplicationJson;
@@ -148,11 +132,11 @@ var Dpicr401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dpicr401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dpicr401ApplicationJson.prototype, "errorDescription", void 0);
     return Dpicr401ApplicationJson;
@@ -174,11 +158,11 @@ var Dpicr404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dpicr404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dpicr404ApplicationJson.prototype, "errorDescription", void 0);
     return Dpicr404ApplicationJson;
@@ -198,11 +182,11 @@ var Dpicr500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dpicr500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dpicr500ApplicationJson.prototype, "errorDescription", void 0);
     return Dpicr500ApplicationJson;
@@ -222,11 +206,11 @@ var Dpicr502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dpicr502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dpicr502ApplicationJson.prototype, "errorDescription", void 0);
     return Dpicr502ApplicationJson;
@@ -246,11 +230,11 @@ var Dpicr503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dpicr503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dpicr503ApplicationJson.prototype, "errorDescription", void 0);
     return Dpicr503ApplicationJson;
@@ -270,55 +254,71 @@ var Dpicr504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dpicr504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dpicr504ApplicationJson.prototype, "errorDescription", void 0);
     return Dpicr504ApplicationJson;
 }(SpeakeasyBase));
 export { Dpicr504ApplicationJson };
+var DpicrRequest = /** @class */ (function (_super) {
+    __extends(DpicrRequest, _super);
+    function DpicrRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", DpicrRequestBody)
+    ], DpicrRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", DpicrSecurity)
+    ], DpicrRequest.prototype, "security", void 0);
+    return DpicrRequest;
+}(SpeakeasyBase));
+export { DpicrRequest };
 var DpicrResponse = /** @class */ (function (_super) {
     __extends(DpicrResponse, _super);
     function DpicrResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DpicrResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DpicrResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dpicr400ApplicationJson)
     ], DpicrResponse.prototype, "dpicr400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dpicr401ApplicationJson)
     ], DpicrResponse.prototype, "dpicr401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dpicr404ApplicationJson)
     ], DpicrResponse.prototype, "dpicr404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dpicr500ApplicationJson)
     ], DpicrResponse.prototype, "dpicr500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dpicr502ApplicationJson)
     ], DpicrResponse.prototype, "dpicr502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dpicr503ApplicationJson)
     ], DpicrResponse.prototype, "dpicr503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dpicr504ApplicationJson)
     ], DpicrResponse.prototype, "dpicr504ApplicationJsonObject", void 0);
     return DpicrResponse;

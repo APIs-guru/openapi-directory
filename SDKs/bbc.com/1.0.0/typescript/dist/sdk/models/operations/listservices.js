@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListServicesServiceTypeEnum;
 (function (ListServicesServiceTypeEnum) {
@@ -43,51 +43,51 @@ var ListServicesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end_from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_from" }),
         __metadata("design:type", Date)
     ], ListServicesQueryParams.prototype, "endFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end_to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_to" }),
         __metadata("design:type", Date)
     ], ListServicesQueryParams.prototype, "endTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mid" }),
         __metadata("design:type", Array)
     ], ListServicesQueryParams.prototype, "mid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ListServicesQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], ListServicesQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
         __metadata("design:type", Array)
     ], ListServicesQueryParams.prototype, "partnerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
         __metadata("design:type", Array)
     ], ListServicesQueryParams.prototype, "partnerPid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], ListServicesQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=service_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=service_type" }),
         __metadata("design:type", Array)
     ], ListServicesQueryParams.prototype, "serviceType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sid" }),
         __metadata("design:type", Array)
     ], ListServicesQueryParams.prototype, "sid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start_from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_from" }),
         __metadata("design:type", Date)
     ], ListServicesQueryParams.prototype, "startFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start_to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_to" }),
         __metadata("design:type", Date)
     ], ListServicesQueryParams.prototype, "startTo", void 0);
     return ListServicesQueryParams;
@@ -99,7 +99,7 @@ var ListServicesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListServicesQueryParams)
     ], ListServicesRequest.prototype, "queryParams", void 0);
     return ListServicesRequest;
@@ -111,23 +111,23 @@ var ListServicesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ListServicesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListServicesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], ListServicesResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListServicesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServicesResponse.prototype, "nitro", void 0);
     return ListServicesResponse;

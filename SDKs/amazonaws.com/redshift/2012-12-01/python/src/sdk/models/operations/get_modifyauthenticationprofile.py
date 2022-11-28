@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyAuthenticationProfileActionEnum(str, Enum):
     MODIFY_AUTHENTICATION_PROFILE = "ModifyAuthenticationProfile"
@@ -10,10 +14,10 @@ class GetModifyAuthenticationProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyAuthenticationProfileQueryParams:
-    action: GetModifyAuthenticationProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    authentication_profile_content: str = field(default=None, metadata={'query_param': { 'field_name': 'AuthenticationProfileContent', 'style': 'form', 'explode': True }})
-    authentication_profile_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AuthenticationProfileName', 'style': 'form', 'explode': True }})
-    version: GetModifyAuthenticationProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetModifyAuthenticationProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    authentication_profile_content: str = field(metadata={'query_param': { 'field_name': 'AuthenticationProfileContent', 'style': 'form', 'explode': True }})
+    authentication_profile_name: str = field(metadata={'query_param': { 'field_name': 'AuthenticationProfileName', 'style': 'form', 'explode': True }})
+    version: GetModifyAuthenticationProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetModifyAuthenticationProfileHeaders:
 
 @dataclass
 class GetModifyAuthenticationProfileRequest:
-    query_params: GetModifyAuthenticationProfileQueryParams = field(default=None)
-    headers: GetModifyAuthenticationProfileHeaders = field(default=None)
+    headers: GetModifyAuthenticationProfileHeaders = field()
+    query_params: GetModifyAuthenticationProfileQueryParams = field()
     
 
 @dataclass
 class GetModifyAuthenticationProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

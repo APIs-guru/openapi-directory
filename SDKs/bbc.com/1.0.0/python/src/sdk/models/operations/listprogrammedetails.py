@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -13,14 +13,14 @@ class ListProgrammeDetailsQueryParams:
 
 @dataclass
 class ListProgrammeDetailsRequest:
-    query_params: ListProgrammeDetailsQueryParams = field(default=None)
+    query_params: ListProgrammeDetailsQueryParams = field()
     
 
 @dataclass
 class ListProgrammeDetailsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     nitro: Optional[Any] = field(default=None)
     

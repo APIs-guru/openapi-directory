@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetOpenIDConnectProviderActionEnum(str, Enum):
     GET_OPEN_ID_CONNECT_PROVIDER = "GetOpenIDConnectProvider"
@@ -10,9 +14,9 @@ class GetGetOpenIDConnectProviderVersionEnum(str, Enum):
 
 @dataclass
 class GetGetOpenIDConnectProviderQueryParams:
-    action: GetGetOpenIDConnectProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    open_id_connect_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
-    version: GetGetOpenIDConnectProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetOpenIDConnectProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    open_id_connect_provider_arn: str = field(metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
+    version: GetGetOpenIDConnectProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetOpenIDConnectProviderHeaders:
 
 @dataclass
 class GetGetOpenIDConnectProviderRequest:
-    query_params: GetGetOpenIDConnectProviderQueryParams = field(default=None)
-    headers: GetGetOpenIDConnectProviderHeaders = field(default=None)
+    headers: GetGetOpenIDConnectProviderHeaders = field()
+    query_params: GetGetOpenIDConnectProviderQueryParams = field()
     
 
 @dataclass
 class GetGetOpenIDConnectProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class UpdateDeploymentGroupXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class UpdateDeploymentGroupXAmzTargetEnum(str, Enum):
 
 @dataclass
 class UpdateDeploymentGroupHeaders:
+    x_amz_target: UpdateDeploymentGroupXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,21 +20,21 @@ class UpdateDeploymentGroupHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: UpdateDeploymentGroupXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateDeploymentGroupRequest:
-    headers: UpdateDeploymentGroupHeaders = field(default=None)
-    request: shared.UpdateDeploymentGroupInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDeploymentGroupHeaders = field()
+    request: shared.UpdateDeploymentGroupInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDeploymentGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     alarms_limit_exceeded_exception: Optional[Any] = field(default=None)
     application_does_not_exist_exception: Optional[Any] = field(default=None)
     application_name_required_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     deployment_config_does_not_exist_exception: Optional[Any] = field(default=None)
     deployment_group_already_exists_exception: Optional[Any] = field(default=None)
     deployment_group_does_not_exist_exception: Optional[Any] = field(default=None)
@@ -55,7 +60,6 @@ class UpdateDeploymentGroupResponse:
     invalid_traffic_routing_configuration_exception: Optional[Any] = field(default=None)
     invalid_trigger_config_exception: Optional[Any] = field(default=None)
     lifecycle_hook_limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     tag_set_list_limit_exceeded_exception: Optional[Any] = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     trigger_targets_limit_exceeded_exception: Optional[Any] = field(default=None)

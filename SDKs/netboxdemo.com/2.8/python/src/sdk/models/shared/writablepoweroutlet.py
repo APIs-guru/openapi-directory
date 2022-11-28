@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nestedcable
+from sdk import utils
+from . import *
 
 class WritablePowerOutletFeedLegEnum(str, Enum):
     A = "A"
@@ -79,17 +81,14 @@ class WritablePowerOutletTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritablePowerOutlet:
-    cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
-    connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
-    connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    device: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    feed_leg: Optional[WritablePowerOutletFeedLegEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    power_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power_port' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[WritablePowerOutletTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class WritablePowerOutletInput:
+    device: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    cable: Optional[NestedCableInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cable') }})
+    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connection_status') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    feed_leg: Optional[WritablePowerOutletFeedLegEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feed_leg') }})
+    power_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('power_port') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    type: Optional[WritablePowerOutletTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -26,6 +26,8 @@ type CommitCommentSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// CommitComment
+// Commit Comment
 type CommitComment struct {
 	AuthorAssociation AuthorAssociationEnum   `json:"author_association"`
 	Body              string                  `json:"body"`

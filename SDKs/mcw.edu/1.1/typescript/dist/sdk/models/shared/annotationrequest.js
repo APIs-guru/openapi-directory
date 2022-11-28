@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AnnotationRequest = /** @class */ (function (_super) {
     __extends(AnnotationRequest, _super);
     function AnnotationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=evidenceCodes" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceCodes" }),
         __metadata("design:type", Array)
     ], AnnotationRequest.prototype, "evidenceCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=ids" }),
+        SpeakeasyMetadata({ data: "json, name=ids" }),
         __metadata("design:type", Array)
     ], AnnotationRequest.prototype, "ids", void 0);
     __decorate([
-        Metadata({ data: "json, name=speciesTypeKeys" }),
+        SpeakeasyMetadata({ data: "json, name=speciesTypeKeys" }),
         __metadata("design:type", Array)
     ], AnnotationRequest.prototype, "speciesTypeKeys", void 0);
     __decorate([
-        Metadata({ data: "json, name=termAcc" }),
+        SpeakeasyMetadata({ data: "json, name=termAcc" }),
         __metadata("design:type", String)
     ], AnnotationRequest.prototype, "termAcc", void 0);
     return AnnotationRequest;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductPlanTypeEnum } from "./provisionedproductplantypeenum";
+
 
 
 // ProvisionedProductPlanSummary
@@ -7,21 +8,21 @@ import { ProvisionedProductPlanTypeEnum } from "./provisionedproductplantypeenum
  * Summary information about a plan.
 **/
 export class ProvisionedProductPlanSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PlanId" })
+  @SpeakeasyMetadata({ data: "json, name=PlanId" })
   planId?: string;
 
-  @Metadata({ data: "json, name=PlanName" })
+  @SpeakeasyMetadata({ data: "json, name=PlanName" })
   planName?: string;
 
-  @Metadata({ data: "json, name=PlanType" })
+  @SpeakeasyMetadata({ data: "json, name=PlanType" })
   planType?: ProvisionedProductPlanTypeEnum;
 
-  @Metadata({ data: "json, name=ProvisionProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionProductId" })
   provisionProductId?: string;
 
-  @Metadata({ data: "json, name=ProvisionProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionProductName" })
   provisionProductName?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId?: string;
 }

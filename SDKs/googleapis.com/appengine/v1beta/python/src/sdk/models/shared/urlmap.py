@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import apiendpointhandler
-from . import scripthandler
-from . import staticfileshandler
+from sdk import utils
+from . import *
 
 class URLMapAuthFailActionEnum(str, Enum):
     AUTH_FAIL_ACTION_UNSPECIFIED = "AUTH_FAIL_ACTION_UNSPECIFIED"
@@ -34,12 +34,16 @@ class URLMapSecurityLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class URLMap:
-    api_endpoint: Optional[apiendpointhandler.APIEndpointHandler] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiEndpoint' }})
-    auth_fail_action: Optional[URLMapAuthFailActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authFailAction' }})
-    login: Optional[URLMapLoginEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    redirect_http_response_code: Optional[URLMapRedirectHTTPResponseCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirectHttpResponseCode' }})
-    script: Optional[scripthandler.ScriptHandler] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'script' }})
-    security_level: Optional[URLMapSecurityLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityLevel' }})
-    static_files: Optional[staticfileshandler.StaticFilesHandler] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'staticFiles' }})
-    url_regex: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urlRegex' }})
+    r"""URLMap
+    URL pattern and description of how the URL should be handled. App Engine can handle URLs by executing application code or by serving static files uploaded with the version, such as images, CSS, or JavaScript.
+    """
+    
+    api_endpoint: Optional[APIEndpointHandler] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiEndpoint') }})
+    auth_fail_action: Optional[URLMapAuthFailActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authFailAction') }})
+    login: Optional[URLMapLoginEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('login') }})
+    redirect_http_response_code: Optional[URLMapRedirectHTTPResponseCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('redirectHttpResponseCode') }})
+    script: Optional[ScriptHandler] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('script') }})
+    security_level: Optional[URLMapSecurityLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityLevel') }})
+    static_files: Optional[StaticFilesHandler] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('staticFiles') }})
+    url_regex: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urlRegex') }})
     

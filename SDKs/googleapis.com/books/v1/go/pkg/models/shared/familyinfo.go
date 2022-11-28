@@ -1,5 +1,7 @@
 package shared
 
+// FamilyInfoMembership
+// Family membership info of the user that made the request.
 type FamilyInfoMembership struct {
 	AcquirePermission     *string `json:"acquirePermission,omitempty"`
 	AgeGroup              *string `json:"ageGroup,omitempty"`

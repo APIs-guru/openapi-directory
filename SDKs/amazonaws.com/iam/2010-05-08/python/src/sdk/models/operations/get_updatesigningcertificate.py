@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateSigningCertificateActionEnum(str, Enum):
     UPDATE_SIGNING_CERTIFICATE = "UpdateSigningCertificate"
@@ -14,11 +18,11 @@ class GetUpdateSigningCertificateVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateSigningCertificateQueryParams:
-    action: GetUpdateSigningCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    certificate_id: str = field(default=None, metadata={'query_param': { 'field_name': 'CertificateId', 'style': 'form', 'explode': True }})
-    status: GetUpdateSigningCertificateStatusEnum = field(default=None, metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
+    action: GetUpdateSigningCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    certificate_id: str = field(metadata={'query_param': { 'field_name': 'CertificateId', 'style': 'form', 'explode': True }})
+    status: GetUpdateSigningCertificateStatusEnum = field(metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
+    version: GetUpdateSigningCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetUpdateSigningCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetUpdateSigningCertificateHeaders:
 
 @dataclass
 class GetUpdateSigningCertificateRequest:
-    query_params: GetUpdateSigningCertificateQueryParams = field(default=None)
-    headers: GetUpdateSigningCertificateHeaders = field(default=None)
+    headers: GetUpdateSigningCertificateHeaders = field()
+    query_params: GetUpdateSigningCertificateQueryParams = field()
     
 
 @dataclass
 class GetUpdateSigningCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComparisonOperatorEnum } from "./comparisonoperatorenum";
 /**
  * A rule that compares an input property value to a threshold value with a comparison operator.

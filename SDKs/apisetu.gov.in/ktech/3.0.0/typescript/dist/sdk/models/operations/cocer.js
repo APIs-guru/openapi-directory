@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CocerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(CocerRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var CocerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cert_type" }),
+        SpeakeasyMetadata({ data: "json, name=cert_type" }),
         __metadata("design:type", String)
     ], CocerRequestBodyCertificateParameters.prototype, "certType", void 0);
     __decorate([
-        Metadata({ data: "json, name=company_name" }),
+        SpeakeasyMetadata({ data: "json, name=company_name" }),
         __metadata("design:type", String)
     ], CocerRequestBodyCertificateParameters.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=reg_no" }),
+        SpeakeasyMetadata({ data: "json, name=reg_no" }),
         __metadata("design:type", String)
     ], CocerRequestBodyCertificateParameters.prototype, "regNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=sector" }),
+        SpeakeasyMetadata({ data: "json, name=sector" }),
         __metadata("design:type", String)
     ], CocerRequestBodyCertificateParameters.prototype, "sector", void 0);
     return CocerRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var CocerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", CocerRequestBodyCertificateParameters)
     ], CocerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], CocerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], CocerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], CocerRequestBody.prototype, "txnId", void 0);
     return CocerRequestBody;
@@ -82,32 +82,16 @@ var CocerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], CocerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], CocerSecurity.prototype, "clientId", void 0);
     return CocerSecurity;
 }(SpeakeasyBase));
 export { CocerSecurity };
-var CocerRequest = /** @class */ (function (_super) {
-    __extends(CocerRequest, _super);
-    function CocerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", CocerRequestBody)
-    ], CocerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", CocerSecurity)
-    ], CocerRequest.prototype, "security", void 0);
-    return CocerRequest;
-}(SpeakeasyBase));
-export { CocerRequest };
 export var Cocer400ApplicationJsonErrorEnum;
 (function (Cocer400ApplicationJsonErrorEnum) {
     Cocer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Cocer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cocer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cocer400ApplicationJson.prototype, "errorDescription", void 0);
     return Cocer400ApplicationJson;
@@ -156,11 +140,11 @@ var Cocer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cocer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cocer401ApplicationJson.prototype, "errorDescription", void 0);
     return Cocer401ApplicationJson;
@@ -182,11 +166,11 @@ var Cocer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cocer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cocer404ApplicationJson.prototype, "errorDescription", void 0);
     return Cocer404ApplicationJson;
@@ -206,11 +190,11 @@ var Cocer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cocer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cocer500ApplicationJson.prototype, "errorDescription", void 0);
     return Cocer500ApplicationJson;
@@ -230,11 +214,11 @@ var Cocer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cocer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cocer502ApplicationJson.prototype, "errorDescription", void 0);
     return Cocer502ApplicationJson;
@@ -254,11 +238,11 @@ var Cocer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cocer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cocer503ApplicationJson.prototype, "errorDescription", void 0);
     return Cocer503ApplicationJson;
@@ -278,55 +262,71 @@ var Cocer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cocer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cocer504ApplicationJson.prototype, "errorDescription", void 0);
     return Cocer504ApplicationJson;
 }(SpeakeasyBase));
 export { Cocer504ApplicationJson };
+var CocerRequest = /** @class */ (function (_super) {
+    __extends(CocerRequest, _super);
+    function CocerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", CocerRequestBody)
+    ], CocerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CocerSecurity)
+    ], CocerRequest.prototype, "security", void 0);
+    return CocerRequest;
+}(SpeakeasyBase));
+export { CocerRequest };
 var CocerResponse = /** @class */ (function (_super) {
     __extends(CocerResponse, _super);
     function CocerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CocerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CocerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cocer400ApplicationJson)
     ], CocerResponse.prototype, "cocer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cocer401ApplicationJson)
     ], CocerResponse.prototype, "cocer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cocer404ApplicationJson)
     ], CocerResponse.prototype, "cocer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cocer500ApplicationJson)
     ], CocerResponse.prototype, "cocer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cocer502ApplicationJson)
     ], CocerResponse.prototype, "cocer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cocer503ApplicationJson)
     ], CocerResponse.prototype, "cocer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cocer504ApplicationJson)
     ], CocerResponse.prototype, "cocer504ApplicationJsonObject", void 0);
     return CocerResponse;

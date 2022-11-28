@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EstimatedResourceSize } from "./estimatedresourcesize";
+
 
 
 // DatastoreStatistics
@@ -7,6 +8,6 @@ import { EstimatedResourceSize } from "./estimatedresourcesize";
  * Statistical information about the data store.
 **/
 export class DatastoreStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: EstimatedResourceSize;
 }

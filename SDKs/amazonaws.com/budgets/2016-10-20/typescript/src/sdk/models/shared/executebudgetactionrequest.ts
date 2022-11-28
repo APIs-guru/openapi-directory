@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionTypeEnum } from "./executiontypeenum";
 
 
+
 export class ExecuteBudgetActionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=ActionId" })
+  @SpeakeasyMetadata({ data: "json, name=ActionId" })
   actionId: string;
 
-  @Metadata({ data: "json, name=BudgetName" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetName" })
   budgetName: string;
 
-  @Metadata({ data: "json, name=ExecutionType" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionType" })
   executionType: ExecutionTypeEnum;
 }

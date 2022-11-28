@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetFundingAccountPathParams:
-    funding_account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'fundingAccountId', 'style': 'simple', 'explode': False }})
+    funding_account_id: str = field(metadata={'path_param': { 'field_name': 'fundingAccountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class GetFundingAccountQueryParams:
 
 @dataclass
 class GetFundingAccountRequest:
-    path_params: GetFundingAccountPathParams = field(default=None)
-    query_params: GetFundingAccountQueryParams = field(default=None)
+    path_params: GetFundingAccountPathParams = field()
+    query_params: GetFundingAccountQueryParams = field()
     
 
 @dataclass
 class GetFundingAccountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     funding_account_response: Optional[shared.FundingAccountResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)
     inline_response_404: Optional[Any] = field(default=None)

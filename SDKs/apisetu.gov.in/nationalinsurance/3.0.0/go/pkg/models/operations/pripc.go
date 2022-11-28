@@ -28,11 +28,6 @@ type PripcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PripcRequest struct {
-	Request  *PripcRequestBody `request:"mediaType=application/json"`
-	Security PripcSecurity
-}
-
 type Pripc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Pripc504ApplicationJSON struct {
 	Error            *Pripc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Pripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PripcRequest struct {
+	Request  *PripcRequestBody `request:"mediaType=application/json"`
+	Security PripcSecurity
 }
 
 type PripcResponse struct {

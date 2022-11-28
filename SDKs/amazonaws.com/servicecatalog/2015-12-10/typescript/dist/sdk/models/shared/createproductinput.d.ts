@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProductTypeEnum } from "./producttypeenum";
 import { ProvisioningArtifactProperties } from "./provisioningartifactproperties";
 import { Tag } from "./tag";

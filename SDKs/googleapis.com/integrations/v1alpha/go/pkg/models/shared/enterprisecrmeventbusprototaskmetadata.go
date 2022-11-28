@@ -56,6 +56,8 @@ const (
 	EnterpriseCrmEventbusProtoTaskMetadataSystemEnumDataBridge        EnterpriseCrmEventbusProtoTaskMetadataSystemEnum = "DATA_BRIDGE"
 )
 
+// EnterpriseCrmEventbusProtoTaskMetadata
+// TaskMetadata are attributes that are associated to every common Task we have. Next available: 26
 type EnterpriseCrmEventbusProtoTaskMetadata struct {
 	ActiveTaskName              *string                                                                `json:"activeTaskName,omitempty"`
 	Admins                      []EnterpriseCrmEventbusProtoTaskMetadataAdmin                          `json:"admins,omitempty"`

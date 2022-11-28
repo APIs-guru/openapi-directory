@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamObject } from "./streamobject";
+
 
 
 // StopBackfillJobResponse
@@ -7,6 +8,6 @@ import { StreamObject } from "./streamobject";
  * Response for manually stop a backfill job for a specific stream object.
 **/
 export class StopBackfillJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: StreamObject;
 }

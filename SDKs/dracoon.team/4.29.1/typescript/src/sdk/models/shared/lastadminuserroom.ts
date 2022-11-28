@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LastAdminUserRoom
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Room information
 **/
 export class LastAdminUserRoom extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=lastAdminInGroup" })
+  @SpeakeasyMetadata({ data: "json, name=lastAdminInGroup" })
   lastAdminInGroup: boolean;
 
-  @Metadata({ data: "json, name=lastAdminInGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=lastAdminInGroupId" })
   lastAdminInGroupId?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parentId" })
+  @SpeakeasyMetadata({ data: "json, name=parentId" })
   parentId?: number;
 
-  @Metadata({ data: "json, name=parentPath" })
+  @SpeakeasyMetadata({ data: "json, name=parentPath" })
   parentPath: string;
 }

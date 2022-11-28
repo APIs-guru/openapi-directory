@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1ScoreComponentRecommendationAction } from "./googlecloudapigeev1scorecomponentrecommendationaction";
+
 
 
 // GoogleCloudApigeeV1ScoreComponentRecommendation
@@ -8,15 +8,15 @@ import { GoogleCloudApigeeV1ScoreComponentRecommendationAction } from "./googlec
  * Recommendation based on security concerns and score.
 **/
 export class GoogleCloudApigeeV1ScoreComponentRecommendation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.GoogleCloudApigeeV1ScoreComponentRecommendationAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: GoogleCloudApigeeV1ScoreComponentRecommendationAction })
   actions?: GoogleCloudApigeeV1ScoreComponentRecommendationAction[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=impact" })
+  @SpeakeasyMetadata({ data: "json, name=impact" })
   impact?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

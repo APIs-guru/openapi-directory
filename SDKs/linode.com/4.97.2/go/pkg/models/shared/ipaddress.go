@@ -9,6 +9,8 @@ const (
 	IPAddressTypeEnumIpv6Range IPAddressTypeEnum = "ipv6/range"
 )
 
+// IPAddress
+// An IP address that exists in Linode's system, either IPv4 or IPv6.
 type IPAddress struct {
 	Address    *string            `json:"address,omitempty"`
 	Gateway    *string            `json:"gateway,omitempty"`
@@ -19,4 +21,10 @@ type IPAddress struct {
 	Region     *string            `json:"region,omitempty"`
 	SubnetMask *string            `json:"subnet_mask,omitempty"`
 	Type       *IPAddressTypeEnum `json:"type,omitempty"`
+}
+
+// IPAddressInput
+// An IP address that exists in Linode's system, either IPv4 or IPv6.
+type IPAddressInput struct {
+	Rdns *string `json:"rdns,omitempty"`
 }

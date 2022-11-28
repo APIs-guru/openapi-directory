@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 /**
  * Contains the inputs for the <a>CreateComputer</a> operation.

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SavingsPlanRateFilterNameEnum } from "./savingsplanratefilternameenum";
+
 
 
 // SavingsPlanRateFilter
@@ -7,9 +8,9 @@ import { SavingsPlanRateFilterNameEnum } from "./savingsplanratefilternameenum";
  * Information about a filter.
 **/
 export class SavingsPlanRateFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: SavingsPlanRateFilterNameEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

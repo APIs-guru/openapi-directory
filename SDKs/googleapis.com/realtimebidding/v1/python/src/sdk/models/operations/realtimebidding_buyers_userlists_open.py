@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RealtimebiddingBuyersUserListsOpenPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RealtimebiddingBuyersUserListsOpenQueryParams:
 
 @dataclass
 class RealtimebiddingBuyersUserListsOpenSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RealtimebiddingBuyersUserListsOpenRequest:
-    path_params: RealtimebiddingBuyersUserListsOpenPathParams = field(default=None)
-    query_params: RealtimebiddingBuyersUserListsOpenQueryParams = field(default=None)
+    path_params: RealtimebiddingBuyersUserListsOpenPathParams = field()
+    query_params: RealtimebiddingBuyersUserListsOpenQueryParams = field()
+    security: RealtimebiddingBuyersUserListsOpenSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RealtimebiddingBuyersUserListsOpenSecurity = field(default=None)
     
 
 @dataclass
 class RealtimebiddingBuyersUserListsOpenResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_list: Optional[shared.UserList] = field(default=None)
     

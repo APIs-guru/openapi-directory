@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactStatusEnum } from "./contactstatusenum";
 import { Elevation } from "./elevation";
 // ContactData
@@ -35,55 +35,55 @@ var ContactData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contactId" }),
+        SpeakeasyMetadata({ data: "json, name=contactId" }),
         __metadata("design:type", String)
     ], ContactData.prototype, "contactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactStatus" }),
+        SpeakeasyMetadata({ data: "json, name=contactStatus" }),
         __metadata("design:type", String)
     ], ContactData.prototype, "contactStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Date)
     ], ContactData.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=errorMessage" }),
         __metadata("design:type", String)
     ], ContactData.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=groundStation" }),
+        SpeakeasyMetadata({ data: "json, name=groundStation" }),
         __metadata("design:type", String)
     ], ContactData.prototype, "groundStation", void 0);
     __decorate([
-        Metadata({ data: "json, name=maximumElevation" }),
+        SpeakeasyMetadata({ data: "json, name=maximumElevation" }),
         __metadata("design:type", Elevation)
     ], ContactData.prototype, "maximumElevation", void 0);
     __decorate([
-        Metadata({ data: "json, name=missionProfileArn" }),
+        SpeakeasyMetadata({ data: "json, name=missionProfileArn" }),
         __metadata("design:type", String)
     ], ContactData.prototype, "missionProfileArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=postPassEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=postPassEndTime" }),
         __metadata("design:type", Date)
     ], ContactData.prototype, "postPassEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=prePassStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=prePassStartTime" }),
         __metadata("design:type", Date)
     ], ContactData.prototype, "prePassStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], ContactData.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=satelliteArn" }),
+        SpeakeasyMetadata({ data: "json, name=satelliteArn" }),
         __metadata("design:type", String)
     ], ContactData.prototype, "satelliteArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Date)
     ], ContactData.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], ContactData.prototype, "tags", void 0);
     return ContactData;

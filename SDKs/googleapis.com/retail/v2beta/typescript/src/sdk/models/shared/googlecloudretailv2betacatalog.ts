@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2betaMerchantCenterLinkingConfig } from "./googlecloudretailv2betamerchantcenterlinkingconfig";
 import { GoogleCloudRetailV2betaProductLevelConfig } from "./googlecloudretailv2betaproductlevelconfig";
+
 
 
 // GoogleCloudRetailV2betaCatalog
@@ -8,15 +9,15 @@ import { GoogleCloudRetailV2betaProductLevelConfig } from "./googlecloudretailv2
  * The catalog configuration.
 **/
 export class GoogleCloudRetailV2betaCatalog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=merchantCenterLinkingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=merchantCenterLinkingConfig" })
   merchantCenterLinkingConfig?: GoogleCloudRetailV2betaMerchantCenterLinkingConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=productLevelConfig" })
+  @SpeakeasyMetadata({ data: "json, name=productLevelConfig" })
   productLevelConfig?: GoogleCloudRetailV2betaProductLevelConfig;
 }

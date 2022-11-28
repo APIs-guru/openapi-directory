@@ -9,6 +9,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnumAudienceFilterScopeAcrossAllSessions GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum = "AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS"
 )
 
+// GoogleAnalyticsAdminV1alphaAudienceSequenceFilter
+// Defines filters that must occur in a specific order for the user to be a member of the Audience.
 type GoogleAnalyticsAdminV1alphaAudienceSequenceFilter struct {
 	Scope                   *GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum             `json:"scope,omitempty"`
 	SequenceMaximumDuration *string                                                                 `json:"sequenceMaximumDuration,omitempty"`

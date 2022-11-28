@@ -1,58 +1,61 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deployment_branch_policy
-from . import simple_user
-from . import team_simple
-from . import deployment_reviewer_type_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnvironmentProtectionRules1:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    wait_timer: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wait_timer' }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    node_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_id') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    wait_timer: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wait_timer') }})
     
 
 @dataclass_json
 @dataclass
 class EnvironmentProtectionRules2Reviewers:
-    reviewer: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewer' }})
-    type: Optional[deployment_reviewer_type_enum.DeploymentReviewerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    reviewer: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewer') }})
+    type: Optional[DeploymentReviewerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class EnvironmentProtectionRules2:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    reviewers: Optional[List[EnvironmentProtectionRules2Reviewers]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reviewers' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    node_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_id') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    reviewers: Optional[List[EnvironmentProtectionRules2Reviewers]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reviewers') }})
     
 
 @dataclass_json
 @dataclass
 class EnvironmentProtectionRules3:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    node_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_id') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class Environment:
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    deployment_branch_policy: Optional[deployment_branch_policy.DeploymentBranchPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployment_branch_policy' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    protection_rules: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection_rules' }})
-    updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""Environment
+    Details of a deployment environment
+    """
+    
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    html_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('html_url') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    node_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_id') }})
+    updated_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('updated_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    deployment_branch_policy: Optional[DeploymentBranchPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployment_branch_policy') }})
+    protection_rules: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protection_rules') }})
     

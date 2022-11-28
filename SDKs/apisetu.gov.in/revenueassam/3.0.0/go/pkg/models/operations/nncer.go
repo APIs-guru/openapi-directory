@@ -26,11 +26,6 @@ type NncerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type NncerRequest struct {
-	Request  *NncerRequestBody `request:"mediaType=application/json"`
-	Security NncerSecurity
-}
-
 type Nncer400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Nncer504ApplicationJSON struct {
 	Error            *Nncer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Nncer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type NncerRequest struct {
+	Request  *NncerRequestBody `request:"mediaType=application/json"`
+	Security NncerSecurity
 }
 
 type NncerResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// OidcIdentityProviderConfig
+// An object that represents the configuration for an OpenID Connect (OIDC) identity provider.
 type OidcIdentityProviderConfig struct {
 	ClientID                   *string           `json:"clientId,omitempty"`
 	ClusterName                *string           `json:"clusterName,omitempty"`

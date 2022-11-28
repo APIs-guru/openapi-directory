@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
+
 
 
 // DefaultPushNotificationMessage
@@ -7,24 +8,24 @@ import { ActionEnum } from "./actionenum";
  * Specifies the default settings and content for a push notification that's sent directly to an endpoint.
 **/
 export class DefaultPushNotificationMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data?: Map<string, string>;
 
-  @Metadata({ data: "json, name=SilentPush" })
+  @SpeakeasyMetadata({ data: "json, name=SilentPush" })
   silentPush?: boolean;
 
-  @Metadata({ data: "json, name=Substitutions" })
+  @SpeakeasyMetadata({ data: "json, name=Substitutions" })
   substitutions?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AttachPolicyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
   xAmzDataPartition: string;
 }
 
@@ -34,7 +35,7 @@ export class AttachPolicyHeaders extends SpeakeasyBase {
  * The reference that identifies an object.
 **/
 export class AttachPolicyRequestBodyObjectReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Selector" })
+  @SpeakeasyMetadata({ data: "json, name=Selector" })
   selector?: string;
 }
 
@@ -44,63 +45,63 @@ export class AttachPolicyRequestBodyObjectReference extends SpeakeasyBase {
  * The reference that identifies an object.
 **/
 export class AttachPolicyRequestBodyPolicyReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Selector" })
+  @SpeakeasyMetadata({ data: "json, name=Selector" })
   selector?: string;
 }
 
 
 export class AttachPolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectReference" })
   objectReference: AttachPolicyRequestBodyObjectReference;
 
-  @Metadata({ data: "json, name=PolicyReference" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyReference" })
   policyReference: AttachPolicyRequestBodyPolicyReference;
 }
 
 
 export class AttachPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: AttachPolicyHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AttachPolicyRequestBody;
 }
 
 
 export class AttachPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: shared.AccessDeniedException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   attachPolicyResponse?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   directoryNotEnabledException?: shared.DirectoryNotEnabledException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: shared.InternalServiceException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArnException?: shared.InvalidArnException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: shared.LimitExceededException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notPolicyException?: shared.NotPolicyException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: shared.ResourceNotFoundException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retryableConflictException?: shared.RetryableConflictException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: shared.ValidationException;
 }

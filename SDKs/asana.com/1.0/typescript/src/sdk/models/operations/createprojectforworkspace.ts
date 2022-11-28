@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateProjectForWorkspacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
   workspaceGid: string;
 }
 
 
 export class CreateProjectForWorkspaceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class CreateProjectForWorkspaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.ProjectRequest;
-}
-
-
-export class CreateProjectForWorkspaceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateProjectForWorkspacePathParams;
-
-  @Metadata()
-  queryParams: CreateProjectForWorkspaceQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateProjectForWorkspaceRequestBody;
+export class CreateProjectForWorkspaceRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.ProjectRequestInput;
 }
 
 
 export class CreateProjectForWorkspace201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.ProjectResponse;
 }
 
 
+export class CreateProjectForWorkspaceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateProjectForWorkspacePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: CreateProjectForWorkspaceQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateProjectForWorkspaceRequestBodyInput;
+}
+
+
 export class CreateProjectForWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createProjectForWorkspace201ApplicationJsonObject?: CreateProjectForWorkspace201ApplicationJson;
 }

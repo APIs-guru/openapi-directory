@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReturnPoliciesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=marketplace_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=marketplace_id" })
   marketplaceId: string;
 }
 
 
 export class GetReturnPoliciesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 }
 
 
 export class GetReturnPoliciesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetReturnPoliciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetReturnPoliciesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetReturnPoliciesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetReturnPoliciesSecurity;
 }
 
 
 export class GetReturnPoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   returnPolicyResponse?: shared.ReturnPolicyResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

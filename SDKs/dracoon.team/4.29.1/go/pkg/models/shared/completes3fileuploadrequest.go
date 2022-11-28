@@ -8,6 +8,8 @@ const (
 	CompleteS3FileUploadRequestResolutionStrategyEnumFail       CompleteS3FileUploadRequestResolutionStrategyEnum = "fail"
 )
 
+// CompleteS3FileUploadRequest
+// Request model for completing a S3 file upload
 type CompleteS3FileUploadRequest struct {
 	FileKey            *FileKey                                           `json:"fileKey,omitempty"`
 	FileName           *string                                            `json:"fileName,omitempty"`

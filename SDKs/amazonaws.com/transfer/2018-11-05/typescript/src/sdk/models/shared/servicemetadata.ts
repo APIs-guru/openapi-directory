@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserDetails } from "./userdetails";
+
 
 
 // ServiceMetadata
@@ -7,6 +8,6 @@ import { UserDetails } from "./userdetails";
  * A container object for the session details associated with a workflow.
 **/
 export class ServiceMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserDetails" })
+  @SpeakeasyMetadata({ data: "json, name=UserDetails" })
   userDetails: UserDetails;
 }

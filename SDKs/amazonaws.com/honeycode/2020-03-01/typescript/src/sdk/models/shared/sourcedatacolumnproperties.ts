@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SourceDataColumnProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains the properties for importing data to a specific column in a table.
 **/
 export class SourceDataColumnProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnIndex" })
+  @SpeakeasyMetadata({ data: "json, name=columnIndex" })
   columnIndex?: number;
 }

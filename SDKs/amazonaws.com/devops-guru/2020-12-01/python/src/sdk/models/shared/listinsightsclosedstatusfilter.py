@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import endtimerange
-from . import insighttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListInsightsClosedStatusFilter:
-    end_time_range: endtimerange.EndTimeRange = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndTimeRange' }})
-    type: insighttype_enum.InsightTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""ListInsightsClosedStatusFilter
+     Used to filter for insights that have the status <code>CLOSED</code>. 
+    """
+    
+    end_time_range: EndTimeRange = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndTimeRange') }})
+    type: InsightTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

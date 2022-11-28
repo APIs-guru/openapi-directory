@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UntagDeliveryStreamInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamName" })
   deliveryStreamName: string;
 
-  @Metadata({ data: "json, name=TagKeys" })
+  @SpeakeasyMetadata({ data: "json, name=TagKeys" })
   tagKeys: string[];
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionAuthorizationTypeEnum } from "./connectionauthorizationtypeenum";
 import { ConnectionStateEnum } from "./connectionstateenum";
+
 
 
 // Connection
@@ -8,27 +9,27 @@ import { ConnectionStateEnum } from "./connectionstateenum";
  * Contains information about a connection.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorizationType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizationType" })
   authorizationType?: ConnectionAuthorizationTypeEnum;
 
-  @Metadata({ data: "json, name=ConnectionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionArn" })
   connectionArn?: string;
 
-  @Metadata({ data: "json, name=ConnectionState" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionState" })
   connectionState?: ConnectionStateEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastAuthorizedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastAuthorizedTime" })
   lastAuthorizedTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=StateReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateReason" })
   stateReason?: string;
 }

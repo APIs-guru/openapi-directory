@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainValidation } from "./domainvalidation";
 import { ExtendedKeyUsage } from "./extendedkeyusage";
 import { FailureReasonEnum } from "./failurereasonenum";
@@ -13,86 +12,87 @@ import { CertificateStatusEnum } from "./certificatestatusenum";
 import { CertificateTypeEnum } from "./certificatetypeenum";
 
 
+
 // CertificateDetail
 /** 
  * Contains metadata about an ACM certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request. 
 **/
 export class CertificateDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=CertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" })
   certificateAuthorityArn?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=DomainValidationOptions", elemType: shared.DomainValidation })
+  @SpeakeasyMetadata({ data: "json, name=DomainValidationOptions", elemType: DomainValidation })
   domainValidationOptions?: DomainValidation[];
 
-  @Metadata({ data: "json, name=ExtendedKeyUsages", elemType: shared.ExtendedKeyUsage })
+  @SpeakeasyMetadata({ data: "json, name=ExtendedKeyUsages", elemType: ExtendedKeyUsage })
   extendedKeyUsages?: ExtendedKeyUsage[];
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: FailureReasonEnum;
 
-  @Metadata({ data: "json, name=ImportedAt" })
+  @SpeakeasyMetadata({ data: "json, name=ImportedAt" })
   importedAt?: Date;
 
-  @Metadata({ data: "json, name=InUseBy" })
+  @SpeakeasyMetadata({ data: "json, name=InUseBy" })
   inUseBy?: string[];
 
-  @Metadata({ data: "json, name=IssuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=IssuedAt" })
   issuedAt?: Date;
 
-  @Metadata({ data: "json, name=Issuer" })
+  @SpeakeasyMetadata({ data: "json, name=Issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=KeyAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=KeyAlgorithm" })
   keyAlgorithm?: KeyAlgorithmEnum;
 
-  @Metadata({ data: "json, name=KeyUsages", elemType: shared.KeyUsage })
+  @SpeakeasyMetadata({ data: "json, name=KeyUsages", elemType: KeyUsage })
   keyUsages?: KeyUsage[];
 
-  @Metadata({ data: "json, name=NotAfter" })
+  @SpeakeasyMetadata({ data: "json, name=NotAfter" })
   notAfter?: Date;
 
-  @Metadata({ data: "json, name=NotBefore" })
+  @SpeakeasyMetadata({ data: "json, name=NotBefore" })
   notBefore?: Date;
 
-  @Metadata({ data: "json, name=Options" })
+  @SpeakeasyMetadata({ data: "json, name=Options" })
   options?: CertificateOptions;
 
-  @Metadata({ data: "json, name=RenewalEligibility" })
+  @SpeakeasyMetadata({ data: "json, name=RenewalEligibility" })
   renewalEligibility?: RenewalEligibilityEnum;
 
-  @Metadata({ data: "json, name=RenewalSummary" })
+  @SpeakeasyMetadata({ data: "json, name=RenewalSummary" })
   renewalSummary?: RenewalSummary;
 
-  @Metadata({ data: "json, name=RevocationReason" })
+  @SpeakeasyMetadata({ data: "json, name=RevocationReason" })
   revocationReason?: RevocationReasonEnum;
 
-  @Metadata({ data: "json, name=RevokedAt" })
+  @SpeakeasyMetadata({ data: "json, name=RevokedAt" })
   revokedAt?: Date;
 
-  @Metadata({ data: "json, name=Serial" })
+  @SpeakeasyMetadata({ data: "json, name=Serial" })
   serial?: string;
 
-  @Metadata({ data: "json, name=SignatureAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=SignatureAlgorithm" })
   signatureAlgorithm?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: CertificateStatusEnum;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=SubjectAlternativeNames" })
+  @SpeakeasyMetadata({ data: "json, name=SubjectAlternativeNames" })
   subjectAlternativeNames?: string[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: CertificateTypeEnum;
 }

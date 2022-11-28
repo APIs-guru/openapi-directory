@@ -20,12 +20,12 @@ type PostPortfolioOptimizationMeanVarianceEfficientRequestBody struct {
 	Constraints            PostPortfolioOptimizationMeanVarianceEfficientRequestBodyConstraints `json:"constraints"`
 }
 
-type PostPortfolioOptimizationMeanVarianceEfficientRequest struct {
-	Request PostPortfolioOptimizationMeanVarianceEfficientRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationMeanVarianceEfficient200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationMeanVarianceEfficientRequest struct {
+	Request PostPortfolioOptimizationMeanVarianceEfficientRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMeanVarianceEfficientResponse struct {

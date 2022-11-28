@@ -1,5 +1,7 @@
 package shared
 
+// ProductSearchParams
+// Parameters for a product search request.
 type ProductSearchParams struct {
 	BoundingPoly      *BoundingPoly `json:"boundingPoly,omitempty"`
 	Filter            *string       `json:"filter,omitempty"`

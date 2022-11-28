@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SendOfferToInterestedBuyersHeaders = /** @class */ (function (_super) {
     __extends(SendOfferToInterestedBuyersHeaders, _super);
@@ -30,7 +30,7 @@ var SendOfferToInterestedBuyersHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
         __metadata("design:type", String)
     ], SendOfferToInterestedBuyersHeaders.prototype, "xEbayCMarketplaceId", void 0);
     return SendOfferToInterestedBuyersHeaders;
@@ -42,7 +42,7 @@ var SendOfferToInterestedBuyersSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], SendOfferToInterestedBuyersSecurity.prototype, "apiAuth", void 0);
     return SendOfferToInterestedBuyersSecurity;
@@ -54,15 +54,15 @@ var SendOfferToInterestedBuyersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SendOfferToInterestedBuyersHeaders)
     ], SendOfferToInterestedBuyersRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CreateOffersRequest)
     ], SendOfferToInterestedBuyersRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SendOfferToInterestedBuyersSecurity)
     ], SendOfferToInterestedBuyersRequest.prototype, "security", void 0);
     return SendOfferToInterestedBuyersRequest;
@@ -74,15 +74,15 @@ var SendOfferToInterestedBuyersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SendOfferToInterestedBuyersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SendOfferToInterestedBuyersCollectionResponse)
     ], SendOfferToInterestedBuyersResponse.prototype, "sendOfferToInterestedBuyersCollectionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SendOfferToInterestedBuyersResponse.prototype, "statusCode", void 0);
     return SendOfferToInterestedBuyersResponse;

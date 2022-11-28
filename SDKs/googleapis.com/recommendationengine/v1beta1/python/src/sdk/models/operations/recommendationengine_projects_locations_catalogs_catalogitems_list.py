@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsCatalogItemsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class RecommendationengineProjectsLocationsCatalogsCatalogItemsListQueryParams:
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsCatalogItemsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsCatalogItemsListRequest:
-    path_params: RecommendationengineProjectsLocationsCatalogsCatalogItemsListPathParams = field(default=None)
-    query_params: RecommendationengineProjectsLocationsCatalogsCatalogItemsListQueryParams = field(default=None)
-    security: RecommendationengineProjectsLocationsCatalogsCatalogItemsListSecurity = field(default=None)
+    path_params: RecommendationengineProjectsLocationsCatalogsCatalogItemsListPathParams = field()
+    query_params: RecommendationengineProjectsLocationsCatalogsCatalogItemsListQueryParams = field()
+    security: RecommendationengineProjectsLocationsCatalogsCatalogItemsListSecurity = field()
     
 
 @dataclass
 class RecommendationengineProjectsLocationsCatalogsCatalogItemsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_recommendationengine_v1beta1_list_catalog_items_response: Optional[shared.GoogleCloudRecommendationengineV1beta1ListCatalogItemsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

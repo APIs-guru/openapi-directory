@@ -13,13 +13,13 @@ type GetTimePeriodQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTimePeriod200ApplicationJSON struct {
+	Data *shared.TimePeriodResponse `json:"data,omitempty"`
+}
+
 type GetTimePeriodRequest struct {
 	PathParams  GetTimePeriodPathParams
 	QueryParams GetTimePeriodQueryParams
-}
-
-type GetTimePeriod200ApplicationJSON struct {
-	Data *shared.TimePeriodResponse `json:"data,omitempty"`
 }
 
 type GetTimePeriodResponse struct {

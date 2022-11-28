@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OfflineStoreStatusValueEnum } from "./offlinestorestatusvalueenum";
+
 
 
 // OfflineStoreStatus
@@ -7,9 +8,9 @@ import { OfflineStoreStatusValueEnum } from "./offlinestorestatusvalueenum";
  * The status of <code>OfflineStore</code>.
 **/
 export class OfflineStoreStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlockedReason" })
+  @SpeakeasyMetadata({ data: "json, name=BlockedReason" })
   blockedReason?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: OfflineStoreStatusValueEnum;
 }

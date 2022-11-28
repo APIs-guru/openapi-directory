@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SheetsChartReference } from "./sheetschartreference";
+
 
 
 // LinkedContentReference
@@ -7,6 +8,6 @@ import { SheetsChartReference } from "./sheetschartreference";
  * A reference to the external linked source content.
 **/
 export class LinkedContentReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sheetsChartReference" })
+  @SpeakeasyMetadata({ data: "json, name=sheetsChartReference" })
   sheetsChartReference?: SheetsChartReference;
 }

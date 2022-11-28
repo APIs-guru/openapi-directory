@@ -1,15 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import operatingsystem_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PatchBaselineIdentity:
-    baseline_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BaselineDescription' }})
-    baseline_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BaselineId' }})
-    baseline_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BaselineName' }})
-    default_baseline: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultBaseline' }})
-    operating_system: Optional[operatingsystem_enum.OperatingSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OperatingSystem' }})
+    r"""PatchBaselineIdentity
+    Defines the basic information about a patch baseline.
+    """
+    
+    baseline_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BaselineDescription') }})
+    baseline_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BaselineId') }})
+    baseline_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BaselineName') }})
+    default_baseline: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultBaseline') }})
+    operating_system: Optional[OperatingSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OperatingSystem') }})
     

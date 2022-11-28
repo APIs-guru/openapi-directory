@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeTokenStatusEnum } from "./changetokenstatusenum";
 
 
+
 export class GetChangeTokenStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeTokenStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeTokenStatus" })
   changeTokenStatus?: ChangeTokenStatusEnum;
 }

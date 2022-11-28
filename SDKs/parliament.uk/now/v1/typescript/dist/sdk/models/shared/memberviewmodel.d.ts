@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HouseMembershipViewModel } from "./housemembershipviewmodel";
 import { PartyViewModel } from "./partyviewmodel";
 export declare class MemberViewModel extends SpeakeasyBase {

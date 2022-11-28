@@ -1,6 +1,7 @@
 
 
+
 export enum ExpiredEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }

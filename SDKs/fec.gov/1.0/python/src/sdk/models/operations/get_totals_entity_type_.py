@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetTotalsEntityTypeEntityTypeEnum(str, Enum):
@@ -13,7 +17,7 @@ class GetTotalsEntityTypeEntityTypeEnum(str, Enum):
 
 @dataclass
 class GetTotalsEntityTypePathParams:
-    entity_type: GetTotalsEntityTypeEntityTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'entity_type', 'style': 'simple', 'explode': False }})
+    entity_type: GetTotalsEntityTypeEntityTypeEnum = field(metadata={'path_param': { 'field_name': 'entity_type', 'style': 'simple', 'explode': False }})
     
 class GetTotalsEntityTypeFilingFrequencyEnum(str, Enum):
     UNKNOWN = ""
@@ -38,7 +42,7 @@ class GetTotalsEntityTypeOrganizationTypeEnum(str, Enum):
 
 @dataclass
 class GetTotalsEntityTypeQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_designation: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_designation', 'style': 'form', 'explode': True }})
     committee_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     committee_state: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_state', 'style': 'form', 'explode': True }})
@@ -66,13 +70,13 @@ class GetTotalsEntityTypeQueryParams:
 
 @dataclass
 class GetTotalsEntityTypeRequest:
-    path_params: GetTotalsEntityTypePathParams = field(default=None)
-    query_params: GetTotalsEntityTypeQueryParams = field(default=None)
+    path_params: GetTotalsEntityTypePathParams = field()
+    query_params: GetTotalsEntityTypeQueryParams = field()
     
 
 @dataclass
 class GetTotalsEntityTypeResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_totals_page: Optional[shared.CommitteeTotalsPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationSchema } from "./destinationschema";
 import { KinesisFirehoseOutput } from "./kinesisfirehoseoutput";
 import { KinesisStreamsOutput } from "./kinesisstreamsoutput";
@@ -37,23 +37,23 @@ var Output = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationSchema" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationSchema" }),
         __metadata("design:type", DestinationSchema)
     ], Output.prototype, "destinationSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisFirehoseOutput" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisFirehoseOutput" }),
         __metadata("design:type", KinesisFirehoseOutput)
     ], Output.prototype, "kinesisFirehoseOutput", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisStreamsOutput" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisStreamsOutput" }),
         __metadata("design:type", KinesisStreamsOutput)
     ], Output.prototype, "kinesisStreamsOutput", void 0);
     __decorate([
-        Metadata({ data: "json, name=LambdaOutput" }),
+        SpeakeasyMetadata({ data: "json, name=LambdaOutput" }),
         __metadata("design:type", LambdaOutput)
     ], Output.prototype, "lambdaOutput", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Output.prototype, "name", void 0);
     return Output;

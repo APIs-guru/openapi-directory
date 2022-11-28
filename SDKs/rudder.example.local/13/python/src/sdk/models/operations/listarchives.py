@@ -1,17 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ListArchivesPathParams:
-    archive_kind: shared.ArchiveKindEnum = field(default=None, metadata={'path_param': { 'field_name': 'archiveKind', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class ListArchivesRequest:
-    path_params: ListArchivesPathParams = field(default=None)
+    archive_kind: shared.ArchiveKindEnum = field(metadata={'path_param': { 'field_name': 'archiveKind', 'style': 'simple', 'explode': False }})
     
 class ListArchives200ApplicationJSONActionEnum(str, Enum):
     ARCHIVE_FULL = "archiveFull"
@@ -24,15 +21,15 @@ class ListArchives200ApplicationJSONActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListArchives200ApplicationJSONDataFull:
-    commiter: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commiter' }})
-    git_commit: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitCommit' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    commiter: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('commiter') }})
+    git_commit: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gitCommit') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class ListArchives200ApplicationJSONData:
-    full: List[ListArchives200ApplicationJSONDataFull] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'full' }})
+    full: List[ListArchives200ApplicationJSONDataFull] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('full') }})
     
 class ListArchives200ApplicationJSONResultEnum(str, Enum):
     SUCCESS = "success"
@@ -42,14 +39,19 @@ class ListArchives200ApplicationJSONResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListArchives200ApplicationJSON:
-    action: ListArchives200ApplicationJSONActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    data: ListArchives200ApplicationJSONData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    result: ListArchives200ApplicationJSONResultEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    action: ListArchives200ApplicationJSONActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    data: ListArchives200ApplicationJSONData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    result: ListArchives200ApplicationJSONResultEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    
+
+@dataclass
+class ListArchivesRequest:
+    path_params: ListArchivesPathParams = field()
     
 
 @dataclass
 class ListArchivesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_archives_200_application_json_object: Optional[ListArchives200ApplicationJSON] = field(default=None)
     

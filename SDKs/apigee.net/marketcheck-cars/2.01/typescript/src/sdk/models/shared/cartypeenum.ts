@@ -1,6 +1,7 @@
 
 
+
 export enum CarTypeEnum {
-    New = "new"
-,    Used = "used"
+    New = "new",
+    Used = "used"
 }

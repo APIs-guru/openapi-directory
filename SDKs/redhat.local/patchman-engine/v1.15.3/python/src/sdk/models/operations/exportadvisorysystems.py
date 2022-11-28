@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ExportAdvisorySystemsPathParams:
-    advisory_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advisory_id', 'style': 'simple', 'explode': False }})
+    advisory_id: str = field(metadata={'path_param': { 'field_name': 'advisory_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +29,20 @@ class ExportAdvisorySystemsQueryParams:
 
 @dataclass
 class ExportAdvisorySystemsSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ExportAdvisorySystemsRequest:
-    path_params: ExportAdvisorySystemsPathParams = field(default=None)
-    query_params: ExportAdvisorySystemsQueryParams = field(default=None)
-    security: ExportAdvisorySystemsSecurity = field(default=None)
+    path_params: ExportAdvisorySystemsPathParams = field()
+    query_params: ExportAdvisorySystemsQueryParams = field()
+    security: ExportAdvisorySystemsSecurity = field()
     
 
 @dataclass
 class ExportAdvisorySystemsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     controllers_system_inline_items: Optional[List[shared.ControllersSystemInlineItem]] = field(default=None)
     

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkehubProjectsLocationsFeaturesPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +31,21 @@ class GkehubProjectsLocationsFeaturesPatchQueryParams:
 
 @dataclass
 class GkehubProjectsLocationsFeaturesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkehubProjectsLocationsFeaturesPatchRequest:
-    path_params: GkehubProjectsLocationsFeaturesPatchPathParams = field(default=None)
-    query_params: GkehubProjectsLocationsFeaturesPatchQueryParams = field(default=None)
-    request: Optional[shared.Feature] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GkehubProjectsLocationsFeaturesPatchSecurity = field(default=None)
+    path_params: GkehubProjectsLocationsFeaturesPatchPathParams = field()
+    query_params: GkehubProjectsLocationsFeaturesPatchQueryParams = field()
+    security: GkehubProjectsLocationsFeaturesPatchSecurity = field()
+    request: Optional[shared.FeatureInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GkehubProjectsLocationsFeaturesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

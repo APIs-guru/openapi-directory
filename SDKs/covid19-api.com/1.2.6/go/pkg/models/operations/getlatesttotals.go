@@ -15,10 +15,6 @@ type GetLatestTotalsQueryParams struct {
 	Format *GetLatestTotalsFormatEnum `queryParam:"style=form,explode=true,name=format"`
 }
 
-type GetLatestTotalsRequest struct {
-	QueryParams GetLatestTotalsQueryParams
-}
-
 type GetLatestTotals200ApplicationJSON struct {
 	Confirmed  *int64     `json:"confirmed,omitempty"`
 	Critical   *int64     `json:"critical,omitempty"`
@@ -26,6 +22,10 @@ type GetLatestTotals200ApplicationJSON struct {
 	LastChange *time.Time `json:"lastChange,omitempty"`
 	LastUpdate *time.Time `json:"lastUpdate,omitempty"`
 	Recovered  *int64     `json:"recovered,omitempty"`
+}
+
+type GetLatestTotalsRequest struct {
+	QueryParams GetLatestTotalsQueryParams
 }
 
 type GetLatestTotalsResponse struct {

@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateResolverPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    field_name: str = field(default=None, metadata={'path_param': { 'field_name': 'fieldName', 'style': 'simple', 'explode': False }})
-    type_name: str = field(default=None, metadata={'path_param': { 'field_name': 'typeName', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    field_name: str = field(metadata={'path_param': { 'field_name': 'fieldName', 'style': 'simple', 'explode': False }})
+    type_name: str = field(metadata={'path_param': { 'field_name': 'typeName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,8 +30,12 @@ class UpdateResolverHeaders:
 @dataclass_json
 @dataclass
 class UpdateResolverRequestBodyCachingConfig:
-    caching_keys: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cachingKeys' }})
-    ttl: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttl' }})
+    r"""UpdateResolverRequestBodyCachingConfig
+    The caching configuration for a resolver that has caching enabled.
+    """
+    
+    caching_keys: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cachingKeys') }})
+    ttl: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
     
 class UpdateResolverRequestBodyKindEnum(str, Enum):
     UNIT = "UNIT"
@@ -36,43 +45,51 @@ class UpdateResolverRequestBodyKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateResolverRequestBodyPipelineConfig:
-    functions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'functions' }})
+    r"""UpdateResolverRequestBodyPipelineConfig
+    The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
+    """
+    
+    functions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('functions') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateResolverRequestBodySyncConfig:
-    conflict_detection: Optional[shared.ConflictDetectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conflictDetection' }})
-    conflict_handler: Optional[shared.ConflictHandlerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conflictHandler' }})
-    lambda_conflict_handler_config: Optional[shared.LambdaConflictHandlerConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lambdaConflictHandlerConfig' }})
+    r"""UpdateResolverRequestBodySyncConfig
+    <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+    """
+    
+    conflict_detection: Optional[shared.ConflictDetectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conflictDetection') }})
+    conflict_handler: Optional[shared.ConflictHandlerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conflictHandler') }})
+    lambda_conflict_handler_config: Optional[shared.LambdaConflictHandlerConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lambdaConflictHandlerConfig') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateResolverRequestBody:
-    caching_config: Optional[UpdateResolverRequestBodyCachingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cachingConfig' }})
-    data_source_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSourceName' }})
-    kind: Optional[UpdateResolverRequestBodyKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    pipeline_config: Optional[UpdateResolverRequestBodyPipelineConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipelineConfig' }})
-    request_mapping_template: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestMappingTemplate' }})
-    response_mapping_template: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseMappingTemplate' }})
-    sync_config: Optional[UpdateResolverRequestBodySyncConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'syncConfig' }})
+    caching_config: Optional[UpdateResolverRequestBodyCachingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cachingConfig') }})
+    data_source_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSourceName') }})
+    kind: Optional[UpdateResolverRequestBodyKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    pipeline_config: Optional[UpdateResolverRequestBodyPipelineConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineConfig') }})
+    request_mapping_template: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestMappingTemplate') }})
+    response_mapping_template: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseMappingTemplate') }})
+    sync_config: Optional[UpdateResolverRequestBodySyncConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('syncConfig') }})
     
 
 @dataclass
 class UpdateResolverRequest:
-    path_params: UpdateResolverPathParams = field(default=None)
-    headers: UpdateResolverHeaders = field(default=None)
-    request: UpdateResolverRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateResolverHeaders = field()
+    path_params: UpdateResolverPathParams = field()
+    request: UpdateResolverRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateResolverResponse:
+    content_type: str = field()
+    status_code: int = field()
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_resolver_response: Optional[shared.UpdateResolverResponse] = field(default=None)
     

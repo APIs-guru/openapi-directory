@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Admin } from "./admin";
 /**
  * Response message for AccessControl.ListLocationAdmins.

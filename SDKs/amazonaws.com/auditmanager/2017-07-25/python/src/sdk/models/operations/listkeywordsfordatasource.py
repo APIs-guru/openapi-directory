@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListKeywordsForDataSourceSourceEnum(str, Enum):
@@ -12,9 +16,9 @@ class ListKeywordsForDataSourceSourceEnum(str, Enum):
 
 @dataclass
 class ListKeywordsForDataSourceQueryParams:
+    source: ListKeywordsForDataSourceSourceEnum = field(metadata={'query_param': { 'field_name': 'source', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
-    source: ListKeywordsForDataSourceSourceEnum = field(default=None, metadata={'query_param': { 'field_name': 'source', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,16 +34,16 @@ class ListKeywordsForDataSourceHeaders:
 
 @dataclass
 class ListKeywordsForDataSourceRequest:
-    query_params: ListKeywordsForDataSourceQueryParams = field(default=None)
-    headers: ListKeywordsForDataSourceHeaders = field(default=None)
+    headers: ListKeywordsForDataSourceHeaders = field()
+    query_params: ListKeywordsForDataSourceQueryParams = field()
     
 
 @dataclass
 class ListKeywordsForDataSourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_keywords_for_data_source_response: Optional[shared.ListKeywordsForDataSourceResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFirestoreAdminV1beta2Field } from "./googlefirestoreadminv1beta2field";
 // GoogleFirestoreAdminV1beta2ListFieldsResponse
 /**
  * The response for FirestoreAdmin.ListFields.
@@ -34,11 +34,11 @@ var GoogleFirestoreAdminV1beta2ListFieldsResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fields", elemType: shared.GoogleFirestoreAdminV1beta2Field }),
+        SpeakeasyMetadata({ data: "json, name=fields", elemType: GoogleFirestoreAdminV1beta2Field }),
         __metadata("design:type", Array)
     ], GoogleFirestoreAdminV1beta2ListFieldsResponse.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2ListFieldsResponse.prototype, "nextPageToken", void 0);
     return GoogleFirestoreAdminV1beta2ListFieldsResponse;

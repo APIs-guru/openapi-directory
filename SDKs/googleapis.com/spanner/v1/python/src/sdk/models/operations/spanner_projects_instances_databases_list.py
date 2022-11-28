@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SpannerProjectsInstancesDatabasesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class SpannerProjectsInstancesDatabasesListQueryParams:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class SpannerProjectsInstancesDatabasesListSecurity:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesListRequest:
-    path_params: SpannerProjectsInstancesDatabasesListPathParams = field(default=None)
-    query_params: SpannerProjectsInstancesDatabasesListQueryParams = field(default=None)
-    security: SpannerProjectsInstancesDatabasesListSecurity = field(default=None)
+    path_params: SpannerProjectsInstancesDatabasesListPathParams = field()
+    query_params: SpannerProjectsInstancesDatabasesListQueryParams = field()
+    security: SpannerProjectsInstancesDatabasesListSecurity = field()
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_databases_response: Optional[shared.ListDatabasesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

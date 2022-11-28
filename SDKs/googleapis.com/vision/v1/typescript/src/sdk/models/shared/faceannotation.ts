@@ -1,70 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { BoundingPoly } from "./boundingpoly";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingPoly } from "./boundingpoly";
 import { Landmark } from "./landmark";
 
+
 export enum FaceAnnotationAngerLikelihoodEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum FaceAnnotationBlurredLikelihoodEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum FaceAnnotationHeadwearLikelihoodEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum FaceAnnotationJoyLikelihoodEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum FaceAnnotationSorrowLikelihoodEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum FaceAnnotationSurpriseLikelihoodEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum FaceAnnotationUnderExposedLikelihoodEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 
@@ -73,48 +72,48 @@ export enum FaceAnnotationUnderExposedLikelihoodEnum {
  * A face annotation object contains the results of face detection.
 **/
 export class FaceAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=angerLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=angerLikelihood" })
   angerLikelihood?: FaceAnnotationAngerLikelihoodEnum;
 
-  @Metadata({ data: "json, name=blurredLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=blurredLikelihood" })
   blurredLikelihood?: FaceAnnotationBlurredLikelihoodEnum;
 
-  @Metadata({ data: "json, name=boundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=boundingPoly" })
   boundingPoly?: BoundingPoly;
 
-  @Metadata({ data: "json, name=detectionConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=detectionConfidence" })
   detectionConfidence?: number;
 
-  @Metadata({ data: "json, name=fdBoundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=fdBoundingPoly" })
   fdBoundingPoly?: BoundingPoly;
 
-  @Metadata({ data: "json, name=headwearLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=headwearLikelihood" })
   headwearLikelihood?: FaceAnnotationHeadwearLikelihoodEnum;
 
-  @Metadata({ data: "json, name=joyLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=joyLikelihood" })
   joyLikelihood?: FaceAnnotationJoyLikelihoodEnum;
 
-  @Metadata({ data: "json, name=landmarkingConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=landmarkingConfidence" })
   landmarkingConfidence?: number;
 
-  @Metadata({ data: "json, name=landmarks", elemType: shared.Landmark })
+  @SpeakeasyMetadata({ data: "json, name=landmarks", elemType: Landmark })
   landmarks?: Landmark[];
 
-  @Metadata({ data: "json, name=panAngle" })
+  @SpeakeasyMetadata({ data: "json, name=panAngle" })
   panAngle?: number;
 
-  @Metadata({ data: "json, name=rollAngle" })
+  @SpeakeasyMetadata({ data: "json, name=rollAngle" })
   rollAngle?: number;
 
-  @Metadata({ data: "json, name=sorrowLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=sorrowLikelihood" })
   sorrowLikelihood?: FaceAnnotationSorrowLikelihoodEnum;
 
-  @Metadata({ data: "json, name=surpriseLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=surpriseLikelihood" })
   surpriseLikelihood?: FaceAnnotationSurpriseLikelihoodEnum;
 
-  @Metadata({ data: "json, name=tiltAngle" })
+  @SpeakeasyMetadata({ data: "json, name=tiltAngle" })
   tiltAngle?: number;
 
-  @Metadata({ data: "json, name=underExposedLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=underExposedLikelihood" })
   underExposedLikelihood?: FaceAnnotationUnderExposedLikelihoodEnum;
 }

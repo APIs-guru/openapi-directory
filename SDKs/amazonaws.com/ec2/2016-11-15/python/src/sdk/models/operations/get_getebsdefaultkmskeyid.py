@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetEbsDefaultKmsKeyIDActionEnum(str, Enum):
     GET_EBS_DEFAULT_KMS_KEY_ID = "GetEbsDefaultKmsKeyId"
@@ -10,9 +14,9 @@ class GetGetEbsDefaultKmsKeyIDVersionEnum(str, Enum):
 
 @dataclass
 class GetGetEbsDefaultKmsKeyIDQueryParams:
-    action: GetGetEbsDefaultKmsKeyIDActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetEbsDefaultKmsKeyIDActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetGetEbsDefaultKmsKeyIDVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetGetEbsDefaultKmsKeyIDVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetEbsDefaultKmsKeyIDHeaders:
 
 @dataclass
 class GetGetEbsDefaultKmsKeyIDRequest:
-    query_params: GetGetEbsDefaultKmsKeyIDQueryParams = field(default=None)
-    headers: GetGetEbsDefaultKmsKeyIDHeaders = field(default=None)
+    headers: GetGetEbsDefaultKmsKeyIDHeaders = field()
+    query_params: GetGetEbsDefaultKmsKeyIDQueryParams = field()
     
 
 @dataclass
 class GetGetEbsDefaultKmsKeyIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

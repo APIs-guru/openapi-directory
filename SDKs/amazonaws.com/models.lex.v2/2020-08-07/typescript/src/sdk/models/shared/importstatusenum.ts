@@ -1,8 +1,9 @@
 
 
+
 export enum ImportStatusEnum {
-    InProgress = "InProgress"
-,    Completed = "Completed"
-,    Failed = "Failed"
-,    Deleting = "Deleting"
+    InProgress = "InProgress",
+    Completed = "Completed",
+    Failed = "Failed",
+    Deleting = "Deleting"
 }

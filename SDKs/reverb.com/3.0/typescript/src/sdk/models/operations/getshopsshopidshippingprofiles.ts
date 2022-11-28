@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetShopsShopIdShippingProfilesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shop_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shop_id" })
   shopId: string;
 }
 
 
 export class GetShopsShopIdShippingProfilesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class GetShopsShopIdShippingProfilesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetShopsShopIdShippingProfilesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetShopsShopIdShippingProfilesSecurity;
 }
 
 
 export class GetShopsShopIdShippingProfilesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

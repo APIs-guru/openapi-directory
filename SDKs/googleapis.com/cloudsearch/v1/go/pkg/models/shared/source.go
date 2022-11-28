@@ -14,6 +14,8 @@ const (
 	SourcePredefinedSourceEnumGoogleKeep     SourcePredefinedSourceEnum = "GOOGLE_KEEP"
 )
 
+// Source
+// Defines sources for the suggest/search APIs.
 type Source struct {
 	Name             *string                     `json:"name,omitempty"`
 	PredefinedSource *SourcePredefinedSourceEnum `json:"predefinedSource,omitempty"`

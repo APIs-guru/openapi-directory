@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TerminologyProperties
+// The properties of the custom terminology.
 type TerminologyProperties struct {
 	Arn                 *string        `json:"Arn,omitempty"`
 	CreatedAt           *time.Time     `json:"CreatedAt,omitempty"`

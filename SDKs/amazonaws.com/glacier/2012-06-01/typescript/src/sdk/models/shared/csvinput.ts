@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileHeaderInfoEnum } from "./fileheaderinfoenum";
+
 
 
 // CsvInput
@@ -7,21 +8,21 @@ import { FileHeaderInfoEnum } from "./fileheaderinfoenum";
  * Contains information about the comma-separated value (CSV) file to select from.
 **/
 export class CsvInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Comments" })
+  @SpeakeasyMetadata({ data: "json, name=Comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=FieldDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=FieldDelimiter" })
   fieldDelimiter?: string;
 
-  @Metadata({ data: "json, name=FileHeaderInfo" })
+  @SpeakeasyMetadata({ data: "json, name=FileHeaderInfo" })
   fileHeaderInfo?: FileHeaderInfoEnum;
 
-  @Metadata({ data: "json, name=QuoteCharacter" })
+  @SpeakeasyMetadata({ data: "json, name=QuoteCharacter" })
   quoteCharacter?: string;
 
-  @Metadata({ data: "json, name=QuoteEscapeCharacter" })
+  @SpeakeasyMetadata({ data: "json, name=QuoteEscapeCharacter" })
   quoteEscapeCharacter?: string;
 
-  @Metadata({ data: "json, name=RecordDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=RecordDelimiter" })
   recordDelimiter?: string;
 }

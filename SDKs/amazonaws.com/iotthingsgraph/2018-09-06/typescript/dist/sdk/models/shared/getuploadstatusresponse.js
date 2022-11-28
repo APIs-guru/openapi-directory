@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UploadStatusEnum } from "./uploadstatusenum";
 var GetUploadStatusResponse = /** @class */ (function (_super) {
     __extends(GetUploadStatusResponse, _super);
@@ -30,31 +30,31 @@ var GetUploadStatusResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdDate" }),
+        SpeakeasyMetadata({ data: "json, name=createdDate" }),
         __metadata("design:type", Date)
     ], GetUploadStatusResponse.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", Array)
     ], GetUploadStatusResponse.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespaceArn" }),
+        SpeakeasyMetadata({ data: "json, name=namespaceArn" }),
         __metadata("design:type", String)
     ], GetUploadStatusResponse.prototype, "namespaceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespaceName" }),
+        SpeakeasyMetadata({ data: "json, name=namespaceName" }),
         __metadata("design:type", String)
     ], GetUploadStatusResponse.prototype, "namespaceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespaceVersion" }),
+        SpeakeasyMetadata({ data: "json, name=namespaceVersion" }),
         __metadata("design:type", Number)
     ], GetUploadStatusResponse.prototype, "namespaceVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadId" }),
+        SpeakeasyMetadata({ data: "json, name=uploadId" }),
         __metadata("design:type", String)
     ], GetUploadStatusResponse.prototype, "uploadId", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadStatus" }),
+        SpeakeasyMetadata({ data: "json, name=uploadStatus" }),
         __metadata("design:type", String)
     ], GetUploadStatusResponse.prototype, "uploadStatus", void 0);
     return GetUploadStatusResponse;

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ExitEventTypeEnum {
-    ExitEventTypeUnspecified = "EXIT_EVENT_TYPE_UNSPECIFIED"
-,    ExitEventTypeDefault = "EXIT_EVENT_TYPE_DEFAULT"
-,    ExitEventTypeBackup = "EXIT_EVENT_TYPE_BACKUP"
+    ExitEventTypeUnspecified = "EXIT_EVENT_TYPE_UNSPECIFIED",
+    ExitEventTypeDefault = "EXIT_EVENT_TYPE_DEFAULT",
+    ExitEventTypeBackup = "EXIT_EVENT_TYPE_BACKUP"
 }
 
 
@@ -12,15 +13,15 @@ export enum ExitEventTypeEnum {
  * Exit event of the creative.
 **/
 export class ExitEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reportingName" })
+  @SpeakeasyMetadata({ data: "json, name=reportingName" })
   reportingName?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ExitEventTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

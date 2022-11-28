@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReisezentrenLocLatLonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lat" })
   lat: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lon" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lon" })
   lon: number;
 }
 
 
 export class GetReisezentrenLocLatLonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetReisezentrenLocLatLonPathParams;
 }
 
 
 export class GetReisezentrenLocLatLonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   travelCenter?: shared.TravelCenter;
 }

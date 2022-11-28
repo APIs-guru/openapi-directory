@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics
+// Version variant and associated metrics.
 type GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics struct {
 	Metrics      []GoogleCloudDialogflowCxV3beta1ExperimentResultMetric `json:"metrics,omitempty"`
 	SessionCount *int32                                                 `json:"sessionCount,omitempty"`

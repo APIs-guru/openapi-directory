@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeListenersActionEnum(str, Enum):
     DESCRIBE_LISTENERS = "DescribeListeners"
@@ -10,12 +14,12 @@ class GetDescribeListenersVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeListenersQueryParams:
-    action: GetDescribeListenersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeListenersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeListenersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     listener_arns: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ListenerArns', 'style': 'form', 'explode': True }})
     load_balancer_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerArn', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
-    version: GetDescribeListenersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDescribeListenersHeaders:
 
 @dataclass
 class GetDescribeListenersRequest:
-    query_params: GetDescribeListenersQueryParams = field(default=None)
-    headers: GetDescribeListenersHeaders = field(default=None)
+    headers: GetDescribeListenersHeaders = field()
+    query_params: GetDescribeListenersQueryParams = field()
     
 
 @dataclass
 class GetDescribeListenersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

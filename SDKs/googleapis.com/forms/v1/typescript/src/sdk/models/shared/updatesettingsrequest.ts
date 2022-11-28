@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FormSettings } from "./formsettings";
+
 
 
 // UpdateSettingsRequest
@@ -7,9 +8,9 @@ import { FormSettings } from "./formsettings";
  * Update Form's FormSettings.
 **/
 export class UpdateSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: FormSettings;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

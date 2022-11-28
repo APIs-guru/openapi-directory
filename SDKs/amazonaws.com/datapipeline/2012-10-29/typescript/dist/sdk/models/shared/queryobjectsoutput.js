@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // QueryObjectsOutput
 /**
  * Contains the output of QueryObjects.
@@ -33,15 +33,15 @@ var QueryObjectsOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hasMoreResults" }),
+        SpeakeasyMetadata({ data: "json, name=hasMoreResults" }),
         __metadata("design:type", Boolean)
     ], QueryObjectsOutput.prototype, "hasMoreResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=ids" }),
+        SpeakeasyMetadata({ data: "json, name=ids" }),
         __metadata("design:type", Array)
     ], QueryObjectsOutput.prototype, "ids", void 0);
     __decorate([
-        Metadata({ data: "json, name=marker" }),
+        SpeakeasyMetadata({ data: "json, name=marker" }),
         __metadata("design:type", String)
     ], QueryObjectsOutput.prototype, "marker", void 0);
     return QueryObjectsOutput;

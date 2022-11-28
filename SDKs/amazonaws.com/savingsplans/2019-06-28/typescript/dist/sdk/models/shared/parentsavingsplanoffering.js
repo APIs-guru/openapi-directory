@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CurrencyCodeEnum } from "./currencycodeenum";
 import { SavingsPlanPaymentOptionEnum } from "./savingsplanpaymentoptionenum";
 import { SavingsPlanTypeEnum } from "./savingsplantypeenum";
@@ -36,27 +36,27 @@ var ParentSavingsPlanOffering = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=currency" }),
+        SpeakeasyMetadata({ data: "json, name=currency" }),
         __metadata("design:type", String)
     ], ParentSavingsPlanOffering.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "json, name=durationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=durationSeconds" }),
         __metadata("design:type", Number)
     ], ParentSavingsPlanOffering.prototype, "durationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=offeringId" }),
+        SpeakeasyMetadata({ data: "json, name=offeringId" }),
         __metadata("design:type", String)
     ], ParentSavingsPlanOffering.prototype, "offeringId", void 0);
     __decorate([
-        Metadata({ data: "json, name=paymentOption" }),
+        SpeakeasyMetadata({ data: "json, name=paymentOption" }),
         __metadata("design:type", String)
     ], ParentSavingsPlanOffering.prototype, "paymentOption", void 0);
     __decorate([
-        Metadata({ data: "json, name=planDescription" }),
+        SpeakeasyMetadata({ data: "json, name=planDescription" }),
         __metadata("design:type", String)
     ], ParentSavingsPlanOffering.prototype, "planDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=planType" }),
+        SpeakeasyMetadata({ data: "json, name=planType" }),
         __metadata("design:type", String)
     ], ParentSavingsPlanOffering.prototype, "planType", void 0);
     return ParentSavingsPlanOffering;

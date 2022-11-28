@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import stoptype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StopAutomationExecutionRequest:
-    automation_execution_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AutomationExecutionId' }})
-    type: Optional[stoptype_enum.StopTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    automation_execution_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AutomationExecutionId') }})
+    type: Optional[StopTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

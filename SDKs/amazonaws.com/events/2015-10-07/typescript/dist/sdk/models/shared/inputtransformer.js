@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InputTransformer
 /**
  * Contains the parameters needed for you to provide custom input to a target based on one or more pieces of data extracted from the event.
@@ -33,11 +33,11 @@ var InputTransformer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InputPathsMap" }),
+        SpeakeasyMetadata({ data: "json, name=InputPathsMap" }),
         __metadata("design:type", Map)
     ], InputTransformer.prototype, "inputPathsMap", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=InputTemplate" }),
         __metadata("design:type", String)
     ], InputTransformer.prototype, "inputTemplate", void 0);
     return InputTransformer;

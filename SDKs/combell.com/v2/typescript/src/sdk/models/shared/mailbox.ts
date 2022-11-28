@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Mailbox extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actual_size" })
+  @SpeakeasyMetadata({ data: "json, name=actual_size" })
   actualSize?: number;
 
-  @Metadata({ data: "json, name=max_size" })
+  @SpeakeasyMetadata({ data: "json, name=max_size" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

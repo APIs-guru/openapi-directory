@@ -1,6 +1,7 @@
 
 
+
 export enum AppPkgOperationalStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

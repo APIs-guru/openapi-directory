@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NewDeviceMetadataType
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The new device metadata type.
 **/
 export class NewDeviceMetadataType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceGroupKey" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceGroupKey" })
   deviceGroupKey?: string;
 
-  @Metadata({ data: "json, name=DeviceKey" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceKey" })
   deviceKey?: string;
 }

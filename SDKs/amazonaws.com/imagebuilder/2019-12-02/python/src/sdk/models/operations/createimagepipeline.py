@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,16 +23,24 @@ class CreateImagePipelineHeaders:
 @dataclass_json
 @dataclass
 class CreateImagePipelineRequestBodyImageTestsConfiguration:
-    image_tests_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageTestsEnabled' }})
-    timeout_minutes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeoutMinutes' }})
+    r"""CreateImagePipelineRequestBodyImageTestsConfiguration
+    Image tests configuration.
+    """
+    
+    image_tests_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageTestsEnabled') }})
+    timeout_minutes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeoutMinutes') }})
     
 
 @dataclass_json
 @dataclass
 class CreateImagePipelineRequestBodySchedule:
-    pipeline_execution_start_condition: Optional[shared.PipelineExecutionStartConditionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipelineExecutionStartCondition' }})
-    schedule_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduleExpression' }})
-    timezone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timezone' }})
+    r"""CreateImagePipelineRequestBodySchedule
+    A schedule configures how often and when a pipeline will automatically create a new image.
+    """
+    
+    pipeline_execution_start_condition: Optional[shared.PipelineExecutionStartConditionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineExecutionStartCondition') }})
+    schedule_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduleExpression') }})
+    timezone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timezone') }})
     
 class CreateImagePipelineRequestBodyStatusEnum(str, Enum):
     DISABLED = "DISABLED"
@@ -37,31 +50,32 @@ class CreateImagePipelineRequestBodyStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateImagePipelineRequestBody:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    container_recipe_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerRecipeArn' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    distribution_configuration_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'distributionConfigurationArn' }})
-    enhanced_image_metadata_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enhancedImageMetadataEnabled' }})
-    image_recipe_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageRecipeArn' }})
-    image_tests_configuration: Optional[CreateImagePipelineRequestBodyImageTestsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageTestsConfiguration' }})
-    infrastructure_configuration_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'infrastructureConfigurationArn' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    schedule: Optional[CreateImagePipelineRequestBodySchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schedule' }})
-    status: Optional[CreateImagePipelineRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    infrastructure_configuration_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('infrastructureConfigurationArn') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    container_recipe_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerRecipeArn') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    distribution_configuration_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('distributionConfigurationArn') }})
+    enhanced_image_metadata_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enhancedImageMetadataEnabled') }})
+    image_recipe_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageRecipeArn') }})
+    image_tests_configuration: Optional[CreateImagePipelineRequestBodyImageTestsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageTestsConfiguration') }})
+    schedule: Optional[CreateImagePipelineRequestBodySchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schedule') }})
+    status: Optional[CreateImagePipelineRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateImagePipelineRequest:
-    headers: CreateImagePipelineHeaders = field(default=None)
-    request: CreateImagePipelineRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateImagePipelineHeaders = field()
+    request: CreateImagePipelineRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateImagePipelineResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_image_pipeline_response: Optional[shared.CreateImagePipelineResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
@@ -71,5 +85,4 @@ class CreateImagePipelineResponse:
     service_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

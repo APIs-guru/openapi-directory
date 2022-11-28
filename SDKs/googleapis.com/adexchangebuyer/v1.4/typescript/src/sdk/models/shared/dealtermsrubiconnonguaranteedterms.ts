@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
-import { Price } from "./price";
+
 
 
 export class DealTermsRubiconNonGuaranteedTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=priorityPrice" })
+  @SpeakeasyMetadata({ data: "json, name=priorityPrice" })
   priorityPrice?: Price;
 
-  @Metadata({ data: "json, name=standardPrice" })
+  @SpeakeasyMetadata({ data: "json, name=standardPrice" })
   standardPrice?: Price;
 }

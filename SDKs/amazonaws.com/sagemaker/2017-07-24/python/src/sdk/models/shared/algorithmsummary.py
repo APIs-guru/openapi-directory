@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import algorithmstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AlgorithmSummary:
-    algorithm_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlgorithmArn' }})
-    algorithm_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlgorithmDescription' }})
-    algorithm_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlgorithmName' }})
-    algorithm_status: algorithmstatus_enum.AlgorithmStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlgorithmStatus' }})
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""AlgorithmSummary
+    Provides summary information about an algorithm.
+    """
+    
+    algorithm_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AlgorithmArn') }})
+    algorithm_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AlgorithmName') }})
+    algorithm_status: AlgorithmStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AlgorithmStatus') }})
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    algorithm_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AlgorithmDescription') }})
     

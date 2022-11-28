@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestDeletedNodesSummaryPathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,15 +27,15 @@ class RequestDeletedNodesSummaryHeaders:
 
 @dataclass
 class RequestDeletedNodesSummaryRequest:
-    path_params: RequestDeletedNodesSummaryPathParams = field(default=None)
-    query_params: RequestDeletedNodesSummaryQueryParams = field(default=None)
-    headers: RequestDeletedNodesSummaryHeaders = field(default=None)
+    headers: RequestDeletedNodesSummaryHeaders = field()
+    path_params: RequestDeletedNodesSummaryPathParams = field()
+    query_params: RequestDeletedNodesSummaryQueryParams = field()
     
 
 @dataclass
 class RequestDeletedNodesSummaryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deleted_node_summary_list: Optional[shared.DeletedNodeSummaryList] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

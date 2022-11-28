@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogEntry } from "./logentry";
 import { SuppressionInfo } from "./suppressioninfo";
+
 
 
 // TailLogEntriesResponse
@@ -9,9 +9,9 @@ import { SuppressionInfo } from "./suppressioninfo";
  * Result returned from TailLogEntries.
 **/
 export class TailLogEntriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entries", elemType: shared.LogEntry })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: LogEntry })
   entries?: LogEntry[];
 
-  @Metadata({ data: "json, name=suppressionInfo", elemType: shared.SuppressionInfo })
+  @SpeakeasyMetadata({ data: "json, name=suppressionInfo", elemType: SuppressionInfo })
   suppressionInfo?: SuppressionInfo[];
 }

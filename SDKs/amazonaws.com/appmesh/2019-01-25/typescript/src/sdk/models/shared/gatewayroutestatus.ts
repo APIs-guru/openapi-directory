@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GatewayRouteStatusCodeEnum } from "./gatewayroutestatuscodeenum";
+
 
 
 // GatewayRouteStatus
@@ -7,6 +8,6 @@ import { GatewayRouteStatusCodeEnum } from "./gatewayroutestatuscodeenum";
  * An object that represents the current status of a gateway route.
 **/
 export class GatewayRouteStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GatewayRouteStatusCodeEnum;
 }

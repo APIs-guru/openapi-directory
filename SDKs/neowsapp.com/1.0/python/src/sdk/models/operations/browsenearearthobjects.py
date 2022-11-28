@@ -11,12 +11,12 @@ class BrowseNearEarthObjectsQueryParams:
 
 @dataclass
 class BrowseNearEarthObjectsRequest:
-    query_params: BrowseNearEarthObjectsQueryParams = field(default=None)
+    query_params: BrowseNearEarthObjectsQueryParams = field()
     
 
 @dataclass
 class BrowseNearEarthObjectsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     near_earth_object: Optional[shared.NearEarthObject] = field(default=None)
-    status_code: int = field(default=None)
     

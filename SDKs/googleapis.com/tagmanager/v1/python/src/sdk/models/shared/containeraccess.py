@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ContainerAccessPermissionEnum(str, Enum):
     READ = "read"
@@ -14,6 +16,10 @@ class ContainerAccessPermissionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ContainerAccess:
-    container_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerId' }})
-    permission: Optional[List[ContainerAccessPermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permission' }})
+    r"""ContainerAccess
+    Defines the Google Tag Manager Container access permissions.
+    """
+    
+    container_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerId') }})
+    permission: Optional[List[ContainerAccessPermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permission') }})
     

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RejectedLogEventsInfo } from "./rejectedlogeventsinfo";
 
 
+
 export class PutLogEventsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextSequenceToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextSequenceToken" })
   nextSequenceToken?: string;
 
-  @Metadata({ data: "json, name=rejectedLogEventsInfo" })
+  @SpeakeasyMetadata({ data: "json, name=rejectedLogEventsInfo" })
   rejectedLogEventsInfo?: RejectedLogEventsInfo;
 }

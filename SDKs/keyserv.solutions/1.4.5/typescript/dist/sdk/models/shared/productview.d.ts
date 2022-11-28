@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionView } from "./subscriptionview";
 export declare class ProductView extends SpeakeasyBase {
     created?: Date;

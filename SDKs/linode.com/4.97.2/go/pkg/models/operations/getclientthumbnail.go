@@ -8,12 +8,12 @@ type GetClientThumbnailPathParams struct {
 	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-type GetClientThumbnailRequest struct {
-	PathParams GetClientThumbnailPathParams
-}
-
 type GetClientThumbnailDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetClientThumbnailRequest struct {
+	PathParams GetClientThumbnailPathParams
 }
 
 type GetClientThumbnailResponse struct {

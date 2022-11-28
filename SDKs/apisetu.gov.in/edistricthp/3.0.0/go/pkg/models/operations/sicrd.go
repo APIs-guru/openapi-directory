@@ -26,11 +26,6 @@ type SicrdSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type SicrdRequest struct {
-	Request  *SicrdRequestBody `request:"mediaType=application/json"`
-	Security SicrdSecurity
-}
-
 type Sicrd400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Sicrd504ApplicationJSON struct {
 	Error            *Sicrd504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Sicrd504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type SicrdRequest struct {
+	Request  *SicrdRequestBody `request:"mediaType=application/json"`
+	Security SicrdSecurity
 }
 
 type SicrdResponse struct {

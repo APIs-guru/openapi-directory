@@ -1,5 +1,8 @@
 package shared
 
+// SearchResponseObjectAlbums
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type SearchResponseObjectAlbums struct {
 	Href     *string                 `json:"href,omitempty"`
 	Items    []SimplifiedAlbumObject `json:"items,omitempty"`
@@ -10,6 +13,9 @@ type SearchResponseObjectAlbums struct {
 	Total    *int32                  `json:"total,omitempty"`
 }
 
+// SearchResponseObjectArtists
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type SearchResponseObjectArtists struct {
 	Href     *string        `json:"href,omitempty"`
 	Items    []ArtistObject `json:"items,omitempty"`
@@ -20,6 +26,9 @@ type SearchResponseObjectArtists struct {
 	Total    *int32         `json:"total,omitempty"`
 }
 
+// SearchResponseObjectEpisodes
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type SearchResponseObjectEpisodes struct {
 	Href     *string                   `json:"href,omitempty"`
 	Items    []SimplifiedEpisodeObject `json:"items,omitempty"`
@@ -30,6 +39,9 @@ type SearchResponseObjectEpisodes struct {
 	Total    *int32                    `json:"total,omitempty"`
 }
 
+// SearchResponseObjectPlaylists
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type SearchResponseObjectPlaylists struct {
 	Href     *string                    `json:"href,omitempty"`
 	Items    []SimplifiedPlaylistObject `json:"items,omitempty"`
@@ -40,6 +52,9 @@ type SearchResponseObjectPlaylists struct {
 	Total    *int32                     `json:"total,omitempty"`
 }
 
+// SearchResponseObjectShows
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type SearchResponseObjectShows struct {
 	Href     *string                `json:"href,omitempty"`
 	Items    []SimplifiedShowObject `json:"items,omitempty"`
@@ -50,6 +65,9 @@ type SearchResponseObjectShows struct {
 	Total    *int32                 `json:"total,omitempty"`
 }
 
+// SearchResponseObjectTracks
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type SearchResponseObjectTracks struct {
 	Href     *string       `json:"href,omitempty"`
 	Items    []TrackObject `json:"items,omitempty"`

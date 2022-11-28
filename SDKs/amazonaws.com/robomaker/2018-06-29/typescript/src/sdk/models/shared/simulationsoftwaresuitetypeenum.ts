@@ -1,6 +1,7 @@
 
 
+
 export enum SimulationSoftwareSuiteTypeEnum {
-    Gazebo = "Gazebo"
-,    RosbagPlay = "RosbagPlay"
+    Gazebo = "Gazebo",
+    RosbagPlay = "RosbagPlay"
 }

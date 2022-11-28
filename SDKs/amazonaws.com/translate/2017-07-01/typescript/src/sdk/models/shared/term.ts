@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Term
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The term being translated by the custom terminology.
 **/
 export class Term extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceText" })
+  @SpeakeasyMetadata({ data: "json, name=SourceText" })
   sourceText?: string;
 
-  @Metadata({ data: "json, name=TargetText" })
+  @SpeakeasyMetadata({ data: "json, name=TargetText" })
   targetText?: string;
 }

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostStudiesIdAttachmentsNameVerifyMd5PathParams = /** @class */ (function (_super) {
     __extends(PostStudiesIdAttachmentsNameVerifyMd5PathParams, _super);
     function PostStudiesIdAttachmentsNameVerifyMd5PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostStudiesIdAttachmentsNameVerifyMd5PathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], PostStudiesIdAttachmentsNameVerifyMd5PathParams.prototype, "name", void 0);
     return PostStudiesIdAttachmentsNameVerifyMd5PathParams;
@@ -45,7 +45,7 @@ var PostStudiesIdAttachmentsNameVerifyMd5Request = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostStudiesIdAttachmentsNameVerifyMd5PathParams)
     ], PostStudiesIdAttachmentsNameVerifyMd5Request.prototype, "pathParams", void 0);
     return PostStudiesIdAttachmentsNameVerifyMd5Request;
@@ -57,15 +57,15 @@ var PostStudiesIdAttachmentsNameVerifyMd5Response = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostStudiesIdAttachmentsNameVerifyMd5Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostStudiesIdAttachmentsNameVerifyMd5Response.prototype, "postStudiesIdAttachmentsNameVerifyMd5200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostStudiesIdAttachmentsNameVerifyMd5Response.prototype, "statusCode", void 0);
     return PostStudiesIdAttachmentsNameVerifyMd5Response;

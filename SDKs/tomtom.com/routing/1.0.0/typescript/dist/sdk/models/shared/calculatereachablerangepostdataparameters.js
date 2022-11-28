@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner = /** @class */ (function (_super) {
     __extends(CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner, _super);
     function CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=latitude" }),
+        SpeakeasyMetadata({ data: "json, name=latitude" }),
         __metadata("design:type", String)
     ], CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=longitude" }),
+        SpeakeasyMetadata({ data: "json, name=longitude" }),
         __metadata("design:type", String)
     ], CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner.prototype, "longitude", void 0);
     return CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner;
@@ -46,11 +45,11 @@ var CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=latitude" }),
+        SpeakeasyMetadata({ data: "json, name=latitude" }),
         __metadata("design:type", String)
     ], CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=longitude" }),
+        SpeakeasyMetadata({ data: "json, name=longitude" }),
         __metadata("design:type", String)
     ], CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner.prototype, "longitude", void 0);
     return CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner;
@@ -62,11 +61,11 @@ var CalculateReachableRangePostDataParametersAvoidAreasRectangles = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=northEastCorner" }),
+        SpeakeasyMetadata({ data: "json, name=northEastCorner" }),
         __metadata("design:type", CalculateReachableRangePostDataParametersAvoidAreasRectanglesNorthEastCorner)
     ], CalculateReachableRangePostDataParametersAvoidAreasRectangles.prototype, "northEastCorner", void 0);
     __decorate([
-        Metadata({ data: "json, name=southWestCorner" }),
+        SpeakeasyMetadata({ data: "json, name=southWestCorner" }),
         __metadata("design:type", CalculateReachableRangePostDataParametersAvoidAreasRectanglesSouthWestCorner)
     ], CalculateReachableRangePostDataParametersAvoidAreasRectangles.prototype, "southWestCorner", void 0);
     return CalculateReachableRangePostDataParametersAvoidAreasRectangles;
@@ -78,7 +77,7 @@ var CalculateReachableRangePostDataParametersAvoidAreas = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rectangles", elemType: shared.CalculateReachableRangePostDataParametersAvoidAreasRectangles }),
+        SpeakeasyMetadata({ data: "json, name=rectangles", elemType: CalculateReachableRangePostDataParametersAvoidAreasRectangles }),
         __metadata("design:type", Array)
     ], CalculateReachableRangePostDataParametersAvoidAreas.prototype, "rectangles", void 0);
     return CalculateReachableRangePostDataParametersAvoidAreas;
@@ -90,15 +89,15 @@ var CalculateReachableRangePostDataParameters = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowVignette" }),
+        SpeakeasyMetadata({ data: "json, name=allowVignette" }),
         __metadata("design:type", Array)
     ], CalculateReachableRangePostDataParameters.prototype, "allowVignette", void 0);
     __decorate([
-        Metadata({ data: "json, name=avoidAreas" }),
+        SpeakeasyMetadata({ data: "json, name=avoidAreas" }),
         __metadata("design:type", CalculateReachableRangePostDataParametersAvoidAreas)
     ], CalculateReachableRangePostDataParameters.prototype, "avoidAreas", void 0);
     __decorate([
-        Metadata({ data: "json, name=avoidVignette" }),
+        SpeakeasyMetadata({ data: "json, name=avoidVignette" }),
         __metadata("design:type", Array)
     ], CalculateReachableRangePostDataParameters.prototype, "avoidVignette", void 0);
     return CalculateReachableRangePostDataParameters;

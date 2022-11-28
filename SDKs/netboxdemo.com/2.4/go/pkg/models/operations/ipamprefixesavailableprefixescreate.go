@@ -10,7 +10,7 @@ type IpamPrefixesAvailablePrefixesCreatePathParams struct {
 
 type IpamPrefixesAvailablePrefixesCreateRequest struct {
 	PathParams IpamPrefixesAvailablePrefixesCreatePathParams
-	Request    shared.WritablePrefix `request:"mediaType=application/json"`
+	Request    shared.WritablePrefixInput `request:"mediaType=application/json"`
 }
 
 type IpamPrefixesAvailablePrefixesCreateResponse struct {

@@ -6,10 +6,6 @@ type GetweatherQueryParams struct {
 	State   string `queryParam:"style=form,explode=true,name=state"`
 }
 
-type GetweatherRequest struct {
-	QueryParams GetweatherQueryParams
-}
-
 type Getweather200ApplicationJSON struct {
 	City             *string `json:"City,omitempty"`
 	Code             *string `json:"Code,omitempty"`
@@ -22,6 +18,10 @@ type Getweather200ApplicationJSON struct {
 	Weather          *string `json:"Weather,omitempty"`
 	WindDir          *string `json:"WindDir,omitempty"`
 	WindMph          *string `json:"WindMPH,omitempty"`
+}
+
+type GetweatherRequest struct {
+	QueryParams GetweatherQueryParams
 }
 
 type GetweatherResponse struct {

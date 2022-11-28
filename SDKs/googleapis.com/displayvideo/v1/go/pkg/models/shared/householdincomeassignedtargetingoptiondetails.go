@@ -13,6 +13,8 @@ const (
 	HouseholdIncomeAssignedTargetingOptionDetailsHouseholdIncomeEnumHouseholdIncomeTop10Percent     HouseholdIncomeAssignedTargetingOptionDetailsHouseholdIncomeEnum = "HOUSEHOLD_INCOME_TOP_10_PERCENT"
 )
 
+// HouseholdIncomeAssignedTargetingOptionDetails
+// Details for assigned household income targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_HOUSEHOLD_INCOME`.
 type HouseholdIncomeAssignedTargetingOptionDetails struct {
 	HouseholdIncome   *HouseholdIncomeAssignedTargetingOptionDetailsHouseholdIncomeEnum `json:"householdIncome,omitempty"`
 	TargetingOptionID *string                                                           `json:"targetingOptionId,omitempty"`

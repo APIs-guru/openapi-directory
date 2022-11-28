@@ -9,6 +9,8 @@ const (
 	LongviewPlanLongviewSubscriptionEnumLongview100 LongviewPlanLongviewSubscriptionEnum = "longview-100"
 )
 
+// LongviewPlan
+// Longview Plan object.
 type LongviewPlan struct {
 	LongviewSubscription *LongviewPlanLongviewSubscriptionEnum `json:"longview_subscription,omitempty"`
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Artifact
+// An artifact
 type Artifact struct {
 	ArchiveDownloadURL string    `json:"archive_download_url"`
 	CreatedAt          time.Time `json:"created_at"`

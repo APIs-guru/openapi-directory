@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,18 +15,18 @@ class GetUsersQueryParams:
 
 @dataclass
 class GetUsersSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUsersRequest:
-    query_params: GetUsersQueryParams = field(default=None)
-    security: GetUsersSecurity = field(default=None)
+    query_params: GetUsersQueryParams = field()
+    security: GetUsersSecurity = field()
     
 
 @dataclass
 class GetUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     users: Optional[List[Any]] = field(default=None)
     

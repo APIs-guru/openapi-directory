@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MirrorTimelineAttachmentsInsertPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class MirrorTimelineAttachmentsInsertQueryParams:
 
 @dataclass
 class MirrorTimelineAttachmentsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MirrorTimelineAttachmentsInsertRequest:
-    path_params: MirrorTimelineAttachmentsInsertPathParams = field(default=None)
-    query_params: MirrorTimelineAttachmentsInsertQueryParams = field(default=None)
-    security: MirrorTimelineAttachmentsInsertSecurity = field(default=None)
+    path_params: MirrorTimelineAttachmentsInsertPathParams = field()
+    query_params: MirrorTimelineAttachmentsInsertQueryParams = field()
+    security: MirrorTimelineAttachmentsInsertSecurity = field()
     
 
 @dataclass
 class MirrorTimelineAttachmentsInsertResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

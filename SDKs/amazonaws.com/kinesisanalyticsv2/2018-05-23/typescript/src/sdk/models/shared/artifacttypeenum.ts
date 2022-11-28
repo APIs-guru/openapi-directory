@@ -1,6 +1,7 @@
 
 
+
 export enum ArtifactTypeEnum {
-    Udf = "UDF"
-,    DependencyJar = "DEPENDENCY_JAR"
+    Udf = "UDF",
+    DependencyJar = "DEPENDENCY_JAR"
 }

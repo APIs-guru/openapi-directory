@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountStatusStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: string;
 
-  @Metadata({ data: "json, name=disapproved" })
+  @SpeakeasyMetadata({ data: "json, name=disapproved" })
   disapproved?: string;
 
-  @Metadata({ data: "json, name=expiring" })
+  @SpeakeasyMetadata({ data: "json, name=expiring" })
   expiring?: string;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: string;
 }

@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import s3destination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Destination:
-    s3_destination: Optional[s3destination.S3Destination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Destination' }})
+    r"""Destination
+    Describes the location of the updated firmware.
+    """
+    
+    s3_destination: Optional[S3Destination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Destination') }})
     

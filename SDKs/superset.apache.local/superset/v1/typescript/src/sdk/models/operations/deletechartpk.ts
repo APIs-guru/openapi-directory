@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteChartPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class DeleteChartPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteChartPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteChartPkPathParams;
-
-  @Metadata()
-  security: DeleteChartPkSecurity;
-}
-
-
 export class DeleteChartPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteChartPk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteChartPk403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteChartPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteChartPk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteChartPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteChartPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteChartPkPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteChartPkSecurity;
+}
+
+
 export class DeleteChartPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteChartPk200ApplicationJsonObject?: DeleteChartPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteChartPk401ApplicationJsonObject?: DeleteChartPk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteChartPk403ApplicationJsonObject?: DeleteChartPk403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteChartPk404ApplicationJsonObject?: DeleteChartPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteChartPk422ApplicationJsonObject?: DeleteChartPk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteChartPk500ApplicationJsonObject?: DeleteChartPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

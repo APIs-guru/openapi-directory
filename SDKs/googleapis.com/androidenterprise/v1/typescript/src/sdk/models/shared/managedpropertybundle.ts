@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedProperty } from "./managedproperty";
+
 
 
 // ManagedPropertyBundle
@@ -8,6 +8,6 @@ import { ManagedProperty } from "./managedproperty";
  * A bundle of managed properties.
 **/
 export class ManagedPropertyBundle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=managedProperty", elemType: shared.ManagedProperty })
+  @SpeakeasyMetadata({ data: "json, name=managedProperty", elemType: ManagedProperty })
   managedProperty?: ManagedProperty[];
 }

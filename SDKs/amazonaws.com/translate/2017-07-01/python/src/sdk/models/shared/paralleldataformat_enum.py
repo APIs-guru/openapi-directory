@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ParallelDataFormatEnum(str, Enum):
     TSV = "TSV"

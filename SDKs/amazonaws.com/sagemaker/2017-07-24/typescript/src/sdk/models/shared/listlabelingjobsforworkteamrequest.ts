@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListLabelingJobsForWorkteamSortByOptionsEnum } from "./listlabelingjobsforworkteamsortbyoptionsenum";
 import { SortOrderEnum } from "./sortorderenum";
 
 
+
 export class ListLabelingJobsForWorkteamRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeAfter" })
   creationTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=CreationTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeBefore" })
   creationTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=JobReferenceCodeContains" })
+  @SpeakeasyMetadata({ data: "json, name=JobReferenceCodeContains" })
   jobReferenceCodeContains?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: ListLabelingJobsForWorkteamSortByOptionsEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderEnum;
 
-  @Metadata({ data: "json, name=WorkteamArn" })
+  @SpeakeasyMetadata({ data: "json, name=WorkteamArn" })
   workteamArn: string;
 }

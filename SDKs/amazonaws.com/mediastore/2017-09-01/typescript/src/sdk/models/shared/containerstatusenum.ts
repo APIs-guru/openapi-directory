@@ -1,7 +1,8 @@
 
 
+
 export enum ContainerStatusEnum {
-    Active = "ACTIVE"
-,    Creating = "CREATING"
-,    Deleting = "DELETING"
+    Active = "ACTIVE",
+    Creating = "CREATING",
+    Deleting = "DELETING"
 }

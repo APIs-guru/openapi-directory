@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetStripeGatewayDeveloperDeveloperIdAccountsPathParams = /** @class */ (function (_super) {
     __extends(GetStripeGatewayDeveloperDeveloperIdAccountsPathParams, _super);
     function GetStripeGatewayDeveloperDeveloperIdAccountsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
         __metadata("design:type", String)
     ], GetStripeGatewayDeveloperDeveloperIdAccountsPathParams.prototype, "developerId", void 0);
     return GetStripeGatewayDeveloperDeveloperIdAccountsPathParams;
@@ -41,7 +41,7 @@ var GetStripeGatewayDeveloperDeveloperIdAccountsRequest = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetStripeGatewayDeveloperDeveloperIdAccountsPathParams)
     ], GetStripeGatewayDeveloperDeveloperIdAccountsRequest.prototype, "pathParams", void 0);
     return GetStripeGatewayDeveloperDeveloperIdAccountsRequest;
@@ -53,15 +53,15 @@ var GetStripeGatewayDeveloperDeveloperIdAccountsResponse = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetStripeGatewayDeveloperDeveloperIdAccountsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetStripeGatewayDeveloperDeveloperIdAccountsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetStripeGatewayDeveloperDeveloperIdAccountsResponse.prototype, "statusCode", void 0);
     return GetStripeGatewayDeveloperDeveloperIdAccountsResponse;

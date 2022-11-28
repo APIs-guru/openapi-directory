@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersUserIDGroupsPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetUsersUserIDGroupsQueryParams:
 
 @dataclass
 class GetUsersUserIDGroupsRequest:
-    path_params: GetUsersUserIDGroupsPathParams = field(default=None)
-    query_params: GetUsersUserIDGroupsQueryParams = field(default=None)
+    path_params: GetUsersUserIDGroupsPathParams = field()
+    query_params: GetUsersUserIDGroupsQueryParams = field()
     
 
 @dataclass
 class GetUsersUserIDGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_user_entities: Optional[List[shared.GroupUserEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

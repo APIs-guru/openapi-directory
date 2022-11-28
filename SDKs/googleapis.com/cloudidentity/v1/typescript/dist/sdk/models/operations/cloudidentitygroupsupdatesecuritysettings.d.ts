@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudidentityGroupsUpdateSecuritySettingsPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class CloudidentityGroupsUpdateSecuritySettingsSecurity extends S
 export declare class CloudidentityGroupsUpdateSecuritySettingsRequest extends SpeakeasyBase {
     pathParams: CloudidentityGroupsUpdateSecuritySettingsPathParams;
     queryParams: CloudidentityGroupsUpdateSecuritySettingsQueryParams;
-    request?: shared.SecuritySettings;
+    request?: shared.SecuritySettingsInput;
     security: CloudidentityGroupsUpdateSecuritySettingsSecurity;
 }
 export declare class CloudidentityGroupsUpdateSecuritySettingsResponse extends SpeakeasyBase {

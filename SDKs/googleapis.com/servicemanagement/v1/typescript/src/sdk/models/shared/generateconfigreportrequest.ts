@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenerateConfigReportRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for GenerateConfigReport method.
 **/
 export class GenerateConfigReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newConfig" })
+  @SpeakeasyMetadata({ data: "json, name=newConfig" })
   newConfig?: Map<string, any>;
 
-  @Metadata({ data: "json, name=oldConfig" })
+  @SpeakeasyMetadata({ data: "json, name=oldConfig" })
   oldConfig?: Map<string, any>;
 }

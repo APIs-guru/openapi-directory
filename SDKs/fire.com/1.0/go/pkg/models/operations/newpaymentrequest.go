@@ -49,10 +49,6 @@ type NewPaymentRequestNewPaymentRequest struct {
 	Type              NewPaymentRequestNewPaymentRequestTypeEnum      `json:"type"`
 }
 
-type NewPaymentRequestRequest struct {
-	Request NewPaymentRequestNewPaymentRequest `request:"mediaType=application/json"`
-}
-
 type NewPaymentRequestNewPaymentRequestResponseTypeEnum string
 
 const (
@@ -62,6 +58,10 @@ const (
 type NewPaymentRequestNewPaymentRequestResponse struct {
 	Code *string                                             `json:"code,omitempty"`
 	Type *NewPaymentRequestNewPaymentRequestResponseTypeEnum `json:"type,omitempty"`
+}
+
+type NewPaymentRequestRequest struct {
+	Request NewPaymentRequestNewPaymentRequest `request:"mediaType=application/json"`
 }
 
 type NewPaymentRequestResponse struct {

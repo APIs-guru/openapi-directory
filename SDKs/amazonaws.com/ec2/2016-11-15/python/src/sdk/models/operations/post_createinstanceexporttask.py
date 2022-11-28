@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateInstanceExportTaskActionEnum(str, Enum):
     CREATE_INSTANCE_EXPORT_TASK = "CreateInstanceExportTask"
@@ -10,8 +14,8 @@ class PostCreateInstanceExportTaskVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateInstanceExportTaskQueryParams:
-    action: PostCreateInstanceExportTaskActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateInstanceExportTaskVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateInstanceExportTaskActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateInstanceExportTaskVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateInstanceExportTaskHeaders:
 
 @dataclass
 class PostCreateInstanceExportTaskRequest:
-    query_params: PostCreateInstanceExportTaskQueryParams = field(default=None)
-    headers: PostCreateInstanceExportTaskHeaders = field(default=None)
+    headers: PostCreateInstanceExportTaskHeaders = field()
+    query_params: PostCreateInstanceExportTaskQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateInstanceExportTaskResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

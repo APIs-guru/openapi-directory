@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -14,24 +14,24 @@ class GetListingViolationsQueryParams:
 
 @dataclass
 class GetListingViolationsHeaders:
-    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
+    x_ebay_c_marketplace_id: str = field(metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetListingViolationsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetListingViolationsRequest:
-    query_params: GetListingViolationsQueryParams = field(default=None)
-    headers: GetListingViolationsHeaders = field(default=None)
-    security: GetListingViolationsSecurity = field(default=None)
+    headers: GetListingViolationsHeaders = field()
+    query_params: GetListingViolationsQueryParams = field()
+    security: GetListingViolationsSecurity = field()
     
 
 @dataclass
 class GetListingViolationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paged_compliance_violation_collection: Optional[shared.PagedComplianceViolationCollection] = field(default=None)
-    status_code: int = field(default=None)
     

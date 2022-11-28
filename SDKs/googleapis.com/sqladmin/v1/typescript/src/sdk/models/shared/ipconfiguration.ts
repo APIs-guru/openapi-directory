@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AclEntry } from "./aclentry";
+
 
 
 // IpConfiguration
@@ -8,18 +8,18 @@ import { AclEntry } from "./aclentry";
  * IP Management configuration.
 **/
 export class IpConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allocatedIpRange" })
+  @SpeakeasyMetadata({ data: "json, name=allocatedIpRange" })
   allocatedIpRange?: string;
 
-  @Metadata({ data: "json, name=authorizedNetworks", elemType: shared.AclEntry })
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetworks", elemType: AclEntry })
   authorizedNetworks?: AclEntry[];
 
-  @Metadata({ data: "json, name=ipv4Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4Enabled" })
   ipv4Enabled?: boolean;
 
-  @Metadata({ data: "json, name=privateNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=privateNetwork" })
   privateNetwork?: string;
 
-  @Metadata({ data: "json, name=requireSsl" })
+  @SpeakeasyMetadata({ data: "json, name=requireSsl" })
   requireSsl?: boolean;
 }

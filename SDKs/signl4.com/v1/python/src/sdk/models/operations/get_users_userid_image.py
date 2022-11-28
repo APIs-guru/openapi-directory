@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersUserIDImagePathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class GetUsersUserIDImageQueryParams:
 
 @dataclass
 class GetUsersUserIDImageRequest:
-    path_params: GetUsersUserIDImagePathParams = field(default=None)
-    query_params: GetUsersUserIDImageQueryParams = field(default=None)
+    path_params: GetUsersUserIDImagePathParams = field()
+    query_params: GetUsersUserIDImageQueryParams = field()
     
 
 @dataclass
 class GetUsersUserIDImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     user_image: Optional[shared.UserImage] = field(default=None)
     

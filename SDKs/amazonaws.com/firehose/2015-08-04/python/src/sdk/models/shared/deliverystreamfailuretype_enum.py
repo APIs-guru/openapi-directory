@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DeliveryStreamFailureTypeEnum(str, Enum):
     RETIRE_KMS_GRANT_FAILED = "RETIRE_KMS_GRANT_FAILED"

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourcePendingMaintenanceActions } from "./resourcependingmaintenanceactions";
+
 
 
 // ApplyPendingMaintenanceActionResponse
@@ -7,6 +8,6 @@ import { ResourcePendingMaintenanceActions } from "./resourcependingmaintenancea
  * <p/>
 **/
 export class ApplyPendingMaintenanceActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourcePendingMaintenanceActions" })
+  @SpeakeasyMetadata({ data: "json, name=ResourcePendingMaintenanceActions" })
   resourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
 }

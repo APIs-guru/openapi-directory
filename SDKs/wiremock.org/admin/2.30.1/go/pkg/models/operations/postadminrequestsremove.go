@@ -1,5 +1,7 @@
 package operations
 
+// PostAdminRequestsRemoveRequestBodyBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminRequestsRemoveRequestBodyBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`

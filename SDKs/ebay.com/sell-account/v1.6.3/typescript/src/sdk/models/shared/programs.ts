@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Program } from "./program";
+
 
 
 // Programs
@@ -8,6 +8,6 @@ import { Program } from "./program";
  * A list of the supported seller programs.
 **/
 export class Programs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=programs", elemType: shared.Program })
+  @SpeakeasyMetadata({ data: "json, name=programs", elemType: Program })
   programs?: Program[];
 }

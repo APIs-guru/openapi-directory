@@ -9,6 +9,8 @@ const (
 	AuxiliaryMessageSeverityEnumSeverityError       AuxiliaryMessageSeverityEnum = "SEVERITY_ERROR"
 )
 
+// AuxiliaryMessage
+// Auxiliary message about issues with printers or settings. Example: {message_type:AUXILIARY_MESSAGE_WARNING, field_mask:make_and_model, message:"Given printer is invalid or no longer supported."}
 type AuxiliaryMessage struct {
 	AuxiliaryMessage *string                       `json:"auxiliaryMessage,omitempty"`
 	FieldMask        *string                       `json:"fieldMask,omitempty"`

@@ -22,23 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BatchGetRecordError } from "./batchgetrecorderror";
+import { BatchGetRecordResultDetail } from "./batchgetrecordresultdetail";
+import { BatchGetRecordIdentifier } from "./batchgetrecordidentifier";
 var BatchGetRecordResponse = /** @class */ (function (_super) {
     __extends(BatchGetRecordResponse, _super);
     function BatchGetRecordResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Errors", elemType: shared.BatchGetRecordError }),
+        SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchGetRecordError }),
         __metadata("design:type", Array)
     ], BatchGetRecordResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=Records", elemType: shared.BatchGetRecordResultDetail }),
+        SpeakeasyMetadata({ data: "json, name=Records", elemType: BatchGetRecordResultDetail }),
         __metadata("design:type", Array)
     ], BatchGetRecordResponse.prototype, "records", void 0);
     __decorate([
-        Metadata({ data: "json, name=UnprocessedIdentifiers", elemType: shared.BatchGetRecordIdentifier }),
+        SpeakeasyMetadata({ data: "json, name=UnprocessedIdentifiers", elemType: BatchGetRecordIdentifier }),
         __metadata("design:type", Array)
     ], BatchGetRecordResponse.prototype, "unprocessedIdentifiers", void 0);
     return BatchGetRecordResponse;

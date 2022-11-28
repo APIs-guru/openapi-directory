@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PodcastLookingForField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cohosts" })
+  @SpeakeasyMetadata({ data: "json, name=cohosts" })
   cohosts?: boolean;
 
-  @Metadata({ data: "json, name=cross_promotion" })
+  @SpeakeasyMetadata({ data: "json, name=cross_promotion" })
   crossPromotion?: boolean;
 
-  @Metadata({ data: "json, name=guests" })
+  @SpeakeasyMetadata({ data: "json, name=guests" })
   guests?: boolean;
 
-  @Metadata({ data: "json, name=sponsors" })
+  @SpeakeasyMetadata({ data: "json, name=sponsors" })
   sponsors?: boolean;
 }

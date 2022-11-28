@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelDeployConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies how to generate the endpoint name for an automatic one-click Autopilot model deployment.
 **/
 export class ModelDeployConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoGenerateEndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=AutoGenerateEndpointName" })
   autoGenerateEndpointName?: boolean;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName?: string;
 }

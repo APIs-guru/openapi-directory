@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DataTransfer
+// A Transfer resource represents the transfer of the ownership of user data between users.
 type DataTransfer struct {
 	ApplicationDataTransfers  []ApplicationDataTransfer `json:"applicationDataTransfers,omitempty"`
 	Etag                      *string                   `json:"etag,omitempty"`

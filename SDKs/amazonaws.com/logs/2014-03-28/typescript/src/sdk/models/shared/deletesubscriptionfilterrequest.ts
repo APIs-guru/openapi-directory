@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSubscriptionFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterName" })
+  @SpeakeasyMetadata({ data: "json, name=filterName" })
   filterName: string;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 }

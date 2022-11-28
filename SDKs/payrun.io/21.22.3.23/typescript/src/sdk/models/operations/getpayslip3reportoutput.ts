@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPayslip3ReportOutputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployeeCodes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployeeCodes" })
   employeeCodes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" })
   maxIndex?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" })
   payScheduleKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" })
   paymentDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=StartIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartIndex" })
   startIndex?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
   taxYear: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" })
   transformDefinitionKey?: string;
 }
 
 
 export class GetPayslip3ReportOutputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetPayslip3ReportOutputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPayslip3ReportOutputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPayslip3ReportOutputHeaders;
 }
 
 
 export class GetPayslip3ReportOutputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPayslip3ReportOutput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

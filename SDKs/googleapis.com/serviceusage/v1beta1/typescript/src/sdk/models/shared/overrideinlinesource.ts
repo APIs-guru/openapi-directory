@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuotaOverride } from "./quotaoverride";
+
 
 
 // OverrideInlineSource
@@ -8,6 +8,6 @@ import { QuotaOverride } from "./quotaoverride";
  * Import data embedded in the request message
 **/
 export class OverrideInlineSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overrides", elemType: shared.QuotaOverride })
+  @SpeakeasyMetadata({ data: "json, name=overrides", elemType: QuotaOverride })
   overrides?: QuotaOverride[];
 }

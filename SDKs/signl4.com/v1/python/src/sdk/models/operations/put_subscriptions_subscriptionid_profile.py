@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutSubscriptionsSubscriptionIDProfilePathParams:
-    subscription_id: str = field(default=None, metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
+    subscription_id: str = field(metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +18,15 @@ class PutSubscriptionsSubscriptionIDProfileRequests:
 
 @dataclass
 class PutSubscriptionsSubscriptionIDProfileRequest:
-    path_params: PutSubscriptionsSubscriptionIDProfilePathParams = field(default=None)
+    path_params: PutSubscriptionsSubscriptionIDProfilePathParams = field()
     request: Optional[PutSubscriptionsSubscriptionIDProfileRequests] = field(default=None)
     
 
 @dataclass
 class PutSubscriptionsSubscriptionIDProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     subscription_info: Optional[shared.SubscriptionInfo] = field(default=None)
     

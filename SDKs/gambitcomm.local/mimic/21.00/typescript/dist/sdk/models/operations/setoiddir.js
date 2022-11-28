@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SetOiddirPathParams = /** @class */ (function (_super) {
     __extends(SetOiddirPathParams, _super);
     function SetOiddirPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], SetOiddirPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=oiddir" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=oiddir" }),
         __metadata("design:type", String)
     ], SetOiddirPathParams.prototype, "oiddir", void 0);
     return SetOiddirPathParams;
@@ -45,7 +45,7 @@ var SetOiddirRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SetOiddirPathParams)
     ], SetOiddirRequest.prototype, "pathParams", void 0);
     return SetOiddirRequest;
@@ -57,15 +57,15 @@ var SetOiddirResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SetOiddirResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SetOiddirResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SetOiddirResponse.prototype, "setOiddir200ApplicationJsonString", void 0);
     return SetOiddirResponse;

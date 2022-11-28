@@ -1,5 +1,7 @@
 package shared
 
+// VideoStream
+// Video stream resource.
 type VideoStream struct {
 	AllowOpenGop    *bool    `json:"allowOpenGop,omitempty"`
 	AqStrength      *float64 `json:"aqStrength,omitempty"`

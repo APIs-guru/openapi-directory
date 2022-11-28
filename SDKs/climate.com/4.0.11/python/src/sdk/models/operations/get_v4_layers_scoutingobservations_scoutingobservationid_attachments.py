@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsPathParams:
-    scouting_observation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'scoutingObservationId', 'style': 'simple', 'explode': False }})
+    scouting_observation_id: str = field(metadata={'path_param': { 'field_name': 'scoutingObservationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,34 +15,24 @@ class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsHeaders:
     
 
 @dataclass
-class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsSecurityOption1:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsSecurityOption2:
-    oauth2_authorization_code: shared.SchemeOauth2AuthorizationCode = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsSecurity:
-    option1: Optional[GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    oauth2_authorization_code: Optional[shared.SchemeOauth2AuthorizationCode] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsRequest:
-    path_params: GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsPathParams = field(default=None)
-    headers: GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsHeaders = field(default=None)
-    security: GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsSecurity = field(default=None)
+    headers: GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsHeaders = field()
+    path_params: GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsPathParams = field()
+    security: GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsSecurity = field()
     
 
 @dataclass
 class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
     scouting_observation_attachments: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

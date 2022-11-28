@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRunV2SecretKeySelector } from "./googlecloudrunv2secretkeyselector";
+
 
 
 // GoogleCloudRunV2EnvVarSource
@@ -7,6 +8,6 @@ import { GoogleCloudRunV2SecretKeySelector } from "./googlecloudrunv2secretkeyse
  * EnvVarSource represents a source for the value of an EnvVar.
 **/
 export class GoogleCloudRunV2EnvVarSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=secretKeyRef" })
+  @SpeakeasyMetadata({ data: "json, name=secretKeyRef" })
   secretKeyRef?: GoogleCloudRunV2SecretKeySelector;
 }

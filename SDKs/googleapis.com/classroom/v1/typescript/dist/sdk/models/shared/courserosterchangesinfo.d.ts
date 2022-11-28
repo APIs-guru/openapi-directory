@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Information about a `Feed` with a `feed_type` of `COURSE_ROSTER_CHANGES`.
 **/

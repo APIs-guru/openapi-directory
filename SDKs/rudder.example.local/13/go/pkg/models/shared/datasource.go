@@ -7,10 +7,14 @@ const (
 	DatasourceRunParametersScheduleTypeEnumNotscheduled DatasourceRunParametersScheduleTypeEnum = "notscheduled"
 )
 
+// DatasourceRunParametersSchedule
+// Configure if data source should be fetch periodically
 type DatasourceRunParametersSchedule struct {
 	Type *DatasourceRunParametersScheduleTypeEnum `json:"type,omitempty"`
 }
 
+// DatasourceRunParameters
+// Parameters to configure when the data source is fetched to update node properties.
 type DatasourceRunParameters struct {
 	OnGeneration *bool                            `json:"onGeneration,omitempty"`
 	OnNewNode    *bool                            `json:"onNewNode,omitempty"`
@@ -41,10 +45,14 @@ const (
 	DatasourceTypeParametersRequestModeNameEnumByNode DatasourceTypeParametersRequestModeNameEnum = "byNode"
 )
 
+// DatasourceTypeParametersRequestMode
+// Configure the strategy used to query the HTTP data source.
 type DatasourceTypeParametersRequestMode struct {
 	Name *DatasourceTypeParametersRequestModeNameEnum `json:"name,omitempty"`
 }
 
+// DatasourceTypeParameters
+// You can use Rudder variable expansion (`${rudder.node`, `${node.properties...}`)
 type DatasourceTypeParameters struct {
 	CheckSsl       *bool                                      `json:"checkSsl,omitempty"`
 	Headers        []DatasourceTypeParametersHeaders          `json:"headers,omitempty"`
@@ -55,6 +63,8 @@ type DatasourceTypeParameters struct {
 	URL            *string                                    `json:"url,omitempty"`
 }
 
+// DatasourceType
+// Define and configure data source type.
 type DatasourceType struct {
 	Name       *DatasourceTypeNameEnum   `json:"name,omitempty"`
 	Parameters *DatasourceTypeParameters `json:"parameters,omitempty"`

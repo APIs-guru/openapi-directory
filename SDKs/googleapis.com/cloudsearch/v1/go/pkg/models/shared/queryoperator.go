@@ -14,6 +14,8 @@ const (
 	QueryOperatorTypeEnumHTML      QueryOperatorTypeEnum = "HTML"
 )
 
+// QueryOperator
+// The definition of a operator that can be used in a Search/Suggest request.
 type QueryOperator struct {
 	DisplayName             *string                `json:"displayName,omitempty"`
 	EnumValues              []string               `json:"enumValues,omitempty"`

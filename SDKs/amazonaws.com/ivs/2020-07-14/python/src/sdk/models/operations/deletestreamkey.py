@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,21 +21,21 @@ class DeleteStreamKeyHeaders:
 @dataclass_json
 @dataclass
 class DeleteStreamKeyRequestBody:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
     
 
 @dataclass
 class DeleteStreamKeyRequest:
-    headers: DeleteStreamKeyHeaders = field(default=None)
-    request: DeleteStreamKeyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteStreamKeyHeaders = field()
+    request: DeleteStreamKeyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteStreamKeyResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     pending_verification: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

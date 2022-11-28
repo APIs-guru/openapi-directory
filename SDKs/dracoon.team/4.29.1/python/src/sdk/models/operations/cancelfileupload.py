@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CancelFileUploadPathParams:
-    upload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
+    upload_id: str = field(metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class CancelFileUploadHeaders:
 
 @dataclass
 class CancelFileUploadRequest:
-    path_params: CancelFileUploadPathParams = field(default=None)
-    headers: CancelFileUploadHeaders = field(default=None)
+    headers: CancelFileUploadHeaders = field()
+    path_params: CancelFileUploadPathParams = field()
     
 
 @dataclass
 class CancelFileUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

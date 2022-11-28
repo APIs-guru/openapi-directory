@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class QueryTableRowsPathParams:
-    table_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
-    workbook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
+    table_id: str = field(metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
+    workbook_id: str = field(metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,36 +34,40 @@ class QueryTableRowsHeaders:
 @dataclass_json
 @dataclass
 class QueryTableRowsRequestBodyFilterFormula:
-    context_row_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contextRowId' }})
-    formula: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'formula' }})
+    r"""QueryTableRowsRequestBodyFilterFormula
+     An object that represents a filter formula along with the id of the context row under which the filter function needs to evaluate. 
+    """
+    
+    context_row_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contextRowId') }})
+    formula: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('formula') }})
     
 
 @dataclass_json
 @dataclass
 class QueryTableRowsRequestBody:
-    filter_formula: QueryTableRowsRequestBodyFilterFormula = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterFormula' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    filter_formula: QueryTableRowsRequestBodyFilterFormula = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterFormula') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class QueryTableRowsRequest:
-    path_params: QueryTableRowsPathParams = field(default=None)
-    query_params: QueryTableRowsQueryParams = field(default=None)
-    headers: QueryTableRowsHeaders = field(default=None)
-    request: QueryTableRowsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: QueryTableRowsHeaders = field()
+    path_params: QueryTableRowsPathParams = field()
+    query_params: QueryTableRowsQueryParams = field()
+    request: QueryTableRowsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class QueryTableRowsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     query_table_rows_result: Optional[shared.QueryTableRowsResult] = field(default=None)
     request_timeout_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

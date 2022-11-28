@@ -1,5 +1,7 @@
 package shared
 
+// WorkItem
+// WorkItem represents basic information about a WorkItem to be executed in the cloud.
 type WorkItem struct {
 	Configuration            *string                   `json:"configuration,omitempty"`
 	ID                       *string                   `json:"id,omitempty"`

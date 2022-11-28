@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV2betaPolicy } from "./googleiamv2betapolicy";
 /**
  * Response message for `ListPolicies`.

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellLocation } from "./tablecelllocation";
 import { TableBorderProperties } from "./tableborderproperties";
+
 
 
 // TableBorderCell
@@ -8,9 +9,9 @@ import { TableBorderProperties } from "./tableborderproperties";
  * The properties of each border cell.
 **/
 export class TableBorderCell extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: TableCellLocation;
 
-  @Metadata({ data: "json, name=tableBorderProperties" })
+  @SpeakeasyMetadata({ data: "json, name=tableBorderProperties" })
   tableBorderProperties?: TableBorderProperties;
 }

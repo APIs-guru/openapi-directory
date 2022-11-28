@@ -1,66 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETOBJECTSTORAGEKEY_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const GetObjectStorageKeyServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class GetObjectStorageKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=keyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=keyId" })
   keyId: number;
 }
 
 
-export class GetObjectStorageKeySecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetObjectStorageKeySecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetObjectStorageKeySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetObjectStorageKeySecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetObjectStorageKeySecurityOption2;
-}
-
-
-export class GetObjectStorageKeyRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: GetObjectStorageKeyPathParams;
-
-  @Metadata()
-  security: GetObjectStorageKeySecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetObjectStorageKeyDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetObjectStorageKeyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: GetObjectStorageKeyPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetObjectStorageKeySecurity;
+}
+
+
 export class GetObjectStorageKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   objectStorageKey?: shared.ObjectStorageKey;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getObjectStorageKeyDefaultApplicationJsonObject?: GetObjectStorageKeyDefaultApplicationJson;
 }

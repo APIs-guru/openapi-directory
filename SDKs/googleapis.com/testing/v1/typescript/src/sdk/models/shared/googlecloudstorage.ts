@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudStorage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A storage location within Google cloud storage (GCS).
 **/
 export class GoogleCloudStorage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsPath" })
+  @SpeakeasyMetadata({ data: "json, name=gcsPath" })
   gcsPath?: string;
 }

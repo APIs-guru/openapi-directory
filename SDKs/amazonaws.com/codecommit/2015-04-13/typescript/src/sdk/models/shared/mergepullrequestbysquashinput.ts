@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConflictDetailLevelTypeEnumEnum } from "./conflictdetailleveltypeenumenum";
 import { ConflictResolution } from "./conflictresolution";
 import { ConflictResolutionStrategyTypeEnumEnum } from "./conflictresolutionstrategytypeenumenum";
 
 
+
 export class MergePullRequestBySquashInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorName" })
+  @SpeakeasyMetadata({ data: "json, name=authorName" })
   authorName?: string;
 
-  @Metadata({ data: "json, name=commitMessage" })
+  @SpeakeasyMetadata({ data: "json, name=commitMessage" })
   commitMessage?: string;
 
-  @Metadata({ data: "json, name=conflictDetailLevel" })
+  @SpeakeasyMetadata({ data: "json, name=conflictDetailLevel" })
   conflictDetailLevel?: ConflictDetailLevelTypeEnumEnum;
 
-  @Metadata({ data: "json, name=conflictResolution" })
+  @SpeakeasyMetadata({ data: "json, name=conflictResolution" })
   conflictResolution?: ConflictResolution;
 
-  @Metadata({ data: "json, name=conflictResolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=conflictResolutionStrategy" })
   conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnumEnum;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=keepEmptyFolders" })
+  @SpeakeasyMetadata({ data: "json, name=keepEmptyFolders" })
   keepEmptyFolders?: boolean;
 
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=sourceCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitId" })
   sourceCommitId?: string;
 }

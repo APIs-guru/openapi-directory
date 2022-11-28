@@ -4,6 +4,8 @@ type UpdateOrganizationPathParams struct {
 	OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
 }
 
+// UpdateOrganizationRequestBodyAPI
+// API-specific settings
 type UpdateOrganizationRequestBodyAPI struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }

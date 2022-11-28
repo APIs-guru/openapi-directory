@@ -13,18 +13,18 @@ class ProvideFeedbackRequestBody:
 
 @dataclass
 class ProvideFeedbackSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ProvideFeedbackRequest:
+    security: ProvideFeedbackSecurity = field()
     request: Optional[ProvideFeedbackRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: ProvideFeedbackSecurity = field(default=None)
     
 
 @dataclass
 class ProvideFeedbackResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example: Optional[shared.Example] = field(default=None)
-    status_code: int = field(default=None)
     

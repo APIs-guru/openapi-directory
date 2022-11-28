@@ -10,24 +10,24 @@ class EndpointPauseAUsersPlaybackQueryParams:
 
 @dataclass
 class EndpointPauseAUsersPlaybackHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointPauseAUsersPlaybackSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointPauseAUsersPlaybackRequest:
-    query_params: EndpointPauseAUsersPlaybackQueryParams = field(default=None)
-    headers: EndpointPauseAUsersPlaybackHeaders = field(default=None)
-    security: EndpointPauseAUsersPlaybackSecurity = field(default=None)
+    headers: EndpointPauseAUsersPlaybackHeaders = field()
+    query_params: EndpointPauseAUsersPlaybackQueryParams = field()
+    security: EndpointPauseAUsersPlaybackSecurity = field()
     
 
 @dataclass
 class EndpointPauseAUsersPlaybackResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     

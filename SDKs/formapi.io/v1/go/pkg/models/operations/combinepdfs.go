@@ -41,11 +41,6 @@ type CombinePdfsSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type CombinePdfsRequest struct {
-	Request  CombinePdfsCombinePdfsData `request:"mediaType=application/json"`
-	Security CombinePdfsSecurity
-}
-
 type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnum string
 
 const (
@@ -103,6 +98,11 @@ type CombinePdfsCreateCombinedSubmissionResponse struct {
 	CombinedSubmission CombinePdfsCreateCombinedSubmissionResponseCombinedSubmission `json:"combined_submission"`
 	Errors             []string                                                      `json:"errors,omitempty"`
 	Status             CombinePdfsCreateCombinedSubmissionResponseStatusEnum         `json:"status"`
+}
+
+type CombinePdfsRequest struct {
+	Request  CombinePdfsCombinePdfsData `request:"mediaType=application/json"`
+	Security CombinePdfsSecurity
 }
 
 type CombinePdfsResponse struct {

@@ -1,7 +1,8 @@
 
 
+
 export enum EnabledRepositoriesEnum {
-    All = "all"
-,    None = "none"
-,    Selected = "selected"
+    All = "all",
+    None = "none",
+    Selected = "selected"
 }

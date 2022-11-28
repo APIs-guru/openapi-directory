@@ -1,4 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudApigeeV1DeveloperSubscriptionInput
+/** 
+ * Structure of a DeveloperSubscription.
+**/
+export class GoogleCloudApigeeV1DeveloperSubscriptionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=apiproduct" })
+  apiproduct?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
+  endTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
+  startTime?: string;
+}
 
 
 // GoogleCloudApigeeV1DeveloperSubscription
@@ -6,21 +23,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Structure of a DeveloperSubscription.
 **/
 export class GoogleCloudApigeeV1DeveloperSubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiproduct" })
+  @SpeakeasyMetadata({ data: "json, name=apiproduct" })
   apiproduct?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=lastModifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedAt" })
   lastModifiedAt?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

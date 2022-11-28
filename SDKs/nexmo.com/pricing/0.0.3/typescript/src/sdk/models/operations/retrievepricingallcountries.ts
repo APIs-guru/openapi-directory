@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RetrievePricingAllCountriesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: string;
 }
 
 
 export class RetrievePricingAllCountriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
   apiSecret: string;
 }
 
 
-export class RetrievePricingAllCountriesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RetrievePricingAllCountriesPathParams;
-
-  @Metadata()
-  queryParams: RetrievePricingAllCountriesQueryParams;
-}
-
-
 export class RetrievePricingAllCountries400ApplicationJsonInvalidParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=parameter" })
+  @SpeakeasyMetadata({ data: "json, name=parameter" })
   parameter?: string;
 }
 
 
 export class RetrievePricingAllCountries400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error_title" })
+  @SpeakeasyMetadata({ data: "json, name=error_title" })
   errorTitle: string;
 
-  @Metadata({ data: "json, name=invalid_parameters" })
+  @SpeakeasyMetadata({ data: "json, name=invalid_parameters" })
   invalidParameters: RetrievePricingAllCountries400ApplicationJsonInvalidParameters;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class RetrievePricingAllCountries401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=error-code-label" })
+  @SpeakeasyMetadata({ data: "json, name=error-code-label" })
   errorCodeLabel: string;
 }
 
 
+export class RetrievePricingAllCountriesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RetrievePricingAllCountriesPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: RetrievePricingAllCountriesQueryParams;
+}
+
+
 export class RetrievePricingAllCountriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pricingCountriesResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrievePricingAllCountries400ApplicationJsonObject?: RetrievePricingAllCountries400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrievePricingAllCountries401ApplicationJsonObject?: RetrievePricingAllCountries401ApplicationJson;
 }

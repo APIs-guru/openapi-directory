@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAPIServiceusageV1ServiceConfig
+// The configuration of the service.
 type GoogleAPIServiceusageV1ServiceConfig struct {
 	Apis               []API                         `json:"apis,omitempty"`
 	Authentication     *Authentication               `json:"authentication,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventUpdateRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An event period update resource.
 **/
 export class EventUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definitionId" })
+  @SpeakeasyMetadata({ data: "json, name=definitionId" })
   definitionId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=updateCount" })
+  @SpeakeasyMetadata({ data: "json, name=updateCount" })
   updateCount?: string;
 }

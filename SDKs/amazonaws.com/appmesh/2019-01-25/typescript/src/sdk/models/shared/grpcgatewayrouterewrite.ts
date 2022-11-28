@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GatewayRouteHostnameRewrite } from "./gatewayroutehostnamerewrite";
+
 
 
 // GrpcGatewayRouteRewrite
@@ -7,6 +8,6 @@ import { GatewayRouteHostnameRewrite } from "./gatewayroutehostnamerewrite";
  * An object that represents the gateway route to rewrite.
 **/
 export class GrpcGatewayRouteRewrite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: GatewayRouteHostnameRewrite;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1LabelStats
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Statistics about annotation specs.
 **/
 export class GoogleCloudDatalabelingV1beta1LabelStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exampleCount" })
+  @SpeakeasyMetadata({ data: "json, name=exampleCount" })
   exampleCount?: Map<string, string>;
 }

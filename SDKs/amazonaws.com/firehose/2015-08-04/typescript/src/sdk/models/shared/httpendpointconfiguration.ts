@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpEndpointConfiguration
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the configuration of the HTTP endpoint to which Kinesis Firehose delivers data.
 **/
 export class HttpEndpointConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessKey" })
+  @SpeakeasyMetadata({ data: "json, name=AccessKey" })
   accessKey?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url: string;
 }

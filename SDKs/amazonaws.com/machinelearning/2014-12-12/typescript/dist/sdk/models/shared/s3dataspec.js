@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3DataSpec
 /**
  *  Describes the data specification of a <code>DataSource</code>.
@@ -33,19 +33,19 @@ var S3DataSpec = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataLocationS3" }),
+        SpeakeasyMetadata({ data: "json, name=DataLocationS3" }),
         __metadata("design:type", String)
     ], S3DataSpec.prototype, "dataLocationS3", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataRearrangement" }),
+        SpeakeasyMetadata({ data: "json, name=DataRearrangement" }),
         __metadata("design:type", String)
     ], S3DataSpec.prototype, "dataRearrangement", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSchema" }),
+        SpeakeasyMetadata({ data: "json, name=DataSchema" }),
         __metadata("design:type", String)
     ], S3DataSpec.prototype, "dataSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSchemaLocationS3" }),
+        SpeakeasyMetadata({ data: "json, name=DataSchemaLocationS3" }),
         __metadata("design:type", String)
     ], S3DataSpec.prototype, "dataSchemaLocationS3", void 0);
     return S3DataSpec;

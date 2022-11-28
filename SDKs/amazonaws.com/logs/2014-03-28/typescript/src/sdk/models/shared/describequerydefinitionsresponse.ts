@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryDefinition } from "./querydefinition";
 
 
+
 export class DescribeQueryDefinitionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=queryDefinitions", elemType: shared.QueryDefinition })
+  @SpeakeasyMetadata({ data: "json, name=queryDefinitions", elemType: QueryDefinition })
   queryDefinitions?: QueryDefinition[];
 }

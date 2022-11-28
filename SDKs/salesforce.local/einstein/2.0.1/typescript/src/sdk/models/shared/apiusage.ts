@@ -1,33 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlanData } from "./plandata";
 
 
+
 export class ApiUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endsAt" })
+  @SpeakeasyMetadata({ data: "json, name=endsAt" })
   endsAt?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=licenseId" })
+  @SpeakeasyMetadata({ data: "json, name=licenseId" })
   licenseId?: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 
-  @Metadata({ data: "json, name=organizationId" })
+  @SpeakeasyMetadata({ data: "json, name=organizationId" })
   organizationId?: string;
 
-  @Metadata({ data: "json, name=planData", elemType: shared.PlanData })
+  @SpeakeasyMetadata({ data: "json, name=planData", elemType: PlanData })
   planData?: PlanData[];
 
-  @Metadata({ data: "json, name=predictionsMax" })
+  @SpeakeasyMetadata({ data: "json, name=predictionsMax" })
   predictionsMax?: number;
 
-  @Metadata({ data: "json, name=predictionsUsed" })
+  @SpeakeasyMetadata({ data: "json, name=predictionsUsed" })
   predictionsUsed?: number;
 
-  @Metadata({ data: "json, name=startsAt" })
+  @SpeakeasyMetadata({ data: "json, name=startsAt" })
   startsAt?: Date;
 }

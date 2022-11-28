@@ -5,6 +5,8 @@ type NetworkUnblockResponseUnprocessableNetworkInvalidParameters struct {
 	Reason *string `json:"reason,omitempty"`
 }
 
+// NetworkUnblockResponseUnprocessableNetwork
+// Invalid Network
 type NetworkUnblockResponseUnprocessableNetwork struct {
 	Detail            *string                                                       `json:"detail,omitempty"`
 	Instance          *string                                                       `json:"instance,omitempty"`

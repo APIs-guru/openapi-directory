@@ -1,5 +1,7 @@
 package shared
 
+// GoogleIdentityStsV1ExchangeTokenResponse
+// Response message for ExchangeToken.
 type GoogleIdentityStsV1ExchangeTokenResponse struct {
 	AccessToken     *string `json:"access_token,omitempty"`
 	ExpiresIn       *int32  `json:"expires_in,omitempty"`

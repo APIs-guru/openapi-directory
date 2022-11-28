@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecaptchaenterpriseV1ChallengeMetrics
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metrics related to challenges.
 **/
 export class GoogleCloudRecaptchaenterpriseV1ChallengeMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failedCount" })
+  @SpeakeasyMetadata({ data: "json, name=failedCount" })
   failedCount?: string;
 
-  @Metadata({ data: "json, name=nocaptchaCount" })
+  @SpeakeasyMetadata({ data: "json, name=nocaptchaCount" })
   nocaptchaCount?: string;
 
-  @Metadata({ data: "json, name=pageloadCount" })
+  @SpeakeasyMetadata({ data: "json, name=pageloadCount" })
   pageloadCount?: string;
 
-  @Metadata({ data: "json, name=passedCount" })
+  @SpeakeasyMetadata({ data: "json, name=passedCount" })
   passedCount?: string;
 }

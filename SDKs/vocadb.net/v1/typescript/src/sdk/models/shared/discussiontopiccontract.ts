@@ -1,38 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserForApiContract } from "./userforapicontract";
 import { CommentForApiContract } from "./commentforapicontract";
-import { CommentForApiContract } from "./commentforapicontract";
+
 
 
 export class DiscussionTopicContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: UserForApiContract;
 
-  @Metadata({ data: "json, name=commentCount" })
+  @SpeakeasyMetadata({ data: "json, name=commentCount" })
   commentCount?: number;
 
-  @Metadata({ data: "json, name=comments", elemType: shared.CommentForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=comments", elemType: CommentForApiContract })
   comments?: CommentForApiContract[];
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=folderId" })
+  @SpeakeasyMetadata({ data: "json, name=folderId" })
   folderId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lastComment" })
+  @SpeakeasyMetadata({ data: "json, name=lastComment" })
   lastComment?: CommentForApiContract;
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

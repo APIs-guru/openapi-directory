@@ -48,6 +48,8 @@ type LinodeBackupsSchedule struct {
 	Window *LinodeBackupsScheduleWindowEnum `json:"window,omitempty"`
 }
 
+// LinodeBackups
+// Information about this Linode's backups status. For information about available backups, see [/linode/instances/{linodeId}/backups](/docs/api/linode-instances/#backups-list).
 type LinodeBackups struct {
 	Enabled        *bool                  `json:"enabled,omitempty"`
 	LastSuccessful *time.Time             `json:"last_successful,omitempty"`
@@ -60,6 +62,8 @@ const (
 	LinodeHypervisorEnumKvm LinodeHypervisorEnum = "kvm"
 )
 
+// LinodeSpecs
+// Information about the resources available to this Linode.
 type LinodeSpecs struct {
 	Disk     *int64 `json:"disk,omitempty"`
 	Memory   *int64 `json:"memory,omitempty"`
@@ -84,6 +88,12 @@ const (
 	LinodeStatusEnumStopped      LinodeStatusEnum = "stopped"
 )
 
+// LinodeBackupsInput
+// Information about this Linode's backups status. For information about available backups, see [/linode/instances/{linodeId}/backups](/docs/api/linode-instances/#backups-list).
+type LinodeBackupsInput struct {
+	Schedule *LinodeBackupsSchedule `json:"schedule,omitempty"`
+}
+
 type Linode struct {
 	Alerts          *LinodeAlerts          `json:"alerts,omitempty"`
 	Backups         *LinodeBackups         `json:"backups,omitempty"`
@@ -102,4 +112,13 @@ type Linode struct {
 	Type            *string                `json:"type,omitempty"`
 	Updated         *time.Time             `json:"updated,omitempty"`
 	WatchdogEnabled *bool                  `json:"watchdog_enabled,omitempty"`
+}
+
+type LinodeInput struct {
+	Alerts          *LinodeAlerts       `json:"alerts,omitempty"`
+	Backups         *LinodeBackupsInput `json:"backups,omitempty"`
+	Group           *string             `json:"group,omitempty"`
+	Label           *string             `json:"label,omitempty"`
+	Tags            []string            `json:"tags,omitempty"`
+	WatchdogEnabled *bool               `json:"watchdog_enabled,omitempty"`
 }

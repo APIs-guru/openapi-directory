@@ -1,5 +1,7 @@
 package shared
 
+// ReplicaSettingsDescription
+// Represents the properties of a replica.
 type ReplicaSettingsDescription struct {
 	RegionName                                         string                                           `json:"RegionName"`
 	ReplicaBillingModeSummary                          *BillingModeSummary                              `json:"ReplicaBillingModeSummary,omitempty"`

@@ -1,105 +1,106 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReverseDictionaryExcludeSourceDictionariesEnum {
-    Ahd = "ahd"
-,    Century = "century"
-,    Cmu = "cmu"
-,    Macmillan = "macmillan"
-,    Wiktionary = "wiktionary"
-,    Webster = "webster"
-,    Wordnet = "wordnet"
+    Ahd = "ahd",
+    Century = "century",
+    Cmu = "cmu",
+    Macmillan = "macmillan",
+    Wiktionary = "wiktionary",
+    Webster = "webster",
+    Wordnet = "wordnet"
 }
 
 export enum ReverseDictionaryIncludeSourceDictionariesEnum {
-    Ahd = "ahd"
-,    Century = "century"
-,    Cmu = "cmu"
-,    Macmillan = "macmillan"
-,    Wiktionary = "wiktionary"
-,    Webster = "webster"
-,    Wordnet = "wordnet"
+    Ahd = "ahd",
+    Century = "century",
+    Cmu = "cmu",
+    Macmillan = "macmillan",
+    Wiktionary = "wiktionary",
+    Webster = "webster",
+    Wordnet = "wordnet"
 }
 
 export enum ReverseDictionaryIncludeTagsEnum {
-    False = "false"
-,    True = "true"
+    False = "false",
+    True = "true"
 }
 
 export enum ReverseDictionarySortByEnum {
-    Alpha = "alpha"
-,    Count = "count"
+    Alpha = "alpha",
+    Count = "count"
 }
 
 export enum ReverseDictionarySortOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 
 export class ReverseDictionaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludePartOfSpeech" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludePartOfSpeech" })
   excludePartOfSpeech?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludeSourceDictionaries" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeSourceDictionaries" })
   excludeSourceDictionaries?: ReverseDictionaryExcludeSourceDictionariesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expandTerms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expandTerms" })
   expandTerms?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=findSenseForWord" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=findSenseForWord" })
   findSenseForWord?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includePartOfSpeech" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includePartOfSpeech" })
   includePartOfSpeech?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeSourceDictionaries" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeSourceDictionaries" })
   includeSourceDictionaries?: ReverseDictionaryIncludeSourceDictionariesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeTags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeTags" })
   includeTags?: ReverseDictionaryIncludeTagsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxCorpusCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxCorpusCount" })
   maxCorpusCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxLength" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxLength" })
   maxLength?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minCorpusCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minCorpusCount" })
   minCorpusCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minLength" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minLength" })
   minLength?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: ReverseDictionarySortByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: ReverseDictionarySortOrderEnum;
 }
 
 
 export class ReverseDictionaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReverseDictionaryQueryParams;
 }
 
 
 export class ReverseDictionaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

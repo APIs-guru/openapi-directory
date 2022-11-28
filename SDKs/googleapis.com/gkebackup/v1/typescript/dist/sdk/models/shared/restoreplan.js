@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RestoreConfig } from "./restoreconfig";
 // RestorePlan
 /**
@@ -34,45 +34,77 @@ var RestorePlan = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=backupPlan" }),
+        SpeakeasyMetadata({ data: "json, name=backupPlan" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "backupPlan", void 0);
     __decorate([
-        Metadata({ data: "json, name=cluster" }),
+        SpeakeasyMetadata({ data: "json, name=cluster" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "cluster", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], RestorePlan.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=restoreConfig" }),
+        SpeakeasyMetadata({ data: "json, name=restoreConfig" }),
         __metadata("design:type", RestoreConfig)
     ], RestorePlan.prototype, "restoreConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], RestorePlan.prototype, "updateTime", void 0);
     return RestorePlan;
 }(SpeakeasyBase));
 export { RestorePlan };
+// RestorePlanInput
+/**
+ * The configuration of a potential series of Restore operations to be performed against Backups belong to a particular BackupPlan. Next id: 11
+**/
+var RestorePlanInput = /** @class */ (function (_super) {
+    __extends(RestorePlanInput, _super);
+    function RestorePlanInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=backupPlan" }),
+        __metadata("design:type", String)
+    ], RestorePlanInput.prototype, "backupPlan", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cluster" }),
+        __metadata("design:type", String)
+    ], RestorePlanInput.prototype, "cluster", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], RestorePlanInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], RestorePlanInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=restoreConfig" }),
+        __metadata("design:type", RestoreConfig)
+    ], RestorePlanInput.prototype, "restoreConfig", void 0);
+    return RestorePlanInput;
+}(SpeakeasyBase));
+export { RestorePlanInput };

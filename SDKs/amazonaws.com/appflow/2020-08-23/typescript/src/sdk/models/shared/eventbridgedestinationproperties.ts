@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorHandlingConfig } from "./errorhandlingconfig";
+
 
 
 // EventBridgeDestinationProperties
@@ -7,9 +8,9 @@ import { ErrorHandlingConfig } from "./errorhandlingconfig";
  *  The properties that are applied when Amazon EventBridge is being used as a destination. 
 **/
 export class EventBridgeDestinationProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorHandlingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=errorHandlingConfig" })
   errorHandlingConfig?: ErrorHandlingConfig;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object: string;
 }

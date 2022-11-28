@@ -1,5 +1,7 @@
 package shared
 
+// ImageClassificationModelMetadata
+// Model metadata for image classification.
 type ImageClassificationModelMetadata struct {
 	BaseModelID *string  `json:"baseModelId,omitempty"`
 	ModelType   *string  `json:"modelType,omitempty"`

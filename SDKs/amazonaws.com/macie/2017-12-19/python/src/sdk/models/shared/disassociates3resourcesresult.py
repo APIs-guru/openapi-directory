@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import faileds3resource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DisassociateS3ResourcesResult:
-    failed_s3_resources: Optional[List[faileds3resource.FailedS3Resource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failedS3Resources' }})
+    failed_s3_resources: Optional[List[FailedS3Resource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failedS3Resources') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetApplyPendingMaintenanceActionActionEnum {
     ApplyPendingMaintenanceAction = "ApplyPendingMaintenanceAction"
@@ -10,63 +11,63 @@ export enum GetApplyPendingMaintenanceActionVersionEnum {
 
 
 export class GetApplyPendingMaintenanceActionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetApplyPendingMaintenanceActionActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ApplyAction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ApplyAction" })
   applyAction: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=OptInType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OptInType" })
   optInType: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ResourceIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ResourceIdentifier" })
   resourceIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetApplyPendingMaintenanceActionVersionEnum;
 }
 
 
 export class GetApplyPendingMaintenanceActionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetApplyPendingMaintenanceActionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApplyPendingMaintenanceActionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApplyPendingMaintenanceActionHeaders;
 }
 
 
 export class GetApplyPendingMaintenanceActionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

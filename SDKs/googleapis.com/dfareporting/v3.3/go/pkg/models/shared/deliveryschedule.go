@@ -21,6 +21,8 @@ const (
 	DeliverySchedulePriorityEnumAdPriority16 DeliverySchedulePriorityEnum = "AD_PRIORITY_16"
 )
 
+// DeliverySchedule
+// Delivery Schedule.
 type DeliverySchedule struct {
 	FrequencyCap    *FrequencyCap                 `json:"frequencyCap,omitempty"`
 	HardCutoff      *bool                         `json:"hardCutoff,omitempty"`

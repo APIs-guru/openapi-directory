@@ -30,11 +30,6 @@ type DrvlcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type DrvlcRequest struct {
-	Request  *DrvlcRequestBody `request:"mediaType=application/json"`
-	Security DrvlcSecurity
-}
-
 type Drvlc400ApplicationJSONErrorEnum string
 
 const (
@@ -164,6 +159,11 @@ const (
 type Drvlc504ApplicationJSON struct {
 	Error            *Drvlc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Drvlc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type DrvlcRequest struct {
+	Request  *DrvlcRequestBody `request:"mediaType=application/json"`
+	Security DrvlcSecurity
 }
 
 type DrvlcResponse struct {

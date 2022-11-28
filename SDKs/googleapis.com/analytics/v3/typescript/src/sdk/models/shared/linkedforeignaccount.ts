@@ -1,4 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// LinkedForeignAccountInput
+/** 
+ * JSON template for an Analytics Remarketing Audience Foreign Link.
+**/
+export class LinkedForeignAccountInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
+  accountId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
+  kind?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=linkedAccountId" })
+  linkedAccountId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=remarketingAudienceId" })
+  remarketingAudienceId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
+  webPropertyId?: string;
+}
 
 
 // LinkedForeignAccount
@@ -6,33 +38,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for an Analytics Remarketing Audience Foreign Link.
 **/
 export class LinkedForeignAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=eligibleForSearch" })
+  @SpeakeasyMetadata({ data: "json, name=eligibleForSearch" })
   eligibleForSearch?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=linkedAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=linkedAccountId" })
   linkedAccountId?: string;
 
-  @Metadata({ data: "json, name=remarketingAudienceId" })
+  @SpeakeasyMetadata({ data: "json, name=remarketingAudienceId" })
   remarketingAudienceId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }

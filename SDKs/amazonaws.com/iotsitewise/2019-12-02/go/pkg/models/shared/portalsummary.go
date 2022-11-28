@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PortalSummary
+// Contains a portal summary.
 type PortalSummary struct {
 	CreationDate   *time.Time   `json:"creationDate,omitempty"`
 	Description    *string      `json:"description,omitempty"`

@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowCxV3beta1DeploymentStateEnumFailed           GoogleCloudDialogflowCxV3beta1DeploymentStateEnum = "FAILED"
 )
 
+// GoogleCloudDialogflowCxV3beta1Deployment
+// Represents an deployment in an environment. A deployment happens when a flow version configured to be active in the environment. You can configure running pre-deployment steps, e.g. running validation test cases, experiment auto-rollout, etc.
 type GoogleCloudDialogflowCxV3beta1Deployment struct {
 	EndTime     *string                                            `json:"endTime,omitempty"`
 	FlowVersion *string                                            `json:"flowVersion,omitempty"`

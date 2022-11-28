@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DebugOptions } from "./debugoptions";
 import { WorkerPool } from "./workerpool";
 
+
 export enum EnvironmentFlexResourceSchedulingGoalEnum {
-    FlexrsUnspecified = "FLEXRS_UNSPECIFIED"
-,    FlexrsSpeedOptimized = "FLEXRS_SPEED_OPTIMIZED"
-,    FlexrsCostOptimized = "FLEXRS_COST_OPTIMIZED"
+    FlexrsUnspecified = "FLEXRS_UNSPECIFIED",
+    FlexrsSpeedOptimized = "FLEXRS_SPEED_OPTIMIZED",
+    FlexrsCostOptimized = "FLEXRS_COST_OPTIMIZED"
 }
 
 export enum EnvironmentShuffleModeEnum {
-    ShuffleModeUnspecified = "SHUFFLE_MODE_UNSPECIFIED"
-,    VmBased = "VM_BASED"
-,    ServiceBased = "SERVICE_BASED"
+    ShuffleModeUnspecified = "SHUFFLE_MODE_UNSPECIFIED",
+    VmBased = "VM_BASED",
+    ServiceBased = "SERVICE_BASED"
 }
 
 
@@ -21,54 +21,109 @@ export enum EnvironmentShuffleModeEnum {
  * Describes the environment in which a Dataflow Job runs.
 **/
 export class Environment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterManagerApiService" })
+  @SpeakeasyMetadata({ data: "json, name=clusterManagerApiService" })
   clusterManagerApiService?: string;
 
-  @Metadata({ data: "json, name=dataset" })
+  @SpeakeasyMetadata({ data: "json, name=dataset" })
   dataset?: string;
 
-  @Metadata({ data: "json, name=debugOptions" })
+  @SpeakeasyMetadata({ data: "json, name=debugOptions" })
   debugOptions?: DebugOptions;
 
-  @Metadata({ data: "json, name=experiments" })
+  @SpeakeasyMetadata({ data: "json, name=experiments" })
   experiments?: string[];
 
-  @Metadata({ data: "json, name=flexResourceSchedulingGoal" })
+  @SpeakeasyMetadata({ data: "json, name=flexResourceSchedulingGoal" })
   flexResourceSchedulingGoal?: EnvironmentFlexResourceSchedulingGoalEnum;
 
-  @Metadata({ data: "json, name=internalExperiments" })
+  @SpeakeasyMetadata({ data: "json, name=internalExperiments" })
   internalExperiments?: Map<string, any>;
 
-  @Metadata({ data: "json, name=sdkPipelineOptions" })
+  @SpeakeasyMetadata({ data: "json, name=sdkPipelineOptions" })
   sdkPipelineOptions?: Map<string, any>;
 
-  @Metadata({ data: "json, name=serviceAccountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
   serviceAccountEmail?: string;
 
-  @Metadata({ data: "json, name=serviceKmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceKmsKeyName" })
   serviceKmsKeyName?: string;
 
-  @Metadata({ data: "json, name=serviceOptions" })
+  @SpeakeasyMetadata({ data: "json, name=serviceOptions" })
   serviceOptions?: string[];
 
-  @Metadata({ data: "json, name=shuffleMode" })
+  @SpeakeasyMetadata({ data: "json, name=shuffleMode" })
   shuffleMode?: EnvironmentShuffleModeEnum;
 
-  @Metadata({ data: "json, name=tempStoragePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=tempStoragePrefix" })
   tempStoragePrefix?: string;
 
-  @Metadata({ data: "json, name=userAgent" })
+  @SpeakeasyMetadata({ data: "json, name=userAgent" })
   userAgent?: Map<string, any>;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: Map<string, any>;
 
-  @Metadata({ data: "json, name=workerPools", elemType: shared.WorkerPool })
+  @SpeakeasyMetadata({ data: "json, name=workerPools", elemType: WorkerPool })
   workerPools?: WorkerPool[];
 
-  @Metadata({ data: "json, name=workerRegion" })
+  @SpeakeasyMetadata({ data: "json, name=workerRegion" })
   workerRegion?: string;
 
-  @Metadata({ data: "json, name=workerZone" })
+  @SpeakeasyMetadata({ data: "json, name=workerZone" })
+  workerZone?: string;
+}
+
+
+// EnvironmentInput
+/** 
+ * Describes the environment in which a Dataflow Job runs.
+**/
+export class EnvironmentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clusterManagerApiService" })
+  clusterManagerApiService?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=dataset" })
+  dataset?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=debugOptions" })
+  debugOptions?: DebugOptions;
+
+  @SpeakeasyMetadata({ data: "json, name=experiments" })
+  experiments?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=flexResourceSchedulingGoal" })
+  flexResourceSchedulingGoal?: EnvironmentFlexResourceSchedulingGoalEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=internalExperiments" })
+  internalExperiments?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=sdkPipelineOptions" })
+  sdkPipelineOptions?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
+  serviceAccountEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceKmsKeyName" })
+  serviceKmsKeyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceOptions" })
+  serviceOptions?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=tempStoragePrefix" })
+  tempStoragePrefix?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=userAgent" })
+  userAgent?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=workerPools", elemType: WorkerPool })
+  workerPools?: WorkerPool[];
+
+  @SpeakeasyMetadata({ data: "json, name=workerRegion" })
+  workerRegion?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=workerZone" })
   workerZone?: string;
 }

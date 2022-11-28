@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TeamGameTeamsStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat?: string;
 }
 
 
 export class TeamGameTeams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conference" })
+  @SpeakeasyMetadata({ data: "json, name=conference" })
   conference?: string;
 
-  @Metadata({ data: "json, name=homeAway" })
+  @SpeakeasyMetadata({ data: "json, name=homeAway" })
   homeAway?: boolean;
 
-  @Metadata({ data: "json, name=points" })
+  @SpeakeasyMetadata({ data: "json, name=points" })
   points?: number;
 
-  @Metadata({ data: "json, name=school" })
+  @SpeakeasyMetadata({ data: "json, name=school" })
   school?: string;
 
-  @Metadata({ data: "json, name=stats", elemType: shared.TeamGameTeamsStats })
+  @SpeakeasyMetadata({ data: "json, name=stats", elemType: TeamGameTeamsStats })
   stats?: TeamGameTeamsStats[];
 }
 
 
 export class TeamGame extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=teams", elemType: shared.TeamGameTeams })
+  @SpeakeasyMetadata({ data: "json, name=teams", elemType: TeamGameTeams })
   teams?: TeamGameTeams[];
 }

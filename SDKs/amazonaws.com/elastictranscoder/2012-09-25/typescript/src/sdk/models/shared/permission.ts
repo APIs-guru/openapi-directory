@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Permission
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The <code>Permission</code> structure.
 **/
 export class Permission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Access" })
+  @SpeakeasyMetadata({ data: "json, name=Access" })
   access?: string[];
 
-  @Metadata({ data: "json, name=Grantee" })
+  @SpeakeasyMetadata({ data: "json, name=Grantee" })
   grantee?: string;
 
-  @Metadata({ data: "json, name=GranteeType" })
+  @SpeakeasyMetadata({ data: "json, name=GranteeType" })
   granteeType?: string;
 }

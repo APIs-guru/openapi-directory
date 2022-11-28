@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetClusterPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetClusterQueryParams:
 
 @dataclass
 class GetClusterSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetClusterRequest:
-    path_params: GetClusterPathParams = field(default=None)
-    query_params: GetClusterQueryParams = field(default=None)
-    security: GetClusterSecurity = field(default=None)
+    path_params: GetClusterPathParams = field()
+    query_params: GetClusterQueryParams = field()
+    security: GetClusterSecurity = field()
     
 
 @dataclass
 class GetClusterResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
     cluster: Optional[shared.Cluster] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

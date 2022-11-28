@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetOfferingsOfferingIDUsersPathParams:
-    offering_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
+    offering_id: str = field(metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
     
 class GetOfferingsOfferingIDUsersFacilitatorsEnum(str, Enum):
     TRUE = "true"
@@ -29,14 +30,14 @@ class GetOfferingsOfferingIDUsersQueryParams:
 
 @dataclass
 class GetOfferingsOfferingIDUsersRequest:
-    path_params: GetOfferingsOfferingIDUsersPathParams = field(default=None)
-    query_params: GetOfferingsOfferingIDUsersQueryParams = field(default=None)
+    path_params: GetOfferingsOfferingIDUsersPathParams = field()
+    query_params: GetOfferingsOfferingIDUsersQueryParams = field()
     
 
 @dataclass
 class GetOfferingsOfferingIDUsersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     offering_user_responses: Optional[List[shared.OfferingUserResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

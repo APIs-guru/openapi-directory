@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SoftwareRecipeStepInstallMsi
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Installs an MSI file.
 **/
 export class SoftwareRecipeStepInstallMsi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedExitCodes" })
+  @SpeakeasyMetadata({ data: "json, name=allowedExitCodes" })
   allowedExitCodes?: number[];
 
-  @Metadata({ data: "json, name=artifactId" })
+  @SpeakeasyMetadata({ data: "json, name=artifactId" })
   artifactId?: string;
 
-  @Metadata({ data: "json, name=flags" })
+  @SpeakeasyMetadata({ data: "json, name=flags" })
   flags?: string[];
 }

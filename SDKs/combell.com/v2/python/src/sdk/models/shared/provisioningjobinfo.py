@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import completionestimation
-from . import provisioningjobstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProvisioningJobInfo:
-    completion: Optional[completionestimation.CompletionEstimation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completion' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    status: Optional[provisioningjobstatus_enum.ProvisioningJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    completion: Optional[CompletionEstimation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('completion') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    status: Optional[ProvisioningJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetClientClientIdPathParams extends SpeakeasyBase {
     clientId: string;
-}
-export declare class GetClientClientIdRequest extends SpeakeasyBase {
-    pathParams: GetClientClientIdPathParams;
 }
 export declare class GetClientClientId200ApplicationJson extends SpeakeasyBase {
     atId?: string;
@@ -25,6 +22,9 @@ export declare class GetClientClientId200ApplicationJson extends SpeakeasyBase {
     softwareVersion?: string;
     tokenEndpointAuthMethod?: string;
     tosUri?: string;
+}
+export declare class GetClientClientIdRequest extends SpeakeasyBase {
+    pathParams: GetClientClientIdPathParams;
 }
 export declare class GetClientClientIdResponse extends SpeakeasyBase {
     contentType: string;

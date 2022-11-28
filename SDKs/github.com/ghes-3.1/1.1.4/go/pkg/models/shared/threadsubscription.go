@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ThreadSubscription
+// Thread Subscription
 type ThreadSubscription struct {
 	CreatedAt     time.Time `json:"created_at"`
 	Ignored       bool      `json:"ignored"`

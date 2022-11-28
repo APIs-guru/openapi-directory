@@ -1,5 +1,7 @@
 package shared
 
+// BackupInfo
+// Information about a backup.
 type BackupInfo struct {
 	Backup         *string `json:"backup,omitempty"`
 	CreateTime     *string `json:"createTime,omitempty"`

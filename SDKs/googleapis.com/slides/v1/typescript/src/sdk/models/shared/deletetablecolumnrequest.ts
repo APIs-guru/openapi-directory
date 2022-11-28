@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellLocation } from "./tablecelllocation";
+
 
 
 // DeleteTableColumnRequest
@@ -7,9 +8,9 @@ import { TableCellLocation } from "./tablecelllocation";
  * Deletes a column from a table.
 **/
 export class DeleteTableColumnRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cellLocation" })
+  @SpeakeasyMetadata({ data: "json, name=cellLocation" })
   cellLocation?: TableCellLocation;
 
-  @Metadata({ data: "json, name=tableObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=tableObjectId" })
   tableObjectId?: string;
 }

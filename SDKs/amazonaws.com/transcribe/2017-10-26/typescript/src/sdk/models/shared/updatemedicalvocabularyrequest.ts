@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageCodeEnum } from "./languagecodeenum";
 
 
+
 export class UpdateMedicalVocabularyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=VocabularyFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyFileUri" })
   vocabularyFileUri?: string;
 
-  @Metadata({ data: "json, name=VocabularyName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyName" })
   vocabularyName: string;
 }

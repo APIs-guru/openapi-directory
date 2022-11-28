@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationItemTypeEnum } from "./configurationitemtypeenum";
 import { Filter } from "./filter";
 import { OrderByElement } from "./orderbyelement";

@@ -8,11 +8,8 @@ type PostNetworksIDActionsDeleteSubnetDeleteSubnetRequest struct {
 	IPRange string `json:"ip_range"`
 }
 
-type PostNetworksIDActionsDeleteSubnetRequest struct {
-	PathParams PostNetworksIDActionsDeleteSubnetPathParams
-	Request    *PostNetworksIDActionsDeleteSubnetDeleteSubnetRequest `request:"mediaType=application/json"`
-}
-
+// PostNetworksIDActionsDeleteSubnetActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostNetworksIDActionsDeleteSubnetActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostNetworksIDActionsDeleteSubnetActionResponseAction struct {
 
 type PostNetworksIDActionsDeleteSubnetActionResponse struct {
 	Action PostNetworksIDActionsDeleteSubnetActionResponseAction `json:"action"`
+}
+
+type PostNetworksIDActionsDeleteSubnetRequest struct {
+	PathParams PostNetworksIDActionsDeleteSubnetPathParams
+	Request    *PostNetworksIDActionsDeleteSubnetDeleteSubnetRequest `request:"mediaType=application/json"`
 }
 
 type PostNetworksIDActionsDeleteSubnetResponse struct {

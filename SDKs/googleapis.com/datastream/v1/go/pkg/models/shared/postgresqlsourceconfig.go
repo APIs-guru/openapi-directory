@@ -1,5 +1,7 @@
 package shared
 
+// PostgresqlSourceConfig
+// PostgreSQL data source configuration
 type PostgresqlSourceConfig struct {
 	ExcludeObjects  *PostgresqlRdbms `json:"excludeObjects,omitempty"`
 	IncludeObjects  *PostgresqlRdbms `json:"includeObjects,omitempty"`

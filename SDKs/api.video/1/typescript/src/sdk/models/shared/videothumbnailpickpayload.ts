@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VideoThumbnailPickPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timecode" })
+  @SpeakeasyMetadata({ data: "json, name=timecode" })
   timecode: string;
 }

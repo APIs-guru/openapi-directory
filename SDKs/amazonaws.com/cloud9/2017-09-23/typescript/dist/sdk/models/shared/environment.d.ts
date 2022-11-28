@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
 import { EnvironmentLifecycle } from "./environmentlifecycle";
 import { ManagedCredentialsStatusEnum } from "./managedcredentialsstatusenum";

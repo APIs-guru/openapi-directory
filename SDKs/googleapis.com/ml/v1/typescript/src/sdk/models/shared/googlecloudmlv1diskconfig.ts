@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudMlV1DiskConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the config of disk options.
 **/
 export class GoogleCloudMlV1DiskConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bootDiskSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=bootDiskSizeGb" })
   bootDiskSizeGb?: number;
 
-  @Metadata({ data: "json, name=bootDiskType" })
+  @SpeakeasyMetadata({ data: "json, name=bootDiskType" })
   bootDiskType?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// RdsHTTPEndpointConfig
+// The Amazon RDS HTTP endpoint configuration.
 type RdsHTTPEndpointConfig struct {
 	AwsRegion           *string `json:"awsRegion,omitempty"`
 	AwsSecretStoreArn   *string `json:"awsSecretStoreArn,omitempty"`

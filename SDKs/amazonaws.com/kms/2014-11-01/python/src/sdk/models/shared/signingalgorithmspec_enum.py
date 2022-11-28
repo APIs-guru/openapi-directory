@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SigningAlgorithmSpecEnum(str, Enum):
     RSASSA_PSS_SHA_256 = "RSASSA_PSS_SHA_256"

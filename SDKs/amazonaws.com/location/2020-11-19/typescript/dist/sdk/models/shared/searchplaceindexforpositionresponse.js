@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SearchForPositionResult } from "./searchforpositionresult";
 import { SearchPlaceIndexForPositionSummary } from "./searchplaceindexforpositionsummary";
 var SearchPlaceIndexForPositionResponse = /** @class */ (function (_super) {
     __extends(SearchPlaceIndexForPositionResponse, _super);
@@ -31,11 +31,11 @@ var SearchPlaceIndexForPositionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Results", elemType: shared.SearchForPositionResult }),
+        SpeakeasyMetadata({ data: "json, name=Results", elemType: SearchForPositionResult }),
         __metadata("design:type", Array)
     ], SearchPlaceIndexForPositionResponse.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=Summary" }),
+        SpeakeasyMetadata({ data: "json, name=Summary" }),
         __metadata("design:type", SearchPlaceIndexForPositionSummary)
     ], SearchPlaceIndexForPositionResponse.prototype, "summary", void 0);
     return SearchPlaceIndexForPositionResponse;

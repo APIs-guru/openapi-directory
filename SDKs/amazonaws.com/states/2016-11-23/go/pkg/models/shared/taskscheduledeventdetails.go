@@ -1,5 +1,7 @@
 package shared
 
+// TaskScheduledEventDetails
+// Contains details about a task scheduled during an execution.
 type TaskScheduledEventDetails struct {
 	HeartbeatInSeconds *int64 `json:"heartbeatInSeconds,omitempty"`
 	Parameters         string `json:"parameters"`

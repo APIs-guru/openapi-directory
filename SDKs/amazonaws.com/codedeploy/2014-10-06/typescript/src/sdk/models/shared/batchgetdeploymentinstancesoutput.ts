@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceSummary } from "./instancesummary";
+
 
 
 // BatchGetDeploymentInstancesOutput
@@ -8,9 +8,9 @@ import { InstanceSummary } from "./instancesummary";
  * Represents the output of a <code>BatchGetDeploymentInstances</code> operation.
 **/
 export class BatchGetDeploymentInstancesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=instancesSummary", elemType: shared.InstanceSummary })
+  @SpeakeasyMetadata({ data: "json, name=instancesSummary", elemType: InstanceSummary })
   instancesSummary?: InstanceSummary[];
 }

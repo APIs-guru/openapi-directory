@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetFilesV3FilesSearchDoSearchQueryParams extends SpeakeasyBase {
     after?: string;
@@ -26,19 +26,12 @@ export declare class GetFilesV3FilesSearchDoSearchQueryParams extends SpeakeasyB
     url?: string;
     width?: number;
 }
-export declare class GetFilesV3FilesSearchDoSearchSecurityOption1 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-export declare class GetFilesV3FilesSearchDoSearchSecurityOption2 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class GetFilesV3FilesSearchDoSearchSecurityOption3 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class GetFilesV3FilesSearchDoSearchSecurity extends SpeakeasyBase {
-    option1?: GetFilesV3FilesSearchDoSearchSecurityOption1;
-    option2?: GetFilesV3FilesSearchDoSearchSecurityOption2;
-    option3?: GetFilesV3FilesSearchDoSearchSecurityOption3;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
+    hapikey?: shared.SchemeHapikey;
+    privateAppsLegacy1?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy1?: shared.SchemeOauth2Legacy;
 }
 export declare class GetFilesV3FilesSearchDoSearchRequest extends SpeakeasyBase {
     queryParams: GetFilesV3FilesSearchDoSearchQueryParams;

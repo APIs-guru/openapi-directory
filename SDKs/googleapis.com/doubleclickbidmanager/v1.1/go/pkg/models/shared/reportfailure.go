@@ -23,6 +23,8 @@ const (
 	ReportFailureErrorCodeEnumReportingInvalidQueryMissingPartnerAndAdvertiserFilters ReportFailureErrorCodeEnum = "REPORTING_INVALID_QUERY_MISSING_PARTNER_AND_ADVERTISER_FILTERS"
 )
 
+// ReportFailure
+// An explanation of a report failure.
 type ReportFailure struct {
 	ErrorCode *ReportFailureErrorCodeEnum `json:"errorCode,omitempty"`
 }

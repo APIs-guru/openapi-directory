@@ -1,5 +1,7 @@
 package shared
 
+// VpcConfigResponse
+// An object representing an Amazon EKS cluster VPC configuration response.
 type VpcConfigResponse struct {
 	ClusterSecurityGroupID *string  `json:"clusterSecurityGroupId,omitempty"`
 	EndpointPrivateAccess  *bool    `json:"endpointPrivateAccess,omitempty"`

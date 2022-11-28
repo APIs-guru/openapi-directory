@@ -1,20 +1,23 @@
 from dataclasses import dataclass, field
-
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class SignUpdatePathParams:
-    job: str = field(default=None, metadata={'path_param': { 'field_name': 'job', 'style': 'simple', 'explode': False }})
+    job: str = field(metadata={'path_param': { 'field_name': 'job', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SignUpdateRequest:
-    path_params: SignUpdatePathParams = field(default=None)
+    path_params: SignUpdatePathParams = field()
     
 
 @dataclass
 class SignUpdateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

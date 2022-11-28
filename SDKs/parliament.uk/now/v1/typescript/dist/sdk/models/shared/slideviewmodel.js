@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LineViewModel } from "./lineviewmodel";
 export var SlideViewModelSoundToPlayEnum;
 (function (SlideViewModelSoundToPlayEnum) {
     SlideViewModelSoundToPlayEnum["NewSlide"] = "NewSlide";
@@ -52,35 +52,35 @@ var SlideViewModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=carouselDisplaySeconds" }),
+        SpeakeasyMetadata({ data: "json, name=carouselDisplaySeconds" }),
         __metadata("design:type", Number)
     ], SlideViewModel.prototype, "carouselDisplaySeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=carouselOrder" }),
+        SpeakeasyMetadata({ data: "json, name=carouselOrder" }),
         __metadata("design:type", Number)
     ], SlideViewModel.prototype, "carouselOrder", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], SlideViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lines", elemType: shared.LineViewModel }),
+        SpeakeasyMetadata({ data: "json, name=lines", elemType: LineViewModel }),
         __metadata("design:type", Array)
     ], SlideViewModel.prototype, "lines", void 0);
     __decorate([
-        Metadata({ data: "json, name=slideTime" }),
+        SpeakeasyMetadata({ data: "json, name=slideTime" }),
         __metadata("design:type", Date)
     ], SlideViewModel.prototype, "slideTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=soundToPlay" }),
+        SpeakeasyMetadata({ data: "json, name=soundToPlay" }),
         __metadata("design:type", String)
     ], SlideViewModel.prototype, "soundToPlay", void 0);
     __decorate([
-        Metadata({ data: "json, name=speakerTime" }),
+        SpeakeasyMetadata({ data: "json, name=speakerTime" }),
         __metadata("design:type", Date)
     ], SlideViewModel.prototype, "speakerTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SlideViewModel.prototype, "type", void 0);
     return SlideViewModel;

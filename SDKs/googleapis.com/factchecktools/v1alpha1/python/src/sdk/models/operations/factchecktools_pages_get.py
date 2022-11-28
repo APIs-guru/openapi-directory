@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FactchecktoolsPagesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class FactchecktoolsPagesGetQueryParams:
 
 @dataclass
 class FactchecktoolsPagesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FactchecktoolsPagesGetRequest:
-    path_params: FactchecktoolsPagesGetPathParams = field(default=None)
-    query_params: FactchecktoolsPagesGetQueryParams = field(default=None)
-    security: FactchecktoolsPagesGetSecurity = field(default=None)
+    path_params: FactchecktoolsPagesGetPathParams = field()
+    query_params: FactchecktoolsPagesGetQueryParams = field()
+    security: FactchecktoolsPagesGetSecurity = field()
     
 
 @dataclass
 class FactchecktoolsPagesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_factchecking_factchecktools_v1alpha1_claim_review_markup_page: Optional[shared.GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage] = field(default=None)
-    status_code: int = field(default=None)
     

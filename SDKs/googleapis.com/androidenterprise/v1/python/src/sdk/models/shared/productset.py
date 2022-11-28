@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import productvisibility
+from sdk import utils
+from . import *
 
 class ProductSetProductSetBehaviorEnum(str, Enum):
     UNKNOWN = "unknown"
@@ -13,7 +15,11 @@ class ProductSetProductSetBehaviorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ProductSet:
-    product_id: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productId' }})
-    product_set_behavior: Optional[ProductSetProductSetBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productSetBehavior' }})
-    product_visibility: Optional[List[productvisibility.ProductVisibility]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productVisibility' }})
+    r"""ProductSet
+    A set of products.
+    """
+    
+    product_id: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productId') }})
+    product_set_behavior: Optional[ProductSetProductSetBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productSetBehavior') }})
+    product_visibility: Optional[List[ProductVisibility]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productVisibility') }})
     

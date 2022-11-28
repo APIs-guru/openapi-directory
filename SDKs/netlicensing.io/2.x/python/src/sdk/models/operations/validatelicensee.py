@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class ValidateLicenseePathParams:
-    licensee_number: str = field(default=None, metadata={'path_param': { 'field_name': 'licenseeNumber', 'style': 'simple', 'explode': False }})
+    licensee_number: str = field(metadata={'path_param': { 'field_name': 'licenseeNumber', 'style': 'simple', 'explode': False }})
     
 class ValidateLicenseeRequestBodyActionEnum(str, Enum):
     CHECK_OUT = "checkOut"
@@ -23,20 +28,20 @@ class ValidateLicenseeRequestBody:
 
 @dataclass
 class ValidateLicenseeSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class ValidateLicenseeRequest:
-    path_params: ValidateLicenseePathParams = field(default=None)
+    path_params: ValidateLicenseePathParams = field()
+    security: ValidateLicenseeSecurity = field()
     request: Optional[ValidateLicenseeRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: ValidateLicenseeSecurity = field(default=None)
     
 
 @dataclass
 class ValidateLicenseeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensing: Optional[Any] = field(default=None)
     

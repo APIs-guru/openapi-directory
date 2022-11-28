@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoutingControlStateEnum } from "./routingcontrolstateenum";
+
 
 
 // UpdateRoutingControlStateEntry
@@ -7,9 +8,9 @@ import { RoutingControlStateEnum } from "./routingcontrolstateenum";
  * A routing control state.
 **/
 export class UpdateRoutingControlStateEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RoutingControlArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoutingControlArn" })
   routingControlArn: string;
 
-  @Metadata({ data: "json, name=RoutingControlState" })
+  @SpeakeasyMetadata({ data: "json, name=RoutingControlState" })
   routingControlState: RoutingControlStateEnum;
 }

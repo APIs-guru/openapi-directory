@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorMessage } from "./errormessage";
 
 
+
 export class BadRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hints", elemType: shared.ErrorMessage })
+  @SpeakeasyMetadata({ data: "json, name=hints", elemType: ErrorMessage })
   hints?: ErrorMessage[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

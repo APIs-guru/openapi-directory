@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateDescription } from "./certificatedescription";
+
 
 
 // DescribeCertificateResponse
@@ -7,6 +8,6 @@ import { CertificateDescription } from "./certificatedescription";
  * The output of the DescribeCertificate operation.
 **/
 export class DescribeCertificateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateDescription" })
+  @SpeakeasyMetadata({ data: "json, name=certificateDescription" })
   certificateDescription?: CertificateDescription;
 }

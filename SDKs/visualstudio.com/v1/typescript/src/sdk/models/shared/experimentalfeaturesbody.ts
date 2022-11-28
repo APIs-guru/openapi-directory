@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ExperimentalFeaturesBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableDynamicHttpsDetection" })
+  @SpeakeasyMetadata({ data: "json, name=enableDynamicHttpsDetection" })
   enableDynamicHttpsDetection?: boolean;
 
-  @Metadata({ data: "json, name=queueResourceAllocation" })
+  @SpeakeasyMetadata({ data: "json, name=queueResourceAllocation" })
   queueResourceAllocation?: boolean;
 
-  @Metadata({ data: "json, name=usePrebuiltImages" })
+  @SpeakeasyMetadata({ data: "json, name=usePrebuiltImages" })
   usePrebuiltImages?: boolean;
 }

@@ -22,16 +22,16 @@ type UpdateBulkInventoryRequestBody struct {
 	File *UpdateBulkInventoryRequestBodyFile `multipartForm:"file"`
 }
 
-type UpdateBulkInventoryRequest struct {
-	QueryParams UpdateBulkInventoryQueryParams
-	Headers     UpdateBulkInventoryHeaders
-	Request     UpdateBulkInventoryRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type UpdateBulkInventory200ApplicationJSON struct {
 	AdditionalAttributes map[string]interface{} `json:"additionalAttributes,omitempty"`
 	Errors               map[string]interface{} `json:"errors,omitempty"`
 	FeedID               *string                `json:"feedId,omitempty"`
+}
+
+type UpdateBulkInventoryRequest struct {
+	QueryParams UpdateBulkInventoryQueryParams
+	Headers     UpdateBulkInventoryHeaders
+	Request     UpdateBulkInventoryRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type UpdateBulkInventoryResponse struct {

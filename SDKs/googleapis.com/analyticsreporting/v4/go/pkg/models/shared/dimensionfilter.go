@@ -15,6 +15,8 @@ const (
 	DimensionFilterOperatorEnumInList              DimensionFilterOperatorEnum = "IN_LIST"
 )
 
+// DimensionFilter
+// Dimension filter specifies the filtering options on a dimension.
 type DimensionFilter struct {
 	CaseSensitive *bool                        `json:"caseSensitive,omitempty"`
 	DimensionName *string                      `json:"dimensionName,omitempty"`

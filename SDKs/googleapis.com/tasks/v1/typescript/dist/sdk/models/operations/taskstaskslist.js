@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TasksTasksListPathParams = /** @class */ (function (_super) {
     __extends(TasksTasksListPathParams, _super);
@@ -30,7 +30,7 @@ var TasksTasksListPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tasklist" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tasklist" }),
         __metadata("design:type", String)
     ], TasksTasksListPathParams.prototype, "tasklist", void 0);
     return TasksTasksListPathParams;
@@ -42,87 +42,87 @@ var TasksTasksListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=completedMax" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=completedMax" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "completedMax", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=completedMin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=completedMin" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "completedMin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dueMax" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dueMax" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "dueMax", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dueMin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dueMin" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "dueMin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], TasksTasksListQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], TasksTasksListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=showCompleted" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showCompleted" }),
         __metadata("design:type", Boolean)
     ], TasksTasksListQueryParams.prototype, "showCompleted", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=showDeleted" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showDeleted" }),
         __metadata("design:type", Boolean)
     ], TasksTasksListQueryParams.prototype, "showDeleted", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=showHidden" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showHidden" }),
         __metadata("design:type", Boolean)
     ], TasksTasksListQueryParams.prototype, "showHidden", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=updatedMin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedMin" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "updatedMin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], TasksTasksListQueryParams.prototype, "uploadProtocol", void 0);
     return TasksTasksListQueryParams;
@@ -134,11 +134,11 @@ var TasksTasksListSecurityOption1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], TasksTasksListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], TasksTasksListSecurityOption1.prototype, "oauth2c", void 0);
     return TasksTasksListSecurityOption1;
@@ -150,11 +150,11 @@ var TasksTasksListSecurityOption2 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], TasksTasksListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], TasksTasksListSecurityOption2.prototype, "oauth2c", void 0);
     return TasksTasksListSecurityOption2;
@@ -166,11 +166,11 @@ var TasksTasksListSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", TasksTasksListSecurityOption1)
     ], TasksTasksListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", TasksTasksListSecurityOption2)
     ], TasksTasksListSecurity.prototype, "option2", void 0);
     return TasksTasksListSecurity;
@@ -182,15 +182,15 @@ var TasksTasksListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TasksTasksListPathParams)
     ], TasksTasksListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TasksTasksListQueryParams)
     ], TasksTasksListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TasksTasksListSecurity)
     ], TasksTasksListRequest.prototype, "security", void 0);
     return TasksTasksListRequest;
@@ -202,15 +202,15 @@ var TasksTasksListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TasksTasksListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TasksTasksListResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Tasks)
     ], TasksTasksListResponse.prototype, "tasks", void 0);
     return TasksTasksListResponse;

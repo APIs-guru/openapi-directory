@@ -1,65 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export const ECOMMERCEDELIVERY_SERVERS = [
-	"http://api.climatekuul.com:8000/footprint",
-];
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
+export const EcommerceDeliveryServerList = [
+	"http://api.climatekuul.com:8000/footprint",
+] as const;
 
 
 export class EcommerceDeliveryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType: string;
 }
 
 
 export class EcommerceDeliveryRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=apiKey_l1;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l1;" })
   apiKeyL1: string;
 
-  @Metadata({ data: "form, name=apiKey_l2;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l2;" })
   apiKeyL2: string;
 
-  @Metadata({ data: "form, name=destination_airport_code;" })
+  @SpeakeasyMetadata({ data: "form, name=destination_airport_code;" })
   destinationAirportCode?: string;
 
-  @Metadata({ data: "form, name=destination_latitude;" })
+  @SpeakeasyMetadata({ data: "form, name=destination_latitude;" })
   destinationLatitude: number;
 
-  @Metadata({ data: "form, name=destination_longitude;" })
+  @SpeakeasyMetadata({ data: "form, name=destination_longitude;" })
   destinationLongitude: number;
 
-  @Metadata({ data: "form, name=origin_airport_code;" })
+  @SpeakeasyMetadata({ data: "form, name=origin_airport_code;" })
   originAirportCode?: string;
 
-  @Metadata({ data: "form, name=origin_latitude;" })
+  @SpeakeasyMetadata({ data: "form, name=origin_latitude;" })
   originLatitude: number;
 
-  @Metadata({ data: "form, name=origin_longitude;" })
+  @SpeakeasyMetadata({ data: "form, name=origin_longitude;" })
   originLongitude: number;
 
-  @Metadata({ data: "form, name=volumetric_weight;" })
+  @SpeakeasyMetadata({ data: "form, name=volumetric_weight;" })
   volumetricWeight: number;
 
-  @Metadata({ data: "form, name=waybill_type;" })
+  @SpeakeasyMetadata({ data: "form, name=waybill_type;" })
   waybillType: string;
 }
 
 
 export class EcommerceDeliveryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EcommerceDeliveryHeaders;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: EcommerceDeliveryRequestBody;
 }
 
 
 export class EcommerceDeliveryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Run } from "./run";
+
 
 
 // ListRunsResult
@@ -8,9 +8,9 @@ import { Run } from "./run";
  * Represents the result of a list runs request.
 **/
 export class ListRunsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=runs", elemType: shared.Run })
+  @SpeakeasyMetadata({ data: "json, name=runs", elemType: Run })
   runs?: Run[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DiskInfo
+// Describes a disk.
 type DiskInfo struct {
 	IsSystemDisk *bool   `json:"isSystemDisk,omitempty"`
 	Name         *string `json:"name,omitempty"`

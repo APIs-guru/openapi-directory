@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SamlSsoInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details that are applicable when `sso_mode` == `SAML_SSO`.
 **/
 export class SamlSsoInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inboundSamlSsoProfile" })
+  @SpeakeasyMetadata({ data: "json, name=inboundSamlSsoProfile" })
   inboundSamlSsoProfile?: string;
 }

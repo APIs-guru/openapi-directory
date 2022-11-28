@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressPathParams:
-    google_email_address: str = field(default=None, metadata={'path_param': { 'field_name': 'googleEmailAddress', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    google_email_address: str = field(metadata={'path_param': { 'field_name': 'googleEmailAddress', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressQueryParams:
 
 @dataclass
 class GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressRequest:
-    path_params: GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressPathParams = field(default=None)
-    query_params: GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressQueryParams = field(default=None)
+    path_params: GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressPathParams = field()
+    query_params: GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressQueryParams = field()
     
 
 @dataclass
 class GetSetupV1ResourcesIDCalendarAuthGoogleGoogleEmailAddressResponse:
+    content_type: str = field()
+    status_code: int = field()
     calendar_auth_view_model: Optional[shared.CalendarAuthViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

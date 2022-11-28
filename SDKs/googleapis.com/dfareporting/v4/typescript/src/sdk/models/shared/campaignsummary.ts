@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CampaignSummary
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a summarized campaign information associated with this invoice.
 **/
 export class CampaignSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingInvoiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=billingInvoiceCode" })
   billingInvoiceCode?: string;
 
-  @Metadata({ data: "json, name=campaignId" })
+  @SpeakeasyMetadata({ data: "json, name=campaignId" })
   campaignId?: string;
 
-  @Metadata({ data: "json, name=preTaxAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=preTaxAmountMicros" })
   preTaxAmountMicros?: string;
 
-  @Metadata({ data: "json, name=taxAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=taxAmountMicros" })
   taxAmountMicros?: string;
 
-  @Metadata({ data: "json, name=totalAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=totalAmountMicros" })
   totalAmountMicros?: string;
 }

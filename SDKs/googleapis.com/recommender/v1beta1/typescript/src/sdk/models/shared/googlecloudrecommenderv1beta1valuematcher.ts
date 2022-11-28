@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommenderV1beta1ValueMatcher
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains various matching options for values for a GCP resource field.
 **/
 export class GoogleCloudRecommenderV1beta1ValueMatcher extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchesPattern" })
+  @SpeakeasyMetadata({ data: "json, name=matchesPattern" })
   matchesPattern?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JwtLocation } from "./jwtlocation";
+
 
 
 // AuthProvider
@@ -8,21 +8,21 @@ import { JwtLocation } from "./jwtlocation";
  * Configuration for an authentication provider, including support for [JSON Web Token (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
 **/
 export class AuthProvider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audiences" })
+  @SpeakeasyMetadata({ data: "json, name=audiences" })
   audiences?: string;
 
-  @Metadata({ data: "json, name=authorizationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationUrl" })
   authorizationUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=jwksUri" })
+  @SpeakeasyMetadata({ data: "json, name=jwksUri" })
   jwksUri?: string;
 
-  @Metadata({ data: "json, name=jwtLocations", elemType: shared.JwtLocation })
+  @SpeakeasyMetadata({ data: "json, name=jwtLocations", elemType: JwtLocation })
   jwtLocations?: JwtLocation[];
 }

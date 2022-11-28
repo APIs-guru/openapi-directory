@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteInstanceProfileActionEnum(str, Enum):
     DELETE_INSTANCE_PROFILE = "DeleteInstanceProfile"
@@ -10,9 +14,9 @@ class GetDeleteInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteInstanceProfileQueryParams:
-    action: GetDeleteInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    instance_profile_name: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
-    version: GetDeleteInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_profile_name: str = field(metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
+    version: GetDeleteInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteInstanceProfileHeaders:
 
 @dataclass
 class GetDeleteInstanceProfileRequest:
-    query_params: GetDeleteInstanceProfileQueryParams = field(default=None)
-    headers: GetDeleteInstanceProfileHeaders = field(default=None)
+    headers: GetDeleteInstanceProfileHeaders = field()
+    query_params: GetDeleteInstanceProfileQueryParams = field()
     
 
 @dataclass
 class GetDeleteInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

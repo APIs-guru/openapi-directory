@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StoryIdCollaboratorsUseridPermissiontypeGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=permissiontype" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permissiontype" })
   permissiontype: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" })
   storyCollaboratorUserid: string;
 }
 
 
 export class StoryIdCollaboratorsUseridPermissiontypeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StoryIdCollaboratorsUseridPermissiontypeGetPathParams;
 }
 
 
 export class StoryIdCollaboratorsUseridPermissiontypeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetail?: any;
 }

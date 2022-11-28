@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://servicequotas.{region}.amazonaws.com",
 	"https://servicequotas.{region}.amazonaws.com",
 	"http://servicequotas.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/servicequotas/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateServiceQuotaTemplate - Associates your quota request template with your organization. When a new account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.
 func (s *SDK) AssociateServiceQuotaTemplate(ctx context.Context, request operations.AssociateServiceQuotaTemplateRequest) (*operations.AssociateServiceQuotaTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.AssociateServiceQuotaTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateServiceQuotaTemplate(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -191,8 +218,9 @@ func (s *SDK) AssociateServiceQuotaTemplate(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteServiceQuotaIncreaseRequestFromTemplate - Deletes the quota increase request for the specified quota from your quota request template.
 func (s *SDK) DeleteServiceQuotaIncreaseRequestFromTemplate(ctx context.Context, request operations.DeleteServiceQuotaIncreaseRequestFromTemplateRequest) (*operations.DeleteServiceQuotaIncreaseRequestFromTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -212,7 +240,7 @@ func (s *SDK) DeleteServiceQuotaIncreaseRequestFromTemplate(ctx context.Context,
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -332,8 +360,9 @@ func (s *SDK) DeleteServiceQuotaIncreaseRequestFromTemplate(ctx context.Context,
 	return res, nil
 }
 
+// DisassociateServiceQuotaTemplate - Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new accounts in your organization. Disabling a quota request template does not apply its quota increase requests.
 func (s *SDK) DisassociateServiceQuotaTemplate(ctx context.Context, request operations.DisassociateServiceQuotaTemplateRequest) (*operations.DisassociateServiceQuotaTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.DisassociateServiceQuotaTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -353,7 +382,7 @@ func (s *SDK) DisassociateServiceQuotaTemplate(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -463,8 +492,9 @@ func (s *SDK) DisassociateServiceQuotaTemplate(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAwsDefaultServiceQuota - Retrieves the default value for the specified quota. The default value does not reflect any quota increases.
 func (s *SDK) GetAwsDefaultServiceQuota(ctx context.Context, request operations.GetAwsDefaultServiceQuotaRequest) (*operations.GetAwsDefaultServiceQuotaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetAWSDefaultServiceQuota"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -484,7 +514,7 @@ func (s *SDK) GetAwsDefaultServiceQuota(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -564,8 +594,9 @@ func (s *SDK) GetAwsDefaultServiceQuota(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAssociationForServiceQuotaTemplate - Retrieves the status of the association for the quota request template.
 func (s *SDK) GetAssociationForServiceQuotaTemplate(ctx context.Context, request operations.GetAssociationForServiceQuotaTemplateRequest) (*operations.GetAssociationForServiceQuotaTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -585,7 +616,7 @@ func (s *SDK) GetAssociationForServiceQuotaTemplate(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -695,8 +726,9 @@ func (s *SDK) GetAssociationForServiceQuotaTemplate(ctx context.Context, request
 	return res, nil
 }
 
+// GetRequestedServiceQuotaChange - Retrieves information about the specified quota increase request.
 func (s *SDK) GetRequestedServiceQuotaChange(ctx context.Context, request operations.GetRequestedServiceQuotaChangeRequest) (*operations.GetRequestedServiceQuotaChangeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetRequestedServiceQuotaChange"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -716,7 +748,7 @@ func (s *SDK) GetRequestedServiceQuotaChange(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -796,8 +828,9 @@ func (s *SDK) GetRequestedServiceQuotaChange(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetServiceQuota - Retrieves the applied quota value for the specified quota. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
 func (s *SDK) GetServiceQuota(ctx context.Context, request operations.GetServiceQuotaRequest) (*operations.GetServiceQuotaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuota"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -817,7 +850,7 @@ func (s *SDK) GetServiceQuota(ctx context.Context, request operations.GetService
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -897,8 +930,9 @@ func (s *SDK) GetServiceQuota(ctx context.Context, request operations.GetService
 	return res, nil
 }
 
+// GetServiceQuotaIncreaseRequestFromTemplate - Retrieves information about the specified quota increase request in your quota request template.
 func (s *SDK) GetServiceQuotaIncreaseRequestFromTemplate(ctx context.Context, request operations.GetServiceQuotaIncreaseRequestFromTemplateRequest) (*operations.GetServiceQuotaIncreaseRequestFromTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -918,7 +952,7 @@ func (s *SDK) GetServiceQuotaIncreaseRequestFromTemplate(ctx context.Context, re
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1038,8 +1072,9 @@ func (s *SDK) GetServiceQuotaIncreaseRequestFromTemplate(ctx context.Context, re
 	return res, nil
 }
 
+// ListAwsDefaultServiceQuotas - Lists the default values for the quotas for the specified AWS service. A default value does not reflect any quota increases.
 func (s *SDK) ListAwsDefaultServiceQuotas(ctx context.Context, request operations.ListAwsDefaultServiceQuotasRequest) (*operations.ListAwsDefaultServiceQuotasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListAWSDefaultServiceQuotas"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1061,7 +1096,7 @@ func (s *SDK) ListAwsDefaultServiceQuotas(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1151,8 +1186,9 @@ func (s *SDK) ListAwsDefaultServiceQuotas(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListRequestedServiceQuotaChangeHistory - Retrieves the quota increase requests for the specified service.
 func (s *SDK) ListRequestedServiceQuotaChangeHistory(ctx context.Context, request operations.ListRequestedServiceQuotaChangeHistoryRequest) (*operations.ListRequestedServiceQuotaChangeHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1174,7 +1210,7 @@ func (s *SDK) ListRequestedServiceQuotaChangeHistory(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1264,8 +1300,9 @@ func (s *SDK) ListRequestedServiceQuotaChangeHistory(ctx context.Context, reques
 	return res, nil
 }
 
+// ListRequestedServiceQuotaChangeHistoryByQuota - Retrieves the quota increase requests for the specified quota.
 func (s *SDK) ListRequestedServiceQuotaChangeHistoryByQuota(ctx context.Context, request operations.ListRequestedServiceQuotaChangeHistoryByQuotaRequest) (*operations.ListRequestedServiceQuotaChangeHistoryByQuotaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1287,7 +1324,7 @@ func (s *SDK) ListRequestedServiceQuotaChangeHistoryByQuota(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1377,8 +1414,9 @@ func (s *SDK) ListRequestedServiceQuotaChangeHistoryByQuota(ctx context.Context,
 	return res, nil
 }
 
+// ListServiceQuotaIncreaseRequestsInTemplate - Lists the quota increase requests in the specified quota request template.
 func (s *SDK) ListServiceQuotaIncreaseRequestsInTemplate(ctx context.Context, request operations.ListServiceQuotaIncreaseRequestsInTemplateRequest) (*operations.ListServiceQuotaIncreaseRequestsInTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1400,7 +1438,7 @@ func (s *SDK) ListServiceQuotaIncreaseRequestsInTemplate(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1510,8 +1548,9 @@ func (s *SDK) ListServiceQuotaIncreaseRequestsInTemplate(ctx context.Context, re
 	return res, nil
 }
 
+// ListServiceQuotas - Lists the applied quota values for the specified AWS service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
 func (s *SDK) ListServiceQuotas(ctx context.Context, request operations.ListServiceQuotasRequest) (*operations.ListServiceQuotasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotas"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1533,7 +1572,7 @@ func (s *SDK) ListServiceQuotas(ctx context.Context, request operations.ListServ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1623,8 +1662,9 @@ func (s *SDK) ListServiceQuotas(ctx context.Context, request operations.ListServ
 	return res, nil
 }
 
+// ListServices - Lists the names and codes for the services integrated with Service Quotas.
 func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesRequest) (*operations.ListServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListServices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1646,7 +1686,7 @@ func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1726,8 +1766,9 @@ func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesR
 	return res, nil
 }
 
+// ListTagsForResource - Returns a list of the tags assigned to the specified applied quota.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1747,7 +1788,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1827,8 +1868,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutServiceQuotaIncreaseRequestIntoTemplate - Adds a quota increase request to your quota request template.
 func (s *SDK) PutServiceQuotaIncreaseRequestIntoTemplate(ctx context.Context, request operations.PutServiceQuotaIncreaseRequestIntoTemplateRequest) (*operations.PutServiceQuotaIncreaseRequestIntoTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1848,7 +1890,7 @@ func (s *SDK) PutServiceQuotaIncreaseRequestIntoTemplate(ctx context.Context, re
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1978,8 +2020,9 @@ func (s *SDK) PutServiceQuotaIncreaseRequestIntoTemplate(ctx context.Context, re
 	return res, nil
 }
 
+// RequestServiceQuotaIncrease - Submits a quota increase request for the specified quota.
 func (s *SDK) RequestServiceQuotaIncrease(ctx context.Context, request operations.RequestServiceQuotaIncreaseRequest) (*operations.RequestServiceQuotaIncreaseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.RequestServiceQuotaIncrease"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1999,7 +2042,7 @@ func (s *SDK) RequestServiceQuotaIncrease(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2119,8 +2162,9 @@ func (s *SDK) RequestServiceQuotaIncrease(ctx context.Context, request operation
 	return res, nil
 }
 
+// TagResource - Adds tags to the specified applied quota. You can include one or more tags to add to the quota.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2140,7 +2184,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2240,8 +2284,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes tags from the specified applied quota. You can specify one or more tags to remove.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ServiceQuotasV20190624.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2261,7 +2306,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Account } from "./account";
 import { TargetLocation } from "./targetlocation";
 
+
 export enum InvitationRoleEnum {
-    AdminRoleUnspecified = "ADMIN_ROLE_UNSPECIFIED"
-,    Owner = "OWNER"
-,    CoOwner = "CO_OWNER"
-,    Manager = "MANAGER"
-,    CommunityManager = "COMMUNITY_MANAGER"
+    AdminRoleUnspecified = "ADMIN_ROLE_UNSPECIFIED",
+    Owner = "OWNER",
+    CoOwner = "CO_OWNER",
+    Manager = "MANAGER",
+    CommunityManager = "COMMUNITY_MANAGER"
 }
 
 
@@ -16,15 +17,15 @@ export enum InvitationRoleEnum {
  * Output only. Represents a pending invitation.
 **/
 export class Invitation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: InvitationRoleEnum;
 
-  @Metadata({ data: "json, name=targetAccount" })
+  @SpeakeasyMetadata({ data: "json, name=targetAccount" })
   targetAccount?: Account;
 
-  @Metadata({ data: "json, name=targetLocation" })
+  @SpeakeasyMetadata({ data: "json, name=targetLocation" })
   targetLocation?: TargetLocation;
 }

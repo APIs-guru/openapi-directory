@@ -1,7 +1,8 @@
 
 
+
 export enum ClosestEnum {
-    Either = "either"
-,    Before = "before"
-,    After = "after"
+    Either = "either",
+    Before = "before",
+    After = "after"
 }

@@ -1,4 +1,4 @@
-from .__endpointtypeselement_enum import *
+from ._endpointtypeselement_enum import *
 from .action_enum import *
 from .activitiesresponse import *
 from .activity import *

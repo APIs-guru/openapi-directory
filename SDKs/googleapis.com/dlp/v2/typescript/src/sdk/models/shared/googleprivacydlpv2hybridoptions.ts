@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2TableOptions } from "./googleprivacydlpv2tableoptions";
+
 
 
 // GooglePrivacyDlpV2HybridOptions
@@ -7,15 +8,15 @@ import { GooglePrivacyDlpV2TableOptions } from "./googleprivacydlpv2tableoptions
  * Configuration to control jobs where the content being inspected is outside of Google Cloud Platform.
 **/
 export class GooglePrivacyDlpV2HybridOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=requiredFindingLabelKeys" })
+  @SpeakeasyMetadata({ data: "json, name=requiredFindingLabelKeys" })
   requiredFindingLabelKeys?: string[];
 
-  @Metadata({ data: "json, name=tableOptions" })
+  @SpeakeasyMetadata({ data: "json, name=tableOptions" })
   tableOptions?: GooglePrivacyDlpV2TableOptions;
 }

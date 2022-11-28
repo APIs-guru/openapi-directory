@@ -1,5 +1,7 @@
 package shared
 
+// NewPublicVirtualInterfaceAllocation
+// Information about a public virtual interface to be provisioned on a connection.
 type NewPublicVirtualInterfaceAllocation struct {
 	AddressFamily        *AddressFamilyEnum  `json:"addressFamily,omitempty"`
 	AmazonAddress        *string             `json:"amazonAddress,omitempty"`

@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SignierteBelegdaten } from "./signiertebelegdaten";
 
+
 export enum BelegBelegTypenEnum {
-    Belegkreisinitialisierung = "Belegkreisinitialisierung"
-,    Kassenbericht = "Kassenbericht"
-,    Monatsabschluss = "Monatsabschluss"
-,    Startbeleg = "Startbeleg"
-,    Storno = "Storno"
-,    Systembeleg = "Systembeleg"
-,    Training = "Training"
+    Belegkreisinitialisierung = "Belegkreisinitialisierung",
+    Kassenbericht = "Kassenbericht",
+    Monatsabschluss = "Monatsabschluss",
+    Startbeleg = "Startbeleg",
+    Storno = "Storno",
+    Systembeleg = "Systembeleg",
+    Training = "Training"
 }
 
 
 export class Beleg extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Beleg-Codes" })
+  @SpeakeasyMetadata({ data: "json, name=Beleg-Codes" })
   belegCodes?: string[];
 
-  @Metadata({ data: "json, name=Beleg-Typen" })
+  @SpeakeasyMetadata({ data: "json, name=Beleg-Typen" })
   belegTypen?: BelegBelegTypenEnum[];
 
-  @Metadata({ data: "json, name=Belegdaten" })
+  @SpeakeasyMetadata({ data: "json, name=Belegdaten" })
   belegdaten?: SignierteBelegdaten;
 
-  @Metadata({ data: "json, name=JWS" })
+  @SpeakeasyMetadata({ data: "json, name=JWS" })
   jws?: string;
 
-  @Metadata({ data: "json, name=QR" })
+  @SpeakeasyMetadata({ data: "json, name=QR" })
   qr?: string;
 
-  @Metadata({ data: "json, name=QR-Link" })
+  @SpeakeasyMetadata({ data: "json, name=QR-Link" })
   qrLink?: string;
 
-  @Metadata({ data: "json, name=Registrierkasse-UUID" })
+  @SpeakeasyMetadata({ data: "json, name=Registrierkasse-UUID" })
   registrierkasseUuid?: string;
 
-  @Metadata({ data: "json, name=Signaturerstellungseinheit-UUID" })
+  @SpeakeasyMetadata({ data: "json, name=Signaturerstellungseinheit-UUID" })
   signaturerstellungseinheitUuid?: string;
 
-  @Metadata({ data: "json, name=_href" })
+  @SpeakeasyMetadata({ data: "json, name=_href" })
   href?: string;
 
-  @Metadata({ data: "json, name=_uuid" })
+  @SpeakeasyMetadata({ data: "json, name=_uuid" })
   uuid?: string;
 }

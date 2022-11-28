@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UnclaimDevicePathParams:
-    device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
+    device_id: str = field(metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class UnclaimDeviceHeaders:
 
 @dataclass
 class UnclaimDeviceRequest:
-    path_params: UnclaimDevicePathParams = field(default=None)
-    headers: UnclaimDeviceHeaders = field(default=None)
+    headers: UnclaimDeviceHeaders = field()
+    path_params: UnclaimDevicePathParams = field()
     
 
 @dataclass
 class UnclaimDeviceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unclaim_device_response: Optional[shared.UnclaimDeviceResponse] = field(default=None)
     

@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostOwnershipInstallQueryParams = /** @class */ (function (_super) {
     __extends(PostOwnershipInstallQueryParams, _super);
     function PostOwnershipInstallQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=appId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=appId" }),
         __metadata("design:type", String)
     ], PostOwnershipInstallQueryParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customData" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" }),
         __metadata("design:type", String)
     ], PostOwnershipInstallQueryParams.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=model" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=model" }),
         __metadata("design:type", String)
     ], PostOwnershipInstallQueryParams.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modelId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelId" }),
         __metadata("design:type", String)
     ], PostOwnershipInstallQueryParams.prototype, "modelId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" }),
         __metadata("design:type", String)
     ], PostOwnershipInstallQueryParams.prototype, "userId", void 0);
     return PostOwnershipInstallQueryParams;
@@ -57,7 +57,7 @@ var PostOwnershipInstallRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostOwnershipInstallQueryParams)
     ], PostOwnershipInstallRequest.prototype, "queryParams", void 0);
     return PostOwnershipInstallRequest;
@@ -69,15 +69,15 @@ var PostOwnershipInstallResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostOwnershipInstallResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostOwnershipInstallResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostOwnershipInstallResponse.prototype, "statusCode", void 0);
     return PostOwnershipInstallResponse;

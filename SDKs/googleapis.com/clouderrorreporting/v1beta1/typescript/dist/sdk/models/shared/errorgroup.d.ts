@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TrackingIssue } from "./trackingissue";
 export declare enum ErrorGroupResolutionStatusEnum {
     ResolutionStatusUnspecified = "RESOLUTION_STATUS_UNSPECIFIED",

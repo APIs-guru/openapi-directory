@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WordInfo } from "./wordinfo";
 // SpeechRecognitionAlternative
 /**
  * Alternative hypotheses (a.k.a. n-best list).
@@ -34,15 +34,15 @@ var SpeechRecognitionAlternative = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=confidence" }),
+        SpeakeasyMetadata({ data: "json, name=confidence" }),
         __metadata("design:type", Number)
     ], SpeechRecognitionAlternative.prototype, "confidence", void 0);
     __decorate([
-        Metadata({ data: "json, name=transcript" }),
+        SpeakeasyMetadata({ data: "json, name=transcript" }),
         __metadata("design:type", String)
     ], SpeechRecognitionAlternative.prototype, "transcript", void 0);
     __decorate([
-        Metadata({ data: "json, name=words", elemType: shared.WordInfo }),
+        SpeakeasyMetadata({ data: "json, name=words", elemType: WordInfo }),
         __metadata("design:type", Array)
     ], SpeechRecognitionAlternative.prototype, "words", void 0);
     return SpeechRecognitionAlternative;

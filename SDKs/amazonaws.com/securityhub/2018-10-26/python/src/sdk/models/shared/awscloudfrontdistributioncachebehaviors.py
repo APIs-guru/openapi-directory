@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import awscloudfrontdistributioncachebehavior
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AwsCloudFrontDistributionCacheBehaviors:
-    items: Optional[List[awscloudfrontdistributioncachebehavior.AwsCloudFrontDistributionCacheBehavior]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Items' }})
+    r"""AwsCloudFrontDistributionCacheBehaviors
+    Provides information about caching for the distribution.
+    """
+    
+    items: Optional[List[AwsCloudFrontDistributionCacheBehavior]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Items') }})
     

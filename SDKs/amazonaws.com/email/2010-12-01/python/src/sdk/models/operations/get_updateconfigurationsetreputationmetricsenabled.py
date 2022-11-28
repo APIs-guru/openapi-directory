@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateConfigurationSetReputationMetricsEnabledActionEnum(str, Enum):
     UPDATE_CONFIGURATION_SET_REPUTATION_METRICS_ENABLED = "UpdateConfigurationSetReputationMetricsEnabled"
@@ -10,10 +14,10 @@ class GetUpdateConfigurationSetReputationMetricsEnabledVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateConfigurationSetReputationMetricsEnabledQueryParams:
-    action: GetUpdateConfigurationSetReputationMetricsEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    configuration_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
-    enabled: bool = field(default=None, metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
-    version: GetUpdateConfigurationSetReputationMetricsEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateConfigurationSetReputationMetricsEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    configuration_set_name: str = field(metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
+    enabled: bool = field(metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
+    version: GetUpdateConfigurationSetReputationMetricsEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateConfigurationSetReputationMetricsEnabledHeaders:
 
 @dataclass
 class GetUpdateConfigurationSetReputationMetricsEnabledRequest:
-    query_params: GetUpdateConfigurationSetReputationMetricsEnabledQueryParams = field(default=None)
-    headers: GetUpdateConfigurationSetReputationMetricsEnabledHeaders = field(default=None)
+    headers: GetUpdateConfigurationSetReputationMetricsEnabledHeaders = field()
+    query_params: GetUpdateConfigurationSetReputationMetricsEnabledQueryParams = field()
     
 
 @dataclass
 class GetUpdateConfigurationSetReputationMetricsEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

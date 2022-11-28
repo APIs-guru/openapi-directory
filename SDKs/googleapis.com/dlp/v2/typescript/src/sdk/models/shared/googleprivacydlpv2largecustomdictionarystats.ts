@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2LargeCustomDictionaryStats
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Summary statistics of a custom dictionary.
 **/
 export class GooglePrivacyDlpV2LargeCustomDictionaryStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approxNumPhrases" })
+  @SpeakeasyMetadata({ data: "json, name=approxNumPhrases" })
   approxNumPhrases?: string;
 }

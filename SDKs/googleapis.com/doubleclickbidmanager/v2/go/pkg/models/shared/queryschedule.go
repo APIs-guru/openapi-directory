@@ -13,6 +13,8 @@ const (
 	QueryScheduleFrequencyEnumYearly               QueryScheduleFrequencyEnum = "YEARLY"
 )
 
+// QuerySchedule
+// Information on when and how frequently to run a query.
 type QuerySchedule struct {
 	EndDate             *Date                       `json:"endDate,omitempty"`
 	Frequency           *QueryScheduleFrequencyEnum `json:"frequency,omitempty"`

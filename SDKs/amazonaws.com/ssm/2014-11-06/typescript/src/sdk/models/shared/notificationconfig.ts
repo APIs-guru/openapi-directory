@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationEventEnum } from "./notificationeventenum";
 import { NotificationTypeEnum } from "./notificationtypeenum";
+
 
 
 // NotificationConfig
@@ -8,12 +9,12 @@ import { NotificationTypeEnum } from "./notificationtypeenum";
  * Configurations for sending notifications.
 **/
 export class NotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NotificationArn" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationArn" })
   notificationArn?: string;
 
-  @Metadata({ data: "json, name=NotificationEvents" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationEvents" })
   notificationEvents?: NotificationEventEnum[];
 
-  @Metadata({ data: "json, name=NotificationType" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationType" })
   notificationType?: NotificationTypeEnum;
 }

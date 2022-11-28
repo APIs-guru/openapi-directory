@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const FETCHFAXMEDIA_SERVERS = [
-	"https://fax.twilio.com",
-];
 
+export const FetchFaxMediaServerList = [
+	"https://fax.twilio.com",
+] as const;
 
 
 export class FetchFaxMediaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" })
   faxSid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=Sid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" })
   sid: string;
 }
 
 
 export class FetchFaxMediaSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   accountSidAuthToken: shared.SchemeAccountSidAuthToken;
 }
 
 
 export class FetchFaxMediaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FetchFaxMediaPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FetchFaxMediaSecurity;
 }
 
 
 export class FetchFaxMediaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   faxV1FaxFaxMedia?: shared.FaxV1FaxFaxMedia;
 }

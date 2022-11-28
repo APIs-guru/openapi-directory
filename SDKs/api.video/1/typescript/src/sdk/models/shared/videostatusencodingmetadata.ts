@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VideostatusEncodingMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=aspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=audioCodec" })
+  @SpeakeasyMetadata({ data: "json, name=audioCodec" })
   audioCodec?: string;
 
-  @Metadata({ data: "json, name=bitrate" })
+  @SpeakeasyMetadata({ data: "json, name=bitrate" })
   bitrate?: number;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=framerate" })
+  @SpeakeasyMetadata({ data: "json, name=framerate" })
   framerate?: number;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=samplerate" })
+  @SpeakeasyMetadata({ data: "json, name=samplerate" })
   samplerate?: number;
 
-  @Metadata({ data: "json, name=videoCodec" })
+  @SpeakeasyMetadata({ data: "json, name=videoCodec" })
   videoCodec?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

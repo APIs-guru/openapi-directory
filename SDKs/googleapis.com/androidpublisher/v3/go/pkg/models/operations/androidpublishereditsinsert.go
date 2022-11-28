@@ -30,7 +30,6 @@ type AndroidpublisherEditsInsertSecurity struct {
 type AndroidpublisherEditsInsertRequest struct {
 	PathParams  AndroidpublisherEditsInsertPathParams
 	QueryParams AndroidpublisherEditsInsertQueryParams
-	Request     *shared.AppEdit `request:"mediaType=application/json"`
 	Security    AndroidpublisherEditsInsertSecurity
 }
 

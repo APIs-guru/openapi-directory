@@ -1,91 +1,92 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTenantTenantnamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantname" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantname" })
   tenantname: string;
 }
 
 
-export class GetTenantTenantnameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTenantTenantnamePathParams;
-}
-
-
 export class GetTenantTenantname200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@id" })
+  @SpeakeasyMetadata({ data: "json, name=@id" })
   atId?: string;
 
-  @Metadata({ data: "json, name=about" })
+  @SpeakeasyMetadata({ data: "json, name=about" })
   about?: string;
 
-  @Metadata({ data: "json, name=attribution" })
+  @SpeakeasyMetadata({ data: "json, name=attribution" })
   attribution?: string;
 
-  @Metadata({ data: "json, name=depot" })
+  @SpeakeasyMetadata({ data: "json, name=depot" })
   depot?: string;
 
-  @Metadata({ data: "json, name=depots" })
+  @SpeakeasyMetadata({ data: "json, name=depots" })
   depots?: any[];
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: boolean;
 
-  @Metadata({ data: "json, name=factories" })
+  @SpeakeasyMetadata({ data: "json, name=factories" })
   factories?: any[];
 
-  @Metadata({ data: "json, name=factory" })
+  @SpeakeasyMetadata({ data: "json, name=factory" })
   factory?: string;
 
-  @Metadata({ data: "json, name=favicon" })
+  @SpeakeasyMetadata({ data: "json, name=favicon" })
   favicon?: string;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer: string;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 
-  @Metadata({ data: "json, name=sheet" })
+  @SpeakeasyMetadata({ data: "json, name=sheet" })
   sheet?: string;
 
-  @Metadata({ data: "json, name=sub" })
+  @SpeakeasyMetadata({ data: "json, name=sub" })
   sub: string;
 
-  @Metadata({ data: "json, name=subtenant" })
+  @SpeakeasyMetadata({ data: "json, name=subtenant" })
   subtenant?: boolean;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 
-  @Metadata({ data: "json, name=theme" })
+  @SpeakeasyMetadata({ data: "json, name=theme" })
   theme?: string;
 
-  @Metadata({ data: "json, name=userinfo" })
+  @SpeakeasyMetadata({ data: "json, name=userinfo" })
   userinfo?: string;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 }
 
 
+export class GetTenantTenantnameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTenantTenantnamePathParams;
+}
+
+
 export class GetTenantTenantnameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTenantTenantname200ApplicationJsonObject?: GetTenantTenantname200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

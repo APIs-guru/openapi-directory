@@ -1,102 +1,103 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DescribeSavingsPlansOfferingsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum DescribeSavingsPlansOfferingsRequestBodyProductTypeEnum {
-    Ec2 = "EC2"
-,    Fargate = "Fargate"
-,    Lambda = "Lambda"
-,    SageMaker = "SageMaker"
+    Ec2 = "EC2",
+    Fargate = "Fargate",
+    Lambda = "Lambda",
+    SageMaker = "SageMaker"
 }
 
 
 export class DescribeSavingsPlansOfferingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencies" })
+  @SpeakeasyMetadata({ data: "json, name=currencies" })
   currencies?: shared.CurrencyCodeEnum[];
 
-  @Metadata({ data: "json, name=descriptions" })
+  @SpeakeasyMetadata({ data: "json, name=descriptions" })
   descriptions?: string[];
 
-  @Metadata({ data: "json, name=durations" })
+  @SpeakeasyMetadata({ data: "json, name=durations" })
   durations?: number[];
 
-  @Metadata({ data: "json, name=filters", elemType: shared.SavingsPlanOfferingFilterElement })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: shared.SavingsPlanOfferingFilterElement })
   filters?: shared.SavingsPlanOfferingFilterElement[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=offeringIds" })
+  @SpeakeasyMetadata({ data: "json, name=offeringIds" })
   offeringIds?: string[];
 
-  @Metadata({ data: "json, name=operations" })
+  @SpeakeasyMetadata({ data: "json, name=operations" })
   operations?: string[];
 
-  @Metadata({ data: "json, name=paymentOptions" })
+  @SpeakeasyMetadata({ data: "json, name=paymentOptions" })
   paymentOptions?: shared.SavingsPlanPaymentOptionEnum[];
 
-  @Metadata({ data: "json, name=planTypes" })
+  @SpeakeasyMetadata({ data: "json, name=planTypes" })
   planTypes?: shared.SavingsPlanTypeEnum[];
 
-  @Metadata({ data: "json, name=productType" })
+  @SpeakeasyMetadata({ data: "json, name=productType" })
   productType?: DescribeSavingsPlansOfferingsRequestBodyProductTypeEnum;
 
-  @Metadata({ data: "json, name=serviceCodes" })
+  @SpeakeasyMetadata({ data: "json, name=serviceCodes" })
   serviceCodes?: string[];
 
-  @Metadata({ data: "json, name=usageTypes" })
+  @SpeakeasyMetadata({ data: "json, name=usageTypes" })
   usageTypes?: string[];
 }
 
 
 export class DescribeSavingsPlansOfferingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DescribeSavingsPlansOfferingsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: DescribeSavingsPlansOfferingsRequestBody;
 }
 
 
 export class DescribeSavingsPlansOfferingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   describeSavingsPlansOfferingsResponse?: shared.DescribeSavingsPlansOfferingsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

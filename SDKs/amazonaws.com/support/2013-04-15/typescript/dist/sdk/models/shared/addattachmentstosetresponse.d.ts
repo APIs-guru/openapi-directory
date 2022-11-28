@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The ID and expiry time of the attachment set returned by the <a>AddAttachmentsToSet</a> operation.
 **/

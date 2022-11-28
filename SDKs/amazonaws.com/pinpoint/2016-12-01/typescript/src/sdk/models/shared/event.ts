@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Session } from "./session";
+
 
 
 // Event
@@ -7,33 +8,33 @@ import { Session } from "./session";
  * Specifies information about an event that reports data to Amazon Pinpoint.
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=AppPackageName" })
   appPackageName?: string;
 
-  @Metadata({ data: "json, name=AppTitle" })
+  @SpeakeasyMetadata({ data: "json, name=AppTitle" })
   appTitle?: string;
 
-  @Metadata({ data: "json, name=AppVersionCode" })
+  @SpeakeasyMetadata({ data: "json, name=AppVersionCode" })
   appVersionCode?: string;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ClientSdkVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ClientSdkVersion" })
   clientSdkVersion?: string;
 
-  @Metadata({ data: "json, name=EventType" })
+  @SpeakeasyMetadata({ data: "json, name=EventType" })
   eventType: string;
 
-  @Metadata({ data: "json, name=Metrics" })
+  @SpeakeasyMetadata({ data: "json, name=Metrics" })
   metrics?: Map<string, number>;
 
-  @Metadata({ data: "json, name=SdkName" })
+  @SpeakeasyMetadata({ data: "json, name=SdkName" })
   sdkName?: string;
 
-  @Metadata({ data: "json, name=Session" })
+  @SpeakeasyMetadata({ data: "json, name=Session" })
   session?: Session;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp: string;
 }

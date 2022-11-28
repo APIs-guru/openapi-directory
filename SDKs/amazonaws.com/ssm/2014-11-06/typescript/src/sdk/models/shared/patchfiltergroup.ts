@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchFilter } from "./patchfilter";
+
 
 
 // PatchFilterGroup
@@ -8,6 +8,6 @@ import { PatchFilter } from "./patchfilter";
  * A set of patch filters, typically used for approval rules.
 **/
 export class PatchFilterGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PatchFilters", elemType: shared.PatchFilter })
+  @SpeakeasyMetadata({ data: "json, name=PatchFilters", elemType: PatchFilter })
   patchFilters: PatchFilter[];
 }

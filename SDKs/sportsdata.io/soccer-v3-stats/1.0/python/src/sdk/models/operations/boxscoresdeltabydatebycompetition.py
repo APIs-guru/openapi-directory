@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 
 class BoxScoresDeltaByDateByCompetitionFormatEnum(str, Enum):
     XML = "xml"
@@ -8,20 +12,20 @@ class BoxScoresDeltaByDateByCompetitionFormatEnum(str, Enum):
 
 @dataclass
 class BoxScoresDeltaByDateByCompetitionPathParams:
-    competition: str = field(default=None, metadata={'path_param': { 'field_name': 'competition', 'style': 'simple', 'explode': False }})
-    date: str = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
-    format: BoxScoresDeltaByDateByCompetitionFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    minutes: str = field(default=None, metadata={'path_param': { 'field_name': 'minutes', 'style': 'simple', 'explode': False }})
+    competition: str = field(metadata={'path_param': { 'field_name': 'competition', 'style': 'simple', 'explode': False }})
+    date_: str = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    format: BoxScoresDeltaByDateByCompetitionFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    minutes: str = field(metadata={'path_param': { 'field_name': 'minutes', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class BoxScoresDeltaByDateByCompetitionRequest:
-    path_params: BoxScoresDeltaByDateByCompetitionPathParams = field(default=None)
+    path_params: BoxScoresDeltaByDateByCompetitionPathParams = field()
     
 
 @dataclass
 class BoxScoresDeltaByDateByCompetitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     box_scores: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

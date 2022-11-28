@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InvoiceResponseClarification } from "./invoiceresponseclarification";
 
+
 export enum DocumentInvoiceResponseResponseCodeEnum {
-    Ab = "AB"
-,    Ip = "IP"
-,    Uq = "UQ"
-,    Re = "RE"
-,    Ap = "AP"
-,    Pd = "PD"
+    Ab = "AB",
+    Ip = "IP",
+    Uq = "UQ",
+    Re = "RE",
+    Ap = "AP",
+    Pd = "PD"
 }
 
 
@@ -17,15 +17,15 @@ export enum DocumentInvoiceResponseResponseCodeEnum {
  * The invoice response to send.
 **/
 export class DocumentInvoiceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clarifications", elemType: shared.InvoiceResponseClarification })
+  @SpeakeasyMetadata({ data: "json, name=clarifications", elemType: InvoiceResponseClarification })
   clarifications?: InvoiceResponseClarification[];
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=responseCode" })
+  @SpeakeasyMetadata({ data: "json, name=responseCode" })
   responseCode: DocumentInvoiceResponseResponseCodeEnum;
 }

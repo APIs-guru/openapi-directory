@@ -1,5 +1,7 @@
 package shared
 
+// AwsAPIGatewayRestAPIDetails
+// Contains information about a REST API in version 1 of Amazon API Gateway.
 type AwsAPIGatewayRestAPIDetails struct {
 	APIKeySource           *string                             `json:"ApiKeySource,omitempty"`
 	BinaryMediaTypes       []string                            `json:"BinaryMediaTypes,omitempty"`

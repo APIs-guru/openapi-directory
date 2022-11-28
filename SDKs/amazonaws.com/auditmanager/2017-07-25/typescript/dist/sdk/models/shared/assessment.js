@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsAccount } from "./awsaccount";
 import { AssessmentFramework } from "./assessmentframework";
 import { AssessmentMetadata } from "./assessmentmetadata";
@@ -36,23 +36,23 @@ var Assessment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Assessment.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsAccount" }),
+        SpeakeasyMetadata({ data: "json, name=awsAccount" }),
         __metadata("design:type", AwsAccount)
     ], Assessment.prototype, "awsAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=framework" }),
+        SpeakeasyMetadata({ data: "json, name=framework" }),
         __metadata("design:type", AssessmentFramework)
     ], Assessment.prototype, "framework", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", AssessmentMetadata)
     ], Assessment.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], Assessment.prototype, "tags", void 0);
     return Assessment;

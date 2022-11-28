@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicDnsPropertiesMutable } from "./publicdnspropertiesmutable";
+
 
 
 // PublicDnsNamespaceProperties
@@ -7,6 +8,6 @@ import { PublicDnsPropertiesMutable } from "./publicdnspropertiesmutable";
  * DNS properties for the public DNS namespace.
 **/
 export class PublicDnsNamespaceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DnsProperties" })
+  @SpeakeasyMetadata({ data: "json, name=DnsProperties" })
   dnsProperties: PublicDnsPropertiesMutable;
 }

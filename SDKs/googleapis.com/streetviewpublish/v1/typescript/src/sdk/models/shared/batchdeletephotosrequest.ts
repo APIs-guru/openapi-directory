@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchDeletePhotosRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to delete multiple Photos.
 **/
 export class BatchDeletePhotosRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=photoIds" })
+  @SpeakeasyMetadata({ data: "json, name=photoIds" })
   photoIds?: string[];
 }

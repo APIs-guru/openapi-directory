@@ -1,5 +1,7 @@
 package shared
 
+// Registry
+// The details of a public registry.
 type Registry struct {
 	Aliases     []RegistryAlias `json:"aliases"`
 	RegistryArn string          `json:"registryArn"`

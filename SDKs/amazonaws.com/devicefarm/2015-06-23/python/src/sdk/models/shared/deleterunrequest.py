@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DeleteRunRequest:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
+    r"""DeleteRunRequest
+    Represents a request to the delete run operation.
+    """
+    
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
     

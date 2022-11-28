@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribePoliciesActionEnum(str, Enum):
     DESCRIBE_POLICIES = "DescribePolicies"
@@ -10,13 +14,13 @@ class GetDescribePoliciesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribePoliciesQueryParams:
-    action: GetDescribePoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribePoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribePoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     auto_scaling_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
     policy_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'PolicyNames', 'style': 'form', 'explode': True }})
     policy_types: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'PolicyTypes', 'style': 'form', 'explode': True }})
-    version: GetDescribePoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribePoliciesHeaders:
 
 @dataclass
 class GetDescribePoliciesRequest:
-    query_params: GetDescribePoliciesQueryParams = field(default=None)
-    headers: GetDescribePoliciesHeaders = field(default=None)
+    headers: GetDescribePoliciesHeaders = field()
+    query_params: GetDescribePoliciesQueryParams = field()
     
 
 @dataclass
 class GetDescribePoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

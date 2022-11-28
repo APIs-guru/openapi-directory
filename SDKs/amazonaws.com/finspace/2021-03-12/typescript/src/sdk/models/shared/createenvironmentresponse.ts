@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEnvironmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentArn" })
+  @SpeakeasyMetadata({ data: "json, name=environmentArn" })
   environmentArn?: string;
 
-  @Metadata({ data: "json, name=environmentId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentId" })
   environmentId?: string;
 
-  @Metadata({ data: "json, name=environmentUrl" })
+  @SpeakeasyMetadata({ data: "json, name=environmentUrl" })
   environmentUrl?: string;
 }

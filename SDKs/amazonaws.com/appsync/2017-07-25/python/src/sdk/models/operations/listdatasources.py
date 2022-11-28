@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDataSourcesPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class ListDataSourcesHeaders:
 
 @dataclass
 class ListDataSourcesRequest:
-    path_params: ListDataSourcesPathParams = field(default=None)
-    query_params: ListDataSourcesQueryParams = field(default=None)
-    headers: ListDataSourcesHeaders = field(default=None)
+    headers: ListDataSourcesHeaders = field()
+    path_params: ListDataSourcesPathParams = field()
+    query_params: ListDataSourcesQueryParams = field()
     
 
 @dataclass
 class ListDataSourcesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     list_data_sources_response: Optional[shared.ListDataSourcesResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

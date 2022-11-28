@@ -10,11 +10,11 @@ class GetActionResourceShowQueryParams:
 
 @dataclass
 class GetActionResourceShowRequest:
-    query_params: GetActionResourceShowQueryParams = field(default=None)
+    query_params: GetActionResourceShowQueryParams = field()
     
 
 @dataclass
 class GetActionResourceShowResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

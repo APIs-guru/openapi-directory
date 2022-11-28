@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConstraintDetail } from "./constraintdetail";
 
 
+
 export class ListConstraintsForPortfolioOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConstraintDetails", elemType: shared.ConstraintDetail })
+  @SpeakeasyMetadata({ data: "json, name=ConstraintDetails", elemType: ConstraintDetail })
   constraintDetails?: ConstraintDetail[];
 
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 }

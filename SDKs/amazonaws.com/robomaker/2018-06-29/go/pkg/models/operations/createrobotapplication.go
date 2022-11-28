@@ -14,10 +14,14 @@ type CreateRobotApplicationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateRobotApplicationRequestBodyEnvironment
+// The object that contains the Docker image URI for either your robot or simulation applications.
 type CreateRobotApplicationRequestBodyEnvironment struct {
 	URI *string `json:"uri,omitempty"`
 }
 
+// CreateRobotApplicationRequestBodyRobotSoftwareSuite
+// Information about a robot software suite (ROS distribution).
 type CreateRobotApplicationRequestBodyRobotSoftwareSuite struct {
 	Name    *shared.RobotSoftwareSuiteTypeEnum        `json:"name,omitempty"`
 	Version *shared.RobotSoftwareSuiteVersionTypeEnum `json:"version,omitempty"`

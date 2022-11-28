@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class TestnetGetTokenMetadataPathParams:
-    tokenid: str = field(default=None, metadata={'path_param': { 'field_name': 'tokenid', 'style': 'simple', 'explode': False }})
+    tokenid: str = field(metadata={'path_param': { 'field_name': 'tokenid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class TestnetGetTokenMetadataQueryParams:
 
 @dataclass
 class TestnetGetTokenMetadataRequest:
-    path_params: TestnetGetTokenMetadataPathParams = field(default=None)
-    query_params: TestnetGetTokenMetadataQueryParams = field(default=None)
+    path_params: TestnetGetTokenMetadataPathParams = field()
+    query_params: TestnetGetTokenMetadataQueryParams = field()
     
 
 @dataclass
 class TestnetGetTokenMetadataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     get_token_metadata_response: Optional[shared.GetTokenMetadataResponse] = field(default=None)
     

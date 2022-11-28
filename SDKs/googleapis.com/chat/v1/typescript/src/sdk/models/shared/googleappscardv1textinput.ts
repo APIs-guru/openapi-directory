@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1Action } from "./googleappscardv1action";
 import { GoogleAppsCardV1Suggestions } from "./googleappscardv1suggestions";
-import { GoogleAppsCardV1Action } from "./googleappscardv1action";
+
 
 export enum GoogleAppsCardV1TextInputTypeEnum {
-    SingleLine = "SINGLE_LINE"
-,    MultipleLine = "MULTIPLE_LINE"
+    SingleLine = "SINGLE_LINE",
+    MultipleLine = "MULTIPLE_LINE"
 }
 
 
 // GoogleAppsCardV1TextInput
 /** 
- * A text input is a UI item where users can input text. A text input can also have an onChange action and suggestions.
+ * A field in which users can enter text. Supports suggestions and on-change actions. Chat apps receive and can process the value of entered text during form input events. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/how-tos/dialogs#receive_form_data_from_dialogs). When you need to collect abstract data from users, use a text input. To collect defined data from users, use the selection input widget instead. Only supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) coming soon.
 **/
 export class GoogleAppsCardV1TextInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoCompleteAction" })
+  @SpeakeasyMetadata({ data: "json, name=autoCompleteAction" })
   autoCompleteAction?: GoogleAppsCardV1Action;
 
-  @Metadata({ data: "json, name=hintText" })
+  @SpeakeasyMetadata({ data: "json, name=hintText" })
   hintText?: string;
 
-  @Metadata({ data: "json, name=initialSuggestions" })
+  @SpeakeasyMetadata({ data: "json, name=initialSuggestions" })
   initialSuggestions?: GoogleAppsCardV1Suggestions;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=onChangeAction" })
+  @SpeakeasyMetadata({ data: "json, name=onChangeAction" })
   onChangeAction?: GoogleAppsCardV1Action;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleAppsCardV1TextInputTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

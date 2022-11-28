@@ -1,6 +1,7 @@
 
 
+
 export enum ObEntryStatus1CodeEnum {
-    Booked = "Booked"
-,    Pending = "Pending"
+    Booked = "Booked",
+    Pending = "Pending"
 }

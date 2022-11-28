@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { File } from "./file";
 import { Folder } from "./folder";
 import { SubModule } from "./submodule";
 import { SymbolicLink } from "./symboliclink";
 
 
+
 export class GetFolderOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitId" })
+  @SpeakeasyMetadata({ data: "json, name=commitId" })
   commitId: string;
 
-  @Metadata({ data: "json, name=files", elemType: shared.File })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: File })
   files?: File[];
 
-  @Metadata({ data: "json, name=folderPath" })
+  @SpeakeasyMetadata({ data: "json, name=folderPath" })
   folderPath: string;
 
-  @Metadata({ data: "json, name=subFolders", elemType: shared.Folder })
+  @SpeakeasyMetadata({ data: "json, name=subFolders", elemType: Folder })
   subFolders?: Folder[];
 
-  @Metadata({ data: "json, name=subModules", elemType: shared.SubModule })
+  @SpeakeasyMetadata({ data: "json, name=subModules", elemType: SubModule })
   subModules?: SubModule[];
 
-  @Metadata({ data: "json, name=symbolicLinks", elemType: shared.SymbolicLink })
+  @SpeakeasyMetadata({ data: "json, name=symbolicLinks", elemType: SymbolicLink })
   symbolicLinks?: SymbolicLink[];
 
-  @Metadata({ data: "json, name=treeId" })
+  @SpeakeasyMetadata({ data: "json, name=treeId" })
   treeId?: string;
 }

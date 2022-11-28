@@ -1,5 +1,8 @@
 package shared
 
+// AutoBranchCreationConfig
+//
+//	Describes the automated branch creation configuration.
 type AutoBranchCreationConfig struct {
 	BasicAuthCredentials       *string           `json:"basicAuthCredentials,omitempty"`
 	BuildSpec                  *string           `json:"buildSpec,omitempty"`

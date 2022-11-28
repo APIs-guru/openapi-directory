@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityConfig } from "./identityconfig";
 import { KerberosConfig } from "./kerberosconfig";
+
 
 
 // SecurityConfig
@@ -8,9 +9,9 @@ import { KerberosConfig } from "./kerberosconfig";
  * Security related configuration, including encryption, Kerberos, etc.
 **/
 export class SecurityConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identityConfig" })
+  @SpeakeasyMetadata({ data: "json, name=identityConfig" })
   identityConfig?: IdentityConfig;
 
-  @Metadata({ data: "json, name=kerberosConfig" })
+  @SpeakeasyMetadata({ data: "json, name=kerberosConfig" })
   kerberosConfig?: KerberosConfig;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalizedStringBundle } from "./localizedstringbundle";
-import { LocalizedStringBundle } from "./localizedstringbundle";
+
 
 
 // AchievementConfigurationDetail
@@ -8,21 +8,21 @@ import { LocalizedStringBundle } from "./localizedstringbundle";
  * An achievement configuration detail.
 **/
 export class AchievementConfigurationDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: LocalizedStringBundle;
 
-  @Metadata({ data: "json, name=iconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=iconUrl" })
   iconUrl?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: LocalizedStringBundle;
 
-  @Metadata({ data: "json, name=pointValue" })
+  @SpeakeasyMetadata({ data: "json, name=pointValue" })
   pointValue?: number;
 
-  @Metadata({ data: "json, name=sortRank" })
+  @SpeakeasyMetadata({ data: "json, name=sortRank" })
   sortRank?: number;
 }

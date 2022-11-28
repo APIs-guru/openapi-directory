@@ -1,5 +1,7 @@
 package shared
 
+// Metadata
+// Other properties of the build.
 type Metadata struct {
 	BuildFinishedOn   *string       `json:"buildFinishedOn,omitempty"`
 	BuildInvocationID *string       `json:"buildInvocationId,omitempty"`

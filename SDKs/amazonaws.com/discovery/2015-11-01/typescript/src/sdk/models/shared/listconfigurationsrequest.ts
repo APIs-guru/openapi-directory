@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationItemTypeEnum } from "./configurationitemtypeenum";
 import { Filter } from "./filter";
 import { OrderByElement } from "./orderbyelement";
 
 
+
 export class ListConfigurationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationType" })
+  @SpeakeasyMetadata({ data: "json, name=configurationType" })
   configurationType: ConfigurationItemTypeEnum;
 
-  @Metadata({ data: "json, name=filters", elemType: shared.Filter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: Filter })
   filters?: Filter[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=orderBy", elemType: shared.OrderByElement })
+  @SpeakeasyMetadata({ data: "json, name=orderBy", elemType: OrderByElement })
   orderBy?: OrderByElement[];
 }

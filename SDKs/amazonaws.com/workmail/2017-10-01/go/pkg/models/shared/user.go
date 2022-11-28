@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// User
+// The representation of an Amazon WorkMail user.
 type User struct {
 	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
 	DisplayName  *string          `json:"DisplayName,omitempty"`

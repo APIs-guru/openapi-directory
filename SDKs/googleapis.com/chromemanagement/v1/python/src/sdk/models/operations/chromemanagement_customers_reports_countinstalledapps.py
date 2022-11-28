@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromemanagementCustomersReportsCountInstalledAppsPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,20 +31,20 @@ class ChromemanagementCustomersReportsCountInstalledAppsQueryParams:
 
 @dataclass
 class ChromemanagementCustomersReportsCountInstalledAppsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromemanagementCustomersReportsCountInstalledAppsRequest:
-    path_params: ChromemanagementCustomersReportsCountInstalledAppsPathParams = field(default=None)
-    query_params: ChromemanagementCustomersReportsCountInstalledAppsQueryParams = field(default=None)
-    security: ChromemanagementCustomersReportsCountInstalledAppsSecurity = field(default=None)
+    path_params: ChromemanagementCustomersReportsCountInstalledAppsPathParams = field()
+    query_params: ChromemanagementCustomersReportsCountInstalledAppsQueryParams = field()
+    security: ChromemanagementCustomersReportsCountInstalledAppsSecurity = field()
     
 
 @dataclass
 class ChromemanagementCustomersReportsCountInstalledAppsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_management_v1_count_installed_apps_response: Optional[shared.GoogleChromeManagementV1CountInstalledAppsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

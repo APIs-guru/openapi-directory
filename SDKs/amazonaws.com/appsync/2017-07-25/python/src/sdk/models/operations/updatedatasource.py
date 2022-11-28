@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDataSourcePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,38 +29,58 @@ class UpdateDataSourceHeaders:
 @dataclass_json
 @dataclass
 class UpdateDataSourceRequestBodyDynamodbConfig:
-    aws_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'awsRegion' }})
-    delta_sync_config: Optional[shared.DeltaSyncConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deltaSyncConfig' }})
-    table_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableName' }})
-    use_caller_credentials: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useCallerCredentials' }})
-    versioned: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versioned' }})
+    r"""UpdateDataSourceRequestBodyDynamodbConfig
+    Describes an Amazon DynamoDB data source configuration.
+    """
+    
+    aws_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('awsRegion') }})
+    delta_sync_config: Optional[shared.DeltaSyncConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deltaSyncConfig') }})
+    table_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableName') }})
+    use_caller_credentials: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('useCallerCredentials') }})
+    versioned: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versioned') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateDataSourceRequestBodyElasticsearchConfig:
-    aws_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'awsRegion' }})
-    endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpoint' }})
+    r"""UpdateDataSourceRequestBodyElasticsearchConfig
+    Describes an Elasticsearch data source configuration.
+    """
+    
+    aws_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('awsRegion') }})
+    endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpoint') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateDataSourceRequestBodyHTTPConfig:
-    authorization_config: Optional[shared.AuthorizationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationConfig' }})
-    endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpoint' }})
+    r"""UpdateDataSourceRequestBodyHTTPConfig
+    Describes an HTTP data source configuration.
+    """
+    
+    authorization_config: Optional[shared.AuthorizationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizationConfig') }})
+    endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpoint') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateDataSourceRequestBodyLambdaConfig:
-    lambda_function_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lambdaFunctionArn' }})
+    r"""UpdateDataSourceRequestBodyLambdaConfig
+    Describes an Amazon Web Services Lambda data source configuration.
+    """
+    
+    lambda_function_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lambdaFunctionArn') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateDataSourceRequestBodyRelationalDatabaseConfig:
-    rds_http_endpoint_config: Optional[shared.RdsHTTPEndpointConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rdsHttpEndpointConfig' }})
-    relational_database_source_type: Optional[shared.RelationalDatabaseSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationalDatabaseSourceType' }})
+    r"""UpdateDataSourceRequestBodyRelationalDatabaseConfig
+    Describes a relational database data source configuration.
+    """
+    
+    rds_http_endpoint_config: Optional[shared.RdsHTTPEndpointConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rdsHttpEndpointConfig') }})
+    relational_database_source_type: Optional[shared.RelationalDatabaseSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationalDatabaseSourceType') }})
     
 class UpdateDataSourceRequestBodyTypeEnum(str, Enum):
     AWS_LAMBDA = "AWS_LAMBDA"
@@ -69,31 +94,31 @@ class UpdateDataSourceRequestBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateDataSourceRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    dynamodb_config: Optional[UpdateDataSourceRequestBodyDynamodbConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dynamodbConfig' }})
-    elasticsearch_config: Optional[UpdateDataSourceRequestBodyElasticsearchConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'elasticsearchConfig' }})
-    http_config: Optional[UpdateDataSourceRequestBodyHTTPConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpConfig' }})
-    lambda_config: Optional[UpdateDataSourceRequestBodyLambdaConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lambdaConfig' }})
-    relational_database_config: Optional[UpdateDataSourceRequestBodyRelationalDatabaseConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationalDatabaseConfig' }})
-    service_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceRoleArn' }})
-    type: UpdateDataSourceRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: UpdateDataSourceRequestBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    dynamodb_config: Optional[UpdateDataSourceRequestBodyDynamodbConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dynamodbConfig') }})
+    elasticsearch_config: Optional[UpdateDataSourceRequestBodyElasticsearchConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('elasticsearchConfig') }})
+    http_config: Optional[UpdateDataSourceRequestBodyHTTPConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpConfig') }})
+    lambda_config: Optional[UpdateDataSourceRequestBodyLambdaConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lambdaConfig') }})
+    relational_database_config: Optional[UpdateDataSourceRequestBodyRelationalDatabaseConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationalDatabaseConfig') }})
+    service_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceRoleArn') }})
     
 
 @dataclass
 class UpdateDataSourceRequest:
-    path_params: UpdateDataSourcePathParams = field(default=None)
-    headers: UpdateDataSourceHeaders = field(default=None)
-    request: UpdateDataSourceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDataSourceHeaders = field()
+    path_params: UpdateDataSourcePathParams = field()
+    request: UpdateDataSourceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDataSourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_data_source_response: Optional[shared.UpdateDataSourceResponse] = field(default=None)
     

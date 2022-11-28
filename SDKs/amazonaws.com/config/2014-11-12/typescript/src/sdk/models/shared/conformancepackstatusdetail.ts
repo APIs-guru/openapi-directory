@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConformancePackStateEnum } from "./conformancepackstateenum";
+
 
 
 // ConformancePackStatusDetail
@@ -7,27 +8,27 @@ import { ConformancePackStateEnum } from "./conformancepackstateenum";
  * Status details of a conformance pack.
 **/
 export class ConformancePackStatusDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConformancePackArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackArn" })
   conformancePackArn: string;
 
-  @Metadata({ data: "json, name=ConformancePackId" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackId" })
   conformancePackId: string;
 
-  @Metadata({ data: "json, name=ConformancePackName" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackName" })
   conformancePackName: string;
 
-  @Metadata({ data: "json, name=ConformancePackState" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackState" })
   conformancePackState: ConformancePackStateEnum;
 
-  @Metadata({ data: "json, name=ConformancePackStatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackStatusReason" })
   conformancePackStatusReason?: string;
 
-  @Metadata({ data: "json, name=LastUpdateCompletedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateCompletedTime" })
   lastUpdateCompletedTime?: Date;
 
-  @Metadata({ data: "json, name=LastUpdateRequestedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateRequestedTime" })
   lastUpdateRequestedTime: Date;
 
-  @Metadata({ data: "json, name=StackArn" })
+  @SpeakeasyMetadata({ data: "json, name=StackArn" })
   stackArn: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WrappingPublicKey
 /**
  * The public key component of the wrapping key. For details of the type of key this public key corresponds to, see the ImportMethod.
@@ -33,7 +33,7 @@ var WrappingPublicKey = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=pem" }),
+        SpeakeasyMetadata({ data: "json, name=pem" }),
         __metadata("design:type", String)
     ], WrappingPublicKey.prototype, "pem", void 0);
     return WrappingPublicKey;

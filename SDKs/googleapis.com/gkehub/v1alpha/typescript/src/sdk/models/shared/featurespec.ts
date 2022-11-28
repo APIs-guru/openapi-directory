@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MembershipSpec } from "./membershipspec";
 
+
 export enum FeatureSpecProvisionGoogleCaEnum {
-    GoogleCaProvisioningUnspecified = "GOOGLE_CA_PROVISIONING_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
+    GoogleCaProvisioningUnspecified = "GOOGLE_CA_PROVISIONING_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Enabled = "ENABLED"
 }
 
 
@@ -13,9 +14,9 @@ export enum FeatureSpecProvisionGoogleCaEnum {
  * **Workload Certificate**: The Hub-wide input for the WorkloadCertificate feature.
 **/
 export class FeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultConfig" })
+  @SpeakeasyMetadata({ data: "json, name=defaultConfig" })
   defaultConfig?: MembershipSpec;
 
-  @Metadata({ data: "json, name=provisionGoogleCa" })
+  @SpeakeasyMetadata({ data: "json, name=provisionGoogleCa" })
   provisionGoogleCa?: FeatureSpecProvisionGoogleCaEnum;
 }

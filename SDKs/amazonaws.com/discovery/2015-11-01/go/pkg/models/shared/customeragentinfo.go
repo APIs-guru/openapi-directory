@@ -1,5 +1,7 @@
 package shared
 
+// CustomerAgentInfo
+// Inventory data for installed discovery agents.
 type CustomerAgentInfo struct {
 	ActiveAgents      int64 `json:"activeAgents"`
 	BlackListedAgents int64 `json:"blackListedAgents"`

@@ -1,5 +1,7 @@
 package shared
 
+// AwsIamInstanceProfile
+// Information about an instance profile.
 type AwsIamInstanceProfile struct {
 	Arn                 *string                     `json:"Arn,omitempty"`
 	CreateDate          *string                     `json:"CreateDate,omitempty"`

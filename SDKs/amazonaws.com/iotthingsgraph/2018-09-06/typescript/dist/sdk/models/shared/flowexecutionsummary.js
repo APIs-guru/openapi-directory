@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowExecutionStatusEnum } from "./flowexecutionstatusenum";
 // FlowExecutionSummary
 /**
@@ -34,27 +34,27 @@ var FlowExecutionSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], FlowExecutionSummary.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=flowExecutionId" }),
+        SpeakeasyMetadata({ data: "json, name=flowExecutionId" }),
         __metadata("design:type", String)
     ], FlowExecutionSummary.prototype, "flowExecutionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=flowTemplateId" }),
+        SpeakeasyMetadata({ data: "json, name=flowTemplateId" }),
         __metadata("design:type", String)
     ], FlowExecutionSummary.prototype, "flowTemplateId", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], FlowExecutionSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=systemInstanceId" }),
+        SpeakeasyMetadata({ data: "json, name=systemInstanceId" }),
         __metadata("design:type", String)
     ], FlowExecutionSummary.prototype, "systemInstanceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], FlowExecutionSummary.prototype, "updatedAt", void 0);
     return FlowExecutionSummary;

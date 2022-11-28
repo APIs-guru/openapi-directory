@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteConfigurationSetEventDestinationActionEnum(str, Enum):
     DELETE_CONFIGURATION_SET_EVENT_DESTINATION = "DeleteConfigurationSetEventDestination"
@@ -10,10 +14,10 @@ class GetDeleteConfigurationSetEventDestinationVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteConfigurationSetEventDestinationQueryParams:
-    action: GetDeleteConfigurationSetEventDestinationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    configuration_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
-    event_destination_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EventDestinationName', 'style': 'form', 'explode': True }})
-    version: GetDeleteConfigurationSetEventDestinationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteConfigurationSetEventDestinationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    configuration_set_name: str = field(metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
+    event_destination_name: str = field(metadata={'query_param': { 'field_name': 'EventDestinationName', 'style': 'form', 'explode': True }})
+    version: GetDeleteConfigurationSetEventDestinationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteConfigurationSetEventDestinationHeaders:
 
 @dataclass
 class GetDeleteConfigurationSetEventDestinationRequest:
-    query_params: GetDeleteConfigurationSetEventDestinationQueryParams = field(default=None)
-    headers: GetDeleteConfigurationSetEventDestinationHeaders = field(default=None)
+    headers: GetDeleteConfigurationSetEventDestinationHeaders = field()
+    query_params: GetDeleteConfigurationSetEventDestinationQueryParams = field()
     
 
 @dataclass
 class GetDeleteConfigurationSetEventDestinationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

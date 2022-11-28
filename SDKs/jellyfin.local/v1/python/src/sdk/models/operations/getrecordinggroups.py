@@ -10,18 +10,18 @@ class GetRecordingGroupsQueryParams:
 
 @dataclass
 class GetRecordingGroupsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetRecordingGroupsRequest:
-    query_params: GetRecordingGroupsQueryParams = field(default=None)
-    security: GetRecordingGroupsSecurity = field(default=None)
+    query_params: GetRecordingGroupsQueryParams = field()
+    security: GetRecordingGroupsSecurity = field()
     
 
 @dataclass
 class GetRecordingGroupsResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

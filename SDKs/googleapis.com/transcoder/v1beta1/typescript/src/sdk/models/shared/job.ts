@@ -1,16 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobConfig } from "./jobconfig";
-import { FailureDetail } from "./failuredetail";
 import { OriginUri } from "./originuri";
 import { Progress } from "./progress";
+import { FailureDetail } from "./failuredetail";
+
 
 export enum JobStateEnum {
-    ProcessingStateUnspecified = "PROCESSING_STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Running = "RUNNING"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    ProcessingStateUnspecified = "PROCESSING_STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Running = "RUNNING",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
+}
+
+
+// JobInput
+/** 
+ * Transcoding job resource.
+**/
+export class JobInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=config" })
+  config?: JobConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=inputUri" })
+  inputUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=originUri" })
+  originUri?: OriginUri;
+
+  @SpeakeasyMetadata({ data: "json, name=outputUri" })
+  outputUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=priority" })
+  priority?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=progress" })
+  progress?: Progress;
+
+  @SpeakeasyMetadata({ data: "json, name=templateId" })
+  templateId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ttlAfterCompletionDays" })
+  ttlAfterCompletionDays?: number;
 }
 
 
@@ -19,48 +53,48 @@ export enum JobStateEnum {
  * Transcoding job resource.
 **/
 export class Job extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: JobConfig;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=failureDetails", elemType: shared.FailureDetail })
+  @SpeakeasyMetadata({ data: "json, name=failureDetails", elemType: FailureDetail })
   failureDetails?: FailureDetail[];
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=inputUri" })
+  @SpeakeasyMetadata({ data: "json, name=inputUri" })
   inputUri?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=originUri" })
+  @SpeakeasyMetadata({ data: "json, name=originUri" })
   originUri?: OriginUri;
 
-  @Metadata({ data: "json, name=outputUri" })
+  @SpeakeasyMetadata({ data: "json, name=outputUri" })
   outputUri?: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress?: Progress;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: JobStateEnum;
 
-  @Metadata({ data: "json, name=templateId" })
+  @SpeakeasyMetadata({ data: "json, name=templateId" })
   templateId?: string;
 
-  @Metadata({ data: "json, name=ttlAfterCompletionDays" })
+  @SpeakeasyMetadata({ data: "json, name=ttlAfterCompletionDays" })
   ttlAfterCompletionDays?: number;
 }

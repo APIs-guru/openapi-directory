@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,14 +12,14 @@ class GenerateDeviceAuthorizationCodeQueryParams:
 
 @dataclass
 class GenerateDeviceAuthorizationCodeRequest:
-    query_params: GenerateDeviceAuthorizationCodeQueryParams = field(default=None)
-    request: shared.DeviceRegistrationRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: GenerateDeviceAuthorizationCodeQueryParams = field()
+    request: shared.DeviceRegistrationRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GenerateDeviceAuthorizationCodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device_authorization_code: Optional[shared.DeviceAuthorizationCode] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

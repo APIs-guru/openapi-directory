@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComputeMessageStatsResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response containing stats for messages in the requested topic and partition.
 **/
 export class ComputeMessageStatsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageBytes" })
+  @SpeakeasyMetadata({ data: "json, name=messageBytes" })
   messageBytes?: string;
 
-  @Metadata({ data: "json, name=messageCount" })
+  @SpeakeasyMetadata({ data: "json, name=messageCount" })
   messageCount?: string;
 
-  @Metadata({ data: "json, name=minimumEventTime" })
+  @SpeakeasyMetadata({ data: "json, name=minimumEventTime" })
   minimumEventTime?: string;
 
-  @Metadata({ data: "json, name=minimumPublishTime" })
+  @SpeakeasyMetadata({ data: "json, name=minimumPublishTime" })
   minimumPublishTime?: string;
 }

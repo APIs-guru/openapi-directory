@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaPredictResponsePredictionResult } from "./googlecloudretailv2alphapredictresponsepredictionresult";
+
 
 
 // GoogleCloudRetailV2alphaPredictResponse
@@ -8,15 +8,15 @@ import { GoogleCloudRetailV2alphaPredictResponsePredictionResult } from "./googl
  * Response message for predict method.
 **/
 export class GoogleCloudRetailV2alphaPredictResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributionToken" })
+  @SpeakeasyMetadata({ data: "json, name=attributionToken" })
   attributionToken?: string;
 
-  @Metadata({ data: "json, name=missingIds" })
+  @SpeakeasyMetadata({ data: "json, name=missingIds" })
   missingIds?: string[];
 
-  @Metadata({ data: "json, name=results", elemType: shared.GoogleCloudRetailV2alphaPredictResponsePredictionResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: GoogleCloudRetailV2alphaPredictResponsePredictionResult })
   results?: GoogleCloudRetailV2alphaPredictResponsePredictionResult[];
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

@@ -32,6 +32,8 @@ const (
 	OperationStatusEnumAborting          OperationStatusEnum = "ABORTING"
 )
 
+// Operation
+// This operation resource represents operations that may have happened or are happening on the cluster. All fields are output only.
 type Operation struct {
 	ClusterConditions  []StatusCondition           `json:"clusterConditions,omitempty"`
 	Detail             *string                     `json:"detail,omitempty"`

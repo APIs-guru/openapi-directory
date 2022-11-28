@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WritableVirtualMachineInterfaceModeEnum(str, Enum):
     ACCESS = "access"
@@ -84,17 +86,16 @@ class WritableVirtualMachineInterfaceTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritableVirtualMachineInterface:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
-    mode: Optional[WritableVirtualMachineInterfaceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
-    mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mtu' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tagged_vlans: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagged_vlans' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: WritableVirtualMachineInterfaceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    untagged_vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'untagged_vlan' }})
-    virtual_machine: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtual_machine' }})
+class WritableVirtualMachineInterfaceInput:
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: WritableVirtualMachineInterfaceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mac_address') }})
+    mode: Optional[WritableVirtualMachineInterfaceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
+    mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mtu') }})
+    tagged_vlans: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagged_vlans') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    untagged_vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('untagged_vlan') }})
+    virtual_machine: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtual_machine') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyDbClusterSnapshotAttributeActionEnum;
 (function (GetModifyDbClusterSnapshotAttributeActionEnum) {
     GetModifyDbClusterSnapshotAttributeActionEnum["ModifyDbClusterSnapshotAttribute"] = "ModifyDBClusterSnapshotAttribute";
@@ -37,27 +37,27 @@ var GetModifyDbClusterSnapshotAttributeQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AttributeName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AttributeName" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeQueryParams.prototype, "attributeName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DBClusterSnapshotIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBClusterSnapshotIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeQueryParams.prototype, "dbClusterSnapshotIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ValuesToAdd" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ValuesToAdd" }),
         __metadata("design:type", Array)
     ], GetModifyDbClusterSnapshotAttributeQueryParams.prototype, "valuesToAdd", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ValuesToRemove" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ValuesToRemove" }),
         __metadata("design:type", Array)
     ], GetModifyDbClusterSnapshotAttributeQueryParams.prototype, "valuesToRemove", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeQueryParams.prototype, "version", void 0);
     return GetModifyDbClusterSnapshotAttributeQueryParams;
@@ -69,31 +69,31 @@ var GetModifyDbClusterSnapshotAttributeHeaders = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyDbClusterSnapshotAttributeHeaders;
@@ -105,11 +105,11 @@ var GetModifyDbClusterSnapshotAttributeRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyDbClusterSnapshotAttributeQueryParams)
     ], GetModifyDbClusterSnapshotAttributeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyDbClusterSnapshotAttributeHeaders)
     ], GetModifyDbClusterSnapshotAttributeRequest.prototype, "headers", void 0);
     return GetModifyDbClusterSnapshotAttributeRequest;
@@ -121,15 +121,15 @@ var GetModifyDbClusterSnapshotAttributeResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyDbClusterSnapshotAttributeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyDbClusterSnapshotAttributeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyDbClusterSnapshotAttributeResponse.prototype, "statusCode", void 0);
     return GetModifyDbClusterSnapshotAttributeResponse;

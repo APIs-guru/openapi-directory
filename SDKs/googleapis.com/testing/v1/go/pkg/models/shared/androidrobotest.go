@@ -8,6 +8,8 @@ const (
 	AndroidRoboTestRoboModeEnumRoboVersion2        AndroidRoboTestRoboModeEnum = "ROBO_VERSION_2"
 )
 
+// AndroidRoboTest
+// A test of an android application that explores the application on a virtual or physical Android Device, finding culprits and crashes as it goes.
 type AndroidRoboTest struct {
 	AppApk             *FileReference               `json:"appApk,omitempty"`
 	AppBundle          *AppBundle                   `json:"appBundle,omitempty"`

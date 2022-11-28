@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Expr } from "./expr";
 export declare class PolicyBindings extends SpeakeasyBase {
     condition?: Expr;

@@ -5,7 +5,7 @@ import (
 )
 
 type DcimRearPortTemplatesCreateRequest struct {
-	Request shared.WritableRearPortTemplate `request:"mediaType=application/json"`
+	Request shared.WritableRearPortTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimRearPortTemplatesCreateResponse struct {

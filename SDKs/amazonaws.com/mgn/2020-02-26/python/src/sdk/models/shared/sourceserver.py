@@ -1,21 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import datareplicationinfo
-from . import launchedinstance
-from . import lifecycle
-from . import sourceproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SourceServer:
-    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    data_replication_info: Optional[datareplicationinfo.DataReplicationInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataReplicationInfo' }})
-    is_archived: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isArchived' }})
-    launched_instance: Optional[launchedinstance.LaunchedInstance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'launchedInstance' }})
-    life_cycle: Optional[lifecycle.LifeCycle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifeCycle' }})
-    source_properties: Optional[sourceproperties.SourceProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceProperties' }})
-    source_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceServerID' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    data_replication_info: Optional[DataReplicationInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataReplicationInfo') }})
+    is_archived: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isArchived') }})
+    launched_instance: Optional[LaunchedInstance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('launchedInstance') }})
+    life_cycle: Optional[LifeCycle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lifeCycle') }})
+    source_properties: Optional[SourceProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceProperties') }})
+    source_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceServerID') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

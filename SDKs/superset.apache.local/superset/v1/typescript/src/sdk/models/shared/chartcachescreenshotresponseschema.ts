@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChartCacheScreenshotResponseSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cache_key" })
+  @SpeakeasyMetadata({ data: "json, name=cache_key" })
   cacheKey?: string;
 
-  @Metadata({ data: "json, name=chart_url" })
+  @SpeakeasyMetadata({ data: "json, name=chart_url" })
   chartUrl?: string;
 
-  @Metadata({ data: "json, name=image_url" })
+  @SpeakeasyMetadata({ data: "json, name=image_url" })
   imageUrl?: string;
 }

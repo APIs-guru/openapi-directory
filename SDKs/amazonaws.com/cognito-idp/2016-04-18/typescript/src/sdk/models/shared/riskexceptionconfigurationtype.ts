@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RiskExceptionConfigurationType
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The type of the configuration to override the risk decision.
 **/
 export class RiskExceptionConfigurationType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlockedIPRangeList" })
+  @SpeakeasyMetadata({ data: "json, name=BlockedIPRangeList" })
   blockedIpRangeList?: string[];
 
-  @Metadata({ data: "json, name=SkippedIPRangeList" })
+  @SpeakeasyMetadata({ data: "json, name=SkippedIPRangeList" })
   skippedIpRangeList?: string[];
 }

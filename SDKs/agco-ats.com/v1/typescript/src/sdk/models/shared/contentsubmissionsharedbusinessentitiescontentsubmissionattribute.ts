@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentSubmissionID, form, name=ContentSubmissionID;" })
+  @SpeakeasyMetadata({ data: "json, name=ContentSubmissionID, form, name=ContentSubmissionID;" })
   contentSubmissionId?: number;
 
-  @Metadata({ data: "json, name=ID, form, name=ID;" })
+  @SpeakeasyMetadata({ data: "json, name=ID, form, name=ID;" })
   id?: number;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name: string;
 
-  @Metadata({ data: "json, name=Value, form, name=Value;" })
+  @SpeakeasyMetadata({ data: "json, name=Value, form, name=Value;" })
   value?: string;
 }

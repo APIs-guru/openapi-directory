@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudRun } from "./cloudrun";
 import { Gke } from "./gke";
+
 
 
 // Destination
@@ -8,15 +9,15 @@ import { Gke } from "./gke";
  * Represents a target of an invocation over HTTP.
 **/
 export class Destination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudFunction" })
+  @SpeakeasyMetadata({ data: "json, name=cloudFunction" })
   cloudFunction?: string;
 
-  @Metadata({ data: "json, name=cloudRun" })
+  @SpeakeasyMetadata({ data: "json, name=cloudRun" })
   cloudRun?: CloudRun;
 
-  @Metadata({ data: "json, name=gke" })
+  @SpeakeasyMetadata({ data: "json, name=gke" })
   gke?: Gke;
 
-  @Metadata({ data: "json, name=workflow" })
+  @SpeakeasyMetadata({ data: "json, name=workflow" })
   workflow?: string;
 }

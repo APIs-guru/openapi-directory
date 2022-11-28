@@ -18,6 +18,8 @@ type UpdateDetectorModelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateDetectorModelRequestBodyDetectorModelDefinition
+// Information that defines how a detector operates.
 type UpdateDetectorModelRequestBodyDetectorModelDefinition struct {
 	InitialStateName *string        `json:"initialStateName,omitempty"`
 	States           []shared.State `json:"states,omitempty"`

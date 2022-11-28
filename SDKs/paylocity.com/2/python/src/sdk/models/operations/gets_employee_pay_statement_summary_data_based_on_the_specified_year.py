@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearPathParams:
-    company_id: str = field(default=None, metadata={'path_param': { 'field_name': 'companyId', 'style': 'simple', 'explode': False }})
-    employee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'employeeId', 'style': 'simple', 'explode': False }})
-    year: str = field(default=None, metadata={'path_param': { 'field_name': 'year', 'style': 'simple', 'explode': False }})
+    company_id: str = field(metadata={'path_param': { 'field_name': 'companyId', 'style': 'simple', 'explode': False }})
+    employee_id: str = field(metadata={'path_param': { 'field_name': 'employeeId', 'style': 'simple', 'explode': False }})
+    year: str = field(metadata={'path_param': { 'field_name': 'year', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,20 +20,20 @@ class GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearQueryParams:
 
 @dataclass
 class GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearSecurity:
-    paylocity_auth: shared.SchemePaylocityAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    paylocity_auth: shared.SchemePaylocityAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearRequest:
-    path_params: GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearPathParams = field(default=None)
-    query_params: GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearQueryParams = field(default=None)
-    security: GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearSecurity = field(default=None)
+    path_params: GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearPathParams = field()
+    query_params: GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearQueryParams = field()
+    security: GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearSecurity = field()
     
 
 @dataclass
 class GetsEmployeePayStatementSummaryDataBasedOnTheSpecifiedYearResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     errors: Optional[List[shared.Error]] = field(default=None)
     pay_statement_summaries: Optional[List[shared.PayStatementSummary]] = field(default=None)
     

@@ -9,6 +9,8 @@ const (
 	PostureDetailSecurityRiskEnumHardwareBackedEvaluationFailed PostureDetailSecurityRiskEnum = "HARDWARE_BACKED_EVALUATION_FAILED"
 )
 
+// PostureDetail
+// Additional details regarding the security posture of the device.
 type PostureDetail struct {
 	Advice       []UserFacingMessage            `json:"advice,omitempty"`
 	SecurityRisk *PostureDetailSecurityRiskEnum `json:"securityRisk,omitempty"`

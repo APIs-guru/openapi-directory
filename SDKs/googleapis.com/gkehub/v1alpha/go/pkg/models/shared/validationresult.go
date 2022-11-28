@@ -8,6 +8,8 @@ const (
 	ValidationResultValidatorEnumCrossProjectPermission   ValidationResultValidatorEnum = "CROSS_PROJECT_PERMISSION"
 )
 
+// ValidationResult
+// ValidationResults are results set by each validator running during ValidateCreateMembership.
 type ValidationResult struct {
 	Result    *string                        `json:"result,omitempty"`
 	Success   *bool                          `json:"success,omitempty"`

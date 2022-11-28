@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RenderableTask } from "./renderabletask";
 import { UiTemplate } from "./uitemplate";
 
 
+
 export class RenderUiTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HumanTaskUiArn" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiArn" })
   humanTaskUiArn?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=Task" })
+  @SpeakeasyMetadata({ data: "json, name=Task" })
   task: RenderableTask;
 
-  @Metadata({ data: "json, name=UiTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=UiTemplate" })
   uiTemplate?: UiTemplate;
 }

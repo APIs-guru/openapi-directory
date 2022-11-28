@@ -1,8 +1,12 @@
-import warnings
+
+
 import requests
-from typing import Optional
-from sdk.models import operations
+
 from . import utils
+
+from .holidays import Holidays
+from .provinces import Provinces
+from .root import Root
 
 
 SERVERS = [
@@ -11,136 +15,66 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+    holidays: Holidays
+    provinces: Provinces
+    root: Root
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def get_api_v1_holidays(self, request: operations.GetAPIV1HolidaysRequest) -> operations.GetAPIV1HolidaysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/api/v1/holidays"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetAPIV1HolidaysResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV1Holidays200ApplicationJSON])
-                res.get_api_v1_holidays_200_application_json_object = out
-
-        return res
-
-    
-    def get_api_v1_provinces(self, request: operations.GetAPIV1ProvincesRequest) -> operations.GetAPIV1ProvincesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/api/v1/provinces"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetAPIV1ProvincesResponse(status_code=r.status_code, content_type=content_type)
+        self.holidays = Holidays(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV1Provinces200ApplicationJSON])
-                res.get_api_v1_provinces_200_application_json_object = out
-
-        return res
-
-    
-    def get_api_v1_provinces_province_id(self, request: operations.GetAPIV1ProvincesProvinceIDRequest) -> operations.GetAPIV1ProvincesProvinceIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/api/v1/provinces/{provinceId}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetAPIV1ProvincesProvinceIDResponse(status_code=r.status_code, content_type=content_type)
+        self.provinces = Provinces(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV1ProvincesProvinceID200ApplicationJSON])
-                res.get_api_v1_provinces_province_id_200_application_json_object = out
-        elif r.status_code == 404:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV1ProvincesProvinceID404ApplicationJSON])
-                res.get_api_v1_provinces_province_id_404_application_json_object = out
-
-        return res
-
+        self.root = Root(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def get_api_vi(self) -> operations.GetAPIViResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/api/v1"
-
-        client = self.client
-
-        r = client.request("GET", url)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetAPIViResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAPIVi200ApplicationJSON])
-                res.get_api_vi_200_application_json_object = out
-
-        return res
-
-    
-    def get_holidays_holiday_id(self, request: operations.GetHolidaysHolidayIDRequest) -> operations.GetHolidaysHolidayIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/api/v1/holidays/{holidayId}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetHolidaysHolidayIDResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetHolidaysHolidayID200ApplicationJSON])
-                res.get_holidays_holiday_id_200_application_json_object = out
-        elif r.status_code == 404:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetHolidaysHolidayID404ApplicationJSON])
-                res.get_holidays_holiday_id_404_application_json_object = out
-
-        return res
-
     

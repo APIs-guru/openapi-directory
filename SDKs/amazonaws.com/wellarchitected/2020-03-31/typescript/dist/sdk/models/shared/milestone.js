@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Workload } from "./workload";
 // Milestone
 /**
@@ -34,19 +34,19 @@ var Milestone = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MilestoneName" }),
+        SpeakeasyMetadata({ data: "json, name=MilestoneName" }),
         __metadata("design:type", String)
     ], Milestone.prototype, "milestoneName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MilestoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=MilestoneNumber" }),
         __metadata("design:type", Number)
     ], Milestone.prototype, "milestoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordedAt" }),
+        SpeakeasyMetadata({ data: "json, name=RecordedAt" }),
         __metadata("design:type", Date)
     ], Milestone.prototype, "recordedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Workload" }),
+        SpeakeasyMetadata({ data: "json, name=Workload" }),
         __metadata("design:type", Workload)
     ], Milestone.prototype, "workload", void 0);
     return Milestone;

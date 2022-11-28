@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 
 class CommentAPIDeleteCommentEntryTypeEnum(str, Enum):
     UNDEFINED = "Undefined"
@@ -18,17 +18,17 @@ class CommentAPIDeleteCommentEntryTypeEnum(str, Enum):
 
 @dataclass
 class CommentAPIDeleteCommentPathParams:
-    comment_id: int = field(default=None, metadata={'path_param': { 'field_name': 'commentId', 'style': 'simple', 'explode': False }})
-    entry_type: CommentAPIDeleteCommentEntryTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'entryType', 'style': 'simple', 'explode': False }})
+    comment_id: int = field(metadata={'path_param': { 'field_name': 'commentId', 'style': 'simple', 'explode': False }})
+    entry_type: CommentAPIDeleteCommentEntryTypeEnum = field(metadata={'path_param': { 'field_name': 'entryType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CommentAPIDeleteCommentRequest:
-    path_params: CommentAPIDeleteCommentPathParams = field(default=None)
+    path_params: CommentAPIDeleteCommentPathParams = field()
     
 
 @dataclass
 class CommentAPIDeleteCommentResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

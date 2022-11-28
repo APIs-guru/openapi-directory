@@ -1,20 +1,21 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import classificationcategory
-from . import sentiment
-from . import entity
-from . import sentence
-from . import token
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AnnotateTextResponse:
-    categories: Optional[List[classificationcategory.ClassificationCategory]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    document_sentiment: Optional[sentiment.Sentiment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentSentiment' }})
-    entities: Optional[List[entity.Entity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entities' }})
-    language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
-    sentences: Optional[List[sentence.Sentence]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sentences' }})
-    tokens: Optional[List[token.Token]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tokens' }})
+    r"""AnnotateTextResponse
+    The text annotations response message.
+    """
+    
+    categories: Optional[List[ClassificationCategory]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    document_sentiment: Optional[Sentiment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentSentiment') }})
+    entities: Optional[List[Entity]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entities') }})
+    language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('language') }})
+    sentences: Optional[List[Sentence]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sentences') }})
+    tokens: Optional[List[Token]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tokens') }})
     

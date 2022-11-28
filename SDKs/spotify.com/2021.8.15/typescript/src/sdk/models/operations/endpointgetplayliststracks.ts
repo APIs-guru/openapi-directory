@@ -1,55 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetPlaylistsTracksPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
   playlistId: string;
 }
 
 
 export class EndpointGetPlaylistsTracksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=additional_types" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=additional_types" })
   additionalTypes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=market" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=market" })
   market?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class EndpointGetPlaylistsTracksHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetPlaylistsTracksSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
-}
-
-
-export class EndpointGetPlaylistsTracksRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: EndpointGetPlaylistsTracksPathParams;
-
-  @Metadata()
-  queryParams: EndpointGetPlaylistsTracksQueryParams;
-
-  @Metadata()
-  headers: EndpointGetPlaylistsTracksHeaders;
-
-  @Metadata()
-  security: EndpointGetPlaylistsTracksSecurity;
 }
 
 
@@ -58,39 +44,54 @@ export class EndpointGetPlaylistsTracksRequest extends SpeakeasyBase {
  * https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 **/
 export class EndpointGetPlaylistsTracks200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.PlaylistTrackObject })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: shared.PlaylistTrackObject })
   items?: shared.PlaylistTrackObject[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
+export class EndpointGetPlaylistsTracksRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: EndpointGetPlaylistsTracksPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: EndpointGetPlaylistsTracksQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: EndpointGetPlaylistsTracksHeaders;
+
+  @SpeakeasyMetadata()
+  security: EndpointGetPlaylistsTracksSecurity;
+}
+
+
 export class EndpointGetPlaylistsTracksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   endpointGetPlaylistsTracks200ApplicationJsonObject?: EndpointGetPlaylistsTracks200ApplicationJson;
 }

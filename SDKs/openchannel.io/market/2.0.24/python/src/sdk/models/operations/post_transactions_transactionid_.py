@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class PostTransactionsTransactionIDPathParams:
-    transaction_id: str = field(default=None, metadata={'path_param': { 'field_name': 'transactionId', 'style': 'simple', 'explode': False }})
+    transaction_id: str = field(metadata={'path_param': { 'field_name': 'transactionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class PostTransactionsTransactionIDQueryParams:
 
 @dataclass
 class PostTransactionsTransactionIDRequest:
-    path_params: PostTransactionsTransactionIDPathParams = field(default=None)
-    query_params: PostTransactionsTransactionIDQueryParams = field(default=None)
+    path_params: PostTransactionsTransactionIDPathParams = field()
+    query_params: PostTransactionsTransactionIDQueryParams = field()
     
 
 @dataclass
 class PostTransactionsTransactionIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

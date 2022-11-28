@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // StandardResourceMetadata
 /**
  * The standard metadata of a cloud resource.
@@ -33,39 +33,39 @@ var StandardResourceMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additionalAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=additionalAttributes" }),
         __metadata("design:type", Array)
     ], StandardResourceMetadata.prototype, "additionalAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetType" }),
+        SpeakeasyMetadata({ data: "json, name=assetType" }),
         __metadata("design:type", String)
     ], StandardResourceMetadata.prototype, "assetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], StandardResourceMetadata.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], StandardResourceMetadata.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], StandardResourceMetadata.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], StandardResourceMetadata.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], StandardResourceMetadata.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkTags" }),
+        SpeakeasyMetadata({ data: "json, name=networkTags" }),
         __metadata("design:type", Array)
     ], StandardResourceMetadata.prototype, "networkTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=project" }),
+        SpeakeasyMetadata({ data: "json, name=project" }),
         __metadata("design:type", String)
     ], StandardResourceMetadata.prototype, "project", void 0);
     return StandardResourceMetadata;

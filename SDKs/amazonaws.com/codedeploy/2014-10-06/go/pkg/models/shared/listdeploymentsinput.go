@@ -1,5 +1,7 @@
 package shared
 
+// ListDeploymentsInput
+// Represents the input of a <code>ListDeployments</code> operation.
 type ListDeploymentsInput struct {
 	ApplicationName     *string                `json:"applicationName,omitempty"`
 	CreateTimeRange     *TimeRange             `json:"createTimeRange,omitempty"`

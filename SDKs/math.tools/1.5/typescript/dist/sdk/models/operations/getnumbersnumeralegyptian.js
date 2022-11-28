@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetNumbersNumeralEgyptianQueryParams = /** @class */ (function (_super) {
     __extends(GetNumbersNumeralEgyptianQueryParams, _super);
@@ -30,7 +30,7 @@ var GetNumbersNumeralEgyptianQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=number" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" }),
         __metadata("design:type", Number)
     ], GetNumbersNumeralEgyptianQueryParams.prototype, "number", void 0);
     return GetNumbersNumeralEgyptianQueryParams;
@@ -42,7 +42,7 @@ var GetNumbersNumeralEgyptianSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXMathtoolsApiSecret)
     ], GetNumbersNumeralEgyptianSecurity.prototype, "xMathtoolsApiSecret", void 0);
     return GetNumbersNumeralEgyptianSecurity;
@@ -54,11 +54,11 @@ var GetNumbersNumeralEgyptianRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersNumeralEgyptianQueryParams)
     ], GetNumbersNumeralEgyptianRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersNumeralEgyptianSecurity)
     ], GetNumbersNumeralEgyptianRequest.prototype, "security", void 0);
     return GetNumbersNumeralEgyptianRequest;
@@ -70,11 +70,11 @@ var GetNumbersNumeralEgyptianResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNumbersNumeralEgyptianResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNumbersNumeralEgyptianResponse.prototype, "statusCode", void 0);
     return GetNumbersNumeralEgyptianResponse;

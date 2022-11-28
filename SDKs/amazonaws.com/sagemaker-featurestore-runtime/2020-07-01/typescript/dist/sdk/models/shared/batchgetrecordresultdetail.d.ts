@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FeatureValue } from "./featurevalue";
 /**
  * The output of Records that have been retrieved in a batch.

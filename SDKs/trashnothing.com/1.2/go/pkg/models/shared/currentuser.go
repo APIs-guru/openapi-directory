@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CurrentUserEmail
+// Data related to the users' email address.
 type CurrentUserEmail struct {
 	Address  *string `json:"address,omitempty"`
 	Bouncing *bool   `json:"bouncing,omitempty"`
@@ -16,6 +18,8 @@ type CurrentUserFeedback struct {
 	Score           *int64   `json:"score,omitempty"`
 }
 
+// CurrentUserLocation
+// The users' location.  The location is used to determine which posts are shown to the user (may be null).
 type CurrentUserLocation struct {
 	Latitude  *float64 `json:"latitude,omitempty"`
 	Longitude *float64 `json:"longitude,omitempty"`
@@ -23,6 +27,8 @@ type CurrentUserLocation struct {
 	Radius    *float64 `json:"radius,omitempty"`
 }
 
+// CurrentUserPostLocation
+// Location data used by the user the last time they posted.
 type CurrentUserPostLocation struct {
 	Latitude  *float64 `json:"latitude,omitempty"`
 	Longitude *float64 `json:"longitude,omitempty"`

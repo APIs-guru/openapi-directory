@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionCredentials } from "./connectioncredentials";
 import { Websocket } from "./websocket";
 
 
+
 export class CreateParticipantConnectionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionCredentials" })
   connectionCredentials?: ConnectionCredentials;
 
-  @Metadata({ data: "json, name=Websocket" })
+  @SpeakeasyMetadata({ data: "json, name=Websocket" })
   websocket?: Websocket;
 }

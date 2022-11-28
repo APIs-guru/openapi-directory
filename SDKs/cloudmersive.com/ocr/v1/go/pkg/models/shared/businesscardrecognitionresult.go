@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BusinessCardRecognitionResult
+// Result of recognizing a business card, to extract the key information from the business card
 type BusinessCardRecognitionResult struct {
 	AddressString *string    `json:"AddressString,omitempty"`
 	BusinessName  *string    `json:"BusinessName,omitempty"`

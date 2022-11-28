@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetReportRefreshRequestOptions } from "./assetreportrefreshrequestoptions";
 /**
  * AssetReportRefreshRequest defines the request schema for `/asset_report/refresh`

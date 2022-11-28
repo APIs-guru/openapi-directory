@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Folder } from "./folder";
+
 
 
 // SearchFoldersResponse
@@ -8,9 +8,9 @@ import { Folder } from "./folder";
  * The response message for searching folders.
 **/
 export class SearchFoldersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=folders", elemType: shared.Folder })
+  @SpeakeasyMetadata({ data: "json, name=folders", elemType: Folder })
   folders?: Folder[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

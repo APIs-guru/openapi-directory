@@ -1,5 +1,7 @@
 package shared
 
+// Container
+// A Docker container that is part of a task.
 type Container struct {
 	ContainerArn      *string            `json:"containerArn,omitempty"`
 	CPU               *string            `json:"cpu,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRegisterDbProxyTargetsActionEnum(str, Enum):
     REGISTER_DB_PROXY_TARGETS = "RegisterDBProxyTargets"
@@ -10,8 +14,8 @@ class PostRegisterDbProxyTargetsVersionEnum(str, Enum):
 
 @dataclass
 class PostRegisterDbProxyTargetsQueryParams:
-    action: PostRegisterDbProxyTargetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRegisterDbProxyTargetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRegisterDbProxyTargetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRegisterDbProxyTargetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRegisterDbProxyTargetsHeaders:
 
 @dataclass
 class PostRegisterDbProxyTargetsRequest:
-    query_params: PostRegisterDbProxyTargetsQueryParams = field(default=None)
-    headers: PostRegisterDbProxyTargetsHeaders = field(default=None)
+    headers: PostRegisterDbProxyTargetsHeaders = field()
+    query_params: PostRegisterDbProxyTargetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRegisterDbProxyTargetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

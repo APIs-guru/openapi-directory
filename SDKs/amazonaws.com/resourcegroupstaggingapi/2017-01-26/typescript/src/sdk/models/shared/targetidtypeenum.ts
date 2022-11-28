@@ -1,7 +1,8 @@
 
 
+
 export enum TargetIdTypeEnum {
-    Account = "ACCOUNT"
-,    Ou = "OU"
-,    Root = "ROOT"
+    Account = "ACCOUNT",
+    Ou = "OU",
+    Root = "ROOT"
 }

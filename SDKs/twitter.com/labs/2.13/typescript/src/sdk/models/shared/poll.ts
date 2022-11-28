@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PollOption } from "./polloption";
 
+
 export enum PollVotingStatusEnum {
-    Open = "open"
-,    Closed = "closed"
+    Open = "open",
+    Closed = "closed"
 }
 
 
@@ -13,18 +13,18 @@ export enum PollVotingStatusEnum {
  * Represent a Poll attached to a Tweet
 **/
 export class Poll extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duration_minutes" })
+  @SpeakeasyMetadata({ data: "json, name=duration_minutes" })
   durationMinutes?: number;
 
-  @Metadata({ data: "json, name=end_datetime" })
+  @SpeakeasyMetadata({ data: "json, name=end_datetime" })
   endDatetime?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=options", elemType: shared.PollOption })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: PollOption })
   options: PollOption[];
 
-  @Metadata({ data: "json, name=voting_status" })
+  @SpeakeasyMetadata({ data: "json, name=voting_status" })
   votingStatus?: PollVotingStatusEnum;
 }

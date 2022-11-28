@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IssuesListCommentsForRepoPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 class IssuesListCommentsForRepoDirectionEnum(str, Enum):
     ASC = "asc"
@@ -24,15 +25,15 @@ class IssuesListCommentsForRepoQueryParams:
 
 @dataclass
 class IssuesListCommentsForRepoRequest:
-    path_params: IssuesListCommentsForRepoPathParams = field(default=None)
-    query_params: IssuesListCommentsForRepoQueryParams = field(default=None)
+    path_params: IssuesListCommentsForRepoPathParams = field()
+    query_params: IssuesListCommentsForRepoQueryParams = field()
     
 
 @dataclass
 class IssuesListCommentsForRepoResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     issue_comments: Optional[List[shared.IssueComment]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

@@ -1,5 +1,7 @@
 package shared
 
+// VolumeStatistics
+// An object that contains information about the amount of email that was delivered to recipients.
 type VolumeStatistics struct {
 	InboxRawCount  *int64 `json:"InboxRawCount,omitempty"`
 	ProjectedInbox *int64 `json:"ProjectedInbox,omitempty"`

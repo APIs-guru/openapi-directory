@@ -1,12 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import contentmatcher
-from . import httpcheck
-from . import internalchecker
-from . import monitoredresource
-from . import resourcegroup
-from . import tcpcheck
+from sdk import utils
+from . import *
 
 class UptimeCheckConfigCheckerTypeEnum(str, Enum):
     CHECKER_TYPE_UNSPECIFIED = "CHECKER_TYPE_UNSPECIFIED"
@@ -24,18 +21,22 @@ class UptimeCheckConfigSelectedRegionsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UptimeCheckConfig:
-    checker_type: Optional[UptimeCheckConfigCheckerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkerType' }})
-    content_matchers: Optional[List[contentmatcher.ContentMatcher]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentMatchers' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    http_check: Optional[httpcheck.HTTPCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpCheck' }})
-    internal_checkers: Optional[List[internalchecker.InternalChecker]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'internalCheckers' }})
-    is_internal: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isInternal' }})
-    monitored_resource: Optional[monitoredresource.MonitoredResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'monitoredResource' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
-    resource_group: Optional[resourcegroup.ResourceGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceGroup' }})
-    selected_regions: Optional[List[UptimeCheckConfigSelectedRegionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selectedRegions' }})
-    tcp_check: Optional[tcpcheck.TCPCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tcpCheck' }})
-    timeout: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeout' }})
-    user_labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userLabels' }})
+    r"""UptimeCheckConfig
+    This message configures which resources and services to monitor for availability.
+    """
+    
+    checker_type: Optional[UptimeCheckConfigCheckerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checkerType') }})
+    content_matchers: Optional[List[ContentMatcher]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentMatchers') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    http_check: Optional[HTTPCheck] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpCheck') }})
+    internal_checkers: Optional[List[InternalChecker]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('internalCheckers') }})
+    is_internal: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isInternal') }})
+    monitored_resource: Optional[MonitoredResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('monitoredResource') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
+    resource_group: Optional[ResourceGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceGroup') }})
+    selected_regions: Optional[List[UptimeCheckConfigSelectedRegionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selectedRegions') }})
+    tcp_check: Optional[TCPCheck] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tcpCheck') }})
+    timeout: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeout') }})
+    user_labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userLabels') }})
     

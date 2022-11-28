@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextStyle } from "./textstyle";
+
 
 
 // TextRun
@@ -7,9 +8,9 @@ import { TextStyle } from "./textstyle";
  * A TextElement kind that represents a run of text that all has the same styling.
 **/
 export class TextRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=style" })
+  @SpeakeasyMetadata({ data: "json, name=style" })
   style?: TextStyle;
 }

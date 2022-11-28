@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProductNotifierPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=notifierId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=notifierId" })
   notifierId: string;
 }
 
 
 export class ProductNotifierSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class ProductNotifierRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProductNotifierPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ProductNotifierSecurity;
 }
 
 
 export class ProductNotifierResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   productNotifier200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   productNotifierDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

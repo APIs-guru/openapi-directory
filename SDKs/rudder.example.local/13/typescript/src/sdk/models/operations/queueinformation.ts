@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum QueueInformation200ApplicationJsonActionEnum {
     QueueInformation = "queueInformation"
@@ -10,38 +11,38 @@ export enum QueueInformation200ApplicationJsonActionEnum {
  * Information about the service
 **/
 export class QueueInformation200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queueMaxSize" })
+  @SpeakeasyMetadata({ data: "json, name=queueMaxSize" })
   queueMaxSize: number;
 
-  @Metadata({ data: "json, name=queueSaturated" })
+  @SpeakeasyMetadata({ data: "json, name=queueSaturated" })
   queueSaturated: boolean;
 }
 
 export enum QueueInformation200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class QueueInformation200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: QueueInformation200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: QueueInformation200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: QueueInformation200ApplicationJsonResultEnum;
 }
 
 
 export class QueueInformationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queueInformation200ApplicationJsonObject?: QueueInformation200ApplicationJson;
 }

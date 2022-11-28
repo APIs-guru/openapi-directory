@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetTrackPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,26 +15,26 @@ class EndpointGetTrackQueryParams:
 
 @dataclass
 class EndpointGetTrackHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetTrackSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetTrackRequest:
-    path_params: EndpointGetTrackPathParams = field(default=None)
-    query_params: EndpointGetTrackQueryParams = field(default=None)
-    headers: EndpointGetTrackHeaders = field(default=None)
-    security: EndpointGetTrackSecurity = field(default=None)
+    headers: EndpointGetTrackHeaders = field()
+    path_params: EndpointGetTrackPathParams = field()
+    query_params: EndpointGetTrackQueryParams = field()
+    security: EndpointGetTrackSecurity = field()
     
 
 @dataclass
 class EndpointGetTrackResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     track_object: Optional[shared.TrackObject] = field(default=None)
     

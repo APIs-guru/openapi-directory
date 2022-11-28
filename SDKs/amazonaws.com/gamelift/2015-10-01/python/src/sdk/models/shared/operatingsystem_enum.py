@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class OperatingSystemEnum(str, Enum):
     WINDOWS_2012 = "WINDOWS_2012"

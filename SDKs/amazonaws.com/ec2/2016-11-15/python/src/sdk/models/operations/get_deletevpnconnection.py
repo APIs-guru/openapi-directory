@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteVpnConnectionActionEnum(str, Enum):
     DELETE_VPN_CONNECTION = "DeleteVpnConnection"
@@ -10,10 +14,10 @@ class GetDeleteVpnConnectionVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVpnConnectionQueryParams:
-    action: GetDeleteVpnConnectionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteVpnConnectionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteVpnConnectionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpn_connection_id: str = field(metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeleteVpnConnectionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpn_connection_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteVpnConnectionHeaders:
 
 @dataclass
 class GetDeleteVpnConnectionRequest:
-    query_params: GetDeleteVpnConnectionQueryParams = field(default=None)
-    headers: GetDeleteVpnConnectionHeaders = field(default=None)
+    headers: GetDeleteVpnConnectionHeaders = field()
+    query_params: GetDeleteVpnConnectionQueryParams = field()
     
 
 @dataclass
 class GetDeleteVpnConnectionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

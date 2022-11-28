@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceAssociationStatusInfo
+// Status information about the instance association.
 type InstanceAssociationStatusInfo struct {
 	AssociationID      *string                       `json:"AssociationId,omitempty"`
 	AssociationName    *string                       `json:"AssociationName,omitempty"`

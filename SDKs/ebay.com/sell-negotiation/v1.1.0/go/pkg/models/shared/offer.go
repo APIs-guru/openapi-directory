@@ -1,5 +1,7 @@
 package shared
 
+// Offer
+// A complex type that defines an offer that a seller makes to eligible buyers.
 type Offer struct {
 	AllowCounterOffer *bool         `json:"allowCounterOffer,omitempty"`
 	Buyer             *User         `json:"buyer,omitempty"`

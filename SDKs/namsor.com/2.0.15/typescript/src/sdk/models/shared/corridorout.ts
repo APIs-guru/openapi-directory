@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirstLastNameDiasporaedOut } from "./firstlastnamediasporaedout";
 import { FirstLastNameGenderedOut } from "./firstlastnamegenderedout";
 import { FirstLastNameOriginedOut } from "./firstlastnameoriginedout";
+
 
 
 // CorridorOut
@@ -9,18 +10,18 @@ import { FirstLastNameOriginedOut } from "./firstlastnameoriginedout";
  * Represent multiple classifications for corridor sender and receiver (gender, country, origin, diaspora)
 **/
 export class CorridorOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirstLastNameDiasporaedOut" })
+  @SpeakeasyMetadata({ data: "json, name=FirstLastNameDiasporaedOut" })
   firstLastNameDiasporaedOut?: FirstLastNameDiasporaedOut;
 
-  @Metadata({ data: "json, name=FirstLastNameGenderedOut" })
+  @SpeakeasyMetadata({ data: "json, name=FirstLastNameGenderedOut" })
   firstLastNameGenderedOut?: FirstLastNameGenderedOut;
 
-  @Metadata({ data: "json, name=FirstLastNameOriginedOut" })
+  @SpeakeasyMetadata({ data: "json, name=FirstLastNameOriginedOut" })
   firstLastNameOriginedOut?: FirstLastNameOriginedOut;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 }

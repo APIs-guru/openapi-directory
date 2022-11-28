@@ -32,7 +32,7 @@ type CloudresourcemanagerTagValuesPatchSecurity struct {
 type CloudresourcemanagerTagValuesPatchRequest struct {
 	PathParams  CloudresourcemanagerTagValuesPatchPathParams
 	QueryParams CloudresourcemanagerTagValuesPatchQueryParams
-	Request     *shared.TagValue `request:"mediaType=application/json"`
+	Request     *shared.TagValueInput `request:"mediaType=application/json"`
 	Security    CloudresourcemanagerTagValuesPatchSecurity
 }
 

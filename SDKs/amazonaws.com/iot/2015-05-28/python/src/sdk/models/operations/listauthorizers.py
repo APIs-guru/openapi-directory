@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListAuthorizersStatusEnum(str, Enum):
@@ -28,18 +32,18 @@ class ListAuthorizersHeaders:
 
 @dataclass
 class ListAuthorizersRequest:
-    query_params: ListAuthorizersQueryParams = field(default=None)
-    headers: ListAuthorizersHeaders = field(default=None)
+    headers: ListAuthorizersHeaders = field()
+    query_params: ListAuthorizersQueryParams = field()
     
 
 @dataclass
 class ListAuthorizersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_authorizers_response: Optional[shared.ListAuthorizersResponse] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

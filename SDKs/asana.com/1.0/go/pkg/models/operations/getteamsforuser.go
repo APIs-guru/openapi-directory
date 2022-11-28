@@ -16,13 +16,13 @@ type GetTeamsForUserQueryParams struct {
 	Organization string   `queryParam:"style=form,explode=true,name=organization"`
 }
 
+type GetTeamsForUser200ApplicationJSON struct {
+	Data []shared.TeamCompact `json:"data,omitempty"`
+}
+
 type GetTeamsForUserRequest struct {
 	PathParams  GetTeamsForUserPathParams
 	QueryParams GetTeamsForUserQueryParams
-}
-
-type GetTeamsForUser200ApplicationJSON struct {
-	Data []shared.TeamCompact `json:"data,omitempty"`
 }
 
 type GetTeamsForUserResponse struct {

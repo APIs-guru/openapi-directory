@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StageEnum } from "./stageenum";
 /**
  *  The branch for an Amplify app, which maps to a third-party repository branch.

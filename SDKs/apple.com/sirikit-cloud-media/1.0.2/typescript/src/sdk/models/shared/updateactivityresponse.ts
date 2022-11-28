@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Queue } from "./queue";
 import { UserActivity } from "./useractivity";
 
 
+
 export class UpdateActivityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queue" })
+  @SpeakeasyMetadata({ data: "json, name=queue" })
   queue?: Queue;
 
-  @Metadata({ data: "json, name=userActivity" })
+  @SpeakeasyMetadata({ data: "json, name=userActivity" })
   userActivity?: UserActivity;
 }

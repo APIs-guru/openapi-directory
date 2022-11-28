@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DoubleclickbidmanagerReportsListreportsPathParams:
-    query_id: str = field(default=None, metadata={'path_param': { 'field_name': 'queryId', 'style': 'simple', 'explode': False }})
+    query_id: str = field(metadata={'path_param': { 'field_name': 'queryId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DoubleclickbidmanagerReportsListreportsQueryParams:
 
 @dataclass
 class DoubleclickbidmanagerReportsListreportsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DoubleclickbidmanagerReportsListreportsRequest:
-    path_params: DoubleclickbidmanagerReportsListreportsPathParams = field(default=None)
-    query_params: DoubleclickbidmanagerReportsListreportsQueryParams = field(default=None)
-    security: DoubleclickbidmanagerReportsListreportsSecurity = field(default=None)
+    path_params: DoubleclickbidmanagerReportsListreportsPathParams = field()
+    query_params: DoubleclickbidmanagerReportsListreportsQueryParams = field()
+    security: DoubleclickbidmanagerReportsListreportsSecurity = field()
     
 
 @dataclass
 class DoubleclickbidmanagerReportsListreportsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_reports_response: Optional[shared.ListReportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

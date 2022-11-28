@@ -16,6 +16,8 @@ const (
 	GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumMandatory        GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "MANDATORY"
 )
 
+// GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig
+// Options related to MultiFactor Authentication for the project.
 type GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig struct {
 	EnabledProviders []GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum `json:"enabledProviders,omitempty"`
 	State            *GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum             `json:"state,omitempty"`

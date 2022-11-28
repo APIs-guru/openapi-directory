@@ -9,10 +9,6 @@ type GetKernelsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetKernelsRequest struct {
-	QueryParams GetKernelsQueryParams
-}
-
 type GetKernels200ApplicationJSON struct {
 	Data    []shared.Kernel `json:"data,omitempty"`
 	Page    *int64          `json:"page,omitempty"`
@@ -22,6 +18,10 @@ type GetKernels200ApplicationJSON struct {
 
 type GetKernelsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetKernelsRequest struct {
+	QueryParams GetKernelsQueryParams
 }
 
 type GetKernelsResponse struct {

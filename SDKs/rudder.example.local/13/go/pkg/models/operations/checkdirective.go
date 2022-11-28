@@ -8,11 +8,6 @@ type CheckDirectivePathParams struct {
 	DirectiveID string `pathParam:"style=simple,explode=false,name=directiveId"`
 }
 
-type CheckDirectiveRequest struct {
-	PathParams CheckDirectivePathParams
-	Request    shared.Directive `request:"mediaType=application/json"`
-}
-
 type CheckDirective200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +29,11 @@ type CheckDirective200ApplicationJSON struct {
 	Action CheckDirective200ApplicationJSONActionEnum `json:"action"`
 	Data   CheckDirective200ApplicationJSONData       `json:"data"`
 	Result CheckDirective200ApplicationJSONResultEnum `json:"result"`
+}
+
+type CheckDirectiveRequest struct {
+	PathParams CheckDirectivePathParams
+	Request    shared.Directive `request:"mediaType=application/json"`
 }
 
 type CheckDirectiveResponse struct {

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Region
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type defines information for a region.
 **/
 export class Region extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regionName" })
+  @SpeakeasyMetadata({ data: "json, name=regionName" })
   regionName?: string;
 
-  @Metadata({ data: "json, name=regionType" })
+  @SpeakeasyMetadata({ data: "json, name=regionType" })
   regionType?: string;
 }

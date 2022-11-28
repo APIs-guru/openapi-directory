@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAvailableObservationHeadingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: number;
 }
 
 
 export class GetAvailableObservationHeadingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAvailableObservationHeadingsPathParams;
 }
 
 
 export class GetAvailableObservationHeadingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ObservationHeading })
+  @SpeakeasyMetadata({ elemType: shared.ObservationHeading })
   observationHeadings?: shared.ObservationHeading[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

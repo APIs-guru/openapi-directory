@@ -8,6 +8,8 @@ const (
 	DealPausingInfoPauseRoleEnumSeller                     DealPausingInfoPauseRoleEnum = "SELLER"
 )
 
+// DealPausingInfo
+// Information related to deal pausing.
 type DealPausingInfo struct {
 	PauseReason      *string                       `json:"pauseReason,omitempty"`
 	PauseRole        *DealPausingInfoPauseRoleEnum `json:"pauseRole,omitempty"`

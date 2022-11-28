@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserContext } from "./usercontext";
 import { ProjectStatusEnum } from "./projectstatusenum";
 import { ServiceCatalogProvisionedProductDetails } from "./servicecatalogprovisionedproductdetails";
@@ -7,38 +6,39 @@ import { ServiceCatalogProvisioningDetails } from "./servicecatalogprovisioningd
 import { Tag } from "./tag";
 
 
+
 // Project
 /** 
  * The properties of a project as returned by the Search API.
 **/
 export class Project extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: UserContext;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=ProjectArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectArn" })
   projectArn?: string;
 
-  @Metadata({ data: "json, name=ProjectDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectDescription" })
   projectDescription?: string;
 
-  @Metadata({ data: "json, name=ProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=ProjectName" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectName" })
   projectName?: string;
 
-  @Metadata({ data: "json, name=ProjectStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectStatus" })
   projectStatus?: ProjectStatusEnum;
 
-  @Metadata({ data: "json, name=ServiceCatalogProvisionedProductDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCatalogProvisionedProductDetails" })
   serviceCatalogProvisionedProductDetails?: ServiceCatalogProvisionedProductDetails;
 
-  @Metadata({ data: "json, name=ServiceCatalogProvisioningDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCatalogProvisioningDetails" })
   serviceCatalogProvisioningDetails?: ServiceCatalogProvisioningDetails;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

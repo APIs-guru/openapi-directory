@@ -1,6 +1,7 @@
 
 
+
 export enum AggregationFunctionEnum {
-    Avg = "AVG"
-,    Sum = "SUM"
+    Avg = "AVG",
+    Sum = "SUM"
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MatterPermission } from "./matterpermission";
 export declare enum MatterStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",

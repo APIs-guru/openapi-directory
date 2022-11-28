@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EnterpriseAccount
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A service account that can be used to authenticate as the enterprise to API calls that require such authentication.
 **/
 export class EnterpriseAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=accountEmail" })
   accountEmail?: string;
 }

@@ -1,0 +1,21 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class AccountBidderLocation extends SpeakeasyBase {
+    bidProtocol?: string;
+    maximumQps?: number;
+    region?: string;
+    url?: string;
+}
+/**
+ * Configuration data for an Ad Exchange buyer account.
+**/
+export declare class Account extends SpeakeasyBase {
+    applyPretargetingToNonGuaranteedDeals?: boolean;
+    bidderLocation?: AccountBidderLocation[];
+    cookieMatchingNid?: string;
+    cookieMatchingUrl?: string;
+    id?: number;
+    kind?: string;
+    maximumActiveCreatives?: number;
+    maximumTotalQps?: number;
+    numberActiveCreatives?: number;
+}

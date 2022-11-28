@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetHistoryQueryParams = /** @class */ (function (_super) {
     __extends(GetHistoryQueryParams, _super);
     function GetHistoryQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=applicationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=applicationId" }),
         __metadata("design:type", String)
     ], GetHistoryQueryParams.prototype, "applicationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" }),
         __metadata("design:type", Number)
     ], GetHistoryQueryParams.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=groupId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" }),
         __metadata("design:type", String)
     ], GetHistoryQueryParams.prototype, "groupId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceId" }),
         __metadata("design:type", String)
     ], GetHistoryQueryParams.prototype, "serviceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" }),
         __metadata("design:type", Number)
     ], GetHistoryQueryParams.prototype, "to", void 0);
     return GetHistoryQueryParams;
@@ -57,7 +57,7 @@ var GetHistoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetHistoryQueryParams)
     ], GetHistoryRequest.prototype, "queryParams", void 0);
     return GetHistoryRequest;
@@ -69,15 +69,15 @@ var GetHistoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetHistoryResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetHistoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetHistoryResponse.prototype, "statusCode", void 0);
     return GetHistoryResponse;

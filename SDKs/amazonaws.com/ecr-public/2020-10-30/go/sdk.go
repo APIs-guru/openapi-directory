@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://api.ecr-public.{region}.amazonaws.com",
 	"https://api.ecr-public.{region}.amazonaws.com",
 	"http://api.ecr-public.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/ecr-public/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BatchCheckLayerAvailability - <p>Checks the availability of one or more image layers within a repository in a public registry. When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it has been uploaded, then the image layer is skipped.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
 func (s *SDK) BatchCheckLayerAvailability(ctx context.Context, request operations.BatchCheckLayerAvailabilityRequest) (*operations.BatchCheckLayerAvailabilityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.BatchCheckLayerAvailability"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) BatchCheckLayerAvailability(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) BatchCheckLayerAvailability(ctx context.Context, request operation
 	return res, nil
 }
 
+// BatchDeleteImage - <p>Deletes a list of specified images within a repository in a public registry. Images are specified with either an <code>imageTag</code> or <code>imageDigest</code>.</p> <p>You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository.</p> <p>You can completely delete an image (and all of its tags) by specifying the image's digest in your request.</p>
 func (s *SDK) BatchDeleteImage(ctx context.Context, request operations.BatchDeleteImageRequest) (*operations.BatchDeleteImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.BatchDeleteImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) BatchDeleteImage(ctx context.Context, request operations.BatchDele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -232,8 +260,9 @@ func (s *SDK) BatchDeleteImage(ctx context.Context, request operations.BatchDele
 	return res, nil
 }
 
+// CompleteLayerUpload - <p>Informs Amazon ECR that the image layer upload has completed for a specified public registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
 func (s *SDK) CompleteLayerUpload(ctx context.Context, request operations.CompleteLayerUploadRequest) (*operations.CompleteLayerUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.CompleteLayerUpload"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -253,7 +282,7 @@ func (s *SDK) CompleteLayerUpload(ctx context.Context, request operations.Comple
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) CompleteLayerUpload(ctx context.Context, request operations.Comple
 	return res, nil
 }
 
+// CreateRepository - Creates a repository in a public registry. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html">Amazon ECR repositories</a> in the <i>Amazon Elastic Container Registry User Guide</i>.
 func (s *SDK) CreateRepository(ctx context.Context, request operations.CreateRepositoryRequest) (*operations.CreateRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.CreateRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +434,7 @@ func (s *SDK) CreateRepository(ctx context.Context, request operations.CreateRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -494,8 +524,9 @@ func (s *SDK) CreateRepository(ctx context.Context, request operations.CreateRep
 	return res, nil
 }
 
+// DeleteRepository - Deletes a repository in a public registry. If the repository contains images, you must either delete all images in the repository or use the <code>force</code> option which deletes all images on your behalf before deleting the repository.
 func (s *SDK) DeleteRepository(ctx context.Context, request operations.DeleteRepositoryRequest) (*operations.DeleteRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.DeleteRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -515,7 +546,7 @@ func (s *SDK) DeleteRepository(ctx context.Context, request operations.DeleteRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -585,8 +616,9 @@ func (s *SDK) DeleteRepository(ctx context.Context, request operations.DeleteRep
 	return res, nil
 }
 
+// DeleteRepositoryPolicy - Deletes the repository policy associated with the specified repository.
 func (s *SDK) DeleteRepositoryPolicy(ctx context.Context, request operations.DeleteRepositoryPolicyRequest) (*operations.DeleteRepositoryPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.DeleteRepositoryPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -606,7 +638,7 @@ func (s *SDK) DeleteRepositoryPolicy(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -676,8 +708,9 @@ func (s *SDK) DeleteRepositoryPolicy(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DescribeImageTags - Returns the image tag details for a repository in a public registry.
 func (s *SDK) DescribeImageTags(ctx context.Context, request operations.DescribeImageTagsRequest) (*operations.DescribeImageTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.DescribeImageTags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -699,7 +732,7 @@ func (s *SDK) DescribeImageTags(ctx context.Context, request operations.Describe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -759,8 +792,9 @@ func (s *SDK) DescribeImageTags(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// DescribeImages - <p>Returns metadata about the images in a repository in a public registry.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>
 func (s *SDK) DescribeImages(ctx context.Context, request operations.DescribeImagesRequest) (*operations.DescribeImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.DescribeImages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -782,7 +816,7 @@ func (s *SDK) DescribeImages(ctx context.Context, request operations.DescribeIma
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -852,8 +886,9 @@ func (s *SDK) DescribeImages(ctx context.Context, request operations.DescribeIma
 	return res, nil
 }
 
+// DescribeRegistries - Returns details for a public registry.
 func (s *SDK) DescribeRegistries(ctx context.Context, request operations.DescribeRegistriesRequest) (*operations.DescribeRegistriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.DescribeRegistries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -875,7 +910,7 @@ func (s *SDK) DescribeRegistries(ctx context.Context, request operations.Describ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -935,8 +970,9 @@ func (s *SDK) DescribeRegistries(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeRepositories - Describes repositories in a public registry.
 func (s *SDK) DescribeRepositories(ctx context.Context, request operations.DescribeRepositoriesRequest) (*operations.DescribeRepositoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.DescribeRepositories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -958,7 +994,7 @@ func (s *SDK) DescribeRepositories(ctx context.Context, request operations.Descr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1018,8 +1054,9 @@ func (s *SDK) DescribeRepositories(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// GetAuthorizationToken - Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. This API requires the <code>ecr-public:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions.
 func (s *SDK) GetAuthorizationToken(ctx context.Context, request operations.GetAuthorizationTokenRequest) (*operations.GetAuthorizationTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.GetAuthorizationToken"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1039,7 +1076,7 @@ func (s *SDK) GetAuthorizationToken(ctx context.Context, request operations.GetA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1089,8 +1126,9 @@ func (s *SDK) GetAuthorizationToken(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetRegistryCatalogData - Retrieves catalog metadata for a public registry.
 func (s *SDK) GetRegistryCatalogData(ctx context.Context, request operations.GetRegistryCatalogDataRequest) (*operations.GetRegistryCatalogDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.GetRegistryCatalogData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1110,7 +1148,7 @@ func (s *SDK) GetRegistryCatalogData(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1160,8 +1198,9 @@ func (s *SDK) GetRegistryCatalogData(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetRepositoryCatalogData - Retrieve catalog metadata for a repository in a public registry. This metadata is displayed publicly in the Amazon ECR Public Gallery.
 func (s *SDK) GetRepositoryCatalogData(ctx context.Context, request operations.GetRepositoryCatalogDataRequest) (*operations.GetRepositoryCatalogDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.GetRepositoryCatalogData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1181,7 +1220,7 @@ func (s *SDK) GetRepositoryCatalogData(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1241,8 +1280,9 @@ func (s *SDK) GetRepositoryCatalogData(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetRepositoryPolicy - Retrieves the repository policy for the specified repository.
 func (s *SDK) GetRepositoryPolicy(ctx context.Context, request operations.GetRepositoryPolicyRequest) (*operations.GetRepositoryPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.GetRepositoryPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1262,7 +1302,7 @@ func (s *SDK) GetRepositoryPolicy(ctx context.Context, request operations.GetRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1332,8 +1372,9 @@ func (s *SDK) GetRepositoryPolicy(ctx context.Context, request operations.GetRep
 	return res, nil
 }
 
+// InitiateLayerUpload - <p>Notifies Amazon ECR that you intend to upload an image layer.</p> <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether or not an image layer has been uploaded is determined by the BatchCheckLayerAvailability API action.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
 func (s *SDK) InitiateLayerUpload(ctx context.Context, request operations.InitiateLayerUploadRequest) (*operations.InitiateLayerUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.InitiateLayerUpload"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1353,7 +1394,7 @@ func (s *SDK) InitiateLayerUpload(ctx context.Context, request operations.Initia
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1433,8 +1474,9 @@ func (s *SDK) InitiateLayerUpload(ctx context.Context, request operations.Initia
 	return res, nil
 }
 
+// ListTagsForResource - List the tags for an Amazon ECR Public resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1454,7 +1496,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1514,8 +1556,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutImage - <p>Creates or updates the image manifest and tags associated with an image.</p> <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and the tags associated with the image.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
 func (s *SDK) PutImage(ctx context.Context, request operations.PutImageRequest) (*operations.PutImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.PutImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1535,7 +1578,7 @@ func (s *SDK) PutImage(ctx context.Context, request operations.PutImageRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1675,8 +1718,9 @@ func (s *SDK) PutImage(ctx context.Context, request operations.PutImageRequest) 
 	return res, nil
 }
 
+// PutRegistryCatalogData - Create or updates the catalog data for a public registry.
 func (s *SDK) PutRegistryCatalogData(ctx context.Context, request operations.PutRegistryCatalogDataRequest) (*operations.PutRegistryCatalogDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.PutRegistryCatalogData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1696,7 +1740,7 @@ func (s *SDK) PutRegistryCatalogData(ctx context.Context, request operations.Put
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1756,8 +1800,9 @@ func (s *SDK) PutRegistryCatalogData(ctx context.Context, request operations.Put
 	return res, nil
 }
 
+// PutRepositoryCatalogData - Creates or updates the catalog data for a repository in a public registry.
 func (s *SDK) PutRepositoryCatalogData(ctx context.Context, request operations.PutRepositoryCatalogDataRequest) (*operations.PutRepositoryCatalogDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.PutRepositoryCatalogData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1777,7 +1822,7 @@ func (s *SDK) PutRepositoryCatalogData(ctx context.Context, request operations.P
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1837,8 +1882,9 @@ func (s *SDK) PutRepositoryCatalogData(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// SetRepositoryPolicy - Applies a repository policy to the specified public repository to control access permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.
 func (s *SDK) SetRepositoryPolicy(ctx context.Context, request operations.SetRepositoryPolicyRequest) (*operations.SetRepositoryPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.SetRepositoryPolicy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1858,7 +1904,7 @@ func (s *SDK) SetRepositoryPolicy(ctx context.Context, request operations.SetRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1918,8 +1964,9 @@ func (s *SDK) SetRepositoryPolicy(ctx context.Context, request operations.SetRep
 	return res, nil
 }
 
+// TagResource - Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1939,7 +1986,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2019,8 +2066,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Deletes specified tags from a resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2040,7 +2088,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2120,8 +2168,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UploadLayerPart - <p>Uploads an image layer part to Amazon ECR.</p> <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per each new image layer part.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
 func (s *SDK) UploadLayerPart(ctx context.Context, request operations.UploadLayerPartRequest) (*operations.UploadLayerPartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=SpencerFrontendService.UploadLayerPart"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2141,7 +2190,7 @@ func (s *SDK) UploadLayerPart(ctx context.Context, request operations.UploadLaye
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

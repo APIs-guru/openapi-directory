@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IoTJobAbortActionEnum } from "./iotjobabortactionenum";
 import { IoTJobExecutionFailureTypeEnum } from "./iotjobexecutionfailuretypeenum";
 /**

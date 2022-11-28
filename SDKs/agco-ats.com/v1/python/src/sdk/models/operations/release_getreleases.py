@@ -13,13 +13,13 @@ class ReleaseGetReleasesQueryParams:
 
 @dataclass
 class ReleaseGetReleasesRequest:
-    query_params: ReleaseGetReleasesQueryParams = field(default=None)
+    query_params: ReleaseGetReleasesQueryParams = field()
     
 
 @dataclass
 class ReleaseGetReleasesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_content_submission_shared_business_entities_release_: Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesRelease] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

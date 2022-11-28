@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsMediaStartUploadPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessAccountsLocationsMediaStartUploadQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsMediaStartUploadRequest:
-    path_params: MybusinessAccountsLocationsMediaStartUploadPathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsMediaStartUploadQueryParams = field(default=None)
+    path_params: MybusinessAccountsLocationsMediaStartUploadPathParams = field()
+    query_params: MybusinessAccountsLocationsMediaStartUploadQueryParams = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsMediaStartUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media_item_data_ref: Optional[shared.MediaItemDataRef] = field(default=None)
-    status_code: int = field(default=None)
     

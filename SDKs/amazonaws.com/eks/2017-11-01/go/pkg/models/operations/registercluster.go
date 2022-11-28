@@ -14,6 +14,8 @@ type RegisterClusterHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// RegisterClusterRequestBodyConnectorConfig
+// The configuration sent to a cluster for configuration.
 type RegisterClusterRequestBodyConnectorConfig struct {
 	Provider *shared.ConnectorConfigProviderEnum `json:"provider,omitempty"`
 	RoleArn  *string                             `json:"roleArn,omitempty"`

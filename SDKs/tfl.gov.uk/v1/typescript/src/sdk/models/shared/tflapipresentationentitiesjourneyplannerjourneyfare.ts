@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesJourneyPlannerFareCaveat } from "./tflapipresentationentitiesjourneyplannerfarecaveat";
 import { TflApiPresentationEntitiesJourneyPlannerFare } from "./tflapipresentationentitiesjourneyplannerfare";
 
 
+
 export class TflApiPresentationEntitiesJourneyPlannerJourneyFare extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caveats", elemType: shared.TflApiPresentationEntitiesJourneyPlannerFareCaveat })
+  @SpeakeasyMetadata({ data: "json, name=caveats", elemType: TflApiPresentationEntitiesJourneyPlannerFareCaveat })
   caveats?: TflApiPresentationEntitiesJourneyPlannerFareCaveat[];
 
-  @Metadata({ data: "json, name=fares", elemType: shared.TflApiPresentationEntitiesJourneyPlannerFare })
+  @SpeakeasyMetadata({ data: "json, name=fares", elemType: TflApiPresentationEntitiesJourneyPlannerFare })
   fares?: TflApiPresentationEntitiesJourneyPlannerFare[];
 
-  @Metadata({ data: "json, name=totalCost" })
+  @SpeakeasyMetadata({ data: "json, name=totalCost" })
   totalCost?: number;
 }

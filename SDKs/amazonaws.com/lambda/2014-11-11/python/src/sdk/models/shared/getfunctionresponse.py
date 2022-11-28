@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import functioncodelocation
-from . import functionconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetFunctionResponse:
-    code: Optional[functioncodelocation.FunctionCodeLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    configuration: Optional[functionconfiguration.FunctionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Configuration' }})
+    r"""GetFunctionResponse
+    This response contains the object for AWS Lambda function location (see <a>API_FunctionCodeLocation</a>
+    """
+    
+    code: Optional[FunctionCodeLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    configuration: Optional[FunctionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Configuration') }})
     

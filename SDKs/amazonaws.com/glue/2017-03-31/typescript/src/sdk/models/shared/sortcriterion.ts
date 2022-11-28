@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SortEnum } from "./sortenum";
+
 
 
 // SortCriterion
@@ -7,9 +8,9 @@ import { SortEnum } from "./sortenum";
  * Specifies a field to sort by and a sort order.
 **/
 export class SortCriterion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FieldName" })
+  @SpeakeasyMetadata({ data: "json, name=FieldName" })
   fieldName?: string;
 
-  @Metadata({ data: "json, name=Sort" })
+  @SpeakeasyMetadata({ data: "json, name=Sort" })
   sort?: SortEnum;
 }

@@ -30,7 +30,7 @@ type GkehubProjectsLocationsMembershipsValidateCreateSecurity struct {
 type GkehubProjectsLocationsMembershipsValidateCreateRequest struct {
 	PathParams  GkehubProjectsLocationsMembershipsValidateCreatePathParams
 	QueryParams GkehubProjectsLocationsMembershipsValidateCreateQueryParams
-	Request     *shared.ValidateCreateMembershipRequest `request:"mediaType=application/json"`
+	Request     *shared.ValidateCreateMembershipRequestInput `request:"mediaType=application/json"`
 	Security    GkehubProjectsLocationsMembershipsValidateCreateSecurity
 }
 

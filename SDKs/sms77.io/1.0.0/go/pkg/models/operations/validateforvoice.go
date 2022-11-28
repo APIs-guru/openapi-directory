@@ -5,14 +5,14 @@ type ValidateForVoiceQueryParams struct {
 	Number   string  `queryParam:"style=form,explode=true,name=number"`
 }
 
-type ValidateForVoiceRequest struct {
-	QueryParams ValidateForVoiceQueryParams
-}
-
 type ValidateForVoice200ApplicationJSON struct {
 	Code    *string `json:"code,omitempty"`
 	Error   *string `json:"error,omitempty"`
 	Success *bool   `json:"success,omitempty"`
+}
+
+type ValidateForVoiceRequest struct {
+	QueryParams ValidateForVoiceQueryParams
 }
 
 type ValidateForVoiceResponse struct {

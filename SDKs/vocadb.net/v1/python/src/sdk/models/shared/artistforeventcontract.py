@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import artistcontract
+from sdk import utils
+from . import *
 
 class ArtistForEventContractEffectiveRolesEnum(str, Enum):
     DEFAULT = "Default"
@@ -33,9 +35,9 @@ class ArtistForEventContractRolesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ArtistForEventContract:
-    artist: Optional[artistcontract.ArtistContract] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'artist' }})
-    effective_roles: Optional[ArtistForEventContractEffectiveRolesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'effectiveRoles' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    roles: Optional[ArtistForEventContractRolesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
+    artist: Optional[ArtistContract] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('artist') }})
+    effective_roles: Optional[ArtistForEventContractEffectiveRolesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('effectiveRoles') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    roles: Optional[ArtistForEventContractRolesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
     

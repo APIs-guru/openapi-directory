@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoRollbackConfig } from "./autorollbackconfig";
 import { BlueGreenUpdatePolicy } from "./bluegreenupdatepolicy";
+
 
 
 // DeploymentConfig
@@ -8,9 +9,9 @@ import { BlueGreenUpdatePolicy } from "./bluegreenupdatepolicy";
  * Currently, the <code>DeploymentConfig</code> API is not supported.
 **/
 export class DeploymentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoRollbackConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=AutoRollbackConfiguration" })
   autoRollbackConfiguration?: AutoRollbackConfig;
 
-  @Metadata({ data: "json, name=BlueGreenUpdatePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=BlueGreenUpdatePolicy" })
   blueGreenUpdatePolicy: BlueGreenUpdatePolicy;
 }

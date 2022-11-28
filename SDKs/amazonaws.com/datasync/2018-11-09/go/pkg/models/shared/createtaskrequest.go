@@ -1,5 +1,7 @@
 package shared
 
+// CreateTaskRequest
+// CreateTaskRequest
 type CreateTaskRequest struct {
 	CloudWatchLogGroupArn  *string        `json:"CloudWatchLogGroupArn,omitempty"`
 	DestinationLocationArn string         `json:"DestinationLocationArn"`

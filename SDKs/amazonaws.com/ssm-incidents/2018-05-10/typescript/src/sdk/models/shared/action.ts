@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SsmAutomation } from "./ssmautomation";
+
 
 
 // Action
@@ -7,6 +8,6 @@ import { SsmAutomation } from "./ssmautomation";
  * The action that starts at the beginning of an incident. The response plan defines the action.
 **/
 export class Action extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ssmAutomation" })
+  @SpeakeasyMetadata({ data: "json, name=ssmAutomation" })
   ssmAutomation?: SsmAutomation;
 }

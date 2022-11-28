@@ -47,7 +47,7 @@ type CloudsearchSettingsSearchapplicationsUpdateSecurity struct {
 type CloudsearchSettingsSearchapplicationsUpdateRequest struct {
 	PathParams  CloudsearchSettingsSearchapplicationsUpdatePathParams
 	QueryParams CloudsearchSettingsSearchapplicationsUpdateQueryParams
-	Request     *shared.SearchApplication `request:"mediaType=application/json"`
+	Request     *shared.SearchApplicationInput `request:"mediaType=application/json"`
 	Security    CloudsearchSettingsSearchapplicationsUpdateSecurity
 }
 

@@ -12,6 +12,8 @@ const (
 	HeaderTypeEnumMetricDecimal         HeaderTypeEnum = "METRIC_DECIMAL"
 )
 
+// Header
+// The header information of the columns requested in the report.
 type Header struct {
 	CurrencyCode *string         `json:"currencyCode,omitempty"`
 	Name         *string         `json:"name,omitempty"`

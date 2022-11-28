@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionStateEnum } from "./executionstateenum";
 var DescribeExecutionOutput = /** @class */ (function (_super) {
     __extends(DescribeExecutionOutput, _super);
@@ -30,27 +30,27 @@ var DescribeExecutionOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=executionId" }),
+        SpeakeasyMetadata({ data: "json, name=executionId" }),
         __metadata("design:type", String)
     ], DescribeExecutionOutput.prototype, "executionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], DescribeExecutionOutput.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=managedDeviceId" }),
+        SpeakeasyMetadata({ data: "json, name=managedDeviceId" }),
         __metadata("design:type", String)
     ], DescribeExecutionOutput.prototype, "managedDeviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=startedAt" }),
+        SpeakeasyMetadata({ data: "json, name=startedAt" }),
         __metadata("design:type", Date)
     ], DescribeExecutionOutput.prototype, "startedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], DescribeExecutionOutput.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=taskId" }),
+        SpeakeasyMetadata({ data: "json, name=taskId" }),
         __metadata("design:type", String)
     ], DescribeExecutionOutput.prototype, "taskId", void 0);
     return DescribeExecutionOutput;

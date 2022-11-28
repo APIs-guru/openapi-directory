@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentPathParams:
-    participant: str = field(default=None, metadata={'path_param': { 'field_name': 'participant', 'style': 'simple', 'explode': False }})
+    participant: str = field(metadata={'path_param': { 'field_name': 'participant', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentQueryPar
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentSecurity
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentRequest:
-    path_params: DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentQueryParams = field(default=None)
+    path_params: DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentPathParams = field()
+    query_params: DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentQueryParams = field()
+    security: DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentSecurity = field()
     request: Optional[shared.GoogleCloudDialogflowV2beta1AnalyzeContentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentSecurity = field(default=None)
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_v2beta1_analyze_content_response: Optional[shared.GoogleCloudDialogflowV2beta1AnalyzeContentResponse] = field(default=None)
-    status_code: int = field(default=None)
     

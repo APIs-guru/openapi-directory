@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetParcelsPidsSiteIdOutputFormatOutputFormatEnum;
 (function (GetParcelsPidsSiteIdOutputFormatOutputFormatEnum) {
     GetParcelsPidsSiteIdOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,11 +39,11 @@ var GetParcelsPidsSiteIdOutputFormatPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetParcelsPidsSiteIdOutputFormatPathParams.prototype, "outputFormat", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=siteID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteID" }),
         __metadata("design:type", String)
     ], GetParcelsPidsSiteIdOutputFormatPathParams.prototype, "siteId", void 0);
     return GetParcelsPidsSiteIdOutputFormatPathParams;
@@ -55,7 +55,7 @@ var GetParcelsPidsSiteIdOutputFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetParcelsPidsSiteIdOutputFormatPathParams)
     ], GetParcelsPidsSiteIdOutputFormatRequest.prototype, "pathParams", void 0);
     return GetParcelsPidsSiteIdOutputFormatRequest;
@@ -67,11 +67,11 @@ var GetParcelsPidsSiteIdOutputFormatResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetParcelsPidsSiteIdOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetParcelsPidsSiteIdOutputFormatResponse.prototype, "statusCode", void 0);
     return GetParcelsPidsSiteIdOutputFormatResponse;

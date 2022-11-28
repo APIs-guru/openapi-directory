@@ -5,22 +5,22 @@ from sdk.models import shared
 
 @dataclass
 class PostBehaviorsWebhookTestRequestBody:
+    url: str = field(metadata={'multipart_form': { 'field_name': 'url' }})
     action: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'action' }})
     body: Optional[dict[str, Any]] = field(default=None, metadata={'multipart_form': { 'field_name': 'body', 'json': True }})
     encoding: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'encoding' }})
     headers: Optional[dict[str, Any]] = field(default=None, metadata={'multipart_form': { 'field_name': 'headers', 'json': True }})
     method: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'method' }})
-    url: str = field(default=None, metadata={'multipart_form': { 'field_name': 'url' }})
     
 
 @dataclass
 class PostBehaviorsWebhookTestRequest:
-    request: PostBehaviorsWebhookTestRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    request: PostBehaviorsWebhookTestRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostBehaviorsWebhookTestResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     status_entity: Optional[shared.StatusEntity] = field(default=None)
     

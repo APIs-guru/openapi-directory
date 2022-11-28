@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import masterauth
+from sdk import utils
+from . import *
 
 class SetMasterAuthRequestActionEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -13,10 +18,14 @@ class SetMasterAuthRequestActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SetMasterAuthRequest:
-    action: Optional[SetMasterAuthRequestActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    cluster_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterId' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectId' }})
-    update: Optional[masterauth.MasterAuth] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'update' }})
-    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zone' }})
+    r"""SetMasterAuthRequest
+    SetMasterAuthRequest updates the admin password of a cluster.
+    """
+    
+    action: Optional[SetMasterAuthRequestActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    cluster_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterId') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    update: Optional[MasterAuth] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('update') }})
+    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zone') }})
     

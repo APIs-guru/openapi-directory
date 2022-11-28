@@ -21,6 +21,8 @@ const (
 	ActivitySnippetTypeEnumPromotedItem    ActivitySnippetTypeEnum = "promotedItem"
 )
 
+// ActivitySnippet
+// Basic details about an activity, including title, description, thumbnails, activity type and group. Next ID: 12
 type ActivitySnippet struct {
 	ChannelID    *string                  `json:"channelId,omitempty"`
 	ChannelTitle *string                  `json:"channelTitle,omitempty"`

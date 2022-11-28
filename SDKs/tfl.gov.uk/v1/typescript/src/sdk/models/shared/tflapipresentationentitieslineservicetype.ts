@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesLineSpecificServiceType } from "./tflapipresentationentitieslinespecificservicetype";
 
 
+
 export class TflApiPresentationEntitiesLineServiceType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineName" })
+  @SpeakeasyMetadata({ data: "json, name=lineName" })
   lineName?: string;
 
-  @Metadata({ data: "json, name=lineSpecificServiceTypes", elemType: shared.TflApiPresentationEntitiesLineSpecificServiceType })
+  @SpeakeasyMetadata({ data: "json, name=lineSpecificServiceTypes", elemType: TflApiPresentationEntitiesLineSpecificServiceType })
   lineSpecificServiceTypes?: TflApiPresentationEntitiesLineSpecificServiceType[];
 }

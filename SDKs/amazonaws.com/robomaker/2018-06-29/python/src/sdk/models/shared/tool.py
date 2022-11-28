@@ -1,15 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import exitbehavior_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Tool:
-    command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    exit_behavior: Optional[exitbehavior_enum.ExitBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exitBehavior' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    stream_output_to_cloud_watch: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'streamOutputToCloudWatch' }})
-    stream_ui: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'streamUI' }})
+    r"""Tool
+    Information about a tool. Tools are used in a simulation job.
+    """
+    
+    command: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('command') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    exit_behavior: Optional[ExitBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exitBehavior') }})
+    stream_output_to_cloud_watch: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('streamOutputToCloudWatch') }})
+    stream_ui: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('streamUI') }})
     

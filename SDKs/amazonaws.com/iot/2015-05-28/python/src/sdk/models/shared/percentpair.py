@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class PercentPair:
-    percent: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percent' }})
-    value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""PercentPair
+    Describes the percentile and percentile value.
+    """
+    
+    percent: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('percent') }})
+    value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

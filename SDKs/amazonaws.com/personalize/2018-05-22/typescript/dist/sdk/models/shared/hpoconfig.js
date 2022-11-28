@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HyperParameterRanges } from "./hyperparameterranges";
 import { HpoObjective } from "./hpoobjective";
 import { HpoResourceConfig } from "./hporesourceconfig";
@@ -36,15 +36,15 @@ var HpoConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithmHyperParameterRanges" }),
+        SpeakeasyMetadata({ data: "json, name=algorithmHyperParameterRanges" }),
         __metadata("design:type", HyperParameterRanges)
     ], HpoConfig.prototype, "algorithmHyperParameterRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=hpoObjective" }),
+        SpeakeasyMetadata({ data: "json, name=hpoObjective" }),
         __metadata("design:type", HpoObjective)
     ], HpoConfig.prototype, "hpoObjective", void 0);
     __decorate([
-        Metadata({ data: "json, name=hpoResourceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=hpoResourceConfig" }),
         __metadata("design:type", HpoResourceConfig)
     ], HpoConfig.prototype, "hpoResourceConfig", void 0);
     return HpoConfig;

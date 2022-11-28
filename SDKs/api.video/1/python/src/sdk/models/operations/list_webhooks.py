@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -12,18 +12,18 @@ class ListWebhooksQueryParams:
 
 @dataclass
 class ListWebhooksSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ListWebhooksRequest:
-    query_params: ListWebhooksQueryParams = field(default=None)
-    security: ListWebhooksSecurity = field(default=None)
+    query_params: ListWebhooksQueryParams = field()
+    security: ListWebhooksSecurity = field()
     
 
 @dataclass
 class ListWebhooksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webhooks_list_response: Optional[shared.WebhooksListResponse] = field(default=None)
     

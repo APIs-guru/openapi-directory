@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldContentTypeEnum } from "./fieldcontenttypeenum";
+
 
 
 // ObjectTypeField
@@ -7,12 +8,12 @@ import { FieldContentTypeEnum } from "./fieldcontenttypeenum";
  * Represents a field in a ProfileObjectType.
 **/
 export class ObjectTypeField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType?: FieldContentTypeEnum;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: string;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target?: string;
 }

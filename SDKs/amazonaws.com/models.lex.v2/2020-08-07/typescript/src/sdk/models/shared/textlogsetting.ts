@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextLogDestination } from "./textlogdestination";
+
 
 
 // TextLogSetting
@@ -7,9 +8,9 @@ import { TextLogDestination } from "./textlogdestination";
  * Defines settings to enable text conversation logs.
 **/
 export class TextLogSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination: TextLogDestination;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 }

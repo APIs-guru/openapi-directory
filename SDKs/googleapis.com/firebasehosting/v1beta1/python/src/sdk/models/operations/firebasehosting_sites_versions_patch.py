@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasehostingSitesVersionsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class FirebasehostingSitesVersionsPatchQueryParams:
 
 @dataclass
 class FirebasehostingSitesVersionsPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasehostingSitesVersionsPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +48,15 @@ class FirebasehostingSitesVersionsPatchSecurity:
 
 @dataclass
 class FirebasehostingSitesVersionsPatchRequest:
-    path_params: FirebasehostingSitesVersionsPatchPathParams = field(default=None)
-    query_params: FirebasehostingSitesVersionsPatchQueryParams = field(default=None)
+    path_params: FirebasehostingSitesVersionsPatchPathParams = field()
+    query_params: FirebasehostingSitesVersionsPatchQueryParams = field()
+    security: FirebasehostingSitesVersionsPatchSecurity = field()
     request: Optional[shared.Version] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasehostingSitesVersionsPatchSecurity = field(default=None)
     
 
 @dataclass
 class FirebasehostingSitesVersionsPatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     version: Optional[shared.Version] = field(default=None)
     

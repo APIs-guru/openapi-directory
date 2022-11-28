@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserMarketplacePurchase
+// User Marketplace Purchase
 type UserMarketplacePurchase struct {
 	Account         MarketplaceAccount     `json:"account"`
 	BillingCycle    string                 `json:"billing_cycle"`

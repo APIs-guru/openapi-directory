@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningArtifactGuidanceEnum } from "./provisioningartifactguidanceenum";
 var UpdateProvisioningArtifactInput = /** @class */ (function (_super) {
     __extends(UpdateProvisioningArtifactInput, _super);
@@ -30,31 +30,31 @@ var UpdateProvisioningArtifactInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], UpdateProvisioningArtifactInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Active" }),
+        SpeakeasyMetadata({ data: "json, name=Active" }),
         __metadata("design:type", Boolean)
     ], UpdateProvisioningArtifactInput.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateProvisioningArtifactInput.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Guidance" }),
+        SpeakeasyMetadata({ data: "json, name=Guidance" }),
         __metadata("design:type", String)
     ], UpdateProvisioningArtifactInput.prototype, "guidance", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], UpdateProvisioningArtifactInput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], UpdateProvisioningArtifactInput.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], UpdateProvisioningArtifactInput.prototype, "provisioningArtifactId", void 0);
     return UpdateProvisioningArtifactInput;

@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import behavioronmxfailure_enum
-from . import mailfromdomainstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MailFromAttributes:
-    behavior_on_mx_failure: behavioronmxfailure_enum.BehaviorOnMxFailureEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BehaviorOnMxFailure' }})
-    mail_from_domain: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MailFromDomain' }})
-    mail_from_domain_status: mailfromdomainstatus_enum.MailFromDomainStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MailFromDomainStatus' }})
+    r"""MailFromAttributes
+    A list of attributes that are associated with a MAIL FROM domain.
+    """
+    
+    behavior_on_mx_failure: BehaviorOnMxFailureEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BehaviorOnMxFailure') }})
+    mail_from_domain: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MailFromDomain') }})
+    mail_from_domain_status: MailFromDomainStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MailFromDomainStatus') }})
     

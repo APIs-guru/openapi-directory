@@ -18,6 +18,8 @@ const (
 	SiteSummaryResponseFilterStatusEnumPending SiteSummaryResponseFilterStatusEnum = "PENDING"
 )
 
+// SiteSummaryResponse
+// Response message for GetSiteSummary.
 type SiteSummaryResponse struct {
 	AbusiveStatus   *SiteSummaryResponseAbusiveStatusEnum `json:"abusiveStatus,omitempty"`
 	EnforcementTime *string                               `json:"enforcementTime,omitempty"`

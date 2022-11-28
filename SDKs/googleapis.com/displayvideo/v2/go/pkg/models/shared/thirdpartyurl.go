@@ -21,6 +21,8 @@ const (
 	ThirdPartyURLTypeEnumThirdPartyURLTypeAudioVideoProgress      ThirdPartyURLTypeEnum = "THIRD_PARTY_URL_TYPE_AUDIO_VIDEO_PROGRESS"
 )
 
+// ThirdPartyURL
+// Tracking URLs from third parties to track interactions with an audio or a video creative.
 type ThirdPartyURL struct {
 	Type *ThirdPartyURLTypeEnum `json:"type,omitempty"`
 	URL  *string                `json:"url,omitempty"`

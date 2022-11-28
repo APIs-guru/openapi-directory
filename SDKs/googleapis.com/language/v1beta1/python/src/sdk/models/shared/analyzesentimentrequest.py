@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import document
+from sdk import utils
+from . import *
 
 class AnalyzeSentimentRequestEncodingTypeEnum(str, Enum):
     NONE = "NONE"
@@ -13,6 +15,10 @@ class AnalyzeSentimentRequestEncodingTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AnalyzeSentimentRequest:
-    document: Optional[document.Document] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document' }})
-    encoding_type: Optional[AnalyzeSentimentRequestEncodingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encodingType' }})
+    r"""AnalyzeSentimentRequest
+    The sentiment analysis request message.
+    """
+    
+    document: Optional[Document] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('document') }})
+    encoding_type: Optional[AnalyzeSentimentRequestEncodingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encodingType') }})
     

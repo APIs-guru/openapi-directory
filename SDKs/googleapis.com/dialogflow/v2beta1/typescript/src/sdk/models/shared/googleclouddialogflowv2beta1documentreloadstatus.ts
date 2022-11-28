@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleRpcStatus } from "./googlerpcstatus";
+
 
 
 // GoogleCloudDialogflowV2beta1DocumentReloadStatus
@@ -7,9 +8,9 @@ import { GoogleRpcStatus } from "./googlerpcstatus";
  * The status of a reload attempt.
 **/
 export class GoogleCloudDialogflowV2beta1DocumentReloadStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GoogleRpcStatus;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 }

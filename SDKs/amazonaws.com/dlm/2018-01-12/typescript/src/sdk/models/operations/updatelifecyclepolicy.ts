@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateLifecyclePolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=policyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=policyId" })
   policyId: string;
 }
 
 
 export class UpdateLifecyclePolicyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,83 +38,83 @@ export class UpdateLifecyclePolicyHeaders extends SpeakeasyBase {
  * Specifies the configuration of a lifecycle policy.
 **/
 export class UpdateLifecyclePolicyRequestBodyPolicyDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=Actions", elemType: shared.Action })
   actions?: shared.Action[];
 
-  @Metadata({ data: "json, name=EventSource" })
+  @SpeakeasyMetadata({ data: "json, name=EventSource" })
   eventSource?: shared.EventSource;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: shared.Parameters;
 
-  @Metadata({ data: "json, name=PolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyType" })
   policyType?: shared.PolicyTypeValuesEnum;
 
-  @Metadata({ data: "json, name=ResourceLocations" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceLocations" })
   resourceLocations?: shared.ResourceLocationValuesEnum[];
 
-  @Metadata({ data: "json, name=ResourceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceTypes" })
   resourceTypes?: shared.ResourceTypeValuesEnum[];
 
-  @Metadata({ data: "json, name=Schedules", elemType: shared.Schedule })
+  @SpeakeasyMetadata({ data: "json, name=Schedules", elemType: shared.Schedule })
   schedules?: shared.Schedule[];
 
-  @Metadata({ data: "json, name=TargetTags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TargetTags", elemType: shared.Tag })
   targetTags?: shared.Tag[];
 }
 
 export enum UpdateLifecyclePolicyRequestBodyStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 
 export class UpdateLifecyclePolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ExecutionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionRoleArn" })
   executionRoleArn?: string;
 
-  @Metadata({ data: "json, name=PolicyDetails" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyDetails" })
   policyDetails?: UpdateLifecyclePolicyRequestBodyPolicyDetails;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: UpdateLifecyclePolicyRequestBodyStateEnum;
 }
 
 
 export class UpdateLifecyclePolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateLifecyclePolicyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateLifecyclePolicyHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateLifecyclePolicyRequestBody;
 }
 
 
 export class UpdateLifecyclePolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateLifecyclePolicyResponse?: Map<string, any>;
 }

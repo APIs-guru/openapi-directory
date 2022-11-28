@@ -1,5 +1,7 @@
 package shared
 
+// InstanceStatus
+// Instance represents the status of an instance of a Job.
 type InstanceStatus struct {
 	CompletionTime    *string                `json:"completionTime,omitempty"`
 	Failed            *int32                 `json:"failed,omitempty"`

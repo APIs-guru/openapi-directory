@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsElasticBeanstalkEnvironmentEnvironmentLink } from "./awselasticbeanstalkenvironmentenvironmentlink";
 import { AwsElasticBeanstalkEnvironmentOptionSetting } from "./awselasticbeanstalkenvironmentoptionsetting";
 import { AwsElasticBeanstalkEnvironmentTier } from "./awselasticbeanstalkenvironmenttier";
+
 
 
 // AwsElasticBeanstalkEnvironmentDetails
@@ -10,51 +10,51 @@ import { AwsElasticBeanstalkEnvironmentTier } from "./awselasticbeanstalkenviron
  * Contains details about an Elastic Beanstalk environment.
 **/
 export class AwsElasticBeanstalkEnvironmentDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName?: string;
 
-  @Metadata({ data: "json, name=Cname" })
+  @SpeakeasyMetadata({ data: "json, name=Cname" })
   cname?: string;
 
-  @Metadata({ data: "json, name=DateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=DateCreated" })
   dateCreated?: string;
 
-  @Metadata({ data: "json, name=DateUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=DateUpdated" })
   dateUpdated?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EndpointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointUrl" })
   endpointUrl?: string;
 
-  @Metadata({ data: "json, name=EnvironmentArn" })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentArn" })
   environmentArn?: string;
 
-  @Metadata({ data: "json, name=EnvironmentId" })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentId" })
   environmentId?: string;
 
-  @Metadata({ data: "json, name=EnvironmentLinks", elemType: shared.AwsElasticBeanstalkEnvironmentEnvironmentLink })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentLinks", elemType: AwsElasticBeanstalkEnvironmentEnvironmentLink })
   environmentLinks?: AwsElasticBeanstalkEnvironmentEnvironmentLink[];
 
-  @Metadata({ data: "json, name=EnvironmentName" })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentName" })
   environmentName?: string;
 
-  @Metadata({ data: "json, name=OptionSettings", elemType: shared.AwsElasticBeanstalkEnvironmentOptionSetting })
+  @SpeakeasyMetadata({ data: "json, name=OptionSettings", elemType: AwsElasticBeanstalkEnvironmentOptionSetting })
   optionSettings?: AwsElasticBeanstalkEnvironmentOptionSetting[];
 
-  @Metadata({ data: "json, name=PlatformArn" })
+  @SpeakeasyMetadata({ data: "json, name=PlatformArn" })
   platformArn?: string;
 
-  @Metadata({ data: "json, name=SolutionStackName" })
+  @SpeakeasyMetadata({ data: "json, name=SolutionStackName" })
   solutionStackName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=Tier" })
+  @SpeakeasyMetadata({ data: "json, name=Tier" })
   tier?: AwsElasticBeanstalkEnvironmentTier;
 
-  @Metadata({ data: "json, name=VersionLabel" })
+  @SpeakeasyMetadata({ data: "json, name=VersionLabel" })
   versionLabel?: string;
 }

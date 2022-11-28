@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDistrictsByYearPathParams:
-    year: int = field(default=None, metadata={'path_param': { 'field_name': 'year', 'style': 'simple', 'explode': False }})
+    year: int = field(metadata={'path_param': { 'field_name': 'year', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetDistrictsByYearHeaders:
 
 @dataclass
 class GetDistrictsByYearSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetDistrictsByYearRequest:
-    path_params: GetDistrictsByYearPathParams = field(default=None)
-    headers: GetDistrictsByYearHeaders = field(default=None)
-    security: GetDistrictsByYearSecurity = field(default=None)
+    headers: GetDistrictsByYearHeaders = field()
+    path_params: GetDistrictsByYearPathParams = field()
+    security: GetDistrictsByYearSecurity = field()
     
 
 @dataclass
 class GetDistrictsByYearResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     district_lists: Optional[List[shared.DistrictList]] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

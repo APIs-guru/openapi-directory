@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionStateEnum } from "./executionstateenum";
 export declare class DescribeExecutionOutput extends SpeakeasyBase {
     executionId?: string;

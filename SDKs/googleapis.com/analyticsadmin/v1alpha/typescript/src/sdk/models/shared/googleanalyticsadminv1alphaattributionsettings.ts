@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum {
-    AcquisitionConversionEventLookbackWindowUnspecified = "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED"
-,    AcquisitionConversionEventLookbackWindow7Days = "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS"
-,    AcquisitionConversionEventLookbackWindow30Days = "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS"
+    AcquisitionConversionEventLookbackWindowUnspecified = "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED",
+    AcquisitionConversionEventLookbackWindow7Days = "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS",
+    AcquisitionConversionEventLookbackWindow30Days = "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS"
 }
 
 export enum GoogleAnalyticsAdminV1alphaAttributionSettingsOtherConversionEventLookbackWindowEnum {
-    OtherConversionEventLookbackWindowUnspecified = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED"
-,    OtherConversionEventLookbackWindow30Days = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS"
-,    OtherConversionEventLookbackWindow60Days = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS"
-,    OtherConversionEventLookbackWindow90Days = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS"
+    OtherConversionEventLookbackWindowUnspecified = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED",
+    OtherConversionEventLookbackWindow30Days = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS",
+    OtherConversionEventLookbackWindow60Days = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS",
+    OtherConversionEventLookbackWindow90Days = "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS"
 }
 
 export enum GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnum {
-    ReportingAttributionModelUnspecified = "REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED"
-,    CrossChannelDataDriven = "CROSS_CHANNEL_DATA_DRIVEN"
-,    CrossChannelLastClick = "CROSS_CHANNEL_LAST_CLICK"
-,    CrossChannelFirstClick = "CROSS_CHANNEL_FIRST_CLICK"
-,    CrossChannelLinear = "CROSS_CHANNEL_LINEAR"
-,    CrossChannelPositionBased = "CROSS_CHANNEL_POSITION_BASED"
-,    CrossChannelTimeDecay = "CROSS_CHANNEL_TIME_DECAY"
-,    AdsPreferredLastClick = "ADS_PREFERRED_LAST_CLICK"
+    ReportingAttributionModelUnspecified = "REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED",
+    CrossChannelDataDriven = "CROSS_CHANNEL_DATA_DRIVEN",
+    CrossChannelLastClick = "CROSS_CHANNEL_LAST_CLICK",
+    CrossChannelFirstClick = "CROSS_CHANNEL_FIRST_CLICK",
+    CrossChannelLinear = "CROSS_CHANNEL_LINEAR",
+    CrossChannelPositionBased = "CROSS_CHANNEL_POSITION_BASED",
+    CrossChannelTimeDecay = "CROSS_CHANNEL_TIME_DECAY",
+    AdsPreferredLastClick = "ADS_PREFERRED_LAST_CLICK"
 }
 
 
@@ -30,15 +31,15 @@ export enum GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionMo
  * The attribution settings used for a given property. This is a singleton resource.
 **/
 export class GoogleAnalyticsAdminV1alphaAttributionSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acquisitionConversionEventLookbackWindow" })
+  @SpeakeasyMetadata({ data: "json, name=acquisitionConversionEventLookbackWindow" })
   acquisitionConversionEventLookbackWindow?: GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=otherConversionEventLookbackWindow" })
+  @SpeakeasyMetadata({ data: "json, name=otherConversionEventLookbackWindow" })
   otherConversionEventLookbackWindow?: GoogleAnalyticsAdminV1alphaAttributionSettingsOtherConversionEventLookbackWindowEnum;
 
-  @Metadata({ data: "json, name=reportingAttributionModel" })
+  @SpeakeasyMetadata({ data: "json, name=reportingAttributionModel" })
   reportingAttributionModel?: GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnum;
 }

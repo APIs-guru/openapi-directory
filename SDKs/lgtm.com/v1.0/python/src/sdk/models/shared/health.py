@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import health
+from sdk import utils
 
 class HealthStatusEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -12,7 +13,7 @@ class HealthStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Health:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    details: Optional[dict[str, health.Health]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    status: Optional[HealthStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    details: Optional[dict[str, Health]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    status: Optional[HealthStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

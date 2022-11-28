@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetAssetPropertyValueHistoryTimeOrderingEnum(str, Enum):
@@ -36,18 +37,18 @@ class GetAssetPropertyValueHistoryHeaders:
 
 @dataclass
 class GetAssetPropertyValueHistoryRequest:
-    query_params: GetAssetPropertyValueHistoryQueryParams = field(default=None)
-    headers: GetAssetPropertyValueHistoryHeaders = field(default=None)
+    headers: GetAssetPropertyValueHistoryHeaders = field()
+    query_params: GetAssetPropertyValueHistoryQueryParams = field()
     
 
 @dataclass
 class GetAssetPropertyValueHistoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_asset_property_value_history_response: Optional[shared.GetAssetPropertyValueHistoryResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

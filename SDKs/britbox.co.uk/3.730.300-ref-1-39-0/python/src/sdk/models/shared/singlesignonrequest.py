@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SingleSignOnRequestCookieTypeEnum(str, Enum):
     SESSION = "Session"
@@ -19,9 +21,9 @@ class SingleSignOnRequestScopesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SingleSignOnRequest:
-    cookie_type: Optional[SingleSignOnRequestCookieTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookieType' }})
-    link_accounts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linkAccounts' }})
-    provider: SingleSignOnRequestProviderEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
-    scopes: Optional[List[SingleSignOnRequestScopesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scopes' }})
-    token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
+    provider: SingleSignOnRequestProviderEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
+    token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('token') }})
+    cookie_type: Optional[SingleSignOnRequestCookieTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cookieType') }})
+    link_accounts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linkAccounts') }})
+    scopes: Optional[List[SingleSignOnRequestScopesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scopes') }})
     

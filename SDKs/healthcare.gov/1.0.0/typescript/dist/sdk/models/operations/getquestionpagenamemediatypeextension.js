@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetQuestionPageNameMediaTypeExtensionMediaTypeExtensionEnum;
 (function (GetQuestionPageNameMediaTypeExtensionMediaTypeExtensionEnum) {
     GetQuestionPageNameMediaTypeExtensionMediaTypeExtensionEnum["DotJson"] = ".json";
@@ -33,11 +33,11 @@ var GetQuestionPageNameMediaTypeExtensionPathParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" }),
         __metadata("design:type", String)
     ], GetQuestionPageNameMediaTypeExtensionPathParams.prototype, "mediaTypeExtension", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pageName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageName" }),
         __metadata("design:type", String)
     ], GetQuestionPageNameMediaTypeExtensionPathParams.prototype, "pageName", void 0);
     return GetQuestionPageNameMediaTypeExtensionPathParams;
@@ -49,7 +49,7 @@ var GetQuestionPageNameMediaTypeExtensionRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetQuestionPageNameMediaTypeExtensionPathParams)
     ], GetQuestionPageNameMediaTypeExtensionRequest.prototype, "pathParams", void 0);
     return GetQuestionPageNameMediaTypeExtensionRequest;
@@ -61,15 +61,15 @@ var GetQuestionPageNameMediaTypeExtensionResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetQuestionPageNameMediaTypeExtensionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetQuestionPageNameMediaTypeExtensionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetQuestionPageNameMediaTypeExtensionResponse.prototype, "statusCode", void 0);
     return GetQuestionPageNameMediaTypeExtensionResponse;

@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-// SdkResponse
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// SDKResponse
 /**
  * The binary blob response to <a>GetSdk</a>, which contains the generated SDK.
 **/
-var SdkResponse = /** @class */ (function (_super) {
-    __extends(SdkResponse, _super);
-    function SdkResponse() {
+var SDKResponse = /** @class */ (function (_super) {
+    __extends(SDKResponse, _super);
+    function SDKResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
-    ], SdkResponse.prototype, "body", void 0);
-    return SdkResponse;
+    ], SDKResponse.prototype, "body", void 0);
+    return SDKResponse;
 }(SpeakeasyBase));
-export { SdkResponse };
+export { SDKResponse };

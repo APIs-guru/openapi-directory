@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeSetSummaryListItem } from "./changesetsummarylistitem";
 
 
+
 export class ListChangeSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeSetSummaryList", elemType: shared.ChangeSetSummaryListItem })
+  @SpeakeasyMetadata({ data: "json, name=ChangeSetSummaryList", elemType: ChangeSetSummaryListItem })
   changeSetSummaryList?: ChangeSetSummaryListItem[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CommentReply } from "./commentreply";
+
 
 
 // CommentReplyList
@@ -8,18 +8,18 @@ import { CommentReply } from "./commentreply";
  * A list of replies to a comment on a file in Google Drive.
 **/
 export class CommentReplyList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.CommentReply })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: CommentReply })
   items?: CommentReply[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

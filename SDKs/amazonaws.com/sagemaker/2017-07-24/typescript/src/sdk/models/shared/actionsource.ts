@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionSource
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure describing the source of an action.
 **/
 export class ActionSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceId" })
+  @SpeakeasyMetadata({ data: "json, name=SourceId" })
   sourceId?: string;
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: string;
 
-  @Metadata({ data: "json, name=SourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=SourceUri" })
   sourceUri: string;
 }

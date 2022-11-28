@@ -27,11 +27,6 @@ type IticrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type IticrRequest struct {
-	Request  *IticrRequestBody `request:"mediaType=application/json"`
-	Security IticrSecurity
-}
-
 type Iticr400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Iticr504ApplicationJSON struct {
 	Error            *Iticr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Iticr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type IticrRequest struct {
+	Request  *IticrRequestBody `request:"mediaType=application/json"`
+	Security IticrSecurity
 }
 
 type IticrResponse struct {

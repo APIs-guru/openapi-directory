@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestingLevelValueEnum } from "./nestinglevelvalueenum";
 // DocDbSettings
 /**
@@ -34,47 +34,47 @@ var DocDbSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DocsToInvestigate" }),
+        SpeakeasyMetadata({ data: "json, name=DocsToInvestigate" }),
         __metadata("design:type", Number)
     ], DocDbSettings.prototype, "docsToInvestigate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExtractDocId" }),
+        SpeakeasyMetadata({ data: "json, name=ExtractDocId" }),
         __metadata("design:type", Boolean)
     ], DocDbSettings.prototype, "extractDocId", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=NestingLevel" }),
+        SpeakeasyMetadata({ data: "json, name=NestingLevel" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "nestingLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], DocDbSettings.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "secretsManagerAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerSecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "secretsManagerSecretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], DocDbSettings.prototype, "username", void 0);
     return DocDbSettings;

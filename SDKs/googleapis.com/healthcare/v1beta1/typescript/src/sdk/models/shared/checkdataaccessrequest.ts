@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsentList } from "./consentlist";
 
+
 export enum CheckDataAccessRequestResponseViewEnum {
-    ResponseViewUnspecified = "RESPONSE_VIEW_UNSPECIFIED"
-,    Basic = "BASIC"
-,    Full = "FULL"
+    ResponseViewUnspecified = "RESPONSE_VIEW_UNSPECIFIED",
+    Basic = "BASIC",
+    Full = "FULL"
 }
 
 
@@ -13,15 +14,15 @@ export enum CheckDataAccessRequestResponseViewEnum {
  * Checks if a particular data_id of a User data mapping in the given consent store is consented for a given use.
 **/
 export class CheckDataAccessRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentList" })
+  @SpeakeasyMetadata({ data: "json, name=consentList" })
   consentList?: ConsentList;
 
-  @Metadata({ data: "json, name=dataId" })
+  @SpeakeasyMetadata({ data: "json, name=dataId" })
   dataId?: string;
 
-  @Metadata({ data: "json, name=requestAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=requestAttributes" })
   requestAttributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=responseView" })
+  @SpeakeasyMetadata({ data: "json, name=responseView" })
   responseView?: CheckDataAccessRequestResponseViewEnum;
 }

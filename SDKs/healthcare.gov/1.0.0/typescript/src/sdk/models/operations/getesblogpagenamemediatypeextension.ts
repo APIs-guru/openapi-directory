@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetEsBlogPageNameMediaTypeExtensionMediaTypeExtensionEnum {
     DotJson = ".json"
@@ -6,27 +7,27 @@ export enum GetEsBlogPageNameMediaTypeExtensionMediaTypeExtensionEnum {
 
 
 export class GetEsBlogPageNameMediaTypeExtensionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" })
   mediaTypeExtension: GetEsBlogPageNameMediaTypeExtensionMediaTypeExtensionEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pageName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageName" })
   pageName: string;
 }
 
 
 export class GetEsBlogPageNameMediaTypeExtensionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEsBlogPageNameMediaTypeExtensionPathParams;
 }
 
 
 export class GetEsBlogPageNameMediaTypeExtensionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

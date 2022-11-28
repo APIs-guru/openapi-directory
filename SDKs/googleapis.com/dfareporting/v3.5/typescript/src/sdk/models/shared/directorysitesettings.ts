@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DfpSettings } from "./dfpsettings";
+
 
 
 // DirectorySiteSettings
@@ -7,15 +8,15 @@ import { DfpSettings } from "./dfpsettings";
  * Directory Site Settings
 **/
 export class DirectorySiteSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeViewOptOut" })
+  @SpeakeasyMetadata({ data: "json, name=activeViewOptOut" })
   activeViewOptOut?: boolean;
 
-  @Metadata({ data: "json, name=dfpSettings" })
+  @SpeakeasyMetadata({ data: "json, name=dfpSettings" })
   dfpSettings?: DfpSettings;
 
-  @Metadata({ data: "json, name=instreamVideoPlacementAccepted" })
+  @SpeakeasyMetadata({ data: "json, name=instreamVideoPlacementAccepted" })
   instreamVideoPlacementAccepted?: boolean;
 
-  @Metadata({ data: "json, name=interstitialPlacementAccepted" })
+  @SpeakeasyMetadata({ data: "json, name=interstitialPlacementAccepted" })
   interstitialPlacementAccepted?: boolean;
 }

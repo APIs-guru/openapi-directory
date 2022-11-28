@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartCrawlerScheduleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CrawlerName" })
+  @SpeakeasyMetadata({ data: "json, name=CrawlerName" })
   crawlerName: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateLicenseePathParams = /** @class */ (function (_super) {
     __extends(UpdateLicenseePathParams, _super);
@@ -30,7 +30,7 @@ var UpdateLicenseePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" }),
         __metadata("design:type", String)
     ], UpdateLicenseePathParams.prototype, "licenseeNumber", void 0);
     return UpdateLicenseePathParams;
@@ -42,19 +42,19 @@ var UpdateLicenseeRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=active;" }),
+        SpeakeasyMetadata({ data: "form, name=active;" }),
         __metadata("design:type", Boolean)
     ], UpdateLicenseeRequestBody.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "form, name=markedForTransfer;" }),
+        SpeakeasyMetadata({ data: "form, name=markedForTransfer;" }),
         __metadata("design:type", Boolean)
     ], UpdateLicenseeRequestBody.prototype, "markedForTransfer", void 0);
     __decorate([
-        Metadata({ data: "form, name=name;" }),
+        SpeakeasyMetadata({ data: "form, name=name;" }),
         __metadata("design:type", String)
     ], UpdateLicenseeRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], UpdateLicenseeRequestBody.prototype, "number", void 0);
     return UpdateLicenseeRequestBody;
@@ -66,7 +66,7 @@ var UpdateLicenseeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], UpdateLicenseeSecurity.prototype, "basicAuth", void 0);
     return UpdateLicenseeSecurity;
@@ -78,15 +78,15 @@ var UpdateLicenseeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateLicenseePathParams)
     ], UpdateLicenseeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", UpdateLicenseeRequestBody)
     ], UpdateLicenseeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateLicenseeSecurity)
     ], UpdateLicenseeRequest.prototype, "security", void 0);
     return UpdateLicenseeRequest;
@@ -98,19 +98,19 @@ var UpdateLicenseeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], UpdateLicenseeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateLicenseeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateLicenseeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateLicenseeResponse.prototype, "netlicensing", void 0);
     return UpdateLicenseeResponse;

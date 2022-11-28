@@ -1,6 +1,7 @@
 
 
+
 export enum ImageTypeEnum {
-    Owned = "OWNED"
-,    Shared = "SHARED"
+    Owned = "OWNED",
+    Shared = "SHARED"
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLog } from "./accesslog";
+
 
 
 // Logging
@@ -7,6 +8,6 @@ import { AccessLog } from "./accesslog";
  * An object that represents the logging information for a virtual node.
 **/
 export class Logging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLog" })
+  @SpeakeasyMetadata({ data: "json, name=accessLog" })
   accessLog?: AccessLog;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlanDataTypeOfPlanBasedOnTheSourceEnum;
 (function (PlanDataTypeOfPlanBasedOnTheSourceEnum) {
     PlanDataTypeOfPlanBasedOnTheSourceEnum["Starter"] = "STARTER";
@@ -45,15 +45,15 @@ var PlanData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], PlanData.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=plan" }),
+        SpeakeasyMetadata({ data: "json, name=plan" }),
         __metadata("design:type", String)
     ], PlanData.prototype, "plan", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], PlanData.prototype, "source", void 0);
     return PlanData;

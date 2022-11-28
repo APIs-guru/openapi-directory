@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum VehicleMotStatusEnum {
     NoDetailsHeldByDvla = "No details held by DVLA",
     NoResultsReturned = "No results returned",

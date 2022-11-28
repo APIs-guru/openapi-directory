@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Author } from "./author";
 import { Answer } from "./answer";
+
 
 
 // Question
@@ -9,27 +9,27 @@ import { Answer } from "./answer";
  * Represents a single question and some of its answers.
 **/
 export class Question extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: Author;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=topAnswers", elemType: shared.Answer })
+  @SpeakeasyMetadata({ data: "json, name=topAnswers", elemType: Answer })
   topAnswers?: Answer[];
 
-  @Metadata({ data: "json, name=totalAnswerCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalAnswerCount" })
   totalAnswerCount?: number;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=upvoteCount" })
+  @SpeakeasyMetadata({ data: "json, name=upvoteCount" })
   upvoteCount?: number;
 }

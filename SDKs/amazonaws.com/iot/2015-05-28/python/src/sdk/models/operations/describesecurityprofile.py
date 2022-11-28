@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeSecurityProfilePathParams:
-    security_profile_name: str = field(default=None, metadata={'path_param': { 'field_name': 'securityProfileName', 'style': 'simple', 'explode': False }})
+    security_profile_name: str = field(metadata={'path_param': { 'field_name': 'securityProfileName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DescribeSecurityProfileHeaders:
 
 @dataclass
 class DescribeSecurityProfileRequest:
-    path_params: DescribeSecurityProfilePathParams = field(default=None)
-    headers: DescribeSecurityProfileHeaders = field(default=None)
+    headers: DescribeSecurityProfileHeaders = field()
+    path_params: DescribeSecurityProfilePathParams = field()
     
 
 @dataclass
 class DescribeSecurityProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_security_profile_response: Optional[shared.DescribeSecurityProfileResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

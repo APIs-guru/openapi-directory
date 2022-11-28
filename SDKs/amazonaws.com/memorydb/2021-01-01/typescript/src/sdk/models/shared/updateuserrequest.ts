@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationMode } from "./authenticationmode";
 
 
+
 export class UpdateUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessString" })
+  @SpeakeasyMetadata({ data: "json, name=AccessString" })
   accessString?: string;
 
-  @Metadata({ data: "json, name=AuthenticationMode" })
+  @SpeakeasyMetadata({ data: "json, name=AuthenticationMode" })
   authenticationMode?: AuthenticationMode;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName: string;
 }

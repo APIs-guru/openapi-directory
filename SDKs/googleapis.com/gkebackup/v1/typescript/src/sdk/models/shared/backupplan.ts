@@ -1,7 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupConfig } from "./backupconfig";
 import { Schedule } from "./schedule";
 import { RetentionPolicy } from "./retentionpolicy";
+
+
+
+// BackupPlanInput
+/** 
+ * Defines the configuration and scheduling for a "line" of Backups.
+**/
+export class BackupPlanInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=backupConfig" })
+  backupConfig?: BackupConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=backupSchedule" })
+  backupSchedule?: Schedule;
+
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
+  cluster?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=deactivated" })
+  deactivated?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=retentionPolicy" })
+  retentionPolicy?: RetentionPolicy;
+}
 
 
 // BackupPlan
@@ -9,42 +38,42 @@ import { RetentionPolicy } from "./retentionpolicy";
  * Defines the configuration and scheduling for a "line" of Backups.
 **/
 export class BackupPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupConfig" })
+  @SpeakeasyMetadata({ data: "json, name=backupConfig" })
   backupConfig?: BackupConfig;
 
-  @Metadata({ data: "json, name=backupSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=backupSchedule" })
   backupSchedule?: Schedule;
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deactivated" })
+  @SpeakeasyMetadata({ data: "json, name=deactivated" })
   deactivated?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=protectedPodCount" })
+  @SpeakeasyMetadata({ data: "json, name=protectedPodCount" })
   protectedPodCount?: number;
 
-  @Metadata({ data: "json, name=retentionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=retentionPolicy" })
   retentionPolicy?: RetentionPolicy;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

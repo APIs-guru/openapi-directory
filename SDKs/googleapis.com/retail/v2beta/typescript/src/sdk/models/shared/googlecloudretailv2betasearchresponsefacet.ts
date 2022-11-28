@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2betaSearchResponseFacetFacetValue } from "./googlecloudretailv2betasearchresponsefacetfacetvalue";
+
 
 
 // GoogleCloudRetailV2betaSearchResponseFacet
@@ -8,12 +8,12 @@ import { GoogleCloudRetailV2betaSearchResponseFacetFacetValue } from "./googlecl
  * A facet result.
 **/
 export class GoogleCloudRetailV2betaSearchResponseFacet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dynamicFacet" })
+  @SpeakeasyMetadata({ data: "json, name=dynamicFacet" })
   dynamicFacet?: boolean;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=values", elemType: shared.GoogleCloudRetailV2betaSearchResponseFacetFacetValue })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: GoogleCloudRetailV2betaSearchResponseFacetFacetValue })
   values?: GoogleCloudRetailV2betaSearchResponseFacetFacetValue[];
 }

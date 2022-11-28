@@ -8,6 +8,8 @@ const (
 	GlobalResourcesSharedModelsFileDownloadStateEnumRemoved   GlobalResourcesSharedModelsFileDownloadStateEnum = "Removed"
 )
 
+// GlobalResourcesSharedModelsFileDownload
+// A language used for string translations.
 type GlobalResourcesSharedModelsFileDownload struct {
 	Crc         string                                           `json:"CRC" form:"name=CRC"`
 	ContentType string                                           `json:"ContentType" form:"name=ContentType"`

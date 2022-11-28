@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetUpdateDomainEndpointOptionsActionEnum(str, Enum):
@@ -8,6 +12,10 @@ class GetUpdateDomainEndpointOptionsActionEnum(str, Enum):
 
 @dataclass
 class GetUpdateDomainEndpointOptionsDomainEndpointOptions:
+    r"""GetUpdateDomainEndpointOptionsDomainEndpointOptions
+    The domain's endpoint options.
+    """
+    
     enforce_https: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'EnforceHTTPS' }})
     tls_security_policy: Optional[shared.TLSSecurityPolicyEnum] = field(default=None, metadata={'query_param': { 'field_name': 'TLSSecurityPolicy' }})
     
@@ -17,10 +25,10 @@ class GetUpdateDomainEndpointOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateDomainEndpointOptionsQueryParams:
-    action: GetUpdateDomainEndpointOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_endpoint_options: GetUpdateDomainEndpointOptionsDomainEndpointOptions = field(default=None, metadata={'query_param': { 'field_name': 'DomainEndpointOptions', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetUpdateDomainEndpointOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateDomainEndpointOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_endpoint_options: GetUpdateDomainEndpointOptionsDomainEndpointOptions = field(metadata={'query_param': { 'field_name': 'DomainEndpointOptions', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetUpdateDomainEndpointOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +44,13 @@ class GetUpdateDomainEndpointOptionsHeaders:
 
 @dataclass
 class GetUpdateDomainEndpointOptionsRequest:
-    query_params: GetUpdateDomainEndpointOptionsQueryParams = field(default=None)
-    headers: GetUpdateDomainEndpointOptionsHeaders = field(default=None)
+    headers: GetUpdateDomainEndpointOptionsHeaders = field()
+    query_params: GetUpdateDomainEndpointOptionsQueryParams = field()
     
 
 @dataclass
 class GetUpdateDomainEndpointOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

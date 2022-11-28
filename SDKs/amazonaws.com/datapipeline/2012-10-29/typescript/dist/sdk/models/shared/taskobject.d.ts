@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PipelineObject } from "./pipelineobject";
 /**
  * Contains information about a pipeline task that is assigned to a task runner.

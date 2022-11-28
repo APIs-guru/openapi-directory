@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ModelPackage
+// A versioned model that can be deployed for SageMaker inference.
 type ModelPackage struct {
 	ApprovalDescription          *string                              `json:"ApprovalDescription,omitempty"`
 	CertifyForMarketplace        *bool                                `json:"CertifyForMarketplace,omitempty"`

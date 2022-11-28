@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGoalsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_workspace_level" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_workspace_level" })
   isWorkspaceLevel?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=portfolio" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=portfolio" })
   portfolio?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=project" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" })
   project?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time_periods" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time_periods" })
   timePeriods?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workspace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspace" })
   workspace?: string;
 }
 
 
-export class GetGoalsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetGoalsQueryParams;
-}
-
-
 export class GetGoals200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.GoalCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.GoalCompact })
   data?: shared.GoalCompact[];
 }
 
 
+export class GetGoalsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetGoalsQueryParams;
+}
+
+
 export class GetGoalsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getGoals200ApplicationJsonObject?: GetGoals200ApplicationJson;
 }

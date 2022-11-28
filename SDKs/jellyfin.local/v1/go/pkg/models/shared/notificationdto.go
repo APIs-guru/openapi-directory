@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// NotificationDto
+// The notification DTO.
 type NotificationDto struct {
 	Date        *time.Time             `json:"Date,omitempty"`
 	Description *string                `json:"Description,omitempty"`

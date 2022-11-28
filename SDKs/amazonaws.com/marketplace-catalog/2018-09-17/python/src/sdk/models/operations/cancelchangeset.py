@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class CancelChangeSetQueryParams:
-    catalog: str = field(default=None, metadata={'query_param': { 'field_name': 'catalog', 'style': 'form', 'explode': True }})
-    change_set_id: str = field(default=None, metadata={'query_param': { 'field_name': 'changeSetId', 'style': 'form', 'explode': True }})
+    catalog: str = field(metadata={'query_param': { 'field_name': 'catalog', 'style': 'form', 'explode': True }})
+    change_set_id: str = field(metadata={'query_param': { 'field_name': 'changeSetId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -22,19 +25,19 @@ class CancelChangeSetHeaders:
 
 @dataclass
 class CancelChangeSetRequest:
-    query_params: CancelChangeSetQueryParams = field(default=None)
-    headers: CancelChangeSetHeaders = field(default=None)
+    headers: CancelChangeSetHeaders = field()
+    query_params: CancelChangeSetQueryParams = field()
     
 
 @dataclass
 class CancelChangeSetResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     cancel_change_set_response: Optional[shared.CancelChangeSetResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

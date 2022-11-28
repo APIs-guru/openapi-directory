@@ -1,0 +1,93 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export var FetchPhoneNumberCountryServerList = [
+    "https://pricing.twilio.com",
+];
+var FetchPhoneNumberCountryPathParams = /** @class */ (function (_super) {
+    __extends(FetchPhoneNumberCountryPathParams, _super);
+    function FetchPhoneNumberCountryPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IsoCountry" }),
+        __metadata("design:type", String)
+    ], FetchPhoneNumberCountryPathParams.prototype, "isoCountry", void 0);
+    return FetchPhoneNumberCountryPathParams;
+}(SpeakeasyBase));
+export { FetchPhoneNumberCountryPathParams };
+var FetchPhoneNumberCountrySecurity = /** @class */ (function (_super) {
+    __extends(FetchPhoneNumberCountrySecurity, _super);
+    function FetchPhoneNumberCountrySecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], FetchPhoneNumberCountrySecurity.prototype, "accountSidAuthToken", void 0);
+    return FetchPhoneNumberCountrySecurity;
+}(SpeakeasyBase));
+export { FetchPhoneNumberCountrySecurity };
+var FetchPhoneNumberCountryRequest = /** @class */ (function (_super) {
+    __extends(FetchPhoneNumberCountryRequest, _super);
+    function FetchPhoneNumberCountryRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], FetchPhoneNumberCountryRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FetchPhoneNumberCountryPathParams)
+    ], FetchPhoneNumberCountryRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FetchPhoneNumberCountrySecurity)
+    ], FetchPhoneNumberCountryRequest.prototype, "security", void 0);
+    return FetchPhoneNumberCountryRequest;
+}(SpeakeasyBase));
+export { FetchPhoneNumberCountryRequest };
+var FetchPhoneNumberCountryResponse = /** @class */ (function (_super) {
+    __extends(FetchPhoneNumberCountryResponse, _super);
+    function FetchPhoneNumberCountryResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], FetchPhoneNumberCountryResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], FetchPhoneNumberCountryResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.PricingV1PhoneNumberPhoneNumberCountryInstance)
+    ], FetchPhoneNumberCountryResponse.prototype, "pricingV1PhoneNumberPhoneNumberCountryInstance", void 0);
+    return FetchPhoneNumberCountryResponse;
+}(SpeakeasyBase));
+export { FetchPhoneNumberCountryResponse };

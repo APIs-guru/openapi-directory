@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImagePredictionResultModel
+// result of an image prediction request
 type ImagePredictionResultModel struct {
 	Created     *time.Time                `json:"Created,omitempty"`
 	ID          *string                   `json:"Id,omitempty"`

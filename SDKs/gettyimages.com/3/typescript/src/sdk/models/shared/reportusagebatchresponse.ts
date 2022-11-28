@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportUsageBatchResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the response from the Batch Usages endpoint.
 **/
 export class ReportUsageBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=invalid_assets" })
+  @SpeakeasyMetadata({ data: "json, name=invalid_assets" })
   invalidAssets?: string[];
 
-  @Metadata({ data: "json, name=total_asset_usages_processed" })
+  @SpeakeasyMetadata({ data: "json, name=total_asset_usages_processed" })
   totalAssetUsagesProcessed?: number;
 }

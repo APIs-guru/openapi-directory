@@ -1,21 +1,28 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://apisetu.gov.in/icsi/v3"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * govid - ID Card
+     *
      * API to verify ID Card.
     **/
-    Govid(req: operations.GovidRequest, config?: AxiosRequestConfig): Promise<operations.GovidResponse>;
+    govid(req: operations.GovidRequest, config?: AxiosRequestConfig): Promise<operations.GovidResponse>;
     /**
+     * mbcer - Membership Certificate
+     *
      * API to verify Membership Certificate.
     **/
-    Mbcer(req: operations.MbcerRequest, config?: AxiosRequestConfig): Promise<operations.MbcerResponse>;
+    mbcer(req: operations.MbcerRequest, config?: AxiosRequestConfig): Promise<operations.MbcerResponse>;
 }
 export {};

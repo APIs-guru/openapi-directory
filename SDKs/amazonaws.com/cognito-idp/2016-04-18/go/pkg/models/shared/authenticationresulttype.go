@@ -1,5 +1,7 @@
 package shared
 
+// AuthenticationResultType
+// The authentication result.
 type AuthenticationResultType struct {
 	AccessToken       *string                `json:"AccessToken,omitempty"`
 	ExpiresIn         *int64                 `json:"ExpiresIn,omitempty"`

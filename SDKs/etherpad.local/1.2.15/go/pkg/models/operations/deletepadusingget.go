@@ -4,10 +4,6 @@ type DeletePadUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type DeletePadUsingGetRequest struct {
-	QueryParams DeletePadUsingGetQueryParams
-}
-
 type DeletePadUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -30,6 +26,10 @@ type DeletePadUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type DeletePadUsingGetRequest struct {
+	QueryParams DeletePadUsingGetQueryParams
 }
 
 type DeletePadUsingGetResponse struct {

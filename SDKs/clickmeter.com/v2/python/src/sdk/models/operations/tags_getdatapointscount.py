@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagsGetDatapointsCountPathParams:
-    tag_id: int = field(default=None, metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
+    tag_id: int = field(metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
     
 class TagsGetDatapointsCountStatusEnum(str, Enum):
     DELETED = "deleted"
@@ -29,14 +30,14 @@ class TagsGetDatapointsCountQueryParams:
 
 @dataclass
 class TagsGetDatapointsCountRequest:
-    path_params: TagsGetDatapointsCountPathParams = field(default=None)
-    query_params: TagsGetDatapointsCountQueryParams = field(default=None)
+    path_params: TagsGetDatapointsCountPathParams = field()
+    query_params: TagsGetDatapointsCountQueryParams = field()
     
 
 @dataclass
 class TagsGetDatapointsCountResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_count_responce: Optional[shared.APICoreResponsesCountResponce] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

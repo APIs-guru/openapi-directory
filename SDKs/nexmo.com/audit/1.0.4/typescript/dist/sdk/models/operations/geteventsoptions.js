@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetEventsOptionsSecurity = /** @class */ (function (_super) {
     __extends(GetEventsOptionsSecurity, _super);
@@ -30,7 +30,7 @@ var GetEventsOptionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], GetEventsOptionsSecurity.prototype, "basicAuth", void 0);
     return GetEventsOptionsSecurity;
@@ -42,7 +42,7 @@ var GetEventsOptionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEventsOptionsSecurity)
     ], GetEventsOptionsRequest.prototype, "security", void 0);
     return GetEventsOptionsRequest;
@@ -54,27 +54,27 @@ var GetEventsOptionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AuditEventTypesResp)
     ], GetEventsOptionsResponse.prototype, "auditEventTypesResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEventsOptionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorForbidden)
     ], GetEventsOptionsResponse.prototype, "errorForbidden", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorUnauthorized)
     ], GetEventsOptionsResponse.prototype, "errorUnauthorized", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NoContent)
     ], GetEventsOptionsResponse.prototype, "noContent", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEventsOptionsResponse.prototype, "statusCode", void 0);
     return GetEventsOptionsResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2IntentMessageQuickReplies
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The quick replies response message.
 **/
 export class GoogleCloudDialogflowV2IntentMessageQuickReplies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quickReplies" })
+  @SpeakeasyMetadata({ data: "json, name=quickReplies" })
   quickReplies?: string[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

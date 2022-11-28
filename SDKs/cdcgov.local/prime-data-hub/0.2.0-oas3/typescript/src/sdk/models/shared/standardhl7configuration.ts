@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SftpTransport } from "./sftptransport";
 import { As2Transport } from "./as2transport";
 import { BlobStoreTransport } from "./blobstoretransport";
 import { NullTransport } from "./nulltransport";
 
+
 export enum StandardHl7ConfigurationPhoneNumberFormattingEnum {
-    Standard = "STANDARD"
-,    OnlyDigitsInComponentOne = "ONLY_DIGITS_IN_COMPONENT_ONE"
-,    AreaLocalInComponentOne = "AREA_LOCAL_IN_COMPONENT_ONE"
+    Standard = "STANDARD",
+    OnlyDigitsInComponentOne = "ONLY_DIGITS_IN_COMPONENT_ONE",
+    AreaLocalInComponentOne = "AREA_LOCAL_IN_COMPONENT_ONE"
 }
 
 
@@ -16,72 +17,72 @@ export enum StandardHl7ConfigurationPhoneNumberFormattingEnum {
  * A standard HL7 configuration
 **/
 export class StandardHl7Configuration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=convertTimestampToDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=convertTimestampToDateTime" })
   convertTimestampToDateTime?: string;
 
-  @Metadata({ data: "json, name=defaultAoeToUnknown" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAoeToUnknown" })
   defaultAoeToUnknown?: boolean;
 
-  @Metadata({ data: "json, name=includeAOE" })
+  @SpeakeasyMetadata({ data: "json, name=includeAOE" })
   includeAoe: boolean;
 
-  @Metadata({ data: "json, name=nameFormat" })
+  @SpeakeasyMetadata({ data: "json, name=nameFormat" })
   nameFormat?: string;
 
-  @Metadata({ data: "json, name=phoneNumberFormatting" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumberFormatting" })
   phoneNumberFormatting?: StandardHl7ConfigurationPhoneNumberFormattingEnum;
 
-  @Metadata({ data: "json, name=receivingApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=receivingApplicationName" })
   receivingApplicationName?: string;
 
-  @Metadata({ data: "json, name=receivingApplicationOID" })
+  @SpeakeasyMetadata({ data: "json, name=receivingApplicationOID" })
   receivingApplicationOid?: string;
 
-  @Metadata({ data: "json, name=receivingFacilityName" })
+  @SpeakeasyMetadata({ data: "json, name=receivingFacilityName" })
   receivingFacilityName?: string;
 
-  @Metadata({ data: "json, name=receivingFacilityOID" })
+  @SpeakeasyMetadata({ data: "json, name=receivingFacilityOID" })
   receivingFacilityOid?: string;
 
-  @Metadata({ data: "json, name=receivingOrganization" })
+  @SpeakeasyMetadata({ data: "json, name=receivingOrganization" })
   receivingOrganization?: string;
 
-  @Metadata({ data: "json, name=reportingFacilityId" })
+  @SpeakeasyMetadata({ data: "json, name=reportingFacilityId" })
   reportingFacilityId?: string;
 
-  @Metadata({ data: "json, name=reportingFacilityIdType" })
+  @SpeakeasyMetadata({ data: "json, name=reportingFacilityIdType" })
   reportingFacilityIdType?: string;
 
-  @Metadata({ data: "json, name=reportingFacilityName" })
+  @SpeakeasyMetadata({ data: "json, name=reportingFacilityName" })
   reportingFacilityName?: string;
 
-  @Metadata({ data: "json, name=suppressAoe" })
+  @SpeakeasyMetadata({ data: "json, name=suppressAoe" })
   suppressAoe?: boolean;
 
-  @Metadata({ data: "json, name=suppressHl7Fields" })
+  @SpeakeasyMetadata({ data: "json, name=suppressHl7Fields" })
   suppressHl7Fields?: string;
 
-  @Metadata({ data: "json, name=suppressQstForAoe" })
+  @SpeakeasyMetadata({ data: "json, name=suppressQstForAoe" })
   suppressQstForAoe?: boolean;
 
-  @Metadata({ data: "json, name=transport" })
+  @SpeakeasyMetadata({ data: "json, name=transport" })
   transport: any;
 
-  @Metadata({ data: "json, name=truncateHDNamespaceIds" })
+  @SpeakeasyMetadata({ data: "json, name=truncateHDNamespaceIds" })
   truncateHdNamespaceIds?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=useBatchHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=useBatchHeaders" })
   useBatchHeaders: boolean;
 
-  @Metadata({ data: "json, name=useBlankInsteadOfUnknown" })
+  @SpeakeasyMetadata({ data: "json, name=useBlankInsteadOfUnknown" })
   useBlankInsteadOfUnknown?: string;
 
-  @Metadata({ data: "json, name=usePid14ForPatientEmail" })
+  @SpeakeasyMetadata({ data: "json, name=usePid14ForPatientEmail" })
   usePid14ForPatientEmail?: boolean;
 
-  @Metadata({ data: "json, name=useTestProcessingMode" })
+  @SpeakeasyMetadata({ data: "json, name=useTestProcessingMode" })
   useTestProcessingMode?: boolean;
 }

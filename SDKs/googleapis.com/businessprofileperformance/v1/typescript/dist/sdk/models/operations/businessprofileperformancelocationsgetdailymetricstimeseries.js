@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams = /** @class */ (function (_super) {
     __extends(BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams, _super);
@@ -30,7 +30,7 @@ var BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams.prototype, "name", void 0);
     return BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams;
@@ -67,95 +67,95 @@ var BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailyMetric" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailyMetric" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailyMetric", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailyRange.endDate.day" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailyRange.endDate.day" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailyRangeEndDateDay", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailyRange.endDate.month" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailyRange.endDate.month" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailyRangeEndDateMonth", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailyRange.endDate.year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailyRange.endDate.year" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailyRangeEndDateYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailyRange.startDate.day" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailyRange.startDate.day" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailyRangeStartDateDay", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailyRange.startDate.month" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailyRange.startDate.month" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailyRangeStartDateMonth", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailyRange.startDate.year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailyRange.startDate.year" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailyRangeStartDateYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.dayOfWeek" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.dayOfWeek" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailySubEntityTypeDayOfWeek", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.hours" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.hours" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailySubEntityTypeTimeOfDayHours", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.minutes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.minutes" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailySubEntityTypeTimeOfDayMinutes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.nanos" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.nanos" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailySubEntityTypeTimeOfDayNanos", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.seconds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dailySubEntityType.timeOfDay.seconds" }),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "dailySubEntityTypeTimeOfDaySeconds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams.prototype, "uploadProtocol", void 0);
     return BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams;
@@ -167,11 +167,11 @@ var BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesRequest = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesRequest.prototype, "queryParams", void 0);
     return BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesRequest;
@@ -183,15 +183,15 @@ var BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetDailyMetricsTimeSeriesResponse)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse.prototype, "getDailyMetricsTimeSeriesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse.prototype, "statusCode", void 0);
     return BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse;

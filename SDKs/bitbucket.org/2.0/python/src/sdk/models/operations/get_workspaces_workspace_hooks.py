@@ -5,41 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class GetWorkspacesWorkspaceHooksPathParams:
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetWorkspacesWorkspaceHooksSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetWorkspacesWorkspaceHooksSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetWorkspacesWorkspaceHooksSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWorkspacesWorkspaceHooksSecurity:
-    option1: Optional[GetWorkspacesWorkspaceHooksSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetWorkspacesWorkspaceHooksSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetWorkspacesWorkspaceHooksSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetWorkspacesWorkspaceHooksRequest:
-    path_params: GetWorkspacesWorkspaceHooksPathParams = field(default=None)
-    security: GetWorkspacesWorkspaceHooksSecurity = field(default=None)
+    path_params: GetWorkspacesWorkspaceHooksPathParams = field()
+    security: GetWorkspacesWorkspaceHooksSecurity = field()
     
 
 @dataclass
 class GetWorkspacesWorkspaceHooksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_webhook_subscriptions: Optional[shared.PaginatedWebhookSubscriptions] = field(default=None)
     

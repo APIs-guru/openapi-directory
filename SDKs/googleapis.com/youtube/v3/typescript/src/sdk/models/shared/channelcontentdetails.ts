@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChannelContentDetailsRelatedPlaylists extends SpeakeasyBase {
-  @Metadata({ data: "json, name=favorites" })
+  @SpeakeasyMetadata({ data: "json, name=favorites" })
   favorites?: string;
 
-  @Metadata({ data: "json, name=likes" })
+  @SpeakeasyMetadata({ data: "json, name=likes" })
   likes?: string;
 
-  @Metadata({ data: "json, name=uploads" })
+  @SpeakeasyMetadata({ data: "json, name=uploads" })
   uploads?: string;
 
-  @Metadata({ data: "json, name=watchHistory" })
+  @SpeakeasyMetadata({ data: "json, name=watchHistory" })
   watchHistory?: string;
 
-  @Metadata({ data: "json, name=watchLater" })
+  @SpeakeasyMetadata({ data: "json, name=watchLater" })
   watchLater?: string;
 }
 
@@ -24,6 +25,6 @@ export class ChannelContentDetailsRelatedPlaylists extends SpeakeasyBase {
  * Details about the content of a channel.
 **/
 export class ChannelContentDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=relatedPlaylists" })
+  @SpeakeasyMetadata({ data: "json, name=relatedPlaylists" })
   relatedPlaylists?: ChannelContentDetailsRelatedPlaylists;
 }

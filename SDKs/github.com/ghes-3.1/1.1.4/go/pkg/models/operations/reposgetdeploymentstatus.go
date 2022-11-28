@@ -11,13 +11,13 @@ type ReposGetDeploymentStatusPathParams struct {
 	StatusID     int64  `pathParam:"style=simple,explode=false,name=status_id"`
 }
 
-type ReposGetDeploymentStatusRequest struct {
-	PathParams ReposGetDeploymentStatusPathParams
-}
-
 type ReposGetDeploymentStatus415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposGetDeploymentStatusRequest struct {
+	PathParams ReposGetDeploymentStatusPathParams
 }
 
 type ReposGetDeploymentStatusResponse struct {

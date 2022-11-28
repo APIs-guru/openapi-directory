@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeApplicableIndividualAssessmentsResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DescribeApplicableIndividualAssessmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndividualAssessmentNames" })
+  @SpeakeasyMetadata({ data: "json, name=IndividualAssessmentNames" })
   individualAssessmentNames?: string[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

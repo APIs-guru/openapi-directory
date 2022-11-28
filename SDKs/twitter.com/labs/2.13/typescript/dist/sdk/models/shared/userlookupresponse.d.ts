@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Expansions } from "./expansions";
 export declare class UserLookupResponse extends SpeakeasyBase {
     data?: any[];

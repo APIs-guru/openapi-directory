@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SourceLocation
 /**
  * Indicates a location in the source code of the service for which errors are reported. `functionName` must be provided by the application when reporting an error, unless the error report contains a `message` with a supported exception stack trace. All fields are optional for the later case.
@@ -33,15 +33,15 @@ var SourceLocation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filePath" }),
+        SpeakeasyMetadata({ data: "json, name=filePath" }),
         __metadata("design:type", String)
     ], SourceLocation.prototype, "filePath", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionName" }),
+        SpeakeasyMetadata({ data: "json, name=functionName" }),
         __metadata("design:type", String)
     ], SourceLocation.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lineNumber" }),
+        SpeakeasyMetadata({ data: "json, name=lineNumber" }),
         __metadata("design:type", Number)
     ], SourceLocation.prototype, "lineNumber", void 0);
     return SourceLocation;

@@ -1,6 +1,7 @@
 
 
+
 export enum ProtocolEnum {
-    Mqtt = "MQTT"
-,    Http = "HTTP"
+    Mqtt = "MQTT",
+    Http = "HTTP"
 }

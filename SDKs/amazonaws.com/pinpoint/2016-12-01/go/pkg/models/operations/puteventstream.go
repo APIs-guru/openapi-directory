@@ -18,6 +18,8 @@ type PutEventStreamHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutEventStreamRequestBodyWriteEventStream
+// Specifies the Amazon Resource Name (ARN) of an event stream to publish events to and the AWS Identity and Access Management (IAM) role to use when publishing those events.
 type PutEventStreamRequestBodyWriteEventStream struct {
 	DestinationStreamArn *string `json:"DestinationStreamArn,omitempty"`
 	RoleArn              *string `json:"RoleArn,omitempty"`

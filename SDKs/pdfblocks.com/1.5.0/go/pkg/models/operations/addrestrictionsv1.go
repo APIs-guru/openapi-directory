@@ -27,15 +27,15 @@ type AddRestrictionsV1RequestBody struct {
 	UserPassword             *string                                              `multipartForm:"name=user_password"`
 }
 
-type AddRestrictionsV1Request struct {
-	Request AddRestrictionsV1RequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type AddRestrictionsV14XxApplicationProblemPlusJSON struct {
 	Errors map[string]interface{} `json:"errors,omitempty"`
 	Status *int64                 `json:"status,omitempty"`
 	Title  *string                `json:"title,omitempty"`
 	Type   *string                `json:"type,omitempty"`
+}
+
+type AddRestrictionsV1Request struct {
+	Request AddRestrictionsV1RequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type AddRestrictionsV1Response struct {

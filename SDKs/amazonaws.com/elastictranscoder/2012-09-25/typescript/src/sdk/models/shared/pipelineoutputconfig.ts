@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Permission } from "./permission";
+
 
 
 // PipelineOutputConfig
@@ -8,12 +8,12 @@ import { Permission } from "./permission";
  * The <code>PipelineOutputConfig</code> structure.
 **/
 export class PipelineOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=Bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=Permissions", elemType: shared.Permission })
+  @SpeakeasyMetadata({ data: "json, name=Permissions", elemType: Permission })
   permissions?: Permission[];
 
-  @Metadata({ data: "json, name=StorageClass" })
+  @SpeakeasyMetadata({ data: "json, name=StorageClass" })
   storageClass?: string;
 }

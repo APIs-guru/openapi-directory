@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListDocumentsPathParams:
-    collection_id: str = field(default=None, metadata={'path_param': { 'field_name': 'collectionId', 'style': 'simple', 'explode': False }})
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    collection_id: str = field(metadata={'path_param': { 'field_name': 'collectionId', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -33,14 +34,14 @@ class FirestoreProjectsDatabasesDocumentsListDocumentsQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListDocumentsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListDocumentsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class FirestoreProjectsDatabasesDocumentsListDocumentsSecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListDocumentsRequest:
-    path_params: FirestoreProjectsDatabasesDocumentsListDocumentsPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesDocumentsListDocumentsQueryParams = field(default=None)
-    security: FirestoreProjectsDatabasesDocumentsListDocumentsSecurity = field(default=None)
+    path_params: FirestoreProjectsDatabasesDocumentsListDocumentsPathParams = field()
+    query_params: FirestoreProjectsDatabasesDocumentsListDocumentsQueryParams = field()
+    security: FirestoreProjectsDatabasesDocumentsListDocumentsSecurity = field()
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListDocumentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_documents_response: Optional[shared.ListDocumentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

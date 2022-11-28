@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ErrorUnprovisioned:
-    detail: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    instance: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ErrorUnprovisioned
+    Unprovisioned
+    """
+    
+    detail: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    instance: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('instance') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

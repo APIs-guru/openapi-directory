@@ -1,7 +1,8 @@
 
 
+
 export enum ProjectStatusEnum {
-    Creating = "CREATING"
-,    Created = "CREATED"
-,    Deleting = "DELETING"
+    Creating = "CREATING",
+    Created = "CREATED",
+    Deleting = "DELETING"
 }

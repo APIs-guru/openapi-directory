@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InboxPlacementTrackingOption } from "./inboxplacementtrackingoption";
+
 
 
 // DomainDeliverabilityTrackingOption
@@ -7,12 +8,12 @@ import { InboxPlacementTrackingOption } from "./inboxplacementtrackingoption";
  * An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.
 **/
 export class DomainDeliverabilityTrackingOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=InboxPlacementTrackingOption" })
+  @SpeakeasyMetadata({ data: "json, name=InboxPlacementTrackingOption" })
   inboxPlacementTrackingOption?: InboxPlacementTrackingOption;
 
-  @Metadata({ data: "json, name=SubscriptionStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionStartDate" })
   subscriptionStartDate?: Date;
 }

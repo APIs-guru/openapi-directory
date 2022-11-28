@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostOwnershipOwnershipIdPathParams = /** @class */ (function (_super) {
     __extends(PostOwnershipOwnershipIdPathParams, _super);
     function PostOwnershipOwnershipIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ownershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ownershipId" }),
         __metadata("design:type", String)
     ], PostOwnershipOwnershipIdPathParams.prototype, "ownershipId", void 0);
     return PostOwnershipOwnershipIdPathParams;
@@ -41,11 +41,11 @@ var PostOwnershipOwnershipIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customData" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" }),
         __metadata("design:type", String)
     ], PostOwnershipOwnershipIdQueryParams.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=expires" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expires" }),
         __metadata("design:type", Number)
     ], PostOwnershipOwnershipIdQueryParams.prototype, "expires", void 0);
     return PostOwnershipOwnershipIdQueryParams;
@@ -57,11 +57,11 @@ var PostOwnershipOwnershipIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostOwnershipOwnershipIdPathParams)
     ], PostOwnershipOwnershipIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostOwnershipOwnershipIdQueryParams)
     ], PostOwnershipOwnershipIdRequest.prototype, "queryParams", void 0);
     return PostOwnershipOwnershipIdRequest;
@@ -73,15 +73,15 @@ var PostOwnershipOwnershipIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostOwnershipOwnershipIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostOwnershipOwnershipIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostOwnershipOwnershipIdResponse.prototype, "statusCode", void 0);
     return PostOwnershipOwnershipIdResponse;

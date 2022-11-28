@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeletePlatformVersionActionEnum(str, Enum):
     DELETE_PLATFORM_VERSION = "DeletePlatformVersion"
@@ -10,9 +14,9 @@ class GetDeletePlatformVersionVersionEnum(str, Enum):
 
 @dataclass
 class GetDeletePlatformVersionQueryParams:
-    action: GetDeletePlatformVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeletePlatformVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeletePlatformVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     platform_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PlatformArn', 'style': 'form', 'explode': True }})
-    version: GetDeletePlatformVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeletePlatformVersionHeaders:
 
 @dataclass
 class GetDeletePlatformVersionRequest:
-    query_params: GetDeletePlatformVersionQueryParams = field(default=None)
-    headers: GetDeletePlatformVersionHeaders = field(default=None)
+    headers: GetDeletePlatformVersionHeaders = field()
+    query_params: GetDeletePlatformVersionQueryParams = field()
     
 
 @dataclass
 class GetDeletePlatformVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

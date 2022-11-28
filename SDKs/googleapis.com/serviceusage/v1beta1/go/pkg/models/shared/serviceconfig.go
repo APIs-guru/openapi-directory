@@ -1,5 +1,7 @@
 package shared
 
+// ServiceConfig
+// The configuration of the service.
 type ServiceConfig struct {
 	Apis               []API                         `json:"apis,omitempty"`
 	Authentication     *Authentication               `json:"authentication,omitempty"`

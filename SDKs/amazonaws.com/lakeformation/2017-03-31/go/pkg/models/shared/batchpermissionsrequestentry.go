@@ -1,5 +1,7 @@
 package shared
 
+// BatchPermissionsRequestEntry
+// A permission to a resource granted by batch operation to the principal.
 type BatchPermissionsRequestEntry struct {
 	ID                         string             `json:"Id"`
 	Permissions                []PermissionEnum   `json:"Permissions,omitempty"`

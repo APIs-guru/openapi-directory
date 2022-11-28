@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifying information about the device.
 **/
 export class DeviceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=associatedWithJob" })
+  @SpeakeasyMetadata({ data: "json, name=associatedWithJob" })
   associatedWithJob?: string;
 
-  @Metadata({ data: "json, name=managedDeviceArn" })
+  @SpeakeasyMetadata({ data: "json, name=managedDeviceArn" })
   managedDeviceArn?: string;
 
-  @Metadata({ data: "json, name=managedDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=managedDeviceId" })
   managedDeviceId?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

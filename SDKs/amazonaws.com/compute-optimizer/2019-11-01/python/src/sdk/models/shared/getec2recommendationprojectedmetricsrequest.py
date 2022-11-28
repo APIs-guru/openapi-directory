@@ -1,20 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import recommendationpreferences
-from . import metricstatistic_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetEc2RecommendationProjectedMetricsRequest:
-    end_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    instance_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceArn' }})
-    period: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
-    recommendation_preferences: Optional[recommendationpreferences.RecommendationPreferences] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommendationPreferences' }})
-    start_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    stat: metricstatistic_enum.MetricStatisticEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stat' }})
+    end_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    instance_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceArn') }})
+    period: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
+    start_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    stat: MetricStatisticEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stat') }})
+    recommendation_preferences: Optional[RecommendationPreferences] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommendationPreferences') }})
     

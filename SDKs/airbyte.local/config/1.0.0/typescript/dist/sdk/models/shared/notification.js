@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationTypeEnum } from "./notificationtypeenum";
 import { SlackNotificationConfiguration } from "./slacknotificationconfiguration";
 var Notification = /** @class */ (function (_super) {
@@ -31,11 +31,11 @@ var Notification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=notificationType" }),
+        SpeakeasyMetadata({ data: "json, name=notificationType" }),
         __metadata("design:type", String)
     ], Notification.prototype, "notificationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=slackConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=slackConfiguration" }),
         __metadata("design:type", SlackNotificationConfiguration)
     ], Notification.prototype, "slackConfiguration", void 0);
     return Notification;

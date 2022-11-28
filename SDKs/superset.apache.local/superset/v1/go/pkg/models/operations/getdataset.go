@@ -12,11 +12,6 @@ type GetDatasetSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDatasetRequest struct {
-	QueryParams GetDatasetQueryParams
-	Security    GetDatasetSecurity
-}
-
 type GetDataset200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -50,6 +45,11 @@ type GetDataset422ApplicationJSON struct {
 
 type GetDataset500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDatasetRequest struct {
+	QueryParams GetDatasetQueryParams
+	Security    GetDatasetSecurity
 }
 
 type GetDatasetResponse struct {

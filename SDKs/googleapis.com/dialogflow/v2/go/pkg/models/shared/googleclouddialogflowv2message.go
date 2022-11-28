@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowV2MessageParticipantRoleEnumEndUser         GoogleCloudDialogflowV2MessageParticipantRoleEnum = "END_USER"
 )
 
+// GoogleCloudDialogflowV2Message
+// Represents a message posted into a conversation.
 type GoogleCloudDialogflowV2Message struct {
 	Content           *string                                            `json:"content,omitempty"`
 	CreateTime        *string                                            `json:"createTime,omitempty"`

@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetApiV2PerformanceStatsHeaders extends SpeakeasyBase {
     xRapidApiKey?: string;
-}
-export declare class GetApiV2PerformanceStatsRequest extends SpeakeasyBase {
-    headers: GetApiV2PerformanceStatsHeaders;
 }
 export declare class GetApiV2PerformanceStats200ApplicationJsonDataAccuracy extends SpeakeasyBase {
     last14Days?: number;
@@ -55,6 +52,9 @@ export declare class GetApiV2PerformanceStats200ApplicationJson extends Speakeas
 }
 export declare class GetApiV2PerformanceStats404ApplicationJson extends SpeakeasyBase {
     errors?: Map<string, any>;
+}
+export declare class GetApiV2PerformanceStatsRequest extends SpeakeasyBase {
+    headers: GetApiV2PerformanceStatsHeaders;
 }
 export declare class GetApiV2PerformanceStatsResponse extends SpeakeasyBase {
     contentType: string;

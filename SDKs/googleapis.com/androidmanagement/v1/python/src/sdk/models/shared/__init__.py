@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .advancedsecurityoverrides import *
 from .alt_enum import *
 from .alwaysonvpnpackage import *
@@ -17,7 +17,7 @@ from .compliancerule import *
 from .contactinfo import *
 from .contentproviderendpoint import *
 from .crossprofilepolicies import *
-from .date import *
+from .date_ import *
 from .device import *
 from .devicesettings import *
 from .display import *

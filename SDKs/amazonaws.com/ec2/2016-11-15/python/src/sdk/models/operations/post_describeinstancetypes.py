@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeInstanceTypesActionEnum(str, Enum):
     DESCRIBE_INSTANCE_TYPES = "DescribeInstanceTypes"
@@ -10,10 +14,10 @@ class PostDescribeInstanceTypesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeInstanceTypesQueryParams:
-    action: PostDescribeInstanceTypesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeInstanceTypesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeInstanceTypesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeInstanceTypesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeInstanceTypesHeaders:
 
 @dataclass
 class PostDescribeInstanceTypesRequest:
-    query_params: PostDescribeInstanceTypesQueryParams = field(default=None)
-    headers: PostDescribeInstanceTypesHeaders = field(default=None)
+    headers: PostDescribeInstanceTypesHeaders = field()
+    query_params: PostDescribeInstanceTypesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeInstanceTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

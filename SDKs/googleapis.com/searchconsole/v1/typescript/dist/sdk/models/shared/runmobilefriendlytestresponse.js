@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MobileFriendlyIssue } from "./mobilefriendlyissue";
+import { ResourceIssue } from "./resourceissue";
 import { Image } from "./image";
 import { TestStatus } from "./teststatus";
 export var RunMobileFriendlyTestResponseMobileFriendlinessEnum;
@@ -42,23 +43,23 @@ var RunMobileFriendlyTestResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=mobileFriendliness" }),
+        SpeakeasyMetadata({ data: "json, name=mobileFriendliness" }),
         __metadata("design:type", String)
     ], RunMobileFriendlyTestResponse.prototype, "mobileFriendliness", void 0);
     __decorate([
-        Metadata({ data: "json, name=mobileFriendlyIssues", elemType: shared.MobileFriendlyIssue }),
+        SpeakeasyMetadata({ data: "json, name=mobileFriendlyIssues", elemType: MobileFriendlyIssue }),
         __metadata("design:type", Array)
     ], RunMobileFriendlyTestResponse.prototype, "mobileFriendlyIssues", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceIssues", elemType: shared.ResourceIssue }),
+        SpeakeasyMetadata({ data: "json, name=resourceIssues", elemType: ResourceIssue }),
         __metadata("design:type", Array)
     ], RunMobileFriendlyTestResponse.prototype, "resourceIssues", void 0);
     __decorate([
-        Metadata({ data: "json, name=screenshot" }),
+        SpeakeasyMetadata({ data: "json, name=screenshot" }),
         __metadata("design:type", Image)
     ], RunMobileFriendlyTestResponse.prototype, "screenshot", void 0);
     __decorate([
-        Metadata({ data: "json, name=testStatus" }),
+        SpeakeasyMetadata({ data: "json, name=testStatus" }),
         __metadata("design:type", TestStatus)
     ], RunMobileFriendlyTestResponse.prototype, "testStatus", void 0);
     return RunMobileFriendlyTestResponse;

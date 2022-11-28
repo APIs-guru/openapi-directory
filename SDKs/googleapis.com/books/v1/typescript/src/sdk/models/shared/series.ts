@@ -1,89 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SeriesSeriesSeriesSubscriptionReleaseInfoCurrentReleaseInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountInMicros" })
+  @SpeakeasyMetadata({ data: "json, name=amountInMicros" })
   amountInMicros?: number;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=releaseNumber" })
+  @SpeakeasyMetadata({ data: "json, name=releaseNumber" })
   releaseNumber?: string;
 
-  @Metadata({ data: "json, name=releaseTime" })
+  @SpeakeasyMetadata({ data: "json, name=releaseTime" })
   releaseTime?: string;
 }
 
 
 export class SeriesSeriesSeriesSubscriptionReleaseInfoNextReleaseInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountInMicros" })
+  @SpeakeasyMetadata({ data: "json, name=amountInMicros" })
   amountInMicros?: number;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=releaseNumber" })
+  @SpeakeasyMetadata({ data: "json, name=releaseNumber" })
   releaseNumber?: string;
 
-  @Metadata({ data: "json, name=releaseTime" })
+  @SpeakeasyMetadata({ data: "json, name=releaseTime" })
   releaseTime?: string;
 }
 
 
 export class SeriesSeriesSeriesSubscriptionReleaseInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancelTime" })
+  @SpeakeasyMetadata({ data: "json, name=cancelTime" })
   cancelTime?: string;
 
-  @Metadata({ data: "json, name=currentReleaseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=currentReleaseInfo" })
   currentReleaseInfo?: SeriesSeriesSeriesSubscriptionReleaseInfoCurrentReleaseInfo;
 
-  @Metadata({ data: "json, name=nextReleaseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=nextReleaseInfo" })
   nextReleaseInfo?: SeriesSeriesSeriesSubscriptionReleaseInfoNextReleaseInfo;
 
-  @Metadata({ data: "json, name=seriesSubscriptionType" })
+  @SpeakeasyMetadata({ data: "json, name=seriesSubscriptionType" })
   seriesSubscriptionType?: string;
 }
 
 
 export class SeriesSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bannerImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerImageUrl" })
   bannerImageUrl?: string;
 
-  @Metadata({ data: "json, name=eligibleForSubscription" })
+  @SpeakeasyMetadata({ data: "json, name=eligibleForSubscription" })
   eligibleForSubscription?: boolean;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=isComplete" })
+  @SpeakeasyMetadata({ data: "json, name=isComplete" })
   isComplete?: boolean;
 
-  @Metadata({ data: "json, name=seriesFormatType" })
+  @SpeakeasyMetadata({ data: "json, name=seriesFormatType" })
   seriesFormatType?: string;
 
-  @Metadata({ data: "json, name=seriesId" })
+  @SpeakeasyMetadata({ data: "json, name=seriesId" })
   seriesId?: string;
 
-  @Metadata({ data: "json, name=seriesSubscriptionReleaseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=seriesSubscriptionReleaseInfo" })
   seriesSubscriptionReleaseInfo?: SeriesSeriesSeriesSubscriptionReleaseInfo;
 
-  @Metadata({ data: "json, name=seriesType" })
+  @SpeakeasyMetadata({ data: "json, name=seriesType" })
   seriesType?: string;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class Series extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=series", elemType: shared.SeriesSeries })
+  @SpeakeasyMetadata({ data: "json, name=series", elemType: SeriesSeries })
   series?: SeriesSeries[];
 }

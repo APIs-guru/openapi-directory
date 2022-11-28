@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import importtask
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeImportTasksResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    tasks: Optional[List[importtask.ImportTask]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tasks' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    tasks: Optional[List[ImportTask]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tasks') }})
     

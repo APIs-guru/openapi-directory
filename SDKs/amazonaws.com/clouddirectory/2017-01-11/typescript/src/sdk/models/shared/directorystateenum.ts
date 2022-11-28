@@ -1,7 +1,8 @@
 
 
+
 export enum DirectoryStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Deleted = "DELETED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Deleted = "DELETED"
 }

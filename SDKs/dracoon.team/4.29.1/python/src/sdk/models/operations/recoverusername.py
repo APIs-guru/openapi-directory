@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class RecoverUserNameRequest:
-    request: shared.RecoverUserNameRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.RecoverUserNameRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RecoverUserNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

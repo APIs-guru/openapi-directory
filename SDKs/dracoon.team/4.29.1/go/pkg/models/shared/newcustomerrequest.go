@@ -8,6 +8,8 @@ const (
 	NewCustomerRequestCustomerContractTypeEnumPay  NewCustomerRequestCustomerContractTypeEnum = "pay"
 )
 
+// NewCustomerRequest
+// Request model for creating a customer
 type NewCustomerRequest struct {
 	ActivationCode       *string                                    `json:"activationCode,omitempty"`
 	CompanyName          *string                                    `json:"companyName,omitempty"`

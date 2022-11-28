@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetAppValidationConfigurationXAmzTargetEnum {
     AwsServerMigrationServiceV20161024GetAppValidationConfiguration = "AWSServerMigrationService_V2016_10_24.GetAppValidationConfiguration"

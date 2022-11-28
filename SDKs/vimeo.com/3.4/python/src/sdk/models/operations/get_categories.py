@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetCategoriesDirectionEnum(str, Enum):
@@ -21,12 +22,12 @@ class GetCategoriesQueryParams:
 
 @dataclass
 class GetCategoriesRequest:
-    query_params: GetCategoriesQueryParams = field(default=None)
+    query_params: GetCategoriesQueryParams = field()
     
 
 @dataclass
 class GetCategoriesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     categories: Optional[List[shared.Category]] = field(default=None)
     

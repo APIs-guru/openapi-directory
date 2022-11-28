@@ -41,7 +41,7 @@ type SQLInstancesPatchSecurity struct {
 type SQLInstancesPatchRequest struct {
 	PathParams  SQLInstancesPatchPathParams
 	QueryParams SQLInstancesPatchQueryParams
-	Request     *shared.DatabaseInstance `request:"mediaType=application/json"`
+	Request     *shared.DatabaseInstanceInput `request:"mediaType=application/json"`
 	Security    SQLInstancesPatchSecurity
 }
 

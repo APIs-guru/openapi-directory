@@ -1,17 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import calllogsembeddedobject
-from . import links
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CallLogsHalResponse:
-    embedded: Optional[calllogsembeddedobject.CallLogsEmbeddedObject] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_embedded' }})
-    links: Optional[links.Links] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    page_size: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page_size' }})
-    total_items: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_items' }})
-    total_page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_page' }})
+    embedded: Optional[CallLogsEmbeddedObject] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_embedded') }})
+    links: Optional[Links] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    page_size: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page_size') }})
+    total_items: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total_items') }})
+    total_page: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total_page') }})
     

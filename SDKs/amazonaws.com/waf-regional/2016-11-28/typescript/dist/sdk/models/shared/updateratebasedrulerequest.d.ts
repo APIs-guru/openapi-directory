@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RuleUpdate } from "./ruleupdate";
 export declare class UpdateRateBasedRuleRequest extends SpeakeasyBase {
     changeToken: string;

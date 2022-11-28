@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeBalancerStatsDataTraffic
@@ -7,10 +8,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class NodeBalancerStatsDataTraffic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=in" })
+  @SpeakeasyMetadata({ data: "json, name=in" })
   in?: number[];
 
-  @Metadata({ data: "json, name=out" })
+  @SpeakeasyMetadata({ data: "json, name=out" })
   out?: number[];
 }
 
@@ -21,10 +22,10 @@ export class NodeBalancerStatsDataTraffic extends SpeakeasyBase {
  * 
 **/
 export class NodeBalancerStatsData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections?: number[];
 
-  @Metadata({ data: "json, name=traffic" })
+  @SpeakeasyMetadata({ data: "json, name=traffic" })
   traffic?: NodeBalancerStatsDataTraffic;
 }
 
@@ -35,9 +36,9 @@ export class NodeBalancerStatsData extends SpeakeasyBase {
  * 
 **/
 export class NodeBalancerStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: NodeBalancerStatsData;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

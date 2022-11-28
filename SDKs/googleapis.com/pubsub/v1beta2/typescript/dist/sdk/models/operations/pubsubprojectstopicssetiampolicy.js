@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PubsubProjectsTopicsSetIamPolicyPathParams = /** @class */ (function (_super) {
     __extends(PubsubProjectsTopicsSetIamPolicyPathParams, _super);
@@ -30,7 +30,7 @@ var PubsubProjectsTopicsSetIamPolicyPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyPathParams.prototype, "resource", void 0);
     return PubsubProjectsTopicsSetIamPolicyPathParams;
@@ -42,47 +42,47 @@ var PubsubProjectsTopicsSetIamPolicyQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyQueryParams.prototype, "uploadProtocol", void 0);
     return PubsubProjectsTopicsSetIamPolicyQueryParams;
@@ -94,11 +94,11 @@ var PubsubProjectsTopicsSetIamPolicySecurityOption1 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], PubsubProjectsTopicsSetIamPolicySecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], PubsubProjectsTopicsSetIamPolicySecurityOption1.prototype, "oauth2c", void 0);
     return PubsubProjectsTopicsSetIamPolicySecurityOption1;
@@ -110,11 +110,11 @@ var PubsubProjectsTopicsSetIamPolicySecurityOption2 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], PubsubProjectsTopicsSetIamPolicySecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], PubsubProjectsTopicsSetIamPolicySecurityOption2.prototype, "oauth2c", void 0);
     return PubsubProjectsTopicsSetIamPolicySecurityOption2;
@@ -126,11 +126,11 @@ var PubsubProjectsTopicsSetIamPolicySecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", PubsubProjectsTopicsSetIamPolicySecurityOption1)
     ], PubsubProjectsTopicsSetIamPolicySecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", PubsubProjectsTopicsSetIamPolicySecurityOption2)
     ], PubsubProjectsTopicsSetIamPolicySecurity.prototype, "option2", void 0);
     return PubsubProjectsTopicsSetIamPolicySecurity;
@@ -142,19 +142,19 @@ var PubsubProjectsTopicsSetIamPolicyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PubsubProjectsTopicsSetIamPolicyPathParams)
     ], PubsubProjectsTopicsSetIamPolicyRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PubsubProjectsTopicsSetIamPolicyQueryParams)
     ], PubsubProjectsTopicsSetIamPolicyRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.SetIamPolicyRequest)
     ], PubsubProjectsTopicsSetIamPolicyRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PubsubProjectsTopicsSetIamPolicySecurity)
     ], PubsubProjectsTopicsSetIamPolicyRequest.prototype, "security", void 0);
     return PubsubProjectsTopicsSetIamPolicyRequest;
@@ -166,15 +166,15 @@ var PubsubProjectsTopicsSetIamPolicyResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PubsubProjectsTopicsSetIamPolicyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Policy)
     ], PubsubProjectsTopicsSetIamPolicyResponse.prototype, "policy", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PubsubProjectsTopicsSetIamPolicyResponse.prototype, "statusCode", void 0);
     return PubsubProjectsTopicsSetIamPolicyResponse;

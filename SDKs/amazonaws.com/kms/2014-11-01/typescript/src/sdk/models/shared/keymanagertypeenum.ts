@@ -1,6 +1,7 @@
 
 
+
 export enum KeyManagerTypeEnum {
-    Aws = "AWS"
-,    Customer = "CUSTOMER"
+    Aws = "AWS",
+    Customer = "CUSTOMER"
 }

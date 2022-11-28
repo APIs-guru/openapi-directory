@@ -25,6 +25,8 @@ const (
 	SmartMeDeviceConfigurationContainerUploadIntervalEnumUploadInterval24h   SmartMeDeviceConfigurationContainerUploadIntervalEnum = "UploadInterval_24h"
 )
 
+// SmartMeDeviceConfigurationContainer
+// API Container class for the meter configuration
 type SmartMeDeviceConfigurationContainer struct {
 	DeviceEncryptionKey *string                                                `json:"DeviceEncryptionKey,omitempty"`
 	DevicePinCode       *string                                                `json:"DevicePinCode,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Fingerprint
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A set of properties that uniquely identify a given Docker image.
 **/
 export class Fingerprint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=v1Name" })
+  @SpeakeasyMetadata({ data: "json, name=v1Name" })
   v1Name?: string;
 
-  @Metadata({ data: "json, name=v2Blob" })
+  @SpeakeasyMetadata({ data: "json, name=v2Blob" })
   v2Blob?: string[];
 
-  @Metadata({ data: "json, name=v2Name" })
+  @SpeakeasyMetadata({ data: "json, name=v2Name" })
   v2Name?: string;
 }

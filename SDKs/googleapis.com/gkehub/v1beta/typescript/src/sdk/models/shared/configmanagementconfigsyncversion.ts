@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfigManagementConfigSyncVersion
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specific versioning information pertaining to ConfigSync's Pods
 **/
 export class ConfigManagementConfigSyncVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admissionWebhook" })
+  @SpeakeasyMetadata({ data: "json, name=admissionWebhook" })
   admissionWebhook?: string;
 
-  @Metadata({ data: "json, name=gitSync" })
+  @SpeakeasyMetadata({ data: "json, name=gitSync" })
   gitSync?: string;
 
-  @Metadata({ data: "json, name=importer" })
+  @SpeakeasyMetadata({ data: "json, name=importer" })
   importer?: string;
 
-  @Metadata({ data: "json, name=monitor" })
+  @SpeakeasyMetadata({ data: "json, name=monitor" })
   monitor?: string;
 
-  @Metadata({ data: "json, name=reconcilerManager" })
+  @SpeakeasyMetadata({ data: "json, name=reconcilerManager" })
   reconcilerManager?: string;
 
-  @Metadata({ data: "json, name=rootReconciler" })
+  @SpeakeasyMetadata({ data: "json, name=rootReconciler" })
   rootReconciler?: string;
 
-  @Metadata({ data: "json, name=syncer" })
+  @SpeakeasyMetadata({ data: "json, name=syncer" })
   syncer?: string;
 }

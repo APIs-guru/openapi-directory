@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareInvitationSummary } from "./shareinvitationsummary";
+
 
 
 // ListShareInvitationsOutput
@@ -8,9 +8,9 @@ import { ShareInvitationSummary } from "./shareinvitationsummary";
  * Input for List Share Invitations
 **/
 export class ListShareInvitationsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ShareInvitationSummaries", elemType: shared.ShareInvitationSummary })
+  @SpeakeasyMetadata({ data: "json, name=ShareInvitationSummaries", elemType: ShareInvitationSummary })
   shareInvitationSummaries?: ShareInvitationSummary[];
 }

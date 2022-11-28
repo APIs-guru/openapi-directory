@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RunProjectsLocationsServicesRevisionsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +31,20 @@ class RunProjectsLocationsServicesRevisionsDeleteQueryParams:
 
 @dataclass
 class RunProjectsLocationsServicesRevisionsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RunProjectsLocationsServicesRevisionsDeleteRequest:
-    path_params: RunProjectsLocationsServicesRevisionsDeletePathParams = field(default=None)
-    query_params: RunProjectsLocationsServicesRevisionsDeleteQueryParams = field(default=None)
-    security: RunProjectsLocationsServicesRevisionsDeleteSecurity = field(default=None)
+    path_params: RunProjectsLocationsServicesRevisionsDeletePathParams = field()
+    query_params: RunProjectsLocationsServicesRevisionsDeleteQueryParams = field()
+    security: RunProjectsLocationsServicesRevisionsDeleteSecurity = field()
     
 
 @dataclass
 class RunProjectsLocationsServicesRevisionsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

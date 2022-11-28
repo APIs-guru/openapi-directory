@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepositoryTriggerExecutionFailure
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A trigger failed to run.
 **/
 export class RepositoryTriggerExecutionFailure extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=failureMessage" })
   failureMessage?: string;
 
-  @Metadata({ data: "json, name=trigger" })
+  @SpeakeasyMetadata({ data: "json, name=trigger" })
   trigger?: string;
 }

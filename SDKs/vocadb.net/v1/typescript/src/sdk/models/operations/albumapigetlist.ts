@@ -1,166 +1,167 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum AlbumApiGetListArtistParticipationStatusEnum {
-    Everything = "Everything"
-,    OnlyMainAlbums = "OnlyMainAlbums"
-,    OnlyCollaborations = "OnlyCollaborations"
+    Everything = "Everything",
+    OnlyMainAlbums = "OnlyMainAlbums",
+    OnlyCollaborations = "OnlyCollaborations"
 }
 
 export enum AlbumApiGetListDiscTypesEnum {
-    Unknown = "Unknown"
-,    Album = "Album"
-,    Single = "Single"
-,    Ep = "EP"
-,    SplitAlbum = "SplitAlbum"
-,    Compilation = "Compilation"
-,    Video = "Video"
-,    Artbook = "Artbook"
-,    Game = "Game"
-,    Fanmade = "Fanmade"
-,    Instrumental = "Instrumental"
-,    Other = "Other"
+    Unknown = "Unknown",
+    Album = "Album",
+    Single = "Single",
+    Ep = "EP",
+    SplitAlbum = "SplitAlbum",
+    Compilation = "Compilation",
+    Video = "Video",
+    Artbook = "Artbook",
+    Game = "Game",
+    Fanmade = "Fanmade",
+    Instrumental = "Instrumental",
+    Other = "Other"
 }
 
 export enum AlbumApiGetListFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    Artists = "Artists"
-,    Description = "Description"
-,    Discs = "Discs"
-,    Identifiers = "Identifiers"
-,    MainPicture = "MainPicture"
-,    Names = "Names"
-,    PVs = "PVs"
-,    ReleaseEvent = "ReleaseEvent"
-,    Tags = "Tags"
-,    Tracks = "Tracks"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    Artists = "Artists",
+    Description = "Description",
+    Discs = "Discs",
+    Identifiers = "Identifiers",
+    MainPicture = "MainPicture",
+    Names = "Names",
+    PVs = "PVs",
+    ReleaseEvent = "ReleaseEvent",
+    Tags = "Tags",
+    Tracks = "Tracks",
+    WebLinks = "WebLinks"
 }
 
 export enum AlbumApiGetListLangEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 export enum AlbumApiGetListNameMatchModeEnum {
-    Auto = "Auto"
-,    Partial = "Partial"
-,    StartsWith = "StartsWith"
-,    Exact = "Exact"
-,    Words = "Words"
+    Auto = "Auto",
+    Partial = "Partial",
+    StartsWith = "StartsWith",
+    Exact = "Exact",
+    Words = "Words"
 }
 
 export enum AlbumApiGetListSortEnum {
-    None = "None"
-,    Name = "Name"
-,    ReleaseDate = "ReleaseDate"
-,    ReleaseDateWithNulls = "ReleaseDateWithNulls"
-,    AdditionDate = "AdditionDate"
-,    RatingAverage = "RatingAverage"
-,    RatingTotal = "RatingTotal"
-,    NameThenReleaseDate = "NameThenReleaseDate"
-,    CollectionCount = "CollectionCount"
+    None = "None",
+    Name = "Name",
+    ReleaseDate = "ReleaseDate",
+    ReleaseDateWithNulls = "ReleaseDateWithNulls",
+    AdditionDate = "AdditionDate",
+    RatingAverage = "RatingAverage",
+    RatingTotal = "RatingTotal",
+    NameThenReleaseDate = "NameThenReleaseDate",
+    CollectionCount = "CollectionCount"
 }
 
 export enum AlbumApiGetListStatusEnum {
-    Draft = "Draft"
-,    Finished = "Finished"
-,    Approved = "Approved"
-,    Locked = "Locked"
+    Draft = "Draft",
+    Finished = "Finished",
+    Approved = "Approved",
+    Locked = "Locked"
 }
 
 
 export class AlbumApiGetListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=advancedFilters" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=advancedFilters" })
   advancedFilters?: any[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=artistId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=artistId" })
   artistId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=artistParticipationStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=artistParticipationStatus" })
   artistParticipationStatus?: AlbumApiGetListArtistParticipationStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=barcode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=barcode" })
   barcode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=childTags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=childTags" })
   childTags?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=childVoicebanks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=childVoicebanks" })
   childVoicebanks?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deleted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=discTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=discTypes" })
   discTypes?: AlbumApiGetListDiscTypesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: AlbumApiGetListFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
   getTotalCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeMembers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeMembers" })
   includeMembers?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: AlbumApiGetListLangEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameMatchMode" })
   nameMatchMode?: AlbumApiGetListNameMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=preferAccurateMatches" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=preferAccurateMatches" })
   preferAccurateMatches?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=releaseDateAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=releaseDateAfter" })
   releaseDateAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=releaseDateBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=releaseDateBefore" })
   releaseDateBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: AlbumApiGetListSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: AlbumApiGetListStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagId" })
   tagId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagName" })
   tagName?: string[];
 }
 
 
 export class AlbumApiGetListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AlbumApiGetListQueryParams;
 }
 
 
 export class AlbumApiGetListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partialFindResultAlbumForApiContract?: shared.PartialFindResultAlbumForApiContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://mbus.local",
 	"https://mbus.local/",
 }
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Get - Gets data from the slave identified by {address}
 func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operations.GetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/mbus/get/{device}/{baudrate}/{address}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -61,7 +83,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -114,8 +136,9 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 	return res, nil
 }
 
+// GetMulti - Gets data from the slave identified by {address}, and supports multiple responses from the slave
 func (s *SDK) GetMulti(ctx context.Context, request operations.GetMultiRequest) (*operations.GetMultiResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/mbus/getMulti/{device}/{baudrate}/{address}/{maxframes}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -123,7 +146,7 @@ func (s *SDK) GetMulti(ctx context.Context, request operations.GetMultiRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -176,8 +199,9 @@ func (s *SDK) GetMulti(ctx context.Context, request operations.GetMultiRequest) 
 	return res, nil
 }
 
+// Hat - Gets Raspberry Pi Hat information
 func (s *SDK) Hat(ctx context.Context) (*operations.HatResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/mbus/hat"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -185,7 +209,7 @@ func (s *SDK) Hat(ctx context.Context) (*operations.HatResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -226,8 +250,9 @@ func (s *SDK) Hat(ctx context.Context) (*operations.HatResponse, error) {
 	return res, nil
 }
 
+// HatOff - Turns off power to the M-Bus
 func (s *SDK) HatOff(ctx context.Context) (*operations.HatOffResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/mbus/hat/off"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -235,7 +260,7 @@ func (s *SDK) HatOff(ctx context.Context) (*operations.HatOffResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -267,8 +292,9 @@ func (s *SDK) HatOff(ctx context.Context) (*operations.HatOffResponse, error) {
 	return res, nil
 }
 
+// HatOn - Turns on power to the M-Bus
 func (s *SDK) HatOn(ctx context.Context) (*operations.HatOnResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/mbus/hat/on"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -276,7 +302,7 @@ func (s *SDK) HatOn(ctx context.Context) (*operations.HatOnResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -308,8 +334,9 @@ func (s *SDK) HatOn(ctx context.Context) (*operations.HatOnResponse, error) {
 	return res, nil
 }
 
+// MbusAPI - Returns this API specification
 func (s *SDK) MbusAPI(ctx context.Context) (*operations.MbusAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/mbus/api"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -317,7 +344,7 @@ func (s *SDK) MbusAPI(ctx context.Context) (*operations.MbusAPIResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -359,8 +386,9 @@ func (s *SDK) MbusAPI(ctx context.Context) (*operations.MbusAPIResponse, error) 
 	return res, nil
 }
 
+// Scan - Scan the specified device for slaves
 func (s *SDK) Scan(ctx context.Context, request operations.ScanRequest) (*operations.ScanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/mbus/scan/{device}/{baudrate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -368,7 +396,7 @@ func (s *SDK) Scan(ctx context.Context, request operations.ScanRequest) (*operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

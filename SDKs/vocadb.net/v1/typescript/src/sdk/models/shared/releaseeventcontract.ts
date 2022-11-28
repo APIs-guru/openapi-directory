@@ -1,93 +1,148 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReleaseEventSeriesContract } from "./releaseeventseriescontract";
 import { SongListBaseContract } from "./songlistbasecontract";
 import { VenueContract } from "./venuecontract";
 
+
 export enum ReleaseEventContractCategoryEnum {
-    Unspecified = "Unspecified"
-,    AlbumRelease = "AlbumRelease"
-,    Anniversary = "Anniversary"
-,    Club = "Club"
-,    Concert = "Concert"
-,    Contest = "Contest"
-,    Convention = "Convention"
-,    Other = "Other"
+    Unspecified = "Unspecified",
+    AlbumRelease = "AlbumRelease",
+    Anniversary = "Anniversary",
+    Club = "Club",
+    Concert = "Concert",
+    Contest = "Contest",
+    Convention = "Convention",
+    Other = "Other"
 }
 
 export enum ReleaseEventContractInheritedCategoryEnum {
-    Unspecified = "Unspecified"
-,    AlbumRelease = "AlbumRelease"
-,    Anniversary = "Anniversary"
-,    Club = "Club"
-,    Concert = "Concert"
-,    Contest = "Contest"
-,    Convention = "Convention"
-,    Other = "Other"
+    Unspecified = "Unspecified",
+    AlbumRelease = "AlbumRelease",
+    Anniversary = "Anniversary",
+    Club = "Club",
+    Concert = "Concert",
+    Contest = "Contest",
+    Convention = "Convention",
+    Other = "Other"
 }
 
 export enum ReleaseEventContractStatusEnum {
-    Draft = "Draft"
-,    Finished = "Finished"
-,    Approved = "Approved"
-,    Locked = "Locked"
+    Draft = "Draft",
+    Finished = "Finished",
+    Approved = "Approved",
+    Locked = "Locked"
 }
 
 
 export class ReleaseEventContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalNames" })
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
   additionalNames?: string;
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: ReleaseEventContractCategoryEnum;
 
-  @Metadata({ data: "json, name=customName" })
+  @SpeakeasyMetadata({ data: "json, name=customName" })
   customName?: boolean;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=hasVenueOrVenueName" })
+  @SpeakeasyMetadata({ data: "json, name=hasVenueOrVenueName" })
   hasVenueOrVenueName?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=inheritedCategory" })
+  @SpeakeasyMetadata({ data: "json, name=inheritedCategory" })
   inheritedCategory?: ReleaseEventContractInheritedCategoryEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pictureMime" })
+  @SpeakeasyMetadata({ data: "json, name=pictureMime" })
   pictureMime?: string;
 
-  @Metadata({ data: "json, name=series" })
+  @SpeakeasyMetadata({ data: "json, name=series" })
   series?: ReleaseEventSeriesContract;
 
-  @Metadata({ data: "json, name=songList" })
+  @SpeakeasyMetadata({ data: "json, name=songList" })
   songList?: SongListBaseContract;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ReleaseEventContractStatusEnum;
 
-  @Metadata({ data: "json, name=urlSlug" })
+  @SpeakeasyMetadata({ data: "json, name=urlSlug" })
   urlSlug?: string;
 
-  @Metadata({ data: "json, name=venue" })
+  @SpeakeasyMetadata({ data: "json, name=venue" })
   venue?: VenueContract;
 
-  @Metadata({ data: "json, name=venueName" })
+  @SpeakeasyMetadata({ data: "json, name=venueName" })
   venueName?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: number;
+}
+
+
+export class ReleaseEventContractInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
+  additionalNames?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=category" })
+  category?: ReleaseEventContractCategoryEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=customName" })
+  customName?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=date" })
+  date?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  deleted?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
+  endDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=pictureMime" })
+  pictureMime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=series" })
+  series?: ReleaseEventSeriesContract;
+
+  @SpeakeasyMetadata({ data: "json, name=songList" })
+  songList?: SongListBaseContract;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: ReleaseEventContractStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=urlSlug" })
+  urlSlug?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=venue" })
+  venue?: VenueContract;
+
+  @SpeakeasyMetadata({ data: "json, name=venueName" })
+  venueName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

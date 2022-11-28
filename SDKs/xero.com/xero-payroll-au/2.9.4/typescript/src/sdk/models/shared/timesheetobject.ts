@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Timesheet } from "./timesheet";
 
 
+
 export class TimesheetObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Timesheet" })
+  @SpeakeasyMetadata({ data: "json, name=Timesheet" })
   timesheet?: Timesheet;
 }

@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Process = /** @class */ (function (_super) {
     __extends(Process, _super);
     function Process() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=crop" }),
+        SpeakeasyMetadata({ data: "json, name=crop" }),
         __metadata("design:type", String)
     ], Process.prototype, "crop", void 0);
     __decorate([
-        Metadata({ data: "json, name=flip" }),
+        SpeakeasyMetadata({ data: "json, name=flip" }),
         __metadata("design:type", Boolean)
     ], Process.prototype, "flip", void 0);
     __decorate([
-        Metadata({ data: "json, name=mirror" }),
+        SpeakeasyMetadata({ data: "json, name=mirror" }),
         __metadata("design:type", Boolean)
     ], Process.prototype, "mirror", void 0);
     __decorate([
-        Metadata({ data: "json, name=processing_algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=processing_algorithm" }),
         __metadata("design:type", String)
     ], Process.prototype, "processingAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=resize" }),
+        SpeakeasyMetadata({ data: "json, name=resize" }),
         __metadata("design:type", String)
     ], Process.prototype, "resize", void 0);
     __decorate([
-        Metadata({ data: "json, name=rotate" }),
+        SpeakeasyMetadata({ data: "json, name=rotate" }),
         __metadata("design:type", Number)
     ], Process.prototype, "rotate", void 0);
     return Process;

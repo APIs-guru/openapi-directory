@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GitHubEnterpriseSecrets
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * GitHubEnterpriseSecrets represents the names of all necessary secrets in Secret Manager for a GitHub Enterprise server. Format is: projects//secrets/.
 **/
 export class GitHubEnterpriseSecrets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oauthClientIdName" })
+  @SpeakeasyMetadata({ data: "json, name=oauthClientIdName" })
   oauthClientIdName?: string;
 
-  @Metadata({ data: "json, name=oauthClientIdVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=oauthClientIdVersionName" })
   oauthClientIdVersionName?: string;
 
-  @Metadata({ data: "json, name=oauthSecretName" })
+  @SpeakeasyMetadata({ data: "json, name=oauthSecretName" })
   oauthSecretName?: string;
 
-  @Metadata({ data: "json, name=oauthSecretVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=oauthSecretVersionName" })
   oauthSecretVersionName?: string;
 
-  @Metadata({ data: "json, name=privateKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=privateKeyName" })
   privateKeyName?: string;
 
-  @Metadata({ data: "json, name=privateKeyVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=privateKeyVersionName" })
   privateKeyVersionName?: string;
 
-  @Metadata({ data: "json, name=webhookSecretName" })
+  @SpeakeasyMetadata({ data: "json, name=webhookSecretName" })
   webhookSecretName?: string;
 
-  @Metadata({ data: "json, name=webhookSecretVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=webhookSecretVersionName" })
   webhookSecretVersionName?: string;
 }

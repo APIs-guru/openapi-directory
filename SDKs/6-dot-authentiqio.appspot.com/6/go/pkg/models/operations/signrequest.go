@@ -4,14 +4,14 @@ type SignRequestQueryParams struct {
 	Test *int64 `queryParam:"style=form,explode=true,name=test"`
 }
 
-type SignRequestRequest struct {
-	QueryParams SignRequestQueryParams
-	Request     []byte `request:"mediaType=application/jwt"`
-}
-
 type SignRequest201ApplicationJSON struct {
 	Job    *string `json:"job,omitempty"`
 	Status *string `json:"status,omitempty"`
+}
+
+type SignRequestRequest struct {
+	QueryParams SignRequestQueryParams
+	Request     []byte `request:"mediaType=application/jwt"`
 }
 
 type SignRequestResponse struct {

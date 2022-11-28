@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InitiateOpenIdLoginQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=issuer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=issuer" })
   issuer: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=redirect_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=redirect_uri" })
   redirectUri: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=test" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=test" })
   test: boolean;
 }
 
 
 export class InitiateOpenIdLoginRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: InitiateOpenIdLoginQueryParams;
 }
 
 
 export class InitiateOpenIdLoginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

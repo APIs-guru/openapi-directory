@@ -1,5 +1,7 @@
 package shared
 
+// PartitionQueryRequest
+// The request for PartitionQuery
 type PartitionQueryRequest struct {
 	ParamTypes       map[string]Type        `json:"paramTypes,omitempty"`
 	Params           map[string]interface{} `json:"params,omitempty"`

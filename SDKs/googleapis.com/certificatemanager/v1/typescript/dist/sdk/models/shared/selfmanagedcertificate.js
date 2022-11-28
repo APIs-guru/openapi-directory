@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SelfManagedCertificate
 /**
  * Certificate data for a SelfManaged Certificate. SelfManaged Certificates are uploaded by the user. Updating such certificates before they expire remains the user's responsibility.
@@ -33,11 +33,11 @@ var SelfManagedCertificate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=pemCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=pemCertificate" }),
         __metadata("design:type", String)
     ], SelfManagedCertificate.prototype, "pemCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=pemPrivateKey" }),
+        SpeakeasyMetadata({ data: "json, name=pemPrivateKey" }),
         __metadata("design:type", String)
     ], SelfManagedCertificate.prototype, "pemPrivateKey", void 0);
     return SelfManagedCertificate;

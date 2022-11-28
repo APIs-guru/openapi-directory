@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImagePerformance
+// Image performance model
 type ImagePerformance struct {
 	Created      *time.Time    `json:"created,omitempty"`
 	Height       *int32        `json:"height,omitempty"`

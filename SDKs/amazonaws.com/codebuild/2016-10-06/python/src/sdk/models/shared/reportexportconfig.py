@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportexportconfigtype_enum
-from . import s3reportexportconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReportExportConfig:
-    export_config_type: Optional[reportexportconfigtype_enum.ReportExportConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exportConfigType' }})
-    s3_destination: Optional[s3reportexportconfig.S3ReportExportConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Destination' }})
+    r"""ReportExportConfig
+     Information about the location where the run of a report is exported. 
+    """
+    
+    export_config_type: Optional[ReportExportConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exportConfigType') }})
+    s3_destination: Optional[S3ReportExportConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Destination') }})
     

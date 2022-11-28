@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateSnapshotCopyGrantActionEnum(str, Enum):
     CREATE_SNAPSHOT_COPY_GRANT = "CreateSnapshotCopyGrant"
@@ -10,8 +14,8 @@ class PostCreateSnapshotCopyGrantVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateSnapshotCopyGrantQueryParams:
-    action: PostCreateSnapshotCopyGrantActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateSnapshotCopyGrantVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateSnapshotCopyGrantActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateSnapshotCopyGrantVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateSnapshotCopyGrantHeaders:
 
 @dataclass
 class PostCreateSnapshotCopyGrantRequest:
-    query_params: PostCreateSnapshotCopyGrantQueryParams = field(default=None)
-    headers: PostCreateSnapshotCopyGrantHeaders = field(default=None)
+    headers: PostCreateSnapshotCopyGrantHeaders = field()
+    query_params: PostCreateSnapshotCopyGrantQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateSnapshotCopyGrantResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

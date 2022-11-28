@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildInfo } from "./buildinfo";
 import { CloudBuildOptions } from "./cloudbuildoptions";
 import { ContainerInfo } from "./containerinfo";
+import { FileInfo } from "./fileinfo";
 import { ZipInfo } from "./zipinfo";
 // Deployment
 /**
@@ -38,23 +38,23 @@ var Deployment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=build" }),
+        SpeakeasyMetadata({ data: "json, name=build" }),
         __metadata("design:type", BuildInfo)
     ], Deployment.prototype, "build", void 0);
     __decorate([
-        Metadata({ data: "json, name=cloudBuildOptions" }),
+        SpeakeasyMetadata({ data: "json, name=cloudBuildOptions" }),
         __metadata("design:type", CloudBuildOptions)
     ], Deployment.prototype, "cloudBuildOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=container" }),
+        SpeakeasyMetadata({ data: "json, name=container" }),
         __metadata("design:type", ContainerInfo)
     ], Deployment.prototype, "container", void 0);
     __decorate([
-        Metadata({ data: "json, name=files", elemType: shared.FileInfo }),
+        SpeakeasyMetadata({ data: "json, name=files", elemType: FileInfo }),
         __metadata("design:type", Map)
     ], Deployment.prototype, "files", void 0);
     __decorate([
-        Metadata({ data: "json, name=zip" }),
+        SpeakeasyMetadata({ data: "json, name=zip" }),
         __metadata("design:type", ZipInfo)
     ], Deployment.prototype, "zip", void 0);
     return Deployment;

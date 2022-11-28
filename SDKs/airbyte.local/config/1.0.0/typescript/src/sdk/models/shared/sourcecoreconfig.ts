@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SourceCoreConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=connectionConfiguration" })
   connectionConfiguration: any;
 
-  @Metadata({ data: "json, name=sourceDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceDefinitionId" })
   sourceDefinitionId: string;
 }

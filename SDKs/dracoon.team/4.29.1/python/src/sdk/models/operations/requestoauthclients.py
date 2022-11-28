@@ -16,14 +16,14 @@ class RequestOAuthClientsHeaders:
 
 @dataclass
 class RequestOAuthClientsRequest:
-    query_params: RequestOAuthClientsQueryParams = field(default=None)
-    headers: RequestOAuthClientsHeaders = field(default=None)
+    headers: RequestOAuthClientsHeaders = field()
+    query_params: RequestOAuthClientsQueryParams = field()
     
 
 @dataclass
 class RequestOAuthClientsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     o_auth_clients: Optional[List[shared.OAuthClient]] = field(default=None)
-    status_code: int = field(default=None)
     

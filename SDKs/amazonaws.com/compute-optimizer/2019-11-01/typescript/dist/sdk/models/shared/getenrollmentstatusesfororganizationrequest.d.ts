@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EnrollmentFilter } from "./enrollmentfilter";
 export declare class GetEnrollmentStatusesForOrganizationRequest extends SpeakeasyBase {
     filters?: EnrollmentFilter[];

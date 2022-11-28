@@ -1,5 +1,7 @@
 package shared
 
+// YadifConfig
+// Yet Another Deinterlacing Filter Configuration.
 type YadifConfig struct {
 	DeinterlaceAllFrames      *bool   `json:"deinterlaceAllFrames,omitempty"`
 	DisableSpatialInterlacing *bool   `json:"disableSpatialInterlacing,omitempty"`

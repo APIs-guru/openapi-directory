@@ -4,10 +4,8 @@ type PostServersIDActionsDisableRescuePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsDisableRescueRequest struct {
-	PathParams PostServersIDActionsDisableRescuePathParams
-}
-
+// PostServersIDActionsDisableRescueActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsDisableRescueActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsDisableRescueActionResponseAction struct {
 
 type PostServersIDActionsDisableRescueActionResponse struct {
 	Action PostServersIDActionsDisableRescueActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsDisableRescueRequest struct {
+	PathParams PostServersIDActionsDisableRescuePathParams
 }
 
 type PostServersIDActionsDisableRescueResponse struct {

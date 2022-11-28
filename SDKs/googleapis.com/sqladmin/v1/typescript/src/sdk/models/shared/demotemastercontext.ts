@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DemoteMasterConfiguration } from "./demotemasterconfiguration";
+
 
 
 // DemoteMasterContext
@@ -7,18 +8,18 @@ import { DemoteMasterConfiguration } from "./demotemasterconfiguration";
  * Database instance demote primary instance context.
 **/
 export class DemoteMasterContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=masterInstanceName" })
+  @SpeakeasyMetadata({ data: "json, name=masterInstanceName" })
   masterInstanceName?: string;
 
-  @Metadata({ data: "json, name=replicaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=replicaConfiguration" })
   replicaConfiguration?: DemoteMasterConfiguration;
 
-  @Metadata({ data: "json, name=skipReplicationSetup" })
+  @SpeakeasyMetadata({ data: "json, name=skipReplicationSetup" })
   skipReplicationSetup?: boolean;
 
-  @Metadata({ data: "json, name=verifyGtidConsistency" })
+  @SpeakeasyMetadata({ data: "json, name=verifyGtidConsistency" })
   verifyGtidConsistency?: boolean;
 }

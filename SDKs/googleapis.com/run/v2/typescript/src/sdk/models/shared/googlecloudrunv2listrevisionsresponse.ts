@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRunV2Revision } from "./googlecloudrunv2revision";
+
 
 
 // GoogleCloudRunV2ListRevisionsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudRunV2Revision } from "./googlecloudrunv2revision";
  * Response message containing a list of Revisions.
 **/
 export class GoogleCloudRunV2ListRevisionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=revisions", elemType: shared.GoogleCloudRunV2Revision })
+  @SpeakeasyMetadata({ data: "json, name=revisions", elemType: GoogleCloudRunV2Revision })
   revisions?: GoogleCloudRunV2Revision[];
 }

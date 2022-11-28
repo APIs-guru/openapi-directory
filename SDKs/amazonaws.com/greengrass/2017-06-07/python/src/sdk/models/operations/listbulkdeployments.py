@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,14 +25,14 @@ class ListBulkDeploymentsHeaders:
 
 @dataclass
 class ListBulkDeploymentsRequest:
-    query_params: ListBulkDeploymentsQueryParams = field(default=None)
-    headers: ListBulkDeploymentsHeaders = field(default=None)
+    headers: ListBulkDeploymentsHeaders = field()
+    query_params: ListBulkDeploymentsQueryParams = field()
     
 
 @dataclass
 class ListBulkDeploymentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_bulk_deployments_response: Optional[shared.ListBulkDeploymentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

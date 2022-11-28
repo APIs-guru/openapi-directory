@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutImagePolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageArn" })
+  @SpeakeasyMetadata({ data: "json, name=imageArn" })
   imageArn?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

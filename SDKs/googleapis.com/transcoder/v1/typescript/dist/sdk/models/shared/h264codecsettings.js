@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // H264CodecSettings
 /**
  * H264 codec settings.
@@ -33,83 +33,83 @@ var H264CodecSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowOpenGop" }),
+        SpeakeasyMetadata({ data: "json, name=allowOpenGop" }),
         __metadata("design:type", Boolean)
     ], H264CodecSettings.prototype, "allowOpenGop", void 0);
     __decorate([
-        Metadata({ data: "json, name=aqStrength" }),
+        SpeakeasyMetadata({ data: "json, name=aqStrength" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "aqStrength", void 0);
     __decorate([
-        Metadata({ data: "json, name=bFrameCount" }),
+        SpeakeasyMetadata({ data: "json, name=bFrameCount" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "bFrameCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=bPyramid" }),
+        SpeakeasyMetadata({ data: "json, name=bPyramid" }),
         __metadata("design:type", Boolean)
     ], H264CodecSettings.prototype, "bPyramid", void 0);
     __decorate([
-        Metadata({ data: "json, name=bitrateBps" }),
+        SpeakeasyMetadata({ data: "json, name=bitrateBps" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "bitrateBps", void 0);
     __decorate([
-        Metadata({ data: "json, name=crfLevel" }),
+        SpeakeasyMetadata({ data: "json, name=crfLevel" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "crfLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableTwoPass" }),
+        SpeakeasyMetadata({ data: "json, name=enableTwoPass" }),
         __metadata("design:type", Boolean)
     ], H264CodecSettings.prototype, "enableTwoPass", void 0);
     __decorate([
-        Metadata({ data: "json, name=entropyCoder" }),
+        SpeakeasyMetadata({ data: "json, name=entropyCoder" }),
         __metadata("design:type", String)
     ], H264CodecSettings.prototype, "entropyCoder", void 0);
     __decorate([
-        Metadata({ data: "json, name=frameRate" }),
+        SpeakeasyMetadata({ data: "json, name=frameRate" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "frameRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=gopDuration" }),
+        SpeakeasyMetadata({ data: "json, name=gopDuration" }),
         __metadata("design:type", String)
     ], H264CodecSettings.prototype, "gopDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=gopFrameCount" }),
+        SpeakeasyMetadata({ data: "json, name=gopFrameCount" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "gopFrameCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=heightPixels" }),
+        SpeakeasyMetadata({ data: "json, name=heightPixels" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "heightPixels", void 0);
     __decorate([
-        Metadata({ data: "json, name=pixelFormat" }),
+        SpeakeasyMetadata({ data: "json, name=pixelFormat" }),
         __metadata("design:type", String)
     ], H264CodecSettings.prototype, "pixelFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=preset" }),
+        SpeakeasyMetadata({ data: "json, name=preset" }),
         __metadata("design:type", String)
     ], H264CodecSettings.prototype, "preset", void 0);
     __decorate([
-        Metadata({ data: "json, name=profile" }),
+        SpeakeasyMetadata({ data: "json, name=profile" }),
         __metadata("design:type", String)
     ], H264CodecSettings.prototype, "profile", void 0);
     __decorate([
-        Metadata({ data: "json, name=rateControlMode" }),
+        SpeakeasyMetadata({ data: "json, name=rateControlMode" }),
         __metadata("design:type", String)
     ], H264CodecSettings.prototype, "rateControlMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=tune" }),
+        SpeakeasyMetadata({ data: "json, name=tune" }),
         __metadata("design:type", String)
     ], H264CodecSettings.prototype, "tune", void 0);
     __decorate([
-        Metadata({ data: "json, name=vbvFullnessBits" }),
+        SpeakeasyMetadata({ data: "json, name=vbvFullnessBits" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "vbvFullnessBits", void 0);
     __decorate([
-        Metadata({ data: "json, name=vbvSizeBits" }),
+        SpeakeasyMetadata({ data: "json, name=vbvSizeBits" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "vbvSizeBits", void 0);
     __decorate([
-        Metadata({ data: "json, name=widthPixels" }),
+        SpeakeasyMetadata({ data: "json, name=widthPixels" }),
         __metadata("design:type", Number)
     ], H264CodecSettings.prototype, "widthPixels", void 0);
     return H264CodecSettings;

@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGeomarksGeomarkIdPointFileFormatExtensionFileFormatExtensionEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Kml = "kml"
-,    Kmz = "kmz"
-,    Shp = "shp"
-,    Shpz = "shpz"
-,    Geojson = "geojson"
-,    Gml = "gml"
-,    Wkt = "wkt"
+    Json = "json",
+    Xml = "xml",
+    Kml = "kml",
+    Kmz = "kmz",
+    Shp = "shp",
+    Shpz = "shpz",
+    Geojson = "geojson",
+    Gml = "gml",
+    Wkt = "wkt"
 }
 
 
 export class GetGeomarksGeomarkIdPointFileFormatExtensionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fileFormatExtension" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileFormatExtension" })
   fileFormatExtension: GetGeomarksGeomarkIdPointFileFormatExtensionFileFormatExtensionEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=geomarkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=geomarkId" })
   geomarkId: string;
 }
 
 
 export class GetGeomarksGeomarkIdPointFileFormatExtensionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=srid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=srid" })
   srid?: number;
 }
 
 
 export class GetGeomarksGeomarkIdPointFileFormatExtensionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetGeomarksGeomarkIdPointFileFormatExtensionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGeomarksGeomarkIdPointFileFormatExtensionQueryParams;
 }
 
 
 export class GetGeomarksGeomarkIdPointFileFormatExtensionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

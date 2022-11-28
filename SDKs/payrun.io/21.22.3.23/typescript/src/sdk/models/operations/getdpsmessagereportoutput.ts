@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDpsMessageReportOutputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=FromDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FromDate" })
   fromDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" })
   maxIndex?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MessageStatuses" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MessageStatuses" })
   messageStatuses?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MessageTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MessageTypes" })
   messageTypes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=StartIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartIndex" })
   startIndex?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ToDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ToDate" })
   toDate?: Date;
 }
 
 
 export class GetDpsMessageReportOutputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetDpsMessageReportOutputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDpsMessageReportOutputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDpsMessageReportOutputHeaders;
 }
 
 
 export class GetDpsMessageReportOutputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDpsMessageReportOutput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

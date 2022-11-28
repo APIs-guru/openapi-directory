@@ -8,14 +8,14 @@ type EnterpriseAdminUpdateUsernameForUserRequestBody struct {
 	Login string `json:"login"`
 }
 
-type EnterpriseAdminUpdateUsernameForUserRequest struct {
-	PathParams EnterpriseAdminUpdateUsernameForUserPathParams
-	Request    *EnterpriseAdminUpdateUsernameForUserRequestBody `request:"mediaType=application/json"`
-}
-
 type EnterpriseAdminUpdateUsernameForUser202ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 	URL     *string `json:"url,omitempty"`
+}
+
+type EnterpriseAdminUpdateUsernameForUserRequest struct {
+	PathParams EnterpriseAdminUpdateUsernameForUserPathParams
+	Request    *EnterpriseAdminUpdateUsernameForUserRequestBody `request:"mediaType=application/json"`
 }
 
 type EnterpriseAdminUpdateUsernameForUserResponse struct {

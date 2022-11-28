@@ -14,7 +14,7 @@ type CreateTimesheetSecurity struct {
 
 type CreateTimesheetRequest struct {
 	Headers  CreateTimesheetHeaders
-	Request  []shared.Timesheet `request:"mediaType=application/json"`
+	Request  []shared.TimesheetInput `request:"mediaType=application/json"`
 	Security CreateTimesheetSecurity
 }
 

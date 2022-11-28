@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetOfferingsOfferingIDAnalyticsMarksQuizzesPathParams:
-    offering_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
+    offering_id: str = field(metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOfferingsOfferingIDAnalyticsMarksQuizzesRequest:
-    path_params: GetOfferingsOfferingIDAnalyticsMarksQuizzesPathParams = field(default=None)
+    path_params: GetOfferingsOfferingIDAnalyticsMarksQuizzesPathParams = field()
     
 
 @dataclass
 class GetOfferingsOfferingIDAnalyticsMarksQuizzesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     quiz_mark_responses: Optional[List[shared.QuizMarkResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

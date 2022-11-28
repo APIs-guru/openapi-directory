@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkerHealthReport
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * WorkerHealthReport contains information about the health of a worker. The VM should be identified by the labels attached to the WorkerMessage that this health ping belongs to.
 **/
 export class WorkerHealthReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=msg" })
+  @SpeakeasyMetadata({ data: "json, name=msg" })
   msg?: string;
 
-  @Metadata({ data: "json, name=pods" })
+  @SpeakeasyMetadata({ data: "json, name=pods" })
   pods?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=reportInterval" })
+  @SpeakeasyMetadata({ data: "json, name=reportInterval" })
   reportInterval?: string;
 
-  @Metadata({ data: "json, name=vmBrokenCode" })
+  @SpeakeasyMetadata({ data: "json, name=vmBrokenCode" })
   vmBrokenCode?: string;
 
-  @Metadata({ data: "json, name=vmIsBroken" })
+  @SpeakeasyMetadata({ data: "json, name=vmIsBroken" })
   vmIsBroken?: boolean;
 
-  @Metadata({ data: "json, name=vmIsHealthy" })
+  @SpeakeasyMetadata({ data: "json, name=vmIsHealthy" })
   vmIsHealthy?: boolean;
 
-  @Metadata({ data: "json, name=vmStartupTime" })
+  @SpeakeasyMetadata({ data: "json, name=vmStartupTime" })
   vmStartupTime?: string;
 }

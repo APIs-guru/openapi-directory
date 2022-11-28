@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SimpleRuleEvaluation } from "./simpleruleevaluation";
 /**
  * Information needed to evaluate data.

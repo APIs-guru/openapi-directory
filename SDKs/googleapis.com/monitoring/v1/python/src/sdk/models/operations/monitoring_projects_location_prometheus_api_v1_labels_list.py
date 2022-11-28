@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MonitoringProjectsLocationPrometheusAPIV1LabelsListPathParams:
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class MonitoringProjectsLocationPrometheusAPIV1LabelsListQueryParams:
 
 @dataclass
 class MonitoringProjectsLocationPrometheusAPIV1LabelsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsLocationPrometheusAPIV1LabelsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsLocationPrometheusAPIV1LabelsListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -54,14 +55,14 @@ class MonitoringProjectsLocationPrometheusAPIV1LabelsListSecurity:
 
 @dataclass
 class MonitoringProjectsLocationPrometheusAPIV1LabelsListRequest:
-    path_params: MonitoringProjectsLocationPrometheusAPIV1LabelsListPathParams = field(default=None)
-    query_params: MonitoringProjectsLocationPrometheusAPIV1LabelsListQueryParams = field(default=None)
-    security: MonitoringProjectsLocationPrometheusAPIV1LabelsListSecurity = field(default=None)
+    path_params: MonitoringProjectsLocationPrometheusAPIV1LabelsListPathParams = field()
+    query_params: MonitoringProjectsLocationPrometheusAPIV1LabelsListQueryParams = field()
+    security: MonitoringProjectsLocationPrometheusAPIV1LabelsListSecurity = field()
     
 
 @dataclass
 class MonitoringProjectsLocationPrometheusAPIV1LabelsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_body: Optional[shared.HTTPBody] = field(default=None)
-    status_code: int = field(default=None)
     

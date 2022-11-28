@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * DepositSwitchTokenCreateRequest defines the request schema for `/deposit_switch/token/create`
 **/

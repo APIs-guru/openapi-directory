@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingConfiguration } from "./loggingconfiguration";
 
 
+
 export class UpdateLoggingConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirewallArn" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallArn" })
   firewallArn?: string;
 
-  @Metadata({ data: "json, name=FirewallName" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallName" })
   firewallName?: string;
 
-  @Metadata({ data: "json, name=LoggingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingConfiguration" })
   loggingConfiguration?: LoggingConfiguration;
 }

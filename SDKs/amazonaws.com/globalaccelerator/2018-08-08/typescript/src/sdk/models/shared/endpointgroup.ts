@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointDescription } from "./endpointdescription";
 import { HealthCheckProtocolEnum } from "./healthcheckprotocolenum";
 import { PortOverride } from "./portoverride";
+
 
 
 // EndpointGroup
@@ -10,33 +10,33 @@ import { PortOverride } from "./portoverride";
  * A complex type for the endpoint group. An AWS Region can have only one endpoint group for a specific listener. 
 **/
 export class EndpointGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointDescriptions", elemType: shared.EndpointDescription })
+  @SpeakeasyMetadata({ data: "json, name=EndpointDescriptions", elemType: EndpointDescription })
   endpointDescriptions?: EndpointDescription[];
 
-  @Metadata({ data: "json, name=EndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupArn" })
   endpointGroupArn?: string;
 
-  @Metadata({ data: "json, name=EndpointGroupRegion" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupRegion" })
   endpointGroupRegion?: string;
 
-  @Metadata({ data: "json, name=HealthCheckIntervalSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckIntervalSeconds" })
   healthCheckIntervalSeconds?: number;
 
-  @Metadata({ data: "json, name=HealthCheckPath" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckPath" })
   healthCheckPath?: string;
 
-  @Metadata({ data: "json, name=HealthCheckPort" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckPort" })
   healthCheckPort?: number;
 
-  @Metadata({ data: "json, name=HealthCheckProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckProtocol" })
   healthCheckProtocol?: HealthCheckProtocolEnum;
 
-  @Metadata({ data: "json, name=PortOverrides", elemType: shared.PortOverride })
+  @SpeakeasyMetadata({ data: "json, name=PortOverrides", elemType: PortOverride })
   portOverrides?: PortOverride[];
 
-  @Metadata({ data: "json, name=ThresholdCount" })
+  @SpeakeasyMetadata({ data: "json, name=ThresholdCount" })
   thresholdCount?: number;
 
-  @Metadata({ data: "json, name=TrafficDialPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=TrafficDialPercentage" })
   trafficDialPercentage?: number;
 }

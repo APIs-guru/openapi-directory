@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEc2InstanceViolation } from "./awsec2instanceviolation";
 import { AwsEc2NetworkInterfaceViolation } from "./awsec2networkinterfaceviolation";
 import { AwsVpcSecurityGroupViolation } from "./awsvpcsecuritygroupviolation";
@@ -18,59 +18,60 @@ import { NetworkFirewallUnexpectedGatewayRoutesViolation } from "./networkfirewa
 import { PossibleRemediationActions } from "./possibleremediationactions";
 
 
+
 // ResourceViolation
 /** 
  * Violation detail based on resource type.
 **/
 export class ResourceViolation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AwsEc2InstanceViolation" })
+  @SpeakeasyMetadata({ data: "json, name=AwsEc2InstanceViolation" })
   awsEc2InstanceViolation?: AwsEc2InstanceViolation;
 
-  @Metadata({ data: "json, name=AwsEc2NetworkInterfaceViolation" })
+  @SpeakeasyMetadata({ data: "json, name=AwsEc2NetworkInterfaceViolation" })
   awsEc2NetworkInterfaceViolation?: AwsEc2NetworkInterfaceViolation;
 
-  @Metadata({ data: "json, name=AwsVPCSecurityGroupViolation" })
+  @SpeakeasyMetadata({ data: "json, name=AwsVPCSecurityGroupViolation" })
   awsVpcSecurityGroupViolation?: AwsVpcSecurityGroupViolation;
 
-  @Metadata({ data: "json, name=DnsDuplicateRuleGroupViolation" })
+  @SpeakeasyMetadata({ data: "json, name=DnsDuplicateRuleGroupViolation" })
   dnsDuplicateRuleGroupViolation?: DnsDuplicateRuleGroupViolation;
 
-  @Metadata({ data: "json, name=DnsRuleGroupLimitExceededViolation" })
+  @SpeakeasyMetadata({ data: "json, name=DnsRuleGroupLimitExceededViolation" })
   dnsRuleGroupLimitExceededViolation?: DnsRuleGroupLimitExceededViolation;
 
-  @Metadata({ data: "json, name=DnsRuleGroupPriorityConflictViolation" })
+  @SpeakeasyMetadata({ data: "json, name=DnsRuleGroupPriorityConflictViolation" })
   dnsRuleGroupPriorityConflictViolation?: DnsRuleGroupPriorityConflictViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallBlackHoleRouteDetectedViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallBlackHoleRouteDetectedViolation" })
   networkFirewallBlackHoleRouteDetectedViolation?: NetworkFirewallBlackHoleRouteDetectedViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallInternetTrafficNotInspectedViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallInternetTrafficNotInspectedViolation" })
   networkFirewallInternetTrafficNotInspectedViolation?: NetworkFirewallInternetTrafficNotInspectedViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallInvalidRouteConfigurationViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallInvalidRouteConfigurationViolation" })
   networkFirewallInvalidRouteConfigurationViolation?: NetworkFirewallInvalidRouteConfigurationViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallMissingExpectedRTViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallMissingExpectedRTViolation" })
   networkFirewallMissingExpectedRtViolation?: NetworkFirewallMissingExpectedRtViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallMissingExpectedRoutesViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallMissingExpectedRoutesViolation" })
   networkFirewallMissingExpectedRoutesViolation?: NetworkFirewallMissingExpectedRoutesViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallMissingFirewallViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallMissingFirewallViolation" })
   networkFirewallMissingFirewallViolation?: NetworkFirewallMissingFirewallViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallMissingSubnetViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallMissingSubnetViolation" })
   networkFirewallMissingSubnetViolation?: NetworkFirewallMissingSubnetViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallPolicyModifiedViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallPolicyModifiedViolation" })
   networkFirewallPolicyModifiedViolation?: NetworkFirewallPolicyModifiedViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallUnexpectedFirewallRoutesViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallUnexpectedFirewallRoutesViolation" })
   networkFirewallUnexpectedFirewallRoutesViolation?: NetworkFirewallUnexpectedFirewallRoutesViolation;
 
-  @Metadata({ data: "json, name=NetworkFirewallUnexpectedGatewayRoutesViolation" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkFirewallUnexpectedGatewayRoutesViolation" })
   networkFirewallUnexpectedGatewayRoutesViolation?: NetworkFirewallUnexpectedGatewayRoutesViolation;
 
-  @Metadata({ data: "json, name=PossibleRemediationActions" })
+  @SpeakeasyMetadata({ data: "json, name=PossibleRemediationActions" })
   possibleRemediationActions?: PossibleRemediationActions;
 }

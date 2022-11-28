@@ -14,14 +14,14 @@ type ActionsListRepoWorkflowsQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListRepoWorkflowsRequest struct {
-	PathParams  ActionsListRepoWorkflowsPathParams
-	QueryParams ActionsListRepoWorkflowsQueryParams
-}
-
 type ActionsListRepoWorkflows200ApplicationJSON struct {
 	TotalCount int64             `json:"total_count"`
 	Workflows  []shared.Workflow `json:"workflows"`
+}
+
+type ActionsListRepoWorkflowsRequest struct {
+	PathParams  ActionsListRepoWorkflowsPathParams
+	QueryParams ActionsListRepoWorkflowsQueryParams
 }
 
 type ActionsListRepoWorkflowsResponse struct {

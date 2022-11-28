@@ -12,12 +12,12 @@ class GetAccountsQueryParams:
 
 @dataclass
 class GetAccountsRequest:
-    query_params: GetAccountsQueryParams = field(default=None)
+    query_params: GetAccountsQueryParams = field()
     
 
 @dataclass
 class GetAccountsResponse:
+    content_type: str = field()
+    status_code: int = field()
     accounts: Optional[List[shared.Account]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogLevelEnum } from "./loglevelenum";
+
 
 
 // ZeppelinMonitoringConfigurationDescription
@@ -7,6 +8,6 @@ import { LogLevelEnum } from "./loglevelenum";
  * The monitoring configuration for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.
 **/
 export class ZeppelinMonitoringConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogLevel" })
+  @SpeakeasyMetadata({ data: "json, name=LogLevel" })
   logLevel?: LogLevelEnum;
 }

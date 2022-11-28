@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerReturnReason } from "./customerreturnreason";
 import { RefundReason } from "./refundreason";
 import { OrderLineItemProduct } from "./orderlineitemproduct";
 
 
+
 export class MerchantOrderReturnItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerReturnReason" })
+  @SpeakeasyMetadata({ data: "json, name=customerReturnReason" })
   customerReturnReason?: CustomerReturnReason;
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=merchantReturnReason" })
+  @SpeakeasyMetadata({ data: "json, name=merchantReturnReason" })
   merchantReturnReason?: RefundReason;
 
-  @Metadata({ data: "json, name=product" })
+  @SpeakeasyMetadata({ data: "json, name=product" })
   product?: OrderLineItemProduct;
 
-  @Metadata({ data: "json, name=returnShipmentIds" })
+  @SpeakeasyMetadata({ data: "json, name=returnShipmentIds" })
   returnShipmentIds?: string[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }

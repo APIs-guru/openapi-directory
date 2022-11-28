@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class MetricTypeEnum(str, Enum):
     DYNAMO_DB_READ_CAPACITY_UTILIZATION = "DynamoDBReadCapacityUtilization"

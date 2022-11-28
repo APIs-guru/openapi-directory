@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FsCommandPositionOptionEnum {
-    Centered = "CENTERED"
-,    DistanceFromTopLeftCorner = "DISTANCE_FROM_TOP_LEFT_CORNER"
+    Centered = "CENTERED",
+    DistanceFromTopLeftCorner = "DISTANCE_FROM_TOP_LEFT_CORNER"
 }
 
 
@@ -11,18 +12,18 @@ export enum FsCommandPositionOptionEnum {
  * FsCommand.
 **/
 export class FsCommand extends SpeakeasyBase {
-  @Metadata({ data: "json, name=left" })
+  @SpeakeasyMetadata({ data: "json, name=left" })
   left?: number;
 
-  @Metadata({ data: "json, name=positionOption" })
+  @SpeakeasyMetadata({ data: "json, name=positionOption" })
   positionOption?: FsCommandPositionOptionEnum;
 
-  @Metadata({ data: "json, name=top" })
+  @SpeakeasyMetadata({ data: "json, name=top" })
   top?: number;
 
-  @Metadata({ data: "json, name=windowHeight" })
+  @SpeakeasyMetadata({ data: "json, name=windowHeight" })
   windowHeight?: number;
 
-  @Metadata({ data: "json, name=windowWidth" })
+  @SpeakeasyMetadata({ data: "json, name=windowWidth" })
   windowWidth?: number;
 }

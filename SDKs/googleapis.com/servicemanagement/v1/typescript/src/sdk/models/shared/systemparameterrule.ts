@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemParameter } from "./systemparameter";
+
 
 
 // SystemParameterRule
@@ -8,9 +8,9 @@ import { SystemParameter } from "./systemparameter";
  * Define a system parameter rule mapping system parameter definitions to methods.
 **/
 export class SystemParameterRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameters", elemType: shared.SystemParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: SystemParameter })
   parameters?: SystemParameter[];
 
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector?: string;
 }

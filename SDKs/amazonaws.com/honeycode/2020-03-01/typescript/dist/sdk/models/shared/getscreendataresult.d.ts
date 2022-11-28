@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResultSet } from "./resultset";
 export declare class GetScreenDataResult extends SpeakeasyBase {
     nextToken?: string;

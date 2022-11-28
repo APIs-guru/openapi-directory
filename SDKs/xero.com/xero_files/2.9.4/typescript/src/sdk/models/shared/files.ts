@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileObject } from "./fileobject";
 
 
+
 export class Files extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.FileObject })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: FileObject })
   items?: FileObject[];
 
-  @Metadata({ data: "json, name=Page" })
+  @SpeakeasyMetadata({ data: "json, name=Page" })
   page?: number;
 
-  @Metadata({ data: "json, name=PerPage" })
+  @SpeakeasyMetadata({ data: "json, name=PerPage" })
   perPage?: number;
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

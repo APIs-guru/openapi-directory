@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2ImportAgentRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for Agents.ImportAgent.
 **/
 export class GoogleCloudDialogflowV2ImportAgentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentContent" })
+  @SpeakeasyMetadata({ data: "json, name=agentContent" })
   agentContent?: string;
 
-  @Metadata({ data: "json, name=agentUri" })
+  @SpeakeasyMetadata({ data: "json, name=agentUri" })
   agentUri?: string;
 }

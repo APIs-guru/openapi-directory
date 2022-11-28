@@ -1,5 +1,7 @@
 package shared
 
+// ResourceViolation
+// Violation detail based on resource type.
 type ResourceViolation struct {
 	AwsEc2InstanceViolation                             *AwsEc2InstanceViolation                             `json:"AwsEc2InstanceViolation,omitempty"`
 	AwsEc2NetworkInterfaceViolation                     *AwsEc2NetworkInterfaceViolation                     `json:"AwsEc2NetworkInterfaceViolation,omitempty"`

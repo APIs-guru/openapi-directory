@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteNetworkInsightsAnalysisActionEnum(str, Enum):
     DELETE_NETWORK_INSIGHTS_ANALYSIS = "DeleteNetworkInsightsAnalysis"
@@ -10,10 +14,10 @@ class GetDeleteNetworkInsightsAnalysisVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteNetworkInsightsAnalysisQueryParams:
-    action: GetDeleteNetworkInsightsAnalysisActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteNetworkInsightsAnalysisActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_insights_analysis_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInsightsAnalysisId', 'style': 'form', 'explode': True }})
+    version: GetDeleteNetworkInsightsAnalysisVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    network_insights_analysis_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInsightsAnalysisId', 'style': 'form', 'explode': True }})
-    version: GetDeleteNetworkInsightsAnalysisVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteNetworkInsightsAnalysisHeaders:
 
 @dataclass
 class GetDeleteNetworkInsightsAnalysisRequest:
-    query_params: GetDeleteNetworkInsightsAnalysisQueryParams = field(default=None)
-    headers: GetDeleteNetworkInsightsAnalysisHeaders = field(default=None)
+    headers: GetDeleteNetworkInsightsAnalysisHeaders = field()
+    query_params: GetDeleteNetworkInsightsAnalysisQueryParams = field()
     
 
 @dataclass
 class GetDeleteNetworkInsightsAnalysisResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

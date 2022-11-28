@@ -1,39 +1,108 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudDatacatalogV1BigQueryDateShardedSpec } from "./googleclouddatacatalogv1bigquerydateshardedspec";
-import { GoogleCloudDatacatalogV1BigQueryTableSpec } from "./googleclouddatacatalogv1bigquerytablespec";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1BusinessContext } from "./googleclouddatacatalogv1businesscontext";
-import { GoogleCloudDatacatalogV1DataSource } from "./googleclouddatacatalogv1datasource";
+import { GoogleCloudDatacatalogV1DataSourceInput } from "./googleclouddatacatalogv1datasource";
 import { GoogleCloudDatacatalogV1DataSourceConnectionSpec } from "./googleclouddatacatalogv1datasourceconnectionspec";
 import { GoogleCloudDatacatalogV1DatabaseTableSpec } from "./googleclouddatacatalogv1databasetablespec";
 import { GoogleCloudDatacatalogV1FilesetSpec } from "./googleclouddatacatalogv1filesetspec";
-import { GoogleCloudDatacatalogV1GcsFilesetSpec } from "./googleclouddatacatalogv1gcsfilesetspec";
+import { GoogleCloudDatacatalogV1GcsFilesetSpecInput } from "./googleclouddatacatalogv1gcsfilesetspec";
 import { GoogleCloudDatacatalogV1PersonalDetails } from "./googleclouddatacatalogv1personaldetails";
 import { GoogleCloudDatacatalogV1RoutineSpec } from "./googleclouddatacatalogv1routinespec";
 import { GoogleCloudDatacatalogV1Schema } from "./googleclouddatacatalogv1schema";
+import { GoogleCloudDatacatalogV1SystemTimestampsInput } from "./googleclouddatacatalogv1systemtimestamps";
+import { GoogleCloudDatacatalogV1UsageSignalInput } from "./googleclouddatacatalogv1usagesignal";
+import { GoogleCloudDatacatalogV1BigQueryDateShardedSpec } from "./googleclouddatacatalogv1bigquerydateshardedspec";
+import { GoogleCloudDatacatalogV1BigQueryTableSpec } from "./googleclouddatacatalogv1bigquerytablespec";
+import { GoogleCloudDatacatalogV1DataSource } from "./googleclouddatacatalogv1datasource";
+import { GoogleCloudDatacatalogV1GcsFilesetSpec } from "./googleclouddatacatalogv1gcsfilesetspec";
 import { GoogleCloudDatacatalogV1SystemTimestamps } from "./googleclouddatacatalogv1systemtimestamps";
 import { GoogleCloudDatacatalogV1UsageSignal } from "./googleclouddatacatalogv1usagesignal";
 
+
 export enum GoogleCloudDatacatalogV1EntryIntegratedSystemEnum {
-    IntegratedSystemUnspecified = "INTEGRATED_SYSTEM_UNSPECIFIED"
-,    Bigquery = "BIGQUERY"
-,    CloudPubsub = "CLOUD_PUBSUB"
-,    DataprocMetastore = "DATAPROC_METASTORE"
-,    Dataplex = "DATAPLEX"
+    IntegratedSystemUnspecified = "INTEGRATED_SYSTEM_UNSPECIFIED",
+    Bigquery = "BIGQUERY",
+    CloudPubsub = "CLOUD_PUBSUB",
+    DataprocMetastore = "DATAPROC_METASTORE",
+    Dataplex = "DATAPLEX"
 }
 
 export enum GoogleCloudDatacatalogV1EntryTypeEnum {
-    EntryTypeUnspecified = "ENTRY_TYPE_UNSPECIFIED"
-,    Table = "TABLE"
-,    Model = "MODEL"
-,    DataStream = "DATA_STREAM"
-,    Fileset = "FILESET"
-,    Cluster = "CLUSTER"
-,    Database = "DATABASE"
-,    DataSourceConnection = "DATA_SOURCE_CONNECTION"
-,    Routine = "ROUTINE"
-,    Lake = "LAKE"
-,    Zone = "ZONE"
-,    Service = "SERVICE"
+    EntryTypeUnspecified = "ENTRY_TYPE_UNSPECIFIED",
+    Table = "TABLE",
+    Model = "MODEL",
+    DataStream = "DATA_STREAM",
+    Fileset = "FILESET",
+    Cluster = "CLUSTER",
+    Database = "DATABASE",
+    DataSourceConnection = "DATA_SOURCE_CONNECTION",
+    Routine = "ROUTINE",
+    Lake = "LAKE",
+    Zone = "ZONE",
+    Service = "SERVICE"
+}
+
+
+// GoogleCloudDatacatalogV1EntryInput
+/** 
+ * Entry metadata. A Data Catalog entry represents another resource in Google Cloud Platform (such as a BigQuery dataset or a Pub/Sub topic) or outside of it. You can use the `linked_resource` field in the entry resource to refer to the original resource ID of the source system. An entry resource contains resource details, for example, its schema. Additionally, you can attach flexible metadata to an entry in the form of a Tag.
+**/
+export class GoogleCloudDatacatalogV1EntryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=businessContext" })
+  businessContext?: GoogleCloudDatacatalogV1BusinessContext;
+
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
+  dataSource?: GoogleCloudDatacatalogV1DataSourceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=dataSourceConnectionSpec" })
+  dataSourceConnectionSpec?: GoogleCloudDatacatalogV1DataSourceConnectionSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=databaseTableSpec" })
+  databaseTableSpec?: GoogleCloudDatacatalogV1DatabaseTableSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=filesetSpec" })
+  filesetSpec?: GoogleCloudDatacatalogV1FilesetSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=fullyQualifiedName" })
+  fullyQualifiedName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=gcsFilesetSpec" })
+  gcsFilesetSpec?: GoogleCloudDatacatalogV1GcsFilesetSpecInput;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=linkedResource" })
+  linkedResource?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=personalDetails" })
+  personalDetails?: GoogleCloudDatacatalogV1PersonalDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=routineSpec" })
+  routineSpec?: GoogleCloudDatacatalogV1RoutineSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=schema" })
+  schema?: GoogleCloudDatacatalogV1Schema;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceSystemTimestamps" })
+  sourceSystemTimestamps?: GoogleCloudDatacatalogV1SystemTimestampsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: GoogleCloudDatacatalogV1EntryTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=usageSignal" })
+  usageSignal?: GoogleCloudDatacatalogV1UsageSignalInput;
+
+  @SpeakeasyMetadata({ data: "json, name=userSpecifiedSystem" })
+  userSpecifiedSystem?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=userSpecifiedType" })
+  userSpecifiedType?: string;
 }
 
 
@@ -42,72 +111,72 @@ export enum GoogleCloudDatacatalogV1EntryTypeEnum {
  * Entry metadata. A Data Catalog entry represents another resource in Google Cloud Platform (such as a BigQuery dataset or a Pub/Sub topic) or outside of it. You can use the `linked_resource` field in the entry resource to refer to the original resource ID of the source system. An entry resource contains resource details, for example, its schema. Additionally, you can attach flexible metadata to an entry in the form of a Tag.
 **/
 export class GoogleCloudDatacatalogV1Entry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigqueryDateShardedSpec" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryDateShardedSpec" })
   bigqueryDateShardedSpec?: GoogleCloudDatacatalogV1BigQueryDateShardedSpec;
 
-  @Metadata({ data: "json, name=bigqueryTableSpec" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryTableSpec" })
   bigqueryTableSpec?: GoogleCloudDatacatalogV1BigQueryTableSpec;
 
-  @Metadata({ data: "json, name=businessContext" })
+  @SpeakeasyMetadata({ data: "json, name=businessContext" })
   businessContext?: GoogleCloudDatacatalogV1BusinessContext;
 
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource?: GoogleCloudDatacatalogV1DataSource;
 
-  @Metadata({ data: "json, name=dataSourceConnectionSpec" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceConnectionSpec" })
   dataSourceConnectionSpec?: GoogleCloudDatacatalogV1DataSourceConnectionSpec;
 
-  @Metadata({ data: "json, name=databaseTableSpec" })
+  @SpeakeasyMetadata({ data: "json, name=databaseTableSpec" })
   databaseTableSpec?: GoogleCloudDatacatalogV1DatabaseTableSpec;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=filesetSpec" })
+  @SpeakeasyMetadata({ data: "json, name=filesetSpec" })
   filesetSpec?: GoogleCloudDatacatalogV1FilesetSpec;
 
-  @Metadata({ data: "json, name=fullyQualifiedName" })
+  @SpeakeasyMetadata({ data: "json, name=fullyQualifiedName" })
   fullyQualifiedName?: string;
 
-  @Metadata({ data: "json, name=gcsFilesetSpec" })
+  @SpeakeasyMetadata({ data: "json, name=gcsFilesetSpec" })
   gcsFilesetSpec?: GoogleCloudDatacatalogV1GcsFilesetSpec;
 
-  @Metadata({ data: "json, name=integratedSystem" })
+  @SpeakeasyMetadata({ data: "json, name=integratedSystem" })
   integratedSystem?: GoogleCloudDatacatalogV1EntryIntegratedSystemEnum;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=linkedResource" })
+  @SpeakeasyMetadata({ data: "json, name=linkedResource" })
   linkedResource?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=personalDetails" })
+  @SpeakeasyMetadata({ data: "json, name=personalDetails" })
   personalDetails?: GoogleCloudDatacatalogV1PersonalDetails;
 
-  @Metadata({ data: "json, name=routineSpec" })
+  @SpeakeasyMetadata({ data: "json, name=routineSpec" })
   routineSpec?: GoogleCloudDatacatalogV1RoutineSpec;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: GoogleCloudDatacatalogV1Schema;
 
-  @Metadata({ data: "json, name=sourceSystemTimestamps" })
+  @SpeakeasyMetadata({ data: "json, name=sourceSystemTimestamps" })
   sourceSystemTimestamps?: GoogleCloudDatacatalogV1SystemTimestamps;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDatacatalogV1EntryTypeEnum;
 
-  @Metadata({ data: "json, name=usageSignal" })
+  @SpeakeasyMetadata({ data: "json, name=usageSignal" })
   usageSignal?: GoogleCloudDatacatalogV1UsageSignal;
 
-  @Metadata({ data: "json, name=userSpecifiedSystem" })
+  @SpeakeasyMetadata({ data: "json, name=userSpecifiedSystem" })
   userSpecifiedSystem?: string;
 
-  @Metadata({ data: "json, name=userSpecifiedType" })
+  @SpeakeasyMetadata({ data: "json, name=userSpecifiedType" })
   userSpecifiedType?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleExampleLibraryagentV1Shelf
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Shelf contains a collection of books with a theme.
 **/
 export class GoogleExampleLibraryagentV1Shelf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=theme" })
+  @SpeakeasyMetadata({ data: "json, name=theme" })
   theme?: string;
 }

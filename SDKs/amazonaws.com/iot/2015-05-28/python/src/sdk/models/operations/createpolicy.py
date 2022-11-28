@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreatePolicyPathParams:
-    policy_name: str = field(default=None, metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
+    policy_name: str = field(metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,27 +27,27 @@ class CreatePolicyHeaders:
 @dataclass_json
 @dataclass
 class CreatePolicyRequestBody:
-    policy_document: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyDocument' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    policy_document: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyDocument') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreatePolicyRequest:
-    path_params: CreatePolicyPathParams = field(default=None)
-    headers: CreatePolicyHeaders = field(default=None)
-    request: CreatePolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreatePolicyHeaders = field()
+    path_params: CreatePolicyPathParams = field()
+    request: CreatePolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreatePolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_policy_response: Optional[shared.CreatePolicyResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     malformed_policy_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceGroupConfig } from "./instancegroupconfig";
+
 
 
 // AddInstanceGroupsInput
@@ -8,9 +8,9 @@ import { InstanceGroupConfig } from "./instancegroupconfig";
  * Input to an AddInstanceGroups call.
 **/
 export class AddInstanceGroupsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceGroups", elemType: shared.InstanceGroupConfig })
+  @SpeakeasyMetadata({ data: "json, name=InstanceGroups", elemType: InstanceGroupConfig })
   instanceGroups: InstanceGroupConfig[];
 
-  @Metadata({ data: "json, name=JobFlowId" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowId" })
   jobFlowId: string;
 }

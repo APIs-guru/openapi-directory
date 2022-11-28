@@ -13,6 +13,8 @@ const (
 	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate4Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_4_POINT_5_LESS"
 )
 
+// DoubleVerifyAppStarRating
+// Details of DoubleVerify star ratings settings.
 type DoubleVerifyAppStarRating struct {
 	AvoidInsufficientStarRating *bool                                           `json:"avoidInsufficientStarRating,omitempty"`
 	AvoidedStarRating           *DoubleVerifyAppStarRatingAvoidedStarRatingEnum `json:"avoidedStarRating,omitempty"`

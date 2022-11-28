@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectorSummary } from "./detectorsummary";
 
 
+
 export class ListDetectorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectorSummaries", elemType: shared.DetectorSummary })
+  @SpeakeasyMetadata({ data: "json, name=detectorSummaries", elemType: DetectorSummary })
   detectorSummaries?: DetectorSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

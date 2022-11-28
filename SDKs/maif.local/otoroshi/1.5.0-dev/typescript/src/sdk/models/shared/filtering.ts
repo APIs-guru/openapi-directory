@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Filtering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclude" })
+  @SpeakeasyMetadata({ data: "json, name=exclude" })
   exclude?: Map<string, string>[];
 
-  @Metadata({ data: "json, name=include" })
+  @SpeakeasyMetadata({ data: "json, name=include" })
   include?: Map<string, string>[];
 }

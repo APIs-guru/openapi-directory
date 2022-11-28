@@ -16,6 +16,8 @@ const (
 	NonComplianceDetailConditionNonComplianceReasonEnumAppNotUpdated                  NonComplianceDetailConditionNonComplianceReasonEnum = "APP_NOT_UPDATED"
 )
 
+// NonComplianceDetailCondition
+// A compliance rule condition which is satisfied if there exists any matching NonComplianceDetail for the device. A NonComplianceDetail matches a NonComplianceDetailCondition if all the fields which are set within the NonComplianceDetailCondition match the corresponding NonComplianceDetail fields.
 type NonComplianceDetailCondition struct {
 	NonComplianceReason *NonComplianceDetailConditionNonComplianceReasonEnum `json:"nonComplianceReason,omitempty"`
 	PackageName         *string                                              `json:"packageName,omitempty"`

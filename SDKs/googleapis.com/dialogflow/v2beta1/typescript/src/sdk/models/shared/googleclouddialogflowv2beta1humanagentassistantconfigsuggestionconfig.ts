@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionFeatureConfig } from "./googleclouddialogflowv2beta1humanagentassistantconfigsuggestionfeatureconfig";
+
 
 
 // GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionConfig
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionFeatureC
  * Detail human agent assistant config.
 **/
 export class GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=featureConfigs", elemType: shared.GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionFeatureConfig })
+  @SpeakeasyMetadata({ data: "json, name=featureConfigs", elemType: GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionFeatureConfig })
   featureConfigs?: GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionFeatureConfig[];
 
-  @Metadata({ data: "json, name=groupSuggestionResponses" })
+  @SpeakeasyMetadata({ data: "json, name=groupSuggestionResponses" })
   groupSuggestionResponses?: boolean;
 }

@@ -9,6 +9,8 @@ type GitTreeTree struct {
 	URL  *string `json:"url,omitempty"`
 }
 
+// GitTree
+// The hierarchy between files in a Git repository.
 type GitTree struct {
 	Sha       string        `json:"sha"`
 	Tree      []GitTreeTree `json:"tree"`

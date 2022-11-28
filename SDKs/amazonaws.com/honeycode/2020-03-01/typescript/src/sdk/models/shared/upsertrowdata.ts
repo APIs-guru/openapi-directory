@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CellInput } from "./cellinput";
 import { Filter } from "./filter";
+
 
 
 // UpsertRowData
@@ -9,12 +9,12 @@ import { Filter } from "./filter";
  *  Data needed to upsert rows in a table as part of a single item in the BatchUpsertTableRows request. 
 **/
 export class UpsertRowData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchItemId" })
+  @SpeakeasyMetadata({ data: "json, name=batchItemId" })
   batchItemId: string;
 
-  @Metadata({ data: "json, name=cellsToUpdate", elemType: shared.CellInput })
+  @SpeakeasyMetadata({ data: "json, name=cellsToUpdate", elemType: CellInput })
   cellsToUpdate: Map<string, CellInput>;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter: Filter;
 }

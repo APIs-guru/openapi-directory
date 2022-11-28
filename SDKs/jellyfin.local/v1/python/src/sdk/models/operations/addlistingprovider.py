@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -19,19 +22,19 @@ class AddListingProviderRequests:
 
 @dataclass
 class AddListingProviderSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AddListingProviderRequest:
-    query_params: AddListingProviderQueryParams = field(default=None)
+    query_params: AddListingProviderQueryParams = field()
+    security: AddListingProviderSecurity = field()
     request: Optional[AddListingProviderRequests] = field(default=None)
-    security: AddListingProviderSecurity = field(default=None)
     
 
 @dataclass
 class AddListingProviderResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     listings_provider_info: Optional[shared.ListingsProviderInfo] = field(default=None)
-    status_code: int = field(default=None)
     

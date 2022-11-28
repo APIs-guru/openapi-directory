@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import replicationconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutReplicationConfigurationResponse:
-    replication_configuration: Optional[replicationconfiguration.ReplicationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationConfiguration' }})
+    replication_configuration: Optional[ReplicationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationConfiguration') }})
     

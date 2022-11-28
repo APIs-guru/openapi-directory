@@ -11,13 +11,13 @@ class GetAPIReferenceAnsweringBodiesQueryParams:
 
 @dataclass
 class GetAPIReferenceAnsweringBodiesRequest:
-    query_params: GetAPIReferenceAnsweringBodiesQueryParams = field(default=None)
+    query_params: GetAPIReferenceAnsweringBodiesQueryParams = field()
     
 
 @dataclass
 class GetAPIReferenceAnsweringBodiesResponse:
+    content_type: str = field()
+    status_code: int = field()
     answering_bodies: Optional[List[shared.AnsweringBody]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

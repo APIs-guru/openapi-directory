@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetObjectsWithReferenceCountUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetObjectsWithReferenceCountUsingGetPathParams, _super);
     function GetObjectsWithReferenceCountUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dateYYYYMMDD" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateYYYYMMDD" }),
         __metadata("design:type", String)
     ], GetObjectsWithReferenceCountUsingGetPathParams.prototype, "dateYyyymmdd", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
         __metadata("design:type", Number)
     ], GetObjectsWithReferenceCountUsingGetPathParams.prototype, "speciesTypeKey", void 0);
     return GetObjectsWithReferenceCountUsingGetPathParams;
@@ -45,7 +45,7 @@ var GetObjectsWithReferenceCountUsingGetRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetObjectsWithReferenceCountUsingGetPathParams)
     ], GetObjectsWithReferenceCountUsingGetRequest.prototype, "pathParams", void 0);
     return GetObjectsWithReferenceCountUsingGetRequest;
@@ -57,15 +57,15 @@ var GetObjectsWithReferenceCountUsingGetResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetObjectsWithReferenceCountUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetObjectsWithReferenceCountUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetObjectsWithReferenceCountUsingGetResponse.prototype, "statusCode", void 0);
     return GetObjectsWithReferenceCountUsingGetResponse;

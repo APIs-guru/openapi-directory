@@ -1,5 +1,7 @@
 package shared
 
+// NetworkProfile
+// An array of settings that describes characteristics of a network profile.
 type NetworkProfile struct {
 	Arn                   *string                 `json:"arn,omitempty"`
 	Description           *string                 `json:"description,omitempty"`

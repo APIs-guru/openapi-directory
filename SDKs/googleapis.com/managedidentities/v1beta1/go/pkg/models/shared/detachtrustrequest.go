@@ -1,5 +1,7 @@
 package shared
 
-type DetachTrustRequest struct {
-	Trust *Trust `json:"trust,omitempty"`
+// DetachTrustRequestInput
+// Request message for DetachTrust
+type DetachTrustRequestInput struct {
+	Trust *TrustInput `json:"trust,omitempty"`
 }

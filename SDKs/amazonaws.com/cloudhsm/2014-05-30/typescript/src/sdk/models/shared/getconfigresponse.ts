@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigCred" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigCred" })
   configCred?: string;
 
-  @Metadata({ data: "json, name=ConfigFile" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigFile" })
   configFile?: string;
 
-  @Metadata({ data: "json, name=ConfigType" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigType" })
   configType?: string;
 }

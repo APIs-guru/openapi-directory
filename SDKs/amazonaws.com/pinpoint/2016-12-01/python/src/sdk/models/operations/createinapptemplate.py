@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateInAppTemplatePathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,34 +28,38 @@ class CreateInAppTemplateHeaders:
 @dataclass_json
 @dataclass
 class CreateInAppTemplateRequestBodyInAppTemplateRequest:
-    content: Optional[List[shared.InAppMessageContent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Content' }})
-    custom_config: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CustomConfig' }})
-    layout: Optional[shared.LayoutEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Layout' }})
-    template_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateDescription' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    r"""CreateInAppTemplateRequestBodyInAppTemplateRequest
+    InApp Template Request.
+    """
+    
+    content: Optional[List[shared.InAppMessageContent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Content') }})
+    custom_config: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CustomConfig') }})
+    layout: Optional[shared.LayoutEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Layout') }})
+    template_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateDescription') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass_json
 @dataclass
 class CreateInAppTemplateRequestBody:
-    in_app_template_request: CreateInAppTemplateRequestBodyInAppTemplateRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InAppTemplateRequest' }})
+    in_app_template_request: CreateInAppTemplateRequestBodyInAppTemplateRequest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InAppTemplateRequest') }})
     
 
 @dataclass
 class CreateInAppTemplateRequest:
-    path_params: CreateInAppTemplatePathParams = field(default=None)
-    headers: CreateInAppTemplateHeaders = field(default=None)
-    request: CreateInAppTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateInAppTemplateHeaders = field()
+    path_params: CreateInAppTemplatePathParams = field()
+    request: CreateInAppTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateInAppTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_in_app_template_response: Optional[shared.CreateInAppTemplateResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

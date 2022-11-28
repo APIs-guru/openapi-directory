@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostCachekeyInvalidateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostCachekeyInvalidateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.CacheInvalidationRequestSchema;
-
-  @Metadata()
-  security: PostCachekeyInvalidateSecurity;
-}
-
-
 export class PostCachekeyInvalidate400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostCachekeyInvalidate500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostCachekeyInvalidateRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.CacheInvalidationRequestSchema;
+
+  @SpeakeasyMetadata()
+  security: PostCachekeyInvalidateSecurity;
+}
+
+
 export class PostCachekeyInvalidateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCachekeyInvalidate400ApplicationJsonObject?: PostCachekeyInvalidate400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCachekeyInvalidate500ApplicationJsonObject?: PostCachekeyInvalidate500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

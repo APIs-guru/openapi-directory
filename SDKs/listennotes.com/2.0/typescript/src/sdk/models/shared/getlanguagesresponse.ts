@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLanguagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languages" })
+  @SpeakeasyMetadata({ data: "json, name=languages" })
   languages: string[];
 }

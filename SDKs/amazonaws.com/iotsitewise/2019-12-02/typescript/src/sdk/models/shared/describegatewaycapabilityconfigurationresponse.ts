@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapabilitySyncStatusEnum } from "./capabilitysyncstatusenum";
 
 
+
 export class DescribeGatewayCapabilityConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capabilityConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=capabilityConfiguration" })
   capabilityConfiguration: string;
 
-  @Metadata({ data: "json, name=capabilityNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=capabilityNamespace" })
   capabilityNamespace: string;
 
-  @Metadata({ data: "json, name=capabilitySyncStatus" })
+  @SpeakeasyMetadata({ data: "json, name=capabilitySyncStatus" })
   capabilitySyncStatus: CapabilitySyncStatusEnum;
 
-  @Metadata({ data: "json, name=gatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayId" })
   gatewayId: string;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateThingRuntimeConfigurationPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ThingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'ThingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,27 +28,31 @@ class UpdateThingRuntimeConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration:
-    telemetry: Optional[shared.TelemetryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Telemetry' }})
+    r"""UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration
+    Configuration settings for running telemetry.
+    """
+    
+    telemetry: Optional[shared.TelemetryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Telemetry') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateThingRuntimeConfigurationRequestBody:
-    telemetry_configuration: Optional[UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TelemetryConfiguration' }})
+    telemetry_configuration: Optional[UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TelemetryConfiguration') }})
     
 
 @dataclass
 class UpdateThingRuntimeConfigurationRequest:
-    path_params: UpdateThingRuntimeConfigurationPathParams = field(default=None)
-    headers: UpdateThingRuntimeConfigurationHeaders = field(default=None)
-    request: UpdateThingRuntimeConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateThingRuntimeConfigurationHeaders = field()
+    path_params: UpdateThingRuntimeConfigurationPathParams = field()
+    request: UpdateThingRuntimeConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateThingRuntimeConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_thing_runtime_configuration_response: Optional[dict[str, Any]] = field(default=None)
     

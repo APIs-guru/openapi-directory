@@ -1,18 +1,20 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import byproducts
-from . import environment
-from . import grafeasv1beta1intotoartifact
-from . import grafeasv1beta1intotoartifact
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Link:
-    byproducts: Optional[byproducts.ByProducts] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'byproducts' }})
-    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    environment: Optional[environment.Environment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    materials: Optional[List[grafeasv1beta1intotoartifact.GrafeasV1beta1IntotoArtifact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'materials' }})
-    products: Optional[List[grafeasv1beta1intotoartifact.GrafeasV1beta1IntotoArtifact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'products' }})
+    r"""Link
+    This corresponds to an in-toto link.
+    """
+    
+    byproducts: Optional[ByProducts] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('byproducts') }})
+    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('command') }})
+    environment: Optional[Environment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    materials: Optional[List[GrafeasV1beta1IntotoArtifact]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('materials') }})
+    products: Optional[List[GrafeasV1beta1IntotoArtifact]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('products') }})
     

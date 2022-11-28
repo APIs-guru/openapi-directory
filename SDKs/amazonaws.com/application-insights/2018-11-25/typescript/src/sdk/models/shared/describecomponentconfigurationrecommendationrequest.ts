@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TierEnum } from "./tierenum";
 
 
+
 export class DescribeComponentConfigurationRecommendationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComponentName" })
+  @SpeakeasyMetadata({ data: "json, name=ComponentName" })
   componentName: string;
 
-  @Metadata({ data: "json, name=ResourceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceGroupName" })
   resourceGroupName: string;
 
-  @Metadata({ data: "json, name=Tier" })
+  @SpeakeasyMetadata({ data: "json, name=Tier" })
   tier: TierEnum;
 }

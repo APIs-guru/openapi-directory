@@ -17,6 +17,8 @@ const (
 	LocationTypeEnumMultiRegional           LocationTypeEnum = "MULTI_REGIONAL"
 )
 
+// Location
+// A GCP resource location that can be selected for a FirebaseProject.
 type Location struct {
 	Features   []LocationFeaturesEnum `json:"features,omitempty"`
 	LocationID *string                `json:"locationId,omitempty"`

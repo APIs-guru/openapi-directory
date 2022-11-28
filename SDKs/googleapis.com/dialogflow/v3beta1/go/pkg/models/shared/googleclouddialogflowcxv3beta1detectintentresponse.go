@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowCxV3beta1DetectIntentResponseResponseTypeEnumFinal                   GoogleCloudDialogflowCxV3beta1DetectIntentResponseResponseTypeEnum = "FINAL"
 )
 
+// GoogleCloudDialogflowCxV3beta1DetectIntentResponse
+// The message returned from the DetectIntent method.
 type GoogleCloudDialogflowCxV3beta1DetectIntentResponse struct {
 	AllowCancellation *bool                                                               `json:"allowCancellation,omitempty"`
 	OutputAudio       *string                                                             `json:"outputAudio,omitempty"`

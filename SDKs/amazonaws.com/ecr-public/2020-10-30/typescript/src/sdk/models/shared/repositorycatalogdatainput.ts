@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepositoryCatalogDataInput
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object containing the catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
 **/
 export class RepositoryCatalogDataInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aboutText" })
+  @SpeakeasyMetadata({ data: "json, name=aboutText" })
   aboutText?: string;
 
-  @Metadata({ data: "json, name=architectures" })
+  @SpeakeasyMetadata({ data: "json, name=architectures" })
   architectures?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=logoImageBlob" })
+  @SpeakeasyMetadata({ data: "json, name=logoImageBlob" })
   logoImageBlob?: string;
 
-  @Metadata({ data: "json, name=operatingSystems" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystems" })
   operatingSystems?: string[];
 
-  @Metadata({ data: "json, name=usageText" })
+  @SpeakeasyMetadata({ data: "json, name=usageText" })
   usageText?: string;
 }

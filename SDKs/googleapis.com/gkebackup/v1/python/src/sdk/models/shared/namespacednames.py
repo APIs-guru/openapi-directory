@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import namespacedname
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NamespacedNames:
-    namespaced_names: Optional[List[namespacedname.NamespacedName]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'namespacedNames' }})
+    r"""NamespacedNames
+    A list of namespaced Kubernetes resources.
+    """
+    
+    namespaced_names: Optional[List[NamespacedName]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('namespacedNames') }})
     

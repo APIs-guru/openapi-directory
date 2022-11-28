@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://cloudsearch.{region}.amazonaws.com",
 	"https://cloudsearch.{region}.amazonaws.com",
 	"http://cloudsearch.{region}.amazonaws.com.cn",
@@ -22,10 +22,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/cloudsearch/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -36,33 +41,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetCreateDomain - Creates a new search domain.
 func (s *SDK) GetCreateDomain(ctx context.Context, request operations.GetCreateDomainRequest) (*operations.GetCreateDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDomain"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -74,7 +101,7 @@ func (s *SDK) GetCreateDomain(ctx context.Context, request operations.GetCreateD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -134,8 +161,9 @@ func (s *SDK) GetCreateDomain(ctx context.Context, request operations.GetCreateD
 	return res, nil
 }
 
+// GetDefineRankExpression - Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.
 func (s *SDK) GetDefineRankExpression(ctx context.Context, request operations.GetDefineRankExpressionRequest) (*operations.GetDefineRankExpressionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DefineRankExpression"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -147,7 +175,7 @@ func (s *SDK) GetDefineRankExpression(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -207,8 +235,9 @@ func (s *SDK) GetDefineRankExpression(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeleteDomain - Permanently deletes a search domain and all of its data.
 func (s *SDK) GetDeleteDomain(ctx context.Context, request operations.GetDeleteDomainRequest) (*operations.GetDeleteDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDomain"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -220,7 +249,7 @@ func (s *SDK) GetDeleteDomain(ctx context.Context, request operations.GetDeleteD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -270,8 +299,9 @@ func (s *SDK) GetDeleteDomain(ctx context.Context, request operations.GetDeleteD
 	return res, nil
 }
 
+// GetDeleteIndexField - Removes an <code>IndexField</code> from the search domain.
 func (s *SDK) GetDeleteIndexField(ctx context.Context, request operations.GetDeleteIndexFieldRequest) (*operations.GetDeleteIndexFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteIndexField"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -283,7 +313,7 @@ func (s *SDK) GetDeleteIndexField(ctx context.Context, request operations.GetDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -343,8 +373,9 @@ func (s *SDK) GetDeleteIndexField(ctx context.Context, request operations.GetDel
 	return res, nil
 }
 
+// GetDeleteRankExpression - Removes a <code>RankExpression</code> from the search domain.
 func (s *SDK) GetDeleteRankExpression(ctx context.Context, request operations.GetDeleteRankExpressionRequest) (*operations.GetDeleteRankExpressionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteRankExpression"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -356,7 +387,7 @@ func (s *SDK) GetDeleteRankExpression(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -416,8 +447,9 @@ func (s *SDK) GetDeleteRankExpression(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDescribeAvailabilityOptions - Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.
 func (s *SDK) GetDescribeAvailabilityOptions(ctx context.Context, request operations.GetDescribeAvailabilityOptionsRequest) (*operations.GetDescribeAvailabilityOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAvailabilityOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -429,7 +461,7 @@ func (s *SDK) GetDescribeAvailabilityOptions(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -489,8 +521,9 @@ func (s *SDK) GetDescribeAvailabilityOptions(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetDescribeDefaultSearchField - Gets the default search field configured for the search domain.
 func (s *SDK) GetDescribeDefaultSearchField(ctx context.Context, request operations.GetDescribeDefaultSearchFieldRequest) (*operations.GetDescribeDefaultSearchFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDefaultSearchField"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -502,7 +535,7 @@ func (s *SDK) GetDescribeDefaultSearchField(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -562,8 +595,9 @@ func (s *SDK) GetDescribeDefaultSearchField(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDescribeDomains - Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.
 func (s *SDK) GetDescribeDomains(ctx context.Context, request operations.GetDescribeDomainsRequest) (*operations.GetDescribeDomainsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDomains"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -575,7 +609,7 @@ func (s *SDK) GetDescribeDomains(ctx context.Context, request operations.GetDesc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -625,8 +659,9 @@ func (s *SDK) GetDescribeDomains(ctx context.Context, request operations.GetDesc
 	return res, nil
 }
 
+// GetDescribeIndexFields - Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. Shows all fields by default.
 func (s *SDK) GetDescribeIndexFields(ctx context.Context, request operations.GetDescribeIndexFieldsRequest) (*operations.GetDescribeIndexFieldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIndexFields"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -638,7 +673,7 @@ func (s *SDK) GetDescribeIndexFields(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -698,8 +733,9 @@ func (s *SDK) GetDescribeIndexFields(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetDescribeRankExpressions - Gets the rank expressions configured for the search domain. Can be limited to specific rank expressions by name. Shows all rank expressions by default.
 func (s *SDK) GetDescribeRankExpressions(ctx context.Context, request operations.GetDescribeRankExpressionsRequest) (*operations.GetDescribeRankExpressionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeRankExpressions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -711,7 +747,7 @@ func (s *SDK) GetDescribeRankExpressions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -771,8 +807,9 @@ func (s *SDK) GetDescribeRankExpressions(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDescribeServiceAccessPolicies - Gets information about the resource-based policies that control access to the domain's document and search services.
 func (s *SDK) GetDescribeServiceAccessPolicies(ctx context.Context, request operations.GetDescribeServiceAccessPoliciesRequest) (*operations.GetDescribeServiceAccessPoliciesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeServiceAccessPolicies"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -784,7 +821,7 @@ func (s *SDK) GetDescribeServiceAccessPolicies(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -844,8 +881,9 @@ func (s *SDK) GetDescribeServiceAccessPolicies(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetDescribeStemmingOptions - Gets the stemming dictionary configured for the search domain.
 func (s *SDK) GetDescribeStemmingOptions(ctx context.Context, request operations.GetDescribeStemmingOptionsRequest) (*operations.GetDescribeStemmingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeStemmingOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -857,7 +895,7 @@ func (s *SDK) GetDescribeStemmingOptions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -917,8 +955,9 @@ func (s *SDK) GetDescribeStemmingOptions(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDescribeStopwordOptions - Gets the stopwords configured for the search domain.
 func (s *SDK) GetDescribeStopwordOptions(ctx context.Context, request operations.GetDescribeStopwordOptionsRequest) (*operations.GetDescribeStopwordOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeStopwordOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -930,7 +969,7 @@ func (s *SDK) GetDescribeStopwordOptions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -990,8 +1029,9 @@ func (s *SDK) GetDescribeStopwordOptions(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDescribeSynonymOptions - Gets the synonym dictionary configured for the search domain.
 func (s *SDK) GetDescribeSynonymOptions(ctx context.Context, request operations.GetDescribeSynonymOptionsRequest) (*operations.GetDescribeSynonymOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSynonymOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1003,7 +1043,7 @@ func (s *SDK) GetDescribeSynonymOptions(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1063,8 +1103,9 @@ func (s *SDK) GetDescribeSynonymOptions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetIndexDocuments - Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose <a>OptionStatus</a> has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.
 func (s *SDK) GetIndexDocuments(ctx context.Context, request operations.GetIndexDocumentsRequest) (*operations.GetIndexDocumentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=IndexDocuments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1076,7 +1117,7 @@ func (s *SDK) GetIndexDocuments(ctx context.Context, request operations.GetIndex
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1136,8 +1177,9 @@ func (s *SDK) GetIndexDocuments(ctx context.Context, request operations.GetIndex
 	return res, nil
 }
 
+// GetUpdateAvailabilityOptions - Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.
 func (s *SDK) GetUpdateAvailabilityOptions(ctx context.Context, request operations.GetUpdateAvailabilityOptionsRequest) (*operations.GetUpdateAvailabilityOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateAvailabilityOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1149,7 +1191,7 @@ func (s *SDK) GetUpdateAvailabilityOptions(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1209,8 +1251,9 @@ func (s *SDK) GetUpdateAvailabilityOptions(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetUpdateDefaultSearchField - Configures the default search field for the search domain. The default search field is the text field that is searched when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain's text fields.
 func (s *SDK) GetUpdateDefaultSearchField(ctx context.Context, request operations.GetUpdateDefaultSearchFieldRequest) (*operations.GetUpdateDefaultSearchFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateDefaultSearchField"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1222,7 +1265,7 @@ func (s *SDK) GetUpdateDefaultSearchField(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1282,8 +1325,9 @@ func (s *SDK) GetUpdateDefaultSearchField(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetUpdateServiceAccessPolicies - Configures the policies that control access to the domain's document and search services. The maximum size of an access policy document is 100 KB.
 func (s *SDK) GetUpdateServiceAccessPolicies(ctx context.Context, request operations.GetUpdateServiceAccessPoliciesRequest) (*operations.GetUpdateServiceAccessPoliciesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateServiceAccessPolicies"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1295,7 +1339,7 @@ func (s *SDK) GetUpdateServiceAccessPolicies(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1355,8 +1399,9 @@ func (s *SDK) GetUpdateServiceAccessPolicies(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetUpdateStemmingOptions - Configures a stemming dictionary for the search domain. The stemming dictionary is used during indexing and when processing search requests. The maximum size of the stemming dictionary is 500 KB.
 func (s *SDK) GetUpdateStemmingOptions(ctx context.Context, request operations.GetUpdateStemmingOptionsRequest) (*operations.GetUpdateStemmingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateStemmingOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1368,7 +1413,7 @@ func (s *SDK) GetUpdateStemmingOptions(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1428,8 +1473,9 @@ func (s *SDK) GetUpdateStemmingOptions(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetUpdateStopwordOptions - Configures stopwords for the search domain. Stopwords are used during indexing and when processing search requests. The maximum size of the stopwords dictionary is 10 KB.
 func (s *SDK) GetUpdateStopwordOptions(ctx context.Context, request operations.GetUpdateStopwordOptionsRequest) (*operations.GetUpdateStopwordOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateStopwordOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1441,7 +1487,7 @@ func (s *SDK) GetUpdateStopwordOptions(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1501,8 +1547,9 @@ func (s *SDK) GetUpdateStopwordOptions(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetUpdateSynonymOptions - Configures a synonym dictionary for the search domain. The synonym dictionary is used during indexing to configure mappings for terms that occur in text fields. The maximum size of the synonym dictionary is 100 KB.
 func (s *SDK) GetUpdateSynonymOptions(ctx context.Context, request operations.GetUpdateSynonymOptionsRequest) (*operations.GetUpdateSynonymOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateSynonymOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1514,7 +1561,7 @@ func (s *SDK) GetUpdateSynonymOptions(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1574,8 +1621,9 @@ func (s *SDK) GetUpdateSynonymOptions(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// PostCreateDomain - Creates a new search domain.
 func (s *SDK) PostCreateDomain(ctx context.Context, request operations.PostCreateDomainRequest) (*operations.PostCreateDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1594,7 +1642,7 @@ func (s *SDK) PostCreateDomain(ctx context.Context, request operations.PostCreat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1654,8 +1702,9 @@ func (s *SDK) PostCreateDomain(ctx context.Context, request operations.PostCreat
 	return res, nil
 }
 
+// PostDefineIndexField - Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones. If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.
 func (s *SDK) PostDefineIndexField(ctx context.Context, request operations.PostDefineIndexFieldRequest) (*operations.PostDefineIndexFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DefineIndexField"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1674,7 +1723,7 @@ func (s *SDK) PostDefineIndexField(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1734,8 +1783,9 @@ func (s *SDK) PostDefineIndexField(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDefineRankExpression - Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.
 func (s *SDK) PostDefineRankExpression(ctx context.Context, request operations.PostDefineRankExpressionRequest) (*operations.PostDefineRankExpressionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DefineRankExpression"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1754,7 +1804,7 @@ func (s *SDK) PostDefineRankExpression(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1814,8 +1864,9 @@ func (s *SDK) PostDefineRankExpression(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDeleteDomain - Permanently deletes a search domain and all of its data.
 func (s *SDK) PostDeleteDomain(ctx context.Context, request operations.PostDeleteDomainRequest) (*operations.PostDeleteDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1834,7 +1885,7 @@ func (s *SDK) PostDeleteDomain(ctx context.Context, request operations.PostDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1884,8 +1935,9 @@ func (s *SDK) PostDeleteDomain(ctx context.Context, request operations.PostDelet
 	return res, nil
 }
 
+// PostDeleteIndexField - Removes an <code>IndexField</code> from the search domain.
 func (s *SDK) PostDeleteIndexField(ctx context.Context, request operations.PostDeleteIndexFieldRequest) (*operations.PostDeleteIndexFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteIndexField"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1904,7 +1956,7 @@ func (s *SDK) PostDeleteIndexField(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1964,8 +2016,9 @@ func (s *SDK) PostDeleteIndexField(ctx context.Context, request operations.PostD
 	return res, nil
 }
 
+// PostDeleteRankExpression - Removes a <code>RankExpression</code> from the search domain.
 func (s *SDK) PostDeleteRankExpression(ctx context.Context, request operations.PostDeleteRankExpressionRequest) (*operations.PostDeleteRankExpressionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteRankExpression"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1984,7 +2037,7 @@ func (s *SDK) PostDeleteRankExpression(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2044,8 +2097,9 @@ func (s *SDK) PostDeleteRankExpression(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostDescribeAvailabilityOptions - Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.
 func (s *SDK) PostDescribeAvailabilityOptions(ctx context.Context, request operations.PostDescribeAvailabilityOptionsRequest) (*operations.PostDescribeAvailabilityOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeAvailabilityOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2064,7 +2118,7 @@ func (s *SDK) PostDescribeAvailabilityOptions(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2124,8 +2178,9 @@ func (s *SDK) PostDescribeAvailabilityOptions(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostDescribeDefaultSearchField - Gets the default search field configured for the search domain.
 func (s *SDK) PostDescribeDefaultSearchField(ctx context.Context, request operations.PostDescribeDefaultSearchFieldRequest) (*operations.PostDescribeDefaultSearchFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDefaultSearchField"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2144,7 +2199,7 @@ func (s *SDK) PostDescribeDefaultSearchField(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2204,8 +2259,9 @@ func (s *SDK) PostDescribeDefaultSearchField(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDescribeDomains - Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.
 func (s *SDK) PostDescribeDomains(ctx context.Context, request operations.PostDescribeDomainsRequest) (*operations.PostDescribeDomainsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDomains"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2224,7 +2280,7 @@ func (s *SDK) PostDescribeDomains(ctx context.Context, request operations.PostDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2274,8 +2330,9 @@ func (s *SDK) PostDescribeDomains(ctx context.Context, request operations.PostDe
 	return res, nil
 }
 
+// PostDescribeIndexFields - Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. Shows all fields by default.
 func (s *SDK) PostDescribeIndexFields(ctx context.Context, request operations.PostDescribeIndexFieldsRequest) (*operations.PostDescribeIndexFieldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeIndexFields"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2294,7 +2351,7 @@ func (s *SDK) PostDescribeIndexFields(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2354,8 +2411,9 @@ func (s *SDK) PostDescribeIndexFields(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDescribeRankExpressions - Gets the rank expressions configured for the search domain. Can be limited to specific rank expressions by name. Shows all rank expressions by default.
 func (s *SDK) PostDescribeRankExpressions(ctx context.Context, request operations.PostDescribeRankExpressionsRequest) (*operations.PostDescribeRankExpressionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeRankExpressions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2374,7 +2432,7 @@ func (s *SDK) PostDescribeRankExpressions(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2434,8 +2492,9 @@ func (s *SDK) PostDescribeRankExpressions(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeServiceAccessPolicies - Gets information about the resource-based policies that control access to the domain's document and search services.
 func (s *SDK) PostDescribeServiceAccessPolicies(ctx context.Context, request operations.PostDescribeServiceAccessPoliciesRequest) (*operations.PostDescribeServiceAccessPoliciesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeServiceAccessPolicies"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2454,7 +2513,7 @@ func (s *SDK) PostDescribeServiceAccessPolicies(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2514,8 +2573,9 @@ func (s *SDK) PostDescribeServiceAccessPolicies(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostDescribeStemmingOptions - Gets the stemming dictionary configured for the search domain.
 func (s *SDK) PostDescribeStemmingOptions(ctx context.Context, request operations.PostDescribeStemmingOptionsRequest) (*operations.PostDescribeStemmingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeStemmingOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2534,7 +2594,7 @@ func (s *SDK) PostDescribeStemmingOptions(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2594,8 +2654,9 @@ func (s *SDK) PostDescribeStemmingOptions(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeStopwordOptions - Gets the stopwords configured for the search domain.
 func (s *SDK) PostDescribeStopwordOptions(ctx context.Context, request operations.PostDescribeStopwordOptionsRequest) (*operations.PostDescribeStopwordOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeStopwordOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2614,7 +2675,7 @@ func (s *SDK) PostDescribeStopwordOptions(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2674,8 +2735,9 @@ func (s *SDK) PostDescribeStopwordOptions(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDescribeSynonymOptions - Gets the synonym dictionary configured for the search domain.
 func (s *SDK) PostDescribeSynonymOptions(ctx context.Context, request operations.PostDescribeSynonymOptionsRequest) (*operations.PostDescribeSynonymOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeSynonymOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2694,7 +2756,7 @@ func (s *SDK) PostDescribeSynonymOptions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2754,8 +2816,9 @@ func (s *SDK) PostDescribeSynonymOptions(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostIndexDocuments - Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose <a>OptionStatus</a> has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.
 func (s *SDK) PostIndexDocuments(ctx context.Context, request operations.PostIndexDocumentsRequest) (*operations.PostIndexDocumentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=IndexDocuments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2774,7 +2837,7 @@ func (s *SDK) PostIndexDocuments(ctx context.Context, request operations.PostInd
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2834,8 +2897,9 @@ func (s *SDK) PostIndexDocuments(ctx context.Context, request operations.PostInd
 	return res, nil
 }
 
+// PostUpdateAvailabilityOptions - Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.
 func (s *SDK) PostUpdateAvailabilityOptions(ctx context.Context, request operations.PostUpdateAvailabilityOptionsRequest) (*operations.PostUpdateAvailabilityOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateAvailabilityOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2854,7 +2918,7 @@ func (s *SDK) PostUpdateAvailabilityOptions(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2914,8 +2978,9 @@ func (s *SDK) PostUpdateAvailabilityOptions(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostUpdateDefaultSearchField - Configures the default search field for the search domain. The default search field is the text field that is searched when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain's text fields.
 func (s *SDK) PostUpdateDefaultSearchField(ctx context.Context, request operations.PostUpdateDefaultSearchFieldRequest) (*operations.PostUpdateDefaultSearchFieldResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateDefaultSearchField"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2934,7 +2999,7 @@ func (s *SDK) PostUpdateDefaultSearchField(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2994,8 +3059,9 @@ func (s *SDK) PostUpdateDefaultSearchField(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostUpdateServiceAccessPolicies - Configures the policies that control access to the domain's document and search services. The maximum size of an access policy document is 100 KB.
 func (s *SDK) PostUpdateServiceAccessPolicies(ctx context.Context, request operations.PostUpdateServiceAccessPoliciesRequest) (*operations.PostUpdateServiceAccessPoliciesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateServiceAccessPolicies"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3014,7 +3080,7 @@ func (s *SDK) PostUpdateServiceAccessPolicies(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3074,8 +3140,9 @@ func (s *SDK) PostUpdateServiceAccessPolicies(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostUpdateStemmingOptions - Configures a stemming dictionary for the search domain. The stemming dictionary is used during indexing and when processing search requests. The maximum size of the stemming dictionary is 500 KB.
 func (s *SDK) PostUpdateStemmingOptions(ctx context.Context, request operations.PostUpdateStemmingOptionsRequest) (*operations.PostUpdateStemmingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateStemmingOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3094,7 +3161,7 @@ func (s *SDK) PostUpdateStemmingOptions(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3154,8 +3221,9 @@ func (s *SDK) PostUpdateStemmingOptions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostUpdateStopwordOptions - Configures stopwords for the search domain. Stopwords are used during indexing and when processing search requests. The maximum size of the stopwords dictionary is 10 KB.
 func (s *SDK) PostUpdateStopwordOptions(ctx context.Context, request operations.PostUpdateStopwordOptionsRequest) (*operations.PostUpdateStopwordOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateStopwordOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3174,7 +3242,7 @@ func (s *SDK) PostUpdateStopwordOptions(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3234,8 +3302,9 @@ func (s *SDK) PostUpdateStopwordOptions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostUpdateSynonymOptions - Configures a synonym dictionary for the search domain. The synonym dictionary is used during indexing to configure mappings for terms that occur in text fields. The maximum size of the synonym dictionary is 100 KB.
 func (s *SDK) PostUpdateSynonymOptions(ctx context.Context, request operations.PostUpdateSynonymOptionsRequest) (*operations.PostUpdateSynonymOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=UpdateSynonymOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3254,7 +3323,7 @@ func (s *SDK) PostUpdateSynonymOptions(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

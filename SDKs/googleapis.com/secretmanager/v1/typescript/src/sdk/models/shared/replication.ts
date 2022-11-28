@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Automatic } from "./automatic";
 import { UserManaged } from "./usermanaged";
+
 
 
 // Replication
@@ -8,9 +9,9 @@ import { UserManaged } from "./usermanaged";
  * A policy that defines the replication and encryption configuration of data.
 **/
 export class Replication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=automatic" })
+  @SpeakeasyMetadata({ data: "json, name=automatic" })
   automatic?: Automatic;
 
-  @Metadata({ data: "json, name=userManaged" })
+  @SpeakeasyMetadata({ data: "json, name=userManaged" })
   userManaged?: UserManaged;
 }

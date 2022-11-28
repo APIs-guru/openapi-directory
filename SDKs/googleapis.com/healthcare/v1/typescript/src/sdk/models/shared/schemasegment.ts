@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SchemaSegment
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An HL7v2 Segment.
 **/
 export class SchemaSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxOccurs" })
+  @SpeakeasyMetadata({ data: "json, name=maxOccurs" })
   maxOccurs?: number;
 
-  @Metadata({ data: "json, name=minOccurs" })
+  @SpeakeasyMetadata({ data: "json, name=minOccurs" })
   minOccurs?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

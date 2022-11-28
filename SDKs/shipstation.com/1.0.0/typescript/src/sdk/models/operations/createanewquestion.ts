@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateANewQuestionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=choices" })
+  @SpeakeasyMetadata({ data: "json, name=choices" })
   choices?: string[];
 
-  @Metadata({ data: "json, name=question" })
+  @SpeakeasyMetadata({ data: "json, name=question" })
   question?: string;
 }
 
 
 export class CreateANewQuestionRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: CreateANewQuestionRequestBody;
 }
 
 
 export class CreateANewQuestionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

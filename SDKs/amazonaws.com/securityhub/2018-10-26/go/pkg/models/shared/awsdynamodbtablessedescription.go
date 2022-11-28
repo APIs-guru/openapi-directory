@@ -1,5 +1,7 @@
 package shared
 
+// AwsDynamoDbTableSseDescription
+// Information about the server-side encryption for the table.
 type AwsDynamoDbTableSseDescription struct {
 	InaccessibleEncryptionDateTime *string `json:"InaccessibleEncryptionDateTime,omitempty"`
 	KmsMasterKeyArn                *string `json:"KmsMasterKeyArn,omitempty"`

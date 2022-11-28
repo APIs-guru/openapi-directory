@@ -1,5 +1,7 @@
 package shared
 
+// Borders
+// The borders of the cell.
 type Borders struct {
 	Bottom *Border `json:"bottom,omitempty"`
 	Left   *Border `json:"left,omitempty"`

@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2recordcondition
-from . import googleprivacydlpv2fieldid
-from . import googleprivacydlpv2infotypetransformations
-from . import googleprivacydlpv2primitivetransformation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2FieldTransformation:
-    condition: Optional[googleprivacydlpv2recordcondition.GooglePrivacyDlpV2RecordCondition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'condition' }})
-    fields: Optional[List[googleprivacydlpv2fieldid.GooglePrivacyDlpV2FieldID]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    info_type_transformations: Optional[googleprivacydlpv2infotypetransformations.GooglePrivacyDlpV2InfoTypeTransformations] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'infoTypeTransformations' }})
-    primitive_transformation: Optional[googleprivacydlpv2primitivetransformation.GooglePrivacyDlpV2PrimitiveTransformation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primitiveTransformation' }})
+    r"""GooglePrivacyDlpV2FieldTransformation
+    The transformation to apply to the field.
+    """
+    
+    condition: Optional[GooglePrivacyDlpV2RecordCondition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('condition') }})
+    fields: Optional[List[GooglePrivacyDlpV2FieldID]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    info_type_transformations: Optional[GooglePrivacyDlpV2InfoTypeTransformations] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('infoTypeTransformations') }})
+    primitive_transformation: Optional[GooglePrivacyDlpV2PrimitiveTransformation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primitiveTransformation') }})
     

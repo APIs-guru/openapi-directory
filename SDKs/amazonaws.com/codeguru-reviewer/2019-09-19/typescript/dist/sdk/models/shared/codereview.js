@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Metrics } from "./metrics";
 import { ProviderTypeEnum } from "./providertypeenum";
 import { SourceCodeType } from "./sourcecodetype";
@@ -38,63 +38,63 @@ var CodeReview = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnalysisTypes" }),
+        SpeakeasyMetadata({ data: "json, name=AnalysisTypes" }),
         __metadata("design:type", Array)
     ], CodeReview.prototype, "analysisTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssociationArn" }),
+        SpeakeasyMetadata({ data: "json, name=AssociationArn" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "associationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeReviewArn" }),
+        SpeakeasyMetadata({ data: "json, name=CodeReviewArn" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "codeReviewArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedTimeStamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTimeStamp" }),
         __metadata("design:type", Date)
     ], CodeReview.prototype, "createdTimeStamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedTimeStamp" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedTimeStamp" }),
         __metadata("design:type", Date)
     ], CodeReview.prototype, "lastUpdatedTimeStamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Metrics" }),
+        SpeakeasyMetadata({ data: "json, name=Metrics" }),
         __metadata("design:type", Metrics)
     ], CodeReview.prototype, "metrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Owner" }),
+        SpeakeasyMetadata({ data: "json, name=Owner" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderType" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderType" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "providerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=PullRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=PullRequestId" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "pullRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RepositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=RepositoryName" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "repositoryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceCodeType" }),
+        SpeakeasyMetadata({ data: "json, name=SourceCodeType" }),
         __metadata("design:type", SourceCodeType)
     ], CodeReview.prototype, "sourceCodeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateReason" }),
+        SpeakeasyMetadata({ data: "json, name=StateReason" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "stateReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], CodeReview.prototype, "type", void 0);
     return CodeReview;

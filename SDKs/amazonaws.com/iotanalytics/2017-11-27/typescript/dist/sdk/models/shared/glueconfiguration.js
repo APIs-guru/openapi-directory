@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GlueConfiguration
 /**
  * Configuration information for coordination with Glue, a fully managed extract, transform and load (ETL) service.
@@ -33,11 +33,11 @@ var GlueConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=databaseName" }),
+        SpeakeasyMetadata({ data: "json, name=databaseName" }),
         __metadata("design:type", String)
     ], GlueConfiguration.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tableName" }),
+        SpeakeasyMetadata({ data: "json, name=tableName" }),
         __metadata("design:type", String)
     ], GlueConfiguration.prototype, "tableName", void 0);
     return GlueConfiguration;

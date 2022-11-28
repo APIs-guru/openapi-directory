@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContributionMatrix } from "./contributionmatrix";
+
 
 
 // MetricLevelImpact
@@ -7,12 +8,12 @@ import { ContributionMatrix } from "./contributionmatrix";
  * Details about a measure affected by an anomaly.
 **/
 export class MetricLevelImpact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContributionMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=ContributionMatrix" })
   contributionMatrix?: ContributionMatrix;
 
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=NumTimeSeries" })
+  @SpeakeasyMetadata({ data: "json, name=NumTimeSeries" })
   numTimeSeries?: number;
 }

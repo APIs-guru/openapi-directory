@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogMetric } from "./logmetric";
+
 
 
 // ListLogMetricsResponse
@@ -8,9 +8,9 @@ import { LogMetric } from "./logmetric";
  * Result returned from ListLogMetrics.
 **/
 export class ListLogMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metrics", elemType: shared.LogMetric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: LogMetric })
   metrics?: LogMetric[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

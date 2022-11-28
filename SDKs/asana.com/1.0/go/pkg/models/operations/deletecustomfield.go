@@ -13,13 +13,13 @@ type DeleteCustomFieldQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeleteCustomField200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeleteCustomFieldRequest struct {
 	PathParams  DeleteCustomFieldPathParams
 	QueryParams DeleteCustomFieldQueryParams
-}
-
-type DeleteCustomField200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteCustomFieldResponse struct {

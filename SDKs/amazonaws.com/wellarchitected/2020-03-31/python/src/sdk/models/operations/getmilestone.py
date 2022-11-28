@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetMilestonePathParams:
-    milestone_number: int = field(default=None, metadata={'path_param': { 'field_name': 'MilestoneNumber', 'style': 'simple', 'explode': False }})
-    workload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
+    milestone_number: int = field(metadata={'path_param': { 'field_name': 'MilestoneNumber', 'style': 'simple', 'explode': False }})
+    workload_id: str = field(metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class GetMilestoneHeaders:
 
 @dataclass
 class GetMilestoneRequest:
-    path_params: GetMilestonePathParams = field(default=None)
-    headers: GetMilestoneHeaders = field(default=None)
+    headers: GetMilestoneHeaders = field()
+    path_params: GetMilestonePathParams = field()
     
 
 @dataclass
 class GetMilestoneResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_milestone_output: Optional[shared.GetMilestoneOutput] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

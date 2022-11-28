@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApigatewayApiConfigFile } from "./apigatewayapiconfigfile";
+
 
 
 // ApigatewayApiConfigOpenApiDocument
@@ -7,6 +8,6 @@ import { ApigatewayApiConfigFile } from "./apigatewayapiconfigfile";
  * An OpenAPI Specification Document describing an API.
 **/
 export class ApigatewayApiConfigOpenApiDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: ApigatewayApiConfigFile;
 }

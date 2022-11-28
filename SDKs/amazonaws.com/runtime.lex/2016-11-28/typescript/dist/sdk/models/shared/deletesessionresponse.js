@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteSessionResponse = /** @class */ (function (_super) {
     __extends(DeleteSessionResponse, _super);
     function DeleteSessionResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=botAlias" }),
+        SpeakeasyMetadata({ data: "json, name=botAlias" }),
         __metadata("design:type", String)
     ], DeleteSessionResponse.prototype, "botAlias", void 0);
     __decorate([
-        Metadata({ data: "json, name=botName" }),
+        SpeakeasyMetadata({ data: "json, name=botName" }),
         __metadata("design:type", String)
     ], DeleteSessionResponse.prototype, "botName", void 0);
     __decorate([
-        Metadata({ data: "json, name=sessionId" }),
+        SpeakeasyMetadata({ data: "json, name=sessionId" }),
         __metadata("design:type", String)
     ], DeleteSessionResponse.prototype, "sessionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], DeleteSessionResponse.prototype, "userId", void 0);
     return DeleteSessionResponse;

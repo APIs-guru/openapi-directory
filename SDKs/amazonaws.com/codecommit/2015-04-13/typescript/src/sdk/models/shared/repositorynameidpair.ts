@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepositoryNameIdPair
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a repository name and ID.
 **/
 export class RepositoryNameIdPair extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repositoryId" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryId" })
   repositoryId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 }

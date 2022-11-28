@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { LineItem } from "./lineitem";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LineItemInput } from "./lineitem";
 
 
-// BulkUpdateLineItemsRequest
+
+// BulkUpdateLineItemsRequestInput
 /** 
  * Request message for LineItemService.BulkUpdateLineItems.
 **/
-export class BulkUpdateLineItemsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineItemIds" })
+export class BulkUpdateLineItemsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=lineItemIds" })
   lineItemIds?: string[];
 
-  @Metadata({ data: "json, name=targetLineItem" })
-  targetLineItem?: LineItem;
+  @SpeakeasyMetadata({ data: "json, name=targetLineItem" })
+  targetLineItem?: LineItemInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

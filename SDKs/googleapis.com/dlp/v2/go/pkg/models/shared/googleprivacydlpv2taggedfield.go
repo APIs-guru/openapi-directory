@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2TaggedField
+// A column with a semantic tag attached.
 type GooglePrivacyDlpV2TaggedField struct {
 	CustomTag *string                     `json:"customTag,omitempty"`
 	Field     *GooglePrivacyDlpV2FieldID  `json:"field,omitempty"`

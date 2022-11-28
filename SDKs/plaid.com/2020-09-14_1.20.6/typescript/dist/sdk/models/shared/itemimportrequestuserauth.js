@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ItemImportRequestUserAuth
 /**
  * Object of user ID and auth token pair, permitting Plaid to aggregate a user’s accounts
@@ -33,11 +33,11 @@ var ItemImportRequestUserAuth = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=auth_token" }),
+        SpeakeasyMetadata({ data: "json, name=auth_token" }),
         __metadata("design:type", String)
     ], ItemImportRequestUserAuth.prototype, "authToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_id" }),
+        SpeakeasyMetadata({ data: "json, name=user_id" }),
         __metadata("design:type", String)
     ], ItemImportRequestUserAuth.prototype, "userId", void 0);
     return ItemImportRequestUserAuth;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ConditionalSingleFieldDependencyDependencyTypeEnum {
     ConditionalSingleField = "CONDITIONAL_SINGLE_FIELD"
 }

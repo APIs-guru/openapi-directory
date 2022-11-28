@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import typedattributevaluerange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TypedLinkAttributeRange:
-    attribute_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeName' }})
-    range: typedattributevaluerange.TypedAttributeValueRange = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Range' }})
+    r"""TypedLinkAttributeRange
+    Identifies the range of attributes that are used by a specified filter.
+    """
+    
+    range: TypedAttributeValueRange = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Range') }})
+    attribute_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeName') }})
     

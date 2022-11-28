@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostStopActivityStreamActionEnum(str, Enum):
     STOP_ACTIVITY_STREAM = "StopActivityStream"
@@ -10,8 +14,8 @@ class PostStopActivityStreamVersionEnum(str, Enum):
 
 @dataclass
 class PostStopActivityStreamQueryParams:
-    action: PostStopActivityStreamActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostStopActivityStreamVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostStopActivityStreamActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostStopActivityStreamVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostStopActivityStreamHeaders:
 
 @dataclass
 class PostStopActivityStreamRequest:
-    query_params: PostStopActivityStreamQueryParams = field(default=None)
-    headers: PostStopActivityStreamHeaders = field(default=None)
+    headers: PostStopActivityStreamHeaders = field()
+    query_params: PostStopActivityStreamQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostStopActivityStreamResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

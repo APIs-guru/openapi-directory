@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,27 +24,27 @@ class YoutubeChannelBannersInsertQueryParams:
 
 @dataclass
 class YoutubeChannelBannersInsertRequests:
-    application_octet_stream: bytes = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
-    image_jpeg: bytes = field(default=None, metadata={'request': { 'media_type': 'image/jpeg' }})
-    image_png: bytes = field(default=None, metadata={'request': { 'media_type': 'image/png' }})
+    application_octet_stream: bytes = field(metadata={'request': { 'media_type': 'application/octet-stream' }})
+    image_jpeg: bytes = field(metadata={'request': { 'media_type': 'image/jpeg' }})
+    image_png: bytes = field(metadata={'request': { 'media_type': 'image/png' }})
     
 
 @dataclass
 class YoutubeChannelBannersInsertSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubeChannelBannersInsertSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubeChannelBannersInsertSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -55,14 +56,14 @@ class YoutubeChannelBannersInsertSecurity:
 
 @dataclass
 class YoutubeChannelBannersInsertRequest:
-    query_params: YoutubeChannelBannersInsertQueryParams = field(default=None)
+    query_params: YoutubeChannelBannersInsertQueryParams = field()
+    security: YoutubeChannelBannersInsertSecurity = field()
     request: Optional[YoutubeChannelBannersInsertRequests] = field(default=None)
-    security: YoutubeChannelBannersInsertSecurity = field(default=None)
     
 
 @dataclass
 class YoutubeChannelBannersInsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     channel_banner_resource: Optional[shared.ChannelBannerResource] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

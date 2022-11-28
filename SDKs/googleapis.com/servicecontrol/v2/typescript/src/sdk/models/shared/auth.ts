@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Auth
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This message defines request authentication attributes. Terminology is based on the JSON Web Token (JWT) standard, but the terms also correlate to concepts in other standards.
 **/
 export class Auth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLevels" })
+  @SpeakeasyMetadata({ data: "json, name=accessLevels" })
   accessLevels?: string[];
 
-  @Metadata({ data: "json, name=audiences" })
+  @SpeakeasyMetadata({ data: "json, name=audiences" })
   audiences?: string[];
 
-  @Metadata({ data: "json, name=claims" })
+  @SpeakeasyMetadata({ data: "json, name=claims" })
   claims?: Map<string, any>;
 
-  @Metadata({ data: "json, name=presenter" })
+  @SpeakeasyMetadata({ data: "json, name=presenter" })
   presenter?: string;
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: string;
 }

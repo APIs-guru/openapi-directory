@@ -50,6 +50,8 @@ const (
 	APIRequestResultEnumDeny    APIRequestResultEnum = "DENY"
 )
 
+// APIRequest
+// Represents a request that was made to the API. Including what Token was used and what resource was accessed.
 type APIRequest struct {
 	Action    *APIRequestActionEnum `json:"action,omitempty"`
 	Actor     *APIRequestActor      `json:"actor,omitempty"`

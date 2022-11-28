@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MetricSetSummary
+// Contains information about a dataset.
 type MetricSetSummary struct {
 	AnomalyDetectorArn   *string           `json:"AnomalyDetectorArn,omitempty"`
 	CreationTime         *time.Time        `json:"CreationTime,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SasPortalCreateSignedDeviceRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for CreateSignedDevice.
 **/
 export class SasPortalCreateSignedDeviceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encodedDevice" })
+  @SpeakeasyMetadata({ data: "json, name=encodedDevice" })
   encodedDevice?: string;
 
-  @Metadata({ data: "json, name=installerId" })
+  @SpeakeasyMetadata({ data: "json, name=installerId" })
   installerId?: string;
 }

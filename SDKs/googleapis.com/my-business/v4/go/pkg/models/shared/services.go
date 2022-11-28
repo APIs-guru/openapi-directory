@@ -108,6 +108,8 @@ const (
 	ServicesWakeUpCallsExceptionEnumDependentOnDayOfWeek ServicesWakeUpCallsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Services
+// Conveniences or help provided by the property to facilitate an easier, more comfortable stay.
 type Services struct {
 	BaggageStorage                   *bool                                         `json:"baggageStorage,omitempty"`
 	BaggageStorageException          *ServicesBaggageStorageExceptionEnum          `json:"baggageStorageException,omitempty"`

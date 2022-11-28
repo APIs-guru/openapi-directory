@@ -18,6 +18,8 @@ const (
 	DiscoveryAnalysisKindEnumSpdxRelationship    DiscoveryAnalysisKindEnum = "SPDX_RELATIONSHIP"
 )
 
+// Discovery
+// A note that indicates a type of analysis a provider would perform. This note exists in a provider's project. A `Discovery` occurrence is created in a consumer's project at the start of analysis.
 type Discovery struct {
 	AnalysisKind *DiscoveryAnalysisKindEnum `json:"analysisKind,omitempty"`
 }

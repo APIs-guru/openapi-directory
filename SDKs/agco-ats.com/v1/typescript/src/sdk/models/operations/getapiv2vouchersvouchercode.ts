@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV2VouchersVoucherCodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=VoucherCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=VoucherCode" })
   voucherCode: string;
 }
 
 export enum GetApiV2VouchersVoucherCodeDeletedEnum {
-    NotDeleted = "NotDeleted"
-,    Deleted = "Deleted"
-,    All = "All"
+    NotDeleted = "NotDeleted",
+    Deleted = "Deleted",
+    All = "All"
 }
 
 
 export class GetApiV2VouchersVoucherCodeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Deleted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Deleted" })
   deleted?: GetApiV2VouchersVoucherCodeDeletedEnum;
 }
 
 
 export class GetApiV2VouchersVoucherCodeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV2VouchersVoucherCodePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV2VouchersVoucherCodeQueryParams;
 }
 
 
 export class GetApiV2VouchersVoucherCodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dealerDbModelsVoucher?: shared.DealerDbModelsVoucher;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

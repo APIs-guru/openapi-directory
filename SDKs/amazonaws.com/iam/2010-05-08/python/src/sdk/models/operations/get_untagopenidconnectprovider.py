@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUntagOpenIDConnectProviderActionEnum(str, Enum):
     UNTAG_OPEN_ID_CONNECT_PROVIDER = "UntagOpenIDConnectProvider"
@@ -10,10 +14,10 @@ class GetUntagOpenIDConnectProviderVersionEnum(str, Enum):
 
 @dataclass
 class GetUntagOpenIDConnectProviderQueryParams:
-    action: GetUntagOpenIDConnectProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    open_id_connect_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
-    version: GetUntagOpenIDConnectProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUntagOpenIDConnectProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    open_id_connect_provider_arn: str = field(metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetUntagOpenIDConnectProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUntagOpenIDConnectProviderHeaders:
 
 @dataclass
 class GetUntagOpenIDConnectProviderRequest:
-    query_params: GetUntagOpenIDConnectProviderQueryParams = field(default=None)
-    headers: GetUntagOpenIDConnectProviderHeaders = field(default=None)
+    headers: GetUntagOpenIDConnectProviderHeaders = field()
+    query_params: GetUntagOpenIDConnectProviderQueryParams = field()
     
 
 @dataclass
 class GetUntagOpenIDConnectProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -15,14 +15,14 @@ class ActivityListNotificationsForAuthenticatedUserQueryParams:
 
 @dataclass
 class ActivityListNotificationsForAuthenticatedUserRequest:
-    query_params: ActivityListNotificationsForAuthenticatedUserQueryParams = field(default=None)
+    query_params: ActivityListNotificationsForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class ActivityListNotificationsForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     threads: Optional[List[shared.Thread]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

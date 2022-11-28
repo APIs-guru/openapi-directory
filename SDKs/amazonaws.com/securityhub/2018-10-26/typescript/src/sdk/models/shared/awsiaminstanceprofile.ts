@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsIamInstanceProfileRole } from "./awsiaminstanceprofilerole";
+
 
 
 // AwsIamInstanceProfile
@@ -8,21 +8,21 @@ import { AwsIamInstanceProfileRole } from "./awsiaminstanceprofilerole";
  * Information about an instance profile.
 **/
 export class AwsIamInstanceProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreateDate" })
   createDate?: string;
 
-  @Metadata({ data: "json, name=InstanceProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceProfileId" })
   instanceProfileId?: string;
 
-  @Metadata({ data: "json, name=InstanceProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceProfileName" })
   instanceProfileName?: string;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=Roles", elemType: shared.AwsIamInstanceProfileRole })
+  @SpeakeasyMetadata({ data: "json, name=Roles", elemType: AwsIamInstanceProfileRole })
   roles?: AwsIamInstanceProfileRole[];
 }

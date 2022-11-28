@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineExecution } from "./pipelineexecution";
+
 
 
 // GetPipelineExecutionOutput
@@ -7,6 +8,6 @@ import { PipelineExecution } from "./pipelineexecution";
  * Represents the output of a <code>GetPipelineExecution</code> action.
 **/
 export class GetPipelineExecutionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineExecution" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecution" })
   pipelineExecution?: PipelineExecution;
 }

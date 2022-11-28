@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetStoreCheckStatusJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=auth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auth_token" })
   authToken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=partner_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_code" })
   partnerCode: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=store_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=store_code" })
   storeCode: string;
 }
 
 
 export class GetStoreCheckStatusJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetStoreCheckStatusJsonQueryParams;
 }
 
 
 export class GetStoreCheckStatusJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getStoreCheckStatusJson200ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partnerError?: shared.PartnerError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

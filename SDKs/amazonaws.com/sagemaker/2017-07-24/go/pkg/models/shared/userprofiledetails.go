@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserProfileDetails
+// The user profile details.
 type UserProfileDetails struct {
 	CreationTime     *time.Time             `json:"CreationTime,omitempty"`
 	DomainID         *string                `json:"DomainId,omitempty"`

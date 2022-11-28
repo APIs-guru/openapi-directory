@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlOverrideStrategyEnum } from "./automloverridestrategyenum";
 import { EncryptionConfig } from "./encryptionconfig";
 import { EvaluationParameters } from "./evaluationparameters";
@@ -37,95 +37,95 @@ var DescribePredictorResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AlgorithmArn" }),
+        SpeakeasyMetadata({ data: "json, name=AlgorithmArn" }),
         __metadata("design:type", String)
     ], DescribePredictorResponse.prototype, "algorithmArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoMLAlgorithmArns" }),
+        SpeakeasyMetadata({ data: "json, name=AutoMLAlgorithmArns" }),
         __metadata("design:type", Array)
     ], DescribePredictorResponse.prototype, "autoMlAlgorithmArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoMLOverrideStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=AutoMLOverrideStrategy" }),
         __metadata("design:type", String)
     ], DescribePredictorResponse.prototype, "autoMlOverrideStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DescribePredictorResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetImportJobArns" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetImportJobArns" }),
         __metadata("design:type", Array)
     ], DescribePredictorResponse.prototype, "datasetImportJobArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=EncryptionConfig" }),
+        SpeakeasyMetadata({ data: "json, name=EncryptionConfig" }),
         __metadata("design:type", EncryptionConfig)
     ], DescribePredictorResponse.prototype, "encryptionConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=EstimatedTimeRemainingInMinutes" }),
+        SpeakeasyMetadata({ data: "json, name=EstimatedTimeRemainingInMinutes" }),
         __metadata("design:type", Number)
     ], DescribePredictorResponse.prototype, "estimatedTimeRemainingInMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationParameters" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationParameters" }),
         __metadata("design:type", EvaluationParameters)
     ], DescribePredictorResponse.prototype, "evaluationParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=FeaturizationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=FeaturizationConfig" }),
         __metadata("design:type", FeaturizationConfig)
     ], DescribePredictorResponse.prototype, "featurizationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForecastHorizon" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastHorizon" }),
         __metadata("design:type", Number)
     ], DescribePredictorResponse.prototype, "forecastHorizon", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForecastTypes" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastTypes" }),
         __metadata("design:type", Array)
     ], DescribePredictorResponse.prototype, "forecastTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=HPOConfig" }),
+        SpeakeasyMetadata({ data: "json, name=HPOConfig" }),
         __metadata("design:type", HyperParameterTuningJobConfig)
     ], DescribePredictorResponse.prototype, "hpoConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=InputDataConfig" }),
         __metadata("design:type", InputDataConfig)
     ], DescribePredictorResponse.prototype, "inputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], DescribePredictorResponse.prototype, "lastModificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], DescribePredictorResponse.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=OptimizationMetric" }),
+        SpeakeasyMetadata({ data: "json, name=OptimizationMetric" }),
         __metadata("design:type", String)
     ], DescribePredictorResponse.prototype, "optimizationMetric", void 0);
     __decorate([
-        Metadata({ data: "json, name=PerformAutoML" }),
+        SpeakeasyMetadata({ data: "json, name=PerformAutoML" }),
         __metadata("design:type", Boolean)
     ], DescribePredictorResponse.prototype, "performAutoMl", void 0);
     __decorate([
-        Metadata({ data: "json, name=PerformHPO" }),
+        SpeakeasyMetadata({ data: "json, name=PerformHPO" }),
         __metadata("design:type", Boolean)
     ], DescribePredictorResponse.prototype, "performHpo", void 0);
     __decorate([
-        Metadata({ data: "json, name=PredictorArn" }),
+        SpeakeasyMetadata({ data: "json, name=PredictorArn" }),
         __metadata("design:type", String)
     ], DescribePredictorResponse.prototype, "predictorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=PredictorExecutionDetails" }),
+        SpeakeasyMetadata({ data: "json, name=PredictorExecutionDetails" }),
         __metadata("design:type", PredictorExecutionDetails)
     ], DescribePredictorResponse.prototype, "predictorExecutionDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=PredictorName" }),
+        SpeakeasyMetadata({ data: "json, name=PredictorName" }),
         __metadata("design:type", String)
     ], DescribePredictorResponse.prototype, "predictorName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribePredictorResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingParameters" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingParameters" }),
         __metadata("design:type", Map)
     ], DescribePredictorResponse.prototype, "trainingParameters", void 0);
     return DescribePredictorResponse;

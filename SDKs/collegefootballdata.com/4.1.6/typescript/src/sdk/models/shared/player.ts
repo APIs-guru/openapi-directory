@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Player extends SpeakeasyBase {
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=home_city" })
+  @SpeakeasyMetadata({ data: "json, name=home_city" })
   homeCity?: string;
 
-  @Metadata({ data: "json, name=home_country" })
+  @SpeakeasyMetadata({ data: "json, name=home_country" })
   homeCountry?: string;
 
-  @Metadata({ data: "json, name=home_county_fips" })
+  @SpeakeasyMetadata({ data: "json, name=home_county_fips" })
   homeCountyFips?: string;
 
-  @Metadata({ data: "json, name=home_latitude" })
+  @SpeakeasyMetadata({ data: "json, name=home_latitude" })
   homeLatitude?: number;
 
-  @Metadata({ data: "json, name=home_longitude" })
+  @SpeakeasyMetadata({ data: "json, name=home_longitude" })
   homeLongitude?: number;
 
-  @Metadata({ data: "json, name=home_state" })
+  @SpeakeasyMetadata({ data: "json, name=home_state" })
   homeState?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=jersey" })
+  @SpeakeasyMetadata({ data: "json, name=jersey" })
   jersey?: number;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=recruit_ids" })
+  @SpeakeasyMetadata({ data: "json, name=recruit_ids" })
   recruitIds?: number[];
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year?: number;
 }

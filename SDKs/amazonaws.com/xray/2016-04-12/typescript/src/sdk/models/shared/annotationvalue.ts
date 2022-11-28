@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AnnotationValue
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Value of a segment annotation. Has one of three value types: Number, Boolean, or String.
 **/
 export class AnnotationValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BooleanValue" })
+  @SpeakeasyMetadata({ data: "json, name=BooleanValue" })
   booleanValue?: boolean;
 
-  @Metadata({ data: "json, name=NumberValue" })
+  @SpeakeasyMetadata({ data: "json, name=NumberValue" })
   numberValue?: number;
 
-  @Metadata({ data: "json, name=StringValue" })
+  @SpeakeasyMetadata({ data: "json, name=StringValue" })
   stringValue?: string;
 }

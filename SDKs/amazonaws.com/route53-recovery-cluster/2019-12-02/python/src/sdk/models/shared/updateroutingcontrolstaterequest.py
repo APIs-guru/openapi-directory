@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import routingcontrolstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateRoutingControlStateRequest:
-    routing_control_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoutingControlArn' }})
-    routing_control_state: routingcontrolstate_enum.RoutingControlStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoutingControlState' }})
+    routing_control_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoutingControlArn') }})
+    routing_control_state: RoutingControlStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoutingControlState') }})
     

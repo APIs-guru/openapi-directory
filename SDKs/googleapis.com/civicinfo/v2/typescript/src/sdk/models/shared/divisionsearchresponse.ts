@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DivisionSearchResult } from "./divisionsearchresult";
+
 
 
 // DivisionSearchResponse
@@ -8,9 +8,9 @@ import { DivisionSearchResult } from "./divisionsearchresult";
  * The result of a division search query.
 **/
 export class DivisionSearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.DivisionSearchResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: DivisionSearchResult })
   results?: DivisionSearchResult[];
 }

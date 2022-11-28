@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StorageSource } from "./storagesource";
 /**
  * Response of `GenerateSourceUploadUrl` method.

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryUsersPatchPathParams:
-    user_key: str = field(default=None, metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
+    user_key: str = field(metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DirectoryUsersPatchQueryParams:
 
 @dataclass
 class DirectoryUsersPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryUsersPatchRequest:
-    path_params: DirectoryUsersPatchPathParams = field(default=None)
-    query_params: DirectoryUsersPatchQueryParams = field(default=None)
-    request: Optional[shared.User] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryUsersPatchSecurity = field(default=None)
+    path_params: DirectoryUsersPatchPathParams = field()
+    query_params: DirectoryUsersPatchQueryParams = field()
+    security: DirectoryUsersPatchSecurity = field()
+    request: Optional[shared.UserInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DirectoryUsersPatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user: Optional[shared.User] = field(default=None)
     

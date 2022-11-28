@@ -5,7 +5,7 @@ import (
 )
 
 type ExtrasConfigContextsCreateRequest struct {
-	Request shared.WritableConfigContext `request:"mediaType=application/json"`
+	Request shared.WritableConfigContextInput `request:"mediaType=application/json"`
 }
 
 type ExtrasConfigContextsCreateResponse struct {

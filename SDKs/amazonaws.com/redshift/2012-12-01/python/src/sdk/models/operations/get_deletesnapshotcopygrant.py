@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteSnapshotCopyGrantActionEnum(str, Enum):
     DELETE_SNAPSHOT_COPY_GRANT = "DeleteSnapshotCopyGrant"
@@ -10,9 +14,9 @@ class GetDeleteSnapshotCopyGrantVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteSnapshotCopyGrantQueryParams:
-    action: GetDeleteSnapshotCopyGrantActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    snapshot_copy_grant_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotCopyGrantName', 'style': 'form', 'explode': True }})
-    version: GetDeleteSnapshotCopyGrantVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteSnapshotCopyGrantActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    snapshot_copy_grant_name: str = field(metadata={'query_param': { 'field_name': 'SnapshotCopyGrantName', 'style': 'form', 'explode': True }})
+    version: GetDeleteSnapshotCopyGrantVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteSnapshotCopyGrantHeaders:
 
 @dataclass
 class GetDeleteSnapshotCopyGrantRequest:
-    query_params: GetDeleteSnapshotCopyGrantQueryParams = field(default=None)
-    headers: GetDeleteSnapshotCopyGrantHeaders = field(default=None)
+    headers: GetDeleteSnapshotCopyGrantHeaders = field()
+    query_params: GetDeleteSnapshotCopyGrantQueryParams = field()
     
 
 @dataclass
 class GetDeleteSnapshotCopyGrantResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

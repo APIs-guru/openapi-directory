@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Subscription } from "./subscription";
+
 
 
 // SubscriptionDefinitionVersion
@@ -8,6 +8,6 @@ import { Subscription } from "./subscription";
  * Information about a subscription definition version.
 **/
 export class SubscriptionDefinitionVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Subscriptions", elemType: shared.Subscription })
+  @SpeakeasyMetadata({ data: "json, name=Subscriptions", elemType: Subscription })
   subscriptions?: Subscription[];
 }

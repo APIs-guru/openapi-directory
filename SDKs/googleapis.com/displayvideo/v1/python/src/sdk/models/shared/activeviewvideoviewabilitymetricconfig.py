@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ActiveViewVideoViewabilityMetricConfigMinimumDurationEnum(str, Enum):
     VIDEO_DURATION_UNSPECIFIED = "VIDEO_DURATION_UNSPECIFIED"
@@ -50,9 +52,13 @@ class ActiveViewVideoViewabilityMetricConfigMinimumVolumeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActiveViewVideoViewabilityMetricConfig:
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    minimum_duration: Optional[ActiveViewVideoViewabilityMetricConfigMinimumDurationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumDuration' }})
-    minimum_quartile: Optional[ActiveViewVideoViewabilityMetricConfigMinimumQuartileEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumQuartile' }})
-    minimum_viewability: Optional[ActiveViewVideoViewabilityMetricConfigMinimumViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumViewability' }})
-    minimum_volume: Optional[ActiveViewVideoViewabilityMetricConfigMinimumVolumeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumVolume' }})
+    r"""ActiveViewVideoViewabilityMetricConfig
+    Configuration for custom Active View video viewability metrics.
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    minimum_duration: Optional[ActiveViewVideoViewabilityMetricConfigMinimumDurationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumDuration') }})
+    minimum_quartile: Optional[ActiveViewVideoViewabilityMetricConfigMinimumQuartileEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumQuartile') }})
+    minimum_viewability: Optional[ActiveViewVideoViewabilityMetricConfigMinimumViewabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumViewability') }})
+    minimum_volume: Optional[ActiveViewVideoViewabilityMetricConfigMinimumVolumeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumVolume') }})
     

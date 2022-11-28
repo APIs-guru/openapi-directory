@@ -1,5 +1,7 @@
 package shared
 
+// CreateManagedShortLinkRequest
+// Request to create a managed Short Dynamic Link.
 type CreateManagedShortLinkRequest struct {
 	DynamicLinkInfo *DynamicLinkInfo `json:"dynamicLinkInfo,omitempty"`
 	LongDynamicLink *string          `json:"longDynamicLink,omitempty"`

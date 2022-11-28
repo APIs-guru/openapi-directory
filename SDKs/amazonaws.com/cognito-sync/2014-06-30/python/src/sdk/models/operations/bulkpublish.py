@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class BulkPublishPathParams:
-    identity_pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
+    identity_pool_id: str = field(metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class BulkPublishHeaders:
 
 @dataclass
 class BulkPublishRequest:
-    path_params: BulkPublishPathParams = field(default=None)
-    headers: BulkPublishHeaders = field(default=None)
+    headers: BulkPublishHeaders = field()
+    path_params: BulkPublishPathParams = field()
     
 
 @dataclass
 class BulkPublishResponse:
+    content_type: str = field()
+    status_code: int = field()
     already_streamed_exception: Optional[Any] = field(default=None)
     bulk_publish_response: Optional[shared.BulkPublishResponse] = field(default=None)
-    content_type: str = field(default=None)
     duplicate_request_exception: Optional[Any] = field(default=None)
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// DomainEntry
+// Describes a domain recordset entry.
 type DomainEntry struct {
 	ID      *string           `json:"id,omitempty"`
 	IsAlias *bool             `json:"isAlias,omitempty"`

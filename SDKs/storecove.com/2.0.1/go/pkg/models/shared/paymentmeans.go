@@ -22,6 +22,8 @@ const (
 	PaymentMeansCodeEnumSgPaynow             PaymentMeansCodeEnum = "sg_paynow"
 )
 
+// PaymentMeans
+// A PaymentMeans is a way to pay the invoice.
 type PaymentMeans struct {
 	Account     *string              `json:"account,omitempty"`
 	BrancheCode *string              `json:"branche_code,omitempty"`

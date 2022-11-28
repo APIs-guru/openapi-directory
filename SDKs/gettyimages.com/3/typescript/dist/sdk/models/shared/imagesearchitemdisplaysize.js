@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ImageSearchItemDisplaySize = /** @class */ (function (_super) {
     __extends(ImageSearchItemDisplaySize, _super);
     function ImageSearchItemDisplaySize() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=is_watermarked" }),
+        SpeakeasyMetadata({ data: "json, name=is_watermarked" }),
         __metadata("design:type", Boolean)
     ], ImageSearchItemDisplaySize.prototype, "isWatermarked", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ImageSearchItemDisplaySize.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], ImageSearchItemDisplaySize.prototype, "uri", void 0);
     return ImageSearchItemDisplaySize;

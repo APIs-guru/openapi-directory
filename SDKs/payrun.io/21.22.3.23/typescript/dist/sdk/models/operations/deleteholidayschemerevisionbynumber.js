@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteHolidaySchemeRevisionByNumberPathParams = /** @class */ (function (_super) {
     __extends(DeleteHolidaySchemeRevisionByNumberPathParams, _super);
@@ -30,15 +30,15 @@ var DeleteHolidaySchemeRevisionByNumberPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], DeleteHolidaySchemeRevisionByNumberPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=HolidaySchemeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=HolidaySchemeId" }),
         __metadata("design:type", String)
     ], DeleteHolidaySchemeRevisionByNumberPathParams.prototype, "holidaySchemeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=RevisionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=RevisionNumber" }),
         __metadata("design:type", String)
     ], DeleteHolidaySchemeRevisionByNumberPathParams.prototype, "revisionNumber", void 0);
     return DeleteHolidaySchemeRevisionByNumberPathParams;
@@ -50,11 +50,11 @@ var DeleteHolidaySchemeRevisionByNumberHeaders = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], DeleteHolidaySchemeRevisionByNumberHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], DeleteHolidaySchemeRevisionByNumberHeaders.prototype, "authorization", void 0);
     return DeleteHolidaySchemeRevisionByNumberHeaders;
@@ -66,11 +66,11 @@ var DeleteHolidaySchemeRevisionByNumberRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteHolidaySchemeRevisionByNumberPathParams)
     ], DeleteHolidaySchemeRevisionByNumberRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteHolidaySchemeRevisionByNumberHeaders)
     ], DeleteHolidaySchemeRevisionByNumberRequest.prototype, "headers", void 0);
     return DeleteHolidaySchemeRevisionByNumberRequest;
@@ -82,15 +82,15 @@ var DeleteHolidaySchemeRevisionByNumberResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteHolidaySchemeRevisionByNumberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], DeleteHolidaySchemeRevisionByNumberResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteHolidaySchemeRevisionByNumberResponse.prototype, "statusCode", void 0);
     return DeleteHolidaySchemeRevisionByNumberResponse;

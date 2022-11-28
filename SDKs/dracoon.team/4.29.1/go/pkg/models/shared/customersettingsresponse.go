@@ -1,5 +1,7 @@
 package shared
 
+// CustomerSettingsResponse
+// Customer settings
 type CustomerSettingsResponse struct {
 	HomeRoomParentID   *int64  `json:"homeRoomParentId,omitempty"`
 	HomeRoomParentName *string `json:"homeRoomParentName,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetTerminateInstanceInAutoScalingGroupActionEnum;
 (function (GetTerminateInstanceInAutoScalingGroupActionEnum) {
     GetTerminateInstanceInAutoScalingGroupActionEnum["TerminateInstanceInAutoScalingGroup"] = "TerminateInstanceInAutoScalingGroup";
@@ -37,19 +37,19 @@ var GetTerminateInstanceInAutoScalingGroupQueryParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=InstanceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceId" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupQueryParams.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ShouldDecrementDesiredCapacity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ShouldDecrementDesiredCapacity" }),
         __metadata("design:type", Boolean)
     ], GetTerminateInstanceInAutoScalingGroupQueryParams.prototype, "shouldDecrementDesiredCapacity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupQueryParams.prototype, "version", void 0);
     return GetTerminateInstanceInAutoScalingGroupQueryParams;
@@ -61,31 +61,31 @@ var GetTerminateInstanceInAutoScalingGroupHeaders = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetTerminateInstanceInAutoScalingGroupHeaders;
@@ -97,11 +97,11 @@ var GetTerminateInstanceInAutoScalingGroupRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTerminateInstanceInAutoScalingGroupQueryParams)
     ], GetTerminateInstanceInAutoScalingGroupRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTerminateInstanceInAutoScalingGroupHeaders)
     ], GetTerminateInstanceInAutoScalingGroupRequest.prototype, "headers", void 0);
     return GetTerminateInstanceInAutoScalingGroupRequest;
@@ -113,15 +113,15 @@ var GetTerminateInstanceInAutoScalingGroupResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetTerminateInstanceInAutoScalingGroupResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTerminateInstanceInAutoScalingGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTerminateInstanceInAutoScalingGroupResponse.prototype, "statusCode", void 0);
     return GetTerminateInstanceInAutoScalingGroupResponse;

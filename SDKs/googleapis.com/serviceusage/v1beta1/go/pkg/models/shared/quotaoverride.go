@@ -1,5 +1,7 @@
 package shared
 
+// QuotaOverride
+// A quota override
 type QuotaOverride struct {
 	AdminOverrideAncestor *string           `json:"adminOverrideAncestor,omitempty"`
 	Dimensions            map[string]string `json:"dimensions,omitempty"`

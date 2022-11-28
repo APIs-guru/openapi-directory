@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Membership } from "./membership";
 /**
  * The response message for MembershipsService.ListMemberships.

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ExportMetadataRequestDatabaseDumpTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Mysql = "MYSQL"
-,    Avro = "AVRO"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Mysql = "MYSQL",
+    Avro = "AVRO"
 }
 
 
@@ -12,12 +13,12 @@ export enum ExportMetadataRequestDatabaseDumpTypeEnum {
  * Request message for DataprocMetastore.ExportMetadata.
 **/
 export class ExportMetadataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseDumpType" })
+  @SpeakeasyMetadata({ data: "json, name=databaseDumpType" })
   databaseDumpType?: ExportMetadataRequestDatabaseDumpTypeEnum;
 
-  @Metadata({ data: "json, name=destinationGcsFolder" })
+  @SpeakeasyMetadata({ data: "json, name=destinationGcsFolder" })
   destinationGcsFolder?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

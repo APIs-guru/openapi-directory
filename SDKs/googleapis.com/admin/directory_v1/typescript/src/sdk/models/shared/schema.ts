@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaFieldSpec } from "./schemafieldspec";
+
 
 
 // Schema
@@ -8,21 +8,21 @@ import { SchemaFieldSpec } from "./schemafieldspec";
  * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
 **/
 export class Schema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=fields", elemType: shared.SchemaFieldSpec })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: SchemaFieldSpec })
   fields?: SchemaFieldSpec[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=schemaId" })
+  @SpeakeasyMetadata({ data: "json, name=schemaId" })
   schemaId?: string;
 
-  @Metadata({ data: "json, name=schemaName" })
+  @SpeakeasyMetadata({ data: "json, name=schemaName" })
   schemaName?: string;
 }

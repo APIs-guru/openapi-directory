@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetRestoreTableFromClusterSnapshotActionEnum {
     RestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
@@ -10,81 +11,81 @@ export enum GetRestoreTableFromClusterSnapshotVersionEnum {
 
 
 export class GetRestoreTableFromClusterSnapshotQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetRestoreTableFromClusterSnapshotActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EnableCaseSensitiveIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnableCaseSensitiveIdentifier" })
   enableCaseSensitiveIdentifier?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NewTableName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NewTableName" })
   newTableName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SnapshotIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SnapshotIdentifier" })
   snapshotIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SourceDatabaseName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceDatabaseName" })
   sourceDatabaseName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SourceSchemaName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceSchemaName" })
   sourceSchemaName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SourceTableName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceTableName" })
   sourceTableName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TargetDatabaseName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TargetDatabaseName" })
   targetDatabaseName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TargetSchemaName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TargetSchemaName" })
   targetSchemaName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetRestoreTableFromClusterSnapshotVersionEnum;
 }
 
 
 export class GetRestoreTableFromClusterSnapshotHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetRestoreTableFromClusterSnapshotRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRestoreTableFromClusterSnapshotQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetRestoreTableFromClusterSnapshotHeaders;
 }
 
 
 export class GetRestoreTableFromClusterSnapshotResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

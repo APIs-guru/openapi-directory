@@ -1,5 +1,7 @@
 package shared
 
+// DataSource
+// Describes a data source.
 type DataSource struct {
 	DataSourceArn            *string                             `json:"dataSourceArn,omitempty"`
 	Description              *string                             `json:"description,omitempty"`

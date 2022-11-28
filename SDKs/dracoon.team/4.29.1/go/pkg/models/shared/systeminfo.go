@@ -1,5 +1,7 @@
 package shared
 
+// SystemInfo
+// System information (default language and authentication methods)
 type SystemInfo struct {
 	AuthMethods           []AuthMethod `json:"authMethods"`
 	HideLoginInputFields  bool         `json:"hideLoginInputFields"`

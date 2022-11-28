@@ -7,6 +7,8 @@ const (
 	RecipientDeliveryTypeEnumAttachment RecipientDeliveryTypeEnum = "ATTACHMENT"
 )
 
+// Recipient
+// Represents a recipient.
 type Recipient struct {
 	DeliveryType *RecipientDeliveryTypeEnum `json:"deliveryType,omitempty"`
 	Email        *string                    `json:"email,omitempty"`

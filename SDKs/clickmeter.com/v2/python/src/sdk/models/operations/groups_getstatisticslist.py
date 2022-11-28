@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GroupsGetStatisticsListPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class GroupsGetStatisticsListGroupByEnum(str, Enum):
     WEEK = "week"
@@ -31,21 +32,21 @@ class GroupsGetStatisticsListTimeFrameEnum(str, Enum):
 
 @dataclass
 class GroupsGetStatisticsListQueryParams:
+    time_frame: GroupsGetStatisticsListTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     group_by: Optional[GroupsGetStatisticsListGroupByEnum] = field(default=None, metadata={'query_param': { 'field_name': 'groupBy', 'style': 'form', 'explode': True }})
-    time_frame: GroupsGetStatisticsListTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GroupsGetStatisticsListRequest:
-    path_params: GroupsGetStatisticsListPathParams = field(default=None)
-    query_params: GroupsGetStatisticsListQueryParams = field(default=None)
+    path_params: GroupsGetStatisticsListPathParams = field()
+    query_params: GroupsGetStatisticsListQueryParams = field()
     
 
 @dataclass
 class GroupsGetStatisticsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_dto_aggregated_aggregated_result_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreDtoAggregatedAggregatedResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

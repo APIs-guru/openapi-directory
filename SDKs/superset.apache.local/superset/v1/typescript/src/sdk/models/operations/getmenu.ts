@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMenuSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetMenuRequest extends SpeakeasyBase {
-  @Metadata()
-  security: GetMenuSecurity;
-}
-
-
 export class GetMenu200ApplicationJsonResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childs" })
+  @SpeakeasyMetadata({ data: "json, name=childs" })
   childs?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=icon" })
+  @SpeakeasyMetadata({ data: "json, name=icon" })
   icon?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class GetMenu200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result", elemType: operations.GetMenu200ApplicationJsonResult })
+  @SpeakeasyMetadata({ data: "json, name=result", elemType: GetMenu200ApplicationJsonResult })
   result?: GetMenu200ApplicationJsonResult[];
 }
 
 
 export class GetMenu401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetMenuRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: GetMenuSecurity;
+}
+
+
 export class GetMenuResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMenu200ApplicationJsonObject?: GetMenu200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMenu401ApplicationJsonObject?: GetMenu401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

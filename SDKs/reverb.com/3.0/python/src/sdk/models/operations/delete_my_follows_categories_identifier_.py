@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteMyFollowsCategoriesIdentifierPathParams:
-    identifier: str = field(default=None, metadata={'path_param': { 'field_name': 'identifier', 'style': 'simple', 'explode': False }})
+    identifier: str = field(metadata={'path_param': { 'field_name': 'identifier', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteMyFollowsCategoriesIdentifierSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteMyFollowsCategoriesIdentifierRequest:
-    path_params: DeleteMyFollowsCategoriesIdentifierPathParams = field(default=None)
-    security: DeleteMyFollowsCategoriesIdentifierSecurity = field(default=None)
+    path_params: DeleteMyFollowsCategoriesIdentifierPathParams = field()
+    security: DeleteMyFollowsCategoriesIdentifierSecurity = field()
     
 
 @dataclass
 class DeleteMyFollowsCategoriesIdentifierResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

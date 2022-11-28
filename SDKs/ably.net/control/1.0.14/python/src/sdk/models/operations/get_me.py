@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetMeSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetMeRequest:
-    security: GetMeSecurity = field(default=None)
+    security: GetMeSecurity = field()
     
 
 @dataclass
 class GetMeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     me: Optional[shared.Me] = field(default=None)
     

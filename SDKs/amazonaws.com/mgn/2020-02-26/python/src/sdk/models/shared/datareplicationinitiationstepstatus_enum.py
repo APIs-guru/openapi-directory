@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DataReplicationInitiationStepStatusEnum(str, Enum):
     NOT_STARTED = "NOT_STARTED"

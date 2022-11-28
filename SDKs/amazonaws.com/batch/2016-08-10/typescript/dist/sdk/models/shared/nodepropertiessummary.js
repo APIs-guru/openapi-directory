@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NodePropertiesSummary
 /**
  * An object representing the properties of a node that's associated with a multi-node parallel job.
@@ -33,15 +33,15 @@ var NodePropertiesSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=isMainNode" }),
+        SpeakeasyMetadata({ data: "json, name=isMainNode" }),
         __metadata("design:type", Boolean)
     ], NodePropertiesSummary.prototype, "isMainNode", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeIndex" }),
+        SpeakeasyMetadata({ data: "json, name=nodeIndex" }),
         __metadata("design:type", Number)
     ], NodePropertiesSummary.prototype, "nodeIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=numNodes" }),
+        SpeakeasyMetadata({ data: "json, name=numNodes" }),
         __metadata("design:type", Number)
     ], NodePropertiesSummary.prototype, "numNodes", void 0);
     return NodePropertiesSummary;

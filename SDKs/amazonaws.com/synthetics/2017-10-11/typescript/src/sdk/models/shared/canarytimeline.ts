@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CanaryTimeline
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This structure contains information about when the canary was created and modified.
 **/
 export class CanaryTimeline extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Created" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=LastStarted" })
+  @SpeakeasyMetadata({ data: "json, name=LastStarted" })
   lastStarted?: Date;
 
-  @Metadata({ data: "json, name=LastStopped" })
+  @SpeakeasyMetadata({ data: "json, name=LastStopped" })
   lastStopped?: Date;
 }

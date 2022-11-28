@@ -1,11 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class CreateOrganizationAdaptivePolicyACLPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 class CreateOrganizationAdaptivePolicyACLRequestBodyIPVersionEnum(str, Enum):
     ANY = "any"
@@ -26,30 +28,30 @@ class CreateOrganizationAdaptivePolicyACLRequestBodyRulesProtocolEnum(str, Enum)
 @dataclass_json
 @dataclass
 class CreateOrganizationAdaptivePolicyACLRequestBodyRules:
-    dst_port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dstPort' }})
-    policy: CreateOrganizationAdaptivePolicyACLRequestBodyRulesPolicyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
-    protocol: CreateOrganizationAdaptivePolicyACLRequestBodyRulesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
-    src_port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'srcPort' }})
+    policy: CreateOrganizationAdaptivePolicyACLRequestBodyRulesPolicyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    protocol: CreateOrganizationAdaptivePolicyACLRequestBodyRulesProtocolEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
+    dst_port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dstPort') }})
+    src_port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('srcPort') }})
     
 
 @dataclass_json
 @dataclass
 class CreateOrganizationAdaptivePolicyACLRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    ip_version: CreateOrganizationAdaptivePolicyACLRequestBodyIPVersionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipVersion' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rules: List[CreateOrganizationAdaptivePolicyACLRequestBodyRules] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    ip_version: CreateOrganizationAdaptivePolicyACLRequestBodyIPVersionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipVersion') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    rules: List[CreateOrganizationAdaptivePolicyACLRequestBodyRules] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rules') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 
 @dataclass
 class CreateOrganizationAdaptivePolicyACLRequest:
-    path_params: CreateOrganizationAdaptivePolicyACLPathParams = field(default=None)
-    request: CreateOrganizationAdaptivePolicyACLRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: CreateOrganizationAdaptivePolicyACLPathParams = field()
+    request: CreateOrganizationAdaptivePolicyACLRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateOrganizationAdaptivePolicyACLResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_organization_adaptive_policy_acl_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

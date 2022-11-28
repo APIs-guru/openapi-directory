@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrivateIp } from "./privateip";
 import { SecurityGroup } from "./securitygroup";
+
 
 
 // NetworkInterface
@@ -9,33 +9,33 @@ import { SecurityGroup } from "./securitygroup";
  * Contains information about the network interfaces interacting with an EC2 instance. This data type is used as one of the elements of the <a>AssetAttributes</a> data type.
 **/
 export class NetworkInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipv6Addresses" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6Addresses" })
   ipv6Addresses?: string[];
 
-  @Metadata({ data: "json, name=networkInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaceId" })
   networkInterfaceId?: string;
 
-  @Metadata({ data: "json, name=privateDnsName" })
+  @SpeakeasyMetadata({ data: "json, name=privateDnsName" })
   privateDnsName?: string;
 
-  @Metadata({ data: "json, name=privateIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=privateIpAddress" })
   privateIpAddress?: string;
 
-  @Metadata({ data: "json, name=privateIpAddresses", elemType: shared.PrivateIp })
+  @SpeakeasyMetadata({ data: "json, name=privateIpAddresses", elemType: PrivateIp })
   privateIpAddresses?: PrivateIp[];
 
-  @Metadata({ data: "json, name=publicDnsName" })
+  @SpeakeasyMetadata({ data: "json, name=publicDnsName" })
   publicDnsName?: string;
 
-  @Metadata({ data: "json, name=publicIp" })
+  @SpeakeasyMetadata({ data: "json, name=publicIp" })
   publicIp?: string;
 
-  @Metadata({ data: "json, name=securityGroups", elemType: shared.SecurityGroup })
+  @SpeakeasyMetadata({ data: "json, name=securityGroups", elemType: SecurityGroup })
   securityGroups?: SecurityGroup[];
 
-  @Metadata({ data: "json, name=subnetId" })
+  @SpeakeasyMetadata({ data: "json, name=subnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=vpcId" })
+  @SpeakeasyMetadata({ data: "json, name=vpcId" })
   vpcId?: string;
 }

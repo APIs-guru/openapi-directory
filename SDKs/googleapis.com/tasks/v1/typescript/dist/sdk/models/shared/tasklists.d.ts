@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TaskList } from "./tasklist";
 export declare class TaskLists extends SpeakeasyBase {
     etag?: string;

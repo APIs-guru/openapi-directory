@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class TransferMessageSeverityEnum(str, Enum):
     MESSAGE_SEVERITY_UNSPECIFIED = "MESSAGE_SEVERITY_UNSPECIFIED"
@@ -12,7 +14,11 @@ class TransferMessageSeverityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TransferMessage:
-    message_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messageText' }})
-    message_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messageTime' }})
-    severity: Optional[TransferMessageSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
+    r"""TransferMessage
+    Represents a user facing message for a particular data transfer run.
+    """
+    
+    message_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messageText') }})
+    message_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messageTime') }})
+    severity: Optional[TransferMessageSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
     

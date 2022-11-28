@@ -1,6 +1,7 @@
 package shared
 
-type GoogleCloudApigeeV1APISecurityConfig struct {
-	Enabled   *bool   `json:"enabled,omitempty"`
-	ExpiresAt *string `json:"expiresAt,omitempty"`
+// GoogleCloudApigeeV1APISecurityConfigInput
+// Configurations of the API Security add-on.
+type GoogleCloudApigeeV1APISecurityConfigInput struct {
+	Enabled *bool `json:"enabled,omitempty"`
 }

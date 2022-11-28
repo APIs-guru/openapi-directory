@@ -4,11 +4,6 @@ type GetAccountsAccountTradesPathParams struct {
 	Account string `pathParam:"style=simple,explode=false,name=account"`
 }
 
-type GetAccountsAccountTradesRequest struct {
-	PathParams GetAccountsAccountTradesPathParams
-	Request    *string `request:"mediaType=application/json"`
-}
-
 type GetAccountsAccountTrades200ApplicationJSONSideEnum string
 
 const (
@@ -36,6 +31,11 @@ type GetAccountsAccountTrades200ApplicationJSON struct {
 	Ticker             *string                                             `json:"Ticker,omitempty"`
 	TradePrice         *float64                                            `json:"TradePrice,omitempty"`
 	TradeSize          *float64                                            `json:"TradeSize,omitempty"`
+}
+
+type GetAccountsAccountTradesRequest struct {
+	PathParams GetAccountsAccountTradesPathParams
+	Request    *string `request:"mediaType=application/json"`
 }
 
 type GetAccountsAccountTradesResponse struct {

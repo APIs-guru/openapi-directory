@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteDedicatedIPPoolPathParams:
-    pool_name: str = field(default=None, metadata={'path_param': { 'field_name': 'PoolName', 'style': 'simple', 'explode': False }})
+    pool_name: str = field(metadata={'path_param': { 'field_name': 'PoolName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteDedicatedIPPoolHeaders:
 
 @dataclass
 class DeleteDedicatedIPPoolRequest:
-    path_params: DeleteDedicatedIPPoolPathParams = field(default=None)
-    headers: DeleteDedicatedIPPoolHeaders = field(default=None)
+    headers: DeleteDedicatedIPPoolHeaders = field()
+    path_params: DeleteDedicatedIPPoolPathParams = field()
     
 
 @dataclass
 class DeleteDedicatedIPPoolResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_dedicated_ip_pool_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

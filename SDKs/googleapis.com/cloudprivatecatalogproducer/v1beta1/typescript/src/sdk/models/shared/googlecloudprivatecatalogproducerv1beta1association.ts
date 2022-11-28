@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudPrivatecatalogproducerV1beta1Association
@@ -28,12 +29,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * google.cloud.v1beta1.PrivateCatalog.SearchCatalogs action.
 **/
 export class GoogleCloudPrivatecatalogproducerV1beta1Association extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 }

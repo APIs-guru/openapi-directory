@@ -5,7 +5,7 @@ import (
 )
 
 type ExtrasGraphsCreateRequest struct {
-	Request shared.Graph `request:"mediaType=application/json"`
+	Request shared.GraphInput `request:"mediaType=application/json"`
 }
 
 type ExtrasGraphsCreateResponse struct {

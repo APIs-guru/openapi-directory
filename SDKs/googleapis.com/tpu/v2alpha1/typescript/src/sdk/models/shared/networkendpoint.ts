@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessConfig } from "./accessconfig";
+
 
 
 // NetworkEndpoint
@@ -7,12 +8,12 @@ import { AccessConfig } from "./accessconfig";
  * A network endpoint over which a TPU worker can be reached.
 **/
 export class NetworkEndpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessConfig" })
+  @SpeakeasyMetadata({ data: "json, name=accessConfig" })
   accessConfig?: AccessConfig;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 }

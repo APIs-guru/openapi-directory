@@ -8,14 +8,14 @@ type ReserveRequestBody struct {
 	Token         *string `json:"token,omitempty"`
 }
 
-type ReserveRequest struct {
-	Request ReserveRequestBody `request:"mediaType=application/json"`
-}
-
 type Reserve201ApplicationJSON struct {
 	Command map[string]interface{} `json:"command,omitempty"`
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
+}
+
+type ReserveRequest struct {
+	Request ReserveRequestBody `request:"mediaType=application/json"`
 }
 
 type ReserveResponse struct {

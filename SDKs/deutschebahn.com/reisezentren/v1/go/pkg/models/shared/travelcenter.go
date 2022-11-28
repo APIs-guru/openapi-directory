@@ -1,5 +1,7 @@
 package shared
 
+// TravelCenterOpeningTimes
+// Opening times of the travel center, ordered by week day
 type TravelCenterOpeningTimes struct {
 	Fri []string `json:"fri,omitempty"`
 	Mon []string `json:"mon,omitempty"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DiscussionAPIGetFoldersFieldsEnum(str, Enum):
@@ -15,13 +16,13 @@ class DiscussionAPIGetFoldersQueryParams:
 
 @dataclass
 class DiscussionAPIGetFoldersRequest:
-    query_params: DiscussionAPIGetFoldersQueryParams = field(default=None)
+    query_params: DiscussionAPIGetFoldersQueryParams = field()
     
 
 @dataclass
 class DiscussionAPIGetFoldersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     discussion_folder_contracts: Optional[List[shared.DiscussionFolderContract]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,10 +4,6 @@ type RetrieveAUserPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type RetrieveAUserRequest struct {
-	PathParams RetrieveAUserPathParams
-}
-
 type RetrieveAUser200ApplicationJSONPerson struct {
 	Email *string `json:"email,omitempty"`
 }
@@ -19,6 +15,10 @@ type RetrieveAUser200ApplicationJSON struct {
 	Object    *string                                `json:"object,omitempty"`
 	Person    *RetrieveAUser200ApplicationJSONPerson `json:"person,omitempty"`
 	Type      *string                                `json:"type,omitempty"`
+}
+
+type RetrieveAUserRequest struct {
+	PathParams RetrieveAUserPathParams
 }
 
 type RetrieveAUserResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SecretsManagerSecretResourceData
 /**
  * Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.
@@ -33,11 +33,11 @@ var SecretsManagerSecretResourceData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], SecretsManagerSecretResourceData.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AdditionalStagingLabelsToDownload" }),
+        SpeakeasyMetadata({ data: "json, name=AdditionalStagingLabelsToDownload" }),
         __metadata("design:type", Array)
     ], SecretsManagerSecretResourceData.prototype, "additionalStagingLabelsToDownload", void 0);
     return SecretsManagerSecretResourceData;

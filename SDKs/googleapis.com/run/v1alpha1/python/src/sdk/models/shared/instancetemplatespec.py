@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import instancespec
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InstanceTemplateSpec:
-    spec: Optional[instancespec.InstanceSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
+    r"""InstanceTemplateSpec
+    InstanceTemplateSpec describes the data an instance should have when created from a template.
+    """
+    
+    spec: Optional[InstanceSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
     

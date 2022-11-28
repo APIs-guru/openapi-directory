@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // YumSettings
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Yum patching is performed by executing `yum update`. Additional options can be set to control how this is executed. Note that not all settings are supported on all platforms.
 **/
 export class YumSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludes" })
+  @SpeakeasyMetadata({ data: "json, name=excludes" })
   excludes?: string[];
 
-  @Metadata({ data: "json, name=exclusivePackages" })
+  @SpeakeasyMetadata({ data: "json, name=exclusivePackages" })
   exclusivePackages?: string[];
 
-  @Metadata({ data: "json, name=minimal" })
+  @SpeakeasyMetadata({ data: "json, name=minimal" })
   minimal?: boolean;
 
-  @Metadata({ data: "json, name=security" })
+  @SpeakeasyMetadata({ data: "json, name=security" })
   security?: boolean;
 }

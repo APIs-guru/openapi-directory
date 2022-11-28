@@ -32,6 +32,8 @@ const (
 	EventPrimaryEventTypeEnumUpload           EventPrimaryEventTypeEnum = "upload"
 )
 
+// Event
+// Represents the changes associated with an action taken by a user.
 type Event struct {
 	AdditionalEventTypes []EventAdditionalEventTypesEnum `json:"additionalEventTypes,omitempty"`
 	EventTimeMillis      *string                         `json:"eventTimeMillis,omitempty"`

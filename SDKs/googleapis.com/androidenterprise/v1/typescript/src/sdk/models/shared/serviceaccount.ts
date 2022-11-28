@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccountKey } from "./serviceaccountkey";
+
 
 
 // ServiceAccount
@@ -7,9 +8,9 @@ import { ServiceAccountKey } from "./serviceaccountkey";
  * A service account identity, including the name and credentials that can be used to authenticate as the service account.
 **/
 export class ServiceAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: ServiceAccountKey;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -17,12 +17,12 @@ type PostPortfolioOptimizationMinimumVarianceRequestBody struct {
 	Constraints            *PostPortfolioOptimizationMinimumVarianceRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
-type PostPortfolioOptimizationMinimumVarianceRequest struct {
-	Request PostPortfolioOptimizationMinimumVarianceRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationMinimumVariance200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationMinimumVarianceRequest struct {
+	Request PostPortfolioOptimizationMinimumVarianceRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMinimumVarianceResponse struct {

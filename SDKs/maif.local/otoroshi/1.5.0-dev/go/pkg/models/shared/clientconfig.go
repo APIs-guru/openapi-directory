@@ -1,5 +1,7 @@
 package shared
 
+// ClientConfig
+// The configuration of the circuit breaker for a service descriptor
 type ClientConfig struct {
 	BackoffFactor     int32 `json:"backoffFactor"`
 	CallTimeout       int32 `json:"callTimeout"`

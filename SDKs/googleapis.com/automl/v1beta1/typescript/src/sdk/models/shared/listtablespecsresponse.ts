@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableSpec } from "./tablespec";
+
 
 
 // ListTableSpecsResponse
@@ -8,9 +8,9 @@ import { TableSpec } from "./tablespec";
  * Response message for AutoMl.ListTableSpecs.
 **/
 export class ListTableSpecsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tableSpecs", elemType: shared.TableSpec })
+  @SpeakeasyMetadata({ data: "json, name=tableSpecs", elemType: TableSpec })
   tableSpecs?: TableSpec[];
 }

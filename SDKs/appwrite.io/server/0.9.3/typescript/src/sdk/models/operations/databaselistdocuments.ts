@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DatabaseListDocumentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectionId" })
   collectionId: string;
 }
 
 
 export class DatabaseListDocumentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filters" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filters" })
   filters?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderCast" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderCast" })
   orderCast?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderField" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderField" })
   orderField?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderType" })
   orderType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 }
 
 
 export class DatabaseListDocumentsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   jwt: shared.SchemeJwt;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   key: shared.SchemeKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class DatabaseListDocumentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DatabaseListDocumentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DatabaseListDocumentsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DatabaseListDocumentsSecurity;
 }
 
 
 export class DatabaseListDocumentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   documentList?: shared.DocumentList;
 }

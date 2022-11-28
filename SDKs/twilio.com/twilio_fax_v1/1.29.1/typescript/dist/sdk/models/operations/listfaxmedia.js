@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export var LISTFAXMEDIA_SERVERS = [
+export var ListFaxMediaServerList = [
     "https://fax.twilio.com",
 ];
 var ListFaxMediaPathParams = /** @class */ (function (_super) {
@@ -33,7 +33,7 @@ var ListFaxMediaPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" }),
         __metadata("design:type", String)
     ], ListFaxMediaPathParams.prototype, "faxSid", void 0);
     return ListFaxMediaPathParams;
@@ -45,7 +45,7 @@ var ListFaxMediaQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PageSize" }),
         __metadata("design:type", Number)
     ], ListFaxMediaQueryParams.prototype, "pageSize", void 0);
     return ListFaxMediaQueryParams;
@@ -57,67 +57,43 @@ var ListFaxMediaSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeAccountSidAuthToken)
     ], ListFaxMediaSecurity.prototype, "accountSidAuthToken", void 0);
     return ListFaxMediaSecurity;
 }(SpeakeasyBase));
 export { ListFaxMediaSecurity };
-var ListFaxMediaRequest = /** @class */ (function (_super) {
-    __extends(ListFaxMediaRequest, _super);
-    function ListFaxMediaRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", String)
-    ], ListFaxMediaRequest.prototype, "serverUrl", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", ListFaxMediaPathParams)
-    ], ListFaxMediaRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", ListFaxMediaQueryParams)
-    ], ListFaxMediaRequest.prototype, "queryParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", ListFaxMediaSecurity)
-    ], ListFaxMediaRequest.prototype, "security", void 0);
-    return ListFaxMediaRequest;
-}(SpeakeasyBase));
-export { ListFaxMediaRequest };
 var ListFaxMediaListFaxMediaResponseMeta = /** @class */ (function (_super) {
     __extends(ListFaxMediaListFaxMediaResponseMeta, _super);
     function ListFaxMediaListFaxMediaResponseMeta() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=first_page_url" }),
+        SpeakeasyMetadata({ data: "json, name=first_page_url" }),
         __metadata("design:type", String)
     ], ListFaxMediaListFaxMediaResponseMeta.prototype, "firstPageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], ListFaxMediaListFaxMediaResponseMeta.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=next_page_url" }),
+        SpeakeasyMetadata({ data: "json, name=next_page_url" }),
         __metadata("design:type", String)
     ], ListFaxMediaListFaxMediaResponseMeta.prototype, "nextPageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=page" }),
+        SpeakeasyMetadata({ data: "json, name=page" }),
         __metadata("design:type", Number)
     ], ListFaxMediaListFaxMediaResponseMeta.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "json, name=page_size" }),
+        SpeakeasyMetadata({ data: "json, name=page_size" }),
         __metadata("design:type", Number)
     ], ListFaxMediaListFaxMediaResponseMeta.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=previous_page_url" }),
+        SpeakeasyMetadata({ data: "json, name=previous_page_url" }),
         __metadata("design:type", String)
     ], ListFaxMediaListFaxMediaResponseMeta.prototype, "previousPageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ListFaxMediaListFaxMediaResponseMeta.prototype, "url", void 0);
     return ListFaxMediaListFaxMediaResponseMeta;
@@ -129,31 +105,55 @@ var ListFaxMediaListFaxMediaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=media", elemType: shared.FaxV1FaxFaxMedia }),
+        SpeakeasyMetadata({ data: "json, name=media", elemType: shared.FaxV1FaxFaxMedia }),
         __metadata("design:type", Array)
     ], ListFaxMediaListFaxMediaResponse.prototype, "media", void 0);
     __decorate([
-        Metadata({ data: "json, name=meta" }),
+        SpeakeasyMetadata({ data: "json, name=meta" }),
         __metadata("design:type", ListFaxMediaListFaxMediaResponseMeta)
     ], ListFaxMediaListFaxMediaResponse.prototype, "meta", void 0);
     return ListFaxMediaListFaxMediaResponse;
 }(SpeakeasyBase));
 export { ListFaxMediaListFaxMediaResponse };
+var ListFaxMediaRequest = /** @class */ (function (_super) {
+    __extends(ListFaxMediaRequest, _super);
+    function ListFaxMediaRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], ListFaxMediaRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ListFaxMediaPathParams)
+    ], ListFaxMediaRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ListFaxMediaQueryParams)
+    ], ListFaxMediaRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ListFaxMediaSecurity)
+    ], ListFaxMediaRequest.prototype, "security", void 0);
+    return ListFaxMediaRequest;
+}(SpeakeasyBase));
+export { ListFaxMediaRequest };
 var ListFaxMediaResponse = /** @class */ (function (_super) {
     __extends(ListFaxMediaResponse, _super);
     function ListFaxMediaResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListFaxMediaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListFaxMediaListFaxMediaResponse)
     ], ListFaxMediaResponse.prototype, "listFaxMediaResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListFaxMediaResponse.prototype, "statusCode", void 0);
     return ListFaxMediaResponse;

@@ -44,7 +44,7 @@ type CloudidentityGroupsCreateSecurity struct {
 
 type CloudidentityGroupsCreateRequest struct {
 	QueryParams CloudidentityGroupsCreateQueryParams
-	Request     *shared.Group `request:"mediaType=application/json"`
+	Request     *shared.GroupInput `request:"mediaType=application/json"`
 	Security    CloudidentityGroupsCreateSecurity
 }
 

@@ -4,6 +4,13 @@ import (
 	"time"
 )
 
+type FullItemStateEnum string
+
+const (
+	FullItemStateEnumArchived FullItemStateEnum = "ARCHIVED"
+	FullItemStateEnumDeleted  FullItemStateEnum = "DELETED"
+)
+
 type FullItemCategoryEnum string
 
 const (
@@ -34,13 +41,6 @@ type FullItemSections struct {
 	Label *string `json:"label,omitempty"`
 }
 
-type FullItemStateEnum string
-
-const (
-	FullItemStateEnumArchived FullItemStateEnum = "ARCHIVED"
-	FullItemStateEnumDeleted  FullItemStateEnum = "DELETED"
-)
-
 type FullItemUrls struct {
 	Href    string `json:"href"`
 	Primary *bool  `json:"primary,omitempty"`
@@ -66,4 +66,18 @@ type FullItem struct {
 	Urls         []FullItemUrls       `json:"urls,omitempty"`
 	Vault        FullItemVault        `json:"vault"`
 	Version      *int64               `json:"version,omitempty"`
+}
+
+type FullItemInput struct {
+	Category FullItemCategoryEnum `json:"category"`
+	Favorite *bool                `json:"favorite,omitempty"`
+	Fields   []FieldInput         `json:"fields,omitempty"`
+	Files    []FileInput          `json:"files,omitempty"`
+	ID       *string              `json:"id,omitempty"`
+	Sections []FullItemSections   `json:"sections,omitempty"`
+	Tags     []string             `json:"tags,omitempty"`
+	Title    *string              `json:"title,omitempty"`
+	Urls     []FullItemUrls       `json:"urls,omitempty"`
+	Vault    FullItemVault        `json:"vault"`
+	Version  *int64               `json:"version,omitempty"`
 }

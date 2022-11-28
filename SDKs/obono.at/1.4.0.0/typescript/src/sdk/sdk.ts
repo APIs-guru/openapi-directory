@@ -1,19 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromResponse} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://obono.at/api/v1",
+export const ServerList = [
+	"https://obono.at/api/v1",
 ] as const;
 
 export function WithServerURL(
@@ -24,13 +20,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -39,41 +35,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // GetAuth - Request a JWT access token using your obono username and password.
-  GetAuth(
+  /**
+   * getAuth - Request a JWT access token using your obono username and password.
+  **/
+  getAuth(
     req: operations.GetAuthRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAuthResponse> {
@@ -81,22 +84,24 @@ export class SDK {
       req = new operations.GetAuthRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/auth";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAuthResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAuthResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.authResult = httpRes?.data;
             }
             break;
@@ -108,8 +113,10 @@ export class SDK {
   }
 
   
-  // GetBelegeBelegUuid - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
-  GetBelegeBelegUuid(
+  /**
+   * getBelegeBelegUuid - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
+  **/
+  getBelegeBelegUuid(
     req: operations.GetBelegeBelegUuidRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBelegeBelegUuidResponse> {
@@ -117,27 +124,27 @@ export class SDK {
       req = new operations.GetBelegeBelegUuidRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/belege/{belegUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.beleg = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -147,7 +154,7 @@ export class SDK {
   }
 
   
-  GetExportCsvRegistrierkassenRegistrierkasseUuidBelege(
+  getExportCsvRegistrierkassenRegistrierkasseUuidBelege(
     req: operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeResponse> {
@@ -155,11 +162,12 @@ export class SDK {
       req = new operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/csv/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -168,16 +176,17 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -187,7 +196,7 @@ export class SDK {
   }
 
   
-  GetExportDep131RegistrierkassenRegistrierkasseUuidBelege(
+  getExportDep131RegistrierkassenRegistrierkasseUuidBelege(
     req: operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeResponse> {
@@ -195,11 +204,12 @@ export class SDK {
       req = new operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/dep131/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -208,16 +218,17 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -227,7 +238,7 @@ export class SDK {
   }
 
   
-  GetExportDep7RegistrierkassenRegistrierkasseUuidBelege(
+  getExportDep7RegistrierkassenRegistrierkasseUuidBelege(
     req: operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeResponse> {
@@ -235,11 +246,12 @@ export class SDK {
       req = new operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/dep7/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -248,16 +260,17 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -267,7 +280,7 @@ export class SDK {
   }
 
   
-  GetExportGobdRegistrierkassenRegistrierkasseUuid(
+  getExportGobdRegistrierkassenRegistrierkasseUuid(
     req: operations.GetExportGobdRegistrierkassenRegistrierkasseUuidRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportGobdRegistrierkassenRegistrierkasseUuidResponse> {
@@ -275,11 +288,12 @@ export class SDK {
       req = new operations.GetExportGobdRegistrierkassenRegistrierkasseUuidRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/gobd/registrierkassen/{registrierkasseUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -288,16 +302,17 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportGobdRegistrierkassenRegistrierkasseUuidResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportGobdRegistrierkassenRegistrierkasseUuidResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -307,7 +322,7 @@ export class SDK {
   }
 
   
-  GetExportHtmlBelegeBelegUuid(
+  getExportHtmlBelegeBelegUuid(
     req: operations.GetExportHtmlBelegeBelegUuidRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportHtmlBelegeBelegUuidResponse> {
@@ -315,22 +330,22 @@ export class SDK {
       req = new operations.GetExportHtmlBelegeBelegUuidRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/html/belege/{belegUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportHtmlBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportHtmlBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -340,7 +355,7 @@ export class SDK {
   }
 
   
-  GetExportPdfBelegeBelegUuid(
+  getExportPdfBelegeBelegUuid(
     req: operations.GetExportPdfBelegeBelegUuidRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportPdfBelegeBelegUuidResponse> {
@@ -348,22 +363,22 @@ export class SDK {
       req = new operations.GetExportPdfBelegeBelegUuidRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/pdf/belege/{belegUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportPdfBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportPdfBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -373,7 +388,7 @@ export class SDK {
   }
 
   
-  GetExportQrBelegeBelegUuid(
+  getExportQrBelegeBelegUuid(
     req: operations.GetExportQrBelegeBelegUuidRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportQrBelegeBelegUuidResponse> {
@@ -381,22 +396,22 @@ export class SDK {
       req = new operations.GetExportQrBelegeBelegUuidRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/qr/belege/{belegUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportQrBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportQrBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -406,7 +421,7 @@ export class SDK {
   }
 
   
-  GetExportThermalPrintBelegeBelegUuid(
+  getExportThermalPrintBelegeBelegUuid(
     req: operations.GetExportThermalPrintBelegeBelegUuidRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportThermalPrintBelegeBelegUuidResponse> {
@@ -414,12 +429,11 @@ export class SDK {
       req = new operations.GetExportThermalPrintBelegeBelegUuidRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/thermal-print/belege/{belegUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -428,16 +442,17 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportThermalPrintBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportThermalPrintBelegeBelegUuidResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -447,7 +462,7 @@ export class SDK {
   }
 
   
-  GetExportXlsRegistrierkassenRegistrierkasseUuidBelege(
+  getExportXlsRegistrierkassenRegistrierkasseUuidBelege(
     req: operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeResponse> {
@@ -455,11 +470,12 @@ export class SDK {
       req = new operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/export/xls/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -468,16 +484,17 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -487,8 +504,10 @@ export class SDK {
   }
 
   
-  // AddBeleg - Signs a receipt and stores it in the "Datenerfassungsprotokoll".
-  AddBeleg(
+  /**
+   * addBeleg - Signs a receipt and stores it in the "Datenerfassungsprotokoll".
+  **/
+  addBeleg(
     req: operations.AddBelegRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddBelegResponse> {
@@ -496,51 +515,51 @@ export class SDK {
       req = new operations.AddBelegRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddBelegResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.AddBelegResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 409:
+          case httpRes?.status == 409:
             break;
-          case 415:
+          case httpRes?.status == 415:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
         }
 
@@ -550,8 +569,10 @@ export class SDK {
   }
 
   
-  // CreateAbschluss - Generates an `Abschlussbeleg`.
-  CreateAbschluss(
+  /**
+   * createAbschluss - Generates an `Abschlussbeleg`.
+  **/
+  createAbschluss(
     req: operations.CreateAbschlussRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateAbschlussResponse> {
@@ -559,39 +580,39 @@ export class SDK {
       req = new operations.CreateAbschlussRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/abschluss", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateAbschlussResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CreateAbschlussResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -601,8 +622,10 @@ export class SDK {
   }
 
   
-  // GetBeleg - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
-  GetBeleg(
+  /**
+   * getBeleg - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
+  **/
+  getBeleg(
     req: operations.GetBelegRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBelegResponse> {
@@ -610,26 +633,28 @@ export class SDK {
       req = new operations.GetBelegRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBelegResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBelegResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.beleg = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -639,8 +664,10 @@ export class SDK {
   }
 
   
-  // GetBelege - Retrieves the `Beleg` collection from the "Datenerfassungsprotokoll".
-  GetBelege(
+  /**
+   * getBelege - Retrieves the `Beleg` collection from the "Datenerfassungsprotokoll".
+  **/
+  getBelege(
     req: operations.GetBelegeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBelegeResponse> {
@@ -648,11 +675,12 @@ export class SDK {
       req = new operations.GetBelegeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -661,17 +689,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBelegeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.belege = httpRes?.data;
             }
             break;
@@ -683,8 +712,10 @@ export class SDK {
   }
 
   
-  // GetDep - Generates a DEP file.
-  GetDep(
+  /**
+   * getDep - Generates a DEP file.
+  **/
+  getDep(
     req: operations.GetDepRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDepResponse> {
@@ -692,21 +723,23 @@ export class SDK {
       req = new operations.GetDepRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/dep", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDepResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetDepResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -716,8 +749,10 @@ export class SDK {
   }
 
   
-  // GetMonatsbelege - Returns a list of `Monatsbelege`.
-  GetMonatsbelege(
+  /**
+   * getMonatsbelege - Returns a list of `Monatsbelege`.
+  **/
+  getMonatsbelege(
     req: operations.GetMonatsbelegeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMonatsbelegeResponse> {
@@ -725,11 +760,12 @@ export class SDK {
       req = new operations.GetMonatsbelegeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/monatsbelege", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -738,17 +774,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMonatsbelegeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMonatsbelegeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.monatsbelegs = httpRes?.data;
             }
             break;
@@ -760,8 +797,10 @@ export class SDK {
   }
 
   
-  // GetRegistrierkasse - Returns information about a particular `Registrierkasse`.
-  GetRegistrierkasse(
+  /**
+   * getRegistrierkasse - Returns information about a particular `Registrierkasse`.
+  **/
+  getRegistrierkasse(
     req: operations.GetRegistrierkasseRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRegistrierkasseResponse> {
@@ -769,26 +808,28 @@ export class SDK {
       req = new operations.GetRegistrierkasseRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRegistrierkasseResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRegistrierkasseResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.registrierkasse = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProjectUsernameProjectCheckoutKeyFingerprintPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fingerprint" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fingerprint" })
   fingerprint: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
 export class GetProjectUsernameProjectCheckoutKeyFingerprintRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetProjectUsernameProjectCheckoutKeyFingerprintPathParams;
 }
 
 
 export class GetProjectUsernameProjectCheckoutKeyFingerprintResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   key?: shared.Key;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

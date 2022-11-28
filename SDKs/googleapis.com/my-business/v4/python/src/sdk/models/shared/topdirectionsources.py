@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import regioncount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TopDirectionSources:
-    day_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayCount' }})
-    region_counts: Optional[List[regioncount.RegionCount]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionCounts' }})
+    r"""TopDirectionSources
+    Top regions where driving-direction requests originated from.
+    """
+    
+    day_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayCount') }})
+    region_counts: Optional[List[RegionCount]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionCounts') }})
     

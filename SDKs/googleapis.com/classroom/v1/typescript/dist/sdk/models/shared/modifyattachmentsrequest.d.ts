@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
 /**
  * Request to modify the attachments of a student submission.

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiveChatMessageAuthorDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=channelUrl" })
+  @SpeakeasyMetadata({ data: "json, name=channelUrl" })
   channelUrl?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=isChatModerator" })
+  @SpeakeasyMetadata({ data: "json, name=isChatModerator" })
   isChatModerator?: boolean;
 
-  @Metadata({ data: "json, name=isChatOwner" })
+  @SpeakeasyMetadata({ data: "json, name=isChatOwner" })
   isChatOwner?: boolean;
 
-  @Metadata({ data: "json, name=isChatSponsor" })
+  @SpeakeasyMetadata({ data: "json, name=isChatSponsor" })
   isChatSponsor?: boolean;
 
-  @Metadata({ data: "json, name=isVerified" })
+  @SpeakeasyMetadata({ data: "json, name=isVerified" })
   isVerified?: boolean;
 
-  @Metadata({ data: "json, name=profileImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=profileImageUrl" })
   profileImageUrl?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Identity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The unique identifier of the update.
 **/
 export class Identity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: number;
 
-  @Metadata({ data: "json, name=updateId" })
+  @SpeakeasyMetadata({ data: "json, name=updateId" })
   updateId?: string;
 }

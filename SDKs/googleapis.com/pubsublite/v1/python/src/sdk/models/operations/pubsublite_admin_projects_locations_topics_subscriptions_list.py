@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsSubscriptionsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class PubsubliteAdminProjectsLocationsTopicsSubscriptionsListQueryParams:
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsSubscriptionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsSubscriptionsListRequest:
-    path_params: PubsubliteAdminProjectsLocationsTopicsSubscriptionsListPathParams = field(default=None)
-    query_params: PubsubliteAdminProjectsLocationsTopicsSubscriptionsListQueryParams = field(default=None)
-    security: PubsubliteAdminProjectsLocationsTopicsSubscriptionsListSecurity = field(default=None)
+    path_params: PubsubliteAdminProjectsLocationsTopicsSubscriptionsListPathParams = field()
+    query_params: PubsubliteAdminProjectsLocationsTopicsSubscriptionsListQueryParams = field()
+    security: PubsubliteAdminProjectsLocationsTopicsSubscriptionsListSecurity = field()
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsSubscriptionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_topic_subscriptions_response: Optional[shared.ListTopicSubscriptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

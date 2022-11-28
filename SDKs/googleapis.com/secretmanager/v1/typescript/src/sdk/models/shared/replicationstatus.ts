@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutomaticStatus } from "./automaticstatus";
 import { UserManagedStatus } from "./usermanagedstatus";
+
 
 
 // ReplicationStatus
@@ -8,9 +9,9 @@ import { UserManagedStatus } from "./usermanagedstatus";
  * The replication status of a SecretVersion.
 **/
 export class ReplicationStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=automatic" })
+  @SpeakeasyMetadata({ data: "json, name=automatic" })
   automatic?: AutomaticStatus;
 
-  @Metadata({ data: "json, name=userManaged" })
+  @SpeakeasyMetadata({ data: "json, name=userManaged" })
   userManaged?: UserManagedStatus;
 }

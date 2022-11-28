@@ -13,16 +13,16 @@ type GamesAdditionsListQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GamesAdditionsListRequest struct {
-	PathParams  GamesAdditionsListPathParams
-	QueryParams GamesAdditionsListQueryParams
-}
-
 type GamesAdditionsList200ApplicationJSON struct {
 	Count    int64         `json:"count"`
 	Next     *string       `json:"next,omitempty"`
 	Previous *string       `json:"previous,omitempty"`
 	Results  []shared.Game `json:"results"`
+}
+
+type GamesAdditionsListRequest struct {
+	PathParams  GamesAdditionsListPathParams
+	QueryParams GamesAdditionsListQueryParams
 }
 
 type GamesAdditionsListResponse struct {

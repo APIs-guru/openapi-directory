@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class FirehoseLogDelivery:
-    delivery_stream: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryStream' }})
-    enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
+    r"""FirehoseLogDelivery
+    The settings for delivering logs to Amazon Kinesis Data Firehose.
+    """
+    
+    enabled: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    delivery_stream: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryStream') }})
     

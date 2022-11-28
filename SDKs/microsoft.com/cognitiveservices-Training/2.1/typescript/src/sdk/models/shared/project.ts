@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectSettings } from "./projectsettings";
+
 
 
 // Project
@@ -7,24 +8,40 @@ import { ProjectSettings } from "./projectsettings";
  * Represents a project
 **/
 export class Project extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created, form, name=created;" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=description, form, name=description;" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id, form, name=id;" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastModified, form, name=lastModified;" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=name, form, name=name;" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=settings, form, name=settings;" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: ProjectSettings;
 
-  @Metadata({ data: "json, name=thumbnailUri, form, name=thumbnailUri;" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailUri" })
   thumbnailUri?: string;
+}
+
+
+// ProjectInput
+/** 
+ * Represents a project
+**/
+export class ProjectInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description, form, name=description;" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=settings, form, name=settings;" })
+  settings?: ProjectSettings;
 }

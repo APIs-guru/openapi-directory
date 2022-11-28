@@ -4,10 +4,6 @@ type GetDatacentersQueryParams struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type GetDatacentersRequest struct {
-	QueryParams GetDatacentersQueryParams
-}
-
 type GetDatacenters200ApplicationJSONDatacentersLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -19,6 +15,8 @@ type GetDatacenters200ApplicationJSONDatacentersLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// GetDatacenters200ApplicationJSONDatacentersServerTypes
+// The Server types the Datacenter can handle
 type GetDatacenters200ApplicationJSONDatacentersServerTypes struct {
 	Available             []float64 `json:"available"`
 	AvailableForMigration []float64 `json:"available_for_migration"`
@@ -36,6 +34,10 @@ type GetDatacenters200ApplicationJSONDatacenters struct {
 type GetDatacenters200ApplicationJSON struct {
 	Datacenters    []GetDatacenters200ApplicationJSONDatacenters `json:"datacenters"`
 	Recommendation float64                                       `json:"recommendation"`
+}
+
+type GetDatacentersRequest struct {
+	QueryParams GetDatacentersQueryParams
 }
 
 type GetDatacentersResponse struct {

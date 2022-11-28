@@ -1,5 +1,7 @@
 package shared
 
-type GoogleCloudRetailV2ProductInlineSource struct {
-	Products []GoogleCloudRetailV2Product `json:"products,omitempty"`
+// GoogleCloudRetailV2ProductInlineSourceInput
+// The inline source for the input config for ImportProducts method.
+type GoogleCloudRetailV2ProductInlineSourceInput struct {
+	Products []GoogleCloudRetailV2ProductInput `json:"products,omitempty"`
 }

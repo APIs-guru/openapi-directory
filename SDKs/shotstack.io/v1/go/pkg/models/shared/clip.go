@@ -46,6 +46,8 @@ const (
 	ClipPositionEnumCenter      ClipPositionEnum = "center"
 )
 
+// Clip
+// A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.
 type Clip struct {
 	Asset      interface{}       `json:"asset"`
 	Effect     *ClipEffectEnum   `json:"effect,omitempty"`

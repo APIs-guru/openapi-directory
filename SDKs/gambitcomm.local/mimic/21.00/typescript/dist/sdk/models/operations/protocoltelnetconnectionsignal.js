@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolTelnetConnectionSignalPathParams = /** @class */ (function (_super) {
     __extends(ProtocolTelnetConnectionSignalPathParams, _super);
     function ProtocolTelnetConnectionSignalPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTelnetConnectionSignalPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=connectionID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=connectionID" }),
         __metadata("design:type", Number)
     ], ProtocolTelnetConnectionSignalPathParams.prototype, "connectionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=signalName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=signalName" }),
         __metadata("design:type", String)
     ], ProtocolTelnetConnectionSignalPathParams.prototype, "signalName", void 0);
     return ProtocolTelnetConnectionSignalPathParams;
@@ -49,7 +49,7 @@ var ProtocolTelnetConnectionSignalRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTelnetConnectionSignalPathParams)
     ], ProtocolTelnetConnectionSignalRequest.prototype, "pathParams", void 0);
     return ProtocolTelnetConnectionSignalRequest;
@@ -61,15 +61,15 @@ var ProtocolTelnetConnectionSignalResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTelnetConnectionSignalResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTelnetConnectionSignalResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolTelnetConnectionSignalResponse.prototype, "protocolTelnetConnectionSignal200ApplicationJsonStrings", void 0);
     return ProtocolTelnetConnectionSignalResponse;

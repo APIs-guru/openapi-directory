@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskSetFieldEnum } from "./tasksetfieldenum";
 
 
+
 export class DescribeTaskSetsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: string;
 
-  @Metadata({ data: "json, name=include" })
+  @SpeakeasyMetadata({ data: "json, name=include" })
   include?: TaskSetFieldEnum[];
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service: string;
 
-  @Metadata({ data: "json, name=taskSets" })
+  @SpeakeasyMetadata({ data: "json, name=taskSets" })
   taskSets?: string[];
 }

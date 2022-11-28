@@ -14,12 +14,16 @@ type UpdateIndexingConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration
+// Thing group indexing configuration.
 type UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration struct {
 	CustomFields           []shared.Field                     `json:"customFields,omitempty"`
 	ManagedFields          []shared.Field                     `json:"managedFields,omitempty"`
 	ThingGroupIndexingMode *shared.ThingGroupIndexingModeEnum `json:"thingGroupIndexingMode,omitempty"`
 }
 
+// UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration
+// The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing Thing Indexing</a>.
 type UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration struct {
 	CustomFields                  []shared.Field                            `json:"customFields,omitempty"`
 	ManagedFields                 []shared.Field                            `json:"managedFields,omitempty"`

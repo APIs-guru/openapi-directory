@@ -10,14 +10,14 @@ type CodeScanningGetSarifPathParams struct {
 	SarifID string `pathParam:"style=simple,explode=false,name=sarif_id"`
 }
 
-type CodeScanningGetSarifRequest struct {
-	PathParams CodeScanningGetSarifPathParams
-}
-
 type CodeScanningGetSarif503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type CodeScanningGetSarifRequest struct {
+	PathParams CodeScanningGetSarifPathParams
 }
 
 type CodeScanningGetSarifResponse struct {

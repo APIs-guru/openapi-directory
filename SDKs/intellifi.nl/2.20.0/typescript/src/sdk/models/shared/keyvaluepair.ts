@@ -1,22 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class KeyValuePairInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=kv_key" })
+  kvKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kv_value" })
+  kvValue?: any;
+}
 
 
 export class KeyValuePair extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kv_key" })
+  @SpeakeasyMetadata({ data: "json, name=kv_key" })
   kvKey?: string;
 
-  @Metadata({ data: "json, name=kv_value" })
+  @SpeakeasyMetadata({ data: "json, name=kv_value" })
   kvValue?: any;
 
-  @Metadata({ data: "json, name=time_created" })
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

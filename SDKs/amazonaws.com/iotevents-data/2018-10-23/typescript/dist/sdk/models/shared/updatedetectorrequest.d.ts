@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DetectorStateDefinition } from "./detectorstatedefinition";
 /**
  * Information used to update the detector (instance).

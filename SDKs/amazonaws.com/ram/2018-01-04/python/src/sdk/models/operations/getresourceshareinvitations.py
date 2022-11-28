@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,22 +28,23 @@ class GetResourceShareInvitationsHeaders:
 @dataclass_json
 @dataclass
 class GetResourceShareInvitationsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArns' }})
-    resource_share_invitation_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareInvitationArns' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArns') }})
+    resource_share_invitation_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareInvitationArns') }})
     
 
 @dataclass
 class GetResourceShareInvitationsRequest:
-    query_params: GetResourceShareInvitationsQueryParams = field(default=None)
-    headers: GetResourceShareInvitationsHeaders = field(default=None)
-    request: GetResourceShareInvitationsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetResourceShareInvitationsHeaders = field()
+    query_params: GetResourceShareInvitationsQueryParams = field()
+    request: GetResourceShareInvitationsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetResourceShareInvitationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_resource_share_invitations_response: Optional[shared.GetResourceShareInvitationsResponse] = field(default=None)
     invalid_max_results_exception: Optional[Any] = field(default=None)
     invalid_next_token_exception: Optional[Any] = field(default=None)
@@ -48,6 +53,5 @@ class GetResourceShareInvitationsResponse:
     resource_share_invitation_arn_not_found_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

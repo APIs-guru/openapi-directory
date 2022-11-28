@@ -24,6 +24,8 @@ const (
 	DeliveryErrorErrorTypeEnumBadPtrRecord                 DeliveryErrorErrorTypeEnum = "BAD_PTR_RECORD"
 )
 
+// DeliveryError
+// Metric on a particular delivery error type.
 type DeliveryError struct {
 	ErrorClass *DeliveryErrorErrorClassEnum `json:"errorClass,omitempty"`
 	ErrorRatio *float64                     `json:"errorRatio,omitempty"`

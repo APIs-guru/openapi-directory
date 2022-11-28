@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ListTrackersResponseEntry
+// Contains the tracker resource details.
 type ListTrackersResponseEntry struct {
 	CreateTime            time.Time       `json:"CreateTime"`
 	Description           string          `json:"Description"`

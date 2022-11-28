@@ -8,6 +8,8 @@ const (
 	LoginRequestAuthTypeEnumRadius          LoginRequestAuthTypeEnum = "radius"
 )
 
+// LoginRequest
+// Request model for performing an authentication
 type LoginRequest struct {
 	AuthType *LoginRequestAuthTypeEnum `json:"authType,omitempty"`
 	Language *string                   `json:"language,omitempty"`

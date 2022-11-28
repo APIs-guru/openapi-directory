@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FleetAttributes
+// <p>Describes a GameLift fleet of game hosting resources.</p> <p> <b>Related actions</b> </p> <p> <a>CreateFleet</a> | <a>DescribeFleetAttributes</a> </p>
 type FleetAttributes struct {
 	BuildArn                       *string                      `json:"BuildArn,omitempty"`
 	BuildID                        *string                      `json:"BuildId,omitempty"`

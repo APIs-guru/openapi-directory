@@ -18,6 +18,20 @@ const (
 	GoogleCloudDataplexV1ZoneTypeEnumCurated         GoogleCloudDataplexV1ZoneTypeEnum = "CURATED"
 )
 
+// GoogleCloudDataplexV1ZoneInput
+// A zone represents a logical group of related assets within a lake. A zone can be used to map to organizational structure or represent stages of data readiness from raw to curated. It provides managing behavior that is shared or inherited by all contained assets.
+type GoogleCloudDataplexV1ZoneInput struct {
+	AssetStatus   *GoogleCloudDataplexV1AssetStatus       `json:"assetStatus,omitempty"`
+	Description   *string                                 `json:"description,omitempty"`
+	DiscoverySpec *GoogleCloudDataplexV1ZoneDiscoverySpec `json:"discoverySpec,omitempty"`
+	DisplayName   *string                                 `json:"displayName,omitempty"`
+	Labels        map[string]string                       `json:"labels,omitempty"`
+	ResourceSpec  *GoogleCloudDataplexV1ZoneResourceSpec  `json:"resourceSpec,omitempty"`
+	Type          *GoogleCloudDataplexV1ZoneTypeEnum      `json:"type,omitempty"`
+}
+
+// GoogleCloudDataplexV1Zone
+// A zone represents a logical group of related assets within a lake. A zone can be used to map to organizational structure or represent stages of data readiness from raw to curated. It provides managing behavior that is shared or inherited by all contained assets.
 type GoogleCloudDataplexV1Zone struct {
 	AssetStatus   *GoogleCloudDataplexV1AssetStatus       `json:"assetStatus,omitempty"`
 	CreateTime    *string                                 `json:"createTime,omitempty"`

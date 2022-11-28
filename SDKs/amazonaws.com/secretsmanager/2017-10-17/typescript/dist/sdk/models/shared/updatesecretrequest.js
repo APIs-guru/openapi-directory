@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateSecretRequest = /** @class */ (function (_super) {
     __extends(UpdateSecretRequest, _super);
     function UpdateSecretRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientRequestToken" }),
         __metadata("design:type", String)
     ], UpdateSecretRequest.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateSecretRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], UpdateSecretRequest.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretBinary" }),
+        SpeakeasyMetadata({ data: "json, name=SecretBinary" }),
         __metadata("design:type", String)
     ], UpdateSecretRequest.prototype, "secretBinary", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretId" }),
         __metadata("design:type", String)
     ], UpdateSecretRequest.prototype, "secretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretString" }),
+        SpeakeasyMetadata({ data: "json, name=SecretString" }),
         __metadata("design:type", String)
     ], UpdateSecretRequest.prototype, "secretString", void 0);
     return UpdateSecretRequest;

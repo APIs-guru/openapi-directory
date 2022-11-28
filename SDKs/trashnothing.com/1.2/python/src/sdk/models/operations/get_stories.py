@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -15,42 +16,27 @@ class GetStoriesQueryParams:
     
 
 @dataclass
-class GetStoriesSecurityOption1:
-    oauth2_implicit: shared.SchemeOauth2Implicit = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetStoriesSecurityOption2:
-    oauth2_code: shared.SchemeOauth2Code = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetStoriesSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    
-
-@dataclass
 class GetStoriesSecurity:
-    option1: Optional[GetStoriesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetStoriesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetStoriesSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class GetStoriesRequest:
-    query_params: GetStoriesQueryParams = field(default=None)
-    security: GetStoriesSecurity = field(default=None)
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    oauth2_code: Optional[shared.SchemeOauth2Code] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2_implicit: Optional[shared.SchemeOauth2Implicit] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass_json
 @dataclass
 class GetStories200ApplicationJSON:
-    stories: Optional[List[shared.Story]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stories' }})
+    stories: Optional[List[shared.Story]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stories') }})
+    
+
+@dataclass
+class GetStoriesRequest:
+    query_params: GetStoriesQueryParams = field()
+    security: GetStoriesSecurity = field()
     
 
 @dataclass
 class GetStoriesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_stories_200_application_json_object: Optional[GetStories200ApplicationJSON] = field(default=None)
     

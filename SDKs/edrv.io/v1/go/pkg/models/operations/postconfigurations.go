@@ -5,14 +5,14 @@ type PostConfigurationsRequestBody struct {
 	Value *string `json:"value,omitempty"`
 }
 
-type PostConfigurationsRequest struct {
-	Request PostConfigurationsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostConfigurations201ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type PostConfigurationsRequest struct {
+	Request PostConfigurationsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostConfigurationsResponse struct {

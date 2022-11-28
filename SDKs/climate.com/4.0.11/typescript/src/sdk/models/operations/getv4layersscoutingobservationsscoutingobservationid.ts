@@ -1,56 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV4LayersScoutingObservationsScoutingObservationIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scoutingObservationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scoutingObservationId" })
   scoutingObservationId: string;
 }
 
 
-export class GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class GetV4LayersScoutingObservationsScoutingObservationIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetV4LayersScoutingObservationsScoutingObservationIdSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class GetV4LayersScoutingObservationsScoutingObservationIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetV4LayersScoutingObservationsScoutingObservationIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetV4LayersScoutingObservationsScoutingObservationIdSecurity;
 }
 
 
 export class GetV4LayersScoutingObservationsScoutingObservationIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scoutingObservation?: shared.ScoutingObservation;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import displaydata
+from sdk import utils
+from . import *
 
 class TransformSummaryKindEnum(str, Enum):
     UNKNOWN_KIND = "UNKNOWN_KIND"
@@ -18,10 +20,14 @@ class TransformSummaryKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TransformSummary:
-    display_data: Optional[List[displaydata.DisplayData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayData' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    input_collection_name: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputCollectionName' }})
-    kind: Optional[TransformSummaryKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    output_collection_name: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputCollectionName' }})
+    r"""TransformSummary
+    Description of the type, names/ids, and input/outputs for a transform.
+    """
+    
+    display_data: Optional[List[DisplayData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayData') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    input_collection_name: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputCollectionName') }})
+    kind: Optional[TransformSummaryKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    output_collection_name: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputCollectionName') }})
     

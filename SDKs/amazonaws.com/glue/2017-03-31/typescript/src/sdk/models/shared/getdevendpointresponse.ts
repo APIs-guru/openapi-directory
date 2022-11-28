@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevEndpoint } from "./devendpoint";
 
 
+
 export class GetDevEndpointResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DevEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=DevEndpoint" })
   devEndpoint?: DevEndpoint;
 }

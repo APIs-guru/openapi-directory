@@ -1,69 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetHookEventsSubjectTypeSubjectTypeEnum {
-    Workspace = "workspace"
-,    User = "user"
-,    Repository = "repository"
-,    Team = "team"
+    Workspace = "workspace",
+    User = "user",
+    Repository = "repository",
+    Team = "team"
 }
 
 
 export class GetHookEventsSubjectTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subject_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subject_type" })
   subjectType: GetHookEventsSubjectTypeSubjectTypeEnum;
 }
 
 
-export class GetHookEventsSubjectTypeSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class GetHookEventsSubjectTypeSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class GetHookEventsSubjectTypeSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetHookEventsSubjectTypeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetHookEventsSubjectTypeSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetHookEventsSubjectTypeSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetHookEventsSubjectTypeSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetHookEventsSubjectTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetHookEventsSubjectTypePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetHookEventsSubjectTypeSecurity;
 }
 
 
 export class GetHookEventsSubjectTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paginatedHookEvents?: shared.PaginatedHookEvents;
 }

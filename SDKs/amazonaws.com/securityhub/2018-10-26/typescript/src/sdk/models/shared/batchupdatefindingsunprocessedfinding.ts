@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsSecurityFindingIdentifier } from "./awssecurityfindingidentifier";
+
 
 
 // BatchUpdateFindingsUnprocessedFinding
@@ -7,12 +8,12 @@ import { AwsSecurityFindingIdentifier } from "./awssecurityfindingidentifier";
  * A finding from a <code>BatchUpdateFindings</code> request that Security Hub was unable to update.
 **/
 export class BatchUpdateFindingsUnprocessedFinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode: string;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage: string;
 
-  @Metadata({ data: "json, name=FindingIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=FindingIdentifier" })
   findingIdentifier: AwsSecurityFindingIdentifier;
 }

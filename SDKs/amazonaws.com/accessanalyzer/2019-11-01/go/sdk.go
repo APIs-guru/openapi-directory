@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://access-analyzer.{region}.amazonaws.com",
 	"https://access-analyzer.{region}.amazonaws.com",
 	"http://access-analyzer.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/access-analyzer/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ApplyArchiveRule - Retroactively applies the archive rule to existing findings that meet the archive rule criteria.
 func (s *SDK) ApplyArchiveRule(ctx context.Context, request operations.ApplyArchiveRuleRequest) (*operations.ApplyArchiveRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/archive-rule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) ApplyArchiveRule(ctx context.Context, request operations.ApplyArch
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -152,8 +179,9 @@ func (s *SDK) ApplyArchiveRule(ctx context.Context, request operations.ApplyArch
 	return res, nil
 }
 
+// CancelPolicyGeneration - Cancels the requested policy generation.
 func (s *SDK) CancelPolicyGeneration(ctx context.Context, request operations.CancelPolicyGenerationRequest) (*operations.CancelPolicyGenerationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/generation/{jobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -163,7 +191,7 @@ func (s *SDK) CancelPolicyGeneration(ctx context.Context, request operations.Can
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -233,8 +261,9 @@ func (s *SDK) CancelPolicyGeneration(ctx context.Context, request operations.Can
 	return res, nil
 }
 
+// CreateAccessPreview - Creates an access preview that allows you to preview IAM Access Analyzer findings for your resource before deploying resource permissions.
 func (s *SDK) CreateAccessPreview(ctx context.Context, request operations.CreateAccessPreviewRequest) (*operations.CreateAccessPreviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/access-preview"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -254,7 +283,7 @@ func (s *SDK) CreateAccessPreview(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -354,8 +383,9 @@ func (s *SDK) CreateAccessPreview(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateAnalyzer - Creates an analyzer for your account.
 func (s *SDK) CreateAnalyzer(ctx context.Context, request operations.CreateAnalyzerRequest) (*operations.CreateAnalyzerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/analyzer"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -375,7 +405,7 @@ func (s *SDK) CreateAnalyzer(ctx context.Context, request operations.CreateAnaly
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -465,8 +495,9 @@ func (s *SDK) CreateAnalyzer(ctx context.Context, request operations.CreateAnaly
 	return res, nil
 }
 
+// CreateArchiveRule - <p>Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.</p> <p>To learn about filter keys that you can use to create an archive rule, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>
 func (s *SDK) CreateArchiveRule(ctx context.Context, request operations.CreateArchiveRuleRequest) (*operations.CreateArchiveRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analyzer/{analyzerName}/archive-rule", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -486,7 +517,7 @@ func (s *SDK) CreateArchiveRule(ctx context.Context, request operations.CreateAr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -577,8 +608,9 @@ func (s *SDK) CreateArchiveRule(ctx context.Context, request operations.CreateAr
 	return res, nil
 }
 
+// DeleteAnalyzer - Deletes the specified analyzer. When you delete an analyzer, IAM Access Analyzer is disabled for the account or organization in the current or specific Region. All findings that were generated by the analyzer are deleted. You cannot undo this action.
 func (s *SDK) DeleteAnalyzer(ctx context.Context, request operations.DeleteAnalyzerRequest) (*operations.DeleteAnalyzerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analyzer/{analyzerName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -590,7 +622,7 @@ func (s *SDK) DeleteAnalyzer(ctx context.Context, request operations.DeleteAnaly
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -661,8 +693,9 @@ func (s *SDK) DeleteAnalyzer(ctx context.Context, request operations.DeleteAnaly
 	return res, nil
 }
 
+// DeleteArchiveRule - Deletes the specified archive rule.
 func (s *SDK) DeleteArchiveRule(ctx context.Context, request operations.DeleteArchiveRuleRequest) (*operations.DeleteArchiveRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analyzer/{analyzerName}/archive-rule/{ruleName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -674,7 +707,7 @@ func (s *SDK) DeleteArchiveRule(ctx context.Context, request operations.DeleteAr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -745,8 +778,9 @@ func (s *SDK) DeleteArchiveRule(ctx context.Context, request operations.DeleteAr
 	return res, nil
 }
 
+// GetAccessPreview - Retrieves information about an access preview for the specified analyzer.
 func (s *SDK) GetAccessPreview(ctx context.Context, request operations.GetAccessPreviewRequest) (*operations.GetAccessPreviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/access-preview/{accessPreviewId}#analyzerArn", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -758,7 +792,7 @@ func (s *SDK) GetAccessPreview(ctx context.Context, request operations.GetAccess
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -838,8 +872,9 @@ func (s *SDK) GetAccessPreview(ctx context.Context, request operations.GetAccess
 	return res, nil
 }
 
+// GetAnalyzedResource - Retrieves information about a resource that was analyzed.
 func (s *SDK) GetAnalyzedResource(ctx context.Context, request operations.GetAnalyzedResourceRequest) (*operations.GetAnalyzedResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/analyzed-resource#analyzerArn&resourceArn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -851,7 +886,7 @@ func (s *SDK) GetAnalyzedResource(ctx context.Context, request operations.GetAna
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -931,8 +966,9 @@ func (s *SDK) GetAnalyzedResource(ctx context.Context, request operations.GetAna
 	return res, nil
 }
 
+// GetAnalyzer - Retrieves information about the specified analyzer.
 func (s *SDK) GetAnalyzer(ctx context.Context, request operations.GetAnalyzerRequest) (*operations.GetAnalyzerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analyzer/{analyzerName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -942,7 +978,7 @@ func (s *SDK) GetAnalyzer(ctx context.Context, request operations.GetAnalyzerReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1022,8 +1058,9 @@ func (s *SDK) GetAnalyzer(ctx context.Context, request operations.GetAnalyzerReq
 	return res, nil
 }
 
+// GetArchiveRule - <p>Retrieves information about an archive rule.</p> <p>To learn about filter keys that you can use to create an archive rule, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>
 func (s *SDK) GetArchiveRule(ctx context.Context, request operations.GetArchiveRuleRequest) (*operations.GetArchiveRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analyzer/{analyzerName}/archive-rule/{ruleName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1033,7 +1070,7 @@ func (s *SDK) GetArchiveRule(ctx context.Context, request operations.GetArchiveR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1113,8 +1150,9 @@ func (s *SDK) GetArchiveRule(ctx context.Context, request operations.GetArchiveR
 	return res, nil
 }
 
+// GetFinding - Retrieves information about the specified finding.
 func (s *SDK) GetFinding(ctx context.Context, request operations.GetFindingRequest) (*operations.GetFindingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/finding/{id}#analyzerArn", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1126,7 +1164,7 @@ func (s *SDK) GetFinding(ctx context.Context, request operations.GetFindingReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1206,8 +1244,9 @@ func (s *SDK) GetFinding(ctx context.Context, request operations.GetFindingReque
 	return res, nil
 }
 
+// GetGeneratedPolicy - Retrieves the policy that was generated using <code>StartPolicyGeneration</code>.
 func (s *SDK) GetGeneratedPolicy(ctx context.Context, request operations.GetGeneratedPolicyRequest) (*operations.GetGeneratedPolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/generation/{jobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1219,7 +1258,7 @@ func (s *SDK) GetGeneratedPolicy(ctx context.Context, request operations.GetGene
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1289,8 +1328,9 @@ func (s *SDK) GetGeneratedPolicy(ctx context.Context, request operations.GetGene
 	return res, nil
 }
 
+// ListAccessPreviewFindings - Retrieves a list of access preview findings generated by the specified access preview.
 func (s *SDK) ListAccessPreviewFindings(ctx context.Context, request operations.ListAccessPreviewFindingsRequest) (*operations.ListAccessPreviewFindingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/access-preview/{accessPreviewId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1312,7 +1352,7 @@ func (s *SDK) ListAccessPreviewFindings(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1402,8 +1442,9 @@ func (s *SDK) ListAccessPreviewFindings(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListAccessPreviews - Retrieves a list of access previews for the specified analyzer.
 func (s *SDK) ListAccessPreviews(ctx context.Context, request operations.ListAccessPreviewsRequest) (*operations.ListAccessPreviewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/access-preview#analyzerArn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1415,7 +1456,7 @@ func (s *SDK) ListAccessPreviews(ctx context.Context, request operations.ListAcc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1495,8 +1536,9 @@ func (s *SDK) ListAccessPreviews(ctx context.Context, request operations.ListAcc
 	return res, nil
 }
 
+// ListAnalyzedResources - Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer..
 func (s *SDK) ListAnalyzedResources(ctx context.Context, request operations.ListAnalyzedResourcesRequest) (*operations.ListAnalyzedResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/analyzed-resource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1518,7 +1560,7 @@ func (s *SDK) ListAnalyzedResources(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1598,8 +1640,9 @@ func (s *SDK) ListAnalyzedResources(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListAnalyzers - Retrieves a list of analyzers.
 func (s *SDK) ListAnalyzers(ctx context.Context, request operations.ListAnalyzersRequest) (*operations.ListAnalyzersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/analyzer"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1611,7 +1654,7 @@ func (s *SDK) ListAnalyzers(ctx context.Context, request operations.ListAnalyzer
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1681,8 +1724,9 @@ func (s *SDK) ListAnalyzers(ctx context.Context, request operations.ListAnalyzer
 	return res, nil
 }
 
+// ListArchiveRules - Retrieves a list of archive rules created for the specified analyzer.
 func (s *SDK) ListArchiveRules(ctx context.Context, request operations.ListArchiveRulesRequest) (*operations.ListArchiveRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analyzer/{analyzerName}/archive-rule", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1694,7 +1738,7 @@ func (s *SDK) ListArchiveRules(ctx context.Context, request operations.ListArchi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1764,8 +1808,9 @@ func (s *SDK) ListArchiveRules(ctx context.Context, request operations.ListArchi
 	return res, nil
 }
 
+// ListFindings - <p>Retrieves a list of findings generated by the specified analyzer.</p> <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>
 func (s *SDK) ListFindings(ctx context.Context, request operations.ListFindingsRequest) (*operations.ListFindingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/finding"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1787,7 +1832,7 @@ func (s *SDK) ListFindings(ctx context.Context, request operations.ListFindingsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1867,8 +1912,9 @@ func (s *SDK) ListFindings(ctx context.Context, request operations.ListFindingsR
 	return res, nil
 }
 
+// ListPolicyGenerations - Lists all of the policy generations requested in the last seven days.
 func (s *SDK) ListPolicyGenerations(ctx context.Context, request operations.ListPolicyGenerationsRequest) (*operations.ListPolicyGenerationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/policy/generation"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1880,7 +1926,7 @@ func (s *SDK) ListPolicyGenerations(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1950,8 +1996,9 @@ func (s *SDK) ListPolicyGenerations(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListTagsForResource - Retrieves a list of tags applied to the specified resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1961,7 +2008,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2041,8 +2088,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// StartPolicyGeneration - Starts the policy generation request.
 func (s *SDK) StartPolicyGeneration(ctx context.Context, request operations.StartPolicyGenerationRequest) (*operations.StartPolicyGenerationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/policy/generation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2062,7 +2110,7 @@ func (s *SDK) StartPolicyGeneration(ctx context.Context, request operations.Star
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2152,8 +2200,9 @@ func (s *SDK) StartPolicyGeneration(ctx context.Context, request operations.Star
 	return res, nil
 }
 
+// StartResourceScan - Immediately starts a scan of the policies applied to the specified resource.
 func (s *SDK) StartResourceScan(ctx context.Context, request operations.StartResourceScanRequest) (*operations.StartResourceScanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/resource/scan"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2173,7 +2222,7 @@ func (s *SDK) StartResourceScan(ctx context.Context, request operations.StartRes
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2244,8 +2293,9 @@ func (s *SDK) StartResourceScan(ctx context.Context, request operations.StartRes
 	return res, nil
 }
 
+// TagResource - Adds a tag to the specified resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2265,7 +2315,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2345,8 +2395,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes a tag from the specified resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2358,7 +2409,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2438,8 +2489,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateArchiveRule - Updates the criteria and values for the specified archive rule.
 func (s *SDK) UpdateArchiveRule(ctx context.Context, request operations.UpdateArchiveRuleRequest) (*operations.UpdateArchiveRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analyzer/{analyzerName}/archive-rule/{ruleName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2459,7 +2511,7 @@ func (s *SDK) UpdateArchiveRule(ctx context.Context, request operations.UpdateAr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2530,8 +2582,9 @@ func (s *SDK) UpdateArchiveRule(ctx context.Context, request operations.UpdateAr
 	return res, nil
 }
 
+// UpdateFindings - Updates the status for the specified findings.
 func (s *SDK) UpdateFindings(ctx context.Context, request operations.UpdateFindingsRequest) (*operations.UpdateFindingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/finding"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2551,7 +2604,7 @@ func (s *SDK) UpdateFindings(ctx context.Context, request operations.UpdateFindi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2622,8 +2675,9 @@ func (s *SDK) UpdateFindings(ctx context.Context, request operations.UpdateFindi
 	return res, nil
 }
 
+// ValidatePolicy - Requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices.
 func (s *SDK) ValidatePolicy(ctx context.Context, request operations.ValidatePolicyRequest) (*operations.ValidatePolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/policy/validation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2645,7 +2699,7 @@ func (s *SDK) ValidatePolicy(ctx context.Context, request operations.ValidatePol
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

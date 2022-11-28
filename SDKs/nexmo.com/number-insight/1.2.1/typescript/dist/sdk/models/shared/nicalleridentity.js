@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var NiCallerIdentityCallerTypeEnum;
 (function (NiCallerIdentityCallerTypeEnum) {
     NiCallerIdentityCallerTypeEnum["Business"] = "business";
@@ -39,19 +39,19 @@ var NiCallerIdentity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=caller_name" }),
+        SpeakeasyMetadata({ data: "json, name=caller_name" }),
         __metadata("design:type", String)
     ], NiCallerIdentity.prototype, "callerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=caller_type" }),
+        SpeakeasyMetadata({ data: "json, name=caller_type" }),
         __metadata("design:type", String)
     ], NiCallerIdentity.prototype, "callerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=first_name" }),
+        SpeakeasyMetadata({ data: "json, name=first_name" }),
         __metadata("design:type", String)
     ], NiCallerIdentity.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_name" }),
+        SpeakeasyMetadata({ data: "json, name=last_name" }),
         __metadata("design:type", String)
     ], NiCallerIdentity.prototype, "lastName", void 0);
     return NiCallerIdentity;

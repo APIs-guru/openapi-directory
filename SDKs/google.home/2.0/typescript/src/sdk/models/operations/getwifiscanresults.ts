@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWiFiScanResultsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Example114 })
+  @SpeakeasyMetadata({ elemType: shared.Example114 })
   example114s?: shared.Example114[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

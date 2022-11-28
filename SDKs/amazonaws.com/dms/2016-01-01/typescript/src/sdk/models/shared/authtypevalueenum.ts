@@ -1,6 +1,7 @@
 
 
+
 export enum AuthTypeValueEnum {
-    No = "no"
-,    Password = "password"
+    No = "no",
+    Password = "password"
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type CircuitsProvidersCreateRequest struct {
-	Request shared.Provider `request:"mediaType=application/json"`
+	Request shared.ProviderInput `request:"mediaType=application/json"`
 }
 
 type CircuitsProvidersCreateResponse struct {

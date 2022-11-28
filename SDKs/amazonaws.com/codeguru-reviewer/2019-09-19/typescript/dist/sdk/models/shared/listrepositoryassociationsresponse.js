@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RepositoryAssociationSummary } from "./repositoryassociationsummary";
 var ListRepositoryAssociationsResponse = /** @class */ (function (_super) {
     __extends(ListRepositoryAssociationsResponse, _super);
     function ListRepositoryAssociationsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListRepositoryAssociationsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=RepositoryAssociationSummaries", elemType: shared.RepositoryAssociationSummary }),
+        SpeakeasyMetadata({ data: "json, name=RepositoryAssociationSummaries", elemType: RepositoryAssociationSummary }),
         __metadata("design:type", Array)
     ], ListRepositoryAssociationsResponse.prototype, "repositoryAssociationSummaries", void 0);
     return ListRepositoryAssociationsResponse;

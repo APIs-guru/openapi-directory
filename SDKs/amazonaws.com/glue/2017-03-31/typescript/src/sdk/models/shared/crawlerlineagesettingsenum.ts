@@ -1,6 +1,7 @@
 
 
+
 export enum CrawlerLineageSettingsEnum {
-    Enable = "ENABLE"
-,    Disable = "DISABLE"
+    Enable = "ENABLE",
+    Disable = "DISABLE"
 }

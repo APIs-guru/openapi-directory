@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class InjuriesFormatEnum(str, Enum):
     XML = "XML"
@@ -8,17 +9,17 @@ class InjuriesFormatEnum(str, Enum):
 
 @dataclass
 class InjuriesPathParams:
-    format: InjuriesFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: InjuriesFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class InjuriesRequest:
-    path_params: InjuriesPathParams = field(default=None)
+    path_params: InjuriesPathParams = field()
     
 
 @dataclass
 class InjuriesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     injuries: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

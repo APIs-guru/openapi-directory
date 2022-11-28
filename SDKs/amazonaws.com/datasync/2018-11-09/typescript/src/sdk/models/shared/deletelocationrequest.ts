@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteLocationRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * DeleteLocation
 **/
 export class DeleteLocationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LocationArn" })
+  @SpeakeasyMetadata({ data: "json, name=LocationArn" })
   locationArn: string;
 }

@@ -14,17 +14,9 @@ type GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentID
 	Range  string `header:"style=simple,explode=false,name=Range"`
 }
 
-type GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentIDContentsSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentIDContentsSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentIDContentsSecurity struct {
-	Option1 *GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentIDContentsSecurityOption1 `security:"option"`
-	Option2 *GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentIDContentsSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentIDContentsRequest struct {

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestOrderAddress } from "./testorderaddress";
 
 
+
 export class TestOrderDeliveryDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: TestOrderAddress;
 
-  @Metadata({ data: "json, name=isScheduledDelivery" })
+  @SpeakeasyMetadata({ data: "json, name=isScheduledDelivery" })
   isScheduledDelivery?: boolean;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 }

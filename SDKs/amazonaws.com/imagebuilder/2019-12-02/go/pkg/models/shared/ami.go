@@ -1,5 +1,8 @@
 package shared
 
+// Ami
+//
+//	Details of an Amazon EC2 AMI.
 type Ami struct {
 	AccountID   *string     `json:"accountId,omitempty"`
 	Description *string     `json:"description,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetRemoteImagesPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,20 +20,20 @@ class GetRemoteImagesQueryParams:
 
 @dataclass
 class GetRemoteImagesSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetRemoteImagesRequest:
-    path_params: GetRemoteImagesPathParams = field(default=None)
-    query_params: GetRemoteImagesQueryParams = field(default=None)
-    security: GetRemoteImagesSecurity = field(default=None)
+    path_params: GetRemoteImagesPathParams = field()
+    query_params: GetRemoteImagesQueryParams = field()
+    security: GetRemoteImagesSecurity = field()
     
 
 @dataclass
 class GetRemoteImagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[dict[str, Any]] = field(default=None)
     remote_image_result: Optional[shared.RemoteImageResult] = field(default=None)
-    status_code: int = field(default=None)
     

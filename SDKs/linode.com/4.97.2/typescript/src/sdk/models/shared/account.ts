@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Promotion } from "./promotion";
+
 
 
 // AccountCreditCard
@@ -8,11 +8,57 @@ import { Promotion } from "./promotion";
  * Credit Card information associated with this Account.
 **/
 export class AccountCreditCard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: string;
 
-  @Metadata({ data: "json, name=last_four" })
+  @SpeakeasyMetadata({ data: "json, name=last_four" })
   lastFour?: string;
+}
+
+
+// AccountInput
+/** 
+ * Account object
+**/
+export class AccountInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=active_promotions", elemType: Promotion })
+  activePromotions?: Promotion[];
+
+  @SpeakeasyMetadata({ data: "json, name=address_1" })
+  address1?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=address_2" })
+  address2?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=city" })
+  city?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=company" })
+  company?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=country" })
+  country?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  firstName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
+  lastName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phone" })
+  phone?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tax_id" })
+  taxId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=zip" })
+  zip?: string;
 }
 
 
@@ -21,60 +67,60 @@ export class AccountCreditCard extends SpeakeasyBase {
  * Account object
 **/
 export class Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active_promotions", elemType: shared.Promotion })
+  @SpeakeasyMetadata({ data: "json, name=active_promotions", elemType: Promotion })
   activePromotions?: Promotion[];
 
-  @Metadata({ data: "json, name=active_since" })
+  @SpeakeasyMetadata({ data: "json, name=active_since" })
   activeSince?: Date;
 
-  @Metadata({ data: "json, name=address_1" })
+  @SpeakeasyMetadata({ data: "json, name=address_1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=address_2" })
+  @SpeakeasyMetadata({ data: "json, name=address_2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=balance_uninvoiced" })
+  @SpeakeasyMetadata({ data: "json, name=balance_uninvoiced" })
   balanceUninvoiced?: number;
 
-  @Metadata({ data: "json, name=capabilities" })
+  @SpeakeasyMetadata({ data: "json, name=capabilities" })
   capabilities?: string[];
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=credit_card" })
+  @SpeakeasyMetadata({ data: "json, name=credit_card" })
   creditCard?: AccountCreditCard;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=euuid" })
+  @SpeakeasyMetadata({ data: "json, name=euuid" })
   euuid?: string;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=tax_id" })
+  @SpeakeasyMetadata({ data: "json, name=tax_id" })
   taxId?: string;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }

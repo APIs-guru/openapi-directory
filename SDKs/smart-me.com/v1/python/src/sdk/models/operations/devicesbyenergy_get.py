@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DevicesByEnergyGetMeterEnergyTypeEnum(str, Enum):
@@ -22,18 +23,18 @@ class DevicesByEnergyGetMeterEnergyTypeEnum(str, Enum):
 
 @dataclass
 class DevicesByEnergyGetQueryParams:
-    meter_energy_type: DevicesByEnergyGetMeterEnergyTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'meterEnergyType', 'style': 'form', 'explode': True }})
+    meter_energy_type: DevicesByEnergyGetMeterEnergyTypeEnum = field(metadata={'query_param': { 'field_name': 'meterEnergyType', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class DevicesByEnergyGetRequest:
-    query_params: DevicesByEnergyGetQueryParams = field(default=None)
+    query_params: DevicesByEnergyGetQueryParams = field()
     
 
 @dataclass
 class DevicesByEnergyGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     devices: Optional[List[shared.Device]] = field(default=None)
-    status_code: int = field(default=None)
     

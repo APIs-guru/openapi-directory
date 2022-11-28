@@ -7,6 +7,8 @@ const (
 	FsCommandPositionOptionEnumDistanceFromTopLeftCorner FsCommandPositionOptionEnum = "DISTANCE_FROM_TOP_LEFT_CORNER"
 )
 
+// FsCommand
+// FsCommand.
 type FsCommand struct {
 	Left           *int32                       `json:"left,omitempty"`
 	PositionOption *FsCommandPositionOptionEnum `json:"positionOption,omitempty"`

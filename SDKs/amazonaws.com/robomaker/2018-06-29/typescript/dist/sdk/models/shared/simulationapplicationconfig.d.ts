@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LaunchConfig } from "./launchconfig";
 import { Tool } from "./tool";
 import { UploadConfiguration } from "./uploadconfiguration";

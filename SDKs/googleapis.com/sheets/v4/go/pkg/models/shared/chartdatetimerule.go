@@ -21,6 +21,8 @@ const (
 	ChartDateTimeRuleTypeEnumYearMonthDay                     ChartDateTimeRuleTypeEnum = "YEAR_MONTH_DAY"
 )
 
+// ChartDateTimeRule
+// Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values.
 type ChartDateTimeRule struct {
 	Type *ChartDateTimeRuleTypeEnum `json:"type,omitempty"`
 }

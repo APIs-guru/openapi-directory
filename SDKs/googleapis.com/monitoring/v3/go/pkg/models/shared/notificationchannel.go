@@ -8,6 +8,8 @@ const (
 	NotificationChannelVerificationStatusEnumVerified                      NotificationChannelVerificationStatusEnum = "VERIFIED"
 )
 
+// NotificationChannel
+// A NotificationChannel is a medium through which an alert is delivered when a policy violation is detected. Examples of channels include email, SMS, and third-party messaging applications. Fields containing sensitive information like authentication tokens or contact info are only partially populated on retrieval.
 type NotificationChannel struct {
 	CreationRecord     *MutationRecord                            `json:"creationRecord,omitempty"`
 	Description        *string                                    `json:"description,omitempty"`

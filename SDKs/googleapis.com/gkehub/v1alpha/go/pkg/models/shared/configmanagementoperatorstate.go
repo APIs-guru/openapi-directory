@@ -9,6 +9,8 @@ const (
 	ConfigManagementOperatorStateDeploymentStateEnumError                      ConfigManagementOperatorStateDeploymentStateEnum = "ERROR"
 )
 
+// ConfigManagementOperatorState
+// State information for an ACM's Operator
 type ConfigManagementOperatorState struct {
 	DeploymentState *ConfigManagementOperatorStateDeploymentStateEnum `json:"deploymentState,omitempty"`
 	Errors          []ConfigManagementInstallError                    `json:"errors,omitempty"`

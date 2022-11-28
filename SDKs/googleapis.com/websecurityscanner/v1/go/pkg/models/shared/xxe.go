@@ -7,6 +7,8 @@ const (
 	XxePayloadLocationEnumCompleteRequestBody XxePayloadLocationEnum = "COMPLETE_REQUEST_BODY"
 )
 
+// Xxe
+// Information reported for an XXE.
 type Xxe struct {
 	PayloadLocation *XxePayloadLocationEnum `json:"payloadLocation,omitempty"`
 	PayloadValue    *string                 `json:"payloadValue,omitempty"`

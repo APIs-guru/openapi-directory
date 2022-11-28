@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BoardPermissions = /** @class */ (function (_super) {
     __extends(BoardPermissions, _super);
     function BoardPermissions() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=can_add_assets" }),
+        SpeakeasyMetadata({ data: "json, name=can_add_assets" }),
         __metadata("design:type", Boolean)
     ], BoardPermissions.prototype, "canAddAssets", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_delete_board" }),
+        SpeakeasyMetadata({ data: "json, name=can_delete_board" }),
         __metadata("design:type", Boolean)
     ], BoardPermissions.prototype, "canDeleteBoard", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_invite_to_board" }),
+        SpeakeasyMetadata({ data: "json, name=can_invite_to_board" }),
         __metadata("design:type", Boolean)
     ], BoardPermissions.prototype, "canInviteToBoard", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_remove_assets" }),
+        SpeakeasyMetadata({ data: "json, name=can_remove_assets" }),
         __metadata("design:type", Boolean)
     ], BoardPermissions.prototype, "canRemoveAssets", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_update_description" }),
+        SpeakeasyMetadata({ data: "json, name=can_update_description" }),
         __metadata("design:type", Boolean)
     ], BoardPermissions.prototype, "canUpdateDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_update_name" }),
+        SpeakeasyMetadata({ data: "json, name=can_update_name" }),
         __metadata("design:type", Boolean)
     ], BoardPermissions.prototype, "canUpdateName", void 0);
     return BoardPermissions;

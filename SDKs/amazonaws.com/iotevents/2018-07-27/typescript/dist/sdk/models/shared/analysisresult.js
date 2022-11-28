@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalysisResultLevelEnum } from "./analysisresultlevelenum";
+import { AnalysisResultLocation } from "./analysisresultlocation";
 // AnalysisResult
 /**
  * Contains the result of the analysis.
@@ -35,19 +35,19 @@ var AnalysisResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=level" }),
+        SpeakeasyMetadata({ data: "json, name=level" }),
         __metadata("design:type", String)
     ], AnalysisResult.prototype, "level", void 0);
     __decorate([
-        Metadata({ data: "json, name=locations", elemType: shared.AnalysisResultLocation }),
+        SpeakeasyMetadata({ data: "json, name=locations", elemType: AnalysisResultLocation }),
         __metadata("design:type", Array)
     ], AnalysisResult.prototype, "locations", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], AnalysisResult.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], AnalysisResult.prototype, "type", void 0);
     return AnalysisResult;

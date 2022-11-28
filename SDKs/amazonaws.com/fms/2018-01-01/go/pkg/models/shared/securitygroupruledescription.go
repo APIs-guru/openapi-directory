@@ -1,5 +1,7 @@
 package shared
 
+// SecurityGroupRuleDescription
+// Describes a set of permissions for a security group rule.
 type SecurityGroupRuleDescription struct {
 	FromPort     *int64  `json:"FromPort,omitempty"`
 	Ipv4Range    *string `json:"IPV4Range,omitempty"`

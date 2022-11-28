@@ -1,6 +1,7 @@
 
 
+
 export enum LambdaFilesystemPermissionEnum {
-    Ro = "ro"
-,    Rw = "rw"
+    Ro = "ro",
+    Rw = "rw"
 }

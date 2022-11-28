@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FreeBetDetail } from "./freebetdetail";
 import { Betslipleg } from "./betslipleg";
 export declare class Betslipbet extends SpeakeasyBase {

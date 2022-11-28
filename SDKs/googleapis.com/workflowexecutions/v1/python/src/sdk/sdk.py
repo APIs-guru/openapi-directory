@@ -1,8 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://cloud.google.com/workflows"""
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+
 from . import utils
+
+from .projects import Projects
 
 
 SERVERS = [
@@ -11,148 +13,46 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://cloud.google.com/workflows"""
+    projects: Projects
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def workflowexecutions_projects_locations_workflows_executions_cancel(self, request: operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCancelRequest) -> operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCancelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{name}:cancel", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCancelResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Execution])
-                res.execution = out
-
-        return res
-
+        self.projects = Projects(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def workflowexecutions_projects_locations_workflows_executions_create(self, request: operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreateRequest) -> operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{parent}/executions", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Execution])
-                res.execution = out
-
-        return res
-
-    
-    def workflowexecutions_projects_locations_workflows_executions_get(self, request: operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetRequest) -> operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Execution])
-                res.execution = out
-
-        return res
-
-    
-    def workflowexecutions_projects_locations_workflows_executions_list(self, request: operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListRequest) -> operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{parent}/executions", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.WorkflowexecutionsProjectsLocationsWorkflowsExecutionsListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListExecutionsResponse])
-                res.list_executions_response = out
-
-        return res
-
-    
-    def workflowexecutions_projects_locations_workflows_trigger_pubsub_execution(self, request: operations.WorkflowexecutionsProjectsLocationsWorkflowsTriggerPubsubExecutionRequest) -> operations.WorkflowexecutionsProjectsLocationsWorkflowsTriggerPubsubExecutionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{workflow}:triggerPubsubExecution", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.WorkflowexecutionsProjectsLocationsWorkflowsTriggerPubsubExecutionResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Execution])
-                res.execution = out
-
-        return res
-
     

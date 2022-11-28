@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactSource } from "./artifactsource";
+
 
 
 // ArtifactSummary
@@ -7,21 +8,21 @@ import { ArtifactSource } from "./artifactsource";
  * Lists a summary of the properties of an artifact. An artifact represents a URI addressable object or data. Some examples are a dataset and a model.
 **/
 export class ArtifactSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactArn" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactArn" })
   artifactArn?: string;
 
-  @Metadata({ data: "json, name=ArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactName" })
   artifactName?: string;
 
-  @Metadata({ data: "json, name=ArtifactType" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactType" })
   artifactType?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: ArtifactSource;
 }

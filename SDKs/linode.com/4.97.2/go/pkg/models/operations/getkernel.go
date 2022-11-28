@@ -8,12 +8,12 @@ type GetKernelPathParams struct {
 	KernelID string `pathParam:"style=simple,explode=false,name=kernelId"`
 }
 
-type GetKernelRequest struct {
-	PathParams GetKernelPathParams
-}
-
 type GetKernelDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetKernelRequest struct {
+	PathParams GetKernelPathParams
 }
 
 type GetKernelResponse struct {

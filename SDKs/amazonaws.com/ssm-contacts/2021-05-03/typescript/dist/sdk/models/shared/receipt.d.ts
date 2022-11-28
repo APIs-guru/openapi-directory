@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReceiptTypeEnum } from "./receipttypeenum";
 /**
  * Records events during an engagement.

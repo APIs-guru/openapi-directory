@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Get } from "./get";
+
 
 
 // TransactGetItem
@@ -7,6 +8,6 @@ import { Get } from "./get";
  * Specifies an item to be retrieved as part of the transaction.
 **/
 export class TransactGetItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Get" })
+  @SpeakeasyMetadata({ data: "json, name=Get" })
   get: Get;
 }

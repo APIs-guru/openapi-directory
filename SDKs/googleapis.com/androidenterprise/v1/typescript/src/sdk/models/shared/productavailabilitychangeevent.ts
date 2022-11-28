@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProductAvailabilityChangeEventAvailabilityStatusEnum {
-    Unknown = "unknown"
-,    Available = "available"
-,    Removed = "removed"
-,    Unpublished = "unpublished"
+    Unknown = "unknown",
+    Available = "available",
+    Removed = "removed",
+    Unpublished = "unpublished"
 }
 
 
@@ -13,9 +14,9 @@ export enum ProductAvailabilityChangeEventAvailabilityStatusEnum {
  * An event generated whenever a product's availability changes.
 **/
 export class ProductAvailabilityChangeEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availabilityStatus" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityStatus" })
   availabilityStatus?: ProductAvailabilityChangeEventAvailabilityStatusEnum;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 }

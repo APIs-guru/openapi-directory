@@ -4,11 +4,15 @@ import (
 	"time"
 )
 
+// CommentContext
+// The context of the file which is being commented on.
 type CommentContext struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
 }
 
+// Comment
+// A comment on a file in Google Drive.
 type Comment struct {
 	Anchor       *string         `json:"anchor,omitempty"`
 	Author       *User           `json:"author,omitempty"`

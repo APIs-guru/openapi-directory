@@ -1,5 +1,7 @@
 package shared
 
+// Earning
+// The employee earning model
 type Earning struct {
 	Agency            *string  `json:"agency,omitempty"`
 	Amount            *float64 `json:"amount,omitempty"`

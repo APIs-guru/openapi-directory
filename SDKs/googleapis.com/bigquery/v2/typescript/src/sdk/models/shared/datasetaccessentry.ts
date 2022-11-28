@@ -1,16 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetReference } from "./datasetreference";
 
+
 export enum DatasetAccessEntryTargetTypesEnum {
-    TargetTypeUnspecified = "TARGET_TYPE_UNSPECIFIED"
-,    Views = "VIEWS"
+    TargetTypeUnspecified = "TARGET_TYPE_UNSPECIFIED",
+    Views = "VIEWS",
+    Routines = "ROUTINES"
 }
 
 
 export class DatasetAccessEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataset" })
+  @SpeakeasyMetadata({ data: "json, name=dataset" })
   dataset?: DatasetReference;
 
-  @Metadata({ data: "json, name=targetTypes" })
+  @SpeakeasyMetadata({ data: "json, name=targetTypes" })
   targetTypes?: DatasetAccessEntryTargetTypesEnum[];
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnthosObservabilityMembershipSpec } from "./anthosobservabilitymembershipspec";
-import { AnthosVmMembershipSpec } from "./anthosvmmembershipspec";
 import { MembershipSpec } from "./membershipspec";
 import { ConfigManagementMembershipSpec } from "./configmanagementmembershipspec";
 import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
 import { ServiceMeshMembershipSpec } from "./servicemeshmembershipspec";
 import { PolicyControllerMembershipSpec } from "./policycontrollermembershipspec";
+import { IdentityServiceMembershipSpecInput } from "./identityservicemembershipspec";
 // MembershipFeatureSpec
 /**
  * MembershipFeatureSpec contains configuration information for a single Membership.
@@ -40,33 +40,73 @@ var MembershipFeatureSpec = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=anthosobservability" }),
+        SpeakeasyMetadata({ data: "json, name=anthosobservability" }),
         __metadata("design:type", AnthosObservabilityMembershipSpec)
     ], MembershipFeatureSpec.prototype, "anthosobservability", void 0);
     __decorate([
-        Metadata({ data: "json, name=anthosvm" }),
-        __metadata("design:type", AnthosVmMembershipSpec)
-    ], MembershipFeatureSpec.prototype, "anthosvm", void 0);
-    __decorate([
-        Metadata({ data: "json, name=cloudbuild" }),
+        SpeakeasyMetadata({ data: "json, name=cloudbuild" }),
         __metadata("design:type", MembershipSpec)
     ], MembershipFeatureSpec.prototype, "cloudbuild", void 0);
     __decorate([
-        Metadata({ data: "json, name=configmanagement" }),
+        SpeakeasyMetadata({ data: "json, name=configmanagement" }),
         __metadata("design:type", ConfigManagementMembershipSpec)
     ], MembershipFeatureSpec.prototype, "configmanagement", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityservice" }),
+        SpeakeasyMetadata({ data: "json, name=fleetobservability" }),
+        __metadata("design:type", Map)
+    ], MembershipFeatureSpec.prototype, "fleetobservability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=identityservice" }),
         __metadata("design:type", IdentityServiceMembershipSpec)
     ], MembershipFeatureSpec.prototype, "identityservice", void 0);
     __decorate([
-        Metadata({ data: "json, name=mesh" }),
+        SpeakeasyMetadata({ data: "json, name=mesh" }),
         __metadata("design:type", ServiceMeshMembershipSpec)
     ], MembershipFeatureSpec.prototype, "mesh", void 0);
     __decorate([
-        Metadata({ data: "json, name=policycontroller" }),
+        SpeakeasyMetadata({ data: "json, name=policycontroller" }),
         __metadata("design:type", PolicyControllerMembershipSpec)
     ], MembershipFeatureSpec.prototype, "policycontroller", void 0);
     return MembershipFeatureSpec;
 }(SpeakeasyBase));
 export { MembershipFeatureSpec };
+// MembershipFeatureSpecInput
+/**
+ * MembershipFeatureSpec contains configuration information for a single Membership.
+**/
+var MembershipFeatureSpecInput = /** @class */ (function (_super) {
+    __extends(MembershipFeatureSpecInput, _super);
+    function MembershipFeatureSpecInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=anthosobservability" }),
+        __metadata("design:type", AnthosObservabilityMembershipSpec)
+    ], MembershipFeatureSpecInput.prototype, "anthosobservability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cloudbuild" }),
+        __metadata("design:type", MembershipSpec)
+    ], MembershipFeatureSpecInput.prototype, "cloudbuild", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=configmanagement" }),
+        __metadata("design:type", ConfigManagementMembershipSpec)
+    ], MembershipFeatureSpecInput.prototype, "configmanagement", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=fleetobservability" }),
+        __metadata("design:type", Map)
+    ], MembershipFeatureSpecInput.prototype, "fleetobservability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=identityservice" }),
+        __metadata("design:type", IdentityServiceMembershipSpecInput)
+    ], MembershipFeatureSpecInput.prototype, "identityservice", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=mesh" }),
+        __metadata("design:type", ServiceMeshMembershipSpec)
+    ], MembershipFeatureSpecInput.prototype, "mesh", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=policycontroller" }),
+        __metadata("design:type", PolicyControllerMembershipSpec)
+    ], MembershipFeatureSpecInput.prototype, "policycontroller", void 0);
+    return MembershipFeatureSpecInput;
+}(SpeakeasyBase));
+export { MembershipFeatureSpecInput };

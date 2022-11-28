@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastorePartitions } from "./datastorepartitions";
 import { DatastoreStorageSummary } from "./datastorestoragesummary";
 import { FileFormatTypeEnum } from "./fileformattypeenum";
@@ -37,35 +37,35 @@ var DatastoreSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], DatastoreSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=datastoreName" }),
+        SpeakeasyMetadata({ data: "json, name=datastoreName" }),
         __metadata("design:type", String)
     ], DatastoreSummary.prototype, "datastoreName", void 0);
     __decorate([
-        Metadata({ data: "json, name=datastorePartitions" }),
+        SpeakeasyMetadata({ data: "json, name=datastorePartitions" }),
         __metadata("design:type", DatastorePartitions)
     ], DatastoreSummary.prototype, "datastorePartitions", void 0);
     __decorate([
-        Metadata({ data: "json, name=datastoreStorage" }),
+        SpeakeasyMetadata({ data: "json, name=datastoreStorage" }),
         __metadata("design:type", DatastoreStorageSummary)
     ], DatastoreSummary.prototype, "datastoreStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileFormatType" }),
+        SpeakeasyMetadata({ data: "json, name=fileFormatType" }),
         __metadata("design:type", String)
     ], DatastoreSummary.prototype, "fileFormatType", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastMessageArrivalTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastMessageArrivalTime" }),
         __metadata("design:type", Date)
     ], DatastoreSummary.prototype, "lastMessageArrivalTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], DatastoreSummary.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DatastoreSummary.prototype, "status", void 0);
     return DatastoreSummary;

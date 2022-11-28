@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import conversionstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConversionsBatchUpdateResponse:
-    has_failures: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hasFailures' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    status: Optional[List[conversionstatus.ConversionStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""ConversionsBatchUpdateResponse
+    Update Conversions Response.
+    """
+    
+    has_failures: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hasFailures') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    status: Optional[List[ConversionStatus]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPodcastByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum GetPodcastByIdSortEnum {
-    RecentFirst = "recent_first"
-,    OldestFirst = "oldest_first"
+    RecentFirst = "recent_first",
+    OldestFirst = "oldest_first"
 }
 
 
 export class GetPodcastByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=next_episode_pub_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=next_episode_pub_date" })
   nextEpisodePubDate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetPodcastByIdSortEnum;
 }
 
 
 export class GetPodcastByIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
   xListenApiKey: string;
 }
 
 
 export class GetPodcastByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPodcastByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPodcastByIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPodcastByIdHeaders;
 }
 
 
 export class GetPodcastByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   podcastFull?: shared.PodcastFull;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

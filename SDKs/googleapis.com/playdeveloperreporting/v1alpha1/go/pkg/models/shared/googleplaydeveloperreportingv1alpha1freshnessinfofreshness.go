@@ -8,6 +8,8 @@ const (
 	GooglePlayDeveloperReportingV1alpha1FreshnessInfoFreshnessAggregationPeriodEnumDaily                        GooglePlayDeveloperReportingV1alpha1FreshnessInfoFreshnessAggregationPeriodEnum = "DAILY"
 )
 
+// GooglePlayDeveloperReportingV1alpha1FreshnessInfoFreshness
+// Information about data freshness for a single aggregation period.
 type GooglePlayDeveloperReportingV1alpha1FreshnessInfoFreshness struct {
 	AggregationPeriod *GooglePlayDeveloperReportingV1alpha1FreshnessInfoFreshnessAggregationPeriodEnum `json:"aggregationPeriod,omitempty"`
 	LatestEndTime     *GoogleTypeDateTime                                                              `json:"latestEndTime,omitempty"`

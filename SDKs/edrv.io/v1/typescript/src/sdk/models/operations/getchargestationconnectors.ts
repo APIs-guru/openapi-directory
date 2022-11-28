@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetChargeStationConnectorsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetChargeStationConnectorsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_evse" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_evse" })
   includeEvse?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
   includeOrganization?: boolean;
 }
 
 
 export class GetChargeStationConnectorsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetChargeStationConnectorsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetChargeStationConnectorsQueryParams;
 }
 
 
 export class GetChargeStationConnectorsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

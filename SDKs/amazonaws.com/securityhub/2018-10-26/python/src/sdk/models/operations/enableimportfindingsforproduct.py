@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,23 @@ class EnableImportFindingsForProductHeaders:
 @dataclass_json
 @dataclass
 class EnableImportFindingsForProductRequestBody:
-    product_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductArn' }})
+    product_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductArn') }})
     
 
 @dataclass
 class EnableImportFindingsForProductRequest:
-    headers: EnableImportFindingsForProductHeaders = field(default=None)
-    request: EnableImportFindingsForProductRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: EnableImportFindingsForProductHeaders = field()
+    request: EnableImportFindingsForProductRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class EnableImportFindingsForProductResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     enable_import_findings_for_product_response: Optional[shared.EnableImportFindingsForProductResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

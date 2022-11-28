@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,22 @@ class PutImageRecipePolicyHeaders:
 @dataclass_json
 @dataclass
 class PutImageRecipePolicyRequestBody:
-    image_recipe_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageRecipeArn' }})
-    policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
+    image_recipe_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageRecipeArn') }})
+    policy: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
     
 
 @dataclass
 class PutImageRecipePolicyRequest:
-    headers: PutImageRecipePolicyHeaders = field(default=None)
-    request: PutImageRecipePolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutImageRecipePolicyHeaders = field()
+    request: PutImageRecipePolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutImageRecipePolicyResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
@@ -40,5 +45,4 @@ class PutImageRecipePolicyResponse:
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

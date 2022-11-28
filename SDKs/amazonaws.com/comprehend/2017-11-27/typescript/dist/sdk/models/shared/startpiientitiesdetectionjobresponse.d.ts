@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
 export declare class StartPiiEntitiesDetectionJobResponse extends SpeakeasyBase {
     jobArn?: string;

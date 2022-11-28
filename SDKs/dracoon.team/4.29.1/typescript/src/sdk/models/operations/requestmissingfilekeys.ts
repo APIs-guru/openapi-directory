@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestMissingFileKeysQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=file_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=file_id" })
   fileId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=room_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=room_id" })
   roomId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=use_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=use_key" })
   useKey?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_id" })
   userId?: number;
 }
 
 
 export class RequestMissingFileKeysHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RequestMissingFileKeysRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestMissingFileKeysQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestMissingFileKeysHeaders;
 }
 
 
-export class RequestMissingFileKeysResponse extends SpeakeasyBase {
-  @Metadata()
+export class RequestMissingFileKeysResponseOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
-  missingKeysResponse?: shared.MissingKeysResponse;
+  @SpeakeasyMetadata()
+  missingKeysResponse?: shared.MissingKeysResponseOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

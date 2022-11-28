@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSubtitlePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=index" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" })
   index: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mediaSourceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaSourceId" })
   mediaSourceId: string;
 }
 
 
 export class GetSubtitleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=addVttTimeMap" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=addVttTimeMap" })
   addVttTimeMap?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=copyTimestamps" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=copyTimestamps" })
   copyTimestamps?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endPositionTicks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endPositionTicks" })
   endPositionTicks?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startPositionTicks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startPositionTicks" })
   startPositionTicks?: number;
 }
 
 
 export class GetSubtitleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSubtitlePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSubtitleQueryParams;
 }
 
 
 export class GetSubtitleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSubtitle200TextWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

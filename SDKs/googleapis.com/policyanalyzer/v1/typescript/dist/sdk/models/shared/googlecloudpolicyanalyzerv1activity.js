@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPolicyanalyzerV1ObservationPeriod } from "./googlecloudpolicyanalyzerv1observationperiod";
 var GoogleCloudPolicyanalyzerV1Activity = /** @class */ (function (_super) {
     __extends(GoogleCloudPolicyanalyzerV1Activity, _super);
@@ -30,19 +30,19 @@ var GoogleCloudPolicyanalyzerV1Activity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activity" }),
+        SpeakeasyMetadata({ data: "json, name=activity" }),
         __metadata("design:type", Map)
     ], GoogleCloudPolicyanalyzerV1Activity.prototype, "activity", void 0);
     __decorate([
-        Metadata({ data: "json, name=activityType" }),
+        SpeakeasyMetadata({ data: "json, name=activityType" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicyanalyzerV1Activity.prototype, "activityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=fullResourceName" }),
+        SpeakeasyMetadata({ data: "json, name=fullResourceName" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicyanalyzerV1Activity.prototype, "fullResourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=observationPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=observationPeriod" }),
         __metadata("design:type", GoogleCloudPolicyanalyzerV1ObservationPeriod)
     ], GoogleCloudPolicyanalyzerV1Activity.prototype, "observationPeriod", void 0);
     return GoogleCloudPolicyanalyzerV1Activity;

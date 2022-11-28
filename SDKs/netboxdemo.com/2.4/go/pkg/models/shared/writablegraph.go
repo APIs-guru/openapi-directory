@@ -1,7 +1,6 @@
 package shared
 
-type WritableGraph struct {
-	ID     *int64  `json:"id,omitempty"`
+type WritableGraphInput struct {
 	Link   *string `json:"link,omitempty"`
 	Name   string  `json:"name"`
 	Source string  `json:"source"`

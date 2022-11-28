@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,20 +17,20 @@ class AnalyticsProvisioningCreateAccountTreeQueryParams:
 
 @dataclass
 class AnalyticsProvisioningCreateAccountTreeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsProvisioningCreateAccountTreeRequest:
-    query_params: AnalyticsProvisioningCreateAccountTreeQueryParams = field(default=None)
+    query_params: AnalyticsProvisioningCreateAccountTreeQueryParams = field()
+    security: AnalyticsProvisioningCreateAccountTreeSecurity = field()
     request: Optional[shared.AccountTreeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsProvisioningCreateAccountTreeSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsProvisioningCreateAccountTreeResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_tree_response: Optional[shared.AccountTreeResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

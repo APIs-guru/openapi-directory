@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class WebfontsWebfontsListSortEnum(str, Enum):
@@ -29,12 +30,12 @@ class WebfontsWebfontsListQueryParams:
 
 @dataclass
 class WebfontsWebfontsListRequest:
-    query_params: WebfontsWebfontsListQueryParams = field(default=None)
+    query_params: WebfontsWebfontsListQueryParams = field()
     
 
 @dataclass
 class WebfontsWebfontsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webfont_list: Optional[shared.WebfontList] = field(default=None)
     

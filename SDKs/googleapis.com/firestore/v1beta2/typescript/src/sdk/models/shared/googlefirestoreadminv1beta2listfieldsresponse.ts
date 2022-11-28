@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta2Field } from "./googlefirestoreadminv1beta2field";
+
 
 
 // GoogleFirestoreAdminV1beta2ListFieldsResponse
@@ -8,9 +8,9 @@ import { GoogleFirestoreAdminV1beta2Field } from "./googlefirestoreadminv1beta2f
  * The response for FirestoreAdmin.ListFields.
 **/
 export class GoogleFirestoreAdminV1beta2ListFieldsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.GoogleFirestoreAdminV1beta2Field })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: GoogleFirestoreAdminV1beta2Field })
   fields?: GoogleFirestoreAdminV1beta2Field[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

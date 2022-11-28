@@ -8,6 +8,8 @@ const (
 	RoleKindEnumClusterRole     RoleKindEnum = "CLUSTER_ROLE"
 )
 
+// Role
+// Kubernetes Role or ClusterRole.
 type Role struct {
 	Kind *RoleKindEnum `json:"kind,omitempty"`
 	Name *string       `json:"name,omitempty"`

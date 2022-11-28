@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteDbSubnetGroupActionEnum(str, Enum):
     DELETE_DB_SUBNET_GROUP = "DeleteDBSubnetGroup"
@@ -10,8 +14,8 @@ class PostDeleteDbSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteDbSubnetGroupQueryParams:
-    action: PostDeleteDbSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteDbSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteDbSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteDbSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteDbSubnetGroupHeaders:
 
 @dataclass
 class PostDeleteDbSubnetGroupRequest:
-    query_params: PostDeleteDbSubnetGroupQueryParams = field(default=None)
-    headers: PostDeleteDbSubnetGroupHeaders = field(default=None)
+    headers: PostDeleteDbSubnetGroupHeaders = field()
+    query_params: PostDeleteDbSubnetGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteDbSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

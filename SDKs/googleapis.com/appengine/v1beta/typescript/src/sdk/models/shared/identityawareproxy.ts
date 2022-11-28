@@ -1,4 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// IdentityAwareProxyInput
+/** 
+ * Identity-Aware Proxy
+**/
+export class IdentityAwareProxyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
+  enabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=oauth2ClientId" })
+  oauth2ClientId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=oauth2ClientSecret" })
+  oauth2ClientSecret?: string;
+}
 
 
 // IdentityAwareProxy
@@ -6,15 +23,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identity-Aware Proxy
 **/
 export class IdentityAwareProxy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=oauth2ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=oauth2ClientId" })
   oauth2ClientId?: string;
 
-  @Metadata({ data: "json, name=oauth2ClientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=oauth2ClientSecret" })
   oauth2ClientSecret?: string;
 
-  @Metadata({ data: "json, name=oauth2ClientSecretSha256" })
+  @SpeakeasyMetadata({ data: "json, name=oauth2ClientSecretSha256" })
   oauth2ClientSecretSha256?: string;
 }

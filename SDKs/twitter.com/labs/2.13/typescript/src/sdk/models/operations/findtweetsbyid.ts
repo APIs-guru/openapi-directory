@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FindTweetsByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=expansions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=expansions" })
   expansions?: shared.TweetExpansionsParameterEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
   ids: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=media.fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=media.fields" })
   mediaFields?: shared.MediaFieldsParameterEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=place.fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=place.fields" })
   placeFields?: shared.PlaceFieldsParameterEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=poll.fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=poll.fields" })
   pollFields?: shared.PollFieldsParameterEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=tweet.fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tweet.fields" })
   tweetFields?: shared.TweetFieldsParameterEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=user.fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=user.fields" })
   userFields?: shared.UserFieldsParameterEnum[];
 }
 
 
 export class FindTweetsByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FindTweetsByIdQueryParams;
 }
 
 
 export class FindTweetsByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problem?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tweetLookupResponse?: shared.TweetLookupResponse;
 }

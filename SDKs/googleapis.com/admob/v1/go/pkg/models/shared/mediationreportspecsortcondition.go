@@ -43,6 +43,8 @@ const (
 	MediationReportSpecSortConditionOrderEnumDescending           MediationReportSpecSortConditionOrderEnum = "DESCENDING"
 )
 
+// MediationReportSpecSortCondition
+// Sorting direction to be applied on a dimension or a metric.
 type MediationReportSpecSortCondition struct {
 	Dimension *MediationReportSpecSortConditionDimensionEnum `json:"dimension,omitempty"`
 	Metric    *MediationReportSpecSortConditionMetricEnum    `json:"metric,omitempty"`

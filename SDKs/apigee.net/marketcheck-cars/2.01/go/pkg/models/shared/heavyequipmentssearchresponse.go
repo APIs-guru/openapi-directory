@@ -1,5 +1,7 @@
 package shared
 
+// HeavyEquipmentsSearchResponse
+// Heavy Equipments search query response
 type HeavyEquipmentsSearchResponse struct {
 	Facets      map[string]interface{}       `json:"facets,omitempty"`
 	Listings    []HeavyEquipmentsBaseListing `json:"listings,omitempty"`

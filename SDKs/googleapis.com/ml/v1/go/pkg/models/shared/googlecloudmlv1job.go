@@ -13,6 +13,25 @@ const (
 	GoogleCloudMlV1JobStateEnumCancelled        GoogleCloudMlV1JobStateEnum = "CANCELLED"
 )
 
+// GoogleCloudMlV1JobInput
+// Represents a training or prediction job.
+type GoogleCloudMlV1JobInput struct {
+	CreateTime       *string                             `json:"createTime,omitempty"`
+	EndTime          *string                             `json:"endTime,omitempty"`
+	ErrorMessage     *string                             `json:"errorMessage,omitempty"`
+	Etag             *string                             `json:"etag,omitempty"`
+	JobID            *string                             `json:"jobId,omitempty"`
+	Labels           map[string]string                   `json:"labels,omitempty"`
+	PredictionInput  *GoogleCloudMlV1PredictionInput     `json:"predictionInput,omitempty"`
+	PredictionOutput *GoogleCloudMlV1PredictionOutput    `json:"predictionOutput,omitempty"`
+	StartTime        *string                             `json:"startTime,omitempty"`
+	State            *GoogleCloudMlV1JobStateEnum        `json:"state,omitempty"`
+	TrainingInput    *GoogleCloudMlV1TrainingInput       `json:"trainingInput,omitempty"`
+	TrainingOutput   *GoogleCloudMlV1TrainingOutputInput `json:"trainingOutput,omitempty"`
+}
+
+// GoogleCloudMlV1Job
+// Represents a training or prediction job.
 type GoogleCloudMlV1Job struct {
 	CreateTime       *string                          `json:"createTime,omitempty"`
 	EndTime          *string                          `json:"endTime,omitempty"`

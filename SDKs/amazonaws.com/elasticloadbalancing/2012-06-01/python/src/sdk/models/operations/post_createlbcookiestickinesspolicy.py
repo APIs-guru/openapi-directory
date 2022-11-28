@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateLbCookieStickinessPolicyActionEnum(str, Enum):
     CREATE_LB_COOKIE_STICKINESS_POLICY = "CreateLBCookieStickinessPolicy"
@@ -10,8 +14,8 @@ class PostCreateLbCookieStickinessPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateLbCookieStickinessPolicyQueryParams:
-    action: PostCreateLbCookieStickinessPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateLbCookieStickinessPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateLbCookieStickinessPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateLbCookieStickinessPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateLbCookieStickinessPolicyHeaders:
 
 @dataclass
 class PostCreateLbCookieStickinessPolicyRequest:
-    query_params: PostCreateLbCookieStickinessPolicyQueryParams = field(default=None)
-    headers: PostCreateLbCookieStickinessPolicyHeaders = field(default=None)
+    headers: PostCreateLbCookieStickinessPolicyHeaders = field()
+    query_params: PostCreateLbCookieStickinessPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateLbCookieStickinessPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

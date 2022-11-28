@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorldConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information for a world.
 **/
 export class WorldConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=world" })
+  @SpeakeasyMetadata({ data: "json, name=world" })
   world?: string;
 }

@@ -31,7 +31,7 @@ type CloudassetSavedQueriesCreateSecurity struct {
 type CloudassetSavedQueriesCreateRequest struct {
 	PathParams  CloudassetSavedQueriesCreatePathParams
 	QueryParams CloudassetSavedQueriesCreateQueryParams
-	Request     *shared.SavedQuery `request:"mediaType=application/json"`
+	Request     *shared.SavedQueryInput `request:"mediaType=application/json"`
 	Security    CloudassetSavedQueriesCreateSecurity
 }
 

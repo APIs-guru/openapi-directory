@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AccountResponseProviderEnum(str, Enum):
     MESSENGER = "messenger"
@@ -11,10 +13,10 @@ class AccountResponseProviderEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AccountResponse:
-    access_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access_token' }})
-    api_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'api_key' }})
-    applications: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applications' }})
-    external_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'external_id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    provider: AccountResponseProviderEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
+    api_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('api_key') }})
+    external_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('external_id') }})
+    provider: AccountResponseProviderEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
+    access_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('access_token') }})
+    applications: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applications') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

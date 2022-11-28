@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo } from "./googlecloudidentitytoolkitv2startmfaphonerequestinfo";
+
 
 
 // GoogleCloudIdentitytoolkitV2StartMfaSignInRequest
@@ -7,15 +8,15 @@ import { GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo } from "./googlecl
  * Starts multi-factor sign-in by sending the multi-factor auth challenge.
 **/
 export class GoogleCloudIdentitytoolkitV2StartMfaSignInRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mfaEnrollmentId" })
+  @SpeakeasyMetadata({ data: "json, name=mfaEnrollmentId" })
   mfaEnrollmentId?: string;
 
-  @Metadata({ data: "json, name=mfaPendingCredential" })
+  @SpeakeasyMetadata({ data: "json, name=mfaPendingCredential" })
   mfaPendingCredential?: string;
 
-  @Metadata({ data: "json, name=phoneSignInInfo" })
+  @SpeakeasyMetadata({ data: "json, name=phoneSignInInfo" })
   phoneSignInInfo?: GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo;
 
-  @Metadata({ data: "json, name=tenantId" })
+  @SpeakeasyMetadata({ data: "json, name=tenantId" })
   tenantId?: string;
 }

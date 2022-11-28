@@ -24,6 +24,8 @@ const (
 	AutoInstallConstraintNetworkTypeConstraintEnumUnmeteredNetwork                 AutoInstallConstraintNetworkTypeConstraintEnum = "unmeteredNetwork"
 )
 
+// AutoInstallConstraint
+// The auto-install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.
 type AutoInstallConstraint struct {
 	ChargingStateConstraint   *AutoInstallConstraintChargingStateConstraintEnum   `json:"chargingStateConstraint,omitempty"`
 	DeviceIdleStateConstraint *AutoInstallConstraintDeviceIdleStateConstraintEnum `json:"deviceIdleStateConstraint,omitempty"`

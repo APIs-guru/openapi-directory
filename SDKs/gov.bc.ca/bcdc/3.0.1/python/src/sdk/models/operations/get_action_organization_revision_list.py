@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
@@ -9,11 +9,11 @@ class GetActionOrganizationRevisionListQueryParams:
 
 @dataclass
 class GetActionOrganizationRevisionListRequest:
-    query_params: GetActionOrganizationRevisionListQueryParams = field(default=None)
+    query_params: GetActionOrganizationRevisionListQueryParams = field()
     
 
 @dataclass
 class GetActionOrganizationRevisionListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

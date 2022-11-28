@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import linktype
-from . import linktype
-from . import linktype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AppPkgInfoLinks:
-    app_d: linktype.LinkType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appD' }})
-    app_pkg_content: linktype.LinkType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appPkgContent' }})
-    self: linktype.LinkType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    r"""AppPkgInfoLinks
+    Links to resources related to this resource.
+    """
+    
+    app_d: LinkType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('appD') }})
+    app_pkg_content: LinkType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('appPkgContent') }})
+    self: LinkType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
     

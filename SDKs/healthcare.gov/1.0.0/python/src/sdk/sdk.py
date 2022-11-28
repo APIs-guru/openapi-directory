@@ -1,7 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://www.healthcare.gov/developers/"""
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -10,26 +13,48 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://www.healthcare.gov/developers/"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_api_articles_media_type_extension_(self, request: operations.GetAPIArticlesMediaTypeExtensionRequest) -> operations.GetAPIArticlesMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/articles{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -45,13 +70,16 @@ class SDK:
 
     
     def get_api_blog_media_type_extension_(self, request: operations.GetAPIBlogMediaTypeExtensionRequest) -> operations.GetAPIBlogMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/blog{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -67,13 +95,16 @@ class SDK:
 
     
     def get_api_glossary_media_type_extension_(self, request: operations.GetAPIGlossaryMediaTypeExtensionRequest) -> operations.GetAPIGlossaryMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/glossary{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -89,13 +120,16 @@ class SDK:
 
     
     def get_api_questions_media_type_extension_(self, request: operations.GetAPIQuestionsMediaTypeExtensionRequest) -> operations.GetAPIQuestionsMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/questions{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -111,13 +145,16 @@ class SDK:
 
     
     def get_api_states_media_type_extension_(self, request: operations.GetAPIStatesMediaTypeExtensionRequest) -> operations.GetAPIStatesMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/states{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -133,13 +170,16 @@ class SDK:
 
     
     def get_api_topics_media_type_extension_(self, request: operations.GetAPITopicsMediaTypeExtensionRequest) -> operations.GetAPITopicsMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/topics{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -155,13 +195,16 @@ class SDK:
 
     
     def get_blog_page_name_media_type_extension_(self, request: operations.GetBlogPageNameMediaTypeExtensionRequest) -> operations.GetBlogPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/blog/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -177,13 +220,16 @@ class SDK:
 
     
     def get_es_blog_page_name_media_type_extension_(self, request: operations.GetEsBlogPageNameMediaTypeExtensionRequest) -> operations.GetEsBlogPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/es/blog/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -199,13 +245,16 @@ class SDK:
 
     
     def get_es_glossary_page_name_media_type_extension_(self, request: operations.GetEsGlossaryPageNameMediaTypeExtensionRequest) -> operations.GetEsGlossaryPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/es/glossary/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -221,13 +270,16 @@ class SDK:
 
     
     def get_es_page_name_media_type_extension_(self, request: operations.GetEsPageNameMediaTypeExtensionRequest) -> operations.GetEsPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/es/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -243,13 +295,16 @@ class SDK:
 
     
     def get_es_question_page_name_media_type_extension_(self, request: operations.GetEsQuestionPageNameMediaTypeExtensionRequest) -> operations.GetEsQuestionPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/es/question/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -265,13 +320,16 @@ class SDK:
 
     
     def get_es_state_name_media_type_extension_(self, request: operations.GetEsStateNameMediaTypeExtensionRequest) -> operations.GetEsStateNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/es/{stateName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -287,13 +345,16 @@ class SDK:
 
     
     def get_glossary_page_name_media_type_extension_(self, request: operations.GetGlossaryPageNameMediaTypeExtensionRequest) -> operations.GetGlossaryPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/glossary/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -309,13 +370,16 @@ class SDK:
 
     
     def get_page_name_media_type_extension_(self, request: operations.GetPageNameMediaTypeExtensionRequest) -> operations.GetPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -331,13 +395,16 @@ class SDK:
 
     
     def get_question_page_name_media_type_extension_(self, request: operations.GetQuestionPageNameMediaTypeExtensionRequest) -> operations.GetQuestionPageNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/question/{pageName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -353,13 +420,16 @@ class SDK:
 
     
     def get_state_name_media_type_extension_(self, request: operations.GetStateNameMediaTypeExtensionRequest) -> operations.GetStateNameMediaTypeExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns pages content.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{stateName}{mediaTypeExtension}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

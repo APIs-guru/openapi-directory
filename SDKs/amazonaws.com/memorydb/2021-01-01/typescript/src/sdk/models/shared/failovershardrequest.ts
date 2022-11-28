@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FailoverShardRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterName" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterName" })
   clusterName: string;
 
-  @Metadata({ data: "json, name=ShardName" })
+  @SpeakeasyMetadata({ data: "json, name=ShardName" })
   shardName: string;
 }

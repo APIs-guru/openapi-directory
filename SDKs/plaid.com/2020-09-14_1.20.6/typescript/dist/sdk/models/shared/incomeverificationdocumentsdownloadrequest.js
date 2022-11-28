@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IncomeVerificationDocumentsDownloadRequest
 /**
  * IncomeVerificationDocumentsDownloadRequest defines the request schema for `/income/verification/documents/download`.
@@ -33,15 +33,15 @@ var IncomeVerificationDocumentsDownloadRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], IncomeVerificationDocumentsDownloadRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=income_verification_id" }),
+        SpeakeasyMetadata({ data: "json, name=income_verification_id" }),
         __metadata("design:type", String)
     ], IncomeVerificationDocumentsDownloadRequest.prototype, "incomeVerificationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], IncomeVerificationDocumentsDownloadRequest.prototype, "secret", void 0);
     return IncomeVerificationDocumentsDownloadRequest;

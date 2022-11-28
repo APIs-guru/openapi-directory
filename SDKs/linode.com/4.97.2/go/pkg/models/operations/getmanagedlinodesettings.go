@@ -9,22 +9,9 @@ type GetManagedLinodeSettingsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetManagedLinodeSettingsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetManagedLinodeSettingsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetManagedLinodeSettingsSecurity struct {
-	Option1 *GetManagedLinodeSettingsSecurityOption1 `security:"option"`
-	Option2 *GetManagedLinodeSettingsSecurityOption2 `security:"option"`
-}
-
-type GetManagedLinodeSettingsRequest struct {
-	QueryParams GetManagedLinodeSettingsQueryParams
-	Security    GetManagedLinodeSettingsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetManagedLinodeSettings200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetManagedLinodeSettings200ApplicationJSON struct {
 
 type GetManagedLinodeSettingsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetManagedLinodeSettingsRequest struct {
+	QueryParams GetManagedLinodeSettingsQueryParams
+	Security    GetManagedLinodeSettingsSecurity
 }
 
 type GetManagedLinodeSettingsResponse struct {

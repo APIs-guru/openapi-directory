@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StartReplicationTaskMessage
+// <p/>
 type StartReplicationTaskMessage struct {
 	CdcStartPosition         *string                           `json:"CdcStartPosition,omitempty"`
 	CdcStartTime             *time.Time                        `json:"CdcStartTime,omitempty"`

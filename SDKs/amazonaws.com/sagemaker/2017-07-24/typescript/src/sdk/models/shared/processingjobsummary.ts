@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingJobStatusEnum } from "./processingjobstatusenum";
+
 
 
 // ProcessingJobSummary
@@ -7,27 +8,27 @@ import { ProcessingJobStatusEnum } from "./processingjobstatusenum";
  * Summary of information about a processing job.
 **/
 export class ProcessingJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=ExitMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ExitMessage" })
   exitMessage?: string;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=ProcessingEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingEndTime" })
   processingEndTime?: Date;
 
-  @Metadata({ data: "json, name=ProcessingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJobArn" })
   processingJobArn: string;
 
-  @Metadata({ data: "json, name=ProcessingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJobName" })
   processingJobName: string;
 
-  @Metadata({ data: "json, name=ProcessingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJobStatus" })
   processingJobStatus: ProcessingJobStatusEnum;
 }

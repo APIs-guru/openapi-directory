@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Notebook instance configurations that can be updated.
 **/
 export class InstanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableHealthMonitoring" })
+  @SpeakeasyMetadata({ data: "json, name=enableHealthMonitoring" })
   enableHealthMonitoring?: boolean;
 
-  @Metadata({ data: "json, name=notebookUpgradeSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=notebookUpgradeSchedule" })
   notebookUpgradeSchedule?: string;
 }

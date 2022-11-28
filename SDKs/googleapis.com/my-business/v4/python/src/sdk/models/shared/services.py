@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import languagesspoken
+from sdk import utils
+from . import *
 
 class ServicesBaggageStorageExceptionEnum(str, Enum):
     EXCEPTION_UNSPECIFIED = "EXCEPTION_UNSPECIFIED"
@@ -79,29 +81,33 @@ class ServicesWakeUpCallsExceptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Services:
-    baggage_storage: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'baggageStorage' }})
-    baggage_storage_exception: Optional[ServicesBaggageStorageExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'baggageStorageException' }})
-    concierge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'concierge' }})
-    concierge_exception: Optional[ServicesConciergeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conciergeException' }})
-    convenience_store: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'convenienceStore' }})
-    convenience_store_exception: Optional[ServicesConvenienceStoreExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'convenienceStoreException' }})
-    currency_exchange: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencyExchange' }})
-    currency_exchange_exception: Optional[ServicesCurrencyExchangeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencyExchangeException' }})
-    elevator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'elevator' }})
-    elevator_exception: Optional[ServicesElevatorExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'elevatorException' }})
-    front_desk: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frontDesk' }})
-    front_desk_exception: Optional[ServicesFrontDeskExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frontDeskException' }})
-    full_service_laundry: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fullServiceLaundry' }})
-    full_service_laundry_exception: Optional[ServicesFullServiceLaundryExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fullServiceLaundryException' }})
-    gift_shop: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'giftShop' }})
-    gift_shop_exception: Optional[ServicesGiftShopExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'giftShopException' }})
-    languages_spoken: Optional[languagesspoken.LanguagesSpoken] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languagesSpoken' }})
-    self_service_laundry: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfServiceLaundry' }})
-    self_service_laundry_exception: Optional[ServicesSelfServiceLaundryExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfServiceLaundryException' }})
-    social_hour: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'socialHour' }})
-    social_hour_exception: Optional[ServicesSocialHourExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'socialHourException' }})
-    twenty_four_hour_front_desk: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'twentyFourHourFrontDesk' }})
-    twenty_four_hour_front_desk_exception: Optional[ServicesTwentyFourHourFrontDeskExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'twentyFourHourFrontDeskException' }})
-    wake_up_calls: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wakeUpCalls' }})
-    wake_up_calls_exception: Optional[ServicesWakeUpCallsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wakeUpCallsException' }})
+    r"""Services
+    Conveniences or help provided by the property to facilitate an easier, more comfortable stay.
+    """
+    
+    baggage_storage: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('baggageStorage') }})
+    baggage_storage_exception: Optional[ServicesBaggageStorageExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('baggageStorageException') }})
+    concierge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('concierge') }})
+    concierge_exception: Optional[ServicesConciergeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conciergeException') }})
+    convenience_store: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('convenienceStore') }})
+    convenience_store_exception: Optional[ServicesConvenienceStoreExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('convenienceStoreException') }})
+    currency_exchange: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencyExchange') }})
+    currency_exchange_exception: Optional[ServicesCurrencyExchangeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencyExchangeException') }})
+    elevator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('elevator') }})
+    elevator_exception: Optional[ServicesElevatorExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('elevatorException') }})
+    front_desk: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frontDesk') }})
+    front_desk_exception: Optional[ServicesFrontDeskExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frontDeskException') }})
+    full_service_laundry: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fullServiceLaundry') }})
+    full_service_laundry_exception: Optional[ServicesFullServiceLaundryExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fullServiceLaundryException') }})
+    gift_shop: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('giftShop') }})
+    gift_shop_exception: Optional[ServicesGiftShopExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('giftShopException') }})
+    languages_spoken: Optional[LanguagesSpoken] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languagesSpoken') }})
+    self_service_laundry: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfServiceLaundry') }})
+    self_service_laundry_exception: Optional[ServicesSelfServiceLaundryExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfServiceLaundryException') }})
+    social_hour: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('socialHour') }})
+    social_hour_exception: Optional[ServicesSocialHourExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('socialHourException') }})
+    twenty_four_hour_front_desk: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('twentyFourHourFrontDesk') }})
+    twenty_four_hour_front_desk_exception: Optional[ServicesTwentyFourHourFrontDeskExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('twentyFourHourFrontDeskException') }})
+    wake_up_calls: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wakeUpCalls') }})
+    wake_up_calls_exception: Optional[ServicesWakeUpCallsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wakeUpCallsException') }})
     

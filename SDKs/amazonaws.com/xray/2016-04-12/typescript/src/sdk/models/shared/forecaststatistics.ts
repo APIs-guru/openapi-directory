@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ForecastStatistics
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The predicted high and low fault count. This is used to determine if a service has become anomalous and if an insight should be created.
 **/
 export class ForecastStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FaultCountHigh" })
+  @SpeakeasyMetadata({ data: "json, name=FaultCountHigh" })
   faultCountHigh?: number;
 
-  @Metadata({ data: "json, name=FaultCountLow" })
+  @SpeakeasyMetadata({ data: "json, name=FaultCountLow" })
   faultCountLow?: number;
 }

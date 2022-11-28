@@ -1,6 +1,7 @@
 
 
+
 export enum FirelensConfigurationTypeEnum {
-    Fluentd = "fluentd"
-,    Fluentbit = "fluentbit"
+    Fluentd = "fluentd",
+    Fluentbit = "fluentbit"
 }

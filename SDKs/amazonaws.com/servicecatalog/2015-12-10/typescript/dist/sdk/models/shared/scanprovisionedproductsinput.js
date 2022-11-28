@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLevelFilter } from "./accesslevelfilter";
 var ScanProvisionedProductsInput = /** @class */ (function (_super) {
     __extends(ScanProvisionedProductsInput, _super);
@@ -30,19 +30,19 @@ var ScanProvisionedProductsInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], ScanProvisionedProductsInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=AccessLevelFilter" }),
+        SpeakeasyMetadata({ data: "json, name=AccessLevelFilter" }),
         __metadata("design:type", AccessLevelFilter)
     ], ScanProvisionedProductsInput.prototype, "accessLevelFilter", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], ScanProvisionedProductsInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], ScanProvisionedProductsInput.prototype, "pageToken", void 0);
     return ScanProvisionedProductsInput;

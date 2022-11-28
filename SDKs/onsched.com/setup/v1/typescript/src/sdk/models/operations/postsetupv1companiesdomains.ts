@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSetupV1CompaniesDomainsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   companyDomainInputModel?: shared.CompanyDomainInputModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   companyDomainInputModel1?: shared.CompanyDomainInputModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   companyDomainInputModel2?: shared.CompanyDomainInputModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   companyDomainInputModel3?: shared.CompanyDomainInputModel;
 }
 
 
 export class PostSetupV1CompaniesDomainsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostSetupV1CompaniesDomainsRequests;
 }
 
 
 export class PostSetupV1CompaniesDomainsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companyDomainViewModel?: shared.CompanyDomainViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

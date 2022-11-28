@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionRecommendation } from "./lambdafunctionrecommendation";
 
 
+
 export class GetLambdaFunctionRecommendationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lambdaFunctionRecommendations", elemType: shared.LambdaFunctionRecommendation })
+  @SpeakeasyMetadata({ data: "json, name=lambdaFunctionRecommendations", elemType: LambdaFunctionRecommendation })
   lambdaFunctionRecommendations?: LambdaFunctionRecommendation[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

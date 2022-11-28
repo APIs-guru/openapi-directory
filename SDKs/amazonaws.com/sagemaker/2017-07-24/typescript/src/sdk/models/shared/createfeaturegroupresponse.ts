@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateFeatureGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeatureGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupArn" })
   featureGroupArn: string;
 }

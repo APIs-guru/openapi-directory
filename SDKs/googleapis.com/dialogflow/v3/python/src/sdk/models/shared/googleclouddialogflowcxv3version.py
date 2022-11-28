@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3nlusettings
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowCxV3VersionStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -12,11 +14,28 @@ class GoogleCloudDialogflowCxV3VersionStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class GoogleCloudDialogflowCxV3VersionInput:
+    r"""GoogleCloudDialogflowCxV3VersionInput
+    Represents a version of a flow.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    nlu_settings: Optional[GoogleCloudDialogflowCxV3NluSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nluSettings') }})
+    
+
+@dataclass_json
+@dataclass
 class GoogleCloudDialogflowCxV3Version:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    nlu_settings: Optional[googleclouddialogflowcxv3nlusettings.GoogleCloudDialogflowCxV3NluSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nluSettings' }})
-    state: Optional[GoogleCloudDialogflowCxV3VersionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""GoogleCloudDialogflowCxV3Version
+    Represents a version of a flow.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    nlu_settings: Optional[GoogleCloudDialogflowCxV3NluSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nluSettings') }})
+    state: Optional[GoogleCloudDialogflowCxV3VersionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

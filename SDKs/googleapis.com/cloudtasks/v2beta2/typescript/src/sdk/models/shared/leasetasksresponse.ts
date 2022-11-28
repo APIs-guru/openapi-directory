@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Task } from "./task";
+
 
 
 // LeaseTasksResponse
@@ -8,6 +8,6 @@ import { Task } from "./task";
  * Response message for leasing tasks using LeaseTasks.
 **/
 export class LeaseTasksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tasks", elemType: shared.Task })
+  @SpeakeasyMetadata({ data: "json, name=tasks", elemType: Task })
   tasks?: Task[];
 }

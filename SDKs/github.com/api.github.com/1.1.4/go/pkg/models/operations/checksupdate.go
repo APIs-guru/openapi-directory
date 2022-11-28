@@ -55,6 +55,8 @@ type ChecksUpdateRequestBodyOutputImages struct {
 	ImageURL string  `json:"image_url"`
 }
 
+// ChecksUpdateRequestBodyOutput
+// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
 type ChecksUpdateRequestBodyOutput struct {
 	Annotations []ChecksUpdateRequestBodyOutputAnnotations `json:"annotations,omitempty"`
 	Images      []ChecksUpdateRequestBodyOutputImages      `json:"images,omitempty"`

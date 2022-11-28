@@ -1,47 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactRequest } from "./contactrequest";
 
 
+
 export class SendMessagesRequestFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }
 
 
 export class SendMessagesRequestMedia extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 export enum SendMessagesRequestTypeEnum {
-    Sms = "SMS"
-,    Mms = "MMS"
+    Sms = "SMS",
+    Mms = "MMS"
 }
 
 
 export class SendMessagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contacts", elemType: shared.ContactRequest })
+  @SpeakeasyMetadata({ data: "json, name=contacts", elemType: ContactRequest })
   contacts?: ContactRequest[];
 
-  @Metadata({ data: "json, name=conversationStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=conversationStrategy" })
   conversationStrategy?: string;
 
-  @Metadata({ data: "json, name=conversations" })
+  @SpeakeasyMetadata({ data: "json, name=conversations" })
   conversations?: string[];
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: SendMessagesRequestFilters;
 
-  @Metadata({ data: "json, name=media", elemType: shared.SendMessagesRequestMedia })
+  @SpeakeasyMetadata({ data: "json, name=media", elemType: SendMessagesRequestMedia })
   media?: SendMessagesRequestMedia[];
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SendMessagesRequestTypeEnum;
 }

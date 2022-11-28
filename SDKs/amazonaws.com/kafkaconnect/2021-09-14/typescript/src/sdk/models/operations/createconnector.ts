@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateConnectorHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class CreateConnectorHeaders extends SpeakeasyBase {
  * Information about the capacity of the connector, whether it is auto scaled or provisioned.
 **/
 export class CreateConnectorRequestBodyCapacity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoScaling" })
+  @SpeakeasyMetadata({ data: "json, name=autoScaling" })
   autoScaling?: shared.AutoScaling;
 
-  @Metadata({ data: "json, name=provisionedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=provisionedCapacity" })
   provisionedCapacity?: shared.ProvisionedCapacity;
 }
 
@@ -44,7 +45,7 @@ export class CreateConnectorRequestBodyCapacity extends SpeakeasyBase {
  * The details of the Apache Kafka cluster to which the connector is connected.
 **/
 export class CreateConnectorRequestBodyKafkaCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apacheKafkaCluster" })
+  @SpeakeasyMetadata({ data: "json, name=apacheKafkaCluster" })
   apacheKafkaCluster?: shared.ApacheKafkaCluster;
 }
 
@@ -54,7 +55,7 @@ export class CreateConnectorRequestBodyKafkaCluster extends SpeakeasyBase {
  * The client authentication information used in order to authenticate with the Apache Kafka cluster.
 **/
 export class CreateConnectorRequestBodyKafkaClusterClientAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationType" })
   authenticationType?: shared.KafkaClusterClientAuthenticationTypeEnum;
 }
 
@@ -64,7 +65,7 @@ export class CreateConnectorRequestBodyKafkaClusterClientAuthentication extends 
  * Details of encryption in transit to the Apache Kafka cluster.
 **/
 export class CreateConnectorRequestBodyKafkaClusterEncryptionInTransit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionType" })
   encryptionType?: shared.KafkaClusterEncryptionInTransitTypeEnum;
 }
 
@@ -74,7 +75,7 @@ export class CreateConnectorRequestBodyKafkaClusterEncryptionInTransit extends S
  * Details about log delivery.
 **/
 export class CreateConnectorRequestBodyLogDelivery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workerLogDelivery" })
+  @SpeakeasyMetadata({ data: "json, name=workerLogDelivery" })
   workerLogDelivery?: shared.WorkerLogDelivery;
 }
 
@@ -84,93 +85,93 @@ export class CreateConnectorRequestBodyLogDelivery extends SpeakeasyBase {
  * The configuration of the workers, which are the processes that run the connector logic.
 **/
 export class CreateConnectorRequestBodyWorkerConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: number;
 
-  @Metadata({ data: "json, name=workerConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=workerConfigurationArn" })
   workerConfigurationArn?: string;
 }
 
 
 export class CreateConnectorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity: CreateConnectorRequestBodyCapacity;
 
-  @Metadata({ data: "json, name=connectorConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=connectorConfiguration" })
   connectorConfiguration: Map<string, string>;
 
-  @Metadata({ data: "json, name=connectorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=connectorDescription" })
   connectorDescription?: string;
 
-  @Metadata({ data: "json, name=connectorName" })
+  @SpeakeasyMetadata({ data: "json, name=connectorName" })
   connectorName: string;
 
-  @Metadata({ data: "json, name=kafkaCluster" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaCluster" })
   kafkaCluster: CreateConnectorRequestBodyKafkaCluster;
 
-  @Metadata({ data: "json, name=kafkaClusterClientAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaClusterClientAuthentication" })
   kafkaClusterClientAuthentication: CreateConnectorRequestBodyKafkaClusterClientAuthentication;
 
-  @Metadata({ data: "json, name=kafkaClusterEncryptionInTransit" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaClusterEncryptionInTransit" })
   kafkaClusterEncryptionInTransit: CreateConnectorRequestBodyKafkaClusterEncryptionInTransit;
 
-  @Metadata({ data: "json, name=kafkaConnectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=kafkaConnectVersion" })
   kafkaConnectVersion: string;
 
-  @Metadata({ data: "json, name=logDelivery" })
+  @SpeakeasyMetadata({ data: "json, name=logDelivery" })
   logDelivery?: CreateConnectorRequestBodyLogDelivery;
 
-  @Metadata({ data: "json, name=plugins", elemType: shared.Plugin })
+  @SpeakeasyMetadata({ data: "json, name=plugins", elemType: shared.Plugin })
   plugins: shared.Plugin[];
 
-  @Metadata({ data: "json, name=serviceExecutionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=serviceExecutionRoleArn" })
   serviceExecutionRoleArn: string;
 
-  @Metadata({ data: "json, name=workerConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=workerConfiguration" })
   workerConfiguration?: CreateConnectorRequestBodyWorkerConfiguration;
 }
 
 
 export class CreateConnectorRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateConnectorHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateConnectorRequestBody;
 }
 
 
 export class CreateConnectorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createConnectorResponse?: shared.CreateConnectorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionInfoBody } from "./connectioninfobody";
 import { ExperimentalFeaturesBody } from "./experimentalfeaturesbody";
 import { IdentityBody } from "./identitybody";
@@ -8,64 +7,65 @@ import { SecretDataBody } from "./secretdatabody";
 import { SeedInfoBody } from "./seedinfobody";
 
 
+
 export class CreateCloudEnvironmentBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoShutdownDelayMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=autoShutdownDelayMinutes" })
   autoShutdownDelayMinutes?: number;
 
-  @Metadata({ data: "json, name=connection" })
+  @SpeakeasyMetadata({ data: "json, name=connection" })
   connection?: ConnectionInfoBody;
 
-  @Metadata({ data: "json, name=containerImage" })
+  @SpeakeasyMetadata({ data: "json, name=containerImage" })
   containerImage?: string;
 
-  @Metadata({ data: "json, name=createAsPrebuild" })
+  @SpeakeasyMetadata({ data: "json, name=createAsPrebuild" })
   createAsPrebuild?: boolean;
 
-  @Metadata({ data: "json, name=devContainerJson" })
+  @SpeakeasyMetadata({ data: "json, name=devContainerJson" })
   devContainerJson?: string;
 
-  @Metadata({ data: "json, name=experimentalFeatures" })
+  @SpeakeasyMetadata({ data: "json, name=experimentalFeatures" })
   experimentalFeatures?: ExperimentalFeaturesBody;
 
-  @Metadata({ data: "json, name=features" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
   features?: Map<string, string>;
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName: string;
 
-  @Metadata({ data: "json, name=githubEnvironmentEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=githubEnvironmentEndpoint" })
   githubEnvironmentEndpoint?: string;
 
-  @Metadata({ data: "json, name=hasDevcontainerJson" })
+  @SpeakeasyMetadata({ data: "json, name=hasDevcontainerJson" })
   hasDevcontainerJson?: boolean;
 
-  @Metadata({ data: "json, name=identity" })
+  @SpeakeasyMetadata({ data: "json, name=identity" })
   identity?: IdentityBody;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=personalization" })
+  @SpeakeasyMetadata({ data: "json, name=personalization" })
   personalization?: PersonalizationInfoBody;
 
-  @Metadata({ data: "json, name=planId" })
+  @SpeakeasyMetadata({ data: "json, name=planId" })
   planId?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: string;
 
-  @Metadata({ data: "json, name=secrets", elemType: shared.SecretDataBody })
+  @SpeakeasyMetadata({ data: "json, name=secrets", elemType: SecretDataBody })
   secrets?: SecretDataBody[];
 
-  @Metadata({ data: "json, name=seed" })
+  @SpeakeasyMetadata({ data: "json, name=seed" })
   seed?: SeedInfoBody;
 
-  @Metadata({ data: "json, name=skuName" })
+  @SpeakeasyMetadata({ data: "json, name=skuName" })
   skuName?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

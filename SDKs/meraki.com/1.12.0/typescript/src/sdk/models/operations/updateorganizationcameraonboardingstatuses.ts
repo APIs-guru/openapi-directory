@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateOrganizationCameraOnboardingStatusesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class UpdateOrganizationCameraOnboardingStatusesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial?: string;
 
-  @Metadata({ data: "json, name=wirelessCredentialsSent" })
+  @SpeakeasyMetadata({ data: "json, name=wirelessCredentialsSent" })
   wirelessCredentialsSent?: boolean;
 }
 
 
 export class UpdateOrganizationCameraOnboardingStatusesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateOrganizationCameraOnboardingStatusesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateOrganizationCameraOnboardingStatusesRequestBody;
 }
 
 
 export class UpdateOrganizationCameraOnboardingStatusesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateOrganizationCameraOnboardingStatuses200ApplicationJsonObject?: Map<string, any>;
 }

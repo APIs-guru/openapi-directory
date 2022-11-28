@@ -1,10 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SetDimension } from "./setdimension";
-import { SetDimension } from "./setdimension";
-import { SetDimension } from "./setdimension";
-import { SetDimension } from "./setdimension";
-import { SetDimension } from "./setdimension";
-import { SetDimension } from "./setdimension";
+
 
 
 // SegmentDemographics
@@ -12,21 +8,21 @@ import { SetDimension } from "./setdimension";
  * Specifies demographic-based dimension settings for including or excluding endpoints from a segment. These settings derive from characteristics of endpoint devices, such as platform, make, and model.
 **/
 export class SegmentDemographics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AppVersion" })
   appVersion?: SetDimension;
 
-  @Metadata({ data: "json, name=Channel" })
+  @SpeakeasyMetadata({ data: "json, name=Channel" })
   channel?: SetDimension;
 
-  @Metadata({ data: "json, name=DeviceType" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceType" })
   deviceType?: SetDimension;
 
-  @Metadata({ data: "json, name=Make" })
+  @SpeakeasyMetadata({ data: "json, name=Make" })
   make?: SetDimension;
 
-  @Metadata({ data: "json, name=Model" })
+  @SpeakeasyMetadata({ data: "json, name=Model" })
   model?: SetDimension;
 
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform?: SetDimension;
 }

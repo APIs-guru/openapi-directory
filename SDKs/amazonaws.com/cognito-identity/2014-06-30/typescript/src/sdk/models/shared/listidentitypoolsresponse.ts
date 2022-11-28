@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityPoolShortDescription } from "./identitypoolshortdescription";
+
 
 
 // ListIdentityPoolsResponse
@@ -8,9 +8,9 @@ import { IdentityPoolShortDescription } from "./identitypoolshortdescription";
  * The result of a successful ListIdentityPools action.
 **/
 export class ListIdentityPoolsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityPools", elemType: shared.IdentityPoolShortDescription })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPools", elemType: IdentityPoolShortDescription })
   identityPools?: IdentityPoolShortDescription[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

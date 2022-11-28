@@ -15,11 +15,6 @@ type ListTemplatesSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type ListTemplatesRequest struct {
-	QueryParams ListTemplatesQueryParams
-	Security    ListTemplatesSecurity
-}
-
 type ListTemplatesTemplateExpirationIntervalEnum string
 
 const (
@@ -49,6 +44,11 @@ type ListTemplatesTemplate struct {
 	SlackWebhookURL           string                                       `json:"slack_webhook_url"`
 	TemplateType              string                                       `json:"template_type"`
 	WebhookURL                string                                       `json:"webhook_url"`
+}
+
+type ListTemplatesRequest struct {
+	QueryParams ListTemplatesQueryParams
+	Security    ListTemplatesSecurity
 }
 
 type ListTemplatesResponse struct {

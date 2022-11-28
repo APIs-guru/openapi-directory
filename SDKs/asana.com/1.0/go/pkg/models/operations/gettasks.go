@@ -18,12 +18,12 @@ type GetTasksQueryParams struct {
 	Workspace      *string    `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetTasksRequest struct {
-	QueryParams GetTasksQueryParams
-}
-
 type GetTasks200ApplicationJSON struct {
 	Data []shared.TaskCompact `json:"data,omitempty"`
+}
+
+type GetTasksRequest struct {
+	QueryParams GetTasksQueryParams
 }
 
 type GetTasksResponse struct {

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,21 @@ class PutEventsHeaders:
 @dataclass_json
 @dataclass
 class PutEventsRequestBody:
-    event_list: List[shared.Event] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventList' }})
-    session_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sessionId' }})
-    tracking_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackingId' }})
-    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    event_list: List[shared.Event] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventList') }})
+    session_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sessionId') }})
+    tracking_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('trackingId') }})
+    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
     
 
 @dataclass
 class PutEventsRequest:
-    headers: PutEventsHeaders = field(default=None)
-    request: PutEventsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutEventsHeaders = field()
+    request: PutEventsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_input_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

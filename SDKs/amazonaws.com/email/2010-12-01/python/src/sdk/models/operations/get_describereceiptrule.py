@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeReceiptRuleActionEnum(str, Enum):
     DESCRIBE_RECEIPT_RULE = "DescribeReceiptRule"
@@ -10,10 +14,10 @@ class GetDescribeReceiptRuleVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeReceiptRuleQueryParams:
-    action: GetDescribeReceiptRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    rule_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleName', 'style': 'form', 'explode': True }})
-    rule_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
-    version: GetDescribeReceiptRuleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDescribeReceiptRuleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    rule_name: str = field(metadata={'query_param': { 'field_name': 'RuleName', 'style': 'form', 'explode': True }})
+    rule_set_name: str = field(metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
+    version: GetDescribeReceiptRuleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDescribeReceiptRuleHeaders:
 
 @dataclass
 class GetDescribeReceiptRuleRequest:
-    query_params: GetDescribeReceiptRuleQueryParams = field(default=None)
-    headers: GetDescribeReceiptRuleHeaders = field(default=None)
+    headers: GetDescribeReceiptRuleHeaders = field()
+    query_params: GetDescribeReceiptRuleQueryParams = field()
     
 
 @dataclass
 class GetDescribeReceiptRuleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

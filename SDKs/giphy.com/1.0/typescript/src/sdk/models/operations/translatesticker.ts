@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TranslateStickerQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=s" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=s" })
   s: string;
 }
 
 
-export class TranslateStickerRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: TranslateStickerQueryParams;
-}
-
-
 export class TranslateSticker200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.Gif;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: shared.Meta;
 }
 
 
+export class TranslateStickerRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: TranslateStickerQueryParams;
+}
+
+
 export class TranslateStickerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   translateSticker200ApplicationJsonObject?: TranslateSticker200ApplicationJson;
 }

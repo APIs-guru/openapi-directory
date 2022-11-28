@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationTargetActions } from "./notificationtargetactions";
+import { EmailConfiguration } from "./emailconfiguration";
+import { SmsConfiguration } from "./smsconfiguration";
 // NotificationAction
 /**
  * Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model.
@@ -35,15 +36,15 @@ var NotificationAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", NotificationTargetActions)
     ], NotificationAction.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=emailConfigurations", elemType: shared.EmailConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=emailConfigurations", elemType: EmailConfiguration }),
         __metadata("design:type", Array)
     ], NotificationAction.prototype, "emailConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=smsConfigurations", elemType: shared.SmsConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=smsConfigurations", elemType: SmsConfiguration }),
         __metadata("design:type", Array)
     ], NotificationAction.prototype, "smsConfigurations", void 0);
     return NotificationAction;

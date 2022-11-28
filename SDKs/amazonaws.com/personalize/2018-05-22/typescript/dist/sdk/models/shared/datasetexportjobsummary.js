@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DatasetExportJobSummary
 /**
  * Provides a summary of the properties of a dataset export job. For a complete listing, call the <a>DescribeDatasetExportJob</a> API.
@@ -33,27 +33,27 @@ var DatasetExportJobSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationDateTime" }),
         __metadata("design:type", Date)
     ], DatasetExportJobSummary.prototype, "creationDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetExportJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=datasetExportJobArn" }),
         __metadata("design:type", String)
     ], DatasetExportJobSummary.prototype, "datasetExportJobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], DatasetExportJobSummary.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobName" }),
+        SpeakeasyMetadata({ data: "json, name=jobName" }),
         __metadata("design:type", String)
     ], DatasetExportJobSummary.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], DatasetExportJobSummary.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DatasetExportJobSummary.prototype, "status", void 0);
     return DatasetExportJobSummary;

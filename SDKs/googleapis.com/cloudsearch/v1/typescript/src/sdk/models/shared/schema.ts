@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectDefinition } from "./objectdefinition";
+
 
 
 // Schema
@@ -8,9 +8,9 @@ import { ObjectDefinition } from "./objectdefinition";
  * The schema definition for a data source.
 **/
 export class Schema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectDefinitions", elemType: shared.ObjectDefinition })
+  @SpeakeasyMetadata({ data: "json, name=objectDefinitions", elemType: ObjectDefinition })
   objectDefinitions?: ObjectDefinition[];
 
-  @Metadata({ data: "json, name=operationIds" })
+  @SpeakeasyMetadata({ data: "json, name=operationIds" })
   operationIds?: string[];
 }

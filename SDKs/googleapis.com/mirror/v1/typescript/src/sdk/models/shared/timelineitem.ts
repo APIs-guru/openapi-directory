@@ -1,11 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
 import { Contact } from "./contact";
 import { Location } from "./location";
 import { MenuItem } from "./menuitem";
 import { NotificationConfig } from "./notificationconfig";
-import { Contact } from "./contact";
+
 
 
 // TimelineItem
@@ -13,81 +12,81 @@ import { Contact } from "./contact";
  * Each item in the user's timeline is represented as a TimelineItem JSON structure, described below.
 **/
 export class TimelineItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: Attachment })
   attachments?: Attachment[];
 
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=canonicalUrl" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalUrl" })
   canonicalUrl?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: Contact;
 
-  @Metadata({ data: "json, name=displayTime" })
+  @SpeakeasyMetadata({ data: "json, name=displayTime" })
   displayTime?: Date;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=html" })
+  @SpeakeasyMetadata({ data: "json, name=html" })
   html?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=inReplyTo" })
+  @SpeakeasyMetadata({ data: "json, name=inReplyTo" })
   inReplyTo?: string;
 
-  @Metadata({ data: "json, name=isBundleCover" })
+  @SpeakeasyMetadata({ data: "json, name=isBundleCover" })
   isBundleCover?: boolean;
 
-  @Metadata({ data: "json, name=isDeleted" })
+  @SpeakeasyMetadata({ data: "json, name=isDeleted" })
   isDeleted?: boolean;
 
-  @Metadata({ data: "json, name=isPinned" })
+  @SpeakeasyMetadata({ data: "json, name=isPinned" })
   isPinned?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=menuItems", elemType: shared.MenuItem })
+  @SpeakeasyMetadata({ data: "json, name=menuItems", elemType: MenuItem })
   menuItems?: MenuItem[];
 
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification?: NotificationConfig;
 
-  @Metadata({ data: "json, name=pinScore" })
+  @SpeakeasyMetadata({ data: "json, name=pinScore" })
   pinScore?: number;
 
-  @Metadata({ data: "json, name=recipients", elemType: shared.Contact })
+  @SpeakeasyMetadata({ data: "json, name=recipients", elemType: Contact })
   recipients?: Contact[];
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=sourceItemId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceItemId" })
   sourceItemId?: string;
 
-  @Metadata({ data: "json, name=speakableText" })
+  @SpeakeasyMetadata({ data: "json, name=speakableText" })
   speakableText?: string;
 
-  @Metadata({ data: "json, name=speakableType" })
+  @SpeakeasyMetadata({ data: "json, name=speakableType" })
   speakableType?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

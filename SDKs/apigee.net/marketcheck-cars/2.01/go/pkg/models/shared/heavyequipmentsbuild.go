@@ -1,5 +1,7 @@
 package shared
 
+// HeavyEquipmentsBuild
+// Describes the Heavy Equipments specification
 type HeavyEquipmentsBuild struct {
 	BodyType     *string `json:"body_type,omitempty"`
 	Category     *string `json:"category,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddGroupMigrationRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for 'AddGroupMigration' request.
 **/
 export class AddGroupMigrationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=migratingVm" })
+  @SpeakeasyMetadata({ data: "json, name=migratingVm" })
   migratingVm?: string;
 }

@@ -8,6 +8,8 @@ const (
 	OrganizationJurisdictionEnumCounty   OrganizationJurisdictionEnum = "County"
 )
 
+// Organization
+// An organization connected to data hub
 type Organization struct {
 	CountyName   *string                      `json:"countyName,omitempty"`
 	Description  string                       `json:"description"`

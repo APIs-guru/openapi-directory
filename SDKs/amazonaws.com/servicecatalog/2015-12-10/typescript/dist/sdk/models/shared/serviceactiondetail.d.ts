@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceActionSummary } from "./serviceactionsummary";
 /**
  * An object containing detailed information about the self-service action.

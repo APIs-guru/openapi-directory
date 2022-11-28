@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeLifecycleHooksActionEnum(str, Enum):
     DESCRIBE_LIFECYCLE_HOOKS = "DescribeLifecycleHooks"
@@ -10,8 +14,8 @@ class PostDescribeLifecycleHooksVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeLifecycleHooksQueryParams:
-    action: PostDescribeLifecycleHooksActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeLifecycleHooksVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeLifecycleHooksActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeLifecycleHooksVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeLifecycleHooksHeaders:
 
 @dataclass
 class PostDescribeLifecycleHooksRequest:
-    query_params: PostDescribeLifecycleHooksQueryParams = field(default=None)
-    headers: PostDescribeLifecycleHooksHeaders = field(default=None)
+    headers: PostDescribeLifecycleHooksHeaders = field()
+    query_params: PostDescribeLifecycleHooksQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeLifecycleHooksResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

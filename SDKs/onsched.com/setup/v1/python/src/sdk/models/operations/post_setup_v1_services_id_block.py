@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostSetupV1ServicesIDBlockPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostSetupV1ServicesIDBlockRequests:
 
 @dataclass
 class PostSetupV1ServicesIDBlockRequest:
-    path_params: PostSetupV1ServicesIDBlockPathParams = field(default=None)
+    path_params: PostSetupV1ServicesIDBlockPathParams = field()
     request: Optional[PostSetupV1ServicesIDBlockRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1ServicesIDBlockResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_block_view_model: Optional[shared.ServiceBlockViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

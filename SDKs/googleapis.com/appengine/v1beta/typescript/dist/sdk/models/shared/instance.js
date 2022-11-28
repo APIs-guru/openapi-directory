@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var InstanceAvailabilityEnum;
 (function (InstanceAvailabilityEnum) {
     InstanceAvailabilityEnum["Unspecified"] = "UNSPECIFIED";
@@ -48,71 +48,71 @@ var Instance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appEngineRelease" }),
+        SpeakeasyMetadata({ data: "json, name=appEngineRelease" }),
         __metadata("design:type", String)
     ], Instance.prototype, "appEngineRelease", void 0);
     __decorate([
-        Metadata({ data: "json, name=availability" }),
+        SpeakeasyMetadata({ data: "json, name=availability" }),
         __metadata("design:type", String)
     ], Instance.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "json, name=averageLatency" }),
+        SpeakeasyMetadata({ data: "json, name=averageLatency" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "averageLatency", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Instance.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=memoryUsage" }),
+        SpeakeasyMetadata({ data: "json, name=memoryUsage" }),
         __metadata("design:type", String)
     ], Instance.prototype, "memoryUsage", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Instance.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=qps" }),
+        SpeakeasyMetadata({ data: "json, name=qps" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "qps", void 0);
     __decorate([
-        Metadata({ data: "json, name=requests" }),
+        SpeakeasyMetadata({ data: "json, name=requests" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "requests", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], Instance.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmDebugEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=vmDebugEnabled" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "vmDebugEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmId" }),
+        SpeakeasyMetadata({ data: "json, name=vmId" }),
         __metadata("design:type", String)
     ], Instance.prototype, "vmId", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmIp" }),
+        SpeakeasyMetadata({ data: "json, name=vmIp" }),
         __metadata("design:type", String)
     ], Instance.prototype, "vmIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmLiveness" }),
+        SpeakeasyMetadata({ data: "json, name=vmLiveness" }),
         __metadata("design:type", String)
     ], Instance.prototype, "vmLiveness", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmName" }),
+        SpeakeasyMetadata({ data: "json, name=vmName" }),
         __metadata("design:type", String)
     ], Instance.prototype, "vmName", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmStatus" }),
+        SpeakeasyMetadata({ data: "json, name=vmStatus" }),
         __metadata("design:type", String)
     ], Instance.prototype, "vmStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmZoneName" }),
+        SpeakeasyMetadata({ data: "json, name=vmZoneName" }),
         __metadata("design:type", String)
     ], Instance.prototype, "vmZoneName", void 0);
     return Instance;

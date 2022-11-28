@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudApigeeV1ScoreComponent } from "./googlecloudapigeev1scorecomponent";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1ScoreComponent } from "./googlecloudapigeev1scorecomponent";
 import { GoogleTypeInterval } from "./googletypeinterval";
+
 
 
 // GoogleCloudApigeeV1Score
@@ -10,12 +9,12 @@ import { GoogleTypeInterval } from "./googletypeinterval";
  * Represents Security Score.
 **/
 export class GoogleCloudApigeeV1Score extends SpeakeasyBase {
-  @Metadata({ data: "json, name=component" })
+  @SpeakeasyMetadata({ data: "json, name=component" })
   component?: GoogleCloudApigeeV1ScoreComponent;
 
-  @Metadata({ data: "json, name=subcomponents", elemType: shared.GoogleCloudApigeeV1ScoreComponent })
+  @SpeakeasyMetadata({ data: "json, name=subcomponents", elemType: GoogleCloudApigeeV1ScoreComponent })
   subcomponents?: GoogleCloudApigeeV1ScoreComponent[];
 
-  @Metadata({ data: "json, name=timeRange" })
+  @SpeakeasyMetadata({ data: "json, name=timeRange" })
   timeRange?: GoogleTypeInterval;
 }

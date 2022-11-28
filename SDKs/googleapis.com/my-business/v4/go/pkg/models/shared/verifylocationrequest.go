@@ -11,6 +11,8 @@ const (
 	VerifyLocationRequestMethodEnumAuto                          VerifyLocationRequestMethodEnum = "AUTO"
 )
 
+// VerifyLocationRequest
+// Request message for Verifications.VerifyLocation.
 type VerifyLocationRequest struct {
 	AddressInput *AddressInput                    `json:"addressInput,omitempty"`
 	Context      *ServiceBusinessContext          `json:"context,omitempty"`

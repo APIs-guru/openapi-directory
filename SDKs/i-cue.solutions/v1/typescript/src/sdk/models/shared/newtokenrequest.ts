@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NewTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityToken" })
+  @SpeakeasyMetadata({ data: "json, name=entityToken" })
   entityToken?: string;
 
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=userToken" })
+  @SpeakeasyMetadata({ data: "json, name=userToken" })
   userToken?: string;
 }

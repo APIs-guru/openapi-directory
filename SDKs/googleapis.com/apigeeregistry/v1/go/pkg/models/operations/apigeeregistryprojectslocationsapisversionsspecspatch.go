@@ -32,7 +32,7 @@ type ApigeeregistryProjectsLocationsApisVersionsSpecsPatchSecurity struct {
 type ApigeeregistryProjectsLocationsApisVersionsSpecsPatchRequest struct {
 	PathParams  ApigeeregistryProjectsLocationsApisVersionsSpecsPatchPathParams
 	QueryParams ApigeeregistryProjectsLocationsApisVersionsSpecsPatchQueryParams
-	Request     *shared.APISpec `request:"mediaType=application/json"`
+	Request     *shared.APISpecInput `request:"mediaType=application/json"`
 	Security    ApigeeregistryProjectsLocationsApisVersionsSpecsPatchSecurity
 }
 

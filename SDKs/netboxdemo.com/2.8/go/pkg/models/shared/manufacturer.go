@@ -9,3 +9,9 @@ type Manufacturer struct {
 	PlatformCount      *int64  `json:"platform_count,omitempty"`
 	Slug               string  `json:"slug"`
 }
+
+type ManufacturerInput struct {
+	Description *string `json:"description,omitempty"`
+	Name        string  `json:"name"`
+	Slug        string  `json:"slug"`
+}

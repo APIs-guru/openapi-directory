@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Target } from "./target";
+
 
 
 // ListenRequest
@@ -7,12 +8,12 @@ import { Target } from "./target";
  * A request for Firestore.Listen
 **/
 export class ListenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addTarget" })
+  @SpeakeasyMetadata({ data: "json, name=addTarget" })
   addTarget?: Target;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=removeTarget" })
+  @SpeakeasyMetadata({ data: "json, name=removeTarget" })
   removeTarget?: number;
 }

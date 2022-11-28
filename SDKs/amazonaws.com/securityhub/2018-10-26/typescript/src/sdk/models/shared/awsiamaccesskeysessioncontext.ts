@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsIamAccessKeySessionContextAttributes } from "./awsiamaccesskeysessioncontextattributes";
 import { AwsIamAccessKeySessionContextSessionIssuer } from "./awsiamaccesskeysessioncontextsessionissuer";
+
 
 
 // AwsIamAccessKeySessionContext
@@ -8,9 +9,9 @@ import { AwsIamAccessKeySessionContextSessionIssuer } from "./awsiamaccesskeyses
  * Provides information about the session that the key was used for.
 **/
 export class AwsIamAccessKeySessionContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: AwsIamAccessKeySessionContextAttributes;
 
-  @Metadata({ data: "json, name=SessionIssuer" })
+  @SpeakeasyMetadata({ data: "json, name=SessionIssuer" })
   sessionIssuer?: AwsIamAccessKeySessionContextSessionIssuer;
 }

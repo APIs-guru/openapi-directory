@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAssignIpv6AddressesActionEnum(str, Enum):
     ASSIGN_IPV6_ADDRESSES = "AssignIpv6Addresses"
@@ -10,8 +14,8 @@ class PostAssignIpv6AddressesVersionEnum(str, Enum):
 
 @dataclass
 class PostAssignIpv6AddressesQueryParams:
-    action: PostAssignIpv6AddressesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAssignIpv6AddressesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAssignIpv6AddressesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAssignIpv6AddressesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAssignIpv6AddressesHeaders:
 
 @dataclass
 class PostAssignIpv6AddressesRequest:
-    query_params: PostAssignIpv6AddressesQueryParams = field(default=None)
-    headers: PostAssignIpv6AddressesHeaders = field(default=None)
+    headers: PostAssignIpv6AddressesHeaders = field()
+    query_params: PostAssignIpv6AddressesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAssignIpv6AddressesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

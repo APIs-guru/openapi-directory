@@ -32,7 +32,7 @@ type DatastreamProjectsLocationsPrivateConnectionsCreateSecurity struct {
 type DatastreamProjectsLocationsPrivateConnectionsCreateRequest struct {
 	PathParams  DatastreamProjectsLocationsPrivateConnectionsCreatePathParams
 	QueryParams DatastreamProjectsLocationsPrivateConnectionsCreateQueryParams
-	Request     *shared.PrivateConnection `request:"mediaType=application/json"`
+	Request     *shared.PrivateConnectionInput `request:"mediaType=application/json"`
 	Security    DatastreamProjectsLocationsPrivateConnectionsCreateSecurity
 }
 

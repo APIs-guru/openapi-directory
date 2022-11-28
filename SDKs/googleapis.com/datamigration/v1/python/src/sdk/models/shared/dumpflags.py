@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import dumpflag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DumpFlags:
-    dump_flags: Optional[List[dumpflag.DumpFlag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dumpFlags' }})
+    r"""DumpFlags
+    Dump flags definition.
+    """
+    
+    dump_flags: Optional[List[DumpFlag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dumpFlags') }})
     

@@ -1,30 +1,31 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetAPIVVersionMetalsSupportedCurrencyPathParams:
-    version: str = field(default=None, metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
+    version: str = field(metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAPIVVersionMetalsSupportedCurrencyQueryParams:
+    token: str = field(metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
     format: Optional[shared.ResponseFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    token: str = field(default=None, metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetAPIVVersionMetalsSupportedCurrencyRequest:
-    path_params: GetAPIVVersionMetalsSupportedCurrencyPathParams = field(default=None)
-    query_params: GetAPIVVersionMetalsSupportedCurrencyQueryParams = field(default=None)
+    path_params: GetAPIVVersionMetalsSupportedCurrencyPathParams = field()
+    query_params: GetAPIVVersionMetalsSupportedCurrencyQueryParams = field()
     
 
 @dataclass
 class GetAPIVVersionMetalsSupportedCurrencyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     get_api_v_version_metals_supported_currency_200_application_json_strings: Optional[List[str]] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

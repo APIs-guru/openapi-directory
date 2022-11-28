@@ -1,5 +1,7 @@
 package shared
 
+// CustomEventsBatchInsertResponse
+// Insert Custom Events Response.
 type CustomEventsBatchInsertResponse struct {
 	HasFailures *bool               `json:"hasFailures,omitempty"`
 	Kind        *string             `json:"kind,omitempty"`

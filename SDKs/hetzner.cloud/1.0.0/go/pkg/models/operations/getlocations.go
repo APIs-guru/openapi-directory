@@ -4,10 +4,6 @@ type GetLocationsQueryParams struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type GetLocationsRequest struct {
-	QueryParams GetLocationsQueryParams
-}
-
 type GetLocations200ApplicationJSONLocations struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -21,6 +17,10 @@ type GetLocations200ApplicationJSONLocations struct {
 
 type GetLocations200ApplicationJSON struct {
 	Locations []GetLocations200ApplicationJSONLocations `json:"locations"`
+}
+
+type GetLocationsRequest struct {
+	QueryParams GetLocationsQueryParams
 }
 
 type GetLocationsResponse struct {

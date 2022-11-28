@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Metro
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a metro region that can be targeted by ads.
 **/
 export class Metro extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=countryDartId" })
+  @SpeakeasyMetadata({ data: "json, name=countryDartId" })
   countryDartId?: string;
 
-  @Metadata({ data: "json, name=dartId" })
+  @SpeakeasyMetadata({ data: "json, name=dartId" })
   dartId?: string;
 
-  @Metadata({ data: "json, name=dmaId" })
+  @SpeakeasyMetadata({ data: "json, name=dmaId" })
   dmaId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metroCode" })
+  @SpeakeasyMetadata({ data: "json, name=metroCode" })
   metroCode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

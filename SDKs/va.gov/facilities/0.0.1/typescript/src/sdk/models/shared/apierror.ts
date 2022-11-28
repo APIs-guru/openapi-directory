@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorMessage } from "./errormessage";
+
 
 
 // ApiError
@@ -8,6 +8,6 @@ import { ErrorMessage } from "./errormessage";
  * API invocation or processing error
 **/
 export class ApiError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorMessage })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ErrorMessage })
   errors: ErrorMessage[];
 }

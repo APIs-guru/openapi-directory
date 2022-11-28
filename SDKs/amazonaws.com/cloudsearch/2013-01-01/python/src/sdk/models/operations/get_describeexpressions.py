@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeExpressionsActionEnum(str, Enum):
     DESCRIBE_EXPRESSIONS = "DescribeExpressions"
@@ -10,11 +14,11 @@ class GetDescribeExpressionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeExpressionsQueryParams:
-    action: GetDescribeExpressionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeExpressionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetDescribeExpressionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     deployed: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Deployed', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
     expression_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ExpressionNames', 'style': 'form', 'explode': True }})
-    version: GetDescribeExpressionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeExpressionsHeaders:
 
 @dataclass
 class GetDescribeExpressionsRequest:
-    query_params: GetDescribeExpressionsQueryParams = field(default=None)
-    headers: GetDescribeExpressionsHeaders = field(default=None)
+    headers: GetDescribeExpressionsHeaders = field()
+    query_params: GetDescribeExpressionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeExpressionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

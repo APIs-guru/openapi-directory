@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsDestination } from "./cloudwatchlogsdestination";
 import { KinesisFirehoseDestination } from "./kinesisfirehosedestination";
 import { EventTypeEnum } from "./eventtypeenum";
 import { SnsDestination } from "./snsdestination";
+
 
 
 // EventDestination
@@ -10,21 +11,21 @@ import { SnsDestination } from "./snsdestination";
  * An object that defines an event destination.
 **/
 export class EventDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsDestination" })
   cloudWatchLogsDestination?: CloudWatchLogsDestination;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=KinesisFirehoseDestination" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisFirehoseDestination" })
   kinesisFirehoseDestination?: KinesisFirehoseDestination;
 
-  @Metadata({ data: "json, name=MatchingEventTypes" })
+  @SpeakeasyMetadata({ data: "json, name=MatchingEventTypes" })
   matchingEventTypes?: EventTypeEnum[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SnsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=SnsDestination" })
   snsDestination?: SnsDestination;
 }

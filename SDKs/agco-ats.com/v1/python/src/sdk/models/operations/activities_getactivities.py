@@ -12,13 +12,13 @@ class ActivitiesGetActivitiesQueryParams:
 
 @dataclass
 class ActivitiesGetActivitiesRequest:
-    query_params: ActivitiesGetActivitiesQueryParams = field(default=None)
+    query_params: ActivitiesGetActivitiesQueryParams = field()
     
 
 @dataclass
 class ActivitiesGetActivitiesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_build_system_shared_dto_activity_: Optional[shared.APIPagedResponseBuildSystemSharedDtoActivity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

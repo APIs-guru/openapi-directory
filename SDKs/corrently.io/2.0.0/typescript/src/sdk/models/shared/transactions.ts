@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Transactions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cashier" })
+  @SpeakeasyMetadata({ data: "json, name=cashier" })
   cashier?: string;
 
-  @Metadata({ data: "json, name=timeStamp" })
+  @SpeakeasyMetadata({ data: "json, name=timeStamp" })
   timeStamp?: number;
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 
-  @Metadata({ data: "json, name=txtype" })
+  @SpeakeasyMetadata({ data: "json, name=txtype" })
   txtype?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

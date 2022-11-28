@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,36 +22,41 @@ class CreateImageRecipeHeaders:
 @dataclass_json
 @dataclass
 class CreateImageRecipeRequestBodyAdditionalInstanceConfiguration:
-    systems_manager_agent: Optional[shared.SystemsManagerAgent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'systemsManagerAgent' }})
-    user_data_override: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userDataOverride' }})
+    r"""CreateImageRecipeRequestBodyAdditionalInstanceConfiguration
+    In addition to your infrastruction configuration, these settings provide an extra layer of control over your build instances. For instances where Image Builder installs the SSM agent, you can choose whether to keep it for the AMI that you create. You can also specify commands to run on launch for all of your build instances.
+    """
+    
+    systems_manager_agent: Optional[shared.SystemsManagerAgent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('systemsManagerAgent') }})
+    user_data_override: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userDataOverride') }})
     
 
 @dataclass_json
 @dataclass
 class CreateImageRecipeRequestBody:
-    additional_instance_configuration: Optional[CreateImageRecipeRequestBodyAdditionalInstanceConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalInstanceConfiguration' }})
-    block_device_mappings: Optional[List[shared.InstanceBlockDeviceMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blockDeviceMappings' }})
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    components: List[shared.ComponentConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'components' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent_image: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentImage' }})
-    semantic_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'semanticVersion' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    working_directory: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workingDirectory' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    components: List[shared.ComponentConfiguration] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('components') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    parent_image: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentImage') }})
+    semantic_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('semanticVersion') }})
+    additional_instance_configuration: Optional[CreateImageRecipeRequestBodyAdditionalInstanceConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalInstanceConfiguration') }})
+    block_device_mappings: Optional[List[shared.InstanceBlockDeviceMapping]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('blockDeviceMappings') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    working_directory: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workingDirectory') }})
     
 
 @dataclass
 class CreateImageRecipeRequest:
-    headers: CreateImageRecipeHeaders = field(default=None)
-    request: CreateImageRecipeRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateImageRecipeHeaders = field()
+    request: CreateImageRecipeRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateImageRecipeResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_image_recipe_response: Optional[shared.CreateImageRecipeResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
@@ -58,5 +67,4 @@ class CreateImageRecipeResponse:
     service_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

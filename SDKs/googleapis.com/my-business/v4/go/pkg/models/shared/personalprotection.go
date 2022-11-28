@@ -36,6 +36,8 @@ const (
 	PersonalProtectionProtectiveEquipmentAvailableExceptionEnumDependentOnDayOfWeek PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// PersonalProtection
+// Personal protection measures implemented by the hotel during COVID-19.
 type PersonalProtection struct {
 	CommonAreasOfferSanitizingItems          *bool                                                           `json:"commonAreasOfferSanitizingItems,omitempty"`
 	CommonAreasOfferSanitizingItemsException *PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum `json:"commonAreasOfferSanitizingItemsException,omitempty"`

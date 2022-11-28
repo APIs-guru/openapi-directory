@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink } from "./googleanalyticsadminv1alphadisplayvideo360advertiserlink";
+
 
 
 // GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalResponse
@@ -7,6 +8,6 @@ import { GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink } from "./goog
  * Response message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
 **/
 export class GoogleAnalyticsAdminV1alphaApproveDisplayVideo360AdvertiserLinkProposalResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayVideo360AdvertiserLink" })
+  @SpeakeasyMetadata({ data: "json, name=displayVideo360AdvertiserLink" })
   displayVideo360AdvertiserLink?: GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink;
 }

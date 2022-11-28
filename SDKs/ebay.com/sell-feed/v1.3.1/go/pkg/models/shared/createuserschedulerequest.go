@@ -1,5 +1,7 @@
 package shared
 
+// CreateUserScheduleRequest
+// The type that defines the fields for the createSchedule method.
 type CreateUserScheduleRequest struct {
 	FeedType                   *string `json:"feedType,omitempty"`
 	PreferredTriggerDayOfMonth *int32  `json:"preferredTriggerDayOfMonth,omitempty"`

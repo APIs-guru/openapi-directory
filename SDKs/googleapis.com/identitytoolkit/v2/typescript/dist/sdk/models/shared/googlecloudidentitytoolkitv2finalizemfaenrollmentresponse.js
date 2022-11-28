@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo } from "./googlecloudidentitytoolkitv2finalizemfaphoneresponseinfo";
 // GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse
 /**
@@ -34,15 +34,15 @@ var GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=idToken" }),
+        SpeakeasyMetadata({ data: "json, name=idToken" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse.prototype, "idToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneAuthInfo" }),
+        SpeakeasyMetadata({ data: "json, name=phoneAuthInfo" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse.prototype, "phoneAuthInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=refreshToken" }),
+        SpeakeasyMetadata({ data: "json, name=refreshToken" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse.prototype, "refreshToken", void 0);
     return GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentResponse;

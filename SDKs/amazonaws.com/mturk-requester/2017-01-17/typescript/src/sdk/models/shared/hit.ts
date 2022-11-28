@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HitReviewStatusEnum } from "./hitreviewstatusenum";
 import { HitStatusEnum } from "./hitstatusenum";
 import { QualificationRequirement } from "./qualificationrequirement";
+
 
 
 // Hit
@@ -10,66 +10,66 @@ import { QualificationRequirement } from "./qualificationrequirement";
  *  The HIT data structure represents a single HIT, including all the information necessary for a Worker to accept and complete the HIT.
 **/
 export class Hit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentDurationInSeconds" })
   assignmentDurationInSeconds?: number;
 
-  @Metadata({ data: "json, name=AutoApprovalDelayInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AutoApprovalDelayInSeconds" })
   autoApprovalDelayInSeconds?: number;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Expiration" })
+  @SpeakeasyMetadata({ data: "json, name=Expiration" })
   expiration?: Date;
 
-  @Metadata({ data: "json, name=HITGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=HITGroupId" })
   hitGroupId?: string;
 
-  @Metadata({ data: "json, name=HITId" })
+  @SpeakeasyMetadata({ data: "json, name=HITId" })
   hitId?: string;
 
-  @Metadata({ data: "json, name=HITLayoutId" })
+  @SpeakeasyMetadata({ data: "json, name=HITLayoutId" })
   hitLayoutId?: string;
 
-  @Metadata({ data: "json, name=HITReviewStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HITReviewStatus" })
   hitReviewStatus?: HitReviewStatusEnum;
 
-  @Metadata({ data: "json, name=HITStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HITStatus" })
   hitStatus?: HitStatusEnum;
 
-  @Metadata({ data: "json, name=HITTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=HITTypeId" })
   hitTypeId?: string;
 
-  @Metadata({ data: "json, name=Keywords" })
+  @SpeakeasyMetadata({ data: "json, name=Keywords" })
   keywords?: string;
 
-  @Metadata({ data: "json, name=MaxAssignments" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAssignments" })
   maxAssignments?: number;
 
-  @Metadata({ data: "json, name=NumberOfAssignmentsAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfAssignmentsAvailable" })
   numberOfAssignmentsAvailable?: number;
 
-  @Metadata({ data: "json, name=NumberOfAssignmentsCompleted" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfAssignmentsCompleted" })
   numberOfAssignmentsCompleted?: number;
 
-  @Metadata({ data: "json, name=NumberOfAssignmentsPending" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfAssignmentsPending" })
   numberOfAssignmentsPending?: number;
 
-  @Metadata({ data: "json, name=QualificationRequirements", elemType: shared.QualificationRequirement })
+  @SpeakeasyMetadata({ data: "json, name=QualificationRequirements", elemType: QualificationRequirement })
   qualificationRequirements?: QualificationRequirement[];
 
-  @Metadata({ data: "json, name=Question" })
+  @SpeakeasyMetadata({ data: "json, name=Question" })
   question?: string;
 
-  @Metadata({ data: "json, name=RequesterAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=RequesterAnnotation" })
   requesterAnnotation?: string;
 
-  @Metadata({ data: "json, name=Reward" })
+  @SpeakeasyMetadata({ data: "json, name=Reward" })
   reward?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CloudEnvironmentFolderBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recentFolderPaths" })
+  @SpeakeasyMetadata({ data: "json, name=recentFolderPaths" })
   recentFolderPaths?: string[];
 }

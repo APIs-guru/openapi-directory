@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyInstancePlacementActionEnum(str, Enum):
     MODIFY_INSTANCE_PLACEMENT = "ModifyInstancePlacement"
@@ -18,15 +22,15 @@ class GetModifyInstancePlacementVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyInstancePlacementQueryParams:
-    action: GetModifyInstancePlacementActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyInstancePlacementActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: str = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    version: GetModifyInstancePlacementVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     affinity: Optional[GetModifyInstancePlacementAffinityEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Affinity', 'style': 'form', 'explode': True }})
     group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
     host_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'HostId', 'style': 'form', 'explode': True }})
     host_resource_group_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'HostResourceGroupArn', 'style': 'form', 'explode': True }})
-    instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
     partition_number: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PartitionNumber', 'style': 'form', 'explode': True }})
     tenancy: Optional[GetModifyInstancePlacementTenancyEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Tenancy', 'style': 'form', 'explode': True }})
-    version: GetModifyInstancePlacementVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -42,13 +46,13 @@ class GetModifyInstancePlacementHeaders:
 
 @dataclass
 class GetModifyInstancePlacementRequest:
-    query_params: GetModifyInstancePlacementQueryParams = field(default=None)
-    headers: GetModifyInstancePlacementHeaders = field(default=None)
+    headers: GetModifyInstancePlacementHeaders = field()
+    query_params: GetModifyInstancePlacementQueryParams = field()
     
 
 @dataclass
 class GetModifyInstancePlacementResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

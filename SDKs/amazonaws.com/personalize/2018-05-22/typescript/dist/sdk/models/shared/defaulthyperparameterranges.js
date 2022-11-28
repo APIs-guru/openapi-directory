@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DefaultCategoricalHyperParameterRange } from "./defaultcategoricalhyperparameterrange";
+import { DefaultContinuousHyperParameterRange } from "./defaultcontinuoushyperparameterrange";
+import { DefaultIntegerHyperParameterRange } from "./defaultintegerhyperparameterrange";
 // DefaultHyperParameterRanges
 /**
  * Specifies the hyperparameters and their default ranges. Hyperparameters can be categorical, continuous, or integer-valued.
@@ -34,15 +36,15 @@ var DefaultHyperParameterRanges = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=categoricalHyperParameterRanges", elemType: shared.DefaultCategoricalHyperParameterRange }),
+        SpeakeasyMetadata({ data: "json, name=categoricalHyperParameterRanges", elemType: DefaultCategoricalHyperParameterRange }),
         __metadata("design:type", Array)
     ], DefaultHyperParameterRanges.prototype, "categoricalHyperParameterRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=continuousHyperParameterRanges", elemType: shared.DefaultContinuousHyperParameterRange }),
+        SpeakeasyMetadata({ data: "json, name=continuousHyperParameterRanges", elemType: DefaultContinuousHyperParameterRange }),
         __metadata("design:type", Array)
     ], DefaultHyperParameterRanges.prototype, "continuousHyperParameterRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=integerHyperParameterRanges", elemType: shared.DefaultIntegerHyperParameterRange }),
+        SpeakeasyMetadata({ data: "json, name=integerHyperParameterRanges", elemType: DefaultIntegerHyperParameterRange }),
         __metadata("design:type", Array)
     ], DefaultHyperParameterRanges.prototype, "integerHyperParameterRanges", void 0);
     return DefaultHyperParameterRanges;

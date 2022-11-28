@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1PersonalDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Entry metadata relevant only to the user and private to them.
 **/
 export class GoogleCloudDatacatalogV1PersonalDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=starTime" })
+  @SpeakeasyMetadata({ data: "json, name=starTime" })
   starTime?: string;
 
-  @Metadata({ data: "json, name=starred" })
+  @SpeakeasyMetadata({ data: "json, name=starred" })
   starred?: boolean;
 }

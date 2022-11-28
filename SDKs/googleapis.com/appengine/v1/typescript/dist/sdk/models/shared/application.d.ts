@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UrlDispatchRule } from "./urldispatchrule";
 import { FeatureSettings } from "./featuresettings";
 import { IdentityAwareProxy } from "./identityawareproxy";

@@ -14,6 +14,8 @@ const (
 	RevocationDetailsRevocationStateEnumAttributeAuthorityCompromise   RevocationDetailsRevocationStateEnum = "ATTRIBUTE_AUTHORITY_COMPROMISE"
 )
 
+// RevocationDetails
+// Describes fields that are relavent to the revocation of a Certificate.
 type RevocationDetails struct {
 	RevocationState *RevocationDetailsRevocationStateEnum `json:"revocationState,omitempty"`
 	RevocationTime  *string                               `json:"revocationTime,omitempty"`

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class CreateTimerRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  timerInfoDto?: shared.TimerInfoDto;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  timerInfoDto1?: shared.TimerInfoDto;
+export class CreateTimerRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  timerInfoDto?: shared.TimerInfoDtoInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  timerInfoDto2?: shared.TimerInfoDto;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  timerInfoDto1?: shared.TimerInfoDtoInput;
+
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  timerInfoDto2?: shared.TimerInfoDtoInput;
 }
 
 
 export class CreateTimerSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class CreateTimerRequest extends SpeakeasyBase {
-  @Metadata()
-  request?: CreateTimerRequests;
+  @SpeakeasyMetadata()
+  request?: CreateTimerRequestsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateTimerSecurity;
 }
 
 
 export class CreateTimerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

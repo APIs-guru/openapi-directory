@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostgresqlSchema } from "./postgresqlschema";
+
 
 
 // PostgresqlRdbms
@@ -8,6 +8,6 @@ import { PostgresqlSchema } from "./postgresqlschema";
  * PostgreSQL database structure.
 **/
 export class PostgresqlRdbms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=postgresqlSchemas", elemType: shared.PostgresqlSchema })
+  @SpeakeasyMetadata({ data: "json, name=postgresqlSchemas", elemType: PostgresqlSchema })
   postgresqlSchemas?: PostgresqlSchema[];
 }

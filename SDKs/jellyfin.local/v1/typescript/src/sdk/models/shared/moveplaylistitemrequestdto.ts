@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MovePlaylistItemRequestDto
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class MovePlaylistItemRequestDto.
 **/
 export class MovePlaylistItemRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NewIndex" })
+  @SpeakeasyMetadata({ data: "json, name=NewIndex" })
   newIndex?: number;
 
-  @Metadata({ data: "json, name=PlaylistItemId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemId" })
   playlistItemId?: string;
 }

@@ -8,6 +8,8 @@ const (
 	GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterfaceTypeEnumNic                      GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterfaceTypeEnum = "NIC"
 )
 
+// GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface
+// Logical interface.
 type GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface struct {
 	Name     *string                                                                      `json:"name,omitempty"`
 	Required *bool                                                                        `json:"required,omitempty"`

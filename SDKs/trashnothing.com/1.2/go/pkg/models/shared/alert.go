@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Alert
+// A search alert that the user has created so that they can be notified when new posts match the search query specified by the alert.
 type Alert struct {
 	AlertID   *string    `json:"alert_id,omitempty"`
 	LastSent  *time.Time `json:"last_sent,omitempty"`

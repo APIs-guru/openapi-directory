@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Licensing
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configure Licensing.
 **/
 export class Licensing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=osByol" })
+  @SpeakeasyMetadata({ data: "json, name=osByol" })
   osByol?: boolean;
 }

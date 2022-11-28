@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetRelatedWordsPathParams:
-    word: str = field(default=None, metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
+    word: str = field(metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
     
 class GetRelatedWordsRelationshipTypesEnum(str, Enum):
     SYNONYM = "synonym"
@@ -39,13 +40,13 @@ class GetRelatedWordsQueryParams:
 
 @dataclass
 class GetRelatedWordsRequest:
-    path_params: GetRelatedWordsPathParams = field(default=None)
-    query_params: GetRelatedWordsQueryParams = field(default=None)
+    path_params: GetRelatedWordsPathParams = field()
+    query_params: GetRelatedWordsQueryParams = field()
     
 
 @dataclass
 class GetRelatedWordsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

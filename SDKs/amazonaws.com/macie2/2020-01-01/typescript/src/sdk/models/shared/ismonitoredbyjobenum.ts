@@ -1,7 +1,8 @@
 
 
+
 export enum IsMonitoredByJobEnum {
-    True = "TRUE"
-,    False = "FALSE"
-,    Unknown = "UNKNOWN"
+    True = "TRUE",
+    False = "FALSE",
+    Unknown = "UNKNOWN"
 }

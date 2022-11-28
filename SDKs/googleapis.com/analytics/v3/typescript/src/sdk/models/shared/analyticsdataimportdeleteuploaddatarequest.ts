@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AnalyticsDataimportDeleteUploadDataRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request template for the delete upload data request.
 **/
 export class AnalyticsDataimportDeleteUploadDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customDataImportUids" })
+  @SpeakeasyMetadata({ data: "json, name=customDataImportUids" })
   customDataImportUids?: string[];
 }

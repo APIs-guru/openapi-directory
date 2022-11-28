@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CloudPubsubTopicPayloadFormatEnum;
 (function (CloudPubsubTopicPayloadFormatEnum) {
     CloudPubsubTopicPayloadFormatEnum["PayloadFormatUnspecified"] = "PAYLOAD_FORMAT_UNSPECIFIED";
@@ -38,11 +38,11 @@ var CloudPubsubTopic = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=payloadFormat" }),
+        SpeakeasyMetadata({ data: "json, name=payloadFormat" }),
         __metadata("design:type", String)
     ], CloudPubsubTopic.prototype, "payloadFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=topicName" }),
+        SpeakeasyMetadata({ data: "json, name=topicName" }),
         __metadata("design:type", String)
     ], CloudPubsubTopic.prototype, "topicName", void 0);
     return CloudPubsubTopic;

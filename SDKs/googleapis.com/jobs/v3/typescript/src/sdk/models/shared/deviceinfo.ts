@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeviceInfoDeviceTypeEnum {
-    DeviceTypeUnspecified = "DEVICE_TYPE_UNSPECIFIED"
-,    Web = "WEB"
-,    MobileWeb = "MOBILE_WEB"
-,    Android = "ANDROID"
-,    Ios = "IOS"
-,    Bot = "BOT"
-,    Other = "OTHER"
+    DeviceTypeUnspecified = "DEVICE_TYPE_UNSPECIFIED",
+    Web = "WEB",
+    MobileWeb = "MOBILE_WEB",
+    Android = "ANDROID",
+    Ios = "IOS",
+    Bot = "BOT",
+    Other = "OTHER"
 }
 
 
@@ -16,9 +17,9 @@ export enum DeviceInfoDeviceTypeEnum {
  * Device information collected from the job seeker, candidate, or other entity conducting the job search. Providing this information improves the quality of the search results across devices.
 **/
 export class DeviceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceType" })
+  @SpeakeasyMetadata({ data: "json, name=deviceType" })
   deviceType?: DeviceInfoDeviceTypeEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

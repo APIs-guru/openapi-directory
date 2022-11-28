@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Version } from "./version";
-import { Version } from "./version";
-import { Version } from "./version";
+
 
 
 // Detail
@@ -9,45 +8,45 @@ import { Version } from "./version";
  * A detail for a distro and package affected by this vulnerability and its associated fix (if one is available).
 **/
 export class Detail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=affectedCpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=affectedCpeUri" })
   affectedCpeUri?: string;
 
-  @Metadata({ data: "json, name=affectedPackage" })
+  @SpeakeasyMetadata({ data: "json, name=affectedPackage" })
   affectedPackage?: string;
 
-  @Metadata({ data: "json, name=affectedVersionEnd" })
+  @SpeakeasyMetadata({ data: "json, name=affectedVersionEnd" })
   affectedVersionEnd?: Version;
 
-  @Metadata({ data: "json, name=affectedVersionStart" })
+  @SpeakeasyMetadata({ data: "json, name=affectedVersionStart" })
   affectedVersionStart?: Version;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fixedCpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=fixedCpeUri" })
   fixedCpeUri?: string;
 
-  @Metadata({ data: "json, name=fixedPackage" })
+  @SpeakeasyMetadata({ data: "json, name=fixedPackage" })
   fixedPackage?: string;
 
-  @Metadata({ data: "json, name=fixedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=fixedVersion" })
   fixedVersion?: Version;
 
-  @Metadata({ data: "json, name=isObsolete" })
+  @SpeakeasyMetadata({ data: "json, name=isObsolete" })
   isObsolete?: boolean;
 
-  @Metadata({ data: "json, name=packageType" })
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
   packageType?: string;
 
-  @Metadata({ data: "json, name=severityName" })
+  @SpeakeasyMetadata({ data: "json, name=severityName" })
   severityName?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=sourceUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUpdateTime" })
   sourceUpdateTime?: string;
 
-  @Metadata({ data: "json, name=vendor" })
+  @SpeakeasyMetadata({ data: "json, name=vendor" })
   vendor?: string;
 }

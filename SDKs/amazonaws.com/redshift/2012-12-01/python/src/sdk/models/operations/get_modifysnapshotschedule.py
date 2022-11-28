@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifySnapshotScheduleActionEnum(str, Enum):
     MODIFY_SNAPSHOT_SCHEDULE = "ModifySnapshotSchedule"
@@ -10,10 +14,10 @@ class GetModifySnapshotScheduleVersionEnum(str, Enum):
 
 @dataclass
 class GetModifySnapshotScheduleQueryParams:
-    action: GetModifySnapshotScheduleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    schedule_definitions: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'ScheduleDefinitions', 'style': 'form', 'explode': True }})
-    schedule_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ScheduleIdentifier', 'style': 'form', 'explode': True }})
-    version: GetModifySnapshotScheduleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetModifySnapshotScheduleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    schedule_definitions: List[str] = field(metadata={'query_param': { 'field_name': 'ScheduleDefinitions', 'style': 'form', 'explode': True }})
+    schedule_identifier: str = field(metadata={'query_param': { 'field_name': 'ScheduleIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifySnapshotScheduleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetModifySnapshotScheduleHeaders:
 
 @dataclass
 class GetModifySnapshotScheduleRequest:
-    query_params: GetModifySnapshotScheduleQueryParams = field(default=None)
-    headers: GetModifySnapshotScheduleHeaders = field(default=None)
+    headers: GetModifySnapshotScheduleHeaders = field()
+    query_params: GetModifySnapshotScheduleQueryParams = field()
     
 
 @dataclass
 class GetModifySnapshotScheduleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

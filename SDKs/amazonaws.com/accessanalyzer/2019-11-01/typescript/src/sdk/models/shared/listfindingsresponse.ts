@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingSummary } from "./findingsummary";
+
 
 
 // ListFindingsResponse
@@ -8,9 +8,9 @@ import { FindingSummary } from "./findingsummary";
  * The response to the request.
 **/
 export class ListFindingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=findings", elemType: shared.FindingSummary })
+  @SpeakeasyMetadata({ data: "json, name=findings", elemType: FindingSummary })
   findings: FindingSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -14,6 +14,9 @@ type ListInputRoutingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListInputRoutingsRequestBodyInputIdentifier
+//
+//	The identifer of the input.
 type ListInputRoutingsRequestBodyInputIdentifier struct {
 	IotEventsInputIdentifier   *shared.IotEventsInputIdentifier   `json:"iotEventsInputIdentifier,omitempty"`
 	IotSiteWiseInputIdentifier *shared.IotSiteWiseInputIdentifier `json:"iotSiteWiseInputIdentifier,omitempty"`

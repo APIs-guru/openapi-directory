@@ -21,6 +21,8 @@ const (
 	GoogleCloudChannelV1EduDataInstituteTypeEnumUniversity               GoogleCloudChannelV1EduDataInstituteTypeEnum = "UNIVERSITY"
 )
 
+// GoogleCloudChannelV1EduData
+// Required Edu Attributes
 type GoogleCloudChannelV1EduData struct {
 	InstituteSize *GoogleCloudChannelV1EduDataInstituteSizeEnum `json:"instituteSize,omitempty"`
 	InstituteType *GoogleCloudChannelV1EduDataInstituteTypeEnum `json:"instituteType,omitempty"`

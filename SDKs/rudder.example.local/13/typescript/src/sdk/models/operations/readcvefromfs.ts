@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReadCvEfromFs200ApplicationJsonActionEnum {
     ReadCvEfromFs = "readCVEfromFS"
@@ -6,35 +7,35 @@ export enum ReadCvEfromFs200ApplicationJsonActionEnum {
 
 
 export class ReadCvEfromFs200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CVEs" })
+  @SpeakeasyMetadata({ data: "json, name=CVEs" })
   cvEs: number;
 }
 
 export enum ReadCvEfromFs200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ReadCvEfromFs200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ReadCvEfromFs200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ReadCvEfromFs200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ReadCvEfromFs200ApplicationJsonResultEnum;
 }
 
 
 export class ReadCvEfromFsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   readCvEfromFs200ApplicationJsonObject?: ReadCvEfromFs200ApplicationJson;
 }

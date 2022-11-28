@@ -18,6 +18,8 @@ type CreateVirtualNodeHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateVirtualNodeRequestBodySpec
+// An object representing the specification of a virtual node.
 type CreateVirtualNodeRequestBodySpec struct {
 	Backends         []string                 `json:"backends,omitempty"`
 	Listeners        []shared.Listener        `json:"listeners,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetPolicyResponse
+// The output from the GetPolicy operation.
 type GetPolicyResponse struct {
 	CreationDate     *time.Time `json:"creationDate,omitempty"`
 	DefaultVersionID *string    `json:"defaultVersionId,omitempty"`

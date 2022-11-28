@@ -1,91 +1,180 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeepUntilEnum } from "./keepuntilenum";
 import { BaseItemDto } from "./baseitemdto";
 import { RecordingStatusEnum } from "./recordingstatusenum";
+import { BaseItemDtoInput } from "./baseitemdto";
+
 
 
 export class TimerInfoDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=ChannelName" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=ChannelPrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelPrimaryImageTag" })
   channelPrimaryImageTag?: string;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=ExternalChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalChannelId" })
   externalChannelId?: string;
 
-  @Metadata({ data: "json, name=ExternalId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=ExternalProgramId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalProgramId" })
   externalProgramId?: string;
 
-  @Metadata({ data: "json, name=ExternalSeriesTimerId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalSeriesTimerId" })
   externalSeriesTimerId?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=IsPostPaddingRequired" })
+  @SpeakeasyMetadata({ data: "json, name=IsPostPaddingRequired" })
   isPostPaddingRequired?: boolean;
 
-  @Metadata({ data: "json, name=IsPrePaddingRequired" })
+  @SpeakeasyMetadata({ data: "json, name=IsPrePaddingRequired" })
   isPrePaddingRequired?: boolean;
 
-  @Metadata({ data: "json, name=KeepUntil" })
+  @SpeakeasyMetadata({ data: "json, name=KeepUntil" })
   keepUntil?: KeepUntilEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Overview" })
+  @SpeakeasyMetadata({ data: "json, name=Overview" })
   overview?: string;
 
-  @Metadata({ data: "json, name=ParentBackdropImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropImageTags" })
   parentBackdropImageTags?: string[];
 
-  @Metadata({ data: "json, name=ParentBackdropItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropItemId" })
   parentBackdropItemId?: string;
 
-  @Metadata({ data: "json, name=PostPaddingSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=PostPaddingSeconds" })
   postPaddingSeconds?: number;
 
-  @Metadata({ data: "json, name=PrePaddingSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=PrePaddingSeconds" })
   prePaddingSeconds?: number;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=ProgramId" })
+  @SpeakeasyMetadata({ data: "json, name=ProgramId" })
   programId?: string;
 
-  @Metadata({ data: "json, name=ProgramInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ProgramInfo" })
   programInfo?: BaseItemDto;
 
-  @Metadata({ data: "json, name=RunTimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=RunTimeTicks" })
   runTimeTicks?: number;
 
-  @Metadata({ data: "json, name=SeriesTimerId" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesTimerId" })
   seriesTimerId?: string;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: RecordingStatusEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
+  type?: string;
+}
+
+
+export class TimerInfoDtoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ChannelId" })
+  channelId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
+  channelName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelPrimaryImageTag" })
+  channelPrimaryImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
+  endDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=ExternalChannelId" })
+  externalChannelId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ExternalId" })
+  externalId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ExternalProgramId" })
+  externalProgramId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ExternalSeriesTimerId" })
+  externalSeriesTimerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=IsPostPaddingRequired" })
+  isPostPaddingRequired?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsPrePaddingRequired" })
+  isPrePaddingRequired?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=KeepUntil" })
+  keepUntil?: KeepUntilEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Overview" })
+  overview?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropImageTags" })
+  parentBackdropImageTags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=ParentBackdropItemId" })
+  parentBackdropItemId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PostPaddingSeconds" })
+  postPaddingSeconds?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=PrePaddingSeconds" })
+  prePaddingSeconds?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
+  priority?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ProgramId" })
+  programId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ProgramInfo" })
+  programInfo?: BaseItemDtoInput;
+
+  @SpeakeasyMetadata({ data: "json, name=RunTimeTicks" })
+  runTimeTicks?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=SeriesTimerId" })
+  seriesTimerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
+  serverId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
+  serviceName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
+  startDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=Status" })
+  status?: RecordingStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

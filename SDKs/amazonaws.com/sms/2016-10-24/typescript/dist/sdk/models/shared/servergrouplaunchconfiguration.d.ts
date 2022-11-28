@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServerLaunchConfiguration } from "./serverlaunchconfiguration";
 /**
  * Launch configuration for a server group.

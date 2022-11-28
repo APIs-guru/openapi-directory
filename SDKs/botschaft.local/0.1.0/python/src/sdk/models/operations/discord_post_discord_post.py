@@ -10,14 +10,14 @@ class DiscordPostDiscordPostHeaders:
 
 @dataclass
 class DiscordPostDiscordPostRequest:
-    headers: DiscordPostDiscordPostHeaders = field(default=None)
-    request: shared.DiscordMessageRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DiscordPostDiscordPostHeaders = field()
+    request: shared.DiscordMessageRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DiscordPostDiscordPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     discord_post_discord_post_200_application_json_any: Optional[Any] = field(default=None)
     

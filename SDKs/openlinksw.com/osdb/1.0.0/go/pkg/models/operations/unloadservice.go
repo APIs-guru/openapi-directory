@@ -8,10 +8,6 @@ type UnloadServicePathParams struct {
 	ServiceID string `pathParam:"style=simple,explode=false,name=serviceId"`
 }
 
-type UnloadServiceRequest struct {
-	PathParams UnloadServicePathParams
-}
-
 type UnloadService200ApplicationJSONStatusEnum string
 
 const (
@@ -23,6 +19,10 @@ type UnloadService200ApplicationJSON struct {
 	Method   string                                    `json:"method"`
 	Response string                                    `json:"response"`
 	Status   UnloadService200ApplicationJSONStatusEnum `json:"status"`
+}
+
+type UnloadServiceRequest struct {
+	PathParams UnloadServicePathParams
 }
 
 type UnloadServiceResponse struct {

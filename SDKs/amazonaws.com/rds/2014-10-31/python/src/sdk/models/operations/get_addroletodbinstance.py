@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAddRoleToDbInstanceActionEnum(str, Enum):
     ADD_ROLE_TO_DB_INSTANCE = "AddRoleToDBInstance"
@@ -10,11 +14,11 @@ class GetAddRoleToDbInstanceVersionEnum(str, Enum):
 
 @dataclass
 class GetAddRoleToDbInstanceQueryParams:
-    action: GetAddRoleToDbInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
-    feature_name: str = field(default=None, metadata={'query_param': { 'field_name': 'FeatureName', 'style': 'form', 'explode': True }})
-    role_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'RoleArn', 'style': 'form', 'explode': True }})
-    version: GetAddRoleToDbInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAddRoleToDbInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    feature_name: str = field(metadata={'query_param': { 'field_name': 'FeatureName', 'style': 'form', 'explode': True }})
+    role_arn: str = field(metadata={'query_param': { 'field_name': 'RoleArn', 'style': 'form', 'explode': True }})
+    version: GetAddRoleToDbInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetAddRoleToDbInstanceHeaders:
 
 @dataclass
 class GetAddRoleToDbInstanceRequest:
-    query_params: GetAddRoleToDbInstanceQueryParams = field(default=None)
-    headers: GetAddRoleToDbInstanceHeaders = field(default=None)
+    headers: GetAddRoleToDbInstanceHeaders = field()
+    query_params: GetAddRoleToDbInstanceQueryParams = field()
     
 
 @dataclass
 class GetAddRoleToDbInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

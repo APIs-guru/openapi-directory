@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class WorldExportJobErrorCodeEnum(str, Enum):
     INTERNAL_SERVICE_ERROR = "InternalServiceError"

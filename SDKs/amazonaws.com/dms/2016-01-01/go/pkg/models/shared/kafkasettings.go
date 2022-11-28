@@ -1,5 +1,7 @@
 package shared
 
+// KafkaSettings
+// Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.
 type KafkaSettings struct {
 	Broker                      *string                    `json:"Broker,omitempty"`
 	IncludeControlDetails       *bool                      `json:"IncludeControlDetails,omitempty"`

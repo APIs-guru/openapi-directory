@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class FunctionsGetTagPathParams:
-    function_id: str = field(default=None, metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
-    tag_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
+    function_id: str = field(metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
+    tag_id: str = field(metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FunctionsGetTagSecurity:
-    key: shared.SchemeKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    key: shared.SchemeKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class FunctionsGetTagRequest:
-    path_params: FunctionsGetTagPathParams = field(default=None)
-    security: FunctionsGetTagSecurity = field(default=None)
+    path_params: FunctionsGetTagPathParams = field()
+    security: FunctionsGetTagSecurity = field()
     
 
 @dataclass
 class FunctionsGetTagResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tag: Optional[shared.Tag] = field(default=None)
     

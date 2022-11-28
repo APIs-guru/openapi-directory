@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListProgrammesAudioDescribedEnum;
 (function (ListProgrammesAudioDescribedEnum) {
@@ -130,155 +130,155 @@ var ListProgrammesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=audio_described" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=audio_described" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "audioDescribed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability_entity_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability_entity_type" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "availabilityEntityType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability_from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability_from" }),
         __metadata("design:type", Date)
     ], ListProgrammesQueryParams.prototype, "availabilityFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability_type" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "availabilityType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=children_of" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=children_of" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "childrenOf", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=descendants_of" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=descendants_of" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "descendantsOf", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=duration" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=embargoed" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embargoed" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "embargoed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entity_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity_type" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "entityType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=genre" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=genre" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "genre", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_letter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_letter" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "initialLetter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_letter_end" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_letter_end" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "initialLetterEnd", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_letter_start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_letter_start" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "initialLetterStart", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_letter_strict" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_letter_strict" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "initialLetterStrict", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=item" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=item" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "item", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=master_brand" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=master_brand" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "masterBrand", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=media_set" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=media_set" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "mediaSet", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=media_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=media_type" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "mediaType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ListProgrammesQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], ListProgrammesQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "partnerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "partnerPid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=payment_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payment_type" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "paymentType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=people" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=people" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "people", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pid" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "pid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=promoted_for" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=promoted_for" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "promotedFor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=signed" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=signed" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "signed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "sortDirection", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tag_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag_name" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "tagName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tag_scheme" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag_scheme" }),
         __metadata("design:type", String)
     ], ListProgrammesQueryParams.prototype, "tagScheme", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tleo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tleo" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "tleo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" }),
         __metadata("design:type", Array)
     ], ListProgrammesQueryParams.prototype, "version", void 0);
     return ListProgrammesQueryParams;
@@ -290,7 +290,7 @@ var ListProgrammesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListProgrammesQueryParams)
     ], ListProgrammesRequest.prototype, "queryParams", void 0);
     return ListProgrammesRequest;
@@ -302,23 +302,23 @@ var ListProgrammesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ListProgrammesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListProgrammesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], ListProgrammesResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListProgrammesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListProgrammesResponse.prototype, "nitro", void 0);
     return ListProgrammesResponse;

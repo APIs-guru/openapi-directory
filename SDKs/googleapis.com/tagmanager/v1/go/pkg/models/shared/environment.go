@@ -9,6 +9,8 @@ const (
 	EnvironmentTypeEnumDraft  EnvironmentTypeEnum = "draft"
 )
 
+// Environment
+// Represents a Google Tag Manager Environment. Note that a user can create, delete and update environments of type USER, but can only update the enable_debug and url fields of environments of other types.
 type Environment struct {
 	AccountID                *string              `json:"accountId,omitempty"`
 	AuthorizationCode        *string              `json:"authorizationCode,omitempty"`

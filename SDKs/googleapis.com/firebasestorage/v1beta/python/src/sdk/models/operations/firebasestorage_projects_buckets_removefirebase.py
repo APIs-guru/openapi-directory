@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasestorageProjectsBucketsRemoveFirebasePathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebasestorageProjectsBucketsRemoveFirebaseQueryParams:
 
 @dataclass
 class FirebasestorageProjectsBucketsRemoveFirebaseSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasestorageProjectsBucketsRemoveFirebaseSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebasestorageProjectsBucketsRemoveFirebaseSecurity:
 
 @dataclass
 class FirebasestorageProjectsBucketsRemoveFirebaseRequest:
-    path_params: FirebasestorageProjectsBucketsRemoveFirebasePathParams = field(default=None)
-    query_params: FirebasestorageProjectsBucketsRemoveFirebaseQueryParams = field(default=None)
+    path_params: FirebasestorageProjectsBucketsRemoveFirebasePathParams = field()
+    query_params: FirebasestorageProjectsBucketsRemoveFirebaseQueryParams = field()
+    security: FirebasestorageProjectsBucketsRemoveFirebaseSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebasestorageProjectsBucketsRemoveFirebaseSecurity = field(default=None)
     
 
 @dataclass
 class FirebasestorageProjectsBucketsRemoveFirebaseResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

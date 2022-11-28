@@ -54,6 +54,8 @@ const (
 	WaterConservationWaterSavingToiletsExceptionEnumDependentOnDayOfWeek WaterConservationWaterSavingToiletsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// WaterConservation
+// Water conservation practices implemented at the hotel.
 type WaterConservation struct {
 	IndependentOrganizationAuditsWaterUse          *bool                                                                `json:"independentOrganizationAuditsWaterUse,omitempty"`
 	IndependentOrganizationAuditsWaterUseException *WaterConservationIndependentOrganizationAuditsWaterUseExceptionEnum `json:"independentOrganizationAuditsWaterUseException,omitempty"`

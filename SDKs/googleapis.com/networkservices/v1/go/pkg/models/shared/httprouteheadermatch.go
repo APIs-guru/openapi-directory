@@ -1,5 +1,7 @@
 package shared
 
+// HTTPRouteHeaderMatch
+// Specifies how to select a route rule based on HTTP request headers.
 type HTTPRouteHeaderMatch struct {
 	ExactMatch   *string                           `json:"exactMatch,omitempty"`
 	Header       *string                           `json:"header,omitempty"`

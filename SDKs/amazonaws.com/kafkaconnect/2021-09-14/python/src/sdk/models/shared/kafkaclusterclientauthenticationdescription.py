@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import kafkaclusterclientauthenticationtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class KafkaClusterClientAuthenticationDescription:
-    authentication_type: Optional[kafkaclusterclientauthenticationtype_enum.KafkaClusterClientAuthenticationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authenticationType' }})
+    r"""KafkaClusterClientAuthenticationDescription
+    The client authentication information used in order to authenticate with the Apache Kafka cluster.
+    """
+    
+    authentication_type: Optional[KafkaClusterClientAuthenticationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authenticationType') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BeaconAttachment } from "./beaconattachment";
+
 
 
 // ListBeaconAttachmentsResponse
@@ -8,6 +8,6 @@ import { BeaconAttachment } from "./beaconattachment";
  * Response to `ListBeaconAttachments` that contains the requested attachments.
 **/
 export class ListBeaconAttachmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.BeaconAttachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: BeaconAttachment })
   attachments?: BeaconAttachment[];
 }

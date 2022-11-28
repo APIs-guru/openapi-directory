@@ -1,5 +1,7 @@
 package shared
 
+// OrderFilterCriteria
+// The type that defines the fields for the order filters.
 type OrderFilterCriteria struct {
 	CreationDateRange *DateRange `json:"creationDateRange,omitempty"`
 	ModifiedDateRange *DateRange `json:"modifiedDateRange,omitempty"`

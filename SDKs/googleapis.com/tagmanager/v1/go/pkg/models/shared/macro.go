@@ -1,5 +1,7 @@
 package shared
 
+// Macro
+// Represents a Google Tag Manager Macro.
 type Macro struct {
 	AccountID       *string     `json:"accountId,omitempty"`
 	ContainerID     *string     `json:"containerId,omitempty"`

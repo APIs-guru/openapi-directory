@@ -1,5 +1,7 @@
 package shared
 
+// TableOfContents
+// A StructuralElement representing a table of contents.
 type TableOfContents struct {
 	Content               []StructuralElement `json:"content,omitempty"`
 	SuggestedDeletionIds  []string            `json:"suggestedDeletionIds,omitempty"`

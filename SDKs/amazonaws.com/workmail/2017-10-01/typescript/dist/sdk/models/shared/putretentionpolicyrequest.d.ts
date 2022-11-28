@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FolderConfiguration } from "./folderconfiguration";
 export declare class PutRetentionPolicyRequest extends SpeakeasyBase {
     description?: string;

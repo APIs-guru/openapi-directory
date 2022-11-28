@@ -1,6 +1,7 @@
 
 
+
 export enum AssemblyTypeEnum {
-    None = "None"
-,    Line = "Line"
+    None = "None",
+    Line = "Line"
 }

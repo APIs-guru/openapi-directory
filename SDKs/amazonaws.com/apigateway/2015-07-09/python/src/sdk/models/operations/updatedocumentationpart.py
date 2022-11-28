@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDocumentationPartPathParams:
-    part_id: str = field(default=None, metadata={'path_param': { 'field_name': 'part_id', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    part_id: str = field(metadata={'path_param': { 'field_name': 'part_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,25 +28,25 @@ class UpdateDocumentationPartHeaders:
 @dataclass_json
 @dataclass
 class UpdateDocumentationPartRequestBody:
-    patch_operations: Optional[List[shared.PatchOperation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patchOperations' }})
+    patch_operations: Optional[List[shared.PatchOperation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('patchOperations') }})
     
 
 @dataclass
 class UpdateDocumentationPartRequest:
-    path_params: UpdateDocumentationPartPathParams = field(default=None)
-    headers: UpdateDocumentationPartHeaders = field(default=None)
-    request: UpdateDocumentationPartRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDocumentationPartHeaders = field()
+    path_params: UpdateDocumentationPartPathParams = field()
+    request: UpdateDocumentationPartRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDocumentationPartResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     documentation_part: Optional[shared.DocumentationPart] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1AssistQueryParameters } from "./googleclouddialogflowv2beta1assistqueryparameters";
+
 
 
 // GoogleCloudDialogflowV2beta1SuggestArticlesRequest
@@ -7,12 +8,12 @@ import { GoogleCloudDialogflowV2beta1AssistQueryParameters } from "./googlecloud
  * The request message for Participants.SuggestArticles.
 **/
 export class GoogleCloudDialogflowV2beta1SuggestArticlesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assistQueryParams" })
+  @SpeakeasyMetadata({ data: "json, name=assistQueryParams" })
   assistQueryParams?: GoogleCloudDialogflowV2beta1AssistQueryParameters;
 
-  @Metadata({ data: "json, name=contextSize" })
+  @SpeakeasyMetadata({ data: "json, name=contextSize" })
   contextSize?: number;
 
-  @Metadata({ data: "json, name=latestMessage" })
+  @SpeakeasyMetadata({ data: "json, name=latestMessage" })
   latestMessage?: string;
 }

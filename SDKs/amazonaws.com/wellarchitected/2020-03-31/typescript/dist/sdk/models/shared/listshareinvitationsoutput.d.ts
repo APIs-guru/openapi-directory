@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ShareInvitationSummary } from "./shareinvitationsummary";
 /**
  * Input for List Share Invitations

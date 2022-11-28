@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 import { TenancyEnum } from "./tenancyenum";
 
 
+
 export class RegisterWorkspaceDirectoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=EnableSelfService" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSelfService" })
   enableSelfService?: boolean;
 
-  @Metadata({ data: "json, name=EnableWorkDocs" })
+  @SpeakeasyMetadata({ data: "json, name=EnableWorkDocs" })
   enableWorkDocs: boolean;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds?: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Tenancy" })
+  @SpeakeasyMetadata({ data: "json, name=Tenancy" })
   tenancy?: TenancyEnum;
 }

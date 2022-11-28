@@ -13,12 +13,12 @@ class GetSectionsQueryParams:
 
 @dataclass
 class GetSectionsRequest:
-    query_params: GetSectionsQueryParams = field(default=None)
+    query_params: GetSectionsQueryParams = field()
     
 
 @dataclass
 class GetSectionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sections_response: Optional[shared.SectionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

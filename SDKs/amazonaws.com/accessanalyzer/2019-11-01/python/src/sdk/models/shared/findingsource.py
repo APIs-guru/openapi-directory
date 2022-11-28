@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import findingsourcedetail
-from . import findingsourcetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FindingSource:
-    detail: Optional[findingsourcedetail.FindingSourceDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    type: findingsourcetype_enum.FindingSourceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""FindingSource
+    The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+    """
+    
+    type: FindingSourceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    detail: Optional[FindingSourceDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
     

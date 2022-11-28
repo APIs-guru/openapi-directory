@@ -9,6 +9,8 @@ const (
 	ConfigChangeChangeTypeEnumModified              ConfigChangeChangeTypeEnum = "MODIFIED"
 )
 
+// ConfigChange
+// Output generated from semantically comparing two versions of a service configuration. Includes detailed information about a field that have changed with applicable advice about potential consequences for the change, such as backwards-incompatibility.
 type ConfigChange struct {
 	Advices    []Advice                    `json:"advices,omitempty"`
 	ChangeType *ConfigChangeChangeTypeEnum `json:"changeType,omitempty"`

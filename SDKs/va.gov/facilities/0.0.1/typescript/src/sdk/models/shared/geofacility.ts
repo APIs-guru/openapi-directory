@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Geometry } from "./geometry";
 import { Properties } from "./properties";
+
 
 export enum GeoFacilityTypeEnum {
     Feature = "Feature"
@@ -12,12 +13,12 @@ export enum GeoFacilityTypeEnum {
  * GeoJSON-complaint Feature object describing a VA Facility
 **/
 export class GeoFacility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=geometry" })
+  @SpeakeasyMetadata({ data: "json, name=geometry" })
   geometry: Geometry;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties: Properties;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GeoFacilityTypeEnum;
 }

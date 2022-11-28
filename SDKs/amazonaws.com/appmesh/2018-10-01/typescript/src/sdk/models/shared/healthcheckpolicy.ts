@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortProtocolEnum } from "./portprotocolenum";
+
 
 
 // HealthCheckPolicy
@@ -7,24 +8,24 @@ import { PortProtocolEnum } from "./portprotocolenum";
  * An object representing the health check policy for a virtual node's listener.
 **/
 export class HealthCheckPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=healthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=healthyThreshold" })
   healthyThreshold: number;
 
-  @Metadata({ data: "json, name=intervalMillis" })
+  @SpeakeasyMetadata({ data: "json, name=intervalMillis" })
   intervalMillis: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: PortProtocolEnum;
 
-  @Metadata({ data: "json, name=timeoutMillis" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutMillis" })
   timeoutMillis: number;
 
-  @Metadata({ data: "json, name=unhealthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=unhealthyThreshold" })
   unhealthyThreshold: number;
 }

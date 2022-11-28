@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdatePermissionSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=InstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceArn" })
   instanceArn: string;
 
-  @Metadata({ data: "json, name=PermissionSetArn" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionSetArn" })
   permissionSetArn: string;
 
-  @Metadata({ data: "json, name=RelayState" })
+  @SpeakeasyMetadata({ data: "json, name=RelayState" })
   relayState?: string;
 
-  @Metadata({ data: "json, name=SessionDuration" })
+  @SpeakeasyMetadata({ data: "json, name=SessionDuration" })
   sessionDuration?: string;
 }

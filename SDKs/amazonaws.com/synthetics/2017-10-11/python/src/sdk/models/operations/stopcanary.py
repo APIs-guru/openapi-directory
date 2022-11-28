@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class StopCanaryPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class StopCanaryHeaders:
 
 @dataclass
 class StopCanaryRequest:
-    path_params: StopCanaryPathParams = field(default=None)
-    headers: StopCanaryHeaders = field(default=None)
+    headers: StopCanaryHeaders = field()
+    path_params: StopCanaryPathParams = field()
     
 
 @dataclass
 class StopCanaryResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     stop_canary_response: Optional[dict[str, Any]] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

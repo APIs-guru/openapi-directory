@@ -25,6 +25,8 @@ const (
 	TagDataFormatEnumPlacementTagTrackingThirdPartyMeasurement      TagDataFormatEnum = "PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT"
 )
 
+// TagData
+// Placement Tag Data
 type TagData struct {
 	AdID          *string            `json:"adId,omitempty"`
 	ClickTag      *string            `json:"clickTag,omitempty"`

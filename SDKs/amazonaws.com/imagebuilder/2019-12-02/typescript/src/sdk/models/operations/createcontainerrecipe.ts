@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateContainerRecipeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -35,16 +36,16 @@ export enum CreateContainerRecipeRequestBodyContainerTypeEnum {
  * Defines a custom source AMI and block device mapping configurations of an instance used for building and testing container images.
 **/
 export class CreateContainerRecipeRequestBodyInstanceConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockDeviceMappings", elemType: shared.InstanceBlockDeviceMapping })
+  @SpeakeasyMetadata({ data: "json, name=blockDeviceMappings", elemType: shared.InstanceBlockDeviceMapping })
   blockDeviceMappings?: shared.InstanceBlockDeviceMapping[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 }
 
 export enum CreateContainerRecipeRequestBodyPlatformOverrideEnum {
-    Windows = "Windows"
-,    Linux = "Linux"
+    Windows = "Windows",
+    Linux = "Linux"
 }
 
 
@@ -53,114 +54,114 @@ export enum CreateContainerRecipeRequestBodyPlatformOverrideEnum {
  * The container repository where the output container image is stored.
 **/
 export class CreateContainerRecipeRequestBodyTargetRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: shared.ContainerRepositoryServiceEnum;
 }
 
 
 export class CreateContainerRecipeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=components", elemType: shared.ComponentConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=components", elemType: shared.ComponentConfiguration })
   components: shared.ComponentConfiguration[];
 
-  @Metadata({ data: "json, name=containerType" })
+  @SpeakeasyMetadata({ data: "json, name=containerType" })
   containerType: CreateContainerRecipeRequestBodyContainerTypeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=dockerfileTemplateData" })
+  @SpeakeasyMetadata({ data: "json, name=dockerfileTemplateData" })
   dockerfileTemplateData?: string;
 
-  @Metadata({ data: "json, name=dockerfileTemplateUri" })
+  @SpeakeasyMetadata({ data: "json, name=dockerfileTemplateUri" })
   dockerfileTemplateUri?: string;
 
-  @Metadata({ data: "json, name=imageOsVersionOverride" })
+  @SpeakeasyMetadata({ data: "json, name=imageOsVersionOverride" })
   imageOsVersionOverride?: string;
 
-  @Metadata({ data: "json, name=instanceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=instanceConfiguration" })
   instanceConfiguration?: CreateContainerRecipeRequestBodyInstanceConfiguration;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parentImage" })
+  @SpeakeasyMetadata({ data: "json, name=parentImage" })
   parentImage: string;
 
-  @Metadata({ data: "json, name=platformOverride" })
+  @SpeakeasyMetadata({ data: "json, name=platformOverride" })
   platformOverride?: CreateContainerRecipeRequestBodyPlatformOverrideEnum;
 
-  @Metadata({ data: "json, name=semanticVersion" })
+  @SpeakeasyMetadata({ data: "json, name=semanticVersion" })
   semanticVersion: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=targetRepository" })
+  @SpeakeasyMetadata({ data: "json, name=targetRepository" })
   targetRepository: CreateContainerRecipeRequestBodyTargetRepository;
 
-  @Metadata({ data: "json, name=workingDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=workingDirectory" })
   workingDirectory?: string;
 }
 
 
 export class CreateContainerRecipeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateContainerRecipeHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateContainerRecipeRequestBody;
 }
 
 
 export class CreateContainerRecipeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   callRateLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createContainerRecipeResponse?: shared.CreateContainerRecipeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   idempotentParameterMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidVersionNumberException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

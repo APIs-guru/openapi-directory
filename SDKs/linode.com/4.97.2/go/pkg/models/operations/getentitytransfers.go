@@ -9,22 +9,9 @@ type GetEntityTransfersQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetEntityTransfersSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetEntityTransfersSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetEntityTransfersSecurity struct {
-	Option1 *GetEntityTransfersSecurityOption1 `security:"option"`
-	Option2 *GetEntityTransfersSecurityOption2 `security:"option"`
-}
-
-type GetEntityTransfersRequest struct {
-	QueryParams GetEntityTransfersQueryParams
-	Security    GetEntityTransfersSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetEntityTransfers200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetEntityTransfers200ApplicationJSON struct {
 
 type GetEntityTransfersDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetEntityTransfersRequest struct {
+	QueryParams GetEntityTransfersQueryParams
+	Security    GetEntityTransfersSecurity
 }
 
 type GetEntityTransfersResponse struct {

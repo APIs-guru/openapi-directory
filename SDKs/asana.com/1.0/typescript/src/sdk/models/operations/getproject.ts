@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
   projectGid: string;
 }
 
 
 export class GetProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class GetProjectRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetProjectPathParams;
-
-  @Metadata()
-  queryParams: GetProjectQueryParams;
-}
-
-
 export class GetProject200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.ProjectResponse;
 }
 
 
+export class GetProjectRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetProjectPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetProjectQueryParams;
+}
+
+
 export class GetProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getProject200ApplicationJsonObject?: GetProject200ApplicationJson;
 }

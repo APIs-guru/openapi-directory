@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MySqlReplicaConfiguration } from "./mysqlreplicaconfiguration";
+
 
 
 // ReplicaConfiguration
@@ -7,12 +8,12 @@ import { MySqlReplicaConfiguration } from "./mysqlreplicaconfiguration";
  * Read-replica configuration for connecting to the primary instance.
 **/
 export class ReplicaConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failoverTarget" })
+  @SpeakeasyMetadata({ data: "json, name=failoverTarget" })
   failoverTarget?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=mysqlReplicaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=mysqlReplicaConfiguration" })
   mysqlReplicaConfiguration?: MySqlReplicaConfiguration;
 }

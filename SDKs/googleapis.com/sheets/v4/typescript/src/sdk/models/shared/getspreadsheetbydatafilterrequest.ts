@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFilter } from "./datafilter";
+
 
 
 // GetSpreadsheetByDataFilterRequest
@@ -8,9 +8,9 @@ import { DataFilter } from "./datafilter";
  * The request for retrieving a Spreadsheet.
 **/
 export class GetSpreadsheetByDataFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataFilters", elemType: shared.DataFilter })
+  @SpeakeasyMetadata({ data: "json, name=dataFilters", elemType: DataFilter })
   dataFilters?: DataFilter[];
 
-  @Metadata({ data: "json, name=includeGridData" })
+  @SpeakeasyMetadata({ data: "json, name=includeGridData" })
   includeGridData?: boolean;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 
 class DeleteV2LoggingLevelTargetTypeEnum(str, Enum):
     DEFAULT = "DEFAULT"
@@ -8,8 +12,8 @@ class DeleteV2LoggingLevelTargetTypeEnum(str, Enum):
 
 @dataclass
 class DeleteV2LoggingLevelQueryParams:
-    target_name: str = field(default=None, metadata={'query_param': { 'field_name': 'targetName', 'style': 'form', 'explode': True }})
-    target_type: DeleteV2LoggingLevelTargetTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'targetType', 'style': 'form', 'explode': True }})
+    target_name: str = field(metadata={'query_param': { 'field_name': 'targetName', 'style': 'form', 'explode': True }})
+    target_type: DeleteV2LoggingLevelTargetTypeEnum = field(metadata={'query_param': { 'field_name': 'targetType', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,15 +29,15 @@ class DeleteV2LoggingLevelHeaders:
 
 @dataclass
 class DeleteV2LoggingLevelRequest:
-    query_params: DeleteV2LoggingLevelQueryParams = field(default=None)
-    headers: DeleteV2LoggingLevelHeaders = field(default=None)
+    headers: DeleteV2LoggingLevelHeaders = field()
+    query_params: DeleteV2LoggingLevelQueryParams = field()
     
 
 @dataclass
 class DeleteV2LoggingLevelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

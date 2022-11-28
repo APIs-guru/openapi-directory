@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional
+
+
 GET_PROMETHEUS_METRICS_SERVERS = [
 	"http://localhost:8080",
 ]
@@ -12,7 +14,7 @@ class GetPrometheusMetricsRequest:
 
 @dataclass
 class GetPrometheusMetricsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_prometheus_metrics_200_text_plain_string: Optional[str] = field(default=None)
-    status_code: int = field(default=None)
     

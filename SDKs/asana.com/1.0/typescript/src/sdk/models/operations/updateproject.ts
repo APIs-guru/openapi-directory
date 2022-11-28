@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
   projectGid: string;
 }
 
 
 export class UpdateProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class UpdateProjectRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.ProjectRequest;
-}
-
-
-export class UpdateProjectRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateProjectPathParams;
-
-  @Metadata()
-  queryParams: UpdateProjectQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: UpdateProjectRequestBody;
+export class UpdateProjectRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.ProjectRequestInput;
 }
 
 
 export class UpdateProject200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.ProjectResponse;
 }
 
 
+export class UpdateProjectRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateProjectPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: UpdateProjectQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: UpdateProjectRequestBodyInput;
+}
+
+
 export class UpdateProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateProject200ApplicationJsonObject?: UpdateProject200ApplicationJson;
 }

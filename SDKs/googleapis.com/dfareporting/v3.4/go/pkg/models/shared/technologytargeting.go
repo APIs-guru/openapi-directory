@@ -1,5 +1,7 @@
 package shared
 
+// TechnologyTargeting
+// Technology Targeting.
 type TechnologyTargeting struct {
 	Browsers                []Browser                `json:"browsers,omitempty"`
 	ConnectionTypes         []ConnectionType         `json:"connectionTypes,omitempty"`

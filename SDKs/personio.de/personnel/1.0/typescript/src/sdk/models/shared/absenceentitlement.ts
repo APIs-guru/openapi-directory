@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AbsenceEntitlementValueAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entitlement" })
+  @SpeakeasyMetadata({ data: "json, name=entitlement" })
   entitlement?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -19,18 +19,18 @@ export enum AbsenceEntitlementValueTypeEnum {
 
 
 export class AbsenceEntitlementValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: AbsenceEntitlementValueAttributes;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AbsenceEntitlementValueTypeEnum;
 }
 
 
 export class AbsenceEntitlement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value", elemType: shared.AbsenceEntitlementValue })
+  @SpeakeasyMetadata({ data: "json, name=value", elemType: AbsenceEntitlementValue })
   value: AbsenceEntitlementValue[];
 }

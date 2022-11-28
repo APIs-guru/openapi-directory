@@ -1,0 +1,118 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+```bash
+go get openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```go
+package main
+
+import (
+    "openapi"
+    "openapi/pkg/models/shared"
+    "openapi/pkg/models/operations"
+)
+
+func main() {
+    s := sdk.New()
+    
+    req := operations.StorageBucketAccessControlsDeleteRequest{
+        Security: operations.StorageBucketAccessControlsDeleteSecurity{
+            Oauth2: shared.SchemeOauth2{
+                Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+            }
+            Oauth2c: shared.SchemeOauth2c{
+                Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+            },
+        },
+        PathParams: operations.StorageBucketAccessControlsDeletePathParams{
+            Bucket: "omnis",
+            Entity: "et",
+        },
+        QueryParams: operations.StorageBucketAccessControlsDeleteQueryParams{
+            Alt: "json",
+            Fields: "delectus",
+            Key: "reprehenderit",
+            OauthToken: "dolor",
+            PrettyPrint: true,
+            QuotaUser: "hic",
+            UserIP: "voluptatibus",
+        },
+    }
+    
+    res, err := s.BucketAccessControls.StorageBucketAccessControlsDelete(ctx, req)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.StatusCode == http.StatusOK {
+        // handle response
+    }
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### bucketAccessControls
+
+* `StorageBucketAccessControlsDelete` - Permanently deletes the ACL entry for the specified entity on the specified bucket.
+* `StorageBucketAccessControlsGet` - Returns the ACL entry for the specified entity on the specified bucket.
+* `StorageBucketAccessControlsInsert` - Creates a new ACL entry on the specified bucket.
+* `StorageBucketAccessControlsList` - Retrieves ACL entries on the specified bucket.
+* `StorageBucketAccessControlsPatch` - Updates an ACL entry on the specified bucket. This method supports patch semantics.
+* `StorageBucketAccessControlsUpdate` - Updates an ACL entry on the specified bucket.
+
+### buckets
+
+* `StorageBucketsDelete` - Permanently deletes an empty bucket.
+* `StorageBucketsGet` - Returns metadata for the specified bucket.
+* `StorageBucketsInsert` - Creates a new bucket.
+* `StorageBucketsList` - Retrieves a list of buckets for a given project.
+* `StorageBucketsPatch` - Updates a bucket. This method supports patch semantics.
+* `StorageBucketsUpdate` - Updates a bucket.
+
+### channels
+
+* `StorageChannelsStop` - Stop watching resources through this channel
+
+### defaultObjectAccessControls
+
+* `StorageDefaultObjectAccessControlsDelete` - Permanently deletes the default object ACL entry for the specified entity on the specified bucket.
+* `StorageDefaultObjectAccessControlsGet` - Returns the default object ACL entry for the specified entity on the specified bucket.
+* `StorageDefaultObjectAccessControlsInsert` - Creates a new default object ACL entry on the specified bucket.
+* `StorageDefaultObjectAccessControlsList` - Retrieves default object ACL entries on the specified bucket.
+* `StorageDefaultObjectAccessControlsPatch` - Updates a default object ACL entry on the specified bucket. This method supports patch semantics.
+* `StorageDefaultObjectAccessControlsUpdate` - Updates a default object ACL entry on the specified bucket.
+
+### objectAccessControls
+
+* `StorageObjectAccessControlsDelete` - Permanently deletes the ACL entry for the specified entity on the specified object.
+* `StorageObjectAccessControlsGet` - Returns the ACL entry for the specified entity on the specified object.
+* `StorageObjectAccessControlsInsert` - Creates a new ACL entry on the specified object.
+* `StorageObjectAccessControlsList` - Retrieves ACL entries on the specified object.
+* `StorageObjectAccessControlsPatch` - Updates an ACL entry on the specified object. This method supports patch semantics.
+* `StorageObjectAccessControlsUpdate` - Updates an ACL entry on the specified object.
+
+### objects
+
+* `StorageObjectsCompose` - Concatenates a list of existing objects into a new object in the same bucket.
+* `StorageObjectsCopy` - Copies an object to a destination in the same location. Optionally overrides metadata.
+* `StorageObjectsDelete` - Deletes data blobs and associated metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.
+* `StorageObjectsGet` - Retrieves objects or their associated metadata.
+* `StorageObjectsInsert` - Stores new data blobs and associated metadata.
+* `StorageObjectsList` - Retrieves a list of objects matching the criteria.
+* `StorageObjectsPatch` - Updates a data blob's associated metadata. This method supports patch semantics.
+* `StorageObjectsUpdate` - Updates a data blob's associated metadata.
+* `StorageObjectsWatchAll` - Watch for changes on all objects in a bucket.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

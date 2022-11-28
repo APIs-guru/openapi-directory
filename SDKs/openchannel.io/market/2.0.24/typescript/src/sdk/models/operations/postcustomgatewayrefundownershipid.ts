@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostCustomGatewayRefundOwnershipIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ownershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ownershipId" })
   ownershipId: string;
 }
 
 
 export class PostCustomGatewayRefundOwnershipIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=amount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amount" })
   amount: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=customData" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" })
   customData?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=developerAmount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerAmount" })
   developerAmount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=feeAmount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=feeAmount" })
   feeAmount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=marketplaceAmount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=marketplaceAmount" })
   marketplaceAmount?: number;
 }
 
 
 export class PostCustomGatewayRefundOwnershipIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostCustomGatewayRefundOwnershipIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostCustomGatewayRefundOwnershipIdQueryParams;
 }
 
 
 export class PostCustomGatewayRefundOwnershipIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

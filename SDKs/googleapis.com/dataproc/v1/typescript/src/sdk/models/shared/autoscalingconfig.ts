@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoscalingConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Autoscaling Policy config associated with the cluster.
 **/
 export class AutoscalingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyUri" })
+  @SpeakeasyMetadata({ data: "json, name=policyUri" })
   policyUri?: string;
 }

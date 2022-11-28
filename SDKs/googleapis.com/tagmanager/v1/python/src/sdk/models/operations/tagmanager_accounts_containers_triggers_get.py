@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersTriggersGetPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    container_id: str = field(default=None, metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
-    trigger_id: str = field(default=None, metadata={'path_param': { 'field_name': 'triggerId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    container_id: str = field(metadata={'path_param': { 'field_name': 'containerId', 'style': 'simple', 'explode': False }})
+    trigger_id: str = field(metadata={'path_param': { 'field_name': 'triggerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class TagmanagerAccountsContainersTriggersGetQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersTriggersGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersTriggersGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class TagmanagerAccountsContainersTriggersGetSecurity:
 
 @dataclass
 class TagmanagerAccountsContainersTriggersGetRequest:
-    path_params: TagmanagerAccountsContainersTriggersGetPathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersTriggersGetQueryParams = field(default=None)
-    security: TagmanagerAccountsContainersTriggersGetSecurity = field(default=None)
+    path_params: TagmanagerAccountsContainersTriggersGetPathParams = field()
+    query_params: TagmanagerAccountsContainersTriggersGetQueryParams = field()
+    security: TagmanagerAccountsContainersTriggersGetSecurity = field()
     
 
 @dataclass
 class TagmanagerAccountsContainersTriggersGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     trigger: Optional[shared.Trigger] = field(default=None)
     

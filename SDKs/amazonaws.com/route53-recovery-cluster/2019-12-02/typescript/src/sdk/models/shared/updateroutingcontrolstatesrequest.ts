@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateRoutingControlStateEntry } from "./updateroutingcontrolstateentry";
 
 
+
 export class UpdateRoutingControlStatesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UpdateRoutingControlStateEntries", elemType: shared.UpdateRoutingControlStateEntry })
+  @SpeakeasyMetadata({ data: "json, name=UpdateRoutingControlStateEntries", elemType: UpdateRoutingControlStateEntry })
   updateRoutingControlStateEntries: UpdateRoutingControlStateEntry[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CapacityProviderStrategyItem } from "./capacityproviderstrategyitem";
 import { LaunchTypeEnum } from "./launchtypeenum";
 import { NetworkConfiguration } from "./networkconfiguration";

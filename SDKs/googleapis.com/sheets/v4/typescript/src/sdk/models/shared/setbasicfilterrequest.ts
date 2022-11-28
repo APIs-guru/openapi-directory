@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicFilter } from "./basicfilter";
+
 
 
 // SetBasicFilterRequest
@@ -7,6 +8,6 @@ import { BasicFilter } from "./basicfilter";
  * Sets the basic filter associated with a sheet.
 **/
 export class SetBasicFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: BasicFilter;
 }

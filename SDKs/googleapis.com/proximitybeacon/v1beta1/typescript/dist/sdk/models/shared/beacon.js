@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdvertisedId } from "./advertisedid";
 import { EphemeralIdRegistration } from "./ephemeralidregistration";
 import { IndoorLevel } from "./indoorlevel";
@@ -52,47 +52,47 @@ var Beacon = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=advertisedId" }),
+        SpeakeasyMetadata({ data: "json, name=advertisedId" }),
         __metadata("design:type", AdvertisedId)
     ], Beacon.prototype, "advertisedId", void 0);
     __decorate([
-        Metadata({ data: "json, name=beaconName" }),
+        SpeakeasyMetadata({ data: "json, name=beaconName" }),
         __metadata("design:type", String)
     ], Beacon.prototype, "beaconName", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Beacon.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=ephemeralIdRegistration" }),
+        SpeakeasyMetadata({ data: "json, name=ephemeralIdRegistration" }),
         __metadata("design:type", EphemeralIdRegistration)
     ], Beacon.prototype, "ephemeralIdRegistration", void 0);
     __decorate([
-        Metadata({ data: "json, name=expectedStability" }),
+        SpeakeasyMetadata({ data: "json, name=expectedStability" }),
         __metadata("design:type", String)
     ], Beacon.prototype, "expectedStability", void 0);
     __decorate([
-        Metadata({ data: "json, name=indoorLevel" }),
+        SpeakeasyMetadata({ data: "json, name=indoorLevel" }),
         __metadata("design:type", IndoorLevel)
     ], Beacon.prototype, "indoorLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=latLng" }),
+        SpeakeasyMetadata({ data: "json, name=latLng" }),
         __metadata("design:type", LatLng)
     ], Beacon.prototype, "latLng", void 0);
     __decorate([
-        Metadata({ data: "json, name=placeId" }),
+        SpeakeasyMetadata({ data: "json, name=placeId" }),
         __metadata("design:type", String)
     ], Beacon.prototype, "placeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=properties" }),
+        SpeakeasyMetadata({ data: "json, name=properties" }),
         __metadata("design:type", Map)
     ], Beacon.prototype, "properties", void 0);
     __decorate([
-        Metadata({ data: "json, name=provisioningKey" }),
+        SpeakeasyMetadata({ data: "json, name=provisioningKey" }),
         __metadata("design:type", String)
     ], Beacon.prototype, "provisioningKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Beacon.prototype, "status", void 0);
     return Beacon;

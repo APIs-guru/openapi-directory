@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OsPolicyResourceComplianceExecResourceOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ExecResource specific output.
 **/
 export class OsPolicyResourceComplianceExecResourceOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enforcementOutput" })
+  @SpeakeasyMetadata({ data: "json, name=enforcementOutput" })
   enforcementOutput?: string;
 }

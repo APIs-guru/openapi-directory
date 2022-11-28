@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputeCapacityStatus } from "./computecapacitystatus";
 import { DomainJoinInfo } from "./domainjoininfo";
 import { FleetError } from "./fleeterror";
@@ -9,68 +8,69 @@ import { StreamViewEnum } from "./streamviewenum";
 import { VpcConfig } from "./vpcconfig";
 
 
+
 // Fleet
 /** 
  * Describes a fleet.
 **/
 export class Fleet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=ComputeCapacityStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ComputeCapacityStatus" })
   computeCapacityStatus: ComputeCapacityStatus;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisconnectTimeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=DisconnectTimeoutInSeconds" })
   disconnectTimeoutInSeconds?: number;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=DomainJoinInfo" })
+  @SpeakeasyMetadata({ data: "json, name=DomainJoinInfo" })
   domainJoinInfo?: DomainJoinInfo;
 
-  @Metadata({ data: "json, name=EnableDefaultInternetAccess" })
+  @SpeakeasyMetadata({ data: "json, name=EnableDefaultInternetAccess" })
   enableDefaultInternetAccess?: boolean;
 
-  @Metadata({ data: "json, name=FleetErrors", elemType: shared.FleetError })
+  @SpeakeasyMetadata({ data: "json, name=FleetErrors", elemType: FleetError })
   fleetErrors?: FleetError[];
 
-  @Metadata({ data: "json, name=FleetType" })
+  @SpeakeasyMetadata({ data: "json, name=FleetType" })
   fleetType?: FleetTypeEnum;
 
-  @Metadata({ data: "json, name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamRoleArn" })
   iamRoleArn?: string;
 
-  @Metadata({ data: "json, name=IdleDisconnectTimeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=IdleDisconnectTimeoutInSeconds" })
   idleDisconnectTimeoutInSeconds?: number;
 
-  @Metadata({ data: "json, name=ImageArn" })
+  @SpeakeasyMetadata({ data: "json, name=ImageArn" })
   imageArn?: string;
 
-  @Metadata({ data: "json, name=ImageName" })
+  @SpeakeasyMetadata({ data: "json, name=ImageName" })
   imageName?: string;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType: string;
 
-  @Metadata({ data: "json, name=MaxUserDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaxUserDurationInSeconds" })
   maxUserDurationInSeconds?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state: FleetStateEnum;
 
-  @Metadata({ data: "json, name=StreamView" })
+  @SpeakeasyMetadata({ data: "json, name=StreamView" })
   streamView?: StreamViewEnum;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfig;
 }

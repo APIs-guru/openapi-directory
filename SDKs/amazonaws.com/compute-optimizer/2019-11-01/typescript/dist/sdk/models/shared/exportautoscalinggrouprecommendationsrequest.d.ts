@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExportableAutoScalingGroupFieldEnum } from "./exportableautoscalinggroupfieldenum";
 import { FileFormatEnum } from "./fileformatenum";
 import { Filter } from "./filter";

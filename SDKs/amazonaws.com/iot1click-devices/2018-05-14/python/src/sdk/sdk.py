@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/iot1click/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,30 +17,59 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/iot1click/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def claim_devices_by_claim_code(self, request: operations.ClaimDevicesByClaimCodeRequest) -> operations.ClaimDevicesByClaimCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds device(s) to your account (i.e., claim one or more devices) if and only if you
+         received a claim code with the device(s).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/claims/{claimCode}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -64,15 +96,18 @@ class SDK:
 
     
     def describe_device(self, request: operations.DescribeDeviceRequest) -> operations.DescribeDeviceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Given a device ID, returns a DescribeDeviceResponse object describing the
+         details of the device.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -99,22 +134,26 @@ class SDK:
 
     
     def finalize_device_claim(self, request: operations.FinalizeDeviceClaimRequest) -> operations.FinalizeDeviceClaimResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Given a device ID, finalizes the claim request for the associated device.</p><note>
+         <p>Claiming a device consists of initiating a claim, then publishing a device event,
+         and finalizing the claim. For a device of type button, a device event can
+         be published by simply clicking the device.</p>
+         </note>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}/finalize-claim", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -149,15 +188,17 @@ class SDK:
 
     
     def get_device_methods(self, request: operations.GetDeviceMethodsRequest) -> operations.GetDeviceMethodsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Given a device ID, returns the invokable methods associated with the device.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}/methods", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -184,15 +225,21 @@ class SDK:
 
     
     def initiate_device_claim(self, request: operations.InitiateDeviceClaimRequest) -> operations.InitiateDeviceClaimResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Given a device ID, initiates a claim request for the associated device.</p><note>
+         <p>Claiming a device consists of initiating a claim, then publishing a device event,
+         and finalizing the claim. For a device of type button, a device event can
+         be published by simply clicking the device.</p>
+         </note>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}/initiate-claim", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -223,22 +270,23 @@ class SDK:
 
     
     def invoke_device_method(self, request: operations.InvokeDeviceMethodRequest) -> operations.InvokeDeviceMethodResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Given a device ID, issues a request to invoke a named device method (with possible
+         parameters). See the \"Example POST\" code snippet below.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}/methods", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -277,17 +325,19 @@ class SDK:
 
     
     def list_device_events(self, request: operations.ListDeviceEventsRequest) -> operations.ListDeviceEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Using a device ID, returns a DeviceEventsResponse object containing an
+         array of events for the device.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}/events#fromTimeStamp&toTimeStamp", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -318,17 +368,18 @@ class SDK:
 
     
     def list_devices(self, request: operations.ListDevicesRequest) -> operations.ListDevicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the 1-Click compatible devices associated with your AWS account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/devices"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -355,15 +406,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the tags associated with the specified resource ARN.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource-arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -386,22 +439,23 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds or updates the tags associated with the resource ARN. See <a href=\"https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits\">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per
+         resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource-arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -426,15 +480,17 @@ class SDK:
 
     
     def unclaim_device(self, request: operations.UnclaimDeviceRequest) -> operations.UnclaimDeviceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates a device from your AWS account using its device ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}/unclaim", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -461,17 +517,19 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Using tag keys, deletes the tags (key/value pairs) associated with the specified
+         resource ARN.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource-arn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -496,22 +554,23 @@ class SDK:
 
     
     def update_device_state(self, request: operations.UpdateDeviceStateRequest) -> operations.UpdateDeviceStateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Using a Boolean value (true or false), this operation
+         enables or disables the device given a device ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/devices/{deviceId}/state", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

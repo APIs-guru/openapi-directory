@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import servingcontext
+from sdk import utils
+from . import *
 
 class CorrectionTypeEnum(str, Enum):
     CORRECTION_TYPE_UNSPECIFIED = "CORRECTION_TYPE_UNSPECIFIED"
@@ -21,7 +23,11 @@ class CorrectionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Correction:
-    contexts: Optional[List[servingcontext.ServingContext]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contexts' }})
-    details: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    type: Optional[CorrectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Correction
+    Output only. Shows any corrections that were applied to this creative.
+    """
+    
+    contexts: Optional[List[ServingContext]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contexts') }})
+    details: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    type: Optional[CorrectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

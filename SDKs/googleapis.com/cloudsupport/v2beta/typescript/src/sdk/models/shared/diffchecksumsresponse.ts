@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompositeMedia } from "./compositemedia";
-import { CompositeMedia } from "./compositemedia";
+
 
 
 // DiffChecksumsResponse
@@ -8,18 +8,18 @@ import { CompositeMedia } from "./compositemedia";
  * # gdata.* are outside protos with mising documentation
 **/
 export class DiffChecksumsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checksumsLocation" })
+  @SpeakeasyMetadata({ data: "json, name=checksumsLocation" })
   checksumsLocation?: CompositeMedia;
 
-  @Metadata({ data: "json, name=chunkSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=chunkSizeBytes" })
   chunkSizeBytes?: string;
 
-  @Metadata({ data: "json, name=objectLocation" })
+  @SpeakeasyMetadata({ data: "json, name=objectLocation" })
   objectLocation?: CompositeMedia;
 
-  @Metadata({ data: "json, name=objectSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=objectSizeBytes" })
   objectSizeBytes?: string;
 
-  @Metadata({ data: "json, name=objectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=objectVersion" })
   objectVersion?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LoggingUpdateSettingsPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class LoggingUpdateSettingsSecurity extends SpeakeasyBase {
 export declare class LoggingUpdateSettingsRequest extends SpeakeasyBase {
     pathParams: LoggingUpdateSettingsPathParams;
     queryParams: LoggingUpdateSettingsQueryParams;
-    request?: shared.Settings;
+    request?: shared.SettingsInput;
     security: LoggingUpdateSettingsSecurity;
 }
 export declare class LoggingUpdateSettingsResponse extends SpeakeasyBase {

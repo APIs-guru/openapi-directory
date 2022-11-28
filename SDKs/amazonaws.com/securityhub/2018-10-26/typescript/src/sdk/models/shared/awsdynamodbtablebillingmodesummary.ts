@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsDynamoDbTableBillingModeSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the billing for read/write capacity on the table.
 **/
 export class AwsDynamoDbTableBillingModeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BillingMode" })
+  @SpeakeasyMetadata({ data: "json, name=BillingMode" })
   billingMode?: string;
 
-  @Metadata({ data: "json, name=LastUpdateToPayPerRequestDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateToPayPerRequestDateTime" })
   lastUpdateToPayPerRequestDateTime?: string;
 }

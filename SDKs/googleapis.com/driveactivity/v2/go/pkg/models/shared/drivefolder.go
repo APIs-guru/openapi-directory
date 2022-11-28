@@ -9,6 +9,8 @@ const (
 	DriveFolderTypeEnumStandardFolder  DriveFolderTypeEnum = "STANDARD_FOLDER"
 )
 
+// DriveFolder
+// A Drive item which is a folder.
 type DriveFolder struct {
 	Type *DriveFolderTypeEnum `json:"type,omitempty"`
 }

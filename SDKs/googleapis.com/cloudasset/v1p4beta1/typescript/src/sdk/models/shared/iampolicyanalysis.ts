@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicyAnalysisQuery } from "./iampolicyanalysisquery";
 import { IamPolicyAnalysisResult } from "./iampolicyanalysisresult";
+
 
 
 // IamPolicyAnalysis
@@ -9,12 +9,12 @@ import { IamPolicyAnalysisResult } from "./iampolicyanalysisresult";
  * An analysis message to group the query and results.
 **/
 export class IamPolicyAnalysis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisQuery" })
+  @SpeakeasyMetadata({ data: "json, name=analysisQuery" })
   analysisQuery?: IamPolicyAnalysisQuery;
 
-  @Metadata({ data: "json, name=analysisResults", elemType: shared.IamPolicyAnalysisResult })
+  @SpeakeasyMetadata({ data: "json, name=analysisResults", elemType: IamPolicyAnalysisResult })
   analysisResults?: IamPolicyAnalysisResult[];
 
-  @Metadata({ data: "json, name=fullyExplored" })
+  @SpeakeasyMetadata({ data: "json, name=fullyExplored" })
   fullyExplored?: boolean;
 }

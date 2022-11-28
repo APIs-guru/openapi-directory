@@ -1,10 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ManagedCertificate } from "./managedcertificate";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ManagedCertificateInput } from "./managedcertificate";
 import { SelfManagedCertificate } from "./selfmanagedcertificate";
+import { ManagedCertificate } from "./managedcertificate";
+
 
 export enum CertificateScopeEnum {
-    Default = "DEFAULT"
-,    EdgeCache = "EDGE_CACHE"
+    Default = "DEFAULT",
+    EdgeCache = "EDGE_CACHE"
+}
+
+
+// CertificateInput
+/** 
+ * Defines TLS certificate.
+**/
+export class CertificateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=managed" })
+  managed?: ManagedCertificateInput;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=scope" })
+  scope?: CertificateScopeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=selfManaged" })
+  selfManaged?: SelfManagedCertificate;
 }
 
 
@@ -13,36 +40,36 @@ export enum CertificateScopeEnum {
  * Defines TLS certificate.
 **/
 export class Certificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=managed" })
+  @SpeakeasyMetadata({ data: "json, name=managed" })
   managed?: ManagedCertificate;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pemCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=pemCertificate" })
   pemCertificate?: string;
 
-  @Metadata({ data: "json, name=sanDnsnames" })
+  @SpeakeasyMetadata({ data: "json, name=sanDnsnames" })
   sanDnsnames?: string[];
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: CertificateScopeEnum;
 
-  @Metadata({ data: "json, name=selfManaged" })
+  @SpeakeasyMetadata({ data: "json, name=selfManaged" })
   selfManaged?: SelfManagedCertificate;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

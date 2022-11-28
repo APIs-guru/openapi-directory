@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceDataColumnProperties } from "./sourcedatacolumnproperties";
+
 
 
 // DestinationOptions
@@ -8,6 +8,6 @@ import { SourceDataColumnProperties } from "./sourcedatacolumnproperties";
  * An object that contains the options relating to the destination of the import request.
 **/
 export class DestinationOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnMap", elemType: shared.SourceDataColumnProperties })
+  @SpeakeasyMetadata({ data: "json, name=columnMap", elemType: SourceDataColumnProperties })
   columnMap?: Map<string, SourceDataColumnProperties>;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// CreateWorkspaceResponse
+// Represents the output of a CreateWorkspace operation.
 type CreateWorkspaceResponse struct {
 	Arn         string            `json:"arn"`
 	Status      WorkspaceStatus   `json:"status"`

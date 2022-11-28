@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SandboxItemSetVerificationStatusRequestVerificationStatusEnum(str, Enum):
     AUTOMATICALLY_VERIFIED = "automatically_verified"
@@ -10,9 +12,13 @@ class SandboxItemSetVerificationStatusRequestVerificationStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SandboxItemSetVerificationStatusRequest:
-    access_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access_token' }})
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account_id' }})
-    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'client_id' }})
-    secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secret' }})
-    verification_status: SandboxItemSetVerificationStatusRequestVerificationStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verification_status' }})
+    r"""SandboxItemSetVerificationStatusRequest
+    SandboxItemSetVerificationStatusRequest defines the request schema for `/sandbox/item/set_verification_status`
+    """
+    
+    access_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('access_token') }})
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account_id') }})
+    verification_status: SandboxItemSetVerificationStatusRequestVerificationStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('verification_status') }})
+    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('client_id') }})
+    secret: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secret') }})
     

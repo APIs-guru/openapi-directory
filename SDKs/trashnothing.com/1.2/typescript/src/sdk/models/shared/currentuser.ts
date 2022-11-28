@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CurrentUserEmail
@@ -6,25 +7,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Data related to the users' email address.
 **/
 export class CurrentUserEmail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=bouncing" })
+  @SpeakeasyMetadata({ data: "json, name=bouncing" })
   bouncing?: boolean;
 
-  @Metadata({ data: "json, name=spam_stop" })
+  @SpeakeasyMetadata({ data: "json, name=spam_stop" })
   spamStop?: boolean;
 }
 
 
 export class CurrentUserFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percent_positive" })
+  @SpeakeasyMetadata({ data: "json, name=percent_positive" })
   percentPositive?: number;
 
-  @Metadata({ data: "json, name=restriction" })
+  @SpeakeasyMetadata({ data: "json, name=restriction" })
   restriction?: string;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }
 
@@ -34,16 +35,16 @@ export class CurrentUserFeedback extends SpeakeasyBase {
  * The users' location.  The location is used to determine which posts are shown to the user (may be null).
 **/
 export class CurrentUserLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=radius" })
+  @SpeakeasyMetadata({ data: "json, name=radius" })
   radius?: number;
 }
 
@@ -53,93 +54,93 @@ export class CurrentUserLocation extends SpeakeasyBase {
  * Location data used by the user the last time they posted.
 **/
 export class CurrentUserPostLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CurrentUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=about_me" })
+  @SpeakeasyMetadata({ data: "json, name=about_me" })
   aboutMe?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=digest" })
+  @SpeakeasyMetadata({ data: "json, name=digest" })
   digest?: string;
 
-  @Metadata({ data: "json, name=digest_photos" })
+  @SpeakeasyMetadata({ data: "json, name=digest_photos" })
   digestPhotos?: boolean;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: CurrentUserEmail;
 
-  @Metadata({ data: "json, name=feedback" })
+  @SpeakeasyMetadata({ data: "json, name=feedback" })
   feedback?: CurrentUserFeedback;
 
-  @Metadata({ data: "json, name=firstname" })
+  @SpeakeasyMetadata({ data: "json, name=firstname" })
   firstname?: string;
 
-  @Metadata({ data: "json, name=has_password" })
+  @SpeakeasyMetadata({ data: "json, name=has_password" })
   hasPassword?: boolean;
 
-  @Metadata({ data: "json, name=last_listings_view" })
+  @SpeakeasyMetadata({ data: "json, name=last_listings_view" })
   lastListingsView?: Date;
 
-  @Metadata({ data: "json, name=lastname" })
+  @SpeakeasyMetadata({ data: "json, name=lastname" })
   lastname?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: CurrentUserLocation;
 
-  @Metadata({ data: "json, name=member_since" })
+  @SpeakeasyMetadata({ data: "json, name=member_since" })
   memberSince?: string;
 
-  @Metadata({ data: "json, name=post_location" })
+  @SpeakeasyMetadata({ data: "json, name=post_location" })
   postLocation?: CurrentUserPostLocation;
 
-  @Metadata({ data: "json, name=post_reminders" })
+  @SpeakeasyMetadata({ data: "json, name=post_reminders" })
   postReminders?: boolean;
 
-  @Metadata({ data: "json, name=profile_image" })
+  @SpeakeasyMetadata({ data: "json, name=profile_image" })
   profileImage?: string;
 
-  @Metadata({ data: "json, name=profile_image_source" })
+  @SpeakeasyMetadata({ data: "json, name=profile_image_source" })
   profileImageSource?: string;
 
-  @Metadata({ data: "json, name=public_name" })
+  @SpeakeasyMetadata({ data: "json, name=public_name" })
   publicName?: boolean;
 
-  @Metadata({ data: "json, name=public_post_sources" })
+  @SpeakeasyMetadata({ data: "json, name=public_post_sources" })
   publicPostSources?: string[];
 
-  @Metadata({ data: "json, name=reply_time" })
+  @SpeakeasyMetadata({ data: "json, name=reply_time" })
   replyTime?: number;
 
-  @Metadata({ data: "json, name=show_all_group_posts" })
+  @SpeakeasyMetadata({ data: "json, name=show_all_group_posts" })
   showAllGroupPosts?: boolean;
 
-  @Metadata({ data: "json, name=signup" })
+  @SpeakeasyMetadata({ data: "json, name=signup" })
   signup?: Date;
 
-  @Metadata({ data: "json, name=special_notices" })
+  @SpeakeasyMetadata({ data: "json, name=special_notices" })
   specialNotices?: boolean;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 
-  @Metadata({ data: "json, name=uses_fair_offer_policy" })
+  @SpeakeasyMetadata({ data: "json, name=uses_fair_offer_policy" })
   usesFairOfferPolicy?: boolean;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified?: boolean;
 }

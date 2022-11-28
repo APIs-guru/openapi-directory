@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AutoForwardingDispositionEnum {
-    DispositionUnspecified = "dispositionUnspecified"
-,    LeaveInInbox = "leaveInInbox"
-,    Archive = "archive"
-,    Trash = "trash"
-,    MarkRead = "markRead"
+    DispositionUnspecified = "dispositionUnspecified",
+    LeaveInInbox = "leaveInInbox",
+    Archive = "archive",
+    Trash = "trash",
+    MarkRead = "markRead"
 }
 
 
@@ -14,12 +15,12 @@ export enum AutoForwardingDispositionEnum {
  * Auto-forwarding settings for an account.
 **/
 export class AutoForwarding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disposition" })
+  @SpeakeasyMetadata({ data: "json, name=disposition" })
   disposition?: AutoForwardingDispositionEnum;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }

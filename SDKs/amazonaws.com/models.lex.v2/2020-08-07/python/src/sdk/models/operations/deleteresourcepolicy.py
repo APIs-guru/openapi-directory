@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteResourcePolicyPathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,18 +29,18 @@ class DeleteResourcePolicyHeaders:
 
 @dataclass
 class DeleteResourcePolicyRequest:
-    path_params: DeleteResourcePolicyPathParams = field(default=None)
-    query_params: DeleteResourcePolicyQueryParams = field(default=None)
-    headers: DeleteResourcePolicyHeaders = field(default=None)
+    headers: DeleteResourcePolicyHeaders = field()
+    path_params: DeleteResourcePolicyPathParams = field()
+    query_params: DeleteResourcePolicyQueryParams = field()
     
 
 @dataclass
 class DeleteResourcePolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_resource_policy_response: Optional[shared.DeleteResourcePolicyResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

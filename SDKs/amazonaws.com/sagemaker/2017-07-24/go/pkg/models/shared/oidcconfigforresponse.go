@@ -1,5 +1,7 @@
 package shared
 
+// OidcConfigForResponse
+// Your OIDC IdP workforce configuration.
 type OidcConfigForResponse struct {
 	AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty"`
 	ClientID              *string `json:"ClientId,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Budget
+// <p>Represents the output of the <code>CreateBudget</code> operation. The content consists of the detailed metadata and data file information, and the current status of the <code>budget</code> object.</p> <p>This is the ARN pattern for a budget: </p> <p> <code>arn:aws:budgets::AccountId:budget/budgetName</code> </p>
 type Budget struct {
 	BudgetLimit         *Spend              `json:"BudgetLimit,omitempty"`
 	BudgetName          string              `json:"BudgetName"`

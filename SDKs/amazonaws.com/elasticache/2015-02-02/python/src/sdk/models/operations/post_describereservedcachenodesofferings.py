@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeReservedCacheNodesOfferingsActionEnum(str, Enum):
     DESCRIBE_RESERVED_CACHE_NODES_OFFERINGS = "DescribeReservedCacheNodesOfferings"
@@ -10,10 +14,10 @@ class PostDescribeReservedCacheNodesOfferingsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeReservedCacheNodesOfferingsQueryParams:
-    action: PostDescribeReservedCacheNodesOfferingsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeReservedCacheNodesOfferingsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeReservedCacheNodesOfferingsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeReservedCacheNodesOfferingsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeReservedCacheNodesOfferingsHeaders:
 
 @dataclass
 class PostDescribeReservedCacheNodesOfferingsRequest:
-    query_params: PostDescribeReservedCacheNodesOfferingsQueryParams = field(default=None)
-    headers: PostDescribeReservedCacheNodesOfferingsHeaders = field(default=None)
+    headers: PostDescribeReservedCacheNodesOfferingsHeaders = field()
+    query_params: PostDescribeReservedCacheNodesOfferingsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeReservedCacheNodesOfferingsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

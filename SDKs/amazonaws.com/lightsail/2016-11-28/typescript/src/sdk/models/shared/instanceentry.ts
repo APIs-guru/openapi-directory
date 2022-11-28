@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortInfoSourceTypeEnum } from "./portinfosourcetypeenum";
+
 
 
 // InstanceEntry
@@ -7,18 +8,18 @@ import { PortInfoSourceTypeEnum } from "./portinfosourcetypeenum";
  * Describes the Amazon Elastic Compute Cloud instance and related resources to be created using the <code>create cloud formation stack</code> operation.
 **/
 export class InstanceEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityZone" })
   availabilityZone: string;
 
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType: string;
 
-  @Metadata({ data: "json, name=portInfoSource" })
+  @SpeakeasyMetadata({ data: "json, name=portInfoSource" })
   portInfoSource: PortInfoSourceTypeEnum;
 
-  @Metadata({ data: "json, name=sourceName" })
+  @SpeakeasyMetadata({ data: "json, name=sourceName" })
   sourceName: string;
 
-  @Metadata({ data: "json, name=userData" })
+  @SpeakeasyMetadata({ data: "json, name=userData" })
   userData?: string;
 }

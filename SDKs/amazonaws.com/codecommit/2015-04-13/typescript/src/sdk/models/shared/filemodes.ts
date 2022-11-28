@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
-import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
-import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
+
 
 
 // FileModes
@@ -9,12 +8,12 @@ import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
  * Information about file modes in a merge or pull request.
 **/
 export class FileModes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=base" })
+  @SpeakeasyMetadata({ data: "json, name=base" })
   base?: FileModeTypeEnumEnum;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: FileModeTypeEnumEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: FileModeTypeEnumEnum;
 }

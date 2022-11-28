@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorAssociationEnum } from "./authorassociationenum";
 import { ReactionRollup } from "./reactionrollup";
 import { SimpleUser } from "./simpleuser";
 
 
+
 export class PullRequestReviewCommentLinksHtml extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href: string;
 }
 
 
 export class PullRequestReviewCommentLinksPullRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href: string;
 }
 
 
 export class PullRequestReviewCommentLinksSelf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href: string;
 }
 
 
 export class PullRequestReviewCommentLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html" })
+  @SpeakeasyMetadata({ data: "json, name=html" })
   html: PullRequestReviewCommentLinksHtml;
 
-  @Metadata({ data: "json, name=pull_request" })
+  @SpeakeasyMetadata({ data: "json, name=pull_request" })
   pullRequest: PullRequestReviewCommentLinksPullRequest;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: PullRequestReviewCommentLinksSelf;
 }
 
@@ -39,69 +40,69 @@ export class PullRequestReviewCommentLinks extends SpeakeasyBase {
  * Pull Request Review Comments are comments on a portion of the Pull Request's diff.
 **/
 export class PullRequestReviewComment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links: PullRequestReviewCommentLinks;
 
-  @Metadata({ data: "json, name=author_association" })
+  @SpeakeasyMetadata({ data: "json, name=author_association" })
   authorAssociation: AuthorAssociationEnum;
 
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 
-  @Metadata({ data: "json, name=body_html" })
+  @SpeakeasyMetadata({ data: "json, name=body_html" })
   bodyHtml?: string;
 
-  @Metadata({ data: "json, name=body_text" })
+  @SpeakeasyMetadata({ data: "json, name=body_text" })
   bodyText?: string;
 
-  @Metadata({ data: "json, name=commit_id" })
+  @SpeakeasyMetadata({ data: "json, name=commit_id" })
   commitId: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=diff_hunk" })
+  @SpeakeasyMetadata({ data: "json, name=diff_hunk" })
   diffHunk: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=in_reply_to_id" })
+  @SpeakeasyMetadata({ data: "json, name=in_reply_to_id" })
   inReplyToId?: number;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=original_commit_id" })
+  @SpeakeasyMetadata({ data: "json, name=original_commit_id" })
   originalCommitId: string;
 
-  @Metadata({ data: "json, name=original_position" })
+  @SpeakeasyMetadata({ data: "json, name=original_position" })
   originalPosition: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position: number;
 
-  @Metadata({ data: "json, name=pull_request_review_id" })
+  @SpeakeasyMetadata({ data: "json, name=pull_request_review_id" })
   pullRequestReviewId: number;
 
-  @Metadata({ data: "json, name=pull_request_url" })
+  @SpeakeasyMetadata({ data: "json, name=pull_request_url" })
   pullRequestUrl: string;
 
-  @Metadata({ data: "json, name=reactions" })
+  @SpeakeasyMetadata({ data: "json, name=reactions" })
   reactions?: ReactionRollup;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt: Date;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: SimpleUser;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DatabaseCreateCollectionRequestBody = /** @class */ (function (_super) {
     __extends(DatabaseCreateCollectionRequestBody, _super);
@@ -30,19 +30,19 @@ var DatabaseCreateCollectionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DatabaseCreateCollectionRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=read" }),
+        SpeakeasyMetadata({ data: "json, name=read" }),
         __metadata("design:type", Array)
     ], DatabaseCreateCollectionRequestBody.prototype, "read", void 0);
     __decorate([
-        Metadata({ data: "json, name=rules" }),
+        SpeakeasyMetadata({ data: "json, name=rules" }),
         __metadata("design:type", Array)
     ], DatabaseCreateCollectionRequestBody.prototype, "rules", void 0);
     __decorate([
-        Metadata({ data: "json, name=write" }),
+        SpeakeasyMetadata({ data: "json, name=write" }),
         __metadata("design:type", Array)
     ], DatabaseCreateCollectionRequestBody.prototype, "write", void 0);
     return DatabaseCreateCollectionRequestBody;
@@ -54,11 +54,11 @@ var DatabaseCreateCollectionSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], DatabaseCreateCollectionSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], DatabaseCreateCollectionSecurity.prototype, "project", void 0);
     return DatabaseCreateCollectionSecurity;
@@ -70,11 +70,11 @@ var DatabaseCreateCollectionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", DatabaseCreateCollectionRequestBody)
     ], DatabaseCreateCollectionRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseCreateCollectionSecurity)
     ], DatabaseCreateCollectionRequest.prototype, "security", void 0);
     return DatabaseCreateCollectionRequest;
@@ -86,15 +86,15 @@ var DatabaseCreateCollectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DatabaseCreateCollectionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DatabaseCreateCollectionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Collection)
     ], DatabaseCreateCollectionResponse.prototype, "collection", void 0);
     return DatabaseCreateCollectionResponse;

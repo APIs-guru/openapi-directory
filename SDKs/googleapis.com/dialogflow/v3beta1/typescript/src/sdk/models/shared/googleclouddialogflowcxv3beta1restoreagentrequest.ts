@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowCxV3beta1RestoreAgentRequestRestoreOptionEnum {
-    RestoreOptionUnspecified = "RESTORE_OPTION_UNSPECIFIED"
-,    Keep = "KEEP"
-,    Fallback = "FALLBACK"
+    RestoreOptionUnspecified = "RESTORE_OPTION_UNSPECIFIED",
+    Keep = "KEEP",
+    Fallback = "FALLBACK"
 }
 
 
@@ -12,12 +13,12 @@ export enum GoogleCloudDialogflowCxV3beta1RestoreAgentRequestRestoreOptionEnum {
  * The request message for Agents.RestoreAgent.
 **/
 export class GoogleCloudDialogflowCxV3beta1RestoreAgentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentContent" })
+  @SpeakeasyMetadata({ data: "json, name=agentContent" })
   agentContent?: string;
 
-  @Metadata({ data: "json, name=agentUri" })
+  @SpeakeasyMetadata({ data: "json, name=agentUri" })
   agentUri?: string;
 
-  @Metadata({ data: "json, name=restoreOption" })
+  @SpeakeasyMetadata({ data: "json, name=restoreOption" })
   restoreOption?: GoogleCloudDialogflowCxV3beta1RestoreAgentRequestRestoreOptionEnum;
 }

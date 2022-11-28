@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcConfig } from "./vpcconfig";
+
 
 
 // MonitoringNetworkConfig
@@ -7,12 +8,12 @@ import { VpcConfig } from "./vpcconfig";
  * The networking configuration for the monitoring job.
 **/
 export class MonitoringNetworkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnableInterContainerTrafficEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=EnableInterContainerTrafficEncryption" })
   enableInterContainerTrafficEncryption?: boolean;
 
-  @Metadata({ data: "json, name=EnableNetworkIsolation" })
+  @SpeakeasyMetadata({ data: "json, name=EnableNetworkIsolation" })
   enableNetworkIsolation?: boolean;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfig;
 }

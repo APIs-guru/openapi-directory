@@ -33,6 +33,8 @@ const (
 	DsRecordDigestTypeEnumSha384                DsRecordDigestTypeEnum = "SHA384"
 )
 
+// DsRecord
+// Defines a Delegation Signer (DS) record, which is needed to enable DNSSEC for a domain. It contains a digest (hash) of a DNSKEY record that must be present in the domain's DNS zone.
 type DsRecord struct {
 	Algorithm  *DsRecordAlgorithmEnum  `json:"algorithm,omitempty"`
 	Digest     *string                 `json:"digest,omitempty"`

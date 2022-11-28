@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileSystem } from "./filesystem";
+
 
 
 // CreateFileSystemResponse
@@ -7,6 +8,6 @@ import { FileSystem } from "./filesystem";
  * The response object returned after the file system is created.
 **/
 export class CreateFileSystemResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FileSystem" })
+  @SpeakeasyMetadata({ data: "json, name=FileSystem" })
   fileSystem?: FileSystem;
 }

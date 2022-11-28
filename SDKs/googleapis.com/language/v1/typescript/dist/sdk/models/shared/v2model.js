@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var V2ModelContentCategoriesVersionEnum;
 (function (V2ModelContentCategoriesVersionEnum) {
     V2ModelContentCategoriesVersionEnum["ContentCategoriesVersionUnspecified"] = "CONTENT_CATEGORIES_VERSION_UNSPECIFIED";
@@ -39,7 +39,7 @@ var V2Model = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contentCategoriesVersion" }),
+        SpeakeasyMetadata({ data: "json, name=contentCategoriesVersion" }),
         __metadata("design:type", String)
     ], V2Model.prototype, "contentCategoriesVersion", void 0);
     return V2Model;

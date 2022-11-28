@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PersonalityQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=all" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" })
   all?: boolean;
 }
 
 
 export class PersonalityRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PersonalityQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.Post })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Post })
   request?: shared.Post[];
 }
 
 
 export class PersonalityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PostPredicted })
+  @SpeakeasyMetadata({ elemType: shared.PostPredicted })
   predictionResults?: shared.PostPredicted[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrors?: shared.ValidationErrors;
 }

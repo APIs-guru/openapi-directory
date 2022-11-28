@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import accelerator
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeAcceleratorResponse:
-    accelerator: Optional[accelerator.Accelerator] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Accelerator' }})
+    accelerator: Optional[Accelerator] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Accelerator') }})
     

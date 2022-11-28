@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobLogEventEnum } from "./joblogeventenum";
 import { JobLogEventData } from "./joblogeventdata";
 // JobLog
@@ -35,15 +35,15 @@ var JobLog = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=event" }),
+        SpeakeasyMetadata({ data: "json, name=event" }),
         __metadata("design:type", String)
     ], JobLog.prototype, "event", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventData" }),
+        SpeakeasyMetadata({ data: "json, name=eventData" }),
         __metadata("design:type", JobLogEventData)
     ], JobLog.prototype, "eventData", void 0);
     __decorate([
-        Metadata({ data: "json, name=logDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=logDateTime" }),
         __metadata("design:type", String)
     ], JobLog.prototype, "logDateTime", void 0);
     return JobLog;

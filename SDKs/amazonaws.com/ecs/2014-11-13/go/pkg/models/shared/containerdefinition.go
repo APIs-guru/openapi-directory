@@ -1,5 +1,7 @@
 package shared
 
+// ContainerDefinition
+// Container definitions are used in task definitions to describe the different containers that are launched as part of a task.
 type ContainerDefinition struct {
 	Command                []string               `json:"command,omitempty"`
 	CPU                    *int64                 `json:"cpu,omitempty"`

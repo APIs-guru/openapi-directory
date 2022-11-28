@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import associatedassetssummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAssociatedAssetsResponse:
-    asset_summaries: List[associatedassetssummary.AssociatedAssetsSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetSummaries' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    asset_summaries: List[AssociatedAssetsSummary] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('assetSummaries') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

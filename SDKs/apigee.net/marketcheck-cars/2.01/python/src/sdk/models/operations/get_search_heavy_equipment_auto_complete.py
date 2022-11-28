@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSearchHeavyEquipmentAutoCompleteFieldEnum(str, Enum):
@@ -25,16 +26,16 @@ class GetSearchHeavyEquipmentAutoCompleteSortByEnum(str, Enum):
 
 @dataclass
 class GetSearchHeavyEquipmentAutoCompleteQueryParams:
+    field: GetSearchHeavyEquipmentAutoCompleteFieldEnum = field(metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
+    input: str = field(metadata={'query_param': { 'field_name': 'input', 'style': 'form', 'explode': True }})
     api_key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     body_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'body_type', 'style': 'form', 'explode': True }})
     city: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'city', 'style': 'form', 'explode': True }})
     color: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'color', 'style': 'form', 'explode': True }})
     drivetrain: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'drivetrain', 'style': 'form', 'explode': True }})
     engine: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine', 'style': 'form', 'explode': True }})
-    field: GetSearchHeavyEquipmentAutoCompleteFieldEnum = field(default=None, metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
     fuel_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fuel_type', 'style': 'form', 'explode': True }})
     ignore_case: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ignore_case', 'style': 'form', 'explode': True }})
-    input: str = field(default=None, metadata={'query_param': { 'field_name': 'input', 'style': 'form', 'explode': True }})
     inventory_type: Optional[shared.InventoryTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'inventory_type', 'style': 'form', 'explode': True }})
     make: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'make', 'style': 'form', 'explode': True }})
     model: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'model', 'style': 'form', 'explode': True }})
@@ -49,13 +50,13 @@ class GetSearchHeavyEquipmentAutoCompleteQueryParams:
 
 @dataclass
 class GetSearchHeavyEquipmentAutoCompleteRequest:
-    query_params: GetSearchHeavyEquipmentAutoCompleteQueryParams = field(default=None)
+    query_params: GetSearchHeavyEquipmentAutoCompleteQueryParams = field()
     
 
 @dataclass
 class GetSearchHeavyEquipmentAutoCompleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     search_auto_complete_response: Optional[shared.SearchAutoCompleteResponse] = field(default=None)
-    status_code: int = field(default=None)
     

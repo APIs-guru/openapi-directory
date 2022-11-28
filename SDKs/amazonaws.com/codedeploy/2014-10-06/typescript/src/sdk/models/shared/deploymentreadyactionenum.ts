@@ -1,6 +1,7 @@
 
 
+
 export enum DeploymentReadyActionEnum {
-    ContinueDeployment = "CONTINUE_DEPLOYMENT"
-,    StopDeployment = "STOP_DEPLOYMENT"
+    ContinueDeployment = "CONTINUE_DEPLOYMENT",
+    StopDeployment = "STOP_DEPLOYMENT"
 }

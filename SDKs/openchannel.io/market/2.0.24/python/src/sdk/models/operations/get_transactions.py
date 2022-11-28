@@ -12,12 +12,12 @@ class GetTransactionsQueryParams:
 
 @dataclass
 class GetTransactionsRequest:
-    query_params: GetTransactionsQueryParams = field(default=None)
+    query_params: GetTransactionsQueryParams = field()
     
 
 @dataclass
 class GetTransactionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

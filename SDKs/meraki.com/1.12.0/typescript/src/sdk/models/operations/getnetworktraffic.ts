@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkTrafficPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum GetNetworkTrafficDeviceTypeEnum {
-    Combined = "combined"
-,    Wireless = "wireless"
-,    Switch = "switch"
-,    Appliance = "appliance"
+    Combined = "combined",
+    Wireless = "wireless",
+    Switch = "switch",
+    Appliance = "appliance"
 }
 
 
 export class GetNetworkTrafficQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceType" })
   deviceType?: GetNetworkTrafficDeviceTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 }
 
 
 export class GetNetworkTrafficRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkTrafficPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkTrafficQueryParams;
 }
 
 
 export class GetNetworkTrafficResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkTraffic200ApplicationJsonObject?: Map<string, any>;
 }

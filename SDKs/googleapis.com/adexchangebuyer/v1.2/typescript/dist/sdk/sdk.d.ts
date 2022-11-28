@@ -1,20 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Accounts } from "./accounts";
+import { Creatives } from "./creatives";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://www.googleapis.com/adexchangebuyer/v1.2"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    accounts: Accounts;
+    creatives: Creatives;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    AdexchangebuyerAccountsGet(req: operations.AdexchangebuyerAccountsGetRequest, config?: AxiosRequestConfig): Promise<operations.AdexchangebuyerAccountsGetResponse>;
-    AdexchangebuyerAccountsList(req: operations.AdexchangebuyerAccountsListRequest, config?: AxiosRequestConfig): Promise<operations.AdexchangebuyerAccountsListResponse>;
-    AdexchangebuyerAccountsPatch(req: operations.AdexchangebuyerAccountsPatchRequest, config?: AxiosRequestConfig): Promise<operations.AdexchangebuyerAccountsPatchResponse>;
-    AdexchangebuyerAccountsUpdate(req: operations.AdexchangebuyerAccountsUpdateRequest, config?: AxiosRequestConfig): Promise<operations.AdexchangebuyerAccountsUpdateResponse>;
-    AdexchangebuyerCreativesGet(req: operations.AdexchangebuyerCreativesGetRequest, config?: AxiosRequestConfig): Promise<operations.AdexchangebuyerCreativesGetResponse>;
-    AdexchangebuyerCreativesInsert(req: operations.AdexchangebuyerCreativesInsertRequest, config?: AxiosRequestConfig): Promise<operations.AdexchangebuyerCreativesInsertResponse>;
-    AdexchangebuyerCreativesList(req: operations.AdexchangebuyerCreativesListRequest, config?: AxiosRequestConfig): Promise<operations.AdexchangebuyerCreativesListResponse>;
 }
 export {};

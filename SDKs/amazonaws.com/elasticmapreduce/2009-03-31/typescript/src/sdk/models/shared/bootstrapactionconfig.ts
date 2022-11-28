@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptBootstrapActionConfig } from "./scriptbootstrapactionconfig";
+
 
 
 // BootstrapActionConfig
@@ -7,9 +8,9 @@ import { ScriptBootstrapActionConfig } from "./scriptbootstrapactionconfig";
  * Configuration of a bootstrap action.
 **/
 export class BootstrapActionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=ScriptBootstrapAction" })
+  @SpeakeasyMetadata({ data: "json, name=ScriptBootstrapAction" })
   scriptBootstrapAction: ScriptBootstrapActionConfig;
 }

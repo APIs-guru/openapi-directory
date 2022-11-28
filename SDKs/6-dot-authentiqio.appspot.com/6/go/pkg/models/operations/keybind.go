@@ -4,13 +4,13 @@ type KeyBindPathParams struct {
 	Pk string `pathParam:"style=simple,explode=false,name=PK"`
 }
 
+type KeyBind200ApplicationJSON struct {
+	Status *string `json:"status,omitempty"`
+}
+
 type KeyBindRequest struct {
 	PathParams KeyBindPathParams
 	Request    []byte `request:"mediaType=application/jwt"`
-}
-
-type KeyBind200ApplicationJSON struct {
-	Status *string `json:"status,omitempty"`
 }
 
 type KeyBindResponse struct {

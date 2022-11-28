@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndBalance } from "./endbalance";
 import { Error } from "./error";
 import { StartBalance } from "./startbalance";
 import { StatementLine } from "./statementline";
 
 
+
 export class Statement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endBalance" })
+  @SpeakeasyMetadata({ data: "json, name=endBalance" })
   endBalance?: EndBalance;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: Error })
   errors?: Error[];
 
-  @Metadata({ data: "json, name=feedConnectionId" })
+  @SpeakeasyMetadata({ data: "json, name=feedConnectionId" })
   feedConnectionId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=startBalance" })
+  @SpeakeasyMetadata({ data: "json, name=startBalance" })
   startBalance?: StartBalance;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=statementLineCount" })
+  @SpeakeasyMetadata({ data: "json, name=statementLineCount" })
   statementLineCount?: number;
 
-  @Metadata({ data: "json, name=statementLines", elemType: shared.StatementLine })
+  @SpeakeasyMetadata({ data: "json, name=statementLines", elemType: StatementLine })
   statementLines?: StatementLine[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: any;
 }

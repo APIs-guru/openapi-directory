@@ -1,5 +1,7 @@
 package shared
 
+// GkeNodeConfig
+// Parameters that describe cluster nodes.
 type GkeNodeConfig struct {
 	Accelerators   []GkeNodePoolAcceleratorConfig `json:"accelerators,omitempty"`
 	BootDiskKmsKey *string                        `json:"bootDiskKmsKey,omitempty"`

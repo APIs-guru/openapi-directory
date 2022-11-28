@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentDimensionFilter } from "./segmentdimensionfilter";
 import { SegmentMetricFilter } from "./segmentmetricfilter";
+
 
 
 // SegmentFilterClause
@@ -8,12 +9,12 @@ import { SegmentMetricFilter } from "./segmentmetricfilter";
  * Filter Clause to be used in a segment definition, can be wither a metric or a dimension filter.
 **/
 export class SegmentFilterClause extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionFilter" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionFilter" })
   dimensionFilter?: SegmentDimensionFilter;
 
-  @Metadata({ data: "json, name=metricFilter" })
+  @SpeakeasyMetadata({ data: "json, name=metricFilter" })
   metricFilter?: SegmentMetricFilter;
 
-  @Metadata({ data: "json, name=not" })
+  @SpeakeasyMetadata({ data: "json, name=not" })
   not?: boolean;
 }

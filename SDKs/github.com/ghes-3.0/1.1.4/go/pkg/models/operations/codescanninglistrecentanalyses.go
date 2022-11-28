@@ -18,15 +18,15 @@ type CodeScanningListRecentAnalysesQueryParams struct {
 	ToolName *string `queryParam:"style=form,explode=true,name=tool_name"`
 }
 
-type CodeScanningListRecentAnalysesRequest struct {
-	PathParams  CodeScanningListRecentAnalysesPathParams
-	QueryParams CodeScanningListRecentAnalysesQueryParams
-}
-
 type CodeScanningListRecentAnalyses503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type CodeScanningListRecentAnalysesRequest struct {
+	PathParams  CodeScanningListRecentAnalysesPathParams
+	QueryParams CodeScanningListRecentAnalysesQueryParams
 }
 
 type CodeScanningListRecentAnalysesResponse struct {

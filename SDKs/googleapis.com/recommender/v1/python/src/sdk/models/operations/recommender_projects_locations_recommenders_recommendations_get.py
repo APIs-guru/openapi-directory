@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersRecommendationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class RecommenderProjectsLocationsRecommendersRecommendationsGetQueryParams:
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersRecommendationsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersRecommendationsGetRequest:
-    path_params: RecommenderProjectsLocationsRecommendersRecommendationsGetPathParams = field(default=None)
-    query_params: RecommenderProjectsLocationsRecommendersRecommendationsGetQueryParams = field(default=None)
-    security: RecommenderProjectsLocationsRecommendersRecommendationsGetSecurity = field(default=None)
+    path_params: RecommenderProjectsLocationsRecommendersRecommendationsGetPathParams = field()
+    query_params: RecommenderProjectsLocationsRecommendersRecommendationsGetQueryParams = field()
+    security: RecommenderProjectsLocationsRecommendersRecommendationsGetSecurity = field()
     
 
 @dataclass
 class RecommenderProjectsLocationsRecommendersRecommendationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_recommender_v1_recommendation: Optional[shared.GoogleCloudRecommenderV1Recommendation] = field(default=None)
-    status_code: int = field(default=None)
     

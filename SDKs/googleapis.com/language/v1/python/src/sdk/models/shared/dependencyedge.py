@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DependencyEdgeLabelEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -91,6 +93,10 @@ class DependencyEdgeLabelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DependencyEdge:
-    head_token_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headTokenIndex' }})
-    label: Optional[DependencyEdgeLabelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
+    r"""DependencyEdge
+    Represents dependency parse tree information for a token. (For more information on dependency labels, see http://www.aclweb.org/anthology/P13-2017
+    """
+    
+    head_token_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('headTokenIndex') }})
+    label: Optional[DependencyEdgeLabelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SolidFill } from "./solidfill";
 
+
 export enum ShapeBackgroundFillPropertyStateEnum {
-    Rendered = "RENDERED"
-,    NotRendered = "NOT_RENDERED"
-,    Inherit = "INHERIT"
+    Rendered = "RENDERED",
+    NotRendered = "NOT_RENDERED",
+    Inherit = "INHERIT"
 }
 
 
@@ -13,9 +14,9 @@ export enum ShapeBackgroundFillPropertyStateEnum {
  * The shape background fill.
 **/
 export class ShapeBackgroundFill extends SpeakeasyBase {
-  @Metadata({ data: "json, name=propertyState" })
+  @SpeakeasyMetadata({ data: "json, name=propertyState" })
   propertyState?: ShapeBackgroundFillPropertyStateEnum;
 
-  @Metadata({ data: "json, name=solidFill" })
+  @SpeakeasyMetadata({ data: "json, name=solidFill" })
   solidFill?: SolidFill;
 }

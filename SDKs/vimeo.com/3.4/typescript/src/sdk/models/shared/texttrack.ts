@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TextTrackTypeEnum {
-    Captions = "captions"
-,    Subtitles = "subtitles"
+    Captions = "captions",
+    Subtitles = "subtitles"
 }
 
 
 export class TextTrack extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active: boolean;
 
-  @Metadata({ data: "json, name=hls_link" })
+  @SpeakeasyMetadata({ data: "json, name=hls_link" })
   hlsLink: string;
 
-  @Metadata({ data: "json, name=hls_link_expires_time" })
+  @SpeakeasyMetadata({ data: "json, name=hls_link_expires_time" })
   hlsLinkExpiresTime: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=link_expires_time" })
+  @SpeakeasyMetadata({ data: "json, name=link_expires_time" })
   linkExpiresTime: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: TextTrackTypeEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }

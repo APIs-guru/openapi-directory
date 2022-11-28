@@ -1,5 +1,7 @@
 package shared
 
+// PillarReviewSummary
+// A pillar review summary of a lens review.
 type PillarReviewSummary struct {
 	Notes      *string          `json:"Notes,omitempty"`
 	PillarID   *string          `json:"PillarId,omitempty"`

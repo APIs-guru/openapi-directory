@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InsightHealth
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about the number of open reactive and proactive insights that can be used to gauge the health of your system. 
 **/
 export class InsightHealth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MeanTimeToRecoverInMilliseconds" })
+  @SpeakeasyMetadata({ data: "json, name=MeanTimeToRecoverInMilliseconds" })
   meanTimeToRecoverInMilliseconds?: number;
 
-  @Metadata({ data: "json, name=OpenProactiveInsights" })
+  @SpeakeasyMetadata({ data: "json, name=OpenProactiveInsights" })
   openProactiveInsights?: number;
 
-  @Metadata({ data: "json, name=OpenReactiveInsights" })
+  @SpeakeasyMetadata({ data: "json, name=OpenReactiveInsights" })
   openReactiveInsights?: number;
 }

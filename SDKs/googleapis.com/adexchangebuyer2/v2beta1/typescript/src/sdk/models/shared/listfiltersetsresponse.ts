@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterSet } from "./filterset";
+
 
 
 // ListFilterSetsResponse
@@ -8,9 +8,9 @@ import { FilterSet } from "./filterset";
  * Response message for listing filter sets.
 **/
 export class ListFilterSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterSets", elemType: shared.FilterSet })
+  @SpeakeasyMetadata({ data: "json, name=filterSets", elemType: FilterSet })
   filterSets?: FilterSet[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

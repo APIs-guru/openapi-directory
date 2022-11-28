@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsGetPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ToolresultsProjectsHistoriesExecutionsGetQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsGetRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsGetPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsGetQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesExecutionsGetSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsGetPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsGetQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsGetSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     execution: Optional[shared.Execution] = field(default=None)
-    status_code: int = field(default=None)
     

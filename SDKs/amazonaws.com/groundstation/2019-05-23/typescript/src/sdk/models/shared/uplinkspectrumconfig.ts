@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Frequency } from "./frequency";
 import { PolarizationEnum } from "./polarizationenum";
+
 
 
 // UplinkSpectrumConfig
@@ -8,9 +9,9 @@ import { PolarizationEnum } from "./polarizationenum";
  * Information about the uplink spectral <code>Config</code>.
 **/
 export class UplinkSpectrumConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=centerFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=centerFrequency" })
   centerFrequency: Frequency;
 
-  @Metadata({ data: "json, name=polarization" })
+  @SpeakeasyMetadata({ data: "json, name=polarization" })
   polarization?: PolarizationEnum;
 }

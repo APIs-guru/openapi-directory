@@ -1,5 +1,7 @@
 package shared
 
+// VersionInformation
+// Information about a version.
 type VersionInformation struct {
 	Arn               *string `json:"Arn,omitempty"`
 	CreationTimestamp *string `json:"CreationTimestamp,omitempty"`

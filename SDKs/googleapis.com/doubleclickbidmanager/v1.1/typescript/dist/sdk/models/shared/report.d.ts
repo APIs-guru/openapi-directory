@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReportKey } from "./reportkey";
 import { ReportMetadata } from "./reportmetadata";
 import { Parameters } from "./parameters";

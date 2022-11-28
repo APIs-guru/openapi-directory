@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FirebaseAppInfoPlatformEnum {
-    PlatformUnspecified = "PLATFORM_UNSPECIFIED"
-,    Ios = "IOS"
-,    Android = "ANDROID"
-,    Web = "WEB"
+    PlatformUnspecified = "PLATFORM_UNSPECIFIED",
+    Ios = "IOS",
+    Android = "ANDROID",
+    Web = "WEB"
 }
 
 export enum FirebaseAppInfoStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Deleted = "DELETED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Deleted = "DELETED"
 }
 
 
@@ -19,24 +20,24 @@ export enum FirebaseAppInfoStateEnum {
  * A high-level summary of an App.
 **/
 export class FirebaseAppInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyId" })
   apiKeyId?: string;
 
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=namespace" })
+  @SpeakeasyMetadata({ data: "json, name=namespace" })
   namespace?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: FirebaseAppInfoPlatformEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: FirebaseAppInfoStateEnum;
 }

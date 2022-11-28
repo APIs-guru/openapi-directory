@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputDataConfig } from "./inputdataconfig";
 import { JobStatusEnum } from "./jobstatusenum";
 import { LanguageCodeEnum } from "./languagecodeenum";

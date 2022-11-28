@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import subsctiptiontype_apppkg_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubscriptionsAppPkgSubscription:
-    href: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
-    subsctiption_type: subsctiptiontype_apppkg_enum.SubsctiptionTypeAppPkgEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subsctiptionType' }})
+    r"""SubscriptionsAppPkgSubscription
+    'The data type represents the input parameters of \"subscription operation\" to notification of application package management for the onboarding, or operational state change of application package.'
+    """
+    
+    href: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('href') }})
+    subsctiption_type: SubsctiptionTypeAppPkgEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subsctiptionType') }})
     

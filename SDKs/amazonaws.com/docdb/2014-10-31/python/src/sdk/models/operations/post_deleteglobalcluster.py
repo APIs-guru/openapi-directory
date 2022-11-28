@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteGlobalClusterActionEnum(str, Enum):
     DELETE_GLOBAL_CLUSTER = "DeleteGlobalCluster"
@@ -10,8 +14,8 @@ class PostDeleteGlobalClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteGlobalClusterQueryParams:
-    action: PostDeleteGlobalClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteGlobalClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteGlobalClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteGlobalClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteGlobalClusterHeaders:
 
 @dataclass
 class PostDeleteGlobalClusterRequest:
-    query_params: PostDeleteGlobalClusterQueryParams = field(default=None)
-    headers: PostDeleteGlobalClusterHeaders = field(default=None)
+    headers: PostDeleteGlobalClusterHeaders = field()
+    query_params: PostDeleteGlobalClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteGlobalClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

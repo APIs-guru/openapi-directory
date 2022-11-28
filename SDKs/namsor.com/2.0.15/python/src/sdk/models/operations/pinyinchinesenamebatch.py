@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PinyinChineseNameBatchSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class PinyinChineseNameBatchRequest:
+    security: PinyinChineseNameBatchSecurity = field()
     request: Optional[shared.BatchPersonalNameIn] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PinyinChineseNameBatchSecurity = field(default=None)
     
 
 @dataclass
 class PinyinChineseNameBatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_personal_name_parsed_out: Optional[shared.BatchPersonalNameParsedOut] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

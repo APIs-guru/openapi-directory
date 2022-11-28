@@ -9,22 +9,9 @@ type GetBackupsPathParams struct {
 	LinodeID int64 `pathParam:"style=simple,explode=false,name=linodeId"`
 }
 
-type GetBackupsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetBackupsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetBackupsSecurity struct {
-	Option1 *GetBackupsSecurityOption1 `security:"option"`
-	Option2 *GetBackupsSecurityOption2 `security:"option"`
-}
-
-type GetBackupsRequest struct {
-	PathParams GetBackupsPathParams
-	Security   GetBackupsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetBackups200ApplicationJSONAutomaticDisks struct {
@@ -69,6 +56,11 @@ type GetBackups200ApplicationJSON struct {
 
 type GetBackupsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetBackupsRequest struct {
+	PathParams GetBackupsPathParams
+	Security   GetBackupsSecurity
 }
 
 type GetBackupsResponse struct {

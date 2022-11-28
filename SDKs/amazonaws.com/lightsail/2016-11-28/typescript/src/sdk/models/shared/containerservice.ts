@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerServiceDeployment } from "./containerservicedeployment";
 import { ResourceLocation } from "./resourcelocation";
-import { ContainerServiceDeployment } from "./containerservicedeployment";
 import { ContainerServicePowerNameEnum } from "./containerservicepowernameenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { ContainerServiceStateEnum } from "./containerservicestateenum";
@@ -10,62 +8,63 @@ import { ContainerServiceStateDetail } from "./containerservicestatedetail";
 import { Tag } from "./tag";
 
 
+
 // ContainerService
 /** 
  * Describes an Amazon Lightsail container service.
 **/
 export class ContainerService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=containerServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=containerServiceName" })
   containerServiceName?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=currentDeployment" })
+  @SpeakeasyMetadata({ data: "json, name=currentDeployment" })
   currentDeployment?: ContainerServiceDeployment;
 
-  @Metadata({ data: "json, name=isDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=isDisabled" })
   isDisabled?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ResourceLocation;
 
-  @Metadata({ data: "json, name=nextDeployment" })
+  @SpeakeasyMetadata({ data: "json, name=nextDeployment" })
   nextDeployment?: ContainerServiceDeployment;
 
-  @Metadata({ data: "json, name=power" })
+  @SpeakeasyMetadata({ data: "json, name=power" })
   power?: ContainerServicePowerNameEnum;
 
-  @Metadata({ data: "json, name=powerId" })
+  @SpeakeasyMetadata({ data: "json, name=powerId" })
   powerId?: string;
 
-  @Metadata({ data: "json, name=principalArn" })
+  @SpeakeasyMetadata({ data: "json, name=principalArn" })
   principalArn?: string;
 
-  @Metadata({ data: "json, name=privateDomainName" })
+  @SpeakeasyMetadata({ data: "json, name=privateDomainName" })
   privateDomainName?: string;
 
-  @Metadata({ data: "json, name=publicDomainNames" })
+  @SpeakeasyMetadata({ data: "json, name=publicDomainNames" })
   publicDomainNames?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ContainerServiceStateEnum;
 
-  @Metadata({ data: "json, name=stateDetail" })
+  @SpeakeasyMetadata({ data: "json, name=stateDetail" })
   stateDetail?: ContainerServiceStateDetail;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

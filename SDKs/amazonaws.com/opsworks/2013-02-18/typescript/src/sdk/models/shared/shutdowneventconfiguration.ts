@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShutdownEventConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Shutdown event configuration.
 **/
 export class ShutdownEventConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DelayUntilElbConnectionsDrained" })
+  @SpeakeasyMetadata({ data: "json, name=DelayUntilElbConnectionsDrained" })
   delayUntilElbConnectionsDrained?: boolean;
 
-  @Metadata({ data: "json, name=ExecutionTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionTimeout" })
   executionTimeout?: number;
 }

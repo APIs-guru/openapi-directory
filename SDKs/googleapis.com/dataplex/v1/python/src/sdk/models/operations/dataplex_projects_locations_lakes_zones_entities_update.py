@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesUpdatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class DataplexProjectsLocationsLakesZonesEntitiesUpdateQueryParams:
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesUpdateRequest:
-    path_params: DataplexProjectsLocationsLakesZonesEntitiesUpdatePathParams = field(default=None)
-    query_params: DataplexProjectsLocationsLakesZonesEntitiesUpdateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudDataplexV1Entity] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataplexProjectsLocationsLakesZonesEntitiesUpdateSecurity = field(default=None)
+    path_params: DataplexProjectsLocationsLakesZonesEntitiesUpdatePathParams = field()
+    query_params: DataplexProjectsLocationsLakesZonesEntitiesUpdateQueryParams = field()
+    security: DataplexProjectsLocationsLakesZonesEntitiesUpdateSecurity = field()
+    request: Optional[shared.GoogleCloudDataplexV1EntityInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DataplexProjectsLocationsLakesZonesEntitiesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dataplex_v1_entity: Optional[shared.GoogleCloudDataplexV1Entity] = field(default=None)
-    status_code: int = field(default=None)
     

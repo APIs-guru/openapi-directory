@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://parliament.uk",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BrowseIndexTerms - Returns a list of index terms by start letter.
 func (s *SDK) BrowseIndexTerms(ctx context.Context, request operations.BrowseIndexTermsRequest) (*operations.BrowseIndexTermsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/IndexTerm/browse"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) BrowseIndexTerms(ctx context.Context, request operations.BrowseInd
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -107,8 +129,9 @@ func (s *SDK) BrowseIndexTerms(ctx context.Context, request operations.BrowseInd
 	return res, nil
 }
 
+// GetAPIIndexTermIndexTermID - Returns an index term by id.
 func (s *SDK) GetAPIIndexTermIndexTermID(ctx context.Context, request operations.GetAPIIndexTermIndexTermIDRequest) (*operations.GetAPIIndexTermIndexTermIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/IndexTerm/{indexTermId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -116,7 +139,7 @@ func (s *SDK) GetAPIIndexTermIndexTermID(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -162,8 +185,9 @@ func (s *SDK) GetAPIIndexTermIndexTermID(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAPIPart - Returns a list of all parts.
 func (s *SDK) GetAPIPart(ctx context.Context) (*operations.GetAPIPartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Part"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -171,7 +195,7 @@ func (s *SDK) GetAPIPart(ctx context.Context) (*operations.GetAPIPartResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -215,8 +239,9 @@ func (s *SDK) GetAPIPart(ctx context.Context) (*operations.GetAPIPartResponse, e
 	return res, nil
 }
 
+// GetAPIPartPartNumber - Returns a part by part number.
 func (s *SDK) GetAPIPartPartNumber(ctx context.Context, request operations.GetAPIPartPartNumberRequest) (*operations.GetAPIPartPartNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Part/{partNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -224,7 +249,7 @@ func (s *SDK) GetAPIPartPartNumber(ctx context.Context, request operations.GetAP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -270,8 +295,9 @@ func (s *SDK) GetAPIPartPartNumber(ctx context.Context, request operations.GetAP
 	return res, nil
 }
 
+// GetAPISectionSectionID - Returns a section by section id.
 func (s *SDK) GetAPISectionSectionID(ctx context.Context, request operations.GetAPISectionSectionIDRequest) (*operations.GetAPISectionSectionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Section/{sectionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -279,7 +305,7 @@ func (s *SDK) GetAPISectionSectionID(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -325,8 +351,9 @@ func (s *SDK) GetAPISectionSectionID(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// Get - Returns a single chapter overview by chapter number.
 func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operations.GetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Chapter/{chapterNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -334,7 +361,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -380,8 +407,9 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 	return res, nil
 }
 
+// GetIndexTermSearchResults - Returns a list of index terms which contain the search term.
 func (s *SDK) GetIndexTermSearchResults(ctx context.Context, request operations.GetIndexTermSearchResultsRequest) (*operations.GetIndexTermSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Search/IndexTermSearchResults/{searchTerm}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -391,7 +419,7 @@ func (s *SDK) GetIndexTermSearchResults(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -435,8 +463,9 @@ func (s *SDK) GetIndexTermSearchResults(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetParagraphSearchResults - Returns a list of paragraphs which contain the search term.
 func (s *SDK) GetParagraphSearchResults(ctx context.Context, request operations.GetParagraphSearchResultsRequest) (*operations.GetParagraphSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Search/ParagraphSearchResults/{searchTerm}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -446,7 +475,7 @@ func (s *SDK) GetParagraphSearchResults(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -490,8 +519,9 @@ func (s *SDK) GetParagraphSearchResults(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetParagraphSectionID - Returns a section overview by reference.
 func (s *SDK) GetParagraphSectionID(ctx context.Context, request operations.GetParagraphSectionIDRequest) (*operations.GetParagraphSectionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Search/Paragraph/{reference}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -499,7 +529,7 @@ func (s *SDK) GetParagraphSectionID(ctx context.Context, request operations.GetP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -545,8 +575,9 @@ func (s *SDK) GetParagraphSectionID(ctx context.Context, request operations.GetP
 	return res, nil
 }
 
+// GetSectionSearchResults - Returns a list of sections which contain the search term.
 func (s *SDK) GetSectionSearchResults(ctx context.Context, request operations.GetSectionSearchResultsRequest) (*operations.GetSectionSearchResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Search/SectionSearchResults/{searchTerm}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -556,7 +587,7 @@ func (s *SDK) GetSectionSearchResults(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -600,8 +631,9 @@ func (s *SDK) GetSectionSearchResults(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// Navigate - Returns a section overview by section id and step.
 func (s *SDK) Navigate(ctx context.Context, request operations.NavigateRequest) (*operations.NavigateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Section/{sectionId},{step}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -609,7 +641,7 @@ func (s *SDK) Navigate(ctx context.Context, request operations.NavigateRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

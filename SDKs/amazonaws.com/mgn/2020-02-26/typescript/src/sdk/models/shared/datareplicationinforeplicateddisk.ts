@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataReplicationInfoReplicatedDisk
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to query disks replicated.
 **/
 export class DataReplicationInfoReplicatedDisk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backloggedStorageBytes" })
+  @SpeakeasyMetadata({ data: "json, name=backloggedStorageBytes" })
   backloggedStorageBytes?: number;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=replicatedStorageBytes" })
+  @SpeakeasyMetadata({ data: "json, name=replicatedStorageBytes" })
   replicatedStorageBytes?: number;
 
-  @Metadata({ data: "json, name=rescannedStorageBytes" })
+  @SpeakeasyMetadata({ data: "json, name=rescannedStorageBytes" })
   rescannedStorageBytes?: number;
 
-  @Metadata({ data: "json, name=totalStorageBytes" })
+  @SpeakeasyMetadata({ data: "json, name=totalStorageBytes" })
   totalStorageBytes?: number;
 }

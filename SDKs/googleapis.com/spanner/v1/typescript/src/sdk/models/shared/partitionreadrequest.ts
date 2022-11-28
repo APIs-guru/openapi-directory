@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeySet } from "./keyset";
 import { PartitionOptions } from "./partitionoptions";
 import { TransactionSelector } from "./transactionselector";
+
 
 
 // PartitionReadRequest
@@ -9,21 +10,21 @@ import { TransactionSelector } from "./transactionselector";
  * The request for PartitionRead
 **/
 export class PartitionReadRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns" })
+  @SpeakeasyMetadata({ data: "json, name=columns" })
   columns?: string[];
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: string;
 
-  @Metadata({ data: "json, name=keySet" })
+  @SpeakeasyMetadata({ data: "json, name=keySet" })
   keySet?: KeySet;
 
-  @Metadata({ data: "json, name=partitionOptions" })
+  @SpeakeasyMetadata({ data: "json, name=partitionOptions" })
   partitionOptions?: PartitionOptions;
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: TransactionSelector;
 }

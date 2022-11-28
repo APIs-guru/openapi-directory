@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetRemovePermissionPathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetRemovePermissionActionEnum(str, Enum):
     REMOVE_PERMISSION = "RemovePermission"
@@ -16,9 +20,9 @@ class GetRemovePermissionVersionEnum(str, Enum):
 
 @dataclass
 class GetRemovePermissionQueryParams:
-    action: GetRemovePermissionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    label: str = field(default=None, metadata={'query_param': { 'field_name': 'Label', 'style': 'form', 'explode': True }})
-    version: GetRemovePermissionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetRemovePermissionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    label: str = field(metadata={'query_param': { 'field_name': 'Label', 'style': 'form', 'explode': True }})
+    version: GetRemovePermissionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetRemovePermissionHeaders:
 
 @dataclass
 class GetRemovePermissionRequest:
-    path_params: GetRemovePermissionPathParams = field(default=None)
-    query_params: GetRemovePermissionQueryParams = field(default=None)
-    headers: GetRemovePermissionHeaders = field(default=None)
+    headers: GetRemovePermissionHeaders = field()
+    path_params: GetRemovePermissionPathParams = field()
+    query_params: GetRemovePermissionQueryParams = field()
     
 
 @dataclass
 class GetRemovePermissionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

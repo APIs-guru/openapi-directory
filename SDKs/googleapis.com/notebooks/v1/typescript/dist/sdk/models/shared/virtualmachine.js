@@ -22,8 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { VirtualMachineConfigInput } from "./virtualmachineconfig";
 import { VirtualMachineConfig } from "./virtualmachineconfig";
+// VirtualMachineInput
+/**
+ * Runtime using Virtual Machine for computing.
+**/
+var VirtualMachineInput = /** @class */ (function (_super) {
+    __extends(VirtualMachineInput, _super);
+    function VirtualMachineInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=virtualMachineConfig" }),
+        __metadata("design:type", VirtualMachineConfigInput)
+    ], VirtualMachineInput.prototype, "virtualMachineConfig", void 0);
+    return VirtualMachineInput;
+}(SpeakeasyBase));
+export { VirtualMachineInput };
 // VirtualMachine
 /**
  * Runtime using Virtual Machine for computing.
@@ -34,15 +51,15 @@ var VirtualMachine = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=instanceId" }),
+        SpeakeasyMetadata({ data: "json, name=instanceId" }),
         __metadata("design:type", String)
     ], VirtualMachine.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceName" }),
+        SpeakeasyMetadata({ data: "json, name=instanceName" }),
         __metadata("design:type", String)
     ], VirtualMachine.prototype, "instanceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=virtualMachineConfig" }),
+        SpeakeasyMetadata({ data: "json, name=virtualMachineConfig" }),
         __metadata("design:type", VirtualMachineConfig)
     ], VirtualMachine.prototype, "virtualMachineConfig", void 0);
     return VirtualMachine;

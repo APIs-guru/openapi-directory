@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatFormatEnum(str, Enum):
     JSON = "json"
@@ -9,12 +10,12 @@ class GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatFormatEnum(str,
 
 @dataclass
 class GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatPathParams:
-    format: GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    max_lat: float = field(default=None, metadata={'path_param': { 'field_name': 'maxLat', 'style': 'simple', 'explode': False }})
-    max_lon: float = field(default=None, metadata={'path_param': { 'field_name': 'maxLon', 'style': 'simple', 'explode': False }})
-    min_lat: float = field(default=None, metadata={'path_param': { 'field_name': 'minLat', 'style': 'simple', 'explode': False }})
-    min_lon: float = field(default=None, metadata={'path_param': { 'field_name': 'minLon', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    format: GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    max_lat: float = field(metadata={'path_param': { 'field_name': 'maxLat', 'style': 'simple', 'explode': False }})
+    max_lon: float = field(metadata={'path_param': { 'field_name': 'maxLon', 'style': 'simple', 'explode': False }})
+    min_lat: float = field(metadata={'path_param': { 'field_name': 'minLat', 'style': 'simple', 'explode': False }})
+    min_lon: float = field(metadata={'path_param': { 'field_name': 'minLon', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,12 +25,12 @@ class GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatQueryParams:
 
 @dataclass
 class GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatRequest:
-    path_params: GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatPathParams = field(default=None)
-    query_params: GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatQueryParams = field(default=None)
+    path_params: GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatPathParams = field()
+    query_params: GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatQueryParams = field()
     
 
 @dataclass
 class GetMapVersionNumberCopyrightsMinLonMinLatMaxLonMaxLatFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

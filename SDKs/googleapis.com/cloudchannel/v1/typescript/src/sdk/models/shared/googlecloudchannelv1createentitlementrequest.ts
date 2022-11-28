@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudChannelV1Entitlement } from "./googlecloudchannelv1entitlement";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudChannelV1EntitlementInput } from "./googlecloudchannelv1entitlement";
 
 
-// GoogleCloudChannelV1CreateEntitlementRequest
+
+// GoogleCloudChannelV1CreateEntitlementRequestInput
 /** 
  * Request message for CloudChannelService.CreateEntitlement
 **/
-export class GoogleCloudChannelV1CreateEntitlementRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entitlement" })
-  entitlement?: GoogleCloudChannelV1Entitlement;
+export class GoogleCloudChannelV1CreateEntitlementRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=entitlement" })
+  entitlement?: GoogleCloudChannelV1EntitlementInput;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

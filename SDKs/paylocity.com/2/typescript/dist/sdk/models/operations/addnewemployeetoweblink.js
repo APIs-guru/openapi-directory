@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddNewEmployeeToWebLinkPathParams = /** @class */ (function (_super) {
     __extends(AddNewEmployeeToWebLinkPathParams, _super);
@@ -30,7 +30,7 @@ var AddNewEmployeeToWebLinkPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], AddNewEmployeeToWebLinkPathParams.prototype, "companyId", void 0);
     return AddNewEmployeeToWebLinkPathParams;
@@ -42,7 +42,7 @@ var AddNewEmployeeToWebLinkSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], AddNewEmployeeToWebLinkSecurity.prototype, "paylocityAuth", void 0);
     return AddNewEmployeeToWebLinkSecurity;
@@ -54,15 +54,15 @@ var AddNewEmployeeToWebLinkRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddNewEmployeeToWebLinkPathParams)
     ], AddNewEmployeeToWebLinkRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.StagedEmployee)
     ], AddNewEmployeeToWebLinkRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddNewEmployeeToWebLinkSecurity)
     ], AddNewEmployeeToWebLinkRequest.prototype, "security", void 0);
     return AddNewEmployeeToWebLinkRequest;
@@ -74,19 +74,19 @@ var AddNewEmployeeToWebLinkResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddNewEmployeeToWebLinkResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddNewEmployeeToWebLinkResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], AddNewEmployeeToWebLinkResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ elemType: shared.TrackingNumberResponse }),
+        SpeakeasyMetadata({ elemType: shared.TrackingNumberResponse }),
         __metadata("design:type", Array)
     ], AddNewEmployeeToWebLinkResponse.prototype, "trackingNumberResponses", void 0);
     return AddNewEmployeeToWebLinkResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PayoutInstrument
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type provides details about the seller's account that received (or is scheduled to receive) a payout.
 **/
 export class PayoutInstrument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountLastFourDigits" })
+  @SpeakeasyMetadata({ data: "json, name=accountLastFourDigits" })
   accountLastFourDigits?: string;
 
-  @Metadata({ data: "json, name=instrumentType" })
+  @SpeakeasyMetadata({ data: "json, name=instrumentType" })
   instrumentType?: string;
 
-  @Metadata({ data: "json, name=nickname" })
+  @SpeakeasyMetadata({ data: "json, name=nickname" })
   nickname?: string;
 }

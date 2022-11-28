@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import header
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HeaderOverride:
-    header: Optional[header.Header] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'header' }})
+    r"""HeaderOverride
+    Wraps the Header object.
+    """
+    
+    header: Optional[Header] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('header') }})
     

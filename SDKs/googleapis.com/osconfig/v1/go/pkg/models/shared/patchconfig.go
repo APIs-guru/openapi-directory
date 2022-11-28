@@ -9,6 +9,8 @@ const (
 	PatchConfigRebootConfigEnumNever                   PatchConfigRebootConfigEnum = "NEVER"
 )
 
+// PatchConfig
+// Patch configuration specifications. Contains details on how to apply the patch(es) to a VM instance.
 type PatchConfig struct {
 	Apt                 *AptSettings                 `json:"apt,omitempty"`
 	Goo                 map[string]interface{}       `json:"goo,omitempty"`

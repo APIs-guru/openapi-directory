@@ -18,6 +18,8 @@ const (
 	ProvinceIDEnumYt ProvinceIDEnum = "YT"
 )
 
+// Province
+// A Canadian province or territory
 type Province struct {
 	ID          *ProvinceIDEnum `json:"id,omitempty"`
 	NameEn      *string         `json:"nameEn,omitempty"`

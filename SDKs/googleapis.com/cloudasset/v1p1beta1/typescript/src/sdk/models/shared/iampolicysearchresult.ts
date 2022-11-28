@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Explanation } from "./explanation";
 import { Policy } from "./policy";
+
 
 
 // IamPolicySearchResult
@@ -8,15 +9,15 @@ import { Policy } from "./policy";
  * The result for an IAM policy search.
 **/
 export class IamPolicySearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=explanation" })
+  @SpeakeasyMetadata({ data: "json, name=explanation" })
   explanation?: Explanation;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: Policy;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum IpAddressTypeEnum {
-    Dualstack = "dualstack"
-,    Ipv4 = "ipv4"
+    Dualstack = "dualstack",
+    Ipv4 = "ipv4"
 }

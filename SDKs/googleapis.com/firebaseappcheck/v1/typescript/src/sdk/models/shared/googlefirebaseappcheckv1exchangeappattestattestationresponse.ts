@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1AppCheckToken } from "./googlefirebaseappcheckv1appchecktoken";
+
 
 
 // GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationResponse
@@ -7,9 +8,9 @@ import { GoogleFirebaseAppcheckV1AppCheckToken } from "./googlefirebaseappcheckv
  * Response message for the ExchangeAppAttestAttestation method.
 **/
 export class GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appCheckToken" })
+  @SpeakeasyMetadata({ data: "json, name=appCheckToken" })
   appCheckToken?: GoogleFirebaseAppcheckV1AppCheckToken;
 
-  @Metadata({ data: "json, name=artifact" })
+  @SpeakeasyMetadata({ data: "json, name=artifact" })
   artifact?: string;
 }

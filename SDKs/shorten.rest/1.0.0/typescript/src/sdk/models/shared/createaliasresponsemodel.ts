@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateAliasResponseModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliasName" })
+  @SpeakeasyMetadata({ data: "json, name=aliasName" })
   aliasName?: string;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=shortUrl" })
+  @SpeakeasyMetadata({ data: "json, name=shortUrl" })
   shortUrl?: string;
 }

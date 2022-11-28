@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class EnterpriseAdminGetAnnouncementResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     announcement: Optional[shared.Announcement] = field(default=None)
     

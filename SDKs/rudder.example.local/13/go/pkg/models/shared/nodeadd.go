@@ -33,6 +33,8 @@ type NodeAddPropertiesVars struct {
 	Vars2 *string `json:"vars2,omitempty"`
 }
 
+// NodeAddProperties
+// Node properties in "key":"value" format, where "key" is a string, and "value" is either a string, a json array, or a json object. The following example shows you three example of &#58; &#173; a json array on the example of "tags":[ "some", "tags" ] &#173; a simple string on the example of "env":"prod" &#173; a complex json object on the example of "vars":{ "var1":"value1", "var2":"value2" } They are optional and can be used in any combination as long the keys are unique within the properties object.
 type NodeAddProperties struct {
 	Env  *string                     `json:"env,omitempty"`
 	Tags []NodeAddPropertiesTagsEnum `json:"tags,omitempty"`

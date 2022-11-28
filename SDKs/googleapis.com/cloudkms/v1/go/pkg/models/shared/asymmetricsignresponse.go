@@ -10,6 +10,8 @@ const (
 	AsymmetricSignResponseProtectionLevelEnumExternalVpc                AsymmetricSignResponseProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// AsymmetricSignResponse
+// Response message for KeyManagementService.AsymmetricSign.
 type AsymmetricSignResponse struct {
 	Name                 *string                                    `json:"name,omitempty"`
 	ProtectionLevel      *AsymmetricSignResponseProtectionLevelEnum `json:"protectionLevel,omitempty"`

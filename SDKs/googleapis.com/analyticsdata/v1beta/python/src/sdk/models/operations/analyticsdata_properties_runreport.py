@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsdataPropertiesRunReportPathParams:
-    property: str = field(default=None, metadata={'path_param': { 'field_name': 'property', 'style': 'simple', 'explode': False }})
+    property: str = field(metadata={'path_param': { 'field_name': 'property', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AnalyticsdataPropertiesRunReportQueryParams:
 
 @dataclass
 class AnalyticsdataPropertiesRunReportSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsdataPropertiesRunReportSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class AnalyticsdataPropertiesRunReportSecurity:
 
 @dataclass
 class AnalyticsdataPropertiesRunReportRequest:
-    path_params: AnalyticsdataPropertiesRunReportPathParams = field(default=None)
-    query_params: AnalyticsdataPropertiesRunReportQueryParams = field(default=None)
+    path_params: AnalyticsdataPropertiesRunReportPathParams = field()
+    query_params: AnalyticsdataPropertiesRunReportQueryParams = field()
+    security: AnalyticsdataPropertiesRunReportSecurity = field()
     request: Optional[shared.RunReportRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsdataPropertiesRunReportSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsdataPropertiesRunReportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     run_report_response: Optional[shared.RunReportResponse] = field(default=None)
-    status_code: int = field(default=None)
     

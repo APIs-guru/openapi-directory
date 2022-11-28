@@ -28,11 +28,6 @@ type LocerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type LocerRequest struct {
-	Request  *LocerRequestBody `request:"mediaType=application/json"`
-	Security LocerSecurity
-}
-
 type Locer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Locer504ApplicationJSON struct {
 	Error            *Locer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Locer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type LocerRequest struct {
+	Request  *LocerRequestBody `request:"mediaType=application/json"`
+	Security LocerSecurity
 }
 
 type LocerResponse struct {

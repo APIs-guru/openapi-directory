@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccessUrls
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * URLs where a CertificateAuthority will publish content.
 **/
 export class AccessUrls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCertificateAccessUrl" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificateAccessUrl" })
   caCertificateAccessUrl?: string;
 
-  @Metadata({ data: "json, name=crlAccessUrls" })
+  @SpeakeasyMetadata({ data: "json, name=crlAccessUrls" })
   crlAccessUrls?: string[];
 }

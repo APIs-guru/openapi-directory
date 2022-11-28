@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LiabilitiesGetRequestOptions } from "./liabilitiesgetrequestoptions";
+
 
 
 // LiabilitiesGetRequest
@@ -7,15 +8,15 @@ import { LiabilitiesGetRequestOptions } from "./liabilitiesgetrequestoptions";
  * LiabilitiesGetRequest defines the request schema for `/liabilities/get`
 **/
 export class LiabilitiesGetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: LiabilitiesGetRequestOptions;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3RecordingDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about an S3 recording <code>Config</code> used in a contact.
 **/
 export class S3RecordingDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketArn" })
+  @SpeakeasyMetadata({ data: "json, name=bucketArn" })
   bucketArn?: string;
 
-  @Metadata({ data: "json, name=keyTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=keyTemplate" })
   keyTemplate?: string;
 }

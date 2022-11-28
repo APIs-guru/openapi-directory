@@ -1,5 +1,7 @@
 package shared
 
+// CutoverStep
+// CutoverStep holds information about the cutover step progress.
 type CutoverStep struct {
 	EndTime                  *string                `json:"endTime,omitempty"`
 	FinalSync                *ReplicationCycle      `json:"finalSync,omitempty"`

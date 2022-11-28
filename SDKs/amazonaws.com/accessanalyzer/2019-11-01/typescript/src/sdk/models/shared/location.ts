@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PathElement } from "./pathelement";
 import { Span } from "./span";
+
 
 
 // Location
@@ -9,9 +9,9 @@ import { Span } from "./span";
  * A location in a policy that is represented as a path through the JSON representation and a corresponding span.
 **/
 export class Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=path", elemType: shared.PathElement })
+  @SpeakeasyMetadata({ data: "json, name=path", elemType: PathElement })
   path: PathElement[];
 
-  @Metadata({ data: "json, name=span" })
+  @SpeakeasyMetadata({ data: "json, name=span" })
   span: Span;
 }

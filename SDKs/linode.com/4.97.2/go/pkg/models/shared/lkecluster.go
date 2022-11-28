@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LkeCluster
+// A Kubernetes cluster.
 type LkeCluster struct {
 	Created    *time.Time `json:"created,omitempty"`
 	ID         *int64     `json:"id,omitempty"`

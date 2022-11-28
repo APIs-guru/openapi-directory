@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateGraphqlApiPathParams = /** @class */ (function (_super) {
     __extends(UpdateGraphqlApiPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateGraphqlApiPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiPathParams.prototype, "apiId", void 0);
     return UpdateGraphqlApiPathParams;
@@ -42,31 +42,31 @@ var UpdateGraphqlApiHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateGraphqlApiHeaders;
@@ -90,15 +90,15 @@ var UpdateGraphqlApiRequestBodyLambdaAuthorizerConfig = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authorizerResultTtlInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerResultTtlInSeconds" }),
         __metadata("design:type", Number)
     ], UpdateGraphqlApiRequestBodyLambdaAuthorizerConfig.prototype, "authorizerResultTtlInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizerUri" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerUri" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyLambdaAuthorizerConfig.prototype, "authorizerUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityValidationExpression" }),
+        SpeakeasyMetadata({ data: "json, name=identityValidationExpression" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyLambdaAuthorizerConfig.prototype, "identityValidationExpression", void 0);
     return UpdateGraphqlApiRequestBodyLambdaAuthorizerConfig;
@@ -114,15 +114,15 @@ var UpdateGraphqlApiRequestBodyLogConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cloudWatchLogsRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=cloudWatchLogsRoleArn" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyLogConfig.prototype, "cloudWatchLogsRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=excludeVerboseContent" }),
+        SpeakeasyMetadata({ data: "json, name=excludeVerboseContent" }),
         __metadata("design:type", Boolean)
     ], UpdateGraphqlApiRequestBodyLogConfig.prototype, "excludeVerboseContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldLogLevel" }),
+        SpeakeasyMetadata({ data: "json, name=fieldLogLevel" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyLogConfig.prototype, "fieldLogLevel", void 0);
     return UpdateGraphqlApiRequestBodyLogConfig;
@@ -138,19 +138,19 @@ var UpdateGraphqlApiRequestBodyOpenIdConnectConfig = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authTTL" }),
+        SpeakeasyMetadata({ data: "json, name=authTTL" }),
         __metadata("design:type", Number)
     ], UpdateGraphqlApiRequestBodyOpenIdConnectConfig.prototype, "authTtl", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientId" }),
+        SpeakeasyMetadata({ data: "json, name=clientId" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyOpenIdConnectConfig.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=iatTTL" }),
+        SpeakeasyMetadata({ data: "json, name=iatTTL" }),
         __metadata("design:type", Number)
     ], UpdateGraphqlApiRequestBodyOpenIdConnectConfig.prototype, "iatTtl", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuer" }),
+        SpeakeasyMetadata({ data: "json, name=issuer" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyOpenIdConnectConfig.prototype, "issuer", void 0);
     return UpdateGraphqlApiRequestBodyOpenIdConnectConfig;
@@ -166,19 +166,19 @@ var UpdateGraphqlApiRequestBodyUserPoolConfig = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appIdClientRegex" }),
+        SpeakeasyMetadata({ data: "json, name=appIdClientRegex" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyUserPoolConfig.prototype, "appIdClientRegex", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsRegion" }),
+        SpeakeasyMetadata({ data: "json, name=awsRegion" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyUserPoolConfig.prototype, "awsRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultAction" }),
+        SpeakeasyMetadata({ data: "json, name=defaultAction" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyUserPoolConfig.prototype, "defaultAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=userPoolId" }),
+        SpeakeasyMetadata({ data: "json, name=userPoolId" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBodyUserPoolConfig.prototype, "userPoolId", void 0);
     return UpdateGraphqlApiRequestBodyUserPoolConfig;
@@ -190,35 +190,35 @@ var UpdateGraphqlApiRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additionalAuthenticationProviders", elemType: shared.AdditionalAuthenticationProvider }),
+        SpeakeasyMetadata({ data: "json, name=additionalAuthenticationProviders", elemType: shared.AdditionalAuthenticationProvider }),
         __metadata("design:type", Array)
     ], UpdateGraphqlApiRequestBody.prototype, "additionalAuthenticationProviders", void 0);
     __decorate([
-        Metadata({ data: "json, name=authenticationType" }),
+        SpeakeasyMetadata({ data: "json, name=authenticationType" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBody.prototype, "authenticationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=lambdaAuthorizerConfig" }),
+        SpeakeasyMetadata({ data: "json, name=lambdaAuthorizerConfig" }),
         __metadata("design:type", UpdateGraphqlApiRequestBodyLambdaAuthorizerConfig)
     ], UpdateGraphqlApiRequestBody.prototype, "lambdaAuthorizerConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=logConfig" }),
+        SpeakeasyMetadata({ data: "json, name=logConfig" }),
         __metadata("design:type", UpdateGraphqlApiRequestBodyLogConfig)
     ], UpdateGraphqlApiRequestBody.prototype, "logConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateGraphqlApiRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=openIDConnectConfig" }),
+        SpeakeasyMetadata({ data: "json, name=openIDConnectConfig" }),
         __metadata("design:type", UpdateGraphqlApiRequestBodyOpenIdConnectConfig)
     ], UpdateGraphqlApiRequestBody.prototype, "openIdConnectConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=userPoolConfig" }),
+        SpeakeasyMetadata({ data: "json, name=userPoolConfig" }),
         __metadata("design:type", UpdateGraphqlApiRequestBodyUserPoolConfig)
     ], UpdateGraphqlApiRequestBody.prototype, "userPoolConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=xrayEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=xrayEnabled" }),
         __metadata("design:type", Boolean)
     ], UpdateGraphqlApiRequestBody.prototype, "xrayEnabled", void 0);
     return UpdateGraphqlApiRequestBody;
@@ -230,15 +230,15 @@ var UpdateGraphqlApiRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateGraphqlApiPathParams)
     ], UpdateGraphqlApiRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateGraphqlApiHeaders)
     ], UpdateGraphqlApiRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateGraphqlApiRequestBody)
     ], UpdateGraphqlApiRequest.prototype, "request", void 0);
     return UpdateGraphqlApiRequest;
@@ -250,39 +250,39 @@ var UpdateGraphqlApiResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGraphqlApiResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGraphqlApiResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGraphqlApiResponse.prototype, "concurrentModificationException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateGraphqlApiResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGraphqlApiResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGraphqlApiResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateGraphqlApiResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGraphqlApiResponse.prototype, "unauthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateGraphqlApiResponse)
     ], UpdateGraphqlApiResponse.prototype, "updateGraphqlApiResponse", void 0);
     return UpdateGraphqlApiResponse;

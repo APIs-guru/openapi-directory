@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
+
 
 
 // BatchStatementRequest
@@ -8,12 +8,12 @@ import { AttributeValue } from "./attributevalue";
  *  A PartiQL batch statement request. 
 **/
 export class BatchStatementRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsistentRead" })
+  @SpeakeasyMetadata({ data: "json, name=ConsistentRead" })
   consistentRead?: boolean;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: AttributeValue })
   parameters?: AttributeValue[];
 
-  @Metadata({ data: "json, name=Statement" })
+  @SpeakeasyMetadata({ data: "json, name=Statement" })
   statement: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// BaiduMessage
+// Specifies the settings for a one-time message that's sent directly to an endpoint through the Baidu (Baidu Cloud Push) channel.
 type BaiduMessage struct {
 	Action            *ActionEnum         `json:"Action,omitempty"`
 	Body              *string             `json:"Body,omitempty"`

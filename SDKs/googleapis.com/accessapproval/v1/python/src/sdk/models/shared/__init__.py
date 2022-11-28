@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .accessapprovalsettings import *
 from .accesslocations import *
 from .accessreason import *

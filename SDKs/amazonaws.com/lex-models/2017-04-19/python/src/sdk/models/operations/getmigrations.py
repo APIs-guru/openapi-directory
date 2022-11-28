@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetMigrationsMigrationStatusEqualsEnum(str, Enum):
@@ -39,16 +43,16 @@ class GetMigrationsHeaders:
 
 @dataclass
 class GetMigrationsRequest:
-    query_params: GetMigrationsQueryParams = field(default=None)
-    headers: GetMigrationsHeaders = field(default=None)
+    headers: GetMigrationsHeaders = field()
+    query_params: GetMigrationsQueryParams = field()
     
 
 @dataclass
 class GetMigrationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_migrations_response: Optional[shared.GetMigrationsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

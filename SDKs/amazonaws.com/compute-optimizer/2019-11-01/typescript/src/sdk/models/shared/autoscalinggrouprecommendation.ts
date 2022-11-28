@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupConfiguration } from "./autoscalinggroupconfiguration";
 import { FindingEnum } from "./findingenum";
 import { AutoScalingGroupRecommendationOption } from "./autoscalinggrouprecommendationoption";
 import { UtilizationMetric } from "./utilizationmetric";
+
 
 
 // AutoScalingGroupRecommendation
@@ -11,30 +11,30 @@ import { UtilizationMetric } from "./utilizationmetric";
  * Describes an Auto Scaling group recommendation.
 **/
 export class AutoScalingGroupRecommendation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=autoScalingGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroupArn" })
   autoScalingGroupArn?: string;
 
-  @Metadata({ data: "json, name=autoScalingGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroupName" })
   autoScalingGroupName?: string;
 
-  @Metadata({ data: "json, name=currentConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=currentConfiguration" })
   currentConfiguration?: AutoScalingGroupConfiguration;
 
-  @Metadata({ data: "json, name=finding" })
+  @SpeakeasyMetadata({ data: "json, name=finding" })
   finding?: FindingEnum;
 
-  @Metadata({ data: "json, name=lastRefreshTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastRefreshTimestamp" })
   lastRefreshTimestamp?: Date;
 
-  @Metadata({ data: "json, name=lookBackPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=lookBackPeriodInDays" })
   lookBackPeriodInDays?: number;
 
-  @Metadata({ data: "json, name=recommendationOptions", elemType: shared.AutoScalingGroupRecommendationOption })
+  @SpeakeasyMetadata({ data: "json, name=recommendationOptions", elemType: AutoScalingGroupRecommendationOption })
   recommendationOptions?: AutoScalingGroupRecommendationOption[];
 
-  @Metadata({ data: "json, name=utilizationMetrics", elemType: shared.UtilizationMetric })
+  @SpeakeasyMetadata({ data: "json, name=utilizationMetrics", elemType: UtilizationMetric })
   utilizationMetrics?: UtilizationMetric[];
 }

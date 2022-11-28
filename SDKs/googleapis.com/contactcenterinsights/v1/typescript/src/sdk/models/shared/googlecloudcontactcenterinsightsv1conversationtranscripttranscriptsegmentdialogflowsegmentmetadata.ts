@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentDialogflowSegmentMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata from Dialogflow relating to the current transcript segment.
 **/
 export class GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentDialogflowSegmentMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=smartReplyAllowlistCovered" })
+  @SpeakeasyMetadata({ data: "json, name=smartReplyAllowlistCovered" })
   smartReplyAllowlistCovered?: boolean;
 }

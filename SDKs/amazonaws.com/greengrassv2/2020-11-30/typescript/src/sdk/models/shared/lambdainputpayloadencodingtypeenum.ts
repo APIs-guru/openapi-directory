@@ -1,6 +1,7 @@
 
 
+
 export enum LambdaInputPayloadEncodingTypeEnum {
-    Json = "json"
-,    Binary = "binary"
+    Json = "json",
+    Binary = "binary"
 }

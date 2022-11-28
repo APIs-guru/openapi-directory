@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchLogsLogDelivery
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The settings for delivering connector logs to Amazon CloudWatch Logs.
 **/
 export class CloudWatchLogsLogDelivery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=logGroup" })
+  @SpeakeasyMetadata({ data: "json, name=logGroup" })
   logGroup?: string;
 }

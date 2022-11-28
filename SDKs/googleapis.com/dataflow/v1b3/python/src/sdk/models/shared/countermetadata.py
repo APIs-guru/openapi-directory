@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CounterMetadataKindEnum(str, Enum):
     INVALID = "INVALID"
@@ -28,8 +30,12 @@ class CounterMetadataStandardUnitsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CounterMetadata:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    kind: Optional[CounterMetadataKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    other_units: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'otherUnits' }})
-    standard_units: Optional[CounterMetadataStandardUnitsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'standardUnits' }})
+    r"""CounterMetadata
+    CounterMetadata includes all static non-name non-value counter attributes.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    kind: Optional[CounterMetadataKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    other_units: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('otherUnits') }})
+    standard_units: Optional[CounterMetadataStandardUnitsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('standardUnits') }})
     

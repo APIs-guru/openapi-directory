@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateScheduledAuditPathParams:
-    scheduled_audit_name: str = field(default=None, metadata={'path_param': { 'field_name': 'scheduledAuditName', 'style': 'simple', 'explode': False }})
+    scheduled_audit_name: str = field(metadata={'path_param': { 'field_name': 'scheduledAuditName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -38,28 +43,28 @@ class CreateScheduledAuditRequestBodyFrequencyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateScheduledAuditRequestBody:
-    day_of_month: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfMonth' }})
-    day_of_week: Optional[CreateScheduledAuditRequestBodyDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfWeek' }})
-    frequency: CreateScheduledAuditRequestBodyFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequency' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    target_check_names: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetCheckNames' }})
+    frequency: CreateScheduledAuditRequestBodyFrequencyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequency') }})
+    target_check_names: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetCheckNames') }})
+    day_of_month: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfMonth') }})
+    day_of_week: Optional[CreateScheduledAuditRequestBodyDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfWeek') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateScheduledAuditRequest:
-    path_params: CreateScheduledAuditPathParams = field(default=None)
-    headers: CreateScheduledAuditHeaders = field(default=None)
-    request: CreateScheduledAuditRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateScheduledAuditHeaders = field()
+    path_params: CreateScheduledAuditPathParams = field()
+    request: CreateScheduledAuditRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateScheduledAuditResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_scheduled_audit_response: Optional[shared.CreateScheduledAuditResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

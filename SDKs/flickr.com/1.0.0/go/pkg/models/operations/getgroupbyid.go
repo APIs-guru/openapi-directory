@@ -11,13 +11,13 @@ type GetGroupByIDQueryParams struct {
 	Lang           *string `queryParam:"style=form,explode=true,name=lang"`
 }
 
-type GetGroupByIDRequest struct {
-	QueryParams GetGroupByIDQueryParams
-}
-
 type GetGroupByID200ApplicationJSON struct {
 	Group *shared.Group `json:"group,omitempty"`
 	Stat  *string       `json:"stat,omitempty"`
+}
+
+type GetGroupByIDRequest struct {
+	QueryParams GetGroupByIDQueryParams
 }
 
 type GetGroupByIDResponse struct {

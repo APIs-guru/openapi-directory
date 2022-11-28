@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineObject } from "./pipelineobject";
+
 
 
 // TaskObject
@@ -8,15 +8,15 @@ import { PipelineObject } from "./pipelineobject";
  * Contains information about a pipeline task that is assigned to a task runner.
 **/
 export class TaskObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attemptId" })
+  @SpeakeasyMetadata({ data: "json, name=attemptId" })
   attemptId?: string;
 
-  @Metadata({ data: "json, name=objects", elemType: shared.PipelineObject })
+  @SpeakeasyMetadata({ data: "json, name=objects", elemType: PipelineObject })
   objects?: Map<string, PipelineObject>;
 
-  @Metadata({ data: "json, name=pipelineId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineId" })
   pipelineId?: string;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 }

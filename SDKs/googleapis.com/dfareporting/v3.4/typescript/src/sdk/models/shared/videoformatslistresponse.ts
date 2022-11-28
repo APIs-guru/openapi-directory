@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoFormat } from "./videoformat";
+
 
 
 // VideoFormatsListResponse
@@ -8,9 +8,9 @@ import { VideoFormat } from "./videoformat";
  * Video Format List Response
 **/
 export class VideoFormatsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=videoFormats", elemType: shared.VideoFormat })
+  @SpeakeasyMetadata({ data: "json, name=videoFormats", elemType: VideoFormat })
   videoFormats?: VideoFormat[];
 }

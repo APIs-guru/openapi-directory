@@ -9,10 +9,6 @@ type GetTransactionsByIDPathParams struct {
 	Ican int64 `pathParam:"style=simple,explode=false,name=ican"`
 }
 
-type GetTransactionsByIDRequest struct {
-	PathParams GetTransactionsByIDPathParams
-}
-
 type GetTransactionsByIDTransactionRelatedCard struct {
 	Alias              *string    `json:"alias,omitempty"`
 	CardID             *float64   `json:"cardId,omitempty"`
@@ -154,6 +150,10 @@ type GetTransactionsByIDTransaction struct {
 	TaxAmount                *int64                                                                                                   `json:"taxAmount,omitempty"`
 	TxnID                    *int64                                                                                                   `json:"txnId,omitempty"`
 	Type                     *string                                                                                                  `json:"type,omitempty"`
+}
+
+type GetTransactionsByIDRequest struct {
+	PathParams GetTransactionsByIDPathParams
 }
 
 type GetTransactionsByIDResponse struct {

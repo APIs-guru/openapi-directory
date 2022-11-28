@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LanguageCodesSet
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used with equivalent term set glossaries.
 **/
 export class LanguageCodesSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCodes" })
+  @SpeakeasyMetadata({ data: "json, name=languageCodes" })
   languageCodes?: string[];
 }

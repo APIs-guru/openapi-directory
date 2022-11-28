@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    step_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
-    test_case_id: str = field(default=None, metadata={'path_param': { 'field_name': 'testCaseId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    step_id: str = field(metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
+    test_case_id: str = field(metadata={'path_param': { 'field_name': 'testCaseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_case: Optional[shared.TestCase] = field(default=None)
     

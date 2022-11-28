@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
+
 
 
 // TableError
@@ -7,9 +8,9 @@ import { ErrorDetail } from "./errordetail";
  * An error record for table operations.
 **/
 export class TableError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorDetail" })
   errorDetail?: ErrorDetail;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 }

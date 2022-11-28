@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutSessionPathParams = /** @class */ (function (_super) {
     __extends(PutSessionPathParams, _super);
@@ -30,15 +30,15 @@ var PutSessionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=botAlias" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botAlias" }),
         __metadata("design:type", String)
     ], PutSessionPathParams.prototype, "botAlias", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=botName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botName" }),
         __metadata("design:type", String)
     ], PutSessionPathParams.prototype, "botName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
         __metadata("design:type", String)
     ], PutSessionPathParams.prototype, "userId", void 0);
     return PutSessionPathParams;
@@ -50,35 +50,35 @@ var PutSessionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "accept", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], PutSessionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return PutSessionHeaders;
@@ -94,31 +94,31 @@ var PutSessionRequestBodyDialogAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fulfillmentState" }),
+        SpeakeasyMetadata({ data: "json, name=fulfillmentState" }),
         __metadata("design:type", String)
     ], PutSessionRequestBodyDialogAction.prototype, "fulfillmentState", void 0);
     __decorate([
-        Metadata({ data: "json, name=intentName" }),
+        SpeakeasyMetadata({ data: "json, name=intentName" }),
         __metadata("design:type", String)
     ], PutSessionRequestBodyDialogAction.prototype, "intentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], PutSessionRequestBodyDialogAction.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageFormat" }),
+        SpeakeasyMetadata({ data: "json, name=messageFormat" }),
         __metadata("design:type", String)
     ], PutSessionRequestBodyDialogAction.prototype, "messageFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=slotToElicit" }),
+        SpeakeasyMetadata({ data: "json, name=slotToElicit" }),
         __metadata("design:type", String)
     ], PutSessionRequestBodyDialogAction.prototype, "slotToElicit", void 0);
     __decorate([
-        Metadata({ data: "json, name=slots" }),
+        SpeakeasyMetadata({ data: "json, name=slots" }),
         __metadata("design:type", Map)
     ], PutSessionRequestBodyDialogAction.prototype, "slots", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], PutSessionRequestBodyDialogAction.prototype, "type", void 0);
     return PutSessionRequestBodyDialogAction;
@@ -130,19 +130,19 @@ var PutSessionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext }),
+        SpeakeasyMetadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext }),
         __metadata("design:type", Array)
     ], PutSessionRequestBody.prototype, "activeContexts", void 0);
     __decorate([
-        Metadata({ data: "json, name=dialogAction" }),
+        SpeakeasyMetadata({ data: "json, name=dialogAction" }),
         __metadata("design:type", PutSessionRequestBodyDialogAction)
     ], PutSessionRequestBody.prototype, "dialogAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=recentIntentSummaryView", elemType: shared.IntentSummary }),
+        SpeakeasyMetadata({ data: "json, name=recentIntentSummaryView", elemType: shared.IntentSummary }),
         __metadata("design:type", Array)
     ], PutSessionRequestBody.prototype, "recentIntentSummaryView", void 0);
     __decorate([
-        Metadata({ data: "json, name=sessionAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=sessionAttributes" }),
         __metadata("design:type", Map)
     ], PutSessionRequestBody.prototype, "sessionAttributes", void 0);
     return PutSessionRequestBody;
@@ -154,15 +154,15 @@ var PutSessionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutSessionPathParams)
     ], PutSessionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutSessionHeaders)
     ], PutSessionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PutSessionRequestBody)
     ], PutSessionRequest.prototype, "request", void 0);
     return PutSessionRequest;
@@ -174,47 +174,47 @@ var PutSessionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "badGatewayException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutSessionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "dependencyFailedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "notAcceptableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutSessionResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PutSessionResponse)
     ], PutSessionResponse.prototype, "putSessionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutSessionResponse.prototype, "statusCode", void 0);
     return PutSessionResponse;

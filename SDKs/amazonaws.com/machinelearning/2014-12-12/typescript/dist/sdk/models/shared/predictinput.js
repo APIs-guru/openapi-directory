@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PredictInput = /** @class */ (function (_super) {
     __extends(PredictInput, _super);
     function PredictInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MLModelId" }),
+        SpeakeasyMetadata({ data: "json, name=MLModelId" }),
         __metadata("design:type", String)
     ], PredictInput.prototype, "mlModelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PredictEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=PredictEndpoint" }),
         __metadata("design:type", String)
     ], PredictInput.prototype, "predictEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=Record" }),
+        SpeakeasyMetadata({ data: "json, name=Record" }),
         __metadata("design:type", Map)
     ], PredictInput.prototype, "record", void 0);
     return PredictInput;

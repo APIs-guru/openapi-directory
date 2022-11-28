@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListRequest:
-    path_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListPathParams = field()
+    query_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListQueryParams = field()
+    security: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinksListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_display_video360_advertiser_links_response: Optional[shared.GoogleAnalyticsAdminV1alphaListDisplayVideo360AdvertiserLinksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,30 +5,30 @@ from sdk.models import shared
 
 @dataclass
 class RemoveVideosFromProjectAlt1PathParams:
-    project_id: float = field(default=None, metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
+    project_id: float = field(metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RemoveVideosFromProjectAlt1QueryParams:
+    uris: str = field(metadata={'query_param': { 'field_name': 'uris', 'style': 'form', 'explode': True }})
     should_delete_clips: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'should_delete_clips', 'style': 'form', 'explode': True }})
-    uris: str = field(default=None, metadata={'query_param': { 'field_name': 'uris', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class RemoveVideosFromProjectAlt1Security:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RemoveVideosFromProjectAlt1Request:
-    path_params: RemoveVideosFromProjectAlt1PathParams = field(default=None)
-    query_params: RemoveVideosFromProjectAlt1QueryParams = field(default=None)
-    security: RemoveVideosFromProjectAlt1Security = field(default=None)
+    path_params: RemoveVideosFromProjectAlt1PathParams = field()
+    query_params: RemoveVideosFromProjectAlt1QueryParams = field()
+    security: RemoveVideosFromProjectAlt1Security = field()
     
 
 @dataclass
 class RemoveVideosFromProjectAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     

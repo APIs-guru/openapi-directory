@@ -14,11 +14,6 @@ type BookingMybookingsHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type BookingMybookingsRequest struct {
-	QueryParams BookingMybookingsQueryParams
-	Headers     BookingMybookingsHeaders
-}
-
 type BookingMybookings200ApplicationJSONDataItemSummariesMerchantTermsAndConditionsCancellationFromTourDate struct {
 	DayRangeMax          *int64 `json:"dayRangeMax,omitempty"`
 	DayRangeMin          *int64 `json:"dayRangeMin,omitempty"`
@@ -125,6 +120,11 @@ type BookingMybookings200ApplicationJSON struct {
 	Success          *bool                                    `json:"success,omitempty"`
 	TotalCount       *int64                                   `json:"totalCount,omitempty"`
 	Vmid             *string                                  `json:"vmid,omitempty"`
+}
+
+type BookingMybookingsRequest struct {
+	QueryParams BookingMybookingsQueryParams
+	Headers     BookingMybookingsHeaders
 }
 
 type BookingMybookingsResponse struct {

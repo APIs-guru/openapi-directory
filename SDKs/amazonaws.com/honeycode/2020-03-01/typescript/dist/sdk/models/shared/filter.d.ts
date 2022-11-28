@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  An object that represents a filter formula along with the id of the context row under which the filter function needs to evaluate.
 **/

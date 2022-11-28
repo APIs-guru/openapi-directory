@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudChannelV1ListTransferableSkusRequest
+// Request message for CloudChannelService.ListTransferableSkus
 type GoogleCloudChannelV1ListTransferableSkusRequest struct {
 	AuthToken       *string `json:"authToken,omitempty"`
 	CloudIdentityID *string `json:"cloudIdentityId,omitempty"`

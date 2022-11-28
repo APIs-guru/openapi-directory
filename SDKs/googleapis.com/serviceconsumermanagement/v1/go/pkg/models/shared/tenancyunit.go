@@ -1,5 +1,7 @@
 package shared
 
+// TenancyUnit
+// Representation of a tenancy unit.
 type TenancyUnit struct {
 	Consumer        *string          `json:"consumer,omitempty"`
 	CreateTime      *string          `json:"createTime,omitempty"`

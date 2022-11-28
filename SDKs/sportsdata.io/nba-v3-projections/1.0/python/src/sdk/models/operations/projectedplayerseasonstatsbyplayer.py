@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 class ProjectedPlayerSeasonStatsByPlayerFormatEnum(str, Enum):
     XML = "XML"
@@ -8,19 +9,19 @@ class ProjectedPlayerSeasonStatsByPlayerFormatEnum(str, Enum):
 
 @dataclass
 class ProjectedPlayerSeasonStatsByPlayerPathParams:
-    format: ProjectedPlayerSeasonStatsByPlayerFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    playerid: str = field(default=None, metadata={'path_param': { 'field_name': 'playerid', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    format: ProjectedPlayerSeasonStatsByPlayerFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    playerid: str = field(metadata={'path_param': { 'field_name': 'playerid', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProjectedPlayerSeasonStatsByPlayerRequest:
-    path_params: ProjectedPlayerSeasonStatsByPlayerPathParams = field(default=None)
+    path_params: ProjectedPlayerSeasonStatsByPlayerPathParams = field()
     
 
 @dataclass
 class ProjectedPlayerSeasonStatsByPlayerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_season_projection: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

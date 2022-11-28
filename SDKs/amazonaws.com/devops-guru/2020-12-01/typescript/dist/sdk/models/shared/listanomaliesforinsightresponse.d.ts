@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProactiveAnomalySummary } from "./proactiveanomalysummary";
 import { ReactiveAnomalySummary } from "./reactiveanomalysummary";
 export declare class ListAnomaliesForInsightResponse extends SpeakeasyBase {

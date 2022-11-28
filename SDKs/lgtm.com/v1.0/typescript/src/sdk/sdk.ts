@@ -1,18 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromResponse} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://lgtm.com/api/v1.0",
+export const ServerList = [
+	"https://lgtm.com/api/v1.0",
 ] as const;
 
 export function WithServerURL(
@@ -23,52 +19,51 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // AbortUpload - Abort database upload process
-  /** 
+  /**
+   * abortUpload - Abort database upload process
+   *
    * Aborts the specified upload session and deletes any uploaded parts. After the session is aborted it cannot be restarted.
    * If any part uploads are in progress when the session is aborted, their data may not be deleted. To ensure that uploaded parts are deleted correctly, you should only abort an upload session after all part uploads have completed.
    * 
   **/
-  AbortUpload(
+  abortUpload(
     req: operations.AbortUploadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AbortUploadResponse> {
@@ -76,22 +71,24 @@ export class SDK {
       req = new operations.AbortUploadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/snapshots/uploads/{session-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AbortUploadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AbortUploadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operation = httpRes?.data;
             }
             break;
@@ -103,8 +100,9 @@ export class SDK {
   }
 
   
-  // AddProject - Add a project to LGTM
-  /** 
+  /**
+   * addProject - Add a project to LGTM
+   *
    * LGTM administrators can add a new project to LGTM by providing a repository URL. By default, LGTM tries to build and analyze the project in the same way as for projects added through the user interface. If at least one language is successfully analyzed, and the repository doesn't already exist on LGTM, a new project is created. If the project already exists but your API call triggers a successful analysis  of additional languages, LGTM adds those languages to the project.
    * 
    * You can configure how LGTM processes the project using query parameters to:
@@ -118,7 +116,7 @@ export class SDK {
    * With any of these options, you can also include an `lgtm.yml` in the body of the request to [customize extraction](https://lgtm.com/help/lgtm/customizing-code-extraction).
    * 
   **/
-  AddProject(
+  addProject(
     req: operations.AddProjectRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AddProjectResponse> {
@@ -126,22 +124,22 @@ export class SDK {
       req = new operations.AddProjectRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/projects";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -152,20 +150,21 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddProjectResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AddProjectResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operation = httpRes?.data;
             }
             break;
@@ -177,14 +176,15 @@ export class SDK {
   }
 
   
-  // CompleteUpload - Complete snapshot upload session
-  /** 
+  /**
+   * completeUpload - Complete snapshot upload session
+   *
    * Completes the database upload by closing the upload session, upgrading the database if appropriate, and scheduling analysis of that snapshot of the codebase.
    * 
    * You can view the analysis progress and access the results using the `task-result-url`.
    * 
   **/
-  CompleteUpload(
+  completeUpload(
     req: operations.CompleteUploadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CompleteUploadResponse> {
@@ -192,22 +192,24 @@ export class SDK {
       req = new operations.CompleteUploadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/snapshots/uploads/{session-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompleteUploadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CompleteUploadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operation = httpRes?.data;
             }
             break;
@@ -219,12 +221,13 @@ export class SDK {
   }
 
   
-  // CreateQueryJob - Run a CodeQL query on one or more projects
-  /** 
+  /**
+   * createQueryJob - Run a CodeQL query on one or more projects
+   *
    * Submit a query to run on one or more projects on LGTM. The query is included in the body of the request.
    * 
   **/
-  CreateQueryJob(
+  createQueryJob(
     req: operations.CreateQueryJobRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateQueryJobResponse> {
@@ -232,22 +235,22 @@ export class SDK {
       req = new operations.CreateQueryJobRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/queryjobs";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -258,22 +261,22 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateQueryJobResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateQueryJobResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operation = httpRes?.data;
             }
             break;
@@ -285,13 +288,14 @@ export class SDK {
   }
 
   
-  // DeleteProject - Delete project by numeric identifier
-  /** 
+  /**
+   * deleteProject - Delete project by numeric identifier
+   *
    * Delete a project with a particular numeric project identifier.
    * In addition to access to the project, administrative access to LGTM or the LGTM Enterprise instance is required to delete projects.
    * 
   **/
-  DeleteProject(
+  deleteProject(
     req: operations.DeleteProjectRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteProjectResponse> {
@@ -299,22 +303,24 @@ export class SDK {
       req = new operations.DeleteProjectRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/projects/{project-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteProjectResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteProjectResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.projectDetails = httpRes?.data;
             }
             break;
@@ -326,8 +332,9 @@ export class SDK {
   }
 
   
-  // GetAlerts - Get detailed alert information
-  /** 
+  /**
+   * getAlerts - Get detailed alert information
+   *
    * Download all the alerts found by an analysis.
    * Use the `Accept:` request header to specify the output media type as either CSV or [SARIF](https://lgtm.com/help/lgtm/sarif-results-file): 
    * 
@@ -349,7 +356,7 @@ export class SDK {
    * To find the analysis identifier for a commit, use the `/analyses/{project-id}/commits/{commit-id}`  endpoint. For more information, see [Get analysis summary for a specific commit](https://lgtm.com/help/lgtm/api/api-v1#opIdgetAnalysisForCommit). 
    * 
   **/
-  GetAlerts(
+  getAlerts(
     req: operations.GetAlertsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAlertsResponse> {
@@ -357,11 +364,12 @@ export class SDK {
       req = new operations.GetAlertsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/analyses/{analysis-id}/alerts", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -370,23 +378,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAlertsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAlertsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAlerts200ApplicationJsonObject = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/sarif+json`)) {
+            if (utils.MatchContentType(contentType, `application/sarif+json`)) {
                 res.getAlerts200ApplicationSarifPlusJsonObject = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/csv`)) {
+            if (utils.MatchContentType(contentType, `text/csv`)) {
                 res.getAlerts200TextCsvString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -398,8 +407,9 @@ export class SDK {
   }
 
   
-  // GetAnalysis - Get analysis summary
-  /** 
+  /**
+   * getAnalysis - Get analysis summary
+   *
    * Get a summary of the analysis results for a specific analysis identifier.
    * 
    * To find the analysis identifier for a commit, use the `/analyses/{project-id}/commits/{commit-id}` endpoint. For more information, see [Get analysis summary for a specific commit](https://lgtm.com/help/lgtm/api/api-v1#opIdgetAnalysisForCommit).
@@ -407,7 +417,7 @@ export class SDK {
    * This endpoint reports the commit analyzed and a summary of the results for each language. Alternatively, you can use this identifier to download full details  of all the alerts found by the analysis. For more information, see [Get detailed alert information](https://lgtm.com/help/lgtm/api/api-v1#opIdgetAlerts).
    * 
   **/
-  GetAnalysis(
+  getAnalysis(
     req: operations.GetAnalysisRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnalysisResponse> {
@@ -415,22 +425,24 @@ export class SDK {
       req = new operations.GetAnalysisRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/analyses/{analysis-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnalysisResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAnalysisResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.analysis = httpRes?.data;
             }
             break;
@@ -442,14 +454,15 @@ export class SDK {
   }
 
   
-  // GetAnalysisForCommit - Get analysis summary for a specific commit
-  /** 
+  /**
+   * getAnalysisForCommit - Get analysis summary for a specific commit
+   *
    * Get a summary of the analysis results for a specific commit, or the latest commit, to a project. (For projects configured for sparse or upload analysis, only `latest` is supported.) 
    * 
    * This endpoint reports a summary of results for each language, and also the analysis identifier. You can use the analysis identifier to download full details of all the alerts  found by the analysis. For more information, see [Get detailed alert information](https://lgtm.com/help/lgtm/api/api-v1#opIdgetAlerts).
    * 
   **/
-  GetAnalysisForCommit(
+  getAnalysisForCommit(
     req: operations.GetAnalysisForCommitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnalysisForCommitResponse> {
@@ -457,22 +470,24 @@ export class SDK {
       req = new operations.GetAnalysisForCommitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/analyses/{project-id}/commits/{commit-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnalysisForCommitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAnalysisForCommitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.analysis = httpRes?.data;
             }
             break;
@@ -484,8 +499,9 @@ export class SDK {
   }
 
   
-  // GetCodeReview - Get results of code review
-  /** 
+  /**
+   * getCodeReview - Get results of code review
+   *
    * Get the results of a code review using the review identifier for the task.
    * 
    * When you request a code review, the response includes a task result URL of the form: `/codereviews/{review-id}`.
@@ -493,7 +509,7 @@ export class SDK {
    * This endpoint reports the results of a complete code review, or the status of a review  that's still in progress.
    * 
   **/
-  GetCodeReview(
+  getCodeReview(
     req: operations.GetCodeReviewRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCodeReviewResponse> {
@@ -501,22 +517,24 @@ export class SDK {
       req = new operations.GetCodeReviewRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/codereviews/{review-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCodeReviewResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCodeReviewResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.codeReviews = httpRes?.data;
             }
             break;
@@ -528,13 +546,14 @@ export class SDK {
   }
 
   
-  // GetHealth - Get a summary of the application's health
-  /** 
+  /**
+   * getHealth - Get a summary of the application's health
+   *
    * Return an indication of whether the application is working as expected (up) or needs  attention (down). 
    * \> The `description` and `details` fields are reported only if the request includes an access token for a user account that has administration rights for this LGTM server.
    * 
   **/
-  GetHealth(
+  getHealth(
     req: operations.GetHealthRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetHealthResponse> {
@@ -542,27 +561,29 @@ export class SDK {
       req = new operations.GetHealthRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/system/health";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetHealthResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetHealthResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.health = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.health = httpRes?.data;
             }
             break;
@@ -574,12 +595,13 @@ export class SDK {
   }
 
   
-  // GetIssue - Get detailed alert information for an issue
-  /** 
+  /**
+   * getIssue - Get detailed alert information for an issue
+   *
    * Fetch the alert information for an issue in [SARIF](https://lgtm.com/help/lgtm/sarif-results-file) format.
    * 
   **/
-  GetIssue(
+  getIssue(
     req: operations.GetIssueRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetIssueResponse> {
@@ -587,22 +609,24 @@ export class SDK {
       req = new operations.GetIssueRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/issues/{project-id}/{alert-key}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetIssueResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/sarif+json`)) {
+        const res: operations.GetIssueResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/sarif+json`)) {
                 res.getIssue200ApplicationSarifPlusJsonObject = httpRes?.data;
             }
             break;
@@ -614,12 +638,13 @@ export class SDK {
   }
 
   
-  // GetMetric - Get the computed values of the specified metric
-  /** 
+  /**
+   * getMetric - Get the computed values of the specified metric
+   *
    * LGTM administrators can download usage data using this endpoint. The response includes up to 1000 values for the specified metric and reports the date-time that each value was calculated. There is normally one value per day.
    * 
   **/
-  GetMetric(
+  getMetric(
     req: operations.GetMetricRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMetricResponse> {
@@ -627,22 +652,24 @@ export class SDK {
       req = new operations.GetMetricRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/system/metrics/{metric-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMetricResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMetricResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.metric = httpRes?.data;
             }
             break;
@@ -654,12 +681,13 @@ export class SDK {
   }
 
   
-  // GetMetrics - Get the identifiers and descriptions of the usage metrics
-  /** 
+  /**
+   * getMetrics - Get the identifiers and descriptions of the usage metrics
+   *
    * LGTM administrators can use this endpoint to list the usage metrics that are available to download.
    * 
   **/
-  GetMetrics(
+  getMetrics(
     req: operations.GetMetricsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMetricsResponse> {
@@ -667,22 +695,24 @@ export class SDK {
       req = new operations.GetMetricsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/system/metrics";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMetricsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMetricsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.metricsList = httpRes?.data;
             }
             break;
@@ -694,12 +724,13 @@ export class SDK {
   }
 
   
-  // GetOperation - Get operation status
-  /** 
+  /**
+   * getOperation - Get operation status
+   *
    * Track progress of a long-running operation using the operations identifier returned when you  created the operation. For example, by triggering the analysis of a commit, or the code review of a patch. For both LGTM.com and LGTM Enterprise, you must include an access token with the `operations:read` scope.
    * 
   **/
-  GetOperation(
+  getOperation(
     req: operations.GetOperationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetOperationResponse> {
@@ -707,22 +738,24 @@ export class SDK {
       req = new operations.GetOperationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/operations/{operation-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetOperationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetOperationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operation = httpRes?.data;
             }
             break;
@@ -734,14 +767,15 @@ export class SDK {
   }
 
   
-  // GetProject - Get project by numeric identifier
-  /** 
+  /**
+   * getProject - Get project by numeric identifier
+   *
    * Get the latest summary for a specific project using the numeric project identifier.
    * 
    * To find the LGTM identifier for a project, list all projects using the `/projects`  endpoint and look up the project by name. Alternatively, use the `/projects/{provider}/{org}/{name}` endpoint. If you have administration access, the project identifier is also displayed in  the administration page for the project.
    * 
   **/
-  GetProject(
+  getProject(
     req: operations.GetProjectRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectResponse> {
@@ -749,22 +783,24 @@ export class SDK {
       req = new operations.GetProjectRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/projects/{project-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.projectDetails = httpRes?.data;
             }
             break;
@@ -776,14 +812,15 @@ export class SDK {
   }
 
   
-  // GetProjectByUrlIdentifier - Get project by URL identifier
-  /** 
+  /**
+   * getProjectByUrlIdentifier - Get project by URL identifier
+   *
    * Get the latest summary for a specific project using the project's URL identifier `{provider}/{org}/{name}`.
    * 
    * To find the URL identifier for a project, view the project overview page in LGTM. The URL identifier follows after `/projects`. For example, for a project with the URL `https://lgtm.example.com/projects/g/apache/commons-io` the URL identifier is `g/apache/commons-io`. In the example, `g` represents the `provider` (repository host), `apache` is the `organization` and `commons-io` is the `name` of the repository.
    * 
   **/
-  GetProjectByUrlIdentifier(
+  getProjectByUrlIdentifier(
     req: operations.GetProjectByUrlIdentifierRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectByUrlIdentifierResponse> {
@@ -791,26 +828,28 @@ export class SDK {
       req = new operations.GetProjectByUrlIdentifierRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/projects/{provider}/{org}/{name}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectByUrlIdentifierResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectByUrlIdentifierResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.projectDetails = httpRes?.data;
             }
             break;
-          case 307:
+          case httpRes?.status == 307:
             break;
         }
 
@@ -820,11 +859,12 @@ export class SDK {
   }
 
   
-  // GetProjectConfig - Get configuration for a project identified by numeric identifier
-  /** 
+  /**
+   * getProjectConfig - Get configuration for a project identified by numeric identifier
+   *
    * Get the latest configuration for a specific project using the numeric project identifier.
   **/
-  GetProjectConfig(
+  getProjectConfig(
     req: operations.GetProjectConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectConfigResponse> {
@@ -832,11 +872,12 @@ export class SDK {
       req = new operations.GetProjectConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/projects/{project-id}/settings/analysis-configuration", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -845,25 +886,26 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/x-yaml`)) {
+        const res: operations.GetProjectConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getProjectConfig400ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -875,8 +917,9 @@ export class SDK {
   }
 
   
-  // GetProjects - List projects
-  /** 
+  /**
+   * getProjects - List projects
+   *
    * List all the projects the current user has authorization to view. 
    * 
    * A maximum of 100 projects are returned in each response. When further results are available, the response includes the URL you need to request the next page of results.
@@ -886,7 +929,7 @@ export class SDK {
    * When more than one page of results is available, each response includes a `nextPageUrl` response parameter. You can use this URL to request the next page of results. The `nextPageUrl` includes an automatically generated `start` parameter, which specifies the projects to return in the next page of results.
    * 
   **/
-  GetProjects(
+  getProjects(
     req: operations.GetProjectsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectsResponse> {
@@ -894,11 +937,12 @@ export class SDK {
       req = new operations.GetProjectsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/projects";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -907,17 +951,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.projectList = httpRes?.data;
             }
             break;
@@ -929,14 +974,15 @@ export class SDK {
   }
 
   
-  // GetQueryJob - Get the status of a query job
-  /** 
+  /**
+   * getQueryJob - Get the status of a query job
+   *
    * Get the status of a query job using the query job identifier for the task.
    * 
    * When you create a query job, the response includes a task result URL of the form: `/queryjobs/{queryjob-id}`.
    * 
   **/
-  GetQueryJob(
+  getQueryJob(
     req: operations.GetQueryJobRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQueryJobResponse> {
@@ -944,22 +990,24 @@ export class SDK {
       req = new operations.GetQueryJobRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/queryjobs/{queryjob-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQueryJobResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetQueryJobResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.queryjob = httpRes?.data;
             }
             break;
@@ -971,12 +1019,13 @@ export class SDK {
   }
 
   
-  // GetQueryJobResultsForProject - Fetch the results of a query job for a specific project
-  /** 
+  /**
+   * getQueryJobResultsForProject - Fetch the results of a query job for a specific project
+   *
    * Fetch the results for a specific project. The endpoint succeeds only if the query was successful,  and returns a `404` error otherwise.  By default, the endpoint provides only results that are within the source tree. To obtain all results, specify the `nofilter` parameter.
    * 
   **/
-  GetQueryJobResultsForProject(
+  getQueryJobResultsForProject(
     req: operations.GetQueryJobResultsForProjectRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQueryJobResultsForProjectResponse> {
@@ -984,11 +1033,12 @@ export class SDK {
       req = new operations.GetQueryJobResultsForProjectRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/queryjobs/{queryjob-id}/results/{project-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -997,17 +1047,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQueryJobResultsForProjectResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetQueryJobResultsForProjectResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.queryjobProjectResults = httpRes?.data;
             }
             break;
@@ -1019,8 +1070,9 @@ export class SDK {
   }
 
   
-  // GetQueryJobResultsOverview - Provide a summary of results for the projects in the query job
-  /** 
+  /**
+   * getQueryJobResultsOverview - Provide a summary of results for the projects in the query job
+   *
    * This endpoint provides a summary of the results generated by completed query runs for each  project specified in the the POST /queryjobs endpoint.  For completed query jobs, the summary includes:
    * 
    *   * The number of results for successful query runs.
@@ -1029,7 +1081,7 @@ export class SDK {
    * No information is included in the response for any project for which the query  run is still in progress.
    * 
   **/
-  GetQueryJobResultsOverview(
+  getQueryJobResultsOverview(
     req: operations.GetQueryJobResultsOverviewRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQueryJobResultsOverviewResponse> {
@@ -1037,11 +1089,12 @@ export class SDK {
       req = new operations.GetQueryJobResultsOverviewRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/queryjobs/{queryjob-id}/results", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1050,17 +1103,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQueryJobResultsOverviewResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetQueryJobResultsOverviewResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.queryjobResultsOverview = httpRes?.data;
             }
             break;
@@ -1072,8 +1126,9 @@ export class SDK {
   }
 
   
-  // GetSnapshot - Download a snapshot
-  /** 
+  /**
+   * getSnapshot - Download a snapshot
+   *
    * Download a CodeQL database from LGTM, representing a snapshot of the codebase, to run queries in your IDE.
    * 
    * This endpoint works for projects that have been successfully analyzed for the language specified in the request.  A successful request redirects you to a URL for downloading a database that represents the code snapshot, as specified in the `Location:` header in the response. Therefore, your HTTP client should be configured to follow redirects. For example, if you are using `curl`, you can add the`-L` flag to the command.
@@ -1081,7 +1136,7 @@ export class SDK {
    * The database is downloaded as a zip file that can be imported into an IDE equipped with a  CodeQL extension. The extension must be up to date to analyze databases downloaded from LGTM. For more information on running queries locally in your IDE, see [Runnning queries in your IDE](https://lgtm.com/help/lgtm/running-queries-ide). 
    * 
   **/
-  GetSnapshot(
+  getSnapshot(
     req: operations.GetSnapshotRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSnapshotResponse> {
@@ -1089,21 +1144,23 @@ export class SDK {
       req = new operations.GetSnapshotRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/snapshots/{project-id}/{language}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSnapshotResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 303:
+        const res: operations.GetSnapshotResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 303:
             break;
         }
 
@@ -1113,31 +1170,31 @@ export class SDK {
   }
 
   
-  // GetSpec - API specification
-  /** 
+  /**
+   * getSpec - API specification
+   *
    * Get the specification of this API in [OpenAPI](https://github.com/OAI/OpenAPI-Specification) format. This endpoint does not require an access token. This makes it easier for you to use the specification with third-party tools.
   **/
-  GetSpec(
-    
+  getSpec(
     config?: AxiosRequestConfig
   ): Promise<operations.GetSpecResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/openapi";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSpecResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSpecResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSpec200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1149,11 +1206,12 @@ export class SDK {
   }
 
   
-  // GetVersion - Version information
-  /** 
+  /**
+   * getVersion - Version information
+   *
    * Get the version information of this API.
   **/
-  GetVersion(
+  getVersion(
     req: operations.GetVersionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetVersionResponse> {
@@ -1161,22 +1219,24 @@ export class SDK {
       req = new operations.GetVersionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetVersionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetVersionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.version = httpRes?.data;
             }
             break;
@@ -1188,8 +1248,9 @@ export class SDK {
   }
 
   
-  // InitSnapshotUpload - Start snapshot upload session
-  /** 
+  /**
+   * initSnapshotUpload - Start snapshot upload session
+   *
    * Start a session to upload an externally-built database (which represents a snapshot of a codebase) to a project on LGTM. 
    * 
    * This endpoint works for projects that are already on LGTM, and the selected language of  the database must already be configured. The project must be configured with 'upload' analysis mode. You can upload a "bundled" CodeQL database or a database exported by  the QL command-line tools (`odasa`).
@@ -1200,7 +1261,7 @@ export class SDK {
    * When the upload session has been successfully started, upload the database to the  upload URL returned in the response. The database can be uploaded to the upload URL in parts using  the [`PUT /snapshots/uploads/{session-id}`](https://lgtm.com/help/lgtm/api/api-v1#opIduploadPart) endpoint. After uploading all the parts you must call  the [`POST /snapshots/uploads/{session-id}`](https://lgtm.com/help/lgtm/api/api-v1#opIdcompleteUpload) endpoint to complete the upload session.
    * 
   **/
-  InitSnapshotUpload(
+  initSnapshotUpload(
     req: operations.InitSnapshotUploadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.InitSnapshotUploadResponse> {
@@ -1208,11 +1269,12 @@ export class SDK {
       req = new operations.InitSnapshotUploadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/snapshots/{project-id}/{language}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1221,17 +1283,18 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InitSnapshotUploadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.InitSnapshotUploadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.uploadSession = httpRes?.data;
             }
             break;
@@ -1243,8 +1306,9 @@ export class SDK {
   }
 
   
-  // RequestAnalysis - Run analysis of a specific commit
-  /** 
+  /**
+   * requestAnalysis - Run analysis of a specific commit
+   *
    * Trigger the analysis of a specific commit to a project. If a previous attempt to analyze that commit failed, this triggers a fresh analysis.  This is supported for all LGTM projects, regardless of repository type or host. The commit must be available in the main repository, but can be on a branch that isn't tracked by LGTM. For both LGTM.com and LGTM Enterprise, you must include an access token with the `analyses:write` scope.
    * 
    * When you request the analysis of a commit, the API returns:
@@ -1253,7 +1317,7 @@ export class SDK {
    * - `task-result`: containing information about the progress and results of the analysis.
    * 
   **/
-  RequestAnalysis(
+  requestAnalysis(
     req: operations.RequestAnalysisRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RequestAnalysisResponse> {
@@ -1261,11 +1325,12 @@ export class SDK {
       req = new operations.RequestAnalysisRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/analyses/{project-id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1274,17 +1339,18 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RequestAnalysisResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RequestAnalysisResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operation = httpRes?.data;
             }
             break;
@@ -1296,8 +1362,9 @@ export class SDK {
   }
 
   
-  // RequestReview - Run code review for a patch
-  /** 
+  /**
+   * requestReview - Run code review for a patch
+   *
    * Trigger the code review of a patch. This is available for projects with Git repositories.
    * 
    * Your request must include:
@@ -1313,7 +1380,7 @@ export class SDK {
    * When the review is complete, you can access the results using the task result URL.
    * 
   **/
-  RequestReview(
+  requestReview(
     req: operations.RequestReviewRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RequestReviewResponse> {
@@ -1321,22 +1388,22 @@ export class SDK {
       req = new operations.RequestReviewRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/codereviews/{project-id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1347,22 +1414,22 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RequestReviewResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RequestReviewResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operation = httpRes?.data;
             }
             break;
@@ -1374,11 +1441,12 @@ export class SDK {
   }
 
   
-  // SetProjectConfig - Set the administrator configuration for a project identified by numeric identifier
-  /** 
+  /**
+   * setProjectConfig - Set the administrator configuration for a project identified by numeric identifier
+   *
    * Set the administrator configuration for a specific project using the numeric project identifier.
   **/
-  SetProjectConfig(
+  setProjectConfig(
     req: operations.SetProjectConfigRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetProjectConfigResponse> {
@@ -1386,40 +1454,40 @@ export class SDK {
       req = new operations.SetProjectConfigRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/projects/{project-id}/settings/analysis-configuration", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetProjectConfigResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/x-yaml`)) {
+        const res: operations.SetProjectConfigResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1434,8 +1502,9 @@ export class SDK {
   }
 
   
-  // UploadPart - Upload snapshot
-  /** 
+  /**
+   * uploadPart - Upload snapshot
+   *
    * Upload a database representing a snapshot of a codebase.  The database is sent in one or more parts. Each part is sent in the request body. 
    * Use the [`POST /snapshots/{project-id}/{language}`](https://lgtm.com/help/lgtm/api/api-v1#opIdinitSnapshotUpload) endpoint  to start an upload session before uploading a database part. Database parts must have been generated and prepared for upload using the CodeQL CLI or the QL command-line tools. For further information on exporting externally-built databases,  see [Preparing snapshots to upload to LGTM](https://help.semmle.com/wiki/display/SD/Preparing+snapshots+to+upload+to+LGTM).
    * 
@@ -1444,7 +1513,7 @@ export class SDK {
    * If the upload fails you should retry it with the same data.
    * 
   **/
-  UploadPart(
+  uploadPart(
     req: operations.UploadPartRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UploadPartResponse> {
@@ -1452,39 +1521,39 @@ export class SDK {
       req = new operations.UploadPartRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/snapshots/uploads/{session-id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UploadPartResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UploadPartResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 

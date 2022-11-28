@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import rule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateCallAnalyticsCategoryRequest:
-    category_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CategoryName' }})
-    rules: List[rule.Rule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Rules' }})
+    category_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CategoryName') }})
+    rules: List[Rule] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Rules') }})
     

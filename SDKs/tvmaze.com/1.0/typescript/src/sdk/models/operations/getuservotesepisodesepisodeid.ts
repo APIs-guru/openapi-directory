@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserVotesEpisodesEpisodeIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=episode_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=episode_id" })
   episodeId: number;
 }
 
 
 export class GetUserVotesEpisodesEpisodeIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUserVotesEpisodesEpisodeIdPathParams;
 }
 
 
 export class GetUserVotesEpisodesEpisodeIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   episodeVote?: shared.EpisodeVote;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

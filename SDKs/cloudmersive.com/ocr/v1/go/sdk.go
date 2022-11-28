@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.cloudmersive.com",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ImageOcrImageLinesWithLocation - Convert a scanned image into words with location
+// Converts an uploaded image in common formats such as JPEG, PNG into lines/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrImageLinesWithLocation(ctx context.Context, request operations.ImageOcrImageLinesWithLocationRequest) (*operations.ImageOcrImageLinesWithLocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/image/to/lines-with-location"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -73,7 +96,7 @@ func (s *SDK) ImageOcrImageLinesWithLocation(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -124,8 +147,10 @@ func (s *SDK) ImageOcrImageLinesWithLocation(ctx context.Context, request operat
 	return res, nil
 }
 
+// ImageOcrImageWordsWithLocation - Convert a scanned image into words with location
+// Converts an uploaded image in common formats such as JPEG, PNG into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrImageWordsWithLocation(ctx context.Context, request operations.ImageOcrImageWordsWithLocationRequest) (*operations.ImageOcrImageWordsWithLocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/image/to/words-with-location"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -145,7 +170,7 @@ func (s *SDK) ImageOcrImageWordsWithLocation(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -196,8 +221,10 @@ func (s *SDK) ImageOcrImageWordsWithLocation(ctx context.Context, request operat
 	return res, nil
 }
 
+// ImageOcrPhotoRecognizeBusinessCard - Recognize a photo of a business card, extract key business information
+// Analyzes a photograph of a business card as input, and outputs key business information such as the name of the person, name of the business, the address of the business, the phone number, the email address and more.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrPhotoRecognizeBusinessCard(ctx context.Context, request operations.ImageOcrPhotoRecognizeBusinessCardRequest) (*operations.ImageOcrPhotoRecognizeBusinessCardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/photo/recognize/business-card"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -215,7 +242,7 @@ func (s *SDK) ImageOcrPhotoRecognizeBusinessCard(ctx context.Context, request op
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -266,8 +293,10 @@ func (s *SDK) ImageOcrPhotoRecognizeBusinessCard(ctx context.Context, request op
 	return res, nil
 }
 
+// ImageOcrPhotoRecognizeFormAdvanced - Recognize a photo of a form, extract key fields using stored templates
+// Analyzes a photograph of a form as input, and outputs key business fields and information.  Customzie data to be extracted by defining fields for the form.  Uses template definitions stored in Cloudmersive Configuration; to configure stored templates in a configuration bucket, log into Cloudmersive Management Portal and navigate to Settings &gt; API Configuration &gt; Create Bucket.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrPhotoRecognizeFormAdvanced(ctx context.Context, request operations.ImageOcrPhotoRecognizeFormAdvancedRequest) (*operations.ImageOcrPhotoRecognizeFormAdvancedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/photo/recognize/form/advanced"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -287,7 +316,7 @@ func (s *SDK) ImageOcrPhotoRecognizeFormAdvanced(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -338,8 +367,10 @@ func (s *SDK) ImageOcrPhotoRecognizeFormAdvanced(ctx context.Context, request op
 	return res, nil
 }
 
+// ImageOcrPhotoRecognizeReceipt - Recognize a photo of a receipt, extract key business information
+// Analyzes a photograph of a receipt as input, and outputs key business information such as the name of the business, the address of the business, the phone number of the business, the total of the receipt, the date of the receipt, and more.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrPhotoRecognizeReceipt(ctx context.Context, request operations.ImageOcrPhotoRecognizeReceiptRequest) (*operations.ImageOcrPhotoRecognizeReceiptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/photo/recognize/receipt"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -359,7 +390,7 @@ func (s *SDK) ImageOcrPhotoRecognizeReceipt(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -410,8 +441,10 @@ func (s *SDK) ImageOcrPhotoRecognizeReceipt(ctx context.Context, request operati
 	return res, nil
 }
 
+// ImageOcrPhotoToText - Convert a photo of a document into text
+// Converts an uploaded photo of a document in common formats such as JPEG, PNG into text via Optical Character Recognition.  This API is intended to be run on photos of documents, e.g. taken with a smartphone and supports cases where other content, such as a desk, are in the frame and the camera is crooked.  If you want to OCR a scanned image, use the image/toText API call instead as it is designed for scanned images.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrPhotoToText(ctx context.Context, request operations.ImageOcrPhotoToTextRequest) (*operations.ImageOcrPhotoToTextResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/photo/toText"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -431,7 +464,7 @@ func (s *SDK) ImageOcrPhotoToText(ctx context.Context, request operations.ImageO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -482,8 +515,10 @@ func (s *SDK) ImageOcrPhotoToText(ctx context.Context, request operations.ImageO
 	return res, nil
 }
 
+// ImageOcrPhotoWordsWithLocation - Convert a photo of a document or receipt into words with location
+// Converts a photo of a document or receipt in common formats such as JPEG, PNG into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on photographs of documents.  If you want to OCR scanned documents (e.g. taken with a scanner), be sure to use the image/toText API instead, as it is designed for that use case.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrPhotoWordsWithLocation(ctx context.Context, request operations.ImageOcrPhotoWordsWithLocationRequest) (*operations.ImageOcrPhotoWordsWithLocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/photo/to/words-with-location"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -503,7 +538,7 @@ func (s *SDK) ImageOcrPhotoWordsWithLocation(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -554,8 +589,10 @@ func (s *SDK) ImageOcrPhotoWordsWithLocation(ctx context.Context, request operat
 	return res, nil
 }
 
+// ImageOcrPost - Convert a scanned image into text
+// Converts an uploaded image in common formats such as JPEG, PNG into text via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.  Note: for free tier API keys, it is required to add a credit card to your account for security reasons, to use the free tier key with this API.
 func (s *SDK) ImageOcrPost(ctx context.Context, request operations.ImageOcrPostRequest) (*operations.ImageOcrPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/image/toText"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -575,7 +612,7 @@ func (s *SDK) ImageOcrPost(ctx context.Context, request operations.ImageOcrPostR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -626,8 +663,10 @@ func (s *SDK) ImageOcrPost(ctx context.Context, request operations.ImageOcrPostR
 	return res, nil
 }
 
+// PdfOcrPdfToLinesWithLocation - Convert a PDF into text lines with location
+// Converts a PDF into lines/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
 func (s *SDK) PdfOcrPdfToLinesWithLocation(ctx context.Context, request operations.PdfOcrPdfToLinesWithLocationRequest) (*operations.PdfOcrPdfToLinesWithLocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/pdf/to/lines-with-location"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -647,7 +686,7 @@ func (s *SDK) PdfOcrPdfToLinesWithLocation(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -698,8 +737,10 @@ func (s *SDK) PdfOcrPdfToLinesWithLocation(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PdfOcrPdfToWordsWithLocation - Convert a PDF into words with location
+// Converts a PDF into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
 func (s *SDK) PdfOcrPdfToWordsWithLocation(ctx context.Context, request operations.PdfOcrPdfToWordsWithLocationRequest) (*operations.PdfOcrPdfToWordsWithLocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/pdf/to/words-with-location"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -719,7 +760,7 @@ func (s *SDK) PdfOcrPdfToWordsWithLocation(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -770,8 +811,9 @@ func (s *SDK) PdfOcrPdfToWordsWithLocation(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PdfOcrPost - Converts an uploaded PDF file into text via Optical Character Recognition.
 func (s *SDK) PdfOcrPost(ctx context.Context, request operations.PdfOcrPostRequest) (*operations.PdfOcrPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/pdf/toText"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -791,7 +833,7 @@ func (s *SDK) PdfOcrPost(ctx context.Context, request operations.PdfOcrPostReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -842,8 +884,10 @@ func (s *SDK) PdfOcrPost(ctx context.Context, request operations.PdfOcrPostReque
 	return res, nil
 }
 
+// PreprocessingBinarize - Convert an image of text into a binarized (light and dark) view
+// Perform an adaptive binarization algorithm on the input image to prepare it for further OCR operations.
 func (s *SDK) PreprocessingBinarize(ctx context.Context, request operations.PreprocessingBinarizeRequest) (*operations.PreprocessingBinarizeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/preprocessing/image/binarize"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -861,7 +905,7 @@ func (s *SDK) PreprocessingBinarize(ctx context.Context, request operations.Prep
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -916,8 +960,10 @@ func (s *SDK) PreprocessingBinarize(ctx context.Context, request operations.Prep
 	return res, nil
 }
 
+// PreprocessingBinarizeAdvanced - Convert an image of text into a binary (light and dark) view with ML
+// Perform an advanced adaptive, Deep Learning-based binarization algorithm on the input image to prepare it for further OCR operations.  Provides enhanced accuracy than adaptive binarization.  Image will be upsampled to 300 DPI if it has a DPI below 300.
 func (s *SDK) PreprocessingBinarizeAdvanced(ctx context.Context, request operations.PreprocessingBinarizeAdvancedRequest) (*operations.PreprocessingBinarizeAdvancedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/preprocessing/image/binarize/advanced"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -935,7 +981,7 @@ func (s *SDK) PreprocessingBinarizeAdvanced(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -990,8 +1036,10 @@ func (s *SDK) PreprocessingBinarizeAdvanced(ctx context.Context, request operati
 	return res, nil
 }
 
+// PreprocessingGetPageAngle - Get the angle of the page / document / receipt
+// Analyzes a photo or image of a document and identifies the rotation angle of the page.
 func (s *SDK) PreprocessingGetPageAngle(ctx context.Context, request operations.PreprocessingGetPageAngleRequest) (*operations.PreprocessingGetPageAngleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/preprocessing/image/get-page-angle"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1009,7 +1057,7 @@ func (s *SDK) PreprocessingGetPageAngle(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1060,8 +1108,10 @@ func (s *SDK) PreprocessingGetPageAngle(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PreprocessingUnrotate - Detect and unrotate a document image
+// Detect and unrotate an image of a document (e.g. that was scanned at an angle).  Great for document scanning applications; once unskewed, this image is perfect for converting to PDF using the Convert API or optical character recognition using the OCR API.
 func (s *SDK) PreprocessingUnrotate(ctx context.Context, request operations.PreprocessingUnrotateRequest) (*operations.PreprocessingUnrotateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/preprocessing/image/unrotate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1079,7 +1129,7 @@ func (s *SDK) PreprocessingUnrotate(ctx context.Context, request operations.Prep
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1134,8 +1184,10 @@ func (s *SDK) PreprocessingUnrotate(ctx context.Context, request operations.Prep
 	return res, nil
 }
 
+// PreprocessingUnrotateAdvanced - Detect and unrotate a document image (advanced)
+// Detect and unrotate an image of a document (e.g. that was scanned at an angle) using deep learning.  Great for document scanning applications; once unskewed, this image is perfect for converting to PDF using the Convert API or optical character recognition using the OCR API.
 func (s *SDK) PreprocessingUnrotateAdvanced(ctx context.Context, request operations.PreprocessingUnrotateAdvancedRequest) (*operations.PreprocessingUnrotateAdvancedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/preprocessing/image/unrotate/advanced"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1153,7 +1205,7 @@ func (s *SDK) PreprocessingUnrotateAdvanced(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1208,8 +1260,10 @@ func (s *SDK) PreprocessingUnrotateAdvanced(ctx context.Context, request operati
 	return res, nil
 }
 
+// PreprocessingUnskew - Detect and unskew a photo of a document
+// Detect and unskew a photo of a document (e.g. taken on a cell phone) into a perfectly square image.  Great for document scanning applications; once unskewed, this image is perfect for converting to PDF using the Convert API or optical character recognition using the OCR API.
 func (s *SDK) PreprocessingUnskew(ctx context.Context, request operations.PreprocessingUnskewRequest) (*operations.PreprocessingUnskewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/preprocessing/image/unskew"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1227,7 +1281,7 @@ func (s *SDK) PreprocessingUnskew(ctx context.Context, request operations.Prepro
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1282,8 +1336,10 @@ func (s *SDK) PreprocessingUnskew(ctx context.Context, request operations.Prepro
 	return res, nil
 }
 
+// ReceiptsPhotoToCsv - Convert a photo of a receipt into a CSV file containing structured information from the receipt
+// Leverage Deep Learning to automatically turn a photo of a receipt into a CSV file containing the structured information from the receipt.
 func (s *SDK) ReceiptsPhotoToCsv(ctx context.Context, request operations.ReceiptsPhotoToCsvRequest) (*operations.ReceiptsPhotoToCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ocr/receipts/photo/to/csv"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1301,7 +1357,7 @@ func (s *SDK) ReceiptsPhotoToCsv(ctx context.Context, request operations.Receipt
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

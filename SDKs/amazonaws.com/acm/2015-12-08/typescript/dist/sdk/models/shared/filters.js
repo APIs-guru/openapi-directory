@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Filters
 /**
  * This structure can be used in the <a>ListCertificates</a> action to filter the output of the certificate list.
@@ -33,15 +33,15 @@ var Filters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=extendedKeyUsage" }),
+        SpeakeasyMetadata({ data: "json, name=extendedKeyUsage" }),
         __metadata("design:type", Array)
     ], Filters.prototype, "extendedKeyUsage", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyTypes" }),
+        SpeakeasyMetadata({ data: "json, name=keyTypes" }),
         __metadata("design:type", Array)
     ], Filters.prototype, "keyTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyUsage" }),
+        SpeakeasyMetadata({ data: "json, name=keyUsage" }),
         __metadata("design:type", Array)
     ], Filters.prototype, "keyUsage", void 0);
     return Filters;

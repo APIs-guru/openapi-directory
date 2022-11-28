@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePlayDeveloperReportingV1beta1DimensionValue
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the value of a single dimension.
 **/
 export class GooglePlayDeveloperReportingV1beta1DimensionValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimension" })
+  @SpeakeasyMetadata({ data: "json, name=dimension" })
   dimension?: string;
 
-  @Metadata({ data: "json, name=int64Value" })
+  @SpeakeasyMetadata({ data: "json, name=int64Value" })
   int64Value?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 
-  @Metadata({ data: "json, name=valueLabel" })
+  @SpeakeasyMetadata({ data: "json, name=valueLabel" })
   valueLabel?: string;
 }

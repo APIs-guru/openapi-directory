@@ -1,103 +1,104 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PadUsersUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 }
 
 
-export class PadUsersUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: PadUsersUsingGetQueryParams;
-}
-
-
 export class PadUsersUsingGet200ApplicationJsonDataPadUsers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colorId" })
+  @SpeakeasyMetadata({ data: "json, name=colorId" })
   colorId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: number;
 }
 
 
 export class PadUsersUsingGet200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=padUsers", elemType: operations.PadUsersUsingGet200ApplicationJsonDataPadUsers })
+  @SpeakeasyMetadata({ data: "json, name=padUsers", elemType: PadUsersUsingGet200ApplicationJsonDataPadUsers })
   padUsers?: PadUsersUsingGet200ApplicationJsonDataPadUsers[];
 }
 
 
 export class PadUsersUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: PadUsersUsingGet200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PadUsersUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PadUsersUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PadUsersUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PadUsersUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: PadUsersUsingGetQueryParams;
+}
+
+
 export class PadUsersUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingGet200ApplicationJsonObject?: PadUsersUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingGet400ApplicationJsonObject?: PadUsersUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingGet401ApplicationJsonObject?: PadUsersUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingGet500ApplicationJsonObject?: PadUsersUsingGet500ApplicationJson;
 }

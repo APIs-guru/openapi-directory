@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,46 +23,54 @@ class UpdateFlowHeaders:
 @dataclass_json
 @dataclass
 class UpdateFlowRequestBodySourceFlowConfig:
-    connector_profile_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileName' }})
-    connector_type: Optional[shared.ConnectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorType' }})
-    incremental_pull_config: Optional[shared.IncrementalPullConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'incrementalPullConfig' }})
-    source_connector_properties: Optional[shared.SourceConnectorProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceConnectorProperties' }})
+    r"""UpdateFlowRequestBodySourceFlowConfig
+     Contains information about the configuration of the source connector used in the flow. 
+    """
+    
+    connector_profile_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileName') }})
+    connector_type: Optional[shared.ConnectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorType') }})
+    incremental_pull_config: Optional[shared.IncrementalPullConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('incrementalPullConfig') }})
+    source_connector_properties: Optional[shared.SourceConnectorProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceConnectorProperties') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFlowRequestBodyTriggerConfig:
-    trigger_properties: Optional[shared.TriggerProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerProperties' }})
-    trigger_type: Optional[shared.TriggerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerType' }})
+    r"""UpdateFlowRequestBodyTriggerConfig
+     The trigger settings that determine how and when Amazon AppFlow runs the specified flow. 
+    """
+    
+    trigger_properties: Optional[shared.TriggerProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerProperties') }})
+    trigger_type: Optional[shared.TriggerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerType') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFlowRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    destination_flow_config_list: List[shared.DestinationFlowConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationFlowConfigList' }})
-    flow_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flowName' }})
-    source_flow_config: UpdateFlowRequestBodySourceFlowConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceFlowConfig' }})
-    tasks: List[shared.Task] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tasks' }})
-    trigger_config: UpdateFlowRequestBodyTriggerConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerConfig' }})
+    destination_flow_config_list: List[shared.DestinationFlowConfig] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationFlowConfigList') }})
+    flow_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('flowName') }})
+    source_flow_config: UpdateFlowRequestBodySourceFlowConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceFlowConfig') }})
+    tasks: List[shared.Task] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tasks') }})
+    trigger_config: UpdateFlowRequestBodyTriggerConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerConfig') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 
 @dataclass
 class UpdateFlowRequest:
-    headers: UpdateFlowHeaders = field(default=None)
-    request: UpdateFlowRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateFlowHeaders = field()
+    request: UpdateFlowRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateFlowResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
     connector_authentication_exception: Optional[Any] = field(default=None)
     connector_server_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_flow_response: Optional[shared.UpdateFlowResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

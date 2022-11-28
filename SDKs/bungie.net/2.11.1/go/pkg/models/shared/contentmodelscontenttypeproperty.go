@@ -1,0 +1,46 @@
+package shared
+
+type ContentModelsContentTypeProperty struct {
+	Attributes                     map[string]string
+	BindToProperty                 *string
+	BoundRegex                     *string
+	ChildProperties                []ContentModelsContentTypeProperty
+	ContentTypeAllowed             *string
+	Datatype                       *int32
+	DefaultValues                  []ContentModelsContentTypeDefaultValue
+	Enabled                        *bool
+	Entitytype                     *string
+	Fallback                       *bool
+	IsCombo                        *bool
+	IsExternalAllowed              *bool
+	IsImage                        *bool
+	IsTitle                        *bool
+	IsVideo                        *bool
+	LegalContentTypes              []string
+	Localizable                    *bool
+	MaxByteLength                  *int32
+	MaxFileSize                    *int32
+	MaxHeight                      *int32
+	MaxLength                      *int32
+	MaxWidth                       *int32
+	MinHeight                      *int32
+	MinWidth                       *int32
+	Name                           *string
+	Order                          *int32
+	PropertyDescription            *string
+	PropertySection                *string
+	ReadableName                   *string
+	Regexp                         *string
+	RepresentationSelection        map[string]string
+	RepresentationValidationString *string
+	Required                       *bool
+	RootPropertyName               *string
+	RssAttribute                   *string
+	SuppressProperty               *bool
+	ValidateAs                     *string
+	Value                          *string
+	Visible                        *bool
+	VisibleDependency              *string
+	VisibleOn                      *string
+	Weight                         *int32
+}

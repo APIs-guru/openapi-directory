@@ -1,11 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PushUriToAccountIdSecurity extends SpeakeasyBase {
     oauthsecurity: shared.SchemeOauthsecurity;
-}
-export declare class PushUriToAccountIdRequest extends SpeakeasyBase {
-    request?: any;
-    security: PushUriToAccountIdSecurity;
 }
 export declare class PushUriToAccountId400ApplicationJson extends SpeakeasyBase {
     error?: string;
@@ -22,6 +18,10 @@ export declare class PushUriToAccountId404ApplicationJson extends SpeakeasyBase 
 export declare class PushUriToAccountId500ApplicationJson extends SpeakeasyBase {
     error?: string;
     errorDescription?: string;
+}
+export declare class PushUriToAccountIdRequest extends SpeakeasyBase {
+    request?: any;
+    security: PushUriToAccountIdSecurity;
 }
 export declare class PushUriToAccountIdResponse extends SpeakeasyBase {
     contentType: string;

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UserGetCredentialTypesForTargetAccountPathParams = /** @class */ (function (_super) {
     __extends(UserGetCredentialTypesForTargetAccountPathParams, _super);
     function UserGetCredentialTypesForTargetAccountPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
         __metadata("design:type", Number)
     ], UserGetCredentialTypesForTargetAccountPathParams.prototype, "membershipId", void 0);
     return UserGetCredentialTypesForTargetAccountPathParams;
@@ -41,7 +41,7 @@ var UserGetCredentialTypesForTargetAccountRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UserGetCredentialTypesForTargetAccountPathParams)
     ], UserGetCredentialTypesForTargetAccountRequest.prototype, "pathParams", void 0);
     return UserGetCredentialTypesForTargetAccountRequest;
@@ -53,15 +53,15 @@ var UserGetCredentialTypesForTargetAccountResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], UserGetCredentialTypesForTargetAccountResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UserGetCredentialTypesForTargetAccountResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UserGetCredentialTypesForTargetAccountResponse.prototype, "statusCode", void 0);
     return UserGetCredentialTypesForTargetAccountResponse;

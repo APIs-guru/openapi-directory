@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class SecuritycenterProjectsLocationsClustersUpdateContainerThrea
 export declare class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsRequest extends SpeakeasyBase {
     pathParams: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsPathParams;
     queryParams: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsQueryParams;
-    request?: shared.ContainerThreatDetectionSettings;
+    request?: shared.ContainerThreatDetectionSettingsInput;
     security: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsSecurity;
 }
 export declare class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsResponse extends SpeakeasyBase {

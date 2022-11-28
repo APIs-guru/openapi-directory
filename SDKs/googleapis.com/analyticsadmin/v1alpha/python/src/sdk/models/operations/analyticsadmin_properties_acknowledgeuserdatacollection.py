@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesAcknowledgeUserDataCollectionPathParams:
-    property: str = field(default=None, metadata={'path_param': { 'field_name': 'property', 'style': 'simple', 'explode': False }})
+    property: str = field(metadata={'path_param': { 'field_name': 'property', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminPropertiesAcknowledgeUserDataCollectionQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesAcknowledgeUserDataCollectionSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesAcknowledgeUserDataCollectionRequest:
-    path_params: AnalyticsadminPropertiesAcknowledgeUserDataCollectionPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesAcknowledgeUserDataCollectionQueryParams = field(default=None)
+    path_params: AnalyticsadminPropertiesAcknowledgeUserDataCollectionPathParams = field()
+    query_params: AnalyticsadminPropertiesAcknowledgeUserDataCollectionQueryParams = field()
+    security: AnalyticsadminPropertiesAcknowledgeUserDataCollectionSecurity = field()
     request: Optional[shared.GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesAcknowledgeUserDataCollectionSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsadminPropertiesAcknowledgeUserDataCollectionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_acknowledge_user_data_collection_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TopicRuleDestination
+// A topic rule destination.
 type TopicRuleDestination struct {
 	Arn               *string                         `json:"arn,omitempty"`
 	CreatedAt         *time.Time                      `json:"createdAt,omitempty"`

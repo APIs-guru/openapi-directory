@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -20,20 +24,20 @@ class GetQueryJSONQueryParams:
     sw: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sw', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetQueryJSONRequest:
-    query_params: GetQueryJSONQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetQueryJSON200ApplicationJSON:
-    results: Optional[List[shared.Event]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    results: Optional[List[shared.Event]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    
+
+@dataclass
+class GetQueryJSONRequest:
+    query_params: GetQueryJSONQueryParams = field()
     
 
 @dataclass
 class GetQueryJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_query_json_200_application_json_object: Optional[GetQueryJSON200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// ActionSummary
+// Provides a summary of an action.
 type ActionSummary struct {
 	Description *string                 `json:"description,omitempty"`
 	ID          *string                 `json:"id,omitempty"`

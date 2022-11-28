@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCustomersAccountAnnouncementsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account" })
   account: number;
 }
 
 
-export class GetCustomersAccountAnnouncementsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetCustomersAccountAnnouncementsPathParams;
-}
-
-
 export class GetCustomersAccountAnnouncements200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=list", elemType: shared.OneannouncementsPostResponses201ContentApplication1jsonSchema })
+  @SpeakeasyMetadata({ data: "json, name=list", elemType: shared.OneannouncementsPostResponses201ContentApplication1jsonSchema })
   list?: shared.OneannouncementsPostResponses201ContentApplication1jsonSchema[];
 }
 
 
+export class GetCustomersAccountAnnouncementsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetCustomersAccountAnnouncementsPathParams;
+}
+
+
 export class GetCustomersAccountAnnouncementsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCustomersAccountAnnouncements200ApplicationJsonObject?: GetCustomersAccountAnnouncements200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   oneannouncementsPostResponses403ContentApplication1jsonSchema?: shared.OneannouncementsPostResponses403ContentApplication1jsonSchema;
 }

@@ -1,9 +1,5 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
-from .anthosvmmembershipspec import *
-from .anthosvmmembershipstate import *
-from .anthosvmsubfeaturespec import *
-from .anthosvmsubfeaturestate import *
 from .appdevexperiencefeaturestate import *
 from .appliancecluster import *
 from .auditconfig import *
@@ -45,6 +41,7 @@ from .generateconnectmanifestresponse import *
 from .gkecluster import *
 from .googlerpcstatus import *
 from .identityserviceauthmethod import *
+from .identityserviceazureadconfig import *
 from .identityservicegoogleconfig import *
 from .identityservicemembershipspec import *
 from .identityservicemembershipstate import *
@@ -55,7 +52,6 @@ from .listfeaturesresponse import *
 from .listlocationsresponse import *
 from .listmembershipsresponse import *
 from .listoperationsresponse import *
-from .localcontrollerstate import *
 from .location import *
 from .membership import *
 from .membershipendpoint import *
@@ -69,6 +65,7 @@ from .operation import *
 from .policy import *
 from .resourcemanifest import *
 from .resourceoptions import *
+from .scopefeaturestate import *
 from .security import *
 from .servicemeshcontrolplanemanagement import *
 from .servicemeshdataplanemanagement import *

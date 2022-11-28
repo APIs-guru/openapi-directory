@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Face } from "./face";
 
 
+
 export class ListFacesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FaceModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=FaceModelVersion" })
   faceModelVersion?: string;
 
-  @Metadata({ data: "json, name=Faces", elemType: shared.Face })
+  @SpeakeasyMetadata({ data: "json, name=Faces", elemType: Face })
   faces?: Face[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

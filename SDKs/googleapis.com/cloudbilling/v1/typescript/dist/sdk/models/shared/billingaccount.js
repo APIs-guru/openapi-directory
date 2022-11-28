@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BillingAccount
 /**
  * A billing account in the [Google Cloud Console](https://console.cloud.google.com/). You can assign a billing account to one or more projects.
@@ -33,21 +33,41 @@ var BillingAccount = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], BillingAccount.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=masterBillingAccount" }),
+        SpeakeasyMetadata({ data: "json, name=masterBillingAccount" }),
         __metadata("design:type", String)
     ], BillingAccount.prototype, "masterBillingAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], BillingAccount.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=open" }),
+        SpeakeasyMetadata({ data: "json, name=open" }),
         __metadata("design:type", Boolean)
     ], BillingAccount.prototype, "open", void 0);
     return BillingAccount;
 }(SpeakeasyBase));
 export { BillingAccount };
+// BillingAccountInput
+/**
+ * A billing account in the [Google Cloud Console](https://console.cloud.google.com/). You can assign a billing account to one or more projects.
+**/
+var BillingAccountInput = /** @class */ (function (_super) {
+    __extends(BillingAccountInput, _super);
+    function BillingAccountInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], BillingAccountInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=masterBillingAccount" }),
+        __metadata("design:type", String)
+    ], BillingAccountInput.prototype, "masterBillingAccount", void 0);
+    return BillingAccountInput;
+}(SpeakeasyBase));
+export { BillingAccountInput };

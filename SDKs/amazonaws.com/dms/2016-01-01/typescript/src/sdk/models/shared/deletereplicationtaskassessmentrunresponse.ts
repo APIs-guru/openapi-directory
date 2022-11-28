@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationTaskAssessmentRun } from "./replicationtaskassessmentrun";
+
 
 
 // DeleteReplicationTaskAssessmentRunResponse
@@ -7,6 +8,6 @@ import { ReplicationTaskAssessmentRun } from "./replicationtaskassessmentrun";
  * <p/>
 **/
 export class DeleteReplicationTaskAssessmentRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationTaskAssessmentRun" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskAssessmentRun" })
   replicationTaskAssessmentRun?: ReplicationTaskAssessmentRun;
 }

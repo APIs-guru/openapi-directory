@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import error
-from . import requestreference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HiuSubscriptionRequestReceiptSubscriptionRequest:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class HiuSubscriptionRequestReceipt:
-    error: Optional[error.Error] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    resp: requestreference.RequestReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resp' }})
-    subscription_request: Optional[HiuSubscriptionRequestReceiptSubscriptionRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptionRequest' }})
-    timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    resp: RequestReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resp') }})
+    timestamp: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    error: Optional[Error] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    subscription_request: Optional[HiuSubscriptionRequestReceiptSubscriptionRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscriptionRequest') }})
     

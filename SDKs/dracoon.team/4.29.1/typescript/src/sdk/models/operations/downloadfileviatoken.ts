@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DownloadFileViaTokenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=token" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token" })
   token: string;
 }
 
 
 export class DownloadFileViaTokenQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=generic_mimetype" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=generic_mimetype" })
   genericMimetype?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inline" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inline" })
   inline?: boolean;
 }
 
 
 export class DownloadFileViaTokenHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Range" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Range" })
   range?: string;
 }
 
 
 export class DownloadFileViaTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DownloadFileViaTokenPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DownloadFileViaTokenQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DownloadFileViaTokenHeaders;
 }
 
 
 export class DownloadFileViaTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

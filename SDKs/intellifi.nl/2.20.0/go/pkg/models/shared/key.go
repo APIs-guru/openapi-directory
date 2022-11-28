@@ -1,5 +1,10 @@
 package shared
 
+type KeyInput struct {
+	IsReadOnly *bool   `json:"is_read_only,omitempty"`
+	Label      *string `json:"label,omitempty"`
+}
+
 type Key struct {
 	ID          *string `json:"id,omitempty"`
 	IsReadOnly  *bool   `json:"is_read_only,omitempty"`

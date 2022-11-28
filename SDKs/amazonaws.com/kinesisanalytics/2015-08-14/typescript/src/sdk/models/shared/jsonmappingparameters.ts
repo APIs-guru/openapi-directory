@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JsonMappingParameters
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides additional mapping information when JSON is the record format on the streaming source.
 **/
 export class JsonMappingParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RecordRowPath" })
+  @SpeakeasyMetadata({ data: "json, name=RecordRowPath" })
   recordRowPath: string;
 }

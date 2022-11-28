@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
+
 
 
 // TestCaseRun
@@ -7,30 +8,30 @@ import { StatusEnum } from "./statusenum";
  * Provides test case run.
 **/
 export class TestCaseRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=failure" })
+  @SpeakeasyMetadata({ data: "json, name=failure" })
   failure?: string;
 
-  @Metadata({ data: "json, name=logUrl" })
+  @SpeakeasyMetadata({ data: "json, name=logUrl" })
   logUrl?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=testCaseDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=testCaseDefinitionId" })
   testCaseDefinitionId?: string;
 
-  @Metadata({ data: "json, name=testCaseDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=testCaseDefinitionName" })
   testCaseDefinitionName?: string;
 
-  @Metadata({ data: "json, name=testCaseRunId" })
+  @SpeakeasyMetadata({ data: "json, name=testCaseRunId" })
   testCaseRunId?: string;
 
-  @Metadata({ data: "json, name=warnings" })
+  @SpeakeasyMetadata({ data: "json, name=warnings" })
   warnings?: string;
 }

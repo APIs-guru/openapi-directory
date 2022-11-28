@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddatacatalogv1serializedtaxonomy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDatacatalogV1ReplaceTaxonomyRequest:
-    serialized_taxonomy: Optional[googleclouddatacatalogv1serializedtaxonomy.GoogleCloudDatacatalogV1SerializedTaxonomy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serializedTaxonomy' }})
+    r"""GoogleCloudDatacatalogV1ReplaceTaxonomyRequest
+    Request message for ReplaceTaxonomy.
+    """
+    
+    serialized_taxonomy: Optional[GoogleCloudDatacatalogV1SerializedTaxonomy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serializedTaxonomy') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDescribeReservedDbInstancesOfferingsActionEnum {
     DescribeReservedDbInstancesOfferings = "DescribeReservedDBInstancesOfferings"
@@ -10,78 +11,78 @@ export enum GetDescribeReservedDbInstancesOfferingsVersionEnum {
 
 
 export class GetDescribeReservedDbInstancesOfferingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeReservedDbInstancesOfferingsActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBInstanceClass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBInstanceClass" })
   dbInstanceClass?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Duration" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Duration" })
   duration?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Marker" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
   maxRecords?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MultiAZ" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MultiAZ" })
   multiAz?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=OfferingType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OfferingType" })
   offeringType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ProductDescription" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ProductDescription" })
   productDescription?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ReservedDBInstancesOfferingId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ReservedDBInstancesOfferingId" })
   reservedDbInstancesOfferingId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeReservedDbInstancesOfferingsVersionEnum;
 }
 
 
 export class GetDescribeReservedDbInstancesOfferingsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeReservedDbInstancesOfferingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeReservedDbInstancesOfferingsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeReservedDbInstancesOfferingsHeaders;
 }
 
 
 export class GetDescribeReservedDbInstancesOfferingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

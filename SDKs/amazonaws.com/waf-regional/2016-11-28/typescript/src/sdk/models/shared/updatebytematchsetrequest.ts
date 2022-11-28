@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ByteMatchSetUpdate } from "./bytematchsetupdate";
 
 
+
 export class UpdateByteMatchSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ByteMatchSetId" })
+  @SpeakeasyMetadata({ data: "json, name=ByteMatchSetId" })
   byteMatchSetId: string;
 
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.ByteMatchSetUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: ByteMatchSetUpdate })
   updates: ByteMatchSetUpdate[];
 }

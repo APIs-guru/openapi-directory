@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetContainerRecipeQueryParams:
-    container_recipe_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'containerRecipeArn', 'style': 'form', 'explode': True }})
+    container_recipe_arn: str = field(metadata={'query_param': { 'field_name': 'containerRecipeArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class GetContainerRecipeHeaders:
 
 @dataclass
 class GetContainerRecipeRequest:
-    query_params: GetContainerRecipeQueryParams = field(default=None)
-    headers: GetContainerRecipeHeaders = field(default=None)
+    headers: GetContainerRecipeHeaders = field()
+    query_params: GetContainerRecipeQueryParams = field()
     
 
 @dataclass
 class GetContainerRecipeResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     get_container_recipe_response: Optional[shared.GetContainerRecipeResponse] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

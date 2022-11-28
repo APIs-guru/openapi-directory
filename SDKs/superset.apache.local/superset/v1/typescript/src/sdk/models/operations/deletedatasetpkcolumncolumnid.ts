@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDatasetPkColumnColumnIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=column_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=column_id" })
   columnId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class DeleteDatasetPkColumnColumnIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteDatasetPkColumnColumnIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteDatasetPkColumnColumnIdPathParams;
-
-  @Metadata()
-  security: DeleteDatasetPkColumnColumnIdSecurity;
-}
-
-
 export class DeleteDatasetPkColumnColumnId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkColumnColumnId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkColumnColumnId403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkColumnColumnId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkColumnColumnId422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatasetPkColumnColumnId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteDatasetPkColumnColumnIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteDatasetPkColumnColumnIdPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteDatasetPkColumnColumnIdSecurity;
+}
+
+
 export class DeleteDatasetPkColumnColumnIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkColumnColumnId200ApplicationJsonObject?: DeleteDatasetPkColumnColumnId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkColumnColumnId401ApplicationJsonObject?: DeleteDatasetPkColumnColumnId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkColumnColumnId403ApplicationJsonObject?: DeleteDatasetPkColumnColumnId403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkColumnColumnId404ApplicationJsonObject?: DeleteDatasetPkColumnColumnId404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkColumnColumnId422ApplicationJsonObject?: DeleteDatasetPkColumnColumnId422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatasetPkColumnColumnId500ApplicationJsonObject?: DeleteDatasetPkColumnColumnId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

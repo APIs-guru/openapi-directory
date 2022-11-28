@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceFilter } from "./devicefilter";
+
 
 
 // DeviceSelectionResult
@@ -8,12 +8,12 @@ import { DeviceFilter } from "./devicefilter";
  * Contains the run results requested by the device selection configuration and how many devices were returned. For an example of the JSON response syntax, see <a>ScheduleRun</a>.
 **/
 export class DeviceSelectionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.DeviceFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: DeviceFilter })
   filters?: DeviceFilter[];
 
-  @Metadata({ data: "json, name=matchedDevicesCount" })
+  @SpeakeasyMetadata({ data: "json, name=matchedDevicesCount" })
   matchedDevicesCount?: number;
 
-  @Metadata({ data: "json, name=maxDevices" })
+  @SpeakeasyMetadata({ data: "json, name=maxDevices" })
   maxDevices?: number;
 }

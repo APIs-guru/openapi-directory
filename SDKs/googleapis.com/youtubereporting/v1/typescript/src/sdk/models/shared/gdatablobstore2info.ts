@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GdataBlobstore2Info
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * gdata
 **/
 export class GdataBlobstore2Info extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blobGeneration" })
+  @SpeakeasyMetadata({ data: "json, name=blobGeneration" })
   blobGeneration?: string;
 
-  @Metadata({ data: "json, name=blobId" })
+  @SpeakeasyMetadata({ data: "json, name=blobId" })
   blobId?: string;
 
-  @Metadata({ data: "json, name=downloadReadHandle" })
+  @SpeakeasyMetadata({ data: "json, name=downloadReadHandle" })
   downloadReadHandle?: string;
 
-  @Metadata({ data: "json, name=readToken" })
+  @SpeakeasyMetadata({ data: "json, name=readToken" })
   readToken?: string;
 
-  @Metadata({ data: "json, name=uploadMetadataContainer" })
+  @SpeakeasyMetadata({ data: "json, name=uploadMetadataContainer" })
   uploadMetadataContainer?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiKeyOut
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The API Key.
 **/
 export class ApiKeyOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin?: boolean;
 
-  @Metadata({ data: "json, name=anonymized" })
+  @SpeakeasyMetadata({ data: "json, name=anonymized" })
   anonymized?: boolean;
 
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey?: string;
 
-  @Metadata({ data: "json, name=corporate" })
+  @SpeakeasyMetadata({ data: "json, name=corporate" })
   corporate?: boolean;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=learnable" })
+  @SpeakeasyMetadata({ data: "json, name=learnable" })
   learnable?: boolean;
 
-  @Metadata({ data: "json, name=partner" })
+  @SpeakeasyMetadata({ data: "json, name=partner" })
   partner?: boolean;
 
-  @Metadata({ data: "json, name=striped" })
+  @SpeakeasyMetadata({ data: "json, name=striped" })
   striped?: boolean;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=vetted" })
+  @SpeakeasyMetadata({ data: "json, name=vetted" })
   vetted?: boolean;
 }

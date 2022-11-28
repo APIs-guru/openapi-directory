@@ -1,26 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppliedLicense } from "./appliedlicense";
 import { ComputeScheduling } from "./computescheduling";
 import { NetworkInterface } from "./networkinterface";
 
+
 export enum TargetVmDetailsBootOptionEnum {
-    BootOptionUnspecified = "BOOT_OPTION_UNSPECIFIED"
-,    Efi = "EFI"
-,    Bios = "BIOS"
+    BootOptionUnspecified = "BOOT_OPTION_UNSPECIFIED",
+    Efi = "EFI",
+    Bios = "BIOS"
 }
 
 export enum TargetVmDetailsDiskTypeEnum {
-    DiskTypeUnspecified = "DISK_TYPE_UNSPECIFIED"
-,    Standard = "STANDARD"
-,    Balanced = "BALANCED"
-,    Ssd = "SSD"
+    DiskTypeUnspecified = "DISK_TYPE_UNSPECIFIED",
+    Standard = "STANDARD",
+    Balanced = "BALANCED",
+    Ssd = "SSD"
 }
 
 export enum TargetVmDetailsLicenseTypeEnum {
-    Default = "DEFAULT"
-,    Payg = "PAYG"
-,    Byol = "BYOL"
+    Default = "DEFAULT",
+    Payg = "PAYG",
+    Byol = "BYOL"
+}
+
+
+// TargetVmDetailsInput
+/** 
+ * TargetVMDetails is a collection of details for creating a VM in a target Compute Engine project.
+**/
+export class TargetVmDetailsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=appliedLicense" })
+  appliedLicense?: AppliedLicense;
+
+  @SpeakeasyMetadata({ data: "json, name=computeScheduling" })
+  computeScheduling?: ComputeScheduling;
+
+  @SpeakeasyMetadata({ data: "json, name=diskType" })
+  diskType?: TargetVmDetailsDiskTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=externalIp" })
+  externalIp?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=internalIp" })
+  internalIp?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=licenseType" })
+  licenseType?: TargetVmDetailsLicenseTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
+  machineType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=machineTypeSeries" })
+  machineTypeSeries?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=network" })
+  network?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NetworkInterface })
+  networkInterfaces?: NetworkInterface[];
+
+  @SpeakeasyMetadata({ data: "json, name=networkTags" })
+  networkTags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=secureBoot" })
+  secureBoot?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
+  serviceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=subnetwork" })
+  subnetwork?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=targetProject" })
+  targetProject?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=zone" })
+  zone?: string;
 }
 
 
@@ -29,66 +93,66 @@ export enum TargetVmDetailsLicenseTypeEnum {
  * TargetVMDetails is a collection of details for creating a VM in a target Compute Engine project.
 **/
 export class TargetVmDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appliedLicense" })
+  @SpeakeasyMetadata({ data: "json, name=appliedLicense" })
   appliedLicense?: AppliedLicense;
 
-  @Metadata({ data: "json, name=bootOption" })
+  @SpeakeasyMetadata({ data: "json, name=bootOption" })
   bootOption?: TargetVmDetailsBootOptionEnum;
 
-  @Metadata({ data: "json, name=computeScheduling" })
+  @SpeakeasyMetadata({ data: "json, name=computeScheduling" })
   computeScheduling?: ComputeScheduling;
 
-  @Metadata({ data: "json, name=diskType" })
+  @SpeakeasyMetadata({ data: "json, name=diskType" })
   diskType?: TargetVmDetailsDiskTypeEnum;
 
-  @Metadata({ data: "json, name=externalIp" })
+  @SpeakeasyMetadata({ data: "json, name=externalIp" })
   externalIp?: string;
 
-  @Metadata({ data: "json, name=internalIp" })
+  @SpeakeasyMetadata({ data: "json, name=internalIp" })
   internalIp?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=licenseType" })
+  @SpeakeasyMetadata({ data: "json, name=licenseType" })
   licenseType?: TargetVmDetailsLicenseTypeEnum;
 
-  @Metadata({ data: "json, name=machineType" })
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
   machineType?: string;
 
-  @Metadata({ data: "json, name=machineTypeSeries" })
+  @SpeakeasyMetadata({ data: "json, name=machineTypeSeries" })
   machineTypeSeries?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=networkInterfaces", elemType: shared.NetworkInterface })
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NetworkInterface })
   networkInterfaces?: NetworkInterface[];
 
-  @Metadata({ data: "json, name=networkTags" })
+  @SpeakeasyMetadata({ data: "json, name=networkTags" })
   networkTags?: string[];
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 
-  @Metadata({ data: "json, name=secureBoot" })
+  @SpeakeasyMetadata({ data: "json, name=secureBoot" })
   secureBoot?: boolean;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=subnetwork" })
+  @SpeakeasyMetadata({ data: "json, name=subnetwork" })
   subnetwork?: string;
 
-  @Metadata({ data: "json, name=targetProject" })
+  @SpeakeasyMetadata({ data: "json, name=targetProject" })
   targetProject?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

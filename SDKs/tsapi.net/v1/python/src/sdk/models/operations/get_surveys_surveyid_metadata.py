@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetSurveysSurveyIDMetadataPathParams:
-    survey_id: str = field(default=None, metadata={'path_param': { 'field_name': 'surveyId', 'style': 'simple', 'explode': False }})
+    survey_id: str = field(metadata={'path_param': { 'field_name': 'surveyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSurveysSurveyIDMetadataRequest:
-    path_params: GetSurveysSurveyIDMetadataPathParams = field(default=None)
+    path_params: GetSurveysSurveyIDMetadataPathParams = field()
     
 
 @dataclass
 class GetSurveysSurveyIDMetadataResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     survey_metadata: Optional[shared.SurveyMetadata] = field(default=None)
     

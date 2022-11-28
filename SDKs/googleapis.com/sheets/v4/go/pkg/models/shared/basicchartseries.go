@@ -22,6 +22,8 @@ const (
 	BasicChartSeriesTypeEnumSteppedArea               BasicChartSeriesTypeEnum = "STEPPED_AREA"
 )
 
+// BasicChartSeries
+// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
 type BasicChartSeries struct {
 	Color          *Color                              `json:"color,omitempty"`
 	ColorStyle     *ColorStyle                         `json:"colorStyle,omitempty"`

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetLeaderboardsForCharacterPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetLeaderboardsForCharacterPathParams, _super);
     function Destiny2GetLeaderboardsForCharacterPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
         __metadata("design:type", Number)
     ], Destiny2GetLeaderboardsForCharacterPathParams.prototype, "characterId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetLeaderboardsForCharacterPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetLeaderboardsForCharacterPathParams.prototype, "membershipType", void 0);
     return Destiny2GetLeaderboardsForCharacterPathParams;
@@ -49,15 +49,15 @@ var Destiny2GetLeaderboardsForCharacterQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxtop" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxtop" }),
         __metadata("design:type", Number)
     ], Destiny2GetLeaderboardsForCharacterQueryParams.prototype, "maxtop", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modes" }),
         __metadata("design:type", String)
     ], Destiny2GetLeaderboardsForCharacterQueryParams.prototype, "modes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=statid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=statid" }),
         __metadata("design:type", String)
     ], Destiny2GetLeaderboardsForCharacterQueryParams.prototype, "statid", void 0);
     return Destiny2GetLeaderboardsForCharacterQueryParams;
@@ -69,11 +69,11 @@ var Destiny2GetLeaderboardsForCharacterRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetLeaderboardsForCharacterPathParams)
     ], Destiny2GetLeaderboardsForCharacterRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetLeaderboardsForCharacterQueryParams)
     ], Destiny2GetLeaderboardsForCharacterRequest.prototype, "queryParams", void 0);
     return Destiny2GetLeaderboardsForCharacterRequest;
@@ -85,15 +85,15 @@ var Destiny2GetLeaderboardsForCharacterResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetLeaderboardsForCharacterResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetLeaderboardsForCharacterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetLeaderboardsForCharacterResponse.prototype, "statusCode", void 0);
     return Destiny2GetLeaderboardsForCharacterResponse;

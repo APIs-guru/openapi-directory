@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PullsListPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 class PullsListDirectionEnum(str, Enum):
     ASC = "asc"
@@ -37,15 +41,15 @@ class PullsListQueryParams:
 
 @dataclass
 class PullsListRequest:
-    path_params: PullsListPathParams = field(default=None)
-    query_params: PullsListQueryParams = field(default=None)
+    path_params: PullsListPathParams = field()
+    query_params: PullsListQueryParams = field()
     
 
 @dataclass
 class PullsListResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     pull_request_simples: Optional[List[shared.PullRequestSimple]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeletedNodeSummaryTypeEnum {
-    Folder = "folder"
-,    File = "file"
+    Folder = "folder",
+    File = "file"
 }
 
 
@@ -11,33 +12,33 @@ export enum DeletedNodeSummaryTypeEnum {
  * Deleted node information (Deleted node can be a folder or file)
 **/
 export class DeletedNodeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cntVersions" })
+  @SpeakeasyMetadata({ data: "json, name=cntVersions" })
   cntVersions: number;
 
-  @Metadata({ data: "json, name=firstDeletedAt" })
+  @SpeakeasyMetadata({ data: "json, name=firstDeletedAt" })
   firstDeletedAt: Date;
 
-  @Metadata({ data: "json, name=lastDeletedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastDeletedAt" })
   lastDeletedAt: Date;
 
-  @Metadata({ data: "json, name=lastDeletedNodeId" })
+  @SpeakeasyMetadata({ data: "json, name=lastDeletedNodeId" })
   lastDeletedNodeId: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parentId" })
+  @SpeakeasyMetadata({ data: "json, name=parentId" })
   parentId: number;
 
-  @Metadata({ data: "json, name=parentPath" })
+  @SpeakeasyMetadata({ data: "json, name=parentPath" })
   parentPath: string;
 
-  @Metadata({ data: "json, name=timestampCreation" })
+  @SpeakeasyMetadata({ data: "json, name=timestampCreation" })
   timestampCreation?: Date;
 
-  @Metadata({ data: "json, name=timestampModification" })
+  @SpeakeasyMetadata({ data: "json, name=timestampModification" })
   timestampModification?: Date;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: DeletedNodeSummaryTypeEnum;
 }

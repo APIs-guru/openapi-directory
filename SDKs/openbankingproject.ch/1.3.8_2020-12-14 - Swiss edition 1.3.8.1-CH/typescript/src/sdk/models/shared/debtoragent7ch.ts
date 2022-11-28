@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstitutionalIdentification2 } from "./institutionalidentification2";
+
 
 
 // DebtorAgent7Ch
@@ -11,9 +12,9 @@ import { InstitutionalIdentification2 } from "./institutionalidentification2";
  * 
 **/
 export class DebtorAgent7Ch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bic" })
+  @SpeakeasyMetadata({ data: "json, name=bic" })
   bic?: string;
 
-  @Metadata({ data: "json, name=iid" })
+  @SpeakeasyMetadata({ data: "json, name=iid" })
   iid?: InstitutionalIdentification2;
 }

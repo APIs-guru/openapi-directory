@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssociationSummary
+// Lists a summary of the properties of an association. An association is an entity that links other lineage or experiment entities. An example would be an association between a training job and a model.
 type AssociationSummary struct {
 	AssociationType *AssociationEdgeTypeEnum `json:"AssociationType,omitempty"`
 	CreatedBy       *UserContext             `json:"CreatedBy,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserContextDataType
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
 **/
 export class UserContextDataType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncodedData" })
+  @SpeakeasyMetadata({ data: "json, name=EncodedData" })
   encodedData?: string;
 }

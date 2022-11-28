@@ -17,12 +17,12 @@ class PostForecastForecastTopDownRequests:
 
 @dataclass
 class PostForecastForecastTopDownRequest:
-    headers: PostForecastForecastTopDownHeaders = field(default=None)
+    headers: PostForecastForecastTopDownHeaders = field()
     request: Optional[PostForecastForecastTopDownRequests] = field(default=None)
     
 
 @dataclass
 class PostForecastForecastTopDownResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

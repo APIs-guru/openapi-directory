@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class EvaluatePullRequestApprovalRulesXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class EvaluatePullRequestApprovalRulesXAmzTargetEnum(str, Enum):
 
 @dataclass
 class EvaluatePullRequestApprovalRulesHeaders:
+    x_amz_target: EvaluatePullRequestApprovalRulesXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,18 +20,18 @@ class EvaluatePullRequestApprovalRulesHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: EvaluatePullRequestApprovalRulesXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EvaluatePullRequestApprovalRulesRequest:
-    headers: EvaluatePullRequestApprovalRulesHeaders = field(default=None)
-    request: shared.EvaluatePullRequestApprovalRulesInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: EvaluatePullRequestApprovalRulesHeaders = field()
+    request: shared.EvaluatePullRequestApprovalRulesInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class EvaluatePullRequestApprovalRulesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     encryption_integrity_checks_failed_exception: Optional[Any] = field(default=None)
     encryption_key_access_denied_exception: Optional[Any] = field(default=None)
     encryption_key_disabled_exception: Optional[Any] = field(default=None)
@@ -39,5 +44,4 @@ class EvaluatePullRequestApprovalRulesResponse:
     pull_request_id_required_exception: Optional[Any] = field(default=None)
     revision_id_required_exception: Optional[Any] = field(default=None)
     revision_not_current_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// ReportType
+// A report type.
 type ReportType struct {
 	DeprecateTime *string `json:"deprecateTime,omitempty"`
 	ID            *string `json:"id,omitempty"`

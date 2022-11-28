@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PlacementDescription
+// An object describing a project's placement.
 type PlacementDescription struct {
 	Attributes    map[string]string `json:"attributes"`
 	CreatedDate   time.Time         `json:"createdDate"`

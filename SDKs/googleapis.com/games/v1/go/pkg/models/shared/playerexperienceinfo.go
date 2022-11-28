@@ -1,5 +1,7 @@
 package shared
 
+// PlayerExperienceInfo
+// 1P/3P metadata about the player's experience.
 type PlayerExperienceInfo struct {
 	CurrentExperiencePoints    *string      `json:"currentExperiencePoints,omitempty"`
 	CurrentLevel               *PlayerLevel `json:"currentLevel,omitempty"`

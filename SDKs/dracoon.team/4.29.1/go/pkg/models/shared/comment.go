@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Comment
+// Node comment information
 type Comment struct {
 	CreatedAt time.Time `json:"createdAt"`
 	CreatedBy UserInfo  `json:"createdBy"`

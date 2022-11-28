@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var NotebooksProjectsLocationsEnvironmentsCreatePathParams = /** @class */ (function (_super) {
     __extends(NotebooksProjectsLocationsEnvironmentsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var NotebooksProjectsLocationsEnvironmentsCreatePathParams = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreatePathParams.prototype, "parent", void 0);
     return NotebooksProjectsLocationsEnvironmentsCreatePathParams;
@@ -42,51 +42,51 @@ var NotebooksProjectsLocationsEnvironmentsCreateQueryParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=environmentId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=environmentId" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return NotebooksProjectsLocationsEnvironmentsCreateQueryParams;
@@ -98,11 +98,11 @@ var NotebooksProjectsLocationsEnvironmentsCreateSecurity = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], NotebooksProjectsLocationsEnvironmentsCreateSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], NotebooksProjectsLocationsEnvironmentsCreateSecurity.prototype, "oauth2c", void 0);
     return NotebooksProjectsLocationsEnvironmentsCreateSecurity;
@@ -114,19 +114,19 @@ var NotebooksProjectsLocationsEnvironmentsCreateRequest = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NotebooksProjectsLocationsEnvironmentsCreatePathParams)
     ], NotebooksProjectsLocationsEnvironmentsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NotebooksProjectsLocationsEnvironmentsCreateQueryParams)
     ], NotebooksProjectsLocationsEnvironmentsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.Environment)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.EnvironmentInput)
     ], NotebooksProjectsLocationsEnvironmentsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NotebooksProjectsLocationsEnvironmentsCreateSecurity)
     ], NotebooksProjectsLocationsEnvironmentsCreateRequest.prototype, "security", void 0);
     return NotebooksProjectsLocationsEnvironmentsCreateRequest;
@@ -138,15 +138,15 @@ var NotebooksProjectsLocationsEnvironmentsCreateResponse = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NotebooksProjectsLocationsEnvironmentsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], NotebooksProjectsLocationsEnvironmentsCreateResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NotebooksProjectsLocationsEnvironmentsCreateResponse.prototype, "statusCode", void 0);
     return NotebooksProjectsLocationsEnvironmentsCreateResponse;

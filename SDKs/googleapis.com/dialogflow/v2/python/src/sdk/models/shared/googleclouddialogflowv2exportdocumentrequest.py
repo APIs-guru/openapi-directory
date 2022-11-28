@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2gcsdestination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2ExportDocumentRequest:
-    export_full_content: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exportFullContent' }})
-    gcs_destination: Optional[googleclouddialogflowv2gcsdestination.GoogleCloudDialogflowV2GcsDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsDestination' }})
-    smart_messaging_partial_update: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'smartMessagingPartialUpdate' }})
+    r"""GoogleCloudDialogflowV2ExportDocumentRequest
+    Request message for Documents.ExportDocument.
+    """
+    
+    export_full_content: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exportFullContent') }})
+    gcs_destination: Optional[GoogleCloudDialogflowV2GcsDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsDestination') }})
+    smart_messaging_partial_update: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('smartMessagingPartialUpdate') }})
     

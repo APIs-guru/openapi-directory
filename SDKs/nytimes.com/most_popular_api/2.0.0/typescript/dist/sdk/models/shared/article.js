@@ -22,62 +22,62 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Article = /** @class */ (function (_super) {
     __extends(Article, _super);
     function Article() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=abstract" }),
+        SpeakeasyMetadata({ data: "json, name=abstract" }),
         __metadata("design:type", String)
     ], Article.prototype, "abstract", void 0);
     __decorate([
-        Metadata({ data: "json, name=byline" }),
+        SpeakeasyMetadata({ data: "json, name=byline" }),
         __metadata("design:type", String)
     ], Article.prototype, "byline", void 0);
     __decorate([
-        Metadata({ data: "json, name=column" }),
+        SpeakeasyMetadata({ data: "json, name=column" }),
         __metadata("design:type", String)
     ], Article.prototype, "column", void 0);
     __decorate([
-        Metadata({ data: "json, name=des_facet" }),
+        SpeakeasyMetadata({ data: "json, name=des_facet" }),
         __metadata("design:type", Object)
     ], Article.prototype, "desFacet", void 0);
     __decorate([
-        Metadata({ data: "json, name=geo_facet" }),
+        SpeakeasyMetadata({ data: "json, name=geo_facet" }),
         __metadata("design:type", Object)
     ], Article.prototype, "geoFacet", void 0);
     __decorate([
-        Metadata({ data: "json, name=media" }),
+        SpeakeasyMetadata({ data: "json, name=media" }),
         __metadata("design:type", Object)
     ], Article.prototype, "media", void 0);
     __decorate([
-        Metadata({ data: "json, name=org_facet" }),
+        SpeakeasyMetadata({ data: "json, name=org_facet" }),
         __metadata("design:type", Array)
     ], Article.prototype, "orgFacet", void 0);
     __decorate([
-        Metadata({ data: "json, name=per_facet" }),
+        SpeakeasyMetadata({ data: "json, name=per_facet" }),
         __metadata("design:type", Array)
     ], Article.prototype, "perFacet", void 0);
     __decorate([
-        Metadata({ data: "json, name=published_date" }),
+        SpeakeasyMetadata({ data: "json, name=published_date" }),
         __metadata("design:type", String)
     ], Article.prototype, "publishedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=section" }),
+        SpeakeasyMetadata({ data: "json, name=section" }),
         __metadata("design:type", String)
     ], Article.prototype, "section", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], Article.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Article.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Article.prototype, "url", void 0);
     return Article;

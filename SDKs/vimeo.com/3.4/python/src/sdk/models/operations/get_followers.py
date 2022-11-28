@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetFollowersPathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetFollowersDirectionEnum(str, Enum):
     ASC = "asc"
@@ -27,13 +31,13 @@ class GetFollowersQueryParams:
 
 @dataclass
 class GetFollowersRequest:
-    path_params: GetFollowersPathParams = field(default=None)
-    query_params: GetFollowersQueryParams = field(default=None)
+    path_params: GetFollowersPathParams = field()
+    query_params: GetFollowersQueryParams = field()
     
 
 @dataclass
 class GetFollowersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     users: Optional[List[shared.User]] = field(default=None)
     

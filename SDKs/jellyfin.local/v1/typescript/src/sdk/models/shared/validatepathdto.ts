@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ValidatePathDto
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Validate path object.
 **/
 export class ValidatePathDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsFile" })
+  @SpeakeasyMetadata({ data: "json, name=IsFile" })
   isFile?: boolean;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=ValidateWritable" })
+  @SpeakeasyMetadata({ data: "json, name=ValidateWritable" })
   validateWritable?: boolean;
 }

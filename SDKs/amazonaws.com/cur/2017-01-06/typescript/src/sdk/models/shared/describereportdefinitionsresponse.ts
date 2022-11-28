@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportDefinition } from "./reportdefinition";
+
 
 
 // DescribeReportDefinitionsResponse
@@ -8,9 +8,9 @@ import { ReportDefinition } from "./reportdefinition";
  * If the action is successful, the service sends back an HTTP 200 response.
 **/
 export class DescribeReportDefinitionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ReportDefinitions", elemType: shared.ReportDefinition })
+  @SpeakeasyMetadata({ data: "json, name=ReportDefinitions", elemType: ReportDefinition })
   reportDefinitions?: ReportDefinition[];
 }

@@ -11,6 +11,8 @@ type LdapMappingUserPlan struct {
 	Space         int64  `json:"space"`
 }
 
+// LdapMappingUser
+// Ldap Private User
 type LdapMappingUser struct {
 	AvatarURL               string               `json:"avatar_url"`
 	Bio                     string               `json:"bio"`

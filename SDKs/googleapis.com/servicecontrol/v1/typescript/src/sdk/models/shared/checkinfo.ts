@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumerInfo } from "./consumerinfo";
+
 
 
 // CheckInfo
@@ -7,9 +8,9 @@ import { ConsumerInfo } from "./consumerinfo";
  * Contains additional information about the check operation.
 **/
 export class CheckInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerInfo" })
+  @SpeakeasyMetadata({ data: "json, name=consumerInfo" })
   consumerInfo?: ConsumerInfo;
 
-  @Metadata({ data: "json, name=unusedArguments" })
+  @SpeakeasyMetadata({ data: "json, name=unusedArguments" })
   unusedArguments?: string[];
 }

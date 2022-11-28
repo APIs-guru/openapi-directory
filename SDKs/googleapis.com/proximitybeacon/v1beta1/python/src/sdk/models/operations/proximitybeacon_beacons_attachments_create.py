@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsCreatePathParams:
-    beacon_name: str = field(default=None, metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
+    beacon_name: str = field(metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ProximitybeaconBeaconsAttachmentsCreateQueryParams:
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsCreateRequest:
-    path_params: ProximitybeaconBeaconsAttachmentsCreatePathParams = field(default=None)
-    query_params: ProximitybeaconBeaconsAttachmentsCreateQueryParams = field(default=None)
+    path_params: ProximitybeaconBeaconsAttachmentsCreatePathParams = field()
+    query_params: ProximitybeaconBeaconsAttachmentsCreateQueryParams = field()
+    security: ProximitybeaconBeaconsAttachmentsCreateSecurity = field()
     request: Optional[shared.BeaconAttachment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ProximitybeaconBeaconsAttachmentsCreateSecurity = field(default=None)
     
 
 @dataclass
 class ProximitybeaconBeaconsAttachmentsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     beacon_attachment: Optional[shared.BeaconAttachment] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

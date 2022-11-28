@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsBatchGetReviewsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessAccountsLocationsBatchGetReviewsQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsBatchGetReviewsRequest:
-    path_params: MybusinessAccountsLocationsBatchGetReviewsPathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsBatchGetReviewsQueryParams = field(default=None)
+    path_params: MybusinessAccountsLocationsBatchGetReviewsPathParams = field()
+    query_params: MybusinessAccountsLocationsBatchGetReviewsQueryParams = field()
     request: Optional[shared.BatchGetReviewsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsBatchGetReviewsResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_get_reviews_response: Optional[shared.BatchGetReviewsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

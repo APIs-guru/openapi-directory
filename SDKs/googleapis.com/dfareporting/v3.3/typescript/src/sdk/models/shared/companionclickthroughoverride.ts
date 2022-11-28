@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClickThroughUrl } from "./clickthroughurl";
+
 
 
 // CompanionClickThroughOverride
@@ -7,9 +8,9 @@ import { ClickThroughUrl } from "./clickthroughurl";
  * Companion Click-through override.
 **/
 export class CompanionClickThroughOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrl" })
   clickThroughUrl?: ClickThroughUrl;
 
-  @Metadata({ data: "json, name=creativeId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeId" })
   creativeId?: string;
 }

@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class MeIndexResponse:
+    content_type: str = field()
+    status_code: int = field()
     api2_models_big_oven_user: Optional[shared.Api2ModelsBigOvenUser] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

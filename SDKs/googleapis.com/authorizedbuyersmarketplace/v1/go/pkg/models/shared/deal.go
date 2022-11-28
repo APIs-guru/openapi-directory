@@ -9,6 +9,23 @@ const (
 	DealDealTypeEnumProgrammaticGuaranteed DealDealTypeEnum = "PROGRAMMATIC_GUARANTEED"
 )
 
+// DealInput
+// A deal represents a segment of inventory for displaying ads that contains the terms and targeting information that is used for serving as well as the deal stats and status. Note: A proposal may contain multiple deals.
+type DealInput struct {
+	EstimatedGrossSpend         *Money                       `json:"estimatedGrossSpend,omitempty"`
+	FlightEndTime               *string                      `json:"flightEndTime,omitempty"`
+	FlightStartTime             *string                      `json:"flightStartTime,omitempty"`
+	Name                        *string                      `json:"name,omitempty"`
+	PreferredDealTerms          *PreferredDealTerms          `json:"preferredDealTerms,omitempty"`
+	PrivateAuctionTerms         *PrivateAuctionTermsInput    `json:"privateAuctionTerms,omitempty"`
+	ProgrammaticGuaranteedTerms *ProgrammaticGuaranteedTerms `json:"programmaticGuaranteedTerms,omitempty"`
+	PublisherProfile            *string                      `json:"publisherProfile,omitempty"`
+	SellerTimeZone              *TimeZone                    `json:"sellerTimeZone,omitempty"`
+	Targeting                   *MarketplaceTargeting        `json:"targeting,omitempty"`
+}
+
+// Deal
+// A deal represents a segment of inventory for displaying ads that contains the terms and targeting information that is used for serving as well as the deal stats and status. Note: A proposal may contain multiple deals.
 type Deal struct {
 	BilledBuyer                 *string                      `json:"billedBuyer,omitempty"`
 	Buyer                       *string                      `json:"buyer,omitempty"`

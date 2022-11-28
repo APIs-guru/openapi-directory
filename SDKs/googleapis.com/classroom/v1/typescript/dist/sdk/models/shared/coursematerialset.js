@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CourseMaterial } from "./coursematerial";
 // CourseMaterialSet
 /**
  * A set of materials that appears on the "About" page of the course. These materials might include a syllabus, schedule, or other background information relating to the course as a whole.
@@ -34,11 +34,11 @@ var CourseMaterialSet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=materials", elemType: shared.CourseMaterial }),
+        SpeakeasyMetadata({ data: "json, name=materials", elemType: CourseMaterial }),
         __metadata("design:type", Array)
     ], CourseMaterialSet.prototype, "materials", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], CourseMaterialSet.prototype, "title", void 0);
     return CourseMaterialSet;

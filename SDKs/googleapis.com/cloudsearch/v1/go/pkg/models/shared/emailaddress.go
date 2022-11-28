@@ -1,5 +1,7 @@
 package shared
 
+// EmailAddress
+// A person's email address.
 type EmailAddress struct {
 	CustomType   *string `json:"customType,omitempty"`
 	EmailAddress *string `json:"emailAddress,omitempty"`

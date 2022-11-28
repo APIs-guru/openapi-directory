@@ -8,6 +8,8 @@ const (
 	BackendRulePathTranslationEnumAppendPathToAddress        BackendRulePathTranslationEnum = "APPEND_PATH_TO_ADDRESS"
 )
 
+// BackendRule
+// A backend rule provides configuration for an individual API element.
 type BackendRule struct {
 	Address           *string                         `json:"address,omitempty"`
 	Deadline          *float64                        `json:"deadline,omitempty"`

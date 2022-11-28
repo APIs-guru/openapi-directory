@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReplicationPendingModifiedValues
 /**
  * Provides information about the values of pending modifications to a replication instance. This data type is an object of the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_ReplicationInstance.html"> <code>ReplicationInstance</code> </a> user-defined data type.
@@ -33,19 +33,19 @@ var ReplicationPendingModifiedValues = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllocatedStorage" }),
+        SpeakeasyMetadata({ data: "json, name=AllocatedStorage" }),
         __metadata("design:type", Number)
     ], ReplicationPendingModifiedValues.prototype, "allocatedStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], ReplicationPendingModifiedValues.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=MultiAZ" }),
+        SpeakeasyMetadata({ data: "json, name=MultiAZ" }),
         __metadata("design:type", Boolean)
     ], ReplicationPendingModifiedValues.prototype, "multiAz", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceClass" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceClass" }),
         __metadata("design:type", String)
     ], ReplicationPendingModifiedValues.prototype, "replicationInstanceClass", void 0);
     return ReplicationPendingModifiedValues;

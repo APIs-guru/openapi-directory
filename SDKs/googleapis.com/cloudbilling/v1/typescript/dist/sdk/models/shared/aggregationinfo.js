@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AggregationInfoAggregationIntervalEnum;
 (function (AggregationInfoAggregationIntervalEnum) {
     AggregationInfoAggregationIntervalEnum["AggregationIntervalUnspecified"] = "AGGREGATION_INTERVAL_UNSPECIFIED";
@@ -45,15 +45,15 @@ var AggregationInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aggregationCount" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationCount" }),
         __metadata("design:type", Number)
     ], AggregationInfo.prototype, "aggregationCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=aggregationInterval" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationInterval" }),
         __metadata("design:type", String)
     ], AggregationInfo.prototype, "aggregationInterval", void 0);
     __decorate([
-        Metadata({ data: "json, name=aggregationLevel" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationLevel" }),
         __metadata("design:type", String)
     ], AggregationInfo.prototype, "aggregationLevel", void 0);
     return AggregationInfo;

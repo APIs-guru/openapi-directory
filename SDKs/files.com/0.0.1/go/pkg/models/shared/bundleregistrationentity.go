@@ -1,5 +1,7 @@
 package shared
 
+// BundleRegistrationEntity
+// List Bundle Registrations
 type BundleRegistrationEntity struct {
 	ClickwrapBody  *string `json:"clickwrap_body,omitempty"`
 	Code           *string `json:"code,omitempty"`

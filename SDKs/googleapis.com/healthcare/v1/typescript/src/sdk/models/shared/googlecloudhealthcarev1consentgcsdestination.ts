@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudHealthcareV1ConsentGcsDestination
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Cloud Storage location for export.
 **/
 export class GoogleCloudHealthcareV1ConsentGcsDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uriPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=uriPrefix" })
   uriPrefix?: string;
 }

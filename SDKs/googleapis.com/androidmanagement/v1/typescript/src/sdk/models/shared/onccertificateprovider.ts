@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentProviderEndpoint } from "./contentproviderendpoint";
+
 
 
 // OncCertificateProvider
@@ -7,9 +8,9 @@ import { ContentProviderEndpoint } from "./contentproviderendpoint";
  * This feature is not generally available.
 **/
 export class OncCertificateProvider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateReferences" })
+  @SpeakeasyMetadata({ data: "json, name=certificateReferences" })
   certificateReferences?: string[];
 
-  @Metadata({ data: "json, name=contentProviderEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=contentProviderEndpoint" })
   contentProviderEndpoint?: ContentProviderEndpoint;
 }

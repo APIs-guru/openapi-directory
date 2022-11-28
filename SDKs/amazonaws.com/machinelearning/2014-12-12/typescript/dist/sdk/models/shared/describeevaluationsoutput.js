@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Evaluation } from "./evaluation";
 // DescribeEvaluationsOutput
 /**
  * Represents the query results from a <code>DescribeEvaluations</code> operation. The content is essentially a list of <code>Evaluation</code>.
@@ -34,11 +34,11 @@ var DescribeEvaluationsOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeEvaluationsOutput.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Results", elemType: shared.Evaluation }),
+        SpeakeasyMetadata({ data: "json, name=Results", elemType: Evaluation }),
         __metadata("design:type", Array)
     ], DescribeEvaluationsOutput.prototype, "results", void 0);
     return DescribeEvaluationsOutput;

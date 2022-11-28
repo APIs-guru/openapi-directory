@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class AnalyticsreportingUserActivitySearchQueryParams:
 
 @dataclass
 class AnalyticsreportingUserActivitySearchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsreportingUserActivitySearchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class AnalyticsreportingUserActivitySearchSecurity:
 
 @dataclass
 class AnalyticsreportingUserActivitySearchRequest:
-    query_params: AnalyticsreportingUserActivitySearchQueryParams = field(default=None)
+    query_params: AnalyticsreportingUserActivitySearchQueryParams = field()
+    security: AnalyticsreportingUserActivitySearchSecurity = field()
     request: Optional[shared.SearchUserActivityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsreportingUserActivitySearchSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsreportingUserActivitySearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_user_activity_response: Optional[shared.SearchUserActivityResponse] = field(default=None)
-    status_code: int = field(default=None)
     

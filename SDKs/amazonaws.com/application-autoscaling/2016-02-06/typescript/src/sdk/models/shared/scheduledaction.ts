@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ScalableTargetAction } from "./scalabletargetaction";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
+
 
 
 // ScheduledAction
@@ -9,36 +10,36 @@ import { ServiceNamespaceEnum } from "./servicenamespaceenum";
  * Represents a scheduled action.
 **/
 export class ScheduledAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=ScalableDimension" })
+  @SpeakeasyMetadata({ data: "json, name=ScalableDimension" })
   scalableDimension?: ScalableDimensionEnum;
 
-  @Metadata({ data: "json, name=ScalableTargetAction" })
+  @SpeakeasyMetadata({ data: "json, name=ScalableTargetAction" })
   scalableTargetAction?: ScalableTargetAction;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule: string;
 
-  @Metadata({ data: "json, name=ScheduledActionARN" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledActionARN" })
   scheduledActionArn: string;
 
-  @Metadata({ data: "json, name=ScheduledActionName" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledActionName" })
   scheduledActionName: string;
 
-  @Metadata({ data: "json, name=ServiceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNamespace" })
   serviceNamespace: ServiceNamespaceEnum;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 }

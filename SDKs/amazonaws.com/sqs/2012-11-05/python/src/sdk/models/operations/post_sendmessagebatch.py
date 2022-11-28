@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSendMessageBatchActionEnum(str, Enum):
     SEND_MESSAGE_BATCH = "SendMessageBatch"
@@ -10,8 +14,8 @@ class PostSendMessageBatchVersionEnum(str, Enum):
 
 @dataclass
 class PostSendMessageBatchQueryParams:
-    action: PostSendMessageBatchActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSendMessageBatchVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSendMessageBatchActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSendMessageBatchVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSendMessageBatchHeaders:
 
 @dataclass
 class PostSendMessageBatchRequest:
-    query_params: PostSendMessageBatchQueryParams = field(default=None)
-    headers: PostSendMessageBatchHeaders = field(default=None)
+    headers: PostSendMessageBatchHeaders = field()
+    query_params: PostSendMessageBatchQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSendMessageBatchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

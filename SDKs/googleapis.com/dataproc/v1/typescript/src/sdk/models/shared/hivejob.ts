@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryList } from "./querylist";
+
 
 
 // HiveJob
@@ -7,21 +8,21 @@ import { QueryList } from "./querylist";
  * A Dataproc job for running Apache Hive (https://hive.apache.org/) queries on YARN.
 **/
 export class HiveJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continueOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=continueOnFailure" })
   continueOnFailure?: boolean;
 
-  @Metadata({ data: "json, name=jarFileUris" })
+  @SpeakeasyMetadata({ data: "json, name=jarFileUris" })
   jarFileUris?: string[];
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=queryFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=queryFileUri" })
   queryFileUri?: string;
 
-  @Metadata({ data: "json, name=queryList" })
+  @SpeakeasyMetadata({ data: "json, name=queryList" })
   queryList?: QueryList;
 
-  @Metadata({ data: "json, name=scriptVariables" })
+  @SpeakeasyMetadata({ data: "json, name=scriptVariables" })
   scriptVariables?: Map<string, string>;
 }

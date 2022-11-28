@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NetworkInterface
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the elastic network interface for tasks that use the <code>awsvpc</code> network mode.
 **/
 export class NetworkInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentId" })
+  @SpeakeasyMetadata({ data: "json, name=attachmentId" })
   attachmentId?: string;
 
-  @Metadata({ data: "json, name=ipv6Address" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6Address" })
   ipv6Address?: string;
 
-  @Metadata({ data: "json, name=privateIpv4Address" })
+  @SpeakeasyMetadata({ data: "json, name=privateIpv4Address" })
   privateIpv4Address?: string;
 }

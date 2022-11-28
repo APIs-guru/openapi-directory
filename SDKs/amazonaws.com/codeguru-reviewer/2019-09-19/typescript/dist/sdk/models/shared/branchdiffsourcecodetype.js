@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BranchDiffSourceCodeType
 /**
  *  A type of <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies a code diff between a source and destination branch in an associated repository.
@@ -33,11 +33,11 @@ var BranchDiffSourceCodeType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationBranchName" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationBranchName" }),
         __metadata("design:type", String)
     ], BranchDiffSourceCodeType.prototype, "destinationBranchName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceBranchName" }),
+        SpeakeasyMetadata({ data: "json, name=SourceBranchName" }),
         __metadata("design:type", String)
     ], BranchDiffSourceCodeType.prototype, "sourceBranchName", void 0);
     return BranchDiffSourceCodeType;

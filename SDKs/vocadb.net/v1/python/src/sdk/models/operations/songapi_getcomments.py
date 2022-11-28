@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class SongAPIGetCommentsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SongAPIGetCommentsRequest:
-    path_params: SongAPIGetCommentsPathParams = field(default=None)
+    path_params: SongAPIGetCommentsPathParams = field()
     
 
 @dataclass
 class SongAPIGetCommentsResponse:
-    body: bytes = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     comment_for_api_contracts: Optional[List[shared.CommentForAPIContract]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

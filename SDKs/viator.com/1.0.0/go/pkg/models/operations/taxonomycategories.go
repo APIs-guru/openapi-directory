@@ -8,11 +8,6 @@ type TaxonomyCategoriesHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type TaxonomyCategoriesRequest struct {
-	QueryParams TaxonomyCategoriesQueryParams
-	Headers     TaxonomyCategoriesHeaders
-}
-
 type TaxonomyCategories200ApplicationJSONDataSubcategories struct {
 	CategoryID         *int64  `json:"categoryId,omitempty"`
 	Sortorder          *int64  `json:"sortorder,omitempty"`
@@ -44,6 +39,11 @@ type TaxonomyCategories200ApplicationJSON struct {
 	Success          *bool                                      `json:"success,omitempty"`
 	TotalCount       *int64                                     `json:"totalCount,omitempty"`
 	Vmid             *string                                    `json:"vmid,omitempty"`
+}
+
+type TaxonomyCategoriesRequest struct {
+	QueryParams TaxonomyCategoriesQueryParams
+	Headers     TaxonomyCategoriesHeaders
 }
 
 type TaxonomyCategoriesResponse struct {

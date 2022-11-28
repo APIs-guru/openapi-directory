@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InferenceExecutionSummary } from "./inferenceexecutionsummary";
 export declare class ListInferenceExecutionsResponse extends SpeakeasyBase {
     inferenceExecutionSummaries?: InferenceExecutionSummary[];

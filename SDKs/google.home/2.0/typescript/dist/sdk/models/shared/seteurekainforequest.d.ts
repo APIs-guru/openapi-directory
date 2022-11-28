@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OptIn1 } from "./optin1";
 import { Settings1 } from "./settings1";
 export declare class SetEurekaInfoRequest extends SpeakeasyBase {

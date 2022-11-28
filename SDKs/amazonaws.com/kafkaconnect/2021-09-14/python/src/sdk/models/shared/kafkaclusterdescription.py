@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import apachekafkaclusterdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class KafkaClusterDescription:
-    apache_kafka_cluster: Optional[apachekafkaclusterdescription.ApacheKafkaClusterDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apacheKafkaCluster' }})
+    r"""KafkaClusterDescription
+    Details of how to connect to the Apache Kafka cluster.
+    """
+    
+    apache_kafka_cluster: Optional[ApacheKafkaClusterDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apacheKafkaCluster') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConsentList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List of resource names of Consent resources.
 **/
 export class ConsentList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consents" })
+  @SpeakeasyMetadata({ data: "json, name=consents" })
   consents?: string[];
 }

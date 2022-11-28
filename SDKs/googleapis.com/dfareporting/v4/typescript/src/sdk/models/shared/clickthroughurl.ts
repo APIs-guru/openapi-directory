@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClickThroughUrl
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Click-through URL
 **/
 export class ClickThroughUrl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computedClickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=computedClickThroughUrl" })
   computedClickThroughUrl?: string;
 
-  @Metadata({ data: "json, name=customClickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=customClickThroughUrl" })
   customClickThroughUrl?: string;
 
-  @Metadata({ data: "json, name=defaultLandingPage" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLandingPage" })
   defaultLandingPage?: boolean;
 
-  @Metadata({ data: "json, name=landingPageId" })
+  @SpeakeasyMetadata({ data: "json, name=landingPageId" })
   landingPageId?: string;
 }

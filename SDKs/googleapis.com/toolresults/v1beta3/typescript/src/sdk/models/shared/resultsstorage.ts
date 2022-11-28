@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileReference } from "./filereference";
-import { FileReference } from "./filereference";
+
 
 
 // ResultsStorage
@@ -8,9 +8,9 @@ import { FileReference } from "./filereference";
  * The storage for test results.
 **/
 export class ResultsStorage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resultsStoragePath" })
+  @SpeakeasyMetadata({ data: "json, name=resultsStoragePath" })
   resultsStoragePath?: FileReference;
 
-  @Metadata({ data: "json, name=xunitXmlFile" })
+  @SpeakeasyMetadata({ data: "json, name=xunitXmlFile" })
   xunitXmlFile?: FileReference;
 }

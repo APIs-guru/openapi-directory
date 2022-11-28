@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SupportTicketRequest
@@ -8,33 +9,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class SupportTicketRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=domain_id" })
+  @SpeakeasyMetadata({ data: "json, name=domain_id" })
   domainId?: number;
 
-  @Metadata({ data: "json, name=linode_id" })
+  @SpeakeasyMetadata({ data: "json, name=linode_id" })
   linodeId?: number;
 
-  @Metadata({ data: "json, name=longviewclient_id" })
+  @SpeakeasyMetadata({ data: "json, name=longviewclient_id" })
   longviewclientId?: number;
 
-  @Metadata({ data: "json, name=managed_issue" })
+  @SpeakeasyMetadata({ data: "json, name=managed_issue" })
   managedIssue?: boolean;
 
-  @Metadata({ data: "json, name=nodebalancer_id" })
+  @SpeakeasyMetadata({ data: "json, name=nodebalancer_id" })
   nodebalancerId?: number;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: string;
 
-  @Metadata({ data: "json, name=volume_id" })
+  @SpeakeasyMetadata({ data: "json, name=volume_id" })
   volumeId?: number;
 }

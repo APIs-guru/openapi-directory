@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetTagPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    tag_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    tag_id: str = field(metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +16,20 @@ class GetTagQueryParams:
 
 @dataclass
 class GetTagHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTagRequest:
-    path_params: GetTagPathParams = field(default=None)
-    query_params: GetTagQueryParams = field(default=None)
-    headers: GetTagHeaders = field(default=None)
+    headers: GetTagHeaders = field()
+    path_params: GetTagPathParams = field()
+    query_params: GetTagQueryParams = field()
     
 
 @dataclass
 class GetTagResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag: Optional[shared.Tag] = field(default=None)
     

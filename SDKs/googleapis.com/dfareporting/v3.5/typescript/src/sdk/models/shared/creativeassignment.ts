@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClickThroughUrl } from "./clickthroughurl";
 import { CompanionClickThroughOverride } from "./companionclickthroughoverride";
 import { CreativeGroupAssignment } from "./creativegroupassignment";
@@ -7,47 +6,48 @@ import { DimensionValue } from "./dimensionvalue";
 import { RichMediaExitOverride } from "./richmediaexitoverride";
 
 
+
 // CreativeAssignment
 /** 
  * Creative Assignment.
 **/
 export class CreativeAssignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=applyEventTags" })
+  @SpeakeasyMetadata({ data: "json, name=applyEventTags" })
   applyEventTags?: boolean;
 
-  @Metadata({ data: "json, name=clickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrl" })
   clickThroughUrl?: ClickThroughUrl;
 
-  @Metadata({ data: "json, name=companionCreativeOverrides", elemType: shared.CompanionClickThroughOverride })
+  @SpeakeasyMetadata({ data: "json, name=companionCreativeOverrides", elemType: CompanionClickThroughOverride })
   companionCreativeOverrides?: CompanionClickThroughOverride[];
 
-  @Metadata({ data: "json, name=creativeGroupAssignments", elemType: shared.CreativeGroupAssignment })
+  @SpeakeasyMetadata({ data: "json, name=creativeGroupAssignments", elemType: CreativeGroupAssignment })
   creativeGroupAssignments?: CreativeGroupAssignment[];
 
-  @Metadata({ data: "json, name=creativeId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeId" })
   creativeId?: string;
 
-  @Metadata({ data: "json, name=creativeIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=creativeIdDimensionValue" })
   creativeIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=richMediaExitOverrides", elemType: shared.RichMediaExitOverride })
+  @SpeakeasyMetadata({ data: "json, name=richMediaExitOverrides", elemType: RichMediaExitOverride })
   richMediaExitOverrides?: RichMediaExitOverride[];
 
-  @Metadata({ data: "json, name=sequence" })
+  @SpeakeasyMetadata({ data: "json, name=sequence" })
   sequence?: number;
 
-  @Metadata({ data: "json, name=sslCompliant" })
+  @SpeakeasyMetadata({ data: "json, name=sslCompliant" })
   sslCompliant?: boolean;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

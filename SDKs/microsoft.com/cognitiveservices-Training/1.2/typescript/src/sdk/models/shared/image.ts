@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PredictionTag } from "./predictiontag";
 import { ImageTag } from "./imagetag";
+
 
 
 // Image
@@ -9,27 +9,27 @@ import { ImageTag } from "./imagetag";
  * Image model to be sent as JSON
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Created" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=Predictions", elemType: shared.PredictionTag })
+  @SpeakeasyMetadata({ data: "json, name=Predictions", elemType: PredictionTag })
   predictions?: PredictionTag[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.ImageTag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: ImageTag })
   tags?: ImageTag[];
 
-  @Metadata({ data: "json, name=ThumbnailUri" })
+  @SpeakeasyMetadata({ data: "json, name=ThumbnailUri" })
   thumbnailUri?: string;
 
-  @Metadata({ data: "json, name=Width" })
+  @SpeakeasyMetadata({ data: "json, name=Width" })
   width?: number;
 }

@@ -1,8 +1,10 @@
-import warnings
+
+
 import requests
-from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared
 from . import utils
+
+from .api_calls import APICalls
 
 
 SERVERS = [
@@ -11,87 +13,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+    api_calls: APICalls
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        self._init_sdks()
+    
+
     def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
-
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        self._init_sdks()
     
-    def get_records_format_(self, request: operations.GetRecordsFormatRequest) -> operations.GetRecordsFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/records.{format}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetRecordsFormatResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetRecordsFormat200ApplicationJSON])
-                res.get_records_format_200_application_json_object = out
-        elif r.status_code == 400:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.get_records_format_400_application_json_object = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-        elif r.status_code == 403:
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.get_records_format_403_application_json_object = out
-
-        return res
-
     
-    def get_records_record_id_json(self, request: operations.GetRecordsRecordIDJSONRequest) -> operations.GetRecordsRecordIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/records/{record_id}.json", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetRecordsRecordIDJSONResponse(status_code=r.status_code, content_type=content_type)
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Record])
-                res.record = out
-        elif r.status_code == 403:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.get_records_record_id_json_403_application_json_object = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-        elif r.status_code == 404:
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.get_records_record_id_json_404_application_json_object = out
-
-        return res
-
+        self.api_calls = APICalls(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+    
     

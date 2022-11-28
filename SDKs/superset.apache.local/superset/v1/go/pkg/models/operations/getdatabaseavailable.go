@@ -8,10 +8,6 @@ type GetDatabaseAvailableSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDatabaseAvailableRequest struct {
-	Security GetDatabaseAvailableSecurity
-}
-
 type GetDatabaseAvailable200ApplicationJSON struct {
 	AvailableDrivers         []string               `json:"available_drivers,omitempty"`
 	DefaultDriver            *string                `json:"default_driver,omitempty"`
@@ -28,6 +24,10 @@ type GetDatabaseAvailable400ApplicationJSON struct {
 
 type GetDatabaseAvailable500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDatabaseAvailableRequest struct {
+	Security GetDatabaseAvailableSecurity
 }
 
 type GetDatabaseAvailableResponse struct {

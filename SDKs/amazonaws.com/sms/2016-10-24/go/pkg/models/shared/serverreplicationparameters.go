@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServerReplicationParameters
+// The replication parameters for replicating a server.
 type ServerReplicationParameters struct {
 	Encrypted                *bool            `json:"encrypted,omitempty"`
 	Frequency                *int64           `json:"frequency,omitempty"`

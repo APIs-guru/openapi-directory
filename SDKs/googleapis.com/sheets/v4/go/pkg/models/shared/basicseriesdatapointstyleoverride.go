@@ -1,5 +1,7 @@
 package shared
 
+// BasicSeriesDataPointStyleOverride
+// Style override settings for a single series data point.
 type BasicSeriesDataPointStyleOverride struct {
 	Color      *Color      `json:"color,omitempty"`
 	ColorStyle *ColorStyle `json:"colorStyle,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatastorePartition } from "./datastorepartition";
 /**
  *  Contains information about the partition dimensions in a data store.

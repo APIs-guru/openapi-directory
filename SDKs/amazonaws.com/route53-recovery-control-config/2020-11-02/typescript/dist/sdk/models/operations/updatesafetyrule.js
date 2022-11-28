@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateSafetyRuleHeaders = /** @class */ (function (_super) {
     __extends(UpdateSafetyRuleHeaders, _super);
@@ -30,31 +30,31 @@ var UpdateSafetyRuleHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateSafetyRuleHeaders;
@@ -70,15 +70,15 @@ var UpdateSafetyRuleRequestBodyAssertionRuleUpdate = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleRequestBodyAssertionRuleUpdate.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SafetyRuleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SafetyRuleArn" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleRequestBodyAssertionRuleUpdate.prototype, "safetyRuleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=WaitPeriodMs" }),
+        SpeakeasyMetadata({ data: "json, name=WaitPeriodMs" }),
         __metadata("design:type", Number)
     ], UpdateSafetyRuleRequestBodyAssertionRuleUpdate.prototype, "waitPeriodMs", void 0);
     return UpdateSafetyRuleRequestBodyAssertionRuleUpdate;
@@ -94,15 +94,15 @@ var UpdateSafetyRuleRequestBodyGatingRuleUpdate = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleRequestBodyGatingRuleUpdate.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SafetyRuleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SafetyRuleArn" }),
         __metadata("design:type", String)
     ], UpdateSafetyRuleRequestBodyGatingRuleUpdate.prototype, "safetyRuleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=WaitPeriodMs" }),
+        SpeakeasyMetadata({ data: "json, name=WaitPeriodMs" }),
         __metadata("design:type", Number)
     ], UpdateSafetyRuleRequestBodyGatingRuleUpdate.prototype, "waitPeriodMs", void 0);
     return UpdateSafetyRuleRequestBodyGatingRuleUpdate;
@@ -114,11 +114,11 @@ var UpdateSafetyRuleRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssertionRuleUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=AssertionRuleUpdate" }),
         __metadata("design:type", UpdateSafetyRuleRequestBodyAssertionRuleUpdate)
     ], UpdateSafetyRuleRequestBody.prototype, "assertionRuleUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=GatingRuleUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=GatingRuleUpdate" }),
         __metadata("design:type", UpdateSafetyRuleRequestBodyGatingRuleUpdate)
     ], UpdateSafetyRuleRequestBody.prototype, "gatingRuleUpdate", void 0);
     return UpdateSafetyRuleRequestBody;
@@ -130,11 +130,11 @@ var UpdateSafetyRuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSafetyRuleHeaders)
     ], UpdateSafetyRuleRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateSafetyRuleRequestBody)
     ], UpdateSafetyRuleRequest.prototype, "request", void 0);
     return UpdateSafetyRuleRequest;
@@ -146,27 +146,27 @@ var UpdateSafetyRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateSafetyRuleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateSafetyRuleResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateSafetyRuleResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateSafetyRuleResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateSafetyRuleResponse)
     ], UpdateSafetyRuleResponse.prototype, "updateSafetyRuleResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateSafetyRuleResponse.prototype, "validationException", void 0);
     return UpdateSafetyRuleResponse;

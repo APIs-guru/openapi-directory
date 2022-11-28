@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingMethodEnum } from "./billingmethodenum";
+
 
 
 // CreateRemoteAccessSessionConfiguration
@@ -7,9 +8,9 @@ import { BillingMethodEnum } from "./billingmethodenum";
  * Configuration settings for a remote access session, including billing method.
 **/
 export class CreateRemoteAccessSessionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingMethod" })
+  @SpeakeasyMetadata({ data: "json, name=billingMethod" })
   billingMethod?: BillingMethodEnum;
 
-  @Metadata({ data: "json, name=vpceConfigurationArns" })
+  @SpeakeasyMetadata({ data: "json, name=vpceConfigurationArns" })
   vpceConfigurationArns?: string[];
 }

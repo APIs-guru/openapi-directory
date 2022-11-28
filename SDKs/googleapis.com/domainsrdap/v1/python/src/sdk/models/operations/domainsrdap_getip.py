@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,12 +21,12 @@ class DomainsrdapGetIPQueryParams:
 
 @dataclass
 class DomainsrdapGetIPRequest:
-    query_params: DomainsrdapGetIPQueryParams = field(default=None)
+    query_params: DomainsrdapGetIPQueryParams = field()
     
 
 @dataclass
 class DomainsrdapGetIPResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_body: Optional[shared.HTTPBody] = field(default=None)
-    status_code: int = field(default=None)
     

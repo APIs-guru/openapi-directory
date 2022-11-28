@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioAnalysisContributionsReturnRequestBodyPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights: number[];
 }
 
 
 export class PostPortfolioAnalysisContributionsReturnRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets: number;
 
-  @Metadata({ data: "json, name=assetsGroups" })
+  @SpeakeasyMetadata({ data: "json, name=assetsGroups" })
   assetsGroups?: number[][];
 
-  @Metadata({ data: "json, name=assetsReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetsReturns" })
   assetsReturns: number[];
 
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisContributionsReturnRequestBodyPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisContributionsReturnRequestBodyPortfolios })
   portfolios: PostPortfolioAnalysisContributionsReturnRequestBodyPortfolios[];
 }
 
 
-export class PostPortfolioAnalysisContributionsReturnRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioAnalysisContributionsReturnRequestBody;
-}
-
-
 export class PostPortfolioAnalysisContributionsReturn200ApplicationJsonPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsGroupsReturnContributions" })
+  @SpeakeasyMetadata({ data: "json, name=assetsGroupsReturnContributions" })
   assetsGroupsReturnContributions?: number[];
 
-  @Metadata({ data: "json, name=assetsReturnContributions" })
+  @SpeakeasyMetadata({ data: "json, name=assetsReturnContributions" })
   assetsReturnContributions: number[];
 }
 
 
 export class PostPortfolioAnalysisContributionsReturn200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisContributionsReturn200ApplicationJsonPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisContributionsReturn200ApplicationJsonPortfolios })
   portfolios: PostPortfolioAnalysisContributionsReturn200ApplicationJsonPortfolios[];
 }
 
 
+export class PostPortfolioAnalysisContributionsReturnRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioAnalysisContributionsReturnRequestBody;
+}
+
+
 export class PostPortfolioAnalysisContributionsReturnResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioAnalysisContributionsReturn200ApplicationJsonObject?: PostPortfolioAnalysisContributionsReturn200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

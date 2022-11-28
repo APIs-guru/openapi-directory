@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CustomPage = /** @class */ (function (_super) {
     __extends(CustomPage, _super);
     function CustomPage() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], CustomPage.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=hidden" }),
+        SpeakeasyMetadata({ data: "json, name=hidden" }),
         __metadata("design:type", Boolean)
     ], CustomPage.prototype, "hidden", void 0);
     __decorate([
-        Metadata({ data: "json, name=html" }),
+        SpeakeasyMetadata({ data: "json, name=html" }),
         __metadata("design:type", String)
     ], CustomPage.prototype, "html", void 0);
     __decorate([
-        Metadata({ data: "json, name=htmlmode" }),
+        SpeakeasyMetadata({ data: "json, name=htmlmode" }),
         __metadata("design:type", Boolean)
     ], CustomPage.prototype, "htmlmode", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], CustomPage.prototype, "title", void 0);
     return CustomPage;

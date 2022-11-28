@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ViolatingResource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information regarding any resource causing the vulnerability such as JavaScript sources, image, audio files, etc.
 **/
 export class ViolatingResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentType" })
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=resourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUrl" })
   resourceUrl?: string;
 }

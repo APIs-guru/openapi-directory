@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ImageIdentifier
 /**
  * An object with identifying information for an Amazon ECR image.
@@ -33,11 +33,11 @@ var ImageIdentifier = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imageDigest" }),
+        SpeakeasyMetadata({ data: "json, name=imageDigest" }),
         __metadata("design:type", String)
     ], ImageIdentifier.prototype, "imageDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageTag" }),
+        SpeakeasyMetadata({ data: "json, name=imageTag" }),
         __metadata("design:type", String)
     ], ImageIdentifier.prototype, "imageTag", void 0);
     return ImageIdentifier;

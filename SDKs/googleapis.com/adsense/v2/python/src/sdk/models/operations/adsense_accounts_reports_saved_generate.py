@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsenseAccountsReportsSavedGeneratePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class AdsenseAccountsReportsSavedGenerateDateRangeEnum(str, Enum):
     REPORTING_DATE_RANGE_UNSPECIFIED = "REPORTING_DATE_RANGE_UNSPECIFIED"
@@ -50,14 +54,14 @@ class AdsenseAccountsReportsSavedGenerateQueryParams:
 
 @dataclass
 class AdsenseAccountsReportsSavedGenerateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsenseAccountsReportsSavedGenerateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -68,14 +72,14 @@ class AdsenseAccountsReportsSavedGenerateSecurity:
 
 @dataclass
 class AdsenseAccountsReportsSavedGenerateRequest:
-    path_params: AdsenseAccountsReportsSavedGeneratePathParams = field(default=None)
-    query_params: AdsenseAccountsReportsSavedGenerateQueryParams = field(default=None)
-    security: AdsenseAccountsReportsSavedGenerateSecurity = field(default=None)
+    path_params: AdsenseAccountsReportsSavedGeneratePathParams = field()
+    query_params: AdsenseAccountsReportsSavedGenerateQueryParams = field()
+    security: AdsenseAccountsReportsSavedGenerateSecurity = field()
     
 
 @dataclass
 class AdsenseAccountsReportsSavedGenerateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report_result: Optional[shared.ReportResult] = field(default=None)
-    status_code: int = field(default=None)
     

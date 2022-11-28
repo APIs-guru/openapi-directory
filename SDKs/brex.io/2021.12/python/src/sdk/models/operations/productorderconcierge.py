@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -21,19 +22,19 @@ class ProductOrderConciergeRequestBody:
 
 @dataclass
 class ProductOrderConciergeSecurity:
-    user_key: shared.SchemeUserKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    user_key: shared.SchemeUserKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ProductOrderConciergeRequest:
+    security: ProductOrderConciergeSecurity = field()
     request: Optional[ProductOrderConciergeRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: ProductOrderConciergeSecurity = field(default=None)
     
 
 @dataclass
 class ProductOrderConciergeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product_order_concierge_200_application_json_any: Optional[Any] = field(default=None)
     product_order_concierge_default_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

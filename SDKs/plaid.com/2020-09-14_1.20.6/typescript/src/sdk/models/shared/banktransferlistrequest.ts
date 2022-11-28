@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BankTransferDirectionEnum } from "./banktransferdirectionenum";
+
 
 
 // BankTransferListRequest
@@ -7,27 +8,27 @@ import { BankTransferDirectionEnum } from "./banktransferdirectionenum";
  * BankTransferListRequest defines the request schema for `/bank_transfer/list`
 **/
 export class BankTransferListRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: BankTransferDirectionEnum;
 
-  @Metadata({ data: "json, name=end_date" })
+  @SpeakeasyMetadata({ data: "json, name=end_date" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=origination_account_id" })
+  @SpeakeasyMetadata({ data: "json, name=origination_account_id" })
   originationAccountId?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=start_date" })
+  @SpeakeasyMetadata({ data: "json, name=start_date" })
   startDate?: Date;
 }

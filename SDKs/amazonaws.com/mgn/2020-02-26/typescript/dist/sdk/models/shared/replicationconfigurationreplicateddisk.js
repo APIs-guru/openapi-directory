@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum } from "./replicationconfigurationreplicateddiskstagingdisktypeenum";
 // ReplicationConfigurationReplicatedDisk
 /**
@@ -34,19 +34,19 @@ var ReplicationConfigurationReplicatedDisk = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceName" }),
+        SpeakeasyMetadata({ data: "json, name=deviceName" }),
         __metadata("design:type", String)
     ], ReplicationConfigurationReplicatedDisk.prototype, "deviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=iops" }),
+        SpeakeasyMetadata({ data: "json, name=iops" }),
         __metadata("design:type", Number)
     ], ReplicationConfigurationReplicatedDisk.prototype, "iops", void 0);
     __decorate([
-        Metadata({ data: "json, name=isBootDisk" }),
+        SpeakeasyMetadata({ data: "json, name=isBootDisk" }),
         __metadata("design:type", Boolean)
     ], ReplicationConfigurationReplicatedDisk.prototype, "isBootDisk", void 0);
     __decorate([
-        Metadata({ data: "json, name=stagingDiskType" }),
+        SpeakeasyMetadata({ data: "json, name=stagingDiskType" }),
         __metadata("design:type", String)
     ], ReplicationConfigurationReplicatedDisk.prototype, "stagingDiskType", void 0);
     return ReplicationConfigurationReplicatedDisk;

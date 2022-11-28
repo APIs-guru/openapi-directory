@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetStatsSeriesPeriodFieldsPeriodEnum(str, Enum):
     DAY = "day"
@@ -8,8 +9,8 @@ class GetStatsSeriesPeriodFieldsPeriodEnum(str, Enum):
 
 @dataclass
 class GetStatsSeriesPeriodFieldsPathParams:
-    fields: str = field(default=None, metadata={'path_param': { 'field_name': 'fields', 'style': 'simple', 'explode': False }})
-    period: GetStatsSeriesPeriodFieldsPeriodEnum = field(default=None, metadata={'path_param': { 'field_name': 'period', 'style': 'simple', 'explode': False }})
+    fields: str = field(metadata={'path_param': { 'field_name': 'fields', 'style': 'simple', 'explode': False }})
+    period: GetStatsSeriesPeriodFieldsPeriodEnum = field(metadata={'path_param': { 'field_name': 'period', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,13 +22,13 @@ class GetStatsSeriesPeriodFieldsQueryParams:
 
 @dataclass
 class GetStatsSeriesPeriodFieldsRequest:
-    path_params: GetStatsSeriesPeriodFieldsPathParams = field(default=None)
-    query_params: GetStatsSeriesPeriodFieldsQueryParams = field(default=None)
+    path_params: GetStatsSeriesPeriodFieldsPathParams = field()
+    query_params: GetStatsSeriesPeriodFieldsQueryParams = field()
     
 
 @dataclass
 class GetStatsSeriesPeriodFieldsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

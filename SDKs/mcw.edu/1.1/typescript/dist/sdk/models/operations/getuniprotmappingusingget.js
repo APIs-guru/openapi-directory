@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetUniProtMappingUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetUniProtMappingUsingGetPathParams, _super);
     function GetUniProtMappingUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
         __metadata("design:type", Number)
     ], GetUniProtMappingUsingGetPathParams.prototype, "rgdId", void 0);
     return GetUniProtMappingUsingGetPathParams;
@@ -41,7 +41,7 @@ var GetUniProtMappingUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUniProtMappingUsingGetPathParams)
     ], GetUniProtMappingUsingGetRequest.prototype, "pathParams", void 0);
     return GetUniProtMappingUsingGetRequest;
@@ -53,15 +53,15 @@ var GetUniProtMappingUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetUniProtMappingUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUniProtMappingUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUniProtMappingUsingGetResponse.prototype, "statusCode", void 0);
     return GetUniProtMappingUsingGetResponse;

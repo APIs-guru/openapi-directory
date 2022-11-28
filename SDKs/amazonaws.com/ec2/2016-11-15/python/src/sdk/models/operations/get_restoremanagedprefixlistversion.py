@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRestoreManagedPrefixListVersionActionEnum(str, Enum):
     RESTORE_MANAGED_PREFIX_LIST_VERSION = "RestoreManagedPrefixListVersion"
@@ -10,12 +14,12 @@ class GetRestoreManagedPrefixListVersionVersionEnum(str, Enum):
 
 @dataclass
 class GetRestoreManagedPrefixListVersionQueryParams:
-    action: GetRestoreManagedPrefixListVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    current_version: int = field(default=None, metadata={'query_param': { 'field_name': 'CurrentVersion', 'style': 'form', 'explode': True }})
+    action: GetRestoreManagedPrefixListVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    current_version: int = field(metadata={'query_param': { 'field_name': 'CurrentVersion', 'style': 'form', 'explode': True }})
+    prefix_list_id: str = field(metadata={'query_param': { 'field_name': 'PrefixListId', 'style': 'form', 'explode': True }})
+    previous_version: int = field(metadata={'query_param': { 'field_name': 'PreviousVersion', 'style': 'form', 'explode': True }})
+    version: GetRestoreManagedPrefixListVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    prefix_list_id: str = field(default=None, metadata={'query_param': { 'field_name': 'PrefixListId', 'style': 'form', 'explode': True }})
-    previous_version: int = field(default=None, metadata={'query_param': { 'field_name': 'PreviousVersion', 'style': 'form', 'explode': True }})
-    version: GetRestoreManagedPrefixListVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetRestoreManagedPrefixListVersionHeaders:
 
 @dataclass
 class GetRestoreManagedPrefixListVersionRequest:
-    query_params: GetRestoreManagedPrefixListVersionQueryParams = field(default=None)
-    headers: GetRestoreManagedPrefixListVersionHeaders = field(default=None)
+    headers: GetRestoreManagedPrefixListVersionHeaders = field()
+    query_params: GetRestoreManagedPrefixListVersionQueryParams = field()
     
 
 @dataclass
 class GetRestoreManagedPrefixListVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

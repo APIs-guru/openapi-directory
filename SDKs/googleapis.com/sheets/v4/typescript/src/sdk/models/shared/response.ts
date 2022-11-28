@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddBandingResponse } from "./addbandingresponse";
 import { AddChartResponse } from "./addchartresponse";
 import { AddDataSourceResponse } from "./adddatasourceresponse";
@@ -24,77 +24,78 @@ import { UpdateDeveloperMetadataResponse } from "./updatedevelopermetadatarespon
 import { UpdateEmbeddedObjectPositionResponse } from "./updateembeddedobjectpositionresponse";
 
 
+
 // Response
 /** 
  * A single response from an update.
 **/
 export class Response extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addBanding" })
+  @SpeakeasyMetadata({ data: "json, name=addBanding" })
   addBanding?: AddBandingResponse;
 
-  @Metadata({ data: "json, name=addChart" })
+  @SpeakeasyMetadata({ data: "json, name=addChart" })
   addChart?: AddChartResponse;
 
-  @Metadata({ data: "json, name=addDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=addDataSource" })
   addDataSource?: AddDataSourceResponse;
 
-  @Metadata({ data: "json, name=addDimensionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=addDimensionGroup" })
   addDimensionGroup?: AddDimensionGroupResponse;
 
-  @Metadata({ data: "json, name=addFilterView" })
+  @SpeakeasyMetadata({ data: "json, name=addFilterView" })
   addFilterView?: AddFilterViewResponse;
 
-  @Metadata({ data: "json, name=addNamedRange" })
+  @SpeakeasyMetadata({ data: "json, name=addNamedRange" })
   addNamedRange?: AddNamedRangeResponse;
 
-  @Metadata({ data: "json, name=addProtectedRange" })
+  @SpeakeasyMetadata({ data: "json, name=addProtectedRange" })
   addProtectedRange?: AddProtectedRangeResponse;
 
-  @Metadata({ data: "json, name=addSheet" })
+  @SpeakeasyMetadata({ data: "json, name=addSheet" })
   addSheet?: AddSheetResponse;
 
-  @Metadata({ data: "json, name=addSlicer" })
+  @SpeakeasyMetadata({ data: "json, name=addSlicer" })
   addSlicer?: AddSlicerResponse;
 
-  @Metadata({ data: "json, name=createDeveloperMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=createDeveloperMetadata" })
   createDeveloperMetadata?: CreateDeveloperMetadataResponse;
 
-  @Metadata({ data: "json, name=deleteConditionalFormatRule" })
+  @SpeakeasyMetadata({ data: "json, name=deleteConditionalFormatRule" })
   deleteConditionalFormatRule?: DeleteConditionalFormatRuleResponse;
 
-  @Metadata({ data: "json, name=deleteDeveloperMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDeveloperMetadata" })
   deleteDeveloperMetadata?: DeleteDeveloperMetadataResponse;
 
-  @Metadata({ data: "json, name=deleteDimensionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDimensionGroup" })
   deleteDimensionGroup?: DeleteDimensionGroupResponse;
 
-  @Metadata({ data: "json, name=deleteDuplicates" })
+  @SpeakeasyMetadata({ data: "json, name=deleteDuplicates" })
   deleteDuplicates?: DeleteDuplicatesResponse;
 
-  @Metadata({ data: "json, name=duplicateFilterView" })
+  @SpeakeasyMetadata({ data: "json, name=duplicateFilterView" })
   duplicateFilterView?: DuplicateFilterViewResponse;
 
-  @Metadata({ data: "json, name=duplicateSheet" })
+  @SpeakeasyMetadata({ data: "json, name=duplicateSheet" })
   duplicateSheet?: DuplicateSheetResponse;
 
-  @Metadata({ data: "json, name=findReplace" })
+  @SpeakeasyMetadata({ data: "json, name=findReplace" })
   findReplace?: FindReplaceResponse;
 
-  @Metadata({ data: "json, name=refreshDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=refreshDataSource" })
   refreshDataSource?: RefreshDataSourceResponse;
 
-  @Metadata({ data: "json, name=trimWhitespace" })
+  @SpeakeasyMetadata({ data: "json, name=trimWhitespace" })
   trimWhitespace?: TrimWhitespaceResponse;
 
-  @Metadata({ data: "json, name=updateConditionalFormatRule" })
+  @SpeakeasyMetadata({ data: "json, name=updateConditionalFormatRule" })
   updateConditionalFormatRule?: UpdateConditionalFormatRuleResponse;
 
-  @Metadata({ data: "json, name=updateDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=updateDataSource" })
   updateDataSource?: UpdateDataSourceResponse;
 
-  @Metadata({ data: "json, name=updateDeveloperMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=updateDeveloperMetadata" })
   updateDeveloperMetadata?: UpdateDeveloperMetadataResponse;
 
-  @Metadata({ data: "json, name=updateEmbeddedObjectPosition" })
+  @SpeakeasyMetadata({ data: "json, name=updateEmbeddedObjectPosition" })
   updateEmbeddedObjectPosition?: UpdateEmbeddedObjectPositionResponse;
 }

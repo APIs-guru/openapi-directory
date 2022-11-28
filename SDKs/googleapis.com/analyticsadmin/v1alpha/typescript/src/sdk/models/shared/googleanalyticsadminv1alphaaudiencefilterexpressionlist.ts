@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaAudienceFilterExpression } from "./googleanalyticsadminv1alphaaudiencefilterexpression";
+
 
 
 // GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList
@@ -8,6 +8,6 @@ import { GoogleAnalyticsAdminV1alphaAudienceFilterExpression } from "./googleana
  * A list of Audience filter expressions.
 **/
 export class GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterExpressions", elemType: shared.GoogleAnalyticsAdminV1alphaAudienceFilterExpression })
+  @SpeakeasyMetadata({ data: "json, name=filterExpressions", elemType: GoogleAnalyticsAdminV1alphaAudienceFilterExpression })
   filterExpressions?: GoogleAnalyticsAdminV1alphaAudienceFilterExpression[];
 }

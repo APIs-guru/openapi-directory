@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiMembersIdPortraitPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetApiMembersIdPortraitQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cropType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cropType" })
   cropType?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=webVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=webVersion" })
   webVersion?: boolean;
 }
 
 
 export class GetApiMembersIdPortraitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiMembersIdPortraitPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiMembersIdPortraitQueryParams;
 }
 
 
 export class GetApiMembersIdPortraitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

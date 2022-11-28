@@ -1,5 +1,7 @@
 package shared
 
+// AwsCodeBuildProjectSource
+// Information about the build input source code for this build project.
 type AwsCodeBuildProjectSource struct {
 	GitCloneDepth *int64  `json:"GitCloneDepth,omitempty"`
 	InsecureSsl   *bool   `json:"InsecureSsl,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MlProjectsModelsGetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class MlProjectsModelsGetIamPolicyQueryParams:
 
 @dataclass
 class MlProjectsModelsGetIamPolicySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MlProjectsModelsGetIamPolicyRequest:
-    path_params: MlProjectsModelsGetIamPolicyPathParams = field(default=None)
-    query_params: MlProjectsModelsGetIamPolicyQueryParams = field(default=None)
-    security: MlProjectsModelsGetIamPolicySecurity = field(default=None)
+    path_params: MlProjectsModelsGetIamPolicyPathParams = field()
+    query_params: MlProjectsModelsGetIamPolicyQueryParams = field()
+    security: MlProjectsModelsGetIamPolicySecurity = field()
     
 
 @dataclass
 class MlProjectsModelsGetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_iam_v1_policy: Optional[shared.GoogleIamV1Policy] = field(default=None)
-    status_code: int = field(default=None)
     

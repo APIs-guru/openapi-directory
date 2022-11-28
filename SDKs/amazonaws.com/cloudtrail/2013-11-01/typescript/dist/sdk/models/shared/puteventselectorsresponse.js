@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AdvancedEventSelector } from "./advancedeventselector";
+import { EventSelector } from "./eventselector";
 var PutEventSelectorsResponse = /** @class */ (function (_super) {
     __extends(PutEventSelectorsResponse, _super);
     function PutEventSelectorsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AdvancedEventSelectors", elemType: shared.AdvancedEventSelector }),
+        SpeakeasyMetadata({ data: "json, name=AdvancedEventSelectors", elemType: AdvancedEventSelector }),
         __metadata("design:type", Array)
     ], PutEventSelectorsResponse.prototype, "advancedEventSelectors", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSelectors", elemType: shared.EventSelector }),
+        SpeakeasyMetadata({ data: "json, name=EventSelectors", elemType: EventSelector }),
         __metadata("design:type", Array)
     ], PutEventSelectorsResponse.prototype, "eventSelectors", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrailARN" }),
+        SpeakeasyMetadata({ data: "json, name=TrailARN" }),
         __metadata("design:type", String)
     ], PutEventSelectorsResponse.prototype, "trailArn", void 0);
     return PutEventSelectorsResponse;

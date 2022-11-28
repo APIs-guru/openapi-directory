@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
 import { MetricValue } from "./metricvalue";
+
 
 
 // Row
@@ -9,9 +9,9 @@ import { MetricValue } from "./metricvalue";
  * Report data for each row. For example if RunReportRequest contains: ```none "dimensions": [ { "name": "eventName" }, { "name": "countryId" } ], "metrics": [ { "name": "eventCount" } ] ``` One row with 'in_app_purchase' as the eventName, 'JP' as the countryId, and 15 as the eventCount, would be: ```none "dimensionValues": [ { "value": "in_app_purchase" }, { "value": "JP" } ], "metricValues": [ { "value": "15" } ] ```
 **/
 export class Row extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionValues", elemType: shared.DimensionValue })
+  @SpeakeasyMetadata({ data: "json, name=dimensionValues", elemType: DimensionValue })
   dimensionValues?: DimensionValue[];
 
-  @Metadata({ data: "json, name=metricValues", elemType: shared.MetricValue })
+  @SpeakeasyMetadata({ data: "json, name=metricValues", elemType: MetricValue })
   metricValues?: MetricValue[];
 }

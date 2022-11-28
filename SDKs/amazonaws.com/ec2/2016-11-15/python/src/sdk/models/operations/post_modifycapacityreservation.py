@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyCapacityReservationActionEnum(str, Enum):
     MODIFY_CAPACITY_RESERVATION = "ModifyCapacityReservation"
@@ -10,8 +14,8 @@ class PostModifyCapacityReservationVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyCapacityReservationQueryParams:
-    action: PostModifyCapacityReservationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyCapacityReservationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyCapacityReservationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyCapacityReservationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyCapacityReservationHeaders:
 
 @dataclass
 class PostModifyCapacityReservationRequest:
-    query_params: PostModifyCapacityReservationQueryParams = field(default=None)
-    headers: PostModifyCapacityReservationHeaders = field(default=None)
+    headers: PostModifyCapacityReservationHeaders = field()
+    query_params: PostModifyCapacityReservationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyCapacityReservationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

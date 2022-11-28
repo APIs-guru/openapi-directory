@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import launchpathsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListLaunchPathsOutput:
-    launch_path_summaries: Optional[List[launchpathsummary.LaunchPathSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LaunchPathSummaries' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextPageToken' }})
+    launch_path_summaries: Optional[List[LaunchPathSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LaunchPathSummaries') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextPageToken') }})
     

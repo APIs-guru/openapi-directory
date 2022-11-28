@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Budget } from "./budget";
+
 
 
 // DescribeBudgetResponse
@@ -7,6 +8,6 @@ import { Budget } from "./budget";
  *  Response of DescribeBudget 
 **/
 export class DescribeBudgetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Budget" })
+  @SpeakeasyMetadata({ data: "json, name=Budget" })
   budget?: Budget;
 }

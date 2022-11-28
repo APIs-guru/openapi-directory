@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettlementTransactionAmount } from "./settlementtransactionamount";
 import { SettlementTransactionIdentifiers } from "./settlementtransactionidentifiers";
 import { SettlementTransactionTransaction } from "./settlementtransactiontransaction";
+
 
 
 // SettlementTransaction
@@ -9,15 +10,15 @@ import { SettlementTransactionTransaction } from "./settlementtransactiontransac
  * Settlement transactions give a detailed breakdown of the settlement report.
 **/
 export class SettlementTransaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: SettlementTransactionAmount;
 
-  @Metadata({ data: "json, name=identifiers" })
+  @SpeakeasyMetadata({ data: "json, name=identifiers" })
   identifiers?: SettlementTransactionIdentifiers;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: SettlementTransactionTransaction;
 }

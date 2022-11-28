@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum BatchGetAmpUrlsRequestLookupStrategyEnum {
     FetchLiveDoc = "FETCH_LIVE_DOC",
     InIndexDoc = "IN_INDEX_DOC"

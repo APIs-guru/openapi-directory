@@ -1,5 +1,7 @@
 package shared
 
+// AnomalyGroup
+// A group of anomalous metrics
 type AnomalyGroup struct {
 	AnomalyGroupID        *string             `json:"AnomalyGroupId,omitempty"`
 	AnomalyGroupScore     *float64            `json:"AnomalyGroupScore,omitempty"`

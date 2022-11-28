@@ -6,6 +6,7 @@ export * from "./batchresponsemarketingeventpublicdefaultresponse";
 export * from "./batchresponsesubscriberemailresponse";
 export * from "./batchresponsesubscribervidresponse";
 export * from "./collectionresponsemarketingeventexternaluniqueidentifiernopaging";
+export * from "./error";
 export * from "./errorcategory";
 export * from "./errordetail";
 export * from "./eventdetailsettings";

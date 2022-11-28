@@ -1,12 +1,10 @@
 package operations
 
+// UpdateCveRequestBody
+// CVE update config
 type UpdateCveRequestBody struct {
 	URL   *string  `json:"url,omitempty"`
 	Years []string `json:"years,omitempty"`
-}
-
-type UpdateCveRequest struct {
-	Request *UpdateCveRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateCve200ApplicationJSONActionEnum string
@@ -30,6 +28,10 @@ type UpdateCve200ApplicationJSON struct {
 	Action UpdateCve200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateCve200ApplicationJSONData       `json:"data"`
 	Result UpdateCve200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateCveRequest struct {
+	Request *UpdateCveRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateCveResponse struct {

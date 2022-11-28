@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DelegationStatusEnum } from "./delegationstatusenum";
 /**
  *  The metadata associated with the specified delegation.

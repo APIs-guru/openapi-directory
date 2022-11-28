@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigOvenModelApi2RecipeInfox } from "./bigovenmodelapi2recipeinfox";
 
 
+
 export class BigOvenModelApi2RecipeSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResultCount" })
+  @SpeakeasyMetadata({ data: "json, name=ResultCount" })
   resultCount?: number;
 
-  @Metadata({ data: "json, name=Results", elemType: shared.BigOvenModelApi2RecipeInfox })
+  @SpeakeasyMetadata({ data: "json, name=Results", elemType: BigOvenModelApi2RecipeInfox })
   results?: BigOvenModelApi2RecipeInfox[];
 
-  @Metadata({ data: "json, name=SpellSuggest" })
+  @SpeakeasyMetadata({ data: "json, name=SpellSuggest" })
   spellSuggest?: string;
 }

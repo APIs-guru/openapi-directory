@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import deviceconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListDeviceConfigVersionsResponse:
-    device_configs: Optional[List[deviceconfig.DeviceConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceConfigs' }})
+    r"""ListDeviceConfigVersionsResponse
+    Response for `ListDeviceConfigVersions`.
+    """
+    
+    device_configs: Optional[List[DeviceConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceConfigs') }})
     

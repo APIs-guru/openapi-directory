@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UserCtrlGetUsersPathParams = /** @class */ (function (_super) {
     __extends(UserCtrlGetUsersPathParams, _super);
@@ -30,7 +30,7 @@ var UserCtrlGetUsersPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" }),
         __metadata("design:type", String)
     ], UserCtrlGetUsersPathParams.prototype, "accountId", void 0);
     return UserCtrlGetUsersPathParams;
@@ -42,27 +42,27 @@ var UserCtrlGetUsersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], UserCtrlGetUsersQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=first_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first_name" }),
         __metadata("design:type", String)
     ], UserCtrlGetUsersQueryParams.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=last_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=last_name" }),
         __metadata("design:type", String)
     ], UserCtrlGetUsersQueryParams.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=login_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login_name" }),
         __metadata("design:type", String)
     ], UserCtrlGetUsersQueryParams.prototype, "loginName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], UserCtrlGetUsersQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], UserCtrlGetUsersQueryParams.prototype, "pageSize", void 0);
     return UserCtrlGetUsersQueryParams;
@@ -74,7 +74,7 @@ var UserCtrlGetUsersSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], UserCtrlGetUsersSecurity.prototype, "bearerAuth", void 0);
     return UserCtrlGetUsersSecurity;
@@ -86,15 +86,15 @@ var UserCtrlGetUsersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UserCtrlGetUsersPathParams)
     ], UserCtrlGetUsersRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UserCtrlGetUsersQueryParams)
     ], UserCtrlGetUsersRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UserCtrlGetUsersSecurity)
     ], UserCtrlGetUsersRequest.prototype, "security", void 0);
     return UserCtrlGetUsersRequest;
@@ -106,19 +106,19 @@ var UserCtrlGetUsersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UserCtrlGetUsersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UserCtrlGetUsersResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UsersHalResponse)
     ], UserCtrlGetUsersResponse.prototype, "usersHalResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ValidationErrorsResponse)
     ], UserCtrlGetUsersResponse.prototype, "validationErrorsResponse", void 0);
     return UserCtrlGetUsersResponse;

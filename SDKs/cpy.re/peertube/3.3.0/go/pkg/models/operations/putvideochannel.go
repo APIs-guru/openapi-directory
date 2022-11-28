@@ -14,7 +14,7 @@ type PutVideoChannelSecurity struct {
 
 type PutVideoChannelRequest struct {
 	PathParams PutVideoChannelPathParams
-	Request    *shared.VideoChannelUpdate `request:"mediaType=application/json"`
+	Request    *shared.VideoChannelUpdateInput `request:"mediaType=application/json"`
 	Security   PutVideoChannelSecurity
 }
 

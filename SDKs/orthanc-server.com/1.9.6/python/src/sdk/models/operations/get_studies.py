@@ -13,12 +13,12 @@ class GetStudiesQueryParams:
 
 @dataclass
 class GetStudiesRequest:
-    query_params: GetStudiesQueryParams = field(default=None)
+    query_params: GetStudiesQueryParams = field()
     
 
 @dataclass
 class GetStudiesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_studies_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

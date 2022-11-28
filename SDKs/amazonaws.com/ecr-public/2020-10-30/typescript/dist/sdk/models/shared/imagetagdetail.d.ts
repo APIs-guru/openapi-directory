@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReferencedImageDetail } from "./referencedimagedetail";
 /**
  * An object representing the image tag details for an image.

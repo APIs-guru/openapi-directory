@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolTodGettimePathParams = /** @class */ (function (_super) {
     __extends(ProtocolTodGettimePathParams, _super);
     function ProtocolTodGettimePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTodGettimePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=numRetries" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=numRetries" }),
         __metadata("design:type", Number)
     ], ProtocolTodGettimePathParams.prototype, "numRetries", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=portNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portNum" }),
         __metadata("design:type", Number)
     ], ProtocolTodGettimePathParams.prototype, "portNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=scriptName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scriptName" }),
         __metadata("design:type", String)
     ], ProtocolTodGettimePathParams.prototype, "scriptName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=serverAddr" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serverAddr" }),
         __metadata("design:type", String)
     ], ProtocolTodGettimePathParams.prototype, "serverAddr", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=timeSec" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=timeSec" }),
         __metadata("design:type", Number)
     ], ProtocolTodGettimePathParams.prototype, "timeSec", void 0);
     return ProtocolTodGettimePathParams;
@@ -61,7 +61,7 @@ var ProtocolTodGettimeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTodGettimePathParams)
     ], ProtocolTodGettimeRequest.prototype, "pathParams", void 0);
     return ProtocolTodGettimeRequest;
@@ -73,15 +73,15 @@ var ProtocolTodGettimeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTodGettimeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTodGettimeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolTodGettimeResponse.prototype, "protocolTodGettime200ApplicationJsonStrings", void 0);
     return ProtocolTodGettimeResponse;

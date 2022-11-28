@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelStatusEnum } from "./modelstatusenum";
 
 
+
 export class ListModelsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatasetNameBeginsWith" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetNameBeginsWith" })
   datasetNameBeginsWith?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=ModelNameBeginsWith" })
+  @SpeakeasyMetadata({ data: "json, name=ModelNameBeginsWith" })
   modelNameBeginsWith?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ModelStatusEnum;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ReportDefinition
+// The definition of AWS Cost and Usage Report. You can specify the report name, time unit, report format, compression format, S3 bucket, additional artifacts, and schema elements in the definition.
 type ReportDefinition struct {
 	AdditionalArtifacts      []AdditionalArtifactEnum `json:"AdditionalArtifacts,omitempty"`
 	AdditionalSchemaElements []SchemaElementEnum      `json:"AdditionalSchemaElements"`

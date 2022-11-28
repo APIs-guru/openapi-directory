@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostSetupV1ServicesIDAllocationsBulkPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostSetupV1ServicesIDAllocationsBulkRequests:
 
 @dataclass
 class PostSetupV1ServicesIDAllocationsBulkRequest:
-    path_params: PostSetupV1ServicesIDAllocationsBulkPathParams = field(default=None)
+    path_params: PostSetupV1ServicesIDAllocationsBulkPathParams = field()
     request: Optional[PostSetupV1ServicesIDAllocationsBulkRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1ServicesIDAllocationsBulkResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_allocation_view_models: Optional[List[shared.ServiceAllocationViewModel]] = field(default=None)
-    status_code: int = field(default=None)
     

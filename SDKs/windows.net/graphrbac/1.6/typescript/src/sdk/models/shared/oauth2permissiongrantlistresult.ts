@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OAuth2PermissionGrantListResult
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Server response for get oauth2 permissions grants
 **/
 export class OAuth2PermissionGrantListResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=odata.nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=odata.nextLink" })
   odataNextLink?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: any[];
 }

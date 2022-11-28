@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterAttribute } from "./parameterattribute";
+
 
 
 // ParameterObject
@@ -8,9 +8,9 @@ import { ParameterAttribute } from "./parameterattribute";
  * Contains information about a parameter object.
 **/
 export class ParameterObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.ParameterAttribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: ParameterAttribute })
   attributes: ParameterAttribute[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }

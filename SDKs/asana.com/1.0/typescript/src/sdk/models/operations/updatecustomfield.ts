@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateCustomFieldPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=custom_field_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=custom_field_gid" })
   customFieldGid: string;
 }
 
 
 export class UpdateCustomFieldQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class UpdateCustomFieldRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.CustomFieldRequest;
-}
-
-
-export class UpdateCustomFieldRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateCustomFieldPathParams;
-
-  @Metadata()
-  queryParams: UpdateCustomFieldQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: UpdateCustomFieldRequestBody;
+export class UpdateCustomFieldRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.CustomFieldRequestInput;
 }
 
 
 export class UpdateCustomField200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.CustomFieldResponse;
 }
 
 
+export class UpdateCustomFieldRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateCustomFieldPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: UpdateCustomFieldQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: UpdateCustomFieldRequestBodyInput;
+}
+
+
 export class UpdateCustomFieldResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateCustomField200ApplicationJsonObject?: UpdateCustomField200ApplicationJson;
 }

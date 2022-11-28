@@ -1,5 +1,7 @@
 package shared
 
+// GoogleMapsPlayablelocationsV3SampleFilter
+// Specifies the filters to use when searching for playable locations.
 type GoogleMapsPlayablelocationsV3SampleFilter struct {
 	IncludedTypes    []string                                           `json:"includedTypes,omitempty"`
 	MaxLocationCount *int32                                             `json:"maxLocationCount,omitempty"`

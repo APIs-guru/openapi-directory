@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PeeringStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Connected = "CONNECTED"
-,    Disconnected = "DISCONNECTED"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Connected = "CONNECTED",
+    Disconnected = "DISCONNECTED",
+    Deleting = "DELETING"
 }
 
 
@@ -14,27 +15,43 @@ export enum PeeringStateEnum {
  * Represents a Managed Microsoft Identities Peering.
 **/
 export class Peering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizedNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetwork" })
   authorizedNetwork?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=domainResource" })
+  @SpeakeasyMetadata({ data: "json, name=domainResource" })
   domainResource?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: PeeringStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// PeeringInput
+/** 
+ * Represents a Managed Microsoft Identities Peering.
+**/
+export class PeeringInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetwork" })
+  authorizedNetwork?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=domainResource" })
+  domainResource?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
 }

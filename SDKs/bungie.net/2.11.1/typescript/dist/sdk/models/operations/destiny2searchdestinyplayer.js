@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2SearchDestinyPlayerPathParams = /** @class */ (function (_super) {
     __extends(Destiny2SearchDestinyPlayerPathParams, _super);
     function Destiny2SearchDestinyPlayerPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=displayName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=displayName" }),
         __metadata("design:type", String)
     ], Destiny2SearchDestinyPlayerPathParams.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2SearchDestinyPlayerPathParams.prototype, "membershipType", void 0);
     return Destiny2SearchDestinyPlayerPathParams;
@@ -45,7 +45,7 @@ var Destiny2SearchDestinyPlayerQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=returnOriginalProfile" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=returnOriginalProfile" }),
         __metadata("design:type", Boolean)
     ], Destiny2SearchDestinyPlayerQueryParams.prototype, "returnOriginalProfile", void 0);
     return Destiny2SearchDestinyPlayerQueryParams;
@@ -57,11 +57,11 @@ var Destiny2SearchDestinyPlayerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2SearchDestinyPlayerPathParams)
     ], Destiny2SearchDestinyPlayerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2SearchDestinyPlayerQueryParams)
     ], Destiny2SearchDestinyPlayerRequest.prototype, "queryParams", void 0);
     return Destiny2SearchDestinyPlayerRequest;
@@ -73,15 +73,15 @@ var Destiny2SearchDestinyPlayerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2SearchDestinyPlayerResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2SearchDestinyPlayerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2SearchDestinyPlayerResponse.prototype, "statusCode", void 0);
     return Destiny2SearchDestinyPlayerResponse;

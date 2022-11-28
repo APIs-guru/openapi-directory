@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SiteVerificationWebResourceUpdatePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +25,21 @@ class SiteVerificationWebResourceUpdateQueryParams:
 
 @dataclass
 class SiteVerificationWebResourceUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SiteVerificationWebResourceUpdateRequest:
-    path_params: SiteVerificationWebResourceUpdatePathParams = field(default=None)
-    query_params: SiteVerificationWebResourceUpdateQueryParams = field(default=None)
+    path_params: SiteVerificationWebResourceUpdatePathParams = field()
+    query_params: SiteVerificationWebResourceUpdateQueryParams = field()
+    security: SiteVerificationWebResourceUpdateSecurity = field()
     request: Optional[shared.SiteVerificationWebResourceResource] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SiteVerificationWebResourceUpdateSecurity = field(default=None)
     
 
 @dataclass
 class SiteVerificationWebResourceUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     site_verification_web_resource_resource: Optional[shared.SiteVerificationWebResourceResource] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -13,6 +13,8 @@ const (
 	UpdateNetworkWirelessRfProfileRequestBodyApBandSettingsBandOperationModeEnumFiveghz UpdateNetworkWirelessRfProfileRequestBodyApBandSettingsBandOperationModeEnum = "5ghz"
 )
 
+// UpdateNetworkWirelessRfProfileRequestBodyApBandSettings
+// Settings that will be enabled if selectionType is set to 'ap'.
 type UpdateNetworkWirelessRfProfileRequestBodyApBandSettings struct {
 	BandOperationMode   *UpdateNetworkWirelessRfProfileRequestBodyApBandSettingsBandOperationModeEnum `json:"bandOperationMode,omitempty"`
 	BandSteeringEnabled *bool                                                                         `json:"bandSteeringEnabled,omitempty"`
@@ -25,6 +27,8 @@ const (
 	UpdateNetworkWirelessRfProfileRequestBodyBandSelectionTypeEnumAp   UpdateNetworkWirelessRfProfileRequestBodyBandSelectionTypeEnum = "ap"
 )
 
+// UpdateNetworkWirelessRfProfileRequestBodyFiveGhzSettings
+// Settings related to 5Ghz band
 type UpdateNetworkWirelessRfProfileRequestBodyFiveGhzSettings struct {
 	ChannelWidth      *string `json:"channelWidth,omitempty"`
 	MaxPower          *int64  `json:"maxPower,omitempty"`
@@ -41,6 +45,8 @@ const (
 	UpdateNetworkWirelessRfProfileRequestBodyMinBitrateTypeEnumSsid UpdateNetworkWirelessRfProfileRequestBodyMinBitrateTypeEnum = "ssid"
 )
 
+// UpdateNetworkWirelessRfProfileRequestBodyTwoFourGhzSettings
+// Settings related to 2.4Ghz band
 type UpdateNetworkWirelessRfProfileRequestBodyTwoFourGhzSettings struct {
 	AxEnabled         *bool    `json:"axEnabled,omitempty"`
 	MaxPower          *int64   `json:"maxPower,omitempty"`

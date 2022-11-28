@@ -1,5 +1,7 @@
 package shared
 
+// GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
+// Information about the claim rating.
 type GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating struct {
 	BestRating        *int32  `json:"bestRating,omitempty"`
 	ImageURL          *string `json:"imageUrl,omitempty"`

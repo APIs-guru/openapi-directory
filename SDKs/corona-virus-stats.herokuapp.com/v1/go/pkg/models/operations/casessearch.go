@@ -10,15 +10,15 @@ type CasesSearchQueryParams struct {
 	Search *string `queryParam:"style=form,explode=true,name=search"`
 }
 
-type CasesSearchRequest struct {
-	QueryParams CasesSearchQueryParams
-}
-
 type CasesSearch200ApplicationJSON struct {
 	Count    int64                 `json:"count"`
 	Next     *string               `json:"next,omitempty"`
 	Previous *string               `json:"previous,omitempty"`
 	Results  []shared.CountryStats `json:"results"`
+}
+
+type CasesSearchRequest struct {
+	QueryParams CasesSearchQueryParams
 }
 
 type CasesSearchResponse struct {

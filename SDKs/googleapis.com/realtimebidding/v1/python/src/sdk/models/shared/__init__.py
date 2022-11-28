@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .addtargetedappsrequest import *
 from .addtargetedpublishersrequest import *
 from .addtargetedsitesrequest import *
@@ -15,7 +15,7 @@ from .buyer import *
 from .creative import *
 from .creativedimensions import *
 from .creativeservingdecision import *
-from .date import *
+from .date_ import *
 from .destinationnotcrawlableevidence import *
 from .destinationnotworkingevidence import *
 from .destinationurlevidence import *

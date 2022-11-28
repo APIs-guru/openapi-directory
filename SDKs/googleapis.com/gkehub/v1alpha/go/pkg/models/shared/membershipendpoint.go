@@ -1,5 +1,18 @@
 package shared
 
+// MembershipEndpointInput
+// MembershipEndpoint contains information needed to contact a Kubernetes API, endpoint and any additional Kubernetes metadata.
+type MembershipEndpointInput struct {
+	ApplianceCluster   *ApplianceCluster        `json:"applianceCluster,omitempty"`
+	EdgeCluster        *EdgeCluster             `json:"edgeCluster,omitempty"`
+	GkeCluster         *GkeClusterInput         `json:"gkeCluster,omitempty"`
+	KubernetesResource *KubernetesResourceInput `json:"kubernetesResource,omitempty"`
+	MultiCloudCluster  *MultiCloudClusterInput  `json:"multiCloudCluster,omitempty"`
+	OnPremCluster      *OnPremClusterInput      `json:"onPremCluster,omitempty"`
+}
+
+// MembershipEndpoint
+// MembershipEndpoint contains information needed to contact a Kubernetes API, endpoint and any additional Kubernetes metadata.
 type MembershipEndpoint struct {
 	ApplianceCluster   *ApplianceCluster   `json:"applianceCluster,omitempty"`
 	EdgeCluster        *EdgeCluster        `json:"edgeCluster,omitempty"`

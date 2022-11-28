@@ -1,26 +1,28 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import closestatus_enum
-from . import workflowexecution
-from . import executionstatus_enum
-from . import workflowexecution
-from . import workflowtype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkflowExecutionInfo:
-    cancel_requested: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cancelRequested' }})
-    close_status: Optional[closestatus_enum.CloseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closeStatus' }})
-    close_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closeTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    execution: workflowexecution.WorkflowExecution = field(default=None, metadata={'dataclasses_json': { 'field_name': 'execution' }})
-    execution_status: executionstatus_enum.ExecutionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionStatus' }})
-    parent: Optional[workflowexecution.WorkflowExecution] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    start_timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    tag_list: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagList' }})
-    workflow_type: workflowtype.WorkflowType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workflowType' }})
+    r"""WorkflowExecutionInfo
+    Contains information about a workflow execution.
+    """
+    
+    execution: WorkflowExecution = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('execution') }})
+    execution_status: ExecutionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionStatus') }})
+    start_timestamp: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTimestamp'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    workflow_type: WorkflowType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('workflowType') }})
+    cancel_requested: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cancelRequested') }})
+    close_status: Optional[CloseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('closeStatus') }})
+    close_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('closeTimestamp'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    parent: Optional[WorkflowExecution] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    tag_list: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagList') }})
     

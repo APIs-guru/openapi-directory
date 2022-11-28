@@ -1,6 +1,7 @@
 
 
+
 export enum StatusTypeEnum {
-    Enabled = "Enabled"
-,    Disabled = "Disabled"
+    Enabled = "Enabled",
+    Disabled = "Disabled"
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Report } from "./report";
+
 
 
 // ReportsOutput
@@ -8,12 +8,12 @@ import { Report } from "./report";
  * Represents the result of report searches
 **/
 export class ReportsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=reports", elemType: shared.Report })
+  @SpeakeasyMetadata({ data: "json, name=reports", elemType: Report })
   reports: Report[];
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }

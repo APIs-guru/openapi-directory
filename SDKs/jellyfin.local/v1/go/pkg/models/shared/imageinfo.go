@@ -1,5 +1,7 @@
 package shared
 
+// ImageInfo
+// Class ImageInfo.
 type ImageInfo struct {
 	BlurHash   *string        `json:"BlurHash,omitempty"`
 	Height     *int32         `json:"Height,omitempty"`

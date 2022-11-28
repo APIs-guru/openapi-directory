@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ActionLabels
 /**
  * User-facing labels for this custom workflow action.
@@ -33,27 +33,27 @@ var ActionLabels = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actionCardContent" }),
+        SpeakeasyMetadata({ data: "json, name=actionCardContent" }),
         __metadata("design:type", String)
     ], ActionLabels.prototype, "actionCardContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=actionDescription" }),
+        SpeakeasyMetadata({ data: "json, name=actionDescription" }),
         __metadata("design:type", String)
     ], ActionLabels.prototype, "actionDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=actionName" }),
+        SpeakeasyMetadata({ data: "json, name=actionName" }),
         __metadata("design:type", String)
     ], ActionLabels.prototype, "actionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=appDisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=appDisplayName" }),
         __metadata("design:type", String)
     ], ActionLabels.prototype, "appDisplayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputFieldDescriptions" }),
+        SpeakeasyMetadata({ data: "json, name=inputFieldDescriptions" }),
         __metadata("design:type", Map)
     ], ActionLabels.prototype, "inputFieldDescriptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputFieldLabels" }),
+        SpeakeasyMetadata({ data: "json, name=inputFieldLabels" }),
         __metadata("design:type", Map)
     ], ActionLabels.prototype, "inputFieldLabels", void 0);
     return ActionLabels;

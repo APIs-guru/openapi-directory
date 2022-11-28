@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2betaFulfillmentInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Fulfillment information, such as the store IDs for in-store pickup or region IDs for different shipping methods.
 **/
 export class GoogleCloudRetailV2betaFulfillmentInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=placeIds" })
+  @SpeakeasyMetadata({ data: "json, name=placeIds" })
   placeIds?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

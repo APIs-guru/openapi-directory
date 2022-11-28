@@ -1,15 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import scaleinpolicyupdate
-from . import scaleoutpolicyupdate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AutoScalingUpdate:
-    max_worker_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxWorkerCount' }})
-    mcu_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mcuCount' }})
-    min_worker_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minWorkerCount' }})
-    scale_in_policy: scaleinpolicyupdate.ScaleInPolicyUpdate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scaleInPolicy' }})
-    scale_out_policy: scaleoutpolicyupdate.ScaleOutPolicyUpdate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scaleOutPolicy' }})
+    r"""AutoScalingUpdate
+    The updates to the auto scaling parameters for the connector.
+    """
+    
+    max_worker_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxWorkerCount') }})
+    mcu_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mcuCount') }})
+    min_worker_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('minWorkerCount') }})
+    scale_in_policy: ScaleInPolicyUpdate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scaleInPolicy') }})
+    scale_out_policy: ScaleOutPolicyUpdate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scaleOutPolicy') }})
     

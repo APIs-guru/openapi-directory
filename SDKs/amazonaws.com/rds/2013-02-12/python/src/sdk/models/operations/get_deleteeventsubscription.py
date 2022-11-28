@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteEventSubscriptionActionEnum(str, Enum):
     DELETE_EVENT_SUBSCRIPTION = "DeleteEventSubscription"
@@ -10,9 +14,9 @@ class GetDeleteEventSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteEventSubscriptionQueryParams:
-    action: GetDeleteEventSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    subscription_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
-    version: GetDeleteEventSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteEventSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    subscription_name: str = field(metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
+    version: GetDeleteEventSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteEventSubscriptionHeaders:
 
 @dataclass
 class GetDeleteEventSubscriptionRequest:
-    query_params: GetDeleteEventSubscriptionQueryParams = field(default=None)
-    headers: GetDeleteEventSubscriptionHeaders = field(default=None)
+    headers: GetDeleteEventSubscriptionHeaders = field()
+    query_params: GetDeleteEventSubscriptionQueryParams = field()
     
 
 @dataclass
 class GetDeleteEventSubscriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

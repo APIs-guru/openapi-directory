@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CollectionStatusItemLevelIssue } from "./collectionstatusitemlevelissue";
 import { CollectionStatusDestinationStatus } from "./collectionstatusdestinationstatus";
+
 
 
 // CollectionStatus
@@ -9,18 +9,18 @@ import { CollectionStatusDestinationStatus } from "./collectionstatusdestination
  * The collectionstatus message.
 **/
 export class CollectionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionLevelIssuses", elemType: shared.CollectionStatusItemLevelIssue })
+  @SpeakeasyMetadata({ data: "json, name=collectionLevelIssuses", elemType: CollectionStatusItemLevelIssue })
   collectionLevelIssuses?: CollectionStatusItemLevelIssue[];
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=destinationStatuses", elemType: shared.CollectionStatusDestinationStatus })
+  @SpeakeasyMetadata({ data: "json, name=destinationStatuses", elemType: CollectionStatusDestinationStatus })
   destinationStatuses?: CollectionStatusDestinationStatus[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateDate" })
   lastUpdateDate?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeAccountLimitsActionEnum(str, Enum):
     DESCRIBE_ACCOUNT_LIMITS = "DescribeAccountLimits"
@@ -10,10 +14,10 @@ class GetDescribeAccountLimitsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAccountLimitsQueryParams:
-    action: GetDescribeAccountLimitsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAccountLimitsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAccountLimitsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
-    version: GetDescribeAccountLimitsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDescribeAccountLimitsHeaders:
 
 @dataclass
 class GetDescribeAccountLimitsRequest:
-    query_params: GetDescribeAccountLimitsQueryParams = field(default=None)
-    headers: GetDescribeAccountLimitsHeaders = field(default=None)
+    headers: GetDescribeAccountLimitsHeaders = field()
+    query_params: GetDescribeAccountLimitsQueryParams = field()
     
 
 @dataclass
 class GetDescribeAccountLimitsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

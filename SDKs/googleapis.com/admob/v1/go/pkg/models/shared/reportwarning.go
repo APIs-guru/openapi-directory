@@ -10,6 +10,8 @@ const (
 	ReportWarningTypeEnumReportCurrencyNotAccountCurrency ReportWarningTypeEnum = "REPORT_CURRENCY_NOT_ACCOUNT_CURRENCY"
 )
 
+// ReportWarning
+// Warnings associated with generation of the report.
 type ReportWarning struct {
 	Description *string                `json:"description,omitempty"`
 	Type        *ReportWarningTypeEnum `json:"type,omitempty"`

@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import severitydescription_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Severity:
-    description: Optional[severitydescription_enum.SeverityDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    score: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
+    r"""Severity
+    Provides the numerical and qualitative representations of a finding's severity.
+    """
+    
+    description: Optional[SeverityDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    score: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
     

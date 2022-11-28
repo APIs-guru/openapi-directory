@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TileCoordinates } from "./tilecoordinates";
 import { FirstDerivativeElevationGrid } from "./firstderivativeelevationgrid";
 import { SecondDerivativeElevationGrid } from "./secondderivativeelevationgrid";
+
 
 
 // TerrainTile
@@ -9,15 +10,15 @@ import { SecondDerivativeElevationGrid } from "./secondderivativeelevationgrid";
  * A tile containing information about the terrain located in the region it covers.
 **/
 export class TerrainTile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coordinates" })
+  @SpeakeasyMetadata({ data: "json, name=coordinates" })
   coordinates?: TileCoordinates;
 
-  @Metadata({ data: "json, name=firstDerivative" })
+  @SpeakeasyMetadata({ data: "json, name=firstDerivative" })
   firstDerivative?: FirstDerivativeElevationGrid;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=secondDerivative" })
+  @SpeakeasyMetadata({ data: "json, name=secondDerivative" })
   secondDerivative?: SecondDerivativeElevationGrid;
 }

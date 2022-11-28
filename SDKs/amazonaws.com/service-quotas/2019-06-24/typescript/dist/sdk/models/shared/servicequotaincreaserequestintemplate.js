@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ServiceQuotaIncreaseRequestInTemplate
 /**
  * Information about a quota increase request.
@@ -33,35 +33,35 @@ var ServiceQuotaIncreaseRequestInTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AwsRegion" }),
+        SpeakeasyMetadata({ data: "json, name=AwsRegion" }),
         __metadata("design:type", String)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "awsRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=DesiredValue" }),
+        SpeakeasyMetadata({ data: "json, name=DesiredValue" }),
         __metadata("design:type", Number)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "desiredValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=GlobalQuota" }),
+        SpeakeasyMetadata({ data: "json, name=GlobalQuota" }),
         __metadata("design:type", Boolean)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "globalQuota", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuotaCode" }),
+        SpeakeasyMetadata({ data: "json, name=QuotaCode" }),
         __metadata("design:type", String)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "quotaCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuotaName" }),
+        SpeakeasyMetadata({ data: "json, name=QuotaName" }),
         __metadata("design:type", String)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "quotaName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceCode" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceCode" }),
         __metadata("design:type", String)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "serviceCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceName" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceName" }),
         __metadata("design:type", String)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "serviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Unit" }),
+        SpeakeasyMetadata({ data: "json, name=Unit" }),
         __metadata("design:type", String)
     ], ServiceQuotaIncreaseRequestInTemplate.prototype, "unit", void 0);
     return ServiceQuotaIncreaseRequestInTemplate;

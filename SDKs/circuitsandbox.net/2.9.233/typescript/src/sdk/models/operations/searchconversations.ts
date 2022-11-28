@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SearchConversationsScopeEnum {
-    Files = "FILES"
-,    People = "PEOPLE"
-,    Members = "MEMBERS"
-,    Messages = "MESSAGES"
-,    Sentby = "SENTBY"
-,    All = "ALL"
-,    Conversations = "CONVERSATIONS"
-,    Label = "LABEL"
-,    Filter = "FILTER"
+    Files = "FILES",
+    People = "PEOPLE",
+    Members = "MEMBERS",
+    Messages = "MESSAGES",
+    Sentby = "SENTBY",
+    All = "ALL",
+    Conversations = "CONVERSATIONS",
+    Label = "LABEL",
+    Filter = "FILTER"
 }
 
 
 export class SearchConversationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeItemIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeItemIds" })
   includeItemIds?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scope" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scope" })
   scope?: SearchConversationsScopeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=term" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=term" })
   term: string;
 }
 
 
 export class SearchConversationsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class SearchConversationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchConversationsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SearchConversationsSecurity;
 }
 
 
 export class SearchConversationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversationSearchResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

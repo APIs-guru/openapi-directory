@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetTransactionsByPayeePathParams:
-    budget_id: str = field(default=None, metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
-    payee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'payee_id', 'style': 'simple', 'explode': False }})
+    budget_id: str = field(metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
+    payee_id: str = field(metadata={'path_param': { 'field_name': 'payee_id', 'style': 'simple', 'explode': False }})
     
 class GetTransactionsByPayeeTypeEnum(str, Enum):
     UNCATEGORIZED = "uncategorized"
@@ -19,20 +20,20 @@ class GetTransactionsByPayeeTypeEnum(str, Enum):
 @dataclass
 class GetTransactionsByPayeeQueryParams:
     last_knowledge_of_server: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'last_knowledge_of_server', 'style': 'form', 'explode': True }})
-    since_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'since_date', 'style': 'form', 'explode': True }})
+    since_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'since_date', 'style': 'form', 'explode': True }})
     type: Optional[GetTransactionsByPayeeTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetTransactionsByPayeeRequest:
-    path_params: GetTransactionsByPayeePathParams = field(default=None)
-    query_params: GetTransactionsByPayeeQueryParams = field(default=None)
+    path_params: GetTransactionsByPayeePathParams = field()
+    query_params: GetTransactionsByPayeeQueryParams = field()
     
 
 @dataclass
 class GetTransactionsByPayeeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     hybrid_transactions_response: Optional[shared.HybridTransactionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

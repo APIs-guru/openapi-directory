@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRunV2GrpcAction } from "./googlecloudrunv2grpcaction";
 import { GoogleCloudRunV2HttpGetAction } from "./googlecloudrunv2httpgetaction";
 import { GoogleCloudRunV2TcpSocketAction } from "./googlecloudrunv2tcpsocketaction";
+
 
 
 // GoogleCloudRunV2Probe
@@ -9,24 +10,24 @@ import { GoogleCloudRunV2TcpSocketAction } from "./googlecloudrunv2tcpsocketacti
  * Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
 **/
 export class GoogleCloudRunV2Probe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=failureThreshold" })
   failureThreshold?: number;
 
-  @Metadata({ data: "json, name=grpc" })
+  @SpeakeasyMetadata({ data: "json, name=grpc" })
   grpc?: GoogleCloudRunV2GrpcAction;
 
-  @Metadata({ data: "json, name=httpGet" })
+  @SpeakeasyMetadata({ data: "json, name=httpGet" })
   httpGet?: GoogleCloudRunV2HttpGetAction;
 
-  @Metadata({ data: "json, name=initialDelaySeconds" })
+  @SpeakeasyMetadata({ data: "json, name=initialDelaySeconds" })
   initialDelaySeconds?: number;
 
-  @Metadata({ data: "json, name=periodSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=periodSeconds" })
   periodSeconds?: number;
 
-  @Metadata({ data: "json, name=tcpSocket" })
+  @SpeakeasyMetadata({ data: "json, name=tcpSocket" })
   tcpSocket?: GoogleCloudRunV2TcpSocketAction;
 
-  @Metadata({ data: "json, name=timeoutSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutSeconds" })
   timeoutSeconds?: number;
 }

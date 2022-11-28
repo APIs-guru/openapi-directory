@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceTemplate
+// The service template detail data.
 type ServiceTemplate struct {
 	Arn                  string            `json:"arn"`
 	CreatedAt            time.Time         `json:"createdAt"`

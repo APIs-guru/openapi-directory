@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PropertyBuiltYearExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum PropertyFloorsCountExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum PropertyLastRenovatedYearExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum PropertyRoomsCountExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 
@@ -34,27 +35,27 @@ export enum PropertyRoomsCountExceptionEnum {
  * General factual information about the property's physical structure and important dates.
 **/
 export class Property extends SpeakeasyBase {
-  @Metadata({ data: "json, name=builtYear" })
+  @SpeakeasyMetadata({ data: "json, name=builtYear" })
   builtYear?: number;
 
-  @Metadata({ data: "json, name=builtYearException" })
+  @SpeakeasyMetadata({ data: "json, name=builtYearException" })
   builtYearException?: PropertyBuiltYearExceptionEnum;
 
-  @Metadata({ data: "json, name=floorsCount" })
+  @SpeakeasyMetadata({ data: "json, name=floorsCount" })
   floorsCount?: number;
 
-  @Metadata({ data: "json, name=floorsCountException" })
+  @SpeakeasyMetadata({ data: "json, name=floorsCountException" })
   floorsCountException?: PropertyFloorsCountExceptionEnum;
 
-  @Metadata({ data: "json, name=lastRenovatedYear" })
+  @SpeakeasyMetadata({ data: "json, name=lastRenovatedYear" })
   lastRenovatedYear?: number;
 
-  @Metadata({ data: "json, name=lastRenovatedYearException" })
+  @SpeakeasyMetadata({ data: "json, name=lastRenovatedYearException" })
   lastRenovatedYearException?: PropertyLastRenovatedYearExceptionEnum;
 
-  @Metadata({ data: "json, name=roomsCount" })
+  @SpeakeasyMetadata({ data: "json, name=roomsCount" })
   roomsCount?: number;
 
-  @Metadata({ data: "json, name=roomsCountException" })
+  @SpeakeasyMetadata({ data: "json, name=roomsCountException" })
   roomsCountException?: PropertyRoomsCountExceptionEnum;
 }

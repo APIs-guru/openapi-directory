@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionStateEnum } from "./executionstateenum";
 /**
  * The summary of a task execution on a specified device.

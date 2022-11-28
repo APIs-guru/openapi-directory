@@ -1,39 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DiskFilesystemEnum {
-    Raw = "raw"
-,    Swap = "swap"
-,    Ext3 = "ext3"
-,    Ext4 = "ext4"
-,    Initrd = "initrd"
+    Raw = "raw",
+    Swap = "swap",
+    Ext3 = "ext3",
+    Ext4 = "ext4",
+    Initrd = "initrd"
 }
 
 export enum DiskStatusEnum {
-    Ready = "ready"
-,    NotReady = "not ready"
-,    Deleting = "deleting"
+    Ready = "ready",
+    NotReady = "not ready",
+    Deleting = "deleting"
+}
+
+
+export class DiskInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=filesystem" })
+  filesystem?: DiskFilesystemEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=size" })
+  size?: number;
 }
 
 
 export class Disk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=filesystem" })
+  @SpeakeasyMetadata({ data: "json, name=filesystem" })
   filesystem?: DiskFilesystemEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DiskStatusEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

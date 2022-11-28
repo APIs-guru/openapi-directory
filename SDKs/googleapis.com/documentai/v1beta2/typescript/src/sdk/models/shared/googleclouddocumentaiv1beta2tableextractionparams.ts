@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1beta2TableBoundHint } from "./googleclouddocumentaiv1beta2tableboundhint";
+
 
 
 // GoogleCloudDocumentaiV1beta2TableExtractionParams
@@ -8,15 +8,15 @@ import { GoogleCloudDocumentaiV1beta2TableBoundHint } from "./googleclouddocumen
  * Parameters to control table extraction behavior.
 **/
 export class GoogleCloudDocumentaiV1beta2TableExtractionParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=headerHints" })
+  @SpeakeasyMetadata({ data: "json, name=headerHints" })
   headerHints?: string[];
 
-  @Metadata({ data: "json, name=modelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=modelVersion" })
   modelVersion?: string;
 
-  @Metadata({ data: "json, name=tableBoundHints", elemType: shared.GoogleCloudDocumentaiV1beta2TableBoundHint })
+  @SpeakeasyMetadata({ data: "json, name=tableBoundHints", elemType: GoogleCloudDocumentaiV1beta2TableBoundHint })
   tableBoundHints?: GoogleCloudDocumentaiV1beta2TableBoundHint[];
 }

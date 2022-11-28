@@ -11,10 +11,20 @@ const (
 	GoogleCloudApigeeV1DataCollectorTypeEnumDatetime        GoogleCloudApigeeV1DataCollectorTypeEnum = "DATETIME"
 )
 
+// GoogleCloudApigeeV1DataCollector
+// Data collector configuration.
 type GoogleCloudApigeeV1DataCollector struct {
 	CreatedAt      *string                                   `json:"createdAt,omitempty"`
 	Description    *string                                   `json:"description,omitempty"`
 	LastModifiedAt *string                                   `json:"lastModifiedAt,omitempty"`
 	Name           *string                                   `json:"name,omitempty"`
 	Type           *GoogleCloudApigeeV1DataCollectorTypeEnum `json:"type,omitempty"`
+}
+
+// GoogleCloudApigeeV1DataCollectorInput
+// Data collector configuration.
+type GoogleCloudApigeeV1DataCollectorInput struct {
+	Description *string                                   `json:"description,omitempty"`
+	Name        *string                                   `json:"name,omitempty"`
+	Type        *GoogleCloudApigeeV1DataCollectorTypeEnum `json:"type,omitempty"`
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThirdPartyJob } from "./thirdpartyjob";
+
 
 
 // PollForThirdPartyJobsOutput
@@ -8,6 +8,6 @@ import { ThirdPartyJob } from "./thirdpartyjob";
  * Represents the output of a <code>PollForThirdPartyJobs</code> action.
 **/
 export class PollForThirdPartyJobsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs", elemType: shared.ThirdPartyJob })
+  @SpeakeasyMetadata({ data: "json, name=jobs", elemType: ThirdPartyJob })
   jobs?: ThirdPartyJob[];
 }

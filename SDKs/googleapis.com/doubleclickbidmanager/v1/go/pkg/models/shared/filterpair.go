@@ -295,6 +295,8 @@ const (
 	FilterPairTypeEnumFilterVerificationAudibilityComplete                     FilterPairTypeEnum = "FILTER_VERIFICATION_AUDIBILITY_COMPLETE"
 )
 
+// FilterPair
+// Filter used to match traffic data in your report.
 type FilterPair struct {
 	Type  *FilterPairTypeEnum `json:"type,omitempty"`
 	Value *string             `json:"value,omitempty"`

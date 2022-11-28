@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteIntegrationLinkModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasRemainingIntegrationLink" })
+  @SpeakeasyMetadata({ data: "json, name=hasRemainingIntegrationLink" })
   hasRemainingIntegrationLink?: boolean;
 }

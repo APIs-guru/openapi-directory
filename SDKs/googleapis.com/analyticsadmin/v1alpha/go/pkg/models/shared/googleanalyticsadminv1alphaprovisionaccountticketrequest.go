@@ -1,6 +1,8 @@
 package shared
 
-type GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequest struct {
-	Account     *GoogleAnalyticsAdminV1alphaAccount `json:"account,omitempty"`
-	RedirectURI *string                             `json:"redirectUri,omitempty"`
+// GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequestInput
+// Request message for ProvisionAccountTicket RPC.
+type GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequestInput struct {
+	Account     *GoogleAnalyticsAdminV1alphaAccountInput `json:"account,omitempty"`
+	RedirectURI *string                                  `json:"redirectUri,omitempty"`
 }

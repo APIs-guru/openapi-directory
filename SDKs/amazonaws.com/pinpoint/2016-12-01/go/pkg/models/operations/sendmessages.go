@@ -18,6 +18,8 @@ type SendMessagesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SendMessagesRequestBodyMessageRequest
+// Specifies the configuration and other settings for a message.
 type SendMessagesRequestBodyMessageRequest struct {
 	Addresses             map[string]shared.AddressConfiguration      `json:"Addresses,omitempty"`
 	Context               map[string]string                           `json:"Context,omitempty"`

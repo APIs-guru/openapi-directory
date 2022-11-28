@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class InitiateJobPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    vault_name: str = field(default=None, metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    vault_name: str = field(metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,34 +28,39 @@ class InitiateJobHeaders:
 @dataclass_json
 @dataclass
 class InitiateJobRequestBodyJobParameters:
-    archive_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ArchiveId' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Format' }})
-    inventory_retrieval_parameters: Optional[shared.InventoryRetrievalJobInput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InventoryRetrievalParameters' }})
-    output_location: Optional[shared.OutputLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutputLocation' }})
-    retrieval_byte_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RetrievalByteRange' }})
-    sns_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SNSTopic' }})
-    select_parameters: Optional[shared.SelectParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SelectParameters' }})
-    tier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tier' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""InitiateJobRequestBodyJobParameters
+    Provides options for defining a job.
+    """
+    
+    archive_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ArchiveId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Format') }})
+    inventory_retrieval_parameters: Optional[shared.InventoryRetrievalJobInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InventoryRetrievalParameters') }})
+    output_location: Optional[shared.OutputLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutputLocation') }})
+    retrieval_byte_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RetrievalByteRange') }})
+    sns_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SNSTopic') }})
+    select_parameters: Optional[shared.SelectParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SelectParameters') }})
+    tier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tier') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     
 
 @dataclass_json
 @dataclass
 class InitiateJobRequestBody:
-    job_parameters: Optional[InitiateJobRequestBodyJobParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobParameters' }})
+    job_parameters: Optional[InitiateJobRequestBodyJobParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobParameters') }})
     
 
 @dataclass
 class InitiateJobRequest:
-    path_params: InitiateJobPathParams = field(default=None)
-    headers: InitiateJobHeaders = field(default=None)
-    request: InitiateJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: InitiateJobHeaders = field()
+    path_params: InitiateJobPathParams = field()
+    request: InitiateJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class InitiateJobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     initiate_job_output: Optional[dict[str, Any]] = field(default=None)
     insufficient_capacity_exception: Optional[Any] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
@@ -59,5 +68,4 @@ class InitiateJobResponse:
     policy_enforced_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

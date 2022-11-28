@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IapTestServiceAccountInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes authentication configuration when Web-Security-Scanner service account is added in Identity-Aware-Proxy (IAP) access policies.
 **/
 export class IapTestServiceAccountInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=targetAudienceClientId" })
+  @SpeakeasyMetadata({ data: "json, name=targetAudienceClientId" })
   targetAudienceClientId?: string;
 }

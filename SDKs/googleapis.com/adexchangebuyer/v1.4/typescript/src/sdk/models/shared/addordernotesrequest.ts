@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketplaceNote } from "./marketplacenote";
 
 
+
 export class AddOrderNotesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notes", elemType: shared.MarketplaceNote })
+  @SpeakeasyMetadata({ data: "json, name=notes", elemType: MarketplaceNote })
   notes?: MarketplaceNote[];
 }

@@ -32,7 +32,7 @@ type MetastoreProjectsLocationsFederationsCreateSecurity struct {
 type MetastoreProjectsLocationsFederationsCreateRequest struct {
 	PathParams  MetastoreProjectsLocationsFederationsCreatePathParams
 	QueryParams MetastoreProjectsLocationsFederationsCreateQueryParams
-	Request     *shared.Federation `request:"mediaType=application/json"`
+	Request     *shared.FederationInput `request:"mediaType=application/json"`
 	Security    MetastoreProjectsLocationsFederationsCreateSecurity
 }
 

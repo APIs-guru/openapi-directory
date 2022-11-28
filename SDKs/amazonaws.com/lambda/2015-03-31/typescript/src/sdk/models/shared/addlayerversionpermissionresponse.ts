@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddLayerVersionPermissionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=RevisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=Statement" })
+  @SpeakeasyMetadata({ data: "json, name=Statement" })
   statement?: string;
 }

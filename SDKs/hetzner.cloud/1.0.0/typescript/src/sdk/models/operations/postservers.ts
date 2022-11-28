@@ -1,57 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostServersCreateServerRequestFirewalls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firewall" })
+  @SpeakeasyMetadata({ data: "json, name=firewall" })
   firewall?: number;
 }
 
 
 export class PostServersCreateServerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=automount" })
+  @SpeakeasyMetadata({ data: "json, name=automount" })
   automount?: boolean;
 
-  @Metadata({ data: "json, name=datacenter" })
+  @SpeakeasyMetadata({ data: "json, name=datacenter" })
   datacenter?: string;
 
-  @Metadata({ data: "json, name=firewalls", elemType: operations.PostServersCreateServerRequestFirewalls })
+  @SpeakeasyMetadata({ data: "json, name=firewalls", elemType: PostServersCreateServerRequestFirewalls })
   firewalls?: PostServersCreateServerRequestFirewalls[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, any>;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=networks" })
+  @SpeakeasyMetadata({ data: "json, name=networks" })
   networks?: number[];
 
-  @Metadata({ data: "json, name=server_type" })
+  @SpeakeasyMetadata({ data: "json, name=server_type" })
   serverType: string;
 
-  @Metadata({ data: "json, name=ssh_keys" })
+  @SpeakeasyMetadata({ data: "json, name=ssh_keys" })
   sshKeys?: string[];
 
-  @Metadata({ data: "json, name=start_after_create" })
+  @SpeakeasyMetadata({ data: "json, name=start_after_create" })
   startAfterCreate?: boolean;
 
-  @Metadata({ data: "json, name=user_data" })
+  @SpeakeasyMetadata({ data: "json, name=user_data" })
   userData?: string;
 
-  @Metadata({ data: "json, name=volumes" })
+  @SpeakeasyMetadata({ data: "json, name=volumes" })
   volumes?: number[];
-}
-
-
-export class PostServersRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostServersCreateServerRequest;
 }
 
 
@@ -60,79 +55,79 @@ export class PostServersRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostServersCreateServerResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostServersCreateServerResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostServersCreateServerResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostServersCreateServerResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostServersCreateServerResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostServersCreateServerResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostServersCreateServerResponseActionResources })
   resources: PostServersCreateServerResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersCreateServerResponseActionStatusEnum;
 }
 
 
 export class PostServersCreateServerResponseServerDatacenterLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=network_zone" })
+  @SpeakeasyMetadata({ data: "json, name=network_zone" })
   networkZone: string;
 }
 
@@ -142,13 +137,13 @@ export class PostServersCreateServerResponseServerDatacenterLocation extends Spe
  * The Server types the Datacenter can handle
 **/
 export class PostServersCreateServerResponseServerDatacenterServerTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=available" })
+  @SpeakeasyMetadata({ data: "json, name=available" })
   available: number[];
 
-  @Metadata({ data: "json, name=available_for_migration" })
+  @SpeakeasyMetadata({ data: "json, name=available_for_migration" })
   availableForMigration: number[];
 
-  @Metadata({ data: "json, name=supported" })
+  @SpeakeasyMetadata({ data: "json, name=supported" })
   supported: number[];
 }
 
@@ -158,19 +153,19 @@ export class PostServersCreateServerResponseServerDatacenterServerTypes extends 
  * Datacenter this Resource is located at
 **/
 export class PostServersCreateServerResponseServerDatacenter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: PostServersCreateServerResponseServerDatacenterLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=server_types" })
+  @SpeakeasyMetadata({ data: "json, name=server_types" })
   serverTypes: PostServersCreateServerResponseServerDatacenterServerTypes;
 }
 
@@ -180,19 +175,19 @@ export class PostServersCreateServerResponseServerDatacenter extends SpeakeasyBa
  * Information about the Server the Image was created from
 **/
 export class PostServersCreateServerResponseServerImageCreatedFrom extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 export enum PostServersCreateServerResponseServerImageOsFlavorEnum {
-    Ubuntu = "ubuntu"
-,    Centos = "centos"
-,    Debian = "debian"
-,    Fedora = "fedora"
-,    Unknown = "unknown"
+    Ubuntu = "ubuntu",
+    Centos = "centos",
+    Debian = "debian",
+    Fedora = "fedora",
+    Unknown = "unknown"
 }
 
 
@@ -201,84 +196,84 @@ export enum PostServersCreateServerResponseServerImageOsFlavorEnum {
  * Protection configuration for the Resource
 **/
 export class PostServersCreateServerResponseServerImageProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 }
 
 export enum PostServersCreateServerResponseServerImageStatusEnum {
-    Available = "available"
-,    Creating = "creating"
-,    Unavailable = "unavailable"
+    Available = "available",
+    Creating = "creating",
+    Unavailable = "unavailable"
 }
 
 export enum PostServersCreateServerResponseServerImageTypeEnum {
-    System = "system"
-,    App = "app"
-,    Snapshot = "snapshot"
-,    Backup = "backup"
-,    Temporary = "temporary"
+    System = "system",
+    App = "app",
+    Snapshot = "snapshot",
+    Backup = "backup",
+    Temporary = "temporary"
 }
 
 
 export class PostServersCreateServerResponseServerImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bound_to" })
+  @SpeakeasyMetadata({ data: "json, name=bound_to" })
   boundTo: number;
 
-  @Metadata({ data: "json, name=build_id" })
+  @SpeakeasyMetadata({ data: "json, name=build_id" })
   buildId?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=created_from" })
+  @SpeakeasyMetadata({ data: "json, name=created_from" })
   createdFrom: PostServersCreateServerResponseServerImageCreatedFrom;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted: string;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=disk_size" })
+  @SpeakeasyMetadata({ data: "json, name=disk_size" })
   diskSize: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=image_size" })
+  @SpeakeasyMetadata({ data: "json, name=image_size" })
   imageSize: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=os_flavor" })
+  @SpeakeasyMetadata({ data: "json, name=os_flavor" })
   osFlavor: PostServersCreateServerResponseServerImageOsFlavorEnum;
 
-  @Metadata({ data: "json, name=os_version" })
+  @SpeakeasyMetadata({ data: "json, name=os_version" })
   osVersion: string;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: PostServersCreateServerResponseServerImageProtection;
 
-  @Metadata({ data: "json, name=rapid_deploy" })
+  @SpeakeasyMetadata({ data: "json, name=rapid_deploy" })
   rapidDeploy?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersCreateServerResponseServerImageStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PostServersCreateServerResponseServerImageTypeEnum;
 }
 
 export enum PostServersCreateServerResponseServerIsoTypeEnum {
-    Public = "public"
-,    Private = "private"
+    Public = "public",
+    Private = "private"
 }
 
 
@@ -287,19 +282,19 @@ export enum PostServersCreateServerResponseServerIsoTypeEnum {
  * ISO Image that is attached to this Server. Null if no ISO is attached.
 **/
 export class PostServersCreateServerResponseServerIso extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PostServersCreateServerResponseServerIsoTypeEnum;
 }
 
@@ -309,37 +304,37 @@ export enum PostServersCreateServerResponseServerPlacementGroupNullableTypeEnum 
 
 
 export class PostServersCreateServerResponseServerPlacementGroupNullable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=servers" })
+  @SpeakeasyMetadata({ data: "json, name=servers" })
   servers: number[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PostServersCreateServerResponseServerPlacementGroupNullableTypeEnum;
 }
 
 
 export class PostServersCreateServerResponseServerPrivateNet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias_ips" })
+  @SpeakeasyMetadata({ data: "json, name=alias_ips" })
   aliasIps?: string[];
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=mac_address" })
+  @SpeakeasyMetadata({ data: "json, name=mac_address" })
   macAddress?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: number;
 }
 
@@ -349,24 +344,24 @@ export class PostServersCreateServerResponseServerPrivateNet extends SpeakeasyBa
  * Protection configuration for the Server
 **/
 export class PostServersCreateServerResponseServerProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 
-  @Metadata({ data: "json, name=rebuild" })
+  @SpeakeasyMetadata({ data: "json, name=rebuild" })
   rebuild: boolean;
 }
 
 export enum PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnum {
-    Applied = "applied"
-,    Pending = "pending"
+    Applied = "applied",
+    Pending = "pending"
 }
 
 
 export class PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnum;
 }
 
@@ -376,22 +371,22 @@ export class PostServersCreateServerResponseServerPublicNetServerPublicNetFirewa
  * IP address (v4) and its reverse DNS entry of this Server
 **/
 export class PostServersCreateServerResponseServerPublicNetIpv4 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked: boolean;
 
-  @Metadata({ data: "json, name=dns_ptr" })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr" })
   dnsPtr: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
 
 export class PostServersCreateServerResponseServerPublicNetIpv6DnsPtr extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dns_ptr" })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr" })
   dnsPtr: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
@@ -401,13 +396,13 @@ export class PostServersCreateServerResponseServerPublicNetIpv6DnsPtr extends Sp
  * IPv6 network assigned to this Server and its reverse DNS entry
 **/
 export class PostServersCreateServerResponseServerPublicNetIpv6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked: boolean;
 
-  @Metadata({ data: "json, name=dns_ptr", elemType: operations.PostServersCreateServerResponseServerPublicNetIpv6DnsPtr })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr", elemType: PostServersCreateServerResponseServerPublicNetIpv6DnsPtr })
   dnsPtr: PostServersCreateServerResponseServerPublicNetIpv6DnsPtr[];
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
@@ -417,22 +412,22 @@ export class PostServersCreateServerResponseServerPublicNetIpv6 extends Speakeas
  * Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
 **/
 export class PostServersCreateServerResponseServerPublicNet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firewalls", elemType: operations.PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall })
+  @SpeakeasyMetadata({ data: "json, name=firewalls", elemType: PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall })
   firewalls?: PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall[];
 
-  @Metadata({ data: "json, name=floating_ips" })
+  @SpeakeasyMetadata({ data: "json, name=floating_ips" })
   floatingIps: number[];
 
-  @Metadata({ data: "json, name=ipv4" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4" })
   ipv4: PostServersCreateServerResponseServerPublicNetIpv4;
 
-  @Metadata({ data: "json, name=ipv6" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6" })
   ipv6: PostServersCreateServerResponseServerPublicNetIpv6;
 }
 
 export enum PostServersCreateServerResponseServerServerTypeCpuTypeEnum {
-    Shared = "shared"
-,    Dedicated = "dedicated"
+    Shared = "shared",
+    Dedicated = "dedicated"
 }
 
 
@@ -441,10 +436,10 @@ export enum PostServersCreateServerResponseServerServerTypeCpuTypeEnum {
  * Hourly costs for a Server type in this Location
 **/
 export class PostServersCreateServerResponseServerServerTypePricesPriceHourly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
@@ -454,28 +449,28 @@ export class PostServersCreateServerResponseServerServerTypePricesPriceHourly ex
  * Monthly costs for a Server type in this Location
 **/
 export class PostServersCreateServerResponseServerServerTypePricesPriceMonthly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
 
 export class PostServersCreateServerResponseServerServerTypePrices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: string;
 
-  @Metadata({ data: "json, name=price_hourly" })
+  @SpeakeasyMetadata({ data: "json, name=price_hourly" })
   priceHourly: PostServersCreateServerResponseServerServerTypePricesPriceHourly;
 
-  @Metadata({ data: "json, name=price_monthly" })
+  @SpeakeasyMetadata({ data: "json, name=price_monthly" })
   priceMonthly: PostServersCreateServerResponseServerServerTypePricesPriceMonthly;
 }
 
 export enum PostServersCreateServerResponseServerServerTypeStorageTypeEnum {
-    Local = "local"
-,    Network = "network"
+    Local = "local",
+    Network = "network"
 }
 
 
@@ -484,141 +479,147 @@ export enum PostServersCreateServerResponseServerServerTypeStorageTypeEnum {
  * Type of Server - determines how much ram, disk and cpu a Server has
 **/
 export class PostServersCreateServerResponseServerServerType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cores" })
+  @SpeakeasyMetadata({ data: "json, name=cores" })
   cores: number;
 
-  @Metadata({ data: "json, name=cpu_type" })
+  @SpeakeasyMetadata({ data: "json, name=cpu_type" })
   cpuType: PostServersCreateServerResponseServerServerTypeCpuTypeEnum;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=disk" })
+  @SpeakeasyMetadata({ data: "json, name=disk" })
   disk: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=prices", elemType: operations.PostServersCreateServerResponseServerServerTypePrices })
+  @SpeakeasyMetadata({ data: "json, name=prices", elemType: PostServersCreateServerResponseServerServerTypePrices })
   prices: PostServersCreateServerResponseServerServerTypePrices[];
 
-  @Metadata({ data: "json, name=storage_type" })
+  @SpeakeasyMetadata({ data: "json, name=storage_type" })
   storageType: PostServersCreateServerResponseServerServerTypeStorageTypeEnum;
 }
 
 export enum PostServersCreateServerResponseServerStatusEnum {
-    Running = "running"
-,    Initializing = "initializing"
-,    Starting = "starting"
-,    Stopping = "stopping"
-,    Off = "off"
-,    Deleting = "deleting"
-,    Migrating = "migrating"
-,    Rebuilding = "rebuilding"
-,    Unknown = "unknown"
+    Running = "running",
+    Initializing = "initializing",
+    Starting = "starting",
+    Stopping = "stopping",
+    Off = "off",
+    Deleting = "deleting",
+    Migrating = "migrating",
+    Rebuilding = "rebuilding",
+    Unknown = "unknown"
 }
 
 
 export class PostServersCreateServerResponseServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backup_window" })
+  @SpeakeasyMetadata({ data: "json, name=backup_window" })
   backupWindow: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=datacenter" })
+  @SpeakeasyMetadata({ data: "json, name=datacenter" })
   datacenter: PostServersCreateServerResponseServerDatacenter;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image: PostServersCreateServerResponseServerImage;
 
-  @Metadata({ data: "json, name=included_traffic" })
+  @SpeakeasyMetadata({ data: "json, name=included_traffic" })
   includedTraffic: number;
 
-  @Metadata({ data: "json, name=ingoing_traffic" })
+  @SpeakeasyMetadata({ data: "json, name=ingoing_traffic" })
   ingoingTraffic: number;
 
-  @Metadata({ data: "json, name=iso" })
+  @SpeakeasyMetadata({ data: "json, name=iso" })
   iso: PostServersCreateServerResponseServerIso;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=load_balancers" })
+  @SpeakeasyMetadata({ data: "json, name=load_balancers" })
   loadBalancers?: number[];
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=outgoing_traffic" })
+  @SpeakeasyMetadata({ data: "json, name=outgoing_traffic" })
   outgoingTraffic: number;
 
-  @Metadata({ data: "json, name=placement_group" })
+  @SpeakeasyMetadata({ data: "json, name=placement_group" })
   placementGroup?: PostServersCreateServerResponseServerPlacementGroupNullable;
 
-  @Metadata({ data: "json, name=primary_disk_size" })
+  @SpeakeasyMetadata({ data: "json, name=primary_disk_size" })
   primaryDiskSize: number;
 
-  @Metadata({ data: "json, name=private_net", elemType: operations.PostServersCreateServerResponseServerPrivateNet })
+  @SpeakeasyMetadata({ data: "json, name=private_net", elemType: PostServersCreateServerResponseServerPrivateNet })
   privateNet: PostServersCreateServerResponseServerPrivateNet[];
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: PostServersCreateServerResponseServerProtection;
 
-  @Metadata({ data: "json, name=public_net" })
+  @SpeakeasyMetadata({ data: "json, name=public_net" })
   publicNet: PostServersCreateServerResponseServerPublicNet;
 
-  @Metadata({ data: "json, name=rescue_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=rescue_enabled" })
   rescueEnabled: boolean;
 
-  @Metadata({ data: "json, name=server_type" })
+  @SpeakeasyMetadata({ data: "json, name=server_type" })
   serverType: PostServersCreateServerResponseServerServerType;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersCreateServerResponseServerStatusEnum;
 
-  @Metadata({ data: "json, name=volumes" })
+  @SpeakeasyMetadata({ data: "json, name=volumes" })
   volumes?: number[];
 }
 
 
 export class PostServersCreateServerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostServersCreateServerResponseAction;
 
-  @Metadata({ data: "json, name=next_actions", elemType: operations.PostServersCreateServerResponseAction })
+  @SpeakeasyMetadata({ data: "json, name=next_actions", elemType: PostServersCreateServerResponseAction })
   nextActions: PostServersCreateServerResponseAction[];
 
-  @Metadata({ data: "json, name=root_password" })
+  @SpeakeasyMetadata({ data: "json, name=root_password" })
   rootPassword: string;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server: PostServersCreateServerResponseServer;
 }
 
 
+export class PostServersRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostServersCreateServerRequest;
+}
+
+
 export class PostServersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createServerResponse?: PostServersCreateServerResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

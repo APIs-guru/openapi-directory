@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizerTypeEnum } from "./authorizertypeenum";
 import { JwtConfiguration } from "./jwtconfiguration";
+
 
 
 // Authorizer
@@ -8,36 +9,36 @@ import { JwtConfiguration } from "./jwtconfiguration";
  * Represents an authorizer.
 **/
 export class Authorizer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorizerCredentialsArn" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizerCredentialsArn" })
   authorizerCredentialsArn?: string;
 
-  @Metadata({ data: "json, name=AuthorizerId" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizerId" })
   authorizerId?: string;
 
-  @Metadata({ data: "json, name=AuthorizerPayloadFormatVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizerPayloadFormatVersion" })
   authorizerPayloadFormatVersion?: string;
 
-  @Metadata({ data: "json, name=AuthorizerResultTtlInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizerResultTtlInSeconds" })
   authorizerResultTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=AuthorizerType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizerType" })
   authorizerType?: AuthorizerTypeEnum;
 
-  @Metadata({ data: "json, name=AuthorizerUri" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorizerUri" })
   authorizerUri?: string;
 
-  @Metadata({ data: "json, name=EnableSimpleResponses" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSimpleResponses" })
   enableSimpleResponses?: boolean;
 
-  @Metadata({ data: "json, name=IdentitySource" })
+  @SpeakeasyMetadata({ data: "json, name=IdentitySource" })
   identitySource?: string[];
 
-  @Metadata({ data: "json, name=IdentityValidationExpression" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityValidationExpression" })
   identityValidationExpression?: string;
 
-  @Metadata({ data: "json, name=JwtConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=JwtConfiguration" })
   jwtConfiguration?: JwtConfiguration;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

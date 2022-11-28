@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SubscriptionResponse } from "./subscriptionresponse";
 export var BatchResponseSubscriptionResponseStatusEnum;
 (function (BatchResponseSubscriptionResponseStatusEnum) {
     BatchResponseSubscriptionResponseStatusEnum["Pending"] = "PENDING";
@@ -37,27 +37,27 @@ var BatchResponseSubscriptionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=completedAt" }),
+        SpeakeasyMetadata({ data: "json, name=completedAt" }),
         __metadata("design:type", Date)
     ], BatchResponseSubscriptionResponse.prototype, "completedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=links" }),
+        SpeakeasyMetadata({ data: "json, name=links" }),
         __metadata("design:type", Map)
     ], BatchResponseSubscriptionResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedAt" }),
+        SpeakeasyMetadata({ data: "json, name=requestedAt" }),
         __metadata("design:type", Date)
     ], BatchResponseSubscriptionResponse.prototype, "requestedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.SubscriptionResponse }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: SubscriptionResponse }),
         __metadata("design:type", Array)
     ], BatchResponseSubscriptionResponse.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=startedAt" }),
+        SpeakeasyMetadata({ data: "json, name=startedAt" }),
         __metadata("design:type", Date)
     ], BatchResponseSubscriptionResponse.prototype, "startedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], BatchResponseSubscriptionResponse.prototype, "status", void 0);
     return BatchResponseSubscriptionResponse;

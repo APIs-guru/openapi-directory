@@ -31,7 +31,7 @@ type NetworkservicesProjectsLocationsTCPRoutesCreateSecurity struct {
 type NetworkservicesProjectsLocationsTCPRoutesCreateRequest struct {
 	PathParams  NetworkservicesProjectsLocationsTCPRoutesCreatePathParams
 	QueryParams NetworkservicesProjectsLocationsTCPRoutesCreateQueryParams
-	Request     *shared.TCPRoute `request:"mediaType=application/json"`
+	Request     *shared.TCPRouteInput `request:"mediaType=application/json"`
 	Security    NetworkservicesProjectsLocationsTCPRoutesCreateSecurity
 }
 

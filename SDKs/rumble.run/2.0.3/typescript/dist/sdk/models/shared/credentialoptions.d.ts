@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum CredentialOptionsTypeEnum {
     MiradoreApiKeyV1 = "miradore_api_key_v1",
     AwsAccessSecret = "aws_access_secret"

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SubUserDataPermissionLevelEnum {
-    SelectedFolderAndSubfoldersMeters = "SelectedFolderAndSubfoldersMeters"
-,    SelectedFolderOnly = "SelectedFolderOnly"
+    SelectedFolderAndSubfoldersMeters = "SelectedFolderAndSubfoldersMeters",
+    SelectedFolderOnly = "SelectedFolderOnly"
 }
 
 
@@ -11,24 +12,24 @@ export enum SubUserDataPermissionLevelEnum {
  * Container data for the sub user
 **/
 export class SubUserData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessEndDate, form, name=AccessEndDate;" })
+  @SpeakeasyMetadata({ data: "json, name=AccessEndDate, form, name=AccessEndDate;" })
   accessEndDate?: Date;
 
-  @Metadata({ data: "json, name=AccessTimeStartDate, form, name=AccessTimeStartDate;" })
+  @SpeakeasyMetadata({ data: "json, name=AccessTimeStartDate, form, name=AccessTimeStartDate;" })
   accessTimeStartDate?: Date;
 
-  @Metadata({ data: "json, name=Email, form, name=Email;" })
+  @SpeakeasyMetadata({ data: "json, name=Email, form, name=Email;" })
   email?: string;
 
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: string;
 
-  @Metadata({ data: "json, name=NewPassword, form, name=NewPassword;" })
+  @SpeakeasyMetadata({ data: "json, name=NewPassword, form, name=NewPassword;" })
   newPassword?: string;
 
-  @Metadata({ data: "json, name=PermissionLevel, form, name=PermissionLevel;" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionLevel, form, name=PermissionLevel;" })
   permissionLevel?: SubUserDataPermissionLevelEnum;
 
-  @Metadata({ data: "json, name=Username, form, name=Username;" })
+  @SpeakeasyMetadata({ data: "json, name=Username, form, name=Username;" })
   username?: string;
 }

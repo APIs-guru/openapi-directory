@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListUsersRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the request to list users.
 **/
 export class ListUsersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributesToGet" })
+  @SpeakeasyMetadata({ data: "json, name=AttributesToGet" })
   attributesToGet?: string[];
 
-  @Metadata({ data: "json, name=Filter" })
+  @SpeakeasyMetadata({ data: "json, name=Filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

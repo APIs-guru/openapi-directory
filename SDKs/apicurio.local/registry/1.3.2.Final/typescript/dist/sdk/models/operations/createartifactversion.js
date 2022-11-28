@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateArtifactVersionPathParams = /** @class */ (function (_super) {
     __extends(CreateArtifactVersionPathParams, _super);
@@ -30,7 +30,7 @@ var CreateArtifactVersionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
         __metadata("design:type", String)
     ], CreateArtifactVersionPathParams.prototype, "artifactId", void 0);
     return CreateArtifactVersionPathParams;
@@ -56,7 +56,7 @@ var CreateArtifactVersionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" }),
         __metadata("design:type", String)
     ], CreateArtifactVersionHeaders.prototype, "xRegistryArtifactType", void 0);
     return CreateArtifactVersionHeaders;
@@ -68,15 +68,15 @@ var CreateArtifactVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateArtifactVersionPathParams)
     ], CreateArtifactVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateArtifactVersionHeaders)
     ], CreateArtifactVersionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=*/*" }),
+        SpeakeasyMetadata({ data: "request, media_type=*/*" }),
         __metadata("design:type", Uint8Array)
     ], CreateArtifactVersionRequest.prototype, "request", void 0);
     return CreateArtifactVersionRequest;
@@ -88,19 +88,19 @@ var CreateArtifactVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateArtifactVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], CreateArtifactVersionResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateArtifactVersionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.VersionMetaData)
     ], CreateArtifactVersionResponse.prototype, "versionMetaData", void 0);
     return CreateArtifactVersionResponse;

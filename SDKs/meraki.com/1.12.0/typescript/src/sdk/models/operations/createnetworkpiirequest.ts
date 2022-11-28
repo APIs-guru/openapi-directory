@@ -1,57 +1,58 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkPiiRequestPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum CreateNetworkPiiRequestRequestBodyTypeEnum {
-    Delete = "delete"
-,    RestrictProcessing = "restrict processing"
+    Delete = "delete",
+    RestrictProcessing = "restrict processing"
 }
 
 
 export class CreateNetworkPiiRequestRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasets" })
+  @SpeakeasyMetadata({ data: "json, name=datasets" })
   datasets?: string[];
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=mac" })
+  @SpeakeasyMetadata({ data: "json, name=mac" })
   mac?: string;
 
-  @Metadata({ data: "json, name=smDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=smDeviceId" })
   smDeviceId?: string;
 
-  @Metadata({ data: "json, name=smUserId" })
+  @SpeakeasyMetadata({ data: "json, name=smUserId" })
   smUserId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CreateNetworkPiiRequestRequestBodyTypeEnum;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 
 export class CreateNetworkPiiRequestRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkPiiRequestPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: CreateNetworkPiiRequestRequestBody;
 }
 
 
 export class CreateNetworkPiiRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkPiiRequest201ApplicationJsonObject?: Map<string, any>;
 }

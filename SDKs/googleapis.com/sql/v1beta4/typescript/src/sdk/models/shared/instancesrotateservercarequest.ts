@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RotateServerCaContext } from "./rotateservercacontext";
+
 
 
 // InstancesRotateServerCaRequest
@@ -7,6 +8,6 @@ import { RotateServerCaContext } from "./rotateservercacontext";
  * Rotate Server CA request.
 **/
 export class InstancesRotateServerCaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rotateServerCaContext" })
+  @SpeakeasyMetadata({ data: "json, name=rotateServerCaContext" })
   rotateServerCaContext?: RotateServerCaContext;
 }

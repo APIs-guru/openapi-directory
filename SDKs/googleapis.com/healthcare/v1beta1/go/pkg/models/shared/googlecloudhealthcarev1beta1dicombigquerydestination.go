@@ -9,6 +9,8 @@ const (
 	GoogleCloudHealthcareV1beta1DicomBigQueryDestinationWriteDispositionEnumWriteAppend                 GoogleCloudHealthcareV1beta1DicomBigQueryDestinationWriteDispositionEnum = "WRITE_APPEND"
 )
 
+// GoogleCloudHealthcareV1beta1DicomBigQueryDestination
+// The BigQuery table where the server writes output.
 type GoogleCloudHealthcareV1beta1DicomBigQueryDestination struct {
 	Force            *bool                                                                     `json:"force,omitempty"`
 	TableURI         *string                                                                   `json:"tableUri,omitempty"`

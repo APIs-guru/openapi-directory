@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
 /**
  * An object that contains the <code>ChangeType</code>, <code>Details</code>, and <code>Entity</code>.

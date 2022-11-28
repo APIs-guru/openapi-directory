@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Window2 } from "./window2";
 var Example17 = /** @class */ (function (_super) {
     __extends(Example17, _super);
     function Example17() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=do_not_disturb" }),
+        SpeakeasyMetadata({ data: "json, name=do_not_disturb" }),
         __metadata("design:type", Boolean)
     ], Example17.prototype, "doNotDisturb", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], Example17.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=led_brightness" }),
+        SpeakeasyMetadata({ data: "json, name=led_brightness" }),
         __metadata("design:type", Number)
     ], Example17.prototype, "ledBrightness", void 0);
     __decorate([
-        Metadata({ data: "json, name=volume" }),
+        SpeakeasyMetadata({ data: "json, name=volume" }),
         __metadata("design:type", Number)
     ], Example17.prototype, "volume", void 0);
     __decorate([
-        Metadata({ data: "json, name=windows", elemType: shared.Window2 }),
+        SpeakeasyMetadata({ data: "json, name=windows", elemType: Window2 }),
         __metadata("design:type", Array)
     ], Example17.prototype, "windows", void 0);
     return Example17;

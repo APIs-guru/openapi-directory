@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BatchGetFrameMetricDataResponse
+// The structure representing the BatchGetFrameMetricDataResponse.
 type BatchGetFrameMetricDataResponse struct {
 	EndTime             time.Time                       `json:"endTime"`
 	EndTimes            []TimestampStructure            `json:"endTimes"`

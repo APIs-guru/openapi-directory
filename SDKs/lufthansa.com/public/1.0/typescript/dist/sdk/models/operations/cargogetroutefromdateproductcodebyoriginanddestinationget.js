@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum;
 (function (CargoGetRouteFromDateProductCodeByOriginAndDestinationGetProductCodeEnum) {
@@ -50,19 +50,19 @@ var CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destination" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destination" }),
         __metadata("design:type", String)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fromDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fromDate" }),
         __metadata("design:type", String)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams.prototype, "fromDate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=origin" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=origin" }),
         __metadata("design:type", String)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams.prototype, "origin", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productCode" }),
         __metadata("design:type", String)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams.prototype, "productCode", void 0);
     return CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams;
@@ -74,7 +74,7 @@ var CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders.prototype, "accept", void 0);
     return CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders;
@@ -86,7 +86,7 @@ var CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity.prototype, "auth", void 0);
     return CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity;
@@ -98,15 +98,15 @@ var CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CargoGetRouteFromDateProductCodeByOriginAndDestinationGetPathParams)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CargoGetRouteFromDateProductCodeByOriginAndDestinationGetHeaders)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CargoGetRouteFromDateProductCodeByOriginAndDestinationGetSecurity)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest.prototype, "security", void 0);
     return CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest;
@@ -118,15 +118,15 @@ var CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse.prototype, "cargoGetRouteFromDateProductCodeByOriginAndDestinationGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse.prototype, "statusCode", void 0);
     return CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse;

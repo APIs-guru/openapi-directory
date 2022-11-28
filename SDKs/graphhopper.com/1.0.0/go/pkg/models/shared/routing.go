@@ -26,6 +26,8 @@ const (
 	RoutingSnapPreventionsEnumFerry    RoutingSnapPreventionsEnum = "ferry"
 )
 
+// Routing
+// This contains all routing specific configurations.
 type Routing struct {
 	CalcPoints             *bool                           `json:"calc_points,omitempty"`
 	ConsiderTraffic        *bool                           `json:"consider_traffic,omitempty"`

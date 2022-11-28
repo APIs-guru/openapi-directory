@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PartListElement
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of the part sizes of the multipart upload.
 **/
 export class PartListElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RangeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=RangeInBytes" })
   rangeInBytes?: string;
 
-  @Metadata({ data: "json, name=SHA256TreeHash" })
+  @SpeakeasyMetadata({ data: "json, name=SHA256TreeHash" })
   sha256TreeHash?: string;
 }

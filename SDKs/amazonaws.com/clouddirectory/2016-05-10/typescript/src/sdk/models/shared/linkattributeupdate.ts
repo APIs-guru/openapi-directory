@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinkAttributeAction } from "./linkattributeaction";
 import { AttributeKey } from "./attributekey";
+
 
 
 // LinkAttributeUpdate
@@ -8,9 +9,9 @@ import { AttributeKey } from "./attributekey";
  * Structure that contains attribute update information.
 **/
 export class LinkAttributeUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeAction" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeAction" })
   attributeAction?: LinkAttributeAction;
 
-  @Metadata({ data: "json, name=AttributeKey" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeKey" })
   attributeKey?: AttributeKey;
 }

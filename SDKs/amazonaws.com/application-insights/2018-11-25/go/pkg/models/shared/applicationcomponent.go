@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationComponent
+// Describes a standalone resource or similarly grouped resources that the application is made up of.
 type ApplicationComponent struct {
 	ComponentName    *string                      `json:"ComponentName,omitempty"`
 	ComponentRemarks *string                      `json:"ComponentRemarks,omitempty"`

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAclRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ACLName" })
+  @SpeakeasyMetadata({ data: "json, name=ACLName" })
   aclName: string;
 }

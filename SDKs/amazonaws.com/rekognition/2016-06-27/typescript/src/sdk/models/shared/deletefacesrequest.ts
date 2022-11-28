@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteFacesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CollectionId" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionId" })
   collectionId: string;
 
-  @Metadata({ data: "json, name=FaceIds" })
+  @SpeakeasyMetadata({ data: "json, name=FaceIds" })
   faceIds: string[];
 }

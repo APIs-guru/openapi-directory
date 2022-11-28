@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Flight
+// Flight
 type Flight struct {
 	EndDate    *time.Time `json:"endDate,omitempty"`
 	RateOrCost *string    `json:"rateOrCost,omitempty"`

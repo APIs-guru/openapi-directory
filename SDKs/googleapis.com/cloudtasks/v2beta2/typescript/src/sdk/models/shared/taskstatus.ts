@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttemptStatus } from "./attemptstatus";
-import { AttemptStatus } from "./attemptstatus";
+
 
 
 // TaskStatus
@@ -8,15 +8,15 @@ import { AttemptStatus } from "./attemptstatus";
  * Status of the task.
 **/
 export class TaskStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attemptDispatchCount" })
+  @SpeakeasyMetadata({ data: "json, name=attemptDispatchCount" })
   attemptDispatchCount?: number;
 
-  @Metadata({ data: "json, name=attemptResponseCount" })
+  @SpeakeasyMetadata({ data: "json, name=attemptResponseCount" })
   attemptResponseCount?: number;
 
-  @Metadata({ data: "json, name=firstAttemptStatus" })
+  @SpeakeasyMetadata({ data: "json, name=firstAttemptStatus" })
   firstAttemptStatus?: AttemptStatus;
 
-  @Metadata({ data: "json, name=lastAttemptStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lastAttemptStatus" })
   lastAttemptStatus?: AttemptStatus;
 }

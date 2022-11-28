@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExportTaskStatusCodeEnum } from "./exporttaskstatuscodeenum";
 /**
  * Represents the status of an export task.

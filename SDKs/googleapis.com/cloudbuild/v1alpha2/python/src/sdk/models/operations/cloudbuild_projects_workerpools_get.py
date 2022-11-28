@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsWorkerPoolsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudbuildProjectsWorkerPoolsGetQueryParams:
 
 @dataclass
 class CloudbuildProjectsWorkerPoolsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsWorkerPoolsGetRequest:
-    path_params: CloudbuildProjectsWorkerPoolsGetPathParams = field(default=None)
-    query_params: CloudbuildProjectsWorkerPoolsGetQueryParams = field(default=None)
-    security: CloudbuildProjectsWorkerPoolsGetSecurity = field(default=None)
+    path_params: CloudbuildProjectsWorkerPoolsGetPathParams = field()
+    query_params: CloudbuildProjectsWorkerPoolsGetQueryParams = field()
+    security: CloudbuildProjectsWorkerPoolsGetSecurity = field()
     
 
 @dataclass
 class CloudbuildProjectsWorkerPoolsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     worker_pool: Optional[shared.WorkerPool] = field(default=None)
     

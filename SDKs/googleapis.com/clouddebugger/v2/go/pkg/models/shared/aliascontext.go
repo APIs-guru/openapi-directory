@@ -9,6 +9,8 @@ const (
 	AliasContextKindEnumOther   AliasContextKindEnum = "OTHER"
 )
 
+// AliasContext
+// An alias to a repo revision.
 type AliasContext struct {
 	Kind *AliasContextKindEnum `json:"kind,omitempty"`
 	Name *string               `json:"name,omitempty"`

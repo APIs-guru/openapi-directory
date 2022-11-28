@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGlobalwinescoresLatestColorEnum(str, Enum):
     RED = "red"
@@ -33,12 +37,12 @@ class GetGlobalwinescoresLatestHeaders:
 
 @dataclass
 class GetGlobalwinescoresLatestRequest:
-    query_params: GetGlobalwinescoresLatestQueryParams = field(default=None)
-    headers: GetGlobalwinescoresLatestHeaders = field(default=None)
+    headers: GetGlobalwinescoresLatestHeaders = field()
+    query_params: GetGlobalwinescoresLatestQueryParams = field()
     
 
 @dataclass
 class GetGlobalwinescoresLatestResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

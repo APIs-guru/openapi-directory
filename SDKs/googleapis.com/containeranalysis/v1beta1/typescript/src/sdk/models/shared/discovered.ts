@@ -1,23 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalysisCompleted } from "./analysiscompleted";
 import { Status } from "./status";
-import { Status } from "./status";
+
 
 export enum DiscoveredAnalysisStatusEnum {
-    AnalysisStatusUnspecified = "ANALYSIS_STATUS_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Scanning = "SCANNING"
-,    FinishedSuccess = "FINISHED_SUCCESS"
-,    Complete = "COMPLETE"
-,    FinishedFailed = "FINISHED_FAILED"
-,    FinishedUnsupported = "FINISHED_UNSUPPORTED"
+    AnalysisStatusUnspecified = "ANALYSIS_STATUS_UNSPECIFIED",
+    Pending = "PENDING",
+    Scanning = "SCANNING",
+    FinishedSuccess = "FINISHED_SUCCESS",
+    Complete = "COMPLETE",
+    FinishedFailed = "FINISHED_FAILED",
+    FinishedUnsupported = "FINISHED_UNSUPPORTED"
 }
 
 export enum DiscoveredContinuousAnalysisEnum {
-    ContinuousAnalysisUnspecified = "CONTINUOUS_ANALYSIS_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    ContinuousAnalysisUnspecified = "CONTINUOUS_ANALYSIS_UNSPECIFIED",
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }
 
 
@@ -26,21 +25,21 @@ export enum DiscoveredContinuousAnalysisEnum {
  * Provides information about the analysis status of a discovered resource.
 **/
 export class Discovered extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisCompleted" })
+  @SpeakeasyMetadata({ data: "json, name=analysisCompleted" })
   analysisCompleted?: AnalysisCompleted;
 
-  @Metadata({ data: "json, name=analysisError", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=analysisError", elemType: Status })
   analysisError?: Status[];
 
-  @Metadata({ data: "json, name=analysisStatus" })
+  @SpeakeasyMetadata({ data: "json, name=analysisStatus" })
   analysisStatus?: DiscoveredAnalysisStatusEnum;
 
-  @Metadata({ data: "json, name=analysisStatusError" })
+  @SpeakeasyMetadata({ data: "json, name=analysisStatusError" })
   analysisStatusError?: Status;
 
-  @Metadata({ data: "json, name=continuousAnalysis" })
+  @SpeakeasyMetadata({ data: "json, name=continuousAnalysis" })
   continuousAnalysis?: DiscoveredContinuousAnalysisEnum;
 
-  @Metadata({ data: "json, name=lastAnalysisTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastAnalysisTime" })
   lastAnalysisTime?: string;
 }

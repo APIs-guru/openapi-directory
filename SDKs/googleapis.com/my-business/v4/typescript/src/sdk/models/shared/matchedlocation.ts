@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
+
 
 
 // MatchedLocation
@@ -7,9 +8,9 @@ import { Location } from "./location";
  * Represents a possible match to a location.
 **/
 export class MatchedLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isExactMatch" })
+  @SpeakeasyMetadata({ data: "json, name=isExactMatch" })
   isExactMatch?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 }

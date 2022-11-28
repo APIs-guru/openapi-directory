@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1EnvironmentInfrastructureSpecComputeResources
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Compute resources associated with the analyze interactive workloads.
 **/
 export class GoogleCloudDataplexV1EnvironmentInfrastructureSpecComputeResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diskSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeGb" })
   diskSizeGb?: number;
 
-  @Metadata({ data: "json, name=maxNodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxNodeCount" })
   maxNodeCount?: number;
 
-  @Metadata({ data: "json, name=nodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
   nodeCount?: number;
 }

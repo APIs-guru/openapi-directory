@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSlotTypeVersionsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class GetSlotTypeVersionsHeaders:
 
 @dataclass
 class GetSlotTypeVersionsRequest:
-    path_params: GetSlotTypeVersionsPathParams = field(default=None)
-    query_params: GetSlotTypeVersionsQueryParams = field(default=None)
-    headers: GetSlotTypeVersionsHeaders = field(default=None)
+    headers: GetSlotTypeVersionsHeaders = field()
+    path_params: GetSlotTypeVersionsPathParams = field()
+    query_params: GetSlotTypeVersionsQueryParams = field()
     
 
 @dataclass
 class GetSlotTypeVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_slot_type_versions_response: Optional[shared.GetSlotTypeVersionsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

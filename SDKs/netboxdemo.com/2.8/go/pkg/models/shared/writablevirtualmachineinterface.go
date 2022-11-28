@@ -85,10 +85,9 @@ const (
 	WritableVirtualMachineInterfaceTypeEnumOther                            WritableVirtualMachineInterfaceTypeEnum = "other"
 )
 
-type WritableVirtualMachineInterface struct {
+type WritableVirtualMachineInterfaceInput struct {
 	Description    *string                                  `json:"description,omitempty"`
 	Enabled        *bool                                    `json:"enabled,omitempty"`
-	ID             *int64                                   `json:"id,omitempty"`
 	MacAddress     *string                                  `json:"mac_address,omitempty"`
 	Mode           *WritableVirtualMachineInterfaceModeEnum `json:"mode,omitempty"`
 	Mtu            *int64                                   `json:"mtu,omitempty"`

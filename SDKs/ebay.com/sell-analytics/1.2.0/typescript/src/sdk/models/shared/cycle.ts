@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Cycle
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex type that describes a program cycle.
 **/
 export class Cycle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cycleType" })
+  @SpeakeasyMetadata({ data: "json, name=cycleType" })
   cycleType?: string;
 
-  @Metadata({ data: "json, name=evaluationDate" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationDate" })
   evaluationDate?: string;
 
-  @Metadata({ data: "json, name=evaluationMonth" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationMonth" })
   evaluationMonth?: string;
 }

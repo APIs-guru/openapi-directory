@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobSummary
+// Provides information about a classification job, including the current status of the job.
 type JobSummary struct {
 	BucketCriteria     *S3BucketCriteriaForJob    `json:"bucketCriteria,omitempty"`
 	BucketDefinitions  []S3BucketDefinitionForJob `json:"bucketDefinitions,omitempty"`

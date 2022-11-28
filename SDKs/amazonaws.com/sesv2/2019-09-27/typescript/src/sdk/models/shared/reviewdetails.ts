@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReviewStatusEnum } from "./reviewstatusenum";
+
 
 
 // ReviewDetails
@@ -7,9 +8,9 @@ import { ReviewStatusEnum } from "./reviewstatusenum";
  * An object that contains information about your account details review.
 **/
 export class ReviewDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaseId" })
+  @SpeakeasyMetadata({ data: "json, name=CaseId" })
   caseId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ReviewStatusEnum;
 }

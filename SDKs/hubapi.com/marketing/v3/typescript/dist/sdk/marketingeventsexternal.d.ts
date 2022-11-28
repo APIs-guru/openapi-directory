@@ -1,0 +1,23 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+export declare class MarketingEventsExternal {
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    _language: string;
+    _sdkVersion: string;
+    _genVersion: string;
+    constructor(defaultClient: AxiosInstance, securityClient: AxiosInstance, serverURL: string, language: string, sdkVersion: string, genVersion: string);
+    deleteMarketingV3MarketingEventsEventsExternalEventIdArchive(req: operations.DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveRequest, config?: AxiosRequestConfig): Promise<operations.DeleteMarketingV3MarketingEventsEventsExternalEventIdArchiveResponse>;
+    getMarketingV3MarketingEventsEventsSearchDoSearch(req: operations.GetMarketingV3MarketingEventsEventsSearchDoSearchRequest, config?: AxiosRequestConfig): Promise<operations.GetMarketingV3MarketingEventsEventsSearchDoSearchResponse>;
+    getMarketingV3MarketingEventsEventsExternalEventIdGetById(req: operations.GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdRequest, config?: AxiosRequestConfig): Promise<operations.GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdResponse>;
+    patchMarketingV3MarketingEventsEventsExternalEventIdUpdate(req: operations.PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest, config?: AxiosRequestConfig): Promise<operations.PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse>;
+    postMarketingV3MarketingEventsEventsDeleteArchiveBatch(req: operations.PostMarketingV3MarketingEventsEventsDeleteArchiveBatchRequest, config?: AxiosRequestConfig): Promise<operations.PostMarketingV3MarketingEventsEventsDeleteArchiveBatchResponse>;
+    postMarketingV3MarketingEventsEventsUpsertDoUpsert(req: operations.PostMarketingV3MarketingEventsEventsUpsertDoUpsertRequest, config?: AxiosRequestConfig): Promise<operations.PostMarketingV3MarketingEventsEventsUpsertDoUpsertResponse>;
+    postMarketingV3MarketingEventsEventsExternalEventIdCancelDoCancel(req: operations.PostMarketingV3MarketingEventsEventsExternalEventIdCancelDoCancelRequest, config?: AxiosRequestConfig): Promise<operations.PostMarketingV3MarketingEventsEventsExternalEventIdCancelDoCancelResponse>;
+    postMarketingV3MarketingEventsEventsExternalEventIdCompleteComplete(req: operations.PostMarketingV3MarketingEventsEventsExternalEventIdCompleteCompleteRequest, config?: AxiosRequestConfig): Promise<operations.PostMarketingV3MarketingEventsEventsExternalEventIdCompleteCompleteResponse>;
+    postMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertById(req: operations.PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdRequest, config?: AxiosRequestConfig): Promise<operations.PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdResponse>;
+    postMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateUpsertDoUpsertById(req: operations.PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateUpsertDoUpsertByIdRequest, config?: AxiosRequestConfig): Promise<operations.PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateUpsertDoUpsertByIdResponse>;
+    postMarketingV3MarketingEventsEventsCreate(req: operations.PostMarketingV3MarketingEventsEventsCreateRequest, config?: AxiosRequestConfig): Promise<operations.PostMarketingV3MarketingEventsEventsCreateResponse>;
+    putMarketingV3MarketingEventsEventsExternalEventIdReplace(req: operations.PutMarketingV3MarketingEventsEventsExternalEventIdReplaceRequest, config?: AxiosRequestConfig): Promise<operations.PutMarketingV3MarketingEventsEventsExternalEventIdReplaceResponse>;
+}

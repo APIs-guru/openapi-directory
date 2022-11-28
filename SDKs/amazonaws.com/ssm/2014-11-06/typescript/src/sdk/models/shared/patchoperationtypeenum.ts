@@ -1,6 +1,7 @@
 
 
+
 export enum PatchOperationTypeEnum {
-    Scan = "Scan"
-,    Install = "Install"
+    Scan = "Scan",
+    Install = "Install"
 }

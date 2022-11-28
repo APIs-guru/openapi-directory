@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,14 +17,14 @@ class WebmastersSitesListQueryParams:
 
 @dataclass
 class WebmastersSitesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebmastersSitesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -34,13 +35,13 @@ class WebmastersSitesListSecurity:
 
 @dataclass
 class WebmastersSitesListRequest:
-    query_params: WebmastersSitesListQueryParams = field(default=None)
-    security: WebmastersSitesListSecurity = field(default=None)
+    query_params: WebmastersSitesListQueryParams = field()
+    security: WebmastersSitesListSecurity = field()
     
 
 @dataclass
 class WebmastersSitesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sites_list_response: Optional[shared.SitesListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://vocadb.net",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,48 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ActivityEntryAPIGetList - Gets a list of recent activity entries.
+// Entries are always returned sorted from newest to oldest.
+//
+//	Activity for deleted entries is not returned.
 func (s *SDK) ActivityEntryAPIGetList(ctx context.Context, request operations.ActivityEntryAPIGetListRequest) (*operations.ActivityEntryAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/activityEntries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -63,7 +88,7 @@ func (s *SDK) ActivityEntryAPIGetList(ctx context.Context, request operations.Ac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -135,8 +160,9 @@ func (s *SDK) ActivityEntryAPIGetList(ctx context.Context, request operations.Ac
 	return res, nil
 }
 
+// AlbumAPIDelete - Deletes an album.
 func (s *SDK) AlbumAPIDelete(ctx context.Context, request operations.AlbumAPIDeleteRequest) (*operations.AlbumAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -146,7 +172,7 @@ func (s *SDK) AlbumAPIDelete(ctx context.Context, request operations.AlbumAPIDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -167,8 +193,12 @@ func (s *SDK) AlbumAPIDelete(ctx context.Context, request operations.AlbumAPIDel
 	return res, nil
 }
 
+// AlbumAPIDeleteComment - Deletes a comment.
+// Normal users can delete their own comments, moderators can delete all comments.
+//
+//	Requires login.
 func (s *SDK) AlbumAPIDeleteComment(ctx context.Context, request operations.AlbumAPIDeleteCommentRequest) (*operations.AlbumAPIDeleteCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/comments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -176,7 +206,7 @@ func (s *SDK) AlbumAPIDeleteComment(ctx context.Context, request operations.Albu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -198,7 +228,7 @@ func (s *SDK) AlbumAPIDeleteComment(ctx context.Context, request operations.Albu
 }
 
 func (s *SDK) AlbumAPIDeleteReview(ctx context.Context, request operations.AlbumAPIDeleteReviewRequest) (*operations.AlbumAPIDeleteReviewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}/reviews/{reviewId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -206,7 +236,7 @@ func (s *SDK) AlbumAPIDeleteReview(ctx context.Context, request operations.Album
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -227,8 +257,10 @@ func (s *SDK) AlbumAPIDeleteReview(ctx context.Context, request operations.Album
 	return res, nil
 }
 
+// AlbumAPIGetComments - Gets a list of comments for an album.
+// Pagination and sorting might be added later.
 func (s *SDK) AlbumAPIGetComments(ctx context.Context, request operations.AlbumAPIGetCommentsRequest) (*operations.AlbumAPIGetCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}/comments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -236,7 +268,7 @@ func (s *SDK) AlbumAPIGetComments(ctx context.Context, request operations.AlbumA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -308,8 +340,9 @@ func (s *SDK) AlbumAPIGetComments(ctx context.Context, request operations.AlbumA
 	return res, nil
 }
 
+// AlbumAPIGetList - Gets a page of albums.
 func (s *SDK) AlbumAPIGetList(ctx context.Context, request operations.AlbumAPIGetListRequest) (*operations.AlbumAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/albums"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -319,7 +352,7 @@ func (s *SDK) AlbumAPIGetList(ctx context.Context, request operations.AlbumAPIGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -391,8 +424,9 @@ func (s *SDK) AlbumAPIGetList(ctx context.Context, request operations.AlbumAPIGe
 	return res, nil
 }
 
+// AlbumAPIGetNames - Gets a list of album names. Ideal for autocomplete boxes.
 func (s *SDK) AlbumAPIGetNames(ctx context.Context, request operations.AlbumAPIGetNamesRequest) (*operations.AlbumAPIGetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/albums/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -402,7 +436,7 @@ func (s *SDK) AlbumAPIGetNames(ctx context.Context, request operations.AlbumAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -474,8 +508,10 @@ func (s *SDK) AlbumAPIGetNames(ctx context.Context, request operations.AlbumAPIG
 	return res, nil
 }
 
+// AlbumAPIGetNewAlbums - Gets list of upcoming or recent albums, same as front page.
+// Output is cached for 1 hour.
 func (s *SDK) AlbumAPIGetNewAlbums(ctx context.Context, request operations.AlbumAPIGetNewAlbumsRequest) (*operations.AlbumAPIGetNewAlbumsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/albums/new"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -485,7 +521,7 @@ func (s *SDK) AlbumAPIGetNewAlbums(ctx context.Context, request operations.Album
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -557,8 +593,9 @@ func (s *SDK) AlbumAPIGetNewAlbums(ctx context.Context, request operations.Album
 	return res, nil
 }
 
+// AlbumAPIGetOne - Gets an album by Id.
 func (s *SDK) AlbumAPIGetOne(ctx context.Context, request operations.AlbumAPIGetOneRequest) (*operations.AlbumAPIGetOneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -568,7 +605,7 @@ func (s *SDK) AlbumAPIGetOne(ctx context.Context, request operations.AlbumAPIGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -641,7 +678,7 @@ func (s *SDK) AlbumAPIGetOne(ctx context.Context, request operations.AlbumAPIGet
 }
 
 func (s *SDK) AlbumAPIGetReviews(ctx context.Context, request operations.AlbumAPIGetReviewsRequest) (*operations.AlbumAPIGetReviewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}/reviews", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -651,7 +688,7 @@ func (s *SDK) AlbumAPIGetReviews(ctx context.Context, request operations.AlbumAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -723,8 +760,10 @@ func (s *SDK) AlbumAPIGetReviews(ctx context.Context, request operations.AlbumAP
 	return res, nil
 }
 
+// AlbumAPIGetTopAlbums - Gets list of top rated albums, same as front page.
+// Output is cached for 1 hour.
 func (s *SDK) AlbumAPIGetTopAlbums(ctx context.Context, request operations.AlbumAPIGetTopAlbumsRequest) (*operations.AlbumAPIGetTopAlbumsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/albums/top"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -734,7 +773,7 @@ func (s *SDK) AlbumAPIGetTopAlbums(ctx context.Context, request operations.Album
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -806,8 +845,9 @@ func (s *SDK) AlbumAPIGetTopAlbums(ctx context.Context, request operations.Album
 	return res, nil
 }
 
+// AlbumAPIGetTracks - Gets tracks for an album.
 func (s *SDK) AlbumAPIGetTracks(ctx context.Context, request operations.AlbumAPIGetTracksRequest) (*operations.AlbumAPIGetTracksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}/tracks", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -817,7 +857,7 @@ func (s *SDK) AlbumAPIGetTracks(ctx context.Context, request operations.AlbumAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -890,7 +930,7 @@ func (s *SDK) AlbumAPIGetTracks(ctx context.Context, request operations.AlbumAPI
 }
 
 func (s *SDK) AlbumAPIGetTracksFields(ctx context.Context, request operations.AlbumAPIGetTracksFieldsRequest) (*operations.AlbumAPIGetTracksFieldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}/tracks/fields", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -900,7 +940,7 @@ func (s *SDK) AlbumAPIGetTracksFields(ctx context.Context, request operations.Al
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -980,7 +1020,7 @@ func (s *SDK) AlbumAPIGetTracksFields(ctx context.Context, request operations.Al
 }
 
 func (s *SDK) AlbumAPIGetUserCollections(ctx context.Context, request operations.AlbumAPIGetUserCollectionsRequest) (*operations.AlbumAPIGetUserCollectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/albums/{id}/user-collections", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -990,7 +1030,7 @@ func (s *SDK) AlbumAPIGetUserCollections(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1062,8 +1102,9 @@ func (s *SDK) AlbumAPIGetUserCollections(ctx context.Context, request operations
 	return res, nil
 }
 
+// ArtistAPIDelete - Deletes an artist.
 func (s *SDK) ArtistAPIDelete(ctx context.Context, request operations.ArtistAPIDeleteRequest) (*operations.ArtistAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/artists/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1073,7 +1114,7 @@ func (s *SDK) ArtistAPIDelete(ctx context.Context, request operations.ArtistAPID
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1094,8 +1135,12 @@ func (s *SDK) ArtistAPIDelete(ctx context.Context, request operations.ArtistAPID
 	return res, nil
 }
 
+// ArtistAPIDeleteComment - Deletes a comment.
+// Normal users can delete their own comments, moderators can delete all comments.
+//
+//	Requires login.
 func (s *SDK) ArtistAPIDeleteComment(ctx context.Context, request operations.ArtistAPIDeleteCommentRequest) (*operations.ArtistAPIDeleteCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/artists/comments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1103,7 +1148,7 @@ func (s *SDK) ArtistAPIDeleteComment(ctx context.Context, request operations.Art
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1124,8 +1169,10 @@ func (s *SDK) ArtistAPIDeleteComment(ctx context.Context, request operations.Art
 	return res, nil
 }
 
+// ArtistAPIGetComments - Gets a list of comments for an artist.
+// Pagination and sorting might be added later.
 func (s *SDK) ArtistAPIGetComments(ctx context.Context, request operations.ArtistAPIGetCommentsRequest) (*operations.ArtistAPIGetCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/artists/{id}/comments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1133,7 +1180,7 @@ func (s *SDK) ArtistAPIGetComments(ctx context.Context, request operations.Artis
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1205,8 +1252,9 @@ func (s *SDK) ArtistAPIGetComments(ctx context.Context, request operations.Artis
 	return res, nil
 }
 
+// ArtistAPIGetList - Find artists.
 func (s *SDK) ArtistAPIGetList(ctx context.Context, request operations.ArtistAPIGetListRequest) (*operations.ArtistAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/artists"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1216,7 +1264,7 @@ func (s *SDK) ArtistAPIGetList(ctx context.Context, request operations.ArtistAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1288,8 +1336,9 @@ func (s *SDK) ArtistAPIGetList(ctx context.Context, request operations.ArtistAPI
 	return res, nil
 }
 
+// ArtistAPIGetNames - Gets a list of artist names. Ideal for autocomplete boxes.
 func (s *SDK) ArtistAPIGetNames(ctx context.Context, request operations.ArtistAPIGetNamesRequest) (*operations.ArtistAPIGetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/artists/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1299,7 +1348,7 @@ func (s *SDK) ArtistAPIGetNames(ctx context.Context, request operations.ArtistAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1371,8 +1420,9 @@ func (s *SDK) ArtistAPIGetNames(ctx context.Context, request operations.ArtistAP
 	return res, nil
 }
 
+// ArtistAPIGetOne - Gets an artist by Id.
 func (s *SDK) ArtistAPIGetOne(ctx context.Context, request operations.ArtistAPIGetOneRequest) (*operations.ArtistAPIGetOneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/artists/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1382,7 +1432,7 @@ func (s *SDK) ArtistAPIGetOne(ctx context.Context, request operations.ArtistAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1454,8 +1504,12 @@ func (s *SDK) ArtistAPIGetOne(ctx context.Context, request operations.ArtistAPIG
 	return res, nil
 }
 
+// CommentAPIDeleteComment - Deletes a comment.
+// Normal users can delete their own comments, moderators can delete all comments.
+//
+//	Requires login.
 func (s *SDK) CommentAPIDeleteComment(ctx context.Context, request operations.CommentAPIDeleteCommentRequest) (*operations.CommentAPIDeleteCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/comments/{entryType}-comments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1463,7 +1517,7 @@ func (s *SDK) CommentAPIDeleteComment(ctx context.Context, request operations.Co
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1484,8 +1538,9 @@ func (s *SDK) CommentAPIDeleteComment(ctx context.Context, request operations.Co
 	return res, nil
 }
 
+// CommentAPIGetComments - Gets a list of comments for an entry.
 func (s *SDK) CommentAPIGetComments(ctx context.Context, request operations.CommentAPIGetCommentsRequest) (*operations.CommentAPIGetCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/comments/{entryType}-comments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1495,7 +1550,7 @@ func (s *SDK) CommentAPIGetComments(ctx context.Context, request operations.Comm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1568,7 +1623,7 @@ func (s *SDK) CommentAPIGetComments(ctx context.Context, request operations.Comm
 }
 
 func (s *SDK) DiscussionAPIDeleteComment(ctx context.Context, request operations.DiscussionAPIDeleteCommentRequest) (*operations.DiscussionAPIDeleteCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/discussions/comments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1576,7 +1631,7 @@ func (s *SDK) DiscussionAPIDeleteComment(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1598,7 +1653,7 @@ func (s *SDK) DiscussionAPIDeleteComment(ctx context.Context, request operations
 }
 
 func (s *SDK) DiscussionAPIDeleteTopic(ctx context.Context, request operations.DiscussionAPIDeleteTopicRequest) (*operations.DiscussionAPIDeleteTopicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/discussions/topics/{topicId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1606,7 +1661,7 @@ func (s *SDK) DiscussionAPIDeleteTopic(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1628,7 +1683,7 @@ func (s *SDK) DiscussionAPIDeleteTopic(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DiscussionAPIGetFolders(ctx context.Context, request operations.DiscussionAPIGetFoldersRequest) (*operations.DiscussionAPIGetFoldersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/discussions/folders"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1638,7 +1693,7 @@ func (s *SDK) DiscussionAPIGetFolders(ctx context.Context, request operations.Di
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1711,7 +1766,7 @@ func (s *SDK) DiscussionAPIGetFolders(ctx context.Context, request operations.Di
 }
 
 func (s *SDK) DiscussionAPIGetTopic(ctx context.Context, request operations.DiscussionAPIGetTopicRequest) (*operations.DiscussionAPIGetTopicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/discussions/topics/{topicId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1721,7 +1776,7 @@ func (s *SDK) DiscussionAPIGetTopic(ctx context.Context, request operations.Disc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1794,7 +1849,7 @@ func (s *SDK) DiscussionAPIGetTopic(ctx context.Context, request operations.Disc
 }
 
 func (s *SDK) DiscussionAPIGetTopics(ctx context.Context, request operations.DiscussionAPIGetTopicsRequest) (*operations.DiscussionAPIGetTopicsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/discussions/topics"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1804,7 +1859,7 @@ func (s *SDK) DiscussionAPIGetTopics(ctx context.Context, request operations.Dis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1877,7 +1932,7 @@ func (s *SDK) DiscussionAPIGetTopics(ctx context.Context, request operations.Dis
 }
 
 func (s *SDK) DiscussionAPIGetTopicsForFolder(ctx context.Context, request operations.DiscussionAPIGetTopicsForFolderRequest) (*operations.DiscussionAPIGetTopicsForFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/discussions/folders/{folderId}/topics", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1887,7 +1942,7 @@ func (s *SDK) DiscussionAPIGetTopicsForFolder(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1959,8 +2014,9 @@ func (s *SDK) DiscussionAPIGetTopicsForFolder(ctx context.Context, request opera
 	return res, nil
 }
 
+// EntryAPIGetList - Find entries.
 func (s *SDK) EntryAPIGetList(ctx context.Context, request operations.EntryAPIGetListRequest) (*operations.EntryAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/entries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1970,7 +2026,7 @@ func (s *SDK) EntryAPIGetList(ctx context.Context, request operations.EntryAPIGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2042,8 +2098,9 @@ func (s *SDK) EntryAPIGetList(ctx context.Context, request operations.EntryAPIGe
 	return res, nil
 }
 
+// EntryAPIGetNames - Gets a list of entry names. Ideal for autocomplete boxes.
 func (s *SDK) EntryAPIGetNames(ctx context.Context, request operations.EntryAPIGetNamesRequest) (*operations.EntryAPIGetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/entries/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2053,7 +2110,7 @@ func (s *SDK) EntryAPIGetNames(ctx context.Context, request operations.EntryAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2126,7 +2183,7 @@ func (s *SDK) EntryAPIGetNames(ctx context.Context, request operations.EntryAPIG
 }
 
 func (s *SDK) EntryTypesAPIGetMappedTag(ctx context.Context, request operations.EntryTypesAPIGetMappedTagRequest) (*operations.EntryTypesAPIGetMappedTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/entry-types/{entryType}/{subType}/tag", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2136,7 +2193,7 @@ func (s *SDK) EntryTypesAPIGetMappedTag(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2209,7 +2266,7 @@ func (s *SDK) EntryTypesAPIGetMappedTag(ctx context.Context, request operations.
 }
 
 func (s *SDK) GetAPIUsersCurrentAlbumCollectionStatusesAlbumID(ctx context.Context, request operations.GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDRequest) (*operations.GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/current/album-collection-statuses/{albumId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2217,7 +2274,7 @@ func (s *SDK) GetAPIUsersCurrentAlbumCollectionStatusesAlbumID(ctx context.Conte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2290,7 +2347,7 @@ func (s *SDK) GetAPIUsersCurrentAlbumCollectionStatusesAlbumID(ctx context.Conte
 }
 
 func (s *SDK) GetAPIUsersCurrentFollowedArtistsArtistID(ctx context.Context, request operations.GetAPIUsersCurrentFollowedArtistsArtistIDRequest) (*operations.GetAPIUsersCurrentFollowedArtistsArtistIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/current/followedArtists/{artistId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2298,7 +2355,7 @@ func (s *SDK) GetAPIUsersCurrentFollowedArtistsArtistID(ctx context.Context, req
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2370,8 +2427,9 @@ func (s *SDK) GetAPIUsersCurrentFollowedArtistsArtistID(ctx context.Context, req
 	return res, nil
 }
 
+// PvAPIGetList - Gets a list of PVs for songs.
 func (s *SDK) PvAPIGetList(ctx context.Context, request operations.PvAPIGetListRequest) (*operations.PvAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/pvs/for-songs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2381,7 +2439,7 @@ func (s *SDK) PvAPIGetList(ctx context.Context, request operations.PvAPIGetListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2453,8 +2511,9 @@ func (s *SDK) PvAPIGetList(ctx context.Context, request operations.PvAPIGetListR
 	return res, nil
 }
 
+// ReleaseEventAPIDelete - Deletes an event.
 func (s *SDK) ReleaseEventAPIDelete(ctx context.Context, request operations.ReleaseEventAPIDeleteRequest) (*operations.ReleaseEventAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/releaseEvents/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2464,7 +2523,7 @@ func (s *SDK) ReleaseEventAPIDelete(ctx context.Context, request operations.Rele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2485,8 +2544,9 @@ func (s *SDK) ReleaseEventAPIDelete(ctx context.Context, request operations.Rele
 	return res, nil
 }
 
+// ReleaseEventAPIGetAlbums - Gets a list of albums for a specific event.
 func (s *SDK) ReleaseEventAPIGetAlbums(ctx context.Context, request operations.ReleaseEventAPIGetAlbumsRequest) (*operations.ReleaseEventAPIGetAlbumsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/releaseEvents/{eventId}/albums", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2496,7 +2556,7 @@ func (s *SDK) ReleaseEventAPIGetAlbums(ctx context.Context, request operations.R
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2568,8 +2628,9 @@ func (s *SDK) ReleaseEventAPIGetAlbums(ctx context.Context, request operations.R
 	return res, nil
 }
 
+// ReleaseEventAPIGetList - Gets a page of events.
 func (s *SDK) ReleaseEventAPIGetList(ctx context.Context, request operations.ReleaseEventAPIGetListRequest) (*operations.ReleaseEventAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/releaseEvents"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2579,7 +2640,7 @@ func (s *SDK) ReleaseEventAPIGetList(ctx context.Context, request operations.Rel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2651,8 +2712,11 @@ func (s *SDK) ReleaseEventAPIGetList(ctx context.Context, request operations.Rel
 	return res, nil
 }
 
+// ReleaseEventAPIGetNames - Find event names by a part of name.
+//
+//	Matching is done anywhere from the name.
 func (s *SDK) ReleaseEventAPIGetNames(ctx context.Context, request operations.ReleaseEventAPIGetNamesRequest) (*operations.ReleaseEventAPIGetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/releaseEvents/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2662,7 +2726,7 @@ func (s *SDK) ReleaseEventAPIGetNames(ctx context.Context, request operations.Re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2735,7 +2799,7 @@ func (s *SDK) ReleaseEventAPIGetNames(ctx context.Context, request operations.Re
 }
 
 func (s *SDK) ReleaseEventAPIGetOne(ctx context.Context, request operations.ReleaseEventAPIGetOneRequest) (*operations.ReleaseEventAPIGetOneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/releaseEvents/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2745,7 +2809,7 @@ func (s *SDK) ReleaseEventAPIGetOne(ctx context.Context, request operations.Rele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2817,8 +2881,9 @@ func (s *SDK) ReleaseEventAPIGetOne(ctx context.Context, request operations.Rele
 	return res, nil
 }
 
+// ReleaseEventAPIGetPublishedSongs - Gets a list of songs for a specific event.
 func (s *SDK) ReleaseEventAPIGetPublishedSongs(ctx context.Context, request operations.ReleaseEventAPIGetPublishedSongsRequest) (*operations.ReleaseEventAPIGetPublishedSongsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/releaseEvents/{eventId}/published-songs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2828,7 +2893,7 @@ func (s *SDK) ReleaseEventAPIGetPublishedSongs(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2900,8 +2965,9 @@ func (s *SDK) ReleaseEventAPIGetPublishedSongs(ctx context.Context, request oper
 	return res, nil
 }
 
+// ReleaseEventAPIPostReport - Creates a new report.
 func (s *SDK) ReleaseEventAPIPostReport(ctx context.Context, request operations.ReleaseEventAPIPostReportRequest) (*operations.ReleaseEventAPIPostReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/releaseEvents/{eventId}/reports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2911,7 +2977,7 @@ func (s *SDK) ReleaseEventAPIPostReport(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2932,8 +2998,9 @@ func (s *SDK) ReleaseEventAPIPostReport(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ReleaseEventSeriesAPIDelete - Deletes an event series.
 func (s *SDK) ReleaseEventSeriesAPIDelete(ctx context.Context, request operations.ReleaseEventSeriesAPIDeleteRequest) (*operations.ReleaseEventSeriesAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/releaseEventSeries/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2943,7 +3010,7 @@ func (s *SDK) ReleaseEventSeriesAPIDelete(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2964,8 +3031,9 @@ func (s *SDK) ReleaseEventSeriesAPIDelete(ctx context.Context, request operation
 	return res, nil
 }
 
+// ReleaseEventSeriesAPIGetList - Gets a page of event series.
 func (s *SDK) ReleaseEventSeriesAPIGetList(ctx context.Context, request operations.ReleaseEventSeriesAPIGetListRequest) (*operations.ReleaseEventSeriesAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/releaseEventSeries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2975,7 +3043,7 @@ func (s *SDK) ReleaseEventSeriesAPIGetList(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3047,8 +3115,9 @@ func (s *SDK) ReleaseEventSeriesAPIGetList(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ReleaseEventSeriesAPIGetOne - Gets single event series by ID.
 func (s *SDK) ReleaseEventSeriesAPIGetOne(ctx context.Context, request operations.ReleaseEventSeriesAPIGetOneRequest) (*operations.ReleaseEventSeriesAPIGetOneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/releaseEventSeries/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3058,7 +3127,7 @@ func (s *SDK) ReleaseEventSeriesAPIGetOne(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3130,8 +3199,9 @@ func (s *SDK) ReleaseEventSeriesAPIGetOne(ctx context.Context, request operation
 	return res, nil
 }
 
+// ResourcesAPIGetList - Gets a number of resource sets for a specific culture.
 func (s *SDK) ResourcesAPIGetList(ctx context.Context, request operations.ResourcesAPIGetListRequest) (*operations.ResourcesAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/resources/{cultureCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3141,7 +3211,7 @@ func (s *SDK) ResourcesAPIGetList(ctx context.Context, request operations.Resour
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3178,8 +3248,9 @@ func (s *SDK) ResourcesAPIGetList(ctx context.Context, request operations.Resour
 	return res, nil
 }
 
+// SongAPIDelete - Deletes a song.
 func (s *SDK) SongAPIDelete(ctx context.Context, request operations.SongAPIDeleteRequest) (*operations.SongAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3189,7 +3260,7 @@ func (s *SDK) SongAPIDelete(ctx context.Context, request operations.SongAPIDelet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3210,8 +3281,12 @@ func (s *SDK) SongAPIDelete(ctx context.Context, request operations.SongAPIDelet
 	return res, nil
 }
 
+// SongAPIDeleteComment - Deletes a comment.
+// Normal users can delete their own comments, moderators can delete all comments.
+//
+//	Requires login.
 func (s *SDK) SongAPIDeleteComment(ctx context.Context, request operations.SongAPIDeleteCommentRequest) (*operations.SongAPIDeleteCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/comments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3219,7 +3294,7 @@ func (s *SDK) SongAPIDeleteComment(ctx context.Context, request operations.SongA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3240,8 +3315,9 @@ func (s *SDK) SongAPIDeleteComment(ctx context.Context, request operations.SongA
 	return res, nil
 }
 
+// SongAPIGetByID - Gets a song by Id.
 func (s *SDK) SongAPIGetByID(ctx context.Context, request operations.SongAPIGetByIDRequest) (*operations.SongAPIGetByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3251,7 +3327,7 @@ func (s *SDK) SongAPIGetByID(ctx context.Context, request operations.SongAPIGetB
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3323,8 +3399,9 @@ func (s *SDK) SongAPIGetByID(ctx context.Context, request operations.SongAPIGetB
 	return res, nil
 }
 
+// SongAPIGetByPv - Gets a song by PV.
 func (s *SDK) SongAPIGetByPv(ctx context.Context, request operations.SongAPIGetByPvRequest) (*operations.SongAPIGetByPvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/songs/byPv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3334,7 +3411,7 @@ func (s *SDK) SongAPIGetByPv(ctx context.Context, request operations.SongAPIGetB
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3406,8 +3483,10 @@ func (s *SDK) SongAPIGetByPv(ctx context.Context, request operations.SongAPIGetB
 	return res, nil
 }
 
+// SongAPIGetComments - Gets a list of comments for a song.
+// Pagination and sorting might be added later.
 func (s *SDK) SongAPIGetComments(ctx context.Context, request operations.SongAPIGetCommentsRequest) (*operations.SongAPIGetCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/{id}/comments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3415,7 +3494,7 @@ func (s *SDK) SongAPIGetComments(ctx context.Context, request operations.SongAPI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3487,8 +3566,10 @@ func (s *SDK) SongAPIGetComments(ctx context.Context, request operations.SongAPI
 	return res, nil
 }
 
+// SongAPIGetDerived - Gets derived (alternate versions) of a song.
+// Pagination and sorting might be added later.
 func (s *SDK) SongAPIGetDerived(ctx context.Context, request operations.SongAPIGetDerivedRequest) (*operations.SongAPIGetDerivedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/{id}/derived", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3498,7 +3579,7 @@ func (s *SDK) SongAPIGetDerived(ctx context.Context, request operations.SongAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3570,8 +3651,10 @@ func (s *SDK) SongAPIGetDerived(ctx context.Context, request operations.SongAPIG
 	return res, nil
 }
 
+// SongAPIGetHighlightedSongs - Gets list of highlighted songs, same as front page.
+// Output is cached for 1 hour.
 func (s *SDK) SongAPIGetHighlightedSongs(ctx context.Context, request operations.SongAPIGetHighlightedSongsRequest) (*operations.SongAPIGetHighlightedSongsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/songs/highlighted"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3581,7 +3664,7 @@ func (s *SDK) SongAPIGetHighlightedSongs(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3653,8 +3736,9 @@ func (s *SDK) SongAPIGetHighlightedSongs(ctx context.Context, request operations
 	return res, nil
 }
 
+// SongAPIGetList - Find songs.
 func (s *SDK) SongAPIGetList(ctx context.Context, request operations.SongAPIGetListRequest) (*operations.SongAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/songs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3664,7 +3748,7 @@ func (s *SDK) SongAPIGetList(ctx context.Context, request operations.SongAPIGetL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3736,8 +3820,10 @@ func (s *SDK) SongAPIGetList(ctx context.Context, request operations.SongAPIGetL
 	return res, nil
 }
 
+// SongAPIGetLyrics - Gets lyrics by ID.
+// Output is cached. Specify song version as parameter to refresh.
 func (s *SDK) SongAPIGetLyrics(ctx context.Context, request operations.SongAPIGetLyricsRequest) (*operations.SongAPIGetLyricsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/lyrics/{lyricsId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3745,7 +3831,7 @@ func (s *SDK) SongAPIGetLyrics(ctx context.Context, request operations.SongAPIGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3817,8 +3903,9 @@ func (s *SDK) SongAPIGetLyrics(ctx context.Context, request operations.SongAPIGe
 	return res, nil
 }
 
+// SongAPIGetNames - Gets a list of song names. Ideal for autocomplete boxes.
 func (s *SDK) SongAPIGetNames(ctx context.Context, request operations.SongAPIGetNamesRequest) (*operations.SongAPIGetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/songs/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3828,7 +3915,7 @@ func (s *SDK) SongAPIGetNames(ctx context.Context, request operations.SongAPIGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3900,8 +3987,12 @@ func (s *SDK) SongAPIGetNames(ctx context.Context, request operations.SongAPIGet
 	return res, nil
 }
 
+// SongAPIGetRatings - Get ratings for a song.
+// The result includes ratings and user information.
+//
+//	For users who have requested not to make their ratings public, the user will be empty.
 func (s *SDK) SongAPIGetRatings(ctx context.Context, request operations.SongAPIGetRatingsRequest) (*operations.SongAPIGetRatingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/{id}/ratings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3911,7 +4002,7 @@ func (s *SDK) SongAPIGetRatings(ctx context.Context, request operations.SongAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3983,8 +4074,9 @@ func (s *SDK) SongAPIGetRatings(ctx context.Context, request operations.SongAPIG
 	return res, nil
 }
 
+// SongAPIGetRelated - Gets related songs.
 func (s *SDK) SongAPIGetRelated(ctx context.Context, request operations.SongAPIGetRelatedRequest) (*operations.SongAPIGetRelatedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/{id}/related", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3994,7 +4086,7 @@ func (s *SDK) SongAPIGetRelated(ctx context.Context, request operations.SongAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4066,8 +4158,9 @@ func (s *SDK) SongAPIGetRelated(ctx context.Context, request operations.SongAPIG
 	return res, nil
 }
 
+// SongAPIGetTopSongs - Gets top rated songs.
 func (s *SDK) SongAPIGetTopSongs(ctx context.Context, request operations.SongAPIGetTopSongsRequest) (*operations.SongAPIGetTopSongsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/songs/top-rated"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4077,7 +4170,7 @@ func (s *SDK) SongAPIGetTopSongs(ctx context.Context, request operations.SongAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4149,8 +4242,13 @@ func (s *SDK) SongAPIGetTopSongs(ctx context.Context, request operations.SongAPI
 	return res, nil
 }
 
+// SongAPIPostRating - Add or update rating for a specific song, for the currently logged in user.
+// If the user has already rated the song, any previous rating is replaced.
+//
+//	Authorization cookie must be included.
+//	This API supports CORS.
 func (s *SDK) SongAPIPostRating(ctx context.Context, request operations.SongAPIPostRatingRequest) (*operations.SongAPIPostRatingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songs/{id}/ratings", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4168,7 +4266,7 @@ func (s *SDK) SongAPIPostRating(ctx context.Context, request operations.SongAPIP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4189,8 +4287,9 @@ func (s *SDK) SongAPIPostRating(ctx context.Context, request operations.SongAPIP
 	return res, nil
 }
 
+// SongListAPIDelete - Deletes a song list.
 func (s *SDK) SongListAPIDelete(ctx context.Context, request operations.SongListAPIDeleteRequest) (*operations.SongListAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songLists/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4200,7 +4299,7 @@ func (s *SDK) SongListAPIDelete(ctx context.Context, request operations.SongList
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4221,8 +4320,12 @@ func (s *SDK) SongListAPIDelete(ctx context.Context, request operations.SongList
 	return res, nil
 }
 
+// SongListAPIDeleteComment - Deletes a comment.
+// Normal users can delete their own comments, moderators can delete all comments.
+//
+//	Requires login.
 func (s *SDK) SongListAPIDeleteComment(ctx context.Context, request operations.SongListAPIDeleteCommentRequest) (*operations.SongListAPIDeleteCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songLists/comments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4230,7 +4333,7 @@ func (s *SDK) SongListAPIDeleteComment(ctx context.Context, request operations.S
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4251,8 +4354,9 @@ func (s *SDK) SongListAPIDeleteComment(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// SongListAPIGetComments - Gets a list of comments for a song list.
 func (s *SDK) SongListAPIGetComments(ctx context.Context, request operations.SongListAPIGetCommentsRequest) (*operations.SongListAPIGetCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songLists/{listId}/comments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4260,7 +4364,7 @@ func (s *SDK) SongListAPIGetComments(ctx context.Context, request operations.Son
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4332,8 +4436,9 @@ func (s *SDK) SongListAPIGetComments(ctx context.Context, request operations.Son
 	return res, nil
 }
 
+// SongListAPIGetFeaturedListNames - Gets a list of featuedd list names. Ideal for autocomplete boxes.
 func (s *SDK) SongListAPIGetFeaturedListNames(ctx context.Context, request operations.SongListAPIGetFeaturedListNamesRequest) (*operations.SongListAPIGetFeaturedListNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/songLists/featured/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4343,7 +4448,7 @@ func (s *SDK) SongListAPIGetFeaturedListNames(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4415,8 +4520,9 @@ func (s *SDK) SongListAPIGetFeaturedListNames(ctx context.Context, request opera
 	return res, nil
 }
 
+// SongListAPIGetFeaturedLists - Gets a list of featured song lists.
 func (s *SDK) SongListAPIGetFeaturedLists(ctx context.Context, request operations.SongListAPIGetFeaturedListsRequest) (*operations.SongListAPIGetFeaturedListsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/songLists/featured"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4426,7 +4532,7 @@ func (s *SDK) SongListAPIGetFeaturedLists(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4498,8 +4604,9 @@ func (s *SDK) SongListAPIGetFeaturedLists(ctx context.Context, request operation
 	return res, nil
 }
 
+// SongListAPIGetSongs - Gets a list of songs in a song list.
 func (s *SDK) SongListAPIGetSongs(ctx context.Context, request operations.SongListAPIGetSongsRequest) (*operations.SongListAPIGetSongsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/songLists/{listId}/songs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4509,7 +4616,7 @@ func (s *SDK) SongListAPIGetSongs(ctx context.Context, request operations.SongLi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4581,8 +4688,9 @@ func (s *SDK) SongListAPIGetSongs(ctx context.Context, request operations.SongLi
 	return res, nil
 }
 
+// TagAPIDelete - Deletes a tag.
 func (s *SDK) TagAPIDelete(ctx context.Context, request operations.TagAPIDeleteRequest) (*operations.TagAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/tags/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4592,7 +4700,7 @@ func (s *SDK) TagAPIDelete(ctx context.Context, request operations.TagAPIDeleteR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4613,8 +4721,12 @@ func (s *SDK) TagAPIDelete(ctx context.Context, request operations.TagAPIDeleteR
 	return res, nil
 }
 
+// TagAPIDeleteComment - Deletes a comment.
+//
+//	Normal users can delete their own comments, moderators can delete all comments.
+//	Requires login.
 func (s *SDK) TagAPIDeleteComment(ctx context.Context, request operations.TagAPIDeleteCommentRequest) (*operations.TagAPIDeleteCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/tags/comments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4622,7 +4734,7 @@ func (s *SDK) TagAPIDeleteComment(ctx context.Context, request operations.TagAPI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4643,8 +4755,9 @@ func (s *SDK) TagAPIDeleteComment(ctx context.Context, request operations.TagAPI
 	return res, nil
 }
 
+// TagAPIGetByID - Gets a tag by ID.
 func (s *SDK) TagAPIGetByID(ctx context.Context, request operations.TagAPIGetByIDRequest) (*operations.TagAPIGetByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/tags/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4654,7 +4767,7 @@ func (s *SDK) TagAPIGetByID(ctx context.Context, request operations.TagAPIGetByI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4726,8 +4839,9 @@ func (s *SDK) TagAPIGetByID(ctx context.Context, request operations.TagAPIGetByI
 	return res, nil
 }
 
+// TagAPIGetByName - DEPRECATED. Gets a tag by name.
 func (s *SDK) TagAPIGetByName(ctx context.Context, request operations.TagAPIGetByNameRequest) (*operations.TagAPIGetByNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/tags/byName/{name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4737,7 +4851,7 @@ func (s *SDK) TagAPIGetByName(ctx context.Context, request operations.TagAPIGetB
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4809,8 +4923,9 @@ func (s *SDK) TagAPIGetByName(ctx context.Context, request operations.TagAPIGetB
 	return res, nil
 }
 
+// TagAPIGetCategoryNamesList - Gets a list of tag category names.
 func (s *SDK) TagAPIGetCategoryNamesList(ctx context.Context, request operations.TagAPIGetCategoryNamesListRequest) (*operations.TagAPIGetCategoryNamesListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tags/categoryNames"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4820,7 +4935,7 @@ func (s *SDK) TagAPIGetCategoryNamesList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4892,8 +5007,11 @@ func (s *SDK) TagAPIGetCategoryNamesList(ctx context.Context, request operations
 	return res, nil
 }
 
+// TagAPIGetChildTags - Gets a list of child tags for a tag.
+//
+//	Only direct children will be included.
 func (s *SDK) TagAPIGetChildTags(ctx context.Context, request operations.TagAPIGetChildTagsRequest) (*operations.TagAPIGetChildTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/tags/{tagId}/children", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4903,7 +5021,7 @@ func (s *SDK) TagAPIGetChildTags(ctx context.Context, request operations.TagAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4975,8 +5093,11 @@ func (s *SDK) TagAPIGetChildTags(ctx context.Context, request operations.TagAPIG
 	return res, nil
 }
 
+// TagAPIGetComments - Gets a list of comments for a tag.
+//
+//	Note: pagination and sorting might be added later.
 func (s *SDK) TagAPIGetComments(ctx context.Context, request operations.TagAPIGetCommentsRequest) (*operations.TagAPIGetCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/tags/{tagId}/comments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4984,7 +5105,7 @@ func (s *SDK) TagAPIGetComments(ctx context.Context, request operations.TagAPIGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5056,8 +5177,9 @@ func (s *SDK) TagAPIGetComments(ctx context.Context, request operations.TagAPIGe
 	return res, nil
 }
 
+// TagAPIGetList - Find tags.
 func (s *SDK) TagAPIGetList(ctx context.Context, request operations.TagAPIGetListRequest) (*operations.TagAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tags"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5067,7 +5189,7 @@ func (s *SDK) TagAPIGetList(ctx context.Context, request operations.TagAPIGetLis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5139,8 +5261,11 @@ func (s *SDK) TagAPIGetList(ctx context.Context, request operations.TagAPIGetLis
 	return res, nil
 }
 
+// TagAPIGetNames - Find tag names by a part of name.
+//
+//	Matching is done anywhere from the name.
 func (s *SDK) TagAPIGetNames(ctx context.Context, request operations.TagAPIGetNamesRequest) (*operations.TagAPIGetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tags/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5150,7 +5275,7 @@ func (s *SDK) TagAPIGetNames(ctx context.Context, request operations.TagAPIGetNa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5222,8 +5347,9 @@ func (s *SDK) TagAPIGetNames(ctx context.Context, request operations.TagAPIGetNa
 	return res, nil
 }
 
+// TagAPIGetTopTags - Gets the most common tags in a category.
 func (s *SDK) TagAPIGetTopTags(ctx context.Context, request operations.TagAPIGetTopTagsRequest) (*operations.TagAPIGetTopTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tags/top"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5233,7 +5359,7 @@ func (s *SDK) TagAPIGetTopTags(ctx context.Context, request operations.TagAPIGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5305,8 +5431,9 @@ func (s *SDK) TagAPIGetTopTags(ctx context.Context, request operations.TagAPIGet
 	return res, nil
 }
 
+// TagAPIPostNewTag - Creates a new tag.
 func (s *SDK) TagAPIPostNewTag(ctx context.Context, request operations.TagAPIPostNewTagRequest) (*operations.TagAPIPostNewTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tags"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5316,7 +5443,7 @@ func (s *SDK) TagAPIPostNewTag(ctx context.Context, request operations.TagAPIPos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5389,8 +5516,9 @@ func (s *SDK) TagAPIPostNewTag(ctx context.Context, request operations.TagAPIPos
 	return res, nil
 }
 
+// TagAPIPostReport - Creates a new report.
 func (s *SDK) TagAPIPostReport(ctx context.Context, request operations.TagAPIPostReportRequest) (*operations.TagAPIPostReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/tags/{tagId}/reports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -5400,7 +5528,7 @@ func (s *SDK) TagAPIPostReport(ctx context.Context, request operations.TagAPIPos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5422,7 +5550,7 @@ func (s *SDK) TagAPIPostReport(ctx context.Context, request operations.TagAPIPos
 }
 
 func (s *SDK) UserAPIDeleteFollowedTag(ctx context.Context, request operations.UserAPIDeleteFollowedTagRequest) (*operations.UserAPIDeleteFollowedTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/current/followedTags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5430,7 +5558,7 @@ func (s *SDK) UserAPIDeleteFollowedTag(ctx context.Context, request operations.U
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5451,8 +5579,9 @@ func (s *SDK) UserAPIDeleteFollowedTag(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UserAPIDeleteMessages - Deletes a list of user messages.
 func (s *SDK) UserAPIDeleteMessages(ctx context.Context, request operations.UserAPIDeleteMessagesRequest) (*operations.UserAPIDeleteMessagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/messages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5462,7 +5591,7 @@ func (s *SDK) UserAPIDeleteMessages(ctx context.Context, request operations.User
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5483,8 +5612,12 @@ func (s *SDK) UserAPIDeleteMessages(ctx context.Context, request operations.User
 	return res, nil
 }
 
+// UserAPIDeleteProfileComment - Deletes a comment.
+// Normal users can delete their own comments, moderators can delete all comments.
+//
+//	Requires login.
 func (s *SDK) UserAPIDeleteProfileComment(ctx context.Context, request operations.UserAPIDeleteProfileCommentRequest) (*operations.UserAPIDeleteProfileCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/profileComments/{commentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5492,7 +5625,7 @@ func (s *SDK) UserAPIDeleteProfileComment(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5513,8 +5646,12 @@ func (s *SDK) UserAPIDeleteProfileComment(ctx context.Context, request operation
 	return res, nil
 }
 
+// UserAPIGetAlbumCollection - Gets a list of albums in a user's collection.
+// This includes albums that have been rated by the user as well as albums that the user has bought or wishlisted.
+//
+//	Note that the user might have set his album ownership status and media type as private, in which case those properties are not included.
 func (s *SDK) UserAPIGetAlbumCollection(ctx context.Context, request operations.UserAPIGetAlbumCollectionRequest) (*operations.UserAPIGetAlbumCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/albums", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5524,7 +5661,7 @@ func (s *SDK) UserAPIGetAlbumCollection(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5597,7 +5734,7 @@ func (s *SDK) UserAPIGetAlbumCollection(ctx context.Context, request operations.
 }
 
 func (s *SDK) UserAPIGetAlbumForUser(ctx context.Context, request operations.UserAPIGetAlbumForUserRequest) (*operations.UserAPIGetAlbumForUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/album-collection-statuses/{albumId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5605,7 +5742,7 @@ func (s *SDK) UserAPIGetAlbumForUser(ctx context.Context, request operations.Use
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5678,7 +5815,7 @@ func (s *SDK) UserAPIGetAlbumForUser(ctx context.Context, request operations.Use
 }
 
 func (s *SDK) UserAPIGetArtistForUser(ctx context.Context, request operations.UserAPIGetArtistForUserRequest) (*operations.UserAPIGetArtistForUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/followedArtists/{artistId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5686,7 +5823,7 @@ func (s *SDK) UserAPIGetArtistForUser(ctx context.Context, request operations.Us
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5758,8 +5895,12 @@ func (s *SDK) UserAPIGetArtistForUser(ctx context.Context, request operations.Us
 	return res, nil
 }
 
+// UserAPIGetCurrent - Gets information about the currently logged in user.
+// Requires login information.
+//
+//	This API supports CORS, and is restricted to specific origins.
 func (s *SDK) UserAPIGetCurrent(ctx context.Context, request operations.UserAPIGetCurrentRequest) (*operations.UserAPIGetCurrentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/users/current"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5769,7 +5910,7 @@ func (s *SDK) UserAPIGetCurrent(ctx context.Context, request operations.UserAPIG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5841,8 +5982,9 @@ func (s *SDK) UserAPIGetCurrent(ctx context.Context, request operations.UserAPIG
 	return res, nil
 }
 
+// UserAPIGetEvents - Gets a list of events a user has subscribed to.
 func (s *SDK) UserAPIGetEvents(ctx context.Context, request operations.UserAPIGetEventsRequest) (*operations.UserAPIGetEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/events", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5852,7 +5994,7 @@ func (s *SDK) UserAPIGetEvents(ctx context.Context, request operations.UserAPIGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5924,8 +6066,9 @@ func (s *SDK) UserAPIGetEvents(ctx context.Context, request operations.UserAPIGe
 	return res, nil
 }
 
+// UserAPIGetFollowedArtists - Gets a list of artists followed by a user.
 func (s *SDK) UserAPIGetFollowedArtists(ctx context.Context, request operations.UserAPIGetFollowedArtistsRequest) (*operations.UserAPIGetFollowedArtistsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/followedArtists", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5935,7 +6078,7 @@ func (s *SDK) UserAPIGetFollowedArtists(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6007,8 +6150,9 @@ func (s *SDK) UserAPIGetFollowedArtists(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UserAPIGetList - Gets a list of users.
 func (s *SDK) UserAPIGetList(ctx context.Context, request operations.UserAPIGetListRequest) (*operations.UserAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6018,7 +6162,7 @@ func (s *SDK) UserAPIGetList(ctx context.Context, request operations.UserAPIGetL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6090,8 +6234,12 @@ func (s *SDK) UserAPIGetList(ctx context.Context, request operations.UserAPIGetL
 	return res, nil
 }
 
+// UserAPIGetMessage - Gets a user message.
+// The message will be marked as read.
+//
+//	User can only load messages from their own inbox.
 func (s *SDK) UserAPIGetMessage(ctx context.Context, request operations.UserAPIGetMessageRequest) (*operations.UserAPIGetMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/messages/{messageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6099,7 +6247,7 @@ func (s *SDK) UserAPIGetMessage(ctx context.Context, request operations.UserAPIG
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6171,8 +6319,9 @@ func (s *SDK) UserAPIGetMessage(ctx context.Context, request operations.UserAPIG
 	return res, nil
 }
 
+// UserAPIGetMessages - Gets a list of messages.
 func (s *SDK) UserAPIGetMessages(ctx context.Context, request operations.UserAPIGetMessagesRequest) (*operations.UserAPIGetMessagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/messages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6182,7 +6331,7 @@ func (s *SDK) UserAPIGetMessages(ctx context.Context, request operations.UserAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6254,8 +6403,9 @@ func (s *SDK) UserAPIGetMessages(ctx context.Context, request operations.UserAPI
 	return res, nil
 }
 
+// UserAPIGetNames - Gets a list of user names. Ideal for autocomplete boxes.
 func (s *SDK) UserAPIGetNames(ctx context.Context, request operations.UserAPIGetNamesRequest) (*operations.UserAPIGetNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/users/names"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6265,7 +6415,7 @@ func (s *SDK) UserAPIGetNames(ctx context.Context, request operations.UserAPIGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6337,8 +6487,9 @@ func (s *SDK) UserAPIGetNames(ctx context.Context, request operations.UserAPIGet
 	return res, nil
 }
 
+// UserAPIGetOne - Gets user by ID.
 func (s *SDK) UserAPIGetOne(ctx context.Context, request operations.UserAPIGetOneRequest) (*operations.UserAPIGetOneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6348,7 +6499,7 @@ func (s *SDK) UserAPIGetOne(ctx context.Context, request operations.UserAPIGetOn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6420,8 +6571,9 @@ func (s *SDK) UserAPIGetOne(ctx context.Context, request operations.UserAPIGetOn
 	return res, nil
 }
 
+// UserAPIGetProfileComments - Gets a list of comments posted on user's profile.
 func (s *SDK) UserAPIGetProfileComments(ctx context.Context, request operations.UserAPIGetProfileCommentsRequest) (*operations.UserAPIGetProfileCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/profileComments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6431,7 +6583,7 @@ func (s *SDK) UserAPIGetProfileComments(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6503,8 +6655,9 @@ func (s *SDK) UserAPIGetProfileComments(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UserAPIGetRatedSongs - Gets a list of songs rated by a user.
 func (s *SDK) UserAPIGetRatedSongs(ctx context.Context, request operations.UserAPIGetRatedSongsRequest) (*operations.UserAPIGetRatedSongsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/ratedSongs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6514,7 +6667,7 @@ func (s *SDK) UserAPIGetRatedSongs(ctx context.Context, request operations.UserA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6587,7 +6740,7 @@ func (s *SDK) UserAPIGetRatedSongs(ctx context.Context, request operations.UserA
 }
 
 func (s *SDK) UserAPIGetSongLists(ctx context.Context, request operations.UserAPIGetSongListsRequest) (*operations.UserAPIGetSongListsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/songLists", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6597,7 +6750,7 @@ func (s *SDK) UserAPIGetSongLists(ctx context.Context, request operations.UserAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6669,8 +6822,9 @@ func (s *SDK) UserAPIGetSongLists(ctx context.Context, request operations.UserAP
 	return res, nil
 }
 
+// UserAPIGetSongRating - Gets a specific user's rating for a song.
 func (s *SDK) UserAPIGetSongRating(ctx context.Context, request operations.UserAPIGetSongRatingRequest) (*operations.UserAPIGetSongRatingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/ratedSongs/{songId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6678,7 +6832,7 @@ func (s *SDK) UserAPIGetSongRating(ctx context.Context, request operations.UserA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6750,8 +6904,10 @@ func (s *SDK) UserAPIGetSongRating(ctx context.Context, request operations.UserA
 	return res, nil
 }
 
+// UserAPIGetSongRatingForCurrent - Gets currently logged in user's rating for a song.
+// Requires authentication.
 func (s *SDK) UserAPIGetSongRatingForCurrent(ctx context.Context, request operations.UserAPIGetSongRatingForCurrentRequest) (*operations.UserAPIGetSongRatingForCurrentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/current/ratedSongs/{songId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6759,7 +6915,7 @@ func (s *SDK) UserAPIGetSongRatingForCurrent(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6831,8 +6987,12 @@ func (s *SDK) UserAPIGetSongRatingForCurrent(ctx context.Context, request operat
 	return res, nil
 }
 
+// UserAPIPostAlbumStatus - Add or update collection status, media type and rating for a specific album, for the currently logged in user.
+// If the user has already rated the album, any previous rating is replaced.
+//
+//	Authorization cookie must be included.
 func (s *SDK) UserAPIPostAlbumStatus(ctx context.Context, request operations.UserAPIPostAlbumStatusRequest) (*operations.UserAPIPostAlbumStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/current/albums/{albumId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6842,7 +7002,7 @@ func (s *SDK) UserAPIPostAlbumStatus(ctx context.Context, request operations.Use
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6922,7 +7082,7 @@ func (s *SDK) UserAPIPostAlbumStatus(ctx context.Context, request operations.Use
 }
 
 func (s *SDK) UserAPIPostFollowedTag(ctx context.Context, request operations.UserAPIPostFollowedTagRequest) (*operations.UserAPIPostFollowedTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/current/followedTags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6930,7 +7090,7 @@ func (s *SDK) UserAPIPostFollowedTag(ctx context.Context, request operations.Use
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6951,8 +7111,9 @@ func (s *SDK) UserAPIPostFollowedTag(ctx context.Context, request operations.Use
 	return res, nil
 }
 
+// UserAPIPostRefreshEntryEdit - Refresh entry edit status, indicating that the current user is still editing that entry.
 func (s *SDK) UserAPIPostRefreshEntryEdit(ctx context.Context, request operations.UserAPIPostRefreshEntryEditRequest) (*operations.UserAPIPostRefreshEntryEditResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/users/current/refreshEntryEdit"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -6962,7 +7123,7 @@ func (s *SDK) UserAPIPostRefreshEntryEdit(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6984,7 +7145,7 @@ func (s *SDK) UserAPIPostRefreshEntryEdit(ctx context.Context, request operation
 }
 
 func (s *SDK) UserAPIPostReport(ctx context.Context, request operations.UserAPIPostReportRequest) (*operations.UserAPIPostReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/reports", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7002,7 +7163,7 @@ func (s *SDK) UserAPIPostReport(ctx context.Context, request operations.UserAPIP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7074,8 +7235,9 @@ func (s *SDK) UserAPIPostReport(ctx context.Context, request operations.UserAPIP
 	return res, nil
 }
 
+// UserAPIPostSetting - Updates user setting.
 func (s *SDK) UserAPIPostSetting(ctx context.Context, request operations.UserAPIPostSettingRequest) (*operations.UserAPIPostSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/users/{id}/settings/{settingName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7093,7 +7255,7 @@ func (s *SDK) UserAPIPostSetting(ctx context.Context, request operations.UserAPI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7114,8 +7276,9 @@ func (s *SDK) UserAPIPostSetting(ctx context.Context, request operations.UserAPI
 	return res, nil
 }
 
+// VenueAPIDelete - Deletes a venue.
 func (s *SDK) VenueAPIDelete(ctx context.Context, request operations.VenueAPIDeleteRequest) (*operations.VenueAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/venues/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -7125,7 +7288,7 @@ func (s *SDK) VenueAPIDelete(ctx context.Context, request operations.VenueAPIDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7146,8 +7309,9 @@ func (s *SDK) VenueAPIDelete(ctx context.Context, request operations.VenueAPIDel
 	return res, nil
 }
 
+// VenueAPIGetList - Gets a page of event venue.
 func (s *SDK) VenueAPIGetList(ctx context.Context, request operations.VenueAPIGetListRequest) (*operations.VenueAPIGetListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/venues"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7157,7 +7321,7 @@ func (s *SDK) VenueAPIGetList(ctx context.Context, request operations.VenueAPIGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7229,8 +7393,9 @@ func (s *SDK) VenueAPIGetList(ctx context.Context, request operations.VenueAPIGe
 	return res, nil
 }
 
+// VenueAPIPostReport - Creates a new report.
 func (s *SDK) VenueAPIPostReport(ctx context.Context, request operations.VenueAPIPostReportRequest) (*operations.VenueAPIPostReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/venues/{id}/reports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -7240,7 +7405,7 @@ func (s *SDK) VenueAPIPostReport(ctx context.Context, request operations.VenueAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

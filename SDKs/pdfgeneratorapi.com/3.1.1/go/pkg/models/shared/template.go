@@ -1,5 +1,7 @@
 package shared
 
+// Template
+// Template object
 type Template struct {
 	ID       *int64   `json:"id,omitempty"`
 	Modified *string  `json:"modified,omitempty"`

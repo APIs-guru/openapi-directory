@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Patch
@@ -6,72 +7,72 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents metadata about a patch.
 **/
 export class Patch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdvisoryIds" })
+  @SpeakeasyMetadata({ data: "json, name=AdvisoryIds" })
   advisoryIds?: string[];
 
-  @Metadata({ data: "json, name=Arch" })
+  @SpeakeasyMetadata({ data: "json, name=Arch" })
   arch?: string;
 
-  @Metadata({ data: "json, name=BugzillaIds" })
+  @SpeakeasyMetadata({ data: "json, name=BugzillaIds" })
   bugzillaIds?: string[];
 
-  @Metadata({ data: "json, name=CVEIds" })
+  @SpeakeasyMetadata({ data: "json, name=CVEIds" })
   cveIds?: string[];
 
-  @Metadata({ data: "json, name=Classification" })
+  @SpeakeasyMetadata({ data: "json, name=Classification" })
   classification?: string;
 
-  @Metadata({ data: "json, name=ContentUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ContentUrl" })
   contentUrl?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Epoch" })
+  @SpeakeasyMetadata({ data: "json, name=Epoch" })
   epoch?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=KbNumber" })
+  @SpeakeasyMetadata({ data: "json, name=KbNumber" })
   kbNumber?: string;
 
-  @Metadata({ data: "json, name=Language" })
+  @SpeakeasyMetadata({ data: "json, name=Language" })
   language?: string;
 
-  @Metadata({ data: "json, name=MsrcNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MsrcNumber" })
   msrcNumber?: string;
 
-  @Metadata({ data: "json, name=MsrcSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=MsrcSeverity" })
   msrcSeverity?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Product" })
+  @SpeakeasyMetadata({ data: "json, name=Product" })
   product?: string;
 
-  @Metadata({ data: "json, name=ProductFamily" })
+  @SpeakeasyMetadata({ data: "json, name=ProductFamily" })
   productFamily?: string;
 
-  @Metadata({ data: "json, name=Release" })
+  @SpeakeasyMetadata({ data: "json, name=Release" })
   release?: string;
 
-  @Metadata({ data: "json, name=ReleaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=ReleaseDate" })
   releaseDate?: Date;
 
-  @Metadata({ data: "json, name=Repository" })
+  @SpeakeasyMetadata({ data: "json, name=Repository" })
   repository?: string;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Vendor" })
+  @SpeakeasyMetadata({ data: "json, name=Vendor" })
   vendor?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

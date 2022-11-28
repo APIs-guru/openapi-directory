@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ChangeActionEnum } from "./changeactionenum";
 import { XssMatchTuple } from "./xssmatchtuple";
 /**

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPayrollCalendarPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=PayrollCalendarID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PayrollCalendarID" })
   payrollCalendarId: string;
 }
 
 
 export class GetPayrollCalendarHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class GetPayrollCalendarSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetPayrollCalendarRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPayrollCalendarPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPayrollCalendarHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPayrollCalendarSecurity;
 }
 
 
 export class GetPayrollCalendarResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiException?: shared.ApiException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payrollCalendars?: shared.PayrollCalendars;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

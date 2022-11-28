@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
+
 
 
 // ActivityContentDetailsPlaylistItem
@@ -7,12 +8,12 @@ import { ResourceId } from "./resourceid";
  * Information about a new playlist item.
 **/
 export class ActivityContentDetailsPlaylistItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=playlistId" })
+  @SpeakeasyMetadata({ data: "json, name=playlistId" })
   playlistId?: string;
 
-  @Metadata({ data: "json, name=playlistItemId" })
+  @SpeakeasyMetadata({ data: "json, name=playlistItemId" })
   playlistItemId?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: ResourceId;
 }

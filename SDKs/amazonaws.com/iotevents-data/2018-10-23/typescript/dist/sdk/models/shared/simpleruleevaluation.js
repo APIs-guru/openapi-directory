@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComparisonOperatorEnum } from "./comparisonoperatorenum";
 // SimpleRuleEvaluation
 /**
@@ -34,15 +34,15 @@ var SimpleRuleEvaluation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=inputPropertyValue" }),
+        SpeakeasyMetadata({ data: "json, name=inputPropertyValue" }),
         __metadata("design:type", String)
     ], SimpleRuleEvaluation.prototype, "inputPropertyValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=operator" }),
+        SpeakeasyMetadata({ data: "json, name=operator" }),
         __metadata("design:type", String)
     ], SimpleRuleEvaluation.prototype, "operator", void 0);
     __decorate([
-        Metadata({ data: "json, name=thresholdValue" }),
+        SpeakeasyMetadata({ data: "json, name=thresholdValue" }),
         __metadata("design:type", String)
     ], SimpleRuleEvaluation.prototype, "thresholdValue", void 0);
     return SimpleRuleEvaluation;

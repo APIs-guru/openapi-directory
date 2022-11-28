@@ -7,6 +7,8 @@ const (
 	GrantsResponseGlobalAccountAccessEnumReadWrite GrantsResponseGlobalAccountAccessEnum = "read_write"
 )
 
+// GrantsResponseGlobal
+// A structure containing the Account-level grants a User has.
 type GrantsResponseGlobal struct {
 	AccountAccess        *GrantsResponseGlobalAccountAccessEnum `json:"account_access,omitempty"`
 	AddDomains           *bool                                  `json:"add_domains,omitempty"`
@@ -20,6 +22,21 @@ type GrantsResponseGlobal struct {
 	LongviewSubscription *bool                                  `json:"longview_subscription,omitempty"`
 }
 
+// GrantsResponseInput
+// A structure representing all grants a restricted User has on the Account. Not available for unrestricted users, as they have access to everything without grants. If retrieved from the `/profile/grants` endpoint, entities to which a User has no access will be omitted.
+type GrantsResponseInput struct {
+	Domain       []GrantInput          `json:"domain,omitempty"`
+	Global       *GrantsResponseGlobal `json:"global,omitempty"`
+	Image        []GrantInput          `json:"image,omitempty"`
+	Linode       []GrantInput          `json:"linode,omitempty"`
+	Longview     []GrantInput          `json:"longview,omitempty"`
+	Nodebalancer []GrantInput          `json:"nodebalancer,omitempty"`
+	Stackscript  []GrantInput          `json:"stackscript,omitempty"`
+	Volume       []GrantInput          `json:"volume,omitempty"`
+}
+
+// GrantsResponse
+// A structure representing all grants a restricted User has on the Account. Not available for unrestricted users, as they have access to everything without grants. If retrieved from the `/profile/grants` endpoint, entities to which a User has no access will be omitted.
 type GrantsResponse struct {
 	Domain       []Grant               `json:"domain,omitempty"`
 	Global       *GrantsResponseGlobal `json:"global,omitempty"`

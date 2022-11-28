@@ -1,5 +1,7 @@
 package shared
 
+// StreamConfig
+// Contains configuration for streaming FHIR export.
 type StreamConfig struct {
 	BigqueryDestination          *GoogleCloudHealthcareV1beta1FhirBigQueryDestination `json:"bigqueryDestination,omitempty"`
 	DeidentifiedStoreDestination *DeidentifiedStoreDestination                        `json:"deidentifiedStoreDestination,omitempty"`

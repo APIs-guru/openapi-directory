@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class UpdateGroupCertificateConfigurationResponse:
-    certificate_authority_expiry_in_milliseconds: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CertificateAuthorityExpiryInMilliseconds' }})
-    certificate_expiry_in_milliseconds: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CertificateExpiryInMilliseconds' }})
-    group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupId' }})
+    certificate_authority_expiry_in_milliseconds: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CertificateAuthorityExpiryInMilliseconds') }})
+    certificate_expiry_in_milliseconds: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CertificateExpiryInMilliseconds') }})
+    group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupId') }})
     

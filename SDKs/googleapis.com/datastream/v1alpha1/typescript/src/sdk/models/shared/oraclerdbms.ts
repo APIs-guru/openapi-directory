@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OracleSchema } from "./oracleschema";
+
 
 
 // OracleRdbms
@@ -8,6 +8,6 @@ import { OracleSchema } from "./oracleschema";
  * Oracle database structure.
 **/
 export class OracleRdbms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oracleSchemas", elemType: shared.OracleSchema })
+  @SpeakeasyMetadata({ data: "json, name=oracleSchemas", elemType: OracleSchema })
   oracleSchemas?: OracleSchema[];
 }
